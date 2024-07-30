@@ -14,7 +14,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスの参照
-kind: documentation
 title: 外れ値モニター
 ---
 

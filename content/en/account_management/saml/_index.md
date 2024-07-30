@@ -1,6 +1,5 @@
 ---
 title: Single Sign On With SAML
-kind: documentation
 aliases:
   - /guides/saml
 further_reading:
@@ -21,31 +20,14 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 **Notes**: 
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
-- If you don't have SAML enabled on your Datadog account, reach out to [support][1] to enable it.
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][2], [Auth0][3], [Azure][2], [Google][4], [LastPass][5], [Okta][6], and [SafeNet][7].
-- SAML configuration requires [Datadog Administrator][8] access.
-
-[1]: /help/
-[2]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
-[3]: https://auth0.com/docs/protocols/saml-protocol
-[4]: https://cloud.google.com/architecture/identity/single-sign-on
-[5]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
-[6]: https://developer.okta.com/docs/concepts/saml/
-[7]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
-[8]: /account_management/users/default_roles/
+- If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
+- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
+- SAML configuration requires [Datadog Administrator][9] access.
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][2], [Auth0][3], [Azure][2], [Google][4], [LastPass][5], [Okta][6], and [SafeNet][7].
-- SAML configuration requires [Datadog Administrator][8] access.
-
-[2]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
-[3]: https://auth0.com/docs/protocols/saml-protocol
-[4]: https://cloud.google.com/architecture/identity/single-sign-on
-[5]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
-[6]: https://developer.okta.com/docs/concepts/saml/
-[7]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
-[8]: /account_management/users/default_roles/
+- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
+- SAML configuration requires [Datadog Administrator][9] access.
 {{% /site-region %}}
 
 ## Configuring SAML
@@ -69,14 +51,14 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
 
 5. After you upload the IdP metadata and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
-    {{< img src="account_management/saml/saml_enable.png" alt="saml enable" >}}
+    {{< img src="account_management/saml/saml_enable_cropped.png" alt="Configure SAML by uploading your IdP metadata" >}}
     
 6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
 
 7. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
    - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
-    {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" >}}
+    {{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation that SAML Enabled" >}}
 
    - **If using IdP-initiated login** (Identity Provider, or login initiated from your app portal): By clicking on the app icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
 
@@ -147,7 +129,7 @@ If you do not use the updated SP metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][23] to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][23] to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP metadata
 
@@ -161,6 +143,13 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
 [2]: /help/
+[3]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
+[4]: https://auth0.com/docs/protocols/saml-protocol
+[5]: https://cloud.google.com/architecture/identity/single-sign-on
+[6]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
+[7]: https://developer.okta.com/docs/concepts/saml/
+[8]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
+[9]: /account_management/users/default_roles/
 [10]: /account_management/saml/activedirectory/
 [11]: /account_management/saml/auth0/
 [12]: /account_management/saml/azure/

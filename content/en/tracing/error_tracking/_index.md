@@ -1,6 +1,5 @@
 ---
 title: Error Tracking for Backend Services
-kind: documentation
 description: Learn how to search and manage errors collected from your backend services.
 further_reading:
 - link: "https://www.datadoghq.com/blog/service-page/"
@@ -21,23 +20,21 @@ algolia:
 
 ## Overview
 
-It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging stack traces, you can minimize the impact of fatal errors on your backend services.
+{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-Once you have set up [APM][4] for **Backend Services** error tracking, the issue list populates with cards. Navigate to **APM** > **Error Tracking** to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your backend services.
+{{% error-tracking-description %}}
 
-{{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="The Error Tracking Explorer for APM displaying issues from your backend services" style="width:100%;" >}}
+## Setup
 
-Error Tracking enables you to:
+Error Tracking is available for all the languages supported by APM and does not require using a different SDK.
 
-- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.
-- Access a trace in its source code repository, a Git blame, or a commit.
+Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
+
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
+
+To get started with configuring your repository, see the [Source Code Integration documentation][6].
 
 ## Use span tags to track error spans
-
-<div class="alert alert-info">Error Tracking is available for all the languages supported by APM and does not require using a different SDK.</div>
 
 The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error spans within a trace are processed by Error Tracking **if the error is located in a service entry span** (the uppermost service span). This span must also contain the `error.stack`, `error.message`, and `error.type` [span tags][1] to be tracked.
 
@@ -47,9 +44,9 @@ Error Tracking computes a fingerprint for each error span it processes using the
 
 ## Examine issues to start troubleshooting or debugging
 
-Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][3]. 
+Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
 
-Click on an issue to see a summary of the error, the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
+Issues created from APM include the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
 
 ## Further Reading
 
@@ -59,3 +56,5 @@ Click on an issue to see a summary of the error, the distribution of impacted sp
 [2]: /tracing/trace_explorer/trace_view/?tab=spantags
 [3]: /tracing/error_tracking/explorer
 [4]: /tracing
+[5]: https://app.datadoghq.com/apm/error-tracking
+[6]: /integrations/guide/source-code-integration

@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/pipelines/gitlab/
   tag: ドキュメント
   text: GitLab パイプラインでトレースを設定する
-kind: documentation
 title: GitLab
 ---
 

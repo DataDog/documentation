@@ -1,6 +1,5 @@
 ---
 title: Incident Details Page
-kind: documentation
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details
@@ -9,10 +8,6 @@ further_reading:
   tag: "Documentation"
   text: "Incident Management Analytics"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Incident Management is not available on the Datadog {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
 
 ## Overview
 

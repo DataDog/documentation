@@ -12,13 +12,14 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: カスタムメソッドをインスツルメントして、ビジネスロジックを詳細に可視化する
 ---
 
 _8 分で読了_
 
-{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="分析ビュー" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="分析ビュー" style="width:90%;">}}
+
+<div class="alert alert-warning"><strong>注</strong>: このページでは、カスタムインスツルメンテーションアプリケーションへの OpenTracing の使用について説明します。OpenTracing は非推奨です。ここで説明するコンセプトはまだ当てはまりますが、代わりにお使いの言語の <a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry を使ったカスタムインスツルメンテーション</a> の説明と例に従ってください。</div>
 
 ビジネスロジックを詳細に可視化するために、Datadog APM では、ニーズと実装に基づいてトレースを構成するスパンをカスタマイズできます。これにより、コードベース内のあらゆるメソッド、さらにはメソッド内の特定のコンポーネントをトレースすることができます。これを使用すれば、アプリケーションの重要な領域を最適な粒度で最適化、監視できます。
 
@@ -30,7 +31,7 @@ Datadog は、ウェブサービス、データベース、キャッシュなど
 
 以下の例では、`BackupLedger.write` メソッド全体をトレースして、実行時間とステータスを測定します。`BackupLedger.write` は、トランザクション台帳の現在の状態をメモリに保存してから、支払いデータベースを呼び出して新しい顧客請求を送信するアクションです。これは、支払いサービスの `charge` エンドポイントがヒットしたときに発生します。
 
-{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="分析ビュー" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_2_cropped.png" alt="分析ビュー" style="width:90%;">}}
 
 `http.request POST /charge/` スパンは、直接の子スパンがないと多くの時間がかかります。これは、このリクエストがその動作に対するより優れた情報を得るために、さらなるインスツルメンテーションを必要とする手がかりです。使用しているプログラミング言語に応じて、関数を異なる方法で装飾する必要があります。
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
@@ -93,7 +94,7 @@ public class BackupLedger {
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -139,7 +140,7 @@ class BackupLedger:
         # [...]
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -169,7 +170,7 @@ class BackupLedger
 end
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -215,7 +216,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -242,7 +243,7 @@ function write (transactions) {
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -273,7 +274,7 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -318,32 +319,33 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
     public function write(array $transactions) {
       foreach ($transactions as $transaction) {
         // グローバルトレーサーを使用してインラインコードのブロックをトレース
-        $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
+        $span = \DDTrace\start_span();
+        $span->name = 'BackupLedger.persist';
 
         // スパンにカスタムメタデータを追加
-        $scope->getSpan()->setTag('transaction.id', $transaction->getId());
+        $span->meta['transaction.id'] = $transaction->getId();
         $this->transactions[$transaction->getId()] = $transaction;
 
-        // スパンを閉じます
-        $scope->close();
+        // スパンを閉じる
+        \DDTrace\close_span();
       }
 
       # [...]
     }
   }
 
-  // ddtrace v0.47.0 以前の場合、\dd_trace_method() を使用
+  // ddtrace v0.47.0 未満の場合、\dd_trace_method() を使用
   \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
     // SpanData::$name のデフォルトは、設定されていない場合 'ClassName.methodName' (v0.47.0 以降)
     $span->name = 'BackupLedger.write';
-    // SpanData::$resource のデフォルトは、設定されていない場合 SpanData::$name if not set (v0.47.0 以降)
+    // SpanData::$resource のデフォルトは、設定されていない場合 SpanData::$name (v0.47.0 以降)
     $span->resource = 'BackupLedger.write';
     $span->service = 'php';
   });
 ?>
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -351,17 +353,15 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 ビジネスロジックをインスツルメントしたら、Datadog APM UI で結果を確認します。
 
-1. **[Service List][1]** に移動し、カスタムスパンを追加したサービスを特定してから、**サービス詳細画面**に移動します。サービス詳細画面で、追加した**特定のリソース**をクリックし、時間フィルターを `The past 15 minutes` に変更して、スパンサマリーテーブルまでスクロールします。
+1. **[サービスカタログ][1]**に移動し、カスタムスパンを追加したサービスをクリックして、そのサービスページを開きます。サービスページで、追加した**特定のリソース**をクリックし、時間フィルターを `The past 15 minutes` に変更し、スパンサマリーテーブルまでスクロールダウンします。
 
     {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="スパンサマリーテーブル" style="width:90%;">}}
-
-   *これで、追加した新しいスパンを見つけることができるはずです*
 
 スパンサマリーテーブルでは、トレースを構成するスパンに関する集約情報を確認できます。ここで、異常な回数繰り返されるスパンを特定して、ループやデータベースアクセスの非効率性を見つけることができます（[`n+1` 問題][2]など）。
 
 2. **トレースの一覧画面**までスクロールダウンし、トレースのいずれかをクリックします。
 
-    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="分析ビュー" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_4_cropped.png" alt="分析ビュー" style="width:90%;">}}
 
 これで、カスタムスパンがコードベースに正常に追加され、フレームグラフと [App Analytics][3] で利用できるようになりました。これは、Datadog のツールを最大限に活用するための最初のステップです。次に[カスタムタグをスパンに追加][4]すれば、さらに強力にすることができます。
 
@@ -369,7 +369,7 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[4]: /ja/tracing/guide/add_span_md_and_graph_it/
+[4]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

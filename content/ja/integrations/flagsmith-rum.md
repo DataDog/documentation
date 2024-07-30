@@ -20,10 +20,9 @@ integration_id: flagsmith-rum
 integration_title: Flagsmith
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: flagsmith-rum
-oauth: {}
 public_title: Flagsmith
 short_description: Flagsmith の機能フラグで RUM データを強化
 supported_os:
@@ -54,6 +53,7 @@ tile:
   title: Flagsmith
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -62,7 +62,7 @@ tile:
 
 Datadog Flagsmith RUM インテグレーションは、RUM データを機能フラグで強化し、パフォーマンスの監視と行動の変化を可視化します。どのユーザーにユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断します。
 
-## セットアップ
+## 計画と使用
 
 機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][2]ガイドをご覧ください。
 
@@ -80,7 +80,7 @@ flagsmith.init({
 })
 ```
 
-## トラブルシューティング
+## ヘルプ
 
 サポートが必要な場合は、 [Flagsmith のドキュメント][3]をご覧いただくか、[Datadog サポート][4]までお問い合わせください。
 

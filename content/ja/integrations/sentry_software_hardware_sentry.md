@@ -9,6 +9,7 @@ assets:
     Hardware Sentry - Main: assets/dashboards/main.json
     Hardware Sentry - Site: assets/dashboards/site.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -18,6 +19,7 @@ assets:
       prefix: hardware_sentry.
     service_checks:
       metadata_path: service_checks.json
+    source_type_id: 10286
     source_type_name: Hardware Sentry
   logs: {}
   monitors:
@@ -60,12 +62,11 @@ integration_id: hardware-sentry
 integration_title: Hardware Sentry
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: sentry_software_hardware_sentry
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -90,6 +91,8 @@ tile:
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: サーバー、ネットワーク、ストレージのハードウェアとその二酸化炭素排出量の監視
   media:
@@ -119,6 +122,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -142,7 +146,7 @@ tile:
 
 **100% ソフトウェア開発**: 電力センサーを内蔵していないシステムでも、スマート PDU は不要です。
 
-### ダッシュボード  
+### ライブラリ
 
 このインテグレーションには、**[Hardware Sentry OpenTelemetry Collector][4]** が収集したメトリクスを活用するダッシュボードのセットが付属しています。
 
@@ -152,7 +156,7 @@ tile:
 | Hardware Sentry - サイト | 1 つの*サイト* (データセンターまたはサーバールーム) とその監視対象*ホスト*に関連するメトリクス |
 | Hardware Sentry - ホスト | 1 つの*ホスト*とその内部デバイスに関連するメトリクス |
 
-## サポート
+## Agent
 
 Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプションにより、[Sentry Desk][12] が提供するすべてのサービスにアクセスすることができるようになります。
 

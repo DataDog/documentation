@@ -8,7 +8,7 @@ dependencies:
 integration_id: tcp-rtt
 integration_title: TCP RTT
 is_public: true
-kind: integration
+custom_kind: integration
 name: tcp_rtt
 newhlevel: true
 public_title: Datadog-TCP RTT インテグレーション

@@ -2,6 +2,7 @@
 categories:
 - languages
 - log collection
+- tracing
 dependencies: []
 description: Python アプリケーションからメトリクス、トレース、ログを収集。
 doc_link: https://docs.datadoghq.com/integrations/python/
@@ -19,7 +20,7 @@ integration_id: python
 integration_title: Python
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション
@@ -27,11 +28,12 @@ short_description: Python アプリケーションからメトリクス、トレ
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Python インテグレーションを利用して、Python アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## セットアップ
+## 計画と使用
 
 ### メトリクスの収集
 
@@ -41,13 +43,13 @@ Python インテグレーションを利用して、Python アプリケーショ
 
 トレースを Datadog に送信するには、[Python アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
 
-### ログの収集
+### 収集データ
 
 _Agent v6.0 以上で使用可能_
 
 ログを Datadog に転送するには、[Python ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

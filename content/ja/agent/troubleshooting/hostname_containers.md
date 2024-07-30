@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: コンテナでのホスト名検出
 ---
 
@@ -70,7 +69,6 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -87,7 +85,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -138,7 +135,6 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -159,7 +155,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -177,7 +172,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ECS と Docker VM のホスト名エラー
+## Amazon ECS と Docker VM のホスト名エラー
 
 クラウドプロバイダー上の Docker で Agent を実行する場合、ホスト名エラーは通常、Agent が少なくとも次のいずれかにアクセスできないことを意味します。
 * コンテナランタイム API
@@ -188,7 +183,7 @@ spec:
 Agent が Docker ソケットに接続できるようにします。
 
 {{< tabs >}}
-{{% tab "EC2 上の AWS ECS" %}}
+{{% tab "EC2 上の Amazon ECS" %}}
 
 [タスク定義][1]で Docker ソケットがマウントされていることを確認します。
 

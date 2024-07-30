@@ -1,6 +1,6 @@
 ---
 title: Events with a Custom Agent Check
-kind: guide
+
 aliases:
 - /events/agent/
 - /events/guides/agent
@@ -110,6 +110,6 @@ This is an example of using a custom Agent check to send one event periodically.
 
 
 [1]: /developers/custom_checks/write_agent_check/
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /agent/guide/agent-commands/#agent-information
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/configuration/agent-commands/#restart-the-agent
+[4]: /agent/configuration/agent-commands/#agent-information

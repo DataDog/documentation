@@ -27,7 +27,6 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: Documentation
   text: Utilisation intensive du processeur ou de la mémoire
-kind: documentation
 title: Dépannage de l'Agent
 ---
 
@@ -39,7 +38,7 @@ Si vous pensez que vous rencontrez un problème, commencez par consulter cette l
 * Votre host est-il connecté à Internet, ou peut-il y accéder par l'intermédiaire d'un proxy ?
 * Si vous utilisez un proxy : votre [Agent est-il configuré pour ce proxy][4] ?
 * La clé d'API Datadog indiquée dans votre fichier de configuration `datadog.yaml` correspond-elle à [la clé d'API sur la plateforme Datadog][5] ?
-* Le site configuré dans votre fichier de configuration  `datadog.yaml` [correspond-il à celui de votre organisation][5] ?
+* Le site configuré dans votre fichier de configuration  `datadog.yaml` [correspond-il à celui de votre organisation][6] ?
 * Exécutez-vous un seul Agent Datadog sur votre host ?
 * Avez-vous redémarré l'Agent Datadog après avoir modifié un fichier de configuration yaml ?
 
@@ -54,11 +53,11 @@ Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[é
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /fr/agent/troubleshooting/hostname_containers/
-[4]: /fr/agent/proxy/
+[4]: /fr/agent/configuration/proxy/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /fr/agent/troubleshooting/site/
-[7]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: /fr/agent/guide/agent-log-files/
+[7]: /fr/agent/configuration/agent-commands/#agent-status-and-information
+[8]: /fr/agent/configuration/agent-log-files/
 [9]: /fr/agent/troubleshooting/debug_mode/
 [10]: /fr/help/
 [11]: /fr/agent/troubleshooting/send_a_flare/

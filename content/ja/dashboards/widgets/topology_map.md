@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: ドキュメント
   text: サービスマップ
-kind: documentation
 title: Topology Map ウィジェット
 widget_type: topology_map
 ---

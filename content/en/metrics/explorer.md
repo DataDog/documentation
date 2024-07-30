@@ -1,6 +1,5 @@
 ---
 title: Metrics Explorer
-kind: documentation
 description: "Explore all of your metrics and perform analytics."
 aliases:
   - /graphing/metrics/explorer/
@@ -11,6 +10,7 @@ further_reading:
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
+    
 ---
 
 ## Overview
@@ -44,9 +44,9 @@ The possible options are:
 
 **Note**: The options may differ based on the metric type selected.
 
-### Functions
+### Functions and formulas
 
-You can optionally add functions to your query using the function button. Not all functions are available for all metric types.
+You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
 ### Export
 
@@ -59,5 +59,8 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /notebooks/
 [3]: /dashboards/#screenboards
-[4]: /dashboards/#timeboards
+[4]: /dashboards/#get-started
 [5]: /metrics/introduction/#space-aggregation
+[6]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing
+
+

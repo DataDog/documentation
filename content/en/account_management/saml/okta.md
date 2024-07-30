@@ -1,6 +1,5 @@
 ---
 title: Okta SAML IdP
-kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
 further_reading:
@@ -14,20 +13,26 @@ further_reading:
 
 ## Setup
 
-Follow Okta's [Create SAML app integrations][1] docs to configure Okta as a SAML IdP.
+Follow Okta's [Create custom SAML app integrations][1] instructions to configure Okta as a SAML IdP.
 
-**Note**: It's recommended that you set up Datadog as an Okta application manually, as opposed to using a `pre-configured` configuration.
+**Note**: Set up Datadog as an Okta application manually. Do not use the preconfigured Datadog application.
 
-**Note**: US1 customers can use the preset configuration in Okta's [How to Configure SAML 2.0 for Datadog][2] docs to configure Okta as a SAML IdP.
+{{% site-region region="us" %}}
+
+**Note**: US1 customers can use the preset configuration in Okta's [add existing app integrations][7] instructions to configure Okta as a SAML IdP. Use the latest preconfigured Datadog application in the [Okta Integration Network (OIN)][2].
+
+[7]: https://help.okta.com/en-us/content/topics/apps/apps-add-applications.htm
+[2]: https://www.okta.com/integrations/
+{{% /site-region %}}
 
 ## General details
 
 | Okta IDP Input Field        | Expected Value                                                                                                                 |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Single Sign On URL          | Assertion Consumer Service URL (Find this URL on the [Configure SAML][3] page, in the *Assertion Consumer Service URL* field.) |
+| Single Sign On URL          | Assertion Consumer Service URL (Find this URL on the [Configure SAML page][3], in the *Assertion Consumer Service URL* field.) |
 | Recipient URL               | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
 | Destination URL             | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
-| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this URL on the [Configure SAML][3] page, in the *Service Provider Entity ID* field.)         |
+| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this ID on the [Configure SAML page][3], in the *Service Provider Entity ID* field.)         |
 | Name ID Format              | EmailAddress                                                                                                                   |
 | Response                    | Signed                                                                                                                         |
 | Assertion Signature         | Signed                                                                                                                         |
@@ -64,7 +69,6 @@ In the event that you need to upload an `IDP.XML` file to Datadog before being a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm?cshid=ext_Apps_App_Integration_Wizard-saml
-[2]: https://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-DataDog.html
 [3]: https://app.datadoghq.com/saml/saml_setup
 [4]: /account_management/saml/mapping
 [5]: /account_management/saml/

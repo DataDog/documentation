@@ -12,7 +12,7 @@ integration_id: azure-app-configuration
 integration_title: Microsoft Azure App Configuration
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_app_configuration
 public_title: Datadog-Microsoft Azure App Configuration インテグレーション
@@ -20,29 +20,30 @@ short_description: Azure App Configuration のキーメトリクスを追跡し�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure App Configuration は、アプリケーションの設定と機能フラグを管理するためのセントラルサービスを提供します。App Configuration では、アプリケーションのすべての設定を保存し、そのアクセスを一箇所で保護することができます。
 
 [Datadog Azure インテグレーション][1]を利用することで、Azure App Configuration からメトリクスを収集し、リクエストの着信やレイテンシー、スロットリングエラーをモニタリングすることができます。
 
-## セットアップ
-### インストール
+## 計画と使用
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
-### メトリクス
+## リアルユーザーモニタリング
+### データセキュリティ
 {{< get-metrics-from-git "azure_app_configuration" >}}
 
 
-### イベント
+### ヘルプ
 Azure App Configuration インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 Azure App Configuration インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

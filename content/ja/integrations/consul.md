@@ -3,8 +3,9 @@ app_id: consul
 app_uuid: d0b52e9d-6594-4ff5-9b66-800943f75756
 assets:
   dashboards:
-    consul: assets/dashboards/consul_dashboard.json
+    consul: assets/dashboards/consul_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,10 +20,15 @@ assets:
     - consul-agent
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 122
     source_type_name: Consul
   logs:
     source: consul
+  monitors:
+    consul: assets/monitors/consul_status.json
   saved_views:
+    consul_errors: assets/saved_views/consul_errors.json
+    consul_overview: assets/saved_views/consul_overview.json
     consul_processes: assets/saved_views/consul_processes.json
 author:
   homepage: https://www.datadoghq.com
@@ -34,7 +40,7 @@ categories:
 - containers
 - log collection
 - network
-- notification
+- notifications
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
@@ -43,12 +49,11 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.2.2
+integration_version: 2.6.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: consul
-oauth: {}
 public_title: Consul
 short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
 supported_os:
@@ -62,7 +67,7 @@ tile:
   - Category::コンテナ
   - Category::ログの収集
   - Category::ネットワーク
-  - Category::通知
+  - Category::Notifications
   - Category::オーケストレーション
   - Supported OS::Linux
   - Supported OS::Windows
@@ -75,6 +80,7 @@ tile:
   title: Consul
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Consul ダッシュ][1]
@@ -98,20 +104,20 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 メトリクスに加えて、Datadog Agent は Consul の健全性チェックごとにサービスチェックを送信し、新しいリーダー選出ごとにイベントを送信します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -158,7 +164,7 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
 
 3. [Agent を再起動します][3]。
 
-##### DogStatsD
+##### ヘルプ
 
 Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を介して同じ追加メトリクスのセットを Agent に送信するように Consul を構成できます。
 
@@ -207,7 +213,7 @@ Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を
 
 3. [Agent を再起動します][3]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -239,7 +245,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [5]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -249,11 +255,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                              |
 | -------------------- | ---------------------------------- |
-| `<インテグレーション名>` | `consul`                           |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                      |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "https://%%host%%:8500"}` |
+| `<INTEGRATION_NAME>` | `consul`                           |
+| `<INIT_CONFIG>`      | 空白または `{}`                      |
+| `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:8500"}` |
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -294,9 +300,9 @@ $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 23176/consul
 ```
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "consul" >}}
 
 
@@ -304,16 +310,16 @@ Consul Agent が DogStatsD に送信するメトリクスの詳細について�
 
 ネットワークレイテンシーメトリクスの計算方法については、[Consul のネットワーク座標系に関するドキュメント][5]を参照してください。
 
-### イベント
+### ヘルプ
 
 **consul.new_leader**:<br>
 Datadog Agent は、Consul クラスターが新しいリーダーを選出すると、`prev_consul_leader`、`curr_consul_leader`、および `consul_datacenter` のタグを付けてイベントを送信します。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "consul" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
@@ -331,7 +337,7 @@ Datadog Agent は、Consul クラスターが新しいリーダーを選出す�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://www.consul.io/docs/agent/telemetry.html
 [5]: https://www.consul.io/docs/internals/coordinates.html

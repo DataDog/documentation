@@ -13,6 +13,7 @@ assets:
       prefix: aws.mediaconvert.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 245
     source_type_name: Amazon MediaConvert
 author:
   homepage: https://www.datadoghq.com
@@ -32,10 +33,9 @@ integration_id: amazon-mediaconvert
 integration_title: Amazon MediaConvert
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_mediaconvert
-oauth: {}
 public_title: Amazon MediaConvert
 short_description: テレビ、コネクテッドデバイス向けビデオコンテンツのフォーマットと圧縮
 supported_os: []
@@ -54,15 +54,16 @@ tile:
   title: Amazon MediaConvert
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Amazon Elemental MediaConvert は、オフラインビデオコンテンツをテレビや接続デバイスへの配信用にフォーマットして圧縮するサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Elemental MediaConvert メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -71,7 +72,7 @@ Amazon Elemental MediaConvert は、オフラインビデオコンテンツを�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MediaConvert` が有効になっていることを確認します。
 2. [Datadog - Amazon Elemental MediaConvert インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -87,21 +88,21 @@ Amazon Elemental MediaConvert から S3 バケットまたは CloudWatch のい�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_mediaconvert" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Elemental MediaConvert インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Elemental MediaConvert インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

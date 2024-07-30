@@ -29,11 +29,15 @@ Datadog では HTTP REST API を採用しており、リソース指向 URL を�
 
 API への認証は、ヘッダー `DD-API-KEY` を用いて [API キー][1]で行います。エンドポイントによっては、ヘッダー `DD-APPLICATION-KEY` を使用した[アプリケーションキー][2]も必要です。
 
-API を実行するには、[![Postman で実行][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+API を試すには [![Postman で実行][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa)
+
+**注**: Postman を通して Datadog API を認証するには、Datadog API コレクションに含まれる**コレクション変数**に、Datadog API とアプリケーションキーの値を追加します。
 
 [API の使用][4]でエンドポイントについて説明しています。
 
-**注**: cURL コードの例は、BASH および GNU Core Utilities を使用することを想定したものです。macOS をお使いの場合は [Homebrew package manager][5] から Coreutils をダウンロードして、コマンド `brew install coreutils` でインストールできます。
+**注**: 
+   - Datadog API コレクションの **Variables** タブに API とアプリケーションキーの値を追加します。
+   - cURL コード例は、BASH と GNU coreutils の使用を前提としています。macOS をお使いの場合は [Homebrew package manager][5] を使って Coreutils をダウンロードして、コマンド `brew install coreutils` でインストールできます。
 
 ### クライアントライブラリ
 
@@ -42,7 +46,7 @@ API を実行するには、[![Postman で実行][3]](https://god.gw.postman.com
 {{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
-#### インストール
+#### インフラストラクチャーリスト
 Maven - この依存関係をプロジェクトの POM に追加します。
 ```xml
 <dependency>
@@ -58,7 +62,7 @@ Gradle - この依存関係をプロジェクトのビルドファイルに追�
 compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
-#### 使用方法
+#### ガイド
 
 ```java
 import com.datadog.api.client.ApiClient;
@@ -118,55 +122,55 @@ application {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-legacy" >}}
-#### インストール
+#### インフラストラクチャーリスト
 ```sh
 pip install datadog
 ```
-#### 使用方法
+#### ガイド
 ```python
 import datadog
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-#### インストール
+#### インフラストラクチャーリスト
 ```console
 pip3 install datadog-api-client
 ```
-#### 使用方法
+#### ガイド
 ```python
 import datadog_api_client
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-legacy" >}}
-#### インストール
+#### インフラストラクチャーリスト
 ```sh
 gem install dogapi
 ```
-#### 使用方法
+#### ガイド
 ```ruby
 require 'dogapi'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-#### インストール
+#### インフラストラクチャーリスト
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
-#### 使用方法
+#### ガイド
 ```ruby
 require 'datadog_api_client'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-#### インストール
+#### インフラストラクチャーリスト
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
-#### 使用方法
+#### ガイド
 ```go
 import (
         "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
@@ -177,7 +181,7 @@ import (
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
-#### インストール
+#### インフラストラクチャーリスト
 パッケージは [@datadog/datadog-api-client][1] の下にあり、NPM または Yarn を介してインストールできます。
 
 ```js
@@ -188,7 +192,7 @@ npm install @datadog/datadog-api-client
 yarn add @datadog/datadog-api-client
 ```
 
-#### 使用方法
+#### ガイド
 ```js
 import { <VERSION> } from 'datadog-api-client';
 ```

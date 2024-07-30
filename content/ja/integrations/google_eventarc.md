@@ -12,7 +12,7 @@ integration_id: google-eventarc
 integration_title: Google Eventarc
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_eventarc
 public_title: Google Eventarc インテグレーション
@@ -20,11 +20,12 @@ short_description: Datadog のアラートを Google Eventarc チャンネルに
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Datadog のイベントを [Eventarc][1] に送信して Google サービスに配信し、Datadog のモニター通知で Eventarc 主導のワークフローを開始できるようにします。
 
-### セットアップ
+### 計画と使用
 
 1. 通知を受け取る各 GCP プロジェクトに、メインの [GCP インテグレーション][2]がインストールされていることを確認します。
 
@@ -48,21 +49,21 @@ GCP Eventarc インテグレーションを使用して、モニター用の新�
 
 ターゲットにできるリソースの完全なリストは、[GCP ドキュメント][5]にあります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Google Eventarc インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Google Eventarc インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Eventarc インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

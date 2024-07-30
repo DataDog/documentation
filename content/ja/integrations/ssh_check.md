@@ -34,12 +34,11 @@ draft: false
 git_integration_title: ssh_check
 integration_id: ssh
 integration_title: SSH
-integration_version: 2.4.0
+integration_version: 2.7.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ssh_check
-oauth: {}
 public_title: SSH
 short_description: SSH 接続と SFTP レイテンシーを監視。
 supported_os:
@@ -145,6 +144,6 @@ SSH チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

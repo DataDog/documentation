@@ -36,7 +36,7 @@ Both of these should return the same image.
 {{- $extension := .extension | default ".svg" -}}
 {{- $fallback := .fallback | default "none" -}}
 {{- $img_url := $ctx.Site.Params.integrations_img_url -}}
-{{- $imagesJSON := getJSON "https://s3.amazonaws.com/origin-static-assets/websites-integrations/images.json" -}}
+{{- $imagesJSON := site.Data.images -}}
 {{- $integrationLogosList := index $imagesJSON "integrationLogosList" | default slice -}}
 {{- $integrationAliasList := index $imagesJSON "aliases" | default dict -}}
 {{- if (eq (len $integrationLogosList) 0) -}}
@@ -140,7 +140,7 @@ Both of these should return the same image.
       {{- if eq $ctx.Page.Language.Lang "en" -}}
         <!-- For security monitoring its an accepted that certain categories won't have an image to fall back to agent.svg, lets reduce that noise -->
         {{- if not (in (slice "runtime security" "file integrity monitoring") $basename) -}}
-          {{- warnf "missing integration svg %q called from %q" $basename $ctx.Page.Permalink -}}
+          <!--{{/*- warnf "missing integration svg %q called from %q" $basename $ctx.Page.Permalink -*/}}-->
         {{- end -}}
         {{- $output_image = "" -}}
       {{- end -}}

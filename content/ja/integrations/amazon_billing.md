@@ -1,126 +1,101 @@
 ---
-aliases:
-- /ja/integrations/awsbilling/
-- /ja/integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage/
+app_id: amazon-billing
+app_uuid: 9409f423-8c1f-4a82-8632-1be74d52c028
+assets:
+  dashboards:
+    aws_billing: assets/dashboards/amazon_billing_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.billing.estimated_charges
+      metadata_path: metadata.csv
+      prefix: aws.billing
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 158
+    source_type_name: Amazon Billing
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
-- Cost Management
 - aws
-- log collection
+- metrics
+- cloud
+- cost management
 dependencies: []
-description: AWS アカウントの支払実績と支払予測を監視
-doc_link: https://docs.datadoghq.com/integrations/amazon_billing/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_billing
-has_logo: true
 integration_id: amazon-billing
 integration_title: AWS Billing and Cost Management
 integration_version: ''
 is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
+custom_kind: integration
+manifest_version: 2.0.0
 name: amazon_billing
-public_title: Datadog-AWS Billing and Cost Management インテグレーション
-short_description: AWS アカウントの支払実績と支払予測を監視
-version: '1.0'
+public_title: AWS Billing and Cost Management
+short_description: AWS Billing で AWS の請求予測とコストを追跡できます。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Metrics
+  - Category::クラウド
+  - Category::Cost Management
+  configuration: README.md#Setup
+  description: AWS Billing で AWS の請求予測とコストを追跡できます。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AWS Billing and Cost Management
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-AWS Billing and Cost Management を使用すると、CloudWatch の使用量を含む AWS インフラストラクチャーの予測課金額やコストを追跡できます。
+AWS Billing and Cost Management は、推定請求額と予算メトリクスを表示します。
 
-このインテグレーションを有効にすると、請求メトリクスを Datadog に表示できます。
+このインテグレーションを有効にすると、AWS Billing and Cost Management メトリクスを Datadog で確認することができます。
 
-## セットアップ
+**注**: このインテグレーションでは `budgets:ViewBudget` 権限が完全に有効になっている必要があります。請求メトリクスは AWS コンソールで有効にする必要があります。AWS のセットアップの詳細については、[Amazon Web Services インテグレーションドキュメント][1]を参照してください。
 
-### インストール
+## 計画と使用
+
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Billing` が有効になっていることを確認します。
-2. AWS 請求のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [AWS 予算ポリシー][4]を参照してください。
+2. [Datadog - AWS Billing インテグレーション][3]をインストールします。
 
-    | AWS アクセス許可       | 説明                      |
-    | -------------------- | -------------------------------- |
-    | `budgets:ViewBudget` | AWS の予算メトリクスの表示に使用されます。|
+## リアルユーザーモニタリング
 
-3. [AWS コンソール][5]内で請求メトリクスを有効にします。
-4. [Datadog - AWS Billing and Cost Management インテグレーション][6]をインストールします。
-5. [AWS 予算を作成][7]して、[メトリクス](#metrics)の受信を開始します。
-
-**注**: AWS の予算メトリクスは、AWS プライマリアカウントからのみ収集できます。
-
-### ログの収集
-
-#### ログの有効化
-
-S3 バケットまたは CloudWatch のいずれかにログを送信するよう AWS Billing を構成します。
-
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_billing` に設定されているかを確認してください。
-
-#### ログを Datadog に送信する方法
-
-1. [Datadog Forwarder Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールで、AWS Billing ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
-
-    - [S3 バケットに手動トリガーを追加][9]
-    - [CloudWatch ロググループに手動トリガーを追加][10]
-
-## CloudWatch 使用状況の監視
-
-AWS アクセス許可を設定して `budgets:ViewBudget` アクセス許可を追加すると、このインテグレーションを使用して CloudWatch の請求情報を監視できます。
-
-AWS の請求メトリクスは、約 4 時間ごとに取得できます。Datadog がこのメトリクスを収集するまで 4 時間かかる場合があります。
-
-メトリクスが利用可能になったら、`aws.billing.estimated_charges` と `aws.billing.forecasted_charges` を調べます。これらのメトリクスを使用して、コンテキストを `service:amazoncloudwatch` まで絞り込むことで、CloudWatch の使用状況を追跡できます。また、`max:account_id` を使用して、支払額を AWS アカウントごとに分けることができます。
-
-メトリクス `aws.billing.estimated_charges` は、当月のその時点までの CloudWatch 請求額と AWS が見なす額を示します。この値は、毎月初に 0 にリセットされます。メトリクス `aws.billing.forecasted_charges` は、当月の使用状況に基づいた月末の CloudWatch の推定請求額です。
-
-## 収集データ
-
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_billing" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
-
-### イベント
+### ヘルプ
 
 AWS Billing and Cost Management インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS Billing and Cost Management インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-### AWS 請求インテグレーションからメトリクスが報告されない
-
-インテグレーションのトラブルシューティングに使用できるチェックリストを以下に示します。
-
-1. IAM ポリシーに `budgets:ViewBudget` が含まれているか。
-2. 支払者アカウントで請求メトリクスが有効になっているか。
-
-**注**: AWS の請求メトリクスは、Datadog によって 4 時間ないしは 8 時間ごとに収集されます。
-
-### メトリクスがない
-
-`aws.billing.actual_spend`、`aws.billing.forecasted_spend`、または `aws.billing.budget_limit` がない場合は、[AWS 予算を作成][7]すると、Datadog でメトリクスの受信が開始されます。
-
-`aws.billing.estimated_charges` がない場合、該当の AWS アカウントがプライマリアカウントであることを確認してください。このメトリクスは、上記のようにプライマリ AWS 請求アカウントでないアカウントから引き出すことはできません。
-
-**注**: AWS の請求メトリクスは、Datadog によって 4 時間ないしは 8 時間ごとに収集されます。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/cost-management/latest/userguide/security-iam.html
-[5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
-[6]: https://app.datadoghq.com/integrations/amazon-billing
-[7]: https://console.aws.amazon.com/billing/home?#/createbudget
-[8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[10]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_billing/amazon_billing_metadata.csv
+[3]: https://app.datadoghq.com/integrations/amazon-billing
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_billing/metadata.csv
+[5]: https://docs.datadoghq.com/ja/help/

@@ -3,6 +3,7 @@ app_id: docker
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -18,6 +19,7 @@ assets:
     - docker-containerd-shim
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 73
     source_type_name: Docker
 author:
   homepage: https://www.datadoghq.com
@@ -37,10 +39,9 @@ integration_id: docker
 integration_title: Docker Daemon
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: docker_daemon
-oauth: {}
 public_title: Docker Daemon
 short_description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
 supported_os:
@@ -62,6 +63,7 @@ tile:
   title: Docker Daemon
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 **注**: Docker Daemon チェックのメンテナンスは継続されていますが、**Agent v5** でのみ動作します。
@@ -79,8 +81,8 @@ tile:
 * Docker_daemon の状態を視覚化および監視できます。
 * Docker_daemon のフェイルオーバーとイベントの通知を受けることができます。
 
-## セットアップ
-### インストール
+## 計画と使用
+### インフラストラクチャーリスト
 
 すべてのコンテナに関する Docker メトリクスを収集するには、ホストごとに **1 つの** Datadog Agent を実行します。各ホストで直接 Agent を実行する方法と、1 つの [docker-dd-agent コンテナ][2]内で実行する方法 (推奨) の 2 つがあります。
 
@@ -189,12 +191,12 @@ Datadog Agent を使用したカスタム Docker コンテナの構築、Alpine 
 
 [`import`][18] コマンドは、古い `docker_daemon.yaml` を新しい `docker.yaml` に変換します。また、このコマンドは、必要な設定を `docker_daemon.yaml` から `datadog.yaml` に移動します。
 
-## 収集データ
-### メトリクス
+## リアルユーザーモニタリング
+### データセキュリティ
 {{< get-metrics-from-git "docker_daemon" >}}
 
 
-### イベント
+### ヘルプ
 Docker インテグレーションは以下のイベントを生成します。
 
 * Delete Image
@@ -208,13 +210,13 @@ Docker インテグレーションは以下のイベントを生成します。
 * Restart Daemon
 * Update
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "docker_daemon" >}}
 
 
 **注**: `docker.exit` を使用するには、[Docker YAML ファイル][21]に `collect_exit_codes: true` を追加し、Agent を再起動します。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
 
@@ -234,11 +236,11 @@ Docker インテグレーションは以下のイベントを生成します。
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/docker.png
 [2]: https://github.com/DataDog/docker-dd-agent
 [3]: https://github.com/DataDog/docker-dd-agent#cgroups
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://app.datadoghq.com/account/settings#integrations/docker
 [6]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example
 [7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/integrations-docker-dockerps.png
-[8]: https://app.datadoghq.com/account/settings#agent/docker
+[8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [9]: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy
 [10]: https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration
 [11]: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-a-web-proxy-as-proxy

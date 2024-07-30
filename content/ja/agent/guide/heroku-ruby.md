@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: ドキュメント
   text: Heroku ログの収集
-kind: ガイド
 title: Datadog で Heroku の Ruby on Rails アプリケーションをインスツルメント
 ---
 
@@ -616,10 +615,10 @@ APM Agent
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Datadog の Ruby アプリケーショントレース" >}}
 
-[Service list][20] では、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認できます。
+[サービスカタログ][20] では、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認できます。
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のサービスリストビュー" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービスビュー" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のサービスカタログ" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービス詳細ページ" >}}
 
 ## ログ管理
 
@@ -856,7 +855,7 @@ Agent (v7.27.0)
 [17]: https://elements.heroku.com/addons/memcachedcloud
 [18]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
 [19]: https://app.datadoghq.com/apm/traces
-[20]: https://app.datadoghq.com/apm/services
+[20]: https://app.datadoghq.com/services
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages

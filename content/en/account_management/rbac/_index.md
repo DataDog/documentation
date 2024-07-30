@@ -1,6 +1,5 @@
 ---
-title: Role Based Access Control
-kind: documentation
+title: Access Control
 aliases:
     - /guides/rbac
     - /account_management/rbac/role_api
@@ -25,28 +24,38 @@ further_reading:
       text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
 
+## Overview
+
+Datadog offers a flexible access management system that allows you to customize the level at which you control access to your Datadog resources.
+
+Users looking for basic functionality have access to OOTB [roles](#role-based-access-control) with [permissions][1]. For more flexibility, create your own [custom roles](#custom-roles) to combine permissions into new roles. Permissions attached to a custom role apply to all resources of a particular resource type.
+
+Organizations and users that need maximum flexibility can control access to individual dashboards, notebooks, and other resources with [granular access control][2].
+
+## Role based access control
+
 Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify. By default, Datadog offers three roles, and you can create [custom roles](#custom-roles) so you can define a better mapping between your users and their permissions.
 
 By granting permissions to roles, any user who is associated with that role receives that permission. When users are associated with multiple roles, they receive all the permissions granted to each of their roles. The more roles a user is associated with, the more access they have within a Datadog account.
 
-If a user in a [child organization][1] has `org_management` permission, it does not mean that they have the same permission in the parent org. Users' roles are not shared between parent and child organizations.
+If a user in a [child organization][3] has `org_management` permission, it does not mean that they have the same permission in the parent org. Users' roles are not shared between parent and child organizations.
 
-**Note**: If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [Single Sign On With SAML][2].
+**Note**: If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [SAML group mapping][4].
 
 ## Datadog default roles
 
 Datadog Admin Role
-: Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][3]. They can also promote standard users to administrators.
+: Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][5]. They can also promote standard users to administrators.
 
 Datadog Standard Role
-: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][3], [monitors][4], [events][5], and [notebooks][6]. Standard users can also invite other users to organizations.
+: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][5], [monitors][6], [events][7], and [notebooks][8]. Standard users can also invite other users to organizations.
 
 Datadog Read Only Role
-: Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][3] with someone outside their unit.
+: Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][5] with someone outside their unit.
 
 ## Custom roles
 
-The custom roles feature gives your organization the ability to create new roles with unique permission sets. Manage your custom roles through the Datadog site, the [Datadog Role API][7], or SAML directly. Find out below how to create, update, or delete a role. See [Datadog Role Permissions][8] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
+The custom roles feature gives your organization the ability to create new roles with unique permission sets. Manage your custom roles through the Datadog site, the [Datadog Role API][8], or SAML directly. Find out below how to create, update, or delete a role. See [Datadog Role Permissions][1] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
 
 ### Enable custom roles
 
@@ -181,38 +190,17 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 {{< img src="account_management/rbac/role_templates.png" alt="Role Templates dropdown menu with Datadog Billing Admin Role selected" style="width:90%;">}}
 
-## Restrict access to individual resources (granular access controls)
-
-Some resources allow you to restrict access to individual resources by roles, [Teams][16] (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of payment methods to billing administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
-
-
-| Supported Resources with Granular Access Control | Team-Based Access | Role-Based Access | User / Service Account-Based Access |
-|--------------------------------------------------|-------------------|-------------------|-------------------------------------|
-| [Dashboards][11]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Monitors][12]                                   |                   | {{< X >}}         |                                     |
-| [Notebooks][6]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Security rules][13]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Service Level Objectives][14]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Synthetic tests][15]                            |                   | {{< X >}}         |                                     |
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/multi_organization/
-[2]: /account_management/saml/
-[3]: /dashboards/
-[4]: /monitors/
-[5]: /events/
-[6]: /notebooks/#limit-edit-access
-[7]: /api/v2/roles/
-[8]: /account_management/rbac/permissions/
+[1]: /account_management/rbac/permissions/
+[2]: /account_management/rbac/granular_access/
+[3]: /account_management/multi_organization/
+[4]: /account_management/saml/mapping/
+[5]: /dashboards/
+[6]: /monitors/
+[7]: /events/
+[8]: /api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
 [10]: /api/latest/roles/#create-role
-[11]: /dashboards/#permissions
-[12]: /monitors/notify/#permissions
-[13]: /security/detection_rules/#limit-edit-access
-[14]: /service_management/service_level_objectives/#permissions
-[15]: /synthetics/browser_tests/#permissions
-[16]: /account_management/teams/

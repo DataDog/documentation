@@ -1,7 +1,7 @@
 ---
 categories:
 - collaboration
-- notification
+- notifications
 dependencies: []
 description: Datadog のアラートとグラフをチームの DingTalk Group に送信
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/
@@ -12,7 +12,7 @@ integration_id: dingtalk
 integration_title: DingTalk
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: dingtalk
 public_title: Datadog-DingTalk インテグレーション
@@ -20,6 +20,7 @@ short_description: Datadog のアラートとグラフをチームの DingTalk G
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 DingTalk と統合して、以下のことができます。
@@ -27,11 +28,11 @@ DingTalk と統合して、以下のことができます。
 -   DingTalk で Datadog アラートとイベントの通知を受けることができます。
 -   メッセージやグラフを DingTalk グループと共有できます。
 
-## インストール
+## インフラストラクチャーリスト
 
 DingTalk インテグレーションは、Datadog の [DingTalk インテグレーションタイル][1]でインストールされます。
 
-## セットアップ
+## 計画と使用
 
 Datadog と DingTalk グループを統合するには、以下の手順に従ってください。
 
@@ -45,24 +46,24 @@ Datadog と DingTalk グループを統合するには、以下の手順に従�
 
 インテグレーションをインストールまたは更新したら、DingTalk グループ名で [`@-notification` 機能][2]を使用できるようになります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 DingTalk インテグレーションは、メトリクスを提供しません。
 
-### イベント
+### ヘルプ
 
 DingTalk インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 DingTalk インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/dingtalk
+[1]: https://app.datadoghq.com/integrations/dingtalk
 [2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [3]: https://docs.datadoghq.com/ja/help/

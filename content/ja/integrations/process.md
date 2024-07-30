@@ -30,10 +30,9 @@ integration_id: システム
 integration_title: プロセス
 integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: プロセス
-oauth: {}
 public_title: プロセス
 short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
 supported_os:

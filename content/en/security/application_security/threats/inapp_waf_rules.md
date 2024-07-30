@@ -1,6 +1,5 @@
 ---
 title: In-App WAF Rules
-kind: documentation
 aliases:
   - /security_platform/application_security/event_rules
   - /security/application_security/event_rules
@@ -21,13 +20,13 @@ further_reading:
 
 With Application Security Management (ASM) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
 
-An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display suspicious requests in the trace explorer and in the default signal rules. 
+An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules. 
 
 You can add to the In-App WAF rules without upgrading the tracing library. 
 
 ## Structure of an ASM In-App WAF rule
 
-An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a suspicious request is detected, tags from the rules are propagated onto the suspicious request, and can be used to build [detection rules][1].
+An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a security trace is detected, tags from the rules are propagated onto the security trace, and can be used to build [detection rules][1].
 
 ### Conditions
 Conditions define when the rule tags an incoming request. The conditions are composed of _inputs_ and _operators_.
@@ -56,17 +55,26 @@ An input represents which part of the request the operator is applied to. The fo
 
 ## Custom in-app WAF rules
 
-**Note:** This feature is in beta.
+   <div class="alert alert-info">Custom in-app WAF rules is in beta.</div>
 
-Custom in-app WAF rules enable users to log specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** –> **Application Security** –> **Configuration** –> **In-App WAF** -> [**Custom Rules**][4].
+Custom in-app WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4].
 
-**Note:** Default rules in in-app WAF are read-only. Sometimes, to fine-tune your in-app WAF behavior, you need to modify the in-app WAF rules. While you cannot modify the default rules, you can create a custom rule based on one of the default rules and modify the match conditions as per your needs. Be sure to disable the default rule so that you don't end up with two very similar rules evaluating the same requests. 
+**Note:** Default rules in in-app WAF are read-only. To refine your in-app WAF behavior, modify the in-app WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 
 
-## Configure an ASM In-App WAF rule in your service
+## Configure an ASM In-App WAF rule
 
-1. In Datadog, navigate to the [In-App WAF page under ASM Configuration][2].
+Blocking on a service is defined through the policy rules. Three Datadog default policies are included in the in-app WAF: *Datadog Recommended*, *Datadog Monitoring-only*, which monitors attacks only, and *Datadog Block Attack tools*, which blocks attack tools and monitors all other attacks.
 
-2. Click **Download Configuration** to download the configuration file, `appsec-rules.json`, to your local machine.
+Services using a policy are visible directly in the policy management page.
+
+1. In Datadog, navigate to [Security > Application Security > Protection > In-App WAF][2].
+
+   {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
+
+2. Click on the three dots to the right of one of the policies, and select **Download Configuration of this Policy** to download the configuration file to your local machine.
+3. Optionally, select **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled ASM services.
+
+   **Note:** A policy can be applied to one or more services, but a service can only contain one _policy_.
 
 3. Update the file to include the JSON definition of your new rule, following the specification above. For example:
 
@@ -111,13 +119,13 @@ Custom in-app WAF rules enable users to log specific types of requests to their 
 
 ## What to do next
 
-Next, [configure detection rules to create security signals][1] based on those suspicious requests defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
+Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/custom_rules/
-[2]: https://app.datadoghq.com/security/appsec/in-app-waf?group_by=NONE
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /security/application_security/enabling/
-[4]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=custom-rules
+[4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules

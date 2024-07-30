@@ -21,32 +21,41 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
-kind: documentation
-title: ロールベースのアクセス制御
+title: アクセス制御
 ---
+
+## 概要
+
+Datadog は、Datadog リソースへのアクセスを制御するレベルをカスタマイズすることを可能にする、柔軟なアクセス管理システムを提供しています。
+
+基本的な機能を求めるユーザーには、[権限][1]付きのすぐに使える[ロール](#role-based-access-control)が用意されています。より柔軟性を求めるのであれば、独自の[カスタムロール](#custom-roles)を作成し、権限を新しいロールにまとめることができます。カスタムロールにアタッチされた権限は、特定のリソースタイプのすべてのリソースに適用されます。
+
+最大限の柔軟性を必要とする組織やユーザーは、[粒度の高いアクセス制御][2]を使用して、個々のダッシュボード、ノートブック、およびその他のリソースへのアクセスを制御できます。
+
+## ロールベースのアクセス制御
 
 ロールによりユーザーを分類し、各ユーザーが読み取ることができるデータや変更できるアカウントアセットなど、アカウントのアクセス許可を定義します。Datadog ではデフォルトで 3 つのロールを提供していますが、[カスタムロール](#カスタムロール)を作成すると、ユーザーとアクセス許可のマッピングをより適切に定義できます。
 
 ロールにアクセス許可を付与することで、ロールに関連付けられているユーザーはアクセス許可を受け取ります。複数のロールに関連付けられているユーザーは、それぞれのロールに付与されているすべてのアクセス許可を受け取ります。ユーザーに関連付けられたロールが増えるほど、Datadog アカウント内で持つアクセス権も増えます。
 
-[子組織][1]のユーザーが `org_management` 権限を持っていても、親組織で同じ権限を持っているとは限りません。ユーザーのロールは、親組織と子組織の間で共有されることはありません。
+[子組織][3]のユーザーが `org_management` 権限を持っていても、親組織で同じ権限を持っているとは限りません。ユーザーのロールは、親組織と子組織の間で共有されることはありません。
 
-**注**: SAML ID プロバイダーを使用する場合、認証のためにそれを Datadog と統合でき、ID 属性を Datadog のデフォルトロールとカスタムロールにマップできます。詳細については、[SAML を使用したシングルサインオン][2]を参照してください。
+**注**: SAML ID プロバイダーを使用する場合、認証のためにそれを Datadog と統合でき、ID 属性を Datadog のデフォルトロールとカスタムロールにマップできます。詳細については、[SAML グループマッピング][4]を参照してください。
 
 ## Datadog のデフォルトのロール
 
 Datadog 管理者ロール
-: 請求情報へのアクセス、API キーの無効化に加えて、ユーザーの管理や[読み取り専用ダッシュボード][3]の構成が可能です。標準ユーザーを管理者に昇格させることもできます。
+: 請求情報へのアクセス、API キーの無効化に加えて、ユーザーの管理や[読み取り専用ダッシュボード][5]の構成が可能です。標準ユーザーを管理者に昇格させることもできます。
 
 Datadog 標準ロール
-: [ダッシュボード][3]、[モニター][4]、[イベント][5]、[ノートブック][6]など、Datadog が提供するすべてのモニタリング機能を表示および変更できます。他のユーザーをオーガニゼーションに招待することも可能です。
+: [ダッシュボード][5]、[モニター][6]、[イベント][7]、[ノートブック][8]など、Datadog が提供するすべての監視機能を表示および変更できます。他のユーザーを組織に招待することも可能です。
 
 Datadog 読み取り専用ロール
-: Datadog システム内での編集権限を持たないユーザーです。特定の機能を読み取り専用ビューでクライアントに共有したり、ある部門のメンバーから外部ユーザーに[ダッシュボード][3]を共有する必要がある場合に便利です。
+: Datadog システム内での編集権限を持たないユーザーです。特定の機能を読み取り専用ビューでクライアントに共有したり、ある部門のメンバーから外部ユーザーに[ダッシュボード][5]を共有する必要がある場合に便利です。
 
 ## カスタムロール
 
-カスタムロール機能を使用すると、オーガニゼーションで一意の権限セットを持つ新規ロールを作成できます。Datadog サイト、[Datadog Role API][7]、または SAML から直接カスタムロールを管理できます。下記からロールの作成、更新、削除方法をご確認ください。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][8]を参照してください。Datadog でロールを作成または編集できるのは、ユーザーアクセス管理のアクセス許可を持つユーザーのみです。
+カスタムロール機能を使用すると、組織で一意の権限セットを持つ新しいロールを作成できます。Datadog サイト、[Datadog Role API][8]、または SAML から直接カスタムロールを管理できます。下記からロールの作成、更新、削除方法をご確認ください。利用可能なアクセス許可の詳細については、[Datadog ロールの権限][1]を参照してください。Datadog でロールを作成または編集できるのは、User Access Manage 権限を持つユーザーのみです。
 
 ### カスタムロールを有効にする
 
@@ -181,34 +190,17 @@ Datadog サイトでロールを作成または更新する際、Datadog ロー�
 
 {{< img src="account_management/rbac/role_templates.png" alt="Datadog 請求管理者ロールが選択されたロールテンプレートのドロップダウンメニュー" style="width:90%;">}}
 
-## 個々のリソースへのアクセスを制限する
-
-RBAC ロールを設定すると、ユーザーロールによって個々のリソースへのアクセスを制限することができます。
-
-以下のリソースでは、きめ細かいアクセス制御が可能です。
-- [ダッシュボード][11]
-- [モニター][12]
-- [ノートブック][6]
-- [セキュリティルール][13]
-- [サービスレベル目標][14]
-- [Synthetic テスト][15]
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/multi_organization/
-[2]: /ja/account_management/saml/
-[3]: /ja/dashboards/
-[4]: /ja/monitors/
-[5]: /ja/events/
-[6]: /ja/notebooks/#limit-edit-access
-[7]: /ja/api/v2/roles/
-[8]: /ja/account_management/rbac/permissions/
+[1]: /ja/account_management/rbac/permissions/
+[2]: /ja/account_management/rbac/granular_access/
+[3]: /ja/account_management/multi_organization/
+[4]: /ja/account_management/saml/mapping/
+[5]: /ja/dashboards/
+[6]: /ja/monitors/
+[7]: /ja/events/
+[8]: /ja/api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
 [10]: /ja/api/latest/roles/#create-role
-[11]: /ja/dashboards/#permissions
-[12]: /ja/monitors/notify/#permissions
-[13]: /ja/security_platform/detection_rules/#limit-edit-access
-[14]: /ja/monitors/service_level_objectives/#permissions
-[15]: /ja/synthetics/browser_tests/#permissions

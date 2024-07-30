@@ -15,7 +15,6 @@ further_reading:
 - link: /integrations/github
   tag: 설명서
   text: Datadog GitHub 통합
-kind: 설명서
 title: AWS Lambda용 서버리스 모니터링 구성
 ---
 
@@ -843,7 +842,7 @@ export class ExampleStack extends cdk.Stack {
        DD_API_KEY: ${env:DD_API_KEY}
        DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
      layers:
-       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
+       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    ```
 
 5. 배포.

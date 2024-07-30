@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Configuración de métodos de inicio de sesión
 ---
 
@@ -14,13 +13,13 @@ Métodos de inicio de sesión disponibles:
 
 - Nombre de usuario y contraseña de Datadog (estándar) 
 - Inicio de sesión de Google
-- Inicio de sesión con SAML
+- [Iniciar sesión con SAML][2]
 
 ## Activar o desactivar un método de inicio de sesión predeterminado
 
 Como directivo, puedes activar o desactivar los métodos de inicio de sesión predeterminados de tu organización. En un primer momento, las nuevas organizaciones tienen el **nombre de usuario y contraseña de Datadog** y el **inicio de sesión de Google** configurados para todas las organizaciones y usuarios. No obstante, una vez que configures SAML, también tendrás el **inicio sesión con SAML** activado.
 
-1. Dirígete a [Login Methods][2].
+1. Ve a [Métodos de inicio de sesión][3].
 2. Establece el parámetro **Enabled by Default** (Activado de forma predeterminada) de cada método en `On` u `Off`, de acuerdo con las preferencias de tu organización o los requisitos de su política.
 3. Confirma tu selección.
 
@@ -32,12 +31,13 @@ Mediante las anulaciones, puedes cambiar los métodos de inicio de sesión dispo
 
 {{< img src="account_management/login_methods_disabled_overrides_set.png" alt="Método de inicio de sesión desactivado con una anulación de usuario configurada" style="width:80%;">}}
 
-En [User Management][3] (Gestión de usuarios), puedes filtrar los usuarios según los métodos de anulación configurados o ver qué usuarios tienen activados los métodos de inicio de sesión predeterminados:
+En [Gestión de usuarios][4], puedes filtrar los usuarios por los métodos de anulación configurados o ver los usuarios que tienen habilitados los métodos de inicio de sesión predeterminados:
 
 {{< img src="account_management/users/user_page_login_methods_override_view.png" alt="Vista de User Management filtrada para mostrar a los usuarios según el método de inicio de sesión configurado." style="width:80%;">}}
 
 Puedes editar las anulaciones del usuario o eliminarlas por completo para permitir que el usuario solo pueda usar las establecidas por defecto. Para más información, consulta la sección [Editar los métodos de inicio de sesión de un usuario][1]. 
 
 [1]: /es/account_management/users/#edit-a-users-login-methods
-[2]: https://app.datadoghq.com/organization-settings/login-methods
-[3]: https://app.datadoghq.com/organization-settings/users
+[2]: /es/account_management/saml/
+[3]: https://app.datadoghq.com/organization-settings/login-methods
+[4]: https://app.datadoghq.com/organization-settings/users

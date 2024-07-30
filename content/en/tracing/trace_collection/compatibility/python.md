@@ -1,6 +1,5 @@
 ---
 title: Python Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Python tracer'
 aliases:
   - /tracing/compatibility_requirements/python
@@ -22,16 +21,19 @@ Two release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+| `>=1.0,<2` | Maintenance          |
+| `>=2.0,<3` | General Availability |
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
+|---------|-----------------------|---------|-----------------|---------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7+            | `>=2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7+            | `>=2`                     |
+| Windows | 64bit, 32bit          | CPython | 3.7+            | `>=2`                     |
 
 ## Integrations
 
@@ -72,7 +74,7 @@ The `ddtrace` library includes support for the following data stores:
 | [algoliasearch][18]                | >= 1.20.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
 | [Cassandra][20]                    | >= 3.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]                | >= 1.6, < 8.0     | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Elasticsearch][21]                | >= 1.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | >= 0.12           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Mariadb][23]                      | >= 1.0.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][24] [pylibmc][25]      | >= 1.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
@@ -82,6 +84,7 @@ The `ddtrace` library includes support for the following data stores:
 | [MySQL][30] [MySQL-python][31]     | >= 1.2.3          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
 | [MySQL][30] [mysqlclient][32]      | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
 | [MySQL][30] [mysql-connector][33]  | >= 2.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Opensearch][63]                   | >= 1.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Postgres][34] [aiopg][35]         | >= 0.12.0, <=&nbsp;0.16        | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
 | [Postgres][34] [psycopg][36]       | >= 2.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
 | [PyMySQL][37]                      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
@@ -104,16 +107,19 @@ The `ddtrace` library includes support for the following libraries:
 | [asyncio][46]     | Fully Supported   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
 | [Botocore][47]    | >= 1.4.51         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
 | [Boto2][48]       | >= 2.29.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][49]      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Celery][49]      | >= 4.4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
 | [Consul][50]      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [Futures][51]     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][52]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [gevent][52]      | >= 20.12          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Logbook][66]     | >= 1.0.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#logbook     |
+| [Loguru][65]      | >= 0.4.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#loguru     |
 | [Jinja2][55]      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][58]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
@@ -185,3 +191,7 @@ The `ddtrace` library includes support for the following libraries:
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
 [61]: https://gunicorn.org/
 [62]: https://snowflake.com/
+[63]: https://opensearch.org/
+[64]: https://www.structlog.org/en/stable/
+[65]: https://loguru.readthedocs.io/en/stable/
+[66]: https://logbook.readthedocs.io/en/stable/

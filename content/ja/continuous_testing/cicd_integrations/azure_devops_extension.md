@@ -4,7 +4,6 @@ aliases:
 dependencies:
 - https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
 description: Synthetics と Datadog CI 拡張機能を使用して、CI パイプラインで使用できるタスクを作成します。
-kind: documentation
 title: Continuous Testing と Datadog CI Azure DevOps 拡張機能
 ---
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]
@@ -105,9 +104,6 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
     testSearchQuery: 'tag:e2e-tests'
-    variables: |
-      START_URL=https://staging.website.com
-      PASSWORD=$(StagingPassword)
 ```
 
 ### `testSearchQuery` と変数のオーバーライドを使用したタスク例
@@ -119,6 +115,9 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
     testSearchQuery: 'tag:e2e-tests'
+    variables: |
+      START_URL=https://staging.website.com
+      PASSWORD=$(StagingPassword)
 ```
 
 ### `configPath` によるグローバル構成オーバーライドを使用したタスク例
@@ -156,7 +155,6 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 | `failOnCriticalErrors` | _オプション_  | テストがトリガーされなかったり、Datadog から結果を取得できなかったりした場合に、CI ジョブを失敗させます。**デフォルト:** `false`                                                                                                                                 |
 | `failOnMissingTests`   | _オプション_  | パブリック ID (`publicIds` を使用するか、[テストファイル][14]にリストされている) を持つ指定されたテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム上または Datadog サイトで削除された場合)、CI ジョブを失敗させます。**デフォルト:** `false`     |
 | `failOnTimeout`        | _オプション_  | 少なくとも 1 つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させます。**デフォルト:** `true`                                                                                                                                                     |
-
 
 ## その他の参考資料
 

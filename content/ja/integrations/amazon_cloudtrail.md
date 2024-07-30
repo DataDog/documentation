@@ -2,11 +2,9 @@
 aliases:
 - /ja/integrations/awscloudtrail/
 - /ja/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
-- /ja/integrations/amazon_cloudtrail/
 categories:
-- cloud
-- monitoring
 - aws
+- cloud
 - log collection
 - security
 dependencies: []
@@ -19,7 +17,7 @@ integration_id: amazon-cloudtrail
 integration_title: AWS CloudTrail
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_cloudtrail
 public_title: Datadog-AWS CloudTrail インテグレーション
@@ -27,6 +25,7 @@ short_description: 不審な AWS アカウントアクティビティを警告�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 <div class="alert alert-warning">
@@ -40,9 +39,9 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 他の AWS サービスについては、[Amazon Web Services インテグレーションのページ][1]を参照してください
 
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -83,7 +82,7 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 2. [Datadog - AWS CloudTrail インテグレーション][6]をインストールします。
    インテグレーションページで、Datadog のイベントエクスプローラーに標準の優先度 (デフォルトのフィルター) で表示するイベントのタイプを選択します。Amazon Web Services ページで構成したアカウントもここに表示されます。ここに記載されていないイベントの確認を希望する場合は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -102,13 +101,13 @@ AWS CloudTrail で [Trail の作成][8]を行い、ログを書き込む S3 バ�
 
 AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][11]を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 AWS CloudTrail インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 AWS CloudTrail インテグレーションは、AWS CloudTrail の監査証跡に基づいて多種多様なイベントを作成します。すべてのイベントは、Datadog の[イベントエクスプローラー][12]で `#cloudtrail` でタグ付けされます。インテグレーションコンフィギュレーションで、優先度を設定できます。
 
@@ -145,11 +144,11 @@ AWS CloudTrail インテグレーションは、AWS CloudTrail の監査証跡�
 * signin 
 * ssm
 
-### サービスのチェック
+### ヘルプ
 
 AWS CloudTrail インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ### CloudTrail タイルがないか、アカウントがリストされません
 

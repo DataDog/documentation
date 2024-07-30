@@ -1,6 +1,5 @@
 ---
 title: APM Billing
-kind: documentation
 aliases:
 - /account_management/billing/profiler/
 - /account_management/billing/apm_distributed_tracing/
@@ -12,7 +11,7 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [APM Host][5]      | $31 per underlying [APM host][5] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More APM pricing information.][5] |
+| [APM Host][5]      | $31 per underlying [APM host][5] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement. [More APM pricing information.][5] |
 | APM Pro (APM Host with Data Streams Monitoring) | $35 per underlying [APM host][5]. Includes Data Streams Monitoring. | Same as APM Host | Datadog records the number of unique APM hosts in the Datadog APM service and unique DSM hosts you are concurrently monitoring once an hour. The hourly measurements and billing for APM Pro are conducted the same as for APM Hosts.  |
 | APM Enterprise (APM Host with Data Streams Monitoring & [Continuous Profiler)][6] | $40 per underlying [APM host][5]. Includes Data Streams Monitoring and [Continuous Profiler][6] with four profiled containers per host per month. | Same as APM Host | Datadog records the number of unique APM hosts in the APM service, unique DSM hosts, and unique Continuous Profiler hosts you are concurrently monitoring once per hour. The hourly measurements and billing for APM Enterprise are conducted the same as for APM Hosts. |
 | [Fargate][4]       | APM: $2 per concurrent task per month <br> APM Pro: $2.30 per concurrent task per month <br> APM Enterprise: $2.60 per concurrent task per month              | 65,000 Indexed Spans and 10 GB of Ingested Spans included in pricing.              | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the average number of hours your applications were run and monitored. [More Fargate pricing information.][4]              |
@@ -20,7 +19,7 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 | [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More APM pricing information.][5]                                                                                          |
 
 **Notes**:  
-   - If you're using a container based environment, you get billed for the underlying host deploying the Datadog Agent.
+   - If you're using a non-Fargate container based environment, you get billed for the underlying host deploying the Datadog Agent.
    - One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, is not counted towards the four profiler containers allotment.
    - [Universal Service Monitoring][15] is included in all APM tiers (APM, APM Pro, APM Enterprise) at no additional cost.
 
@@ -30,7 +29,7 @@ For more information, see the [Pricing page][7].
 
 | Billing Parameter  | Normalized Queries                | Billing                                          |
 |--------------------|-----------------------------------|--------------------------------------------------|
-| Database host      | 200 normalized queries are included per month with every database host. | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. |
+| Database host      | 200 normalized queries are included per month with every database host. | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement. |
 | Normalized Queries | Billed when the configured threshold is in excess of normalized queries that are included with every database host. | A _normalized query_ represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time. |
 
 For more information, see the [Pricing page][7].

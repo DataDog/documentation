@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking
   tag: ブログ
   text: RUM のデプロイメント追跡でフロントエンドの不具合をトラブルシュートする
-kind: ガイド
 title: RUM デプロイメント追跡の概要
 ---
 

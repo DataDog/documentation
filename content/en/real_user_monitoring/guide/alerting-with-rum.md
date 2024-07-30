@@ -1,9 +1,9 @@
 ---
 title: Alerting With RUM Data
-kind: guide
+
 description: Guide for creating alerts on RUM events.
 further_reading:
-- link: '/real_user_monitoring/dashboards/'
+- link: '/real_user_monitoring/platform/dashboards/'
   tag: 'Documentation'
   text: 'RUM Dashboards'
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -82,9 +82,9 @@ This example monitor warns when the LCP takes 2 seconds to load and alerts when 
 
 [1]: /monitors/types/real_user_monitoring/#create-a-rum-monitor
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-your-new-attributes
+[3]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
 [4]: /real_user_monitoring/explorer/export/
 [5]: /monitors/notify/
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#performance-metrics-for-views
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[7]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [8]: /real_user_monitoring/android/mobile_vitals/

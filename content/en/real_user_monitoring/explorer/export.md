@@ -1,6 +1,5 @@
 ---
 title: Export RUM Events and Graphs
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -24,7 +23,7 @@ You can use your RUM query and visualization graphs in dashboards, monitors, and
 
 You can copy, export, or download your aggregated search query and visualization graphs in the [RUM Explorer][2].
 
-{{< img src="real_user_monitoring/explorer/export/rum_explorer_export-4.png" alt="Export button in the right hand corner of the RUM Explorer" width="100%" >}}
+{{< img src="real_user_monitoring/explorer/export/rum-explorer-export-5.png" alt="Export button in the right hand corner of the RUM Explorer" width="100%" >}}
 
 Click the **More** button on the right hand corner and select an option from the dropdown menu:
 

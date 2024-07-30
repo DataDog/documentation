@@ -4,6 +4,9 @@ algolia:
   - 外形監視
 aliases:
 - /ja/integrations/synthetics/
+cascade:
+  algolia:
+    rank: 70
 description: 自動テストを使用して、システムとアプリケーションの最も重要な部分が世界各地で正常に稼働していることを確認します。
 disable_sidebar: true
 further_reading:
@@ -16,13 +19,21 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/
   tag: ブログ
   text: Synthetic テスト内の CDN パフォーマンスの監視
+- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
+  tag: ブログ
+  text: 静的 Web アプリケーションを監視するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
+  tag: ブログ
+  text: Datadog Synthetic Monitoring で API テストカバレッジを向上させる
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: ラーニングセンター
   text: Synthetic テストの紹介
 - link: /synthetics/guide/
   tag: ドキュメント
   text: Synthetic モニタリングガイド
-kind: documentation
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Synthetic テスト能力を高めるためのインタラクティブなセッションに参加できます
 title: Synthetic の監視
 ---
 
@@ -44,9 +55,15 @@ API テストを使用すると、[シングル][4]または[チェーン][5]リ
 
 ## ブラウザテストを記録する
 
-[Synthetic ブラウザテスト][14]を使用して、エンドツーエンドのテストで世界中の Web ページを顧客がどのように体験しているかを監視します。
+[Synthetic ブラウザテスト][14]を使用して、世界中の Web ページを顧客がどのように体験しているかをエンドツーエンドで監視します。
 
 {{< img src="synthetics/browser_test.mp4" alt="ブラウザテスト" video=true style="width:100%;">}}
+
+## モバイルアプリケーションテストを記録する
+
+[Synthetic モバイルアプリケーションテスト][21]を使用して、顧客が異なるデバイスタイプから iOS と Android アプリケーションをエンドツーエンドでどのように体験するかを監視します。
+
+{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Synthetic モバイルテストの記録ワークフローの例" style="width:100%;">}}
 
 ## プライベートロケーションを起動する
 
@@ -64,13 +81,19 @@ API テストを使用すると、[シングル][4]または[チェーン][5]リ
 
 API テスト、マルチステップ API テスト、ブラウザテスト、プライベートロケーションのパフォーマンス情報や、Datadog のイベントを[すぐに使える Synthetic ダッシュボード][17]で分析します。
 
-{{< img src="synthetics/test_summary_dashboard.png" alt="テストサマリーダッシュボード" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing サマリーダッシュボード" style="width:100%;">}}
 
-## Synthetic Monitoring & Continuous Testing Explorer を使用する
+## Synthetic Monitoring & Testing Results Explorer を使用する
 
 Synthetic テストの実行や、CI/CD パイプラインで実行されているテストのバッチに対して、[検索クエリおよび視覚化][20]を作成します。
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+
+## テストカバレッジの追跡
+
+[アプリケーションの最も重要なワークフローを確実にテストする][22]ことで、テストスイートを最適化します。
+
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## 準備はいいですか？
 
@@ -101,3 +124,5 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
 [18]: /ja/getting_started/synthetics
 [19]: /ja/getting_started/synthetics/private_location
 [20]: /ja/continuous_testing/explorer/
+[21]: /ja/mobile_testing
+[22]: /ja/synthetics/test_coverage

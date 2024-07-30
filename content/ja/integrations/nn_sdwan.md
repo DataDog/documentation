@@ -5,6 +5,7 @@ assets:
   dashboards:
     Netnology SD-WAN Overview: assets/dashboards/nn_sdwan_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
       prefix: nn_sdwan.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10277
     source_type_name: Netnology SD-WAN
   monitors:
     High Latency Monitor: assets/monitors/high-latency-monitor.json
@@ -28,7 +30,7 @@ author:
   support_email: info@netnology.io
 categories:
 - ネットワーク
-- notification
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true
@@ -38,10 +40,9 @@ integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
-oauth: {}
 public_title: Netnology Cisco SD-WAN
 short_description: Cisco SDWAN Controller Metric Exporter
 supported_os:
@@ -52,7 +53,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Network
-  - Category::Notification
+  - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -64,6 +65,7 @@ tile:
   title: Netnology Cisco SD-WAN
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -72,11 +74,11 @@ tile:
 
 現在、SD-WAN コントローラのターゲットとしてサポートされているのは、Cisco vManage デバイスのみです。
 
-## セットアップ
+## 計画と使用
 
 Netnology Cisco SD-WAN インテグレーションは [Datadog Agent][2] パッケージに含まれていないため、手動でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -88,7 +90,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Cisco SD-WAN のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nn_sdwan.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nn_sdwan.d/conf.yaml][5] を参照してください。
 
@@ -98,27 +100,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `nn_sdwan` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "nn_sdwan" >}}
 
 
-### イベント
+### ヘルプ
 
 Netnology Cisco SD-WAN インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "nn_sdwan" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://netnology.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/datadog_checks/nn_sdwan/data/conf.yaml.example

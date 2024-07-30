@@ -8,6 +8,7 @@ assets:
     Redis Enterprise Database Overview: assets/dashboards/redisenterprise_overview.json
     Redis Enterprise Redis on Flash: assets/dashboards/redisenterprise_rof.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
       prefix: redisenterprise.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10190
     source_type_name: Redis Enterprise
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -25,7 +27,7 @@ author:
   sales_email: github@mague.com
   support_email: github@mague.com
 categories:
-- data store
+- data stores
 - キャッシュ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md
@@ -36,10 +38,9 @@ integration_id: redisenterprise
 integration_title: RedisEnterprise
 integration_version: 1.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: redisenterprise
-oauth: {}
 public_title: RedisEnterprise
 short_description: Redis Enterprise 可視性
 supported_os:
@@ -52,7 +53,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Caching
   configuration: README.md#Setup
   description: Redis Enterprise 可視性
@@ -62,6 +63,7 @@ tile:
   title: RedisEnterprise
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ![img][1]
@@ -99,9 +101,9 @@ Redis Enterprise Datadog インテグレーションで提供される、クラ�
 
 このインテグレーションは、Redis Labs により提供されています。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に従って、ホストに RedisEnterprise チェックをインストールしてください。[v7.21 / v6.21 以前の Agent][10] または [Docker Agent][11] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][9]に関する Agent のガイドを参照してください。
 
@@ -117,7 +119,7 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 
 3. [他のパッケージ化されたインテグレーション][14]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 [サンプルコンフィギュレーション][15]をコピーして必要なセクションを更新し、Redis Enterprise クラスターからデータを収集します
 
@@ -146,13 +148,13 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 
 [ドキュメント][16]に従いユーザーを構成します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "redisenterprise" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 **`redisenterprise.running`**
 
@@ -171,11 +173,11 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 
 **注:** クラスターは、期限の切れたライセンスでも引き続き通常どおり動作しますが、この間はコンフィギュレーションを変更できません。更新するには、営業担当までお問い合わせください。
 
-### イベント
+### ヘルプ
 
 すべての [Redis Enterprise イベント][18]が収集されます。
 
-## トラブルシューティング
+## ヘルプ
 
 [Redis フィールドエンジニアリングチーム][19]にお問い合わせください。
 
@@ -191,7 +193,7 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 [9]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentv721v621
 [10]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentearlierversions
 [11]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=docker
-[12]: https://app.datadoghq.com/account/settings#agent
+[12]: https://app.datadoghq.com/account/settings/agent/latest
 [13]: https://github.com/DataDog/integrations-extras/tags
 [14]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [15]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/datadog_checks/redisenterprise/data/conf.yaml.example

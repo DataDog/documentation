@@ -33,12 +33,11 @@ draft: false
 git_integration_title: riak
 integration_id: riak
 integration_title: Riak
-integration_version: 3.2.0
+integration_version: 3.3.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: riak
-oauth: {}
 public_title: Riak
 short_description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
 supported_os:
@@ -198,6 +197,6 @@ Riak チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

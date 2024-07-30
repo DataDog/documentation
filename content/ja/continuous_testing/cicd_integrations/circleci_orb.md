@@ -3,7 +3,6 @@ aliases:
 - /ja/synthetics/cicd_integrations/circleci_orb
 dependencies:
 - https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md
-kind: documentation
 title: Continuous Testing と CircleCI Orb
 ---
 ## 概要

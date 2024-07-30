@@ -5,10 +5,10 @@
 
 {{ with $filters }}
 <div class="controls" data-ref="controls">
-  <a data-ref="filter" data-filter="all" href="#all" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{- i18n "all" -}}</a>
+  <button data-ref="filter" data-filter="all" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{- i18n "all" -}}</button>
   {{- range $i, $filter := . -}}
     {{- $clean_filter := replace $filter "/" "" | urlize -}}
-    <a data-ref="filter" data-filter="cat-{{- $clean_filter -}}" href="#cat-{{- $clean_filter -}}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{- $clean_filter -}}">{{- $filter | upper -}}</a>
+    <button data-ref="filter" data-filter="cat-{{- $clean_filter -}}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{- $clean_filter -}}">{{- $filter | upper -}}</button>
   {{- end -}}
 </div>
 {{ end }}
@@ -25,7 +25,7 @@
       <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
         {{ range last 1 $v.Pages }}
           {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}
-          {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") }}
+          {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
           {{ if $int_logo }}
             <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
           {{ else }}
@@ -43,13 +43,17 @@
               {{ $groupHeaderText = $word | upper }}
             {{ else }}
               <!-- concatenate -->
-              {{ $groupHeaderText = printf "%s %s" $groupHeaderText ($word | title )}}
+              {{ $groupHeaderText = (trim (printf "%s %s" $groupHeaderText ($word | title )) " ") }}
             {{ end }}
           {{ end }}
         {{ else }}
           {{ $groupHeaderText = $v.Key }}
         {{ end }}
-        {{$groupHeaderText}}
+        <span>{{ $groupHeaderText }}</span>
+        {{ if $groupHeaderText }}
+          <span class="icon-wrapper" data-anchor="#{{$v.Key | anchorize}}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $groupHeaderText) ) }}</span>
+          <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+        {{ end }}
       </div>
       <div class="js-group-header__arrow">></div>
     </div>
@@ -61,7 +65,7 @@
             <!-- e.g gcp.project use source -->
             {{ $basename = .Params.source }}
           {{ end }}
-          {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") }}
+          {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
           {{ if $int_logo }}
             <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
           {{ else }}

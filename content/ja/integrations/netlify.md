@@ -17,7 +17,7 @@ integration_id: netlify
 integration_title: Netlify
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: netlify
 public_title: Datadog-Netlify インテグレーション
@@ -27,6 +27,7 @@ type: ''
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 [Netlify][1] は、顧客が動的で高性能のウェブアプリを構築しデプロイできる Jamstack ウェブ開発プラットフォームです。
@@ -38,26 +39,26 @@ Netlify を Datadog と統合すると、以下のことができます。
 * 関数の実行時間を視覚化し、各リクエストの対応するログを確認
 * [Datadog Synthetics Monitoring][3] によるフロントエンドのパフォーマンス監視
 
-## セットアップ
+## 計画と使用
 
 1. [Datadog API キー][4]を生成します。
 2. [Netlify ログドレイン][5]を構成してログを Datadog へ送信します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Netlify インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Netlify インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Netlify インテグレーションには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

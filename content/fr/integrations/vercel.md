@@ -27,7 +27,7 @@ integration_id: vercel
 integration_title: Vercel
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: https://docs.datadoghq.com/help/
 manifest_version: 1.0.0
 metric_prefix: vercel.

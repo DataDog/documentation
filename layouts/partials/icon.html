@@ -13,7 +13,7 @@
 
 {{ if .title }}
 {{/*  enable bootstrap tooltip if title attribute needed  */}}
-{{ $title = (printf "title=%s data-bs-toggle='tooltip' data-bs-placement='top'" .title) }}
+{{ $title = (printf "title=%q data-bs-toggle='tooltip' data-bs-placement='top'" .title) }}
 {{ end }}
 
 {{/* Combine contextual params into inline style */}}

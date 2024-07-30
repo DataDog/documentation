@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: blog
   text: Surveiller les workflows GitHub Actions avec CI Visibility de Datadog
-kind: documentation
 title: Configurer le tracing sur les workflows GitHub Actions
 ---
 
@@ -85,7 +84,7 @@ Les pages [Pipelines][7] et [Pipeline Executions][8] affichent des données apr�
 
 **Remarque** : la page Pipelines affiche des données uniquement pour la branche par défaut de chaque référentiel.
 
-## Désactiver le tracing sur GigHub Actions
+## Désactiver le tracing sur GitHub Actions
 
 Pour désactiver l'intégration GitHub Actions avec CI Visibility, assurez-vous que l'application GitHub n'est plus abonnée aux événements de tâche de workflow et d'exécution de workflow. Pour supprimer ces événements, procédez comme suit :
 

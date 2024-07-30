@@ -19,7 +19,6 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
-kind: documentation
 title: Cluster Agent のカスタムメトリクスと外部メトリクスによるオートスケーリング
 ---
 

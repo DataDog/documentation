@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentation
   text: Azure インテグレーション
-kind: ガイド
 title: Azure インテグレーションアーキテクチャと構成
 ---
 
@@ -120,15 +119,15 @@ Monitoring Reader ロール以下のアクセスを制限することの意味�
   - [Cloud Security Management Misconfigurations (CSM Misconfigurations)][3] または [Resource Catalog][4] のデータの一部または全部の消失
   - Datadog が生成したメトリクスの一部または全部の喪失
 
-Azure AD ロールを制限または省略することの意味は以下の通りです。
+Azure AD のロールを制限または省略することの影響は次のとおりです。
 
   - CSM Misconfigurations における Azure AD リソースのメタデータの一部または全部の消失
   - Azure AD リソースの資格情報有効期限監視の一部または全部の喪失
 
 [1]: /ja/getting_started/site/
 [2]: https://www.datadoghq.com/
-[3]: /ja/security/cspm/
-[4]: /ja/security/cspm/resource_catalog/
+[3]: /ja/security/misconfigurations/
+[4]: /ja/security/misconfigurations/resource_catalog/
 [5]: https://us3.datadoghq.com/signup
 [6]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
 {{% /site-region %}}

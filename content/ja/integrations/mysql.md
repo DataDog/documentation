@@ -6,6 +6,7 @@ assets:
     mysql: assets/dashboards/overview.json
     mysql-screenboard: assets/dashboards/overview-screenboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
     - mysqld
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 18
     source_type_name: MySQL
   logs:
     source: mysql
@@ -35,7 +37,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mysql/README.md
@@ -44,12 +46,11 @@ draft: false
 git_integration_title: mysql
 integration_id: mysql
 integration_title: MySQL
-integration_version: 10.3.0
+integration_version: 12.4.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: mysql
-oauth: {}
 public_title: MySQL
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
 supported_os:
@@ -62,7 +63,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   configuration: README.md#Setup
   description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
@@ -72,6 +73,7 @@ tile:
   title: MySQL
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![MySQL ダッシュボード][1]
@@ -82,11 +84,11 @@ MySQL インテグレーションは、MySQL インスタンスのパフォー�
 
 [データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画が提供されます。
 
-## セットアップ
+## 計画と使用
 
 <div class="alert alert-info">このページでは、MySQL Agent の標準的なインテグレーションについて説明します。MySQL のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### インストール
+### インフラストラクチャーリスト
 
 MySQL チェックは [Datadog Agent][3] パッケージに含まれています。MySQL サーバーに追加でインストールする必要はありません。
 
@@ -163,18 +165,22 @@ mysql> GRANT SELECT ON performance_schema.* TO 'datadog'@'%';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
+**注**: 利用可能な構成オプションの完全なリストについては、[mysql.d/conf.yaml のサンプル][6]を参照してください。
+
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-MySQL の[メトリクス](#メトリクスの収集)と[ログ](#ログ収集)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mysql.d/conf.yaml][2] を参照してください。
+MySQL の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。
+
+利用可能な構成オプションの完全なリストについては、[`mysql.d/conf.yaml` のサンプル][2]を参照してください。
 
 ##### メトリクスの収集
 
@@ -193,7 +199,6 @@ MySQL の[メトリクス](#メトリクスの収集)と[ログ](#ログ収集)�
         galera_cluster: true
         extra_status_metrics: true
         extra_innodb_metrics: true
-        extra_performance_metrics: true
         schema_size_metrics: false
         disable_innodb_metrics: false
   ```
@@ -204,11 +209,9 @@ MySQL の[メトリクス](#メトリクスの収集)と[ログ](#ログ収集)�
 
 **注**: `datadog` ユーザーは、`localhost` ではなく `host: 127.0.0.1` として MySQL インテグレーション構成内にセットアップされる必要があります。または、`sock` を使用することもできます。
 
-カスタムメトリクスのオプションなど、使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mysql.yaml][2] を参照してください。
-
 [Agent を再起動][4]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -320,7 +323,7 @@ LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "username": "datadog
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-#### ログの収集
+#### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][3]を参照してください。
@@ -338,7 +341,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Kubernetes
+#### ガイド
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -400,7 +403,7 @@ spec:
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][3]を参照してください。
 
-#### ログの収集
+#### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][4]を参照してください。
@@ -453,7 +456,7 @@ metadata:
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -481,11 +484,11 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `mysql` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "mysql" >}}
 
 
@@ -566,7 +569,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | mysql.innodb.ibuf_merges                    | RATE        |
 | mysql.innodb.ibuf_segment_size              | GAUGE       |
 | mysql.innodb.ibuf_size                      | GAUGE       |
-| mysql.innodb.lock_structs                   | RATE        |
+| mysql.innodb.lock_structs                   | GAUGE       |
 | mysql.innodb.locked_tables                  | GAUGE       |
 | mysql.innodb.locked_transactions            | GAUGE       |
 | mysql.innodb.log_waits                      | RATE        |
@@ -632,31 +635,31 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | ---------------------- | ----------- |
 | mysql.info.schema.size | GAUGE       |
 
-### イベント
+### ヘルプ
 
 MySQL チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "mysql" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-- [SQL Server インテグレーションでの接続の問題][7]
-- [MySQL Localhost エラー - Localhost と 127.0.0.1][8]
-- [SQL Server インテグレーションで名前付きインスタンスを使用できますか][9]
-- [Google CloudSQL で dd-agent MySQL チェックをセットアップできますか][10]
-- [MySQL カスタムクエリ][11]
-- [WMI を使用して、より多くの SQL Server パフォーマンスメトリクスを収集する][12]
-- [SQL Server インテグレーションからさらに多くのメトリクスを収集するには？][13]
-- [データベースユーザーに権限がありません][14]
-- [SQL ストアドプロシージャを使用してメトリクスを収集する方法][15]
+- [SQL Server インテグレーションでの接続の問題][8]
+- [MySQL Localhost エラー - Localhost と 127.0.0.1][9]
+- [SQL Server インテグレーションで名前付きインスタンスを使用できますか][10]
+- [Google CloudSQL で dd-agent MySQL チェックをセットアップできますか][11]
+- [MySQL カスタムクエリ][12]
+- [WMI を使用して、より多くの SQL Server パフォーマンスメトリクスを収集する][13]
+- [SQL Server インテグレーションからさらに多くのメトリクスを収集するには？][14]
+- [データベースユーザーに権限がありません][15]
+- [SQL ストアドプロシージャを使用してメトリクスを収集する方法][16]
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [MySQL パフォーマンスメトリクスの監視][16]
+- [MySQL パフォーマンスメトリクスの監視][17]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd.png
@@ -664,14 +667,15 @@ MySQL チェックには、イベントは含まれません。
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#mysql
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/integrations/guide/connection-issues-with-the-sql-server-integration/
-[8]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
-[9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
-[10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
-[11]: https://docs.datadoghq.com/ja/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
-[12]: https://docs.datadoghq.com/ja/integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics/
-[13]: https://docs.datadoghq.com/ja/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
-[14]: https://docs.datadoghq.com/ja/integrations/faq/database-user-lacks-privileges/
-[15]: https://docs.datadoghq.com/ja/integrations/guide/collect-sql-server-custom-metrics/#collecting-metrics-from-a-custom-procedure
-[16]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics
+[6]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/integrations/guide/connection-issues-with-the-sql-server-integration/
+[9]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
+[11]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
+[12]: https://docs.datadoghq.com/ja/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
+[13]: https://docs.datadoghq.com/ja/integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics/
+[14]: https://docs.datadoghq.com/ja/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[15]: https://docs.datadoghq.com/ja/integrations/faq/database-user-lacks-privileges/
+[16]: https://docs.datadoghq.com/ja/integrations/guide/collect-sql-server-custom-metrics/#collecting-metrics-from-a-custom-procedure
+[17]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics

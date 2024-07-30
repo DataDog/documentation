@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "600"
+    "other": "750"
   },
 
   "beta_sentence": {
@@ -354,5 +354,23 @@
   },
   "personalized_demo" : {
     "other": "Request a personalized demo"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
+  },
+  "legacy": {
+      "other": "Legacy"
+  },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
+  },
+  "available_for": {
+    "other": "Available for"
   }
 }

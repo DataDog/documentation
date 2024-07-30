@@ -1,113 +1,89 @@
 ---
 title: Setup Data Streams Monitoring for Go
-kind: documentation
 ---
-
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
 
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Data Streams Library v0.2 or later][2]
+* [dd-trace-go v1.56.1 or later][2]
 
 ### Installation
 
-Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline.
+- Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.
+- [Start the tracer][3].
 
 Two types of instrumentation are available:
 - Instrumentation for Kafka-based workloads
 - Custom instrumentation for any other queuing technology or protocol
 
-<div class="alert alert-info">The default Trace Agent URL is <code>localhost:8126</code>. If this is different for your application, use the <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code> option.</div>
-
-### Kafka instrumentation
-
-1. Configure producers to call `TraceKafkaProduce()` before sending out a Kafka message:
-
-   ```go
-   import (ddkafka "github.com/DataDog/data-streams-go/integrations/kafka")
-   ...
-   ctx = ddkafka.TraceKafkaProduce(ctx, &kafkaMsg)
-   ```
-
-   This function adds a new checkpoint onto any existing pathway in the provided Go context, or creates a new pathway if none are found. It then adds the pathway into your Kafka message headers.
-
-2. Configure consumers to call `TraceKafkaConsume()`:
-
-   ```go
-   import ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-   ...
-   ctx = ddkafka.TraceKafkaConsume(ctx, &kafkaMsg, consumer_group)
-   ```
-
-   This function extracts the pathway that a Kafka message has gone through so far. It sets a new checkpoint on the pathway to record the successful consumption of a message and stores the pathway into the provided Go context.
-
-   **Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway.
-
-For `TraceKafkaProduce()`, if you are sending multiple Kafka messages at once (fan-out), do not reuse the output `ctx` across calls.
-
-For `TraceKafkaConsume()`, if you are aggregating multiple messages to create a smaller number of payloads (fan-in), call `MergeContext()` to merge the contexts into one context that can be passed into the next `TraceKafkaProduce()` call:
+### Confluent Kafka client
 
 ```go
 import (
-    datastreams "github.com/DataDog/data-streams-go"
-    ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
+  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
 )
 
 ...
+// CREATE PRODUCER WITH THIS WRAPPER
+producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
+		"bootstrap.servers": bootStrapServers,
+}, ddkafka.WithDataStreams())
 
-contexts := []Context{}
-for (...) {
-    contexts.append(contexts, ddkafka.TraceKafkaConsume(ctx, &consumedMsg, consumer_group))
-}
-mergedContext = datastreams.MergeContexts(contexts...)
+```
+
+If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure:
+1. Extract the context from headers:
+    ```go
+    ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
+    ```
+
+2. Inject it into the header before producing downstream:
+    ```go
+    datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
+    ```
+
+### Sarama Kafka client
+
+```go
+import (
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+)
 
 ...
+config := sarama.NewConfig()
+producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
 
-ddkafka.TraceKafkaProduce(mergedContext, &producedMsg)
+// ADD THIS LINE
+producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
 ```
 
 ### Manual instrumentation
 
-You can also use manual instrumentation. For example, in HTTP, you can propagate the pathway with HTTP headers.
+You can also use manual instrumentation. For example, you can propagate context through Kinesis.
 
-To inject a pathway:
+#### Instrumenting the produce call
+
+1. Ensure your message supports the [TextMapWriter interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37).
+2. Inject the context into your message and instrument the produce call by calling:
 
 ```go
-req, err := http.NewRequest(...)
-...
-p, ok := datastreams.PathwayFromContext(ctx)
+ctx, ok := tracer.SetDataStreamsCheckpointWithParams(ctx, options.CheckpointParams{PayloadSize: getProducerMsgSize(msg)}, "direction:out", "type:kinesis", "topic:kinesis_arn")
 if ok {
-   req.Headers.Set(datastreams.PropagationKeyBase64, p.EncodeStr())
+  datastreams.InjectToBase64Carrier(ctx, message)
 }
+
 ```
 
-To extract a pathway:
+#### Instrumenting the consume call
+
+1. Ensure your message supports the [TextMapReader interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44).
+2. Extract the context from your message and instrument the consume call by calling:
 
 ```go
-func extractPathwayToContext(req *http.Request) context.Context {
-	ctx := req.Context()
-	p, err := datastreams.DecodeStr(req.Header.Get(datastreams.PropagationKeyBase64))
-	if err != nil {
-		return ctx
-	}
-	ctx = datastreams.ContextWithPathway(ctx, p)
-	_, ctx = datastreams.SetCheckpoint(ctx, "type:http")
-}
+	ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
-
-### Add a dimension
-
-You can add an additional dimension to end-to-end latency metrics with the `event_type` tag:
-
-```go
-_, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
-```
-
-You only need to add the `event_type` tag for the first service in each pathway. High-cardinality data (such as request IDs or hosts) are not supported as values for the `event_type` tag.
 
 [1]: /agent
-[2]: https://github.com/DataDog/data-streams-go
+[2]: https://github.com/DataDog/dd-trace-go
+[3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/

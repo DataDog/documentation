@@ -31,10 +31,9 @@ integration_id: external-dns
 integration_title: ExternalDNS
 integration_version: 2.3.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: external_dns
-oauth: {}
 public_title: ExternalDNS
 short_description: Surveillez toutes vos métriques ExternalDNS avec Datadog.
 supported_os:

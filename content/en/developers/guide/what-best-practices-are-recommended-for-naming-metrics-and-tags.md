@@ -1,6 +1,6 @@
 ---
 title: What best practices are recommended for naming metrics and tags?
-kind: faq
+
 further_reading:
 - link: "/metrics/"
   tag: "Documentation"
@@ -12,7 +12,14 @@ aliases:
   - /developers/faq/what-best-practices-are-recommended-for-naming-metrics-and-tags
 ---
 
-Datadog recommends certain best practices for naming metrics, tags, and services.
+Naming convention is an art and possibly one of the most difficult decisions to agree on. Defining a naming convention for your metrics, tags, and services is crucial to have a clean, readable, and maintainable telemetry data. Here are some recommendations:
+
+* Provide descriptive and meaningful names: the metrics or tags clearly describe the purpose or meaning of the value.
+* Adhere to the format and limitations described below.
+* Avoid abbreviations that might have multiple meanings
+* Maintain consistency across all teams, apps, and services.
+* Avoid reserved keywords that might cause clashes with the other tags or metrics.
+* In the case of metrics, prefix them with a namespace depicting the application or service generating the data.
 
 ## Rules and best practices for naming metrics
 
@@ -34,7 +41,7 @@ As a best practice, Datadog recommends using unified service tagging when assign
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
 * A trailing underscore is removed, whether if it originated from a converted character or if it was in the original tag value.
 * Contiguous underscores are reduced to a single underscore.
-* Tags can be up to 200 characters long and support Unicode.
+* Tags can be up to 200 characters long (including both key and value) and support Unicode. Additional characters beyond this limit are truncated.
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
 

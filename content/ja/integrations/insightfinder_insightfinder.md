@@ -5,11 +5,13 @@ app_id: insightfinder-insightfinder-license
 app_uuid: 6f2fcb70-c087-412a-b221-360ba6a1c68f
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10299
     source_type_name: InsightFinder ライセンス
 author:
   homepage: https://insightfinder.com/
@@ -20,7 +22,8 @@ author:
 categories:
 - アラート設定
 - マーケットプレイス
-- notification
+- notifications
+- ai/ml
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -29,12 +32,11 @@ integration_id: insightfinder-insightfinder-license
 integration_title: InsightFinder
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: insightfinder_insightfinder
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -55,7 +57,8 @@ tile:
   classifier_tags:
   - Category::Alerting
   - Category::Marketplace
-  - Category::Notification
+  - Category::Notifications
+  - Category::AI/ML
   - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
@@ -90,6 +93,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -97,7 +101,7 @@ DevSecOps、DataOps、MLOps、IT 運用、SRE チームは、複雑なモダン 
 
 InsightFinder の無料トライアルや、Datadog をはじめとする DevSecOps、IT 運用管理 (ITOM)、IT サービス管理 (ITSM) の人気ツールとのインテグレーションにより、お客様は迅速に価値を得ることができます。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから InsightFinder にお問い合わせください。
 

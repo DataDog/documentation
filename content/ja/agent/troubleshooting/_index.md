@@ -27,7 +27,6 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: Documentation
   text: CPU やメモリの消費量が多い
-kind: documentation
 title: Agent のトラブルシューティング
 ---
 

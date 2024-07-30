@@ -14,7 +14,7 @@ integration_id: google-cloud-apis
 integration_title: "API Google\_Cloud"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: api_google_cloud
 public_title: "Intégration Datadog/API Google\_Cloud"

@@ -23,7 +23,7 @@ integration_id: datadog-cluster-agent
 integration_title: Agent de cluster Datadog
 integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: datadog_cluster_agent.

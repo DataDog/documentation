@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Recueillir vos traces
-kind: documentation
 platform: Red Hat
 title: Utilisation de base de l'Agent pour Red Hat
 ---

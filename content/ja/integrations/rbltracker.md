@@ -29,10 +29,9 @@ integration_id: rbltracker
 integration_title: RBLTracker
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: rbltracker
-oauth: {}
 public_title: RBLTracker
 short_description: RBLTracker は、操作が簡単なリアルタイムのブラックリスト監視機能を提供します。
 supported_os:

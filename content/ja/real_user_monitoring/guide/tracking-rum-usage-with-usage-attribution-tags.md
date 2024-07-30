@@ -7,7 +7,6 @@ further_reading:
 - link: /account_management/billing/usage_attribution/
   tag: Documentation
   text: 計画と使用設定
-kind: ガイド
 title: 使用量属性タグによる RUM の使用量の追跡
 ---
 
@@ -36,12 +35,12 @@ datadogRum.setGlobalContextProperty('department', 'marketing');
 
 **モバイルセッション**用のタグを設定するには、[`addAttribute`][5] メソッドを使用します。以下はその例です。
 
-```javascript
+```
 //Android
-GlobalRumMonitor.addAttribute('department', 'marketing')
+GlobalRumMonitor.get().addAttribute("department", "marketing")
 
 //iOS
-Global.rum.addAttribute(forKey: 'department', value: 'marketing')
+RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
 ```
 
 **注**: いくつかのタグはデフォルトで含まれています (`service`、`env`、`version`、`application.id`、`application.name`)。それ以外のタグについては、上記の方法でグローバルコンテキストを設定します。

@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/troubleshooting/agent_apm_metrics/
   tag: Documentation
   text: Métriques APM envoyées par l'Agent Datadog
-kind: documentation
 title: Dépannage d'APM
 ---
 
@@ -57,7 +56,7 @@ Datadog réduit les chaînes suivantes lorsqu'elles dépassent le nombre de cara
 | [clé de tag][8]    |  200       |
 | [valeur de tag][8]  |  5000      |
 
-En outre, une span ne peut pas inclure simultanément plus de 256 [tags de span][8].
+En outre, une span ne peut pas inclure simultanément plus de 1024 [tags de span][8].
 
 Sur un intervalle donné de 40 minutes, Datadog accepte les combinaisons d'éléments suivantes. Pour prendre en charge des volumes plus importants, contactez l'[assistance][1] afin de présenter votre scénario d'utilisation.
 
@@ -77,7 +76,7 @@ Consultez la section relative à [l'utilisation des ressources de l'Agent][10] p
 
 ## Modifier, supprimer ou masquer des spans
 
-Plusieurs options de configuration sont disponibles pour nettoyer des données sensibles ou supprimer des traces correspondant à des checks de santé ou à du trafic non désiré. Ces options peuvent être définies au sein de l'Agent Datadog ou dans le client de tracing (pour certains langages). Pour en savoir plus sur les options disponibles, consultez la section relative à la [sécurité et à la personnalisation de l'Agent][10]. Bien que cette page contienne des exemples pertinents, n'hésitez pas à contacter l'[assistance Datadog][1] si vous avez besoin d'aide pour appliquer ces options à votre environnement.
+Plusieurs options de configuration sont disponibles pour nettoyer des données sensibles ou ignorer des traces correspondant à des checks de santé ou à du trafic non désiré. Ces options peuvent être définies au sein de l'Agent Datadog ou dans le client de tracing (pour certains langages). Pour en savoir plus sur les options disponibles, consultez la section relative à la [sécurité et à la personnalisation de l'Agent][11]. Bien que cette page contienne des exemples pertinents, n'hésitez pas à contacter l'[assistance Datadog][1] si vous avez besoin d'aide pour appliquer ces options à votre environnement.
 
 ## Problèmes relatifs aux conventions de nommage des services
 
@@ -125,7 +124,7 @@ Au moment d'ouvrir un [ticket d'assistance][1], vous serez peut-être invité à
 
     Les logs de debugging du traceur vont un cran plus loin que les logs de lancement : ils servent à vérifier si les intégrations sont correctement instrumentées, même si aucun trafic ne circule via l'application. Les logs de debugging peuvent s'avérer extrêmement utiles pour visualiser le contenu des spans créées par le traceur, et peuvent mettre en évidence une erreur en cas de problème de connexion lors de l'envoi de spans à l'Agent. Les logs de debugging du traceur constituent généralement l'outil de prédilection pour confirmer la présence d'un problème lorsque le traceur affiche un comportement nuancé.
 
-4. **Un [flare de l'Agent Datadog][11] (snapshot de logs et de configurations), qui capture un échantillon de logs représentatifs d'une période au cours de laquelle des traces sont envoyées à votre Agent Datadog en [mode debugging ou trace][12] (en fonction des informations recherchées dans ces logs).**
+4. **Un [flare de l'Agent Datadog][12] (snapshot de logs et de configurations), qui capture un échantillon de logs représentatifs d'une période au cours de laquelle des traces sont envoyées à votre Agent Datadog en [mode debugging ou trace][13] (en fonction des informations recherchées dans ces logs).**
 
     Les flares de l'Agent Datadog vous permettent d'analyser l'activité au sein de l'Agent Datadog, et de voir par exemple si des traces sont rejetées ou malformées. Les flares ne sont d'aucune utilité si les traces ne parviennent pas à l'Agent Datadog, mais ils peuvent aider à identifier la source d'un problème ou toute anomalie au niveau des métriques.
 
@@ -141,7 +140,7 @@ kubectl exec -it <nom-pod-agent> -c trace-agent -- agent flare <id-ticket> --loc
 
     Expliquez à l'équipe d'assistance comment votre application est déployée, afin qu'elle puisse identifier plus facilement les causes potentielles d'un problème de communication ou de configuration du tracer-agent. Si le problème s'avère complexe, vous devrez peut-être envoyer à l'assistance un manifeste Kubernetes ou une définition de tâche ECS, par exemple.
 
-6. **Le code personnalisé écrit à l'aide des bibliothèques de tracing, comme la configuration du traceur, l'[instrumentation personnalisée][13] et l'ajout de tags de span**.
+6. **Le code personnalisé écrit à l'aide des bibliothèques de tracing, comme la configuration du traceur, l'[instrumentation personnalisée][14] et l'ajout de tags de span**.
 
     Aussi utile qu'elle soit, l'instrumentation personnalisée peut également avoir des effets secondaires indésirables sur vos visualisations de traces dans Datadog. Pour cette raison, l'équipe d'assistance peut vous demander de telles informations afin de vérifier si l'instrumentation personnalisée est à l'origine de votre problème.
 
@@ -152,7 +151,7 @@ kubectl exec -it <nom-pod-agent> -c trace-agent -- agent flare <id-ticket> --loc
    * **Traceur Datadog**
    * **Agent Datadog**
 
-    L'identification des versions utilisées nous permet de garantir la prise en charge des intégrations, conformément à la section [Exigences de compatibilité][14], de rechercher les problèmes connus ou de recommander une mise à jour du traceur ou du langage si cela est susceptible de régler le problème.
+    L'identification des versions utilisées nous permet de garantir la prise en charge des intégrations, conformément à la section [Exigences de compatibilité][15], de rechercher les problèmes connus ou de recommander une mise à niveau du traceur ou du langage si cela est susceptible de régler le problème.
 
 ## Pour aller plus loin
 

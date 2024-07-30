@@ -1,27 +1,27 @@
 ---
-title: Tutorial - Enabling Tracing for a Java Application on AWS ECS with EC2
-kind: guide
+title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with EC2
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Container Service (ECS). In this scenario, the Datadog Agent is also installed in the cluster. 
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Container Service (ECS). In this scenario, the Datadog Agent is also installed in the cluster.
 
 For other scenarios, including on a host, in a container, on other cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1]. Some of those other tutorials, for example, the ones using containers or EKS, step through the differences seen in Datadog between automatic and custom instrumentation. This tutorial skips right to a fully custom instrumented example.
 
@@ -35,7 +35,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - Git
 - Docker
 - Terraform
-- AWS ECS
+- Amazon ECS
 - an AWS ECR repository for hosting images
 - An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Using the AWS credentials file and credential Profiles][20].
 
@@ -47,11 +47,11 @@ The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutor
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the application. 
+The repository contains a multi-service Java application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the application.
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT`, and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
+The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT`, and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on Amazon ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
 
 ### Initial ECS setup
 
@@ -107,7 +107,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
 
-To start, use a terraform script to deploy to AWS ECS:
+To start, use a terraform script to deploy to Amazon ECS:
 
 1. From the `terraform/EC2/deployment` directory, run the following commands:
 
@@ -157,7 +157,7 @@ Now that you have a working Java application, configure it to enable tracing.
 1. Add the Java tracing package to your project. Because the Agent runs on EC2 instances, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -165,18 +165,18 @@ Now that you have a working Java application, configure it to enable tracing.
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
    ```
-   
+
    Repeat this step with the other service, `calendar`. Open `calendar/dockerfile.calendar.maven`, and comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
-   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"] 
+   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
    Now both services will have automatic instrumentation.
 
    <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
-3. Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code. Add some annotations to the code to trace into some sample methods. 
+3. Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code. Add some annotations to the code to trace into some sample methods.
 
    Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
 
@@ -211,7 +211,7 @@ Now that you have a working Java application, configure it to enable tracing.
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -223,7 +223,7 @@ Now that you have a working Java application, configure it to enable tracing.
             span.setTag(Tags.ERROR, true);
             span.setTag(DDTags.ERROR_MSG, e.getMessage());
             span.setTag(DDTags.ERROR_TYPE, e.getClass().getName());
-            
+
             final StringWriter errorString = new StringWriter();
             e.printStackTrace(new PrintWriter(errorString));
             span.setTag(DDTags.ERROR_STACK, errorString.toString());
@@ -236,12 +236,12 @@ Now that you have a working Java application, configure it to enable tracing.
 7. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
 8. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed on ECS, these environment variables are set within the task definition for the containers.
-   
+
    For this tutorial, the `/terraform/EC2/deployment/main.tf` file already has these environment variables defined for the notes and calendar applications, for example, for `notes`:
 
    ```yaml
    ...
-   
+
       name : "notes",
       image : "${module.settings.aws_ecr_repository}:notes",
       essential : true,
@@ -349,8 +349,8 @@ Next, deploy the Datadog Agent to collect the trace data from your instrumented 
      },
      ...
    ```
- 
-2. Register the Agent task definition, replacing the profile and region with your information. From the `terraform/EC2` folder, run: 
+
+2. Register the Agent task definition, replacing the profile and region with your information. From the `terraform/EC2` folder, run:
 
    ```sh
    aws ecs register-task-definition --cli-input-json file://dd_agent_task_definition.json --profile <AWS_PROFILE> --region <AWS_REGION>
@@ -368,7 +368,7 @@ Next, deploy the Datadog Agent to collect the trace data from your instrumented 
 
 Redeploy the application and exercise the API:
 
-1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application). From the `terraform/EC2/deployment` directory, run the following commands:
+1. Redeploy the application to Amazon ECS using the [same terraform commands as before](#deploy-the-application). From the `terraform/EC2/deployment` directory, run the following commands:
 
    ```sh
    terraform init
@@ -382,29 +382,29 @@ Redeploy the application and exercise the API:
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
-   
+
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
    : `{"id":1,"description":"hello"}`
-   
+
    `curl -X GET 'BASE_DOMAIN:8080/notes?id=1'`
    : `{"id":1,"description":"hello"}`
-   
+
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[{"id":1,"description":"hello"}]`
-   
+
    `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
    : `{"id":1,"description":"UpdatedNote"}`
-   
+
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[{"id":1,"description":"hello"}]`
-   
+
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
    : This command calls both the `notes` and `calendar` services.
 
 4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
    The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
@@ -412,14 +412,14 @@ If you don't see traces after several minutes, clear any filter in the Traces Se
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
 On the Trace Explorer, click into one of the `GET` requests, and see a flame graph like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
-   
+
 The `privateMethod` around which you created a manual span shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
 
 For more information, read [Custom Instrumentation][12].

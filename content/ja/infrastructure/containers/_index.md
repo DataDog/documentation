@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: ブログ
   text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
-kind: documentation
 title: コンテナビュー
 ---
 
@@ -251,6 +250,6 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [16]: /ja/infrastructure/containers/configuration
 [17]: /ja/infrastructure/faq/live-containers-legacy-configuration
-[18]: https://app.datadoghq.com/orchestration/overview/
+[18]: https://app.datadoghq.com/orchestration/overview
 [19]: /ja/infrastructure/containers/orchestrator_explorer/
 [20]: /ja/infrastructure/containers/kubernetes_resources

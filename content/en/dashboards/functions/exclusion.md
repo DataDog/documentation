@@ -1,6 +1,5 @@
 ---
 title: Exclusion
-kind: documentation
 aliases:
     - /graphing/functions/exclusion/
 ---
@@ -22,26 +21,16 @@ When you graph this metric as a timeseries, you would have 3 x 4 = 12 lines on y
 | `clamp_min()` | Set any metric values _under_ a threshold value to equal that value. | `clamp_min(avg:system.load.1{*}, 100)` |
 | `clamp_max()` | Set any metric values _over_ a threshold value to equal that value.  | `clamp_max(avg:system.load.1{*}, 100)` |
 
-The `clamp_min()` and `clamp_max()` functions take one parameter:
-
--   `THRESHOLD`: the threshold value you've specified.
-    -   `clamp_min()` sets all datapoints below the threshold to equal that value, while `clamp_max()` limits datapoints above the threshold.
+Add a threshold value. The `clamp_min()` sets all datapoints below the threshold to equal that value, while `clamp_max()` limits datapoints above the threshold.
 
 ## Cutoff
 
 | Function       | Description                                     | Example                                 |
 | -------------- | ----------------------------------------------- | --------------------------------------- |
-| `cutoff_min()` | Remove metric values _under_ a threshold value. | `cutoff_min(avg:system.load.1{*}, 100)` |
-| `cutoff_max()` | Remove metric values _over_ a threshold value.  | `cutoff_max(avg:system.load.1{*}, 100)` |
+| `cutoff_min()` | Replace metric values _under_ a threshold value with NaN. | `cutoff_min(avg:system.load.1{*}, 100)` |
+| `cutoff_max()` | Replace metric values _over_ a threshold value with NaN.  | `cutoff_max(avg:system.load.1{*}, 100)` |
 
-The `cutoff_min()` and `cutoff_max()` functions take one parameter:
-
-- `THRESHOLD`: the threshold value you've specified.
-    - `cutoff_min()` removes all metric values lower than this threshold value from your graph, while `cutoff_max()` removes all metric values higher than this threshold value.
-
-The cutoff functions do not remove values that are equal to the threshold value.
-
-In addition, the functions do not delete datapoints from Datadog entirely; it only removes them from your visualization. Disabling the function brings your datapoints back.
+Add a threshold value. The `cutoff_min()` replaces all metric values lower than this threshold value with `NaN`, while `cutoff_max()` replaces all metric values higher than this threshold value with `NaN`. The cutoff functions do not replace values that are **equal to** the threshold value.
 
 **Tip**: For both the clamp and cutoff functions, it may be helpful to see the threshold value you have chosen. You can [set a horizontal marker][1] in Dashboards to indicate this value.
 

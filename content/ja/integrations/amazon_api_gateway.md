@@ -1,39 +1,75 @@
 ---
-aliases:
-- /ja/integrations/awsapigateway/
+app_id: amazon-api-gateway
+app_uuid: 431bfc66-cc6e-40c5-b7f0-dbb2990322c8
+assets:
+  dashboards:
+    Amazon API Gateway: assets/dashboards/aws_api_gateway_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.apigateway.latency
+      metadata_path: metadata.csv
+      prefix: aws.apigateway
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 166
+    source_type_name: Amazon API Gateway
+  monitors:
+    '[AWS] API Gateway Elevated 4XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_4xx_errors.json
+    '[AWS] API Gateway Elevated 5XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_5xx_errors.json
+    '[AWS] API Gateway High Response Time (latency) on {{apiname.name}}': assets/monitors/rec_mon_high_latency.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
 - aws
-- log collection
+- metrics
+- cloud
 dependencies: []
-description: ゲートウェイエラー、キャッシュのヒット/ミス、リクエストレイテンシーを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_api_gateway/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_api_gateway
-has_logo: true
 integration_id: amazon-api-gateway
 integration_title: Amazon API Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
+custom_kind: integration
+manifest_version: 2.0.0
 name: amazon_api_gateway
-public_title: Datadog-Amazon API Gateway インテグレーション
-short_description: Amazon API ゲートウェイエラーを追跡。
-version: '1.0'
+public_title: Amazon API Gateway インテグレーション
+short_description: Amazon API Gateway は API のマネージドサービスです。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Metrics
+  - Category::クラウド
+  configuration: README.md#Setup
+  description: Amazon API Gateway は API のマネージドサービスです。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon API Gateway インテグレーション
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Amazon API Gateway は、開発者があらゆる規模で API の作成、公開、保守、監視、およびセキュリティ保護を簡単に行えるフルマネージド型サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての API Gateway メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、セットアップします。
 
 ### メトリクスの収集
 
@@ -44,13 +80,16 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
     - `apigateway:GET`
     - `tag:GetResources`
 
-3. [Datadog - AWS API Gateway インテグレーション][4]をインストールします。
+3. [Datadog - Amazon API Gateway インテグレーション][4]をインストールします。
+
+
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 **注**: CloudWatch の詳細メトリクスを有効にしている場合、ステージ内のすべてのリソースまたはルートで有効にする必要があります。無効の場合、Datadog の集計値が不正確になります。
 
-### ログの収集
+### 収集データ
 
-API Gateway ログを有効化します。
+API Gateway ログを有効にするには
 
 1. AWS コンソールで API Gateway に移動します。
 2. 目的の API を選択し、Stages セクションに移動します。
@@ -61,6 +100,8 @@ API Gateway ログを有効化します。
 
     ```text
     {
+        "apiId": "$context.apiId",
+        "stage": "$context.stage",
         "requestId":"$context.requestId",
         "ip":"$context.identity.sourceIp",
         "caller":"$context.identity.caller",
@@ -80,25 +121,24 @@ API Gateway ログを有効化します。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で API Gateway ログを含む CloudWatch ロググループにトリガーを追加します。
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
 
-完了したら、[Datadog Log セクション][6]に移動し、ログを確認します。
+完了したら、[Logs ページ][6]に移動し、ログの検索を開始します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS API Gateway インテグレーションには、イベントは含まれません。
+Amazon API Gateway インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS API Gateway インテグレーションには、サービスのチェック機能は含まれません。
+Amazon API Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

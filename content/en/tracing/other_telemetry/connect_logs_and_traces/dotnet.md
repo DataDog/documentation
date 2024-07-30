@@ -1,6 +1,5 @@
 ---
-title: Connecting .NET Logs and Traces
-kind: documentation
+title: Correlating .NET Logs and Traces
 description: 'Connect your .NET logs and traces to correlate them in Datadog.'
 aliases:
   - /tracing/connect_logs_and_traces/dotnet

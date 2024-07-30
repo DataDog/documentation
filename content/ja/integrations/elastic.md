@@ -6,6 +6,7 @@ assets:
     elasticsearch: assets/dashboards/overview.json
     elasticsearch_timeboard: assets/dashboards/metrics.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,10 +19,13 @@ assets:
     - java org.elasticsearch.bootstrap.Elasticsearch
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 37
     source_type_name: Elasticsearch
   logs:
     source: elasticsearch
   monitors:
+    '[ElasticSearch] Average query latency is high': assets/monitors/elastic_average_search_latency.json
+    '[ElasticSearch] Current indexing load is high': assets/monitors/elastic_indexing_load.json
     '[ElasticSearch] Number of pending tasks is high': assets/monitors/elastic_pending_tasks_high.json
     '[ElasticSearch] Query load is high': assets/monitors/elastic_query_load_high.json
     '[ElasticSearch] Time spent on queries is high': assets/monitors/elastic_query_latency_high.json
@@ -34,7 +38,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 - tracing
 dependencies:
@@ -44,12 +48,11 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.5.0
+integration_version: 6.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: elastic
-oauth: {}
 public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
@@ -59,7 +62,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   - Category::Tracing
   - Supported OS::Linux
@@ -73,6 +76,7 @@ tile:
   title: ElasticSearch
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Elastic search ダッシュボード][1]
@@ -83,20 +87,20 @@ Elasticsearch クラスターの健全性について、全体的なステータ
 
 Datadog Agent の Elasticsearch チェックは、検索とインデックス化のパフォーマンス、メモリ使用量とガベージコレクション、ノード可用性、シャード統計、ディスク容量とパフォーマンス、保留状態のタスクなど多数のメトリクスを収集します。Agent は、クラスターの全体的なステータスに関するイベントとサービスチェックも送信します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -201,7 +205,7 @@ Datadog APM は、Elasticsearch と統合して分散システム全体のトレ
 1. [Datadog でトレースの収集を有効にします][9]。
 2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][10]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -299,7 +303,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"url": "http://%%host%%:9200"}]'
 ```
 
-##### ログの収集
+##### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -336,7 +340,7 @@ Agent コンテナで必要な環境変数
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Kubernetes
+#### ガイド
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -389,7 +393,7 @@ spec:
     - name: elasticsearch
 ```
 
-##### ログの収集
+##### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
@@ -459,7 +463,7 @@ Agent コンテナで必要な環境変数
 }
 ```
 
-##### ログの収集
+##### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -509,7 +513,7 @@ Agent コンテナで必要な環境変数
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `elastic` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
 デフォルトでは、次のすべてのメトリクスが Agent によって送信されるわけではありません。すべてのメトリクスを送信するには、上述のように `elastic.yaml` でフラグを構成します。
 
@@ -518,19 +522,19 @@ Agent コンテナで必要な環境変数
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
 - `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "elastic" >}}
 
 
-### イベント
+### ヘルプ
 
 Elasticsearch チェックは、Elasticsearch クラスターの全体的なステータスが赤、黄、緑に変化するたびに、Datadog にイベントを送信します。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "elastic" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 - [Agent が接続できない][4]
 - [Elasticsearch からすべてのメトリクスが送信されないのはなぜですか？][5]

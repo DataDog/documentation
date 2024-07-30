@@ -27,10 +27,9 @@ integration_id: windows-performance-counters
 integration_title: Windows パフォーマンスカウンター
 integration_version: 1.5.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: windows_performance_counters
-oauth: {}
 public_title: Windows パフォーマンスカウンター
 short_description: Windows OS のパフォーマンスカウンターを監視します。
 supported_os:

@@ -3,12 +3,14 @@ app_id: snmp-chatsworth-products
 app_uuid: 344b37df-ba82-4352-b277-ba1f1ccf716f
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10330
     source_type_name: Chatsworth Products
 author:
   homepage: https://www.datadoghq.com
@@ -16,9 +18,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- notification
 - ネットワーク
+- notifications
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_chatsworth_products/README.md
@@ -29,10 +30,9 @@ integration_id: snmp-chatsworth-products
 integration_title: Chatsworth Products
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_chatsworth_products
-oauth: {}
 public_title: Chatsworth Products
 short_description: Chatsworth Products のネットワークデバイスから SNMP メトリクスを収集します。
 supported_os:
@@ -42,13 +42,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Network
+  - Category::Notifications
+  - Category::SNMP
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Monitoring
-  - Category::Notification
-  - Category::Network
-  - Category::SNMP
   configuration: README.md#Setup
   description: Chatsworth Products のネットワークデバイスから SNMP メトリクスを収集します。
   media: []
@@ -57,6 +56,7 @@ tile:
   title: Chatsworth Products
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -67,17 +67,17 @@ Chatsworth Products のインテグレーションを構成し、Chatsworth PDU 
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## セットアップ
+## 計画と使用
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

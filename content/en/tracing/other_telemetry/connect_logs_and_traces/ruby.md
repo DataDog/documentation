@@ -1,6 +1,5 @@
 ---
-title: Connecting Ruby Logs and Traces
-kind: documentation
+title: Correlating Ruby Logs and Traces
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40

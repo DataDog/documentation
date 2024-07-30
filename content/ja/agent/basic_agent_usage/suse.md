@@ -14,10 +14,9 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: SUSE
 title: SUSE 用 Agent の基本的な使用方法
 ---
@@ -125,11 +124,11 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 詳細については、[埋め込み Agent へのパッケージの追加方法][4]の手順を参照してください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/suse
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=suse
 [2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /ja/agent/troubleshooting/
 [4]: /ja/developers/guide/custom-python-package/

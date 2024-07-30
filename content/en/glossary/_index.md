@@ -1,5 +1,7 @@
 ---
 title: Glossary
+aliases:
+    - /glossary/terms/wall_time/
 cascade:
     disable_toc: true
 scrollspy:

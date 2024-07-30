@@ -14,11 +14,18 @@ const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
-    window.scroll(0, 0);
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
 
     let mainContent = document.getElementById('mainContent');
 
-    if (mainContent) {
+    // temp workaround for integrations page https://datadoghq.atlassian.net/browse/WEB-5018
+    let isIntegrations = document.querySelector('.integrations')
+
+    if (mainContent && !isIntegrations) {
         const currentTOC = document.querySelector('.js-toc-container');
 
         const httpRequest = new XMLHttpRequest();
@@ -210,9 +217,25 @@ function loadPage(newUrl) {
             }
 
             const pathName = new URL(newUrl).pathname;
+            
+            // Get and clean window pathname in order to update language dropdown items href
+            const nonEnPage = document.documentElement.lang !== 'en-US' // check if page is not in english
+            const commitRef = document.documentElement.dataset.commitRef
+            const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
+            
+            const noCommitRefPathName = pathName.slice(commitRefLen) // adjust pathname to remove commit ref if in preview env
+            const noCommitRefNoLangPathName = nonEnPage ? noCommitRefPathName.slice(3) : noCommitRefPathName // adjust pathname to remove language if not in english e.g. /ja/agent -> /agent
+            
+            document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
+                // Updates langauge dropdown item hrefs on asynchronous page loads
+                const noFtBranchddItemPathName = ddItem.pathname.slice(commitRefLen) // adjust dd item pathname to remove commit ref if in preview env
+                const noFtBranchNoLangddItemPathName = ddItem.dataset.lang ? noFtBranchddItemPathName.slice(3) : noFtBranchddItemPathName // adjust dd item pathname to remove language if not in english e.g. /ja/agent -> /agent
+
+                const updatedURL = ddItem.href.replace(noFtBranchNoLangddItemPathName, noCommitRefNoLangPathName)
+                ddItem.setAttribute('href', updatedURL)
+            })
 
             // sets query params if code tabs are present
-
             initCodeTabs();
 
             const regionSelector = document.querySelector('.js-region-select');
@@ -251,3 +274,5 @@ function loadPage(newUrl) {
 }
 
 export {loadPage};
+
+

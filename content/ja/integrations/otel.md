@@ -6,6 +6,7 @@ assets:
     OpenTelemetry Collector Metrics Dashboard: assets/dashboards/otel_collector_metrics_dashboard.json
     OpenTelemetry Dashboard: assets/dashboards/otel_host_metrics_dashboard.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -17,7 +18,10 @@ assets:
       prefix: otel.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 312
     source_type_name: OTel
+  monitors:
+    OpenTelemetry Refused Spans: assets/monitors/otel_refused_spans.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -36,10 +40,9 @@ integration_id: otel
 integration_title: OpenTelemetry
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: otel
-oauth: {}
 public_title: OpenTelemetry
 short_description: OpenTelemetry コレクターからテレメトリーデータを取得
 supported_os:
@@ -63,6 +66,7 @@ tile:
   title: OpenTelemetry
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## OpenTelemetry コレクター
 
 ## 概要
@@ -73,14 +77,14 @@ OpenTelemetry コレクターは、ベンダーに依存しない Agent プロ�
 
 ホストメトリクスは OpenTelemetry ホストメトリクスのデフォルトダッシュボードに表示されますが、OpenTelemetry コレクターを使用して任意のメトリクスを Datadog に送信することができます。ホストメトリクスレシーバーで生成されるような `system.*` や `process.*` 以下のメトリクスは、Datadog Agent からのメトリクスと衝突しないように、`otel.system.*` や `otel.process.*` に名前変更されています。さらに、OpenTelemetry コレクターのメトリクスは、OpenTelemetry コレクターメトリクスのデフォルトダッシュボードに表示されます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [OpenTelemetry コレクターのドキュメント][3]に従って `opentelemetry-collector-contrib` ディストリビューションをインストールするか、Datadog Exporter を含むその他のディストリビューションを使用してください。
 
 このセットアップでテレメトリーデータを Datadog にエクスポートするには、Datadog Agent は**必要ありません**。Datadog Agent を使用する場合は、[Datadog Agent における OTLP の取り込み][2]を参照してください。
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 OpenTelemetry コレクターからテレメトリーデータを Datadog にエクスポートするには、Datadog エクスポーターをお使いのメトリクスおよびトレースパイプラインに追加します。
 この時必要な設定は [API キー][4]のみです。
@@ -136,21 +140,21 @@ Exporter started.   {"component_kind": "exporter", "component_type": "datadog", 
 Everything is ready. Begin running and processing data.
 ```
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "otel" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 OpenTelemetry コレクターには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 OpenTelemetry コレクターには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

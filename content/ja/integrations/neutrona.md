@@ -3,6 +3,7 @@ app_id: neutrona
 app_uuid: f44f84d4-1436-4ab1-8023-b952850b64c8
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: neutrona.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10051
     source_type_name: Neutrona
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -30,10 +32,9 @@ integration_id: neutrona
 integration_title: Neutrona
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: neutrona
-oauth: {}
 public_title: Neutrona
 short_description: Neutrona Telemetry
 supported_os:
@@ -56,6 +57,7 @@ tile:
   title: Neutrona
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -64,11 +66,11 @@ tile:
 
 - Azure (ExpressRoute)
 
-## セットアップ
+## 計画と使用
 
 Neutrona チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -80,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Neutrona の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル neutrona.d/conf.yaml][6] を参照してください。
@@ -91,26 +93,26 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `neutrona` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "neutrona" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 現時点で、Neutrona には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 現時点で、Neutrona には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://telemetry.neutrona.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

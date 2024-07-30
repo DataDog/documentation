@@ -3,6 +3,7 @@ app_id: kernelcare
 app_uuid: 7bfd2b8a-d461-4890-aeba-f1e9eab617c7
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: kernelcare.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10109
     source_type_name: KernelCare
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -31,10 +33,9 @@ integration_id: kernelcare
 integration_title: KernelCare
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: kernelcare
-oauth: {}
 public_title: KernelCare
 short_description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
 supported_os:
@@ -57,6 +58,7 @@ tile:
   title: KernelCare
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -65,11 +67,11 @@ tile:
 
 このインテグレーションにより、Datadog Agent を介して KernelCare メトリクスを転送できます。
 
-## セットアップ
+## 計画と使用
 
 Kernelcare チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -81,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -91,27 +93,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チ
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `kernelcare` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "kernelcare" >}}
 
 
-### イベント
+### ヘルプ
 
 Kernelcare インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "kernelcare" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://www.kernelcare.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example

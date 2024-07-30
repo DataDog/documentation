@@ -10,6 +10,7 @@ assets:
     AtomWatch Boomi Workload Monitoring: assets/dashboards/boomi_workload_monitoring2.json
     AtomWatch Overview: assets/dashboards/atomwatch_overview.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -20,20 +21,22 @@ assets:
       prefix: kitepipe.atomwatch.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10355
     source_type_name: AtomWatch
   monitors:
     AtomWatch is Down: assets/monitors/atomwatch_down.json
+    'AtomWatch: Boomi Cluster Node "View File" is Missing': assets/monitors/cluster_view_file_missing.json
+    'AtomWatch: Boomi Cluster Node "View File" is Too Old': assets/monitors/cluster_view_file_too_old.json
+    'AtomWatch: Boomi Cluster Problem': assets/monitors/cluster_view_file_problem.json
+    'AtomWatch: Execution Duration Anomaly': assets/monitors/execution_duration_anomaly.json
+    'AtomWatch: Failure calling Boomi Platform API': assets/monitors/failed_boomi_platform_api_call.json
+    'AtomWatch: Infrastructure - API Gateway Node CPU Usage High': assets/monitors/api_gw_node_cpu.json
+    'AtomWatch: Infrastructure - API Gateway Node Disk Usage High': assets/monitors/api_gw_node_disk.json
+    'AtomWatch: Infrastructure - API Gateway Node Memory Usage High': assets/monitors/api_gw_node_ram.json
+    'AtomWatch: Infrastructure - Molecule Node CPU Usage High': assets/monitors/molecule_node_cpu.json
+    'AtomWatch: Infrastructure - Molecule Node Disk Usage High': assets/monitors/molecule_node_disk.json
+    'AtomWatch: Infrastructure - Molecule Node Memory Usage High': assets/monitors/molecule_node_ram.json
     'AtomWatch: Runtime Online Status': assets/monitors/boomi_online_status.json
-    Boomi Cluster Node "View File" is Missing: assets/monitors/cluster_view_file_missing.json
-    Boomi Cluster Node "View File" is Too Old: assets/monitors/cluster_view_file_too_old.json
-    Boomi Cluster Problem: assets/monitors/cluster_view_file_problem.json
-    'Boomi Infrastructure: API Gateway Node CPU Usage High': assets/monitors/api_gw_node_cpu.json
-    'Boomi Infrastructure: API Gateway Node Disk Usage High': assets/monitors/api_gw_node_disk.json
-    'Boomi Infrastructure: API Gateway Node Memory Usage High': assets/monitors/api_gw_node_ram.json
-    'Boomi Infrastructure: Molecule Node CPU Usage High': assets/monitors/molecule_node_cpu.json
-    'Boomi Infrastructure: Molecule Node Disk Usage High': assets/monitors/molecule_node_disk.json
-    'Boomi Infrastructure: Molecule Node Memory Usage High': assets/monitors/molecule_node_ram.json
-    Execution Duration Anomaly: assets/monitors/execution_duration_anomaly.json
 author:
   homepage: https://www.kitepipe.com
   name: Kitepipe
@@ -41,12 +44,12 @@ author:
   support_email: AtomWatch.Support@kitepipe.com
   vendor_id: kitepipe
 categories:
-- アラート設定
+- slos
 - AWS
-- event management
+- イベント管理
 - ログの収集
 - マーケットプレイス
-- 通知
+- notifications
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -55,20 +58,19 @@ integration_id: kitepipe-atomwatch
 integration_title: Kitepipe AtomWatch
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: kitepipe_atomwatch
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.kitepipe.atomwatch
   product_id: atomwatch
-  short_description: Boomi ノード 1 台あたりの単価
+  short_description: Boomi Atom または Molecule Node の単価
   tag: billing_key
-  unit_label: Boomi ノード
+  unit_label: Boomi Atom または Molecule Node
   unit_price: 200
 public_title: Kitepipe AtomWatch
 short_description: Boomi のプロセスとインフラストラクチャーを監視
@@ -85,7 +87,7 @@ tile:
   - Category::Event Management
   - Category::Log Collection
   - Category::Marketplace
-  - Category::Notification
+  - Category::Notifications
   - Submitted Data Type::Metrics
   - Submitted Data Type::Logs
   - Submitted Data Type::Events
@@ -114,13 +116,14 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Kitepipe の AtomWatch は Agent ベースのインテグレーションで、Boomi プロセス、クラスターノード、関連インフラストラクチャーからメトリクスを収集し、Datadog と Boomi の両方のお客様にインテグレーションの健全性を知らせることができます。
 
-AtomWatch バージョン 1.0 には、Boomi の実行統計、クラスターのステータス、インフラストラクチャーの健全性を報告する 4 つのダッシュボード、13 のカスタムメトリクス、12 のモニターが含まれています。これらのメトリクスは、Datadog および Boomi のお客様が、拡張された時間推移分析 (Boomi Process Reporting の利用可能期間の基準である 30 日を超える) に利用できます。
+AtomWatch バージョン 1.0 には、Boomi の実行統計、クラスターのステータス、インフラストラクチャーの健全性を報告する 4 つのダッシュボード、13 のカスタムメトリクス、13 のモニターが含まれています。これらのメトリクスは、Datadog および Boomi のお客様が、拡張された時間推移分析 (Boomi Process Reporting の利用可能期間の基準である 30 日を超える) に利用できます。
 
 AtomWatch を購入した Datadog のお客様は、Boomi Java Runtime を Atom または Molecule のいずれかの構成で管理する必要があります。Kitepipe では、14 日間の無料トライアルに 1 時間のセットアップと構成セッションが含まれています。
 
@@ -132,19 +135,19 @@ Kitepipe は Boomi Platinum Implementation Partner であり、北米におけ�
 
 Datadog のサービス AtomWatch は、AWS における Boomi マネージドサービスを中心とした Kitepipe の新しい提案です。Kitepipe は、Boomi プロセスの AWS マイグレーション、AWS マネージド Boomi、Boomi で構築されたバイオテクノロジーの垂直ソリューション、NetSuite、SAP、Coupa、Workday、HRIS、Data Mart/BI などのエンドポイントを含む多くのインテグレーション分野、業界、ドメインでリーダーとして活躍しています。
 
-### ログの収集
+### レート
 
 このインテグレーションは、お客様に代わって Boomi プラットフォームへの API 呼び出しを行い、実行レコードを取得し、Datadog にログとして送信します。
 
-### イベント
+### ヘルプ
 
 このインテグレーションは、Boomi API から AuditLog レコードを取得し、Datadog にイベントとして送信します。イベントは、Boomi Workload Monitoring Dashboard または[イベントエクスプローラー][1]でフィルターされた形で見ることができます。フィルタリングされていない AuditLog レコードを検査するために、独自のモニターを構築することができます。
 
-### メトリクス
+### データセキュリティ
 
 このインテグレーションは、メトリクスを送信します。メトリクスの一覧は、**Data Collected** タブで確認することができます。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AtomWatch にお問い合わせください。
 
@@ -159,6 +162,7 @@ Kitepipe の AtomWatch のサポート時間は、米国とカナダのタイム
 お役に立つドキュメント、リンクや記事:
 
 - [AtomWatch ドキュメント][9]
+- [Datadog Marketplace の Kitepipe の製品を使って Boomi インテグレーションを監視する][12]
 
 [1]: https://app.datadoghq.com/event/explorer
 [2]: https://help.boomi.com/bundle/atomsphere_platform/page/int-Adding_API_tokens.html
@@ -171,6 +175,7 @@ Kitepipe の AtomWatch のサポート時間は、米国とカナダのタイム
 [9]: https://atomwatch.refined.site/space/CS/11108353
 [10]: https://www.kitepipe.com/
 [11]: mailto:AtomWatch.Support@kitepipe.com
+[12]: https://www.datadoghq.com/blog/kitepipe-datadog-marketplace/
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/kitepipe-atomwatch" target="_blank">こちらをクリック</a>してください。

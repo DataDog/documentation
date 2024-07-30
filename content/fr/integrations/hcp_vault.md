@@ -21,7 +21,7 @@ integration_id: hcp-vault
 integration_title: "HCP\_Vault"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: hcp_vault.

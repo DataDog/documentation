@@ -2,22 +2,22 @@
 aliases:
 - /ja/integrations/awsroute53/
 categories:
-- cloud
-- network
-- web
 - aws
+- cloud
 - log collection
+- network
+- notifications
 dependencies: []
 description: Route 53 メトリクスを追跡し、健全性チェックを監視。
 doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
 draft: false
 git_integration_title: amazon_route53
 has_logo: true
-integration_id: amazon-route-53
+integration_id: ''
 integration_title: Amazon Route 53
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_route53
 public_title: Datadog-Amazon Route 53 インテグレーション
@@ -25,11 +25,12 @@ short_description: Route 53 メトリクスを追跡し、健全性チェック�
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_route53/route53_graph.png" alt="Route 53 のグラフ" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/amazon_route53/route53_graph.png" alt="route53 グラフ" popup="true">}}
 
 ## 概要
 
-AWS Route 53 は DNS 管理およびトラフィック管理と共に、健全性チェックによる可用性とパフォーマンスの監視を提供します。Datadog に健全性チェック情報を表示して、環境内の他のメトリクスやイベントとの関連性を提供できます。Route 53 の健全性チェックステータスグラフのダッシュボードの例を挙げます。
+Amazon Route 53 は DNS 管理およびトラフィック管理に加え、健全性チェックによる可用性とパフォーマンスの監視を提供します。Datadog に健全性チェック情報を表示して、環境内の他のメトリクスやイベントとの関連性を提供できます。Route 53 の健全性チェックステータスグラフのダッシュボードの例を挙げます。
 
 その他の AWS サービスの詳細については、[AWS タイル][1]を参照してください。
 
@@ -42,14 +43,14 @@ AWS Route 53 は DNS 管理およびトラフィック管理と共に、健全�
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Route53` が有効になっていることを確認します。
-2. Amazon Route53 のメトリクスを収集するため、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+2. Amazon Route 53 のメトリクスを収集するため、次の権限を [Datadog IAM ポリシー][3]に追加します。
 
     - `route53:listHealthChecks`: 使用できる健全性チェックを一覧表示します。
     - `route53:listTagsForResources`: Route53 CloudWatch メトリクスにタグを追加します。
 
     詳細については、AWS ウェブサイト上の [Route53 ポリシー][4]を参照してください。
 
-3. [Datadog - AWS Route53 インテグレーション][5]をインストールします。
+3. [Datadog - Amazon Route53 インテグレーション][5]をインストールします。
 
 **注**: CloudWatch を使用して Amazon Route 53 メトリクスを取得するには、US East (N. Virginia) をリージョンとして選択する必要があります。他のリージョンを選択した場合、Amazon Route 53 メトリクスは使用できません。詳細は、[健全性チェックステータスのモニタリングと通知の受信][6]を参照してください。
 
@@ -105,11 +106,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Route 53 インテグレーションには、イベントは含まれません。
+Amazon Route 53 インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS Route 53 インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Route 53 インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

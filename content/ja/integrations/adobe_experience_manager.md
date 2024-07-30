@@ -15,7 +15,7 @@ has_logo: true
 integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: adobe_experience_manager
 public_title: Datadog-Adobe Experience Manager
 short_description: ログを収集して、エラー、リクエスト応答時間などを追跡
@@ -26,9 +26,9 @@ supported_os:
 title: Adobe Experience Manager
 ---
 
-{{% site-region region="us3" %}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Adobe Experience Manager インテグレーションはサポートされていません。</div>
-{{% /site-region %}}
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Adobe Experience Manager インテグレーションは利用できません。</div>
+{{< /site-region >}}
 
 ## 概要
 
@@ -72,7 +72,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
 [4]: /ja/help/

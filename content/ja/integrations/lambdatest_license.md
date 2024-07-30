@@ -25,12 +25,11 @@ integration_id: lambdatest-software-license
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: lambdatest_license
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -78,6 +77,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -98,7 +98,7 @@ LambdaTest を使用すると、以下にアクセスできます。
 Datadog Marketplace を通じて、LambdaTest のサブスクリプションを購入することができます。LambdaTest のアカウントを設定したら (または既に LambdaTest のお客様である場合)、[インテグレーションタイル][1]に移動して、Datadog へのデータ送信を開始してください。
 
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 

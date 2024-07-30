@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: Documentation
   text: Liens personnalisés
-kind: documentation
 title: Widgets
 ---
 
@@ -46,7 +45,11 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 ### Groups
 {{< whatsnext desc="Affichez vos widgets dans des groupes : ">}}
     {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/placeholder_light_large.png">}}Groupe{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} Groupe{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/split_graph"
+        img="dashboards/widgets/icons/group-split_light_small.svg">}} Graphe scindé{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations et embeds
@@ -70,13 +73,15 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 ### Alertes et réponse
 {{< whatsnext desc="Widgets de synthèse permettant d'afficher des données de surveillance : ">}}
     {{< nextlink href="/dashboards/widgets/alert_graph" 
-        img="dashboards/widgets/icons/alert-graph_light_large.png">}}Graphique des alertes{{< /nextlink >}}
+        img="dashboards/widgets/icons/alert-graph_light_large.png">}} Graphique des alertes{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/alert_value" 
         img="dashboards/widgets/icons/alert-value_light_large.png">}}Valeur d'alerte{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/check_status" 
-        img="dashboards/widgets/icons/check-status_light_large.png">}}Statut de check{{< /nextlink >}}
+        img="dashboards/widgets/icons/check-status_light_large.png">}} Statut de check{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" 
-        img="dashboards/widgets/icons/monitor-summary_light_large.png">}}Résumé des monitors{{< /nextlink >}}
+        img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Résumé des monitors{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/run_workflow" 
+        img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Exécuter un workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture
@@ -91,10 +96,12 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 
 ### Performances et fiabilité
 {{< whatsnext desc="Visualisations sur la fiabilité des sites : ">}}
+    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
+        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Flamegraph de profiling{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo" 
-        img="dashboards/widgets/icons/slo-summary_light_large.png">}}Résumé des SLO{{< /nextlink >}}
+        img="dashboards/widgets/icons/slo-summary_light_large.png">}} Résumé des SLO{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}}Liste de SLO{{< /nextlink >}}
+        img="dashboards/widgets/icons/slo-list_light_large.png">}} Liste de SLO{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Plein écran
@@ -118,9 +125,24 @@ Les liens personnalisés permettent d'associer des valeurs de données à des UR
 
 Pour personnaliser les interactions avec les données intégrées à vos widgets génériques, consultez la section [Liens personnalisés][2].
 
+## Remplacement des unités
+
+Personnalisez les unités affichées dans les widgets afin d'enrichir le contexte de vos données. Pour en savoir plus et découvrir des cas d'utilisation, consultez la section [Personnaliser vos visualisations avec les remplacements d'unités][3].
+- **Remplacement des unités** : choisissez d'afficher des unités de la famille « mémoire », et laissez Datadog choisir l'échelle appropriée en fonction des données (comme les mégaoctets ou les gigaoctets).
+- **Remplacement des unités et de l'échelle** : assignez une échelle unique à des unités (par exemple, afficher les données en mégaoctets quelle que soit la valeur).
+- **Définir des unités personnalisées** : définissez des unités entièrement personnalisées (telles que « test » au lieu d'un nombre générique).
+
+Ces options ne vous dispensent pas d'attribuer des unités à vos données.
+{{< whatsnext desc="Définir des unités au niveau de l'organisation : ">}}
+    {{< nextlink href="/metrics/units/">}} Définir des unités pour les métriques{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/facets/#units">}} Définir des unités pour les requêtes basées sur des événements{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Copier et coller des widgets
 
-Les widgets peuvent être copiés sur les pages des [dashboards][3], [notebooks][4], [services APM][5] et [ressources APM][6] à l'aide du raccourci `Ctrl + C` (`Cmd + C` pour Mac). Vous pouvez également sélectionner l'icône de partage et choisir l'option Copy.
+<div class="alert alert-warning">Vous devez posséder les <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards">autorisations <code>dashboard_public_share</code></a> et activer le <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Partage des données publiques statiques</strong></a> dans vos Paramètres d'organisation pour utiliser cette fonctionnalité.</div>
+
+Les widgets peuvent être copiés sur les pages des [dashboards][4], [notebooks][5], [services APM][6] et [ressources APM][7] à l'aide du raccourci `Ctrl + C` (`Cmd + C` pour Mac). Vous pouvez également sélectionner l'icône de partage et choisir l'option Copy.
 
 Les widgets copiés peuvent être collés dans Datadog en utilisant les touches `Ctrl + V` (`Cmd + V` pour Mac) :
 
@@ -155,7 +177,8 @@ Pour exporter les données d'un widget Série temporelle, Tableau ou Top list au
 
 [1]: /fr/dashboards/widgets/timeseries/#full-screen
 [2]: /fr/dashboards/guide/context-links/
-[3]: /fr/dashboards/
-[4]: /fr/notebooks/
-[5]: /fr/tracing/services/service_page/
-[6]: /fr/tracing/services/resource_page/
+[3]: /fr/dashboards/guide/unit-override
+[4]: /fr/dashboards/
+[5]: /fr/notebooks/
+[6]: /fr/tracing/services/service_page/
+[7]: /fr/tracing/services/resource_page/

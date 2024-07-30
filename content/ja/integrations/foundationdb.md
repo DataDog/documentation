@@ -7,6 +7,7 @@ assets:
     FoundationDB Processes and Utilization: assets/dashboards/foundationdb_processes_and_utilization.json
     FoundationDB Transactions and Queues: assets/dashboards/foundationdb_transactions_and_queues.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,6 +20,7 @@ assets:
       prefix: foundationdb.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10258
     source_type_name: FoundationDB
   logs:
     source: foundationdb
@@ -43,7 +45,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/foundationdb/README.md
@@ -52,12 +54,11 @@ draft: false
 git_integration_title: foundationdb
 integration_id: foundationdb
 integration_title: FoundationDB
-integration_version: 1.2.0
+integration_version: 1.4.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: foundationdb
-oauth: {}
 public_title: FoundationDB
 short_description: FoundationDB インテグレーション
 supported_os:
@@ -70,7 +71,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   configuration: README.md#Setup
   description: FoundationDB インテグレーション
@@ -80,28 +81,29 @@ tile:
   title: FoundationDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックでは、Datadog Agent を通じて [FoundationDB][1] を監視します。FoundationDB クラスターが健全であることを確認するほか、多数のメトリクスを収集し、オプションで FoundationDB トランザクションログも収集します。
 
-## セットアップ
+## 計画と使用
 
 チェックとメトリクスはどちらも FoundationDB クラスター全体に適用され、1 つのホストにのみインストールする必要があります。このホストは FoundationDB を実行しているホストである必要はなく、アクセス可能なホストであれば問題ありません。
 
-### インストール
+### インフラストラクチャーリスト
 
 FoundationDB チェックは [Datadog Agent][2] パッケージに含まれていますが、[FoundationDB クライアント][3]がインストールされている必要があります。
 
-### 構成
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -116,7 +118,7 @@ FoundationDB チェックは [Datadog Agent][2] パッケージに含まれて�
 
 4. [Agent を再起動します][4]。
 
-##### ログの収集
+##### 収集データ
 
 FoundationDB はデフォルトで XML ログを書き込みますが、Datadog インテグレーションは JSON ログを想定しています。そのため、FoundationDB に構成変更を行う必要があります。
 
@@ -173,11 +175,11 @@ FoundationDB はデフォルトで XML ログを書き込みますが、Datadog 
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<インテグレーション名>` | `foundationdb`                                             |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{}`                                                       |
+| `<INTEGRATION_NAME>` | `foundationdb`                                             |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{}`                                                       |
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -196,23 +198,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [Agent の status サブコマンドを実行][4]し、**Checks** セクションで `foundationdb` を探します。
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "foundationdb" >}}
 
 
-### イベント
+### ヘルプ
 
 FoundationDB チェックには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 [1]: https://www.foundationdb.org/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://apple.github.io/foundationdb/downloads.html
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

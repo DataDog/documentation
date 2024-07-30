@@ -3,7 +3,6 @@ further_reading:
 - link: network_monitoring/devices/setup
   tag: ドキュメント
   text: NDM のセットアップに関する詳細
-kind: ガイド
 title: Python ベースのチェックから SNMP Core チェック (Go) への移行
 ---
 

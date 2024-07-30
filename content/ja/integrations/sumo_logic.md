@@ -2,8 +2,7 @@
 aliases:
 - /ja/integrations/sumologic/
 categories:
-- monitoring
-- notification
+- notifications
 dependencies: []
 description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
 doc_link: https://docs.datadoghq.com/integrations/sumologic/
@@ -14,7 +13,7 @@ integration_id: ''
 integration_title: Sumo Logic
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: sumo_logic
 public_title: Datadog-Sumo Logic インテグレーション
@@ -22,13 +21,14 @@ short_description: Sumo Logic から Datadog にログを送信。Datadog 通知
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログデータを Datadog のイベントストリームに転送することも、Sumo Logic を Datadog アラートおよびイベントの通知チャンネルとして使用することもできます。つまり、サービス間で相互に通知を行うことができます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 #### Datadog から Sumo Logic への送信
 
@@ -61,4 +61,4 @@ Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログ�
 9. Sumo Logic で、検索を保存し、その検索のスケジュールを選択します。
 10. **Alert Type** には Webhook を選択します。Webhook のリストから新しい Datadog 接続を選択します。ペイロードを任意にカスタマイズし、結果の数が 1 以上である場合にのみ通知が送信されるように、**Alert Condition** を変更します。 {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="ホスト済コレクション" popup="true">}}
 
-[1]: https://app.datadoghq.com/account/settings#integrations/sumo_logic
+[1]: https://app.datadoghq.com/integrations/sumo_logic

@@ -3,6 +3,7 @@ app_id: unbound
 app_uuid: 33cd72ba-822b-4a74-92eb-f1240ea71975
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: unbound.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10165
     source_type_name: Unbound
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -30,10 +32,9 @@ integration_id: unbound
 integration_title: Unbound
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: unbound
-oauth: {}
 public_title: Unbound
 short_description: unbound メトリクスを収集する Datadog インテグレーション
 supported_os:
@@ -56,6 +57,7 @@ tile:
   title: Unbound
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -66,11 +68,11 @@ unbound サービスからメトリクスをリアルタイムに取得して、
 
 - unbound の状態を視覚化して監視します。
 
-## セットアップ
+## 計画と使用
 
 Unbound チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -82,7 +84,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `unbound.d/conf.yaml` ファイルを編集して、
    unbound メトリクスの収集を開始します。
@@ -94,27 +96,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェ
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `unbound` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "unbound" >}}
 
 
-### イベント
+### ヘルプ
 
 Unbound チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "unbound" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example

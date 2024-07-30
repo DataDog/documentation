@@ -22,10 +22,9 @@ integration_id: embrace-mobile
 integration_title: Embrace Mobile
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
-oauth: {}
 public_title: Embrace Mobile
 short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
 supported_os:
@@ -67,6 +66,7 @@ tile:
   title: Embrace Mobile
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -75,7 +75,7 @@ tile:
 
 アプリをインストールすると、Embrace のダッシュボードでモバイルの主要なヘルスメトリクスを追跡できるようになります。パフォーマンスの低下があった場合、手動でユーザーセッションを再生しなくても、影響のあったセッションの完全な詳細を調査することができます。
 
-## セットアップ
+## 計画と使用
 
 1. 無料トライアルを開始し、[Embrace のドキュメント][2]に従ってください。**Datadog でメトリクスを見る前に、このドキュメントに従う必要があります**。
 1. Embrace インテグレーションのセットアップが完了したら、Datadog に戻り両プラットフォームを接続します。
@@ -83,7 +83,7 @@ tile:
 1. Datadog でダッシュボードを新規作成します。クラッシュまたはネットワーキングメトリクスを含む Embrace のデータを表示するには、Embrace ウィジェットを選択します。
 1. "Details" をクリックすると、Datadog から Embrace の詳細を確認できます。
 
-## サポート
+## Agent
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

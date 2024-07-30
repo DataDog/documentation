@@ -1,7 +1,6 @@
 ---
 code_lang: java
 code_lang_weight: 0
-kind: documentation
 title: Java 互換性要件
 type: multi-code-lang
 ---

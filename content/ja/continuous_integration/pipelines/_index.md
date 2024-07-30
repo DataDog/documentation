@@ -2,15 +2,22 @@
 aliases:
 - /ja/continuous_integration/pipelines_setup/
 - /ja/continuous_integration/explore_pipelines/
+- /ja/continuous_integration/setup_pipelines/
+cascade:
+  algolia:
+    rank: 70
+    tags:
+    - CI パイプライン
+    - CI パイプライン
+    - サポートされる機能
 further_reading:
 - link: /monitors/types/ci/
   tag: ドキュメント
   text: CI Pipeline モニターの作成
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
-  text: CI の表示に関するトラブルシューティング
-kind: documentation
-title: Datadog におけるパイプラインの可視化
+  text: CI Visibility のトラブルシューティング
+title: Datadog の CI Pipeline Visibility
 ---
 
 {{< site-region region="gov" >}}
@@ -19,87 +26,137 @@ title: Datadog におけるパイプラインの可視化
 
 ## 概要
 
-[**Pipelines**][1] ページは、パイプラインからの重要なメトリクスと結果を表示することで、CI 状態のパイプラインファーストビューを提供します。パイプラインを保守しているのではなく、関連するコードを保守しているため、最も気になるパフォーマンス問題やテストの失敗を調査するのに役立ちます。
+[Pipeline Visibility][1] は、CI の健全性をパイプライン中心で表示し、パイプラインからの重要なメトリクスと結果を提供します。これにより、パイプラインの障害をトラブルシュートし、パフォーマンスのボトルネックに対処し、CI のパフォーマンスと信頼性を長期的に追跡するのに役立ちます。
 
 ## セットアップ
 
 {{< whatsnext desc="Datadog で Pipeline Visibility を設定するための CI プロバイダーを選択します。" >}}
-    {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
+ {{< nextlink href="continuous_integration/pipelines/awscodepipeline" >}}AWS CodePipeline{{< /nextlink >}}
+{{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}    {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/github" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/teamcity" >}}TeamCity{{< /nextlink >}}
+ {{< nextlink href="continuous_integration/pipelines/custom" >}}その他の CI プロバイダー{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}カスタムコマンド{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}カスタムタグとメトリクス{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}カスタムタグと測定値{{< /nextlink >}}
 {{< /whatsnext >}}
+
+### 用語
+
+CI パイプラインの概念はプロバイダーによって異なる場合がありますが、Datadog Pipeline Visibility での CI パイプラインの定義とそれらの概念がどのように対応しているかを確認してください。
+
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
+
+| Datadog  | GitHub Actions |
+|----------|----------------|
+| パイプライン | ワークフロー       |
+| ジョブ      | ジョブ            |
+| 手順     | 手順           |
+
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| パイプライン                   | パイプライン |
+| ステージ                      | ステージ    |
+| ジョブ                        | ジョブ      |
+| _Datadog では利用不可_ | スクリプト   |
+
+{{% /tab %}}
+{{% tab "Jenkins" %}}
+
+| Datadog  | Jenkins  |
+|----------|----------|
+| パイプライン | パイプライン |
+| ステージ    | ステージ    |
+| ジョブ      | 手順     |
+
+{{% /tab %}}
+{{% tab "CircleCI" %}}
+
+| Datadog                    | CircleCI  |
+|----------------------------|-----------|
+| パイプライン                   | ワークフロー  |
+| ジョブ                        | ジョブ       |
+| _Datadog では利用不可_ | 手順      |
+
+{{% /tab %}}
+{{% tab "Buildkite" %}}
+
+| Datadog                    | Buildkite |
+|----------------------------|-----------|
+| パイプライン                   | パイプライン  |
+| ジョブ                        | ジョブ       |
+| _Datadog では利用不可_ | 手順      |
+
+{{% /tab %}}
+{{% tab "TeamCity" %}}
+
+| Datadog                    | TeamCity    |
+|----------------------------|-------------|
+| パイプライン                   | ビルドチェーン |
+| ジョブ                        | ビルド       |
+| _Datadog では利用不可_ | 手順        |
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+| Datadog                    | Azure Pipelines |
+|----------------------------|-----------------|
+| パイプライン                   | パイプライン        |
+| ステージ                      | ステージ           |
+| ジョブ                        | ジョブ             |
+| _Datadog では利用不可_ | 手順            |
+
+{{% /tab %}}
+{{% tab "AWS CodePipeline" %}}
+
+| Datadog  | AWS CodePipeline |
+|----------|------------------|
+| パイプライン | パイプライン         |
+| ステージ    | ステージ            |
+| ジョブ      | アクション           |
+
+{{% /tab %}}
+
+{{% tab "その他の CI プロバイダー" %}}
+
+| Datadog  | その他の CI プロバイダー |
+|----------|--------------------|
+| パイプライン | パイプライン           |
+| ステージ    | ステージ              |
+| ジョブ      | ジョブ                |
+| 手順     | 手順               |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 CI プロバイダーが対応していない場合は、[公開 API エンドポイント][2]から Pipeline Visibility を設定してみてください。
 
-## パイプラインの確認
+### サポートされる機能
 
-パイプラインを確認するには、**CI** > **Pipelines** に移動します。
-
-## パイプラインの健全性の概要
-
-Pipelines ページには、選択した時間枠での各パイプラインのデフォルトブランチの集計統計と、最新のパイプライン実行のステータスが表示されます。このページを使用して、すべてのパイプラインを確認し、その健全性をすばやく確認します。Pipelines ページには、通常は `main` や `prod` などの名前が付けられた_デフォルト_ブランチのメトリクスが表示されます。
-
-表示されるメトリクスには、ビルド頻度、失敗率、平均期間、95 パーセンタイル期間が含まれます。この情報は、どのパイプラインが使用率が高く、潜在的にリソースの消費量が多いかを明らかにします。最後のビルド結果、期間、最後の実行時間は、最後のコミットの効果を示します。
-
-パイプライン名でページをフィルタリングして、最も関心のあるパイプラインを確認できます。遅延または障害が発生しているパイプラインをクリックすると、パフォーマンスの低下やビルドエラーを引き起こした可能性のあるコミットが表示されます。
-
-## パイプラインの詳細とブランチ
-
-特定のパイプラインをクリックすると、_Pipeline Details_ ページが表示されます。このページには、指定した時間枠で選択したパイプラインのデータのビューが表示され、デフォルト以外のブランチを表示できます。
-
-{{< img src="ci/pipeline_branch_overview_updated.png" alt="単一パイプラインの詳細" style="width:100%;">}}
-
-時間の経過に伴う実行の合計と失敗、ビルド期間のパーセンタイル、ステージごとの内訳に費やされた合計時間など、選択したパイプラインに関する情報を取得します。ステージとジョブの要約テーブルもあるため、期間、全体的な実行時間の割合、または失敗率の観点からそれらをすばやく並べ替えることができます。
-
-パイプラインの_デフォルト_ブランチを表示すると、ページ上の各ステージとジョブのサマリーテーブルに、ステージとジョブの期間の絶対的および相対的な変化を視覚化する _Duration Change_ グラフと、_Errored Executions_ のグラフが表示されます。
-
-{{< img src="ci/pipeline_job_summary_duration_change.png" alt="ジョブサマリーテーブル" style="width:100%;">}}
-
-パイプラインのフィーチャーブランチを表示する際、_Errored Executions_ のグラフが 2 つ表示されます。1 つはこのフィーチャーブランチでの実行に失敗したもの、もう 1 つはこのブランチの失敗を他の失敗と比較するものです。`Other Branches` と `Specific Branch` を切り替えるオプションがあります。`Other Branches` を選択すると、このフィーチャーブランチの実行失敗を他のすべてのブランチの失敗と集計して比較し、導入された (ローカル) 実行失敗と継承された (グローバル) 実行失敗を区別することができます。`Specific Branch` に追跡すると、このフィーチャーブランチの実行失敗と選択した別のブランチの実行失敗を直接比較し、パイプラインのパフォーマンスの変化を具体的に追跡するのに役立ちます。
-
-オプションで、このフィーチャーブランチでの実行失敗と、選択した別のブランチでの実行失敗を直接比較することも可能です。
-
-{{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="ステージサマリーテーブル" style="width:100%;">}}
-
-下部のパイプライン実行リストには、選択したブランチについて、選択した時間枠内にパイプライン (またはそのステージまたはジョブ) が実行されたすべての時間が表示されます。左側のファセットを使用して、表示するパイプライン、ステージ、またはジョブにリストを正確にフィルタリングします。
-
-### サービス、リソース、ネットワークイベントへの接続を確認する
-
-実行の 1 つをクリックしてパイプライン実行ビューを開き、パイプラインとそのステージのフレームグラフまたはスパンリストを表示します。左側の _Executions (n)_ リストを使用すると、同じコミットでパイプラインを再試行するたびにデータにすばやくアクセスできます。
-
-CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > documentation`) をクリックして、パイプライン、ステージ、またはジョブの Resource、Service、または Analytics ページを具体的に調べます。また、完全なタグ情報と、ネットワーク監視イベントへのリンクもあります。
-
-{{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行のトレース情報" style="width:100%;">}}
-
-### ログへの接続を確認する
-
-CI プロバイダーでジョブログ収集がサポートされ、有効になっている場合、関連するログイベントはパイプライン実行ビューの _Logs_ タブで確認できます。
-
-**注**: ジョブログの収集は、限られたプロバイダーのみでサポートされています。
-- [GitHub Actions][3]
-- [GitLab][4] (ベータ版)
-- [Jenkins][5]
-
-## パイプライン実行の詳細とトレース
-
-[Pipeline Executions][6] ページで、選択した時間枠でのパイプラインの実行に関する集計データを確認できます。検索フィールドとファセットを使用して、調査したい実行までリストをスコープします。上部のボタンを使用して、リストを変更してパイプライン、ステージ、またはジョブを表示します。
-
-以下は、最もアクティブなパイプラインの継続時間、失敗したパイプラインの継続時間、パイプラインの実行時間を可視化する 3 つのグラフで、それぞれ継続時間の累積に切り替えるオプションがあります。これらのグラフは左上で選択したレベル (`Pipeline`、`Stage`、`Job` など) にスコープされます。
-
-{{< img src="ci/pipeline_explorer_trends.png" alt="エクスプローラービューのトレンドグラフ" style="width:100%;">}}
-
-各パイプラインの実行は、ステージとジョブの情報を含むトレースとして報告されます。リスト内の実行をクリックして、個々のパイプライン、ステージ、ジョブ実行トレースにアクセスします (Pipeline Details ページからパイプラインの実行をクリックするのと同様)。
-
-または、[**Analytics**][7] ボタンをクリックして、パイプライン実行データをインタラクティブにフィルタリング、グループ化すれば、質問への回答やダッシュボードでの共有に使用することができます。
-
-{{< img src="ci/ci-pipelines-execution.png" alt="パイプライン実行の分析" style="width:100%;">}}
+|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS CodePipeline | その他の CI プロバイダー |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| {{< ci-details title="パイプライントレースの可視化" >}}パイプライン実行と関連するトレースの可視化。{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< ci-details title="実行中のパイプライン" >}}稼働中のパイプライン実行の識別と関連するトレース。{{< /ci-details >}} | | {{< X >}} | | | {{< X >}} | | | | {{< X >}} |
+| {{< ci-details title="部分再試行" >}}部分再試行の識別 (例えば、ジョブの一部のみが再試行された場合)。{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
+| {{< ci-details title="ステップスパン" >}}ステップレベルのスパンは、より詳細な可視性を得るために利用できます。{{< /ci-details >}} | {{< X >}} (_ただし、ジョブスパンとして表示されます_) |  |  |  | {{< X >}} |  | {{< X >}} |  |  |  {{< X >}} |
+| {{< ci-details title="手動ステップ" >}}パイプライン全体に手動承認フェーズがあるジョブの識別。{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  {{< X >}} |
+| {{< ci-details title="承認待ち時間" >}}パイプラインまたはジョブが手動承認を待っている時間。{{< /ci-details >}} |  | {{< X >}} |  |  |  {{< X >}}  | {{< X >}}  |   |  | {{< X >}} |  |
+| {{< ci-details title="キュー時間" >}}パイプラインまたはジョブが実行前にキューにあった時間。{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  {{< X >}} |
+| {{< ci-details title="実行時間" >}}パイプラインがジョブをアクティブに稼働した時間。{{< /ci-details >}} | | {{< X >}} | | | | | | | | |
+| {{< ci-details title="ログの相関付け" >}}CI プロバイダーからのパイプラインまたはジョブのログの取得。ログは、パイプライン実行ビューの <strong>Logs</strong> タブに表示されます。{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  | {{< X >}} |  |
+| {{< ci-details title="インフラストラクチャーメトリクスの相関付け" >}}Datadog Agent、CI パイプライン、またはジョブランナーのホストレベルの情報を CI パイプラインの実行データと相関付け。{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  |  |  |  |
+| {{< ci-details title="datadog-ci を使用したトレースコマンドのカスタムスパン" >}}パイプラインのフレームグラフによる視覚化に組み込むために、コマンドレベルイベントの CI Visibility への送信をサポート。その後、<a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_commands/">これらのイベント</a>のクエリと分析が可能になります。{{< /ci-details >}} | {{< X >}} |  | {{< X >}} |  |  |  |  |  |  |  |
+| {{< ci-details title="カスタム事前定義タグ" >}}CI プロバイダーで、実行間で変化しない静的なパイプラインタグの設定をサポート。{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  |  |  |
+| {{< ci-details title="カスタムタグとランタイムの測定値" >}}CI Visibility で、<a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/">テキストと数字で構成されたユーザー定義タグ</a>のパイプラインおよびジョブへの追加をサポート。{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  {{< X >}} |
+| {{< ci-details title="パラメーター" >}}ユーザーが設定したカスタムパイプラインパラメーター (例: <code>DYNAMICS_IS_CHILD:true</code>) の追加をサポート。その後、<a href="https://docs.datadoghq.com/continuous_integration/explorer/?tab=pipelineexecutions">CI Visibility Explorer</a> でこれらのパラメーターを使って検索を行い、特定のパラメーターを持つすべてのイベントを見つけることができます。{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} |  |  |  {{< X >}} |
+| {{< ci-details title="パイプラインの失敗理由" >}}パイプラインやジョブの失敗の背後にある具体的な理由の特定。{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
 
 ## CI パイプラインデータの使用
 
@@ -107,20 +164,15 @@ CI プロバイダーでジョブログ収集がサポートされ、有効に�
 
 ## パイプラインデータのアラート
 
-**Export** ボタンをクリックすると、[**Pipelines Executions** ページ][6]または [**Test Runs** ページ][13]の [CI Pipeline モニター][12]に検索クエリをエクスポートできます。
+**Export** ボタンをクリックすると、[**Executions** ページ][6]または [**Test Runs** ページ][13]の [CI Pipeline モニター][12]に検索クエリをエクスポートできます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/ci/pipelines
 [2]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
-[3]: /ja/continuous_integration/pipelines/github/#enable-log-collection
-[4]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
-[5]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: https://app.datadoghq.com/ci/pipeline-executions
-[7]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list
 [10]: /ja/dashboards

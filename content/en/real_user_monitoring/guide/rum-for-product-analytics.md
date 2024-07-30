@@ -1,6 +1,6 @@
 ---
 title: Use RUM & Session Replay for Product Analytics
-kind: guide
+
 description: Learn how to use RUM & Session Replay to monitor trends in user behavior and feature adoption.
 further_reading:
 - link: '/real_user_monitoring/explorer/'
@@ -9,7 +9,7 @@ further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn how to visualize your RUM data'
-- link: '/real_user_monitoring/frustration_signals'
+- link: '/real_user_monitoring/browser/frustration_signals/'
   tag: 'Documentation'
   text: 'Learn about frustration signals'
 - link: '/real_user_monitoring/session_replay'
@@ -28,13 +28,13 @@ This guide discusses several use cases to enrich your RUM & Session Replay data 
 
 ## Setup
 
-Once you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
+After you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
 
 ## Monitor page traffic and feature usage
 
 If you are interested in learning what buttons your users click on the most, you can track page traffic and the usage of buttons in your application. 
 
-1. Navigate to the [RUM Explorer][5] and select **Actions** from the dropdown menu next to the search query. 
+1. In the [RUM Explorer][5], select **Actions** from the dropdown menu next to the search query. 
 2. Enter `@view.name:/cart` in the search query and select the **Top List** visualization type.
 3. In the `by` field of the `Group into fields` section above, select **Action Name** from the group dropdown.
 
@@ -123,15 +123,15 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
-[3]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#enrich-user-sessions
 [4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /real_user_monitoring/funnel_analysis/
+[6]: /product_analytics/journeys/funnel_analysis
 [7]: /real_user_monitoring/explorer/saved_views/
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/
-[10]: /real_user_monitoring/frustration_signals/
-[11]: /real_user_monitoring/session_replay/
+[10]: /real_user_monitoring/browser/frustration_signals/
+[11]: /real_user_monitoring/session_replay/browser/
 [12]: /dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists

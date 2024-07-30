@@ -1,6 +1,6 @@
 ---
 title: Surveillance de la redirection HTTPS des requêtes HTTP
-kind: guide
+
 further_reading:
   - link: /synthetics/api_tests/http_tests
     tag: Documentation

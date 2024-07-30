@@ -5,6 +5,7 @@ assets:
   dashboards:
     Red Hat Gluster Storage: assets/dashboards/red_hat_gluster_storage.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
     - gluster
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10145
     source_type_name: GlusterFS
   logs:
     source: glusterfs
@@ -31,7 +33,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md
@@ -40,12 +42,11 @@ draft: false
 git_integration_title: glusterfs
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
-integration_version: 1.5.1
+integration_version: 1.7.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: glusterfs
-oauth: {}
 public_title: Red Hat Gluster Storage
 short_description: GlusterFS クラスターノード、ボリューム、ブリックステータスのメトリクスを監視します。
 supported_os:
@@ -54,7 +55,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   configuration: README.md#Setup
   description: GlusterFS クラスターノード、ボリューム、ブリックステータスのメトリクスを監視します。
@@ -64,6 +65,7 @@ tile:
   title: Red Hat Gluster Storage
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -71,16 +73,16 @@ tile:
 このチェックは、Datadog Agent を介して [RedHat Gluster Storage][1] クラスターの状態、ボリューム、ブリックステータスを監視します。
 この GlusterFS インテグレーションは、RedHat ベンダーバージョンとオープンソースバージョンの GlusterFS の両方と互換性があります。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 GlusterFS チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. GlusterFS のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `glusterfs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル glusterfs.d/conf.yaml][4] を参照してください。
 
@@ -117,7 +119,7 @@ GlusterFS チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 2. [Agent を再起動します][6]。
 
-#### ログの収集
+#### 収集データ
 
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
@@ -148,28 +150,28 @@ Kubernetes 環境でのログ収集のための Agent の構成については�
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `glusterfs` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "glusterfs" >}}
 
 
-### イベント
+### ヘルプ
 
 GlusterFS には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "glusterfs" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://www.redhat.com/en/technologies/storage/gluster
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example
 [5]: https://github.com/gluster/gstatus#install
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

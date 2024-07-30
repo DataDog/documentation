@@ -3,6 +3,7 @@ app_id: zenduty
 app_uuid: 0f2dea25-5757-477c-ad92-d459133d8b05
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: zenduty.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10305
     source_type_name: Zenduty
 author:
   homepage: https://www.zenduty.com
@@ -20,10 +22,10 @@ author:
   support_email: shubham@zenduty.com
 categories:
 - アラート設定
-- 問題追跡
 - コラボレーション
-- notification
-- モニタリング
+- インシデント
+- 問題追跡
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zenduty/README.md
 display_on_public_website: true
@@ -33,28 +35,27 @@ integration_id: zenduty
 integration_title: Zenduty
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: zenduty
-oauth: {}
 public_title: Zenduty
 short_description: Datadog アラートのインシデントレスポンスおよび通知パートナーとして Zenduty を使用する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Offering::Integration
   - Category::Alerting
-  - Category::Issue Tracking
   - Category::Collaboration
-  - Category::Notification
-  - Category::Monitoring
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog アラートのインシデントレスポンスおよび通知パートナーとして Zenduty を使用する
   media:
@@ -78,6 +79,7 @@ tile:
   title: Zenduty
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Zenduty インテグレーションを使用して、Datadog アラートを適切なチームに送信し、オンコールスケジュールに従って通知し、インシデントを迅速に修復して解決できるようにします。メール、Slack、Microsoft Teams、SMS、電話、Android、iOS のプッシュメッセージで通知を送信します。
@@ -87,7 +89,7 @@ Zenduty と Datadog を接続することで、以下のことが可能になり
 - オンコールスケジュール、エスカレーションポリシー、インシデントプレイブック、ポストモーテム、詳細分析のデプロイメント
 - アラートルールを使用して、特定のユーザーやチームへの Datadog アラートのルーティングをカスタマイズし、抑制ルールを記述して、メモ、対応者、インシデントタスクを自動的に追加する
 
-## セットアップ
+## 計画と使用
 
 ### Zenduty
 [Zenduty][1] では、以下の手順で操作してください。
@@ -125,20 +127,20 @@ Zenduty と Datadog を接続することで、以下のことが可能になり
 
 **注**: Datadog のインシデントが作成または解決されたときに Zenduty を通してアラートを受け取るには、Datadog モニターの構成で **Notify your team** の下に `@zenduty` をチャンネルとして記載してください。
 
-## 収集データ
-### メトリクス
+## リアルユーザーモニタリング
+### データセキュリティ
 
 Zenduty インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 トリガーされたイベント、承認されたイベント、解決されたイベントは Zenduty のダッシュボードに表示されます。
 
-### サービスのチェック
+### ヘルプ
 
 Zenduty インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://www.zenduty.com

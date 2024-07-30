@@ -1,6 +1,5 @@
 ---
 title: APM Troubleshooting
-kind: documentation
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
@@ -55,13 +54,13 @@ Datadog truncates the following strings if they exceed the indicated number of c
 | type         |  100       |
 | [resource][7]   |  5000      |
 | [tag key][8]    |  200       |
-| [tag value][8]  |  5000      |
+| [tag value][8]  |  25000     |
 
 Additionally, the number of [span tags][8] present on any span cannot exceed 1024.
 
 For a given 40 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
-- 1000 unique environments and service combinations
+- 5000 unique environments and service combinations
 - 30 unique [second primary tag][16] values per environment
 - 100 unique operation names per environment and service
 - 1000 unique resources per environment, service, and operation name
@@ -108,6 +107,16 @@ Second primary tags are additional tags that you can use to group and aggregate 
 Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
 
  For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
+
+### Missing error message and stack trace
+
+In some traces with an error status, the **Errors** tab shows `Missing error message and stack trace` rather than exception details. 
+
+A span can show this message for two possible reasons:
+- The span contains an unhandled exception.
+- An HTTP response within the span returned an HTTP status code between 400 and 599.
+
+When an exception is handled in a try/catch block, `error.msg`, `error.type`, and `error.stack` span tags are not populated. To populate the detailed error span tags, use [Custom Instrumentation][18] code.
 
 ## Troubleshooting data requested by Datadog Support
 
@@ -165,7 +174,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [5]: /tracing/troubleshooting/tracer_debug_logs/
 [6]: /tracing/glossary/#services
 [7]: /tracing/glossary/#resources
-[8]: /tracing/glossary/#span-tags
+[8]: /glossary/#span-tag
 [9]: /tracing/troubleshooting/agent_rate_limits
 [10]: /tracing/troubleshooting/agent_apm_resource_usage/
 [11]: /tracing/custom_instrumentation/agent_customization
@@ -175,3 +184,4 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [15]: /tracing/compatibility_requirements/
 [16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [17]: /tracing/guide/setting_primary_tags_to_scope/
+[18]: /tracing/trace_collection/custom_instrumentation/?tab=datadogapi

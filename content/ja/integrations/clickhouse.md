@@ -5,6 +5,7 @@ assets:
   dashboards:
     ClickHouse Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: clickhouse.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10078
     source_type_name: ClickHouse
   logs:
     source: clickhouse
@@ -25,7 +27,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - キャッシュ
-- data store
+- data stores
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
@@ -34,12 +36,11 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 2.8.3
+integration_version: 3.5.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: clickhouse
-oauth: {}
 public_title: ClickHouse
 short_description: ClickHouse クラスターの健全性とパフォーマンスを監視。
 supported_os:
@@ -50,7 +51,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
@@ -63,28 +64,29 @@ tile:
   title: ClickHouse
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [ClickHouse][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 ClickHouse チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 #### メトリクスの収集
 
@@ -92,7 +94,7 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 2. [Agent を再起動します][2]。
 
-##### ログの収集
+##### 収集データ
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -117,7 +119,7 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 [1]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/datadog_checks/clickhouse/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -127,11 +129,11 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<インテグレーション名>` | `clickhouse`                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
+| `<INTEGRATION_NAME>` | `clickhouse`                                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -148,28 +150,28 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、**Checks** セクションで `clickhouse` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "clickhouse" >}}
 
 
-### イベント
+### ヘルプ
 
 ClickHouse チェックにはイベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "clickhouse" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 
 [1]: https://clickhouse.yandex
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

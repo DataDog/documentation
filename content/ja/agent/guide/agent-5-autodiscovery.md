@@ -1,10 +1,10 @@
 ---
-title: Agent v5 を使用したオートディスカバリー
-kind: ガイド
-private: true
 aliases:
-  - /ja/agent/faq/agent-5-autodiscovery
+- /ja/agent/faq/agent-5-autodiscovery
+private: true
+title: Agent v5 を使用したオートディスカバリー
 ---
+
 <div class="alert alert-info">
 オートディスカバリーは、これまでのサービスディスカバリーのことです。Agent のコード内や一部の構成オプションでは、引き続きサービスディスカバリーと呼びます。
 </div>
@@ -236,7 +236,6 @@ Kubernetes ポッドを直接定義する (`kind: Pod`) 場合は、各ポッド
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -259,7 +258,6 @@ Deployment からポッドを定義する場合は、テンプレートアノテ
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # ここにテンプレートを追加しないでください
   name: apache-deployment
 spec:
@@ -334,7 +332,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
   - `%%host_<NETWORK NAME>%%`: 複数のネットワークにアタッチされている場合に、`%%host_bridge%%`、`%%host_swarm%%` など使用するネットワーク名を指定します。指定されたネットワーク名が見つからない場合は、`%%host%%` と同様に動作します。
 
 - コンテナポート: `port`
-  - `%%port%%`: 公開ポートを**数値として昇順にソート**した場合に最大のポートが使用されます。たとえば、ポート 80、443、8443 を公開しているコンテナの場合は、ポート 8443 が使用されます。
+  - `%%port%%`: 公開ポートを**数値として昇順にソート**した場合に最大のポートが使用されます (例えば、ポート 80、443、8443 を公開しているコンテナの場合は、ポート 8443 が使用されます)
   - `%%port_0%%`: ポートを**数値として昇順にソート**した場合に最初のポートが使用されます。前述のコンテナの場合、`%%port_0%%` はポート 80、`%%port_1%%` はポート 443 を表します。
   - 使用するポートが変わらない場合、Datadog では`port` 変数を使用しないでポートを直接指定することをお勧めしています。
 
@@ -407,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[22]: /ja/agent/configuration/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

@@ -33,10 +33,9 @@ integration_id: purefb
 integration_title: Pure Storage FlashBlade
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: purefb
-oauth: {}
 public_title: Pure Storage FlashBlade
 short_description: Surveiller les performances et l'utilisation de stockages Pure Storage FlashBlade
 supported_os:

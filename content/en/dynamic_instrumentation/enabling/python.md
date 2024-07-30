@@ -1,9 +1,8 @@
 ---
 title: Enable Dynamic Instrumentation for Python
-kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/python/
-is_beta: true
+is_beta: false
 private: false
 code_lang: python
 type: multi-code-lang
@@ -16,10 +15,13 @@ further_reading:
 
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
 
+## Prerequisites
+
+Recommended, [autocomplete and search (open beta)][6] is enabled.
+
 ## Installation
 
-
-1. Install or upgrade your Agent to version [7.44.0][2] or higher.
+1. Install or upgrade your Agent to version [7.45.0][2] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Install `ddtrace`, which provides both tracing and Dynamic Instrumentation:
@@ -28,7 +30,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
    pip install ddtrace
    ```
 
-   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 1.15.0 and higher.
+   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 2.2.0 and higher.
 
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
 {{< tabs >}}
@@ -81,3 +83,4 @@ See [Dynamic Instrumentation][5] for information about setting snapshot and metr
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
+[6]: /dynamic_instrumentation/symdb/

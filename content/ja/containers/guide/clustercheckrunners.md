@@ -12,7 +12,6 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: ドキュメント
   text: クラスターチェック
-kind: documentation
 title: クラスターチェックランナー
 ---
 

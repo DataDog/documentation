@@ -4,7 +4,7 @@ aliases:
 - /ja/guides/markdown/
 - /ja/events
 further_reading:
-- link: /api/v1/events/
+- link: '#post-an-event'
   tag: Documentation
   text: Datadog イベント API
 - link: /service_management/events/guides/recommended_event_tags/
@@ -13,58 +13,34 @@ further_reading:
 - link: https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/
   tag: ブログ
   text: 機密データスキャナーでイベントの機密データを特定し、編集する
-kind: documentation
-title: イベント
+- link: https://app.datadoghq.com/event/configuration/quick-start
+  tag: App
+  text: クイックスタートガイド
+is_beta: true
+title: イベント管理
 ---
 
-{{< img src="service_management/events/events_explorer.png" alt="イベントエクスプローラー表示" >}}
+{{< site-region region="us3,us5,gov" >}}
+<div class="alert alert-warning">Event Management はこのサイトではサポートされていません。</div>
+{{< /site-region >}}
 
-## はじめに
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeYkh0jFy_wMCLGKZ5019H0DpFvq0fILvyJEt_gRyeGgvRymA/viewform" btn_hidden="false" header="ベータ版に参加しよう">}}
+イベント管理のベータ版に参加して、Datadog とサードパーティのアラートとの相関付けを行い、イベントを実用的なインサイトに変え、調査を一元化し、重大な問題をチームとしてより迅速に管理しましょう。詳しくは、 <a href="https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#event-management">発表</a>をご覧ください。
+{{< /callout >}}
 
-_イベント_とは、コードのデプロイメント、サービスの健全性、構成変更、監視アラートなど、IT 運用の管理およびトラブルシューティングに関連する注目すべき変化の記録です。
+## 概要
 
-Datadog Events は、あらゆるソースからのイベントを一箇所で検索、分析、フィルタリングするための統合インターフェイスを提供します。
+あらゆるソースからイベントを取り込み、リッチ化・正規化して、関連付け (公開ベータ版を参照) を行い、実用的なインサイトを得ることができます。Datadogは、モニター、Watchdog、エラー追跡を含むさまざまな製品から自動的にイベントを作成します。Agent とインストールされたインテグレーションから生成されたイベントも追跡できます。また、イベント管理では、サードパーティのアラートイベント、変更リクエスト、デプロイ、構成変更など、さまざまなソースからイベントを取り込むことができます。
 
-追加設定なしで、Datadog Events は、Agent とインストールされたインテグレーションによって収集されるイベントを自動的に収集します。
+[Kubernetes][1]、[Docker][2]、[Jenkins][3]、[Chef][4]、[Puppet][5]、[Amazon ECS][6] または [Autoscaling][7]、[Sentry][8]、[Nagios][9] など 100 以上の Datadog インテグレーションがイベント収集をサポートしています。
 
-[Kubernetes][1]、[Docker][2]、[Jenkins][3]、[Chef][4]、[Puppet][5]、[AWS ECS][6] または [Autoscaling][7]、[Sentry][8]、[Nagios][9] など 100 以上の Datadog インテグレーションがイベント収集をサポートしています。
+## コンポーネント
 
-## Datadog にカスタムイベントを送信する
-
-[Datadog API][10]、[Custom Agent Check][11]、[DogStatsD][12]、または [Events Email API][13] を使って、独自のカスタムイベントを送信することも可能です。
-
-## Datadog Events の確認
-
-### イベントエクスプローラーと分析
-
-[イベントエクスプローラー][14]を使用して、Datadog に流入するイベントを集計・表示します。イベントを属性でグループ化またはフィルタリングし、[イベント分析][15]でグラフィカルに表現します。[クエリ構文][16]を使用して、ブール演算子やワイルドカード演算子を使用してイベントをフィルタリングします。
-
-{{< img src="service_management/events/events-explorer.mp4" alt="イベントを属性でソートし、分析結果を調べる" video=true >}}
-
-### ダッシュボードウィジェットのソースとしてのイベント
-
-[グラフウィジェット][17]でイベントをデータソースとして利用することができます。イベント検索クエリの時系列、表、上位リストウィジェットを構築することができます。
-
-{{< img src="service_management/events/events-dashboard.mp4" alt="イベントをソースとするグラフウィジェット" video=true >}}
-
-例えば、[Monitor Notifications Overview][18] ダッシュボードは、モニターアラートイベントの傾向を分析し、構成の改善とアラートの疲労を軽減するのに役立ちます。
-
-### イベントからカスタムメトリクスを生成 
-
-イベント検索クエリから 15 ヶ月間保持される[メトリクスを生成][15]し、過去のイベントやアラートを作成、監視します。
-
-{{< img src="service_management/events/generate-metrics.png" alt="イベント検索クエリによるメトリクスのイメージ。" >}}
-
-### 処理パイプラインによるイベントの正規化およびリッチ化
-
-_プロセッサー_は、イベント属性が取り込まれると、その属性に対してデータ構造化アクションを実行します。_パイプライン_は、1 つまたは複数のプロセッサーを順番に実行することで構成されます。イベント処理パイプラインを使用すると、以下のことが可能になります。
-
-- 属性の再マッピングにより、異なるイベントのソースを正規化する。例えば、予約済みの[サービスタグ][19]をどこでも同じように使用します。
-- [Reference Table][20] に保存された外部データでイベントをリッチ化する (ベータ版)。例えば、サービス名とサービスディレクトリを対応させ、チームの所有者情報、ダッシュボードへのリンク、ドキュメントへのリンクでイベントをリッチ化することができます。
-
-イベント処理パイプラインの追加と構成は、イベント管理の [Enrich & Normalize][21] タブを参照してください。さらにサポートが必要な場合は、Datadog [サポート][22]にお問い合わせください。
-
-[処理パイプラインの詳細はこちら][23]。
+{{< whatsnext desc="イベント管理の機能:">}}
+    {{< nextlink href="/service_management/events/ingest/" >}}<u>イベントの取り込み</u> - Datadog にイベントを送信する方法について{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/" >}}<u>イベントエクスプローラー</u> - Datadog に集まるイベントの集約と表示{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/usage/" >}}<u>イベントの利用</u> - イベントの分析、調査、監視 {{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## その他の参考資料
 
@@ -80,17 +56,3 @@ _プロセッサー_は、イベント属性が取り込まれると、その属
 [7]: /ja/integrations/amazon_auto_scaling/#events
 [8]: /ja/integrations/sentry/
 [9]: /ja/integrations/nagios/#events
-[10]: /ja/api/latest/events/#post-an-event
-[11]: /ja/service_management/events/guides/agent/
-[12]: /ja/service_management/events/guides/dogstatsd/
-[13]: /ja/service_management/events/guides/email/
-[14]: /ja/service_management/events/explorer/
-[15]: /ja/service_management/events/explorer/#event-analytics
-[16]: /ja/logs/explorer/search_syntax/
-[17]: /ja/dashboards/widgets/alert_graph/
-[18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
-[19]: /ja/getting_started/tagging/unified_service_tagging/
-[20]: /ja/integrations/guide/reference-tables/
-[21]: https://app.datadoghq.com/event/pipelines
-[22]: /ja/help/
-[23]: /ja/logs/log_configuration/processors/

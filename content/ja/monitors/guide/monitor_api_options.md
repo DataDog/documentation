@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: モニター API オプション
 ---
 
@@ -20,7 +19,7 @@ title: モニター API オプション
 
 -  **`require_full_window`** このモニターがウィンドウ全体のデータを取得するまで評価を行わないかどうかを示すブール値。疎なメトリクスの場合は `False` に設定することをお勧めします。そうしないと、一部の評価がスキップされます。デフォルト: **False**
 - **`renotify_interval`** モニターが最後に通知してから現在のステータスを再通知するまでの分数。これは、回復していないことを再通知するだけです。デフォルト: **null**。
-- **`renotify_statuses`** モニターが再通知する状態。`renotify_interval` が設定されている場合にのみ設定できます。デフォルト: **null**。`renotify_states` が設定されていない場合、` Alert` および `NoData` 状態から再通知します。
+- **`renotify_statuses`** モニターが再通知する状態。デフォルト: `renotify_interval` が **null** の場合は *null*。`renotify_interval` が設定されている場合、デフォルトは `Alert` と `No Data` で再通知します。
 - **`renotify_occurrences`** モニターが再通知する回数。`renotify_interval` が設定されている場合にのみ設定できます。デフォルト: **null**、無制限に再通知します。
 - **`escalation_message`** 再通知に含めるメッセージ。他の場所と同様に '@username' 通知をサポートします。`renotify_interval` が `null` の場合は適用されません。デフォルト: **null**。
 - **`notify_audit`** タグ付けされたユーザーに、このモニターへの変更が通知されるかどうかを示すブール値。デフォルト: **False**

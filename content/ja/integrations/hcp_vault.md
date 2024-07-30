@@ -5,6 +5,7 @@ assets:
   dashboards:
     HCPVault Overview: assets/dashboards/hcp_vault_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: hcp_vault.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10223
     source_type_name: HCPVault
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -30,10 +32,9 @@ integration_id: hcp-vault
 integration_title: HCP Vault
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: hcp_vault
-oauth: {}
 public_title: HCP Vault
 short_description: HCP Vault のインテグレーションにより、Vault クラスターの概要がわかります。
 supported_os:
@@ -54,6 +55,7 @@ tile:
   title: HCP Vault
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -64,9 +66,9 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 
 メトリクスの範囲と解釈の詳細については、HCP Vault メトリクスガイダンス][1]を参照してください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 以下の構成方法に従ってください。
 
@@ -75,7 +77,7 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 - Datadog リージョンと [Datadog API キー][2]
 - HCP で割り当てられた Admin または Contributor [ロール][3]を持つアカウント
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 メトリクスストリーミングを有効にするには
 
@@ -95,22 +97,23 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 **注**: HCP Vault は、一度に 1 つのメトリクスエンドポイントへのメトリクスストリーミングのみをサポートしています。
 
 6. Datadog に移動し、インテグレーションタイルの Install をクリックして、インテグレーションを有効にします。これにより、HCP Vault のテレメトリを最大限に活用するウィジェットを備えた HCP Vault ダッシュボードがインストールされます。ダッシュボード一覧で「HCP Vault Overview」を検索すると、ダッシュボードを見つけることができます。
+   **注**: ダッシュボードで `cluster` と `project_id` の値を指定して、適切なクラスターのメトリクスを選択します。`cluster` はクラスター作成時に設定したクラスター名です。`project_id` は HCP ポータルの URL `https://portal.cloud.hashicorp.com/orgs/xxxx/projects/xxxx` に存在するものです。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 メトリクスの範囲と解釈の詳細については、HCP Vault メトリクスガイダンス][1]を参照してください。
 
-### サービスのチェック
+### ヘルプ
 
 HCP Vault インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 HCP Vault インテグレーションには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

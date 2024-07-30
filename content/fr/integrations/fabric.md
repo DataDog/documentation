@@ -1,7 +1,6 @@
 ---
 categories:
 - orchestration
-ddtype: crawler
 dependencies: []
 description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements
   Datadog.
@@ -13,7 +12,7 @@ integration_id: fabric
 integration_title: Fabric
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: fabric
 public_title: Intégration Datadog/Fabric
@@ -22,6 +21,7 @@ short_description: Consultez et recherchez des tâches Fabric depuis votre flux 
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 **Attention** : cette intégration est obsolète et n'est plus activement développée.
@@ -31,9 +31,9 @@ Associez Fabric à Datadog pour :
 - Enregistrer et rechercher des événements de déploiement dans le flux d'événements
 - Corréler les événements de déploiement avec les changements de métriques sur les dashboards
 
-## Configuration
+## Formule et utilisation
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Installez le package dogapi :
 
@@ -63,21 +63,21 @@ Associez Fabric à Datadog pour :
         # do things
     ```
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration Fabric n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration Fabric n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Fabric n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 

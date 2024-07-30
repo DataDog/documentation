@@ -1,6 +1,5 @@
 ---
 description: 데이터베이스 모니터링 설정 트러블슈팅
-kind: 설명서
 title: 데이터베이스 모니터링 트러블슈팅
 ---
 {{< site-region region="gov" >}}

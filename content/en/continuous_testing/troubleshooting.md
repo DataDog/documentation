@@ -1,6 +1,5 @@
 ---
 title: Continuous Testing and CI/CD Troubleshooting
-kind: documentation
 description: Learn about Continuous Testing and CI/CD concepts and troubleshoot common errors.
 aliases:
   - /synthetics/cicd_integrations/troubleshooting
@@ -34,11 +33,11 @@ Batch timeout
 Execution rule
 : An [execution rule][4] defines the impact of a test failure on a CI/CD pipeline from most to least impactful: `skipped`, `non_blocking`, and `blocking`. These options are weighted and default to the most impactful. If your test is configured as `skipped` in the UI and `blocking` in the configuration file, it is skipped during the test run. </br><br> You can set the execution rule in your tests' properties, global configuration file, or an individual test's override file. 
 
-## Explorer
+## Results Explorer
 
 ### CI metadata does not appear
 
-Check whether you are using API endpoints to trigger your CI/CD test runs. In order to populate the CI Results Explorer with CI metadata, you must use one of Datadog's [native integrations][5], or the [NPM package][6].
+Check whether you are using API endpoints to trigger your CI/CD test runs. In order to populate the Synthetic Monitoring & Continuous Testing Results Explorer with CI metadata, you must use one of Datadog's [native integrations][5], or the [NPM package][6].
 
 ## Within your CI/CD pipeline
 

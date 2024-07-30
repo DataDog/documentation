@@ -1,12 +1,11 @@
 ---
 title: Can I set up the dd-agent mysql check on my Google CloudSQL?
-kind: guide
 aliases:
   - /agent/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
   - /integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
 ---
 
-Much like the "Native" [AWS RDS Integration][1] with MySQL, you can set up a Datadog Agent's MySQL integration to monitor on a MySQL instance running in Google CloudSQL. With this setup, you can complement the metrics you would otherwise get from Datadog's [Google CloudSQL Integration][2] with the metrics available from the Datadog Agent's [MySQL integration][3].
+Much like the "Native" [Amazon RDS Integration][1] with MySQL, you can set up a Datadog Agent's MySQL integration to monitor on a MySQL instance running in Google CloudSQL. With this setup, you can complement the metrics you would otherwise get from Datadog's [Google CloudSQL Integration][2] with the metrics available from the Datadog Agent's [MySQL integration][3].
 
 To set up this "extra" integration on your Google CloudSQL instance, you can set up the MySQL integration on a Datadog Agent and [configure it to remotely connect][4] to your Google CloudSQL instance instead of using the localhost default. The setup steps are otherwise the same as any other locally hosted MySQL instance.
 

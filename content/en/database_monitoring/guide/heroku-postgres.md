@@ -1,16 +1,12 @@
 ---
 title: Setting up Heroku Postgres for Database Monitoring
-kind: guide
+
 private: true
 further_reading:
 - link: "/agent/basic_agent_usage/heroku/"
   tag: "Documentation"
   text: "Datadog Heroku Buildpack"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported on {{< region-param key=dd_datacenter >}}.</div>
-{{< /site-region >}}
 
 This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
 

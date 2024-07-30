@@ -5,11 +5,13 @@ assets:
   dashboards:
     F5-Networks: assets/dashboards/f5-networks.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10179
     source_type_name: F5 Networks
 author:
   homepage: https://www.datadoghq.com
@@ -18,7 +20,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ネットワーク
-- notification
+- notifications
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md
@@ -29,10 +31,9 @@ integration_id: snmp-f5
 integration_title: F5 Networks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_f5
-oauth: {}
 public_title: F5 Networks
 short_description: F5 ネットワークデバイスから SNMP メトリクスを収集
 supported_os:
@@ -43,7 +44,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Network
-  - Category::Notification
+  - Category::Notifications
   - Category::SNMP
   - Supported OS::Linux
   - Supported OS::Windows
@@ -56,27 +57,28 @@ tile:
   title: F5 Networks
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 F5 Networks は、アプリケーションデリバリーネットワーキングとセキュリティの企業です。Big IP と LTM プラットフォームを含む F5 デバイスの健全性とパフォーマンスメトリクスを収集します。
 
-## セットアップ
+## 計画と使用
 
 F5 アプライアンスのすべてのメトリクスは、SNMP から収集されます。メトリクスの収集を開始するには、SNMP インテグレーションをインストールし、構成します。詳細と構成オプションについては、[ネットワークデバイスモニタリング][1]のドキュメントを参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 SNMP で収集可能なすべてのメトリクスは、ネットワークデバイスモニタリングのドキュメントの[収集データ][2]に記載されています。F5 アプライアンスから収集されたすべてのメトリクスは、[F5] ネームスペースの下で見つけることができます。
 
-### サービスのチェック
+### ヘルプ
 
 F5 インテグレーションに含まれるサービスチェックはありません。
 
-### イベント
+### ヘルプ
 
 F5 プラットフォームのどのコンポーネントからも、Datadog に追加のイベントが送信されることはありません。
 
@@ -87,9 +89,9 @@ F5 プラットフォームのどのコンポーネントからも、Datadog に
 * [Datadog でデータセンターおよびネットワークデバイスを監視][3]
 * [Datadog による SNMP モニタリング][4]
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/network_monitoring/devices/setup
 [2]: https://docs.datadoghq.com/ja/network_monitoring/devices/data

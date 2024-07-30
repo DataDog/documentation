@@ -20,12 +20,11 @@ integration_id: isdown-isdown
 integration_title: IsDown
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: isdown_isdown
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

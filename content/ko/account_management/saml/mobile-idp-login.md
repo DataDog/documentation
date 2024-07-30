@@ -9,7 +9,6 @@ further_reading:
   tag: 설명서
   text: 여러 계정으로 팀 & 조직 설정하기
 is_public: true
-kind: 설명서
 title: IdP Initiated SAML을 사용하는 Datadog 모바일 앱
 ---
 

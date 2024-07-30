@@ -14,6 +14,7 @@ assets:
     NetApp ESeries SANtricity Performance - Volume Group/Pool by Drive: assets/dashboards/crest_data_systems_NetAppESeriesSANtricity_Performance-VolumeGroup_PoolbyDrive.json
     NetApp ESeries SANtricity Performance - Volume Group/Pool by Volume: assets/dashboards/crest_data_systems_NetAppESeriesSANtricity_Performance-VolumeGroup_PoolbyVolume.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -24,6 +25,7 @@ assets:
       prefix: cds.netapp.eseries.santricity.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10322
     source_type_name: crest_data_systems_netapp_eseries_santricity
 author:
   homepage: https://www.crestdatasys.com
@@ -32,7 +34,7 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- data store
+- data stores
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -42,7 +44,7 @@ integration_id: crest-data-systems-netapp-eseries-santricity
 integration_title: NetApp ESeries SANtricity
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -65,7 +67,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Marketplace
   - Offering::Integration
   - Submitted Data Type::Metrics
@@ -105,24 +107,31 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 このインテグレーションは、NetApp ESeries SANtricity プラットフォームから構成とパフォーマンスの詳細を収集し、重要なメトリクスをキャプチャして、NetApp ESeries SANtricity で構成された配列のパフォーマンスを可視化します。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
 - サポートメール: datadog.integrations@crestdatasys.com
 - 営業メール: datadog-sales@crestdatasys.com
 - Web サイト: [crestdatasys.com][3]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.crestdatasys.com/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[5]: https://www.crestdatasys.com/datadog-integrations-readme/NetApp_ESeries_SANtricity.pdf
+[6]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[8]: https://www.crestdatasys.com/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
+
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-eseries-santricity" target="_blank">こちらをクリック</a>してください。

@@ -6,7 +6,7 @@ aliases:
 categories:
 - aws
 - cloud
-- data store
+- data stores
 - log collection
 - network
 dependencies: []
@@ -29,7 +29,7 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
@@ -41,7 +41,8 @@ short_description: Amazon RDS와 관련된 다양한 메트릭을 추적합니�
 version: '1.0'
 ---
 
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS 대시보드" popup="true">}}
 
 ## 개요
 
@@ -175,7 +176,7 @@ Lambda 함수에 대한 테스트 버튼을 클릭하면 다음 오류가 발생
     | `rds:ListTagsForResource` | RDS 인스턴스에 커스텀 태그를 추가합니다.    |
     | `rds:DescribeEvents`     | RDS 데이터베이스와 관련된 이벤트를 추가합니다. |
 
-3. [Datadog - AWS RDS 통합][4]을 설치합니다.
+3. [Datadog - Amazon RDS 통합][4]을 설치합니다.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/#installation
@@ -193,7 +194,7 @@ Lambda 함수에 대한 테스트 버튼을 클릭하면 다음 오류가 발생
     | `rds:ListTagsForResource` | RDS 인스턴스에 커스텀 태그를 추가합니다.     |
     | `rds:DescribeEvents`     | RDS 데이터베이스와 관련된 이벤트를 추가합니다. |
 
-3. [Datadog - AWS RDS 통합][4]을 설치합니다.
+3. [Datadog - Amazon RDS 통합][4]을 설치합니다.
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -301,9 +302,9 @@ AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일
 
 ### 이벤트 
 
-AWS RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 그룹과 관련된 이벤트가 포함됩니다. 아래 이벤트 예시를 참조하세요:
+Amazon RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 그룹과 관련된 이벤트가 포함됩니다. 아래 이벤트 예시를 참조하세요.
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="AWS RDS Events" >}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Amazon RDS 이벤트" >}}
 
 ### 서비스 점검
 
@@ -317,10 +318,10 @@ AWS RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 
 
 ## 즉시 사용 가능한 모니터링
 
-AWS RDS 통합은 즉시 사용 가능한 모니터링 기능을 제공하여 성능을 모니터링하고 최적화합니다.
+Amazon RDS 통합은 즉시 사용 가능한 모니터링 기능을 제공하여 성능을 모니터링하고 최적화합니다.
 
-- AWS RDS 대시보드: 즉시 사용 가능한 [AWS RDS 대시보드][9]를 사용하여 RDS 인스턴스에 대한 포괄적인 개요를 확인하세요.
-- 권장 모니터: [권장 AWS RDS 모니터][10]를 활성화하여 문제를 사전에 감지하고 적시에 알림을 받습니다.
+- Amazon RDS 대시보드: 즉시 사용 가능한 [Amazon RDS 대시보드][9]를 사용하여 RDS 인스턴스에 대한 포괄적인 개요를 확인해 보세요.
+- 권장 모니터링: [권장 Amazon RDS 모니터링][10]을 활성화하여 문제를 사전에 감지하고 적시에 알림을 받습니다.
 
 ## 문제 해결
 

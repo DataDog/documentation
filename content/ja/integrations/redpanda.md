@@ -5,6 +5,7 @@ assets:
   dashboards:
     Redpanda Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,17 +16,18 @@ assets:
       prefix: redpanda.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10232
     source_type_name: Redpanda
   logs:
     source: redpanda
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Redpanda
-  sales_email: support@vectorized.io
-  support_email: support@vectorized.io
+  sales_email: support@redpanda.com
+  support_email: support@redpanda.com
 categories:
 - ログの収集
-- メッセージング
+- メッセージキュー
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -33,12 +35,11 @@ draft: false
 git_integration_title: redpanda
 integration_id: redpanda
 integration_title: Redpanda
-integration_version: 1.1.1
+integration_version: 2.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: redpanda
-oauth: {}
 public_title: Redpanda
 short_description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
 supported_os:
@@ -49,7 +50,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
-  - Category::Messaging
+  - Category::Message Queues
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -61,6 +62,7 @@ tile:
   title: Redpanda
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 ## 概要
 
@@ -68,22 +70,22 @@ Redpanda は、ミッションクリティカルなワークロードのため�
 
 Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示したり、特定のユーザーニーズに基づいて追加のメトリクスグループを追加することができます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
 ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>` を実行します。
 
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -96,7 +98,7 @@ Agent のアップデート版をビルドするには
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
 
-ARG INTEGRATION_VERSION=1.0.0
+ARG INTEGRATION_VERSION=2.0.0
 
 RUN agent integration install -r -t datadog-redpanda==${INTEGRATION_VERSION}
 ```
@@ -122,12 +124,12 @@ helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
 ##### メトリクスの収集
 
@@ -137,7 +139,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 2. [Agent を再起動します][3]。
 
-##### ログの収集
+##### 収集データ
 
 デフォルトでは、Datadog Agent でログを収集することは無効になっています。ログ収集は、Agent v6.0+ で利用可能です。
 
@@ -164,7 +166,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 [2]: https://github.com/DataDog/integrations-extras/blob/master/redpanda/datadog_checks/redpanda/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -174,7 +176,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 メトリクスは、Datadog のサーバーに自動的に収集されます。詳細は、[オートディスカバリーインテグレーションテンプレート][1]を参照してください。
 
-##### ログの収集
+##### 収集データ
 
 デフォルトでは、Datadog Agent でログ収集は無効になっています。ログ収集は、Agent v6.0+ で利用可能です。
 
@@ -185,7 +187,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 | `<LOG_CONFIG>` | `{"source": "redpanda", "service": "redpanda_cluster"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -193,27 +195,27 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 [Agent のステータスサブコマンドを実行][4]し、Checks セクションで `redpanda` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "redpanda" >}}
 
 
-### イベント
+### ヘルプ
 
 Redpanda インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "redpanda" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
-[1]: https://vectorized.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[1]: https://redpanda.com
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

@@ -1,6 +1,5 @@
 ---
 title: .NET Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your .NET application's performance with the runtime metrics associated to your traces."
 code_lang: dotnet
 type: multi-code-lang
@@ -29,12 +28,13 @@ further_reading:
 - .NET 5
 - .NET 6
 - .NET 7
+- .NET 8
  
 ## Automatic configuration
 
 Enable runtime metrics collection in the .NET Tracer 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
 
-View runtime metrics in correlation with your .NET services. See the [Service page][1] in Datadog.
+View runtime metrics in correlation with your .NET services. See the [Service Catalog][1] in Datadog.
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 
@@ -42,6 +42,8 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 
 - **Kubernetes**: You _must_ [bind the DogstatsD port to a host port][4].
 - **ECS**: [Set the appropriate flags in your task definition][5].
+
+Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][7].
 
 ## Data Collected
 
@@ -67,9 +69,10 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent
 [5]: /agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics
+[7]: /developers/dogstatsd/unix_socket/

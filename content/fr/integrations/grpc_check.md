@@ -3,6 +3,7 @@ app_id: grpc-check
 app_uuid: f0317cd5-e4b9-4147-998e-25c69fad94ed
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: grpc_check.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10296
     source_type_name: gRPC Check
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -31,10 +33,9 @@ integration_id: grpc-check
 integration_title: gRPC Health
 integration_version: 1.0.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: grpc_check
-oauth: {}
 public_title: gRPC Health
 short_description: Surveiller des serveurs gRPC basés sur le protocole gRPC Health
   Checking
@@ -56,19 +57,20 @@ tile:
   title: gRPC Health
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
 
 Ce check permet de surveiller des endpoints implémentant le [protocole gRPC Health Checking][1] par l'intermédiaire de l'Agent Datadog.
 
-## Configuration
+## Formule et utilisation
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
-### Installation
+### Liste des infrastructures
 
-#### Host
+#### SLO basés sur des métriques
 
 Pour installer le check grpc_check sur votre host, utilisez la commande suivante :
 
@@ -86,7 +88,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
   && /opt/datadog-agent/embedded/bin/pip3 install grpcio grpcio-health-checking
 ```
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `grpc_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance grpc_check. Consultez le [fichier d'exemple grpc_check.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
@@ -96,21 +98,21 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 
 [Lancez la sous-commande status de l'Agent][5] et cherchez `grpc_check` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "grpc_check" >}}
 
 
-### Événements
+### Aide
 
 L'intégration grpc_check n'inclut aucun événement.
 
-### Checks de service
+### Aide
 {{< get-service-checks-from-git "grpc_check" >}}
 
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 

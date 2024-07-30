@@ -1,6 +1,5 @@
 ---
 title: Feature Flag Tracking
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
@@ -13,10 +12,6 @@ further_reading:
   tag: "Blog"
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
-
-<div class="alert alert-warning">
-    Feature Flag Tracking is in beta.
-</div>
 
 ## Overview
 
@@ -45,14 +40,14 @@ Feature flags will show up in the context of events where they are evaluated, me
 
 ## View your Feature Flags
 
-Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][4] tab within RUM or click the [**Feature Flags**][4] tab under **UX Monitoring**
+Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][4] tab within RUM.
 
 From this view, you can investigate any questions you have about your feature flag's health and usage.
 - Monitor the number of users experiencing each variant and see summary statistics of your feature flag
 - Check the status of your feature flag to see if there are any that can be removed for code clean up
 - View which pages your feature flags are being evaluated on
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag's health and usage" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag's health and usage" style="width:90%;" >}}
 
 
 ### Search and filter
@@ -61,7 +56,8 @@ Search and filter your feature flags by typing in the search bar. You can also u
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
 
 ### Feature Flag Status
-There are two possible feature flag statuses:
+There are three possible feature flag statuses:
+- **Active**: The feature flag has evaluated different variants for the past 2 weeks
 - **Inactive**: For the past 2 weeks, there have only been feature flag evaluations for your control variant
 - **Out to 100%**: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
 
@@ -96,7 +92,7 @@ You can compare important metrics to you and your teams by grouping your query b
 [2]: /real_user_monitoring/browser#setup
 [3]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
 [4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /real_user_monitoring/session_replay/
+[5]: /real_user_monitoring/session_replay/browser/
 [6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
 [7]: https://app.datadoghq.com/rum/explorer
 [8]: /dashboards/

@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: ドキュメント
   text: APM 接続エラーのトラブルシューティング
-kind: Documentation
 title: トレーサーデバッグログ
 ---
 

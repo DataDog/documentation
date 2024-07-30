@@ -3,6 +3,7 @@ app_id: trino
 app_uuid: 5d6fa7f8-e827-408c-9cf1-8f2bd64b45d3
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: trino.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10282
     source_type_name: Trino
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -29,10 +31,9 @@ integration_id: trino
 integration_title: Trino
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: trino
-oauth: {}
 public_title: Trino
 short_description: Trino クラスターのパフォーマンスと使用量を収集する
 supported_os:
@@ -53,6 +54,7 @@ tile:
   title: Trino
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -62,9 +64,9 @@ tile:
 - 全体的なアクティビティメトリクス: 完了/失敗したクエリ、データ入力/出力サイズ、実行時間。
 - パフォーマンスメトリクス: クラスターメモリ、入力 CPU 時間、実行 CPU 時間。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -76,7 +78,7 @@ Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェック�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `trino.d/conf.yaml` ファイルを編集して、
    Trino パフォーマンスデータの収集を開始します。
@@ -93,23 +95,23 @@ Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェック�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで Trino を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "trino" >}}
 
 
-### イベント
+### ヘルプ
 
 Trino インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Trino インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 [1]: https://trino.io/

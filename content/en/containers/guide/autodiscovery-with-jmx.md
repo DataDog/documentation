@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery with JMX
-kind: guide
 aliases:
   - /agent/guide/autodiscovery-with-jmx
 further_reading:
@@ -291,7 +290,7 @@ datadog:
 
 {{% /tab %}}
 {{% tab "Custom image" %}}
-If you cannot mount these files in the Agent container (for example, on AWS ECS) you can build an Agent Docker image containing the desired configuration files.
+If you cannot mount these files in the Agent container (for example, on Amazon ECS) you can build an Agent Docker image containing the desired configuration files.
 
 For example:
 

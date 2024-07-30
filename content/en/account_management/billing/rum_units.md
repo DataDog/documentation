@@ -1,6 +1,5 @@
 ---
 title: RUM Billing Details
-kind: documentation
 beta: true
 private: true
 ---

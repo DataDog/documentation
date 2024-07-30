@@ -10,7 +10,6 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: SLO の概要、構成、計算
-kind: documentation
 title: メトリクスベース SLO
 ---
 
@@ -26,13 +25,13 @@ title: メトリクスベース SLO
 
 ### クエリの定義
 
-1. 定義するクエリは 2 つあります。分子クエリは良好なイベントの合計を定義し、分母クエリは総イベントの合計を定義します。SLO 計算が正しく動作するように、クエリでは COUNT、RATE、またはパーセンタイル対応の DISTRIBUTION メトリクスを使用する必要があります。
-2. タグを使用して特定のグループを含めるか除外するには、`FROM` フィールドを使用します。
-3. パーセンタイル対応の DISTRIBUTION メトリクスでは、`count values...` アグリゲーターを使用して、メトリクスがカウントする数値のしきい値を指定する必要があります。この機能はしきい値クエリと呼ばれ、数値のしきい値に一致する生の値の数をカウントして、分子と分母のカウントを生成することができます。詳しくは、[しきい値クエリ][7]を参照してください。
-4. オプションとして、パーセンタイル対応の DISTRIBUTION メトリクススでは、`count values...` アグリゲーターのすぐ右にあるドロップダウンを使用して、SLI を特定のグループごとに分割することができます。
-5. オプションとして、COUNT または RATE のメトリクスでは、`sum by` アグリゲーターを使用して、SLI を特定のグループごとに分割することができます。
+1. 定義するクエリは 2 つあります。分子クエリは良好なイベントの合計を定義し、分母クエリは総イベントの合計を定義します。SLO 計算が正しく動作するように、クエリでは COUNT、RATE、またはパーセンタイル対応の DISTRIBUTION メトリクスを使用する必要があります。詳しくは[クエリ][9]のドキュメントをご覧ください。
+1. タグを使用して特定のグループを含めるか除外するには、`FROM` フィールドを使用します。
+1. パーセンタイル対応の DISTRIBUTION メトリクスでは、`count values...` アグリゲーターを使用して、メトリクスがカウントする数値のしきい値を指定する必要があります。この機能はしきい値クエリと呼ばれ、数値のしきい値に一致する生の値の数をカウントして、分子と分母のカウントを生成することができます。詳しくは、[しきい値クエリ][7]を参照してください。
+1. オプションとして、パーセンタイル対応の DISTRIBUTION メトリクススでは、`count values...` アグリゲーターのすぐ右にあるドロップダウンを使用して、SLI を特定のグループごとに分割することができます。
+1. オプションとして、COUNT または RATE のメトリクスでは、`sum by` アグリゲーターを使用して、SLI を特定のグループごとに分割することができます。
 
-**例:** HTTP のリターンコードを追跡しており、メトリクスに `code:2xx` || `code:3xx` || `code:4xx` などのタグが含まれている場合の例。良質なイベントの合計は `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}` です。イベント自体の合計を表す `total` は `sum:httpservice.hits{!code:3xx}` となります。
+**例:** HTTP のリターンコードを追跡しており、メトリクスに `code:2xx OR code:3xx OR code:4xx` などのタグが含まれている場合の例。良好なイベントの合計は `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}` です。イベント自体の合計を表す `total` は `sum:httpservice.hits{!code:3xx}` となります。
 
 `HTTP 3xx` を省いた理由は、これらは一般的にリダイレクトされるもので、SLI として、または SLl に対してカウントされるべきではないためです。一方、3xx ベースでないエラーコードは合計に含める必要があります。`total` には `HTTP 3xx` を除いたすべてのタイプのデータを、また `numerator` には `OK` タイプのステータスコードのみを充当します。
 
@@ -72,3 +71,4 @@ SLO がターゲットパーセンテージを上回っている間、SLO のス
 [6]: https://app.datadoghq.com/slo/new/metric
 [7]: /ja/metrics/distributions/#threshold-queries
 [8]: /ja/service_management/service_level_objectives/monitor/
+[9]: https://docs.datadoghq.com/ja/dashboards/querying/#advanced-graphing

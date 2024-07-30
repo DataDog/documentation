@@ -7,7 +7,6 @@ further_reading:
 - link: /monitors/guide/suppress-alert-with-downtimes
   tag: ガイド
   text: Downtimes API と UI によるアラートの抑制
-kind: ガイド
 title: ダウンタイムスケジュールのスコープ
 ---
 

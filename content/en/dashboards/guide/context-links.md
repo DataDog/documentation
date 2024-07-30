@@ -1,6 +1,5 @@
 ---
 title: Context Links
-kind: guide
 further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'
@@ -11,11 +10,11 @@ further_reading:
 
 Dashboards collect data from multiple sources and display this data as visualizations. 
 
-You can attach dashboards to [monitor notifications][1], use them as screenboards to observe key technical or business indicators, or reference them in [runbooks][2] to provide additional context. Dashboards enable you to see not only snapshots of the current state of your platform, but also interactions—so you can preemptively see issues and analyze them more deeply in specialized pages.
+You can attach dashboards to [monitor notifications][1], use them as screenboards to observe key technical or business indicators, or reference them in [runbooks][2] to provide additional context. With Dashboards, you can see snapshots of the current state of your platform as well as interactions, so you can preemptively see issues and analyze them more deeply in specialized pages.
 
 The video below demonstrates a user looking at an overview dashboard for a web application. The user identifies a spike on a technical metric, zooms in for details, and accesses the underlying host dashboard to check for possible root causes.
 
-{{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/context_links/overview.mp4" alt="Troubleshooting workflow from a dashboard metric graph, using context links to find the root cause of issue" video="true" style="width:80%;" >}}
 
 This guide introduces **context links** in your dashboards and covers the following:
 
@@ -76,6 +75,7 @@ When you have to choose between `{{something}}` and `{{something.value}}`:
 
 * `{{something}}` returns the value prefixed by its key. For example, `env:prod`.
 * `{{something.value}}` returns the raw value. For example, `prod`.
+* See the [example use case to configure multiple variables](#configure-multiple-variables).
 
 
 In this example, when you click **View in Acme**, the link directs you to `https://prod.acme.io/search?what=basic&when=1643021787564`.
@@ -143,11 +143,11 @@ Clicking the **Zendesk User Page** link directs you to this user's page in Zende
 
 ### Dashboard links to the AWS Console
 
-The following example explains how to create a link from a host in a dashboard widget to its corresponding AWS EC2 instance page in the AWS Console.
+The following example explains how to create a link from a host in a dashboard widget to its corresponding Amazon EC2 instance page in the AWS Console.
 
 #### Context
 
-Your platform is hosted on [AWS EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
+Your platform is hosted on [Amazon EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
 
 You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog. 
 
@@ -155,7 +155,7 @@ To accelerate this operations workflow, you would like a direct connection betwe
 
 #### Approach
 
-A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, where you can read:
+A typical Amazon EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, where you can read:
 
 * `eu-west-3`: The data center region displayed as a subdomain and a URL parameter.
 * `i-04b737b9f8bf94a94`: The host ID displayed as a hash parameter.
@@ -166,21 +166,21 @@ If your platforms runs on multiple regions, your widget configuration depends on
 
 * If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **query** variable.
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
 * If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable. 
 
-{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="AWS EC2 Query" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
 #### Result
 
 Your dashboard widget contains a link that takes you to the appropriate host in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query context link" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 Query context link" style="width:90%;" >}}
 
-Clicking the **AWS EC2 Instance Summary** link directs you to the AWS EC2 instance page in the AWS Console.
+Clicking the **Amazon EC2 Instance Summary** link directs you to the Amazon EC2 instance page in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 Query Result" style="width:70%;" >}}
 
 ### Dashboard links to saved views and remapped attributes in Datadog
 
@@ -224,6 +224,29 @@ As the API Gateways team updates the saved view to account for the latest update
 
 Remapping the IP address creates a context link that connects your RUM events with corresponding logs.
 
+### Configure multiple variables
+
+The following example explains how to configure multiple variables and conditions in your context link query.
+
+#### Context
+
+Add context links to investigate specific logs or conditions. 
+- You have multiple tag values with the same context (for example, `env:production OR env:prod`). 
+- You want to filter down logs to multiple conditions (for example, `env:prod AND service:backend`)
+
+#### Approach
+
+After you select the template variables you want to troubleshoot, the context link configuration takes those template variables and inserts them into the query. **Note**: The syntax and the parenthesis enclosure impacts the query. 
+
+For example, if you want to configure a context link with `service:backend` AND (`env:production` OR `env:prod`), use the following configuration:
+
+```
+service:backend (env:{{$env.value}})
+```
+
+#### Result
+
+The parenthesis translates the `(env:{{$env.value}})` to `(env:*)` which allows you to enter multiple variables into your context links query.
 
 ## Further Reading
 
@@ -232,7 +255,7 @@ Remapping the IP address creates a context link that connects your RUM events wi
 
 [1]: /monitors/notify/
 [2]: /notebooks/
-[3]: /dashboards/#permissions
+[3]: /dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/

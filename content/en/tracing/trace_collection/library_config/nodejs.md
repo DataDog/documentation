@@ -1,12 +1,11 @@
 ---
 title: Configuring the Node.js Tracing Library
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Source code'
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
@@ -15,11 +14,14 @@ further_reading:
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/glossary/'
-      tag: 'Use the APM UI'
+      tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
-      tag: 'Advanced Usage'
+      tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: "/opentelemetry/interoperability/environment_variable_support"
+      tag: "Documentation"
+      text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -48,6 +50,14 @@ The version number of the application.
 **Default**: `{}`<br>
 Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
 
+`DD_TRACE_HEADER_TAGS`
+: **Configuration**: `headerTags` <br>
+**Default**: N/A <br>
+Accepts a comma-delimited list of case-insensitive HTTP headers optionally mapped to tag names. Automatically applies matching header values as tags on traces. When a tag name is not specified, it defaults to tags of the form `http.request.headers.<header-name>` for requests and `http.response.headers.<header-name>` for responses. **Note**: This option is only supported for HTTP/1.<br><br>
+**Example**: `User-ID:userId,Request-ID`<br>
+  - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
+  - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
+
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
 
 ### Instrumentation
@@ -56,6 +66,11 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
 Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+
+`DD_TRACE_OTEL_ENABLED`
+: **Configuration**: N/A<br>
+**Default**: `undefined`<br>
+When `true`, OpenTelemetry-based tracing for [custom][15] instrumentation is enabled.
 
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
@@ -99,8 +114,8 @@ Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and t
 
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
-**Default**: `1.0` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
-Ratio of spans to sample as a float between `0.0` and `1.0`. <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
+The maximum number of traces per second per service instance.<br>
 
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
@@ -262,4 +277,6 @@ For more examples of how to work with the library see [API documentation][2].
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/nodejs
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
+[14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/

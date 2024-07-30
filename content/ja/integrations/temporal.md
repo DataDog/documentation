@@ -41,10 +41,9 @@ integration_id: temporal
 integration_title: Temporal
 integration_version: 1.1.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: temporal
-oauth: {}
 public_title: Temporal
 short_description: Temporal Cluster の健全性とパフォーマンスを監視します。
 supported_os:

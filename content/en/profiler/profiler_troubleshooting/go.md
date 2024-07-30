@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Go Profiler
-kind: Documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30

@@ -14,7 +14,7 @@ has_logo: true
 integration_id: google-cloud-bigquery
 integration_title: Google BigQuery
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_big_query
 public_title: Datadog-Google BigQuery インテグレーション

@@ -10,7 +10,7 @@ has_logo: true
 integration_id: sinatra
 integration_title: Sinatra
 is_public: true
-kind: integration
+custom_kind: integration
 name: Sinatra
 public_title: Intégration Datadog/Sinatra
 short_description: Recueillez des logs d'application Sinatra.

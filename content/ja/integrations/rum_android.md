@@ -1,15 +1,18 @@
 ---
 app_id: rum-android
 app_uuid: a70b6926-49a8-4f90-8190-315170e97e4f
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メトリクス
-- モバイル
-- トレーシング
+- ログの収集
+- モニター
+- apm
+- ネットワーク
+- profiler_troubleshooting
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md
 display_on_public_website: true
@@ -19,10 +22,9 @@ integration_id: rum-android
 integration_title: Android
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_android
-oauth: {}
 public_title: Android
 short_description: Datadog RUM を使用した Android アプリケーションの監視とメトリクス生成
 supported_os:
@@ -30,8 +32,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
+  - Category::Network
   - Category::Tracing
   - Supported OS::Android
   configuration: README.md#Setup
@@ -42,6 +46,7 @@ tile:
   title: Android
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -64,7 +69,7 @@ Datadog [Android インテグレーション][1]を利用することで、問�
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## セットアップ
+## 計画と使用
 
 ### RUM イベントの収集
 
@@ -78,21 +83,21 @@ Android アプリケーションのトレースを Datadog に送信し始める
 
 Android アプリケーションのログを Datadog に転送し始めるには、[Android ログ収集][5]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Android インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
 
-### イベント
+### ヘルプ
 
 イベントや属性の詳細については、[RUM Android データ収集][7]を参照してください。
 
-### サービスのチェック
+### ヘルプ
 
 Android インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

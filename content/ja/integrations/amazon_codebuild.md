@@ -12,11 +12,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/
 draft: false
 git_integration_title: amazon_codebuild
 has_logo: true
-integration_id: amazon-codebuild
+integration_id: ''
 integration_title: AWS CodeBuild
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_codebuild
 public_title: Datadog-AWS CodeBuild インテグレーション
@@ -24,6 +24,7 @@ short_description: 行われているデプロイを表示し、その所要時�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS CodeBuild は、ソースコードのコンパイル、テストの実行、デプロイ可能なソフトウェアパッケージの生成を行うビルドサービスです。
@@ -34,9 +35,9 @@ Datadog AWS CodeBuild インテグレーションをインストールすると�
 - ビルドに関するメトリクスを収集できます。
 - 他の Datadog メトリクスとビルドを関連付けることができます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -46,7 +47,7 @@ Datadog AWS CodeBuild インテグレーションをインストールすると�
 
 2. [Datadog - AWS Codebuild インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -62,21 +63,21 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_codebuild" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS CodeBuild インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS CodeBuild インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

@@ -12,8 +12,9 @@ author:
 categories:
 - アラート設定
 - コラボレーション
+- インシデント
 - 問題追跡
-- notification
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md
 display_on_public_website: true
@@ -23,27 +24,27 @@ integration_id: pagerduty-ui
 integration_title: PagerDuty UI
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: pagerduty_ui
-oauth: {}
 public_title: PagerDuty UI
 short_description: Datadog のダッシュボードから PagerDuty のインシデントを監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Alerting
   - Category::Collaboration
+  - Category::Incidents
   - Category::Issue Tracking
-  - Category::Notification
+  - Category::Notifications
   - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のダッシュボードから PagerDuty のインシデントを監視する
   media:
@@ -64,6 +65,7 @@ tile:
   title: PagerDuty UI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -95,7 +97,7 @@ Incidents by PagerDuty は、Datadog のインターフェイスから直接イ�
 - PagerDuty に移動して、個々のインシデントとそのサービスを表示したり、インシデントリストを表示することができます
 
 
-## セットアップ
+## 計画と使用
 
 1. Datadog アカウントで、Dashboards に移動します。Status Dashboard ウィジェットを追加したいダッシュボードを選択するか、[新しいダッシュボードを作成][1]します。
 
@@ -103,7 +105,7 @@ Incidents by PagerDuty は、Datadog のインターフェイスから直接イ�
 
 3. Custom Widget Editor のモーダルで、**Connect** をクリックします。**サービス地域**を選択し、PagerDuty アカウントに**ログイン**します。Custom Widget Editor にリダイレクトされると、ウィジェットがどのように表示されるかのプレビューが表示されます。プレビューの下にある **Widget options** で、ダッシュボードのデフォルトにする追加機能を任意で選択します。また、オプションで**ウィジェットタイトル**を変更することができます。**Done**をクリックして、ウィジェットをダッシュボードに追加します。
 
-## サポート
+## Agent
 
 PagerDuty のカスタマーになりたい方は [PagerDuty 営業チーム][2]に、トラブルシューティングは [Datadog サポート][3]にお問い合わせください。
 

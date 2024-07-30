@@ -28,10 +28,9 @@ integration_id: typingdna-activelock
 integration_title: TypingDNA ActiveLock
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: typingdna_activelock
-oauth: {}
 public_title: TypingDNA ActiveLock
 short_description: TypingDNA ActiveLock のログを閲覧・分析することができます。
 supported_os:

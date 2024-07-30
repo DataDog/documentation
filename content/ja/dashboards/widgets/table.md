@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: グラフクエリの構築方法について
-kind: documentation
 title: テーブルウィジェット
 widget_type: query_table
 ---
@@ -53,7 +52,7 @@ widget_type: query_table
   * クエリ数の上限を大きくして、できるだけ多くの列が組み合わさるようにします。
   * インサイトを"生み出している"と思われる列でテーブルをソートします。
 
-## API
+## 課金
 
 このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][8] ドキュメントをご参照ください。
 
@@ -69,10 +68,10 @@ widget_type: query_table
 [2]: /ja/logs/search_syntax/
 [3]: /ja/tracing/trace_explorer/query_syntax/
 [4]: /ja/real_user_monitoring/explorer/search_syntax
-[5]: /ja/profiler/search_profiles
+[5]: /ja/profiler/profile_visualizations
 [6]: /ja/security_monitoring/explorer/
 [7]: /ja/dashboards/guide/apm-stats-graph
-[8]: /ja/api/v1/dashboards/
+[8]: /ja/api/latest/dashboards/
 [9]: /ja/dashboards/graphing_json/widget_json/
 [10]: /ja/dashboards/guide/context-links/
 [11]: /ja/dashboards/querying/#advanced-graphing

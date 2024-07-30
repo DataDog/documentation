@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/log_collection/javascript
   tag: ドキュメント
   text: ブラウザログ収集
-kind: ガイド
 title: ブラウザ開発ツール使用時の注意点
 ---
 
@@ -20,7 +19,7 @@ title: ブラウザ開発ツール使用時の注意点
 これは、以下に示すように、DevTool コンソールが不正な行番号とファイルを表示することにつながるかもしれません。
 {{< img src="real_user_monitoring/guide/devtools-tips/issue_console.png" alt="DevTools コンソールで、console.error ステートメントのファイル番号と行番号が正しくないという問題が発生する。">}}
 
-上の図では、`console.error` 関数がインスツルメンテーションされています。このステートメントが呼び出された実際のファイルと行番号、`VM505:1` の代わりに、コンソールに `datadog-rum-v4.js:1` と表示されていることに注意してください。
+上の図では、`console.error` 関数がインスツルメンテーションされています。このステートメントが呼び出された実際のファイルと行番号、`VM505:1` の代わりに、コンソールに `datadog-rum.js:1` と表示されていることに注意してください。
 
 ### ブラウザの無視リストにスクリプトを追加して、正しいファイル番号と行番号を表示させる
 

@@ -1,33 +1,28 @@
 ---
 title: Datadog Windows Agent User
-kind: guide
 aliases:
   - /agent/faq/windows-agent-ddagent-user/
 algolia:
   tags: ['windows agent user', 'windows user','ddagentuser', 'group policy']
 ---
 
-Starting with release `6.11.0`, the core and APM/trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
-
-The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
-The account is assigned to the following groups during installation:
+By default, the Windows Agent uses the `ddagentuser` account created at install time. The account is assigned to the following groups during installation:
 
 * It becomes a member of the "Performance Monitor Users" group
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
 * It becomes a member of the "Event Log Readers" group
+* It becomes a member of the "Performance Log Users" group (since 7.51)
 
 **Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
 
-Additionally the following security policies are applied to the account during installation:
+Additionally, the following security policies are applied to the account during installation:
 * Deny access to this computer from the network
 * Deny log on locally
 * Deny log on through Remote Desktop Services
 * Log on as a service
 
-**Important**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
-
-**Note**: All example commands on this page use `<>` to indicate a variable that should be replaced. For example, if the user account is `ddagentuser` and the command contains `DDAGENTUSER_NAME=<USERNAME>` then `DDAGENTUSER_NAME=ddagentuser` should be entered in the command line.
+The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
 
 **Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Grouped Managed Service Account (gMSA)**. To specify a Grouped Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, as the installer cannot create one.
 
@@ -35,17 +30,17 @@ Additionally the following security policies are applied to the account during i
 
 If no user account is specified on the command line, the installer attempts to create a local user account named `ddagentuser` with a randomly generated password.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
-To specify the optional USERNAME and PASSWORD on the command line pass the following properties to the `msiexec` command (Remove the bracket `<>` characters from the username and password placeholders):
+To specify the optional USERNAME and PASSWORD on the command line, pass the following properties to the `msiexec` command (The bracket `<>` characters indicate a variable that should be replaced):
 
 ```shell
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
-
-**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
+Requirements:
+* The username must be 20 characters or fewer to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+* Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
 **Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitor Users and Event Log Readers groups.
 
@@ -64,7 +59,7 @@ On domain joined machines, the Agent installer can use a user supplied account, 
 
 If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 

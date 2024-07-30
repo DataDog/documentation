@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Privacy Options
-kind: documentation
 description: Configure privacy options for Mobile Session Replay.
 aliases:
 further_reading:
@@ -241,7 +240,7 @@ This includes:
 - Thumb of a Slider (iOS and Android)
 
 **Text attributes**
-- The color of a label rendering the the selected date in Date Picker (iOS)
+- The color of a label rendering the selected date in Date Picker (iOS)
 - The position of the first and last option in Value Picker (iOS and Android)
 
 ### Touch interactions

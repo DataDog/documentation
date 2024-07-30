@@ -10,7 +10,6 @@ further_reading:
 - link: tracing/app_analytics
   tag: ドキュメント
   text: App Analytics クエリでディメンションとしてバージョンを使用する
-kind: documentation
 title: デプロイメントの追跡
 ---
 ## Version タグ

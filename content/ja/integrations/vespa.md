@@ -3,6 +3,7 @@ app_id: vespa
 app_uuid: 9e31df30-189f-468f-88c7-9c73caf4cdca
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: vespa.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10212
     source_type_name: Vespa
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,7 @@ author:
   sales_email: dd@vespa.ai
   support_email: dd@vespa.ai
 categories:
-- data store
+- data stores
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md
 display_on_public_website: true
@@ -29,10 +31,9 @@ integration_id: vespa
 integration_title: Vespa
 integration_version: 1.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: vespa
-oauth: {}
 public_title: Vespa
 short_description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
 supported_os:
@@ -41,7 +42,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::Data Store
+  - Category::Data Stores
   configuration: README.md#Setup
   description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
   media: []
@@ -50,6 +51,7 @@ tile:
   title: Vespa
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -59,11 +61,11 @@ tile:
 - Vespa のステータスとパフォーマンスを視覚化して監視する
 - 健全性と可用性に関するアラートを生成する
 
-## セットアップ
+## 計画と使用
 
 Vespa チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Vespa チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -75,7 +77,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Vespa チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Vespa チェックを構成するには
 
@@ -91,27 +93,27 @@ Vespa チェックを構成するには
 
 [Agent のステータスサブコマンド][9]を実行し、Checks セクションで `vespa` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "vespa" >}}
 
 
-### イベント
+### ヘルプ
 
 Vespa インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "vespa" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://vespa.ai/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

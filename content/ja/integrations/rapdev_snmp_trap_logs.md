@@ -24,12 +24,11 @@ integration_id: rapdev-snmp-trap-logs
 integration_title: SNMP Trap Logs
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_snmp_trap_logs
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -47,6 +46,7 @@ tile:
   - Category::Network
   - Category::SNMP
   - Supported OS::Linux
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: SNMP トラップメッセージの Datadog ログへの変換
   media:
@@ -68,6 +68,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイスの SNMP Trap メッセージを Datadog Logs に変換することが可能です。できるだけ多くの MIB ファイルを収集し、SNMP トラップを人間が読めるログメッセージに翻訳できるような形式に変換しています。
 
@@ -75,7 +76,7 @@ RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイ�
 
 本パッケージに含まれる全 MIB の一覧は、[mib_yamls.txt ファイル][4]をご参照ください。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

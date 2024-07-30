@@ -1,6 +1,5 @@
 ---
 title: 回帰
-kind: documentation
 aliases:
   - /ja/graphing/functions/regression/
 ---

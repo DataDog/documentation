@@ -5,6 +5,7 @@ assets:
   dashboards:
     'Retool + Datadog: ElasticSearch Action Console': assets/dashboards/retool_retool_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: retool
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10176
     source_type_name: Retool
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -31,10 +33,9 @@ integration_id: retool
 integration_title: Retool
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: retool
-oauth: {}
 public_title: Retool
 short_description: Retool は内部ツールを素早く構築する方法です
 supported_os:
@@ -56,6 +57,7 @@ tile:
   title: Retool
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -65,35 +67,35 @@ Retool により開発者は Datadog ダッシュボードに直接埋め込む�
 
 ![Screenshot1][1]
 
-### メトリクス
+### データセキュリティ
 Elasticsearch Management 用の Datadog の埋め込み Retool アプリは、主要な Elasticsearch メトリクスとログに対する既存の可視性と、Datadog ダッシュボードから直接クラスターやアカウントなどを管理する力を組み合わせたものです。
 
-### ダッシュボード  
+### ライブラリ
 Retool は Elasticsearch Management 用の埋め込みアプリを作成しました。Elasticsearch のメトリクス、トレース、ログは、すでに Datadog で監視できます。埋め込みアプリで、開発者は Datadog ダッシュボードから直接 Datadog の豊富なインサイトにアクションを起こすことができます。そのアクションには以下のものが含まれます。
 
 - シャードとレプリカで新しいインデックスを追加
 - シャードの再配置とインデックスの除外でノードを管理
 - 新しいスナップショットの作成とインデックスの復元
 
-## セットアップ
+## 計画と使用
 Retool インテグレーションにはすぐに使えるダッシュボードが付いてくるため、iframe から Retool にサインアップまたはログインできます。
 
 接続文字列を使い ElasticSearch クラスターに接続するよう促されます。このアプリは自動的にインスタンスに追加されます。次に、ナビゲーションバーのリソースをクリックし、新しく Datadog リソースを作成します（API キーとアプリケーションキーを追加）。最後に、クエリエディターのリソース選択ドロップダウンから選択して、Datadog リソースを 2 つの Datadog クエリに接続します。
 
 Datadog に戻るとダッシュボードでアプリが稼働しているのがわかります。アプリは随時編集でき、DevOps ワークフローに合わせてカスタマイズできます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 現時点では、Retool インテグレーションにはメトリクスは含まれません。
 
-### イベント
+### ヘルプ
 現時点では、Retool インテグレーションにはイベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 現時点では、Retool にはサービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 ご不明な点は、[Datadog のサポートチーム][2]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/retool/images/1.png

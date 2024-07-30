@@ -12,7 +12,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - developer tools
-- notification
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -22,10 +22,9 @@ integration_id: firefly
 integration_title: Firefly
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: firefly
-oauth: {}
 public_title: Firefly
 short_description: クラウドを規約に準拠させる
 supported_os:
@@ -39,7 +38,7 @@ tile:
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Developer Tools
-  - Category::Notification
+  - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -64,6 +63,7 @@ tile:
   title: Firefly
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -82,7 +82,7 @@ Infrastructure-as-Code と実際のクラウドの状態に差異がある場合
 ### ポリシー違反の検出と修正
 Firefly の統合ポリシーエンジンにより、危険な構成ミスやコストのかかる使用不足を発見し、カスタムポリシーと既成ポリシーの両方でポリシー違反のアラートを受け取ることができます。
 
-## セットアップ
+## 計画と使用
 
 ### Firefly - Datadog インテグレーションの構成
 1. Datadog のアプリケーションキーと API キーを新規に作成します。
@@ -91,7 +91,7 @@ Firefly の統合ポリシーエンジンにより、危険な構成ミスやコ
 4. API キーをコピーして、専用の行に貼り付けます。
 5. **Done** をクリックします。
 
-## サポート
+## Agent
 何か質問はありますか？メール [contact@gofirefly.io][1] またはアプリ内チャットをご利用ください。
 
 [1]: mailto:contact@gofirefly.io

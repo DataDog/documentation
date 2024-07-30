@@ -1,6 +1,5 @@
 ---
 title: Rehydrating from Archives
-kind: Documentation
 description: "Capture log events from your archives back into Datadog."
 aliases:
   - /logs/historical-views
@@ -13,12 +12,11 @@ Log Rehydration* enables you to capture log events from customer-owned storage-o
 
 ## Historical views
 
-With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. 
+With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently.
 
 To create a historical view:
 
-1. Navigate to the [Configuration page][2] of your Datadog account.
-2. Select the [**Rehydrate From Archives**][3] tab.
+1. Navigate to the [Rehydrate From Archives][3] page.
 3. Click **New Historical View**.
 
 Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives.
@@ -114,10 +112,7 @@ An external archive must be configured in order to rehydrate data from it. [Foll
 Datadog requires the permission to read from your archives in order to rehydrate content from them. This permission can be changed at any time.
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
-{{< /site-region >}}
+{{% tab "Amazon S3" %}}
 
 In order to rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
@@ -181,7 +176,6 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 *Log Rehydration is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /logs/explorer/search/
 [5]: /logs/archives/?tab=awss3#datadog-tags

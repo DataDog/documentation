@@ -1,0 +1,56 @@
+{{ $dot := . }}
+<div class="ci-cd-integrations">
+  <div class="container cards-dd">
+    <div class="row row-cols-4 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/argocd/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/argocd_small.svg" "class" "img-fluid" "alt" "argocd" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/ciproviders/#mark-github-actions-jobs-as-deployments">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/github_small.svg" "class" "img-fluid" "alt" "github" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/ciproviders/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/gitlab_small.svg" "class" "img-fluid" "alt" "gitlab" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/ciproviders/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/jenkins.png" "class" "img-fluid" "alt" "jenkins" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/ciproviders/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/circleci.png" "class" "img-fluid" "alt" "circleci" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/ciproviders/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/azure-pipelines_small.svg" "class" "img-fluid" "alt" "azure pipelines" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/continuous_delivery/deployments/ciproviders/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/buildkite_small.svg" "class" "img-fluid" "alt" "buildkite" "width" "150") }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

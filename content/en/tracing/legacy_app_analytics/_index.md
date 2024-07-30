@@ -1,6 +1,5 @@
 ---
 title: App Analytics
-kind: documentation
 aliases:
   - /tracing/visualization/search/
   - /tracing/trace_search_and_analytics/

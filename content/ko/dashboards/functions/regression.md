@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/regression/
-kind: 설명서
 title: 회귀
 ---
 

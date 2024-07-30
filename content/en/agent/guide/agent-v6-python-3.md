@@ -1,6 +1,5 @@
 ---
 title: Python Version Management
-kind: guide
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"
@@ -55,7 +54,7 @@ To switch from Python 2 to Python 3, update the image tag used to deploy the Age
 {{% tab "Helm" %}}
 By default, the [Datadog Helm chart][1] uses the Agent 7 image that embeds the Python 3 runtime.
 
-To keep the Datadog Agent updated, edit your `values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
+To keep the Datadog Agent updated, edit your `datadog-values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
 
 To use a specific container registry, set it with `agent.image.repository` and `clusterChecksRunner.image.repository`. Ensure that `agents.image.tag` and  `clusterChecksRunner.image.tag` are undefined.
 
@@ -109,7 +108,6 @@ If you have previously pinned the image version:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -126,7 +124,6 @@ or you are using `image.name`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -153,7 +150,6 @@ If you have enabled cluster check runners deployment, also pin the Agent 7 image
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -177,7 +173,6 @@ If you need to use an Agent JMX image, you can set it without specifying the Age
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -196,7 +191,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
 In your DaemonSet manifest, update the image tag in each container definition:
 
@@ -209,7 +204,6 @@ For example, if your previous image value was `gcr.io/datadoghq/agent:6.33.0`, u
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:
@@ -224,7 +218,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:
@@ -284,5 +277,5 @@ datadog_config:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/versions/upgrade_to_agent_v7/?tab=linux
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/configuration/agent-commands/#restart-the-agent

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Traffic Server - Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -20,6 +21,7 @@ assets:
     - trafficserver start
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10259
     source_type_name: Traffic Server
   logs:
     source: traffic_server
@@ -45,12 +47,11 @@ draft: false
 git_integration_title: traffic_server
 integration_id: traffic-server
 integration_title: Traffic Server
-integration_version: 1.1.0
+integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: traffic_server
-oauth: {}
 public_title: Traffic Server
 short_description: 接続、キャッシュ、DNS のメトリクスの監視
 supported_os:
@@ -73,6 +74,7 @@ tile:
   title: Traffic Server
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -87,11 +89,11 @@ Datadog-Apache Traffic Server インテグレーションを有効にすると�
 - システムログ、エラーログを監視する。
 
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 Traffic Server チェックは [Datadog Agent][3] パッケージに含まれています。
 
@@ -101,7 +103,7 @@ Traffic Server で監視を有効にするには、Traffic Server で [Stats Ove
 stats_over_http.so
 ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Traffic Server のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `traffic_server.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sample traffic_server.d/conf.yaml][5] を参照してください。
 
@@ -128,13 +130,13 @@ stats_over_http.so
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `traffic_server` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "traffic_server" >}}
 
 
-### ログの収集
+### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -161,22 +163,22 @@ _Agent バージョン 6.0 以降で利用可能_
         source: traffic_server
    ```
 
-### イベント
+### ヘルプ
 
 Traffic Server インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "traffic_server" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://trafficserver.apache.org/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.trafficserver.apache.org/en/latest/admin-guide/monitoring/statistics/accessing.en.html#stats-over-http
 [5]: https://github.com/DataDog/integrations-core/blob/master/traffic_server/datadog_checks/traffic_server/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

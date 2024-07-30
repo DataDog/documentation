@@ -1,6 +1,5 @@
 ---
 title: Monitoring Page Performance
-kind: documentation
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"
@@ -17,14 +16,14 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "Learn about RUM Dashboards"
 ---
 
 ## Overview
 
-RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
+RUM view events collect extensive performance metrics for every pageview. Monitor your application's pageviews and explore performance metrics in dashboards and the RUM Explorer.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
@@ -44,24 +43,39 @@ You can access performance metrics for your views in:
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
+- Metrics collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
 | [First Input Delay][8]        | Interactivity    | Time elapsed between a user's first interaction with the page and the browser's response.             | <100ms      |
 | [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
+| [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
+
+### Core web vitals target elements
+
+Identifying what element triggered a high Core Web Vitals metric is the first step in understanding the root cause and being able to improve performance.
+RUM reports the element that is associated with each Core Web Vital instance:
+
+- For Largest Contentful Paint, RUM reports the CSS Selector of the element corresponding to the largest contentful paint.
+- For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
+- For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
+- For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
 ## All performance metrics
-
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
+| `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                                        |
+| `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
+| `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
+| `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                         |
 | `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. For more information, see the [MDN documentation][12].                                                                                                        |
@@ -132,6 +146,7 @@ window.DD_RUM.init({
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
 ## Add your own performance timing
+
 On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 
 For example, you can add a timing when your hero image has appeared:
@@ -154,11 +169,11 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
+Once the timing is sent, the timing is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
-If you are using an asynchronous setup, you can provide your own timing (the number of milliseconds relative to the start of the current RUM view or the UNIX epoch timestamp) as a second parameter.
+If you are using an asynchronous setup, you can provide your own timing (as a UNIX epoch timestamp) as a second parameter.
 
 For example:
 
@@ -175,14 +190,13 @@ document.addEventListener("scroll", function handler() {
 
 ```
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/dashboards/
+[1]: /real_user_monitoring/platform/dashboards/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/dashboards/performance
+[3]: /real_user_monitoring/platform/dashboards/performance
 [4]: /real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/
@@ -198,3 +212,4 @@ document.addEventListener("scroll", function handler() {
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
 [18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[19]: https://web.dev/inp/

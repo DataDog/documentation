@@ -14,7 +14,7 @@ has_logo: true
 integration_id: content_security_policy_logs
 integration_title: Logs de CSP
 is_public: true
-kind: integration
+custom_kind: integration
 name: content_security_policy_logs
 public_title: Intégration Datadog/Logs de CSP
 short_description: Détectez les violations de CSP

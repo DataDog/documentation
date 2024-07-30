@@ -1,8 +1,11 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: statsig-statsig
 app_uuid: 289b74cb-ad37-4a0e-98f5-4d5c6f3e3d19
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +15,7 @@ assets:
       prefix: statsig.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10188
     source_type_name: Statsig ライセンス
 author:
   homepage: https://www.statsig.com
@@ -30,12 +34,11 @@ integration_id: statsig-statsig
 integration_title: Statsig
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: statsig-statsig
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -81,6 +84,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -97,17 +101,17 @@ Datadog Marketplace の製品には、Statsig のプラットフォームへの�
 
 {{< img src="marketplace/statsig-statsig/images/statsig_metrics.png" alt="Statsig メトリクス" >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][3] を参照してください。
 
-### イベント
+### ヘルプ
 
 Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、新規または更新された機能ゲートまたは新しいインテグレーションが有効になった時）。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Statsig サポートにお問い合わせください。
 

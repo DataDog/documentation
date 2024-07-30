@@ -1,6 +1,6 @@
 ---
 title: Monitor Your RUM Usage
-kind: guide
+
 description: 'Learn how to monitor your RUM usage and receive alerts on unexpected spikes and impending thresholds.'
 further_reading:
 - link: '/real_user_monitoring/'
@@ -100,7 +100,7 @@ To create an anomaly detection monitor to be alerted when the number of sessions
    This example notification message contains actionable instructions:
 
    ```
-   Shopist.io is sending too many user sessions. Go to the application's codebase and decrease the sample rate. Here is the (documentation)[https://docs.datadoghq.com/real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration] for how to do so.
+   Shopist.io is sending too many user sessions. Go to the application's codebase and decrease the sample rate. Here is the (documentation)[https://docs.datadoghq.com/real_user_monitoring/guide/sampling-browser-plans] for how to do so.
 
    {{#is_warning}}@slack-Shopist-alerts {{/is_warning}}
 

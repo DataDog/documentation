@@ -5,6 +5,7 @@ assets:
   dashboards:
     cybersixgill: assets/dashboards/cybersixgill_actionable_alerts_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: cybersixgill_actionable_alerts.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10342
     source_type_name: cybersixgill_actionable_alerts
 author:
   homepage: https://www.cybersixgill.com/
@@ -23,8 +25,7 @@ author:
   support_email: support@cyebrsixgill.com
 categories:
 - セキュリティ
-- モニタリング
-- event management
+- イベント管理
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cybersixgill_actionable_alerts/README.md
 display_on_public_website: true
@@ -34,10 +35,9 @@ integration_id: cybersixgill-actionable-alerts
 integration_title: Cybersixgill Actionable Alerts
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cybersixgill_actionable_alerts
-oauth: {}
 public_title: Cybersixgill Actionable Alerts
 short_description: アセットのアクティビティを監視し、脅威の到来をリアルタイムにアラートします
 supported_os:
@@ -52,7 +52,6 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Security
-  - Category::Monitoring
   - Category::Event Management
   - Submitted Data Type::Events
   configuration: README.md#Setup
@@ -75,6 +74,7 @@ tile:
   title: Cybersixgill Actionable Alerts
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -94,7 +94,7 @@ Cybersixgill Actionable Alerts チェックをホストにインストールす�
 datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0.1
 ```
 
-### コンフィギュレーション
+### 構成
 5. [Cybersixgill サポート][3]に連絡し、Cybersixgill Developer Platform へのアクセスをリクエストします。
 6. Cybersixgill 開発者プラットフォームにアクセスできるウェルカムメールを受け取ります。
 7. Cybersixgill 開発者プラットフォーム内で、クライアント ID およびクライアントシークレットを作成します。
@@ -104,9 +104,9 @@ datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0
 ### 検証
 [Datadog Events Explorer][4] で Cybersixgill のイベントが生成されていることを確認します。
 
-## 収集データ
+## データ収集
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "cybersixgill_actionable_alerts" >}}
 
 
@@ -118,7 +118,7 @@ datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0
 
 
 [1]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/?tab=configurationtemplate#configure-the-developer-tool
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: mailto:support@cybersixgill.com
 [4]: https://app.datadoghq.com/event/explorer
 [5]: https://github.com/DataDog/integrations-extras/blob/master/cybersixgill_actionable_alerts/assets/service_checks.json

@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
   tag: blog
   text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
-kind: documentation
 title: インシデント管理
 ---
 

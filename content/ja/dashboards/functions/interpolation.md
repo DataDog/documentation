@@ -1,7 +1,13 @@
 ---
 aliases:
 - /ja/graphing/functions/interpolation/
-kind: documentation
+further_reading:
+- link: /dashboards/functions/
+  tag: ドキュメント
+  text: その他の関数タイプ
+- link: /metrics/guide/interpolation-the-fill-modifier-explained/
+  tag: ドキュメント
+  text: 補間とフィル修飾子
 title: 補間
 ---
 
@@ -36,7 +42,7 @@ title: 補間
 `default_zero()` 関数は、次のような使用例に対応します (使用例は他にもあります)。
 
 - 疎なメトリクスに対して算術演算を行う際にゲージを 0 に揃える (注: `as_count()` または `as_rate()` としてクエリされる `COUNT` または `RATE` タイプのメトリクスは、_常に_ 0 に揃えられます。したがって、`default_zero()` を使用しても揃え方に変更はありません。これは `GAUGE` タイプのメトリクスにのみ影響します)。
-- モニターのデータなし状態を解消する。これは、単純なアラートとマルチアラートの両方で機能しますが、値 0 によってモニターがトリガーされてはなりません。たとえば、`avg(last_10m):avg:system.cpu.idle{*} < 10` というクエリを使用したモニターでは正しく機能しません。値が 0 と評価されると、このモニターが (解消ではなく) トリガーされるためです。`as_count()` クエリを使用したエラー率モニターにはこの関数を使用しないでください。詳細については[モニター評価での as_count()][3] を参照してください。
+- モニターがデータなし状態に入る前に、モニターのアラートを解消する。これは、単純なアラートとマルチアラートの両方に有効ですが、0 の値でモニターがトリガーされることはありません。たとえば、`avg(last_10m):avg:system.cpu.idle{*} < 10` というクエリを使用したモニターでは正しく機能しません。値が 0 と評価されると、このモニターが (解消ではなく) トリガーされるためです。`as_count()` クエリを使用したエラー率モニターにはこの関数を使用しないでください。詳細については[モニター評価での as_count()][3] を参照してください。
 - (空ではないが) 疎な系列内の空の間隔を埋める。これには、視覚的な理由またはモニター評価で時系列の最小/最大/平均を調整する目的があります。評価ウィンドウにデータのポイントがない場合、`default_zero()` は何の効果もありません。
 - 時系列ウィジェットで、データがない場合に値 0 を表示する。
 
@@ -86,22 +92,11 @@ default_zero(avg:custom_metric{*})
 +---------------------+-----------------------------+
 ```
 
-## その他の関数
+## その他の参考資料
 
-{{< whatsnext desc="他に利用できる関数を参照します。" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}アルゴリズム: メトリクスに異常値や外れ値の検出機能を実装します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}算術: メトリクスに対して算術演算を実行します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}カウント: メトリクスの 0 以外または null 以外の値をカウントします。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}除外: メトリクスの特定の値を除外します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}ランク: メトリクスの一部のみを選択します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}レート: メトリクスに対してカスタム微分係数を計算します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}回帰: メトリクスに何らかの機械学習関数を適用します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rollup" >}}ロールアップ: メトリクスに使用される元ポイントの数を制御します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/
-[2]: /ja/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[2]: /ja/dashboards/functions/#add-a-function
 [3]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 [4]: /ja/metrics/

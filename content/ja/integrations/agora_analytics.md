@@ -5,6 +5,7 @@ assets:
   dashboards:
     Agora Analytics Overview: assets/dashboards/agora_analytics_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -23,6 +24,7 @@ assets:
       prefix: agora.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10335
     source_type_name: Agora Analytics
 author:
   homepage: https://www.agora.io
@@ -40,10 +42,9 @@ integration_id: agora-analytics
 integration_title: Agora Analytics
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: agora_analytics
-oauth: {}
 public_title: Agora Analytics
 short_description: Datadog で Agora Analytics Collector のメトリクスを表示する
 supported_os:
@@ -70,6 +71,7 @@ tile:
   title: Agora Analytics
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,25 +80,25 @@ Agora Analytics は、音声やビデオの使用状況、品質、パフォー�
 
 このインテグレーションは、使用率、品質、パフォーマンスなどのメトリクスを Datadog アカウントに直接送信します。
 
-## セットアップ
+## 計画と使用
 
 Agora Analytics Datadog Connector の構成については、Agora Analytics インテグレーション[ドキュメント][1]を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Agora Analytics は Datadog にメトリクスを送信します。
 
-### イベント
+### ヘルプ
 
 Agora Analytics には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Agora Analytics には、サービスのチェック機能は含まれません。
 
-## サポート
+## Agent
 
 ヘルプが必要な場合は、[Agora サポート][2]までお問い合わせください。
 

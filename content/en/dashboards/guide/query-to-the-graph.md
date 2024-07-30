@@ -1,6 +1,5 @@
 ---
 title: Query to the Graph
-kind: documentation
 aliases:
     - /dashboards/faq/query-to-the-graph
 ---
@@ -86,7 +85,7 @@ In this example, `rollup(avg,60)` defines an aggregate period of 60 seconds. So 
 
 ## Proceed to space-aggregation
 
-Next, you can mix data from different source into a single line.
+Next, you can mix data from different sources into a single line.
 
 You have ~300 points for each source. Each of them represents a minute.
 In this example, for each minute, Datadog computes the average across all sources, resulting in the following graph:
@@ -159,7 +158,7 @@ Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 For more information, see [Visualize StatsD metrics with Counts Graphing][9].
 Documentation about [StatsD/DogStatsD][10].
 
-[1]: /dashboards/#timeboards
+[1]: /dashboards/#get-started
 [2]: /dashboards/#screenboards
 [3]: /agent/
 [4]: /metrics/custom_metrics/

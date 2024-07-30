@@ -17,7 +17,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイ
-kind: ドキュメント
 title: モバイルセッションリプレイのプライバシーオプション
 ---
 
@@ -240,7 +239,7 @@ Datadog のレコーダーが各テキストタイプをどのように取り扱
 - スライダーのつまみ (iOS および Android)
 
 **テキスト属性**
-- 日付選択ツールで選択された日付を表示するラベルの色 (iOS)
+- Date Picker (iOS) で選択された日付を表示するラベルの色
 - 値選択ツールの最初と最後のオプションの位置 (iOS および Android)
 
 ### タッチインタラクション

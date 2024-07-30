@@ -1,10 +1,10 @@
 ---
-title: ダッシュボードリスト API (v1)
-kind: ガイド
 aliases:
-  - /ja/graphing/faq/dashboard-lists-api-doc
-  - /ja/graphing/guide/dashboard-lists-api-v1-doc
+- /ja/graphing/faq/dashboard-lists-api-doc
+- /ja/graphing/guide/dashboard-lists-api-v1-doc
+title: ダッシュボードリスト API (v1)
 ---
+
 APIを介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。
 
 - [ダッシュボードリストのアイテムを取得する](#get-items-of-a-dashboard-list)
@@ -90,7 +90,7 @@ curl -X GET \
                 'name': None
             },
             'url': '/screen/integration/66/aws-dynamodb',
-            'title': 'AWS DynamoDB',
+            'title': 'Amazon DynamoDB',
             'modified': None,
             'created': None,
             'is_favorite': True,
@@ -182,7 +182,7 @@ curl -X GET \
         "total" => 5,
         "dashboards" => [
             {
-                "title" => "AWS DynamoDB",
+                "title" => "Amazon DynamoDB",
                 "is_favorite" => true,
                 "id" => 66,
                 "icon" => "/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png",
@@ -286,7 +286,7 @@ curl -X GET \
                 "name": None
             },
             "url": "/screen/integration/66/aws-dynamodb",
-            "title": "AWS DynamoDB",
+            "title": "Amazon DynamoDB",
             "modified": None,
             "created": None,
             "is_favorite": True,

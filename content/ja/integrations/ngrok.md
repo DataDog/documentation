@@ -4,6 +4,15 @@ app_uuid: 3b096ceb-d7a5-4bb5-bf0a-3a07d308d56a
 assets:
   dashboards:
     ngrok_http_events: assets/dashboards/ngrok_http_events.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10397
+    source_type_name: ngrok
 author:
   homepage: https://ngrok.com
   name: ngrok
@@ -21,10 +30,9 @@ integration_id: ngrok
 integration_title: ngrok
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ngrok
-oauth: {}
 public_title: ngrok
 short_description: ngrok HTTP イベントで貴重なアプリケーションインサイトを視覚化
 supported_os:
@@ -58,6 +66,7 @@ tile:
   title: ngrok
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 ngrok は、認証、ロードバランシング、およびその他の重要な制御を備えたグローバルなプレゼンスポイントを使用して、あらゆるクラウド、プライベートネットワーク、またはデバイスにあるアプリケーションに即座にイングレスを提供します。
@@ -66,7 +75,7 @@ ngrok プラットフォームには、Datadog イベント宛先インテグレ
 
 
 
-## セットアップ
+## 計画と使用
 
 ngrok イベントを Datadog に転送するには、2 つの構成が必要です。
 
@@ -112,7 +121,7 @@ ngrok イベントを Datadog に転送するには、2 つの構成が必要で
 - object.http.request.method
 - object.http.request.url.path
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[ngrok サポート][7] に連絡するか、[ngrok ドキュメント][8]を参照してください。
 

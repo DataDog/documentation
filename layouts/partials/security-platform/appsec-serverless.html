@@ -1,0 +1,29 @@
+{{ $dot := . }}
+<div class="appsec-serverless">
+  <div class="container cards-dd">
+    <div class="row row-cols-2 row-cols-sm-3 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/security/application_security/enabling/serverless/?tab=serverlessframework#aws-lambda">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_lambda.png" "class" "img-fluid" "alt" "AWS Lambda" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/application_security/enabling/serverless/?tab=serverlessframework#google-cloud-run">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/google_cloud_run.png" "class" "img-fluid" "alt" "Google Cloud Run" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/application_security/enabling/serverless/?tab=serverlessframework#azure-app-service">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/azure_app_services.png" "class" "img-fluid" "alt" "Azure App Service" "width" "200") }}
+          </div>
+        </a>
+      </div>
+    </div>
+</div>
+</div>
+

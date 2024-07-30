@@ -11,11 +11,11 @@ doc_link: https://docs.datadoghq.com/integrations/awscloudsearch/
 draft: false
 git_integration_title: amazon_cloudsearch
 has_logo: true
-integration_id: amazon-cloudsearch
+integration_id: ''
 integration_title: Amazon CloudSearch
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_cloudsearch
 public_title: Datadog-Amazon CloudSearch インテグレーション
@@ -23,24 +23,25 @@ short_description: インデックスの使用率、正常に完了したリク�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon CloudSearch は、AWS クラウドにおけるマネージド型サービスであり、検索ソリューションを容易かつコスト効率よくセットアップ、管理、スケーリングできます。
 
 このインテグレーションを有効にすると、Datadog にすべての CloudSearch メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CloudSearch` が有効になっていることを確認します。
-2. [Datadog - AWS CloudSearch インテグレーション][3]をインストールします。
+2. [Datadog - Amazon CloudSearch インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -56,23 +57,23 @@ Amazon CloudSearch から S3 バケットまたは CloudWatch のいずれかに
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_cloudsearch" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS Cloudsearch インテグレーションには、イベントは含まれません。
+Amazon CloudSearch インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS Cloudsearch インテグレーションには、サービスのチェック機能は含まれません。
+Amazon CloudSearch インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

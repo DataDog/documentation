@@ -1,6 +1,5 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
-kind: guide
 further_reading:
     - link: '/agent/logs'
       tag: 'Documentation'
@@ -12,10 +11,6 @@ further_reading:
 
 {{% site-region region="us3,us5,eu,gov" %}}
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
-{{% /site-region %}}
-
-{{% site-region region="ap1"%}}
-<div class="alert alert-primary">Datadog PrivateLink in AP1 is currently in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1" %}}
@@ -46,16 +41,18 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
-| Datadog                   | PrivateLink service name                                                        | Private DNS name                                                       |
-|---------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | {{< region-param key="agent_http_endpoint" code="true">}}              |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | {{< region-param key="http_endpoint" code="true">}}                    |
-| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        | <code>api.{{< region-param key="dd_site" >}}</code>                    |
-| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}    | <code>process.{{< region-param key="dd_site" >}}</code>                |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
+| Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+|---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint" code="true">}}              |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint" code="true">}}                    |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>api.{{< region-param key="dd_site" >}}</code>                    |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" >}}</code>                |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
+| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code>                 |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
@@ -98,10 +95,10 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 
 [1]: /help/
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-[5]: /agent/guide/agent-commands/#restart-the-agent
+[5]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 
 {{% tab "Connect from another region using VPC Peering" %}}
@@ -117,16 +114,18 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
-| Datadog                   | PrivateLink service name                                                        |
-|---------------------------|---------------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  |
-| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        |
-| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}    |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     |
+| Datadog                   | PrivateLink service name                                                               |
+|---------------------------|----------------------------------------------------------------------------------------|
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
+| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 
@@ -154,16 +153,18 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog                   | PrivateLink service name                                                        | Private DNS name                                                       |
-  |---------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------|
-  | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
-  | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code>       |
-  | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        | <code>api.{{< region-param key="dd_site" >}}</code>                    |
-  | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
-  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
-  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}    | <code>process.{{< region-param key="dd_site" >}}</code>                |
-  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
-  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
+  | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+  |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+  | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
+  | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code>       |
+  | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>api.{{< region-param key="dd_site" >}}</code>                    |
+  | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
+  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
+  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" >}}</code>                |
+  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
+  | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
+  | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code>                 |
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command: 
   
@@ -241,8 +242,8 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [4]: https://docs.aws.amazon.com/vpc/latest/privatelink/view-vpc-endpoint-service-dns-name.html
 [5]: https://docs.amazonaws.cn/en_us/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
 [6]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 {{% /tab %}}

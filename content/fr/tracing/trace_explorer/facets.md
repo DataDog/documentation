@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: Documentation
   text: En savoir plus sur le Trace Explorer
-kind: documentation
 title: Facettes de spans
 ---
 

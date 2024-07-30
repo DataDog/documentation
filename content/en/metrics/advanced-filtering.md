@@ -1,6 +1,5 @@
 ---
 title: Advanced Filtering
-kind: documentation
 description: Filter your data to narrow the scope of metrics returned.
 further_reading:
   - link: "/metrics/explorer/"
@@ -70,11 +69,10 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 ## Wildcard filtered queries 
 
-Tag value prefix and suffix wildcard matching is supported: 
+Prefix, suffix, and substring wildcard tag filtering are supported: 
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
-
-**Note**: Prefix and suffix wildcard matching in the same filter is not supported.
+-  `node:*-prod-*`
 
 ### Wildcard filtered query examples
 
@@ -82,12 +80,19 @@ Tag value prefix and suffix wildcard matching is supported:
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="Wildcard used as suffix" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_suffix_example.png" alt="Wildcard used as suffix" style="width:100%;" >}}
+
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="Wildcard used as prefix" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_prefix_example.png" alt="Wildcard used as prefix" style="width:100%;" >}}
+
+```
+avg:system.disk.utilized{region:*east*} by {region}
+```
+
+{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="Wildcard used as infix" style="width:100%;" >}}
 
 ## Exclusion functions
 

@@ -30,10 +30,9 @@ integration_id: dotnetclr
 integration_title: .NET CLR
 integration_version: 1.14.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: dotnetclr
-oauth: {}
 public_title: .NET CLR
 short_description: Visualisez et surveillez les statuts de Dotnetclr
 supported_os:

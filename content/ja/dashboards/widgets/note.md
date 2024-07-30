@@ -6,7 +6,6 @@ further_reading:
 - link: /ja/dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築方法について
-kind: documentation
 title: ノート &amp; リンクウィジェット
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Metric Type Modifiers
-kind: documentation
 aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
@@ -77,8 +76,6 @@ Depending on the metric type you applied them to, the behavior differs:
 {{< /tabs >}}
 
 ### The `weighted()` modifier
-
-<div class="alert alert-info">The <code>.weighted()</code> modifier is in beta. To enable this feature, <a href="https://docs.datadoghq.com/help/" target="_blank">contact Support</a>.</div>
 
 Tags such as `pod name` or `container_name` cause high tag churn, especially when creating queries for cost management, capacity planning, or autoscaling for containerized applications. To ensure mathematical accuracy of queries on gauges regardless of tag churn, you can use a `.weighted()` in-application modifier. The `.weighted()` modifier enables Datadog to properly weight metric values based on the lifespan of these frequently churning tags. 
 

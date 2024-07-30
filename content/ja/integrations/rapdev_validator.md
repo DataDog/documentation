@@ -9,6 +9,7 @@ assets:
     RapDev Validator Host Dashboard: assets/dashboards/host_dashboard.json
     RapDev Validator Synthetic Dashboard: assets/dashboards/synthetic_dashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,6 +20,7 @@ assets:
       prefix: rapdev.validator.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10183
     source_type_name: RapDev Validator
   logs: {}
   monitors:
@@ -42,12 +44,11 @@ integration_id: rapdev-validator
 integration_title: Tag Validator
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_validator
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -70,6 +71,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
   media:
@@ -82,21 +84,22 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 RapDev Validator は、Datadog 環境でのタグモニタリングと Agent のコンプライアンス問題を解決するのに役立ちます。インテグレーションはタグキーのリストと、お使いの環境のタグ付け戦略に基づく許容値を受け取り、それらをメトリクスおよびサービスチェックとして Datadog インスタンスに報告します。このようにして、お使いの環境内のホストに正しいタグが割り当てられているかを表示することができます。
 
-### ダッシュボード  
+### ライブラリ
 1. RapDev Validator ホストダッシュボード
 2. RapDev Validator Synthetic ダッシュボード
 3. RapDev Validator ダッシュボード
 
-### アラート設定
+### ログ管理
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - メール: support@rapdev.io

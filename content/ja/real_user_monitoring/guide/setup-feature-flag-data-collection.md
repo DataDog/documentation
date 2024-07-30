@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
 title: RUM の機能フラグデータの概要
 ---
 
@@ -148,9 +147,9 @@ Amplitude の SDK の初期化については、Amplitude の [iOS SDK ドキュ
 ```swift
   class DatadogExposureTrackingProvider : ExposureTrackingProvider {
     func track(exposure: Exposure) {
-      // Amplitude が露出を報告したときに機能フラグを送信します
+      // Amplitude で露出が報告された際に機能フラグを送信します
       if let variant = exposure.variant {
-        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+        RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
       }
     }
   }
@@ -217,7 +216,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
    ```swift
-   Global.rum.addFeatureFlagEvaluation(key, value);
+   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -454,7 +453,7 @@ Split の SDK の初期化については、[Split の iOS SDK ドキュメン�
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
-          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
+          RUMMonitor.shared().addFeatureFlagEvaluation(name: feature, value: treatment)
       }
   }
 ```

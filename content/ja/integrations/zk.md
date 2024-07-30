@@ -41,10 +41,9 @@ integration_id: zookeeper
 integration_title: ZooKeeper
 integration_version: 4.2.3
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: zk
-oauth: {}
 public_title: ZooKeeper
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 supported_os:

@@ -7,6 +7,7 @@ assets:
   dashboards:
     RapDev GitHub Overview: assets/dashboards/RapDevGitHubDashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
       prefix: rapdev.github.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10289
     source_type_name: RapDev GitHub
 author:
   homepage: https://www.rapdev.io
@@ -37,12 +39,11 @@ integration_id: rapdev-github
 integration_title: GitHub
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_github
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -69,6 +70,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: GitHub の組織やエンタープライズを監視する
   media:
@@ -87,6 +89,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -96,10 +99,10 @@ tile:
 + セルフホストランナーとインストール型ランナー
 + GitHub ワークフローモニタリング
 
-### ダッシュボード  
+### ライブラリ
 このインテグレーションは、**RapDev GitHub Dashboard** と呼ばれるすぐに使えるダッシュボードを提供します。このダッシュボードは、データが Datadog に送信されるたびにポップアップし、特定のリポジトリや作成者の検索をさらに絞り込むための環境変数が含まれています。
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 - サポート: support@rapdev.io
 - セールス: sales@rapdev.io

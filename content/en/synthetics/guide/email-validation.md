@@ -1,7 +1,6 @@
 ---
-title: Email Validation With Browser Tests
-kind: documentation
-description: Verify an email and its content with browser test steps
+title: Use Email Validation In Browser Tests
+description: Verify an email and its content with browser test steps.
 further_reading:
 - link: "/synthetics/browser_tests/actions"
   tag: "Documentation"

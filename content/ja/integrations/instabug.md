@@ -20,10 +20,9 @@ integration_id: instabug
 integration_title: Instabug
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: instabug
-oauth: {}
 public_title: Instabug
 short_description: モバイルアプリの健全性とパフォーマンスを監視・追跡します。
 supported_os:

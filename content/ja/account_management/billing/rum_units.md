@@ -1,6 +1,5 @@
 ---
 title: RUM の請求についての詳細
-kind: documentation
 beta: true
 ---
 

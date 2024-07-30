@@ -1,6 +1,7 @@
 ---
 app_id: rum-javascript
 app_uuid: d2496eee-ced1-4bf2-a85d-b8277b4952cf
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -19,10 +20,9 @@ integration_id: rum-javascript
 integration_title: JavaScript
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_javascript
-oauth: {}
 public_title: JavaScript
 short_description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
 supported_os:
@@ -42,6 +42,7 @@ tile:
   title: JavaScript
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -61,7 +62,7 @@ JavaScript アプリケーションをエンドツーエンドで監視します
 - フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
 
 
-## セットアップ
+## 計画と使用
 
 ### RUM イベントの収集
 
@@ -75,9 +76,9 @@ JavaScript アプリケーションのトレースを Datadog に送信し始め
 
 JavaScript アプリケーションのログを Datadog に転送し始めるには、[ブラウザログ収集][4]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 JavaScript インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
 
@@ -89,7 +90,7 @@ JavaScript インテグレーションには、メトリクスは含まれてい
 
 JavaScript インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

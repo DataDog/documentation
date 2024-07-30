@@ -1,10 +1,15 @@
 .glossary-main {
-  h2:before {
-    margin-top: -140px !important;
-    height: 140px !important;
-  }
+    h2:before {
+        margin-top: -140px !important;
+        height: 140px !important;
+    }
     h4 {
         text-transform: none;
+    }
+
+    .core-product-label {
+        @include font-size-line-height(18px, 24px);
+        padding: 0px 8px 2px 8px;
     }
 
     #glossary-nav {
@@ -17,6 +22,7 @@
         @include media-breakpoint-up(md) {
             margin-top: 3px;
             padding-top: 11px;
+            padding-bottom: 6px;
             background: white;
             width: 100%;
             top: 89px;
@@ -58,7 +64,7 @@
             flex-direction: column;
 
             @include media-breakpoint-up(md) {
-                padding-left: 15px;
+                padding-left: 0px;
                 flex-direction: row;
             }
 
@@ -72,10 +78,10 @@
                 }
             }
         }
-        .filters-glossary{
-            padding-left: 15px;
-            margin-top: 16px;
-            font-size: 16px;
-        }
+    }
+    .filters-glossary{
+        padding-left: 15px;
+        margin-top: 16px;
+        font-size: 16px;
     }
 }

@@ -4,7 +4,6 @@ cascade:
     category: ガイド
     rank: 20
     subcategory: アカウントの管理ガイド
-kind: ガイド
 private: true
 title: アカウントの管理ガイド
 ---
@@ -16,5 +15,6 @@ title: アカウントの管理ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="一般的なアカウント管理:" >}}
+    {{< nextlink href="account_management/guide/manage-datadog-with-terraform" >}}Terraform で Datadog を管理する{{< /nextlink >}}
     {{< nextlink href="account_management/guide/access-your-support-ticket" >}}サポートチケットにアクセスする{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,6 +1,7 @@
 ---
 categories:
 - キャッシュ
+- モニター
 dependencies: []
 description: Datadog メトリクスを使用して Edgecast の Web トラフィックを監視します。
 doc_link: https://docs.datadoghq.com/integrations/edgecast_cdn/
@@ -15,7 +16,7 @@ integration_id: ''
 integration_title: Edgecast
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: edgecast_cdn
 public_title: Datadog-Edgecast インテグレーション
@@ -24,11 +25,12 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-Edgecast のメトリクスを収集し、オリジンごとの Web トラフィックを監視することができます。
+Edgecast は、エッジコンピューティング、アプリケーションセキュリティ、オーバーザトップビデオストリーミングのためのコンテンツデリバリネットワーク (CDN) やその他のソリューションを提供するグローバルネットワークプラットフォームです。Edgecast のメトリクスを収集し、オリジン別に Web トラフィックを監視することができます。
 
-## セットアップ
+## 計画と使用
 
 ### Edgecast クライアントの作成 
 
@@ -38,7 +40,7 @@ Edgecast のメトリクスを収集し、オリジンごとの Web トラフィ
 4. **Settings** に移動し、**JWT Expiration in Seconds** を 600 に変更します。
 5. **Save** をクリックすると、このクライアントと変更した設定値が保存されます。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Datadog の [Edgecast インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
 2. Datadog でこのクライアントを識別するための一意の名前を入力します。
@@ -48,21 +50,21 @@ Edgecast のメトリクスを収集し、オリジンごとの Web トラフィ
 4. オプションで、カスタムタグを追加して、このインテグレーションのために収集されたすべてのメトリクスに関連付けます。
    * メトリクスには、オリジンに関連する Edgecast 名が自動的にタグ付けされます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "edgecast_cdn" >}}
 
 
-### イベント
+### ヘルプ
 
 Edgecast インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Edgecast インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
@@ -71,6 +73,6 @@ Edgecast インテグレーションには、サービスのチェック機能�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://id.vdms.io
-[2]: https://app.datadoghq.com/account/settings#integrations/edgecast-cdn
+[2]: https://app.datadoghq.com/integrations/edgecast-cdn
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/edgecast_cdn/edgecast_cdn_metadata.csv
 [4]: https://docs.datadoghq.com/ja/help

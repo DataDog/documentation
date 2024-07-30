@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: メソッドが属性と同じ名前を持つ
 ---
 ## メタデータ

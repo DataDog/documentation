@@ -39,10 +39,9 @@ integration_id: arangodb
 integration_title: ArangoDB
 integration_version: 1.4.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: arangodb
-oauth: {}
 public_title: ArangoDB
 short_description: ArangoDB の構成に関するメトリックスを追跡します。
 supported_os:

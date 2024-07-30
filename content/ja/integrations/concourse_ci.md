@@ -3,6 +3,7 @@ app_id: concourse-ci
 app_uuid: eb83d03f-e1d6-4718-8e54-922f4d2528b1
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: concourse.ci.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10041
     source_type_name: Concourse CI
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -29,10 +31,9 @@ integration_id: concourse-ci
 integration_title: Concourse-CI
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: concourse_ci
-oauth: {}
 public_title: Concourse-CI
 short_description: Concourse CI から送信されるメトリクスを収集
 supported_os:
@@ -54,6 +55,7 @@ tile:
   title: Concourse-CI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -63,13 +65,13 @@ Concourse CI で Datadog メトリクスエミッターを構成すると、以�
 - パイプラインの処理時間、コンテナの数、およびマウントされたワーカーボリュームを可視化できます。
 - 低速なリクエストを識別してルートを構築できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Concourse CI には Datadog メトリクスエミッターが付属しています。起動時にメトリクスを送信するように [ATC][1] を構成するには、[Datadog Agent][2] がインストールされていることが前提条件です。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、`concourse.ci` というプレフィックスを使用することが重要です。
 
@@ -84,13 +86,13 @@ Metric Emitter (Datadog):
     --datadog-prefix=           Prefix for all metrics to easily find them in Datadog [$CONCOURSE_DATADOG_PREFIX]
 ```
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "concourse_ci" >}}
 
 
-### イベント
+### ヘルプ
 
 このインテグレーションは、イベントをサポートしていません。
 
@@ -98,12 +100,12 @@ Metric Emitter (Datadog):
 
 このインテグレーションは、サービスチェックを収集しません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://concourse-ci.org/concepts.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [4]: https://concourse-ci.org/metrics.html#configuring-metrics
 [5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv

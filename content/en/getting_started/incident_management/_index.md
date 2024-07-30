@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Incident Management
-kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
@@ -32,6 +31,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
+    - link: 'https://www.datadoghq.com/blog/how-datadog-manages-incidents/'
+      tag: 'Blog'
+      text: 'How we manage incidents at Datadog'
 ---
 
 {{% site-region region="gov" %}}
@@ -52,11 +54,11 @@ This guide walks you through using the Datadog site for declaring an incident, u
 
 This guide describes using the [Datadog Clipboard][2] to declare an incident. Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
-1. In the Datadog menu on the left-hand side, go to **Dashboard** > **Dashboard lists** and select **System - Metrics**.
+1. In Datadog, navigate to [**Dashboard List**][15] and select **System - Metrics**.
 2. Hover over one of the graphs and copy it to the Clipboard with one of the following commands:
     - **Ctrl**/**Cmd** + **C**
     - Click the **Export** icon on the graph and select **Copy**.
-3. In the Datadog menu on the left-hand side, go to **Monitors** > **Manage Monitors** and select **[Auto] Clock in sync with NTP**.
+3. In the Datadog menu on the left-hand side, go to [**Monitors** > **Monitors List**][16] and select **[Auto] Clock in sync with NTP**.
 4. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 5. In the Clipboard, click **Add current page** to add the monitor to the Clipboard.
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="Copy to Clipboard" responsive="true" style="width:100%;">}}
@@ -133,7 +135,7 @@ You can add any Slack comment in the incident channel to the timeline so that yo
  In the _Remediation_ section, you can keep track of documents and tasks for investigating the issue or for post-incident remediation tasks.
 
 1. Click the **Remediation** tab.
-2. Click the the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
+2. Click the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
 3. Add a task by adding a description of a task in the _Incident Tasks_ box, for example: `Run the steps in the notebook.`
 4. Click **Create Task**.
 5. Click **Assign To** and assign yourself the task.
@@ -204,6 +206,8 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [9]: /service_management/incident_management/#status-levels
 [10]: /service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /service_management/mobile/
+[12]: /mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

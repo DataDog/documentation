@@ -1,6 +1,5 @@
 ---
 title: Datagram Format and Shell Usage
-kind: documentation
 description: Overview of the datagram format used by DogStatsD as well as (advanced) shell usage.
 aliases:
     - /developers/dogstatsd/data_types/
@@ -11,9 +10,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. The raw datagrams are encoded in UTF-8. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
@@ -108,7 +104,7 @@ The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 | `<TITLE_UTF8_LENGTH>`                | Yes      | The length (in bytes) of the UTF-8-encoded `<TITLE>`                                                                              |
 | `<TEXT_UTF8_LENGTH>`                 | Yes      | The length (in bytes) of the UTF-8-encoded `<TEXT>`                                                                               |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
+| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. Defaults to the Datadog Agent instance.                                                                               |
 | `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
 | `p:<PRIORITY>`                       | No       | Set to `normal` or `low`. Default `normal`.                                                                            |
 | `s:<SOURCE_TYPE_NAME>`               | No       | Add a source type to the event. No default.                                                                            |
@@ -202,7 +198,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}

@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: RUM とセッションリプレイについて
-kind: documentation
 title: RUM とセッションリプレイの課金
 ---
 

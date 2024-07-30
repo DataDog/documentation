@@ -2,7 +2,7 @@
 categories:
 - クラウド
 - インシデント
-- 通知
+- notifications
 dependencies: []
 description: このインテグレーションにより、Datadog でトリガーされたアラートから Salesforce Incidents を作成し、既存のインシデントに新しい情報を随時更新することができます。
 doc_link: https://docs.datadoghq.com/integrations/salesforce_incidents/
@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Salesforce Incidents
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: salesforce_incidents
 public_title: Datadog-Salesforce Incidents インテグレーション
@@ -21,11 +21,12 @@ short_description: Datadog のアラートから Salesforce Service Cloud のイ
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Salesforce Incidents インテグレーションを利用すると、モニターアラートイベントから Salesforce Service Cloud にインシデントを作成することができます。Salesforce Datadog Widget を使用すると、インシデントに関連するモニターイベントのタイムラインを Salesforce で直接表示できます。
 
-## セットアップ
+## 計画と使用
 
 ### Datadog と Salesforce Service Cloud の連携
 
@@ -47,7 +48,7 @@ Salesforce 組織でトラフィックのフィルタリングに Trusted IP 範
 2. インシデントテンプレートの名前を入力します。この名前には `salesforce_incidents-` というプレフィックスが付き、モニター通知で使用するハンドルになります (`@salesforce_incidents-my-incident-template-name` のように)。
 3. Salesforce Organization を選択します。
 4. インシデントを作成する際に使用する件名、説明、所有者、優先順位を指定します。
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 
 ### Datadog ウィジェットを Salesforce Service Cloud に追加する
 
@@ -57,9 +58,9 @@ Salesforce Service Cloud に Datadog Widget をインストールするには
 2. Salesforce Service Cloud で、Incident Record ページに移動します。
 3. 歯車のアイコンをクリックし、**Edit page** をクリックします。
 4. 左のナビゲーションのカスタムコンポーネントから Datadog ウィジェットをクリックし、ページにドラッグします。
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 
-## 使用方法
+## API
 
 #### Datadog アラートから Salesforce Service Cloud にインシデントを作成する
 
@@ -68,21 +69,21 @@ Datadog モニターの **Notify your team** または **Say what's happening** 
 インシデントは、モニターがトリガーされると作成されます。モニターが解決されるまで、新しいインシデントは作成されません。
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Salesforce Incidents インテグレーションは、メトリクスを提供しません。
 
-### イベント
+### ヘルプ
 
 Salesforce Incidents インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Salesforce Incidents インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

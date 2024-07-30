@@ -1,11 +1,11 @@
 ---
 categories:
 - cloud
-- data store
+- data stores
 - aws
 - ログの収集
 dependencies: []
-description: AWS DocumentDB のメトリクスとログを監視
+description: Amazon DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
 draft: false
 further_reading:
@@ -14,34 +14,35 @@ further_reading:
   text: Amazon DocumentDB のメトリクスとログを Datadog で収集
 git_integration_title: amazon_documentdb
 has_logo: true
-integration_id: amazon-documentdb
+integration_id: ''
 integration_title: Amazon DocumentDB
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_documentdb
 public_title: Datadog-Amazon DocumentDB インテグレーション
-short_description: AWS DocumentDB のメトリクスとログを監視
+short_description: Amazon DocumentDB のメトリクスとログを監視
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon DocumentDB は、MongoDB のワークロードをサポートする、高速で、スケーラブル、高可用性、フルマネージド型のドキュメントデータベースサービスです。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DocumentDB` が有効になっていることを確認します。
-2. [Datadog - AWS DocumentDB インテグレーション][3]をインストールします。
+2. [Datadog - Amazon DocumentDB インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -57,23 +58,23 @@ Amazon DocumentDB から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_documentdb" >}}
 
 
 AWS から取得される各メトリクスには、dbinstanceidentifier、dbclusteridentifier など、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS DocumentDB インテグレーションには、イベントは含まれません。
+Amazon DocumentDB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
+Amazon DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

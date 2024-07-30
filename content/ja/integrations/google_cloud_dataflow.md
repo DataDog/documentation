@@ -17,7 +17,7 @@ integration_id: google-cloud-dataflow
 integration_title: Google Cloud Dataflow
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   job-backlog-time: assets/monitors/backlog_monitor.json
@@ -27,48 +27,54 @@ short_description: Google Cloud Dataflow のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Cloud Dataflow は、ストリーム (リアルタイム) モードとバッチ (履歴) モードのどちらでも、同等の信頼性と表現力でデータを変換し、強化することができる、フルマネージド型のサービスです。
 
 Datadog Google Cloud インテグレーションを使用して、Google Cloud Dataflow からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
 ### メトリクスの収集
 
-#### インストール
+#### インフラストラクチャーリスト
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### ログの収集
+### 収集データ
 
-Google Cloud Dataflow のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud Dataflow のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
 これが完了したら、Google Cloud Dataflow のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
 1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Dataflow のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_cloud_dataflow" >}}
 
 
-### イベント
+<div class="alert alert-warning">
+Google Cloud Dataflow を使って Apache Beam パイプラインのメトリクスを監視する場合、Gauge の静的メソッドから生成されたメトリクスは収集されないことに注意してください。これらのメトリクスを監視する必要がある場合は、<a href="https://micrometer.io/docs">Micrometer</a> を使用できます。
+</div>
+
+
+### ヘルプ
 
 Google Cloud Dataflow インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Cloud Dataflow インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

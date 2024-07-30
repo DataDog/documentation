@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/network_performance_monitoring/guide/manage_traffic_costs_with_npm/
-kind: ガイド
 title: NPM でクラウドトラフィックのコストを管理する
 ---
 特にクラウド環境ではトラフィックが高額になりがちです。クラウドプロバイダーはトラフィックがアベイラビリティーゾーン (AZ) の範囲内、AZ 間、特定のリージョン間、またはオープンなインターネットのどれに流入するのかに応じて異なる課金形態を採用しています。クロスリージョンおよび送信トラフィックは最も高額となるだけでなく、エラー、レイテンシー、セキュリティ上の脅威に対する脆弱性も最高水準となります。
@@ -37,7 +36,7 @@ Datadog で Kubernetes への移行を行いましたが、ステートレスサ
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/scope_destination_points.png" alt="Type ファセットの使用">}}
     その後、送信先を `domain` でグループ化して送信先ごとに外部トラフィックの量を分割します。パブリックサーバーには Datadog Agent をインストールできませんが、Datadog は外部およびクラウドエンドポイントを示す IP を、読んで意味の通るわかりやすいドメイン名に変換して解決することができます。
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/dns_resolution.png" alt="DNS でグループ化">}}
-    上記のサンプルクエリは部分文字列のワイルドカードエントリ (dns:*s3* など) を使用して AWS S3、Elastic ロードバランサー、API、および外部の `.com` ドメインへのトラフィックでフィルターを適用しています。
+    上記の例のクエリは部分文字列のワイルドカードエントリ (dns:*s3* など) を使用して Amazon S3、Elastic ロードバランサー、API、および外部の `.com` ドメインへのトラフィックをフィルタリングします。
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/wildcard.png" alt="ワイルドカード検索">}}
 
 ## トラフィックコストの可視化

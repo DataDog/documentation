@@ -22,12 +22,11 @@ integration_id: steadybit-steadybit
 integration_title: Steadybit
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: steadybit_steadybit
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -97,11 +96,11 @@ tile:
  - メール: [Steadybit Support][7].
 
 [1]: https://steadybit.com/?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
-[2]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
+[2]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
 [3]: https://steadybit.com/pricing?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
 [4]: office@steadybit.com
 [5]: https://signup.steadybit.io/?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
-[6]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme#content-installation
+[6]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme#content-installation
 [7]: mailto:support@steadybit.com
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/steadybit-steadybit" target="_blank">こちらをクリック</a>してください。

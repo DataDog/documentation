@@ -31,7 +31,7 @@ guid: f1098d6f-b393-4374-81c0-47c0a142aeef
 integration_id: kong
 integration_title: Kong
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: kong.

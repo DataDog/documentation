@@ -1,6 +1,5 @@
 ---
 title: Container Troubleshooting
-kind: documentation
 description: Troubleshooting containers-related issues
 further_reading:
 - link: "/containers/troubleshooting/duplicate_hosts"
@@ -16,7 +15,7 @@ There are three methods of deploying the Agent:
 
 2. In a **cloud environment**, such as [Amazon ECS][2], [Fargate in an Amazon ECS environment][3], or [Amazon EKS][4]
 
-3. In a [Kubernetes environment][2]
+3. In a [Kubernetes environment][16]
 
 These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
 
@@ -32,7 +31,7 @@ A useful way to inject [environment variables][8] or to configure a DogStatsD li
 
 Verify that the following are true:
 
-- The metrics endpoint is exposed and is open for the the Agent to reach.
+- The metrics endpoint is exposed and is open for the Agent to reach.
 
 - There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
 
@@ -85,7 +84,7 @@ Ensure that your IAM policy is updated.
 
   - [ECS][12]: Ensure that the log router is attached to the container from which you would like to collect logs.
 
-  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Kinesis Data Firehose][14]. Using Kinesis Data Firehose to collect logs requires the successful implementation of the Kinesis Data Firehose delivery stream, as well as some command line tools. 
+  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Amazon Data Firehose][14]. Using Amazon Data Firehose to collect logs requires the successful implementation of the Amazon Data Firehose delivery stream, as well as some command line tools. 
  
 
 ## Kubernetes
@@ -170,3 +169,4 @@ $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 [13]: https://docs.datadoghq.com/integrations/eks_fargate/#log-collection
 [14]: https://docs.datadoghq.com/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
 [15]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare
+[16]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator

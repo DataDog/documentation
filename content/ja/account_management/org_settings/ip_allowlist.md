@@ -1,10 +1,9 @@
 ---
-kind: documentation
 title: IP 許可リスト
 ---
 
-{{< callout url="/help/" header="IP 許可リストの概要" >}}
-IP 許可リスト機能は、エンタープライズレベルのお客様のみご利用いただけます。サポートにお問い合わせの上、アクセスをリクエストしてください。
+{{< callout url="/help/" header="Get Started with IP Allowlist" >}}
+IP 許可リスト機能は、エンタープライズプランのお客様のみご利用いただけます。サポートに連絡してアクセスをリクエストしてください。
 {{< /callout >}}
 
 ## 概要

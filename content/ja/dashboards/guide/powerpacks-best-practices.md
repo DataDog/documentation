@@ -9,7 +9,6 @@ further_reading:
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: ガイド
   text: 適切なダッシュボードを維持するためのベストプラクティス
-kind: ガイド
 title: パワーパックでグラフの専門知識を拡大する
 ---
 

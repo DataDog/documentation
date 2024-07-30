@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "500"
+    "other": "750"
   },
 
   "beta_sentence": {
@@ -316,6 +316,14 @@
   },
   "beta_check":{
     "other": "Bêta"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
   }
-
 }

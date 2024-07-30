@@ -1,6 +1,5 @@
 ---
 title: Incident Settings
-kind: documentation
 description: Configure and customize your Incident Management experience
 aliases:
 - /monitors/incident_management/notification_rules
@@ -125,7 +124,10 @@ Changing your channel name template does not rename any existing incident channe
 
 #### Slack features
 
-You can mirror Slack channel messages, to import and retain all slack conversations in the incident timeline. **Note**: This counts every slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
+The following features are available to use with the Incident Management Slack integration. Enable or configure these options in **[Service Management > Incidents > Settings > Integrations][15]**.
+- Mirror Slack channel messages, to import and retain all slack conversations in the incident timeline. **Note**: This counts every slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
+- You can also automatically add [team members][6] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
+- Automatically archive a slack channel after a certain amount of time.
 
 ## Notifications
 
@@ -160,7 +162,7 @@ To configure a new notification rule:
 2. Under **For incidents matching...**, select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers for any incident.
 3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][18]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][19] for this option to appear.
 4. **With Template**: Select the desired message template you want the notification rule to use.
-5. **Renotify on updates to**: Choose which incident properties trigger renotifications. Whenever one or more of the selected properties changes, a new notification is sent. Note that you cannot renotify on properties that are already in your filters (see step 2, above).
+5. **Renotify on updates to**: Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change. **Note**: properties already in your filters (see step 2) are automatically included in these rules.
 6. Click **Save**
 
 You can perform the following operations to manage your notification rules.
@@ -205,5 +207,5 @@ To create a postmortem template:
 [15]: https://app.datadoghq.com/incidents/settings#Integrations
 [16]: https://app.datadoghq.com/account/settings#integrations
 [17]: /service_management/incident_management/incident_details/#notifications-section
-[18]: /monitors/notifications/?tab=is_alert#notify-your-team
-[19]: /service_management/mobile/
+[18]: /monitors/notifications/?tab=is_alert#configure-notifications-and-automations
+[19]: /mobile/

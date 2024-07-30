@@ -2,7 +2,6 @@
 title: Docker Data Collected
 aliases:
 - /agent/docker/data_collected
-kind: documentation
 ---
 
 ## Docker integration

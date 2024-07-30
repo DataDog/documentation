@@ -5,19 +5,20 @@ further_reading:
   text: Synthetics API
 - link: /synthetics/
   tag: ドキュメント
-  text: チェックを管理する
+  text: Synthetic モニタリングについて
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Terraform による Synthetic API テストの作成と管理
-kind: ガイド
 title: API で API テストを作成する
 ---
 
 ## 概要
 
-このガイドでは、API テストを作成するために使用できるコンフィギュレーションファイルの例を記載しています。
+このガイドには、API テストの作成に使用できるコンフィギュレーションファイルの例や [Terraform][2] リソースへのリンク、グローバル変数などの関連する Synthetics リソースが含まれています。
 
-API で API テストを作成するには、[JSON のコンフィギュレーション例](#json-configuration)を参照してください。Python クライアントで HTTP テストを作成するには、[Python クライアントの例](#python-client)を参照してください。
+   - API を使用している場合は、[JSON の構成例](#json-configuration)を参照してください。
+   - Python クライアントを使用している場合は、[Python クライアントの例](#python-client)を参照してください。
+   - Terraform を使用している場合は、[Terraform の例](#terraform)を参照してください。
 
 詳しくは、API ドキュメントの [API テストの作成][1]をご覧ください。
 
@@ -464,8 +465,34 @@ configuration = Configuration(
         print("Exception when calling SyntheticsApi->create_synthetics_api_test: %s\n" % e)
 {{< /code-block >}}
 
+## ダッシュボード  
+
+### API テスト
+
+[Synthetic テストリソース][7]を使用して、`type` を `api` に設定することで、Terraform で API テストを作成・管理することができます。
+
+### プライベートロケーション
+
+カスタムロケーションや保護されたロケーションから Synthetic テストを実行する必要がある場合は、[プライベートロケーションリソース][3]を使用して、テストを実行するプライベートロケーションを作成および管理できます。[プライベートロケーション][4]のページで詳細をご覧ください。
+
+### グローバル変数とローカル変数
+
+[Synthetics グローバル変数リソース][5]を使用して、Synthetics グローバル変数を作成・管理します。これはテスト間で安全に共有できる変数です。また、[config_variable][9] でネストされたスキーマを使用して、テスト固有の[組み込みのローカル変数][8]を作成することもできます。
+
+### 同時実行上限
+
+[Synthetics の同時実行上限リソース][6]を使用すると、並列で実行される Synthetic テストの数を制限することができます。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/api/latest/synthetics/#create-an-api-test
+[2]: https://www.terraform.io/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
+[4]: /ja/synthetics/private_locations
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_concurrency_cap
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+[8]: https://docs.datadoghq.com/ja/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#nested-schema-for-config_variable

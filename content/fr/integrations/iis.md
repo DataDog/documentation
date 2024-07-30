@@ -45,10 +45,9 @@ integration_id: iis
 integration_title: IIS
 integration_version: 2.19.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: iis
-oauth: {}
 public_title: IIS
 short_description: Surveillez des métriques globales ou par site ainsi que le statut
   de disponibilité de chaque site.

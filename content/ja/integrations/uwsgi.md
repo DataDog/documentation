@@ -1,27 +1,27 @@
 ---
-title: uWSGI
-name: uwsgi
-kind: インテグレーション
-description: uWSGI のログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡
-short_description: ログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡できます。
 categories:
-  - ログの収集
-  - web
-doc_link: /integrations/uwsgi/
+- ログの収集
+- web
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
+description: uWSGI のログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡
+doc_link: /integrations/uwsgi/
+git_integration_title: uwsgi
 has_logo: true
+integration_id: uwsgi
 integration_title: uWSGI
 is_public: true
+custom_kind: integration
+name: uwsgi
 public_title: Datadog-uWSGI インテグレーション
-ddtype: check
-git_integration_title: uwsgi
+short_description: ログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡できます。
 supported_os:
-  - linux
-  - mac_os
-  - windows
-integration_id: uwsgi
+- linux
+- mac_os
+- windows
+title: uWSGI
 ---
+
 ## 概要
 
 uWSGI のログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータス (2xx、3xx、4xx、5xx)、サービスのアップタイム、速度低下などを追跡できます。
@@ -32,7 +32,7 @@ uWSGI のログを収集して、毎秒のリクエスト数、処理バイト�
 
 uWSGI サーバーが実行されているインスタンス上に [Agent をインストール][1]します。
 
-### コンフィギュレーション
+### 構成
 
 uWSGI サーバーは、デフォルトでログを stdout に記録します。ファイルへのログ記録を開始するには、以下のコマンドを実行するか、[ファイルへのログ記録に関する uWSGI の説明][2]に従います。
 
@@ -70,7 +70,7 @@ Datadog-uWSGI インテグレーションは、デフォルトで、[uWSGI の�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://uwsgi-docs.readthedocs.io/en/latest/Logging.html#logging-to-files
 [3]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging

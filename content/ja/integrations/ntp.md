@@ -19,7 +19,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
@@ -30,10 +29,9 @@ integration_id: ntp
 integration_title: NTP
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ntp
-oauth: {}
 public_title: NTP
 short_description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
 supported_os:
@@ -46,8 +44,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
-  - Category::Network
+  - Category::ネットワーク
   configuration: README.md#Setup
   description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
   media: []
@@ -56,6 +53,7 @@ tile:
   title: NTP
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -81,7 +79,7 @@ Network Time Protocol (NTP) インテグレーションはデフォルトで有�
 
 NTP チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 Agent はデフォルトで  NTP チェックを有効にします。チェックを自分で構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーで `ntp.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ntp.d/conf.yaml][3] を参照してください。
 
@@ -91,7 +89,7 @@ Agent はデフォルトで  NTP チェックを有効にします。チェッ�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `ntp` を探します。
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 {{< get-metrics-from-git "ntp" >}}
@@ -101,7 +99,7 @@ Agent はデフォルトで  NTP チェックを有効にします。チェッ�
 
 NTP チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "ntp" >}}
 
 
