@@ -269,7 +269,11 @@ function loadPage(newUrl) {
         httpRequest.open('GET', newUrl);
         httpRequest.send();
     } else {
-        window.location.href = newUrl;
+        // Integrations Pages
+        if(new URL(newUrl).pathname !== document.documentElement.dataset.relpermalink) {
+            // if switching between integrations pages, reload page
+            window.location.href = newUrl;
+        }
     }
 }
 
