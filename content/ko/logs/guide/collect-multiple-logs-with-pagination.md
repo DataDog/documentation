@@ -190,6 +190,6 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-*Logging without Limits은 Datadog, Inc의 상표입니다.
+*Logging without Limits는 Datadog, Inc의 상표입니다.
 
 [1]: /ko/api/v1/logs/#get-a-list-of-logs
