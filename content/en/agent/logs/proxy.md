@@ -296,6 +296,7 @@ stream {
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/log_transport?tab=https
 [2]: /agent/configuration/proxy/
