@@ -13,7 +13,7 @@ further_reading:
   text: "Sensitive Data Scanner"
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
   tag: "documentation"
-  text: "Dual shipping with Observability Pipelines"
+  text: "Dual ship to Observability Pipelines with the Datadog Agent"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
   tag: "blog"
   text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"

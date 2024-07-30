@@ -103,6 +103,12 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
+### AWS Lambda setup
+
+Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers. 
+
+**Note**: Using the `Datadog-Python` and `Datadog-Extension` layers automatically turns on all LLM Observability integrations, and force flushes spans at the end of the Lambda function.
+
 #### Application naming guidelines
 
 Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unicode string. It may contain the characters listed below:
@@ -563,7 +569,7 @@ def separate_task(workflow_span):
     return
 {{< /code-block >}}
 
-### Flushing in serverless environments
+#### Force flushing in serverless environments
 
 `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
@@ -655,3 +661,4 @@ def server_process_request(request):
 [11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
 [12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/auto_instrumentation/
+[14]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=custom#installation

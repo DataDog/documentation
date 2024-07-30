@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting Android SDK issues
 description: Learn how to troubleshoot issues with Android Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10

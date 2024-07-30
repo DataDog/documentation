@@ -34,7 +34,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP][10]                                                                                                        |
+| `payment.failure`      | None                                                 | [Excessive payment failures from IP][10]                                                                                                        |
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
