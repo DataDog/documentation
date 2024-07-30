@@ -138,6 +138,8 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 
 {{% aws-permissions %}}
 
+{{% aws-resource-collection %}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
