@@ -16,21 +16,21 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) facilita la 
 
 Refuerza tu postura de seguridad y logra un cumplimiento continuo mediante la detección, la priorización y la corrección de configuraciones erróneas en todos tus recursos en la nube utilizando [reglas de cumplimiento predefinidas](#manage-out-of-the-box-and-custom-compliance-rules) de Datadog. 
 
-Vea una descripción general de alto nivel de tu postura de seguridad en la [página de descripción general][1]. Examina los detalles de los errores de configuración y analiza las configuraciones históricas con el [Explorador de configuraciones erróneas][2].
+Ve una descripción general de alto nivel de tu postura de seguridad en la [página de descripción general][1]. Examina los detalles de los errores de configuración y analiza las configuraciones históricas con el [Explorador de configuraciones erróneas][2].
 
 CSM Misconfigurations evalúa los recursos en incrementos de entre 15 minutos y 4 horas (dependiendo del tipo). Datadog genera nuevos errores de configuración en cuanto se completa un análisis y almacena un historial completo de todos los errores de configuración de los últimos 15 meses para que estén disponibles en caso de investigación o auditoría.
 
-{{< img src="security/csm/csm_overview_2.png" alt="Buzón de entrada en la información general de CLoud Security Management, que muestra una lista de los problemas de seguridad priorizados que se debe resolver" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Buzón de entrada en la información general de CLoud Security Management, que muestra una lista de los problemas de seguridad priorizados que se deben corregir" width="100%">}}
 
 ## Observar un cumplimiento de los marcos y referencia del sector
 
-CSM Misconfigurations viene con más de 1000 reglas de cumplimiento predefinidas cuyo mantenimiento está en manos de un equipo de expertos en seguridad. Las reglas se corresponden con los controles y requisitos de las normas de cumplimiento y las referencias del sector, como los marcos de cumplimiento PCI y SOC2.
+CSM Misconfigurations viene con más de 1000 reglas de cumplimiento predefinidas cuyo mantenimiento está en manos de un equipo de expertos en seguridad. Las reglas se corresponden con los controles y requisitos de las reglas de cumplimiento y las referencias del sector, como los marcos de cumplimiento PCI y SOC2.
 
 [Consulta los informes de cumplimiento][3] para ver cómo te va con cada control de un marco de cumplimiento. Los informes incluyen detalles como los recursos con el mayor número de errores de configuración, un desglose completo del número de recursos con errores de configuración aprobados/fallidos y las tres fallas más graves de las reglas.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_2.png" alt="Marcos de cumplimiento de CSM Misconfigurations" width="100%">}}
 
-## Gestión de las normas de cumplimiento predefinidas y personalizadas
+## Gestión de las reglas de cumplimiento predefinidas y personalizadas
 
 Las [reglas de cumplimiento predefinidas][4] ponen de manifiesto los riesgos más importantes para que puedas tomar medidas inmediatas y corregirlos. Datadog desarrolla continuamente nuevas reglas predeterminadas que se importan automáticamente a tu cuenta. [Personaliza las reglas][5] definiendo cómo cada regla analiza tu entorno, [crea reglas personalizadas][6] y [configura notificaciones en tiempo real para errores de configuración](#set-up-real-time-notifications).
 
@@ -46,7 +46,7 @@ Utiliza variables de plantilla y Markdown para [personalizar los mensajes de not
 
 Investiga los detalles utilizando el [Explorador de errores de configuración][10]. Ve información detallada sobre un recurso, como su configuración, las reglas de cumplimiento aplicadas al recurso y las etiquetas (tags) que proporcionan contexto adicional sobre quién es el propietario del recurso y su localización dentro de tu entorno. Si un error de configuración no se ajusta a tu caso de uso empresarial o es un riesgo aceptado, puedes [silenciar el error de configuración][13] hasta un periodo de tiempo indefinido.
 
-También puedes [crear una incidencia en Jira][15] y asignarla a un equipo, utilizar las correcciones de Terraform para generar una solicitud pull en GitHub con cambios en el código que corrijan el error de configuración subyacente y aprovechar [Workflow Automation][14] para crear flujos de trabajo automatizados (con o sin participación humana).
+También puedes [crear una incidencia en Jira][15] y asignarla a un equipo, utilizar las correcciones de Terraform para generar una solicitud pull en GitHub con cambios en el código que corrijan el error de configuración subyacente y aprovechar [Workflow Automation][14] para crear flujos (flows) de trabajo automatizados (con o sin participación humana).
 
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="Página del Explorador de CSM Misconfigurations" width="100%">}}
 
