@@ -12,7 +12,9 @@
 
     <div class="card-body p-2 d-flex flex-column">
         <div class="card-content">
+            {{ if ne .Params.hide_callout_image true}}
             <img class="img-fluid mb-2 mb-md-0" src="{{ .Site.Params.img_url}}images/learning-center-bits-logo-2.png" alt="learning center">
+            {{ end }}
             <div>
                 <h5 class="card-title text-black mt-0 mb-1">{{$header}}</h5>
                 <p class="card-text mb-2">{{.Inner}}</p>
