@@ -63,7 +63,7 @@ It means that you are either:
 If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master` or `main`). After you commit on your default branch, non-default branches are analyzed.
 
-You can always configure your default branch in your repository configuration.
+You can always configure your default branch in-app under [Repository Settings][4].
 
 ## Software Composition Analysis
 
@@ -80,7 +80,7 @@ For issues with Datadog Software Composition Analysis, include the following inf
 If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master` or `main`). After you commit on your default branch, non-default branches are analyzed.
 
-You can always configure your default branch in your repository configuration.
+You can always configure your default branch in-app under [Repository Settings][4].
 
 ## Further reading
 
@@ -89,3 +89,4 @@ You can always configure your default branch in your repository configuration.
 [1]: /help/
 [2]: /code_analysis/static_analysis/github_actions
 [3]: /code_analysis/static_analysis/github_actions#inputs
+[4]: https://app.datadoghq.com/ci/settings/repository
