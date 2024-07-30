@@ -19,6 +19,6 @@ Cloud Security Management Threats supports the following Linux distributions:
 
 - Custom kernel builds are not supported.
 - For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting Cloud Security Management Threats][1].
-- Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example Centos/RHEL 7 with kernel 3.10 has eBPF features backported and is supported).
+- Data collection is done using eBPF, so Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
 
 [1]: /security/cloud_security_management/troubleshooting/threats
