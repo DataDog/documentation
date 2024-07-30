@@ -45,9 +45,9 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) so that you can easily build and deploy pipelines.
 
-The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your logs based on the selected use case. This means you can redact sensitive data and determine which logs should be sent to which destinations before it leaves your environment.
+The Observability Pipelines Worker is the software that runs in your infrastructure and centrally aggregates, processes, and routes your logs based on your use case. This means you can redact sensitive data, pre-process logs, and determine which destinations to send the logs to, before they leave your environment.
 
-The Observability Pipelines UI provides a control plane to manage your Observability Pipelines Workers. You build and edit pipelines, and deploy pipeline changes to your Workers from there. You can also enable monitors for your pipelines to evaluate their health.
+The Observability Pipelines UI provides a control plane to manage your Observability Pipelines Workers. You build and edit pipelines and deploy pipeline changes to your Workers from there. You can also enable monitors for your pipelines to evaluate their health.
 
 ## Get started
 
@@ -88,11 +88,11 @@ As your organization grows, your observability needs for different use cases, su
 
 #### Archive Logs
 
-If you are migrating to Datadog Log Management, use the Archive Logs template to help you make that transition. You can preprocess logs sent to your current vendor and separately preprocess logs sent to a cloud storage option for archiving. The archived logs are stored in a Datadog-rehydratable format, so that you have historical logs that can be rehydrated later in Datadog as needed.
+If you are migrating to Datadog Log Management, use the Archive Logs template to help you make that transition. You can pre-process logs sent to your current vendor and separately pre-process logs sent to a cloud storage option for archiving. The archived logs are stored in a Datadog-rehydratable format, so that you have historical logs that can be rehydrated later in Datadog as needed.
 
 #### Split Logs
 
-When you have logs from different services and applications, you might need to send them to different downstream services for query, analysis, and alerting. For example, you want to send security logs to a SIEM and DevOps logs to Datadog. Use the Split Logs template to preprocess your logs and determine which logs should go to which destination.
+When you have logs from different services and applications, you might need to send them to different downstream services for query, analysis, and alerting. For example, you want to send security logs to a SIEM and DevOps logs to Datadog. Use the Split Logs template to pre-process your logs and determine which logs should go to which destination.
 
 #### Sensitive Data Redaction
 
