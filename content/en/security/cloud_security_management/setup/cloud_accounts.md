@@ -34,8 +34,6 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ## Disable resource collection
 
-placeholder text
-
 {{< tabs >}}
 {{% tab "AWS" %}}
 
