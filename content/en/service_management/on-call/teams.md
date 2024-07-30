@@ -46,6 +46,10 @@ Configure your monitors, incidents, or other resources to send Pages to your On-
 
 Ensure that your On-Call Team members have set up their [Profile Settings][8].
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /account_management/teams/
 [2]: /service_management/on-call/
 [3]: https://app.datadoghq.com/organization-settings/teams

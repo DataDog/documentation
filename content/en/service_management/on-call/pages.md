@@ -41,8 +41,9 @@ Manually paging a Team through Datadog always results in a `high` urgency Page.
 
 Manually paging a Team from Slack or Microsoft Teams always results in a `high` urgency Page.
 
-#### Through the API
-TK
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
