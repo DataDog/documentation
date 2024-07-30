@@ -57,7 +57,7 @@ Setting daily quotas on your indexes can help prevent billing overages when new 
 
 ### Set up storage for long-term retention
 
-If you want to retain logs long-term with the ability to query them as needed, without the cost of standard indexes configure [Flex Logs][30]. This tier decouples storage from compute costs so you can cost-effectively retain logs that may not need to be queried as frequently as standard indexes.
+If you want to retain logs for an extended time while maintaining querying speeds similar to Standard Indexing, configure [Flex Logs][30]. This tier is best suited for logs that require longer retention and occasionally need to be queried urgently. Flex Logs decouples storage from compute costs so you can cost effectively retain more logs for longer without sacrificing visibility. Logs that need to be frequently queried should be stored in standard indexes.
 
 ### Set up multiple archives for long-term storage
 
