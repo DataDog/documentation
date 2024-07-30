@@ -1,5 +1,5 @@
 import MarkdownIt from 'markdown-it';
-import type { ClientVariable, RenderableTreeNodes } from '../types';
+import type { ClientVariable, RenderableTreeNodes, Tag } from '../types';
 const { escapeHtml } = MarkdownIt().utils;
 import { Config } from '../types';
 import { reresolve } from '../reresolver';
@@ -24,10 +24,9 @@ const voidElements = new Set([
   'wbr'
 ]);
 
-const softBlack = '#3B444B';
-
 export default function render(node: RenderableTreeNodes, config?: Config): string {
-  if (typeof node === 'string' || typeof node === 'number') return escapeHtml(String(node));
+  if (typeof node === 'string' || typeof node === 'number')
+    return escapeHtml(String(node));
 
   if (node === null || typeof node !== 'object') {
     return '';
@@ -61,15 +60,19 @@ export default function render(node: RenderableTreeNodes, config?: Config): stri
 
   const { name, attributes, children = [] } = node;
 
-  if ('if' in node) {
+  if ('if' in node && node.if) {
+    let ref = '';
+    if ('ref' in node.if) {
+      ref = `data-if=${node.if.ref}`;
+    }
     if (config && config.variables !== undefined) {
-      node = reresolve(node, config);
+      node = reresolve(node, config); // TODO: Fix with generic type
     }
-    let wrapperTagClass = '';
+    let wrapperTagClasses = 'markdoc__toggleable';
     if (attributes?.display === 'false') {
-      wrapperTagClass = `class="markdoc__hidden"`;
+      wrapperTagClasses += ` markdoc__hidden`;
     }
-    let wrapperTagOutput = `<${name} ${wrapperTagClass}>`;
+    let wrapperTagOutput = `<${name} class="${wrapperTagClasses}" ${ref}>`;
     wrapperTagOutput += render(children, config);
     wrapperTagOutput += `</${name}>`;
     return wrapperTagOutput;
@@ -78,7 +81,8 @@ export default function render(node: RenderableTreeNodes, config?: Config): stri
   if (!name) return render(children, config);
 
   let output = `<${name}`;
-  for (const [k, v] of Object.entries(attributes ?? {})) output += ` ${k.toLowerCase()}="${escapeHtml(String(v))}"`;
+  for (const [k, v] of Object.entries(attributes ?? {}))
+    output += ` ${k.toLowerCase()}="${escapeHtml(String(v))}"`;
   output += '>';
 
   if (voidElements.has(name)) return output;

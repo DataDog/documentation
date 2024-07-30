@@ -168,7 +168,8 @@
             "value": true
           },
           "1": true
-        }
+        },
+        "ref": "0"
       },
       "attributes": {
         "display": "true"
@@ -209,7 +210,8 @@
             "value": "Datadog"
           },
           "1": "Datadog"
-        }
+        },
+        "ref": "1"
       },
       "attributes": {
         "display": "true"
@@ -250,7 +252,8 @@
             "value": false
           },
           "1": true
-        }
+        },
+        "ref": "2"
       },
       "attributes": {
         "display": "false"
@@ -291,7 +294,8 @@
             "value": "Datadog"
           },
           "1": "Hello"
-        }
+        },
+        "ref": "3"
       },
       "attributes": {
         "display": "false"
@@ -491,7 +495,8 @@
             ],
             "value": false
           }
-        }
+        },
+        "ref": "4"
       },
       "attributes": {
         "display": "true"
@@ -537,7 +542,8 @@
                 "value": "Datadog"
               },
               "1": "Hello"
-            }
+            },
+            "ref": "5"
           },
           "1": {
             "$$mdtype": "Function",
@@ -552,9 +558,11 @@
                 "value": "Datadog"
               },
               "1": "Datadog"
-            }
+            },
+            "ref": "6"
           }
-        }
+        },
+        "ref": "7"
       },
       "attributes": {
         "display": "true"
@@ -599,7 +607,8 @@
               "missingVarTwo"
             ]
           }
-        }
+        },
+        "ref": "8"
       },
       "attributes": {
         "display": "false"
@@ -662,7 +671,8 @@
             ],
             "value": true
           }
-        }
+        },
+        "ref": "9"
       },
       "attributes": {
         "display": "true"
@@ -709,7 +719,8 @@
             ],
             "value": false
           }
-        }
+        },
+        "ref": "10"
       },
       "attributes": {
         "display": "false"
@@ -755,7 +766,8 @@
                 "value": "Datadog"
               },
               "1": "Hello"
-            }
+            },
+            "ref": "11"
           },
           "1": {
             "$$mdtype": "Function",
@@ -770,9 +782,11 @@
                 "value": "Datadog"
               },
               "1": "Datadog"
-            }
+            },
+            "ref": "12"
           }
-        }
+        },
+        "ref": "13"
       },
       "attributes": {
         "display": "false"
@@ -828,7 +842,8 @@
             ],
             "value": false
           }
-        }
+        },
+        "ref": "14"
       },
       "attributes": {
         "display": "true"
@@ -874,9 +889,11 @@
                 "value": "Datadog"
               },
               "1": "Hello"
-            }
+            },
+            "ref": "15"
           }
-        }
+        },
+        "ref": "16"
       },
       "attributes": {
         "display": "true"
@@ -916,7 +933,8 @@
             ],
             "value": true
           }
-        }
+        },
+        "ref": "17"
       },
       "attributes": {
         "display": "false"
@@ -962,9 +980,11 @@
                 "value": "Datadog"
               },
               "1": "Datadog"
-            }
+            },
+            "ref": "18"
           }
-        }
+        },
+        "ref": "19"
       },
       "attributes": {
         "display": "false"
@@ -1017,7 +1037,8 @@
                 ],
                 "value": false
               }
-            }
+            },
+            "ref": "20"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1031,9 +1052,11 @@
                 ],
                 "value": true
               }
-            }
+            },
+            "ref": "21"
           }
-        }
+        },
+        "ref": "22"
       },
       "attributes": {
         "display": "true"
@@ -1079,7 +1102,8 @@
                 "value": "Datadog"
               },
               "1": "Datadog"
-            }
+            },
+            "ref": "23"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1094,9 +1118,11 @@
                 "value": "Datadog"
               },
               "1": "Hello"
-            }
+            },
+            "ref": "24"
           }
-        }
+        },
+        "ref": "25"
       },
       "attributes": {
         "display": "true"
@@ -1146,7 +1172,8 @@
                     ],
                     "value": false
                   }
-                }
+                },
+                "ref": "26"
               },
               "1": {
                 "$$mdtype": "Function",
@@ -1160,9 +1187,11 @@
                     ],
                     "value": true
                   }
-                }
+                },
+                "ref": "27"
               }
-            }
+            },
+            "ref": "28"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1181,7 +1210,8 @@
                     ],
                     "value": false
                   }
-                }
+                },
+                "ref": "29"
               },
               "1": {
                 "$$mdtype": "Function",
@@ -1195,11 +1225,14 @@
                     ],
                     "value": true
                   }
-                }
+                },
+                "ref": "30"
               }
-            }
+            },
+            "ref": "31"
           }
-        }
+        },
+        "ref": "32"
       },
       "attributes": {
         "display": "true"
@@ -1244,10 +1277,12 @@
                 ],
                 "value": false
               }
-            }
+            },
+            "ref": "33"
           },
           "1": true
-        }
+        },
+        "ref": "34"
       },
       "attributes": {
         "display": "true"
@@ -1304,9 +1339,11 @@
                     ],
                     "value": true
                   }
-                }
+                },
+                "ref": "35"
               }
-            }
+            },
+            "ref": "36"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1325,7 +1362,8 @@
                     ],
                     "value": false
                   }
-                }
+                },
+                "ref": "37"
               },
               "1": {
                 "$$mdtype": "Function",
@@ -1339,11 +1377,14 @@
                     ],
                     "value": true
                   }
-                }
+                },
+                "ref": "38"
               }
-            }
+            },
+            "ref": "39"
           }
-        }
+        },
+        "ref": "40"
       },
       "attributes": {
         "display": "false"
@@ -1388,7 +1429,8 @@
                 ],
                 "value": false
               }
-            }
+            },
+            "ref": "41"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1402,9 +1444,11 @@
                 ],
                 "value": true
               }
-            }
+            },
+            "ref": "42"
           }
-        }
+        },
+        "ref": "43"
       },
       "attributes": {
         "display": "false"
@@ -1450,7 +1494,8 @@
                 "value": "Datadog"
               },
               "1": "Datadog"
-            }
+            },
+            "ref": "44"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1465,9 +1510,11 @@
                 "value": "Datadog"
               },
               "1": "Hello"
-            }
+            },
+            "ref": "45"
           }
-        }
+        },
+        "ref": "46"
       },
       "attributes": {
         "display": "false"

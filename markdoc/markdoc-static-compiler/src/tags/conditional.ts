@@ -7,29 +7,14 @@ import {
   RenderableTreeNode,
   RenderableTreeNodes,
   Schema,
-  Value,
+  Value
 } from '../types';
-
-function createUuid() {
-  var dt = new Date().getTime();
-  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-    /[xy]/g,
-    function (c) {
-      var r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
-  return uuid;
-}
 
 type Condition = { condition: Value; children: Node[] };
 
 export function truthy(param: any) {
   if (typeof param === 'object' && 'value' in param) {
-    return (
-      param.value !== false && param.value !== undefined && param.value !== null
-    );
+    return param.value !== false && param.value !== undefined && param.value !== null;
   }
   return param !== false && param !== undefined && param !== null;
 }
@@ -41,15 +26,12 @@ export function truthy(value: any) {
 */
 
 function renderConditions(node: Node) {
-  const conditions: Condition[] = [
-    { condition: node.attributes.primary, children: [] },
-  ];
+  const conditions: Condition[] = [{ condition: node.attributes.primary, children: [] }];
   for (const child of node.children) {
     if (child.type === 'tag' && child.tag === 'else')
       conditions.push({
-        condition:
-          'primary' in child.attributes ? child.attributes.primary : true,
-        children: [],
+        condition: 'primary' in child.attributes ? child.attributes.primary : true,
+        children: []
       });
     else conditions[conditions.length - 1].children.push(child);
   }
@@ -82,7 +64,7 @@ export const tagIf: Schema = {
 
 export const tagIf: Schema = {
   attributes: {
-    primary: { type: Object, render: true },
+    primary: { type: Object, render: true }
   },
 
   transform(node, config) {
@@ -93,17 +75,17 @@ export const tagIf: Schema = {
         name: node.attributes.inline ? 'span' : 'div',
         if: node.attributes.primary,
         attributes: {
-          display: truthy(node.attributes.primary) ? 'true' : 'false',
+          display: truthy(node.attributes.primary) ? 'true' : 'false'
           // uuid: createUuid(),
         },
-        children,
+        children
       };
 
       return enclosingTag;
     };
 
-    const nodes = node.children.flatMap<MaybePromise<RenderableTreeNodes>>(
-      (child) => child.transform(config)
+    const nodes = node.children.flatMap<MaybePromise<RenderableTreeNodes>>((child) =>
+      child.transform(config)
     );
     if (nodes.some(isPromise)) {
       return Promise.all(nodes).then((nodes) => {
@@ -112,12 +94,12 @@ export const tagIf: Schema = {
       });
     }
     return [buildEnclosingTag(nodes as RenderableTreeNode[])];
-  },
+  }
 };
 
 export const tagElse: Schema = {
   selfClosing: true,
   attributes: {
-    primary: { type: Object, render: false },
-  },
+    primary: { type: Object, render: false }
+  }
 };

@@ -1,6 +1,7 @@
 import type Func from './ast/function';
 import type Node from './ast/node';
 import type Var from './ast/variable';
+import { z } from 'zod';
 
 export interface Tag {
   $$mdtype: 'Tag';
@@ -12,12 +13,15 @@ export interface Tag {
   children: RenderableTreeNode[];
 }
 
-export interface ClientFunction {
-  $$mdtype: 'Function';
-  name: 'and' | 'or' | 'equals' | 'not' | 'default' | 'debug';
-  parameters: Record<string, any>;
-  value: any;
-}
+export const ClientFunctionSchema = z.object({
+  $$mdtype: z.literal('Function'),
+  name: z.enum(['and', 'or', 'equals', 'not', 'default', 'debug']),
+  parameters: z.record(z.any()),
+  value: z.any(),
+  ref: z.string()
+});
+
+export type ClientFunction = z.infer<typeof ClientFunctionSchema>;
 
 export interface ClientVariable {
   $$mdtype: 'Variable';

@@ -11,6 +11,7 @@ import transformer, { globalAttributes } from './src/transformer';
 import transforms from './src/transforms';
 import { parseTags } from './src/utils';
 import validator, { validateTree } from './src/validator';
+import { reresolveFunctionNode } from './src/reresolver';
 
 import type { Node, ParserArgs, Tag } from './src/types';
 import type Token from 'markdown-it/lib/token';
@@ -51,8 +52,14 @@ export function resolve<C extends Config = Config>(content: any, config: C): any
   return content.resolve(config);
 }
 
-export function transform<C extends Config = Config>(node: Node, config?: C): RenderableTreeNode;
-export function transform<C extends Config = Config>(nodes: Node[], config?: C): RenderableTreeNode[];
+export function transform<C extends Config = Config>(
+  node: Node,
+  config?: C
+): RenderableTreeNode;
+export function transform<C extends Config = Config>(
+  nodes: Node[],
+  config?: C
+): RenderableTreeNode[];
 export function transform<C extends Config = Config>(nodes: any, options?: C): any {
   const config = mergeConfig(options);
   const content = resolve(nodes, config);
@@ -61,13 +68,20 @@ export function transform<C extends Config = Config>(nodes: any, options?: C): a
   return content.transform(config);
 }
 
-export function validate<C extends Config = Config>(node: Node, options?: C): ValidateError[];
+export function validate<C extends Config = Config>(
+  node: Node,
+  options?: C
+): ValidateError[];
 export function validate<C extends Config = Config>(content: any, options?: C): any {
   const config = mergeConfig(options);
   return validateTree(content, config);
 }
 
-export function createElement(name: string | { key?: string | number }, attributes = {}, ...children: any[]) {
+export function createElement(
+  name: string | { key?: string | number },
+  attributes = {},
+  ...children: any[]
+) {
   return { name, attributes, children };
 }
 
@@ -85,7 +99,8 @@ export {
   transformer,
   validator,
   truthy,
-  format
+  format,
+  reresolveFunctionNode
 };
 
 export default class MarkdocStaticCompiler {
@@ -114,6 +129,7 @@ export default class MarkdocStaticCompiler {
 
   parse = parse;
   resolve = (content: Parameters<typeof resolve>[0]) => resolve(content, this.config);
-  transform = (content: Parameters<typeof transform>[0]) => transform(content, this.config);
+  transform = (content: Parameters<typeof transform>[0]) =>
+    transform(content, this.config);
   validate = (content: Parameters<typeof validate>[0]) => validate(content, this.config);
 }

@@ -4,6 +4,7 @@ import { SharedRenderer } from './SharedRenderer';
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
+import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
 
 /**
  * A class containing functions for rendering on the client.
@@ -25,6 +26,7 @@ export class ClientRenderer {
   private contentElement?: Element;
   private selectedValsByPrefId: Record<string, string> = {};
   private prefPills: Array<Element> = [];
+  private ifFunctionsByRef: Record<string, ClientFunction> = {};
 
   private constructor() {}
 
@@ -58,7 +60,46 @@ export class ClientRenderer {
       return;
     }
     this.selectedValsByPrefId[prefId] = optionId;
-    this.rerender();
+    this.rerenderChooser();
+    this.rerenderPageContent();
+  }
+
+  rerenderPageContent() {
+    const newDisplayStatusByRef: Record<string, boolean> = {};
+
+    // Update the resolved function values,
+    // and make a list of refs that require a display status change
+    Object.keys(this.ifFunctionsByRef).forEach((ref) => {
+      const clientFunction = this.ifFunctionsByRef[ref];
+      const oldValue = clientFunction.value;
+      const resolvedFunction = reresolveFunctionNode(clientFunction, {
+        variables: this.selectedValsByPrefId
+      });
+      this.ifFunctionsByRef[ref] = resolvedFunction;
+      if (oldValue !== resolvedFunction.value) {
+        newDisplayStatusByRef[ref] = resolvedFunction.value;
+      }
+    });
+
+    const toggleables = document.getElementsByClassName('markdoc__toggleable');
+    for (let i = 0; i < toggleables.length; i++) {
+      const toggleable = toggleables[i];
+
+      const ref = toggleable.getAttribute('data-if');
+
+      if (!ref) {
+        throw new Error('No ref found on toggleable element');
+      }
+      if (newDisplayStatusByRef[ref] === undefined) {
+        continue;
+      }
+
+      if (newDisplayStatusByRef[ref]) {
+        toggleable.classList.remove('markdoc__hidden');
+      } else {
+        toggleable.classList.add('markdoc__hidden');
+      }
+    }
   }
 
   addChooserEventListeners(chooserNode?: HTMLElement) {
@@ -84,7 +125,8 @@ export class ClientRenderer {
     chooserElement: Element;
     contentElement: Element;
     selectedValsByPrefId?: Record<string, string>;
-    renderableTree?: RenderableTreeNodes;
+    renderableTree: RenderableTreeNodes;
+    ifFunctionsByRef: Record<string, ClientFunction>;
   }) {
     this.prefOptionsConfig = p.prefOptionsConfig;
     this.pagePrefsConfig = p.pagePrefsConfig;
@@ -92,6 +134,7 @@ export class ClientRenderer {
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.contentElement = p.contentElement;
     this.renderableTree = p.renderableTree;
+    this.ifFunctionsByRef = p.ifFunctionsByRef;
     this.prefPills = [];
 
     const contentElement = document.getElementById('markdoc-content');
@@ -111,7 +154,7 @@ export class ClientRenderer {
     this.addChooserEventListeners();
   }
 
-  rerender() {
+  rerenderChooser() {
     if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
       throw new Error(
         'Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement'
@@ -145,10 +188,12 @@ export class ClientRenderer {
     });
     this.addChooserEventListeners(newChooserNode as HTMLElement);
 
+    /*
     MarkdocStaticCompiler.renderers.incremental(
       this.renderableTree,
       this.contentElement,
       { variables: this.selectedValsByPrefId }
     );
+    */
   }
 }
