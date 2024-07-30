@@ -72,17 +72,11 @@ See [Advanced Configurations][8] for bootstrapping options and for details on se
 
 ## Explore Observability Pipelines
 
-### Start building pipelines with out-of-the-box templates
+### Build pipelines with out-of-the-box templates
 
 {{< img src="observability_pipelines/templates.png" alt="" style="width:100%;" >}}
 
 The [templates](#out-of-the-box-templates) are purpose-built for the following use cases:
-
-- [Log Volume Control](#log-volume-control): Cut down on your log volume before it leaves your infrastructure or network.
-- [Dual Ship Logs](#dual-ship-logs): Send copies of your logs to multiple destinations.
-- [Split Logs](#split-logs): Send your logs to different destinations based on your use case. For example, you can send DevOps logs to Datadog and security logs to a security vendor.
-- [Archive Logs](#archive-logs): Send logs to a log vendor and to an archive in Datadog rehydratable format.
-- [Sensitive Data Redaction](#sensitive-data-redaction): Remove sensitive data from your logs before they are routed outside of your infrastructure.
 
 #### Log Volume Control
 
@@ -106,7 +100,7 @@ Use the Sensitive Data Redaction template to detect and redact sensitive informa
 
 #### Log Enrichment
 
-Your organization's different services, systems, and application all generate logs containing layers of information in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich it with information from a reference table, which could be a local file or a GeoIP database.
+Your organization's different services, systems, and application all generate logs containing layers of information and in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich it with information from a reference table, which could be a local file or a GeoIP database.
 
 ### Build pipelines in the Observability Pipelines UI
 
@@ -121,8 +115,6 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 - There are increasing error rates for a component. This could happen because the component is processing data in unexpected formats or encountering other internal issues.
 - There are spikes in data droppged by a component.
 - The Observability Pipelines Worker has high CPU usage or memory usage.
-
-You can also create your own custom monitors with metrics for the different components.
 
 ## Further Reading
 
