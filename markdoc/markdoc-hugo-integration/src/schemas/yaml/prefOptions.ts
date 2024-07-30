@@ -20,7 +20,7 @@ const PrefOptionSchema = z
 
 const MinifiedPrefOptionSchema = z
   .object({
-    dn: z.string(), // display name
+    n: z.string(), // display name
     d: z.boolean().optional(), // default
     i: z.string().regex(SNAKE_CASE_REGEX) // identifier
   })

@@ -16,7 +16,7 @@ export const PagePrefConfigSchema = z
 
 export const MinifiedPagePrefConfigSchema = z
   .object({
-    dn: z.string(), // display name
+    n: z.string(), // display name
     i: z.string().regex(SNAKE_CASE_REGEX), // identifier
     o: z.string().regex(PREF_OPTIONS_ID_REGEX), // options source
     d: z.string().regex(SNAKE_CASE_REGEX).optional() // default value

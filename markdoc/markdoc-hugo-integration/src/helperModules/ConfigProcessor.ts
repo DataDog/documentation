@@ -290,7 +290,7 @@ export class ConfigProcessor {
     const minifiedPrefOptionsConfig: MinifiedPrefOptionsConfig = {};
     for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
       minifiedPrefOptionsConfig[optionsListId] = optionsList.map((option) => ({
-        dn: option.display_name,
+        n: option.display_name,
         d: option.default,
         i: option.identifier
       }));
@@ -305,7 +305,7 @@ export class ConfigProcessor {
     const minifiedPagePrefsConfig: Array<MinifiedPagePrefConfig> = [];
     pagePrefsConfig.forEach((pagePrefConfig) => {
       minifiedPagePrefsConfig.push({
-        dn: pagePrefConfig.display_name,
+        n: pagePrefConfig.display_name,
         i: pagePrefConfig.identifier,
         o: pagePrefConfig.options_source,
         d: pagePrefConfig.default_value

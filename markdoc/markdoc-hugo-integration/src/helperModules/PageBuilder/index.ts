@@ -183,20 +183,34 @@ ${rerenderScript}
     let ifFunctionsByRefStr;
 
     if (p.pageBuildArgs.debug) {
-      prefOptionsConfigStr = JSON.stringify(p.pageBuildArgs.prefOptionsConfig, null, 2);
-      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
-      pagePrefsConfigStr = JSON.stringify(
-        p.pageBuildArgs.parsedFile.frontmatter.page_preferences,
+      prefOptionsConfigStr = JSON.stringify(
+        ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
         null,
         2
       );
+      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
+      if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+        pagePrefsConfigStr = JSON.stringify(
+          ConfigProcessor.minifyPagePrefsConfig(
+            p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+          ),
+          null,
+          2
+        );
+      }
       ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
     } else {
-      prefOptionsConfigStr = JSON.stringify(p.pageBuildArgs.prefOptionsConfig);
-      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
-      pagePrefsConfigStr = JSON.stringify(
-        p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+      prefOptionsConfigStr = JSON.stringify(
+        ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
       );
+      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
+      if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+        pagePrefsConfigStr = JSON.stringify(
+          ConfigProcessor.minifyPagePrefsConfig(
+            p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+          )
+        );
+      }
       ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef);
     }
 

@@ -3698,6 +3698,42 @@
           });
           return resolvedPagePrefs;
         }
+        static resolveMinifiedPagePrefs(p) {
+          const resolvedPagePrefs = {};
+          p.pagePrefsConfig.forEach((prefConfig) => {
+            const prefConfigDup = this.resolveMinifiedPrefOptionsSource({
+              pagePrefConfig: prefConfig,
+              valsByPrefId: p.valsByPrefId
+            });
+            const defaultValue = prefConfigDup.d || p.prefOptionsConfig[prefConfigDup.o].find((option) => option.d).i;
+            const possibleValues = p.prefOptionsConfig[prefConfigDup.o].map((option) => option.i);
+            let currentValue = p.valsByPrefId[prefConfigDup.i];
+            if (currentValue && !possibleValues.includes(currentValue)) {
+              currentValue = defaultValue;
+            }
+            const resolvedPref = {
+              identifier: prefConfigDup.i,
+              displayName: prefConfigDup.n,
+              defaultValue,
+              currentValue,
+              options: p.prefOptionsConfig[prefConfigDup.o].map((option) => ({
+                id: option.i,
+                displayName: option.n
+              }))
+            };
+            resolvedPagePrefs[prefConfigDup.i] = resolvedPref;
+          });
+          return resolvedPagePrefs;
+        }
+        static resolveMinifiedPrefOptionsSource(p) {
+          const prefConfigDup = Object.assign({}, p.pagePrefConfig);
+          if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.o)) {
+            prefConfigDup.o = prefConfigDup.o.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
+              return p.valsByPrefId[placeholder.toLowerCase()];
+            });
+          }
+          return prefConfigDup;
+        }
         /**
          * Resolve any placeholders in the options source of a page preference.
          * For example, if the options source is "<COLOR>_<FINISH>_paint_options",
@@ -17179,7 +17215,7 @@
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
             throw new Error("Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement");
           }
-          const resolvedPagePrefs = SharedRenderer_1.SharedRenderer.resolvePagePrefs({
+          const resolvedPagePrefs = SharedRenderer_1.SharedRenderer.resolveMinifiedPagePrefs({
             pagePrefsConfig: this.pagePrefsConfig,
             prefOptionsConfig: this.prefOptionsConfig,
             valsByPrefId: this.selectedValsByPrefId

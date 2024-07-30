@@ -1,8 +1,8 @@
 import { RenderableTreeNodes } from 'markdoc-static-compiler';
 import { rerenderChooser } from './PageBuilder/components/Chooser';
 import { SharedRenderer } from './SharedRenderer';
-import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
-import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
+import { MinifiedPrefOptionsConfig } from '../schemas/yaml/prefOptions';
+import { MinifiedPagePrefsConfig, PagePrefsConfig } from '../schemas/yaml/frontMatter';
 import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
 
 /**
@@ -18,8 +18,8 @@ import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
 export class ClientRenderer {
   static #instance: ClientRenderer;
 
-  private prefOptionsConfig?: PrefOptionsConfig;
-  private pagePrefsConfig?: PagePrefsConfig;
+  private prefOptionsConfig?: MinifiedPrefOptionsConfig;
+  private pagePrefsConfig?: MinifiedPagePrefsConfig;
   private chooserElement?: Element;
   private selectedValsByPrefId: Record<string, string> = {};
   private prefPills: Array<Element> = [];
@@ -117,8 +117,8 @@ export class ClientRenderer {
   }
 
   initialize(p: {
-    prefOptionsConfig: PrefOptionsConfig;
-    pagePrefsConfig: PagePrefsConfig;
+    prefOptionsConfig: MinifiedPrefOptionsConfig;
+    pagePrefsConfig: MinifiedPagePrefsConfig;
     chooserElement: Element;
     contentElement: Element;
     selectedValsByPrefId?: Record<string, string>;
@@ -154,7 +154,7 @@ export class ClientRenderer {
      * can have a cascading impact on the interpolated placeholder values,
      * and thus the valid options for each preference.
      */
-    const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
+    const resolvedPagePrefs = SharedRenderer.resolveMinifiedPagePrefs({
       pagePrefsConfig: this.pagePrefsConfig,
       prefOptionsConfig: this.prefOptionsConfig!,
       valsByPrefId: this.selectedValsByPrefId
