@@ -20,11 +20,15 @@ function loadPage(newUrl) {
         behavior: "instant"
     });
 
+    const pathName = new URL(newUrl).pathname;
+    const commitRef = document.documentElement.dataset.commitRef
+    const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
+
     let mainContent = document.getElementById('mainContent');
 
     // temp workaround for integrations page https://datadoghq.atlassian.net/browse/WEB-5018
     let isIntegrations = document.querySelector('.integrations')
-
+    
     if (mainContent && !isIntegrations) {
         const currentTOC = document.querySelector('.js-toc-container');
 
@@ -215,14 +219,10 @@ function loadPage(newUrl) {
                     sidebar.classList.remove('d-none');
                 }
             }
-
-            const pathName = new URL(newUrl).pathname;
             
-            // Get and clean window pathname in order to update language dropdown items href
+            // Clean window pathname in order to update language dropdown items href
             const nonEnPage = document.documentElement.lang !== 'en-US' // check if page is not in english
-            const commitRef = document.documentElement.dataset.commitRef
-            const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
-            
+            s
             const noCommitRefPathName = pathName.slice(commitRefLen) // adjust pathname to remove commit ref if in preview env
             const noCommitRefNoLangPathName = nonEnPage ? noCommitRefPathName.slice(3) : noCommitRefPathName // adjust pathname to remove language if not in english e.g. /ja/agent -> /agent
             
@@ -270,8 +270,9 @@ function loadPage(newUrl) {
         httpRequest.send();
     } else {
         // Integrations Pages
-        if(new URL(newUrl).pathname !== document.documentElement.dataset.relpermalink) {
-            // if switching between integrations pages, reload page
+        
+        if(pathName.slice(commitRefLen) !== document.documentElement.dataset.relpermalink) {
+            // if switching between integrations pages, reload page. adjusts the pathName to remove commit ref if in preview env.
             window.location.href = newUrl;
         }
     }
