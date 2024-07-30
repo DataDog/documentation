@@ -6,7 +6,6 @@ code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/python
   - /security/application_security/getting_started/python
-  - /security/application_security/enabling/python
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -112,4 +111,4 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/python
+[1]: /security/application_security/threats/setup/compatibility/php/

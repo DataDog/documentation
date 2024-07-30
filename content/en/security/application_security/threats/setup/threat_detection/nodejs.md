@@ -6,7 +6,6 @@ code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/nodejs
   - /security/application_security/getting_started/nodejs
-  - /security/application_security/enabling/nodejs
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -155,8 +154,8 @@ If you need additional assistance, contact [Datadog support][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security/application_security/enabling/compatibility/nodejs
-[3]: /security/application_security/enabling/compatibility/nodejs#asm-capabilities-support
+[2]: /security/application_security/threats/setup/threat_detection/nodejs
+[3]: /security/application_security/threats/setup/threat_detection/nodejs
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: /help

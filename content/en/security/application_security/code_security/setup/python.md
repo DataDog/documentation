@@ -114,8 +114,8 @@ If you need additional assistance, contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-py/releases
-[2]: /security/application_security/enabling/compatibility/python
-[3]: /security/application_security/enabling/compatibility/python/#asm-capabilities-support
+[2]: /security/application_security/code_security/setup/python
+[3]: /security/application_security/code_security/setup/python
 [4]: https://app.datadoghq.com/security/appsec/vm
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/

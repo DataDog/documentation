@@ -42,8 +42,7 @@ What makes Datadog SCA unique is its end-to-end coverage of your software develo
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories. Additionally, the Datadog Security research team evaluates vulnerabilities and malware findings. For more information, see the [GuardDog][13] GitHub project.
 
 
-Check [ASM Compatibility][6] to see if your service is supported.
-
+Check the ASM Compatibility for each ASM product to see if your service is supported.
 
 
 ## Library Inventory

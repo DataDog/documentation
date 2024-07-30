@@ -6,7 +6,6 @@ code_lang_weight: 0
 aliases:
   - /security_platform/application_security/getting_started/java
   - /security/application_security/getting_started/java
-  - /security/application_security/enabling/java/
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -140,8 +139,8 @@ If you need additional assistance, contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /security/application_security/enabling/compatibility/java
-[3]: /security/application_security/enabling/compatibility/java/#asm-capabilities-support
+[2]: /security/application_security/threats/setup/compatibility/java/
+[3]: /security/application_security/threats/setup/compatibility/java/
 [4]: https://app.datadoghq.com/security/appsec/vm
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/

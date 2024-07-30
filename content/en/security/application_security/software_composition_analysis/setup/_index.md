@@ -29,7 +29,7 @@ Before setting up Software Composition Analysis, ensure the following prerequisi
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and traces are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the **Library Compatibility** page for each ASM product.
 
 ## Software Composition Analysis enablement types
 
@@ -178,8 +178,7 @@ java -javaagent:dd-java-agent.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /security/application_security/enabling/compatibility/
+[1]: /security/application_security/software_composition_analysis/setup/compatibility/java
 [2]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [3]: https://app.datadoghq.com/security/configuration/asm/setup
 [4]: /integrations/github/
-[5]: /security/application_security/enabling/tracing_libraries/code_security/

@@ -6,7 +6,6 @@ code_lang_weight: 30
 aliases:
   - /security_platform/application_security/getting_started/ruby
   - /security/application_security/getting_started/ruby
-  - /security/application_security/enabling/ruby
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -216,6 +215,6 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/ruby
+[1]: /security/application_security/threats/setup/compatibility/ruby/
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide2.md
 [3]: /tracing/trace_collection/dd_libraries/ruby/

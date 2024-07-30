@@ -6,7 +6,6 @@ code_lang_weight: 40
 aliases:
   - /security_platform/application_security/getting_started/php
   - /security/application_security/getting_started/php
-  - /security/application_security/enabling/php
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -99,4 +98,4 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/php
+[1]: /security/application_security/threats/setup/compatibility/php/

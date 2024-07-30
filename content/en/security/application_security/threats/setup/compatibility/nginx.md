@@ -32,4 +32,4 @@ the unsupported capabilities, let us know! Fill out <a
 href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send
 details</a>.</div>
 
-[1]: /security/application_security/enabling/tracing_libraries/threat_detection/nginx/#limitations
+[1]: /security/application_security/threats/setup/threat_detection/nginx/
