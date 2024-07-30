@@ -32,6 +32,7 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
 | [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+| [Custom spans][18] | Custom spans | Configure custom spans for your pipelines. |
 
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
 **AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
@@ -104,14 +105,7 @@ The event pattern above sets up the integration only for the `first-pipeline` an
 ### Correlate pipelines with tests
 
 If you are using [Test Visibility][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests
-with the related pipeline inside Datadog Pipeline Visibility.
-1. In the AWS Console, go to your pipeline configuration and click **Edit**
-2. Go to the stage containing the AWS CodeBuild action, click **Edit Stage**, and then edit the relevant action.
-3. Under **Environment variables**, add an environment variable.
-Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.PipelineExecutionId}`. Leave the type as _Plaintext_.
-4. Click **Done** to save your changes.
-
-The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
+with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
 
 ### Enable log correlation
 
@@ -122,6 +116,18 @@ The AWS CodePipeline integration supports correlating **CodeBuild** actions with
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the <code>source:codebuild</code> and <code>sourcecategory:aws</code> tags.</div>
 
 <div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations.</a></div>
+
+### Add the pipeline execution ID as an environment variable
+
+The pipeline execution ID is an identifier Datadog needs to uniquely identify a pipeline execution. Perform the following steps to assign a pipeline execution ID to correlate pipelines with tests and custom commands:
+
+1. In the AWS Console, go to your pipeline configuration and click **Edit**
+2. Go to the stage containing the AWS CodeBuild action, click **Edit Stage**, and then edit the relevant action.
+3. Under **Environment variables**, add an environment variable.
+Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.PipelineExecutionId}`. Leave the type as _Plaintext_.
+4. Click **Done** to save your changes.
+
+The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
 
 ## Visualize pipeline data in Datadog
 
@@ -150,4 +156,4 @@ The **CI Pipeline List** page shows data for only the [default branch][13] of ea
 [15]: /glossary/#running-pipeline
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [17]: /glossary/#approval-wait-time
-
+[18]: /glossary/#custom-span
