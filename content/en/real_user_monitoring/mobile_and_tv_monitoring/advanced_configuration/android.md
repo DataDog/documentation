@@ -222,7 +222,7 @@ You can use the `StopInstance` API to stop the SDK instance assigned to the give
 
 ### Control event buildup
 
-Many operations such as data processing and event input/output are queued in background threads. To handle edge cases where the queue has grown so much that there could be delayed processing, high memory usage, or Application Not Responding (ANR) errors.
+Many operations, such as data processing and event input/output, are queued in background threads. To handle edge cases where the queue has grown so much that there could be delayed processing, high memory usage, or Application Not Responding (ANR) errors.
 
 You can control the buildup of events on the SDK with the `setBackpressureStrategy` API. This API ignores new tasks if a queue reaches 1024 items.
 
