@@ -434,7 +434,7 @@ Datadog provides a [JSON Schema][17] for service definitions so you can use feat
 
 The plugin supports the new v3.0 schema and includes information that will tell your IDEs which filenames it applies to—specifically, the files entity.datadog.yaml, entity.datadog.yml, and entity.datadog.json to quickly and accurately complete your entity definition file without referencing documentation. In the example below, the IDE automatically creates keys as you fill out the entity definition.
 
-{{< img src="tracing/service_catalog/service_catalog_ide.mp4" video=true alt="Using the IDE plugin to atucomplete and validate definitions" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/service_catalog_ide.mp4" video=true alt="A developer using the IDE plugin to autocomplete and validate definitions" style="width:100%;" >}}
 
 ## Build custom extensions 
 
