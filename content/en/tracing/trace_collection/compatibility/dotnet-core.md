@@ -94,7 +94,11 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## OpenTelemetry based integrations
 
-Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET APM SDK automatically resurfaces traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet explicitly tested).
+Some libraries provide built-in [Activity based tracing][13]. This is the same mechanism that OpenTelemetry is based on.
+
+For these libraries, set `DD_TRACE_OTEL_ENABLED` to `true`, and the .NET APM SDK automatically captures traces their traces. This is supported since [version 2.21.0][4].
+
+The following list of libraries have been tested with this setup:
 
 | Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |

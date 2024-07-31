@@ -50,7 +50,7 @@ The terminology update does not affect the functionality of Datadog's APM tools.
 
 ## API vs. SDK
 
-APIs provide a standardized interface for instrumenting your applications to collect telemetry data.
+APM SDKs are distinct from APIs, which provide a standardized interface for instrumenting your applications to collect telemetry data.
 
 - **API**: The interface that defines how to instrument your application. It provides methods and classes for creating spans, adding tags, and managing traces. For more information, read [Custom Instrumentation][9] using the Datadog API or OpenTelemetry API.
 - **SDK**: The implementation of the API. It includes all the logic for processing, managing, and sending telemetry data to the Datadog Agent. For more information, read [Add the APM SDK][10].
