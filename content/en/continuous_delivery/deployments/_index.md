@@ -44,16 +44,6 @@ You can export your search query to a [saved view][6] by clicking the **Export**
 
 {{< img src="continuous_delivery/explorer/deployment_executions_export.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
 
-## Visualize correlated pipelines and deployments
-
-Once the setup is completed, the deployment executions panel contains a new tab called **Pipeline** from which the pipeline trace is visible. From this tab, you can navigate to CI visibility by clicking the **View Full Pipeline** link at the top:
-
-{{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
-
-Additionally, on the CI Visibility page, pipelines that contain deployments display a new **Deployments** tab:
-
-{{< img src="ci/cd-ci-correlation-deployments-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -177,13 +177,17 @@ The [**Deployments**][6] and [**Executions**][7] pages populate with data after 
 
 ## Correlate deployments with CI pipelines
 
-If Argo CD deployments are triggered from a CI pipeline, you can correlate the deployment execution and the pipeline. This allows you to visualize all the deployments triggered from a pipeline, as well as which pipeline triggered a specific deployment. See the [Visualize correlated pipelines and deployments][18] section on the CD Visibility page for an example.
+By default, the Git metadata reported in deployment events is associated with the repository that Argo CD monitors. However, a common setup is to:
+- Have an application repository, storing the source code, and a configuration repository, storing the Kubernetes manifests. Then, configure Argo CD to monitor the configuration repository, as outlined in the [Argo CD Best Practices page][17].
+- When a change occurs in the application repository, perform an automated commit that updates the configuration repository (for example, changing the current image of a Kubernetes resource).
 
-By default, the Git metadata reported in deployments is associated with the repository that Argo CD monitors. However, a common setup is to separate the source code repository from the repository Argo CD monitors (the configuration repository), as outlined in the [Argo CD Best Practices page][17]. Then, you can use automated commits from a CI pipeline to update the configuration repository when changes occur in the source repository. The following diagram represents an example of this kind of setup:
+The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-To associate source code Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
+In this case, you can replace the Git metadata reported in the deployment with the one of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
+
+To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command between committing and pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
 
 ```yaml
 - job: JobToUpdateConfigurationRepository
@@ -196,11 +200,12 @@ To associate source code Git information with the Argo CD deployments, run the `
     git push
 ```
 
-Even if the same repository serves as the source code repository and configuration repository, running this command is still required since it also gathers the information required to perform the correlation between the pipeline and the deployment.
+**Note**: Even in case a single repository is used to store both the source code and the Kubernetes manifest, running this command is still required to correctly associate deployments and CI pipelines.
+
 
 ### Validation
 
-After successfully running the command, deployments contain Git metadata from the application repository instead of the configuration repository, and also display the associated pipeline. See the [Visualize correlated pipelines and deployments][18] section on the CD Visibility page for more details.
+If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view will contain a new **Pipeline** tab representing the related CI pipeline trace.
 
 ## Troubleshooting
 
@@ -228,4 +233,3 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
-[18]: /continuous_delivery/deployments/#visualize-correlated-pipelines-and-deployments
