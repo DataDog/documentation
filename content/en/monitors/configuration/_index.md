@@ -305,7 +305,7 @@ If you configure tags or dimensions in your query, these values are available fo
 
 All users can view all monitors, regardless of the team or role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
 
-You can further restrict your monitor by specifying a list of [teams][17], [roles][15] or users allowed to edit it. The monitor's creator has edit rights on the monitor by default. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+You can further restrict your monitor by specifying a list of [teams][17], [roles][15], or users allowed to edit it. The monitor's creator has edit rights on the monitor by default. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
