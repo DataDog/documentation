@@ -44,6 +44,27 @@ For performance issues, include the following information:
 
 If you are experiencing issues unrelated to performance or if the Datadog Static Analyzer fails to exit, run the Datadog Static Analyzer with the `--debug true --performance-statistics` flag.
 
+### Issue `GLIBC_X.YY not found`
+
+If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
+
+```
+version `GLIBC_X.YY' not found
+```
+
+It means that you are either:
+
+- running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case, Datadog recommends upgrading to the latest version. The analyzer always runs with the latest of Ubuntu/Debian based-systems.
+- running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
+  run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
+
+### Results are not being surfaced in the Datadog UI
+
+If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master` or `main`). After you commit on your default branch, non-default branches are analyzed.
+
+You can always configure your default branch in-app under [Repository Settings][4].
+
 ## Software Composition Analysis
 
 For issues with Datadog Software Composition Analysis, include the following information in a bug report to Support as well as your Customer Success Manager.
@@ -54,6 +75,13 @@ For issues with Datadog Software Composition Analysis, include the following inf
 - The name of the branch you ran the analysis on
 - The list of dependency files in your repository (such as `package-lock.json`, `requirements.txt`, or `pom.xml`)
 
+### Results are not being surfaced in the Datadog UI
+
+If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master` or `main`). After you commit on your default branch, non-default branches are analyzed.
+
+You can always configure your default branch in-app under [Repository Settings][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -61,3 +89,4 @@ For issues with Datadog Software Composition Analysis, include the following inf
 [1]: /help/
 [2]: /code_analysis/static_analysis/github_actions
 [3]: /code_analysis/static_analysis/github_actions#inputs
+[4]: https://app.datadoghq.com/ci/settings/repository
