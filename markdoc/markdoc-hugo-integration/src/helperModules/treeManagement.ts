@@ -65,8 +65,6 @@ export const minifyClientVariable = (v: ClientVariable) => {
 export const minifyClientFunction = (f: ClientFunction) => {
   const fDup = { ...f };
 
-  console.log(fDup);
-
   // recursively minify any nested functions and variables
   Object.keys(fDup.parameters).forEach((pKey) => {
     const parameter = fDup.parameters[pKey];

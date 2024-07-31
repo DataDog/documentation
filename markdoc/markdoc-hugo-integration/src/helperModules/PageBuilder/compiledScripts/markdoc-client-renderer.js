@@ -15019,7 +15019,6 @@
       var ClientRenderer2 = class {
         constructor() {
           this.selectedValsByPrefId = {};
-          this.prefPills = [];
           this.ifFunctionsByRef = {};
         }
         static get instance() {
@@ -15086,12 +15085,7 @@
         addChooserEventListeners() {
           const prefPills = document.getElementsByClassName("markdoc-pref__pill");
           for (let i = 0; i < prefPills.length; i++) {
-            if (this.prefPills.includes(prefPills[i])) {
-              continue;
-            } else {
-              this.prefPills.push(prefPills[i]);
-              prefPills[i].addEventListener("click", (e) => this.handlePrefSelectionChange(e));
-            }
+            prefPills[i].addEventListener("click", (e) => this.handlePrefSelectionChange(e));
           }
         }
         initialize(p) {
@@ -15103,7 +15097,6 @@
           Object.keys(p.ifFunctionsByRef).forEach((ref) => {
             this.ifFunctionsByRef[ref] = (0, treeManagement_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
           });
-          this.prefPills = [];
           const chooserElement = document.getElementById("markdoc-chooser");
           if (!chooserElement) {
             throw new Error('Cannot find chooser element with id "markdoc-chooser"');

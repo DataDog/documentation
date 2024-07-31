@@ -24,7 +24,6 @@ export class ClientRenderer {
   private pagePrefsConfig?: MinifiedPagePrefsConfig;
   private chooserElement?: Element;
   private selectedValsByPrefId: Record<string, string> = {};
-  private prefPills: Array<Element> = [];
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
 
   private constructor() {}
@@ -104,12 +103,7 @@ export class ClientRenderer {
   addChooserEventListeners() {
     const prefPills = document.getElementsByClassName('markdoc-pref__pill');
     for (let i = 0; i < prefPills.length; i++) {
-      if (this.prefPills.includes(prefPills[i])) {
-        continue;
-      } else {
-        this.prefPills.push(prefPills[i]);
-        prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
-      }
+      prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
     }
   }
 
@@ -117,7 +111,6 @@ export class ClientRenderer {
     prefOptionsConfig: MinifiedPrefOptionsConfig;
     pagePrefsConfig: MinifiedPagePrefsConfig;
     chooserElement: Element;
-    contentElement: Element;
     selectedValsByPrefId?: Record<string, string>;
     ifFunctionsByRef: Record<string, MinifiedClientFunction>;
   }) {
@@ -131,7 +124,6 @@ export class ClientRenderer {
         p.ifFunctionsByRef[ref]
       ) as ClientFunction;
     });
-    this.prefPills = [];
 
     const chooserElement = document.getElementById('markdoc-chooser');
     if (!chooserElement) {

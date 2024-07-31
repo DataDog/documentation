@@ -179,7 +179,6 @@ ${rerenderScript}
     let defaultValsByPrefIdStr;
     let pagePrefsConfigStr;
     const ifFunctionsByRef = getMinifiedIfFunctionsByRef(p.renderableTree);
-    console.log(ifFunctionsByRef);
     let ifFunctionsByRefStr;
 
     if (p.pageBuildArgs.debug) {
