@@ -171,7 +171,7 @@ window.DD_RUM.startDurationVital("dropdownRendering", {details: "login"})
 
 This allows you to visualize the Top List of the same component's rendering duration across different pages by grouping with `@vital.details`.
 
-You can also add some context to your custom vital by using the `contexts` property:
+You can also add some context to your custom vital by using the `context` property:
 
 ```javascript
 const vital = window.DD_RUM.startDurationVital("dropdownRendering", {context: { clientId: "xxx" }})
