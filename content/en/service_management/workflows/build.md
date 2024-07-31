@@ -124,7 +124,7 @@ If you're not sure what variable you're looking for, Datadog suggests existing s
 
 ### Input parameters
 
-Use input parameters to pass data into a workflow. You can use input parameters in workflows that:
+Input parameters are immutable key-value pairs that you can use to pass data into a workflow. You can use input parameters in workflows that:
 - are triggered manually, such as from a Dashboard.
 - use mention triggers, such as Monitors and Security Signal Notification Rules.
 
