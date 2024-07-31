@@ -311,7 +311,7 @@ You can further restrict your monitor by specifying a list of [teams][17], [role
 
 ### Granular access controls
 
-Use [granular access controls][16] to limit the teams, roles or users that can edit a monitor:
+Use [granular access controls][16] to limit the teams, roles, or users that can edit a monitor:
 1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
 1. Click **Edit Access**.
