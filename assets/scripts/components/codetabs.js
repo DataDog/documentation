@@ -101,7 +101,7 @@ const initCodeTabs = () => {
                 if (window.location.hash) {
                     setTimeout(function () {
                         scrollToAnchor(tabQueryParameter, window.location.hash);
-                    }, 300);
+                    }, 350);
                 }
             }else{
                 activateCodeTab(firstTab)
