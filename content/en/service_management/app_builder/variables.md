@@ -25,6 +25,8 @@ To add a state variable to your app, perform the following steps:
 
 ## Example app
 
+{{< img src="service_management/app_builder/state-variables-example-app.mp4" alt="Clicking the button flips the callout value between a green Pass to a red Fail" video="true" width="360px">}}
+
 To create an app that uses a button to change a callout value component's style and value, follow these instructions.
 
 ### Create the variables
@@ -57,10 +59,7 @@ To create an app that uses a button to change a callout value component's style 
         } }
         ```
 1. Click **Preview** to preview your app.<br>
-    When you click the **Change status** button in your app, the color and text of the callout value element alternate between a green Pass and a red Fail:
-
-    {{< img src="service_management/app_builder/state-variables-example-app.mp4" alt="Clicking the button flips the callout value between a green Pass to a red Fail" video="true" width="360px">}}
-
+    When you click the **Change status** button in your app, the color and text of the callout value element alternate between a green Pass and a red Fail.
 
 ## Further reading
 
