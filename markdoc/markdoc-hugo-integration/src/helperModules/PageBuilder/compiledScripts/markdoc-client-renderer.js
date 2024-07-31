@@ -14836,7 +14836,7 @@
         return result;
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.expandClientFunction = exports.minifyClientFunction = exports.CLIENT_FUNCTION_MINIFY_MAP = exports.CLIENT_FUNCTION_EXPAND_MAP = void 0;
+      exports.expandClientFunction = exports.minifyClientFunction = exports.minifyClientVariable = exports.expandClientVariable = exports.CLIENT_FUNCTION_MINIFY_MAP = exports.CLIENT_FUNCTION_EXPAND_MAP = void 0;
       exports.getMinifiedIfFunctionsByRef = getMinifiedIfFunctionsByRef;
       exports.buildRenderableTree = buildRenderableTree;
       var markdoc_static_compiler_1 = __importStar(require_dist());
@@ -14858,6 +14858,22 @@
         default: "def",
         debug: "deb"
       };
+      var expandClientVariable = (v) => {
+        return {
+          $$mdtype: "Variable",
+          path: v.p,
+          value: v.v
+        };
+      };
+      exports.expandClientVariable = expandClientVariable;
+      var minifyClientVariable = (v) => {
+        return {
+          m: "V",
+          p: v.path,
+          v: v.value
+        };
+      };
+      exports.minifyClientVariable = minifyClientVariable;
       var minifyClientFunction = (f) => {
         const fDup = Object.assign({}, f);
         console.log(fDup);
@@ -14865,6 +14881,8 @@
           const parameter = fDup.parameters[pKey];
           if (typeof parameter === "object" && "$$mdtype" in parameter && parameter.$$mdtype === "Function") {
             fDup.parameters[pKey] = (0, exports.minifyClientFunction)(parameter);
+          } else if (typeof parameter === "object" && "$$mdtype" in parameter && parameter.$$mdtype === "Variable") {
+            fDup.parameters[pKey] = (0, exports.minifyClientVariable)(parameter);
           }
         });
         return {
@@ -14882,6 +14900,8 @@
           const parameter = fDup.p[pKey];
           if (typeof parameter === "object" && "m" in parameter && parameter.m === "F") {
             fDup.p[pKey] = (0, exports.expandClientFunction)(parameter);
+          } else if (typeof parameter === "object" && "m" in parameter && parameter.m === "V") {
+            fDup.p[pKey] = (0, exports.expandClientVariable)(parameter);
           }
         });
         return {

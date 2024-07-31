@@ -4,12 +4,19 @@ import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode,
   ClientFunction,
-  ClientFunctionSchema
+  ClientFunctionSchema,
+  ClientVariable
 } from 'markdoc-static-compiler';
 
 /**
  * A set of functions for working with Markdoc's renderable tree.
  */
+
+export interface MinifiedClientVariable {
+  m: 'V';
+  p: string[];
+  v: any;
+}
 
 export interface MinifiedClientFunction {
   m: 'F';
@@ -39,12 +46,28 @@ export const CLIENT_FUNCTION_MINIFY_MAP = {
   debug: 'deb'
 };
 
+export const expandClientVariable = (v: MinifiedClientVariable): ClientVariable => {
+  return {
+    $$mdtype: 'Variable',
+    path: v.p,
+    value: v.v
+  };
+};
+
+export const minifyClientVariable = (v: ClientVariable) => {
+  return {
+    m: 'V',
+    p: v.path,
+    v: v.value
+  };
+};
+
 export const minifyClientFunction = (f: ClientFunction) => {
   const fDup = { ...f };
 
   console.log(fDup);
 
-  // recursively minify any nested functions
+  // recursively minify any nested functions and variables
   Object.keys(fDup.parameters).forEach((pKey) => {
     const parameter = fDup.parameters[pKey];
     if (
@@ -53,6 +76,12 @@ export const minifyClientFunction = (f: ClientFunction) => {
       parameter.$$mdtype === 'Function'
     ) {
       fDup.parameters[pKey] = minifyClientFunction(parameter);
+    } else if (
+      typeof parameter === 'object' &&
+      '$$mdtype' in parameter &&
+      parameter.$$mdtype === 'Variable'
+    ) {
+      fDup.parameters[pKey] = minifyClientVariable(parameter);
     }
   });
 
@@ -73,6 +102,8 @@ export const expandClientFunction = (f: MinifiedClientFunction) => {
     const parameter = fDup.p[pKey];
     if (typeof parameter === 'object' && 'm' in parameter && parameter.m === 'F') {
       fDup.p[pKey] = expandClientFunction(parameter);
+    } else if (typeof parameter === 'object' && 'm' in parameter && parameter.m === 'V') {
+      fDup.p[pKey] = expandClientVariable(parameter);
     }
   });
 
