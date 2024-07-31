@@ -1,8 +1,10 @@
 import { getChooserHtml } from './PageBuilder/components/Chooser';
 import { MinifiedPrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { MinifiedPagePrefsConfig } from '../schemas/yaml/frontMatter';
-import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
+import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { resolveMinifiedPagePrefs } from './sharedRendering';
+import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
+import { expandClientFunction, MinifiedClientFunction } from './treeManagement';
 
 /**
  * A class containing functions for rendering on the client.
@@ -14,6 +16,7 @@ import { resolveMinifiedPagePrefs } from './sharedRendering';
  * one instance of it in the application, with the configuration
  * updating as various pages are loaded.
  */
+
 export class ClientRenderer {
   static #instance: ClientRenderer;
 
@@ -108,16 +111,6 @@ export class ClientRenderer {
         prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
       }
     }
-    /*
-    for (let i = 0; i < prefPills.length; i++) {
-      if (this.prefPills.includes(prefPills[i])) {
-        continue;
-      } else {
-        this.prefPills.push(prefPills[i]);
-        prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
-      }
-    }
-    */
   }
 
   initialize(p: {
@@ -126,13 +119,18 @@ export class ClientRenderer {
     chooserElement: Element;
     contentElement: Element;
     selectedValsByPrefId?: Record<string, string>;
-    ifFunctionsByRef: Record<string, ClientFunction>;
+    ifFunctionsByRef: Record<string, MinifiedClientFunction>;
   }) {
     this.prefOptionsConfig = p.prefOptionsConfig;
     this.pagePrefsConfig = p.pagePrefsConfig;
     this.chooserElement = p.chooserElement;
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
-    this.ifFunctionsByRef = p.ifFunctionsByRef;
+    this.ifFunctionsByRef = {};
+    Object.keys(p.ifFunctionsByRef).forEach((ref) => {
+      this.ifFunctionsByRef[ref] = expandClientFunction(
+        p.ifFunctionsByRef[ref]
+      ) as ClientFunction;
+    });
     this.prefPills = [];
 
     const chooserElement = document.getElementById('markdoc-chooser');

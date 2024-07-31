@@ -14,6 +14,7 @@ import {
 /**
  * Functions necessary for rendering
  * at both compile time and in the client on selection change.
+ * Not packaged as a class to avoid unnecessary bundle size increase.
  *
  * IMPORTANT:
  * Because this code must run on both the server and the client,

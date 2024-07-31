@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { getChooserHtml } from './components/Chooser';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
-import { TreeManager } from '../TreeManager';
+import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { resolvePagePrefs } from '../sharedRendering';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
@@ -55,7 +55,7 @@ export class PageBuilder {
       args.prefOptionsConfig
     );
 
-    const renderableTree = TreeManager.buildRenderableTree({
+    const renderableTree = buildRenderableTree({
       parsedFile: args.parsedFile,
       prefOptionsConfig: args.prefOptionsConfig,
       defaultValsByPrefId
@@ -178,7 +178,8 @@ ${rerenderScript}
     let prefOptionsConfigStr;
     let defaultValsByPrefIdStr;
     let pagePrefsConfigStr;
-    const ifFunctionsByRef = TreeManager.getIfFunctionsByRef(p.renderableTree);
+    const ifFunctionsByRef = getMinifiedIfFunctionsByRef(p.renderableTree);
+    console.log(ifFunctionsByRef);
     let ifFunctionsByRefStr;
 
     if (p.pageBuildArgs.debug) {

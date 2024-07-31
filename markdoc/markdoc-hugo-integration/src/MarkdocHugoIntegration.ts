@@ -133,6 +133,10 @@ export class MarkdocHugoIntegration {
 
     this.compiledFiles.sort();
 
+    if (this.#hasErrors()) {
+      this.logErrorsToConsole();
+    }
+
     return {
       hasErrors: this.#hasErrors(),
       parsingErrorReportsByFilePath: this.parsingErrorReportsByFilePath,

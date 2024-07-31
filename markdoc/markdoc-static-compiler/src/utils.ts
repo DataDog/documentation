@@ -1,19 +1,14 @@
 import { parse, SyntaxError } from './grammar/tag';
 import Variable from './ast/variable';
 import Function from './ast/function';
-import type {
-  Tag,
-  ClientVariable,
-  ClientFunction,
-  RenderableTreeNode,
-} from './types';
+import type { Tag, ClientVariable, ClientFunction, RenderableTreeNode } from './types';
 
 import type Token from 'markdown-it/lib/token';
 
 enum STATES {
   normal,
   string,
-  escape,
+  escape
 }
 
 export const OPEN = '{%';
@@ -64,11 +59,11 @@ function parseTag(content: string, line: number, contentStart: number) {
     if (!(error instanceof SyntaxError)) throw error;
     const {
       message,
-      location: { start, end },
+      location: { start, end }
     } = error as SyntaxError;
     const location = {
       start: { line, character: start.offset + contentStart },
-      end: { line: line + 1, character: end.offset + contentStart },
+      end: { line: line + 1, character: end.offset + contentStart }
     };
 
     return { type: 'error', meta: { error: { message, location } } };
@@ -111,19 +106,19 @@ export function parseTags(content: string, firstLine = 0): Token[] {
       type: 'text',
       start,
       end: pos - 1,
-      content: precedingText,
+      content: precedingText
     });
 
     output.push({
       map: [line, line + 1],
       position: {
         start: pos - lineStart,
-        end: pos - lineStart + text.length,
+        end: pos - lineStart + text.length
       },
       start: pos,
       end: pos + text.length - 1,
       info: text,
-      ...tag,
+      ...tag
     });
 
     start = end + CLOSE.length;
@@ -134,9 +129,10 @@ export function parseTags(content: string, firstLine = 0): Token[] {
     type: 'text',
     start,
     end: content.length - 1,
-    content: content.slice(start),
+    content: content.slice(start)
   });
 
+  // @ts-ignore
   return output;
 }
 
@@ -149,7 +145,7 @@ export function buildTag(
     $$mdtype: 'Tag',
     name,
     attributes,
-    children,
+    children
   };
 }
 
