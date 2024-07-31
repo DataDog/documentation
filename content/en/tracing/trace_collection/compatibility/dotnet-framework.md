@@ -93,7 +93,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
 ## OpenTelemetry based integrations
 
@@ -156,5 +156,4 @@ Version updates imply the following changes to runtime support:
 [8]: /agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
-[11]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
-[12]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[11]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet

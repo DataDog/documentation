@@ -216,6 +216,13 @@ components:
       required: true
       schema:
         type: string
+    FileID:
+      description: File ID.
+      in: path
+      name: file_id
+      required: true
+      schema:
+        type: string
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -348,6 +355,13 @@ components:
       description: The UUID of the incident todo.
       in: path
       name: todo_id
+      required: true
+      schema:
+        type: string
+    InstanceId:
+      description: The ID of the workflow instance.
+      in: path
+      name: instance_id
       required: true
       schema:
         type: string
@@ -556,6 +570,13 @@ components:
       required: true
       schema:
         example: 00000000-0000-9999-0000-000000000000
+        type: string
+    WorkflowId:
+      description: The ID of the workflow.
+      in: path
+      name: workflow_id
+      required: true
+      schema:
         type: string
   requestBodies: {}
   responses:
@@ -5535,6 +5556,234 @@ components:
         name:
           description: Name of the creator.
           nullable: true
+          type: string
+      type: object
+    CustomCostGetResponseMeta:
+      description: Meta for the response from the Get Custom Costs endpoints.
+      properties:
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostListResponseMeta:
+      description: Meta for the response from the List Custom Costs endpoints.
+      properties:
+        total_filtered_count:
+          description: Number of Custom Costs files returned by the List Custom Costs
+            endpoint
+          format: int64
+          type: integer
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostUploadResponseMeta:
+      description: Meta for the response from the Upload Custom Costs endpoints.
+      properties:
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostsFileGetResponse:
+      description: Response for Get Custom Costs files.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomCostsFileMetadataWithContentHighLevel'
+        meta:
+          $ref: '#/components/schemas/CustomCostGetResponseMeta'
+      type: object
+    CustomCostsFileLineItem:
+      description: Line item details from a Custom Costs file.
+      properties:
+        BilledCost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        BillingCurrency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        ChargeDescription:
+          description: Description for the line item cost.
+          example: Monthly usage charge for my service
+          type: string
+        ChargePeriodEnd:
+          description: End date of the usage charge.
+          example: '2023-02-28'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        ChargePeriodStart:
+          description: Start date of the usage charge.
+          example: '2023-02-01'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        ProviderName:
+          description: Name of the provider for the line item.
+          type: string
+        Tags:
+          additionalProperties:
+            type: string
+          description: Additional tags for the line item.
+          type: object
+      type: object
+    CustomCostsFileListResponse:
+      description: Response for List Custom Costs files.
+      properties:
+        data:
+          description: List of Custom Costs files.
+          items:
+            $ref: '#/components/schemas/CustomCostsFileMetadataHighLevel'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CustomCostListResponseMeta'
+      type: object
+    CustomCostsFileMetadata:
+      description: Schema of a Custom Costs metadata.
+      properties:
+        billed_cost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        billing_currency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        charge_period:
+          $ref: '#/components/schemas/CustomCostsFileUsageChargePeriod'
+        name:
+          description: Name of the Custom Costs file.
+          example: my_file.json
+          type: string
+        provider_names:
+          description: Providers contained in the Custom Costs file.
+          items:
+            description: Name of the provider.
+            example: my_provider
+            type: string
+          type: array
+        status:
+          description: Status of the Custom Costs file.
+          example: active
+          type: string
+        uploaded_at:
+          description: Timestamp, in millisecond, of the upload time of the Custom
+            Costs file.
+          example: 1704067200000
+          format: double
+          type: number
+        uploaded_by:
+          $ref: '#/components/schemas/CustomCostsUser'
+      type: object
+    CustomCostsFileMetadataHighLevel:
+      description: JSON API format for a Custom Costs file.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomCostsFileMetadata'
+        id:
+          description: ID of the Custom Costs metadata.
+          type: string
+        type:
+          description: Type of the Custom Costs file metadata.
+          type: string
+      type: object
+    CustomCostsFileMetadataWithContent:
+      description: Schema of a cost file's metadata.
+      properties:
+        billed_cost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        billing_currency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        charge_period:
+          $ref: '#/components/schemas/CustomCostsFileUsageChargePeriod'
+        content:
+          description: Detail of the line items from the Custom Costs file.
+          items:
+            $ref: '#/components/schemas/CustomCostsFileLineItem'
+          type: array
+        name:
+          description: Name of the Custom Costs file.
+          example: my_file.json
+          type: string
+        provider_names:
+          description: Providers contained in the Custom Costs file.
+          items:
+            description: Name of a provider.
+            example: my_provider
+            type: string
+          type: array
+        status:
+          description: Status of the Custom Costs file.
+          example: active
+          type: string
+        uploaded_at:
+          description: Timestamp in millisecond of the upload time of the Custom Costs
+            file.
+          example: 1704067200000
+          format: double
+          type: number
+        uploaded_by:
+          $ref: '#/components/schemas/CustomCostsUser'
+      type: object
+    CustomCostsFileMetadataWithContentHighLevel:
+      description: JSON API format of for a Custom Costs file with content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomCostsFileMetadataWithContent'
+        id:
+          description: ID of the Custom Costs metadata.
+          type: string
+        type:
+          description: Type of the Custom Costs file metadata.
+          type: string
+      type: object
+    CustomCostsFileUploadRequest:
+      description: Request for uploading a Custom Costs file.
+      items:
+        $ref: '#/components/schemas/CustomCostsFileLineItem'
+      type: array
+    CustomCostsFileUploadResponse:
+      description: Response for Uploaded Custom Costs files.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomCostsFileMetadataHighLevel'
+        meta:
+          $ref: '#/components/schemas/CustomCostUploadResponseMeta'
+      type: object
+    CustomCostsFileUsageChargePeriod:
+      description: Usage charge period of a Custom Costs file.
+      properties:
+        end:
+          description: End of the usage of the Custom Costs file.
+          example: 1706745600000
+          format: double
+          type: number
+        start:
+          description: Start of the usage of the Custom Costs file.
+          example: 1704067200000
+          format: double
+          type: number
+      type: object
+    CustomCostsUser:
+      description: Metadata of the user that has uploaded the Custom Costs file.
+      properties:
+        email:
+          description: The name of the Custom Costs file.
+          example: email.test@datadohq.com
+          type: string
+        icon:
+          description: The name of the Custom Costs file.
+          example: icon.png
+          type: string
+        name:
+          description: Name of the user.
+          example: Test User
           type: string
       type: object
     CustomDestinationAttributeTagsRestrictionListType:
@@ -15208,6 +15457,12 @@ components:
     ProjectedCostAttributes:
       description: Projected Cost attributes data.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         charges:
           description: List of charges data reported for the requested month.
           items:
@@ -17971,7 +18226,8 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time.'
+        and evaluates in real time. For third party rules, it should equal max signal
+        duration.'
       enum:
       - 0
       - 60
@@ -18015,7 +18271,8 @@ components:
       type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window."
+        if a case is matched at least once within\nthis keep alive window. For third
+        party rules, it should equal max signal duration."
       enum:
       - 0
       - 60
@@ -22570,6 +22827,7 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
+          format: url
           type: string
       required:
       - label
@@ -23795,6 +24053,107 @@ components:
       - PAST_SIX_MONTHS
       - PAST_ONE_YEAR
       - ALERT
+    WorkflowInstanceCreateMeta:
+      description: Additional information for creating a workflow instance.
+      properties:
+        payload:
+          additionalProperties: {}
+          description: The input parameters to the workflow.
+          type: object
+      type: object
+    WorkflowInstanceCreateRequest:
+      description: Request used to create a workflow instance.
+      properties:
+        meta:
+          $ref: '#/components/schemas/WorkflowInstanceCreateMeta'
+      type: object
+    WorkflowInstanceCreateResponse:
+      additionalProperties: {}
+      description: Response returned upon successful workflow instance creation.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowInstanceCreateResponseData'
+      type: object
+    WorkflowInstanceCreateResponseData:
+      additionalProperties: {}
+      description: Data about the created workflow instance.
+      properties:
+        id:
+          description: The ID of the workflow execution. It can be used to fetch the
+            execution status.
+          type: string
+      type: object
+    WorkflowInstanceListItem:
+      additionalProperties: {}
+      description: An item in the workflow instances list.
+      properties:
+        id:
+          description: The ID of the workflow instance
+          type: string
+      type: object
+    WorkflowListInstancesResponse:
+      additionalProperties: {}
+      description: Response returned when listing workflow instances.
+      properties:
+        data:
+          description: A list of workflow instances.
+          items:
+            $ref: '#/components/schemas/WorkflowInstanceListItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/WorkflowListInstancesResponseMeta'
+      type: object
+    WorkflowListInstancesResponseMeta:
+      additionalProperties: {}
+      description: Metadata about the instances list
+      properties:
+        page:
+          $ref: '#/components/schemas/WorkflowListInstancesResponseMetaPage'
+      type: object
+    WorkflowListInstancesResponseMetaPage:
+      additionalProperties: {}
+      description: Page information for the list instances response.
+      properties:
+        totalCount:
+          description: The total count of items.
+          format: int64
+          type: integer
+      type: object
+    WorklflowCancelInstanceResponse:
+      description: Information about the canceled instance.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorklflowCancelInstanceResponseData'
+      type: object
+    WorklflowCancelInstanceResponseData:
+      description: Data about the canceled instance.
+      properties:
+        id:
+          description: The id of the canceled instance
+          type: string
+      type: object
+    WorklflowGetInstanceResponse:
+      additionalProperties: {}
+      description: The state of the given workflow instance.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorklflowGetInstanceResponseData'
+      type: object
+    WorklflowGetInstanceResponseData:
+      additionalProperties: {}
+      description: The data of the instance response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorklflowGetInstanceResponseDataAttributes'
+      type: object
+    WorklflowGetInstanceResponseDataAttributes:
+      additionalProperties: {}
+      description: The attributes of the instance response data.
+      properties:
+        id:
+          description: The id of the instance.
+          type: string
+      type: object
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -26696,6 +27055,130 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+  /api/v2/cost/custom_costs:
+    get:
+      description: List the Custom Costs files.
+      operationId: ListCustomCostsFiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List Custom Costs files
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    put:
+      description: Upload a Custom Costs file.
+      operationId: UploadCustomCostsFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomCostsFileUploadRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileUploadResponse'
+          description: Accepted
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Upload Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 11
+      x-undo:
+        type: idempotent
+  /api/v2/cost/custom_costs/{file_id}:
+    delete:
+      description: Delete the specified Custom Costs file.
+      operationId: DeleteCustomCostsFile
+      parameters:
+      - $ref: '#/components/parameters/FileID'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch the specified Custom Costs file.
+      operationId: GetCustomCostsFile
+      parameters:
+      - $ref: '#/components/parameters/FileID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileGetResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/cost/enabled:
     get:
       description: Get the Cloud Cost Management activity.
@@ -29703,6 +30186,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+    x-merge-override:
+      patch: true
   /api/v2/integrations/okta/accounts:
     get:
       description: List Okta accounts.
@@ -38233,6 +38718,8 @@ paths:
       x-menu-order: 13
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: true
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
@@ -39018,6 +39505,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -39336,6 +39832,15 @@ paths:
         required: false
         schema:
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -39858,6 +40363,120 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/workflows/{workflow_id}/instances:
+    get:
+      description: List all instances of a given workflow.
+      operationId: ListWorkflowInstances
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListInstancesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List workflow instances
+      tags:
+      - Workflow Automation
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Execute the given workflow
+      operationId: CreateWorkflowInstance
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowInstanceCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowInstanceCreateResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Execute a workflow
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/workflows/{workflow_id}/instances/{instance_id}:
+    get:
+      description: Get a specific execution of a given workflow.
+      operationId: GetWorkflowInstance
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorklflowGetInstanceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a workflow instance
+      tags:
+      - Workflow Automation
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
+    put:
+      description: Cancels a specific execution of a given workflow.
+      operationId: CancelWorkflowInstance
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorklflowCancelInstanceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Cancel a workflow instance
+      tags:
+      - Workflow Automation
+      x-menu-order: 4
+      x-undo:
+        type: safe
   x-merge-override:
     /api/v2/team/{team_id}/links: true
     /api/v2/team/{team_id}/links/{link_id}: true
@@ -40273,4 +40892,9 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
+- description: Automate your teams operational processes with Datadog Workflow Automation.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/service_management/workflows/
+  name: Workflow Automation
 x-group-parameters: true

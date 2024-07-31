@@ -59,7 +59,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -241,7 +241,7 @@ By default, enabling APM on your server installs support for Java, Python, Ruby,
 For example, to install support for only v1.25.0 of the Java APM SDK and the latest Python APM SDK, add the following to the installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the APM SDK by placing a colon after the language name and specifying the APM SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.

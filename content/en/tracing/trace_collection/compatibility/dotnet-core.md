@@ -90,7 +90,7 @@ The [latest version of the .NET APM SDK][4] can automatically instrument the fol
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
-Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][13]). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][13] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## OpenTelemetry based integrations
 
@@ -164,8 +164,7 @@ Version updates imply the following changes to runtime support:
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
-[13]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
-[14]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[13]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
 [15]: https://github.com/dotnet/runtime/pull/73760
 [16]: https://github.com/dotnet/runtime/issues/11885
 [17]: https://github.com/dotnet/runtime/issues/85777
