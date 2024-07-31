@@ -40,7 +40,7 @@ integration_id: aws-fargate
 integration_title: Amazon ECS on AWS Fargate
 integration_version: 4.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ecs_fargate
 public_title: Amazon ECS on AWS Fargate
@@ -93,13 +93,13 @@ Datadog Agent は、ECS のタスクメタデータエンドポイントでタ�
 
 **注**: Network Performance Monitoring (NPM) は、ECS Fargate ではサポートされていません。
 
-## 計画と使用
+## セットアップ
 
 以下の手順では、AWS ECS Fargate 内で Datadog Container Agent をセットアップします。**注**: Fargate インテグレーションを最大限活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
 
 Datadog Agent を持たないタスクも Cloudwatch でメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent を通じて直接発送されるメトリクスより報告のレイテンシーが高くなります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog で ECS Fargate タスクを監視するには、アプリケーションコンテナと**同じタスク定義**内のコンテナとして Agent を実行します。Datadog でメトリクスを収集するには、各タスク定義にアプリケーションコンテナのほかに Datadog Agent コンテナを含める必要があります。以下のセットアップ手順を実行します。
 

@@ -7,7 +7,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
   tag: Terraform
   text: Terraform による Synthetic グローバル変数の作成と管理
-kind: ドキュメント
 title: ブラウザテストのステップ
 ---
 

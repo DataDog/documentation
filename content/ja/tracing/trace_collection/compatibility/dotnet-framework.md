@@ -12,7 +12,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
   text: カスタムインスツルメンテーションの例
-kind: documentation
 title: .NET Framework 互換性要件
 type: multi-code-lang
 ---

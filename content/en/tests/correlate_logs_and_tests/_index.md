@@ -1,6 +1,5 @@
 ---
 title: Correlate Logs and Tests
-kind: documentation
 description: Correlate your logs with your test traces.
 further_reading:
   - link: "/tests"
@@ -34,7 +33,7 @@ Use the following environment variables to enable and configure agentless log su
 
 | Name | Description | Default value |
 |---|---|---|
-| `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Enables/disables log submission | `true` 
+| `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Enables/disables log submission | `false` 
 | `DD_AGENTLESS_LOG_SUBMISSION_LEVEL` (optional) | Sets log level for agentless submission | `INFO`
 | `DD_AGENTLESS_LOG_SUBMISSION_QUEUE_SIZE` (optional) | Sets the maximum size of pending logs queue | `1024`
 | `DD_AGENTLESS_LOG_SUBMISSION_URL` (optional) | Sets custom URL for submitting logs | -

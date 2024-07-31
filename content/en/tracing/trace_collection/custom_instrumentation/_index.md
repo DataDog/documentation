@@ -1,6 +1,5 @@
 ---
 title: Custom Instrumentation
-kind: Documentation
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'

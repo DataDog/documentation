@@ -11,7 +11,6 @@ further_reading:
 - link: /quality_gates
   tag: Documentación
   text: Más información sobre Umbrales de calidad
-kind: documentación
 title: Detección temprana de defectos
 ---
 

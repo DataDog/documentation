@@ -1,6 +1,5 @@
 ---
 title: Docker Tag Extraction
-kind: documentation
 aliases:
 - /agent/docker/tag
 further_reading:

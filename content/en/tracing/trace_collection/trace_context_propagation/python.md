@@ -1,6 +1,5 @@
 ---
 title: Propagating Python Trace Context
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
@@ -19,7 +18,7 @@ Distributed headers injection and extraction is controlled by
 configuring injection and extraction styles. Supported styles are:
 `tracecontext`, `datadog`, `b3multi` and `b3 single header`.
 
-- Configure injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,b3mutli` environment variable.
+- Configure injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,b3multi` environment variable.
 - Configure extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,b3multi` environment variable.
 - Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,b3multi` environment variable.
 

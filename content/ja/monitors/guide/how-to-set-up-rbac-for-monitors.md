@@ -9,7 +9,6 @@ further_reading:
 - link: /monitors/notify/#permissions
   tag: ドキュメント
   text: UI を使った制限付きモニターの作成について詳しく見る
-kind: ガイド
 title: モニター用に RBAC を設定する方法
 ---
 

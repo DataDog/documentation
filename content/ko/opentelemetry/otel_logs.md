@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
   tag: 설명서
   text: OpenTelemetry 트레이스와 로그 연결
-kind: 설명서
 title: OpenTelemetry에서 Datadog로 로그 전송
 ---
 

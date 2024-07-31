@@ -8,7 +8,6 @@ further_reading:
 - link: /synthetics/settings/
   tag: ドキュメント
   text: Synthetic モニタリングの設定
-kind: documentation
 title: Synthetic の RUM 機能のプレビューを見る
 ---
 

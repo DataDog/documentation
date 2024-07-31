@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: ドキュメント
   text: モニターの管理
-kind: documentation
 title: チェック内容のサマリー
 ---
 

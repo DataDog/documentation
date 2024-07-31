@@ -1,7 +1,6 @@
 ---
 code_lang: ruby
 code_lang_weight: 30
-kind: documentation
 title: Exigences de compatibilité Ruby
 type: multi-code-lang
 ---

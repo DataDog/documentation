@@ -4,7 +4,6 @@ aliases:
 - /fr/workflows/setup
 description: Connexions des workflows
 disable_toc: false
-kind: documentation
 title: Connexions
 ---
 

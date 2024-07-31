@@ -1,6 +1,5 @@
 ---
 title: Detecting a Network Outage
-kind: guide
 aliases:
     - /network_performance_monitoring/guide/detecting_a_network_outage/
 ---

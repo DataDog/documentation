@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay/
   tag: ドキュメント
   text: セッションリプレイ
-kind: ドキュメント
 title: モバイルおよび TV モニタリング
 type: multi-code-lang
 ---

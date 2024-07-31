@@ -1,6 +1,5 @@
 ---
-title: Enabling ASM Code Security using Datadog Tracing Libraries
-kind: documentation
+title: Enabling Code Security using Datadog Tracing Libraries
 type: multi-code-lang
 further_reading:
 - link: "/security/application_security/"
@@ -23,10 +22,8 @@ further_reading:
   text: "How Application Security Management Works in Datadog"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
-  text: "Secure serverless applications with Datadog ASM"
+  text: "Secure serverless applications with Datadog"
 ---
-
-<div class="alert alert-info">Code Security is in beta.</div>
 
 Select your application language for details on how to enable Code Security for your language and infrastructure types.
 

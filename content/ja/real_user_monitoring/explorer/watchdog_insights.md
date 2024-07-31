@@ -13,7 +13,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: RUM エクスプローラーでの検索方法について
-kind: documentation
 title: Watchdog Insights for RUM
 ---
 

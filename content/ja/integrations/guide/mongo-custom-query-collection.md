@@ -3,7 +3,6 @@ further_reading:
 - link: /ja/integrations/mongo/
   tag: ドキュメント
   text: MongoDB インテグレーションについて
-kind: ガイド
 title: MongoDB カスタムメトリクスを収集
 ---
 

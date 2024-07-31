@@ -1,6 +1,5 @@
 ---
 title: GitLab
-kind: documentation
 description: Configure your GitLab instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
   - /synthetics/cicd_integrations/gitlab

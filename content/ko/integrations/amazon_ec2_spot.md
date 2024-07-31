@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Amazon EC2 Spot
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: amazon_ec2_spot
 public_title: Datadog-Amazon EC2 Spot 통합

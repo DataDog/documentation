@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Resource Utilization
-kind: documentation
 aliases:
 - /infrastructure/containers/kubernetes_resources
 further_reading:

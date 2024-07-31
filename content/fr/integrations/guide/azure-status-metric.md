@@ -2,7 +2,7 @@
 aliases:
 - /fr/integrations/faq/azure-vm-status-is-not-reporting
 - /fr/integrations/faq/azure-status-metric
-kind: guide
+
 title: Métrique count et status Azure
 ---
 

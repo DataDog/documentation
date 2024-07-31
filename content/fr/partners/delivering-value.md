@@ -1,7 +1,6 @@
 ---
 description: Étapes recommandées après avoir configuré l'ingestion de données dans
   Datadog.
-kind: documentation
 private: true
 title: Générer de la valeur ajoutée
 ---

@@ -1,6 +1,6 @@
 ---
 title: Proxy Your Mobile RUM Data
-kind: guide
+
 aliases:
   - /real_user_monitoring/faq/proxy_mobile_rum_data/
 further_reading:

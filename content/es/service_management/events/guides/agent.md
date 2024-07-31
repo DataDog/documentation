@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentación
   text: Escribir un check del Agent personalizado
-kind: guía
 title: Eventos con un check del Agent personalizado
 ---
 

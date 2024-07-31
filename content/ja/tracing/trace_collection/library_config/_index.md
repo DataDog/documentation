@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Datadog トレーシングライブラリの構成
 type: multi-code-lang
 ---

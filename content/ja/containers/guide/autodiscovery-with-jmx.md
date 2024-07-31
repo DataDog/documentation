@@ -14,7 +14,6 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentation
   text: アプリケーションのタグの動的割り当てと収集
-kind: ガイド
 title: JMX を使用したオートディスカバリー
 ---
 

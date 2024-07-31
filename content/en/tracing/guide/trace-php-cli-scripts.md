@@ -1,6 +1,6 @@
 ---
 title: Tracing PHP CLI Scripts
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_collection/dd_libraries/php/"
   tag: "Documentation"

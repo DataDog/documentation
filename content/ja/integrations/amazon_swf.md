@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon Simple Workflow Service
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_swf
 public_title: Datadog-Amazon Simple Workflow Service インテグレーション

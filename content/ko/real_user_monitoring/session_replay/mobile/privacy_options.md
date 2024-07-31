@@ -17,7 +17,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: 설명서
   text: 세션 재생
-kind: 설명서
 title: 모바일 세션 재생 개인정보 보호 옵션
 ---
 

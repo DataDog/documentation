@@ -11,7 +11,6 @@ further_reading:
 - link: /opentelemetry/
   tag: ドキュメント
   text: Datadog の OpenTelemetry サポート
-kind: ドキュメント
 title: OpenTelemetry による取り込みサンプリング
 ---
 

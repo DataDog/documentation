@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Terms and Concepts
-kind: documentation
 further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/'
       tag: 'External Site'

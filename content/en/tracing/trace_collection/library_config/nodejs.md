@@ -1,6 +1,5 @@
 ---
 title: Configuring the Node.js Tracing Library
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
@@ -20,6 +19,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: "/opentelemetry/interoperability/environment_variable_support"
+      tag: "Documentation"
+      text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -64,6 +66,11 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
 Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+
+`DD_TRACE_OTEL_ENABLED`
+: **Configuration**: N/A<br>
+**Default**: `undefined`<br>
+When `true`, OpenTelemetry-based tracing for [custom][15] instrumentation is enabled.
 
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
@@ -271,3 +278,5 @@ For more examples of how to work with the library see [API documentation][2].
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/nodejs
 [13]: /agent/configuration/network/#configure-ports
+[14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/

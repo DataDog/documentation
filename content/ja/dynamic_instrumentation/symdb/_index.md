@@ -4,7 +4,6 @@ further_reading:
   tag: ドキュメント
   text: ダイナミックインスツルメンテーションについて
 is_beta: true
-kind: ドキュメント
 private: true
 title: Symbol Database
 ---

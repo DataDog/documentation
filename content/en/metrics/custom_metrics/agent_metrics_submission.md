@@ -1,6 +1,5 @@
 ---
 title: "Metric Submission: Custom Agent Check"
-kind: documentation
 aliases:
   - /developers/metrics/agent_metrics_submission/
   - /metrics/agent_metrics_submission

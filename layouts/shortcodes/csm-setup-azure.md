@@ -19,7 +19,7 @@ Use one of the following methods to enable CSM for your Azure subscriptions:
 #### Azure integration page
 
 1. On the [**Azure Integration** page][3], select an Azure app registration.
-2. Under **Resource Collection**, select the **Collect resources for Cloud Security Posture Management** checkbox.
+2. Under **Resource Collection**, select **Enable Cloud Security Management**.
 3. Click **Submit Changes**.
 
 [1]: https://docs.datadoghq.com/integrations/azure

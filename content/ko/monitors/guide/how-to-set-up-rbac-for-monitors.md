@@ -9,7 +9,6 @@ further_reading:
 - link: /monitors/notify/#permissions
   tag: 설명서
   text: UI(사용자 인터페이스)를 통한 제한된 모니터 생성에 관해 자세히 보기
-kind: 가이드
 title: 모니터의 RBAC(역할 기반 접근 제어) 설정 방법
 ---
 

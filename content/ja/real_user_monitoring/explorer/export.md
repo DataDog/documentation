@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors
   tag: ドキュメント
   text: モニターについて
-kind: documentation
 title: RUM イベントとグラフのエクスポート
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights
-kind: documentation
 description: View anomalies and outliers that match your search query with Watchdog Insights.
 further_reading:
 - link: "/logs/explorer/watchdog_insights/"

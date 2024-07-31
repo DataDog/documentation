@@ -1,6 +1,6 @@
 ---
 title: Commands to install the Azure Datadog Extension
-kind: guide
+
 aliases:
   - "/integrations/faq/powershell-command-to-install-azure-datadog-extension"
 further_reading:
@@ -40,7 +40,7 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) Url to the Azure blob contaning the Agent configuration as a zip. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
 | `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
@@ -89,7 +89,7 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
 | `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:

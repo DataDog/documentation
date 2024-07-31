@@ -5,7 +5,6 @@ aliases:
 - /ja/serverless/libraries_integrations/forwarder/
 dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
-kind: documentation
 title: Datadog Forwarder
 ---
 
@@ -127,12 +126,11 @@ class SampleRegistry
 5. 一部の AWS アカウントは、トリガーが Cloudwatch ロググループが Forwarder を呼び出すことを許可するリソースベースのポリシーを自動的に作成しないように構成されています。Cloudwatch Log Events によって Forwarder が呼び出されるために必要な権限を確認するには、[CloudWatchLogPermissions][103] を参照してください。
 6. [トリガーを構成します][104]。
 7. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:ListBucket`、`s3:DeleteObject` 権限を Lambda 実行ロールに提供します。このバケットは、異なるタグキャッシュ (Lambda、S3、Step Function、Log Group) の保存に使用されます。さらに、このバケットは、転送の例外が発生した場合に、未転送のイベントを保存するために使用されます。
-8. 環境変数 `DD_STORE_FAILED_EVENTS` を `true` に設定して、フォワーダーがイベントデータも S3 バケットに保存するようにします。ログ、メトリクス、トレースをインテークに送信する際に例外が発生した場合、フォワーダーは関連データを S3 バケットに保存します。カスタム呼び出し、つまり `retry` キーワードが空でない文字列に設定されたイベントを受信した場合 (手動でトリガー可能 - 下記参照)、フォワーダーは保存されたイベントの送信を再試行します。成功した場合、バケット内のストレージをクリアします。
+8. 環境変数 `DD_STORE_FAILED_EVENTS` を `true` に設定して、フォワーダーがイベントデータも S3 バケットに保存するようにします。ログ、メトリクス、またはトレースをインテークに送信する際に例外が発生した場合、フォワーダーは関連データを S3 バケットに保存します。カスタム呼び出し、つまり `retry` キーワードが空でない文字列に設定されたイベントを受信した場合 (手動でトリガー可能 - 下記参照)、フォワーダーは保存されたイベントの送信を再度試みます。成功した場合、バケット内のストレージをクリアします。
 
-```bash 
+```bash
 aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' out
 ```
-
 
 [101]: https://github.com/DataDog/datadog-serverless-functions/releases
 [102]: https://app.datadoghq.com/organization-settings/api-keys
@@ -151,10 +149,13 @@ aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' o
 最新バージョンへのアップグレードで問題が発生した場合は、トラブルシューティングのセクションを確認してください。
 
 ### 古いバージョンを 3.107.0 以降にアップグレードする
+
 バージョン 3.107.0 から、インテークポイントで例外が発生した場合に未転送のイベントを Lambda 関数が保存できる新機能が追加されました。`DD_STORE_FAILED_EVENTS` 環境変数を使用してこの機能を有効にすると、失敗したイベントはタグキャッシュを保存するために使用されるのと同じ S3 バケット内の定義済みディレクトリに保存されます。同じバケットを使用して、複数の Lambda 関数のログをユニークなサブディレクトリに保存できます。
 
 ### 古いバージョンを 3.106.0 以降にアップグレードする
-バージョン 3.106.0 から、Lambda 関数は `DD_S3_BUCKET_NAME` で構成された S3 バケットに保存されるキャッシュファイル名にプレフィックスを追加するよう更新されました。これにより、複数の関数のキャッシュファイルを同じバケットに保存できるようになります。
+
+バージョン 3.106.0 から、Lambda 関数は `DD_S3_BUCKET_NAME` で構成された S3 バケットに保存されるキャッシュファイル名にプレフィックスを追加するよう更新されました。これにより、複数の関数のキャッシュファイルを同じバケットに保存できるようになります。 
+また、このバージョンから、フォワーダーは S3 にエクスポートされるすべてのログに、デフォルトでカスタム S3 バケットタグをアタッチするようになります。たとえば、サービスが宛先の S3 バケットにログを送信するよう構成された場合、フォワーダーはログを取得・転送する際にそのバケットのタグをログに追加します。
 
 ### 古いバージョンを 3.99.0 以降にアップグレードする
 
@@ -203,7 +204,7 @@ Forwarder および、Forwarder CloudFormation スタックによって作成さ
 
 Datadog は、Lambda 関数を直接編集するのではなく、CloudFormation を介して Forwarder 設定を調整することをお勧めします。スタックを起動するときに、[`template.yaml` ファイル][8] と CloudFormation スタック作成ユーザーインターフェイスで設定の説明を確認してください。追加の設定をテンプレートで調整できるように、お気軽にプルリクエストを送信してください。
 
-## ヘルプ
+## トラブルシューティング
 
 最近の[リリース][9]で問題がすでに修正されているかどうかも、忘れずに確認してください。
 
@@ -220,15 +221,16 @@ Forwarder Lambda 関数で環境変数 `DD_LOG_LEVEL` を `debug` に設定し�
 それでもわからない場合は、デバッグログのコピーを使用して [Datadog サポート][10]のチケットを作成してください。
 
 ### JSON 形式のログが Datadog に表示されていない
+
 ログに Datadog がタイムスタンプとしてパースする属性が含まれている場合、タイムスタンプが現在で正しい形式であることを確認する必要があります。どの属性がタイムスタンプとしてパースされ、タイムスタンプが有効であることを確認する方法については、[ログ日付リマッパー][24]を参照してください。
 
 ### S3 トリガーの作成に関する問題
+
 S3 トリガーを作成する際に次のようなエラーが発生した場合、[この記事](https://aws.amazon.com/blogs/compute/fanout-s3-event-notifications-to-multiple-endpoints/)で AWS が提案するファンアウトアーキテクチャに従うことを検討してください。
 
 ```
 An error occurred when creating the trigger: Configuration is ambiguously defined. Cannot have overlapping suffixes in two rules if the prefixes are overlapping for the same event type.
 ```
-
 
 ## 寄稿
 
@@ -250,7 +252,7 @@ An error occurred when creating the trigger: Configuration is ambiguously define
    ```bash
    # Upload in the AWS Lambda console if you don't have AWS CLI
    aws lambda update-function-code \
-       --region <AWS_REGION>
+       --region <AWS_REGION> \
        --function-name <FORWARDER_NAME> \
        --zip-file fileb://.forwarder/aws-dd-forwarder-<SEMANTIC_VERSION>.zip
    ```
@@ -295,7 +297,7 @@ VPC プライベートサブネットで Forwarder を実行し、AWS PrivateLin
 
 `DdUsePrivateLink` オプションは [v3.41.0][16] から非推奨になりました。このオプションは以前、データのインテークに PrivateLink エンドポイントの特別なセットを使用するよう Forwarder に指示するために使用されていました: `pvtlink.api.{{< region-param key="dd_site" code="true" >}}`、`api-pvtlink.logs.{{< region-param key="dd_site" code="true" >}}`、`trace-pvtlink.agent.{{< region-param key="dd_site" code="true" >}}`。v3.41.0 以降、Forwarder はインテークエンドポイントの通常の DNS 名を使用して PrivateLink 経由で Datadog にデータを送信することができます: `api.{{< region-param key="dd_site" code="true" >}}`、`http-intake.logs.{{< region-param key="dd_site" code="true" >}}`、`trace.agent.{{< region-param key="dd_site" code="true" >}}`。したがって、`DdUsePrivateLink` オプションは不要になりました。
 
-`DdUsePrivateLink` が `true` に設定された、Forwarder の旧デプロイメントをご使用の場合は、構成済みの PrivateLink エンドポイントと [Datadog の文書に記載されたもの][14]が異なることがありますが、これは想定内です。古い PrivateLink エンドポイントは、文書から削除されていますが、依然として機能します。Forwarder をアップグレードする際は、変更の必要はなく、`DdUsePrivateLink` を有効にしたまま、旧エンドポイントを引き続き使用できます。
+`DdUsePrivateLink` が `true` に設定された、Forwarder の旧デプロイメントをご使用の場合は、構成済みの PrivateLink エンドポイントと [Datadog のドキュメントに記載されたもの][14]が異なることがありますが、これは想定内です。古い PrivateLink エンドポイントは、ドキュメントから削除されていますが、依然として機能します。Forwarder をアップグレードする際は、変更の必要はなく、`DdUsePrivateLink` を有効にしたまま、旧エンドポイントを引き続き使用できます。
 
 ただし、新しいエンドポイントへの切り替えをご希望の場合は、上記の新しい手順に従い、以下を実行する必要があります。
 
@@ -313,13 +315,13 @@ VPC プライベートサブネットで Forwarder を実行し、AWS PrivateLin
 4. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
 5. HAProxy または NGINX を使用している場合
 
-  - `DdApiUrl` を `http://<proxy_host>:3834` または `https://<proxy_host>:3834` に設定します。
-  - `DdTraceIntakeUrl` を `http://<proxy_host>:3835` または `https://<proxy_host>:3835` に設定します。
-  - `DdUrl` を `<proxy_host>` に、`DdPort` を `3837` に設定します。
+- `DdApiUrl` を `http://<proxy_host>:3834` または `https://<proxy_host>:3834` に設定します。
+- `DdTraceIntakeUrl` を `http://<proxy_host>:3835` または `https://<proxy_host>:3835` に設定します。
+- `DdUrl` を `<proxy_host>` に、`DdPort` を `3837` に設定します。
 
-  それ以外、Web プロキシを使用している場合
+それ以外、Web プロキシを使用している場合
 
-  - `DdHttpProxyURL` をプロキシエンドポイントに設定します。例: `http://<proxy_host>:<port>` またはプロキシにユーザー名とパスワードがある場合は、`http://<username>:<password>@<proxy_host>:<port>`
+- `DdHttpProxyURL` をプロキシエンドポイントに設定します。例: `http://<proxy_host>:<port>` またはプロキシにユーザー名とパスワードがある場合は、`http://<username>:<password>@<proxy_host>:<port>`
 
 7. `http` を使用したプロキシに接続する場合は、`DdNoSsl` を `true` に設定します。
 8. 自己署名証明書のある `https` を使用したプロキシに接続する場合は `DdSkipSslValidation` を `true` に設定します。
@@ -422,7 +424,7 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 
 ログのフィルタリングに使用できる正規表現の例：
 
-- Lambda プラットフォームログ: `"(START|END) RequestId:\s` の包含 (または除外)。先行する `"` は、 ログメッセージの開始 (JSON blob 内の (`{"message": "START RequestId...."}`)) と一致する必要があります。Datadog では、`REPORT` ログを残すことを推奨しています。これは、サーバーレス関数のビューで呼び出しリストを生成するために使用されるからです。
+- Lambda プラットフォームログの包含 (または除外): `"(START|END) RequestId:\s`。先行する `"` は、 JSON blob (`{"message": "START RequestId...."}`) 内にあるログメッセージの先頭文字と一致させるために必要です。Datadog では、`REPORT` ログを残すことを推奨しています。これは、サーバーレス関数のビューで呼び出しリストを生成するために使用されるからです。
 - CloudTrail エラーメッセージのみ含める: `errorMessage`
 - HTTP 4XX または 5XX のエラーコードを含むログのみを含める: `\b[4|5][0-9][0-9]\b`
 - `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\"awsRegion\":\"us-east-1\"`
@@ -435,7 +437,7 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 `SourceZipUrl`
 : 実行内容を理解できない場合は、変更しないでください。関数のソースコードのデフォルトの場所を上書きします。
 
-`PermissionBoundaryArn`
+`PermissionsBoundaryArn`
 : Permissions Boundary Policy の ARN。
 
 `DdUsePrivateLink` (非推奨)
@@ -462,7 +464,7 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 `LayerARN`
 : フォワーダーコードを含むレイヤーの ARN。空の場合、スクリプトはフォワーダーが公開されたレイヤーのバージョンを使用します。デフォルトは空です。
 
-## ヘルプ
+## 権限
 
 CloudFormation Stack をデフォルトのオプションでデプロイするには、Datadog API キーをシークレットとして保存し、Forwarder のコード (ZIP ファイル) を格納する S3 バケットを作成し、Lambda 関数 (実行ロールとロググループを含む) を作成します。
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /quality_gates
   tag: ドキュメント
   text: Quality Gates について
-kind: ドキュメント
 title: Early Flake Detection
 ---
 

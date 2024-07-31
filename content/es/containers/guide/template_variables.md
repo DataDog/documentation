@@ -13,7 +13,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Determina qué contenedor debe incluirse en el Autodiscovery del Agent
-kind: guía
 title: Variables de plantilla de Autodiscovery
 ---
 

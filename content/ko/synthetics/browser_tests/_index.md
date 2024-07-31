@@ -22,7 +22,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 테라폼
   text: Terraform으로 신서틱(Synthetic) 브라우저 테스트 생성 및 관리
-kind: 설명서
 title: 브라우저 테스트
 ---
 

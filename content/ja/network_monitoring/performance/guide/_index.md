@@ -2,7 +2,6 @@
 aliases:
 - /ja/network_performance_monitoring/guide/
 disable_toc: true
-kind: ガイド
 private: true
 title: ネットワークパフォーマンスモニタリングガイド
 ---

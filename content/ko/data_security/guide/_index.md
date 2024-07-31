@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 보안 지침
 disable_toc: true
-kind: 지침
 private: true
 title: 보안 지침
 ---

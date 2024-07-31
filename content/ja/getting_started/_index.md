@@ -14,7 +14,6 @@ further_reading:
 - link: https://datadoghq.com/blog/
   tag: ブログ
   text: Datadog の新しい製品や機能、インテグレーションについて学びましょう
-kind: documentation
 title: はじめに
 ---
 

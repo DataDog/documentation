@@ -1,6 +1,5 @@
 ---
 title: Log Archives
-kind: documentation
 description: Forward all your ingested logs to long term storage.
 aliases:
   - /logs/s3/
@@ -198,10 +197,10 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 
 Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
 
-**Notes:** 
+**Notes:**
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.  
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
-* If your bucket restricts network access to specified IPs, add the webhook IPs from the [IP ranges list][8] to the allowlist. 
+* If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}

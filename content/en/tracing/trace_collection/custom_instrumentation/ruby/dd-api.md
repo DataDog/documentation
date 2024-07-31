@@ -1,6 +1,5 @@
 ---
 title: Ruby Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/ruby
     - /tracing/manual_instrumentation/ruby

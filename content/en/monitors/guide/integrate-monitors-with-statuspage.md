@@ -1,6 +1,5 @@
 ---
 title: Integrating Monitors With Statuspage
-kind: guide
 description: Learn how to integrate Datadog monitors with Atlassian Statuspage.
 further_reading:
 - link: '/integrations/statuspage'

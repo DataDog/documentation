@@ -1,6 +1,5 @@
 ---
 title: Assigning Tags
-kind: documentation
 description: 'Learn how to assign tags in Datadog.'
 aliases:
     - /agent/tagging

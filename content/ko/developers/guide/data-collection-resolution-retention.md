@@ -5,7 +5,6 @@ algolia:
 aliases:
 - /ko/developers/faq/data-collection-resolution-retention/
 disable_sidebar: true
-kind: 지침
 title: Datadog 데이터 수집, 해결 및 보존
 ---
 

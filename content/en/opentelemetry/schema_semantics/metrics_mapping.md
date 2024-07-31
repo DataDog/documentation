@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Metrics Mapping
-kind: documentation
 aliases:
 - /opentelemetry/guide/metrics_mapping/
 further_reading:

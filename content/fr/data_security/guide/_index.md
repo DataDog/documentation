@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: Guides sur la sécurité
 disable_toc: true
-kind: guide
 private: true
 title: Guides sur la sécurité
 ---

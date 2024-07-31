@@ -35,7 +35,7 @@ integration_id: aqua
 integration_title: Aqua
 integration_version: 1.0.0
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: aqua
 public_title: Aqua

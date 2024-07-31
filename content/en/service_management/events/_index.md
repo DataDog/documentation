@@ -1,6 +1,5 @@
 ---
 title: Event Management
-kind: documentation
 is_beta: true
 aliases:
 - /guides/eventcorrelation/

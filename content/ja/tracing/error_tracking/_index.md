@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: ドキュメント
   text: エラー追跡モニターを作成する
-kind: documentation
 title: バックエンドサービスのエラー追跡
 ---
 

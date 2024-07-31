@@ -5,7 +5,6 @@ further_reading:
 - link: /data_security/
   tag: Documentation
   text: Consulter les principales catégories de données envoyées à Datadog
-kind: documentation
 title: Sécurité des données liées à la surveillance Synthetic
 ---
 

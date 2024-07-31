@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits* について
-kind: documentation
 title: ログアーカイブ
 ---
 

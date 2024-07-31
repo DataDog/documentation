@@ -13,7 +13,6 @@ further_reading:
 - link: /synthetics/private_locations/
   tag: 설명서
   text: 프라이빗 위치 생성
-kind: 설명서
 title: 신서틱(Synthetic) 모니터링 트러블슈팅
 ---
 
@@ -111,6 +110,12 @@ Chrome 브라우저의 일부 정책 때문에 확장이 예상대로 레코딩�
 
 자동화된 브라우저는 CSS `pointer` 미디어 기능 에뮬레이션을 지원하지 않습니다. 브라우저 테스트는 모든 테스트와 장치(노트북, 태블릿 또는 모바일)에 대해 `pointer: none`을 포함합니다.
 
+### 리소스 기간
+
+#### 리소스의 지속 시간이 실제 단계 지속 시간보다 깁니다.
+
+로드 시간이 긴 리소스는 여러 단계에 걸쳐 있을 수 있습니다. 테스트 결과 단계 내에서 Datadog은 해당 특정 단계에서 시작된 모든 리소스를 반환합니다. 그러나 Datadog에서는 중요한 네트워크 호출이 완료되는 데 약 20초가 소요됩니다. 이 기간이 지나면 합성 작업자는 다음 단계로 진행됩니다. 작업자는 시간 초과 계층 구조를 사용하여 속도와 안정성의 균형을 유지합니다. 이 때문에 Datadog은 웹 애플리케이션의 속도나 느림을 측정하기 위해 단계 지속 시간을 사용하는 것을 권장하지 않습니다. 단계 기간은 작업자가 신뢰할 수 있는 결과를 제공하는 데 필요한 균형 잡힌 시간을 반영합니다.
+
 ## API 및 브라우저 테스트
 
 ### 무단 오류
@@ -165,7 +170,7 @@ Chrome 브라우저의 일부 정책 때문에 확장이 예상대로 레코딩�
 [104]: /ko/help/
 
 {{% /tab %}}
-{{% tab "Docker" %}}
+{{% tab "도커" %}}
 
 ### 내 프라이빗 위치 컨테이너가 때때로 `OOM`로 작동하지 않음 
 
@@ -183,7 +188,7 @@ Chrome 브라우저의 일부 정책 때문에 확장이 예상대로 레코딩�
 
 ### 재부팅하지 않고 Synthetics Private Location Worker 서비스를 다시 시작합니다.
 
-먼저, 설치 시 지정된 설정으로 프라이빗 위치를 설치했는지 확인하세요. GUI를 사용하거나 Windows PowerShell을 사용하여 서비스를 다시 시작할 수 있습니다.
+먼저, 설치 시 지정된 설정으로 프라이빗 위치를 설치했는지 확인하세요. GUI를 사용하거나 Windows PowerShell을 사용하여 서비스를 다시 시작할 수 있습니다.
 
 #### GUI
 
@@ -210,7 +215,7 @@ Synthetics Private Location Worker가 충돌하는 경우 Windows에서 PowerShe
 {{% /tab %}}
 {{< /tabs >}}
 
-### Sudo 비밀번호를 요구하거나 Dog 사용자 비밀번호를 요구함
+### Sudo 비밀번호를 요구하거나 Dog 사용자 비밀번호를 요구함
 
 프라이빗 위치 사용자(`dog`)는 다양한 이유로 `sudo`를 요구합니다. 일반적으로 이 사용자는 컨테이너의 프라이빗 위치를 시작하는 과정에서 `sudo` 액세스를 할 수 있는 특정 권한을 보유하고 있습니다. `dog` 사용자의 `sudo` 사용 가능성을 제한하는 정책이 있거나 컨테이너가 `dog` 사용자로 시작하지 못하도록 하는 정책(UID 501)이 있는지 확인하세요.
 
@@ -231,5 +236,5 @@ Synthetics Private Location Worker가 충돌하는 경우 Windows에서 PowerShe
 [9]: /ko/synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /ko/synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /ko/synthetics/api_tests/?tab=httptest#notify-your-team
+[12]: /ko/synthetics/api_tests/?tab=httptest#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/

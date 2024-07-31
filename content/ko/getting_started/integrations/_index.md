@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/
   tag: 설명서
   text: Datadog 통합 목록 보기
-kind: 설명서
 title: 통합 소개
 ---
 

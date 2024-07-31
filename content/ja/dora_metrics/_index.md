@@ -19,7 +19,6 @@ further_reading:
   tag: ドキュメント
   text: Code Analysis について
 is_beta: true
-kind: ドキュメント
 title: Azure
 ---
 

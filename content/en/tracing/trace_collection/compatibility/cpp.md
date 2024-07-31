@@ -1,6 +1,5 @@
 ---
 title: C++ Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the C++ tracer'
 aliases:
   - /tracing/compatibility_requirements/cpp

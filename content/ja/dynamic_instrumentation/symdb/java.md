@@ -2,7 +2,6 @@
 code_lang: java
 code_lang_weight: 10
 is_beta: true
-kind: ドキュメント
 private: true
 title: Java で Symbol Database を有効にする
 type: multi-code-lang

@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Duplicar hosts con Kubernetes en AWS (EC2 o EKS)
 ---
 

@@ -33,7 +33,7 @@ integration_id: google-cloud-platform
 integration_title: Google Cloud Platform
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_platform
 public_title: Datadog-Google Cloud Platform Integration

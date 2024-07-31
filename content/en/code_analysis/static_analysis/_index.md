@@ -1,5 +1,5 @@
 ---
-title: Static Analysis
+title: Static Analysis (SAST)
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -12,6 +12,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
+algolia:
+  tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 ---
 
 {{% site-region region="gov" %}}
@@ -26,7 +28,9 @@ Code Analysis is in public beta.
 
 ## Overview
 
-Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and security vulnerabilities early in the Software Development Life Cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
+Static Analysis (SAST) is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. 
+
+Static Analysis helps you identify maintainability issues and security vulnerabilities early in the software development life cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
 
 Using Static Analysis provides organizations with the following benefits:
 
@@ -35,26 +39,23 @@ Using Static Analysis provides organizations with the following benefits:
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
-## Languages
+## Set up Static Analysis
 
-Static Analysis currently supports scanning the following languages and technologies for poor coding practices and security vulnerabilities:
+Static Analysis supports scanning for poor coding practices and security vulnerabilities in the following languages and technologies:
 
-- C#
-- Dockerfiles
-- Go
-- Java
-- JavaScript
-- Python
-- Ruby
-- TypeScript
+{{< partial name="code_analysis/languages-getting-started.html" >}}
 
-## Integrations
+</br> 
+
+To get started, you can set up Static Analysis on the [**Code Analysis** page][1] or see the [Setup documentation][9].
+
+## Integrate Static Analysis into your software development lifecycle
 
 ### CI providers
 {{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of your choice. See the documentation for information about the following integrations:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Other CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Source code management
@@ -65,8 +66,8 @@ Static Analysis currently supports scanning the following languages and technolo
 ### IDEs
 {{< whatsnext desc="With Static Analysis, you can identify code vulnerabilities as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
@@ -107,54 +108,11 @@ The two types of fixes are distinguished visually in the UI with different label
 *AI Suggested Fixes:*
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
-### Ignoring violations
-
-#### Ignore for a repository
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
-
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore: "**"
-```
-
-#### Ignore for a file or directory
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][5].
-
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
-```
-
-#### Ignore for a specific instance
-
-To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
-
-```python
-#no-dd-sa
-foo = 1
-bar = 2
-```
-
-You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template: 
-
-`no-dd-sa:<rule-name>`
-
-For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which tells the developer to use [camelCase][6] instead of [snake_case][7].
-
-```javascript
-// no-dd-sa:javascript-code-style/assignment-name
-my_foo = 1
-myBar = 2
-```
+### Customizing your configuration
+See [this page][8] to learn how to customize how Static Analyis is configured in your repositories.
 
 ### Reporting false positives
-If you believe a specific violation is a false positive, you can indicate false positives and tell us why you flagged it. Datadog reviews submissions to improve our rules over time.
+If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
 
 {{< img src="code_analysis/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Analysis violation as a false positive" style="width:60%;">}}
 
@@ -169,3 +127,5 @@ If you believe a specific violation is a false positive, you can indicate false 
 [5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
+[8]: /code_analysis/static_analysis/setup/#add-a-static-analysis-yaml-file-to-your-project
+[9]: /code_analysis/static_analysis/setup

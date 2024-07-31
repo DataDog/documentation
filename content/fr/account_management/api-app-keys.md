@@ -35,8 +35,8 @@ Lorsque vous appliquez des portées à des clés d'application, il est recommand
 Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis une application pour navigateur, mobile ou téléviseur : celles-ci seraient exposées côté client. Les applications conçues pour les utilisateurs finaux reposent donc sur des tokens client pour transmettre des données à Datadog.
 
  Plusieurs types de clients doivent utiliser un token client pour envoyer des données. Par exemple :
-- Les collecteurs de logs pour les [navigateurs Web][6], [Android][12], [iOS][13], [React Native][14], [Flutter][15], et [Roku][16], qui envoient des logs.
-- Les applications [Real User Monitoring][7], qui envoient des événements et des logs
+- Les collecteurs de logs pour les [navigateurs Web][6], [Android][7], [iOS][8], [React Native][9], [Flutter][10], et [Roku][11], qui envoient des logs.
+- Les applications [Real User Monitoring][12], qui envoient des événements et des logs
 
 Les tokens client sont uniques à votre organisation. Pour les gérer, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
 
@@ -46,10 +46,12 @@ Les tokens client sont uniques à votre organisation. Pour les gérer, accédez 
 
 Pour ajouter une clé d'API Datadog ou un token client, procédez comme suit :
 
-1. Accédez aux paramètres d'organisation, puis cliquez sur l'onglet **API keys** ou **Client Tokens**.
+1. Accédez aux paramètres d'organisation, puis cliquez sur l'onglet [**API keys**][1] ou [**Client Tokens**][13].
 2. Cliquez sur le bouton **New Key** ou **New Client Token**, en fonction de l'élément à créer.
 3. Attribuez un nom à votre clé ou à votre token.
 4. Cliquez sur **Create API key** ou **Create Client Token**.
+
+{{< img src="account_management/api-key.png" alt="Accédez à la page des clés dʼAPI de votre organisation dans Datadog" style="width:80%;" >}}
 
 **Remarques :**
 
@@ -62,7 +64,9 @@ Pour supprimer une clé d'API ou un token client Datadog, accédez à la liste d
 
 ## Ajouter des clés d'application
 
-Pour ajouter une clé d'application Datadog, accédez à **Organization Settings** > **Application Keys**. Cliquez ensuite sur **New Key**. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer des clés d'application.
+Pour ajouter une clé d'application Datadog, accédez à [**Organization Settings** > **Application Keys**][2]. Cliquez ensuite sur **New Key**. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer des clés d'application.
+
+{{< img src="account_management/app-key.png" alt="Accédez à la page des clés dʼapplication de votre organisation dans Datadog" style="width:80%;" >}}
 
 **Remarques :**
 
@@ -70,11 +74,11 @@ Pour ajouter une clé d'application Datadog, accédez à **Organization Settings
 
 ## Supprimer des clés d'application
 
-Pour supprimer une clé d'application Datadog, accédez à **Organization Settings** > **Application Keys**. Vos clés d'application s'affichent alors. Cliquez ensuite sur l'option **Revoke** en regard de la clé à révoquer. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer et gérer des clés d'application. Si vous êtes autorisé à gérer toutes les clés d'application de votre organisation, vous pouvez rechercher la clé à révoquer, puis cliquer sur l'option **Revoke** correspondante.
+Pour supprimer une clé d'application Datadog, accédez à [**Organization Settings** > **Application Keys**][2]. Vos clés d'application s'affichent alors. Cliquez ensuite sur l'option **Revoke** en regard de la clé à révoquer. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer et gérer des clés d'application. Si vous êtes autorisé à gérer toutes les clés d'application de votre organisation, vous pouvez rechercher la clé à révoquer, puis cliquer sur l'option **Revoke** correspondante.
 
 ## Appliquer une portée à des clés d'application
 
-Pour appliquer des [portées d'autorisation][3] à des clés d'application, créez ou modifiez une clé d'application via l'[API Datadog][5] ou depuis l'interface. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][8] ou à un [compte de service][9]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
+Pour appliquer des [portées d'autorisation][3] à des clés d'application, créez ou modifiez une clé d'application en [envoyant une requête sur l'API Datadog][5] ou lʼIU pour créer ou modifier une clé dʼapplication. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][14] ou à un [compte de service][15]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
 
 **Remarques :**
 
@@ -86,7 +90,7 @@ Pensez à configurer plusieurs clés d'API pour votre organisation. Par exemple,
 
 L'utilisation de plusieurs clés d'API vous permet d'effectuer une rotation des clés dans le cadre de vos mesures de sécurité ou de révoquer une clé spécifique si elle est exposée par inadvertance ou si vous cessez d'utiliser le service auquel elle est associée.
 
-Si la limite de 50 clés d'API est insuffisante pour votre organisation, contactez l'[assistance][10] pour demander d'augmenter ce nombre.
+Si la limite de 50 clés d'API est insuffisante pour votre organisation, contactez l'[assistance][16] pour demander d'augmenter ce nombre.
 
 ## Désactiver un compte utilisateur
 
@@ -94,7 +98,7 @@ Si le compte d'un utilisateur est désactivé, les clés d'application créées 
 
 ## Transferts de clé
 
-Pour des raisons de sécurité, Datadog ne permet pas le transfert d'une clé d'application d'un utilisateur à un autre. Si vous avez besoin de partager une clé d'application, utilisez un [compte de service][11].
+Pour des raisons de sécurité, Datadog ne transfère pas les clés d'application d'un utilisateur à un autre. Si vous devez partager une clé d'application, utilisez un [compte de service][17].
 
 ## Que faire en cas d'exposition d'une clé d'API ou d'application
 
@@ -115,11 +119,11 @@ Suivez ces étapes pour protéger votre compte :
     - Nouvelles ressources
     - Modifications apportées aux rôles ou aux autorisations
 
-Si vous avez identifié une activité inhabituelle ou que vous avez besoin d'aide pour sécuriser votre compte, contactez l'[assistance Datadog][10].
+Si vous avez identifié une activité inhabituelle ou que vous avez besoin d'aide pour sécuriser votre compte, contactez l'[assistance Datadog][16].
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][16].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
@@ -127,13 +131,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [4]: /fr/account_management/rbac/permissions
 [5]: /fr/api/latest/key-management/
 [6]: /fr/logs/log_collection/javascript/
-[7]: /fr/real_user_monitoring/
-[8]: /fr/api/latest/key-management/#create-an-application-key-for-current-user
-[9]: /fr/api/latest/service-accounts/
-[10]: /fr/help/
-[11]: /fr/account_management/org_settings/service_accounts/
-[12]: /fr/logs/log_collection/android/
-[13]: /fr/logs/log_collection/ios/
-[14]: /fr/logs/log_collection/reactnative/
-[15]: /fr/logs/log_collection/flutter/
-[16]: /fr/logs/log_collection/roku/
+[7]: /fr/logs/log_collection/android/
+[8]: /fr/logs/log_collection/ios/
+[9]: /fr/logs/log_collection/reactnative/
+[10]: /fr/logs/log_collection/flutter/
+[11]: /fr/logs/log_collection/roku/
+[12]: /fr/real_user_monitoring/
+[13]: https://app.datadoghq.com/organization-settings/client-tokens
+[14]: /fr/api/latest/key-management/#create-an-application-key-for-current-user
+[15]: /fr/api/latest/service-accounts/
+[16]: /fr/help/
+[17]: /fr/account_management/org_settings/service_accounts/

@@ -1,6 +1,5 @@
 ---
 title: データをクエリしてテキストファイルにするまでの手順
-kind: ガイド
 aliases:
   - /ja/developers/faq/query-data-to-a-text-file-step-by-step
 ---

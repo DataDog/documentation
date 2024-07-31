@@ -9,7 +9,7 @@ further_reading:
 - link: /data_streams/
   tags: Documentation
   text: Data Streams Monitoring
-kind: guide
+
 title: Surveiller des files d'attente de Kafka
 ---
 

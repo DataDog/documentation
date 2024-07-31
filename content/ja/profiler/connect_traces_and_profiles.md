@@ -11,7 +11,6 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-kind: ドキュメント
 title: 遅いトレースやエンドポイントを調査する
 ---
 

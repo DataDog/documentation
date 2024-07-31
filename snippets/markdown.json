@@ -37,7 +37,6 @@
 		"body": [
 			"---",
 			"title: Doc Title",
-			"kind: <UPDATE>",
 			"disable_toc: false",
 			"aliases:",
 			"- /path-to-old-doc/",

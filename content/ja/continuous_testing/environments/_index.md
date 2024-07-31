@@ -22,7 +22,6 @@ further_reading:
 - link: /synthetics/private_locations
   tag: ドキュメント
   text: プライベートロケーションの詳細
-kind: ドキュメント
 title: ローカル環境とステージング環境のテスト
 ---
 

@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
   tag: ブログ
   text: Datadog でのインシデント管理方法
-kind: documentation
 title: Incident Management の概要
 ---
 

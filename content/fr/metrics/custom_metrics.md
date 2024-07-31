@@ -18,7 +18,6 @@ further_reading:
   tag: Blog
   text: Contrôler de façon dynamique le volume de vos métriques custom grâce à Metrics
     without Limits™
-kind: documentation
 title: Métriques custom
 ---
 

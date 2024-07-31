@@ -1,6 +1,5 @@
 ---
 title: Configure Serverless Monitoring for AWS Lambda
-kind: documentation
 further_reading:
   - link: '/serverless/installation/'
     tag: 'Documentation'

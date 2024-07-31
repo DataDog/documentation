@@ -11,7 +11,6 @@ further_reading:
   tag: blog
   text: Realiza un seguimiento de los cambios en dashboards y notebooks de Datadog
     con el historial de versiones
-kind: documentation
 title: Historial de versiones de notebooks
 ---
 

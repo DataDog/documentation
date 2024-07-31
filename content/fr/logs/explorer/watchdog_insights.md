@@ -1,6 +1,6 @@
 ---
 aliases:
-- /fr/logs/explorer/insights
+- /logs/explorer/insights
 description: Sachez précisément où regarder pour commencer ou poursuivre vos enquêtes
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
@@ -12,7 +12,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: Documentation
   text: En savoir plus sur la vue Log Explorer
-kind: documentation
 title: Watchdog Insights pour les logs
 ---
 
@@ -40,6 +39,11 @@ Chaque insight propose des interactions ainsi qu'un volet latéral affichant des
 
 ## Types d'insights
 
+La fonctionnalité [Watchdow Insights][8] affiche les anomalies et singularités qui ont été détectées pour certains tags, vous aidant ainsi déterminer la cause à l'origine d'un problème. Les [Insights][9] proviennent des solutions APM et Log Management, du profileur en continu et des données d'infrastructure comportant le tag `service`. Les deux types d'insights spécifiques à Log Management sont les suivants :
+
+- [Détection des anomalies dans les logs](#detection-des-anomalies-dans-les-logs)
+- [Singularités indiquant une erreur](#singularites-indiquant-une-erreur)
+
 ### Détection des anomalies dans les logs
 
 Les logs ingérés sont analysés au niveau de l'admission. Watchdog agrège les logs en fonction de certains patterns détectés ainsi que des tags `environment`, `service`, `source` et `status`. Ces logs agrégés sont ensuite analysés afin d'identifier différents comportements anormaux, notamment :
@@ -50,9 +54,16 @@ Les logs ingérés sont analysés au niveau de l'admission. Watchdog agrège les
 
 Les logs sont présentés sous la forme d'insights dans le Log Explorer. Ils tiennent compte du contexte de recherche ainsi que des restrictions appliquées au rôle de l'utilisateur.
 
-{{< img src="logs/explorer/watchdog_insights/log-anomalies-light.mp4" alt="Un utilisateur parcourant les détails d'un insight spécifique" video="true">}}
+{{< img src="logs/explorer/watchdog_insights/log-anomalies-light-cropped.mp4" alt="Un utilisateur parcourant les détails d'un insight spécifique" video="true">}}
 
 Cliquez sur un insight précis pour afficher la description complète de l'anomalie détectée, ainsi que la liste des patterns ayant permis l'identification de l'anomalie.
+
+Les anomalies considérées comme graves par Watchdog s'affichent également dans le [fil d'alertes Watchdog][6]. Vous pouvez créer des alertes à partir de ces anomalies en configurant un [monitor de logs Watchdog][7].
+Une anomalie grave répond aux critères suivants :
+
+* Elle contient des logs d'erreur
+* Elle dure au moins 10 minutes (pour éviter les erreurs passagères)
+* Elle est caractérisée par une forte augmentation (pour ignorer les hausses négligeables)
 
 Pour en savoir plus sur la recherche de logs dans le Log Explorer, consultez les sections [Syntaxe de recherche de logs][2] et [Intervalles personnalisés][3].
 
@@ -60,7 +71,7 @@ Pour en savoir plus sur la recherche de logs dans le Log Explorer, consultez le
 
 Les singularités (ou « error outliers ») affichent des champs, comme des [tags ou attributs à facettes][4], susceptibles d'indiquer une erreur pour la requête actuelle. Les paires `key:value` qui sont statistiquement surreprésentées parmi les erreurs mettent en lumière les causes possibles d'un problème.
 
-Voici quelques exemples de singularités habituelles : `env:staging`, `docker_image:acme:3.1` et `http.useragent_details.browser.family:curl`.
+Voici quelques exemples de singularités sur des erreurs habituelles : `env:staging`, `docker_image:acme:3.1` et `http.useragent_details.browser.family:curl`.
 
 Les informations suivantes sont accessibles depuis la **fiche de la bannière** :
 
@@ -79,7 +90,7 @@ Les informations suivantes sont accessibles depuis le **volet latéral développ
   * Les tags généralement associés aux logs d'erreur
   * La liste complète des [patterns de log][5]
 
-{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Volet latéral Error Outlier" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Volet latéral de la singularité sur des erreurs" style="width:100%;" >}}
 
 ## Pour aller plus loin
 
@@ -91,4 +102,8 @@ Les informations suivantes sont accessibles depuis le **volet latéral développ
 [2]: /fr/logs/search-syntax
 [3]: /fr/dashboards/guide/custom_time_frames
 [4]: /fr/logs/explorer/facets/
-[5]: /fr/logs/explorer/group/#patterns
+[5]: /fr/logs/explorer/analytics/patterns
+[6]: https://app.datadoghq.com/watchdog
+[7]: /fr/monitors/types/watchdog/
+[8]: /fr/watchdog/
+[9]: /fr/watchdog/insights/?tab=logmanagement#outlier-types

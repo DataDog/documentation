@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Data Streams Monitoring for .NET のセットアップ
 ---
 

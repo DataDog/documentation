@@ -10,7 +10,6 @@ further_reading:
 - link: developers/libraries
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-kind: documentation
 title: Datagramme et interface système
 ---
 

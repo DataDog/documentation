@@ -16,7 +16,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング
-kind: documentation
 title: クエリメトリクスの確認
 ---
 

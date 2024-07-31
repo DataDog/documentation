@@ -58,7 +58,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   echo \$(date -u) "Installing Datadog Agent on the driver (master node)..."
 
   DRIVER_TAGS="\${HOST_TAGS}","spark_node:driver"
-  DD_INSTALL_ONLY=true DD_HOST_TAGS=\$DRIVER_TAGS DD_HOSTNAME=\$DD_HOSTNAME bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_HOST_TAGS=\$DRIVER_TAGS DD_HOSTNAME=\$DD_HOSTNAME bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
   echo \$(date -u) "Datadog agent installed, applying Databricks specific configuration..."
 
   while [ -z \$gotparams ]; do
@@ -109,7 +109,7 @@ instances:
 else
   echo \$(date -u) "Installing Datadog Agent on the workers..."
   WORKER_TAGS="\${HOST_TAGS}","spark_node:worker"
-  DD_INSTALL_ONLY=true DD_HOST_TAGS=\$WORKER_TAGS DD_HOSTNAME=\$DD_HOSTNAME bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_HOST_TAGS=\$WORKER_TAGS DD_HOSTNAME=\$DD_HOSTNAME bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
   echo \$(date -u) "Datadog agent downloaded, applying Databricks specific configuration..."
 
   if [[ \${WORKER_LOGS_ENABLED} = true ]]; then

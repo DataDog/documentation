@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
-kind: documentation
 title: Node.js ランタイムメトリクス
 type: multi-code-lang
 ---

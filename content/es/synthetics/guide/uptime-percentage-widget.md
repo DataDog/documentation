@@ -9,7 +9,6 @@ further_reading:
 - link: /getting_started/synthetics/
   tag: Documentación
   text: Empezando con Synthetic Monitoring
-kind: guía
 title: Monitorizar el tiempo de actividad de un sitio web con SLOs
 ---
 

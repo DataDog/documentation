@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: 블로그
   text: 네트워크 및 보안 분석에 대한 DNS 모니터링
-kind: 설명서
 title: 네트워크 성능 모니터링
 ---
 

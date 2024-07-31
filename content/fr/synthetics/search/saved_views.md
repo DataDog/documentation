@@ -3,7 +3,6 @@ further_reading:
 - link: /synthetics/search/
   tag: Documentation
   text: Découvrir comment rechercher et gérer vos tests Synthetic
-kind: documentation
 title: Vues enregistrées
 ---
 

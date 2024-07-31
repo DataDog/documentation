@@ -3,7 +3,6 @@ aliases:
 - /ja/developers/integrations/oauth_for_data_integrations
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/oauth_for_integrations.md
-kind: documentation
 title: インテグレーションのための OAuth
 ---
 {{< callout btn_hidden="true" >}}

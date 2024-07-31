@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/how-to-run-jmx-commands-in-windows
-kind: guide
+
 title: Exécuter des commandes JMX sous Windows
 ---
 

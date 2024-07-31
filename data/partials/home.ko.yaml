@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: 에이전트 시작하기
   title: 에이전트 설치하기
-- desc: 700개 이상의 내장 통합을 사용해 메트릭, 트레이스, 로그를 집계하여 Datadog로 전송하세요.
+- desc: 750개 이상의 내장 통합을 사용해 메트릭, 트레이스, 로그를 집계하여 Datadog로 전송하세요.
   link: getting_started/integrations/
   link_text: 통합 시작하기
   title: 통합 설정하기

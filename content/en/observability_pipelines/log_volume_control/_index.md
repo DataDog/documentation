@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control
-kind: document
 disable_toc: false
 ---
 
@@ -14,14 +13,22 @@ As your infrastructure and applications grow, so does your log volume and the co
 - **Dedupe**: Drop duplicate copies of your logs, for example, due to retries because of network issues.
 - **Remap**: Add, drop, or rename a field in your logs.
 
+{{% observability_pipelines/use_case_images/log_volume_control %}}
+
 Select a log source to get started:
 
-- [Datadog Agent][4]
-- [Splunk HTTP Event Collector (HEC)][1]
-- [Splunk Heavy and Universal Forwarders (TCP)][2]
-- [Sumo Logic Hosted Collector][3]
+- [Datadog Agent][1]
+- [Fluentd or Fluent Bit][2]
+- [HTTP Client][3]
+- [Splunk HTTP Event Collector (HEC)][4]
+- [Splunk Heavy and Universal Forwarders (TCP)][5]
+- [Sumo Logic Hosted Collector][6]
+- [Rsyslog or Syslog-ng][7]
 
-[1]: /observability_pipelines/log_volume_control/splunk_hec
-[2]: /observability_pipelines/log_volume_control/splunk_tcp
-[3]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
-[4]: /observability_pipelines/log_volume_control/datadog_agent
+[1]: /observability_pipelines/log_volume_control/datadog_agent
+[2]: /observability_pipelines/log_volume_control/fluent
+[3]: /observability_pipelines/log_volume_control/http_client
+[4]: /observability_pipelines/log_volume_control/splunk_hec
+[5]: /observability_pipelines/log_volume_control/splunk_tcp
+[6]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
+[7]: /observability_pipelines/log_volume_control/syslog

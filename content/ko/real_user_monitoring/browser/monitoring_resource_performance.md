@@ -12,7 +12,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드
-kind: 설명서
 title: 리소스 성능 모니터링
 ---
 

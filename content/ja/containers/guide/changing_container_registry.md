@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/guide/changing_container_registry
-kind: ガイド
 title: コンテナのレジストリを変更する
 ---
 

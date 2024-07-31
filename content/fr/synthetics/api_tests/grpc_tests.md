@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/
   tag: Blog
   text: Surveiller des API gRPC avec la surveillance Synthetic Datadog
-kind: documentation
 title: Checks de santé GRPC
 ---
 ## Présentation

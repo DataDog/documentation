@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: Datadog Agent の概要
 is_beta: true
-kind: ドキュメント
 private: false
 title: Java のダイナミックインスツルメンテーションを有効にする
 type: multi-code-lang
