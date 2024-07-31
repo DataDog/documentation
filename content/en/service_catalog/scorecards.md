@@ -61,7 +61,7 @@ To evaluate and add custom rules in the Scorecards UI:
 4. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
 5. View an overview of outcomes and remarks in the Scorecards dashboard.
 
-{{< img src="/tracing/service_catalog/scorecard-create-and-update-custom-rule-ui" alt="User creating and evaluating a custom rule in the Scorecards UI" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecard-create-and-update-rule-ui.mp4" alt="User creating and evaluating a custom rule in the Scorecards UI" style="width:90%;" >}}
 
 ## How services are evaluated
 
