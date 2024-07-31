@@ -115,7 +115,7 @@ Actualiza el archivo JSON de definición de tarea de ECS de tu aplicación añad
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Vídeo que muestra el explorador de señales y detalles, y el explorador de vulnerabilidades y detalles." video="true" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< nombre parcial="whats-next/whats-next.html" >}}
 
