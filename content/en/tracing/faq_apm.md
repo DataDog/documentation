@@ -23,7 +23,7 @@ If you experience unexpected behavior while using the APM product, the steps on 
 
 ## Trace metric related issues
 
-{{% collapse-content title="There are more traces on the Trace Explorer page than on the Monitor's page" level="h4" %}}
+{{% collapse-content title="There are more spans on the Trace Explorer page than on the Monitor's page" level="h4" %}}
 
 This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
@@ -68,15 +68,15 @@ Metric names must follow the [metric naming convention][15]. Metric names that s
 {{% collapse-content title="One of my services is showing up as multiple different services in Datadog" level="h4" %}}
 
 An example of this issue is if your `service:test` is showing as all of these in the Datadog platform:
-- `Service:test`
-- `Service:test-mongodb`
-- `Service:test-postgresdb` 
+- `service:test`
+- `service:test-mongodb`
+- `service:test-postgresdb` 
 
 To have the service names merged into one, you can use one(1) of these two options:
 
 1. You could use `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language used to rename the service. This feature is offered in Java, Go, Python, Node.js, PHP and .NET. You can [choose your application's language][9] for additional information on the configuration options available for tracing libraries.
 
-2. You could use the <strong> [Inferred services][10] </strong>. Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn’t been instrumented yet.
+2. You could request access to the <strong> [Inferred Service dependencies][10] </strong>. Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn’t been instrumented yet.
 
 {{% /collapse-content %}} 
 
@@ -84,13 +84,15 @@ To have the service names merged into one, you can use one(1) of these two optio
 
 {{% collapse-content title="There is an unexpected increase in ingested/indexed spans on the Plan and Usage page" level="h4" %}}
 
-Spikes in data ingestion and indexing can be a result of multiple things(share some reasons.. from reasonX to reasonY). To dive into what specifically might be causing this increase, use the [estimated usage metrics][11]:
+Spikes in data ingestion and indexing can be caused by various factors. To dive into what specifically might be causing this increase, use the [APM Traces Estimated Usage metrics][11]:
 
 
 | USAGE TYPE | METRIC | DESCRIPTION |
 | ------- | ------------ |------------ |
 | APM Indexed Spans     | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters.|
 | APM Ingested Spans     | `datadog.estimated_usage.apm.ingested_spans`| Total number of ingested spans. |
+
+The [APM Traces Usage dashboard][17] contains several widget groups displaying high-level KPIs and additional usage information.
 
 {{% /collapse-content %}} 
 
@@ -138,3 +140,4 @@ If you need to accommodate larger volumes, contact [Datadog support][1] with you
 [14]: https://app.datadoghq.com/services
 [15]: https://docs.datadoghq.com/metrics/#naming-metrics 
 [16]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/
+[17]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
