@@ -17,8 +17,6 @@ further_reading:
 
 In Observability Pipelines, a pipeline is a sequential path made up of three types of components: a source, processors, and destinations. The Observability Pipeline [source][2] receives logs from your log source (for example, the Datadog Agent). The [processors][3] enrich and transform your data, and the [destination][4] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud provider storage and another specified destination.
 
-You set up a pipeline and its components in the [Observability Pipelines][1] UI after you select a template. All [sources][2] and [processors][3] are available for all templates. All [destinations][4] are available for all templates, except for the Amazon S3, Google Cloud Storage, and Azure Storage destinations, which are only available for the Archive Logs template. After you have set up your pipeline, see [Update Exiting Pipelines][10] if you want to update it.
-
 ## Set up a pipeline
 
 Set up your pipelines and its [sources][2], [processors][3], [destinations][4] in the Observability Pipelines UI. The general setup steps are:
