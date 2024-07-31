@@ -44,23 +44,24 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 
 ### Creating custom rules
 
-To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
+To add and evaluate custom rules using the [Scorecards API][10]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
 2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
-3. View an overview of outcomes in the Scorecards dashboard.
+3. View an overview of outcomes and remarks in the Scorecards dashboard.
 
 After initial setup, rules can also be enabled or disabled through the API. 
 
 
-To add custom rules to your Scorecards dashboard using the Scorecards UI: 
+To add custom and evaluate custom rules in the Scorecards UI: 
 
 1. Click **Create Rule** on the Scorecards page.
 2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
-3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the Scorecards API `/scorecard/outcomes/batch` endpoint.
-4. View an overview of outcomes in the Scorecards dashboard.
+3. Navigate to the rule you created and select **Edit Outcome** next to the service that you want to evaluate.
+4. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
+5. View an overview of outcomes and remarks in the Scorecards dashboard.
 
-{{< img src="/tracing/service_catalog/scorecard-create-rule-ui.png" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecard-create-and-update-custom-rule-ui" alt="User creating and evaluating a custom rule in the Scorecards UI" style="width:90%;" >}}
 
 ## How services are evaluated
 
