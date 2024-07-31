@@ -176,5 +176,5 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 [1]: https://app.datadoghq.com/functions
 [2]: /serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /serverless/configuration/
-[4]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[4]: /security/application_security/serverless/
 
