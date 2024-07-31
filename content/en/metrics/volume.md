@@ -98,7 +98,7 @@ In this example, the tag configuration modal shows a metric with a current volum
 
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Tag configuration modal showing an example metric with a current volume of 13690031 index metrics and an estimated new volume of 1, with an empty allowlist of tags" style="width:80%;" >}}
 
-## Analyze metric utilization in Datadog
+## Analyze metrics' utility and relative value in Datadog
 As part of our Metrics without Limits suite of governance features, you can now quickly pinpoint valuable metrics that are underutilized in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor or SLO that queries a particular metric. Our intelligent query insights surface the popularity of these related assets as well as the quantity so you can evaluate metric utility within your organization, enabling data-driven decisions. This feature allows you to identify how your team can utilize existing metrics to get more value from your observability spend and [reduce metric volume and cost].
 
 {{< img src="metrics/volume/related_assets.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to one dashboard" style="width:100%;" >}}
