@@ -142,7 +142,7 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 
 1. Datadog에서 [**APM** > **Services**][3]로 이동하세요. 이름이 `hello`인 Python 서비스가 있습니다.
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service" 서비스를 보여주는 서비스 카탈로그" style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service" style="width:100%;" >}}
 
 1. 대기 시간, 처리량, 오류율과 같은 성능 메트릭을 볼 서비스를 선택하세요.
 1. [**APM** > **Traces**][4]로 이동하세요. `hello` 서비스 트레이스가 있습니다.
