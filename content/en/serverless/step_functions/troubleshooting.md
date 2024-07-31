@@ -40,7 +40,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
 
 ## Traces are missing intermittently
-When searching traces, select the **Live Search** option on the upper right corner. If Live Search shows your trace, add "@trace_type:stepfunctions" to the [retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) and set the desired retention rate. For debugging, we recommend setting the retention rate to 100%. The filter can be disabled after debugging is done.
+When searching traces, select the **Live Search** option in the upper right corner. If Live Search shows your trace, add "@trace_type:stepfunctions" to the [retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) and set the desired retention rate. For debugging, Datadog recommends setting the retention rate to 100%. The filter can be disabled after debugging is done.
 
 ## Some step spans are missing in the traces
 - Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
