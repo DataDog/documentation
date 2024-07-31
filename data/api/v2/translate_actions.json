@@ -311,6 +311,24 @@
     "request_description": "",
     "request_schema_description": "Azure config Patch Request."
   },
+  "ListCustomCostsFiles": {
+    "description": "List the Custom Costs files.",
+    "summary": "List Custom Costs files"
+  },
+  "UploadCustomCostsFile": {
+    "description": "Upload a Custom Costs file.",
+    "summary": "Upload Custom Costs file",
+    "request_description": "",
+    "request_schema_description": "Request for uploading a Custom Costs file."
+  },
+  "DeleteCustomCostsFile": {
+    "description": "Delete the specified Custom Costs file.",
+    "summary": "Delete Custom Costs file"
+  },
+  "GetCustomCostsFile": {
+    "description": "Fetch the specified Custom Costs file.",
+    "summary": "Get Custom Costs file"
+  },
   "GetCloudCostActivity": {
     "description": "Get the Cloud Cost Management activity.",
     "summary": "Cloud Cost Enabled"
@@ -1726,5 +1744,23 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "ListWorkflowInstances": {
+    "description": "List all instances of a given workflow.",
+    "summary": "List workflow instances"
+  },
+  "CreateWorkflowInstance": {
+    "description": "Execute the given workflow",
+    "summary": "Execute a workflow",
+    "request_description": "",
+    "request_schema_description": "Request used to create a workflow instance."
+  },
+  "GetWorkflowInstance": {
+    "description": "Get a specific execution of a given workflow.",
+    "summary": "Get a workflow instance"
+  },
+  "CancelWorkflowInstance": {
+    "description": "Cancels a specific execution of a given workflow.",
+    "summary": "Cancel a workflow instance"
   }
 }

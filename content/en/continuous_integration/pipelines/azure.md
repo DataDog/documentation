@@ -33,6 +33,7 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
+| [Custom spans][15] | Custom spans | Configure custom spans for your pipelines. |
 
 ## Configure the Datadog integration
 
@@ -135,3 +136,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure
+[15]: /glossary/#custom-span
