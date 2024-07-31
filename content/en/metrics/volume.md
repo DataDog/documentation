@@ -31,8 +31,8 @@ With the Metrics Volume Management page you can quickly answer the following que
 - Which team owns these Top 500 metric names and is responsible for optimizing?
 - Which metrics are actually valuable (or not) to my organization?
 
-## Real-time visibility and monitoring on your account's estimated Custom Metrics usage
-Datadog provides you real-time estimated usage metrics OOTB so you can understand and alert on your usage in real-time. You can quickly see a breakdown of: 
+## Real-time visibility and monitoring on your organization's Custom Metrics usage
+Datadog provides you real-time _estimated_ usage metrics OOTB so you can understand and alert on your usage in real-time. You can quickly see a breakdown of: 
 - Your account's indexed custom metrics volume in real-time (and how much of that indexed volume hasn't been optimized with [Metrics without Limits™][3] yet) 
 - Your account's ingested custom metrics (emitted from metrics that have been configured with [Metrics without Limits™][3]) in real-time
 
@@ -59,37 +59,36 @@ Facets can also filter your metrics by:
 The Volume page displays a list of your metrics reported to Datadog sorted by estimated custom metrics or by the change in volume. To sort metrics by either of these options, click on the column header of the metric table.
 | Column | Description |
 |--------|-------------|
-|**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality/volume.| 
+|**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality (aka custom metrics volume).| 
 |**Top 500 Metric Names by Change in Volume** |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the timeframe of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. |
 
 ## Compare a metric's cardinality (volume) over time 
 
 {{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
 
-When identifying your top 500 metric names by change in volume, you can additionally click on the number to compare a metric name's # of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics (quick refresher on how we meter and bill for custom metrics here[6]) 
+When identifying your top 500 metric names by change in volume, you can additionally hover over the number to compare a metric name's # of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics (quick refresher on how we meter and bill for custom metrics here[6]) 
 
 To compare your spiking metric's cardinality over time:
 1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
 2. Select the metric name which you want the view the cardinality over time and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
 3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change Alert Monitor][2] documentation.
 
-## Identify unqueried metrics
+## Identify less valuable, unqueried metrics
 
 {{< img src="metrics/volume/id_unqueried_metrics.png" alt="Facet fields for Query Activity with the 'Not actively queried' facet selected" style="width:100%;" >}}
 
-To effectively reduce costs with Metrics without Limits, organizations often start with their largest metric names that aren't valuable to the organization; in other words, ones that aren't actively queried. 
+To start reducing custom metrics costs, organizations often start with their largest metric names that aren't valuable to the organization; in other words, ones that aren't actively queried. Datadog's intelligent query insights analyze your queries and surfaces your unqueried metrics over the past 30 days. Our analysis is constantly running in the background ensuring that your unqueried metrics are always up-to-date and available self-service.
 
-To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the *Query Activity Facet* box. Datadog analyzes query patterns to determine valuable metrics. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
+To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the *Query Activity Facet* box. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
 
-## Reduce metric volume and cost
+## How to quickly reduce metric volume and cost
 
-After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][3]:
+After you identify unqueried metrics, you can quickly and confidently eliminate the volume and cost of these metric names by using [Metrics without Limits™][3] without a single line of code. By using Metrics without Limits, you ensure that you pay only for the metrics that you use by eliminating timeseries that are never or rarely leveraged. Based on our intelligent query insights, the average customer's custom metrics volume can be reduced by 70% if they were to use Metrics without Limits on their unqueried metric names. 
 
-1. Click on the metric name to open its details side panel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
+To configure multiple unqueried metrics at once
+1. Click the **Configure Metrics** dropdown and select **Manage Tags** to open the [Metrics without Limits™ Tag configuration modal][4].
+2. Specify the metric namespace of the unqueried metrics you'd like to apply a bulk tag configuration to.
 3. Select **Include tags…** and set an empty allowlist of tags.
-
-You can also click the **Configure Metrics** dropdown and select **Manage Tags** to open the [Metrics without Limits™ Tag configuration modal][4]. 
 
 {{< img src="metrics/volume/configure_metrics.png" alt="Configure Metric dropdown at the top of the page highlighting the Manage tags option" style="width:100%;" >}}
 
@@ -100,10 +99,7 @@ In this example, the tag configuration modal shows a metric with a current volum
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Tag configuration modal showing an example metric with a current volume of 13690031 index metrics and an estimated new volume of 1, with an empty allowlist of tags" style="width:80%;" >}}
 
 ## Analyze metric utilization in Datadog
-
-<div class="alert alert-info">Related Assets is in public beta</div>
-
-Assess the value of metrics queried but underutilized in Datadog with metrics-related assets. A metrics-related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can utilize existing metrics to get more value from your observability spend and [reduce metric volume and cost].
+As part of our Metrics without Limits suite of governance features, you can now quickly pinpoint valuable metrics that are underutilized in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor or SLO that queries a particular metric. Our intelligent query insights surface the popularity of these related assets as well as the quantity so you can evaluate metric utility within your organization, enabling data-driven decisions. This feature allows you to identify how your team can utilize existing metrics to get more value from your observability spend and [reduce metric volume and cost].
 
 {{< img src="metrics/volume/related_assets.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to one dashboard" style="width:100%;" >}}
 
