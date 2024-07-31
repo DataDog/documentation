@@ -1,8 +1,6 @@
 ---
 title: Code Security Setup
 disable_toc: false
-aliases:
-- /security/application_security/enabling/tracing_libraries/code_security/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"

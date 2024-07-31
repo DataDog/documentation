@@ -121,7 +121,6 @@ Software Composition Analysis enriches the information APM is already collecting
 [3]: https://app.datadoghq.com/security/appsec/vm
 [4]: https://app.datadoghq.com/security/appsec
 [5]: https://app.datadoghq.com/security/appsec/landing
-[6]: /security/application_security/enabling/compatibility
 [7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions

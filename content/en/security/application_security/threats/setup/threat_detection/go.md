@@ -6,7 +6,6 @@ code_lang_weight: 20
 aliases:
   - /security_platform/application_security/getting_started/go
   - /security/application_security/getting_started/go
-  - /security/application_security/enabling/go
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

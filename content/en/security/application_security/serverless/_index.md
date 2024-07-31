@@ -997,7 +997,7 @@ A few minutes after you enable your application and exercise it, **threat inform
 [1]: https://app.datadoghq.com/services?query=type%3Afunction%20&env=prod&groupBy=&hostGroup=%2A&lens=Security&sort=-attackExposure&view=list
 [2]: /serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
-[4]: /security/application_security/enabling/compatibility/serverless
+[4]: /security/application_security/serverless/compatibility
 [5]: /security/default_rules/security-scan-detected/
 [6]: /serverless/libraries_integrations/plugin/
 [apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
