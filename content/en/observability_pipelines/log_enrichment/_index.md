@@ -5,11 +5,11 @@ disable_toc: false
 
 ## Overview
 
- As your organization grows, the logs from your services, systems, and applications grow in volume and complexity. To manage these logs, you might need to standardize their format and add additional information to make it easier to search and analyze them. For example, each log source has its own unique format, which can make it difficult to search and analyze during investigations if they have not be reformatted and standardized. You could also have additional information, such as customer IDs or IP addresses, that you want to use to add to your logs. Use the Log Enrichment Template and these Observability Pipelines processors to enrich and transform your logs:
+ As your organization grows, the logs from your services, systems, and applications grow in volume and complexity. To manage these logs, you might need to standardize their format and add information to make it easier to search and analyze them. For example, each log source has its own unique format. This can make it difficult to search and analyze during investigations if they have not been reformatted and standardized. You could also have additional information, such as customer IDs or IP addresses, that you want to add to your logs. Use the Log Enrichment Template and the Observability Pipelines processors to enrich and transform your logs:
 
 - **Enrichment Table**: Enrich your logs with information from a reference table, which could be a local file or a GeoIP database.
 - **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources.
-- **Add hostname**: Add the name of the host that sent the log so you can use it to pinpoint the root cause if there is an issue.
+- **Add hostname**: Add the name of the host that sent the log so you can use it to find the root cause of an issue.
 - **Parse JSON**: Convert fields into JSON objects.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
