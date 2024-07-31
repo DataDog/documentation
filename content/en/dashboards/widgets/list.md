@@ -85,7 +85,7 @@ For Events, you can choose how they're displayed in the widget:
 
 #### Sorting by
 
-For Incidents, you can sort by:
+For incidents, you can sort by:
 
 * Created time
 * Severity
