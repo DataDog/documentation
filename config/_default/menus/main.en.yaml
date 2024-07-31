@@ -3177,12 +3177,12 @@ menu:
       url: tracing/troubleshooting/quantization
       identifier: tracing_troubleshooting_quantization
       parent: tracing_troubleshooting
-      weight: 1310  
-    - name: Frequently Asked APM Questions
-      url: tracing/frequently_asked_APM_questions
+      weight: 1310
+    - name: Frequently Asked Questions
+      url: tracing/faq_apm
       identifier: tracing_faq_apm
-      parent: tracing
-      weight: 14 
+      parent: tracing_troubleshooting
+      weight: 1311
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
