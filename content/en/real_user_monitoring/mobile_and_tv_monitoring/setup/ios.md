@@ -47,20 +47,9 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 ### Declare the SDK as a dependency
 
-Declare the library as a dependency depending on your package manager:
+Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogRUM'
-```
-
-
-[1]: https://cocoapods.org/
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -74,6 +63,17 @@ DatadogCore
 DatadogRUM
 ```
 
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogRUM'
+```
+
+
+[1]: https://cocoapods.org/
 {{% /tab %}}
 {{% tab "Carthage" %}}
 
