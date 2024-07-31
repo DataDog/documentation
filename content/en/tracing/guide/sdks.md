@@ -16,13 +16,19 @@ algolia:
 
 ## Overview
 
-Datadog now consistently uses the term **APM SDK** to refer to Datadog Application Performance Monitoring tools, previously known as **tracing libraries** or **tracers**.
+Datadog uses the term **APM SDK** to refer to Datadog Application Performance Monitoring tools, previously known as **tracing libraries** or **tracers**.
 
-This guide provides an overview of the terminology and its implications.
+The terminology update does not affect the functionality of Datadog's APM tools. You can continue using them as before without any required actions on your part.
 
 ## What is an APM SDK?
 
-An APM SDK is a language-specific library that allows you to instrument your application for application performance monitoring. Datadog offers APM SDKs for various programming languages, including:
+An APM SDK is a language-specific library that allows you to instrument your application for application performance monitoring. The APM SDK terminology more accurately reflects the following:
+
+- **Expanded capabilities**: APM SDKs offer you comprehensive toolset, including tracing, profiling, and trace metrics collection.
+- **OpenTelemetry**: [APM SDKs support OpenTelemetry tracing APIs][11], giving you more flexible ways to instrument your applications.
+- **Industry alignment**: APM SDKs align with industry standards, making it easier for you to compare and integrate tools across your tech stack.
+
+Datadog offers APM SDKs for various programming languages, including:
 
 | Language   | SDK                  |
 |------------|----------------------|
@@ -35,27 +41,12 @@ An APM SDK is a language-specific library that allows you to instrument your app
 | Ruby       | [dd-trace-rb][7]     |
 | Python     | [dd-trace-py][8]     |
 
-
-
-## APM SDK vs. tracer
-
-Datadog uses "APM SDK" for the following reasons:
-
-- **Alignment with industry standards**: APM SDK aligns with the terminology used across the application performance monitoring industry.
-- **Expanded capabilities**: APM SDK better reflects the comprehensive nature of Datadog's tools, which include not only tracing capabilities but also other features such as profiling and metrics collection, and support for OpenTelemetry tracing APIs.
-
-## Impact on Datadog users
-
-The terminology update does not affect the functionality of Datadog's APM tools. You can continue using them as before without any required actions on your part. Whenever you encounter "APM SDK" in Datadog documentation, app, or communications, be aware that it refers to what was previously called tracing libraries or tracers.
-
-## API vs. SDK
+## APIs vs. SDKs
 
 APM SDKs are distinct from APIs, which provide a standardized interface for instrumenting your applications to collect telemetry data.
 
 - **API**: The interface that defines how to instrument your application. It provides methods and classes for creating spans, adding tags, and managing traces. For more information, read [Custom Instrumentation][9] using the Datadog API or OpenTelemetry API.
 - **SDK**: The implementation of the API. It includes all the logic for processing, managing, and sending telemetry data to the Datadog Agent. For more information, read [Add the APM SDK][10].
-
-<div class="alert alert-info">Datadog SDKs also support using the <a href="/opentelemetry/interoperability/instrumentation_libraries">OpenTelemetry tracing APIs</a> to instrument your applications.</div>
 
 ## Further reading
 
@@ -71,3 +62,4 @@ APM SDKs are distinct from APIs, which provide a standardized interface for inst
 [8]: https://github.com/DataDog/dd-trace-py
 [9]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [10]: /tracing/trace_collection/custom_instrumentation/
+[11]: /opentelemetry/interoperability/instrumentation_libraries
