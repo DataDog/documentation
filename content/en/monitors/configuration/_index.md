@@ -303,34 +303,32 @@ If you configure tags or dimensions in your query, these values are available fo
 
 ## Permissions
 
-All users can view all monitors, regardless of the role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
+All users can view all monitors, regardless of the team or role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
 
-You can further restrict your monitor by specifying a list of [roles][15] allowed to edit it. The monitor's creator can always edit the monitor. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+You can further restrict your monitor by specifying a list of [teams][17], [roles][15] or users allowed to edit it. The monitor's creator has edit rights on the monitor by default. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
 ### Granular access controls
 
-Use [granular access controls][16] to limit the roles that can edit a monitor:
+Use [granular access controls][16] to limit the teams, roles or users that can edit a monitor:
 1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
 1. Click **Edit Access**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams, or users that may edit the monitor.
+1. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Done**.
 
-**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
+**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a monitor with restricted access, follow the steps below:
 1. While viewing a monitor, click the **More** dropdown menu.
 1. Select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
-
-Edit-restricted monitors display the roles that have Editor access at the top of the page.
 
 ## Further reading
 
@@ -352,3 +350,4 @@ Edit-restricted monitors display the roles that have Editor access at the top of
 [14]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [15]: /account_management/rbac/
 [16]: /account_management/rbac/granular_access
+[17]: /account_management/teams/
