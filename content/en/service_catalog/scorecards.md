@@ -53,7 +53,7 @@ To add and evaluate custom rules using the [Scorecards API][10]:
 After initial setup, rules can also be enabled or disabled through the API. 
 
 
-To add custom and evaluate custom rules in the Scorecards UI: 
+To evaluate and add custom rules in the Scorecards UI: 
 
 1. Click **Create Rule** on the Scorecards page.
 2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
