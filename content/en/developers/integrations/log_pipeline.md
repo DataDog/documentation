@@ -22,7 +22,7 @@ description: Learn how to create a Datadog Log Integration.
 
 This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration sends logs to Datadog. 
 
-## Integration Development Prerequisites
+## Integration development prerequisites
 
 In developing your integration to send logs to Datadog follow these guidlines to ensure the best experience for your users
 
@@ -31,10 +31,10 @@ In developing your integration to send logs to Datadog follow these guidlines to
 Before creating a log pipeline, consider the following guidlines and practices:
 
 The integration must use supported Datadog logs endpoints
-: Your integration must use one of the [supported endpoints][23] exposed by Datadog for log ingestion. You can otherwise simply use [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
+: Your integration must use one of the [supported endpoints][23] exposed by Datadog for log ingestion. You can otherwise use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
 
 The integration must support all Datadog sites
-: The user must be able to choose between the different Datadog sites whenever applicable. See [Getting Started with Datadog Sites][2] for more information about site differences. </br></br> Your Datadog site endpoint is `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
+: Users must be able to choose between the different Datadog sites whenever applicable. See [Getting Started with Datadog Sites][2] for more information about site differences. </br></br> Your Datadog site endpoint is `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
 
 Allow users to attach custom tags while setting up your integration
 : Tags can be set as key-value attributes in the JSON body of your integration's logs payload. Datadog recommends allowing users to set custom tags for an integration. If the integation uses the [Send Logs API documentation][1] tags can optionally be set using the `ddtags=<TAGS>` query parameter.
@@ -48,21 +48,23 @@ Do not log Datadog API Keys
 Do not use Datadog Application Keys
 : Datadog Application Keys are not required to send logs using the HTTP endpoint. 
 
-## Creating Log Integration Assets in your Datadog Partner Account 
+## Creating log integration assets in your Datadog partner account 
 
 For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
 
-### Log Pipeline Design
+Log integrations are made of two sets of components, a log pipeline and log facets.
 
-Once you've settled on a design for your Datadog Integration and are able to send logs to Datadog's logs endpoint(s), you can design Logs Pipelines and Facets to enrich and parse your Integration's Logs.
+### Log pipeline design
 
-#### Log Pipeline Requirements
+After you've settled on a design for your Datadog Integration and are able to send logs to Datadog's logs endpoint(s), you can design Logs Pipelines and Facets to enrich and parse your Integration's Logs.
+
+#### Log pipeline requirements
 
 Map your application's logs attributes to Datadog's Standard Attributes
-: Centralizing logs from various technologies and applications can generate tens or hundreds of different attributes in a Log Management environment. To take advantage of out-of-the-box dashboards Technology Partner Integrations must rely as much as possible on Datadog's [standard naming convention][17]. </br></br> Use the [Attribute Remapper][5] to set attribute keys to standard [Datadog Standard Attributes][6]. For example, an attribute key that contains a client IP value should be remapped to `network.client.ip`. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
+: Centralizing logs from various technologies and applications can generate large amounts of unique attributes in a Log Management environment. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog's [standard naming convention][17]. </br></br> Use the [Attribute Remapper][5] to set attribute keys to standard [Datadog Standard Attributes][6]. For example, an attribute key that contains a client IP value should be remapped to `network.client.ip`. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
 
 Set your application's `source` tag to the integration name
-: Datadog recommends that the `source` tag is set to `<integration_name>`. The `source` tag must be non-editable by the user because the is is used to enable integration pipelines and dashboards. </br></br> The `source` tag must be in lowercase.
+: Datadog recommends that the `source` tag is set to `<integration_name>`. The `source` tag must be non-editable by the user because the is used to enable integration pipelines and dashboards. </br></br> The `source` tag must be in lowercase.
 
 Set the`service` tag is set to the name of the service producing telemetry
 : The `service` tag can be used to differentiate logs by microservice or product line. </br></br> For cases where the source and service aren't different services, set `service` to the same value as `source`. `service` tags must be non-editable by the user because the tags are used to enable integration pipelines and dashboards. </br></br> Use the [Service Remapper][7] to remap the `service` attribute or set it to the same value as the `source` attribute. </br></br> The `service` tags must be in lowercase.
@@ -74,15 +76,15 @@ Set custom attributes within your logs as the official status
 : Use a [Status Remapper][25] to remap the `status` of a log, or a [Category Processor][19] for statuses mapped to a range (as with HTTP status codes).
 
 Set a namespace for custom attributes within your logs
-: Generic attributes in your logs that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are to be used with [Facets][14]. </br></br> Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. For example, an attribute key that contains a host url value specific to your integration technology may be remapped to `integration_name.host.url`. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
+: Generic attributes in your logs that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are to be used with [Facets][14]. </br></br> Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. For example, an attribute key that contains a host url value specific to your integration technology may be remapped to `integration_name.host.url`. </br></br> Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
 
 Parse and extract information your logs
 : Use the [grok processor][8] to extract values in the logs for better searching and analytics. To maintain optimal performance, the grok parser must be specific. Avoid wildcard matches.
 
 Set the message as the official message of your logs
-: Use the [message remapper][9] to define the official message of the log if application logs do not map to the standard message attribute. This will make the attributes searchable by full text.
+: Use the [message remapper][9] to define the official message of the log if application logs do not map to the standard message attribute. This allows users to search for logs using free text.
 
-#### Create a Pipeline
+#### Create a pipeline
 
 Logs sent to Datadog are processed in [log pipelines][13] to standardize them for easier search and analysis.
 
