@@ -142,4 +142,3 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 [12]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [13]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [14]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
-[15]: /continuous_delivery/deployments/#visualize-correlated-pipelines-and-deployments
