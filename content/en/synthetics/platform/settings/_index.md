@@ -141,10 +141,36 @@ Choose the type of variable you want to create:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
 2. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
 3. Enter the **Value** you want to assign to your variable.
-4. Optionally, use built-ins to assign values to your variable. For example click on the `{{ alphabetic(n) }}` built-in to populate the **Value** with an example of an alphabetic value. 
+4. Optionally, use builtins to assign values to your variable. For example click on the `{{ alphabetic(n) }}` builtin to populate the **Value** with an example of an alphabetic value. 
 5. Enable obfuscation of your variable to hide its value on test results (optional).
 
 {{< img src="synthetics/settings/variable_value_3.png" alt="Global Variable Specify Value" style="width:100%;">}}
+
+The following builtins are available:
+
+&#x7b;&#x7b; numeric(n) &#x7d;&#x7d;
+: Generates a numeric string with `n` digits.
+
+&#x7b;&#x7b; alphabetic(n) &#x7d;&#x7d;
+: Generates an alphabetic string with `n` letters.
+
+&#x7b;&#x7b; alphanumeric(n) &#x7d;&#x7d;
+: Generates an alphanumeric string with `n` characters.
+
+&#x7b;&#x7b; date(n unit, format) &#x7d;&#x7d;
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
+
+&#x7b;&#x7b; timestamp(n, unit) &#x7d;&#x7d;
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at +/- `n` units.
+
+&#x7b;&#x7b; uuid &#x7d;&#x7d;
+: Generates a version 4 universally unique identifier (UUID).
+
+&#x7b;&#x7b; public-id &#x7d;&#x7d;
+: Injects the Public ID of your test.
+
+&#x7b;&#x7b; result-id &#x7d;&#x7d;
+: Injects the Result ID of your test run.
 
 {{% /tab %}}
 

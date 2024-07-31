@@ -107,6 +107,11 @@ Define the configuration of your browser test.
 
    {{% /tab %}}
 
+   {{% tab "Time & Language" %}}
+   
+   Configure default time and language for the test.
+
+   {{% /tab %}}
    {{< /tabs >}}
 
 {{% synthetics-variables %}}

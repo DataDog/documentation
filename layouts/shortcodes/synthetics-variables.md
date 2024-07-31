@@ -22,4 +22,10 @@ To create a local variable, click **Create a Local Variable**. You can select on
 &#x7b;&#x7b; uuid &#x7d;&#x7d;
 : Generates a version 4 universally unique identifier (UUID).
 
+&#x7b;&#x7b; public-id &#x7d;&#x7d;
+: Injects the Public ID of your test.
+
+&#x7b;&#x7b; result-id &#x7d;&#x7d;
+: Injects the Result ID of your test run.
+
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
