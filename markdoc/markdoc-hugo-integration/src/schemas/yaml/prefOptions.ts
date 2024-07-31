@@ -26,6 +26,12 @@ const MinifiedPrefOptionSchema = z
   })
   .strict();
 
+interface MinifiedPrefOption {
+  n: string; // display name
+  d?: boolean; // default
+  i: string; // identifier
+}
+
 export const MinifiedPrefOptionsConfigSchema = z.record(
   z.string().regex(PREF_OPTIONS_ID_REGEX),
   z.array(MinifiedPrefOptionSchema)
@@ -34,7 +40,9 @@ export const MinifiedPrefOptionsConfigSchema = z.record(
 /**
  * A minified version of the PrefOptionsConfigSchema.
  */
-export type MinifiedPrefOptionsConfig = z.infer<typeof MinifiedPrefOptionsConfigSchema>;
+export interface MinifiedPrefOptionsConfig {
+  [key: string]: MinifiedPrefOption[];
+}
 
 /**
  * The validated preference options configuration

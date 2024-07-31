@@ -23,11 +23,20 @@ export const MinifiedPagePrefConfigSchema = z
   })
   .strict();
 
-export type MinifiedPagePrefConfig = z.infer<typeof MinifiedPagePrefConfigSchema>;
+// Defining this type without Zod
+// to keep Zod out of the browser bundle
+export interface MinifiedPagePrefConfig {
+  n: string; // display name
+  i: string; // identifier
+  o: string; // options source
+  d?: string; // default value
+}
 
 export const MinifiedPagePrefsConfigSchema = z.array(MinifiedPagePrefConfigSchema);
 
-export type MinifiedPagePrefsConfig = z.infer<typeof MinifiedPagePrefsConfigSchema>;
+// Defining this type without Zod
+// to keep Zod out of the browser bundle
+export type MinifiedPagePrefsConfig = Array<MinifiedPagePrefConfig>;
 
 /**
  * The configuration of an individual page preference,
