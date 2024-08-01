@@ -21,3 +21,4 @@ cascade:
   aliases:
     - /api/screenboards/
 ---
+test
