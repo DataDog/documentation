@@ -3332,7 +3332,7 @@ menu:
       parent: tracing_troubleshooting
       weight: 1310
     - name: Frequently Asked Questions
-      url: tracing/faq_apm
+      url: tracing/troubleshooting/faq_apm
       identifier: tracing_faq_apm
       parent: tracing_troubleshooting
       weight: 1311
