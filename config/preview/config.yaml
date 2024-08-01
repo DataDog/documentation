@@ -3,10 +3,6 @@ buildfuture: true
 builddrafts: true
 enableGitInfo: true
 
-# can also be CLI flag
-# renderSegments:
-#   - english
-
 # Exclude all non-English languages
 segments:
   english:
@@ -19,6 +15,7 @@ segments:
   api:
     includes:
     - path: '{/api,/api/**}'
+      kind: '{page,section}'
       lang: en
 
 
@@ -41,6 +38,9 @@ deployment:
     - name: "previewAssets"
       URL: "s3://dd-staging-static-assets?region=us-east-1&prefix=documentation/"
       include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"
+    - name: "preview:api"
+      URL: "s3://datadog-docs-preview?region=us-east-1&prefix=$CI_COMMIT_REF_NAME/"
+      include: "{/api,api/**}"
 
     matchers:
       # temporarily lets nocache this sh file
