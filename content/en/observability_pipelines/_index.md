@@ -86,10 +86,10 @@ As your organization grows, your observability needs for different use cases, su
 
 #### Archive Logs
 
-Use the Archive Logs template to store logs in a cloud storage solution (Amazon S3, Google Cloud Storage, or Azure Storage). The archived logs are stored in a Datadog-rehydratable format, so that they can be rehydrated in Datadog as needed. This is useful:
+Use the Archive Logs template to store logs in a cloud storage solution (Amazon S3, Google Cloud Storage, or Azure Storage). The archived logs are stored in a Datadog-rehydratable format, so that they can be rehydrated in Datadog as needed. This is useful when:
 
-- If you have a high volume of noisy logs, but might need to index them in Datadog Log Management ad hoc for an investigation. You can archive those logs and then rehydrate them as needed.
-- If you are migrating to Datadog Log Management. You can send logs to your current vendor and to a cloud storage solution for archiving, so that you have historical logs that can be rehydrated later in Datadog as needed.
+- You have a high volume of noisy logs, but might need to index them in Datadog Log Management ad hoc for an investigation. You can archive those logs and then rehydrate them as needed.
+- You are migrating to Datadog Log Management. You can send logs to your current vendor and to a cloud storage solution for archiving, so you have historical logs that can be rehydrated later in Datadog as needed.
 - You have a retention policy to fulfill compliance requirements but don't necessarily need to index those logs.
 
 #### Split Logs
