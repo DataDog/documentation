@@ -194,7 +194,7 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
 ## Compatibility requirements
 
@@ -247,7 +247,7 @@ const http = require('http')
 
 ## Configuration
 
-While it's not required, we highly recommend disabling the corresponding Datadog instrumentation to prevent users from receiving duplicate spans
+While it's not required, it's recommended to disable the corresponding Datadog instrumentation to prevent users from receiving duplicate spans
 
 To achieve this, launch your application with the `DD_TRACE_DISABLED_INSTRUMENTATIONS` environment variable set to a comma-separated list of integration names to disable. For example, for this application, you would use: `DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net`
 
