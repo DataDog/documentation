@@ -14,7 +14,14 @@ further_reading:
 * Linked Lambda traces are supported for Node.js (layer v112+) and Python (layer v95+) runtimes.
 
 ### How it works
-Datadog AWS Step Functions Monitoring collects logs and integration metrics from the AWS integration and uses ingested logs from AWS Step Functions to generate enhanced metrics and traces for your Step Function executions.
+AWS Step Functions is a fully managed service, and the Datadog Agent cannot be directly installed on Step Functions. However, Datadog can monitor Step Functions through logs.
+
+You can send your Step Functions logs to Datadog by using one of the following methods:
+
+- Use the [Datadog Forwarder][6]. For instructions, see the [Setup](#setup) section on this page.
+- Use Amazon Firehose. For instructions, see [Send AWS service logs to the Datadog Amazon Data Firehose destination][7].
+
+Datadog uses these ingested logs to generate [enhanced metrics][8] for your Step Function executions.
 
 ### Setup
 
@@ -184,7 +191,9 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 {{% /tab %}}
 {{< /tabs >}}
 
+## Link Step Functions with your AWS Lambda traces
 
+TK
 
 ## See your Step Function metrics, logs, and traces in Datadog
 
@@ -197,3 +206,6 @@ If you cannot see your traces, see [Troubleshooting][5].
 [2]: https://app.datadoghq.com/functions?search=&cloud=aws&entity_view=step_functions
 [3]: /serverless/installation/#installation-instructions
 [5]: /serverless/step_functions/troubleshooting
+[6]: /logs/guide/forwarder
+[7]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
+[8]: /serverless/step_functions/enhanced-metrics
