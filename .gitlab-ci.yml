@@ -170,7 +170,6 @@ build_preview:
         - content/en/api/**/*
         - data/api/**/*
       when: never
-      when: always
   artifacts:
     when: always
     paths:
