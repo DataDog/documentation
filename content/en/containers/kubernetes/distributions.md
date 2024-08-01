@@ -544,58 +544,6 @@ agents:
 
 No specific configuration is required.
 
-To enable container monitoring, add the following (`containerd` check):
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
-```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Custom `datadog-values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-      value: "containerd"
-```
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-More `datadog-values.yaml` examples can be found in the [Helm chart repository][3].
-More `datadog-agent.yaml` examples can be found in the [Datadog Operator repository][4].
-
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 
 TKG requires some small configuration changes, shown below. For example, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
