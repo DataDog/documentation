@@ -109,7 +109,7 @@ Define the configuration of your browser test.
 
    {{% tab "Time & Language" %}}
    
-   Configure default time and language for the test.
+  By default, timezone will be set to UTC and language will be set to English (en). To define language, use the corresponding 2 or 3 digit ISO code for this language found [here][19].
 
    {{% /tab %}}
    {{< /tabs >}}
@@ -220,3 +220,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [16]: /synthetics/guide/browser-tests-passkeys
 [17]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [18]: https://www.microsoft.com/edge/download
+[19] https://www.loc.gov/standards/iso639-2/php/code_list.php

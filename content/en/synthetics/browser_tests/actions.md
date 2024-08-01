@@ -71,7 +71,8 @@ Some assertions validate the active page, the page the user last interacted with
 
 To create a step, select an assertion type:
 
-{{% collapse-content title="Test An Element On The Active Page" level="h4" %}}
+{{< tabs >}}
+{{% tab "Test An Element On The Active Page" %}}
 
 #### Test an element's content
 
@@ -93,9 +94,8 @@ Create this assertion step to have your browser test select a page element and v
 
 {{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
 
-{{< /collapse-content >}}
-
-{{% collapse-content title="Test Active Page Content" level="h4" %}}
+{{% /tab %}}
+{{% tab "Test Active Page Content" %}}
 
 #### Test that some text is not present on the active page
 
@@ -111,15 +111,15 @@ Create this assertion step to have your browser test verify that the URL of the 
 
 You can test for a value in the URL such as `string`, `number`, or `regex`.
 
-{{< /collapse-content >}}
+{{% /tab %}}
 
-{{% collapse-content title="Special Assertions" level="h4" %}}
+{{% tab "Special Assertions" %}}
 
 #### Test that an email was received
 
 Create this assertion step to have your browser test confirm that your application's email mechanisms are working and verify that the values you specified, such as `string`, `number`, or `regex`, are present in the email subject or body. 
 
-For more information, see [Email Validation with Browser Tests][15].
+For more information, see [Email Validation with Browser Tests][1].
 
 #### Test your UI with custom JavaScript
 
@@ -129,7 +129,7 @@ The JavaScript assertion function contains the following parameters and requires
 
 * The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean. If a falsy value is returned, the test step fails.
 
-* `vars` (optional): A string containing your browser test's [variables][16]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+* `vars` (optional): A string containing your browser test's [variables][2]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
 * `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
@@ -157,15 +157,13 @@ return jQuery().jquery.startsWith('3.5.1')
 
 Create this assertion step to have your browser test verify the downloaded files from the previous steps. You can check that a file was correctly downloaded and assert the file name, size, and MD5 value.
 
-For more information about how to test downloads, see [Test File Upload and Download][17].
+For more information about how to test downloads, see [Test File Upload and Download][3].
 
-#### Test number and target of requests
-
-Create this assertion step to have your browser test the number of HTTP requests that are made to a specific URL regex.
-
-{{< img src="synthetics/browser_tests/number_and_target.png" alt="Test number and target of requests option with the requests made dropdown shown" style="width:60%;" >}}
-
-{{< /collapse-content >}} 
+[1]: /synthetics/guide/email-validation
+[2]: /synthetics/browser_tests/actions#use-variables
+[3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+{{% /tab %}}
+{{< /tabs >}}
 
 </br>
 
@@ -494,6 +492,3 @@ Select multiple or single steps for deletion or replay, then click "Save & Quit"
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [14]: https://app.datadoghq.com/synthetics/tests
-[15]: /synthetics/guide/email-validation
-[16]: /synthetics/browser_tests/actions#use-variables
-[17]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
