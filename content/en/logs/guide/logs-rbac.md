@@ -338,16 +338,19 @@ This ensures that:
 * Neither `ACME Admin` nor `ACME User` members can interfere with assets from other teams.
 * Neither `ACME Admin` nor `ACME User` members can interfere with higher level "Admin" configurations, such as which logs flow into their assets, budget limitations, or [Log Access Restriction rules](#restrict-access-to-logs).
 
-
 As a good practice for maximum granularity and easier maintainability, you should **not** grant other roles the permission to edit the ACME Log Assets. Instead, consider adding (some) users from those other roles to the `ACME Admin` role as well.
 
 ### Log pipelines
+
+<div class="alert alert-info">To enable this feature, reach out to your Datadog representative and request access.</div>
 
 Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][14] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
 {{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline" style="width:60%;">}}
 
 ### Log indexes
+
+<div class="alert alert-info">To enable this feature, reach out to your Datadog representative and request access.</div>
 
 Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][16] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 

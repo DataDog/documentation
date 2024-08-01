@@ -58,26 +58,7 @@ This permission is global and enables both the creation of new indexes, and the 
 
 ### `logs_write_exclusion_filters`
 
-Grants a role the ability to create or modify [exclusion filters][8] within an index.
-
-This permission can be assigned either globally or restricted to a subset of indexes.
-
-**Subset of indexes**:
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field.
-
-[1]: /logs/log_configuration/indexes/
-{{% /tab %}}
-{{% tab "API" %}}
-
-This configuration is only supported through the UI.
-
-{{% /tab %}}
-{{< /tabs >}}
+Grants a role the ability to create or modify [exclusion filters][8] within an index. 
 
 ### `logs_write_pipelines`
 
@@ -146,8 +127,6 @@ In the following example, assuming all roles but `Guest` have the `logs_read_arc
 * Staging is accessible to all users, except users that **only** belong to the `Guest` role.
 * Prod is accessible to all users belonging to `Customer Support`.
 * Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
-
-{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role" style="width:90%;">}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -294,15 +273,14 @@ These permissions are globally enabled by default for all users.
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
 
+<div class="alert alert-info">To enable this feature, reach out to your Datadog representative and request access.</div>
+
 To scope this permission to a subset of indexes, first remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role. Then:
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Grant this role access to the index in [Configuration page][1].
-
-{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles" style="width:75%;" >}}
-
+Grant this role access to the index in the index [Configuration page][1].
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
 {{% /tab %}}
