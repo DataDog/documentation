@@ -965,7 +965,7 @@
     "description": "Create a Synthetic global variable.",
     "summary": "Create a global variable",
     "request_description": "Details of the global variable to create.",
-    "request_schema_description": "Synthetic global variable."
+    "request_schema_description": "Details of the global variable to create."
   },
   "DeleteGlobalVariable": {
     "description": "Delete a Synthetic global variable.",
