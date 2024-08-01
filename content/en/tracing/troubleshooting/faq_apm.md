@@ -68,7 +68,7 @@ For example, you might have a single service like `service:test` showing multipl
 
 You can merge the service names using `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language. For more information, see [Configure the Datadog Tracing Library][9] or choose your language here:
 
-{{% programming-lang-wrapper langs="java,python,go,nodejs,dotnet,php" %}}
+{{% programming-lang-wrapper langs="java,python,go,nodejs,dotnet,php,ruby" %}}
 
 {{% programming-lang lang="java" %}}
 
@@ -127,6 +127,18 @@ Change the default name of an APM integration. Rename one or more integrations a
 [1000]: https://docs.datadoghq.com/tracing/trace_collection/library_config/php#integration-names
 
 {{% /programming-lang %}}
+
+{{% programming-lang lang="ruby" %}}
+Ruby does not currently support `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`. Please review [Additional Ruby configuration][2000] to see the code options for changing the service name.
+
+[2000]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#advanced-configuration
+
+{{% /programming-lang %}}
+
+
+
+
+
 
 
 {{% /programming-lang-wrapper %}}
