@@ -2932,7 +2932,7 @@ menu:
       parent: automatic_instrumentation
       identifier: single_step_apm
       weight: 2011
-    - name: Using Datadog Tracing Libraries
+    - name: Using Datadog APM SDKs
       url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
       parent: automatic_instrumentation
       identifier: auto_dd_libraries
@@ -3007,12 +3007,12 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
       weight: 2033
-    - name: Library Compatibility
+    - name: APM SDK Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
       identifier: tracing_compatibility
       weight: 203
-    - name: Library Configuration
+    - name: APM SDK Configuration
       url: tracing/trace_collection/library_config/
       parent: tracing_trace_collection
       identifier: tracing_library_config
@@ -5125,7 +5125,7 @@ menu:
       parent: appsec_enabling_single_step
       identifier: appsec_enabling_single_step_code
       weight: 2102
-    - name: Using Datadog Tracing libraries
+    - name: Using Datadog Tracing Libraries
       url: security/application_security/enabling/tracing_libraries/
       parent: appsec_getting_started
       identifier: appsec_enabling_tracing_libraries

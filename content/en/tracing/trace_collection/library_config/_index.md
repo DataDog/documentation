@@ -3,7 +3,7 @@ title: Configure the Datadog APM SDK
 type: multi-code-lang
 ---
 
-For information about configuration options for tracing libraries, choose your language:
+For information about configuration options for APM SDKs, choose your language:
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
