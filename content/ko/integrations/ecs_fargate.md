@@ -268,7 +268,7 @@ ECS Fargate의 유일한 옵션은 [복제본 서비스][6]으로 작업을 실�
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
 
-{{% 탭 "AWS cli" %}}
+{{% tab "AWS cli" %}}
 ##### AWS CLI 복제본 서비스
 
 AWS CLI 도구][1]를 사용하여 다음 명령을 실행합니다.
