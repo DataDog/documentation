@@ -69,7 +69,7 @@ code_languages:
     name: rust
     syntax: rust
     command: rustc
-    example_file: example.rs
+    example_file: src/main.rs
 
 code_language_ids:
     android: Android
