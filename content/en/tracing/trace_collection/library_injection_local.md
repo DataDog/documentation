@@ -229,7 +229,7 @@ The library injection mechanism for Python only supports injecting the Python li
 
 ##### `tls: protocol version not supported`
 
-- **Problem**: Since Cluster Agent v1.20, the API is only served with TLS v1.3 by default. If Kubernetes cluster is configured with TLS v1.2 or older, library injection fails.
+- **Problem**: Since Cluster Agent v1.20, the API is only served using TLS v1.3 by default. If the Kubernetes cluster is configured with TLS v1.2 or older, library injection fails.
 
 - **Solution**: Set `DD_CLUSTER_AGENT_ALLOW_LEGACY_TLS` to `true` for Cluster Agent.
 
