@@ -8,16 +8,15 @@ DDSQL is in private beta.
 
 ## Data types
 
-DDSQL implements a simplified version of the SQL type system that is mostly descended from SQLite.
+DDSQL implements a simplified version of the SQL type system that is mostly descended from PostgreSQL.
 
 ### Base types
 
 | SQL name   | Aliases                  | Description |
 |------------|--------------------------|-------------|
 | integer    | int                      | Storage is always int64. |
-| decimal    |                       | Precision and scale may be ignored. DDSQL implements the decimal type as floating point, rather than fixed point. |
 | text       | char, varchar, json      | Storage is always unlimited-length UTF-8. |
-| real       | double                   | Storage is always IEEE-754 float64. |
+| real       | double, decimal          | Storage is always IEEE-754 float64. |
 | timestamp  | timestamp without time zone | SQL standard datetime type. |
 | group      | hstore, tag_column       | Sorted set of strings with tag-like "= is contains" semantics. |
 | boolean    |                          | `TRUE` or `FALSE` |
