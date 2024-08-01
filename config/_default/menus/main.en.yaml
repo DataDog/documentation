@@ -55,9 +55,9 @@ menu:
       url: markdoc_testing/traffic_light_colors/
       parent: markdoc_testing
       weight: 2
-    - name: Styles Scratchpad
-      identifier: markdoc_testing_styles_scratchpad
-      url: markdoc_testing/styles_scratchpad/
+    - name: Pet Care Guide
+      identifier: markdoc_testing_pet_care_guide
+      url: markdoc_testing/pet_care_guide/
       parent: markdoc_testing
       weight: 3
     - name: Datadog
