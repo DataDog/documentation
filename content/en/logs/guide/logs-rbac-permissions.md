@@ -74,37 +74,6 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 
 Grants a role the ability to create, edit, or delete processors and nested pipelines.
 
-This permission can be assigned either globally or restricted to a subset of pipelines.
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-Assign the role(s) in the `Edit` modal of a specific pipeline.
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
-2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
-3. Grant permission to that role with the following call:
-
-```sh
-curl -X POST \
-        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
-        -H "Content-Type: application/json" \
-        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
-        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
-        -d '{
-                "id": "<PERMISSION_UUID>",
-                "type": "permissions"
-            }'
-```
-
-[1]: /api/v2/roles/#list-roles
-[2]: /api/v2/roles/#list-permissions
-{{% /tab %}}
-{{< /tabs >}}
-
 ### `logs_write_archives`
 
 Grants the ability to create, edit, or delete [Log Archives][12]. This includes:

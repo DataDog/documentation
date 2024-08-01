@@ -346,7 +346,34 @@ As a good practice for maximum granularity and easier maintainability, you shoul
 
 Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][14] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
-{{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline" style="width:60%;">}}
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Assign the role(s) in the `Edit` modal of a specific pipeline.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+3. Grant permission to that role with the following call:
+
+```sh
+curl -X POST \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
+            }'
+```
+
+[1]: /api/latest/roles/#list-roles
+[2]: /api/latest/roles/#list-permissions
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Log indexes
 
