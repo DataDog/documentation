@@ -441,10 +441,10 @@ In the Docker compose file that launches your containers, use the following sett
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket
-      - DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket
+      - DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket
+      - DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket
     volumes:
-      - /opt/datadog/apm:/opt/datadog/apm
+      - /var/run/datadog:/var/run/datadog
       - /var/run/docker.sock:/var/run/docker.sock:ro
 ```
 
