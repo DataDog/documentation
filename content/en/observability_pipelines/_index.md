@@ -45,7 +45,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) so that you can easily build and deploy pipelines.
 
-The Observability Pipelines Worker is the software that runs in your infrastructure and centrally aggregates, processes, and routes your logs based on your use case. This means you can redact sensitive data, pre-process logs, and determine which destinations to send the logs to, before they leave your environment.
+The Observability Pipelines Worker is the software that runs in your infrastructure and centrally aggregates, processes, and routes your logs based on your use case. This means you can redact sensitive data, pre-process logs, and determine which destinations to send your logs to, before they leave your environment.
 
 The Observability Pipelines UI provides a control plane to manage your Observability Pipelines Workers. You build and edit pipelines and deploy pipeline changes to your Workers from there. You can also enable monitors for your pipelines to evaluate their health.
 
@@ -78,11 +78,11 @@ The [templates](#out-of-the-box-templates) are purpose-built for the following u
 
 #### Log Volume Control
 
-Raw logs are noisy and only some logs are useful for further search and analysis during investigations. Use the Log Volume Control template to determine which logs you want to send to your indexed solution, whether it's a SIEM or log management solution, so that you can increase the value of the logs indexed and also remain within your planned budget.
+Raw logs are noisy and only some logs are useful for further search and analysis during investigations. Use the Log Volume Control template to determine which logs to send to your indexed solution, such as a SIEM or log management solution. This helps you to increase the value of your indexed logs and also remain within your planned budget.
 
 #### Dual Ship Logs
 
-As your organization grows, your observability needs for different use cases, such as security, archiving, and log management also change. This could mean having to trial different SIEM, archiving and log management solutions. However, managing log pipelines to different solutions can get complicated. Use the Dual Ship Logs template to centrally aggregate, process, and send copies of your logs to different destinations.
+As your organization grows, your observability needs for different use cases, such as security, archiving, and log management also change. This could mean having to trial different archiving, SIEM, and log management solutions. However, managing log pipelines to different solutions can get complicated. Use the Dual Ship Logs template to centrally aggregate, process, and send copies of your logs to different destinations.
 
 #### Archive Logs
 
@@ -90,15 +90,15 @@ If you are migrating to Datadog Log Management, use the Archive Logs template to
 
 #### Split Logs
 
-When you have logs from different services and applications, you might need to send them to different downstream services for query, analysis, and alerting. For example, you might want to send security logs to a SIEM solution and DevOps logs to Datadog. Use the Split Logs template to pre-process your logs separately for each destination before sending them downstream.
+When you have logs from different services and applications, you might need to send them to different downstream services for querying, analysis, and alerting. For example, you might want to send security logs to a SIEM solution and DevOps logs to Datadog. Use the Split Logs template to pre-process your logs separately for each destination before sending them downstream.
 
 #### Sensitive Data Redaction
 
-Use the Sensitive Data Redaction template to detect and redact sensitive information on premises. The Observability Pipelines sensitive data scanner processor provides 70 out-of-the-box scanning rules, but you can also create your own custom scanning rules based on regex. The OOTB rules recognize standard patterns such as credit card numbers, email addresses, IP addresses, API and SSH keys, and access tokens.
+Use the Sensitive Data Redaction template to detect and redact sensitive information on premises. The Observability Pipelines sensitive data scanner processor provides 70 out-of-the-box scanning rules, but you can also create your own custom scanning rules using regex. The OOTB rules recognize standard patterns such as credit card numbers, email addresses, IP addresses, API and SSH keys, and access tokens.
 
 #### Log Enrichment
 
-Your organization's different services, systems, and application all generate logs containing layers of information and in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich it with information from a reference table, which could be a local file or a GeoIP database.
+Your organization's different services, systems, and application all generate logs containing layers of information and in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich it with information, from example, from a reference table.
 
 ### Build pipelines in the Observability Pipelines UI
 
@@ -110,9 +110,9 @@ Build your pipelines in the Observability Pipelines UI. After you select one of 
 
 After you create your pipeline, enable out-of-the box monitors to get alerted when:
 
-- There are increasing error rates for a component. This could happen because the component is processing data in unexpected formats or encountering other internal issues.
-- There are spikes in data droppged by a component.
+- There are increasing error rates for a component. This could happen because the component is processing data in unexpected formats.
 - The Observability Pipelines Worker has high CPU usage or memory usage.
+- There are spikes in data dropped by a component.
 
 ## Further Reading
 
