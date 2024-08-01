@@ -12,7 +12,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: Blog
   text: Prácticas recomendadas para el etiquetado de tus monitores
-kind: documentación
 title: Gestionar monitores
 ---
 

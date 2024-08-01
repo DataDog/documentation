@@ -13,7 +13,7 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: Tous les guides
-kind: guide
+
 title: Instrumenter une méthode personnalisée pour analyser en détail votre logique
   opérationnelle
 ---

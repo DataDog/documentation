@@ -4,7 +4,6 @@ aliases:
 - /ko/serverless/serverless_integrations/cli/
 dependencies:
 - https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
-kind: 설명서
 title: Datadog 서버리스 CLI
 ---
 CLI를 사용하여 Datadog으로 AWS 람다 함수를 계측할 수 있습니다. CLI는 기존 람다 함수의 설정을 수정하여 계측을 활성화하므로 재배치할 필요가 *없습니다*. Datadog 서버리스 모니터링을 시작하는 가장 빠른 방법입니다.

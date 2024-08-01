@@ -125,15 +125,15 @@ Click the **Text** cell to add a markdown cell so you can add information and no
 
 ## An example workspace
 
-{{< img src="logs/workspace/workspace_datasets_example.png" alt="The workspace datasets" style="width:100%;" >}}
+{{< img src="logs/workspace/datasets_example.png" alt="The workspace datasets" style="width:100%;" >}}
 
 This example workspace has:
 -  Three data sources:
-	- `transaction_start_logs`
-	- `transaction_execution_logs`
+	- `trade_start_logs`
+	- `trade_execution_logs`
 	- `trading_platform_users`
 - Three derived datasets, which are the results of data that has been transformed from filtering, grouping, or querying using SQL:
-    - `parsed_executed_logs`
+    - `parsed_execution_logs`
     - `transaction_record`
     - `transaction_record_with_names`
 
@@ -141,21 +141,21 @@ This example workspace has:
 
 This diagram shows the different transformation and analysis cells the data sources go through.
 
-{{< img src="logs/workspace/flowchart.png" alt="A flowchart showing the steps that the data sources go through" style="width:60%;"  >}}
+{{< img src="logs/workspace/workspace_flowchart.png" alt="A flowchart showing the steps that the data sources go through" style="width:80%;"  >}}
 
 ### Example walkthrough
 
 The example starts off with two logs data sources:
-- `transaction_start_logs`
-- `transaction_execution_logs`
+- `trade_start_logs`
+- `trade_execution_logs`
 
-The next cell in the workspace is the transform cell `parsed_executed_logs`. It uses the following [grok parsing syntax][3] to extract the transaction ID from the `message` column of the `transaction_execution_logs` dataset and adds the transaction ID to a new column called `transaction_id`.
+The next cell in the workspace is the transform cell `parsed_execution_logs`. It uses the following [grok parsing syntax][3] to extract the transaction ID from the `message` column of the `trade_execution_logs` dataset and adds the transaction ID to a new column called `transaction_id`.
 
 ```
 transaction %{notSpace:transaction_id}
 ```
 
-An example of the resulting `parsed_executed_logs` dataset:
+An example of the resulting `parsed_execution_logs` dataset:
 
 | timestamp           | host             | message                            | transaction_id |
 | ------------------- | ---------------- | ---------------------------------- | ----------- |
@@ -164,7 +164,7 @@ An example of the resulting `parsed_executed_logs` dataset:
 | May 29 10:58:54.000 | shopist.internal | Executing trade for transaction 96870 | 96870       |
 | May 31 12:20:01.152 | shopist.internal | Executing trade for transaction 80207 | 80207       |
 
-The analysis cell `transaction_record` uses the following SQL command to select specific columns from the `transaction_start_logs` dataset and the `transaction_execution_logs`, renames the status `INFO` to `OK`, and then joins the two datasets.
+The analysis cell `transaction_record` uses the following SQL command to select specific columns from the `trade_start_logs` dataset and the `trade_execution_logs`, renames the status `INFO` to `OK`, and then joins the two datasets.
 
 ```sql
 SELECT
@@ -177,9 +177,9 @@ SELECT
         ELSE executed_logs.status
     END AS status
 FROM
-    transaction_start_logs AS start_logs
+    trade_start_logs AS start_logs
 JOIN
-    transaction_execution_logs AS executed_logs
+    trade_execution_logs AS executed_logs
 ON
     start_logs.transaction_id = executed_logs.transaction_id;
 ```

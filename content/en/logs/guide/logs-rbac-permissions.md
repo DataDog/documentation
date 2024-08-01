@@ -1,6 +1,6 @@
 ---
 title: Logs RBAC Permissions
-kind: guide
+
 further_reading:
 - link: "/logs/guide/logs-rbac"
   tag: "Documentation"
@@ -68,10 +68,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{% tab "UI" %}}
 
 1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
-
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters" style="width:75%;" >}}
-
+2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field.
 
 [1]: /logs/log_configuration/indexes/
 {{% /tab %}}
@@ -307,7 +304,7 @@ Grant this role access to the index in [Configuration page][1].
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles" style="width:75%;" >}}
 
 
-[1]: https://app.datadoghq.com/logs/indexes
+[1]: https://app.datadoghq.com/logs/pipelines/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 

@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: 모든 가이드
-kind: 지침
 title: 데이터베이스 서비스의 비정상 p99 대기 시간 경보
 ---
 

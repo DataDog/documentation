@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
   text: RUM ブラウザモニタリング
-kind: ガイド
 title: ブラウザアプリケーションでサービスを定義し、UI コンポーネントを追跡する
 ---
 

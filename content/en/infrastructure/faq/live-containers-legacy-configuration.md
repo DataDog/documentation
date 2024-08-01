@@ -1,6 +1,6 @@
 ---
 title: Live Containers Legacy Configuration
-kind: faq
+
 aliases:
   - /infrastructure/livecontainers/legacy
 further_reading:

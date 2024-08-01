@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Datadog Forwarder を使用した Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 

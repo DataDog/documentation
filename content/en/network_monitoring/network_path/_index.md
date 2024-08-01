@@ -1,6 +1,6 @@
 ---
 title: Network Path
-description: Investigate network traffic paths 
+description: Investigate network traffic paths
 is_beta: true
 further_reading:
 - link: "/network_monitoring/network_path/list_view"
@@ -32,7 +32,7 @@ Network Path illustrates the route that network traffic follows from its origin 
 
 ## How it works
 
-Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to its destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. 
+Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to its destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. Network Path automatically sends either TCP or UDP packets to running applications.
 
 The following diagram depicts the typical flow of a network path from a source (Host) to its destination.
 

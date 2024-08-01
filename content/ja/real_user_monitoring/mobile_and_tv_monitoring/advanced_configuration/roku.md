@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
-kind: ドキュメント
 title: RUM Roku の高度な構成
 type: multi-code-lang
 ---

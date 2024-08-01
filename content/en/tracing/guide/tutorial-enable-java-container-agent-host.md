@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application in a Container and an Agent on a Host
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"

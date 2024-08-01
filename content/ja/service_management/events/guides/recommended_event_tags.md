@@ -6,7 +6,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags
   tag: Documentation
   text: タグの割り当てについて
-kind: ガイド
 title: イベントへのタグ付けのベストプラクティス
 ---
 

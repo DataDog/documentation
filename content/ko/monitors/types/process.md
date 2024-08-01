@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
   tag: 블로그
   text: Datadog으로 AWS Fargate에서 실행 중인 프로세스 모니터링
-kind: 설명서
 title: 실시간 프로세스 모니터
 ---
 

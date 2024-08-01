@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: 블로그
   text: Datadog RUM의 기능 플래그 추적을 통해 릴리스 안전성 보장
-kind: 설명서
 title: 기능 플래그 추적
 ---
 

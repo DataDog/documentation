@@ -1,6 +1,6 @@
 ---
 title: Proxy Your Browser RUM Data
-kind: guide
+
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
 further_reading:

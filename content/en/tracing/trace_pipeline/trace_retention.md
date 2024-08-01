@@ -118,9 +118,9 @@ For example, you can create filters to keep all traces for:
 
 ## Trace search and analytics on indexed spans
 
-### In the Trace Explorer
+### In the Trace Explorer, dashboards, and notebooks
 
-By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table).
+By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table), as well as in dashboards and notebook queries.
 
 However, because the diversity-sampled set of data is **not uniformly sampled** (that is, not proportionally representative of the full traffic) and is biased towards errors and high latency traces, you can choose to exclude these spans from these views by adding `-retained_by:diversity_sampling` query parameter to the query.
 
@@ -131,9 +131,9 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
 
-### In dashboards, notebooks, and monitors
+### In trace analytics monitors
 
-For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM trace analytics monitor evaluation.
 
 ## Further Reading
 

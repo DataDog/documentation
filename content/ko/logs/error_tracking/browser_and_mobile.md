@@ -8,7 +8,6 @@ further_reading:
   tag: 설명서
   text: 오류 추적 탐색기에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 브라우저 및 모바일 오류 추적
 ---
 

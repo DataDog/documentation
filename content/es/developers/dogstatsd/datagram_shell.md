@@ -10,7 +10,6 @@ further_reading:
 - link: developers/libraries
   tag: Documentación
   text: API oficial y creada por la comunidad, y bibliotecas de clientes DogStatsD
-kind: Documentación
 title: Formato de datagramas y uso de shells
 ---
 

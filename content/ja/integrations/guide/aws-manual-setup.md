@@ -37,7 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: ブログ
   text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
-kind: ガイド
 title: AWS マニュアルセットアップガイド
 ---
 

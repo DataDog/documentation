@@ -17,7 +17,7 @@ further_reading:
 - link: /real_user_monitoring/ios/data_collected
   tag: Documentation
   text: Données RUM recueillies (iOS)
-kind: guide
+
 title: Calculer votre score Apdex et des indicateurs de performance personnalisés
   avec les données RUM
 ---

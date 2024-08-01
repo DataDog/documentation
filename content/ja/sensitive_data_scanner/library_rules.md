@@ -3,7 +3,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: ドキュメント
   text: 機密データスキャナーのセットアップ
-kind: ドキュメント
 title: ライブラリルール
 ---
 

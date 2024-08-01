@@ -10,7 +10,6 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentación
   text: Comprender lo que sucede en cualquier nivel del sistema
-kind: documentación
 title: Mapas de hosts y contenedores
 ---
 

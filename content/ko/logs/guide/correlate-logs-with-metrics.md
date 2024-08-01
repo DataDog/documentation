@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/live_tail/
   tag: 설명서
   text: Datadog 라이브 테일 기능
-kind: 지침
 title: 로그와 메트릭 상호 연결하기
 ---
 

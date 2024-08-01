@@ -8,7 +8,6 @@ further_reading:
 - link: /continuous_integration/search/?tab=pipelines
   tag: ドキュメント
   text: Datadog CI Pipeline Visibility
-kind: ガイド
 title: CI Visibility で開発ライフサイクルを効率化する
 ---
 

@@ -19,6 +19,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sensitive-data-management-best-practices/"
       tag: "Blog"
       text: "Best practices for sensitive data management"
+    - link: "https://www.datadoghq.com/blog/data-security/"
+      tag: "Blog"
+      text: "Discover sensitive data in your cloud data stores with Data Security"
 ---
 
 ## Overview
@@ -212,6 +215,34 @@ To add scanning rules, perform the following steps:
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Excluded namespaces
+
+There are reserved keywords that the Datadog platform requires for functionality. If any of these words are in a log that is being scanned, the 30 characters after the matched word are ignored and not redacted. For example, what comes after the word `date` in a log is usually the event timestamp. If the timestamp is accidentally redacted, that would result in issues with processing the log and being able to query it later. Therefore, the behavior for excluded namespaces is to prevent unintentionally redacting important information for product functionality.
+
+The excluded namespaces are:
+
+- `host`
+- `hostname`
+- `syslog.hostname`
+- `service`
+- `status`
+- `env`
+- `dd.trace_id`
+- `trace_id`
+- `trace id`
+- `dd.span_id`
+- `span_id`
+- `span id`
+- `@timestamp`
+- `timestamp`
+- `_timestamp`
+- `Timestamp`
+- `date`
+- `published_date`
+- `syslog.timestamp`
+- `error.fingerprint`
+- `x-datadog-parent-id`
 
 ### Edit scanning rules
 

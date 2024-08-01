@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/configuration/#migrate-to-the-datadog-lambda-extension
   tag: ドキュメント
   text: Datadog Lambda 拡張機能に移行する
-kind: ガイド
 title: Datadog Lambda 拡張機能への移行を決定
 ---
 

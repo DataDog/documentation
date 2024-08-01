@@ -43,7 +43,6 @@ further_reading:
   tag: Blog
   text: Incorporar y monitorizar con facilidad logs de seguridad con los Paquetes
     de contenido de Cloud SIEM
-kind: documentación
 title: Empezando con Cloud SIEM
 ---
 

@@ -39,9 +39,13 @@ If your organization has an existing all-encompassing index with a low limit, pl
 ## I can see the `aws.stepfunctions` root span but I cannot see any step spans
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
 
+## Traces are missing intermittently
+When searching traces, select the **Live Search** option in the upper right corner. If Live Search shows your trace, add "@trace_type:stepfunctions" to the [retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) and set the desired retention rate. For debugging, Datadog recommends setting the retention rate to 100%. The filter can be disabled after debugging is done.
+
 ## Some step spans are missing in the traces
-- For actions, we support basic actions of Lambda and DynamoDB. For example, Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem and more.
-- `Wait`, `Choice`, `Success`, `Fail`, and `Pass` are supported, while `Map` and `Parallel` are not. You are able to see parallel executing spans stacked on top of each other, but no `Parallel` spans show on the flame graph.
+- Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
+- AWS Step Functions activities are not supported.
+- `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
 
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:

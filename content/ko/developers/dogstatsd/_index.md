@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: 블로그
   text: Datadog을 통해 Azure App Service에서 Linux 웹 앱을 모니터링하세요
-kind: 설명서
 title: DogStatsD
 ---
 

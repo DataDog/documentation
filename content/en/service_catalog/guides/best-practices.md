@@ -1,6 +1,6 @@
 ---
 title: Service Catalog Best Practices
-kind: guide
+
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"

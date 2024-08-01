@@ -1,6 +1,6 @@
 ---
 title: Debug the slowest trace on the slowest endpoint of a web service
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"

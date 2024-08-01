@@ -1,6 +1,6 @@
 ---
 title: Monitor Your HTTP Requests Are Redirected Into HTTPS
-kind: guide
+
 further_reading:
     - link: '/synthetics/api_tests/http_tests'
       tag: 'Documentation'

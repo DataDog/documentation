@@ -1,6 +1,6 @@
 ---
 title: Submit Evaluations
-kind: guide
+
 aliases:
     - /tracing/llm_observability/submit_evaluations
 ---

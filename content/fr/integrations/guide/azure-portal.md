@@ -10,7 +10,7 @@ further_reading:
   tag: Blog
   text: Activer en quelques minutes la surveillance pour les environnements Azure
     de grande envergure avec Datadog
-kind: guide
+
 title: Gérer l'intégration Azure native
 ---
 

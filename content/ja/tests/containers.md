@@ -6,7 +6,6 @@ further_reading:
 - link: /tests
   tag: ドキュメント
   text: Test Visibility について
-kind: ドキュメント
 title: コンテナ内のテスト
 ---
 

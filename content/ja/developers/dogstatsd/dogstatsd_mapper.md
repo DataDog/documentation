@@ -1,6 +1,5 @@
 ---
 title: DogStatsD Mapper
-kind: ドキュメント
 description: DogStatsD のマッピング規則を使用して、statsd メトリクス名の一部をタグに変換。
 further_reading:
   - link: developers/dogstatsd

@@ -1,5 +1,4 @@
 ---
-kind: Documentación
 title: Guía para la resolución de problemas de recopilación de logs de Docker
 ---
 

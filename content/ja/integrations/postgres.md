@@ -55,7 +55,7 @@ integration_id: postgres
 integration_title: Postgres
 integration_version: 18.2.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: postgres
 public_title: Postgres
