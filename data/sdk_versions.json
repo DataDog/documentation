@@ -21,7 +21,7 @@
   },
   {
     "client": "datadog-api-client-rust",
-    "version": "master"
+    "version": "0.2.0"
   },
   {
     "client": "integrations-core",
