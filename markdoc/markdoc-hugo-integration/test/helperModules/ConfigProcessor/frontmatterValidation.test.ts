@@ -3,7 +3,7 @@ import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
   paintColorsFrontmatter,
   paintColorsPrefOptionsConfig
-} from '../../config/mocks/valid/paintColorsConfig';
+} from '../../mocks/valid/paintColorsConfig';
 import { Frontmatter } from '../../../src/schemas/yaml/frontMatter';
 
 describe('ConfigProcessor.getPrefOptionsForPage', () => {

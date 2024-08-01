@@ -1,8 +1,8 @@
 import {
   PrefOptionsConfig,
   PrefOptionsConfigSchema
-} from '../../../../src/schemas/yaml/prefOptions';
-import { Frontmatter, FrontmatterSchema } from '../../../../src/schemas/yaml/frontMatter';
+} from '../../../src/schemas/yaml/prefOptions';
+import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
 export const paintColorsPrefOptionsConfig: PrefOptionsConfig = {
   color_options: [

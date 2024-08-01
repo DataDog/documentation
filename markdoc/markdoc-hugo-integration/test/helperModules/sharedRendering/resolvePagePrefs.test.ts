@@ -1,7 +1,7 @@
 import {
   paintColorsFrontmatter,
   paintColorsPrefOptionsConfig
-} from '../../config/mocks/valid/paintColorsConfig';
+} from '../../mocks/valid/paintColorsConfig';
 import { describe, test, expect } from 'vitest';
 import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {

@@ -35,7 +35,8 @@ describe('ConfigProcessor', () => {
       try {
         ConfigProcessor.loadPrefOptionsFromDir(`${INVALID_PREF_MOCKS_DIR}/${invalidDir}`);
       } catch (error) {
-        expect(error.message).toMatchFileSnapshot(
+        const sanitizedErrorMessage = error.message.replace(INVALID_PREF_MOCKS_DIR, '');
+        expect(sanitizedErrorMessage).toMatchFileSnapshot(
           `${SNAPSHOTS_DIR}/helperModules/ConfigProcessor/invalid/ingestedPrefOptionsError/${invalidDir}.snap.txt`
         );
       }

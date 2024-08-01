@@ -1,1 +1,1 @@
-ENOENT: no such file or directory, scandir '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/config/mocks/invalid/prefsOptionsDirs/capitalized_id'
+ENOENT: no such file or directory, scandir '/capitalized_id'
