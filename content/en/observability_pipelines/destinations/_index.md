@@ -20,12 +20,15 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 1. Set up you processors.
 1. Install the Observability Pipelines Worker.
 
-All [destinations][2] are available for all templates, except for the Amazon S3, Google Cloud Storage, and Azure Storage destinations which are only available for the Archive Logs template.
-
-{{< whatsnext desc="These are the available Observability Pipelines destinations:" >}}
+{{< whatsnext desc="The available Observability Pipelines destinations are:" >}}
     {{< nextlink href="observability_pipelines/destinations/#datadog-log-management" >}}Datadog Log Management{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#splunk-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#sumo-logic/" >}}Sumo Logic{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#splunk_hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#sumo_logic" >}}Sumo Logic{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#chronicle" >}}Google Chronicle{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#elasticsearch" >}}Elasticsearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Log Management
@@ -57,6 +60,56 @@ All [destinations][2] are available for all templates, except for the Amazon S3,
 ### Set the environment variables
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+## Rsyslog or Syslog-ng
+
+### Set up the destination in the pipelines UI
+
+{{% observability_pipelines/destination_settings/syslog %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+## Google Chronicle
+
+### Set up the destination in the pipelines UI
+
+{{% observability_pipelines/destination_settings/chronicle %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+## Elasticsearch
+
+### Set up the destination in the pipelines UI
+
+{{% observability_pipelines/destination_settings/elasticsearch %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
+
+## OpenSearch
+
+### Set up the destination in the pipelines UI
+
+{{% observability_pipelines/destination_settings/opensearch %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+## Amazon OpenSearch
+
+### Set up the destination in the pipelines UI
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/

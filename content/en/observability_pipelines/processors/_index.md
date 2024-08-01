@@ -27,10 +27,10 @@ Use Observability Pipelines's processors to parse, structure, and enrich your lo
 
 ## Processors
 
-{{< whatsnext desc="Set up each processor in the pipeline UI. These are the available processors:" >}}
+{{< whatsnext desc="Set up each processor in the pipeline UI. The available processors are:" >}}
     {{< nextlink href="observability_pipelines/processors/#add-hostname" >}}Add hostname{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#edit-fields" >}}Edit fields{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#enrichment-table" >}}enrichment_table{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/#enrichment-table" >}}Enrichment table{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#filter" >}}Filter{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#grok-parser" >}}Grok parser{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#parse-json" >}}Parse JSON{{< /nextlink >}}
@@ -47,6 +47,10 @@ Use Observability Pipelines's processors to parse, structure, and enrich your lo
 ## Edit fields
 
 {{% observability_pipelines/processors/remap %}}
+
+## Enrichment table
+
+{{% observability_pipelines/processors/enrichment_table %}}
 
 ## Filter
 

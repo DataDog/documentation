@@ -76,7 +76,6 @@ To set up a pipeline:
 See [Set Up Pipelines][7] for more information.
 
 See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
-See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Further Reading
 
