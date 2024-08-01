@@ -152,6 +152,42 @@ class Integrations:
                         yaml_data, default_flow_style=False
                     )
                 )
+    
+    @staticmethod
+    def format_metric_spec_yaml(key_name, metric_spec_filename, yml_filename):
+        """
+        Given a file path to metric_spec.yaml file, format all metrics
+
+        :param key_name: integration key name for root object
+        :param metric_spec_filename: path to input metric spec file
+        :param yml_filename: path to output yml file
+        """
+        yaml_data = {key_name: []}
+        with open(metric_spec_filename) as f:
+            spec = yaml.safe_load(f)
+        
+        for group in spec.get("metric_groups"):
+            for metric in group.get("metrics"):
+                if "metadata" in metric:
+                    metric_metadata = metric.get("metadata", {})
+                    yaml_data[key_name].append(
+                        {
+                            "metric_name": metric.get("name", ""),
+                            "metric_type": metric_metadata.get("metric_type", ""),
+                            "interval": str(metric_metadata.get("interval", "")),
+                            "unit_name": metric_metadata.get("unit_name", ""),
+                            "per_unit_name": metric_metadata.get("per_unit_name", ""),
+                            "description": str(
+                                markdown2.markdown(metric_metadata.get("description", ""))
+                            )[3:-5],
+                            "orientation": str(metric_metadata.get("orientation", 0)),
+                            "integration": spec["integration"],
+                            "short_name": metric_metadata.get("short_name", ""),
+                            "curated_metric": metric_metadata.get("curated_metric", ""),
+                        }
+                    )
+        with open(file=yml_filename, mode="w", encoding="utf-8") as f:
+            f.write(yaml.dump(yaml_data, default_flow_style=False))
 
     def inline_references(self, integration_readme, regex_skip_sections_start, regex_skip_sections_end):
         """
@@ -358,7 +394,7 @@ class Integrations:
         Take a single metadata csv file and convert it to yaml
         :param file_name: path to a metadata csv file
         """
-        if file_name.endswith("/metadata.csv"):
+        if file_name.endswith("/metadata.csv") or file_name.endswith("/metric_spec.yaml"):
             key_name = basename(
                 dirname(normpath(file_name))
             )
@@ -375,7 +411,10 @@ class Integrations:
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
             )
-        self.metric_csv_to_yaml(key_name, file_name, new_file_name)
+        if file_name.endswith("/metric_spec.yaml"):
+            self.format_metric_spec_yaml(key_name, file_name, new_file_name)
+        else:
+            self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
         """
