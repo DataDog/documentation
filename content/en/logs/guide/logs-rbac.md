@@ -381,7 +381,22 @@ curl -X POST \
 
 Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][16] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 
+{{< tabs >}}
+{{% tab "UI" %}}
+
+1. Remove the global permission on the role.
+2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field.
+
 {{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes" style="width:60%;">}}
+
+[1]: /logs/log_configuration/indexes/
+{{% /tab %}}
+{{% tab "API" %}}
+
+This configuration is only supported through the UI.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Log archives
 
