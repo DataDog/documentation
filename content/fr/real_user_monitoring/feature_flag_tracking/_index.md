@@ -54,7 +54,7 @@ Dans cette vue, vous pouvez répondre à toutes les questions que vous vous pose
 ### Rechercher et filtrer des événements
 Recherchez et filtrez vos feature flags en tapant dans la barre de recherche. Vous pouvez également utiliser la recherche à facettes pour restreindre, élargir ou déplacer votre focus sur les sous-ensembles de feature flags qui vous intéressent.
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt=Barre de recherche et filtrage dans la liste des feature flags" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Barre de recherche et filtrage dans la liste des feature flags" style="width:90%;" >}}
 
 ### Statut des feature flags
 Il existe trois statuts possibles pour les feature flags :
