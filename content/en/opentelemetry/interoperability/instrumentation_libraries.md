@@ -204,9 +204,6 @@ Follow the detailed setup & example below for instrumenting a sample application
 
 ## Setup
 
-<<<<<<< HEAD
-{{% /tab %}} -->
-=======
  1. Follow the instructions in the Imports and Setup sections of the [Nodejs Custom Instrumentation using OpenTelemetry API][14] page.
  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
 
@@ -258,7 +255,6 @@ To achieve this, launch your application with the `DD_TRACE_DISABLED_INSTRUMENTA
 [14]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/#setup
 
 {{% /tab %}}
->>>>>>> e2b1c9f031 (document drop in support for nodejs)
 
 <!-- {{% tab "PHP" %}}
 
