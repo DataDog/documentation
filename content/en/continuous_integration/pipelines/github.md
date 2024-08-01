@@ -38,6 +38,8 @@ Set up tracing in GitHub Actions to track the execution of your workflows, ident
 | [Custom tags][12] [and measures at runtime][13] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Approval wait time][16] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
+| [Custom spans][17] | Custom spans | Configure custom spans for your pipelines. |
+
 
 The following GitHub versions are supported:
 
@@ -130,3 +132,4 @@ workflow job and workflow run events. To remove the events:
 [14]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [15]: /glossary/#queue-time
 [16]: /glossary/#approval-wait-time
+[17]: /glossary/#custom-span
