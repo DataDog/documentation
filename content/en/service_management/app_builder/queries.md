@@ -65,41 +65,71 @@ To display a toast (a brief notification message) to the user when the system re
 
 To prompt a user for confirmation before the query runs, toggle the **Requires Confirmation** option in the **Advanced** section of a query.
 
-## Example
+## Example app
 
-### Return a workflow result to an app
-
+### Return workflow results to an app
 App Builder queries can trigger Workflow Automation workflows. Apps can then use the results of those workflows.
 
-Say you have a workflow called "My AB Workflow" that sends a poll to a Slack channel and asks the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data. You can then display that data in your app.
+This app triggers a workflow, which sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
 
-#### Create workflow
+{{% collapse-content title="Build the app" level="h4" %}}
 
-1. In a new workflow canvas, click **Start with an action**.
-1. Search for "Make a decision" and select the **Make a decision** Slack action.
+##### Create workflow
+
+1. In a new workflow canvas, under **Datadog Triggers**, click **App**. 
+1. Under the **App** trigger step, click the plus (**+**) icon then search for "Make a decision" and select the **Make a decision** Slack action.
 1. Select your workspace and choose a channel to poll.
-1. Fill in some prompt text "Would you like a fact about cats or dogs?" and change the button choices to "Cat" and "Dog".
-1. Under the **Make a decision** step in the canvas, click the plus (**+**) icon above **Cat** and add the step you want. In this case, add the **Make request** HTTP action.
-1. Name the step "Get cat fact". Under **Inputs**, for the **URL**, keep **GET** selected and enter the URL `https://api.api-ninjas.com/v1/cats`.
-1. Under the **Make a decision** step in the canvas, click the plus (**+**) icon above **Dog**. Follow the same steps to add the **Make request** HTTP action, but this time name the step "Get dog fact" and use the URL `https://api.api-ninjas.com/v1/dogs`.
+1. Fill in the prompt text "Cat fact or dog fact?" and change the button choices to "Cat fact" and "Dog fact".
+1. Under the **Make a decision** step in the canvas, click the plus (**+**) icon above **Cat fact** and add the **Make request** HTTP action.
+1. Name the step "Get cat fact". Under **Inputs**, for the **URL**, keep **GET** selected and enter the URL `https://catfact.ninja/fact`.
+1. Under the **Make a decision** step in the canvas, click the plus (**+**) icon above **Dog fact**. Follow the same steps to add the **Make request** HTTP action, but this time name the step "Get dog fact" and use the following parameters:
+    * **URL**: `https://dogapi.dog/api/v2/facts`.
+    * **Request Headers**: `Content-Type` of `application/json`
 1. Click the plus (**+**) icon under the cat fact step. Search for "Function" and choose the **Function** data transformation step.
 1. Connect the plus (**+**) icon under the dog fact step to this **JS Function** step by clicking and dragging from the plus to the dot that appears above the JS Function step.
-1. For the JS Function, under **Configure**, for **Script**, use the following code snippet:
+1. In the JS Function, under **Configure**, for **Script**, use the following code snippet:
     ```
-    const catFactOutput = $.Steps.Get_cat_fact?.body?.data ?? {};
-    const dogFactOutput = $.Steps.Get_dog_fact?.body?.data ?? {};
+    const catFact = $.Steps.Get_cat_fact?.body?.fact;
+    const dogFactRaw = $.Steps.Get_dog_fact?.body;
 
-    return Object.keys(catFactOutput).length ? catFactOutput : dogFactOutput;
+    let dogFact;
+
+    try {
+        const parsedDogFact = JSON.parse(dogFactRaw);
+        dogFact = parsedDogFact.data?.[0]?.attributes?.body;
+    } catch {
+        // Do nothing
+    }
+
+    return catFact != null ? catFact : dogFact;
     ```
+1. In the workflow overview, under **Output Parameters**, add a parameter named `output` with the value `{{ Steps.Function.data }}` and the Data Type `string`.
+1. Name your workflow "My AB Workflow", then save and publish the workflow.
 
-#### Create app
+##### Create app
 
 To connect App Builder to the workflow, perform the following steps:
 
 1. In your app, under **Queries**, click **+ New Query**.
 1. Search for "Trigger Workflow" and select the **Trigger Workflow** Datadog Workflow Automation item.
+1. Set **Run Settings** to Manual and name the query `triggerWorkflow0`.
 1. Under **Inputs**, for **App Workflow**, select **My AB Workflow**.
+1. Click **Run** to run the workflow, then go to your Slack channel and answer the poll question. This gives App Builder example data to display.
+1. Add a text component named. Under **Content**, enter the expression `${triggerWorkflow0?.outputs?.workflowOutputs?.output}`.
+1. Add a button component. For **Label**, use "Trigger Workflow".
+1. Under the button's **Events**, click the plus (**+**) to add an event. Use the following values:
+    * **Event**: click
+    * **Reaction**: Trigger Query
+    * **Query**: `triggerWorkflow0`
+1. Save your app.
 
+##### Test app
+
+1. In your app, click **Preview**.
+1. Click the **Trigger Workflow** button.
+1. In the Slack channel you selected, answer the poll question.<br>
+    Your app displays results related to the option you chose.
+{{% /collapse-content %}} 
 
 ## Further reading
 
