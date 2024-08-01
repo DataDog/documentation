@@ -6947,6 +6947,19 @@ menu:
       url: /api/latest/service-scorecards/
       identifier: service-scorecards
       generated: true
+    - name: Update an existing rule
+      url: '#update-an-existing-rule'
+      identifier: service-scorecards-update-an-existing-rule
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardRule
+        unstable:
+          - v2
+        order: 4
     - name: Delete a rule
       url: '#delete-a-rule'
       identifier: service-scorecards-delete-a-rule
