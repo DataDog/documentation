@@ -485,7 +485,7 @@ components:
       schema:
         type: string
     RuleId:
-      description: The ID of the rule/scorecard.
+      description: The ID of the rule.
       in: path
       name: rule_id
       required: true
@@ -16582,7 +16582,7 @@ components:
       properties:
         id:
           description: The unique ID for a scorecard.
-          example: 00000000-0000-beef-0000-000000000000
+          example: q8MQxk8TCqrHnWkp
           type: string
         type:
           $ref: '#/components/schemas/ScorecardType'
@@ -17597,7 +17597,7 @@ components:
       type: object
     RuleId:
       description: The unique ID for a scorecard rule.
-      example: 00000000-0000-beef-0000-000000000000
+      example: q8MQxk8TCqrHnWkx
       type: string
     RuleOutcomeRelationships:
       description: The JSON:API relationship to a scorecard rule.
@@ -23437,6 +23437,38 @@ components:
           $ref: '#/components/schemas/UpdateOpenAPIResponseAttributes'
         id:
           $ref: '#/components/schemas/ApiID'
+      type: object
+    UpdateRuleRequest:
+      description: Request to update a scorecard rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateRuleRequestData'
+      type: object
+    UpdateRuleRequestData:
+      description: Data for the request to update a scorecard rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    UpdateRuleResponse:
+      description: The response from a rule update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateRuleResponseData'
+      type: object
+    UpdateRuleResponseData:
+      description: The data for a rule update response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        relationships:
+          $ref: '#/components/schemas/RelationshipToRule'
+        type:
+          $ref: '#/components/schemas/RuleType'
       type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
@@ -34142,22 +34174,34 @@ paths:
 
         - Service Level Objectives: `slo`
 
+        - Synthetic Global Variable: `synthetic-global-variable`
+
+        - Synthetic Test: `synthetic-test`
+
+        - Synthetic Private Location: `synthetic-private-location`
+
 
         #### Supported relations for resources
 
-        Resource Type            | Supported Relations
+        Resource Type              | Supported Relations
 
-        -------------------------|--------------------------
+        ---------------------------|--------------------------
 
-        Dashboards               | `viewer`, `editor`
+        Dashboards                 | `viewer`, `editor`
 
-        Notebooks                | `viewer`, `editor`
+        Notebooks                  | `viewer`, `editor`
 
-        Powerpacks               | `viewer`, `editor`
+        Powerpacks                 | `viewer`, `editor`
 
-        Security Rules           | `viewer`, `editor`
+        Security Rules             | `viewer`, `editor`
 
-        Service Level Objectives | `viewer`, `editor`'
+        Service Level Objectives   | `viewer`, `editor`
+
+        Synthetic Global Variable  | `viewer`, `editor`
+
+        Synthetic Test             | `viewer`, `editor`
+
+        Synthetic Private Location | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -35472,6 +35516,46 @@ paths:
       tags:
       - Service Scorecards
       x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Updates an existing rule.
+      operationId: UpdateScorecardRule
+      parameters:
+      - $ref: '#/components/parameters/RuleId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRuleRequest'
+        description: Rule attributes.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRuleResponse'
+          description: Rule updated successfully
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Update an existing rule
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -40841,8 +40925,8 @@ tags:
 
     and improve communication with internal and external users.'
   name: Service Level Objectives
-- description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)
-    for more information.
+- description: 'API to create and update scorecard rules and outcomes. See [Service
+    Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
 
 
     This feature is currently in BETA. If you have any feedback, contact [Datadog
