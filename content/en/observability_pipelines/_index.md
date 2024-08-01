@@ -72,7 +72,7 @@ See [Advanced Configurations][7] for bootstrapping options and for details on se
 
 ### Build pipelines with out-of-the-box templates
 
-{{< img src="observability_pipelines/templates.png" alt="" style="width:100%;" >}}
+{{< img src="observability_pipelines/templates.png" alt="The Observability Pipelines UI showing the six templates" style="width:100%;" >}}
 
 The [templates](#out-of-the-box-templates) are purpose-built for the following use cases:
 
