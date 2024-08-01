@@ -112,7 +112,7 @@ Libraries are modularized in v2. Adopt the following libraries:
 These come in addition to the existing `DatadogCrashReporting` and `DatadogObjc`.
 
 <details>
-  <summary>SPM</summary>
+  <summary>SPM (Recommended)</summary>
 
   ```swift
 let package = Package(
