@@ -118,7 +118,7 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
    {{% tab "Javascript" %}}
 
-   Define variables for your HTTP API tests with Javascript:
+   Define variables for your HTTP API tests with JavaScript:
 
   {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 

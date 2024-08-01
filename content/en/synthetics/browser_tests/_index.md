@@ -109,7 +109,7 @@ Define the configuration of your browser test.
 
    {{% tab "Time & Language" %}}
    
-  By default, timezone will be set to UTC and language will be set to English (en). To define language, use the corresponding 2 or 3 digit ISO code for this language found [here][19].
+  By default, timezone is set to UTC, and language is set to English (en). To define a language, use the corresponding 2 or 3 digit [ISO code][19].
 
    {{% /tab %}}
    {{< /tabs >}}
