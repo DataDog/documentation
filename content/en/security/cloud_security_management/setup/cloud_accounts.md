@@ -32,7 +32,9 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
-## Disable resource collection
+## Disable resource scanning
+
+To disable resource scanning for your cloud accounts, navigate to either the [**CSM Setup**][1] page or the cloud account integration page. Disabling resource scanning does not affect your ability to access historical findings. You can still review data from the past 15 months.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -93,3 +95,5 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
