@@ -76,7 +76,7 @@ Use processors within your pipelines to enrich, restructure your data and genera
 ##### Requirements
 
 Map the application's logs attributes to [Datadog's Standard Attributes][6]
-: Use the [Attribute Remapper][5] to map attribute keys to standard [Datadog Standard Attributes][6]. For example, an attribute key that contains a client IP value should be remapped to `network.client.ip`. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
+: Use the [Attribute Remapper][5] to map attribute keys to standard [Datadog Standard Attributes][6]. For example, an attribute for client IP value should be remapped to `network.client.ip`.
 
 Map the log `source` tag to the integration name
 : Datadog recommends that the `source` tag is set to `<integration_name>`. The `source` tag must be non-editable by the user because the is used to enable integration pipelines and dashboards. The `source` tag must be in lowercase.
@@ -84,7 +84,7 @@ Map the log `source` tag to the integration name
 Map the log `service` tag to the name of the [service][26] producing telemetry
 : Use the [Service Remapper][7] to remap the `service` attribute. When the source and service are not different services, set `service` to the same value as the `source` tag. `service` tags must be in lowercase. 
 
-Map the log internal date to their official Datadog timestamp
+Map the log's internal timestamp to it's official Datadog timestamp
 : Use the [Date Remapper][4] to define the official timestamp for logs.
 
 Map the custom status attributes of the logs to the official Datadog `status` attribute
@@ -97,12 +97,17 @@ Set a namespace for custom attributes within your logs
 : Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14].
 Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. 
 
-* Parse and extract information from your logs using the [grok processor][8]. Extracting attributes allows for better searching and analytics. To maintain optimal performance, the grok parser must be specific. Avoid wildcard matches.
-* Map log attributes to [Datadog's Standard Attributes][6] where possible. Centralizing logs from various technologies and applications can generate large amounts of unique attributes in a Log Management environment. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s standard naming convention.
-* Namespace generic log attributes that **do not** map to a standard attribute. For example, an attribute for a server url value specific to your integration technology may be remapped to `integration_name.server.url`.
-* Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
+1. If logs aren't `JSON` formatted, they may need to be parsed to extract attribute information. Use the [grok processor][8] to extract attributes and information from logs prior to remapping or further processing.
+2. After extracting attributes, map any standard log attributes to [Datadog's Standard Attributes][6] where possible, using the [Attribute Remapper][5].
+3. Map the timestamp extracted from the log to it's official Datadog timestamp using the [Date Remapper][4].
+4. Namespace any generic log attributes that **do not** map to a standard attribute. For example, an attribute for a `server_url` value specific to your integration technology may be remapped to `integration_name.server_url`.
+5. For more advanced processing and data transformations, make use of additional [processors][10]. For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
-**Tip**: Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
+**Tips**
+* Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
+* To maintain optimal grok parsing performance, avoid wildcard matchers and make your parsing statements as specific as possible.
+* Centralizing logs from various technologies and applications can generate large amounts of unique attributes in a Log Management environment. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17].
+* Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
 
 ### Create facets
 
