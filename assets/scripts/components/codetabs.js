@@ -1,5 +1,5 @@
 import { getQueryParameterByName } from '../helpers/browser';
-import { getCookieByName } from '../helpers/helpers';
+import { getCookieByName, chromeHashFix } from '../helpers/helpers';
 import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
@@ -81,7 +81,7 @@ const initCodeTabs = () => {
     }
 
     const scrollToAnchor = (tab, anchorname) => {
-        const anchor = document.querySelector(`[data-lang='${tab}'] ${anchorname}`);
+        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
         console.log('tab: ', tab);
         console.log('scrolling to anchor: ', anchor);
         if (anchor) {
@@ -101,15 +101,17 @@ const initCodeTabs = () => {
                 if (window.location.hash) {
                     setTimeout(function () {
                         scrollToAnchor(tabQueryParameter, window.location.hash);
-                    }, 350);
+                    }, 300);
                 }
             }else{
                 activateCodeTab(firstTab)
+                chromeHashFix();
             }
         } else {
             if (codeTabsList.length > 0) {
                 activateCodeTab(firstTab)
             }
+            chromeHashFix();
         }
     }
 
@@ -230,4 +232,4 @@ const initCodeTabs = () => {
     init()
 }
 
-export default initCodeTabs;
+export default initCodeTabs

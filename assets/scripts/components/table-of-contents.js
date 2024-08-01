@@ -242,14 +242,3 @@ window.addEventListener('scroll', () => {
 
 DOMReady(handleAPIPage);
 
-// Fixes Chrome issue where pages with hash params are not scrolling to anchor
-window.addEventListener('load', () => {
-    const isChrome = /Chrome/.test(navigator.userAgent);
-    if (window.location.hash && isChrome) {
-        setTimeout(function () {
-            const hash = window.location.hash;
-            window.location.hash = '';
-            window.location.hash = hash;
-        }, 300);
-    }
-});

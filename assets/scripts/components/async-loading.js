@@ -4,7 +4,7 @@ import { redirectToRegion, hideTOCItems } from '../region-redirects';
 import { initCopyCode } from './copy-code';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
-import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
+import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName, chromeHashFix } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './algolia';
@@ -237,6 +237,7 @@ function loadPage(newUrl) {
 
             // sets query params if code tabs are present
             initCodeTabs();
+            chromeHashFix();
 
             const regionSelector = document.querySelector('.js-region-select');
 
