@@ -15,12 +15,13 @@ describe('ConfigProcessor', () => {
 
   const invalidDirs = [
     'missing_default_value',
+    'multiple_default_values',
     'missing_display_name',
-    'missing_identifier',
-    'capitalized_identifier',
-    'multi_word_identifier',
-    'punctuated_identifier',
-    'spinal_case_identifier'
+    'missing_id',
+    'capitalized_id',
+    'multi_word_id',
+    'punctuated_id',
+    'spinal_case_id'
   ];
 
   invalidDirs.forEach((invalidDir) => {

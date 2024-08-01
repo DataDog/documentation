@@ -1,18 +1,18 @@
-# This options set has a punctuated identifier for the red option
+# This options set has a punctuated ID for the red option
 primary_color_options:
   - display_name: Red
-    identifier: red.
+    id: red.
   - display_name: Yellow
-    identifier: yellow
+    id: yellow
   - display_name: Blue
-    identifier: blue
+    id: blue
     default: true
 
 traffic_light_color_options:
   - display_name: Red
-    identifier: red
+    id: red
   - display_name: Yellow
-    identifier: yellow
+    id: yellow
   - display_name: Green
-    identifier: green
+    id: green
     default: true

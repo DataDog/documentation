@@ -3,7 +3,7 @@ import { SNAKE_CASE_REGEX } from './../regexes';
 
 export const SitewidePrefIdsConfigSchema = z
   .object({
-    valid_sitewide_preference_identifiers: z.array(z.string().regex(SNAKE_CASE_REGEX)).min(1)
+    valid_sitewide_preference_ids: z.array(z.string().regex(SNAKE_CASE_REGEX)).min(1)
   })
   .strict();
 

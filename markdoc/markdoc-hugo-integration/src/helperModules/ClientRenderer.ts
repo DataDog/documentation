@@ -4,7 +4,7 @@ import { MinifiedPagePrefsConfig } from '../schemas/yaml/frontMatter';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { resolveMinifiedPagePrefs } from './sharedRendering';
 import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
-import { expandClientFunction, MinifiedClientFunction } from './treeManagement';
+import { expandClientFunction, MinifiedClientFunction } from './dataCompression';
 
 /**
  * A class containing functions for rendering on the client.
@@ -160,7 +160,7 @@ export class ClientRenderer {
      */
     Object.keys(resolvedPagePrefs).forEach((resolvedPrefId) => {
       const resolvedPref = resolvedPagePrefs[resolvedPrefId];
-      this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
+      this.selectedValsByPrefId[resolvedPref.id] = resolvedPref.currentValue;
     });
 
     const newChooserHtml = getChooserHtml(resolvedPagePrefs);

@@ -1,12 +1,134 @@
 [
   {
-    "validation": "regex",
-    "code": "invalid_string",
-    "message": "Invalid",
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
     "path": [
       "primary_color_options",
       0,
+      "id"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
       "identifier"
-    ]
+    ],
+    "path": [
+      "primary_color_options",
+      0
+    ],
+    "message": "Unrecognized key(s) in object: 'identifier'"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "primary_color_options",
+      1,
+      "id"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "identifier"
+    ],
+    "path": [
+      "primary_color_options",
+      1
+    ],
+    "message": "Unrecognized key(s) in object: 'identifier'"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "primary_color_options",
+      2,
+      "id"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "identifier"
+    ],
+    "path": [
+      "primary_color_options",
+      2
+    ],
+    "message": "Unrecognized key(s) in object: 'identifier'"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "traffic_light_color_options",
+      0,
+      "id"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "identifier"
+    ],
+    "path": [
+      "traffic_light_color_options",
+      0
+    ],
+    "message": "Unrecognized key(s) in object: 'identifier'"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "traffic_light_color_options",
+      1,
+      "id"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "identifier"
+    ],
+    "path": [
+      "traffic_light_color_options",
+      1
+    ],
+    "message": "Unrecognized key(s) in object: 'identifier'"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "traffic_light_color_options",
+      2,
+      "id"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "identifier"
+    ],
+    "path": [
+      "traffic_light_color_options",
+      2
+    ],
+    "message": "Unrecognized key(s) in object: 'identifier'"
   }
 ]

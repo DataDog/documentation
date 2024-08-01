@@ -73,7 +73,7 @@ export class ConfigProcessor {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent) as SitewidePrefIdsConfig;
     SitewidePrefIdsConfigSchema.parse(parsedYaml);
-    return parsedYaml.valid_sitewide_preference_identifiers;
+    return parsedYaml.valid_sitewide_preference_ids;
   }
 
   /**
@@ -111,10 +111,9 @@ export class ConfigProcessor {
         }
       );
 
-      defaultValuesByPrefId[fmPrefConfig.identifier] =
+      defaultValuesByPrefId[fmPrefConfig.id] =
         fmPrefConfig.default_value ||
-        prefOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!
-          .identifier;
+        prefOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!.id;
     }
 
     return defaultValuesByPrefId;
@@ -143,7 +142,7 @@ export class ConfigProcessor {
 
     this.validatePlaceholderReferences(frontmatter);
 
-    // Verify that all possible options_source identifiers are valid
+    // Verify that all possible options_source IDs are valid
 
     const validValuesByOptionsSetId: Record<string, string[]> = {};
     const optionsSetIdsByPrefId: Record<string, string> = {};
@@ -163,9 +162,9 @@ export class ConfigProcessor {
         }
         validValuesByOptionsSetId[fmPrefConfig.options_source] = prefOptionsConfig[
           fmPrefConfig.options_source
-        ].map((option) => option.identifier);
+        ].map((option) => option.id);
 
-        optionsSetIdsByPrefId[fmPrefConfig.identifier] = fmPrefConfig.options_source;
+        optionsSetIdsByPrefId[fmPrefConfig.id] = fmPrefConfig.options_source;
 
         // add this options source to the prefOptionsConfigForPage object
         prefOptionsConfigForPage[fmPrefConfig.options_source] =
@@ -201,7 +200,7 @@ export class ConfigProcessor {
         }
         validValuesByOptionsSetId[potentialOptionsSetId] = prefOptionsConfig[
           potentialOptionsSetId
-        ].map((option) => option.identifier);
+        ].map((option) => option.id);
 
         // add this options source to the prefOptionsConfigForPage object
         prefOptionsConfigForPage[potentialOptionsSetId] =
@@ -216,7 +215,7 @@ export class ConfigProcessor {
    * Verify that each placeholder refers to a valid page pref ID.
    *
    * For example, if there is a <COLOR> placeholder, there must
-   * also be a page pref with the identifier 'color', and it must
+   * also be a page pref with the ID 'color', and it must
    * have been defined in the frontmatter before the placeholder is referenced.
    *
    * @param frontmatter A Frontmatter object.
@@ -243,14 +242,14 @@ export class ConfigProcessor {
         const referencedId = match[1].toLowerCase();
         if (!validPrefIds.includes(referencedId)) {
           throw new Error(
-            `Placeholder ${match[0]} does not refer to a valid page preference identifier. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the page_preferences list before it is referenced in ${match[0]}.`
+            `Placeholder ${match[0]} does not refer to a valid page preference ID. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the page_preferences list before it is referenced in ${match[0]}.`
           );
         }
       }
 
       // add this pref ID to the list of valid pref IDs
       // that may be referenced by placeholders later in the list
-      validPrefIds.push(fmPrefConfig.identifier);
+      validPrefIds.push(fmPrefConfig.id);
     }
   }
 
@@ -292,7 +291,7 @@ export class ConfigProcessor {
       minifiedPrefOptionsConfig[optionsListId] = optionsList.map((option) => ({
         n: option.display_name,
         d: option.default,
-        i: option.identifier
+        i: option.id
       }));
     }
     MinifiedPrefOptionsConfigSchema.parse(minifiedPrefOptionsConfig);
@@ -306,7 +305,7 @@ export class ConfigProcessor {
     pagePrefsConfig.forEach((pagePrefConfig) => {
       minifiedPagePrefsConfig.push({
         n: pagePrefConfig.display_name,
-        i: pagePrefConfig.identifier,
+        i: pagePrefConfig.id,
         o: pagePrefConfig.options_source,
         d: pagePrefConfig.default_value
       });

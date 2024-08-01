@@ -13,7 +13,7 @@ const ResolvedPagePrefOptionSchema = z
 export const ResolvedPagePrefSchema = z
   .object({
     // The unique ID of the variable
-    identifier: z.string().regex(SNAKE_CASE_REGEX),
+    id: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the preference in the UI
     displayName: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
@@ -32,7 +32,7 @@ export const ResolvedPagePrefSchema = z
  *
  * @example
  * {
- *   identifier: 'category',
+ *   id: 'category',
  *   displayName: 'Category',
  *   defaultValue: 'all',
  *   options: [
@@ -48,6 +48,6 @@ export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
 
 /**
  * A collection of ResolvedPagePref objects, indexed by their
- * unique identifiers.
+ * unique IDs.
  */
 export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;

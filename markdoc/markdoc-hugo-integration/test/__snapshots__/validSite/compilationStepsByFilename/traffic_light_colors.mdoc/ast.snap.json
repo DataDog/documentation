@@ -4,7 +4,7 @@
   "lines": [],
   "inline": false,
   "attributes": {
-    "frontmatter": "title: The Colors of the Common Traffic Light\npage_preferences:\n  - display_name: \"Color\"\n    identifier: color\n    options_source: traffic_light_color_options\n  - display_name: \"Item\"\n    identifier: item\n    options_source: <COLOR>_item_options"
+    "frontmatter": "title: The Colors of the Common Traffic Light\npage_preferences:\n  - display_name: \"Color\"\n    id: color\n    options_source: traffic_light_color_options\n  - display_name: \"Item\"\n    id: item\n    options_source: <COLOR>_item_options"
   },
   "children": [
     {

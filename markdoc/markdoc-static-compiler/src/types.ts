@@ -27,6 +27,12 @@ export interface ClientFunction {
   ref: string;
 }
 
+export const ClientVariableSchema = z.object({
+  $$mdtype: z.literal('Variable'),
+  path: z.array(z.string()).min(1),
+  value: z.any()
+});
+
 export interface ClientVariable {
   $$mdtype: 'Variable';
   path: string[];

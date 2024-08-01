@@ -1,17 +1,17 @@
 # This options set is missing the display name for blue
 primary_color_options:
   - display_name: Red
-    identifier: red
+    id: red
   - display_name: Yellow
-    identifier: yellow
-  - identifier: blue
+    id: yellow
+  - id: blue
     default: true
 
 traffic_light_color_options:
   - display_name: Red
-    identifier: red
+    id: red
   - display_name: Yellow
-    identifier: yellow
+    id: yellow
   - display_name: Green
-    identifier: green
+    id: green
     default: true

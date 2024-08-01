@@ -49,29 +49,29 @@ export function resolvePagePrefs(p: {
     const defaultValue =
       prefConfigDup.default_value ||
       p.prefOptionsConfig[prefConfigDup.options_source].find((option) => option.default)!
-        .identifier;
+        .id;
 
     const possibleValues = p.prefOptionsConfig[prefConfigDup.options_source].map(
-      (option) => option.identifier
+      (option) => option.id
     );
-    let currentValue = p.valsByPrefId[prefConfigDup.identifier];
+    let currentValue = p.valsByPrefId[prefConfigDup.id];
     if (currentValue && !possibleValues.includes(currentValue)) {
       currentValue = defaultValue;
     }
 
     // Add the resolved pref to the returned object
     const resolvedPref: ResolvedPagePref = {
-      identifier: prefConfigDup.identifier,
+      id: prefConfigDup.id,
       displayName: prefConfigDup.display_name,
       defaultValue,
       currentValue,
       options: p.prefOptionsConfig[prefConfigDup.options_source].map((option) => ({
-        id: option.identifier,
+        id: option.id,
         displayName: option.display_name
       }))
     };
 
-    resolvedPagePrefs[prefConfigDup.identifier] = resolvedPref;
+    resolvedPagePrefs[prefConfigDup.id] = resolvedPref;
   });
 
   return resolvedPagePrefs;
@@ -105,7 +105,7 @@ export function resolveMinifiedPagePrefs(p: {
 
     // Add the resolved pref to the returned object
     const resolvedPref: ResolvedPagePref = {
-      identifier: prefConfigDup.i,
+      id: prefConfigDup.i,
       displayName: prefConfigDup.n,
       defaultValue,
       currentValue,

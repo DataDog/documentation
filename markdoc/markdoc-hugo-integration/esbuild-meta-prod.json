@@ -1,0 +1,218 @@
+{
+  "inputs": {
+    "dist/helperModules/PageBuilder/components/Chooser.js": {
+      "bytes": 1078,
+      "imports": [],
+      "format": "cjs"
+    },
+    "dist/schemas/regexes.js": {
+      "bytes": 1197,
+      "imports": [],
+      "format": "cjs"
+    },
+    "dist/helperModules/sharedRendering.js": {
+      "bytes": 5571,
+      "imports": [
+        {
+          "path": "dist/schemas/regexes.js",
+          "kind": "require-call",
+          "original": "../schemas/regexes"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../markdoc-static-compiler/src/grammar/tag.js": {
+      "bytes": 42415,
+      "imports": [],
+      "format": "cjs"
+    },
+    "../markdoc-static-compiler/src/ast/variable.ts": {
+      "bytes": 717,
+      "imports": [],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/ast/base.ts": {
+      "bytes": 1332,
+      "imports": [],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/ast/function.ts": {
+      "bytes": 534,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/ast/base.ts",
+          "kind": "import-statement",
+          "original": "./base"
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/utils.ts": {
+      "bytes": 3966,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/grammar/tag.js",
+          "kind": "import-statement",
+          "original": "./grammar/tag"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/ast/variable.ts",
+          "kind": "import-statement",
+          "original": "./ast/variable"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/ast/function.ts",
+          "kind": "import-statement",
+          "original": "./ast/function"
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/tags/conditional.ts": {
+      "bytes": 2760,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/utils.ts",
+          "kind": "import-statement",
+          "original": "../utils"
+        },
+        {
+          "path": "../types",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../types",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/functions/index.ts": {
+      "bytes": 2492,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/tags/conditional.ts",
+          "kind": "import-statement",
+          "original": "../tags/conditional"
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/reresolver/index.js": {
+      "bytes": 3957,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/functions/index.ts",
+          "kind": "require-call",
+          "original": "../functions"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/tags/conditional.ts",
+          "kind": "require-call",
+          "original": "../tags/conditional"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/utils.ts",
+          "kind": "require-call",
+          "original": "../utils"
+        }
+      ],
+      "format": "cjs"
+    },
+    "dist/helperModules/dataCompression.js": {
+      "bytes": 2871,
+      "imports": [],
+      "format": "cjs"
+    },
+    "dist/helperModules/ClientRenderer.js": {
+      "bytes": 7127,
+      "imports": [
+        {
+          "path": "dist/helperModules/PageBuilder/components/Chooser.js",
+          "kind": "require-call",
+          "original": "./PageBuilder/components/Chooser"
+        },
+        {
+          "path": "dist/helperModules/sharedRendering.js",
+          "kind": "require-call",
+          "original": "./sharedRendering"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/reresolver/index.js",
+          "kind": "require-call",
+          "original": "markdoc-static-compiler/src/reresolver"
+        },
+        {
+          "path": "dist/helperModules/dataCompression.js",
+          "kind": "require-call",
+          "original": "./dataCompression"
+        }
+      ],
+      "format": "cjs"
+    },
+    "src/markdoc-client-renderer.js": {
+      "bytes": 136,
+      "imports": [
+        {
+          "path": "dist/helperModules/ClientRenderer.js",
+          "kind": "require-call",
+          "original": "../dist/helperModules/ClientRenderer"
+        }
+      ]
+    }
+  },
+  "outputs": {
+    "src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.min.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/markdoc-client-renderer.js",
+      "inputs": {
+        "dist/helperModules/PageBuilder/components/Chooser.js": {
+          "bytesInOutput": 539
+        },
+        "dist/schemas/regexes.js": {
+          "bytesInOutput": 396
+        },
+        "dist/helperModules/sharedRendering.js": {
+          "bytesInOutput": 1500
+        },
+        "../markdoc-static-compiler/src/grammar/tag.js": {
+          "bytesInOutput": 12824
+        },
+        "../markdoc-static-compiler/src/ast/variable.ts": {
+          "bytesInOutput": 259
+        },
+        "../markdoc-static-compiler/src/ast/base.ts": {
+          "bytesInOutput": 350
+        },
+        "../markdoc-static-compiler/src/ast/function.ts": {
+          "bytesInOutput": 236
+        },
+        "../markdoc-static-compiler/src/utils.ts": {
+          "bytesInOutput": 1762
+        },
+        "../markdoc-static-compiler/src/tags/conditional.ts": {
+          "bytesInOutput": 624
+        },
+        "../markdoc-static-compiler/src/functions/index.ts": {
+          "bytesInOutput": 1117
+        },
+        "../markdoc-static-compiler/src/reresolver/index.js": {
+          "bytesInOutput": 1579
+        },
+        "dist/helperModules/dataCompression.js": {
+          "bytesInOutput": 1542
+        },
+        "dist/helperModules/ClientRenderer.js": {
+          "bytesInOutput": 3278
+        },
+        "src/markdoc-client-renderer.js": {
+          "bytesInOutput": 61
+        }
+      },
+      "bytes": 26758
+    }
+  }
+}

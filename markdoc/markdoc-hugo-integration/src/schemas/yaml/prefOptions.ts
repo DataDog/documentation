@@ -7,14 +7,14 @@ import { SNAKE_CASE_REGEX, PREF_OPTIONS_ID_REGEX } from '../regexes';
  *
  * @example
  * display_name: Postgres
- * identifier: postgres
+ * id: postgres
  * default: true
  */
 const PrefOptionSchema = z
   .object({
     display_name: z.string(),
     default: z.boolean().optional(),
-    identifier: z.string().regex(SNAKE_CASE_REGEX)
+    id: z.string().regex(SNAKE_CASE_REGEX)
   })
   .strict();
 
@@ -22,14 +22,14 @@ const MinifiedPrefOptionSchema = z
   .object({
     n: z.string(), // display name
     d: z.boolean().optional(), // default
-    i: z.string().regex(SNAKE_CASE_REGEX) // identifier
+    i: z.string().regex(SNAKE_CASE_REGEX) // ID
   })
   .strict();
 
 interface MinifiedPrefOption {
   n: string; // display name
   d?: boolean; // default
-  i: string; // identifier
+  i: string; // ID
 }
 
 export const MinifiedPrefOptionsConfigSchema = z.record(
@@ -73,14 +73,14 @@ export const PrefOptionsConfigSchema = z.record(
  * @example
  * {
  *  primary_color_options: [
- *   { identifier: 'red', display_name: 'Red', default: true },
- *   { identifier: 'blue', display_name: 'Blue' },
- *   { identifier: 'yellow', display_name: 'Yellow' }
+ *   { id: 'red', display_name: 'Red', default: true },
+ *   { id: 'blue', display_name: 'Blue' },
+ *   { id: 'yellow', display_name: 'Yellow' }
  *  ],
  *  traffic_light_color_options: [
- *   { identifier: 'red', display_name: 'Red', default: true },
- *   { identifier: 'green', display_name: 'Green' },
- *   { identifier: 'yellow', display_name: 'Yellow' }
+ *   { id: 'red', display_name: 'Red', default: true },
+ *   { id: 'green', display_name: 'Green' },
+ *   { id: 'yellow', display_name: 'Yellow' }
  *  ],
  * }
  */

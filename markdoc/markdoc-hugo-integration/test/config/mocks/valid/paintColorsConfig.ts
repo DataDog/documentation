@@ -6,36 +6,36 @@ import { Frontmatter, FrontmatterSchema } from '../../../../src/schemas/yaml/fro
 
 export const paintColorsPrefOptionsConfig: PrefOptionsConfig = {
   color_options: [
-    { identifier: 'blue', display_name: 'Blue', default: true },
-    { identifier: 'red', display_name: 'Red' }
+    { id: 'blue', display_name: 'Blue', default: true },
+    { id: 'red', display_name: 'Red' }
   ],
   finish_options: [
-    { identifier: 'matte', display_name: 'Matte' },
-    { identifier: 'eggshell', display_name: 'Eggshell', default: true },
-    { identifier: 'gloss', display_name: 'Gloss' }
+    { id: 'matte', display_name: 'Matte' },
+    { id: 'eggshell', display_name: 'Eggshell', default: true },
+    { id: 'gloss', display_name: 'Gloss' }
   ],
   matte_blue_paint_options: [
-    { identifier: 'powder_blue', display_name: 'Powder Blue', default: true }
+    { id: 'powder_blue', display_name: 'Powder Blue', default: true }
   ],
   eggshell_blue_paint_options: [
-    { identifier: 'elegant_royal', display_name: 'Elegant Royal', default: true },
-    { identifier: 'robins_egg', display_name: "Robin's Egg" }
+    { id: 'elegant_royal', display_name: 'Elegant Royal', default: true },
+    { id: 'robins_egg', display_name: "Robin's Egg" }
   ],
   gloss_blue_paint_options: [
-    { identifier: 'sky_blue', display_name: 'Sky Blue', default: true },
-    { identifier: 'navy', display_name: 'Navy' }
+    { id: 'sky_blue', display_name: 'Sky Blue', default: true },
+    { id: 'navy', display_name: 'Navy' }
   ],
   matte_red_paint_options: [
-    { identifier: 'brick', display_name: 'Brick', default: true },
-    { identifier: 'scarlet', display_name: 'Scarlet' }
+    { id: 'brick', display_name: 'Brick', default: true },
+    { id: 'scarlet', display_name: 'Scarlet' }
   ],
   eggshell_red_paint_options: [
-    { identifier: 'rose', display_name: 'Rose', default: true },
-    { identifier: 'ruby', display_name: 'Ruby' }
+    { id: 'rose', display_name: 'Rose', default: true },
+    { id: 'ruby', display_name: 'Ruby' }
   ],
   gloss_red_paint_options: [
-    { identifier: 'fire_engine', display_name: 'Fire Engine', default: true },
-    { identifier: 'crimson', display_name: 'Crimson' }
+    { id: 'fire_engine', display_name: 'Fire Engine', default: true },
+    { id: 'crimson', display_name: 'Crimson' }
   ]
 };
 PrefOptionsConfigSchema.parse(paintColorsPrefOptionsConfig);
@@ -45,17 +45,17 @@ export const paintColorsFrontmatter: Frontmatter = {
   page_preferences: [
     {
       display_name: 'Color',
-      identifier: 'color',
+      id: 'color',
       options_source: 'color_options'
     },
     {
       display_name: 'Finish',
-      identifier: 'finish',
+      id: 'finish',
       options_source: 'finish_options'
     },
     {
       display_name: 'Paint color',
-      identifier: 'paint',
+      id: 'paint',
       options_source: '<FINISH>_<COLOR>_paint_options'
     }
   ]

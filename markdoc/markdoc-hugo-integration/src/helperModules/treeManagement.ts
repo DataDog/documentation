@@ -3,116 +3,13 @@ import { ParsedFile } from './FileParser';
 import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode,
-  ClientFunction,
-  ClientFunctionSchema,
-  ClientVariable
+  ClientFunctionSchema
 } from 'markdoc-static-compiler';
+import { MinifiedClientFunction, minifyClientFunction } from './dataCompression';
 
 /**
  * A set of functions for working with Markdoc's renderable tree.
  */
-
-export interface MinifiedClientVariable {
-  m: 'V';
-  p: string[];
-  v: any;
-}
-
-export interface MinifiedClientFunction {
-  m: 'F';
-  n: 'a' | 'o' | 'e' | 'n' | 'def' | 'deb';
-  p: Record<string, any>;
-  v: any;
-  r: string;
-}
-
-export const CLIENT_FUNCTION_EXPAND_MAP = {
-  F: 'Function',
-  a: 'and',
-  o: 'or',
-  e: 'equals',
-  n: 'not',
-  def: 'default',
-  deb: 'debug'
-};
-
-export const CLIENT_FUNCTION_MINIFY_MAP = {
-  Function: 'F',
-  and: 'a',
-  or: 'o',
-  equals: 'e',
-  not: 'n',
-  default: 'def',
-  debug: 'deb'
-};
-
-export const expandClientVariable = (v: MinifiedClientVariable): ClientVariable => {
-  return {
-    $$mdtype: 'Variable',
-    path: v.p,
-    value: v.v
-  };
-};
-
-export const minifyClientVariable = (v: ClientVariable) => {
-  return {
-    m: 'V',
-    p: v.path,
-    v: v.value
-  };
-};
-
-export const minifyClientFunction = (f: ClientFunction) => {
-  const fDup = { ...f };
-
-  // recursively minify any nested functions and variables
-  Object.keys(fDup.parameters).forEach((pKey) => {
-    const parameter = fDup.parameters[pKey];
-    if (
-      typeof parameter === 'object' &&
-      '$$mdtype' in parameter &&
-      parameter.$$mdtype === 'Function'
-    ) {
-      fDup.parameters[pKey] = minifyClientFunction(parameter);
-    } else if (
-      typeof parameter === 'object' &&
-      '$$mdtype' in parameter &&
-      parameter.$$mdtype === 'Variable'
-    ) {
-      fDup.parameters[pKey] = minifyClientVariable(parameter);
-    }
-  });
-
-  return {
-    m: CLIENT_FUNCTION_MINIFY_MAP[fDup.$$mdtype],
-    n: CLIENT_FUNCTION_MINIFY_MAP[fDup.name],
-    p: f.parameters,
-    v: f.value,
-    r: f.ref
-  };
-};
-
-export const expandClientFunction = (f: MinifiedClientFunction) => {
-  const fDup = { ...f };
-
-  // recursively expand any nested functions
-  Object.keys(fDup.p).forEach((pKey) => {
-    const parameter = fDup.p[pKey];
-    if (typeof parameter === 'object' && 'm' in parameter && parameter.m === 'F') {
-      fDup.p[pKey] = expandClientFunction(parameter);
-    } else if (typeof parameter === 'object' && 'm' in parameter && parameter.m === 'V') {
-      fDup.p[pKey] = expandClientVariable(parameter);
-    }
-  });
-
-  return {
-    $$mdtype: CLIENT_FUNCTION_EXPAND_MAP[fDup.m],
-    name: CLIENT_FUNCTION_EXPAND_MAP[fDup.n],
-    parameters: fDup.p,
-    value: fDup.v,
-    ref: fDup.r
-  };
-};
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -177,7 +74,7 @@ export function buildRenderableTree(p: {
 
   if (invalidVarIds.length > 0) {
     throw new Error(
-      `Invalid reference found in markup: ${invalidVarIds} is not a valid identifier.`
+      `Invalid reference found in markup: ${invalidVarIds} is not a valid ID.`
     );
   }
 
@@ -185,34 +82,34 @@ export function buildRenderableTree(p: {
 }
 
 /**
- * Collect all variable identifiers referenced in the markup.
+ * Collect all variable IDs referenced in the markup.
  * (The markup must first be parsed into a renderable tree.)
  *
  * @param node A renderable tree.
- * @returns A list of variable identifiers found in the tree.
+ * @returns A list of variable IDs found in the tree.
  */
 function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
-  let variableIdentifiers: string[] = [];
+  let varIds: string[] = [];
 
-  if (!node) return variableIdentifiers;
+  if (!node) return varIds;
 
   if (Array.isArray(node)) {
     node.forEach((n) => {
-      const identifiers = collectVarIdsFromTree(n);
-      variableIdentifiers = variableIdentifiers.concat(identifiers);
+      const ids = collectVarIdsFromTree(n);
+      varIds = varIds.concat(ids);
     });
   }
 
-  if (typeof node !== 'object') return variableIdentifiers;
+  if (typeof node !== 'object') return varIds;
 
   if ('children' in node && node.children) {
-    const identifiers = collectVarIdsFromTree(node.children);
-    variableIdentifiers = variableIdentifiers.concat(identifiers);
+    const ids = collectVarIdsFromTree(node.children);
+    varIds = varIds.concat(ids);
   }
 
   if ('parameters' in node && node.parameters) {
-    const identifiers = collectVarIdsFromTree(Object.values(node.parameters));
-    variableIdentifiers = variableIdentifiers.concat(identifiers);
+    const ids = collectVarIdsFromTree(Object.values(node.parameters));
+    varIds = varIds.concat(ids);
   }
 
   if (typeof node === 'object' && '$$mdtype' in node && node.$$mdtype === 'Variable') {
@@ -225,7 +122,7 @@ function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
     //
     // We may wind up needing to support nested data because we may need to
     // group all pref variables under a parent $prefs object or similar.
-    variableIdentifiers.push(node.path?.join('.'));
+    varIds.push(node.path?.join('.'));
   }
 
   if (
@@ -234,15 +131,13 @@ function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
     node.$$mdtype === 'Tag' &&
     'if' in node
   ) {
-    const identifiers = collectVarIdsFromTree(
+    const ids = collectVarIdsFromTree(
       // @ts-ignore
       node.if
     );
-    variableIdentifiers = variableIdentifiers.concat(identifiers);
+    varIds = varIds.concat(ids);
   }
 
-  const uniqueIdentifiers = Array.from(new Set(variableIdentifiers));
-
-  // return the unique identifiers
-  return Array.from(uniqueIdentifiers);
+  // remove duplicates
+  return Array.from(new Set(varIds));
 }

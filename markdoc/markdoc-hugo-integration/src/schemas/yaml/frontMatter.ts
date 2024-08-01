@@ -8,7 +8,7 @@ import { SNAKE_CASE_REGEX, PREF_OPTIONS_ID_REGEX } from './../regexes';
 export const PagePrefConfigSchema = z
   .object({
     display_name: z.string(),
-    identifier: z.string().regex(SNAKE_CASE_REGEX),
+    id: z.string().regex(SNAKE_CASE_REGEX),
     options_source: z.string().regex(PREF_OPTIONS_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional()
   })
@@ -17,7 +17,7 @@ export const PagePrefConfigSchema = z
 export const MinifiedPagePrefConfigSchema = z
   .object({
     n: z.string(), // display name
-    i: z.string().regex(SNAKE_CASE_REGEX), // identifier
+    i: z.string().regex(SNAKE_CASE_REGEX), // id
     o: z.string().regex(PREF_OPTIONS_ID_REGEX), // options source
     d: z.string().regex(SNAKE_CASE_REGEX).optional() // default value
   })
@@ -27,7 +27,7 @@ export const MinifiedPagePrefConfigSchema = z
 // to keep Zod out of the browser bundle
 export interface MinifiedPagePrefConfig {
   n: string; // display name
-  i: string; // identifier
+  i: string; // ID
   o: string; // options source
   d?: string; // default value
 }
@@ -45,7 +45,7 @@ export type MinifiedPagePrefsConfig = Array<MinifiedPagePrefConfig>;
  * @example
  * {
  *   display_name: "Database",
- *   identifier: "database",
+ *   id: "database",
  *   options_source: "dbm_database_options",
  *   default_value: "postgres" // optional override
  * }
@@ -109,17 +109,17 @@ export const FrontmatterSchema = z.object({
  *   page_preferences: [
  *     {
  *       display_name: "Color",
- *       identifier: "color",
+ *       id: "color",
  *       options_source: "color_options"
  *     },
  *     {
  *       display_name: "Finish",
- *       identifier: "finish",
+ *       id: "finish",
  *       options_source: "paint_finish_options"
  *     },
  *     {
  *       display_name: "Paint color",
- *       identifier: "paint_color",
+ *       id: "paint_color",
  *       options_source: "<FINISH>_<COLOR>_paint_options"
  *     }
  *   ]

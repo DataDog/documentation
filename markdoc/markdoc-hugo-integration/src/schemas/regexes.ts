@@ -17,15 +17,15 @@ export const PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
 export const GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
 
 /**
- * A regex that matches a preference options set identifier.
+ * A regex that matches a preference options set ID.
  *
- * The identifier must:
+ * The ID must:
  * - be in snake case
  * - be all lowercase except for placeholders,
  *   which are uppercase and bracketed (`<PLACEHOLDER>`, `<MY_PLACEHOLDER>`)
  * - end with the literal string "_options"
  *
- * Valid identifier examples:
+ * Valid ID examples:
  * - `paint_options`
  * - `<COLOR>_paint_options`
  * - `matte_<COLOR>_paint_options`

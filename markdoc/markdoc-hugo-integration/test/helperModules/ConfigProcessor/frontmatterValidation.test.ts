@@ -22,18 +22,18 @@ describe('ConfigProcessor.getPrefOptionsForPage', () => {
       page_preferences: [
         {
           display_name: 'Color',
-          identifier: 'color',
+          id: 'color',
           options_source: 'color_options'
         },
         {
           display_name: 'Finish',
-          identifier: 'finish',
+          id: 'finish',
           options_source: 'finish_options'
         },
         // This placeholder below is invalid because 'color' is misspelled
         {
           display_name: 'Paint color',
-          identifier: 'paint',
+          id: 'paint',
           options_source: '<FINISH>_<COLOUR>_paint_options'
         }
       ]
@@ -44,7 +44,7 @@ describe('ConfigProcessor.getPrefOptionsForPage', () => {
         paintColorsPrefOptionsConfig
       )
     ).toThrowError(
-      `Placeholder <COLOUR> does not refer to a valid page preference identifier. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_preferences list before it is referenced in <COLOUR>.`
+      `Placeholder <COLOUR> does not refer to a valid page preference ID. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_preferences list before it is referenced in <COLOUR>.`
     );
   });
 

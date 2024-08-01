@@ -3,12 +3,12 @@
   "page_preferences": [
     {
       "display_name": "Color",
-      "identifier": "color",
+      "id": "color",
       "options_source": "traffic_light_color_options"
     },
     {
       "display_name": "Item",
-      "identifier": "item",
+      "id": "item",
       "options_source": "<COLOR>_item_options"
     }
   ]

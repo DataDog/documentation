@@ -1,10 +1,10 @@
-# This file simply lists the allowed identifiers for sitewide preferences
+# This file simply lists the allowed IDs for sitewide preferences
 # such as database, host, programming_language, and so on.
 # It's used to prevent authors from making a configuration mistake such as
 # referring to 'datbase' instead of 'database'.
 #
-# The only identifier needed for the tests is `color`, but the typical
-# sitewide preference identifiers could include:
+# The only ID needed for the tests is `color`, but the typical
+# sitewide preference IDs could include:
 # 
 # - dd_agent_version
 # - programming_language
@@ -14,5 +14,5 @@
 # - host
 # - operating_system
 
-valid_sitewide_preference_identifiers:
+valid_sitewide_preference_ids:
   - color

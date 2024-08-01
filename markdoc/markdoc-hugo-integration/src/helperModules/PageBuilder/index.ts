@@ -151,11 +151,7 @@ ${rerenderScript}
    * Provide the JavaScript code for the client-side renderer.
    */
   static getClientRendererScriptStr(debug: boolean) {
-    if (debug) {
-      return clientRendererScriptStr;
-    } else {
-      return minifiedClientRendererScriptStr;
-    }
+    return minifiedClientRendererScriptStr;
   }
 
   /**

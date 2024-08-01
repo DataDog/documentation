@@ -1,10 +1,10 @@
 yellow_item_options:
   - display_name: Banana
-    identifier: banana
+    id: banana
     default: true
   - display_name: Sunflower
-    identifier: sunflower
+    id: sunflower
   - display_name: Lemon
-    identifier: lemon
+    id: lemon
   - display_name: School bus
-    identifier: school_bus
+    id: school_bus

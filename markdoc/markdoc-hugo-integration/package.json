@@ -5,8 +5,8 @@
     "scripts": {
         "test": "npm run build; vitest run --coverage --reporter=verbose",
         "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets",
-        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --tree-shaking=true --bundle --minify > ./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.min.js",
-        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --tree-shaking=true --bundle > ./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.js",
+        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.min.js'",
+        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.js'",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets && npm run copy-compiled-scripts",
         "copy-assets": "cp -r ./src/helperModules/PageBuilder/assets ./dist/helperModules/PageBuilder",
         "copy-compiled-scripts": "cp -r ./src/helperModules/PageBuilder/compiledScripts ./dist/helperModules/PageBuilder"
@@ -20,6 +20,7 @@
     },
     "devDependencies": {
         "@types/js-yaml": "^4.0.9",
+        "@types/lodash": "^4.17.7",
         "@types/node": "^20.11.30",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
