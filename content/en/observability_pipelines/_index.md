@@ -13,7 +13,7 @@ further_reading:
   text: "Sensitive Data Scanner"
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
   tag: "documentation"
-  text: "Dual shipping with Observability Pipelines"
+  text: "Dual ship to Observability Pipelines with the Datadog Agent"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
   tag: "blog"
   text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
@@ -66,6 +66,7 @@ To set up a pipeline:
     - [Split logs][4]
     - [Archive logs to Datadog Archives][5]
     - [Sensitive data redaction][6]
+    - [Log Enrichment][7]
 1. Select and set up your source.
 1. Select and set up your destinations.
 1. Set up you processors.
@@ -74,6 +75,7 @@ To set up a pipeline:
 
 See [Set Up Pipelines][7] for more information.
 
+See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Further Reading
@@ -86,5 +88,6 @@ See [Advanced Configurations][8] for bootstrapping options and for details on se
 [4]: /observability_pipelines/split_logs/
 [5]: /observability_pipelines/archive_logs/
 [6]: /observability_pipelines/sensitive_data_redaction/
-[7]: /observability_pipelines/set_up_pipelines/
+[7]: /observability_pipelines/log_enrichment/
+[8]: /observability_pipelines/set_up_pipelines/
 [8]: /observability_pipelines/advanced_configurations/

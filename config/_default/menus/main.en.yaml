@@ -2306,26 +2306,36 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 401
+    - name: Events
+      url: service_management/app_builder/events/
+      parent: app_builder
+      identifier: app_builder_events
+      weight: 5
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 5
+      weight: 6
+    - name: Variables
+      url: service_management/app_builder/variables/
+      parent: app_builder
+      identifier: app_builder_variables
+      weight: 7
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 6
+      weight: 8
     - name: Private Actions
       url: service_management/app_builder/private_actions/
       parent: app_builder
       identifier: app_builder_private_actions
-      weight: 7
+      weight: 9
     - name: Private Action Credentials
       url: service_management/app_builder/private_actions/private_action_credentials/
       parent: app_builder_private_actions
       identifier: app_builder_private_actions_creds
-      weight: 701
+      weight: 901
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -3321,6 +3331,11 @@ menu:
       identifier: tracing_troubleshooting_quantization
       parent: tracing_troubleshooting
       weight: 1310
+    - name: Frequently Asked Questions
+      url: tracing/troubleshooting/faq_apm
+      identifier: tracing_faq_apm
+      parent: tracing_troubleshooting
+      weight: 1311
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
@@ -4136,6 +4151,11 @@ menu:
       parent: code_analysis
       identifier: code_analysis_troubleshooting
       weight: 6
+    - name: Frequently Asked Questions
+      url: code_analysis/faq
+      parent: code_analysis
+      identifier: code_analysis_faq
+      weight: 7
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -4434,6 +4454,46 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_syslog
       weight: 5017
+    - name: Log Enrichment
+      url: observability_pipelines/log_enrichment/
+      parent: observability_pipelines_set_up_pipelines
+      identifier: observability_pipelines_log_enrichment
+      weight: 106
+    - name: Datadog Agent
+      url: observability_pipelines/log_enrichment/datadog_agent/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_datadog_agent
+      weight: 6011
+    - name: Fluent
+      url: observability_pipelines/log_enrichment/fluent/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_fluent
+      weight: 6012
+    - name: HTTP Client
+      url: observability_pipelines/log_enrichment/http_client/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_http_client
+      weight: 6013
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/log_enrichment/splunk_hec/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_splunk_hec
+      weight: 6014
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/log_enrichment/splunk_tcp/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_splunk_tcp
+      weight: 6015
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/log_enrichment/sumo_logic_hosted_collector/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_sumo_logic_hosted_collector
+      weight: 6016
+    - name: Syslog
+      url: observability_pipelines/log_enrichment/syslog/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_syslog
+      weight: 6017
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines

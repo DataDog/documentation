@@ -1143,5 +1143,12 @@
       "suffix": "",
       "description": "Update a user returns \"OK\" response"
     }
+  ],
+  "CreateWorkflowInstance": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Execute a workflow returns \"Created\" response"
+    }
   ]
 }

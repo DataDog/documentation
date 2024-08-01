@@ -1744,5 +1744,23 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "ListWorkflowInstances": {
+    "description": "List all instances of a given workflow.",
+    "summary": "List workflow instances"
+  },
+  "CreateWorkflowInstance": {
+    "description": "Execute the given workflow",
+    "summary": "Execute a workflow",
+    "request_description": "",
+    "request_schema_description": "Request used to create a workflow instance."
+  },
+  "GetWorkflowInstance": {
+    "description": "Get a specific execution of a given workflow.",
+    "summary": "Get a workflow instance"
+  },
+  "CancelWorkflowInstance": {
+    "description": "Cancels a specific execution of a given workflow.",
+    "summary": "Cancel a workflow instance"
   }
 }
