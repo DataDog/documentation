@@ -69,9 +69,9 @@ For a Docker Linux container:
      -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-     -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-     -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-     -v /opt/datadog/apm:/opt/datadog/apm \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
