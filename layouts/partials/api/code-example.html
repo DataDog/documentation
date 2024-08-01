@@ -67,7 +67,11 @@
 {{- /* Use global authentication */ -}}
   &nbsp;<span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span>&nbsp;<span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
 {{- end -}}
+{{- if eq $lang.name "rust" -}}
+&nbsp;<span class="n">cargo run</span></div></code></pre>
+{{- else -}}
 &nbsp;<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
+{{- end -}}
 {{ end }}
 
 {{ define "partials/accordion-card" }}
