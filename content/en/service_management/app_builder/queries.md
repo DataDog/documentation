@@ -79,7 +79,7 @@ This app triggers a workflow, which sends a poll to a Slack channel asking the u
 ##### Create workflow
 
 1. In a new workflow canvas, under **Datadog Triggers**, click **App**. 
-1. Under the **App** trigger step, click the plus (**+**) icon then search for "Make a decision" and select the **Make a decision** Slack action.
+1. Under the **App** trigger step, click the plus (**+**) icon, then search for "Make a decision" and select the **Make a decision** Slack action.
 1. Select your workspace and choose a channel to poll.
 1. Fill in the prompt text "Cat fact or dog fact?" and change the button choices to "Cat fact" and "Dog fact".
 1. Under the **Make a decision** step in the canvas, click the plus (**+**) icon above **Cat fact** and add the **Make request** HTTP action.
