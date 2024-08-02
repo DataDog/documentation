@@ -32,21 +32,38 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
-The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
+The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/context_npm3.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
 {{< img src="network_performance_monitoring/network_analytics/flow_table_region_az2.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
-You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
+You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
+
+Additionally, set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+### Tagging
 
-You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
+Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.  
+
+In the following illustration, when grouping from **client** tag `service` to **server** tag `service`, the resulting data displays the traffic flow from `service2` to `service3`: 
+
+{{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
+
+To further elaborate on the above diagram, the following shows the traffic flow when grouped by the respective **client** and **server** tags:
+
+| Client Tags              | Server Tags              | Traffic Flow Result       |
+|--------------------------|--------------------------|---------------------------|
+| `service`     | `service`     | `service2` **&#8594;** `service3` |
+| `container` | `container` | `container2` **&#8594;** `container3` |
+| `az`               | `az`               | `az2` **&#8594;** `az3`           |
+| `region`       | `region`       | `region1` **&#8594;** `region2`   |
+
+See [custom facets](#custom-facets), below, for other tags. 
 
 ### Recommended queries
 
@@ -345,5 +362,6 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
-[11]: /getting_started/tagging/unified_service_tagging/
-[12]: /network_monitoring/network_path
+[11]: /network_monitoring/network_path
+[12]: /getting_started/tagging/unified_service_tagging/
+
