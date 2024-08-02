@@ -4146,16 +4146,21 @@ menu:
       parent: code_analysis
       identifier: code_analysis_ide_plugins
       weight: 5
+    - name: Git Hooks
+      url: code_analysis/git_hooks
+      parent: code_analysis
+      identifier: code_analysis_git_hooks
+      weight: 6
     - name: Troubleshooting
       url: code_analysis/troubleshooting
       parent: code_analysis
       identifier: code_analysis_troubleshooting
-      weight: 6
+      weight: 7
     - name: Frequently Asked Questions
       url: code_analysis/faq
       parent: code_analysis
       identifier: code_analysis_faq
-      weight: 7
+      weight: 8
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -5169,7 +5174,7 @@ menu:
       url: security/application_security/software_composition_analysis/setup/compatibility/
       parent: application_security_software_composition_analysis_setup
       identifier: appsec_compat_sca
-      weight: 2      
+      weight: 2
     - name: Code Security
       url: security/application_security/code_security/
       parent: application_security
@@ -5184,7 +5189,7 @@ menu:
       url: security/application_security/code_security/setup/compatibility/
       parent: application_security_code_security_setup
       identifier: appsec_compat_code_security
-      weight: 2      
+      weight: 2
     - name: Threat Management
       url: security/application_security/threats/
       parent: application_security
