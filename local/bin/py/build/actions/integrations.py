@@ -267,7 +267,7 @@ class Integrations:
             glob.iglob(pattern, recursive=True)
             for pattern in content["globs"]
         ):
-            if file_name.endswith(".csv"):
+            if file_name.endswith(".csv") or file_name.endswith("metric-spec.yaml"):
                 self.process_integration_metric(file_name)
 
             elif file_name.endswith("manifest.json"):
@@ -391,8 +391,8 @@ class Integrations:
 
     def process_integration_metric(self, file_name):
         """
-        Take a single metadata csv file and convert it to yaml
-        :param file_name: path to a metadata csv file
+        Take a single metadata or metric spec file and formats it to yaml
+        :param file_name: path to a metadata csv or yaml file
         """
         if file_name.endswith("/metadata.csv") or file_name.endswith("/metric_spec.yaml"):
             key_name = basename(
@@ -698,6 +698,10 @@ class Integrations:
         tab_logic = False
         metrics = glob.glob(
             "{path}{sep}*metadata.csv".format(
+                path=dirname(file_name), sep=sep
+            )
+        ) + glob.glob(
+            "{path}{sep}*metric-spec.yaml".format(
                 path=dirname(file_name), sep=sep
             )
         )
