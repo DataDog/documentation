@@ -83,7 +83,7 @@ To find the metrics not actively queried in the past 30 days, click on **Not Act
 
 ## How to quickly reduce metric volume and cost
 
-After you identify unqueried metrics, you can quickly and confidently eliminate the volume and cost of these metric names by using [Metrics without Limits™][3] without a single line of code. By using Metrics without Limits, you ensure that you pay only for the metrics that you use by eliminating timeseries that are never or rarely leveraged. Based on our intelligent query insights, the average customer's custom metrics volume can be reduced by 70% if they were to use Metrics without Limits on their unqueried metric names. 
+After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][3] without a single line of code. By using Metrics without Limits, you ensure that you pay only for the metrics that you use by eliminating timeseries that are never or rarely leveraged. Use Metrics without Limits™ on your unqueried metric names to reduce custom metrics volume. 
 
 To configure multiple unqueried metrics at once
 1. Click the **Configure Metrics** dropdown and select **Manage Tags** to open the [Metrics without Limits™ Tag configuration modal][4].
