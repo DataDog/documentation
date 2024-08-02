@@ -77,7 +77,7 @@ To compare your spiking metric's cardinality over time:
 
 {{< img src="metrics/volume/id_unqueried_metrics.png" alt="Facet fields for Query Activity with the 'Not actively queried' facet selected" style="width:100%;" >}}
 
-To start reducing custom metrics costs, organizations often start with their largest metric names that aren't valuable to the organization; in other words, ones that aren't actively queried. Datadog's intelligent query insights analyze your queries and surfaces your unqueried metrics over the past 30 days. Our analysis is constantly running in the background ensuring that your unqueried metrics are always up-to-date and available self-service.
+To start reducing custom metrics costs, start with your largest metric names that aren't actively queried. Datadog's intelligent query insights analyze your queries and surfaces your unqueried metrics over the past 30 days. This analysis is constantly running in the background ensuring that your unqueried metrics are always up-to-date.
 
 To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the *Query Activity Facet* box. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
 
