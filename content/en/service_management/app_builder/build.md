@@ -117,4 +117,4 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 [9]: /service_management/app_builder/components
 [10]: https://app.datadoghq.com/app-builder/action-catalog
 [11]: /service_management/app_builder/events
-[11]: /service_management/app_builder/queries
+[12]: /service_management/app_builder/queries
