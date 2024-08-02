@@ -25,6 +25,10 @@ Datadog uses these ingested logs to generate [enhanced metrics][8] for your Step
 
 ### Setup
 
+Ensure that the [AWS Step Functions integration][9] is installed.
+
+Then, to send your Step Functions logs to Datadog:
+
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
@@ -193,7 +197,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 ## Link Step Functions with your AWS Lambda traces
 
-TK
+Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
 
 ## See your Step Function metrics, logs, and traces in Datadog
 
@@ -209,3 +213,5 @@ If you cannot see your traces, see [Troubleshooting][5].
 [6]: /logs/guide/forwarder
 [7]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
 [8]: /serverless/step_functions/enhanced-metrics
+[9]: /integrations/amazon_step_functions
+[10]: /serverless/aws_lambda/installation
