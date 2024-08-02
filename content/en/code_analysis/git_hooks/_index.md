@@ -22,7 +22,7 @@ and ensure the code enforces some requirements before it's being pushed.
 ## How Datadog Git Hooks work?
 
 Datadog Code Analysis provides a Git Hook to check for static analysis
-violations or secrets  before code is pushed or committed. The Datadog Code Analysis Git Hook
+violations or secrets before code is pushed or committed. The Datadog Code Analysis Git Hook
 checks the code of the latest commit and the default branch and surfaces
 any errors it detects.
 
