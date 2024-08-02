@@ -100,6 +100,24 @@ Attack attempts were detected targeting the serverless application.
 
 **Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
 
+### Under provisioned
+
+CPU utilization for this function averaged more than 80%. This means your function may benefit from additional CPU resources.
+
+**Resolution:** Consider increasing the amount of allocated memory on your Lambda function. Increasing the amount of memory scales available CPU resources. Note this may affect your AWS bill.
+
+### Overallocated provisioned concurrency
+
+The function's provisioned concurrency utilization was below 60%. According to AWS, provisioned concurrency is best optimized for cost when utilization is consistently greater than 60%.
+
+**Resolution:** Consider decreasing the amount of configured provisioned concurrency for your function.
+
+### Deprecated runtime
+
+The function's runtime is no longer supported.
+
+**Resolution:** Upgrade to the latest runtime to ensure you are up to date on the latest security, performance, and reliability standards.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
