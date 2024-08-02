@@ -16522,6 +16522,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToPermissionData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToPermissionData:
       description: Relationship to permission object.
       properties:
@@ -16531,6 +16533,8 @@ components:
         type:
           $ref: '#/components/schemas/PermissionsType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToPermissions:
       description: Relationship to multiple permissions objects.
       properties:
@@ -16540,6 +16544,8 @@ components:
             $ref: '#/components/schemas/RelationshipToPermissionData'
           type: array
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRole:
       description: Relationship to role.
       properties:
@@ -17322,6 +17328,8 @@ components:
       required:
       - type
       type: object
+      x-merge-override:
+        required: false
     RoleAttributes:
       description: Attributes of the role.
       properties:
@@ -17441,8 +17449,6 @@ components:
       properties:
         permissions:
           $ref: '#/components/schemas/RelationshipToPermissions'
-        users:
-          $ref: '#/components/schemas/RelationshipToUsers'
       type: object
     RoleResponse:
       description: Response containing information about a single role.
@@ -17472,6 +17478,11 @@ components:
         name:
           description: Name of the role.
           type: string
+        user_count:
+          description: The user count.
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     RoleUpdateData:
       description: Data related to the update of a role.
@@ -17491,6 +17502,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     RoleUpdateRequest:
       description: Update a role.
       properties:
@@ -22807,6 +22820,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamLinkAttributes:
       description: Team link attributes
       properties:
@@ -24248,6 +24263,10 @@ components:
               have permission to edit those SLOs.
             slos_read: View SLOs and status corrections.
             slos_write: Create, edit, and delete SLOs.
+            synthetics_default_settings_read: View the default settings for Synthetic
+              Monitoring.
+            synthetics_default_settings_write: Edit the default settings for Synthetic
+              Monitoring.
             synthetics_global_variable_read: View, search, and use Synthetics global
               variables.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -24494,6 +24513,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -25290,6 +25311,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -27087,6 +27110,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/cost/custom_costs:
     get:
       description: List the Custom Costs files.
@@ -27610,6 +27635,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -28588,6 +28615,8 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    x-merge-override:
+      delete: true
   /api/v2/incidents/{incident_id}/attachments:
     get:
       description: Get all attachments for a given incident.
@@ -29445,6 +29474,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -30133,6 +30164,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
       description: Delete a Fastly service for an account.
@@ -30219,6 +30252,7 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      get: true
       patch: true
   /api/v2/integrations/okta/accounts:
     get:
@@ -30387,6 +30421,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      get: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -33735,6 +33771,8 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -34174,22 +34212,34 @@ paths:
 
         - Service Level Objectives: `slo`
 
+        - Synthetic Global Variable: `synthetic-global-variable`
+
+        - Synthetic Test: `synthetic-test`
+
+        - Synthetic Private Location: `synthetic-private-location`
+
 
         #### Supported relations for resources
 
-        Resource Type            | Supported Relations
+        Resource Type              | Supported Relations
 
-        -------------------------|--------------------------
+        ---------------------------|--------------------------
 
-        Dashboards               | `viewer`, `editor`
+        Dashboards                 | `viewer`, `editor`
 
-        Notebooks                | `viewer`, `editor`
+        Notebooks                  | `viewer`, `editor`
 
-        Powerpacks               | `viewer`, `editor`
+        Powerpacks                 | `viewer`, `editor`
 
-        Security Rules           | `viewer`, `editor`
+        Security Rules             | `viewer`, `editor`
 
-        Service Level Objectives | `viewer`, `editor`'
+        Service Level Objectives   | `viewer`, `editor`
+
+        Synthetic Global Variable  | `viewer`, `editor`
+
+        Synthetic Test             | `viewer`, `editor`
+
+        Synthetic Private Location | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -34463,6 +34513,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/roles/{role_id}/clone:
     post:
       description: Clone an existing role
@@ -34524,6 +34577,8 @@ paths:
         - name: role_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -34672,6 +34727,10 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
+      get: true
+      post: true
   /api/v2/roles/{role_id}/users:
     delete:
       description: Removes a user from a role.
@@ -35027,6 +35086,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -37535,6 +37596,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/services:
     get:
       deprecated: true
@@ -38548,6 +38611,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -38790,8 +38855,6 @@ paths:
       x-menu-order: 13
       x-undo:
         type: idempotent
-    x-merge-override:
-      patch: true
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
@@ -39007,6 +39070,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -40317,6 +40382,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/users/{user_id}/orgs:
     get:
       description: 'Get a user organization. Returns the user information and all
@@ -40398,6 +40465,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/users/{user_uuid}/memberships:
     get:
       description: Get a list of memberships for a user
@@ -40437,7 +40506,8 @@ paths:
         type: safe
   /api/v2/workflows/{workflow_id}/instances:
     get:
-      description: List all instances of a given workflow.
+      description: List all instances of a given workflow. This API requires an application
+        key scoped with the workflows_read permission.
       operationId: ListWorkflowInstances
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -40456,6 +40526,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_read
       summary: List workflow instances
       tags:
       - Workflow Automation
@@ -40463,7 +40538,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Execute the given workflow
+      description: Execute the given workflow. This API requires an application key
+        scoped with the workflows_run permission.
       operationId: CreateWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -40495,7 +40571,8 @@ paths:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}:
     get:
-      description: Get a specific execution of a given workflow.
+      description: Get a specific execution of a given workflow. This API requires
+        an application key scoped with the workflows_read permission.
       operationId: GetWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -40523,7 +40600,8 @@ paths:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
     put:
-      description: Cancels a specific execution of a given workflow.
+      description: Cancels a specific execution of a given workflow. This API requires
+        an application key scoped with the workflows_run permission.
       operationId: CancelWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'

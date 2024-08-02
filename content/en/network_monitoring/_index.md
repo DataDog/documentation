@@ -27,7 +27,7 @@ cascade:
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=NPM">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=NPM">}}
   Learn how Datadog Network Performance Monitoring provides full visibility into every network component that makes up your on-prem, cloud, and hybrid environments, with minimal overhead.
 {{< /learning-center-callout >}}
 

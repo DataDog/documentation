@@ -441,10 +441,10 @@ In the Docker compose file that launches your containers, use the following sett
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket
-      - DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket
+      - DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket
+      - DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket
     volumes:
-      - /opt/datadog/apm:/opt/datadog/apm
+      - /var/run/datadog:/var/run/datadog
       - /var/run/docker.sock:/var/run/docker.sock:ro
 ```
 
@@ -555,7 +555,7 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/library_config/
-[3]: /security/application_security/enabling/tracing_libraries/threat_detection/java
+[3]: /security/application_security/threats/setup/threat_detection/java/
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
 [5]: /tracing/trace_collection/automatic_instrumentation/
 [6]: /tracing/trace_collection/single-step-apm

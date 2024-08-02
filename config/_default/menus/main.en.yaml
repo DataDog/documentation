@@ -1725,21 +1725,26 @@ menu:
       url: metrics/summary/
       parent: metrics_top_level
       weight: 6
+    - name: Volume
+      identifier: metrics_volume
+      url: metrics/volume/
+      parent: metrics_top_level
+      weight: 7
     - name: Advanced Filtering
       url: metrics/advanced-filtering/
       parent: metrics_top_level
       identifier: metrics_advanced_filtering
-      weight: 7
+      weight: 8
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 8
+      weight: 9
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 9
+      weight: 10
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
@@ -5150,141 +5155,136 @@ menu:
       parent: application_security
       identifier: appsec_terms
       weight: 1
-    - name: Enabling ASM
-      url: security/application_security/enabling/
-      parent: application_security
-      identifier: appsec_getting_started
-      weight: 2
-    - name: Library Compatibility
-      url: security/application_security/enabling/compatibility/
-      parent: appsec_getting_started
-      identifier: appsec_compat
-      weight: 201
-    - name: Using Single Step Instrumentation
-      url: security/application_security/enabling/single_step/
-      parent: appsec_getting_started
-      identifier: appsec_enabling_single_step
-      weight: 202
-    - name: Threat Detection and Protection
-      url: security/application_security/enabling/single_step/threat_detection/
-      parent: appsec_enabling_single_step
-      identifier: appsec_enabling_single_step_threats
-      weight: 2101
-    - name: Code Security
-      url: security/application_security/enabling/single_step/code_security/
-      parent: appsec_enabling_single_step
-      identifier: appsec_enabling_single_step_code
-      weight: 2102
-    - name: Using Datadog Tracing libraries
-      url: security/application_security/enabling/tracing_libraries/
-      parent: appsec_getting_started
-      identifier: appsec_enabling_tracing_libraries
-      weight: 203
-    - name: Threat Detection and Protection
-      url: security/application_security/enabling/tracing_libraries/threat_detection/
-      parent: appsec_enabling_tracing_libraries
-      identifier: appsec_enabling_tracing_libraries_threats
-      weight: 204
-    - name: Code Security
-      url: security/application_security/enabling/tracing_libraries/code_security/
-      parent: appsec_enabling_tracing_libraries
-      identifier: appsec_enabling_tracing_libraries_code
-      weight: 205
-    - name: Software Composition Analysis
-      url: security/application_security/enabling/tracing_libraries/sca/
-      parent: appsec_enabling_tracing_libraries
-      identifier: appsec_enabling_tracing_libraries_sca
-      weight: 206
-    - name: Enabling ASM for Serverless
-      url: security/application_security/enabling/serverless/
-      parent: appsec_getting_started
-      identifier: appsec_enabling_serverless
-      weight: 207
     - name: How It Works
       url: security/application_security/how-appsec-works/
       parent: application_security
       identifier: appsec_howitworks
       weight: 3
     - name: Software Composition Analysis
-      url: security/application_security/software_composition_analysis
+      url: security/application_security/software_composition_analysis/
       parent: application_security
       identifier: application_security_software_composition_analysis
       weight: 5
+    - name: Setup
+      url: security/application_security/software_composition_analysis/setup/
+      parent: application_security_software_composition_analysis
+      identifier: application_security_software_composition_analysis_setup
+      weight: 1
+    - name: Library Compatibility
+      url: security/application_security/software_composition_analysis/setup/compatibility/
+      parent: application_security_software_composition_analysis_setup
+      identifier: appsec_compat_sca
+      weight: 2      
     - name: Code Security
       url: security/application_security/code_security/
       parent: application_security
       identifier: application_security_code_security
       weight: 6
+    - name: Setup
+      url: security/application_security/code_security/setup/
+      parent: application_security_code_security
+      identifier: application_security_code_security_setup
+      weight: 1
+    - name: Library Compatibility
+      url: security/application_security/code_security/setup/compatibility/
+      parent: application_security_code_security_setup
+      identifier: appsec_compat_code_security
+      weight: 2      
     - name: Threat Management
       url: security/application_security/threats/
       parent: application_security
       identifier: appsec_threats
       weight: 7
+    - name: Setup
+      url: security/application_security/threats/setup/
+      parent: appsec_threats
+      identifier: appsec_threats_management_setup
+      weight: 700
+    - name: Library Compatibility
+      url: security/application_security/threats/setup/compatibility/
+      parent: appsec_threats_management_setup
+      identifier: appsec_compat_threats_mgmt
+      weight: 701
+    - name: Using Single Step Instrumentation
+      url: security/application_security/threats/setup/single_step/
+      parent: appsec_threats_management_setup
+      identifier: appsec_threats_setup_using_single_step
+      weight: 702
+    - name: Using Datadog Tracing Libraries
+      url: security/application_security/threats/setup/threat_detection/
+      parent: appsec_threats_management_setup
+      identifier: appsec_threats_setup_threat_detection_setup
+      weight: 703
     - name: Attack Summary
       url: security/application_security/threats/attack-summary/
       parent: appsec_threats
       identifier: attack_summary_overview
-      weight: 701
+      weight: 704
     - name: Attacker Explorer
       url: security/application_security/threats/attacker-explorer/
       parent: appsec_threats
       identifier: threats_attackers
-      weight: 702
+      weight: 705
     - name: Custom Detection Rules
       url: security/application_security/threats/custom_rules/
       parent: appsec_threats
       identifier: threats_custom_rules
-      weight: 703
+      weight: 706
     - name: Exploit Prevention
       url: security/application_security/threats/exploit-prevention/
       parent: appsec_threats
       identifier: exploit_prevention
-      weight: 704
+      weight: 707
     - name: In-App WAF Rules
       url: security/application_security/threats/inapp_waf_rules/
       parent: appsec_threats
       identifier: threats_event_rules
-      weight: 705
-    - name: Library Configuration
-      url: security/application_security/threats/library_configuration/
-      parent: appsec_threats
-      identifier: threats_configuration
-      weight: 706
+      weight: 708
     - name: OOTB Rules
       url: security/default_rules/#cat-application-security
       parent: appsec_threats
       identifier: appsec_default_rules
-      weight: 707
+      weight: 710
     - name: Protection
       url: security/application_security/threats/protection/
       parent: appsec_threats
       identifier: threats_protection
-      weight: 708
+      weight: 718
     - name: Security Signals
       url: security/application_security/threats/security_signals/
       parent: appsec_threats
       identifier: threats_security_signals
-      weight: 709
+      weight: 719
     - name: Threat Intelligence
       url: security/application_security/threats/threat-intelligence/
       parent: appsec_threats
       identifier: threats_threat_intelligence
-      weight: 710
+      weight: 720
     - name: Trace Qualification
       url: security/application_security/threats/trace_qualification/
       parent: appsec_threats
       identifier: threats_trace_qualification
-      weight: 711
+      weight: 721
     - name: User Monitoring and Protection
       url: security/application_security/threats/add-user-info/
       parent: appsec_threats
       identifier: threats_user_info
-      weight: 712
+      weight: 722
+    - name: Application Security for Serverless
+      url: security/application_security/serverless/
+      parent: application_security
+      identifier: asm_serverless
+      weight: 8
+    - name: Library Compatibility
+      url: security/application_security/serverless/compatibility/
+      parent: asm_serverless
+      identifier: asm_serverless_compat
+      weight: 1
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
       identifier: asm_api_security
-      weight: 8
+      weight: 9
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
