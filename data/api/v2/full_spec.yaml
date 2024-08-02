@@ -24511,6 +24511,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -25307,6 +25309,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -27104,6 +27108,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/cost/custom_costs:
     get:
       description: List the Custom Costs files.
@@ -27627,6 +27633,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -28605,6 +28613,8 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    x-merge-override:
+      delete: true
   /api/v2/incidents/{incident_id}/attachments:
     get:
       description: Get all attachments for a given incident.
@@ -29462,6 +29472,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -30150,6 +30162,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
       description: Delete a Fastly service for an account.
@@ -30236,6 +30250,7 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      get: true
       patch: true
   /api/v2/integrations/okta/accounts:
     get:
@@ -30404,6 +30419,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      get: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -33752,6 +33769,8 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -34493,6 +34512,7 @@ paths:
       x-undo:
         type: idempotent
     x-merge-override:
+      delete: true
       patch: true
   /api/v2/roles/{role_id}/clone:
     post:
@@ -34705,6 +34725,7 @@ paths:
         type: safe
     x-merge-override:
       delete: true
+      get: true
       post: true
   /api/v2/roles/{role_id}/users:
     delete:
@@ -35061,6 +35082,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -37569,6 +37592,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/services:
     get:
       deprecated: true
@@ -38582,6 +38607,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -38824,8 +38851,6 @@ paths:
       x-menu-order: 13
       x-undo:
         type: idempotent
-    x-merge-override:
-      patch: true
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
@@ -39041,6 +39066,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -40351,6 +40378,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/users/{user_id}/orgs:
     get:
       description: 'Get a user organization. Returns the user information and all
@@ -40432,6 +40461,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/users/{user_uuid}/memberships:
     get:
       description: Get a list of memberships for a user
