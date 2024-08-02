@@ -22,7 +22,7 @@ Cloud-based applications generate massive amounts of data, which can be overwhel
 
 Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][3], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
-With the Metrics Volume Management page you can quickly answer the following questions in real-time: 
+With the Metrics Volume Management page you can access the following in real-time: 
 - What is my overall account's realtime estimated Indexed Custom Metrics usage?
 - What is my overall account's realtime estimated Ingested Custom Metrics usage?
 - What are the Top 500 largest Metrics without Limits configured metric names by Ingested Custom Metrics volume?
