@@ -192,9 +192,13 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 ## Edit a recording 
 
-To edit a mobile recording after it's saved, navigate to [Synthetics > Tests][7], click on a previously saved mobile test, click the gear icon on the top right hand corner and then click "edit recording".
+To edit a mobile recording after it's saved:
 
-Select multiple or single steps for deletion or replay, then click "Save & Quit".
+- Navigate to [Synthetics > Tests.][7]
+- Click on a previously saved mobile test.
+- Click the gear icon on the top right hand corner and then click "edit recording".
+- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+- Select multiple or single steps for deletion or replay, then click "Save & Quit".
 
 {{< img src="mobile_app_testing/test_steps/edit-mobile-recording.png" alt="Editing a mobile recording, and using the multi-select feature" width="70%" >}}
 
