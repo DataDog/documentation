@@ -120,7 +120,7 @@ To connect App Builder to the workflow, perform the following steps:
 1. Add a text component. Under **Content**, enter the expression `${triggerWorkflow0?.outputs?.workflowOutputs?.output}`.
 1. Add a button component. Use the following values:
     * **Label**: "Trigger Workflow"
-    * **Is Loading**: `${triggerWorkflow0.isLoading}` (click the **</>** to enter an expression)
+    * **Is Loading**: `${triggerWorkflow0.isLoading}` (click **</>** to enter an expression)
 1. Under the button's **Events**, click the plus (**+**) to add an event. Use the following values:
     * **Event**: click
     * **Reaction**: Trigger Query
