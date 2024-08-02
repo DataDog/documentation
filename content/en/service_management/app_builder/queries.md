@@ -130,7 +130,7 @@ To connect App Builder to the workflow, perform the following steps:
 1. In your app, click **Preview**.
 1. Click the **Trigger Workflow** button.
 1. In the Slack channel you selected, answer the poll question.<br>
-    Your app displays results related to the option you chose.
+    Your app displays a result related to the option you chose.
 {{% /collapse-content %}} 
 
 ## Further reading
