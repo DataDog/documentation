@@ -104,9 +104,7 @@ Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attrib
 1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Use grok processors to parse out attributes and enrich logs prior to remapping or further processing.
 2. After extracting log attributes, remap them to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
 3. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
-4. Namespace any generic log attributes that **do not** fit a standard attribute.  
-For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
-5. For more advanced processing and data transformations, make use of additional [processors][10].  
+4. For more advanced processing and data transformations, make use of additional [processors][10].  
 For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
 **Tips**
@@ -147,8 +145,8 @@ They allow for better findability of application logs by populating autocomplete
 ##### Requirements
 
 Attributes mapped to custom facets must be namespaced first
-: Generic custom attributes that do not map to [Datadog Standard Attribute][6] must be namespaced when used with custom [facets][14]. 
-An [Attribute Remapper][5] can be used to namespace an attribute with the integration's name. For example, remapping `attribute_name` to `integration_name.attribute_name`. 
+: Generic custom attributes that do not map to [Datadog Standard Attribute][6] must be namespaced when used with custom [facets][14]. An [Attribute Remapper][5] can be used to namespace an attribute with the integration's name.  
+For example, remapping `attribute_name` to `integration_name.attribute_name`.
 
 Custom facets must not duplicate an existing Datadog Facet
 : To avoid confusion with existing out-of-the-box Datadog facets, avoid creating custom facets that duplicate an existing facets mapped to [Datadog Standard Attributes][6].
@@ -197,7 +195,7 @@ Three common validation errors are:
 2. Not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
 3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
 
-Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. Datadog team members respond within 2-3 business days.
+After validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. Datadog team members respond within 2-3 business days.
 
 ## Further reading
 
