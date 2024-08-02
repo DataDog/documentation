@@ -1752,21 +1752,21 @@
     "summary": "Get user memberships"
   },
   "ListWorkflowInstances": {
-    "description": "List all instances of a given workflow.",
+    "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",
     "summary": "List workflow instances"
   },
   "CreateWorkflowInstance": {
-    "description": "Execute the given workflow",
+    "description": "Execute the given workflow. This API requires an application key scoped with the workflows_run permission.",
     "summary": "Execute a workflow",
     "request_description": "",
     "request_schema_description": "Request used to create a workflow instance."
   },
   "GetWorkflowInstance": {
-    "description": "Get a specific execution of a given workflow.",
+    "description": "Get a specific execution of a given workflow. This API requires an application key scoped with the workflows_read permission.",
     "summary": "Get a workflow instance"
   },
   "CancelWorkflowInstance": {
-    "description": "Cancels a specific execution of a given workflow.",
+    "description": "Cancels a specific execution of a given workflow. This API requires an application key scoped with the workflows_run permission.",
     "summary": "Cancel a workflow instance"
   }
 }

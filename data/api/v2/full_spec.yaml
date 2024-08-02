@@ -40449,7 +40449,8 @@ paths:
         type: safe
   /api/v2/workflows/{workflow_id}/instances:
     get:
-      description: List all instances of a given workflow.
+      description: List all instances of a given workflow. This API requires an application
+        key scoped with the workflows_read permission.
       operationId: ListWorkflowInstances
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -40475,7 +40476,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Execute the given workflow
+      description: Execute the given workflow. This API requires an application key
+        scoped with the workflows_run permission.
       operationId: CreateWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -40507,7 +40509,8 @@ paths:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}:
     get:
-      description: Get a specific execution of a given workflow.
+      description: Get a specific execution of a given workflow. This API requires
+        an application key scoped with the workflows_read permission.
       operationId: GetWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -40535,7 +40538,8 @@ paths:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
     put:
-      description: Cancels a specific execution of a given workflow.
+      description: Cancels a specific execution of a given workflow. This API requires
+        an application key scoped with the workflows_run permission.
       operationId: CancelWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
