@@ -104,7 +104,7 @@ Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attrib
 1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Using a grok processors will parse out attributes and enrich logs prior to remapping or further processing.
 2. After extracting attributes, remap log attributes to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
 3. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
-4. Namespace any generic log attributes that **do not** fit a standard attribute. <br></br> For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
+4. Namespace any generic log attributes that **do not** fit a standard attribute. \n For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
 5. For more advanced processing and data transformations, make use of additional [processors][10]. For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
 **Tips**
@@ -126,7 +126,7 @@ You can create [facets][12] in the [Log Explorer][16].
 
 **Add a facet or measure**:
 
-<div class="alert alert-info">Quantitative facets, called "Measures", are used for searching over a range of numeric values using relational operators. <br></br>For example, a measure for `application_latency` allows users to search for all logs greater-than a certain duration. </div>
+<div class="alert alert-info">Quantitative facets, called "Measures", allow users to filter logs over a range of numeric values using relational operators. For example, a measure for a latency attribute allows users to search for all logs greater-than a certain duration. </div>
 
 1. Click on a log that contains the attribute you want to add a facet or measure for. 
 2. In the log panel, click the Cog icon next to the attribute.
@@ -145,7 +145,7 @@ They allow for better findability of application logs by populating autocomplete
 
 Attributes mapped to custom facets must be namespaced first
 : Generic custom attributes that do not map to [Datadog Standard Attribute][6] must be namespaced when used with custom [facets][14]. 
-An integration's name can be used to namespace an attribute using an [Attribute Remapper][5] to prepend the namespace. </br></br> For example, remapping `attribute_name`, to `integration_name.attribute_name`. 
+An [Attribute Remapper][5] can be used to namespace an attribute with the integration's name. For example, remapping `attribute_name` to `integration_name.attribute_name`. 
 
 Custom facets must not duplicate an existing Datadog Facet
 : To avoid confusion with existing out-of-the-box Datadog facets, avoid creating custom facets that duplicate an existing facets mapped to [Datadog Standard Attributes][6].
