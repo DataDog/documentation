@@ -104,7 +104,7 @@ Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attrib
 1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Using a grok processors will parse out attributes and enrich logs prior to remapping or further processing.
 2. After extracting attributes, remap log attributes to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
 3. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
-4. Namespace any generic log attributes that **do not** fit a standard attribute. For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
+4. Namespace any generic log attributes that **do not** fit a standard attribute. <br></br> For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
 5. For more advanced processing and data transformations, make use of additional [processors][10]. For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
 **Tips**
@@ -114,7 +114,7 @@ Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attrib
 
 ### Create facets
 
-Facets are specific attributes that can be used to filter and narrow down search results. While facets are not strictly necessary for filtering search results, they play a crucial role in helping users understand the available dimensions for refining their search. 
+Facets are specific qualitative or quantitative attributes that can be used to filter and narrow down search results. While facets are not strictly necessary for filtering search results, they play a crucial role in helping users understand the available dimensions for refining their search. 
 
 Facets for standard attributes are automatically added by Datadog when a pipeline is published. Review if the attribute should be remapped to a [Datadog Standard Attribute][6] instead. 
 
@@ -126,7 +126,7 @@ You can create [facets][12] in the [Log Explorer][16].
 
 **Add a facet or measure**:
 
-<div class="alert alert-info">Facets can be qualitative _facets_ or quantitative _measures_. Measures are used for searching over a range of numeric values using relational operators. For example, adding a measure for `application_latency` allows users to search for all logs greater-than a certain duration. </div>
+<div class="alert alert-info">Quantitative facets, called "Measures", are used for searching over a range of numeric values using relational operators. <br></br>For example, a measure for `application_latency` allows users to search for all logs greater-than a certain duration. </div>
 
 1. Click on a log that contains the attribute you want to add a facet or measure for. 
 2. In the log panel, click the Cog icon next to the attribute.
