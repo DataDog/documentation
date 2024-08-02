@@ -117,8 +117,10 @@ To connect App Builder to the workflow, perform the following steps:
 1. Set **Run Settings** to Manual and name the query `triggerWorkflow0`.
 1. Under **Inputs**, for **App Workflow**, select **My AB Workflow**.
 1. Click **Run** to run the workflow, then go to your Slack channel and answer the poll question. This gives App Builder example data to display.
-1. Add a text component named. Under **Content**, enter the expression `${triggerWorkflow0?.outputs?.workflowOutputs?.output}`.
-1. Add a button component. For **Label**, use "Trigger Workflow".
+1. Add a text component. Under **Content**, enter the expression `${triggerWorkflow0?.outputs?.workflowOutputs?.output}`.
+1. Add a button component. Use the following values:
+    * **Label**: "Trigger Workflow"
+    * **Is Loading**: `${triggerWorkflow0.isLoading}` (click the **</>** to enter an expression)
 1. Under the button's **Events**, click the plus (**+**) to add an event. Use the following values:
     * **Event**: click
     * **Reaction**: Trigger Query
