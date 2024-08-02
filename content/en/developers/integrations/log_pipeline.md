@@ -24,7 +24,7 @@ This page walks Technology Partners through creating a log pipeline. A log pipel
 
 ## Integration prerequisites
 
-In developing your integration to send logs to Datadog follow these guidlines to ensure the best experience for your users
+In developing your integration to send logs to Datadog follow these guidlines to ensure the best experience for your users.
 
 ### Guidelines
 
@@ -53,6 +53,7 @@ Do not use Datadog Application Keys
 For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
 
 Log integrations are made of two sets of components, [pipelines][13] and accompanying [facets][12].
+
 After you've settled on a design for your Datadog Integration and are able to send logs to Datadog's logs endpoint(s), you should define your log pipelines and facets to enrich and structure your integration's Logs.
 
 <div class="alert alert-warning">Empty Log integrations that do not contain pipeline processors or facets may be rejected by Datadog's integration review process.</div>
@@ -71,7 +72,7 @@ Logs sent to Datadog are processed in [log pipelines][13] to enrich, standardize
 
 #### Add pipeline processors
 
-Use processors within your pipelines to enrich, restructure your data and generate attributes. For a list of all log processors, see [Processors][10].
+Use processors within your pipelines to enrich, restructure your data, and generate log attributes. For a list of all log processors, see [Processors][10].
 
 Centralizing logs from various technologies and applications can generate large amounts of unique attributes. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17].
 Before defining your pipeline processors make sure to review [Datadog's Standard Attributes][6].
@@ -88,7 +89,7 @@ Map the log `service` tag to the name of the [service][26] producing telemetry
 : Use the [Service Remapper][7] to remap the `service` attribute. When the source and service are not different services, set `service` to the same value as the `source` tag. `service` tags must be in lowercase. 
 
 Map the log's internal timestamp to it's official Datadog timestamp
-: Use the [Date Remapper][4] to define the official timestamp for logs. If not set the log timestamp defaults to the time of ingestion at Datadog's endpoint.
+: Use the [Date Remapper][4] to define the official timestamp for logs. If the log timestamp does not already map to a [standard date attribute][28] it defaults to the time of ingestion at Datadog's endpoint.
 
 Map the custom status attributes of the logs to the official Datadog `status` attribute
 : Use a [Status Remapper][25] to remap the `status` of a log, or a [Category Processor][19] for statuses mapped to a range (as with HTTP status codes).
@@ -100,9 +101,9 @@ Set a namespace for custom attributes within your logs
 : Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14].
 Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. 
 
-1. If logs aren't `JSON` formatted, they may need to be parsed to extract attribute information. Use the [grok processor][8] to extract attributes and enrich logs prior to remapping or further processing.
-2. After extracting attributes, map log attributes to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
-3. Set the timestamp extracted from the log to be its official Datadog timestamp using the [Date Remapper][4].
+1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Using a grok processors will parse out attributes and enrich logs prior to remapping or further processing.
+2. After extracting attributes, remap log attributes to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
+3. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
 4. Namespace any generic log attributes that **do not** fit a standard attribute. For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
 5. For more advanced processing and data transformations, make use of additional [processors][10]. For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
@@ -125,7 +126,7 @@ You can create [facets][12] in the [Log Explorer][16].
 
 **Add a facet or measure**:
 
-<div class="alert alert-info">Facets can be qualitative *facets* or quantitative *measures*. Measures can be used for searching over a range of numeric values using relational operators. For example, adding a measure for latency allows users to search for all logs greater than a certain duration. </div>
+<div class="alert alert-info">Facets can be qualitative _facets_ or quantitative _measures_. Measures are used for searching over a range of numeric values using relational operators. For example, adding a measure for `application_latency` allows users to search for all logs greater-than a certain duration. </div>
 
 1. Click on a log that contains the attribute you want to add a facet or measure for. 
 2. In the log panel, click the Cog icon next to the attribute.
@@ -136,14 +137,15 @@ You can create [facets][12] in the [Log Explorer][16].
 
 #### Configure and edit facets
 
-Correctly defining facets is important as they improve the usability of user logs in analytics, monitors, and aggregation features across Datadog's logs management product. 
+Correctly defining facets is important as they improve the usability of logs in analytics, monitors, and aggregation features across Datadog's logs management product. 
+
 They allow for better findability of application logs by populating autocomplete features across Log Management.
 
 ##### Requirements
 
 Attributes mapped to custom facets must be namespaced first
 : Generic custom attributes that do not map to [Datadog Standard Attribute][6] must be namespaced when used with custom [facets][14]. 
-The integration name can be used to namespace an attribute, `attribute_name`, to `@integration_name.attribute_name` using an [Attribute Remapper][5] to append the namespace. 
+An integration's name can be used to namespace an attribute using an [Attribute Remapper][5] to prepend the namespace. </br></br> For example, remapping `attribute_name`, to `integration_name.attribute_name`. 
 
 Custom facets must not duplicate an existing Datadog Facet
 : To avoid confusion with existing out-of-the-box Datadog facets, avoid creating custom facets that duplicate an existing facets mapped to [Datadog Standard Attributes][6].
@@ -152,7 +154,7 @@ Custom facets must be grouped under the `source` name
 : When creating a custom facet a group should be assigned. Set the `Group` value to the `source`, same as the integration's name.
 
 Custom facets must have the same data type as the mapped attribute
-: Set the facet Data Type (String, Boolean, Double, or Integer) to the same type as the Attribute mapped to it. Mismatched types prevent the facet from being used as intended and can cause it to populate incorrectly.
+: Set the facet data type (String, Boolean, Double, or Integer) to the same type as the Attribute mapped to it. Mismatched types prevent the facet from being used as intended and can cause it to populate incorrectly.
 
 1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
 2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.
@@ -163,7 +165,7 @@ Custom facets must have the same data type as the mapped attribute
 **Tips**
 * Measures should have a unit where possible. Measures can be assigned a [unit][27]. Two families of units are available, `TIME` and `BYTES`, with units such as `millisecond` or `gibibyte`.
 * Facets can be assigned a description. A clear description of the facet can help users understand how to best use it.
-* If you redfine an attribute and keep both, define a facet on a single one.
+* If you redefine an attribute and keep both, define a facet on a single one.
 * When manually configuring facets in `.yaml` files, note they are assigned a `source`. This refers to where the attribute is captured from and can be `log` for attributes or `tag` for tags.
 
 ## Review and deploy the integration
@@ -225,3 +227,4 @@ Once validations pass, Datadog creates and deploys the new log integration asset
 [25]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-status-remapper
 [26]: https://docs.datadoghq.com/getting_started/tagging/#overview
 [27]: https://docs.datadoghq.com/logs/explorer/facets/#units
+[28]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=date#date-attribute
