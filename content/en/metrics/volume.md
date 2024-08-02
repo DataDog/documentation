@@ -70,7 +70,7 @@ When identifying the top 500 metric names by change in volume, you can hover ove
 
 To compare your spiking metric's cardinality over time:
 1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
-2. Select the metric name which you want the view the cardinality over time and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
+2. Select the metric name that you want to view the cardinality over time, and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
 3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change Alert Monitor][2] documentation.
 
 ## Identify less valuable, unqueried metrics
