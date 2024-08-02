@@ -70,7 +70,7 @@ To prompt a user for confirmation before the query runs, toggle the **Requires C
 ### Return workflow results to an app
 App Builder queries can trigger Workflow Automation workflows. Apps can then use the results of those workflows.
 
-This app triggers a workflow, which sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
+This app provides a button to trigger a workflow. The workflow sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
 
 {{< img src="service_management/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="486px">}}
 
