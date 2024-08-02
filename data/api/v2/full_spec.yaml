@@ -16522,6 +16522,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToPermissionData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToPermissionData:
       description: Relationship to permission object.
       properties:
@@ -34701,6 +34703,9 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
+      post: true
   /api/v2/roles/{role_id}/users:
     delete:
       description: Removes a user from a role.
