@@ -101,11 +101,13 @@ Set a namespace for custom attributes within your logs
 : Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14].
 Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. 
 
-1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Using a grok processors will parse out attributes and enrich logs prior to remapping or further processing.
-2. After extracting attributes, remap log attributes to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
+1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Use grok processors to parse out attributes and enrich logs prior to remapping or further processing.
+2. After extracting log attributes, remap them to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
 3. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
-4. Namespace any generic log attributes that **do not** fit a standard attribute. \n For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
-5. For more advanced processing and data transformations, make use of additional [processors][10]. For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
+4. Namespace any generic log attributes that **do not** fit a standard attribute.  
+For example, a `server_url` attribute specific to your integration technology may be remapped to `integration_name.server_url`.
+5. For more advanced processing and data transformations, make use of additional [processors][10].  
+For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
 **Tips**
 * Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
@@ -126,7 +128,8 @@ You can create [facets][12] in the [Log Explorer][16].
 
 **Add a facet or measure**:
 
-<div class="alert alert-info">Quantitative facets, called "Measures", allow users to filter logs over a range of numeric values using relational operators. For example, a measure for a latency attribute allows users to search for all logs greater-than a certain duration. </div>
+<div class="alert alert-info">Quantitative facets, called "Measures", allow users to filter logs over a range of numeric values using relational operators.  
+For example, a measure for a latency attribute allows users to search for all logs greater-than a certain duration. </div>
 
 1. Click on a log that contains the attribute you want to add a facet or measure for. 
 2. In the log panel, click the Cog icon next to the attribute.
