@@ -6326,6 +6326,11 @@ menu:
       identifier: sds_regular_expression_syntax
       parent: sensitive_data_scanner
       weight: 3
+    - name: Guides
+      url: sensitive_data_scanner/guide/
+      identifier: sds_guides
+      parent: sensitive_data_scanner
+      weight: 4
     - name: Help
       url: help/
       pre: info-fill
