@@ -88,7 +88,7 @@ Map the log `service` tag to the name of the [service][26] producing telemetry
 : Use the [Service Remapper][7] to remap the `service` attribute. When the source and service are not different services, set `service` to the same value as the `source` tag. `service` tags must be in lowercase. 
 
 Map the log's internal timestamp to it's official Datadog timestamp
-: Use the [Date Remapper][4] to define the official timestamp for logs. If not set the log timestamp will be default to the time of ingestion at Datadog's endpoint.
+: Use the [Date Remapper][4] to define the official timestamp for logs. If not set the log timestamp defaults to the time of ingestion at Datadog's endpoint.
 
 Map the custom status attributes of the logs to the official Datadog `status` attribute
 : Use a [Status Remapper][25] to remap the `status` of a log, or a [Category Processor][19] for statuses mapped to a range (as with HTTP status codes).
@@ -118,7 +118,7 @@ Facets are specific attributes that can be used to filter and narrow down search
 Facets for standard attributes are automatically added by Datadog when a pipeline is published. Review if the attribute should be remapped to a [Datadog Standard Attribute][6] instead. 
 
 Not all attributes are meant to be used as a facet. The need for facets in integrations is focused on two things:
-* Facets provide a straightforward interface for filtering logs. They are leveraged in Log Management autocomplete features, allowing users to more easily find and aggregate key information found in their logs.
+* Facets provide a straightforward interface for filtering logs. They are leveraged in Log Management autocomplete features, allowing users to find and aggregate key information found in their logs.
 * Facets allow for attributes with low readability to be renamed with a label that is easier to understand. For example: `@deviceCPUper` → `Device CPU Utilization Percentage`.
 
 You can create [facets][12] in the [Log Explorer][16].
@@ -192,7 +192,7 @@ Three common validation errors are:
 2. Not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
 3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
 
-Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. A Datadog team member will respond within 2-3 business days.
+Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. Datadog team members respond within 2-3 business days.
 
 ## Further reading
 
