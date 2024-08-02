@@ -21,7 +21,6 @@ further_reading:
   tag: Blog
   text: Permitir a los ingenieros hacerse cargo de los costes de Google Cloud con
     Datadog
-kind: Documentación
 title: Monitor de costes de la nube
 ---
 

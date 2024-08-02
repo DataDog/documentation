@@ -24,7 +24,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: Documentación
   text: Sensitive Data Scanner
-kind: Documentación
 title: Reducir los riesgos que amenazan los datos
 ---
 

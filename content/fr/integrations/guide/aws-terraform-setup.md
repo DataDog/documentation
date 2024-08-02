@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: Blog
   text: Gérer Datadog avec Terraform
-kind: guide
+
 title: Intégration AWS avec Terraform
 ---
 

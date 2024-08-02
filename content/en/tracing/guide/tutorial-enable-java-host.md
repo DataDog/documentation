@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on the Same Host as the Datadog Agent
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"

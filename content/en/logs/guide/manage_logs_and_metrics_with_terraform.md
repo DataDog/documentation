@@ -1,6 +1,6 @@
 ---
 title: Manage Logs and Metrics with Terraform
-kind: guide
+
 disable_toc: false
 ---
 

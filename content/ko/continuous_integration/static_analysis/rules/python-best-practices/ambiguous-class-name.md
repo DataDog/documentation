@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 읽기 가능한 클래스 이름 정하기
 ---
 ## 메타데이터

@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Comprobar el estado del monitor
-kind: documentación
 title: Monitor de red
 ---
 

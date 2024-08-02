@@ -6,7 +6,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여해 서버리스 모니터링에 대해 자세히 알아보세요.
-kind: 설명서
 title: AWS Lambda 서버리스 모니터링 시작하기
 ---
 

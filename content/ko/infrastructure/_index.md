@@ -3,11 +3,13 @@ aliases:
 - /ko/graphing/infrastructure/
 cascade:
 - _target:
-    path: /infrastructure/resource_catalog/aws_iam_user.md
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: ko
   aliases:
-  - /security/cspm/custom_rules/aws_iam_user/
+  - /ko/security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
+    lang: ko
   algolia:
     rank: 70
 further_reading:
@@ -17,7 +19,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기본 구축
   text: 대화형 세션에 참여하여 인프라스트럭처 모니터링 강화
-kind: 설명서
 title: 인프라스트럭처
 ---
 

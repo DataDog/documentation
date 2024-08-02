@@ -7,7 +7,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: 설명서
   text: 로그 처리하는 방법 배우기
-kind: 설명서
 title: 저장된 보기
 ---
 

@@ -7,7 +7,6 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: ドキュメント
   text: Synthetic テストの実行について
-kind: ガイド
 title: Synthetic テストのリトライがモニターステータスにどのように影響を与えるかを理解する
 ---
 

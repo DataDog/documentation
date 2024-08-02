@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
   tag: 블로그
   text: 민감 데이터 관리 모범 사례
-kind: 설명서
 title: 민감한 데이터 스캐너
 ---
 

@@ -201,6 +201,13 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "UploadCustomCostsFile": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_4125168396",
+      "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
   "CreateCloudflareAccount": [
     {
       "group": "cloudflare_integration",
@@ -804,6 +811,13 @@
       "description": "Change the triage state of a security signal returns \"OK\" response"
     }
   ],
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
+    }
+  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1029,6 +1043,13 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
   "AggregateSpans": [
     {
       "group": "spans",
@@ -1128,6 +1149,13 @@
       "group": "users",
       "suffix": "",
       "description": "Update a user returns \"OK\" response"
+    }
+  ],
+  "CreateWorkflowInstance": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Execute a workflow returns \"Created\" response"
     }
   ]
 }

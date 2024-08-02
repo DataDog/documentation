@@ -15,7 +15,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-java
   tags: GitHub
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
 title: チュートリアル - Datadog Agent と同じホスト上の Java アプリケーションのトレースを有効にする
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: account_management/rbac/permissions
   tag: Documentation
   text: RBAC アクセス許可の詳細
-kind: ガイド
 title: ログ RBAC アクセス許可
 ---
 

@@ -9,7 +9,6 @@ further_reading:
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
   tag: GitHub
   text: 'Datadog Operator: configuración'
-kind: documentación
 title: Empezando con el Datadog Operator
 ---
 

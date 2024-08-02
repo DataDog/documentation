@@ -20,7 +20,6 @@ further_reading:
   text: Reducir el cambio de contexto y solucionar problemas con plugins de entorno
     de desarrollo integrado de Datadog
 is_beta: true
-kind: documentación
 title: Plugin de Datadog para entornos de desarrollo integrados de JetBrains
 ---
 

@@ -44,7 +44,7 @@ integration_id: gunicorn
 integration_title: Gunicorn
 integration_version: 2.7.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: gunicorn
 public_title: Gunicorn

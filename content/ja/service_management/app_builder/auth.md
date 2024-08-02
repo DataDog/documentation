@@ -1,6 +1,5 @@
 ---
 description: App Builder へのアクセスおよび認証
-kind: ドキュメント
 title: アクセス・認証
 ---
 

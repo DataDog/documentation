@@ -24,7 +24,7 @@ categories:
 - aws
 - クラウド
 - モニター
-custom_kind: インテグレーション
+custom_custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false

@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Configurar las notificaciones de tu monitor
-kind: guía
 title: Crear alertas de clúster para notificar si un porcentaje de los grupos están
   en estado crítico
 ---

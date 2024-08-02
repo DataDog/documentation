@@ -11,7 +11,7 @@ guides:
   link: getting_started/application/
   link_text: Datadog で始める
   title: アプリで始める
-heading: Welcome to Datadog Docs!
+heading: Datadog ドキュメントへようこそ！
 nav_sections:
 - nav_section:
   - name: プラットフォームサービス
@@ -91,45 +91,53 @@ nav_sections:
       icon: datastreams-monitoring
       link: data_streams/
       title: Data Streams Monitoring
+    - desc: データ処理ジョブを監視し、最適化する
+      icon: ''
+      link: ''
+      title: データジョブのモニタリング
     - desc: コードを変更せずにサービスを発見、マッピング、監視する
-      icon: usm
-      link: universal_service_monitoring/
+      icon: ''
+      link: ''
       title: Universal Service Monitoring
     - desc: アップタイムの確保、地域ごとの問題点の指摘、アプリケーションのパフォーマンステスト
-      icon: synthetics
-      link: synthetics/
+      icon: rum
+      link: ''
       title: Synthetic Monitoring
     - desc: アプリケーションのユーザーエクスペリエンスを把握、観察、分析
-      icon: rum
-      link: real_user_monitoring/
+      icon: ''
+      link: ''
       title: Real User Monitoring
+    - desc: ユーザーの行動に関する洞察を得て、データに基づく製品の決定を行う
+      icon: ''
+      link: ''
+      title: 製品分析
     - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
-      icon: mobile
-      link: mobile_app_testing/
+      icon: ''
+      link: ''
       title: Mobile Application Testing
     - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施
-      icon: continuous-testing
-      link: continuous_testing/
+      icon: ''
+      link: ''
       title: Continuous Testing
     - desc: CI パイプラインの健全性とパフォーマンスを監視
-      icon: ci
-      link: continuous_integration/
+      icon: ''
+      link: ''
       title: CI Visibility
     - desc: 不安定なテストの検出と、不安定なテストをもたらしたコミットの特定
-      icon: ci
-      link: tests/
+      icon: ''
+      link: ''
       title: Test Visibility
     - desc: 脅威、脆弱性、誤構成の検出
-      icon: security-platform
-      link: security/
+      icon: ''
+      link: ''
       title: セキュリティ
     - desc: メトリクスの探索、検索、および分布の作成
-      icon: metric
-      link: metrics/
+      icon: ''
+      link: ''
       title: メトリクス
     - desc: 取り込んだログを処理し、監視し、アーカイブ
-      icon: log
-      link: logs/
+      icon: ''
+      link: ''
       title: Log Management
     - desc: テレメトリーパイプラインの管理と監視
       icon: pipelines

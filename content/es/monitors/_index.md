@@ -36,7 +36,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-recommended-monitors/
   tag: Blog
   text: Activa alertas preconfiguradas con monitores recomendados para AWS
-kind: documentación
 title: Monitores
 ---
 

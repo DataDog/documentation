@@ -1,6 +1,6 @@
 ---
 title: Submit Metrics to Datadog with Threadstats
-kind: faq
+
 further_reading:
 - link: "https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/"
   tag: "Source Code"

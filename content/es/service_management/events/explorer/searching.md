@@ -3,7 +3,6 @@ further_reading:
 - link: logs/explorer/search_syntax
   tag: Documentación
   text: Sintaxis de búsqueda de logs
-kind: Documentación
 title: Sintaxis de búsqueda
 ---
 

@@ -8,13 +8,13 @@ further_reading:
 
 ## Overview
 
-OpenTelemetry defines certain semantic conventions related to hostnames. If an OpenTelemetry Protocol (OTLP) payload for any signal type has known hostname attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
+OpenTelemetry defines certain semantic conventions for resource attributes related to hostnames. If an OpenTelemetry Protocol (OTLP) payload for any signal type has known hostname resource attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
 
 This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2]. When using the [recommended configuration][4] for the Datadog exporter, the [resource detection processor][1] adds the necessary attributes to the payload to ensure accurate hostname resolution.
 
 ## Conventions used to determine the hostname
 
-Conventions are checked in the following order, and the first valid hostname is used. If no valid conventions are present, the fallback hostname logic is used. This fallback logic varies by product.
+Conventions are checked in resource attributes the following order, and the first valid hostname is used. If no valid conventions are present, the fallback hostname logic is used. This fallback logic varies by product.
 
 1. Check Datadog-specific conventions: `host` and `datadog.host.name`.
 1. Check cloud provider-specific conventions for AWS, Azure and GCP.
@@ -43,7 +43,7 @@ Don't forget to add the `transform` processor to your pipelines.
 
 ### Cloud provider-specific conventions
 
-The `cloud.provider` attribute is used to determine the cloud provider. Further attributes are used to determine the hostname for each specific platform. If `cloud.provider` or any of the attributes are missing, the next set of conventions is checked.
+The `cloud.provider` resource attribute is used to determine the cloud provider. Further attributes are used to determine the hostname for each specific platform. If `cloud.provider` or any of the attributes are missing, the next set of conventions is checked.
 
 #### Amazon Web Services
 
@@ -77,7 +77,7 @@ To get the cluster name, the following conventions are checked:
 
 ### `host.id` and `host.name`
 
-If none of the above conventions are present, the `host.id` and `host.name` attributes are used as-is to determine the hostname. 
+If none of the above conventions are present, the `host.id` and `host.name` resource attributes are used as-is to determine the hostname. 
 
 **Note:** The OpenTelemetry specification allows `host.id` and `host.name` to have values that may not match those used by other Datadog products in a given environment. If using multiple Datadog products to monitor the same host, you may have to override the hostname using `datadog.host.name` to ensure consistency.
 

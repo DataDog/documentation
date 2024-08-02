@@ -18,7 +18,6 @@ further_reading:
 - link: /watchdog/insights/
   tag: Documentación
   text: Detección outlier en Watchdog Insights
-kind: documentación
 title: Monitor outlier
 ---
 

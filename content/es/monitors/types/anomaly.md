@@ -22,7 +22,6 @@ further_reading:
 - link: dashboards/functions/algorithms/#anomalies
   tag: Documentación
   text: Función para anomalías
-kind: Documentación
 title: Monitor de anomalías
 ---
 

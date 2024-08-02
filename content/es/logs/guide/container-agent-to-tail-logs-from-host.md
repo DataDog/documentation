@@ -14,7 +14,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (rastrear)
-kind: guía
 title: Utiliza el agente contenedor para rastrear logs del host
 ---
 

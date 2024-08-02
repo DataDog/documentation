@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
   tag: 블로그
   text: 단일 페이지 애플리케이션 모니터링 시작
-kind: 설명서
 title: RUM  탐색기
 ---
 

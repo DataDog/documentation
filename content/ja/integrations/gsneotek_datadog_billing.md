@@ -23,7 +23,7 @@ integration_id: gsneotek-datadog-billing
 integration_title: GS Neotek Datadog Cost Analysis
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: gsneotek_datadog_billing
 pricing:

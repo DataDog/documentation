@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/security/cloud_siem/log_detection_rules
   tag: Documentación
   text: Reglas de detección de logs
-kind: Documentación
 title: Crear una regla de detección Cloud SIEM
 ---
 

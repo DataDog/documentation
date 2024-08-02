@@ -15,7 +15,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드에 대해 알아보기
-kind: 설명서
 title: 사용자 액션 추적
 ---
 

@@ -11,7 +11,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (cola)
-kind: guía
 title: Enviar logs desde un archivo de log personalizado con permisos de lectura ampliados
 ---
 

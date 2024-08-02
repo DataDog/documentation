@@ -20,7 +20,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-servicio-linux/
   tag: Blog
   text: Monitoriza tus aplicaciones web de Linux en Azure App Service con Datadog
-kind: documentación
 title: DogStatsD
 ---
 

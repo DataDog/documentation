@@ -2,7 +2,7 @@
 title: How to Set Up RBAC for Logs
 aliases:
   - /logs/guide/restrict-access-to-log-events-with-restriction-queries
-kind: guide
+
 further_reading:
 - link: "/logs/guide/logs-rbac-permissions/"
   tag: "Documentation"
@@ -338,20 +338,65 @@ This ensures that:
 * Neither `ACME Admin` nor `ACME User` members can interfere with assets from other teams.
 * Neither `ACME Admin` nor `ACME User` members can interfere with higher level "Admin" configurations, such as which logs flow into their assets, budget limitations, or [Log Access Restriction rules](#restrict-access-to-logs).
 
-
 As a good practice for maximum granularity and easier maintainability, you should **not** grant other roles the permission to edit the ACME Log Assets. Instead, consider adding (some) users from those other roles to the `ACME Admin` role as well.
 
 ### Log pipelines
 
+<div class="alert alert-info">To enable this feature, reach out to your Datadog representative and request access.</div>
+
 Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][14] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
-{{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline" style="width:60%;">}}
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Assign the role(s) in the `Edit` modal of a specific pipeline.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+3. Grant permission to that role with the following call:
+
+```sh
+curl -X POST \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
+            }'
+```
+
+[1]: /api/latest/roles/#list-roles
+[2]: /api/latest/roles/#list-permissions
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Log indexes
 
+<div class="alert alert-info">To enable this feature, reach out to your Datadog representative and request access.</div>
+
 Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][16] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 
+{{< tabs >}}
+{{% tab "UI" %}}
+
+1. Remove the global permission on the role.
+2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field.
+
 {{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes" style="width:60%;">}}
+
+[1]: /logs/log_configuration/indexes/
+{{% /tab %}}
+{{% tab "API" %}}
+
+This configuration is only supported through the UI.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Log archives
 
