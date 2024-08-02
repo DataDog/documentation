@@ -2465,6 +2465,10 @@
           this.selectedValsByPrefId = {};
           this.ifFunctionsByRef = {};
         }
+        /**
+         * Return the existing instance,
+         * or create a new one if none exists.
+         */
         static get instance() {
           if (!__classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance)) {
             __classPrivateFieldSet(_a, _a, new _a(), "f", _ClientRenderer_instance);
@@ -2479,23 +2483,66 @@
         handlePrefSelectionChange(e) {
           const node = e.target;
           if (!(node instanceof Element)) {
-            console.log("From handleValueChange: Node is not an Element");
             return;
           }
           const prefId = node.getAttribute("data-pref-id");
           if (!prefId) {
-            console.log("From handleValueChange: No prefId found");
             return;
           }
           const optionId = node.getAttribute("data-option-id");
           if (!optionId) {
-            console.log("From handleValueChange: No optionId found");
             return;
           }
           this.selectedValsByPrefId[prefId] = optionId;
           this.rerenderChooser();
           this.rerenderPageContent();
+          this.populateRightNav();
         }
+        /**
+         * Check whether the element or any of its ancestors
+         * have the class 'markdoc__hidden'.
+         */
+        elementIsHidden(element) {
+          let currentElement = element;
+          while (currentElement) {
+            if (currentElement.classList.contains("markdoc__hidden")) {
+              return true;
+            }
+            currentElement = currentElement.parentElement;
+          }
+        }
+        /**
+         * Should run after the page has been rendered.
+         */
+        populateRightNav() {
+          let html = "<ul>";
+          const headers = Array.from(document.querySelectorAll("#mainContent h2, #mainContent h3, #mainContent h4, #mainContent h5, #mainContent h6"));
+          let lastSeenLevel = 2;
+          headers.forEach((header) => {
+            if (this.elementIsHidden(header)) {
+              return;
+            }
+            const level = parseInt(header.tagName[1]);
+            if (level > lastSeenLevel) {
+              html += "<ul>";
+            } else if (level < lastSeenLevel) {
+              html += "</ul>";
+            }
+            lastSeenLevel = level;
+            console.log(header);
+            html += `<li><a href="#${header.id}">${header.textContent}</a></li>`;
+          });
+          html += "</ul>";
+          const rightNav = document.getElementById("TableOfContents");
+          if (!rightNav) {
+            throw new Error('Cannot find right nav element with id "TableOfContents"');
+          }
+          rightNav.innerHTML = html;
+        }
+        /**
+         * Rerender the section of the page that was derived
+         * from the author's .mdoc file.
+         */
         rerenderPageContent() {
           const newDisplayStatusByRef = {};
           Object.keys(this.ifFunctionsByRef).forEach((ref) => {
@@ -2526,6 +2573,9 @@
             }
           }
         }
+        /**
+         * Listen for selection changes in the chooser.
+         */
         addChooserEventListeners() {
           const prefPills = document.getElementsByClassName("markdoc-pref__pill");
           for (let i = 0; i < prefPills.length; i++) {
@@ -2548,6 +2598,9 @@
             this.chooserElement = chooserElement;
           }
           this.addChooserEventListeners();
+          document.addEventListener("DOMContentLoaded", () => {
+            this.populateRightNav();
+          });
         }
         rerenderChooser() {
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {

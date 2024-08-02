@@ -11,7 +11,7 @@
       "format": "cjs"
     },
     "dist/helperModules/sharedRendering.js": {
-      "bytes": 5571,
+      "bytes": 5508,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -122,12 +122,12 @@
       "format": "cjs"
     },
     "dist/helperModules/dataCompression.js": {
-      "bytes": 2871,
+      "bytes": 3055,
       "imports": [],
       "format": "cjs"
     },
     "dist/helperModules/ClientRenderer.js": {
-      "bytes": 7127,
+      "bytes": 9169,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/Chooser.js",
@@ -206,13 +206,13 @@
           "bytesInOutput": 3085
         },
         "dist/helperModules/ClientRenderer.js": {
-          "bytesInOutput": 6509
+          "bytesInOutput": 8300
         },
         "src/markdoc-client-renderer.js": {
           "bytesInOutput": 115
         }
       },
-      "bytes": 85139
+      "bytes": 86930
     }
   }
 }

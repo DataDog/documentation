@@ -68,6 +68,58 @@ export class ClientRenderer {
     this.selectedValsByPrefId[prefId] = optionId;
     this.rerenderChooser();
     this.rerenderPageContent();
+    this.populateRightNav();
+  }
+
+  /**
+   * Check whether the element or any of its ancestors
+   * have the class 'markdoc__hidden'.
+   */
+  elementIsHidden(element: Element) {
+    // check whether the element or any of its parents are hidden
+    let currentElement: Element | null = element;
+    while (currentElement) {
+      if (currentElement.classList.contains('markdoc__hidden')) {
+        return true;
+      }
+      currentElement = currentElement.parentElement;
+    }
+  }
+
+  /**
+   * Should run after the page has been rendered.
+   */
+  populateRightNav() {
+    let html = '<ul>';
+    const headers = Array.from(
+      document.querySelectorAll(
+        '#mainContent h2, #mainContent h3, #mainContent h4, #mainContent h5, #mainContent h6'
+      )
+    );
+    let lastSeenLevel = 2;
+    headers.forEach((header) => {
+      if (this.elementIsHidden(header)) {
+        return;
+      }
+
+      // Start or end a list if the level has changed
+      const level = parseInt(header.tagName[1]);
+      if (level > lastSeenLevel) {
+        html += '<ul>';
+      } else if (level < lastSeenLevel) {
+        html += '</ul>';
+      }
+      lastSeenLevel = level;
+
+      console.log(header);
+      html += `<li><a href="#${header.id}">${header.textContent}</a></li>`;
+    });
+    html += '</ul>';
+    const rightNav = document.getElementById('TableOfContents');
+    if (!rightNav) {
+      throw new Error('Cannot find right nav element with id "TableOfContents"');
+    }
+    rightNav.innerHTML = html;
   }
 
   /**
@@ -148,6 +200,9 @@ export class ClientRenderer {
     }
 
     this.addChooserEventListeners();
+    document.addEventListener('DOMContentLoaded', () => {
+      this.populateRightNav();
+    });
   }
 
   rerenderChooser() {
