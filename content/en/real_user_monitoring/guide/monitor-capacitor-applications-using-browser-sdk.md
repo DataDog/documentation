@@ -11,7 +11,7 @@ further_reading:
 
 [Capacitor][1] is an open source native runtime for building Web Native applications that run natively on iOS, Android, and progressive web applications with JavaScript, HTML, and CSS.
 
-You can install and configure the Datadog Browser SDK to start monitoring applications you've built with Capacitor.
+You can install and configure the Datadog Browser SDK to start monitoring applications you've built with Capacitor. The configuration provides you with visibility into the JavaScript portion of your application (excludes native application visibility).
 
 **Note**: Applications wrapped by Capacitor to run an **iOS** target uses `capacitor://` as the default scheme to serve local assets.
 
