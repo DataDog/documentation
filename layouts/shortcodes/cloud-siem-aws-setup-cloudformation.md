@@ -15,6 +15,6 @@
 - For more information about Datadog's AWS integration and CloudFormation template, see [Getting Started with AWS][103].
 - If you need to set up the AWS integration manually, see [AWS manual setup instructions][104].
 
-[102]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[102]: https://app.datadoghq.com/integrations/amazon-web-services?
 [103]: https://docs.datadoghq.com/getting_started/integrations/aws/
 [104]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#manual
