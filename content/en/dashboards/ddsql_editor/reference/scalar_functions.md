@@ -19,6 +19,15 @@ These functions return one value per row.
 | substr(expr *s*, numeric *start*, numeric *numChars*) | text | Returns a substring of *s* from *start* to a max of *numChars*, if provided. *start* is a 1-based index, so `substr('hello', 2)` returns `'ello'`. If the start is less than 1, it is treated as if it were 1. The result is computed by taking the range of characters `[start, start+numChars]`, where if any value is less than 1, it is treated as 1. This means `substr('hello', -2, 4)` returns `'h'`. |
 | replace(text *s*, text *from*, text *to*) | text | Replaces all occurrences in *s* of substring *from* with substring *to*. |
 | regexp_replace(text *s*, text *pattern*, text *replacement*) | text | Replace substrings in *s* that match the POSIX regular expression *pattern* with the *replacement*. Supports Go's [regular expression syntax][1]. |
+ reverse(expr text)                                        | string  | Reverses the string (brown → nworb) |
+| md5(expr text)                                            | string  | Calculate the MD5 hash of a string and returns the result in hexadecimal                                          |
+| char_length(str text)                                     | integer | Number of characters in str                                                                                       |
+| left(str text, n int)                                     | text    | Return first n characters in str. When n is negative, return all but last \|n\| characters.                       |
+| right(str text, n int)                                    | text    | Return last n characters in str. When n is negative, return all but first \|n\| characters.                       |
+| ltrim(str text [, characters text])                       | text    | Remove the longest string containing only characters from characters (a space by default) from the start of str   |
+| rtrim(str text [, characters text])                       | text    | Remove the longest string containing only characters from characters (a space by default) from the end of str     |
+| trim([leading \| trailing \| both] [characters] from str) | text    | Remove the longest string containing only the characters (a space by default) from the start/end/both ends of str |
+| sort_order_ip(ip text)                                    | text    | Returns a string representing a sort order over IPv4 and IPv6 range                                               |
 
 
 ## Mathematical functions and operators
@@ -32,6 +41,9 @@ These functions return one value per row.
 | ceil(numeric *n*) | numeric | Returns the nearest integer that is greater than or equal to *n*. |
 | power(numeric *n*, numeric *s*) | numeric | Raises *n* to the *s* power. |
 | ln(numeric *n*) | numeric | Calculates the natural logarithm of *n*. |
+| log(numeric *n*)  | numeric | Logarithm to base 10 of *n*. |
+| log2(numeric *n*) | numeric | Logarithm to base 2 of *n*. |
+| exp(numeric *n*) | numeric | The mathematical constant e, raised to the power of *n*. |
 | sqrt(numeric *n*) | numeric | Calculates the square root of *n*. |
 
 
@@ -52,6 +64,8 @@ These functions return one value per row.
 | Name | Return type | Description |
 |------|-------------|-------------|
 | date_trunc(string *precision*, timestamp *t*) | timestamp | Truncates the timestamp to the chosen *precision* ("second", "minute", "hour", "day", "week", "month", or "year"). |
+| date_diff(string *precision*, timestamp *t*, timestamp *t*) | integer | Returns the difference between two dates, in the precision specified. | 
+| to_timestamp(numeric *n*) | timestamp | Transforms *n* into a timestamp, considering *n* as the time in seconds.|
 
 ## Conditional expressions
 
@@ -65,6 +79,9 @@ These functions return one value per row.
 | Name | Return type | Description | 
 |------|-------------|-------------| 
 | json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in JSON as text, defined by the path. Its behavior is equivalent to the [postgres function with the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
+| json_extract_path(text json, text path…) | json | Same functionality as `json_extract_path_text`, but returns a column of type JSON instead of type text.|
+| json_build_object(key1 text, value1 json/text/int/float, key2 text, value2 json/text/int/float, … ) | json | Builds a JSON object based on the parameters passed in. The parameters to the function are the keys/values of the JSON object being built, alternating between key and value mapped to each key.|
+| row_to_json(table) | json | Returns a JSON representation of each row in a table as a JSON value. The JSON keys are the column names, and the values are the values under each row at each column. <br><br> <strong>Note</strong>: row_to_json takes in a table name, NOT a column. |
 
 ### JSON array
   Return the 0th element in a JSON array under the key `forest` in each JSON object or row in `col`.
