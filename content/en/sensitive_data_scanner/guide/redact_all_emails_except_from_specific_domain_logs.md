@@ -1,5 +1,5 @@
 ---
-title: Redact All Emails Except from a Specific Domain
+title: Redact All Emails Except from a Specific Domain for Logs
 disable_toc: false
 further_reading:
 - link: "/sensitive_data_scanner/"
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-This guide walks you through how you can use Sensitive Data Scanner to redact all emails except the ones from a specific email domain (for example, `@test.com`).
+This guide walks you through how you can use Sensitive Data Scanner to redact all emails except the ones from a specific email domain (for example, `@test.com`) in your logs.
 
 ## Set up a grok processor
 
