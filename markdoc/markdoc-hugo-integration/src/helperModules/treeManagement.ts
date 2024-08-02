@@ -1,3 +1,13 @@
+/**
+ * A set of functions for working with Markdoc's renderable tree.
+ * For example, we collect conditions from the renderable tree
+ * so we can attach them to their corresponding elements
+ * using event listeners.
+ *
+ * The renderable tree is used to render HTML output at compile time.
+ * Read more about Markdoc's phases: https://markdoc.dev/docs/render
+ */
+
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { ParsedFile } from './FileParser';
 import MarkdocStaticCompiler, {
@@ -6,10 +16,6 @@ import MarkdocStaticCompiler, {
   ClientFunctionSchema
 } from 'markdoc-static-compiler';
 import { MinifiedClientFunction, minifyClientFunction } from './dataCompression';
-
-/**
- * A set of functions for working with Markdoc's renderable tree.
- */
 
 /**
  * Collect the top-level client functions inside the renderable tree,

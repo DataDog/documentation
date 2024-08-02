@@ -1,3 +1,9 @@
+/**
+ * The external interface of the integration.
+ * This class is responsible for compiling Markdoc files
+ * and reporting any errors encountered during compilation.
+ */
+
 import fs from 'fs';
 import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
@@ -25,9 +31,6 @@ const CompilationConfigSchema = z.object({
 
 type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
 
-/**
- * The external interface of the integration.
- */
 export class MarkdocHugoIntegration {
   directories: {
     content: string;
@@ -77,6 +80,13 @@ export class MarkdocHugoIntegration {
     return partial;
   }
 
+  /**
+   * Parse a single Markdoc file into a collection
+   * of data structures, such as the AST and the frontmatter.
+   *
+   * @param markdocFilepath The path to the file.
+   * @returns A ParsedFile object.
+   */
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
     const parsedFile = FileParser.parseMdocFile(
       markdocFilepath,

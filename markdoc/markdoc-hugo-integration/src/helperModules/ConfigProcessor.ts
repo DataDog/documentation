@@ -283,6 +283,10 @@ export class ConfigProcessor {
     return final;
   }
 
+  /**
+   * Shorten the keys in a PrefOptionsConfig object to save space
+   * when storing the object inline at the bottom of an .md file.
+   */
   static minifyPrefOptionsConfig(
     prefOptionsConfig: PrefOptionsConfig
   ): MinifiedPrefOptionsConfig {
@@ -298,6 +302,11 @@ export class ConfigProcessor {
     return minifiedPrefOptionsConfig;
   }
 
+  /**
+   * Shorten the keys in a PagePrefsConfig object to save space
+   * when storing the object inline at the bottom of an
+   * .md file.
+   */
   static minifyPagePrefsConfig(
     pagePrefsConfig: PagePrefsConfig
   ): MinifiedPagePrefsConfig {

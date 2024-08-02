@@ -1,16 +1,3 @@
-import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
-import {
-  PagePrefsConfig,
-  PagePrefConfig,
-  MinifiedPagePrefsConfig,
-  MinifiedPagePrefConfig
-} from '../schemas/yaml/frontMatter';
-import {
-  MinifiedPrefOptionsConfig,
-  PrefOptionsConfig
-} from '../schemas/yaml/prefOptions';
-
 /**
  * Functions necessary for rendering
  * at both compile time and in the client on selection change.
@@ -23,7 +10,18 @@ import {
  * for the client.
  */
 
-// -----------------------------------------------------------
+import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
+import {
+  PagePrefsConfig,
+  PagePrefConfig,
+  MinifiedPagePrefsConfig,
+  MinifiedPagePrefConfig
+} from '../schemas/yaml/frontMatter';
+import {
+  MinifiedPrefOptionsConfig,
+  PrefOptionsConfig
+} from '../schemas/yaml/prefOptions';
 
 /**
  * Resolve the page preferences object that is used

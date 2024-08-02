@@ -1,10 +1,10 @@
-import { ClientFunction, ClientVariable } from 'markdoc-static-compiler/src/types';
-
 /**
  * Utility functions for minifying and expanding client-side data.
  * This is used to reduce the size of the inline script included
  * at the bottom of each compiled .md file.
  */
+
+import { ClientFunction, ClientVariable } from 'markdoc-static-compiler/src/types';
 
 export interface MinifiedClientVariable {
   m: 'V';

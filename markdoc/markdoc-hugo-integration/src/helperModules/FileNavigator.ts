@@ -1,10 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-
 /**
  * A module of static helper functions
  * for working with files and directories.
  */
+
+import fs from 'fs';
+import path from 'path';
+
 export class FileNavigator {
   /**
    * Find all files in a directory that match a given regular expression.
