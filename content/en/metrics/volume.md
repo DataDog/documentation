@@ -66,7 +66,7 @@ The Volume page displays a list of your metrics reported to Datadog sorted by es
 
 {{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
 
-When identifying your top 500 metric names by change in volume, you can additionally hover over the number to compare a metric name's # of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics (quick refresher on how we meter and bill for custom metrics here[6]) 
+When identifying the top 500 metric names by change in volume, you can hover over the number to compare a metric name's number of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][6].
 
 To compare your spiking metric's cardinality over time:
 1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
