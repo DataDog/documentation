@@ -66,7 +66,70 @@ For example, you might have a single service like `service:test` showing multipl
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-You can merge the service names using `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` (depending on the language). For more information, see [Configure the Datadog Tracing Library][9].
+You can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
+
+For more information, see [Configure the Datadog Tracing Library][9] or choose your language here:
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+`dd.service.mapping`
+: **Environment Variable**: `DD_SERVICE_MAPPING`<br>
+**Default**: `null`<br>
+**Example**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
+Dynamically rename services via configuration. Useful for making databases have distinct names across different services.
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+
+`DD_SERVICE_MAPPING`
+: Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+`DD_SERVICE_MAPPING`
+: **Default**: `null` <br>
+Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+`DD_SERVICE_MAPPING`
+: **Configuration**: `serviceMapping`<br>
+**Default**: N/A<br>
+**Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+`DD_TRACE_SERVICE_MAPPING`
+: Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
+**Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
+The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+`DD_SERVICE_MAPPING`
+: **INI**: `datadog.service_mapping`<br>
+**Default**: `null`<br>
+Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names][1000]).
+
+[1000]: https://docs.datadoghq.com/tracing/trace_collection/library_config/php#integration-names
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Ruby does not support `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`. See [Additional Ruby configuration][2000] for code options to change the service name.
+
+[2000]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#advanced-configuration
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 
