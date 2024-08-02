@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/
   tag: 설명서
   text: Datadog에서 개발
-kind: 설명서
 title: 커스텀 에이전트 검사 작성
 ---
 

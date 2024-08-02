@@ -5,7 +5,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: リアルユーザーモニタリングについて
-kind: ガイド
 title: モバイルの RUM データをプロキシする
 ---
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/tracing/faq/span_and_trace_id_format/
-kind: ガイド
 title: トレースとスパン ID のフォーマット
 ---
 {{< jqmath-vanilla >}}

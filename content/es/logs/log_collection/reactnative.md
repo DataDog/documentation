@@ -7,16 +7,15 @@ further_reading:
 - link: logs/explorer
   tag: Documentación
   text: Aprende a explorar tus logs
-kind: documentación
 title: Recopilación de logs de React Native
 ---
 
 Envía logs a Datadog desde tus aplicaciones de React Native Mobile con [la biblioteca de registro del cliente `dd-sdk-reactnative` de Datadog][1] y aprovecha las siguientes características:
 
 * Loguear en Datadog en formato JSON de forma nativa.
-* Añade `context` y atributos personalizados adicionales a cada log enviado.
-* Reenvíe excepciones capturadas de JavaScript.
-* Registra las direcciones IP reales de los clientes y los Agents de usuario.
+* Añadir `context` y atributos personalizados adicionales a cada log enviado.
+* Reenviar excepciones capturadas de JavaScript.
+* Registrar las direcciones IP reales de los clientes y los Agents de usuario.
 * Uso optimizado de red con envíos masivos automáticos.
 
 ## Configuración

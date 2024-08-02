@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with Fargate
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"

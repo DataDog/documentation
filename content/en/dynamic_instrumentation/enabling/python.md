@@ -15,10 +15,13 @@ further_reading:
 
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
 
+## Prerequisites
+
+Recommended, [autocomplete and search (open beta)][6] is enabled.
+
 ## Installation
 
-
-1. Install or upgrade your Agent to version [7.44.0][2] or higher.
+1. Install or upgrade your Agent to version [7.45.0][2] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Install `ddtrace`, which provides both tracing and Dynamic Instrumentation:
@@ -80,3 +83,4 @@ See [Dynamic Instrumentation][5] for information about setting snapshot and metr
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
+[6]: /dynamic_instrumentation/symdb/

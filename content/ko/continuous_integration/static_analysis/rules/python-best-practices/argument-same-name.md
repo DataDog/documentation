@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 같은 이름의 인수 없도록 하기
 ---
 ## 메타데이터

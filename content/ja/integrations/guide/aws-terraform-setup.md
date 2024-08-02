@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: ブログ
   text: Datadog を Terraform で管理する
-kind: ガイド
 title: AWS と Terraform のインテグレーション
 ---
 

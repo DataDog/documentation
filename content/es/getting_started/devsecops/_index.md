@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Empezando con los paquetes DevSecOps
 ---
 

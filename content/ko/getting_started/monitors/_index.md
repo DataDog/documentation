@@ -17,7 +17,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 효과적인 모니터 생성을 위해 대화형 세션에 참여하세요.
-kind: 설명서
 title: 모니터 시작하기
 ---
 

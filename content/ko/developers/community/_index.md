@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: 블로그
   text: Datadog 오픈 소스 허브란?
-kind: 설명서
 title: 커뮤니티
 ---
 

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/security/application_security/getting_started/serverless
+- /security/application_security/getting_started/serverless
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
@@ -24,25 +24,25 @@ title: サーバーレスの ASM を有効にする
 
 サーバーレス関数で利用可能な ASM 機能については、[互換性要件][4]を参照してください。
 
-## ホストとコンテナマップ
+## AWS Lambda
 
-AWS Lambda に ASM を構成する場合、以下のような内容になります。
+AWS Lambda に ASM を設定するには、以下の手順を行います。
 
 1. ASM の恩恵を最も受けられる脆弱な関数や攻撃を受けている関数を特定する。[サービスカタログの Security タブ][1]で検索してください。
-2. [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli)、[AWS CDK](https://github.com/DataDog/datadog-cdk-constructs)、[Datadog Serverless Framework プラグイン][6]を使用するか、または Datadog トレーシングレイヤーを使用して手動で ASM インスツルメンテーションをセットアップします。
+2. [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli)、[AWS CDK](https://github.com/DataDog/datadog-cdk-constructs)、または [Datadog Serverless Framework プラグイン][6]を使用するか、Datadog トレーシングレイヤーを使用して手動で、ASM インスツルメンテーションを設定する。
 3. アプリケーションでセキュリティシグナルをトリガーし、その結果の情報を Datadog がどのように表示するかを確認する。
 
 ### 前提条件
 
-- [サーバーレス APM トレーシング][apm-lambda-tracing-setup]は Lambda 関数上にセットアップされ、Datadog に直接トレースを送信します。
-  X-Ray トレーシングは、それだけでは ASM には不十分であり、APM トレーシングを有効にする必要があります。
+- Datadog に直接トレースを送信する Lambda 関数で、[サーバーレス APM トレーシング][apm-lambda-tracing-setup]が設定されていること。
+  X-Ray トレーシングだけでは ASM に不十分で、APM トレーシングを有効にする必要があること。
 
-### はじめに
+### 詳細はこちら
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-[Datadog Serverless Framework プラグイン][1]を使用すると、ASM を使用して Lambda を自動的に構成してデプロイすることができます。
+[Datadog Serverless Framework プラグイン][1]を使用すれば、Lambda を ASM で自動的に構成、デプロイすることができます。
 
 Datadog Serverless Framework プラグインをインストールして構成するには
 
@@ -51,14 +51,14 @@ Datadog Serverless Framework プラグインをインストールして構成す
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. `enableASM` 構成パラメーターで `serverless.yml` を更新することで ASM を有効にします。
+2. `enableASM` 構成パラメーターを使用して `serverless.yml` を更新することで、ASM を有効にします：
    ```yaml
    custom:
      datadog:
        enableASM: true
    ```
 
-   全体として、新しい `serverless.yml` ファイルには少なくとも以下が含まれている必要があります。
+   全体として、新しい `serverless.yml` には最低でも以下のパラメーターが必要です。
    ```yaml
    custom:
      datadog:
@@ -66,7 +66,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
        enableDDTracing: true
        enableASM: true
    ```
-   Lambda の設定をさらに構成するには、[プラグインパラメーター][4]の完全なリストも参照してください。
+   Lambda 設定の構成をさらに行う場合は、[プラグインパラメーター][4]の一覧も参照してください。
 
 4. 関数を再デプロイして呼び出します。数分後、[ASM ビュー][3]に表示されます。
 
@@ -78,11 +78,11 @@ Datadog Serverless Framework プラグインをインストールして構成す
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-Datadog CLI は、新しいデプロイメントを要求することなくインスツルメンテーションを有効にするために既存の Lambda 関数の構成を変更します。これは Datadog のサーバーレスモニタリングを開始する最も速い方法です。
+Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを修正し、新しいデプロイを必要とせずにインスツルメンテーションを可能にします。Datadog のサーバーレスモニタリングをすばやく開始するための最適な方法です。
 
-**関数の初期トレーシングを構成する場合**、以下の手順を実行します。
+**関数の初期トレースを設定する場合**は、以下の手順を実行します。
 
-1. Datadog CLI クライアントをインストールする:
+1. Datadog CLI クライアントをインストールします。
 
     ```sh
     npm install -g @datadog/datadog-ci
@@ -94,21 +94,21 @@ Datadog CLI は、新しいデプロイメントを要求することなくイ�
     datadog-ci lambda instrument -i --appsec
     ```
 
-3. AWS の認証情報を構成する:
+3. AWS の認証情報を構成します。
 
    Datadog CLI は、AWS Lambda サービスへのアクセスを必要とし、AWS JavaScript SDK に依存して[資格情報を解決][1]します。AWS CLI を呼び出すときに使用するのと同じ方法を使用して、AWS の資格情報が構成されていることを確認します。
 
-4. Datadog サイトを構成する:
+4. Datadog サイトを構成します。
 
     ```sh
     export DATADOG_SITE="<DATADOG_SITE>"
     ```
 
-   `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(このページの右側で正しい **Datadog site** が選択されていることを確認してください)。
+   `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます (このページの右側で正しい **Datadog サイト**が選択されていることを確認してください)。 
 
-5. Datadog API キーを構成する:
+5. Datadog API キーを構成します。
 
-   Datadog はセキュリティを理由に AWS Secrets Manager に Datadog API キーを保存することを推奨しています。キーはプレーンテキストの文字列で保存する必要があります (JSON ブロブではない)。Lambda 関数が必要な `secretsmanager:GetSecretValue` IAM 権限を持っていることを確認してください。
+   Datadog は、セキュリティのために、AWS Secrets Manager に Datadog API キーを保存することを推奨します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。Lambda 関数に必要な `secretsmanager:GetSecretValue` IAM 権限があることを確認します。
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -120,7 +120,7 @@ Datadog CLI は、新しいデプロイメントを要求することなくイ�
     export DATADOG_API_KEY="<DATADOG_API_KEY>"
     ```
 
-6. Lambda 関数をインスツルメントする:
+6. Lambda 関数をインスツルメントします。
 
    Lambda 関数をインスツルメントするには、次のコマンドを実行します。
 
@@ -130,10 +130,10 @@ Datadog CLI は、新しいデプロイメントを要求することなくイ�
 
    プレースホルダーを埋めるには
     - `<functionname>` と `<another_functionname>` を Lambda 関数名に置き換えます。
-    - または、`--functions-regex` を使用すると、指定した正規表現にマッチする名前を持つ複数の関数を自動的にインスツルメントすることができます。
+    - また、`--functions-regex` を使用すると、指定した正規表現にマッチする名前を持つ複数の関数を自動的にインスツルメントすることができます。
     - `<aws_region>` を AWS リージョン名に置き換えます。
 
-   **注**: まず開発環境またはステージング環境で Lambda 関数をインスツルメントしてください。もしインスツルメンテーション結果に満足できなかった場合は、同じ引数を使って `uninstrument` を実行し、変更を元に戻してください。
+   **注**: Lambda 関数は、まず開発環境またはステージング環境でインスツルメントしてください。インスツルメンテーションの結果が思わしくない場合は、同じ引数で `uninstrument` を実行し、変更を元に戻してください。
 
    その他のパラメーターは、[CLI ドキュメント][2]に記載されています。
 
@@ -146,7 +146,7 @@ Datadog CLI は、新しいデプロイメントを要求することなくイ�
 
 [Datadog CDK コンストラクト][1] は、Lambda レイヤーを使用して Datadog を関数に自動的にインストールし、Datadog Lambda 拡張機能を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-1. Datadog CDK コンストラクトライブラリをインストールする:
+1. Datadog CDK コンストラクトライブラリをインストールします。
 
     ```sh
     # For AWS CDK v1
@@ -339,17 +339,17 @@ Datadog CLI は、新しいデプロイメントを要求することなくイ�
 {{% /tab %}}
 {{< /tabs >}}
 
-## 送信 - Powershell
+## Google Cloud Run
 
-<div class="alert alert-info">Google Cloud Run の ASM サポートはベータ版です。</a></div>
+<div class="alert alert-info">Google Cloud Run のASM サポートはベータ版です。</a></div>
 
 ### `serverless-init` の動作
 
 `serverless-init` アプリケーションはプロセスをラップし、サブプロセスとしてこれを実行します。このアプリケーションはメトリクス用の DogStatsD リスナーとトレース用の Trace Agent リスナーを起動します。アプリケーションの stdout/stderr ストリームをラップすることでログを収集します。ブートストラップの後、`serverless-init` はサブプロセスとしてコマンドを起動します。
 
-完全なインスツルメントを行うために、Docker コンテナ内で実行される最初のコマンドが `datadog-init` であることを確認してください。これは、それをエントリーポイントとして設定するか、または CMD の最初の引数として設定することで実現できます。
+完全なインスツルメンテーションを得るには、Docker コンテナ内で実行する最初のコマンドとして `datadog-init` を呼び出していることを確認します。これを行うには、エントリーポイントとして設定するか、CMD の最初の引数として設定します。
 
-### はじめに
+### 詳細はこちら
 
 {{< tabs >}}
 {{% tab "NodeJS" %}}
@@ -398,7 +398,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
+5. エントリポイントでラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
    ```dockerfile
    CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ```
@@ -474,7 +474,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Datadog トレーシングライブラリによって起動されたエントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
+5. Datadog トレーシングライブラリによって起動されたエントリポイントでラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
    ```dockerfile
    CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ```
@@ -550,7 +550,7 @@ CMD ["./mvnw", "spring-boot:run"]
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
+5. エントリポイントでラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
    ```dockerfile
    CMD ["./mvnw", "spring-boot:run"]
    ```
@@ -588,7 +588,7 @@ CMD ["your_entrypoint.sh", "./mvnw", "spring-boot:run"]
 {{% /tab %}}
 {{% tab "Go" %}}
 
-アプリケーションをデプロイする前に、Go トレーサーを[手動でインストール][1]してください。"appsec" タグを有効にした状態で Go バイナリをコンパイルします (`go build --tags "appsec" ...`)。その後、以下の指示と引数を Dockerfile に追加してください。
+アプリケーションをデプロイする前に、Go トレーサーを[手動でインストール][1]してください。"appsec" タグを有効にして Go バイナリをコンパイルします (`go build --tags "appsec" ...`)。以下の指示と引数を Dockerfile に追加してください。
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -620,7 +620,7 @@ ENV DD_APPSEC_ENABLED=1
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
+4. エントリポイントでラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
    ```dockerfile
    CMD ["/path/to/your-go-binary"]
    ```
@@ -696,7 +696,7 @@ CMD ["dotnet", "helloworld.dll"]
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
+5. エントリポイントでラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
    ```dockerfile
    CMD ["dotnet", "helloworld.dll"]
    ```
@@ -774,7 +774,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
+5. エントリポイントでラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
    ```dockerfile
    CMD ["rails", "server", "-b", "0.0.0.0"]
    ```
@@ -922,9 +922,9 @@ CMD your_entrypoint.sh php-fpm; your_entrypoint.sh nginx -g daemon off;
 {{% /tab %}}
 {{< /tabs >}}
 
-## 高度なフィルタリング
+## Azure App Service
 
-### 計画と使用
+### セットアップ
 #### アプリケーションの設定を行う
 アプリケーションで ASM を有効にするには、まず、Azure 構成設定の **Application Settings** に、以下のキーと値のペアを追加します。
 
@@ -935,7 +935,7 @@ CMD your_entrypoint.sh php-fpm; your_entrypoint.sh nginx -g daemon off;
 - `DD_SITE` は Datadog サイト[パラメーター][2]です。サイトは {{< region-param key="dd_site" code="true" >}} です。この値のデフォルトは `datadoghq.com` です。
 - `DD_SERVICE` はこのプログラムで使用するサービス名です。デフォルトは `package.json` の名前フィールドの値です。
 - `DD_START_APP` はアプリケーションの起動に使用するコマンドです。例えば、`node ./bin/www` です (Tomcat で動作するアプリケーションでは不要です)。
-- アプリケーションセキュリティを有効にするには、`DD_APPSEC_ENABLED` の値を 1 にします
+- アプリケーションセキュリティを有効にするには、`DD_APPSEC_ENABLED` の値を 1 にする必要があります。
 
 ### 起動コマンドを特定する
 
@@ -945,11 +945,11 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 
 | ランタイム   | `DD_START_APP` 値の例                                                               | 説明                                                                                                                                                                                                                        |
 |-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| .NET   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します。                                                                                                                                                                   |
-| 検索構文 | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br /> **注**: コマンドの `.dll` ファイル名は `.dll` ファイルのファイル名と一致する必要があります。場合によっては、これは Web アプリとは一致しないことがあります。         |
-| ページのパフォーマンスの監視       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します。                                                                                                                                                                           |
-| ブラウザエラーの収集    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。                                                                                                                                      |
-| トラブルシューティング      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | アプリを起動するためのコマンドです。Tomcat で動作するアプリケーションでは不要です。                                                                                                                                                                                                  |
+| Node.js   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します。                                                                                                                                                                   |
+| .NET Core | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br /> **注***: コマンド内の `.dll` ファイル名は、`.dll` ファイルのファイル名と一致する必要があります。場合によっては、Web アプリと一致しないことがあります。         |
+| PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します                                                                                                                                                                           |
+| Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。                                                                                                                                      |
+| Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | アプリを起動するためのコマンドです。Tomcat で動作するアプリケーションでは不要です。                                                                                                                                                                                                  |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
@@ -982,7 +982,7 @@ curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datad
 {{< /tabs >}}
 
 
-## 脅威検出のテスト
+## 脅威検知のテスト
 
 Application Security Management の脅威検出を実際に確認するためには、既知の攻撃パターンをアプリケーションに送信してください。例えば、ユーザーエージェントヘッダーに `dd-test-scanner-log` を設定したリクエストを送信して、[セキュリティスキャナ攻撃][5]の試行をトリガーすることができます。
    ```sh
@@ -990,7 +990,7 @@ Application Security Management の脅威検出を実際に確認するために
    ```
 アプリケーションを有効にして実行すると、数分後に[アプリケーションシグナルエクスプローラー][3]に脅威情報が表示されます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

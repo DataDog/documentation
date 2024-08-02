@@ -4,7 +4,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentation
   text: Intégration Azure
-kind: guide
+
 title: Guide sur la gestion automatisée de l'intégration Azure
 ---
 

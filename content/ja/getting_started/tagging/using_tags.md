@@ -12,7 +12,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags/
   tag: ドキュメント
   text: タグの割り当て方法
-kind: ドキュメント
 title: タグの使用方法
 ---
 

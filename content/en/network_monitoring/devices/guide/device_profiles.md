@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Device Profiles
-kind: guide
+
 is_beta: true
 further_reading:
 - link: "/network_monitoring/devices/guide/build-ndm-profile/"

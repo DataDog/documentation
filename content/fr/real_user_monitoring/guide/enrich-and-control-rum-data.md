@@ -3,7 +3,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans l'Explorer
-kind: guide
+
 title: Enrichir et contrôler les données RUM Browser avec beforeSend
 ---
 

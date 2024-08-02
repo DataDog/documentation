@@ -2,7 +2,7 @@
 categories:
 - developer tools
 - notifications
-custom_kind: インテグレーション
+custom_custom_kind: integration
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 doc_link: https://docs.datadoghq.com/integrations/webhooks/

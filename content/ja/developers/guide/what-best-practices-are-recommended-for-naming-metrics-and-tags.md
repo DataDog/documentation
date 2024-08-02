@@ -8,7 +8,7 @@ further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
   text: タグの概要
-kind: faq
+
 title: メトリクスやタグの命名で推奨されるベストプラクティス
 ---
 

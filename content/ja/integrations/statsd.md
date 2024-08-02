@@ -32,7 +32,7 @@ integration_id: statsd
 integration_title: StatsD
 integration_version: 1.11.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: statsd
 public_title: StatsD

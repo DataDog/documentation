@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/monitors/faq/how-can-i-export-alert-history
-kind: 가이드
 title: 모니터링 경고를 CSV로 내보내기
 ---
 

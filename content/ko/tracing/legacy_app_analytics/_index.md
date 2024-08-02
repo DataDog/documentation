@@ -3,7 +3,6 @@ aliases:
 - /ko/tracing/visualization/search/
 - /ko/tracing/trace_search_and_analytics/
 - /ko/tracing/advanced_usage/
-kind: 설명서
 title: 애플리케이션 분석
 ---
 

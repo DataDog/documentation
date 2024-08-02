@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: 블로그
   text: Datadog 보안 모니터링 공지
-kind: 가이드
 title: AWS Organization용 다계정 설정 AWS 통합
 ---
 

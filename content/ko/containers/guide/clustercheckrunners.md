@@ -12,7 +12,6 @@ further_reading:
 - link: 컨테이너스/클러스터_에이전트/클러스터점검/
   tag: 설명서
   text: 클러스터 검사
-kind: 설명서
 title: 클러스터 검사 러너
 ---
 

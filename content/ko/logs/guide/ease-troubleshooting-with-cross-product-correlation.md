@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/apm/
   tag: 설명서
   text: 신서틱(Synthetic) 테스트 및 트레이스 연결하기
-kind: 지침
 title: 제품 간 상호 연결로 쉬운 트러블슈팅
 ---
 

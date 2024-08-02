@@ -14,7 +14,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para mejorar tu comprensión de APM
-kind: documentación
 title: Empezando con el rastreo
 ---
 

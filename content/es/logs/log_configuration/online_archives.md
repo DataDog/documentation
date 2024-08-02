@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/online-archives-datadog/
   tag: Blog
   text: Análisis e investigación histórica de logs con Archivos en línea
-kind: documentación
 private: true
 title: Archivos en línea
 ---
@@ -47,7 +46,7 @@ Configurar Archivos en línea en la página de [Configuración de índices de lo
 
 ## Búsqueda en Archivos en línea
 
-Selecciona Archivos en línea en el menú desplegable del Logs Explorer para empezar a buscar en Archivos en línea en lugar de en índices. Este menú desplegable se encuentra junto al selector de tiempo. Puedes ajustar el selector de tiempo al marcar opciones preestablecidas, hasta 3 meses, o al marcar la vista de calendario para buscar más atrás en el tiempo.
+Selecciona Online Archive (Archivos en línea) en el menú desplegable del Logs Explorer para empezar a buscar en Archivos en línea en lugar de en índices. Este menú desplegable se encuentra junto al selector de tiempo. Puedes ajustar el selector de tiempo al marcar opciones preestablecidas, hasta 3 meses, o al marcar la vista de calendario para buscar más atrás en el tiempo.
 
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="Cómo buscar tu archivo en línea" style="width:100%;">}}

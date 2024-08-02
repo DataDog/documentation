@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: Blog
   text: Presentamos el hub Open Source de Datadog
-kind: documentación
 title: Desarrolladores
 ---
 

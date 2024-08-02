@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/explorer/export
   tag: 설명서
   text: 로그 탐색기에서 보기 내보내기
-kind: 설명서
 title: 로그 시각화
 ---
 
