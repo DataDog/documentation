@@ -1,6 +1,6 @@
 ---
-title: Code Analysis Git Hooks
-description: Prevent code merge of errors
+title: Git Hooks
+description: Prevent the merging of code with errors
 further_reading:
 - link: "/code_analysis/"
   tag: "Documentation"
@@ -13,33 +13,29 @@ further_reading:
   text: "Learn about Software Composition Analysis"
 ---
 
-## What is a Git hook
+## Overview
 
-A [Git Hook](https://git-scm.com/docs/githooks) is a program executed before a user commits code on a repository
-or push code to a remote location. A Git hook is generally used to run verifications
-and ensure the code enforces some requirements before it's being pushed.
+A [Git hook](https://git-scm.com/docs/githooks) is a program executed before a user commits code to a repository
+or pushes code to a remote location. A Git hook is generally used to run verifications
+and enforce requirements on the code before it is pushed to the remote branch.
 
-## How Datadog Git Hooks work?
-
-Datadog Code Analysis provides a Git Hook to check for static analysis
-violations or secrets before code is pushed or committed. The Datadog Code Analysis Git Hook
-checks the code of the latest commit and the default branch and surfaces
+Datadog Code Analysis provides a Git hook to check for static analysis
+violations or secrets before code is pushed or committed. The Datadog Code Analysis Git hook
+checks the code from the latest commit and the default branch and surfaces
 any errors it detects.
 
-With the Datadog Git Hook, developers are being warned before pushing any code
-containing coding errors, vulnerabilities or secrets. When committing code with
-error, a prompt like the following appears in the user terminal.
+The Datadog Git hook warns developers before they push any code
+containing coding errors, vulnerabilities, or secrets. When you commit code with an
+error, a prompt like the following appears in the user terminal:
 
 {{< img src="code_analysis/git_hooks/git_hook.png" alt="Datadog Git Hook detecting vulnerabilities" style="width:100%;">}}
 
-## How to use the Datadog Git Hook
+## Setup
 
-Download the `datadog-git-hook` from the release page or the [Datadog Static Analyzer
-releases](https://github.com/DataDog/datadog-static-analyzer/releases) and install
-the program on your computer.
-
-Add a `.git/hooks/pre-push` file in the repository with the script below (it
-assumes the `datadog-static-analyzer-git-hook` binary is in `/usr/local/bin/datadog-static-analyzer-git-hook`).
+1. Download the `datadog-git-hook` program from the release page or the [Datadog Static Analyzer
+releases](https://github.com/DataDog/datadog-static-analyzer/releases).
+2. Install the program on your computer.
+3. Add a `.git/hooks/pre-push` file in the repository with the script below. **Note:** The script assumes the `datadog-static-analyzer-git-hook` binary is in `/usr/local/bin/datadog-static-analyzer-git-hook`.
 
 ```shell
 #!/bin/sh
@@ -61,12 +57,12 @@ else
 fi
 ```
 
-Note that the program accepts the following parameters:
+The program accepts the following parameters:
 
- - `--confirmation`: ask the user for confirmation to override the Git Hook check
- - `--default-branch`: specify the name of the default branch
- - `--secrets`: enable secrets detection (in private beta)
- - `--output <file>`: export the findings found in the commit into a SARIF file
+ - `--confirmation`: Ask the user for confirmation to override the Git hook check
+ - `--default-branch`: Specify the name of the default branch.
+ - `--secrets`: Enable secrets detection (private beta).
+ - `--output <file>`: Export the findings found in the commit into a SARIF file.
 
 ## Further reading
 
