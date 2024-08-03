@@ -38,6 +38,10 @@ cascade:
     {{< nextlink href="/dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="DDSQL Editor:" >}}
+    {{< nextlink href="/dashboards/guide/ddsql_use_cases" >}}Common DDSQL Queries and Use Cases{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Deprecated APIs:" >}}
     {{< nextlink href="dashboards/guide/screenboard-api-doc" >}}Screenboard API{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/timeboard-api-doc" >}}Timeboard API{{< /nextlink >}}
