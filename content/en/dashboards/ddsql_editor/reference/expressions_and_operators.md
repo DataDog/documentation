@@ -63,9 +63,6 @@ DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent
 | NOT     | Boolean logic, !a       |
 | IS NULL | Returns true for each row that is null |
 
-[1]: /dashboards/ddsql_editor/reference/tags/
-[2]: https://www.postgresql.org/docs/current/functions-comparison.html
-
 ## CASE
 
 The `CASE` expression is a generic conditional expression, similar to if/else statements in other programming languages. `CASE` comes in two forms, simple and searched.
@@ -111,3 +108,6 @@ CAST(expression AS type)
 Not all types are convertible in this way.
 
 DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>`. For example, `SELECT 1::text;`.
+
+[1]: /dashboards/ddsql_editor/reference/tags/
+[2]: https://www.postgresql.org/docs/current/functions-comparison.html
