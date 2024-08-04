@@ -1,6 +1,6 @@
 ---
 aliases:
-- /security_platform/application_security
+- /es/security_platform/application_security
 description: Monitoriza amenazas dirigidas al sistema de producción basándote en el
   contexto de ejecución proporcionado por las trazas (traces) distribuidas.
 further_reading:
@@ -13,15 +13,12 @@ further_reading:
 - link: /security/application_security/software_composition_analysis/
   tag: Documentación
   text: Análisis de la composición del software
-- link: /security/application_security/enabling/#compatibility
-  tag: Documentación
-  text: Obtener más información sobre la compatibilidad de lenguajes y marcos
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: Página del producto
   text: Datadog Application Security Management
 - link: https://www.datadoghq.com/blog/datadog-application-security/
   tag: Blog
-  text: Anuncio sobre la seguridad de las aplicaciones de Datadog
+  text: Presentación de la seguridad de las aplicaciones en Datadog
 - link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: Blog
   text: Aplicaciones serverless seguras con Datadog ASM
@@ -47,7 +44,7 @@ title: Application Security Management
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
+<div class="alert alert-warning">Application Security Management no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="Panel de señales de seguridad en Datadog, que muestra flujos (flows) de ataque y gráficos de llamas" width="75%">}}
@@ -72,7 +69,7 @@ Si quieres saber cómo está estructurado Application Security Management y cóm
 
 Valiéndose de las [reglas predefinidas] proporcionadas[4], ASM detecta amenazas sin configuración manual. Si ya tienes configurado [APM][1] de Datadog en un host físico o virtual, para la configuración sólo es necesario definir una variable de entorno para empezar.
 
-Para empezar a configurar tu entorno para detectar amenazas y protegerte de ellas con ASM, consulta la [documentación sobre la activación][5]. Tras configurar ASM, podrás empezar a investigar y corregir señales de seguridad en el [Explorador de señales de seguridad][6].
+Para empezar a configurar su entorno para detectar y proteger amenazas con ASM, siga la documentación de habilitación de cada producto. Una vez configurado ASM, puede empezar a investigar y corregir las señales de seguridad en el [Explorador de señales de seguridad][6].
 
 ## Investigar y corregir señales de seguridad
 
@@ -90,7 +87,6 @@ El [Análisis de composición del software (SCA)][8] te muestra cuándo están e
 [2]: /es/agent/
 [3]: /es/security/application_security/how-appsec-works/
 [4]: /es/security/default_rules/?category=cat-application-security
-[5]: /es/security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
 [8]: /es/security/application_security/software_composition_analysis/
