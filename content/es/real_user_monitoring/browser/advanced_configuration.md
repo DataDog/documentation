@@ -30,7 +30,7 @@ Existen varias formas de modificar los [datos y el contexto recopilados][1] por 
 
 - Proteger datos sensibles como la información de identificación personal.
 - Conectar una sesión del usuario con tu identificación interna de ese usuario, ayuda con el soporte.
-- Reducir la cantidad de datos RUM que estás recopilando, mediante el muestreo de los datos.
+- Reducir la cantidad de datos de RUM que estás recopilando, mediante el muestreo de los datos.
 - Proporcionar más contexto que el que ofrecen los atributos por defecto sobre la procedencia de los datos.
 
 ## Sustituir los nombres de las vistas de RUM por defecto
