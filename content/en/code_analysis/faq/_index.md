@@ -76,7 +76,7 @@ Datadog's static analyzer is available under an open source license and the code
 
 ### Does the analyzer runs on Windows?
 
-The Datadog Static Analyzer supports Windows since version 0.4.1.
+The Datadog Static Analyzer version 0.4.1 or higher is supported on Windows.
 
 ## Software Composition Analysis
 
