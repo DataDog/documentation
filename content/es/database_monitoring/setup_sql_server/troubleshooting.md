@@ -242,9 +242,9 @@ Es posible que el Agent no encuentre el controlador. Esto sucede con mayor frecu
 
 Para obtener ayuda al elegir un controlador, consulta la sección [elegir un controlador de SQL Server](#picking-a-sql-server-driver) para saber cómo configurar correctamente tu controlador con el Agent.
 
-### Conexión a SQL Server en un host Linux
+### Conexión a SQL Server en un host de Linux
 
-Para conectar SQL Server (ya sea alojado en Linux o Windows) a un host Linux:
+Para conectar SQL Server (ya sea alojado en Linux o Windows) a un host de Linux:
 
 1. Instala el [controlador ODBC de Microsoft][11] para tu distribución Linux.
    Si no sabes cuál es el nombre del controlador que debes utilizar, puede encontrarlo entre paréntesis en la parte superior de `/etc/odbcinst.ini`.
