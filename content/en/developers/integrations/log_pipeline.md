@@ -72,10 +72,10 @@ Logs sent to Datadog are processed in [log pipelines][13] to enrich, standardize
 
 #### Add pipeline processors
 
-Use processors within your pipelines to enrich, restructure your data, and generate log attributes. For a list of all log processors, see [Processors][10].
-
 Centralizing logs from various technologies and applications can generate large amounts of unique attributes. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17].
 Before defining your pipeline processors make sure to review [Datadog's Standard Attributes][6].
+
+Use processors within your pipelines to enrich, restructure your data, and generate log attributes. For a list of all log processors, see [Processors][10].
 
 ##### Requirements
 
@@ -101,15 +101,16 @@ Set a namespace for custom attributes within your logs
 : Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14].
 Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. 
 
-1. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Use grok processors to parse out attributes and enrich logs prior to remapping or further processing.
-2. After extracting log attributes, remap them to [Datadog's Standard Attributes][6] where possible using the [Attribute Remapper][5].
-3. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
-4. For more advanced processing and data transformations, make use of additional [processors][10].  
+1. Expand the newly created pipeline and click the "Add Processor" button to begin building your pipeline using processors.
+2. If the integration's logs aren't `JSON` formatted, extract attribute information using the [Grok Processor][8]. Use grok processors to parse out attributes and enrich logs prior to remapping or further processing.
+3. After extracting log attributes, remap them to [Datadog's Standard Attributes][6] where possible using [Attribute Remappers][5].
+4. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
+5. For more advanced processing and data transformations, make use of additional [processors][10].  
 For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
 
 **Tips**
 * Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
-* To maintain optimal grok parsing performance, avoid wildcard matchers and make your parsing statements as specific as possible.
+* To maintain optimal grok parsing performance, avoid wildcard matchers such as `%{data:}` and `%{regex(".*"):}`. Make your parsing statements as specific as possible.
 * Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
 
 ### Create facets
