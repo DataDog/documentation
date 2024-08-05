@@ -401,4 +401,4 @@ For more information on custom metric submission, see [Serverless Custom Metrics
 [6]: /serverless/configuration
 [7]: /serverless/custom_metrics?tab=ruby
 [8]: /tracing/custom_instrumentation/ruby/
-[9]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[9]: /security/application_security/serverless/

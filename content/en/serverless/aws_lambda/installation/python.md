@@ -462,4 +462,4 @@ def get_message():
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=python
 [5]: /tracing/custom_instrumentation/python/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[6]: /security/application_security/serverless/

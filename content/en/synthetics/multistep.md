@@ -69,7 +69,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    See the [HTTP Tests documentation][101] to create an HTTP request and add assertions. Assertions are optional in multistep API tests.
 
-   [101]: /synthetics/multistep#define-the-request
+   [101]: /synthetics/api_tests/http_tests/
 
    {{% /tab %}}
    {{% tab "gRPC" %}}
