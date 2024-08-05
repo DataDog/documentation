@@ -24,7 +24,11 @@ const voidElements = new Set([
   'wbr'
 ]);
 
-export default function render(node: RenderableTreeNodes, config?: Config): string {
+export default function render(
+  node: RenderableTreeNodes,
+  config?: Config,
+  components?: Record<string, any>
+): string {
   if (typeof node === 'string' || typeof node === 'number')
     return escapeHtml(String(node));
 
@@ -35,7 +39,7 @@ export default function render(node: RenderableTreeNodes, config?: Config): stri
   if (Array.isArray(node))
     return node
       .map((n) => {
-        return render(n, config);
+        return render(n, config, components);
       })
       .join('');
 
@@ -60,6 +64,13 @@ export default function render(node: RenderableTreeNodes, config?: Config): stri
 
   const { name, attributes, children = [] } = node;
 
+  console.log('name:', name);
+
+  if (components && name in components) {
+    const Klass = components[name];
+    return new Klass(node).render();
+  }
+
   if ('if' in node && node.if) {
     let ref = '';
     if ('ref' in node.if) {
@@ -73,7 +84,7 @@ export default function render(node: RenderableTreeNodes, config?: Config): stri
       wrapperTagClasses += ` markdoc__hidden`;
     }
     let wrapperTagOutput = `<${name} class="${wrapperTagClasses}" ${ref}>`;
-    wrapperTagOutput += render(children, config);
+    wrapperTagOutput += render(children, config, components);
     wrapperTagOutput += `</${name}>`;
     return wrapperTagOutput;
   }
@@ -87,7 +98,7 @@ export default function render(node: RenderableTreeNodes, config?: Config): stri
 
   if (voidElements.has(name)) return output;
 
-  if (children.length) output += render(children, config);
+  if (children.length) output += render(children, config, components);
   output += `</${name}>`;
 
   return output;

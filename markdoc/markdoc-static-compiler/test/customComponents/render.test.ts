@@ -1,9 +1,38 @@
-import MarkdocStaticCompiler from '../../dist';
+import MarkdocStaticCompiler, { Tag, Config, CustomHtmlComponent } from '../../dist';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 
-describe('rendering stages', () => {
+const alert = {
+  render: 'Alert',
+  children: ['paragraph'],
+  attributes: {
+    level: {
+      type: String,
+      default: 'info',
+      matches: ['info', 'warning']
+    }
+  }
+};
+
+class Alert extends CustomHtmlComponent {
+  level = 'info';
+
+  constructor(
+    tag: Tag,
+    config?: Config,
+    components?: Record<string, CustomHtmlComponent>
+  ) {
+    super(tag, config, components);
+    this.level = tag.attributes.level || 'info';
+  }
+
+  render() {
+    return `<div class="alert ${this.level}">${this.contents}</div>`;
+  }
+}
+
+describe('custom components', () => {
   // retrieve test input file
   const inputPath = __dirname + '/input.mdoc';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
@@ -17,17 +46,29 @@ describe('rendering stages', () => {
       test_string: 'Datadog',
       always_false: false,
       always_true: true
+    },
+    tags: {
+      alert
     }
   });
 
   // stage 3: render the HTML
-  const html = MarkdocStaticCompiler.renderers.html(renderableTree, {
-    variables: {
-      test_string: 'Datadog',
-      always_false: false,
-      always_true: true
+  const html = MarkdocStaticCompiler.renderers.html(
+    renderableTree,
+    {
+      variables: {
+        test_string: 'Datadog',
+        always_false: false,
+        always_true: true
+      },
+      tags: {
+        alert
+      }
+    },
+    {
+      Alert
     }
-  });
+  );
 
   // apply some styles to the HTML
   // to make "hidden" content visible but
@@ -46,6 +87,14 @@ describe('rendering stages', () => {
     .markdoc__hidden code {
       color: pink;
     }
+
+    div.info {
+      border: 1px solid blue;
+    }
+
+    div.warning {
+      border: 1px solid red;
+    }
   </style>
   ${html}
   `;
@@ -57,17 +106,19 @@ describe('rendering stages', () => {
 
   test('ast', () => {
     expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-      '../__snapshots__/ast.snap.json'
+      '../__snapshots__/customComponents/ast.snap.json'
     );
   });
 
   test('renderableTree', () => {
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      '../__snapshots__/renderableTree.snap.json'
+      '../__snapshots__/customComponents/renderableTree.snap.json'
     );
   });
 
   test('renderedHtml', () => {
-    expect(formattedHtml).toMatchFileSnapshot('../__snapshots__/renderedHtml.snap.html');
+    expect(formattedHtml).toMatchFileSnapshot(
+      '../__snapshots__/customComponents/renderedHtml.snap.html'
+    );
   });
 });

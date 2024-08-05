@@ -12,6 +12,7 @@ import transforms from './src/transforms';
 import { parseTags } from './src/utils';
 import validator, { validateTree } from './src/validator';
 import { reresolveFunctionNode } from './src/reresolver';
+import { CustomHtmlComponent } from './src/CustomHtmlComponent';
 
 import type { Node, ParserArgs, Tag } from './src/types';
 import type Token from 'markdown-it/lib/token';
@@ -100,7 +101,8 @@ export {
   validator,
   truthy,
   format,
-  reresolveFunctionNode
+  reresolveFunctionNode,
+  CustomHtmlComponent
 };
 
 export default class MarkdocStaticCompiler {
