@@ -696,18 +696,21 @@ class Integrations:
             content = {}
         no_integration_issue = True
         tab_logic = False
+        # Prioritize having metric-spec.yaml over metadata.csv
         metrics = glob.glob(
-            "{path}{sep}*metadata.csv".format(
-                path=dirname(file_name), sep=sep
+                "{path}{sep}*metric-spec.yaml".format(path=dirname(file_name), sep=sep)
             )
-        ) + glob.glob(
-            "{path}{sep}*metric-spec.yaml".format(
-                path=dirname(file_name), sep=sep
+        if metrics:
+            metrics = metrics[0] if len(metrics) > 0 else None
+            metrics_exist = metrics and exists(metrics)
+        else:
+            metrics = glob.glob(
+                "{path}{sep}*metadata.csv".format(path=dirname(file_name), sep=sep)
             )
-        )
-        metrics = metrics[0] if len(metrics) > 0 else None
-        metrics_exist = (metrics and exists(metrics)
-                         and linecache.getline(metrics, 2))
+            metrics = metrics[0] if len(metrics) > 0 else None
+            metrics_exist = (
+                metrics and exists(metrics) and linecache.getline(metrics, 2)
+            )
         service_check = glob.glob("{file}.json".format(
             file=self.data_service_checks_dir + basename(dirname(file_name))))
         service_check = (
