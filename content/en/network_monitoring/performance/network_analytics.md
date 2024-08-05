@@ -28,9 +28,15 @@ The Network Analytics page provides insights into your overall network health an
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
+To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.
 
-{{< img src="network_performance_monitoring/network_analytics/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
+
+For example, if you want to see network traffic on your services between your **client** ordering service called `orders-app` and your **server** database service called `azure.sql_database`, use `client_service:orders-app` in the search bar, and use the `service` tags in the **View clients as** and **View servers as** drop down to visualize the traffic flow between those two services: 
+
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when grouping by tags" style="width:90%;">}}
+
+For information on `NA/Untagged` traffic paths, see [Unresolved traffic.](#unresolved-traffic)
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
@@ -45,25 +51,6 @@ You can further aggregate to isolate to traffic where the client or server match
 Additionally, set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
-
-### Tagging
-
-Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.  
-
-In the following illustration, when grouping from **client** tag `service` to **server** tag `service`, the resulting data displays the traffic flow from `service2` to `service3`: 
-
-{{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
-
-To further elaborate on the above diagram, the following shows the traffic flow when grouped by the respective **client** and **server** tags:
-
-| Client Tags              | Server Tags              | Traffic Flow Result       |
-|--------------------------|--------------------------|---------------------------|
-| `service`     | `service`     | `service2` **&#8594;** `service3` |
-| `container` | `container` | `container2` **&#8594;** `container3` |
-| `az`               | `az`               | `az2` **&#8594;** `az3`           |
-| `region`       | `region`       | `region1` **&#8594;** `region2`   |
-
-See [custom facets](#custom-facets), below, for other tags. 
 
 ### Recommended queries
 
