@@ -22,7 +22,7 @@ Ce guide décrit la démarche à suivre pour tester une interface utilisateur (I
 
 Pour créer une assertion à l'aide de code JavaScript personnalisé, procédez comme suit :
 
-1. Cliquez sur **Assertion** et sélectionnez **Test your UI with custom JavaScript**.
+1. Cliquez sur **Assertion** et sélectionnez **Test custom JavaScript assertion**.
 2. Rédigez le corps de votre assertion.
 3. Si vous le souhaitez, sélectionnez un élément cible dans votre IU.
 4. Cliquez sur **Apply**.
