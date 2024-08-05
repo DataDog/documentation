@@ -2,6 +2,7 @@
 title: Auto Instrumentation
 aliases:
     - /tracing/llm_observability/auto_instrumentation
+    - /llm_observability/auto_instrumentation
 further_reading:
     - link: '/llm_observability/setup/sdk'
       tag: 'Documentation'

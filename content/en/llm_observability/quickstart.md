@@ -2,7 +2,6 @@
 title: Trace An LLM Application
 aliases:
     - /tracing/llm_observability/quickstart
-    - /llm_observability/quickstart
 further_reading:
     - link: '/llm_observability'
       tag: 'Documentation'
@@ -87,6 +86,6 @@ If your application consists of more elaborate prompting or complex chains or wo
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /llm_observability/setup/api
 [9]: /llm_observability/setup/sdk/#command-line-setup
-[10]: /llm_observability/auto_instrumentation
+[10]: /llm_observability/setup/sdk/auto_instrumentation/
 [11]: /llm_observability/setup/
 [12]: https://github.com/DataDog/llm-observability

@@ -7,10 +7,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
       tag: 'Blog'
       text: 'Get granular LLM observability by instrumenting your LLM chains'
-    - link: '/llm_observability/guide/create_a_trace'
+    - link: '/llm_observability/quickstart'
       tag: 'Guide'
       text: 'Trace an LLM Application'
-    - link: '/llm_observability/guide/submit_evaluations'
+    - link: '/llm_observability/submit_evaluations'
       tag: 'Guide'
       text: 'Submit Evaluations to LLM Observability'
 ---
@@ -201,13 +201,13 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 [5]: /llm_observability/setup/sdk/#installation
 [6]: /llm_observability/setup/sdk/#command-line-setup
 [7]: /llm_observability/setup/sdk/#in-code-setup
-[8]: /llm_observability/guide/create_a_trace
+[8]: /llm_observability/quickstart
 [9]: /llm_observability/setup/sdk/#tracing-spans
 [10]: https://app.datadoghq.com/dash/integration/llm_analytics
 [11]: /llm_observability/setup/sdk/#annotating-a-span
 [12]: /llm_observability/setup/sdk/#annotating-a-span
 [13]: /llm_observability/setup/sdk/#tracking-user-sessions
 [14]: /llm_observability/setup/sdk/#tracing-multiple-applications
-[15]: /llm_observability/guide/submit_evaluations
+[15]: /llm_observability/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability
