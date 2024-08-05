@@ -10,6 +10,6 @@ cascade:
 ---
 
 {{< whatsnext desc="LLM Observability Guides:" >}}
-    {{< nextlink href="/llm_observability/guide/create_a_trace" >}}Create an LLM Application Trace{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/guide/submit_evaluations" >}}Submit Evaluations{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/quickstart" >}}Create an LLM Application Trace{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/submit_evaluations" >}}Submit Evaluations{{< /nextlink >}}
 {{< /whatsnext >}}

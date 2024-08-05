@@ -64,4 +64,4 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [3]: /llm_observability/setup/sdk
 [4]: /llm_observability/setup/api
 [5]: /llm_observability/setup
-[6]: /llm_observability/guide/create_a_trace
+[6]: /llm_observability/quickstart

@@ -3678,39 +3678,49 @@ menu:
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
-      identifier: llm_observability
+      identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
     - name: Terms and Concepts
       url: llm_observability/terms/
-      parent: llm_observability
+      parent: llm_obs
       identifier: llm_obs_terms
       weight: 1
+    - name: Quickstart
+      url: llm_observability/quickstart/
+      parent: llm_obs
+      identifier: llm_obs_quickstart
+      weight: 2
     - name: Setup
       url: llm_observability/setup/
-      parent: llm_observability
+      parent: llm_obs
       identifier: llm_obs_setup
-      weight: 2
+      weight: 3
     - name: SDK
       url: llm_observability/setup/sdk/
       parent: llm_obs_setup
       identifier: llm_obs_setup_sdk
-      weight: 201
+      weight: 301
+    - name: Auto Instrumentation
+      url: llm_observability/setup/sdk/auto_instrumentation
+      parent: llm_obs_setup_sdk
+      identifier: llm_obs_setup_sdk_auto_instrumentation
+      weight: 3101
     - name: API
       url: llm_observability/setup/api/
       parent: llm_obs_setup
       identifier: llm_obs_setup_api
-      weight: 202
-    - name: Auto Instrumentation
-      url: llm_observability/auto_instrumentation/
-      parent: llm_observability
-      identifier: llm_obs_auto_instrumentation
-      weight: 3
+      weight: 302
+    - name: Submit Evaluations
+      url: llm_observability/submit_evaluations/
+      parent: llm_obs
+      identifier: llm_obs_submit_evaluations
+      weight: 4
     - name: Guides
       url: llm_observability/guide/
-      parent: llm_observability
+      parent: llm_obs
       identifier: llm_obs_guide
-      weight: 4
+      weight: 5
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
