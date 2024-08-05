@@ -156,7 +156,7 @@ class Integrations:
     @staticmethod
     def format_metric_spec_yaml(key_name, metric_spec_filename, yml_filename):
         """
-        Given a file path to metric_spec.yaml file, format all metrics
+        Given a file path to metric-spec.yaml file, format all metrics
 
         :param key_name: integration key name for root object
         :param metric_spec_filename: path to input metric spec file
@@ -394,7 +394,7 @@ class Integrations:
         Take a single metadata or metric spec file and formats it to yaml
         :param file_name: path to a metadata csv or yaml file
         """
-        if file_name.endswith("/metadata.csv") or file_name.endswith("/metric_spec.yaml"):
+        if file_name.endswith("/metadata.csv") or file_name.endswith("/metric-spec.yaml"):
             key_name = basename(
                 dirname(normpath(file_name))
             )
@@ -411,7 +411,7 @@ class Integrations:
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
             )
-        if file_name.endswith("/metric_spec.yaml"):
+        if file_name.endswith("/metric-spec.yaml"):
             self.format_metric_spec_yaml(key_name, file_name, new_file_name)
         else:
             self.metric_csv_to_yaml(key_name, file_name, new_file_name)
