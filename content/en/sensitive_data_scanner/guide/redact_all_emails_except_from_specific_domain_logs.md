@@ -1,5 +1,5 @@
 ---
-title: Redact All Emails Except from a Specific Domain for Logs
+title: Redact All Emails Except from a Specific Domain in Logs
 disable_toc: false
 further_reading:
 - link: "/sensitive_data_scanner/"
