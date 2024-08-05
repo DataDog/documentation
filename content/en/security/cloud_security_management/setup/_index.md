@@ -96,6 +96,9 @@ The following table shows which sections appear on the Setup page for each featu
 
 <div class="alert alert-info">For instructions on setting up Agentless Scanning, see <a href="/security/cloud_security_management/setup/agentless_scanning">Setting up CSM Agentless Scanning</a>.</div>
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
+
 ## Enable additional features
 
 You can enable additional CSM features at any time by returning to the [Features][11] page and clicking **Enable** for the features you want to add. This page also serves as a status page that indicates which features are enabled, which features are enabled but not yet configured, and which features are not enabled.
