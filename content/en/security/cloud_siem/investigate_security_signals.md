@@ -58,13 +58,14 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Click the **Signals** tab at the top of the page.
 1. Click on a security signal from the table.
 1. In the **What Happened** section, see the logs that matched the query. Hover over the query to see the query details.
-    - You can also see specific information like username or network IP. Click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
-1. In the **Signal Status & Assignee** section:   
-  a. Click the dropdown to change the triage status of the signal. The default status is `OPEN`.
+    - You can also see specific information like username or network IP. In Details, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
+1. In the **Next Steps** section:   
+  a. Under _Triage_, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
       - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
       - `Under Review`: During an active investigation, you can switch the signal state to `Under Review`. From the `Under Review` state, you can move the signal state to `Archived` or `Open` as needed.
-      - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state within 30 days of being created.</ul>
+      - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state. All signals are locked after 30 days of being created.</ul>
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
+  c. Under _Take Action_, you can easily create a case, declare an incident, edit suppressions, or run workflows. Creating a case will automatically assign the signal to yourself and set the signal into `Under Review`. 
 
 ### Triage multiple signals
 
@@ -85,7 +86,7 @@ Use Workflow Automations to carry out actions to help you investigate and remedi
 - Looking up an IP address with a third party threat intelligence provider.
 - Sending slack messages to your colleagues to get help with your investigation.
 
-In the signal side panel, click the **Workflows** tab to see which workflows were triggered for the signal. Click **Run Workflow** to manually trigger a workflow for the signal. You can also manually trigger a workflow from the **Next Steps** section at the top of the signal panel.
+In the signal side panel, use the **Next Steps** area to select **Run Workflows**. The workflow browser allows you to search and select a workflow to run. You may click the **Workflows** tab to see which workflows were triggered for the signal. 
 
 To trigger a Workflow automatically for any Security Signal, see [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
 
@@ -101,12 +102,11 @@ Click the **Logs** tab to view the logs related to the signal. Click **View All 
 
 To investigate entities related to the signal:
 
-1. Click the **Entities** tab to see entities related to the signal, such as IP addresses.
-1. Click **View Related Logs** to see logs related to that entity in the Log Explorer.
+1. Click the **Entities** tab to see entities related to the signal, such as Users or IP addresses.
 1. Click the down arrow next to **View Relate Logs** and you can:   
     - Select **View IP Dashboard** to see more information about the IP address in the IP Investigation dashboard.
     - Select **View Related Signals** to open the Signals Explorer and see the other signals associated with the IP address.
-1. For cloud environment entities, such as an assumed role or IAM user, click **View in Investigator** to go to the Investigator to get more details.
+1. For cloud environment entities, such as an assumed role or IAM user, view the activity graph to see what other actions the user took and click **View in Investigator** to go to the Investigator to get more details.
 
 ### Related signals
 
@@ -116,8 +116,10 @@ Click the **Related Signals** tab to see the related signals and what informatio
 
 Do one of the following to view the suppression rules affecting the detection rule that generated the signal:
 
-- Click the **Suppressions** tab to see a list of suppressions, if there are any. Click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
+- In the **What Happened** section, click hover your mouse over the funnel icon and click **Add Suppression**.
 - In the **Next Steps** section, click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
+- Click the **Suppressions** tab to see a list of suppressions, if there are any. Click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
+
 
 ## Collaborate
 
@@ -153,7 +155,7 @@ If you want to add the signal to an incident, click the down arrow next to **Dec
 
 Datadog Cloud SIEM offers integrated threat intelligence provided by our threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IP addresses known to be used by malicious actors), so that you can quickly identify which potential threats to address.
 
-Datadog automatically enriches all ingested logs for indicators of compromise (IOCs) from our threat intelligence feeds. If a log contains a match to a known IOC, a `threat_intel` attribute is appendeded to the log event to provide additional insights based on available intelligence.
+Datadog automatically enriches all ingested logs for indicators of compromise (IOCs) from our threat intelligence feeds. If a log contains a match to a known IOC, a `threat_intel` attribute is appended to the log event to provide additional insights based on available intelligence.
 
 The query to see all threat intelligence matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
 
