@@ -60,13 +60,14 @@ To set up a pipeline:
     - [Split logs][4]
     - [Archive logs to Datadog Archives][5]
     - [Sensitive data redaction][6]
+    - [Log Enrichment][7]
 1. Select and set up your source.
 1. Select and set up your destinations.
 1. Set up you processors.
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
 
-See [Advanced Configurations][7] for bootstrapping options and for details on setting up the Worker with Kubernetes.
+See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Explore Observability Pipelines
 
@@ -128,4 +129,5 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [4]: /observability_pipelines/split_logs/
 [5]: /observability_pipelines/archive_logs/
 [6]: /observability_pipelines/sensitive_data_redaction/
-[7]: /observability_pipelines/advanced_configurations/
+[7]: /observability_pipelines/log_enrichment/
+[8]: /observability_pipelines/advanced_configurations/
