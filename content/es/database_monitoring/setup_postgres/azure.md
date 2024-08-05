@@ -268,7 +268,7 @@ Para obtener información adicional sobre la configuración de los campos `deplo
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Para configurar el Agent de Database Monitoring que se ejecuta en un contenedor de Docker, puedes configurar las [plantillas de la integración Autodiscovery][1] como etiquetas (tags) de Docker en tu contenedor del Agent.
+Para configurar el Agent de Database Monitoring que se ejecuta en un contenedor de Docker, puedes configurar las [plantillas de la integración Autodiscovery][1] como etiquetas (labels) de Docker en tu contenedor del Agent.
 
 **Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que las etiquetas de Autodiscovery funcionen.
 
