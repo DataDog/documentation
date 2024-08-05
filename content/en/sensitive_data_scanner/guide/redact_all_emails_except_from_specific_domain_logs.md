@@ -42,25 +42,25 @@ Navigate to [Log Explorer][2] to confirm that new logs coming in with those emai
 
 ## Add the email domain attribute as a facet
 
-1. In [Log Explorer][2], select a log that contains the email with the specified domain.
+1. In [Log Explorer][2], select a log that contains an email with the specified domain.
 1. Click on the cog next to the domain attribute you just created.
 1. Select **Create facet for...**.
-1. Optionally, add it to a group in the **Advanced Options** section.
+1. Optionally, add the facet to a group in the **Advanced Options** section.
 1. Click **Add**.
 
-## Configure the Sensitive Data Scanner scanning group to filter out logs with the domain attribute
+## Configure the Sensitive Data Scanner scanning group to filter out logs with your domain attribute
 
-Update your Sensitive Data Scanner's scanning group to filter out logs with the domain attribute, so only logs that do not have that email domain are redacted.
+Update your Sensitive Data Scanner's scanning group to filter out logs with the domain attribute that you created, so only logs that do not have that email domain are redacted.
 
 1. Navigate to the Sensitive Data Scanner [Configuration][3] page.
 1. Click the pencil icon to the left of the scanning group you want to update.
-1. In the **Filter** field, add the domain attribute so those logs are filtered out. For example, to filter out logs with the email domain `test.com`, add `-@domain:test.com` to the filter query.
+1. In the **Filter** field, add the domain attribute so that logs with that attribute are filtered out. For example, to filter out logs with the email domain `test.com`, add `-@domain:test.com` to the filter query.
 {{< img src="sensitive_data_scanner/guides/scanning_group_filter_domain.png" alt="The scanning group's filter query with -@domain:test.com" style="width:100%;" >}}
 1. Click **Update**.
 
 Navigate to [Log Explorer][2] to confirm that the new logs coming in do not have emails with the specified domain redacted.
 
-{{< img src="sensitive_data_scanner/guides/log_explorer_domain.png" alt="The Log Explorer showing logs with redacted emails and a log showing the test.com email not redacted" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/guides/log_explorer_domain.png" alt="The Log Explorer showing logs with redacted email addresses and one log showing the test.com email unredacted" style="width:100%;" >}}
 
 ## Further reading
 
