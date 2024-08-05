@@ -11,9 +11,9 @@ further_reading:
 
 This guide walks you through how to redact all emails, except the ones from a specific email domain (for example, `@test.com`), in your logs.
 
-## Set up a grok processor
+## Set up a grok parser in your logs pipeline
 
-If the email domain you do not want redacted is not an existing log attribute, set up a grok processor to identify all logs with the email domain and add it as an attribute.
+If the email domain you do not want redacted is not an existing log attribute, set up a grok parser to identify all logs with the email domain and add it as an attribute.
 
 1. Navigate to [Log Pipeline][1].
 1. Select your pipeline.
