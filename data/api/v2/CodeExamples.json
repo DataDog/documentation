@@ -1043,6 +1043,13 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
   "AggregateSpans": [
     {
       "group": "spans",
