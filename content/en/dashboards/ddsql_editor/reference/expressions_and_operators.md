@@ -49,19 +49,10 @@ DDSQL also supports the following comparator keywords as they are defined in the
 - `IS NOT NULL`
 - `LIKE`
 - `NOT LIKE`
-- `IN and NOT IN`
+- `IN`
+- `NOT IN`
 
 DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y`. See [the Postgres documentation for `BETWEEN`][2] for details.
-
-## Logical operators
-
-| Name    | Description             |
-|---------|-------------------------|
-| AND     | Boolean logic, a & b    |
-| OR      | Boolean logic, a &vert;&vert; b |
-| XOR     | Boolean logic, a ^ b    |
-| NOT     | Boolean logic, !a       |
-| IS NULL | Returns true for each row that is null |
 
 [1]: /dashboards/ddsql_editor/reference/tags/
 [2]: https://www.postgresql.org/docs/current/functions-comparison.html
@@ -110,4 +101,10 @@ CAST(expression AS type)
 
 Not all types are convertible in this way.
 
-DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>`. For example, `SELECT 1::text;`.
+DDSQL also supports Postgres casting syntax:
+
+{{< code-block lang="sql" >}}
+expression::type
+{{< /code-block >}}
+
+For example, `SELECT 1::text;`.
