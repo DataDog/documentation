@@ -39,6 +39,30 @@ See [Advanced Configurations][11] for bootstrapping options and for details on s
 
 After you have set up your pipeline, see [Update Exiting Pipelines][12] if you want to make any changes to it.
 
+## Observability Pipelines Worker stats and logs
+
+To view information about the Observability Pipelines Workers running for an active pipeline:
+
+1. Navigate to [Observability Pipelines][4].
+1. Select your pipeline.
+1. Click the **Workers** tab to see the Workers's memory and CPU utilization, traffic stats, and any errors.
+1. To view the Workers's statuses and versions, click the **Latest Deployment & Setup** tab.
+1. To see the Workers's logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][13] for details on how to filter your logs. To see logs for a specific Worker, add `@op_work.id:<worker_id>` to the search query.
+
+## Clone a pipeline
+
+1. Navigate to [Observability Pipelines][4].
+1. Select the pipeline you want to clone.
+1. Click the cog at the top right side of the page, then select **Clone**.
+
+## Delete a pipeline
+
+1. Navigate to [Observability Pipelines][4].
+1. Select the pipeline you want to delete.
+1. Click the cog at the top right side of the page, then select **Delete**.
+
+**Note**: You cannot delete an active pipeline. You must stop all Workers for a pipeline before you can delete it.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -55,3 +79,4 @@ After you have set up your pipeline, see [Update Exiting Pipelines][12] if you w
 [10]: /observability_pipelines/log_enrichment/
 [11]: /observability_pipelines/advanced_configurations/
 [12]: /observability_pipelines/update_existing_pipelines/
+[13]: /logs/explorer/search_syntax/
