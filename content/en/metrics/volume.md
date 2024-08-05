@@ -59,8 +59,15 @@ Facets can also filter your metrics by:
 The Volume page displays a list of your metrics reported to Datadog sorted by estimated custom metrics or by the change in volume. To sort metrics by either of these options, click on the column header of the metric table.
 | Column | Description |
 |--------|-------------|
-|**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality (aka custom metrics volume).| 
-|**Top 500 Metric Names by Change in Volume** |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the timeframe of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. |
+|**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality (aka custom metrics volume). 
+
+You can also access these Top 500 metric names programmatically by using our timeseries querying API[7] with the following query string: 
+
+| 
+|**Top 500 Metric Names by Change in Volume** |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the timeframe of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. 
+
+You can also access these Top 500 metric names programmatically by using our timeseries querying API[7] with the following query string: 
+|
 
 ## Compare a metric's cardinality (volume) over time 
 
