@@ -71,7 +71,7 @@ For example, you might have a single service like `service:test` showing multipl
 
 You can use [Inferred Service dependencies[Beta]] [18]. Inferred external APIs use the default naming scheme net.peer.name. For example, api.stripe.com, api.twilio.com, us6.api.mailchimp.com. Inferred databases use the default naming scheme db.instance.
 
-Or you can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
+Orm you can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 
 For more information, see [Configure the Datadog Tracing Library][9] or choose your language here:
 
