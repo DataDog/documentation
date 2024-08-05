@@ -579,60 +579,60 @@
             dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
 
-      - repo_name: dd-source
-        contents:
-        - action: workflows
-          branch: main
-          globs:
-            - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
-            - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
-          options:
-            dest_path: '/service_management/workflows/actions_catalog/'
-            bundle_excludes:
-              - "com.datadoghq.test"
-              - "com.datadoghq.sample"
-              - "com.datadoghq.internal"
+      # - repo_name: dd-source
+      #   contents:
+      #   - action: workflows
+      #     branch: main
+      #     globs:
+      #       - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
+      #       - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+      #     options:
+      #       dest_path: '/service_management/workflows/actions_catalog/'
+      #       bundle_excludes:
+      #         - "com.datadoghq.test"
+      #         - "com.datadoghq.sample"
+      #         - "com.datadoghq.internal"
 
-      - repo_name: web-ui
-        contents:
-          - action: pull-and-push-file
-            branch: prod
-            globs:
-              - "generated/md/external/semantic-color-documentation.md"
-            options:
-              base_path: ""
-              dest_path: "/layouts/shortcodes/"
-              file_name: "semantic-color.md"
+      # - repo_name: web-ui
+      #   contents:
+      #     - action: pull-and-push-file
+      #       branch: prod
+      #       globs:
+      #         - "generated/md/external/semantic-color-documentation.md"
+      #       options:
+      #         base_path: ""
+      #         dest_path: "/layouts/shortcodes/"
+      #         file_name: "semantic-color.md"
 
-      - repo_name: dd-trace-rb
-        contents:
-          - action: pull-and-push-file
-            branch: release
-            globs:
-              - 'docs/Compatibility.md'
-            options:
-              dest_path: '/tracing/trace_collection/compatibility/'
-              file_name: 'ruby.md'
-              front_matters:
-                title: Ruby Compatibility Requirements
-                aliases:
-                  - /tracing/compatibility_requirements/ruby
-                  - /tracing/setup_overview/compatibility_requirements/ruby
-                code_lang: ruby
-                type: multi-code-lang
-                code_lang_weight: 20
-                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
-                further_reading:
-                    - link: 'tracing/trace_collection/dd_libraries/ruby'
-                      tag: 'Documentation'
-                      text: 'Instrument Your Application'
-          - action: pull-and-push-file
-            branch: release
-            globs:
-            - 'docs/legacy/Compatibility-v1.md'
-            options:
-              dest_path: '/tracing/trace_collection/compatibility/'
-              file_name: 'ruby_v1.md'
-              front_matters:
-                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
-                title: (Legacy) Ruby Compatibility Requirements
+      # - repo_name: dd-trace-rb
+      #   contents:
+      #     - action: pull-and-push-file
+      #       branch: release
+      #       globs:
+      #         - 'docs/Compatibility.md'
+      #       options:
+      #         dest_path: '/tracing/trace_collection/compatibility/'
+      #         file_name: 'ruby.md'
+      #         front_matters:
+      #           title: Ruby Compatibility Requirements
+      #           aliases:
+      #             - /tracing/compatibility_requirements/ruby
+      #             - /tracing/setup_overview/compatibility_requirements/ruby
+      #           code_lang: ruby
+      #           type: multi-code-lang
+      #           code_lang_weight: 20
+      #           dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
+      #           further_reading:
+      #               - link: 'tracing/trace_collection/dd_libraries/ruby'
+      #                 tag: 'Documentation'
+      #                 text: 'Instrument Your Application'
+      #     - action: pull-and-push-file
+      #       branch: release
+      #       globs:
+      #       - 'docs/legacy/Compatibility-v1.md'
+      #       options:
+      #         dest_path: '/tracing/trace_collection/compatibility/'
+      #         file_name: 'ruby_v1.md'
+      #         front_matters:
+      #           dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
+      #           title: (Legacy) Ruby Compatibility Requirements
