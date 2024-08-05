@@ -32,7 +32,7 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic on your services between your **client** ordering service called `orders-app` and your **server** database service called `azure.sql_database`, use `client_service:orders-app` in the search bar, and use the `service` tags in the **View clients as** and **View servers as** drop down to visualize the traffic flow between those two services: 
+For example, if you want to see network traffic on your services between your **client** ordering service called `orders-app` and your **server** database services, use `client_service:orders-app` in the search bar, and use the `service` tags in the **View clients as** and **View servers as** drop down to visualize the traffic flow between those two services: 
 
 {{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when grouping by tags" style="width:90%;">}}
 
