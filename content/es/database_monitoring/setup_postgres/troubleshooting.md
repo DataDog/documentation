@@ -1,19 +1,18 @@
 ---
-description: Soluciones para los problemas de configuración de la monitorización de
-  bases de datos para Postgres
-title: Solucionar problemas de configuración de la monitorización de bases de datos
+description: Soluciones para los problemas de configuración de Database Monitoring
   para Postgres
+title: Solucionar problemas de configuración de DBM (Database Monitoring) para Postgres
 ---
 
-En esta página se detallan los problemas más comunes relacionados con la configuración y el uso de la monitorización de bases de datos con Postgres y se explica cómo resolverlos. Datadog recomienda utilizar la última versión estable del Agent y seguir la última [documentación de configuración][1], ya que puede cambiar según las versiones del Agent.
+En esta página se detallan los problemas más comunes relacionados con la configuración y el uso de Database Monitoring con Postgres y se explica cómo resolverlos. Datadog recomienda utilizar la última versión estable del Agent y seguir la última [documentación de configuración][1], ya que puede cambiar según las versiones del Agent.
 
 ## Diagnóstico de problemas comunes
 
-### Después de configurar la monitorización de bases de datos no se muestran más datos
+### Después de configurar Database Monitoring no se muestran más datos
 
 Si no ves ningún dato después de seguir las [instrucciones de configuración][1] y configurar el Agent, lo más probable es que haya un problema con la configuración del Agent o con la clave de API. Asegúrate de que estás recibiendo datos del Agent, siguiendo la [guía para solucionar problemas][2].
 
-Si recibes otros datos, como métricas del sistema, pero no los de la monitorización de bases de datos (como métricas de consultas y ejemplos de consultas), es probable que haya un problema con la configuración del Agent o de la base de datos. Asegúrate de que la configuración de tu Agent se parece al ejemplo de las [instrucciones de configuración][1], comprobando minuciosamente la localización de los archivos de configuración.
+Si recibes otros datos, como métricas del sistema, pero no los de Database Monitoring (como métricas de consultas y ejemplos de consultas), es probable que haya un problema con la configuración del Agent o de la base de datos. Asegúrate de que la configuración de tu Agent se parece al ejemplo de las [instrucciones de configuración][1], comprobando minuciosamente la localización de los archivos de configuración.
 
 Para depurar, comienza por ejecutar el [comando de estado del Agent][3] para recopilar información de depuración sobre los datos recopilados y enviados a Datadog.
 
