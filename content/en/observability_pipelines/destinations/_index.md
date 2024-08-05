@@ -9,9 +9,9 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your logs to different destinations.
+Use the Observability Pipelines Worker to send your processed logs to different destinations.
 
-Select and set up your destinations when you build a pipeline in the UI. This is step 4 in the process:
+Select and set up your destinations when you [set up a pipeline][2]. This is step 4 in the process:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a template.
@@ -33,7 +33,7 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Datadog Log Management
 
-### Set up the destination in the pipelines UI
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/datadog %}}
 
@@ -43,7 +43,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Splunk HEC
 
-### Set up the destination in the pipelines UI
+Set up the Splunk HEC destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
 
@@ -53,7 +55,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Sumo Logic
 
-### Set up the destination in the pipelines UI
+Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/sumo_logic %}}
 
@@ -63,7 +67,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Rsyslog or Syslog-ng
 
-### Set up the destination in the pipelines UI
+Set up the Rsyslog or Syslog-ng destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/syslog %}}
 
@@ -73,7 +79,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Google Chronicle
 
-### Set up the destination in the pipelines UI
+Set up the Google Chronicle destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/chronicle %}}
 
@@ -83,7 +91,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Elasticsearch
 
-### Set up the destination in the pipelines UI
+Set up the Elasticsearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/elasticsearch %}}
 
@@ -93,7 +103,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## OpenSearch
 
-### Set up the destination in the pipelines UI
+Set up the OpenSearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/opensearch %}}
 
@@ -103,7 +115,9 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 
 ## Amazon OpenSearch
 
-### Set up the destination in the pipelines UI
+Set up the Amazon OpenSearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
@@ -112,4 +126,4 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/
+[2]: /observability_pipelines/set_up_pipelines/
