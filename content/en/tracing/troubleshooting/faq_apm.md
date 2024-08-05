@@ -15,7 +15,7 @@ further_reading:
       text: "Datadog's full list of integrations"
     - link: 'https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/?tab=java'
       tag: 'Documentation'
-      text: 'Inferred Service dependencies[Beta]'
+      text: 'Inferred Service dependencies (beta)'
 ---
 
 ## Overview
