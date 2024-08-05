@@ -160,7 +160,7 @@ class Integrations:
 
         :param key_name: integration key name for root object
         :param metric_spec_filename: path to input metric spec file
-        :param yml_filename: path to output yml file
+        :param yml_filename: path to output yaml file
         """
         yaml_data = {key_name: []}
         with open(metric_spec_filename) as f:
