@@ -19,7 +19,6 @@ You can use DDSQL to query your infrastructure in the [DDSQL Editor][2] in Datad
     {{< nextlink href="dashboards/ddsql_editor/reference/scalar_functions" >}}Scalar Functions{{< /nextlink >}}
     {{< nextlink href="dashboards/ddsql_editor/reference/statements" >}}Statements{{< /nextlink >}}
     {{< nextlink href="dashboards/ddsql_editor/reference/tags" >}}Tags{{< /nextlink >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/window_functions" >}}Window Functions{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
