@@ -15,7 +15,7 @@ further_reading:
 
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you begin an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 
-{{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestion menu with all available variables" video=true >}}
+{{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" video=true >}}
 
 Some fields, like [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the **Content** property of a text component (and add an exclamation mark), use the expression `${textInput0.value} ${textInput1.value}!`.
 
