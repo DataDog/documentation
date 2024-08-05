@@ -74,15 +74,15 @@ See [Advanced Configurations][7] for bootstrapping options and for details on se
 
 {{< img src="observability_pipelines/templates.png" alt="The Observability Pipelines UI showing the six templates" style="width:100%;" >}}
 
-The [templates](#out-of-the-box-templates) are purpose-built for the following use cases:
+The [templates](#out-of-the-box-templates) are built for the following use cases:
 
 #### Log Volume Control
 
-Raw logs are noisy and only some logs are useful for further search and analysis during investigations. Use the Log Volume Control template to determine which logs to send to your indexed solution, such as a SIEM or log management solution. This helps you to increase the value of your indexed logs and also remain within your planned budget.
+Raw logs are noisy, and only some logs are useful for further search and analysis during investigations. Use the Log Volume Control template to determine which logs to send to your indexed solution, such as a SIEM or log management solution. This helps you to increase the value of your indexed logs and also remain within your planned budget.
 
 #### Dual Ship Logs
 
-As your organization grows, your observability needs for different use cases, such as security, archiving, and log management also change. This could mean having to trial different archiving, SIEM, and log management solutions. However, managing log pipelines to different solutions can get complicated. Use the Dual Ship Logs template to centrally aggregate, process, and send copies of your logs to different destinations.
+As your organization grows, your observability needs for different use cases, such as security, archiving, and log management, also change. This could mean having to trial different archiving, SIEM, and log management solutions. However, managing log pipelines to different solutions can be complicated. Use the Dual Ship Logs template to centrally aggregate, process, and send copies of your logs to different destinations.
 
 #### Archive Logs
 
@@ -94,21 +94,21 @@ Use the Archive Logs template to store logs in a cloud storage solution (Amazon 
 
 #### Split Logs
 
-When you have logs from different services and applications, you might need to send them to different downstream services for querying, analysis, and alerting. For example, you might want to send security logs to a SIEM solution and DevOps logs to Datadog. Use the Split Logs template to pre-process your logs separately for each destination before sending them downstream.
+When you have logs from different services and applications, you might need to send them to different downstream services for querying, analysis, and alerting. For example, you might want to send security logs to a SIEM solution and DevOps logs to Datadog. Use the Split Logs template to preprocess your logs separately for each destination before sending them downstream.
 
 #### Sensitive Data Redaction
 
-Use the Sensitive Data Redaction template to detect and redact sensitive information on premises. The Observability Pipelines sensitive data scanner processor provides 70 out-of-the-box scanning rules, but you can also create your own custom scanning rules using regex. The OOTB rules recognize standard patterns such as credit card numbers, email addresses, IP addresses, API and SSH keys, and access tokens.
+Use the Sensitive Data Redaction template to detect and redact sensitive information on premises. The Observability Pipelines sensitive data scanner processor provides 70 out-of-the-box scanning rules, but you can also create your own custom scanning rules using regular expressions. The OOTB rules recognize standard patterns such as credit card numbers, email addresses, IP addresses, API and SSH keys, and access tokens.
 
 #### Log Enrichment
 
-Your organization's different services, systems, and application all generate logs containing layers of information and in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich it with information, from example, from a reference table.
+Your organization's different services, systems, and applications all generate logs containing layers of information and in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich them with information, such as data from a reference table.
 
 ### Build pipelines in the Observability Pipelines UI
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
-Build your pipelines in the Observability Pipelines UI. After you select one of the out-the-box templates, the onboarding workflow walks you through setting up your source, processors, and destinations. Then installation page provides instructions on how to install the Worker in your environment (Docker, Kubernetes, Linux, or CloudFormation).
+Build your pipelines in the Observability Pipelines UI. After you select one of the out-the-box templates, the onboarding workflow walks you through setting up your source, processors, and destinations. The installation page provides instructions on how to install the Worker in your environment (Docker, Kubernetes, Linux, or CloudFormation).
 
 ### Enable out-of-the-box monitors for your pipeline components
 
