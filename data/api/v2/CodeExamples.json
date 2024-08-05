@@ -666,6 +666,13 @@
       "description": "Edit a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "UpdateDeviceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for a device returns \"OK\" response"
+    }
+  ],
   "CreateOktaAccount": [
     {
       "group": "okta_integration",
