@@ -29,13 +29,13 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 
 1. On the [Integration Settings page][3], find the Jira integration.
 2. Click the toggle for **Automatically create a Jira Issue**.
-3. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, the Jira issue will be created when the incident is created.
-4. Define a template with dynamic variables to drive the content of the Jira ticket. The template maps severities to Jira priorities, adds labels, defines a dynamic assignee, and more. Dynamic variables will only work for **string** [Jira field types][5].
+3. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, the Jira issue is created when the incident is created.
+4. Define a template with dynamic variables to drive the content of the Jira ticket. The template maps severities to Jira priorities, adds labels, defines a dynamic assignee, and more. Dynamic variables only work for **string** [Jira field types][5].
 
 {{< img src="service_management/incidents/guide/jira/incident_jira_template.png" alt="Example template for Jira tickets that are automatically created from Datadog incidents" style="width:80%;" >}}
 
 As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference.
-The Jira issue will be unidirectionally synced with the incident based on the template defined in the [Integration Settings page][3].
+The Jira issue is unidirectionally synced with the incident based on the template defined in the [Integration Settings page][3].
 
 ## Further Reading
 
