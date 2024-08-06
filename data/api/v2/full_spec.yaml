@@ -11355,6 +11355,37 @@ components:
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
       type: object
+    ListTagsResponse:
+      description: List tags response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListTagsResponseData'
+      type: object
+    ListTagsResponseData:
+      description: The list tags response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListTagsResponseDataAttributes'
+        id:
+          description: The device ID
+          example: example:1.2.3.4
+          type: string
+        type:
+          description: The type of the resource. The value should always be tags.
+          type: string
+      type: object
+    ListTagsResponseDataAttributes:
+      description: The definition of ListTagsResponseDataAttributes object.
+      properties:
+        tags:
+          description: The list of tags
+          example:
+          - tag:test
+          - tag:testbis
+          items:
+            type: string
+          type: array
+      type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
       enum:
@@ -33182,6 +33213,73 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/ndm/tags/devices/{device_id}:
+    get:
+      description: Get the list of tags for a device.
+      operationId: ListDeviceUserTags
+      parameters:
+      - description: The id of the device to fetch tags for.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the list of tags for a device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: Update the tags for a device.
+      operationId: UpdateDeviceUserTags
+      parameters:
+      - description: The id of the device to update tags for.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsResponse'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update the tags for a device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
