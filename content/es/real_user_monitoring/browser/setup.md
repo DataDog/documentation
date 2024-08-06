@@ -13,7 +13,7 @@ title: Configuración de la monitorización de RUM Browser
 
 El SDK de RUM Browser es compatible con todos los navegadores modernos de escritorio y móviles, incluido IE11. Para obtener más información, consulta la tabla [Compatibilidad del navegador][1].
 
-Datadog y los desarrolladores que utilizan los SDK de RUM comparten la responsabilidad de mantener seguros los datos de los usuarios. Más información sobre [Responsabilidad compartida][2].
+Datadog y los desarrolladores que sacan provecho de los SDK de RUM comparten la responsabilidad de mantener seguros los datos de los usuarios. Más información sobre [Responsabilidad compartida][2].
 
 ## Configuración
 
