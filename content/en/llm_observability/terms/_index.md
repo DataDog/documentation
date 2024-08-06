@@ -110,7 +110,7 @@ Retrieval spans typically do not have child spans, as they represent a standalon
 
 ## Traces
 
-LLM Observability supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can access the following features of LLM Observability:
+LLM Observability supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can use the following features of LLM Observability:
 
 ### LLM Inference Monitoring
 
@@ -148,11 +148,89 @@ You can instrument your LLM application to trace and group together all workflow
 
 ## Evaluations
 
-Evaluations are a method for measuring the performance of your LLM application. For example, quality checks like failure to answer or topic relevancy are different types of evaluations that you can track for your LLM application.
+LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations, including assessments of sentiment, topic relevancy, and user satisfaction. With evaluations, you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
-{{< img src="llm_observability/evaluations.png" alt="A quality evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/evaluations.png" alt="A quality evaluation in LLM Observability" style="width:100%;" >}}
 
-Datadog's LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation. While Datadog provides out-of-the-box evaluations for your traces, you can also [submit your own evaluations][5] to LLM Observability.
+In addition to evaluating conversations, LLM Observability integrates with [Sensitive Data Scanner][5], which helps prevent data leakage by identifying and flagging any sensitive information (such as personal data, financial details, or proprietary information) that may be present in conversations. 
+
+By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+
+LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation. While Datadog provides out-of-the-box evaluations for your traces, you can also [submit your own evaluations][6] to LLM Observability.
+
+### Quality evaluations
+
+#### Topic Relevancy
+
+This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
+
+{{< img src="llm_observability/evaluations/topic_relevancy.png" alt="A Topic Relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+  
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
+
+#### Failure to Answer
+
+This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
+
+{{< img src="llm_observability/evaluations/failure_to_answer.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
+
+#### Language Mismatch
+
+This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
+
+{{< img src="llm_observability/evaluations/language_mismatch.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Evaluated using Open Source Model | Language Mismatch flags whether each prompt-response pair demonstrates that the LLM application answered the user's question in the same language that the user used.  |
+
+#### Sentiment
+
+This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
+
+{{< img src="llm_observability/evaluations/sentiment.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
+
+### Security and Safety evaluations
+
+#### Toxicity
+
+This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
+
+{{< img src="llm_observability/evaluations/toxicity.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+  
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
+
+#### Prompt Injection
+
+This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
+
+{{< img src="llm_observability/evaluations/prompt_injection.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input | Evaluated using LLM | Prompt Injection flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
+
+#### Sensitive Data Scanning
+
+This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
+
+{{< img src="llm_observability/evaluations/sensitive_data_scanning.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+  
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][5], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
 
 ## Further Reading
 
@@ -162,4 +240,5 @@ Datadog's LLM Observability associates evaluations with individual spans so you 
 [2]: /llm_observability/setup/sdk/?tab=model#tracing-spans
 [3]: /llm_observability/setup/sdk/auto_instrumentation/
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
-[5]: /llm_observability/submit_evaluations
+[5]: /sensitive_data_scanner/
+[6]: /llm_observability/submit_evaluations
