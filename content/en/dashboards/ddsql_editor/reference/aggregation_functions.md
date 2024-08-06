@@ -45,4 +45,4 @@ Aggregate functions compute a single result from a set of input values, usually 
 ### array_agg
 | Name | Argument Types | Return type | Description |
 |------|----------------|-------------|-------------|
-| string_agg(expr *e*) | variable | array<variable> | Concatenates the input values into an array |
+| string_agg(expr *e*) | variable | array<variable> | Concatenates the input values into an array. |
