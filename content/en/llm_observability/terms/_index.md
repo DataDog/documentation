@@ -148,7 +148,7 @@ You can instrument your LLM application to trace and group together all workflow
 
 ## Evaluations
 
-LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations, including assessments of sentiment, topic relevancy, and user satisfaction. With evaluations, you can understand the performance of conversations and enhance your LLM application's responses which improves the user experience and ensures valuable, accurate outputs.
+LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations, including assessments of sentiment, topic relevancy, and user satisfaction. With evaluations, you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
 {{< img src="llm_observability/evaluations/evaluations.png" alt="A quality evaluation in LLM Observability" style="width:100%;" >}}
 
@@ -162,7 +162,7 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 #### Topic Relevancy
 
-This check identifies and flags user inputs that deviate from the configured acceptable input topics, ensuring that interactions stay pertinent to the LLM's designated purpose and scope.
+This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
 {{< img src="llm_observability/evaluations/topic_relevancy.png" alt="A Topic Relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
   
@@ -214,19 +214,19 @@ This check evaluates each input prompt from the user and the response from the L
 
 #### Prompt Injection
 
-This check identifies attempts to manipulate the LLM's responses or redirect the conversation in ways not intended by the original users. This check maintains the integrity and authenticity of interactions between users and the LLM.
+This check identifies attempts by unauthorized or malicious users to manipulate the LLM's responses or redirect the conversation in ways not intended by the original user. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
 {{< img src="llm_observability/evaluations/prompt_injection.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on Input | Evaluated using LLM | Prompt Injection Flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
+| Evaluated on Input | Evaluated using LLM | Prompt Injection flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
 #### Sensitive Data Scanning
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning.png" alt="A Security & Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
