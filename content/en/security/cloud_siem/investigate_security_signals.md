@@ -62,8 +62,8 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. In the **Next Steps** section:   
   a. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
       - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
-      - `Under Review`: During an active investigation, change the triage status to `Under Review`. From the `Under Review` state, you can move the triage status to `Archived` or `Open` as needed.
-      - `Archived`: When the detection that caused the signal has been resolved, update the status to `Archived`. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, the triage status can be changed back to `Open`. All signals are locked 30 days after they have been created.</ul>
+      - `Under Review`: During an active investigation, change the triage status to `Under Review`. From the `Under Review` state, you can move the status to `Archived` or `Open` as needed.
+      - `Archived`: When the detection that caused the signal has been resolved, update the status to `Archived`. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, the status can be changed back to `Open`. All signals are locked 30 days after they have been created.</ul>
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
   c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to you and sets the triage status to `Under Review`.
 
