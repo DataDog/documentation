@@ -67,6 +67,8 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
   c. Under _Take Action_, you can easily create a case, declare an incident, edit suppressions, or run workflows. Creating a case will automatically assign the signal to yourself and set the signal into `Under Review`. 
 
+{{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="The signal side panel of a compromised AWS IAM user access key showing two IP addresses and their locations" style="width:90%;" >}}
+
 ### Triage multiple signals
 
 Use bulk actions to triage multiple signals. To use bulk actions, first search and filter your signals in the Signal Explorer, then:
