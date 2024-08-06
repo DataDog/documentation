@@ -210,6 +210,7 @@ Database Monitoring for MongoDB is available in the beta version of the Datadog 
 
 To collect more comprehensive database metrics from MongoDB Atlas, install the [MongoDB Atlas integration][3] (optional).
 
+
 ## Data Collected
 
 {{% dbm-mongodb-agent-data-collected %}}

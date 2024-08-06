@@ -199,6 +199,7 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
+
 ## Data Collected
 
 {{% dbm-mongodb-agent-data-collected %}}
