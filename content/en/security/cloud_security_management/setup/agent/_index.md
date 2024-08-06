@@ -9,4 +9,6 @@ aliases:
 
 Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 {{< partial name="csm/csm-agent-tiles.html" >}}
