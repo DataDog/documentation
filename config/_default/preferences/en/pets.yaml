@@ -1,0 +1,13 @@
+pet_type_options:
+  - display_name: Dog
+    id: dog
+    default: true
+  - display_name: Cat
+    id: cat
+
+pet_location_options:
+  - display_name: Indoors
+    id: indoors
+    default: true
+  - display_name: Outdoors
+    id: outdoors
