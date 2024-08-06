@@ -3727,15 +3727,15 @@ menu:
       identifier: llm_obs_setup_sdk
       weight: 301
     - name: Auto Instrumentation
-      url: llm_observability/setup/sdk/auto_instrumentation
-      parent: llm_obs_setup_sdk
-      identifier: llm_obs_setup_sdk_auto_instrumentation
-      weight: 3101
+      url: llm_observability/setup/auto_instrumentation
+      parent: llm_obs_setup
+      identifier: llm_obs_setup_auto_instrumentation
+      weight: 302
     - name: API
       url: llm_observability/setup/api/
       parent: llm_obs_setup
       identifier: llm_obs_setup_api
-      weight: 302
+      weight: 303
     - name: Submit Evaluations
       url: llm_observability/submit_evaluations/
       parent: llm_obs
