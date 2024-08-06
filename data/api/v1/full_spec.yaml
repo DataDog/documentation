@@ -14054,6 +14054,7 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJavascript'
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -14170,6 +14171,19 @@ components:
         metaSchema:
           $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
+    SyntheticsAssertionJavascript:
+      description: A JavaScript assertion.
+      properties:
+        code:
+          description: The JavaScript code that performs the assertions.
+          example: dd.expect(dd.response.statusCode).to.equal(200);
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - code
+      type: object
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
@@ -14257,6 +14271,7 @@ components:
       - grpcMetadata
       - grpcProto
       - connection
+      - javascript
       example: statusCode
       type: string
       x-enum-varnames:
@@ -14279,6 +14294,7 @@ components:
       - GRPC_METADATA
       - GRPC_PROTO
       - CONNECTION
+      - JAVASCRIPT
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
       enum:
