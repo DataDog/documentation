@@ -392,4 +392,4 @@ module "lambda-datadog" {
 [8]: /agent/configuration/proxy/
 [9]: /serverless/guide/datadog_forwarder_java
 [10]: /serverless/guide/upgrade_java_instrumentation
-[11]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[11]: /security/application_security/serverless/

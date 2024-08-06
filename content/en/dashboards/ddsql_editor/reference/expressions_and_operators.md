@@ -65,3 +65,49 @@ DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent
 
 [1]: /dashboards/ddsql_editor/reference/tags/
 [2]: https://www.postgresql.org/docs/current/functions-comparison.html
+
+## CASE
+
+The `CASE` expression is a generic conditional expression, similar to if/else statements in other programming languages. `CASE` comes in two forms, simple and searched.
+
+### Simple CASE statements
+
+Simple CASE statements use the following syntax:
+
+{{< code-block lang="sql" >}}
+CASE expression
+  WHEN value THEN result
+  [ WHEN ... ]
+  [ ELSE result ]
+END
+{{< /code-block >}}
+
+The expression is computed, then compared to each of the value expressions in the `WHEN` clauses until one is found that is equal to it. If no match is found, the result of the `ELSE` clause, or `NULL` if `ELSE` is omitted, is returned.
+
+### Searched CASE statements
+
+Searched CASE statements use the following syntax:
+
+{{< code-block lang="sql" >}}
+CASE
+  WHEN condition THEN result
+  [ WHEN ... ]
+  [ ELSE result ]
+END
+{{< /code-block >}}
+
+If a condition's result is true, the value of the `CASE` expression is the result that follows the condition, and the remainder of the `CASE` expression is not processed. If the condition's result is not true, any subsequent `WHEN` clauses are examined in the same manner. If no `WHEN` condition yields true, the value of the `CASE` expression is the result of the `ELSE` clause. If the `ELSE` clause is omitted and no condition is true, the result is `NULL`.
+
+## CAST
+
+`CAST` specifies a conversion from one data type to another.
+
+### Syntax
+
+{{< code-block lang="sql" >}}
+CAST(expression AS type)
+{{< /code-block >}}
+
+Not all types are convertible in this way.
+
+DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>`. For example, `SELECT 1::text;`.

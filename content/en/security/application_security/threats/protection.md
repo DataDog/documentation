@@ -106,7 +106,7 @@ As important as it is for you to be able to apply protection granularly and redu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/
+[1]: /security/application_security/threats/setup/
 [2]: /agent/remote_config/#enabling-remote-configuration
 [3]: /agent/versions/upgrade_between_agent_minor_versions
 [4]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
@@ -117,7 +117,7 @@ As important as it is for you to be able to apply protection granularly and redu
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
 [10]: /security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
-[12]: /security/application_security/enabling/compatibility/
+[12]: /security/application_security/threats/setup/compatibility/
 [14]: https://app.datadoghq.com/security/appsec/detection-rules
 [15]: /security/application_security/threats/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [16]: https://app.datadoghq.com/security/appsec/protection-settings
