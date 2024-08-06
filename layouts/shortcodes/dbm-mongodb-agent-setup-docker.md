@@ -36,9 +36,9 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 ### Validate
 
-[Run the Agent's status subcommand][1002] and look for `mongo` under the **Checks** section. Navigate to the [Databases][1003] page in Datadog to get started.
+[Run the Agent's status subcommand][1002] and look for `mongo` under the **Checks** section. Navigate to the [Database Monitoring for MongoDB][1003] page in Datadog to get started.
 
 [1000]: /agent/faq/template_variables/
 [1001]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [1002]: /agent/configuration/agent-commands/#agent-status-and-information
-[1003]: https://app.datadoghq.com/databases
+[1003]: https://app.datadoghq.com/databases/list?listView=mongo
