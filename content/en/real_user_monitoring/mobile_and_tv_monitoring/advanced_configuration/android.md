@@ -202,9 +202,9 @@ The Android SDK first stores events and only uploads events when the [intake spe
 You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
 
 ```kotlin
-   fun clearAllData(sdkCore: SdkCore = getInstance()) {
-          sdkCore.clearAllData()
-      }
+fun clearAllData(sdkCore: SdkCore = getInstance()) {
+    sdkCore.clearAllData()
+}
 ```
 
 ### Stop data collection
