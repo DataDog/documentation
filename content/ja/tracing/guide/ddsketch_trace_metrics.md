@@ -11,7 +11,6 @@ further_reading:
 - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
   tag: Documentation
   text: トレースメトリクスの詳細
-kind: ガイド
 title: APM の DDSketch ベースのメトリクス
 ---
 

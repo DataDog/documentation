@@ -8,7 +8,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-slo
   tag: ラーニングセンター
   text: サービスレベル目標入門
-kind: ガイド
 title: SLO チェックリスト
 ---
 

@@ -24,7 +24,7 @@ integration_id: rapdev-usage-tracker
 integration_title: Usage Tracker
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: rapdev_usage_tracker
 pricing:

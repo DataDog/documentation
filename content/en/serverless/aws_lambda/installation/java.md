@@ -273,7 +273,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.2.0"
+  version = "1.3.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -392,4 +392,4 @@ module "lambda-datadog" {
 [8]: /agent/configuration/proxy/
 [9]: /serverless/guide/datadog_forwarder_java
 [10]: /serverless/guide/upgrade_java_instrumentation
-[11]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[11]: /security/application_security/serverless/

@@ -28,7 +28,7 @@ integration_id: tenable
 integration_title: Tenable Nessus
 integration_version: 1.4.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tenable
 public_title: Tenable Nessus

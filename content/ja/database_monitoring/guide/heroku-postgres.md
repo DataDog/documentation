@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: ドキュメント
   text: Datadog Heroku ビルドパック
-kind: ガイド
 private: true
 title: Heroku Postgres のデータベースモニタリングのためのセットアップ
 ---

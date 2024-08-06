@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
   tag: ブログ
   text: オートディスカバリーの詳細
-kind: ドキュメント
 title: 統合サービスタグ付け
 ---
 
@@ -25,25 +24,29 @@ title: 統合サービスタグ付け
 
 これら 3 つのタグを使用すると、次のことができます。
 
-- バージョンでフィルタリングされたトレースおよびコンテナメトリクスでデプロイへの影響を特定する
+- バージョンでフィルタリングされたトレースおよびコンテナメトリクスを使用してデプロイの影響を特定する
 - 一貫性のあるタグを使用して、トレース、メトリクス、ログ間をシームレスに移動する
-- 統一された方法で環境またはバージョンに基づいてサービスデータを表示する
+- 統一された方法で環境やバージョンに基づいてサービスデータを表示する
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="統合サービスタグ付け" video=true >}}
 
-**注**: オートディスカバリーログのコンフィギュレーションが存在しない場合、ログの公式サービスはフォルトでコンテナのショートイメージになります。ログの公式サービスを上書きするには、オートディスカバリーの [Docker ラベル/ポッドアノテーション][2]を追加します。例: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**注**:
+
+- `version` タグは、新しいアプリケーションのデプロイごとに変更されることが期待されています。アプリケーションのコードに異なる 2 つのバージョンがある場合、それぞれに異なる `version` タグが付けられるべきです。
+- オートディスカバリーログの構成が存在しない場合、ログの公式サービスはデフォルトでコンテナのショートイメージになります。ログの公式サービスを上書きするには、オートディスカバリーの [Docker ラベル/ポッドアノテーション][2]を追加します。例: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- スパンに関連付けられたホストはデータベース/キャッシュホストではないため、ホスト情報はデータベースとキャッシュスパンでは除外されます。
 
 ### 要件
 
 - 統合サービスタグ付けには、[Datadog Agent][3] 6.19.x/7.19.x 以上のセットアップが必要です。
 
-- 統合サービスタグ付けには、[予約済みタグ][1]の新しいコンフィギュレーションに対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][4]をご覧ください。
+- 統合サービスタグ付けには、[予約済みタグ][1]の新しい構成に対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][4]をご覧ください。
 
 
 | 言語         | トレーサー最小バージョン |
 |--------------|------------|
 | .NET    |  1.17.0+       |
-| C++    |  1.1.4+       |
+| C++    |  0.1.0+       |
 | Go         |  1.24.0+       |
 | Java   |  0.50.0+      |
 | Node    |  0.20.3+       |
@@ -51,18 +54,20 @@ title: 統合サービスタグ付け
 | Python  |  0.38.0+      |
 | Ruby  |  0.34.0+      |
 
-- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][1]および[タグの付け方][5]のドキュメントをお読みください。
+- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、構成に進む前に、[タグの概要][1]および[タグの付け方][5]のドキュメントをお読みください。
 
-## コンフィギュレーション
+## 構成
 
 統合サービスタグ付けの構成を開始するには、環境を選択します。
 
 - [コンテナ化](#containerized-environment)
 - [非コンテナ化](#non-containerized-environment)
+- [サーバーレス](#serverless-environment)
+- [OpenTelemetry](#opentelemetry)
 
 ### コンテナ化環境
 
-コンテナ化環境では、`env`、`service`、`version` は、サービスの環境変数またはラベル（Kubernetes のデプロイやポッドラベル、Docker コンテナラベルなど）を介して設定されます。Datadog Agent はこのタグ付けコンフィギュレーションを検出し、コンテナから収集するデータに適用します。
+コンテナ化環境では、`env`、`service`、`version` は、サービスの環境変数またはラベル（Kubernetes のデプロイやポッドラベル、Docker コンテナラベルなど）を介して設定されます。Datadog Agent はこのタグ付け構成を検出し、コンテナから収集するデータに適用します。
 
 コンテナ化環境で統合サービスタグ付けをセットアップするには
 
@@ -72,14 +77,14 @@ title: 統合サービスタグ付け
 
 3. コンテナオーケストレーションサービスに対応する環境は、以下のように完全構成または部分構成のいずれかに基づいて構成します。
 
-#### コンフィギュレーション
+#### 構成
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-[Admission Controller][1] を有効にして Datadog Cluster Agent をデプロイした場合、Admission Controller はポッドマニフェストを変異させ、(構成された変異条件に基づいて) 必要なすべての環境変数を注入します。その場合、ポッドマニフェスト内の環境変数 `DD_` の手動構成は不要になります。詳細は [Admission Controller のドキュメント][1]を参照してください。
+[Admission Controller][1] を有効にして Datadog Cluster Agent をデプロイした場合、Admission Controller はポッドマニフェストを変更し、(構成された変更条件に基づいて) 必要なすべての環境変数を注入します。その場合、ポッドマニフェスト内の `DD_` 環境変数の手動設定は不要になります。詳細は [Admission Controller のドキュメント][1] を参照してください。
 
-##### 完全なコンフィギュレーション
+##### 完全な構成
 
 Kubernetes の使用時に全範囲の統合サービスタグ付けを取得するには、デプロイオブジェクトレベルとポッドテンプレート仕様レベルの両方に環境変数を追加します。
 
@@ -115,7 +120,7 @@ template:
                 fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-##### 部分的なコンフィギュレーション
+##### 部分的な構成
 
 ###### ポッドレベルのメトリクス
 
@@ -129,7 +134,7 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-これらのラベルは、ポッドレベルの Kubernetes CPU、メモリ、ネットワーク、ディスクメトリクスをカバーし、[Kubernetes の Downward API][2] を介してサービスのコンテナに `DD_ENV`、`DD_SERVICE`、`DD_VERSION` を挿入するために使用できます。
+これらのラベルは、ポッドレベルの Kubernetes CPU、メモリ、ネットワーク、ディスクメトリクスをカバーし、[Kubernetes の Downward API][2] を介してサービスのコンテナに `DD_ENV`、`DD_SERVICE`、`DD_VERSION` を注入するために使用できます。
 
 ポッドごとに複数のコンテナがある場合は、コンテナごとに標準ラベルを指定できます。
 
@@ -166,7 +171,7 @@ tags.datadoghq.com/<container-name>.version
 
 ###### APM トレーサー / StatsD クライアント
 
-[APM トレーサー][5]および [StatsD クライアント][6]環境変数を構成するには、[Kubernetes の Downward API][2] を以下の形式で使用します。
+[APM トレーサー][5]および [StatsD クライアント][6]の環境変数を構成するには、[Kubernetes の Downward API][2] を以下の形式で使用します。
 
 ```yaml
 containers:
@@ -196,7 +201,7 @@ containers:
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-##### 完全なコンフィギュレーション
+##### 完全な構成
 
 コンテナの `DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。
 
@@ -210,7 +215,7 @@ LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```
 
-`env` はデプロイ時に決定される可能性が高いため、後で環境変数を挿入してラベルを付けることができます。
+`env` はデプロイ時に決定される可能性が高いため、後で環境変数を注入してラベルを付けることができます。
 
 ```shell
 docker run -e DD_ENV=<ENV> -l com.datadoghq.tags.env=<ENV> ...
@@ -228,7 +233,7 @@ docker run -e DD_ENV="<ENV>" \
            ...
 ```
 
-##### 部分的なコンフィギュレーション
+##### 部分的な構成
 
 サービスが Datadog 環境変数を必要としない場合 (たとえば、Redis、PostgreSQL、NGINX などのサードパーティソフトウェアや、APM によってトレースされないアプリケーション)、Docker ラベルを使用できます。
 
@@ -238,14 +243,14 @@ com.datadoghq.tags.service
 com.datadoghq.tags.version
 ```
 
-完全なコンフィギュレーションで説明したように、これらのラベルは Dockerfile で設定するか、コンテナを起動するための引数として設定できます。
+完全な構成で説明したように、これらのラベルは Dockerfile で設定するか、コンテナを起動するための引数として設定できます。
 
 {{% /tab %}}
 
 {{% tab "ECS" %}}
-##### 完全なコンフィギュレーション
+##### 完全な構成
 
-各サービスのコンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、このコンフィギュレーションをすべて 1 か所で設定できます。
+各サービスのコンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、この構成をすべて 1 か所で設定できます。
 
 ```
 "environment": [
@@ -269,7 +274,7 @@ com.datadoghq.tags.version
 }
 ```
 
-##### 部分的なコンフィギュレーション
+##### 部分構成
 
 サービスが Datadog 環境変数を必要としない場合 (たとえば、Redis、PostgreSQL、NGINX などのサードパーティソフトウェアや、APM によってトレースされないアプリケーション)、ECS タスク定義で Docker ラベルを使用できます。
 
@@ -288,7 +293,7 @@ com.datadoghq.tags.version
 
 サービスのバイナリまたは実行可能ファイルをどのように構築およびデプロイするかによって、環境変数を設定するためのオプションをいくつか利用できる場合があります。ホストごとに 1 つ以上のサービスを実行する可能性があるため、Datadog ではこれらの環境変数のスコープを単一プロセスにすることをお勧めします。
 
-[トレース][8]、[ログ][9]、[RUMリソース][10]、[Synthetic テスト][11]、[StatsD メトリクス][12]、またはシステムメトリクスのサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
+[トレース][8]、[ログ][9]、[RUMリソース][10]、[Synthetic テスト][11]、[StatsD メトリクス][12]、またはシステムメトリクスのサービスのランタイムから直接送信されるすべてのテレメトリーの構成の単一ポイントを形成するには、次のいずれかを実行します。
 
 1. 実行可能ファイルのコマンドで環境変数をエクスポートします。
 
@@ -307,7 +312,7 @@ com.datadoghq.tags.version
 
    2. `DD_VERSION` でスパンを構成して、トレーサーに属するサービス (通常は `DD_SERVICE`) に属するすべてのスパンにバージョンを追加します。これは、サービスが外部サービスの名前でスパンを作成する場合、そのスパンはタグとして `version` を受信しないことを意味します。
 
-      バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、これらは APM および [DogStatsD クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに挿入します。
+      バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、これらは APM および [DogStatsD クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに注入します。
 
       **注**: **スパンごとに 1 つのサービス**しか存在できません。トレースメトリクスには、通常、単一のサービスもあります。ただし、ホストのタグで異なるサービスが定義されている場合、その構成されたサービスタグは、そのホストから発行されたすべてのトレースメトリクスに表示されます。
 
@@ -317,22 +322,20 @@ com.datadoghq.tags.version
 
    {{% tab "ログ" %}}
 
-[接続されたログとトレース][1]を使用している場合、APM トレーサーでサポートされている場合は、自動ログ挿入を有効にします。APM トレーサーは、自動的に `env`、`service`、`version` をログに挿入するため、他の場所でこれらのフィールドを手動で構成する必要がなくなります。
-
-**注**: PHP Tracer は、ログの統合サービスタグ付けのコンフィギュレーションをサポートしていません。
+[接続されたログとトレース][1]を使用している場合、APM トレーサーでサポートされている場合は、自動ログ注入を有効にします。そうすれば、APM トレーサーは、自動的に `env`、`service`、`version` をログに注入するため、他の場所でこれらのフィールドを手動で構成する必要がなくなります。
 
 [1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
 {{% tab "RUM とセッションリプレイ" %}}
 
-[接続された RUM とトレース][1]を使用する場合、初期化ファイルの `service` フィールドにブラウザアプリケーションを指定し、`env` フィールドに環境を定義し、`version` フィールドにバージョンを列挙します。
+[接続された RUM とトレース][1]を使用する場合、初期化ファイルの `service` フィールドにブラウザアプリケーションを指定し、`env` フィールドに環境を定義し、`version` フィールドにバージョンを記載します。
 
-[RUM アプリケーションの作成][2]の際に、`env` と `service` の名前を確認します。
+[RUM アプリケーションを作成する][2]際に、`env` と `service` の名前を確認します。
 
 
-[1]: /ja/real_user_monitoring/connect_rum_and_traces/
-[2]: /ja/real_user_monitoring/browser/#setup
+[1]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /ja/real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
@@ -360,11 +363,11 @@ com.datadoghq.tags.version
 
 インフラストラクチャーメトリクスには、`env` タグと `service` タグを追加することができます。コンテナ化されていないコンテキストでは、サービスメトリクスのタグ付けは Agent レベルで構成されます。
 
-この構成はサービスのプロセスを起動するたびに変更されるわけではないので、`version` を追加することは推奨されません。
+この構成はサービスのプロセスを呼び出すたびに変更されるわけではないので、`version` を追加することは推奨されません。
 
 #### ホスト毎の単一サービス
 
-Agent の[メインコンフィギュレーションファイル][1]に、以下のコンフィギュレーションを適用します。
+Agent の[メインコンフィギュレーションファイル][1]に、以下の構成を適用します。
 
 ```yaml
 env: <ENV>
@@ -376,7 +379,7 @@ tags:
 
 #### ホスト毎の複数のサービス
 
-Agent の[メインコンフィギュレーションファイル][1]に、以下のコンフィギュレーションを適用します。
+Agent の[メインコンフィギュレーションファイル][1]に、以下の構成を適用します。
 
 ```yaml
 env: <ENV>
@@ -397,9 +400,9 @@ instances:
       service: nginx-web-app
 ```
 
-**注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。これによってメトリクスの解釈に相違が生じることがあるため、`service` タグはプロセスチェックのコンフィギュレーションのみで構成することをお勧めします。
+**注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。これによってメトリクスの解釈に相違が生じることがあるため、`service` タグはプロセスチェックの構成のみで構成することをお勧めします。
 
-[1]: /ja/agent/guide/agent-configuration-files
+[1]: /ja/agent/configuration/agent-configuration-files
 [2]: /ja/integrations/process
     {{% /tab %}}
     {{< /tabs >}}
@@ -407,6 +410,71 @@ instances:
 ### サーバーレス環境
 
 AWS Lambda 関数については、[タグを使った Lambda のテレメトリー接続方法][15]を参照してください。
+
+### OpenTelemetry
+
+OpenTelemetry を使用する場合、以下の[リソース属性][16] を、対応する Datadog 規則にマッピングします。
+
+| OpenTelemetry 規則 | Datadog 規則 |
+| --- | --- |
+| `deployment.environment` | `env` |
+| `service.name` | `service` |
+| `service.version` | `version` |
+
+<div class="alert alert-warning"><code>DD_SERVICE</code>、<code>DD_ENV</code>、<code>DD_VERSION</code> のような Datadog 固有の環境変数は、OpenTelemetry 構成では既定ではサポートされていません。</div>
+
+{{< tabs >}}
+{{% tab "環境変数" %}}
+
+環境変数を使用してリソース属性を設定するには、`OTEL_RESOURCE_ATTRIBUTES` に適切な値を設定します。
+
+```shell
+export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment=production,service.version=1.2.3"
+```
+
+{{% /tab %}}
+
+{{% tab "SDK" %}}
+
+アプリケーションコードでリソース属性を設定するには、必要な属性を持つ `Resource` を作成し、`TracerProvider` に関連付けます。
+
+Python を使った例を次に示します。
+
+```python
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+
+resource = Resource(attributes={
+   "service.name": "<SERVICE>",
+   "deployment.environment": "<ENV>",
+   "service.version": "<VERSION>"
+})
+tracer_provider = TracerProvider(resource=resource)
+```
+
+{{% /tab %}}
+
+{{% tab "コレクター" %}}
+
+OpenTelemetry コレクターからリソース属性を設定するには、コレクターコンフィギュレーションファイルの[変換プロセッサ][100]を使用します。変換プロセッサを使用すると、収集したテレメトリーデータを Datadog エクスポーターに送信する前に、その属性を変更できます。
+
+```yaml
+processors:
+  transform:
+    trace_statements:
+      - context: resource
+        statements:
+          - set(attributes["service.name"], "my-service")
+          - set(attributes["deployment.environment"], "production")
+          - set(attributes["service.version"], "1.2.3")
+...
+```
+
+[100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -420,9 +488,10 @@ AWS Lambda 関数については、[タグを使った Lambda のテレメトリ
 [7]: /ja/agent/docker/?tab=standard#optional-collection-agents
 [8]: /ja/getting_started/tracing/
 [9]: /ja/getting_started/logs/
-[10]: /ja/real_user_monitoring/connect_rum_and_traces/
+[10]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
 [11]: /ja/getting_started/synthetics/
 [12]: /ja/integrations/statsd/
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
 [15]: /ja/serverless/configuration/#connect-telemetry-using-tags
+[16]: https://opentelemetry.io/docs/languages/js/resources/

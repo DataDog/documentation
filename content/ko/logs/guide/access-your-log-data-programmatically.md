@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/search_syntax/
   tag: 설명서
   text: 로그 검색 API용 구문에 대해 더 알아보기
-kind: 지침
 title: 로그 검색 API를 활용하여 로그 데이터에 프로그래밍으로 액세스하기
 ---
 

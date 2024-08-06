@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: ¿Cómo investigar un problema de parseo de logs?
-kind: guía
 title: Los logs no muestran la marca temporal prevista
 ---
 
@@ -74,7 +73,7 @@ Añade un [Reasignador de fecha de log][5] para asegurarte de que el valor del a
 3. Selecciona **Date remapper** (Reasignador de fecha) como el tipo de procesador.
 4. Introduce un nombre para el procesador.
 5. Agrega **date** (fecha) a la sección Set date attribute(s) (Establecer atributos de fecha).
-6. Haz clic en **Create**.
+6. Haz clic en **Create** (Crear).
 
 El siguiente log generado en `06:01:03 EST`, que corresponde a `11:01:03 UTC`, se visualiza correctamente como 12:01:03 (la zona horaria mostrada es UTC+1 en este caso).
 
@@ -82,9 +81,9 @@ El siguiente log generado en `06:01:03 EST`, que corresponde a `11:01:03 UTC`, s
 
 **Nota**: Cualquier modificación en un pipeline solo afecta a los nuevos logs, ya que todo el procesamiento se realiza en la ingesta.
 
-## Logs JSON
+## Logs de JSON
 
-Los logs de JSON se analizan automáticamente en Datadog. Dado que el atributo `status` del log es un [atributo reservado][4], pasa por operaciones de preprocesamiento para los logs JSON.
+Los logs de JSON se analizan automáticamente en Datadog. Dado que el atributo `status` del log es un [atributo reservado][4], pasa por operaciones de preprocesamiento para los logs de JSON.
 
 En el ejemplo siguiente, la marca temporal real del log es el valor del atributo `mytimestamp` y no la marca temporal del log `Dec 13, 2017 at 14:16:45.158`.
 
@@ -95,7 +94,7 @@ En el ejemplo siguiente, la marca temporal real del log es el valor del atributo
 Para asegurarte de que el valor del atributo `mytimestamp` anula la marca temporal actual del log que se está mostrando, debes añadirlo como atributo de fecha.
 
 1. Ve a tu [Pipeline de logs][2]. 
-2. Sitúate sobre Preprocessing for JSON Logs (Preprocesamiento para logs JSON) y haz clic en el icono del lápiz.
+2. Sitúate sobre Preprocessing for JSON Logs (Preprocesamiento para logs de JSON) y haz clic en el icono del lápiz.
 3. Añade `mytimestamp` a la lista de atributos de fecha. El reasignador de fechas busca cada uno de los atributos reservados en el orden en que aparecen en la lista. Para asegurarte de que la fecha procede del atributo `mytimestamp`, colócalo en primer lugar en la lista.
 4. Haz clic en **Save** (Guardar).
 
@@ -114,7 +113,7 @@ Si el formato de fecha no es admitido por defecto por el reasignador, puedes ana
 3. Selecciona el tipo de procesador **Grok Parser** (Analizador Grok).
 4. Define la regla de parseo en función de tu formato de fecha. Consulta estos [ejemplos de parseo de fechas][4] para más detalles.
 5. En la sección Advanced Settings (Configuración avanzada), añade `mytimestamp` a la sección `Extract from` para que este analizador se aplique únicamente al atributo personalizado `mytimestamp`.
-6. Haz clic en **Create**.
+6. Haz clic en **Create** (Crear).
 7. Añade un [Reasignador de fecha de log][5] para asignar la marca temporal correcta a los nuevos logs.
 
 {{< partial name="whats-next/whats-next.html" >}}

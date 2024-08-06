@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs is available for IDEA, GoLand, PhpStorm, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
+The Datadog plugin for JetBrains IDEs is available for IntelliJ IDEA, GoLand, PhpStorm, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 

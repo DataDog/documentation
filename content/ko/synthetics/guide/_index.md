@@ -7,7 +7,6 @@ cascade:
     rank: 20
     subcategory: Synthetic Monitoring 가이드
 disable_toc: true
-kind: 지침
 private: true
 title: Synthetic Monitoring 가이드
 ---

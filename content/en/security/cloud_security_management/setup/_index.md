@@ -31,9 +31,9 @@ Datadog provides a guided workflow for setting up [Cloud Security Management (CS
 1. On the [Features][11] page, select the features you want to enable.
 1. Click **Start Using Cloud Security Management** and confirm your selections.
 
-{{< img src="security/csm/setup/features_selection_new_user.png" alt="CSM Features page" width="100%">}} 
+{{< img src="security/csm/setup/features_selection_new_user2.png" alt="CSM Features page" width="100%">}} 
 
-After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Compliance Scanning**, only the **Cloud accounts** and **Hosts and containers** sections are displayed.
+After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Misconfigurations**, only the **Cloud Accounts** and **Hosts and Containers** sections are displayed.
 
 The following table shows which sections appear on the Setup page for each feature.
 
@@ -49,9 +49,10 @@ The following table shows which sections appear on the Setup page for each featu
       <td>Misconfigurations</td>
       <td>
         <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud accounts</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">CloudTrail logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/source_code_integrations">Source Code Integrations</a></li>
         </ul>
       </td>
     </tr>
@@ -59,16 +60,16 @@ The following table shows which sections appear on the Setup page for each featu
       <td>Threat Detection</td>
       <td>
         <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
-          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless resources</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless Resources</a></li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td>Identity Risks (CIEM)</td>
+      <td>Identity Risks (CIEM)<br><em>*Requires Misconfigurations</em></td>
       <td>
         <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">CloudTrail logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
         </ul>
       </td>
     </tr>
@@ -76,8 +77,8 @@ The following table shows which sections appear on the Setup page for each featu
       <td>Host Vulnerability Management</td>
       <td>
         <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud accounts</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
         </ul>
       </td>
     </tr>
@@ -85,8 +86,16 @@ The following table shows which sections appear on the Setup page for each featu
       <td>Container Vulnerability Management</td>
       <td>
         <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud accounts</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>AWS CloudTrail Logs<br><em>*Requires Cloud SIEM</em></td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
         </ul>
       </td>
     </tr>

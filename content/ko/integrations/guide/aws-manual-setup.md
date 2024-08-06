@@ -37,7 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: 블로그
   text: 인프라스트럭처와 애플리케이션 태깅의 모범 사례
-kind: 지침
 title: AWS 매뉴얼 설정 가이드
 ---
 

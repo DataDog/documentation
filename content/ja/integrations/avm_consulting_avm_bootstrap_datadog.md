@@ -21,7 +21,7 @@ integration_id: avm-consulting-insightflow
 integration_title: InsightFlow - Bootstrap Datadog
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

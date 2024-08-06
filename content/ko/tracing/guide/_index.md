@@ -8,7 +8,6 @@ cascade:
     rank: 50
     subcategory: 애플리케이션 성능 모니터링(APM) 지침
 disable_toc: true
-kind: 지침
 private: true
 title: 트레이싱 지침
 ---

@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: RUM データを視覚化する方法について
-kind: ガイド
 title: RUM イベントの階層を理解する
 ---
 
