@@ -102,7 +102,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
    {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
-2. Ensure you have deployed the [Datadog Lambda Forwarder][1], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][2].
+2. Ensure you have deployed the [Datadog Lambda Forwarder][1], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][2]. When deploying the Forwarder on v3.121.0+, you can also set the `DdStepFunctionsTraceEnabled` parameter in CloudFormation to enable tracing for all your Step Functions at the Forwarder-level.
 
    Take note of your Forwarder's ARN.
 
@@ -126,7 +126,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 <div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</a>.</div>
 
 4. Enable enhanced metrics on your Step Function by adding a `DD_ENHANCED_METRICS` tag. Set the value to `true`. 
-5. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`.
+5. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`. This is only needed if `DD_STEP_FUNCTIONS_TRACE_ENABLED` hasn't been set by the Forwarder. 
 6. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name.
 7. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
 
