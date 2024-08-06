@@ -85,11 +85,12 @@ filelog:
 ### Custom tags
 In order to add custom Datadog tags to logs, set the `ddtags` attribute on the logs. For example, this can be done with the [transform processor][3]:
 ```yaml
-transform:
-  log_statements:
-    - context: log
-      statements:
-        - set(attributes["ddtags"], "first_custom:tag, second_custom:tag")
+processors:
+  transform:
+    log_statements:
+      - context: log
+        statements:
+          - set(attributes["ddtags"], "first_custom:tag, second_custom:tag")
 ```
 
 ## Data collected
