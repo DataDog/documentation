@@ -114,8 +114,7 @@ To start the publishing process in the [Developer Platform][4]:
 
 2. Under the Integration Publishing section, follow the steps to add the OAuth client information to your pull request. This includes updating the `manifest.json` file and adding a file to the `assets` directory.
 
-3. Add a link to the Github directory or pull request in the appropriate field.
-
+3. Add a link to the GitHub directory or pull request in the appropriate field.
 4. Click **Finish & Send**.
 
 Once an OAuth client is submitted for publishing, the team is notified. When your pull request is approved by all required parties and is ready to be merged, at that point your OAuth client gets published as well. Your integration tile is then published to your sandbox account (_not_ for all customers), and your OAuth client can then be authorized by any Datadog organization (not only your Sandbox organization).
