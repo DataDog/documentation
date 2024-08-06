@@ -1,7 +1,7 @@
 ---
 title: DDSQL Editor
 further_reading:
-- link: "dashboards/ddsql_editor/references"
+- link: "dashboards/ddsql_editor/reference"
   tag: "Documentation"
   text: "Query References"
 - link: "dashboards/guide/ddsql_use_cases"
