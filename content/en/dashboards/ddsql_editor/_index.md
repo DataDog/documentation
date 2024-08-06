@@ -1,5 +1,12 @@
 ---
 title: DDSQL Editor
+further_reading:
+- link: "dashboards/ddsql_editor/reference"
+  tag: "Documentation"
+  text: "Query References"
+- link: "dashboards/guide/ddsql_use_cases"
+  tag: "Guide"
+  text: "Common queries and use cases"
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
@@ -48,6 +55,10 @@ Save useful queries, or export the data as CSV.
 Browse and re-run saved queries in the side panel.
 
 {{< img src="dashboards/ddsql/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
 [2]: /dashboards/ddsql_editor/reference
