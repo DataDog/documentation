@@ -61,15 +61,15 @@ The Volume page displays a list of your metrics reported to Datadog sorted by es
 |--------|-------------|
 |**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality (aka custom metrics volume). 
 
-You can also access these Top 500 metric names programmatically by using our timeseries querying API[7] with the following query string: `sum:datadog.estimated_usage.metrics.custom.by_metric{*} by {metric_name}`
+You can also access these Top 500 metric names programmatically by using our scalar querying API[7] with the following query string: `sum:datadog.estimated_usage.metrics.custom.by_metric{*} by {metric_name}`
 
 | 
 |**Top 500 Metric Names by Change in Volume** |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the timeframe of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. 
 
-You can also access these Top 500 metric names programmatically by using our timeseries querying API[7] with the following query strings: 
+You can also access these Top 500 metric names programmatically by using our scalar querying API[7] with the following query strings: 
 1. Metric query a: `sum:datadog.estimated_usage.metrics.custom.by_metric{*} by {metric_name}`
 2. Metric query b: `hour_before(sum:datadog.estimated_usage.metrics.custom.by_metric{*} by {metric_name})`
-3. Compute the difference: `a-b`
+3. Use a formula to compute the difference: `a-b`
 |
 
 ## Compare a metric's cardinality (volume) over time 
@@ -128,3 +128,4 @@ To view a metric's related assets:
 [4]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [5]: #reduce-metric-volume-and-cost
 [6]: https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrategauge
+[7]: https://docs.datadoghq.com/api/latest/metrics/#query-scalar-data-across-multiple-products
