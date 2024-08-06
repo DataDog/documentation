@@ -15,7 +15,7 @@ DDSQL implements a simplified version of the SQL type system that is mostly desc
 | SQL name   | Aliases                  | Description |
 |------------|--------------------------|-------------|
 | integer    | int                      | Storage is always int64. |
-| text       | char, varchar, string    | Storage is always unlimited-length UTF-8. |
+| text       | char, varchar, string    | Storage is always an unlimited length UTF-8. |
 | real       | double, decimal          | Storage is always IEEE-754 float64. |
 | timestamp  | timestamp without time zone | SQL standard datetime type. |
 | date       |                          | Timestamp with resolution on a day level. |
