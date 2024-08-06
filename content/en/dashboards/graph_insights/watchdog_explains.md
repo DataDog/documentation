@@ -11,6 +11,10 @@ further_reading:
 
 ## Overview
 
+{{< callout url="https://www.datadoghq.com/private-beta/watchdog-explains-graph-insights/" d_toggle="modal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Beta!">}}
+Watchdog Explains is available in Private Beta. To request access, complete the form.
+{{< /callout >}}
+
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
 {{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="Your image description" video=true >}}
@@ -21,7 +25,12 @@ In Datadog, an investigation typically starts with graphs, then branches out int
 
 ## How does it work?
 
-Watchdog Explains scans metric-based graphs to look for anomalies and dissects the anomaly to show which tags are responsible. It then compares the same timeseries data across each applicable tag group against the source graph to identify which ones represent that anomalous behavior. Watchdog Explains runs every single applicable group by and compares its similarity to the source graph. If a graph’s shape changes significantly by removing an individual group by, it infers that the tag is mostly likely the cause of the spike. Watchdog Explains shows you evidence to quantify exactly how influential a given tag is.
+1. **Watchdog Explains runs anomaly detection** and determines if the graph shape or value changed from the historical pattern. It scans metric-based graphs to look for anomalies and dissects the anomaly to show which tags are responsible. 
+
+2. **Then, it runs the same query filtered on each applicable tag group**. It compares the same timeseries data across each applicable tag group against the source graph to identify which ones represent that anomalous behavior. 
+   - If a graph’s shape changes significantly by removing an individual tag group, it infers that the tag is mostly likely the cause of the spike. 
+   - Watchdog Explains shows you evidence to quantify exactly how influential a given tag is.
+
 
 ## Investigate anomalies
 
@@ -29,11 +38,11 @@ Start your investigation from any timeseries metric graph. Open a graph in full 
 
 {{< img src="dashboards/graph_insights/watchdog_explains/graph_anomaly_detection.png" alt="Watchdog Explains highlights the anomalous parts of a graph based on historical data" style="width:100%;" >}}
 
-Watchdog Explains highlights the timeframe when the spike is taking place with a pink box. On the right panel, you can view the tag group or tag groups that might be responsible for the spike. 
+Watchdog Explains highlights anomalies with a pink box. On the right side panel, you can view the tags that are responsible for the spike.
 
 {{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:100%;" >}}
 
-Click each tag or group to see Watchdog's analysis on the impact that that tag has on the overall shape of the graph. Click **Filter "Your tag group"** to compare what the graph would look like if you removed the tag and compare it against the original. 
+Click on a tag to see evidence of how it contributes to the graph shape.
 
 ## Further Reading
 
