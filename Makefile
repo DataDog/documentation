@@ -206,6 +206,7 @@ clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsub
 update_websites_sources_module:
 	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
 	node_modules/hugo-bin/vendor/hugo mod clean
+	cat go.mod
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead
