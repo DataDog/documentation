@@ -1,244 +1,217 @@
 ---
-title: Install the Datadog Agent with OpenTelemetry Collector Using Helm
+title: Install the Datadog Agent with the OpenTelemetry Collector
 private: true
 ---
 
 ## Overview
 
+Follow this guide to install the Datadog Agent with the OpenTelemetry (OTel) Collector using Helm.
+
 ## Requirements
 
-- Kubernetes v1.29+
-- Helm v3+
-- [kind](https://kind.sigs.k8s.io/)
-- _Optional_: aws-vault and access to AWS Sandbox environment
-
-## Prerequisites
-
-Enable feature flags in the workshop **Datadog OpenTelemetry (698785)** org:
-
-- [fleet_view_config_layers via SDP](https://sdp.ddbuild.io/#/feature-flags/fleet_view_config_layers) (enabled by default for dev, staging; prod requires manual enabling and approval)
-- `event_platform_resource_writer_write_datadog_agent_otel` (enabled by default for all envs: [dev and staging](https://github.com/DataDog/consul-config/pull/250271), [us1](https://github.com/DataDog/consul-config/pull/250273), [us3](https://github.com/DataDog/consul-config/pull/250274), [us5](https://github.com/DataDog/consul-config/pull/250275), [ap1](https://github.com/DataDog/consul-config/pull/250276), [eu1](https://github.com/DataDog/consul-config/pull/250277))
-
-## Stage 1: Install OpenTelemetry demo
-
-We're going to use the [OpenTelemetry Demo](https://opentelemetry.io/docs/demo/) project in Kubernetes environment to illustrate the implementation of the [OpenTelemetry Collector in the Agent](https://www.datadoghq.com/blog/datadog-agent-with-otel-collector/).
-
-### 1.1 Connect to the workshop's K8S cluster
-
-To create K8S cluster with `kind` simpy run:
-
-```shell
-kind create cluster --name workshop
-```
-
-Verify: get cluster info:
-
-```shell
-kubectl cluster-info --context kind-workshop
-```
-
-Create K8S namespace for the workshop. Use your **firstname** as the namespace:
-
-```shell
-kubectl create namespace <YOUR_NAME>
-```
-
-_(Optional)_ Make the namespace default, so you don't need to explicitly provide it for all `kubectl`/`helm` commands:
-
-```shell
-kubectl config set-context --current --namespace=<YOUR_NAME>
-```
-
-Verify: check `kubectl` config to make sure your namespace was set as default for the `kind-workshop` context
-
-```shell
-kubectl config get-contexts
-```
-
-_(Optional)_ In case you're using EKS cluster for the workshop, to connect your `kubectl` to the cluster, you need to create a `kubeconfig` file. You can do it automatically by running following command:
-
-```shell
-aws eks update-kubeconfig --region us-east-2 --name TODO
-```
-
-Verify: check `kubectl` config to make sure your new context was added successfully:
-
-```shell
-kubectl config get-contexts
-```
-
-### 1.2 Get the latest version of otel-demo Helm chart
-
-Add OpenTelemetry Helm repository:
-
-```shell
-helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-```
-
-If you already have the repository, update it to the latest version:
-
-```shell
-helm repo update
-```
-
-Verify: check the version of `opentelemetry-demo` chart
-
-```shell
-helm show chart open-telemetry/opentelemetry-demo
-```
-
-The version should be 0.32.3 or above.
-
-### 1.3: Configure the OpenTelemetry collector
-
-The OTel Collector config for the `otel-demo` Helm chart can be found [on GitHub](https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-demo/values.yaml#L656-L724).
-At this step, we don't need to modify the default OTel Collector configuration and can use it as-is.
-
-You can inspect the default Collector config in the [OTelBin](https://www.otelbin.io/?#config=connectors%3A*N__spanmetrics%3A_%7B%7D*Nexporters%3A*N__debug%3A_%7B%7D*N__opensearch%3A*N____http%3A*N______endpoint%3A_http%3A%2F%2Fotel-demo-opensearch%3A9200*N______tls%3A*N________insecure%3A_true*N____logs*_index%3A_otel*N__otlp%3A*N____endpoint%3A_*%22demo-jaeger-collector%3A4317*%22*N____tls%3A*N______insecure%3A_true*N__otlphttp%2Fprometheus%3A*N____endpoint%3A_http%3A%2F%2Fdemo-prometheus-server%3A9090%2Fapi%2Fv1%2Fotlp*N____tls%3A*N______insecure%3A_true*N__datadog%3A*N____api%3A*N______key%3A_*SDD*_API*_KEY*N____traces%3A*N______endpoint%3A_%22https%3A%2F%2Ftrace.agent.datadoghq.com%22*Nextensions%3A*N__health*_check%3A*N____endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A13133*Nprocessors%3A*N__batch%3A_%7B%7D*N__k8sattributes%3A*N____extract%3A*N______metadata%3A*N______-_k8s.namespace.name*N______-_k8s.deployment.name*N______-_k8s.statefulset.name*N______-_k8s.daemonset.name*N______-_k8s.cronjob.name*N______-_k8s.job.name*N______-_k8s.node.name*N______-_k8s.pod.name*N______-_k8s.pod.uid*N______-_k8s.pod.start*_time*N____passthrough%3A_false*N____pod*_association%3A*N____-_sources%3A*N______-_from%3A_resource*_attribute*N________name%3A_k8s.pod.ip*N____-_sources%3A*N______-_from%3A_resource*_attribute*N________name%3A_k8s.pod.uid*N____-_sources%3A*N______-_from%3A_connection*N__memory*_limiter%3A*N____check*_interval%3A_5s*N____limit*_percentage%3A_80*N____spike*_limit*_percentage%3A_25*N__resource%3A*N____attributes%3A*N____-_action%3A_insert*N______from*_attribute%3A_k8s.pod.uid*N______key%3A_service.instance.id*Nreceivers%3A*N__httpcheck%2Ffrontendproxy%3A*N____targets%3A*N____-_endpoint%3A_http%3A%2F%2Fdemo-frontendproxy%3A8080*N__jaeger%3A*N____protocols%3A*N______grpc%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A14250*N______thrift*_compact%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A6831*N______thrift*_http%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A14268*N__otlp%3A*N____protocols%3A*N______grpc%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A4317*N______http%3A*N________cors%3A*N__________allowed*_origins%3A*N__________-_http%3A%2F%2F***N__________-_https%3A%2F%2F***N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A4318*N__prometheus%3A*N____config%3A*N______scrape*_configs%3A*N______-_job*_name%3A_opentelemetry-collector*N________scrape*_interval%3A_10s*N________static*_configs%3A*N________-_targets%3A*N__________-_*S%7Benv%3AMY*_POD*_IP%7D%3A8888*N__redis%3A*N____collection*_interval%3A_10s*N____endpoint%3A_redis-cart%3A6379*N__zipkin%3A*N____endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A9411*Nservice%3A*N__extensions%3A*N__-_health*_check*N__pipelines%3A*N____logs%3A*N______exporters%3A*N______-_opensearch*N______-_debug*N______processors%3A*N______-_k8sattributes*N______-_memory*_limiter*N______-_resource*N______-_batch*N______receivers%3A*N______-_otlp*N____metrics%3A*N______exporters%3A*N______-_otlphttp%2Fprometheus*N______-_debug*N______processors%3A*N______-_k8sattributes*N______-_memory*_limiter*N______-_resource*N______-_batch*N______receivers%3A*N______-_httpcheck%2Ffrontendproxy*N______-_redis*N______-_otlp*N______-_spanmetrics*N____traces%3A*N______exporters%3A*N______-_otlp*N______-_debug*N______-_spanmetrics*N______processors%3A*N______-_k8sattributes*N______-_memory*_limiter*N______-_resource*N______-_batch*N______receivers%3A*N______-_otlp*N______-_jaeger*N______-_zipkin*N__telemetry%3A*N____metrics%3A*N______address%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A8888%7E).
-
-### 1.4: Install `otel-demo` chart
-
-To install the chart with the release name demo, run the following command:
-
-```shell
-helm upgrade --install demo open-telemetry/opentelemetry-demo --namespace <YOUR_NAME>
-```
-
-Verify: check the list of pods to see all the `otel-demo` apps up and running:
-
-```shell
-kubectl get pods --namespace <YOUR_NAME>
-```
-
-To access `otel-demo` apps we need to forward our localhost port `8080` to the `frontendproxy` service:
-
-```shell
-kubectl port-forward svc/demo-frontendproxy 8080:8080 --namespace <YOUR_NAME>
-```
-
-Now we should be able to access `otel-demo` apps in the browser:
-
-- [Webstore](http://localhost:8080/)
-- [Grafana](http://localhost:8080/grafana/)
-- [Load Generator UI](http://localhost:8080/loadgen/)
-- [Jaeger UI](http://localhost:8080/jaeger/ui/)
-
-This is our first **milestone**: we have `otel-demo` project up and running.
-
-## 2: Install the Agent with OpenTelemetry Collector
-
-To install the Agent with OTel collector we're going to use the latest version of Helm chart from the official repository.
-
-### 2.1: Get the latest version of the agent Helm chart
-
-Add DataDog repository to your Helm repositories:
-
-```shell
-helm repo add datadog https://helm.datadoghq.com
-```
-
-If you already have the repository, update it to the latest version:
-
-```shell
-helm repo update
-```
-Verify: check the version of `datadog` chart
-
-```shell
-helm show chart datadog/datadog
-```
-
-DataDog chart version should have `version: 3.69.0` or above.
-
-### 2.2: Store API key as a Kubernetes secret
-
-To create a secret that contains your Datadog API key, replace the `<DD_API_KEY>` below with the API key for your organization. This secret is used in the manifest to deploy the Datadog Agent.
-
-```shell
-kubectl create secret generic datadog-secret \
-  --from-literal api-key=<DD_API_KEY> \
-  --from-literal app-key=<DD_APP_KEY>
-```
-
-Verify: get the `datadog-secret` secret info
-
-```shell
-kubectl get secret datadog-secret
-```
-
-### 2.3 Install the Agent
-
-To install the Agent with OTel collector, some of the configuration has to be provided explicitly.
-
-#### The DataDog Agent configuration
-
-> [!TIP]
-> Check [datadog-values.yaml](step23/datadog-values.yaml) file to see the complete Agent configuration.
-
-The Agent image should be set to `datadog/agent-dev` with OTel Beta tag `nightly-ot-beta-main` (the official DataDog Agent image doesn't contain OTel collector yet).
-
-```yaml
-agents:
-  image:
-    repository: datadog/agent-dev
-    tag: nightly-ot-beta-main
-    doNotCheckTag: true
-```
-
-After that, we can explicitly enable OTel Collector in the Agent:
-
-```yaml
-datadog:
-  ...
-  otelCollector:
-    enabled: true
-    ports:
-      - containerPort: "4317"
-        hostPort: "4317"
-        name: otel-grpc
-      - containerPort: "4318"
-        hostPort: "4318"
-        name: otel-http
-```
-
-Now we can enable some of the Agent features we want to use:
-
-```yaml
-datadog:
-  ...
-  apm:
-    portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
-    peer_service_aggregation: true
-  orchestratorExplorer:
-    enabled: true
-  processAgent:
-    enabled: true
-    processCollection: true
-  networkMonitoring:
-    enabled: true
-```
-
-> [!WARNING]
-> Do not enable logs collection in the Agent!
-> We will be running OTel Collector with `debug` exporter, which produces extensive amount of logs for the `otel-demo` environment.
-
-> [!IMPORTANT]
-> If you're running your local K8S cluster via kind, make sure to set `DD_ENV` and `DD_HOSTNAME` environment variables.
-> They will prevent collision of telemetry data that comes from other attendees' environments.
-
-```yaml
-datadog:
-  ...
-  env:
-    - name: DD_ENV
-      value: "<YOUR_NAME>"
-    - name: DD_HOSTNAME
-      value: "<YOUR_NAME>"
-```
-
-#### The OTel Collector configuration
+To complete this guide, you need the following:
+
+**Datadog account**:
+1. [Create a Datadog account][1] if you don't have one.
+1. Find or create your [Datadog API key][2].
+1. Find or create your [Datadog application key][20].
+
+**Software**:  
+Install the following tools on your machine:
+
+- Kubernetes v1.29+  
+- Helm v3+  
+- Docker  
+- [kind][3]  
+- [kubectl][4]
+
+**Datadog feature flags**:  
+Ensure the following feature flags are enabled in the **Datadog OpenTelemetry (698785)** organization:
+
+- `fleet_view_config_layers` [using SDP][5] (enabled by default for dev, staging; prod requires enabling manually with approval).
+- `event_platform_resource_writer_write_datadog_agent_otel` (enabled by default for all environments).   
+
+## Install OpenTelemetry demo
+
+This guide uses the [OpenTelemetry Demo][12] project in a Kubernetes environment to illustrate the implementation of the [OpenTelemetry Collector in the Datadog Agent][13].
+
+### Connect to the Kubernetes cluster
+
+1. Create a local Kubernetes cluster using `kind`:
+   ```shell
+   kind create cluster --name workshop
+   ```
+1. Verify that you created the cluster:
+   ```shell
+   kubectl cluster-info --context kind-workshop
+   ```
+1. Create a Kubernetes namespace for the workshop. Use your first name as the namespace:
+   ```shell
+   kubectl create namespace <YOUR_NAME>
+   ```
+1. Optionally, set this namespace as the default to avoid specifying it in subsequent kubectl and helm commands:
+   ```shell
+   kubectl config set-context --current --namespace=<YOUR_NAME>
+   ```
+1. Verify the namespace configuration was set as default for the `kind-workshop` context:
+   ```shell
+   kubectl config get-contexts
+   ```
+{{% collapse-content title="Optional configuration for EKS clusters" level="p" %}}
+If you're using an Amazon EKS cluster instead of a local cluster:
+1. Connect your <code>kubectl</code> to the cluster by creating a <code>kubeconfig</code> file:
+   ```shell
+    aws eks update-kubeconfig --region us-east-2 --name <YOUR_CLUSTER_NAME>
+   ```
+1. Verify the `kubectl` configuration to ensure your new context was added successfully:
+   ```shell
+   kubectl config get-contexts
+   ```
+{{% /collapse-content %}}
+
+### Get the otel-demo Helm chart
+
+1. Add OpenTelemetry Helm repository:
+   ```shell
+   helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+   ```
+   <div class="alert alert-info">If you already have the repository, update it to the latest version: <code>helm repo update</code>.</div>
+
+1. Check the version of `opentelemetry-demo` chart:
+   ```shell
+   helm show chart open-telemetry/opentelemetry-demo
+   ```
+   Ensure that the version is 0.32.3 or higher.
+
+### Configure the OpenTelemetry Collector
+
+The OpenTelemetry Collector configuration for the `otel-demo` Helm chart is pre-configured. For this guide, use the default configuration without modifications.
+
+If you are curious you can:
+
+- [View the configuration on GitHub][14].
+- [Inspect the configuration using OTelBin][15].
+
+### Install `otel-demo` chart
+
+1. Install the chart with the release name `demo`:
+   ```shell
+   helm upgrade --install demo open-telemetry/opentelemetry-demo --namespace <YOUR_NAME>
+   ```
+1. Verify that all `otel-demo` apps are running:
+   ```shell
+   kubectl get pods --namespace <YOUR_NAME>
+   ```
+1. Set up port forwarding to access the `otel-demo` apps:
+   ```shell
+   kubectl port-forward svc/demo-frontendproxy 8080:8080 --namespace <YOUR_NAME>
+   ```
+1. Access the `otel-demo` apps in your browser:
+
+- [Webstore][16]
+- [Grafana][17]
+- [Load Generator UI][18]
+- [Jaeger UI][19]
+
+Congratulations! The `otel-demo` project is up and running.
+
+## Install the Datadog Agent with the OpenTelemetry Collector
+
+This section guides you through installing the Datadog Agent with the embedded OpenTelemetry Collector using Helm.
+
+### Get the latest version of the Agent Helm chart
+
+1. Add the DataDog repository to your Helm repositories:
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   ```
+   <div class="alert alert-info">If you already have the repository, update it to the latest version: <code>helm repo update</code></div>
+
+2. Verify the `datadog` chart version:
+   ```shell
+   helm show chart datadog/datadog
+   ```
+   Ensure that the version is 3.69.0 or higher.
+
+### Store your keys as a Kubernetes secret
+
+Next, create a secret containing your Datadog API and application keys. This secret is used in the manifest to deploy the Datadog Agent.
+
+1. Create a secret containing your Datadog API and application keys:
+   ```shell
+   kubectl create secret generic datadog-secret \
+     --from-literal api-key=<DD_API_KEY> \
+     --from-literal app-key=<DD_APP_KEY>
+   ```
+   Replace the `<DD_API_KEY>` and `<DD_APP_KEY>` with the API and application keys for your organization.
+1. Verify you created the secret:
+   ```shell
+   kubectl get secret datadog-secret
+   ```
+
+### Install and configure the Datadog Agent
+
+To install the Datadog Agent with the OpenTelemetry Collector, you need to provide specific configuration details.
+
+#### Datadog Agent configuration
+
+Add the following configuration to your Agent's `datadog-values.yaml` file.
+
+<div class="alert alert-info">You can review the <a href="https://github.com/DataDog/agent-psa-internal/blob/main/otel-agent/step23/datadog-values.yaml">datadog-values.yaml</a> file to see the complete Agent configuration.</div>
+
+1. Use the `datadog/agent-dev:nightly-ot-beta-main` image:
+   ```yaml
+   agents:
+     image:
+       repository: datadog/agent-dev
+       tag: nightly-ot-beta-main
+       doNotCheckTag: true
+   ```
+
+1. Enable the OTel Collector in the Agent:
+   ```yaml
+   datadog:
+     ...
+     otelCollector:
+       enabled: true
+       ports:
+         - containerPort: "4317"
+           hostPort: "4317"
+           name: otel-grpc
+         - containerPort: "4318"
+           hostPort: "4318"
+           name: otel-http
+   ```
+1. Enable the necessary Agent features:
+   ```yaml
+   datadog:
+     ...
+     apm:
+       portEnabled: true
+       peer_tags_aggregation: true
+       compute_stats_by_span_kind: true
+       peer_service_aggregation: true
+     orchestratorExplorer:
+       enabled: true
+     processAgent:
+       enabled: true
+       processCollection: true
+     networkMonitoring:
+       enabled: true
+   ```
+   <div class="alert alert-warning">Do not enable logs collection in the Agent! Running the OTel Collector with <code>debug</code> exporter produces extensive amount of logs for the <code>otel-demo</code> environment.</div>
+1. Set the following envionmrnt variables to prevent data collision:
+   ```yaml
+   datadog:
+     ...
+     env:
+       - name: DD_ENV
+         value: "<YOUR_NAME>"
+       - name: DD_HOSTNAME
+         value: "<YOUR_NAME>"
+   ```
+
+#### OpenTelemetry Collector configuration
 
 The DataDog Helm chart provides a recommended OTel Collector configuration. It's a great starting point for most projects.
 The full config can be found [on GitHub](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/templates/_otel_agent_config.yaml).
@@ -600,3 +573,24 @@ kubectl port-forward svc/demo-frontendproxy 8080:8080 --namespace <YOUR_NAME>
 
 
 Congrats! That's our final **milestone** of the workshop: we've installed custom distribution of the embedded OTel Collector in the DataDog Agent via Helm.
+
+[1]: https://www.datadoghq.com/free-datadog-trial/
+[2]: https://app.datadoghq.com/organization-settings/api-keys/
+[3]: https://kind.sigs.k8s.io/
+[4]: https://kubernetes.io/docs/tasks/tools/#kubectl
+[5]: https://sdp.ddbuild.io/#/feature-flags/fleet_view_config_layers
+[6]: https://github.com/DataDog/consul-config/pull/250271
+[7]: https://github.com/DataDog/consul-config/pull/250273
+[8]: https://github.com/DataDog/consul-config/pull/250274
+[9]: https://github.com/DataDog/consul-config/pull/250275
+[10]: https://github.com/DataDog/consul-config/pull/250276
+[11]: https://github.com/DataDog/consul-config/pull/250277
+[12]: https://opentelemetry.io/docs/demo/
+[13]: https://www.datadoghq.com/blog/datadog-agent-with-otel-collector/
+[14]: https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-demo/values.yaml#L656-L72
+[15]: https://www.otelbin.io/?#config=connectors%3A*N__spanmetrics%3A_%7B%7D*Nexporters%3A*N__debug%3A_%7B%7D*N__opensearch%3A*N____http%3A*N______endpoint%3A_http%3A%2F%2Fotel-demo-opensearch%3A9200*N______tls%3A*N________insecure%3A_true*N____logs*_index%3A_otel*N__otlp%3A*N____endpoint%3A_*%22demo-jaeger-collector%3A4317*%22*N____tls%3A*N______insecure%3A_true*N__otlphttp%2Fprometheus%3A*N____endpoint%3A_http%3A%2F%2Fdemo-prometheus-server%3A9090%2Fapi%2Fv1%2Fotlp*N____tls%3A*N______insecure%3A_true*N__datadog%3A*N____api%3A*N______key%3A_*SDD*_API*_KEY*N____traces%3A*N______endpoint%3A_%22https%3A%2F%2Ftrace.agent.datadoghq.com%22*Nextensions%3A*N__health*_check%3A*N____endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A13133*Nprocessors%3A*N__batch%3A_%7B%7D*N__k8sattributes%3A*N____extract%3A*N______metadata%3A*N______-_k8s.namespace.name*N______-_k8s.deployment.name*N______-_k8s.statefulset.name*N______-_k8s.daemonset.name*N______-_k8s.cronjob.name*N______-_k8s.job.name*N______-_k8s.node.name*N______-_k8s.pod.name*N______-_k8s.pod.uid*N______-_k8s.pod.start*_time*N____passthrough%3A_false*N____pod*_association%3A*N____-_sources%3A*N______-_from%3A_resource*_attribute*N________name%3A_k8s.pod.ip*N____-_sources%3A*N______-_from%3A_resource*_attribute*N________name%3A_k8s.pod.uid*N____-_sources%3A*N______-_from%3A_connection*N__memory*_limiter%3A*N____check*_interval%3A_5s*N____limit*_percentage%3A_80*N____spike*_limit*_percentage%3A_25*N__resource%3A*N____attributes%3A*N____-_action%3A_insert*N______from*_attribute%3A_k8s.pod.uid*N______key%3A_service.instance.id*Nreceivers%3A*N__httpcheck%2Ffrontendproxy%3A*N____targets%3A*N____-_endpoint%3A_http%3A%2F%2Fdemo-frontendproxy%3A8080*N__jaeger%3A*N____protocols%3A*N______grpc%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A14250*N______thrift*_compact%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A6831*N______thrift*_http%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A14268*N__otlp%3A*N____protocols%3A*N______grpc%3A*N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A4317*N______http%3A*N________cors%3A*N__________allowed*_origins%3A*N__________-_http%3A%2F%2F***N__________-_https%3A%2F%2F***N________endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A4318*N__prometheus%3A*N____config%3A*N______scrape*_configs%3A*N______-_job*_name%3A_opentelemetry-collector*N________scrape*_interval%3A_10s*N________static*_configs%3A*N________-_targets%3A*N__________-_*S%7Benv%3AMY*_POD*_IP%7D%3A8888*N__redis%3A*N____collection*_interval%3A_10s*N____endpoint%3A_redis-cart%3A6379*N__zipkin%3A*N____endpoint%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A9411*Nservice%3A*N__extensions%3A*N__-_health*_check*N__pipelines%3A*N____logs%3A*N______exporters%3A*N______-_opensearch*N______-_debug*N______processors%3A*N______-_k8sattributes*N______-_memory*_limiter*N______-_resource*N______-_batch*N______receivers%3A*N______-_otlp*N____metrics%3A*N______exporters%3A*N______-_otlphttp%2Fprometheus*N______-_debug*N______processors%3A*N______-_k8sattributes*N______-_memory*_limiter*N______-_resource*N______-_batch*N______receivers%3A*N______-_httpcheck%2Ffrontendproxy*N______-_redis*N______-_otlp*N______-_spanmetrics*N____traces%3A*N______exporters%3A*N______-_otlp*N______-_debug*N______-_spanmetrics*N______processors%3A*N______-_k8sattributes*N______-_memory*_limiter*N______-_resource*N______-_batch*N______receivers%3A*N______-_otlp*N______-_jaeger*N______-_zipkin*N__telemetry%3A*N____metrics%3A*N______address%3A_*S%7Benv%3AMY*_POD*_IP%7D%3A8888%7E
+[16]: http://localhost:8080/
+[17]: http://localhost:8080/grafana/
+[18]: http://localhost:8080/loadgen/
+[19]: http://localhost:8080/jaeger/ui/
+[20]: https://app.datadoghq.com/organization-settings/application-keys
