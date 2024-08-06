@@ -343,6 +343,7 @@ build_live:
     - make vector_data
     - yarn run prebuild
     - make update_websites_sources_module
+    - cat go.mod
     - build_site
     - in-isolation deploy_site
     - in-isolation create_artifact
