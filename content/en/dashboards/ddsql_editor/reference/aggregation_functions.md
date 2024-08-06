@@ -40,7 +40,7 @@ Aggregate functions compute a single result from a set of input values, usually 
 ### string_agg
 | Name | Argument Types | Return type | Description |
 |------|----------------|-------------|-------------|
-| string_agg(expr *e*, delimiter *e*) | string, string | string | Concatenates the input values, seperated by a delimeter. |
+| string_agg(expr *e*, delimiter *e*) | string, string | string | Concatenates the input values, seperated by a delimiter. |
 
 ### array_agg
 | Name | Argument Types | Return type | Description |
