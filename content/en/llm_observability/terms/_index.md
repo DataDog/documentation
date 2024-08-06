@@ -214,13 +214,13 @@ This check evaluates each input prompt from the user and the response from the L
 
 #### Prompt Injection
 
-This check identifies attempts by unauthorized or malicious users to manipulate the LLM's responses or redirect the conversation in ways not intended by the original user. This check maintains the integrity and authenticity of interactions between users and the LLM.
+This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
 {{< img src="llm_observability/evaluations/prompt_injection.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on Input | Evaluated using LLM | Prompt Injection flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
+| Evaluated on Input | Evaluated using LLM | Prompt Injection flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or author. |
 
 #### Sensitive Data Scanning
 
