@@ -25,7 +25,7 @@ DDSQL implements a simplified version of the SQL type system that is mostly desc
 | json       |                          | JSON data |
 
 ### Arrays
-Arrays are ordered collections of a specific base type. Each base type can have a corresponding array type.
+Arrays are an ordered collection of a specific base type. Each base type can have a corresponding array type.
 
 ### Literals
 
