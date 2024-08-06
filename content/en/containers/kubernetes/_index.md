@@ -26,6 +26,11 @@ further_reading:
       text: 'Join an interactive session for insights on Kubernetes monitoring'
 ---
 
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+  This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.

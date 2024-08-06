@@ -39,6 +39,11 @@ cascade:
 
 </br>
 
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
+  Join an introductory or intermediate enablement session to learn more about how Datadog Application Performance Monitoring (APM) provides AI-powered, code-level distributed tracing from browser and mobile applications to backend services and databases. 
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and seamless correlation with other telemetry data, Datadog APM helps ensure the best possible performance and user experience for your applications.

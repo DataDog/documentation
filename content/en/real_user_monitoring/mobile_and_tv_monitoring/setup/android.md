@@ -352,19 +352,32 @@ See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHostsWithHeaderType = mapOf(
+    "example.com" to setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT),
+    "example.eu" to  setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT))
 val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
+    .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
+final Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+final Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
-    .addInterceptor(new DatadogInterceptor())
+    .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build();
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+
 
 This records each request processed by the `OkHttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10].
 

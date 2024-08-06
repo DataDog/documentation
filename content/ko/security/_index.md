@@ -1,15 +1,15 @@
 ---
 aliases:
-- /ko/compliance_monitoring
-- /ko/cloud_siem
-- /ko/security_platform
-- /ko/security/security_monitoring
-- /ko/security_monitoring/explorer/
-- /ko/cloud_siem/explorer/
-- /ko/security_platform/explorer
-- /ko/synthetics/
-- /ko/security_platform/security_signal_management
-- /ko/security/security_signal_management
+- /compliance_monitoring
+- /cloud_siem
+- /security_platform
+- /security/security_monitoring
+- /security_monitoring/explorer/
+- /cloud_siem/explorer/
+- /security_platform/explorer
+- /security/explorer
+- /security_platform/security_signal_management
+- /security/security_signal_management
 cascade:
   algolia:
     rank: 70
@@ -23,7 +23,7 @@ further_reading:
 - link: /getting_started/cloud_siem
   tag: 설명서
   text: Cloud SIEM을 통한 위협 감지 시작
-- link: /security/misconfigurations/setup
+- link: /security/cloud_security_management/misconfigurations/
   tag: 설명서
   text: CSM Misconfigurations로 잘못된 구성 추적하기
 - link: /security/threats/setup
@@ -66,15 +66,15 @@ Datadog 보안은 [애플리케이션 보안 관리](#application-security-manag
 
 [애플리케이션 보안 관리][1](ASM)은 SSRF(Server-Side-Request-Forgery), SQL 인젝션, Log4Shell, XSS(Reflected Cross-Site-Scripting) 등 코드 수준 취약성을 악용하려는 애플리케이션 수준 공격에 대한 관측 가능성을 제공합니다. ASM은 [Datadog APM][2], [Datadog Agent][3] 및 인앱 감지 규칙을 활용해 애플리케이션 환경에서 위협을 감지합니다. 제품 [가이드 투어](https://www.datadoghq.com/guided-tour/security/application-security-management/)를 확인해 자세히 알아보세요.
 
-{{< img src="/security/application_security/app-sec-landing-page.png" alt="공격 흐름과 플레임 그래프를 표시하는 Datadog의 보안 신호 패널" width="75%">}}
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="공격 흐름과 화염 그래프를 표시하는 Datadog 보안 신호 패널" width="75%">}}
 
-## 추적하기
+## 클라우드 보안 정보와 이벤트 관리(SIEM)
 
 [클라우드 SIEM][4](보안 정보 및 이벤트 관리)은 타겟화된 공격, 위협 정보 목록과 일치하는 시스템과 통신하는 IP 또는 안전하지 않은 설정 등 애플리케이션과 인프라의 실시간 위협을 감지합니다. [Datadog 로그 관리][5]로 지원되는 클라우드 SIEM을 통해 [Datadog 클라우드 SIEM에서 감지한 위협을 자동으로 치료하여][6] 위협 대응 워크플로우 속도를 향상할 수 있습니다. 전용 [가이드 투어](https://www.datadoghq.com/guided-tour/security/cloud-siem)를 확인하여 자세히 알아보세요.
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="중요 신호, 의심스러운 행위자, 영향 대상 리소스, 위협 정보 및 신호 트렌드 위젯을 포함하는 보안 개요 섹션을 표시하는 클라우드 SIEM 홈페이지" width="100%">}}
 
-## 검색 구문
+## 클라우드 보안 관리
 
 [클라우드 보안 관리(CSM)][10]은 전 클라우드 인프라에 대한 실시간 위협 감지 및 지속적인 설정 감사를 제공합니다. 원활한 협업과 빠른 치료가 가능하도록 통합된 뷰에서 이를 확인할 수 있습니다. 관측 가능성 데이터를 기반으로 보안 팀은 전체 공격 흐름을 추적하여 위협의 영향을 파악하고 취약성이 트리거된 리소스 소유자를 식별할 수 있습니다.
 
@@ -82,7 +82,7 @@ CSM은 [위협][12], [잘못된 설정][11], [리스트 식별][15] 및 [취약�
 
 {{< img src="security/csm/csm_overview_2.png" alt="우선순위 보안 문제 목록이 표시된 클라우드 보안 관리 개요의 보안 받은 편지함" width="100%">}}
 
-Datadog 보안을 시작하려면 Datadog에서 [**보안 > **설정**][9] 페이지로 이동합니다. 해당 페이지에는 단일 또는 다중 설정에 대한 자세한 정보가 포함되거 있습니다. 또는 아래 시작하기 섹션으로 이동해 플랫폼의 각 영역에 대해 자세히 알아보세요.
+Datadog 보안을 시작하려면 Datadog에서 [**Security** > **Setup**][9] 페이지로 이동합니다. 해당 페이지에는 단일 또는 다중 설정에 대한 자세한 정보가 포함되거 있습니다. 또는 아래 시작하기 섹션으로 이동해 플랫폼의 각 영역에 대해 자세히 알아보세요.
 
 ## 참고 자료
 
@@ -96,9 +96,9 @@ Datadog 보안을 시작하려면 Datadog에서 [**보안 > **설정**][9] 페�
 [6]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
 [9]: https://app.datadoghq.com/security/configuration
 [10]: /ko/security/cloud_security_management/
-[11]: /ko/security/misconfigurations/
+[11]: /ko/security/cloud_security_management/misconfigurations/
 [12]: /ko/security/threats/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
-[15]: /ko/security/identity_risks/
-[16]: /ko/security/vulnerabilities/
+[15]: /ko/security/cloud_security_management/identity_risks/
+[16]: /ko/security/cloud_security_management/vulnerabilities/
