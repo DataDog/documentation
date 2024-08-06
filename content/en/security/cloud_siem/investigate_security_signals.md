@@ -62,10 +62,10 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. In the **Next Steps** section:   
   a. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
       - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
-      - `Under Review`: During an active investigation, you can switch the signal state to `Under Review`. From the `Under Review` state, you can move the signal state to `Archived` or `Open` as needed.
-      - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state. All signals are locked after 30 days of being created.</ul>
+      - `Under Review`: During an active investigation, change the triage status to `Under Review`. From the `Under Review` state, you can move the triage status to `Archived` or `Open` as needed.
+      - `Archived`: When the detection that caused the signal has been resolved, update the status to `Archived`. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, the triage status can be changed back to `Open`. All signals are locked 30 days after they have been created.</ul>
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
-  c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to yourself and sets the signal to `Under Review`.
+  c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to you and sets the triage status to `Under Review`.
 
 {{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="The signal side panel of a compromised AWS IAM user access key showing two IP addresses and their locations" style="width:90%;" >}}
 
@@ -134,10 +134,9 @@ To create a case from a security signal:
 1. Fill in the information for the case.
 1. Click **Create Case**.
 
-The signal is automatically assigned to the user who created the case and the signal status is automatically changed to `Under Review`.
+The signal is automatically assigned to the user who created the case and the triage status is also changed to `Under Review`.
 
 After a case is created, hover over the **Case** button to see the case associated with the signal.
-
 
 **Note**: If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident.
 
