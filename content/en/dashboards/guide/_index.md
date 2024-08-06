@@ -39,7 +39,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="DDSQL Editor:" >}}
-    {{< nextlink href="/dashboards/guide/ddsql_use_cases" >}}Common DDSQL Queries and Use Cases{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/ddsql_use_cases" >}}Common DDSQL queries and use cases{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
