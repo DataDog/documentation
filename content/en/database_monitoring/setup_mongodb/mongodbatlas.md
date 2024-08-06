@@ -8,7 +8,7 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
 Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
 
@@ -109,7 +109,7 @@ The output should be similar to:
 In this example, the individual `mongos` routers are:
 - `XXXXX-00-00.4zh9o.mongodb.net:27016`
 - `XXXXX-00-01.4zh9o.mongodb.net:27016`
-- `XXXXX-00-02.4zh9o.mongodb.net:27016`. 
+- `XXXXX-00-02.4zh9o.mongodb.net:27016`.
 
 You can use one of these hostnames to configure the Agent.
 
@@ -145,7 +145,7 @@ The output should be similar to:
 }
 {{< /code-block >}}
 
-In this example, the individual MongoDB instances for shard-0 are: 
+In this example, the individual MongoDB instances for shard-0 are:
 - `XXXXX-00-00.4zh9o.mongodb.net:27017`
 - `XXXXX-00-01.4zh9o.mongodb.net:27017`
 - `XXXXX-00-02.4zh9o.mongodb.net:27017`

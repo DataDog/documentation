@@ -4,6 +4,9 @@ further_reading:
 - link: "/dashboards/ddsql_editor/reference"
   tag: "Documentation"
   text: "References for DDSQL Queries"
+- link: "dashboards/guide/ddsql_use_cases"
+  tag: "Guide"
+  text: "Common queries and use cases"
 ---
 
 

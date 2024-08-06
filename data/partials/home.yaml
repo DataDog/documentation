@@ -147,6 +147,10 @@ nav_sections:
         link: observability_pipelines/
         icon: pipelines
         desc: Manage and monitor your telemetry pipelines
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: Trace, monitor, and secure your LLM applications
   - nav_section:
     - name: 'Configuration'
     - navtiles:
