@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-A Cloud SIEM security signal is created when Datadog detects a threat while analyzing logs against detection rules. View, search, filter, and correlate security signals in the Signal Explorer without needing to learn a dedicated query language. You can also assign security signals to yourself or another user in the Datadog platform. In addition to the Signal Explorer, you can configure [Notification Rules][1] to send signals to specific individuals or teams to keep them informed of issues.
+A Cloud SIEM security signal is created when Datadog detects a threat while analyzing logs against detection rules. View, search, filter, and correlate security signals in the Signals Explorer without needing to learn a dedicated query language. You can also assign security signals to yourself or another user in the Datadog platform. In addition to the Signals Explorer, you can configure [Notification Rules][1] to send signals to specific individuals or teams to keep them informed of issues.
 
 You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the Cloud Security.
 
-## Signal explorer
+## Signals explorer
 
 In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, you can view signals by [their severity](#view-signals-by-severity), [detection rules](#view-signals-by-detection-rules), and [MITRE ATT&CK](#view-signals-by-mitre-attck). After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
 
@@ -37,7 +37,7 @@ Use different visualizations to investigate the threat activity in your environm
 - **Table** to see signals by the specified tag key (for example, `source`, `technique`, and so on).
 - **Pie Chart** to see the relative volume of each of the detection rules.
 
-{{< img src="security/security_monitoring/investigate_security_signals/signal_list2.png" alt="The Signal Explorer showing signals categorized by detection rules" style="width:100%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/signal_list2.png" alt="The Signals Explorer showing signals categorized by detection rules" style="width:100%;" >}}
 
 ### View signals by detection rules
 
@@ -50,7 +50,7 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Click the plus icon next to the first group `by` to add a second group `by`, and select **Technique** for it.
 1. In the table, click one of the tactics or techniques to see options to further investigate and filter the signals. For example, you can view signals related to the tactic and technique and search for or exclude specific tactics and techniques.
 
-{{< img src="security/security_monitoring/investigate_security_signals/tactics_techniques.png" alt="The Signal Explorer table showing a list of tactics and techniques" style="width:100%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/tactics_techniques.png" alt="The Signals Explorer table showing a list of tactics and techniques" style="width:100%;" >}}
 
 ### Triage a single signal
 
@@ -58,37 +58,37 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Click the **Signals** tab at the top of the page.
 1. Click on a security signal from the table.
 1. In the **What Happened** section, see the logs that matched the query. Hover over the query to see the query details.
-    - You can also see specific information like username or network IP. In Details, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
+    - You can also see specific information like username or network IP. In **Rule Details**, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
 1. In the **Next Steps** section:   
-  a. Under _Triage_, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
+  a. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
       - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
       - `Under Review`: During an active investigation, you can switch the signal state to `Under Review`. From the `Under Review` state, you can move the signal state to `Archived` or `Open` as needed.
       - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state. All signals are locked after 30 days of being created.</ul>
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
-  c. Under _Take Action_, you can easily create a case, declare an incident, edit suppressions, or run workflows. Creating a case will automatically assign the signal to yourself and set the signal into `Under Review`. 
+  c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to yourself and sets the signal to `Under Review`.
 
 {{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="The signal side panel of a compromised AWS IAM user access key showing two IP addresses and their locations" style="width:90%;" >}}
 
 ### Triage multiple signals
 
-Use bulk actions to triage multiple signals. To use bulk actions, first search and filter your signals in the Signal Explorer, then:
+Use bulk actions to triage multiple signals. To use bulk actions, first search and filter your signals in the Signals Explorer, then:
 
-1. Click on the checkbox to the left of the signals that you want to take a bulk action on. To select all signals in the Signal Explorer list, select the checkbox next to the **Status** column header.
+1. Click on the checkbox to the left of the signals that you want to take a bulk action on. To select all signals in the Signals Explorer list, select the checkbox next to the **Status** column header.
 1. Click on the **Bulk Actions** dropdown menu above the signals table and select the action you want to take.
 
 **Note**: The Signals Explorer stops dynamically updating when performing a bulk action.
 
-{{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="The Signal Explorer showing the bulk action option" style="width:55%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="The Signal Explorers showing the bulk action option" style="width:55%;" >}}
 
 ### Run Workflow automation
 
 Use Workflow Automations to carry out actions to help you investigate and remediate a signal. These actions can include:
 - Blocking an IP address from your environment.
 - Disabling a user account.
-- Looking up an IP address with a third party threat intelligence provider.
+- Looking up an IP address with a third-party threat intelligence provider.
 - Sending slack messages to your colleagues to get help with your investigation.
 
-In the signal side panel, use the **Next Steps** area to select **Run Workflows**. The workflow browser allows you to search and select a workflow to run. You may click the **Workflows** tab to see which workflows were triggered for the signal. 
+To run a workflow from the signal side panel, select **Run Workflows** in the **Next Steps** section. In the workflow browser, search and select a workflow to run. Click the **Workflows** tab in the signal side panel to see which workflows were triggered for the signal.
 
 To trigger a Workflow automatically for any Security Signal, see [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
 
@@ -98,30 +98,29 @@ A signal contains important information to determine whether a signal is malicio
 
 ### Logs
 
-Click the **Logs** tab to view the logs related to the signal. Click **View All Related Logs** to see the related logs in the Log Explorer.
+Click the **Logs** tab to view the logs related to the signal. Click **View All Related Logs** to see the related logs in Log Explorer.
 
 ### Entities
 
-To investigate entities related to the signal:
+To investigate entities:
 
-1. Click the **Entities** tab to see entities related to the signal, such as Users or IP addresses.
-1. Click the down arrow next to **View Relate Logs** and you can:   
+1. Click the **Entities** tab to see entities related to the signal, such as users or IP addresses.
+1. Click the down arrow next to **View Related Logs** and:   
     - Select **View IP Dashboard** to see more information about the IP address in the IP Investigation dashboard.
-    - Select **View Related Signals** to open the Signals Explorer and see the other signals associated with the IP address.
-1. For cloud environment entities, such as an assumed role or IAM user, view the activity graph to see what other actions the user took and click **View in Investigator** to go to the Investigator to get more details.
+    - Select **View Related Signals** to open Signals Explorer and see the other signals associated with the IP address.
+1. For cloud environment entities, such as an assumed role or IAM user, view the activity graph to see what other actions the user took. Click **View in Investigator** to go to the Investigator to see more details.
 
 ### Related signals
 
-Click the **Related Signals** tab to see the related signals and what information, such as fields and attributes, the signals share. Click **View All Related Activity** to see the signals in the Signal Explorer.
+Click the **Related Signals** tab to see the related signals and information, such as fields and attributes, that the signals share. Click **View All Related Activity** to see the signals in the Signals Explorer.
 
 ### Suppressions
 
-Do one of the following to view the suppression rules affecting the detection rule that generated the signal:
+To view the suppression rules for the detection rule that generated the signal, do one of the following:
 
-- In the **What Happened** section, click hover your mouse over the funnel icon and click **Add Suppression**.
-- In the **Next Steps** section, click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
+- In the **What Happened** section, hover your mouse over the funnel icon, then click **Add Suppression**.
+- In the **Next Steps** section, click **Edit Suppressions** to see the suppression section of that rule in the detection rule editor.
 - Click the **Suppressions** tab to see a list of suppressions, if there are any. Click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
-
 
 ## Collaborate
 
@@ -131,7 +130,7 @@ Sometimes you need more information than what is available in a single signal to
 
 To create a case from a security signal:
 
-1. Click **Create Case** in the **Next Steps** section to create a new case. If you want to add the signal to an existing case, click the down arrow next to **Create Case** and select **Add to an existing case**.
+1. Click **Create Case** in the **Next Steps** section to create a new case. If you want to add the signal to an existing case, click the down arrow next to **Create Case**, then select **Add to an existing case**.
 1. Fill in the information for the case.
 1. Click **Create Case**.
 
@@ -164,7 +163,7 @@ The query to see all threat intelligence matches in the Security Signals Explore
 - For `@threat_intel.results.category`: attack, corp_vpn, cryptomining, malware, residential_proxy, tor, scanner
 - For `@threat_intel.results.intention`: malicious, suspicious, benign, unknown
 
-{{< img src="security/security_monitoring/investigate_security_signals/threat_intel_results_categories.png" alt="The Signal Explorer showing a bar graph of signals broken down by the threat intel categories of residential proxy, corp_vpn, cryptomining, and malware" style="width:80%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/threat_intel_results_categories.png" alt="The Signals Explorer showing a bar graph of signals broken down by the threat intel categories of residential proxy, corp_vpn, cryptomining, and malware" style="width:80%;" >}}
 
 See the [Threat Intelligence][10] documentation for more information on threat intelligence feeds.
 
