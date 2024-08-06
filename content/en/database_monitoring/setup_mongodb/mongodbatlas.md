@@ -10,7 +10,7 @@ further_reading:
 
 <div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
-Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
+Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, slow operations, operation samples, explain plans, and replication state changes. Database Monitoring for MongoDB requires the Datadog Agent to be installed and configured to connect to your MongoDB Atlas instances. This guide provides instructions on how to set up Database Monitoring for MongoDB Atlas.
 
 ## Before you begin
 
@@ -25,6 +25,7 @@ To enable Database Monitoring for your database:
 
 1. [Grant the Agent access to your MongoDB Atlas Cluster](#grant-the-agent-access-to-your-mongodb-atlas-cluster)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
+3. [Install the MongoDB Atlas integration](#install-the-mongodb-atlas-integration)
 
 ### Grant the Agent access to your MongoDB Atlas Cluster
 
@@ -205,5 +206,14 @@ Database Monitoring for MongoDB is available in the beta version of the Datadog 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Install the MongoDB Atlas integration
+
+To collect more comprehensive database metrics from MongoDB Atlas, install the [MongoDB Atlas integration][3] (optional).
+
+## Data Collected
+
+{{% dbm-mongodb-agent-data-collected %}}
+
 [1]: /database_monitoring/architecture/#cloud-managed-databases
 [2]: /account_management/api-app-keys/
+[3]: /integrations/mongodb_atlas/
