@@ -88,8 +88,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクト�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-go
-[2]: https://github.com/DataDog/dd-trace-go#support-policy
-[3]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[2]: https://github.com/DataDog/dd-trace-go#go-support-policy
 [4]: https://www.datadoghq.com/support/
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [6]: https://gin-gonic.com
