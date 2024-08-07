@@ -60,7 +60,7 @@ local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Pl
 data/sdk_versions.json                                        @Datadog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation 
 /data/sdk_versions.json               @DataDog/api-clients @DataDog/documentation
 
 # Serverless
