@@ -1,17 +1,18 @@
 *                         @DataDog/documentation
 
+/data/api/                        @DataDog/documentation
+/config/_default/menus/           @DataDog/documentation
+.github/ISSUE_TEMPLATE            @DataDog/documentation
+.github/PULL_REQUEST_TEMPLATE.md  @DataDog/documentation
 /assets/                          @DataDog/corpweb
 /data/                            @DataDog/corpweb
-/data/api/                        @DataDog/documentation
 /layouts/                         @DataDog/corpweb
-/src/                             @DataDog/corpweb @DataDog/documentation
 /config/                          @DataDog/corpweb
-/config/_default/menus/           @DataDog/documentation
 package.json                      @DataDog/corpweb
 go.mod                            @DataDog/corpweb
 go.sum                            @DataDog/corpweb
-.github/ISSUE_TEMPLATE            @DataDog/documentation
-.github/PULL_REQUEST_TEMPLATE.md  @DataDog/documentation
+i18n/                             @DataDog/corpweb
+archetypes/                       @DataDog/corpweb
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
@@ -48,7 +49,7 @@ layouts/shortcodes/integration-assets.md                                    @Dat
 layouts/shortcodes/integration-assets-reference.md                          @Datadog/marketplace-product-management @DataDog/documentation
 layouts/shortcodes/integration_categories.md                                @Datadog/marketplace-product-management @DataDog/documentation
 
-# Websites Platform (Devops)
+# Websites Platform
 .github/                                                @DataDog/WebOps-Platform
 .gitlab-ci.yml                                          @DataDog/WebOps-Platform
 Makefile                                                @DataDog/WebOps-Platform
