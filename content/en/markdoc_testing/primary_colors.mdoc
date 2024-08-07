@@ -82,4 +82,28 @@ Blueberries are also popular in smoothies and jams. The vibrant blue color of bl
 
 ### region-param
 
+#### Body copy
+
 {% region-param key="dd_site" /%}
+
+#### Code
+
+{% region-param key="dd_site" code=true /%}
+
+### site-region
+
+#### Selected region (us)
+
+Something should show up here:
+
+{% site-region region="us" %}
+This is the content for the US region only.
+{% /site-region %}
+
+#### Nonselected region (eu)
+
+Nothing should show up here:
+
+{% site-region region="eu" %}
+This is the content for the EU region only.
+{% /site-region %}
