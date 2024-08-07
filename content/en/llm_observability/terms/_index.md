@@ -124,6 +124,9 @@ Tracing individual LLM inferences unlocks basic LLM Observability features, allo
 2. Track token usage, error rates, and latencies for your LLM calls.
 3. Break down important metrics by model and model provider.
 
+
+For a detailed example, see the [LLM Monitoring Jupyter notebook][7] which demonstrates how to create and trace an LLM call.
+
 The SDK provides integrations to automatically capture LLM calls to specific providers. See [Auto-instrumentation][3] for more information. If you are using an LLM provider that is not supported, you must [manually instrument your application][4].
 
 ### LLM Workflow Monitoring
@@ -136,6 +139,8 @@ Most LLM applications include operations that surround LLM calls and play a larg
 
 By tracing LLM calls and contextual task or tool operations together under workflow spans, you can unlock more granular insights and a more holistic view of your LLM application.
 
+For detailed examples, see the [LLM Monitoring Jupyter notebook][8] which demonstrates how to create and trace a complex, static series of steps involving a tool call and a call to an LLM or the [LLM Monitoring Jupyter notebook][10] which demonstrates how to create, trace, and evaluate a RAG workflow.
+
 ### LLM Agent Monitoring
 
 An agent monitoring trace is composed of a root agent span with nested LLM, task, tool, embedding, retrieval, and workflow spans.
@@ -145,6 +150,8 @@ An agent monitoring trace is composed of a root agent span with nested LLM, task
 If your LLM application has complex autonomous logic, such as decision-making that can't be captured by a static workflow, you are likely using an LLM Agent. Agents may execute multiple different workflows depending on the user input.
 
 You can instrument your LLM application to trace and group together all workflows and contextual operations run by a single LLM agent as an agent trace.
+
+For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demonstrates how to create and trace an LLM-powered agent that calls tools and makes decisions based on the data.
 
 ## Evaluations
 
@@ -242,3 +249,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
 [5]: /sensitive_data_scanner/
 [6]: /llm_observability/submit_evaluations
+[7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
+[8]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb
+[9]: https://github.com/DataDog/llm-observability/blob/main/3-agent-span.ipynb
+[10]: https://github.com/DataDog/llm-observability/blob/main/4-custom-evaluations.ipynb
