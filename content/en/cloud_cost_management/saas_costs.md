@@ -88,7 +88,7 @@ Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud C
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-1. [Create an API token][101] in MongoDB with `Organization Member` permissions, and add `Organization Read Only` permissions for cluster resource tags.
+1. [Create an API token][101] in MongoDB with `Organizational Billing Viewer` permissions, and add `Organizational Read Only` permissions for cluster resource tags.
 2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
 3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
 4. Click **Save**.
