@@ -37,7 +37,7 @@ releases](https://github.com/DataDog/datadog-static-analyzer/releases).
 2. Install the program on your computer.
 3. Add a `.git/hooks/pre-push` file in the repository with the script below. **Note:** The script assumes the `datadog-static-analyzer-git-hook` binary is in `/usr/local/bin/datadog-static-analyzer-git-hook`.
 
-```shell
+```bash
 #!/bin/sh
 
 # Get the repo root path
