@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud provider storage and another specified destination.
+In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud storage provider and another specified destination.
 
 ## Set up a pipeline
 
-Set up your pipelines and its [sources][1], [processors][2], [destinations][3] in the Observability Pipelines UI. The general setup steps are:
+Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
 
 1. Navigate to [Observability Pipelines][4].
 1. Select a template:
@@ -31,13 +31,13 @@ Set up your pipelines and its [sources][1], [processors][2], [destinations][3] i
     - [Log Enrichment][10]
 1. Select and set up your source.
 1. Select and set up your destinations.
-1. Set up you processors.
+1. Set up your processors.
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
 
 See [Advanced Configurations][11] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
-After you have set up your pipeline, see [Update Exiting Pipelines][12] if you want to make any changes to it.
+After you have set up your pipeline, see [Update Existing Pipelines][12] if you want to make any changes to it.
 
 ## Observability Pipelines Worker stats and logs
 
@@ -45,9 +45,9 @@ To view information about the Observability Pipelines Workers running for an act
 
 1. Navigate to [Observability Pipelines][4].
 1. Select your pipeline.
-1. Click the **Workers** tab to see the Workers's memory and CPU utilization, traffic stats, and any errors.
-1. To view the Workers's statuses and versions, click the **Latest Deployment & Setup** tab.
-1. To see the Workers's logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][13] for details on how to filter your logs. To see logs for a specific Worker, add `@op_work.id:<worker_id>` to the search query.
+1. Click the **Workers** tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
+1. To view the Workers' statuses and versions, click the **Latest Deployment & Setup** tab.
+1. To see the Workers' logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][13] for details on how to filter your logs. To see logs for a specific Worker, add `@op_work.id:<worker_id>` to the search query.
 
 ## Clone a pipeline
 
