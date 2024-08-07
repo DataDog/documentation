@@ -1,6 +1,10 @@
 ---
 title: Install the Datadog Agent with the OpenTelemetry Collector
 private: true
+further_reading:
+- link: "/opentelemetry/agent/agent_with_custom_components"
+  tag: "Documentation"
+  text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
 ## Overview
@@ -28,7 +32,7 @@ Install the following tools on your machine:
 **Datadog feature flags**:  
 Ensure the following feature flags are enabled in the **Datadog OpenTelemetry (698785)** organization:
 
-- `fleet_view_config_layers` [using SDP][5] (enabled by default for dev, staging; prod requires enabling manually with approval).
+- `fleet_view_config_layers` [using SDP][5] (enabled by default for dev and staging; prod requires enabling manually with approval).
 - `event_platform_resource_writer_write_datadog_agent_otel` (enabled by default for all environments).   
 
 ## Install OpenTelemetry demo
@@ -121,7 +125,7 @@ This section guides you through installing the Datadog Agent with the embedded O
 
 ### Get the latest version of the Agent Helm chart
 
-1. Add the DataDog repository to your Helm repositories:
+1. Add the Datadog repository to your Helm repositories:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    ```
@@ -199,8 +203,8 @@ Add the following configuration to your Agent's `datadog-values.yaml` file.
      networkMonitoring:
        enabled: true
    ```
-   <div class="alert alert-warning">Do not enable logs collection in the Agent! Running the OTel Collector with <code>debug</code> exporter produces extensive amount of logs for the <code>otel-demo</code> environment.</div>
-1. Set the following envionmrnt variables to prevent data collision:
+   <div class="alert alert-warning">Do not enable logs collection in the Agent! Running the OTel Collector with <code>debug</code> exporter produces an extensive amount of logs for the <code>otel-demo</code> environment.</div>
+1. Set the following environment variables to prevent data collision:
    ```yaml
    datadog:
      ...
@@ -213,366 +217,247 @@ Add the following configuration to your Agent's `datadog-values.yaml` file.
 
 #### OpenTelemetry Collector configuration
 
-The DataDog Helm chart provides a recommended OTel Collector configuration. It's a great starting point for most projects.
-The full config can be found [on GitHub](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/templates/_otel_agent_config.yaml).
-You can inspect the default Collector config in the [OTelBin](https://www.otelbin.io/?#config=receivers%3A*N__prometheus%3A*N____config%3A*N______scrape*_configs%3A*N________-_job*_name%3A_%22otelcol%22*N__________scrape*_interval%3A_10s*N__________static*_configs%3A*N____________-_targets%3A_%5B%220.0.0.0%3A8888%22%5D*N__otlp%3A*N____protocols%3A*N______grpc%3A*N__________endpoint%3A_0.0.0.0%3A%7B%7B_include_%22get-port-number-from-name%22_*Cdict_%22ports%22_.Values.datadog.otelCollector.ports_%22portName%22_%22otel-grpc%22*D_%7D%7D*N______http%3A*N__________endpoint%3A_0.0.0.0%3A%7B%7B_include_%22get-port-number-from-name%22_*Cdict_%22ports%22_.Values.datadog.otelCollector.ports_%22portName%22_%22otel-http%22*D_%7D%7D*Nexporters%3A*N__debug%3A*N____verbosity%3A_detailed*N__datadog%3A*N____api%3A*N______key%3A_*S%7Benv%3ADD*_API*_KEY%7D*Nprocessors%3A*N__infraattributes%3A*N____cardinality%3A_2*N__batch%3A*N____timeout%3A_10s*Nconnectors%3A*N__datadog%2Fconnector%3A*N____traces%3A*N______compute*_top*_level*_by*_span*_kind%3A_true*N______peer*_tags*_aggregation%3A_true*N______compute*_stats*_by*_span*_kind%3A_true*Nservice%3A*N__pipelines%3A*N____traces%3A*N______receivers%3A_%5Botlp%5D*N______processors%3A_%5Bbatch%5D*N______exporters%3A_%5Bdatadog%2Fconnector%5D*N____traces%2Fotlp%3A*N______receivers%3A_%5Botlp%5D*N______processors%3A_%5Binfraattributes%2C_batch%5D*N______exporters%3A_%5Bdatadog%5D*N____metrics%3A*N______receivers%3A_%5Botlp%2C_datadog%2Fconnector%2C_prometheus%5D*N______processors%3A_%5Binfraattributes%2C_batch%5D*N______exporters%3A_%5Bdatadog%5D*N____logs%3A*N______receivers%3A_%5Botlp%5D*N______processors%3A_%5Binfraattributes%2C_batch%5D*N______exporters%3A_%5Bdatadog%5D%7E)
+The Datadog Helm chart provides a recommended OpenTelemetry Collector configuration. This a great starting point for most projects. 
 
-Let's try to modify the default Collector configuration for the demo purposes: let's add `debug` exporter to existing pipelines.
+1. Review the default configuration:
+   - [View the configuration on GitHub][21].
+   - [Inspect the configuration using OTelBin][22].
 
-```yaml
-...
-service:
-  telemetry:
-    logs:
-      level: debug
-  pipelines:
-    traces:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [debug, datadog/connector]
-    traces/otlp:
-      receivers: [otlp]
-      processors: [infraattributes, batch]
-      exporters: [debug, datadog]
-    metrics:
-      receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes, batch]
-      exporters: [debug, datadog]
-    logs:
-      receivers: [otlp]
-      processors: [infraattributes, batch]
-      exporters: [debug, datadog]
-```
+1. Modify the Collector configuration to add the `debug` exporter to existing pipelines:
+   ```yaml
+   ...
+   service:
+     telemetry:
+       logs:
+         level: debug
+     pipelines:
+       traces:
+         receivers: [otlp]
+         processors: [batch]
+         exporters: [debug, datadog/connector]
+       traces/otlp:
+         receivers: [otlp]
+         processors: [infraattributes, batch]
+         exporters: [debug, datadog]
+       metrics:
+         receivers: [otlp, datadog/connector, prometheus]
+         processors: [infraattributes, batch]
+         exporters: [debug, datadog]
+       logs:
+         receivers: [otlp]
+         processors: [infraattributes, batch]
+         exporters: [debug, datadog]
+   ```
 
-> [!TIP]
-> Check [collector-config.yaml](step23/collector-config.yaml) file to see the complete OTel Collector configuration.
+#### Install the OpenTelemetry integration
 
-#### Install OpenTelemetry integration
+1. Go to the [OpenTelemetry Integration page][23] and ensure it's installed.
+1. The OpenTelemetry Integration provides two OOTB dashboards that are essential for monitoring and debugging OTel Collector:
+   - [OpenTelemetry Host Metrics Dashboard][24]
+   - [OpenTelemetry Collector Metrics Dashboard][25]
 
-Go to [OpenTelemetry Integration page](https://app.datadoghq.com/integrations/otel) and check if it's installed.
+#### Install the Datadog Agent using Helm
 
-The [OpenTelemetry Integration](https://app.datadoghq.com/integrations/otel) provides two OOTB dashboards that are essential for monitoring and debugging OTel Collector:
-- [OpenTelemetry Host Metrics Dashboard](https://app.datadoghq.com/dash/integration/30425/opentelemetry-host-metrics-dashboard)
-- [OpenTelemetry Collector Metrics Dashboard](https://app.datadoghq.com/dash/integration/30773/opentelemetry-collector-metrics-dashboard)
+1. Install the Datadog Agent with OpenTelemetry Collector:
+   ```shell
+   helm upgrade --install otel-agent datadog/datadog \
+     --values ./step23/datadog-values.yaml \
+     --set-file datadog.otelCollector.config=./step23/collector-config.yaml \
+     --namespace <YOUR_NAME>
+   ```
+1. Verify the Agent is running by checking the list of running pods:
+   ```shell
+   kubectl get pods --namespace <YOUR_NAME>
+   ```
+1. Confirm that Agent default features are working by checking:
+   - Infrastructure [Host Map][26]
+   - [Live Containers Monitoring][27]
+   - [Live Processes][28]
+   - [NPM][29]
+   - [Fleet Automation][30]
 
-#### Install the Agent via Helm
+### Configure the `otel-demo` apps to use the Converged Agent
 
-Finally, let's put it all together and install the DataDog Agent with OTel Collector to our demo environment:
+This section explains how to switch all the `otel-demo` apps from using the `collector-contrib` to the Converged Datadog Agent.
 
-```shell
-helm upgrade --install otel-agent datadog/datadog \
-  --values ./step23/datadog-values.yaml \
-  --set-file datadog.otelCollector.config=./step23/collector-config.yaml \
-  --namespace <YOUR_NAME>
-```
+#### Convert the `otel-demo` collector's configuration
 
-To verify the Agent is up and running, let's get the list of running pods:
+To make the `otel-demo` Collector configuration compatible with the Datadog Converged Agent, remove unsupported and redundant components.
 
-```shell
-kubectl get pods --namespace <YOUR_NAME>
-```
+<div class="alert alert-info">You can review the <a href="https://github.com/DataDog/agent-psa-internal/blob/main/otel-agent/step23/collector-config.yaml">collector-config.yaml</a> file to see the complete Agent configuration.</div>
 
-Let's confirm that Agent default enablements are working:
-- Infrastructure [Host Map](https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=env).
-- [Live Containers Monitoring](https://app.datadoghq.com/containers)
-- [Live Processes](https://app.datadoghq.com/process)
-- [NPM](https://app.datadoghq.com/network/overview)
-- [Fleet Automation](https://app.datadoghq.com/fleet?group_by=env)
+<div class="alert alert-warning">The Datadog Agent with OTel Collector includes essential components by default. Using unsupported components will cause the otel-agent container to fail with a <code>CrashLoopBackOff</code> state. Refer to the <a href=https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml>manifest.yaml</a> file for a list of included components.</div>
 
-### 2.4 Configure the `otel-demo` apps to use the Converged Agent
-
-It's time to switch all the `otel-demo` apps to use Converged DataDog Agent instead of `collector-contrib`.
-
-#### Convert `otel-demo` collector's configuration
-
-> [!TIP]
-> Check [collector-config.yaml](step24/collector-config.yaml) file to see the complete OTel Collector configuration.
-
-To convert `otel-demo` Collector's configuration to be compatible with DataDog Converged Agent, we need to remove unsupported or redundant components.
-
-> [!WARNING]
-> DataDog Agent with OTel Collector includes the most common and essential components by default.
-> Using OTel components that's not included will result in ERROR and failure to start `otel-agent` container -- the Agent pod will be in `CrashLoopBackOff` state.
-> You can find the full list of included components in the Agent's [manifest.yaml](https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml) file.
-
-Here's the list of redundant components from the `otel-demo` default configuration:
-
-- The [`spanmetrics` connector](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md) responsible for aggregating Request, Error and Duration (R.E.D) metrics. Since we already have it covered by DataDog APM out of the box, we can remove this connector.
-- The `jaeger` and `zipkin` receivers are not required for the workshop.
-- The DataDog Agent provides us with all required telemetry data for Kubernetes cluster, so we can safely remove [`k8sattributes` processors](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor) from the pipelines.
-- And since we're no longer using `k8sattributes`, the [`resource` processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourceprocessor) is not needed either.
-
-Unsupported components from the `otel-demo` configuration:
-
-- The [`opensearch` exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/opensearchexporter) used for the logs pipeline is not included into default DataDog Agent distribution. We have to remove it for now.
-- The [`httpcheck`](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver) used for synthethic checks against HTTP endpoints is not included into default DataDog Agent distribution. We have to remove `httpcheck/frontendproxy` receiver for now.
-
-As a result, initial `otel-demo` collector configuration will be reduced to the following pipelines:
-
-```yaml
-service:
-  ...
-  pipelines:
-    traces:
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [otlp, debug]
-    metrics:
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [otlphttp/prometheus, debug]
-    logs:
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [debug]
-```
-
-Now we can merge it into the Agent OTel Collector configuration:
-
-```yaml
-exporters:
-  ...
-  otlp:
-    endpoint: "otel-demo-jaeger-collector:4317"
-    tls:
-      insecure: true
-  otlphttp/prometheus:
-    endpoint: http://otel-demo-prometheus-server:9090/api/v1/otlp
-    tls:
-      insecure: true
-service:
-  ...
-  pipelines:
-    traces: # Agent traces pipeline
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [debug, datadog/connector]
-    traces/otlp: # Agent traces pipeline
-      receivers: [otlp]
-      processors: [memory_limiter, infraattributes, batch]
-      exporters: [debug, datadog]
-    traces/jaeger: # otel-demo traces pipeline
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [otlp, debug]
-    metrics: # Agent metrics pipeline
-      receivers: [otlp, datadog/connector, prometheus]
-      processors: [memory_limiter, infraattributes, batch]
-      exporters: [debug, datadog]
-    metrics/prometheus: # otel-demo metrics pipeline
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [otlphttp/prometheus, debug]
-    logs:  # Agent logs pipeline
-      receivers: [otlp]
-      processors: [memory_limiter, infraattributes, batch]
-      exporters: [debug, datadog]
-    logs/opensearch: # otel-demo logs pipeline
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [debug]
-```
-
-> [!TIP]
-> Check [collector-config.yaml](step24/collector-config.yaml) file to see the complete OTel Collector configuration.
-
-To apply the changes, we need to run `helm upgrade` command. For the Helm values we're going to use [datadog-values.yaml](step23/datadog-values.yaml) file from the previous step:
-
-```shell
-helm upgrade otel-agent datadog/datadog \
-  --values ./step23/datadog-values.yaml \
-  --set-file datadog.otelCollector.config=./step24/collector-config.yaml \
-  --namespace <YOUR_NAME>
-```
+1. Remove the following components from the `otel-demo` configuration:
+   - [`spanmetrics` connector][31] 
+   - `jaeger` and `zipkin` receivers
+   - [`k8sattributes` processor][32]
+   - [`resource` processor][33]
+   - [`opensearch` exporter][34]
+   - [`httpcheck` receiver][35]
+   This is what your `otel-demo` collector pipeline configuration should look like:
+   ```yaml
+   service:
+     ...
+     pipelines:
+       traces:
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [otlp, debug]
+       metrics:
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [otlphttp/prometheus, debug]
+       logs:
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [debug]
+   ```
+1. Merge this configuration into the Agent OTel Collector configuration:
+   ```yaml
+   exporters:
+     ...
+     otlp:
+       endpoint: "otel-demo-jaeger-collector:4317"
+       tls:
+         insecure: true
+     otlphttp/prometheus:
+       endpoint: http://otel-demo-prometheus-server:9090/api/v1/otlp
+       tls:
+         insecure: true
+   service:
+     ...
+     pipelines:
+       traces: # Agent traces pipeline
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [debug, datadog/connector]
+       traces/otlp: # Agent traces pipeline
+         receivers: [otlp]
+         processors: [memory_limiter, infraattributes, batch]
+         exporters: [debug, datadog]
+       traces/jaeger: # otel-demo traces pipeline
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [otlp, debug]
+       metrics: # Agent metrics pipeline
+         receivers: [otlp, datadog/connector, prometheus]
+         processors: [memory_limiter, infraattributes, batch]
+         exporters: [debug, datadog]
+       metrics/prometheus: # otel-demo metrics pipeline
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [otlphttp/prometheus, debug]
+       logs:  # Agent logs pipeline
+         receivers: [otlp]
+         processors: [memory_limiter, infraattributes, batch]
+         exporters: [debug, datadog]
+       logs/opensearch: # otel-demo logs pipeline
+         receivers: [otlp]
+         processors: [memory_limiter, batch]
+         exporters: [debug]
+   ```
+1. Apply the changes using the `helm upgrad`e command:
+   ```shell
+   helm upgrade otel-agent datadog/datadog \
+     --values ./step23/datadog-values.yaml \
+     --set-file datadog.otelCollector.config=./step24/collector-config.yaml \
+     --namespace <YOUR_NAME>
+   ```
 
 #### Configure `otel-demo` apps to use the Converged Agent as OTel Collector
 
-> [!TIP]
-> Check [demo-values.yaml](step24/demo-values.yaml) file to see the complete `otel-demo` Helm chart values.
+In the `otel-demo` project, the `OTEL_COLLECTOR_NAME` environment variable controls which Collector is be used by OTel SDKs and auto-instrumentation libraries.
 
-In the `otel-demo` project, the `OTEL_COLLECTOR_NAME` environment variable controls which Collector will be used by OTel SDKs and auto-instrumentation libraries.
-Let's replace its value with the name of the DataDog Agent service: `otel-agent-datadog`:
+<div class="alert alert-info">You can review the <a href="https://github.com/DataDog/agent-psa-internal/blob/main/otel-agent/step24/demo-values.yaml">collector-config.yaml</a> file to see the complete Helm chart values.</div>
 
+1. Update the `OTEL_COLLECTOR_NAME` environment variable:
+   ```yaml
+   default:
+     envOverrides:
+       - name: OTEL_COLLECTOR_NAME
+         value: "otel-agent-datadog"
+   ```
+{{% collapse-content title="Optional configuration for host IP address" level="p" %}}
+You can use either the Kubernetes service name (`otel-agent-datadog`) or the host's IP address. To use the IP address, change your configuration as follows:
 ```yaml
 default:
   envOverrides:
+    ...
+    - name: HOST_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
     - name: OTEL_COLLECTOR_NAME
-      value: "otel-agent-datadog"
+      value: $(HOST_IP)
 ```
+{{% /collapse-content %}}   
+2. Update the `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+   ```yaml
+   default:
+     envOverrides:
+       ...
+       - name: OTEL_RESOURCE_ATTRIBUTES
+         value: >-
+           service.name=$(OTEL_SERVICE_NAME),
+           service.version=1.10.0,
+           service.instance.id=$(OTEL_K8S_POD_UID),
+           service.namespace=opentelemetry-demo,
+           k8s.namespace.name=$(OTEL_K8S_NAMESPACE),
+           k8s.node.name=$(OTEL_K8S_NODE_NAME),
+           k8s.pod.name=$(OTEL_K8S_POD_NAME),
+           k8s.pod.ip=$(POD_IP),
+           deployment.environment=$(OTEL_K8S_NAMESPACE)
+   
+   ```
+1. Apply these changes by redeploying the `otel-demo` apps:
+   ```shell
+   helm upgrade demo open-telemetry/opentelemetry-demo \
+     --values ./step24/demo-values.yaml \
+     --namespace <YOUR_NAME>
+   ```
+1. Verify the Agent and `otel-demo` apps pods are running:
+   ```shell
+   kubectl get pods --namespace <YOUR_NAME>
+   ```
+1. Verify [APM Traces][36] and [Logs][37] to ensure correlation between infra metrics (from the Agent) and Traces (from OTel SDKs).
+1. Set up port forwarding to access the demo frontend:
+   ```shell
+   kubectl port-forward svc/demo-frontendproxy 8080:8080 --namespace <YOUR_NAME>
+   ```
+1. Access the `otel-demo` apps in your browser and verify that telemetry data is still exported to Grafana and Jaeger UI, but not to OpenSearch:
+- Explore Prometheus Metrics and OpenSearch Logs in [Grafana][17].
+- Explore collected traces in [Jaeger UI][19].
 
-> [!NOTE]
-> We can use either K8S service name (`otel-agent-datadog`) or IP address of the host. If you prefer to use IP address, change it following:
-> ```yaml
-> default:
->   envOverrides:
->     ...
->     - name: HOST_IP
->       valueFrom:
->         fieldRef:
->           apiVersion: v1
->           fieldPath: status.hostIP
->     - name: OTEL_COLLECTOR_NAME
->       value: $(HOST_IP)
-> ```
+### Shutdown the `collector-contrib` collector
 
-We also need to update `OTEL_RESOURCE_ATTRIBUTES` environment variable to the following format:
+1. The Converged Agent is handling all OTel data, so you can disable the `opentelemetry-collector` component:
+   ```yaml
+   ...
+   opentelemetry-collector:
+     enabled: false
+   ```
+1. Apply the changes using the `helm upgrade` command:
+   ```shell
+   helm upgrade demo open-telemetry/opentelemetry-demo \
+     --values ./step25/demo-values.yaml \
+     --namespace <YOUR_NAME>
+   ```
+1. Verify that all `otel-demo` app pods are running:
+   ```shell
+   kubectl get pods --namespace <YOUR_NAME>
+   ```
 
-```yaml
-default:
-  envOverrides:
-    ...
-    - name: OTEL_RESOURCE_ATTRIBUTES
-      value: >-
-        service.name=$(OTEL_SERVICE_NAME),
-        service.version=1.10.0,
-        service.instance.id=$(OTEL_K8S_POD_UID),
-        service.namespace=opentelemetry-demo,
-        k8s.namespace.name=$(OTEL_K8S_NAMESPACE),
-        k8s.node.name=$(OTEL_K8S_NODE_NAME),
-        k8s.pod.name=$(OTEL_K8S_POD_NAME),
-        k8s.pod.ip=$(POD_IP),
-        deployment.environment=$(OTEL_K8S_NAMESPACE)
+Congratulations! You've successfully transitioned the `otel-demo` project to use the embedded OTel Collector in the Datadog Agent.
 
-```
+## Use your OpenTelemetry Components with the Converged Agent
 
-> [!TIP]
-> Check [demo-values.yaml](step24/demo-values.yaml) file to see the complete `otel-demo` Helm chart values.
+If you'd like to build a Converged Datadog Agent image with additional OpenTelemetry components, read [Use Custom OpenTelemetry Components with Datadog Agent][38]. 
 
-To apply the changes, we need to redeploy all existing `otel-demo` apps. We can do it by running `helm upgrade` command with the new [demo-values.yaml](step24/demo-values.yaml) file:
+## Further reading
 
-```shell
-helm upgrade demo open-telemetry/opentelemetry-demo \
-  --values ./step24/demo-values.yaml \
-  --namespace <YOUR_NAME>
-```
-
-Verify: check that all agent and `otel-demo` apps pods are up and running:
-
-```shell
-kubectl get pods --namespace <YOUR_NAME>
-```
-
-Let's check [APM Traces](https://app.datadoghq.com/apm/traces) and [Logs](https://app.datadoghq.com/logs) to make sure we can see correlation between infra metrics (from the Agent) and Traces (from OTel SDKs).
-
-Finally, let's verify that telemetry data is still exported to [Grafana](http://localhost:8080/grafana/) and [Jaeger UI](http://localhost:8080/jaeger/ui/), but not to OpenSearch:
-
-```shell
-kubectl port-forward svc/demo-frontendproxy 8080:8080 --namespace <YOUR_NAME>
-```
-
-- Explore Prometheus Metrics and OpenSearch Logs in [Grafana](http://localhost:8080/grafana/)
-- Explore collected traces in [Jaeger UI](http://localhost:8080/jaeger/ui/)
-
-
-### 2.5 Shutdown the `collector-contrib` collector
-
-At this point we no longer need `collector-contrib` collector: all OTel data is collected by the Converged Agent.
-To retire it, we simply need to disable `opentelemetry-collector` component in the `otel-demo` Helm chart:
-
-```yaml
-...
-opentelemetry-collector:
-  enabled: false
-```
-
-> [!TIP]
-> Check [demo-values.yaml](step24/demo-values.yaml) file to see the complete `otel-demo` Helm chart values.
-
-To apply the changes via `helm upgrade` command:
-
-```shell
-helm upgrade demo open-telemetry/opentelemetry-demo \
-  --values ./step25/demo-values.yaml \
-  --namespace <YOUR_NAME>
-```
-
-Verify: all `otel-demo` apps pods are up and running; agent pods aren't affected by the update:
-
-```shell
-kubectl get pods --namespace <YOUR_NAME>
-```
-
-Congrats! We've just reached our next **milestone**: the `otel-demo` project, previously instrumented with `collector-contrib` is now using embedded OTel Collector in the DataDog Agent.
-
-
-## 3: Use BYOC Collector with Converged Agent
-
-Using instructions from [BYOC Workshop](https://docs.google.com/document/d/1_pEm1Wqvt0CVYuD_rNvQ4e06LO-erdXInKCKR8wn4M8/edit), build the collector distribution with [OpenSearch exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/opensearchexporter) support:
-
-```yaml
-...
-exporters:
-  ...
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/exporter/opensearchexporter v0.104.0
-```
-
-```shell
-docker build . -t agent-byoc:0.104.0
-```
-
-Replace agent image with the local one:
-
-```yaml
-agents:
-  image:
-    repository: agent-byoc
-    tag: 0.104.0
-    doNotCheckTag: true
-```
-
-Add [OpenSearch exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/opensearchexporter) to the logs pipeline:
-
-```yaml
-exporters:
-  ...
-  opensearch:
-    http:
-      endpoint: http://otel-demo-opensearch:9200
-      tls:
-        insecure: true
-    logs_index: otel
-    ...
-service:
-  ...
-  pipelines:
-    ...
-    logs/opensearch:
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [debug, opensearch]
-```
-
-Load the docker image with custom collector distribution from localhost to the kind K8S cluster:
-
-```shell
-kind load docker-image agent-byoc --name workshop
-```
-
-Redeploy the agent to apply new changes:
-
-```shell
-helm upgrade otel-agent datadog/datadog \
-  --values ./step30/datadog-values.yaml \
-  --set-file datadog.otelCollector.config=./step30/collector-config.yaml \
-  --namespace <YOUR_NAME>
-```
-
-Verify: agent pods are up and running:
-
-```shell
-kubectl get pods --namespace <YOUR_NAME>
-```
-
-Finally, let's verify that logs are exported to OpenSearch:
-
-```shell
-kubectl port-forward svc/demo-frontendproxy 8080:8080 --namespace <YOUR_NAME>
-```
-
-- Explore OpenSearch Logs in [Grafana](http://localhost:8080/grafana/)
-
-
-Congrats! That's our final **milestone** of the workshop: we've installed custom distribution of the embedded OTel Collector in the DataDog Agent via Helm.
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
@@ -594,3 +479,21 @@ Congrats! That's our final **milestone** of the workshop: we've installed custom
 [18]: http://localhost:8080/loadgen/
 [19]: http://localhost:8080/jaeger/ui/
 [20]: https://app.datadoghq.com/organization-settings/application-keys
+[21]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/templates/_otel_agent_config.yaml
+[22]: https://www.otelbin.io/?#config=receivers%3A*N__prometheus%3A*N____config%3A*N______scrape*_configs%3A*N________-_job*_name%3A_%22otelcol%22*N__________scrape*_interval%3A_10s*N__________static*_configs%3A*N____________-_targets%3A_%5B%220.0.0.0%3A8888%22%5D*N__otlp%3A*N____protocols%3A*N______grpc%3A*N__________endpoint%3A_0.0.0.0%3A%7B%7B_include_%22get-port-number-from-name%22_*Cdict_%22ports%22_.Values.datadog.otelCollector.ports_%22portName%22_%22otel-grpc%22*D_%7D%7D*N______http%3A*N__________endpoint%3A_0.0.0.0%3A%7B%7B_include_%22get-port-number-from-name%22_*Cdict_%22ports%22_.Values.datadog.otelCollector.ports_%22portName%22_%22otel-http%22*D_%7D%7D*Nexporters%3A*N__debug%3A*N____verbosity%3A_detailed*N__datadog%3A*N____api%3A*N______key%3A_*S%7Benv%3ADD*_API*_KEY%7D*Nprocessors%3A*N__infraattributes%3A*N____cardinality%3A_2*N__batch%3A*N____timeout%3A_10s*Nconnectors%3A*N__datadog%2Fconnector%3A*N____traces%3A*N______compute*_top*_level*_by*_span*_kind%3A_true*N______peer*_tags*_aggregation%3A_true*N______compute*_stats*_by*_span*_kind%3A_true*Nservice%3A*N__pipelines%3A*N____traces%3A*N______receivers%3A_%5Botlp%5D*N______processors%3A_%5Bbatch%5D*N______exporters%3A_%5Bdatadog%2Fconnector%5D*N____traces%2Fotlp%3A*N______receivers%3A_%5Botlp%5D*N______processors%3A_%5Binfraattributes%2C_batch%5D*N______exporters%3A_%5Bdatadog%5D*N____metrics%3A*N______receivers%3A_%5Botlp%2C_datadog%2Fconnector%2C_prometheus%5D*N______processors%3A_%5Binfraattributes%2C_batch%5D*N______exporters%3A_%5Bdatadog%5D*N____logs%3A*N______receivers%3A_%5Botlp%5D*N______processors%3A_%5Binfraattributes%2C_batch%5D*N______exporters%3A_%5Bdatadog%5D%7E
+[23]: https://app.datadoghq.com/integrations/otel
+[24]: https://app.datadoghq.com/dash/integration/30425/opentelemetry-host-metrics-dashboard
+[25]: https://app.datadoghq.com/dash/integration/30773/opentelemetry-collector-metrics-dashboard
+[26]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=env
+[27]: https://app.datadoghq.com/containers
+[28]: https://app.datadoghq.com/process
+[29]: https://app.datadoghq.com/network/overview
+[30]: https://app.datadoghq.com/fleet?group_by=env
+[31]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
+[32]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+[33]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourceprocessor
+[34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/opensearchexporter
+[35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver
+[36]: https://app.datadoghq.com/apm/traces
+[37]: https://app.datadoghq.com/logs
+[38]: /opentelemetry/agent/agent_with_custom_components
