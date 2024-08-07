@@ -33,17 +33,16 @@ or a library. Datadog attempts to do this matching using three mechanisms:
 2. Detecting file usage patterns within other Datadog products
 3. Searching for a service name in the path or repository.
 
-If one method succeeds, the system does not try any further matching mechanism. We explain in
-more details each mapping method below.
+If one method succeeds, the system does not try to perform any further matching. Each mapping method is detailed below.
 
 #### Code locations in service catalog
 
-The schema version `v3` (and further version) of service catalog allows you
+The schema version `v3` (and later) of service catalog allows you
 to add the mapping of your code location for your service. The `codeLocations`
 section specifies the locations of the code with the repository that
 contains the code and its associated `paths`.
 
-Note that the `paths` attribute is a list of [glob](https://en.wikipedia.org/wiki/Glob_(programming))
+Note that the `paths` attribute is a list of [globs](https://en.wikipedia.org/wiki/Glob_(programming))
 that should match paths in the repository.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
