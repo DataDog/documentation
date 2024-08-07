@@ -1,0 +1,11 @@
+---
+title: Converged Agent Private Betas
+private: true
+---
+
+## Guides
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/agent/install_agent_with_collector" >}}Install the Datadog Agent with the OpenTelemetry Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/agent/agent_with_custom_components" >}}Use Custom OpenTelemetry Components with Datadog Agent{{< /nextlink >}}
+{{< /whatsnext >}}
