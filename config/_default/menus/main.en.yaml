@@ -1361,11 +1361,11 @@ menu:
       parent: dashboards_ddsql_editor_reference
       identifier: dashboards_ddsql_editor_reference_aggregation_functions
       weight: 11025
-    - name: Window Functions
-      url: dashboards/ddsql_editor/reference/window_functions
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_window_functions
-      weight: 11026
+    # - name: Window Functions
+    #   url: dashboards/ddsql_editor/reference/window_functions
+    #   parent: dashboards_ddsql_editor_reference
+    #   identifier: dashboards_ddsql_editor_reference_window_functions
+    #   weight: 11026
     - name: Querying Tags
       url: dashboards/ddsql_editor/reference/tags
       parent: dashboards_ddsql_editor_reference
@@ -2316,31 +2316,36 @@ menu:
       parent: app_builder
       identifier: app_builder_events
       weight: 5
+    - name: Queries
+      url: service_management/app_builder/queries/
+      parent: app_builder
+      identifier: app_builder_queries
+      weight: 6
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 6
+      weight: 7
     - name: Variables
       url: service_management/app_builder/variables/
       parent: app_builder
       identifier: app_builder_variables
-      weight: 7
+      weight: 8
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 8
+      weight: 9
     - name: Private Actions
       url: service_management/app_builder/private_actions/
       parent: app_builder
       identifier: app_builder_private_actions
-      weight: 9
+      weight: 10
     - name: Private Action Credentials
       url: service_management/app_builder/private_actions/private_action_credentials/
       parent: app_builder_private_actions
       identifier: app_builder_private_actions_creds
-      weight: 901
+      weight: 1001
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -3503,21 +3508,26 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_gcsql
       weight: 304
+    - name: AlloyDB
+      url: database_monitoring/setup_postgres/alloydb
+      parent: dbm_setup_postgres
+      identifier: dbm_setup_postgres_alloydb
+      weight: 305
     - name: Azure
       url: database_monitoring/setup_postgres/azure
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
-      weight: 305
+      weight: 306
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 307
+      weight: 308
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
@@ -4151,16 +4161,21 @@ menu:
       parent: code_analysis
       identifier: code_analysis_ide_plugins
       weight: 5
+    - name: Git Hooks
+      url: code_analysis/git_hooks
+      parent: code_analysis
+      identifier: code_analysis_git_hooks
+      weight: 6
     - name: Troubleshooting
       url: code_analysis/troubleshooting
       parent: code_analysis
       identifier: code_analysis_troubleshooting
-      weight: 6
+      weight: 7
     - name: Frequently Asked Questions
       url: code_analysis/faq
       parent: code_analysis
       identifier: code_analysis_faq
-      weight: 7
+      weight: 8
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -5229,7 +5244,7 @@ menu:
       url: security/application_security/software_composition_analysis/setup/compatibility/
       parent: application_security_software_composition_analysis_setup
       identifier: appsec_compat_sca
-      weight: 2      
+      weight: 2
     - name: Code Security
       url: security/application_security/code_security/
       parent: application_security
@@ -5244,7 +5259,7 @@ menu:
       url: security/application_security/code_security/setup/compatibility/
       parent: application_security_code_security_setup
       identifier: appsec_compat_code_security
-      weight: 2      
+      weight: 2
     - name: Threat Management
       url: security/application_security/threats/
       parent: application_security

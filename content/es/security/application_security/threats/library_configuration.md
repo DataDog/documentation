@@ -7,9 +7,6 @@ further_reading:
 - link: /security/application_security/
   tag: Documentación
   text: Protección contra las amenazas con Datadog Application Security Management
-- link: /security/application_security/enabling/
-  tag: Documentación
-  text: Activación de ASM para tus servicios
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentación
   text: Reglas de Application Security Management predefinidas
@@ -21,7 +18,7 @@ further_reading:
   text: Solucionar problemas de ASM
 - link: /security/application_security/how-appsec-works/
   tag: Documentación
-  text: Cómo funciona la gestión de la seguridad de las aplicaciones en Datadog
+  text: Cómo funciona Application Security Management en Datadog
 title: Configuración de bibliotecas
 ---
 
@@ -95,7 +92,7 @@ Los siguientes son ejemplos de datos que se marcan como confidenciales por defec
 
 Consulta [Seguridad de datos de APM][3] para obtener información sobre otros mecanismos de Datadog Agent y bibliotecas que también pueden utilizarse para eliminar datos confidenciales.
 
-## Configurar una página de bloqueo personalizada o una carga útil
+## Configuración de una página de bloqueo personalizada o una carga útil
 
 {{% asm-protection-page-configuration %}}
 
