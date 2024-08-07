@@ -22446,6 +22446,10 @@ components:
               have permission to edit those SLOs.
             slos_read: View SLOs and status corrections.
             slos_write: Create, edit, and delete SLOs.
+            synthetics_default_settings_read: View the default settings for Synthetic
+              Monitoring.
+            synthetics_default_settings_write: Edit the default settings for Synthetic
+              Monitoring.
             synthetics_global_variable_read: View, search, and use Synthetics global
               variables.
             synthetics_global_variable_write: Create, edit, and delete global variables

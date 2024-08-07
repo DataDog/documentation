@@ -40690,6 +40690,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_read
       summary: Get a workflow instance
       tags:
       - Workflow Automation
