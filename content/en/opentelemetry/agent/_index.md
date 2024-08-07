@@ -1,5 +1,5 @@
 ---
-title: Converged Agent Private Betas
+title: Datadog Agent with Embedded Collector
 private: true
 ---
 
