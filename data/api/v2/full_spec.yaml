@@ -11355,6 +11355,37 @@ components:
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
       type: object
+    ListTagsResponse:
+      description: List tags response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListTagsResponseData'
+      type: object
+    ListTagsResponseData:
+      description: The list tags response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListTagsResponseDataAttributes'
+        id:
+          description: The device ID
+          example: example:1.2.3.4
+          type: string
+        type:
+          description: The type of the resource. The value should always be tags.
+          type: string
+      type: object
+    ListTagsResponseDataAttributes:
+      description: The definition of ListTagsResponseDataAttributes object.
+      properties:
+        tags:
+          description: The list of tags
+          example:
+          - tag:test
+          - tag:testbis
+          items:
+            type: string
+          type: array
+      type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
       enum:
@@ -17328,6 +17359,8 @@ components:
       required:
       - type
       type: object
+      x-merge-override:
+        required: false
     RoleAttributes:
       description: Attributes of the role.
       properties:
@@ -24511,6 +24544,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -25307,6 +25342,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -27104,6 +27141,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/cost/custom_costs:
     get:
       description: List the Custom Costs files.
@@ -27627,6 +27666,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -28605,6 +28646,8 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    x-merge-override:
+      delete: true
   /api/v2/incidents/{incident_id}/attachments:
     get:
       description: Get all attachments for a given incident.
@@ -29462,6 +29505,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -30150,6 +30195,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
       description: Delete a Fastly service for an account.
@@ -30236,6 +30283,7 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      get: true
       patch: true
   /api/v2/integrations/okta/accounts:
     get:
@@ -30404,6 +30452,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      get: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -33163,6 +33213,73 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/ndm/tags/devices/{device_id}:
+    get:
+      description: Get the list of tags for a device.
+      operationId: ListDeviceUserTags
+      parameters:
+      - description: The id of the device to fetch tags for.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the list of tags for a device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: Update the tags for a device.
+      operationId: UpdateDeviceUserTags
+      parameters:
+      - description: The id of the device to update tags for.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsResponse'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update the tags for a device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -33752,6 +33869,8 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -34493,6 +34612,7 @@ paths:
       x-undo:
         type: idempotent
     x-merge-override:
+      delete: true
       patch: true
   /api/v2/roles/{role_id}/clone:
     post:
@@ -34555,6 +34675,8 @@ paths:
         - name: role_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -34705,6 +34827,7 @@ paths:
         type: safe
     x-merge-override:
       delete: true
+      get: true
       post: true
   /api/v2/roles/{role_id}/users:
     delete:
@@ -35061,6 +35184,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -37569,6 +37694,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/services:
     get:
       deprecated: true
@@ -38582,6 +38709,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -38824,8 +38953,6 @@ paths:
       x-menu-order: 13
       x-undo:
         type: idempotent
-    x-merge-override:
-      patch: true
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
@@ -39041,6 +39168,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -40351,6 +40480,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/users/{user_id}/orgs:
     get:
       description: 'Get a user organization. Returns the user information and all
@@ -40432,6 +40563,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/users/{user_uuid}/memberships:
     get:
       description: Get a list of memberships for a user

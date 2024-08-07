@@ -1,8 +1,8 @@
 ---
 aliases:
-- /developers/events/
-- /event/guides/
-- /events/guides/
+- /ja/developers/events/
+- /ja/event/guides/
+- /ja/events/guides/
 cascade:
   algolia:
     category: ガイド

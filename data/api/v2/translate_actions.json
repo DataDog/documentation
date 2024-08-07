@@ -991,6 +991,16 @@
     "description": "Get the list of interfaces of the device.",
     "summary": "Get the list of interfaces of the device"
   },
+  "ListDeviceUserTags": {
+    "description": "Get the list of tags for a device.",
+    "summary": "Get the list of tags for a device"
+  },
+  "UpdateDeviceUserTags": {
+    "description": "Update the tags for a device.",
+    "summary": "Update the tags for a device",
+    "request_description": "",
+    "request_schema_description": "List tags response."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
