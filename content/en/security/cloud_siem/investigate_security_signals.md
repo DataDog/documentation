@@ -65,7 +65,7 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
       - `Under Review`: During an active investigation, change the triage status to `Under Review`. From the `Under Review` state, you can move the status to `Archived` or `Open` as needed.
       - `Archived`: When the detection that caused the signal has been resolved, update the status to `Archived`. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, the status can be changed back to `Open`. All signals are locked 30 days after they have been created.</ul>
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
-  c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to you and sets the triage status to `Under Review`.
+  c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to you and sets the triage status to `Under Review`. 
 
 {{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="The signal side panel of a compromised AWS IAM user access key showing two IP addresses and their locations" style="width:90%;" >}}
 
@@ -80,21 +80,21 @@ Use bulk actions to triage multiple signals. To use bulk actions, first search a
 
 {{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="The Signal Explorers showing the bulk action option" style="width:55%;" >}}
 
-### Run Workflow automation
+### Run Workflow Automation
 
-Use Workflow Automations to carry out actions to help you investigate and remediate a signal. These actions can include:
+Use Workflow Automation to carry out actions to help you investigate and remediate a signal. These actions can include:
 - Blocking an IP address from your environment.
 - Disabling a user account.
 - Looking up an IP address with a third-party threat intelligence provider.
-- Sending slack messages to your colleagues to get help with your investigation.
+- Sending Slack messages to your colleagues to get help with your investigation.
 
 To run a workflow from the signal side panel, select **Run Workflows** in the **Next Steps** section. In the workflow browser, search and select a workflow to run. Click the **Workflows** tab in the signal side panel to see which workflows were triggered for the signal.
 
-To trigger a Workflow automatically for any Security Signal, see [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
+To trigger a workflow automatically for any security signal, see [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
 
 ## Investigate
 
-A signal contains important information to determine whether a signal is malicious or not. Additionally, you can add a signal to a case in Case Management for further investigation.
+A signal contains important information to determine whether the threat detected is malicious or not. Additionally, you can add a signal to a case in Case Management for further investigation.
 
 ### Logs
 
@@ -155,7 +155,7 @@ If you want to add the signal to an incident, click the down arrow next to **Dec
 
 Datadog Cloud SIEM offers integrated threat intelligence provided by our threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IP addresses known to be used by malicious actors), so that you can quickly identify which potential threats to address.
 
-Datadog automatically enriches all ingested logs for indicators of compromise (IOCs) from our threat intelligence feeds. If a log contains a match to a known IOC, a `threat_intel` attribute is appended to the log event to provide additional insights based on available intelligence.
+Datadog automatically enriches all ingested logs for indicators of compromise (IOCs) from its threat intelligence feeds. If a log contains a match to a known IOC, a `threat_intel` attribute is appended to the log event to provide additional insights based on available intelligence.
 
 The query to see all threat intelligence matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
 
