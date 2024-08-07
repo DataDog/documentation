@@ -64,8 +64,6 @@ export default function render(
 
   const { name, attributes, children = [] } = node;
 
-  console.log('name:', name);
-
   if (components && name in components) {
     const Klass = components[name];
     return new Klass(node).render();

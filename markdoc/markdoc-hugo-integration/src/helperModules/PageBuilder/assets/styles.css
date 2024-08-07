@@ -26,3 +26,15 @@
     display: inline-block;
     margin-right: 25px;
 }
+.alert.alert-info p {
+    color: rgb(31, 92, 122);
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+}
+.alert.alert-warning p {
+    color: #60451f;
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+}

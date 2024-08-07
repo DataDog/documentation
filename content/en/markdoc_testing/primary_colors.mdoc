@@ -9,6 +9,10 @@ page_preferences:
     options_source: <COLOR>_item_options
 ---
 
+{% alert level="warning" %}
+Warning: This is just a test page. It's not real.
+{% /alert %}
+
 This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things.
 
 <!-- blue -->
@@ -69,3 +73,9 @@ Blueberries are also popular in smoothies and jams. The vibrant blue color of bl
 ## Red
 {% partial file="red.mdoc" /%}
 {% /if %}
+
+## Test image
+
+Here's an unrelated image, for testing purposes:
+
+{% img src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" /%}

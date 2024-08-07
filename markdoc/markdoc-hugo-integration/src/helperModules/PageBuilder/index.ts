@@ -9,6 +9,7 @@ import { getChooserHtml } from './components/Chooser';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { resolvePagePrefs } from '../sharedRendering';
+import { customComponents } from '../../config';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -76,7 +77,11 @@ export class PageBuilder {
     // Build the page content HTML
     let pageContents = `
 <div id="markdoc-chooser">${chooserHtml}</div>
-<div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(renderableTree)}</div>
+<div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(
+      renderableTree,
+      undefined,
+      customComponents
+    )}</div>
 ${rerenderScript}
 `;
 

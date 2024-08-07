@@ -1,5 +1,7 @@
 import html from './renderers/html';
 import { Tag, Config } from './types';
+import MarkdownIt from 'markdown-it';
+const { escapeHtml, unescapeAll } = MarkdownIt().utils;
 
 export abstract class CustomHtmlComponent {
   contents = '';
@@ -12,6 +14,14 @@ export abstract class CustomHtmlComponent {
     if (tag.children.length > 0) {
       this.contents = html(tag.children, config, components);
     }
+  }
+
+  escapeHtml(str: string): string {
+    return escapeHtml(str);
+  }
+
+  unescapeAll(str: string): string {
+    return unescapeAll(str);
   }
 
   abstract render(): string;

@@ -16,6 +16,7 @@ import MarkdocStaticCompiler, {
   ClientFunctionSchema
 } from 'markdoc-static-compiler';
 import { MinifiedClientFunction, minifyClientFunction } from './dataCompression';
+import { transformConfig } from '../config';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -69,7 +70,8 @@ export function buildRenderableTree(p: {
 }): RenderableTreeNode {
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: p.defaultValsByPrefId,
-    partials: p.parsedFile.partials
+    partials: p.parsedFile.partials,
+    ...transformConfig
   });
 
   // ensure that all variable ids appearing
