@@ -67,6 +67,8 @@ CSM leverages the Datadog Agent and platform-wide cloud integrations and include
 
 {{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 ## Track your organization's health
 
 Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.

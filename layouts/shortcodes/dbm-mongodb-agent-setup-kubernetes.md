@@ -95,7 +95,13 @@ The Cluster Agent automatically registers this configuration and begins running 
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2003] and declare the password using the `ENC[]` syntax.
 
+### Validate
+
+[Run the Agent's status subcommand][2004] and look for `mongo` under the **Checks** section. Navigate to the [Database Monitoring for MongoDB][2005] page in Datadog to get started.
+
 [2000]: /agent/cluster_agent
 [2001]: /agent/cluster_agent/clusterchecks/
 [2002]: https://helm.sh
 [2003]: /agent/configuration/secrets-management
+[2004]: /agent/configuration/agent-commands/#agent-status-and-information
+[2005]: https://app.datadoghq.com/databases/list?listView=mongo

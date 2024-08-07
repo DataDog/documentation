@@ -68,6 +68,7 @@ server:
 
 # Download all dependencies and run the site
 start: dependencies ## Build and run docs including external content.
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -202,6 +203,10 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
 
+update_websites_sources_module:
+	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+	node_modules/hugo-bin/vendor/hugo mod clean
+	cat go.mod
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead
