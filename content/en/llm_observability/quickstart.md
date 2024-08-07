@@ -19,7 +19,7 @@ This guide uses the [LLM Observability SDK for Python][1]. If your application i
 
 ### Jupyter notebooks
 
-To better understand  LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time. 
+To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time. 
 
 ## Command line
 
