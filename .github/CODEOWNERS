@@ -1,16 +1,17 @@
 *                         @DataDog/documentation
 
-/assets/                  @DataDog/corpweb @DataDog/documentation
-/data/                    @DataDog/corpweb @DataDog/documentation
-/data/api/                @DataDog/documentation
-/local/                   @DataDog/corpweb @DataDog/documentation
-/layouts/                 @DataDog/corpweb @DataDog/documentation
-/src/                     @DataDog/corpweb @DataDog/documentation
-/config/                  @DataDog/corpweb @DataDog/documentation
-/config/_default/menus/   @DataDog/documentation
-package.json              @DataDog/corpweb @DataDog/documentation
-go.mod                    @DataDog/corpweb @DataDog/documentation
-go.sum                    @DataDog/corpweb @DataDog/documentation
+/assets/                          @DataDog/corpweb
+/data/                            @DataDog/corpweb
+/data/api/                        @DataDog/documentation
+/layouts/                         @DataDog/corpweb
+/src/                             @DataDog/corpweb @DataDog/documentation
+/config/                          @DataDog/corpweb
+/config/_default/menus/           @DataDog/documentation
+package.json                      @DataDog/corpweb
+go.mod                            @DataDog/corpweb
+go.sum                            @DataDog/corpweb
+.github/ISSUE_TEMPLATE            @DataDog/documentation
+.github/PULL_REQUEST_TEMPLATE.md  @DataDog/documentation
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
@@ -48,7 +49,7 @@ layouts/shortcodes/integration-assets-reference.md                          @Dat
 layouts/shortcodes/integration_categories.md                                @Datadog/marketplace-product-management @DataDog/documentation
 
 # Websites Platform (Devops)
-.github/workflows                                       @DataDog/WebOps-Platform
+.github/                                                @DataDog/WebOps-Platform
 .gitlab-ci.yml                                          @DataDog/WebOps-Platform
 Makefile                                                @DataDog/WebOps-Platform
 translate.yaml                                          @DataDog/WebOps-Platform
@@ -57,6 +58,14 @@ docker-compose-docs.yml                                 @DataDog/WebOps-Platform
 .htmltest.yml                                           @DataDog/WebOps-Platform
 datadog-ci.preview.json                                 @DataDog/WebOps-Platform
 general.preview.synthetics.json                         @DataDog/WebOps-Platform
+/local/                                                 @DataDog/WebOps-Platform
+.gitignore                                              @DataDog/WebOps-Platform
+.gitattributes                                          @DataDog/WebOps-Platform
+.nvmrc                                                  @DataDog/WebOps-Platform
+babel.config.js                                         @DataDog/WebOps-Platform
+postcss.config.js                                       @DataDog/WebOps-Platform
+prettier.config.js                                      @DataDog/WebOps-Platform
+data/reference/                                         @DataDog/WebOps-Platform
 
 # Cloud Cost Management
 documentation/content/en/cloud_cost_management/*.md              @DataDog/cloud-cost-management-visibility @DataDog/documentation
