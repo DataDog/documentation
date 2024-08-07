@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Google AlloyDB managed Postgres
-kind: documentation
 description: Install and configure Database Monitoring for Postgres managed on Google AlloyDB.
 further_reading:
 - link: "/integrations/postgres/"
