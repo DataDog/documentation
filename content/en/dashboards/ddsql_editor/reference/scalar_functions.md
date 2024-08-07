@@ -84,7 +84,7 @@ These functions return one value per row.
 | row_to_json(table) | json | Returns a JSON representation of each row in a table as a JSON value. The JSON keys are the column names, and the values are the values under each row at each column. <br><br> <strong>Note</strong>: row_to_json takes in a table name, NOT a column. |
 
 ### JSON array
-  Return the value the key `forest` in the 0th element in a JSON array for each JSON object or row in `col`.
+  Return the value of the key `forest` in the 0th element in a JSON array for each JSON object or row in `col`.
 
 ```json
 [{
