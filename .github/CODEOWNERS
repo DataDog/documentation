@@ -1,14 +1,10 @@
 *                         @DataDog/documentation
 
-/data/api/                        @DataDog/documentation
-/config/_default/menus/           @DataDog/documentation
-.github/ISSUE_TEMPLATE            @DataDog/documentation
-.github/PULL_REQUEST_TEMPLATE.md  @DataDog/documentation
-README.md                         @DataDog/documentation
-/assets/                          @DataDog/corpweb
-/data/                            @DataDog/corpweb
-/layouts/                         @DataDog/corpweb
-/config/                          @DataDog/corpweb
+# Corpweb
+assets/                           @DataDog/corpweb
+data/                             @DataDog/corpweb
+layouts/                          @DataDog/corpweb
+config/                           @DataDog/corpweb
 package.json                      @DataDog/corpweb
 go.mod                            @DataDog/corpweb
 go.sum                            @DataDog/corpweb
@@ -39,6 +35,29 @@ static-analysis.datadog.yml                             @DataDog/WebOps-Platform
 translate.yaml                                          @DataDog/WebOps-Platform
 yarn.lock                                               @DataDog/WebOps-Platform
 .yarnrc.yml                                             @DataDog/WebOps-Platform
+
+# Scoped Docs/WebOps
+.github/                                                      @DataDog/WebOps-Platform
+/data/api/                                                    @DataDog/documentation
+/config/_default/menus/                                       @DataDog/documentation
+.github/ISSUE_TEMPLATE                                        @DataDog/documentation
+.github/PULL_REQUEST_TEMPLATE.md                              @DataDog/documentation
+README.md                                                     @DataDog/documentation
+local/bin/py/vale                                             @DataDog/documentation
+.github/CODEOWNERS                                            @DataDog/WebOps-Platform @DataDog/documentation
+.github/workflows/check_cache_value.yml                       @DataDog/documentation
+.github/workflows/code-freeze.yml                             @DataDog/documentation
+.github/workflows/gif_check.yml                               @DataDog/documentation
+.github/workflows/preview_link.yml                            @DataDog/documentation
+.github/workflows/vale_linter.yml                             @DataDog/documentation
+local/bin/py/check_cache_values.py                            @DataDog/documentation
+local/bin/py/integration-finder.py                            @DataDog/documentation
+local/bin/py/missing_metrics.py                               @DataDog/documentation
+local/bin/py/preview_links.py                                 @DataDog/documentation
+local/bin/py/missing_metrics.py                               @DataDog/documentation
+local/bin/py/preview-links-template.mako                      @DataDog/documentation
+local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
+local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
