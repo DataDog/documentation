@@ -205,7 +205,7 @@ Cuando se te pida una contraseña, utiliza la que introdujiste al crear el usuar
 
 Al instalar el Datadog Agent también se instala el check Postgres, necesario para Database Monitoring en Postgres. Si aún no has instalado el Agent para el host de tu base de datos Postgres, consulta las [instrucciones de instalación del Agent][8].
 
-1. Edita el archivo `conf.d/postgres.d/conf.yaml` para que apunte a tu `host` / `port` y configura los principales para la monitorización. Para conocer todas las opciones de configuración disponibles, consulta la [muestra postgres.d/conf.yaml][1].
+1. Edita el archivo `conf.d/postgres.d/conf.yaml` para que apunte a tu `host` / `port` y configura los principales para la monitorización. Para conocer todas las opciones de configuración disponibles, consulta la [muestra postgres.d/conf.yaml][9].
 
 {{< tabs >}}
 {{% tab "Postgres v10 o posterior" %}}
@@ -261,7 +261,7 @@ La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no i
      ## For Windows
      #log_destination = 'eventlog'
    ```
-2. Para recopilar métricas de duración detalladas y permitir su búsqueda en la interfaz de Datadog, estas métricas deben configurarse en línea con la propia declaración. A continuación, consulta las diferencias de configuración recomendadas con respecto a las anteriores y ten en cuenta que las opciones `log_statement` y `log_duration` están comentadas. Consulta la discusión sobre este tema [aquí][12].
+2. Para recopilar métricas de duración detalladas y permitir su búsqueda en la interfaz de Datadog, estas métricas deben configurarse en línea con la propia sentencia. A continuación, consulta las diferencias de configuración recomendadas con respecto a las anteriores y ten en cuenta que las opciones `log_statement` y `log_duration` están comentadas. Consulta la discusión sobre este tema [aquí][12].
 
    Esta configuración registra todas las sentencias, pero para reducir el resultado a aquellas que tienen una duración determinada, configura el valor `log_min_duration_statement` con la duración mínima deseada en milisegundos (comprueba que el registro de la sentencia SQL completa cumple con los requisitos de privacidad de tu organización):
    ```conf
