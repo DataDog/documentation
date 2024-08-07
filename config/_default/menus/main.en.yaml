@@ -7094,7 +7094,7 @@ menu:
       url: data_security/logs/
       parent: data_security
       weight: 3
-    - name: Kubernetes
+    - name: Kube3netes
       identifier: data_security_kubernetes
       url: data_security/kubernetes
       parent: data_security
@@ -7119,11 +7119,16 @@ menu:
       url: data_security/hipaa_compliance/
       parent: data_security
       weight: 8
+    - name: Data Retention Periods
+      identifier: data_retention_periods
+      url: data_security/data_retention_periods/
+      parent: data_security
+      weight: 9
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/
       parent: data_security
-      weight: 9
+      weight: 10
     - name: Sensitive Data Scanner
       url: sensitive_data_scanner/
       pre: sensitive-data-scanner
