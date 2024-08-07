@@ -69,7 +69,7 @@ For example, you might have a single service like `service:test` showing multipl
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-You can use [Inferred Service dependencies (beta)][18]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
+You can use [Inferred Service dependencies (beta)][10]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
 
 Or, you can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 
