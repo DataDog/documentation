@@ -1361,11 +1361,11 @@ menu:
       parent: dashboards_ddsql_editor_reference
       identifier: dashboards_ddsql_editor_reference_aggregation_functions
       weight: 11025
-    - name: Window Functions
-      url: dashboards/ddsql_editor/reference/window_functions
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_window_functions
-      weight: 11026
+    # - name: Window Functions
+    #   url: dashboards/ddsql_editor/reference/window_functions
+    #   parent: dashboards_ddsql_editor_reference
+    #   identifier: dashboards_ddsql_editor_reference_window_functions
+    #   weight: 11026
     - name: Querying Tags
       url: dashboards/ddsql_editor/reference/tags
       parent: dashboards_ddsql_editor_reference
@@ -2750,16 +2750,6 @@ menu:
       parent: ndm
       identifier: ndm_snmptraps
       weight: 302
-    - name: NetFlow Monitoring
-      url: network_monitoring/devices/netflow
-      parent: ndm
-      identifier: ndm_netflow
-      weight: 303
-    - name: Monitors
-      url: monitors/types/netflow
-      parent: ndm_netflow
-      identifier: ndm_netflow_monitors
-      weight: 3031
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
@@ -2785,26 +2775,36 @@ menu:
       parent: ndm
       identifier: ndm_guide
       weight: 308
+    - name: NetFlow Monitoring
+      url: /network_monitoring/netflow/
+      parent: nm_parent
+      identifier: ndm_netflow
+      weight: 4
+    - name: Monitors
+      url: monitors/types/netflow
+      parent: ndm_netflow
+      identifier: ndm_netflow_monitors
+      weight: 401
     - name: Network Path
       url: network_monitoring/network_path/
       parent: nm_parent
       identifier: network_path
-      weight: 4
+      weight: 5
     - name: Setup
       url: network_monitoring/network_path/setup/
       parent: network_path
       identifier: network_path_setup
-      weight: 401
+      weight: 501
     - name: List View
       url: network_monitoring/network_path/list_view/
       parent: network_path
       identifier: network_path_list_view
-      weight: 402
+      weight: 502
     - name: Path View
       url: network_monitoring/network_path/path_view/
       parent: network_path
       identifier: network_path_path_view
-      weight: 403
+      weight: 503
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
@@ -3508,21 +3508,26 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_gcsql
       weight: 304
+    - name: AlloyDB
+      url: database_monitoring/setup_postgres/alloydb
+      parent: dbm_setup_postgres
+      identifier: dbm_setup_postgres_alloydb
+      weight: 305
     - name: Azure
       url: database_monitoring/setup_postgres/azure
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
-      weight: 305
+      weight: 306
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 307
+      weight: 308
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm

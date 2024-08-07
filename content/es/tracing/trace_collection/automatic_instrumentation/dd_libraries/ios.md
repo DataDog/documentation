@@ -464,13 +464,13 @@ Trace.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self,
+        delegateClass: <YourSessionDelegate>.self,
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
