@@ -17,9 +17,9 @@ type: multi-code-lang
 
 La bibliothèque de tracing Datadog Go est open source. Consultez le [référentiel GitHub][1] pour en savoir plus.
 
-La bibliothèque de tracing Datadog Go inclut une [stratégie de compatibilité][2] pour les versions de Go. Les deux dernières versions de Go sont entièrement prises en charge, tandis que la troisième version la plus récente est considérée comme en [maintenance][3]. Les versions plus anciennes peuvent fonctionner, mais aucune prise en charge n'est fournie par défaut. Pour toute demande spéciale, [contactez l'assistance][4].
+La bibliothèque de tracing Datadog Go inclut une [stratégie de compatibilité][2] pour les versions de Go. Les deux dernières versions de Go sont entièrement prises en charge, tandis que les versions plus anciennes peuvent fonctionner, mais aucune prise en charge n'est fournie par défaut. Pour toute demande spéciale, [contactez l'assistance][4].
 
-Vous devez exécuter la version 5.21.1 de l'Agent Datadog ou une version plus récente.
+Vous devez exécuter la version 7.20.0 de l'Agent Datadog ou une version plus récente.
 
 ### Intégrations
 
@@ -88,8 +88,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<RÉPERTOIRE_PACKAGE>/<NOM_PACKA
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-go
-[2]: https://github.com/DataDog/dd-trace-go#support-policy
-[3]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[2]: https://github.com/DataDog/dd-trace-go#go-support-policy
 [4]: https://www.datadoghq.com/support/
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [6]: https://gin-gonic.com
