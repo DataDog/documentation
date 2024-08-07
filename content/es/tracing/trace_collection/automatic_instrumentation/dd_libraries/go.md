@@ -25,7 +25,7 @@ type: lenguaje de código múltiple
 
 ## Requisitos de compatibilidad
 
-El rastreador Go requiere Go `v1.18 o superiores` y el Datadog Agent v5.21.1 o anteriores`. Para ver la lista completa de versiones de Go y de compatibilidad de marcos de trabajo de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
+El rastreador Go requiere Go `v1.21 o superiores` y el Datadog Agent `v7.20.0 o superiores`. Para ver la lista completa de versiones de Go y de compatibilidad de marcos de trabajo de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
 
 ## Para empezar
 
