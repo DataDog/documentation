@@ -11,6 +11,8 @@ aliases:
 
 Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 ## Prerequisites
 
 - Datadog Agent version `7.46` or later.
