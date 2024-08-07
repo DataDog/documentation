@@ -54,7 +54,6 @@ local/bin/py/check_cache_values.py                            @DataDog/documenta
 local/bin/py/integration-finder.py                            @DataDog/documentation
 local/bin/py/missing_metrics.py                               @DataDog/documentation
 local/bin/py/preview_links.py                                 @DataDog/documentation
-local/bin/py/missing_metrics.py                               @DataDog/documentation
 local/bin/py/preview-links-template.mako                      @DataDog/documentation
 local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
 local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
