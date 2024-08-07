@@ -347,24 +347,24 @@ To monitor requests sent from the `URLSession` instance as resources, enable `UR
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[SessionDelegate alloc] init]
+                                                      delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
@@ -395,7 +395,7 @@ configuration.sessionSampleRate = 50;
 
 ### Instrument views
 
-The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -418,7 +418,7 @@ The `trackRUMView(name:)` method starts and stops a RUM view when the `SwiftUI` 
 
 ### Instrument tap actions
 
-The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
