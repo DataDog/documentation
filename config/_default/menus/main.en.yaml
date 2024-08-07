@@ -5125,7 +5125,7 @@ menu:
       parent: appsec_enabling_single_step
       identifier: appsec_enabling_single_step_code
       weight: 2102
-    - name: Using Datadog Tracing Libraries
+    - name: Using Datadog APM SDKs
       url: security/application_security/enabling/tracing_libraries/
       parent: appsec_getting_started
       identifier: appsec_enabling_tracing_libraries
