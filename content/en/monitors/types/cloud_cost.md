@@ -27,6 +27,8 @@ Get proactive notifications on cost changes to help mitigate unexpected cloud sp
 
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up. After it's set up, you can configure monitors to alert when costs increase or decrease.
 
+Cloud Cost monitors are evaluated with a 48 hour delayed evaluation window, because Cloud Cost data is not guaranteed to be available until 48 hours after usage. For example, a monitor with a lookback of 7 days being evaluated on January 15 examines cost data from January 6 through January 13.
+
 ## Monitor creation
 
 To create a Cloud Cost monitor in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Cloud Cost**.
