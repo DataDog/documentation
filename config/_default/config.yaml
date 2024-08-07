@@ -108,8 +108,6 @@ module:
     - source: content/ko
       target: content
       lang: ko
-    - source: static
-      target: static
     - source: layouts
       target: layouts
     - source: data
@@ -125,6 +123,12 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    ## exclude images from virtual file system static/ folder. images are being Fingerprinted by hugo
+    - source: static
+      target: static
+      excludeFiles: images
+    - source: static/images
+      target: assets/images
 
 security:
   funcs:
