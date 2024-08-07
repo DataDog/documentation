@@ -41,7 +41,7 @@ cascade:
 <br/>
 
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
 {{< /learning-center-callout >}}
 

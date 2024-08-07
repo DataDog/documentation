@@ -22,7 +22,7 @@ further_reading:
 
 Manage your uploaded mobile applications and your parallelization settings on the [Synthetic Monitoring & Continuous Testing Settings page][1].
 
-{{< img src="mobile_app_testing/applications_list.png" alt="Mobile Applications Settings" style="width:100%;">}}
+{{< img src="mobile_app_testing/applications_list_2.png" alt="Mobile Applications Settings" style="width:100%;">}}
 
 ## Create an application
 
