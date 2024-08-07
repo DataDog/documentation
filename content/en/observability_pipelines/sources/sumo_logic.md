@@ -3,7 +3,7 @@ title: Sumo Logic Hosted Collector
 disable_toc: false
 ---
 
-Use Observability Pipelines's Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector. Select and set up this source when you [set up a pipeline][1].
 
 ### Prerequisites
 

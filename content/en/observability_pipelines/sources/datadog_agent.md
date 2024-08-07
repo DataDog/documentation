@@ -3,7 +3,7 @@ title: Datadog Agent Source
 disable_toc: false
 ---
 
-Use Observability Pipelines's Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
 
 ### Prerequisites
 
