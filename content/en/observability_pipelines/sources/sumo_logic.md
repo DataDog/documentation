@@ -1,12 +1,6 @@
 ---
 title: Sumo Logic Hosted Collector
 disable_toc: false
-aliases:
-- /path-to-old-doc/
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 Use Observability Pipelines's Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector. Select and set up this source when you [set up a pipeline][1].

@@ -1,12 +1,6 @@
 ---
 title: Datadog Agent Source
 disable_toc: false
-aliases:
-- /path-to-old-doc/
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 Use Observability Pipelines's Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].

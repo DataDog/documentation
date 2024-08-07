@@ -1,12 +1,6 @@
 ---
 title: HTTP Client Source
 disable_toc: false
-aliases:
-- /path-to-old-doc/
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 Use Observability Pipelines's HTTP/S Client source to pull logs from the your HTTP/S client. Select and set up this source when you [set up a pipeline][1].

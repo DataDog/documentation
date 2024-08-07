@@ -1,12 +1,6 @@
 ---
 title: Splunk Heavy and Universal Forwarders (TCP) Source
 disable_toc: false
-aliases:
-- /path-to-old-doc/
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 Use Observability Pipelines's Splunk Heavy and Universal Forwards (TCP) source to receive logs sent to you your Splunk forwarders. Select and set up this source when you [set up a pipeline][1].

@@ -1,12 +1,6 @@
 ---
 title: Fluentd and Fluent Bit Sources
 disable_toc: false
-aliases:
-- /path-to-old-doc/
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 Use Observability Pipelines's Fluentd or Fluent Bit source to receive logs from the your Fluentd or Fluent Bit agent. Select and set up this source when you [set up a pipeline][1].
