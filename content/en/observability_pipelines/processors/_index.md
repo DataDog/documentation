@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use Observability Pipelines's processors to parse, structure, and enrich your logs. All processors are available for all templates. Set up your processors in the Observability Pipelines UI after you have selected a template, source, and destinations. This is step 5 in the pipeline setup process:
+Use Observability Pipelines' processors to parse, structure, and enrich your logs. All processors are available for all templates. Set up your processors in the Observability Pipelines UI after you have selected a template, source, and destinations. This is step 5 in the pipeline setup process:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a template.

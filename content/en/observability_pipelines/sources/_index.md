@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines's sources to receive logs from your different log sources.
+Use Observability Pipelines' sources to receive logs from your different log sources.
 
 Select and set up your source when you build a pipeline in the UI. This is step 3 in the pipeline setup process:
 
