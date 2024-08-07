@@ -4,6 +4,7 @@
 /config/_default/menus/           @DataDog/documentation
 .github/ISSUE_TEMPLATE            @DataDog/documentation
 .github/PULL_REQUEST_TEMPLATE.md  @DataDog/documentation
+README.md                         @DataDog/documentation
 /assets/                          @DataDog/corpweb
 /data/                            @DataDog/corpweb
 /layouts/                         @DataDog/corpweb
@@ -13,6 +14,31 @@ go.mod                            @DataDog/corpweb
 go.sum                            @DataDog/corpweb
 i18n/                             @DataDog/corpweb
 archetypes/                       @DataDog/corpweb
+
+# Websites Platform
+babel.config.js                                         @DataDog/WebOps-Platform
+data/reference/                                         @DataDog/WebOps-Platform
+datadog-ci.preview.json                                 @DataDog/WebOps-Platform
+docker-compose-docs.yml                                 @DataDog/WebOps-Platform
+.general.preview.synthetics.json                        @DataDog/WebOps-Platform
+.gitattributes                                          @DataDog/WebOps-Platform
+.gitignore                                              @DataDog/WebOps-Platform
+.github/                                                @DataDog/WebOps-Platform
+.gitlab-ci.yml                                          @DataDog/WebOps-Platform
+.htmltest.yml                                           @DataDog/WebOps-Platform
+jest.config.js                                          @DataDog/WebOps-Platform
+.local/                                                 @DataDog/WebOps-Platform
+Makefile                                                @DataDog/WebOps-Platform
+Makefile.config.example                                 @DataDog/WebOps-Platform
+.nvmrc                                                  @DataDog/WebOps-Platform
+postcss.config.js                                       @DataDog/WebOps-Platform
+.prettierignore                                         @DataDog/WebOps-Platform
+prettier.config.js                                      @DataDog/WebOps-Platform
+static-analysis.datadog.yml                             @DataDog/WebOps-Platform
+.translate                                              @DataDog/WebOps-Platform
+translate.yaml                                          @DataDog/WebOps-Platform
+yarn.lock                                               @DataDog/WebOps-Platform
+.yarnrc.yml                                             @DataDog/WebOps-Platform
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
@@ -48,25 +74,6 @@ content/en/developers/integrations/check_references.md                          
 layouts/shortcodes/integration-assets.md                                    @Datadog/marketplace-product-management @DataDog/documentation
 layouts/shortcodes/integration-assets-reference.md                          @Datadog/marketplace-product-management @DataDog/documentation
 layouts/shortcodes/integration_categories.md                                @Datadog/marketplace-product-management @DataDog/documentation
-
-# Websites Platform
-.github/                                                @DataDog/WebOps-Platform
-.gitlab-ci.yml                                          @DataDog/WebOps-Platform
-Makefile                                                @DataDog/WebOps-Platform
-translate.yaml                                          @DataDog/WebOps-Platform
-.translate                                              @DataDog/WebOps-Platform
-docker-compose-docs.yml                                 @DataDog/WebOps-Platform
-.htmltest.yml                                           @DataDog/WebOps-Platform
-datadog-ci.preview.json                                 @DataDog/WebOps-Platform
-general.preview.synthetics.json                         @DataDog/WebOps-Platform
-/local/                                                 @DataDog/WebOps-Platform
-.gitignore                                              @DataDog/WebOps-Platform
-.gitattributes                                          @DataDog/WebOps-Platform
-.nvmrc                                                  @DataDog/WebOps-Platform
-babel.config.js                                         @DataDog/WebOps-Platform
-postcss.config.js                                       @DataDog/WebOps-Platform
-prettier.config.js                                      @DataDog/WebOps-Platform
-data/reference/                                         @DataDog/WebOps-Platform
 
 # Cloud Cost Management
 documentation/content/en/cloud_cost_management/*.md              @DataDog/cloud-cost-management-visibility @DataDog/documentation
