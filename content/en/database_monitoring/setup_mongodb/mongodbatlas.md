@@ -25,7 +25,7 @@ To enable Database Monitoring for your database:
 
 1. [Grant the Agent access to your MongoDB Atlas Cluster](#grant-the-agent-access-to-your-mongodb-atlas-cluster)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
-3. [Install the MongoDB Atlas integration](#install-the-mongodb-atlas-integration)
+3. [(Optional) Install the MongoDB Atlas integration](#install-the-mongodb-atlas-integration)
 
 ### Grant the Agent access to your MongoDB Atlas Cluster
 
