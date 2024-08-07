@@ -95,18 +95,6 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
-## OpenTelemetry based integrations
-
-Some libraries provide built-in [Activity based tracing][11]. This is the same mechanism that OpenTelemetry is based on.
-
-For these libraries, set `DD_TRACE_OTEL_ENABLED` to `true`, and the .NET APM SDK automatically captures traces their traces. This is supported since [version 2.21.0][4].
-
-The following list of libraries have been tested with this setup:
-
-| Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
-| ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
-| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | See `Azure SDK` section below |
-
 ### Azure SDK
 
 Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][12] for more details.
