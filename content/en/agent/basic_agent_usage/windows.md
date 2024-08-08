@@ -64,18 +64,23 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 {{% tab "Installations in Active Directory Domains" %}}
 
 When deploying the Datadog Agent in an Active Directory environment, Datadog recommends using a Group Managed Service Account (gMSA).
-Doing so can enhance security and simplify management, especially concerning password-management.
 
-The core and APM/trace components of the Windows Agent run under the Group Managed Service account configured. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+**Benefits of Using gMSAs**
+Using gMSA can enhance security and simplify management. Some of the benefits include:
+- Deployment accross multiple servers: Unlike traditional MSAs or sMSAs, gMSAs can be deployed accross multiple servers.
+- Automated password management: The passwords for gMSAs account are handled at the OS level, and are rotated on a regular basis without requiring manual intervention. 
+
+When running with a gMSA account the core and APM/trace components of the Windows Agent run under the account configured.
+The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 ### Prerequisites
 - Active Directory environment configured.
-- Permission to create and manage Group Managed Service Accounts.
+- Permission to create and manage gMSA.
 - See further [requirements in the Microsoft documentation][4].
 
-**Note**: Advanced set up of a Group Managed Service account is beyond the scope of this documentation, please refer to [the Microsoft documentation for setting up a Group Managed Service Account in your environment][5] for more information.
+**Note**: Advanced set up of a gMSA is beyond the scope of this documentation, please refer to [the Microsoft documentation for setting up a Group Managed Service Account in your environment][5] for more information.
 
-### Create and Configure a Group Managed Service Account
+### Create and Configure a gMSA
 **1. Create a Security Group:**
 
 - Open Active Directory Users and Computers (ADUC).
@@ -83,17 +88,17 @@ The core and APM/trace components of the Windows Agent run under the Group Manag
 - Right-click and select New > Group.
 - Name the group (e.g., `DatadogAgentsGroup`), set the group scope to **Global**, and the type to **Security**.
 
-**2. Create the Group Managed Service Account:**
+**2. Create the gMSA:**
 
 - Open PowerShell with **Administrator** privileges.
-- Run the following command to create the Group Managed Service Account:
+- Run the following command to create the gMSA:
 ```powershell
 New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
 ```
 
 Replace <YOUR_DOMAIN_NAME> with your domain name.
 
-**3. Install the Group Managed Service Account on the Target Machine:**
+**3. Install the gMSA on the Target Machine:**
 
 - Ensure the target machine is part of the `DatadogAgentsGroup`.
 - On the target machine, open PowerShell and run:
@@ -108,7 +113,7 @@ Download the [Datadog Agent installer][1] to install the latest version of the A
 #### Install via the GUI
 - Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 - Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
-- When prompted for the "Datadog Agent User Account", enter the username of the Group Managed Service Account (e.g., `<YOUR_DOMAIN_NAME>\DatadogGMSA$`) and **no password**.
+- When prompted for the "Datadog Agent User Account", enter the username of the gMSA (e.g., `<YOUR_DOMAIN_NAME>\DatadogGMSA$`) and **no password**.
 - When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Install with the command line:
@@ -117,7 +122,10 @@ Download the [Datadog Agent installer][1] to install the latest version of the A
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
 ```
-**note:** Replace `DatadogGMSA$` with the username of your Group Managed Service Account, it **must end with a $ symbol.**
+**note:** Replace `DatadogGMSA$` with the username of your gMSA, it **must end with a $ symbol.**
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Installation Configuration Options 
 
