@@ -21,7 +21,7 @@ The Go Datadog Trace Library has a [version support policy][2] defined for Go ve
 
 ### Requirements
 
-- Datadog Agent v7.20.0+.
+- Datadog Agent v6.20.0+.
 - [Add and initialize the Datadog Go tracer][77] before configuring integrations.
 
 ### Integrations

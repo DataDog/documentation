@@ -19,7 +19,7 @@ La bibliothèque de tracing Datadog Go est open source. Consultez le [référent
 
 La bibliothèque de tracing Datadog Go inclut une [stratégie de compatibilité][2] pour les versions de Go. Les deux dernières versions de Go sont entièrement prises en charge, tandis que les versions plus anciennes peuvent fonctionner, mais aucune prise en charge n'est fournie par défaut. Pour toute demande spéciale, [contactez l'assistance][4].
 
-Vous devez exécuter la version 7.20.0 de l'Agent Datadog ou une version plus récente.
+Vous devez exécuter la version 6.20.0 de l'Agent Datadog ou une version plus récente.
 
 ### Intégrations
 

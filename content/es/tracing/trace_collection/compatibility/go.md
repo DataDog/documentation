@@ -21,7 +21,7 @@ La biblioteca de rastreo de Go Datadog tiene una [política de compatibilidad de
 
 ### Requisitos
 
-- Datadog Agent v7.20.0+.
+- Datadog Agent v6.20.0+.
 - [Añade e inicializa el rastreador Datadog Go][77] antes de configurar integraciones.
 
 ### Integraciones
