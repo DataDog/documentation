@@ -24,25 +24,24 @@ Datadog clones your code, runs the static analyzer to perform Static Analysis an
 The benefit of Datadog-hosted scans is that no configuration is needed in your CI pipeline(s) to use Code Analysis.
 
 
-### How services and teams are associated with code violations and libraries?
+### How are services and teams associated with code violations and libraries?
 
-Datadog tries as much as possible to associate the service or team related to a code violation
-or a library. Datadog attempts to do this matching using three mechanisms:
+Datadog aims to associate code violations or libraries with the relevant service or team by using the following mechanisms:
 
-1. Finding a code location for the service with service catalog
-2. Detecting file usage patterns within other Datadog products
-3. Searching for a service name in the path or repository.
+1. Identifying the code location associated with a service using the Service Catalog.
+2. Detecting usage patterns of files within additional Datadog products.
+3. Searching for the service name in the file path or repository.
 
-If one method succeeds, the system does not try to perform any further matching. Each mapping method is detailed below.
+If one method succeeds, no further matching attempts are made. Each mapping method is detailed below.
 
-#### Code locations in service catalog
+#### Identifying the code location in the Service Catalog
 
-The schema version `v3` (and later) of service catalog allows you
+The schema version `v3` and later of the Service Catalog allows you
 to add the mapping of your code location for your service. The `codeLocations`
 section specifies the locations of the code with the repository that
 contains the code and its associated `paths`.
 
-Note that the `paths` attribute is a list of [globs](https://en.wikipedia.org/wiki/Glob_(programming))
+The `paths` attribute is a list of [globs](https://en.wikipedia.org/wiki/Glob_(programming))
 that should match paths in the repository.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -60,10 +59,10 @@ datadog:
 
 #### Detecting file usage patterns
 
-Datadog detects file usage in other products (such as error-tracking) and associate
+Datadog detects file usage in additional products such as Error Tracking and associate
 files with the runtime service. For example, if a service called `foo` has
-a log entry or a stacktrace containing a file with a path `/modules/foo/bar.py`,
-it will associate files `/modules/foo/bar.py` to service `foo`.
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
 
 #### Detecting service name in paths and repository names
 
@@ -72,13 +71,13 @@ the file with the service if it finds a match.
 
 For a repository match, if there is a service called `myservice` and
 the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it will associate `myservice` to all files in the repository.
+it associates `myservice` to all files in the repository.
 
-If no repository match is found, Datadog will attempt to find a match in the
+If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service `myservice` and the path is
-`/path/to/myservice/foo.py`, it will associate the file with `myservice` because
+`/path/to/myservice/foo.py`, it associates the file with `myservice` because
 the name of the service is part of the path. If two services are present
-in the path, the service name the closest to the file name is selected.
+in the path, the service name the closest to the filename is selected.
 
 
 ## Static Analysis
