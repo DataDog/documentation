@@ -23,7 +23,7 @@ further_reading:
     User Monitoring
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
-  text: Presentamos Real User Monitoring de Datadog
+  text: Presentamos Datadog Real User Monitoring
 - link: https://www.datadoghq.com/blog/datadog-mobile-rum/
   tag: Blog
   text: Mejora la experiencia móvil del usuario con Real User Monitoring móvil de
@@ -56,7 +56,7 @@ further_reading:
   text: Prácticas recomendadas para la monitorización de aplicaciones web estáticas
 - link: /real_user_monitoring/browser/data_collected/
   tag: Documentación
-  text: Datos del buscador de RUM recopilados
+  text: Datos del navegador de RUM recopilados
 title: RUM y Session Replay
 ---
 
@@ -127,7 +127,7 @@ El tráfico de todos los SDK de Datadog se transmite a través de SSL (443 por d
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
-## Explorar RUM de Datadog
+## Explorar Datadog RUM
 
 Accede a RUM yendo a [**Experiencia digital > Resumen del rendimiento**][1].
 
