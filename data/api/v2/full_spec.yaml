@@ -34306,34 +34306,38 @@ paths:
 
         - Service Level Objectives: `slo`
 
-        - Synthetic Global Variable: `synthetic-global-variable`
+        - Synthetic Global Variables: `synthetic-global-variable`
 
-        - Synthetic Test: `synthetic-test`
+        - Synthetic Tests: `synthetic-test`
 
-        - Synthetic Private Location: `synthetic-private-location`
+        - Synthetic Private Locations: `synthetic-private-location`
+
+        - Monitors: `monitor`
 
 
         #### Supported relations for resources
 
-        Resource Type              | Supported Relations
+        Resource Type               | Supported Relations
 
-        ---------------------------|--------------------------
+        ----------------------------|--------------------------
 
-        Dashboards                 | `viewer`, `editor`
+        Dashboards                  | `viewer`, `editor`
 
-        Notebooks                  | `viewer`, `editor`
+        Notebooks                   | `viewer`, `editor`
 
-        Powerpacks                 | `viewer`, `editor`
+        Powerpacks                  | `viewer`, `editor`
 
-        Security Rules             | `viewer`, `editor`
+        Security Rules              | `viewer`, `editor`
 
-        Service Level Objectives   | `viewer`, `editor`
+        Service Level Objectives    | `viewer`, `editor`
 
-        Synthetic Global Variable  | `viewer`, `editor`
+        Synthetic Global Variables  | `viewer`, `editor`
 
-        Synthetic Test             | `viewer`, `editor`
+        Synthetic Tests             | `viewer`, `editor`
 
-        Synthetic Private Location | `viewer`, `editor`'
+        Synthetic Private Locations | `viewer`, `editor`
+
+        Monitors                    | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
