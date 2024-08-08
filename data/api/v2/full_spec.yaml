@@ -18,6 +18,7 @@ components:
       required: false
       schema:
         example: '2020-11-24T18:46:21+00:00'
+        format: date-time
         type: string
     APIKeyFilterCreatedAtStartParameter:
       description: Only include API keys created on or after the specified date.
@@ -26,6 +27,7 @@ components:
       required: false
       schema:
         example: '2020-11-24T18:46:21+00:00'
+        format: date-time
         type: string
     APIKeyFilterModifiedAtEndParameter:
       description: Only include API keys modified on or before the specified date.
@@ -34,6 +36,7 @@ components:
       required: false
       schema:
         example: '2020-11-24T18:46:21+00:00'
+        format: date-time
         type: string
     APIKeyFilterModifiedAtStartParameter:
       description: Only include API keys modified on or after the specified date.
@@ -42,6 +45,7 @@ components:
       required: false
       schema:
         example: '2020-11-24T18:46:21+00:00'
+        format: date-time
         type: string
     APIKeyFilterParameter:
       description: Filter API keys by the specified string.
@@ -92,6 +96,7 @@ components:
       required: false
       schema:
         example: '2020-11-24T18:46:21+00:00'
+        format: date-time
         type: string
     ApplicationKeyFilterCreatedAtStartParameter:
       description: Only include application keys created on or after the specified
@@ -101,6 +106,7 @@ components:
       required: false
       schema:
         example: '2020-11-24T18:46:21+00:00'
+        format: date-time
         type: string
     ApplicationKeyFilterParameter:
       description: Filter application keys by the specified string.
@@ -404,6 +410,7 @@ components:
         default: 0
         example: 0
         format: int64
+        minimum: 0
         type: integer
     PageOffset:
       description: Specific offset to use as the beginning of the returned page.
@@ -424,6 +431,8 @@ components:
         default: 10
         example: 10
         format: int64
+        maximum: 9223372036854775807
+        minimum: 1
         type: integer
     ProjectIDPathParameter:
       description: Project UUID
@@ -694,10 +703,16 @@ components:
     APIKeyCreateAttributes:
       description: Attributes used to create an API Key.
       properties:
+        category:
+          description: The APIKeyCreateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyCreateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -712,6 +727,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyCreateRequest:
       description: Request used to create an API key.
       properties:
@@ -746,10 +763,16 @@ components:
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
+        category:
+          description: The APIKeyUpdateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyUpdateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -769,6 +792,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyUpdateRequest:
       description: Request used to update an API key.
       properties:
@@ -790,26 +815,6 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
-        meta:
-          $ref: '#/components/schemas/APIKeysResponseMeta'
-      type: object
-    APIKeysResponseMeta:
-      description: Additional information related to api keys response.
-      properties:
-        max_allowed:
-          description: Max allowed number of API keys.
-          format: int64
-          type: integer
-        page:
-          $ref: '#/components/schemas/APIKeysResponseMetaPage'
-      type: object
-    APIKeysResponseMetaPage:
-      description: Additional information related to the API keys response.
-      properties:
-        total_filtered_count:
-          description: Total filtered application key count.
-          format: int64
-          type: integer
       type: object
     APIKeysSort:
       default: name
@@ -943,6 +948,13 @@ components:
     ApplicationKeyCreateAttributes:
       description: Attributes used to create an application Key.
       properties:
+        created_at:
+          description: The ApplicationKeyCreateAttributes created_at.
+          format: date-time
+          type: string
+        last4:
+          description: The ApplicationKeyCreateAttributes last4.
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -972,6 +984,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyCreateRequest:
       description: Request used to create an application key.
       properties:
@@ -982,9 +996,7 @@ components:
       type: object
     ApplicationKeyRelationships:
       description: Resources related to the application key.
-      properties:
-        owned_by:
-          $ref: '#/components/schemas/RelationshipToUser'
+      properties: {}
       type: object
     ApplicationKeyResponse:
       description: Response for retrieving an application key.
@@ -1002,27 +1014,16 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
-    ApplicationKeyResponseMeta:
-      description: Additional information related to the application key response.
-      properties:
-        max_allowed_per_user:
-          description: Max allowed number of application keys per user.
-          format: int64
-          type: integer
-        page:
-          $ref: '#/components/schemas/ApplicationKeyResponseMetaPage'
-      type: object
-    ApplicationKeyResponseMetaPage:
-      description: Additional information related to the application key response.
-      properties:
-        total_filtered_count:
-          description: Total filtered application key count.
-          format: int64
-          type: integer
-      type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
       properties:
+        created_at:
+          description: The ApplicationKeyUpdateAttributes created_at.
+          format: date-time
+          type: string
+        last4:
+          description: The ApplicationKeyUpdateAttributes last4.
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -1055,6 +1056,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyUpdateRequest:
       description: Request used to update an application key.
       properties:
@@ -1327,6 +1330,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AuthNMappingAttributes:
       description: Attributes of AuthN Mapping.
       properties:
@@ -1557,8 +1562,6 @@ components:
           items:
             $ref: '#/components/schemas/AuthNMappingIncluded'
           type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     AuthNMappingsSort:
       description: Sorting options for AuthN Mappings.
@@ -4433,6 +4436,10 @@ components:
     CloudflareAccountResponseAttributes:
       description: Attributes object of a Cloudflare account.
       properties:
+        api_key:
+          description: The CloudflareAccountResponseAttributes api_key.
+          type: string
+          writeOnly: true
         email:
           description: The email associated with the Cloudflare account.
           example: test-email@example.com
@@ -4460,6 +4467,8 @@ components:
       required:
       - name
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountResponseData:
       description: Data object of a Cloudflare account.
       properties:
@@ -4476,6 +4485,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountType:
       default: cloudflare-accounts
       description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
@@ -4505,6 +4516,9 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
+        name:
+          description: The CloudflareAccountUpdateRequestAttributes name.
+          type: string
         resources:
           description: An allowlist of resources to restrict pulling metrics for.
           example:
@@ -4524,6 +4538,8 @@ components:
       required:
       - api_key
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountUpdateRequestData:
       description: Data object for updating a Cloudflare account.
       properties:
@@ -4532,6 +4548,8 @@ components:
         type:
           $ref: '#/components/schemas/CloudflareAccountType'
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountsResponse:
       description: The expected response schema when getting Cloudflare accounts.
       properties:
@@ -4695,6 +4713,9 @@ components:
           description: The API secret associated with your Confluent account.
           example: test-api-secret-123
           type: string
+        resources:
+          description: The ConfluentAccountUpdateRequestAttributes resources.
+          type: string
         tags:
           description: A list of strings representing tags. Can be a single key, or
             key-value pairs separated by a colon.
@@ -4768,8 +4789,9 @@ components:
         attributes:
           $ref: '#/components/schemas/ConfluentResourceRequestAttributes'
         id:
-          description: The ID associated with a Confluent resource.
+          description: The ConfluentResourceRequestData id.
           example: resource-id-123
+          nullable: true
           type: string
         type:
           $ref: '#/components/schemas/ConfluentResourceType'
@@ -4778,6 +4800,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponse:
       description: Response schema when interacting with a Confluent resource.
       properties:
@@ -4793,10 +4817,6 @@ components:
             extra metric tags.
           example: false
           type: boolean
-        id:
-          description: The ID associated with the Confluent resource.
-          example: resource_id_abc123
-          type: string
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -4830,6 +4850,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceType:
       default: confluent-cloud-resources
       description: The JSON:API type for this request.
@@ -5153,47 +5175,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/ContainerImage'
       - $ref: '#/components/schemas/ContainerImageGroup'
-    ContainerImageMeta:
-      description: Response metadata object.
-      properties:
-        pagination:
-          $ref: '#/components/schemas/ContainerImageMetaPage'
-      type: object
-    ContainerImageMetaPage:
-      description: Paging attributes.
-      properties:
-        cursor:
-          description: The cursor used to get the current results, if any.
-          type: string
-        limit:
-          description: Number of results returned
-          format: int32
-          maximum: 10000
-          minimum: 0
-          type: integer
-        next_cursor:
-          description: The cursor used to get the next results, if any.
-          type: string
-        prev_cursor:
-          description: The cursor used to get the previous results, if any.
-          nullable: true
-          type: string
-        total:
-          description: Total number of records that match the query.
-          format: int64
-          type: integer
-        type:
-          $ref: '#/components/schemas/ContainerImageMetaPageType'
-      type: object
-    ContainerImageMetaPageType:
-      default: cursor_limit
-      description: Type of Container Image pagination.
-      enum:
-      - cursor_limit
-      example: cursor_limit
-      type: string
-      x-enum-varnames:
-      - CURSOR_LIMIT
     ContainerImageType:
       default: container_image
       description: Type of Container Image.
@@ -5242,32 +5223,6 @@ components:
           items:
             $ref: '#/components/schemas/ContainerImageItem'
           type: array
-        links:
-          $ref: '#/components/schemas/ContainerImagesResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ContainerImageMeta'
-      type: object
-    ContainerImagesResponseLinks:
-      description: Pagination links.
-      properties:
-        first:
-          description: Link to the first page.
-          type: string
-        last:
-          description: Link to the last page.
-          nullable: true
-          type: string
-        next:
-          description: Link to the next page.
-          nullable: true
-          type: string
-        prev:
-          description: Link to previous page.
-          nullable: true
-          type: string
-        self:
-          description: Link to current page.
-          type: string
       type: object
     ContainerItem:
       description: Possible Container models.
@@ -8076,6 +8031,10 @@ components:
     FastlyAccounResponseAttributes:
       description: Attributes object of a Fastly account.
       properties:
+        api_key:
+          description: The FastlyAccounResponseAttributes api_key.
+          type: string
+          writeOnly: true
         name:
           description: The name of the Fastly account.
           example: test-name
@@ -8088,6 +8047,8 @@ components:
       required:
       - name
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountCreateRequest:
       description: Payload schema when adding a Fastly account.
       properties:
@@ -8149,6 +8110,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountType:
       default: fastly-accounts
       description: The JSON:API type for this API. Should always be `fastly-accounts`.
@@ -8173,7 +8136,12 @@ components:
           description: The API key of the Fastly account.
           example: ABCDEFG123
           type: string
+        name:
+          description: The FastlyAccountUpdateRequestAttributes name.
+          type: string
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountUpdateRequestData:
       description: Data object for updating a Fastly account.
       properties:
@@ -8182,6 +8150,8 @@ components:
         type:
           $ref: '#/components/schemas/FastlyAccountType'
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountsResponse:
       description: The expected response schema when getting Fastly accounts.
       properties:
@@ -8460,6 +8430,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
@@ -8469,6 +8441,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8487,6 +8460,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -8510,19 +8484,17 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
-        key:
-          description: The application key.
-          readOnly: true
-          type: string
-          x-secret: true
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -9454,15 +9426,56 @@ components:
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
+        additional_notifications:
+          description: The IncidentCreateAttributes additional_notifications.
+          nullable: true
+          type: string
+        archived:
+          description: The IncidentCreateAttributes archived.
+          format: date-time
+          nullable: true
+          type: string
+        case_id:
+          description: The IncidentCreateAttributes case_id.
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        creation_idempotency_key:
+          description: The IncidentCreateAttributes creation_idempotency_key.
+          nullable: true
+          type: string
+        customer_impact_end:
+          description: The IncidentCreateAttributes customer_impact_end.
+          format: date-time
+          nullable: true
+          type: string
         customer_impact_scope:
           description: Required if `customer_impacted:"true"`. A summary of the impact
             customers experienced during the incident.
           example: Example customer impact scope
           type: string
+        customer_impact_start:
+          description: The IncidentCreateAttributes customer_impact_start.
+          format: date-time
+          nullable: true
+          type: string
         customer_impacted:
           description: A flag indicating whether the incident caused customer impact.
           example: false
           type: boolean
+        detected:
+          description: The IncidentCreateAttributes detected.
+          format: date-time
+          nullable: true
+          type: string
+        duration:
+          description: The IncidentCreateAttributes duration.
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          type: integer
         fields:
           additionalProperties:
             $ref: '#/components/schemas/IncidentFieldAttributes'
@@ -9473,6 +9486,10 @@ components:
               type: dropdown
               value: SEV-5
           type: object
+        incident_type_uuid:
+          description: The IncidentCreateAttributes incident_type_uuid.
+          nullable: true
+          type: string
         initial_cells:
           description: An array of initial timeline cells to be placed at the beginning
             of the incident timeline.
@@ -9485,6 +9502,31 @@ components:
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
+        public_id:
+          description: The IncidentCreateAttributes public_id.
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          type: integer
+        resolved:
+          description: The IncidentCreateAttributes resolved.
+          format: date-time
+          nullable: true
+          type: string
+        severity:
+          description: The IncidentCreateAttributes severity.
+          nullable: true
+          type: string
+        state:
+          description: The IncidentCreateAttributes state.
+          nullable: true
+          type: string
+        time_to_resolve:
+          description: The IncidentCreateAttributes time_to_resolve.
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          type: integer
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
@@ -9506,6 +9548,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     IncidentCreateRelationships:
       description: The relationships the incident will have with other resources once
         created.
@@ -9817,6 +9861,10 @@ components:
     IncidentResponseAttributes:
       description: The incident's attributes from a response.
       properties:
+        additional_notifications:
+          description: The IncidentResponseAttributes additional_notifications.
+          nullable: true
+          type: string
         archived:
           description: Timestamp of when the incident was archived.
           format: date-time
@@ -9826,12 +9874,21 @@ components:
         case_id:
           description: The incident case id.
           format: int64
+          minimum: 0
           nullable: true
           type: integer
         created:
           description: Timestamp when the incident was created.
           format: date-time
           readOnly: true
+          type: string
+        created_by_uuid:
+          description: The IncidentResponseAttributes created_by_uuid.
+          nullable: true
+          type: string
+        creation_idempotency_key:
+          description: The IncidentResponseAttributes creation_idempotency_key.
+          nullable: true
           type: string
         customer_impact_duration:
           description: 'Length of the incident''s customer impact in seconds.
@@ -9864,6 +9921,12 @@ components:
           format: date-time
           nullable: true
           type: string
+        duration:
+          description: The IncidentResponseAttributes duration.
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          type: integer
         fields:
           additionalProperties:
             $ref: '#/components/schemas/IncidentFieldAttributes'
@@ -9873,6 +9936,14 @@ components:
               type: dropdown
               value: SEV-5
           type: object
+        incident_type_uuid:
+          description: The IncidentResponseAttributes incident_type_uuid.
+          nullable: true
+          type: string
+        last_modified_by_uuid:
+          description: The IncidentResponseAttributes last_modified_by_uuid.
+          nullable: true
+          type: string
         modified:
           description: Timestamp when the incident was last modified.
           format: date-time
@@ -9958,6 +10029,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     IncidentResponseIncludedItem:
       description: An object related to an incident that is included in the response.
       oneOf:
@@ -11216,8 +11289,6 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
-        meta:
-          $ref: '#/components/schemas/ApplicationKeyResponseMeta'
       type: object
     ListDevicesResponse:
       description: List devices response.
@@ -11355,6 +11426,15 @@ components:
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
       type: object
+    ListServiceAccountApplicationKeysInclude:
+      description: The definition of ListServiceAccountApplicationKeysInclude object.
+      enum:
+      - leak_information
+      - owned_by
+      type: string
+      x-enum-varnames:
+      - LEAK_INFORMATION
+      - OWNED_BY
     ListTagsResponse:
       description: List tags response.
       properties:
@@ -14112,6 +14192,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     NullableUserRelationship:
       description: Relationship to user.
       nullable: true
@@ -14323,10 +14405,12 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
+          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14384,15 +14468,23 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
+          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
+        opsgenie_api_key:
+          description: The OpsgenieServiceResponseAttributes opsgenie_api_key.
+          type: string
+          writeOnly: true
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceResponseData:
       description: Opsgenie service data from a response.
       properties:
@@ -14401,6 +14493,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14409,6 +14503,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceType:
       default: opsgenie-service
       description: Opsgenie service resource type.
@@ -14424,11 +14520,13 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
+          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14437,6 +14535,8 @@ components:
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateData:
       description: Opsgenie service for an update request.
       properties:
@@ -14445,6 +14545,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14453,6 +14555,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateRequest:
       description: Update request for an Opsgenie service.
       properties:
@@ -14839,6 +14943,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
@@ -14848,6 +14954,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         last4:
@@ -14861,6 +14968,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -14884,12 +14992,15 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialApplicationKeyAttributes:
       description: Attributes of a partial application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         last4:
@@ -15280,29 +15391,6 @@ components:
           description: Offset type.
           type: string
       type: object
-    ProcessSummariesMeta:
-      description: Response metadata object.
-      properties:
-        page:
-          $ref: '#/components/schemas/ProcessSummariesMetaPage'
-      type: object
-    ProcessSummariesMetaPage:
-      description: Paging attributes.
-      properties:
-        after:
-          description: 'The cursor used to get the next results, if any. To make the
-            next request, use the same
-
-            parameters with the addition of the `page[cursor]`.'
-          example: 911abf1204838d9cdfcb9a96d0b6a1bd03e1b514074f1ce1737c4cbd
-          type: string
-        size:
-          description: Number of results returned.
-          format: int32
-          maximum: 10000
-          minimum: 0
-          type: integer
-      type: object
     ProcessSummariesResponse:
       description: List of process summaries.
       properties:
@@ -15311,8 +15399,6 @@ components:
           items:
             $ref: '#/components/schemas/ProcessSummary'
           type: array
-        meta:
-          $ref: '#/components/schemas/ProcessSummariesMeta'
       type: object
     ProcessSummary:
       description: Process summary object.
@@ -15325,6 +15411,8 @@ components:
         type:
           $ref: '#/components/schemas/ProcessSummaryType'
       type: object
+      x-merge-override:
+        required: false
     ProcessSummaryAttributes:
       description: Attributes for a process summary.
       properties:
@@ -16361,6 +16449,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpactData:
       description: Relationship to impact object.
       properties:
@@ -16374,6 +16464,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpacts:
       description: Relationship to impacts.
       properties:
@@ -16401,6 +16493,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentIntegrationMetadatas:
       description: A relationship reference for multiple integration metadata objects.
       example:
@@ -16464,6 +16558,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentResponders:
       description: Relationship to incident responders.
       properties:
@@ -16488,6 +16584,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentUserDefinedFields:
       description: Relationship to incident user defined fields.
       properties:
@@ -16583,6 +16681,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToRoleData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoleData:
       description: Relationship to role object.
       properties:
@@ -16593,6 +16693,8 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoles:
       description: Relationship to roles.
       properties:
@@ -16645,12 +16747,16 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeam:
       description: Relationship to team.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToTeamData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamData:
       description: Relationship to Team object.
       properties:
@@ -16661,6 +16767,8 @@ components:
         type:
           $ref: '#/components/schemas/TeamType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -16674,6 +16782,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinks:
       description: Relationship between a team and a team link
       properties:
@@ -16682,9 +16792,9 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToTeamLinkData'
           type: array
-        links:
-          $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -16706,14 +16816,16 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermission:
       description: Relationship between a user team permission and a team
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToUserTeamPermissionData'
-        links:
-          $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
       properties:
@@ -16727,27 +16839,8 @@ components:
       - id
       - type
       type: object
-    RelationshipToUserTeamTeam:
-      description: Relationship between team membership and team
-      properties:
-        data:
-          $ref: '#/components/schemas/RelationshipToUserTeamTeamData'
-      required:
-      - data
-      type: object
-    RelationshipToUserTeamTeamData:
-      description: The team associated with the membership
-      properties:
-        id:
-          description: The ID of the team associated with the membership
-          example: d7e15d9d-d346-43da-81d8-3d9e71d9a5e9
-          type: string
-        type:
-          $ref: '#/components/schemas/UserTeamTeamType'
-      required:
-      - id
-      - type
-      type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamUser:
       description: Relationship between team membership and user
       properties:
@@ -16769,6 +16862,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUsers:
       description: Relationship to users.
       properties:
@@ -22690,6 +22785,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamAttributes:
       description: Team attributes
       properties:
@@ -22716,6 +22813,9 @@ components:
           description: The team's identifier
           example: example-team
           maxLength: 195
+          type: string
+        handles:
+          description: The TeamAttributes handles.
           type: string
         hidden_modules:
           description: Collection of hidden modules for the team
@@ -22794,16 +22894,29 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        handles:
+          description: The TeamCreateAttributes handles.
+          type: string
         hidden_modules:
           description: Collection of hidden modules for the team
           items:
             description: String identifier of the module
             type: string
           type: array
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
+          type: string
+        summary:
+          description: A brief summary of the team
+          readOnly: true
           type: string
         visible_modules:
           description: Collection of visible modules for the team
@@ -23043,14 +23156,6 @@ components:
         user_team_permissions:
           $ref: '#/components/schemas/RelationshipToUserTeamPermission'
       type: object
-    TeamRelationshipsLinks:
-      description: Links attributes.
-      properties:
-        related:
-          description: Related link.
-          example: /api/v2/team/c75a4a8e-20c7-11ee-a3a5-da7ad0900002/links
-          type: string
-      type: object
     TeamResponse:
       description: Response with a team
       properties:
@@ -23093,12 +23198,6 @@ components:
           format: int64
           nullable: true
           type: integer
-        color:
-          description: An identifier for the color representing the team
-          format: int32
-          maximum: 13
-          minimum: 0
-          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -23107,16 +23206,29 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        handles:
+          description: The TeamUpdateAttributes handles.
+          type: string
         hidden_modules:
           description: Collection of hidden modules for the team
           items:
             description: String identifier of the module
             type: string
           type: array
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
+          type: string
+        summary:
+          description: A brief summary of the team
+          readOnly: true
           type: string
         visible_modules:
           description: Collection of visible modules for the team
@@ -23190,72 +23302,6 @@ components:
           items:
             $ref: '#/components/schemas/TeamIncluded'
           type: array
-        links:
-          $ref: '#/components/schemas/TeamsResponseLinks'
-        meta:
-          $ref: '#/components/schemas/TeamsResponseMeta'
-      type: object
-    TeamsResponseLinks:
-      description: Teams response links.
-      properties:
-        first:
-          description: First link.
-          type: string
-        last:
-          description: Last link.
-          nullable: true
-          type: string
-        next:
-          description: Next link.
-          type: string
-        prev:
-          description: Previous link.
-          nullable: true
-          type: string
-        self:
-          description: Current link.
-          type: string
-      type: object
-    TeamsResponseMeta:
-      description: Teams response metadata.
-      properties:
-        pagination:
-          $ref: '#/components/schemas/TeamsResponseMetaPagination'
-      type: object
-    TeamsResponseMetaPagination:
-      description: Teams response metadata.
-      properties:
-        first_offset:
-          description: The first offset.
-          format: int64
-          type: integer
-        last_offset:
-          description: The last offset.
-          format: int64
-          type: integer
-        limit:
-          description: Pagination limit.
-          format: int64
-          type: integer
-        next_offset:
-          description: The next offset.
-          format: int64
-          type: integer
-        offset:
-          description: The offset.
-          format: int64
-          type: integer
-        prev_offset:
-          description: The previous offset.
-          format: int64
-          type: integer
-        total:
-          description: Total results.
-          format: int64
-          type: integer
-        type:
-          description: Offset type.
-          type: string
       type: object
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
@@ -23852,6 +23898,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamAttributes:
       description: Team membership attributes
       properties:
@@ -23877,6 +23925,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/UserTeamAttributes'
+        id:
+          description: ID of user team
+          type: string
         relationships:
           $ref: '#/components/schemas/UserTeamRelationships'
         type:
@@ -23925,8 +23976,6 @@ components:
     UserTeamRelationships:
       description: Relationship between membership and a user
       properties:
-        team:
-          $ref: '#/components/schemas/RelationshipToUserTeamTeam'
         user:
           $ref: '#/components/schemas/RelationshipToUserTeamUser'
       type: object
@@ -23957,15 +24006,6 @@ components:
       type: string
       x-enum-varnames:
       - ADMIN
-    UserTeamTeamType:
-      default: team
-      description: User team team type
-      enum:
-      - team
-      example: team
-      type: string
-      x-enum-varnames:
-      - TEAM
     UserTeamType:
       default: team_memberships
       description: Team membership type
@@ -23980,6 +24020,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/UserTeamAttributes'
+        id:
+          description: ID of user team
+          type: string
         type:
           $ref: '#/components/schemas/UserTeamType'
       required:
@@ -24015,10 +24058,6 @@ components:
           items:
             $ref: '#/components/schemas/UserTeamIncluded'
           type: array
-        links:
-          $ref: '#/components/schemas/TeamsResponseLinks'
-        meta:
-          $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
     UserUpdateAttributes:
       description: Attributes of the edited user.
@@ -24433,6 +24472,9 @@ paths:
         - name: api_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/api_keys/{api_key_id}:
     delete:
       description: Delete an API key.
@@ -24542,6 +24584,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -25224,6 +25268,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/application_keys/{app_key_id}:
     delete:
       description: Delete an application key
@@ -25260,6 +25306,12 @@ paths:
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
       - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
+      - description: app key id
+        in: query
+        name: hide_key
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -25340,6 +25392,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -25492,6 +25546,14 @@ paths:
         name: resource_type
         schema:
           $ref: '#/components/schemas/AuthNMappingResourceType'
+      - description: include mapping
+        in: query
+        name: include
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
       responses:
         '200':
           content:
@@ -25571,6 +25633,9 @@ paths:
         - name: authn_mapping_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/authn_mappings/{authn_mapping_id}:
     delete:
       description: Delete an AuthN Mapping specified by AuthN Mapping UUID.
@@ -26652,6 +26717,9 @@ paths:
         name: filter[tags]
         required: false
         schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[A-Za-z][A-Za-z0-9_\-:./]*[A-Za-z0-9_\-./](,[A-Za-z][A-Za-z0-9_\-:./]*[A-Za-z0-9_\-./])*$
           type: string
       - description: Comma-separated list of tags to group Container Images by.
         example: registry,image_tags
@@ -26659,6 +26727,9 @@ paths:
         name: group_by
         required: false
         schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[A-Za-z][A-Za-z0-9_\-:./]*[A-Za-z0-9_\-./](,[A-Za-z][A-Za-z0-9_\-:./]*[A-Za-z0-9_\-./])*$
           type: string
       - description: Attribute to sort Container Images by.
         example: container_count
@@ -26666,6 +26737,8 @@ paths:
         name: sort
         required: false
         schema:
+          maxLength: 1024
+          minLength: 1
           type: string
       - description: Maximum number of results returned.
         in: query
@@ -26676,6 +26749,7 @@ paths:
           format: int32
           maximum: 10000
           minimum: 1
+          pattern: ^[0-9]+$
           type: integer
       - description: 'String to query the next page of results.
 
@@ -26684,6 +26758,8 @@ paths:
         name: page[cursor]
         required: false
         schema:
+          minLength: 0
+          pattern: ^[A-Za-z0-9+/=]+$
           type: string
       responses:
         '200':
@@ -26721,6 +26797,8 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/containers:
     get:
       description: Get all containers for your organization.
@@ -27556,6 +27634,9 @@ paths:
         - name: app_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/current_user/application_keys/{app_key_id}:
     delete:
       description: Delete an application key owned by current user
@@ -27664,6 +27745,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -28481,6 +28564,8 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    x-merge-override:
+      post: true
   /api/v2/incidents/search:
     get:
       description: Search for incidents matching a certain query.
@@ -28644,6 +28729,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     x-merge-override:
       delete: true
+      get: true
   /api/v2/incidents/{incident_id}/attachments:
     get:
       description: Get all attachments for a given incident.
@@ -29414,6 +29500,9 @@ paths:
         - name: integration_service_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/integration/opsgenie/services/{integration_service_id}:
     delete:
       description: Delete a single service object in the Datadog Opsgenie integration.
@@ -29503,6 +29592,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -29572,6 +29663,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/cloudflare/accounts/{account_id}:
     delete:
       description: Delete a Cloudflare account.
@@ -29669,6 +29762,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/confluent-cloud/accounts:
     get:
       description: List Confluent accounts.
@@ -29742,6 +29838,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/confluent-cloud/accounts/{account_id}:
     delete:
       description: Delete a Confluent account with the provided account ID.
@@ -29825,6 +29923,10 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
+      get: true
+      patch: true
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources:
     get:
       description: Get a Confluent resource for the account associated with the provided
@@ -29888,6 +29990,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources/{resource_id}:
     delete:
       description: Delete a Confluent resource with the provided resource id for the
@@ -29977,6 +30082,10 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      get: true
+      patch: true
   /api/v2/integrations/fastly/accounts:
     get:
       description: List Fastly accounts.
@@ -30045,6 +30154,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/fastly/accounts/{account_id}:
     delete:
       description: Delete a Fastly account.
@@ -30127,6 +30238,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/fastly/accounts/{account_id}/services:
     get:
       description: List Fastly services for an account.
@@ -30192,6 +30306,7 @@ paths:
           source: data.id
         type: unsafe
     x-merge-override:
+      get: true
       post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
@@ -30279,6 +30394,7 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      delete: true
       get: true
       patch: true
   /api/v2/integrations/okta/accounts:
@@ -30351,6 +30467,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/okta/accounts/{account_id}:
     delete:
       description: Delete an Okta account.
@@ -30449,7 +30567,9 @@ paths:
       x-undo:
         type: idempotent
     x-merge-override:
+      delete: true
       get: true
+      patch: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -33877,6 +33997,8 @@ paths:
         name: search
         required: false
         schema:
+          maxLength: 1024
+          minLength: 1
           type: string
       - description: Comma-separated list of tags to filter processes by.
         example: account:prod,user:admin
@@ -33884,6 +34006,9 @@ paths:
         name: tags
         required: false
         schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[A-Za-z][A-Za-z0-9_\-:./]*[A-Za-z0-9_\-./](,[A-Za-z][A-Za-z0-9_\-:./]*[A-Za-z0-9_\-./])*$
           type: string
       - description: 'Unix timestamp (number of seconds since epoch) of the start
           of the query window.
@@ -33928,6 +34053,9 @@ paths:
         name: page[cursor]
         required: false
         schema:
+          maxLength: 56
+          minLength: 56
+          pattern: ^[A-Fa-f0-9]+$
           type: string
       responses:
         '200':
@@ -33965,6 +34093,8 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/query/scalar:
     post:
       description: 'Query scalar values (as seen on Query Value, Table, and Toplist
@@ -37498,6 +37628,14 @@ paths:
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      - description: service account id
+        in: query
+        name: include
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/ListServiceAccountApplicationKeysInclude'
+          type: array
       responses:
         '200':
           content:
@@ -37585,6 +37723,9 @@ paths:
         - name: service_account_id
           source: data.relationships.owned_by.data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
     delete:
       description: Delete an application key owned by this service account.
@@ -37696,6 +37837,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/services:
     get:
       deprecated: true
@@ -38479,12 +38622,15 @@ paths:
         name: filter[keyword]
         required: false
         schema:
+          description: Search query, can be team name, team handle, or email of team
+            member
           type: string
       - description: When true, only returns teams the current user belongs to
         in: query
         name: filter[me]
         required: false
         schema:
+          description: when true, only returns teams the current user belongs to
           type: boolean
       - description: List of fields that need to be fetched.
         explode: false
@@ -38492,6 +38638,7 @@ paths:
         name: fields[team]
         required: false
         schema:
+          description: list of fields that need to be fetched
           items:
             $ref: '#/components/schemas/TeamsField'
           type: array
@@ -38574,6 +38721,9 @@ paths:
         - name: team_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
@@ -38711,6 +38861,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -38977,6 +39129,7 @@ paths:
         name: filter[keyword]
         required: false
         schema:
+          description: Search query, can be user email or name
           type: string
       responses:
         '200':
@@ -39076,6 +39229,9 @@ paths:
         - name: user_id
           source: data.relationships.user.data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
@@ -39170,6 +39326,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: true
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
