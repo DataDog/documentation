@@ -195,13 +195,14 @@ Create a sample configuration file and run your custom Agent to ensure everythin
 3. If the Agent starts, then the build process was successful. 
 
 You can now use this new image to install the Agent. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
+
 For detailed instructions on installing and configuring the Agent with added OTel components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
 
 ## Troubleshooting
 
 Here are some common issues you might encounter while building and running your custom Datadog Agent, along with their solutions:
 
-### Compatibility issues with awscontainerinsightreceiver
+### Compatibility issues with `awscontainerinsightreceiver`
 
 **Problem**: You may encounter errors related to `awscontainerinsightreceiver` during the build:
 ```text
@@ -227,7 +228,7 @@ ERROR: failed to solve: process "/bin/sh -c . venv/bin/activate && invoke otel-a
 
 **Solution**: Run the build command again:
 ```shell
-   docker build . -t agent-otel --no-cache
+docker build . -t agent-otel --no-cache
 ```
 
 ### Insufficient disk space
