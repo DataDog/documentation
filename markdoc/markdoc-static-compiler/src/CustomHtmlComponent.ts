@@ -12,6 +12,7 @@ export abstract class CustomHtmlComponent {
     components?: Record<string, CustomHtmlComponent>
   ) {
     if (tag.children.length > 0) {
+      console.log(`rendering children of ${tag.name}`);
       this.contents = html(tag.children, config, components);
     }
   }

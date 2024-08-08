@@ -4,6 +4,7 @@ const { escapeHtml } = MarkdownIt().utils;
 import { Config } from '../types';
 import { reresolve } from '../reresolver';
 import { isTag, isClientVariable, isClientFunction } from '../utils';
+import { CustomHtmlComponent } from '../CustomHtmlComponent';
 
 // HTML elements that do not have a matching close tag
 // Defined in the HTML standard: https://html.spec.whatwg.org/#void-elements
@@ -66,7 +67,7 @@ export default function render(
 
   if (components && name in components) {
     const Klass = components[name];
-    return new Klass(node).render();
+    return new Klass(node, config, components).render();
   }
 
   if ('if' in node && node.if) {
