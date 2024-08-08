@@ -56,17 +56,6 @@ export const regionParamDefinition = {
 };
 
 export class RegionParam extends CustomHtmlComponent {
-  tag: Tag;
-
-  constructor(
-    tag: Tag,
-    config?: Config,
-    components?: Record<string, CustomHtmlComponent>
-  ) {
-    super(tag, config, components);
-    this.tag = tag;
-  }
-
   render() {
     let result = '{{< region-param';
     Object.keys(this.tag.attributes).forEach((key) => {

@@ -17,17 +17,6 @@ export const imgDefinition = {
 };
 
 export class Img extends CustomHtmlComponent {
-  tag: Tag;
-
-  constructor(
-    tag: Tag,
-    config?: Config,
-    components?: Record<string, CustomHtmlComponent>
-  ) {
-    super(tag, config, components);
-    this.tag = tag;
-  }
-
   render() {
     let result = '{{< img';
     Object.keys(this.tag.attributes).forEach((key) => {

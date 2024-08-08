@@ -5,14 +5,15 @@ const { escapeHtml, unescapeAll } = MarkdownIt().utils;
 
 export abstract class CustomHtmlComponent {
   contents = '';
+  tag: Tag;
 
   constructor(
     tag: Tag,
     config?: Config,
     components?: Record<string, CustomHtmlComponent>
   ) {
+    this.tag = tag;
     if (tag.children.length > 0) {
-      console.log(`rendering children of ${tag.name}`);
       this.contents = html(tag.children, config, components);
     }
   }

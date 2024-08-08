@@ -13,18 +13,8 @@ export const siteRegionDefinition = {
 };
 
 export class SiteRegion extends CustomHtmlComponent {
-  region: string;
-
-  constructor(
-    tag: Tag,
-    config?: Config,
-    components?: Record<string, CustomHtmlComponent>
-  ) {
-    super(tag, config, components);
-    this.region = tag.attributes.region;
-  }
-
   render() {
-    return `<div class="d-none site-region-container" data-region="${this.region}">${this.contents}</div>`;
+    const region = this.tag.attributes.region;
+    return `<div class="d-none site-region-container" data-region="${region}">${this.contents}</div>`;
   }
 }
