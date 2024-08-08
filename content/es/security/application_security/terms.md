@@ -77,10 +77,10 @@ Asignación a usuarios
 Vulnerabilidad
 : Riesgo pasivo de una aplicación. De [OWASP][1]: "Una vulnerabilidad es un hueco o una debilidad en la aplicación. Puede ser un defecto de diseño o un error de implementación, que permite a un atacante causar daño a las partes interesadas de una aplicación. Las partes interesadas incluyen el propietario de la aplicación, los usuarios de la aplicación y otras entidades que dependen de la aplicación."
 
-Calificación del rastreo
+Calificación de trazas
 : Proceso mediante el cual Datadog ayuda a comprender el impacto de las trazas, etiquetándolas
 como `Harmful Safe or Unknown`.
-: Consulta [Calificación del rastreo][15].
+: Consulta [Calificación de trazas][15].
 
 Información sobre amenazas
 : Conjunto de reglas que se ejecutan en bibliotecas Datadog para detectar amenazas. Incluyen patrones de Web Application Firewall (WAF) que monitorizan los intentos de explotar vulnerabilidades conocidas.
