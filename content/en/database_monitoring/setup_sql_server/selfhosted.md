@@ -46,7 +46,7 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- To use Log Shipping Monitoring (available in Agent v7.50+) or SQL Server Agent Monitoring, uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
@@ -59,7 +59,7 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- To use Log Shipping Monitoring (available in Agent v7.50+) or SQL Server Agent Monitoring, uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
