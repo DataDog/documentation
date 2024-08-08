@@ -50,7 +50,7 @@ Handle that should receive notification if time is between 2PM and 5PM UTC
 {{/is_match}}
 ```
 
-**Note:** If you are looking for a way to evaluate your monitor on a schedule, you may want to look at [Custom Schedules][2] instead
+**Note:** If you need to evaluate your monitor on a schedule, see [Custom Schedules][2] instead.
 
 ## Functions
 
