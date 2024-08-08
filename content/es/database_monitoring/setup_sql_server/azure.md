@@ -161,7 +161,7 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 El proveedor [ADO][6] recomendado es el [controlador de bases de datos Microsoft OLE][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
+adoprovider: MSOLEDBSQL19  # Sustituye por MSOLEDBSQL para las versiones 18 y anteriores
 ```
 
 Los otros dos proveedores, `SQLOLEDB` y `SQLNCLI`, se consideran obsoletos por Microsoft y ya no deben ser utilizados.
@@ -179,7 +179,7 @@ Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][9].
 
 ### Confirmar
 
-[Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][14] de Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][11] de Datadog para empezar.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
