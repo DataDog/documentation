@@ -14,8 +14,9 @@ const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
+    // but only if there is no hash in the URL
     const newHash = new URL(newUrl).hash;
-    if (window.location.href !== newUrl && !newHash) {
+    if (!newHash) {
       window.scroll({
         top: 0,
         left: 0,
