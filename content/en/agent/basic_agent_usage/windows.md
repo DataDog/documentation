@@ -20,56 +20,106 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+- link: "/agent/guide/windows-agent-ddagent-user"
+  tag: "Documentation"
+  text: "Learn more about the Datadog Windows Agent User"
 algolia:
-  tags: ['uninstall', 'uninstalling']
+  tags: ['install', 'installing', 'uninstall', 'uninstalling', 'windows']
 ---
 
-## Setup
+# Setup
 
-If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent Supported Platforms documentation for [supported OS versions][2].
+If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. 
 
-### Installation
+## Installation
 
-The core and APM/trace components of the Windows Agent run under the `ddagentuser` account, which is created at install time. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
-
-See installation requirements and special considerations for installing the Datadog Agent on a [domain environment][4], [with a group policy][5], and more. 
+### Requirements
+- **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][2].
+- **Datadog account**: Ensure you have access to a Datadog account and have your Datadog API key.
+- **Administrator privileges**: Administrator access is required on the Windows machine.
 
 {{< tabs >}}
-{{% tab "GUI" %}}
+{{% tab "Standard installation" %}}
 
-1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
+The core and APM/trace components of the Windows Agent run under the `ddagentuser` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+
+### Install the Datadog Agent
+Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
-2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
-4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
+#### Install via the GUI
+- Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
+- Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
+- When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-
-{{% /tab %}}
-{{% tab "Command line" %}}
-
-To install the Agent with the command line:
-
-1. Download the [Datadog Agent installer][1].
-2. Open Command or Powershell prompt as **Administrator**.
-3. Run one of the following commands inside the directory where you downloaded the installer.
-
-**Command prompt**
-
-```shell
-start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
-```
-
-**PowerShell**
-
+#### Install with the command line:
+- Open PowerShell with **Administrator** privileges.
+- Run the following command to install the Datadog Agent:
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
 
-#### Installation Configuration Options 
+{{% /tab %}}
+{{% tab "Installations in Active Directory Domains" %}}
+
+When deploying the Datadog Agent in an Active Directory environment, Datadog recommends using a Group Managed Service Account (gMSA).
+Doing so can enhance security and simplify management, especially concerning password-management.
+
+The core and APM/trace components of the Windows Agent run under the Group Managed Service account configured. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+
+### Prerequisites
+- Active Directory environment configured.
+- Permission to create and manage Group Managed Service Accounts.
+- See further [requirements in the Microsoft documentation][4].
+
+**Note**: Advanced set up of a Group Managed Service account is beyond the scope of this documentation, please refer to [the Microsoft documentation for setting up a Group Managed Service Account in your environment][5] for more information.
+
+### Create and Configure a Group Managed Service Account
+**1. Create a Security Group:**
+
+- Open Active Directory Users and Computers (ADUC).
+- Navigate to the appropriate Organizational Unit (OU).
+- Right-click and select New > Group.
+- Name the group (e.g., `DatadogAgentsGroup`), set the group scope to **Global**, and the type to **Security**.
+
+**2. Create the Group Managed Service Account:**
+
+- Open PowerShell with **Administrator** privileges.
+- Run the following command to create the Group Managed Service Account:
+```powershell
+New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
+```
+
+Replace <YOUR_DOMAIN_NAME> with your domain name.
+
+**3. Install the Group Managed Service Account on the Target Machine:**
+
+- Ensure the target machine is part of the `DatadogAgentsGroup`.
+- On the target machine, open PowerShell and run:
+```powerhsell
+Install-ADServiceAccount -Identity DatadogGMSA
+```
+### Install the Datadog Agent
+Download the [Datadog Agent installer][1] to install the latest version of the Agent.
+
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
+
+#### Install via the GUI
+- Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
+- Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
+- When prompted for the "Datadog Agent User Account", enter the username of the Group Managed Service Account (e.g., `<YOUR_DOMAIN_NAME>\DatadogGMSA$`) and **no password**.
+- When the install finishes, you are given the option to launch the Datadog Agent Manager.
+
+#### Install with the command line:
+- Open PowerShell with **Administrator** privileges.
+- Run the following command to install the Datadog Agent:
+```powershell
+Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
+```
+**note:** Replace `DatadogGMSA$` with the username of your Group Managed Service Account, it **must end with a $ symbol.**
+
+## Installation Configuration Options 
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
 
@@ -92,7 +142,7 @@ Each of the following configuration options can be added as a property to the co
 - Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
 - If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
 
-### More Agent configuration options
+## More Agent configuration options
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. 
 
@@ -118,8 +168,6 @@ Each of the following configuration options can be added as a property to the co
 [2]: /agent/configuration/proxy/
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /network_monitoring/performance
-{{% /tab %}}
-{{% tab "Upgrading" %}}
 
 Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
 
@@ -127,18 +175,16 @@ If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a mo
 
 [1]: /agent/guide/python-3/
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
-{{% /tab %}}
-{{< /tabs >}}
 
-### Installation log files
+## Installation log files
 
 You can find Agent installation log files at `%TEMP%\MSI*.LOG`.
 
-### Validation
+## Validation
 
 To verify your installation, follow the instructions in the [Agent Status and Information](#agent-status-and-information) section.
 
-## Agent commands
+# Agent commands
 
 The execution of the Agent is controlled by the Windows Service Control Manager.
 
@@ -183,7 +229,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
     "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
-## Configuration
+# Configuration
 
 Use the [Datadog Agent Manager][6] to enable, disable, and configure checks. Restart the Agent for your changes to be applied.
 
@@ -197,17 +243,17 @@ Configuration files for integrations are in:
 
 **Note**: `ProgramData` is a hidden folder.
 
-## Uninstall the Agent
+# Uninstall the Agent
 
 There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
-### Add or remove programs
+## Add or remove programs
 
 1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
 1. Search for `add` and click **Add or remove programs**.
 1. Search for `Datadog Agent` and click **Uninstall**.
 
-### PowerShell
+## PowerShell
 
 **Note:** Enable WinRM to use the commands below.
 
@@ -218,9 +264,9 @@ $productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVe
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', "$productCode", 'REBOOT=ReallySuppress')
 {{< /code-block >}}
 
-## Troubleshooting
+# Troubleshooting
 
-### Agent status and information
+## Agent status and information
 
 To verify the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
 
@@ -246,13 +292,13 @@ or cmd.exe:
 "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
-### Logs location
+## Logs location
 
 The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 
 **Note**: `ProgramData` is a hidden folder.
 
-### Send a flare
+## Send a flare
 
 * Navigate to [http://127.0.0.1:5002][12] to display the Datadog Agent Manager.
 
@@ -278,9 +324,9 @@ or cmd.exe:
 
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" style="width:75%;">}}
 
-## Use cases
+# Use cases
 
-###  Monitoring a Windows service
+##  Monitoring a Windows service
 
 On your target host, launch the Datadog Agent Manager and select the "Windows Service" integration from the list. There is an out-of-the-box example; however, this example uses DHCP.
 
@@ -296,13 +342,13 @@ Also, whenever you modify an integration, the Datadog service needs to be restar
 
 For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process](#monitoring-windows-processes) or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
-### Monitoring system load for Windows
+## Monitoring system load for Windows
 
 The Datadog Agent collects a large number of system metrics by default. The most commonly used system metrics are `system.load.*` but these metrics are **Unix** specific.
 
 While Windows does not offer the `system.load.*` metrics, an equivalent option that's available by default is `system.proc.queue.length`. This metric shows the number of threads observed as delayed in the processor ready queue that are waiting to be executed.
 
-### Monitoring Windows processes
+## Monitoring Windows processes
 
 You can monitor Windows processes with [Live Process Monitoring][9]. To enable this on Windows, edit the [Agent main configuration file][10] by setting the following parameter to true:
 
@@ -315,7 +361,7 @@ process_config:
 
 After configuration is complete, [restart the Agent][11].
 
-## Further reading
+# Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -323,8 +369,8 @@ After configuration is complete, [restart the Agent][11].
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
-[4]: /agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
+[4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview#software-requirements
+[5]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
