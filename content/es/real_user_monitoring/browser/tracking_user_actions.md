@@ -5,7 +5,7 @@ algolia:
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
-  text: Presentación del Real User Monitoring (RUM) de Datadog
+  text: Presentación del Real User Monitoring de Datadog
 - link: /real_user_monitoring/explorer/
   tag: Documentación
   text: Explorar tus vistas en Datadog
