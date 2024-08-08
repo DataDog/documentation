@@ -9,7 +9,7 @@ import { getChooserHtml } from './components/Chooser';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { resolvePagePrefs } from '../sharedRendering';
-import { customComponents } from '../../config';
+import { customComponents } from '../../markdocConfig';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 

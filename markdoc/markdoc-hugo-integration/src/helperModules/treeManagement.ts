@@ -16,7 +16,7 @@ import MarkdocStaticCompiler, {
   ClientFunctionSchema
 } from 'markdoc-static-compiler';
 import { MinifiedClientFunction, minifyClientFunction } from './dataCompression';
-import { transformConfig } from '../config';
+import { transformConfig } from '../markdocConfig';
 
 /**
  * Collect the top-level client functions inside the renderable tree,

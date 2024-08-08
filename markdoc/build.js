@@ -28,7 +28,7 @@ const assetsPartialContents = markdocIntegration.buildAssetsPartial();
 fs.writeFileSync(ASSETS_PARTIAL_PATH, assetsPartialContents);
 
 // Compile all .mdoc files found in the content directory
-const { compiledFiles } = markdocIntegration.compileMdocFiles();
+const { compiledFiles, hasErrors } = markdocIntegration.compileMdocFiles();
 
 // Build a .gitignore file for the compiled files,
 // to be written to the content directory
@@ -39,5 +39,10 @@ compiledFiles.forEach((file) => {
     gitignoreContents += sanitizedFile + '\n';
 });
 fs.writeFileSync(CONTENT_DIR + '/.gitignore', gitignoreContents);
+
+if (hasErrors) {
+    console.error('Markdoc compilation failed with errors:');
+    markdocIntegration.logErrorsToConsole();
+}
 
 console.timeEnd('Markdoc compilation execution time');
