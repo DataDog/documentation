@@ -174,7 +174,7 @@ You can also launch this query directly from the signal panel:
 1. Click on the IP address in the **IPS** section.
 2. Select **View Logs with @network.client.ip:<ip_address>**.
 
-{{< img src="security/security_monitoring/investigate_security_signals/threat_intel_view_logs.png" alt="The signal panel showing the threat options for the selected IP address" style="width:70%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/search_logs_by_ip.png" alt="The signal panel showing the threat options for the selected IP address" style="width:90%;" >}}
 
 ## Further reading
 
