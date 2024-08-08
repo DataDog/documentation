@@ -16,7 +16,10 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
 
 - **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 
-- **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
+- **Operating systems**:
+   - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
+   - Docker
+   - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
 
 ## Enabling APM on your applications
 
@@ -69,9 +72,9 @@ For a Docker Linux container:
      -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-     -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-     -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-     -v /opt/datadog/apm:/opt/datadog/apm \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
@@ -593,3 +596,4 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [2]: /tracing/metrics/runtime_metrics/
 [3]: /tracing/service_catalog/
 [4]: /tracing/glossary/#instrumentation
+[5]: /containers/cluster_agent/admission_controller/

@@ -441,5 +441,5 @@ exports.handler = async (event) => {
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=nodejs
 [5]: /tracing/custom_instrumentation/nodejs/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[6]: /security/application_security/serverless/
 
