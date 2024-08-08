@@ -86,7 +86,7 @@ The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account.
 - Open Active Directory Users and Computers (ADUC).
 - Navigate to the appropriate Organizational Unit (OU).
 - Right-click and select New > Group.
-- Name the group (e.g., `DatadogAgentsGroup`), set the group scope to **Global**, and the type to **Security**.
+- Name the group (e.g., `DatadogAgentsGroup`), set the correct group scope for your organization (e.g. **Domain local**), and the type to **Security**.
 
 **2. Create the gMSA:**
 
