@@ -74,11 +74,8 @@ server:
 
 # Download all dependencies and run the site
 start: dependencies ## Build and run docs including external content.
-<<<<<<< HEAD
 	@make compile-markdoc
-=======
 	@make update_websites_sources_module
->>>>>>> master
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
