@@ -31,7 +31,7 @@ If you haven't installed the Datadog Agent yet, see below or the [in-app install
 
 ## Installation
 
-### Requirements
+**Requirements**
 - **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][2].
 - **Datadog account**: Ensure you have access to a Datadog account and have your Datadog API key.
 - **Administrator privileges**: Administrator access is required on the Windows machine.
@@ -57,6 +57,10 @@ Download the [Datadog Agent installer][1] to install the latest version of the A
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
+
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
+[2]: /agent/supported_platforms/?tab=windows
+[3]: /agent/faq/windows-agent-ddagent-user/
 
 {{% /tab %}}
 {{% tab "Installation in Active Directory Domains" %}}
@@ -122,6 +126,12 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 ```
 **note:** Replace `DatadogGMSA$` with the username of your gMSA, it **must end with a $ symbol.**
 
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
+[2]: /agent/supported_platforms/?tab=windows
+[3]: /agent/faq/windows-agent-ddagent-user/
+[4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview#software-requirements
+[5]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -162,25 +172,16 @@ Each of the following configuration options can be added as a property to the co
 | `PROCESS_ENABLED`                           | String  | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
 | `HOSTNAME_FQDN_ENABLED`                     | String  | Enable (`"true"`) or disable (`"false"`) the usage of FQDN for the Agent hostname. It is equivalent to set `hostname_fqdn` in the Agent configuration file. The usage of FQDN for the hostname is disabled by default. _(v6.20.0+)_ |
 | `CMD_PORT`                                  | Number  | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
-| `PROXY_HOST`                                | String  | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
-| `PROXY_PORT`                                | Number  | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
-| `PROXY_USER`                                | String  | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
-| `PROXY_PASSWORD`                            | String  | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][2]. |
+| `PROXY_HOST`                                | String  | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
+| `PROXY_PORT`                                | Number  | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
+| `PROXY_USER`                                | String  | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
+| `PROXY_PASSWORD`                            | String  | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
-| [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(version 7.44.0 and previous)_ |
+| [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
 
+Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][13] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade normally.
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/configuration/proxy/
-[3]: /agent/faq/windows-agent-ddagent-user/
-[4]: /network_monitoring/performance
-
-Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
-
-If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][2] and then upgrade to Datadog Agent version >= 6.
-
-[1]: /agent/guide/python-3/
-[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
+If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][14] and then upgrade to Datadog Agent version >= 6.
 
 #### Installation log files
 
@@ -375,8 +376,8 @@ After configuration is complete, [restart the Agent][11].
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
-[4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview#software-requirements
-[5]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
+[4]: /agent/configuration/proxy/
+[5]: /network_monitoring/performance
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
@@ -384,3 +385,5 @@ After configuration is complete, [restart the Agent][11].
 [10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/configuration/agent-commands/#restart-the-agent
 [12]: http://127.0.0.1:5002
+[13]: /agent/guide/python-3/
+[14]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
