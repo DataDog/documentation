@@ -160,7 +160,9 @@
         {
           "$$mdtype": "Tag",
           "name": "Tab",
-          "attributes": {},
+          "attributes": {
+            "label": "Tab 1"
+          },
           "children": [
             {
               "$$mdtype": "Tag",
@@ -175,7 +177,9 @@
         {
           "$$mdtype": "Tag",
           "name": "Tab",
-          "attributes": {},
+          "attributes": {
+            "label": "Tab 2"
+          },
           "children": [
             {
               "$$mdtype": "Tag",
