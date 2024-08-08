@@ -111,6 +111,7 @@ For faster processing, generate the first exports manually by clicking **Run Now
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
     - Select *review + assign*.
+8. Make a note of the selected App Registration for all further steps.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /tab %}}
@@ -126,6 +127,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
     - Select *review + assign*.
+8. Make a note of the selected App Registration for all further steps.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
@@ -136,7 +138,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 2. Select the Access Control (IAM) tab.
 3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
-5. Assign these permissions to the app registration.
+5. Assign these permissions to the same App Registration chosen in the previous step.
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
@@ -147,6 +149,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 ### Configure Cloud Costs in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
+In Step 1, choose the Azure Integration corresponding to the App Registration chosen in previous steps.
 
 ### Cost types
 
