@@ -4567,7 +4567,7 @@ menu:
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
-      identifier: observability_pipelines_sources_processors
+      identifier: observability_pipelines_processors
       weight: 5
     - name: Destinations
       url: observability_pipelines/destinations/
