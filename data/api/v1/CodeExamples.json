@@ -400,6 +400,21 @@
       "group": "dashboards",
       "suffix": "_985012506",
       "description": "Create a new timeseries widget with incident_analytics data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4262729673",
+      "description": "Create a new timeseries widget with legacy live span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3451918078",
+      "description": "Create a new timeseries widget with new fixed span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3066042014",
+      "description": "Create a new timeseries widget with new live span time format"
     }
   ],
   "CreatePublicDashboard": [
