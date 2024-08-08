@@ -162,7 +162,7 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 1. Click the **Σ (sigma)** to open the **Transformers** panel.
 1. Click **+ Create Transformer**.
 1. Name the transformer `numberTransformer`. Under **Inputs**, under **function () {**, enter the following:
-    ```
+    ```javascript
     // get both random facts
     const fact1 = mathFact1.outputs.body;
     const fact2 = mathFact2.outputs.body;
