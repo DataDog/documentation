@@ -29,7 +29,7 @@ describe('PageBuilder.build', () => {
       parsedFile,
       prefOptionsConfig: prefOptionsConfigForPage,
       debug: true,
-      includeAssetsInline: true,
+      includeAssetsInline: false,
       outputFormat: 'html'
     });
 

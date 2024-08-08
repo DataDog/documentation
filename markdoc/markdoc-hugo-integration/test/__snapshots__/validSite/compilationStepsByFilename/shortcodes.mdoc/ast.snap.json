@@ -1137,7 +1137,7 @@
           ],
           "inline": false,
           "attributes": {
-            "title": "Tab 1"
+            "primary": "Tab 1"
           },
           "children": [
             {
@@ -1216,7 +1216,7 @@
           "annotations": [
             {
               "type": "attribute",
-              "name": "title",
+              "name": "primary",
               "value": "Tab 1"
             }
           ],
@@ -1241,7 +1241,7 @@
           ],
           "inline": false,
           "attributes": {
-            "title": "Tab 2"
+            "primary": "Tab 2"
           },
           "children": [
             {
@@ -1320,7 +1320,7 @@
           "annotations": [
             {
               "type": "attribute",
-              "name": "title",
+              "name": "primary",
               "value": "Tab 2"
             }
           ],
