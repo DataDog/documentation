@@ -31,8 +31,6 @@ export class Img extends CustomHtmlComponent {
   render() {
     let result = '{{< img';
     Object.keys(this.tag.attributes).forEach((key) => {
-      console.log('key', key);
-      console.log('this.tag.attributes[key]', this.tag.attributes[key]);
       result += ` ${key}="${this.tag.attributes[key]}"`;
     });
     result += ' >}}';

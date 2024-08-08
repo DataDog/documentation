@@ -24,7 +24,6 @@ export class Tabs extends CustomHtmlComponent {
   ) {
     super(tag, config, components);
     this.tag = tag;
-    console.log('Tabs tag: ', JSON.stringify(this.tag, null, 2));
     // this.level = tag.attributes.level || 'info';
   }
 

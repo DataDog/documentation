@@ -25,11 +25,11 @@ export class Tab extends CustomHtmlComponent {
   ) {
     super(tag, config, components);
     this.tag = tag;
-    console.log('Tab tag: ', this.tag);
     // this.level = tag.attributes.level || 'info';
   }
 
   render() {
+    console.log('rendering tab');
     return `<div class="tab-pane fade" role="tabpanel">${this.contents}</div>`;
   }
 }
