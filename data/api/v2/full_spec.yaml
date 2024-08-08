@@ -24294,10 +24294,6 @@ components:
               have permission to edit those SLOs.
             slos_read: View SLOs and status corrections.
             slos_write: Create, edit, and delete SLOs.
-            synthetics_default_settings_read: View the default settings for Synthetic
-              Monitoring.
-            synthetics_default_settings_write: Edit the default settings for Synthetic
-              Monitoring.
             synthetics_global_variable_read: View, search, and use Synthetics global
               variables.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -34310,34 +34306,38 @@ paths:
 
         - Service Level Objectives: `slo`
 
-        - Synthetic Global Variable: `synthetic-global-variable`
+        - Synthetic Global Variables: `synthetic-global-variable`
 
-        - Synthetic Test: `synthetic-test`
+        - Synthetic Tests: `synthetic-test`
 
-        - Synthetic Private Location: `synthetic-private-location`
+        - Synthetic Private Locations: `synthetic-private-location`
+
+        - Monitors: `monitor`
 
 
         #### Supported relations for resources
 
-        Resource Type              | Supported Relations
+        Resource Type               | Supported Relations
 
-        ---------------------------|--------------------------
+        ----------------------------|--------------------------
 
-        Dashboards                 | `viewer`, `editor`
+        Dashboards                  | `viewer`, `editor`
 
-        Notebooks                  | `viewer`, `editor`
+        Notebooks                   | `viewer`, `editor`
 
-        Powerpacks                 | `viewer`, `editor`
+        Powerpacks                  | `viewer`, `editor`
 
-        Security Rules             | `viewer`, `editor`
+        Security Rules              | `viewer`, `editor`
 
-        Service Level Objectives   | `viewer`, `editor`
+        Service Level Objectives    | `viewer`, `editor`
 
-        Synthetic Global Variable  | `viewer`, `editor`
+        Synthetic Global Variables  | `viewer`, `editor`
 
-        Synthetic Test             | `viewer`, `editor`
+        Synthetic Tests             | `viewer`, `editor`
 
-        Synthetic Private Location | `viewer`, `editor`'
+        Synthetic Private Locations | `viewer`, `editor`
+
+        Monitors                    | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -40690,6 +40690,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_read
       summary: Get a workflow instance
       tags:
       - Workflow Automation
