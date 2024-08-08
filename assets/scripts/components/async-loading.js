@@ -14,11 +14,14 @@ const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
-    window.scroll({
+    const newHash = new URL(newUrl).hash;
+    if (window.location.href !== newUrl && !newHash) {
+      window.scroll({
         top: 0,
         left: 0,
         behavior: "instant"
-    });
+      });
+    }
 
     const pathName = new URL(newUrl).pathname;
     const commitRef = document.documentElement.dataset.commitRef
@@ -28,7 +31,7 @@ function loadPage(newUrl) {
 
     // temp workaround for integrations page https://datadoghq.atlassian.net/browse/WEB-5018
     let isIntegrations = document.querySelector('.integrations')
-    
+
     if (mainContent && !isIntegrations) {
         const currentTOC = document.querySelector('.js-toc-container');
 
@@ -219,13 +222,13 @@ function loadPage(newUrl) {
                     sidebar.classList.remove('d-none');
                 }
             }
-            
+
             // Clean window pathname in order to update language dropdown items href
             const nonEnPage = document.documentElement.lang !== 'en-US' // check if page is not in english
 
             const noCommitRefPathName = pathName.slice(commitRefLen) // adjust pathname to remove commit ref if in preview env
             const noCommitRefNoLangPathName = nonEnPage ? noCommitRefPathName.slice(3) : noCommitRefPathName // adjust pathname to remove language if not in english e.g. /ja/agent -> /agent
-            
+
             document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
                 // Updates langauge dropdown item hrefs on asynchronous page loads
                 const noFtBranchddItemPathName = ddItem.pathname.slice(commitRefLen) // adjust dd item pathname to remove commit ref if in preview env
@@ -253,7 +256,7 @@ function loadPage(newUrl) {
             toggleMultiCodeLangNav(pageCodeLang);
             hideTOCItems(true)
             initCopyCode()
-            
+
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
 
@@ -270,7 +273,7 @@ function loadPage(newUrl) {
         httpRequest.send();
     } else {
         // Integrations Pages
-        
+
         if(pathName.slice(commitRefLen) !== document.documentElement.dataset.relpermalink) {
             // if switching between integrations pages, reload page. adjusts the pathName to remove commit ref if in preview env.
             window.location.href = newUrl;
