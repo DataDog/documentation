@@ -50,9 +50,9 @@
                   c = f.currentValue || f.defaultValue;
                 (a += '<div class="markdoc-pref__container">'),
                   (a += `<div class="markdoc-pref__label">${f.displayName}</div>`),
-                  f.options.forEach((d) => {
-                    let y = d.id === c ? "selected" : "";
-                    a += `<div class="markdoc-pref__pill ${y}" data-pref-id="${f.id}" data-option-id="${d.id}">${d.displayName}</div>`;
+                  f.options.forEach((p) => {
+                    let v = p.id === c ? "selected" : "";
+                    a += `<div class="markdoc-pref__pill ${v}" data-pref-id="${f.id}" data-option-id="${p.id}">${p.displayName}</div>`;
                   }),
                   (a += "</div>");
               }),
@@ -94,14 +94,14 @@
                     f.default_value ||
                     t.prefOptionsConfig[f.options_source].find((E) => E.default)
                       .id,
-                  d = t.prefOptionsConfig[f.options_source].map((E) => E.id),
-                  y = t.valsByPrefId[f.id];
-                y && !d.includes(y) && (y = c);
+                  p = t.prefOptionsConfig[f.options_source].map((E) => E.id),
+                  v = t.valsByPrefId[f.id];
+                v && !p.includes(v) && (v = c);
                 let _ = {
                   id: f.id,
                   displayName: f.display_name,
                   defaultValue: c,
-                  currentValue: y,
+                  currentValue: v,
                   options: t.prefOptionsConfig[f.options_source].map((E) => ({
                     id: E.id,
                     displayName: E.display_name,
@@ -118,14 +118,14 @@
               t.pagePrefsConfig.forEach((r) => {
                 let f = ze({ pagePrefConfig: r, valsByPrefId: t.valsByPrefId }),
                   c = f.d || t.prefOptionsConfig[f.o].find((E) => E.d).i,
-                  d = t.prefOptionsConfig[f.o].map((E) => E.i),
-                  y = t.valsByPrefId[f.i];
-                y && !d.includes(y) && (y = c);
+                  p = t.prefOptionsConfig[f.o].map((E) => E.i),
+                  v = t.valsByPrefId[f.i];
+                v && !p.includes(v) && (v = c);
                 let _ = {
                   id: f.i,
                   displayName: f.n,
                   defaultValue: c,
-                  currentValue: y,
+                  currentValue: v,
                   options: t.prefOptionsConfig[f.o].map((E) => ({
                     id: E.i,
                     displayName: E.n,
@@ -180,13 +180,13 @@
           D.buildMessage = function (t, a, r) {
             var f = {
               literal: function (C) {
-                return '"' + d(C.text) + '"';
+                return '"' + p(C.text) + '"';
               },
               class: function (C) {
-                var $ = C.parts.map(function (A) {
-                  return Array.isArray(A) ? y(A[0]) + "-" + y(A[1]) : y(A);
+                var y = C.parts.map(function (A) {
+                  return Array.isArray(A) ? v(A[0]) + "-" + v(A[1]) : v(A);
                 });
-                return "[" + (C.inverted ? "^" : "") + $ + "]";
+                return "[" + (C.inverted ? "^" : "") + y + "]";
               },
               any: function () {
                 return "any character";
@@ -204,21 +204,21 @@
             function c(C) {
               return C.charCodeAt(0).toString(16).toUpperCase();
             }
-            function d(C) {
+            function p(C) {
               return C.replace(/\\/g, "\\\\")
                 .replace(/"/g, '\\"')
                 .replace(/\0/g, "\\0")
                 .replace(/\t/g, "\\t")
                 .replace(/\n/g, "\\n")
                 .replace(/\r/g, "\\r")
-                .replace(/[\x00-\x0F]/g, function ($) {
-                  return "\\x0" + c($);
+                .replace(/[\x00-\x0F]/g, function (y) {
+                  return "\\x0" + c(y);
                 })
-                .replace(/[\x10-\x1F\x7F-\x9F]/g, function ($) {
-                  return "\\x" + c($);
+                .replace(/[\x10-\x1F\x7F-\x9F]/g, function (y) {
+                  return "\\x" + c(y);
                 });
             }
-            function y(C) {
+            function v(C) {
               return C.replace(/\\/g, "\\\\")
                 .replace(/\]/g, "\\]")
                 .replace(/\^/g, "\\^")
@@ -227,36 +227,36 @@
                 .replace(/\t/g, "\\t")
                 .replace(/\n/g, "\\n")
                 .replace(/\r/g, "\\r")
-                .replace(/[\x00-\x0F]/g, function ($) {
-                  return "\\x0" + c($);
+                .replace(/[\x00-\x0F]/g, function (y) {
+                  return "\\x0" + c(y);
                 })
-                .replace(/[\x10-\x1F\x7F-\x9F]/g, function ($) {
-                  return "\\x" + c($);
+                .replace(/[\x10-\x1F\x7F-\x9F]/g, function (y) {
+                  return "\\x" + c(y);
                 });
             }
             function _(C) {
               return f[C.type](C);
             }
             function E(C) {
-              var $ = C.map(_),
+              var y = C.map(_),
                 A,
-                V;
-              if (($.sort(), $.length > 0)) {
-                for (A = 1, V = 1; A < $.length; A++)
-                  $[A - 1] !== $[A] && (($[V] = $[A]), V++);
-                $.length = V;
+                N;
+              if ((y.sort(), y.length > 0)) {
+                for (A = 1, N = 1; A < y.length; A++)
+                  y[A - 1] !== y[A] && ((y[N] = y[A]), N++);
+                y.length = N;
               }
-              switch ($.length) {
+              switch (y.length) {
                 case 1:
-                  return $[0];
+                  return y[0];
                 case 2:
-                  return $[0] + " or " + $[1];
+                  return y[0] + " or " + y[1];
                 default:
-                  return $.slice(0, -1).join(", ") + ", or " + $[$.length - 1];
+                  return y.slice(0, -1).join(", ") + ", or " + y[y.length - 1];
               }
             }
             function w(C) {
-              return C ? '"' + d(C) + '"' : "end of input";
+              return C ? '"' + p(C) + '"' : "end of input";
             }
             return "Expected " + E(t) + " but " + w(a) + " found.";
           };
@@ -265,15 +265,15 @@
             var r = {},
               f = { Top: Te },
               c = Te,
-              d = "/",
-              y = ".",
+              p = "/",
+              v = ".",
               _ = "#",
               E = "=",
               w = "(",
               C = ")",
-              $ = ",",
+              y = ",",
               A = "[",
-              V = "]",
+              N = "]",
               z = "null",
               ye = "true",
               Ce = "false",
@@ -291,26 +291,26 @@
               br = /^[^\0-\x1F"\\]/,
               Ee = /^[a-zA-Z0-9_\-]/,
               Er = /^[ \n\t]/,
-              Ae = x("/", !1),
-              Ar = F("tag name"),
-              _r = F("class"),
-              Pr = F("id"),
-              _e = x("=", !1),
-              Fr = x("(", !1),
-              xr = x(")", !1),
-              Y = x(",", !1),
-              Or = F("variable"),
-              Tr = F("null"),
-              wr = F("boolean"),
-              Vr = x("[", !1),
-              Nr = x("]", !1),
-              Ir = x("{", !1),
-              Rr = x("}", !1),
-              Sr = x(":", !1),
-              Lr = F("number"),
-              jr = F("string"),
-              Br = F("identifier"),
-              Dr = F("whitespace"),
+              Ae = F("/", !1),
+              Ar = x("tag name"),
+              _r = x("class"),
+              Pr = x("id"),
+              _e = F("=", !1),
+              xr = F("(", !1),
+              Fr = F(")", !1),
+              Y = F(",", !1),
+              Or = x("variable"),
+              Tr = x("null"),
+              wr = x("boolean"),
+              Nr = F("[", !1),
+              Vr = F("]", !1),
+              Ir = F("{", !1),
+              Rr = F("}", !1),
+              Lr = F(":", !1),
+              Sr = x("number"),
+              jr = x("string"),
+              Br = x("identifier"),
+              Dr = x("whitespace"),
               Mr = function (e) {
                 return { type: "variable", meta: { variable: e } };
               },
@@ -361,9 +361,9 @@
                 let s = {};
                 for (let [o, { name: l, value: u }] of n.entries())
                   s[l || o] = u;
-                return new St(e, s);
+                return new Lt(e, s);
               },
-              Fe = function (e) {
+              xe = function (e) {
                 return e;
               },
               et = function (e, n) {
@@ -422,7 +422,7 @@
               g = 0,
               W = [{ line: 1, column: 1 }],
               j = [],
-              p = 0,
+              d = 0,
               Q;
             if ("startRule" in a) {
               if (!(a.startRule in f))
@@ -437,37 +437,37 @@
             function Pn() {
               return g;
             }
-            function Fn() {
+            function xn() {
               return [g, i];
             }
-            function xn() {
+            function Fn() {
               return q(g, i);
             }
             function On(e, n) {
               throw (
                 ((n = n !== void 0 ? n : q(g, i)),
-                Oe([F(e)], t.substring(g, i), n))
+                Oe([x(e)], t.substring(g, i), n))
               );
             }
             function Tn(e, n) {
               throw ((n = n !== void 0 ? n : q(g, i)), Ct(e, n));
             }
-            function x(e, n) {
+            function F(e, n) {
               return { type: "literal", text: e, ignoreCase: n };
             }
             function wn(e, n, s) {
               return { type: "class", parts: e, inverted: n, ignoreCase: s };
             }
-            function Vn() {
+            function Nn() {
               return { type: "any" };
             }
             function mt() {
               return { type: "end" };
             }
-            function F(e) {
+            function x(e) {
               return { type: "other", description: e };
             }
-            function xe(e) {
+            function Fe(e) {
               var n = W[e],
                 s;
               if (n) return n;
@@ -483,21 +483,21 @@
             function q(e, n) {
               var s = {};
               $t && (s.filename = a.filename);
-              var o = xe(e);
+              var o = Fe(e);
               s.start = { offset: e, line: o.line, column: o.column };
-              var l = xe(n);
+              var l = Fe(n);
               return (s.end = { offset: n, line: l.line, column: l.column }), s;
             }
             function yt() {
               j.push({ pos: i, variants: [] });
             }
-            function m(e) {
+            function $(e) {
               var n = j[j.length - 1];
               i < n.pos ||
                 (i > n.pos && ((n.pos = i), (n.variants = [])),
                 n.variants.push(e));
             }
-            function Nn(e) {
+            function Vn(e) {
               var n = j.pop(),
                 s = j[j.length - 1],
                 o = n.variants;
@@ -528,7 +528,7 @@
             function Te() {
               var e,
                 n = function (s) {
-                  p === 0 && m(s);
+                  d === 0 && $(s);
                 };
               return (
                 (e = Et()),
@@ -541,7 +541,7 @@
               var e,
                 n,
                 s = function (o) {
-                  p === 0 && m(o);
+                  d === 0 && $(o);
                 };
               return (
                 (e = i),
@@ -558,10 +558,10 @@
                 s,
                 o,
                 l = function (u) {
-                  p === 0 && m(u);
+                  d === 0 && $(u);
                 };
-              if (((e = i), (n = Ve()), n !== r)) {
-                for (s = [], o = v(); o !== r; ) s.push(o), (o = v());
+              if (((e = i), (n = Ne()), n !== r)) {
+                for (s = [], o = m(); o !== r; ) s.push(o), (o = m());
                 (g = e), (e = kr(n));
               } else (i = e), (e = r);
               return e;
@@ -575,30 +575,30 @@
                 u,
                 h,
                 P = function (O) {
-                  p === 0 && m(O);
+                  d === 0 && $(O);
                 };
               if (((e = i), (n = we()), n !== r)) {
-                for (s = [], o = v(); o !== r; ) s.push(o), (o = v());
+                for (s = [], o = m(); o !== r; ) s.push(o), (o = m());
                 for (
                   o = i,
                     l = k(),
                     l !== r
-                      ? ((u = v()),
+                      ? ((u = m()),
                         u === r && (u = null),
                         (g = o),
                         (o = Gr(n, l)))
                       : ((i = o), (o = r)),
                     o === r && (o = null),
-                    l = Ve(),
+                    l = Ne(),
                     l === r && (l = null),
                     u = [],
-                    h = v();
+                    h = m();
                   h !== r;
 
                 )
-                  u.push(h), (h = v());
+                  u.push(h), (h = m());
                 P(Ae),
-                  t.charCodeAt(i) === 47 ? ((h = d), i++) : (h = r),
+                  t.charCodeAt(i) === 47 ? ((h = p), i++) : (h = r),
                   h === r && (h = null),
                   (g = e),
                   (e = Hr(n, o, l, h));
@@ -610,12 +610,12 @@
                 n,
                 s,
                 o = function (l) {
-                  p === 0 && m(l);
+                  d === 0 && $(l);
                 };
               return (
                 (e = i),
                 o(Ae),
-                t.charCodeAt(i) === 47 ? ((n = d), i++) : (n = r),
+                t.charCodeAt(i) === 47 ? ((n = p), i++) : (n = r),
                 n !== r
                   ? ((s = we()),
                     s !== r ? ((g = e), (e = Xr(s))) : ((i = e), (e = r)))
@@ -626,33 +626,33 @@
             function we() {
               var e,
                 n = function (s) {
-                  p === 0 && m(s);
+                  d === 0 && $(s);
                 };
-              return n(Ar), p++, (e = N()), p--, e;
-            }
-            function Ve() {
-              var e,
-                n,
-                s,
-                o,
-                l = function (u) {
-                  p === 0 && m(u);
-                };
-              if (((e = i), (n = Ie()), n !== r)) {
-                for (s = [], o = Ne(); o !== r; ) s.push(o), (o = Ne());
-                (g = e), (e = qr(n, s));
-              } else (i = e), (e = r);
-              return e;
+              return n(Ar), d++, (e = V()), d--, e;
             }
             function Ne() {
               var e,
                 n,
                 s,
-                o = function (l) {
-                  p === 0 && m(l);
+                o,
+                l = function (u) {
+                  d === 0 && $(u);
                 };
-              if (((e = i), (n = []), (s = v()), s !== r))
-                for (; s !== r; ) n.push(s), (s = v());
+              if (((e = i), (n = Ie()), n !== r)) {
+                for (s = [], o = Ve(); o !== r; ) s.push(o), (o = Ve());
+                (g = e), (e = qr(n, s));
+              } else (i = e), (e = r);
+              return e;
+            }
+            function Ve() {
+              var e,
+                n,
+                s,
+                o = function (l) {
+                  d === 0 && $(l);
+                };
+              if (((e = i), (n = []), (s = m()), s !== r))
+                for (; s !== r; ) n.push(s), (s = m());
               else n = r;
               return (
                 n !== r
@@ -666,16 +666,16 @@
               var e,
                 n,
                 s = function (o) {
-                  p === 0 && m(o);
+                  d === 0 && $(o);
                 };
               return (
                 (e = i),
-                (n = xt()),
+                (n = Ft()),
                 n !== r && ((g = e), (n = Jr(n))),
                 (e = n),
                 e === r &&
                   ((e = i),
-                  (n = Ft()),
+                  (n = xt()),
                   n !== r && ((g = e), (n = Ur(n))),
                   (e = n),
                   e === r &&
@@ -686,43 +686,43 @@
                 e
               );
             }
-            function Ft() {
-              var e,
-                n,
-                s,
-                o = function (l) {
-                  p === 0 && m(l);
-                };
-              return (
-                o(_r),
-                p++,
-                (e = i),
-                t.charCodeAt(i) === 46 ? ((n = y), i++) : (n = r),
-                n !== r
-                  ? ((s = N()),
-                    s !== r ? ((g = e), (e = Zr(s))) : ((i = e), (e = r)))
-                  : ((i = e), (e = r)),
-                p--,
-                e
-              );
-            }
             function xt() {
               var e,
                 n,
                 s,
                 o = function (l) {
-                  p === 0 && m(l);
+                  d === 0 && $(l);
+                };
+              return (
+                o(_r),
+                d++,
+                (e = i),
+                t.charCodeAt(i) === 46 ? ((n = v), i++) : (n = r),
+                n !== r
+                  ? ((s = V()),
+                    s !== r ? ((g = e), (e = Zr(s))) : ((i = e), (e = r)))
+                  : ((i = e), (e = r)),
+                d--,
+                e
+              );
+            }
+            function Ft() {
+              var e,
+                n,
+                s,
+                o = function (l) {
+                  d === 0 && $(l);
                 };
               return (
                 o(Pr),
-                p++,
+                d++,
                 (e = i),
                 t.charCodeAt(i) === 35 ? ((n = _), i++) : (n = r),
                 n !== r
-                  ? ((s = N()),
+                  ? ((s = V()),
                     s !== r ? ((g = e), (e = Yr(s))) : ((i = e), (e = r)))
                   : ((i = e), (e = r)),
-                p--,
+                d--,
                 e
               );
             }
@@ -732,11 +732,11 @@
                 s,
                 o,
                 l = function (u) {
-                  p === 0 && m(u);
+                  d === 0 && $(u);
                 };
               return (
                 (e = i),
-                (n = N()),
+                (n = V()),
                 n !== r
                   ? (l(_e),
                     t.charCodeAt(i) === 61 ? ((s = E), i++) : (s = r),
@@ -759,47 +759,47 @@
                 u,
                 h,
                 P,
-                O = function (Lt) {
-                  p === 0 && m(Lt);
+                O = function (St) {
+                  d === 0 && $(St);
                 };
-              if (((e = i), (n = N()), n !== r))
+              if (((e = i), (n = V()), n !== r))
                 if (
-                  (O(Fr),
+                  (O(xr),
                   t.charCodeAt(i) === 40 ? ((s = w), i++) : (s = r),
                   s !== r)
                 ) {
-                  for (o = [], l = v(); l !== r; ) o.push(l), (l = v());
+                  for (o = [], l = m(); l !== r; ) o.push(l), (l = m());
                   for (
-                    l = i, u = Se(), u === r && (u = null), h = [], P = Le();
+                    l = i, u = Le(), u === r && (u = null), h = [], P = Se();
                     P !== r;
 
                   )
-                    h.push(P), (P = Le());
+                    h.push(P), (P = Se());
                   (g = l),
                     (l = Qr(n, u, h)),
-                    O(xr),
+                    O(Fr),
                     t.charCodeAt(i) === 41 ? ((u = C), i++) : (u = r),
                     u !== r ? ((g = e), (e = Kr(n, l))) : ((i = e), (e = r));
                 } else (i = e), (e = r);
               else (i = e), (e = r);
               return e;
             }
-            function Se() {
+            function Le() {
               var e,
                 n,
                 s,
                 o,
                 l = function (u) {
-                  p === 0 && m(u);
+                  d === 0 && $(u);
                 };
               return (
                 (e = i),
                 (n = i),
-                (s = N()),
+                (s = V()),
                 s !== r
                   ? (l(_e),
                     t.charCodeAt(i) === 61 ? ((o = E), i++) : (o = r),
-                    o !== r ? ((g = n), (n = Fe(s))) : ((i = n), (n = r)))
+                    o !== r ? ((g = n), (n = xe(s))) : ((i = n), (n = r)))
                   : ((i = n), (n = r)),
                 n === r && (n = null),
                 (s = k()),
@@ -807,23 +807,23 @@
                 e
               );
             }
-            function Le() {
+            function Se() {
               var e,
                 n,
                 s,
                 o,
                 l,
                 u = function (h) {
-                  p === 0 && m(h);
+                  d === 0 && $(h);
                 };
-              for (e = i, n = [], s = v(); s !== r; ) n.push(s), (s = v());
+              for (e = i, n = [], s = m(); s !== r; ) n.push(s), (s = m());
               if (
                 (u(Y),
-                t.charCodeAt(i) === 44 ? ((s = $), i++) : (s = r),
+                t.charCodeAt(i) === 44 ? ((s = y), i++) : (s = r),
                 s !== r)
               ) {
-                for (o = [], l = v(); l !== r; ) o.push(l), (l = v());
-                (l = Se()),
+                for (o = [], l = m(); l !== r; ) o.push(l), (l = m());
+                (l = Le()),
                   l !== r ? ((g = e), (e = ce(l))) : ((i = e), (e = r));
               } else (i = e), (e = r);
               return e;
@@ -833,12 +833,12 @@
                 n,
                 s,
                 o = function (l) {
-                  p === 0 && m(l);
+                  d === 0 && $(l);
                 };
-              for (e = i, n = [], s = v(); s !== r; ) n.push(s), (s = v());
+              for (e = i, n = [], s = m(); s !== r; ) n.push(s), (s = m());
               return (
                 o(Y),
-                t.charCodeAt(i) === 44 ? ((s = $), i++) : (s = r),
+                t.charCodeAt(i) === 44 ? ((s = y), i++) : (s = r),
                 s !== r ? ((n = [n, s]), (e = n)) : ((i = e), (e = r)),
                 e === r && (e = null),
                 e
@@ -851,21 +851,21 @@
                 o,
                 l,
                 u = function (h) {
-                  p === 0 && m(h);
+                  d === 0 && $(h);
                 };
               if (
                 (u(Or),
-                p++,
+                d++,
                 (e = i),
                 Cr.test(t.charAt(i)) ? ((n = t.charAt(i)), i++) : (n = r),
                 n !== r)
               )
-                if (((s = N()), s !== r)) {
+                if (((s = V()), s !== r)) {
                   for (o = [], l = De(); l !== r; ) o.push(l), (l = De());
                   (g = e), (e = rt(n, s, o));
                 } else (i = e), (e = r);
               else (i = e), (e = r);
-              return p--, e;
+              return d--, e;
             }
             function De() {
               var e,
@@ -873,14 +873,14 @@
                 s,
                 o,
                 l = function (u) {
-                  p === 0 && m(u);
+                  d === 0 && $(u);
                 };
               return (
                 (e = i),
-                t.charCodeAt(i) === 46 ? ((n = y), i++) : (n = r),
+                t.charCodeAt(i) === 46 ? ((n = v), i++) : (n = r),
                 n !== r
-                  ? ((s = N()),
-                    s !== r ? ((g = e), (e = Fe(s))) : ((i = e), (e = r)))
+                  ? ((s = V()),
+                    s !== r ? ((g = e), (e = xe(s))) : ((i = e), (e = r)))
                   : ((i = e), (e = r)),
                 e === r &&
                   ((e = i),
@@ -889,7 +889,7 @@
                     ? ((s = He()),
                       s === r && (s = pe()),
                       s !== r
-                        ? (t.charCodeAt(i) === 93 ? ((o = V), i++) : (o = r),
+                        ? (t.charCodeAt(i) === 93 ? ((o = N), i++) : (o = r),
                           o !== r ? ((g = e), (e = ce(s))) : ((i = e), (e = r)))
                         : ((i = e), (e = r)))
                     : ((i = e), (e = r))),
@@ -899,7 +899,7 @@
             function k() {
               var e,
                 n = function (s) {
-                  p === 0 && m(s);
+                  d === 0 && $(s);
                 };
               return (
                 (e = Tt()),
@@ -910,9 +910,9 @@
                     e === r &&
                       ((e = He()),
                       e === r &&
-                        ((e = Vt()),
+                        ((e = Nt()),
                         e === r &&
-                          ((e = Nt()),
+                          ((e = Vt()),
                           e === r && ((e = Re()), e === r && (e = Be()))))))),
                 e
               );
@@ -921,16 +921,16 @@
               var e,
                 n,
                 s = function (o) {
-                  p === 0 && m(o);
+                  d === 0 && $(o);
                 };
               return (
                 s(Tr),
-                p++,
+                d++,
                 (e = i),
                 t.substr(i, 4) === z ? ((n = z), (i += 4)) : (n = r),
                 n !== r && ((g = e), (n = tt())),
                 (e = n),
-                p--,
+                d--,
                 e
               );
             }
@@ -938,11 +938,11 @@
               var e,
                 n,
                 s = function (o) {
-                  p === 0 && m(o);
+                  d === 0 && $(o);
                 };
               return (
                 s(wr),
-                p++,
+                d++,
                 (e = i),
                 t.substr(i, 4) === ye ? ((n = ye), (i += 4)) : (n = r),
                 n !== r && ((g = e), (n = nt())),
@@ -952,11 +952,11 @@
                   t.substr(i, 5) === Ce ? ((n = Ce), (i += 5)) : (n = r),
                   n !== r && ((g = e), (n = it())),
                   (e = n)),
-                p--,
+                d--,
                 e
               );
             }
-            function Vt() {
+            function Nt() {
               var e,
                 n,
                 s,
@@ -965,23 +965,23 @@
                 u,
                 h,
                 P = function (O) {
-                  p === 0 && m(O);
+                  d === 0 && $(O);
                 };
               if (
                 ((e = i),
-                P(Vr),
+                P(Nr),
                 t.charCodeAt(i) === 91 ? ((n = A), i++) : (n = r),
                 n !== r)
               ) {
-                for (s = [], o = v(); o !== r; ) s.push(o), (o = v());
+                for (s = [], o = m(); o !== r; ) s.push(o), (o = m());
                 if (((o = i), (l = k()), l !== r)) {
                   for (u = [], h = Me(); h !== r; ) u.push(h), (h = Me());
                   (h = je()), (g = o), (o = st(l, u));
                 } else (i = o), (o = r);
-                for (o === r && (o = null), l = [], u = v(); u !== r; )
-                  l.push(u), (u = v());
-                P(Nr),
-                  t.charCodeAt(i) === 93 ? ((u = V), i++) : (u = r),
+                for (o === r && (o = null), l = [], u = m(); u !== r; )
+                  l.push(u), (u = m());
+                P(Vr),
+                  t.charCodeAt(i) === 93 ? ((u = N), i++) : (u = r),
                   u !== r ? ((g = e), (e = at(o))) : ((i = e), (e = r));
               } else (i = e), (e = r);
               return e;
@@ -993,21 +993,21 @@
                 o,
                 l,
                 u = function (h) {
-                  p === 0 && m(h);
+                  d === 0 && $(h);
                 };
-              for (e = i, n = [], s = v(); s !== r; ) n.push(s), (s = v());
+              for (e = i, n = [], s = m(); s !== r; ) n.push(s), (s = m());
               if (
                 (u(Y),
-                t.charCodeAt(i) === 44 ? ((s = $), i++) : (s = r),
+                t.charCodeAt(i) === 44 ? ((s = y), i++) : (s = r),
                 s !== r)
               ) {
-                for (o = [], l = v(); l !== r; ) o.push(l), (l = v());
+                for (o = [], l = m(); l !== r; ) o.push(l), (l = m());
                 (l = k()),
                   l !== r ? ((g = e), (e = ce(l))) : ((i = e), (e = r));
               } else (i = e), (e = r);
               return e;
             }
-            function Nt() {
+            function Vt() {
               var e,
                 n,
                 s,
@@ -1016,7 +1016,7 @@
                 u,
                 h,
                 P = function (O) {
-                  p === 0 && m(O);
+                  d === 0 && $(O);
                 };
               if (
                 ((e = i),
@@ -1024,13 +1024,13 @@
                 t.charCodeAt(i) === 123 ? ((n = dr), i++) : (n = r),
                 n !== r)
               ) {
-                for (s = [], o = v(); o !== r; ) s.push(o), (o = v());
+                for (s = [], o = m(); o !== r; ) s.push(o), (o = m());
                 if (((o = i), (l = Ge()), l !== r)) {
                   for (u = [], h = ke(); h !== r; ) u.push(h), (h = ke());
                   (h = je()), (g = o), (o = ot(l, u));
                 } else (i = o), (o = r);
-                for (o === r && (o = null), l = [], u = v(); u !== r; )
-                  l.push(u), (u = v());
+                for (o === r && (o = null), l = [], u = m(); u !== r; )
+                  l.push(u), (u = m());
                 P(Rr),
                   t.charCodeAt(i) === 125 ? ((u = gr), i++) : (u = r),
                   u !== r ? ((g = e), (e = ft(o))) : ((i = e), (e = r));
@@ -1044,15 +1044,15 @@
                 o,
                 l,
                 u = function (h) {
-                  p === 0 && m(h);
+                  d === 0 && $(h);
                 };
-              for (e = i, n = [], s = v(); s !== r; ) n.push(s), (s = v());
+              for (e = i, n = [], s = m(); s !== r; ) n.push(s), (s = m());
               if (
                 (u(Y),
-                t.charCodeAt(i) === 44 ? ((s = $), i++) : (s = r),
+                t.charCodeAt(i) === 44 ? ((s = y), i++) : (s = r),
                 s !== r)
               ) {
-                for (o = [], l = v(); l !== r; ) o.push(l), (l = v());
+                for (o = [], l = m(); l !== r; ) o.push(l), (l = m());
                 (l = Ge()),
                   l !== r ? ((g = e), (e = Pe(l))) : ((i = e), (e = r));
               } else (i = e), (e = r);
@@ -1065,15 +1065,15 @@
                 o,
                 l,
                 u = function (h) {
-                  p === 0 && m(h);
+                  d === 0 && $(h);
                 };
-              if (((e = i), (n = N()), n === r && (n = pe()), n !== r))
+              if (((e = i), (n = V()), n === r && (n = pe()), n !== r))
                 if (
-                  (u(Sr),
+                  (u(Lr),
                   t.charCodeAt(i) === 58 ? ((s = hr), i++) : (s = r),
                   s !== r)
                 ) {
-                  for (o = [], l = v(); l !== r; ) o.push(l), (l = v());
+                  for (o = [], l = m(); l !== r; ) o.push(l), (l = m());
                   (l = k()),
                     l !== r ? ((g = e), (e = lt(n, l))) : ((i = e), (e = r));
                 } else (i = e), (e = r);
@@ -1089,11 +1089,11 @@
                 u,
                 h,
                 P = function (O) {
-                  p === 0 && m(O);
+                  d === 0 && $(O);
                 };
               if (
-                (P(Lr),
-                p++,
+                (P(Sr),
+                d++,
                 (e = i),
                 t.charCodeAt(i) === 45 ? ((n = vr), i++) : (n = r),
                 n === r && (n = null),
@@ -1108,7 +1108,7 @@
               if (s !== r) {
                 if (
                   ((o = i),
-                  t.charCodeAt(i) === 46 ? ((l = y), i++) : (l = r),
+                  t.charCodeAt(i) === 46 ? ((l = v), i++) : (l = r),
                   l !== r)
                 ) {
                   if (
@@ -1126,7 +1126,7 @@
                 } else (i = o), (o = r);
                 o === r && (o = null), (g = e), (e = ut());
               } else (i = e), (e = r);
-              return p--, e;
+              return d--, e;
             }
             function pe() {
               var e,
@@ -1134,11 +1134,11 @@
                 s,
                 o,
                 l = function (u) {
-                  p === 0 && m(u);
+                  d === 0 && $(u);
                 };
               if (
                 (l(jr),
-                p++,
+                d++,
                 (e = i),
                 t.charCodeAt(i) === 34 ? ((n = ue), i++) : (n = r),
                 n !== r)
@@ -1147,12 +1147,12 @@
                 t.charCodeAt(i) === 34 ? ((o = ue), i++) : (o = r),
                   o !== r ? ((g = e), (e = ct(s))) : ((i = e), (e = r));
               } else (i = e), (e = r);
-              return p--, e;
+              return d--, e;
             }
             function Xe() {
               var e,
                 n = function (s) {
-                  p === 0 && m(s);
+                  d === 0 && $(s);
                 };
               return (
                 br.test(t.charAt(i)) ? ((e = t.charAt(i)), i++) : (e = r),
@@ -1166,7 +1166,7 @@
                 s,
                 o,
                 l = function (u) {
-                  p === 0 && m(u);
+                  d === 0 && $(u);
                 };
               return (
                 (e = i),
@@ -1195,16 +1195,16 @@
                 e
               );
             }
-            function N() {
+            function V() {
               var e,
                 n,
                 s,
                 o = function (l) {
-                  p === 0 && m(l);
+                  d === 0 && $(l);
                 };
               if (
                 (o(Br),
-                p++,
+                d++,
                 (e = i),
                 (n = []),
                 Ee.test(t.charAt(i)) ? ((s = t.charAt(i)), i++) : (s = r),
@@ -1214,24 +1214,24 @@
                   n.push(s),
                     Ee.test(t.charAt(i)) ? ((s = t.charAt(i)), i++) : (s = r);
               else n = r;
-              return n !== r ? (e = t.substring(e, i)) : (e = n), p--, e;
+              return n !== r ? (e = t.substring(e, i)) : (e = n), d--, e;
             }
-            function v() {
+            function m() {
               var e,
                 n = function (s) {
-                  p === 0 && m(s);
+                  d === 0 && $(s);
                 };
               return (
                 n(Dr),
-                p++,
+                d++,
                 Er.test(t.charAt(i)) ? ((e = t.charAt(i)), i++) : (e = r),
-                p--,
+                d--,
                 e
               );
             }
-            let { Variable: Rt, Function: St } = a;
+            let { Variable: Rt, Function: Lt } = a;
             if ((yt(), (Q = c()), Q !== r && i === t.length)) return Q;
-            throw (Q !== r && i < t.length && m(mt()), bt());
+            throw (Q !== r && i < t.length && $(mt()), bt());
           }
           We.exports = { SyntaxError: D, parse: Ut };
         });
@@ -1334,11 +1334,11 @@
             if (!(f instanceof se.SyntaxError)) throw f;
             let {
                 message: c,
-                location: { start: d, end: y },
+                location: { start: p, end: v },
               } = f,
               _ = {
-                start: { line: a, character: d.offset + r },
-                end: { line: a + 1, character: y.offset + r },
+                start: { line: a, character: p.offset + r },
+                end: { line: a + 1, character: v.offset + r },
               };
             return {
               type: "error",
@@ -1350,48 +1350,48 @@
           let r = a + 1,
             f = [],
             c = 0;
-          for (let d = 0; d < t.length; d++) {
+          for (let p = 0; p < t.length; p++) {
             if (
-              t[d] ===
+              t[p] ===
               `
 `
             ) {
               r++;
               continue;
             }
-            if (!t.startsWith(ne, d)) continue;
-            let y = nr(t, d);
-            if (y == null) {
-              d = d + ne.length;
+            if (!t.startsWith(ne, p)) continue;
+            let v = nr(t, p);
+            if (v == null) {
+              p = p + ne.length;
               continue;
             }
-            let _ = t.slice(d, y + ie.length),
-              E = t.slice(d + ne.length, y),
+            let _ = t.slice(p, v + ie.length),
+              E = t.slice(p + ne.length, v),
               w = t.lastIndexOf(
                 `
 `,
-                d
+                p
               ),
               C = t.indexOf(
                 `
 `,
-                y
+                v
               ),
-              $ = t.slice(w, C),
-              A = Yt(E.trim(), r, d - w),
-              V = $.trim() === _ ? w : d,
-              z = t.slice(c, V);
-            f.push({ type: "text", start: c, end: d - 1, content: z }),
+              y = t.slice(w, C),
+              A = Yt(E.trim(), r, p - w),
+              N = y.trim() === _ ? w : p,
+              z = t.slice(c, N);
+            f.push({ type: "text", start: c, end: p - 1, content: z }),
               f.push({
                 map: [r, r + 1],
-                position: { start: d - w, end: d - w + _.length },
-                start: d,
-                end: d + _.length - 1,
+                position: { start: p - w, end: p - w + _.length },
+                start: p,
+                end: p + _.length - 1,
                 info: _,
                 ...A,
               }),
-              (c = y + ie.length),
-              (d = c - 1);
+              (c = v + ie.length),
+              (p = c - 1);
           }
           return (
             f.push({
@@ -1619,10 +1619,10 @@
             );
           }
           function ae(t, a) {
-            for (let [c, d] of Object.entries(t.parameters))
-              d.$$mdtype === "Variable"
-                ? (t.parameters[c] = oe(d, a))
-                : d.$$mdtype === "Function" && (t.parameters[c] = ae(d, a));
+            for (let [c, p] of Object.entries(t.parameters))
+              p.$$mdtype === "Variable"
+                ? (t.parameters[c] = oe(p, a))
+                : p.$$mdtype === "Function" && (t.parameters[c] = ae(p, a));
             let r = dn.default[t.name];
             if (!r) throw new Error(`Unknown function: ${t.name}`);
             if (!r.transform)
@@ -1729,10 +1729,10 @@
           };
           b.expandClientFunction = $n;
         });
-        var pr = B((L) => {
+        var pr = B((S) => {
           "use strict";
           var cr =
-              (L && L.__classPrivateFieldGet) ||
+              (S && S.__classPrivateFieldGet) ||
               function (t, a, r, f) {
                 if (r === "a" && !f)
                   throw new TypeError(
@@ -1751,7 +1751,7 @@
                   : a.get(t);
               },
             yn =
-              (L && L.__classPrivateFieldSet) ||
+              (S && S.__classPrivateFieldSet) ||
               function (t, a, r, f, c) {
                 if (f === "m")
                   throw new TypeError("Private method is not writable");
@@ -1767,10 +1767,10 @@
                   f === "a" ? c.call(t, r) : c ? (c.value = r) : a.set(t, r), r
                 );
               },
-            S,
+            L,
             fe;
-          Object.defineProperty(L, "__esModule", { value: !0 });
-          L.ClientRenderer = void 0;
+          Object.defineProperty(S, "__esModule", { value: !0 });
+          S.ClientRenderer = void 0;
           var Cn = Je(),
             bn = Ye(),
             En = lr(),
@@ -1781,48 +1781,71 @@
               }
               static get instance() {
                 return (
-                  cr(S, S, "f", fe) || yn(S, S, new S(), "f", fe),
-                  cr(S, S, "f", fe)
+                  cr(L, L, "f", fe) || yn(L, L, new L(), "f", fe),
+                  cr(L, L, "f", fe)
                 );
               }
               handlePrefSelectionChange(a) {
                 let r = a.target;
-                if (!(r instanceof Element)) {
-                  console.log("From handleValueChange: Node is not an Element");
-                  return;
-                }
+                if (!(r instanceof Element)) return;
                 let f = r.getAttribute("data-pref-id");
-                if (!f) {
-                  console.log("From handleValueChange: No prefId found");
-                  return;
-                }
+                if (!f) return;
                 let c = r.getAttribute("data-option-id");
-                if (!c) {
-                  console.log("From handleValueChange: No optionId found");
-                  return;
-                }
-                (this.selectedValsByPrefId[f] = c),
+                c &&
+                  ((this.selectedValsByPrefId[f] = c),
                   this.rerenderChooser(),
-                  this.rerenderPageContent();
+                  this.rerenderPageContent(),
+                  this.populateRightNav());
+              }
+              elementIsHidden(a) {
+                let r = a;
+                for (; r; ) {
+                  if (r.classList.contains("markdoc__hidden")) return !0;
+                  r = r.parentElement;
+                }
+              }
+              populateRightNav() {
+                let a = "<ul>",
+                  r = Array.from(
+                    document.querySelectorAll(
+                      "#mainContent h2, #mainContent h3, #mainContent h4, #mainContent h5, #mainContent h6"
+                    )
+                  ),
+                  f = 2;
+                r.forEach((p) => {
+                  if (this.elementIsHidden(p)) return;
+                  let v = parseInt(p.tagName[1]);
+                  v > f ? (a += "<ul>") : v < f && (a += "</ul>"),
+                    (f = v),
+                    console.log(p),
+                    (a += `<li><a href="#${p.id}">${p.textContent}</a></li>`);
+                }),
+                  (a += "</ul>");
+                let c = document.getElementById("TableOfContents");
+                if (!c)
+                  throw new Error(
+                    'Cannot find right nav element with id "TableOfContents"'
+                  );
+                c.innerHTML = a;
               }
               rerenderPageContent() {
                 let a = {};
                 Object.keys(this.ifFunctionsByRef).forEach((f) => {
                   let c = this.ifFunctionsByRef[f],
-                    d = c.value,
-                    y = (0, En.reresolveFunctionNode)(c, {
+                    p = c.value,
+                    v = (0, En.reresolveFunctionNode)(c, {
                       variables: this.selectedValsByPrefId,
                     });
-                  (this.ifFunctionsByRef[f] = y),
-                    d !== y.value && (a[f] = y.value);
+                  (this.ifFunctionsByRef[f] = v),
+                    p !== v.value && (a[f] = v.value);
                 });
                 let r = document.getElementsByClassName("markdoc__toggleable");
                 for (let f = 0; f < r.length; f++) {
                   let c = r[f],
-                    d = c.getAttribute("data-if");
-                  if (!d) throw new Error("No ref found on toggleable element");
-                  a[d] !== void 0 &&
-                    (a[d]
+                    p = c.getAttribute("data-if");
+                  if (!p) throw new Error("No ref found on toggleable element");
+                  a[p] !== void 0 &&
+                    (a[p]
                       ? c.classList.remove("markdoc__hidden")
                       : c.classList.add("markdoc__hidden"));
                 }
@@ -1851,7 +1874,10 @@
                   throw new Error(
                     'Cannot find chooser element with id "markdoc-chooser"'
                   );
-                this.addChooserEventListeners();
+                this.addChooserEventListeners(),
+                  document.addEventListener("DOMContentLoaded", () => {
+                    this.populateRightNav();
+                  });
               }
               rerenderChooser() {
                 if (
@@ -1876,8 +1902,8 @@
                   this.addChooserEventListeners();
               }
             };
-          L.ClientRenderer = le;
-          S = le;
+          S.ClientRenderer = le;
+          L = le;
           fe = { value: void 0 };
         });
         var _n = pr().ClientRenderer;
@@ -1912,6 +1938,18 @@
       .markdoc-pref__container {
         display: inline-block;
         margin-right: 25px;
+      }
+      .alert.alert-info p {
+        color: rgb(31, 92, 122);
+        font-size: 16px;
+        font-family: nationalweb, Helvetica, Arial, sans-serif;
+        margin-bottom: 0;
+      }
+      .alert.alert-warning p {
+        color: #60451f;
+        font-size: 16px;
+        font-family: nationalweb, Helvetica, Arial, sans-serif;
+        margin-bottom: 0;
       }
 
       .markdoc__hidden {
