@@ -5,7 +5,7 @@ description: Comprende los tiempos de los tests de API y soluciona sus variacion
 further_reading:
 - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
   tag: Documentación
-  text: Métricas de tests de API Synthetic
+  text: Métricas de tests de API de Synthetics
 title: Comprender los tiempos de los tests de API y solucionar las variaciones
 ---
 
