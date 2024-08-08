@@ -171,7 +171,7 @@ See the [Threat Intelligence][10] documentation for more information on threat i
 When a suspicious activity is detected from your logs, determine whether the suspicious actor has interacted with your systems by searching for its network IP. Use the following query to search by IP attributes in the Log Explorer: `@network.ip.list:<IP address>`. The query searches IPs anywhere within the logs, including the tags, attributes, error, and message fields.
 
 You can also launch this query directly from the signal panel:
-1. Click on the IP address in the **Context** section.
+1. Click on the IP address in the **IPS** section.
 2. Select **View Logs with @network.client.ip:<ip_address>**.
 
 {{< img src="security/security_monitoring/investigate_security_signals/threat_intel_view_logs.png" alt="The signal panel showing the threat options for the selected IP address" style="width:70%;" >}}
