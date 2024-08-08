@@ -1055,6 +1055,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyUpdateRequest:
       description: Request used to update an application key.
       properties:
@@ -8510,12 +8512,15 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -16706,6 +16711,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermission:
       description: Relationship between a user team permission and a team
       properties:
@@ -23614,6 +23621,8 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-merge-override:
+        required: false
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -23633,6 +23642,10 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        mfa_enabled:
+          description: If user has MFA enabled.
+          readOnly: true
+          type: boolean
         modified_at:
           description: Time that the user was last modified.
           format: date-time
@@ -23835,6 +23848,8 @@ components:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+      x-merge-override:
+        properties: false
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -27664,6 +27679,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
