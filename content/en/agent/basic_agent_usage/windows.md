@@ -34,6 +34,7 @@ This page outlines the basic features of the Datadog Agent for Windows. If you h
 ## Install the Agent
 
 ### Requirements
+
 - **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][2].
 - **Datadog account**: Ensure you have access to a Datadog account and have your Datadog API key.
 - **Administrator privileges**: Administrator access is required on the Windows machine.
@@ -44,6 +45,7 @@ This page outlines the basic features of the Datadog Agent for Windows. If you h
 The core and APM/trace components of the Windows Agent run under the `ddagentuser` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 ### Install with the GUI
+
 1. Download the [Datadog Agent installer][4] to install the latest version of the Agent.
 2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5].
@@ -51,6 +53,7 @@ The core and APM/trace components of the Windows Agent run under the `ddagentuse
 When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 ### Install with the command line
+
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
     ```powershell
@@ -75,6 +78,7 @@ Using gMSA can enhance security and simplify management. Some of the benefits in
 When running with a gMSA, the core and APM/trace components of the Windows Agent run under the configured account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 ### Prerequisites
+
 - An Active Directory environment
 - Permission to create and manage gMSAs
 - See further [requirements in the Microsoft documentation][4].
@@ -82,6 +86,7 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
 **Note**: For a comprehensive understanding of setting up gMSAs, see [Microsoft's Group Managed Service Accounts Overview][5].
 
 ### Create and configure a gMSA
+
 1. Create a Security Group:
    1. Open **Active Directory Users and Computers (ADUC)**.
    2. Navigate to the appropriate **Organizational Unit (OU)**.
@@ -90,13 +95,14 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
    5. Set the correct group scope for your organization. For example, **Domain local**.
    6. Set the type to **Security**.
 
-2. Create the gMSA:
 
+2. Create the gMSA:
    1. Open PowerShell with **Administrator** privileges.
    2. Run the following command to create the gMSA, replacing `<YOUR_DOMAIN_NAME>` with your domain name:
         ```powershell
         New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
         ```
+
 
 3. Verify that the gMSA can be used on the target machine:
 
@@ -112,6 +118,7 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
 #### Install via the GUI
+
 1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
@@ -119,6 +126,7 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
 When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Install with the command line
+
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
 
@@ -180,6 +188,7 @@ Each of the following configuration options can be added as a property to the co
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
 | [DEPRECATED] `ADDLOCAL` | String | Enable additional Agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
 
+**Note:**
 Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][13] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade normally.
 
 If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][14] and then upgrade to Datadog Agent version >= 6.
