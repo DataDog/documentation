@@ -1,7 +1,7 @@
 ---
 integration_title: Hdfs
 is_public: true
-kind: 통합
+custom_kind: integration
 short_description: 클러스터 디스크 사용, 볼륨 실패, 데드 DataNodes 추적 more.
 ---
 

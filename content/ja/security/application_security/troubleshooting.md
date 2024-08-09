@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/security_platform/application_security/troubleshooting
+- /security_platform/application_security/troubleshooting
 further_reading:
 - link: /security/application_security/
   tag: ドキュメント
@@ -14,7 +14,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog における Application Security Management の仕組み
-kind: documentation
 title: Application Security Management のトラブルシューティング
 ---
 
@@ -27,9 +26,9 @@ Datadog Application Security Management (ASM) で予期せぬ動作が発生し�
 
 ASM のトレースは、1 秒間に 100 個のトレースにレート制限されています。制限後に送信されたトレースは報告されません。制限を変更する必要がある場合は、[Datadog サポート][1]に連絡してください。
 
-## ASM で不審なリクエストが検出されない
+## ASM でセキュリティトレースが検出されない
 
-ASM の[トレースとシグナルエクスプローラー][2]に脅威情報が表示されるには、一連の手順を正常に実行することが必要です。この問題を調査する際には、各ステップを確認することが重要です。特定の言語に関する追加のトラブルシューティング手順は、末尾の言語タブに記載されています。
+ASM の[トレースとシグナルエクスプローラー][2]に脅威情報が表示されるには、一連の手順が正常に実行される必要があります。この問題を調査する際には、各ステップを確認することが重要です。特定の言語に関する追加のトラブルシューティング手順は、末尾の言語タブに記載されています。
 
 ### ASM が有効であることを確認する
 
@@ -150,7 +149,7 @@ done
 
 アプリケーションを有効にして実行し、成功すると、数分後に[トレースとシグナルエクスプローラー][2]に脅威情報が表示されます。
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
+{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
 
 ### 必要なトレーサーのインテグレーションが無効になっていないか確認する
 
@@ -196,7 +195,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-以下の [Go][1] フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメンテーションを行う必要があります。
+以下の [Go][1] フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメントする必要があります。
 
 - [gRPC][2]
 - [net/http][3]
@@ -204,7 +203,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - [Echo][5]
 - [Chi][6]
 
-お使いのフレームワークがサポートされていない場合は、Go リポジトリで[新しい課題を作成][7]してください。
+お使いのフレームワークがサポートされていない場合は、Go リポジトリで [新しい問題を作成][7] してください。
 
 [1]: /ja/security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
@@ -216,7 +215,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-[Node.js][1] の場合、HTTP インテグレーションが必要です。
+[Node.js][1] の場合、HTTP とのインテグレーションが必要です。
 <p></p>
 
 [1]: /ja/security/application_security/enabling/compatibility/nodejs
@@ -253,7 +252,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 ### スパンが Datadog に正常に送信されたかどうかを確認する
 
-ASM のデータは、[スパン][9]を介して送信されます。スパンが Datadog に正常に送信されていることを確認するために、トレーサーログにこのようなログが含まれていることを確認します。
+ASM のデータは、[スパン][9]を介して送信されます。スパンが Datadog に正常に送信されていることを確認するために、トレーサーログに次のようなログが含まれていることを確認します。
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -315,7 +314,7 @@ datadog.appsec.log_file='tmp/extension.log'
 ```
 
 ### インストールで PHP が見つからない
-インストールスクリプトが正しい PHP のバージョンを見つけられない場合、 `--php-bin` を PHP のバイナリの場所に設定することができます。例:
+インストールスクリプトが正しい PHP のバージョンを見つけられない場合、 `--php-bin` オプションを使用して PHP のバイナリの場所を設定することができます。例:
 
 ```
 $ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
@@ -367,7 +366,6 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 環境変数 `DD_TRACE_DEBUG=1` でデバッグログを有効化します。ASM ライブラリは、標準エラー出力にログを記録します。
 
 **注:** ASM は、有効になっているときのみログを出力します。ASM を有効にするには、環境変数 `DD_APPSEC_ENABLED=1` を使用します。
-
 
 [1]: /ja/tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
@@ -532,7 +530,7 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Agent がトレースを転送するまで 1 分ほど待ち、APM ダッシュボードにトレースが表示されることを確認します。トレース内のセキュリティ情報は、Datadog で処理されるまでにさらに時間がかかり、ASM の[トレースとシグナルエクスプローラー][1]に疑わしいリクエストとして表示される場合があります。
+Agent がトレースを転送するのを 1 分ほど待ってから、APM ダッシュボードでトレースが表示されていることを確認してください。トレース内のセキュリティ情報は、Datadog で処理されるまでにさらに時間がかかり、ASM の[トレースとシグナルエクスプローラー][1]にセキュリティトレースとして表示される場合があります。
 
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /ja/tracing/troubleshooting/#tracer-debug-logs
@@ -540,9 +538,9 @@ Agent がトレースを転送するまで 1 分ほど待ち、APM ダッシュ�
 {{< /programming-lang-wrapper >}}
 
 
-## Application Vulnerability Management で脆弱性が検出されない
+## Software Composition Analysis で脆弱性が検出されない
 
-脆弱性情報が Service Catalog Security View または Application Vulnerability Management Explorer に表示されるには、一連のステップを正常に実行する必要があります。この問題を調査する際には、各ステップを確認することが重要です。
+脆弱性情報が [Service Catalog Security View][16] または [Vulnerability Explorer][12] に表示されるには、一連のステップを正常に実行する必要があります。この問題を調査する際には、各ステップを確認することが重要です。
 
 ### ASM が有効であることを確認する
 
@@ -563,6 +561,55 @@ ASM のデータは、APM トレースと一緒に送信されます。[APM の�
 ### テレメトリーデータの通信を確保する
 
 環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (NodeJS の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
+
+## 脅威管理と保護を無効にする
+
+脅威管理を無効にするには、アプリケーション構成から `DD_APPSEC_ENABLED=true` 環境変数を削除して、サービスを再起動します。
+
+サービスで `DD_APPSEC_ENABLED=true` 環境変数が設定されていない場合は、以下のいずれかを行います。
+* PHP サービスの場合は、環境変数を明示的に `DD_APPSEC_ENABLED=false` に設定し、サービス を再起動します。
+* 脅威管理が[リモート構成][16]を使用して有効化された場合は、以下を実行します。 
+  1. [Services][15] に移動します (**ASM** > **Catalog** > **Services**)。
+  2. **Threat Management in Monitoring Mode** を選択します。
+  3. **Threat Management** ファセットで、**Monitoring Only**、**No data**、**Ready to block** を有効にします。
+  4. サービスをクリックします。
+  5. サービスの詳細で、**Threat Detection** の **Deactivate** をクリックします。
+
+<div class="alert alert-info">脅威管理が<a href="https://app.datadoghq.com/organization-settings/remote-config">リモート構成</a>を使用して有効化された場合は、<strong>Deactivate</strong> ボタンを使用できます。脅威管理がローカル構成を使用して有効化された場合は、<strong>Deactivate</strong> ボタンは使用できません。</div>
+
+* 複数のサービスで脅威管理を一括で無効にするには、以下を実行します。
+  1. [Services][15] に移動します。
+  2. **Threat Management** ファセットで、**Monitoring Only**、**No data**、**Ready to block** を有効にします。
+  3. 脅威の検出を無効にしたいサービスのチェック ボックスを選択します。
+  4. **Bulk Actions** で **Deactivate Threat detection on (number of) services** を選択します。
+
+## Software Composition Analysis を無効にする
+
+[Software Composition Analysis][14] を無効にするには:
+
+* [Services][15] に移動して **Software Composition Analysis (SCA)** を選択し、サービスをクリックして **Deactivate** をクリックします。
+* 複数のサービスで Software Composition Analysis を一括で無効にするには、リストヘッダーのチェックボックスをクリックし、**Bulk Actions** で **Deactivate Software Composition Analysis (SCA) on (number of) services** を選択します。
+* 環境変数 `DD_APPSEC_SCA_ENABLED` を使用して Software Composition Analysis を無効にするには、アプリケーションの構成から環境変数 `DD_APPSEC_SCA_ENABLED=true` を削除し、サービスを再起動します。これは PHP アプリには適用されません。
+
+## コードセキュリティの無効化
+
+[Code Security][13] の脆弱性検出を無効にするには、アプリケーション構成から `DD_IAST_ENABLED=true` 環境変数を削除して、サービスを再起動します。これは PHP アプリには適用されません。
+
+サービスで `DD_IAST_ENABLED=true` 環境変数が設定されていない場合は、以下を行います。
+  1. [Services][15] に移動します。
+  2. **Code Security** を選択します。
+  3. サービスをクリックします。
+  4. サービスの詳細で、**Vulnerability Detection** の **Deactivate** をクリックします。
+
+## IAST/カスタムコードの脆弱性が一部またはすべて検出されない
+
+### IAST が有効であることを確認する
+
+`DD_IAST_ENABLED` 環境変数が `true` に設定されているか、使用言語に対応するシステムプロパティが有効になっていることを確認します。
+
+### Python+Flask の場合は、エントリーポイントパッチ関数を呼び出します。
+
+Flask アプリケーションを実行している場合は、`ddtrace_iast_flask_patch()` 関数をモジュールのトップレベルで、`app.run()` を呼び出す前に呼び出していることを確認してください。詳細は [Flask インテグレーションのドキュメント][17]を参照してください。
 
 ## さらにサポートが必要ですか？
 
@@ -586,3 +633,9 @@ ASM で問題が解決しない場合は、以下の情報を添えて [Datadog 
 [9]: /ja/tracing/glossary/#spans
 [10]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [11]: /ja/security/application_security/enabling/
+[12]: https://app.datadoghq.com/security/appsec/vm
+[13]: /ja/security/application_security/code_security/
+[14]: /ja/security/application_security/software_composition_analysis
+[15]: https://app.datadoghq.com/security/configuration/asm/services-config
+[16]: https://app.datadoghq.com/organization-settings/remote-config
+[17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

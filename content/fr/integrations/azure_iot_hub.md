@@ -1,8 +1,9 @@
 ---
 categories:
-- cloud
 - azure
-ddtype: crawler
+- cloud
+- iot
+- provisioning
 dependencies: []
 description: Surveillez des métriques clés d'Azure IoT Hub.
 doc_link: https://docs.datadoghq.com/integrations/azure_iot_hub/
@@ -13,7 +14,7 @@ integration_id: azure-iot-hub
 integration_title: Microsoft Azure IoT Hub
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_iot_hub
 public_title: Intégration Datadog/Microsoft Azure IoT Hub
@@ -21,6 +22,7 @@ short_description: Surveillez des métriques clés d'Azure IoT Hub.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure IoT Hub est un service entièrement géré qui permet d'établir des communications fiables, sécurisées et bidirectionnelles entre des millions d'appareils IoT.
@@ -32,27 +34,27 @@ Recueillez des métriques d'Azure IoT Hub pour :
 
 Azure Provisioning Service est un service d'assistance pour IoT Hub qui permet un approvisionnement juste à temps et sans intervention sur le bon hub IoT. Aucune intervention humaine n'est requise, ce qui permet aux clients d'approvisionner des millions de périphériques de manière sécurisée et évolutive.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_iot_hub" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure IoT Hub n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure IoT Hub n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

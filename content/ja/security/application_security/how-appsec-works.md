@@ -1,8 +1,8 @@
 ---
 aliases:
-- /ja/security_platform/guide/how-appsec-works/
-- /ja/security_platform/application_security/how-appsec-works/
-- /ja/security/guide/how-appsec-works/
+- /security_platform/guide/how-appsec-works/
+- /security_platform/application_security/how-appsec-works/
+- /security/guide/how-appsec-works/
 further_reading:
 - link: /security/application_security/enabling/compatibility
   tag: ドキュメント
@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: ドキュメント
   text: Application Security Management を有効にする
-kind: documentation
 title: Datadog における Application Security Management の仕組み
 ---
 
@@ -27,7 +26,7 @@ Datadog Application Security Management (ASM) は、アプリケーションの�
 
 さらに、ASM は、アプリケーションが実行時に使用する脆弱なライブラリや依存関係などを通じて、アプリケーションに組み込まれたリスクを検出します。
 
-Datadog APM は、トレースと呼ばれる各アプリケーションリクエストに関する情報を記録します。Datadog ASM は、APM と同じトレーシングライブラリを使用してトラフィックを監視します。ASM は、既知の攻撃パターンに一致するセキュリティトレースに基づいて攻撃の試みにフラグを立てるか、または[ビジネスロジック情報をタグ付け][25]します。Datadog がサービスに影響を与えるアプリケーション攻撃やビジネスロジックの不正使用を検出すると、セキュリティシグナルが自動的に作成されます。このシグナルは、個々の攻撃の試みを評価する代わりに、レビューのために重要な脅威を特定します。セキュリティシグナルの設定に応じて、Slack、メール、または PagerDuty から通知を受け取ることができます。
+Datadog APM は、トレースと呼ばれる各アプリケーションリクエストに関する情報を記録します。Datadog ASM は、APM と同じトレーシングライブラリを使用してトラフィックを監視します。ASM は、既知の攻撃パターンに一致するセキュリティトレースに基づいて攻撃の試みにフラグを立てるか、または[ビジネスロジック情報にタグを付けます][25]。Datadog がサービスに影響を与えるアプリケーション攻撃やビジネスロジックの不正使用を検出すると、セキュリティシグナルが自動的に作成されます。このシグナルは、個々の攻撃の試みを評価するのではなく、レビューのために重要な脅威を特定します。セキュリティシグナルの設定に応じて、Slack、メール、または PagerDuty から通知を受け取ることができます。
 
 従来の Web アプリケーションファイアウォール (WAF) は、通常、境界にデプロイされ、アプリケーションの動作に関するコンテキストを持ちません。ASM はアプリケーションに組み込まれているため、トレースデータにアクセスすることができ、脅威をピンポイントで分類するのに有効です。Datadog ASM は、Web アプリケーションファイアウォール (WAF) と同様に既知の攻撃パターンを活用しますが、アプリケーションのコンテキストを追加することで信号対雑音比を高め、誤検出を低減します。
 
@@ -37,7 +36,7 @@ Datadog ASM [Threat Management][1] は、APM が既に収集している情報�
 
 APM はアプリケーションのトラフィックのサンプルを収集するため、サービスを効果的に監視し保護するためには、トレーシングライブラリで ASM を有効にすることが必要です。
 
-Datadog Threat Monitoring and Detection は、すべてのリクエストでクライアントの IP アドレスと手動で追加したユーザータグを収集することで、悪質な行為者を特定します。
+Datadog Threat Monitoring and Detection は、すべてのリクエストに対してクライアントの IP アドレスと手動で追加されたユーザータグを収集することで、悪質な行為者を特定します。
 
 <div class="alert alert-info"><strong>1 クリック有効化</strong><br>サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
 
@@ -55,7 +54,7 @@ Datadog の AWS Lambda 向け ASM は、関数を標的としている攻撃者�
 
 セットアップに関する情報については、[サーバーレスのための ASM の有効化][8]をお読みください。
 
-## コミュニティオフィスアワー
+## パフォーマンス
 
 Datadog ASM は、Agent と APM にすでに含まれているプロセスを使用するため、使用する際のパフォーマンスへの影響はほとんどありません。APM が有効な場合、Datadog ライブラリは分散型トレースを生成します。Datadog ASM は、既知の攻撃パターンを使用して、トレース内のセキュリティアクティビティにフラグを立てます。攻撃パターンと分散型トレースで提供される実行コンテキストを相関させることで、検出ルールに基づいてセキュリティシグナルをトリガーします。
 
@@ -69,7 +68,7 @@ Datadog ASM は、Agent と APM にすでに含まれているプロセスを使
 
 ## データプライバシー
 
-デフォルトでは、ASM はセキュリティトレースから情報を収集して、なぜそのリクエストが疑わしいとマークされたのかを理解するのに役立ちます。データを送信する前に、ASM はデータが機密であることを示すパターンとキーワードをスキャンします。データが機密であると判断された場合、それは `<redacted>` フラグに置き換えられます。これは、リクエストは疑わしいが、データセキュリティの懸念からリクエストデータを収集できなかったことを示します。
+デフォルトでは、ASM はセキュリティトレースから情報を収集し、そのリクエストが疑わしいと判定された理由を理解するのに役立ちます。データを送信する前に、ASM はデータが機密であることを示すパターンとキーワードをスキャンします。データが機密であると判断された場合、それは `<redacted>` フラグに置き換えられます。これは、リクエストは疑わしいが、データセキュリティの懸念からリクエストデータを収集できなかったことを示します。
 
 ここでは、デフォルトで機密としてフラグが立てられるデータの例をいくつか紹介します。
 * `pwd`、`password`、`ipassword`、`pass_phrase`
@@ -100,8 +99,8 @@ Datadog は、[OWASP ModSecurity Core Rule Set][12] を含む複数のパター�
 
 ## 攻撃試行の分類
 
-分散トレーシング情報を活用して、攻撃試行は安全、不明、または有害として分類されます。
-* 例えば、Java で書かれたサービスを対象とした PHP インジェクション攻撃のように、安全と分類される攻撃試行はアプリケーションに侵入することはできません。
+分散トレーシング情報を利用して、攻撃の試みは安全、不明、または有害として評価されます。
+* 例えば、PHP インジェクション攻撃が Java で書かれたサービスを標的としている場合のように、安全と分類された攻撃試行はアプリケーションを侵害することはできません。
 * 未知の評価は、攻撃が成功する確率について確定的な判断を下すのに十分な情報がない場合に与えられます。
 * コードレベルの脆弱性が攻撃者によって発見された証拠がある場合、有害の評価がハイライトされます。
 
@@ -151,7 +150,7 @@ Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意の�
 [10]: /ja/tracing/configure_data_security/?tab=http
 [11]: /ja/security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[13]: /ja/security/default_rules/#cat-application-security
+[13]: /ja/security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /ja/security/cloud_siem/

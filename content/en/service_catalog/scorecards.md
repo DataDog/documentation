@@ -1,6 +1,5 @@
 ---
 title: Service Scorecards
-kind: documentation
 aliases:
   - /tracing/service_catalog/scorecards
 further_reading:
@@ -45,23 +44,24 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 
 ### Creating custom rules
 
-To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
+To add and evaluate custom rules using the [Scorecards API][10]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
 2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
-3. View an overview of outcomes in the Scorecards dashboard.
+3. View an overview of outcomes and remarks in the Scorecards dashboard.
 
 After initial setup, rules can also be enabled or disabled through the API. 
 
 
-To add custom rules to your Scorecards dashboard using the Scorecards UI: 
+To evaluate and add custom rules in the Scorecards UI: 
 
 1. Click **Create Rule** on the Scorecards page.
 2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
-3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the Scorecards API `/scorecard/outcomes/batch` endpoint.
-4. View an overview of outcomes in the Scorecards dashboard.
+3. Navigate to the rule you created and select **Edit Outcome** next to the service that you want to evaluate.
+4. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
+5. View an overview of outcomes and remarks in the Scorecards dashboard.
 
-{{< img src="/tracing/service_catalog/scorecard-create-rule-ui.png" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecard-create-and-update-rule-ui.mp4" alt="User creating and evaluating a custom rule in the Scorecards UI" video="true" style="width:90%;" >}}
 
 ## How services are evaluated
 
@@ -123,11 +123,13 @@ The scorecard summary is accessible on the [**Explore** page][1] in the Service 
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
 
-## Generating Scorecard reports
+## Track scores over time
 
-{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Scorecard reports are in private beta. Join the beta by requesting access.
-{{< /callout >}}
+You can visualize how teams' scores progress over time as they make changes and remediate known issues through historical timeseries in the Scorecards UI. You can also export these time series to Dashboards and Notebooks where you can filter on different tags such as `team`, `rule`, `scorecard`, `application`, `tier`, and `lifecycle`. 
+
+{{< img src="/tracing/service_catalog/scorecard-historical-metrics.png" alt="Timeseries that shows change in scores over time in Scorecard UI" style="width:90%;" >}}
+
+## Generating Scorecard reports
 
 You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
 

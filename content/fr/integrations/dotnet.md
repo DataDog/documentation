@@ -13,7 +13,7 @@ integration_id: dotnet
 integration_title: .NET
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: dotnet
 public_title: Intégration Datadog/.NET

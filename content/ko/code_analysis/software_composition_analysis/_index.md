@@ -15,7 +15,6 @@ further_reading:
   tag: 설명서
   text: 소스 코드 통합에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 소프트웨어 구성 분석
 ---
 
@@ -40,6 +39,7 @@ SCA는 [코드 분석][3] 기능을 사용하여 CI 파이프라인에서 실행
 
 SCA는 취약한 라이브러리에 관하여 현재 다음과 같은 언어 및 기술 점검을 지원합니다.
 
+- C#
 - Go
 - Java
 - Node.js

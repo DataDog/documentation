@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
-kind: documentación
 title: Puppet
 ---
 Este módulo instala el Datadog Agent y envía informes de Puppet a Datadog.
@@ -125,7 +124,7 @@ Para enviar los informes sobre las ejecuciones de Puppet a tu línea de tiempo d
     }
     ```
 
-    El gem dogapi se instala automáticamente. Configura `manage_dogapi_gem` como false si quieres personalizar la instalación.
+    El GEM dogapi se instala automáticamente. Configura `manage_dogapi_gem` como false si quieres personalizar la instalación.
 
 2. Añade estas opciones de configuración a la configuración del nodo maestro de Puppet (ej.: `/etc/puppetlabs/puppet/puppet.conf`):
 
@@ -208,17 +207,17 @@ Para habilitar las funciones de la herramienta Network Performance Monitoring (N
 
 ```conf
 class { 'datadog_agent::system_probe':
-    network_enabled => true, 
+    network_enabled => true,
 }
 ```
 
 ### Configuración de USM
 
-Para habilitar la herramienta Universal Service Monitoring (USM) del Agent Datadog, utiliza la clase `datadog_agent::system_probe` para crear correctamente el archivo de configuración:
+Para habilitar la herramienta Universal Service Monitoring (USM) del Datadog Agent, utiliza la clase `datadog_agent::system_probe` para crear correctamente el archivo de configuración:
 
 ```conf
 class { 'datadog_agent::system_probe':
-    service_monitoring_enabled => true, 
+    service_monitoring_enabled => true,
 }
 ```
 
@@ -280,7 +279,7 @@ Para generar etiquetas (tags) a partir de hechos personalizados, clasifica tus n
 ```conf
 class { "datadog_agent":
   api_key            => "<YOUR_DD_API_KEY>",
-  facts_to_tags      => ["osfamily","networking.domain","my_custom_fact"],
+  facts_to_tags      => ["os.family","networking.domain","my_custom_fact"],
 }
 ```
 
@@ -328,7 +327,7 @@ class { "datadog_agent":
 }
 ```
 
-(2) `hostname_extraction_regex` es útil cuando el módulo de Puppet y el Datadog Agent dan diferentes nombres para el mismo host en la lista de infraestructuras.
+(2) `hostname_extraction_regex` es útil cuando el módulo Puppet y el Datadog Agent dan diferentes nombres para el mismo host en la lista de infraestructuras.
 
 [1]: https://forge.puppet.com/datadog/datadog_agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys

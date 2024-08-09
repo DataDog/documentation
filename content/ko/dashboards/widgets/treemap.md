@@ -9,7 +9,6 @@ further_reading:
 - link: /dashboards/widgets/pie_chart/
   tag: 설명서
   text: 파이 차트 위젯
-kind: 설명서
 title: 트리맵 위젯
 ---
 

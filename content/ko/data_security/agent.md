@@ -6,7 +6,6 @@ further_reading:
 - link: /data_security/
   tag: 설명서
   text: Datadog에 제출된 주요 데이터 카테고리 검토
-kind: 설명서
 title: 에이전트 데이터 보안
 ---
 
@@ -19,10 +18,12 @@ title: 에이전트 데이터 보안
 에이전트 공식 리포지토리 및 바이너리 패키지는 서명되어 있습니다. 다음 공개 키 중 하나의 서명을 확인하여 배포 채널을 인증합니다:
 
 - Linux DEB 패키지 및 리포 메타데이터:
+  - [D18886567EABAD8B2D2526900D826EB906462314][21]
   - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Linux RPM 패키지 및 리포 메타데이터:
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][22]
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
@@ -111,3 +112,5 @@ Datadog 보안 시스템에서 버그를 발견했다면 [security@datadoghq.com
 [18]: /ko/agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[21]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
+[22]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public

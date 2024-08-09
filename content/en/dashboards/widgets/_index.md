@@ -1,6 +1,5 @@
 ---
 title: Widgets
-kind: documentation
 aliases:
     - /graphing/dashboards/widgets
     - /graphing/faq/widgets
@@ -32,6 +31,7 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Query Value{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
         img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Scatter Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
@@ -103,7 +103,7 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
     {{< nextlink href="/dashboards/widgets/slo" 
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Service Level Objective (SLO) Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO) List{{< /nextlink >}}
+        img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO){{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Full screen

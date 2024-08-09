@@ -1,6 +1,6 @@
 ---
 title: DDSketch-based Metrics in APM
-kind: guide
+
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:

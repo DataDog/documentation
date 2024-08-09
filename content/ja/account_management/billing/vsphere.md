@@ -1,6 +1,5 @@
 ---
 title: vSphere インテグレーションの課金
-kind: documentation
 ---
 ## 概要
 

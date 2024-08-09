@@ -1,6 +1,5 @@
 ---
 title: OAuth2 in Datadog
-kind: documentation
 description: Learn about how Datadog uses OAuth 2.0.
 further_reading:
 - link: "/developers/authorization/oauth2_endpoints"
@@ -8,17 +7,15 @@ further_reading:
   text: "Learn how to use the OAuth 2.0 authorization endpoints"
 ---
 
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
-
 ## Overview
 
 This page provides a step-by-step overview on how to implement the OAuth protocol end-to-end on your application once your **confidential** client is created. 
 
+{{< img src="developers/authorization/oauth_process.png" alt="A diagram explaining how the OAuth authentication process works after a user clicks the Connect Account button in an integration tile." style="width:100%;">}}
+
 ## Implement the OAuth protocol
 
-1. Create and configure your OAuth client in the [Developer Platform][16]. 
+1. Within your Datadog Partner Sandbox Account, create and configure your OAuth client in the [Developer Platform][16].
 
 2. After a user installs your integration, they can click the **Connect Accounts** button to connect their account in the **Configure** tab of the integration tile. 
 

@@ -12,7 +12,7 @@ has_logo: true
 integration_id: amazon-guardduty
 integration_title: Amazon GuardDuty
 is_public: true
-kind: integration
+custom_kind: integration
 name: amazon_guardduty
 public_title: Datadog-Amazon GuardDuty インテグレーション
 short_description: Amazon GuardDuty ログを収集します。

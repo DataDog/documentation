@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: type の代わりに isinstance を使う
 ---
 ## メタデータ

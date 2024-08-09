@@ -1,5 +1,5 @@
 import { getQueryParameterByName } from '../helpers/browser';
-import { getCookieByName } from '../helpers/helpers';
+import { getCookieByName, chromeHashFix } from '../helpers/helpers';
 import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
@@ -80,20 +80,38 @@ const initCodeTabs = () => {
         updateUrl(activeLang)
     }
 
+    const scrollToAnchor = (tab, anchorname) => {
+        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        console.log('tab: ', tab);
+        console.log('scrolling to anchor: ', anchor);
+        if (anchor) {
+            anchor.scrollIntoView();
+        } else {
+            document.querySelector(anchorname).scrollIntoView();
+        }
+    }
+
     const activateTabsOnLoad = () => {
         const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
 
             if (selectedLanguageTab) {
-                selectedLanguageTab.click()
+                activateCodeTab(selectedLanguageTab)
+                if (window.location.hash) {
+                    setTimeout(function () {
+                        scrollToAnchor(tabQueryParameter, window.location.hash);
+                    }, 300);
+                }
             }else{
                 activateCodeTab(firstTab)
+                chromeHashFix();
             }
         } else {
             if (codeTabsList.length > 0) {
                 activateCodeTab(firstTab)
             }
+            chromeHashFix();
         }
     }
 
@@ -214,4 +232,4 @@ const initCodeTabs = () => {
     init()
 }
 
-export default initCodeTabs;
+export default initCodeTabs

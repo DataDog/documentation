@@ -1,6 +1,5 @@
 ---
 title: "AKS Cluster Component"
-kind: documentation
 ---
 
 ## Overview

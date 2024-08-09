@@ -1,6 +1,6 @@
 ---
 title: Cloud Metric Delay
-kind: guide
+
 aliases:
     - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
     - /integrations/faq/why-is-there-a-delay-in-receiving-my-data/
@@ -40,7 +40,7 @@ AWS offers two levels of granularity for metrics (5 and 1 minute metrics). If yo
 Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for *detailed metrics* within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
 
 {{% site-region region="us,us5,eu,ap1" %}}
-On your selected [Datadog site][1] ({{< region-param key="dd_site_name" >}}), you can optionally configure Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose to get CloudWatch metrics into Datadog faster with a 2-3 minute latency. Visit the [documentation on metric streaming][2] to learn more about this approach.
+On your selected [Datadog site][1] ({{< region-param key="dd_site_name" >}}), you can optionally configure Amazon CloudWatch Metric Streams and Amazon Data Firehose to get CloudWatch metrics into Datadog faster with a 2-3 minute latency. Visit the [documentation on metric streaming][2] to learn more about this approach.
 
 [1]: /getting_started/site/
 [2]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/

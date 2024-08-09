@@ -1,6 +1,5 @@
 ---
 title: Tracing .NET Framework Applications
-kind: documentation
 aliases:
     - /tracing/dotnet
     - /tracing/languages/dotnet
@@ -44,10 +43,10 @@ further_reading:
     tag: "Blog"
     text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Source code"
 ---
 ## Compatibility requirements
@@ -65,7 +64,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 ### Installation

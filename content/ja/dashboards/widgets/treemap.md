@@ -9,7 +9,6 @@ further_reading:
 - link: /dashboards/widgets/pie_chart/
   tag: ドキュメント
   text: 円グラフウィジェット
-kind: documentation
 title: ツリーマップウィジェット
 ---
 

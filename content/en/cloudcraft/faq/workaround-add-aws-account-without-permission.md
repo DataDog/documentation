@@ -1,6 +1,5 @@
 ---
 title: I can't create IAM roles in AWS. How can I add an AWS account?
-kind: faq
 ---
 
 Connecting your AWS account with Cloudcraft requires an AWS user with permissions to create IAM roles.

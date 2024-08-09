@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
-kind: documentation
 title: AWS インテグレーションの請求
 ---
 
@@ -25,13 +24,32 @@ ELB、RDS、DynamoDB などの他の AWS リソースは、インフラストラ
 
 **注**: Datadog の請求対象となるのは、EC2 (ホスト)、Lambda (アクティブ関数)、CloudWatch Custom Metrics (カスタムメトリクス) のみです。フィルターできる他のサービスのためにインテグレーションされたメトリクスは、Datadog の課金対象にはなりません。
 
-**注**: EC2 メトリクスリソースの除外設定は、EC2 とそれに接続された EBS ボリュームの両方に適用されます。
+### EC2
 
-インテグレーションページで既存の AWS アカウントに制限を追加した場合は、それまでに検出されたインスタンスが[インフラストラクチャーリスト][5]に最長 2 時間残る可能性があります。移行時間中、EC2 インスタンスのステータスは `???` と表示されます。これは、課金対象に含まれません。
+EC2 メトリクスリソースの除外設定は、EC2 インスタンスとアタッチされた EBS ボリュームの両方に適用されます。インテグレーションページで既存の AWS アカウントに制限を追加した場合は、それまでに検出されたインスタンスが[インフラストラクチャーリスト][5]に最長 2 時間残る可能性があります。移行期間中、EC2 インスタンスのステータスは `???` と表示されます。これは課金の対象外です。
 
 Agent が稼働しているホストはまだ表示され、請求に含まれます。limit オプションを使用して、AWS からの `aws.ec2.*` メトリクス収集を制限し、AWS リソース EC2 インスタンスホストを制限します。
 
-## トラブルシューティング
+#### 例
+
+次のフィルターは、`datadog:no` タグを含む EC2 インスタンスをすべて除外します。
+
+```
+!datadog:no
+```
+
+次のフィルターは、`datadog:monitored` タグ、または `env:production` タグ、または `c1.*` 値を持つ `instance-type` タグを含み、`region:us-east-1` タグを含まない EC2 インスタンスからのみメトリクスを収集します。
+
+```
+datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
+```
+**注**: Datadog では、大文字は小文字に変換され、スペースはアンダースコアに置換されます。たとえば、`Team:Frontend App` タグを含む EC2 インスタンスからメトリクスを収集する場合、Datadog で適用されるタグは `team:frontend_app` になります。
+
+### Amazon Data Firehose を使用した CloudWatch メトリクスストリーム
+
+デフォルトの API ポーリング方法の代わりに、オプションで [Amazon Data Firehose を利用して CloudWatch メトリクスを Datadog に送信][8]することができます。組織が Kinesis Data Firehose を使用した CloudWatch メトリクスストリームの方法を利用している場合、Datadog AWS インテグレーションページで定義されている AWS リソースの除外ルールは適用されません。各 AWS アカウントについて、AWS コンソール内の CloudWatch メトリクスストリーム設定で、メトリクスのネームスペースや特定のメトリクス名の含除ルールを全て管理する必要があります。
+
+## ヘルプ
 
 技術的な質問については、[Datadog のサポートチーム][6]にお問い合わせください。
 
@@ -44,3 +62,4 @@ Agent が稼働しているホストはまだ表示され、請求に含まれ�
 [5]: /ja/infrastructure/
 [6]: /ja/help/
 [7]: mailto:success@datadoghq.com
+[8]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling

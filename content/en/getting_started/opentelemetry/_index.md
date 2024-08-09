@@ -1,9 +1,8 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
-kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
-  tag: 'OpenTelemetry'
+  tag: 'External Site'
   text: 'OpenTelemetry Documentation'
 - link: '/opentelemetry'
   tag: 'Documentation'
@@ -25,6 +24,9 @@ further_reading:
   text: 'Forward logs from the OpenTelemetry Collector with the Datadog Exporter'
 ---
 
+{{< learning-center-callout header="Try 'Introduction to OpenTelemetry with Datadog' in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+  Learn how to configure OpenTelemetry to export metrics, traces, and logs to Datadog, and explore the collected data within the platform.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -239,7 +241,7 @@ The Calendar application is already configured with unified service tagging:
    {{< code-block lang="yaml" filename="docker-compose-otel.yml" collapsible="true" disable_copy="true" >}}
 environment:
   - OTEL_SERVICE_NAME=calendar-otel
-  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
+  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker,service.version=<IMAGE_TAG>
 {{< /code-block >}}
 
 ## Running the application
@@ -288,7 +290,7 @@ View runtime and infrastructure metrics to visualize, monitor, and measure the p
    * **Infrastructure Metrics** to see your Docker container metrics, such as CPU and memory usage.
    * **JVM Metrics** to see runtime metrics, such as heap usage and thread count. 
 
-   {{< img src="/getting_started/opentelemetry/infra_and_jvm.png" alt="View Infrastructure metrics and JVM Runtime metrics for the Calendar application" style="width:90%;" >}}
+   {{< img src="/getting_started/opentelemetry/infra_and_jvm2.png" alt="View Infrastructure metrics and JVM Runtime metrics for the Calendar application" style="width:90%;" >}}
 
 ### Logs
 
@@ -298,7 +300,7 @@ View logs to monitor and troubleshoot application and system operations.
 2. If you have other logs in the list, add `@service.name:calendar-otel ` to the **Search for** field to only see logs from the Calendar application.
 2. Select a log from the list to see more details.
 
-{{< img src="/getting_started/opentelemetry/logs.png" alt="View Logs for the Calendar application" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/logs2.png" alt="View Logs for the Calendar application" style="width:90%;" >}}
 
 ### Traces
 
@@ -307,13 +309,13 @@ View traces and spans to observe the status and performance of requests processe
 1. Go to **APM** > **Traces**.
 2. Find the **Service** section in the filter menu, and select the `calendar-otel` facet to display all `calendar-otel` traces:
 
-   {{< img src="/getting_started/opentelemetry/traces.png" alt="View Traces for the Calendar application" style="width:90%;" >}}
+   {{< img src="/getting_started/opentelemetry/traces2.png" alt="View Traces for the Calendar application" style="width:90%;" >}}
 
 3. [Explore your `calendar-otel` traces][8]. 
 
    To start, click on a trace to open the trace side panel and find more details about the trace and its spans. For example, the [Flame Graph][9] captures how much time was spent in each component of the Calendar execution path:
 
-   {{< img src="/getting_started/opentelemetry/flame_graph.png" alt="View the Flame Graph for a Calendar application trace" style="width:90%;" >}}
+   {{< img src="/getting_started/opentelemetry/flame_graph2.png" alt="View the Flame Graph for a Calendar application trace" style="width:90%;" >}}
 
 4. Notice that you can select **Infrastructure**, **Metrics**, or **Logs** in the bottom panel to correlate your trace with other observability data. 
 

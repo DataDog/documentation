@@ -11,5 +11,5 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : Read about how Database Management handles [sensitive information][101] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-[100]: /agent/basic_agent_usage#agent-overhead
+[100]: /database_monitoring/agent_integration_overhead/?tab=sqlserver
 [101]: /database_monitoring/data_collected/#sensitive-information

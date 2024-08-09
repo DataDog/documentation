@@ -1,6 +1,5 @@
 ---
 title: "Neptune Component"
-kind: documentation
 ---
 ## Overview
 

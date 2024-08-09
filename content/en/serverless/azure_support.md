@@ -1,6 +1,6 @@
 ---
 title: Support for Azure App Services
-kind: faq
+
 description: "Datadog support for Azure App Services"
 ---
 
@@ -21,7 +21,7 @@ description: "Datadog support for Azure App Services"
         <th>Plan</th>
         <th>.NET</th>
         <th>Java</th>
-        <th>Node</th>
+        <th>Node.js</th>
         <th>PHP</th>
         <th>Container</th>
     </tr>
@@ -134,7 +134,7 @@ description: "Datadog support for Azure App Services"
         <th>Plan</th>
         <th>.NET</th>
         <th>Java</th>
-        <th>Node</th>
+        <th>Node.js</th>
         <th>Python</th>
         <th>Ruby</th>
         <th>PHP</th>

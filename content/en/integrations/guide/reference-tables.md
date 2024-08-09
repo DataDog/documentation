@@ -1,6 +1,6 @@
 ---
 title: Add Custom Metadata with Reference Tables
-kind: guide
+
 beta: true
 aliases:
   - /logs/guide/enrichment-tables/
@@ -19,10 +19,6 @@ further_reading:
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
 ---
-
-<div class="alert alert-warning">
-Reference Tables are in public beta. There are no billing implications for defining and querying Reference Tables. During the beta, a limit of 100 Reference Tables per account and a limit of 10,000 rows per Reference Table might apply. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-</div>
 
 ## Overview
 

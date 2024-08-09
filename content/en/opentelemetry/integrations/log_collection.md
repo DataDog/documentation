@@ -31,7 +31,7 @@ receivers:
     poll_interval: 500ms
     include:
       - /var/log/*/app.log
-   operators:
+    operators:
       - type: json_parser
       # Layout must match log timestamp format. If this section is removed, timestamp will correspond to the time of log intake by Datadog.
       - type: time_parser
@@ -81,6 +81,17 @@ filelog:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Custom tags
+In order to add custom Datadog tags to logs, set the `ddtags` attribute on the logs. For example, this can be done with the [transform processor][3]:
+```yaml
+processors:
+  transform:
+    log_statements:
+      - context: log
+        statements:
+          - set(attributes["ddtags"], "first_custom:tag, second_custom:tag")
+```
 
 ## Data collected
 
@@ -141,3 +152,4 @@ Flags: 0
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/logs.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor

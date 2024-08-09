@@ -1,6 +1,6 @@
 ---
 title: Proxy Your Browser RUM Data
-kind: guide
+
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
 further_reading:
@@ -162,7 +162,7 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#initialization-parameters
+[1]: /real_user_monitoring/browser/setup/#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
 
 

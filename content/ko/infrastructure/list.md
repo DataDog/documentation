@@ -12,7 +12,6 @@ further_reading:
 - link: /infrastructure/process/
   tag: 설명서
   text: 실시간 프로세스 모니터링
-kind: 설명서
 title: 인프라스트럭처 목록
 ---
 

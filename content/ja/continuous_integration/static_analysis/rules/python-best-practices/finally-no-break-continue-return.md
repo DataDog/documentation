@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: finally ブロック内で break や continue を使用しない
 ---
 ## メタデータ

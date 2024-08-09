@@ -42,9 +42,9 @@ draft: false
 git_integration_title: singlestore
 integration_id: singlestore
 integration_title: SingleStore
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: singlestore
 public_title: SingleStore

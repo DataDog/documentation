@@ -38,7 +38,7 @@ integration_id: yugabytedb-managed
 integration_title: YugabyteDB Managed
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: yugabytedb_managed
 public_title: YugabyteDB Managed
@@ -80,6 +80,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: YugabyteDB Managed
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->

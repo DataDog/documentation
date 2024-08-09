@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/search_syntax/
   tag: Documentation
   text: ログ検索 API 向け構文の詳細
-kind: ガイド
 title: ログ検索 API を使用してログデータにプログラマティックにアクセスする
 ---
 

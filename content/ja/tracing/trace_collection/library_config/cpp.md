@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/cpp/
   tag: Documentation
   text: トレースコンテキストの伝搬
-kind: documentation
 title: C++ トレーシングライブラリの構成
 type: multi-code-lang
 ---

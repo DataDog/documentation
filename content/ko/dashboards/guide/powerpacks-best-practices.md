@@ -1,12 +1,17 @@
 ---
 further_reading:
+- link: /dashboards/widgets/powerpack
+  tag: 설명서
+  text: Powerpack 위젯
 - link: https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show
   tag: 설명서
   text: 위젯 추가 및 표시 방법 설정
+- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
+  tag: 블로그
+  text: Powerpack을 사용하여 재사용 가능 그룹에 대시보드 위젯 저장
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: 지침
   text: 관련 대시보드 유지 관리를 위한 모범 사례
-kind: 가이드
 title: Powerpack으로 그래프 전문성 확장
 ---
 
@@ -19,7 +24,7 @@ Powerpack은 재사용 가능한 대시보드 빌딩 블록으로, 그래프화 
 Powerpack은 프리셋(Datadog에서 생성) 또는 커스텀(사용자가 생성) 중 하나의 형태를 가집니다.
 
 - 프리셋 Powerpack은 성능 메트릭 또는 기능 사용과 같은 일반적인 모니터링 패턴의 바로 사용 가능한 보기를 제공합니다. 종종 특정 제품 또는 통합(예: `RUM Page Views`')에 연결되며 Datadog에서 이를 유지 관리합니다.
-- 대시보드 쓰기 권한이 있는 사용자는 누구나 커스텀 Powerpack을 생성하여 사용자가 내부 모범 사례를 공유하고 표준화하는 데 도움을 줄 수 있습니다.
+- 대시보드 쓰기 권한이 있는 누구나 커스텀 Powerpack을 생성하여 사용자가 내부 모범 사례를 공유하고 표준화하도록 지원할 수 있습니다. 커스텀 Powerpack에 대한 업데이트는 모든 Powerpack 인스턴스에 동기화되므로, 여러 개의 대시보드에서 개별적으로 업데이트할 필요가 없습니다.
 
 이 지침은 커스텀 Powerpack을 생성하고 공유하는 모범 사례를 다룹니다.
 
@@ -34,7 +39,7 @@ Powerpack은 프리셋(Datadog에서 생성) 또는 커스텀(사용자가 생�
 
 ## Powerpack 생성 모범 사례
 
-잘 구성된 Powerpack은 모든 기존 애플리케이션 팀의 대시보드에 보안 관찰 가능성을 추가하는 등 조직이 새로운 모니터링 패턴을 채택하는 속도를 높일 수 있습니다. 명확하고 독립적으로 구축된 Powerpack을 빌드하면 대시보드 소유자가 문제나 문의를 최소화하면서 콘텐츠를 최대한 활용할 수 있습니다.
+잘 구성된 Powerpack은 모든 기존 애플리케이션 팀의 대시보드에 보안 관측성을 추가하는 등, 조직이 새로운 모니터링 패턴을 채택하는 속도를 높일 수 있습니다. 명확하고 독립적으로 구축된 Powerpack을 빌드하면 대시보드 소유자가 문제나 문의를 최소화하면서 콘텐츠를 최대한 활용할 수 있습니다.
 
 ### 자명한 콘텐츠 빌드
 
@@ -60,7 +65,7 @@ Powerpack은 대시보드 위젯 트레이에 나타나며, 키워드나 태그 
 
 올바른 사용자가 Powerpack을 찾을 수 있도록 타이틀이나 설명에 사용자가 검색할 수 있는 키워드(예: "성능")를 포함하고 주요 기술에 태그를 지정하세요.
 
-설명은 80자로 제한됩니다. 훌륭한 설명은 팩의 용도와 사용 방법에 대한 간략한 요약을 제공합니다. 예를 들어, `RUM Feature Usage`에 대한 "특정 앱 페이지의 UI 작업에 대한 사용 패턴 보기"는 Powerpack이 추적하는 항목, 입력으로 예상되는 항목(특정 앱 페이지)을 설명하고, "사용량", "UI" 및 "앱"과 같은 키워드를 포함합니다.
+설명은 80자로 제한됩니다. 팩의 용도와 사용 방법에 대한 간략한 요약을 제공한다면 훌륭한 설명입니다. 예를 들어, `RUM Feature Usage`에 대한 "특정 앱 페이지의 UI 작업에 대한 사용 패턴 보기"는 Powerpack이 추적하는 항목, 입력값으로 예상되는 항목(특정 앱 페이지)을 설명하고, "사용량", "UI", "앱"과 같은 키워드를 포함합니다.
 
 #### Powerpack 태그 지정
 
@@ -88,8 +93,17 @@ Powerpack 생성 모들은 쿼리에 나타나는 공통 필터를 기반으로 
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="Add to dashboard 옵션을 제공하는 확인란을 표시하는 Tag or Attribute, Name, Value 및 Use as Template Variable 열과 함께 태그 또는 속성 변수의 값을 설정하는 옵션을 보여주는 화면. Add to dashboard 확인란은 $Environment에서 선택되고, $Service에서 선택 취소됩니다." style="width:100%;" >}}
 
+### Powerpack 업데이트
+
+기존 커스텀 Powerpack에 대한 변경 사항은 동일 Powerpack의 모든 인스턴스에 반영됩니다. 이렇게 하면 여러 대시보드에서 중복 콘텐츠를 업데이트하는 프로세스 작업이 간소화됩니다. 동기화된 Powerpack 인스턴스를 편집하려면 **Powerpack 레이아웃 편집**을 클릭합니다.
+
+### 권한 허용
+기본적으로 Powerpack 편집 권한은 작성자에게만 있습니다. 편집 권한은 위젯 트레이의 kebab 메뉴 또는 Powerpack 인스턴스의 헤더에서 언제든 수정할 수 있습니다.
+
 ### 안내하기
 
 Powerpack이 생성되면 조직에 안내하세요. 팩에 대해 커뮤니케이션하면 팩을 알리고 질문에 대한 채널을 제공할 수 있습니다. 이메일 또는 메시징 플랫폼과 같은 커뮤니케이션 채널을 통해 Powerpack의 이름을 조직과 공유하고, 팩의 대상을 지정하고, 팩이 표시될 위치를 설명하세요.
+
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}

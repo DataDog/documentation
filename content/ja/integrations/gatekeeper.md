@@ -40,7 +40,7 @@ integration_id: gatekeeper
 integration_title: Gatekeeper
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: gatekeeper
 public_title: Gatekeeper

@@ -12,7 +12,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: ブログ
   text: モニターのタグ付けのベストプラクティス
-kind: documentation
 title: モニターの管理
 ---
 

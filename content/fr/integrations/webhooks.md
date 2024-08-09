@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: Webhooks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: webhooks
 public_title: Intégration Datadog/Webhooks

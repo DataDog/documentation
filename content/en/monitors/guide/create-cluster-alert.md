@@ -1,6 +1,5 @@
 ---
 title: Create cluster alerts to notify when a percentage of groups are in critical state
-kind: guide
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

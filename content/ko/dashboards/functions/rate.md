@@ -5,7 +5,6 @@ further_reading:
 - link: /monitors/guide/alert-on-no-change-in-value/
   tag: 설명서
   text: 값 변경 없음 경고
-kind: 설명서
 title: 비율
 ---
 

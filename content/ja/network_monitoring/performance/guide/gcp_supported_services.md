@@ -6,7 +6,6 @@ further_reading:
 - link: /network_monitoring/devices
   tag: ドキュメント
   text: ネットワークデバイスモニタリング
-kind: ガイド
 npm_provider: gcp
 title: NPM Google Cloud でサポートされるデバイス
 ---

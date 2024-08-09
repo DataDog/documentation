@@ -1,6 +1,5 @@
 ---
 title: Span Facets
-kind: documentation
 description: 'Trace Facets and Facet Panel'
 further_reading:
 - link: 'tracing/trace_explorer/'

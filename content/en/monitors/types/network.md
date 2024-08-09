@@ -1,6 +1,5 @@
 ---
 title: Network Monitor
-kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
 aliases:
 - /monitors/monitor_types/network
@@ -82,7 +81,7 @@ See the [Monitor configuration][4] documentation for information on [No data][5]
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
 ### Network metric
 

@@ -10,7 +10,7 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: Documentation
   text: サービスの ASM を有効にする
-- link: /security/default_rules/#cat-application-security
+- link: /security/default_rules/?category=cat-application-security
   tag: Documentation
   text: すぐに使える Application Security Management ルール
 - link: /security/application_security/add-user-info/
@@ -22,7 +22,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Datadog における Application Security Management の仕組み
-kind: documentation
 title: ライブラリ構成
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Context Links
-kind: guide
 further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'

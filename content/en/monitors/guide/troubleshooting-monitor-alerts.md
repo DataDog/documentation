@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Monitor Alerts
-kind: guide
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
   tag: "Guide"

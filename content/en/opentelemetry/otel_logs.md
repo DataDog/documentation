@@ -1,11 +1,10 @@
 ---
 title: Send Logs from OpenTelemetry to Datadog
-kind: documentation
 aliases:
 - /logs/log_collection/opentelemetry/
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"

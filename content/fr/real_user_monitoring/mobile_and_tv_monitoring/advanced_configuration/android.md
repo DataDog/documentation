@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explorer la solution RUM de Datadog
-kind: documentation
 title: Configuration avancée de RUM pour Android
 type: multi-code-lang
 ---
@@ -483,18 +482,6 @@ Pour modifier certains attributs dans vos événements RUM ou pour ignorer compl
    |               | `view.name`           | Nom de la vue.                                |
 
    **Remarque** : si vous renvoyez une valeur null à partir de l'implémentation `EventMapper<T>`, l'événement est ignoré.
-
-## Échantillonner des sessions RUM
-
-Pour contrôler les données que votre application envoie à la solution RUM Datadog, vous pouvez spécifier un taux d'échantillonnage pour les sessions RUM lors de l'[initialisation de la fonctionnalité RUM][2]. Ce taux est défini sous forme de pourcentage entre 0 et 100.
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-        // // Ici, 75 % des sessions RUM sont envoyées à Datadog
-        .setSessionSampleRate(75.0f)
-        .build()
-Rum.enable(rumConfig)
-```
 
 ## Pour aller plus loin
 

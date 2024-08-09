@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: よくあるご質問
   text: ログのパースに関する問題を調査する方法
-kind: ガイド
 title: ログに期待されたタイムスタンプが表示されない
 ---
 

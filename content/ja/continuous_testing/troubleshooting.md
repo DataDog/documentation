@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: GitHub
   text: Datadog を使った継続的テストのベストプラクティス
-kind: documentation
 title: Continuous Testing と CI/CD のトラブルシューティング
 ---
 
@@ -33,11 +32,11 @@ CI バッチ
 
 実行ルール: [実行ルール][4]は、テストの失敗が CI パイプラインに与える影響を、影響の大きいものから小さいものへと定義します (`skipped`、`non_blocking`、`blocking`)。これらのオプションは重み付けされ、デフォルトは最も影響の大きいものになります。UI で `skipped` と設定され、構成ファイルで `blocking` と設定されたテストは、テスト実行時にスキップされます。</br><br> 実行ルールはテストのプロパティ、グローバルコンフィギュレーションファイル、あるいは個々のテストのオーバーライドファイルで設定することができます。
 
-## エクスプローラー
+## Results Explorer
 
 ### CI メタデータが表示されない
 
-CI/CD テスト実行のトリガーに API エンドポイントを使用しているかどうかを確認します。CI Results Explorer に CI メタデータを入力するには、Datadog の[ネイティブインテグレーション][5]、または [NPM パッケージ][6]のいずれかを使用する必要があります。
+CI/CD テスト実行のトリガーに API エンドポイントを使用しているかどうかを確認します。Synthetic Monitoring & Continuous Testing Results Explorer に CI メタデータを入力するには、Datadog の[ネイティブインテグレーション][5]、または [NPM パッケージ][6]のいずれかを使用する必要があります。
 
 ## CI/CD パイプライン内
 

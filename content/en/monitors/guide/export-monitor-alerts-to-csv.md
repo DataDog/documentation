@@ -1,6 +1,5 @@
 ---
 title: Export Monitor Alerts to CSV
-kind: guide
 aliases:
 - /monitors/faq/how-can-i-export-alert-history
 ---

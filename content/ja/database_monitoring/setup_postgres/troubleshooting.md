@@ -1,25 +1,21 @@
 ---
 description: Postgres のデータベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: Postgres 用 DBM セットアップのトラブルシューティング
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
-このページでは、Postgres によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
+このページでは、Postgres による Database Monitoring のセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
 ## 一般的な問題の診断
 
-### データベースモニタリングを構成してもデータが表示されない
+### Database Monitoring を構成してもデータが表示されない
 
-[セットアップ手順][1]に従って Agent を構成してもデータが表示されない場合は、Agent のコンフィギュレーションまたは API キーに問題がある可能性があります。[トラブルシューティングガイド][2]に従って、Agent からデータを受信していることを確認してください。
+[セットアップ手順][1]に従って Agent を構成してもデータが表示されない場合は、Agent の構成または API キーに問題がある可能性が高いです。[トラブルシューティングガイド][2]に従って、Agent からデータを受信していることを確認してください。
 
-システムメトリクスなどの他のデータは受信しているが、データベースモニタリングのデータ (クエリメトリクスやクエリサンプルなど) を受信していない場合、Agent またはデータベースのコンフィギュレーションに問題がある可能性があります。Agent のコンフィギュレーションが[セットアップ手順][1]の例と同様であることを確認し、コンフィギュレーションファイルの場所を再確認してください。
+システムメトリクスなどの他のデータは受信しているが、Database Monitoring のデータ (クエリメトリクスやクエリサンプルなど) を受信していない場合、Agent またはデータベースの構成に問題がある可能性があります。Agent の構成が[セットアップ手順][1]の例と同様であることを確認し、コンフィギュレーションファイルの場所を再確認してください。
 
 デバッグを行うには、まず[Agent のステータスコマンド][3]を実行して、収集されたデータや Datadog に送信されたデータのデバッグ情報を収集します。
 
-`Config Errors` セクションをチェックして、コンフィギュレーションファイルが有効であることを確認してください。例えば、次のような場合は、インスタンスコンフィギュレーションが存在しないか、ファイルが無効であることを示しています。
+`Config Errors` セクションをチェックして、コンフィギュレーションファイルが有効であることを確認してください。例えば、次のような場合は、インスタンス構成が存在しないか、ファイルが無効であることを示しています。
 
 ```
   Config Errors
@@ -29,7 +25,7 @@ title: Postgres 用 DBM セットアップのトラブルシューティング
       Configuration file contains no valid instances
 ```
 
-コンフィギュレーションが有効であれば、次のように表示されます。
+構成が有効であれば、次のように表示されます。
 
 ```
 =========
@@ -64,7 +60,7 @@ Collector
 Database Monitoring Query Metrics: Last Run: 2, Total: 24,274
 Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 ```
-Agent のコンフィギュレーションが正しいことを確認したら、[Agent のログ][4]でデータベースのインテグレーション実行時に警告やエラーが発生していないかをチェックします。
+Agent の構成が正しいことを確認したら、[Agent のログ][4]でデータベースのインテグレーション実行時に警告やエラーが発生していないかをチェックします。
 
 Datadog Agent で `check` CLI コマンドを実行し、出力にエラーがないかを検査することで、明示的にチェックを実行することもできます。
 
@@ -95,7 +91,7 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 psql -h localhost -U datadog -d postgres -c "select * from pg_stat_statements LIMIT 1;"
 ```
 
-Agent のコンフィギュレーションでデフォルト `postgres` 以外の `dbname` を指定した場合は、そのデータベースで `CREATE EXTENSION pg_stat_statements` を実行する必要があります。
+Agent の構成でデフォルト `postgres` 以外の `dbname` を指定した場合は、そのデータベースで `CREATE EXTENSION pg_stat_statements` を実行する必要があります。
 
 ターゲットデータベースで拡張機能を作成してもこの警告が表示される場合は、拡張機能が `datadog` ユーザーがアクセスできないスキーマで作成された可能性があります。これを確認するには、このコマンドを実行して `pg_stat_statements` がどのスキーマで作成されたかを確認します。
 
@@ -120,16 +116,17 @@ ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statemen
 いくつかのクエリからデータを取得したが、Database Monitoring で特定のクエリまたはクエリのセットが表示されない場合は、次のガイドに従ってください。
 | 考えられる原因                         | 解決方法                                  |
 |----------------------------------------|-------------------------------------------|
-| Postgres 9.6 を使用している場合で、datadog ユーザーによって実行されたクエリのみが表示される場合は、インスタンス構成にいくつかの設定が欠けている可能性があります。| Postgres 9.6 でインスタンスを監視する場合、Datadog Agent のインスタンス構成は、初期セットアップガイドで作成した関数に基づいて、`pg_stat_statements_view: datadog.pg_stat_statements()` と `pg_stat_activity_view: datadog.pg_stat_activity()` 設定を使用しなければなりません。これらの関数は、すべてのデータベースで作成する必要があります。 |
-| このクエリは「上位クエリ」ではなく、選択した時間枠のどの時点でも、総実行時間の合計が正規化された上位 200 クエリに含まれていないことを意味します。| このクエリは、"Other Queries" の行にグループ化されている可能性があります。どのクエリを追跡するかについては、[収集されたデータ][5]を参照してください。追跡される上位クエリの数は、Datadog サポートに連絡することで上げることができます。 |
+| Postgres 9.6 の場合、Datadog ユーザーが実行したクエリのみが表示される場合は、インスタンス構成にいくつかの設定が欠けている可能性があります。| Postgres 9.6 でインスタンスを監視する場合、Datadog Agent のインスタンス構成は、初期セットアップガイドで作成した関数に基づいて、`pg_stat_statements_view: datadog.pg_stat_statements()` と `pg_stat_activity_view: datadog.pg_stat_activity()` 設定を使用しなければなりません。これらの関数は、すべてのデータベースで作成する必要があります。 |
+|Datadog ユーザーは、他のユーザーによるクエリを表示するための十分なアクセス権を持っていません。|`pg_stat_activity` などのテーブルにアクセスするには、Datadog ユーザーが [`pg_monitor` ロール][25]を持っている必要があります。Datadog ユーザーがこのロールを持っていることを確認してください: `GRANT pg_monitor TO datadog`|
+| このクエリは「上位クエリ」ではなく、選択した時間枠のどの時点でも、総実行時間の合計が正規化された上位 200 クエリに含まれていないことを意味します。| このクエリは、"Other Queries" の行にグループ化されている可能性があります。どのクエリを追跡するかについては、[収集されたデータ][5]を参照してください。追跡される上位クエリの数は、Datadog サポートに連絡することで増やすことができます。 |
 | SELECT、INSERT、UPDATE、または DELETE クエリではありません。| 非ユーティリティ関数は、デフォルトでは追跡されません。それらを収集するには、Postgres のパラメーター `pg_stat_statements.track_utility` を `on` に設定します。詳細は [Postgres のドキュメント][6]を参照してください。 |
 | クエリが関数またはストアドプロシージャ内で実行されています。| 関数やプロシージャで実行されたクエリを追跡するには、構成パラメーター `pg_stat_statements.track` を `on` に設定します。詳しくは、[Postgres のドキュメント][6]を参照してください。 |
-| Postgres の構成パラメーター `pg_stat_statements.max` が作業量に対して低すぎる可能性があります。| 短時間に大量の正規化クエリを実行した場合 (10 秒間に数千の一意の正規化クエリ)、`pg_stat_statements` のバッファはすべての正規化クエリを保持できない可能性があります。この値を増やすと、追跡された正規化クエリのカバレッジが向上し、生成された SQL の高破棄率による影響を軽減することができます。**注**: 列名が順不同のクエリや可変長の ARRAY を使用したクエリは、正規化クエリの破棄率を大幅に増加させる可能性があります。例えば、`SELECT ARRAY[1,2]` と `SELECT ARRAY[1,2,3]` は `pg_stat_statements` では別のクエリとして追跡されます。この設定のチューニングについては、[高度な構成][7]を参照してください。 |
-| Agent が最後に再起動してから、クエリが一度だけ実行されました。| Agent が再起動して以来、2 つの別々の 10 秒間隔で少なくとも 1 回実行された後にのみ、クエリメトリクスが発行されます。 |
+| Postgres の構成パラメーター `pg_stat_statements.max` がワークロードに対して低すぎる可能性があります。| 短時間に大量の正規化クエリを実行した場合 (10 秒間に数千の一意の正規化クエリ)、`pg_stat_statements` のバッファはすべての正規化クエリを保持できない可能性があります。この値を増やすと、追跡された正規化クエリのカバレッジが向上し、生成された SQL の高破棄率による影響を軽減することができます。**注**: 列名が順不同のクエリや可変長の ARRAY を使用したクエリは、正規化クエリの破棄率を大幅に増加させる可能性があります。例えば、`SELECT ARRAY[1,2]` と `SELECT ARRAY[1,2,3]` は `pg_stat_statements` では別のクエリとして追跡されます。この設定のチューニングについては、[高度な構成][7]を参照してください。 |
+| Agent が最後に再起動してから、クエリが一度だけ実行されました。| Agent が再起動して以来、10 秒間隔で 2 回以上実行された後にのみ、クエリメトリクスが発行されます。 |
 
 ### クエリサンプルが切り捨てられる
 
-長いクエリの場合、データベースのコンフィギュレーション上 SQL の全文が表示されないことがあります。お客様のワークロードに合わせて多少のチューニングが必要です。
+長いクエリの場合、データベースの構成上 SQL の全文が表示されないことがあります。お客様のワークロードに合わせて多少のチューニングが必要です。
 
 Postgres の設定 `track_activity_query_size` は、Postgres が保存し、Agent に対して表示する SQL 文の最大サイズを示します。デフォルトでは、この値は 1024 バイトです。この値を 4096 まで上げると、ほとんどのワークロードのクエリをキャプチャすることができます。しかし、クエリが複雑であったり、長い配列を使用する場合はより高い値が適切となる可能性があります。
 
@@ -213,7 +210,7 @@ Agent インスタンスの構成 `ignore_databases` が無視するデータベ
 
 **注:** Agent バージョン <7.41.0 では、`postgres` データベースもデフォルトで無視されます。
 
-#### クエリが実行されない
+#### クエリを説明することができない 
 BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、データベースから有効な実行計画を得ることができません。SELECT、UPDATE、INSERT、DELETE、REPLACE の各クエリのみが実行計画をサポートしています。
 
 #### クエリの実行頻度が比較的低い、または実行速度が速い。
@@ -245,7 +242,7 @@ sudo apt-get install postgresql-contrib-10
 
 ### Agent からのクエリが遅い、またはデータベースへの影響が大きい
 
-データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。Agent クエリがより多くのリソースを必要とする理由として、以下が考えられます。
+Database Monitoring のデフォルトの Agent 構成は保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。Agent クエリがより多くのリソースを必要とする理由として、以下が考えられます。
 
 #### `pg_stat_statements.max` の値が大きい {#high-pg-stat-statements-max-configuration}
 `pg_stat_statements.max` の推奨値は `10000` です。この構成を高い値に設定すると、収集クエリの実行に時間がかかり、クエリのタイムアウトやクエリメトリクスの収集のギャップにつながる可能性があります。Agent がこの警告を表示した場合は、データベースで `pg_stat_statements.max` が `10000` に設定されていることを確認します。
@@ -253,8 +250,8 @@ sudo apt-get install postgresql-contrib-10
 
 [1]: /ja/database_monitoring/setup_postgres/
 [2]: /ja/agent/troubleshooting/
-[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /ja/agent/guide/agent-log-files
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ja/agent/configuration/agent-log-files
 [5]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [7]: /ja/database_monitoring/setup_postgres/advanced_configuration
@@ -275,3 +272,4 @@ sudo apt-get install postgresql-contrib-10
 [22]: https://www.postgresql.org/docs/12/contrib.html
 [23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
+[25]: https://www.postgresql.org/docs/current/predefined-roles.html#:~:text=a%20long%20time.-,pg_monitor,-Read/execute%20various

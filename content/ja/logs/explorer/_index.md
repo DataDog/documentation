@@ -18,10 +18,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: ブログ
   text: ログエクスプローラーの URL をクリップボードに追加する
-- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: ブログ
   text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
-kind: documentation
 title: ログエクスプローラー
 ---
 

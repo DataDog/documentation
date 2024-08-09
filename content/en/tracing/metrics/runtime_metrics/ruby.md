@@ -1,6 +1,5 @@
 ---
 title: Ruby Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your Ruby application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/ruby
@@ -32,7 +31,7 @@ Metrics collection is disabled by default. You can enable it by setting the `DD_
 ```ruby
 # config/initializers/datadog.rb
 require 'datadog/statsd'
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 
 Datadog.configure do |c|
   # To enable runtime metrics collection, set `true`. Defaults to `false`

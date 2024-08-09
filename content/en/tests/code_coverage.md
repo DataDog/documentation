@@ -1,6 +1,5 @@
 ---
 title: Code Coverage in Datadog
-kind: documentation
 description: Learn how to report and use code coverage in Datadog.
 aliases:
 - /continuous_integration/guides/code_coverage/
@@ -30,8 +29,8 @@ Ensure that [Test Visibility][1] is already set up for your language.
 
 * `dd-trace>=3.20.0`.
 * `jest>=24.8.0`, only when run with `jest-circus`.
-* `mocha>=5.2.0`.
-* `cucumber-js>=7.0.0`.
+* `mocha>=5.2.0`, only if `all` option in `nyc` is not explicitly set to `true`.
+* `cucumber-js>=7.0.0`, only if `all` option in `nyc` is not explicitly set to `true`.
 * Only [`Istanbul`][1] code coverage is supported.
 
 
@@ -71,9 +70,13 @@ npm install --save-dev nyc
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
 
+### Known limitations
+
+If the `all` option is set to `true` when running `nyc` (see [nyc docs][3]), the total code coverage reported in the test session does not coincide with the value reported by `nyc`. This is because it does not include uncovered files (the ones that are not touched by your tests).
 
 [1]: https://istanbul.js.org/
 [2]: https://github.com/istanbuljs/nyc
+[3]: https://github.com/istanbuljs/nyc?tab=readme-ov-file#common-configuration-options
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -83,7 +86,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
+If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
 ### Advanced options
 
@@ -149,7 +152,7 @@ Filters provide fine-grained control over what gets excluded using **filter expr
 #### VS code coverage options
 
 
-See [Customize code coverage analysis][102] in the Microsoft documentation for additional information.
+See [Customize code coverage analysis][2] in the Microsoft documentation for additional information.
 
 | Option                   | Summary                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -189,8 +192,8 @@ See [Customize code coverage analysis][102] in the Microsoft documentation for a
 </RunSettings>
 ```
 
-[101]: https://github.com/coverlet-coverage/coverlet
-[102]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
+[1]: https://github.com/coverlet-coverage/coverlet
+[2]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -199,34 +202,17 @@ See [Customize code coverage analysis][102] in the Microsoft documentation for a
 
 When code coverage is available, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-[Jacoco][101] is supported as a code coverage library.
+[Jacoco][1] is supported as a code coverage library.
 
 If your project already has Jacoco configured, the Datadog Tracer instruments it and reports the coverage data to Datadog automatically.
 
 Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
-Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][102] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
+Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][2] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
-[101]: https://www.eclemma.org/jacoco/
-[102]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 
+[1]: https://www.eclemma.org/jacoco/
+[2]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 {{% /tab %}}
-{{% tab "JUnit Report Uploads" %}}
-
-### Compatibility
-* `datadog-ci>=2.17.2`.
-
-You can upload a code coverage percentage value when using JUnit Report uploads:
-
-```shell
-datadog-ci junit upload --service <service_name> --report-metrics=test.code_coverage.lines_pct:85 <path>
-```
-
-In this example, `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
-
-The code coverage report needs to be generated in a different process, otherwise the JUnit report uploads will not generate code coverage reports. The reported metric name must be `test.code_coverage.lines_pct`.
-
-{{% /tab %}}
-
 {{% tab "Python" %}}
 
 ### Compatibility
@@ -274,7 +260,22 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 [1]: https://github.com/nedbat/coveragepy
 [2]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
+{{% tab "JUnit Report Uploads" %}}
 
+### Compatibility
+* `datadog-ci>=2.17.2`.
+
+You can upload a code coverage percentage value when using JUnit Report uploads:
+
+```shell
+datadog-ci junit upload --service <service_name> --report-measures=test.code_coverage.lines_pct:85 <path>
+```
+
+In this example, `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
+
+The code coverage report needs to be generated in a different process, otherwise the JUnit report uploads will not generate code coverage reports. The reported metric name must be `test.code_coverage.lines_pct`.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Graph code coverage
@@ -312,11 +313,11 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 
 ## Show code coverage change of a pull request
 
-The pull request's [test summary comment][8] shows the code coverage change of a GitHub pull request compared to the default branch.
+The pull request's [test summary comment][7] shows the code coverage change of a GitHub pull request compared to the default branch.
 
 ## Intelligent Test Runner and total code coverage
 
-[Intelligent Test Runner][7] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
+[Intelligent Test Runner][8] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
 
 ## Further reading
 
@@ -329,5 +330,5 @@ The pull request's [test summary comment][8] shows the code coverage change of a
 [4]: /monitors
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /continuous_integration/tests/developer_workflows#branch-overview
-[7]: /continuous_integration/intelligent_test_runner/
-[8]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
+[7]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
+[8]: /continuous_integration/intelligent_test_runner/

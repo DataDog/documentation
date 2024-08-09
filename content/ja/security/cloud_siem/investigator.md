@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/visualize-cloud-activity-datadog-cloud-siem-investigator/
   tag: ブログ
   text: Datadog Cloud SIEM Investigator でクラウド環境のアクティビティを視覚化する
-kind: documentation
 title: Investigator
 ---
 

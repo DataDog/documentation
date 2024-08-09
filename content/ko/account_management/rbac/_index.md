@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: 블로그
   text: Datadog Audit Trail로 팀 전반에 컴플라이언스, 거버넌스 및 투명성 구축
-kind: 설명서
 title: 액세스 제어
 ---
 

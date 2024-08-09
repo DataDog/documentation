@@ -1,6 +1,5 @@
 ---
 title: Metric Type Modifiers
-kind: documentation
 aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation

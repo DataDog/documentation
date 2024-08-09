@@ -2,7 +2,6 @@
 aliases:
 - /ko/integrations/faq/how-to-import-datadog-resources-into-terraform
 - /ko/agent/guide/how-to-import-datadog-resources-into-terraform
-kind: 도움말
 title: Datadog 리소스를 Terraform으로 가져오기
 ---
 

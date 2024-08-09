@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/graphing/functions/rollup/
-kind: documentation
 title: ロールアップ
 ---
 

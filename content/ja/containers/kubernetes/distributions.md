@@ -23,7 +23,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/
   tag: ブログ
   text: vSphere 上の Tanzu Kubernetes Grid を監視する
-kind: documentation
 title: Kubernetes ディストリビューション
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: RUM & Session Replay
-kind: documentation
 description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
 disable_sidebar: true
 aliases:
@@ -53,18 +52,23 @@ cascade:
         rank: 70
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  Discover how to create custom user actions tailored to specific business needs, enabling precise tracking of user behavior.
+{{< /learning-center-callout >}}
 
 ## What is Real User Monitoring?
 
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+
 Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. RUM solves four types of use cases for monitoring web and mobile applications:
 
-* **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code.
+* **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your frontend code.
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
+A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes pageviews and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
 
 ## What is Session Replay?
 
@@ -100,7 +104,6 @@ The following table shows which RUM capabilities are supported on each platform:
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
-| Heatmaps | {{< X >}} |  |  |  |  |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains
@@ -118,7 +121,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > Performance Monitoring**][1].
+Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
 
 ### Out-of-the-box dashboards
 
@@ -146,7 +149,7 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 ### Web and mobile vitals
 
-View performance scores and metrics for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
+View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
 
 ### Web view tracking
 

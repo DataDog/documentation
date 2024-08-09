@@ -2,11 +2,9 @@
 aliases:
 - /fr/integrations/awscloudtrail/
 - /fr/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
-- /fr/integrations/amazon_cloudtrail/
 categories:
-- cloud
-- monitoring
 - aws
+- cloud
 - log collection
 - security
 dependencies: []
@@ -20,7 +18,7 @@ integration_id: amazon-cloudtrail
 integration_title: AWS CloudTrail
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_cloudtrail
 public_title: Intégration Datadog/AWS CloudTrail
@@ -29,6 +27,7 @@ short_description: Recevez des alertes concernant toute activité suspecte sur u
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 <div class="alert alert-warning">
@@ -42,9 +41,9 @@ AWS CloudTrail fournit un journal d'audit pour votre compte AWS. Datadog consult
 Pour plus d'informations sur les autres services AWS, consultez [la page relative à l'intégration Amazon Web Services][1].
 
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Amazon Web Services][2].
 
@@ -85,13 +84,13 @@ Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Amazon We
 2. Installez l'[intégration Datadog/AWS CloudTrail][6] :
    Depuis la page de l'intégration, sélectionnez le type d'événement à afficher en priorité normale (le filtre par défaut) dans l'Events Explorer Datadog. Les comptes que vous avez configurés sur la page d'Amazon Web Services apparaissent également ici. Pour visualiser les événements qui ne sont pas mentionnés ici, contactez l'[assistance Datadog][7].
 
-### Collecte de logs
+### APM
 
 #### Activer le logging
 
 Dans AWS CloudTrail, [créez un journal de suivi][8] et sélectionnez un compartiment S3 dans lequel écrire les logs.
 
-#### Envoyer des logs à Datadog
+#### Envoi de logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][9] dans votre compte AWS.
 2. Une fois la fonction Lambda configurée, accédez-y. Dans la section Function Overview, cliquez sur **Add Trigger**.
@@ -104,13 +103,13 @@ Accédez au [Log Explorer][10] pour commencer à explorer vos logs.
 
 Pour en savoir plus sur la collecte de logs de services AWS, consultez la section [Envoyer des logs de services AWS avec la fonction Lambda Datadog][11].
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration AWS CloudTrail n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration AWS CloudTrail crée de nombreux événements basés sur le journal d'audit AWS CloudTrail. Tous les événements dans votre [Events Explorer][12] Datadog se voient assigner le tag `#cloudtrail`. Vous pouvez définir leur priorité dans la configuration de l'intégration.
 
@@ -147,11 +146,11 @@ Voici la liste des événements CloudTrail qui peuvent avoir une priorité norma
 * signin 
 * ssm
 
-### Checks de service
+### Aide
 
 L'intégration AWS CloudTrail n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 ### Le carré CloudTrail ne s'affiche pas ou aucun compte n'est indiqué
 

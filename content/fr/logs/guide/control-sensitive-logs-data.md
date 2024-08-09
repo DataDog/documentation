@@ -14,8 +14,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
   text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
-    vos équipes avec les journaux d'audit Datadog
-kind: guide
+    vos équipes avec le journal d'audit Datadog
+
 title: Contrôler les données de logs sensibles
 ---
 
@@ -70,7 +70,7 @@ Utilisez des règles prêtes à l'emploi ou personnalisées pour [identifier et 
 
 ### Arrêter l'indexation de logs sensibles
 
-Si vous n'utilisez pas le scanner de données sensibles, déterminez si vous souhaitez empêcher tous les nouveaux logs contenant des données sensibles d'être indexés. Vous devrez toujours traiter les logs contenant des données sensibles déjà indexés dans Datadog.
+Si vous n'utilisez pas le scanner de données sensibles, déterminez si vous souhaitez empêcher tous les nouveaux logs contenant des données sensibles d'être indexés. Vous devrez dans tous les cas traiter les logs contenant des données sensibles déjà indexés dans Datadog.
 
 * Recherchez les index qui contiennent des logs avec des données sensibles.
 * Pour chaque index, ajoutez un filtre d'exclusion en fonction de la requête de recherche des données sensibles.
@@ -122,7 +122,7 @@ Si vous avez des questions concernant la conformité des logs ou si vous avez be
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/guide/logs-rbac/
-[2]: /fr/account_management/org_settings/sensitive_data_detection/
+[2]: /fr/sensitive_data_scanner/
 [3]: /fr/account_management/org_settings/
 [4]: /fr/logs/search_syntax/
 [5]: /fr/logs/indexes

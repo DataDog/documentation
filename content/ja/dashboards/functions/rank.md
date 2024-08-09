@@ -1,6 +1,5 @@
 ---
 title: ランク
-kind: documentation
 aliases:
   - /ja/graphing/functions/rank/
 ---

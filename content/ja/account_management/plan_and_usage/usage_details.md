@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/account_management/billing/usage_details/
-kind: documentation
 title: 使用量の詳細
 ---
 

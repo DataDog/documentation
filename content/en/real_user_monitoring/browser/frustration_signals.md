@@ -1,6 +1,5 @@
 ---
 title: Frustration Signals
-kind: documentation
 aliases:
 - /real_user_monitoring/frustration_signals
 further_reading:
@@ -41,15 +40,18 @@ To start collecting frustration signals, add the following to your SDK configura
 
 <details open>
   <summary>Latest version</summary>
-```
+  
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
 ```
+
 </details>
 <details>
   <summary>Before <code>v5.0.0</code></summary>
-```
+  
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true

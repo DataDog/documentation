@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/graphing/functions/smoothing/
-kind: documentation
 title: スムーシング
 ---
 

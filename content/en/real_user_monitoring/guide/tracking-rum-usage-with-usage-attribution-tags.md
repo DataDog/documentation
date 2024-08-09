@@ -1,6 +1,6 @@
 ---
 title: Track RUM Usage with Usage Attribution Tags
-kind: guide
+
 beta: true
 description: Learn how to track RUM usage with custom attribution tags
 aliases:

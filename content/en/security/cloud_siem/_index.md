@@ -1,6 +1,5 @@
 ---
 title: Cloud SIEM
-kind: documentation
 aliases:
   - /security_monitoring/
   - /security_platform/cloud_siem/security_home/
@@ -25,7 +24,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
   tag: "Blog"
   text: "Build sufficient security coverage for your cloud environment"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/akamai-zero-trust-application-security/"
+  tag: "Blog"
+  text: "Monitor Akamai Zero Trust and Application Security with Datadog Cloud SIEM"
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
+  Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Datadog Cloud SIEM (Security Information and Event Management) unifies developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, Slack, Jira, PagerDuty, or a webhook.

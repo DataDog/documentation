@@ -4,7 +4,6 @@ aliases:
 - /ja/tracing/trace_ingestion/
 - /ja/tracing/trace_retention_and_ingestion/
 description: スパンの取り込みをコントロールする方法を学ぶ
-kind: documentation
 title: トレースパイプライン
 ---
 

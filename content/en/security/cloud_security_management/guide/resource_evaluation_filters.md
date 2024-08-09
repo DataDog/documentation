@@ -1,6 +1,5 @@
 ---
 title: Use Filters to Exclude Resources from Evaluation
-kind: guide
 further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"
@@ -9,10 +8,6 @@ further_reading:
     tag: "Documentation"
     text: Setting Up Cloud Security Management
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
 

@@ -8,7 +8,6 @@ cascade:
     rank: 20
     subcategory: グラフ作成ガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: グラフ作成ガイド
 ---

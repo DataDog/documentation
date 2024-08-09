@@ -15,7 +15,6 @@ further_reading:
 - link: /network_monitoring/performance/setup
   tag: 설명서
   text: Datadog 에이전트를 사용하여 네트워크 데이터를 수집합니다.
-kind: 설명서
 title: 네트워크 맵
 ---
 

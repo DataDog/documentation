@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/go/
   tag: Documentation
   text: トレースコンテキストの伝搬
-kind: documentation
 title: Go トレーシングライブラリの構成
 type: multi-code-lang
 ---

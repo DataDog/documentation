@@ -1,6 +1,5 @@
 ---
 title: Graphing Guides
-kind: guide
 private: true
 disable_toc: true
 aliases:
@@ -37,6 +36,10 @@ cascade:
 
 {{< whatsnext desc="Functions:" >}}
     {{< nextlink href="/dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="DDSQL Editor:" >}}
+    {{< nextlink href="/dashboards/guide/ddsql_use_cases" >}}Common DDSQL queries and use cases{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}

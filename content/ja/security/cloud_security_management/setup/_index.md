@@ -8,45 +8,33 @@ aliases:
 - /ja/security/cspm/getting_started
 - /ja/security/cspm/setup
 - /ja/security/misconfigurations/setup
+- /ja/security/vulnerabilities/setup
+- /ja/security/infrastructure_vulnerabilities/setup/
 further_reading:
 - link: /getting_started/cloud_security_management
   tag: ドキュメント
   text: Cloud Security Management の概要
-- link: security/default_rules
+- link: /security/cloud_security_management/setup/csm_enterprise
   tag: ドキュメント
-  text: デフォルトのクラウド構成コンプライアンスルールを探る
-- link: https://www.datadoghq.com/blog/datadog-runtime-security/
-  tag: ブログ
-  text: Datadog クラウドランタイムセキュリティの詳細はこちら
-- link: https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/
-  tag: ブログ
-  text: システムの Linux プロセスからセキュリティ脅威を検出する方法
-- link: https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/
-  tag: ブログ
-  text: 'PwnKit の脆弱性: 概要、検出、対処法'
-- link: https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/
-  tag: ブログ
-  text: 'Dirty Pipe の脆弱性: 概要、検出、対処法'
-- link: https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/
-  tag: ブログ
-  text: Dirty Pipe の脆弱性を利用したコンテナからの脱却
-- link: https://www.datadoghq.com/blog/dns-based-threat-detection/
-  tag: ブログ
-  text: DNS ベースの脅威検出を使用してネットワーク層で攻撃を捉える
-kind: ドキュメント
+  text: CSM Enterprise のセットアップ
+- link: /security/cloud_security_management/setup/csm_pro
+  tag: ドキュメント
+  text: CSM Pro のセットアップ
+- link: /security/cloud_security_management/setup/csm_cloud_workload_security
+  tag: ドキュメント
+  text: CSM Workload Security のセットアップ
 title: Cloud Security Management の設定
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management はサポートされていません。</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations は、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) ではサポートされていません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Cloud Security Management は、現在、CSM Enterprise、CSM Pro、CSM Workload Security の 3 つのパッケージで別々に提供されています。詳細は、<a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Datadog Cloud Security Management の変更点</a>をご覧ください。</div>
+## 概要
 
-Cloud Security Management (CSM) は、クラウドインフラストラクチャー全体にわたってリアルタイムの脅威検出と継続的な構成監査を行い、そのすべてを統合ビューで表示することで、シームレスなコラボレーションと迅速な修復を実現します。
+Cloud Security Management (CSM) は、クラウドインフラストラクチャー全体にわたってリアルタイムの脅威検出と継続的な構成監査を実現し、すべてを統合ビューで表示することで、シームレスなコラボレーションと迅速な修復を可能にします。
 
-CSM には [CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] の 3 つのパッケージがあります。各パッケージには、次の表に示すように、特定の機能セットへのアクセスが含まれます。
-
+CSM は、[CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] の 3 つのパッケージで提供されています。詳細は、[Datadog Cloud Security Management の変更点][7]を参照してください。各パッケージには、次の表に示すように、特定の**機能**セットへのアクセスが含まれています。
 <table>
     <tr>
         <th>パッケージ</th>
@@ -54,51 +42,109 @@ CSM には [CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] の 3
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">脅威</a></li><li style="font-size:16px"><a href="/security/misconfigurations">誤構成 (クラウドアカウントと Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">アイデンティティリスク</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">脆弱性 (コンテナイメージとホスト)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (クラウドアカウントと Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (コンテナイメージとホスト)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">誤構成 (クラウドアカウント)</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">脆弱性 (コンテナイメージ)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (クラウドアカウントと Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (コンテナイメージ)</a></li></ul></td>
     </tr>
     <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">脅威</a></li></ul></td>
+        <td><a href="/security/cloud_security_management/setup/csm_cloud_workload_security">CSM Workload Security</a></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
     </tr>
 </table>
 
-**注**: 
-
-- パッケージに含まれていない機能は、[CSM Setup ページ][4]の指示に従っていつでも有効にすることができます。
-- CSM Identity Risks と CSM Vulnerabilities はベータ版です。設定方法については、[Cloud Security Management Identity Risks][5] および [Cloud Security Management Vulnerabilities の設定][6]を参照してください。
+**注**: パッケージに含まれていない機能は、[CSM セットアップページ][4]の指示に従えばいつでも有効にすることができます。
 
 ## 前提条件
 
-{{< tabs >}}
-{{% tab "CSM Enterprise" %}}
+- CSM に必要な Datadog Agent の**最小**バージョンは、`7.46` 以上です。
 
-{{% csm-prereqs-enterprise-ws %}}
+### サポートされるデプロイメントのタイプと機能
 
-{{% /tab %}}
+次の表に、各デプロイメントタイプで使用できる CSM の機能をまとめます。
 
-{{% tab "CSM Pro" %}}
+<div class="alert alert-info">詳細については、各 CSM 機能の見出しをクリックして、その機能の追加要件を確認してください。</div>
 
-[CSM Pro を有効にする][1]には、まず AWS、Azure、Google Cloud Platform の Datadog クラウドアカウントインテグレーションを設定する必要があります。
+| タイプ          | 必要な Agent  (7.46+) | CSM Misconfigurations | [CSM Threats][8]| [CSM Vulnerabilities][9] | [CSM Identity Risks][10] |
+|---------------|------------------------|-----------------------|-------------|---------------------|--------------------|
+| Docker        | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |
+| ガイド    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Linux         | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Amazon ECS/EKS    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| AWS アカウント   |                        | {{< X >}}             |             |                     | {{< X >}}          |
+| Azure アカウント |                        | {{< X >}}             |             |                     |                    |
+| GCP アカウント   |                        | {{< X >}}             |             |                     |                    |
+| ログの収集       | {{< X >}}              |                       |  {{< X >}}  |                     |                    |
+| AWS Fargate ECS/EKS  | {{< X >}}              |                       | beta        |                     |                    |
 
-[1]: /ja/security/cloud_security_management/setup/csm_pro
 
-{{% /tab %}}
+以下の表は各 CSM 機能ごとの追加前提条件を示しています。
 
-{{% tab "CSM Workload Security" %}}
+### CSM Threats 
 
-{{% csm-prereqs-enterprise-ws %}}
+CSM Threats は、以下の Linux ディストリビューションをサポートしています。
 
-{{% /tab %}}
+| Linux ディストリビューション        | 対応バージョン                    |
+| ---------------------------| --------------------------------------|
+| Ubuntu LTS                 | 18.04、20.04、22.04                   |
+| Mac OS X                      | 10 以降                           |
+| Amazon Linux 2              | カーネル 4.15、5.4、5.10、および 2023      |
+| SUSE Linux Enterprise Server| 12 および 15                              |
+| Red Hat Enterprise Linux    | 7、8、および 9                            |
+| Oracle Linux                | 7、8、および 9                            |
+| Fedora                      | 7                                     |
 
-{{< /tabs >}}
+**注:**
+
+- カスタムカーネルビルドはサポートされていません。
+- Cilium や Calico などのカスタム Kubernetes ネットワークプラグインとの互換性については、[トラブルシューティングページ][102]をご参照ください。
+- データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.15.0 以降または eBPF 機能のバックポートを備えたプラットフォームを必要とします。
+
+### CSM Vulnerabilities 
+
+| コンポーネント                | バージョン/要件                     |
+| ------------------------ | ----------------------------------------|
+| [Helm Chart][103]            | v3.49.6 以降 (Kubernetes のみ)      |
+| [containerd][104]              | v1.5.6 以降 (Kubernetes とホストのみ)|
+
+**注**: CSM Vulnerabilities は以下のコンテナランタイムでは**利用できません**。
+
+  - CRI-O ランタイム
+  - podman ランタイム
+
+### CSM Identity Risks 
+
+<div class="alert alert-info"><strong>注</strong>: 現時点では、CSM Identity Risks は AWS でのみ利用可能です。</div>
+
+CSM Identity Risks を利用するには、[AWS のリソース収集を有効にする][105]必要があります。すでにこの設定を行っている場合は、追加の設定は必要ありません。
+
+**注**: 
+
+- [AWS アカウントで CSM Misconfigurations を有効にしている][106]場合は、すでにクラウドリソース収集が有効になっています。
+- 必須ではありませんが、[CloudTrail ログの転送を有効にする][107]と、インフラストラクチャー内のリソースの実際の使用 (または未使用) に基づき、例えばプロビジョニングされた権限と使用された権限の間に大きな差があるユーザーやロールに関する追加の洞察を得ることができます。
+</br>
+
+## 適用範囲
+
+以下の表は、各 CSM 機能に関連する適用範囲をまとめたものです。
+| リソースの種類                         | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
+| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
+| AWS アカウントのリソース                | {{< X >}}             |             |                      |                     |  
+| Azure サブスクリプションのリソース         | {{< X >}}             |             |                      |                     | 
+| GCP プロジェクトのリソース                | {{< X >}}             |             |                      |                     |  
+| Kubernetes クラスター                      | {{< X >}}             | {{< X >}}   |                      |                     |  
+| Docker ホスト                             | {{< X >}}             |             |                      |                     |
+| Linux ホスト                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  
+| Docker コンテナ                        |                       | {{< X >}}   |                      |                     |
+| コンテナイメージ                         |                       |             |    {{< X >}}         |                     |
+| AWS アカウントの IAM                      |                       |             |                      |  {{< X >}}          |
+
+**注**: CSM Misconfigurations は、さらに、EC2 インスタンス、RDS、S3、ELB など、Windows と AWS Fargate を実行しているクラウドアカウントで使用されている一般的なリソースを監視します。
 
 ## 次のステップ
 
-CSM のセットアップを開始するには、Datadog の [**Security** > **Setup**][4] セクションに移動します。ここに、CSM のセットアップと構成の詳細な手順が記載されています。詳細な手順については、[CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] のセットアップドキュメントを参照してください。
+CSM のセットアップを開始するには、Datadog の [**Security** > **Setup**][4] セクションに移動します。ここに、CSM の構成の詳細な手順が記載されています。詳細なセットアップ手順については、[CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] のセットアップドキュメントを参照してください。
 
 ## その他の参考資料
 
@@ -106,7 +152,17 @@ CSM のセットアップを開始するには、Datadog の [**Security** > **S
 
 [1]: /ja/security/cloud_security_management/setup/csm_enterprise
 [2]: /ja/security/cloud_security_management/setup/csm_pro
-[3]: /ja/security/cloud_security_management/setup/csm_workload_security
+[3]: /ja/security/cloud_security_management/setup/csm_cloud_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /ja/security/identity_risks/#setup
-[6]: /ja/security/infrastructure_vulnerabilities/setup
+[6]: /ja/security/cloud_security_management/setup/compatibility
+[7]: https://www.datadoghq.com/blog/cloud-security-management-changes/
+[8]: /ja/security/cloud_security_management/setup/#csm-threats
+[9]: /ja/security/cloud_security_management/setup/#csm-vulnerabilities
+[10]: /ja/security/cloud_security_management/setup/#csm-identity-risks
+[102]: /ja/security/cloud_security_management/troubleshooting
+[103]: /ja/containers/kubernetes/installation/?tab=helm
+[104]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[105]: /ja/integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
+[106]: /ja/security/cloud_security_management/setup/csm_enterprise?tab=aws#enable-resource-scanning-for-cloud-accounts
+[107]: /ja/security/cloud_security_management/setup/csm_enterprise/?tab=aws#enable-cloudtrail-logs-forwarding

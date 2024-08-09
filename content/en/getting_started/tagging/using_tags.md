@@ -1,6 +1,5 @@
 ---
 title: Using Tags
-kind: documentation
 description: Learn how to use tags in Datadog products.
 aliases:
 - /tagging/using_tags/
@@ -252,32 +251,7 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 
 For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Logs][10].
 
-{{< tabs >}}
-{{% tab "Search" %}}
-
-{{< img src="tagging/using_tags/logsearchtags.png" alt="Log Search Tags" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Analytics" %}}
-
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tags" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Patterns" %}}
-
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns Tags" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Live Tail" %}}
-
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" width="80%">}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Additionally, tags are used to filter a logs [Pipeline][14]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
-
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" style="width:80%;">}}
+Additionally, tags are used to filter a logs [Pipeline][14]. For example, if you only want logs from the coffee-house service to go through the pipeline, add the tag `service:coffee-house` to the filter field.
 
 ## RUM & Session Replay
 
@@ -304,7 +278,7 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 {{% /tab %}}
 {{% tab "Explorer" %}}
 
-The [Synthetic Monitoring & Continuous Testing Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
+The [Synthetic Monitoring & Testing Results Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
 
 To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
 
@@ -337,8 +311,6 @@ When creating a [metric-based SLO][1], use metric tags in the SLO's success rati
 
 * **from** text box to limit the metric scope to only those tags.
 * **sum by** text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
-
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Metric-based SLO Tags" style="width:80%;">}}
 
 [1]: /service_management/service_level_objectives/metric/
 {{% /tab %}}

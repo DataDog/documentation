@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/troubleshooting/
   tags: Documentation
   text: Dépannage
-kind: guide
+
 title: Tracer des scripts CLI PHP
 ---
 

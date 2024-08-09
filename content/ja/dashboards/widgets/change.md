@@ -15,11 +15,11 @@ further_reading:
 - link: /dashboards/graphing_json/request_json/
   tag: ドキュメント
   text: リクエスト JSON スキーマ
-kind: documentation
 title: 変化ウィジェット
 widget_type: 変化
 ---
-Change グラフは、ある期間におけるメトリクスの変化を表示します。
+
+変化グラフは、特定の時間内におけるメトリクスの変動を示します。これは、N 分前の値と現在の値との絶対変化量または相対変化量 (%) を指定のしきい値と比較します。比較されるデータポイントは単一のポイントではなく、メトリクスの定義セクションのパラメーターを使用して計算される値です。詳細については、[メトリクスモニター][6]ドキュメント、および[変化アラートモニターガイド][7]を参照してください。
 
 {{< img src="/dashboards/widgets/change/change_widget.png" alt="jvm.heap_memory メトリクスの変化ウィジェットの例" style="width:100%;" >}}
 
@@ -64,3 +64,5 @@ Change グラフは、ある期間におけるメトリクスの変化を表示�
 [1]: /ja/dashboards/guide/context-links/
 [2]: /ja/api/latest/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/
+[6]: /ja/monitors/types/metric/?tab=change
+[7]: /ja/monitors/guide/change-alert/

@@ -36,9 +36,9 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 3.3.0
+integration_version: 3.5.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: clickhouse
 public_title: ClickHouse

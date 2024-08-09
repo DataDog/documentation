@@ -229,6 +229,22 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
+  - Rust:
+    - name: cadence
+      link: https://docs.rs/cadence/latest/cadence/
+      official: false
+      dogstatsd: true
+      authors: Nick Pillitteri
+    - name: metrics-exporter-statsd
+      link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
+      official: false
+      dogstatsd: true
+      authors: GitHub
+    - name: datadog-api-client-rust
+      link: https://github.com/DataDog/datadog-api-client-rust
+      official: true
+      api: true
+      authors: Datadog
   - Scala:
     - name: datadog-scala
       link: https://github.com/gphat/datadog-scala
@@ -262,6 +278,11 @@ Classic:
       api: true
       authors: Jacob Aronoff
 Tracing:
+  - C++:
+    - name: dd-trace-cpp
+      link: https://github.com/DataDog/dd-trace-cpp
+      official: true
+      authors: Datadog
   - .NET:
     - name: dd-trace-dotnet
       link: https://github.com/DataDog/dd-trace-dotnet
@@ -272,6 +293,11 @@ Tracing:
       link: https://github.com/neuecc/DatadogSharp
       notes: Also supports DogStatsD.
       authors: Yoshifumi Kawai
+  - Rust/C++/C:
+    - name: ddprof
+      link: https://github.com/DataDog/ddprof
+      authors: Datadog
+      notes: A profiler for compiled languages.
   - Elixir:
     - name: spandex
       link: https://github.com/zachdaniel/spandex
@@ -322,7 +348,7 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-rb
       official: true
       authors: Datadog
-      notes: gem is called 'ddtrace'.
+      notes: gem is called 'datadog'.
     - name: ddtrace-rb-method-wrapper
       link: https://github.com/brandfolder/ddtrace-rb-method-wrapper
       authors: Brandfolder

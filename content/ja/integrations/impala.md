@@ -43,7 +43,7 @@ integration_id: impala
 integration_title: Impala
 integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: impala
 public_title: Impala

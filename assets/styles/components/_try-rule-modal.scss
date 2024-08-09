@@ -1,0 +1,209 @@
+#tryRuleModal {
+    .modal-dialog {
+        min-height: 674px;
+        max-width: 720px;
+        box-sizing: content-box;
+        border-radius: 12px;
+        padding: 4px;
+        background-color: white;
+        top: 5vh;
+        a {
+            color: #006BC2;
+        }
+        .modal-content {
+            height: 100%;
+            background-image: url('#{$baseImgURL}images/code_analysis/static_analysis/try-rule-modal-mask.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            border: none;
+            @media (max-width: 576px) {
+                background-image: url('#{$baseImgURL}images/code_analysis/static_analysis/try-rule-modal-mask-mobile.png');
+                background-position-y: -175px;
+            }
+            @media (max-width: 450px) {
+                background-position-y: 0;
+            }
+            .modal-header {
+                color: white;
+                border: none;
+                height: 186px;
+                text-align: center;
+                justify-content: center;
+                padding-bottom: 14px;
+                img {
+                    margin: 4px 0;
+                }
+                .modal-title {
+                    width: 60%;
+                    line-height: normal;
+                    @media (max-width: 576px) {
+                        width: 100%;
+                    }
+                }
+                .modal-close {
+                    top: 12px;
+                    right: 12px;
+                    i.icon-x-circle-solid {
+                        color: white;
+                        cursor: pointer;
+                    }
+                    &:hover {
+                        i.icon-x-circle-solid {
+                            opacity: 0.7;
+                        }
+                    }
+                    
+                }
+            }
+            .modal-body {
+                width: 100%;
+                padding-top: 0;
+                padding-bottom: 24px;
+                flex: none;
+                @media (max-width: 576px) {
+                    margin-top: 56px;
+                }
+                .floating-body-top {
+                    background-color: white;
+                    box-shadow: 0px 2px 8px 0px #00000052;
+                    width: 100%;
+                    min-height: 202px;
+                    row-gap: 4px;
+                    border-radius: 8px;
+                    padding: 16px;
+                    position: relative;
+                    z-index: 1;
+                    h2 {
+                        line-height: 24px;
+                    }
+                    .highlight.js-appended-copy-btn {
+                        .code-button-wrapper {
+                            // Hide the js appended copy button
+                            display: none;
+                        }
+                    }
+                    .copy-icon {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        cursor: pointer;
+                        margin: 8px;
+                        padding: 6px;
+                        border-radius: 4px;
+                        transition: all .3s ease-in-out;
+
+                        svg path {
+                            fill: #1C2B34;
+                            transition: all .3s ease-in-out;
+                        }
+                    }
+                    .copy-icon:hover {
+                        background: #006BC2;
+                        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.32);
+                        
+                        svg path {
+                            fill: white;
+                        }
+                    }
+                    .highlight .chroma {
+                        background: #F9FAFB;
+                        border: none;
+                        padding: 8px;
+                        .chroma {
+                            padding: 0;
+                        }
+                        table {
+                            background: #F9FAFB;
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+                            td {
+                                border-left: none !important;
+                            }
+                            code {
+                                line-height: 18px;
+                                span {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+                    ol {
+                        padding-left: 16px;
+                        li {
+                            padding-left: 4px;
+                            font-size: 14px;
+                        }
+                    }
+                    p {
+                        font-size: 14px;
+                        line-height: 20px;
+                        margin-right: 4px;
+                        color: black;
+                    }
+                    i.icon-external-link {
+                        position: relative;
+                        top: 2px;
+                        cursor: pointer;
+                    }
+                }
+                .floating-body-bottom {
+
+                    justify-content: space-between;
+                    margin-top: 16px;
+                    @media (max-width: 768px) {
+                        justify-content: center;
+                        gap: 16px;
+                    }
+                    .floating-body-2 {
+                        box-shadow: 0px 2px 8px 0px #00000052;
+                        height: 188px;
+                        max-width: 332px;
+                        border-radius: 8px;
+                        padding: 16px;
+                        row-gap: 8px;
+                        @media (max-width: 768px) {
+                            max-width: none;
+                        }
+                        .cta-button {
+                            height: 36px;
+                            padding: 8px 16px;
+                        }
+                        h2 {
+                            line-height: 20px;
+                        }
+                        p {
+                            text-align: center;
+                            font-size: 14px;
+                            line-height: 20px;
+                            margin: 0
+                        }
+                        i.icon-external-link {
+                            position: relative;
+                            top: 3px;
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+            .modal-footer {
+                border: 0;
+                padding: 0;
+                margin: 0 52px;
+                margin-bottom: 8px;
+                text-align: center;
+                p, span {
+                    font-size: 14px;
+                }
+                span {
+                    color: #006BC2;
+                }
+                i {
+                    position: relative;
+                    top: 2px;
+                }
+            }
+        }
+    }
+    
+}

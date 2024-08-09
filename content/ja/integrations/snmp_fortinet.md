@@ -29,7 +29,7 @@ integration_id: snmp-fortinet
 integration_title: Fortinet
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_fortinet
 public_title: Fortinet

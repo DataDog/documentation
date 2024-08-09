@@ -30,7 +30,7 @@ integration_id: snmp-netapp
 integration_title: NetApp
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_netapp
 public_title: NetApp

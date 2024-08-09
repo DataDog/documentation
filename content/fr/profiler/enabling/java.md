@@ -13,7 +13,6 @@ further_reading:
 - link: profiler/profiler_troubleshooting/java
   tag: Documentation
   text: Résoudre les problèmes rencontrés en utilisant le profileur
-kind: Documentation
 title: Activer le profileur Java
 type: multi-code-lang
 ---

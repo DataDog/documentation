@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: Agent のトラブルシューティング
   text: Agent チェックのステータスを確認
-kind: documentation
 title: デバッグモード
 ---
 
@@ -32,9 +31,9 @@ Agent のフルデバッグモードを有効にするには
 
 4. ログが生成されるまで数分待ちます。各 OS 固有の詳細については、[Agent ログファイル][3]をご参照ください。
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
-[3]: /ja/agent/guide/agent-log-files/
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -46,9 +45,9 @@ Agent のフルデバッグモードを有効にするには
 
 4. ログが生成されるまで数分待ちます。各 OS 固有の詳細については、[Agent ログファイル][3]をご参照ください。
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/?tab=agentv5#restart-the-agent
-[3]: /ja/agent/guide/agent-log-files/?tab=agentv5
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
+[2]: /ja/agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
+[3]: /ja/agent/configuration/agent-log-files/?tab=agentv5
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -65,7 +64,7 @@ Agent v6.19 / v7.19 以降の場合は、以下を使用してランタイム時
 agent config set log_level debug
 ```
 
-トレースエージェントが専用コンテナにある場合は、エージェントコンテナでのようにランタイムにトレースエージェントコンテナのログレベルを変更することは **できません**。g `dd_log_level` 変数を `debug` に設定した後に、専用のトレースエージェントコンテナへの再デプロイメントが依然として必要です。
+エージェントコンテナでのようにランタイムにトレースエージェントコンテナのログレベルを変更することは **できません**。`DD_LOG_LEVEL` 変数を `debug` に設定した後に、専用のトレースエージェントコンテナへの再デプロイメントが依然として必要です。
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

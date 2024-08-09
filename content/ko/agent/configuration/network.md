@@ -24,7 +24,6 @@ further_reading:
 - link: 추적
   tag: 설명서
   text: 트레이스 수집
-kind: 가이드
 title: 네트워크 트래픽
 ---
 

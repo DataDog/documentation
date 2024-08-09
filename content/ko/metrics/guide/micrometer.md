@@ -6,7 +6,6 @@ further_reading:
 - link: https://micrometer.io/docs/registry/prometheus
   tag: 마이크로미터
   text: 마이크로미터 프로메테우스(Prometheus)
-kind: 가이드
 title: 마이크로미터(Micrometer)를 사용한 메트릭 전송
 ---
 

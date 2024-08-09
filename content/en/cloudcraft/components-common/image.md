@@ -1,6 +1,5 @@
 ---
 title: "Image Component"
-kind: documentation
 ---
 
 ## Overview

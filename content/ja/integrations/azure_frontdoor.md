@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: Microsoft Azure Front Door
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_frontdoor
 public_title: Datadog-Microsoft Azure Front Door インテグレーション

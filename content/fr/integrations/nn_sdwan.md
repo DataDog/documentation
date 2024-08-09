@@ -38,7 +38,7 @@ integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
 public_title: Netnology Cisco SD-WAN

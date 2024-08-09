@@ -18,7 +18,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
   text: ASM クエリを定義するための構文
-kind: documentation
 title: カスタム検出ルール
 ---
 

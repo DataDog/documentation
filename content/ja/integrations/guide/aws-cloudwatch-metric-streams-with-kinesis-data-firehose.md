@@ -6,14 +6,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
   tag: ブログ
   text: メトリクススストリームを使用して Amazon CloudWatch メトリクスを収集する
-kind: ガイド
-title: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
+title: Amazon Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 ---
 {{% site-region region="us3,gov" %}}
-選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では AWS CloudWatch Metric Streams with Kinesis Data Firehose は利用できません。
+選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では AWS CloudWatch Metric Streams with Amazon Data Firehose は利用できません。
 {{% /site-region %}}
 
-Amazon CloudWatch メトリクスストリームと Amazon Kinesis Data Firehose を使用すると、CloudWatch メトリクスを 2〜3 分のレイテンシーでより速く Datadog に取り込むことができます。これは、Datadog のデフォルトの API ポーリングアプローチよりも大幅に高速で、デフォルトのアプローチではメトリクスが 10 分ごとに更新されます。API ポーリングアプローチについて、詳しくは[クラウドメトリクスの遅延に関するドキュメント][1]でご確認ください。
+Amazon CloudWatch メトリクスストリームと Amazon Data Firehose を使用すると、CloudWatch メトリクスを 2〜3 分のレイテンシーで Datadog に取り込むことができます。これは、Datadog のデフォルトの API ポーリングアプローチよりも大幅に高速で、デフォルトのアプローチではメトリクスが 10 分ごとに更新されます。API ポーリングアプローチについて、詳しくは[クラウドメトリクスの遅延に関するドキュメント][1]でご確認ください。
 
 ## 概要
 
@@ -43,7 +42,7 @@ AWS アカウントやリージョン、あるいは特定のネームスペー�
 
 メトリクスをストリーミングするための Datadog からの追加料金はありません。
 
-AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数と Kinesis Data Firehose に送信されたデータボリュームに基づいて課金します。ストリーミングしているメトリクスのサブセットの CloudWatch コストが増加する可能性があるため、Datadog は、より低いレイテンシーが最も必要な AWS メトリクス、サービス、リージョン、アカウントにメトリクスストリームを優先し、それ以外ではポーリングを使用することをお勧めします。詳細については、[Amazon CloudWatch の価格設定][1]を参照してください。
+AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数と Amazon Data Firehose に送信されたデータボリュームに基づいて課金します。そのため、ストリーミングしているメトリクスのサブセットの CloudWatch コストが増加する可能性があります。このため、Datadog は、より低いレイテンシーが最も必要な AWS メトリクス、サービス、リージョン、アカウントにメトリクスストリームを使用し、それ以外ではポーリングを使用することをお勧めします。詳細については、[Amazon CloudWatch の価格設定][1]を参照してください。
 
 ストリーム内の EC2 または Lambda のメトリクスは、請求対象のホスト数や Lambda の呼び出し数を増加させる可能性があります (EC2 の場合、これらのホストと関数が AWS インテグレーションまたは Datadog Agent でまだ監視されていない場合)。
 
@@ -61,6 +60,8 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 {{% tab "CloudFormation" %}}
 
 複数の AWS リージョンを使用している場合は自動的かつ簡単になるため、Datadog では CloudFormation の使用をお勧めします。
+
+**注**: Datadog へのメトリクスストリーミングは現在、OpenTelemetry v0.7 出力フォーマットのみをサポートしています。
 
 1. Datadog サイトで、[AWS インテグレーションページ][1]の **Configuration** タブに移動します。
 2. AWS アカウントをクリックして、メトリクスストリーミングを設定します。
@@ -91,6 +92,8 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 
 AWS コンソールを使用してメトリクスストリームを設定するには、各 AWS リージョンに対して [CloudWatch メトリクスストリーム][2]を作成します。
 
+**注**: Datadog へのメトリクスストリーミングは現在、OpenTelemetry v0.7 出力フォーマットのみをサポートしています。
+
 1. **Quick AWS Partner Setup** を選択し、ドロップダウンメニューから AWS パートナー送信先として **Datadog** を選択します。
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch メトリクスストリームクイックパートナーの設定" responsive="true" style="width:60%;">}}
 2. メトリクスをストリーミングする Datadog サイトを選択し、[Datadog API キー][1]を入力します。
@@ -119,6 +122,10 @@ Metric Stream リソースが正常に作成されたことを確認したら、
 ### クロスアカウントメトリクスストリーミング
 クロスアカウントメトリクスストリーミングを使用して、AWS リージョン内の複数の AWS アカウントにまたがる単一のメトリクスストリームにメトリクスを含めます。これは、共通の送信先を対象とするメトリクスの収集に必要なストリーム数を減らすのに役立ちます。そのためには、モニタリングアカウントに[ソースアカウントを接続][5]し、AWS モニタリングアカウントで Datadog へのクロスアカウントストリーミングを有効にします。
 
+この機能を正しく動作させるには、監視アカウントに以下の権限が必要です。
+   * oam:ListSinks
+   * oam:ListAttachedLinks
+
 **注:** ストリーミングされるメトリクスに関して、カスタムタグやその他のメタデータを収集するには、ソースアカウントを Datadog と連携させます。
 
 ### メトリクスストリーミングを無効にする
@@ -130,11 +137,12 @@ Metric Stream リソースが正常に作成されたことを確認したら、
 
 [AWS コンソール](?tab=awsconsole#installation)からストリーミングを設定した場合:
 1. 配信ストリームにリンクしている CloudWatch Metric Stream を削除します。
-2. ストリームの設定中に作成された S3 バケット、Firehose、ストリームに関連付けられた IAM ロールおよびその他のすべてのリソースを削除します。
+2. ストリームに関連付けられた S3 および Firehose IAM ロールを含め、ストリームのセットアップ中に作成されたすべてのリソースを削除します。
 
 リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][4]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** に無効にしたリージョンが表示されていないことを確認します。
 
-## トラブルシューティング
+## ヘルプ
+
 Metric Streams や関連リソースのセットアップで遭遇する問題を解決するには、[AWS のトラブルシューティング][5]をご覧ください。
 
 ## その他の参考資料

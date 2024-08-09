@@ -1,6 +1,5 @@
 ---
 title: Rehydrating from Archives
-kind: Documentation
 description: "Capture log events from your archives back into Datadog."
 aliases:
   - /logs/historical-views
@@ -17,8 +16,7 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 To create a historical view:
 
-1. Navigate to the [Configuration page][2] of your Datadog account.
-2. Select the [**Rehydrate From Archives**][3] tab.
+1. Navigate to the [Rehydrate From Archives][3] page.
 3. Click **New Historical View**.
 
 Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives.
@@ -178,7 +176,6 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 *Log Rehydration is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /logs/explorer/search/
 [5]: /logs/archives/?tab=awss3#datadog-tags

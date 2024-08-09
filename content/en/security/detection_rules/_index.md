@@ -1,6 +1,5 @@
 ---
 title: Detection Rules
-kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
@@ -19,7 +18,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
   tag: "Blog"
   text: "Detect suspicious login activity with impossible travel detection rules"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][16].
 
@@ -48,7 +59,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security** > **Configuration**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -143,7 +154,7 @@ The rule deprecation process is as follows:
 [1]: /security/default_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cloud_siem/log_detection_rules/
-[4]: /security/misconfigurations/
+[4]: /security/cloud_security_management/misconfigurations/
 [5]: /security/threats/
 [6]: /security/application_security/
 [7]: /tracing/
@@ -151,8 +162,8 @@ The rule deprecation process is as follows:
 [9]: https://app.datadoghq.com/security/configuration/rules
 [10]: /account_management/rbac/
 [11]: /security/application_security/threats/custom_rules/
-[12]: /security/misconfigurations/custom_rules
+[12]: /security/cloud_security_management/misconfigurations/custom_rules
 [13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /security/identity_risks/
+[14]: /security/cloud_security_management/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security

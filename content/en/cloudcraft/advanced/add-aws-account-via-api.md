@@ -1,6 +1,5 @@
 ---
 title: Add AWS accounts via the Cloudcraft API
-kind: guide
 ---
 
 Cloudcraft currently doesn't offer a way to add multiple AWS accounts at once using the web interface, but you can do so via [the API][1].

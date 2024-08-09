@@ -1,6 +1,5 @@
 ---
 title: GitHub Pull Requests
-kind: documentation
 description: Learn how to use Code Analysis in GitHub pull requests.
 aliases:
 - /static_analysis/github_pull_requests
@@ -23,7 +22,7 @@ During code reviews on GitHub, the integration checks for Static Analysis violat
 
 The comment includes the name, ID, severity, category, and description of the Static Analysis violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
-## Setup Code Analysis for GitHub pull requests
+## Set up Code Analysis for GitHub pull requests
 
 ### Enable Code Analysis on Datadog
 
@@ -42,7 +41,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications > Add New GitHub Application**][3].
 1. Fill out any required details, such as the GitHub organization name.
-1. Under **Select Features**, check the **Static Analysis: Pull Request Review Comments** box.
+1. Under **Select Features**, check the **Code Analysis: Pull Request Review Comments** box.
 1. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
 1. Click **Create App in GitHub**.
 1. Enter a name for your app, and submit it.
@@ -55,7 +54,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Code Analysis.
 {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
-1. On the **Features** tab, look at the **Static Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
+1. On the **Features** tab, look at the **Code Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 1. Under the **Subscribe to events** heading, check the **Pull request** box.
@@ -68,6 +67,8 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 {{< img src="ci/static-analysis-github-comments.png" alt="Example of a Code Analysis comment on a pull request" style="width:100%;" >}}
 
+**Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +78,4 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 [3]: https://app.datadoghq.com/integrations/github/add
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
 [5]: https://app.datadoghq.com/integrations/github/configuration
+[6]: /code_analysis/static_analysis/github_actions/

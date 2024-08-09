@@ -6,7 +6,6 @@ further_reading:
 - link: dashboards/querying/#incident-management-analytics
   tag: Documentation
   text: インシデント管理分析
-kind: documentation
 title: インシデント詳細ページ
 ---
 

@@ -12,7 +12,6 @@ further_reading:
 - link: developers/prometheus
   tag: 설명서
   text: 자체적인 커스텀 프로메테우스(Prometheus) 점검 작성
-kind: 설명서
 title: 호스트에서 프로메테우스(Prometheus) 및 개방형메트릭 수집
 ---
 

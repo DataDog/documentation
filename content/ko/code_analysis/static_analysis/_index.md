@@ -11,7 +11,6 @@ further_reading:
   tag: 설명서
   text: Source Code Integration에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 정적 분석
 ---
 
@@ -59,8 +58,8 @@ title: 정적 분석
 
 ### IDE
 {{< whatsnext desc="정적 분석을 사용하면 IDE(통합 개발 환경)에서 파일 편집 시 코드 취약점을 식별할 수 있습니다. 다음 통합에 대한 자세한 내용을 확인하려면 설명서를 참조하세요:">}}
-    {{< nextlink href="developers/ide_integrations/idea/" >}}Datadog IntelliJ IDEA 플러그인{{< /nextlink >}}
-    {{< nextlink href="developers/ide_integrations/vscode/" >}}Datadog Visual Studio 코드 확장{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog IntelliJ IDEA 플러그인{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/vscode/" >}}Datadog Visual Studio 코드 확장{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 검색 및 필터 결과

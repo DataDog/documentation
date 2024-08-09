@@ -14,7 +14,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: APM の理解を深めるためのインタラクティブなセッションに参加できます
-kind: documentation
 title: トレースの概要
 ---
 
@@ -41,7 +40,7 @@ vagrant ssh
 [Datadog API キー][7]を付加した [1 行のインストールコマンド][6]を使用して、Datadog Host Agent をインストールします。
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ### 検証
