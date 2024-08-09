@@ -67,7 +67,9 @@ To set up a pipeline:
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
 
-See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
+See [Set Up Pipelines][8] for more information.
+
+See [Advanced Configurations][9] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Explore Observability Pipelines
 
@@ -130,4 +132,5 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [5]: /observability_pipelines/archive_logs/
 [6]: /observability_pipelines/sensitive_data_redaction/
 [7]: /observability_pipelines/log_enrichment/
-[8]: /observability_pipelines/advanced_configurations/
+[8]: /observability_pipelines/set_up_pipelines/
+[9]: /observability_pipelines/advanced_configurations/
