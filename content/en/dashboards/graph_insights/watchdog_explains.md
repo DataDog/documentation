@@ -40,7 +40,7 @@ Start your investigation from any timeseries metric graph. Open a graph in full 
 
 Watchdog Explains highlights anomalies with a pink box. On the right side panel, you can view the tags that are responsible for the spike. Click on a tag to see evidence of how it contributes to the graph shape.
 
-{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:0%;" >}}
+{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
 
 
 ## Further Reading
