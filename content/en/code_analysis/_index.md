@@ -149,8 +149,8 @@ For more information, see the [Source Code Integration documentation][10].
 
 [1]: /code_analysis/static_analysis
 [2]: /code_analysis/software_composition_analysis
-[3]: /developers/ide_integrations/vscode/#static-analysis
-[4]: /developers/ide_integrations/idea/#static-analysis
+[3]: /developers/ide_plugins/vscode/#static-analysis
+[4]: /developers/ide_plugins/idea/#static-analysis
 [5]: /code_analysis/github_pull_requests/
 [6]: /code_analysis/static_analysis_rules
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
