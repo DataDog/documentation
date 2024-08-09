@@ -13,6 +13,9 @@ further_reading:
     - link: '/integrations/'
       tag: 'Integrations'
       text: "Datadog's full list of integrations"
+    - link: 'https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/?tab=java'
+      tag: 'Documentation'
+      text: 'Inferred Service dependencies (beta)'
 ---
 
 ## Overview
@@ -66,7 +69,9 @@ For example, you might have a single service like `service:test` showing multipl
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-You can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
+You can use [Inferred Service dependencies (beta)][10]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
+
+Or, you can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 
 For more information, see [Configure the Datadog Tracing Library][9] or choose your language here:
 
