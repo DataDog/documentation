@@ -33,5 +33,5 @@ For more information, see the [Watchdog Explains][2] documentation.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: dashboards/graph_insights/correlations
-[2]: dashboards/graph_insights/watchdog_explains
+[1]: /dashboards/graph_insights/correlations/
+[2]: /dashboards/graph_insights/watchdog_explains/
