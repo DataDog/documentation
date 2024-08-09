@@ -1,0 +1,40 @@
+.markdoc__hidden {
+    display: none;
+}
+.markdoc-pref__pill {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 6px;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.markdoc-pref__pill.selected {
+    color: white;
+    background-color: #632ca6;
+    border-color: #632ca6;
+}
+.markdoc-pref__label {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.markdoc-pref__container {
+    display: inline-block;
+    margin-right: 25px;
+}
+.alert.alert-info p {
+    color: rgb(31, 92, 122);
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+}
+.alert.alert-warning p {
+    color: #60451f;
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+}
