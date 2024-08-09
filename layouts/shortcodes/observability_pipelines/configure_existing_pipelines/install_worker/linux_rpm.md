@@ -1,7 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to re-install the Worker.
 
-    **Note**: If you want to update environment variables, you need to update them in the `/etc/default/observability-pipelines-worker` file, and then restart the Worker. Running the one-step command does not update that file.
+    **Note**: If you want to update the environment variables, you need to update them in the `/etc/default/observability-pipelines-worker` file, and then restart the Worker. Running the one-step command does not update the environment variables in that file.
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
 1. Update your packages and install the latest version of Worker:
