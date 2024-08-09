@@ -99,13 +99,14 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
     New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
     ```
 
-3. Install the gMSA on the Target Machine:
+3. Verify that the gMSA can be used on the target machine:
 
   1. Ensure the target machine is part of the `DatadogAgentsGroup`.
   2. On the target machine, open PowerShell and run:
     ```powerhsell
     Install-ADServiceAccount -Identity DatadogGMSA
     ```
+  There should not be any errors.
 
 ### Install the Agent
 
