@@ -115,10 +115,6 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
 
-`DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext` <br>
-Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
-
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
@@ -167,6 +163,12 @@ Datadog may collect [environmental and diagnostic information about your system]
 : **Default**: `false` <br>
 Enable [runtime metric][17] collection.
 Added in version 1.26.0.
+
+### Trace context propagation
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Default**: `datadog,tracecontext` <br>
+Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
 
 ## Configure APM environment name
 
