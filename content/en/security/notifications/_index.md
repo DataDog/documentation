@@ -28,7 +28,7 @@ products:
 
 ## Overview
 
-Notifications allow you to keep your team informed when a security signal is generated. A security signal is generated when at least one case defined in a [detection rule][2] is matched over a given period of time.
+Notifications help you keep your team informed when a vulnerability or security signal is detected. Vulnerabilities and security signals are generated when at least one case defined in a [detection rule][2] is matched over a given period of time. By promptly alerting your team, notifications ensure that immediate action can be taken to address any potential security issues, enhancing your organization's overall security posture.
 
 ## Notification types
 
@@ -36,15 +36,13 @@ Notifications can be set up for individual [detection rules](#detection-rules) a
 
 ### Detection rules
 
-When you [create or modify a detection rule][2], you can define the notifications that are sent. For example, you can add rule cases to determine when a detection rule triggers a security signal. You can also customize the notification message in the [**Say what's happening**](#say-whats-happening) section.
+When you [create or modify a detection rule][2], you can define the notifications that are sent. For example, you can add rule cases to determine when a detection rule triggers a security signal. 
 
-#### Say what's happening
-
-Use the **Say what's happening** section to customize the notification message using Markdown and [notification variables][1]. This allows you to provide additional details about the signal by referencing its tags and event attributes. You can also add tags to the generated signal, for example, `attack:sql-injection-attempt`.
+You can also customize the notification message using Markdown and [notification variables][1]. This allows you to provide additional details about the signal by referencing its tags and event attributes. You can also add tags to the generated signal, for example, `attack:sql-injection-attempt`.
 
 ### Notification rules
 
-Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences that span across multiple detection rules, vulnerabilities, and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## Notification channels
 
