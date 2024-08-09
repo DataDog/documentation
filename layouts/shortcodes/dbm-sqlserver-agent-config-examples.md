@@ -20,7 +20,7 @@
     [datadog]
     Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
     ```
-    
+
 4. Update the `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` file with your DSN information.
 
     Example:
@@ -50,6 +50,24 @@ instances:
     adoprovider: MSOLEDBSQL
     include_ao_metrics: true  # If Availability Groups is enabled
     include_fci_metrics: true   # If Failover Clustering is enabled
+```
+
+### Using Agent Jobs
+
+**Note: For Agent Jobs users, the Agent must have access to the [msdb] database**.
+
+```yaml
+instances:
+  - dbm: true
+    host: 'shopist-prod,1433'
+    username: datadog
+    password: '<PASSWORD>'
+    connector: adodbapi
+    adoprovider: MSOLEDBSQL
+    agent_jobs:
+      enabled: true
+      collection_interval: 15
+      history_row_limit: 10000
 ```
 
 ### One Agent connecting to multiple hosts
