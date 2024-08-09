@@ -190,14 +190,14 @@ Added in version `2.19.0`.<br>
 Added in version `2.19.0`.<br>
 **Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, the first from the list to parse correctly will be used.<br>
 
-#### Agent
-
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
 **Example**: `layer:api, team:intake, key:value` <br>
 **Note**: The delimiter is a comma and a space: `, `. <br>
 Added in version 1.17.0. <br>
+
+#### Agent
 
 `DD_TRACE_SERVICE_MAPPING`
 : Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
@@ -219,7 +219,7 @@ The `from-key` value is specific to the integration type, and should exclude the
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
-#### Logs
+#### Diagnostic logs
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -245,6 +245,12 @@ The following configuration variables are available **only** when using automati
 
 #### Traces
 
+`DD_TRACE_ENABLED`
+: **TracerSettings property**: `TraceEnabled`<br>
+Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
+**Default**: `true`
+**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
+
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
 This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
@@ -264,17 +270,13 @@ Wildcard support `[*]` added in version 2.7.0.
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
 When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
-#### Agent
-
-`DD_TRACE_ENABLED`
-: **TracerSettings property**: `TraceEnabled`<br>
-Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
-**Default**: `true`
-**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
+#### Database monitoring
 
 `DD_DBM_PROPAGATION_MODE`
 : Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
 **Default**: `disabled`
+
+#### Runtime metrics
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>

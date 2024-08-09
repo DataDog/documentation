@@ -187,11 +187,6 @@ The port of the Trace Agent that the tracer submits to. If the [Agent configurat
 **Default**: `8125`<br>
 The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
 
-`DD_RUNTIME_METRICS_ENABLED`
-: **Configuration**: `runtimeMetrics`<br>
-**Default**: `false`<br>
-Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
-
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Configuration**: `remoteConfig.pollInterval`<br>
 **Default**: 5<br>
@@ -249,6 +244,13 @@ A string for the minimum log level for the tracer to use when debug logging is e
 : **Configuration**: `profiling`<br>
 **Default**: `false`<br>
 Whether to enable profiling.
+
+### Runtime metrics
+
+`DD_RUNTIME_METRICS_ENABLED`
+: **Configuration**: `runtimeMetrics`<br>
+**Default**: `false`<br>
+Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
 
 ### Trace context propagation
 

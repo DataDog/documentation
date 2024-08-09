@@ -171,6 +171,13 @@ For more information, see [Ingestion Mechanisms][6].<br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
+`DD_TAGS`
+: **TracerSettings property**: `GlobalTags`<br>
+If specified, adds all of the specified tags to all generated spans. <br>
+**Example**: `layer:api, team:intake, key:value` <br>
+**Note**: The delimiter is a comma and a space: `, `. <br>
+Added in version 1.17.0. <br>
+
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `null`<br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
@@ -224,18 +231,11 @@ The `from-key` value is specific to the integration type, and should exclude the
 : Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
 
-`DD_TAGS`
-: **TracerSettings property**: `GlobalTags`<br>
-If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake, key:value` <br>
-**Note**: The delimiter is a comma and a space: `, `. <br>
-Added in version 1.17.0. <br>
-
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
-#### Logs
+#### Diagnostic logs
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -261,6 +261,12 @@ The following configuration variables are available **only** when using automati
 
 #### Traces
 
+`DD_TRACE_ENABLED`
+: **TracerSettings property**: `TraceEnabled`<br>
+Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
+**Default**: `true`
+**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
+
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
 This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
@@ -280,17 +286,13 @@ Wildcard support `[*]` added in version 2.7.0.
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
 When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
-#### Agent
-
-`DD_TRACE_ENABLED`
-: **TracerSettings property**: `TraceEnabled`<br>
-Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
-**Default**: `true`
-**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
+#### Database monitoring
 
 `DD_DBM_PROPAGATION_MODE`
 : Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
 **Default**: `disabled`
+
+#### Runtime metrics
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
