@@ -73,8 +73,8 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 \* [CommandType.StoredProcedure][25] not supported
 
 \*\* Full mode SQL Server/Java:
-- still in beta
-- the instrumentation makes an additional roundtrip to the database
+- This mode is in beta.
+- The instrumentation makes an additional roundtrip to the database.
 - Prerequisites:
   - Agent version 7.55.0 or greater
   - Java tracer version 1.39.0 or greater
