@@ -1843,7 +1843,6 @@ menu:
       parent: service_catalog
       identifier: service_catalog_scorecards
       weight: 8
-
     - name: Scorecard Configuration
       url: service_catalog/scorecards/scorecard_configuration
       parent: service_catalog_scorecards
@@ -1859,8 +1858,6 @@ menu:
       parent: service_catalog_scorecards
       identifier: using_scorecards
       weight: 803
-
-
     - name: Software Templates
       url: service_catalog/software_templates
       parent: service_catalog
