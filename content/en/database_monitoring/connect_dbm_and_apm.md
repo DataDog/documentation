@@ -75,7 +75,7 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 \*\* Full mode SQL Server/Java:
 - This mode is in beta.
 - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-- If your applications uses `context_info`, it will be overwritten by the APM tracer.
+- If your applications uses `context_info` to instrument the application, it will be overwritten by the APM tracer.
 - Prerequisites:
   - Agent version 7.55.0 or greater
   - Java tracer version 1.39.0 or greater
