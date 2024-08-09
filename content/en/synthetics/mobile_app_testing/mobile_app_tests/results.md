@@ -73,11 +73,21 @@ Device
 Run type
 : The type of test run (CI, manually triggered, or scheduled).
 
+Records
+: Download device logs that have been captured for your test runs to aid in debugging.
+
 ### Screenshots and actions
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
 
 {{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+
+### XML highlighting 
+
+Results of steps contain the XML representation of the screen being tested, as well as the ability to hover over the screenshot or the XML to highlight specific elements of the app. 
+Click an element to view additional attributes:
+
+{{< img src="mobile_app_testing/xml_inspector.png" alt="Screenshot of a test result under the Sample Runs section, showing the XML inspector" style="width=80%" >}}
 
 ## Failed results
 
