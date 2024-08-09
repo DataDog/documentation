@@ -68,14 +68,14 @@ To display a toast (a brief notification message) to the user when the system re
 
 To prompt a user for confirmation before the query runs, toggle the **Requires Confirmation** option in the **Advanced** section of a query.
 
-## Example app
+## Example apps
 
 ### Return workflow results to an app
 App Builder queries can trigger Workflow Automation workflows. Apps can then use the results of those workflows.
 
 This app provides a button to trigger a workflow. The workflow sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
 
-{{< img src="service_management/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="486px">}}
+{{< img src="service_management/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="70%">}}
 
 {{% collapse-content title="Build the app" level="h4" %}}
 
@@ -93,7 +93,7 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 1. Click the plus (**+**) icon under the cat fact step. Search for "Function" and choose the **Function** data transformation step.
 1. Connect the plus (**+**) icon under the dog fact step to this **JS Function** step by clicking and dragging from the plus to the dot that appears above the JS Function step.
 1. In the JS Function, under **Configure**, for **Script**, use the following code snippet:
-    ```
+    ```javascript
     const catFact = $.Steps.Get_cat_fact?.body?.fact;
     const dogFactRaw = $.Steps.Get_dog_fact?.body;
 
@@ -137,6 +137,72 @@ To connect App Builder to the workflow, perform the following steps:
 1. In the Slack channel you selected, answer the poll question.<br>
     Your app displays a result related to the option you chose.
 {{% /collapse-content %}} 
+
+### Combine and transform query output data
+After you get data from a query in App Builder, you can use data transformers to combine and transform that data.
+
+This app provides buttons to fetch facts about two numbers from an API. It then uses a data transformer to calculate and display the sum of the two numbers.
+
+{{< img src="service_management/app_builder/data-transformer.mp4" alt="Clicking each button fetches a new number fact, and the sum of the two numbers updates along with the facts" video="true" width="70%">}}
+
+{{% collapse-content title="Build the app" level="h4" %}}
+
+##### Create queries
+
+1. In a new app, click **+ New Query**. Search for "Make request" and choose the **HTTP Make request** action.
+1. Use the following values:
+    * **Name**: `mathFact1`
+    * Under **Inputs**, for **URL**: GET `http://numbersapi.com/random/trivia`
+1. Click the **+ (plus)** to add another **HTTP Make request** query. Use the following values:
+    * **Name**: `mathFact2`
+    * Under **Inputs**, for **URL**: GET `http://numbersapi.com/random/trivia`
+
+##### Add data transformer
+
+1. Click the **Σ (sigma)** to open the **Transformers** panel.
+1. Click **+ Create Transformer**.
+1. Name the transformer `numberTransformer`. Under **Inputs**, under **function () {**, enter the following:
+    ```javascript
+    // get both random facts
+    const fact1 = mathFact1.outputs.body;
+    const fact2 = mathFact2.outputs.body;
+
+    // parse the facts to get the first number that appears in them
+    const num1 = fact1.match(/\d+/)[0];
+    const num2 = fact2.match(/\d+/)[0];
+
+    // complete arithmetic on the numbers to find the sum
+    const numSum = Number(num1) + Number(num2)
+
+    return numSum
+    ```
+
+##### Create app canvas components
+
+1. In the app canvas, add a button and fill in the label "Generate fact 1".
+1. Under the button's **Events**, use the following values:
+    * **Event**: click
+    * **Reaction**: Trigger Query
+    * **Query**: mathFact1
+1. Add another button and fill in the label "Generate fact 2".
+1. Under the button's **Events**, use the following values:
+    * **Event**: click
+    * **Reaction**: Trigger Query
+    * **Query**: mathFact2
+1. Add a text element under the first button. For its **Content** property, click the **</>** and enter the expression `${mathFact1.outputs.body}`.
+1. Add a text element under the second button. For its **Content** property, click the **</>** and enter the expression `${mathFact2.outputs.body}`.
+1. Add a text element with the **Content** value "Sum of numbers".
+1. Add a text element next to it. For its **Content** property, click the **</>** and use the expression `${numberTransformer.outputs}`.
+
+
+##### Test app
+
+1. In your app, click **Preview**.
+1. Click **Generate fact 1**, then click **Generate fact 2**.<br>
+    Your app updates the number facts and the sum of the numbers as you click each button.
+
+{{% /collapse-content %}} 
+
 
 ## Further reading
 
