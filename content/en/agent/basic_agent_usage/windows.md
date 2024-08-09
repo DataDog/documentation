@@ -53,9 +53,9 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 #### Install with the command line
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
-```powershell
-Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
-```
+    ```powershell
+    Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
+    ```
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
@@ -83,30 +83,29 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
 
 ### Create and configure a gMSA
 1. Create a Security Group:
-
-  1. Open **Active Directory Users and Computers (ADUC)**.
-  2. Navigate to the appropriate **Organizational Unit (OU)**.
-  3. Right-click and select **New** > **Group**.
-  4. Name the group. For example, `DatadogAgentsGroup`.
-  5. Set the correct group scope for your organization. For example, **Domain local**.
-  6. Set the type to **Security**.
+   1. Open **Active Directory Users and Computers (ADUC)**.
+   2. Navigate to the appropriate **Organizational Unit (OU)**.
+   3. Right-click and select **New** > **Group**.
+   4. Name the group. For example, `DatadogAgentsGroup`.
+   5. Set the correct group scope for your organization. For example, **Domain local**.
+   6. Set the type to **Security**.
 
 2. Create the gMSA:
 
-  1. Open PowerShell with **Administrator** privileges.
-  2. Run the following command to create the gMSA, replacing `<YOUR_DOMAIN_NAME>` with your domain name:
-    ```powershell
-    New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
-    ```
+   1. Open PowerShell with **Administrator** privileges.
+   2. Run the following command to create the gMSA, replacing `<YOUR_DOMAIN_NAME>` with your domain name:
+        ```powershell
+        New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
+        ```
 
 3. Verify that the gMSA can be used on the target machine:
 
-  1. Ensure the target machine is part of the `DatadogAgentsGroup`.
-  2. On the target machine, open PowerShell and run:
-    ```powerhsell
-    Install-ADServiceAccount -Identity DatadogGMSA
-    ```
-  There should not be any errors.
+   1. Ensure the target machine is part of the `DatadogAgentsGroup`.
+   2. On the target machine, open PowerShell and run:
+        ```powerhsell
+        Install-ADServiceAccount -Identity DatadogGMSA
+        ```
+   There should not be any errors.
 
 ### Install the Agent
 
@@ -122,7 +121,8 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 #### Install with the command line
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
-   **Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
+
+**Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
   ```powershell
   Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
   ```
