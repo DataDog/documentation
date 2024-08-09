@@ -24,5 +24,6 @@ For information about configuring the Ruby tracing library, see [Additional Ruby
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging/
-[2]: /tracing/trace_collection/dd_libraries/ruby/#advanced-configuration
+[2]: /tracing/trace_collection/dd_libraries/ruby/#additional-configuration
 [3]: /opentelemetry/interoperability/environment_variable_support
+
