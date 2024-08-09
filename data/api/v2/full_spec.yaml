@@ -6417,8 +6417,9 @@ components:
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp in nanoseconds when the deployment finished.
-            It should not be older than 1 hour.
+          description: Unix timestamp when the deployment finished. It must be in
+            nanoseconds, milliseconds, or seconds, and it should not be older than
+            1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -6432,7 +6433,8 @@ components:
           example: shopist
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the deployment started.
+          description: Unix timestamp when the deployment started. It must be in nanoseconds,
+            milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
           type: integer
@@ -6509,8 +6511,8 @@ components:
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp in nanoseconds when the incident finished. It
-            should not be older than 1 hour.
+          description: Unix timestamp when the incident finished. It must be in nanoseconds,
+            milliseconds, or seconds, and it should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -6537,7 +6539,8 @@ components:
           example: High
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the incident started.
+          description: Unix timestamp when the incident started. It must be in nanoseconds,
+            milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
           type: integer
@@ -18270,8 +18273,7 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time. For third party rules, it should equal max signal
-        duration.'
+        and evaluates in real time. For third party rules, this field is not used.'
       enum:
       - 0
       - 60
@@ -18316,7 +18318,7 @@ components:
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
         if a case is matched at least once within\nthis keep alive window. For third
-        party rules, it should equal max signal duration."
+        party rules, this field is not used."
       enum:
       - 0
       - 60
