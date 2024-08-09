@@ -24,6 +24,62 @@ Datadog clones your code, runs the static analyzer to perform Static Analysis an
 The benefit of Datadog-hosted scans is that no configuration is needed in your CI pipeline(s) to use Code Analysis.
 
 
+### How are services and teams associated with code violations and libraries?
+
+Datadog aims to associate code violations or libraries with the relevant service or team by using the following mechanisms:
+
+1. Identifying the code location associated with a service using the Service Catalog.
+2. Detecting usage patterns of files within additional Datadog products.
+3. Searching for the service name in the file path or repository.
+
+If one method succeeds, no further matching attempts are made. Each mapping method is detailed below.
+
+#### Identifying the code location in the Service Catalog
+
+The schema version `v3` and later of the Service Catalog allows you
+to add the mapping of your code location for your service. The `codeLocations`
+section specifies the locations of the code with the repository that
+contains the code and its associated `paths`.
+
+The `paths` attribute is a list of [globs](https://en.wikipedia.org/wiki/Glob_(programming))
+that should match paths in the repository.
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - /path/to/service/code/**
+{{< /code-block >}}
+
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and associate
+files with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service name in paths and repository names and associates
+the file with the service if it finds a match.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service `myservice` and the path is
+`/path/to/myservice/foo.py`, it associates the file with `myservice` because
+the name of the service is part of the path. If two services are present
+in the path, the service name the closest to the filename is selected.
+
+
 ## Static Analysis
 
 ### Can results be imported into Datadog from other analyzers?

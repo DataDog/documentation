@@ -68,7 +68,7 @@ This command:
 |---|---|
 | `DD_API_KEY` | Point to your [Datadog API key][5]. |
 | `DD_APP_KEY` | Point to your [Datadog application key][6]. |
-| `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). |
+| `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). **Note**: `DATADOG_SITE` is not supported. |
 
 For example:
 
