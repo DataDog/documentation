@@ -1,0 +1,12 @@
+name: Merge readiness notification
+description: Notify the docs team on Slack when a reviewed PR is ready to merge
+inputs:
+  api-token:
+    description: A fine-grained GitHub token for accessing the GitHub API
+    required: true
+  slack-webhook-url:
+    description: The URL of the Slack webhook to send messages to
+    required: true
+runs:
+  using: "node20"
+  main: "../lib/merge_readiness_notification.js"
