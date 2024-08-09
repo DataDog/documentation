@@ -1,0 +1,40 @@
+on:
+  push:
+    branches: [heston/DOCS-8410-workflow]
+  # schedule:
+  #  # At 08:00 on every day-of-week from Monday through Friday.
+  #  - cron: '0 8 * * 1-5'
+
+permissions: {}
+jobs:
+  synthetics-worker-version:
+    permissions:
+      contents: write # for git push
+      pull-requests: write # to create pull request      
+    runs-on: ubuntu-latest
+    name: Find latest synthetic-worker version
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.DOCS_GH_APP_ID }}
+          private-key: ${{ secrets.DOCS_GH_APP_PRIVATE_KEY }}
+
+      - uses: actions/setup-python@v5.1.0
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+
+      - name: Find latest synthetic-worker version
+        id: set-worker-version
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          python local/bin/py/synthetics_worker_version.py
+      
+      - name: echo worker version
+        run: echo ${{ steps.set-worker-version.outputs.worker_version }}
+  
