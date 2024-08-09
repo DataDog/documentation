@@ -68,6 +68,14 @@ To share a given outlier, click on it in the insight panel to open the details s
 
 The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
 
+## Explore graph insights with Watchdog explains
+{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
+Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
+- What is the source of the spike?
+- Does this anomaly affect everyone or is an isolated incident?
+
+For more information, see the [Watchdog Explains][14] documentation.
+
 ## Outlier types
 
 {{< tabs >}}
@@ -296,3 +304,4 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
+[14]: /dashboards/graph_insights/watchdog_explains
