@@ -11,11 +11,13 @@ further_reading:
   text: "Learn about Container Cost Allocation"
 ---
 
+{{< callout url="https://www.datadoghq.com/private-beta/multisource-querying/" btn_hidden="false" header="Join the Beta!">}}
+Multisource Querying is in private beta. To request access, complete the form.
+{{< /callout >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-warning">Multisource Querying is in private beta. To request access, contact your Customer Success Manager.</div>
 
 ## Overview
 
