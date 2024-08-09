@@ -1,5 +1,5 @@
 ---
-title: Create custom rules
+title: Custom rules
 aliases:
   - /tracing/service_catalog/scorecards/custom_rules
 further_reading:

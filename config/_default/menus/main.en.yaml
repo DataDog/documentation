@@ -1848,7 +1848,7 @@ menu:
       parent: service_catalog_scorecards
       identifier: scorecard_configuration
       weight: 801
-    - name: Create Custom Rules
+    - name: Custom Rules
       url: service_catalog/scorecards/custom_rules
       parent: service_catalog_scorecards
       identifier: scorecard_custom_rules
