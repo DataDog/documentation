@@ -202,50 +202,18 @@ For a comprehensive list of environment variables set by Codefresh for every bui
 
 | Environment Variable       | Description                                                                                           |
 |----------------------------|-------------------------------------------------------------------------------------------------------|
-| `CI`                       | Always set to `true`, indicating a CI environment.                                                   |
-| `GITHUB_ACTION`            | The name of the action currently running, or the id of a step. For example: `repo-owner_name-of-action-repo`. |
-| `GITHUB_ACTION_PATH`       | The path where an action is located (only supported in composite actions).                           |
-| `GITHUB_ACTION_REPOSITORY` | The owner and repository name of the action being executed. For example: `actions/checkout`.              |
-| `GITHUB_ACTIONS`           | Always set to `true` when GitHub Actions is running the workflow.                                    |
-| `GITHUB_ACTOR`             | The name of the person or app that initiated the workflow. For example: `octocat`.                       |
-| `GITHUB_ACTOR_ID`          | The account ID of the person or app that triggered the workflow. For example: `1234567`.                 |
-| `GITHUB_API_URL`           | The API URL. For example: `https://api.github.com`.                                                      |
-| `GITHUB_BASE_REF`          | The base ref or target branch of the pull request (only set for `pull_request` or `pull_request_target` events). For example: `main`. |
-| `GITHUB_ENV`               | The path to the file that sets environment variables from workflow commands.                         |
-| `GITHUB_EVENT_NAME`        | The name of the event that triggered the workflow. For example: `workflow_dispatch`.                     |
-| `GITHUB_EVENT_PATH`        | The path to the file containing the full event webhook payload.                                      |
-| `GITHUB_GRAPHQL_URL`       | The GraphQL API URL. For example: `https://api.github.com/graphql`.                                      |
-| `GITHUB_HEAD_REF`          | The head ref or source branch of the pull request (only set for `pull_request` or `pull_request_target` events). For example: `feature-branch-1`. |
-| `GITHUB_JOB`               | The job ID of the current job. For example: `greeting_job`.                                              |
-| `GITHUB_OUTPUT`            | The path to the file that sets the current step's outputs from workflow commands.                    |
-| `GITHUB_PATH`              | The path to the file that sets system PATH variables from workflow commands.                         |
-| `GITHUB_REF`               | The fully-formed ref of the branch or tag that triggered the workflow. For example: `refs/heads/feature-branch-1`. |
-| `GITHUB_REF_NAME`          | The short ref name of the branch or tag that triggered the workflow. For example: `feature-branch-1`.     |
-| `GITHUB_REF_PROTECTED`     | `true` if branch protections or rulesets are configured for the ref that triggered the workflow run. |
-| `GITHUB_REF_TYPE`          | The type of ref that triggered the workflow. Valid values are `branch` or `tag`.                     |
-| `GITHUB_REPOSITORY`        | The owner and repository name. For example: `octocat/Hello-World`.                                        |
-| `GITHUB_REPOSITORY_ID`     | The ID of the repository. For example: `123456789`.                                                      |
-| `GITHUB_REPOSITORY_OWNER`  | The repository owner's name. For example: `octocat`.                                                     |
-| `GITHUB_REPOSITORY_OWNER_ID` | The repository owner's account ID. For example: `1234567`.                                              |
-| `GITHUB_RETENTION_DAYS`    | The number of days that workflow run logs and artifacts are kept. For example: `90`.                     |
-| `GITHUB_RUN_ATTEMPT`       | A unique number for each attempt of a particular workflow run. For example: `3`.                         |
-| `GITHUB_RUN_ID`            | A unique number for each workflow run within a repository. For example: `1658821493`.                    |
-| `GITHUB_RUN_NUMBER`        | A unique number for each run of a particular workflow in a repository. For example: `3`.                 |
-| `GITHUB_SERVER_URL`        | The URL of the GitHub server. For example: `https://github.com`.                                         |
-| `GITHUB_SHA`               | The commit SHA that triggered the workflow. For example: `ffac537e6cbbf934b08745a378932722df287a53`.    |
-| `GITHUB_STEP_SUMMARY`      | The path to the file that contains job summaries from workflow commands.                             |
-| `GITHUB_TRIGGERING_ACTOR`  | The username of the user that initiated the workflow run.                                            |
-| `GITHUB_WORKFLOW`          | The name of the workflow. For example: `My test workflow`.                                               |
-| `GITHUB_WORKFLOW_REF`      | The ref path to the workflow. For example: `octocat/hello-world/.github/workflows/my-workflow.yml@refs/heads/my_branch`. |
-| `GITHUB_WORKFLOW_SHA`      | The commit SHA for the workflow file.                                                                 |
+| `GITHUB_ACTION`            | The name of the action currently running, or the ID of a step. For example: `repo-owner_name-of-action-repo`. |
+| `GITHUB_SERVER_URL`        | The URL of the GitHub server. For example: `https://github.com`.                                       |
+| `GITHUB_RUN_ID`            | A unique number for each workflow run within a repository. For example: `1658821493`.                 |
+| `GITHUB_RUN_NUMBER`        | A unique number for each run of a particular workflow in a repository. For example: `3`.              |
+| `GITHUB_RUN_ATTEMPT`       | A unique number for each attempt of a particular workflow run. For example: `3`.                      |
+| `GITHUB_WORKFLOW`          | The name of the workflow. For example: `My test workflow`.                                            |
 | `GITHUB_WORKSPACE`         | The default working directory on the runner for steps. For example: `/home/runner/work/my-repo-name/my-repo-name`. |
-| `RUNNER_ARCH`              | The architecture of the runner executing the job. Possible values are `X86`, `X64`, `ARM`, `ARM64`. |
-| `RUNNER_DEBUG`             | Set to `1` if debug logging is enabled.                                                             |
-| `RUNNER_ENVIRONMENT`       | The environment of the runner executing the job. Possible values are `github-hosted` or `self-hosted`. |
-| `RUNNER_NAME`              | The name of the runner executing the job. For example: `Hosted Agent`.                                   |
-| `RUNNER_OS`                | The operating system of the runner executing the job. Possible values are `Linux`, `Windows`, `macOS`.|
-| `RUNNER_TEMP`              | The path to a temporary directory on the runner. For example: `D:\a\_temp`.                             |
-| `RUNNER_TOOL_CACHE`        | The path to the directory containing preinstalled tools for GitHub-hosted runners. For example: `C:\hostedtoolcache\windows`. |
+| `GITHUB_REPOSITORY`        | The owner and repository name. For example: `octocat/Hello-World`.                                    |
+| `GITHUB_SHA`               | The commit SHA that triggered the workflow. For example: `ffac537e6cbbf934b08745a378932722df287a53`. |
+| `GITHUB_HEAD_REF`          | The head ref or source branch of the pull request (only set for `pull_request` or `pull_request_target` events). For example: `feature-branch-1`. |
+| `GITHUB_REF`               | The fully-formed ref of the branch or tag that triggered the workflow. For example: `refs/heads/feature-branch-1`. |
+| `GITHUB_JOB`               | The job ID of the current job. For example: `greeting_job`.                                           |
 
 
 For a comprehensive list of environment variables set by GitHub Actions for every build, see the [official GitHub documentation][101].
@@ -256,7 +224,7 @@ For a comprehensive list of environment variables set by GitHub Actions for ever
 {{% /tab %}}
 {{% tab "GitLab CI" %}}
 
-| Variable              | Description                                                                                              |
+| Environment Variable              | Description                                                                                              |
 |-----------------------|----------------------------------------------------------------------------------------------------------|
 | `GITLAB_CI`           | Available for all jobs executed in CI/CD. `true` when available.                                        |
 | `CI_PIPELINE_ID`      | The instance-level ID of the current pipeline. This ID is unique across all projects on the GitLab instance. |
@@ -287,7 +255,7 @@ For a comprehensive list of environment variables set by GitLab CI for every bui
 {{% /tab %}}
 {{% tab "Jenkins" %}}
 
-| Variable              | Description                                                                                              |
+| Environment Variable              | Description                                                                                              |
 |-----------------------|----------------------------------------------------------------------------------------------------------|
 | `JENKINS_URL`         | The URL of the Jenkins master that's running the build.                                                 |
 | `BUILD_TAG`           | A string of the form `jenkins-${JOB_NAME}-${BUILD_NUMBER}` for easier identification.                    |
@@ -315,7 +283,7 @@ For a comprehensive list of environment variables set by Jenkins for every build
 {{% /tab %}}
 {{% tab "TeamCity" %}}
 
-| Variable                     | Description                                                                                                  |
+| Environment Variable                     | Description                                                                                                  |
 |------------------------------|--------------------------------------------------------------------------------------------------------------|
 | `TEAMCITY_VERSION`           | The version of the TeamCity server.                                                                        |
 | `TEAMCITY_BUILDCONF_NAME`    | The name of the build configuration the current build belongs to.                                           |
@@ -331,43 +299,22 @@ For a comprehensive list of environment variables set by TeamCity for every buil
 {{% /tab %}}
 {{% tab "Travis CI" %}}
 
-| Variable                     | Description                                                                                           |
+| Environment Variable                     | Description                                                                                           |
 |------------------------------|-------------------------------------------------------------------------------------------------------|
-| `TRAVIS`                     | Always set to `true` to indicate that the build is running on Travis CI.                            |
-| `TRAVIS_BUILD_ID`            | The ID of the current build used internally by Travis CI.                                            |
-| `TRAVIS_BUILD_NUMBER`        | The number of the current build (such as “4”).                                                         |
-| `TRAVIS_BUILD_WEB_URL`       | URL to the build log.                                                                               |
-| `TRAVIS_BUILD_DIR`           | The absolute path to the directory where the repository being built has been copied on the worker.   |
-| `TRAVIS_JOB_WEB_URL`         | URL to the job log.                                                                                  |
-| `TRAVIS_REPO_SLUG`           | The slug (in form: owner_name/repo_name) of the repository currently being built.                    |
+| `TRAVIS`                     | Always set to `true` to indicate that the build is running on Travis CI.                              |
+| `TRAVIS_BUILD_ID`            | The ID of the current build used internally by Travis CI.                                             |
+| `TRAVIS_BUILD_NUMBER`        | The number of the current build. For example: `4`.                                                    |
+| `TRAVIS_BUILD_WEB_URL`       | URL to the build log.                                                                                 |
+| `TRAVIS_BUILD_DIR`           | The absolute path to the directory where the repository being built has been copied on the worker.    |
+| `TRAVIS_JOB_WEB_URL`         | URL to the job log.                                                                                   |
+| `TRAVIS_REPO_SLUG`           | The slug (in form: `owner_name/repo_name`) of the repository currently being built.                   |
 | `TRAVIS_COMMIT`              | The commit that the current build is testing.                                                         |
-| `TRAVIS_BRANCH`             | For push builds, the name of the branch. For PR builds, the name of the branch targeted by the PR.   |
-| `TRAVIS_TAG`                 | If the current build is for a git tag, this variable is set to the tag’s name, otherwise it is empty.|
+| `TRAVIS_BRANCH`              | For push builds, the name of the branch. For PR builds, the name of the branch targeted by the PR.    |
+| `TRAVIS_TAG`                 | If the current build is for a git tag, this variable is set to the tag’s name, otherwise it is empty. |
 | `TRAVIS_PULL_REQUEST_SLUG`   | If the current job is a pull request, the slug of the repository from which the PR originated.        |
 | `TRAVIS_PULL_REQUEST_BRANCH` | If the current job is a pull request, the name of the branch from which the PR originated.            |
 | `TRAVIS_COMMIT_MESSAGE`      | The commit subject and body, unwrapped.                                                               |
-| `TRAVIS_ALLOW_FAILURE`       | Set to `true` if the job is allowed to fail, `false` otherwise.                                       |
-| `TRAVIS_APP_HOST`            | The name of the server compiling the build script.                                                   |
-| `TRAVIS_COMMIT_RANGE`        | The range of commits included in the push or pull request.                                           |
-| `TRAVIS_COMPILER`            | Indicates the compiler used by the current job (such as clang, gcc).                                   |
-| `TRAVIS_DEBUG_MODE`          | Set to `true` if the job is running in debug mode.                                                    |
-| `TRAVIS_DIST`                | Indicates the distribution the current job is running on.                                            |
-| `TRAVIS_EVENT_TYPE`          | Indicates how the build was triggered. Possible values are `push`, `pull_request`, `api`, `cron`.   |
-| `TRAVIS_JOB_ID`              | The ID of the current job used internally by Travis CI.                                              |
-| `TRAVIS_JOB_NAME`            | The job name if it was specified, or `""`.                                                             |
-| `TRAVIS_JOB_NUMBER`          | The number of the current job (such as “4.1”).                                                          |
-| `TRAVIS_OS_NAME`             | On multi-OS builds, this value indicates the platform the job is running on (such as `linux`, `osx`). |
-| `TRAVIS_CPU_ARCH`            | On multi-arch builds, this value indicates the CPU architecture (such as `amd64`, `arm64`).           |
-| `TRAVIS_OSX_IMAGE`           | The `osx_image` value configured in `.travis.yml`.                                                    |
-| `TRAVIS_PULL_REQUEST`        | The pull request number if the current job is a pull request, `false` if it’s not a pull request.    |
-| `TRAVIS_PULL_REQUEST_SHA`    | The commit SHA of the HEAD commit of the PR if the job is a pull request.                            |
-| `TRAVIS_PULL_REQUEST_IS_DRAFT` | Set to `true` if the PR is in a draft state, `false` if it is not.                                    |
-| `TRAVIS_SECURE_ENV_VARS`     | Set to `true` if there are any encrypted environment variables, `false` otherwise.                   |
-| `TRAVIS_SUDO`                | `true` or `false` based on whether `sudo` is enabled.                                                 |
-| `TRAVIS_TEST_RESULT`         | `0` if all commands in the script section have exited with zero, `1` otherwise.                     |
-| `TRAVIS_BUILD_STAGE_NAME`    | The build stage. If a build does not use build stages, this variable is empty.                       |
-| `TRAVIS_JOB_RESTARTED`       | Set to `true` if the build is restarted, `false` otherwise.                                           |
-| `TRAVIS_JOB_RESTARTED_BY`    | The login of the user triggering the restart.                                                         |
+
 
 
 For a comprehensive list of environment variables set by Travis CI for every build, see the [official Travis CI documentation][101].
@@ -378,7 +325,7 @@ For a comprehensive list of environment variables set by Travis CI for every bui
 {{% /tab %}}
 {{% tab "Buddy CI" %}}
 
-| Variable                                | Description                                                                                           |
+| Environment Variable                                | Description                                                                                           |
 |-----------------------------------------|-------------------------------------------------------------------------------------------------------|
 | `BUDDY`                                 | Represents whether the current environment is a Buddy environment. For example: `true`.    |
 | `BUDDY_SCM_URL`                         | The URL of the repository synchronized with the project. For example: `https://github.com/githubaccount/repository`. |
