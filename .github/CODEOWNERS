@@ -59,6 +59,9 @@ local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Pl
 local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
 data/sdk_versions.json                                        @Datadog/documentation
 
+# markdown shortcodes
+layouts/shortcodes/**/*.md                                    @DataDog/documentation
+
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation @DataDog/WebOps-Platform
 /data/sdk_versions.json               @DataDog/api-clients @DataDog/documentation
