@@ -132,7 +132,7 @@ DOMReady(doOnLoad);
 function getVisibleParentPath(ancestralEl, path){
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
-    
+
     let el = document.querySelector(`${ancestralEl} [data-path="${path}"][data-skip="false"]`)
     // account for preview branch name in url
     let endIdx = env === 'preview' ? 6 : 4
@@ -180,7 +180,7 @@ function getPathElement(event = null) {
     path = path.replace(/\/$/, '');
 
     let sideNavPathElement = getVisibleParentPath('.side',path)
-    
+
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
@@ -413,7 +413,6 @@ window.addEventListener(
     'popstate',
     function (event) {
         setMobileNav();
-        loadPage(window.location.href);
         closeNav();
         getPathElement();
     }
