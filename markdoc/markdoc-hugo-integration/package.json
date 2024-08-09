@@ -9,7 +9,9 @@
         "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.js'",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets && npm run copy-compiled-scripts",
         "copy-assets": "cp -r ./src/helperModules/PageBuilder/assets ./dist/helperModules/PageBuilder",
-        "copy-compiled-scripts": "cp -r ./src/helperModules/PageBuilder/compiledScripts ./dist/helperModules/PageBuilder"
+        "copy-compiled-scripts": "cp -r ./src/helperModules/PageBuilder/compiledScripts ./dist/helperModules/PageBuilder",
+        "collect-tab-labels": "npm run build && node ./dist/scripts/collectTabLabels.js",
+        "analyze-left-nav": "npm run build && node ./dist/scripts/analyzeLeftNav.js"
     },
     "dependencies": {
         "js-yaml": "^4.1.0",
