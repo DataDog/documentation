@@ -8,7 +8,7 @@ instances:
     host: example-service-primary.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -17,7 +17,7 @@ instances:
     host: example-service–replica-1.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -26,7 +26,7 @@ instances:
     host: example-service–replica-2.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -43,7 +43,7 @@ instances:
     host: example-service-primary.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     database_autodiscovery:
       enabled: true
       # Optionally, set the include field to specify
@@ -57,19 +57,6 @@ instances:
       - 'service:example-service'
 ```
 
-### Storing passwords securely
-While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/configuration/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
-```yaml
-init_config:
-instances:
-  - dbm: true
-    host: localhost
-    port: 5432
-    username: datadog
-    password: 'ENC[datadog_user_database_password]'
-```
-
-
 ### Running custom queries
 To collect custom metrics, use the `custom_queries` option. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
 ```yaml
@@ -79,7 +66,7 @@ instances:
     host: localhost
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     custom_queries:
     - metric_prefix: employee
       query: SELECT age, salary, hours_worked, name FROM hr.employees;
@@ -109,7 +96,7 @@ instances:
     host: example-service-primary.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     database_autodiscovery:
       enabled: true
       exclude:
@@ -122,7 +109,7 @@ instances:
   - host: example-service-primary.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbname: users
     dbstrict: true
     relations:
@@ -135,7 +122,7 @@ instances:
   - host: example-service-primary.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbname: inventory
     dbstrict: true
     relations:
@@ -157,7 +144,7 @@ instances:
     host: example-service-primary.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbname: users
     dbstrict: true
     collect_schemas:
@@ -171,7 +158,7 @@ instances:
     host: example-service–replica-1.example-host.com
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     database_autodiscovery:
       enabled: true
     collect_schemas:
@@ -191,12 +178,12 @@ instances:
     host: localhost
     port: 5000
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     reported_hostname: example-service-primary
   - dbm: true
     host: localhost
     port: 5001
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     reported_hostname: example-service-replica-1
 ```

@@ -20,7 +20,7 @@ instances:
   - dbm: true
     host: <HOSTNAME>\,1433
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
     driver: 'FreeTDS'
     include_ao_metrics: true  # Optional: For AlwaysOn users
@@ -42,7 +42,7 @@ instances:
     host: '<HOSTNAME>'
     port: <SQL_PORT>
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
     driver: 'FreeTDS'
     include_ao_metrics: true  # Optional: For AlwaysOn users
@@ -71,7 +71,7 @@ metadata:
           "host": "<HOSTNAME>",
           "port": "<SQL_PORT>",
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "FreeTDS",
           "include_ao_metrics": true,  # Optional: For AlwaysOn users

@@ -42,7 +42,7 @@ instances:
   - hosts:
       - <HOST>:<PORT>
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     dbm: true
@@ -70,7 +70,7 @@ metadata:
         "instances": [{
           "hosts": ["<HOST>:<PORT>"],
           "username": "datadog",
-          "password": "<UNIQUE_PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "options": {
             "authSource": "admin"
           },

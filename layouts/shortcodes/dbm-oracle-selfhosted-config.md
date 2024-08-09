@@ -4,7 +4,7 @@ instances:
   - server: '<HOSTNAME_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle DB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -12,7 +12,7 @@ instances:
   - server: '<HOSTNAME_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle DB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'

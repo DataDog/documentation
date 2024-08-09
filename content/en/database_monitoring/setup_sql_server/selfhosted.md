@@ -73,6 +73,9 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Install the Agent
 
 It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
