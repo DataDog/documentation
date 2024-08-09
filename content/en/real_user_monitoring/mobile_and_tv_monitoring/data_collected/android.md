@@ -68,6 +68,7 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (System User-Agent).  |
 | `device.model`   | string | The device model as reported by the device (System User-Agent).    |
 | `device.name` | string | The device name as reported by the device (System User-Agent).  |
+| `device.architecture` | string | The CPU architecture of the device. |
 
 ### Connectivity
 
@@ -218,6 +219,8 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
 | `error.resource.provider.domain`      | string | The resource provider domain.                                            |
 | `error.resource.provider.type`      | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                                            |
+| `error.is_crash` | string | Overrides the default RUM error source `is_crash` with a custom one. |
+| error.category | string | The specific category of the error. This provides a high-level grouping for different types of errors. Possible values are `ANR`, `App Hang`, `Exception`, or `Watchdog Termination`. |
 
 ### Action timing metrics
 
