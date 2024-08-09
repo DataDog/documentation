@@ -76,24 +76,33 @@ On browser tests, the DNS resolution is done directly by the browser, which usua
 
 ### Proxy configuration
 
+The following parameters can be used to configure a proxy to connect to Datadog:
+
 `proxyDatadog`
 : **Type**: String <br>
 **Default**: `none`<br>
 Proxy URL used by the private location to send requests to Datadog (for example, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-
-**Note:** When setting up an HTTPS proxy, the `HTTP CONNECT` request made to the proxy establishes the initial TCP connection between the private location and Datadog. As such, reverse proxies like HAProxy that direct an `HTTP CONNECT` request to Datadog are not supported. Set up a forward proxy to open the connection to Datadog on behalf of the private location.
-
-`proxyTestRequests`
-: **Type**: String <br>
-**Default**: `none`<br>
-Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
 
 `proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
 Discard SSL errors when private location is using a proxy to send requests to Datadog.
 
+`proxyEnableConnectTunnel`
+: **Type**: Boolean <br>
+**Default**: `none`<br>
+Enable `HTTP CONNECT` tunneling for HTTP proxies. When this option is not set, `HTTP CONNECT` tunneling is only used for HTTPS proxies.
+
+**Note:** When setting up an HTTP proxy, forward proxies like Squid may require the `HTTP CONNECT` request to establish the initial TCP connection between the private location and Datadog. As such, the `proxyEnableConnectTunnel` parameter should be set to `true`. However, reverse proxies like HAProxy that direct an `HTTP CONNECT` request to Datadog may not work with this option enabled.
+
 **Note:** The `proxy` parameter is deprecated and should be replaced by `proxyDatadog`.
+
+The following parameters can be used to configure a default proxy to use for Synthetics tests:
+
+`proxyTestRequests`
+: **Type**: String <br>
+**Default**: `none`<br>
+Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
 
 ### Advanced configuration
 
