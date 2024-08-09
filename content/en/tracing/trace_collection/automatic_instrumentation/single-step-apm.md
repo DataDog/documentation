@@ -135,7 +135,13 @@ To enable Single Step Instrumentation with the Datadog Operator:
      features:
        apm:
          instrumentation:
-           enabled: true  
+           enabled: true
+           libVersions:
+             java: v1
+             dotnet: v2
+             python: v2
+             js: v5
+             ruby: v2
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -171,6 +177,12 @@ To enable Single Step Instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
+      libVersions:
+        java: v1
+        dotnet: v2
+        python: v2
+        js: v5
+        ruby: v2
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -207,7 +219,7 @@ When you run the one-line installation command, there are a few options to custo
 
 ### Specifying tracing library versions {#lib-linux}
 
-By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command.
+By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services using the Datadog APM libraries pinned to the latest major release. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script. If no libraries are specified then all are installed.
 
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
@@ -239,7 +251,7 @@ Available versions are listed in tracer source repositories for each language:
 
 ### Specifying tracing library versions {#lib-docker}
 
-By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script.
+By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET services using the Datadog APM libraries pinned to the latest major release. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script. If no libraries are specified then all are installed.
 
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
