@@ -729,7 +729,7 @@ Automatic user activity tracking offers the following modes:
 - `identification` mode (short-name: `ident`): 
   - By default, ASM libraries automatically collect user IDs.
   - This mode is the default and always collects the user ID or best effort.
-  - The user ID is collected on login success/failure. With failure, the user ID is collected regardless of whether the user exists or not.
+  - The user ID is collected on login success and login failure. With failure, the user ID is collected regardless of whether the user exists or not.
   - When the instrumented framework doesn’t clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
     - `id`
     - `email`
@@ -741,9 +741,9 @@ Automatic user activity tracking offers the following modes:
   - This mode is the same as `identification`, but anonymizes the user ID.
 - `disabled` mode:
   - ASM libraries do *not* collect any user ID from their automated instrumentations. 
-  - This property also results in no longer emitting user login events.
+  - User login events are not emitted.
 
-<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is confiigured using an SDK, and those settings are not overriden by automated instrumentation.</div>
+<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is confiigured using an SDK, and those settings are not overridden by automated instrumentation.</div>
 
 Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident`|`anon`|`disabled`.
 
