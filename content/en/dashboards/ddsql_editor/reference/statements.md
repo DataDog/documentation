@@ -111,7 +111,7 @@ SELECT message, service AS text, 'from logs' FROM logs WHERE env='prod'
 ORDER BY service LIMIT 200 OFFSET 10;
 {{< /code-block >}}
 
-All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other DQL expression types, but not another `UNION`.
+All subqueries in a `UNION` must have the same output schema. A query containing a `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Chained `UNION`s can only have one `ORDER BY` and `LIMIT` expression at the end.
 
 ## WITH
 
