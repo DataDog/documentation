@@ -22,7 +22,7 @@ further_reading:
 
 To get started with Datadog APM, you need to follow these key steps:
 
-1. Install and configure the Datadog Agent.  
+1. Install and configure the Datadog Agent.
 2. Instrument your application.
 
 <div class="alert alert-info"><strong>Simplify your setup!</strong> Install the Agent and instrument your application in one step with <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a>.</div>
@@ -40,7 +40,7 @@ There are two main approaches to instrument your application: automatic or custo
 Create spans for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
 
 - [Single Step Instrumentation (Beta)][7]: Run a one-line install command to install the Datadog Agent, enable APM, and instrument all of your services on your Linux host, VM, or container.
-- [Datadog libraries][8]: Add Datadog tracing libraries to your application.
+- [Datadog SDKs][8]: Add Datadog SDKs to your application.
 
 To learn more, see [automatic instrumentation][5].
 
@@ -48,14 +48,14 @@ To learn more, see [automatic instrumentation][5].
 
 Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. To custom instrument your application, you can use either of these options:
 
-- [Datadog libraries][9]: Use Datadog tracing libraries to add and customize observability within Datadog.
+- [Datadog APIs][9]: Use the Datadog API to add and customize observability within Datadog.
 - [OpenTelemetry APIs][10]: Use OpenTelemetry API support in Datadog libraries to have vendor-neutral instrumentation of your code.
 
 To learn more, see [custom instrumentation][6].
 
 ## APM setup tutorials
 
-The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the Datadog tracing libraries:
+The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the Datadog SDKs:
 
 {{< whatsnext desc="Choose your language and environment:" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}

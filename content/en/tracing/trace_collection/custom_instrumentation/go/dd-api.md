@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog Go APM tracer.'
+description: 'Instrument your code with the Datadog Go APM APM SDK.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -84,7 +84,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ### Adding tags globally to all spans
 
-Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTag` option:
+Add [tags][1] to all [spans][2] by configuring the APM SDK with the `WithGlobalTag` option:
 
 ```go
 package main
@@ -114,7 +114,7 @@ span.Finish(tracer.WithError(err))
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
 
 <div class="alert alert-info">
-Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the <a href="https://pkg.go.dev/context">Go context library documentation</a> or documentation for any third-party libraries integrated with your application.
+Unlike other Datadog APM SDKs, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the <a href="https://pkg.go.dev/context">Go context library documentation</a> or documentation for any third-party libraries integrated with your application.
 </div>
 
 ### Manually creating a new span

@@ -23,9 +23,9 @@ further_reading:
 
 You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data.
 
-Configure the .NET Tracer with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
+Configure the .NET APM SDK with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
 
-The .NET Tracer supports the following logging libraries:
+The .NET APM SDK supports the following logging libraries:
 - [Serilog][2] (v1.4+)
 - [log4net][3]
 - [NLog][4]
@@ -50,12 +50,12 @@ To inject correlation identifiers into your log messages, follow the instruction
 {{% tab "Serilog" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the Serilog logging library requires the application to be instrumented with automatic instrumentation.
+  <strong>Note: </strong>Starting with .NET APM SDK version 2.0.1, automatic injection for the Serilog logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
 To automatically inject correlation identifiers into your log messages:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. Configure the .NET APM SDK with the following settings:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
@@ -67,12 +67,12 @@ To automatically inject correlation identifiers into your log messages:
 {{% tab "log4net" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
+  <strong>Note: </strong>Starting with .NET APM SDK version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
 To automatically inject correlation identifiers into your log messages:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. Configure the .NET APM SDK with the following APM SDK settings:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
@@ -112,12 +112,12 @@ For additional examples, see [the log4net automatic trace ID injection project][
 {{% tab "NLog" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the NLog logging library requires the application to be instrumented with automatic instrumentation.
+  <strong>Note: </strong>Starting with .NET APM SDK version 2.0.1, automatic injection for the NLog logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
 To automatically inject correlation identifiers into your log messages:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. Configure the .NET APM SDK with the following APM SDK settings:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
@@ -170,7 +170,7 @@ For additional examples, see the automatic trace ID injection projects using [NL
 {{% tab "Microsoft.Extensions.Logging" %}}
 To automatically inject correlation identifiers into your log messages:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. Configure the .NET APM SDK with the following settings:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
@@ -212,7 +212,7 @@ Next, complete the setup for either automatic or manual injection.
 
 The final step to enable automatic correlation identifier injection is to:
 
-1. Enable `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables. To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
+1. Enable `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables. To configure the .NET APM SDK with a different method, see [Configuring the .NET Tracer][6].
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 

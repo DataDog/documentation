@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-This creates a tracer that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
+This creates a APM SDK that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
 
 Then, compile and link against `libdd_trace_cpp` with:
 

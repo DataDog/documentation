@@ -128,7 +128,7 @@ All spans indexed by custom retention filters *and* the intelligent retention fi
 
 All spans indexed by custom retention filters or the intelligent retention filter are available to be searched when using trace analytics.
 
-From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
+From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
 
 **Note**: Spans indexed by the intelligent retention filter are excluded from APM trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
@@ -155,7 +155,7 @@ You can customize which spans are retained and at what retention rates. By defau
 [5]: /tracing/glossary/#indexed-span
 [6]: /tracing/trace_pipeline/
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-apm-sdks-user-defined-rules
 [9]: /account_management/billing/apm_distributed_tracing/
 [10]: /glossary/#service-entry-span
 [11]: /glossary/#trace-root-span

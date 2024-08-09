@@ -23,7 +23,7 @@ further_reading:
 
 ## Manual injection
 
-The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
+The Go APM SDK API allows printing span information along with log statements using the `%v` format specifier:
 
 ```go
 package main
@@ -68,8 +68,8 @@ func main() {
     logrus.SetFormatter(&logrus.JSONFormatter{})
 
     // Add Datadog context log hook
-    logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
-    
+    logrus.AddHook(&dd_logrus.DDContextLogHook{})
+
     // ...
 }
 ```

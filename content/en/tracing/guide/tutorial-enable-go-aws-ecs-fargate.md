@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Farga
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional APM SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed APM SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
@@ -19,7 +19,7 @@ further_reading:
   text: Ingestion mechanisms
 - link: https://github.com/DataDog/dd-trace-Go
   tag: "Source Code"
-  text: Tracing library open source code repository
+  text: APM SDK open source code repository
 ---
 
 ## Overview
@@ -107,7 +107,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 ### Deploy the application
 
-Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the APM SDK and Datadog Agent.
 
 To start, use a Terraform script to deploy to Amazon ECS:
 

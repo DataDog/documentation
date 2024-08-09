@@ -1,5 +1,5 @@
 ---
-title: Configuring the Go Tracing Library
+title: Configuring the Go APM SDK
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -21,13 +21,13 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
+After you [set up the APM SDK with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the APM SDK as desired.
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
-Read the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+Read the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go APM SDK.
 
-You may also elect to provide `env`, `service`, and `version` through the tracer's API:
+You may also elect to provide `env`, `service`, and `version` through the APM SDK's API:
 
 ```go
 package main
@@ -49,7 +49,7 @@ func main() {
 }
 ```
 
-The Go tracer supports additional environment variables and functions for configuration.
+The Go APM SDK supports additional environment variables and functions for configuration.
 See all available options in the [configuration documentation][3].
 
 `DD_VERSION`
@@ -114,7 +114,7 @@ Enable startup configuration and the diagnostic log.
 
 `DD_TRACE_DEBUG`
 : **Default**: `false` <br>
-Enable debug logging in the tracer.
+Enable debug logging in the APM SDK.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
@@ -162,7 +162,7 @@ Configures trace header injection and extraction style. See [Propagating Go Trac
 
 ## Configure APM environment name
 
-The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
+The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the APM SDK.
 
 
 ## Further reading

@@ -1,6 +1,6 @@
 ---
 title: .NET and .NET Core Compatibility Requirements
-description: 'Compatibility Requirements for the .NET Tracer'
+description: 'Compatibility Requirements for the .NET APM SDK'
 aliases:
   - /tracing/compatibility_requirements/dotnet-core
   - /tracing/setup_overview/compatibility_requirements/dotnet-core
@@ -20,13 +20,13 @@ further_reading:
 ---
 
 
-The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+The Datadog .NET APM SDK supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
 
-The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
+The .NET APM SDK is open source. For more information, see the [.NET APM SDK repository][1].
 
 ## Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
+The .NET APM SDK supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
@@ -44,7 +44,7 @@ Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle
 
 ## Supported processor architectures
 
-The .NET Tracer supports automatic instrumentation on the following architectures:
+The .NET APM SDK supports automatic instrumentation on the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
@@ -56,7 +56,7 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 
 ## Integrations
 
-The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
+The [latest version of the .NET APM SDK][4] can automatically instrument the following libraries:
 
 | Framework or library            | NuGet package                                                                                        | Integration Name     |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
@@ -92,9 +92,13 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][13] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
+### Azure SDK
+
+Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
+
 ## End of life .NET runtime versions
 
-The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET APM SDK works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Versions                    | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
@@ -115,7 +119,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 
 ## .NET runtime support policy
 
-The .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, the .NET Tracer also limits its support for that version.
+The .NET APM SDK depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, the .NET APM SDK also limits its support for that version.
 
 ### Levels of support
 
@@ -129,7 +133,7 @@ The .NET Tracer depends on the host operating system, .NET runtime, certain .NET
 
 ### Package versioning
 
-The .NET Tracer practices [semantic versioning][11].
+The .NET APM SDK practices [semantic versioning][11].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).

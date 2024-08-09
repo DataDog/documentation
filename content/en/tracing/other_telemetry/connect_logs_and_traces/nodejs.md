@@ -23,7 +23,7 @@ further_reading:
 
 ## Automatic injection
 
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the APM SDK directly:
 
 ```javascript
 // This line must come before importing the logger.
@@ -34,7 +34,7 @@ const tracer = require('dd-trace').init({
 
 This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
 
-If you haven't done so already, configure the Node.js tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
+If you haven't done so already, configure the Node.js APM SDK with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
 experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][1] for more details).
 
 **Note**: Automatic injection only works for logs formatted as JSON.

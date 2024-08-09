@@ -135,7 +135,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
      features:
        apm:
          instrumentation:
-           enabled: true  
+           enabled: true
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -145,7 +145,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
@@ -182,7 +182,7 @@ To enable Single Step Instrumentation with Helm:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -205,19 +205,19 @@ When you run the one-line installation command, there are a few options to custo
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-### Specifying tracing library versions {#lib-linux}
+### Specifying APM SDK versions {#lib-linux}
 
 By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command.
 
-For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+For example, to install support for only v1.25.0 of the Java APM SDK and the latest Python APM SDK, add the following to the installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+You can optionally provide a version number for the APM SDK by placing a colon after the language name and specifying the APM SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Available versions are listed in tracer source repositories for each language:
+Available versions are listed in SDK source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
@@ -237,19 +237,19 @@ Available versions are listed in tracer source repositories for each language:
 
 {{% tab "Docker" %}}
 
-### Specifying tracing library versions {#lib-docker}
+### Specifying APM SDK versions {#lib-docker}
 
 By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script.
 
-For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+For example, to install support for only v1.25.0 of the Java APM SDK and the latest Python APM SDK, add the following to the installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+You can optionally provide a version number for the APM SDK by placing a colon after the language name and specifying the APM SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Available versions are listed in tracer source repositories for each language:
+Available versions are listed in SDK source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
@@ -283,7 +283,7 @@ To enable instrumentation for specific namespaces, add `enabledNamespaces` confi
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          enabledNamespaces: # Add namespaces to instrument
            - default
            - applications
@@ -295,7 +295,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
            - default
            - applications
@@ -331,16 +331,16 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 {{< /collapse-content >}}
 
-### Specifying tracing library versions
+### Specifying APM SDK versions
 
-<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the APM SDKs you specify.</div>
 
-Specify Datadog tracing libraries and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
+Specify Datadog APM SDKs and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
 
 1. [Specify at the service level](#specifying-at-the-service-level), or
 2. [Specify at the cluster level](#specifying-at-the-cluster-level).
 
-**Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, applications written in supported languages are automatically instrumented using the latest tracing library versions.
+**Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, applications written in supported languages are automatically instrumented using the latest APM SDK versions.
 
 #### Specifying at the service level
 
@@ -354,7 +354,7 @@ To automatically instrument applications in specific pods, add the appropriate l
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
+Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and SDK source repositories for each language:
 
 - [Java][31]
 - [Node.js][32]
@@ -437,7 +437,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
-You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
+You can pull the APM SDK from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
 
 For instructions on changing your container registry, see [Changing Your Container Registry][30].
 

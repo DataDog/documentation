@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/java
-description: 'Instrument your code with the Datadog Java APM tracer.'
+description: 'Instrument your code with the Datadog Java APM APM SDK.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -22,7 +22,7 @@ further_reading:
 
 This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
 
-<div class="alert alert-info">The Datadog Java tracer is built on OpenTracing. Although OpenTracing is deprecated in favor of OpenTelemetry, the following examples correctly import the <code>opentracing</code> library.</div>
+<div class="alert alert-info">The Datadog Java APM SDK is built on OpenTracing. Although OpenTracing is deprecated in favor of OpenTelemetry, the following examples correctly import the <code>opentracing</code> library.</div>
 
 ## Adding tags
 
@@ -87,7 +87,7 @@ import io.opentracing.log.Fields;
     }
 ```
 
-**Note**: `Span.log()` is a generic OpenTracing mechanism for associating events to the current timestamp. The Java Tracer only supports logging error events.
+**Note**: `Span.log()` is a generic OpenTracing mechanism for associating events to the current timestamp. The Java APM SDK only supports logging error events.
 Alternatively, you can set error tags directly on the span without `log()`:
 
 ```java
@@ -261,9 +261,9 @@ class SomeClass {
 }
 ```
 
-### Extending tracers
+### Extending APM SDKs
 
-The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
+The APM SDKs are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
 
 ```java
 import java.util.List;

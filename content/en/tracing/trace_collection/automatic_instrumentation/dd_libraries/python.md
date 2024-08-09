@@ -34,9 +34,9 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 ### Instrument your application
 
-After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
+After you install and configure your Datadog Agent, the next step is to add the APM SDK directly in the application to instrument it. Read more about [compatibility information][1].
 
-To begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
+To begin tracing applications written in Python, install the Datadog APM SDK, `ddtrace`, using pip:
 
 ```python
 pip install ddtrace
@@ -56,11 +56,11 @@ For example, if your application is started with `python app.py` then:
 ddtrace-run python app.py
 ```
 
-Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --info` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
+Once you've finished setup and are running the APM SDK with your application, you can run `ddtrace-run --info` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
 The connection for traces can also be configured in code:
 
