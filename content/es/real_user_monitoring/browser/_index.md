@@ -19,7 +19,7 @@ Con el SDK del RUM Browser de Datadog, también puedes:
 
 - Monitorizar las vistas de páginas y el rendimiento de tu aplicación para investigar problemas de rendimiento
 - Obtener una visibilidad completa e integral de los recursos y las solicitudes (como imágenes, archivos CSS, activos de JavaScript y archivos de fuentes)
-- Recopilar y monitorizar automáticamente cualquier evento interesante con todo el contexto pertinente y recopilar manualmente los errores que no se rastrean automáticament
+- Recopilar y monitorizar automáticamente cualquier evento interesante con todo el contexto pertinente y recopilar manualmente los errores que no se rastrean automáticamente
 - Realizar un rastreo de las interacciones del usuario que se han llevado a cabo durante el recorrido del usuario para obtener información sobre su comportamiento y, al mismo tiempo, cumplir los requisitos de privacidad
 - Sacar a la luz los puntos débiles de los usuarios con señales de frustración
 - Determinar la causa de un error hasta la línea de código para solucionarlo
@@ -28,9 +28,9 @@ Con el SDK del RUM Browser de Datadog, también puedes:
 
 ## Empezando
 
-Para empezar con el SDK del RUM Browser, sigue los pasos para [crear una aplicación RUM JavaScript ][1].
+Para empezar con el SDK del RUM Browser, sigue los pasos para [crear una aplicación RUM JavaScript][1].
 
-Desde aquí, puedes modificar los [datos y el contexto][2] que el SDK del RUM Browser recopila para satisfacer sus necesidades específicas. Aprende a sustituir la configuración por defecto en [Configuración avanzada][3].
+Desde aquí, puedes modificar los [datos y el contexto][2] que el SDK del RUM Browser recopila para satisfacer tus necesidades específicas. Aprende a sustituir la configuración por defecto en [Configuración avanzada][3].
 
 ## Referencias adicionales
 
