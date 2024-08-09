@@ -43,17 +43,16 @@ This page outlines the basic features of the Datadog Agent for Windows. If you h
 
 The core and APM/trace components of the Windows Agent run under the `ddagentuser` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
+#### Install with the GUI
+1. Download the [Datadog Agent installer][4] to install the latest version of the Agent.
+2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5].
 
-   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
-
-#### Install via the GUI
-- Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
-- Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
-- When the install finishes, you are given the option to launch the Datadog Agent Manager.
+When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Install with the command line
-- Open PowerShell with **Administrator** privileges.
-- Run the following command to install the Datadog Agent:
+1. Open PowerShell with **Administrator** privileges.
+2. Run the following command to install the Datadog Agent:
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
@@ -61,6 +60,8 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
+[4]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{% tab "Installation in Active Directory Domains" %}}
@@ -80,47 +81,50 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
 
 **Note**: For a comprehensive understanding of setting up gMSAs, see [Microsoft's Group Managed Service Accounts Overview][5].
 
-### Create and Configure a gMSA
+### Create and configure a gMSA
 1. Create a Security Group:
 
-- Open Active Directory Users and Computers (ADUC).
-- Navigate to the appropriate Organizational Unit (OU).
-- Right-click and select New > Group.
-- Name the group (e.g., `DatadogAgentsGroup`), set the correct group scope for your organization (e.g. **Domain local**), and the type to **Security**.
+  1. Open **Active Directory Users and Computers (ADUC)**.
+  2. Navigate to the appropriate **Organizational Unit (OU)**.
+  3. Right-click and select **New** > **Group**.
+  4. Name the group. For example, `DatadogAgentsGroup`.
+  5. Set the correct group scope for your organization. For example, **Domain local**.
+  6. Set the type to **Security**.
 
 2. Create the gMSA:
 
   1. Open PowerShell with **Administrator** privileges.
-  1. Run the following command to create the gMSA, replacing `<YOUR_DOMAIN_NAME>` with your domain name:
-      ```powershell
-      New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
-      ```
-
+  2. Run the following command to create the gMSA, replacing `<YOUR_DOMAIN_NAME>` with your domain name:
+    ```powershell
+    New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
+    ```
 
 3. Install the gMSA on the Target Machine:
 
-- Ensure the target machine is part of the `DatadogAgentsGroup`.
-- On the target machine, open PowerShell and run:
-```powerhsell
-Install-ADServiceAccount -Identity DatadogGMSA
-```
+  1. Ensure the target machine is part of the `DatadogAgentsGroup`.
+  2. On the target machine, open PowerShell and run:
+    ```powerhsell
+    Install-ADServiceAccount -Identity DatadogGMSA
+    ```
+
 ### Install the Agent
 
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
 #### Install via the GUI
-- Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
-- Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
-- When prompted for the "Datadog Agent User Account", enter the username of the gMSA (e.g., `<YOUR_DOMAIN_NAME>\DatadogGMSA$`) and **no password**.
+1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
+2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
+4. When prompted for the "Datadog Agent User Account", enter the username of the gMSA. For example, `<YOUR_DOMAIN_NAME>\DatadogGMSA$` and **no password**.
 When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Install with the command line
 1. Open PowerShell with **Administrator** privileges.
-1. Run the following command to install the Datadog Agent:
+2. Run the following command to install the Datadog Agent:
    **Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
-```powershell
-Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
-```
+  ```powershell
+  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
+  ```
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
