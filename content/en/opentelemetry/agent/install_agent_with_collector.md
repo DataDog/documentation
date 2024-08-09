@@ -9,15 +9,18 @@ further_reading:
 
 ## Overview
 
-The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open-source Collector distribution that includes:
+The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source Collector distribution that includes:
 
 - Built-in Datadog pipelines and extensions
 - Support for traces, metrics, and logs
 - A curated set of components for optimal performance with Datadog
 
+{{< img src="/opentelemetry/embedded_collector/architecture.png" alt="Architecture overview for Collector embedded in the Datadog Agent." style="width:100%;" >}}
+
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
 
 <div class="alert alert-info">If your application is already instrumented with the OTel SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
+
 
 ## Requirements
 
@@ -33,8 +36,9 @@ Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
 - Helm (v3+)
-- Docker
+- [Docker][50]
 - [kubectl][5]
+- Ensure all OTel components are compatible with the [embedded OpenTelemetry Collector version][51]
 
 **Configuration**
 
@@ -557,3 +561,5 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [47]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/observer/README.md
 [48]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/pprofextension/README.md
 [49]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/extension/zpagesextension/README.md
+[50]: https://docs.docker.com/engine/install/
+[51]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml#L7
