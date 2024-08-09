@@ -11,7 +11,7 @@ title: Monitorización del RUM Browser
 
 ## Información general
 
-En Real User Monitoring (RUM) de Datadog, se proporciona información profunda del rendimiento del frontend de tu aplicación. Monitoriza datos reales del usuario para optimizar tu experiencia web y proporcionar experiencias del usuario. Correlaciona tests Sintético, métricas, trazas (traces) y logs de backend en un único lugar para identificar y solucionar problemas de rendimiento en todo el stack tecnológico.
+En Real User Monitoring (RUM) de Datadog, se proporciona información detallada del rendimiento del frontend de tu aplicación. Monitoriza datos reales del usuario para optimizar tu experiencia web y proporcionar experiencias del usuario. Correlaciona tests Sintético, métricas, trazas (traces) y logs de backend en un único lugar para identificar y solucionar problemas de rendimiento en todo el stack tecnológico.
 
 Datadog te ayuda a comprender el nivel actual de la experiencia del usuario, identificar áreas de mejora y medir el éxito de cada cambio y/o implementación. Utiliza esta información para identificar y resolver problemas inesperados del frontend antes de que los usuarios se vean afectados para ofrecer la mejor experiencia.
 
