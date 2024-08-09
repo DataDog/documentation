@@ -17,7 +17,7 @@ Watchdog Explains is available in Private Beta. To request access, complete the 
 
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
-{{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="Your image description" video=true >}}
+{{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="A walkthrough of the Watchdog Explains product" video=true >}}
 
 Watchdog Explains is an investigation assitant that guides you to the root cause of anomalies on any timeseries graph. 
 
@@ -43,6 +43,6 @@ Watchdog Explains highlights anomalies with a pink box. On the right side panel,
 {{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

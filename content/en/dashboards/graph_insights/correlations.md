@@ -43,9 +43,9 @@ Correlations *tries* to automatically detect the area of interest (anomalous beh
 
 You can customize the default search parameters of correlations. From a full-screen graph, on the *Correlations* tab, click the **Edit Search** button, or click directly on the graph.
 
-1. Click and drag on the graph to set the timeframe for your correlations search. 
+1. Click and drag on the graph to set the time frame for your correlations search. 
 1. Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
-1. Select `Auto-select` or `Custom select` from specific categories. For custom metrics, at least one selection is required.
+1. Select **Auto-select** or **Custom select** from specific categories. For custom metrics, at least one selection is required.
    * Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search correlations upon.
 1. Use the tag filter box to scope the search by a tag.
 
