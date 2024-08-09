@@ -75,7 +75,7 @@ App Builder queries can trigger Workflow Automation workflows. Apps can then use
 
 This app provides a button to trigger a workflow. The workflow sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
 
-{{< img src="service_management/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="486px">}}
+{{< img src="service_management/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="70%">}}
 
 {{% collapse-content title="Build the app" level="h4" %}}
 
@@ -93,7 +93,7 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 1. Click the plus (**+**) icon under the cat fact step. Search for "Function" and choose the **Function** data transformation step.
 1. Connect the plus (**+**) icon under the dog fact step to this **JS Function** step by clicking and dragging from the plus to the dot that appears above the JS Function step.
 1. In the JS Function, under **Configure**, for **Script**, use the following code snippet:
-    ```
+    ```javascript
     const catFact = $.Steps.Get_cat_fact?.body?.fact;
     const dogFactRaw = $.Steps.Get_dog_fact?.body;
 
@@ -143,7 +143,7 @@ After you get data from a query in App Builder, you can use data transformers to
 
 This app provides buttons to fetch facts about two numbers from an API. It then uses a data transformer to calculate and display the sum of the two numbers.
 
-{{< img src="service_management/app_builder/data-transformer.mp4" alt="Clicking each button fetches a new number fact, and the sum of the two numbers updates along with the facts" video="true" width="596px">}}
+{{< img src="service_management/app_builder/data-transformer.mp4" alt="Clicking each button fetches a new number fact, and the sum of the two numbers updates along with the facts" video="true" width="70%">}}
 
 {{% collapse-content title="Build the app" level="h4" %}}
 
