@@ -304,4 +304,4 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
-[14]: dashboards/graph_insights/watchdog_explains
+[14]: /dashboards/graph_insights/watchdog_explains
