@@ -29,15 +29,11 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 ### Log collection
 
 #### Rsyslog version >=8
-<div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends inotify mode. Traditionally, imfile used polling mode, which is much more resource-intense (and slower) than inotify mode. </div>
+<div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends <code>inotify</code> mode. Traditionally, <code>imfile</code> used polling mode, which is much more resource-intense (and slower) than <code>inotify</code> mode. </div>
 
 {{< tabs >}}
 
 {{% tab "Ubuntu and Debian" %}}
-
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">The <code>omhttp</code> module is required for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). This module is not installed by default on Ubunto and Debian.</div>
-{{< /site-region >}}
 
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
