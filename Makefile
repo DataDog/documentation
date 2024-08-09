@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data extract-preview-cache dependencies-preview
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -99,6 +99,17 @@ source-dd-source:
 # All the requirements for a full build
 dependencies: clean source-dd-source
 	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders derefs
+
+# This is specifically to run on preview, it should match dependencies target but items we can pull from cache instead
+dependencies-preview: clean source-dd-source
+	make extract-preview-cache
+	make hugpython all-examples update_pre_build node_modules placeholders
+
+# if we extract the cache earlier, prior to dependencies on preview builds we can use it for derefs/workflows
+extract-preview-cache: hugpython | data/workflows/
+	@. hugpython/bin/activate && python3 local/bin/py/build/content_manager.py
+	cp -r temp/data/workflows data/
+	cp temp/data/permissions.json data/permissions.json
 
 # make directories
 data/workflows/:

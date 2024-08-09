@@ -295,3 +295,9 @@ def download_cached_content_into_repo(self):
     # Cleanup temporary dir after cache download complete
     if os.path.isdir('temp'):
         shutil.rmtree('temp')
+
+
+if __name__ == "__main__":
+    # we call this script via imports
+    # so lets set on direct runs to download cache so we can avoid dupe logic in makefile
+    download_and_extract_cached_files_from_s3()
