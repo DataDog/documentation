@@ -133,3 +133,6 @@ The function's runtime is [no longer supported][14].
 [9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [10]: /integrations/amazon_lambda/#metrics
 [11]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+[12]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+[13]: https://aws.amazon.com/blogs/compute/optimizing-your-aws-lambda-costs-part-1/
+[14]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
