@@ -1,7 +1,7 @@
 ---
 title: Create custom rules
 aliases:
-  - /tracing/service_catalog/scorecards/create_custom_rules
+  - /tracing/service_catalog/scorecards/custom_rules
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
