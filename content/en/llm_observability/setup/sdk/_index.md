@@ -2,13 +2,12 @@
 title: LLM Observability Python SDK Reference
 aliases:
     - /tracing/llm_observability/sdk
+    - /llm_observability/sdk
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-LLM Observability is not available in the US1-FED site.
-</div>
-{{% /site-region %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -655,10 +654,10 @@ def server_process_request(request):
 [3]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
 [4]: https://github.com/langchain-ai/langchain
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[8]: /llm_observability/span_kinds/
+[8]: /llm_observability/terms/
 [9]: /getting_started/tagging/
 [10]: https://github.com/DataDog/llm-observability
-[11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
-[12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
-[13]: /llm_observability/auto_instrumentation/
-[14]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=custom#installation
+[11]: /tracing/trace_collection/compatibility/python/#integrations
+[12]: /tracing/trace_collection/compatibility/python/#library-compatibility
+[13]: /llm_observability/setup/auto_instrumentation/
+[14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
