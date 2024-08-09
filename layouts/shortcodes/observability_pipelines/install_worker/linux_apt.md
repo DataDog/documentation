@@ -1,8 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
-1. Run the one-step command provided in the UI to install the Worker:
-    ```shell
-    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLES> <DESTINATION_ENV_VARIABLES> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
-    ```
+1. Run the one-step command provided in the UI to install the Worker.
+
+**Note**: If you want to update the environment variables in the `/etc/default/observability-pipelines-worker` file, you need to update the file manually. Running the one-step command does not update that file.
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
 1. Set up APT transport for downloading using HTTPS:
