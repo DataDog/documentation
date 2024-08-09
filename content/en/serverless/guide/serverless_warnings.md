@@ -100,6 +100,12 @@ Attack attempts were detected targeting the serverless application.
 
 **Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
 
+### Deprecated runtime
+
+The function's runtime is no longer supported.
+
+**Resolution:** Upgrade to the latest runtime to ensure you are up to date on the latest security, performance, and reliability standards.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
