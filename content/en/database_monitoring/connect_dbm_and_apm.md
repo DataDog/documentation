@@ -45,7 +45,7 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` mode only |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -71,6 +71,13 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] not supported
+
+\*\* Full mode SQL Server/Java:
+- still in beta
+- the instrumentation makes an additional roundtrip to the database
+- Prerequisites:
+  - Agent version 7.55.0 or greater
+  - Java tracer version 1.39.0 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
