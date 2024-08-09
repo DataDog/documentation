@@ -27,9 +27,11 @@ algolia:
   tags: ['install', 'installing', 'uninstall', 'uninstalling', 'windows']
 ---
 
-If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. 
+## Overview
 
-## Installation
+This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see [Install the Datadog Agent](#install-the-datadog-agent) or [follow the instructions in the app][1].
+
+## Install the Datadog Agent
 
 **Requirements**
 - **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][2].
@@ -41,8 +43,6 @@ If you haven't installed the Datadog Agent yet, see below or the [in-app install
 
 The core and APM/trace components of the Windows Agent run under the `ddagentuser` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
-### Install the Datadog Agent
-Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
@@ -67,48 +67,44 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 When deploying the Datadog Agent in an Active Directory environment, Datadog recommends using a Group Managed Service Account (gMSA).
 
-**Benefits of Using gMSAs**
 Using gMSA can enhance security and simplify management. Some of the benefits include:
-- Deployment accross multiple servers: Unlike traditional MSAs or sMSAs, gMSAs can be deployed accross multiple servers.
-- Automated password management: The passwords for gMSAs account are handled at the OS level, and are rotated on a regular basis without requiring manual intervention. 
+- Deployment across multiple servers: Unlike traditional Managed Service Accounts (MSAs) or standalone Managed Service Accounts (sMSAs), gMSAs can be deployed across multiple servers.
+- Automated password management: The passwords for gMSAs are handled at the operating system level, and are rotated on a regular basis without requiring manual intervention. 
 
-When running with a gMSA account the core and APM/trace components of the Windows Agent run under the account configured.
-The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+When running with a gMSA, the core and APM/trace components of the Windows Agent run under the configured account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 ### Prerequisites
-- Active Directory environment configured.
-- Permission to create and manage gMSA.
+- An Active Directory environment
+- Permission to create and manage gMSAs
 - See further [requirements in the Microsoft documentation][4].
 
-**Note**: Advanced set up of a gMSA is beyond the scope of this documentation, please refer to [the Microsoft documentation for setting up a Group Managed Service Account in your environment][5] for more information.
+**Note**: For a comprehensive understanding of setting up gMSAs, see [Microsoft's Group Managed Service Accounts Overview][5].
 
 ### Create and Configure a gMSA
-**1. Create a Security Group:**
+1. Create a Security Group:
 
 - Open Active Directory Users and Computers (ADUC).
 - Navigate to the appropriate Organizational Unit (OU).
 - Right-click and select New > Group.
 - Name the group (e.g., `DatadogAgentsGroup`), set the correct group scope for your organization (e.g. **Domain local**), and the type to **Security**.
 
-**2. Create the gMSA:**
+2. Create the gMSA:
 
-- Open PowerShell with **Administrator** privileges.
-- Run the following command to create the gMSA:
-```powershell
-New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
-```
+  1. Open PowerShell with **Administrator** privileges.
+  1. Run the following command to create the gMSA, replacing `<YOUR_DOMAIN_NAME>` with your domain name:
+      ```powershell
+      New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
+      ```
 
-Replace `<YOUR_DOMAIN_NAME>` with your domain name.
 
-**3. Install the gMSA on the Target Machine:**
+3. Install the gMSA on the Target Machine:
 
 - Ensure the target machine is part of the `DatadogAgentsGroup`.
 - On the target machine, open PowerShell and run:
 ```powerhsell
 Install-ADServiceAccount -Identity DatadogGMSA
 ```
-### Install the Datadog Agent
-Download the [Datadog Agent installer][1] to install the latest version of the Agent.
+### Install the Agent
 
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
@@ -116,15 +112,15 @@ Download the [Datadog Agent installer][1] to install the latest version of the A
 - Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 - Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 - When prompted for the "Datadog Agent User Account", enter the username of the gMSA (e.g., `<YOUR_DOMAIN_NAME>\DatadogGMSA$`) and **no password**.
-- When the install finishes, you are given the option to launch the Datadog Agent Manager.
+When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Install with the command line
-- Open PowerShell with **Administrator** privileges.
-- Run the following command to install the Datadog Agent:
+1. Open PowerShell with **Administrator** privileges.
+1. Run the following command to install the Datadog Agent:
+   **Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
 ```
-**note:** Replace `DatadogGMSA$` with the username of your gMSA, it **must end with a $ symbol.**
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
@@ -135,7 +131,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Installation Configuration Options 
+##### Installation configuration options 
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
 
@@ -172,12 +168,12 @@ Each of the following configuration options can be added as a property to the co
 | `PROCESS_ENABLED`                           | String  | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
 | `HOSTNAME_FQDN_ENABLED`                     | String  | Enable (`"true"`) or disable (`"false"`) the usage of FQDN for the Agent hostname. It is equivalent to set `hostname_fqdn` in the Agent configuration file. The usage of FQDN for the hostname is disabled by default. _(v6.20.0+)_ |
 | `CMD_PORT`                                  | Number  | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
-| `PROXY_HOST`                                | String  | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
-| `PROXY_PORT`                                | Number  | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
-| `PROXY_USER`                                | String  | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
-| `PROXY_PASSWORD`                            | String  | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][4]. |
+| `PROXY_HOST`                                | String  | (If using a proxy) sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
+| `PROXY_PORT`                                | Number  | (If using a proxy) sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
+| `PROXY_USER`                                | String  | (If using a proxy) sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
+| `PROXY_PASSWORD`                            | String  | (If using a proxy) sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
-| [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
+| [DEPRECATED] `ADDLOCAL` | String | Enable additional Agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
 
 Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][13] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade normally.
 
