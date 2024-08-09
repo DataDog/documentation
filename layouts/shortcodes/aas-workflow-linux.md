@@ -6,3 +6,4 @@ See the sample [GitHub workflow][workflow].
 [slots]: https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots
 [azure-cli-marketplace]: https://github.com/marketplace/actions/azure-cli-action
 [workflow]: /resources/yaml/serverless/aas-workflow-linux.yaml
+
