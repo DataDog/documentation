@@ -284,6 +284,24 @@ You can use the following methods in `Configuration.Builder` when creating the D
 
 `useSite(DatadogSite)` 
 : Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
+
+`setBatchSize([SMALL|MEDIUM|LARGE])` 
+: Defines the individual batch size for requests sent to Datadog.
+
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+: Defines the frequency for requests made to Datadog endpoints (if requests are available).
+
+`setBatchProcessingLevel(LOW|MEDIUM|HIGH)` 
+: Defines the number of batches sent in each upload cycle.
+
+`setEncryption(Encryption)` 
+: Set an encryption function applied to data stored locally on the device.
+
+`setCrashReportsEnabled(Boolean)` 
+: Enable or disable the collection of JVM crashes.
+
+`setBackpressureStrategy(BackPressureStrategy)` 
+: Define the strategy the SDK will use when handling large volumes of data and internal queues are full.
  
 You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM features:
 
@@ -296,11 +314,8 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `trackLongTasks(durationThreshold)` 
 : Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
-: Defines the individual batch size for requests sent to Datadog.
-
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
-: Defines the frequency for requests made to Datadog endpoints (if requests are available).
+`trackNonFatalAnrs(Boolean)` 
+: Enables tracking non-fatal ANRs. This is enabled by default on Android API 29 and below, and disabled by default on Android API 30 and above.
 
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
 : Sets the preferred frequency for collecting mobile vitals.
@@ -308,9 +323,11 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `setSessionSampleRate(<sampleRate>)` 
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setXxxEventMapper()` 
+`setXxxEventMapper(<event>)` 
 : Sets the data scrubbing callbacks for views, actions, resources, and errors.
 
+`setSessionListener(RumSessionListener)` 
+: Sets a listerner to be notified on when new a new RUM Session is started.
  
 ### Automatically track views
 
