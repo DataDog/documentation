@@ -31,9 +31,9 @@ algolia:
 
 This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see [Install the Datadog Agent](#install-the-datadog-agent) or [follow the instructions in the app][1].
 
-## Install the Datadog Agent
+## Install the Agent
 
-**Requirements**
+### Requirements
 - **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][2].
 - **Datadog account**: Ensure you have access to a Datadog account and have your Datadog API key.
 - **Administrator privileges**: Administrator access is required on the Windows machine.
@@ -43,14 +43,14 @@ This page outlines the basic features of the Datadog Agent for Windows. If you h
 
 The core and APM/trace components of the Windows Agent run under the `ddagentuser` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
-#### Install with the GUI
+### Install with the GUI
 1. Download the [Datadog Agent installer][4] to install the latest version of the Agent.
 2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5].
 
 When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-#### Install with the command line
+### Install with the command line
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
     ```powershell
@@ -136,7 +136,7 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Installation configuration options 
+#### Installation configuration options 
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
 
@@ -159,7 +159,7 @@ Each of the following configuration options can be added as a property to the co
 - Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
 - If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
 
-##### More Agent configuration options
+#### More Agent configuration options
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. 
 
