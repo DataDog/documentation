@@ -1,7 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to install the Worker.
 
-**Note**: If you want to update environment variables, you need to update them in the `/etc/default/observability-pipelines-worker` file, and then restart the Worker. Running the one-step command does not update that file.
+    **Note**: If you want to update environment variables, you need to update them in the `/etc/default/observability-pipelines-worker` file, and then restart the Worker. Running the one-step command does not update that file.
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
 1. Set up the Datadog `rpm` repo on your system with the below command. **Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.

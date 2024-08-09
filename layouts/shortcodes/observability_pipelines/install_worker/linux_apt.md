@@ -1,7 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to install the Worker.
 
-**Note**: If you want to update environment variables, you need to update them in the `/etc/default/observability-pipelines-worker` file, and then restart the Worker. Running the one-step command does not update that file.
+    **Note**: If you want to update environment variables, you need to update them in the `/etc/default/observability-pipelines-worker` file, and then restart the Worker. Running the one-step command does not update that file.
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
 1. Set up APT transport for downloading using HTTPS:
