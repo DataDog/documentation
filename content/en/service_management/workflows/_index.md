@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-workflow-automation/"
   tag: "Blog"
   text: "Quickly remediate issues in your Azure applications with Datadog Workflow Automation"
+- link: "https://www.datadoghq.com/blog/reduce-alert-storms-datadog/"
+  tag: "Blog"
+  text: "Five techniques for reducing alert storms"
 ---
 
 {{< site-region region="gov" >}}

@@ -45,6 +45,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-posture-csm/"
     tag: "Blog"
     text: "Report on changes to your security posture with Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/essential-cloud-security-controls-ruleset-v2/"
+    tag: "Blog"
+    text: "Fix key cloud security risks with the Essential Cloud Security Controls Ruleset"
 algolia:
   tags: ['inbox']
 cascade:
