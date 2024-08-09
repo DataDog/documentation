@@ -6,6 +6,8 @@ further_reading:
   text: "CSM Threats Detection Rules"
 ---
 
+<div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
+
 <div class="alert alert-info">CSM Threats Active Protection is in beta.</div>
 
 This topic explains how to use the CSM Threats **Active Protection** feature to block crypto mining threats automatically. 
