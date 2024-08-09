@@ -115,8 +115,6 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
 
-<<<<<<< HEAD
-=======
 `DD_TRACE_PROPAGATION_STYLE`
 : **Default**: `datadog,tracecontext` <br>
 Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
@@ -144,6 +142,10 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   **Example:**<br>
   - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
   - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
+  
+`DD_TAGS`
+: **Default**: [] <br>
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
 
 ### Agent  
 
@@ -155,20 +157,17 @@ Override the default trace Agent host address for trace submission.
 : **Default**: `8125` <br>
 Overrides the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
-`DD_TAGS`
-: **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
-
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Default**: `true` <br>
 Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
+
+### Runtime metrics
 
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**: `false` <br>
 Enable [runtime metric][17] collection.
 Added in version 1.26.0.
 
->>>>>>> d9c6fb2965ba9f0f9c9d1e26fee26ac0383a0e32
 ## Configure APM environment name
 
 The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
