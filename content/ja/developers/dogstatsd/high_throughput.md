@@ -7,7 +7,6 @@ further_reading:
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-kind: documentation
 title: 大量のメトリクスの送信
 ---
 

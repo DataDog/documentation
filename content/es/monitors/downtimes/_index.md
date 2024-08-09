@@ -25,7 +25,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Notificaciones de monitores
-kind: documentation
 title: Tiempos de inactividad
 ---
 

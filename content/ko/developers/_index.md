@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: 블로그
   text: Datadog Open Source Hub 소개
-kind: 설명서
 title: 개발자
 ---
 

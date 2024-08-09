@@ -15,7 +15,6 @@ further_reading:
   tag: Blog
   text: Enmascarar los datos de usuario con los parámetros de privacidad predeterminados
     de Session Replay
-kind: Documentación
 title: Seguridad de los datos en Real User Monitoring (RUM)
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Aurora managed Postgres
-kind: documentation
 description: Install and configure Database Monitoring for Postgres on Amazon Aurora.
 further_reading:
 - link: "/integrations/postgres/"
@@ -308,7 +307,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
         postgres.yaml: -|
           cluster_check: true
           init_config:
-            instances:
+          instances:
             - dbm: true
               host: '<AWS_INSTANCE_ENDPOINT>'
               port: 5432

@@ -1,6 +1,6 @@
 ---
 title: Understanding RUM and Product Analytics
-kind: guide
+
 description: Guide for existing RUM users looking to understand the relationship between RUM and Product Analytics.
 further_reading:
 - link: '/real_user_monitoring/'

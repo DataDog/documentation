@@ -1,6 +1,6 @@
 ---
 title: Remotely configure RUM using LaunchDarkly
-kind: guide
+
 beta: false
 private: true
 description: Learn how to set up RUM with LaunchDarkly to remotely configure RUM sampling.

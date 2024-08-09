@@ -10,7 +10,6 @@ further_reading:
 - link: tracing/trace_search_and_analytics/query_syntax
   tag: ドキュメント
   text: 保持されたトレースに基づいて分析クエリとモニターを使用します。
-kind: documentation
 title: スパンからメトリクスを生成する
 ---
 

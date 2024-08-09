@@ -1,6 +1,5 @@
 ---
 title: DogStatsD Data Aggregation
-kind: documentation
 description: Learn how the DogStatsD server aggregates your data before sending it to Datadog
 aliases:
     - /developers/faq/data-aggregation-with-dogstatsd-threadstats

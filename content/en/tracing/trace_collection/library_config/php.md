@@ -1,6 +1,5 @@
 ---
 title: Configuring the PHP Tracing Library
-kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -20,6 +19,9 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
+- link: "/opentelemetry/interoperability/environment_variable_support"
+  tag: "Documentation"
+  text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -508,6 +510,43 @@ A comma-separated list of WordPress action hooks to be instrumented. This featur
 Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
 
 
+`DD_OPENAI_SERVICE`
+: **INI**: `datadog.openai.service`<br>
+**Default**: `DD_SERVICE`<br>
+The service name reported by default for OpenAI requests.
+
+`DD_OPENAI_LOGS_ENABLED` (beta)
+: **INI**: `datadog.openai.logs_enabled`<br>
+**Default**: `false`<br>
+Enable collection of prompts and completions as logs. You can adjust the rate of prompts and completions collected using the sample rate configuration described below.
+
+`DD_OPENAI_METRICS_ENABLED`
+: **INI**: `datadog.openai.metrics_enabled`<br>
+**Default**: `true`<br>
+Enable collection of OpenAI metrics.<br>
+If the Datadog Agent is configured to use a non-default StatsD hostname or port, use `DD_DOGSTATSD_URL` to configure the OpenAI metrics collection.
+
+`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
+: **INI**: `datadog.openai.span_char_limit`<br>
+**Default**: `128`<br>
+Configure the maximum number of characters for the following data within span tags:
+
+  - Prompt inputs and completions
+  - Message inputs and completions
+  - Embedding inputs
+
+Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
+
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+: **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
+**Default**: `1.0`<br>
+Configure the sample rate for the collection of prompts and completions as span tags.
+
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+: **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
+**Default**: `0.1`<br>
+Configure the sample rate for the collection of prompts and completions as logs.
+
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
@@ -515,7 +554,7 @@ The table below specifies the default service names for each integration. Change
 Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
 | Integration   | Service Name    |
-| ------------- | --------------- |
+|---------------| --------------- |
 | AMQP          | `amqp`          |
 | CakePHP       | `cakephp`       |
 | CodeIgniter   | `codeigniter`   |
@@ -533,6 +572,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | MongoDB       | `mongodb`       |
 | Mysqli        | `mysqli`        |
 | Nette         | `nette`         |
+| OpenAI        | `openai`        |
 | PCNTL         | `pcntl`         |
 | PDO           | `pdo`           |
 | PhpRedis      | `phpredis`      |
@@ -630,3 +670,4 @@ When the application runs in a docker container, the path `/proc/self` should al
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
+[20]: /opentelemetry/interoperability/environment_variable_support

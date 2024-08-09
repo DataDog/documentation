@@ -13,7 +13,6 @@ further_reading:
   tag: Validation des bases
   text: Prenez part à une session interactive pour améliorer la surveillance de vos
     bases de données avec Database Monitoring
-kind: documentation
 title: Prise en main de la solution Database Monitoring
 ---
 

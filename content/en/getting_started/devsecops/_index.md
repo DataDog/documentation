@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the DevSecOps Bundles
-kind: documentation
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
@@ -40,7 +39,6 @@ Learn more about the features included with APM DevSecOps:
 [5]: /agent/
 [6]: /tracing/trace_collection/
 [7]: /universal_service_monitoring/setup/
-[8]: /security/application_security/enabling/
 [9]: /tracing/metrics/
 [10]: /getting_started/application_security/vulnerability_management/
 
@@ -121,7 +119,6 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [9]: /universal_service_monitoring/setup/
 [10]: /data_streams/#setup
 [11]: /profiler/enabling
-[12]: /security/application_security/enabling/
 [13]: /tracing/metrics/
 [14]: /getting_started/application_security/vulnerability_management/
 

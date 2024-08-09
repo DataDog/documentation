@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Datadog 포워더(Forwarder)를 사용한 루비(Ruby) 서버리스 애플리케이션 계측하기
 ---
 

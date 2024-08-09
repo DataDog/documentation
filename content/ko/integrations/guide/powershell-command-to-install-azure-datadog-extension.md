@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-arc-integration/
   tag: 블로그
   text: Datadog을 활용해 Azure Arc 하이브리드 인프라스트럭처 모니터링
-kind: 지침
 title: Azure Datadog 확장 설치 명령
 ---
 

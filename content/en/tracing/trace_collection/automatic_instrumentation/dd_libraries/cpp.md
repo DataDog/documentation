@@ -1,6 +1,5 @@
 ---
 title: Tracing C++ Applications
-kind: documentation
 aliases:
 - /tracing/cpp/
 - /tracing/languages/cpp/

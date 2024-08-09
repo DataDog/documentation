@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/java/
   tag: Documentation
   text: ヘッダーを使ったトレースコンテキストの伝搬
-kind: documentation
 title: Java トレーシングライブラリの構成
 type: multi-code-lang
 ---

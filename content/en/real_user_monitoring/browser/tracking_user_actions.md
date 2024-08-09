@@ -1,6 +1,5 @@
 ---
 title: Tracking User Actions
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'

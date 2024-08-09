@@ -2,7 +2,6 @@
 aliases:
 - /fr/agent/faq/agent-apm-metrics/
 - /fr/tracing/send_traces/agent-apm-metrics/
-kind: Documentation
 title: Métriques APM envoyées par l'Agent Datadog
 ---
 

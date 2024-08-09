@@ -1,6 +1,5 @@
 ---
 title: Getting Started with DDSQL Editor
-kind: guide
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

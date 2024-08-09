@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 type: multi-code-lang
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android

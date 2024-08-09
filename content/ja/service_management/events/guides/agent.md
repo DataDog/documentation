@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentation
   text: カスタム Agent チェックの書き方
-kind: ガイド
 title: カスタム Agent チェックを使用したイベント
 ---
 

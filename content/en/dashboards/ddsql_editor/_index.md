@@ -1,7 +1,14 @@
 ---
 title: DDSQL Editor
-kind: documentation
+further_reading:
+- link: "/dashboards/ddsql_editor/reference"
+  tag: "Documentation"
+  text: "References for DDSQL Queries"
+- link: "dashboards/guide/ddsql_use_cases"
+  tag: "Guide"
+  text: "Common queries and use cases"
 ---
+
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
 DDSQL Editor is in private beta.
@@ -21,7 +28,7 @@ Type your question into the search box, and Datadog builds the SQL query for you
 
 ### Use SQL syntax (DDSQL)
 
-Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns.
+Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. For more information on DDSQL queries, see the [DDSQL Reference][2] documentation.
 
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
@@ -49,6 +56,10 @@ Save useful queries, or export the data as CSV.
 Browse and re-run saved queries in the side panel.
 
 {{< img src="dashboards/ddsql/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
 [2]: /dashboards/ddsql_editor/reference

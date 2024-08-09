@@ -5,7 +5,6 @@ aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
   - /agent/kubernetes/integrations
-kind: documentation
 further_reading:
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
@@ -24,7 +23,7 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-This page covers how to install and configure integrations for your Kubernetes infrastructure by using a Datadog feature known as _Autodiscovery_. This enables you to use [variables][16] like `%%host%%` to dynamically populate your configuration settings. For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][12]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Autodiscovery Management][23].
+This page covers how to install and configure integrations for your Kubernetes infrastructure by using a Datadog feature known as _Autodiscovery_. This enables you to use [variables][16] like `%%host%%` to dynamically populate your configuration settings. For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][12]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Container Discovery Management][23].
 
 If you are using Docker or Amazon ECS, see [Docker and Integrations][1].
 
@@ -104,7 +103,7 @@ If you define pods indirectly (with deployments, ReplicaSets, or ReplicationCont
 {{% /tab %}}
 {{% tab "Local file" %}}
 
-You can store Autodiscovery templates as local files inside the mounted `/conf.d` directory. You must restart your Agent containers each time you change, add, or remove templates.
+You can store Autodiscovery templates as local files inside the mounted `conf.d` directory (`/etc/datadog-agent/conf.d`). You must restart your Agent containers each time you change, add, or remove templates.
 
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host:
    ```yaml
@@ -503,7 +502,7 @@ Then, in your manifest, define the `volumeMounts` and `volumes`:
         volumeMounts:
         # [...]
           - name: postgresql-config-map
-            mountPath: /conf.d/postgresql.d
+            mountPath: /etc/datadog-agent/conf.d/postgresql.d
         # [...]
       volumes:
       # [...]

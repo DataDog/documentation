@@ -2,7 +2,7 @@
 aliases:
 - /fr/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
 - /fr/integrations/faq/aws-integration-and-cloudwatch-faq
-kind: guide
+
 title: FAQ sur l'intégration AWS et CloudWatch
 ---
 

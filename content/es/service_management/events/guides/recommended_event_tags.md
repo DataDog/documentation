@@ -7,7 +7,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags
   tag: Documentación
   text: Más información sobre cómo asignar etiquetas (tags)
-kind: guía
 title: Prácticas recomendadas para el etiquetado de eventos
 ---
 

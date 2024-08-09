@@ -9,7 +9,6 @@ further_reading:
 - link: /containers/cluster_agent/endpointschecks/
   tag: Documentation
   text: Exécuter des checks d'endpoint avec Autodiscovery
-kind: documentation
 title: Dépannage des checks de cluster et d'endpoint
 ---
 

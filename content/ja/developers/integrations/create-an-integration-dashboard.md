@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/
   tag: ドキュメント
   text: ダッシュボードについて
-kind: documentation
 title: インテグレーションダッシュボードの作成
 ---
 ## 概要

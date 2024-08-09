@@ -1,6 +1,5 @@
 ---
 title: Set Up the Datadog Cluster Agent
-kind: documentation
 aliases:
 - /agent/cluster_agent/setup
 - /agent/cluster_agent/event_collection

@@ -1,6 +1,5 @@
 ---
 title: Send Azure Logs to Datadog
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"

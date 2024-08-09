@@ -39,7 +39,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
   tag: ブログ
   text: サブクエリを使用したログの動的なフィルタリングと相関付け
-kind: Documentation
 title: ログ管理
 ---
 

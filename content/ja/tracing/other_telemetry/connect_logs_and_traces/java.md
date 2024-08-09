@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-kind: documentation
 title: Java ログとトレースの相関付け
 type: multi-code-lang
 ---

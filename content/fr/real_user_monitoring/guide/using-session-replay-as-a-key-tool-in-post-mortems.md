@@ -6,7 +6,7 @@ further_reading:
 - link: https://docs.datadoghq.com/notebooks/
   tag: documentation
   text: Notebooks
-kind: guide
+
 title: Utiliser Session Replay comme principal outil pour vos analyses post-mortem
 ---
 

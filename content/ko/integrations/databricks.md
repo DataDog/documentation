@@ -149,7 +149,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   # 포트 6062의 충돌 예방
   echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
@@ -231,7 +231,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 
@@ -277,7 +277,7 @@ else
   # 드라이버와 작업 노드에 최신 Datadog 에이전트 7 설치
   # datadog.yaml에 호스트 이름을 명시적으로 구성해 에이전트가 버전 7.40+에서 실패하지 않도록 예방
   # 변경 사항을 보려면 https://github.com/DataDog/datadog-agent/issues/14152 참고
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 fi
@@ -348,7 +348,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   # 포트 6062의 충돌 예방
   echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
@@ -428,7 +428,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 
@@ -474,7 +474,7 @@ else
   # 드라이버와 작업 노드에 최신 Datadog 에이전트 7 설치
   # datadog.yaml에 호스트 이름을 명시적으로 구성해 에이전트가 버전 7.40+에서 실패하지 않도록 예방
   # 변경 사항을 보려면 https://github.com/DataDog/datadog-agent/issues/14152 참고
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 fi

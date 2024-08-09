@@ -1,6 +1,5 @@
 ---
 title: Browser Session Replay
-kind: documentation
 description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'

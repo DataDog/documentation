@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: documentation
 aliases:
 - /continuous_testing/explorer/saved_views/
 further_reading:

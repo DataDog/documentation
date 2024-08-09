@@ -11,7 +11,6 @@ further_reading:
 - link: https://docs.datadoghq.com/profiler/
   tag: ドキュメント
   text: Continuous Profiler について
-kind: ガイド
 title: Datadog ソースコードインテグレーション
 ---
 

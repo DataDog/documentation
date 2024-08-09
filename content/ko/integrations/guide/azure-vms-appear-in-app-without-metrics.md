@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
-kind: 가이드
 title: 앱에 Azure VM이 나타나지만 메트릭이 보이지 않음
 ---
 

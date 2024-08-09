@@ -1,6 +1,5 @@
 ---
 title: Propagating Node.js Trace Context
-kind: documentation
 code_lang: nodejs
 code_lang_weight: 40
 type: multi-code-lang

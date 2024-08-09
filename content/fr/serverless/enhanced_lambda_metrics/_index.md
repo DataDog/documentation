@@ -2,7 +2,6 @@
 aliases:
 - /fr/serverless/real-time-enhanced-metrics
 - /fr/serverless/real_time_enhanced_metrics
-kind: documentation
 title: Métriques Lambda optimisées
 ---
 

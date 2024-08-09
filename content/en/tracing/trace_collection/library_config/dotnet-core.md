@@ -1,6 +1,5 @@
 ---
 title: Configuring the .NET Core Tracing Library
-kind: documentation
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
@@ -32,6 +31,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
     tag: "Blog"
     text: "Deploy ASP.NET Core applications to Azure App Service"
+  - link: "/opentelemetry/interoperability/environment_variable_support"
+    tag: "Documentation"
+    text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
@@ -353,3 +355,4 @@ The following configuration variables are for features that are available for us
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
+[20]: /opentelemetry/interoperability/environment_variable_support

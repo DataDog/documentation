@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Privacy Options
-kind: documentation
 description: Configure privacy options for Mobile Session Replay.
 aliases:
 further_reading:

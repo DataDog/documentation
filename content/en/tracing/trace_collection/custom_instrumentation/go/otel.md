@@ -1,6 +1,5 @@
 ---
 title: Go Custom Instrumentation using OpenTelemetry API
-kind: documentation
 description: 'Instrument your Go application with OpenTelemetry API to send traces to Datadog'
 code_lang: otel
 type: multi-code-lang
@@ -131,6 +130,23 @@ span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
 EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
 sp.End()
 
+```
+
+## Adding span events
+
+Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event timestamp and event attributes.
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, and `time` references the Go Standard Library time package. These packages must be imported in order to use this example.
+
+```go
+// Start a span.
+ctx, span := t.Start(context.Background(), "span_name")
+// Add an event.
+span.AddEvent("event1")
+// Add an event with a timestamp.
+span.AddEvent("event2", oteltrace.WithTimestamp(time.Now()))
+// Add an event with span attributes.
+span.AddEvent("event3", oteltrace.WithAttributes(attribute.String("key1", "value"), attribute.Int("key2", 1234)))
+s.End()
 ```
 
 ## Adding spans

@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/postgres/
   tag: ドキュメント
   text: Postgres インテグレーションの基本
-kind: documentation
 title: Azure Database for PostgreSQL のデータベースモニタリングの設定
 ---
 

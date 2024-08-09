@@ -1,6 +1,5 @@
 ---
 title: Advanced Search
-kind: documentation
 disable_toc: false
 further_reading:
 further_reading:

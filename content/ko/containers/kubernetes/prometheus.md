@@ -24,7 +24,6 @@ further_reading:
 - link: /integrations/guide/prometheus-metrics/
   tag: 설명서
   text: Prometheus 메트릭을 Datadog 메트릭에 매핑하기
-kind: 설명서
 title: 쿠버네티스 Prometheus 및 OpenMetrics 메트릭 수집
 ---
 

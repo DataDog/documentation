@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Azure SQL Server
-kind: documentation
 description: Install and configure Database Monitoring for SQL Server managed on Azure.
 further_reading:
 - link: "/integrations/sqlserver/"

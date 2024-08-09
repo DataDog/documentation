@@ -106,7 +106,7 @@ Datadog UI에서 [에이전트 설치 페이지][18]로 이동해 **Ubuntu**를 
 우분투(Ubuntu) 1줄 설치 명령 예시:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [에이전트 설치 페이지][18]에서 사용 중인 운영 체제에 대한 최신 설치 지침을 확인하세요.

@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: カスタムメソッドをインスツルメントして、ビジネスロジックを詳細に可視化する
 ---
 

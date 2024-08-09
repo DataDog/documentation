@@ -13,7 +13,6 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: Documentation
   text: Checks de cluster
-kind: documentation
 title: Exécuteurs de checks de cluster
 ---
 

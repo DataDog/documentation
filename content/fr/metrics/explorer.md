@@ -18,27 +18,23 @@ La page [Metrics Explorer][1] est une interface simple qui vous permet d'explore
 
 ## Graphiques
 
-Cliquez sur la zone de texte **Graph** pour afficher la liste des métriques que vous avez envoyées à Datadog au cours des dernières 24 heures. Commencez à saisir du texte pour filtrez les métriques, puis cliquez sur une métrique pour la sélectionner. Chaque métrique que vous sélectionnez génère un graphique mis à jour en temps réel sur la droite de la page.
+Utilisez l'éditeur de requêtes pour personnaliser le graphique affiché sur la page du Metrics Explorer.
 
-Utilisez les options au-dessus des graphiques pour spécifier un intervalle et la taille du graphique.
+Vous pouvez indiquer la période dans le coin supérieur droit de la page. La valeur par défaut est **Past 1 Hour**.
 
-{{< img src="metrics/explorer/graphs.png" alt="Metrics Explorer" style="width:80%;" >}}
+{{< img src="metrics/explorer/metrics_explorer.png" alt="Le Metrics Explorer affichant deux requêtes sur un graphique à barres" style="width:80%;" >}}
 
-**Remarque** : la case **Calculate as count where applicable** apparaît lorsque la métrique est de type `RATE`.
-
-Les métriques qui n'ont pas été transmises lors des dernières 24 heures ne sont pas indiquées dans le menu déroulant. Vous pouvez ajouter manuellement ces métriques à vos graphiques en saisissant leur nom ou leur requête complète.
+Les métriques qui n'ont pas été transmises lors des dernières 24 heures ne sont pas indiquées dans lʼéditeur de requêtes. Vous pouvez ajouter manuellement ces métriques à vos graphiques en saisissant leur nom ou leur requête complète.
 
 ### Scope
 
-Définissez un contexte de filtrage en sélectionnant ou en recherchant des valeurs de tags depuis la zone de texte **Over**. Vous pouvez par exemple utiliser cette zone pour afficher uniquement les valeurs de métrique associées à un host, un cluster, un environnement ou encore une région spécifique.
-
-### Groupes
-
-Définissez les règles de regroupement en sélectionnant ou en recherchant des clés de tags depuis la zone de texte **One graph per**. Vous pouvez par exemple créer un graphique différent pour chaque host, conteneur, région, environnement, etc. d'une même métrique. Les métriques associées à des tags au format `<KEY>:<VALUE>` peuvent être regroupées.
+Définissez un contexte de filtrage en sélectionnant ou en recherchant des valeurs de tags depuis la zone de texte **from**. Vous pouvez par exemple utiliser cette zone pour afficher uniquement les valeurs de métrique associées à un host, un cluster, un environnement ou encore une région spécifique.
 
 ### Agrégation spatiale
 
-Définissez l'[agrégation spatiale][5] à utiliser pour combiner les valeurs d'une métrique à l'aide de la zone de texte **On each graph, aggregate with the**. Les options proposées sont :
+Définissez l'[agrégation spatiale][5] utilisée pour combiner les valeurs d'une métrique.
+
+Les options possibles sont les suivantes :
 
 * Moyenne des valeurs transmises (par défaut)
 * Maximum des valeurs transmises
@@ -47,20 +43,13 @@ Définissez l'[agrégation spatiale][5] à utiliser pour combiner les valeurs d'
 
 **Remarque** : les options proposées peuvent varier en fonction du type de métrique sélectionné.
 
-### Options
+### Fonctions et formules
 
-Le Metrics Explorer vous permet de modifier les options suivantes :
-
-* Ajouter le préfixe `<VALEUR>` au titre des graphiques : cette option est vide par défaut.
-* Afficher jusqu'à `<NOMBRE>` graphiques en même temps : la valeur par défaut est 20.
+Vous pouvez éventuellement ajouter des fonctions à votre requête en utilisant le bouton fonction. Toutes les fonctions ne sont pas disponibles pour tous les types de métriques. Pour plus d'informations, référez-vous à la documentation relative à la [création de requête][6]. 
 
 ### Exporter
 
-Utilisez les boutons en bas à gauche pour exporter tous vos graphiques vers un nouveau timeboard ou un timeboard existant. Pour exporter un graphique spécifique, cliquez sur l'icône d'exportation en haut à droite de celui-ci.
-
-### Snapshot
-
-Pour créer un snapshot d'un graphique spécifique, cliquez sur l'icône de partage en haut à droite de celui-ci. Sélectionnez ensuite l'option **Send snapshot…** dans le menu déroulant qui s'affiche.
+Exportez votre graphique vers un dashboard ou un notebook à l'aide des boutons situés en haut à droite. Vous pouvez également utiliser **Split Graph in Notebook** pour visualiser les données divisées en graphiques individuels par région, service, ou environnement.
 
 ## Pour aller plus loin
 
@@ -69,5 +58,6 @@ Pour créer un snapshot d'un graphique spécifique, cliquez sur l'icône de part
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /fr/notebooks/
 [3]: /fr/dashboards/#screenboards
-[4]: /fr/dashboards/#timeboards
+[4]: /fr/dashboards/#get-started
 [5]: /fr/metrics/introduction/#space-aggregation
+[6]: https://docs.datadoghq.com/fr/dashboards/querying/#advanced-graphing

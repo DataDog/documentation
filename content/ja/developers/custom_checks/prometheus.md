@@ -1,6 +1,5 @@
 ---
 title: カスタム OpenMetrics チェック
-kind: documentation
 further_reading:
   - link: /agent/prometheus/
     tag: ドキュメント

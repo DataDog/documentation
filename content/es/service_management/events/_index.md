@@ -17,7 +17,6 @@ further_reading:
   tag: Aplicación
   text: Guía de inicio rápido
 is_beta: true
-kind: documentation
 title: Event Management
 ---
 

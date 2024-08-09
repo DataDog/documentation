@@ -1,6 +1,5 @@
 ---
 title: Propagating C++ Trace Context
-kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50

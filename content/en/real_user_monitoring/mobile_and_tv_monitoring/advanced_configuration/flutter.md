@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Advanced Configuration
-kind: documentation
 description: Learn how to configure Flutter Monitoring.
 code_lang: flutter
 type: multi-code-lang
@@ -343,14 +342,6 @@ Likewise, if you change the value from `TrackingConsent.pending` to `TrackingCon
 ## Flutter-specific performance metrics
 
 To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][17].
-
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter RUM SDK does not use too much disk space.
 
 ## OpenTelemetry setup
 

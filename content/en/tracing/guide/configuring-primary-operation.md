@@ -1,6 +1,6 @@
 ---
 title: Primary Operations in Services
-kind: guide
+
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:

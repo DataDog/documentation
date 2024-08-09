@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Consultar el estado de tu monitor
-kind: documentación
 title: Monitor de host
 ---
 

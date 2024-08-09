@@ -1,6 +1,5 @@
 ---
 title: RUM React Native Monitoring Setup
-kind: documentation
 description: Collect RUM data from your React Native projects.
 aliases:
     - /real_user_monitoring/react-native/
@@ -296,7 +295,7 @@ export default function App() {
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sampleRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
 
 ### Override the reported version
 

@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: ブログ
   text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
-kind: documentation
 title: Kubernetes 対応の Cluster Agent
 ---
 

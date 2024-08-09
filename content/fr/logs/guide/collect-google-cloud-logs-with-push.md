@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Apprendre à traiter vos logs
-kind: documentation
 title: Collecte de logs Google Cloud avec un abonnement Pub/Sub Push
 ---
 

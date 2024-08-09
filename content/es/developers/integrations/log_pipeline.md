@@ -16,7 +16,6 @@ further_reading:
 - link: /logs/log_configuration/pipelines/
   tag: Documentación
   text: Obtener más información sobre pipelines de logs
-kind: Documentación
 title: Crear un pipeline de logs
 ---
 ## Información general

@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Feature Flag Data in RUM
-kind: guide
+
 beta: true
 description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:

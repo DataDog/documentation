@@ -1,6 +1,5 @@
 ---
 title: Ignoring Unwanted Resources in APM
-kind: documentation
 ---
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
@@ -130,7 +129,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
-| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.useragent`               | `user_agent` - Java, C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
 #### Database

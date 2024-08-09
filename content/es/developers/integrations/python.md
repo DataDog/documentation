@@ -1,6 +1,5 @@
 ---
 description: Instala la herramienta de desarrollo de la integración de Datadog Agent.
-kind: documentación
 title: Instalar la herramienta de desarrollo de la integración de Datadog Agent
 ---
 Este documento explica cómo configurar un entorno de Python para que funcione en integraciones basadas en el Agent, incluida la instalación del intérprete y la herramienta de desarrollo.

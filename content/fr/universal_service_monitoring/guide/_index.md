@@ -1,6 +1,6 @@
 ---
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides pour Universal Service Monitoring
 ---

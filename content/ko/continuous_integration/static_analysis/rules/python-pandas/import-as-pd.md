@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 코딩 가이드라인에 따라 판다스(pandas) 가져오기
 ---
 ## 메타데이터

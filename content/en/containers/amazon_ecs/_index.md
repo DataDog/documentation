@@ -1,6 +1,5 @@
 ---
 title: Amazon ECS
-kind: documentation
 aliases:
   - /agent/amazon_ecs/
 further_reading:

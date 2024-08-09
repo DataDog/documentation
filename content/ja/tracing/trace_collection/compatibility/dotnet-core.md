@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: GitHub
   text: コンテナ化された ASP.NET コアアプリケーションを監視する
-kind: documentation
 title: .NET Core 互換性要件
 type: multi-code-lang
 ---

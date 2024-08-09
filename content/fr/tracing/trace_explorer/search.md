@@ -5,7 +5,6 @@ further_reading:
 - link: tracing/trace_explorer/query_syntax
   tag: Documentation
   text: Syntaxe de requête
-kind: documentation
 title: Rechercher des spans
 ---
 

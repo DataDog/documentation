@@ -14,7 +14,6 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentación
   text: Crear un test de navegador
-kind: guía
 title: Utilizar las métricas de uso estimado
 ---
 

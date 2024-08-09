@@ -10,7 +10,6 @@ further_reading:
 - link: /developers/integrations/oauth_for_integrations/
   tag: 설명서
   text: 통합용 OAuth 사용에 대해 알아보기
-kind: 설명서
 title: 통합 에셋 참조
 ---
 ## 개요

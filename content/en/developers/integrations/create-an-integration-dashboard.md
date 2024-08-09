@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Create an Integration Dashboard
 description: Learn how to create an integration dashboard.
 further_reading:

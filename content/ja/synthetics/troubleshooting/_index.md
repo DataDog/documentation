@@ -13,7 +13,6 @@ further_reading:
 - link: /synthetics/private_locations/
   tag: ドキュメント
   text: プライベートロケーションの作成
-kind: documentation
 title: Synthetic モニタリングのトラブルシューティング
 ---
 

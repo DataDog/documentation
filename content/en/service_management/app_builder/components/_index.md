@@ -1,6 +1,5 @@
 ---
 title: Components
-kind: documentation
 disable_toc: true
 further_reading:
 - link: "/service_management/app_builder/tables/"
@@ -313,6 +312,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Function
+: setIsOpen<br>
+**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -368,6 +371,10 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+State Function
+: setValue<br>
+**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
 
 For more information on events, see [Events][1].
 
@@ -431,6 +438,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Function
+: setValue<br>
+**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -474,6 +485,10 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+State Function
+: setValue<br>
+**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
 For more information on events, see [Events][1].
 
@@ -543,6 +558,10 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+State Function
+: setValue<br>
+**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
 
 For more information on events, see [Events][1].
 
@@ -660,6 +679,12 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Functions
+: setSelectedRow<br>
+**Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
+: setPageIndex<br>
+**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -747,6 +772,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Function
+: setValue<br>
+**Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -766,7 +795,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][5].
 
 
-[1]: /service_management/app_builder/build/#events
+[1]: /service_management/app_builder/events
 [2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview

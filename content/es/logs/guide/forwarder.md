@@ -5,13 +5,12 @@ aliases:
 - /es/serverless/libraries_integrations/forwarder/
 dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
-kind: Documentación
 title: Datadog Forwarder
 ---
 
 ## Información general
 
-El Datadog Forwarder es una función de AWS Lambda que envía logs desde AWS a Datadog, concretamente:
+El Datadog Forwarder es una función AWS Lambda que envía logs desde AWS a Datadog, concretamente:
 
 - Reenvía logs de CloudWatch, ELB, S3, CloudTrail, VPC, SNS y CloudFront a Datadog.
 - Reenvía eventos S3 a Datadog.
@@ -24,7 +23,7 @@ Para obtener más información sobre el envío de logs de servicios AWS con el D
 
 ## Instalación
 
-Datadog recomienda utilizar [CloudFormation](#cloudformation) para instalar automáticamente el Forwarder. También puedes completar el proceso de configuración utilizando [Terraform](#terraform) o [manualmente](#manual). Una vez instalado, puedes asignar fuentes de logs al Forwarder, como buckets S3 o grupos de logs CloudWatch [configurando activadores][4].
+Datadog recomienda utilizar [CloudFormation](#cloudformation) para instalar automáticamente el Forwarder. También puedes completar el proceso de configuración utilizando [Terraform](#terraform) o [manualmente](#manually). Una vez instalado, puedes asignar fuentes de logs al Forwarder, como buckets S3 o grupos de logs CloudWatch [setting up triggers][4].
 
 {{< tabs >}}
 {{% tab "CloudFormation" %}}
@@ -56,8 +55,8 @@ Instala el Forwarder utilizando el recurso Terraform [`aws_cloudformation_stack`
 
 Datadog recomienda crear configuraciones de Terraform separadas:
 
-- Utiliza la primera para almacenar la [clave de API de Datadog][102] en el AWS Secrets Manager y anota los secretos ARN de la salida de aplicación
-- A continuación, crea una configuración para el Forwarder y proporciona los secretos ARN a través del parámetro `DdApiKeySecretArn`.
+- Utiliza la primera para almacenar la [clave de API de Datadog][102] en el AWS Secrets Manager y anota el ARN de secretos de la salida de aplicación
+- A continuación, crea una configuración para el Forwarder y proporciona el ARN de secretos a través del parámetro `DdApiKeySecretArn`.
 - Por último, crea una configuración para [configurar los activadores en el Forwarder][103].
 
 Al separar las configuraciones de la clave de API y del Forwarder, no es necesario proporcionar la clave de API de Datadog al actualizar el Forwarder. Para actualizar o mejorar el Forwarder en el futuro, vuelve a aplicar la configuración del Forwarder.
@@ -115,13 +114,13 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 Si no puedes instalar el Forwarder utilizando la plantilla de CloudFormation proporcionada, puedes instalarlo manualmente siguiendo los pasos que se indican a continuación. No dudes en abrir una incidencia o en crear una solicitud de extracción para hacernos saber si hay algo que podríamos mejorar para que la plantilla funcione.
 
 1. Crea una función Lambda Python 3.10 utilizando `aws-dd-forwarder-<VERSION>.zip` de las últimas [versiones][101].
-2. Guarda tu [clave de API de Datadog][102] en AWS Secrets Manager, configura la variable de entorno `DD_API_KEY_SECRET_ARN` con el ARN secreto en la función Lambda y añade el permiso `secretsmanager:GetSecretValue` al rol de ejecución de Lambda.
-3. Si necesitas reenviar logs desde buckets S3, añade el permiso `s3:GetObject` al rol de ejecución de Lambda.
+2. Guarda tu [clave de API de Datadog][102] en AWS Secrets Manager, configura la variable de entorno `DD_API_KEY_SECRET_ARN` con el ARN de secretos en la función Lambda y añade el permiso `secretsmanager:GetSecretValue` al rol de ejecución Lambda.
+3. Si necesitas reenviar logs desde buckets S3, añade el permiso `s3:GetObject` al rol de ejecución Lambda.
 4. Configura la variable de entorno `DD_ENHANCED_METRICS` como `false` en el Forwarder. Esto evita que el Forwarder genere métricas mejoradas por sí mismo, aunque seguirá reenviando métricas personalizadas desde otras funciones Lambda.
 5. Algunas cuentas de AWS están configuradas para que los activadores no creen automáticamente políticas basadas en recursos que permitan a grupos de logs de CloudWatch invocar el Forwarder. Consulta [Permisos para logs de CloudWatch][103] para ver qué permisos son necesarios para que el Forwarder sea invocado por eventos de logs de CloudWatch.
 6. [Configura activadores][104].
-7. Crea un bucket S3 y configura la variable de entorno `DD_S3_BUCKET_NAME` con el nombre del bucket. También proporciona permisos `s3:GetObject`, `s3:PutObject`, `s3:ListBucket` y `s3:DeleteObject` en este bucket al rol de ejecución de Lambda. Este bucket se utiliza para almacenar el caché de diferentes etiquetas (tags), a saber, Lambda, S3, función Step y grupo de logs. Además, este bucket se utilizará para almacenar eventos no reenviados en caso de excepciones de reenvío.
-8. Configura la variable de entorno `DD_STORE_FAILED_EVENTS` como `true` para permitir que el Forwarder también almacene datos de eventos en el bucket de S3. En caso de excepciones al enviar logs, métricas o trazas para consumir, el Forwarder almacenará los datos pertinentes en el bucket de S3. En invocaciones personalizadas, es decir, al recibir un evento con la palabra clave `retry` asignada a una cadena no vacía (que puede activarse manualmente; consulta más adelante), el Forwarder volverá a intentar enviar los eventos almacenados. Si tiene éxito, borrará lo que se almacena en el bucket.
+7. Crea un bucket S3 y configura la variable de entorno `DD_S3_BUCKET_NAME` con el nombre del bucket. También proporciona permisos `s3:GetObject`, `s3:PutObject`, `s3:ListBucket` y `s3:DeleteObject` en este bucket al rol de ejecución Lambda. Este bucket se utiliza para almacenar el caché de diferentes etiquetas (tags), a saber, Lambda, S3, función Step y grupo de logs. Además, este bucket se utilizará para almacenar eventos no reenviados en caso de excepciones de reenvío.
+8. Configura la variable de entorno `DD_STORE_FAILED_EVENTS` como `true` para permitir que el Forwarder también almacene datos de eventos en el bucket S3. En caso de excepciones al enviar logs, métricas o trazas para consumir, el Forwarder almacenará los datos pertinentes en el bucket S3. En invocaciones personalizadas, es decir, al recibir un evento con la palabra clave `retry` asignada a una cadena no vacía (que puede activarse manualmente; consulta más adelante), el Forwarder volverá a intentar enviar los eventos almacenados. Si tiene éxito, borrará lo que se almacena en el bucket.
 
 ```bash
 aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' out
@@ -145,12 +144,12 @@ Si tienes problemas para actualizar a la última versión, consulta la sección 
 
 ### Actualizar una versión anterior a la v3.107.0 o superior
 
-A partir de la versión, 3.107.0 se ha añadido una nueva característica para permitir que la función Lambda almacene eventos no reenviados en caso de excepciones en el punto de entrada. Si la función se habilita utilizando la variable de entorno `DD_STORE_FAILED_EVENTS`, los eventos que fallen se almacenarán en un directorio definido en el mismo bucket de S3 utilizado para almacenar el caché de las etiquetas. El mismo bucket puede utilizarse para almacenar logs de varias funciones Lambda en subdirectorios únicos.
+A partir de la versión, 3.107.0 se ha añadido una nueva característica para permitir que la función Lambda almacene eventos no reenviados en caso de excepciones en el punto de entrada. Si la función se habilita utilizando la variable de entorno `DD_STORE_FAILED_EVENTS`, los eventos que fallen se almacenarán en un directorio definido en el mismo bucket S3 utilizado para almacenar el caché de las etiquetas. El mismo bucket puede utilizarse para almacenar logs de varias funciones Lambda en subdirectorios únicos.
 
 ### Actualizar una versión anterior a la v3.106.0 o superior
 
-A partir de la versión 3.106.0, la función Lambda se ha actualizado para añadir un prefijo a los nombres de archivos de caché almacenados en el bucket de S3 configurado en `DD_S3_BUCKET_NAME`. Esto permite utilizar el mismo bucket para almacenar archivos de caché de varias funciones. 
-Además, a partir de esta versión, el Forwarder adjuntará por defecto etiquetas del bucket de S3 personalizadas a todos los logs exportados a S3. Por ejemplo, si un servicio está configurado para enviar logs a un bucket S3 de destino, el Forwarder añadirá las etiquetas del bucket a los logs mientras los extrae y los reenvía.
+A partir de la versión 3.106.0, la función Lambda se ha actualizado para añadir un prefijo a los nombres de archivos de caché almacenados en el bucket S3 configurado en `DD_S3_BUCKET_NAME`. Esto permite utilizar el mismo bucket para almacenar archivos de caché de varias funciones. 
+Además, a partir de esta versión, el Forwarder adjuntará por defecto etiquetas del bucket S3 personalizadas a todos los logs exportados a S3. Por ejemplo, si un servicio está configurado para enviar logs a un bucket S3 de destino, el Forwarder añadirá las etiquetas del bucket a los logs mientras los extrae y los reenvía.
 
 ### Actualizar una versión anterior a la v3.99.0 o superior
 
@@ -174,7 +173,7 @@ A partir de la versión 3.0.0, la función Lambda del Forwarder se gestiona util
 
 1. Instala un nuevo Forwarder siguiendo los pasos de [instalación](#installation).
 2. Busca la función Lambda del Forwarder instalada en la pestaña "Resources" (Recursos) de la pila con el `Forwarder` de ID lógico.
-3. Migra manualmente algunos activadores (filtro de suscripción de grupos de logs de CloudWatch y notificación de eventos de buckets de S3) del antiguo Forwarder al nuevo.
+3. Migra manualmente algunos activadores (filtro de suscripción de grupos de logs de CloudWatch y notificación de eventos de buckets S3) del antiguo Forwarder al nuevo.
 4. Asegúrate de que el nuevo Forwarder funciona como se espera, por ejemplo, que se invoca regularmente sin errores.
 5. Asegúrate de que los logs de los activadores migrados (fuentes) aparecen en el explorador de logs de Datadog y que su aspecto es correcto.
 6. Migra todos los activadores al nuevo Forwarder.
@@ -323,7 +322,7 @@ En cambio, si utilizas el proxy web:
 
 ### Firma de códigos
 
-El Datadog Forwarder está firmado por Datadog. Para verificar la integridad del Forwarder, utiliza el método de instalación manual. [Crea una configuración para la firma de códigos][19] que incluya el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) y asócialo a la función Lambda del Forwarder antes de cargar el archivo .zip del Forwarder.
+El Datadog Forwarder está firmado por Datadog. Para verificar la integridad del Forwarder, utiliza el método de instalación manual. [Crea una configuración para la firma de códigos][19] que incluya el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) y asócialo a la función Lambda del Forwarder antes de cargar el archivo ZIP del Forwarder.
 
 ## Parámetros de CloudFormation
 
@@ -390,10 +389,13 @@ conexión TCP cifrada SSL, configura este parámetro como true (verdadero).
 : Configúralo como false (falso) para deshabilitar el reenvío de logs, mientras se siguen reenviando otros datos de observabilidad, como métricas y trazas de funciones Lambda.
 
 `DdFetchLambdaTags`
-: Permite que el Forwarder recupere etiquetas de Lambda mediante llamadas a la API de GetResources y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol de IAM de ejecución de Lambda.
+: Permite que el Forwarder recupere etiquetas de Lambda mediante llamadas a la API de GetResources y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol IAM de ejecución Lambda.
 
 `DdFetchLogGroupTags`
-: Permite que el Forwarder recupere etiquetas de grupos de logs mediante ListTagsLogGroup y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `logs:ListTagsLogGroup` se añadirá automáticamente al rol de IAM de ejecución de Lambda.
+: Permite que el Forwarder recupere etiquetas de grupos de logs mediante ListTagsLogGroup y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `logs:ListTagsLogGroup` se añadirá automáticamente al rol IAM de ejecución Lambda.
+
+`DdFetchStepFunctionsTags`
+: Permite que Forwarder recupere tags de funciones Step mediante llamadas a la API GetResources y las aplique a logs y trazas (si está habilitado el rastreo de funciones Step). Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol IAM de ejecución de Lambda.
 
 ### Limpieza de logs (opcional)
 
@@ -417,17 +419,17 @@ conexión TCP cifrada SSL, configura este parámetro como true (verdadero).
 `IncludeAtMatch`
 : Sólo envía logs que coinciden con la expresión regular proporcionada, no excluida por `ExcludeAtMatch`.
 
-Las reglas de filtrado se aplican todo el log con formato JSON, incluidos los metadatos que el Forwarder. añade automáticamente Sin embargo, las transformaciones aplicadas por [pipelines de logs][21], que se producen después del envío de logs a Datadog, no pueden utilizarse para filtrar logs en el Forwarder. El uso de una expresión regular ineficaz, como `.*`, puede ralentizar el Forwarder.
+Las reglas de filtrado se aplican a todo el log con formato JSON, incluidos los metadatos que el Forwarder. añade automáticamente Sin embargo, las transformaciones aplicadas por [pipelines de logs][21], que se producen después del envío de logs a Datadog, no pueden utilizarse para filtrar logs en el Forwarder. El uso de una expresión regular ineficaz, como `.*`, puede ralentizar el Forwarder.
 
 Los siguientes son algunos ejemplos de expresiones regulares que pueden utilizarse para el filtrado de logs:
 
-- Incluir (o excluir) logs de la plataforma Lambda: `"(START|END) RequestId:\s`. El precedente `"` es necesario para que coincida con el inicio del mensaje del log, que está en un blob JSON (`{"message": "START RequestId...."}`). Datadog recomienda mantener los logs de `REPORT`, ya que se utilizan para rellenar la lista de invocaciones en las vistas de la función serverless.
-- Incluir sólo mensajes de error de CloudTrail: `errorMessage`.
-- Incluir sólo logs que contienen un código de error HTTP 4XX o 5XX: `\b[4|5][0-9][0-9]\b`.
-- Incluir sólo logs de CloudWatch cuando el campo `message` contiene un par clave/valor JSON específico: `\"awsRegion\":\"us-east-1\"`.
+- Incluye (o excluye) logs de la plataforma Lambda: `"(START|END) RequestId:\s`. El precedente `"` es necesario para que coincida con el inicio del mensaje del log, que está en un blob JSON (`{"message": "START RequestId...."}`). Datadog recomienda conservar los logs de `REPORT`, ya que se utilizan para rellenar la lista de invocaciones en las vistas de funciones serverless.
+- Incluye sólo mensajes de error de CloudTrail: `errorMessage`.
+- Incluye sólo logs que contienen un código de error HTTP 4XX o 5XX: `\b[4|5][0-9][0-9]\b`.
+- Incluye sólo logs de CloudWatch cuando el campo `message` contiene un par clave/valor JSON específico: `\"awsRegion\":\"us-east-1\"`.
   - El campo de mensaje de un evento de log de CloudWatch se codifica como una cadena. Por ejemplo,`{"awsRegion": "us-east-1"}` se codifica como `{\"awsRegion\":\"us-east-1\"}`. Por lo tanto, el patrón que proporciones debe incluir `\` caracteres de escape, como en el siguiente ejemplo: `\"awsRegion\":\"us-east-1\"`.
 
-Para probar diferentes patrones en tus logs, activa [Depurar logs](#troubleshooting).
+Para probar diferentes patrones en tus logs, activa la [limpieza de logs](#troubleshooting).
 
 ### Avanzado (opcional)
 
@@ -441,7 +443,7 @@ Para probar diferentes patrones en tus logs, activa [Depurar logs](#troubleshoot
 : Configurado como true (verdadero) para permitir el envío de logs y métricas a través de AWS PrivateLink. Consulta [Conectarse a Datadog a través de AWS PrivateLink][2].
 
 `DdHttpproxyURL`
-: Configura HTTP_proxy y HTTPS_proxy de las las variables de entorno estándar del proxy web. Estos son los endpoints de URL que tu servidor proxy expone. No lo utilices en combinación con AWS Private Link. Asegúrate también de configurar `DdSkipSslValidation` como true (verdadero).
+: Configura las variables de entorno estándar del proxy web HTTP_PROXY y HTTPS_PROXY. Estos son los endpoints de URL que tu servidor proxy expone. No lo utilices en combinación con AWS Private Link. Asegúrate también de configurar `DdSkipSslValidation` como true (verdadero).
 
 `DdNoproxy`
 : Configura la variable de entorno estándar del proxy web `NO_proxy` . Se trata de una lista separada por comas de los nombres de dominio que deben excluirse del proxy web.
@@ -456,14 +458,14 @@ Para probar diferentes patrones en tus logs, activa [Depurar logs](#troubleshoot
 : Lista separada por comas de los ARN de Lambda que serán llamados de forma asíncrona con el mismo `event` que recibe el Datadog Forwarder.
 
 `InstallAsLayer`
-: Determinar si se utiliza el flujo de instalación basado en capas o no. Configúralo como false (falso) para utilizar el flujo de instalación heredado, que instala una segunda función que copia el código del Forwarder desde GitHub a un bucket de S3. Por defecto es true (verdadero).
+: Determinar si se utiliza el flujo de instalación basado en capas o no. Configúralo como false (falso) para utilizar el flujo de instalación heredado, que instala una segunda función que copia el código del Forwarder desde GitHub a un bucket S3. Por defecto es true (verdadero).
 
 `LayerARN`
 : ARN de la capa que contiene el código del Forwarder. Si está vacío, el script utilizará la versión de la capa con la que se ha publicado el Forwarder. Por defecto está vacío.
 
 ## Permisos
 
-Para desplegar la pila de CloudFormation con las opciones predeterminadas, necesitas tener los permisos que se indican a continuación. Estos sirven para guardar tu clave de API de Datadog como secreto, crear un bucket de S3 para almacenar el código del Forwarder (archivo .zip) y crear funciones Lambda (incluidos los roles de ejecución y los grupos de logs).
+Para desplegar la pila de CloudFormation con las opciones predeterminadas, necesitas tener los permisos que se indican a continuación. Estos sirven para guardar tu clave de API Datadog como secreto, crear un bucket S3 para almacenar el código del Forwarder (archivo ZIP) y crear funciones Lambda (incluidos los roles de ejecución y los grupos de logs).
 
 **Sentencias IAM**:
 
@@ -502,9 +504,9 @@ Para desplegar la pila de CloudFormation con las opciones predeterminadas, neces
 Las siguientes capacidades son necesarias para crear una pila de CloudFormation:
 
 - CAPABILITY_AUTO_EXPAND, ya que la plantilla del Forwarder utiliza macros como la [macro AWS SAM][23].
-- CAPABILTY_IAM/NAMED_IAM, ya que el Forwarder crea roles de IAM.
+- CAPABILTY_IAM/NAMED_IAM, ya que el Forwarder crea roles IAM.
 
-La pila de CloudFormation crea los siguientes roles de IAM:
+La pila de CloudFormation crea los siguientes roles IAM:
 
 - Rol de Forwarder: rol de ejecución para que la función Lambda del Forwarder lea logs de S3, recupere tu clave de API de Datadog de Secrets Manager y escriba sus propios logs.
 
@@ -534,7 +536,7 @@ La pila de CloudFormation crea los siguientes roles de IAM:
 ]
 ```
 
-- `ForwarderZipCopierRole`: rol de ejecución para la función Lambda ForwarderZipCopier para descargar el archivo .zip de despliegue del Forwarder a un bucket de S3.
+- `ForwarderZipCopierRole`: rol de ejecución para la función Lambda ForwarderZipCopier para descargar el archivo ZIP de despliegue del Forwarder a un bucket S3.
 
 **Sentencias IAM**:
 

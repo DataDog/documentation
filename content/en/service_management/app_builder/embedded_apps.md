@@ -1,6 +1,5 @@
 ---
 title: Embedded Apps
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/app-builder/action-catalog"

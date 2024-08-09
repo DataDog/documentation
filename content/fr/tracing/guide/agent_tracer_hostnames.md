@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Comprendre la différence entre le host de l'Agent et le host du traceur
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Serverless Agent configuration
-kind: documentation
 ---
 
 ## Overview
@@ -21,7 +20,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_SITE`                      | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                  |
 | `DD_DD_URL`                    | Optional setting to override the URL for metric submission.                                                                                                                                                        |
 | `DD_URL`                       | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                      |
-| `DD_TRACE_ENABLED`             | Enables trace collection. Defaults to `true`. Fore more information about additional trace collection environment variables.                                                                                       |
+| `DD_TRACE_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about trace collection environment variables, see [Library Configuration][9].                                                                                       |
 | `DD_TAGS`                      | List of tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.                                                                                                         |
 | `DD_TAG_VALUE_SPLIT_SEPARATOR` | Split tag values according to a given separator. Only applies to host tags, and tags coming from container integrations. It does not apply to tags on DogStatsD metrics, or tags collected by other integrations. |
 |
@@ -54,7 +53,6 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_APM_DD_URL`           | Define the endpoint and port to hit when using a proxy for APM. String in the format `<ENDPOINT>:<PORT>`. Because traces are forwarded in TCP, the proxy must be able to handle TCP connections.                                                        |
 | `DD_APM_REPLACE_TAGS`     | Defines a set of rules to replace or remove certain tags that contain [potentially sensitive information][3].                                                                                                                |
 | `DD_APM_IGNORE_RESOURCES` | An exclusion list of regular expressions. Any trace with a resource name that matches one of these expressions is ignored. Use a comma-separated list and surround each entry with double quotes. For example: `"^foo$", "bar$"`                                              |
-| `DD_APM_LOG_THROTTLING`   | Set to `true` to limit the total number of warnings and errors to 10 for every 10 second interval. Defaults to `true`.                                                                                                                                                    |
 
 ### Advanced networking configuration
 
@@ -115,3 +113,5 @@ Send custom metrics with [the StatsD protocol][5]:
 [7]: /serverless/libraries_integrations/cli/#environment-variables
 
 [8]: /agent/troubleshooting/debug_mode/?tab=agentv6v7#agent-log-level
+
+[9]: /tracing/trace_collection/library_config/

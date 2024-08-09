@@ -3,7 +3,6 @@ aliases:
 - /fr/serverless/serverless_integrations
 - /fr/serverless/datadog_lambda_library/
 - /fr/serverless/libraries_integrations/library/
-kind: documentation
 title: Bibliothèques et intégrations sans serveur
 ---
 

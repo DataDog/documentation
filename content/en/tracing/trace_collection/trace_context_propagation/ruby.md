@@ -1,6 +1,5 @@
 ---
 title: Propagating Ruby Trace Context
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20

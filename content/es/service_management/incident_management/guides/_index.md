@@ -12,7 +12,6 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Service%20Management
   tag: Notas de versiones
   text: Consulta las últimas versiones de la Gestión de servicios
-kind: documentation
 private: true
 title: Guías de gestión de incidencias
 ---

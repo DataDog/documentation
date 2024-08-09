@@ -38,7 +38,7 @@ integration_id: ibm-mq
 integration_title: IBM MQ
 integration_version: 6.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_mq
 public_title: IBM MQ

@@ -7,7 +7,6 @@ further_reading:
 - link: /developers/
   tag: ドキュメント
   text: Datadog での開発
-kind: documentation
 title: カスタム Agent チェックの書き方
 ---
 

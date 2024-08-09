@@ -1,6 +1,5 @@
 ---
 title: RUM iOS Advanced Configuration
-kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -436,24 +435,24 @@ To automatically track resources (network requests) and get their timing informa
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[SessionDelegate alloc] init]
+                                                      delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
@@ -482,13 +481,13 @@ RUM.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -537,12 +536,12 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
+URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[DDURLSessionInstrumentation disableWithDelegateClass:[SessionDelegate class]];
+[DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -723,14 +722,6 @@ For example, if the current tracking consent is `.pending`:
 
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
-
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
 
 ## Further Reading
 

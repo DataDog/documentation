@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
   tag: ドキュメント
   text: Synthetics API テストのメトリクス
-kind: documentation
 title: API テストのタイミングの理解と、その変動に対するトラブルシューティング
 ---
 

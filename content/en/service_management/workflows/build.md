@@ -1,6 +1,5 @@
 ---
 title: Build workflows
-kind: documentation
 disable_toc: false
 aliases:
 - /workflows/build
@@ -42,10 +41,6 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Create a workflow with AI
-
-{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
-AI functionality for Workflow Automation is in private beta.
-{{< /callout >}}
 
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
@@ -129,7 +124,7 @@ If you're not sure what variable you're looking for, Datadog suggests existing s
 
 ### Input parameters
 
-Use input parameters to pass data into a workflow. You can use input parameters in workflows that:
+Input parameters are immutable key-value pairs that you can use to pass data into a workflow. You can use input parameters in workflows that:
 - are triggered manually, such as from a Dashboard.
 - use mention triggers, such as Monitors and Security Signal Notification Rules.
 

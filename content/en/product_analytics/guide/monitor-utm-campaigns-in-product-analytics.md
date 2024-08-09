@@ -1,6 +1,6 @@
 ---
 title: How to Monitor UTM Campaigns in Product Analytics
-kind: guide
+
 description: Learn how to use Product Analytics & Session Replay to monitor the performance of UTM campaigns.
 ---
 
