@@ -148,8 +148,8 @@ metadata:
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][14] and your Kubernetes resources should have the following labels:
-- `service` (required): specifies the Datadog service of this resource
-- `team` (optional): specifies the Datadog team of this resource
+- `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][16].
+- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
 
 Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
@@ -197,3 +197,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [13]: /tracing/service_catalog
 [14]: /containers/kubernetes
 [15]: https://app.datadoghq.com/orchestration/explorer
+[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
