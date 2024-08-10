@@ -190,7 +190,7 @@ Los errores de origen incluyen información a nivel de código sobre el error. P
 | `view.frustration.count`        | número | Total de señales de frustración asociadas con una vista.    |
 | `action.frustration.type:dead_click`  | cadena | Los clics sin efecto detectados por el SDK de RUM Browser.              |
 | `action.frustration.type:rage_click`  | cadena | Los clics de frustración detectados por el SDK de RUM Browser.              |
-| `action.frustration.type:error_click` | cadena | Los clics de error detectados por el SDK RUM Browser.             |
+| `action.frustration.type:error_click` | cadena | Los clics de error detectados por el SDK de RUM Browser.             |
 
 ### Atributos UTM
 
