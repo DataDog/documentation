@@ -57,7 +57,7 @@ Los archivos de asignación se utilizan para desofuscar trazas de stack tecnoló
 
 En las aplicaciones React Native, la coincidencia de las trazas de stack tecnológico y los mapas de origen se basa en una combinación de los campos `service`, `version`, `bundle_name` y `platform`. De todos los mapas de origen que coinciden con estos campos, Datadog utiliza el que tiene el valor `build_number` más alto.
 
-Para reducir el tamaño de tu aplicación, su código se minimiza cuando se compila para su lanzamiento. Para vincular los errores a tu código real, debes cargar los siguientes archivos de simbolización:
+Para reducir el tamaño de tu aplicación, su código se minifica cuando se compila para su lanzamiento. Para vincular los errores a tu código real, debes cargar los siguientes archivos de simbolización:
 
 -   Mapa de origen JavaScript para tu paquete iOS JavaScript 
 -   Mapa de origen JavaScript para tu paquete Android JavaScript
@@ -411,11 +411,11 @@ Para obtener más información, consulta la [documentación sobre notificación 
 
 #### Carga de archivos de asignación Android Proguard
 
-En primer lugar, asegúrate de que la minimización Proguard está habilitada en tu proyecto. Por defecto, no está habilitada en los proyectos React Native.
+En primer lugar, asegúrate de que la minificación Proguard está habilitada en tu proyecto. Por defecto, no está habilitada en los proyectos React Native.
 
 Para obtener más información, consulta [la documentación de Proguard React Native][5].
 
-Si aún no sabes si la configuración ha sido la correcta, puedes comprobar si la ejecución de `(cd android && ./gradlew tasks --all) | grep minifyReleaseWithR8` devuelve algo. Si es así, la minimización está habilitada.
+Si aún no sabes si la configuración ha sido la correcta, puedes comprobar si la ejecución de `(cd android && ./gradlew tasks --all) | grep minifyReleaseWithR8` devuelve algo. Si es así, la minificación está habilitada.
 
 {{% collapse-content title="Manualmente en cada compilación" level="h5" %}}
 
