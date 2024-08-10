@@ -13,15 +13,15 @@ further_reading:
   text: Más información sobre el seguimiento de errores
 - link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
   tag: Blog
-  text: Datadog ahora ofrece el informe de fallos y el seguimiento de errores React
-    Native
-title: Informe de fallos y seguimiento de errores React Native
+  text: Datadog ahora ofrece la notificación de fallos y el seguimiento de errores
+    React Native
+title: Notificación de fallos y seguimiento de errores React Native
 type: lenguaje de código múltiple
 ---
 
 ## Información general
 
-Habilita el informe de fallos y el seguimiento de errores React Native para obtener informes completos de fallos y tendencias de errores mediante Real User Monitoring. Con esta función, puede acceder a:
+Habilita la notificación de fallos y el seguimiento de errores React Native para obtener informes completos de fallos y tendencias de errores mediante Real User Monitoring. Con esta función, puede acceder a:
 
 -   Dashboards y atributos de fallos agregados React Native
 -   Informes de fallos React Native simbolizados (JavaScript y iOS o Android nativos)
@@ -35,9 +35,9 @@ Tus informes de fallos aparecen en [**Seguimiento de errores**][1].
 
 Si aún no has configurado el SDK para React Native, sigue las [instrucciones de configuración en la aplicación][2] o consulta la [documentación de configuración de React Native][3].
 
-### Añadir informes de fallos
+### Añadir la notificación de fallos
 
-Actualiza tu fragmento de inicialización para habilitar el informe de fallos nativo JavaScript:
+Actualiza tu fragmento de inicialización para habilitar la notificación de fallos nativo JavaScript:
 
 ```javascript
 const config = new DdSdkReactNativeConfiguration(
@@ -134,7 +134,7 @@ Para probar tu aplicación:
    ```
 
 3. Para los informes de error ofuscados que no provocan un fallo, puedes verificar la simbolización y la desofuscación en [**Rastreo de errores**][1].
-4. Para los fallos, después de que se produzcan, reinicia tu aplicación y espera a que el SDK de React Native cargue el informe de caída en [**Rastreo de errores**][1].
+4. Para los fallos, después de que se produzcan, reinicia tu aplicación y espera a que el SDK de React Native cargue el informe del fallo en [**Rastreo de errores**][1].
 
 Para asegurarte de que tus mapas de origen se envían y vinculan correctamente con tu aplicación, también puedes generar fallos con el paquete [`react-native-performance-limiter`][14].
 
@@ -405,7 +405,7 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 
 {{% collapse-content title="Manualmente en cada compilación" level="h5" %}}
 
-Para obtener más información, consulta la [documentación sobre informes de fallos y seguimiento de errores de iOS][4].
+Para obtener más información, consulta la [documentación sobre notificación de fallos y seguimiento de errores de iOS][4].
 
 {{% /collapse-content %}}
 
