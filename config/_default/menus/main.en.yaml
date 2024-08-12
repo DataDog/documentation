@@ -699,8 +699,8 @@ menu:
       identifier: otel_ingest
       parent: otel_interoperability
       weight: 601
-    - name: W3C Trace Context Propagation
-      url: /tracing/trace_collection/trace_context_propagation/
+    - name: Trace Context Propagation
+      url: /opentelemetry/interoperability/trace_context_propagation
       identifier: otel_propagation
       parent: otel_interoperability
       weight: 602

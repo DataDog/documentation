@@ -10,7 +10,7 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "/tracing/trace_collection/trace_context_propagation/cpp/"
+- link: "/tracing/trace_collection/trace_context_propagation/"
   tag: "Documentation"
   text: "Propagating trace context"
 ---

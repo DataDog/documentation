@@ -10,7 +10,7 @@ further_reading:
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
       tag: 'External Site'
       text: 'API Docs'
-    - link: "/tracing/trace_collection/trace_context_propagation/python/"
+    - link: "/tracing/trace_collection/trace_context_propagation/"
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/glossary/'

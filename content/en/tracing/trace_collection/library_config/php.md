@@ -10,7 +10,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "Source Code"
   text: "Source code"
-- link: "/tracing/trace_collection/trace_context_propagation/php/"
+- link: "/tracing/trace_collection/trace_context_propagation/"
   tag: "Documentation"
   text: "Propagating trace context"
 - link: "/tracing/glossary/"
@@ -662,7 +662,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
-[11]: /tracing/trace_collection/trace_context_propagation/php/
+[11]: /tracing/trace_collection/trace_context_propagation/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/

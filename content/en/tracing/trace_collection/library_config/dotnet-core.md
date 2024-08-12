@@ -10,7 +10,7 @@ further_reading:
   - link: "/tracing/metrics/runtime_metrics/dotnet/"
     tag: "Documentation"
     text: "Runtime metrics"
-  - link: "/tracing/trace_collection/trace_context_propagation/dotnet/"
+  - link: "/tracing/trace_collection/trace_context_propagation/"
     tag: "Documentation"
     text: "Propagating trace context"
   - link: "/serverless/azure_app_services/"

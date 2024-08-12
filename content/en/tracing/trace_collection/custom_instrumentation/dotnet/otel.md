@@ -128,4 +128,4 @@ You can configure the propagation of context for distributed traces by injecting
 [10]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
 [11]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 [13]: /tracing/trace_collection/single-step-apm/
-[14]: /tracing/trace_collection/trace_context_propagation/dotnet/
+[14]: /tracing/trace_collection/trace_context_propagation/

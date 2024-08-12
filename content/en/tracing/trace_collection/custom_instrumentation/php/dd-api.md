@@ -778,5 +778,5 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [8]: /tracing/trace_collection/opentracing/php#opentracing
-[9]: /tracing/trace_collection/trace_context_propagation/php
+[9]: /tracing/trace_collection/trace_context_propagation/
 [10]: /tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information

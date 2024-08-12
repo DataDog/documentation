@@ -240,7 +240,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: /tracing/trace_collection/trace_context_propagation/python/
+[2]: /tracing/trace_collection/trace_context_propagation/
 [4]: /tracing/security
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /tracing/setup/python/
