@@ -4579,11 +4579,101 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_processors
       weight: 5
+    - name: Add hostname
+      url: observability_pipelines/processors/#add-hostname
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_add_hostname
+      weight: 501
+    - name: Edit fields
+      url: observability_pipelines/processors/#edit-fields
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_edit_fields
+      weight: 502
+    - name: Enrichment Table
+      url: observability_pipelines/processors/#enrichment-table
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_enrichment_table
+      weight: 503
+    - name: Filter
+      url: observability_pipelines/processors/#filter
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_filter
+      weight: 504
+    - name: Grok Parser
+      url: observability_pipelines/processors/#grok-parser
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_grok_parser
+      weight: 505
+    - name: Parse JSON
+      url: observability_pipelines/processors/#parse-json
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_parse_json
+      weight: 506
+    - name: Quota
+      url: observability_pipelines/processors/#quota
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_quota
+      weight: 507
+    - name: Reduce
+      url: observability_pipelines/processors/#reduce
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_reduce
+      weight: 508
+    - name: Sample
+      url: observability_pipelines/processors/#sample
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_sample
+      weight: 509
+    - name: Sensitive Data Scanner
+      url: observability_pipelines/processors/#sensitive-data-scanner
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_sensitive_data_scanner
+      weight: 510
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
-      identifier: observability_pipelines_destination
+      identifier: observability_pipelines_destinations
       weight: 6
+    - name: Amazon OpenSearch
+      url: observability_pipelines/destinations/#amazon-opensearch
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_amazon_opensearch
+      weight: 601
+    - name: Datadog Log Management
+      url: observability_pipelines/destinations/#datadog-log-management
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_datadog_log_management
+      weight: 602
+    - name: Elasticsearch
+      url: observability_pipelines/destinations/#elasticsearch
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_elasticsearch
+      weight: 603
+    - name: Google Chronicle
+      url: observability_pipelines/destinations/#google-chronicle
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_google_chronicle
+      weight: 604
+    - name: OpenSearch
+      url: observability_pipelines/destinations/#opensearch
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_opensearch
+      weight: 605
+    - name: Syslog
+      url: observability_pipelines/destinations/#rsyslog-or-syslog-ng
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_syslog
+      weight: 606
+    - name: Splunk HEC
+      url: observability_pipelines/destinations/#splunk-http-event-collector-hec
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_splunk_hec
+      weight: 607
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/destinations/#sumo-logic-hosted-collector
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_sumo_logic_hosted_collector
+      weight: 608
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
