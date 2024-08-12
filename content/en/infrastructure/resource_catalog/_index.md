@@ -78,9 +78,9 @@ The Security tab provides a security-centric view of your infrastructure and all
 
 - [**Signals**][11]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 
-- [**Identity Risks**][12]: Provides in-depth visibility into your organization’s AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
+- [**Identity Risks**][12]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 
-- [**Vulnerabilities**][13]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization’s containers and hosts.
+- [**Vulnerabilities**][13]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
 
 By viewing misconfigurations, signals, identity risks, and vulnerabilities associated with resources, you can address security concerns without needing to spend time and effort to gather additional security context.
 
@@ -90,7 +90,7 @@ By viewing misconfigurations, signals, identity risks, and vulnerabilities assoc
 
 You can filter, sort, and group resources in the Resource Catalog list by cloud platform, resource type, account, team, region, tags, and security risks to scope down to the resources that matter to your current context. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters. 
 
-To filter the list to see a subset of resources you're most interested in, select resource categories or types from the resource selector on the left, or use the query cards and individual facets at the top of your list view. To group by any default or resource specific attributes as well as tags, use the group by dropdown on the top right of your list view. You can additionally sort by different columns or attributes by clicking on the column names. If you are looking for a particular resource, you can search for the resource name directly in the search bar. 
+To filter the list to see a subset of resources you're most interested in, select resource categories or types from the resource selector on the left, or use the query cards and individual facets at the top of your list view. To group by any default or resource specific attributes as well as tags, use the **Group by** dropdown on the top right of your list view. You can additionally sort by different columns or attributes by clicking on the column names. If you are looking for a particular resource, you can search for the resource name directly in the search bar. 
 
 To access the relevant cloud console for any resource in your list, use the **Open Cloud Console** button to be redirected.
 
@@ -102,7 +102,7 @@ In addition, easily export your Resource Catalog list as a CSV file from the top
 
 ### Map view
 
-The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Misconfigurations or Signals.
+The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the **Fill by** selector to fill the map elements by Misconfigurations or Signals.
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-4.png" alt="Resource Catalog map view filled by misconfigurations, grouped by resource type" width="100%">}}
 
