@@ -215,12 +215,8 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [datadog/connector]
-    traces/otlp:
-      receivers: [otlp]
       processors: [infraattributes, batch]
-      exporters: [datadog]
+      exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
       processors: [infraattributes, batch]
