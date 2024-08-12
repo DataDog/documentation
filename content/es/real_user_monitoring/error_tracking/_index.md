@@ -7,8 +7,8 @@ description: Aprende a buscar y gestionar los errores recopilados de tus aplicac
 further_reading:
 - link: https://www.datadoghq.com/blog/error-tracking/
   tag: Blog
-  text: Para entender los problemas de las aplicaciones con el seguimiento de errores
-    de Datadog
+  text: Entender los problemas de las aplicaciones con el seguimiento de errores de
+    Datadog
 - link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog
   tag: Blog
   text: Depuración eficaz de fallos de iOS con RUM en Datadog
@@ -18,8 +18,8 @@ further_reading:
     y el Seguimiento de errores para solucionar los problemas de los clientes
 - link: https://www.datadoghq.com/blog/error-tracking-logs/
   tag: Blog
-  text: Seguimiento y clasificación de los errores en tus logs con el seguimiento
-    de errores de Datadog
+  text: Seguimiento y clasificación de errores en tus logs con el seguimiento de errores
+    de Datadog
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentación
   text: Más información sobre el explorador de seguimiento de errores
@@ -41,7 +41,7 @@ Eche un vistazo a las principales funciones de seguimiento de errores en la docu
 
 ## Configuración
 
-{{< whatsnext desc="Para empezar con el seguimiento de errores en Datadog, consulta la documentación correspondiente:" >}}
+{{< whatsnext desc="Para empezar con el seguimiento de errores en Datadog para RUM, consulta la documentación correspondiente:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
