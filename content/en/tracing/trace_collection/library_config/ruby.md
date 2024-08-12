@@ -7,7 +7,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb/"
   tag: "Source Code"
   text: "Source code"
-- link: "/tracing/trace_collection/trace_context_propagation/ruby/"
+- link: "/tracing/trace_collection/trace_context_propagation/"
   tag: "Documentation"
   text: "Propagating trace context"
 - link: "/opentelemetry/interoperability/environment_variable_support"
