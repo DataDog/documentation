@@ -72,19 +72,44 @@ To prompt a user for confirmation before the query runs, toggle the **Requires C
 
 ### Polling intervals
 
-To run a query repeatedly at a set interval, enter the interval in milliseconds (ms) as the **Polling interval** in the **Advanced** section of a query.
+To run a query repeatedly at a set interval while the app is open on someone's screen, enter the interval in milliseconds (ms) as the **Polling interval** in the **Advanced** section of a query.
+
+**Note**: The query does not run in the background; it only runs when someone has the app open.
 
 ## Mocked outputs
 
 Sometimes when you are building or testing an app in the editor, you might want to avoid executing a real query, or avoid executing the same query repeatedly. When you enable **Mocked outputs** and run your query, App Builder populates outputs with mocked data instead of running the query action.
 
-To enable **Mocked outputs**, perform the following steps:
+You can generate mocked outputs from a previous query run or provide them manually.
 
-1. Fill out the rest of your query.
+### Generate outputs from previous run
+
+To generate mocked output data from a previous query run, perform the following steps:
+
+1. Add a query and fill out the rest of your query's parameters.
 1. Click **Run** to execute your query once.
 1. In the **Mocked outputs** section of the query, click the **Generate** tab.
 1. Click **Generate from outputs**. This automatically toggles **Use Mocked Outputs** on.<br>
     The **Run** button changes to say **Run (Mocked)**, and the next time you run your query, the output populates with the mocked data.
+
+### Provide outputs manually
+
+To provide mocked outputs manually, perform the following steps:
+
+{{% collapse-content title="Using the GUI" level="p" %}}
+1. Add a query and fill out the rest of your query's parameters.
+1. In the **Mocked outputs** section of the query, click the **GUI** tab.
+1. Fill in all required fields, which the GUI view automatically displays.
+1. Optionally, to add additional fields, click **+ (plus)**. Choose a key from the dropdown and fill in a value. If you want to enter a value that is an object or an array, click the **{}** or **[]**, respectively, after the **Enter value** field.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using JSON" level="p" %}}
+1. Add a query and fill out the rest of your query's parameters.
+1. In the **Mocked outputs** section of the query, click the **JSON** tab.
+1. Paste in JSON that matches the expected output format of the query.<br>
+    If you do not know the expected output format, you can run the query once and then reference `outputs` in the **Inspect Data** section of the query.
+{{% /collapse-content %}} 
+
 
 
 ## Example apps
