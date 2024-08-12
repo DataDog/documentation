@@ -65,6 +65,26 @@ menu:
       url: markdoc_testing/shortcodes/tabs
       parent: markdoc_testing_shortcodes
       weight: 301
+    - name: Region
+      identifier: markdoc_testing_shortcodes_region
+      url: markdoc_testing/shortcodes/region
+      parent: markdoc_testing_shortcodes
+      weight: 302
+    - name: Images
+      identifier: markdoc_testing_shortcodes_images
+      url: markdoc_testing/shortcodes/images
+      parent: markdoc_testing_shortcodes
+      weight: 303
+    - name: Alerts
+      identifier: markdoc_testing_shortcodes_alerts
+      url: markdoc_testing/shortcodes/alerts
+      parent: markdoc_testing_shortcodes
+      weight: 304
+    - name: Code
+      identifier: markdoc_testing_shortcodes_code
+      url: markdoc_testing/shortcodes/code
+      parent: markdoc_testing_shortcodes
+      weight: 305
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/
