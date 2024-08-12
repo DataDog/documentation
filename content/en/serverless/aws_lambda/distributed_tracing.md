@@ -159,7 +159,7 @@ If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lamb
 If `dd-trace` is installed on your hosts with the Datadog Agent, and your Node.js or Python serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
 
 1. You have installed the [AWS X-Ray integration][18] for tracing your Lambda functions, enabling both AWS X-Ray active tracing and installing the X-Ray client libraries.
-2. You have installed the [Datadog Lambda Library for your Lambda runtime][5], and the `DD_TRACE_ENABLED` environment variable is set to `false`.
+2. You have installed the [Datadog Lambda Library for your Lambda runtime][5], and the `DD_TRACE_ENABLED` environment variable is set to `true`.
 3. [Datadog APM][20] is configured on your hosts and container-based infrastructure.
 
 Then, for X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the same `env` tag.

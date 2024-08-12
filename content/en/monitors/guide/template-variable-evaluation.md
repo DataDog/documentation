@@ -50,6 +50,8 @@ Handle that should receive notification if time is between 2PM and 5PM UTC
 {{/is_match}}
 ```
 
+**Note:** If you need to evaluate your monitor on a schedule, see [Custom Schedules][2] instead.
+
 ## Functions
 
 The value of a numerical template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
@@ -113,3 +115,4 @@ If `{{value}}` is evaluating to a large number of bytes or bits, use the `humani
 ```
 
 [1]: /logs/explorer/
+[2]: /monitors/guide/custom_schedules

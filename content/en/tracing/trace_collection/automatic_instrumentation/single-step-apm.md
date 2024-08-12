@@ -531,7 +531,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
    ```shell
    dd-host-install --uninstall
    ```
-2. Restart your host.
+2. Restart the services on the host or VM.
 
 {{% /tab %}}
 
