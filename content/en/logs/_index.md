@@ -45,6 +45,10 @@ cascade:
         rank: 70
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  Join an introductory or intermediate enablement session to learn how Datadog Log Management unifies logs, metrics, and traces in a single view, giving you rich context for analyzing log data.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Logging the important parts of your system's operations is crucial for maintaining infrastructure health. Modern infrastructure has the capability to generate thousands of log events per minute. In this situation, you need to choose which logs to send to a log management solution, and which logs to archive. Filtering your logs before sending them, however, may lead to gaps in coverage or the accidental removal of valuable data.

@@ -34,6 +34,10 @@ cascade:
 
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/monitoring-and-slos/">}}
+  Datadog alerts use tags and machine learning to efficiently identify problems in your infrastructure, applications, and services. Every alert is specific, actionable, and contextual—even in large-scale and highly ephemeral environments—helping to minimize downtime and prevent alert fatigue. With native SLO and SLA tracking, you can prioritize and address the issues that matter most to your business.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
@@ -58,7 +62,7 @@ To create a monitor programmatically, see the [Datadog API][7] or [community mai
 
 {{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
 
-Set up [Monitor Notifications][11] when creating monitors to keep your team informed of issues. Route the notifications to the correct people,  include [workflow automations][17], [cases][18], and [Datadog team handles][19], leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
+Set up [Monitor Notifications][11] when creating monitors to keep your team informed of issues. Route the notifications to the correct people, include [workflow automations][17], [cases][18], and [Datadog team handles][19], leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
 
 ## Manage monitors
 
