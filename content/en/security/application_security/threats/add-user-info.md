@@ -742,7 +742,7 @@ Automatic user activity tracking offers the following modes:
   - ASM libraries do *not* collect any user ID from their automated instrumentations. 
   - User login events are not emitted.
 
-<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is confiigured using an SDK, and those settings are not overridden by automated instrumentation.</div>
+<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
 
 Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident`|`anon`|`disabled`.
 
