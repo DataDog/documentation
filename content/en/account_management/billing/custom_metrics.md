@@ -19,7 +19,7 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-Your monthly billable count for custom metrics is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value. 
+Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
 **Custom metrics usage is billed solely on tag value combinations** (also referred to as "metric timeseries", not to be confused with timeseries visualizations). You can send metrics to Datadog without controlling metric submission frequency or the number of queries you run on your metrics. You are not penalized for submitting more granular values on your metrics or trying to get more value from the data you submit to Datadog. 
 
