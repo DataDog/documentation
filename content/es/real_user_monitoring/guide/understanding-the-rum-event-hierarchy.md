@@ -20,7 +20,7 @@ Todos los datos RUM se refieren a sesiones de usuario o sintéticas, que se encu
 
 #### Ejemplo de búsqueda: Lista de todas las sesiones de un usuario
 
-Para listar todas las sesiones de un usuario específico, selecciona **Sesiones** en el menú desplegable de tipo evento y, a continuación, realiza una consulta de búsqueda del estado de la sesión y del usuario.
+Para listar todas las sesiones de un usuario específico, selecciona **Sesiones** en el menú desplegable de tipo de evento y, a continuación, realiza una consulta de búsqueda del estado de la sesión y del usuario.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user-1.png" alt="Ejemplo de búsqueda que lista todas las sesiones del usuario 'Lee Davis'." style="width:80%;">}}
 
@@ -47,11 +47,11 @@ Las acciones representan la actividad del usuario en una página. En los navegad
 
 Este ejemplo muestra una consulta que busca todas las acciones de los usuarios que hacen clic en el botón "Añadir al carro" que han dado lugar a un error.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-evento-hierarchy/rum-actions-all-add-to-cart-1.png" alt="Ejemplo de búsqueda de todas las acciones "Añadir al carro" que han dado lugar a un error." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart-1.png" alt="Ejemplo de búsqueda de todas las acciones "Añadir al carro" que han dado lugar a un error." style="width:80%;">}}
 
 ### Errores
 
-Puedes utilizar RUM para recopilar [errores de frontend][6] que se produzcan durante la sesión del usuario. Por defecto, el SDK del navegador crea eventos de errores para excepciones no controladas y errores de consola. Además, puedes recopilar errores personalizados a través de la API `addError` de RUM (en el [navegador][7] y el [móvil][8]). En las aplicaciones móviles, también puedes ver si el error ha provocado el cierre de la sesión, también conocido como fallo.
+Puedes utilizar RUM para recopilar [errores de frontend][6] que se produzcan durante la sesión del usuario. Por defecto, el SDK del navegador crea eventos de error para excepciones no controladas y errores de consola. Además, puedes recopilar errores personalizados a través de la API `addError` de RUM (en el [navegador][7] y el [móvil][8]). En las aplicaciones móviles, también puedes ver si el error ha provocado el cierre de la sesión, también conocido como fallo.
 
 Los errores se pueden ver tanto en RUM como en Seguimiento de errores. Los errores de origen y personalizados son procesados por Seguimiento de errores, mientras que los errores de consola están únicamente en RUM.
 
