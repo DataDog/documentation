@@ -9,7 +9,7 @@ further_reading:
   text: Visualización de tus datos RUM en el Explorador RUM
 - link: /tracing/version_tracking
   tag: Documentación
-  text: Uso de etiquetas de versión en APM de Datadog para monitorizar despliegues
+  text: Uso de etiquetas (tags) de versión en APM de Datadog para monitorizar despliegues
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking
   tag: Blog
   text: Solucionar problemas de despliegues de frontend fallidos con el Seguimiento
@@ -112,7 +112,7 @@ De forma similar a los gráficos de la página **Información general de la apli
 
 A medida que monitorizas tu versión, esto te ayuda a comparar el rendimiento de los despliegues de código con el código existente para verificar que el nuevo código funciona correctamente y que no han aparecido nuevos errores entre una versión y otra.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Comparación del seguimiento de errores en el navegador" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Comparación del seguimiento de despliegues en el navegador" style="width:75%;">}}
 
 La pestaña **Problemas** enumera las diferencias en los errores detectados para cada una de las dos versiones, destacando:
 - Recuento de errores por versión
