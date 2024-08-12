@@ -25,7 +25,6 @@ function scanDirectory(directory: string): string[] {
   return mdFiles;
 }
 
-// Example usage:
 const directoryPath = '/Users/jen.gilbert/dd/documentation/content/en';
 const mdFiles = scanDirectory(directoryPath);
 
