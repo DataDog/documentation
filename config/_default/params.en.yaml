@@ -6,5 +6,4 @@ announcement_banner:
   desktop_message: "Read the 2024 State of Cloud Costs Study!"
   mobile_message: "Read the State of Cloud Costs Study!"
   external_link: "https://www.datadoghq.com/state-of-cloud-costs/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-cloudcostmgmt-ww-research-banner-report-state-cloud-costs"
-exclude: []
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"

@@ -153,7 +153,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
-* Strings beginning with **e** (case-insensitive)—that do not match `emerg`—map to **error (3)**
+* Strings beginning with **err** (case-insensitive) map to **error (3)**
 * Strings beginning with **w** (case-insensitive) map to **warning (4)**
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**

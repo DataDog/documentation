@@ -7,9 +7,9 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
-Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
+Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB instances. This guide outlines the steps to set up Database Monitoring for self-hosted MongoDB.
 
 ## Before you begin
 
@@ -199,4 +199,10 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## Data Collected
+
+{{% dbm-mongodb-agent-data-collected %}}
+
 [1]: /account_management/api-app-keys/
+[2]: /integrations/mongo/?tab=standalone#metrics
