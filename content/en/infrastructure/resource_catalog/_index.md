@@ -30,7 +30,7 @@ Resource Catalog is not available in this site.
 
 ## Overview
 
-Datadog Resource Catalog is the central hub of all your infrastructure resources to help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
+Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
 
@@ -38,21 +38,21 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ### Use Cases
 
-#### Governance and Reporting
-- Gain visibility into the compliance of your infrastructure with regards to ownership, versioning, migrations, etc
-- Facilitate good tagging practices to optimize cross-telemetry insights
-- Reduce application risks by identifying and fixing security vulnerabilities in the dependencies of your services
+#### Governance and reporting
+- Gain visibility into the compliance of your infrastructure with regards to ownership, versioning, migrations, and so on.
+- Facilitate good tagging practices to optimize cross-telemetry insights.
+- Reduce application risks by identifying and fixing security vulnerabilities in the dependencies of your services.
 - Provide engineering leadership with a high-level view of security practices across teams and cloud accounts.
-- Export resources for record-keeping or auditing
+- Export resources for record-keeping or auditing.
 
 #### Troubleshooting
-- Access telemetry, dashboards and other Datadog views with rich insights to understand the health and performance of your resources
-- Locate team and service owners of relevant resources to speed up incident recovery
-- View resource configuration changes to identify probable root causes
+- Access telemetry, dashboards and other Datadog views with rich insights to understand the health and performance of your resources.
+- Locate team and service owners of relevant resources to speed up incident recovery.
+- View resource configuration changes to identify probable root causes.
 
-#### Observability Optimization
-- Spot resources that can be better monitored by Datadog and bridge observability gaps 
-- Ensure proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security misconfigurations
+#### Observability optimization
+- Spot resources that can be better monitored by Datadog and bridge observability gaps.
+- Ensure proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security misconfigurations.
 
 ## Setup
 
@@ -72,7 +72,7 @@ On the [Resource Catalog page][2], explore the cloud resources in your Datadog o
 The Inventory tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog also shows resource attributes customized for each resource type. You can search resources by specific attributes such as the instance type for a host, or the version for a database.
 
 **Security Tab**:
-The Security tab provides a security centric view of your infrastructure and allows you to understand how your resources are impacted by security risks. 
+The Security tab provides a security-centric view of your infrastructure and allows you to understand how your resources are impacted by security risks. 
 
 - [**Misconfigurations**][10]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 
@@ -90,7 +90,7 @@ By viewing misconfigurations, signals, identity risks, and vulnerabilities assoc
 
 You can filter, sort, and group resources in the Resource Catalog list by cloud platform, resource type, account, team, region, tags, and security risks to scope down to the resources that matter to your current context. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters. 
 
-To filter the list to see a subset of resources you’re most interested in, select resource categories or types from the resource selector on the left, or use the query cards and individual facets at the top of your list view. To group by any default or resource specific attributes as well as tags, use the group by dropdown on the top right of your list view. You can additionally sort by different columns or attributes by clicking on the column names. If you are looking for a particular resource, you can search for the resource name directly in the search bar. 
+To filter the list to see a subset of resources you're most interested in, select resource categories or types from the resource selector on the left, or use the query cards and individual facets at the top of your list view. To group by any default or resource specific attributes as well as tags, use the group by dropdown on the top right of your list view. You can additionally sort by different columns or attributes by clicking on the column names. If you are looking for a particular resource, you can search for the resource name directly in the search bar. 
 
 To access the relevant cloud console for any resource in your list, use the **Open Cloud Console** button to be redirected.
 
@@ -106,13 +106,13 @@ The Resource Catalog map provides a visualization of the resources in your organ
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-4.png" alt="Resource Catalog map view filled by misconfigurations, grouped by resource type" width="100%">}}
 
-## Investigate a Host or Resource
+## Investigate a host or resource
 
 Clicking on a host opens a side panel with details including:
 
-- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource.
-- **Telemetry** including metrics, logs, traces, processes, etc.
-- **Active monitor alerts** and enabled monitors status on the host.
+- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource
+- **Telemetry** including metrics, logs, traces, processes, and so on
+- **Active monitor alerts** and enabled monitors status on the host
 - **Agent configuration** information
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-6.png" alt="Resource Catalog with the host side panel open" width="100%">}}
