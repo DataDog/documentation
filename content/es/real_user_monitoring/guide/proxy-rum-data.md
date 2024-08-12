@@ -16,7 +16,7 @@ El SDK del navegador RUM puede configurarse para enviar solicitudes a través de
 
 Para reenviar correctamente una solicitud a Datadog, tu proxy debe
 
-1. [Crea la URL de admisión en Datadog ](#build-the-datadog-intake-url).
+1. [Crea la URL de admisión de Datadog ](#build-the-datadog-intake-url).
 2. Añade una cabecera `X-Forwarded-For` que contenga la dirección IP del cliente de la solicitud para obtener una geoIP precisa.
 3. Reenvía la solicitud a la URL de admisión de Datadog utilizando el método POST.
 4. No modifiques el cuerpo de la solicitud.
@@ -29,15 +29,15 @@ Para reenviar correctamente una solicitud a Datadog, tu proxy debe
 </ul>
 </div>
 
-### Creación de la URL de admisión en Datadog 
+### Creación de la URL de admisión de Datadog 
 
-Una URL de admisión en Datadog (ejemplo: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) consta de tres partes:
+Una URL de admisión de Datadog (ejemplo: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) consta de tres partes:
 
 - el origen de admisión en Datadog correspondiente a tu [parámetro de inicialización][1] `site` (ejemplo: `https://browser-intake-datadoghq.eu`)
 - la ruta que contiene la versión de la API y el producto (ejemplo: `/api/v2/rum` para datos RUM o `/api/v2/replay` para datos Session Replay)
 - los parámetros (ejemplo: `ddsource=browser&...`)
 
-El origen de admisión en Datadog correspondiente a tu parámetro `site` debe definirse en su implementación del proxy. Se puede acceder a la ruta y los parámetros de cada solicitud enviada al proxy en el parámetro `ddforward` de la solicitud (por ejemplo, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
+El origen de admisión de Datadog correspondiente a tu parámetro `site` debe definirse en su implementación del proxy. Se puede acceder a la ruta y los parámetros de cada solicitud enviada al proxy en el parámetro `ddforward` de la solicitud (por ejemplo, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
 
 A continuación se indican los orígenes de admisión de Datadog para cada sitio:
 
@@ -153,9 +153,9 @@ Por ejemplo, con un `site` configurado en `datadoghq.eu` y la configuración del
 
 ## Configuración del SDK heredada (anterior a v4.34.0)
 
-Antes del SDK del navegador v4.34.0, se utilizaba el parámetro de inicialización `proxyUrl` y el origen de admisión en Datadog estaba incluido en el atributo `ddforward`. La implementación del proxy se encargaba de confirmar este host y el no hacerlo daba lugar a diversas vulnerabilidades.
+Antes del SDK del navegador v4.34.0, se utilizaba el parámetro de inicialización `proxyUrl` y el origen de admisión de Datadog estaba incluido en el atributo `ddforward`. La implementación del proxy se encargaba de confirmar este host y el no hacerlo daba lugar a diversas vulnerabilidades.
 
-El origen de admisión Datadog debe definirse en tu implementación de proxy para garantizar la seguridad. <strong>Si sigues utilizando un proxy con una versión anterior del SDK del navegador, actualízalo a una versión más reciente para evitar vulnerabilidades.</strong>
+El origen de admisión de Datadog debe definirse en tu implementación de proxy para garantizar la seguridad. <strong>Si sigues utilizando un proxy con una versión anterior del SDK del navegador, actualízalo a una versión más reciente para evitar vulnerabilidades.</strong>
 
 ## Referencias adicionales
 
