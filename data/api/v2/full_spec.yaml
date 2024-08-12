@@ -5902,7 +5902,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
-      type: object
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6023,7 +6022,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6163,7 +6161,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
-      type: object
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6277,7 +6274,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationResponseHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -11804,6 +11800,7 @@ components:
       required:
       - type
       - integration
+      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -16963,7 +16960,6 @@ components:
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
-      type: object
     RestrictionQueryRole:
       description: Partial role object.
       properties:
@@ -20814,7 +20810,6 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
-      type: object
     ServiceDefinitionSchemaVersions:
       description: Schema versions
       enum:
