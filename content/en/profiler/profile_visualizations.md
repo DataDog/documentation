@@ -120,7 +120,11 @@ For additional information about debugging slow p95 requests or timeouts using t
 [1]: https://www.datadoghq.com/blog/request-latency-profiling/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
+See [prerequisites][1] to learn how to enable this feature for Python.
+
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+
+[1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 See [prerequisites][1] to learn how to enable this feature for Go.
