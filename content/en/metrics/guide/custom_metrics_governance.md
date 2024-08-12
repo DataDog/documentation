@@ -89,7 +89,7 @@ All users in your organization can see real-time estimated custom metrics usage 
 
 With the Metrics Volume Management page you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
 
-For more information, see the [Metrics Volume Management][9] documentation.
+For more information, see the [Metrics Volume Management][8] documentation.
 
 ## Actionable custom metrics governance
 
@@ -115,9 +115,9 @@ For more information on getting started, see the [Metrics without Limits™][4] 
 
 A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag). Any change in configuration could lead to a spike in usage or a loss in your observability. 
 
-To prevent unexpected changes, use [RBAC permissions][10]. You can edit an existing user role to include the `metrics_tags_write` permission, or create a custom role. This gives your organization better control over which members can impact metrics [cardinality][11] and who can change Metrics without Limits™ tag configurations.
+To prevent unexpected changes, use [RBAC permissions][9]. You can edit an existing user role to include the `metrics_tags_write` permission, or create a custom role. This gives your organization better control over which members can impact metrics [cardinality][10] and who can change Metrics without Limits™ tag configurations.
 
-Datadog provides an [audit trail][12] of all Metrics without Limits™ configurations---detailing the configuration and which user made the configuration---so you can attribute any spikes or dips in your custom metrics usage. To view your audit trail events, enter the following query in the [Events Explorer][13]:
+Datadog provides an [audit trail][11] of all Metrics without Limits™ configurations---detailing the configuration and which user made the configuration---so you can attribute any spikes or dips in your custom metrics usage. To view your audit trail events, enter the following query in the [Events Explorer][12]:
 ```
 tags:audit "Queryable tag configuration" 
 ```
@@ -139,8 +139,8 @@ After you identify the metrics that your developers don't need, you can safely r
 {{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
 
 1. At the top of the the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
-1. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][14].
-1. Configure Tags to create an [Allowlist or a Blocklist][15] of tags. Use the tags associated with unqueried metrics.
+1. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13].
+1. Configure Tags to create an [Allowlist or a Blocklist][14] of tags. Use the tags associated with unqueried metrics.
 
 You can optimize without fear of losing key visibility provided on any dashboards, notebooks, monitors, SLOS or API workflows. Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics volumes by up to 70%**.
 
@@ -148,7 +148,7 @@ You can optimize without fear of losing key visibility provided on any dashboard
 
 Even though a metric is not queried for the past 30 days, your teams might still derive value from it for incident management and outage remediation. Conversely, your teams could be underutilizing existing actively queried metrics. So understanding the relative utility of your metrics is the next recommended step in your governance workflow. 
 
-Metrics without Limits™ provides you with OOTB insights to assess the value of your actively queried metrics with [Metrics Related Assets][16]. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
+Metrics without Limits™ provides you with OOTB insights to assess the value of your actively queried metrics with [Metrics Related Assets][15]. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
 {{< img src="metrics/volume/related_assets.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to one dashboard" style="width:100%;" >}}
 
@@ -161,7 +161,7 @@ To view a metric's related assets:
 
 After you have an understanding of your account's metric usage and the teams responsible for those costs, build monitors to alert you when your cardinality exceeds a certain threshold. Get alerts for overages and spikes in custom metric usage, so you can stay ahead of your monthly bill. 
 
-Datadog offers an OOTB metrics that measures [estimated custom metrics usage][16]. You can use these metrics in your dashboard visualizations and monitor alerts. 
+Datadog offers an OOTB metrics that measures [estimated custom metrics usage][15]. You can use these metrics in your dashboard visualizations and monitor alerts. 
 
 | Usage Type                    | Metric                                   | Description |
 |-------------------------------|------------------------------------------| ----------- |
@@ -200,13 +200,11 @@ You can see an analysis of your realtime estimated custom metrics usage by metri
 [5]: https://app.datadoghq.com/billing/usage-attribution?view=table
 [6]: https://app.datadoghq.com/metric/summary
 [7]: https://app.datadoghq.com/metric/volume
-[8]: /account_management/billing/usage_metrics/
-[9]: /metrics/volume/
-[10]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#metrics
-[11]: /glossary/#cardinality
-[12]: /account_management/audit_trail/
-[13]: https://app.datadoghq.com/event/explorer
-[14]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
-[15]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags
-[16]: /metrics/summary/#metrics-related-assets
-[17]: /account_management/billing/usage_metrics/
+[8]: /metrics/volume/
+[9]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#metrics
+[10]: /glossary/#cardinality
+[11]: /account_management/audit_trail/
+[12]: https://app.datadoghq.com/event/explorer
+[13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
+[14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags
+[15]: /metrics/summary/#metrics-related-assets
