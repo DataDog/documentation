@@ -22,7 +22,7 @@ further_reading:
     de Datadog
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentación
-  text: Más información sobre el explorador de seguimiento de errores
+  text: Más información sobre el Explorador de seguimiento de errores
 - link: /monitors/types/error_tracking/
   tag: Documentación
   text: Creación de un monitor para el seguimiento de errores
@@ -31,17 +31,17 @@ title: Seguimiento de errores en aplicaciones web y móviles
 
 ## Información general
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Detalles de un problema en el explorador de seguimiento de errores" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Detalles de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
-Los problemas de errores RUM incluyen la traza de stack tecnológico, las líneas de tiempo de las sesiones de usuario y los metadatos, incluidos la localización del usuario, la versión y cualquier atributo personalizado que hayas incluido en tus informes de errores.
+Los problemas de errores RUM incluyen la traza (trace) de stack tecnológico, las líneas de tiempo de las sesiones de usuario y los metadatos, incluidos la localización del usuario, la versión y cualquier atributo personalizado que hayas incluido en tus informes de errores.
 
 Eche un vistazo a las principales funciones de seguimiento de errores en la documentación [Explorador de seguimiento de errores][3]. Para ver el Explorador de seguimiento de errores para RUM, ve a [**Experiencia digital** > **Seguimiento de errores**][1].
 
 ## Configuración
 
-{{< whatsnext desc="Para empezar con el seguimiento de errores en Datadog para RUM, consulta la documentación correspondiente:" >}}
+{{< whatsnext desc="Para empezar con el seguimiento de errores de Datadog para RUM, consulta la documentación correspondiente:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
