@@ -18,11 +18,11 @@ export const imgDefinition = {
 
 export class Img extends CustomHtmlComponent {
   render() {
-    let result = '{{< img';
+    let result = '\n<!-- prettier-ignore -->\n{{< img';
     Object.keys(this.tag.attributes).forEach((key) => {
       result += ` ${key}="${this.tag.attributes[key]}"`;
     });
-    result += ' >}}';
+    result += ' >}}\n';
     return result;
   }
 }

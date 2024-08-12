@@ -1,4 +1,6 @@
 # GENERATED FILE: DO NOT EDIT
 # Ignore .md files compiled from Markdoc
 /markdoc_testing/primary_colors.md
+/markdoc_testing/shortcodes/tabs.md
+/markdoc_testing/shortcodes_old.md
 /markdoc_testing/traffic_light_colors.md

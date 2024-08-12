@@ -92,9 +92,9 @@ ${rerenderScript}
       });
     }
 
-    if (args.debug) {
-      pageContents = prettier.format(pageContents, { parser: 'html' });
-    }
+    // if (args.debug) {
+    pageContents = prettier.format(pageContents, { parser: 'html' });
+    // }
 
     if (args.outputFormat === 'markdown') {
       pageContents = this.#addFrontmatter({

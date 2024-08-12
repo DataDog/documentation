@@ -1,10 +1,11 @@
-- id: host
-  display_name: Host
-- id: programming_lang
-  display_name: Language
-- id: database
-  display_name: Database
-- id: os
-  display_name: Operating System
-- id: package_manager
-  display_name: Package Manager
+sitewide_pref_ids:
+  - id: host
+    display_name: Host
+  - id: programming_lang
+    display_name: Language
+  - id: database
+    display_name: Database
+  - id: os
+    display_name: Operating System
+  - id: package_manager
+    display_name: Package Manager
