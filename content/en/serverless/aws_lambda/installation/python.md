@@ -257,7 +257,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.2.0"
+  version = "1.3.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -462,4 +462,4 @@ def get_message():
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=python
 [5]: /tracing/custom_instrumentation/python/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[6]: /security/application_security/serverless/

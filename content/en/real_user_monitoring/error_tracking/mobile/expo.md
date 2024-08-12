@@ -18,7 +18,7 @@ further_reading:
   text: Learn about Error Tracking
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
-  text: Visualize Error Tracking data in the RUM Explorer
+  text: Visualize Error Tracking data in the Explorer
 
 ---
 ## Overview
@@ -92,7 +92,7 @@ Source maps, mapping files, and dSYM files are limited to **500** MB each.
 
 ## Test your implementation
 
-To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 

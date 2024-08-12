@@ -157,6 +157,6 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [20]: /serverless
 [21]: /security/cloud_siem/
 [22]: /synthetics/
-[23]: /service_management/mobile/
+[23]: /mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

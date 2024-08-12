@@ -1,5 +1,3 @@
-## Connect the Datadog Agent to the Observability Pipelines Worker
-
 To send Datadog Agent logs to the Observability Pipelines Worker, update your Agent configuration with the following:
 ```
 observability_pipelines_worker:

@@ -12,6 +12,9 @@ further_reading:
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
+  - link: /real_user_monitoring/session_replay/mobile/setup_and_configuration#web-view-instrumentation
+    tag: Documentation
+    text: Web View Instrumentation
 ---
 
 ## Overview
@@ -24,27 +27,27 @@ You can perform the following:
 - Scope the root cause of latency to web pages or native components in mobile applications
 - Support users that have difficulty loading web pages on mobile devices
 
-**Note:** When Web View Tracking is enabled, Browser Session Replay is disabled, no matter how the Browser SDK is configured.
+You can also record the entire user journey across both web and native views on iOS or Android and watch it in a single Session Replay. Learn how to [instrument consolidated browser and mobile web views][1].
 
 ## Setup
 
 ### Prerequisites
 
-Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][2].
 
 ### Declare `DatadogWebViewTracking` as a dependency (iOS only)
 
-To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][3]. Then, add the package according to your dependency manager and update your initialization snippet.
+To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialization snippet.
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
 
-You can use [CocoaPods][4] to install `dd-sdk-ios`:
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
 ```
 pod 'DatadogWebViewTracking'
 ```
 
-[4]: https://cocoapods.org/
+[1]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -63,7 +66,7 @@ DatadogWebViewTracking
 {{% /tab %}}
 {{% tab "Carthage" %}}
 
-You can use [Carthage][5] to install `dd-sdk-ios`:
+You can use [Carthage][1] to install `dd-sdk-ios`:
 ```
 github "DataDog/dd-sdk-ios"
 ```
@@ -73,7 +76,7 @@ In Xcode, link the following frameworks:
 DatadogWebViewTracking.xcframework
 ```
 
-[5]: https://github.com/Carthage/Carthage
+[1]: https://github.com/Carthage/Carthage
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -191,7 +194,7 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 
 ### Access your web views
 
-Your web views appear in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
+Your web views appear in the [RUM Explorer][5] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
 Filter on your Android and Android TV applications, and click a session. A side panel with a list of events in the session appears.
 
@@ -199,17 +202,17 @@ Filter on your Android and Android TV applications, and click a session. A side 
 
 Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
 
-[1]: https://app.datadoghq.com/rum/explorer
-
 ## Billing implications
 
-See [RUM & Session Replay Billing][4] for details on how webviews in mobile applications impact session recordings and billing.
+See [RUM & Session Replay Billing][6] for details on how web views in mobile applications impact session recordings and billing.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#npm
-[2]: /real_user_monitoring/ios/
-[3]: https://docs.datadoghq.com/logs/log_collection/ios
-[4]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
+[2]: /real_user_monitoring/browser/setup/#npm
+[3]: /real_user_monitoring/ios/
+[4]: https://docs.datadoghq.com/logs/log_collection/ios
+[5]: https://app.datadoghq.com/rum/explorer
+[6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
