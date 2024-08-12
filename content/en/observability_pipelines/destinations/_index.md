@@ -27,7 +27,7 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
     {{< nextlink href="observability_pipelines/destinations/#google-chronicle" >}}Google Chronicle{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#splunk-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
