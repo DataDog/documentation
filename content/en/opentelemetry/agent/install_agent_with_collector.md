@@ -316,7 +316,10 @@ As an example, you can use the [Calendar sample application][9] that's already i
 1. The following code instruments [CalendarController.getDate()][10] method using the OpenTelemetry API:
    {{< code-block lang="java" filename="CalendarController.java" disable_copy="true" collapsible="true" >}}
 private String getDate() {
-  Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
+  Span span = tracer.spanBuilder("getDate")
+    .setAttribute("peer.service", "random-date-service")
+    .setSpanKind(SpanKind.CLIENT)
+    .startSpan();
   try (Scope scope = span.makeCurrent()) {
    ...
   } finally {
