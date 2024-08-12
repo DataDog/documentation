@@ -31,7 +31,7 @@ To complete this guide, you need the following:
 1. Find or create your [Datadog API key][2].
 1. Find or create your [Datadog application key][3].
 
-**Software**:  
+**Software**:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
@@ -53,7 +53,7 @@ Configure your local Kubernetes context to point at the cluster.
    kubectl config use-context <your-cluster-context>
    ```
    Replace <your-cluster-context> with the name of your Kubernetes cluster context.
-   
+
 ## Install the Datadog Agent with OpenTelemetry Collector
 
 ### Add the Datadog Helm Repository
@@ -133,7 +133,7 @@ datadog:
   networkMonitoring:
     enabled: true
    {{< /code-block >}}
-   
+
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
 Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
@@ -156,6 +156,16 @@ datadog:
       - containerPort: "4318"
         hostPort: "4318"
         name: otel-http
+  apm:
+    portEnabled: true
+    peer_tags_aggregation: true
+    compute_stats_by_span_kind: true
+    peer_service_aggregation: true
+  orchestratorExplorer:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
 
   podLabelsAsTags:
     app: kube_app
@@ -163,7 +173,7 @@ datadog:
    {{< /code-block >}}
 
 {{% /collapse-content %}}
-   
+
 ### Configure the OpenTelemetry Collector
 
 The DataDog Helm chart provides a sample OpenTelemetry Collector configuration that's a great starting point for most projects. This section walks you through the predefined pipelines and included OpenTelemetry components.
@@ -322,7 +332,7 @@ private String getDate() {
 
 ### Configure the application
 
-To configure your application container, ensure that the correct OTLP endpoint hostname is used. The Datadog Agent with OpenTelemetry Collector is deployed as a DaemonSet, so the current host needs to be targeted. 
+To configure your application container, ensure that the correct OTLP endpoint hostname is used. The Datadog Agent with OpenTelemetry Collector is deployed as a DaemonSet, so the current host needs to be targeted.
 
 The Calendar application container is already configure with correct `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable [as defined in Helm chart][13]:
 
@@ -390,7 +400,7 @@ env:
       deployment.environment=$(OTEL_K8S_NAMESPACE)
    {{< /code-block >}}
 
-## Run the application 
+## Run the application
 
 To start generating and forwarding observability data to Datadog, you need to deploy the Calendar application with the OpenTelemetry SDK using Helm.
 
@@ -401,7 +411,7 @@ helm upgrade -i <CALENDAR_RELEASE_NAME> ./deploys/calendar/
 1. This Helm chart deploys the sample Calendar application as a ReplicaSet.
 1. To test that the Calendar application is running correctly, execute the following command from another terminal window:
    ```shell
-   curl localhost:9090/calendar 
+   curl localhost:9090/calendar
    ```
 1. Verify that you receive a response like:
    ```text
@@ -439,7 +449,7 @@ View logs to monitor and troubleshoot application and system operations.
 
 ### Traces
 
-View traces and spans to observe the status and performance of requests processed by your application, with infrastructure metrics correlated in the same trace. 
+View traces and spans to observe the status and performance of requests processed by your application, with infrastructure metrics correlated in the same trace.
 
 {{< img src="/opentelemetry/embedded_collector/traces.png" alt="View traces from the Trace Explorer." style="width:100%;" >}}
 
