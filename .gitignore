@@ -237,6 +237,7 @@ static/images/integrations_logos/2020w2.pdf
 # Generated resources from Hugo Pipes
 resources/_gen/
 static/jsconfig.json
+assets/jsconfig.json
 
 # Generated from GitHub actions
 .github/preview-links-template.md
