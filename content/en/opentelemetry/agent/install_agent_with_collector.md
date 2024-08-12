@@ -130,8 +130,6 @@ datadog:
   processAgent:
     enabled: true
     processCollection: true
-  networkMonitoring:
-    enabled: true
    {{< /code-block >}}
 
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
