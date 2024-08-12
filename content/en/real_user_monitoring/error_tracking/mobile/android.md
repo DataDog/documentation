@@ -281,3 +281,4 @@ When looking at the behaviours of the RUM Crash Reporting for Android, there are
 [7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [8]: https://developer.android.com/tools/releases/platforms#11
 [9]: https://developer.android.com/tools/releases/platforms#10
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/#track-background-events
