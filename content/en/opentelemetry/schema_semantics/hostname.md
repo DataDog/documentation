@@ -25,7 +25,7 @@ The following sections explain each set of conventions in more detail.
 
 ### General hostname semantic conventions
 
-The `host` and `datadog.host.name` conventions are Datadog-specific conventions. They are considered first and can be used to override the hostname detected using the usual OpenTelemetry semantic conventions. We first check `host` and then check `datadog.host.name` if `host` was not set.
+The `host` and `datadog.host.name` conventions are Datadog-specific conventions. They are considered first and can be used to override the hostname detected using the usual OpenTelemetry semantic conventions. `host` is checked first and then `datadog.host.name` is checked if `host` was not set.
 
 Prefer using the `datadog.host.name` convention since it is namespaced, and it is less likely to conflict with other vendor-specific behavior.
 
@@ -79,7 +79,7 @@ To get the cluster name, the following conventions are checked:
 
 ### `host.id` and `host.name`
 
-If none of the above conventions are present, the `host.id` and `host.name` resource attributes are used as-is to determine the hostname. We first check `host.id` and then check `host.name` if `host.id` was not set.
+If none of the above conventions are present, the `host.id` and `host.name` resource attributes are used as-is to determine the hostname. `host.id` is checked first and then `host.name` is checked if `host.id` was not set.
 
 **Note:** The OpenTelemetry specification allows `host.id` and `host.name` to have values that may not match those used by other Datadog products in a given environment. If using multiple Datadog products to monitor the same host, you may have to override the hostname using `datadog.host.name` to ensure consistency.
 
