@@ -20,7 +20,7 @@
 <!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
 {{ $currentEnURL := $currentPage.RelPermalink }}
 {{ if ne $currentPage.Lang "en" }}
-    {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
+    {{ $currentEnURL = (strings.Replace $currentPage.RelPermalink (printf "/%s" .Lang) "") }}
 {{ end }}
 
 
@@ -45,7 +45,7 @@
 {{ range $menu }}
     <!-- check if on /api/ top level section page, don't generate sub anchors if true -->
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/" ) }}
-        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+        <li class="stef {{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
