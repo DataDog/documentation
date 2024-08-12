@@ -38,12 +38,13 @@ Network Device Monitoring gives you visibility into your on-premises and virtual
 
 1. Install the Datadog Agent (usually on a server that is not the monitored device).
 2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. Start monitoring your entire network infrastructure on the [Network Devices][3] page.
-4. View metrics collected on Datadog's out-of-the-box dashboards:
+3. Add additional enrichments to your devices by adding network device tagging through the [Service Now integration][225], and programmatically add tags to network devices with the [Network Device Monitoring API][226].
+4. Start monitoring your entire network infrastructure on the [Network Devices][3] page.
+5. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][4]
     - [Across the performance on all interfaces][5]
-5. Catch issues before they arise with proactive monitoring on any [SNMP metric][6].
-6. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][224] directly in the Datadog app.
+6. Catch issues before they arise with proactive monitoring on any [SNMP metric][6].
+7. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][224] directly in the Datadog app.
 
 ## Supported devices
 
@@ -57,7 +58,7 @@ Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for sele
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
-- [Meraki SD-WAN][7] 
+- [Meraki SD-WAN][7] (public beta)
 - [Cisco SD-WAN][223] (public beta)
 
 ### Vendor profiles
@@ -283,3 +284,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [222]: https://docs.datadoghq.com/integrations/pan_firewall/
 [223]: https://docs.datadoghq.com/integrations/cisco_sdwan/
 [224]: /network_monitoring/devices/guide/device_profiles/
+[225]: https://docs.datadoghq.com/integrations/servicenow/#network-device-tagging
+[226]: /api/latest/network-device-monitoring/

@@ -24,7 +24,7 @@ Additionally, the following security policies are applied to the account during 
 
 The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
 
-**Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Grouped Managed Service Account (gMSA)**. To specify a Grouped Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, as the installer cannot create one.
+**Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Group Managed Service Account (gMSA)**. To specify a Group Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Group Managed Service Account must exist *prior* to installation, as the installer cannot create one. See [Getting Started with Group Managed Service Accounts][11] for more information.
 
 ## Installation
 
@@ -165,3 +165,4 @@ If you are using the [Datadog- Win 32 event log Integration][10], the Datadog us
 [8]: /integrations/tomcat/
 [9]: /integrations/kafka/
 [10]: /integrations/win32_event_log/
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts

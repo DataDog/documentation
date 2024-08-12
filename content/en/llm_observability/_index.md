@@ -2,6 +2,10 @@
 title: LLM Observability
 aliases:
     - /tracing/llm_observability/
+further_reading:
+- link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
+  tag: "Blog"
+  text: "Monitor your Anthropic applications with Datadog LLM Observability"
 ---
 
 {{% site-region region="gov" %}}
