@@ -5,7 +5,7 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentación
   text: Más información sobre Real User Monitoring
-title: Datos de proxy de tu navegador RUM
+title: Datos del proxy de tu navegador RUM
 ---
 
 ## Información general
@@ -16,7 +16,7 @@ El SDK del navegador RUM puede configurarse para enviar solicitudes a través de
 
 Para reenviar correctamente una solicitud a Datadog, tu proxy debe
 
-1. [Crea la URL de admisión de Datadog ](#build-the-datadog-intake-url).
+1. [Crea la URL de admisión de Datadog](#build-the-datadog-intake-url).
 2. Añade una cabecera `X-Forwarded-For` que contenga la dirección IP del cliente de la solicitud para obtener una geoIP precisa.
 3. Reenvía la solicitud a la URL de admisión de Datadog utilizando el método POST.
 4. No modifiques el cuerpo de la solicitud.
@@ -33,7 +33,7 @@ Para reenviar correctamente una solicitud a Datadog, tu proxy debe
 
 Una URL de admisión de Datadog (ejemplo: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) consta de tres partes:
 
-- el origen de admisión en Datadog correspondiente a tu [parámetro de inicialización][1] `site` (ejemplo: `https://browser-intake-datadoghq.eu`)
+- el origen de admisión de Datadog correspondiente a tu [parámetro de inicialización][1] `site` (ejemplo: `https://browser-intake-datadoghq.eu`)
 - la ruta que contiene la versión de la API y el producto (ejemplo: `/api/v2/rum` para datos RUM o `/api/v2/replay` para datos Session Replay)
 - los parámetros (ejemplo: `ddsource=browser&...`)
 
