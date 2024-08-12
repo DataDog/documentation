@@ -3,6 +3,14 @@ title: Trace Context Propagation
 type: multi-code-lang
 description: 'Extract and inject Datadog, B3, and W3C Trace Context headers to propagate the context of a distributed trace.'
 aliases:
+- '/tracing/trace_collection/trace_context_propagation/cpp'
+- '/tracing/trace_collection/trace_context_propagation/dotnet'
+- '/tracing/trace_collection/trace_context_propagation/go'
+- '/tracing/trace_collection/trace_context_propagation/java'
+- '/tracing/trace_collection/trace_context_propagation/nodejs'
+- '/tracing/trace_collection/trace_context_propagation/php'
+- '/tracing/trace_collection/trace_context_propagation/python'
+- '/tracing/trace_collection/trace_context_propagation/ruby'
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
