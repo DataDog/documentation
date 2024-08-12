@@ -44,9 +44,9 @@ Este ejemplo muestra las principales acciones en la página `/cart` de Shopist.
 
 Para investigar qué usuarios hacen clic en estos botones, modifica la consulta de búsqueda seleccionando el tipo de visualización **Tabla** y haciendo clic en **+** para añadir otro campo `group` para `@user.name`.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Consulta de búsqueda de acciones agrupadas por nombre de usuario en la página del carro de compra de Shopist" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Consulta de búsqueda de acciones agrupadas por nombre de usuario en la página del carro de compras de Shopist" style="width:90%;">}}
 
-## Análisis de la tasa de conversión de los flujos de trabajo principales
+## Análisis de la tasa de conversión de los flujos (flows) de trabajo principales
 
 Utiliza el [tipo de visualización de embudo][6] para realizar un seguimiento de la tasa de conversión en áreas cruciales de tu sitio web. 
 
@@ -68,7 +68,7 @@ Una vez que hayas creado un embudo basado en vistas o acciones en tu sitio web, 
 
 El panel lateral contiene información detallada sobre el tiempo de carga de una vista individual, las tasas de conversión y abandono en función del país, el tipo de dispositivo, el navegador y la versión y los [problemas][9] pendientes que se produjeron en la página.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_analysis_side_panel.mp4" alt="Panel lateral de análisis de embudo que muestra las tasas de conversión, las tasas de abandono, el rendimiento de la página, los errores y el comportamiento del usuario" width=90%; vídeo="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_analysis_side_panel.mp4" alt="Panel lateral del análisis de embudo que muestra las tasas de conversión, las tasas de abandono, el rendimiento de la página, los errores y el comportamiento del usuario" width=90%; vídeo="true" >}}
 
 ## Identificar a tus usuarios más frustrados
 
@@ -116,7 +116,7 @@ Utiliza el powerpack predefinido Uso de funciones RUM para comprender mejor los 
 
 Este powerpack proporciona gráficos sobre el uso por país, acciones en una vista y acciones a lo largo del tiempo, además del recuento de acciones y el porcentaje de frecuencia de uso en la página del `/cart` de Shopist.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="Powerpack Uso de funciones RUM para monitorizar la acción Aplicar cupón en la página del carro de compras" style="width:100%;" >}} 
+{{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="Powerpack Uso de funciones RUM para monitorizar la acción Aplicar cupón, en la página del carro de compras" style="width:100%;" >}} 
 
 ## Referencias adicionales
 
