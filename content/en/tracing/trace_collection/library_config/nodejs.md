@@ -10,7 +10,7 @@ further_reading:
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
-    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+    - link: "/tracing/trace_collection/trace_context_propagation/"
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/glossary/'
@@ -295,7 +295,7 @@ For more examples of how to work with the library see [API documentation][2].
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
-[5]: /tracing/trace_collection/trace_context_propagation/nodejs
+[5]: /tracing/trace_collection/trace_context_propagation/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
