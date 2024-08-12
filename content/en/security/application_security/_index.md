@@ -3,6 +3,9 @@ title: Application Security Management
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
   - /security_platform/application_security
+  - /security/application_security/enabling/single_step
+  - /security/application_security/enabling/compatibility
+  - /security/application_security/enabling
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
