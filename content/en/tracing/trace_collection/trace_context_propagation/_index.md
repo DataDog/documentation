@@ -603,7 +603,7 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 : Specifies the 64-bits span-id of the current span, in decimal format.
 
 `x-datadog-origin`
-: Specifies the Datadog service that initiated the trace, such as [Real User Monitoring][7] or [Synthetic Monitoring][8]. If this header is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
+: Specifies the Datadog product that initiated the trace, such as [Real User Monitoring][7] or [Synthetic Monitoring][8]. If this header is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
 
 `x-datadog-sampling-priority`
 : Specifies the sampling decision made for the represented span as an integer, in decimal format.
