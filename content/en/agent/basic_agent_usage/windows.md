@@ -29,7 +29,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see [Install the Datadog Agent](#install-the-datadog-agent) or [follow the instructions in the app][1].
+This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see the installation instructions below or [follow the instructions in the app][1].
 
 ## Install the Agent
 
@@ -111,7 +111,7 @@ When running with a gMSA, the core and APM/trace components of the Windows Agent
         ```powerhsell
         Install-ADServiceAccount -Identity DatadogGMSA
         ```
-   There should not be any errors.
+      Ensure the command ran without errors.
 
 ### Install the Agent
 
