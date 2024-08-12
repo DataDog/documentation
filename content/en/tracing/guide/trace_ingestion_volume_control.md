@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The [Ingestion control page][1] provides granular visibility into the ingestion configuration for all services, in the agent and in the tracing libraries. All [Ingestion Mechanisms][2] are publicly documented and configurable.
+The [Ingestion control page][1] provides granular visibility into the ingestion configuration for all services, in the Agent and in the APM SDKs. All [Ingestion Mechanisms][2] are publicly documented and configurable.
 
 With the ingestion control page, you have full visibility and complete control of your span volume. Consequently, you are be able to:
 - Ingest the data that is most relevant to your business and your observability goals.
@@ -42,7 +42,7 @@ Count-based [**Trace analytics**][6] monitors are impacted as well. Check if you
 
 ## Assess your services' ingestion configuration
 
-To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and tracing library configuration.
+To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and APM SDK configuration.
 
 ### Understanding if you are within your monthly ingestion allocation
 
@@ -78,7 +78,7 @@ The **Configuration** column tells you whether or not your services are configur
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
 
-**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` does not change sampling rates that are applied in tracing libraries.
+**Note**: This configuration option only goes into effect when using **Datadog APM SDKs**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` does not change sampling rates that are applied in APM SDKs.
 
 Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
@@ -90,7 +90,7 @@ By configuring sampling rates for a few high-throughput services, most of the "e
 
 Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
 
-If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the tracing library level.
+If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the APM SDK level.
 
 Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
 
@@ -111,12 +111,12 @@ _Know which ingestion mechanisms are responsible for most of the ingestion volum
 
 The default mechanism to sample traces is head-based sampling. The decision whether to sample a trace or not is taken at the beginning of its lifecycle, and propagated downstream in the context of the requests in order to ensure that you can always view and analyze complete traces.
 
-Head-based sampling is configurable in the tracing libraries or from the Datadog Agent:
+Head-based sampling is configurable in the APM SDKs or from the Datadog Agent:
 
 | ingestion reason   | Where             | Ingestion Mechanism Description | Default |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | The Datadog Agent distributes sampling rates to tracing libraries.    | 10 traces per second per Agent |
-| `rule`             | [Tracing Libraries](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | The libraries' defined sampling percentage for specific services.   | null                 |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | The Datadog Agent distributes sampling rates to APM SDKs.    | 10 traces per second per Agent |
+| `rule`             | [APM SDKs](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | The libraries' defined sampling percentage for specific services.   | null                 |
 
 
 Several other ingestion reasons are surfaced in the Ingestion Control page and as a tag on the `datadog.estimated_usage.apm.ingested_bytes` metric. These ingestion reasons may be responsible for your ingestion volume:
@@ -126,7 +126,7 @@ Several other ingestion reasons are surfaced in the Ingestion Control page and a
 | `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Sampling of errors uncaught by the head-based sampling.             | 10 traces per second per Agent (null, if rules are defined) |
 | `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Sampling of rare traces (catching all combinations of a set of span tags).        | 5 traces per second per Agent (null, if rules are defined) |
 | `manual`             | In-code         | In-code decision override to keep/drop a span and its children.    | null |
-| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][16] that samples single spans without the full trace.   | null                 |
+| `analytics`          | Agent and APM SDKs | [Deprecated ingestion mechanism][16] that samples single spans without the full trace.   | null                 |
 
 Additionally, other products can be responsible for sampled span volume:
 
@@ -150,7 +150,7 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [8]: /tracing/trace_pipeline/metrics/
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [10]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-apm-sdks-libraries-user-defined-rules
 [12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [13]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md

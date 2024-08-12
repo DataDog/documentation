@@ -77,7 +77,7 @@ namespace Store.Managers
 ## Custom instrumentation with code
 
 <div class="alert alert-info">
-  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
+  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the APM SDK and the active span.
 </div>
 
 <div class="alert alert-warning">
@@ -215,7 +215,7 @@ DD_TAGS=datacenter:njc,key2:value2
 
 ## Resource filtering
 
-You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][10].
+You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or APM SDK for Data Security][10].
 
 ## Further Reading
 

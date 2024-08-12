@@ -1,5 +1,5 @@
 ---
-title: Configuring the Python Tracing Library
+title: Configuring the Python APM SDK
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 20
@@ -24,13 +24,13 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the APM SDK with your code and configure the Agent to collect APM data, optionally configure the APM SDK as desired, including setting up [Unified Service Tagging][1].
 
 When using **ddtrace-run**, the following [environment variable options][2] can be used:
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
-Enable debug logging in the tracer.
+Enable debug logging in the APM SDK.
 
 `DD_PATCH_MODULES`
 : Override the modules patched for this application execution. Follow the format: `DD_PATCH_MODULES=module:patch,module:patch...`
@@ -88,25 +88,25 @@ Enable web framework and library instrumentation. When `false`, the application 
 
 `DD_AGENT_HOST`
 : **Default**: `localhost`<br>
-Override the address of the trace Agent host that the default tracer attempts to submit traces to.
+Override the address of the trace Agent host that the default APM SDK attempts to submit traces to.
 
 `DD_AGENT_PORT`
 : **Default**: `8126`<br>
-Overrides the port that the default tracer submit traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
+Overrides the port that the default APM SDK submit traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_TRACE_AGENT_URL`
-: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
+: The URL of the Trace Agent that the APM SDK submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_DOGSTATSD_URL`
-: The URL used to connect to the Datadog Agent for DogStatsD metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `dogstatsd_socket` configuration in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog Agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_URL` or `DD_DOGSTATSD_PORT` must match it.
+: The URL used to connect to the Datadog Agent for DogStatsD metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `dogstatsd_socket` configuration in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog Agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this APM SDK `DD_DOGSTATSD_URL` or `DD_DOGSTATSD_PORT` must match it.
 
 `DD_DOGSTATSD_HOST`
 : **Default**: `localhost`<br>
-Override the address of the trace Agent host that the default tracer attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.
+Override the address of the trace Agent host that the default APM SDK attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125`<br>
-Override the port that the default tracer submits DogStatsD metrics to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library  `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` must match it.
+Override the port that the default APM SDK submits DogStatsD metrics to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this APM SDK  `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` must match it.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>

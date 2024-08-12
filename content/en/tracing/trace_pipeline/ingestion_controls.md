@@ -21,7 +21,7 @@ further_reading:
 
 Ingestion controls affect what traces are sent by your applications to Datadog. [APM metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
 
-The Ingestion Control page provides visibility at the Agent and tracing libraries level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:
+The Ingestion Control page provides visibility at the Agent and APM SDK level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:
 - Gain visibility on your service-level ingestion configuration and adjust trace sampling rates for high throughput services.
 - Understand which ingestion mechanisms are responsible for sampling most of your traces.
 - Investigate and act on potential ingestion configuration issues, such as limited CPU or RAM resources for the Agent.
@@ -76,7 +76,7 @@ Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Ingestion Configuration
-: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured in the tracing libraries with [trace sampling rules][8], the service is marked as `Configured`. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured in the APM SDKs with [trace sampling rules][8], the service is marked as `Configured`. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
 
 Infrastructure
 : Hosts, containers, and functions on which the service is running.
@@ -97,12 +97,12 @@ The Traffic Breakdown column breaks down the destination of all traces originati
 The breakdown is composed of the following parts:
 
 - **Complete traces ingested** (blue): The percentage of traces that have been ingested by Datadog.
-- **Complete traces not retained** (gray): The percentage of traces that have intentionally not been forwarded to Datadog by the Agent or the tracing library. This can happen for one of two reasons depending on your configuration:
+- **Complete traces not retained** (gray): The percentage of traces that have intentionally not been forwarded to Datadog by the Agent or the APM SDK. This can happen for one of two reasons depending on your configuration:
 
     1. By default, the [Agent distributes an ingestion rate][4] to services depending on service traffic.
-    2. When the service is manually [configured][8] to ingest a certain percentage of traces at the tracing library level.
+    2. When the service is manually [configured][8] to ingest a certain percentage of traces at the APM SDK level.
 
-- **Complete traces dropped by the tracer rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to manually configure this rate.
+- **Complete traces dropped by the APM SDK rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to manually configure this rate.
 
 - **Traces dropped due to the Agent CPU or RAM limit** (red): This mechanism may drop spans and create incomplete traces. To fix this, increase the CPU and memory allocation for the infrastructure that the Agent runs on.
 
@@ -118,11 +118,11 @@ If most of your service ingestion volume is due to decisions taken by upstream s
 
 For further investigations, use the [APM Trace - Estimated Usage Dashboard][12], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
 
-### Agent and tracing library versions
+### Agent and APM SDK versions
 
-See the **Datadog Agent and tracing library versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
+See the **Datadog Agent and APM SDK versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
 
-{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and tracing library versions" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and APM SDK versions" >}}
 
 **Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
 
@@ -134,7 +134,7 @@ Click **Manage Ingestion Rate** to get instructions on how to configure your ser
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Change the Service Ingestion Rate" >}}
 
-To specify a specific percentage of a service's traffic to be sent, add an environment variable or a generated code snippet to your tracing library configuration for that service.
+To specify a specific percentage of a service's traffic to be sent, add an environment variable or a generated code snippet to your APM SDK configuration for that service.
 
 1. Select the service you want to change the ingested span percent for.
 2. Choose the service language.
@@ -154,7 +154,7 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
-[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-apm-sdks-user-defined-rules
 [9]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
 [10]: /tracing/trace_pipeline/metrics
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/

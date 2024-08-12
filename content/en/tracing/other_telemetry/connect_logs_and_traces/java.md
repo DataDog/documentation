@@ -26,7 +26,7 @@ Ensure log collection is configured. See [Java Log Collection][1] for Log4j, Log
 
 ## Automatic injection
 
-Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into JSON formatted logs. For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`. Full configuration details can be found on the [Java tracer configuration][2] page.
+Starting in version 0.74.0, the Java APM SDK automatically injects trace correlation identifiers into JSON formatted logs. For earlier versions, enable automatic injection in the Java APM SDK by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`. Full configuration details can be found on the [Java APM SDK configuration][2] page.
 
 **Notes**:
 - Automatic injection of trace correlation is available for Log4j2, Log4j, or SLF4J and Logback.

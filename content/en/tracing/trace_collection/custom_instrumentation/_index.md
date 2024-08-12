@@ -15,7 +15,7 @@ algolia:
 
 ## Overview
 
-Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
+Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog SDKs][6].
 
 Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
 
@@ -47,7 +47,7 @@ Use the Datadog API to add custom instrumentation that allows you to programmati
 
 {{% tab "OpenTelemetry API" %}}
 
-Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
+APM SDKs provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the APM SDK for your language, and send those to Datadog.
 
 {{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
 
@@ -57,7 +57,7 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 {{% tab "OpenTracing (legacy)" %}}
 
-If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
+If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported.
 
 {{< partial name="apm/apm-opentracing-custom.html" >}}
 

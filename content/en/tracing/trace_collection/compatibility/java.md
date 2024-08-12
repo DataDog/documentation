@@ -1,6 +1,6 @@
 ---
 title: Java Compatibility Requirements
-description: 'Compatibility Requirements for the Java tracer'
+description: 'Compatibility Requirements for the Java APM SDK'
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -20,9 +20,9 @@ The Java Datadog Trace library is open source - view the [GitHub repository][1] 
 
 ### Supported Java runtimes
 
-The Java Tracer supports automatic instrumentation for the following Oracle JDK, OpenJDK JVM, and [GraalVM](#graalvm-native-image-support) runtimes.
+The Java APM SDK supports automatic instrumentation for the following Oracle JDK, OpenJDK JVM, and [GraalVM](#graalvm-native-image-support) runtimes.
 
-#### Java Tracer v1 (latest)
+#### Java APM SDK v1 (latest)
 
 <table>
   <thead>
@@ -53,7 +53,7 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
 
 Datadog does not officially support any early-access versions of Java.
 
-#### Java Tracer v0 (maintenance)
+#### Java APM SDK v0 (maintenance)
 
 | Java versions      | Operating Systems                                                               | Support level                     |
 |--------------------|---------------------------------------------------------------------------------|-----------------------------------|
@@ -170,7 +170,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Spring SessionAwareMessageListener | 3.1+        | Fully Supported                                     | `spring-jms-3.1`                                        |
 | Spring WebClient                   | 5.0+        | Fully Supported                                     | `spring-webflux`, `spring-webflux-client`               |
 
-**Kafka Note**: Datadog's Kafka integration works with Kafka version `0.11+`, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
+**Kafka Note**: Datadog's Kafka integration works with Kafka version `0.11+`, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the APM SDK tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
 
 **JMS Note**: Datadog's JMS integration automatically adds and reads message object properties `x__dash__datadog__dash__trace__dash__id` and `x__dash__datadog__dash__parent__dash__id` to maintain context propagation between consumer and producer services.
 
@@ -279,25 +279,25 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 ### Known issues
 
-- Running the Java tracer in Bitbucket is not supported.
+- Running the Java APM SDK in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
 
 ## GraalVM Native Image support
 
-GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
+GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java APM SDK supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
 
 ### Requirements
 
 Use the latest versions of:
 
 - [GraalVM][7]
-- [Datadog Java tracer][1]
+- [Datadog Java APM SDK][1]
 
 ### Setup
 
 {{< tabs >}}
 {{% tab "GraalVM" %}}
-To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
+To set up the Datadog Java APM SDK with GraalVM Native Image, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. When you build a native executable with the `native-image` command, add the `-J-javaagent:/path/to/dd-java-agent.jar` argument. For example:
@@ -311,7 +311,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
 {{% /tab %}}
 
 {{% tab "Quarkus Native" %}}
-To set up the Datadog Java tracer with Quarkus Native, follow these steps:
+To set up the Datadog Java APM SDK with Quarkus Native, follow these steps:
 
 1. Instrument your application, following the steps described in [Tracing Java Applications][6].
 2. When you build a native executable, use the `quarkus.native.additional-build-args` property. For example:
@@ -325,7 +325,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
 {{% /tab %}}
 
 {{% tab "Spring Native" %}}
-To set up the Datadog Java tracer with Spring Native, follow these steps:
+To set up the Datadog Java APM SDK with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.

@@ -23,16 +23,16 @@ further_reading:
 
 ## Runtime metrics compatibility
 
-- .NET Framework 4.6.1+ 
+- .NET Framework 4.6.1+
 - .NET Core 3.1
 - .NET 5
 - .NET 6
 - .NET 7
 - .NET 8
- 
+
 ## Automatic configuration
 
-Enable runtime metrics collection in the .NET Tracer 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
+Enable runtime metrics collection in the .NET APM SDK 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
 
 View runtime metrics in correlation with your .NET services. See the [Service Catalog][1] in Datadog.
 

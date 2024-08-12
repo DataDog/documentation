@@ -1,6 +1,6 @@
 ---
 title: .NET Framework Compatibility Requirements
-description: 'Compatibility Requirements for the .NET Tracer'
+description: 'Compatibility Requirements for the .NET APM SDK'
 aliases:
   - /tracing/compatibility_requirements/dotnet-framework
   - /tracing/setup_overview/compatibility_requirements/dotnet-framework
@@ -17,13 +17,13 @@ further_reading:
 ---
 
 
-The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+The Datadog .NET APM SDK supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
+The .NET APM SDK is open source. For more information, see the [.NET APM SDK repository][1].
 
 ## Supported .NET Framework runtimes
 
-The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
+The .NET APM SDK supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET APM SDK does not support code running in partial trust environments.
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version            | Datadog End of Life |
 | ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
@@ -41,13 +41,13 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
 <div class="alert alert-info">
-  <div class="alert-info"><b>Note:</b> When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
+  <div class="alert-info"><b>Note:</b> When deciding which APM SDK version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
   </div>
 </div>
 
 ## Supported processor architectures
 
-The .NET Tracer supports automatic instrumentation on the following architectures:
+The .NET APM SDK supports automatic instrumentation on the following architectures:
 
 | Processor architectures                                                 | Support level         | Package version                        |
 | ------------------------------------------------------------------------|-----------------------|----------------------------------------|
@@ -95,6 +95,10 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
+### Azure SDK
+
+Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][12] for more details.
+
 ## Supported Datadog Agent versions
 
 | **Datadog Agent version**   | **Package version** |
@@ -105,7 +109,7 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## .NET runtime support policy
 
-The .NET Tracer depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, the .NET Tracer also limits its support for that version.
+The .NET APM SDK depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, the .NET APM SDK also limits its support for that version.
 
 ### Levels of support
 

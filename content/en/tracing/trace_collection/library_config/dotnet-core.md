@@ -1,5 +1,5 @@
 ---
-title: Configuring the .NET Core Tracing Library
+title: Configuring the .NET Core APM SDK
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
@@ -36,24 +36,24 @@ further_reading:
     text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
+After you set up the APM SDK with your code and configure the Agent to collect APM data, optionally configure the APM SDK as desired, including setting up [Unified Service Tagging][4].
 
-{{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Core Tracer configuration setting precedence" style="width:100%" >}}
+{{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Core APM SDK configuration setting precedence" style="width:100%" >}}
 
-You can set configuration settings in the .NET Tracer with any of the following methods:
+You can set configuration settings in the .NET APM SDK with any of the following methods:
 
 {{< tabs >}}
 
 {{% tab "Environment variables" %}}
 
-To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
+To configure the APM SDK using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core/#configuring-process-environment-variables
 {{% /tab %}}
 
 {{% tab "Code" %}}
 
-To configure the tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
+To configure the APM SDK in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
@@ -80,7 +80,7 @@ Tracer.Configure(settings);
 
 {{% tab "JSON file" %}}
 
-To configure the tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
+To configure the APM SDK using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
 
 ```json
 {
@@ -113,7 +113,7 @@ If specified, adds the `env` tag with the specified value to all generated spans
 
 `DD_SERVICE`
 : **TracerSettings property**: `ServiceName`<br>
-If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from the application name (IIS application name, process entry assembly, or process name). Added in version 1.17.0.
+If specified, sets the service name. Otherwise, the .NET APM SDK tries to determine service name automatically from the application name (IIS application name, process entry assembly, or process name). Added in version 1.17.0.
 
 `DD_VERSION`
 : **TracerSettings property**: `ServiceVersion`<br>
@@ -178,7 +178,7 @@ If the **Request** has a header `User-ID`, its value is applied as tag `http.req
 If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
 Added in version 1.18.3.<br>
 Response header support and entries without tag names added in version 1.26.0.<br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -198,11 +198,11 @@ If specified, adds all of the specified tags to all generated spans. <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`
-: Sets the directory for .NET Tracer logs. <br>
+: Sets the directory for .NET APM SDK logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\` on Windows, `/var/log/datadog/dotnet` on Linux
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
-: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+: During the APM SDK's startup, this configuration uses the SDK's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
 **Default**: `31`
 
 `DD_TRACE_LOGGING_RATE`
@@ -309,7 +309,7 @@ The following configuration variables are for features that are available for us
 #### Deprecated settings
 
 `DD_TRACE_LOG_PATH`
-: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
+: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET APM SDK log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
 
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>

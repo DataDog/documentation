@@ -2,15 +2,15 @@
 title: Using the .NET diagnostic tool for troubleshooting
 ---
 
-If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
+If your application does not produce traces as expected after installing the .NET APM SDK, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
 
-The diagnostic tool  `dd-dotnet` is bundled with the tracing library starting with version 2.42.0. It is located in the tracing library's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
+The diagnostic tool  `dd-dotnet` is bundled with the APM SDK starting with version 2.42.0. It is located in the APM SDK's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
 
 ## Installing `dd-trace`
 
-**This section is for versions of the tracer older than 2.42.0.**
+**This section is for versions of the APM SDK older than 2.42.0.**
 
-Older versions of the tracer did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
+Older versions of the APM SDK did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
 
 You can install `dd-trace` in one of the following ways:
 
@@ -22,16 +22,16 @@ You can install `dd-trace` in one of the following ways:
     * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][1]
     * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][2]
     * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][3]
- 
+
 - Or by downloading [from the github release page][4].
 
 When invoking the commands in the next sections, make sure to replace `dd-dotnet` with `dd-trace`.
 
-## Process diagnostics 
+## Process diagnostics
 
-For most applications, use the process diagnostics to find the problem. 
+For most applications, use the process diagnostics to find the problem.
 
-1. Ensure the application is running, and get the process ID (pid). 
+1. Ensure the application is running, and get the process ID (pid).
 
    To get the pid of a Windows process, open Task Manager, open the **Details** tab, and look for the PID column. You can also run the command `tasklist /FI "IMAGENAME eq target.exe"`where `target.exe` is the name of the process.
 

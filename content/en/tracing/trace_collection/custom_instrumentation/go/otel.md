@@ -19,7 +19,7 @@ further_reading:
 {{% otel-custom-instrumentation-lang %}}
 
 ## Imports
- 
+
 Import the following packages to setup the Datadog trace provider and use cases demonstrated below:
 
 ```go
@@ -41,7 +41,7 @@ import (
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog APM SDK instead.
 
 2. Install the OpenTelemetry package `go.opentelemetry.io/otel` using the command:
 
@@ -76,7 +76,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
    ```go
    otel.SetTracerProvider(provider)
    ```
-   
+
 7. Run your application.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
@@ -96,10 +96,10 @@ span.SetAttributes(attribute.String(ext.ResourceName, "test.json"))
 
 ### Adding tags globally to all spans
 
-Add tags to all spans by configuring the tracer with the `WithGlobalTag` option:
+Add tags to all spans by configuring the APM SDK with the `WithGlobalTag` option:
 
 ```go
-// Here we can leverage the Datadog tracer options by passing them into the 
+// Here we can leverage the Datadog tracer options by passing them into the
 // NewTracerProvider function.
 provider := ddotel.NewTracerProvider(
 	ddtracer.WithGlobalTag("datacenter", "us-1"),
@@ -126,7 +126,7 @@ ctx, span := t.Start(context.Background(), "span_name")
 // Set an error on a span with 'span.SetAttributes'.
 span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
 
-// ALternatively, it is possible to set an error on a span via end span options. 
+// ALternatively, it is possible to set an error on a span via end span options.
 EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
 sp.End()
 
@@ -151,7 +151,7 @@ s.End()
 
 ## Adding spans
 
-Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
+Unlike other Datadog APM SDKs, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
 
 ```go
 // Can only be done after the setup steps.

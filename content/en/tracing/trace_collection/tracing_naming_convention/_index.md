@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-[Datadog tracing libraries][1] provide out-of-the-box support for instrumenting a variety of libraries.
+[Datadog APM SDKs][1] provide out-of-the-box support for instrumenting a variety of libraries.
 These instrumentations generate spans to represent logical units of work in distributed systems.
 Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. Naming conventions describe the name and content that can be used in span events.
 

@@ -53,7 +53,7 @@ Datadog.configure do |c|
 end
 ```
 
-For more information about trace context propagation configuration, read [the Distributed Tracing section][1] in the Ruby Tracing Library Configuration docs.
+For more information about trace context propagation configuration, read [the Distributed Tracing section][1] in the Ruby APM SDK Configuration docs.
 
 ## Further Reading
 

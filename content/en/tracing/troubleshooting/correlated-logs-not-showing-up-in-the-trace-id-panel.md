@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-The [trace][1] panel contains information about the trace, host, and correlated logs. 
+The [trace][1] panel contains information about the trace, host, and correlated logs.
 
 {{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="A trace page showing an empty log section" style="width:90%;">}}
 
@@ -47,7 +47,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
    {{< tabs >}}
    {{% tab "JSON logs" %}}
 
-   For JSON logs, Step 1 and 2 are automatic. The tracer injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the [reserved attribute remappers][3].
+   For JSON logs, Step 1 and 2 are automatic. The APM SDK injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the [reserved attribute remappers][3].
 
    If this process is not working as expected, ensure the logs attribute's name containing the trace ID is `dd.trace_id` and verify that the attribute is correctly set in the [reserved attributes'][4] Trace ID section.
 
