@@ -85,11 +85,11 @@ En este ejemplo, se selecciona **Tareas prolongadas** en el menú desplegable de
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-3.png" alt="Ejemplo de ausencia de datos luego de escribir una consulta." style="width:80%;">}}
 
-Si no ves datos después de escribir una consulta, confirma que el selector de eventos coincide con lo que tienes en la barra de búsqueda. En el ejemplo anterior, el selector de eventos está configurado para buscar en las **vistas**, pero la barra de búsqueda sólo contiene atributos de **acción**. Para ver los datos relacionados con acciones, cambia el selector de vista a acciones. Si sigues sin ver ningún dato, comprueba el selector del marco temporal para asegurarte de que te encuentras en una ventana de tiempo en la que deberían aparecer datos.
+Si no ves datos después de escribir una consulta, confirma que el selector de eventos coincide con lo que tienes en la barra de búsqueda. En el ejemplo anterior, el selector de eventos está configurado para buscar en las **vistas**, pero la barra de búsqueda sólo contiene atributos de **acción**. Para ver los datos relacionados con acciones, cambia el selector de vista a acciones. Si sigues sin ver ningún dato, comprueba el selector del marco temporal para asegurarte de que te encuentras en una ventana temporal en la que deberían aparecer datos.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-data-now-appears.png" alt="Ejemplo de actualización de una consulta utilizando los selectores de vista y de marco temporal." style="width:80%;">}}
 
-### Consulta de un tipo evento anidado en otro tipo evento 
+### Consulta de un tipo de evento anidado en otro tipo de evento 
 
 Al consultar acciones específicas, puedes utilizar el tipo de evento principal, pero no uno de nivel igual o inferior. Por ejemplo, las acciones están anidadas debajo de las vistas y las acciones y los errores están al mismo nivel en la cadena jerárquica. Esto significa que puedes consultar todas las acciones y errores que se han producido en una página determinada, pero no todas las acciones que han tenido un tipo de error específico.
 
