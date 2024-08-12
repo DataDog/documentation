@@ -27,8 +27,8 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
     {{< nextlink href="observability_pipelines/destinations/#google-chronicle" >}}Google Chronicle{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#splunk-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#sumo-logic" >}}Sumo Logic{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Amazon OpenSearch
@@ -89,30 +89,6 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
-## Splunk HEC
-
-Set up the Splunk HEC destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
-{{% observability_pipelines/destination_settings/splunk_hec %}}
-
-### Set the environment variables
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
-
-## Sumo Logic
-
-Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
-{{% observability_pipelines/destination_settings/sumo_logic %}}
-
-### Set the environment variables
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
-
 ## Rsyslog or Syslog-ng
 
 Set up the Rsyslog or Syslog-ng destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
@@ -124,6 +100,30 @@ Set up the Rsyslog or Syslog-ng destination and its environment variables when y
 ### Set the environment variables
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+## Splunk HTTP Event Collector (HEC)
+
+Set up the Splunk HEC destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
+
+{{% observability_pipelines/destination_settings/splunk_hec %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
+
+## Sumo Logic Hosted Collector
+
+Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+
+### Set up the destination
+
+{{% observability_pipelines/destination_settings/sumo_logic %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/set_up_pipelines/
