@@ -15,7 +15,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables correlation all traces and additional telemetry in a request. When automatic instrumentation is enabled, trace context propagation is handled automatically by the APM SDK.
+Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the APM SDK.
 
 By default, the Datadog SDK extracts and injects distributed tracing headers using the following formats:
 
