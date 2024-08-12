@@ -45,12 +45,12 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 - Provide engineering leadership with a high-level view of security practices across teams and cloud accounts.
 - Export resources for record-keeping or auditing.
 
-#### Troubleshooting
+#### Troubleshooting incidents and performance issues
 - Access telemetry, dashboards and other Datadog views with rich insights to understand the health and performance of your resources.
 - Locate team and service owners of relevant resources to speed up incident recovery.
 - View resource configuration changes to identify probable root causes.
 
-#### Observability optimization
+#### Optimize observability
 - Spot resources that can be better monitored by Datadog and bridge observability gaps.
 - Ensure proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security misconfigurations.
 
@@ -61,7 +61,7 @@ By default, when you navigate to the Resource Catalog, you are able to see Datad
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
 **Note**: 
-- Extending resource collection does not incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
+- Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
 - Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
 
 ## Browse the Resource Catalog
@@ -80,7 +80,7 @@ The Security tab provides a security-centric view of your infrastructure and all
 
 - [**Identity Risks**][12]: Provides in-depth visibility into your organization’s AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 
-- [**Identity Risks**][13]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization’s containers and hosts.
+- [**Vulnerabilities**][13]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization’s containers and hosts.
 
 By viewing misconfigurations, signals, identity risks, and vulnerabilities associated with resources, you can address security concerns without needing to spend time and effort to gather additional security context.
 
