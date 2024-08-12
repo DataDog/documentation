@@ -79,7 +79,7 @@ La etiqueta de versión se captura automáticamente de `info.plist` de la aplica
 ## Análisis del rendimiento de tu despliegue en RUM
 
 {{< tabs >}}
-{{% tab "Explorador RUM" %}}
+{{% tab "Navegador RUM" %}}
 
 ### Uso de etiquetas de versión en la página de información general de la aplicación
 
@@ -108,11 +108,11 @@ Estos widgets se pueden exportar a dashboards y monitores.
 
 Haz clic en cualquier fila de versiones de la tabla **Lista de Versiones*** para abrir una página de comparación de versiones, que te permitirá comparar dos versiones del mismo servicio. Por defecto, la versión seleccionada se compara con todas las versiones anteriores. Puedes cambiar la selección para comparar dos versiones cualesquiera en los últimos 30 días.
 
-De forma similar a los gráficos de la página **Información general de la aplicación**, los gráficos **Sesiones de usuario**, **Core Web Vitals** y **Errores** muestran una descripción general de la restauración de un despliegue o picos en las tasas de error. En esta página, los gráficos resaltan las versiones seleccionadas para su comparación y muestran todas las demás versiones en gris para ofrecer un contexto adicional.
+De forma similar a los gráficos de la página **Información general de la aplicación**, los gráficos **Sesiones de usuario**, **Core Web Vitals** y **Errores** muestran una descripción general del lanzamiento de un despliegue o picos en las tasas de error. En esta página, los gráficos resaltan las versiones seleccionadas para su comparación y muestran todas las demás versiones en gris para ofrecer un contexto adicional.
 
 A medida que monitorizas tu versión, esto te ayuda a comparar el rendimiento de los despliegues de código con el código existente para verificar que el nuevo código funciona correctamente y que no han aparecido nuevos errores entre una versión y otra.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Comparación del seguimiento de despliegues en el navegador" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Comparación del seguimiento de despliegues del navegador" style="width:75%;">}}
 
 La pestaña **Problemas** enumera las diferencias en los errores detectados para cada una de las dos versiones, destacando:
 - Recuento de errores por versión
@@ -155,7 +155,7 @@ Estos widgets se pueden exportar a dashboards y monitores.
 
 Haz clic en cualquier fila de versiones de la tabla **Lista de Versiones*** para abrir una página de comparación de versiones, que te permitirá comparar dos versiones del mismo servicio. Por defecto, la versión seleccionada se compara con todas las versiones anteriores. Puedes cambiar la selección para comparar dos versiones cualesquiera en los últimos 30 días.
 
-De forma similar a los gráficos de la página **Información general de la aplicación**, los gráficos **Sesiones de usuario**, **Mobile Vitals** y **Errores** muestran una descripción general de la restauración de un despliegue o picos en las tasas de error. En esta página, los gráficos resaltan las versiones seleccionadas para su comparación y muestran todas las demás versiones en gris para ofrecer un contexto adicional.
+De forma similar a los gráficos de la página **Información general de la aplicación**, los gráficos **Sesiones de usuario**, **Core Web Vitals** y **Errores** muestran una descripción general del lanzamiento de un despliegue o picos en las tasas de error. En esta página, los gráficos resaltan las versiones seleccionadas para su comparación y muestran todas las demás versiones en gris para ofrecer un contexto adicional.
 
 A medida que monitorizas tu versión, esto te ayuda a comparar el rendimiento de los despliegues de código con el código existente para verificar que el nuevo código funciona correctamente y que no han aparecido nuevos errores entre una versión y otra.
 
