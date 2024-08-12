@@ -58,7 +58,12 @@ After you have set up Test Visibility, you can configure Auto Test Retries from 
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 
+#### Known limitations
+[jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
+
 [1]: /tests/explorer/
+[2]: https://www.npmjs.com/package/jest-image-snapshot
+[3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
 {{% /tab %}}
 
 {{< /tabs >}}
