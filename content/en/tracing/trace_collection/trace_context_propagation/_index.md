@@ -15,42 +15,45 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the tracing library.
+Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables correlation all traces and additional telemetry in a request. When automatic instrumentation is enabled, trace context propagation is handled automatically by the APM SDK.
 
-By default, the Datadog SDK will extract and inject distributed tracing headers using the following formats:
-- [**Datadog**][1] (takes higher precedence when extracting headers)
-- [**W3C Trace Context**][2]
+By default, the Datadog SDK extracts and injects distributed tracing headers using the following formats:
 
-This default behavior has been chosen to maximize compatibility with older versions of the Datadog SDK and other Datadog products, while still allowing for interoperability with other distributed tracing systems like OpenTelemetry.
+- [Datadog][1] (takes higher precedence when extracting headers)
+- [W3C Trace Context][2]
 
-## Customization
+This default configuration maximizes compatibility with older Datadog SDK versions and products while allowing interoperability with other distributed tracing systems like OpenTelemetry.
 
-You may want to customize the trace context propagation configuration if your applications communicate distributed tracing information in a different, supported format or if you want to prevent an application from either extracting or injecting distributed tracing headers.
+## Customize trace context propagation
 
-To customize the trace context propagation configuration of an instrumented application, you can use the following environment variables to configure the formats that are used for reading and writing distributed tracing headers. To enable a specific format, make sure to use the corresponding configuration value that the language SDK recognizes, as outlined in the **[Language support][6]** section.
+You may need to customize the trace context propagation configuration if your applications:
 
-<div class="alert alert-info">
-If multiple trace context propagation formats are enabled, the extraction attempt is done in the specified order, and the first valid trace context is used to continue the distributed trace. If additional valid trace contexts are found, the tracing information will be recorded as individual span links.</div>
+- Communicate distributed tracing information in a different supported format
+- Need to prevent extracting or injecting distributed tracing headers
+
+Use the following environment variables to configure formats for reading and writing distributed tracing headers. Refer to the [Language support][6] section for language-specific configuration values.
 
 `DD_TRACE_PROPAGATION_STYLE`
-: Specifies trace context propagation formats (in a comma-separated list) to be used for both extraction and injection. This may be overridden by the extract-specific or inject-specific configurations. <br>
-**Default:** `datadog,tracecontext`
+: Specifies trace context propagation formats for extraction and injection in a comma-separated list. May be overridden by extract-specific or inject-specific configurations.<br>
+**Default**: `datadog,tracecontext` <br>
+**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links.
 
 `OTEL_PROPAGATORS`
-: Specifies trace context propagation formats (in a comma-separated list) to be used for both extraction and injection. This configuration takes the lowest precedence and will be ignored if any other Datadog trace context propagation environment variable is set.<br>
-**Recommendation**: Only use this configuration when migrating an application from the OpenTelemetry SDK to the Datadog SDK. For more information on this configuration and other OpenTelemetry environment variables, see [Using OpenTelemetry Environment Variables with Datadog SDKs][9].
+: Specifies trace context propagation formats for both extraction and injection (comma-separated list). Lowest precedence; ignored if any other Datadog trace context propagation environment variable is set.<br>
+**Note**: Only use this configuration when migrating an application from the OpenTelemetry SDK to the Datadog SDK. For more information on this configuration and other OpenTelemetry environment variables, see [Using OpenTelemetry Environment Variables with Datadog SDKs][9].
 
 ### Advanced configuration
 
-In the majority of scenarios, you will want to both send and receive trace context headers using the same format. However, if your service needs to accept trace context headers in one format and send them in another format, you can customize them with the following configurations.
+Most services send and receive trace context headers using the same format. However, if your service needs to accept trace context headers in one format and send them in another, use these configurations:
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: Specifies trace context propagation formats (in a comma-separated list) to be used only for extraction. This configuration takes the highest precedence over all other configurations for configuring the extraction propagators.
+: Specifies trace context propagation formats for extraction only in a comma-separated list. Highest precedence for configuring extraction propagators.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: Specifies trace context propagation formats (in a comma-separated list) to be used only for injection. This configuration takes the highest precedence over all other configurations for configuring the injection propagators.
+: Specifies trace context propagation formats for injection only in comma-separated list. Highest precedence for configuring injection propagators.
 
 ## Supported formats
+
 The Datadog SDK supports the following trace context formats:
 
 | Format                 | Configuration Value           |
@@ -68,6 +71,7 @@ The Datadog SDK supports the following trace context formats:
 {{% tab "Java" %}}
 
 ### Supported formats
+
 The Datadog Java SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -82,6 +86,7 @@ The Datadog Java SDK supports the following trace context formats, including dep
 | [None][6]              | `none`              |
 
 ### Additional configuration
+
 In addition to the environment variable configuration, you can also update the propagators using System Property configuration:
 - `-Ddd.trace.propagation.style=datadog,b3multi`
 - `-Dotel.propagators=datadog,b3multi`
@@ -100,6 +105,7 @@ In addition to the environment variable configuration, you can also update the p
 {{% tab "Python" %}}
 
 ### Supported formats
+
 The Datadog Python SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -121,6 +127,7 @@ The Datadog Python SDK supports the following trace context formats, including d
 {{% tab "Ruby" %}}
 
 ### Supported formats
+
 The Datadog Ruby SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -132,6 +139,7 @@ The Datadog Ruby SDK supports the following trace context formats, including dep
 | [None][5]              | `none`              |
 
 ### Additional configuration
+
 In addition to the environment variable configuration, you can also update the propagators in code by using `Datadog.configure`:
 
 ```ruby
@@ -155,6 +163,7 @@ end
 {{% tab "Go" %}}
 
 ### Supported formats
+
 The Datadog Go SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -177,6 +186,7 @@ The Datadog Go SDK supports the following trace context formats, including depre
 {{% tab "NodeJS" %}}
 
 ### Supported formats
+
 The Datadog NodeJS SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -199,6 +209,7 @@ The Datadog NodeJS SDK supports the following trace context formats, including d
 {{% tab "PHP" %}}
 
 ### Supported formats
+
 The Datadog PHP SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -211,11 +222,12 @@ The Datadog PHP SDK supports the following trace context formats, including depr
 | [None][5]              | `none`              |
 
 ### Additional use cases
-For use cases specific to the Datadog PHP SDK, see the [PHP Trace Context Propagation][6] page.
+
+The following use cases are specific to the Datadog PHP SDK:
 
 {{% collapse-content title="Distributed tracing on PHP script launch" level="h4" %}}
 
-When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
+When a new PHP script is launched, the Datadog SDK automatically checks for the presence of Datadog headers for distributed tracing:
 - `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
 - `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
 - `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
@@ -225,7 +237,7 @@ When a new PHP script is launched, the tracer automatically checks for the prese
 
 {{% collapse-content title="Manually setting the distributed tracing context" level="h4" %}}
 
-To manually set this information in a CLI script on new traces or an existing trace, a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
+To manually set tracing information in a CLI script for new or existing traces, use the `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` function.
 
 ```php
 <?php
@@ -242,7 +254,7 @@ function processIncomingQueueMessage($message) {
 );
 ```
 
-Alternatively, starting with version **0.87.0**, if the raw headers are available, a function `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` is provided. Note that the header names must be in lowercase.
+For version **0.87.0** and later, if the raw headers are available, use the `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` function. **Note**: The header names must be in lowercase.
 
 ```php
 $headers = [
@@ -253,7 +265,7 @@ $headers = [
 \DDTrace\consume_distributed_tracing_headers($headers);
 ```
 
-To extract the trace context directly as headers, a function `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` is provided. Its sole optional argument accepts an array of injection style names. It defaults to the configured injection style.
+To extract the trace context directly as headers, use the `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` function.
 
 ```php
 $headers = DDTrace\generate_distributed_tracing_headers();
@@ -261,13 +273,13 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 // These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
 ```
 
+This function's optional argument accepts an array of injection style names. It defaults to the configured injection style.
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="RabbitMQ" level="h4" %}}
 
-Although the PHP tracer supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding a `basic_get` call and the corresponding message processing.
-
-Here is an example:
+The PHP APM SDK supports automatic tracing of the `php-amqplib/php-amqplib` library (version 0.87.0+). However, in some cases, your distributed trace may be disconnected. For example, when reading messages from a distributed queue using the `basic_get` method outside an existing trace, you need to add a custom trace around the `basic_get` call and corresponding message processing:
 
 ```php
 // Create a surrounding trace
@@ -296,13 +308,13 @@ Creating this surrounding trace to your consuming-processing logic ensures obser
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
-[6]: /tracing/trace_collection/trace_context_propagation/php
 
 {{% /tab %}}
 
 {{% tab "C++" %}}
 
 ### Supported formats
+
 The Datadog C++ SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
@@ -314,6 +326,7 @@ The Datadog C++ SDK supports the following trace context formats, including depr
 | [None][5]              | `none`              |
 
 ### Additional configuration
+
 In addition to the environment variable configuration, you can also update the propagators in code:
 
 ```cpp
@@ -347,11 +360,12 @@ int main() {
 ```
 
 ### Additional use cases
+
 {{% collapse-content title="Manually extract propagated context" level="h4" %}}
 
-Propagation context extraction can be accomplished by implementing a custom `DictReader` interface and calling `Tracer::extract_span` or `Tracer::extract_or_create_span`.
+To extract propagation context, implement a custom `DictReader` interface and call `Tracer::extract_span` or `Tracer::extract_or_create_span`.
 
-Here is an implementation to extract propagation context from HTTP Headers:
+Here is an example of extracting propagation context from HTTP Headers:
 
 ```cpp
 #include <datadog/dict_reader.h>
@@ -401,7 +415,7 @@ void handle_http_request(const Request& request, datadog::tracing::Tracer& trace
 
 {{% collapse-content title="Manually inject context for distributed tracing" level="h4" %}}
 
-Propagation context injection can be accomplished by implementing the `DictWriter` interface and calling `Span::inject` on a span instance.
+To inject propagation context, implement the `DictWriter` interface and call `Span::inject` on a span instance:
 
 ```cpp
 #include <datadog/dict_writer.h>
@@ -448,6 +462,7 @@ void handle_http_request(const Request& request, dd::Tracer& tracer) {
 {{% tab ".NET" %}}
 
 ### Supported formats
+
 The Datadog .NET SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value           |
@@ -465,14 +480,16 @@ The Datadog .NET SDK supports the following trace context formats, including dep
 
 {{% collapse-content title="Prior configuration defaults" level="h4" %}}
 
-- Starting from version [2.48.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.48.0), the default propagation style is `datadog, tracecontext`, so the Datadog headers are used, followed by the W3C Trace Context. Prior to version 2.48.0, the order was `tracecontext, Datadog` for both extraction and injection propagation.  Prior to version [2.22.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0), only the `Datadog` injection style was enabled.
-- Starting from version [2.42.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0), when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.
+- As of version [2.48.0][6], the default propagation style is `datadog, tracecontext`. This means Datadog headers are used first, followed by W3C Trace Context.
+- Prior to version 2.48.0, the order was `tracecontext, Datadog` for both extraction and injection propagation.
+- Prior to version [2.22.0][7], only the `Datadog` injection style was enabled.
+- As of version [2.42.0][8], when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Distributed tracing with message queues" level="h4" %}}
 
-In most cases, headers extraction and injection are transparent. There are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In that case, you can add a custom trace using the following code:
+In most cases, header extraction and injection are automatic. However, there are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In these cases, you can add a custom trace using the following code:
 
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
@@ -564,6 +581,10 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.48.0
+[7]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0
+[8]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0
+
 
 {{% /tab %}}
 
@@ -573,7 +594,7 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 ### Datadog format
 
-When the Datadog SDK is configured with the Datadog format for extraction or injection (possibly both), the Datadog SDK will interact with the following request headers:
+When the Datadog SDK is configured with the Datadog format for extraction or injection (possibly both), the Datadog SDK interacts with the following request headers:
 
 `x-datadog-trace-id`
 : Specifies the lower 64-bits of the 128-bit trace-id, in decimal format.
@@ -582,7 +603,7 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 : Specifies the 64-bits span-id of the current span, in decimal format.
 
 `x-datadog-origin`
-: Specifies the Datadog product that initiated the trace, such as [Real User Monitoring][7] or [Synthetics][8]. If this headers is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
+: Specifies the Datadog service that initiated the trace, such as [Real User Monitoring][7] or [Synthetic Monitoring][8]. If this header is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
 
 `x-datadog-sampling-priority`
 : Specifies the sampling decision made for the represented span as an integer, in decimal format.
@@ -592,9 +613,9 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 
 ### None format
 
-When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK will _not_ interact with request headers, meaning that the corresponding context propagation operation will do nothing.
+When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK does _not_ interact with request headers, meaning that the corresponding context propagation operation does nothing.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
