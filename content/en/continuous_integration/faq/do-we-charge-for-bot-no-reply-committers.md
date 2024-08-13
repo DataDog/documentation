@@ -6,7 +6,7 @@ further_reading:
   text: "Learn about CI Visibility"
 ---
 
-[Fill in the description.]
+Datadog does not charge for bot or actions made in the GitHub UI. These types of committers are excluded from billing calculations.
 
 ## Further Reading
 
