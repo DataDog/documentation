@@ -144,6 +144,12 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
+# Automatically download the latest module from websites-sources repo
+update_websites_sources_module:
+	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+	node_modules/hugo-bin/vendor/hugo mod clean
+	node_modules/hugo-bin/vendor/hugo mod tidy
+	cat go.mod
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################
@@ -202,11 +208,6 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
-
-update_websites_sources_module:
-	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
-	node_modules/hugo-bin/vendor/hugo mod clean
-	cat go.mod
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead
