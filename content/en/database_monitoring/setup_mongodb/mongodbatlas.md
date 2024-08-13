@@ -53,6 +53,9 @@ The Datadog Agent requires read-only access to the MongoDB Atlas Cluster to coll
 6. Click **Add User**.
 7. Note the username and password for the monitoring user, so you can configure the Agent.
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install and configure the Agent
 
 To monitor your MongoDB Atlas Cluster, you must install and configure the Datadog Agent on a host that can [remotely access][1] your MongoDB Atlas Cluster. This host can be a Linux host, a Docker container, or a Kubernetes pod.
