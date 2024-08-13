@@ -18,6 +18,24 @@ export class Fence extends CustomHtmlComponent {
       codeContents,
       `--formatter html --html-only --lexer="${language}"`
     );
-    return `<div>${formattedCodeContents}</div>`;
+    return `<div class="code-snippet-wrapper">
+  <div class="code-filename-wrapper d-flex justify-content-end collapsible">
+    <div class="js-code-block-visibility-toggle">
+      <div class="chevron chevron-down d-none"></div>
+      <div class="chevron chevron-up"></div>
+    </div>  
+  </div>
+  <div class="code-snippet">
+    <div class="code-button-wrapper position-absolute">
+      <button class="btn text-primary js-copy-button">Copy</button>
+    </div>
+    <div class="highlight code-snippet js-appended-copy-btn">
+      <div class="code-button-wrapper position-absolute">
+        <button class="btn text-primary js-copy-button">Copy</button>
+      </div>
+      ${formattedCodeContents}
+    </div>
+    </div>
+</div>`;
   }
 }

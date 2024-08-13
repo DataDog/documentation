@@ -4,6 +4,8 @@ title: Code
 
 ### Plain code fence
 
+Markdoc allows the custom rendering of code fences.
+
 ```javascript
 // Function to compute the product of p1 and p2
 function myFunction(p1, p2) {
@@ -11,6 +13,23 @@ function myFunction(p1, p2) {
 }
 ```
 
-### `code` shortcode
+### Indent check
 
-TODO
+1. Do a thing. Here's the code to do that thing:
+    ```python
+    # Function to compute the product of p1 and p2
+    def myFunction(p1, p2):
+        return p1 * p2
+    ```
+2. Do another thing. There's no code for this thing.
+3. This is a really complicated thing, hoo boy!
+    - Step 1: Step one would go here.
+    - Step 2: Step two would go here.
+    - Step 3: Step three would go here. It has some code though!
+        ```javascript
+        // Function to compute the product of p1 and p2
+        function myFunction(p1, p2) {
+          return p1 * p2;
+        }
+        ```
+    - Step 4: Step four would go here.
