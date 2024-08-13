@@ -31,7 +31,7 @@ This change has the following impact on how notifications are generated for CSM 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
 2. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled for individual detection rules.
 
-<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel.</div>
+<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can use the new time aggregation mechanism.</div>
 
 3. Support for CSM Misconfigurations signals will be deprecated in late 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
@@ -48,7 +48,7 @@ When you create a notification rule, you are now required to choose between two 
 
 - Notification rules can now be configured for identity risks and attack paths.
 - CSM Misconfigurations notifications now contain the full finding metadata. Previously, the notification contained only limited signal metadata.
-- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported.
+- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date. Terraform support for Notification Rules will be available at a later date. 
 
 ## How to migrate existing notifications
 
@@ -56,7 +56,7 @@ When you create a notification rule, you are now required to choose between two 
 
 To migrate notifications that are configured for individual detection rules:
 
-1. On the [Misconfiguration Rules page][1], select a detection rule that has notifications enabled for it.
+1. On the [Misconfiguration Rules page][3], select a detection rule that has notifications enabled for it.
 2. In the banner displayed in the **Set severity and notifications** section, click **Update in 1-Click**.
 
    The **Notification Rules** editor page is displayed with the fields pre-populated with the information from the rule.
@@ -70,7 +70,7 @@ To migrate notifications that are configured for individual detection rules:
 
 [1]: /security/notifications/rules/
 [2]: /security/misconfigurations
-[3]: https://app.datadoghq.com/security/configuration/compliance/rules
+[3]: https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20notification%3A%2A%20&deprecated=hide&groupBy=severity&sort=date
 [4]: /security/cloud_security_management/ 
 [5]: /security/application_security/
 [6]: /security/cloud_siem/
