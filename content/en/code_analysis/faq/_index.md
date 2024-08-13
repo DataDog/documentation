@@ -88,7 +88,7 @@ the `CODEOWNERS` file and its mapping within Datadog.
 When Datadog detects the service for your code violation or library, it automatically
 associates the team attached to the service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
 is associated with `myservice`, then the team `myservice` will be associated to any violation
-for this file.
+detected in this file.
 
 If no services or teams are found, Datadog uses the `CODEOWNERS` [file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. You need
