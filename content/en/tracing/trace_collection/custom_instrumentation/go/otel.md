@@ -186,9 +186,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [6]: https://opentelemetry.io/docs/instrumentation/go/
-[9]: /tracing/trace_collection/trace_context_propagation/go/
+[9]: /tracing/trace_collection/trace_context_propagation/
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[13]: /tracing/trace_collection/trace_context_propagation/go/
+[13]: /tracing/trace_collection/trace_context_propagation/
 [14]: /tracing/security
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context
