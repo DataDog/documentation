@@ -14,6 +14,7 @@
         "analyze-left-nav": "npm run build && node ./dist/scripts/analyzeLeftNav.js"
     },
     "dependencies": {
+        "chroma-highlight": "^2.4.2",
         "js-yaml": "^4.1.0",
         "lit": "^3.1.4",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",

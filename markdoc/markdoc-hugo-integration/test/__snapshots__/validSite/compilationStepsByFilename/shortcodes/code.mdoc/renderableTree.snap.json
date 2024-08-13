@@ -13,9 +13,9 @@
     },
     {
       "$$mdtype": "Tag",
-      "name": "pre",
+      "name": "Fence",
       "attributes": {
-        "data-language": "javascript"
+        "language": "javascript"
       },
       "children": [
         "// Function to compute the product of p1 and p2\nfunction myFunction(p1, p2) {\n  return p1 * p2;\n}\n"

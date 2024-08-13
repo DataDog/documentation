@@ -5,6 +5,7 @@ import { siteRegionDefinition, SiteRegion } from './components/siteRegion';
 import { tabDefinition, Tab } from './components/tab';
 import { tabsDefinition, Tabs } from './components/tabs';
 import { hugoMarkdownDefinition, HugoMarkdown } from './components/hugoMarkdown';
+import { fenceDefinition, Fence } from './components/fence';
 
 export const transformConfig = {
   tags: {
@@ -15,6 +16,9 @@ export const transformConfig = {
     tabs: tabsDefinition,
     tab: tabDefinition,
     'hugo-markdown': hugoMarkdownDefinition
+  },
+  nodes: {
+    fence: fenceDefinition
   }
 };
 
@@ -25,5 +29,6 @@ export const customComponents = {
   SiteRegion,
   Tabs,
   Tab,
-  HugoMarkdown
+  HugoMarkdown,
+  Fence
 };

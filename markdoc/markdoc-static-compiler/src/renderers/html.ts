@@ -59,6 +59,23 @@ export default function render(
     return '';
   }
 
+  if (node.$$mdtype === 'Node') {
+    const nodeType = node.type as string;
+    if (nodeType === 'fence') {
+      console.log('fence encountered in renderer:', JSON.stringify(node, null, 2));
+      console.log('components:', JSON.stringify(components, null, 2));
+    }
+    if (
+      nodeType &&
+      typeof nodeType === 'string' &&
+      components &&
+      nodeType in components
+    ) {
+      const Klass = components[nodeType];
+      return new Klass(node, config, components).render();
+    }
+  }
+
   if (!isTag(node)) {
     return '';
   }
