@@ -1,0 +1,41 @@
+---
+title: Track Dashboard Usage
+disable_toc: false
+further_reading:
+- link: "account_management/audit_trail/"
+  tag: "Documentation"
+  text: "Set up Audit Trail"
+---
+
+## Overview
+
+Audit Trail provides Datadog administrators visibility into who within the organization is using Datadog and how they are using Datadog. This guide walks you through how you can see usage information for a specific dashboard.
+
+## Get usage information for a specific dashboard
+
+### Get dashboard ID
+
+You need the ID of the dashboard to get usage information for the dashboard.
+
+1. Navigate to [Dashboards][1].
+1. Select your dashboard.
+1. The dashboard ID is in the URL, after `https://app.datadoghq.com/dashboard/`. For example, if the dashboard URL is: `https://app.datadoghq.com/dashboard/pte-tos-7kc/escalations-report?fromUser=false`. The dashboard's ID is `pte-tos-7kc`.
+
+### View dashboard usage in Audit Trail
+
+To see usage information for the dashboard, you can use Audit Trail to search for all API `GET` requests for that dashboard ID.
+
+1. Navigate to [Audit Trail][2].
+2. In the search box, enter the query: `@http.status_code:200 @http.method:GET @http.url_details.path:/api/v1/dashboard/<dashboard_id>`. Replace `<dashboard_id>` with the dashboard ID you got earlier. This query also narrows down the events to successful requests only.
+Alternatively, you can use the facet panel on the left side of the page to formulate the search query.
+3. Select the timeframe in the upper right side of the page to see the events for a specific time period.
+4. You can set the `group into fields` section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email`, you can see a top list of users, based on email, who accessed the dashboard.
+5. See [Create a dashboard or graph][3] if you want to put this information into a dashboard or graph.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: https://app.datadoghq.com/audit-trail
+[3]: /account_management/audit_trail/#create-a-dashboard-or-a-graph
