@@ -54,7 +54,7 @@ Para realizar un seguimiento del recuento de sesiones tarificadas bajo un SKU RU
 1. Haz clic en **+ Añadir widgets** para abrir el panel lateral de widgets y aplicaciones.
 2. Selecciona **Series temporales** en **Gráficos**.
 3. En la sección **Grafica tus datos**, selecciona **Métricas** y `datadog.estimated_usage.rum.sessions` en los menús desplegables.
-4. En la cláusula `sum`, selecciona la etiqueta `sku` en el menú desplegable. 
+4. En la cláusula `sum`, selecciona la etiqueta (tag) `sku` en el menú desplegable. 
 5. Configura tus preferencias de visualización e introduce un nombre para tu gráfico.
 6. Haz clic en **Guardar**.
 
