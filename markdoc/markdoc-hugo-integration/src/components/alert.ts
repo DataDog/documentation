@@ -1,4 +1,4 @@
-import { CustomHtmlComponent, Tag, Config } from 'markdoc-static-compiler';
+import { CustomHtmlComponent } from 'markdoc-static-compiler';
 
 export const alertDefinition = {
   render: 'Alert',
@@ -6,7 +6,7 @@ export const alertDefinition = {
     level: {
       type: String,
       default: 'info',
-      matches: ['info', 'warning']
+      matches: ['info', 'warning', 'danger']
     }
   }
 };
@@ -14,6 +14,6 @@ export const alertDefinition = {
 export class Alert extends CustomHtmlComponent {
   render() {
     const level = this.tag.attributes.level || 'info';
-    return `<div class="alert alert-${level}">${this.contents}</div>`;
+    return `<div class="alert alert-${level} markdoc-alert">${this.contents}</div>`;
   }
 }

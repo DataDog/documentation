@@ -1,0 +1,56 @@
+---
+title: Tabs demo
+page_preferences:
+  - display_name: "Color"
+    id: color
+    options_source: primary_color_options
+---
+
+## Example
+
+Usually there's a little bit of text here, introducing the tabs.
+
+{% tabs %}
+{% tab title="Tab 1" %}
+{% alert level="info" %}
+Tabs can contain other Markdoc tags, like this alert. They could even contain other tabs, in theory! (Don't do that.)
+{% /alert %}
+
+### Customization demo
+
+<!-- blue -->
+{% if equals($color, "blue") %}
+The selected color is **blue**.
+{% /if %}
+
+<!-- yellow -->
+{% if equals($color, "yellow") %}
+The selected color is **yellow**.
+{% /if %}
+
+<!-- red -->
+{% if equals($color, "red") %}
+The selected color is **red**.
+{% /if %}
+
+### Partial demo
+
+Tabs can include partials, such as these two:
+
+{% partial file="datadog_link.mdoc" /%}
+
+{% partial file="google_link.mdoc" /%}
+
+### Links
+
+Links in Markdoc tabs behave the same as any other link on the page. There's no need to keep separate lists of links inside each tab. Example link: [Markdoc docs][1]. Tab 2 contains the second example link.
+{% /tab %}
+{% tab title="Tab 2" %}
+This is the content for Tab 2.
+
+Example link: [TypeScript docs][2].
+{% /tab %}
+{% /tabs %}
+
+[1]: https://markdoc.dev/docs
+[2]: https://www.typescriptlang.org/docs

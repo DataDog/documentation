@@ -55,36 +55,51 @@ menu:
       url: markdoc_testing/traffic_light_colors/
       parent: markdoc_testing
       weight: 2
+    - name: Plain Markdown Syntax
+      identifier: markdoc_testing_plain_syntax
+      url: markdoc_testing/plain_markdown_syntax
+      parent: markdoc_testing
+      weight: 3
+    - name: Markdoc File
+      identifier: markdoc_testing_plain_syntax_markdoc
+      url: markdoc_testing/plain_markdown_syntax/markdoc
+      parent: markdoc_testing_plain_syntax
+      weight: 301
+    - name: Markdown File (Control)
+      identifier: markdoc_testing_plain_syntax_markdown
+      url: markdoc_testing/plain_markdown_syntax/markdown
+      parent: markdoc_testing_plain_syntax
+      weight: 302
     - name: Shortcodes
       identifier: markdoc_testing_shortcodes
       url: markdoc_testing/shortcodes/
       parent: markdoc_testing
-      weight: 3
+      weight: 4
     - name: Tabs
       identifier: markdoc_testing_shortcodes_tabs
       url: markdoc_testing/shortcodes/tabs
       parent: markdoc_testing_shortcodes
-      weight: 301
+      weight: 401
     - name: Region
       identifier: markdoc_testing_shortcodes_region
       url: markdoc_testing/shortcodes/region
       parent: markdoc_testing_shortcodes
-      weight: 302
-    - name: Images
+      weight: 402
+    - name: Images and Videos
       identifier: markdoc_testing_shortcodes_images
-      url: markdoc_testing/shortcodes/images
+      url: markdoc_testing/shortcodes/images_and_videos
       parent: markdoc_testing_shortcodes
-      weight: 303
+      weight: 403
     - name: Alerts
       identifier: markdoc_testing_shortcodes_alerts
       url: markdoc_testing/shortcodes/alerts
       parent: markdoc_testing_shortcodes
-      weight: 304
+      weight: 404
     - name: Code
       identifier: markdoc_testing_shortcodes_code
       url: markdoc_testing/shortcodes/code
       parent: markdoc_testing_shortcodes
-      weight: 305
+      weight: 405
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/

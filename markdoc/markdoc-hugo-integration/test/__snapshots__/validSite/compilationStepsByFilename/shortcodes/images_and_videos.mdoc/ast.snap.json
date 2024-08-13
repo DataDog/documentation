@@ -1,0 +1,341 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {
+    "frontmatter": "title: Images and Videos"
+  },
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        4,
+        5
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            4,
+            5
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                4,
+                5
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Images"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 4
+                },
+                "end": {
+                  "line": 5
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 4
+            },
+            "end": {
+              "line": 5
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 4
+        },
+        "end": {
+          "line": 5
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        6,
+        7
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            6,
+            7
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                6,
+                7
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "An image should appear below:"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 6
+                },
+                "end": {
+                  "line": 7
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 6
+            },
+            "end": {
+              "line": 7
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 6
+        },
+        "end": {
+          "line": 7
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        8,
+        9
+      ],
+      "inline": false,
+      "attributes": {
+        "src": "account_management/api-key.png",
+        "alt": "Navigate to the API Keys page for your organization in Datadog",
+        "style": "width:80%;"
+      },
+      "children": [],
+      "type": "tag",
+      "tag": "img",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "src",
+          "value": "account_management/api-key.png"
+        },
+        {
+          "type": "attribute",
+          "name": "alt",
+          "value": "Navigate to the API Keys page for your organization in Datadog"
+        },
+        {
+          "type": "attribute",
+          "name": "style",
+          "value": "width:80%;"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 8
+        },
+        "end": {
+          "line": 9
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        10,
+        11
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            10,
+            11
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                10,
+                11
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Videos"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 10
+                },
+                "end": {
+                  "line": 11
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 10
+            },
+            "end": {
+              "line": 11
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 10
+        },
+        "end": {
+          "line": 11
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        12,
+        13
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            12,
+            13
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                12,
+                13
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "TODO"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 12
+                },
+                "end": {
+                  "line": 13
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 12
+            },
+            "end": {
+              "line": 13
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 12
+        },
+        "end": {
+          "line": 13
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

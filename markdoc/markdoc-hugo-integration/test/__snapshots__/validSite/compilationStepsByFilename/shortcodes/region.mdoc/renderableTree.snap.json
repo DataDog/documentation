@@ -1,0 +1,142 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "region-param"
+          ]
+        },
+        " shortcode"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h3",
+      "attributes": {},
+      "children": [
+        "Body copy"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "The user's DD site is ",
+        {
+          "$$mdtype": "Tag",
+          "name": "RegionParam",
+          "attributes": {
+            "key": "dd_site"
+          },
+          "children": []
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h3",
+      "attributes": {},
+      "children": [
+        "Code"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "The user's DD site is ",
+        {
+          "$$mdtype": "Tag",
+          "name": "RegionParam",
+          "attributes": {
+            "key": "dd_site",
+            "code": true
+          },
+          "children": []
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "site-region"
+          ]
+        },
+        " shortcode"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "SiteRegion",
+      "attributes": {
+        "region": "us"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "Your site region is ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "US"
+              ]
+            },
+            ", which is why this line appears. It should be the only line in this section."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "SiteRegion",
+      "attributes": {
+        "region": "eu"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "Your site region is ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "EU"
+              ]
+            },
+            ", which is why this line appears. It should be the only line in this section."
+          ]
+        }
+      ]
+    }
+  ]
+}

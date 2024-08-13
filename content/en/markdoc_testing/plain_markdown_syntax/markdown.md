@@ -1,0 +1,51 @@
+---
+title: Plain Markdown Syntax (Control)
+---
+
+**This file has NOT been processed by Markdoc.**
+
+## Description list
+
+Service
+: Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.
+
+Resource
+: Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.
+
+`clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`
+: Required. A list of node selector terms. The terms are ORed.
+
+`site`
+: Set the site of the Datadog intake for Agent data:  {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+
+## Table
+
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Row 1    | Row 1    | Row 1    |
+| Row 2    | Row 2    | Row 2    |
+| Row 3    | Row 3    | Row 3    |
+
+## Lists
+
+### Unordered list
+
+- Item one
+- Item two
+- Item three
+
+### Ordered list
+
+1. Item one
+2. Item two
+3. Item three
+
+### Nested list
+
+1. Item one
+    - Sub-item one
+    - Sub-item two
+2. Item two
+    - Sub-item one
+    - Sub-item two
+

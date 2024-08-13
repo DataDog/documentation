@@ -74,14 +74,18 @@ export class PageBuilder {
       renderableTree
     });
 
-    // Build the page content HTML
-    let pageContents = `
-<div id="markdoc-chooser">${chooserHtml}</div>
-<div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(
+    let articleHtml = MarkdocStaticCompiler.renderers.html(
       renderableTree,
       undefined,
       customComponents
-    )}</div>
+    );
+
+    articleHtml = prettier.format(articleHtml, { parser: 'html' });
+
+    // Build the page content HTML
+    let pageContents = `
+<div id="markdoc-chooser">${chooserHtml}</div>
+<div id="markdoc-content">${articleHtml}</div>
 ${rerenderScript}
 `;
 
@@ -92,9 +96,9 @@ ${rerenderScript}
       });
     }
 
-    // if (args.debug) {
-    pageContents = prettier.format(pageContents, { parser: 'html' });
-    // }
+    if (args.debug) {
+      pageContents = prettier.format(pageContents, { parser: 'html' });
+    }
 
     if (args.outputFormat === 'markdown') {
       pageContents = this.#addFrontmatter({

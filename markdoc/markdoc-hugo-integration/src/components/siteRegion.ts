@@ -1,4 +1,4 @@
-import { CustomHtmlComponent, Tag, Config } from 'markdoc-static-compiler';
+import { CustomHtmlComponent } from 'markdoc-static-compiler';
 
 export const siteRegionDefinition = {
   render: 'SiteRegion',

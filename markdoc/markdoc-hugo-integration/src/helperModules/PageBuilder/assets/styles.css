@@ -28,13 +28,18 @@
 }
 .alert.alert-info p {
     color: rgb(31, 92, 122);
+}
+.alert.alert-warning p {
+    color: #60451f;
+}
+.alert.alert-danger p {
+    color: #82322f;
+}
+.alert.markdoc-alert p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
     margin-bottom: 0;
 }
-.alert.alert-warning p {
-    color: #60451f;
-    font-size: 16px;
-    font-family: nationalweb, Helvetica, Arial, sans-serif;
-    margin-bottom: 0;
+.alert.markdoc-alert p + p {
+    margin-top: 16px;
 }

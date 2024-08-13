@@ -1,8 +1,6 @@
 sitewide_pref_values:
   - display_name: .NET
     id: dot_net
-  - display_name: Add hostname
-    id: add_hostname
   - display_name: Agent
     id: agent
   - display_name: v5

@@ -1,9 +1,9 @@
-import { CustomHtmlComponent, Tag, Config } from 'markdoc-static-compiler';
+import { CustomHtmlComponent, Config, Node } from 'markdoc-static-compiler';
 import { spinalcase } from 'stringcase';
 
 export const tabDefinition = {
   render: 'Tab',
-  transform(node, config) {
+  transform(node: Node, config: Config) {
     const label = node.annotations[0].value;
     if (!label) {
       console.log('Tab node:', JSON.stringify(node, null, 2));

@@ -1,0 +1,49 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Images"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "An image should appear below:"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "Img",
+      "attributes": {
+        "src": "account_management/api-key.png",
+        "alt": "Navigate to the API Keys page for your organization in Datadog",
+        "style": "width:80%;"
+      },
+      "children": []
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Videos"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "TODO"
+      ]
+    }
+  ]
+}

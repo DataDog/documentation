@@ -4,6 +4,7 @@ import { regionParamDefinition, RegionParam } from './components/regionParam';
 import { siteRegionDefinition, SiteRegion } from './components/siteRegion';
 import { tabDefinition, Tab } from './components/tab';
 import { tabsDefinition, Tabs } from './components/tabs';
+import { hugoMarkdownDefinition, HugoMarkdown } from './components/hugoMarkdown';
 
 export const transformConfig = {
   tags: {
@@ -12,7 +13,8 @@ export const transformConfig = {
     'region-param': regionParamDefinition,
     'site-region': siteRegionDefinition,
     tabs: tabsDefinition,
-    tab: tabDefinition
+    tab: tabDefinition,
+    'hugo-markdown': hugoMarkdownDefinition
   }
 };
 
@@ -22,5 +24,6 @@ export const customComponents = {
   RegionParam,
   SiteRegion,
   Tabs,
-  Tab
+  Tab,
+  HugoMarkdown
 };
