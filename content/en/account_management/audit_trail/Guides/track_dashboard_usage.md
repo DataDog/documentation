@@ -24,7 +24,7 @@ You need the dashboard's ID to get usage information for the dashboard.
 
 ### View dashboard usage in Audit Trail
 
-To see usage information for the dashboard, use Audit Trail to search for all API `GET` requests what that dashboard's ID.
+To see usage information for the dashboard, use Audit Trail to search for all API `GET` requests for that dashboard ID.
 
 1. Navigate to [Audit Trail][2].
 2. In the search bar, enter the query: `@http.status_code:200 @http.method:GET @http.url_details.path:/api/v1/dashboard/<dashboard_id>`. Replace `<dashboard_id>` with the dashboard ID you copied earlier. If the dashboard ID is `pte-tos-7kc`, the search query looks like this:
