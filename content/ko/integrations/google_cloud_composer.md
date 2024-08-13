@@ -27,7 +27,7 @@ version: '1.0'
 
 Google Cloud Composer는 클라우드 및 온프레미스 데이터센터 전반에 걸쳐 파이프라인을 작성, 예약 및 모니터링할 수 있도록 도와드리는 완전관리형 워크플로우 오케스트레이션 서비스입니다.
 
-Datadog Google Cloud Platform 통합을 사용하여 Cloud Composer에서 메트릭을 수집합니다.
+Datadog Google Cloud Platform 통합을 사용하여 Google Cloud Composer에서 메트릭을 수집합니다.
 
 ## 설정
 
