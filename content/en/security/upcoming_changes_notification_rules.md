@@ -48,7 +48,7 @@ When you create a notification rule, you are now required to choose between two 
 
 - Notification rules can now be configured for identity risks and attack paths.
 - CSM Misconfigurations notifications now contain the full finding metadata. Previously, the notification contained only limited signal metadata.
-- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date. Terraform support will be introduced for Notification Rules. 
+- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date. Terraform support for Notification Rules will be available at a later date. 
 
 ## How to migrate existing notifications
 
