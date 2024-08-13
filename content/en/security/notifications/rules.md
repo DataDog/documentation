@@ -7,7 +7,6 @@ aliases:
   - /security_platform/notifications/rules/
   - /security/notification_profiles/
   - /security/notification_rules/
-  - /security/upcoming_changes_notification_rules/
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
