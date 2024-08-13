@@ -54,7 +54,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-py` version 0.44.0+.
 
-To enable the new [timeline feature](#span-execution-timeline-view)
+To enable the [timeline feature](#span-execution-timeline-view):
 
 - Upgrade `dd-trace-py` to version 2.10.5 or later
 - Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
