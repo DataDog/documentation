@@ -34,7 +34,7 @@ Notification rules are predefined sets of conditions that automate the process o
 
 ## Create notification rules
 
-To create a notification rule, you start by specifying the conditions under which the rule should be triggered. These conditions may include criteria such as severity, detection rule type, tags, and attributes. When an issue matches the defined criteria, the rule automatically sends notifications to the designated recipients.
+To create a notification rule, specify the conditions under which the rule should be triggered. These conditions may include criteria such as severity, detection rule type, tags, and attributes. When an issue matches the defined criteria, the rule automatically sends notifications to the designated recipients.
 
 <div class="alert alert-info">As you configure the rule, a preview of issues matching the notification rule conditions appears on the <strong>Preview of Matching Results</strong> panel. This preview helps you determine if your notification rule is too specific or too broad, allowing you to adjust the criteria accordingly for optimal coverage.</div>
 
