@@ -45,7 +45,7 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
 1. From the [Workflow Automation][1] page, click **New Workflow**.
-1. Click **Auto Generate**.
+1. Click **<i class="icon-bits-ai"></i> Build with Bits AI**.
 1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to create your app.
 
