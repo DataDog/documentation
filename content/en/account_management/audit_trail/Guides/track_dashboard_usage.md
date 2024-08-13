@@ -19,14 +19,18 @@ You need the dashboard's ID to get usage information for the dashboard.
 
 1. Navigate to [Dashboards][1].
 1. Select your dashboard.
-1. The dashboard ID is in the dashboard URL, after `https://app.datadoghq.com/dashboard/`. For example, if the dashboard URL is: `https://app.datadoghq.com/dashboard/pte-tos-7kc/escalations-report?fromUser=false`. The dashboard's ID is `pte-tos-7kc`.
+1. The dashboard ID is in the dashboard URL, located after `https://app.datadoghq.com/dashboard/`. For example, if the dashboard URL is `https://app.datadoghq.com/dashboard/pte-tos-7kc/escalations-report`, the dashboard ID is `pte-tos-7kc`.
+1. Copy the dashboard ID.
 
 ### View dashboard usage in Audit Trail
 
 To see usage information for the dashboard, use Audit Trail to search for all API `GET` requests what that dashboard's ID.
 
 1. Navigate to [Audit Trail][2].
-2. In the search bar, enter the query: `@http.status_code:200 @http.method:GET @http.url_details.path:/api/v1/dashboard/<dashboard_id>`. Replace `<dashboard_id>` with the dashboard ID. `@http.status_code:200` narrows down the results to successful requests only.<br>**Note**: You can also use the facet panel on the left side of the page to formulate the search query.
+2. In the search bar, enter the query: `@http.status_code:200 @http.method:GET @http.url_details.path:/api/v1/dashboard/<dashboard_id>`. Replace `<dashboard_id>` with the dashboard ID you copied earlier. If the dashboard ID is `pte-tos-7kc`, the search query looks like this:
+{{< img src="account_management/audit_logs/dashboard_access_query.png" alt="Search query for all successful GET requests for a the dashboard ID pte-tos-7kc" style="width:100%;" >}}
+`@http.status_code:200` narrows down the results to successful requests only.
+<br>**Note**: You can also use the facet panel on the left side of the page to formulate the search query.
 3. Select the timeframe in the upper right side of the page to see the events for a specific time period.
 4. You can configure the **Group into fields** section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email` and click **Top List** in the **Visualize as** section, you get a top list of users who accessed the dashboard.
 5. See [Create a dashboard or graph][3] if you want to put this information into a dashboard or graph.
