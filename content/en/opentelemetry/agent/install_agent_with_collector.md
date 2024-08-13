@@ -115,7 +115,7 @@ datadog:
         hostPort: "4318"
         name: otel-http
    {{< /code-block >}}
-   <div class="alert alert-info"><p>It is required to set the <code>hostPort</code> in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the <code>otel-agent</code> is assigned.</p><p>Alternatively, if you doesn't want to expose the port, you can use the agent service instead via <code>&lt;SERVICE_NAME&gt;.&lt;SERVICE_NAMESPACE&gt;.svc.cluster.local</code>.</p></div>
+   <div class="alert alert-info"><p>It is required to set the <code>hostPort</code> in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.</p><p>Alternatively, if you doesn't want to expose the port, you can use the agent service instead via <code>&lt;SERVICE_NAME&gt;.&lt;SERVICE_NAMESPACE&gt;.svc.cluster.local</code>.</p></div>
 1. (Optional) Enable additional Datadog features.
    <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/"> pricing page</a> and talk to your CSM before proceeding.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
@@ -191,9 +191,9 @@ receivers:
   otlp:
     protocols:
       grpc:
-         endpoint: 0.0.0.0:{{ include "get-port-number-from-name" (dict "ports" .Values.datadog.otelCollector.ports "portName" "otel-grpc") }}
+         endpoint: 0.0.0.0:4317
       http:
-         endpoint: 0.0.0.0:{{ include "get-port-number-from-name" (dict "ports" .Values.datadog.otelCollector.ports "portName" "otel-http") }}
+         endpoint: 0.0.0.0:4318
 exporters:
   debug:
     verbosity: detailed
