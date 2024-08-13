@@ -3,29 +3,29 @@ disable_toc: false
 further_reading:
 - link: /real_user_monitoring/guide/setup-feature-flag-data-collection/
   tag: Documentación
-  text: Configurar la recopilación de datos de marcadores de funciones
+  text: Configurar la recopilación de datos de indicadores de características
 - link: /real_user_monitoring/explorer/
   tag: Documentación
   text: Más información sobre el Explorador RUM
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: Blog
-  text: Para garantizar la seguridad de la versión con el seguimiento de los marcadores
-    de funciones en Datadog RUM
-title: Seguimiento de marcadores de funciones
+  text: Para garantizar la seguridad de la versión con el seguimiento de los indicadores
+    de características en Datadog RUM
+title: Seguimiento de indicadores de características
 ---
 
 ## Información general
 
-Los datos de los indicadores de funciones te ofrecen una mayor visibilidad de tu experiencia de usuario y de la monitorización del rendimiento, ya que te permiten determinar a qué usuarios se les está mostrando una función específica y si algún cambio que introduces repercute en tu experiencia de usuario o afecta negativamente al rendimiento.
+Los datos de los indicadores de características te ofrecen una mayor visibilidad de tu experiencia de usuario y de la monitorización del rendimiento, ya que te permiten determinar a qué usuarios se les está mostrando una función específica y si algún cambio que introduces repercute en tu experiencia de usuario o afecta negativamente al rendimiento.
 
-Si enriqueces tus datos RUM con datos de indicadores de funciones, podrás: 
+Si enriqueces tus datos RUM con datos de indicadores de características, podrás: 
 - Tener la seguridad de que tu función se iniciará con éxito sin causar de forma involuntaria un error o una regresión del rendimiento
 - Correlacionar las versiones de las funciones con el rendimiento, identificar los problemas con versiones específicas y solucionar los problemas con mayor rapidez
 - Optimizar la recopilación y el análisis de los datos y centrarte en la resolución de los problemas
 
-## Configurar la recopilación de datos de indicadores de funciones
+## Configurar la recopilación de datos de indicadores de características
 
-Para ver las instrucciones detalladas de configuración, consulta nuestra guía para [empezar a recopilar datos de indicadores de funciones][1].
+Para ver las instrucciones detalladas de configuración, consulta nuestra guía para [empezar a recopilar datos de indicadores de características][1].
 
 El seguimiento de indicadores de funciones está disponible en el SDK del Navegador RUM. Para empezar, configura la [monitorización del Navegador RUM][2]. Necesitas la versión del SDK RUM del navegador 4.25.0 o posterior.
 
