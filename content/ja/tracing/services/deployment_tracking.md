@@ -1,7 +1,7 @@
 ---
 aliases:
-- /ja/tracing/version_tracking
-- /ja/tracing/deployment_tracking/
+- /tracing/version_tracking
+- /tracing/deployment_tracking/
 description: Datadog を使用して、バージョンタグによりデプロイメントを追跡
 further_reading:
 - link: getting_started/tagging/unified_service_tagging/
@@ -87,6 +87,10 @@ title: デプロイメントの追跡
 サービス詳細画面のグラフと同様、リクエストおよびエラーのグラフにはデプロイメントのロールアウト概要およびエラー率の急上昇を示します。このページでは、比較のため選択されたバージョンがグラフ上でハイライトされ、コンテキストとして他のすべてのバージョンはグレー表示されます。
 
 {{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="デプロイメント比較グラフ" style="width:100%;">}}
+
+[Continuous Profiler が有効な場合][5]、CPU 時間や割り当てメモリなどの主要なパフォーマンスメトリクスの比較を APM リソースごとに表示することもできます。そこから、[プロファイル比較ページ][6]に移動することができます。
+
+{{< img src="tracing/deployment_tracking/DeploymentTrackingProfileComparison.png" alt="デプロイメントプロファイリング比較グラフ" style="width:100%;">}}
 
 ### エラー比較
 
@@ -231,3 +235,5 @@ Time = 45
 [2]: /ja/metrics/types/?tab=distribution#metric-types
 [3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: /ja/watchdog/faulty_deployment_detection/
+[5]: /ja/profiler/enabling/
+[6]: /ja/profiler/compare_profiles

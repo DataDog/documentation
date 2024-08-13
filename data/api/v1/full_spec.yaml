@@ -13695,7 +13695,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAPITestStep'
       - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
-      type: object
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -19235,6 +19234,22 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current date for the given org.
@@ -19947,6 +19962,22 @@ components:
         flex_logs_compute_xsmall_avg:
           description: Shows the average number of Flex Logs Compute Extra Small Instances
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         flex_stored_logs_avg:
@@ -20670,6 +20701,21 @@ components:
         flex_logs_compute_xsmall_avg_sum:
           description: Shows the average number of Flex Logs Compute Extra Small Instances
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_avg_sum:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current months for all organizations.
           format: int64
           type: integer
         flex_stored_logs_avg_sum:

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "name": "Team Defined",
+      "scorecard_name": "Deployments automated via Deployment Trains",
+      "description": "Updated description via test"
+    }
+  }
+}
