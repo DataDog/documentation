@@ -124,10 +124,10 @@ Library                             | Minimum `orchestrion` version |
 <li>
 Install Orchestrion in your environment:
 {{<code-block lang="sh">}}go install github.com/datadog/orchestrion@latest{{</code-block>}}
-Make sure `$(go env GOBIN)` (or `$(go env GOPATH)/bin`) is present in your `$PATH`.
+Make sure <tt>$(go env GOBIN)</tt> (or <tt>$(go env GOPATH)/bin</tt>) is present in your <tt>$PATH</tt>.
 </li>
 <li>
-Register Orchestrion in your project's `go.mod` to ensure reproductibe builds:
+Register Orchestrion in your project's <tt>go.mod</tt> to ensure reproductibe builds:
 {{<code-block lang="sh">}}orchestrion pin{{</code-block>}}
 </li>
 <li>
@@ -135,7 +135,7 @@ Commit changes to your version control system:
 {{<code-block lang="sh">}}git commit -m "chore: enable orchestrion" go.mod go.sum orchestrion.tool.go{{</code-block>}}
 </li>
 <li>
-You can now manage your dependency on `orchestrion` like any other dependency via the `go.mod` file
+You can now manage your dependency on <tt>orchestrion</tt> like any other dependency via the <tt>go.mod</tt> file
 </li>
 </ol>
 
