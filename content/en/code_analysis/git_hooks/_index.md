@@ -37,7 +37,7 @@ releases](https://github.com/DataDog/datadog-static-analyzer/releases).
 2. Install the program on your computer.
 3. Add a `.git/hooks/pre-push` file in the repository with the script below. **Note:** The script assumes the `datadog-static-analyzer-git-hook` binary is in `/usr/local/bin/datadog-static-analyzer-git-hook`.
 
-```shell
+```bash
 #!/bin/sh
 
 # Get the repo root path
@@ -46,7 +46,7 @@ repo_path=$(git rev-parse --show-toplevel)
 # Make sure the user can provide some input
 exec < /dev/tty
 
-/usr/local/bin/datadog-static-analyzer-git-hook -r $repo_path --secrets --confirmation --default-branch <default-branch>
+/usr/local/bin/datadog-static-analyzer-git-hook -r $repo_path --static-analysis --secrets --confirmation --default-branch <default-branch>
 
 if [ $? -eq 0 ]; then
     echo "datadog-static-analyzer check passed"
@@ -61,6 +61,7 @@ The program accepts the following parameters:
 
  - `--confirmation`: Ask the user for confirmation to override the Git hook check
  - `--default-branch`: Specify the name of the default branch.
+ - `--static-analysis`: Enable static analysis.
  - `--secrets`: Enable secrets detection (private beta).
  - `--output <file>`: Export the findings found in the commit into a SARIF file.
 

@@ -21,7 +21,7 @@ The OOTB SLO Performance Dashboard is in Private Beta. Complete the form to requ
 
 Access your OOTB SLO Dashbord by filtering for `SLO Performance Summary` in the search query of the [**Dashboard List**][1] or by clicking on the **Analytics** button on the top right corner of the [SLO status page][2].
 
-{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-default-ootb-dashboard.png" alt="Default OOTB SLO Dashboard by Service Tag" >}}
+{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-ootb-dashboard.png" alt="Default OOTB SLO Dashboard by Service Tag" >}}
 
 ## Interact with your OOTB SLO dashboard
 
@@ -45,7 +45,7 @@ To customize your OOTB SLO dashboard, click **Configure** in the dashboard and s
 
 For instance, if you have added a `journey` tag to your SLOs, you can clone the OOTB dashboard and customize it to be based on the `journey` tag:
 
-{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-by-journey.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}
+{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-flow.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}
 
 
 

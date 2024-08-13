@@ -68,6 +68,7 @@ server:
 
 # Download all dependencies and run the site
 start: dependencies ## Build and run docs including external content.
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -130,7 +131,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.37052508-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.41265762-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -202,6 +203,10 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
 
+update_websites_sources_module:
+	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+	node_modules/hugo-bin/vendor/hugo mod clean
+	cat go.mod
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead

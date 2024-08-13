@@ -74,7 +74,7 @@ UI components can trigger reactions on an [Event][11].
 
 [Queries][12] populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
-You can use [Javascript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
+You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
 ### Interact with an app in JSON
 
