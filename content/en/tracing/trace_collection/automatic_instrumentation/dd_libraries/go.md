@@ -89,8 +89,6 @@ Key benefits:
 - Provides the best possible tracing coverage
 - Enables certain [Application Security Management][7] features exclusive to Orchestrion-built Go applications
 
-Running during compilation allows `orchestrion` to not only instrument your own code, but also all of your dependencies' code, including the Go standard library, ensuring you get the best tracing coverage possible.
-
 ### Requirements
 
 - Supports the two latest Go runtime releases (matching [Go's official release policy][8]). Older Go runtimes may function, but are not supported by default. For special requests, [contact support][9].
