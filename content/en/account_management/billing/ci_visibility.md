@@ -1,6 +1,5 @@
 ---
-title: Understanding CI Visibility Billing
-description: Learn about billing considerations for CI Visibility.
+title: CI Visibility Billing
 further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
@@ -30,7 +29,7 @@ Datadog does not charge for bot or actions made in the GitHub UI. These types of
 
 Yes, you can exclude commits from specific people by using [exclusion filters][2].
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
