@@ -28,17 +28,19 @@ Queries rely on [Connections][5] for authentication. App Builder shares connecti
 - **Auto**: The query runs when the app loads and whenever any query arguments change.
 - **Manual**: The query runs when another portion of the app triggers it. For example, use a manual trigger if you want a query to execute only when a user clicks a UI button component. For more information on event triggers, see [Events][11].
 
-## Debounce
+## Advanced query options
+
+### Debounce
 
 Configuring debounce ensures that your query is only triggered once per user input. By default, debounce is set to `0` milliseconds (ms). To prevent a query from being called too frequently, increase the debounce. Configure debounce in the **Advanced** section of a query.
 
-## Conditional queries
+### Conditional queries
 
 You can set a condition that must be met before a query can run. To set the condition for a query, enter an expression in the **Condition** field in the **Advanced** section of the query. This condition must evaluate to true before the query can run. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, use the following expression:
 
 {{< code-block lang="js" >}}${select0.value && select0.value.length > 0}{{< /code-block >}}
 
-## Post-query transformation
+### Post-query transformation
 
 Perform a post-query transformation to simplify or transform the output of a query. Add a post-query transformation in the **Advanced** section of a query.
 
@@ -56,17 +58,59 @@ for (var item in object) {
 return arr
 {{< /code-block >}}
 
-## Post-query hooks
+### Post-query hooks
 
 Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
 
-## Error notifications
+### Error notifications
 
 To display a toast (a brief notification message) to the user when the system returns an error, toggle **Show Toast on Errors** in the **Advanced** section of a query.
 
-## Confirmation prompts
+### Confirmation prompts
 
 To prompt a user for confirmation before the query runs, toggle the **Requires Confirmation** option in the **Advanced** section of a query.
+
+### Polling intervals
+
+To run a query repeatedly at a set interval while the app is open on someone's screen, enter the interval in milliseconds (ms) as the **Polling interval** in the **Advanced** section of a query.
+
+**Note**: The query does not run in the background; it only runs when someone has the app open.
+
+## Mocked outputs
+
+Sometimes when you are building or testing an app in the editor, you might want to avoid executing a real query, or avoid executing the same query repeatedly. When you enable **Mocked outputs** and run your query, App Builder populates outputs with mocked data instead of running the query action.
+
+You can generate mocked outputs from a previous query run or provide them manually.
+
+### Generate outputs from previous run
+
+To generate mocked output data from a previous query run, perform the following steps:
+
+1. Add a query and fill out the rest of your query's parameters.
+1. Click **Run** to execute your query once.
+1. In the **Mocked outputs** section of the query, click the **Generate** tab.
+1. Click **Generate from outputs**. This automatically toggles **Use Mocked Outputs** on.<br>
+    The **Run** button changes to say **Run (Mocked)**, and the next time you run your query, the output populates with the mocked data.
+
+### Provide outputs manually
+
+To provide mocked outputs manually, perform the following steps:
+
+{{% collapse-content title="Using the GUI" level="p" %}}
+1. Add a query and fill out the rest of your query's parameters.
+1. In the **Mocked outputs** section of the query, click the **GUI** tab.
+1. Fill in all required fields, which the GUI view automatically displays.
+1. Optionally, to add additional fields, click **+ (plus)**. Choose a key from the dropdown and fill in a value. If you want to enter a value that is an object or an array, click the **{}** or **[]**, respectively, after the **Enter value** field.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using JSON" level="p" %}}
+1. Add a query and fill out the rest of your query's parameters.
+1. In the **Mocked outputs** section of the query, click the **JSON** tab.
+1. Paste in JSON that matches the expected output format of the query.<br>
+    If you do not know the expected output format, you can run the query once and then reference `outputs` in the **Inspect Data** section of the query.
+{{% /collapse-content %}} 
+
+
 
 ## Example apps
 
