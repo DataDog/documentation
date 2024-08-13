@@ -86,10 +86,10 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 : Measures the total CPU utilization of the function as a percent.
 
 `aws.lambda.enhanced.cpu_max_utilization`
-: Measures CPU utilization on the maximally utilized core.
+: Measures the CPU utilization on the most utilized core.
 
 `aws.lambda.enhanced.cpu_min_utilization`
-: Measures CPU utilization on the minimally utilized core.
+: Measures the CPU utilization on the least utilized core.
 
 `aws.lambda.enhanced.cpu_system_time`
 : Measures the amount of time the CPU spent running in kernel mode.
