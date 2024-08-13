@@ -24,9 +24,9 @@ Datadog clones your code, runs the static analyzer to perform Static Analysis an
 The benefit of Datadog-hosted scans is that no configuration is needed in your CI pipeline(s) to use Code Analysis.
 
 
-### How are services and teams associated with code violations and libraries?
+### How are services are associated with code violations and libraries?
 
-Datadog aims to associate code violations or libraries with the relevant service or team by using the following mechanisms:
+Datadog aims to associate code violations or libraries with the relevant service by using the following mechanisms:
 
 1. Identifying the code location associated with a service using the Service Catalog.
 2. Detecting usage patterns of files within additional Datadog products.
@@ -79,6 +79,20 @@ If no repository match is found, Datadog attempts to find a match in the
 the name of the service is part of the path. If two services are present
 in the path, the service name the closest to the filename is selected.
 
+
+### How are teams associated with code and libraries?
+
+Teams are associated either by getting the team associated with the service or by using
+the `CODEOWNERS` file and its mapping within Datadog.
+
+When Datadog detects the service for your code violation or library, it automatically
+associates the team attached to the service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team of `myservice` will be associated to any violation
+for this file.
+
+If no service or teams are found, Datadog uses the `CODEOWNERS` [file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+file on your repository. The `CODEOWNERS` file associate file ownership to team on your Git provider. You need
+to correctly define the mapping between your Git provider teams and your Datadog teams for this feature to work.
 
 ## Static Analysis
 
