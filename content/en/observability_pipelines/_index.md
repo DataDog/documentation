@@ -61,9 +61,9 @@ To set up a pipeline:
     - [Archive logs to Datadog Archives][5]
     - [Sensitive data redaction][6]
     - [Log Enrichment][7]
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up you processors.
+1. Select and set up your [source][10].
+1. Select and set up your [destinations][11].
+1. Set up you [processors][12].
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
 
@@ -134,3 +134,6 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [7]: /observability_pipelines/log_enrichment/
 [8]: /observability_pipelines/set_up_pipelines/
 [9]: /observability_pipelines/advanced_configurations/
+[10]: /observability_pipelines/sources/
+[11]: /observability_pipelines/destinations/
+[12]: /observability_pipelines/processors/
