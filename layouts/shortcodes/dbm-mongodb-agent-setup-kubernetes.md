@@ -66,7 +66,7 @@ metadata:
     ad.datadoghq.com/mongo.checks: |
     {
       "mongo": {
-        "init_config": [{}],
+        "init_config": {},
         "instances": [{
           "hosts": ["<HOST>:<PORT>"],
           "username": "datadog",

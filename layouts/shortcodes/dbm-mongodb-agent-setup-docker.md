@@ -14,7 +14,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -l com.datadoghq.ad.checks='{
     "mongo": {
-      "init_config": [{}],
+      "init_config": {},
       "instances": [{
         "hosts": ["<HOST>:<PORT>"],
         "username": "datadog",
