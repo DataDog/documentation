@@ -698,8 +698,10 @@ class Integrations:
         tab_logic = False
         # Prioritize having metric-spec.yaml over metadata.csv
         metrics = glob.glob(
-                "{path}{sep}*metric-spec.yaml".format(path=dirname(file_name), sep=sep)
+            "{path}{sep}**/metric-spec.yaml".format(
+                path=dirname(file_name), sep=sep, recursive=True
             )
+        )
         if metrics:
             metrics = metrics[0] if len(metrics) > 0 else None
             metrics_exist = metrics and exists(metrics)
