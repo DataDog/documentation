@@ -40,4 +40,4 @@ If the issue is alert routing, [template variables][4] and the separation of **w
 [3]: /monitors/types/outlier/
 [4]: /monitors/notify/variables/?tab=is_alert#template-variables
 [5]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[6]: /monitors/types/composite
+[6]: /monitors/types/composite/
