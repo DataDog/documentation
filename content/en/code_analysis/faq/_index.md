@@ -82,15 +82,12 @@ in the path, the service name the closest to the filename is selected.
 
 ### How are teams associated with code violations and libraries?
 
-Teams are associated by either getting the team associated with the service or using
-the `CODEOWNERS` file and its mapping within Datadog.
-
 When Datadog detects the service for your code violation or library, it automatically
 associates the team attached to the service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
 is associated with `myservice`, then the team `myservice` will be associated to any violation
 detected in this file.
 
-If no services or teams are found, Datadog uses the `CODEOWNERS` [file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+If no services or teams are found, Datadog uses the `CODEOWNERS` [file][8]
 file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. You need
 to correctly define the mapping between your Git provider teams and your Datadog teams for this feature to work.
 
@@ -186,3 +183,4 @@ datadog-ci sbom upload --service "your-app" --env "ci" /path/to/sbom-file.json
 [5]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/owasp-benchmark.md
 [6]: https://github.com/DataDog/osv-scanner
 [7]: https://github.com/aquasecurity/trivy
+[8]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
