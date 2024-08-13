@@ -28,13 +28,13 @@ The Network Analytics page provides insights into your overall network health an
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.
+To refine your search to traffic between particular endpoints, aggregate and filter your network connections **with tags**. Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic on your services between your **client** ordering service called `orders-app` and your **server** database services, use `client_service:orders-app` in the search bar, and use the `service` tags in the **View clients as** and **View servers as** drop down to visualize the traffic flow between those two services: 
+For example, if you want to see network traffic between your **client** ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop down, then use the `availability-zone` tag in the **View servers as** drop down to visualize the traffic flow between these two sets of tags:
 
-{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when grouping by tags" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
 For information on `NA/Untagged` traffic paths, see [Unresolved traffic.](#unresolved-traffic)
 
