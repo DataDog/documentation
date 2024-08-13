@@ -31,7 +31,7 @@ This change has the following impact on how notifications are generated for CSM 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
 2. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled for individual detection rules.
 
-<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, a new time aggregation mechanism is made available.</div>
+<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can use the new time aggregation mechanism.</div>
 
 3. Support for CSM Misconfigurations signals will be deprecated in late 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
