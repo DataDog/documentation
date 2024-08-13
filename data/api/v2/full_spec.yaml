@@ -34319,11 +34319,11 @@ paths:
 
         - Service Level Objectives: `slo`
 
-        - Synthetic Global Variables: `synthetic-global-variable`
+        - Synthetic Global Variables: `synthetics-global-variable`
 
-        - Synthetic Tests: `synthetic-test`
+        - Synthetic Tests: `synthetics-test`
 
-        - Synthetic Private Locations: `synthetic-private-location`
+        - Synthetic Private Locations: `synthetics-private-location`
 
         - Monitors: `monitor`
 
