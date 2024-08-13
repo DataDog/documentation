@@ -24,7 +24,8 @@ For the most **complete** security coverage that Datadog can provide, Datadog re
                 "waf:ListRuleGroups",
                 "waf:ListRules",
                 "wafv2:GetIPSet",
-                "wafv2:GetRegexPatternSet"
+                "wafv2:GetRegexPatternSet",
+                "wafv2:GetRuleGroup"
             ],
             "Effect": "Allow",
             "Resource": "*"
