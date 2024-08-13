@@ -3718,49 +3718,49 @@ menu:
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
-      identifier: llm_observability
+      identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
-    - name: Core Concepts
-      url: llm_observability/core_concepts/
-      parent: llm_observability
-      identifier: tracing_llm_obs_core_concepts
-      weight: 1
     - name: Quickstart
       url: llm_observability/quickstart/
-      parent: llm_observability
-      identifier: tracing_llm_obs_quickstart
+      parent: llm_obs
+      identifier: llm_obs_quickstart
+      weight: 1
+    - name: Terms and Concepts
+      url: llm_observability/terms/
+      parent: llm_obs
+      identifier: llm_obs_terms
       weight: 2
-    - name: Trace an LLM Application
-      url: llm_observability/trace_an_llm_application/
-      parent: llm_observability
-      identifier: tracing_llm_obs_trace_an_application
+    - name: Setup
+      url: llm_observability/setup/
+      parent: llm_obs
+      identifier: llm_obs_setup
       weight: 3
-    - name: Span Kinds
-      url: llm_observability/span_kinds/
-      parent: llm_observability
-      identifier: tracing_llm_obs_span_kinds
-      weight: 4
-    - name: Auto Instrumentation
-      url: llm_observability/auto_instrumentation/
-      parent: llm_observability
-      identifier: tracing_llm_obs_auto_instrumentation
-      weight: 5
     - name: SDK
-      url: llm_observability/sdk/
-      parent: llm_observability
-      identifier: tracing_llm_obs_sdk
-      weight: 6
+      url: llm_observability/setup/sdk/
+      parent: llm_obs_setup
+      identifier: llm_obs_setup_sdk
+      weight: 301
+    - name: Auto Instrumentation
+      url: llm_observability/setup/auto_instrumentation
+      parent: llm_obs_setup
+      identifier: llm_obs_setup_auto_instrumentation
+      weight: 302
     - name: API
-      url: llm_observability/api/
-      parent: llm_observability
-      identifier: tracing_llm_obs_api
-      weight: 7
+      url: llm_observability/setup/api/
+      parent: llm_obs_setup
+      identifier: llm_obs_setup_api
+      weight: 303
     - name: Submit Evaluations
       url: llm_observability/submit_evaluations/
-      parent: llm_observability
-      identifier: tracing_llm_obs_submit_evaluations
-      weight: 8
+      parent: llm_obs
+      identifier: llm_obs_submit_evaluations
+      weight: 4
+    - name: Guides
+      url: llm_observability/guide/
+      parent: llm_obs
+      identifier: llm_obs_guide
+      weight: 5
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

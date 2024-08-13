@@ -2,13 +2,12 @@
 title: LLM Observability API Reference
 aliases:
     - /tracing/llm_observability/api
+    - /llm_observability/api
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-LLM Observability is not available in the US1-FED site.
-</div>
-{{% /site-region %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -357,6 +356,6 @@ Evaluations require a `span_id` and `trace_id`.
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. |
 
-[1]: /llm_observability/sdk/
-[2]: /llm_observability/span_kinds/
+[1]: /llm_observability/setup/sdk/
+[2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
