@@ -56,9 +56,8 @@ Requires `dd-trace-py` version 0.44.0+.
 
 To enable the new [timeline feature](#span-execution-timeline-view)
 
-- Upgrade `dd-trace-py` to version 2.10.4 or later
+- Upgrade `dd-trace-py` to version 2.10.5 or later
 - Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
-- Set environment variable `DD_PROFILING_EXPORT_LIBDD_ENABLED` to `true`, this enables new profiling exporter implemented as a native extension.
 
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
