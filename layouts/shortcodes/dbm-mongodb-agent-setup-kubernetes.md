@@ -76,7 +76,7 @@ metadata:
           },
           "dbm": true,
           "cluster_name": "<MONGO_CLUSTER_NAME>",
-          "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>"
+          "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>",
           "additional_metrics": ["metrics.commands", "tcmalloc", "top", "collection"],
           "collections_indexes_stats": true,
           "database_autodiscovery": {
