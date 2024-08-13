@@ -71,7 +71,7 @@ final configuration = DatadogConfiguration(
 
 Si tu aplicación sufre un fallo fatal, el SDK de Flutter de Datadog carga un informe de fallo en Datadog *después* del reinicio de tu aplicación. Para errores no fatales, el SDK de Flutter de Datadog carga estos errores con otros datos RUM.
 
-## Obtener trazas de stack tecnológico desofuscadas
+## Obtener trazas (traces) de stack tecnológico desofuscadas
 
 Los archivos de asignación se utilizan para desofuscar trazas de stack tecnológico, lo que ayuda a depurar errores. Mediante el ID de compilación único que se genera, Datadog hace coincidir automáticamente las trazas de stack tecnológico correctas con los archivos de asignación correspondientes. Esto garantiza que, independientemente de cuándo se haya cargado el archivo de asignación (ya sea durante la compilación de preproducción o de producción), se disponga de la información correcta para garantizar procesos de control de calidad eficaces al revisar fallos y errores notificados en Datadog.
 
