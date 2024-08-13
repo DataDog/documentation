@@ -27,9 +27,9 @@ Si enriqueces tus datos RUM con datos de indicadores de características, podrá
 
 Para ver las instrucciones detalladas de configuración, consulta nuestra guía para [empezar a recopilar datos de indicadores de características][1].
 
-El seguimiento de indicadores de funciones está disponible en el SDK del Navegador RUM. Para empezar, configura la [monitorización del Navegador RUM][2]. Necesitas la versión del SDK RUM del navegador 4.25.0 o posterior.
+El seguimiento de indicadores de características está disponible en el SDK del Navegador RUM. Para empezar, configura la [monitorización del Navegador RUM][2]. Necesitas la versión del SDK RUM del navegador 4.25.0 o posterior.
 
-Puedes empezar a recopilar datos de indicadores de funciones para [soluciones personalizadas de gestión de indicadores de funciones][3] o utilizar uno de nuestros socios de integración. 
+Puedes empezar a recopilar datos de indicadores de características para [soluciones personalizadas de gestión de indicadores de características][3] o utilizar uno de nuestros socios de integración. 
 
 Admitimos integraciones con:
 
@@ -37,24 +37,24 @@ Admitimos integraciones con:
 
 </br>
 
-Los indicadores de funciones aparecerán en el contexto de eventos donde se evalúen, lo que significa que deberían aparecer en las vistas en las que se ejecute la lógica del código del indicador de funciones.
+Los indicadores de características aparecerán en el contexto de eventos donde se evalúen, lo que significa que deberían aparecer en las vistas en las que se ejecute la lógica del código de los indicadores de características.
 
-## Visualizar tus indicadores de funciones
+## Visualizar tus indicadores de características
 
-Una vez que hayas configurado tu recopilación de datos de indicadores de funciones, ve a la pestaña [**Indicadores de funciones**][4] en RUM.
+Una vez que hayas configurado tu recopilación de datos de indicadores de características, ve a la pestaña [**Indicadores de características**][4] en RUM.
 
-Desde esta vista, puedes investigar cualquier duda que tengas sobre el estado y el uso de tu indicador de función.
-- Monitorizar el número de usuarios que experimentan cada variante y ver estadísticas resumidas de tu indicador de función
-- Comprobar el estado de tu indicador de función para ver si hay alguno que pueda eliminarse para limpiar el código
-- Ver en qué páginas se evalúan tus indicadores de funciones
+Desde esta vista, puedes investigar cualquier duda que tengas sobre el estado y el uso de tu indicador de características.
+- Monitorizar el número de usuarios que experimentan cada variante y ver estadísticas resumidas de tu indicador de características
+- Comprobar el estado de tu indicador de características para ver si hay alguno que pueda eliminarse para limpiar el código
+- Ver en qué páginas se evalúan tus indicadores de características
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="Ver una lista de tus indicadores de función para investigar cualquier duda que tengas sobre el estado y el uso de tu indicador de función" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="Ver una lista de tus indicadores de características para investigar cualquier duda que tengas sobre el estado y el uso de tu indicador de características" style="width:90%;" >}}
 
 
 ### Buscar y filtrar
-Busca y filtra tus indicadores de función escribiendo en la barra de búsqued utilizar la búsqueda por faceta para reducir, ampliar o cambiar tu enfoque en los subconjuntos de indicadores de función que te interesen.
+Busca y filtra tus indicadores de características escribiendo en la barra de búsqued utilizar la búsqueda por faceta para reducir, ampliar o cambiar tu enfoque en los subconjuntos de indicadores de características que te interesen.
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Barra de búsqueda y filtrado de listas de indicador de función" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Barra de búsqueda y filtrado de listas de indicadores de características" style="width:90%;" >}}
 
 ### Estado del indicador de función
 Hay tres posibles estados de los indicadores de función:
