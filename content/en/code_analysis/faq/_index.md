@@ -88,7 +88,7 @@ is associated with `myservice`, then the team `myservice` will be associated to 
 detected in this file.
 
 If no services or teams are found, Datadog uses the `CODEOWNERS` [file][8]
-file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. You need
+in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. You need
 to correctly define the mapping between your Git provider teams and your Datadog teams for this feature to work.
 
 ## Static Analysis
