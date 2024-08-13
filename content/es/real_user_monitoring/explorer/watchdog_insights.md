@@ -47,7 +47,7 @@ En la vista **ficha del banner**, se muestra lo siguiente:
 * La proporción de errores totales y eventos RUM generales a los que contribuye el campo
 * Etiquetas relacionadas
 
-En el **panel lateral completo**, puedes ver un gráfico de series temporales sobre el número total de errores RUM con el campo junto con un gráfico circular de impacto y una lista de eventos RUM que contienen el campo.
+En el **panel lateral completo**, puedes ver un gráfico de series temporales sobre el número total de errores RUM en el campo, junto con un gráfico circular de impacto y una lista de eventos RUM que contienen el campo.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Panel lateral completo del outlier de error" style="width:100%;" >}}
 
