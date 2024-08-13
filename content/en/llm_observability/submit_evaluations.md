@@ -1,14 +1,18 @@
 ---
 title: Submit Evaluations
-
 aliases:
     - /tracing/llm_observability/submit_evaluations
+further_reading:
+    - link: '/llm_observability/setup/sdk'
+      tag: 'Documentation'
+      text: 'Learn about the LLM Observability SDK for Python'
+    - link: '/llm_observability/setup/api'
+      tag: 'Documentation'
+      text: 'Learn about the Evaluations API'
 ---
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-LLM Observability is not available in the US1-FED site.
-</div>
-{{% /site-region %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -75,7 +79,11 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 }
 {{< /code-block >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /metrics/custom_metrics/#naming-custom-metrics
-[2]: /llm_observability/sdk/#exporting-a-span
-[3]: /llm_observability/sdk/#submit-evaluations
-[4]: /llm_observability/api/?tab=model#evaluations-api
+[2]: /llm_observability/setup/sdk/#exporting-a-span
+[3]: /llm_observability/setup/sdk/#submit-evaluations
+[4]: /llm_observability/setup/api/?tab=model#evaluations-api
