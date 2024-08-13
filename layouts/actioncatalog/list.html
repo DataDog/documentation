@@ -2,18 +2,20 @@
 {{ define "main" }}
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
+{{ $workflow_bundles := site.Data.workflow_bundles }}
 
-<!-- From imported files -->
-{{ $list := sort .Pages }}
+{{ if eq $workflow_bundles nil }}
+  {{ $err_msg := "Could not load workflow bundles data" }}
 
-<!-- build filters -->
-{{ $.Scratch.Set "filters" (slice)}}
-{{ range $index, $element := $list }}
-    {{ range $e := $element.Params.rule_category }}
-        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
-            {{ $.Scratch.Add "filters" ($e | lower) }}
-        {{ end }}
-    {{ end }}
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf $err_msg }}
+  {{ else }}
+    {{ errorf $err_msg }}
+  {{ end }}
+{{ end }}
+
+{{ range $workflow_bundles }}
+  <h5>{{ . }}</h5>
 {{ end }}
 
 <div class="row">
@@ -26,11 +28,41 @@
 </div>
 
 {{ .Content }}
+<div class="form-group clearfix">
+  <input type="input" data-ref="search" class="form-control grouped-item-search mb-3 position-relative" id="keywords" placeholder="Search here" aria-label="keywords"/>
+</div>
+
 <form id="rules">
-  {{- with $list -}}
-      {{- if isset (index . 0).Params "bundle_title" -}}
-        {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "bundle_title") ) -}}
-      {{- end -}}
-  {{- end -}}
+  <div>
+    <div class="js-empty-results d-none font-semibold"></div>
+    {{ range $workflow_bundles }}
+      {{ $workflow_name := .name }}
+      <div class="js-group js-group-{{ "test" }}" id="{{ "test" | anchorize }}">
+        <div class="js-group-header mb-1 d-flex align-items-center active" id="">
+          <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
+            x
+          </div>
+          <div class="font-semibold ms-1 group-header-text">
+            <span>{{ .title }}</span>
+            <span class="icon-wrapper" data-anchor="#{{"test" | anchorize}}">icon</span>
+            <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+          </div>
+          <div class="js-group-header__arrow">></div>
+        </div>
+        <div class="group-{{ "test" }} mb-2 ms-4 d-none">
+          {{ range $action_name, $action_data := .actions }}
+            {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#/" }}
+            {{ $full_url := print $base_url $workflow_name "/" $workflow_name }}
+            <!-- https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.asana/com.datadoghq.asana.addTagToTask -->
+            <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}">
+              <img src="https://static.datadoghq.com/static/images/logos/asana_avatar.svg" height="17" alt="test"/>
+              <span class="ps-1">{{ .title }}</span>
+              <br>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
 </form>
 {{ end }}
