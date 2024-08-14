@@ -185,7 +185,7 @@ You can see an analysis of your realtime estimated custom metrics usage by metri
 {{< whatsnext desc="Additional use cases to build monitors for with the estimated usage metrics:" >}}
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
-    {{< nextlink href="/monitors/types/forecast/" >}}Forecast future metrics growth and alert on any unexpected overall deviation.{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/forecasts/" >}}Forecast future metrics growth and alert on any unexpected overall deviation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Summary of best practices
