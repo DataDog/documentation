@@ -45,7 +45,7 @@ Dockerfile に以下の指示と引数を追加します。
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+RUN npm install --prefix /dd_tracer/node dd-trace  --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -64,7 +64,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 2. Datadog Node.JS トレーサーを Docker イメージにコピーします。
 
    ```
-   COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+   RUN npm install --prefix /dd_tracer/node dd-trace  --save
    ```
 
    [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
@@ -230,7 +230,11 @@ Dockerfile に以下の指示と引数を追加します。
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+# For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+# For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -247,7 +251,11 @@ CMD ["dotnet", "helloworld.dll"]
 
 2. Datadog .NET トレーサーを Docker イメージにコピーします。
    ```
-   COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+   # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+   # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
+   ARG TRACER_VERSION
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+   RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
    ```
    [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
 
