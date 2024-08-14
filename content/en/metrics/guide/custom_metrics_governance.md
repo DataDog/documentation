@@ -62,7 +62,7 @@ Additionally, review [Usage Attribution][3] information for a total breakdown of
 
 Team-level visibility enables account administrators to hold teams accountable. More importantly, it gives teams the opportunity to understand and reduce their impact on metrics volume.
 
-Individual teams might have limited insights into the costs of the metrics and tags they're submitting. This results in teams being less motivated to control their usage or even limit usage growth. It is crucial for everyone to have visibility into their usage and feel empowered to take ownership in managing those volumes and associated costs.```
+Individual teams might have limited insights into the costs of the metrics and tags they're submitting. This results in teams being less motivated to control their usage or even limit usage growth. It is crucial for everyone to have visibility into their usage and feel empowered to take ownership in managing those volumes and associated costs.
 
 #### Find the source of your largest custom metrics
 <div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
@@ -88,6 +88,8 @@ To see all actively reporting metric names submitted by your team, go to the [Me
 All users in your organization can see OOTB realtime estimated custom metrics usage on the [Metrics Volume Management page][7]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use Metrics Volume Management with Metrics without Limits™, to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
 
 With Metrics Volume Management, you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
+
+{{< img src="metrics/guide/volume_management_page.png" alt="Metrics Volume Management page" style="width:90%;" >}}
 
 For more information, see the [Metrics Volume Management][8] documentation.
 
@@ -131,18 +133,18 @@ To ensure you're not removing valuable visibility while reducing costs, you need
 
 Identify your organization's entire list of unqueried metrics over the past 30 days: 
 1. On the [Metrics Summary page][6], find the **Query Activity (past 30 days)** facet on the left side.
-1. Select **Not Actively Queried**. 
-1. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
-1. (Optional) To export this list, click **Export as CSV** above the metric table.
+2. Select **Not Actively Queried**. 
+3. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
+4. (Optional) To export this list, click **Export as CSV** above the metric table.
 
 After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
 
 {{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
 
-1. At the top of the the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
-1. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
-1. Specify the metric namespace prefix of the metrics you'd like to configure
-1. Select **Include tags...** and leave the allowlist of tags empty
+5. At the top of the the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
+6. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
+7. Specify the metric namespace prefix of the metrics you'd like to configure.
+8. Select **Include tags...** and leave the allowlist of tags empty.
 
 Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
 
