@@ -4,8 +4,8 @@ import { regionParamDefinition, RegionParam } from './components/regionParam';
 import { siteRegionDefinition, SiteRegion } from './components/siteRegion';
 import { tabDefinition, Tab } from './components/tab';
 import { tabsDefinition, Tabs } from './components/tabs';
-import { hugoMarkdownDefinition, HugoMarkdown } from './components/hugoMarkdown';
 import { fenceDefinition, Fence } from './components/fence';
+import { xDefinition, X } from './components/x';
 
 export const transformConfig = {
   tags: {
@@ -15,7 +15,7 @@ export const transformConfig = {
     'site-region': siteRegionDefinition,
     tabs: tabsDefinition,
     tab: tabDefinition,
-    'hugo-markdown': hugoMarkdownDefinition
+    x: xDefinition
   },
   nodes: {
     fence: fenceDefinition
@@ -29,6 +29,6 @@ export const customComponents = {
   SiteRegion,
   Tabs,
   Tab,
-  HugoMarkdown,
-  Fence
+  Fence,
+  X
 };
