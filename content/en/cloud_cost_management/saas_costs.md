@@ -265,7 +265,6 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | Tag Name | Tag Description |
 |---|---|
 | `organization_id` | The unique identifier of the organization. |
-| `project_id` | The unique identifier of the project (can be null). |
 | `project_name` | The name of the project. |
 | `organization_name` | The name of the organization. |
 

@@ -109,7 +109,8 @@ The two types of fixes are distinguished visually in the UI with different label
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
 ### Customizing your configuration
-See [this page][8] to learn how to customize how Static Analyis is configured in your repositories.
+
+To learn how Static Analyis is configured in your repositories, see the [Setup documentation][8].
 
 ### Reporting false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
@@ -124,8 +125,7 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [2]: /code_analysis/static_analysis_rules?categories=Security
 [3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/
-[5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
-[8]: /code_analysis/static_analysis/setup/#add-a-static-analysis-yaml-file-to-your-project
+[8]: /code_analysis/static_analysis/setup/#customize-your-configuration
 [9]: /code_analysis/static_analysis/setup

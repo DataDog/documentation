@@ -14,7 +14,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -l com.datadoghq.ad.checks='{
     "mongo": {
-      "init_config": [{}],
+      "init_config": {},
       "instances": [{
         "hosts": ["<HOST>:<PORT>"],
         "username": "datadog",
@@ -25,6 +25,8 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
         "dbm": true,
         "cluster_name": "<MONGO_CLUSTER_NAME>",
         "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>",
+        "additional_metrics": ["metrics.commands", "tcmalloc", "top", "collection"],
+        "collections_indexes_stats": true,
         "database_autodiscovery": {
           "enabled": true
         }
