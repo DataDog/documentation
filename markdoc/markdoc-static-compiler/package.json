@@ -62,6 +62,7 @@
     },
     "homepage": "https://markdoc.dev",
     "dependencies": {
+        "markdown-it-deflist": "^3.0.0",
         "zod": "^3.22.4"
     }
 }

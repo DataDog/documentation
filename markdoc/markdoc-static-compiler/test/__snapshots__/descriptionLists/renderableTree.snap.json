@@ -13,65 +13,96 @@
     },
     {
       "$$mdtype": "Tag",
-      "name": "p",
-      "attributes": {},
-      "children": [
-        "Service",
-        " ",
-        ": Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application."
-      ]
-    },
-    {
-      "$$mdtype": "Tag",
-      "name": "p",
-      "attributes": {},
-      "children": [
-        "Resource",
-        " ",
-        ": Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job."
-      ]
-    },
-    {
-      "$$mdtype": "Tag",
-      "name": "p",
+      "name": "dl",
       "attributes": {},
       "children": [
         {
           "$$mdtype": "Tag",
-          "name": "code",
+          "name": "dt",
           "attributes": {},
           "children": [
-            "clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution"
+            "Service"
           ]
         },
-        " ",
-        ": Required. A list of node selector terms. The terms are ORed."
-      ]
-    },
-    {
-      "$$mdtype": "Tag",
-      "name": "p",
-      "attributes": {},
-      "children": [
         {
           "$$mdtype": "Tag",
-          "name": "code",
+          "name": "dd",
           "attributes": {},
           "children": [
-            "site"
+            "Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application."
           ]
         },
-        " ",
-        ": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to ",
         {
           "$$mdtype": "Tag",
-          "name": "code",
+          "name": "dt",
           "attributes": {},
           "children": [
-            "datadoghq.com"
+            "Resource"
           ]
         },
-        "."
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dt",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution"
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Required. A list of node selector terms. The terms are ORed."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dt",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "site"
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Set the site of the Datadog intake for Agent data. Defaults to ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "datadoghq.com"
+              ]
+            },
+            "."
+          ]
+        }
       ]
     }
   ]
