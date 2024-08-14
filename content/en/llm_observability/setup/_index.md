@@ -22,7 +22,7 @@ To start sending data to LLM Observability, instrument your application with the
 
 You can visualize the interactions and performance data of your LLM applications on the [**LLM Observability Traces** page][3], where each request fulfilled by your application is represented as a trace.
 
-{{< img src="llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
+{{< img src="llm_observability/traces.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
 For more information about traces, see [Terms and Concepts][4] and decide which instrumentation option best suits your application's needs.
 
