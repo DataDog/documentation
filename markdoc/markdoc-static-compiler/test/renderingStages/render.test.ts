@@ -63,11 +63,13 @@ describe('rendering stages', () => {
 
   test('renderableTree', () => {
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      '../__snapshots__/renderableTree.snap.json'
+      '../__snapshots__/renderingStages/renderableTree.snap.json'
     );
   });
 
   test('renderedHtml', () => {
-    expect(formattedHtml).toMatchFileSnapshot('../__snapshots__/renderedHtml.snap.html');
+    expect(formattedHtml).toMatchFileSnapshot(
+      '../__snapshots__/renderingStages/renderedHtml.snap.html'
+    );
   });
 });
