@@ -101,11 +101,11 @@ For a comprehensive list of environment variables set by Bitbucket for every bui
 
 | Environment Variable                | Description                                                                                                      |
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `BITRISE_BUILD_SLUG`                | The slug that uniquely identifies a build on bitrise.io. It’s part of the build URL.                             |
+| `BITRISE_BUILD_SLUG`                | The slug that uniquely identifies a build on bitrise.io. It's part of the build URL.                             |
 | `BITRISE_TRIGGERED_WORKFLOW_ID`     | The ID of the Workflow that was triggered, exposed regardless of whether the Workflow was triggered manually or automatically. |
 | `BITRISE_BUILD_NUMBER`              | Build number of the build on bitrise.io.                                                                         |
 | `BITRISE_BUILD_URL`                 | The URL of the build on bitrise.io.                                                                              |
-| `BITRISE_SOURCE_DIR`                | Path to the base working directory. By default, it’s the directory where Bitrise runs, unless you provide a different value. |
+| `BITRISE_SOURCE_DIR`                | Path to the base working directory. By default, it's the directory where Bitrise runs, unless you provide a different value. |
 | `GIT_REPOSITORY_URL`                | The URL of the Git repository that hosts your app.                                                               |
 | `BITRISE_GIT_COMMIT`                | The commit hash of the Git commit that triggered the build, when applicable.                                     |
 | `GIT_CLONE_COMMIT_HASH`             | The hash of the commit that the build uses (the cloned commit).                                                  |
@@ -232,7 +232,7 @@ For a comprehensive list of environment variables set by GitHub Actions for ever
 | `CI_PIPELINE_IID`     | The project-level IID (internal ID) of the current pipeline. Unique only within the current project.      |
 | `CI_PROJECT_PATH`     | The project namespace with the project name included.                                                     |
 | `CI_PROJECT_DIR`      | The full path the repository is cloned to, and where the job runs from.                                   |
-| `CI_JOB_STAGE`        | The name of the job’s stage.                                                                            |
+| `CI_JOB_STAGE`        | The name of the job's stage.                                                                            |
 | `CI_JOB_NAME`         | The name of the job.                                                                                     |
 | `CI_JOB_URL`          | The job details URL.                                                                                     |
 | `CI_JOB_ID`           | The internal ID of the job, unique across all jobs in the GitLab instance.                               |
@@ -310,7 +310,7 @@ For a comprehensive list of environment variables set by TeamCity for every buil
 | `TRAVIS_REPO_SLUG`           | The slug (in form: `owner_name/repo_name`) of the repository currently being built.                   |
 | `TRAVIS_COMMIT`              | The commit that the current build is testing.                                                         |
 | `TRAVIS_BRANCH`              | For push builds, the name of the branch. For PR builds, the name of the branch targeted by the PR.    |
-| `TRAVIS_TAG`                 | If the current build is for a Git tag, this variable is set to the tag’s name, otherwise it is empty. |
+| `TRAVIS_TAG`                 | If the current build is for a Git tag, this variable is set to the tag's name, otherwise it is empty. |
 | `TRAVIS_PULL_REQUEST_SLUG`   | If the current job is a pull request, the slug of the repository from which the PR originated.        |
 | `TRAVIS_PULL_REQUEST_BRANCH` | If the current job is a pull request, the name of the branch from which the PR originated.            |
 | `TRAVIS_COMMIT_MESSAGE`      | The commit subject and body, unwrapped.                                                               |
