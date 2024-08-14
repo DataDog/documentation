@@ -57,11 +57,6 @@ export const regionParamDefinition = {
 
 export class RegionParam extends CustomHtmlComponent {
   render() {
-    let result = '{{< region-param';
-    Object.keys(this.tag.attributes).forEach((key) => {
-      result += ` ${key}="${this.tag.attributes[key]}"`;
-    });
-    result += ' >}}';
-    return result;
+    return `{{< region-param ${this.forwardNamedAttributes()} >}}`;
   }
 }

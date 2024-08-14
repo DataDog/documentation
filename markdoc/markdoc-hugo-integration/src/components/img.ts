@@ -12,17 +12,15 @@ export const imgDefinition = {
     },
     style: {
       type: String
+    },
+    video: {
+      type: Boolean
     }
   }
 };
 
 export class Img extends CustomHtmlComponent {
   render() {
-    let result = '\n<!-- prettier-ignore -->\n{{< img';
-    Object.keys(this.tag.attributes).forEach((key) => {
-      result += ` ${key}="${this.tag.attributes[key]}"`;
-    });
-    result += ' >}}\n';
-    return result;
+    return `\n<!-- prettier-ignore -->\n{{< img ${this.forwardNamedAttributes()} >}}\n`;
   }
 }

@@ -18,6 +18,14 @@ export abstract class CustomHtmlComponent {
     }
   }
 
+  forwardNamedAttributes(): string {
+    let result = '';
+    Object.keys(this.tag.attributes).forEach((key) => {
+      result += ` ${key}="${this.tag.attributes[key]}"`;
+    });
+    return result;
+  }
+
   escapeHtml(str: string): string {
     return escapeHtml(str);
   }
