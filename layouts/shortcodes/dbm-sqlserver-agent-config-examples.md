@@ -52,9 +52,9 @@ instances:
     include_fci_metrics: true   # If Failover Clustering is enabled
 ```
 
-### Using Agent Jobs
+### Monitoring SQL Server Agent Jobs
 
-**Note: For Agent Jobs users, the Agent must have access to the [msdb] database**.
+**Note: For monitoring SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database**.
 
 ```yaml
 instances:
