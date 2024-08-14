@@ -9,6 +9,8 @@ further_reading:
       text: 'Learn about the LLM Observability SDK for Python'
 ---
 
+<div class="alert alert-info">The Datadog platform offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide and empower out-of-the-box dashboards. These integrations are different from the LLM Observability offering, which includes SDK autoinstrumentation capabilities and features to monitor your LLM applications. For more information, see the respective documentation to understand distinct use cases and functionalities.</div>
+
 ## Overview
 
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
