@@ -91,7 +91,7 @@ Key benefits:
 
 ### Requirements
 
-- Supports the two latest Go runtime releases (matching [Go's official release policy][8]). Older Go runtimes may function, but are not supported by default. For special requests, [contact support][9].
+- Supports the two latest Go runtime releases (matching [Go's official release policy][8]).
 - Applications must be managed using [go modules][10]. Module vendoring is supported.
 
 #### Supported packages
