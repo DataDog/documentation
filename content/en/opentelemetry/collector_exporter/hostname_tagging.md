@@ -427,8 +427,58 @@ Attributes:
      -> rpc.grpc.status_code: Int(0)
 ```
 
+## Custom tagging
+
+### Custom host tags
+
+#### In the Collector
+
+Set custom hosts tags directly in the Collector:
+```
+      ## @param tags - list of strings - optional - default: empty list
+      ## List of host tags to be sent as part of the host metadata.
+      ## These tags will be attached to telemetry signals that have the host metadata hostname.
+      ##
+      ## To attach tags to telemetry signals regardless of the host, use a processor instead.
+      #
+      tags: ["team:infra", "<TAG_KEY>:<TAG_VALUE>"]
+```
+See all configurations options [here][6].
+
+#### In OTEL Instrumentation
+
+Custom host tags can also be set in your OTEL instrumentation by prefixing resource attributes by `datadog.host.tag`.
+
+This can be set as an env var `OTEL_RESOURCE_ATTRIBUTES=datadog.host.tag.<custom_tag_name>=<custom_tag_value>` in the [OTEL SDK][5].
+Or this can be set in a processor (if corresponding resource attributes already exists): 
+```
+processors:
+  resource:
+    attributes:
+    - key: datadog.host.tag.<custom_tag_name>
+      action: upsert
+      from_attribute: <custom_tag_name>
+```
+
+
+### Custom container tags
+
+Same as for custom host tags, custom containers tags can be set by prefixing resource attributes by `datadog.container.tag` in your OTEL instrumentation.
+
+This can be set as an env var `OTEL_RESOURCE_ATTRIBUTES=datadog.container.tag.<custom_tag_name>=<custom_tag_value>` in the [OTEL SDK][5].
+Or this can be set in a processor (if corresponding resource attributes already exists): 
+```
+processors:
+  resource:
+    attributes:
+    - key: datadog.container.tag.<custom_tag_name>
+      action: upsert
+      from_attribute: <custom_tag_name>
+```
 
 [1]: https://opentelemetry.io/docs/specs/semconv/resource/
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
+[5]: https://opentelemetry.io/docs/languages/js/resources/
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml 
