@@ -110,8 +110,7 @@ Reduce your indexed custom metrics volumes on any metric name by setting a tag c
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
-
-These intelligent query insights continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to us so that your recommended tag configurations are always relevant.
+- Intelligent query insights that continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to us so that your recommended tag configurations are always relevant.
 - Ability to roll back changes at any time to get full visibility into all your originally submitted data.
 
 As part of Datadog's metrics governance best practices, start by using Metrics without Limits on your [Top Custom Metrics](#identify-metrics-that-have-the-biggest-impact-on-monthly-bill).
