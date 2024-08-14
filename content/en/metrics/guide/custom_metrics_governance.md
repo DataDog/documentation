@@ -47,7 +47,7 @@ See the steps in this section to review your total account's monthly metric usag
 
 <div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
-Get a summary of your monthly billable custom metrics usage and costs through the [Plan and Usage][1] details. This out-of-the-box (OOTB) summary of your account's monthly metrics usage provides detailed insights on your monthly Custom Metrics usage, costs, burn rate, and Top Custom Metric Names. 
+The [Plan and Usage][1] provides you an out-of-the-box (OOTB) summary of your account's monthly billable custom metrics usage with detailed insights on your costs, burn rate, and Top Custom Metric names.
 
    1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
    1. Click the **Custom Metrics** tab to view your organization's billable custom metrics usage, usage trends, and top custom metric names.
