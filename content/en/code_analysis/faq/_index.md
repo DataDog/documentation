@@ -115,7 +115,7 @@ Installing and invoking the tool can be done with the two following commands:
 npm install -g @datadog/datadog-ci
 
 # Upload SARIF file
-datadog-ci sarif upload --service "your-app" --env "ci" /path/to/sarif-file.json
+datadog-ci sarif upload /path/to/sarif-file.json
 ```
 
 If you want to import using a tool that is not supported, contact your Customer Success Manager.
@@ -169,7 +169,7 @@ Installing and invoking the tool can be done using these two commands:
 npm install -g @datadog/datadog-ci
 
 # Upload SBOM file
-datadog-ci sbom upload --service "your-app" --env "ci" /path/to/sbom-file.json
+datadog-ci sbom upload /path/to/sbom-file.json
 ```
 
 ## Further reading
