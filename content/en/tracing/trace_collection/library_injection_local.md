@@ -225,6 +225,15 @@ The library injection mechanism for Python only supports injecting the Python li
 - **Solution**: Remove the installation of `ddtrace` if library injection is desired. Otherwise, use the installed library ([see documentation][26]) instead of library injection.
 
 
+#### TLS issues
+
+##### `tls: protocol version not supported`
+
+- **Problem**: Since Cluster Agent v1.20, the API is only served using TLS v1.3 by default. If the Kubernetes cluster is configured with TLS v1.2 or older, library injection fails.
+
+- **Solution**: Set `DD_CLUSTER_AGENT_ALLOW_LEGACY_TLS` to `true` for Cluster Agent.
+
+
 [1]: /containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [3]: /containers/kubernetes/installation/?tab=helm
