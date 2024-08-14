@@ -8,7 +8,7 @@ description: Recopila datos de RUM de tus proyectos Flutter.
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
   tag: Documentación
-  text: Configuración de RUM Flutter Advanced
+  text: Configuración avanzada de RUM Flutter
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: Código fuente
   text: Código fuente de dd-sdk-flutter
