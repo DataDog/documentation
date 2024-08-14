@@ -49,7 +49,7 @@ En el siguiente ejemplo se calcula una puntuación de Apdex utilizando la métri
 4. En **Seleccionar una visualización**, haz clic en **Valor de consulta**. Aparece un widget de valor de consulta.
 5. En el selector de marco temporal, selecciona **Pasado 1 día**. Por defecto, el widget se muestra en Hora global.
 6. Introduce un nombre para el gráfico, por ejemplo `Apdex Score`.
-7. También puedes exportar o copiar y pegar el gráfico sencillo en un dashboard o notebook o puedes hacer clic en **Exportar** > **Nuevo dashboard** para crear un dashboard con este gráfico sencillo. 
+7. También puedes exportar o copiar y pegar el Quick Graph en un dashboard o notebook o puedes hacer clic en **Exportar** > **Nuevo dashboard** para crear un dashboard con este Quick Graph. 
 
 #### Consulta A
 
@@ -68,13 +68,13 @@ En el siguiente ejemplo se calcula una puntuación de Apdex utilizando la métri
 2. Selecciona `RUM` como fuente de datos para la consulta `c` e introduce `@Type:view`.
 3. Pulsa Intro o haz clic en **Actualizar consulta** en el menú desplegable. La consulta `Type:view` aparece junto a `RUM` para la consulta `c`.
 
-{{< img src="real_user_monitoring/guide/quick-graph.png" alt="Puntuación de Apdex en un gráfico sencillo" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/quick-graph.png" alt="Puntuación de Apdex en un Quick Graph" style="width:100%;">}}
 
 ### Configuración JSON
 
 Para acceder al código JSON de este gráfico, haz clic en la pestaña **JSON** junto a **Editar**.
 
-Haz clic en el icono de copia en la esquina derecha para copiar el gráfico sencillo JSON en el portapapeles.
+Haz clic en el icono de copia en la esquina derecha para copiar el Quick Graph JSON en el portapapeles.
 
 {{< code-block lang="json" filename="JSON" disable_copy="false" collapsible="true" >}}
 {
@@ -149,7 +149,7 @@ También puedes calcular otras puntuaciones de Apdex con los siguientes métodos
 - Para calcular la puntuación de Apdex para una aplicación específica, añade una consulta adicional `@application.name` y actualiza tu fórmula.
 - Para calcular la puntuación de Apdex con otra métrica de rendimiento RUM, como First Contentful Paint, sustituye `@view.LargestContentfulPaint` por `@view.FirstContentfulPaint` en las consultas.
 
-Para calcular indicadores de rendimiento adicionales para tus aplicaciones, determina qué puntos de datos necesitas y qué eventos RUM son relevantes para ti, antes de [crear un gráfico sencillo](#create-a-quick-graph).
+Para calcular indicadores de rendimiento adicionales para tus aplicaciones, determina qué puntos de datos necesitas y qué eventos RUM son relevantes para ti, antes de [crear un Quick Graph](#create-a-quick-graph).
 
 ## Referencias adicionales
 
