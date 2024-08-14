@@ -220,6 +220,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitations
 
+### File sizing
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Mapping files are limited to **500** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 {{< /site-region >}}
@@ -241,6 +242,13 @@ datadog {
     )
 }
 ```
+
+### Collection
+The SDK handles crash reporting with the following behaviors:
+
+- The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
+- RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (typically an Activity or Fragment in an `onResume` state), or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][10] in your `RumConfiguration` builder.
+- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate of 100%][11], some will not be reported.
 
 ## Test your implementation
 
