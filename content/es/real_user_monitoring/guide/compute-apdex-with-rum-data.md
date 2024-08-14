@@ -23,9 +23,9 @@ title: Cálculo de la puntuación de Apdex y de los indicadores de rendimiento p
 
 ## Información general
 
-Datadog recopila eventos Real User Monitoring (RUM) a partir de los SDK RUM de navegadores y móviles, que puedes utilizar para crear un gráfico sencillo y calcular métricas de indicadores de rendimiento como Apdex. 
+Datadog recopila eventos Real User Monitoring (RUM) a partir de los SDK RUM de navegadores y móviles, que puedes utilizar para crear un Quick Graph y calcular métricas de indicadores de rendimiento como Apdex. 
 
-Para calcular tu puntuación de Apdex, puedes utilizar la monitorización de servicios de APM o los datos de monitorización de usuarios a partir de los SDK RUM. Esta guía proporciona instrucciones sobre el cálculo de Apdex para una aplicación con datos RUM y el widget **Valor de consulta** en un [gráfico sencillo][1].
+Para calcular tu puntuación de Apdex, puedes utilizar la monitorización de servicios de APM o los datos de monitorización de usuarios a partir de los SDK RUM. Esta guía proporciona instrucciones sobre el cálculo de Apdex para una aplicación con datos RUM y el widget **Valor de consulta** en un [Quick Graph][1].
 
 Para obtener más información sobre el cálculo de Apdex utilizando datos de monitorización de servicios, consulta [Configurar la puntuación de Apdex por servicio][2].
 
@@ -36,11 +36,11 @@ Para obtener más información sobre el cálculo de Apdex utilizando datos de mo
 
 ## Cálculo de una puntuación de Apdex 
 
-En el siguiente ejemplo se calcula una puntuación de Apdex utilizando la métrica de rendimiento Largest Contentful Paint de eventos RUM y un umbral hipotético de `T = 2 sec`. La latencia de frustración mínima es `4T = 8 sec`. El valor resultante se muestra en un gráfico sencillo del widget de valor de consulta, que puedes exportar a dashboards o notebooks.
+En el siguiente ejemplo se calcula una puntuación de Apdex utilizando la métrica de rendimiento Largest Contentful Paint de eventos RUM y un umbral hipotético de `T = 2 sec`. La latencia de frustración mínima es `4T = 8 sec`. El valor resultante se muestra en un Quick Graph del widget de valor de consulta, que puedes exportar a dashboards o notebooks.
 
-### Crear un gráfico sencillo
+### Crear un Quick Graph
 
-1. Ve a **dashboards** > **Gráfico sencillo**.
+1. Ve a **dashboards** > **Quick Graph**.
 2. Crea tres consultas RUM:
    * [Consulta `a`](##query-a) para todas las cargas de páginas satisfactorias (vistas RUM en las que Largest Contentful Paint tarda menos de 2 segundos en cargarse).
    * [Consulta `b`](#query-b) para todas las cargas de páginas toleradas (vistas RUM en las que Largest Contentful Paint tarda menos de 8 segundos en cargarse).
