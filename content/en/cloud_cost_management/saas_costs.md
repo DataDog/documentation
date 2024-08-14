@@ -158,13 +158,14 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 {{% tab "Elastic Cloud" %}}
 In Cloud Cost Management, you can access your Elastic Cloud cost data for the past 15 months after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-1. In your browser, see the [API Key][102] section in your Elastic Cloud organization's settings.
-2. Click the **Create New Key** button.
+1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
+2. Click **Create New Key**.
 3. Choose a **Name** and **Expiration Date** for your API key.
 4. Select the **Billing Admin** role.
-5. Click the **Create Key** button to generate the key.
-7. Navigate to the [Elastic Cloud integration tile][101] in Datadog and click **Add Account**.
-7. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table on the Elastic Cloud Integration tile in Datadog.
+5. Click **Create Key** to generate the key.
+6. Go to the [Elastic Cloud integration tile][101] in Datadog
+7. Click **Add Account**.
+8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
 
 {{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
 
