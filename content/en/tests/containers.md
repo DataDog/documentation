@@ -110,7 +110,7 @@ For a comprehensive list of environment variables set by Bitbucket for every bui
 | `BITRISE_GIT_COMMIT`                | The commit hash of the Git commit that triggered the build, when applicable.                                     |
 | `GIT_CLONE_COMMIT_HASH`             | The hash of the commit that the build uses (the cloned commit).                                                  |
 | `BITRISEIO_GIT_BRANCH_DEST`         | The destination or target branch of the pull request that triggered the build, used only with builds triggered by pull requests. |
-| `BITRISE_GIT_BRANCH`                | The git branch that is built by Bitrise, for example, `main`.                                                    |
+| `BITRISE_GIT_BRANCH`                | The Git branch that is built by Bitrise, for example, `main`.                                                    |
 | `BITRISE_GIT_TAG`                   | If a build is triggered by a Git tag, this environment variable stores the tag used.                                          |
 | `BITRISE_GIT_MESSAGE`               | The commit message, pull request title, or the message you specified if you triggered the build manually.        |
 | `BITRISE_APP_TITLE`                 | The title of your app on bitrise.io.                                                                             |
@@ -140,7 +140,7 @@ For a comprehensive list of environment variables set by Bitrise for every build
 | `BUILDKITE_BUILD_URL`         | The URL for this build on Buildkite.                                                             |
 | `BUILDKITE_BUILD_CHECKOUT_PATH` | The path where the agent has checked out your code for this build.                             |
 | `BUILDKITE_REPO`              | The repository of your pipeline.                                                                  |
-| `BUILDKITE_COMMIT`            | The git commit object of the build.                                                              |
+| `BUILDKITE_COMMIT`            | The Git commit object of the build.                                                              |
 | `BUILDKITE_BRANCH`            | The branch being built.                                                                         |
 | `BUILDKITE_TAG`               | The name of the tag being built, if this build was triggered from a tag.                        |
 | `BUILDKITE_MESSAGE`           | The message associated with the build, usually the commit message.                             |
@@ -310,7 +310,7 @@ For a comprehensive list of environment variables set by TeamCity for every buil
 | `TRAVIS_REPO_SLUG`           | The slug (in form: `owner_name/repo_name`) of the repository currently being built.                   |
 | `TRAVIS_COMMIT`              | The commit that the current build is testing.                                                         |
 | `TRAVIS_BRANCH`              | For push builds, the name of the branch. For PR builds, the name of the branch targeted by the PR.    |
-| `TRAVIS_TAG`                 | If the current build is for a git tag, this variable is set to the tag’s name, otherwise it is empty. |
+| `TRAVIS_TAG`                 | If the current build is for a Git tag, this variable is set to the tag’s name, otherwise it is empty. |
 | `TRAVIS_PULL_REQUEST_SLUG`   | If the current job is a pull request, the slug of the repository from which the PR originated.        |
 | `TRAVIS_PULL_REQUEST_BRANCH` | If the current job is a pull request, the name of the branch from which the PR originated.            |
 | `TRAVIS_COMMIT_MESSAGE`      | The commit subject and body, unwrapped.                                                               |
@@ -330,7 +330,7 @@ For a comprehensive list of environment variables set by Travis CI for every bui
 | `BUDDY`                                 | Represents whether the current environment is a Buddy environment. For example: `true`.    |
 | `BUDDY_SCM_URL`                         | The URL of the repository synchronized with the project. For example: `https://github.com/githubaccount/repository`. |
 | `BUDDY_EXECUTION_REVISION`              | The SHA1 hash of the commit of the current pipeline run. For example: `46c360492d6372e5335300776806af412755871`. |
-| `BUDDY_EXECUTION_BRANCH`                | The name of the Git branch of the current pipeline run. For example: `master`.             |
+| `BUDDY_EXECUTION_BRANCH`                | The name of the Git branch of the current pipeline run. For example: `main`.             |
 | `BUDDY_EXECUTION_TAG`                   | The name of the Git tag of the current pipeline run (if tagged). For example: `v1.0.1`.    |
 | `BUDDY_PIPELINE_ID`                     | The ID of the run pipeline. For example: `1`.                                             |
 | `BUDDY_EXECUTION_ID`                    | The ID of the current pipeline run. For example: `1`.                                     |
