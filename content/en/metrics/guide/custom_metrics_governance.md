@@ -53,6 +53,7 @@ Get a summary of your monthly billable custom metrics usage and costs through th
    1. Click the **Custom Metrics** tab to view your organization's billable custom metrics usage, usage trends, and top custom metric names.
    1. Scroll down to the *Top Custom Metrics for \<MONTH YEAR\>*, to see the top metric names with their contribution % to your custom metrics costs.
 
+Knowing which metrics are the largest contributor of your account's monthly usage and costs is the recommended starting point for using [Metrics without Limits™][4]. With this knowledge, you can find the source of these metric submissions whether by teams, service, organization, or other tag attribute.
 Additionally, review [Usage Attribution][3] information for a total breakdown of your account's billable usage by tag keys. From here, you can identify your largest cost drivers by tags such as team, service, or application. 
 
 **Note**: Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or Customer Success to request this feature.
@@ -113,7 +114,9 @@ With Metrics without Limits™, Datadog automatically provides the following:
 These intelligent query insights continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to us so that your recommended tag configurations are always relevant.
 - Ability to roll back changes at any time to get full visibility into all your originally submitted data.
 
-For more information on getting started, see the [Metrics without Limits™][4] documentation.
+As part of Datadog's metrics governance best practices, start by using Metrics without Limits on your [Top Custom Metrics](#identify-metrics-that-have-the-biggest-impact-on-monthly-bill).
+
+For more details, see the [Metrics without Limits™][4] documentation.
 
 ### Prevent unintentional configurations that reduce observability with RBAC
 
@@ -162,7 +165,10 @@ To view a metric's related assets:
 1. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets. 
 
 ## Monitoring and prevention
-
+In this section, you’ll learn about how to: 
+- Alert on overages and sudden spikes in your overall account's custom metrics usage
+- Forecast future metrics growth and alert on any unexpected overall deviation
+- Alert when a particular metric’s cardinality exceeds a user-defined threshold or anomalously spikes
 After you have an understanding of your account's metric usage and the teams responsible for those costs, build monitors to alert you when your custom metrics usage exceeds a certain threshold. Get alerts on spikes in custom metric usage, so you can prevent unintentional bill spikes.
 
 Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. You can use these metrics in your dashboard visualizations and monitor alerts. 
