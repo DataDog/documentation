@@ -21,7 +21,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 2. Copy the Datadog Node.JS tracer into your Docker image.
 
    ```dockerfile
-   COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+   RUN npm install --prefix /dd_tracer/node dd-trace  --save
    ```
 
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
