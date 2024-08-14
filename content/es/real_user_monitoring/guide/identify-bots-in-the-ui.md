@@ -1,13 +1,13 @@
 ---
 algolia:
   tags:
-  - bots
+  - robots
 description: Identifica las solicitudes RUM entrantes.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentación
   text: Más información sobre el Explorador RUM
-title: Identificar bots en el Explorador RUM
+title: Identificar robots en el Explorador RUM
 ---
 
 ## Información general
@@ -20,11 +20,11 @@ En el [Explorador RUM][2], selecciona **Vistas** en el menú desplegable e intro
 
 {{< img src="real_user_monitoring/guide/identify-bots/rum-explorer-bot-views-1.png" alt="Filtro de vistas actualizado y consulta de búsqueda especificada en el Explorador RUM" style="width:100%" >}}
 
-Busca en la lista de vistas y haz clic en un evento de vista para abrir el panel lateral **Vista**. Haz clic en la pestaña **Atributos** para validar el bot en el campo **Nombre del navegador** en **Sesión**.
+Busca en la lista de vistas y haz clic en un evento de vista para abrir el panel lateral **Vista**. Haz clic en la pestaña **Atributos** para validar el robot en el campo **Nombre del navegador** en **Sesión**.
 
-## Filtrar sesiones de bots durante la admisión
+## Filtrar sesiones de robots durante la admisión
 
-Para filtrar las sesiones de bots, puedes definir condicionalmente un `sessionSampleRate` de `0` para las sesiones de bots, comprobando el `user-agent` con una [lista de bots conocidos][3] cuando la aplicación inicializa el SDK del Navegador RUM.
+Para filtrar las sesiones de robots, puedes definir condicionalmente un `sessionSampleRate` de `0` para las sesiones de robots, comprobando el `user-agent` con una [lista de robots conocidos][3] cuando la aplicación inicializa el SDK del Navegador RUM.
 
 Por ejemplo, este script de ejemplo utiliza un lista de robots conocidos para filtrar las sesiones con robots:
 
