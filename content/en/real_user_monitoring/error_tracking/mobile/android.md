@@ -244,7 +244,7 @@ datadog {
 ```
 
 ### Collection
-The SDK exhibits the following behaviours regarding crash reporting:
+The SDK handles crash reporting with the following behaviors:
 
 - The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
 - Crashes in RUM must be attached to a RUM View. If a crash occurs before a view is visible (typically an Activity or Fragment in an onResume state), or after the app is sent to the background by the end-user navigating away from it, the crash will be muted and won't be reported for collection. This can be mitigated by leveraging the `trackBackgroundEvents()` [method][10] in your `RumConfiguration` builder.
