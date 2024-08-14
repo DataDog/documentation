@@ -13,11 +13,11 @@ title: Consejos para utilizar herramientas de desarrollo del navegador
 
 Esta guía proporciona algunos consejos para el uso de herramientas de desarrollo (DevTools) del navegador, incluidas en los navegadores modernos para depurar aplicaciones instrumentadas con un SDK del navegador Datadog.
 
-## Asegúrate de que los números de archivos y de líneas coinciden en la consola de DevTools
+## Asegúrate de que el archivo y los números de línea coinciden en la consola de DevTools
 
 El SDK del navegador instrumenta las funciones de la consola (`console.error`, pero también `.log`, `.info` y `.warn`) para recopilar datos sobre el comportamiento de la aplicación.
 Esto puede provocar que la consola de DevTools muestre el número de línea y el archivo incorrectos, como se muestra a continuación:
-{{< img src="real_user_monitoring/guide/devtools-tips/issue_console.png" alt="Consola de DevTools que muestra un problema de número de archivo y de línea incorrecto en una sentencia console.error.">}}
+{{< img src="real_user_monitoring/guide/devtools-tips/issue_console.png" alt="Consola de DevTools que muestra un problema de archivo y número de línea incorrectos en una sentencia console.error.">}}
 
 En la imagen anterior, la función `console.error` está instrumentada. Observa que en lugar de mostrar el archivo real y el número de línea en que se ha llamado a esta sentencia, `VM505:1`, la consola muestra `datadog-rum.js:1`.
 
