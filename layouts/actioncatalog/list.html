@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
-{{ $workflow_bundles := site.Data.workflow_bundles }}
+{{ $workflow_bundles := sort site.Data.workflow_bundles "title" }}
 
 {{ if eq $workflow_bundles nil }}
   {{ $err_msg := "Could not load workflow bundles data" }}
@@ -23,11 +23,15 @@
 </div>
 
 {{ .Content }}
+{{/*
 <div class="form-group clearfix">
   <input type="input" data-ref="search" class="form-control grouped-item-search mb-3 position-relative" id="keywords" placeholder="Search here" aria-label="keywords"/>
 </div>
+*/}}
 
 <form id="rules">
+  {{- partial "grouped-item-listings.html" (dict "context" $dot "data" $workflow_bundles) -}}
+  {{/*
   <div>
     <div class="js-empty-results d-none font-semibold"></div>
     {{ range sort $workflow_bundles "name" }}
@@ -67,5 +71,6 @@
       </div>
     {{ end }}
   </div>
+  */}}
 </form>
 {{ end }}

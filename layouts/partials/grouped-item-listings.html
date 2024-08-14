@@ -1,6 +1,14 @@
+<!--
+{{/* 
+  .data is expected to be json, yaml, csv, etc.
+  .listGroups is expected to be a list of Hugo Page objects.
+  Both should not be provided together.
+*/}}
+-->
 {{- $ctx := .context -}}
 {{- $filters := .filters -}}
 {{- $listGroups := .listgroups -}}
+{{- $data := .data -}}
 {{- $transformGroupTitle := .transformGroupTitle | default false -}}
 
 {{ with $filters }}
@@ -19,10 +27,14 @@
 
 <div>
   <div class="js-empty-results d-none font-semibold"></div>
-  {{ range $i, $v := $listGroups }}
+  {{ $iterator := cond (gt (len $data) 0) $data $listGroups }}
+
+  {{ range $i, $v := $iterator }}
   <div class="js-group js-group-{{ $i }}" id="{{ $v.Key | anchorize }}">
     <div class="js-group-header mb-1 d-flex align-items-center active" id="">
       <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
+        {{ $dataset := cond (gt (len $data) 0) $v.actions $v.Pages }}
+        
         {{ range last 1 $v.Pages }}
           {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}
           {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
