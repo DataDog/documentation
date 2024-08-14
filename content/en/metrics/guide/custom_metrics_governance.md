@@ -19,7 +19,7 @@ further_reading:
 
 Cloud-based applications can generate massive amounts of data and large observability costs, ultimately placing pressure on organizations to reduce this budget line item. To reduce observability costs, many teams resort to collecting fewer metrics; however, for centralized SRE and observability teams, effective custom metrics governance should increase monitoring efficiency rather than cut visibility entirely.
 
-This guide gives a walkthrough of the best practices for managing your custom metrics volumes through the three key components of effective metrics governance: **Visibility and Attribution**, **Actionable Custom Metrics Governance**, and **Monitoring and Prevention**. Learn how to use available Datadog tools to help you maintain cost-effective observability With the three key components of custom metrics governance. You'll learn how to:
+This guide provides best practices for managing your custom metrics volumes through the three key components of effective metrics governance: **Visibility and Attribution**, **Actionable Custom Metrics Governance**, and **Monitoring and Prevention**. Learn how to use available Datadog tools to maintain cost-effective observability for these key components. You'll learn how to:
 - [Find and understand your metrics usage and billing information](#visibility-and-attribution)
 - [Identify your largest cost drivers](#account-level-visibility)
 - [Filter down to the teams or services that are responsible for your largest cost drivers](#team-level-visibility-and-attribution)
@@ -39,13 +39,15 @@ This guide gives a walkthrough of the best practices for managing your custom me
 
 ## Visibility and attribution
 
-The first step of managing your custom metrics volumes and costs is understanding what the key drivers of your metric costs are and attributing those drivers to their respective owners. Review your total account's monthly metric usage and also see a breakdown of your account's usage by team or any arbitrary tag key you choose.
+The first step for managing your custom metrics volumes and costs is understanding what the key metric costs drivers are and attributing those drivers to their respective owners. 
+
+See the steps in this section to review your total account's monthly metric usage and see a breakdown of your account's usage by team or by select a tag key.
 
 ### Account-level visibility
 
 <div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
-Get a summary of your monthly billable custom metrics usage and its associated costs through the [Plan and Usage][1] details. This is an out-of-the-box (OOTB) summary of your account's monthly metrics usage that provides you detailed insights on your monthly Custom Metrics usage, costs, burn rate, and Top Custom Metric Names. 
+Get a summary of your monthly billable custom metrics usage and costs through the [Plan and Usage][1] details. This out-of-the-box (OOTB) summary of your account's monthly metrics usage provides detailed insights on your monthly Custom Metrics usage, costs, burn rate, and Top Custom Metric Names. 
 
    1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
    1. Click the **Custom Metrics** tab to view your organization's billable usage, usage trends, and top custom metrics.
@@ -59,9 +61,11 @@ Knowing which metrics are the largest contributor of your account's monthly usag
 
 ### Team-level visibility and attribution
 
-Individual teams may have limited insights into the costs of the metrics and tags they're submitting. This results in teams being less motivated to control their usage or even limit usage growth. It is crucial for everyone to have visibility into their usage and feel empowered to take ownership in managing those volumes and associated costs. Team-level visibility gives account administrators the ability to hold teams accountable, but more importantly, gives teams the opportunity to understand and reduce their impact on metrics volume.
+Team-level visibility enables account administrators to hold teams accountable. More importantly, it gives teams the opportunity to understand and reduce their impact on metrics volume.
 
-#### Find out where your largest custom metrics are coming from
+Individual teams might have limited insights into the costs of the metrics and tags they're submitting. This results in teams being less motivated to control their usage or even limit usage growth. It is crucial for everyone to have visibility into their usage and feel empowered to take ownership in managing those volumes and associated costs.```
+
+#### Find the source of your largest custom metrics
 <div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
 {{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navigate to the Metrics Summary from the Plan & Usage page through the Top Custom Metrics table" style="width:90%;" >}}
@@ -70,13 +74,12 @@ To identify which team or service is responsible for any custom metric:
 
 1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
 1. Click the **Custom Metrics** tab to view your organization's billable usage, usage trends, and top custom metrics.
-1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click  the icon to **See in Metrics Summary** for the top custom metric.
-1. This takes you to the *Metrics Summary* page with the opened metric details sidepanel. 
-1. In the sidepanel, scroll down to the *Tags* section to view associated tags such as teams and service.
+1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click  the icon to **See in Metrics Summary** for the top custom metric. This takes you to the *Metrics Summary* page with the opened metric details side panel. 
+1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
 
-You can also view the responsible teams through the [Usage Attribution page][5]. See a breakdown of your account's bill by any arbitrary tag key of your choosing. For example, `team:X` emits a volume of 10K custom metrics. 
+You can also view the responsible teams through the [Usage Attribution page][5]. To see a breakdown of your account's bill, select any tag key. For example, `team:X` emits a volume of 10K custom metrics. 
 
-#### View the custom metrics your team is submitting
+#### View your team's custom metrics
 
 All teams should have visibility into which metrics are driving their bill spikes in real-time and feel confident that their cost optimization efforts do not impact another team's visibility.
 
@@ -86,22 +89,24 @@ To see all actively reporting metrics submitted by your team:
 
 #### Identify metrics that have the biggest impact on monthly bill
 
-All users in your organization can see real-time estimated custom metrics usage on the [Metrics Volume Management page][7]. Identify which metrics to focus your cost-optimization efforts on. Use Metrics Volume Management with Metrics without Limits™, to configure your metrics ingestion and indexing and reduce costs without sacrificing accuracy.
+All users in your organization can see realtime estimated custom metrics usage on the [Metrics Volume Management page][7]. Identify which metrics to focus your cost-optimization efforts on. Use Metrics Volume Management with Metrics without Limits™, to configure your metrics ingestion and indexing and reduce costs without sacrificing accuracy.
 
-With the Metrics Volume Management page you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
+With Metrics Volume Management, you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
 
 For more information, see the [Metrics Volume Management][8] documentation.
 
 ## Actionable custom metrics governance
 
 Effective custom metrics governance should increase monitoring efficiency. After you understand what your usage is and can narrow down the source of usage spikes, you can take action to reduce your metrics. These actions should help you maximize the ROI and value you get from your observability spend without sacrificing the visibility that your team actively relies on. Cut out the metrics you're not getting as much value from and have more control over your costs by: 
-- Taking advantage of Datadog's Metrics without Limits™ to specify which metrics you want to index or ingest
-- Restricting the configuration of Metrics without Limits™ to designated roles with RBAC
-- Identifying unqueried metrics and metrics that are not being used in Datadog asets
+- Taking advantage of Datadog's Metrics without Limits™ to specify which metrics you want to index or ingest.
+- Restricting the configuration of Metrics without Limits™ to designated roles with RBAC.
+- Identifying unqueried metrics and unused metrics in Datadog assets.
 
 ### Metrics without Limits™
 
-Datadog's [Metrics without Limits™][4] is a first in industry cost management feature that decouples metric ingestion from indexing. Not all your metrics are equally valuable at every moment, and with Metrics without Limits™, you only pay for metrics that you get value from. Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
+Datadog's [Metrics without Limits™][4] is a first in industry cost management feature that decouples metric ingestion from indexing. Not all your metrics are equally valuable at every moment, and with Metrics without Limits™, you only pay for valuable metrics. 
+
+Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
 
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
 
@@ -112,13 +117,13 @@ With Metrics without Limits™, Datadog automatically provides the following:
 
 For more information on getting started, see the [Metrics without Limits™][4] documentation.
 
-### Prevent Configuration changes that cause inadvertent loss of observability
+### Prevent configuration changes that reduce observability
 
 A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag). Any change in configuration could lead to a spike in usage or a loss in your observability. 
 
 To prevent unexpected changes, use [RBAC permissions][9]. You can edit an existing user role to include the `metrics_tags_write` permission, or create a custom role. This gives your organization better control over which members can impact metrics [cardinality][10] and who can change Metrics without Limits™ tag configurations.
 
-Datadog provides an [audit trail][11] of all Metrics without Limits™ configurations---detailing the configuration and which user made the configuration---so you can attribute any spikes or dips in your custom metrics usage. To view your audit trail events, enter the following query in the [Events Explorer][12]:
+Datadog provides an [audit trail][11] of all Metrics without Limits™ configurations---detailing the configuration and user that made the configuration---so you can attribute any spikes or dips in your custom metrics usage. To view your audit trail events, enter the following query in the [Events Explorer][12]:
 ```
 tags:audit "Queryable tag configuration" 
 ```
@@ -141,13 +146,13 @@ After you identify the metrics that your developers don't need, you can safely r
 
 1. At the top of the the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
 1. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13].
-1. Configure Tags to create an [Allowlist or a Blocklist][14] of tags. Use the tags associated with unqueried metrics.
+1. Configure Tags to create an [allowlist or a blocklist][14] of tags. Use the tags associated with unqueried metrics.
 
-You can optimize without fear of losing key visibility provided on any dashboards, notebooks, monitors, SLOS or API workflows. Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics volumes by up to 70%**.
+You can optimize without fear of losing key visibility provided on any dashboards, notebooks, monitors, SLOs, or API workflows. Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics volumes by up to 70%**.
 
 ## Understand the relative utility of your metrics
 
-Even though a metric is not queried for the past 30 days, your teams might still derive value from it for incident management and outage remediation. Conversely, your teams could be underutilizing existing actively queried metrics. So understanding the relative utility of your metrics is the next recommended step in your governance workflow. 
+Even though a metric is not queried for the past 30 days, your teams might still derive value from it for incident management and outage remediation. Conversely, your teams could be underutilizing existing, actively queried metrics. So understanding the relative utility of your metrics is the next recommended step in your governance workflow. 
 
 Metrics without Limits™ provides you with OOTB insights to assess the value of your actively queried metrics with [Metrics Related Assets][15]. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
