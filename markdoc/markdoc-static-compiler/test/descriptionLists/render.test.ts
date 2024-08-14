@@ -3,7 +3,7 @@ import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 
-describe('rendering stages', () => {
+describe('description lists', () => {
   // retrieve test input file
   const inputPath = __dirname + '/input.mdoc';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
@@ -29,47 +29,26 @@ describe('rendering stages', () => {
     }
   });
 
-  // apply some styles to the HTML
-  // to make "hidden" content visible but
-  // in a different style than "shown" content
-  const htmlWithStyles = `
-  <style>
-    .markdoc__hidden {
-      background-color: dimgray;
-      color: white;
-    }
-
-    code {
-      color: deeppink;
-    }
-
-    .markdoc__hidden code {
-      color: pink;
-    }
-  </style>
-  ${html}
-  `;
-
   // format the HTML with prettier
-  const formattedHtml = prettier.format(htmlWithStyles, {
+  const formattedHtml = prettier.format(html, {
     parser: 'html'
   });
 
   test('ast', () => {
     expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-      '../__snapshots__/renderingStages/ast.snap.json'
+      '../__snapshots__/descriptionLists/ast.snap.json'
     );
   });
 
   test('renderableTree', () => {
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      '../__snapshots__/renderingStages/renderableTree.snap.json'
+      '../__snapshots__/descriptionLists/renderableTree.snap.json'
     );
   });
 
   test('renderedHtml', () => {
     expect(formattedHtml).toMatchFileSnapshot(
-      '../__snapshots__/renderingStages/renderedHtml.snap.html'
+      '../__snapshots__/descriptionLists/renderedHtml.snap.html'
     );
   });
 });
