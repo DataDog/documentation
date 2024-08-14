@@ -42,7 +42,7 @@ instances:
   - hosts:
       - <HOST>:<PORT>
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     dbm: true
@@ -66,20 +66,22 @@ metadata:
     ad.datadoghq.com/mongo.checks: |
     {
       "mongo": {
-        "init_config": [{}],
+        "init_config": {},
         "instances": [{
           "hosts": ["<HOST>:<PORT>"],
           "username": "datadog",
-          "password": "<UNIQUE_PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "options": {
             "authSource": "admin"
           },
           "dbm": true,
           "cluster_name": "<MONGO_CLUSTER_NAME>",
+          "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>",
+          "additional_metrics": ["metrics.commands", "tcmalloc", "top", "collection"],
+          "collections_indexes_stats": true,
           "database_autodiscovery": {
             "enabled": true
-          },
-          "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>"
+          }
         }]
       }
     }
