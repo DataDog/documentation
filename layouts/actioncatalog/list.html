@@ -1,9 +1,9 @@
 {{ define "main" }}
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
-{{ $workflow_bundles := sort site.Data.workflow_bundles "title" }}
+{{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
 
-{{ if eq $workflow_bundles nil }}
+{{ if lt (len $workflow_bundles) 1 }}
   {{ $err_msg := "Could not load workflow bundles data" }}
 
   {{ if eq hugo.Environment "development" -}}
@@ -30,7 +30,7 @@
 <form id="rules">
   <div>
     <div class="js-empty-results d-none font-semibold"></div>
-    {{ range $workflow_bundles }}
+    {{ range sort $workflow_bundles "title" }}
       {{ $workflow_title := .title }}
       {{ $workflow_name := .name }}
       {{ $icon_id := .icon.id }}
