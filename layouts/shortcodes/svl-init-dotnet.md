@@ -4,7 +4,8 @@ Add the following instructions and arguments to your Dockerfile.
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
 # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.57.0/datadog-dotnet-apm-2.57.0.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
 RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -24,7 +25,9 @@ CMD ["dotnet", "helloworld.dll"]
    ```dockerfile
    # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
    # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
-   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.57.0/datadog-dotnet-apm-2.57.0.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+   ARG TRACER_VERSION
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+
    RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
    ```
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
@@ -54,7 +57,8 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
 # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.57.0/datadog-dotnet-apm-2.57.0.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
 RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -68,7 +72,8 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
 # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.57.0/datadog-dotnet-apm-2.57.0.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
 RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
