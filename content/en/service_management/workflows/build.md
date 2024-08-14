@@ -45,7 +45,7 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
 1. From the [Workflow Automation][1] page, click **New Workflow**.
-1. Click **Auto Generate**.
+1. Click **<i class="icon-bits-ai"></i> Build with Bits AI**.
 1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to create your app.
 
@@ -69,7 +69,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. Click **Add Step** to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
-1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
+1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon (**+**) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
@@ -233,4 +233,3 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
-
