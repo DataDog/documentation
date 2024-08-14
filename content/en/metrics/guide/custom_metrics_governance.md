@@ -20,7 +20,7 @@ further_reading:
 Cloud-based applications can generate massive amounts of data and large observability costs, ultimately placing pressure on organizations to reduce this budget line item. To reduce observability costs, many teams resort to collecting fewer metrics; however, for centralized SRE and observability teams, effective custom metrics governance should increase monitoring efficiency rather than cut visibility entirely.
 
 This guide gives a walkthrough of the best practices for managing your custom metrics volumes through the three key components of effective metrics governance: **Visibility and Attribution**, **Actionable Custom Metrics Governance**, and **Monitoring and Prevention**. Learn how to use available Datadog tools to help you maintain cost-effective observability With the three key components of custom metrics governance. You'll learn how to:
-- [Find and understand your metrics usage and billing information](#visbility-and-attribution)
+- [Find and understand your metrics usage and billing information](#visibility-and-attribution)
 - [Identify your largest cost drivers](#account-level-visibility)
 - [Filter down to the teams or services that are responsible for your largest cost drivers](#team-level-visibility-and-attribution)
 - [Take action to reduce unused metrics](#actionable-custom-metrics-governance)
