@@ -35,6 +35,11 @@ The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is desig
 - The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget
 - SLOs in the "No Data" state are not considered in the Score
 
+Note that an average remaining error budget of 0% corresponds to a Score value of 66.667. The Score's status and color is based on the following thresholds:
+- **Red:** 0 ≤ Score < 66.667
+- **Yellow:** 66.667 ≤ Score < 80
+- **Green:** 80 ≤ Score ≤ 100
+
 ### Customize your OOTB SLO dashboard
 
 To customize your OOTB SLO dashboard, click **Configure** in the dashboard and select **Clone dashboard**. The default OOTB dashboard is configured based on the `service` tag that's been added to SLOs. You can update the dashboard to be based on any [SLO tag][3] by taking the following steps:
