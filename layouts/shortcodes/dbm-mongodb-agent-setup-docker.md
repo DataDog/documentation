@@ -8,24 +8,28 @@ Add the configuration details for the MongoDB check from the previous step in th
 
 ```shell
 export DD_API_KEY=<DD_API_KEY>
-export DD_AGENT_VERSION=7.55.0-dbm-mongo-1.0
+export DD_AGENT_VERSION=7.56.0-dbm-mongo-1.4
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -l com.datadoghq.ad.checks='{
     "mongo": {
-      "init_config": [{}],
+      "init_config": {},
       "instances": [{
         "hosts": ["<HOST>:<PORT>"],
         "username": "datadog",
         "password": "<UNIQUE_PASSWORD>",
-        "database": "<DATABASE>",
         "options": {
           "authSource": "admin"
         },
         "dbm": true,
         "cluster_name": "<MONGO_CLUSTER_NAME>",
-        "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>"
+        "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>",
+        "additional_metrics": ["metrics.commands", "tcmalloc", "top", "collection"],
+        "collections_indexes_stats": true,
+        "database_autodiscovery": {
+          "enabled": true
+        }
       }]
     }
   }' \
@@ -34,9 +38,9 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 ### Validate
 
-[Run the Agent's status subcommand][1002] and look for `mongo` under the **Checks** section. Navigate to the [Databases][1003] page in Datadog to get started.
+[Run the Agent's status subcommand][1002] and look for `mongo` under the **Checks** section. Navigate to the [Database Monitoring for MongoDB][1003] page in Datadog to get started.
 
 [1000]: /agent/faq/template_variables/
 [1001]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [1002]: /agent/configuration/agent-commands/#agent-status-and-information
-[1003]: https://app.datadoghq.com/databases
+[1003]: https://app.datadoghq.com/databases/list?listView=mongo

@@ -18,9 +18,9 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 ### Configure the Datadog-Databricks integration
 
 1. In your Databricks workspace, click on your profile in the top right corner and go to **Settings**. Select **Developer** in the left side bar. Next to **Access tokens**, click **Manage**.
-1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, remove the default value in **Lifetime (days)**, and click **Generate**. Take note of your token. 
+1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, remove the default value in **Lifetime (days)**, and click **Generate**. Take note of your token.
 
-   **Important:** 
+   **Important:**
    * Make sure you delete the default value in **Lifetime (days)** so that the token doesn't expire and the integration doesn't break.
    * Ensure the account generating the token has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
 
@@ -42,7 +42,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Settings** and click the **Compute** tab.
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
-1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the following script, remembering to replace the placeholders with your parameter values. 
+1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the following script, remembering to replace the placeholders with your parameter values.
 
    ```shell
    #!/bin/bash
@@ -56,7 +56,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
    bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.2.0.sh` to use the last stable version.
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.3.1.sh` to use the last stable version.
 
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
@@ -97,7 +97,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
    bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
    ```
 
-   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.2.0.sh` to use the last stable version.
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.3.1.sh` to use the last stable version.
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
@@ -128,7 +128,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
-| WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   | 
+| WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Include init script logs for debugging when reporting a failure back to Datadog. | false |
 
 
@@ -157,7 +157,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
    If you are submitting Databricks Jobs via the [one-time run API endpoint][8], each job run will have a unique job ID. This can make it difficult to group and analyze cluster metrics for jobs that use ephemeral clusters. To aggregate cluster utilization from the same job and assess performance across multiple runs, you must set the `DD_JOB_NAME` variable inside the `spark_env_vars` of every `new_cluster` to the same value as your request payload's `run_name`.
 
    Here's an example of a one-time job run request body:
-   
+
    {{< highlight json "hl_lines=2 18" >}}
    {
       "run_name": "Example Job",

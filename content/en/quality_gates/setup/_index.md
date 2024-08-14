@@ -15,7 +15,7 @@ further_reading:
 
 To use Datadog Quality Gates, you can define one or more rules on the [**Quality Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
 
-{{< img src="quality_gates/rules_list.png" alt="Quality Gates page in Datadog" style="width:100%" >}}
+{{< img src="quality_gates/rules_list_1.png" alt="Quality Gates page in Datadog" style="width:100%" >}}
 
 Quality Gates ensures that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
 
@@ -27,7 +27,7 @@ To create a Quality Gates rule in Datadog:
 1. Select a type of rule: `Test`, `Pipeline`, `Static Analysis`, or `Software Composition Analysis`.
 1. Set the rule scope, which defines when the rule should be evaluated, by selecting `Always evaluate` or `Select when to evaluate`. You can add branches or repositories to include or exclude from the rule scope, or add a custom scope.
 
-   {{< img src="quality_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in Quality Gates" style="width:80%;">}}
+   {{< img src="quality_gates/setup/custom_scope_1.png" alt="Adding a custom scope to a rule scope in Quality Gates" style="width:80%;">}}
 
    You can create a rule that is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify the branch or repository that should be included or excluded.
 
@@ -41,14 +41,14 @@ To create a Quality Gates rule in Datadog:
 
    Select **Static Analysis** for the rule type and click `Always evaluate` for the rule scope. 
 
-   {{< img src="quality_gates/explorer/static_analysis_rule.png" alt="A Static Analysis rule that fails when any code vulnerability violations with an error status are introduced in any service" style="width:100%" >}}
+   {{< img src="quality_gates/setup/static_analysis_1.png" alt="A Static Analysis rule that fails when any code vulnerability violations with an error status are introduced in any service" style="width:100%" >}}
 
    In the **Define rule conditions** section, click **New** and select `code vulnerabilities violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`. 
 
-1. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
-1. Select the time window over which the query is evaluated.
 1. Specify a rule name that describes the rule that you are creating.
-1. Integrate Quality Gates into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-quality-gates-in-your-cicd-pipeline). 
+1. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
+1. Integrate the Quality Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-quality-gates-in-your-cicd-pipeline).
+1. Enable a [GitHub status check](#enable-github-check-creation) for your Quality Gate rule by setting the appropriate permissions (such as `Checks: Write`) in your GitHub apps. To set this check as blocking in your pull requests, you must click the **Required** checkbox in your GitHub app's [Protected Branches settings][14].
 1. Click **Create Rule**.
 
 ### Integrate Quality Gates in your CI/CD pipeline
@@ -68,7 +68,7 @@ This command:
 |---|---|
 | `DD_API_KEY` | Point to your [Datadog API key][5]. |
 | `DD_APP_KEY` | Point to your [Datadog application key][6]. |
-| `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). |
+| `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). **Note**: `DATADOG_SITE` is not supported. |
 
 For example:
 
@@ -101,17 +101,7 @@ Check the command logs to see the overall gate evaluation status and information
 
 {{< img src="ci/datadog_ci_gate_evaluate_logs.png" alt="Datadog-ci gate evaluate logs" style="width:100%;">}}
 
-## Manage rules
-
-You can edit and delete Quality Gates rules by hovering over a rule on the [**Quality Gates Rules** page][2]. 
-
-{{< img src="quality_gates/setup/delete.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
-
-Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
-
-{{< img src="quality_gates/setup/edit_clone.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
-
-## Enable GitHub check creation
+### Enable GitHub check creation
 
 You can automatically create a [GitHub check][9] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in GitHub.
 
@@ -123,6 +113,16 @@ To enable GitHub Checks:
 After the permission is granted, you can see the checks in GitHub.
 
 **Note**: Re-running a check does not re-run the corresponding Quality Gates rule.
+
+## Manage rules
+
+You can edit and delete Quality Gates rules by hovering over a rule on the [**Quality Gates Rules** page][2]. 
+
+{{< img src="quality_gates/setup/delete_1.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
+
+Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
+
+{{< img src="quality_gates/setup/edit_clone_1.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
 
 ## Permissions
 
@@ -147,3 +147,4 @@ For more information, see the [RBAC Permissions documentation][1].
 [11]: https://docs.datadoghq.com/integrations/github/
 [12]: /getting_started/site/
 [13]: /quality_gates/guide/understanding_rule_scopes
+[14]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches

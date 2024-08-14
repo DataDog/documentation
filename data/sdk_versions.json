@@ -1,7 +1,7 @@
 [
   {
     "client": "datadog-api-client-go",
-    "version": "v2.27.0"
+    "version": "v2.28.0"
   },
   {
     "client": "datadog-api-client-java",
@@ -20,7 +20,11 @@
     "version": "v1.26.0"
   },
   {
+    "client": "datadog-api-client-rust",
+    "version": "0.2.0"
+  },
+  {
     "client": "integrations-core",
-    "version": "ddev-v9.1.0"
+    "version": "ddev-v10.0.0"
   }
 ]
