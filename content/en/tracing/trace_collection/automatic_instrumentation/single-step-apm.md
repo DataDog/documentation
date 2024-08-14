@@ -223,8 +223,7 @@ By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are 
 
 Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
 
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java"` - install only the Java Datadog APM library with the latest version.
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java,python"` - install only the Java and Python Datadog APM libraries with the latest versions.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - install only the Java Datadog APM library pinned to the major version 1 release line.
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - install only the Java and Python Datadog APM libraries pinned to the major versions 1 and 2 respectively.
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - install only the Java and Python Datadog APM libraries pinned to the specific versions 1.38.0 and 2.10.5 respectively.
 
@@ -257,8 +256,7 @@ By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are 
 
 Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
 
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java"` - install only the Java Datadog APM library with the latest version.
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java,python"` - install only the Java and Python Datadog APM libraries with the latest versions.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - install only the Java Datadog APM library pinned to the major version 1 release line.
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - install only the Java and Python Datadog APM libraries pinned to the major versions 1 and 2 respectively.
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - install only the Java and Python Datadog APM libraries pinned to the specific versions 1.38.0 and 2.10.5 respectively.
 
