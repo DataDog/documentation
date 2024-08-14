@@ -14,6 +14,6 @@ export const alertDefinition = {
 export class Alert extends CustomHtmlComponent {
   render() {
     const level = this.tag.attributes.level || 'info';
-    return `<div class="alert alert-${level} markdoc-alert">${this.contents}</div>`;
+    return `<div class="alert alert-${level}">${this.contents}</div>`;
   }
 }

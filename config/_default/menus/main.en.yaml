@@ -81,7 +81,7 @@ menu:
       parent: markdoc_testing_elements
       weight: 203
     - name: Image/Video
-      identifier: markdoc_testing_code_block
+      identifier: markdoc_testing_image
       url: markdoc_testing/elements/image/
       parent: markdoc_testing_elements
       weight: 204

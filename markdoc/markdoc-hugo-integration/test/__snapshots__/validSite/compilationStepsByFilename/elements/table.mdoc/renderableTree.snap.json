@@ -8,7 +8,187 @@
       "name": "h2",
       "attributes": {},
       "children": [
-        "Guidelines"
+        "Markdown table (CommonMark table)"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "table",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "thead",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Header 1"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Header 2"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Header 3"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "tbody",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "em",
+                      "attributes": {},
+                      "children": [
+                        "italic"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "code",
+                      "attributes": {},
+                      "children": [
+                        "code"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "strong",
+                      "attributes": {},
+                      "children": [
+                        "bold"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "a",
+                      "attributes": {
+                        "href": "https://www.google.com"
+                      },
+                      "children": [
+                        "link"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 2"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 2"
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 3"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 3"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "X",
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -16,21 +196,397 @@
       "name": "h2",
       "attributes": {},
       "children": [
-        "Markdown table (CommonMark table)"
+        "Markdoc table"
       ]
     },
     {
       "$$mdtype": "Tag",
-      "name": "Tabs",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Use Markdoc tables to create more complex tables with code blocks, bulleted lists, cells spanning multiple rows and columns, and other elements."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h3",
+      "attributes": {},
+      "children": [
+        "Simple example"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "You wouldn't really need to use a Markdoc table for simple content like this, but it gives an idea of how the entries map to rows and columns."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "table",
       "attributes": {},
       "children": [
         {
           "$$mdtype": "Tag",
-          "name": "Tab",
-          "attributes": {
-            "label": "Result"
-          },
+          "name": "thead",
+          "attributes": {},
           "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Header Col 1"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Header Col 2"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Header Col 3"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "tbody",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 1 Col 1"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 1 Col 2"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 1 Col 3"
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 2 Col 1"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 2 Col 2"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Row 2 Col 3"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h3",
+      "attributes": {},
+      "children": [
+        "Complex example"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "table",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "thead",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Foo"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Bar"
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "th",
+                  "attributes": {},
+                  "children": [
+                    "Baz"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "tbody",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "Fence",
+                      "attributes": {
+                        "language": "ruby"
+                      },
+                      "children": [
+                        "puts \"Some code here.\"\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "ul",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "li",
+                          "attributes": {},
+                          "children": [
+                            "Bulleted list in table"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "li",
+                          "attributes": {},
+                          "children": [
+                            "Second item in bulleted list"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    "Text in a table"
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "p",
+                      "attributes": {},
+                      "children": [
+                        "A sentence that isn't very long."
+                      ]
+                    },
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "p",
+                      "attributes": {},
+                      "children": [
+                        "Another short sentence."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "p",
+                      "attributes": {},
+                      "children": [
+                        "Test 2"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "p",
+                      "attributes": {},
+                      "children": [
+                        "Test 3"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "tr",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "Alert",
+                      "attributes": {
+                        "level": "danger"
+                      },
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "p",
+                          "attributes": {},
+                          "children": [
+                            "An alert in a table?? Let's not."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "td",
+                  "attributes": {
+                    "colSpan": 2
+                  },
+                  "children": [
+                    "A cell that spans two columns "
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Indented tables"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "ol",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "This is item one."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "This is item two. It comes with a CommonMark table:",
             {
               "$$mdtype": "Tag",
               "name": "table",
@@ -215,18 +771,123 @@
         },
         {
           "$$mdtype": "Tag",
-          "name": "Tab",
-          "attributes": {
-            "label": "Markup"
-          },
+          "name": "li",
+          "attributes": {},
           "children": [
+            "This is item three. It has a Markdoc table:",
             {
               "$$mdtype": "Tag",
-              "name": "Fence",
-              "attributes": {
-                "language": "markdown"
-              },
-              "children": []
+              "name": "table",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "thead",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "th",
+                          "attributes": {},
+                          "children": [
+                            "Header Col 1"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "th",
+                          "attributes": {},
+                          "children": [
+                            "Header Col 2"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "th",
+                          "attributes": {},
+                          "children": [
+                            "Header Col 3"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "tbody",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 1 Col 1"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 1 Col 2"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 1 Col 3"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 2 Col 1"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 2 Col 2"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 2 Col 3"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

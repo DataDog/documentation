@@ -1,0 +1,13 @@
+---
+title: region-param
+---
+
+<div id="markdoc-chooser"></div>
+<div id="markdoc-content"><article>
+  <h2>Body copy</h2>
+  <p>The user's DD site is {{< region-param key="dd_site" >}}.</p>
+  <h2>Code</h2>
+  <p>The user's DD site is {{< region-param key="dd_site" code="true" >}}.</p>
+</article>
+</div>
+  <script>    clientRenderer.initialize({        pagePrefsConfig: undefined,        prefOptionsConfig: {},        selectedValsByPrefId: {},        ifFunctionsByRef: {}    });  </script>  

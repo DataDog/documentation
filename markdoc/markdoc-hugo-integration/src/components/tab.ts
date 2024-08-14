@@ -3,19 +3,17 @@ import { spinalcase } from 'stringcase';
 
 export const tabDefinition = {
   render: 'Tab',
-  transform(node: Node, config: Config) {
-    const label = node.annotations[0].value;
-    if (!label) {
-      console.log('Tab node:', JSON.stringify(node, null, 2));
-      throw new Error('Tab must have a label');
+  attributes: {
+    label: {
+      type: String,
+      required: true
     }
-
+  },
+  transform(node: Node, config: Config) {
     return {
       $$mdtype: 'Tag',
       name: 'Tab',
-      attributes: {
-        label
-      },
+      attributes: node.attributes,
       children: node.transformChildren(config)
     };
   }

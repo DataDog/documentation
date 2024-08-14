@@ -1,0 +1,59 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "SiteRegion",
+      "attributes": {
+        "region": "us"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "Your site region is ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "US"
+              ]
+            },
+            ", which is why this line appears. It should be the only line in this section."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "SiteRegion",
+      "attributes": {
+        "region": "eu"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "Your site region is ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "EU"
+              ]
+            },
+            ", which is why this line appears. It should be the only line in this section."
+          ]
+        }
+      ]
+    }
+  ]
+}

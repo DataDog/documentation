@@ -2,12 +2,18 @@
 title: Alert
 ---
 
+## Usage
+
+- The default alert level is `info`.
+- You can use Markdown and Markdoc tags inside of the `alert` tag.
+- Some elements might look odd inside of alerts, because alerts have historically been simple and the relevant CSS styles have not been written. If needed, we can write additional CSS styles to support those elements.
+
 ## Types
 
 ### Info
 
-{% alert level="info" %}
-This is an info alert!
+{% alert %}
+This is an info alert! The `level=info` attribute is optional.
 {% /alert %}
 
 ### Warning

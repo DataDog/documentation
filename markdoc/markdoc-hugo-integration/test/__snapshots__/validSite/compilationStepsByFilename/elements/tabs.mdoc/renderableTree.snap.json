@@ -1,0 +1,338 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Usage"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "ul",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "Tabs can contain other Markdoc tags, such as partials and conditional content. If you can use it on a page, you can use it in a tab."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "Include the URLs for links used in tabs at the bottom of the file along with the other links used on the page, not inside the tab."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Example"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Usually there's a bit of text here to introduce the tabs, so this paragraph is just filler text."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "Tabs",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "Tab",
+          "attributes": {
+            "label": "Tab 1"
+          },
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "Alert",
+              "attributes": {
+                "level": "info"
+              },
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "p",
+                  "attributes": {},
+                  "children": [
+                    "Here's an info alert."
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "h3",
+              "attributes": {},
+              "children": [
+                "Customization demo"
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "div",
+              "if": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "value": true,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "color"
+                    ],
+                    "value": "blue"
+                  },
+                  "1": "blue"
+                },
+                "ref": "0"
+              },
+              "attributes": {
+                "display": "true"
+              },
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "p",
+                  "attributes": {},
+                  "children": [
+                    "The selected color is ",
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "strong",
+                      "attributes": {},
+                      "children": [
+                        "blue"
+                      ]
+                    },
+                    "."
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "div",
+              "if": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "color"
+                    ],
+                    "value": "blue"
+                  },
+                  "1": "yellow"
+                },
+                "ref": "1"
+              },
+              "attributes": {
+                "display": "false"
+              },
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "p",
+                  "attributes": {},
+                  "children": [
+                    "The selected color is ",
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "strong",
+                      "attributes": {},
+                      "children": [
+                        "yellow"
+                      ]
+                    },
+                    "."
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "div",
+              "if": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "color"
+                    ],
+                    "value": "blue"
+                  },
+                  "1": "red"
+                },
+                "ref": "2"
+              },
+              "attributes": {
+                "display": "false"
+              },
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "p",
+                  "attributes": {},
+                  "children": [
+                    "The selected color is ",
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "strong",
+                      "attributes": {},
+                      "children": [
+                        "red"
+                      ]
+                    },
+                    "."
+                  ]
+                }
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "h3",
+              "attributes": {},
+              "children": [
+                "Partial demo"
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "p",
+              "attributes": {},
+              "children": [
+                "Tabs can include partials, such as these two:"
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "p",
+              "attributes": {},
+              "children": [
+                "This content is in a partial. It includes a link to ",
+                {
+                  "$$mdtype": "Tag",
+                  "name": "a",
+                  "attributes": {
+                    "href": "https://www.datadoghq.com"
+                  },
+                  "children": [
+                    "Datadog"
+                  ]
+                },
+                "."
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "p",
+              "attributes": {},
+              "children": [
+                "This content is in a partial. It includes a link to ",
+                {
+                  "$$mdtype": "Tag",
+                  "name": "a",
+                  "attributes": {
+                    "href": "https://www.google.com"
+                  },
+                  "children": [
+                    "Google"
+                  ]
+                },
+                "."
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "h3",
+              "attributes": {},
+              "children": [
+                "Links"
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "p",
+              "attributes": {},
+              "children": [
+                "Links in Markdoc tabs behave the same as any other link on the page. There's no need to keep separate lists of links inside each tab. Example link: ",
+                {
+                  "$$mdtype": "Tag",
+                  "name": "a",
+                  "attributes": {
+                    "href": "https://markdoc.dev/docs"
+                  },
+                  "children": [
+                    "Markdoc docs"
+                  ]
+                },
+                ". Tab 2 contains the second example link."
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "Tab",
+          "attributes": {
+            "label": "Tab 2"
+          },
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "p",
+              "attributes": {},
+              "children": [
+                "This is the content for Tab 2."
+              ]
+            },
+            {
+              "$$mdtype": "Tag",
+              "name": "p",
+              "attributes": {},
+              "children": [
+                "Example link: ",
+                {
+                  "$$mdtype": "Tag",
+                  "name": "a",
+                  "attributes": {
+                    "href": "https://www.typescriptlang.org/docs"
+                  },
+                  "children": [
+                    "TypeScript docs"
+                  ]
+                },
+                "."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

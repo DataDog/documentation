@@ -2,10 +2,6 @@
 title: Table
 ---
 
-## TODOs
-
-- Fix inconsistent text sizes in the Markdoc table.
-
 ## Markdown table (CommonMark table)
 
 | Header 1  | Header 2 | Header 3 |
@@ -53,13 +49,16 @@ You wouldn't really need to use a Markdoc table for simple content like this, bu
 * Text in a table
 ---
 *
-  A "loose" list with
+  A sentence that isn't very long.
 
-  multiple line items
+  Another short sentence.
 * Test 2
 * Test 3
 ---
-* Test 1
+* 
+  {% alert level="danger" %}
+  An alert in a table?? Let's not.
+  {% /alert %}
 * A cell that spans two columns {% colspan=2 %}
 {% /table %}
 

@@ -1,0 +1,318 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {
+    "frontmatter": "title: site-region"
+  },
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "inline": false,
+      "attributes": {
+        "region": "us"
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            5,
+            6
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                5,
+                6
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    5,
+                    6
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Your site region is "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 5
+                    },
+                    "end": {
+                      "line": 6
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    5,
+                    6
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "US"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 5
+                    },
+                    "end": {
+                      "line": 6
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    5,
+                    6
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ", which is why this line appears. It should be the only line in this section."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 5
+                    },
+                    "end": {
+                      "line": 6
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 5
+                },
+                "end": {
+                  "line": 6
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 5
+            },
+            "end": {
+              "line": 6
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "site-region",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "region",
+          "value": "us"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 4
+        },
+        "end": {
+          "line": 5
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "inline": false,
+      "attributes": {
+        "region": "eu"
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            9,
+            10
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                9,
+                10
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    9,
+                    10
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Your site region is "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 9
+                    },
+                    "end": {
+                      "line": 10
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    9,
+                    10
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "EU"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 9
+                    },
+                    "end": {
+                      "line": 10
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    9,
+                    10
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ", which is why this line appears. It should be the only line in this section."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 9
+                    },
+                    "end": {
+                      "line": 10
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 9
+                },
+                "end": {
+                  "line": 10
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 9
+            },
+            "end": {
+              "line": 10
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "site-region",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "region",
+          "value": "eu"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 8
+        },
+        "end": {
+          "line": 9
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

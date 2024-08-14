@@ -1,0 +1,33 @@
+---
+title: Image/Video
+---
+
+<div id="markdoc-chooser"></div>
+<div id="markdoc-content"><article>
+  <h2>Image</h2>
+  <p>
+    Lorem ipsum dolor sit amet. 33 earum tempore in aperiam voluptatem et
+    reprehenderit distinctio eum consequatur debitis ea omnis voluptatem.
+  </p>
+  <p>Ex totam temporibus eum illo amet est libero voluptatibus?</p>
+  <!-- prettier-ignore -->
+  {{< img  src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
+  <p>
+    Aut quasi sunt aut repellat deleniti aut corrupti voluptatem 33 enim
+    consequatur qui obcaecati quaerat eum sint obcaecati hic similique voluptas.
+  </p>
+  <h2>Video</h2>
+  <p>
+    Lorem ipsum dolor sit amet. 33 earum tempore in aperiam voluptatem et
+    reprehenderit distinctio eum consequatur debitis ea omnis voluptatem.
+  </p>
+  <p>Ex totam temporibus eum illo amet est libero voluptatibus?</p>
+  <!-- prettier-ignore -->
+  {{< img  src="cloudcraft/advanced/find-id-using-api/share-with-team.mp4" alt="A quick video showing a Cloudcraft user selecting the Datadog and Cloudcraft teams from the Share & Export menu." video="true" >}}
+  <p>
+    Aut quasi sunt aut repellat deleniti aut corrupti voluptatem 33 enim
+    consequatur qui obcaecati quaerat eum sint obcaecati hic similique voluptas.
+  </p>
+</article>
+</div>
+  <script>    clientRenderer.initialize({        pagePrefsConfig: undefined,        prefOptionsConfig: {},        selectedValsByPrefId: {},        ifFunctionsByRef: {}    });  </script>  

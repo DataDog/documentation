@@ -35,11 +35,16 @@
 .alert.alert-danger p {
     color: #82322f;
 }
-.alert.markdoc-alert p {
+#markdoc-content .alert p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
     margin-bottom: 0;
 }
-.alert.markdoc-alert p + p {
+#markdoc-content .alert p + p {
     margin-top: 16px;
+}
+#markdoc-content table ul,
+#markdoc-content table p {
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
 }

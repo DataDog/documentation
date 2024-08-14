@@ -1,0 +1,58 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Body copy"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "The user's DD site is ",
+        {
+          "$$mdtype": "Tag",
+          "name": "RegionParam",
+          "attributes": {
+            "key": "dd_site"
+          },
+          "children": []
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Code"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "The user's DD site is ",
+        {
+          "$$mdtype": "Tag",
+          "name": "RegionParam",
+          "attributes": {
+            "key": "dd_site",
+            "code": true
+          },
+          "children": []
+        },
+        "."
+      ]
+    }
+  ]
+}
