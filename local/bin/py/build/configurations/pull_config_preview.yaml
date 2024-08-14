@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: nick/cleanup_web_ints
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
@@ -118,7 +118,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: nick/complete_migration_dyn_airbrake
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
