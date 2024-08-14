@@ -13,7 +13,7 @@ title: Enviar acciones RUM personalizadas
 ---
 ## Información general
 
-Real User Monitoring [recopila acciones automáticamente][1] en tu aplicación web. Puedes recopilar eventos y plazos adicionales, como rellenado de formularios y transacciones comerciales.
+Real User Monitoring [recopila acciones automáticamente][1] en tu aplicación web. Puedes recopilar eventos y tiempos adicionales, como rellenado de formularios y transacciones comerciales.
 
 Las acciones RUM personalizadas te permiten monitorizar eventos interesantes con todo su contexto relevante adjunto. Por ejemplo, el SDK del Navegador Datadog puede recopilar la información de pago de un usuario (como la cantidad de artículos en el carro de compras, la lista de artículos y su precio) cuando hace clic en el botón de pago en un sitio web de comercio electrónico.
 
