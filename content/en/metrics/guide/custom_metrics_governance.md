@@ -50,7 +50,7 @@ See the steps in this section to review your total account's monthly metric usag
 Get a summary of your monthly billable custom metrics usage and costs through the [Plan and Usage][1] details. This out-of-the-box (OOTB) summary of your account's monthly metrics usage provides detailed insights on your monthly Custom Metrics usage, costs, burn rate, and Top Custom Metric Names. 
 
    1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
-   1. Click the **Custom Metrics** tab to view your organization's billable usage, usage trends, and top custom metrics.
+   1. Click the **Custom Metrics** tab to view your organization's billable custom metrics usage, usage trends, and top custom metric names.
    1. Scroll down to the *Top Custom Metrics for \<MONTH YEAR\>*, to see the top metric names with their contribution % to your custom metrics costs.
 
 Additionally, review [Usage Attribution][3] information for a total breakdown of your account's billable usage by tag keys. From here, you can identify your largest cost drivers by tags such as team, service, or application. 
@@ -83,9 +83,9 @@ All teams should have visibility into which metrics are driving their bill spike
 
 To see all actively reporting metric names submitted by your team, go to the [Metrics Summary page][6], type in the tag key value pair (for example, `team:dev` or `service:demo`) in the **Filter by Tag Value** field.
 
-#### Identify metrics that have the biggest impact on monthly bill
+#### Identify any team's metrics that have the biggest impact on your bill
 
-All users in your organization can see realtime estimated custom metrics usage on the [Metrics Volume Management page][7]. Identify which metrics to focus your cost-optimization efforts on. Use Metrics Volume Management with Metrics without Limits™, to configure your metrics ingestion and indexing and reduce costs without sacrificing accuracy.
+All users in your organization can see OOTB realtime estimated custom metrics usage on the [Metrics Volume Management page][7]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use Metrics Volume Management with Metrics without Limits™, to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
 
 With Metrics Volume Management, you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
 
@@ -93,10 +93,9 @@ For more information, see the [Metrics Volume Management][8] documentation.
 
 ## Value-based metrics governance
 
-Effective custom metrics governance should increase monitoring efficiency. After you understand what your usage is and can narrow down the source of usage spikes, you can take action to reduce your metrics. These actions should help you maximize the ROI and value you get from your observability spend without sacrificing the visibility that your team actively relies on. Cut out the metrics you're not getting as much value from and have more control over your costs by: 
-- Taking advantage of Datadog's Metrics without Limits™ to specify which metrics you want to index or ingest.
-- Restricting the configuration of Metrics without Limits™ to designated roles with RBAC.
-- Identifying unqueried metrics and unused metrics in Datadog assets.
+Effective custom metrics governance should increase monitoring efficiency. After you understand what your usage is and attribute usage to its source, take action to reduce your metrics. 
+
+In this section, you'll learn about the actions you can take to maximize the ROI and value you get from your observability spend without sacrificing the visibility your team actively relies on.
 
 ### Metrics without Limits™
 
@@ -108,16 +107,16 @@ Reduce your indexed custom metrics volumes on any metric name by setting a tag c
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
-- Continuous analysis of all metrics submitted to Datadog along with user interactions with those metrics anywhere within the Datadog platform and API over the past 30 days. 
+
+These intelligent query insights continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to us so that your recommended tag configurations are always relevant.
 - Ability to roll back changes at any time to get full visibility into all your originally submitted data.
 
 For more information on getting started, see the [Metrics without Limits™][4] documentation.
 
-### Prevent configuration changes that reduce observability
+### Prevent unintentional configurations that reduce observability with RBAC
 
-A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag). Any change in configuration could lead to a spike in usage or a loss in your observability. 
 
-To prevent unexpected changes, use [RBAC permissions][9]. You can edit an existing user role to include the `metrics_tags_write` permission, or create a custom role. This gives your organization better control over which members can impact metrics [cardinality][10] and who can change Metrics without Limits™ tag configurations.
+Metrics without Limits™ allows users to reduce costs on metrics by indexing less data. When used incorrectly, the configuration could lead to unintentional spikes in usage or loss of visibility from tags that are no longer indexed. To prevent unexpected changes, use [RBAC permissions][9]. You can edit an existing user role to include the `metrics_tags_write` permission, or create a custom role. This gives your organization better control over which members can impact metrics [cardinality][10] and who can change Metrics without Limits™ tag configurations.
 
 Datadog provides an [audit trail][11] of all Metrics without Limits™ configurations---detailing the configuration and user that made the configuration---so you can attribute any spikes or dips in your custom metrics usage. To view your audit trail events, enter the following query in the [Events Explorer][12]:
 ```
@@ -128,7 +127,7 @@ tags:audit "Queryable tag configuration"
 
 ### Reduce costs from unqueried metrics
 
-Differentiate the metrics your team actively queries and relies on from the metrics that aren't queried anywhere within the Datadog platform or through the API. 
+To ensure you're not removing valuable visibility while reducing costs, you need to differentiate between the actively queried metrics that your team relies on from the metrics that aren't queried anywhere within the Datadog platform or through the API. Datadog's intelligent query insights continuously computes and analyzes all users' interactions (in-app or via API) on any metric to help identify less valuable, unused metrics.
 
 Identify your organization's entire list of unqueried metrics over the past 30 days: 
 1. On the [Metrics Summary page][6], find the **Query Activity (past 30 days)** facet on the left side.
@@ -178,7 +177,7 @@ Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. 
 You can also see a breakdown of your realtime estimated custom metrics usage by metric name with either the dashboard timeseries widget, or a metric monitor. Use the `datadog.estimated_usage.metrics.custom.by_metric` metric to build a monitor so you can always have up-to-date visibility into each of your metric names' volumes. 
 
 ### Additional monitoring use cases
-
+After you've received an alert, use the Metrics Volume Management page to inspect any spiking metrics' tag keys and use Metrics without Limits™ to immediately drop any anomalous tag keys that are causing your metric to spike. This will ensure you can immediately resolve any unintentional billing spikes. 
 {{< whatsnext desc="Additional use cases to build monitors for with the estimated usage metrics:" >}}
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
