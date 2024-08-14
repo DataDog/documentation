@@ -45,7 +45,7 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 - Provide engineering leadership with a high-level view of security practices across teams and cloud accounts.
 - Export resources for record-keeping or auditing.
 
-#### Troubleshooting incidents and performance issues
+#### Troubleshoot incidents and performance issues
 - Access telemetry, dashboards and other Datadog views with rich insights to understand the health and performance of your resources.
 - Locate team and service owners of relevant resources to speed up incident recovery.
 - View resource configuration changes to identify probable root causes.
