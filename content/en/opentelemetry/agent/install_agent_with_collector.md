@@ -116,7 +116,7 @@ datadog:
         name: otel-http
    {{< /code-block >}}
    <div class="alert alert-info"><p>It is required to set the <code>hostPort</code> in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.</p><p>Alternatively, if you doesn't want to expose the port, you can use the agent service instead via <code>&lt;SERVICE_NAME&gt;.&lt;SERVICE_NAMESPACE&gt;.svc.cluster.local</code>.</p></div>
-1. (Optional) Enable additional Datadog features.
+1. (Optional) Enable additional Datadog features:
    <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/"> pricing page</a> and talk to your CSM before proceeding.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -132,6 +132,15 @@ datadog:
     enabled: true
     processCollection: true
    {{< /code-block >}}
+1. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
+   <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  podLabelsAsTags:
+    app: kube_app
+    release: helm_release
+{{< /code-block >}}
 
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
 Your `datadog-values.yaml` file should look something like this:
@@ -313,18 +322,13 @@ As an example, you can use the [Calendar sample application][9] that's already i
    ```shell
    cd opentelemetry-examples/apps/rest-services/java/calendar
    ```
-1. The following code instruments [CalendarController.getDate()][10] method using the OpenTelemetry API:
-   {{< code-block lang="java" filename="CalendarController.java" disable_copy="true" collapsible="true" >}}
-private String getDate() {
-  Span span = tracer.spanBuilder("getDate")
-    .setAttribute("peer.service", "random-date-service")
-    .setSpanKind(SpanKind.CLIENT)
-    .startSpan();
-  try (Scope scope = span.makeCurrent()) {
-   ...
-  } finally {
-    span.end();
-  }
+1. The following code instruments [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
+   {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="true" >}}
+@WithSpan(kind = SpanKind.CLIENT)
+public String getDate() {
+    Span span = Span.current();
+    span.setAttribute("peer.service", "random-date-service");
+    ...
 }
 {{< /code-block >}}
 
@@ -413,7 +417,7 @@ helm upgrade -i <CALENDAR_RELEASE_NAME> ./deploys/calendar/
    ```
 1. Verify that you receive a response like:
    ```text
-   {"date":"2022-12-30"}
+   {"date":"2024-12-30"}
    ```
 Each call to the Calendar application results in metrics, traces, and logs being forwarded to the Datadog backend.
 
@@ -529,7 +533,7 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
 [9]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
-[10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/controller/CalendarController.java#L70-L86
+[10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
 [11]: https://github.com/DataDog/datadog-agent/blob/386130a34dde43035c814f9a9b08bc72eb20e476/comp/otelcol/collector-contrib/impl/manifest.yaml
 [12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [13]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/deploys/calendar/templates/deployment.yaml#L71-L72
