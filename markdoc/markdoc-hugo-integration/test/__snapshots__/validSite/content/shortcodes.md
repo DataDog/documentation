@@ -7,7 +7,7 @@ title: Shortcode tests
   <h2>Shortcode tests</h2>
   <h3>img</h3>
   <!-- prettier-ignore -->
-  {{< img src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
+  {{< img  src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
   <h3>region-param</h3>
   <h4>Body copy</h4>
   {{< region-param key="dd_site" >}}

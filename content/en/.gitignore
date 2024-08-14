@@ -1,10 +1,12 @@
 # GENERATED FILE: DO NOT EDIT
 # Ignore .md files compiled from Markdoc
-/markdoc_testing/plain_markdown_syntax/markdoc.md
-/markdoc_testing/primary_colors.md
-/markdoc_testing/shortcodes/alerts.md
-/markdoc_testing/shortcodes/code.md
-/markdoc_testing/shortcodes/images_and_videos.md
-/markdoc_testing/shortcodes/region.md
-/markdoc_testing/shortcodes/tabs.md
-/markdoc_testing/traffic_light_colors.md
+/markdoc_testing/demo_pages/primary_colors.md
+/markdoc_testing/demo_pages/traffic_light_colors.md
+/markdoc_testing/elements/alert.md
+/markdoc_testing/elements/code_block.md
+/markdoc_testing/elements/description_list.md
+/markdoc_testing/elements/image.md
+/markdoc_testing/elements/region_param.md
+/markdoc_testing/elements/site_region.md
+/markdoc_testing/elements/table.md
+/markdoc_testing/elements/tabs.md

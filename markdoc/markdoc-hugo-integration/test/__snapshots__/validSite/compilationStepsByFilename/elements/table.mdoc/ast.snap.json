@@ -1,0 +1,1359 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {
+    "frontmatter": "title: Table"
+  },
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        4,
+        5
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            4,
+            5
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                4,
+                5
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Guidelines"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 4
+                },
+                "end": {
+                  "line": 5
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 4
+            },
+            "end": {
+              "line": 5
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 4
+        },
+        "end": {
+          "line": 5
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        6,
+        7
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            6,
+            7
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                6,
+                7
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Markdown table (CommonMark table)"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 6
+                },
+                "end": {
+                  "line": 7
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 6
+            },
+            "end": {
+              "line": 7
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 6
+        },
+        "end": {
+          "line": 7
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        8,
+        9,
+        25,
+        26
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            9,
+            10,
+            15,
+            16
+          ],
+          "inline": false,
+          "attributes": {
+            "title": "Result"
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                10,
+                15
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    10,
+                    11
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        10,
+                        11
+                      ],
+                      "inline": false,
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            10,
+                            11
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                10,
+                                11
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    10,
+                                    11
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Header 1"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 10
+                                    },
+                                    "end": {
+                                      "line": 11
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 10
+                                },
+                                "end": {
+                                  "line": 11
+                                }
+                              }
+                            }
+                          ],
+                          "type": "th",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 10
+                            },
+                            "end": {
+                              "line": 11
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            10,
+                            11
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                10,
+                                11
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    10,
+                                    11
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Header 2"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 10
+                                    },
+                                    "end": {
+                                      "line": 11
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 10
+                                },
+                                "end": {
+                                  "line": 11
+                                }
+                              }
+                            }
+                          ],
+                          "type": "th",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 10
+                            },
+                            "end": {
+                              "line": 11
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            10,
+                            11
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                10,
+                                11
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    10,
+                                    11
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Header 3"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 10
+                                    },
+                                    "end": {
+                                      "line": 11
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 10
+                                },
+                                "end": {
+                                  "line": 11
+                                }
+                              }
+                            }
+                          ],
+                          "type": "th",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 10
+                            },
+                            "end": {
+                              "line": 11
+                            }
+                          }
+                        }
+                      ],
+                      "type": "tr",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 10
+                        },
+                        "end": {
+                          "line": 11
+                        }
+                      }
+                    }
+                  ],
+                  "type": "thead",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 10
+                    },
+                    "end": {
+                      "line": 11
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    12,
+                    15
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        12,
+                        13
+                      ],
+                      "inline": false,
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            12,
+                            13
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                12,
+                                13
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    12,
+                                    13
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "marker": "*"
+                                  },
+                                  "children": [
+                                    {
+                                      "$$mdtype": "Node",
+                                      "errors": [],
+                                      "lines": [
+                                        12,
+                                        13
+                                      ],
+                                      "inline": true,
+                                      "attributes": {
+                                        "content": "italic"
+                                      },
+                                      "children": [],
+                                      "type": "text",
+                                      "annotations": [],
+                                      "slots": {},
+                                      "location": {
+                                        "start": {
+                                          "line": 12
+                                        },
+                                        "end": {
+                                          "line": 13
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "type": "em",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 12
+                                    },
+                                    "end": {
+                                      "line": 13
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 12
+                                },
+                                "end": {
+                                  "line": 13
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 12
+                            },
+                            "end": {
+                              "line": 13
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            12,
+                            13
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                12,
+                                13
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    12,
+                                    13
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "code"
+                                  },
+                                  "children": [],
+                                  "type": "code",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 12
+                                    },
+                                    "end": {
+                                      "line": 13
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 12
+                                },
+                                "end": {
+                                  "line": 13
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 12
+                            },
+                            "end": {
+                              "line": 13
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            12,
+                            13
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                12,
+                                13
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    12,
+                                    13
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "marker": "**"
+                                  },
+                                  "children": [
+                                    {
+                                      "$$mdtype": "Node",
+                                      "errors": [],
+                                      "lines": [
+                                        12,
+                                        13
+                                      ],
+                                      "inline": true,
+                                      "attributes": {
+                                        "content": "bold"
+                                      },
+                                      "children": [],
+                                      "type": "text",
+                                      "annotations": [],
+                                      "slots": {},
+                                      "location": {
+                                        "start": {
+                                          "line": 12
+                                        },
+                                        "end": {
+                                          "line": 13
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "type": "strong",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 12
+                                    },
+                                    "end": {
+                                      "line": 13
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 12
+                                },
+                                "end": {
+                                  "line": 13
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 12
+                            },
+                            "end": {
+                              "line": 13
+                            }
+                          }
+                        }
+                      ],
+                      "type": "tr",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 12
+                        },
+                        "end": {
+                          "line": 13
+                        }
+                      }
+                    },
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        13,
+                        14
+                      ],
+                      "inline": false,
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            13,
+                            14
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                13,
+                                14
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    13,
+                                    14
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "href": "https://www.google.com"
+                                  },
+                                  "children": [
+                                    {
+                                      "$$mdtype": "Node",
+                                      "errors": [],
+                                      "lines": [
+                                        13,
+                                        14
+                                      ],
+                                      "inline": true,
+                                      "attributes": {
+                                        "content": "link"
+                                      },
+                                      "children": [],
+                                      "type": "text",
+                                      "annotations": [],
+                                      "slots": {},
+                                      "location": {
+                                        "start": {
+                                          "line": 13
+                                        },
+                                        "end": {
+                                          "line": 14
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "type": "link",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 13
+                                    },
+                                    "end": {
+                                      "line": 14
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 13
+                                },
+                                "end": {
+                                  "line": 14
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 13
+                            },
+                            "end": {
+                              "line": 14
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            13,
+                            14
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                13,
+                                14
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    13,
+                                    14
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Row 2"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 13
+                                    },
+                                    "end": {
+                                      "line": 14
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 13
+                                },
+                                "end": {
+                                  "line": 14
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 13
+                            },
+                            "end": {
+                              "line": 14
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            13,
+                            14
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                13,
+                                14
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    13,
+                                    14
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Row 2"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 13
+                                    },
+                                    "end": {
+                                      "line": 14
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 13
+                                },
+                                "end": {
+                                  "line": 14
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 13
+                            },
+                            "end": {
+                              "line": 14
+                            }
+                          }
+                        }
+                      ],
+                      "type": "tr",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 13
+                        },
+                        "end": {
+                          "line": 14
+                        }
+                      }
+                    },
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        14,
+                        15
+                      ],
+                      "inline": false,
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            14,
+                            15
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                14,
+                                15
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    14,
+                                    15
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Row 3"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 14
+                                    },
+                                    "end": {
+                                      "line": 15
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 14
+                                },
+                                "end": {
+                                  "line": 15
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 14
+                            },
+                            "end": {
+                              "line": 15
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            14,
+                            15
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                14,
+                                15
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    14,
+                                    15
+                                  ],
+                                  "inline": true,
+                                  "attributes": {
+                                    "content": "Row 3"
+                                  },
+                                  "children": [],
+                                  "type": "text",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 14
+                                    },
+                                    "end": {
+                                      "line": 15
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 14
+                                },
+                                "end": {
+                                  "line": 15
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 14
+                            },
+                            "end": {
+                              "line": 15
+                            }
+                          }
+                        },
+                        {
+                          "$$mdtype": "Node",
+                          "errors": [],
+                          "lines": [
+                            14,
+                            15
+                          ],
+                          "inline": false,
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Node",
+                              "errors": [],
+                              "lines": [
+                                14,
+                                15
+                              ],
+                              "inline": false,
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "$$mdtype": "Node",
+                                  "errors": [],
+                                  "lines": [
+                                    14,
+                                    15
+                                  ],
+                                  "inline": true,
+                                  "attributes": {},
+                                  "children": [],
+                                  "type": "tag",
+                                  "tag": "x",
+                                  "annotations": [],
+                                  "slots": {},
+                                  "location": {
+                                    "start": {
+                                      "line": 14
+                                    },
+                                    "end": {
+                                      "line": 15
+                                    }
+                                  }
+                                }
+                              ],
+                              "type": "inline",
+                              "annotations": [],
+                              "slots": {},
+                              "location": {
+                                "start": {
+                                  "line": 14
+                                },
+                                "end": {
+                                  "line": 15
+                                }
+                              }
+                            }
+                          ],
+                          "type": "td",
+                          "annotations": [],
+                          "slots": {},
+                          "location": {
+                            "start": {
+                              "line": 14
+                            },
+                            "end": {
+                              "line": 15
+                            }
+                          }
+                        }
+                      ],
+                      "type": "tr",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 14
+                        },
+                        "end": {
+                          "line": 15
+                        }
+                      }
+                    }
+                  ],
+                  "type": "tbody",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 12
+                    },
+                    "end": {
+                      "line": 15
+                    }
+                  }
+                }
+              ],
+              "type": "table",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 10
+                },
+                "end": {
+                  "line": 15
+                }
+              }
+            }
+          ],
+          "type": "tag",
+          "tag": "tab",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "title",
+              "value": "Result"
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 9
+            },
+            "end": {
+              "line": 10
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            16,
+            17,
+            24,
+            25
+          ],
+          "inline": false,
+          "attributes": {
+            "title": "Markup"
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                17,
+                24
+              ],
+              "inline": false,
+              "attributes": {
+                "content": "| Header 1  | Header 2 | Header 3 |\n|-----------|----------|----------|\n| *italic*  | `code`   | **bold** |\n| [link][1] | Row 2    | Row 2    |\n| Row 3     | Row 3    | {% x/ %} |\n",
+                "language": "markdown",
+                "process": false
+              },
+              "children": [],
+              "type": "fence",
+              "annotations": [
+                {
+                  "type": "attribute",
+                  "name": "process",
+                  "value": false
+                }
+              ],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 17
+                },
+                "end": {
+                  "line": 24
+                }
+              }
+            }
+          ],
+          "type": "tag",
+          "tag": "tab",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "title",
+              "value": "Markup"
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 16
+            },
+            "end": {
+              "line": 17
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "tabs",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 8
+        },
+        "end": {
+          "line": 9
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

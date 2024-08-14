@@ -1,0 +1,42 @@
+---
+title: Table
+---
+
+## Markdown table (CommonMark table)
+
+| Header 1  | Header 2 | Header 3 |
+|-----------|----------|----------|
+| *italic*  | `code`   | **bold** |
+| [link][1] | Row 2    | Row 2    |
+| Row 3     | Row 3    | {% x/ %} |
+
+## Markdoc table
+
+{% table %}
+* Foo
+* Bar
+* Baz
+---
+*
+  ```
+  puts "Some code here."
+  ```
+*
+  {% list type="checkmark" %}
+  * Bulleted list in table
+  * Second item in bulleted list
+  {% /list %}
+* Text in a table
+---
+*
+  A "loose" list with
+
+  multiple line items
+* Test 2
+* Test 3
+---
+* Test 1
+* A cell that spans two columns {% colspan=2 %}
+{% /table %}
+
+[1]: https://www.google.com

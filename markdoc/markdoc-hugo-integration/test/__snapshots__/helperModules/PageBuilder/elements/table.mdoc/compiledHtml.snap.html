@@ -1,0 +1,81 @@
+<div id="markdoc-chooser"></div>
+<div id="markdoc-content">
+  <article>
+    <h2>Guidelines</h2>
+    <h2>Markdown table (CommonMark table)</h2>
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="result"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Result"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><em>italic</em></td>
+                <td><code>code</code></td>
+                <td><strong>bold</strong></td>
+              </tr>
+              <tr>
+                <td><a href="https://www.google.com">link</a></td>
+                <td>Row 2</td>
+                <td>Row 2</td>
+              </tr>
+              <tr>
+                <td>Row 3</td>
+                <td>Row 3</td>
+                <td><i class="icon-check-bold"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          data-lang="markup"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Markup"
+        >
+          <div class="code-snippet-wrapper">
+            <div
+              class="code-filename-wrapper d-flex justify-content-end collapsible"
+            >
+              <div class="js-code-block-visibility-toggle">
+                <div class="chevron chevron-down d-none"></div>
+                <div class="chevron chevron-up"></div>
+              </div>
+            </div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="highlight code-snippet js-appended-copy-btn">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <pre tabindex="0" class="chroma"><code></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<script>
+  clientRenderer.initialize({
+    pagePrefsConfig: undefined,
+    prefOptionsConfig: {},
+    selectedValsByPrefId: {},
+    ifFunctionsByRef: {},
+  });
+</script>

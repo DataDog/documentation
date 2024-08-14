@@ -1,0 +1,236 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Guidelines"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Markdown table (CommonMark table)"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "Tabs",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "Tab",
+          "attributes": {
+            "label": "Result"
+          },
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "table",
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Tag",
+                  "name": "thead",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "th",
+                          "attributes": {},
+                          "children": [
+                            "Header 1"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "th",
+                          "attributes": {},
+                          "children": [
+                            "Header 2"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "th",
+                          "attributes": {},
+                          "children": [
+                            "Header 3"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$mdtype": "Tag",
+                  "name": "tbody",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Tag",
+                              "name": "em",
+                              "attributes": {},
+                              "children": [
+                                "italic"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Tag",
+                              "name": "code",
+                              "attributes": {},
+                              "children": [
+                                "code"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Tag",
+                              "name": "strong",
+                              "attributes": {},
+                              "children": [
+                                "bold"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Tag",
+                              "name": "a",
+                              "attributes": {
+                                "href": "https://www.google.com"
+                              },
+                              "children": [
+                                "link"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 2"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 2"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$$mdtype": "Tag",
+                      "name": "tr",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 3"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            "Row 3"
+                          ]
+                        },
+                        {
+                          "$$mdtype": "Tag",
+                          "name": "td",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "$$mdtype": "Tag",
+                              "name": "X",
+                              "attributes": {},
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "Tab",
+          "attributes": {
+            "label": "Markup"
+          },
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "Fence",
+              "attributes": {
+                "language": "markdown"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
