@@ -257,7 +257,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 |---|---
 | `name` | The unique identifier of the Elastic Cloud resource. |
 | `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
-| `kind` | The kind of resource. |
+| `kind` | The type of resource. |
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
