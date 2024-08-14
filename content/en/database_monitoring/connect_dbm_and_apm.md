@@ -35,7 +35,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \* Full propagation mode on Aurora MySQL requires version 3.
 
-\*\* SQL Server supports full mode only with Java tracer.
+\*\* SQL Server only supports full mode with the Java tracer.
 
 **Supported application tracers and drivers**
 
@@ -74,7 +74,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \*\* Full mode SQL Server/Java:
 - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-- If your applications uses `context_info` to instrument the application, it will be overwritten by the APM tracer.
+- If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
 - Prerequisites:
   - Agent version 7.55.0 or greater
   - Java tracer version 1.39.0 or greater
