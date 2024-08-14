@@ -21,7 +21,7 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat 그래프" popup="true">}}
 
 ## 개요
 
