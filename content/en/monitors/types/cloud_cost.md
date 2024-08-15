@@ -1,6 +1,6 @@
 ---
 title: Cloud Cost Monitor
-description: "Monitor costs associated with cloud platforms."
+description: "Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs."
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
@@ -39,12 +39,14 @@ You can also create Cloud Cost monitors from [Cloud Costs Analytics][2]. Click o
 
 ## Select a cost monitor type
 
-Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** monitor type.
+You can choose from the following monitor types.
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
 | Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
 | Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
+| Cost Forecast | Set alerts based on forecasted costs exceeding a threshold by the end of the current month. | Alert daily if the forecasted total cost for the current exceeds $500. |
+| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. | Alert if three days from the past week show significant cost anomalies compared to historical data. |
 
 ## Specify which costs to track
 
@@ -61,12 +63,13 @@ Any cost type or metric reporting to Datadog is available for monitors. You can 
 
 ## Set alert conditions
 
-If the cost monitor type is **Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
+If you are using the **Cost Threshold** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
 
-If the cost monitor type is **Cost Changes**, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
+If you are using the **Cost Changes** monitor type, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**. For the **Percentage Change**, you can also filter out changes that are below a certain dollar threshold. For example, the monitor alerts when there is a cost change above 5% for any change that is above $500.
 
-**Note**: For the **Percentage Change**, you can also filter out changes that are below a certain dollar threshold.
-Example: alert when there is a cost change above 5% for any change that is above $500
+If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to`, `equal to`, or `not equal to` a threshold.  
+
+If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service.  
 
 ## Configure notifications and automations
 
