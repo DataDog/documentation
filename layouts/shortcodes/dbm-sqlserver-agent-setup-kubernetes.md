@@ -24,7 +24,7 @@ instances:
     connector: 'odbc'
     driver: 'FreeTDS'
     include_ao_metrics: true  # Optional: For AlwaysOn users
-    agent_jobs:               # Optional: For Agent Jobs users
+    agent_jobs:               # Optional: For monitoring SQL Server Agent jobs
       enabled: true
       collection_interval: 15
       history_row_limit: 10000
@@ -50,7 +50,7 @@ instances:
     connector: 'odbc'
     driver: 'FreeTDS'
     include_ao_metrics: true  # Optional: For AlwaysOn users
-    agent_jobs:               # Optional: For Agent Jobs users
+    agent_jobs:               # Optional: For monitoring SQL Server Agent jobs
       enabled: true
       collection_interval: 15
       history_row_limit: 10000
@@ -83,7 +83,7 @@ metadata:
           "connector": "odbc",
           "driver": "FreeTDS",
           "include_ao_metrics": true,  # Optional: For AlwaysOn users
-          "agent_jobs": {              # Optional: For Agent Jobs users
+          "agent_jobs": {              # Optional: For monitoring SQL Server Agent jobs
             "enabled": true
             "collection_interval": 15
             "history_row_limit": 10000

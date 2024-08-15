@@ -16,7 +16,7 @@ instances:
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     include_ao_metrics: true  # Optional: For AlwaysOn users
-    agent_jobs:               # Optional: For Agent Jobs users
+    agent_jobs:               # Optional: For monitoring SQL Server Agent jobs
       enabled: true
       collection_interval: 15
       history_row_limit: 10000
