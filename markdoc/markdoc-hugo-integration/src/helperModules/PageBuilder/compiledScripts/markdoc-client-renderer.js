@@ -2464,6 +2464,7 @@
         constructor() {
           this.selectedValsByPrefId = {};
           this.ifFunctionsByRef = {};
+          this.storedPreferences = {};
         }
         /**
          * Return the existing instance,
@@ -2472,8 +2473,21 @@
         static get instance() {
           if (!__classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance)) {
             __classPrivateFieldSet(_a, _a, new _a(), "f", _ClientRenderer_instance);
+            __classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance).retrieveStoredPreferences();
           }
           return __classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance);
+        }
+        retrieveStoredPreferences() {
+          const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
+          this.storedPreferences = storedPreferences;
+          console.log("Retrieved stored preferences from new CR instance:", storedPreferences);
+        }
+        updateStoredPreferences() {
+          const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
+          const newStoredPreferences = Object.assign(Object.assign({}, storedPreferences), this.selectedValsByPrefId);
+          this.storedPreferences = newStoredPreferences;
+          console.log("Updated stored preferences:", newStoredPreferences);
+          localStorage.setItem("content-prefs", JSON.stringify(newStoredPreferences));
         }
         getSelectedValsFromUrl() {
           const url = new URL(window.location.href);
@@ -2517,6 +2531,7 @@
           this.rerenderPageContent();
           this.populateRightNav();
           this.syncUrlWithSelectedVals();
+          this.updateStoredPreferences();
         }
         /**
          * Check whether the element or any of its ancestors
@@ -2558,6 +2573,10 @@
             throw new Error('Cannot find right nav element with id "TableOfContents"');
           }
           rightNav.innerHTML = html;
+        }
+        rerender() {
+          this.rerenderChooser();
+          this.rerenderPageContent();
         }
         /**
          * Rerender the section of the page that was derived
@@ -2602,27 +2621,55 @@
             prefPills[i].addEventListener("click", (e) => this.handlePrefSelectionChange(e));
           }
         }
-        initialize(p) {
-          this.prefOptionsConfig = p.prefOptionsConfig;
-          this.pagePrefsConfig = p.pagePrefsConfig;
-          this.chooserElement = p.chooserElement;
-          this.selectedValsByPrefId = p.selectedValsByPrefId || {};
-          this.ifFunctionsByRef = {};
-          Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-            this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
-          });
+        locateChooserElement() {
           const chooserElement = document.getElementById("markdoc-chooser");
           if (!chooserElement) {
             throw new Error('Cannot find chooser element with id "markdoc-chooser"');
           } else {
             this.chooserElement = chooserElement;
           }
-          this.getSelectedValsFromUrl();
-          this.addChooserEventListeners();
-          this.syncUrlWithSelectedVals();
+        }
+        initialize(p) {
+          this.prefOptionsConfig = p.prefOptionsConfig;
+          this.pagePrefsConfig = p.pagePrefsConfig;
+          this.selectedValsByPrefId = p.selectedValsByPrefId || {};
+          this.ifFunctionsByRef = {};
+          Object.keys(p.ifFunctionsByRef).forEach((ref) => {
+            this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
+          });
+          this.locateChooserElement();
+          console.log("Selected values by pref ID on initialization:", this.selectedValsByPrefId);
+          console.log("Stored prefs on initialization:", this.storedPreferences);
+          const relevantStoredPrefIds = Object.keys(this.storedPreferences).filter((prefId) => {
+            return prefId in this.selectedValsByPrefId;
+          });
+          console.log("Relevant stored pref IDs:", relevantStoredPrefIds);
+          relevantStoredPrefIds.forEach((prefId) => {
+            this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
+          });
+          console.log("Selected values by pref ID after overriding with stored prefs:", this.selectedValsByPrefId);
+          const urlPrefs = this.getSelectedValsFromUrl();
+          if (Object.keys(urlPrefs).length > 0) {
+            this.selectedValsByPrefId = Object.assign(Object.assign({}, this.selectedValsByPrefId), this.getSelectedValsFromUrl());
+          }
+          if (relevantStoredPrefIds.length > 0 || Object.keys(urlPrefs).length > 0) {
+            this.rerender();
+          }
+          this.revealPage();
           document.addEventListener("DOMContentLoaded", () => {
             this.populateRightNav();
           });
+          this.syncUrlWithSelectedVals();
+          this.updateStoredPreferences();
+        }
+        revealPage() {
+          if (this.chooserElement) {
+            this.chooserElement.style.visibility = "visible";
+          }
+          const content = document.getElementById("markdoc-content");
+          if (content) {
+            content.style.visibility = "visible";
+          }
         }
         rerenderChooser() {
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {

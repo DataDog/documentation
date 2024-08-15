@@ -1,6 +1,10 @@
 .markdoc__hidden {
     display: none;
 }
+#markdoc-chooser,
+#markdoc-content {
+    visibility: hidden;
+}
 .markdoc-pref__pill {
     display: inline-block;
     padding: 5px 10px;

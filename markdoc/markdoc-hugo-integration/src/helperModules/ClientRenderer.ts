@@ -28,9 +28,10 @@ export class ClientRenderer {
 
   private prefOptionsConfig?: MinifiedPrefOptionsConfig;
   private pagePrefsConfig?: MinifiedPagePrefsConfig;
-  private chooserElement?: Element;
+  private chooserElement?: HTMLElement;
   private selectedValsByPrefId: Record<string, string> = {};
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
+  private storedPreferences: Record<string, string> = {};
 
   private constructor() {}
 
@@ -41,9 +42,28 @@ export class ClientRenderer {
   public static get instance(): ClientRenderer {
     if (!ClientRenderer.#instance) {
       ClientRenderer.#instance = new ClientRenderer();
+      ClientRenderer.#instance.retrieveStoredPreferences();
     }
 
     return ClientRenderer.#instance;
+  }
+
+  retrieveStoredPreferences() {
+    const storedPreferences = JSON.parse(localStorage.getItem('content-prefs') || '{}');
+    this.storedPreferences = storedPreferences;
+    console.log('Retrieved stored preferences from new CR instance:', storedPreferences);
+  }
+
+  updateStoredPreferences() {
+    // update the stored preferences
+    const storedPreferences = JSON.parse(localStorage.getItem('content-prefs') || '{}');
+    const newStoredPreferences = {
+      ...storedPreferences,
+      ...this.selectedValsByPrefId
+    };
+    this.storedPreferences = newStoredPreferences;
+    console.log('Updated stored preferences:', newStoredPreferences);
+    localStorage.setItem('content-prefs', JSON.stringify(newStoredPreferences));
   }
 
   getSelectedValsFromUrl() {
@@ -97,6 +117,7 @@ export class ClientRenderer {
     this.rerenderPageContent();
     this.populateRightNav();
     this.syncUrlWithSelectedVals();
+    this.updateStoredPreferences();
   }
 
   /**
@@ -148,6 +169,11 @@ export class ClientRenderer {
       throw new Error('Cannot find right nav element with id "TableOfContents"');
     }
     rightNav.innerHTML = html;
+  }
+
+  rerender() {
+    this.rerenderChooser();
+    this.rerenderPageContent();
   }
 
   /**
@@ -202,16 +228,23 @@ export class ClientRenderer {
     }
   }
 
+  locateChooserElement() {
+    const chooserElement = document.getElementById('markdoc-chooser');
+    if (!chooserElement) {
+      throw new Error('Cannot find chooser element with id "markdoc-chooser"');
+    } else {
+      this.chooserElement = chooserElement;
+    }
+  }
+
   initialize(p: {
     prefOptionsConfig: MinifiedPrefOptionsConfig;
     pagePrefsConfig: MinifiedPagePrefsConfig;
-    chooserElement: Element;
     selectedValsByPrefId?: Record<string, string>;
     ifFunctionsByRef: Record<string, MinifiedClientFunction>;
   }) {
     this.prefOptionsConfig = p.prefOptionsConfig;
     this.pagePrefsConfig = p.pagePrefsConfig;
-    this.chooserElement = p.chooserElement;
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.ifFunctionsByRef = {};
     Object.keys(p.ifFunctionsByRef).forEach((ref) => {
@@ -220,20 +253,62 @@ export class ClientRenderer {
       ) as ClientFunction;
     });
 
-    const chooserElement = document.getElementById('markdoc-chooser');
-    if (!chooserElement) {
-      throw new Error('Cannot find chooser element with id "markdoc-chooser"');
-    } else {
-      this.chooserElement = chooserElement;
+    this.locateChooserElement();
+
+    console.log(
+      'Selected values by pref ID on initialization:',
+      this.selectedValsByPrefId
+    );
+    console.log('Stored prefs on initialization:', this.storedPreferences);
+
+    // Override default values with stored preferences
+    const relevantStoredPrefIds = Object.keys(this.storedPreferences).filter((prefId) => {
+      return prefId in this.selectedValsByPrefId;
+    });
+    console.log('Relevant stored pref IDs:', relevantStoredPrefIds);
+    relevantStoredPrefIds.forEach((prefId) => {
+      this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
+    });
+
+    console.log(
+      'Selected values by pref ID after overriding with stored prefs:',
+      this.selectedValsByPrefId
+    );
+
+    // Override stored preferences with URL params
+    const urlPrefs = this.getSelectedValsFromUrl();
+    if (Object.keys(urlPrefs).length > 0) {
+      this.selectedValsByPrefId = {
+        ...this.selectedValsByPrefId,
+        ...this.getSelectedValsFromUrl()
+      };
     }
 
-    this.getSelectedValsFromUrl();
-    this.addChooserEventListeners();
-    this.syncUrlWithSelectedVals();
+    // Update the page content if any prefs are not set to the default
+    if (relevantStoredPrefIds.length > 0 || Object.keys(urlPrefs).length > 0) {
+      this.rerender();
+    }
+
+    this.revealPage();
 
     document.addEventListener('DOMContentLoaded', () => {
       this.populateRightNav();
     });
+
+    this.syncUrlWithSelectedVals();
+    this.updateStoredPreferences();
+  }
+
+  revealPage() {
+    // reveal markdoc-chooser and markdoc-content by ID
+    if (this.chooserElement) {
+      this.chooserElement.style.visibility = 'visible';
+    }
+
+    const content = document.getElementById('markdoc-content');
+    if (content) {
+      content.style.visibility = 'visible';
+    }
   }
 
   rerenderChooser() {
