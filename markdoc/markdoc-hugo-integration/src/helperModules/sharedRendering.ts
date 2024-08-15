@@ -34,12 +34,13 @@ export function resolvePagePrefs(p: {
   valsByPrefId: Record<string, string>;
 }): ResolvedPagePrefs {
   const resolvedPagePrefs: ResolvedPagePrefs = {};
+  const valsByPrefIdDup = { ...p.valsByPrefId };
 
   p.pagePrefsConfig.forEach((prefConfig) => {
     // If the options source contains a placeholder, resolve it
     const prefConfigDup = resolvePrefOptionsSource({
       pagePrefConfig: prefConfig,
-      valsByPrefId: p.valsByPrefId
+      valsByPrefId: valsByPrefIdDup
     });
 
     // Update the value for the preference,
@@ -55,6 +56,7 @@ export function resolvePagePrefs(p: {
     let currentValue = p.valsByPrefId[prefConfigDup.id];
     if (currentValue && !possibleValues.includes(currentValue)) {
       currentValue = defaultValue;
+      valsByPrefIdDup[prefConfigDup.id] = defaultValue;
     }
 
     // Add the resolved pref to the returned object
@@ -81,12 +83,16 @@ export function resolveMinifiedPagePrefs(p: {
   valsByPrefId: Record<string, string>;
 }): ResolvedPagePrefs {
   const resolvedPagePrefs: ResolvedPagePrefs = {};
+  // Make a copy of the selected values,
+  // so we can update a value to the default
+  // if the incoming value is invalid
+  const valsByPrefIdDup = { ...p.valsByPrefId };
 
   p.pagePrefsConfig.forEach((prefConfig) => {
     // If the options source contains a placeholder, resolve it
     const prefConfigDup = resolveMinifiedPrefOptionsSource({
       pagePrefConfig: prefConfig,
-      valsByPrefId: p.valsByPrefId
+      valsByPrefId: valsByPrefIdDup
     });
 
     // Update the value for the preference,
@@ -99,6 +105,7 @@ export function resolveMinifiedPagePrefs(p: {
     let currentValue = p.valsByPrefId[prefConfigDup.i];
     if (currentValue && !possibleValues.includes(currentValue)) {
       currentValue = defaultValue;
+      valsByPrefIdDup[prefConfigDup.i] = defaultValue;
     }
 
     // Add the resolved pref to the returned object
@@ -121,10 +128,10 @@ export function resolveMinifiedPagePrefs(p: {
 
 export function resolveMinifiedPrefOptionsSource(p: {
   pagePrefConfig: MinifiedPagePrefConfig;
+  // pagePrefsConfig: MinifiedPagePrefsConfig;
   valsByPrefId: Record<string, string>;
+  // prefOptionsConfig: MinifiedPrefOptionsConfig;
 }): MinifiedPagePrefConfig {
-  // Make a copy in order to preserve the placeholders
-  // for future use
   const prefConfigDup = { ...p.pagePrefConfig };
 
   // Replace any placeholder in the options source with the selected value

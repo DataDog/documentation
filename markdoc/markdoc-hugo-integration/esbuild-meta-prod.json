@@ -11,7 +11,7 @@
       "format": "cjs"
     },
     "dist/helperModules/sharedRendering.js": {
-      "bytes": 5508,
+      "bytes": 5810,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -127,7 +127,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientRenderer.js": {
-      "bytes": 12716,
+      "bytes": 12423,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/Chooser.js",
@@ -176,7 +176,7 @@
           "bytesInOutput": 396
         },
         "dist/helperModules/sharedRendering.js": {
-          "bytesInOutput": 1500
+          "bytesInOutput": 1563
         },
         "../markdoc-static-compiler/src/grammar/tag.js": {
           "bytesInOutput": 12824
@@ -206,13 +206,13 @@
           "bytesInOutput": 1542
         },
         "dist/helperModules/ClientRenderer.js": {
-          "bytesInOutput": 5755
+          "bytesInOutput": 5559
         },
         "src/markdoc-client-renderer.js": {
           "bytesInOutput": 61
         }
       },
-      "bytes": 29240
+      "bytes": 29107
     }
   }
 }

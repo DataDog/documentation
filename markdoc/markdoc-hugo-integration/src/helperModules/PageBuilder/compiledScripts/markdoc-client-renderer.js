@@ -86,16 +86,18 @@
       var regexes_1 = require_regexes();
       function resolvePagePrefs(p) {
         const resolvedPagePrefs = {};
+        const valsByPrefIdDup = Object.assign({}, p.valsByPrefId);
         p.pagePrefsConfig.forEach((prefConfig) => {
           const prefConfigDup = resolvePrefOptionsSource({
             pagePrefConfig: prefConfig,
-            valsByPrefId: p.valsByPrefId
+            valsByPrefId: valsByPrefIdDup
           });
           const defaultValue = prefConfigDup.default_value || p.prefOptionsConfig[prefConfigDup.options_source].find((option) => option.default).id;
           const possibleValues = p.prefOptionsConfig[prefConfigDup.options_source].map((option) => option.id);
           let currentValue = p.valsByPrefId[prefConfigDup.id];
           if (currentValue && !possibleValues.includes(currentValue)) {
             currentValue = defaultValue;
+            valsByPrefIdDup[prefConfigDup.id] = defaultValue;
           }
           const resolvedPref = {
             id: prefConfigDup.id,
@@ -113,16 +115,18 @@
       }
       function resolveMinifiedPagePrefs(p) {
         const resolvedPagePrefs = {};
+        const valsByPrefIdDup = Object.assign({}, p.valsByPrefId);
         p.pagePrefsConfig.forEach((prefConfig) => {
           const prefConfigDup = resolveMinifiedPrefOptionsSource({
             pagePrefConfig: prefConfig,
-            valsByPrefId: p.valsByPrefId
+            valsByPrefId: valsByPrefIdDup
           });
           const defaultValue = prefConfigDup.d || p.prefOptionsConfig[prefConfigDup.o].find((option) => option.d).i;
           const possibleValues = p.prefOptionsConfig[prefConfigDup.o].map((option) => option.i);
           let currentValue = p.valsByPrefId[prefConfigDup.i];
           if (currentValue && !possibleValues.includes(currentValue)) {
             currentValue = defaultValue;
+            valsByPrefIdDup[prefConfigDup.i] = defaultValue;
           }
           const resolvedPref = {
             id: prefConfigDup.i,
@@ -2486,7 +2490,6 @@
           const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
           const newStoredPreferences = Object.assign(Object.assign({}, storedPreferences), this.selectedValsByPrefId);
           this.storedPreferences = newStoredPreferences;
-          console.log("Updated stored preferences:", newStoredPreferences);
           localStorage.setItem("content-prefs", JSON.stringify(newStoredPreferences));
         }
         getSelectedValsFromUrl() {
@@ -2496,7 +2499,6 @@
           searchParams.forEach((val, key) => {
             selectedValsByPrefId[key] = val;
           });
-          console.log("Selected vals from the URL:", selectedValsByPrefId);
           return selectedValsByPrefId;
         }
         syncUrlWithSelectedVals() {
@@ -2564,7 +2566,6 @@
               html += "</ul>";
             }
             lastSeenLevel = level;
-            console.log(header);
             html += `<li><a href="#${header.id}">${header.textContent}</a></li>`;
           });
           html += "</ul>";
@@ -2638,16 +2639,12 @@
             this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
           });
           this.locateChooserElement();
-          console.log("Selected values by pref ID on initialization:", this.selectedValsByPrefId);
-          console.log("Stored prefs on initialization:", this.storedPreferences);
           const relevantStoredPrefIds = Object.keys(this.storedPreferences).filter((prefId) => {
             return prefId in this.selectedValsByPrefId;
           });
-          console.log("Relevant stored pref IDs:", relevantStoredPrefIds);
           relevantStoredPrefIds.forEach((prefId) => {
             this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
           });
-          console.log("Selected values by pref ID after overriding with stored prefs:", this.selectedValsByPrefId);
           const urlPrefs = this.getSelectedValsFromUrl();
           if (Object.keys(urlPrefs).length > 0) {
             this.selectedValsByPrefId = Object.assign(Object.assign({}, this.selectedValsByPrefId), this.getSelectedValsFromUrl());
@@ -2675,6 +2672,10 @@
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
             throw new Error("Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement");
           }
+          console.log("Rerendering chooser with");
+          console.log("pagePrefsConfig:", this.pagePrefsConfig);
+          console.log("prefOptionsConfig:", this.prefOptionsConfig);
+          console.log("selectedValsByPrefId:", this.selectedValsByPrefId);
           const resolvedPagePrefs = (0, sharedRendering_1.resolveMinifiedPagePrefs)({
             pagePrefsConfig: this.pagePrefsConfig,
             prefOptionsConfig: this.prefOptionsConfig,
