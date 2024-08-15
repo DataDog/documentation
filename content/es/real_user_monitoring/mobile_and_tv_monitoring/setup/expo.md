@@ -190,7 +190,7 @@ Si estás utilizando Expo Go, cambia a las compilaciones de desarrollo (recomend
 Las [compilaciones de desarrollo][7] de tu aplicación son compilaciones de depuración que contienen el paquete `expo-dev-client`.
 
 1. Activa el [código nativo personalizado para ejecutar][8] con `expo run:android` y `expo run:ios`.
-2. Para empezar a utilizar tu aplicación de desarrollo, ejecuta `expo install expo-dev-client` y `expo start --dev-client`. Se instala e se inicia el [paquete `expo-dev-client`][9] para ejecutar el código nativo añadido en el modo de desarrollador.
+2. Para empezar a utilizar tu aplicación de desarrollo, ejecuta `expo install expo-dev-client` y `expo start --dev-client`. Se instala y se inicia el [paquete `expo-dev-client`][9] para ejecutar el código nativo añadido en el modo de desarrollador.
 
 ### Desarrollar con Expo Go
 
