@@ -224,16 +224,20 @@ env:
 
 ## Verify data flow
 
+After configuring your application, verify that data is flowing correctly to Datadog:
+
 1. Apply the configuration changes by redeploying your applications.
    ```sh
    kubectl apply -f deployment.yaml
    ```
 1. Confirm that telemetry data is being received in your Datadog account. Check logs, traces and metrics to ensure correct data collection and correlation.
 
-# Decommission standalone Collector
+## Uninstall standalone Collector
+
+Once you've confirmed that all data is being collected correctly in Datadog, you can remove the standalone OpenTelemetry Collector:
 
 1. Ensure all required data is being collected and displayed in Datadog.  
-1. Safely uninstall the open source OpenTelemetry Collector from your environment:
+1. Uninstall the open source OpenTelemetry Collector from your environment:
    ```sh
    kubectl delete deployment old-otel-collector
    ```
