@@ -1,4 +1,3 @@
-test
 
 ---
 title: Datadog Audit Trail
