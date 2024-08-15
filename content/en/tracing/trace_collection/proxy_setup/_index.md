@@ -394,7 +394,7 @@ http {
     fieldRef:
       fieldPath: status.hostIP
 - name: OTEL_EXPORTER_OTLP_ENDPOINT
-  value: "http://$(HOST_IP):4318"
+  value: "http://$(HOST_IP):4317"
 ```
 
 Next, enable OpenTelemetry instrumentation for the controller. Create or edit a ConfigMap with the following details:

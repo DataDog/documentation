@@ -21,7 +21,7 @@ The OOTB SLO Performance Dashboard is in Private Beta. Complete the form to requ
 
 Access your OOTB SLO Dashbord by filtering for `SLO Performance Summary` in the search query of the [**Dashboard List**][1] or by clicking on the **Analytics** button on the top right corner of the [SLO status page][2].
 
-{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-default-ootb-dashboard.png" alt="Default OOTB SLO Dashboard by Service Tag" >}}
+{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-ootb-dashboard.png" alt="Default OOTB SLO Dashboard by Service Tag" >}}
 
 ## Interact with your OOTB SLO dashboard
 
@@ -35,6 +35,11 @@ The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is desig
 - The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget
 - SLOs in the "No Data" state are not considered in the Score
 
+Note that an average remaining error budget of 0% corresponds to a Score value of 66.667. The Score's status and color is based on the following thresholds:
+- **Red:** 0 ≤ Score < 66.667
+- **Yellow:** 66.667 ≤ Score < 80
+- **Green:** 80 ≤ Score ≤ 100
+
 ### Customize your OOTB SLO dashboard
 
 To customize your OOTB SLO dashboard, click **Configure** in the dashboard and select **Clone dashboard**. The default OOTB dashboard is configured based on the `service` tag that's been added to SLOs. You can update the dashboard to be based on any [SLO tag][3] by taking the following steps:
@@ -45,7 +50,7 @@ To customize your OOTB SLO dashboard, click **Configure** in the dashboard and s
 
 For instance, if you have added a `journey` tag to your SLOs, you can clone the OOTB dashboard and customize it to be based on the `journey` tag:
 
-{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-by-journey.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}
+{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-flow.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}
 
 
 
