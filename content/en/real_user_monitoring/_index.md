@@ -1,8 +1,5 @@
 ---
-
-test tk
-
-title: RUM & Session Replay
+title: RUM & Session Replay test tk
 kind: documentation
 description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users." 
 disable_sidebar: true
