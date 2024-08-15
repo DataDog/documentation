@@ -71,7 +71,7 @@ After you have set up Test Visibility, you can configure Auto Test Retries from 
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
-The default behavior of the feature is to retry any failing test case up to 5 times by default.
+The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
 
 * `DD_CIVISIBILITY_RETRY_FAILED_TESTS_MAX_ATTEMPTS` - a non-negative number to change the maximum number of retries per test case (default: 5).
