@@ -2,7 +2,8 @@
 beta: true
 code_lang: ios
 code_lang_weight: 20
-description: Lista de sistemas operativos y plataformas compatibles con RUM iOS SDK.
+description: Lista de sistemas operativos y plataformas compatibles con el SDK de
+  RUM iOS.
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
   tag: Documentación
@@ -12,21 +13,21 @@ further_reading:
   text: Código fuente de dd-sdk-ios
 - link: /real_user_monitoring
   tag: Documentación
-  text: Aprenda a explorar sus datos de RUM
+  text: Aprende a explorar tus datos de RUM
 - link: /real_user_monitoring/error_tracking/ios/
   tag: Documentación
   text: Aprende a rastrear los errores de iOS
 - link: /real_user_monitoring/ios/swiftui/
   tag: Documentación
-  text: Aprende a instrumentar aplicaciones SwiftUI
-title: Versiones compatibles de monitorizaciónde RUM iOS y tvOS
+  text: Aprende a instrumentar aplicaciones de SwiftUI
+title: Versiones compatibles de monitorización de RUM iOS y tvOS
 type: multi-code-lang
 ---
 
 
 ## Versiones compatibles
 
-El RUM iOS SDK es compatible con las siguientes versiones de iOS:
+El SDK de RUM iOS es compatible con las siguientes versiones de iOS:
 
 | Plataforma | Compatible | Versión | Notas |
 |--------|-------------|---------|-------|
