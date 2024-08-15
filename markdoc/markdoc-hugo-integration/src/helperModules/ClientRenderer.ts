@@ -46,6 +46,33 @@ export class ClientRenderer {
     return ClientRenderer.#instance;
   }
 
+  getSelectedValsFromUrl() {
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
+
+    const selectedValsByPrefId: Record<string, string> = {};
+    searchParams.forEach((val, key) => {
+      selectedValsByPrefId[key] = val;
+    });
+
+    console.log('Selected vals from the URL:', selectedValsByPrefId);
+
+    return selectedValsByPrefId;
+  }
+
+  syncUrlWithSelectedVals() {
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
+
+    const sortedPrefIds = Object.keys(this.selectedValsByPrefId).sort();
+
+    sortedPrefIds.forEach((prefId) => {
+      searchParams.set(prefId, this.selectedValsByPrefId[prefId]);
+    });
+
+    window.history.replaceState({}, '', url.toString());
+  }
+
   /**
    * When the user changes a preference value,
    * update the selected values data,
@@ -69,6 +96,7 @@ export class ClientRenderer {
     this.rerenderChooser();
     this.rerenderPageContent();
     this.populateRightNav();
+    this.syncUrlWithSelectedVals();
   }
 
   /**
@@ -199,7 +227,10 @@ export class ClientRenderer {
       this.chooserElement = chooserElement;
     }
 
+    this.getSelectedValsFromUrl();
     this.addChooserEventListeners();
+    this.syncUrlWithSelectedVals();
+
     document.addEventListener('DOMContentLoaded', () => {
       this.populateRightNav();
     });

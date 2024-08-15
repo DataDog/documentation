@@ -2475,6 +2475,25 @@
           }
           return __classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance);
         }
+        getSelectedValsFromUrl() {
+          const url = new URL(window.location.href);
+          const searchParams = url.searchParams;
+          const selectedValsByPrefId = {};
+          searchParams.forEach((val, key) => {
+            selectedValsByPrefId[key] = val;
+          });
+          console.log("Selected vals from the URL:", selectedValsByPrefId);
+          return selectedValsByPrefId;
+        }
+        syncUrlWithSelectedVals() {
+          const url = new URL(window.location.href);
+          const searchParams = url.searchParams;
+          const sortedPrefIds = Object.keys(this.selectedValsByPrefId).sort();
+          sortedPrefIds.forEach((prefId) => {
+            searchParams.set(prefId, this.selectedValsByPrefId[prefId]);
+          });
+          window.history.replaceState({}, "", url.toString());
+        }
         /**
          * When the user changes a preference value,
          * update the selected values data,
@@ -2497,6 +2516,7 @@
           this.rerenderChooser();
           this.rerenderPageContent();
           this.populateRightNav();
+          this.syncUrlWithSelectedVals();
         }
         /**
          * Check whether the element or any of its ancestors
@@ -2597,7 +2617,9 @@
           } else {
             this.chooserElement = chooserElement;
           }
+          this.getSelectedValsFromUrl();
           this.addChooserEventListeners();
+          this.syncUrlWithSelectedVals();
           document.addEventListener("DOMContentLoaded", () => {
             this.populateRightNav();
           });
