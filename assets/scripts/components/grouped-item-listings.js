@@ -29,6 +29,8 @@ export function initializeGroupedListings() {
         }
 
         if (searchValue && searchValue.length >= 2) {
+            console.log('Search value is here')
+            console.log(searchValue)
             results = Array.from(results).filter(item => (item.dataset.name && item.dataset.name.indexOf(searchValue) > -1));
         }
 
@@ -116,11 +118,12 @@ export function initializeGroupedListings() {
         const activeCategory = document.querySelector('.controls .active');
         const activeCategoryFilter = (activeCategory) ? activeCategory.dataset.filter : '';
 
-        if(searchValue){
+        if (searchValue) {
             url.searchParams.set('search', searchValue)
-        }else{
+        } else {
             url.searchParams.delete('search')
         }
+
         clearTimeout(keyupTimeout);
         
         keyupTimeout = setTimeout(() => {
