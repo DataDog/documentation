@@ -94,7 +94,7 @@ Gunicorn 점검을 사용하려면 Gunicorn 앱의 파이썬(Python) 환경에 [
 
 ### 설정
 
-[에이전트의 설정 디렉토리][4] 루트의 `conf.d/` 폴더에 있는 `gunicorn.d/conf.yaml` 파일을 수정하여 Gunicorn [메트릭](#metric-collection) 및 [로그](#log-collection) 수집을 시작하세요.
+[에이전트의 설정 디렉토리][4] 루트의 `conf.d/` 폴더에 있는 `gunicorn.d/conf.yaml` 파일을 수정하여 Gunicorn [메트릭](#메트릭 수집) 및 [로그](#로그 수집) 수집을 시작하세요.
 사용 가능한 모든 설정 옵션은 [gunicorn.yaml 샘플][5]을 참조하세요.
 
 #### 메트릭 수집
