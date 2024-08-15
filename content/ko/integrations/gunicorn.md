@@ -62,7 +62,7 @@ tile:
   media: []
   overview: README.md#Overview
   resources:
-  - resource_type: 블로그
+  - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-gunicorn-performance
   support: README.md#Support
   title: Gunicorn
