@@ -103,7 +103,7 @@ Gunicorn 점검을 사용하려면 Gunicorn 앱의 파이썬(Python) 환경에 [
 
 1. 버전 19.1부터 Gunicorn은 [DogStatsD][7]과 마찬가지로 StatsD 프로토콜을 구현하는 데몬에 메트릭을 전송하는 옵션[6]을 제공합니다. 다른 많은 Gunicorn 옵션과 같이 CLI에서 `gunicorn`(`--statsd-host`)로 전달하거나 앱의 설정 파일(`statsd_host`)에 설정할 수 있습니다. **모든 Gunicorn 메트릭**을 수집하려면 앱을 설정하여  `"localhost:8125"`에서 [DogStatsD][7]로 메트릭을 전송하합니다. 그런 다음 앱을 다시 시작하세요.
 
-2. `gunicorn.d/conf.yaml` 파일에 설정 블록을 추가하여 [Gunicorn 메트릭](#metrics) 수집을 시작하세요.
+2. `gunicorn.d/conf.yaml` 파일에 설정 블록을 추가하여 [Gunicorn 메트릭](#메트릭) 수집을 시작하세요.
 
 ```yaml
 init_config:
