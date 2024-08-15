@@ -60,11 +60,10 @@ These functions return one value per row.
 
 ## Date/time functions and operators
 
-### date_trunc
 | Name | Return type | Description |
 |------|-------------|-------------|
 | date_trunc(string *precision*, timestamp *t*) | timestamp | Truncates the timestamp to the chosen *precision* ("second", "minute", "hour", "day", "week", "month", or "year"). |
-| date_diff(string *precision*, timestamp *t*, timestamp *t*) | integer | Returns the difference between two dates, in the precision specified. | 
+| date_diff(string *precision*, timestamp *t*, timestamp *t*) | integer | Returns the difference between two dates, in the precision specified. |
 | to_timestamp(numeric *n*) | timestamp | Transforms *n* into a timestamp, considering *n* as the time in seconds.|
 
 ## Conditional expressions
@@ -76,8 +75,8 @@ These functions return one value per row.
 
 ## JSON functions and operators
 
-| Name | Return type | Description | 
-|------|-------------|-------------| 
+| Name | Return type | Description |
+|------|-------------|-------------|
 | json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in JSON as text, defined by the path. Its behavior is equivalent to the [postgres function with the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
 | json_extract_path(text json, text path…) | json | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
 | json_build_object(key1 text, value1 json/text/int/float, key2 text, value2 json/text/int/float, … ) | json | Builds a JSON object based on the parameters passed in. The parameters to the function are the keys/values of the JSON object being built, alternating between key and value mapped to each key.|
