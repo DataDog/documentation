@@ -15,7 +15,7 @@ title: Alertas con datos RUM
 
 ## Información general
 
-Real User Monitoring te permite crear alertas que te notifiquen sobre comportamientos atípicos en tus aplicaciones. Puedes crear monitores RUM con condiciones complejas, umbrales predefinidos y múltiples consultas para calcular medias, proporciones y métricas de indicadores de rendimiento (como Apdex).
+Real User Monitoring te permite crear alertas que te notifiquen sobre comportamientos atípicos en tus aplicaciones. Puedes crear monitores RUM con condiciones complejas, umbrales predefinidos y múltiples consultas para calcular medias, relaciones y métricas de indicadores de rendimiento (como Apdex).
 
 ## Definición de tu consulta de búsqueda
 
@@ -45,7 +45,7 @@ Una vez creada una alerta, dirígela a un canal individual o de equipo, escribie
 
 Los siguientes ejemplos muestran casos de uso de alertas con tus datos RUM.
 
-### Reducción de los ingresos
+### Reducciones de ingresos
 
 Con el [contexto global][6] de RUM, puedes enriquecer tus eventos RUM con atributos específicos de la empresa, como el importe de las compras de cada usuario.
 
