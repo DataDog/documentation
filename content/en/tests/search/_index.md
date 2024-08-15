@@ -21,7 +21,7 @@ further_reading:
 
 The [Tests page][1] is useful for developers who want to keep an eye on their test results.
 
-{{< img src="/continuous_integration/tests.png" text="CI Tests page" style="width:100%" >}}
+{{< img src="/tests/services.png" text="A list of test services sorted by the most recent branch on the Test Services page" style="width:100%" >}}
 
 You can access low-level and immediate insights:
 
@@ -71,6 +71,8 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 ### Default Branches view
 
 The [Default Branches][6] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
+
+{{< img src="/tests/default_branches.png" text="A list of test services sorted by the default branch on the Test Services page" style="width:100%" >}}
 
 The Default Branches view shows similar information to the Branches view, but applied to the default branch.
 
