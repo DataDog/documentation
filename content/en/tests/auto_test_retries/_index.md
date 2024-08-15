@@ -31,6 +31,7 @@ Ensure [Test Visibility][1] is configured for your test runs.
 
 * dd-trace-java >= 1.34.0
 * dd-trace-js >= v5.19.0 and dd-trace-js >= v4.43.0
+* datadog-ci-rb >= 1.4.0
 
 ### Configuration
 
@@ -59,11 +60,23 @@ After you have set up Test Visibility, you can configure Auto Test Retries from 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 
 #### Known limitations
+
 [jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
 
-[1]: /tests/explorer/
-[2]: https://www.npmjs.com/package/jest-image-snapshot
 [3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+
+{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+
+The default behavior of the feature is to retry any failing test case up to 5 times by default.
+This behavior can be fine-tuned with the following environment variables:
+
+* `DD_CIVISIBILITY_RETRY_FAILED_TESTS_MAX_ATTEMPTS` - a non-negative number to change the maximum number of retries per test case (default: 5).
+* `DD_CIVISIBILITY_RETRY_FAILED_TESTS_TOTAL_LIMIT` - a non-negative number to set a total number of failed tests to retry (default: 100)
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -80,8 +93,4 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /tests/setup/
-[2]: /tests/explorer/
-[3]: /tests/early_flake_detection
 [4]: https://app.datadoghq.com/ci/settings/test-service
