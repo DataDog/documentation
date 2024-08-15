@@ -18,6 +18,19 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 {{< img src="real_user_monitoring/session_replay/mobile/mobile_replay.mp4" alt="An example of a Mobile Session Replay recording" video="true" style="width:60%;">}}
 
+## Session Replay recorder
+
+The Session Replay recorder is part of the RUM Mobile SDK. The recorder turns the native view's hierarchies into a sequence of flat "wireframes".
+
+A wireframe describes individual rectangular areas in the mobile app screen. It is an abstract type, which means it doesn't always correspond 1:1 to a native view, or live inside the views hierarchy.
+
+Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
+
+The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the browser support table.
+
+
+To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
+
 ## Setup
 
 Learn how to [Setup and Configure Mobile Session Replay][1].
