@@ -34,8 +34,8 @@ Aggregate functions compute a single result from a set of input values, usually 
 | Name | Argument Types | Return type | Description |
 |------|----------------|-------------|-------------|
 | count(expr *e*) | numeric | integer | Computes the number of input rows in which the input value is not null. |
-| count(distinct expr *e1*, *e2* ...) | integer | Computes the number of input values in which the input value is not null. |
-| count(*) | integer | Computes the number of input rows. |
+| count(distinct expr *e1*, *e2* ...) | | integer | Computes the number of input values in which the input value is not null. |
+| count(*) | | integer | Computes the number of input rows. |
 
 ### string_agg
 | Name | Argument Types | Return type | Description |
