@@ -15,6 +15,8 @@ Follow these steps to enable Data Jobs Monitoring for Spark on Kubernetes.
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
 2. [Inject Spark instrumentation](#inject-spark-instrumentation).
 
+<div class="alert alert-info">[Data Jobs Monitoring][6] requires [Datadog Agent version][7] 7.55.0 and later, [Java tracer][8] version 1.38.0 and later.</div>
+
 ### Install the Datadog Agent on your Kubernetes cluster
 
 If you have already [installed the Datadog Agent on your Kubernetes cluster][1], ensure that you have enabled the [Datadog Admission Controller][2]. You can then go to the next step, [Inject Spark instrumentation](#inject-spark-instrumentation).
@@ -229,3 +231,6 @@ In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your da
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
+[7]: https://github.com/DataDog/datadog-agent/releases
+[8]: https://github.com/DataDog/dd-trace-java/releases
+
