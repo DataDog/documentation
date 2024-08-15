@@ -75,7 +75,7 @@ The default behavior of the feature is to retry any failing test case up to 5 ti
 This behavior can be fine-tuned with the following environment variables:
 
 * `DD_CIVISIBILITY_RETRY_FAILED_TESTS_MAX_ATTEMPTS` - a non-negative number to change the maximum number of retries per test case (default: 5).
-* `DD_CIVISIBILITY_RETRY_FAILED_TESTS_TOTAL_LIMIT` - a non-negative number to set a total number of failed tests to retry (default: 100)
+* `DD_CIVISIBILITY_RETRY_FAILED_TESTS_TOTAL_LIMIT` - a non-negative number to set the maximum total number of failed tests to retry (default: 100)
 
 {{% /tab %}}
 
