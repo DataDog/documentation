@@ -2,6 +2,7 @@
 title: Enabling ASM for Serverless
 aliases:
   - /security/application_security/getting_started/serverless
+  - /security/application_security/enabling/serverless
 further_reading:
     - link: "/security/application_security/how-appsec-works/"
       tag: "Documentation"
