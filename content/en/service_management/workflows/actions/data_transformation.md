@@ -43,7 +43,7 @@ To add a function action:
 
 You can use Bits AI to help you write the JavaScript for a **Function** step. To use this feature, perform the following steps:
 
-1. Add a **Function** step to your workflow. 
+1. Add a **Function** step to your workflow. test
 1. Under **General**, in the **Script** field, click **<i class="icon-bits-ai"></i> Write with Bits AI**.
 1. In the **Describe your transformation script** field, enter a description of what you want your script to do. Click the up arrow (**↑**) to submit your description.
 1. Choose an option to **Replace script**, **Insert in script**, or **Copy to clipboard**.
