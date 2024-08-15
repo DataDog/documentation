@@ -44,10 +44,10 @@ El SDK de RUM iOS es compatible con las siguientes versiones de iOS:
 ## Plataformas compatibles
 
 ### Xcode
-El SDK se compila utilizando la versión más reciente de [Xcode][2], pero siempre es compatible con la versión anterior con la [versión mínima compatible de Xcode][3] para la presentación de AppStore.
+El SDK se compila utilizando la versión más reciente de [Xcode][2], pero siempre es compatible con la [versión mínima compatible anterior de Xcode][3] para la presentación de AppStore.
 
 ### Administradores de dependencias
-Actualmente admitimos integración del SDK utilizando los siguientes administradores de dependencias:
+Actualmente admitimos la integración del SDK utilizando los siguientes administradores de dependencias:
 
 - [Swift Package Manager][4]
 - [Cocoapods][5]
