@@ -70,11 +70,15 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
            keyName: app-key
      override:
        nodeAgent:
+         image:
+           tag: <DATADOG_AGENT_VERSION>
          env:
            - name: DD_DJM_CONFIG_ENABLED
              value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+
+   Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 1. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -109,12 +113,18 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        - name: DD_DJM_CONFIG_ENABLED
          value: "true"
 
+   agents:
+     image:
+       tag: <DATADOG_AGENT_VERSION>
+
    clusterAgent:
      admissionController:
        enabled: true
        muteUnlabelled: false
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+
+   Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 1. Run the following command:
    ```shell
    helm install <RELEASE_NAME> \
