@@ -183,7 +183,7 @@ udp 0 0 127.0.0.1:38374 127.0.0.1:8125 ESTABLISHED 15500/gunicorn: mas
 Gunicorn 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-서비스-점검-from-git "gunicorn" >}}
+{{< get-service-checks-from-git "gunicorn" >}}
 
 
 ## 트러블슈팅
