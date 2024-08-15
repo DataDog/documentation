@@ -1,6 +1,6 @@
 ## New Features in Beta
 
-<div class="alert alert-info">The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. The beta version of the Datadog Agent includes new features and improvements. If you are not on the latest beta version **7.57.0-dbm-mongo-1.5**, please upgrade to the latest beta version to access the new features.</div>
+<div class="alert alert-info">The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. If you are not on the latest beta version 7.57.0-dbm-mongo-1.5, please upgrade to the latest beta version to access the new features.</div>
 
 ### Slow Operations
 
