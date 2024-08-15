@@ -17,7 +17,7 @@ type: multi-code-lang
 
 Si experimentas un comportamiento inesperado con Datadog RUM, utiliza esta guía para solucionar los problemas rápidamente. Si sigues teniendo problemas, ponte en contacto con el [Equipo de soporte técnico de Datadog][1] para obtener más ayuda.
 
-## Has un check si el SDK de Datadog está correctamente inicializado
+## Haz un check si el SDK de Datadog está correctamente inicializado
 
 Después de configurar el SDK de Datadog y ejecutar la aplicación por primera vez, haz un check de tu consola de depuración en Xcode. El SDK implementa varios checks de la coherencia y emite las advertencias pertinentes si algo está mal configurado.
 
