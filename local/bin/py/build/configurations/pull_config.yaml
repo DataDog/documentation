@@ -584,8 +584,9 @@
           globs:
             - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
-            dest_path: '/data/'
-            file_name: 'workflow_bundles.json'
+            base_path: ""
+            dest_path: "/data/"
+            file_name: "workflow_bundles.json"
 
       - repo_name: web-ui
         contents:
