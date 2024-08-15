@@ -2484,7 +2484,6 @@
         retrieveStoredPreferences() {
           const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
           this.storedPreferences = storedPreferences;
-          console.log("Retrieved stored preferences from new CR instance:", storedPreferences);
         }
         updateStoredPreferences() {
           const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
@@ -2497,7 +2496,9 @@
           const searchParams = url.searchParams;
           const selectedValsByPrefId = {};
           searchParams.forEach((val, key) => {
-            selectedValsByPrefId[key] = val;
+            if (key in Object.keys(this.selectedValsByPrefId)) {
+              selectedValsByPrefId[key] = val;
+            }
           });
           return selectedValsByPrefId;
         }
@@ -2630,6 +2631,24 @@
             this.chooserElement = chooserElement;
           }
         }
+        applyPrefOverrides() {
+          const relevantPrefIds = Object.keys(this.selectedValsByPrefId);
+          let prefOverrideFound = false;
+          Object.keys(this.storedPreferences).forEach((prefId) => {
+            if (relevantPrefIds.includes(prefId) && this.selectedValsByPrefId[prefId] !== this.storedPreferences[prefId]) {
+              this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
+              prefOverrideFound = true;
+            }
+          });
+          const urlPrefs = this.getSelectedValsFromUrl();
+          Object.keys(urlPrefs).forEach((prefId) => {
+            if (relevantPrefIds.includes(prefId) && this.selectedValsByPrefId[prefId] !== urlPrefs[prefId]) {
+              this.selectedValsByPrefId[prefId] = urlPrefs[prefId];
+              prefOverrideFound = true;
+            }
+          });
+          return prefOverrideFound;
+        }
         initialize(p) {
           this.prefOptionsConfig = p.prefOptionsConfig;
           this.pagePrefsConfig = p.pagePrefsConfig;
@@ -2639,18 +2658,11 @@
             this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
           });
           this.locateChooserElement();
-          const relevantStoredPrefIds = Object.keys(this.storedPreferences).filter((prefId) => {
-            return prefId in this.selectedValsByPrefId;
-          });
-          relevantStoredPrefIds.forEach((prefId) => {
-            this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
-          });
-          const urlPrefs = this.getSelectedValsFromUrl();
-          if (Object.keys(urlPrefs).length > 0) {
-            this.selectedValsByPrefId = Object.assign(Object.assign({}, this.selectedValsByPrefId), this.getSelectedValsFromUrl());
-          }
-          if (relevantStoredPrefIds.length > 0 || Object.keys(urlPrefs).length > 0) {
+          const overrideApplied = this.applyPrefOverrides();
+          if (overrideApplied) {
             this.rerender();
+          } else {
+            this.addChooserEventListeners();
           }
           this.revealPage();
           document.addEventListener("DOMContentLoaded", () => {
@@ -2672,10 +2684,6 @@
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
             throw new Error("Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement");
           }
-          console.log("Rerendering chooser with");
-          console.log("pagePrefsConfig:", this.pagePrefsConfig);
-          console.log("prefOptionsConfig:", this.prefOptionsConfig);
-          console.log("selectedValsByPrefId:", this.selectedValsByPrefId);
           const resolvedPagePrefs = (0, sharedRendering_1.resolveMinifiedPagePrefs)({
             pagePrefsConfig: this.pagePrefsConfig,
             prefOptionsConfig: this.prefOptionsConfig,

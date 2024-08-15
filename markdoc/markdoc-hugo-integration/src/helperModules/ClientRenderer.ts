@@ -51,11 +51,9 @@ export class ClientRenderer {
   retrieveStoredPreferences() {
     const storedPreferences = JSON.parse(localStorage.getItem('content-prefs') || '{}');
     this.storedPreferences = storedPreferences;
-    console.log('Retrieved stored preferences from new CR instance:', storedPreferences);
   }
 
   updateStoredPreferences() {
-    // update the stored preferences
     const storedPreferences = JSON.parse(localStorage.getItem('content-prefs') || '{}');
     const newStoredPreferences = {
       ...storedPreferences,
@@ -71,7 +69,9 @@ export class ClientRenderer {
 
     const selectedValsByPrefId: Record<string, string> = {};
     searchParams.forEach((val, key) => {
-      selectedValsByPrefId[key] = val;
+      if (key in Object.keys(this.selectedValsByPrefId)) {
+        selectedValsByPrefId[key] = val;
+      }
     });
 
     return selectedValsByPrefId;
@@ -83,6 +83,7 @@ export class ClientRenderer {
 
     const sortedPrefIds = Object.keys(this.selectedValsByPrefId).sort();
 
+    // Apply selected values
     sortedPrefIds.forEach((prefId) => {
       searchParams.set(prefId, this.selectedValsByPrefId[prefId]);
     });
@@ -233,6 +234,36 @@ export class ClientRenderer {
     }
   }
 
+  applyPrefOverrides() {
+    const relevantPrefIds = Object.keys(this.selectedValsByPrefId);
+    let prefOverrideFound = false;
+
+    // Override default values with stored preferences
+    Object.keys(this.storedPreferences).forEach((prefId) => {
+      if (
+        relevantPrefIds.includes(prefId) &&
+        this.selectedValsByPrefId[prefId] !== this.storedPreferences[prefId]
+      ) {
+        this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
+        prefOverrideFound = true;
+      }
+    });
+
+    // Override stored preferences with URL params
+    const urlPrefs = this.getSelectedValsFromUrl();
+    Object.keys(urlPrefs).forEach((prefId) => {
+      if (
+        relevantPrefIds.includes(prefId) &&
+        this.selectedValsByPrefId[prefId] !== urlPrefs[prefId]
+      ) {
+        this.selectedValsByPrefId[prefId] = urlPrefs[prefId];
+        prefOverrideFound = true;
+      }
+    });
+
+    return prefOverrideFound;
+  }
+
   initialize(p: {
     prefOptionsConfig: MinifiedPrefOptionsConfig;
     pagePrefsConfig: MinifiedPagePrefsConfig;
@@ -243,6 +274,8 @@ export class ClientRenderer {
     this.pagePrefsConfig = p.pagePrefsConfig;
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.ifFunctionsByRef = {};
+
+    // Unminify conditional function data
     Object.keys(p.ifFunctionsByRef).forEach((ref) => {
       this.ifFunctionsByRef[ref] = expandClientFunction(
         p.ifFunctionsByRef[ref]
@@ -251,26 +284,11 @@ export class ClientRenderer {
 
     this.locateChooserElement();
 
-    // Override default values with stored preferences
-    const relevantStoredPrefIds = Object.keys(this.storedPreferences).filter((prefId) => {
-      return prefId in this.selectedValsByPrefId;
-    });
-    relevantStoredPrefIds.forEach((prefId) => {
-      this.selectedValsByPrefId[prefId] = this.storedPreferences[prefId];
-    });
-
-    // Override stored preferences with URL params
-    const urlPrefs = this.getSelectedValsFromUrl();
-    if (Object.keys(urlPrefs).length > 0) {
-      this.selectedValsByPrefId = {
-        ...this.selectedValsByPrefId,
-        ...this.getSelectedValsFromUrl()
-      };
-    }
-
-    // Update the page content if any prefs are not set to the default
-    if (relevantStoredPrefIds.length > 0 || Object.keys(urlPrefs).length > 0) {
+    const overrideApplied = this.applyPrefOverrides();
+    if (overrideApplied) {
       this.rerender();
+    } else {
+      this.addChooserEventListeners();
     }
 
     this.revealPage();
@@ -301,11 +319,6 @@ export class ClientRenderer {
         'Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement'
       );
     }
-
-    console.log('Rerendering chooser with');
-    console.log('pagePrefsConfig:', this.pagePrefsConfig);
-    console.log('prefOptionsConfig:', this.prefOptionsConfig);
-    console.log('selectedValsByPrefId:', this.selectedValsByPrefId);
 
     /**
      * Re-resolve the page prefs, since a newly selected value

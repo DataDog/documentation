@@ -67,5 +67,3 @@ let outfilePath = __dirname + '/tabLabels.yaml';
 outfilePath = outfilePath.replace('dist', 'src');
 const yamlStr = yaml.dump([...sortedOptionValues]);
 fs.writeFileSync(outfilePath, yamlStr);
-
-console.log(`Wrote ${sortedOptionValues.length} option values.`);
