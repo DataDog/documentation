@@ -161,7 +161,7 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 
 #### Microsoft ADO
 
-El proveedor [ADO][6] recomendado es el [controlador de bases de datos Microsoft OLE][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
+El proveedor [ADO][6] recomendado es el [controlador de Microsoft OLE DB][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
 ```yaml
 connector: adodbapi
 adoprovider: MSOLEDBSQL19  # Sustituir por MSOLEDBSQL para las versiones 18 y anteriores
