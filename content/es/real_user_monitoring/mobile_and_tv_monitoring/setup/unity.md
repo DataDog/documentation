@@ -2,9 +2,9 @@
 aliases:
 - /es/real_user_monitoring/unity/
 - /es/real_user_monitoring/unity/setup
-code_lang: unidad
+code_lang: unity
 code_lang_weight: 30
-description: Recopila datos de RUM de tus proyectos Unity Mobile.
+description: Recopila datos de RUM de tus proyectos de Unity Mobile.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: Código fuente
@@ -26,7 +26,7 @@ type: multi-code-lang
 La monitorización de Unity está en beta pública.
 {{< /beta-callout >}}
 
-Datadog Real User Monitoring (RUM) te permite visualizar y analizar los recorridos de cada usuario individuales de tu aplicación.
+Datadog Real User Monitoring (RUM) te permite visualizar y analizar los recorridos de cada usuario de tu aplicación.
 
 ## Configuración
 
