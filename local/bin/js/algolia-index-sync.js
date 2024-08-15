@@ -21,6 +21,10 @@ const getIndexName = () => {
 };
 
 const updateSettings = (index) => {
+    // Distinct: true means don't duplicate results.
+    // attributeForDistinct: using a page's base_url (without the anchor) to group results for the same page.
+    // This means we aren't returning every section of the same page as different results.
+    // custom ranking by order means when relevant we return the "Overview" or first section of a page.
     const settings = {
         searchableAttributes: [
             'unordered(tags)',
@@ -29,7 +33,7 @@ const updateSettings = (index) => {
             'unordered(content)'
         ],
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
-        customRanking: ['desc(rank)'],
+        customRanking: ['desc(rank)', 'asc(order)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         attributesToSnippet: ['content:20'],
