@@ -9,7 +9,7 @@ instances:
     host: example-service-primary.example-host.com
     port: 3306
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -18,7 +18,7 @@ instances:
     host: example-service-replica-1.example-host.com
     port: 3306
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     options:
       replication: true
     tags:
@@ -29,7 +29,7 @@ instances:
     host: example-service-replica-2.example-host.com
     port: 3306
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     options:
       replication: true
     tags:
@@ -37,18 +37,6 @@ instances:
       - 'team:team-discovery'
       - 'service:example-service'
     [...]
-```
-
-### Storing passwords securely
-While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/configuration/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
-```yaml
-init_config:
-instances:
-  - dbm: true
-    host: localhost
-    port: 3306
-    username: datadog
-    password: 'ENC[datadog_user_database_password]'
 ```
 
 ### Running custom queries
@@ -60,7 +48,7 @@ instances:
     host: localhost
     port: 3306
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     custom_queries:
     - query: SELECT age, salary, hours_worked, name FROM hr.employees;
       columns:
@@ -84,12 +72,12 @@ instances:
     host: localhost
     port: 5000
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     reported_hostname: example-service-primary
   - dbm: true
     host: localhost
     port: 5001
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     reported_hostname: example-service-replica-1
 ```

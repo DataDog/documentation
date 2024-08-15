@@ -151,6 +151,9 @@ db.grantRolesToUser("datadog", [
 {{% /tab %}}
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install and configure the Agent
 
 Datadog recommends installing the Agent directly on the MongoDB host, as that enables the Agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.

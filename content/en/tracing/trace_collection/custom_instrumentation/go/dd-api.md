@@ -223,4 +223,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
-[11]: /tracing/trace_collection/trace_context_propagation/go/
+[11]: /tracing/trace_collection/trace_context_propagation/

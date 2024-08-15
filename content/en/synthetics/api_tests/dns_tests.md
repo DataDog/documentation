@@ -60,6 +60,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | every available record        | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
 | at least one record | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
 
+**Note**: SOA records are not available for testing using Synthetic tests.
+
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_dns.png" alt="Define assertions for your DNS test to succeed or fail on" style="width:90%;" >}}

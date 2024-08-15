@@ -41,7 +41,7 @@ Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8
 
 ## Select your source code management provider
 Datadog Static Analysis supports all source code management providers, with native support for GitHub.
-### Set up the GitHub integration 
+### Set up the GitHub integration
 If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see inline code snippets and enable [pull request comments][11].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
@@ -85,7 +85,7 @@ You can include the following **rule** options in the `static-analysis.datadog.y
 The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
 
 * To set a value for the whole repository, you can specify it as a string.
-* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree. 
+* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
 
 The full structure of the `static-analysis.datadog.yml` file is as follows:
 
@@ -171,7 +171,7 @@ only:
   - "src/main"
   - "src/tests"
   - "**/*.py"
-# Do not analyze third-party or generated files 
+# Do not analyze third-party or generated files
 ignore:
   - "lib/third_party"
   - "**/*.generated.py"
@@ -211,7 +211,7 @@ foo = 1
 bar = 2
 ```
 
-You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template: 
+You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template:
 
 `no-dd-sa:<rule-name>`
 
@@ -236,7 +236,7 @@ To upload a SARIF report:
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
 2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
-   
+
    ```bash
    npm install -g @datadog/datadog-ci
    ```
@@ -245,7 +245,7 @@ To upload a SARIF report:
 5. Upload the results to Datadog:
 
    ```bash
-   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
+   datadog-ci sarif upload $OUTPUT_LOCATION
    ```
 
 ## Diff-aware scanning
@@ -270,7 +270,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
-[2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
+[2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [3]: /developers/ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis_rules

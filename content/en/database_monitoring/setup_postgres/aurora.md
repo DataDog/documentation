@@ -137,6 +137,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -205,7 +208,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        host: '<AWS_INSTANCE_ENDPOINT>'
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        aws:
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
@@ -270,7 +273,7 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
@@ -282,12 +285,8 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
-
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/configuration/secrets-management
-[3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -312,7 +311,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
               host: '<AWS_INSTANCE_ENDPOINT>'
               port: 5432
               username: datadog
-              password: '<PASSWORD>'
+              password: 'ENC[datadog_user_database_password]'
               ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
               # pg_stat_statements_view: datadog.pg_stat_statements()
               # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -363,7 +362,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUE_PASSWORD>"
+          "password": "ENC[datadog_user_database_password]"
         }
       ]
 spec:
@@ -390,14 +389,14 @@ metadata:
             { 
               "dbm":true, 
               "host":"your-host-1.us-east-2.rds.amazonaws.com", 
-              "password":"<UNIQUE_PASSWORD>", 
+              "password":"ENC[datadog_user_database_password]", 
               "port":5432, 
               "username":"<USERNAME>" 
             }, 
             { 
               "dbm":true, 
               "host":"your-host-2.us-east-2.rds.amazonaws.com", 
-              "password":"<UNIQUE_PASSWORD>", 
+              "password":"ENC[datadog_user_database_password]", 
               "port":5432, 
               "username": "<USERNAME>" 
             } 
