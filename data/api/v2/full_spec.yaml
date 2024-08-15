@@ -694,10 +694,16 @@ components:
     APIKeyCreateAttributes:
       description: Attributes used to create an API Key.
       properties:
+        category:
+          description: The APIKeyCreateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyCreateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -712,6 +718,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyCreateRequest:
       description: Request used to create an API key.
       properties:
@@ -743,13 +751,20 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/LeakedKey'
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
+        category:
+          description: The APIKeyUpdateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyUpdateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -769,6 +784,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyUpdateRequest:
       description: Request used to update an API key.
       properties:
@@ -1002,6 +1019,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/LeakedKey'
     ApplicationKeyResponseMeta:
       description: Additional information related to the application key response.
       properties:
@@ -8491,6 +8509,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
@@ -8500,6 +8520,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8518,6 +8539,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -11185,6 +11207,45 @@ components:
           description: Jira project key
           type: string
       type: object
+    LeakedKey:
+      description: The definition of LeakedKey object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LeakedKeyAttributes'
+        id:
+          description: The LeakedKey id.
+          example: id
+          type: string
+        type:
+          $ref: '#/components/schemas/LeakedKeyType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    LeakedKeyAttributes:
+      description: The definition of LeakedKeyAttributes object.
+      properties:
+        date:
+          description: The LeakedKeyAttributes date.
+          example: '2017-07-21T17:32:28Z'
+          format: date-time
+          type: string
+        leak_source:
+          description: The LeakedKeyAttributes leak_source.
+          type: string
+      required:
+      - date
+      type: object
+    LeakedKeyType:
+      default: leaked_keys
+      description: The definition of LeakedKeyType object.
+      enum:
+      - leaked_keys
+      example: leaked_keys
+      type: string
+      x-enum-varnames:
+      - LEAKED_KEYS
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -24497,6 +24558,8 @@ paths:
         - name: api_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/api_keys/{api_key_id}:
     delete:
       description: Delete an API key.
@@ -24606,6 +24669,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
