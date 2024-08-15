@@ -239,7 +239,7 @@ A continuación, impórtalo antes de inicializar el SDK de React Native de Datad
 importar './mockDatadog';
 importar { DdSdkReactNative } desde 'expo-Datadog';
 
-const config = nuevo DdSdkReactNativeConfiguration(/* tu config */);
+const config = nuevo DdSdkReactNativeConfiguration(/* tu configuración */);
 DdSdkReactNative.initialize(config);
 ```
 
@@ -247,7 +247,7 @@ DdSdkReactNative.initialize(config);
 
 ### La aplicación produce muchos recursos de Rum de /logs
 
-Cuando el rastreo de recursos está activado y la verbosidad del SDK está configurada en `DEBUG`, cada recurso de RUM desencadena una llamada `/logs` al servidor del desarrollador de Expo para imprimir el log, que a su vez crea un nuevo recurso de RUM, lo cual crea un bucle infinito.
+Cuando el rastreo de recursos está activado y el nivel de detalle del SDK está configurado en `DEBUG`, cada recurso de RUM desencadena una llamada `/logs` al servidor del desarrollador de Expo para imprimir el log, que a su vez crea un nuevo recurso de RUM, lo cual crea un bucle infinito.
 El SDK filtra los patrones más frecuentes de la URL del host del servidor del desarrollador de Expo, por lo tanto, es posible que no te encuentres con este error en la mayoría de las situaciones.
 Si se produce este error, añade el siguiente asignador de recursos de RUM para filtrar las llamadas:
 
