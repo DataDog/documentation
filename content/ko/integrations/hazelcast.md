@@ -221,11 +221,11 @@ JMXFetch
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-메트릭-from-git "hazelcast" >}}
+{{< get-metrics-from-git "hazelcast" >}}
 
 
 ### 서비스 점검
-{{< get-서비스-점검-from-git "hazelcast" >}}
+{{< get-service-checks-from-git "hazelcast" >}}
 
 
 ## 트러블슈팅
