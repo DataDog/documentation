@@ -33,7 +33,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: 통합
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
 display_on_public_website: true
