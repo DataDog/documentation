@@ -22,7 +22,7 @@ Si experimentas un comportamiento inesperado con Datadog RUM, utiliza esta guía
 Después de configurar el SDK de Datadog y ejecutar la aplicación por primera vez, haz un check de tu consola de depuración en Xcode. El SDK implementa varios checks de la coherencia y emite las advertencias pertinentes si algo está mal configurado.
 
 ## Depuración
-Al escribir tu aplicación, puedes activar los logs de desarrollo configurando el valor `verbosityLevel`. Los mensajes relevantes del SDK con una prioridad igual o superior que el nivel proporcionado se emiten en la consola del depurador en Xcode:
+Al escribir tu aplicación, puedes activar los logs de desarrollo configurando el valor `verbosityLevel`. Los mensajes pertinentes del SDK con una prioridad igual o superior al nivel proporcionado se emiten en la consola del depurador en Xcode:
 
 ```swift
 Datadog.verbosityLevel = .debug
@@ -34,7 +34,7 @@ Entonces deberías ver una salida similar a la siguiente, lo cual indica que un 
 [DATADOG SDK] 🐶 → 17:23:10.972 [DEBUG]    → (rum) aceptado, no se retransmitirá: éxito
 ```
 
-**Recomendación:** Utiliza `Datadog.verbosityLevel` en la configuración de `DEBUG`y desactívala en `RELEASE`.
+**Recomendación:** Utiliza `Datadog.verbosityLevel` en la configuración `DEBUG`y desactívala en `RELEASE`.
 
 ## Utilización de `DDURLSessionDelegate` con tu propio delegado de sesión
 
@@ -61,7 +61,7 @@ clase privada YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 
     // MARCA: - __URLSessionDelegateProviding manipulación
 
-    func urlSession(_ session: URLSession, tarea: URLSessionTask, didFinishCollecting métricas: URLSessionTaskMetrics) {
+    func urlSession(_ sesión: URLSession, tarea: URLSessionTask, didFinishCollecting métricas: URLSessionTaskMetrics) {
         ddURLSessionDelegate.urlSession(session, tarea: tarea, didFinishCollecting: métricas) // reenviar al delegado de Datadog
         /* tu lógica personalizada */
     }
@@ -71,7 +71,7 @@ clase privada YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
         /* tu lógica personalizada */
     }
 
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive datos: Datos) {
+    func urlSession(_ sesión: URLSession, dataTask: URLSessionDataTask, didReceive datos: Datos) {
         ddURLSessionDelegate.urlSession(session, dataTask: dataTask, didReceive: datos) // reenviar al delegado de Datadog
         /* tu lógica personalizada */
     }
@@ -86,7 +86,7 @@ clase privada YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 
 ## Envío de datos cuando el dispositivo está desconectado
 
-RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En casos de zonas con baja conexión de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local en lotes. Se envían tan pronto como la red esté disponible y la carga de la batería sea lo suficientemente alta como para garantizar que el SDK de RUM para iOS no afecte a la experiencia del usuario final. Si el red no está disponible mientras tu aplicación está en primer plano o si falla una carga de datos, el lote se conserva hasta que se lo pueda enviar con éxito.
+RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En casos de zonas con baja conexión de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local en lotes. Se envían tan pronto como la red esté disponible y la carga de la batería sea lo suficientemente alta como para garantizar que el SDK de RUM para iOS no afecte a la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano o si falla una carga de datos, el lote se conserva hasta que se lo pueda enviar con éxito.
 
 Esto significa que incluso si los usuarios abren tu aplicación mientras está desconectada, no se pierde ningún dato.
 
