@@ -28,7 +28,7 @@ Para evitar pruebas defectuosas, Datadog utiliza un algoritmo que aprovecha un c
 
 Cuando el test se ejecuta correctamente, el test del navegador vuelve a calcular (o "autocura") cualquier localizador por medio de valores actualizados, lo que asegura que tus tests no se rompan tras simples actualizaciones de la interfaz de usuario y que se adapten automáticamente a la interfaz de usuario de tu aplicación. 
 
-Para asegurarte de que tu test de navegador no valide un cambio inesperado, utiliza [aserciones][5] en la creación de tu test. Las aserciones te permiten definir qué es y qué no es un comportamiento esperado asociado al recorrido del paso del test. 
+Para asegurarte de que tu test del navegador no valide un cambio inesperado, utiliza [aserciones][5] en la creación de tu test. Las aserciones te permiten definir qué es y qué no es un comportamiento esperado asociado al recorrido del paso del test. 
 
 ### Localizador especificado por el usuario
 
