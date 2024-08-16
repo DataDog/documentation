@@ -22,9 +22,9 @@ To complete this guide, you need the following:
 - Familiarity with [building a custom collector][4] and [OpenTelemetry Collector Builder][5] (OCB).  
 - Basic understanding of the [Go](https://go.dev/) compilation process and [Go modules](https://go.dev/blog/using-go-modules).
 
-## Prepare the Dockerfile
+## Download the Dockerfile
 
-Download the Dockerfile template and prepare it to add the OTel components to be included in the Agent image:
+Download the Dockerfile template:
 
 1. Go to your preferred file location in a terminal. Run the following commands to create a new folder (for example, named `agent-with-otel`) and cd into it.
    ```shell
@@ -118,8 +118,6 @@ agents:
    {{< /code-block >}}
    Replace `<YOUR-REPO>` and `<IMAGE-TAG>` with your repository name and desired image tag.
    
-<div class="alert alert-info">For complete installation instructions, see <a href="/opentelemetry/agent/install_agent_with_collector">Install the Datadog Agent with Embedded OpenTelemetry Collector</a>.</div>
-
 ## Test and validate
 
 Create a sample configuration file and run your custom Agent to ensure everything is working correctly.
