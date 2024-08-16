@@ -143,12 +143,22 @@ If the request is successful, the API responds with a 202 network code and an em
 |---------|--------|--------------|
 | value   | string | Input or output value. This should be used for all spans except for LLM spans. |
 | messages| [[Message](#message)] | List of messages. This should only be used for LLM spans. |
+| documents| [[Document](#document)] | List of documents. This should only be used as the output for retrieval spans |
 
 #### Message
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
 | content [*required*] | string | The body of the message. |
 | role                 | string | The role of the entity.  |
+
+#### Document
+| Field                | Type   | Description              |
+|----------------------|--------|--------------------------|
+| text | string | The text of the document. |
+| name    | string | The name of the document.  |
+| score | float | The score associated with this document. |
+| id    | string | The id of this document.  |
+
 
 #### Meta
 | Field       | Type              | Description  |
