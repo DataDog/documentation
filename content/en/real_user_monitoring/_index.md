@@ -1,5 +1,5 @@
 ---
-title: RUM & Session Replay TEST
+title: RUM & Session Replay TEST 2
 description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
 disable_sidebar: true
 aliases:
