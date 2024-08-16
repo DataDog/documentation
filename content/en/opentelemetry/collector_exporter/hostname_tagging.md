@@ -445,7 +445,7 @@ Set custom hosts tags directly in the Datadog exporter:
 ```
 See all configurations options [here][6].
 
-#### In OTEL Instrumentation
+#### As OTLP resource attributes
 
 Custom host tags can also be set in your OTEL instrumentation by prefixing resource attributes by `datadog.host.tag`.
 
