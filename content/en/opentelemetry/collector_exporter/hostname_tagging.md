@@ -459,7 +459,7 @@ processors:
       action: upsert
       from_attribute: <custom_tag_name>
 ```
-
+**Note:** This is only supported if you have opted-in as described [here][7].
 
 ### Custom container tags
 
@@ -482,3 +482,4 @@ processors:
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
 [5]: https://opentelemetry.io/docs/languages/js/resources/
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml 
+[7]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  
