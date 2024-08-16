@@ -300,3 +300,4 @@ URL Parameter: `ref <kind>:<name>`
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [2]: https://github.com/DataDog/schema/tree/main/service-catalog
 [3]: https://docs.datadoghq.com/code_analysis/faq/#identifying-the-code-location-in-the-service-catalog
+[4]: https://en.wikipedia.org/wiki/Glob_(programming)
