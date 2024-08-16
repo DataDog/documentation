@@ -447,7 +447,7 @@ See all configurations options [here][6].
 
 #### As OTLP resource attributes
 
-Custom host tags can also be set in your OTEL instrumentation by prefixing resource attributes by `datadog.host.tag`.
+Custom host tags can also be set as resource attributes that start with the namespace `datadog.host.tag`.
 
 This can be set as an env var `OTEL_RESOURCE_ATTRIBUTES=datadog.host.tag.<custom_tag_name>=<custom_tag_value>` in the [OTEL SDK][5].
 Or this can be set in a processor (if corresponding resource attributes already exists): 
