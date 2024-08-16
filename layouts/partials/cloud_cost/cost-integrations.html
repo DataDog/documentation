@@ -12,12 +12,24 @@
 
 <div class="saas-cost-integrations">
   <div class="container cards-dd">
-    <div class="row row-cols-7 g-2 g-xl-3 justify-content-center">
-      {{ range $saas_cost_integrations }}
+    <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
+      {{ range first 4 $saas_cost_integrations }}
       <div class="col">
         <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "200") }}
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
+      {{ range (last 4 $saas_cost_integrations) }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
           </div>
         </a>
       </div>
