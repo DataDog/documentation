@@ -1,5 +1,6 @@
 # GENERATED FILE: DO NOT EDIT
 # Ignore .md files compiled from Markdoc
+/markdoc_testing/demo_pages/postgres_integration_setup.md
 /markdoc_testing/demo_pages/primary_colors.md
 /markdoc_testing/demo_pages/traffic_light_colors.md
 /markdoc_testing/elements/alert.md

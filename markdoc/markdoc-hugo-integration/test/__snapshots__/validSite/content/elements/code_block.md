@@ -3,7 +3,7 @@ title: Code Block
 ---
 
 <div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><hr /></div></div>
-<div id="markdoc-content customizable"><article>
+<div id="markdoc-content" class="customizable"><article>
   <h2>Usage</h2>
   <ul>
     <li>

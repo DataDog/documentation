@@ -13,7 +13,7 @@ export const fenceDefinition = {
 export class Fence extends CustomHtmlComponent {
   render() {
     const codeContents = this.tag.children.join('\n');
-    const language = this.tag.attributes.language || 'text';
+    const language = this.tag.attributes.language || 'plaintext';
     const formattedCodeContents = highlight(
       codeContents,
       `--formatter html --html-only --lexer="${language}"`

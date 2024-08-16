@@ -1,0 +1,8 @@
+major_agent_version_options:
+  - id: "7"
+    display_name: "7"
+    default: true
+  - id: "6"
+    display_name: "6"
+  - id: "5"
+    display_name: "5"

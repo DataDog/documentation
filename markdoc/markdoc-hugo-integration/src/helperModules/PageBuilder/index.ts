@@ -87,7 +87,7 @@ export class PageBuilder {
     if (args.parsedFile.frontmatter.page_preferences) {
       pageContents = `
 <div id="markdoc-chooser">${chooserHtml}</div>
-<div id="markdoc-content customizable">${articleHtml}</div>
+<div id="markdoc-content" class="customizable">${articleHtml}</div>
 <div x-init='${rerenderScript}'></div>
 `;
     } else {

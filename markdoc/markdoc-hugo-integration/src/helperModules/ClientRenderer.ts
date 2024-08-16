@@ -301,7 +301,12 @@ export class ClientRenderer {
   revealPage() {
     // reveal markdoc-chooser and markdoc-content by ID
     if (this.chooserElement) {
+      this.chooserElement.style.position = 'sticky';
+      this.chooserElement.style.top = '95px';
+      this.chooserElement.style.backgroundColor = 'white';
+      this.chooserElement.style.paddingTop = '10px';
       this.chooserElement.style.visibility = 'visible';
+      this.chooserElement.style.zIndex = '1000';
     }
 
     const content = document.getElementById('markdoc-content');

@@ -3,7 +3,7 @@ title: The Colors of the Common Traffic Light
 ---
 
 <div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="green">Green</div></div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Item</div><div class="markdoc-pref__pill selected" data-pref-id="item" data-option-id="grass">Grass</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="emerald">Emerald</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="lime">Lime</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="frog">Frog</div></div><hr /></div></div>
-<div id="markdoc-content customizable"><article>
+<div id="markdoc-content" class="customizable"><article>
   <p>
     This test page explores everyday items that are green, yellow, or red --
     which also happen to be the colors of the common traffic light. If this

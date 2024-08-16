@@ -3,7 +3,7 @@ title: The Primary Colors of the Color Wheel
 ---
 
 <div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Item</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="ocean">Ocean</div><div class="markdoc-pref__pill selected" data-pref-id="item" data-option-id="sky">Sky</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="jeans">Jeans</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div>
-<div id="markdoc-content customizable"><article>
+<div id="markdoc-content" class="customizable"><article>
   <p>
     This test page explores everyday items that are blue, yellow, or red --
     which also happen to be the primary colors of the color wheel. If this seems
