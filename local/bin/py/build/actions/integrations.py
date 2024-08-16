@@ -398,9 +398,7 @@ class Integrations:
             key_name = basename(
                 dirname(normpath(file_name))
             )
-        elif file_name.endswith("/assets/metrics/metric-spec.yaml"):
-            with open("~/test.txt", "w") as f:
-                f.write(file_name)
+        elif file_name.endswith("assets/metrics/metric-spec.yaml"):
             file_list = file_name.split(sep)
             key_name = file_list[len(file_list)-4]
         else:
@@ -416,7 +414,7 @@ class Integrations:
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
             )
-        if file_name.endswith("/assets/metrics/metric-spec.yaml"):
+        if file_name.endswith("assets/metrics/metric-spec.yaml"):
             self.format_metric_spec_yaml(key_name, file_name, new_file_name)
         else:
             self.metric_csv_to_yaml(key_name, file_name, new_file_name)
@@ -672,8 +670,8 @@ class Integrations:
     def get_collision_alternate_name(self, file_name):
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
+        dir_path = dir_path.replace('/metrics', '') if dir_path.endswith('metrics') else dir_path
         dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
-        dir_path = dir_path.replace('/assets/metrics', '') if dir_path.endswith('metrics') else dir_path
         collision_name = dir_name
         manifest_json_path = f'{dir_path}/manifest.json'
         manifest_json = {}

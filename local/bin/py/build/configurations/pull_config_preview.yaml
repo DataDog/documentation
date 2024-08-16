@@ -125,6 +125,7 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          - "*/assets/metrics/metric-spec.yaml"
 
       - repo_name: marketplace
         contents:
