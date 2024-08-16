@@ -450,7 +450,7 @@ See all configurations options [here][6].
 Custom host tags can also be set as resource attributes that start with the namespace `datadog.host.tag`.
 
 This can be set as an env var `OTEL_RESOURCE_ATTRIBUTES=datadog.host.tag.<custom_tag_name>=<custom_tag_value>` in the [OTEL SDK][5].
-Or this can be set in a processor (if corresponding resource attributes already exists): 
+Or this can be set in a processor: 
 ```
 processors:
   resource:
