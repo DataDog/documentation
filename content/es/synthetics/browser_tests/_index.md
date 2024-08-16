@@ -66,7 +66,7 @@ Selecciona **Deshabilitar CORS** para evitar que la política de Uso compartido 
    * **Cookies**: Define cookies que añadir a las cookies predeterminadas del navegador. Introduce una cookie por línea, utilizando la sintaxis de [`Set-Cookie`][2].
    * **Autenticación HTTP**: Autentícate a través de HTTP Basic, Digest o NTLM con un nombre de usuario y una contraseña. Tus credenciales se utilizan en cada paso del test del navegador. **Nota**: La autenticación a través de HTTP Basic se puede utilizar para sitios web que solicitan credenciales de usuario a través de un aviso del sistema del navegador.
 
-   Las opciones de solicitud se definen en cada ejecución del test y se aplican a cada paso de tu test del navegador en el momento de la ejecución, no en el momento del registro. Si necesitas que estas opciones permanezcan activas para registrar los pasos siguientes, aplica manualmente las opciones en la página desde la que estás registrando y crea pasos posteriores en tu test.
+   Las opciones de solicitud se definen en cada ejecución del test y se aplican a cada paso de tu test del navegador en el momento de la ejecución, no en el momento de la grabación. Si necesitas que estas opciones permanezcan activas para grabar los pasos siguientes, aplica manualmente las opciones en la página desde la que estás grabando y crea pasos posteriores en tu test.
 
 
 [1]: /es/synthetics/guide/identify_synthetics_bots/?tab=apitests
