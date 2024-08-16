@@ -220,12 +220,19 @@ ${rerenderScript}
 
     let script = `
   <script>
-    clientRenderer.initialize({
+    const initPage = () => { 
+      clientRenderer.initialize({
         pagePrefsConfig: ${pagePrefsConfigStr},
         prefOptionsConfig: ${prefOptionsConfigStr},
         selectedValsByPrefId: ${defaultValsByPrefIdStr},
         ifFunctionsByRef: ${ifFunctionsByRefStr}
-    });
+      });
+    };
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      setTimeout(initPage, 1);
+    } else {
+      document.addEventListener("DOMContentLoaded", initPage);
+    }
   </script>
   `;
 

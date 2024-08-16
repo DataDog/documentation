@@ -292,10 +292,7 @@ export class ClientRenderer {
     }
 
     this.revealPage();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      this.populateRightNav();
-    });
+    this.populateRightNav();
 
     this.syncUrlWithSelectedVals();
     this.updateStoredPreferences();

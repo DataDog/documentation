@@ -127,7 +127,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientRenderer.js": {
-      "bytes": 12554,
+      "bytes": 12476,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/Chooser.js",
@@ -206,13 +206,13 @@
           "bytesInOutput": 1542
         },
         "dist/helperModules/ClientRenderer.js": {
-          "bytesInOutput": 5434
+          "bytesInOutput": 5382
         },
         "src/markdoc-client-renderer.js": {
           "bytesInOutput": 61
         }
       },
-      "bytes": 28982
+      "bytes": 28930
     }
   }
 }
