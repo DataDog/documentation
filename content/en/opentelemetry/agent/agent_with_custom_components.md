@@ -7,26 +7,26 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-This guide explains how to build a Datadog Agent image with additional OpenTelemetry (OTel) Components not included in the default Datadog Agent. To see a list of components already included in the Agent by default, see [Included components][1].
+This guide explains how to build a Datadog Agent image with additional OpenTelemetry components not included in the default Datadog Agent. To see a list of components already included in the Agent by default, see [Included components][1].
 
 ## Prerequisites
 
 To complete this guide, you need the following:
 
 - [Docker][2] 
-- Access to GitHub and the [Datadog Agent][3] source code.   
-- The OpenTelemetry Components you plan to include in the Agent must be compatible with embedded OTel Collector version.
+- GitHub and access to the [Datadog Agent][3] source code.   
+- The OpenTelemetry components you plan to include in the Agent must be compatible with embedded OpenTelemetry Collector version.
 
 **Recommended**:
 
 - Familiarity with [building a custom collector][4] and [OpenTelemetry Collector Builder][5] (OCB).  
-- Basic understanding of the [Go](https://go.dev/) compilation process and [go modules](https://go.dev/blog/using-go-modules).
+- Basic understanding of the [Go](https://go.dev/) compilation process and [Go modules](https://go.dev/blog/using-go-modules).
 
 ## Prepare the Dockerfile
 
 Download the Dockerfile template and prepare it to add the OTel components to be included in the Agent image:
 
-1. Open your terminal and run commands to create a new folder at your preferred file location and cd into it, see an example below
+1. Go to your preferred file location in a terminal. Run the following commands to create a new folder (for example, named `agent-with-otel`) and cd into it.
    ```shell
    mkdir -p agent-with-otel
    cd agent-with-otel
@@ -42,7 +42,7 @@ The Dockerfile:
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the Datadog Agent source code.
 - Creates a virtual environment and installs required Python packages.
-- Builds the OTel agent and copies the resulting binary to the final image.
+- Builds the OpenTelemetry agent and copies the resulting binary to the final image.
 
 ## Create an OpenTelemetry Collector Builder manifest
 
@@ -52,7 +52,7 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
    ```shell
    curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/main/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
-2. Open the `manifest.yaml` file and add the additional OTel components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).  
+2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).  
    The highlighted line in this example adds a [Kafka metrics receiver][7]:
    {{< highlight json "hl_lines=32" >}}
 dist:
@@ -108,7 +108,7 @@ Build your custom Datadog Agent image and push it to a container registry.
    docker push <IMAGE-NAME>/<IMAGE-TAG>
    ``` 
    Replace `<IMAGE-NAME>` and `<IMAGE-TAG>` with your image name and desired tag. If the target repository is not Docker Hub, you need to include the repository name. 
-3. For a Helm Chart installation, set the image tag in your values file:
+3. For a Helm chart installation, set the image tag in your values file:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
@@ -124,8 +124,8 @@ agents:
 
 Create a sample configuration file and run your custom Agent to ensure everything is working correctly.
 
-1. Create a sample OTel configuration file with the additional components.  
-   Here is an example with the additional [Kafka metrics receiver][7] configured:
+1. Create a sample OpenTelemetry configuration file with the additional components.  
+  The following example configures an additional [Kafka metrics receiver][7]:
    ```yaml
    receivers:
      otlp:
@@ -196,11 +196,11 @@ Create a sample configuration file and run your custom Agent to ensure everythin
 
 You can now use this new image to install the Agent. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
 
-For detailed instructions on installing and configuring the Agent with added OTel components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
+For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
 
 ## Troubleshooting
 
-Here are some common issues you might encounter while building and running your custom Datadog Agent, along with their solutions:
+This section discusses some common issues you might encounter while building and running your custom Datadog Agent, along with their solutions:
 
 ### Compatibility issues with `awscontainerinsightreceiver`
 
