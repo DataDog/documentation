@@ -38,7 +38,6 @@ Install and set up the following on your machine:
 - Helm (v3+)
 - [Docker][50]
 - [kubectl][5]
-- Ensure all OTel components are compatible with the [embedded OpenTelemetry Collector version][51]
 
 **Configuration**
 
@@ -241,9 +240,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
-{{% collapse-content title="Component diagram" level="p" %}}
 {{< img src="/opentelemetry/embedded_collector/components.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
-{{% /collapse-content %}}
 
 ##### Datadog connector
 
@@ -300,13 +297,14 @@ This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a Daem
 {{< img src="/opentelemetry/embedded_collector/deployment.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-## Instrument and configure the application
+## Send your telemetry to Datadog
 
 To send your telemetry data to Datadog:
 
-1. Instrument your application.
-2. Correlate your telemetry data.
-3. Run your application.
+1. [Instrument your application](#instrument-the-application)
+2. [Configure the application](#configure-the-application)
+3. [Correlate observability data](#correlate-observability-data)
+4. [Run your application](#run-the-application)
 
 ### Instrument the application
 
