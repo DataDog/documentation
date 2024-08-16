@@ -32,7 +32,7 @@ Al usar [facetas](#facets-and-tags), puedes realizar las siguientes acciones:
 
 ## Buscar tests
 
-### Facetas y etiquetas (tags)
+### Facetas y etiquetas
 
 El panel **Synthetic Filters** (Filtros de Synthetic) de la izquierda detalla las facetas predeterminadas que puedes utilizar para buscar tus tests.
 
