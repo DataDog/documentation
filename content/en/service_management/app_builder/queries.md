@@ -111,6 +111,22 @@ To provide mocked outputs manually, perform the following steps:
 {{% /collapse-content %}} 
 
 
+## Order of operations
+
+When executing a query, App Builder performs the following steps in the order listed:
+
+1. Checks if there is a **Condition** expression for the query, and if so, checks that the condition is met. If it is not, execution stops.
+2. Evaluates any expressions in **Inputs** to determine the input data for the query.
+3. If the **Debounce** property is set, delays execution for the interval defined by the debounce value. If query inputs or their dependencies update during this time, the current query execution is stopped, and a new one starts from the beginning using the updated inputs.<br>
+   **Note**: If more than one query request occurs within the debounce interval, all requests except the last execution request are canceled.  
+4. Executes the query.
+5. Stores the raw query response in `query.rawOutputs`.  
+6. Runs any post query transformation and sets `query.outputs` equal to the result. This process takes a snapshot of app data and passes it to the post query transformation.<br>
+   **Note**: Post query transformations should be pure functions without side effects. For example, do not update a state variable in your post query transformation.
+7. Computes any expressions in the app that depend on data from the query output.
+8. Runs all **Reactions** from the app's **Events**, in the order in which they are defined in the UI. This involves taking a snapshot of the app which is used throughout the reaction's run. A new snapshot is taken before each reaction runs, and changes made by a previous reaction are visible to a subsequent reaction.
+9. If there is a **Polling interval** set, schedules the query to re-run the defined number of milliseconds in the future.
+
 
 ## Example apps
 
