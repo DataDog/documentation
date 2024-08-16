@@ -431,7 +431,7 @@ Attributes:
 
 ### Custom host tags
 
-#### In the Collector
+#### In the Datadog exporter
 
 Set custom hosts tags directly in the Collector:
 ```
