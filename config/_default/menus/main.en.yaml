@@ -3356,11 +3356,6 @@ menu:
       identifier: tracing_troubleshooting_quantization
       parent: tracing_troubleshooting
       weight: 1310
-    - name: Frequently Asked Questions
-      url: tracing/troubleshooting/faq_apm
-      identifier: tracing_faq_apm
-      parent: tracing_troubleshooting
-      weight: 1311
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
