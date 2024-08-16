@@ -433,7 +433,7 @@ Attributes:
 
 #### In the Datadog exporter
 
-Set custom hosts tags directly in the Collector:
+Set custom hosts tags directly in the Datadog exporter:
 ```
       ## @param tags - list of strings - optional - default: empty list
       ## List of host tags to be sent as part of the host metadata.
