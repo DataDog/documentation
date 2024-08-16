@@ -155,7 +155,7 @@ Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el l
 
 ### Seleccionar localizaciones
 
-Selecciona las **Localizaciones** desde donde ejecutar tu test HTTP. Los tests de HTTP pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
+Selecciona las **Localizaciones** desde donde ejecutar tu test HTTP. Los tests HTTP pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
 
 {{% managed-locations %}} 
 
