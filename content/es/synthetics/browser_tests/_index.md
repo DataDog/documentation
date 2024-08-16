@@ -50,7 +50,7 @@ Define la configuración de tu test de navegador.
 
    {{% managed-locations %}}
 
-   También puedes utilizar el [túnel de tests continuos][15] para activar tests en tu configuración de desarrollo local o en tu pipeline CI/CD para probar entornos internos.
+   También puedes utilizar el [túnel de tests continuos][15] para activar tests en tu configuración de desarrollo local o en tu pipeline CI/CD para realizar tests en entornos internos.
 
 6. Ajusta la **frecuencia de los tests**: Los intervalos varían de cada cinco minutos a una vez por semana. Para solicitar una frecuencia de un minuto, [ponte en contacto con el servicio de asistencia][2].
 
@@ -66,7 +66,7 @@ Selecciona **Deshabilitar CORS** para evitar que la política de Uso compartido 
    * **Cookies**: Define cookies que añadir a las cookies predeterminadas del navegador. Introduce una cookie por línea, utilizando la sintaxis de [`Set-Cookie`][2].
    * **Autenticación HTTP**: Autentícate a través de HTTP Basic, Digest o NTLM con un nombre de usuario y una contraseña. Tus credenciales se utilizan en cada paso del test del navegador. **Nota**: La autenticación a través de HTTP Basic se puede utilizar para sitios web que solicitan credenciales de usuario a través de un aviso del sistema del navegador.
 
-   Las opciones de solicitud se definen en cada ejecución del test y se aplican a cada paso de tu test del navegador en el momento de la ejecución, no en el momento del registro. Si necesitas que estas opciones permanezcan activas para registrar los pasos siguientes, aplica manualmente las opciones en la página desde la que estás registrando y crea pasos posteriores en tu prueba.
+   Las opciones de solicitud se definen en cada ejecución del test y se aplican a cada paso de tu test del navegador en el momento de la ejecución, no en el momento del registro. Si necesitas que estas opciones permanezcan activas para registrar los pasos siguientes, aplica manualmente las opciones en la página desde la que estás registrando y crea pasos posteriores en tu test.
 
 
 [1]: /es/synthetics/guide/identify_synthetics_bots/?tab=apitests
@@ -119,7 +119,7 @@ Por defecto, la zona horaria está definida en UTC y el idioma en inglés (En). 
 
 ### Uso de variables globales
 
-Puedes utilizar las [variables globales definidas en **Configuración**][3] en la **URL de inicio** y en **Opciones avanzadas** de los detalles del test de tu navegador, así como en la grabación de la prueba.
+Puedes utilizar las [variables globales definidas en **Configuración**][3] en la **URL de inicio** y en **Opciones avanzadas** de los detalles del test de tu navegador, así como en la grabación del test.
 
 Para visualizar una lista de las variables disponibles:
 
