@@ -2,7 +2,7 @@
 aliases:
 - /es/synthetics/apm/browser_tests
 description: Visualiza los resultados de tests del navegador Synthetic y compara las
-  ejecuciones de muestreos correctas o fallidas con las ejecuciones de tests.
+  ejecuciones de muestra correctas o fallidas con las ejecuciones de tests.
 further_reading:
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: Blog
