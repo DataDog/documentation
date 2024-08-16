@@ -466,7 +466,7 @@ processors:
 Same as for custom host tags, custom containers tags can be set by prefixing resource attributes by `datadog.container.tag` in your OTEL instrumentation.
 
 This can be set as an env var `OTEL_RESOURCE_ATTRIBUTES=datadog.container.tag.<custom_tag_name>=<custom_tag_value>` in an [OTel SDK][5].
-Or this can be set in a processor (if corresponding resource attributes already exists): 
+Or this can be set in a processor: 
 ```
 processors:
   resource:
