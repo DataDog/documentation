@@ -18,14 +18,12 @@ further_reading:
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
-
 - link: https://github.com/DataDog/orchestrion
   tag: "Source Code"
   text: "Orchestrion source code"
 - link: https://datadoghq.dev/orchestrion
   tag: "External Site"
   text: "Orchestrion documentation"
-
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -44,7 +42,7 @@ There are two ways to instrument your Go application:
 1. **Manual instrumentation**:
    - Gives you complete control over which parts of your application are traced.
    - Requires modifying the application's source code.
-2. **Automatic compile-time instrumentation**:
+2. **Compile-time instrumentation**:
    - Ensures maximum coverage of your tracing instrumentation.
    - Does not require source code modifications, making ideal for integrating at the CI/CD level.
 
@@ -62,7 +60,7 @@ If needed, configure the tracing library to send application performance telemet
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Automatic compile-time instrumentation (alpha)" level="p" %}}
+{{% collapse-content title="Compile-time instrumentation (alpha)" level="p" %}}
 
 <div class="card callout-card mb-4">
   <div class="card-body d-flex flex-column">
@@ -81,13 +79,14 @@ For configuration instructions and details about using the API, see the Datadog 
 
 ### Overview
 
-[Orchestrion][6] is Datadog's automatic compile-time instrumentation tool for Go applications. It automatically adds instrumentation (backed by the [Go Datadog Tracing library][4]) to applications during compilation.
+[Orchestrion][6] automatically adds instrumentation to Go applications during compilation, eliminating the need for code changes. It provides comprehensive tracing coverage and enables exclusive security features:
 
-Key benefits:
-
-- Instruments your code and all dependencies, including the Go standard library
-- Provides the best possible tracing coverage
-- Enables certain [Application Security Management][7] features exclusive to Orchestrion-built Go applications
+- Comprehensive tracing coverage:
+   - Instruments your code and all dependencies, including the Go standard library
+   - Instruments your code during compilation, preventing gaps in tracing coverage due to overlooked manual instrumentation
+- Exclusive [Application Security Management][7] features:
+   - Runtime Application Self-Protection (RASP)
+   - Local File Inclusion (LFI) self-protection
 
 ### Requirements
 
@@ -104,7 +103,7 @@ To install and set up Orchestrion:
 
 1. Install Orchestrion:
    ```sh
-   go install github.com/datadog/orchestrion@latest
+   go install github.com/DataDog/orchestrion@latest
    ```
    <div class="alert alert-info">Ensure <code>$(go env GOBIN)</code> (or <code>$(go env GOPATH)/bin</code>) is in your <code>$PATH</code>.</div>
    
@@ -123,19 +122,19 @@ Now you can manage your dependency on `orchestrion` like any other dependency us
 
 Use one of these methods to enable Orchestrion in your build process:
 
-- Prepend `orchestrion` to your usual `go` commands:  
+#### Prepend `orchestrion` to your usual `go` commands:  
   ```sh
   orchestrion go build .
   orchestrion go run .
   orchestrion go test ./...
   ```
-- Add the `-toolexec="orchestrion toolexec"` argument to your `go` commands:
+#### Add the `-toolexec="orchestrion toolexec"` argument to your `go` commands:
    ```sh
    go build -toolexec="orchestrion toolexec" .
    go run -toolexec="orchestrion toolexec" .
    go test -toolexec="orchestrion toolexec" ./...
    ```
-- Modify the `$GOFLAGS` environment variable to inject Orchestrion, and use `go` commands normally:
+#### Modify the `$GOFLAGS` environment variable to inject Orchestrion, and use `go` commands normally:
    ```sh
    # Make sure to include the quotes as shown below, as these are required for
    # the Go toolchain to parse GOFLAGS properly!
@@ -147,7 +146,7 @@ Use one of these methods to enable Orchestrion in your build process:
 
 #### Create custom trace spans
 
-To create custom trace spans for functions accepting `context.Context` or `*http.Reques`t` arguments, add the `//dd:span` directive comment to the function declaration:
+To create custom trace spans for functions accepting `context.Context` or `*http.Request` arguments, add the `//dd:span` directive comment to the function declaration:
 
 {{<code-block lang="go" filename="example.go" collapsible="true">}}
 //dd:span custom_tag:tag_value
