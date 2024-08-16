@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source Collector distribution that includes:
+The Datadog Agent with embedded OpenTelemetry Collector is an open source Collector distribution that includes:
 
 - Built-in Datadog pipelines and extensions
 - Support for traces, metrics, and logs
@@ -19,7 +19,7 @@ The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source
 
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
 
-<div class="alert alert-info">If your application is already instrumented with the OTel SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
+<div class="alert alert-info">If your application is already instrumented with the OpenTelemetry SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
 
 
 ## Requirements
@@ -84,8 +84,8 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
    ```shell
    touch datadog-values.yaml
    ```
-   <div class="alert alert-info">Unspecified parameters will use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
-1. Configure the Datadog API and Application key secrets:
+   <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
+1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   apiKeyExistingSecret: datadog-secret
@@ -117,7 +117,7 @@ datadog:
    {{< /code-block >}}
    <div class="alert alert-info"><p>It is required to set the <code>hostPort</code> in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.</p><p>Alternatively, if you doesn't want to expose the port, you can use the agent service instead via <code>&lt;SERVICE_NAME&gt;.&lt;SERVICE_NAMESPACE&gt;.svc.cluster.local</code>.</p></div>
 1. (Optional) Enable additional Datadog features:
-   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/"> pricing page</a> and talk to your CSM before proceeding.</div>
+   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   ...
@@ -184,7 +184,7 @@ datadog:
 
 ### Configure the OpenTelemetry Collector
 
-The DataDog Helm chart provides a sample OpenTelemetry Collector configuration that's a great starting point for most projects. This section walks you through the predefined pipelines and included OpenTelemetry components.
+The Datadog Helm chart provides a sample OpenTelemetry Collector configuration that you can use as a starting point. This section walks you through the predefined pipelines and included OpenTelemetry components.
 
 This is the full OpenTelemetry Collector configuration in `otel-config.yaml`:
 
@@ -247,7 +247,7 @@ To send telemetry data to Datadog, the following components are defined in the c
 
 ##### Datadog connector
 
-The [Datadog connector][6] computes Datadog APM Trace Metrics.
+The [Datadog connector][6] computes Datadog APM trace metrics.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 connectors:
@@ -271,7 +271,7 @@ exporters:
 
 ##### Prometheus receiver
 
-The [Prometheus receiver][8] collects health metrics from the OpenTelemetry Collector for the Metrics pipeline.
+The [Prometheus receiver][8] collects health metrics from the OpenTelemetry Collector for the metrics pipeline.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 receivers:
@@ -302,7 +302,7 @@ This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a Daem
 
 ## Instrument and configure the application
 
-To send your telemetry data to Datadog, you need to do the following:
+To send your telemetry data to Datadog:
 
 1. Instrument your application.
 2. Correlate your telemetry data.
@@ -322,7 +322,7 @@ As an example, you can use the [Calendar sample application][9] that's already i
    ```shell
    cd opentelemetry-examples/apps/rest-services/java/calendar
    ```
-1. The following code instruments [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
+1. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
    {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="true" >}}
 @WithSpan(kind = SpanKind.CLIENT)
 public String getDate() {
@@ -402,7 +402,7 @@ env:
       deployment.environment=$(OTEL_K8S_NAMESPACE)
    {{< /code-block >}}
 
-## Run the application
+### Run the application
 
 To start generating and forwarding observability data to Datadog, you need to deploy the Calendar application with the OpenTelemetry SDK using Helm.
 
@@ -423,7 +423,7 @@ Each call to the Calendar application results in metrics, traces, and logs being
 
 ## Explore observability data in Datadog
 
-Use the Datadog UI to explore the observability data for the sample Calendar app.
+Use Datadog to explore the observability data for the sample Calendar app.
 
 ### Fleet automation
 
