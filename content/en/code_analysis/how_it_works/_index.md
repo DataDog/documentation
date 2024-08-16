@@ -1,6 +1,8 @@
 ---
-title: Code Analysis Frequently Asked Questions
-description: What are the frequently asked questions about Datadog Code Analysis
+title: How Code Analysis Works in Datadog
+description: Learn how Code Analysis features work to improve code quality.
+aliases:
+- /code_analysis/faq
 further_reading:
 - link: "/code_analysis/"
   tag: "Documentation"
@@ -13,24 +15,25 @@ further_reading:
   text: "Learn about Software Composition Analysis"
 ---
 
-## Common questions
+## Overview
 
-### What are Datadog-hosted scans?
+Datadog Code Analysis helps you identify and address issues in your code with Static Analysis (SAST) and Software Composition Analysis (SCA). 
 
-With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline.
-Datadog clones your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results for you.
+Static Analysis reviews your code for maintainability, bugs, performance, and security issues, offering suggestions to fix them before they reach production. Software Composition Analysis examines open source libraries in your repositories to detect known vulnerabilities. 
 
+### Datadog-hosted scans
 
-The benefit of Datadog-hosted scans is that no configuration is needed in your CI pipeline(s) to use Code Analysis.
+With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline. Datadog clones your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results.
 
+Using Datadog-hosted scans eliminates the need for you to configure a CI pipeline so you can use Code Analysis.
 
-### How are services associated with code violations and libraries?
+### Associating services with code violations and libraries
 
-Datadog aims to associate code violations or libraries with the relevant service by using the following mechanisms:
+Datadog associates code violations or libraries with relevant services by using the following mechanisms:
 
-1. Identifying the code location associated with a service using the Service Catalog.
-2. Detecting usage patterns of files within additional Datadog products.
-3. Searching for the service name in the file path or repository.
+1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
+2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
+3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
 
 If one method succeeds, no further matching attempts are made. Each mapping method is detailed below.
 
@@ -41,7 +44,7 @@ to add the mapping of your code location for your service. The `codeLocations`
 section specifies the locations of the code with the repository that
 contains the code and its associated `paths`.
 
-The `paths` attribute is a list of [globs](https://en.wikipedia.org/wiki/Glob_(programming))
+The `paths` attribute is a list of [globs][9]
 that should match paths in the repository.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -80,10 +83,9 @@ the name of the service is part of the path. If two services are present
 in the path, the service name the closest to the filename is selected.
 
 
-### How are teams associated with code violations and libraries?
+### Associating teams with code violations and libraries
 
-When Datadog detects the service for your code violation or library, it automatically
-associates the team attached to the service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+Datadog automatically associates the team attached to a service when a code violation or library issue is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
 is associated with `myservice`, then the team `myservice` will be associated to any violation
 detected in this file.
 
@@ -93,7 +95,7 @@ to correctly define the mapping between your Git provider teams and your Datadog
 
 ## Static Analysis
 
-### Can results be imported into Datadog from other analyzers?
+### Importing results from other analyzers
 
 While the [Datadog Static Analyzer][4] is recommended, Datadog supports the ingestion of files that adhere to SARIF format.
 
@@ -120,11 +122,7 @@ datadog-ci sarif upload /path/to/sarif-file.json
 
 If you want to import using a tool that is not supported, contact your Customer Success Manager.
 
-### Can custom rules be used?
-
-Custom rule availability is planned for all beta customers at the end of Q3 2024.
-
-### Do you always scan all the files at every push or commit?
+### Scan frequency
 
 By default, scans on non-default branches use *diff-aware*. With diff-aware scans, the analyzer only
 scans the files that changed between the current branch and the default branch. Diff-aware scans
@@ -132,22 +130,22 @@ last seconds, while full-scans may take a few minutes (depending on the codebase
 
 You must be using Datadog's analyzer to enable diff-aware scans.
 
-### What is Datadog's OWASP benchmark score for Static Analysis?
+### OWASP benchmark score
 
 Datadog's static analyzer has been tested against the OWASP benchmark with a score of 44.
 The analyzer is periodically checked against the benchmark and updated results are published to the [static analyzer documentation][5].
 
-### Is the analyzer open source?
+### Open Source availability
 
 Datadog's static analyzer is available under an open source license and the code is [available on GitHub][4].
 
-### Does the analyzer runs on Windows?
+### Windows support
 
 The Datadog Static Analyzer version 0.4.1 or higher is supported on Windows.
 
 ## Software Composition Analysis
 
-### What SBOM format Datadog supports?
+### Supported SBOM formats
 
 While the [Datadog SBOM generator][6] is recommended, Datadog supports the ingestion of any SBOM files.
 Datadog only supports SBOM files with the Cyclone-DX 1.4 and Cyclone-DX 1.5 formats.
@@ -162,7 +160,7 @@ To ingest your SBOM file into Datadog:
 2. Ensure that your `DD_SITE`, `DD_API_KEY` and `DD_APP_KEY` environment variables are set.
 3. Invoke the tool to upload the file to Datadog.
 
-Installing and invoking the tool can be done using these two commands:
+Install and invoke the tool using the following commands:
 
 ```bash
 # Install datadog-ci
@@ -184,3 +182,4 @@ datadog-ci sbom upload /path/to/sbom-file.json
 [6]: https://github.com/DataDog/osv-scanner
 [7]: https://github.com/aquasecurity/trivy
 [8]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[9]: https://en.wikipedia.org/wiki/Glob_(programming)
