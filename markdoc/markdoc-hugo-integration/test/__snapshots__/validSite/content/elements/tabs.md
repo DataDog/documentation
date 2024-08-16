@@ -3,7 +3,7 @@ title: Tabs
 ---
 
 <div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><hr /></div></div>
-<div id="markdoc-content"><article>
+<div id="markdoc-content customizable"><article>
   <h2>Usage</h2>
   <ul>
     <li>
@@ -74,4 +74,4 @@ title: Tabs
   </div>
 </article>
 </div>
-  <script>    clientRenderer.initialize({        pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],        prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},        selectedValsByPrefId: {"color":"blue"},        ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"2"}}    });  </script>  
+<div x-init='    const initPage = () => {       clientRenderer.initialize({        pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],        prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},        selectedValsByPrefId: {"color":"blue"},        ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"2"}}      });    };    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>

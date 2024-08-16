@@ -2,7 +2,7 @@
     display: none;
 }
 #markdoc-chooser,
-#markdoc-content {
+#markdoc-content.customizable {
     visibility: hidden;
 }
 .markdoc-pref__pill {

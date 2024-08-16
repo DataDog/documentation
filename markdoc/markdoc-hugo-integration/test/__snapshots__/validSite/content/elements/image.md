@@ -1,8 +1,6 @@
 ---
 title: Image/Video
 ---
-
-<div id="markdoc-chooser"></div>
 <div id="markdoc-content"><article>
   <h2>Image</h2>
   <p>
@@ -30,4 +28,3 @@ title: Image/Video
   </p>
 </article>
 </div>
-  <script>    clientRenderer.initialize({        pagePrefsConfig: undefined,        prefOptionsConfig: {},        selectedValsByPrefId: {},        ifFunctionsByRef: {}    });  </script>  

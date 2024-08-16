@@ -1,8 +1,6 @@
 ---
 title: Table
 ---
-
-<div id="markdoc-chooser"></div>
 <div id="markdoc-content"><article>
   <h2>Markdown table (CommonMark table)</h2>
   <table>
@@ -185,4 +183,3 @@ title: Table
   </ol>
 </article>
 </div>
-  <script>    clientRenderer.initialize({        pagePrefsConfig: undefined,        prefOptionsConfig: {},        selectedValsByPrefId: {},        ifFunctionsByRef: {}    });  </script>  

@@ -1,8 +1,6 @@
 ---
 title: site-region
 ---
-
-<div id="markdoc-chooser"></div>
 <div id="markdoc-content"><article>
   <div class="d-none site-region-container" data-region="us">
     <p>
@@ -18,4 +16,3 @@ title: site-region
   </div>
 </article>
 </div>
-  <script>    clientRenderer.initialize({        pagePrefsConfig: undefined,        prefOptionsConfig: {},        selectedValsByPrefId: {},        ifFunctionsByRef: {}    });  </script>  

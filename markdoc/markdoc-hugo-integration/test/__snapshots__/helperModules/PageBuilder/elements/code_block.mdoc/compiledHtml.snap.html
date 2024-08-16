@@ -23,7 +23,7 @@
     <hr />
   </div>
 </div>
-<div id="markdoc-content">
+<div id="markdoc-content customizable">
   <article>
     <h2>Usage</h2>
     <ul>
@@ -137,35 +137,13 @@
     </ol>
   </article>
 </div>
-<script>
-  clientRenderer.initialize({
-    pagePrefsConfig: [
-      {
-        n: "Color",
-        i: "color",
-        o: "primary_color_options",
-      },
-    ],
-    prefOptionsConfig: {
-      primary_color_options: [
-        {
-          n: "Red",
-          i: "red",
-        },
-        {
-          n: "Yellow",
-          i: "yellow",
-        },
-        {
-          n: "Blue",
-          d: true,
-          i: "blue",
-        },
-      ],
-    },
-    selectedValsByPrefId: {
-      color: "blue",
-    },
-    ifFunctionsByRef: {},
-  });
-</script>
+<div
+  x-init='const initPage = () => { clientRenderer.initialize({ pagePrefsConfig: [ { "n":
+"Color", "i": "color", "o": "primary_color_options" } ], prefOptionsConfig: {
+"primary_color_options": [ { "n": "Red", "i": "red" }, { "n": "Yellow", "i":
+"yellow" }, { "n": "Blue", "d": true, "i": "blue" } ] }, selectedValsByPrefId: {
+"color": "blue" }, ifFunctionsByRef: {} }); }; if (document.readyState ===
+"complete" || document.readyState === "interactive") { setTimeout(initPage, 1);
+} else { document.addEventListener("DOMContentLoaded", initPage); }
+'
+></div>

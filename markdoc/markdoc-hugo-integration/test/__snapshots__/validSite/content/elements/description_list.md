@@ -1,8 +1,6 @@
 ---
 title: Description List
 ---
-
-<div id="markdoc-chooser"></div>
 <div id="markdoc-content"><article>
   <h2>Example</h2>
   <dl>
@@ -32,4 +30,3 @@ title: Description List
   </dl>
 </article>
 </div>
-  <script>    clientRenderer.initialize({        pagePrefsConfig: undefined,        prefOptionsConfig: {},        selectedValsByPrefId: {},        ifFunctionsByRef: {}    });  </script>  

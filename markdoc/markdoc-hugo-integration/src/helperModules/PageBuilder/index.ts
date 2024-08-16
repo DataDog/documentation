@@ -82,12 +82,16 @@ export class PageBuilder {
 
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 
-    // Build the page content HTML
-    let pageContents = `
+    let pageContents = '';
+    if (args.parsedFile.frontmatter.page_preferences) {
+      pageContents = `
 <div id="markdoc-chooser">${chooserHtml}</div>
-<div id="markdoc-content">${articleHtml}</div>
-${rerenderScript}
+<div id="markdoc-content customizable">${articleHtml}</div>
+<div x-init='${rerenderScript}'></div>
 `;
+    } else {
+      pageContents = `<div id="markdoc-content">${articleHtml}</div>`;
+    }
 
     if (args.includeAssetsInline) {
       pageContents = this.#addInlineAssets({
@@ -219,7 +223,6 @@ ${rerenderScript}
     }
 
     let script = `
-  <script>
     const initPage = () => { 
       clientRenderer.initialize({
         pagePrefsConfig: ${pagePrefsConfigStr},
@@ -233,7 +236,6 @@ ${rerenderScript}
     } else {
       document.addEventListener("DOMContentLoaded", initPage);
     }
-  </script>
   `;
 
     if (p.pageBuildArgs.debug) {
