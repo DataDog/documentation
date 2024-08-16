@@ -123,9 +123,9 @@
           - "*/metadata.csv"
           - "*/manifest.json"
           - "*/assets/service_checks.json"
+          - "*/assets/metrics/metric-spec.yaml"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          - "*/assets/metrics/metric-spec.yaml"
 
       - repo_name: marketplace
         contents:
