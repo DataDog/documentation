@@ -118,7 +118,7 @@ Las aserciones definen cuál es el resultado esperado de un test. Después de ha
 | Respuesta gRPC | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1], [`xpath`][2] | _String_ <br> _[Regex][3]_ |
 | Metadatos gRPC | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ <br> _[Regex][3]_ |
 
-Puedes crear hasta 20 aserciones por test API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
+Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
 
 {{< img src="synthetics/api_tests/assertions_grpc_behavior_check_blur.png" alt="Definir aserciones en las que tu test gRPC tenga éxito o falle" style="width:90%;" >}}
 
@@ -135,7 +135,7 @@ Puedes crear hasta 20 aserciones por test API haciendo clic en **Nueva aserción
 | estado del check de estado | `is`, `is not` | _Integer (ms)_ |
 | Metadatos gRPC | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ |
 
-Puedes crear hasta 20 aserciones por test API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
+Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
 
 {{< img src="synthetics/api_tests/assertions_grpc_health_check.png" alt="Definir aserciones en las que tu test gRPC tenga éxito o falle" style="width:90%;" >}}
 
@@ -148,7 +148,7 @@ Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el l
 
 ### Seleccionar localizaciones
 
-Selecciona las **Localizaciones** desde donde ejecutar tu test gRPC. Los tests gRPC pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
+Selecciona las **Localizaciones** desde donde ejecutar tu test gRPC. Los tests gRPC pueden ejecutarse desde localizaciones gestionadas y también [privadas][2], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
 
 {{% managed-locations %}} 
 
@@ -157,7 +157,7 @@ Selecciona las **Localizaciones** desde donde ejecutar tu test gRPC. Los tests g
 Los tests gRPC se pueden ejecutar:
 
 * **De forma programada** para garantizar que los servicios más importantes siempre resulten accesibles para tus usuarios. Selecciona la frecuencia con la que quieres que Datadog ejecute tu test gRPC.
-* [**En tus pipelines CI/CD**][2] para empezar a realizar envíos sin temer que un código defectuoso pueda afectar a la experiencia de tus clientes.
+* [**En tus pipelines CI/CD**][3] para empezar a realizar envíos sin temer que un código defectuoso pueda afectar a la experiencia de tus clientes.
 * **Bajo demanda** para ejecutar tus tests cuando sea más conveniente para tu equipo.
 
 {{% synthetics-alerting-monitoring %}}
@@ -199,7 +199,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 ## Permisos
 
-De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][13] pueden crear, editar y eliminar tests gRPC Synthetic. Para crear, editar y eliminar tests gRPC Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][12].
+De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][12] pueden crear, editar y eliminar tests gRPC Synthetic. Para crear, editar y eliminar tests gRPC Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][12].
 
 Si utilizas la función [rol personalizado][13], añade tu usuario a cualquier rol personalizado que incluya permisos de `synthetics_read` y `synthetics_write`.
 
