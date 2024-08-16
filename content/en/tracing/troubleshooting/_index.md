@@ -79,7 +79,7 @@ Trace metrics and custom span-based metrics can have different values because th
 
 To ensure that your trace metrics and custom span-based metrics have the same value, configure a 100% ingestion rate for your application or service.
 
-<div class="alert alert-info">Metric names must follow the <a href="/metrics/#naming-metrics">metric naming convention</a>. Metric names that start with <code>trace.*</code> are not permitted and are not saved.</div>
+<div class="alert alert-info">Metric names must follow the <a href="/metrics/custom_metrics/#naming-custom-metrics">metric naming convention</a>. Metric names that start with <code>trace.*</code> are not permitted and are not saved.</div>
 
 {{% /collapse-content %}}
 
