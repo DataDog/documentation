@@ -398,7 +398,7 @@ class Integrations:
             key_name = basename(
                 dirname(normpath(file_name))
             )
-        elif file_name.endswith("assets/metrics/metric-spec.yaml"):
+        elif file_name.endswith("/assets/metrics/metric-spec.yaml"):
             file_list = file_name.split(sep)
             key_name = file_list[len(file_list)-4]
         else:
@@ -414,7 +414,7 @@ class Integrations:
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
             )
-        if file_name.endswith("assets/metrics/metric-spec.yaml"):
+        if file_name.endswith("/assets/metrics/metric-spec.yaml"):
             self.format_metric_spec_yaml(key_name, file_name, new_file_name)
         else:
             self.metric_csv_to_yaml(key_name, file_name, new_file_name)
@@ -702,7 +702,7 @@ class Integrations:
         tab_logic = False
         # Prioritize having metric-spec.yaml over metadata.csv
         metrics = glob.glob(
-            f"{dirname(file_name)}{sep}**{sep}metric-spec.yaml", recursive=True
+            f"{dirname(file_name)}{sep}**{sep}*metric-spec.yaml", recursive=True
         )
         if metrics:
             metrics = metrics[0] if len(metrics) > 0 else None
