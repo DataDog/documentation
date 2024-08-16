@@ -14,7 +14,7 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.mongo\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mongo\.yaml=cluster_check: true
 init_config:
 instances:
   - hosts:
@@ -25,9 +25,11 @@ instances:
       authSource: admin
     dbm: true
     cluster_name: <MONGO_CLUSTER_NAME>
+    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     database_autodiscovery:
       enabled: true
-    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>" \
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
+    collections_indexes_stats: true' \
   datadog/datadog
 ```
 
@@ -50,6 +52,8 @@ instances:
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     database_autodiscovery:
       enabled: true
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
+    collections_indexes_stats: true
 ```
 
 ### Configure with Kubernetes service annotations

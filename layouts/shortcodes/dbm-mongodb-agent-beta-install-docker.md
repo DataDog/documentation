@@ -5,7 +5,7 @@ Replace `<DD_API_KEY>` with your [Datadog API key][1] and `<DD_SITE>` with your 
 # Override the following environment variables
 export DD_API_KEY=<DD_API_KEY>
 export DD_SITE=<DD_SITE>
-export DD_AGENT_VERSION=7.56.0-dbm-mongo-1.4
+export DD_AGENT_VERSION=7.57.0-dbm-mongo-1.5
 
 docker pull "datadog/agent:${DD_AGENT_VERSION}"
 ```
