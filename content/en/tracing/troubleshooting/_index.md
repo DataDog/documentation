@@ -189,38 +189,6 @@ When an exception is handled in a try/catch block, `error.msg`, `error.type`, an
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="The number of services exceeds what is specified in the data volume guidelines" level="h4" %}}
-
-If the number of services exceeds what is specified in the [data volume guidelines](#data-volume-guidelines), try following these best practices for service naming conventions.
-
-### Exclude environment tag values from service names
-
-By default, the environment (`env`) is the primary tag for [Datadog APM][17].
-
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
-
-A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
-
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Service Catalog" style="width:100%;" >}}
-
-One pattern that often leads to issues with an overwhelming number of services is including the environment value in service names. For example, you might have two unique services instead of one since they are operating in two separate environments: `prod-web-store` and `dev-web-store`.
-
-Datadog recommends tuning your instrumentation by renaming your services.
-
-Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied.
-
-### Use the second primary tag instead of putting metric partitions or grouping variables into service names
-
-Second primary tags are additional tags that you can use to group and aggregate your trace metrics. You can use the dropdown to scope the performance data to a given cluster name or data center value.
-
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Use the dropdown menu to select a specific cluster or data center value" style="width:100%;" >}}
-
-Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
-
-For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
-
-{{% /collapse-content %}}
-
 ## Data volume guidelines
 
 If you encounter any of the following issues, you may be exceeding [Datadog's volume guidelines][29]:
@@ -255,6 +223,38 @@ Datadog truncates the following strings if they exceed the indicated number of c
 | [tag value][8]  |  25000     |
 
 Additionally, the number of [span tags][8] present on any span cannot exceed 1024.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="The number of services exceeds what is specified in the data volume guidelines" level="h4" %}}
+
+If the number of services exceeds what is specified in the [data volume guidelines](#data-volume-guidelines), try following these best practices for service naming conventions.
+
+### Exclude environment tag values from service names
+
+By default, the environment (`env`) is the primary tag for [Datadog APM][17].
+
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
+
+A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
+
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Service Catalog" style="width:100%;" >}}
+
+One pattern that often leads to issues with an overwhelming number of services is including the environment value in service names. For example, you might have two unique services instead of one since they are operating in two separate environments: `prod-web-store` and `dev-web-store`.
+
+Datadog recommends tuning your instrumentation by renaming your services.
+
+Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied.
+
+### Use the second primary tag instead of putting metric partitions or grouping variables into service names
+
+Second primary tags are additional tags that you can use to group and aggregate your trace metrics. You can use the dropdown to scope the performance data to a given cluster name or data center value.
+
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Use the dropdown menu to select a specific cluster or data center value" style="width:100%;" >}}
+
+Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
+
+For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
 
 {{% /collapse-content %}}
 
