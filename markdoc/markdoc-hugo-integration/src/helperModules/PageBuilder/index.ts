@@ -10,6 +10,7 @@ import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { resolvePagePrefs } from '../sharedRendering';
 import { customComponents } from '../../markdocConfig';
+import yaml from 'js-yaml';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -171,7 +172,8 @@ export class PageBuilder {
    * Add a frontmatter string to a page contents string.
    */
   static #addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
-    return `---\ntitle: ${p.frontmatter.title}\n---\n${p.pageContents}`;
+    const { page_preferences, ...rest } = p.frontmatter;
+    return `---\n${yaml.dump(rest)}---\n${p.pageContents}`;
   }
 
   /**
