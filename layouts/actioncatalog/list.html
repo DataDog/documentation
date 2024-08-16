@@ -42,7 +42,7 @@
             {{ with $logo_path }}
               <img src="{{ . }}" height="17" alt="{{ $workflow_title }}"/>
             {{ else }}
-              <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
+              <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
             {{ end }}
           </div>
           <div class="font-semibold ms-1 group-header-text">
@@ -61,7 +61,7 @@
               {{ with $logo_path }}
                 <img src="{{ . }}" height="17" alt="{{ $workflow_name }}"/>
               {{ else }}
-                <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
+                <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
               {{ end }}
               <span class="ps-1">{{ .title }}</span>
               <br>
