@@ -110,6 +110,10 @@ To install the CoScreen Slack app, go to [coscreen.co/slack][4] and click on _Ad
 
 To configure this integration, install the [CoScreen Chrome extension][5] and sign in. Open any Google Calendar event and use the **Add CoScreen** button to make the event a CoScreen meeting.
 
+#### CoScreen + Datadog Incident Management
+
+In [Incident Management][9], use the **Meet on CoScreen** button to start a CoScreen meeting with incident responders.
+
 ## Security and privacy
 
  - **Network security**
@@ -141,3 +145,4 @@ For all the details on how CoScreen enables secure collaboration, read the [CoSc
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
 [8]: /sensitive_data_scanner/
+[9]: /service_management/incident_management/
