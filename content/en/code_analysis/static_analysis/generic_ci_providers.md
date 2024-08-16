@@ -22,7 +22,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
 
 Prerequisites:
 
@@ -65,7 +65,7 @@ Add the following to your CI pipeline:
 export DD_SITE="datadoghq.com"
 
 # Install dependencies
-npm install -g @datadog/datadog-ci 
+npm install -g @datadog/datadog-ci
 
 # Download the latest Datadog static analyzer:
 # https://github.com/DataDog/datadog-static-analyzer/releases
@@ -78,7 +78,7 @@ mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 /usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
+datadog-ci sarif upload /tmp/report.sarif
 ```
 
 <div class="alert alert-info">
@@ -87,7 +87,7 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 
 ## Diff-aware scanning
 
-Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. The first scan performed, as well as default branch scans, always produce an analysis of the full repository (not diff-aware). 
+Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. The first scan performed, as well as default branch scans, always produce an analysis of the full repository (not diff-aware).
 
 If you are using GitHub Actions, diff-aware scanning is enabled by default.
 
