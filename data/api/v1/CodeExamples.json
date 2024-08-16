@@ -729,6 +729,23 @@
       "description": "Update an SLO returns \"OK\" response"
     }
   ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_3298562511",
+      "description": "Create a FIDO global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_3397718516",
+      "description": "Create a TOTP global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
+    }
+  ],
   "CreateSyntheticsBrowserTest": [
     {
       "group": "synthetics",
@@ -744,13 +761,6 @@
       "group": "synthetics",
       "suffix": "_397420811",
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
-    }
-  ],
-  "CreateGlobalVariable": [
-    {
-      "group": "synthetics",
-      "suffix": "_1068962881",
-      "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
   "CreateSyntheticsAPITest": [
