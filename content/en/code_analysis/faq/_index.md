@@ -1,5 +1,5 @@
 ---
-title:  Code Analysis Frequently Asked Questions
+title: Code Analysis Frequently Asked Questions
 description: Learn how Code Analysis features work to improve code quality.
 further_reading:
 - link: "/code_analysis/"
