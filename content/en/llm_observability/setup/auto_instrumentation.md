@@ -9,7 +9,7 @@ further_reading:
       text: 'Learn about the LLM Observability SDK for Python'
 ---
 
-<div class="alert alert-info">The Datadog platform offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide and empower out-of-the-box dashboards. These integrations are different from the LLM Observability offering, which includes SDK autoinstrumentation capabilities and features to monitor your LLM applications. For more information, see the respective documentation to understand distinct use cases and functionalities.</div>
+<div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. For example, APM has a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring has an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the LLM Observability offering.</div>
 
 ## Overview
 
