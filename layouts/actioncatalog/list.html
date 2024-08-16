@@ -53,7 +53,7 @@
             {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#/" }}
             {{ $full_url := print $base_url $workflow_name "/" $workflow_name "." $action_name }}
 
-            <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}" data-name="{{ lower $workflow_title }} {{ .File.TranslationBaseName }}">
+            <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}" data-name="{{ lower $workflow_title }} {{ lower $action_name }} {{ .File.TranslationBaseName }}">
               {{ with $logo_path }}<img src="{{ . }}" height="17" alt="{{ $workflow_name }}"/>{{ end }}
               <span class="ps-1">{{ .title }}</span>
               <br>
