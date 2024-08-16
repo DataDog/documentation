@@ -35,7 +35,7 @@ further_reading:
   text: 'Inferred Service dependencies (beta)'
 ---
 
-If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to have trouble, reach out to [Datadog support][1].
+If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
 
 The following components are involved in sending APM data to Datadog:
 
@@ -91,14 +91,14 @@ This section covers strategies to troubleshoot service-related issues.
 
 This can happen when the service name is not consistent across all spans.
 
-For example, you might have a single service like `service:test` showing multiple services in the Datadog:
+For example, you might have a single service such as `service:test` showing multiple services in the Datadog:
 - `service:test`
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
 You can use [Inferred Service dependencies (beta)][30]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
 
-Or, you can merge the service names using an environment variable like `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
+Or, you can merge the service names using an environment variable such as `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 
 For more information, see [Configure the Datadog Tracing Library][27] or choose your language here:
 
@@ -290,7 +290,7 @@ This section covers approaches for addressing security concerns in APM, includin
 
 {{% collapse-content title="Modifying, discarding, or obfuscating spans" level="h4" %}}
 
-There are several configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see [Security and Agent Customization][11]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
+There are several configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the tracing client. For details on the options available, see [Security and Agent Customization][11]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
 
 {{% /collapse-content %}}
 
@@ -300,7 +300,7 @@ This section explains how to use debug and startup logs to identify and resolve 
 
 {{% collapse-content title="Debug logs" level="h4" %}}
 
-To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
+To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or if Datadog support has recommended it for triage purposes. However, be sure to disable debug logging when you are finished testing to avoid the logging overhead it introduces.
 
 These logs can surface instrumentation errors or integration-specific errors. For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][5].
 
@@ -331,11 +331,11 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 4. **Datadog Agent flare**: [Datadog Agent flares][12] enable you to see what is happening within the Datadog Agent, for example, if traces are being rejected or malformed. This does not help if traces are not reaching the Datadog Agent, but does help identify the source of an issue, or any metric discrepancies.
 
-5. **A description of your environment**: Understanding your application's deployment configuration helps the Support team identify potential tracer-agent communication issues and spot misconfigurations. For complex problems, Support may request Kubernetes manifests, ECS task definitions, or similar deployment configuration files.
+5. **A description of your environment**: Understanding your application's deployment configuration helps the Support team identify potential tracer-Agent communication issues and identify misconfigurations. For complex problems, support may request Kubernetes manifests, ECS task definitions, or similar deployment configuration files.
 
 6. **Custom tracing code**: Custom instrumentation, configuration, and adding span tags can significantly impact trace visualizations in Datadog.
 
-7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog Tracer versions you are using allows Support to verify [Compatiblity Requirements][15], check for known issues, or recommend a version upgrades. For example:
+7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatiblity Requirements][15], check for known issues, or recommend a version upgrades. For example:
     
 {{% /collapse-content %}}
 
