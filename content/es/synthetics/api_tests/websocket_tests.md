@@ -80,7 +80,7 @@ Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en 
 
 Selecciona la vista previa de la respuesta directamente o haz clic en **Nueva aserción** para crear una aserción. Puedes crear hasta 20 aserciones por cada test WebSocket.
 
-{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Definir aserciones en las que tu test ICMP tenga éxito o falle" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Definir aserciones en las que tu test WebSocket tenga éxito o falle" style="width:90%;" >}}
 
 Para aplicar una lógica `OR` en una aserción, utiliza los comparadores `matches regex` o `does not match regex` para definir una expresión regular con varios valores esperados para el mismo tipo de aserción, como `(0|100)`. Se considera que el resultado del test tiene éxito si el valor de respuesta de la cadena o de la aserción de la cabecera es 0 o 100.
 
@@ -142,7 +142,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 ## Permisos
 
-De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][10] pueden crear, editar y eliminar tests WebSocket Synthetic. Para crear, editar y eliminar tests WebSocket Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][1o].
+De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][10] pueden crear, editar y eliminar tests WebSocket Synthetic. Para crear, editar y eliminar tests WebSocket Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][10].
 
 Si estás utilizando la [función de rol personalizado][11], añade tu usuario a cualquier rol que incluya permisos `synthetics_read` y `synthetics_write`.
 
