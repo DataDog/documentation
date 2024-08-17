@@ -32,7 +32,7 @@ title: Tests ICMP
 
 Los tests ICMP te permiten monitorizar la disponibilidad de tus hosts y diagnosticar problemas de comunicación de red. Al aplicar aserciones a los valores recibidos de uno o más pings de ICMP a tu endpoint, Datadog puede ayudarte a detectar problemas de conectividad, latencia por encima de la cuota de tiempos de ida y vuelta y cambios inesperados en la configuración del firewall de seguridad. Los tests también pueden hacer un seguimiento el número de saltos de red (TTL) necesarios para conectarse a tu host y ver los resultados de traceroute para analizar los detalles de cada salto de red que se produce en la ruta.
 
-Los tests ICMP pueden ejecutarse tanto desde [localizaciones gestionadas](#select-locations) como de [localizaciones privadas][1] dependiendo de si quieres activar pings ICMP a tus endpoints desde fuera o dentro de tu red. Los tests ICMP pueden ejecutarse de forma programada, bajo demanda o directamente dentro de tus [pipelines CI/CD][2].
+Los tests ICMP pueden ejecutarse tanto desde [localizaciones gestionadas](#select-locations) como de [localizaciones privadas][1] dependiendo de si quieres activar pings de ICMP a tus endpoints desde fuera o dentro de tu red. Los tests ICMP pueden ejecutarse de forma programada, bajo demanda o directamente dentro de tus [pipelines CI/CD][2].
 
 ## Configuración
 
