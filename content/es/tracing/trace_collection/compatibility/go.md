@@ -17,11 +17,11 @@ type: multi-code-lang
 
 La biblioteca de rastreo de Go Datadog es de código abierto; consulta el [repositorio GitHub][1] para más información.
 
-La biblioteca de rastreo de Go Datadog tiene una [política de compatibilidad de versiones][2] definida para las versiones de Go. Las dos últimas versiones de Go son totalmente compatibles, mientras que la tercera versión más reciente se considera en [mantenimiento][3]. Las versiones anteriores pueden funcionar, pero no se proporciona soporte por defecto. Para solicitudes especiales, [contacta con soporte][4]. 
+La biblioteca de rastreo de Go Datadog tiene una [política de compatibilidad de versiones][2] definida para las versiones de Go. Las dos últimas versiones de Go son totalmente compatibles, mientras que las versiones anteriores pueden funcionar, pero no se proporciona soporte por defecto. Para solicitudes especiales, [contacta con soporte][4]. 
 
 ### Requisitos
 
-- Datadog Agent v5.21.1+.
+- Datadog Agent v6.20.0+.
 - [Añade e inicializa el rastreador Datadog Go][77] antes de configurar integraciones.
 
 ### Integraciones
@@ -91,8 +91,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-go
-[2]: https://github.com/DataDog/dd-trace-go#support-policy
-[3]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[2]: https://github.com/DataDog/dd-trace-go#go-support-policy
 [4]: https://www.datadoghq.com/support/
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [6]: https://gin-gonic.com

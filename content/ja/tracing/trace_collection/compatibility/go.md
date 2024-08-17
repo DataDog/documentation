@@ -17,9 +17,9 @@ type: multi-code-lang
 
 Go Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
-Go Datadog トレースライブラリは、Go のバージョンに対して[バージョンサポートポリシー][2]が定義されています。Go の 2 つの最新リリースは完全にサポートされ、3 つ目の最新リリースは[メンテナンス][3]中と見なされています。古いバージョンも機能しますが、デフォルトではサポートは提供されません。特別なリクエストは、[サポートに連絡][4]してください。
+Go Datadog トレースライブラリは、Go のバージョンに対して[バージョンサポートポリシー][2]が定義されています。Go の 2 つの最新リリースは完全にサポートされています。古いバージョンも機能しますが、デフォルトではサポートは提供されません。特別なリクエストは、[サポートに連絡][4]してください。
 
-Datadog Agent v5.21.1+ を実行している必要があります。
+Datadog Agent v6.20.0+ を実行している必要があります。
 
 ### インテグレーション
 
@@ -88,8 +88,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクト�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-go
-[2]: https://github.com/DataDog/dd-trace-go#support-policy
-[3]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[2]: https://github.com/DataDog/dd-trace-go#go-support-policy
 [4]: https://www.datadoghq.com/support/
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [6]: https://gin-gonic.com
