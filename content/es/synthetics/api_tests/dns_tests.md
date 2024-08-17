@@ -68,7 +68,7 @@ Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en 
 
 Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
 
-{{< img src="synthetics/api_tests/assertions_dns.png" alt="Definir aserciones en las que tu test HTTP tenga éxito o falle" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_dns.png" alt="Definir aserciones en las que tu test DNS tenga éxito o falle" style="width:90%;" >}}
 
 Para realizar la lógica `OR` en una aserción, utiliza el comparador `matches regex` para definir una expresión regular con varios valores esperados para el mismo tipo de aserción, como `(0|100)`. El resultado del test es correcto si todos los registros disponibles o al menos el valor de una aserción del registro es 0 o 100.
 
