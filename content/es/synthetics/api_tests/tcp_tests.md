@@ -61,7 +61,7 @@ Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en 
 
 Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
 
-{{< img src="synthetics/api_tests/assertions_tcp.png" alt="Definir aserciones en las que tu test DNS tenga éxito o falle" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_tcp.png" alt="Definir aserciones en las que tu test TCP tenga éxito o falle" style="width:90%;" >}}
 
 Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud, dentro del límite de tiempo de espera establecido por el worker de Synthetics.
 
@@ -87,7 +87,7 @@ Los tests TCP se pueden ejecutar:
 
 ### Uso de variables
 
-Puedes utilizar las [variables globales definidas en la página **Parámetros**][9] en la URL, las opciones avanzadas y las aserciones de tus tests TCP.
+Puedes utilizar las [variables globales definidas en la página **Parámetros**][8] en la URL, las opciones avanzadas y las aserciones de tus tests TCP.
 
 Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
