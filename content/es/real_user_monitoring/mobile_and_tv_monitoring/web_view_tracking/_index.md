@@ -33,7 +33,7 @@ También puedes grabar todo el recorrido del usuario en vistas web y nativas en 
 
 ### Requisitos previos
 
-Configura el SDK de RUM Browser en la página web que desees representar en tu aplicación móvil. Para obtener más información, consulta [<txprotected>Monitorización</txprotected> de RUM Browser][2].
+Configura el SDK de RUM Browser en la página web que desees que se represente en tu aplicación móvil. Para obtener más información, consulta [<txprotected>Monitorización</txprotected> de RUM Browser][2].
 
 ### Declarar `DatadogWebViewTracking` como dependencia (solo iOS)
 
