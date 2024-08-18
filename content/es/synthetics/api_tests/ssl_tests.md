@@ -31,7 +31,7 @@ title: Tests SSL
 
 Los tests SSL/TLS te permiten monitorizar proactivamente la validez y la caducidad de tus certificados SSL/TLS para garantizar las conexiones seguras entre tus servicios claves y los usuarios. Si tu certificado está a punto de caducar o está en riesgo, Datadog te envía una alerta con los detalles del error. De esta manera podrás identificar rápidamente la causa del problema y solucionarlo.
 
-Los tests SSL pueden ejecutarse tanto desde [localizaciones gestionadas](#select-locations) como [privadas][1], dependiendo de si prefieres ejecutarlos desde fuera o dentro de tu red. Los tests UDP pueden ejecutarse de forma programada, bajo demanda o directamente dentro de tus [pipelines CI/CD][2].
+Los tests SSL pueden ejecutarse tanto desde [localizaciones gestionadas](#select-locations) como [privadas][1], dependiendo de si prefieres ejecutarlos desde fuera o dentro de tu red. Los tests SSL pueden ejecutarse de forma programada, bajo demanda o directamente dentro de tus [pipelines CI/CD][2].
 
 ## Configuración
 
@@ -134,7 +134,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 ## Permisos
 
-De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][9] pueden crear, editar y eliminar tests SSL Synthetic. Para crear, editar y eliminar tests SSL Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][11].
+De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][11] pueden crear, editar y eliminar tests SSL Synthetic. Para crear, editar y eliminar tests SSL Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][11].
 
 Si estás utilizando la [función de rol personalizado][12], añade tu usuario a cualquier rol que incluya permisos `synthetics_read` y `synthetics_write`.
 
