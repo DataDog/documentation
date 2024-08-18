@@ -27,7 +27,7 @@ Puedes hacer lo siguiente:
 - Determinar la causa de la latencia de las páginas web o los componentes nativos de las aplicaciones móviles.
 - Prestar asistencia a los usuarios que tienen dificultades para cargar páginas web en dispositivos móviles
 
-También puedes registrar todo el recorrido del usuario en vistas web y nativas en iOS o Android y verlo en una única Repetición de sesión. Más información en [Instrumentar vistas consolidadas del navegador y web móviles][1].
+También puedes grabar todo el recorrido del usuario en vistas web y nativas en iOS o Android y verlo en una única Repetición de sesión. Más información en [Instrumentar vistas consolidadas del navegador y web móviles][1].
 
 ## Configuración
 
