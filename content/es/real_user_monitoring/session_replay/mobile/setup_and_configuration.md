@@ -69,7 +69,7 @@ Para configurar Session Replay para móviles en iOS:
    |----------------------------|---------------------------------------------------------------------------------------------|
    | [CocoaPods][2] | Añade `pod 'DatadogSessionReplay'` a tu `Podfile`.                                         |
    | [Swift paquete Manager][3] | Añade la biblioteca `DatadogSessionReplay` como dependencia a tu aplicación de destino.                      |
-   | Añade `DatadogSessionReplay.xcframework` como dependencia a tu aplicación de destino.                  |
+   | [Carthage][4]               | Añade `DatadogSessionReplay.xcframework` como dependencia a tu aplicación de destino.                  |
 
 3. Habilita Session Replay en tu aplicación:
 
