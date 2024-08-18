@@ -28,7 +28,7 @@ Genera [métricas personalizadas][3] para rastrear los KPI de la aplicación dur
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generar una métrica personalizada en RUM" width="80%" >}}
 
 ## Conectar RUM y trazas
-[Conecte RUM y trazas (traces)][4] para vincular las solicitudes del frontend a sus trazas del backend correspondiente y localizar problemas en cualquier lugar de tu stack.
+[Conecta RUM y trazas (traces)][4] para vincular las solicitudes del frontend a sus trazas del backend correspondiente y localizar problemas en cualquier lugar de tu stack.
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM y Trazas" style="width:100%;">}}
 
