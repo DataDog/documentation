@@ -17,7 +17,7 @@ title: Listas de reproducción de Session Replay
 
 Las listas de reproducción son recopilaciones de repeticiones de sesiones que se pueden agregar a una estructura similar a una carpeta. Puedes utilizar las listas de reproducción para:
 
-- Organizar los patrones observados en repeticiones de sesiones específicas y etiquetarlos en consecuencia
+- Organizar los patrones observados en repeticiones de sesiones específicas y etiquetarlos (label) en consecuencia
 - Echar un vistazo a las listas de reproducción y comprender a simple vista de qué trata cada agrupación
 - Ahorrar tiempo al buscar repeticiones de sesiones específicas
 
