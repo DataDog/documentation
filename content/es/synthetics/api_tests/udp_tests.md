@@ -46,11 +46,11 @@ Cuando decidas crear un test `UDP`, define la solicitud de tu test.
 
 {{< img src="synthetics/api_tests/udp_test_config.png" alt="Definir la solicitud UDP" style="width:90%;" >}}
 
-Haz clic en **Test de URL** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
+Haz clic en **URL del test** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
 
 ### Definición de aserciones
 
-Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en **URL de test**, se añade una aserción básica sobre el `response time`. Debes definir al menos una aserción para que sea monitorizada por tu test.
+Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en **URL del test**, se añade una aserción básica sobre el `response time`. Debes definir al menos una aserción para que sea monitorizada por tu test.
 
 | Tipo            | Operador                                                                        | Tipo de valor                        |
 |-----------------|---------------------------------------------------------------------------------|-----------------------------------|
