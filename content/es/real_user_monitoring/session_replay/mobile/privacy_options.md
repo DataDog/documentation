@@ -156,12 +156,12 @@ Dependiendo de cómo hayas configurado tus parámetros de privacidad, el tipo de
 
 Teniendo en cuenta las estrategias de texto anteriores, tienes algunas opciones diferentes si quieres anular la regla de privacidad predeterminada de `mask` en tu configuración.
 
-El siguiente gráfico muestra cómo Datadog aplica diferentes estrategias de enmascaramiento de texto, utilizando las reglas que configures en tu configuración, a los siguientes tipos de texto.
+El siguiente gráfico muestra cómo Datadog aplica diferentes estrategias de enmascaramiento de texto, utilizando las reglas que defines en tu configuración, a los siguientes tipos de texto.
 
 | Tipo | Permitir todo | Enmascarar todo | Enmascarar la entrada del usuario |
 |------|-------------|------------|-------------------|
 | [Texto confidencial](#sensitive-text) | Enmascaramiento de longitud fija | Enmascaramiento de longitud fija | Enmascaramiento de longitud fija |
-| [Texto de entrada y opción](#input-and-option-text) | Sin enmascarar | Enmascaramiento de longitud fija | Enmascaramiento de longitud fija |
+| [Texto de entrada y de opción](#input-and-option-text) | Sin enmascarar | Enmascaramiento de longitud fija | Enmascaramiento de longitud fija |
 | [Texto estático](#static-text) | Sin enmascarar | Enmascaramiento con conservación del espacio | Sin enmascarar |
 | [Texto de sugerencia](#hint-text) | Sin enmascarar | Enmascaramiento de longitud fija | Sin enmascarar |
 
@@ -199,7 +199,7 @@ Esto incluye lo siguiente.
 - Exclusiones notables:
   - Textos de parámetros (sugerencias) en Campo de texto, Vista de texto y Editar texto (no introducidos por el usuario)
   - Textos no editables en Vista de texto (iOS).
-  - Etiquetas (labels) de mes, día y año en el selector de fechas (valores genéricos)
+  - Etiquetas (labels) de mes, día y año en el selector de fecha (valores genéricos)
 
 #### Texto estático
 Texto estático es cualquier texto que no es introducido directamente por el usuario. Esto incluye lo siguiente.
