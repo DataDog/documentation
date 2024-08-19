@@ -184,4 +184,4 @@ title: Table
     </li>
   </ol>
 </article>
-</div>
+</div><div x-init='    const initPage = () => clientRenderer.initialize({});    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>

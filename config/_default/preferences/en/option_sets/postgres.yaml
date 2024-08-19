@@ -11,7 +11,7 @@ postgres_integration_host_options:
 
 postgres_integration_version_options:
   - display_name: "10+"
-    id: gte_10
+    id: gte_10_x_x
     default: true
   - display_name: "9.6 and below"
-    id: lte_9_6
+    id: lte_9_6_x

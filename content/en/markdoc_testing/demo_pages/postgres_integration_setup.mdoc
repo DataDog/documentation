@@ -38,12 +38,27 @@ The PostgreSQL check is packaged with the Agent. To start gathering your Postgre
 
 Proceed with the following steps in this guide only if you are installing the standard integration alone.
 
+{% if equals($agent_host, "kubernetes") %}
+
+{% if equals($agent_version, "5_x_x") %}
+### Running Agent v5 on Kubernetes
+
+This isn't a real section, it's here to test the dynamic TOC.
+{% /if %}
+{% if equals($agent_version, "6_x_x") %}
+### Running Agent v6 on Kubernetes
+
+This isn't a real section, it's here to test the dynamic TOC.
+{% /if %}
+
+{% /if %}
+
 #### Prepare Postgres
 
 To get started with the standard PostgreSQL integration, create a read-only `datadog` user with proper access to your PostgreSQL server. Start `psql` on your PostgreSQL database.
 
 <!-- postgres_version 10+ -->
-{% if equals($postgres_version, "gte_10") %}
+{% if equals($postgres_version, "gte_10_x_x") %}
 For PostgreSQL version 10 and above, run:
 
 ```shell
@@ -54,7 +69,7 @@ grant SELECT ON pg_stat_database to datadog;
 {% /if %}
 
 <!-- postgres_version 9.6 and below -->
-{% if equals($postgres_version, "lte_9_6") %}
+{% if equals($postgres_version, "lte_9_6_x") %}
 For PostgreSQL versions below 10, run:
 
 ```shell
@@ -195,14 +210,14 @@ Datadog APM integrates with Postgres to see the traces across your distributed s
 ##### Log collection
 
 <!-- self-hosted > Agent version 5 -->
-{% if equals($agent_version, "5") %}
+{% if equals($agent_version, "5_x_x") %}
 {% alert level="warning" %}
 PostgreSQL logs are not available for Agent versions <6.0. Upgrade to a newer Agent version to collect logs.
 {% /alert %}
 {% /if %}
 
 <!-- self-hosted > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
+{% if not(equals($agent_version, "5_x_x")) %}
 PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. See the PostgreSQL documentation on[Error Reporting and Logging][7] for more information.
 
 1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
@@ -290,14 +305,14 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"postgresql","service":"postgresql"}]'
 ##### Trace collection
 
 <!-- Docker > Agent version 5 -->
-{% if equals($agent_version, "5") %}
+{% if equals($agent_version, "5_x_x") %}
 {% alert level="warning" %}
 Trace collection for containerized apps is not available for Agent versions <6.0. Upgrade to a newer Agent version to collect traces.
 {% /alert %}
 {% /if %}
 
 <!-- Docker > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
+{% if not(equals($agent_version, "5_x_x")) %}
 APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
 
 Required environment variables on the Agent container:
@@ -350,7 +365,7 @@ spec:
     - name: postgres
 ```
 <!-- Kubernetes > Agent version 7 -->
-{% if equals($agent_version, "7") %}
+{% if equals($agent_version, "7_x_x") %}
 **Annotations v2** (for Datadog Agent v7.36+)
 
 ```yaml
@@ -402,14 +417,14 @@ spec:
 ##### Trace collection
 
 <!-- Kubernetes > Agent version 5 -->
-{% if equals($agent_version, "5") %}
+{% if equals($agent_version, "5_x_x") %}
 {% alert level="warning" %}
 Trace collection for containerized apps is not supported for Agent versions <6.0. Upgrade to a newer Agent version to collect traces.
 {% /alert %}
 {% /if %}
 
 <!-- Kubernetes > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
+{% if not(equals($agent_version, "5_x_x")) %}
 APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
 
 Required environment variables on the Agent container:
@@ -471,14 +486,14 @@ Then, set [Log Integrations][11] as Docker labels:
 ##### Trace collection
 
 <!-- ECS > Agent version 5 -->
-{% if equals($agent_version, "5") %}
+{% if equals($agent_version, "5_x_x") %}
 {% alert level="warning" %}
 Trace collection for containerized apps is not available for Agent versions <6.0. Upgrade to a newer Agent version to collect traces.
 {% /alert %}
 {% /if %}
 
 <!-- ECS > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
+{% if not(equals($agent_version, "5_x_x")) %}
 APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
 
 Required environment variables on the Agent container:
