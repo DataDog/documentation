@@ -126,6 +126,12 @@ To fix a vulnerability by opening a pull request:
 #### Committing directly to the current branch
 You can also fix a vulnerability by committing directly to the branch the result was found on. 
 
+To commit a suggested fix:
+
+1. View a specific result in Code Analysis.
+2. Click **Fix Violation** in the side panel of the result.
+3. Click **Commit to current branch**.
+
 ### Customizing your configuration
 
 To learn how Static Analyis is configured in your repositories, see the [Setup documentation][8].
