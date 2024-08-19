@@ -7,6 +7,10 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< /callout >}} 
+
 ## Overview
 
 The Datadog Agent with embedded OpenTelemetry Collector is an open source Collector distribution that includes:
