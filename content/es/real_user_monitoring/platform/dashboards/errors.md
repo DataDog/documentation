@@ -11,14 +11,14 @@ title: Dashboards de errores RUM
 ## Errores de aplicaciones web
 
 
-El dashboard de errores de aplicaciones web proporciona información sobre los errores de tus aplicaciones. Te ayuda a centrarte en las vistas o versiones que generan más errores. Muestra:
+El dashboard de errores de aplicaciones web RUM proporciona información sobre los errores de tus aplicaciones. Te ayuda a centrarte en las vistas o versiones que generan más errores. Muestra:
 
 - **Errores de código**:
   Obtén información general de qué partes de tu aplicación están generando más errores. Si necesitas profundizar más, consulta [Seguimiento de errores][1] para investigar errores críticos de frontend y saber cuándo aparecen nuevos errores.
 - **Errores de red**:
   Monitoriza qué recursos generan más errores.
 
-{{< img src="real_user_monitoring/dashboards/dashboard-errors-web.png" alt="Dashboard predefinido de errores de aplicaciones web" style="width:100%" >}}
+{{< img src="real_user_monitoring/dashboards/dashboard-errors-web.png" alt="Dashboard predefinido de errores de aplicaciones web RUM" style="width:100%" >}}
 
 Para obtener más información sobre los datos mostrados, consulte [Datos recopilados del navegador RUM][2].
 
