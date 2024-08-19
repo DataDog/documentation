@@ -127,9 +127,9 @@ Datadog Application Security includes over 100 attack signatures that help prote
 
 ## Built-in vulnerability detection
 
-Datadog Application Security offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+Datadog Application Security offers built-in detection capabilities that warn you about the vulnerabilities detected in your application code and open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
-For more information, read [Software Composition Analysis][5].
+For more information, read [Code Security][28] and [Software Composition Analysis][5].
 
 ## API security
 
