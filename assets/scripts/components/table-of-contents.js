@@ -248,6 +248,9 @@ window.addEventListener('scroll', () => {
 // Expose the buildTOCMap function for customizable docs,
 // so that the TOC can be rebuilt
 // after the user's content preferences change
-window.buildTOCMap = buildTOCMap;
+window.TOCFunctions = {
+    onScroll,
+    buildTOCMap
+};
 
 DOMReady(handleAPIPage);

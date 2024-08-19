@@ -2563,13 +2563,10 @@
             const level = parseInt(header.tagName[1]);
             console.log("header is", header, "level is", level, "lastSeenLevel is", lastSeenLevel);
             if (level === lastSeenLevel) {
-              console.log("same level");
               html += "</li>";
             } else if (level > lastSeenLevel) {
-              console.log("starting nested list");
               html += "<ul>";
             } else if (level < lastSeenLevel) {
-              console.log("ending nested list");
               html += "</ul></li>";
             }
             lastSeenLevel = level;
@@ -2581,7 +2578,8 @@
             throw new Error('Cannot find right nav element with id "TableOfContents"');
           }
           rightNav.innerHTML = html;
-          window.buildTOCMap();
+          window.TOCFunctions.buildTOCMap();
+          window.TOCFunctions.onScroll();
         }
         rerender() {
           this.rerenderChooser();
@@ -2656,6 +2654,17 @@
           });
           return prefOverrideFound;
         }
+        updateEditButton() {
+          const editButton = document.getElementsByClassName("toc-edit-btn")[0];
+          if (!editButton) {
+            return;
+          }
+          const editButtonLink = editButton.getElementsByTagName("a")[0];
+          if (!editButtonLink) {
+            return;
+          }
+          editButtonLink.href = editButtonLink.href.replace(/\.md\/$/, ".mdoc/");
+        }
         initialize(p) {
           this.prefOptionsConfig = p.prefOptionsConfig;
           this.pagePrefsConfig = p.pagePrefsConfig;
@@ -2664,6 +2673,7 @@
           Object.keys(p.ifFunctionsByRef).forEach((ref) => {
             this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
           });
+          this.updateEditButton();
           this.locateChooserElement();
           const overrideApplied = this.applyPrefOverrides();
           if (overrideApplied) {

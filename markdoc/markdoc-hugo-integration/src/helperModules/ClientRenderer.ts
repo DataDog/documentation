@@ -149,22 +149,11 @@ export class ClientRenderer {
 
       // Start or end a list if the level has changed
       const level = parseInt(header.tagName[1]);
-      console.log(
-        'header is',
-        header,
-        'level is',
-        level,
-        'lastSeenLevel is',
-        lastSeenLevel
-      );
       if (level === lastSeenLevel) {
-        console.log('same level');
         html += '</li>';
       } else if (level > lastSeenLevel) {
-        console.log('starting nested list');
         html += '<ul>';
       } else if (level < lastSeenLevel) {
-        console.log('ending nested list');
         html += '</ul></li>';
       }
       lastSeenLevel = level;
@@ -174,11 +163,13 @@ export class ClientRenderer {
     html += '</li></ul>';
     const rightNav = document.getElementById('TableOfContents');
     if (!rightNav) {
-      throw new Error('Cannot find right nav element with id "TableOfContents"');
+      return;
     }
     rightNav.innerHTML = html;
     // @ts-ignore
-    window.buildTOCMap();
+    window.TOCFunctions.buildTOCMap();
+    // @ts-ignore
+    window.TOCFunctions.onScroll();
   }
 
   rerender() {
@@ -277,6 +268,18 @@ export class ClientRenderer {
     return prefOverrideFound;
   }
 
+  updateEditButton() {
+    const editButton = document.getElementsByClassName('toc-edit-btn')[0];
+    if (!editButton) {
+      return;
+    }
+    const editButtonLink = editButton.getElementsByTagName('a')[0];
+    if (!editButtonLink) {
+      return;
+    }
+    editButtonLink.href = editButtonLink.href.replace(/\.md\/$/, '.mdoc/');
+  }
+
   initialize(p: {
     prefOptionsConfig: MinifiedPrefOptionsConfig;
     pagePrefsConfig: MinifiedPagePrefsConfig;
@@ -295,6 +298,7 @@ export class ClientRenderer {
       ) as ClientFunction;
     });
 
+    this.updateEditButton();
     this.locateChooserElement();
 
     const overrideApplied = this.applyPrefOverrides();
