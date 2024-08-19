@@ -60,11 +60,11 @@ If needed, configure the tracing library to send application performance telemet
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Compile-time instrumentation (alpha)" level="p" %}}
+{{% collapse-content title="Compile-time instrumentation (private beta)" level="p" %}}
 
 <div class="card callout-card mb-4">
   <div class="card-body d-flex flex-column">
-    <h5 class="card-title text-black mt-0 mb-1">Orchestrion is currently in alpha</h5>
+    <h5 class="card-title text-black mt-0 mb-1">Orchestrion is currently in private beta</h5>
     <p class="card-text">
       Orchestrion is under active development, and Datadog is eager to hear from you. Request access if you are interested and would like to share your experience.
     </p>
