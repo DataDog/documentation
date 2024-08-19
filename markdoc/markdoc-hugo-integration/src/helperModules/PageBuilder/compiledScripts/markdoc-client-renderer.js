@@ -2561,7 +2561,6 @@
               return;
             }
             const level = parseInt(header.tagName[1]);
-            console.log("header is", header, "level is", level, "lastSeenLevel is", lastSeenLevel);
             if (level === lastSeenLevel) {
               html += "</li>";
             } else if (level > lastSeenLevel) {
@@ -2575,7 +2574,7 @@
           html += "</li></ul>";
           const rightNav = document.getElementById("TableOfContents");
           if (!rightNav) {
-            throw new Error('Cannot find right nav element with id "TableOfContents"');
+            return;
           }
           rightNav.innerHTML = html;
           window.TOCFunctions.buildTOCMap();
@@ -2631,9 +2630,10 @@
         locateChooserElement() {
           const chooserElement = document.getElementById("markdoc-chooser");
           if (!chooserElement) {
-            throw new Error('Cannot find chooser element with id "markdoc-chooser"');
+            return false;
           } else {
             this.chooserElement = chooserElement;
+            return true;
           }
         }
         applyPrefOverrides() {
@@ -2670,21 +2670,25 @@
           this.pagePrefsConfig = p.pagePrefsConfig;
           this.selectedValsByPrefId = p.selectedValsByPrefId || {};
           this.ifFunctionsByRef = {};
-          Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-            this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
-          });
-          this.updateEditButton();
-          this.locateChooserElement();
-          const overrideApplied = this.applyPrefOverrides();
-          if (overrideApplied) {
-            this.rerender();
-          } else {
-            this.addChooserEventListeners();
+          const contentIsCustomizable = this.locateChooserElement();
+          if (contentIsCustomizable) {
+            Object.keys(p.ifFunctionsByRef).forEach((ref) => {
+              this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
+            });
+            const overrideApplied = this.applyPrefOverrides();
+            if (overrideApplied) {
+              this.rerender();
+            } else {
+              this.addChooserEventListeners();
+            }
+            this.revealPage();
           }
-          this.revealPage();
           this.populateRightNav();
-          this.syncUrlWithSelectedVals();
-          this.updateStoredPreferences();
+          this.updateEditButton();
+          if (contentIsCustomizable) {
+            this.syncUrlWithSelectedVals();
+            this.updateStoredPreferences();
+          }
         }
         revealPage() {
           if (this.chooserElement) {

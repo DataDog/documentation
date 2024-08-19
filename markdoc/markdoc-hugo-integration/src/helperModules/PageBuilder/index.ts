@@ -69,7 +69,7 @@ export class PageBuilder {
       defaultValsByPrefId
     });
 
-    const rerenderScript = this.#getRerenderScript({
+    const pageInitScript = this.#getPageInitScript({
       pageBuildArgs: args,
       defaultValsByPrefId,
       renderableTree
@@ -88,10 +88,10 @@ export class PageBuilder {
       pageContents = `
 <div id="markdoc-chooser">${chooserHtml}</div>
 <div id="markdoc-content" class="customizable">${articleHtml}</div>
-<div x-init='${rerenderScript}'></div>
+<div x-init='${pageInitScript}'></div>
 `;
     } else {
-      pageContents = `<div id="markdoc-content">${articleHtml}</div>`;
+      pageContents = `<div id="markdoc-content">${articleHtml}</div><div x-init='${pageInitScript}'></div>`;
     }
 
     if (args.includeAssetsInline) {
@@ -181,58 +181,64 @@ export class PageBuilder {
    * with all of the necessary data required to re-render the page when the user changes
    * a preference setting.
    */
-  static #getRerenderScript(p: {
+  static #getPageInitScript(p: {
     pageBuildArgs: PageBuildArgs;
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
   }): string {
-    let prefOptionsConfigStr;
-    let defaultValsByPrefIdStr;
-    let pagePrefsConfigStr;
-    const ifFunctionsByRef = getMinifiedIfFunctionsByRef(p.renderableTree);
-    let ifFunctionsByRefStr;
+    let initFunctionStr = '';
+    if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+      initFunctionStr = `const initPage = () => clientRenderer.initialize({});\n`;
+    } else {
+      let prefOptionsConfigStr;
+      let defaultValsByPrefIdStr;
+      let pagePrefsConfigStr;
+      const ifFunctionsByRef = getMinifiedIfFunctionsByRef(p.renderableTree);
+      let ifFunctionsByRefStr;
 
-    if (p.pageBuildArgs.debug) {
-      prefOptionsConfigStr = JSON.stringify(
-        ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
-        null,
-        2
-      );
-      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
-      if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-        pagePrefsConfigStr = JSON.stringify(
-          ConfigProcessor.minifyPagePrefsConfig(
-            p.pageBuildArgs.parsedFile.frontmatter.page_preferences
-          ),
+      if (p.pageBuildArgs.debug) {
+        prefOptionsConfigStr = JSON.stringify(
+          ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
           null,
           2
         );
-      }
-      ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
-    } else {
-      prefOptionsConfigStr = JSON.stringify(
-        ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
-      );
-      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
-      if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-        pagePrefsConfigStr = JSON.stringify(
-          ConfigProcessor.minifyPagePrefsConfig(
-            p.pageBuildArgs.parsedFile.frontmatter.page_preferences
-          )
+        defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
+        if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+          pagePrefsConfigStr = JSON.stringify(
+            ConfigProcessor.minifyPagePrefsConfig(
+              p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+            ),
+            null,
+            2
+          );
+        }
+        ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
+      } else {
+        prefOptionsConfigStr = JSON.stringify(
+          ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
         );
+        defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
+        if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+          pagePrefsConfigStr = JSON.stringify(
+            ConfigProcessor.minifyPagePrefsConfig(
+              p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+            )
+          );
+        }
+        ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef);
       }
-      ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef);
+      initFunctionStr = `const initPage = () => { 
+  clientRenderer.initialize({
+    pagePrefsConfig: ${pagePrefsConfigStr},
+    prefOptionsConfig: ${prefOptionsConfigStr},
+    selectedValsByPrefId: ${defaultValsByPrefIdStr},
+    ifFunctionsByRef: ${ifFunctionsByRefStr}
+  });
+};\n`;
     }
 
     let script = `
-    const initPage = () => { 
-      clientRenderer.initialize({
-        pagePrefsConfig: ${pagePrefsConfigStr},
-        prefOptionsConfig: ${prefOptionsConfigStr},
-        selectedValsByPrefId: ${defaultValsByPrefIdStr},
-        ifFunctionsByRef: ${ifFunctionsByRefStr}
-      });
-    };
+    ${initFunctionStr}
     if (document.readyState === "complete" || document.readyState === "interactive") {
       setTimeout(initPage, 1);
     } else {

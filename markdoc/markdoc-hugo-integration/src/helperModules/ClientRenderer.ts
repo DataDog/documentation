@@ -232,9 +232,10 @@ export class ClientRenderer {
   locateChooserElement() {
     const chooserElement = document.getElementById('markdoc-chooser');
     if (!chooserElement) {
-      throw new Error('Cannot find chooser element with id "markdoc-chooser"');
+      return false;
     } else {
       this.chooserElement = chooserElement;
+      return true;
     }
   }
 
@@ -291,28 +292,31 @@ export class ClientRenderer {
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.ifFunctionsByRef = {};
 
-    // Unminify conditional function data
-    Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-      this.ifFunctionsByRef[ref] = expandClientFunction(
-        p.ifFunctionsByRef[ref]
-      ) as ClientFunction;
-    });
+    const contentIsCustomizable = this.locateChooserElement();
+    if (contentIsCustomizable) {
+      // Unminify conditional function data
+      Object.keys(p.ifFunctionsByRef).forEach((ref) => {
+        this.ifFunctionsByRef[ref] = expandClientFunction(
+          p.ifFunctionsByRef[ref]
+        ) as ClientFunction;
+      });
 
-    this.updateEditButton();
-    this.locateChooserElement();
-
-    const overrideApplied = this.applyPrefOverrides();
-    if (overrideApplied) {
-      this.rerender();
-    } else {
-      this.addChooserEventListeners();
+      const overrideApplied = this.applyPrefOverrides();
+      if (overrideApplied) {
+        this.rerender();
+      } else {
+        this.addChooserEventListeners();
+      }
+      this.revealPage();
     }
 
-    this.revealPage();
     this.populateRightNav();
+    this.updateEditButton();
 
-    this.syncUrlWithSelectedVals();
-    this.updateStoredPreferences();
+    if (contentIsCustomizable) {
+      this.syncUrlWithSelectedVals();
+      this.updateStoredPreferences();
+    }
   }
 
   revealPage() {
