@@ -144,7 +144,14 @@ If the request is successful, the API responds with a 202 network code and an em
 | value   | string | Input or output value. This should be used for all spans except for LLM spans. |
 | messages| [[Message](#message)] | List of messages. This should only be used for LLM spans. |
 
+
+**Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
+
+1. If a message with `role=user` exists, the content of the last message is used as `input.value`.
+1. If a `user` role message is not present, `input.value` is inferred by concatenating the content fields of all messages, regardless of their roles.
+
 #### Message
+
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
 | content [*required*] | string | The body of the message. |
