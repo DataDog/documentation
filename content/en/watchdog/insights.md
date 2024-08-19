@@ -274,15 +274,15 @@ An overlay is then set on the function, with pink pills highlighting the differe
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
+For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer. 
 
-[1]: /watchdog/#overview
+[1]: https://app.datadoghq.com/process
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kubernetes anomalies][1] for the current context of the Kubernetes Explorer.
 
-[1]: /watchdog/#overview
+[1]: https://app.datadoghq.com/orchestration/overview/pod
 {{% /tab %}}
 {{< /tabs >}}
 
