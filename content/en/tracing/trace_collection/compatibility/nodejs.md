@@ -98,6 +98,7 @@ Prefix all commands you run with an environment variable:
 
 ```shell
 NODE_OPTIONS='--require dd-trace/init' npm start
+```
 
 Or, modify the `package.json` file if you typically start an application with npm or yarn run scripts:
 
