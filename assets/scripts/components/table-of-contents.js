@@ -114,10 +114,14 @@ export function buildTOCMap() {
 }
 
 export function onScroll() {
-    console.log('running onScroll');
     const windowTopPosition = scrollTop(window);
     const windowHeight = window.innerHeight;
-    const localOffset = 65;
+    let localOffset = 65;
+
+    const isCustomizableDoc = document.getElementById('markdoc-chooser') ? true : false;
+    if (isCustomizableDoc) {
+        localOffset += 65;
+    }
 
     const body = document.body;
     const html = document.documentElement;

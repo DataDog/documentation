@@ -52,3 +52,11 @@
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
 }
+#markdoc-content.customizable h1,
+#markdoc-content.customizable h2,
+#markdoc-content.customizable h3,
+#markdoc-content.customizable h4,
+#markdoc-content.customizable h5,
+#markdoc-content.customizable h6 {
+    scroll-margin-top: 95px;
+}
