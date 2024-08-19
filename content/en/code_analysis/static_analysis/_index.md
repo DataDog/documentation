@@ -114,7 +114,7 @@ The two types of fixes are distinguished visually in the UI with different label
 You can push a code change to fix an issue found by Code Analysis directly from a result in Datadog in two ways.
 
 #### Opening a pull request 
-If the **Pull Requests** permission for your GitHub app is set to **Read & Write**, one-click remediation will be available for all Static Analysis findings where a suggested fix is available.
+If the **Pull Requests** permission for your GitHub app is set to **Read & Write**, one-click remediation will be available for all Static Analysis findings where a suggested fix is available. See [this page][10] to learn how to set up the GitHub integration. 
 
 To fix a vulnerability by opening a pull request:
 1. View a specific result in Code Analysis.
@@ -147,3 +147,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [7]: https://en.wikipedia.org/wiki/Snake_case
 [8]: /code_analysis/static_analysis/setup/#customize-your-configuration
 [9]: /code_analysis/static_analysis/setup
+[10]: /code_analysis/github_pull_requests/
