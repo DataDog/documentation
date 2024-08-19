@@ -39,9 +39,13 @@ Datadog Threat Monitoring and Detection identifies bad actors by collecting clie
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
 If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
-### Identify vulnerable service libraries
+### Identify vulnerabilities in open source libraries used by services
 
 Datadog [Software Composition Analysis][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
+
+### Identify code-level vulnerabilities in services
+
+Datadog [Code Security][28] identifies code-level vulnerabilities in services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within application code. IAST uses instrumentation embedded in code, similar to Application Performance Monitoring (APM), enabling Datadog to identify vulnerabilities using legitimate application traffic rather than relying on external tests that may require extra configuration or periodic scheduling. Datadog Code Security automatically provides the information teams need to locate a vulnerability in an application, from the affected filename down to the exact method and line number.
 
 ## Compatibility
 
@@ -160,3 +164,4 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
 [27]: /tracing/api_catalog/
+[28]: /security/application_security/code_security/
