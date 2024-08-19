@@ -1,6 +1,6 @@
 ---
 title: Log Management
-description: "Configure your Datadog Agent to gather logs from your host, containers & services.
+description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
   - /guides/logs/
