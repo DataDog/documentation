@@ -12,7 +12,7 @@ further_reading:
   text: Más información sobre los tests de navegador de Synthetic
 - link: https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/
   tag: Blog
-  text: Seguimiento de la cobertura de test con RUM y la monitorización Synthetic
+  text: Seguimiento de la cobertura de tests con RUM y la monitorización Synthetic
 title: Dashboards de tests y despliegues
 ---
 
