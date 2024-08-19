@@ -4453,10 +4453,6 @@ components:
     CloudflareAccountResponseAttributes:
       description: Attributes object of a Cloudflare account.
       properties:
-        api_key:
-          description: The CloudflareAccountResponseAttributes api_key.
-          type: string
-          writeOnly: true
         email:
           description: The email associated with the Cloudflare account.
           example: test-email@example.com
@@ -4484,8 +4480,6 @@ components:
       required:
       - name
       type: object
-      x-merge-override:
-        required: false
     CloudflareAccountResponseData:
       description: Data object of a Cloudflare account.
       properties:
@@ -4502,8 +4496,6 @@ components:
       - id
       - type
       type: object
-      x-merge-override:
-        required: false
     CloudflareAccountType:
       default: cloudflare-accounts
       description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
@@ -4533,9 +4525,6 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
-        name:
-          description: The CloudflareAccountUpdateRequestAttributes name.
-          type: string
         resources:
           description: An allowlist of resources to restrict pulling metrics for.
           example:
@@ -4555,8 +4544,6 @@ components:
       required:
       - api_key
       type: object
-      x-merge-override:
-        required: false
     CloudflareAccountUpdateRequestData:
       description: Data object for updating a Cloudflare account.
       properties:
@@ -4565,8 +4552,6 @@ components:
         type:
           $ref: '#/components/schemas/CloudflareAccountType'
       type: object
-      x-merge-override:
-        required: false
     CloudflareAccountsResponse:
       description: The expected response schema when getting Cloudflare accounts.
       properties:
@@ -29692,8 +29677,6 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
-    x-merge-override:
-      get: true
   /api/v2/integrations/cloudflare/accounts/{account_id}:
     delete:
       description: Delete a Cloudflare account.
@@ -29791,9 +29774,6 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-    x-merge-override:
-      delete: true
-      patch: true
   /api/v2/integrations/confluent-cloud/accounts:
     get:
       description: List Confluent accounts.
