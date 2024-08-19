@@ -114,6 +114,7 @@ export function buildTOCMap() {
 }
 
 export function onScroll() {
+    console.log('running onScroll');
     const windowTopPosition = scrollTop(window);
     const windowHeight = window.innerHeight;
     const localOffset = 65;
@@ -153,7 +154,7 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
-                        const header = document.getElementById(`${(decodeURI(id))}`);
+                        const header = document.getElementById(`${decodeURI(id)}`);
                         if (header && header.nodeName === 'H2') {
                             link.classList.add('toc_open');
                         }
@@ -240,5 +241,9 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-DOMReady(handleAPIPage);
+// Expose the buildTOCMap function for customizable docs,
+// so that the TOC can be rebuilt
+// after the user's content preferences change
+window.buildTOCMap = buildTOCMap;
 
+DOMReady(handleAPIPage);

@@ -2554,27 +2554,34 @@
          */
         populateRightNav() {
           let html = "<ul>";
-          const headers = Array.from(document.querySelectorAll("#mainContent h2, #mainContent h3, #mainContent h4, #mainContent h5, #mainContent h6"));
+          const headers = Array.from(document.querySelectorAll("#mainContent h2, #mainContent h3"));
           let lastSeenLevel = 2;
           headers.forEach((header) => {
             if (this.elementIsHidden(header)) {
               return;
             }
             const level = parseInt(header.tagName[1]);
-            if (level > lastSeenLevel) {
+            console.log("header is", header, "level is", level, "lastSeenLevel is", lastSeenLevel);
+            if (level === lastSeenLevel) {
+              console.log("same level");
+              html += "</li>";
+            } else if (level > lastSeenLevel) {
+              console.log("starting nested list");
               html += "<ul>";
             } else if (level < lastSeenLevel) {
-              html += "</ul>";
+              console.log("ending nested list");
+              html += "</ul></li>";
             }
             lastSeenLevel = level;
-            html += `<li><a href="#${header.id}">${header.textContent}</a></li>`;
+            html += `<li><a href="#${header.id}">${header.textContent}</a>`;
           });
-          html += "</ul>";
+          html += "</li></ul>";
           const rightNav = document.getElementById("TableOfContents");
           if (!rightNav) {
             throw new Error('Cannot find right nav element with id "TableOfContents"');
           }
           rightNav.innerHTML = html;
+          window.buildTOCMap();
         }
         rerender() {
           this.rerenderChooser();
