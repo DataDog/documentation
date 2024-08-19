@@ -57,7 +57,7 @@ You can access the resulting traces in the **Traces** tab on the [**LLM Observab
 
 To create a span, the LLM Observability SDK provides two options: using a function decorator or using a context manager inline. 
 
-Using a function decorator is easier and you should start out with this method. Using a context manager is more advanced and allows more fine-grained control over tracing.
+Using a function decorator is the preferred method. Using a context manager is more advanced and allows more fine-grained control over tracing.
 
 Decorators
 : Use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a decorator on the function you'd like to trace, replacing `<SPAN_KIND>` with the desired [span kind][4].
