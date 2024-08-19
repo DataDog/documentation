@@ -51,7 +51,7 @@ Para crear una métrica personalizada a partir de una consulta de búsqueda en e
 
    Si la faceta del atributo RUM es una medida, el valor de la métrica es el valor del atributo RUM.
 
-5. Selecciona una ruta para la agrupación en el menú desplegable situado junto a **agrupar por**. El nombre de etiqueta de la métrica es el atributo original o el nombre de etiqueta sin `@`. Por defecto, las métricas personalizadas generadas a partir de eventos RUM no contienen etiquetas, a menos que se añadan explícitamente. Puedes utilizar un atributo o dimensión de etiqueta que exista en tus eventos RUM, como `@error.source` o `env`, para crear etiquetas de métricas. 
+5. Selecciona una ruta para la agrupación en el menú desplegable situado junto a **agrupar por**. El nombre de etiqueta (tag) de la métrica es el atributo original o el nombre de etiqueta sin `@`. Por defecto, las métricas personalizadas generadas a partir de eventos RUM no contienen etiquetas, a menos que se añadan explícitamente. Puedes utilizar un atributo o dimensión de etiqueta que exista en tus eventos RUM, como `@error.source` o `env`, para crear etiquetas de métricas. 
 
    <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
