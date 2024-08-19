@@ -3,7 +3,7 @@ Add the following instructions and arguments to your Dockerfile.
 ```dockerfile
 COPY --from=datadog/serverless-init:1 / /app/
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
-RUN chmod u+x /app/dotnet.sh && /app/dotnet.sh
+RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -22,7 +22,7 @@ CMD ["dotnet", "helloworld.dll"]
 2. Copy the Datadog .NET tracer into your Docker image.
    For linux/amd64, include the following:
    ```dockerfile
-   RUN chmod u+x /app/dotnet.sh && /app/dotnet.sh
+   RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
    ```
 
    For other architecture types, configure your Dockerfile like so:
@@ -60,7 +60,7 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 ```dockerfile
 COPY --from=datadog/serverless-init:1 / /app/
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
-RUN chmod u+x /app/dotnet.sh && /app/dotnet.sh
+RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -73,7 +73,7 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 ```dockerfile
 COPY --from=datadog/serverless-init:1 / /app/
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
-RUN chmod u+x /app/dotnet.sh && /app/dotnet.sh
+RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
