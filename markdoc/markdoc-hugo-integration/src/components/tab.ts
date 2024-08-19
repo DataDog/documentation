@@ -1,5 +1,5 @@
 import { CustomHtmlComponent, Config, Node } from 'markdoc-static-compiler';
-import { spinalcase } from 'stringcase';
+import { anchorize } from '../helperModules/stringProcessing';
 
 export const tabDefinition = {
   render: 'Tab',
@@ -22,9 +22,7 @@ export const tabDefinition = {
 export class Tab extends CustomHtmlComponent {
   render() {
     let dataLang = this.tag.attributes.label;
-    dataLang = dataLang.toLowerCase();
-    dataLang = dataLang.replace('-', '');
-    dataLang = spinalcase(dataLang);
+    dataLang = anchorize(dataLang);
 
     return `<div data-lang="${dataLang}" class="tab-pane fade" role="tabpanel" title="${this.tag.attributes.label}">${this.contents}</div>`;
   }
