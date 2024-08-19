@@ -24,7 +24,7 @@ Clouds
 Resources
 : CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods.
 
-CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using on the [**Containers** page][1].
+CCM displays costs for resources including CPU, memory, and GPU and more depending on the cloud and orchestrator you are using on the [**Containers** page][1].
 
 {{< img src="cloud_cost/container_cost_allocation/container_allocation.png" alt="Cloud cost allocation table showing requests and idle costs over the past month on the Containers page" style="width:100%;" >}}
 
