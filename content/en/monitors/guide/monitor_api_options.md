@@ -32,8 +32,7 @@ title: Monitor API Options
 
 - **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1].
 
-**Note:** You can now set up permissions on monitors based on [Teams][4] and users, in addition to roles, with [Restriction Policies][5]. For more information on restricting permissions for 
-monitors, see the [dedicated guide][2].
+**Note:** You can now set up permissions on monitors based on [Teams][4] and users, in addition to roles, with [Restriction Policies][5]. For more information on restricting permissions for monitors, see the [dedicated guide][2].
 
 ## Anomaly options
 
