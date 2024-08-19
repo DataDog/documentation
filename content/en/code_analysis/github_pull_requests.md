@@ -18,7 +18,7 @@ Code Analysis integrates with GitHub pull requests in two ways:
 - [Pull request comments to flag violations](#enable-code-analysis-pr-comments-for-your-repositories): During code reviews on GitHub, Datadog can automatically check for Static Analysis violations in pull requests for repositories that have at least one ruleset applied. Violations are flagged with an inline review comment on the relevant line(s) of code, along with suggested fixes (when applicable) that can be applied directly in the pull request. This is only available for Static Analysis (SAST).
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Analysis comment on a pull request" style="width:90%;" >}}
 
-- [Open a pull request to fix an issue directly from Datadog][8]: From the Datadog UI, you can create a pull request to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Analysis (SAST).
+- [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Analysis (SAST).
 {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}
 
 See setup instructions below to on how to enable these features, as well as ensure you have the required GitHub permissions to do so.
