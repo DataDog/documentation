@@ -32,19 +32,16 @@ This page describes the standard Postgres Agent integration. If you are looking 
 
 The PostgreSQL check is packaged with the Agent. To start gathering your PostgreSQL metrics and logs, [install the Agent][2].
 
-### Configuration
-
-**Note**: To install Database Monitoring for PostgreSQL, select your hosting solution in the [Database Monitoring documentation][29] for instructions.
-
-Proceed with the following steps in this guide only if you are installing the standard integration alone.
-
+<!-- kubernetes -->
 {% if equals($agent_host, "kubernetes") %}
 
+<!-- kubernetes > Agent version 5 -->
 {% if equals($agent_version, "5_x_x") %}
 ### Running Agent v5 on Kubernetes
 
 This isn't a real section, it's here to test the dynamic TOC.
 {% /if %}
+<!-- kubernetes > Agent version 6 -->
 {% if equals($agent_version, "6_x_x") %}
 ### Running Agent v6 on Kubernetes
 
@@ -52,6 +49,12 @@ This isn't a real section, it's here to test the dynamic TOC.
 {% /if %}
 
 {% /if %}
+
+### Configuration
+
+**Note**: To install Database Monitoring for PostgreSQL, select your hosting solution in the [Database Monitoring documentation][29] for instructions.
+
+Proceed with the following steps in this guide only if you are installing the standard integration alone.
 
 #### Prepare Postgres
 
