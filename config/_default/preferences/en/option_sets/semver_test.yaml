@@ -1,0 +1,10 @@
+first_test_version_options:
+  - id: "<=1.8.x"
+    display_name: "<=1.8.x"
+    default: true
+  - id: 1.9.x
+    display_name: 1.9.x
+  - id: 2.x.x
+    display_name: 2.x.x
+  - id: ">=3.x.x"
+    display_name: "=>3.x.x"
