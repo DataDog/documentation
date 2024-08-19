@@ -72,7 +72,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 ### Fixing a vulnerability directly from Datadog 
 
-If the **Pull Requests** permission for your GitHub app is set to **Read & Write**, one-click remediation will be available for all Static Analysis findings where a suggested fix is available.
+If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Analysis findings with an available suggested fix.
 
 To fix a vulnerability by opening a pull request:
 1. View a specific result in Code Analysis.
