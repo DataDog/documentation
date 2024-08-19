@@ -87,7 +87,7 @@ Click on a violation to open a side panel that contains information about the sc
 The content of the violation is shown in tabs:
 
 - **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
-- **Fixes**: One or more code fixes that can resolve the violation, which you can copy and paste.
+- **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the Static Analysis violation event.
 
 ### Using suggested fixes
@@ -107,6 +107,24 @@ The two types of fixes are distinguished visually in the UI with different label
 
 *AI Suggested Fixes:*
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
+
+### Fixing a vulnerability or quality issue directly from Datadog
+{{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}
+
+You can push a code change to fix an issue found by Code Analysis directly from a result in Datadog in two ways.
+
+#### Opening a pull request 
+If the **Pull Requests** permission for your GitHub app is set to **Read & Write**, one-click remediation will be available for all Static Analysis findings where a suggested fix is available.
+
+To fix a vulnerability by opening a pull request:
+1. View a specific result in Code Analysis.
+2. Click **Fix Violation** in the side panel of the result. 
+3. Select **Open a Pull Request**.
+4. Enter a pull request title and commit message.
+5. Click **Create PR**.
+
+#### Committing directly to the current branch
+You can also fix a vulnerability by committing directly to the branch the result was found on. 
 
 ### Customizing your configuration
 
