@@ -1,20 +1,6 @@
 ---
-title: Postgres Integration Setup
-page_preferences:
-  - id: postgres_version
-    options_source: postgres_integration_version_options
-    display_name: "Postgres version"
-  - id: agent_version
-    options_source: major_agent_version_options
-    display_name: "Agent version"
-  - id: agent_host
-    options_source: postgres_integration_host_options
-    display_name: "Agent host"
+title: Postgres Integration Setup (CONTROL)
 ---
-
-{% alert %}
-This is a test page. For comparison, see [the vanilla Markdown version][32].
-{% /alert %}
 
 ## Overview
 
@@ -24,9 +10,7 @@ Enable [Database Monitoring][28] (DBM) for enhanced insights into query performa
 
 ## Setup
 
-{% alert %}
-This page describes the standard Postgres Agent integration. If you are looking for the Database Monitoring product for Postgres, see [Datadog Database Monitoring][31].
-{% /alert %}
+<div class="alert alert-info">This page describes the standard Postgres Agent integration. If you are looking for the Database Monitoring product for Postgres, see <a href="https://docs.datadoghq.com/database_monitoring">Datadog Database Monitoring</a>.</div>
 
 ### Installation
 
@@ -42,8 +26,7 @@ Proceed with the following steps in this guide only if you are installing the st
 
 To get started with the standard PostgreSQL integration, create a read-only `datadog` user with proper access to your PostgreSQL server. Start `psql` on your PostgreSQL database.
 
-<!-- postgres_version 10+ -->
-{% if equals($postgres_version, "gte_10") %}
+
 For PostgreSQL version 10 and above, run:
 
 ```shell
@@ -51,17 +34,13 @@ create user datadog with password '<PASSWORD>';
 grant pg_monitor to datadog;
 grant SELECT ON pg_stat_database to datadog;
 ```
-{% /if %}
 
-<!-- postgres_version 9.6 and below -->
-{% if equals($postgres_version, "lte_9_6") %}
 For PostgreSQL versions below 10, run:
 
 ```shell
 create user datadog with password '<PASSWORD>';
 grant SELECT ON pg_stat_database to datadog;
 ```
-{% /if %}
 
 To verify the permissions are correct, run the following command:
 
@@ -74,8 +53,6 @@ psql -h localhost -U datadog postgres -c \
 
 When it prompts for a password, enter the one used in the first command.
 
-<!-- postgres_version 9.6 and below -->
-{% if equals($postgres_version, "lte_9_6") %}
 For PostgreSQL versions 9.6 and below, run the following and create a `SECURITY DEFINER` to read from `pg_stat_activity`.
 
 ```shell
@@ -86,12 +63,9 @@ LANGUAGE sql VOLATILE SECURITY DEFINER;
 CREATE VIEW pg_stat_activity_dd AS SELECT * FROM pg_stat_activity();
 grant SELECT ON pg_stat_activity_dd to datadog;
 ```
-{% /if %}
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. Check the [FAQ section][30] for more information.
 
-<!-- self-hosted -->
-{% if equals($agent_host, "self_hosted") %}
 #### Host
 
 To configure this check for an Agent running on a host:
@@ -194,15 +168,8 @@ Datadog APM integrates with Postgres to see the traces across your distributed s
 
 ##### Log collection
 
-<!-- self-hosted > Agent version 5 -->
-{% if equals($agent_version, "5") %}
-{% alert level="warning" %}
-PostgreSQL logs are not available for Agent versions <6.0. Upgrade to a newer Agent version to collect logs.
-{% /alert %}
-{% /if %}
+<div class="alert alert-info">PostgreSQL logs are not available for Agent versions &lt;6.0. Upgrade to a newer Agent version to collect logs.</div>
 
-<!-- self-hosted > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
 PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. See the PostgreSQL documentation on[Error Reporting and Logging][7] for more information.
 
 1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
@@ -257,11 +224,6 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
       Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][3] for all available configuration options.
 
 5. [Restart the Agent][4].
-{% /if %}
-{% /if %}
-
-<!-- Docker -->
-{% if equals($agent_host, "docker") %}
 
 #### Docker
 
@@ -289,15 +251,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"postgresql","service":"postgresql"}]'
 
 ##### Trace collection
 
-<!-- Docker > Agent version 5 -->
-{% if equals($agent_version, "5") %}
-{% alert level="warning" %}
-Trace collection for containerized apps is not available for Agent versions <6.0. Upgrade to a newer Agent version to collect traces.
-{% /alert %}
-{% /if %}
+<div class="alert alert-info">Trace collection for containerized apps is not available for Agent versions &lt;6.0. Upgrade to a newer Agent version to collect traces.</div>
 
-<!-- Docker > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
 APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
 
 Required environment variables on the Agent container:
@@ -311,12 +266,6 @@ Required environment variables on the Agent container:
 See [Tracing Docker Applications][12] for a complete list of available environment variables and configuration.
 
 Then, [instrument your application container that makes requests to Postgres][11] and set `DD_AGENT_HOST` to the name of your Agent container.
-{% /if %}
-{% /if %}
-
-
-<!-- Kubernetes -->
-{% if equals($agent_host, "kubernetes") %}
 
 #### Kubernetes
 
@@ -349,8 +298,7 @@ spec:
   containers:
     - name: postgres
 ```
-<!-- Kubernetes > Agent version 7 -->
-{% if equals($agent_version, "7") %}
+
 **Annotations v2** (for Datadog Agent v7.36+)
 
 ```yaml
@@ -377,7 +325,6 @@ spec:
   containers:
     - name: postgres
 ```
-{% /if %}
 
 ##### Log collection
 
@@ -401,15 +348,8 @@ spec:
 
 ##### Trace collection
 
-<!-- Kubernetes > Agent version 5 -->
-{% if equals($agent_version, "5") %}
-{% alert level="warning" %}
-Trace collection for containerized apps is not supported for Agent versions <6.0. Upgrade to a newer Agent version to collect traces.
-{% /alert %}
-{% /if %}
+<div class="alert alert-info">Trace collection for containerized apps is not supported for Agent versions &lt;6.0. Upgrade to a newer Agent version to collect traces.</div>
 
-<!-- Kubernetes > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
 APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
 
 Required environment variables on the Agent container:
@@ -423,11 +363,7 @@ Required environment variables on the Agent container:
 See [Tracing Kubernetes Applications][17] and the [Kubernetes DaemonSet Setup][18] for a complete list of available environment variables and configuration.
 
 Then, [instrument your application container that makes requests to Postgres][11].
-{% /if %}
-{% /if %}
 
-<!-- ecs -->
-{% if equals($agent_host, "ecs") %}
 #### ECS
 
 To configure this check for an Agent running on ECS:
@@ -470,15 +406,8 @@ Then, set [Log Integrations][11] as Docker labels:
 
 ##### Trace collection
 
-<!-- ECS > Agent version 5 -->
-{% if equals($agent_version, "5") %}
-{% alert level="warning" %}
-Trace collection for containerized apps is not available for Agent versions <6.0. Upgrade to a newer Agent version to collect traces.
-{% /alert %}
-{% /if %}
+<div class="alert alert-info">Trace collection for containerized apps is not available for Agent versions &lt;6.0. Upgrade to a newer Agent version to collect traces.</div>
 
-<!-- ECS > Agent version 6+ -->
-{% if not(equals($agent_version, "5")) %}
 APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
 
 Required environment variables on the Agent container:
@@ -492,9 +421,6 @@ Required environment variables on the Agent container:
 See [Tracing Docker Applications][27] for a complete list of available environment variables and configuration.
 
 Then, [instrument your application container that makes requests to Postgres][11] and set `DD_AGENT_HOST` to the [EC2 private IP address][17].
-
-{% /if %}
-{% /if %}
 
 ### Validation
 
@@ -527,4 +453,3 @@ Then, [instrument your application container that makes requests to Postgres][11
 [29]: https://docs.datadoghq.com/database_monitoring/#postgres
 [30]: https://docs.datadoghq.com/integrations/postgres/?tab=host#faq
 [31]: https://docs.datadoghq.com/database_monitoring
-[32]: /markdoc_testing/demo_pages/postgres_integration_setup_control
