@@ -142,7 +142,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | Field   | Type   | Description  |
 |---------|--------|--------------|
 | value   | string | Input or output value. If not set, this value is inferred from messages or documents. |
-| messages| [[Message](#message)] | List of messages. This should only be used for LLM spans. |
+| messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
 | documents| [[Document](#document)] | List of documents. This should only be used as the output for retrieval spans |
 
 #### Message
