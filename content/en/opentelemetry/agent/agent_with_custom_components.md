@@ -33,7 +33,7 @@ Download the Dockerfile template:
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/agent-ot/Dockerfile.byoc 
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/agent-ot/Dockerfile.agent-otel 
    ```
 
 The Dockerfile:
