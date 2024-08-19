@@ -37,7 +37,7 @@ network_devices:
     enabled: true
     listeners:
       - flow_type: netflow9   # choices: netflow5, netflow9, ipfix, sflow5
-        port: 2055            # devices must send traffic to this port
+        port: 2055            # devices need to be configured to the same port number
       - flow_type: netflow5
         port: 2056
       - flow_type: ipfix
