@@ -83,6 +83,12 @@ To fix a vulnerability by opening a pull request:
 
 You can also fix a vulnerability by committing directly to the branch the result was found on. 
 
+To commit a suggested fix:
+
+1. View a specific result in Code Analysis.
+2. Click **Fix Violation** in the side panel of the result.
+3. Click **Commit to current branch**.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
