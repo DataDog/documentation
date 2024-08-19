@@ -44,51 +44,6 @@ Software Composition Analysis
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-After you have configured Code Analysis, you can see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories on the [**Code Analysis** page][9]. The summarized results are always for the latest scanned commit on the default branch of each repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
-
-{{< img src="code_analysis/repositories.png" alt="A list of repositories with code and library scan results on the Code Analysis page" style="width:100%;">}}
-
-Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. 
-
-Regardless of the selected branch or commit, all results are organized into the following views:
-
-{{< tabs >}}
-{{% tab "Code Vulnerabilities" %}}
-
-{{< img src="code_analysis/shopist_code_vulnerabilities.png" alt="Code vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
-
-Identify and address code security risks detected by Static Analysis in the **Code Vulnerabilities** view.
-
-{{% /tab %}}
-{{% tab "Code Quality" %}}
-
-{{< img src="code_analysis/shopist_code_quality.png" alt="Code quality vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
-
-Identify and address poor coding practices detected by Static Analysis in the **Code Quality** view.
-
-{{% /tab %}}
-{{% tab "Library Vulnerabilities" %}}
-
-{{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Library vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
-
-Identify and address vulnerable open source libraries detected by SCA in the **Library Vulnerabilities** view.
-
-{{% /tab %}}
-{{% tab "Library List" %}}
-
-{{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
-
-Manage the full list of libraries detected by SCA that have imported into your codebase in the **Library List** view.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Integrations
-
-With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write [directly in an IDE][11] such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
-
-{{< img src="developers/ide_plugins/vscode/static-analysis-issue.png" alt="A Static Analysis result in Visual Studio Code" style="width:100%;">}}
-
 ## Set up Code Analysis on your repository
 
 Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and choose to run the scans directly in Datadog or in your CI pipelines.
@@ -142,6 +97,53 @@ You can configure a GitHub App by using the [GitHub integration tile][7] and set
 {{< img src="code_analysis/source_code_integration.png" alt="Link to GitHub from the Code Analysis view" style="width:100%;">}}
 
 For more information, see the [Source Code Integration documentation][10].
+
+## Static Analysis integrations
+
+With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write [directly in an IDE][11] such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
+
+{{< img src="developers/ide_plugins/vscode/static-analysis-issue.png" alt="A Static Analysis result in Visual Studio Code" style="width:100%;">}}
+
+## Search and manage repositories
+
+After you have configured Code Analysis, you can see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories on the [**Code Analysis** page][9]. The summarized results are always for the latest scanned commit on the default branch of each repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
+
+{{< img src="code_analysis/repositories.png" alt="A list of repositories with code and library scan results on the Code Analysis page" style="width:100%;">}}
+
+Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. 
+
+Regardless of the selected branch or commit, all results are organized into the following views:
+
+{{< tabs >}}
+{{% tab "Code Vulnerabilities" %}}
+
+{{< img src="code_analysis/shopist_code_vulnerabilities.png" alt="Code vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+Identify and address code security risks detected by Static Analysis in the **Code Vulnerabilities** view.
+
+{{% /tab %}}
+{{% tab "Code Quality" %}}
+
+{{< img src="code_analysis/shopist_code_quality.png" alt="Code quality vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+Identify and address poor coding practices detected by Static Analysis in the **Code Quality** view.
+
+{{% /tab %}}
+{{% tab "Library Vulnerabilities" %}}
+
+{{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Library vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+Identify and address vulnerable open source libraries detected by SCA in the **Library Vulnerabilities** view.
+
+{{% /tab %}}
+{{% tab "Library List" %}}
+
+{{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+Manage the full list of libraries detected by SCA that have imported into your codebase in the **Library List** view.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

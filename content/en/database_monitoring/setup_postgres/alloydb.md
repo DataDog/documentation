@@ -102,6 +102,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -140,7 +143,7 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        host: '<INSTANCE_ADDRESS>'
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
@@ -199,7 +202,7 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 See the [Postgres integration spec][2] for additional information on setting `project_id` and `instance_id` fields.
@@ -235,7 +238,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             host: <INSTANCE_ADDRESS>
             port: 5432
             username: datadog
-            password: '<UNIQUE_PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             gcp:
               project_id: '<PROJECT_ID>'
               instance_id: '<INSTANCE_ID>'
@@ -276,7 +279,7 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
@@ -305,7 +308,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
