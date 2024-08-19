@@ -196,6 +196,7 @@ To associate the application repository Git information with the Argo CD deploym
     ...
     git commit
     # Correlate the deployment with the CI pipeline
+    export DD_BETA_COMMANDS_ENABLED=1
     datadog-ci deployment correlate --provider argocd
     git push
 ```
