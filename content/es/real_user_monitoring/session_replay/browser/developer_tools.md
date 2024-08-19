@@ -7,7 +7,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser
   tag: Documentación
   text: Session Replay de navegador
-title: Herramientas de desarrollo del navegador Session Replay
+title: Herramientas de desarrollo de navegador en Session Replay
 ---
 
 ## Información general
@@ -16,7 +16,7 @@ Las herramientas de desarrollo de navegador de Session Replay son herramientas d
 
 ## Herramientas de desarrollo de navegador
 
-Para acceder a las herramientas de desarrollo de navegador, haz clic en el botón **Saltar a la reproducción** a la izquierda de una sesión, en la pestaña **Sesiones**, o haz clic en una sesión y luego en **Reproducir sesión** en la esquina superior derecha del [Explorador RUM[1]. 
+Para acceder a las herramientas de desarrollo de navegador, haz clic en el botón **Ir a la repetición** a la izquierda de una sesión, en la pestaña **Sesiones**, o haz clic en una sesión y luego en **Repetir sesión** en la esquina superior derecha del [Explorador RUM[1]. 
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-1.png" alt="Botón Herramientas de desarrollo" style="width:80%;">}}
 
@@ -24,7 +24,7 @@ El botón **Herramientas de desarrollo** aparece a la derecha del botón **Compa
 
 ### Rendimiento
 
-La pestaña **Rendimiento** muestra una cascada de eventos (como acciones, errores, recursos y tareas prolongadas) y marcas de tiempo de una sesión.
+En la pestaña **Rendimiento** se muestra una cascada de eventos (como acciones, errores, recursos y tareas prolongadas) y marcas de tiempo de una sesión.
 
 Selecciona y aplica los filtros **Red**, **Eventos** y **Tiempos** para cambiar el contexto de los recursos y tipos de evento mostrados. También puedes arrastrar y soltar los controles deslizantes de la cascada para ampliar el intervalo de tiempo.  
 
@@ -32,7 +32,7 @@ Selecciona y aplica los filtros **Red**, **Eventos** y **Tiempos** para cambiar 
 
 ### Consola
 
-La pestaña **Consola** muestra todos los [logs recopilados del navegador web][2] y los errores de cada vista.
+En la pestaña **Consola** se muestran todos los [logs recopilados del navegador web][2] y los errores de cada vista.
 
 Haz clic en **Error**, **Advertencia**, **Información** y **Depurar** para filtrar tus logs en función de la gravedad. Para buscar estos logs en el [Explorador de logs][3], haz clic en **Ver en el Explorador de logs**.
 
