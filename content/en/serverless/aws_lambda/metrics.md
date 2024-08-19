@@ -79,6 +79,45 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 `aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
 
+`aws.lambda.enhanced.cpu_total_utilization`
+: Measures the total CPU utilization of the function as a number of cores.
+
+`aws.lambda.enhanced.cpu_total_utilization_pct`
+: Measures the total CPU utilization of the function as a percent.
+
+`aws.lambda.enhanced.cpu_max_utilization`
+: Measures the CPU utilization on the most utilized core.
+
+`aws.lambda.enhanced.cpu_min_utilization`
+: Measures the CPU utilization on the least utilized core.
+
+`aws.lambda.enhanced.cpu_system_time`
+: Measures the amount of time the CPU spent running in kernel mode.
+
+`aws.lambda.enhanced.cpu_user_time`
+: Measures the amount of time the CPU spent running in user mode.
+
+`aws.lambda.enhanced.cpu_total_time`
+: Measures the total amount of time the CPU spent running.
+
+`aws.lambda.enhanced.num_cores`
+: Measures the number of cores available.
+
+`aws.lambda.enhanced.rx_bytes`
+: Measures the bytes received by the function.
+
+`aws.lambda.enhanced.tx_bytes`
+: Measures the bytes sent by the function.
+
+`aws.lambda.enhanced.total_network`
+: Measures the bytes sent and received by the function.
+
+`aws.lambda.enhanced.tmp_max`
+: Measures the total available space in the /tmp directory.
+
+`aws.lambda.enhanced.tmp_used`
+: Measures the space used in the /tmp directory.
+
 [6]: /integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
 [8]: /metrics/distributions/
