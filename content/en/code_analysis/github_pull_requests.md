@@ -70,16 +70,18 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 **Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
 
-### Fixing a vulnerability by opening a pull request directly from Datadog 
+### Fixing a vulnerability directly from Datadog 
 
 If the **Pull Requests** permission for your GitHub app is set to **Read & Write**, one-click remediation will be available for all Static Analysis findings where a suggested fix is available.
 
 To fix a vulnerability by opening a pull request:
-1. View a specific finding in Code Analysis.
-2. Click **Fix Violation** in the side panel of the finding. 
+1. View a specific result in Code Analysis.
+2. Click **Fix Violation** in the side panel of the result. 
 3. Select **Open a Pull Request**.
 4. Enter a pull request title and commit message.
 5. Click **Create PR**.
+
+You can also fix a vulnerability by committing directly to the branch the result was found on. 
 
 ## Further Reading
 
@@ -92,4 +94,4 @@ To fix a vulnerability by opening a pull request:
 [5]: https://app.datadoghq.com/integrations/github/configuration
 [6]: /code_analysis/static_analysis/github_actions/
 [7]: /code_analysis/github_pull_requests#enable-code-analysis-pr-comments-for-your-repositories
-[7]: /code_analysis/github_pull_requests#enable-one-click-remediation-for-your-repositories
+[7]: /code_analysis/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
