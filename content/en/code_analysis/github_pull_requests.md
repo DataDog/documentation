@@ -94,4 +94,4 @@ You can also fix a vulnerability by committing directly to the branch the result
 [5]: https://app.datadoghq.com/integrations/github/configuration
 [6]: /code_analysis/static_analysis/github_actions/
 [7]: /code_analysis/github_pull_requests#enable-code-analysis-pr-comments-for-your-repositories
-[7]: /code_analysis/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
+[8]: /code_analysis/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
