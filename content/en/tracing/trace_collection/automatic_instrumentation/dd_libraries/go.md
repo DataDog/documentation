@@ -68,7 +68,7 @@ For configuration instructions and details about using the API, see the Datadog 
     <p class="card-text">
       Orchestrion is under active development, and Datadog is eager to hear from you. Request access if you are interested and would like to share your experience.
     </p>
-    <a href="https://docs.google.com/forms/d/1J0AE1m--DEY-IRMWkH7dZDJPQqyo93tK4l9oCdpBHps/viewform?edit_requested=true"
+    <a href="https://www.datadoghq.com/private-beta/compile-time-auto-instrumentation-for-go-lang-datadog-orchestrion/"
       target="_blank"
       class="btn btn-outline-primary pb-1 align-self-end d-flex flex-column justify-content-center"
     >
