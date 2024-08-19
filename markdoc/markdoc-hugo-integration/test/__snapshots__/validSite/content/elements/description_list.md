@@ -2,7 +2,7 @@
 title: Description List
 ---
 <div id="markdoc-content"><article>
-  <h2>Example</h2>
+  <h2 id="example">Example</h2>
   <dl>
     <dt>Service</dt>
     <dd>

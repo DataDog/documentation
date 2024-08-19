@@ -1,5 +1,5 @@
 {
-  "title": "The Primary Colors of the Color Wheel",
+  "title": "Primary Colors",
   "page_preferences": [
     {
       "display_name": "Color",
@@ -11,5 +11,8 @@
       "id": "item",
       "options_source": "<COLOR>_item_options"
     }
+  ],
+  "aliases": [
+    "/primary_colors_alias/"
   ]
 }

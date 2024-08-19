@@ -2,7 +2,9 @@
 title: Table
 ---
 <div id="markdoc-content"><article>
-  <h2>Markdown table (CommonMark table)</h2>
+  <h2 id="markdown-table-commonmark-table">
+    Markdown table (CommonMark table)
+  </h2>
   <table>
     <thead>
       <tr>
@@ -29,12 +31,12 @@ title: Table
       </tr>
     </tbody>
   </table>
-  <h2>Markdoc table</h2>
+  <h2 id="markdoc-table">Markdoc table</h2>
   <p>
     Use Markdoc tables to create more complex tables with code blocks, bulleted
     lists, cells spanning multiple rows and columns, and other elements.
   </p>
-  <h3>Simple example</h3>
+  <h3 id="simple-example">Simple example</h3>
   <p>
     You wouldn't really need to use a Markdoc table for simple content like
     this, but it gives an idea of how the entries map to rows and columns.
@@ -60,7 +62,7 @@ title: Table
       </tr>
     </tbody>
   </table>
-  <h3>Complex example</h3>
+  <h3 id="complex-example">Complex example</h3>
   <table>
     <thead>
       <tr>
@@ -124,7 +126,7 @@ title: Table
       </tr>
     </tbody>
   </table>
-  <h2>Indented tables</h2>
+  <h2 id="indented-tables">Indented tables</h2>
   <ol>
     <li>This is item one.</li>
     <li>

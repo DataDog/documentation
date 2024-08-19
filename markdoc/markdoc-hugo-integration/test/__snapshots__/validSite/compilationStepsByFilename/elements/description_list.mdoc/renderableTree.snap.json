@@ -6,7 +6,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "example"
+      },
       "children": [
         "Example"
       ]

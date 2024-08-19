@@ -6,7 +6,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "usage"
+      },
       "children": [
         "Usage"
       ]
@@ -46,7 +48,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "types"
+      },
       "children": [
         "Types"
       ]
@@ -54,7 +58,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h3",
-      "attributes": {},
+      "attributes": {
+        "id": "info"
+      },
       "children": [
         "Info"
       ]
@@ -79,7 +85,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h3",
-      "attributes": {},
+      "attributes": {
+        "id": "warning"
+      },
       "children": [
         "Warning"
       ]
@@ -104,7 +112,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h3",
-      "attributes": {},
+      "attributes": {
+        "id": "danger"
+      },
       "children": [
         "Danger"
       ]
@@ -129,7 +139,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "advanced-example"
+      },
       "children": [
         "Advanced example"
       ]

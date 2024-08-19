@@ -6,7 +6,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "markdown-table-commonmark-table"
+      },
       "children": [
         "Markdown table (CommonMark table)"
       ]
@@ -194,7 +196,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "markdoc-table"
+      },
       "children": [
         "Markdoc table"
       ]
@@ -210,7 +214,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h3",
-      "attributes": {},
+      "attributes": {
+        "id": "simple-example"
+      },
       "children": [
         "Simple example"
       ]
@@ -340,7 +346,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h3",
-      "attributes": {},
+      "attributes": {
+        "id": "complex-example"
+      },
       "children": [
         "Complex example"
       ]
@@ -563,7 +571,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "indented-tables"
+      },
       "children": [
         "Indented tables"
       ]

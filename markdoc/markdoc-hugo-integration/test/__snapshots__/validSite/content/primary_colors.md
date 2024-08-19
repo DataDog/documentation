@@ -1,43 +1,91 @@
 ---
-title: The Primary Colors of the Color Wheel
+title: Primary Colors
+aliases:
+  - /primary_colors_alias/
 ---
 
 <div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Item</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="ocean">Ocean</div><div class="markdoc-pref__pill selected" data-pref-id="item" data-option-id="sky">Sky</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="jeans">Jeans</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div>
 <div id="markdoc-content" class="customizable"><article>
+  <div class="alert alert-warning">
+    <p>Warning: This is just a test page. It's not real.</p>
+  </div>
   <p>
     This test page explores everyday items that are blue, yellow, or red --
     which also happen to be the primary colors of the color wheel. If this seems
     contrived and odd, that's only because test pages are often both of those
     things.
   </p>
-  <h2>sky: Your blue item of choice</h2>
   <div class="markdoc__toggleable" data-if="7">
+    <h2 id="blue-header-id-override">Blue</h2>
+    <p>
+      Blue is a calming and serene color that is often associated with
+      tranquility, stability, and trust.
+    </p>
     <div class="markdoc__toggleable markdoc__hidden" data-if="3">
+      <h3 id="ocean">Ocean</h3>
       <p>
-        The ocean is a large body of saltwater. It covers about 70% of the
-        Earth's surface.
+        The ocean is a vast and expansive body of saltwater that covers
+        approximately 70% of the Earth's surface. It plays a crucial role in
+        regulating the planet's climate and weather patterns, as well as
+        supporting a diverse array of marine life.
+      </p>
+      <p>
+        The ocean is a source of food, recreation, and transportation for
+        humans, and its depths remain largely unexplored, holding many mysteries
+        and wonders. The sight and sound of the ocean waves can evoke a sense of
+        calm and tranquility, making it a popular destination for relaxation and
+        reflection.
       </p>
     </div>
     <div class="markdoc__toggleable" data-if="4">
+      <h3 id="sky">Sky</h3>
       <p>
-        The sky is the atmosphere as seen from the Earth's surface. It appears
-        blue during the day.
+        The sky is the expanse of atmosphere that we see when we look up from
+        the Earth's surface. During the day, it appears blue due to the
+        scattering of sunlight by the molecules in the air, a phenomenon known
+        as Rayleigh scattering.
+      </p>
+      <p>
+        The sky changes color at sunrise and sunset, displaying beautiful hues
+        of red, orange, and pink. It is home to various weather phenomena,
+        including clouds, rainbows, and storms, and serves as the backdrop for
+        celestial bodies like the sun, moon, and stars. The sky's vastness and
+        ever-changing nature inspire a sense of wonder and curiosity.
       </p>
     </div>
     <div class="markdoc__toggleable markdoc__hidden" data-if="5">
+      <h3 id="jeans">Jeans</h3>
       <p>
-        Jeans are a type of clothing. They're often made from denim and are
-        known for their durability.
+        Jeans are a type of durable clothing typically made from denim fabric.
+        They are known for their versatility and comfort, making them a staple
+        in wardrobes around the world.
+      </p>
+      <p>
+        Originally designed as workwear for miners and laborers in the 19th
+        century, jeans have evolved into a fashion icon, available in various
+        styles, cuts, and colors. They can be dressed up or down, suitable for
+        casual outings or more formal occasions. The durability and timeless
+        appeal of jeans have made them a beloved garment for people of all ages.
       </p>
     </div>
     <div class="markdoc__toggleable markdoc__hidden" data-if="6">
+      <h3 id="blueberry">Blueberry</h3>
       <p>
-        Blueberries are a type of fruit. They're often eaten raw or used in
-        baking.
+        Blueberries are small, round fruits that are known for their sweet and
+        slightly tart flavor. They are rich in antioxidants, vitamins, and
+        fiber, making them a nutritious addition to any diet. Blueberries can be
+        eaten fresh, added to cereals and yogurt, or used in baking to make
+        delicious treats like muffins and pies.
+      </p>
+      <p>
+        Blueberries are also popular in smoothies and jams. The vibrant blue
+        color of blueberries adds a visual appeal to dishes, and their health
+        benefits make them a favorite among health-conscious individuals.
       </p>
     </div>
   </div>
   <div class="markdoc__toggleable markdoc__hidden" data-if="8">
+    <h2 id="yellow">Yellow</h2>
     <div class="markdoc__toggleable markdoc__hidden" data-if="10">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
@@ -63,6 +111,7 @@ title: The Primary Colors of the Color Wheel
     </div>
   </div>
   <div class="markdoc__toggleable markdoc__hidden" data-if="9">
+    <h2 id="red">Red</h2>
     <div class="markdoc__toggleable markdoc__hidden" data-if="14">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.

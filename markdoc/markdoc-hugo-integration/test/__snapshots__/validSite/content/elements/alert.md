@@ -2,7 +2,7 @@
 title: Alert
 ---
 <div id="markdoc-content"><article>
-  <h2>Usage</h2>
+  <h2 id="usage">Usage</h2>
   <ul>
     <li>
       You can use Markdown and Markdoc tags inside of the
@@ -15,14 +15,14 @@ title: Alert
       elements.
     </li>
   </ul>
-  <h2>Types</h2>
-  <h3>Info</h3>
+  <h2 id="types">Types</h2>
+  <h3 id="info">Info</h3>
   <div class="alert alert-info"><p>This is an info alert!</p></div>
-  <h3>Warning</h3>
+  <h3 id="warning">Warning</h3>
   <div class="alert alert-warning"><p>This is a warning alert!</p></div>
-  <h3>Danger</h3>
+  <h3 id="danger">Danger</h3>
   <div class="alert alert-danger"><p>This is a danger alert!</p></div>
-  <h2>Advanced example</h2>
+  <h2 id="advanced-example">Advanced example</h2>
   <div class="alert alert-info">
     <p>
       The contents of the <code>alert</code> tag are written in Markdoc, not

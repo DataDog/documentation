@@ -6,7 +6,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "body-copy"
+      },
       "children": [
         "Body copy"
       ]
@@ -31,7 +33,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "code"
+      },
       "children": [
         "Code"
       ]

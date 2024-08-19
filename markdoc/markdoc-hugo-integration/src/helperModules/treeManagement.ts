@@ -13,10 +13,13 @@ import { ParsedFile } from './FileParser';
 import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode,
-  ClientFunctionSchema
+  ClientFunctionSchema,
+  Tag
 } from 'markdoc-static-compiler';
 import { MinifiedClientFunction, minifyClientFunction } from './dataCompression';
 import { transformConfig } from '../markdocConfig';
+import { anchorize } from './stringProcessing';
+import render from 'markdoc-static-compiler/dist/src/renderers/html';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -67,12 +70,14 @@ export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   prefOptionsConfig: PrefOptionsConfig;
   defaultValsByPrefId: Record<string, string>;
-}): RenderableTreeNode {
+}): Readonly<RenderableTreeNode> {
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: p.defaultValsByPrefId,
     partials: p.parsedFile.partials,
     ...transformConfig
   });
+
+  addHeaderAnchorstoTree(renderableTree);
 
   // ensure that all variable ids appearing
   // in the renderable tree are valid page pref ids
@@ -87,6 +92,24 @@ export function buildRenderableTree(p: {
   }
 
   return renderableTree;
+}
+
+function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
+  const headerTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
+  if (!node) return;
+  if (typeof node !== 'object') return;
+
+  if ('name' in node && headerTags.includes(node.name as string)) {
+    node = node as Tag;
+    if (node.attributes !== null && node.children !== null) {
+      node.attributes.id = node.attributes.id || anchorize(node.children[0] as string);
+    }
+  }
+
+  if ('children' in node && Array.isArray(node.children)) {
+    node.children.forEach((child) => addHeaderAnchorstoTree(child));
+  }
 }
 
 /**

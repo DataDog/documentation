@@ -4,7 +4,7 @@ title: Code Block
 
 <div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><hr /></div></div>
 <div id="markdoc-content" class="customizable"><article>
-  <h2>Usage</h2>
+  <h2 id="usage">Usage</h2>
   <ul>
     <li>
       Markdown tags are <strong>not</strong> supported in code blocks. Use only
@@ -12,7 +12,7 @@ title: Code Block
     </li>
     <li>The default language for code blocks is <code>text</code>.</li>
   </ul>
-  <h2>Simple example</h2>
+  <h2 id="simple-example">Simple example</h2>
   <div class="code-snippet-wrapper">
     <div class="code-filename-wrapper d-flex justify-content-end collapsible">
       <div class="js-code-block-visibility-toggle">
@@ -39,7 +39,7 @@ title: Code Block
       </div>
     </div>
   </div>
-  <h3>Indented code blocks</h3>
+  <h3 id="indented-code-blocks">Indented code blocks</h3>
   <ol>
     <li>
       Item 1 includes some code:

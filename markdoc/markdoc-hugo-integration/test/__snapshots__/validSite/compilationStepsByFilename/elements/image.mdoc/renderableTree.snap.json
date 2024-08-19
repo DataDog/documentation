@@ -6,7 +6,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "image"
+      },
       "children": [
         "Image"
       ]
@@ -48,7 +50,9 @@
     {
       "$$mdtype": "Tag",
       "name": "h2",
-      "attributes": {},
+      "attributes": {
+        "id": "video"
+      },
       "children": [
         "Video"
       ]
