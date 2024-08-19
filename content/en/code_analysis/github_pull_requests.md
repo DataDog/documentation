@@ -14,17 +14,18 @@ further_reading:
 
 ## Overview
 
-Code Analysis can automatically flag violations in pull requests on GitHub. To configure the [GitHub integration][2] to include Code Analysis features, see [the setup instructions](#set-up-code-analysis-for-github-pull-requests).
-
-During code reviews on GitHub, the integration checks for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a review comment on the relevant line of code.
-
+Code Analysis integrates with GitHub pull requests in two ways:
+- [Pull request comments to flag violations][7]: During code reviews on GitHub, Datadog can automatically check for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with an in-line review comment on the relevant line(s) of code, along with suggested fixes (when applicable) that can be applied directly in the pull request. This is only available for Static Analysis (SAST).
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Analysis comment on a pull request" style="width:90%;" >}}
 
-The comment includes the name, ID, severity, category, and description of the Static Analysis violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
+- [Open a pull request to fix an issue directly from Datadog][8]: From the Datadog UI, you can create a pull request to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Analysis (SAST).
+{{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}
+
+See setup instructions below to on how to enable these features, as well as ensure you have the required GitHub permissions to do so.
 
 ## Set up Code Analysis for GitHub pull requests
 
-### Enable Code Analysis on Datadog
+### Enable Datadog Code Analysis
 
 To use Datadog Code Analysis, add the appropriate configuration files to your repository, as described in the [setup instructions][1].
 
@@ -69,6 +70,17 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 **Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
 
+### Fixing a vulnerability by opening a pull request directly from Datadog 
+
+If the **Pull Requests** permission for your GitHub app is set to **Read & Write**, one-click remediation will be available for all Static Analysis findings where a suggested fix is available.
+
+To fix a vulnerability by opening a pull request:
+1. View a specific finding in Code Analysis.
+2. Click **Fix Violation** in the side panel of the finding. 
+3. Select **Open a Pull Request**.
+4. Enter a pull request title and commit message.
+5. Click **Create PR**.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -79,3 +91,5 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
 [5]: https://app.datadoghq.com/integrations/github/configuration
 [6]: /code_analysis/static_analysis/github_actions/
+[7]: /code_analysis/github_pull_requests#enable-code-analysis-pr-comments-for-your-repositories
+[7]: /code_analysis/github_pull_requests#enable-one-click-remediation-for-your-repositories
