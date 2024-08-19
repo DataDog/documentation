@@ -14389,12 +14389,10 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
-          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14452,23 +14450,15 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
-          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
-          maxLength: 100
           type: string
-        opsgenie_api_key:
-          description: The OpsgenieServiceResponseAttributes opsgenie_api_key.
-          type: string
-          writeOnly: true
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
-      x-merge-override:
-        required: false
     OpsgenieServiceResponseData:
       description: Opsgenie service data from a response.
       properties:
@@ -14477,8 +14467,6 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
-          maxLength: 100
-          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14487,8 +14475,6 @@ components:
       - type
       - attributes
       type: object
-      x-merge-override:
-        required: false
     OpsgenieServiceType:
       default: opsgenie-service
       description: Opsgenie service resource type.
@@ -14504,13 +14490,11 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
-          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14519,8 +14503,6 @@ components:
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
-      x-merge-override:
-        required: false
     OpsgenieServiceUpdateData:
       description: Opsgenie service for an update request.
       properties:
@@ -14529,8 +14511,6 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
-          maxLength: 100
-          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14539,8 +14519,6 @@ components:
       - type
       - attributes
       type: object
-      x-merge-override:
-        required: false
     OpsgenieServiceUpdateRequest:
       description: Update request for an Opsgenie service.
       properties:
@@ -29514,9 +29492,6 @@ paths:
         - name: integration_service_id
           source: data.id
         type: unsafe
-    x-merge-override:
-      get: true
-      post: true
   /api/v2/integration/opsgenie/services/{integration_service_id}:
     delete:
       description: Delete a single service object in the Datadog Opsgenie integration.
@@ -29606,8 +29581,6 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
-      get: true
-      patch: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
