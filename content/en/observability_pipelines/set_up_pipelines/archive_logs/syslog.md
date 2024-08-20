@@ -300,9 +300,15 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker
+## Send logs to the Observability Pipelines Worker over Syslog
 
-{{% observability_pipelines/log_source_configuration/syslog%}}
+### rsyslog
+
+{{% observability_pipelines/log_source_configuration/rsyslog %}}
+
+### syslog-ng
+
+{{% observability_pipelines/log_source_configuration/syslog-ng %}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup
