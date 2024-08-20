@@ -122,6 +122,10 @@ dogstatsd:                        # DogStatsD configuration options
 
 There are also facilities to run the Agent with the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
+## Monitor Agent uptime
+
+You can use the metric `datadog.agent.running` to monitor the uptime of an Agent. The metric emits a value of `1` if the Agent is reporting to Datadog.
+
 ## Uninstall the Agent
 
 To remove an installed Agent, run the following `installp` command:
