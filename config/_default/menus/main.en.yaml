@@ -4285,242 +4285,242 @@ menu:
       identifier: observability_pipelines_set_up_pipelines
       weight: 1
     - name: Log Volume Control
-      url: observability_pipelines/log_volume_control/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_log_volume_control
       weight: 101
     - name: Datadog Agent
-      url: observability_pipelines/log_volume_control/datadog_agent/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/datadog_agent/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_datadog_agent
       weight: 1011
     - name: Fluent
-      url: observability_pipelines/log_volume_control/fluent/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/fluent/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_fluent
       weight: 1012
     - name: HTTP Client
-      url: observability_pipelines/log_volume_control/http_client/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/http_client/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_http_client
       weight: 1013
     - name: Splunk HTTP Event Collector
-      url: observability_pipelines/log_volume_control/splunk_hec/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/splunk_hec/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_hec
       weight: 1014
     - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/log_volume_control/splunk_tcp/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/splunk_tcp/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_tcp
       weight: 1015
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/sumo_logic_hosted_collector/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
       weight: 1016
     - name: Syslog
-      url: observability_pipelines/log_volume_control/syslog/
+      url: observability_pipelines/set_up_pipelines/log_volume_control/syslog/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_syslog
       weight: 1017
     - name: Dual Ship Logs
-      url: observability_pipelines/dual_ship_logs/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_dual_ship_logs
       weight: 102
     - name: Datadog Agent
-      url: observability_pipelines/dual_ship_logs/datadog_agent/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/datadog_agent/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_datadog_agent
       weight: 2011
     - name: Fluent
-      url: observability_pipelines/dual_ship_logs/fluent/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/fluent/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_fluent
       weight: 2012
     - name: HTTP Client
-      url: observability_pipelines/dual_ship_logs/http_client/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/http_client/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_http_client
       weight: 2013
     - name: Splunk HTTP Event Collector
-      url: observability_pipelines/dual_ship_logs/splunk_hec/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/splunk_hec/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_hec
       weight: 2014
     - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/dual_ship_logs/splunk_tcp/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/splunk_tcp/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_tcp
       weight: 2015
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
       weight: 2016
     - name: Syslog
-      url: observability_pipelines/dual_ship_logs/syslog/
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/syslog/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_syslog
       weight: 2017
     - name: Archive Logs
-      url: observability_pipelines/archive_logs/
+      url: observability_pipelines/set_up_pipelines/archive_logs/
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_archive_logs
       weight: 103
     - name: Datadog Agent
-      url: observability_pipelines/archive_logs/datadog_agent/
+      url: observability_pipelines/set_up_pipelines/archive_logs/datadog_agent/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_datadog_agent
       weight: 3011
     - name: Fluent
-      url: observability_pipelines/archive_logs/fluent/
+      url: observability_pipelines/set_up_pipelines/archive_logs/fluent/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_fluent
       weight: 3012
     - name: HTTP Client
-      url: observability_pipelines/archive_logs/http_client/
+      url: observability_pipelines/set_up_pipelines/archive_logs/http_client/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_http_client
       weight: 3013
     - name: Splunk HTTP Event Collector
-      url: observability_pipelines/archive_logs/splunk_hec/
+      url: observability_pipelines/set_up_pipelines/archive_logs/splunk_hec/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_splunk_hec
       weight: 3014
     - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/archive_logs/splunk_tcp/
+      url: observability_pipelines/set_up_pipelines/archive_logs/splunk_tcp/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_splunk_tcp
       weight: 3015
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/archive_logs/sumo_logic_hosted_collector/
+      url: observability_pipelines/set_up_pipelines/archive_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_sumo_logic_hosted_collector
       weight: 3016
     - name: Syslog
-      url: observability_pipelines/archive_logs/syslog/
+      url: observability_pipelines/set_up_pipelines/archive_logs/syslog/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_syslog
       weight: 3017
     - name: Split Logs
-      url: observability_pipelines/split_logs/
+      url: observability_pipelines/set_up_pipelines/split_logs/
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_split_logs
       weight: 104
     - name: Datadog Agent
-      url: observability_pipelines/split_logs/datadog_agent/
+      url: observability_pipelines/set_up_pipelines/split_logs/datadog_agent/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_datadog_agent
       weight: 4011
     - name: Fluent
-      url: observability_pipelines/split_logs/fluent/
+      url: observability_pipelines/set_up_pipelines/split_logs/fluent/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_fluent
       weight: 4012
     - name: HTTP Client
-      url: observability_pipelines/split_logs/http_client/
+      url: observability_pipelines/set_up_pipelines/split_logs/http_client/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_http_client
       weight: 4013
     - name: Splunk HTTP Event Collector
-      url: observability_pipelines/split_logs/splunk_hec/
+      url: observability_pipelines/set_up_pipelines/split_logs/splunk_hec/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_splunk_hec
       weight: 4014
     - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/split_logs/splunk_tcp/
+      url: observability_pipelines/set_up_pipelines/split_logs/splunk_tcp/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_splunk_tcp
       weight: 4015
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/split_logs/sumo_logic_hosted_collector/
+      url: observability_pipelines/set_up_pipelines/split_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_sumo_logic_hosted_collector
       weight: 4016
     - name: Syslog
-      url: observability_pipelines/split_logs/syslog/
+      url: observability_pipelines/set_up_pipelines/split_logs/syslog/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_syslog
       weight: 4017
     - name: Sensitive Data Redaction
-      url: observability_pipelines/sensitive_data_redaction/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_sensitive_data_redaction
       weight: 105
     - name: Datadog Agent
-      url: observability_pipelines/sensitive_data_redaction/datadog_agent/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/datadog_agent/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_datadog_agent
       weight: 5011
     - name: Fluent
-      url: observability_pipelines/sensitive_data_redaction/fluent/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/fluent/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_fluent
       weight: 5012
     - name: HTTP Client
-      url: observability_pipelines/sensitive_data_redaction/http_client/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/http_client/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_http_client
       weight: 5013
     - name: Splunk HTTP Event Collector
-      url: observability_pipelines/sensitive_data_redaction/splunk_hec/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/splunk_hec/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_splunk_hec
       weight: 5014
     - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/sensitive_data_redaction/splunk_tcp/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/splunk_tcp/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_splunk_tcp
       weight: 5015
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
       weight: 5016
     - name: Syslog
-      url: observability_pipelines/sensitive_data_redaction/syslog/
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/syslog/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_syslog
       weight: 5017
     - name: Log Enrichment
-      url: observability_pipelines/log_enrichment/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_log_enrichment
       weight: 106
     - name: Datadog Agent
-      url: observability_pipelines/log_enrichment/datadog_agent/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/datadog_agent/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_datadog_agent
       weight: 6011
     - name: Fluent
-      url: observability_pipelines/log_enrichment/fluent/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/fluent/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_fluent
       weight: 6012
     - name: HTTP Client
-      url: observability_pipelines/log_enrichment/http_client/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/http_client/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_http_client
       weight: 6013
     - name: Splunk HTTP Event Collector
-      url: observability_pipelines/log_enrichment/splunk_hec/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/splunk_hec/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_splunk_hec
       weight: 6014
     - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/log_enrichment/splunk_tcp/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/splunk_tcp/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_splunk_tcp
       weight: 6015
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/log_enrichment/sumo_logic_hosted_collector/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/sumo_logic_hosted_collector/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_sumo_logic_hosted_collector
       weight: 6016
     - name: Syslog
-      url: observability_pipelines/log_enrichment/syslog/
+      url: observability_pipelines/set_up_pipelines/log_enrichment/syslog/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_syslog
       weight: 6017
