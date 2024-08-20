@@ -47,13 +47,14 @@ The following table presents the list of collected features and the minimal Agen
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
-1. To enable GPU container cost allocation, install the Datadog DCGM integration.
+1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: /containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+[106]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -69,7 +70,7 @@ The following table presents the list of collected features and the minimal Agen
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. To enable GPU container cost allocation, install the Datadog DCGM integration.
+1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -89,7 +90,7 @@ The following table presents the list of collected features and the minimal Agen
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. To enable GPU container cost allocation, install the Datadog DCGM integration.
+1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -199,7 +200,7 @@ Use the `allocated_spend_type` tag to visualize the spend category associated wi
 
 ### Compute
 
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If there is GPU usage on the pod, the cost of the host instance is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 Costs are allocated into the following spend types:
 
