@@ -300,6 +300,8 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 {{% /tab %}}
 {{< /tabs >}}
 
+## Send logs to the Observability Pipelines Worker over Sumo Logic HTTP Source
+
 {{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
 [1]: /integrations/amazon_web_services/#setup

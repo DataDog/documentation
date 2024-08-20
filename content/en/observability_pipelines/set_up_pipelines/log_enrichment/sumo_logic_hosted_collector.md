@@ -224,6 +224,8 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Send logs to the Observability Pipelines Worker over Sumo Logic HTTP Source
+
 {{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
