@@ -7,18 +7,18 @@ To set up PCI compliant Log Management, you must meet the following requirements
 
 To begin **onboarding**:
 1. Contact [Datadog support][101] or your [Customer Success Manager][102] to request to being the PCI onboarding process while ensuring the necessary PCI requirements are met.
-1. After Datadog support or Customer Success confirms that the org is ready to onboard, configure the respective configuration file to send all your logs to the dedicated PCI compliant endpoint(s):
+2. After Datadog support or Customer Success confirms that the org is ready to onboard, configure the respective configuration file to send all your logs to the dedicated PCI compliant endpoint(s):
 
 - `agent-http-intake-pci.logs.datadoghq.com:443` for Agent traffic
 - `http-intake-pci.logs.datadoghq.com:443` for non-Agent traffic
 - `pci.browser-intake-datadoghq.com:443` for browser logs
 
-For example, add the following lines to the Agent configuration file:
+3. For example, add the following lines to the Agent configuration file:
 ```
 logs_config:
   logs_dd_url: <agent-http-intake-pci.logs.datadoghq.com:443>
 ```
-3. All logs that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enalbed for PCI DSS compliance and are included with no additional charge.
+4. All logs that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enalbed for PCI DSS compliance and are included with no additional charge.
 
 To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).
