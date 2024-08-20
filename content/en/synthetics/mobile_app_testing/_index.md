@@ -30,7 +30,7 @@ cascade:
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. 
 Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
-Mobile app tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
+Mobile app tests can run on a schedule, on demand, or directly within your [CI/CD pipelines][1].
 
 You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
@@ -38,7 +38,7 @@ You can create mobile app tests in Datadog by navigating to [**Digital Experienc
 
 ### Flakiness 
 
-Flakiness is a pain point in end-to-end testing because tests occasionally fail. When a frontend team implements a change, an identifier in your test may alert on it instead of an actual application issue.
+Flakiness is a pain point in end-to-end testing. Test failures are occasionally caused by valid frontend code changes that impact an identifier, not by an actual application issue.
 
 To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in mobile app tests. A small change in the UI may modify an element (for example, moving it to another location). The mobile app test automatically locates the element again based on points of reference that are not affected by the change. 
 

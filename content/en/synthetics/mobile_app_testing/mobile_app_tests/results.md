@@ -96,7 +96,7 @@ View and download crash reports for your iOS and Android devices in the [Results
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-In the Results Explorer, filter and search for crash reports with the following query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:ios` to identify, view, and download crash reports for your iOS devices:
+In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:ios` to identify, view, and download crash reports for your iOS devices:
 
 {{< img src="mobile_app_testing/ios_search.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
 
@@ -107,7 +107,7 @@ Select a failed test and download the crash report:
 {{% /tab %}}
 {{% tab "Android" %}}
 
-In the Results Explorer, filter and search for crash reports with the following query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:android` to identify, view, and download crash reports for your Andriod devices.
+In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:android` to identify, view, and download crash reports for your Android devices.
 
 {{< img src="mobile_app_testing/android_search.png" alt="Screenshot the Results Explorer using filter and search to locate Android crash results" style="width=80%" >}}
 
