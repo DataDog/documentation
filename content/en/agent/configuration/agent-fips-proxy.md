@@ -130,7 +130,7 @@ The `fips` setting is available in Agent versions >= 7.41. When the setting is e
 
 The `https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy runs on the same host as the Agent and relies on the host's security for protection of that communication.
 
-**Host security and hardening are your responsibility.**
+**Host security and hardening are your responsibilities.**
 
 <div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
 
@@ -192,7 +192,7 @@ The `fips` setting is available in Agent versions >= 7.41. When the setting is e
 
 The `use_https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy runs on the same host as the Datadog Agent and relies on the host's security for protection of that communication.
 
-**Host security and hardening are your responsibility.**
+**Host security and hardening are your responsibilities.**
 
 <div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
 
