@@ -1,5 +1,7 @@
 ---
-title: Serverless Compatibility Requirements 
+title: Serverless Compatibility Requirements
+aliases:
+  - /security/application_security/enabling/compatibility/serverless
 code_lang: serverless
 type: multi-code-lang
 code_lang_weight: 90

@@ -194,7 +194,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```swift
     URLSessionInstrumentation.enable(
         with: .init(
-            delegateClass: SessionDelegate.self
+            delegateClass: <YourSessionDelegate>.self
         )
     )
     ```
@@ -203,7 +203,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```swift
     let session =  URLSession(
         configuration: ...,
-        delegate: SessionDelegate(),
+        delegate: <YourSessionDelegate>(),
         delegateQueue: ...
     )
     ```
