@@ -53,6 +53,7 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by LLM Observability" style="width:100%;" >}}
 
 <br>
+
 ## Use integrations with LLM Observability
 
 The [LLM Observability SDK for Python][3] integrates with frameworks such as OpenAI, LangChain, AWS Bedrock, and Anthropic. It automatically traces and annotate LLM calls, capturing latency, errors, and token usage metrics—without code changes.
