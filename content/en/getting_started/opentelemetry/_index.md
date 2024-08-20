@@ -24,6 +24,9 @@ further_reading:
   text: 'Forward logs from the OpenTelemetry Collector with the Datadog Exporter'
 ---
 
+{{< learning-center-callout header="Try 'Introduction to OpenTelemetry with Datadog' in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+  Learn how to configure OpenTelemetry to export metrics, traces, and logs to Datadog, and explore the collected data within the platform.
+{{< /learning-center-callout >}}
 
 ## Overview
 

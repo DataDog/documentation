@@ -42,13 +42,13 @@ def workflows(content, content_dir):
                 
                 for action_name, action_data in get_filtered_actions(data.get('actions', {})).items():
                     action_name = re.split(r':V\d+', action_name)[0] # clean action_name. no version identifier
-                    # for each action of a bundle
-                    if should_show_action(action_data.get('stability'), data):
-                        output_file_name = data.get('name')\
+                    output_file_name = data.get('name')\
                             .replace('com.datadoghq.dd.','')\
                             .replace('com.datadoghq.','')\
                             .replace('.', '_')
-                        action_data['bundle'] = data.get('name')
+                    action_data['bundle'] = data.get('name')
+                    # for each action of a bundle
+                    if should_show_action(action_data.get('stability'), data, output_file_name):
                         action_data['bundle_title'] = data.get('title').strip()
                         action_data['source'] = data.get('icon', {}).get('integration_id', '')
                         action_data['aliases'] = [f'/workflows/actions_catalog/{output_file_name}_{action_name}'.lower()]
@@ -65,7 +65,7 @@ def workflows(content, content_dir):
                             out_file.write(output_content)
 
 
-def should_show_action(action_stability, data):
+def should_show_action(action_stability, data, output_file_name):
     """
     An 'action' should have no 'stability' key or 'stability' key equal to 'stable'
     and should not be tagged as 'internal', 'hidden' or 'deprecated'.
@@ -74,9 +74,14 @@ def should_show_action(action_stability, data):
     @param data {dict}
     @return {boolean}
     """
-    return (not action_stability or action_stability == stability) and not data.get('internal') and not data.get('hidden') and not data.get('deprecated')
-
-
+    exclusion_list = ['azure_network']
+    return (
+        (not action_stability or action_stability == stability)
+        and (not data.get('internal'))
+        and not data.get('hidden')
+        and not data.get('deprecated')
+        and output_file_name not in exclusion_list
+    )
 
 def get_filtered_actions(actions):
     """

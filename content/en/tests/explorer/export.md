@@ -20,7 +20,7 @@ You can use your Test Visibility search query and visualization graphs in dashbo
 
 You can copy, export, or download your aggregated search query and visualization graphs in the [Test Visibility Explorer][2].
 
-{{< img src="continuous_integration/explorer/test_export.png" alt="Export your test runs view in the Test Visibility Explorer" style="width:100%;">}}
+{{< img src="/tests/explorer/export.png" text="Download the list of queried tests results in the Test Visibility as a CSV file" style="width:100%" >}}
 
 Click the **Export** button on the right hand corner and select an option from the dropdown menu:
 

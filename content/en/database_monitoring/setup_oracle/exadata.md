@@ -42,6 +42,9 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 {{% dbm-create-oracle-user %}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install the Agent
 
 See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
