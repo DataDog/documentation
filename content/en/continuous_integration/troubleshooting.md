@@ -40,7 +40,7 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 ## Missing variables in Gitlab pipelines
 
-[User-defined variables in Gitlab][16] should be reported in the field `@ci.parameters`. This information is only present in some cases like downstream pipelines, and may be missing for the rest of the cases since Gitlab [does not always report this information][17] to Datadog.
+[User-defined variables in Gitlab][16] should be reported in the field `@ci.parameters` in CI Visibility. However, this information is only present in some cases like downstream pipelines, and may be missing for the rest of the cases since Gitlab [does not always report this information][17] to Datadog.
 
 ### Limitations on running pipelines
 
