@@ -61,7 +61,7 @@ Otra alternativa es aplicar uno de estos métodos para que la ventana emergente 
 
   * Añadir pasos para cerrar la ventana emergente entre todos los demás pasos del test de navegador y seleccionar la [opción **Allow this step to fail**][3] (Este paso puede no funcionar) en cada uno de ellos.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
