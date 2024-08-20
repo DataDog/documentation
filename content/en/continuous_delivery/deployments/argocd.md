@@ -185,7 +185,7 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-In this case, you can replace the Git metadata reported in the deployment with the one of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
+In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
 
 To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command between committing and pushing the changes to the configuration repository. This requires the datadog-ci CLI version to be >= `2.41.0`. See the [command syntax][14] for additional details:
 
@@ -201,12 +201,12 @@ To associate the application repository Git information with the Argo CD deploym
     git push
 ```
 
-**Note**: Even in case a single repository is used to store both the source code and the Kubernetes manifest, running this command is still required to correctly associate deployments and CI pipelines.
+**Note**: Even if a single repository is used to store both the source code and the Kubernetes manifest, running this command is still required to correctly associate deployments and CI pipelines.
 
 
 ### Validation
 
-If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view will contain a new **Pipeline** tab representing the related CI pipeline trace.
+If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new **Pipeline** tab representing the related CI pipeline trace.
 
 ## Troubleshooting
 
