@@ -1,7 +1,7 @@
 To set up PCI compliant Log Management, you must meet the following requirements:
 - If not already enabled, Audit Trail is automatically enabled when the org is configured as PCI compliant. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
 - Your Datadog organization is in the US1 site.
-- All logs sent to the PCI endpoints using HTTPS only. If you are using the Agent, you should [enforce HTTPS transport][104].
+- All logs sent to the PCI endpoints using HTTPS only. If you are using the Agent, you should enforce HTTPS transport.
 - **All** your endpoints will need to be changed to the PCI endpoints. 
 - You may request access to the PCI Attestation of Compliance and Customer Responsibility Matrix on [Datadog's Trust Center][105] - note that these documents are only applicable once you have finished all the onboarding steps and have been manually configured to compliant by Datadog support.
 
@@ -24,11 +24,11 @@ To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).
 2. Once confirmed by Datadog, your Logs will be configured to be PCI compliant. Only now is your Log Management considered PCI compliant.
 
-If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
+If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager. For PCI compliant Application Performance Monitoring, see [here][104].
 
 [101]: /help/
 [102]: mailto:success@datadoghq.com
 [103]: /account_management/audit_trail/#setup
-[104]: /tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
+[104]: /data_security/pci_compliance/?tab=apm
 [105]: https://trust.datadoghq.com/
 [106]: /sensitive_data_scanner
