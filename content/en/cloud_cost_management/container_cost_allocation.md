@@ -47,7 +47,7 @@ The following table presents the list of collected features and the minimal Agen
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
-1. To enable GPU container cosst allocation, install the Datadog DCGM integration.
+1. To enable GPU container cost allocation, install the Datadog DCGM integration.
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -69,7 +69,7 @@ The following table presents the list of collected features and the minimal Agen
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. To enable GPU container cosst allocation, install the Datadog DCGM integration.
+1. To enable GPU container cost allocation, install the Datadog DCGM integration.
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -89,7 +89,7 @@ The following table presents the list of collected features and the minimal Agen
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. To enable GPU container cosst allocation, install the Datadog DCGM integration.
+1. To enable GPU container cost allocation, install the Datadog DCGM integration.
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
