@@ -13695,7 +13695,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAPITestStep'
       - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
-      type: object
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -15381,6 +15380,12 @@ components:
           description: Unique identifier of the global variable.
           readOnly: true
           type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
         name:
           description: Name of the global variable. Unique across Synthetic global
             variables.
@@ -15471,6 +15476,53 @@ components:
       - JSON_PATH
       - REGEX
       - X_PATH
+    SyntheticsGlobalVariableRequest:
+      description: Details of the global variable to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      type: object
     SyntheticsGlobalVariableTOTPParameters:
       description: Parameters for the TOTP/MFA variable
       properties:
@@ -19235,6 +19287,22 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current date for the given org.
@@ -19947,6 +20015,22 @@ components:
         flex_logs_compute_xsmall_avg:
           description: Shows the average number of Flex Logs Compute Extra Small Instances
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         flex_stored_logs_avg:
@@ -20670,6 +20754,21 @@ components:
         flex_logs_compute_xsmall_avg_sum:
           description: Shows the average number of Flex Logs Compute Extra Small Instances
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_avg_sum:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current months for all organizations.
           format: int64
           type: integer
         flex_stored_logs_avg_sum:
@@ -32942,7 +33041,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+              $ref: '#/components/schemas/SyntheticsGlobalVariableRequest'
         description: Details of the global variable to create.
         required: true
       responses:
@@ -33095,7 +33194,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+              $ref: '#/components/schemas/SyntheticsGlobalVariableRequest'
         description: Details of the global variable to update.
         required: true
       responses:

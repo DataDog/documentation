@@ -1,6 +1,8 @@
 ---
 title: Software Composition Analysis Setup
 disable_toc: false
+aliases:
+- /security/application_security/enabling/tracing_libraries/sca/
 further_reading:
 - link: "/security/application_security/software_composition_analysis"
   tag: "Documentation"

@@ -8,50 +8,85 @@ further_reading:
 - link: /notebooks/
   tag: 설명서
   text: 노트북
-title: 지오맵 위젯
+title: Geomap 위젯
+widget_type: geomap
 ---
 
-지오맵 위젯은 국가 태그 또는 패싯이 있는 메트릭을 그래프화합니다.
+Geomap 위젯을 사용하면 지역을 그라데이션 또는 점으로 표현해 지리 데이터를 시각화할 수 있습니다. 이를 통해 다음을 할 수 있습니다.
+- 국가별 사용자 세션 보기
+- 새 탭에서 모든 세션 목록 필터링하기
+- 사용자 세션을 직원별로 필터링하여 보기
+- 로드 시간, 코어 웹 바이탈, 오류 보기 퍼센트와 같은 성능 메트릭 모니터링하기
 
-{{< img src="dashboards/widgets/geomap/geomap.png" alt="지오맵" >}}
+{{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="점 오버레이를 사용한 Geomap 가시화" >}}
 
-## 구성
+## 설정
 
-{{< img src="dashboards/widgets/geomap/geomap_setup.png" alt="상위 목록" style="width:80%;">}}
+{{< img src="dashboards/widgets/geomap/geomap_setup2.png" alt="위젯 구성의 데이터 섹션 Geomap 그래프">}}
 
-### 설정
+### 구성
+1. 시각화 레이어 선택:
+    * **Regions**: 국가 수준에서 측정 값 누계
+    * **Points**: 이벤트를 점으로 오버레이하여 지리 이벤트 데이터 표시
 
-1. 그래프화할 데이터를 선택합니다.
-    * RUM: RUM 쿼리를 구성하려면 [Rum 가이드][1]를 참조하세요.
-    * 로그 이벤트: 로그 이벤트 쿼리를 설정하려면 [로그 검색 설명서][2]를 참조하세요.
-      * **참고**: 태그별 그룹에는 alpha-2 ISO 형식을 따르는 국가 ISO 코드가 포함되어야 합니다. [GeoIP Processor][3]를 사용하여 이를 수행하거나 [수집 중인 태그][4]를 수동으로 포함할 수 있습니다.
-    * 메트릭: 메트릭 쿼리를 설정하려면 [쿼리][5] 가이드를 참조하세요.
-      * **참고**: 태그별 그룹에는 alpha-2 ISO 형식을 따르는 국가 ISO 코드가 포함되어야 합니다. [수집 로그에서 메트릭을 생성][6]하거나 [수집 중인 태그][4]를 수동으로 포함할 수 있습니다.
+2. 그래프로 표시할 데이터 선택: <br>
+  **참고**: 선택한 가시화 레이어에 따라 지원되는 데이터 소스가 다릅니다.
+  {{< tabs >}}
+  {{% tab "리전" %}}
+  |  데이터 소스    | 참고    | 
+  | --------------  | -------- |
+  |로그 이벤트   |  태그별 그룹에는 alpha-2 ISO 형식을 따르는 국가 ISO 코드가 포함되어야 합니다. 이를 위해 [GeoIP Processor][1]를 사용하거나 수작업으로 [수집한 로그에 태그][2]를 포함할 수 있습니다. 이벤트 쿼리를 구성하려면 [로그 검색 설명서][3]를 참고하세요.|
+  |이벤트   |  태그별 그룹에는 alpha-2 ISO 형식을 따르는 국가 ISO 코드가 포함되어야 합니다. 이를 위해 [수집된 로그에서 메트릭을 생성][4]하거나 수작업으로 [수집한 로그에 태그][2]를 포함할 수 있습니다. 메트릭 쿼리를 구성하려면 [쿼리 설명서][5]를 참고하세요.|
+  |RUM   | RUM 쿼리를 구성하려면 [RUM 설명서][6]를 참고하세요. |
+  |SLO | SLO 쿼리를 구성하려면 [SLO 검색 설명서][7]를 참고하세요. |
+  |보안 신호 <br> 애플리케이션 보안 <br> 감사 추적 | 쿼리를 구성하려면 [로그 검색 설명서][3]를 참고하세요. |
 
-2. 선택 사항: 기본적으로 맵에서 확대하려는 위치에 따라 보기란을 설정합니다.
+  [1]: /logs/log_configuration/processors/#geoip-parser
+  [2]: /getting_started/tagging/#define-tags
+  [3]: /logs/search_syntax/
+  [4]: /logs/logs_to_metrics/
+  [5]: /dashboards/querying/
+  [6]: /real_user_monitoring/explorer/search_syntax/
+  [7]: /service_management/service_level_objectives/#searching-slos
+  {{% /tab %}}
+
+  {{% tab "점" %}}
+  |  데이터 소스 | 참고 |
+  | -----------  | ----- | 
+  |로그 이벤트   | 태그별 그룹에는 alpha-2 ISO 형식을 따르는 국가 ISO 코드가 포함되어야 합니다. 이를 위해 [GeoIP Processor][1]를 사용하거나 수작업으로 [수집한 로그에 태그][2]를 포함할 수 있습니다. 로그 이벤트 쿼리를 구성하려면 [로그 검색 설명서][3]를 참고하세요. |
+  |RUM   | RUM 쿼리를 구성하려면 [RUM 설명서][4]를 참고하세요. |
+
+  [1]: /logs/log_configuration/processors/#geoip-parser
+  [2]: /getting_started/tagging/#define-tags
+  [3]: /logs/search_syntax/
+  [4]: /real_user_monitoring/explorer/search_syntax/
+  {{% /tab %}}
+  {{< /tabs >}}
+
+3. 선택 사항: 처음에 집중하고자 하는 맵의 위치를 보기 상자에서 구성할 수 있습니다.
 
 ### 옵션
 
-#### 글로벌 시간
+#### 컨텍스트 링크
 
-스크린보드 및 노트북에서 위젯에 커스텀 시간 프레임이 있는지 또는 글로벌 시간 프레임을 사용하는지를 선택하세요.
+[컨텍스트 링크][7]는 기본적으로 활성화되어 있으나 토글하여 비활성화할 수 있습니다. 컨텍스트 링크를 사용하면 대시보드 위젯을 다른 페이지(Datadog 페이지나 타사 페이지)와 연결할 수 있습니다.
 
-#### 타이틀
+## API
 
-`Show a Title` 확인란을 활성화하여 위젯의 사용자 지정 제목을 표시하세요.
+위젯을 **[대시보드 API][8]**와 함께 사용해야 합니다. [위젯 JSON 스키마 정의][9]를 보려면 다음 테이블을 참고하세요.
 
-{{< img src="dashboards/widgets/options/title.png" alt="위젯 타이틀" style="width:80%;">}}
-
-선택적으로 크기와 정렬을 정의할 수 있습니다.
-
+{{< dashboards-widgets-api >}}
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/real_user_monitoring/explorer/visualize#timeseries
-[2]: /ko/logs/search_syntax/
-[3]: /ko/logs/log_configuration/processors/#geoip-parser
-[4]: /ko/getting_started/tagging/#defining-tags
+[1]: /ko/logs/log_configuration/processors/#geoip-parser
+[2]: /ko/getting_started/tagging/#define-tags
+[3]: /ko/logs/search_syntax/
+[4]: /ko/logs/logs_to_metrics/
 [5]: /ko/dashboards/querying/
-[6]: /ko/logs/logs_to_metrics/
+[6]: /ko/real_user_monitoring/explorer/search_syntax/
+[7]: /ko/dashboards/guide/context-links/
+[8]: /ko/api/latest/dashboards/
+[9]: /ko/dashboards/graphing_json/widget_json/

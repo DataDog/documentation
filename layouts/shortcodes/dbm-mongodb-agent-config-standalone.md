@@ -19,7 +19,7 @@ instances:
     ## @param password - string - optional
     ## The password to use for authentication.
     #
-    password: <UNIQUEPASSWORD>
+    password: "ENC[datadog_user_database_password]"
 
     ## @param options - mapping - optional
     ## Connection options. For a complete list, see:

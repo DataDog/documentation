@@ -8,9 +8,11 @@ DDSQL is in private beta.
 
 Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.
 
+Tags are modeled in DDSQL with the key as a column name, and values in a `group` type, a sorted set of strings with tag-like "= is contains" semantics.
+
 ## Equality comparisons
 
-Equality comparisons with tags are treated as a "contains" comparison rather than requiring strict equality. `service='website'` is true if a record has a `service` tag with the value `website`, even if it has other service tags as well.
+Equality comparisons between tags and strings are treated as a "contains" comparison rather than requiring strict equality. `service='website'` is true if a record has a `service` tag with the value `website`, even if it has other service tags as well.
 
 As a consequence of this behavior, the `IN` operator with tags works as "overlaps". For example, `service IN ('webstore', 'webstore-analytics')` matches records that contain `service:webstore`, `service:webstore-analytics`, or both, even if other service tags are present (for example, `service:webstore,something-else` matches).
 
@@ -34,7 +36,7 @@ May return the following result:
 To instead match only on `logs`, use this query:
 
 {{< code-block lang="sql" >}}
-SELECT * 
+SELECT *
 FROM (AGGR avg('system.load.1') WHERE team='logs' GROUP BY team)
 WHERE team={'logs'}
 {{< /code-block >}}
@@ -47,7 +49,7 @@ This stricter comparison returns only one result:
 
 ## Implicit tag references
 
-Schema-on-read references on tables that support tags are treated as tag lookups, and are called implicit tag references. 
+Schema-on-read references on tables that support tags are treated as tag lookups, and are called implicit tag references.
 
 For example, the `az` column does not exist on the `resources.host` table, but you may `SELECT az FROM resources.host`. DDSQL recognizes that the `resources.host` table supports schema on read, and `az` becomes an implicit tag reference. Its name in the projection is `az`, which may be used throughout the query.
 

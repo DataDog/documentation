@@ -92,52 +92,52 @@ nav_sections:
       link: data_streams/
       title: Data Streams Monitoring
     - desc: データ処理ジョブを監視し、最適化する
-      icon: ''
-      link: ''
+      icon: data-jobs-monitoring
+      link: data_jobs/
       title: データジョブのモニタリング
     - desc: コードを変更せずにサービスを発見、マッピング、監視する
-      icon: ''
-      link: ''
+      icon: usm
+      link: universal_service_monitoring/
       title: Universal Service Monitoring
     - desc: アップタイムの確保、地域ごとの問題点の指摘、アプリケーションのパフォーマンステスト
-      icon: rum
-      link: ''
+      icon: synthetics
+      link: synthetics/
       title: Synthetic Monitoring
     - desc: アプリケーションのユーザーエクスペリエンスを把握、観察、分析
-      icon: ''
-      link: ''
+      icon: rum
+      link: real_user_monitoring/
       title: Real User Monitoring
     - desc: ユーザーの行動に関する洞察を得て、データに基づく製品の決定を行う
-      icon: ''
-      link: ''
+      icon: product-analytics
+      link: product_analytics/
       title: 製品分析
     - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
-      icon: ''
-      link: ''
+      icon: mobile
+      link: mobile_app_testing/
       title: Mobile Application Testing
     - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施
-      icon: ''
-      link: ''
+      icon: continuous-testing
+      link: continuous_testing/
       title: Continuous Testing
     - desc: CI パイプラインの健全性とパフォーマンスを監視
-      icon: ''
-      link: ''
+      icon: ci
+      link: continuous_integration/
       title: CI Visibility
     - desc: 不安定なテストの検出と、不安定なテストをもたらしたコミットの特定
-      icon: ''
-      link: ''
+      icon: ci
+      link: tests/
       title: Test Visibility
     - desc: 脅威、脆弱性、誤構成の検出
-      icon: ''
-      link: ''
+      icon: security-platform
+      link: security/
       title: セキュリティ
     - desc: メトリクスの探索、検索、および分布の作成
-      icon: ''
-      link: ''
+      icon: metric
+      link: metrics/
       title: メトリクス
     - desc: 取り込んだログを処理し、監視し、アーカイブ
-      icon: ''
-      link: ''
+      icon: log
+      link: logs/
       title: Log Management
     - desc: テレメトリーパイプラインの管理と監視
       icon: pipelines
