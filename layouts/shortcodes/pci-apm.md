@@ -22,7 +22,7 @@ To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).
 2. Once confirmed by Datadog, your spans will be configured to be PCI compliant. Only now is your Application Performance Monitoring considered PCI compliant.
 
-If you have any questions about how Application Performance Monitoring satisfies the applicable requirements under PCI DSS, contact your account manager. For PCI compliant Log Management, see [here][104].
+If you have any questions about how your now PCI compliant Application Performance Monitoring satisfies the applicable requirements under PCI DSS, contact your account manager. For PCI compliant Log Management, see [here][104].
 
 [101]: /help/
 [102]: mailto:success@datadoghq.com
