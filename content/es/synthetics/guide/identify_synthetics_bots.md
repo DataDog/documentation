@@ -88,7 +88,7 @@ Puedes aprovechar tu configuración de test de la API y del navegador en **Opcio
 
 ## Variables del navegador
 
-Cuando un robot Datadog está representando tu aplicación, la variable `window._Datadog_SYNTHETICS_BROWSER` se configura en `true`. Para eliminar las acciones del robot de tus datos de análisis, ajusta el código de tu herramienta de análisis con el siguiente test:
+Cuando un robot de Datadog está representando tu aplicación, la variable `window._Datadog_SYNTHETICS_BROWSER` se configura en `true`. Para eliminar las acciones del robot de tus datos de análisis, ajusta el código de tu herramienta de análisis con el siguiente test:
 
 ```JavaScript
 si (window._Datadog_SYNTHETICS_BROWSER === no definido) {
