@@ -22,7 +22,7 @@ logs_config:
 
 To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).
-2. Once confirmed by Datadog, your Logs will be configured to be PCI compliant. Only now is your Log Management considered PCI compliant.
+2. Once confirmed by Datadog, your Logs and Log Management is considered to be PCI-compliant.
 
 If you have any questions about how your now PCI compliant Log Management satisfies the applicable requirements under PCI DSS, contact your account manager. For PCI compliant Application Performance Monitoring, see [here][104].
 
