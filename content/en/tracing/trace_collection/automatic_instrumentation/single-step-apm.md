@@ -16,7 +16,10 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
 
 - **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 
-- **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
+- **Operating systems**:
+   - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
+   - Docker
+   - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
 
 ## Enabling APM on your applications
 
@@ -34,7 +37,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
@@ -59,7 +62,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -69,9 +72,9 @@ For a Docker Linux container:
      -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-     -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-     -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-     -v /opt/datadog/apm:/opt/datadog/apm \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
@@ -132,7 +135,13 @@ To enable Single Step Instrumentation with the Datadog Operator:
      features:
        apm:
          instrumentation:
-           enabled: true  
+           enabled: true
+           libVersions:
+             java: 1
+             dotnet: 2
+             python: 2
+             js: 5
+             ruby: 2
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -168,6 +177,12 @@ To enable Single Step Instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
+      libVersions:
+        java: 1
+        dotnet: 2
+        python: 2
+        js: 5
+        ruby: 2
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -202,25 +217,25 @@ When you run the one-line installation command, there are a few options to custo
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-### Specifying tracing library versions {#lib-linux}
+### `DD_APM_INSTRUMENTATION_LIBRARIES` - customizing APM libraries
 
-By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command.
+By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
 
-For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
 
-```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - install only the Java Datadog APM library pinned to the major version 1 release line.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - install only the Java and Python Datadog APM libraries pinned to the major versions 1 and 2 respectively.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - install only the Java and Python Datadog APM libraries pinned to the specific versions 1.38.0 and 2.10.5 respectively.
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Available versions are listed in tracer source repositories for each language:
+Available versions are listed in source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
+
 
 [2]: /agent/remote_config
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
@@ -234,25 +249,26 @@ Available versions are listed in tracer source repositories for each language:
 
 {{% tab "Docker" %}}
 
-### Specifying tracing library versions {#lib-docker}
 
-By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script.
+### `DD_APM_INSTRUMENTATION_LIBRARIES` - customizing APM libraries
 
-For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
 
-```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
-```
+Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - install only the Java Datadog APM library pinned to the major version 1 release line.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - install only the Java and Python Datadog APM libraries pinned to the major versions 1 and 2 respectively.
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - install only the Java and Python Datadog APM libraries pinned to the specific versions 1.38.0 and 2.10.5 respectively.
 
-Available versions are listed in tracer source repositories for each language:
+
+Available versions are listed in source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
+
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
@@ -528,7 +544,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
    ```shell
    dd-host-install --uninstall
    ```
-2. Restart your host.
+2. Restart the services on the host or VM.
 
 {{% /tab %}}
 
@@ -593,3 +609,4 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [2]: /tracing/metrics/runtime_metrics/
 [3]: /tracing/service_catalog/
 [4]: /tracing/glossary/#instrumentation
+[5]: /containers/cluster_agent/admission_controller/
