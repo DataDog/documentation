@@ -3,7 +3,7 @@ To set up PCI-compliant Log Management, you must meet the following requirements
 - Your Datadog organization is in the US1 site.
 - All logs sent to the PCI endpoints using HTTPS only. If you are using the Agent to send logs, you should enforce HTTPS transport.
 - **All** your endpoints need to be changed to the PCI endpoints. 
-- You may request access to the PCI Attestation of Compliance and Customer Responsibility Matrix on [Datadog's Trust Center][105] - note that these documents are only applicable once you have finished all the onboarding steps and have been manually configured to compliant by Datadog support.
+- You may request access to the PCI Attestation of Compliance and Customer Responsibility Matrix on [Datadog's Trust Center][105] - note that these documents are only applicable once you have finished all the onboarding steps and have been manually configured to be compliant by Datadog support.
 
 To begin **onboarding**:
 1. Contact [Datadog support][101] or your [Customer Success Manager][102] to request to being the PCI onboarding process while ensuring the necessary PCI requirements are met.
