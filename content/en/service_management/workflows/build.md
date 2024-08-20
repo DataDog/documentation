@@ -138,7 +138,7 @@ To reference the input parameter in a step, use the syntax `{{ Trigger.<paramete
 
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
-{{< img src="service_management/workflows/input-parameter3.png" alt="Hover over a counter to see which steps are using the parameter." style="width:100%;">}}
+{{< img src="service_management/workflows/input-parameter3.png" alt="Hover over a counter to see which steps are using the parameter." style="width:60%;">}}
 
 You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
 
@@ -150,7 +150,7 @@ Source object variables are properties of the triggering event that are resolved
 
 All the variables of the Source object are visible in the Context Variables tab.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
 
 ## Workflow notifications
 
@@ -190,7 +190,7 @@ You can add an error path for the workflow to follow if it encounters an error.
 
 To add an error path:
 1. Hover over the step where you'd like to add an error path.
-1. Click and drag the **Error path** icon {{< img src="service_management/workflows/error-path-icon.png" alt="The error path icon" style="width:39px;" >}} to place a new error path on the canvas.
+1. Click and drag the **Error path** icon <img src="/images/service_management/workflows/error-path-icon.png" alt="The error path icon" style="width:24px;"> to place a new error path on the canvas.
 1. Select a workflow step to add to the error path.
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
 1. When you're done configuring your error path steps, click **Save** to apply your changes.
