@@ -17,8 +17,6 @@ As your organization grows, the amount of data you transfer between cloud provid
 
 Send data over a private network to avoid the public internet and reduce your data transfer fees. As an example of how private links reduce your costs, in the US East AWS Regions, it costs $0.09 to transfer 1GB, but with AWS PrivateLink, the cost to transfer data goes down to $0.01 per GB.
 
-Use Datadog's [Network Performance Monitoring][1] to identify your organization’s highest throughput applications. Connect to Datadog over [supported private connections](#supported-cloud-providers). After you switch to private links, use Datadog’s [Cloud Cost Management][2] tools to verify the impact and monitor the reduction in your cloud costs.
-
 ## Supported cloud providers
 
 <div class="alert alert-warning">Make sure the selected Datadog site {{< region-param key="dd_site_name" code="true" >}} is correct. Cloud specific private links are not available for all Datadog sites.</div>
@@ -28,6 +26,12 @@ Use Datadog's [Network Performance Monitoring][1] to identify your organization�
     {{< nextlink href="/agent/guide/azure-private-link/" >}}Azure Private Link{{< /nextlink >}}
     {{< nextlink href="/agent/guide/gcp-private-service-connect/" >}}Google Cloud Private Service Connect{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Additional tools 
+
+After you switch to private links, you can use the following to monitor your usage and have more control over your data costs:
+- Datadog's [Network Performance Monitoring][1] identifies your organization’s highest throughput applications.
+- [Cloud Cost Management][2] tools can verify and monitor the reduction in your cloud costs.
 
 ## Further reading
 
