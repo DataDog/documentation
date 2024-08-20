@@ -93,7 +93,7 @@ Define el localizador del usuario para asegurarte de que el test de navegador se
 
 Crea este paso de aserción para que el test de navegador seleccione un elemento de la página y valide el estado de la aserción (desmarcado o marcado).
 
-{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Opciones para aserciones en un paso del test de navegador" style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Opciones de aserciones en un paso del test de navegador" style="width:60%;" >}}
 
 {{% /tab %}}
 {{% tab "Comprobar el contenido de la página activa" %}}
@@ -270,13 +270,13 @@ Para enmascarar los valores de las variables locales en los resultados del test,
 
 Crear una variable a partir de un contenido como `span` o `div` extrayendo el texto del elemento.
 
-#### Correo electrónico
+#### Cuerpo del correo electrónico
 
 Crea una variable a partir del cuerpo del correo electrónico utilizando uno de los siguientes métodos: [`regex`][13] o [`Xpath`][12].
 
-* [`Regex`][13] busca y devuelve el primer patrón coincidente (por ejemplo, `/*./`) del cuerpo de texto sin formato del correo electrónico. Si no se encuentra el patrón, busca en el cuerpo HTML.
+* [`Regex`][13] busca y devuelve el primer patrón coincidente (por ejemplo, `/*./`) del cuerpo de texto sin formato del correo electrónico. Si no se encuentra el patrón, busca en el cuerpo de HTML.
 
-* [`Xpath`][12] solo es aplicable cuando el correo electrónico contiene un cuerpo HTML. Devuelve el contenido de la localización correspondiente (por ejemplo, `$`).
+* [`Xpath`][12] solo es aplicable cuando el correo electrónico contiene un cuerpo de HTML. Devuelve el contenido de la localización correspondiente (por ejemplo, `$`).
 
 #### JavaScript
 
