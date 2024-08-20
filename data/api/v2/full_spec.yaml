@@ -694,10 +694,16 @@ components:
     APIKeyCreateAttributes:
       description: Attributes used to create an API Key.
       properties:
+        category:
+          description: The APIKeyCreateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyCreateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -712,6 +718,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyCreateRequest:
       description: Request used to create an API key.
       properties:
@@ -743,13 +751,20 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/LeakedKey'
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
+        category:
+          description: The APIKeyUpdateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyUpdateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -769,6 +784,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyUpdateRequest:
       description: Request used to update an API key.
       properties:
@@ -1002,6 +1019,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/LeakedKey'
     ApplicationKeyResponseMeta:
       description: Additional information related to the application key response.
       properties:
@@ -1055,6 +1073,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyUpdateRequest:
       description: Request used to update an application key.
       properties:
@@ -5900,7 +5920,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
-      type: object
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6021,7 +6040,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6161,7 +6179,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
-      type: object
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6275,7 +6292,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationResponseHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -8463,6 +8479,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
@@ -8472,6 +8490,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8490,6 +8509,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -8513,12 +8533,15 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -11154,6 +11177,45 @@ components:
           description: Jira project key
           type: string
       type: object
+    LeakedKey:
+      description: The definition of LeakedKey object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LeakedKeyAttributes'
+        id:
+          description: The LeakedKey id.
+          example: id
+          type: string
+        type:
+          $ref: '#/components/schemas/LeakedKeyType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    LeakedKeyAttributes:
+      description: The definition of LeakedKeyAttributes object.
+      properties:
+        date:
+          description: The LeakedKeyAttributes date.
+          example: '2017-07-21T17:32:28Z'
+          format: date-time
+          type: string
+        leak_source:
+          description: The LeakedKeyAttributes leak_source.
+          type: string
+      required:
+      - date
+      type: object
+    LeakedKeyType:
+      default: leaked_keys
+      description: The definition of LeakedKeyType object.
+      enum:
+      - leaked_keys
+      example: leaked_keys
+      type: string
+      x-enum-varnames:
+      - LEAKED_KEYS
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -11799,6 +11861,7 @@ components:
       required:
       - type
       - integration
+      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -16709,6 +16772,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermission:
       description: Relationship between a user team permission and a team
       properties:
@@ -16956,7 +17021,6 @@ components:
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
-      type: object
     RestrictionQueryRole:
       description: Partial role object.
       properties:
@@ -20807,7 +20871,6 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
-      type: object
     ServiceDefinitionSchemaVersions:
       description: Schema versions
       enum:
@@ -23616,6 +23679,8 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-merge-override:
+        required: false
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -23635,6 +23700,10 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        mfa_enabled:
+          description: If user has MFA enabled.
+          readOnly: true
+          type: boolean
         modified_at:
           description: Time that the user was last modified.
           format: date-time
@@ -23837,6 +23906,8 @@ components:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+      x-merge-override:
+        properties: false
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -24435,6 +24506,8 @@ paths:
         - name: api_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/api_keys/{api_key_id}:
     delete:
       description: Delete an API key.
@@ -24544,6 +24617,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -27666,6 +27741,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -34308,11 +34384,11 @@ paths:
 
         - Service Level Objectives: `slo`
 
-        - Synthetic Global Variables: `synthetic-global-variable`
+        - Synthetic Global Variables: `synthetics-global-variable`
 
-        - Synthetic Tests: `synthetic-test`
+        - Synthetic Tests: `synthetics-test`
 
-        - Synthetic Private Locations: `synthetic-private-location`
+        - Synthetic Private Locations: `synthetics-private-location`
 
         - Monitors: `monitor`
 

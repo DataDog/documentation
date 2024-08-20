@@ -63,7 +63,7 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
     - ご利用の [Datadog サイト][13]を `DD_SITE` 環境変数に設定します。サイトは次のとおりです: {{< region-param key="dd_site" code="true" >}}
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - オプションで、`DD_TAGS` 環境変数を追加して、追加のタグを指定します。
 
@@ -284,7 +284,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.3",
+            "image": "datadog/fips-proxy:1.1.4",
             "portMappings": [
                 {
                     "containerPort": 9803,

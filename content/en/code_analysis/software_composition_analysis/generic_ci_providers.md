@@ -66,7 +66,7 @@ chmod 755 /osv-scanner/osv-scanner
 /osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
 # Upload results to Datadog
-datadog-ci sbom upload --service "my-app" --env "ci" /tmp/sbom.json
+datadog-ci sbom upload /tmp/sbom.json
 ```
 
 ## Further Reading
