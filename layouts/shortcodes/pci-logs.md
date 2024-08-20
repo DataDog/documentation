@@ -20,7 +20,7 @@ logs_config:
 ```
 3. All logs that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enalbed for PCI DSS compliance and are included with no additional charge.
 
-To finish onboarding and be **compliant**:
+To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).
 2. Once confirmed by Datadog, your Logs will be configured to be PCI compliant. Only now is your Log Management considered PCI compliant.
 
