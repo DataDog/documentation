@@ -112,7 +112,7 @@ For more information about advanced alert options such as evaluation frequency, 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
 In addition to [matching attribute variables][7], the following Error Tracking specific variables are available
-on alert message notifications:
+for alert message notifications:
 
 * `{{issue.attributes.error.type}}`
 * `{{issue.attributes.error.message}}`
