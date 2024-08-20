@@ -30,19 +30,11 @@ Datadog offers PCI-compliant Log Management and Application Performance Monitori
 
 {{% tab "Log Management" %}}
 
-<div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
-</div>
-
 {{% pci-logs %}}
 
 {{% /tab %}}
 
 {{% tab "APM" %}}
-
-<div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
-</div>
 
 {{% pci-apm %}}
 
