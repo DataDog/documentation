@@ -1,8 +1,8 @@
 Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
+# For alpine or arm64 builds, refer to the explanation section
 COPY --from=datadog/serverless-init:1 / /app/
-# For alpine or arm64 builds, refer to tracer installation of the explanation section
 RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
@@ -58,8 +58,8 @@ CMD ["dotnet", "helloworld.dll"]
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
 ```dockerfile
-COPY --from=datadog/serverless-init:1 / /app/
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
+COPY --from=datadog/serverless-init:1 / /app/
 RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
@@ -71,8 +71,8 @@ CMD ["/app/datadog-init", "dotnet", "helloworld.dll"]
 If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead. For more information, see [How `serverless-init` works](#how-serverless-init-works).
 
 ```dockerfile
-COPY --from=datadog/serverless-init:1 / /app/
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
+COPY --from=datadog/serverless-init:1 / /app/
 RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
