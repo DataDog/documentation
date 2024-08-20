@@ -458,7 +458,7 @@ configuration = Configuration(
 
     // ejemplo de transferencia sólo de los valores requeridos que no tienen valores predeterminados definidos
     try:
-        // Crear un test API
+        // Crear un test de API
         api_response = api_instance.create_synthetics_api_test(body)
         pprint(api_response)
     except ApiException as e:
@@ -473,7 +473,7 @@ El [recurso de test Synthetic][7], con `type` configurado como `api`, se puede u
 
 ### Localizaciones privadas
 
-Si necesitas ejecutar tests de Synthetic desde localizaciones personalizadas o protegidas, puedes utilizar el [recurso de localización privada][3] para crear y gestionar localizaciones privadas desde las que ejecutar tus tests. Para obtener más información, consulta la página de [localizaciones privadas][11].
+Si necesitas ejecutar tests de Synthetic desde localizaciones personalizadas o protegidas, puedes utilizar el [recurso de localización privada][3] para crear y gestionar localizaciones privadas desde las que ejecutar tus tests. Para obtener más información, consulta la página de [localizaciones privadas][4].
 
 ### Variables globales y locales
 
