@@ -1,5 +1,5 @@
 To set up PCI compliant Application Performance Monitoring, you must meet the following requirements:
-- If not already enabled, Audit Trail is automatically enabled when the org is configured as PCI compliant. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
+- Audit Trail must be enabled and remain enabled for PCI DSS compliance. If you haven't already enabled Audit Trail, it is _automatically enabled_ once the org is configured as PCI-compliant (after following the steps below).
 - Your Datadog organization is in the US1 site.
 - All spans sent to the PCI endpoints using HTTPS only. If you are using the Agent to send spans, you should enforce HTTPS transport.
 - **All** your endpoints need to be changed to the PCI endpoints. 
