@@ -256,10 +256,10 @@ The following are the status names in the **Ping State** column and their descri
 
 | Status name  | Description                                             |
 |--------------|------------------------------------------------------|
-| Unreachable  | Device is unreachable through Ping.                   |
+| Unreachable  | Device is unreachable through ping.                   |
 | Unmonitored  | Ping has not been configured for this device.        |
-| Ok           | Device is reachable through Ping.                     |
-| N/A          | The devices do not support Ping, or no response was received. |
+| Ok           | Device is reachable through ping.                     |
+| N/A          | The devices do not support ping. |
 
 #### Metrics collected
 
