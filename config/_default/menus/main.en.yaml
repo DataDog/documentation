@@ -6390,6 +6390,11 @@ menu:
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_forwarding
       weight: 902
+    - name: Guides
+      url: account_management/audit_trail/guides/
+      parent: account_management_audit_trail
+      identifier: account_management_audit_trail_guides
+      weight: 903
     - name: Safety Center
       url: account_management/safety_center/
       parent: account_management
