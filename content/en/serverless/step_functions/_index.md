@@ -22,7 +22,7 @@ AWS Step Functions is a serverless orchestration service that lets developers cr
 ### How it works
 Datadog AWS Step Functions Monitoring makes use of Cloudwatch metrics from the [AWS Step Functions integration][2] and Cloudwatch logs sent through the Datadog Forwarder or Amazon Data Firehose. Both Forwarder and Firehose run in your environment. Sending Cloudwatch logs provides tracing and [enhanced metrics][3].
 
-{{< img src="serverless/step_functions/how_it_works.png" alt="Diagram showing two components of Datadog AWS Step Function monitoring: Cloudwatch metrics sent through the AWS Step Functions integration, and logs, traces, and enhanced metrics sent through the Datadog Lambda Forwarder or Amazon Data Firehose." style="width:100%;" >}}
+<!-- {{< img src="serverless/step_functions/how_it_works.png" alt="Diagram showing two components of Datadog AWS Step Function monitoring: Cloudwatch metrics sent through the AWS Step Functions integration, and logs, traces, and enhanced metrics sent through the Datadog Lambda Forwarder or Amazon Data Firehose." style="width:100%;" >}} -->
 
 ### Monitor the overall health of Step Functions in the Serverless view
 The Serverless view shows key metrics for your Step Functions in one place to easily provide a snapshot of the health of your Step Functions. You can access a detailed view of each Step Function to see all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions. 
