@@ -7,33 +7,29 @@ aliases:
   - /security_platform/application_security/getting_started/dotnet
   - /security/application_security/getting_started/dotnet
 further_reading:
-    - link: "/security/application_security/add-user-info/"
-      tag: "Documentation"
-      text: "Adding user information to traces"
-    - link: 'https://github.com/DataDog/dd-trace-dotnet'
-      tag: "Source Code"
-      text: '.NET Datadog library source code'
-    - link: "/security/default_rules/?category=cat-application-security"
-      tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
-    - link: "/security/application_security/troubleshooting"
-      tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+  - link: "/security/application_security/code_security/#code-level-vulnerabilities-list"
+    tag: "Documentation"
+    text: "Supported code-level vulnerabilities list"
+  - link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
+    tag: "Blog"
+    text: "Enhance application security in production with Datadog Code Security"
+  - link: "https://www.datadoghq.com/blog/application-code-vulnerability-detection/"
+    tag: "Blog"
+    text: "Find vulnerabilities in your code with Datadog Code Security"
+  - link: "https://www.datadoghq.com/blog/code-security-owasp-benchmark/"
+    tag: "Blog"
+    text: "Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by using an IAST approach"
+  - link: "/security/application_security/troubleshooting"
+    tag: "Documentation"
+    text: "Troubleshooting Application Security"
 ---
 
-You can monitor application security for .NET apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can detect code-level vulnerabilities and monitor application security in .NET applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-{{% appsec-getstarted %}}
-
-
-## Enabling Code Security
-
-If your service runs a [tracing library version that supports code security vulnerability detection][2], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
-
-To leverage code-level vulnerability detection capabilities for your service:
+Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on code security. For details, see [ASM capabilities support][4].
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][4] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh
