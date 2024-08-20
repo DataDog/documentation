@@ -1,5 +1,3 @@
-## Connect Splunk Forwarder to the Observability Pipelines Worker
-
 To forward your logs to the Worker, add the following configuration to your Splunk Heavy/Universal Forwarder's `etc/system/local/outputs.conf` and replace `<OPW_HOST>` with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker:
 
 ```

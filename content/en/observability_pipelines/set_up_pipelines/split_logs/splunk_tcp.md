@@ -234,6 +234,8 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Connect Splunk Forwarder to the Observability Pipelines Worker
+
 {{% observability_pipelines/log_source_configuration/splunk_tcp %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
