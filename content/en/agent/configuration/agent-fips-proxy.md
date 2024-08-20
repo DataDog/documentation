@@ -214,7 +214,7 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 
 Security considerations:
 - While the Datadog images provided are constructed with security in mind, they have not been evaluated against CIS benchmark recommendations or DISA STIG standards.
-- If you rebuild, reconfigure, or modifying the Datadog Agent FIPS Proxy to fit your deployment or testing needs, you might end up with a technically working setup, but Datadog cannot guarantee FIPS compliance if the Datadog Agent FIPS Proxy is not used exactly as explained in the documentation.
+- If you rebuild, reconfigure, or modify the Datadog Agent FIPS Proxy to fit your deployment or testing needs, you might end up with a technically working setup, but Datadog cannot guarantee FIPS compliance if the Datadog Agent FIPS Proxy is not used exactly as explained in the documentation.
 - If you did not follow the installation steps listed above exactly as documented, Datadog cannot guarantee FIPS compliance. Correct configuration includes having your Datadog Agent configured to communicate to the Datadog Agent FIPS Proxy by setting the `fips.enabled` option, and having a running Datadog Agent FIPS Proxy.
 
 ### Communication between the Agent and the FIPS Proxy
@@ -225,7 +225,7 @@ The Datadog Agent FIPS Proxy only secures communication originating from the Age
 
 The Datadog Agent FIPS Proxy only secures communication originating from the Cluster Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Cluster Agent or originating from the Cluster Agent are not made FIPS-compliant by this solution.
 
-## Release versions
+### Release versions
 
 Datadog Agent FIPS Proxy releases are decoupled from Datadog Agent releases. Use the latest versions of both the Datadog Agent and Datadog Agent FIPS Proxy versions to ensure the Datadog Agent and FIPS proxy support all available products.
 
