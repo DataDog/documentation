@@ -2,6 +2,8 @@
 title: Code Analysis
 description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
 is_beta: true
+aliases:
+- /code_analysis/faq
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
@@ -34,6 +36,8 @@ Code Analysis is in public beta.
 
 ## Overview
 
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+
 Code Analysis displays results for violations found by [Static Analysis][1] and [Software Composition Analysis (SCA)][2] scans in your repositories. 
 
 Static Analysis
@@ -42,7 +46,104 @@ Static Analysis
 Software Composition Analysis 
 : Scans the open source libraries that are imported into your repositories for known vulnerabilities. 
 
-<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+## Code Analysis scan types and formats
+
+{{< tabs >}}
+{{% tab "Static Analysis (SAST)" %}}
+
+### Importing results from other analyzers
+
+While the [Datadog Static Analyzer][101] is recommended, Datadog supports the ingestion of files that adhere to SARIF format.
+
+Ingestion of SARIF files is verified for the following third-party tools:
+
+ - [gitleaks][102]
+ - [semgrep][103]
+ - [eslint][104]
+
+To ingest your SARIF file into Datadog:
+1. Install the `datadog-ci` CLI (requires that Node.js is installed).
+2. Ensure that your `DD_SITE`, `DD_API_KEY`, and `DD_APP_KEY` environment variables are set.
+3. Invoke the tool to upload the file to Datadog.
+
+Install and invoke the tool using the following commands:
+
+```bash
+# Install datadog-ci
+npm install -g @datadog/datadog-ci
+
+# Upload SARIF file
+datadog-ci sarif upload /path/to/sarif-file.json
+```
+
+If you want to import using a tool that is not supported, contact your Customer Success Manager.
+
+### Scan frequency
+
+By default, scans on non-default branches use *diff-aware*. With diff-aware scans, the analyzer only
+scans the files that changed between the current branch and the default branch. Diff-aware scans
+last seconds, while full-scans may take a few minutes (depending on the codebase).
+
+You must be using Datadog's analyzer to enable [diff-aware scans][105].
+
+### OWASP benchmark score
+
+Datadog's static analyzer has been tested against the OWASP benchmark with a score of 44.
+The analyzer is periodically checked against the benchmark and updated results are published to the [static analyzer documentation][106].
+
+### Open source availability
+
+Datadog's static analyzer is available under an open source license and the code is [available on GitHub][101].
+
+### Windows support
+
+The Datadog Static Analyzer version 0.4.1 or higher is supported on Windows.
+
+[101]: https://github.com/DataDog/datadog-static-analyzer
+[102]: https://github.com/gitleaks/gitleaks
+[103]: https://github.com/semgrep/semgrep
+[104]: https://github.com/eslint/eslint
+[105]: /code_analysis/static_analysis/setup/#diff-aware-scanning 
+[106]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/owasp-benchmark.md
+
+{{% /tab %}}
+{{% tab "Software Composition Analysis (SCA)" %}}
+
+### Supported SBOM formats
+
+While the [Datadog SBOM generator][101] is recommended, Datadog supports the ingestion of any SBOM files.
+Datadog only supports SBOM files with the Cyclone-DX 1.4 and Cyclone-DX 1.5 formats.
+
+Ingestion of SBOM files is verified for the following third-party tools:
+
+- [osv-scanner][102]
+- [trivy][103]
+
+To ingest your SBOM file into Datadog:
+
+1. Install the [`datadog-ci` CLI][104], which requires Node.js to be installed.
+2. Ensure that your `DD_SITE`, `DD_API_KEY`, and `DD_APP_KEY` environment variables are set.
+3. Invoke the tool to upload the file to Datadog.
+
+Install and invoke the tool using the following commands:
+
+```bash
+# Install datadog-ci
+npm install -g @datadog/datadog-ci
+
+# Upload SBOM file
+datadog-ci sbom upload /path/to/sbom-file.json
+```
+
+[101]: https://github.com/DataDog/osv-scanner?tab=readme-ov-file#documentation
+[102]: https://github.com/DataDog/osv-scanner
+[103]: https://github.com/aquasecurity/trivy
+[104]: https://www.npmjs.com/package/@datadog/datadog-ci
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<br>
 
 ## Set up Code Analysis on your repository
 
@@ -52,6 +153,10 @@ Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and
 {{% tab "Datadog" %}}
 
 <div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. To enable Static Analysis or use a different CI provider, run scans in your CI pipelines instead.</div>
+
+With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline. Datadog reads your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results.
+
+Using Datadog-hosted scans eliminates the need for you to configure a CI pipeline so you can use Code Analysis.
 
 To enable [Software Composition Analysis][101] on GitHub repositories, click **Select Repositories** on your desired GitHub account and click the toggle for `Enable Software Composition Analysis (SCA)` to enable for all repositories. If you don't see any GitHub accounts listed, [create a new GitHub App][102] to get started.
 
