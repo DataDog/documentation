@@ -1,6 +1,6 @@
 ---
 description: Aprende a grabar automáticamente y a configurar manualmente los pasos
-  en una grabación de test de navegador.
+  en una grabación de tests de navegador.
 further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
