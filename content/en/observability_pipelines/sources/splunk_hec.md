@@ -15,4 +15,8 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/splunk_hec %}}
 
+### Send logs to the Observability Pipelines Worker over Splunk HEC
+
+{{% observability_pipelines/log_source_configuration/splunk_hec %}}
+
 [1]: /observability_pipelines/set_up_pipelines/

@@ -1,5 +1,3 @@
-## Send logs to the Observability Pipelines Worker over Splunk HEC
-
 After you install the Observability Pipelines Worker and deploy the configuration, the Worker exposes three HTTP endpoints that uses the [Splunk HEC API][901]:
 - `/services/collector/event`
 - `/services/collector/raw`

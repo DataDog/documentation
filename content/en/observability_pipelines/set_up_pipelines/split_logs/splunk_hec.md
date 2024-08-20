@@ -235,6 +235,8 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Send logs to the Observability Pipelines Worker over Splunk HEC
+
 {{% observability_pipelines/log_source_configuration/splunk_hec %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
