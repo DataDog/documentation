@@ -248,7 +248,7 @@ ping:
 {{% /tab %}}
 {{< /tabs >}}
 
-After successfully enabling ping on your network devices, the **Ping State** column in the UI will be populated, allowing you to see the ping state statuses for your devices:
+After successfully enabling ping on your network devices, the **Ping State** column in the UI is enabled, allowing you to see the ping state statuses for your devices:
 
 {{< img src="/network_device_monitoring/snmp/ping_state_status.png" alt="The status column in the NDM UI showing the Ping state toggle enabled with the ping state status column highlighted" style="width:100%;">}}
 
@@ -259,7 +259,7 @@ The following are the status names in the **Ping State** column and their descri
 | Unreachable  | Device is unreachable through Ping.                   |
 | Unmonitored  | Ping has not been configured for this device.        |
 | Ok           | Device is reachable through Ping.                     |
-| N/A          | The devices do not support Ping, or we don't receive a response back. |
+| N/A          | The devices do not support Ping, or no response was received. |
 
 #### Metrics collected
 
