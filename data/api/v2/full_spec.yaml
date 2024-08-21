@@ -6456,7 +6456,7 @@ components:
           description: Deployment ID.
           type: string
         service:
-          description: Service name from a service available in the Service Catalog.
+          description: Service name.
           example: shopist
           type: string
         started_at:
