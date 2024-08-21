@@ -198,16 +198,14 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 ## Compatibility requirements
 
-The Datadog Node.js SDK supports library [instrumentations][13] using the OpenTelemetry Node.js Trace API.
-
-Follow the detailed setup & example below for instrumenting a sample application 
+The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTelemetry Node.js Trace API. Follow the detailed setup and example below to instrument a sample application.
 
 ## Setup
 
- 1. Follow the instructions in the Imports and Setup sections of the [Nodejs Custom Instrumentation using OpenTelemetry API][14] page.
- 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
+ 1. Follow the instructions in the "Imports and Setup" sections of the [Node.js Custom Instrumentation using OpenTelemetry API][18] page.
+ 2. Complete the steps for instrumenting your service with your selected `opentelemetry-js-contrib` library.
 
-The following is an example instrumenting the `http/express` library with the Datadog Tracer and Opentelemetry's `http/express` integration:
+The following example demonstrates how to instrument the `http` and `express` OpenTelemetry integrations with the Datadog Node.js SDK:
 
 ```js
 const tracer = require('dd-trace').init()
@@ -219,7 +217,8 @@ const { registerInstrumentations } = require('@opentelemetry/instrumentation')
 const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http')
 const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express')
 
-// The main point to note is to register the instrumentation with the trace provider from Datadog and the OpenTelemetry instrumentation of your choice
+// Register the instrumentation with the Datadog trace provider
+// and the OpenTelemetry instrumentation of your choice
 registerInstrumentations({
   instrumentations: [
     new HttpInstrumentation({
@@ -247,12 +246,12 @@ const http = require('http')
 
 ## Configuration
 
-While it's not required, it's recommended to disable the corresponding Datadog instrumentation to prevent users from receiving duplicate spans
+While not mandatory, it is recommended to disable the corresponding Datadog instrumentation to avoid duplicate spans.
 
-To achieve this, launch your application with the `DD_TRACE_DISABLED_INSTRUMENTATIONS` environment variable set to a comma-separated list of integration names to disable. For example, for this application, you would use: `DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net`
+To do this, launch your application with the DD_TRACE_DISABLED_INSTRUMENTATIONS environment variable set to a comma-separated list of integration names to disable. For this application, you would use: DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net.
 
-[13]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/metapackages/auto-instrumentations-node#supported-instrumentations
-[14]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/#setup
+[17]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/metapackages/auto-instrumentations-node#supported-instrumentations
+[18]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/#setup
 
 {{% /tab %}}
 
