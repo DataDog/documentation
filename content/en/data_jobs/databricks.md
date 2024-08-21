@@ -49,7 +49,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 
    # Required parameters
    export DD_API_KEY=<YOUR API KEY>
-   export DD_SITE=<YOUR DATADOG SITE>
+   export DD_SITE={{< region-param key="dd_site" code="true" >}}
    export DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
 
    # Download and run the latest init script
@@ -68,7 +68,7 @@ Provide the values for the init script parameters at the beginning of the global
 
 ```bash
 export DD_API_KEY=<YOUR API KEY>
-export DD_SITE=<YOUR DATADOG SITE>
+export DD_SITE={{< region-param key="dd_site" code="true" >}}
 export DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
 ```
 
@@ -116,7 +116,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
    ```text
    DD_API_KEY=<YOUR API KEY>
-   DD_SITE=<YOUR DATADOG SITE>
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
    DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
    ```
 
