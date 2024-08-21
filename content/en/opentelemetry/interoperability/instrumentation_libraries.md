@@ -211,13 +211,33 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 {{% /tab %}} -->
 
-<!-- {{% tab ".NET" %}}
+{{% tab ".NET" %}}
 
 ## Compatibility requirements
 
+The Datadog .NET SDK supports library instrumentations that come with [built-in OpenTelemetry support][1].
+
 ## Setup
 
-{{% /tab %}} -->
+To use Opentelemetry instrumentation libraries with the Datadog .NET SDK:
+
+1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`
+
+## Verified OpenTelemetry Instrumentation Libraries
+
+| Library           | Versions | NuGet package                     | Integration Name     | Setup instructions            |
+| ----------------- | -------- | --------------------------------- | -------------------- | ----------------------------- |
+| Azure Service Bus | 7.14.0+ | [Azure.Messaging.ServiceBus][2]  | `AzureServiceBus`    | See `Azure SDK` section below |
+
+### Azure SDK
+
+The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][3] for more details.
+
+[1]: https://opentelemetry.io/docs/languages/net/libraries/#use-natively-instrumented-libraries
+[2]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[3]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+{{% /tab %}}
 
 {{< /tabs >}}
 

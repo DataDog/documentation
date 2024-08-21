@@ -79,6 +79,8 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
+### Securely store your password
+{{% dbm-secret %}}
 
 ### Install the Agent
 
@@ -98,7 +100,7 @@ instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -106,7 +108,7 @@ instances:
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'

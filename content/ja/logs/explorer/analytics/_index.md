@@ -13,6 +13,9 @@ further_reading:
 - link: /logs/explorer/export
   tag: Documentation
   text: ログエクスプローラーのビューをエクスポート
+- link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
+  tag: ブログ
+  text: リファレンステーブルでログにさらなるコンテキストを追加
 title: ログ分析
 ---
 
@@ -20,8 +23,8 @@ title: ログ分析
 
 ログは個々のイベントとして価値がある場合がありますが、価値のある情報がイベントのサブセットに存在する場合もあります。
 
-{{< whatsnext desc="この情報を公開するには、以下にログを集計します。" >}}
-    {{< nextlink href="logs/explorer/analytics/#fields" >}}フィールド{{< /nextlink >}}
+{{< whatsnext desc="この情報を公開するために、ログを以下のようにグループ化できます。" >}}
+    {{< nextlink href="logs/explorer/analytics/#group-logs-by-fields" >}}フィールド{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/patterns" >}}パターン{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/transactions" >}}トランザクション{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -36,19 +39,19 @@ title: ログ分析
 
 ## フィールドによるログのグループ化
 
-インデックス化されたログを**フィールド**で集計する場合、クエリフィルターに一致するすべてのログは、1 つまたは複数のログファセットの値に基づいてグループに集計されます。
+インデックス化されたログを**フィールド**で集計する場合、クエリフィルターに一致するすべてのログは、クエリ検索値に基づいてグループに集計されます。
 
 これらの集計の上で、次のメジャーを抽出することができます。
 
 - グループごとの**ログの数**
-- グループごとのファセットのコード化された値の**一意の数**
-- グループごとのファセットの数値に対する**統計演算** (`min`、`max`、`avg`、`percentiles`)
+- グループごとのクエリ検索値に対する**一意のコード化された値の数** (UI では`count unique of` として表示されます)
+- グループごとのクエリ検索値の数値に対する**統計演算** (`min`、`max`、`avg`、`percentiles`)
 
-単一のファセットに対して複数の値を持つ個々のログは、その数の集計に属します。たとえば、`team:sre` タグと `team:marketplace` タグを持つログは、`team:sre` 集計で 1 回、`team:marketplace` 集計で 1 回カウントされます。
+複数のクエリ検索値を持つ個々のログは、その数の集計に属します。たとえば、`team:sre` タグと `team:marketplace` タグを持つログは、`team:sre` 集計で 1 回、`team:marketplace` 集計で 1 回カウントされます。
 
 ### ロググループを視覚化する
 
-**フィールド**集計は、[上位リスト][4]の視覚化では 1 次元、[時系列][5]、[テーブル][6]、[ツリーマップ][17]、[パイチャート][18]の視覚化では最大 4 次元までサポートしています。
+**フィールド**集計は、[上位リスト][4]の視覚化では 1 次元、[時系列][5]、[テーブル][6]、[ツリーマップ][7]、[パイチャート][8]の視覚化では最大 4 次元までサポートしています。
 
 複数のディメンションがある場合、上位の値は最初のディメンションに基づき決定されます。その後最初のディメンション内の上位値内の 2 番めのディメンション、次に 2 番目のディメンション内の上位値内の 3 番めのディメンションに基づき決定されます。
 
@@ -64,7 +67,7 @@ title: ログ分析
 
 デフォルトでは、新しいクエリが追加されると、選択した視覚化で表示するように自動的に選択されます。
 
-タイムラインを表示するには、`Timeline for` ドロップダウンでそのクエリを選択します。`Use facets with` ドロップダウンでクエリを選択し、[ファセットパネル][7]で値をクリックすると、検索クエリの 1 つをスコープすることができます。選択されたクエリのみが、選択されたファセットで更新されます。
+タイムラインを表示するには、`Timeline for` ドロップダウンでそのクエリを選択します。`Use facets with` ドロップダウンでクエリを選択し、[ファセットパネル][9]で値をクリックすると、検索クエリの 1 つをスコープすることができます。選択されたクエリのみが、選択されたファセットで更新されます。
 
 {{< img src="logs/explorer/group/query_selector.jpg" alt="クエリエディターがセレクタのタイムラインを表示し、クエリ A とクエリ B のドロップダウンオプションがあります" style="width:100%;" >}}
 
@@ -78,15 +81,15 @@ title: ログ分析
 
 ダッシュボードのグラフエディターでログに使用できるすべての関数は、ログエクスプローラーでログに適用することができます。
 
-- [算術演算][8]
-- [補間][9]
-- [タイムシフト][10]
-- [レート][11]
-- [スムーシング][12]
-- [ロールアップ][13]
-- [除外][14]
+- [算術演算][10]
+- [補間][11]
+- [タイムシフト][12]
+- [レート][13]
+- [スムーシング][14]
+- [ロールアップ][15]
+- [除外][16]
 
-これは、[除外関数][14]を適用してログの特定の値を除外する方法の例です。
+これは、[除外関数][16]を適用してログの特定の値を除外する方法の例です。
 
 {{< img src="logs/explorer/group/exclusion_function_logs.jpg" alt="カットオフの分除外フィルターを 100 に設定したクエリ" style="width:100%;" >}}
 
@@ -96,9 +99,9 @@ title: ログ分析
 
 {{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="クエリ A をクエリ B で割る計算式のあるクエリエディター" style="width:100%;" >}}
 
-複数のクエリで数式を適用するには、すべてのクエリが同じファセットでグループ化されている必要があります。上記の例では、両方のクエリが `Webstore Store Name` によってグループ化されています。
+複数のクエリで数式を適用するには、すべてのクエリが同じクエリ検索値でグループ化されている必要があります。上記の例では、両方のクエリが `Webstore Store Name` によってグループ化されています。
 
-関数を数式に適用するには、`Σ` アイコンをクリックします。ここでは、全ログに占めるエラーログの割合に[タイムシフト関数][10]を適用し、現在のデータと 1 週間前のデータを比較する例を示します。
+関数を数式に適用するには、`Σ` アイコンをクリックします。ここでは、全ログに占めるエラーログの割合に[タイムシフト関数][12]を適用し、現在のデータと 1 週間前のデータを比較する例を示します。
 
 {{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="前週のタイムシフト関数を適用した数式を表示したクエリエディター" style="width:100%;" >}}
 
@@ -112,14 +115,13 @@ title: ログ分析
 [4]: /ja/logs/explorer/visualize/#top-list
 [5]: /ja/logs/explorer/visualize/#timeseries
 [6]: /ja/logs/explorer/visualize/#nested-tables
-[7]: /ja/logs/explorer/facets/#facet-panel
-[8]: /ja/dashboards/functions/arithmetic
-[9]: /ja/dashboards/functions/interpolation
-[10]: /ja/dashboards/functions/timeshift
-[11]: /ja/dashboards/functions/rate
-[12]: /ja/dashboards/functions/smoothing
-[13]: /ja/dashboards/functions/rollup
-[14]: /ja/dashboards/functions/exclusion
-[16]: https://app.datadoghq.com/logs
-[17]: /ja/dashboards/widgets/treemap
-[18]: /ja/dashboards/widgets/pie_chart
+[7]: /ja/dashboards/widgets/treemap
+[8]: /ja/dashboards/widgets/pie_chart
+[9]: /ja/logs/explorer/facets/#facet-panel
+[10]: /ja/dashboards/functions/arithmetic
+[11]: /ja/dashboards/functions/interpolation
+[12]: /ja/dashboards/functions/timeshift
+[13]: /ja/dashboards/functions/rate
+[14]: /ja/dashboards/functions/smoothing
+[15]: /ja/dashboards/functions/rollup
+[16]: /ja/dashboards/functions/exclusion

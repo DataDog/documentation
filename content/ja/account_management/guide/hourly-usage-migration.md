@@ -6,7 +6,7 @@ further_reading:
 title: Hourly Usage API の V1 から V2 への移行
 ---
 
-## Summary
+## サマリー
 v1 API のユーザーは、v2 時間単位使用量 API でおなじみの概念を、若干異なるフォーマットで表現していることを認識できるはずです。
 
 v1 API と v2 API の最も顕著な相違点は、v2 API の次の点です。
@@ -39,6 +39,18 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
     * `ci_visibility_test_committers`
 - **cloud_cost_management**
     * `host_count`
+- **csm_container_enterprise**
+    * `cws_count`
+    * `compliance_count`
+    * `total_count`
+- **csm_host_enterprise**
+    * `total_host_count`
+    * `compliance_hosts`
+    * `cws_hosts`
+    * `aas_host_count`
+    * `azure_host_count`
+    * `aws_host_count`
+    * `gcp_host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
@@ -151,6 +163,8 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
     * `check_calls_count`
 - **synthetics_browser**
     * `browser_check_calls_count`
+- **synthetics_mobile**
+    * `test_runs`
 - **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`

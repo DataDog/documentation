@@ -1,19 +1,19 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Python フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-php
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
 title: チュートリアル - Datadog Agent と同じホスト上の Python アプリケーションのトレースを有効にする
 ---
@@ -63,17 +63,15 @@ git clone https://github.com/DataDog/apm-tutorial-python.git
 
 Poetry または pip のいずれかを使用して、サンプルに必要な Python の依存関係を設定し、構成し、インストールします。以下のいずれかを実行します。
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry install
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 python -m venv .venv
@@ -81,15 +79,28 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 以下を実行することでアプリケーションを起動します。
 
-{{< code-block lang="shell" >}}
+{{% tabs %}}
+{{% tab "Poetry" %}}
+
+```shell
+poetry run python -m notes_app.app
+```
+
+{{% /tab %}}
+
+{{% tab "pip" %}}
+
+```shell
 python -m notes_app.app
-{{< /code-block >}}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 サンプルの `notes_app` アプリケーションは、インメモリデータベースにデータを保存する基本的な REST API です。別のターミナルを開き、`curl` を使っていくつかの API リクエストを送信します。
 
@@ -120,9 +131,8 @@ python -m notes_app.app
 
 次に、トレーシングライブラリを Poetry または pip (最小バージョン 18) を使ってインストールします。`apm-tutorial-python` ディレクトリから、以下を実行します。
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry add ddtrace
@@ -130,24 +140,39 @@ poetry install
 
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 pip install ddtrace
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## 自動インスツルメンテーションによる Python アプリケーションの起動
 
 トレースの生成と収集を開始するには、前回とは少し異なる方法でサンプルアプリケーションを再起動します。以下を実行します。
 
-{{< code-block lang="shell" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
- ddtrace-run python -m notes_app.app{{< /code-block >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ poetry run ddtrace-run python -m notes_app.app
+
+```
+
+{{% /tab %}}
+{{% tab "pip" %}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ ddtrace-run python -m notes_app.app
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 このコマンドは、`DD_SERVICE`、`DD_VERSION`、`DD_ENV` 環境変数を設定して[統合サービスタグ付け][10]を有効にし、Datadog 全体のデータ相関を可能にするものです。
 
@@ -228,15 +253,30 @@ from ddtrace import tracer{{< /code-block >}}
 
 1. 以下を実行することでカレンダーアプリケーションを起動します。
 
-   {{< code-block lang="shell" >}}
+   {{< tabs >}}
+   {{% tab "Poetry" %}}
+
+   ```shell
+   DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+   poetry run ddtrace-run python -m calendar_app.app
+
+   ```
+
+   {{% /tab %}}
+   {{% tab "pip" %}}
+
+   ```shell
    DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
    ddtrace-run python -m calendar_app.app
-   {{< /code-block >}}
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
 2. `add_date` パラメーターを指定して、POST リクエストを送信します。
 
-`curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
-: `(2, hello_again with date 2022-11-06)`
+   `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
+   : `(2, hello_again with date 2022-11-06)`
 
 
 3. トレースエクスプローラーで、この最新のトレースをクリックすると、2 つのサービス間の分散型トレーシングが表示されます。
@@ -284,7 +324,7 @@ def create_note(self, desc, add_date=None):
 もし、期待通りのトレースが受信できない場合は、Python パッケージの `ddtrace` でデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -292,7 +332,7 @@ def create_note(self, desc, add_date=None):
 [2]: /ja/tracing/trace_collection/dd_libraries/python/
 [3]: /ja/account_management/api-app-keys/
 [4]: /ja/tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /ja/getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer

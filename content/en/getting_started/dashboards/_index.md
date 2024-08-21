@@ -24,7 +24,7 @@ further_reading:
     text: "Join an interactive session on better visualizations with Dashboards"  
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Dashboarding">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Dashboarding">}}
   Explore and register for Foundation Enablement sessions. Learn to customize your dashboards using our library of visualizations and the drag-and-drop Dashboard builder. Enable your team's success by sharing data with stakeholders via reports, public URLs, and notebooks.
 {{< /learning-center-callout >}}
 
