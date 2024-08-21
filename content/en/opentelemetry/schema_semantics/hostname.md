@@ -43,7 +43,7 @@ transform:
 
 Don't forget to add the `transform` processor to your pipelines.
 
-Due to how our backend processes and deduplicates host names, you may occasionally see an alias for your host. If this causes issues for you, please contact us.
+Due to how the backend processes deduplicate hostnames, you may occasionally see an alias for your host. If this causes issues for you, please contact support.
 
 ### Cloud provider-specific conventions
 
