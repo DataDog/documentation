@@ -51,7 +51,7 @@ If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x
 
 ### Import and initialize the tracer
 
-Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
+Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module. Note that with frameworks like Next.js and Nest.js you must either provide an environment variable or add an additional Node.js flag. See [Complex framework usage][6] for more information.
 
 After you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the tracer has been imported and initialized correctly**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
@@ -203,5 +203,6 @@ Read [tracer settings][3] for a list of initialization options.
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[6]: /tracing/trace_collection/compatibility/nodejs/#complex-framework-usage
 [11]: /tracing/trace_collection/library_injection_local/
 [13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
