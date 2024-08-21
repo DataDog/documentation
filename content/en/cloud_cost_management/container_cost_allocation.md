@@ -200,7 +200,7 @@ Use the `allocated_spend_type` tag to visualize the spend category associated wi
 
 ### Compute
 
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If there is GPU usage on the pod, the cost of the host instance is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If the host instance has GPUs, the cost is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 Costs are allocated into the following spend types:
 
@@ -229,7 +229,7 @@ The cost of an EBS volume has three components: IOPS, throughput, and storage. E
 
 ### Compute
 
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If there is GPU usage on the pod, the cost of the host instance is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If the host instance has GPUs, the cost is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 Costs are allocated into the following spend types:
 
@@ -244,7 +244,7 @@ Costs are allocated into the following spend types:
 
 ### Compute
 
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If there is GPU usage on the pod, the cost of the host instance is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If the host instance has GPUs, the cost is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 Costs are allocated into the following spend types:
 
