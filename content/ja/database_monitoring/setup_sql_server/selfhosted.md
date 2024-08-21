@@ -16,9 +16,9 @@ further_reading:
 title: セルフホスト SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+データベースで Database Monitoring を有効にするには、以下の手順を実行します。
 
 1. [Agent にアクセスを付与する](#grant-the-agent-access)
 1. [Agent をインストールする](#install-the-agent)
@@ -34,7 +34,7 @@ title: セルフホスト SQL Server のデータベースモニタリングの�
 
 Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+サーバーに接続するために読み取り専用ログインを作成し、必要な権限を付与します。
 
 {{< tabs >}}
 {{% tab "SQL Server 2014+" %}}
@@ -72,6 +72,9 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Agent のインストール
 
 Agent を SQL Server ホストに直接インストールすることをお勧めします。そうすることで、SQL Server 固有のテレメトリーに加え、様々なシステムテレメトリー (CPU、メモリ、ディスク、ネットワーク) を収集することができるからです。
@@ -98,6 +101,6 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 ## Agent の構成例
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -14,8 +14,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10155
     source_type_name: Palo Alto Networks Firewall
-  logs:
-    source: pan.firewall
   saved_views:
     Authentication Protocol: assets/saved_views/top_ips_flagged_in_high_severity_threats.json
     High Severity Issues: assets/saved_views/all_high_severity_issues.json
@@ -29,6 +27,7 @@ categories:
 - ネットワーク
 - OS & システム
 - セキュリティ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md
 display_on_public_website: true
@@ -38,7 +37,6 @@ integration_id: pan-firewall
 integration_title: Palo Alto Networks Firewall
 integration_version: 1.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pan_firewall
 public_title: Palo Alto Networks Firewall
@@ -57,10 +55,16 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Palo Alto Networks Firewall ログイベント
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
   support: README.md#Support
   title: Palo Alto Networks Firewall
 ---
@@ -68,7 +72,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
 Datadog の Alto Networks Firewall ログインテグレーションにより、お客様は Palo Alto Networks ファイアウォールログを取り込み、解析し、分析することができます。このログインテグレーションは、Palo Alto ファイアウォールで実行されるオペレーティングシステムである PAN OS によって提供される HTTPS ログテンプレートおよび転送機能に依存しています。PAN-OS を使用すると、お客様は脅威、トラフィック、認証、およびその他の重要なログイベントを転送できます。
 
@@ -82,9 +86,9 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
 #### 認証の異常を監視する
 ファイアウォール認証ログは、ユーザーが Palo Alto Networks ファイアウォールで認証する際の詳細情報を提供します。これらのログを使用して、特定のプロトコル、ユーザー、場所などからの認証トラフィックの異常なスパイクを監視できます。
 
-## 計画と使用
+## セットアップ
 
-### 収集データ
+### ログ収集
 
  1. ファイアウォールが到達可能でインターネットに接続できるマシンに [Datadog Agent をインストール][1]します。
  2. PanOS で、Device >> Server Profiles >> Syslog を選択し、サーバープロファイルの名前を追加します。Syslog ログ転送[コンフィギュレーション手順][2]に従います。以下と同じ手順です。
@@ -93,7 +97,7 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
     * Datadog Agent を備えたマシンの IP アドレス
     * トランスポート: TCP
     * ポート: 10518、形式: BSD
- 4. 必要なログタイプのカスタムログ形式をコピーして構成します。以下の形式は、[Palo Alto Networks Syslog Field Descriptions ドキュメント][3]に記載されている形式からのマッピングです。
+ 4. Copy and configure custom log format for the required log type. The formats below are mappings from the formats listed in [the Palo Alto Networks Syslog Field Descriptions docs][3].
 
     | 名前                         | 形式                                                |
     | -------------------------------| ---------------------------------------------------------- |
@@ -126,21 +130,21 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
      ```
  9. [Agent を再起動します][5]。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションで収集されるメトリクスは、[ネットワークベンダー][6]ページで構成された関連プロファイルにより決定されます。
 
-### ワークフローの自動化
+### Logs
 
 PANOS インテグレーションは、Palo Alto Networks ファイアウォールインテグレーションからログを収集し、それを Datadog に転送します。
 
-### ヘルプ
+### イベント
 
 PANOS インテグレーションは、イベントを送信しません。
 
-### ヘルプ
+### サービスチェック
 
 PANOS インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -151,7 +155,7 @@ PANOS インテグレーションには、サービスのチェック機能は�
 - [ログの種類とフィールド][7]
 - [ログ収集のドキュメント][8]
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

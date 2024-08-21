@@ -42,7 +42,7 @@ The following library versions are compatible with API Security Inventory. [Remo
 
 ## How it works
 
-API Inventory leverages the Datadog tracing library with [ASM enabled][5] to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme.
+API Inventory leverages the Datadog tracing library with ASM enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme.
 
 API Inventory Security uses [Remote Configuration][4] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -118,6 +118,5 @@ By default, API Security Inventory evaluates every tenth request (10% sample rat
 [2]: /security/application_security/threats/
 [3]: /security/application_security/software_composition_analysis/
 [4]: /agent/remote_config/
-[5]: /security/application_security/enabling/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis

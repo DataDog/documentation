@@ -25,7 +25,7 @@ cascade:
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
   With Database Monitoring, learn how to quickly pinpoint costly and slow queries. Drill into precise execution details to address bottlenecks.
 {{< /learning-center-callout >}}
 
@@ -57,7 +57,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ### MongoDB
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 {{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 

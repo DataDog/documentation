@@ -27,27 +27,25 @@ further_reading:
 title: ネットワークデバイスモニタリング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">ネットワークデバイスモニタリングはこのサイトではサポートされていません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
 <br/>
 
-ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化します。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
+Network Device Monitoring は、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよび仮想ネットワークデバイスの可視化を提供します。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスの稼働/停止状況などのメトリクスを収集し始めます。
 
 ## はじめに
 
 1. Datadog Agent をインストールします (通常、監視対象デバイスではないサーバーにインストールします)。
 2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
-3. [ネットワークデバイス][3]ページで、ネットワークインフラストラクチャー全体の監視を開始します。
-4. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
+3. Add additional enrichments to your devices by adding network device tagging through the [Service Now integration][225], and programmatically add tags to network devices with the [Network Device Monitoring API][226].
+4. [ネットワークデバイス][3]ページで、ネットワークインフラストラクチャー全体の監視を開始します。
+5. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
     - [監視対象のデバイス一覧][4]
     - [すべてのインターフェイスのパフォーマンス全体][5]
-5. [SNMP メトリクス][6]の積極的な監視で問題が発生する前に把握します。
+6. [SNMP メトリクス][6]の積極的な監視で問題が発生する前に把握します。
+7. オプションとして、Datadog アプリ内で直接[デバイスプロファイル][224]を作成することにより、特定のメトリクスとタグを収集するように Agent を構成します。
 
 ## サポートされるデバイス
 
@@ -62,13 +60,13 @@ Datadog は、特定のベンダー向けに SD-WAN (Software-Defined Wide Area 
 Datadog は、SD-WAN ネットワークモニタリングのために以下のベンダーをサポートしています。
 
 - [Meraki SD-WAN][7] (公開ベータ版)
-- Cisco SD-WAN (非公開ベータ版)
+- [Cisco SD-WAN][223] (公開ベータ版)
 
 ### ベンダープロファイル
 
 以下のベンダーのデバイスは、専用のプロファイルでサポートされます。特定のベンダーやデバイスタイプがサポートされているが、特定のモデルがサポートされていない場合は、
-  - 自分自身で YAML プロファイルをカスタマイズできます (詳細は [NDM トラブルシューティング FAQ ページ][8] を参照)
-  - 新しい[プロファイル][9]を作成して、新しいデバイスモデルの監視を開始できます
+  - 自分自身で YAML プロファイルをカスタマイズできます (詳細は [NDM トラブルシューティング FAQ ページ][8] を参照)。
+  - 新しい[プロファイル][9]を作成して、新しいデバイスモデルの監視を開始できます。
 
 | ベンダー | コンフィギュレーションファイル |
 | ---  | ----------- |
@@ -284,4 +282,8 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [210]: https://docs.datadoghq.com/ja/integrations/snmp_juniper/
 [211]: https://docs.datadoghq.com/ja/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_pfsense/
-[222]:https://docs.datadoghq.com/ja/integrations/pan_firewall/
+[222]: https://docs.datadoghq.com/ja/integrations/pan_firewall/
+[223]: https://docs.datadoghq.com/ja/integrations/cisco_sdwan/
+[224]: /ja/network_monitoring/devices/guide/device_profiles/
+[225]: https://docs.datadoghq.com/ja/integrations/servicenow/#network-device-tagging
+[226]: /ja/api/latest/network-device-monitoring/

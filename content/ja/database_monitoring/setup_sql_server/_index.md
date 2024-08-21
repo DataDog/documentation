@@ -20,3 +20,5 @@ title: SQL Server の設定
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 
 <br>
+
+[1]: /ja/database_monitoring/setup_sql_server/troubleshooting/#known-limitations

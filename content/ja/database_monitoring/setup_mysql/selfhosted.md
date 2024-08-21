@@ -71,7 +71,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
-次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][5]を参照してください。
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}
@@ -155,6 +155,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Agent のインストール
 
 Datadog Agent をインストールすると、MySQL でのデータベースモニタリングに必要な MySQL チェックもインストールされます。MySQL データベースホストの Agent をまだインストールしていない場合は、[Agent のインストール手順][6]を参照してください。
@@ -175,10 +178,8 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 前述の CREATE USER ステップで作成
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
-
-**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
 `datadog` ユーザーは、`localhost` ではなく `host: 127.0.0.1` として MySQL インテグレーション構成内にセットアップされる必要があります。または、`sock` を使用することもできます。
 
@@ -206,7 +207,7 @@ Agent によってデータベースから収集されたテレメトリーに�
        long_query_time = 3
      ```
 
-   3. ファイルを保存して MySQL を再起動します。
+   3. Save the file and restart MySQL.
    4. Agent が `/var/log/mysql` ディレクトリとその中のすべてのファイルに対する読み取りアクセス許可を持つことを確認します。`logrotate` コンフィギュレーションもチェックして、これらのファイルが考慮され、アクセス許可が正しく設定されていることを確認します。
       `/etc/logrotate.d/mysql-server` の内容は次のようになります。
 
@@ -282,11 +283,11 @@ Agent によってデータベースから収集されたテレメトリーに�
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][12]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage#agent-overhead
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html

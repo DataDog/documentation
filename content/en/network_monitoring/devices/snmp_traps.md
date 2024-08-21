@@ -48,6 +48,8 @@ network_devices:
       privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
 
+**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
+
 ## Device namespaces
 
 As in [Network Device Monitoring][2], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.

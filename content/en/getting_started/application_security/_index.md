@@ -9,9 +9,6 @@ further_reading:
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Management works"
-- link: "/security/application_security/enabling/"
-  tag: "Documentation"
-  text: "Enabling ASM"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
@@ -63,7 +60,7 @@ On the [ASM landing page,][18] follow the instructions to get started. This incl
 ### Enable ASM with Remote Configuration
 #### Prerequisites:
 - Datadog Agent versions 7.42.0 or higher installed on your hosts or containers.
-- Datadog Tracer versions are [compatible with Remote Configuration][16].
+- Datadog Tracer versions are [compatible with Remote Configuration][17].
 
 #### Setup Remote Configuration (if not enabled already)
   Follow the steps to enable [Remote Configuration][17] in your Datadog UI. This includes:
@@ -118,7 +115,6 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [13]: /security/application_security/risk_management
 [14]: https://app.datadoghq.com/security/appsec/vm?&group=vulnerability
 [15]: https://docs.datadoghq.com/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
-[16]: https://docs.datadoghq.com/fr/security/application_security/enabling/compatibility/
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [18]: https://app.datadoghq.com/security/appsec/landing
 [19]: https://app.datadoghq.com/security/configuration/asm/onboarding
