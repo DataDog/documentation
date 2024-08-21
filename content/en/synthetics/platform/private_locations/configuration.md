@@ -93,11 +93,11 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 **Default**: `none`<br>
 Enable `HTTP CONNECT` tunneling for HTTP proxies. When this option is not set, `HTTP CONNECT` tunneling is only used for HTTPS proxies.
 
-**Note:** When setting up an HTTP proxy, forward proxies like Squid may require the `HTTP CONNECT` request to establish the initial TCP connection between the private location and Datadog. As such, the `proxyEnableConnectTunnel` parameter should be set to `true`. However, reverse proxies like HAProxy that direct an `HTTP CONNECT` request to Datadog may not work with this option enabled.
+**Note:** HTTP forward proxies like Squid may require the `HTTP CONNECT` request to establish the initial TCP connection between the private location and Datadog. As such, the `proxyEnableConnectTunnel` parameter should be set to `true`. However, reverse proxies like HAProxy that direct an `HTTP CONNECT` request to Datadog may not work with this option enabled.
 
 **Note:** The `proxy` parameter is deprecated and should be replaced by `proxyDatadog`.
 
-The following parameters can be used to configure a default proxy to use for Synthetics tests:
+The following parameters can be used to configure a default proxy to use for Synthetic Monitoring tests:
 
 `proxyTestRequests`
 : **Type**: String <br>
