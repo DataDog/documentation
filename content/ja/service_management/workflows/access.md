@@ -2,7 +2,7 @@
 algolia:
   tags:
   - ワークフロー
-  - tracing_otel_inst_java
+  - workflows/
   - ワークフローの自動化
 aliases:
 - /ja/workflows/access
@@ -49,7 +49,7 @@ title: アクセス・認証
 1. **Create a service account** をクリックします。
 1. サービスアカウントのユーザーのロールを選択します。
 1. サービスアカウントを保存するには、**Create** をクリックします。
-1. ワークフローを保存して、変更を適用します。 
+1. ワークフローを保存して、変更を適用します。
 
 ワークフローを実行する際、ワークフローアクションで定義された接続をサービスアカウントユーザーが解決します。そのため、サービスアカウントユーザーは `connections_resolve` 権限を必要とします。Datadog Admin Role と Datadog Standard Role は、`connections_resolve` 権限を含んでいます。
 
@@ -78,9 +78,11 @@ title: アクセス・認証
 
 [ロールベースのアクセス制御 (RBAC)][3] を使用して、ワークフローと接続へのアクセスを制御します。ワークフローや接続に適用される権限の一覧は、[Datadog のロール権限][7]を参照してください。
 
+By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
+
 ### 特定の接続へのアクセスを制限する
 
-各接続に権限を設定して、変更を制限したり、使用を制限したりします。詳細な権限には、**Viewer**、*Resolver**、*Editor** があります。
+Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : 接続の表示が可能
@@ -107,7 +109,7 @@ Editor
 
 ### 特定のワークフローへのアクセスを制限する
 
-各ワークフローに権限を設定し、ワークフローの変更や使用を制限します。詳細な権限には、**Viewer**、**Runner**、*Editor** があります。
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : ワークフローの表示が可能
@@ -143,6 +145,8 @@ Editor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
+
 [1]: /ja/account_management/audit_trail/#overview
 [2]: /ja/account_management/org_settings/service_accounts/
 [3]: /ja/account_management/rbac/
@@ -151,3 +155,4 @@ Editor
 [6]: /ja/service_management/workflows/connections/
 [7]: /ja/account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
+[9]: https://datadoghq.slack.com/

@@ -1,10 +1,10 @@
 ---
 further_reading:
-- link: profiler/profiler_troubleshooting/python/
+- link: /tracing/api_catalog/
   tag: ドキュメント
-  text: Python
+  text: API Catalog
 is_beta: true
-title: ヘルプ
+title: トラブルシューティング
 ---
 
 Datadog API カタログで想定外の挙動に遭遇した場合、このガイドが問題解決の助けとなるかもしれません。問題が解決しない場合は、[Datadog サポート][1]にお問い合わせください。
@@ -28,7 +28,7 @@ API カタログは APM トレーシングに基づいているため、エン�
 - エンドポイントは、OpenAPI を通じて登録/アップロードされて以来、まだ使用されていません。
 - トレースは Agent 側でサンプリングされます。詳しくは[取り込みコントロール][3]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
