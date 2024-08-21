@@ -25,11 +25,12 @@ further_reading:
 
 To set up Cloud Security Management, you can choose between two main approaches: the streamlined Quick Start or the flexible Custom Feature Selection.
 
-### Quick Start
+## Quick Start
 
 The [Agentless Scanning Quick Start][1] provides a streamlined setup workflow for Cloud Security Management, allowing you to start monitoring your AWS resources immediately.
 
-**Agentless Scanning Supported Features:**
+**Agentless Scanning supported features**:
+
 - **Misconfigurations**: Detect and manage security misconfigurations.
 - **Identity Risks (CIEM)**: Identify and mitigate identity-related risks.
 - **Host Vulnerability Management**: Scan for vulnerabilities in your hosts.
@@ -39,11 +40,11 @@ The [Agentless Scanning Quick Start][1] provides a streamlined setup workflow fo
 
 Once the onboarding workflow is complete, you can configure additional features, including Agent-based capabilities, on the [Features][2] page to further enhance your security setup.
 
-### Custom Feature Selection
+## Custom Feature Selection
 
 The [Custom Feature Selection][3] workflow offers flexibility and customization during onboarding, enabling you to choose features that best fit your specific needs.
 
-#### When to Use Custom Feature Selection
+### When to Use Custom Feature Selection
 
 Use Custom Feature Selection if you:
 
