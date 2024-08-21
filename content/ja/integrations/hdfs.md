@@ -1,7 +1,7 @@
 ---
+custom_kind: インテグレーション
 integration_title: Hdfs
 is_public: true
-custom_kind: integration
 short_description: クラスターのディスク使用状況、ボリューム障害、停止した DataNode などを追跡します。
 ---
 
@@ -31,7 +31,7 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 <!-- xxx tab "Host" xxx -->
 
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -99,21 +99,21 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `hdfs_datanode` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hdfs_datanode" >}}
 
 
-### ヘルプ
+### イベント
 
 HDFS-datanode チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "hdfs_datanode" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
@@ -153,7 +153,7 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -221,21 +221,21 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `hdfs_namenode` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hdfs_namenode" >}}
 
 
-### ヘルプ
+### イベント
 
 HDFS-namenode チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "hdfs_namenode" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

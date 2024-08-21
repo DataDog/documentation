@@ -1,6 +1,6 @@
 ---
 aliases:
-- /database_monitoring/guide/connect_dbm_and_apm/
+- /ja/database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: ブログ
@@ -25,17 +25,17 @@ Postgres、MySQL、SQL Server、Oracle
 APM トレーサーインテグレーションは、アプリケーションからデータベースに渡される情報量を制御する*伝播モード*をサポートしています。
 
 - `full` モードは完全なトレース情報をデータベースに送信し、DBM 内で個々のトレースを調査できるようにします。これはほとんどのインテグレーションで推奨されるソリューションです。
-- `service` モードはサービス名を送信し、どのサービスがデータベース負荷に寄与しているかを把握できます。このモードは Oracle と SQL Server アプリケーションで唯一サポートされているモードです。
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle applications.
 - `disabled` モードは伝播を無効にし、アプリケーションからの情報を送信しません。
-
-SQL Server と Oracle は、ステートメントキャッシュの動作により、完全なトレースコンテキストを含むとパフォーマンスの問題が発生する可能性があるため、`full` 伝播モードをサポートしていません。
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |            |           |
+| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* Aurora MySQL の完全伝播モードにはバージョン 3 が必要です。
+
+\*\* SQL Server only supports full mode with the Java tracer.
 
 **サポート対象のアプリケーショントレーサーとドライバー**
 
@@ -45,7 +45,7 @@ SQL Server と Oracle は、ステートメントキャッシュの動作によ�
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` モードのみ |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -71,6 +71,13 @@ SQL Server と Oracle は、ステートメントキャッシュの動作によ�
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] はサポートされていません
+
+\*\* Full mode SQL Server/Java:
+- The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
+- If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
+- 前提条件:
+  - Agent version 7.55.0 or greater
+  - Java tracer version 1.39.0 or greater
 
 ## セットアップ
 最高のユーザーエクスペリエンスを得るために、アプリケーションで以下の環境変数が設定されていることを確認してください。
@@ -293,7 +300,8 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 以下の環境変数を設定して、データベースモニタリングの伝播機能を有効にします。
    - Postgres および MySQL の場合: `DD_DBM_PROPAGATION_MODE=full`
-   - SQL Server の場合: `DD_DBM_PROPAGATION_MODE=service`
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java tracer
+   - For Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core

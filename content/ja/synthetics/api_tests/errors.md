@@ -12,6 +12,9 @@ further_reading:
   text: ブラウザーテストの設定
 title: API テストのエラー
 ---
+## HTTP エラー
+
+`Error performing HTTP/2 request` というメッセージは、リモートサーバーの HTTP サポートに一貫性がない場合に表示されることがあります。例えば、HTTP 2 をサポートしているサーバーのエンドポイントに到達するテストを実行したとします。次の実行で、HTTP 1.1 しかサポートしていないサーバーの同じエンドポイントに遭遇すると、テストは HTTP 2 接続の確立に失敗し、エラーを返します。このシナリオでは、HTTP/1.1 に切り替えることでエラーを防ぐことができます。
 
 ## SSL エラー
 
@@ -19,7 +22,7 @@ SSL エラーは、API テストの実行時に発生する可能性のあるエ
 
 {{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="SSL の自己署名エラー" style="width:60%;" >}}
 
-| エラー                                | 説明                                                                                                                                                              |
+| Error                                | 説明                                                                                                                                                              |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `CERT_CHAIN_TOO_LONG`                | 証明書チェーンの長さが、指定された最大深度よりも長くなっています。                                                                                                 |
 | `CERT_HAS_EXPIRED`                   | 証明書の期限が切れています。                                                                                                                                              |
@@ -45,6 +48,6 @@ SSL エラーは、API テストの実行時に発生する可能性のあるエ
 | `UNABLE_TO_DECRYPT_CERT_SIGNATURE`   | 証明書の署名を復号化できません。                                                                                                                      |
 | `UNABLE_TO_DECRYPT_CRL_SIGNATURE`    | CRL 署名を復号化できません。(実際の署名の値を判断できません。)                                                                                |
 | `UNABLE_TO_GET_CRL`                  | 証明書の失効リスト (CRL) が見つかりません。                                                                                                                      |
-| `UNABLE_TO_GET_ISSUER_CERT`          | 署名の階層に含まれる認証局 (CA) のいずれかで必要な証明書が見つかりません。また、その CA はローカルアプリケーションによって信頼されていません。               |
-| `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`  | ローカルで見つかった証明書の発行者証明書が見つかりません。多くの場合これは、信頼された証明書のリストが完全ではないことを意味します。                            |
+| `UNABLE_TO_GET_ISSUER_CERT`          | Unable to find the certificate for one of the certificate authorities (CAs) in the signing hierarchy, and that CA is not trusted by the local application. For example, this error may be thrown when the self-signed root CA, but not the intermediate CA, is missing from the list of trusted certificates.               |
+| `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`  | The issuer certificate of a locally found certificate is not found. This usually means that the list of trusted certificates is not complete. For example, this error may be thrown when the self-signed root CA and intermediate CA are both missing from the list of trusted certificates.                            |
 | `UNABLE_TO_VERIFY_LEAF_SIGNATURE`    | 証明書チェーンに 1 つの (自己署名ではない) 証明書しか含まれておらず、発行者を信頼できないため、署名を確認できません。                         |

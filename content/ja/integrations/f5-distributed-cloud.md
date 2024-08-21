@@ -15,6 +15,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - notifications
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/f5-distributed-cloud/README.md
 display_on_public_website: true
@@ -24,7 +25,6 @@ integration_id: f5-distributed-cloud-services
 integration_title: F5 Distributed Cloud Services
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: f5-distributed-cloud
 public_title: F5 Distributed Cloud Services
@@ -53,6 +53,9 @@ tile:
     image_url: images/dashboard_image.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://www.f5.com/cloud
   support: README.md#Support
   title: F5 Distributed Cloud Services
 ---
@@ -70,7 +73,7 @@ F5 XC プラットフォームには、Datadog HTTPS ロギングエンドポイ
 - ダッシュボード - *アクセスログの概要*
 - 保存ビュー - *よくクエリされるフィールドのためのファセットを含む*
 
-## 計画と使用
+## セットアップ
 
 グローバルログストリーミングは、システムネームスペースまたは共有ネームスペースで利用できます。
 - 共有ネームスペースは、アカウント内のすべての共有ネームスペース、または指定できる特定の共有ネームスペースのリストからのログのストリーミングをサポートしています。
@@ -140,7 +143,7 @@ Global Log Receiver セクションで以下を実行します。
 - path
 - connection_state
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要ですか？[Datadog サポート][7]または [F5 サポート][8]にお問い合わせください。
 

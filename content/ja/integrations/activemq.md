@@ -23,8 +23,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 40
     source_type_name: ActiveMQ
-  logs:
-    source: activemq
   monitors:
     '[ActiveMQ Artemis] High disk store usage': assets/monitors/activemq_artemis_high_disk_store.json
     '[ActiveMQ Artemis] High unrouted messages': assets/monitors/activemq_artemis_unrouted_messages.json
@@ -38,6 +36,7 @@ author:
 categories:
 - log collection
 - message queues
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_on_public_website: true
@@ -47,7 +46,6 @@ integration_id: activemq
 integration_title: ActiveMQ
 integration_version: 3.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: activemq
 public_title: ActiveMQ
@@ -64,10 +62,16 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
   support: README.md#Support
   title: ActiveMQ
 ---
@@ -83,20 +87,20 @@ ActiveMQ チェックは、ブローカーとキュー、プロデューサー�
 
 **注**: バージョン 5.8.0 以前の ActiveMQ を実行している場合は、[Agent 5.10.x リリースのサンプルファイル][2]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含まれています。ActiveMQ ノードに追加でインストールする必要はありません。
 
 チェックは、[JMXFetch][4] を使って JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各ノードで JVM が必要です。Datadog は、Oracle が提供する JVM の使用を推奨しています。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -118,7 +122,7 @@ Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含ま�
 
 3. [Agent を再起動します][5]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -164,7 +168,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | `"is_jmx": true`                     |
 | `<INSTANCE_CONFIG>`  | `{"host": "%%host%%","port":"1099"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -183,21 +187,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `activemq` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "activemq" >}}
 ActiveMQ Artemis フレーバーに関連付けられたメトリクスは、メトリクス名に `artemis` が含まれています。その他すべては ActiveMQ "classic" に報告されます。
 
-### ヘルプ
+### イベント
 
 ActiveMQ チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "activemq" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
@@ -234,7 +238,7 @@ ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれて�
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -244,7 +248,7 @@ ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれて�
 
 2. [Agent を再起動します][13]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -282,21 +286,21 @@ ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれて�
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `activemq_xml` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "activemq_xml" >}}
 
 
-### ヘルプ
+### イベント
 
 ActiveMQ XML チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 ActiveMQ XML チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

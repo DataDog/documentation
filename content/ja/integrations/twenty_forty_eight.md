@@ -8,6 +8,7 @@ author:
   sales_email: sales@datadog.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/twenty_forty_eight/README.md
 display_on_public_website: true
@@ -17,7 +18,6 @@ integration_id: twenty-forty-eight
 integration_title: Twenty Forty Eight
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: twenty_forty_eight
 public_title: Twenty Forty Eight
@@ -55,13 +55,13 @@ Twenty Forty Eight は、Datadog ダッシュボードに追加できる楽し�
 
 ウィジェットをクリックしてアプリをアクティベートし、**矢印キー** を使ってタイルを動かします。同じ数字のタイル同士が触れると、足されて **1 つになります**。2048 になるまで足し残を続けましょう！
 
-## 計画と使用
+## セットアップ
 
 1. Datadog アカウントで、Dashboards に移動します。ゲームを追加するダッシュボードを選択するか、[新しいダッシュボードを作成][2]します。
 
 2. ダッシュボードで、ダッシュボードタイトルの右側にある **+Add Widgets** をクリックします。ウィジェットを右にスクロールし、**Twenty Forty Eight** ウィジェットをダッシュボードの好きな位置にドラッグアンドドロップしてください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -2,6 +2,7 @@
 categories:
 - 構成 & デプロイ
 - コンテナ
+custom_kind: インテグレーション
 dependencies: []
 description: Datadog を使用した Docker メトリクスの監視
 doc_link: https://docs.datadoghq.com/integrations/docker/
@@ -19,7 +20,6 @@ integration_id: docker
 integration_title: Docker
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: docker
 public_title: Datadog-Docker インテグレーション
@@ -37,12 +37,12 @@ Docker からメトリクスをリアルタイムに取得して、以下のこ�
 - コンテナのパフォーマンスを視覚化します
 - コンテナのパフォーマンスを内部で実行されているアプリケーションと関連付けることができます
 
-## 計画と使用
+## セットアップ
 
 コンテナ内で Agent を実行したい場合は、[Docker Agent ドキュメント][1]を参照してください。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
 メトリクス、イベント、サービスチェックについては、[Docker の収集データ][2]を参照してください。
 

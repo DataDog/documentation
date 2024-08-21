@@ -45,7 +45,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 ### イベント分析
 
-{{< img src="service_management/events/events-analytics.png" alt="Events Analytics の表示を 'source:cloudtrail' でフィルターしたもの" >}}
+{{< img src="service_management/events/events-analytics.png" alt="Events Analytics display filtered by 'source:cloudtrail'" >}}
 
 エクスプローラーでのイベントの表示や検索に加え、時系列、トップリスト、テーブルとしてグラフ化し、指定したクエリのイベント数をグループ化することができるようになりました。詳しくは、[イベントアナリティクス][2]をご覧ください。
 
@@ -68,7 +68,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 イベントモニターを作成する際、従来の空白で埋めるタイプのクエリから、新しいクエリ検索フィールドにオートコンプリートが追加されました。
 
-{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="モニタークエリ構文の新しい UI" style="width:100%;" >}}
+{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
 
 新しいクエリ検索では、ブール演算子やワイルドカードなどの新しい機能により、イベントモニターで複雑なクエリを使用することができます。
 
@@ -189,14 +189,14 @@ GitHub または Chef からのイベントを表示する
 : 新しい構文 </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /ja/service_management/events/explorer
-[2]: /ja/service_management/events/explorer/#event-analytics
-[3]: /ja/service_management/events/#generate-custom-metrics-from-events
+[2]: /ja/service_management/events/explorer/analytics
+[3]: service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /ja/service_management/events/guides/new_events_sources/
 [6]: /ja/help/

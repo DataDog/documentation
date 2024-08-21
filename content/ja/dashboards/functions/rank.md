@@ -1,8 +1,9 @@
 ---
-title: ランク
 aliases:
-  - /ja/graphing/functions/rank/
+- /ja/graphing/functions/rank/
+title: ランク
 ---
+
 ## トップ
 
 | 関数 | 説明               | 例                                              |
@@ -24,7 +25,7 @@ aliases:
     - `sum`: すべてのメトリクス値の合計。
     - `last`: 最後のメトリクス値。
     - `l2norm`: 時系列の[ノルム][1]を使用して (常に正の値)、系列をランク付けします。
-    - `area`: グラフの曲線の下の符号付き面積。負の場合もあります。
+    - `area`: Signed area under the curve being graphed, which can be negative
 
 * `DIR`: ランク付けの方向。以下のいずれかを選択します。
     - `asc`: 結果を昇順でランク付けします。

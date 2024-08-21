@@ -98,7 +98,7 @@ api_host = https://ap1.datadoghq.com
 
 * `dog metric`
 * `dog event`
-* `dog status_check`
+* `dog service_check`
 * `dog monitor`
 * `dog downtime`
 * `dog timeboard`
@@ -109,7 +109,7 @@ api_host = https://ap1.datadoghq.com
 * `dog search`
 * `dog comment`
 
-**注**: `dogshell` コマンドは、デフォルトで Datadog US1 にデータを送信します。他のサイトにデータを送信する必要がある場合は、`—api_host` オプションを使用するか、`.dogrc` ファイルに api_host を指定することで実行できます。
+**注**: `dogshell` コマンドはデフォルトで Datadog US1 にデータを送信します。他のサイトにデータを送信する必要がある場合は、`--api_host` オプションを使用するか、`.dogrc` ファイルで api_host を指定してください。
 
 ### 実際の Dogshell
 

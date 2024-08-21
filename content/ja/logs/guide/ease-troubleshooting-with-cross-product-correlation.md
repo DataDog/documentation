@@ -24,7 +24,7 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 このガイドでは、フルスタックデータを相関させる方法を説明します。ユースケースによっては、以下のいくつかのステップは省略することができます。他のステップに依存しているステップは、明示されています。
 
 1. [サーバー側ログとトレースの相関付け](#correlate-server-side-logs-with-traces)
-   * [アプリケーションログの相関付け](#correlate-application-logs)
+   * [Correlate application logs](#correlate-application-logs)
    * [プロキシログの相関付け](#correlate-proxy-logs)
    * [データベースログの相関付け](#correlate-database-logs)
 2. [フロントエンドプロダクトの相関付け](#correlate-frontend-products)
@@ -98,7 +98,7 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. `dd.trace_id` 属性で [トレース ID リマッパー][7]を追加します。
+3. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
 
 ### データベースログの相関付け
 
@@ -157,7 +157,7 @@ PostgreSQL パイプラインのクローン作成とカスタマイズ:
 
 以下に、遅延しているトレースからのクエリ遅延の実行プランの例を示します。
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="クエリ遅延ログの相関" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:100%;" >}}
 
 ## フロントエンドプロダクトの相関付け
 
@@ -235,7 +235,7 @@ APM と Synthetic Monitoring のインテグレーションにより、テスト
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /ja/logs/log_collection/javascript/
 [12]: /ja/account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /ja/real_user_monitoring/browser/#initialization-parameters
+[13]: /ja/real_user_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
 [16]: /ja/real_user_monitoring/platform/connect_rum_and_traces
