@@ -108,7 +108,7 @@ Read the [OpenTelemetry][6] specification for more information.
 
 ### Record exceptions
 
-To record exceptions, use the recordException API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new Span Event that includes standardized exception attributes and associates it with the corresponding Span.
+To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new Span Event that includes standardized exception attributes and associates it with the corresponding Span.
 
 The following examples demonstrate different ways to record exceptions:
 
