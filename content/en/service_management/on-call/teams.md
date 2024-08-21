@@ -24,9 +24,6 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
   {{% tab "Existing Team" %}}
   Select an existing Datadog Team from the drop-down menu.
   {{% /tab %}}
-  {{% tab "Import Team" %}}
-  TK
-  {{% /tab %}}
   {{< /tabs >}}
 1. Add a default escalation policy. 
    {{< img src="service_management/oncall/escalation_policy_blank.png" alt="Setup view of a new escalation policy. Notifies three proposed schedules." style="width:80%;" >}}
