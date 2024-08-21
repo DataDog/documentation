@@ -1,8 +1,9 @@
 ---
-title: データをクエリしてテキストファイルにするまでの手順
 aliases:
-  - /ja/developers/faq/query-data-to-a-text-file-step-by-step
+- /ja/developers/faq/query-data-to-a-text-file-step-by-step
+title: データをクエリしてテキストファイルにするまでの手順
 ---
+
 この記事では、Datadog API を最大限に活用するための環境のセットアップ方法と、[Datadog のパブリック API][1] からローカルファイルにイベント、メトリクス、モニターをプルまたはプッシュする方法について説明します。
 
 前提条件: Python および `pip` がローカルホストにインストールされている必要があります。Windows の場合は、[Windows の Python 2 インストール][2]を参照してください。
@@ -15,7 +16,7 @@ aliases:
 
     a. `<YOUR_DD_API_KEY>` と `<YOUR_DD_APP_KEY>` を [Datadog API キーとアプリケーションキー][4]に置き換えます。
 
-    b. `system.cpu.idle` を、取得するメトリクスに置き換えます。メトリクスのリストは [Datadog メトリクスサマリー][5]に表示されます。
+    b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary][5].
 
     c. オプションで、`*` をホストに置き換えて、データを絞り込みます。ホストのリストは [Datadog インフラストラクチャーリスト][6]に表示されます。
 
@@ -41,6 +42,6 @@ aliases:
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
-[7]: /ja/api/#rate-limiting
+[7]: /ja/api/latest/rate-limits/
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog

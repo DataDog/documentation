@@ -123,6 +123,7 @@
           - "*/metadata.csv"
           - "*/manifest.json"
           - "*/assets/service_checks.json"
+          - "*/assets/metrics/metric-spec.yaml"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 

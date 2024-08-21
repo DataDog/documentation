@@ -24,7 +24,7 @@ instances:
     ## @param password - string - optional
     ## The password to use for authentication.
     #
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
 
     ## @param options - mapping - optional
     ## Connection options. For a complete list, see:
@@ -105,7 +105,7 @@ instances:
   - hosts:
       - <HOST_MONGOS>:<PORT>
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -119,7 +119,7 @@ instances:
   - hosts:
       - <HOST_SHARD1_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -133,7 +133,7 @@ instances:
   - hosts:
       - <HOST_SHARD1_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -147,7 +147,7 @@ instances:
   - hosts:
       - <HOST_SHARD1_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -162,7 +162,7 @@ instances:
   - hosts:
       - <HOST_SHARD2_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -176,7 +176,7 @@ instances:
   - hosts:
       - <HOST_SHARD2_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -190,7 +190,7 @@ instances:
   - hosts:
       - <HOST_SHARD2_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -205,7 +205,7 @@ instances:
   - hosts:
       - <HOST_CONFIG_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     database: config
     options:
       authSource: admin
@@ -216,7 +216,7 @@ instances:
   - hosts:
       - <HOST_CONFIG_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     database: config
     options:
       authSource: admin
@@ -227,7 +227,7 @@ instances:
   - hosts:
       - <HOST_CONFIG_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     database: config
     options:
       authSource: admin

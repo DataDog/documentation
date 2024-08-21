@@ -683,6 +683,8 @@ components:
       properties:
         errors:
           description: A list of errors.
+          example:
+          - Bad Request
           items:
             description: A list of items.
             example: Bad Request
@@ -694,10 +696,16 @@ components:
     APIKeyCreateAttributes:
       description: Attributes used to create an API Key.
       properties:
+        category:
+          description: The APIKeyCreateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyCreateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -712,6 +720,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyCreateRequest:
       description: Request used to create an API key.
       properties:
@@ -743,13 +753,20 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/LeakedKey'
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
+        category:
+          description: The APIKeyUpdateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyUpdateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -769,6 +786,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyUpdateRequest:
       description: Request used to update an API key.
       properties:
@@ -1002,6 +1021,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/LeakedKey'
     ApplicationKeyResponseMeta:
       description: Additional information related to the application key response.
       properties:
@@ -1055,6 +1075,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyUpdateRequest:
       description: Request used to update an application key.
       properties:
@@ -4476,6 +4498,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountType:
       default: cloudflare-accounts
       description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
@@ -4505,6 +4529,9 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
+        name:
+          description: The name of the Cloudflare account.
+          type: string
         resources:
           description: An allowlist of resources to restrict pulling metrics for.
           example:
@@ -4524,6 +4551,8 @@ components:
       required:
       - api_key
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountUpdateRequestData:
       description: Data object for updating a Cloudflare account.
       properties:
@@ -4532,6 +4561,8 @@ components:
         type:
           $ref: '#/components/schemas/CloudflareAccountType'
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountsResponse:
       description: The expected response schema when getting Cloudflare accounts.
       properties:
@@ -5900,7 +5931,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
-      type: object
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6021,7 +6051,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6161,7 +6190,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
-      type: object
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6275,7 +6303,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationResponseHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6429,7 +6456,7 @@ components:
           description: Deployment ID.
           type: string
         service:
-          description: Service name from a service available in the Service Catalog.
+          description: Service name.
           example: shopist
           type: string
         started_at:
@@ -8152,6 +8179,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountType:
       default: fastly-accounts
       description: The JSON:API type for this API. Should always be `fastly-accounts`.
@@ -8176,7 +8205,12 @@ components:
           description: The API key of the Fastly account.
           example: ABCDEFG123
           type: string
+        name:
+          description: The name of the Fastly account.
+          type: string
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountUpdateRequestData:
       description: Data object for updating a Fastly account.
       properties:
@@ -8185,6 +8219,8 @@ components:
         type:
           $ref: '#/components/schemas/FastlyAccountType'
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountsResponse:
       description: The expected response schema when getting Fastly accounts.
       properties:
@@ -8463,6 +8499,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
@@ -8472,6 +8510,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8490,6 +8529,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -8513,12 +8553,15 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -9408,6 +9451,19 @@ components:
             were created or updated by the request are
 
             returned.'
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9439,6 +9495,19 @@ components:
       properties:
         data:
           description: An array of incident attachments.
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9532,8 +9601,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentFieldAttributesSingleValue'
       - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
-      required:
-      - type
     IncidentFieldAttributesMultipleValue:
       description: A field with potentially multiple values selected.
       properties:
@@ -10650,6 +10717,8 @@ components:
       - $ref: '#/components/schemas/IncidentTodoAnonymousAssignee'
     IncidentTodoAssigneeArray:
       description: Array of todo assignees.
+      example:
+      - '@test.user@test.com'
       items:
         $ref: '#/components/schemas/IncidentTodoAssignee'
       type: array
@@ -11154,6 +11223,45 @@ components:
           description: Jira project key
           type: string
       type: object
+    LeakedKey:
+      description: The definition of LeakedKey object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LeakedKeyAttributes'
+        id:
+          description: The LeakedKey id.
+          example: id
+          type: string
+        type:
+          $ref: '#/components/schemas/LeakedKeyType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    LeakedKeyAttributes:
+      description: The definition of LeakedKeyAttributes object.
+      properties:
+        date:
+          description: The LeakedKeyAttributes date.
+          example: '2017-07-21T17:32:28Z'
+          format: date-time
+          type: string
+        leak_source:
+          description: The LeakedKeyAttributes leak_source.
+          type: string
+      required:
+      - date
+      type: object
+    LeakedKeyType:
+      default: leaked_keys
+      description: The definition of LeakedKeyType object.
+      enum:
+      - leaked_keys
+      example: leaked_keys
+      type: string
+      x-enum-varnames:
+      - LEAKED_KEYS
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -11767,9 +11875,6 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
     LogsArchiveDefinition:
       description: The definition of an archive.
       properties:
@@ -11796,9 +11901,7 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
+      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -12602,10 +12705,13 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets where only included attribute is its title
+      description: Assets related to the object, including title and url.
       properties:
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricAssetDashboardRelationship:
@@ -12986,7 +13092,8 @@ components:
       - type
       type: object
     MetricDashboardAttributes:
-      description: Attributes related to the dashboard, including title and popularity.
+      description: Attributes related to the dashboard, including title, popularity,
+        and url.
       properties:
         popularity:
           description: Value from 0 to 5 that ranks popularity of the dashboard.
@@ -12996,6 +13103,9 @@ components:
           type: number
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricDashboardID:
@@ -13324,6 +13434,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - timestamp: 1575317847
+            value: 0.5
           items:
             $ref: '#/components/schemas/MetricPoint'
           type: array
@@ -14115,6 +14228,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     NullableUserRelationship:
       description: Relationship to user.
       nullable: true
@@ -14326,10 +14441,12 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
+          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14387,15 +14504,19 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
+          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceResponseData:
       description: Opsgenie service data from a response.
       properties:
@@ -14404,6 +14525,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14412,6 +14535,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceType:
       default: opsgenie-service
       description: Opsgenie service resource type.
@@ -14427,11 +14552,13 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
+          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14440,6 +14567,8 @@ components:
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateData:
       description: Opsgenie service for an update request.
       properties:
@@ -14448,6 +14577,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14456,6 +14587,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateRequest:
       description: Update request for an Opsgenie service.
       properties:
@@ -16709,6 +16842,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermission:
       description: Relationship between a user team permission and a team
       properties:
@@ -16956,7 +17091,6 @@ components:
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
-      type: object
     RestrictionQueryRole:
       description: Partial role object.
       properties:
@@ -17847,6 +17981,10 @@ components:
       type: object
     ScalarFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - aggregator: avg
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/ScalarQuery'
       type: array
@@ -18805,6 +18943,8 @@ components:
       type: object
     SecurityMonitoringSignalIncidentIds:
       description: Array of incidents that are associated with this signal.
+      example:
+      - 2066
       items:
         description: Public ID attribute of the incident that is associated with the
           signal.
@@ -19712,6 +19852,10 @@ components:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
           type: string
+        editable:
+          description: Whether the suppression rule is editable.
+          example: true
+          type: boolean
         enabled:
           description: Whether the suppression rule is enabled.
           example: true
@@ -20807,7 +20951,6 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
-      type: object
     ServiceDefinitionSchemaVersions:
       description: Schema versions
       enum:
@@ -23328,6 +23471,9 @@ components:
       type: object
     TimeseriesFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/TimeseriesQuery'
       type: array
@@ -23616,6 +23762,8 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-merge-override:
+        required: false
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -23635,6 +23783,10 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        mfa_enabled:
+          description: If user has MFA enabled.
+          readOnly: true
+          type: boolean
         modified_at:
           description: Time that the user was last modified.
           format: date-time
@@ -23837,6 +23989,8 @@ components:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+      x-merge-override:
+        properties: false
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -24256,6 +24410,7 @@ components:
               access to the cloud cost data source in dashboards and notebooks.
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations.
+            code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
@@ -24435,6 +24590,8 @@ paths:
         - name: api_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/api_keys/{api_key_id}:
     delete:
       description: Delete an API key.
@@ -24544,6 +24701,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -27666,6 +27825,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -29416,6 +29576,9 @@ paths:
         - name: integration_service_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/integration/opsgenie/services/{integration_service_id}:
     delete:
       description: Delete a single service object in the Datadog Opsgenie integration.
@@ -29505,6 +29668,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -29574,6 +29739,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/cloudflare/accounts/{account_id}:
     delete:
       description: Delete a Cloudflare account.
@@ -29671,6 +29838,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/confluent-cloud/accounts:
     get:
       description: List Confluent accounts.
@@ -29827,6 +29997,8 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources:
     get:
       description: Get a Confluent resource for the account associated with the provided
@@ -29979,6 +30151,8 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/integrations/fastly/accounts:
     get:
       description: List Fastly accounts.
@@ -30047,6 +30221,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/fastly/accounts/{account_id}:
     delete:
       description: Delete a Fastly account.
@@ -30129,6 +30305,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/fastly/accounts/{account_id}/services:
     get:
       description: List Fastly services for an account.
@@ -30194,6 +30373,7 @@ paths:
           source: data.id
         type: unsafe
     x-merge-override:
+      get: true
       post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
@@ -30281,6 +30461,7 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      delete: true
       get: true
       patch: true
   /api/v2/integrations/okta/accounts:
@@ -30353,6 +30534,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/okta/accounts/{account_id}:
     delete:
       description: Delete an Okta account.
@@ -30451,7 +30634,9 @@ paths:
       x-undo:
         type: idempotent
     x-merge-override:
+      delete: true
       get: true
+      patch: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -34308,11 +34493,11 @@ paths:
 
         - Service Level Objectives: `slo`
 
-        - Synthetic Global Variables: `synthetic-global-variable`
+        - Synthetic Global Variables: `synthetics-global-variable`
 
-        - Synthetic Tests: `synthetic-test`
+        - Synthetic Tests: `synthetics-test`
 
-        - Synthetic Private Locations: `synthetic-private-location`
+        - Synthetic Private Locations: `synthetics-private-location`
 
         - Monitors: `monitor`
 

@@ -57,6 +57,7 @@ local/bin/py/preview_links.py                                 @DataDog/documenta
 local/bin/py/preview-links-template.mako                      @DataDog/documentation
 local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
 local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
+local/**/*                                                    @DataDog/WebOps-Platform
 data/sdk_versions.json                                        @Datadog/documentation
 
 # markdown shortcodes

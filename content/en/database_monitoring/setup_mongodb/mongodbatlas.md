@@ -12,6 +12,8 @@ further_reading:
 
 Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB Atlas instances. This guide outlines the steps to set up Database Monitoring for MongoDB Atlas.
 
+{{% dbm-mongodb-beta-new-features %}}
+
 ## Before you begin
 
 Supported MongoDB major versions
@@ -52,6 +54,9 @@ The Datadog Agent requires read-only access to the MongoDB Atlas Cluster to coll
 5. Under **Database User Privileges**, expand **Custom Roles** and select the custom monitoring role you created in the previous step.
 6. Click **Add User**.
 7. Note the username and password for the monitoring user, so you can configure the Agent.
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ### Install and configure the Agent
 

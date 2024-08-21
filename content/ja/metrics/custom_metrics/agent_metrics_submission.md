@@ -32,11 +32,11 @@ self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 
 | パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 文字列          | 〇      | -             | メトリクスの名前                                                             |
-| `value`       | Float           | 〇      | -             | メトリクスの値                                                           |
-| `tags`        | 文字列のリスト | ✕       | -             | メトリクスに関連付けられているタグのリスト                                       |
-| `hostname`    | 文字列          | ✕       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
-| `device_name` | 文字列          | ✕       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | Yes      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 ### `count()`
 
@@ -52,11 +52,11 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 
 | パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 文字列          | 〇      | -             | メトリクスの名前                                                             |
-| `value`       | Float           | 〇      | -             | メトリクスの値                                                           |
-| `tags`        | 文字列のリスト | ✕       | -             | メトリクスに関連付けられているタグのリスト                                       |
-| `hostname`    | 文字列          | ✕       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
-| `device_name` | 文字列          | ✕       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -75,11 +75,11 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 
 | パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 文字列          | 〇      | -             | メトリクスの名前                                                             |
-| `value`       | Float           | 〇      | -             | メトリクスの値                                                           |
-| `tags`        | 文字列のリスト | ✕       | -             | メトリクスに関連付けられているタグのリスト                                       |
-| `hostname`    | 文字列          | ✕       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
-| `device_name` | 文字列          | ✕       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 {{% tab "Rate" %}}
@@ -98,11 +98,11 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 
 | パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 文字列          | 〇      | -             | メトリクスの名前                                                             |
-| `value`       | Float           | 〇      | -             | メトリクスの値                                                           |
-| `tags`        | 文字列のリスト | ✕       | -             | メトリクスに関連付けられているタグのリスト                                       |
-| `hostname`    | 文字列          | ✕       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
-| `device_name` | 文字列          | ✕       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 
@@ -122,11 +122,11 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 | パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 文字列          | 〇      | -             | メトリクスの名前                                                             |
-| `value`       | Float           | 〇      | -             | メトリクスの値                                                           |
-| `tags`        | 文字列のリスト | ✕       | -             | メトリクスに関連付けられているタグのリスト                                       |
-| `hostname`    | 文字列          | ✕       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
-| `device_name` | 文字列          | ✕       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -232,7 +232,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 [1]: /ja/developers/custom_checks/write_agent_check/
 [2]: /ja/metrics/types/
-[3]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /ja/agent/guide/agent-commands/#restart-the-agent
-[5]: /ja/agent/guide/agent-commands/#agent-information
+[3]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[4]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[5]: /ja/agent/configuration/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/metric/summary

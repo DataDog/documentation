@@ -5,13 +5,13 @@ dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
 title: Datadog 헤로쿠 빌드팩
 ---
-이 [헤로쿠(Heroku) 빌드팩][1]은 Heroku dyno에 Datadog 에이전트를 설치하여 시스템 메트릭, 커스텀 애플리케이션 메트릭 및 트레이스를 수집합니다. 커스텀 애플리케이션 메트릭 또는 트레이스를 수집하려면 애플리케이션에서 [DogStatsD 또는 Datadog APM 라이브러리][2]에 적합한 언어를 포함합니다.
+이 [헤로쿠(Heroku) 빌드팩][1]은 헤로쿠 dyno에 Datadog 에이전트를 설치하여 시스템 메트릭, 커스텀 애플리케이션 메트릭, 그리고 트레이스를 수집합니다. 커스텀 애플리케이션 메트릭 또는 트레이스를 수집하려면 애플리케이션에 적절한 언어 [DogStatsD 또는 Datadog 애플리케이션 성능 모니터링(APM) 라이브러리][2]를 포함하세요.
 
 ## 설치
 
-이 가이드는 이미 헤로쿠를 실행하는 애플리케이션이 있는 것으로 가정합니다. 헤로쿠 설명서를 참조해 헤로쿠에 애플리케이션을 구축하는 방법을 배워보세요.
+이 가이드는 이미 헤로쿠에서 애플리케이션을 실행하고 있다고 가정합니다. 헤로쿠에 애플리케이션을 배포하는 방법을 알아보려면 헤로쿠 설명서를 참조하세요.
 
-1. [Datadog API 설정][3]으로 이동해 Datadog API 키를 복사하세요. 키를 환경 변수에 내보내기하세요.
+1. [Datadog API 설정][3]으로 이동하여 Datadog API 키를 복사합니다. 환경 변수로 내보냅니다.
 
    ```shell
    export DD_API_KEY=<YOUR_API_KEY>
@@ -23,13 +23,13 @@ title: Datadog 헤로쿠 빌드팩
    export APPNAME=<YOUR_HEROKU_APP_NAME>
    ```
 
-3. Datadog 사이트를 DD_SITE 환경 변수로 내보내기:
+3. Datadog 사이트를 DD_SITE 환경 변수로 내보냅니다.
 
    ```shell
    export DD_SITE={{< region-param key=dd_site code="true" >}}
    ```
 
-4. Datadog 빌드팩을 프로젝트에 추가:
+4. 프로젝트에 Datadog 빌드팩을 추가합니다.
 
    ```shell
    cd <HEROKU_PROJECT_ROOT_FOLDER>
@@ -52,14 +52,14 @@ title: Datadog 헤로쿠 빌드팩
    git push heroku main
    ```
 
-완료 후 각 dyno가 시작되면 Datadog 에이전트가 자동으로 시작됩니다.
+완료되면 각 dyno가 시작될 때 Datadog 에이전트가 자동으로 시작됩니다.
 
-Datadog Agent는 statsd/dogstatsd 메트릭 및 이벤트에 대한 `8125` 수신 포트를 제공합니다. 트레이스는 `8126` 포트에서 수집합니다.
+Datadog 에이전트는 statsd/dogstatsd 메트릭 및 이벤트에 대한 포트에 대한 수신 포트 `8125`를 제공합니다. 트레이스는 `8126` 포트에서 수집됩니다.
 
 ### 빌드팩 주문
-헤로쿠 설명서의 [빌드팩 보기][4]에서 설명된 대로 목록에 있는 마지막 빌드팩에서 애플리케이션에 대한 프로세스 유형을 결정하는 데 사용됩니다.
+헤로쿠 설명서 [빌드팩 보기][4]에 설명된 대로 목록의 마지막 빌드팩은 애플리케이션의 프로세스 유형을 결정하는 데 사용됩니다.
 
-[heroku-buildpack-apt][5], [puppeteer-heroku-buildpack][6], 또는 [heroku-buildpack-monorepo][7] 등 `/app` 폴더를 수정하는 빌드팩 등 apt 패키지를 설치하는 빌드팩은 Datadog 빌드팩 **이전에** 추가될 필요가 있습니다. 예를 들어, 애플리케이션에서 `ruby`, `datadog` 및 `apt` 빌드팩을 사용하는 경우 이것이 올바른 `heroku buildpacks` 출력입니다.
+[heroku-buildpack-apt][5], [puppeteer-heroku-buildpack][6] 등 apt 패키지를 설치하는 빌드팩이나 [heroku-buildpack-monorepo][7] 등 `/app` 폴더를 수정하는 빌드팩은 Datadog 빌드팩 **전**에 추가해야 합니다. 예를 들어 애플리케이션에서 `ruby`, `datadog` 및 `apt` 빌드팩을 사용하는 경우 올바른 `heroku buildpacks` 출력이 나타납니다.
 
 ```text
 1. https://github.com/heroku/heroku-buildpack-apt.git
@@ -67,23 +67,23 @@ Datadog Agent는 statsd/dogstatsd 메트릭 및 이벤트에 대한 `8125` 수�
 3. heroku/ruby
 ```
 
-## 특정 빌드팩 버전 및 특정 Datadog 에이전트 버전 고정
+## 특정 빌드팩 버전과 특정 Datadog 에이전트 버전 고정하기
 
-헤로쿠는 항상 최신 빌드팩을 사용할 것을 권장합니다. 빌드팩 버전을 고정하려면 빌드팩 릴리스 태그를 지정하여 이를 수행할 수 있습니다.
+헤로쿠는 항상 최신 빌드팩 커밋을 사용할 것을 권장합니다. 빌드팩 버전을 고정해야 하는 경우 빌드팩 릴리스 태그를 지정하여 고정할 수 있습니다:
 
 ```
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git#<DATADOG_BUILDPACK_RELEASE>
 ```
 
-`<DATADOG_BUILDPACK_RELEASE>`를 사용하려는 [빌드팩 릴리스][8]로 교체합니다.
+`<DATADOG_BUILDPACK_RELEASE>`를 사용하려는 [빌드팩 릴리스][8]로 대체합니다.
 
-기본적으로 빌드팩은 릴리스 시점 최신 버전의 Datadog 에이전트를 고정합니다. `DD_AGENT_VERSION` 환경 변수를 설정해 이전 버전에 에이전트를 고정할 수 있습니다.
+기본적으로 빌드팩은 릴리스 시점에 Datadog 에이전트의 최신 버전을 고정합니다. `DD_AGENT_VERSION` 환경 변수를 설정하여 에이전트를 이전 버전으로 고정할 수 있습니다.
 
-## 업그레이드 및 slug 재컴파일
+## 업그레이드 및 슬러그 재컴파일
 
-이 빌드팩을 업그레이드하거나 특정 빌드팩 옵션을 수정하면 slug를 다시 컴파일해야 합니다.
+이 빌드팩을 업그레이드하거나 특정 빌드팩 옵션을 수정하려면 슬러그를 다시 컴파일해야 합니다.
 
-다음 옵션은 slug를 다시 컴파일해야 합니다.
+다음 옵션을 사용하려면 슬러그를 다시 컴파일해야 합니다:
 
 * `DD_AGENT_VERSION`
 * `DD_AGENT_MAJOR_VERSION`
@@ -91,7 +91,7 @@ heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-data
 * `DD_APM_ENABLED`
 * `DD_PROCESS_AGENT`
 
-예를 들어 `DD_AGENT_VERSION` 등, 이 빌드팩을 업그레이드하거나 옵션을 변경하려면, 다음 단계가 필요합니다.
+이 빌드팩을 업그레이드하거나 이러한 옵션(예: `DD_AGENT_VERSION`)을 변경하려면 다음 단계가 필요합니다.
 
 ```shell
 # Set new version of the Agent
@@ -102,48 +102,48 @@ git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
 
-## 설정
+## 구성
 
-위에 표시된 환경 변수와 함께 설정할 수 있는 몇 가지 옵션들이 있습니다.
+위에 표시된 환경 변수 외에도 설정할 수 있는 변수가 몇 가지 더 있습니다.
 
 | 설정                    | 설명                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_API_KEY`               | *필수* API 키는 [조직 설정 -> API 키][3] 페이지에서 사용할 수 있습니다. **참고**: 애플리케이션 키가 아닌 *API*키입니다.                                                                                                                                                                                                                                                                                                                                                                                 |
-| `DD_HOSTNAME`              | *옵션* **경고**: 수동으로 호스트 이름을 설정하면 메트릭스 연속성 오류가 발생할 수 있습니다. 이 변수를 설정하지 *않는 것이* 좋습니다. dyno 호스트가 오래 지속되지 않기 때문에 `dynoname` 또는 `appname`을 모니터링하는 것이 좋습니다.                                                                                                                                                                                                                                                        |
-| `DD_DYNO_HOST`             | *옵션* `true`로 설정하여 `web.1` 또는 `run.1234` 등 dyno 이름을 호스트 이름으로 사용합니다. 자세한 정보는 아래 [호스트 이름 섹션](#hostname)을 참조하세요. 기본값은 `false`입니다.                                                                                                                                                                                                                                                                                                                                          |
-| `DD_TAGS` | *옵션* 공백으로 구분된 열로 제공된 추가 태그를 설정합니다(**참고**: 빌드팩 버전 `1.16` 이전에서 쉼표로 구분된 열, 이는 여전히 역호환성을 위해 지원됩니다.) 예: `heroku config:set DD_TAGS="simple-tag-0 tag-key-1:tag-value-1"`. 빌드팩은 자동으로 `web.1` 및 `dynotype`(dyno 유형, 예: `run` 또는 `web`) 등 dyno 이름을 대표하는 `dyno` 태그를 추가합니다. 자세한 정보는 [태깅 가이드][10]를 참조하세요. |
-| `DD_VERSION`                  | *옵션* 버전별 트레이스를 구성하는 데 사용되는 애플리케이션 버전을 설정합니다.                                                                                                                                          |
-| `DD_HISTOGRAM_PERCENTILES` | *옵션* 선택적으로 히스토그램 메트릭을 위한 추가 백분위수를 설장합니다. [백분위수를 그래프로 만드는 방법][11]을 참조하세요.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `DISABLE_DATADOG_AGENT`    | *옵션* 설정한 경우 Datadog 에이전트가 실행되지 ㅇ낳습니다.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `DD_APM_ENABLED`           | *옵션* 트레이스 수집은 기본적으로 활성화됩니다. `false`로 설정해 트레이스 수집을 비활성화합니다. 이 옵션을 변경하려면 slug를 다시 컴파일해야 합니다. 자세한 정보는 [slug 업그레이드 및 재컴파일 섹션](#slug-업그레이드-및-재컴파일)을 확인하세요.                                                                                                                                                                                                                                                          |
-| `DD_PROCESS_AGENT`         | *옵션* Datadog 프로세스 에이전트는 기본적으로 비활성화됩니다. `true`로 설정해 프로세스 에이전트를 활성화합니다. 이 옵션을 변경하려면 slug를 재컴파일해야 합니다. 자세한 정보는 [slug 업그레이드 및 재컴파일 섹션](#slug-업그레이드-및-재컴파일)을 참조하세요.                                                                                                                                                                                                                                                 |
-| `DD_SITE`                  | *옵션* app.datadoghq.eu 서비스를 사용하는 경우 이를 `datadoghq.eu`로 설정합니다. 기본값은 `datadoghq.com`입니다.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `DD_AGENT_VERSION`         | *옵션* 기본적으로 빌드팩은 패키지 리포지토리에서 사용 가능한 최신 Datadog 에이전트 6.x 버전을 설치합니다. 이 변수를 사용해 Datadog 에이전트 이전 버전을 설치하세요. **참고**: 일부 에이전트는 사용하지 않을 수 있습니다. 이 옵션은 `DD_AGENT_MAJOR_VERSION`보다 우선합니다. 이 옵션을 변경하려면 slug를 재컴파일해야 합니다. 자세한 정보는 [slug 업그레이드 및 재컴파일](#slug-업그레이드-및-재컴파일)을 참조하세요.                                           |
-| `DD_AGENT_MAJOR_VERSION`   | *옵션* 기본적으로 빌드팩은 패키지 리포지토리에서 사용 가능한 Datadog 에이전트 최신 7.x 버전을 설치합니다. 이 변수를 `6`로 설정해 Datadog 에이전트 최신 6.x 버전을 설치합니다. 에이전트 버전과 파이썬(Python) 버전과 관련된 자세한 정보는 [파이썬 버전 섹션](#파이썬-및-에이전트-버전)을 참조하세요. 이 옵션을 변경하려면 slug를 재컴파일합니다. 자세한 정보는 [slug 업그레이드 및 재컴파일](#slug-업그레이드-및-재컴파일)을 참조하세요.     |
-| `DD_DISABLE_HOST_METRICS`  | *옵션* 기본적으로 빌드팩은 dyno가 실행되는 호스트 머신의 시스템 메트릭을 보고합니다. 이를 `true`로 설정하여 시스템 메트릭 수집을 비활성화하세요. 자세한 정보는 아래에서 [시스템 메트릭 섹션](#시스템-메트릭)을 참조하세요.                                                                                                                                                                                                                                                                                  |
-| `DD_PYTHON_VERSION`        | *옵션* `6.14.0` 버전부터 Datadog 에이전트는 파이썬 버전 `2` 및 `3`과 함께 제공됩니다. 빌드팩은 버전 중 하나만 유지합니다. 이를 `2` 또는 `3`로 설정하여 에이전트에서 유지하려는 파이썬 버전을 선택하세요. 설정하지 않으면 빌드팩은 `2`을 유지합니다. 자세한 정보는 [파이썬 버전 섹션](#파이썬-및-에이전트-버전)을 참조하세요. 이 옵션을 변경하려면 slug를 재컴파일해야 합니다. 자세한 정보는 [slug 업그레이드 및 재컴파일 섹션](#slug-업그레이드-및-재컴파일)을 확인하세요. |
-| `DD_HEROKU_CONF_FOLDER`    | *옵션* 기본적으로 빌드팩은 포함하려는 모든 설정 파일에 대해 `/datadog` 폴더의 애플리케이션 루트를 포함합니다. 이를 설정하여 원하는 경로에 이 위치를 재정의할 수 있습니다. |
-| `DD_ENABLE_HEROKU_REDIS`    | *옵션* 참으로 설정하여 Redis 통합 자동 검색을 활성화하세요. [Datadog Redis 통합 섹션 활성화](#Datadog-Redis-통합-활성화)를 확인하세요. |
-| `DD_REDIS_URL_VAR`    | *옵션* 기본적으로 Redis 통합 자동 검색은 `REDIS_URL`에 저장된 연결 문자열을 사용합니다. 재정의하려면 이 변수를 쉼표로 구분된 연결 문자열에 저장된 변수 이름 목록으로 설정합니다. 자세한 정보는 [Datadog Redis 통합 섹션](#datadog-redis-통합-활성화)을 확인하세요. |
-| `DD_ENABLE_HEROKU_POSTGRES`    | *옵션* 이를 참으로 설정하여 Postgres 통합 자동 검색을 활성화합니다. 자세한 정보는 [Datadog Postgres 통합 섹션 활성화](datadog-postgres-통합-활성화)를 확인하세요. |
-| `DD_POSTGRES_URL_VAR`    | *옵션* 기본적으로 Postgres 통합 자동 검색은 `DATABASE_URL`에 저장된 연결 문자열을 사용합니다. 재정의하려면 이 변수를 쉼표로 구분된 연결 문자열이 저장된 변수 이름 목록으로 설정합니다. 자세한 정보는 [Datadog Postgres 통합 섹션 활성화](#datadog-postgres-통합-활성화)를 확인하세요. |
-| `DD_ENABLE_DBM`    | *옵션* [이 가이드](#datadog-postgres-통합-활성화)를 따라 Datadog Postgres 통합을 활성화하면 `DD_ENABLE_DBM`을 `true`로 설정해 Database 모니터링을 활성화합니다. |
+| `DD_API_KEY`               | * API 키는 [조직 설정 -> API 키][3] 페이지에서 사용할 수 있습니다. **참고**: 이 키는 애플리케이션 키가 아닌 *API* 키입니다.                                                                                                                                                                                                                                                                                                                                                                                |
+| `DD_HOSTNAME`              | *선택 사항* **경고**: 호스트 이름을 수동으로 설정하면 메트릭 연속성 오류가 발생할 수 있습니다. 이 변수를 *설정하지 않는 것*을 권장합니다. dyno 호스트 는 임시적이므로 태그 `dynoname` 또는 `appname` 를 기반으로 모니터링하는 것을 권장합니다.                                                                                                                                                                                                                                                       |
+| `DD_DYNO_HOST`             | *선택 사항* `web.1` 또는 `run.1234` 와 같은 dyno 이름을 호스트 이름으로 사용하려면 `true`로 설정합니다. 자세한 내용은 아래의 [호스트 이름 섹션](#hostname)을 참조하세요. 기본값은 `false`입니다.                                                                                                                                                                                                                                                                                                                                          |
+| `DD_TAGS` | *선택 사항* 추가로 태그를 공백으로 구분된 문자열로 설정합니다(**주**: 빌드팩 버전 `1.16` 이하에서는 쉼표로 구분된 문자열이며, 이전 버전과의 호환성을 유지하기 위해 계속 지원됨). 예:`heroku config:set DD_TAGS="simple-tag-0 tag-key-1:tag-value-1"`. 빌드팩은 `web.1`, `dynotype`(예: `run` 또는 `web`) 등 dyno 이름을 나타내는 태그 `dyno`를 자동으로 추가합니다. 자세한 내용은 [태깅 가이드][10]를 참조하세요. |
+| `DD_VERSION`                  | *선택 사항* 애플리케이션의 버전을 설정하며, 트레이스을 버전별로 구성하는 데 사용됩니다.                                                                                                                                          |
+| `DD_HISTOGRAM_PERCENTILES` | *선택 사항* 선택적으로 히스토그램 메트릭에 대한 추가 백분위수를 설정합니다. [백분위수를 그래프로 표시하는 방법][11]을 참조하세요.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `DISABLE_DATADOG_AGENT`    | *선택 사항* 설정하면 Datadog 에이전트가 실행되지 않습니다.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `DD_APM_ENABLED`           | *선택 사항* 트레이스 수집은 기본적으로 활성화되어 있습니다. 트레이스 수집을 비활성화하려면 `false`로 설정합니다. 이 옵션을 변경하려면 슬러그를 다시 컴파일해야 합니다. 점검 자세한 내용은 [업그레이드 및 슬러그 재컴파일 섹션](#upgrading-and-slug-recompilation)을 참조하세요.                                                                                                                                                                                                                                                          |
+| `DD_PROCESS_AGENT`         | *선택 사항* Datadog 프로세스 에이전트는 기본적으로 비활성화되어 있습니다. 프로세스 에이전트를 활성화하려면 `true`로 설정합니다. 이 옵션을 변경하려면 슬러그를 다시 컴파일해야 합니다. 자세한 내용은 [업그레이드 및 슬러그 재컴파일 섹션](#upgrading-and-slug-recompilation)을 확인합니다.                                                                                                                                                                                                                                                 |
+| `DD_SITE`                  | *선택 사항* app.datadoghq.eu 서비스를 사용하는 경우, `datadoghq.eu`로 설정합니다. 기본값은 `datadoghq.com`입니다.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `DD_AGENT_VERSION`         | *선택 사항* 기본적으로 빌드팩은 패키지 리포지토리에서 제공되는 Datadog 에이전트 의 최신 6.x 버전을 설치합니다. 이전 버전의 Datadog 에이전트를 설치하려면 이 변수를 사용하세요. **참고**: 에이전트의 모든 버전을 사용할 수 있는 것은 아닙니다. 이 옵션은 `DD_AGENT_MAJOR_VERSION` 보다 우선합니다. 이 옵션을 변경하려면 슬러그를 다시 컴파일해야 합니다. 자세한 내용은 [업그레이드 및 슬러그 재컴파일](#upgrading-and-slug-recompilation)을 참조하세요.                                           |
+| `DD_AGENT_MAJOR_VERSION`   | *선택 사항* 기본적으로 빌드팩은 패키지 리포지토리에서 제공되는 Datadog 에이전트 의 최신 7.x 버전을 설치합니다. 점검 이 변수를 `6` 로 설정하면 Datadog 에이전트 의 최신 6.x 버전이 설치됩니다. 에이전트 버전과 파이썬(Python) 버전의 관계에 대한 자세한 내용은 [파이썬(Python) 버전 섹션](#python-and-agent-versions)을 참조하세요. 이 옵션을 변경하려면 슬러그를 다시 컴파일해야 합니다. 자세한 내용은 [업그레이드 및 슬러그 재컴파일](#upgrading-and-slug-recompilation)을 참조하세요.     |
+| `DD_DISABLE_HOST_METRICS`  | *선택 사항* 기본적으로 빌드팩은 dyno를 실행하는 호스트 머신에 대해 메트릭 시스템을 보고합니다. 시스템 메트릭 수집을 비활성화하려면 `true` 로 설정하세요. 자세한 내용은 아래 [시스템 메트릭 섹션](#system-metrics)을 참조하세요.                                                                                                                                                                                                                                                                                  |
+| `DD_PYTHON_VERSION`        | *선택 사항* 버전 `6.14.0`, Datadog 에이전트는 파이썬(Python) 버전 `2` 및 `3`과 함께 제공됩니다. 빌드팩은 이중 하나의 버전만 유지합니다. `2` 또는 `3`으로 설정하여 에이전트에 유지하려는 파이썬(Python) 버전을 선택합니다. 설정하지 않으면 빌드팩은 `2`. 자세한 내용은 [파이썬(Python) 버전 섹션](#python-and-agent-versions)을 확인하세요. 이 옵션을 변경하려면 슬러그를 다시 컴파일해야 합니다. 자세한 내용은 [업그레이드 및 슬러그 재컴파일 섹션](#upgrading-and-slug-recompilation)을 참조하세요. |
+| `DD_HEROKU_CONF_FOLDER`    | *선택 사항* 기본적으로 빌드팩은 애플리케이션 루트의 `/datadog` 폴더에서 포함하려는 설정 파일을 찾습니다. [prerun.sh script](#prerun-script)를 참조하세요. 이 위치를 원하는 경로로 설정하여 재정의할 수 있습니다. |
+| `DD_ENABLE_HEROKU_REDIS`    | *선택 사항* Redis 통합 자동 검색을 활성화하려면 true로 설정합니다. 자세한 내용은 [Datadog Redis 통합 섹션 활성화](#enabling-the-datadog-redis-integration)를 확인하세요. |
+| `DD_REDIS_URL_VAR`    | *선택 사항* 기본적으로 Redis 통합 자동 검색은 `REDIS_URL`에 저장된 연결 문자열을 사용합니다. 이를 재정의하려면 이 변수를 연결 문자열을 저장하는 쉼표로 구분된 변수 이름 목록 으로 설정합니다. 자세한 내용은 [Datadog Redis 통합 섹션 활성화하기](#enabling-the-datadog-redis-integration)를 확인하세요. |
+| `DD_ENABLE_HEROKU_POSTGRES`    | *선택 사항* Postgres 통합 자동 검색을 활성화하려면 true로 설정합니다. 자세한 내용은 [Datadog Postgres 통합 섹션 활성화](#enabling-the-datadog-postgres-integration)를 참조하세요. |
+| `DD_POSTGRES_URL_VAR`    | *선택 사항* 기본적으로 Postgres 통합 자동 검색은 `DATABASE_URL`에 저장된 연결 문자열을 사용합니다. 이를 재정의하려면 이 변수를 연결 문자열을 저장하는 쉼표로 구분된 변수 이름 목록으로 설정합니다. 자세한 내용은 [Datadog Postgres 통합 섹션 활성화하기](#enabling-the-datadog-postgres-integration)를 참조하세요. |
+| `DD_ENABLE_DBM`    | *선택 사항* [이 가이드](#enabling-the-datadog-postgres-integration)에 따라 Datadog Postgres 통합을 활성화하는 경우 `DD_ENABLE_DBM`를 `true`로 설정하여 데이터베이스 모니터링를 활성화합니다. |
 
-추가 설명서는 [Datadog 에이전트 설명서][12]를 참조하세요.
+추가 문서는 [Datadog 에이전트 설명서][12]를 참조하세요.
 
 ## 호스트네임
 
-헤로쿠(Heroku) dyno는 수명이 짧습니다. 새로운 코드가 구축되고, 설정 변경이 있거나 리소스 필요/가용성이 변경될 때마다 각기 다른 호스트 머신으로 이동될 수 있습니다. 헤로쿠는 유연하고 반응성이 뛰어나므로 Datadog에서 많은 수의 호스트가 보고될 수 있습니다. Datadog는 호스트 기반으로 청구하고 빌드팩 기본값은 실제 호스트를 보고하므로 예상보다 더 높은 비용이 발생할 수 있습니다. 
+헤로쿠(Heroku) dyno는 임시적이므로 새 코드가 배포되거나 설정 변경이 이루어지거나 리소스 요구/가용성이 변경될 때마다 다른 호스트 머신으로 이동할 수 있습니다. 따라서 헤로쿠가 유연하고 뛰어난 대응성을 갖추게 되지만 Datadog 에 호스트 보고되는 건수가 많을 수 있습니다. Datadog는 호스트 기준으로 청구하며 빌드팩 기본값은 실제 호스트를 보고하므로 예상 비용이 높아질 수 있습니다.
 
-사용 사례에 따라 더 적은 수의 호스트를 집계하고 보고하도록 호스트 이름을 설정하길 원할 수 있습니다. 그렇게 하려면 `DD_DYNO_HOST`를 `true`로 설정하세요. 그러면 에이전트가 호스트 이름을 앱 및 dyno 이름을 보고합니다(예: `appname.web.1` 또는 `appname.run.1234`) 또한 호스트 개수는 dyno 사용량과 일치하게 됩니다. 하나의 단점은 dyno가 순환할 때마다 메트릭 지속성 오류가 다소 발생할 수 있다는 점입니다.
+사용 사례에 따라 호스트 가 집계되어 더 낮은 수치를 보고하도록 호스트 이름을 설정할 수 있습니다. 이렇게 하려면 `DD_DYNO_HOST`를 `true`로 설정하면 에이전트 이 호스트 이름을 앱 및 dyno 이름(예: `appname.web.1` 또는 `appname.run.1234`)으로 보고하고 호스트 카운트가 dyno 사용량과 거의 일치하게 됩니다. 한 가지 단점은 다이노가 순환될 때마다 메트릭 연속성 오류가 표시될 수 있다는 것입니다.
 
-올바르게 작동하도록 하려면 `HEROKU_APP_NAME`을 설정해야 합니다. 가장 손쉬운 방법은 [dyno 메타데이터를 활성화][13]하는 것입니다. **참고**: Dyno 메타데이터는 아직 비공개 영역에서 사용할 수 없습니다. 이 경우 수동으로 `HEROKU_APP_NAME`을 설정해야 합니다. 
+이 기능이 제대로 작동하려면 `HEROKU_APP_NAME`을 설정해야 합니다. 가장 쉬운 방법은 [dyno 메타데이터를 활성화][13]하는 것입니다. **참고**: dyno 메타데이터는 아직 비공개 스페이스에서 사용할 수 없으며, 이 경우 `HEROKU_APP_NAME`을 수동으로 설정해야 합니다.
 
-## 수명이 짧은 dyno를 위한 Datadog 에이전트 비활성화
+## 수명이 짧은 dyno의 경우 Datadog 에이전트 비활성화하기
 
-기본적으로, Datadog 에이전트는 애플리케이션의 일부인 각 dyno에서 실행됩니다. `scheduler`, `release` 또는 `run`를 포함합니다. 많은 경우 이런 dyno의 메트릭은 필요하지 않으며 이에 대해 Datadog 에이전트를 비활성화해도 좋습니다.
+기본적으로 Datadog 에이전트는 애플리케이션의 일부인 각 dyno에서 실행됩니다. 여기에는 `scheduler`, `release` 또는 `run` dyno가 포함됩니다. 대부분의 경우 이러한 dyno의 메트릭은 필요하지 않으므로 Datadog 에이전트를 비활성화하는 것이 좋습니다.
 
-dyno 유형에 따라 Datadog 에이전트를 비활성화하려면 다음 스니펫을 [prerun.sh script](#prerun-스크립트)(모니터링하려는 dyno 유형에 적응)에 추가합니다.
+dyno 유형에 따라 Datadog 에이전트를 비활성화하려면 [prerun.sh 스크립트](#prerun-script)에 다음 스니펫을 추가하세요(모니터링을 원하지 않는 dyno 유형에 맞게 조정).
 
 ```shell
 # Disable the Datadog Agent based on dyno type
@@ -154,73 +154,81 @@ fi
 
 ## 시스템 메트릭
 
-기본적으로, 빌드팩은 dyno에서 실행되는 호스트 머신의 시스템 메트릭을 수집합니다. 시스템 메트릭은 이 빌드팩을 사용하는 개별 dyno에서 사용할 수 없습니다. 호스트 시스템 메트릭 수집을 비활성화하려면 `DD_DISABLE_HOST_METRICS` 환경 변수를 `true`로 설정합니다.
+기본적으로 빌드팩은 dyno를 실행하는 호스트 머신에 대한 시스템 메트릭을 수집합니다. 이 빌드팩을 사용하는 개별 dyno에는 시스템 메트릭을 사용할 수 없습니다. 호스트 시스템 메트릭 수집을 비활성화하려면 `DD_DISABLE_HOST_METRICS` 환경 변수를 `true`로 설정하세요.
 
-dyno에 대한 시스템 메트릭을 수집하려면, 다음을 해야 합니다.
+dyno를 위한 시스템 메트릭을 수집하려면 반드시 필요합니다.
 
-1. [헤로쿠 랩: 로그-런타임-메트릭][14]을 활성화합니다.
-2. [Datadog 로그 드레인][15]을 사용하여 헤로쿠 Logplex에서 메트릭 로그를 수집하여 Datadog로 전달합니다.
-3. 수집된 로그에 대해 [로그-기반 메트릭][16]을 생성합니다.
+1. [Heroku Labs: log-runtime-metrics][14]를 활성화합니다.
+2. [Datadog 로그 드레인][15]를 사용하여 헤로쿠 로그플렉스에서 메트릭 로그를 수집하여 Datadog로 전달합니다.
+3. 수집된 로그에 [로그 기반 메트릭][16]을 생성합니다.
 
 ## 파일 위치
 
-* Datadog 에이전트는 `/app/.apt/opt/datadog-agent`에 설치되어 있습니다.
-* Datadog 에이전트 설정 파일은 `/app/.apt/etc/datadog-agent`에 있습니다.
-* Datadog 에이전트 로그는 `/app/.apt/var/log/datadog`에 있습니다.
+* Datadog 에이전트 은 다음 주소에 설치됩니다. `/app/.apt/opt/datadog-agent`
+* Datadog 에이전트 설정 파일은 다음 주소에 있습니다. `/app/.apt/etc/datadog-agent`
+* Datadog 에이전트 로그는 다음 위치에 있습니다. `/app/.apt/var/log/datadog`
 
-## 통합 활성화
+## 활성화 통합
 
 ### Datadog Redis 통합 활성화
 
-헤로쿠 애플리케이션에서 Redis 애드온을 사용하는 경우(예: Redis용 헤루쿠 데이터 또는 Redis Enterprise Cloud), 환경 변수를 설정해 Datadog Redis 통합을 활성화할 수 있습니다.
+헤로쿠 애플리케이션에서 Redis 애드온을 사용하는 경우(예: Heroku Data for Redis 또는 Redis Enterprise Cloud), 환경 변수를 설정하여 Datadog Redis 통합을 활성화할 수 있습니다:
 
 ```
 heroku config:set DD_ENABLE_HEROKU_REDIS=true
 ```
 
-기본적으로 이 통합은 Redis 연결 URL이 `REDIS_URL` 환경 변수에 정의되어 있다고 가정합니다. 해당 환경 변수는 Redis용 헤로쿠 데이터 및 기타 Redis 애드온 기본값입니다.
+기본적으로 이 통합은 `REDIS_URL`라는 환경 변수에 Redis 연결 URL이 정의되어 있다고 가정합니다(Heroku Data for Redis 및 기타 Redis 애드온의 경우 기본값 설정).
 
-연결 URL이 각기 다른 환경 변수에 정의되었거나 Redis 인스턴스 1개 이상을 설정해야 하는 경우, `DD_REDIS_URL_VAR` 환경 변수를 쉼표로 구분된 연결 문자열 이름으로 설정합니다. 예를 들어 헤로쿠 Redis와 Redis Enterprise Cloud을 사용하는 경우 `DD_REDIS_URL_VAR`를 설정합니다.
+연결 URL이 다른 환경 변수에 정의되어 있거나 Redis 인스턴스를 2개 이상 설정하려는 경우 `DD_REDIS_URL_VAR` 환경 변수를 연결 문자열의 쉼표로 구분된 변수 이름으로 설정하세요. 예를 들어  Heroku Redis 및 Redis Enterprise Cloud를 모두 사용하는 경우 `DD_REDIS_URL_VAR`를 설정합니다:
 
 ```
+heroku config:set REDIS_URL="redis://aaaaa:bbbbb@redis-url"
+heroku config:set REDISCLOUD_URL="redis://xxxxx:yyyyy@redis-cloud-url"
+
+# This env var must point to other env vars.
 heroku config:set DD_REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
 ```
 
-### Datadog Postgres 통합 활성화
+### Datadog Postgres 활성화 통합
 
-헤로쿠(Heroku) 애플리케이션에서 Postgres 애드온을 사용하는 경우(예: 헤로쿠 Postgres), 환경 변수를 설정하여 Datadog Postgres 통합을 활성화할 수 있습니다.
+헤로쿠 애플리케이션에서 Postgres 애드온을 사용하는 경우(예: 헤로쿠 Postgres), 환경 변수를 설정하여 Datadog Postgres 통합을 활성화할 수 있습니다:
 
 ```
 heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
 ```
 
-기본적으로 이 통합은 Postgres 연결 URL이 `DATABASE_URL` 환경 변수에 정의되어 있는 것으로 간주합니다. 이는 헤로쿠 Postgres 및 기타 Postgres 애드온 기본 설정입니다.
+기본적으로 이 통합은 `DATABASE_URL`이라는 환경 변수에 Postgres 연결 URL이 정의되어 있다고 가정합니다( Heroku Postgres 및 기타 Postgres 추가 기능의 경우 기본값 설정).
 
-연결 URL이 각기 다른 환경 변수에 정의되어 있거나 Postgres 인스턴스를 1개 이상 설정하려면, `DD_POSTGRES_URL_VAR` 환경 변수를 쉼표로 구분된 연결 문자열 변수 이름으로 설정합니다. 예를 들어 Postgres 인스턴스 2개가 있고, 연결 문자열이 `POSTGRES_URL1` 및 `POSTGRES_URL2`에 저장된 경우 `DD_POSTGRES_URL_VAR`를 설정하세요.
+연결 URL이 다른 환경 변수에 정의되어 있거나 Postgres 인스턴스 2개 이상을 설정하려는 경우 `DD_POSTGRES_URL_VAR` 환경 변수를 연결 문자열의 쉼표로 구분된 변수 이름으로 설정합니다. 예를 들어, 2개의 Postgres 인스턴스가 있고 연결 문자열이 `POSTGRES_URL1` 및 `POSTGRES_URL2`에 저장되어 있는 경우 `DD_POSTGRES_URL_VAR`를 적절히 설정합니다.
 
 ```
+heroku config:set POSTGRES_URL1="postgres://aaaaa:bbbbb@postgres-url-1:5432/dbname"
+heroku config:set POSTGRES_URL2="postgres://xxxxx:yyyyy@postgres-url-2:5432/dbname"
+
+# This env var must point to other env vars.
 heroku config:set DD_POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
 ```
 
-Postgres 인스턴스를 위해 [Database 모니터링][17]을 활성화하려면 [이러한 지침][18]에 따라 에이전트가 데이터베이스에 액세스하도록 허용하고 `DD_ENABLE_DBM`을 참으로 설정합니다.
+Postgres 인스턴스에 대해 [데이터베이스 모니터링][17]를 활성화하려면 [이 지침][18]에 따라 에이전트 데이터베이스에 대한 액세스 권한을 부여하고 `DD_ENABLE_DBM` 를 true로 설정합니다.
 
 ```
 heroku config:set DD_ENABLE_DBM=true
 ```
 
-Database 모니터링을 사용하려면 Datadog 에이전트용 데이터베이스 자격 증명을 생성해야 합니다. 그러므로 DBM은 헤로쿠 Postgres Essential Tier 플랜에서 사용할 수 없습니다.
+데이터베이스 모니터링를 사용하려면 Datadog 에이전트에 대한 데이터베이스 자격 증명을 생성해야 하므로 Heroku Postgres Essential Tier 요금제에서는 DBM을 사용할 수 없습니다.
 
-### 기타 통합 활성화
+### 추가 통합 활성화
 
-[Datadog<INTEGRATION_NAME> 통합][19]을 활성화하는 경우
+[Datadog-<INTEGRATION_NAME> 통합 ][19] 활성화:
 
-* 애플리케이션 내 `datadog/conf.d` 폴더를 생성합니다.
-* 각 통합을 활성화하려면 `<INTEGRATION_NAME>.d` 폴더를 생성합니다.
-* 폴더에서 [통합 설정][20]을 사용해 `conf.yaml`을 생성합니다.
+* 애플리케이션 내에 `datadog/conf.d` 폴더를 생성합니다.
+* 활성화할 통합 폴더마다 `<INTEGRATION_NAME>.d` 폴더를 생성합니다.
+* 해당 폴더 아래에 [통합에 대한 설정][20]을 사용하여 `conf.yaml`을 생성합니다.
 
-dyno 시작 동안 YAML 파일은 적절한 Datadog 에이전트 설정 디렉터리에 복사됩니다.
+dyno가 시작되는 동안 YAML 파일은 적절한 Datadog 에이전트 설정 디렉터리에 복사됩니다.
 
-예를 들어 [Datadog-Memcache 통합][21]을 활성화하려면 애플리케이션 루트 `/datadog/conf.d/mcache.d/conf.yaml`에 파일을 추가합니다(또는 `/$DD_HEROKU_CONF_FOLDER/conf.d/mcache.d/conf.yaml`). 이 [설정 옵션](#설정)을 변경한 경우:
+예를 들어 [Datadog-Memcache 통합][21]을 활성화하려면 애플리케이션 루트에 `/datadog/conf.d/mcache.d/conf.yaml` 파일을 추가합니다(또는 이 [설정 옵션](#configuration)을 변경한 경우 `/$DD_HEROKU_CONF_FOLDER/conf.d/mcache.d/conf.yaml`).
 
 ```yaml
 init_config:
@@ -232,27 +240,27 @@ instances:
   - url: localhost
 ```
 
-모든 사용 가능한 설정 옵션은 샘플 [mcache.d/conf.yaml][22]을 참조하세요.
+**참고**: 사용 가능한 모든 설정 옵션은 샘플 [mcache.d/conf.yaml][22]을 참조하세요.
 
 ### 커뮤니티 통합
 
-활성화하려는 통합이 [커뮤니티 통합][23]의 일부인 경우, 패키지를 [prerun script](#prerun-script)의 일부로 패키지를 설치합니다.
+활성화하려는 통합이 [커뮤니티 통합 ][23]의 일부인 경우, [prerun 스크립트](#prerun-script)의 일부로 패키지를 설치합니다.
 
 ```
 agent-wrapper integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-예를 들어 [핑 통합][24]를 설치하려면 설정 파일 `datadog/conf.d/ping.d/conf.yaml`을 생성하고 다음 라인을 사전 실행 스크립트에 다음 라인을 추가합니다.
+예를 들어 [ping 통합][24]을 설치하려면 설정 파일 `datadog/conf.d/ping.d/conf.yaml` 을 만들고 사전 실행 스크립트에 다음 줄을 추가합니다.
 
 ```
 agent-wrapper integration install -t datadog-ping==1.0.0
 ```
 
-### dyno 기반 통합 비활성화
+### dyno를 기준으로 통합 비활성화
 
-모든 dyno에서 헤로쿠 애플리케이션에 있는 파일 시스템이 공유됨에 따라 통합을 활성화하면 `run` 또는 `worker` dyno를 포함하는 각 dyno에서 실행됩니다. dyno 이름 또는 유형에 따라 통합 실행을 제한하려면 작은 스니펫을 [사전 실행 스크립트](#사전 실행-스크립트)에 추가할 수 있습니다.
+헤로쿠(Heroku) 애플리케이션의 파일시스템은 모든 dyno에서 공유되므로 통합을 활성화하면 `run` 또는 `worker` dyno를 포함한 모든 dyno에서 실행됩니다. dyno 이름이나 유형에 따라 통합 실행을 제한하려면 [사전 실행 스크립트](#prerun-script)에 작은 스니펫을 추가하면 됩니다.
 
-예를 들어, Gunicorn 통합이 `web` 유형 dyno에서만 실행되어야 하는 경우 다음을 사전 실행 스크립트에 추가합니다.
+예를 들어 Gunicorn 통합이 `web` 유형의 dyno에서만 실행되어야 하는 경우, 사전 실행 스크립트에 다음을 추가하세요.
 
 ```
 if [ "$DYNOTYPE" != "web" ]; then
@@ -260,11 +268,11 @@ if [ "$DYNOTYPE" != "web" ]; then
 fi
 ```
 
-## 커스텀 점검 활성화
+## 활성화 커스텀 점검
 
-자체적인 [에이전트 커스텀 점검][25]을 활성화하려면 애플리케이션 내에 있는 Datadog 설정 폴더에 `checks.d` 폴더를 생성합니다. 폴더 아래에 커스텀 점검에 있는 모든 `.py` 및 `.yaml` 파일을 복사합니다. dyno 시작 동안 파일은 적합한 Datadog 에이전트 설정 디렉터리로 복사됩니다.
+자신만의 [에이전트 커스텀 점검 ][25]을 활성화하려면 애플리케이션 내 Datadog 설정 폴더에 `checks.d` 폴더를 생성합니다. 그 아래에 커스텀 점검에서 `.py` 및 `.yaml` 파일을 모두 복사합니다. dyno가 시작되는 동안 파일이 적절한 Datadog 에이전트 설정 디렉터리에 복사됩니다.
 
-예를 들어 `foo` 및 `bar`, 2개의 커스텀 점검이 있는 경우 다음이 올바른 폴더 트리입니다.
+예를 들어 커스텀 점검, `foo` 및 `bar`이 두 개가 있는 경우 올바른 폴더 트리입니다.
 
 ```
 .
@@ -280,87 +288,87 @@ fi
 
 ## 사전 실행 스크립트
 
-위의 모든 설정과 더불어 애플리케이션에 `/datadog/prerun.sh` 사전 실행 스크립트를 포함할 수 있습니다. 사전 실행 스크립트는 모든 표준 설정 작업 이후, 그리고 Datadog 에이전트 시작 전에 실행됩니다. DD_TAGS 또는 DD_VERSION 등 환경 변수를 수정하고, 추가 설정을 구성하고, 커뮤니티 통합을 설치하거나 심지어 프로그램에서 Datadog 에이전트를 비활성화할 수 있습니다.
+위의 모든 설정에 추가하여 애플리케이션에 `/datadog/prerun.sh` 스크립트를 포함할 수 있습니다. 이 사전 실행 스크립트는 모든 표준 설정 작업이 끝나고 Datadog 에이전트를 시작하기 직전에 실행됩니다. 이를 통해 환경 변수를 수정하고(예: DD_TAGS 또는 DD_VERSION), 추가 설정을 수행하고, 커뮤니티 통합을 설치하거나, Datadog 에이전트를 프로그래밍 방식으로 비활성화할 수도 있습니다.
 
-아래 예는 `prerun.sh` 스크립트에서 할 수 있는 몇 가지 작업을 보여줍니다.
+아래 예는 `prerun.sh` 스크립트에서 수행할 수 있는 몇 가지 작업을 보여줍니다.
 
-```shell
+```셸
 #!/usr/bin/env bash
 
-# dyno 유형에 따라 Datadog 에이전트 비활성화
+# 다이노 타입에 따라 Datadog 에이전트 을 비활성화합니다.
 if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
-# dyno 유형에 따라 통합 비활성화
+# 다이노 유형에 따라 통합 비활성화
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
 
-# HEROKU_SLUG_COMMIT에 따라 앱 버전 설정
+# HEROKU_SLUG_COMMIT에 따라 앱 버전을 설정합니다.
 if [ -n "$HEROKU_SLUG_COMMIT" ]; then
-  DD_VERSION=$HEROKU_SLUG_COMMIT
+  dd_version=$heroku_slug_commit
 fi
 
-# "ping" 커뮤니티 통합 설치
-agent-wrapper integration install -t datadog-ping==1.0.0
+# "ping" 설치 커뮤니티 통합
+에이전트-wrapper 통합 install -t Datadog-ping==1.0.0
 ```
 
 ## Datadog 콘솔 출력 제한
 
-일부 경우 Datadog 빌드팩이 콘솔에 작성하는 로그 양을 제한하길 원할 수 있습니다.
+경우에 따라 Datadog 빌드팩이 콘솔에 쓰는 로그의 양을 제한하길 원할 수 있습니다.
 
-빌드팩의 로그 출력을 제한하려면 `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `CRITICAL`, `OFF` 중 하나에 `DD_LOG_LEVEL` 환경 변수를 설정합니다.
+빌드팩 로그 출력을 제한하려면 `DD_LOG_LEVEL` 환경 변수를 다음 중 하나로 설정합니다. `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `CRITICAL`, `OFF`.
 
 ```shell
 heroku config:add DD_LOG_LEVEL=ERROR
 ```
 
-## 선택적 바이너리
+## 부수적인 바이너리
 
-slug 영역을 저장하려면, `DD_APM_ENABLED`가 `false`로 설정되어 있거나 `DD_PROCESS_AGENT`이 설정 안 됨 또는 `false`로 설정되어 있는 경우 컴파일 동안 선택적 `process-agent` 바이너리가 제거됩니다.
+슬러그 공간을 절약하기 위해 `DD_APM_ENABLED`가 `false`로 설정되거나 `DD_PROCESS_AGENT`가 설정되지 않았거나 `false`로 설정된 경우 컴파일 중에 `trace-agent` 및 `process-agent` 부수적인 바이너리가 제거됩니다 .
 
-slug 크기를 줄이려면 `DD_APM_ENABLED`이 `false`로 설정되어 있도록 합니다. APM 기능을 사용하지 않고 `DD_PROCESS_AGENT`가 `true`로 설정되지 않은 경우, 프로세스 모니터링을 사용하지 않은 것입니다.
+슬러그 크기를 줄이려면, 애플리케이션 성능 모니터링(APM) 기능을 사용하지 않는 경우 `DD_APM_ENABLED`이 `false`로 설정되어 있는지 확인합니다. 프로세스 모니터링을 사용하지 않는 경우 `DD_PROCESS_AGENT`이 `true`로 설정되어 있지 않은지 확인합니다.
 
 ## 디버깅
 
-[정보 또는 디버깅 명령][26]을 실행하려면 `agent-wrapper` 명령을 사용합니다.
+[정보 또는 디버깅 명령][26] 중 하나를 실행하려면 `agent-wrapper` 명령을 사용합니다.
 
-예를 들어 Datadog 에이전트 상태와 활성화된 통합을 표시하려면 다음을 실행합니다.
+예를 들어, Datadog 에이전트 및 활성화된 통합의 상태를 표시하려면 실행합니다.
 
 ```shell
 agent-wrapper status
 ```
 
-## 파이썬 및 에이전트 버전
+## 파이썬(Python) 및 에이전트 버전
 
-`6.14` 버전 이전 파이썬 버전 `2`이 내장된 Datadog v6 에이전트가 출시되었습니다. 2020년 1월  `6.14`부터 파이썬 버전 `2` 수명 종료를 준비 중임을 발표했습니다. Datadog v6 에이전트는 파이썬 버전 `2` 및 `3` 모두를 포함해 출시되어 소비자가 커스텀 점검을 파이썬 버전 `3`으로 이전할 수 있는 충분한 시간을 제공합니다. 헤로쿠 빌드팩은 버전 중 하만을 유지합니다. `DD_PYTHON_VERSION`을 `2` 또는 `3`로 설정하여 에이전트에서 유지하려는 파이썬 버전을 선택합니다. 설정하지 않는 경우 빌드팩은 파이썬 버전 `2`을 유지합니다. 오직 파이썬 버전 `2`와 호환되는 커스텀 점검을 사용하는 경우 수명 종료 전 `3` 버전으로 마이그레이션합니다.
+`6.14` 버전 이전에는 Datadog v6 에이전트에는 파이썬(Python) 버전 `2`이 포함된 상태로 제공되었습니다. `6.14` 2020년 1월에 발표될 파이썬 버전 `2` 수명 종료에 대비하여, Datadog v6 에이전트에는 파이썬 버전 `2` 과 `3` 버전이 모두 포함되어 제공되어 고객이 커스텀 점검을 파이썬 버전 `3`으로 마이그레이션할 수 있는 충분한 시간을 제공합니다. 헤로쿠 빌드팩은 두 버전 중 하나만 유지합니다. `DD_PYTHON_VERSION`을 `2` 또는 `3`로 설정하여 에이전트에 유지하려는 파이썬 버전을 선택합니다. 설정하지 않으면 빌드팩은 파이썬 버전 `2`를 유지합니다. 파이썬 버전 `2`에서만 작동하는 커스텀 점검을 사용하는 경우 EOL 이전에 `3` 버전으로 마이그레이션하세요.
 
-에이전트 v7는 파이썬 버전 `3`을 포함해 출시합니다. 커스텀 점검을 사용하지 않거나 커스텀 점검이 이미 버전 `3`에 마이그레이션된 경우 가능한 한 빨리 에이전트 v7에 이동합니다. `6.15`부터 v7은 동일한 기능 설정을 공유하는 동일한 부 버전과 함께 릴리스되어 두 버전 간 안전한 이동이 가능합니다. 예를 들어 `6.16`을 실행하는 경우 파이썬 버전 `2`이 필요하지 않으며 안전하게 `7.16`로 건너뛸 수 있습니다. 
+에이전트 v7은 파이썬 버전 `3`과 함께 제공됩니다. 커스텀 점검을 사용하지 않거나 커스텀 점검을 이미 `3` 버전으로 마이그레이션한 경우 가능한 한 빨리 에이전트 v7로 이동하세요. `6.15`부터는 동일한 부 버전을 가진 v7 릴리스가 동일한 기능 세트를 공유하므로 두 버전 간에 이동해도 안전합니다. 예를 들어 `6.16` 을 실행 중이고 파이썬 버전 `2`이 필요하지 않은 경우 `7.16` 으로 이동하는 것이 안전합니다.
 
 ## 헤로쿠 로그 수집
 
-Datadog 빌드팩은 헤로쿠 플랫폼에서 로그를 수집하지 않습니다. 헤로쿠 로그 수집을 설정하려면 [전용 가이드][15]를 참조하세요.
+Datadog 빌드팩은 헤로쿠 플랫폼에서 로그를 수집하지 않습니다. 헤로쿠 로그 수집을 설정하려면 [전용 가이드][15]를 참조하세요.
 
-## 도커(Docker) 이미지를 포함하는 헤로쿠 사용
+## 도커(Docker) 이미지를 통한 헤로쿠 사용
 
-이 빌드팩은 [헤로쿠 Slug 컴파일러][27]를 사용하는 헤로쿠 구축 환경에서만 작동합니다. 도커 컨테이너를 사용하는 헤로쿠에서 애플리케이션을 구축하는 경우
+이 빌드팩은 [헤로쿠의 슬러그 컴파일러][27]를 사용하는 헤로쿠 배포에서만 작동합니다. 도커 컨테이너를 사용하여 헤로쿠에 애플리케이션을 배포하는 경우 다음을 확인합니다.
 
-1. 도커 이미지의 일부로 Datadog 에이전트를 추가하고 컨테이너의 다른 프로세스로 에이전트를 시작합니다.
-2. 헤로쿠 애플리케이션에서 다음 설정 옵션을 사용해 Datadog가 이를 헤로쿠 dyno로 올바르게 보고하도록 합니다.
+1. 도커 이미지의 일부로 Datadog 에이전트를 추가하고 에이전트를 컨테이너에서 다른 프로세스로 시작합니다.
+2. 헤로쿠 애플리케이션에서 다음 설정 옵션을 설정하여 Datadog dyno가 헤로쿠 dyno로 올바르게 보고하도록 합니다.
 
 ```shell
 heroku config:add DD_HEROKU_DYNO=true
 ```
 
-예를 들어, 데비안(Debian) 기반 OS를 사용해 도커 이미지를 빌드하는 경우 `Dockerfile`에 다음 라인을 추가하세요.
+예를 들어 데비안(Debian) 기반 OS를 사용하여 도커(Docker) 이미지를 빌드하는 경우 `Dockerfile`에 다음 줄을 추가합니다.
 
 ```
-# GPG 종속성 설치
+# Install GPG dependencies
 RUN apt-get update \
  && apt-get install -y gnupg apt-transport-https gpg-agent curl ca-certificates
 
-# Datadog 리포지토리 및 서명 키 추가
+# Add Datadog repository and signing keys
 ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
 ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
 RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
@@ -377,22 +385,22 @@ RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADO
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_382E94DE.public
 
 
-# Datadog 에이전트 설치
+# Install the Datadog Agent
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
-# 엔트리포인트 복사
+# Copy entrypoint
 COPY entrypoint.sh /
 
-# DogStatsD 및 트레이스-에이전트 포트 익스포즈
+# Expose DogStatsD and trace-agent ports
 EXPOSE 8125/udp 8126/tcp
 
-# Datadog 설정 복사
+# Copy your Datadog configuration
 COPY datadog-config/ /etc/datadog-agent/
 
 CMD ["/entrypoint.sh"]
 ```
 
-도커 컨테이너 엔트리 포인트에서 Datadog 에이전트, Datadog 애플리케이션 성능 모니터링(APM) 에이전트 및 Datadog 프로세스 에이전트를 시작합니다.
+도커 컨테이너 엔트리 포인트에서 Datadog 에이전트, Datadog 애플리케이션 성능 모니터링(APM) 에이전트 , Datadog 프로세스 에이전트를 시작합니다.
 
 ```
 #!/bin/bash
@@ -402,39 +410,39 @@ datadog-agent run &
 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml
 ```
 
-도커 이미지의 더 많은 고급 옵션을 보려면 [Datadog 에이전트 도커 파일][28]을 참조하세요.
+도커 이미지의 고급 옵션은 [Datadog 에이전트 도커 파일][28]을 참조하세요.
 
-## 기여하기
+## 기여
 
-[기여 가이드라인][29]를 참조하여 [헤로쿠-빌드팩-Datadog 리포지토리][30]에 이슈나 PR을 시작하는 방법을 알아보세요.
+[기여 가이드라인][29]을 참조하여 이슈 또는 PR을 [Heroku-buildpack-datadog repository][30]에 여는 방법을 알아보세요.
 
-## 내역
+## 기록
 
-이 프로젝트의 이전 버전은 [마이크더맨 헤로쿠-빌드팩-datadog 프로젝트][31]에서 가져온 것입니다. 대부분 Datadog 에이전트 버전 6을 위해 재작성되었습니다. 변경 사항과 자세한 정보는 [변경 로그][32]에서 찾을 수 있습니다.
+이 프로젝트의 이전 버전은 [miketheman heroku-buildpack-datadog project][31]에서 가져온 것입니다. 대부분 Datadog 에이전트 버전 6을 위해 재작성되었습니다. 변경 사항과 자세한 정보는 [변경 로그][32]에서 찾을 수 있습니다.
 
 ## 트러블슈팅
 
-### 에이전트 상태 받기
+### 에이전트 상태 가져오기
 
-빌드팩을 설정했고 Datadog에서 예상 데이터를 일부 받지 못하고 있다면, Datadog 에이전트에 대한 상태 명령을 실행해 원인을 파악할 수 있습니다.
+빌드팩을 설정했는데 Datadog에서 예상한 일부 데이터를 받지 못한 경우 Datadog 에이전트에 대한 상태 명령을 실행하여 원인을 찾아볼 수 있습니다.
 
 ```shell
-# 환경 변수로 헤로쿠 애플리케이션 이름 내보내기
+# Export the name of your Heroku application as an environment variable
 export APPNAME=your-application-name
 
 heroku ps:exec -a $APPNAME
 
-# 자격 증명 설정 중... 완료
-# ⬢ ruby-heroku-datadog에서 web.1으로 연결 중...
-# DD_API_KEY 환경 변수가 설정되지 않았습니다. 다음 실행: heroku config:add DD_API_KEY=<your API key>
-# Datadog 에이전트가 비활성화되었습니다. DISABLE_DATADOG_AGENT를 설정 취소하거나 누락된 환경 변수를 설정합니다.
+# Establishing credentials... done
+# Connecting to web.1 on ⬢ ruby-heroku-datadog...
+# DD_API_KEY environment variable not set. Run: heroku config:add DD_API_KEY=<your API key>
+# The Datadog Agent has been disabled. Unset the DISABLE_DATADOG_AGENT or set missing environment variables.
 
 ~ $
 ```
 
-설정되지 않은 DD_API_KEY에 대한 경고는 무시해도 좋습니다. [헤로쿠는 SSH 세션에 대한 설정 변수를 설정하지 않지만](https://devcenter.heroku.com/articles/exec#environment-variables) Datadog 에이전트 프로세스가 해당 변수에 액세스할 수 있습니다.
+DD_API_KEY가 설정되지 않았다는 경고를 무시할 수 있습니다. 헤로쿠는 SSH 세션 자체에 대해 설정 변수를 설정하지 않지만(https://devcenter.heroku.com/articles/exec#environment-variables), Datadog 에이전트 프로세스 에서는 이 변수에 액세스할 수 있습니다.
 
-SSH 세션이 시작되면 Datadog 상태 명령을 실행합니다.
+SSH 세션에 들어가면 Datadog status 명령을 실행합니다.
 
 ```shell
 ~ $ agent-wrapper status
@@ -453,7 +461,7 @@ Agent (v7.27.0)
 
 #### Datadog에 데이터 없음
 
-`status` 명령이 올바르게 실행되고 출력 섹션이 API 키의 유효성을 표시하는지 확인하세요.
+`status` 명령이 올바르게 실행되고 출력의 이 섹션에 API 키가 유효하다는 메시지가 표시되는지 확인합니다.
 
 ```
   API Keys status
@@ -461,9 +469,9 @@ Agent (v7.27.0)
     API key ending with 68306: API Key valid
 ```
 
-#### 통합 확인
+#### 통합 점검
 
-활성화한 통합이 올바르게 실행되는지 확인하려면 `Collector` 섹션에서 점검이 올바르게 실행되는지 확인하세요.
+활성화한 통합이 올바르게 실행되고 있는지 확인하려면 `Collector` 섹션에서 점검이 올바르게 실행되는지 알아볼 수 있습니다.
 
 ```
 =========
@@ -493,9 +501,9 @@ Collector
         version.scheme: semver
 ```
 
-#### APM 에이전트 점검
+#### 애플리케이션 성능 모니터링(APM) 에이전트 확인
 
-APM에 대해 애플리케이션을 계측하였고 Datadog에서 트레이스를 받지 못하고 있는 경우 APM 에이전트가 올바르게 실행되어 트레이스를 수집하는지 점검할 수 있습니다.
+애플리케이션 성능 모니터링(APM)에 대한 애플리케이션을 계측했는데 Datadog에서 트레이스가 표시되지 않는 경우 애플리케이션 성능 모니터링(APM) 에이전트가 올바르게 실행되고 트레이스를 수집하고 있는지 확인할 수 있습니다.
 
 ```
 [...]
@@ -524,13 +532,13 @@ APM Agent
 [...]
 ```
 
-### Datadog가 dyno보다 많은 수의 에이전트를 보고합니다.
+### Datadog는 dyno보다 더 많은 수의 에이전트를 보고하고 있습니다.
 
-`DD_DYNO_HOST`가 `true`로 설정되어 있고 모든 헤로쿠 애플리케이션에 대해 `HEROKU_APP_NAME` 값이 설정되어 있어야 합니다. 자세한 정보는 [호스트 이름 섹션](#호스트이름)을 참조하세요.
+`DD_DYNO_HOST`을 `true`로 설정하고 `HEROKU_APP_NAME`에 모든 헤로쿠 애플리케이션에 대한 값이 설정되어 있는지 확인하세요. 자세한 내용은 [호스트 이름 섹션](#hostname)을 참조하세요.
 
-### 빌드팩이나 에이전트를 업그레이드한 후, 시작 시 에이전트가 오류를 보고합니다.
+### 빌드팩 또는 에이전트를 업그레이드한 후 시작 시 에이전트에서 오류를 보고합니다.
 
-빌드팩 또는 에이전트 업그레이드 이후 애플리케이션의 slug을 컴파일해야 합니다. 자세한 정보는 [업그레이드 및 slug 재컴파일 섹션](#업그레이드-및-slug-재컴파일)을 확인하세요.
+빌드팩 또는 에이전트를 업그레이드한 후에는 애플리케이션의 슬러그를 다시 컴파일해야 합니다. 자세한 내용은 [업그레이드 및 슬러그 재컴파일 섹션](#upgrading-and-slug-recompilation)을 참조하세요.
 
 [1]: https://devcenter.heroku.com/articles/buildpacks
 [2]: https://docs.datadoghq.com/ko/libraries

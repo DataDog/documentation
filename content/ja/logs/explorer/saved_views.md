@@ -1,14 +1,15 @@
 ---
-title: 保存ビュー
 description: 保存ビューを使用してログエクスプローラーを自動構成する
 further_reading:
-  - link: logs/explorer/analytics
-    tag: Documentation
-    text: ログ分析の実行
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
+- link: logs/explorer/analytics
+  tag: Documentation
+  text: ログ分析の実行
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+title: 保存ビュー
 ---
+
 ## 概要
 
 効率的にトラブルシューティングするには、原因などを探索できるようデータが適切な**スコープ**にあること、有意義な情報を表面化できるようデータに**表示オプション**へのアクセスがあること、そして分析に利用できる関連**[ファセット][1]**がリストアップされていること、が必要です。
@@ -50,7 +51,7 @@ Views パネルのデフォルト保存ビューエントリからは、いつ�
 
 Views パネルの保存ビューエントリからは、いつでも以下のアクションが可能です。
 
-* 保存ビューを**ロード**または**リロード** 
+* 保存ビューを**ロード**または**リロード**
 * 現在のビューのコンフィギュレーションで保存ビューを**更新**。
 * 保存ビューの**名前を変更**または**削除**。
 * ショートリンクを使用して保存ビューを**共有**。

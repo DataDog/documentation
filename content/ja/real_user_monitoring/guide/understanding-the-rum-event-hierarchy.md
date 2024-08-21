@@ -110,4 +110,4 @@ RUM を使用して、ユーザーセッション中に発生した[フロント
 [5]: /ja/real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
 [6]: /ja/real_user_monitoring/browser/collecting_browser_errors/?tab=npm
 [7]: /ja/real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[8]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#custom-errors
+[8]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#custom-errors

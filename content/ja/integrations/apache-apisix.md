@@ -31,6 +31,7 @@ author:
 categories:
 - クラウド
 - メトリクス
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: apache-apisix
 integration_title: Apache APISIX
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: apache-apisix
 public_title: Apache APISIX
@@ -57,10 +57,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog-APISIX インテグレーション
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
   support: README.md#Support
   title: Apache APISIX
 ---
@@ -74,13 +78,13 @@ Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイ�
 
 [APISIX-Datadog プラグイン][1]は、Datadog Agent にバンドルされている DogStatsD サーバーに、UDP 接続でカスタムメトリクスをプッシュします。DogStatsD は StatsD プロトコルの実装です。[Apache APISIX][2] Agent のカスタムメトリクスを収集し、1 つのデータポイントに集約して、設定された Datadog サーバーに送信します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 以下の構成方法に従ってください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. すでに Datadog を使用していて、Datadog Agent がインストールされている場合は、ポート 8125/UDP がファイアウォールで許可されていることを確認してください。例えば、Apache APISIX Agent は、Datadog Agent のポート 8125 に到達することができます。すでにこれを構成している場合は、ステップ 3 までスキップできます。
 
@@ -149,17 +153,17 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `apisix` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "apache-apisix" >}}
 
 
-### ヘルプ
+### イベント
 
 Apache APISIX チェックにはイベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

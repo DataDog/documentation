@@ -136,6 +136,8 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 
 {{% aws-permissions %}}
 
+{{% aws-resource-collection %}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/amazon_web_services/
