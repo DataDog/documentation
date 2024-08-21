@@ -10,11 +10,11 @@ further_reading:
   text: "Notification Rules"
 ---
 
-This article outlines upcoming changes to how [notification rules][1] are configured. These changes impact [Cloud Security Management (CSM)][4], and more specifically cloud configuration and infrastructure configuration signals.
+This article outlines upcoming changes to how [notification rules][1] are configured. These changes impact [Cloud Security Management (CSM)][4], and more specifically cloud configuration and infrastructure configuration signals. Note that for the time being, the changes will only affect how you get notified after manually upgrading a notification rule, or after the final deprecation date is reached (early 2025). 
 
 ## Signals deprecation for CSM Misconfigurations
 
-Currently, notifications for [CSM Misconfigurations][2] can only be configured for detection rules that have signals enabled, as shown in the following diagram:
+Until today, notifications for [CSM Misconfigurations][2] would only be sent out for detection rules that have signals enabled, as shown in the following diagram:
 
 **Current workflow**:
 
@@ -29,9 +29,9 @@ As part of the upcoming changes to notification rules, you are no longer require
 This change has the following impact on how notifications are generated for CSM Misconfigurations:
 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
-2. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled for individual detection rules.
+2. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled and configured at the detection rule level.
 
-<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can use the new time aggregation mechanism.</div>
+<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can refine your query and use the new time aggregation mechanism.</div>
 
 3. Support for CSM Misconfigurations signals will be deprecated in early 2025. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 

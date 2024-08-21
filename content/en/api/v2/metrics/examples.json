@@ -1117,8 +1117,8 @@
             "metric": "system.load.1",
             "points": [
               {
-                "timestamp": "integer",
-                "value": "number"
+                "timestamp": 1575317847,
+                "value": 0.5
               }
             ],
             "resources": [
