@@ -88,7 +88,7 @@ Datadog のモニターは UTC 時間を使用し、デフォルトではロー�
 Datadog では、タイムシフトに対して自動的に修正が行われるタイムゾーンを異常検知モニターごとに構成することができます。詳細については、[ローカルタイムゾーンを考慮した異常検知モニターの更新方法][5]を参照してください。
 
 [1]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
-[2]: /ja/monitors/create/types/metric/
-[3]: /ja/monitors/create/types/composite/
+[2]: /ja/monitors/types/metric/
+[3]: /ja/monitors/types/composite/
 [4]: /ja/monitors/guide/recovery-thresholds/
 [5]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
