@@ -20,7 +20,7 @@ Puedes utilizar un DOM de sombra para los siguientes casos de uso:
 La <a href="https://chrome.google.com/webstore/detail/Datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa">extensión del grabador de tests del navegador Datadog </a> no es capaz de capturar el <a href="https://docs.datadoghq.com/synthetics/guide/browser-test-self-maintenance">conjunto completo de localizadores necesarios para apuntar al elemento en</a> las ejecuciones de tests, lo que provoca que el paso falle en las ejecuciones de tests.
 </div>
 
-En función del [modo de encapsulación][2] y del objetivo del paso, aprovecha las acciones de test del navegador para configurar un test que interactúe y valide elementos representados en un shadow DOM. En esta guía se destacan estas acciones y tipos de aserción.
+En función del [modo de encapsulación][2] y del objetivo del paso, aprovecha las acciones de tests del navegador para configurar un test que interactúe y valide elementos representados en un DOM de sombra. En esta guía se destacan estas acciones y tipos de aserción.
 
 ## Modo abierto
 
@@ -35,7 +35,7 @@ En el modo `open`, las aserciones normales no están disponibles. Puedes utiliza
 Para validar que el texto "TODO" aparece en una página, consulta la propiedad `innerHTML` directamente desde el elemento `<body>` del documento principal.
 
 ```HTML
-return document.querySelector("body").innerHTML.includes("TODO")
+devolver document.querySelector("body").innerHTML.includes("TODO")
 ```
 
 ### Validar texto representado
