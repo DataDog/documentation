@@ -104,7 +104,7 @@ span.addEvent('Web page loaded')
 span.addEvent('Button changed color', { colors: [112, 215, 70], 'response.time': 134.3, success: true })
 ```
 
-Read the [OpenTelemetry][6] specification for more information
+Read the [OpenTelemetry][6] specification for more information.
 
 ### Record exceptions
 
@@ -117,7 +117,7 @@ span.recordException(new TestError(), Date.now())
 span.recordException(new TestError())
 ```
 
-Read the [OpenTelemetry][7] specification for more information
+Read the [OpenTelemetry][7] specification for more information.
 
 ## Creating spans
 
