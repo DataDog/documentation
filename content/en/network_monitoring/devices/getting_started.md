@@ -2,12 +2,12 @@
 title: Getting Started with NDM
 description: Get started with your network-connected devices, such as routers, switches, servers, and firewalls.
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/'
-      tag: 'Blog'
-      text: 'Monitor datacenters and network devices with Datadog'
-    - link: 'https://www.datadoghq.com/blog/network-device-monitoring/'
-      tag: 'Blog'
-      text: 'Introducing Network Device Monitoring'
+    - link: '/network_monitoring/devices/supported_devices'
+      tag: 'doc'
+      text: 'Supported NDM Devices'
+    - link: 'network_monitoring/devices/data/'
+      tag: 'Doc'
+      text: 'NDM Data Collected'
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
@@ -33,15 +33,20 @@ Navigate to the [Agent installation page][12], and install the [Datadog Agent][1
 
 ### Integration Configuration
 
-To begin monitoring your network devices, you need to enable the SNMP integration using one of the following methods:
+To begin monitoring your network devices, enable the SNMP integration using one of the following methods:
 
-- Configure SNMP monitoring for [individual devices.][2]
-- Configure SNMP monitoring using device [Autodiscovery.][3]
-- Additionally, SNMP supports enabling [Ping][13] on your devices.
+[Individual devices][2]
+: Configure SNMP monitoring on your individual devices.
 
-## Additional integrations 
+[Autodiscovery][3]
+: Configure SNMP monitoring using Autodiscovery.
 
-### SD-WAN
+[Ping][13]
+: Additionally, SNMP supports enabling ping on your devices.
+
+### Additional integrations 
+
+#### SD-WAN
 
 Additional SD-WAN (Software-Defined Wide Area Network) integrations for select vendors can be configured to allow monitoring of these devices. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
 
@@ -50,20 +55,27 @@ Datadog supports the following vendors for SD-WAN network monitoring:
 - [Meraki SD-WAN][15] (public beta)
 - [Cisco SD-WAN][14] (public beta)
 
-
-## Enrich network devices with tags 
+### Enrich network devices with tags 
 
 Once NDM is configured on your devices, you can further enrich them by adding network device tags using the following methods:
 
-- The Agent side can collect device tags when configuring [individual devices][2] or with [Autodiscovery][3].
-- Configure the Agent to collect and customize specific metrics and tags by creating [Device profiles][16] directly in the app.
-- Add additional network device tags with the [Service Now integration.][4] 
-- Utilize the [Network Device Monitoring API][5] to programmatically add tags to network your devices.
+[Datadog Agent][1]
+: The Agent can collect device tags when configuring [individual devices][2] or with [Autodiscovery][3].
 
+[Device profiles][16]
+: Configure the Agent to collect and customize specific metrics and tags by creating Device profiles directly in the app.
+
+[Service Now integration][4]
+: Add additional network device tags with the Service Now integration.
+
+[Network Device Monitoring API][5]
+: Utilize the Network Device Monitoring API to programmatically add tags to network your devices.
 
 ## NetFlow Monitoring 
 
 Configure [NetFlow Monitoring][21] to visualize and monitor your flow records from your NetFlow-enabled devices.
+
+{{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
 
 ## Validate your data
 
@@ -71,7 +83,7 @@ Configure [NetFlow Monitoring][21] to visualize and monitor your flow records fr
 -  View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][8]
     - [Across the performance on all interfaces][18]
-- Use the Network [Device Topology Map][19] to identify and troubleshoot issues in your devices.
+- Use the Network [Device Topology Map][19] to identify and troubleshoot issues with your devices.
 
 
 ## Troubleshooting
