@@ -57,7 +57,7 @@ Esta guía muestra cómo configurar un monitor de métricas utilizando una métr
 
 5. Define los permisos de edición y haz clic en **Create** (Crear).
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
