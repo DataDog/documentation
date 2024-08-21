@@ -8,7 +8,7 @@
 {{- end -}}
 {{- $isPopup := $.Scratch.Get "popup" -}}
 {{- $img_width := .Get "width" -}}
-{{- $img_inline := .Get "inline" -}}
+{{- $img_inline := .Get "inline" | default "false" -}}
 {{- $img_height := .Get "height" -}}
 {{- $wide :=  .Get "wide" -}}
 {{- $video :=  .Get "video" -}}
@@ -43,7 +43,7 @@
 {{- $pop_param := $.Scratch.Get "pop_param" -}}
 {{- $figure_class :=  .Get "figure_class" -}}
 {{ $e := (print $img_resource "?auto=format" | safeURL) }}
-{{- if not $img_inline}}
+{{- if not (eq $img_inline "true")}}
   <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
     {{- if $video -}}
       <video width="{{$img_width | default "100%" }}" height="auto"
