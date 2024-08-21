@@ -30,23 +30,25 @@ title: Continuous Testing と CI/CD
 
 ## 概要
 
-あらかじめ定義された間隔でテストを実行するだけでなく、`@datadog/datadog-ci` パッケージや API を使用して Datadog Synthetic テストを再利用してオンデマンドでこれを実行することができます。継続的インテグレーション (CI) パイプラインで Datadog Continuous Testing テストを実行すると、ブランチがデプロイされて本番でアプリケーションが壊れるのを防ぐことができます。
+あらかじめ定義された間隔でテストを実行するだけでなく、`@datadog/datadog-ci` パッケージや API を使用して Datadog Synthetic テストを再利用し、オンデマンドで実行することができます。継続的インテグレーション (CI) パイプラインで Datadog Continuous Testing テストを実行することで、ブランチのデプロイとそれによる本番環境でのアプリケーションの破壊を防ぐことができます。
 
-Continuous Testing と CI/CD を使用して、継続的デリバリー (CD) プロセスの一環としてテストを実行し、デプロイメントが終了した直後や新しいリリースが切られた直後に本番環境でアプリケーションとサービスの状態を評価することもできます。ユーザーに影響を与える可能性のある回帰を検出し、重要なテストが失敗したときに自動的にロールバックを起動することができます。
+Continuous Testing と CI/CD を使用して、継続的デリバリー (CD) プロセスの一環としてテストを実行し、デプロイが終了した直後や新しいリリースが行われた直後に本番環境でアプリケーションとサービスの状態を評価することができます。ユーザーに影響を与える可能性のある回帰を検出し、重要なテストが失敗したときには自動的にロールバックを開始することができます。
 
-この機能により、バグや回帰を早期に発見することで、本番環境での問題解決にかかる時間を短縮し、エンジニアリングチームは緊急性のない作業に集中することができます。
+この機能により、バグや回帰をプロセスの早い段階で発見することで、本番環境での問題解決にかかる時間を短縮し、エンジニアリングチームは緊急性のない作業に集中することができます。
 
 まずは、[インテグレーション](#integrations)を参照し、[API](#use-the-api) または[オープンソース CLI パッケージ](#use-the-cli)を使用します。
 
 ## インテグレーション
 
 {{< whatsnext desc="Continuous Testing と CI/CD を使えば、Continuous Testing テストをお好みの CI プラットフォームプロバイダーで実行することができます。以下のインテグレーションについてはドキュメントを、または Datadog CI NPM パッケージの詳細についてご覧ください。" >}}
-    {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/configuration" >}}NPM パッケージ{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
+{{< nextlink href="continuous_testing/cicd_integrations/bitrise_upload" >}}Bitrise でアプリケーションをアップロードする{{< /nextlink >}}
+{{< nextlink href="continuous_testing/cicd_integrations/bitrise_run" >}}Bitrise でテストを実行する{{< /nextlink >}}
+{{< nextlink href="continuous_testing/cicd_integrations/configuration" >}}NPM パッケージ{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## CLI を使用する
@@ -61,7 +63,7 @@ Synthetics API のエンドポイントでは、ステージングとデプロ�
 
 API エンドポイントを使用して、新しいデプロイメントが回帰をもたらしていないことを迅速に検証します。[CI/CD パイプラインからテストを起動する][4]と[バッチの詳細の取得][5]エンドポイントを参照して、cURL またはサポートされているクライアントを通して CI 内でそれらを使用します。
 
-### CI/CD パイプラインからのテストをトリガー
+### CI/CD パイプラインからテストをトリガー
 
 エンドポイントをトリガーするテストは、1 回のリクエストで最大 100 件のテストに対応します。
 
@@ -83,7 +85,7 @@ API エンドポイントを使用して、新しいデプロイメントが回�
 
 詳しくは、[Synthetics API エンドポイントのドキュメント][4]をご覧ください。
 
-### バッチの詳細の取得
+### バッチの詳細を取得
 
 バッチの詳細の取得エンドポイントは、CI/CD パイプラインでトリガーされたテスト群 (バッチと呼ばれます) の結果を取得します。関連する CI の実行のための `batch_id` を提供する必要があります。
 
@@ -93,7 +95,7 @@ API エンドポイントを使用して、新しいデプロイメントが回�
 
 詳しくは、[Synthetics API エンドポイントのドキュメント][5]をご覧ください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

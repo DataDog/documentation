@@ -43,7 +43,7 @@ title: モニターステータス
 
 **一般的な使用例**: エラーがない場合には生成されないエラーメトリクスに基づいたモニター (`aws.elb.httpcode_elb_5xx`、コード内に置かれて_エラーがある場合にのみ_エラーを報告する DogStatsD カウンター)
 
-### インシデントを作成
+### インシデントを作成する
 **Declare incident** を選択して、モニターからインシデントを作成します。重大度レベル、通知、および追加のメモを含む *Declare Incident* ポップアップモーダル を構成します。詳細については、[インシデント管理][3]のドキュメントを参照してください。
 
 ### 設定
@@ -84,10 +84,31 @@ title: モニターステータス
 * モニターのクエリが最近変更された。
 * モニターのタイムフレームがメトリクスに対して短すぎるため、データの供給頻度が低くなっています。
 * 以前にクエリに含まれていたホストの名前が変更されました。ホスト名の変更は、2 時間以内に UI から期限切れになります。
+* フィルターしているクエリが期待通りに動作していない。
 
-ステータスグラフには、モニタークエリのディメンションではなく、アラート用に構成したディメンションが表示されます。例: モニタークエリは `service` と `host` でグループ化されているが、`service` のアラートのみを受信したい。ステータスグラフは、モニターのステータスを `service` でグループ化して表示します。`host` サブグループは、**View all** をクリックすると、各サブグループのステータスグラフを表示するパネルが表示されます。アラートのグループ化の詳細については、[モニターの構成][13]を参照してください。
+ステータスグラフには、モニタークエリのディメンションではなく、アラート用に構成したディメンションが表示されます。例えば、モニタークエリは `service` と `host` でグループ化されていますが、`service` のアラートのみを受信したい場合、ステータスグラフはモニターのステータスを `service` でグループ化して表示します。`host` サブグループは、View all をクリックすると、各サブグループのステータスグラフを表示するパネルが開きます。アラートのグループ化の詳細については、[モニターの構成][14]を参照してください。
 
 {{< img src="monitors/monitor_status/monitor_status_group_subgroup.png" alt="モニターステータスをサービス別にグループ化し、サブグループを表示するオプションをハイライトしています" style="width:100%;" >}}
+
+#### グループまたはイベントによるモニターステータスのフィルター 
+
+
+**Status & History** ビューを特定のグループに絞り込むには、フィルターフィールドを使用し、フィルタリングしたい属性を入力します。グループフィルターの構文は、[モニター検索クエリ][30]と同じ原則に従います。従うべきベストプラクティスをいくつか紹介します。
+
+- フィルターは大文字と小文字を区別し、`env:prod` と `env:Prod` は同じモニターグループを返しません。Datadog ではタグの統一を推奨しています。詳細については、[タグの概要][31]を参照してください。
+- クエリは自動的にワイルドカードを付加します。特定のフィルターを適用するには、クエリを二重引用符 (`"`) で囲んでください。
+  例えば、以下のクエリは二重引用符を使用していません。
+  ```
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-1
+  ```
+  クエリが 1 つの特定のグループを表示することを期待しているにもかかわらず、モニターはフォローグループを返します。
+  ```
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-10
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-12
+  ```
+
+  クエリを二重引用符で囲むと、期待通りのグループが返されます。
+  `"availability-zone:us-central1-a,instance-type:*,name:gke-demo-1"`
 
 #### ノートブックのモニターを調査する
 
@@ -96,6 +117,17 @@ title: モニターステータス
 {{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook ボタン" style="width:90%;">}}
 
 ノートブックはモニターの評価期間と一致し、関連する場合は関連するログを含んでいます。
+
+#### フォローモニターグループの保持
+
+Datadog は、クエリが変更されない限り、UI 上でモニターグループを 24 時間利用可能な状態に保ちます。データの欠落を通知するように構成されているホストモニターとサービスチェックは、48 時間利用可能です。モニターグラフに点線が表示され、non-reporting (報告なし) になっている場合は、以下の理由が考えられます。
+
+- 新しいグループは、モニター作成後しばらくして評価されます。評価グラフには、期間の開始からグループが最初に評価されるまでの点線が表示されます。
+- グループは報告を停止し、脱落し、その後再び報告を開始します。点線は、グループが脱落した時点から再び評価を開始する時点まで表示されます。
+
+{{< img src="monitors/monitor_status/dotted-line.png" alt="グループ維持率を表示" style="width:90%;">}}
+
+**注**: non-reporting は no data (データなし) と同じではありません。non-reporting はグループ固有のステータスです。
 
 ### 履歴
 
@@ -113,15 +145,15 @@ title: モニターステータス
 
 モニターから生成されたイベント (アラート、警告、回復など) は、**Status & History** セクションの上の時間セレクターに基づいてこのセクションに表示されます。イベントは[イベントエクスプローラー][10]にも表示されます。
 
-### 監査イベント
+### Audit trail（監査証跡）
+監査証跡は、あらゆるタイプのモニターの変更を自動的にキャプチャし、イベントを生成します。このイベントはモニターへの変更をドキュメント化します。
 
-すべてのモニターの種類で、モニターを変更 (たとえばモニターを編集) するとイベントエクスプローラーにイベントが作成され、変更内容と変更を行ったユーザーが表示されます。詳しくは、[イベント][11]のドキュメントをご覧ください。
+例えば、モニターを編集した場合、監査証跡イベントには次のように表示されます。
+ - 以前のモニター構成
+ - 現在のモニター構成
+ - 変更を行ったユーザー
 
-モニターを変更した場合、イベント検索を実行すると以下の例のように表示されます。
-
-```text
-https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20monitor%20modified
-```
+ 詳細については、[監査証跡][11]ドキュメントを参照し、[監査証跡のベストプラクティス][12]ブログをお読みください。
 
 Datadog は、作成したモニターへの変更に対する通知オプションも提供しています。モニターエディターの下部にある、**Define permissions and audit notifications** の下にある *If this monitor is modified, notify monitor creator and alert recipients.* (このモニターが変更された場合、モニターの作成者とアラート受信者に通知する) の隣のドロップダウンで、**Notify** を選択します。
 
@@ -131,7 +163,7 @@ Datadog は、作成したモニターへの変更に対する通知オプショ
 
 モニターのステータスページから、任意のモニターのエクスポートを JSON で取得できます。右上にある歯車アイコン（設定）をクリックし、メニューから **Export** を選択します。
 
-メインナビゲーションで、*Monitors --> New Monitor --> Import* の順に選択し、Datadog に JSON で[モニターをインポート][12]します。
+メインナビゲーションで、*Monitors --> New Monitor --> Import* の順に選択し、JSON を使用して Datadog に[モニターをインポート][13]します。
 
 ## その他の参考資料
 
@@ -139,8 +171,8 @@ Datadog は、作成したモニターへの変更に対する通知オプショ
 
 
 [1]: /ja/monitors/configuration/
-[2]: /ja/monitors/notify/downtimes/
-[3]: /ja/monitors/incident_management/#from-a-monitor
+[2]: /ja/monitors/downtimes/
+[3]: /ja/service_management/incident_management/#from-a-monitor
 [4]: /ja/monitors/types/
 [5]: /ja/api/v1/monitors/
 [6]: /ja/dashboards/querying/
@@ -148,6 +180,9 @@ Datadog は、作成したモニターへの変更に対する通知オプショ
 [8]: /ja/notebooks
 [9]: /ja/monitors/configuration/?tab=thresholdalert#evaluation-window
 [10]: https://app.datadoghq.com/event/explorer
-[11]: /ja/events/
-[12]: https://app.datadoghq.com/monitors#create/import
-[13]: /ja/monitors/configuration/?tab=thresholdalert#notification-aggregation
+[11]: /ja/account_management/audit_trail/
+[12]: https://www.datadoghq.com/blog/audit-trail-best-practices/
+[13]: https://app.datadoghq.com/monitors#create/import
+[14]: /ja/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
+[30]: /ja/monitors/manage/search/#query
+[31]: /ja/getting_started/tagging/

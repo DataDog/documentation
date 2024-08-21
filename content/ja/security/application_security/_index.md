@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/security_platform/application_security
+- /ja/security/application_security/enabling/single_step
+- /ja/security/application_security/enabling/compatibility
+- /ja/security/application_security/enabling
 description: 分散型トレースにより提供された実行コンテキストを利用して、実稼働システムをターゲットとした脅威を監視します。
 further_reading:
 - link: /security/application_security/how-appsec-works/
@@ -8,13 +11,10 @@ further_reading:
   text: Application Security Management の仕組み
 - link: /security/application_security/threats/
   tag: ドキュメント
-  text: メトリクス
+  text: Threat Management
 - link: /security/application_security/software_composition_analysis/
   tag: ドキュメント
   text: Software Composition Analysis
-- link: /security/application_security/enabling/#compatibility
-  tag: ドキュメント
-  text: 言語およびフレームワークの互換性に関する詳細
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: 製品ページ
   text: Datadog の Application Security Management
@@ -29,13 +29,16 @@ further_reading:
   text: クラウドネイティブ環境におけるアプリケーションセキュリティのベストプラクティス
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: ブログ
-  text: APM セキュリティビューでリスク、脆弱性、攻撃を可視化する
+  text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
 - link: https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/
   tag: ブログ
   text: Datadog Application Security Management でアプリや API の攻撃者をブロックする
 - link: https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/
   tag: ブログ
   text: Datadog Application Security Management による脅威のモデリング
+- link: https://www.datadoghq.com/blog/aws-waf-datadog/
+  tag: ブログ
+  text: Datadog を使用した AWS WAF のアクティビティの監視
 title: Application Security Management
 ---
 
@@ -55,7 +58,7 @@ ASM では、Datadog の[トレーシングライブラリ][1]と [Datadog Agent
 
 ASM を使用すると、継続的なトレースデータからノイズを取り除き、環境の安全と保護のみに集中できます。
 
-アプリケーションコード内の潜在的な脆弱性を完全に修復するまで、ASM はワンクリックで攻撃者の IP を一時的または永久にブロックし、攻撃を遅らせることができます。
+ASM ならワンクリックで攻撃者の IP を一時的または永久にブロックでき、アプリケーションコード内の潜在的な脆弱性を完全に緩和できるまで攻撃を遅らせることができます。
 
 ## Datadog に実装されたアプリケーションセキュリティの仕組みの理解
 
@@ -65,7 +68,7 @@ Application Security Management がどのように構成され、トレースデ
 
 [独自の規則][4]を利用する ASM なら、手動でコンフィギュレーションをせずに脅威を検出できます。すでに Datadog [APM][1] を物理ホストまたは仮想ホストにすでに構成している場合、環境変数を 1 つ設定するだけですぐに開始できます。
 
-環境を構成し、ASM で脅威の検出と保護を開始するには、[有効化のドキュメント][5]の手順に従います。ASM の構成が完了すると、[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルの調査およびその修復を開始できます。
+To start configuring your environment to detect and protect threats with ASM, follow the enabling documentation for each product. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
 ## セキュリティシグナルの調査と修復
 
@@ -75,6 +78,10 @@ Application Security Management がどのように構成され、トレースデ
 
 [Software Composition Analysis (SCA)][8] は、サービスが、既知の脆弱性を持つオープンソースライブラリを使用している、またはそれに依存しているためにリスクにさらされている場合を示します。脆弱性の発見について調査し、修正アドバイスに従ったり、脆弱性の原因を研究したりすることで、ソフトウェアを安全に保護します。
 
+## Detect vulnerabilities in your application's code
+
+[Code Security][9] identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM) and it enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling.
+
 ## 次のステップ
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -82,8 +89,8 @@ Application Security Management がどのように構成され、トレースデ
 [1]: /ja/tracing/
 [2]: /ja/agent/
 [3]: /ja/security/application_security/how-appsec-works/
-[4]: /ja/security/default_rules/#cat-application-security
-[5]: /ja/security/application_security/enabling/
+[4]: /ja/security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
 [8]: /ja/security/application_security/software_composition_analysis/
+[9]: /ja/security/application_security/code_security/

@@ -1,8 +1,9 @@
 ---
-title: ベータ関数
 aliases:
-  - /ja/graphing/functions/beta/
+- /ja/graphing/functions/beta/
+title: ベータ関数
 ---
+
 ベータ関数は、クエリ用 JSON を直接編集することによって使用できます。
 
 ## ローリング平均

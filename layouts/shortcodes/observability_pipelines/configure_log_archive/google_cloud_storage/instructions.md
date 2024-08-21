@@ -11,6 +11,8 @@
 
 To authenticate the Observability Pipelines Worker for Google Cloud Storage, contact your Google Security Operations representative for a Google Developer Service Account Credential. This credential is a JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][9092] for more information.
 
+**Note**: If you are installing the Worker in Kubernetes, see [Referencing files in Kubernetes][9097] for information on how to reference the credentials file.
+
 ### Connect the storage bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][9094].
@@ -32,3 +34,4 @@ See the [Log Archives documentation][9096] for additional information.
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
+[9097]: /observability_pipelines/advanced_configurations/#referencing-files-in-kubernetes

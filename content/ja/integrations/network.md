@@ -21,16 +21,16 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: ネットワーク
-integration_id: システム
+integration_id: system
 integration_title: Network
 integration_version: 3.3.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ネットワーク
 public_title: Network
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
   media: []
@@ -156,7 +157,7 @@ spec:
 
 [Agent の `status` サブコマンドを実行][8]し、Checks セクションで `network` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "network" >}}

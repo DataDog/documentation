@@ -42,6 +42,11 @@ cascade:
 
 <div class="alert alert-info">This page is about bringing your continuous integration (CI) metrics and data into Datadog dashboards. If you want to run Continuous Testing tests in your CI pipelines, see the <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a> section.</div>
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Join the Introduction to CI Visibility session to understand how Datadog CI Visibility enhances the efficiency of CI pipelines and how to configure the Testing Visibility and Pipeline Visibility products. 
+{{< /learning-center-callout >}}
+
+
 ## Overview
 
 Datadog Continuous Integration (CI) Visibility provides a unified view of pipeline results, performance, trends, and reliability across your CI environments. By integrating Datadog with your CI pipelines, you can create monitors, display data within [Datadog dashboards][1] and [notebooks][2], and create visualizations for your organization's CI health.

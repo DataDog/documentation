@@ -6,6 +6,9 @@ further_reading:
 - link: '/product_analytics/journeys'
   tag: Documentation
   text: Journeys
+- link: '/dashboards/widgets/sankey/'
+  tag: Documentation
+  text: Build Sankey widgets in Dashboards
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}

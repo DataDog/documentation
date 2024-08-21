@@ -2,6 +2,8 @@
 title: Cloud Security Supported Deployment Types
 ---
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 The following table summarizes the CSM features available relative to each deployment type.
 
 | Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless Scanning |
@@ -26,6 +28,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Kubernetes Cluster              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
 | Docker Host                     | {{< X >}}             |             |                     |                    |                        |
 | Linux Host                      | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    | {{< X >}}              |
+| Windows Host                    |                       | {{< X >}}   | beta                |                    |                        |
 | Docker Container                |                       | {{< X >}}   |                     |                    |                        |
 | Container Image                 |                       |             | {{< X >}}           |                    | {{< X >}}              |
 | IAM in AWS Account              |                       |             |                     | {{< X >}}          |                        |

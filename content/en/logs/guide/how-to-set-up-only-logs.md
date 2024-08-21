@@ -4,7 +4,7 @@ aliases:
   - /logs/faq/how-to-set-up-only-logs
 ---
 
-To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:
+To disable payloads, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}
 {{% tab "Host " %}}

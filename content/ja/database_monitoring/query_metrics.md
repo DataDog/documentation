@@ -10,6 +10,12 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: MySQL インテグレーション
+- link: /integrations/sqlserver/
+  tag: ドキュメント
+  text: SQL Server インテグレーション
+- link: /integrations/oracle/
+  tag: ドキュメント
+  text: Oracle インテグレーション
 - link: /database_monitoring/data_collected/
   tag: ドキュメント
   text: 収集データ
@@ -19,27 +25,23 @@ further_reading:
 title: クエリメトリクスの確認
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 クエリメトリクスビューには、正規化されたクエリの過去のクエリパフォーマンスが表示されます。インフラストラクチャーまたはデータセンターのアベイラビリティーゾーンなどのカスタムタグによってパフォーマンスの傾向を視覚化し、異常についてアラートを受け取ります。
 
-UI の **[APM > Databases][1]** をクリックして、データベースモニタリング内のクエリメトリクスビューに移動します。
+Datadog の [Query Metrics ページ][1]に移動します。
 
 ビューには、_上位_ 200 のクエリ、つまり、選択した時間枠で実行されている合計時間が最も長い 200 のクエリが表示されます。詳細については、[追跡されるクエリ][2]を参照してください。1 回限りの、またはほとんど実行されない高速クエリのメトリクス集計は、クエリメトリクスビューには表示されませんが、過去 15 日間に実行された場合は、[クエリサンプル][3]に表示されるスナップショットを見つけることができます。
 
 ## フィルタリングとグループ化
 
-上部の **source** セレクターからデータベースソース (Postgres または MySQL) を選択し、検索タグを指定してクエリのリストをフィルタリングし、タグでグループ化してリストを整理します。
+上部の **source** セレクターからデータベースソース (Postgres など) を選択します。検索タグを指定してクエリのリスト (またはストアドプロシージャ][7]のリストがある場合はそのリスト)、をフィルタリングし、タグでグループ化してリストを整理します。
 
 たとえば、ホストまたはクラスターごとにグループ化して、クエリが実行されているインフラストラクチャーをすばやく確認すると便利なことがよくあります。
 
-{{< img src="database_monitoring/dbm_qm_group_by.png" alt="env タグでグループ化" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qm-group-by-2.png" alt="env タグでグループ化" style="width:100%;">}}
 
 最大 3 つ (たとえば、ホスト、環境、データセンター) でグループ化して、フィルター処理された結果のグループ化されたセットを取得できます。
 
-{{< img src="database_monitoring/dbm_qm_group_by_three.png" alt="3 つのタグによるグループ化" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qm-group-by-three-2.png" alt="3 つのタグによるグループ化" style="width:100%;">}}
 
 グループを展開してクエリのリストを表示し、**View all queries in this group** (このグループ内のすべてのクエリを表示) をクリックして、そのグループ化条件をフィルターバーの Search フィールドに移動し、ページコンテンツをその検索結果にフィルターします。
 
@@ -71,11 +73,12 @@ UI の **[APM > Databases][1]** をクリックして、データベースモニ
 データベースモニタリングビューに使用されるメトリクスは、主に次のとおりです。
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
-
+- **SQL Server**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## クエリの詳細ページ
 
-Query Metrics リストでクエリをクリックすると、そのクエリの Query Details ページが開きます。ページの上部には、[正規化クエリ][4]の全文と、クエリに関連付けられているすべてのタグのリストが表示されます。タグのリストは、クエリが実行される各ホストからのすべてのタグの和集合です。リストを参照して、クエリが実行されているサーバーなどの情報を確認します。
+クエリメトリクスリストでクエリをクリックすると、そのクエリの Query Details ページが開きます。ページの上部には、[正規化クエリ][4]の全文と、クエリに関連付けられているすべてのタグのリストが表示されます。タグのリストは、クエリが実行される各ホストからのすべてのタグの和集合です。リストを参照して、クエリが実行されているサーバーなどの情報を確認します。
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="クエリのタグリスト" style="width:100%;">}}
 
@@ -97,9 +100,9 @@ Query Metrics リストでクエリをクリックすると、そのクエリの
 
 ### 説明プラン
 
-Datadog は説明プランを継続的に収集するため、特定のクエリに複数のプランを含めることができます。これらのプランは正規化されて個別に表示されるため、クエリのパフォーマンスが他のプランよりも優れているか、相対コストが高いかを確認できます。たとえば、以下はクエリの 2 つの説明プランを示しており、1 つは平均レイテンシーがはるかに低くなっています。
+Datadog は実行計画を継続的に収集するため、特定のクエリに複数のプランを含めることができます。これらのプランは正規化されて個別に表示されるため、クエリのパフォーマンスが他のプランよりも優れているか、相対コストが高いかを確認できます。例えば、以下の実行計画はクエリの情報を含んでいます。
 
-{{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="クエリの説明プラン情報" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qd-explain-plans-2.png" alt="クエリの実行計画情報" style="width:100%;">}}
 
 プランを選択して、コストメトリクスまたはその JSON を表示します。**View All Samples for This Plan** をクリックして、[それに関連付けられているサンプル][5]の Query Samples ビューに移動します。
 
@@ -119,9 +122,10 @@ Datadog は説明プランを継続的に収集するため、特定のクエリ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/queries
 [2]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /ja/database_monitoring/query_samples/
 [4]: /ja/database_monitoring/data_collected/#normalized-queries
 [5]: /ja/database_monitoring/query_samples/#sample-details
 [6]: /ja/database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[7]: /ja/database_monitoring/database_hosts/#stored-procedures
