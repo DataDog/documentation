@@ -26,7 +26,7 @@ Si no puedes descargar aplicaciones directamente de Chrome Web Store por motivos
 
 **Nota:** Datadog publica actualizaciones de la extensión del grabador de tests en la [Chrome Web Store][4]. Puedes actualizar manualmente tu extensión interna para grabar tests de navegador.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
