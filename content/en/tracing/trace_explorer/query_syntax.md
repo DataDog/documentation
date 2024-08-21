@@ -212,7 +212,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
-Once you create a new facet, it will be available in the facet panel for quick filtering and basic analytics.
+After you create a new facet, it is available in the facet panel for filtering and basic analytics.
 
 ### Facet panel
 
