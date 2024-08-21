@@ -39,6 +39,8 @@ components:
       properties:
         errors:
           description: Array of errors returned by the API.
+          example:
+          - Bad Request
           items:
             description: Error description.
             example: Bad Request
@@ -1683,6 +1685,10 @@ components:
           description: Points relating to the distribution point metric. All points
             must be tuples with timestamp and a list of values (cannot be a string).
             Timestamps should be in POSIX time in seconds.
+          example:
+          - - 1575317847.0
+            - - 0.5
+              - 1.0
           items:
             $ref: '#/components/schemas/DistributionPoint'
           type: array
@@ -9420,6 +9426,8 @@ components:
       properties:
         keys:
           description: Keys to split on.
+          example:
+          - environment
           items:
             description: A key to split on.
             example: environment
@@ -9427,6 +9435,8 @@ components:
           type: array
         tags:
           description: Tags to split on.
+          example:
+          - environment:staging
           items:
             description: A tag to split on.
             example: environment:staging
@@ -10639,6 +10649,7 @@ components:
       description: A formula and function query.
       example:
         data_source: metrics
+        name: query1
         query: sum:trace.servlet.request.hits{*} by {env}.as_count()
       oneOf:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
@@ -11703,6 +11714,8 @@ components:
         formulas:
           description: A list that contains exactly one formula, as only a single
             formula may be used in a time-slice SLO.
+          example:
+          - formula: query1 - default_zero(query2)
           items:
             $ref: '#/components/schemas/SLOFormula'
           maxItems: 1
@@ -11710,6 +11723,10 @@ components:
           type: array
         queries:
           description: A list of queries that are used to calculate the SLI value.
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
           items:
             $ref: '#/components/schemas/SLODataSourceQueryDefinition'
           type: array
@@ -12424,6 +12441,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - - 1575317847.0
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
@@ -13400,6 +13420,8 @@ components:
           $ref: '#/components/schemas/SplitSort'
         split_dimensions:
           description: The dimension(s) on which to split the graph
+          example:
+          - one_graph_per: service
           items:
             $ref: '#/components/schemas/SplitDimension'
           maxItems: 1
