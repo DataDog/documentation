@@ -15,10 +15,10 @@ You can access the version history feature by clicking the **Version history** b
 Version history isn't just for reviewing past work—it's also a powerful tool for managing your current and future diagrams. Here are some key actions you can take:
 
 1. **Restoring previous versions**: If you need to revert to a previous state of your diagram, you can easily do so. Simply click the **Restore this version** button on the top right side of your screen when viewing a past version.
-2. **Creating new blueprints**: Version history allows you to save any specific version of your diagram as a new blueprint. This feature is particularly useful for creating templates or preserving specific architectural states for future reference. To create a new blueprint from a version, click the select the three dots on the right side of the version name and choose **Save as a new blueprint**.
+2. **Creating new blueprints**: Version history allows you to save any specific version of your diagram as a new blueprint. This feature is particularly useful for creating templates or preserving specific architectural states for future reference. To create a new blueprint from a version, click the three dots on the right side of the version name and choose **Save as a new blueprint**.
 3. **Comparing versions**: While not explicit, the ability to view different versions allows for manual comparison of how your architecture has changed over time.
 
-Note that currently you cannot manually create or delete versions from your history.
+**Note**: Manually creating or deleting versions from your history is not available.
 
 ### Creation
 
@@ -34,7 +34,7 @@ To name a version:
 
 Cloudcraft creates new versions intelligently to balance granularity with efficiency. If the current version is more than 5 minutes old, any new updates will trigger the creation of a new version. For changes made within 5 minutes of the latest version, updates are added to that existing version. This approach ensures that your version history remains meaningful without becoming cluttered with minor changes.
 
-It's worth noting that while you cannot manually create a new version at present, a new version is automatically generated when you switch from [Snapshot to Live mode][1] in your diagram.
+It's worth noting that while you cannot manually create a new version, one is automatically generated when you switch from [Snapshot to Live mode][1] in your diagram.
 
 ### Metadata
 
