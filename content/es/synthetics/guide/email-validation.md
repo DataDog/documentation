@@ -62,6 +62,6 @@ En este ejemplo, el test de navegador mira en el correo electrónico `Welcome to
 Para finalizar el test de navegador, crea una aserción que confirme que el contenido de `div` activa la verificación de cuenta correcta. Por ejemplo, que la página contiene `Your account is now verified`.
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
