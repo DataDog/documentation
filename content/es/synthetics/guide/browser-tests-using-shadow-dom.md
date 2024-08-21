@@ -8,9 +8,9 @@ title: Ejecutar tests en aplicaciones utilizando un Shadow DOM
 
 ## Información general
 
-La API del Shadow Document Object Model (DOM) es un componente web que permite adjuntar un árbol del DOM encapsulado a un elemento HTML. El [DOM de sombra][1] es autónomo y permanece aislado del DOM del documento principal. 
+La API del Shadow Objeto de documento de objeto (DOM) es un componente web que permite adjuntar un árbol del DOM encapsulado a un elemento de HTML. El [DOM de sombra][1] es autónomo y permanece aislado del DOM del documento principal. 
 
-Puedes utilizar un shadow DOM para los siguientes casos de uso:
+Puedes utilizar un DOM de sombra para los siguientes casos de uso:
 
 - Formularios y componentes de bibliotecas de terceros
 - Contenido incrustado (como vídeo o una imagen)
