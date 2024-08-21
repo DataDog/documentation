@@ -216,6 +216,13 @@ components:
       required: true
       schema:
         type: string
+    FileID:
+      description: File ID.
+      in: path
+      name: file_id
+      required: true
+      schema:
+        type: string
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -351,6 +358,13 @@ components:
       required: true
       schema:
         type: string
+    InstanceId:
+      description: The ID of the workflow instance.
+      in: path
+      name: instance_id
+      required: true
+      schema:
+        type: string
     MetricID:
       description: The name of the log-based metric.
       in: path
@@ -471,7 +485,7 @@ components:
       schema:
         type: string
     RuleId:
-      description: The ID of the rule/scorecard.
+      description: The ID of the rule.
       in: path
       name: rule_id
       required: true
@@ -556,6 +570,13 @@ components:
       required: true
       schema:
         example: 00000000-0000-9999-0000-000000000000
+        type: string
+    WorkflowId:
+      description: The ID of the workflow.
+      in: path
+      name: workflow_id
+      required: true
+      schema:
         type: string
   requestBodies: {}
   responses:
@@ -662,6 +683,8 @@ components:
       properties:
         errors:
           description: A list of errors.
+          example:
+          - Bad Request
           items:
             description: A list of items.
             example: Bad Request
@@ -673,10 +696,16 @@ components:
     APIKeyCreateAttributes:
       description: Attributes used to create an API Key.
       properties:
+        category:
+          description: The APIKeyCreateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyCreateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -691,6 +720,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyCreateRequest:
       description: Request used to create an API key.
       properties:
@@ -722,13 +753,20 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/LeakedKey'
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
+        category:
+          description: The APIKeyUpdateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyUpdateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -748,6 +786,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyUpdateRequest:
       description: Request used to update an API key.
       properties:
@@ -981,6 +1021,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/LeakedKey'
     ApplicationKeyResponseMeta:
       description: Additional information related to the application key response.
       properties:
@@ -1034,6 +1075,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyUpdateRequest:
       description: Request used to update an application key.
       properties:
@@ -4455,6 +4498,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountType:
       default: cloudflare-accounts
       description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
@@ -4484,6 +4529,9 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
+        name:
+          description: The name of the Cloudflare account.
+          type: string
         resources:
           description: An allowlist of resources to restrict pulling metrics for.
           example:
@@ -4503,6 +4551,8 @@ components:
       required:
       - api_key
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountUpdateRequestData:
       description: Data object for updating a Cloudflare account.
       properties:
@@ -4511,6 +4561,8 @@ components:
         type:
           $ref: '#/components/schemas/CloudflareAccountType'
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountsResponse:
       description: The expected response schema when getting Cloudflare accounts.
       properties:
@@ -5537,6 +5589,234 @@ components:
           nullable: true
           type: string
       type: object
+    CustomCostGetResponseMeta:
+      description: Meta for the response from the Get Custom Costs endpoints.
+      properties:
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostListResponseMeta:
+      description: Meta for the response from the List Custom Costs endpoints.
+      properties:
+        total_filtered_count:
+          description: Number of Custom Costs files returned by the List Custom Costs
+            endpoint
+          format: int64
+          type: integer
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostUploadResponseMeta:
+      description: Meta for the response from the Upload Custom Costs endpoints.
+      properties:
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostsFileGetResponse:
+      description: Response for Get Custom Costs files.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomCostsFileMetadataWithContentHighLevel'
+        meta:
+          $ref: '#/components/schemas/CustomCostGetResponseMeta'
+      type: object
+    CustomCostsFileLineItem:
+      description: Line item details from a Custom Costs file.
+      properties:
+        BilledCost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        BillingCurrency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        ChargeDescription:
+          description: Description for the line item cost.
+          example: Monthly usage charge for my service
+          type: string
+        ChargePeriodEnd:
+          description: End date of the usage charge.
+          example: '2023-02-28'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        ChargePeriodStart:
+          description: Start date of the usage charge.
+          example: '2023-02-01'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        ProviderName:
+          description: Name of the provider for the line item.
+          type: string
+        Tags:
+          additionalProperties:
+            type: string
+          description: Additional tags for the line item.
+          type: object
+      type: object
+    CustomCostsFileListResponse:
+      description: Response for List Custom Costs files.
+      properties:
+        data:
+          description: List of Custom Costs files.
+          items:
+            $ref: '#/components/schemas/CustomCostsFileMetadataHighLevel'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CustomCostListResponseMeta'
+      type: object
+    CustomCostsFileMetadata:
+      description: Schema of a Custom Costs metadata.
+      properties:
+        billed_cost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        billing_currency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        charge_period:
+          $ref: '#/components/schemas/CustomCostsFileUsageChargePeriod'
+        name:
+          description: Name of the Custom Costs file.
+          example: my_file.json
+          type: string
+        provider_names:
+          description: Providers contained in the Custom Costs file.
+          items:
+            description: Name of the provider.
+            example: my_provider
+            type: string
+          type: array
+        status:
+          description: Status of the Custom Costs file.
+          example: active
+          type: string
+        uploaded_at:
+          description: Timestamp, in millisecond, of the upload time of the Custom
+            Costs file.
+          example: 1704067200000
+          format: double
+          type: number
+        uploaded_by:
+          $ref: '#/components/schemas/CustomCostsUser'
+      type: object
+    CustomCostsFileMetadataHighLevel:
+      description: JSON API format for a Custom Costs file.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomCostsFileMetadata'
+        id:
+          description: ID of the Custom Costs metadata.
+          type: string
+        type:
+          description: Type of the Custom Costs file metadata.
+          type: string
+      type: object
+    CustomCostsFileMetadataWithContent:
+      description: Schema of a cost file's metadata.
+      properties:
+        billed_cost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        billing_currency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        charge_period:
+          $ref: '#/components/schemas/CustomCostsFileUsageChargePeriod'
+        content:
+          description: Detail of the line items from the Custom Costs file.
+          items:
+            $ref: '#/components/schemas/CustomCostsFileLineItem'
+          type: array
+        name:
+          description: Name of the Custom Costs file.
+          example: my_file.json
+          type: string
+        provider_names:
+          description: Providers contained in the Custom Costs file.
+          items:
+            description: Name of a provider.
+            example: my_provider
+            type: string
+          type: array
+        status:
+          description: Status of the Custom Costs file.
+          example: active
+          type: string
+        uploaded_at:
+          description: Timestamp in millisecond of the upload time of the Custom Costs
+            file.
+          example: 1704067200000
+          format: double
+          type: number
+        uploaded_by:
+          $ref: '#/components/schemas/CustomCostsUser'
+      type: object
+    CustomCostsFileMetadataWithContentHighLevel:
+      description: JSON API format of for a Custom Costs file with content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomCostsFileMetadataWithContent'
+        id:
+          description: ID of the Custom Costs metadata.
+          type: string
+        type:
+          description: Type of the Custom Costs file metadata.
+          type: string
+      type: object
+    CustomCostsFileUploadRequest:
+      description: Request for uploading a Custom Costs file.
+      items:
+        $ref: '#/components/schemas/CustomCostsFileLineItem'
+      type: array
+    CustomCostsFileUploadResponse:
+      description: Response for Uploaded Custom Costs files.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomCostsFileMetadataHighLevel'
+        meta:
+          $ref: '#/components/schemas/CustomCostUploadResponseMeta'
+      type: object
+    CustomCostsFileUsageChargePeriod:
+      description: Usage charge period of a Custom Costs file.
+      properties:
+        end:
+          description: End of the usage of the Custom Costs file.
+          example: 1706745600000
+          format: double
+          type: number
+        start:
+          description: Start of the usage of the Custom Costs file.
+          example: 1704067200000
+          format: double
+          type: number
+      type: object
+    CustomCostsUser:
+      description: Metadata of the user that has uploaded the Custom Costs file.
+      properties:
+        email:
+          description: The name of the Custom Costs file.
+          example: email.test@datadohq.com
+          type: string
+        icon:
+          description: The name of the Custom Costs file.
+          example: icon.png
+          type: string
+        name:
+          description: Name of the user.
+          example: Test User
+          type: string
+      type: object
     CustomDestinationAttributeTagsRestrictionListType:
       default: ALLOW_LIST
       description: 'How `forward_tags_restriction_list` parameter should be interpreted.
@@ -5651,7 +5931,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
-      type: object
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -5772,7 +6051,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -5912,7 +6190,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
-      type: object
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6026,7 +6303,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationResponseHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6168,8 +6444,9 @@ components:
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp in nanoseconds when the deployment finished.
-            It should not be older than 1 hour.
+          description: Unix timestamp when the deployment finished. It must be in
+            nanoseconds, milliseconds, or seconds, and it should not be older than
+            1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -6179,11 +6456,12 @@ components:
           description: Deployment ID.
           type: string
         service:
-          description: Service name from a service available in the Service Catalog.
+          description: Service name.
           example: shopist
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the deployment started.
+          description: Unix timestamp when the deployment started. It must be in nanoseconds,
+            milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
           type: integer
@@ -6260,8 +6538,8 @@ components:
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp in nanoseconds when the incident finished. It
-            should not be older than 1 hour.
+          description: Unix timestamp when the incident finished. It must be in nanoseconds,
+            milliseconds, or seconds, and it should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -6288,7 +6566,8 @@ components:
           example: High
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the incident started.
+          description: Unix timestamp when the incident started. It must be in nanoseconds,
+            milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
           type: integer
@@ -7900,6 +8179,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountType:
       default: fastly-accounts
       description: The JSON:API type for this API. Should always be `fastly-accounts`.
@@ -7924,7 +8205,12 @@ components:
           description: The API key of the Fastly account.
           example: ABCDEFG123
           type: string
+        name:
+          description: The name of the Fastly account.
+          type: string
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountUpdateRequestData:
       description: Data object for updating a Fastly account.
       properties:
@@ -7933,6 +8219,8 @@ components:
         type:
           $ref: '#/components/schemas/FastlyAccountType'
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountsResponse:
       description: The expected response schema when getting Fastly accounts.
       properties:
@@ -8211,6 +8499,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
@@ -8220,6 +8510,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8238,6 +8529,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -8261,12 +8553,15 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -9156,6 +9451,19 @@ components:
             were created or updated by the request are
 
             returned.'
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9187,6 +9495,19 @@ components:
       properties:
         data:
           description: An array of incident attachments.
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9280,8 +9601,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentFieldAttributesSingleValue'
       - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
-      required:
-      - type
     IncidentFieldAttributesMultipleValue:
       description: A field with potentially multiple values selected.
       properties:
@@ -10398,6 +10717,8 @@ components:
       - $ref: '#/components/schemas/IncidentTodoAnonymousAssignee'
     IncidentTodoAssigneeArray:
       description: Array of todo assignees.
+      example:
+      - '@test.user@test.com'
       items:
         $ref: '#/components/schemas/IncidentTodoAssignee'
       type: array
@@ -10902,6 +11223,45 @@ components:
           description: Jira project key
           type: string
       type: object
+    LeakedKey:
+      description: The definition of LeakedKey object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LeakedKeyAttributes'
+        id:
+          description: The LeakedKey id.
+          example: id
+          type: string
+        type:
+          $ref: '#/components/schemas/LeakedKeyType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    LeakedKeyAttributes:
+      description: The definition of LeakedKeyAttributes object.
+      properties:
+        date:
+          description: The LeakedKeyAttributes date.
+          example: '2017-07-21T17:32:28Z'
+          format: date-time
+          type: string
+        leak_source:
+          description: The LeakedKeyAttributes leak_source.
+          type: string
+      required:
+      - date
+      type: object
+    LeakedKeyType:
+      default: leaked_keys
+      description: The definition of LeakedKeyType object.
+      enum:
+      - leaked_keys
+      example: leaked_keys
+      type: string
+      x-enum-varnames:
+      - LEAKED_KEYS
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -11105,6 +11465,37 @@ components:
           description: Link for the next set of rules.
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
+      type: object
+    ListTagsResponse:
+      description: List tags response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListTagsResponseData'
+      type: object
+    ListTagsResponseData:
+      description: The list tags response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListTagsResponseDataAttributes'
+        id:
+          description: The device ID
+          example: example:1.2.3.4
+          type: string
+        type:
+          description: The type of the resource. The value should always be tags.
+          type: string
+      type: object
+    ListTagsResponseDataAttributes:
+      description: The definition of ListTagsResponseDataAttributes object.
+      properties:
+        tags:
+          description: The list of tags
+          example:
+          - tag:test
+          - tag:testbis
+          items:
+            type: string
+          type: array
       type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
@@ -11484,9 +11875,6 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
     LogsArchiveDefinition:
       description: The definition of an archive.
       properties:
@@ -11513,9 +11901,7 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
+      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -13041,6 +13427,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - timestamp: 1575317847
+            value: 0.5
           items:
             $ref: '#/components/schemas/MetricPoint'
           type: array
@@ -13832,6 +14221,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     NullableUserRelationship:
       description: Relationship to user.
       nullable: true
@@ -14043,10 +14434,12 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
+          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14104,15 +14497,19 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
+          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceResponseData:
       description: Opsgenie service data from a response.
       properties:
@@ -14121,6 +14518,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14129,6 +14528,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceType:
       default: opsgenie-service
       description: Opsgenie service resource type.
@@ -14144,11 +14545,13 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
+          format: url
           nullable: true
           type: string
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14157,6 +14560,8 @@ components:
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateData:
       description: Opsgenie service for an update request.
       properties:
@@ -14165,6 +14570,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14173,6 +14580,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateRequest:
       description: Update request for an Opsgenie service.
       properties:
@@ -16273,6 +16682,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToPermissionData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToPermissionData:
       description: Relationship to permission object.
       properties:
@@ -16282,6 +16693,8 @@ components:
         type:
           $ref: '#/components/schemas/PermissionsType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToPermissions:
       description: Relationship to multiple permissions objects.
       properties:
@@ -16291,6 +16704,8 @@ components:
             $ref: '#/components/schemas/RelationshipToPermissionData'
           type: array
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRole:
       description: Relationship to role.
       properties:
@@ -16333,7 +16748,7 @@ components:
       properties:
         id:
           description: The unique ID for a scorecard.
-          example: 00000000-0000-beef-0000-000000000000
+          example: q8MQxk8TCqrHnWkp
           type: string
         type:
           $ref: '#/components/schemas/ScorecardType'
@@ -16420,6 +16835,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermission:
       description: Relationship between a user team permission and a team
       properties:
@@ -16667,7 +17084,6 @@ components:
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
-      type: object
     RestrictionQueryRole:
       description: Partial role object.
       properties:
@@ -17073,6 +17489,8 @@ components:
       required:
       - type
       type: object
+      x-merge-override:
+        required: false
     RoleAttributes:
       description: Attributes of the role.
       properties:
@@ -17192,8 +17610,6 @@ components:
       properties:
         permissions:
           $ref: '#/components/schemas/RelationshipToPermissions'
-        users:
-          $ref: '#/components/schemas/RelationshipToUsers'
       type: object
     RoleResponse:
       description: Response containing information about a single role.
@@ -17223,6 +17639,11 @@ components:
         name:
           description: Name of the role.
           type: string
+        user_count:
+          description: The user count.
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     RoleUpdateData:
       description: Data related to the update of a role.
@@ -17242,6 +17663,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     RoleUpdateRequest:
       description: Update a role.
       properties:
@@ -17348,7 +17771,7 @@ components:
       type: object
     RuleId:
       description: The unique ID for a scorecard rule.
-      example: 00000000-0000-beef-0000-000000000000
+      example: q8MQxk8TCqrHnWkx
       type: string
     RuleOutcomeRelationships:
       description: The JSON:API relationship to a scorecard rule.
@@ -17551,6 +17974,10 @@ components:
       type: object
     ScalarFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - aggregator: avg
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/ScalarQuery'
       type: array
@@ -17977,7 +18404,7 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time.'
+        and evaluates in real time. For third party rules, this field is not used.'
       enum:
       - 0
       - 60
@@ -18021,7 +18448,8 @@ components:
       type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window."
+        if a case is matched at least once within\nthis keep alive window. For third
+        party rules, this field is not used."
       enum:
       - 0
       - 60
@@ -18508,6 +18936,8 @@ components:
       type: object
     SecurityMonitoringSignalIncidentIds:
       description: Array of incidents that are associated with this signal.
+      example:
+      - 2066
       items:
         description: Public ID attribute of the incident that is associated with the
           signal.
@@ -20510,7 +20940,6 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
-      type: object
     ServiceDefinitionSchemaVersions:
       description: Schema versions
       enum:
@@ -22556,6 +22985,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamLinkAttributes:
       description: Team link attributes
       properties:
@@ -23029,6 +23460,9 @@ components:
       type: object
     TimeseriesFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/TimeseriesQuery'
       type: array
@@ -23187,6 +23621,38 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    UpdateRuleRequest:
+      description: Request to update a scorecard rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateRuleRequestData'
+      type: object
+    UpdateRuleRequestData:
+      description: Data for the request to update a scorecard rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    UpdateRuleResponse:
+      description: The response from a rule update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateRuleResponseData'
+      type: object
+    UpdateRuleResponseData:
+      description: The data for a rule update response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        relationships:
+          $ref: '#/components/schemas/RelationshipToRule'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -23285,6 +23751,8 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-merge-override:
+        required: false
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -23304,6 +23772,10 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        mfa_enabled:
+          description: If user has MFA enabled.
+          readOnly: true
+          type: boolean
         modified_at:
           description: Time that the user was last modified.
           format: date-time
@@ -23506,6 +23978,8 @@ components:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+      x-merge-override:
+        properties: false
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -23802,6 +24276,107 @@ components:
       - PAST_SIX_MONTHS
       - PAST_ONE_YEAR
       - ALERT
+    WorkflowInstanceCreateMeta:
+      description: Additional information for creating a workflow instance.
+      properties:
+        payload:
+          additionalProperties: {}
+          description: The input parameters to the workflow.
+          type: object
+      type: object
+    WorkflowInstanceCreateRequest:
+      description: Request used to create a workflow instance.
+      properties:
+        meta:
+          $ref: '#/components/schemas/WorkflowInstanceCreateMeta'
+      type: object
+    WorkflowInstanceCreateResponse:
+      additionalProperties: {}
+      description: Response returned upon successful workflow instance creation.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowInstanceCreateResponseData'
+      type: object
+    WorkflowInstanceCreateResponseData:
+      additionalProperties: {}
+      description: Data about the created workflow instance.
+      properties:
+        id:
+          description: The ID of the workflow execution. It can be used to fetch the
+            execution status.
+          type: string
+      type: object
+    WorkflowInstanceListItem:
+      additionalProperties: {}
+      description: An item in the workflow instances list.
+      properties:
+        id:
+          description: The ID of the workflow instance
+          type: string
+      type: object
+    WorkflowListInstancesResponse:
+      additionalProperties: {}
+      description: Response returned when listing workflow instances.
+      properties:
+        data:
+          description: A list of workflow instances.
+          items:
+            $ref: '#/components/schemas/WorkflowInstanceListItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/WorkflowListInstancesResponseMeta'
+      type: object
+    WorkflowListInstancesResponseMeta:
+      additionalProperties: {}
+      description: Metadata about the instances list
+      properties:
+        page:
+          $ref: '#/components/schemas/WorkflowListInstancesResponseMetaPage'
+      type: object
+    WorkflowListInstancesResponseMetaPage:
+      additionalProperties: {}
+      description: Page information for the list instances response.
+      properties:
+        totalCount:
+          description: The total count of items.
+          format: int64
+          type: integer
+      type: object
+    WorklflowCancelInstanceResponse:
+      description: Information about the canceled instance.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorklflowCancelInstanceResponseData'
+      type: object
+    WorklflowCancelInstanceResponseData:
+      description: Data about the canceled instance.
+      properties:
+        id:
+          description: The id of the canceled instance
+          type: string
+      type: object
+    WorklflowGetInstanceResponse:
+      additionalProperties: {}
+      description: The state of the given workflow instance.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorklflowGetInstanceResponseData'
+      type: object
+    WorklflowGetInstanceResponseData:
+      additionalProperties: {}
+      description: The data of the instance response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorklflowGetInstanceResponseDataAttributes'
+      type: object
+    WorklflowGetInstanceResponseDataAttributes:
+      additionalProperties: {}
+      description: The attributes of the instance response data.
+      properties:
+        id:
+          description: The id of the instance.
+          type: string
+      type: object
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -23824,6 +24399,7 @@ components:
               access to the cloud cost data source in dashboards and notebooks.
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations.
+            code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
@@ -24003,6 +24579,8 @@ paths:
         - name: api_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/api_keys/{api_key_id}:
     delete:
       description: Delete an API key.
@@ -24110,6 +24688,10 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      get: true
+      patch: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -24906,6 +25488,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -26703,6 +27287,132 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+  /api/v2/cost/custom_costs:
+    get:
+      description: List the Custom Costs files.
+      operationId: ListCustomCostsFiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List Custom Costs files
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    put:
+      description: Upload a Custom Costs file.
+      operationId: UploadCustomCostsFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomCostsFileUploadRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileUploadResponse'
+          description: Accepted
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Upload Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 11
+      x-undo:
+        type: idempotent
+  /api/v2/cost/custom_costs/{file_id}:
+    delete:
+      description: Delete the specified Custom Costs file.
+      operationId: DeleteCustomCostsFile
+      parameters:
+      - $ref: '#/components/parameters/FileID'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch the specified Custom Costs file.
+      operationId: GetCustomCostsFile
+      parameters:
+      - $ref: '#/components/parameters/FileID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileGetResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/cost/enabled:
     get:
       description: Get the Cloud Cost Management activity.
@@ -27102,6 +27812,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -28080,6 +28793,8 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    x-merge-override:
+      delete: true
   /api/v2/incidents/{incident_id}/attachments:
     get:
       description: Get all attachments for a given incident.
@@ -28850,6 +29565,9 @@ paths:
         - name: integration_service_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/integration/opsgenie/services/{integration_service_id}:
     delete:
       description: Delete a single service object in the Datadog Opsgenie integration.
@@ -28937,6 +29655,10 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      get: true
+      patch: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -29006,6 +29728,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/cloudflare/accounts/{account_id}:
     delete:
       description: Delete a Cloudflare account.
@@ -29103,6 +29827,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/confluent-cloud/accounts:
     get:
       description: List Confluent accounts.
@@ -29259,6 +29986,8 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources:
     get:
       description: Get a Confluent resource for the account associated with the provided
@@ -29411,6 +30140,8 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/integrations/fastly/accounts:
     get:
       description: List Fastly accounts.
@@ -29479,6 +30210,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/fastly/accounts/{account_id}:
     delete:
       description: Delete a Fastly account.
@@ -29561,6 +30294,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/fastly/accounts/{account_id}/services:
     get:
       description: List Fastly services for an account.
@@ -29625,6 +30361,9 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
       description: Delete a Fastly service for an account.
@@ -29711,6 +30450,8 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      delete: true
+      get: true
       patch: true
   /api/v2/integrations/okta/accounts:
     get:
@@ -29782,6 +30523,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/okta/accounts/{account_id}:
     delete:
       description: Delete an Okta account.
@@ -29879,6 +30622,10 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      get: true
+      patch: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -32638,6 +33385,73 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/ndm/tags/devices/{device_id}:
+    get:
+      description: Get the list of tags for a device.
+      operationId: ListDeviceUserTags
+      parameters:
+      - description: The id of the device to fetch tags for.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the list of tags for a device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: Update the tags for a device.
+      operationId: UpdateDeviceUserTags
+      parameters:
+      - description: The id of the device to update tags for.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsResponse'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update the tags for a device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -33227,6 +34041,8 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -33666,22 +34482,38 @@ paths:
 
         - Service Level Objectives: `slo`
 
+        - Synthetic Global Variables: `synthetics-global-variable`
+
+        - Synthetic Tests: `synthetics-test`
+
+        - Synthetic Private Locations: `synthetics-private-location`
+
+        - Monitors: `monitor`
+
 
         #### Supported relations for resources
 
-        Resource Type            | Supported Relations
+        Resource Type               | Supported Relations
 
-        -------------------------|--------------------------
+        ----------------------------|--------------------------
 
-        Dashboards               | `viewer`, `editor`
+        Dashboards                  | `viewer`, `editor`
 
-        Notebooks                | `viewer`, `editor`
+        Notebooks                   | `viewer`, `editor`
 
-        Powerpacks               | `viewer`, `editor`
+        Powerpacks                  | `viewer`, `editor`
 
-        Security Rules           | `viewer`, `editor`
+        Security Rules              | `viewer`, `editor`
 
-        Service Level Objectives | `viewer`, `editor`'
+        Service Level Objectives    | `viewer`, `editor`
+
+        Synthetic Global Variables  | `viewer`, `editor`
+
+        Synthetic Tests             | `viewer`, `editor`
+
+        Synthetic Private Locations | `viewer`, `editor`
+
+        Monitors                    | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -33955,6 +34787,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/roles/{role_id}/clone:
     post:
       description: Clone an existing role
@@ -34016,6 +34851,8 @@ paths:
         - name: role_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -34164,6 +35001,10 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
+      get: true
+      post: true
   /api/v2/roles/{role_id}/users:
     delete:
       description: Removes a user from a role.
@@ -34519,6 +35360,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -34996,6 +35839,46 @@ paths:
       tags:
       - Service Scorecards
       x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Updates an existing rule.
+      operationId: UpdateScorecardRule
+      parameters:
+      - $ref: '#/components/parameters/RuleId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRuleRequest'
+        description: Rule attributes.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRuleResponse'
+          description: Rule updated successfully
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Update an existing rule
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -36987,6 +37870,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/services:
     get:
       deprecated: true
@@ -38000,6 +38885,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -38457,6 +39344,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -39767,6 +40656,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/users/{user_id}/orgs:
     get:
       description: 'Get a user organization. Returns the user information and all
@@ -39848,6 +40739,8 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+    x-merge-override:
+      get: true
   /api/v2/users/{user_uuid}/memberships:
     get:
       description: Get a list of memberships for a user
@@ -39883,6 +40776,134 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/workflows/{workflow_id}/instances:
+    get:
+      description: List all instances of a given workflow. This API requires an application
+        key scoped with the workflows_read permission.
+      operationId: ListWorkflowInstances
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListInstancesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_read
+      summary: List workflow instances
+      tags:
+      - Workflow Automation
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Execute the given workflow. This API requires an application key
+        scoped with the workflows_run permission.
+      operationId: CreateWorkflowInstance
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowInstanceCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowInstanceCreateResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Execute a workflow
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/workflows/{workflow_id}/instances/{instance_id}:
+    get:
+      description: Get a specific execution of a given workflow. This API requires
+        an application key scoped with the workflows_read permission.
+      operationId: GetWorkflowInstance
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorklflowGetInstanceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_read
+      summary: Get a workflow instance
+      tags:
+      - Workflow Automation
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
+    put:
+      description: Cancels a specific execution of a given workflow. This API requires
+        an application key scoped with the workflows_run permission.
+      operationId: CancelWorkflowInstance
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorklflowCancelInstanceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Cancel a workflow instance
+      tags:
+      - Workflow Automation
+      x-menu-order: 4
       x-undo:
         type: safe
   x-merge-override:
@@ -40249,8 +41270,8 @@ tags:
 
     and improve communication with internal and external users.'
   name: Service Level Objectives
-- description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)
-    for more information.
+- description: 'API to create and update scorecard rules and outcomes. See [Service
+    Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
 
 
     This feature is currently in BETA. If you have any feedback, contact [Datadog
@@ -40300,4 +41321,9 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
+- description: Automate your teams operational processes with Datadog Workflow Automation.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/service_management/workflows/
+  name: Workflow Automation
 x-group-parameters: true

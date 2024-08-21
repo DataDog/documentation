@@ -22,7 +22,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
 
 Prerequisites:
 
@@ -48,7 +48,7 @@ Provide the following inputs:
 ```bash
 # Set the Datadog site to send information to
 export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
-                        
+
 # Install dependencies
 npm install -g @datadog/datadog-ci
 
@@ -59,14 +59,14 @@ DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/d
 # Install OSV Scanner
 mkdir /osv-scanner
 curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
-cd /osv-scanner && unzip osv-scanner.zip
+unzip /osv-scanner/osv-scanner.zip -d /osv-scanner
 chmod 755 /osv-scanner/osv-scanner
 
-# Output OSC Scanner results
+# Run OSV Scanner and scan your dependencies
 /osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
-# Upload results
-datadog-ci sbom upload --service "my-app" --env "ci" /tmp/sbom.json
+# Upload results to Datadog
+datadog-ci sbom upload /tmp/sbom.json
 ```
 
 ## Further Reading

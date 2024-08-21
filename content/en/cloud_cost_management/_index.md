@@ -13,6 +13,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
     tag: "Blog"
     text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
+  - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
+    tag: "Blog"
+    text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
   - link: "/monitors/types/cloud_cost/"
     tag: "Documentation"
     text: "Create a Cloud Cost monitor"
@@ -32,6 +35,11 @@ cascade:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
+  Explore your cloud provider costs and correlate them with real-time telemetry data. Gain actionable insights and alerts on where your cloud costs are coming from, how they are changing, and where to find potential optimizations.
+{{< /learning-center-callout >}}
 
 ## Overview
 
