@@ -212,7 +212,7 @@ Costs are allocated into the following spend types:
 
 ### Persistent volume
 
-The cost of an AWS EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
+The cost of an EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
 
 | Spend type | Description    |
 | -----------| -----------    |
@@ -270,7 +270,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | {{< ccm-details title="Managed service fees" >}}Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options.{{< /ccm-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | ECS costs | {{< X >}} | N/A | N/A |
 | Networking costs |  | Limited* | Limited* |
-| GPU |  |  | Limited* |
+| GPU | {{< X >}} | {{< X >}} | {{< X >}}  |
 | {{< ccm-details title="Local storage" >}}Directly-attached storage resources for a node.{{< /ccm-details >}} |  | Limited* | Limited* |
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
@@ -285,7 +285,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
 | `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated AWS EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -339,7 +339,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                      |
 | `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                      |
 | `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                    |
-| `ebs_volume_type`                       | The type of the AWS EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
+| `ebs_volume_type`                       | The type of the EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
 
 ### Amazon ECS
 
