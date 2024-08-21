@@ -12,7 +12,7 @@ algolia:
 ---
 
 <div class="alert alert-info">
-SCIM is only available for the Enterprise plan.
+SCIM is only available for the Enterprise plan. 
 </div>
 
 ## Overview
