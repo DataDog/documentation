@@ -85,7 +85,7 @@ function processData(i, param1, param2) {
 
 ## Adding span events
 
-You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new Span Event with the specified properties and associates it with the corresponding Span.
+You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
 - **Name**: A string representing the event's name.
 - **Timestamp**: A UNIX timestamp representing the event's occurrence time.
@@ -108,7 +108,7 @@ Read the [OpenTelemetry][6] specification for more information.
 
 ### Record exceptions
 
-To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new Span Event that includes standardized exception attributes and associates it with the corresponding Span.
+To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
 
 The following examples demonstrate different ways to record exceptions:
 
