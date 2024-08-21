@@ -5551,31 +5551,26 @@ menu:
       parent: synthetics
       identifier: synthetics_mobile_app_testing
       weight: 4
-    - name: Mobile App Testing
-      url: synthetics/mobile_app_testing/mobile_app_tests
-      parent: synthetics_mobile_app_testing
-      identifier: synthetics_mobile_app_testing_mobile_app_tests
-      weight: 401
     - name: Testing Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/steps
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
-      weight: 402
+      weight: 401
     - name: Testing Results
       url: synthetics/mobile_app_testing/mobile_app_tests/results
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
-      weight: 403
+      weight: 402
     - name: Advanced Options for Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 404
+      weight: 403
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 405
+      weight: 404
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
