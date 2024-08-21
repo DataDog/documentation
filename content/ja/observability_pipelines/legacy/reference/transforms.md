@@ -1,6 +1,6 @@
 ---
 aliases:
-- /observability_pipelines/reference/transforms/
+- /ja/observability_pipelines/reference/transforms/
 legacy: true
 title: 変換
 ---

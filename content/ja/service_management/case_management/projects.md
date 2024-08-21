@@ -7,30 +7,36 @@ further_reading:
 title: プロジェクト
 ---
 
-## 概要
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
-プロジェクトは、一連のケースを保持するコンテナオブジェクトです。組織にとって意味のあるグループ (チーム、サービス、イニシアチブなど) に基づいて作業を整理します。各プロジェクト内のケースは互いに分離されているため、関連性の高いものに集中することができます。
+## Overview
 
-## プロジェクトを作成する
+A project is a container object that holds a set of cases. Organize your work around the groups that make sense to your organization, whether that's teams, services, or initiatives. Cases in each project are isolated from one another, helping you to focus on what's relevant. 
 
-{{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="ケース管理の設定ページで新規プロジェクトを作成する" style="width:100%;" >}}
+## Create a project
 
-プロジェクトを作成するには:
-1. Projects ビューで **New Project** を選択するか、左のナビゲーションバーで **Your Projects** の隣にある **+** アイコンをクリックします。
-1. プロジェクト名とキーを入力します。プロジェクトキーの長さは 1 文字以上 10 文字以下である必要があります。ケース ID 番号には、`NOC-123` のように、アルファベットの組み合わせを先頭に付けます。プロジェクトキーは不変です。 
-1. **Create Project** をクリックします。
+{{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
 
-プロジェクトを作成したら、1 人以上のユーザーまたは Datadog チームをメンバーとして追加します。自分がメンバーになっているプロジェクトは、左側のナビゲーションバーの **Your Projects** セクションに表示されます。 
+To create a project:
+1. Select **New Project** on the Projects view or click on the **+** icon next to *Your Projects* in the left navigation bar.  
+1. Enter a project name and key. Project keys must be between one and 10 characters long. Case ID numbers are prefixed with a combination of letters, for example, `NOC-123`. Project keys are immutable. 
+1. Click **Create Project**.
 
-## プロジェクトに参加する
+After you create your project, add one or more users or Datadog Teams as members. Projects that you're a member of appear in the **Your Projects** section of the left navigation bar. 
 
-{{< img src="/service_management/case_management/projects/join_a_project_cropped.png" alt="プロジェクトに参加するためのボタンオプションが表示されているプロジェクトページ" style="width:100%;" >}}
+## Join a project
 
-左側のナビゲーションバーの **Projects** ビューで、組織内のプロジェクトを検索します。誰でもすべてのプロジェクトを閲覧し、参加することができます。また、プロジェクトのメンバーであるかどうかに関係なく、誰でも任意のプロジェクトでケースを作成し、担当になることができます。
+{{< img src="/service_management/case_management/projects/join_a_project_cropped.png" alt="Projects page showing the button options to join a project" style="width:100%;" >}}
 
-## プロジェクトを削除する
+Find projects within your organization in the **Projects** view in the left navigation bar. Anyone can view and join any project. Anyone can also create and be assigned cases in any project, regardless of whether they're a member of the project or not. 
 
-<div class="alert alert-warning">削除されたケースは復元できません。</div>
+## Delete a project
+
+<div class="alert alert-warning">Deleted cases cannot be recovered.</div>
 
 プロジェクトの削除は、プロジェクトの Settings ページから行えます。
 

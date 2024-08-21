@@ -14,7 +14,7 @@ title: 保存ビュー
 
 ## 保存ビューの作成
 
-保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Save new view as** をクリックします。 
+保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Save new view as** をクリックします。
 
 {{< img src="synthetics/search/create_a_new_saved_view_2.png" alt="Synthetic Tests ページで新規の保存ビューを作成する" style="width:100%" >}}
 

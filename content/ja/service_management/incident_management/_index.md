@@ -24,9 +24,9 @@ further_reading:
 title: インシデント管理
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
-{{< /site-region >}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
+  Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
+{{< /learning-center-callout >}}
 
 組織のサービス中断につながる可能性のあるイベントは、すべてインシデントと見なすことができます。多くの場合、こうしたイベントを処理するためのフレームワークを用意する必要があります。Datadog のインシデント管理機能は、組織がインシデントを効果的に識別して軽減できるシステムを提供します。
 
@@ -75,7 +75,7 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 #### セキュリティシグナルから
 
-サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または Cloud Workload Security のシグナルから直接インシデントを宣言することができます。
+サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または Cloud Security Management Threats のシグナルから直接インシデントを宣言することができます。
 
 サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、Application Security Management のシグナルからインシデントを宣言します。
 
@@ -83,13 +83,11 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 #### Incidents ページから作成
 
-[Datadog UI][1] で **New Incident** をクリックし、インシデントを作成します。
+[Datadog UI][1] で **Declare Incident** をクリックし、インシデントを作成します。
 
-{{< img src="service_management/incidents/incident_declaration_modal.jpeg" alt="インシデント宣言モーダル" style="width:80%;">}}
+{{< img src="/service_management/incidents/declare_incident_make_private.png" alt="インシデント宣言モーダル" style="width:80%;">}}
 
-インシデント作成モーダルは、オーガニゼーションで使用されている重大度とステータスのヘルパーテキストと説明を含む折りたたみ可能なサイドパネルをレスポンダーに提供します。ヘルパーのテキストと説明は、[Incident Settings][6] でカスタマイズできます。
-
-{{< img src="service_management/incidents/incident_information_settings.jpeg" alt="インシデント情報の設定" style="width:80%;">}}
+インシデント作成モーダルは、オーガニゼーションで使用されている重大度とステータスのヘルパーテキストと説明を含む折りたたみ可能なサイドパネルをレスポンダーに提供します。ヘルパーのテキストと説明は、[Incident Settings][6] でカスタマイズできます。また、インシデントを非公開にしてレスポンダーのみにアクセスを制限するオプションもあります。
 
 #### Slack から作成
 
@@ -97,48 +95,32 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 作成モーダルで、説明タイトル (Title) に入力し、カスタマーへの影響 (Yes、No、Unknown) を選択して、重大度 (Severity) を (Unknown または 1～5) から選択します。
 
-インシデントを宣言しているユーザーが Slack を Datadog アカウントと接続済みの場合、デフォルトではそのユーザーがインシデント調査責任者 (IC) になります。IC は、必要に応じて後からアプリ内で変更できます。インシデントを宣言しているユーザーが Datadog アカウントを所有していない場合、IC は一般の `Slack app user` に割り当てられ、アプリ内の別の IC に割り当てることができます。
+If the user declaring the incident has connected their Slack to their Datadog account, then by default that user becomes the Incident Commander (IC). If the person declaring an incident is not a member of a Datadog account, then the IC is unassigned. You can change the IC on the [incidents page][1] later if necessary.
 
-Datadog Slack アプリの使用については、[こちら][8]を確認してください。
+After you declare an incident from Slack, it generates an incident channel.
 
 {{< img src="service_management/incidents/from-slack.png" alt="Slack からインシデントを作成" style="width:60%;">}}
 
-インシデントを宣言しているユーザーが Datadog アカウントを所有している場合、デフォルトではそのユーザーがインシデント調査責任者 (IC) になります。インシデントを宣言しているユーザーが Datadog アカウントを所有していない場合、IC は一般の `Slack app user` に割り当てられます。IC は Datadog アプリの[インシデントページ][1]で変更できます。
-
-Slack でインシデントを宣言すると、インシデントチャネルが生成されます。
-
-Datadog Slack インテグレーションについては、[ドキュメント][7]を参照してください。
+Datadog Slack アプリの使用については、[こちら][8]を確認してください。
 
 {{< site-region region="eu" >}}
 Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、https://help.datadoghq.com/ でチケットを提出して、Slack アプリに関する最新情報を入手してください。
 {{< /site-region >}}
 
-### インシデントの説明
+## インシデントの説明
 
 インシデントの作成場所に関わらず、インシデントについてできる限り詳細な説明を添えて、社内のインシデント管理プロセスに関わるメンバーと情報を共有することが重要です。
 
 インシデントを作成すると、インシデントモーダルが表示されます。このモーダルにはいくつかの重要な要素が含まれています。
 
-**Severity Level**: インシデントの重大度を SEV-1 (最も重大) から SEV-5 (最も軽微) で表します。インシデントを調査中で重大度がまだわからない場合は UNKNOWN を選択します。
-
-* SEV-1: 重大な影響
-* SEV-2: 大きな影響
-* SEV-3: 中程度の影響
-* SEV-4: 小さい影響
-* SEV-5: 軽微な問題
-* UNKNOWN: 初期調査
-
-**注**: 各重大度レベルの説明は、組織の要件に合わせてカスタマイズできます。
-
-**Title**: インシデントにわかりやすいタイトルを付けます。
-
-**Signals**: インシデントを宣言している理由。これは、グラフやログなどの視覚情報にすることができます。
-
-**Incident commander**: この人物はインシデント調査のリーダーとして割り当てられます。
-
-**Additional notifications**: 他のチームまたは人々に通知します。
-
-**Declare Incident** をクリックして、インシデントの作成を完了します。
+| インシデント要素    | 説明 |
+| ----------- | ----------- |
+| タイトル | (必須) インシデントにわかりやすいタイトルを付けます。 |
+| Severity Level| (必須) インシデントの重大度を SEV-1 (最も深刻) から SEV-5 (最も深刻でない) の範囲で示します。インシデントが初期調査中で、重大度がまだわからない場合は、UNKNOWN を選択してください。<br> **注**: 各重大度レベルの説明は、組織の要件に合わせてカスタマイズできます。|
+| Incident Commander | この人物はインシデント調査のリーダーとして割り当てられます。 |
+| Attributes (Teams) | [Datadog Teams][9] を使用して、インシデントに適切なユーザーグループを割り当てます。割り当てられたチームのメンバーは、自動的に Slack チャンネルに招待されます。 |
+| 通知 | このインシデントの通知を送信するユーザー、Slack チャンネル、または外部メールを指定します。  |
+| Notes & Links | 各重大度レベルの説明は、組織の要件に合わせてカスタマイズできます。グラフ、モニター、またはセキュリティシグナルへのリンクを追加して、さらに認識できるようにします。 |
 
 ### インシデントとインシデントタイムラインの更新
 
@@ -169,19 +151,19 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 
 #### 評価フィールド
 
-評価フィールドは、インシデントごとに定義できるメタデータとコンテキストから成ります。このフィールドは [key:value メトリクスタグ][9]になっており、設定でフィールドキーを追加すると、概要ページでインシデントの影響を評価する際に、値を利用できるようになります。例えば、「アプリケーション」フィールドを追加できます。次のフィールドはすべてのインシデントの評価に利用できます。
+評価フィールドは、インシデントごとに定義できるメタデータとコンテキストから成ります。このフィールドは[key:value メトリクスタグ][10]になっており、設定でフィールドキーを追加すると、概要ページでインシデントの影響を評価する際に、値を利用できるようになります。例えば、「アプリケーション」フィールドを追加できます。次のフィールドはすべてのインシデントの評価に利用できます。
 
 * **Root Cause**: このテキストフィールドには、インシデントの根本原因の説明、トリガー、要因を入力できます。
 * **Detection Method**: デフォルトの選択肢「Customer、Employee、Monitor、Other、Unknown」から、インシデントがどのように検出されたか指定します。
-* **Services**: APM を構成済みの場合は、インシデント評価に APM サービスを利用できます。APM サービスの構成については、[ドキュメント][10]を参照してください。
+* **Services**: APM を構成済みの場合は、インシデント評価に APM サービスを利用できます。APM サービスの構成については、[ドキュメント][11]を参照してください。
     * Datadog APM を使用していない場合は、サービス名を CSV ファイルでアップロードできます。CSV ファイルでアップロードされた値は、インシデント管理のインシデント評価にのみ使用できます。
     * Datadog は、大文字と小文字を区別しないことによるサービス名の重複を排除します。そのため、"My Service" や "my service" といった名前を使用している場合、手動で追加した名前のみが表示されます。
     * Datadog は、手動でアップロードしたリストを優先して APM サービス名をオーバーライドします。
     * 利用しているサービスが APM サービスで、過去 7 日間にメトリクスが何もポストされていない場合、検索結果には表示されません。
     * Datadog 製品をさらに統合すると、サービスへの影響をより正確に評価できます。サービスのプロパティフィールドは、Datadog APM を使用しているカスタマーの APM サービスが自動的に入力されます。
-* **Teams**: 組織で定義されている[チーム][11]から選択してください。CSV ファイルからチームリストをアップロードする必要はありません。
+* **Teams**: Choose from the [teams][9] defined in your organization. It is not necessary to upload a list of teams from a CSV file.
 
-## 収集データ
+## データ収集
 
 インシデント管理は、次の分析メジャーを収集します。
 
@@ -199,8 +181,11 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [Slack][7] との統合に加えて、インシデント管理は以下とも統合されます。
 
 - [PagerDuty][13] と [OpsGenie][14] は、オンコールエンジニアにインシデント通知を送信します。
+- [CoScreen][21] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [Jira][15] は、インシデントの Jira チケットを作成します。
 - [Webhook][16] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][17])。
+- [Statuspage][19] to create and update Statuspage incidents.
+- [ServiceNow][20] to create a ServiceNow ticket for an incident.
 
 ## 準備はいいですか？
 
@@ -218,9 +203,9 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [6]: /ja/service_management/incident_management/incident_settings#information
 [7]: /ja/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: /ja/integrations/slack/
-[9]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[10]: /ja/tracing/#2-instrument-your-application
-[11]: /ja/account_management/teams/
+[9]: /ja/account_management/teams/
+[10]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[11]: /ja/tracing/#2-instrument-your-application
 [12]: /ja/service_management/incident_management/analytics/#overview
 [13]: /ja/integrations/pagerduty/
 [14]: /ja/integrations/opsgenie/
@@ -228,3 +213,6 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [16]: /ja/integrations/webhooks/
 [17]: /ja/integrations/webhooks/#sending-sms-through-twilio
 [18]: /ja/getting_started/incident_management
+[19]: /ja/integrations/statuspage/
+[20]: /ja/integrations/servicenow/
+[21]: /ja/coscreen

@@ -6,21 +6,21 @@ title: モニター API オプション
 
 - **`silenced`** スコープからタイムスタンプへの辞書または `null`。各スコープは、指定された POSIX タイムスタンプまで、または値が `null` の場合は無制限にミュートされます。デフォルト: **null** 例:
 
-  - アラートを完全にミュートするには: `{'*': null}`
+  - To mute the alert completely: `{'*': null}`
   - しばらくの間 `role:db` をミュートするには: `{'role:db': 1412798116}`
 
 - **`new_group_delay`** 新しく作成されたアプリケーションまたはコンテナを完全に開始できるようにするための、新しいグループのアラートを開始するまでの時間 (秒単位)。負でない整数である必要があります。デフォルト: **60**。例: コンテナ化されたアーキテクチャーを使用している場合、評価遅延を設定すると、新しいコンテナが作成されたときにモニターのグループ化コンテナがトリガーされなくなり、最初の数分間にレイテンシーや CPU 使用率の急上昇が発生する可能性があります。
 
 - **`new_host_delay`** モニター結果の評価を開始する前に、ホストがブートし、アプリケーションが完全に起動するまで待つ時間 (秒単位)。負でない整数である必要があります。**非推奨: 代わりに `new_group_delay` を使用してください**。
 
-- **`notify_no_data`** データが報告を停止したことをこのモニターが通知するかどうかを示すブール値。デフォルト: **False**
+- **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **False**.
 - **`no_data_timeframe`** データが報告を停止してから何分後にモニターが通知を行うかを定める分数。Datadog では、メトリクスアラートの場合は少なくともモニタータイムフレームの 2 倍、サービスのチェックの場合は少なくとも 2 分に設定するよう推奨しています。**省略した場合、メトリクスアラートには評価タイムフレームの 2 倍、サービスチェックには 24 時間が設定されます。**
 - **`timeout_h`** データを報告していないモニターが、トリガーされた状態から自動的に回復するまでの時間数。最小許容値は 0 時間、最大許容値は 24 時間です。デフォルト: **null**。
 
 -  **`require_full_window`** このモニターがウィンドウ全体のデータを取得するまで評価を行わないかどうかを示すブール値。疎なメトリクスの場合は `False` に設定することをお勧めします。そうしないと、一部の評価がスキップされます。デフォルト: **False**
 - **`renotify_interval`** モニターが最後に通知してから現在のステータスを再通知するまでの分数。これは、回復していないことを再通知するだけです。デフォルト: **null**。
 - **`renotify_statuses`** モニターが再通知する状態。デフォルト: `renotify_interval` が **null** の場合は *null*。`renotify_interval` が設定されている場合、デフォルトは `Alert` と `No Data` で再通知します。
-- **`renotify_occurrences`** モニターが再通知する回数。`renotify_interval` が設定されている場合にのみ設定できます。デフォルト: **null**、無制限に再通知します。
+- **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
 - **`escalation_message`** 再通知に含めるメッセージ。他の場所と同様に '@username' 通知をサポートします。`renotify_interval` が `null` の場合は適用されません。デフォルト: **null**。
 - **`notify_audit`** タグ付けされたユーザーに、このモニターへの変更が通知されるかどうかを示すブール値。デフォルト: **False**
 - **`include_tags`** このモニターからの通知のタイトルに、トリガーしているタグを自動的に挿入するかどうかを示すブール値。デフォルト: **True** 例:
