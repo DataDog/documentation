@@ -16,6 +16,8 @@ Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSe
 
 **US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to simplify configuration for your Azure log forwarding. Datadog recommends using this method when possible. Configuration is done through the [Datadog resource in Azure][5]. This replaces the Azure Event Hub process for log forwarding. See the [Azure Native Logging Guide][4] for more information.
 
+**Note**: To collect logs from Azure Log Analytics workspaces, you must use the Azure Event Hub process.
+
 {{< tabs >}}
 
 {{% tab "Automated Installation" %}}
