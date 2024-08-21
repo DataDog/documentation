@@ -18,6 +18,12 @@ further_reading:
     - link: "/security/cloud_security_management/setup/supported_deployment_types"
       tag: "Documentation"
       text: "Supported Deployment Types"
+    - link: "/security/cloud_security_management/setup/agentless_scanning"
+      tag: "Documentation"
+      text: "Agentless Scanning Quick Start"
+    - link: "/security/cloud_security_management/setup/custom_feature_selection"
+      tag: "Documentation"
+      text: "Setting up Cloud Security Management with Custom Feature Selection"
     - link: "/security/cloud_security_management/guide/agent_variables/"
       tag: "Guide"
       text: "Cloud Security Management Agent Variables"
@@ -52,6 +58,8 @@ Use Custom Feature Selection if you:
 - Require Agent-based security features for enhanced visibility and control.
 
 ## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/agentless_scanning
 [2]: https://app.datadoghq.com/security/configuration/csm/features

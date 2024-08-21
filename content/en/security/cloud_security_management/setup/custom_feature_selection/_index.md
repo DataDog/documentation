@@ -2,7 +2,7 @@
 title: Custom Feature Selection for Cloud Security Management
 ---
 
-## Overview
+The Custom Feature Selection workflow offers flexibility and customization during onboarding, enabling you to choose features that best fit your specific needs.
 
 ## Use cases
 

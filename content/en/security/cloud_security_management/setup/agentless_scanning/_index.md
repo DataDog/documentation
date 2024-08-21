@@ -6,6 +6,8 @@ title: Agentless Scanning Quick Start for Cloud Security Management
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+The Agentless Scanning Quick Start provides a streamlined setup workflow for Cloud Security Management, allowing you to start monitoring your AWS resources immediately.
+
 ## Prerequisites
 
 - AWS integration
