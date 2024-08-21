@@ -463,7 +463,7 @@ If you are using the `Microsoft.Extensions.Logging` integration, you can filter 
 
 ## Agentless logging with Serilog sink
 
-<div class="alert alert-info">Since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the <a href="https://github.com/serilog/serilog-settings-configuration">`Serilog.Setting.Configuration`</a> package.
+<div class="alert alert-info">Since <code>0.2.0</code>, you can configure the Datadog sink by using an <code>appsettings.json</code> file with the <a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a> package.
 For more information, see the <a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a> package.</div>
 
 If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][19] to send logs directly to Datadog.
