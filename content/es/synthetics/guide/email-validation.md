@@ -1,6 +1,6 @@
 ---
-description: Verifica el correo electrónico y su contenido con los pasos de los tests
-  de navegador
+description: Verifica un correo electrónico y su contenido con los pasos del test
+  del navegador.
 further_reading:
 - link: /synthetics/browser_tests/actions
   tag: Documentación
@@ -8,7 +8,7 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
   text: Configurar opciones avanzadas en los pasos
-title: Validar correos electrónicos con tests de navegador
+title: Utiliza la validación de correo electrónico en los tests de navegador
 ---
 
 ## Información general
