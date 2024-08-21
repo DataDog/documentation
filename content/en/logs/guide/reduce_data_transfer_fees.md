@@ -13,7 +13,7 @@ algolia:
 
 ## Overview
 
-As your organization grows, the amount of data you transfer between cloud providers to Datadog can also increase.  Cloud providers charge a *data transfer* fee or *data egress* fee to move that data from cloud storage over public IP addresses. This can easily become one of the largest line items in your organization’s cloud cost bill. 
+As your organization grows, the amount of data you transfer between cloud providers to Datadog can also increase. Cloud providers charge a *data transfer* fee or *data egress* fee to move that data from cloud storage over public IP addresses. This can easily become one of the largest line items in your organization’s cloud cost bill. 
 
 Send data over a private network to avoid the public internet and reduce your data transfer fees. As an example of how private links reduce your costs, in the US East AWS Regions, it costs $0.09 to transfer 1GB, but with AWS PrivateLink, the cost to transfer data goes down to $0.01 per GB.
 
