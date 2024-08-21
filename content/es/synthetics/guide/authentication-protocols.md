@@ -93,7 +93,7 @@ Al guardar tus credenciales como variables locales, estas solo se limitan a un �
 
 Para obtener más información sobre cómo proteger los datos, consulta [Seguridad de los datos en Synthetic Monitoring][7].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
