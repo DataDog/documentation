@@ -69,7 +69,7 @@ Datadog utiliza el protocolo de rastreo distribuido y configura las siguientes c
 : Para tener tests Synthetic como tramo (span) raíz de la traza generada.
 
 `x-datadog-origin: synthetics`
-: Para identificar las trazas generados a partir de tus tests de API. Los tramos de estas trazas se etiquetan con `ingestion_reason:synthetics`.
+: Para identificar las trazas generados a partir de tus tests de API. Los tramos de estas trazas están etiquetados (tag) con `ingestion_reason:synthetics`.
 
 `x-datadog-origin: synthetics-browser`
 : Para identificar las trazas generadas a partir de tus tests de navegador. Estas trazas están etiquetadas con `ingestion_reason:synthetics-browser`.
