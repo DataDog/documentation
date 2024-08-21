@@ -1,0 +1,133 @@
+{{ define "main" }}
+  <div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle">{{ .Title }}</h1>
+        <p>{{ .Params.content | safeHTML }}</p>
+
+    </div>
+    <div class="col-12">
+      {{ if .File }}
+        {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+    </div>
+  </div>
+  {{ partial "translate_status_banner/translate_status_banner.html" . }} 
+
+  
+  {{ $suite := slice }}
+  <div
+  class="filter-search-main row w-100"
+  x-data="{
+    filterValue: '',
+    searchValue: '',
+    pushState (filtering=true) {
+      // Updates the url with the new query params for 'suite' and 'search' without refreshing the page
+      const url = new URL(window.location.href)
+
+      if(filtering){
+        url.searchParams.set('suite', this.filterValue)
+      }else if(!filtering){
+        url.searchParams.set('search', this.searchValue)
+      }
+
+      if(!this.searchValue) {
+        url.searchParams.delete('search')
+      }
+      if(!this.filterValue) {
+        url.searchParams.delete('suite')
+      }
+
+      window.history.pushState(null,'', url.toString())
+      window.scroll(0, 0)
+    },
+    shouldShowAttribute (dataset) {
+      // Determines table-row display
+      // Compares search values and filter values against attributes info (dataset)
+      const datasetArr = dataset.split(';')
+      const filterValues = datasetArr[0]
+      const searchValues = this.searchValue.split(' ')
+
+      const containsFilteredValue = filterValues.includes(this.filterValue.toLowerCase()) // checks first attr in dataset
+      const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
+      console.log(filterValues, this.filterValue, containsFilteredValue)
+      return containsSearchValues && containsFilteredValue
+    },
+    updateWithURLParams () {
+      // Updates x-data properties with url param values
+      const url = new URL(window.location.href)
+      this.filterValue = url.searchParams.get('suite') || ''
+      this.searchValue = url.searchParams.get('search') || ''
+    }
+  }"
+  x-init="updateWithURLParams()">
+    <div
+    class="data-retention-periods table-wrapper order-1">
+      <table>
+        <thead class="table-header">
+          <tr>
+            <th>Product Suite</th>
+            <th>Product</th>
+            <th>Data Type</th>
+            <th>Default Retention Period</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          {{ range .Params.attributes }}
+
+          <!--  concatenating attribute info for a lookup dataset -->
+          {{ $pad := newScratch }}
+          {{ $pad.Set "attribute_info" (slice .suite .product .data_type .default_retention_period) }}
+          {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
+
+          <tr
+          class="table-row"
+          :class="shouldShowAttribute('{{ $attribute_info }}') && 'show'"
+          x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')"
+          x-transition.opacity.duration.250ms
+          >
+            <td>{{ .suite }}</td>
+            <td>{{ .product }}</td>
+            <td>{{ .data_type }}</td>
+            <td>{{ .default_retention_period }}</td>
+          </tr>
+            <!-- Build $suite slice for filtering section (.filters) -->
+          {{ $suite = $suite | append .suite }}
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <nav id="filter-search-nav" class="mb-3">
+      {{/*  FILTER BTNS - Keep here. $suite slice needs to form */}}
+      <div class="filters">
+        {{ if  $suite }}
+            <button
+            @click="filterValue = ''; pushState()"
+            class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            :class="(filterValue === 'all' || !filterValue) && 'active'"
+            data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button>
+        {{ end }}
+
+        {{ range $suite | uniq | sort }}
+            <button
+            @click="filterValue = '{{ . }}'; pushState()"
+            class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            :class="($el.dataset.filter === filterValue) && 'active'"
+            data-filter="{{ . }}"
+            >
+              {{ . | upper }}
+            </button>
+        {{ end }}
+      </div>
+      {{/*  SEARCH  */}}
+      <form
+      class="search mt-2">
+        <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
+      </form>
+    </nav>
+
+  </div>
+
+  {{ .Content }}
+
+{{ end }}

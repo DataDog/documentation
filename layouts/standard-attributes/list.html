@@ -33,7 +33,7 @@
 
   {{ $products := slice }}
   <div
-  class="standard-attributes-main row w-100"
+  class="filter-search-main row w-100"
   x-data="{
     filterValue: '',
     searchValue: '',
@@ -78,7 +78,7 @@
   }"
   x-init="updateWithURLParams()">
     <div
-    class="table-wrapper order-1">
+    class="standard-attributes table-wrapper order-1">
       <table>
         <thead class="table-header">
           <tr>
@@ -135,16 +135,16 @@
             <td>{{ .type }}</td>
             <td>{{ .description | markdownify }}</td>
           </tr>
-            <!-- Build $products slice for filtering section (.filters-standard-attributes) -->
+            <!-- Build $products slice for filtering section (.filters) -->
           {{ $products = union $products .product_source }}
           {{ end }}
         </tbody>
       </table>
     </div>
 
-    <nav id="standard-attributes-nav" class="mb-3">
+    <nav id="filter-search-nav" class="mb-3">
       {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
-      <div class="filters-standard-attributes">
+      <div class="filters">
         {{ if  $products }}
             <button
             @click="filterValue = ''; pushState()"
@@ -186,7 +186,7 @@
       </div>
       {{/*  SEARCH  */}}
       <form
-      class="search-standard-attributes mt-2">
+      class="search mt-2">
         <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
       </form>
     </nav>
