@@ -23,7 +23,7 @@ Puedes aprovechar las [variables locales][1] para generar una cadena aleatoria y
 
 Los navegadores se eliminan después de cada ejecución del test, lo que garantiza que tus tests de navegador no tengan problemas relacionados con la caché en el lado del cliente.
 
-## Leer más
+## Referencias adiionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
