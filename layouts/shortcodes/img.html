@@ -109,6 +109,5 @@
     srcset="{{ $e }}" 
     {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
     {{- with $img_width -}} width="{{ . }}" {{- end -}}
-    {{- with $img_height -}} height="{{ . }}" {{- end -}}
-    {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+    {{- with $img_height -}} height="{{ . }}" {{- end -}} />
   {{- end -}}
