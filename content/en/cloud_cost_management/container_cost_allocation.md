@@ -206,9 +206,9 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
-| Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
-| Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
+| Usage | Cost of resources (such as memory, CPU, and GPU) used by workloads, based on the average usage on that day. |
+| Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
+| Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
 ### Persistent volume
 
