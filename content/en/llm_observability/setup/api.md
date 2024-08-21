@@ -141,8 +141,9 @@ If the request is successful, the API responds with a 202 network code and an em
 #### IO
 | Field   | Type   | Description  |
 |---------|--------|--------------|
-| value   | string | Input or output value. This should be used for all spans except for LLM spans. |
-| messages| [[Message](#message)] | List of messages. This should only be used for LLM spans. |
+| value   | string | Input or output value. If not set, this value is inferred from messages or documents. |
+| messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
+| documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
@@ -156,6 +157,15 @@ If the request is successful, the API responds with a 202 network code and an em
 |----------------------|--------|--------------------------|
 | content [*required*] | string | The body of the message. |
 | role                 | string | The role of the entity.  |
+
+#### Document
+| Field                | Type   | Description              |
+|----------------------|--------|--------------------------|
+| text | string | The text of the document. |
+| name    | string | The name of the document.  |
+| score | float | The score associated with this document. |
+| id    | string | The id of this document.  |
+
 
 #### Meta
 | Field       | Type              | Description  |
