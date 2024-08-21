@@ -71,7 +71,7 @@ title: モニターの管理
 [3]: /ja/monitors/manage/status/#mute
 [4]: /ja/monitors/manage/status/#resolve
 [5]: /ja/account_management/teams/
-[6]: /ja/service_management/mobile/#monitors
+[6]: /ja/mobile/#monitors
 [7]: https://apps.apple.com/app/datadog/id1391380318
 [8]: https://play.google.com/store/apps/details?id=com.datadog.app
 [9]: https://app.datadoghq.com/monitors/triggered

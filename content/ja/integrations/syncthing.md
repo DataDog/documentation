@@ -33,6 +33,7 @@ author:
 categories:
 - コラボレーション
 - セキュリティ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/syncthing/README.md
 display_on_public_website: true
@@ -42,7 +43,6 @@ integration_id: syncthing
 integration_title: Syncthing
 integration_version: 1.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: syncthing
 public_title: Syncthing
@@ -59,6 +59,7 @@ tile:
   - Category::Collaboration
   - Category::Security
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Syncthing インスタンスからの全体的な統計情報を追跡
   media: []
@@ -74,11 +75,11 @@ tile:
 
 Syncthing は、2 台以上のコンピュータ間でファイルをリアルタイムに同期させます。このインテグレーションにより、Datadog を使用して [Syncthing][1] を監視することができます。
 
-## 計画と使用
+## セットアップ
 
 Syncthing チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent で Syncthing チェックをインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -90,7 +91,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Syncthing の[メトリクス](#metrics) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `syncthing.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル syncthing.d/conf.yaml][6] を参照してください。
 
@@ -100,21 +101,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 [Agent の status サブコマンド][8]を実行し、Checks セクションで `syncthing` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "syncthing" >}}
 
 
-### ヘルプ
+### イベント
 
 Syncthing には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "syncthing" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

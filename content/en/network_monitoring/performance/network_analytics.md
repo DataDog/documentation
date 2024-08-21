@@ -24,29 +24,33 @@ further_reading:
 
 The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm3.png" alt="Network Analytics landing page under Network Performance" >}}
+{{< img src="network_performance_monitoring/network_analytics/main_page_npm_4.png" alt="Network Analytics landing page under Network Performance" >}}
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
+To refine your search to traffic between particular endpoints, aggregate and filter your network connections **with tags**. Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.
 
-{{< img src="network_performance_monitoring/network_analytics/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
+For example, if you want to see network traffic between your **client** ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
+
+For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
+
+The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+
+{{< img src="network_performance_monitoring/network_analytics/context_npm3.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
 {{< img src="network_performance_monitoring/network_analytics/flow_table_region_az2.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
-You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
+You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
+
+Additionally, set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
-
-Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
-
-You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
 ### Recommended queries
 
@@ -345,5 +349,6 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
-[11]: /getting_started/tagging/unified_service_tagging/
-[12]: /network_monitoring/network_path
+[11]: /network_monitoring/network_path
+[12]: /getting_started/tagging/unified_service_tagging/
+

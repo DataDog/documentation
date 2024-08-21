@@ -38,17 +38,21 @@ title: CI Visibility のトラブルシューティング
 
 _Pipeline Details_ ページでステージやジョブが見つからないのは、構成が間違っている可能性があります。ステージまたはジョブの実行に保存されているパイプライン名が、親パイプラインの**同じ**名前と一致していることを確認してください。カスタムパイプラインを使用している場合は、[公開 API エンドポイント仕様][15]を参照してください。
 
-### 実行中のパイプラインに関する制限
+## Missing variables in Gitlab pipelines
 
-#### Webhook イベントの配信は、CI プロバイダーによって保証されていません。
+[User-defined variables in Gitlab][16] should be reported in the field `@ci.parameters` in CI Visibility. However, this information is only present in some cases like downstream pipelines, and may be missing for the rest of the cases since Gitlab [does not always report this information][17] to Datadog.
 
-実行中のパイプラインのサポートは、実行ステータスを示す CI プロバイダーから送信されるデータに依存しています。このデータが利用できない場合、Datadog で `Running` とマークされた実行はすでに終了している可能性があります。
+### Limitations on running pipelines
 
-#### パイプラインの最大実行時間
+#### Delivery of webhook events is not guaranteed by CI providers
 
-パイプラインの実行は、`Running` ステータスを最大 3 日間維持できます。それ以降も実行されている場合、そのパイプラインの実行は CI Visibility に表示されません。パイプラインの実行が 3 日後に終了した場合、終了したパイプラインの実行は、対応する最終ステータス (`Success`、`Error`、`Canceled`、`Skipped`) および正しい実行時間とともに CI Visibility に表示されます。
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished.
 
-## 参考資料
+#### Maximum duration for a pipeline execution
+
+A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -67,3 +71,5 @@ _Pipeline Details_ ページでステージやジョブが見つからないの�
 [13]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
 [14]: /ja/continuous_integration/tests/#supported-features
 [15]: /ja/continuous_integration/pipelines/#supported-features
+[16]: https://docs.gitlab.com/ee/ci/variables/#define-a-cicd-variable-in-the-gitlab-ciyml-file
+[17]: https://gitlab.com/gitlab-org/gitlab/-/issues/29539

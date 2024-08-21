@@ -1,13 +1,13 @@
 ---
 aliases:
-- /security_platform/detection_rules/cloud_siem
-- /security_platform/detection_rules/security_monitoring
-- /security_platform/detection_rules/create_a_new_rule
-- /security_platform/cloud_siem/log_detection_rules/
-- /cloud_siem/detection_rules/security_monitoring/
-- /security/detection_rules/cloud_siem/
-- /security/detection_rules/security_monitoring
-- /security/detection_rules/create_a_new_rule
+- /ja/security_platform/detection_rules/cloud_siem
+- /ja/security_platform/detection_rules/security_monitoring
+- /ja/security_platform/detection_rules/create_a_new_rule
+- /ja/security_platform/cloud_siem/log_detection_rules/
+- /ja/cloud_siem/detection_rules/security_monitoring/
+- /ja/security/detection_rules/cloud_siem/
+- /ja/security/detection_rules/security_monitoring
+- /ja/security/detection_rules/create_a_new_rule
 further_reading:
 - link: /cloud_siem/default_rules/
   tag: ドキュメント

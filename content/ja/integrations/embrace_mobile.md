@@ -13,6 +13,7 @@ categories:
 - メトリクス
 - モバイル
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: embrace-mobile
 integration_title: Embrace Mobile
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
 public_title: Embrace Mobile
@@ -75,7 +75,7 @@ tile:
 
 アプリをインストールすると、Embrace のダッシュボードでモバイルの主要なヘルスメトリクスを追跡できるようになります。パフォーマンスの低下があった場合、手動でユーザーセッションを再生しなくても、影響のあったセッションの完全な詳細を調査することができます。
 
-## 計画と使用
+## セットアップ
 
 1. 無料トライアルを開始し、[Embrace のドキュメント][2]に従ってください。**Datadog でメトリクスを見る前に、このドキュメントに従う必要があります**。
 1. Embrace インテグレーションのセットアップが完了したら、Datadog に戻り両プラットフォームを接続します。
