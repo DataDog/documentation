@@ -24,8 +24,8 @@ Las variables globales de MFA de Datadog Sintético te permiten hacer tests de l
 Crea una variable global donde introducir una clave secreta o cargar un código QR de tu proveedor de autenticación. En la pestaña **Variables globales** de tu página **Configuración**, haz clic en **Crear variable global**.
 1. En **Choose variable type** (Elegir el tipo de variable), selecciona **MFA Token**.
 2. En **Definir variable**, introduce un **Nombre de variable**. Tu nombre de variable solo puede utilizar letras mayúsculas, números y guiones bajos.
-3. Introduzca una **Descripción** para tu variable (opcional).
-4. Seleccione **Etiquetas (tags)** para asociarlas a tu variable (opcional).
+3. Introduce una **Descripción** para tu variable (opcional).
+4. Selecciona **Etiquetas (tags)** para asociarlas a tu variable (opcional).
 5. Añade la **clave secreta** a tu variable o carga una imagen de un código QR.
 6. Haz clic en **+ Generar** para crear una TOTP. Puedes copiar la TOTP generada con el icono **Copiar**.
 7. En **Configuración de permisos**, restringe el acceso a tu variable en función de los roles en tu organización. Para más información sobre roles, consulta la [documentación de RBAC][1].
