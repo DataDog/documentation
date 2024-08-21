@@ -122,7 +122,7 @@ All other costs are given the same value and tags as the source metric `aws.cost
 
 ### Persistent volume storage
 
-For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated EBS volume costs. All associated PV, PVC, node, and pod tags are added to the EBS volume cost line items.
+For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated Amazon EBS volume costs. All associated PV, PVC, node, and pod tags are added to the Amazon EBS volume cost line items.
 
 Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to a pod based on the resources it used and the length of time it ran. These resources include the provisioned capacity for storage, IOPS, and throughput. This allocated cost is enriched with all of the pod's tags.
 
@@ -212,7 +212,7 @@ Costs are allocated into the following spend types:
 
 ### Persistent volume
 
-The cost of an EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
+The cost of an Amazon EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
 
 | Spend type | Description    |
 | -----------| -----------    |
@@ -284,8 +284,8 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Amazon EBS costs. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Amazon EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -339,7 +339,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                      |
 | `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                      |
 | `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                    |
-| `ebs_volume_type`                       | The type of the EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
+| `ebs_volume_type`                       | The type of the Amazon EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
 
 ### Amazon ECS
 
