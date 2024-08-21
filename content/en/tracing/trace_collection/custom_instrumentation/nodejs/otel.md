@@ -76,7 +76,6 @@ function processData(i, param1, param2) {
 
     // Add an attribute to the span
     span.setAttribute('app.processedData', result.toString());
-
     span.end();
     return result;
     });
