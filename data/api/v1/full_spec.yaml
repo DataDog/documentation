@@ -4843,11 +4843,11 @@ components:
           $ref: '#/components/schemas/WidgetEventSize'
         group_by:
           description: Group by configuration for the List Stream Widget. Group by
-            can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
+            can be used only with logs_pattern_stream (up to 4 items) or logs_transaction_stream
             (one group by item is required) list stream source.
           items:
             $ref: '#/components/schemas/ListStreamGroupByItems'
-          maxItems: 3
+          maxItems: 4
           type: array
         indexes:
           description: List of indexes.
