@@ -39,14 +39,14 @@ Para obtener más información, consulta [Configuración avanzada][4].
 
 Una vez sepas qué tipo de test quieres ejecutar y el número máximo de tests que quieres ejecutar en paralelo, define los requisitos totales de hardware para tu localización privada.
 
-El requisito básico para la CPU es de 150mCores y para la memoria, de 150MiB.
+El requisito básico para la CPU es de núcleos de 150m y para la memoria es de 150MiB.
 
 Los requisitos adicionales varían en función del tipo de test para la localización privada.
 
 | Tipo de test                                     | Recomendación de CPU/Memoria/Disco    |
 | --------------------------------------------- | --------------------------------- |
-| [Tests de API][1] y [test de API de varios pasos][2] | 100mCores/200MiB/100MiB por ejecución de test   |
-| [Tests de navegador][3]                           | 800mCores/1GiB/500MiB por ejecución de test |
+| [Tests de API][1] y [test de API de varios pasos][2] | Núcleos de 100m/200MiB/100MiB por ejecución de test   |
+| [Tests de navegador][3]                           | Núcleos de 800m/1GiB/500MiB por ejecución de test |
 
 Por ejemplo, Datadog recomienda ~ 8 núcleos de CPU `(150mCores + (800mCores*10 test runs))`, ~ 10 GiB de memoria `(150MiB + (1GiB*10 test runs))` y ~ 5 GiB de disco `(500MiB*10 test runs)` para una localización privada que ejecute sólo tests de navegador con un número máximo de tests concurrentes de `10`.
 
