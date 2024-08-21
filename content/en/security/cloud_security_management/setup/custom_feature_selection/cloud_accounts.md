@@ -3,6 +3,7 @@ title: Setting up Cloud Security Management on Cloud Accounts
 aliases:
   - /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts
+  - /security/cloud_security_management/setup/cloud_accounts
 ---
 
 Use the following instructions to enable Misconfigurations and Identity Risks (CIEM).

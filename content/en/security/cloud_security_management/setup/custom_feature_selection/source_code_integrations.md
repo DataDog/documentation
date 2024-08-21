@@ -1,5 +1,7 @@
 ---
 title: Setting up Source Code Integrations for Cloud Security Management
+aliases:
+  - /security/cloud_security_management/setup/source_code_integrations
 ---
 
 Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security Management (CSM). IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
