@@ -5119,11 +5119,16 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
+    - name: Agentless Scanning Quick Start
+      url: security/cloud_security_management/setup/agentless_scanning
+      parent: csm_setup
+      identifier: csm_setup_agentless_scanning
+      weight: 101
     - name: Custom Feature Selection
       url: security/cloud_security_management/setup/custom_feature_selection
       parent: csm_setup
       identifier: csm_setup_custom_feature_selection
-      weight: 101
+      weight: 102
     - name: Cloud Accounts
       url: security/cloud_security_management/setup/custom_feature_selection/cloud_accounts
       parent: csm_setup_custom_feature_selection
@@ -5149,11 +5154,6 @@ menu:
       parent: csm_setup_custom_feature_selection
       identifier: csm_setup_source_code_integrations
       weight: 1004
-    - name: Agentless Scanning
-      url: security/cloud_security_management/setup/agentless_scanning
-      parent: csm_setup
-      identifier: csm_setup_agentless_scanning
-      weight: 102
     - name: Threats
       url: security/threats/
       parent: csm
