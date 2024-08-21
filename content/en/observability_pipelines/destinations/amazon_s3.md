@@ -1,0 +1,53 @@
+---
+title: Amazon S3 Destination
+disable_toc: false
+---
+
+
+The Amazon S3 destination is available for the [Archive Logs][1] template. Use this destination to archive your logs in Datadog-rehydratable format in an Amazon S3 bucket. You need to set up Datadog Log Archives, if you haven't already, and then set up the destination in the pipeline UI.
+
+## Configure Log Archives
+
+If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up the destination for your pipeline](#set-up-the-destination-in-the-pipeline).
+
+You need to have Datadog's [AWS integration][2] installed to set up Datadog Log Archives.
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+## Set up the destination for your pipeline
+
+Set up the Amazon S3 destination and its environment variables when you [set up an Archive Logs pipeline][1]. The information below is configured in the pipelines UI.
+
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+
+### Set the environment variables
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+[1]: /observability_pipelines/archive_logs/
+[2]: /integrations/amazon_web_services/#setup
