@@ -40,7 +40,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Full-text search 
 
-<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, rehydration filters, or in Live Tail. </div>
 
 Use the syntax `*:search_term` to perform a full-text search across all log attributes, including the log message.
 
