@@ -43,6 +43,8 @@ transform:
 
 Don't forget to add the `transform` processor to your pipelines.
 
+Due to how our backend processes and deduplicates host names, you may occasionally see an alias for your host. If this causes issues for you, please contact us.
+
 ### Cloud provider-specific conventions
 
 The `cloud.provider` resource attribute is used to determine the cloud provider. Further resource attributes are used to determine the hostname for each specific platform. If `cloud.provider` or any of the expected resource attributes are missing, the next set of conventions is checked.
