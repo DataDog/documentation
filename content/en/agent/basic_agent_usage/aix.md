@@ -100,8 +100,7 @@ Enable the above integrations by copying and editing the sample configuration fi
 
 **Note**: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available. 
 
-**Note**
-Log Management is also not available with the Unix Agent.
+**Note**: Log Management is also not available with the Unix Agent.
 
 <div class="alert alert-info">The Unix Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
 
