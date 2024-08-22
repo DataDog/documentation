@@ -675,7 +675,7 @@ This is only required for Jenkins workers. For the Jenkins controller, the infra
 
 **Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0 or later.
 
-## Enable job log collection
+### Collect job logs
 
 This is an optional step that enables the collection of job logs. Both Agentless and Agent-based options are supported.
 
