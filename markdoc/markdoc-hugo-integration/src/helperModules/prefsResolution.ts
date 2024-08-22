@@ -1,11 +1,17 @@
 /**
- * Functions necessary for rendering
- * at both compile time and in the client on selection change.
- * Not packaged as a class to avoid unnecessary bundle size increase.
+ * Functions for resolving prefs config into prefs content
+ * (such as options displayed in the filtering UI).
+ * The resolution steps must run every time the user
+ * updates their preferences.
  *
- * IMPORTANT:
- * Because this code must run on both the server and the client,
- * it cannot contain or import anything containing features unique to Node
+ * Examples:
+ * - Replace placeholders in an options source with actual values.
+ * - Replace a previously chosen value with the default value
+ *   if the chosen value is not valid.
+ *
+ * Organized as isolated functions to control bundle size.
+ * This code must run on both the server and the client.
+ * It cannot contain or import anything containing features unique to Node
  * (for example, file system access), or esbuild will fail to bundle it
  * for the client.
  */

@@ -2,7 +2,6 @@ import { CustomHtmlComponent } from 'markdoc-static-compiler';
 
 export const siteRegionDefinition = {
   render: 'SiteRegion',
-  children: ['paragraph', 'list', 'link', 'heading', 'code'],
   attributes: {
     region: {
       type: String,

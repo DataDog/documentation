@@ -1,3 +1,9 @@
+/**
+ * A module responsible for finding, parsing, and validating
+ * configurations that define the preference settings available to users,
+ * the default values for each preference, and so on.
+ */
+
 import {
   MinifiedPrefOptionsConfig,
   MinifiedPrefOptionsConfigSchema,
@@ -21,11 +27,6 @@ import {
 } from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 
-/**
- * A module responsible for finding, parsing, and validating
- * configurations that define the preference settings available to users,
- * the default values for each preference, and so on.
- */
 export class ConfigProcessor {
   /**
    * Load all of the preference options files in a directory

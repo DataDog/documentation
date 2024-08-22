@@ -1,17 +1,80 @@
 /**
- * Utility functions for minifying and expanding client-side data.
- * This is used to reduce the size of the inline script included
- * at the bottom of each compiled .md file.
+ * Utility functions for minifying
+ * and expanding client-side config.
  */
 
 import { ClientFunction, ClientVariable } from 'markdoc-static-compiler/src/types';
 
+/**
+ * The minified version of a ClientVariable,
+ * which can be reresolved on the client side
+ * to contain a different value than it was originally
+ * resolved with on the server side.
+ *
+ * Unminified ClientVariable example:
+ *
+ * {
+ *   $$mdtype: 'Variable',
+ *   path: ['color'],
+ *   value: 'blue'
+ * }
+ *
+ * Minified ClientVariable example:
+ *
+ * {
+ *   m: 'V',
+ *   p: ['color'],
+ *   v: 'blue'
+ * }
+ */
 export interface MinifiedClientVariable {
   m: 'V';
   p: string[];
   v: any;
 }
 
+/**
+ * The minified version of a ClientFunction,
+ * which can be reresolved on the client side
+ * to contain different parameters
+ * (and thus yield a different return value)
+ * than it was originally
+ * resolved with on the server side.
+ *
+ * Unminified ClientFunction example:
+ *
+ * {
+ *   $$mdtype: "Function",
+ *   name: "equals",
+ *   parameters: {
+ *     0: {
+ *       $$mdtype: "Variable",
+ *       path: ["color"],
+ *       value: "blue"
+ *     },
+ *     1: "blue",
+ *   },
+ *   value: true,
+ *   ref: "someRef"
+ * }
+ *
+ * Minified ClientFunction example:
+ *
+ * {
+ *   m: "F",
+ *   n: "e",
+ *   p: {
+ *     0: {
+ *          m: "V",
+ *          p: ["color"],
+ *          v: "blue"
+ *     },
+ *     1: "blue"
+ *   },
+ *   v: true,
+ *   r: "someRef"
+ * }
+ */
 export interface MinifiedClientFunction {
   m: 'F';
   n: 'a' | 'o' | 'e' | 'n' | 'def' | 'deb';
@@ -20,6 +83,10 @@ export interface MinifiedClientFunction {
   r: string;
 }
 
+/**
+ * The mapping of minified client function names
+ * to their expanded versions.
+ */
 export const CLIENT_FUNCTION_EXPAND_MAP = {
   F: 'Function',
   a: 'and',
@@ -30,6 +97,10 @@ export const CLIENT_FUNCTION_EXPAND_MAP = {
   deb: 'debug'
 };
 
+/**
+ * The mapping of expanded client function names
+ * to their minified versions.
+ */
 export const CLIENT_FUNCTION_MINIFY_MAP = {
   Function: 'F',
   and: 'a',
@@ -40,6 +111,9 @@ export const CLIENT_FUNCTION_MINIFY_MAP = {
   debug: 'deb'
 };
 
+/**
+ * Expand a minified client variable.
+ */
 export const expandClientVariable = (v: MinifiedClientVariable): ClientVariable => {
   const vDup = JSON.parse(JSON.stringify(v)) as MinifiedClientVariable;
 
@@ -50,6 +124,9 @@ export const expandClientVariable = (v: MinifiedClientVariable): ClientVariable 
   };
 };
 
+/**
+ * Minify a client variable.
+ */
 export const minifyClientVariable = (v: ClientVariable): MinifiedClientVariable => {
   const vDup = JSON.parse(JSON.stringify(v)) as ClientVariable;
 
@@ -60,6 +137,9 @@ export const minifyClientVariable = (v: ClientVariable): MinifiedClientVariable 
   };
 };
 
+/**
+ * Minify a client function.
+ */
 export const minifyClientFunction = (f: ClientFunction): MinifiedClientFunction => {
   const fDup = JSON.parse(JSON.stringify(f)) as ClientFunction;
 
@@ -90,6 +170,9 @@ export const minifyClientFunction = (f: ClientFunction): MinifiedClientFunction 
   } as MinifiedClientFunction;
 };
 
+/**
+ * Expand a minified client function.
+ */
 export const expandClientFunction = (f: MinifiedClientFunction) => {
   const fDup = JSON.parse(JSON.stringify(f)) as MinifiedClientFunction;
 

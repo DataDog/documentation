@@ -16,10 +16,9 @@ import MarkdocStaticCompiler, {
   ClientFunctionSchema,
   Tag
 } from 'markdoc-static-compiler';
-import { MinifiedClientFunction, minifyClientFunction } from './dataCompression';
+import { MinifiedClientFunction, minifyClientFunction } from './configMinification';
 import { transformConfig } from '../markdocConfig';
 import { anchorize } from './stringProcessing';
-import render from 'markdoc-static-compiler/dist/src/renderers/html';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -94,6 +93,14 @@ export function buildRenderableTree(p: {
   return renderableTree;
 }
 
+/**
+ * Markdoc does not automatically add anchor links to headers,
+ * so this function adds them to the renderable tree.
+ *
+ * Markdoc does provide a way to manually set the anchor
+ * link for a given header in the markup, so if a header already
+ * has an ID, this function will not overwrite it.
+ */
 function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
   const headerTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 

@@ -19,9 +19,9 @@ import { getChooserHtml } from './PageBuilder/components/Chooser';
 import { MinifiedPrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { MinifiedPagePrefsConfig } from '../schemas/yaml/frontMatter';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
-import { resolveMinifiedPagePrefs } from './sharedRendering';
+import { resolveMinifiedPagePrefs } from './prefsResolution';
 import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
-import { expandClientFunction, MinifiedClientFunction } from './dataCompression';
+import { expandClientFunction, MinifiedClientFunction } from './configMinification';
 
 export class ClientRenderer {
   static #instance: ClientRenderer;

@@ -8,7 +8,7 @@ import path from 'path';
 import { getChooserHtml } from './components/Chooser';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
-import { resolvePagePrefs } from '../sharedRendering';
+import { resolvePagePrefs } from '../prefsResolution';
 import { customComponents } from '../../markdocConfig';
 import yaml from 'js-yaml';
 
