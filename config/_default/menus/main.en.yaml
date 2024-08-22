@@ -1349,7 +1349,7 @@ menu:
       weight: 1
     - name: DDSQL Editor
       url: dashboards/ddsql_editor
-      # pre: inventories Pending websites adding the icon
+      pre: inventories
       identifier: dashboards_ddsql_editor
       parent: platform_heading
       weight: 30000
