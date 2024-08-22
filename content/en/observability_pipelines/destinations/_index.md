@@ -20,7 +20,18 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
 1. Set up your processors.
 1. Install the Observability Pipelines Worker.
 
-### Batch settings
+{{< whatsnext desc="The available Observability Pipelines destinations are:" >}}
+    {{< nextlink href="observability_pipelines/destinations/#amazon-opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#datadog-log-management" >}}Datadog Log Management{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#elasticsearch" >}}Elasticsearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#google-chronicle" >}}Google Chronicle{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
+{{< /whatsnext >}} 
+
+### Batch settings {#batch-settings-intro}
 
 Observability Pipelines destinations batch events sent to the downstream integration. The following parameters define each destinations' batch settings:
 
@@ -56,19 +67,6 @@ These are the batch settings for each destination:
 
 **Note**: The Syslog destination does not batch events.
 
-### Destinations
-
-{{< whatsnext desc="The available Observability Pipelines destinations are:" >}}
-    {{< nextlink href="observability_pipelines/destinations/#amazon-opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#datadog-log-management" >}}Datadog Log Management{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#elasticsearch" >}}Elasticsearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#google-chronicle" >}}Google Chronicle{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Amazon OpenSearch
 
 Set up the Amazon OpenSearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
@@ -82,6 +80,8 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 ### Batch settings
+
+See the [batch settings](#batch-settings-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -98,6 +98,8 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Batch settings
+
+See the [batch settings](#batch-settings-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -117,6 +119,8 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 ### Batch settings
 
+See the [batch settings](#batch-settings-intro) section for more information.
+
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 10,000,000      | 1                   |
@@ -135,6 +139,8 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 ### Batch settings
 
+See the [batch settings](#batch-settings-intro) section for more information.
+
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 1,000,000       | 15                  |
@@ -152,6 +158,8 @@ Set up the OpenSearch destination and its environment variables when you [set up
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
 ### Batch settings
+
+See the [batch settings](#batch-settings-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -187,6 +195,8 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 ### Batch settings
 
+See the [batch settings](#batch-settings-intro) section for more information.
+
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 1,000,000       | 1                   |
@@ -204,6 +214,8 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
 
 ### Batch settings
+
+See the [batch settings](#batch-settings-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
