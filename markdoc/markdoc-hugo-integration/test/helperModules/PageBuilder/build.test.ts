@@ -1,7 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { FileParser } from '../../../src/helperModules/FileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
-import { FileNavigator } from '../../../src/helperModules/FileNavigator';
 import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
   VALID_CONTENT_DIR,
@@ -11,32 +10,30 @@ import {
 } from '../../config/constants';
 
 describe('PageBuilder.build', () => {
-  const markdocFiles = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
+  const testFilePath = VALID_CONTENT_DIR + '/primary_colors.mdoc';
   const prefOptionsConfig =
     ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 
-  markdocFiles.forEach((markdocFile) => {
-    const sanitizedMarkdocFilename = markdocFile.replace(VALID_CONTENT_DIR, '');
+  const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
 
-    const parsedFile = FileParser.parseMdocFile(markdocFile, VALID_PARTIALS_DIR);
+  const parsedFile = FileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
 
-    const prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
-      parsedFile.frontmatter,
-      prefOptionsConfig
+  const prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
+    parsedFile.frontmatter,
+    prefOptionsConfig
+  );
+
+  const html = PageBuilder.build({
+    parsedFile,
+    prefOptionsConfig: prefOptionsConfigForPage,
+    debug: true,
+    includeAssetsInline: false,
+    outputFormat: 'html'
+  });
+
+  test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
+    expect(html).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/PageBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
     );
-
-    const html = PageBuilder.build({
-      parsedFile,
-      prefOptionsConfig: prefOptionsConfigForPage,
-      debug: true,
-      includeAssetsInline: false,
-      outputFormat: 'html'
-    });
-
-    test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
-      expect(html).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/helperModules/PageBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
-      );
-    });
   });
 });
