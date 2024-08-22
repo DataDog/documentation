@@ -14,7 +14,7 @@ algolia:
 ---
 
 <div class="alert alert-warning">
-For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>. 
+For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 
 ## Start, stop, and restart the Agent
