@@ -22,24 +22,24 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}RUM サンプリングのベストプラクティス{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}RUM で UTM キャンペーンを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="ブラウザ RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}カスタムユーザーアクションの送信{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}RUM エクスプローラーでボットを特定する{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}JavaScript ソースマップのアップロード{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}ブラウザ RUM およびブラウザ RUM & セッションリプレイのサンプリング構成によるセッションボリュームの制御{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}ブラウザ RUM データの強化および制御{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}RUM ブラウザ SDK のアップグレード{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}ブラウザ RUM データをプロキシする {{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}ブラウザ開発ツール使用時の注意点{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}ブラウザアプリケーションでサービスを定義し、UI コンポーネントを追跡する{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Shopify ストアで RUM を有効にする{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Squarespace ストアで RUM を有効にする{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce ストアで RUM を有効にする{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}RUM を使用した Next.js アプリケーションの監視{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
+{{< whatsnext desc="Browser RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Send custom user actions{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identify bots in the RUM Explorer{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Upload JavaScript source maps{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}Control session volume using sampling configuration for Browser RUM and Browser RUM & Session Replay{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enrich and control your browser RUM data{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Upgrade the RUM Browser SDK{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Proxy your browser RUM data {{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Tips when using browser developers tools{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}Define services and track UI components in your browser application {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitor your Next.js application with RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}Monitor Capacitor applications using the browser SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}

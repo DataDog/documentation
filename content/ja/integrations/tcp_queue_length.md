@@ -23,6 +23,7 @@ author:
 categories:
 - developer tools
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: tcp-queue-length
 integration_title: TCP Queue Length
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tcp_queue_length
 public_title: TCP Queue Length
@@ -45,6 +45,7 @@ tile:
   - Category::Developer Tools
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で、TCP バッファのサイズを追跡します。
   media: []
@@ -60,9 +61,9 @@ tile:
 
 このチェックは、Linux TCP によるキューの送受信の使用方法を監視します。キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 `tcp_queue_length` はコア Agent 6/7 のチェックで、`system-probe` に実装された eBPF パートに依存します。Agent バージョン 7.24.1/6.24.1 以上が必要です。
 
@@ -81,7 +82,7 @@ yum install -y kernel-devel-$(uname -r)
 
 **注**: バージョン 8 以前の Windows および CentOS/RHEL はサポートされません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 `tcp_queue_length` インテグレーションを有効にするには、`system-probe` とコアエージェントの両方でコンフィギュレーションオプションを有効化する必要があります。
 
@@ -129,7 +130,7 @@ spec:
       enabled: true
   override:
     nodeAgent:
-      volumes: 
+      volumes:
       - emptyDir: {}
         name: src
 ```
@@ -138,21 +139,21 @@ spec:
 
 [Agent の `status` サブコマンドを実行][2]し、Checks セクションで `tcp_queue_length` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tcp_queue_length" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 TCP Queue Length チェックには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 TCP Queue Length チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

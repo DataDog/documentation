@@ -32,6 +32,7 @@ categories:
 - マーケットプレイス
 - 開発ツール
 - iot
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +41,6 @@ integration_id: rapdev-apache-iotdb
 integration_title: Apache IoTDB
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -75,19 +75,19 @@ tile:
   configuration: README.md#Setup
   description: Apache IoTDB の構成ノードとデータノードを監視する
   media:
-  - caption: Apache IoTDB ダッシュボード - クラスター概要
+  - caption: Apache IoTDB Dashboard - Cluster Overview
     image_url: images/cluster_overview.png
     media_type: image
-  - caption: Apache IoTDB ダッシュボード - 書き込みパフォーマンス
+  - caption: Apache IoTDB Dashboard - Write Performance
     image_url: images/write_performance.png
     media_type: image
-  - caption: Apache IoTDB ダッシュボード - クエリインターフェイス
+  - caption: Apache IoTDB Dashboard - Query Interface
     image_url: images/query_interface.png
     media_type: image
-  - caption: Apache IoTDB ダッシュボード - JVM
+  - caption: Apache IoTDB Dashboard - JVM
     image_url: images/jvm.png
     media_type: image
-  - caption: Apache IoTDB ダッシュボード - 接続とネットワーキング
+  - caption: Apache IoTDB Dashboard - Connections & Networking
     image_url: images/connections_networking.png
     media_type: image
   overview: README.md#Overview

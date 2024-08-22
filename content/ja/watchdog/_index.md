@@ -3,7 +3,7 @@ algolia:
   tags:
   - watchdog
 aliases:
-- /tracing/watchdog
+- /ja/tracing/watchdog
 cascade:
   algolia:
     rank: 70

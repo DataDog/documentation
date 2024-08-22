@@ -6,6 +6,9 @@ assets:
     auto_install: false
     events:
       creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 70
     source_type_name: Splunk
 author:
   homepage: https://www.datadoghq.com
@@ -14,7 +17,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-- notification
+- notifications
+- event management
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,7 +28,6 @@ integration_id: splunk
 integration_title: Splunk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: splunk
 public_title: Splunk
@@ -33,15 +37,21 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::ログの収集
-  - Category::通知
+  - Category::Notifications
+  - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
   support: README.md#Support
   title: Splunk
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Splunk のログモニターを接続して、以下のことができます。
@@ -52,7 +62,7 @@ Splunk のログモニターを接続して、以下のことができます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog で Splunk からのレポートを受け取るには、Splunk サーバーに `datadog`  Python ライブラリをインストールする必要があります。
 
@@ -123,7 +133,12 @@ dog --api-key $API_KEY --application-key $APP_KEY event post \
 
 ---
 
-_このドキュメントは、2015 年 10 月 28 日に [AWS 上の Splunk Enterprise AMI][2] を使用して検証されています。_
+## 参考資料
+
+- [Datadog と Splunk を使ってメトリクスとログを相関付ける][2]
+
+_このドキュメントは、2015 年 10 月 28 日に [AWS 上の Splunk Enterprise AMI][3] を使用して検証されています。_
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
+[2]: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
+[3]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
