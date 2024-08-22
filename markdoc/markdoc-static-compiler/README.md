@@ -2,19 +2,30 @@
 
 The static compiler is a fork of the [`markdoc` package][1] designed for static rendering, since the original package was intended for server-side rendering. It parses Markdoc strings into objects, and provides rendering functions that can be used to convert those objects into HTML.
 
-## Compilation process
+## Key differences between static Markdoc (this package) and vanilla Markdoc (the original package)
 
-1. The compiler takes a string of [Markdoc syntax][3], such as this ([example input file][2]).
-2. The compiler parses the markup into an AST, such as this [AST created from the example input file][4]. The AST can be examined for any compilation errors that the author might need to know about, such as malformed syntax.
-3. When supplied with default values for any variables used in the markup, the AST can be parsed into a renderable tree, such as this [renderable tree created from the example input file][5]. The renderable tree focuses only on content; all error/line number data is dropped. All content is present in the tree whether it should be displayed or not, but undisplayed elements have the class `.markdoc__hidden`. This class can be used to hide the elements in prod, or to highlight the elements in testing/debugging.
-4. The renderable tree can be rendered into HTML ([example result][6]) using whichever renderer is appropriate for the context: 
-    - `html` at compile time
-    - `incremental` in the browser, to patch existing HTML based on an updated variable value
-Optionally, to override the default variable values, new variable values can be passed to the render function.
+### The RenderableTree retains conditional logic
+
+In vanilla Markdoc, the `RenderableTree` is strictly for resolved content that should be displayed in the browser. If a variable changes, you create a new `RenderableTree` to use.
+
+In the static version, only one `RenderableTree` is created, and it must represent all possible versions of the conditional content. The final resolution of the content is shifted one step later in the process, when the `RenderableTree` is processed by the `html` renderer.
+
+For an example `RenderableTree`, see [the relevant test snapshot][2].
+
+### The `html` renderer includes all potential elements in the page, but designates some elements as hidden
+
+The renderable tree contains `if` divs and spans that contain `ClientFunction` and `ClientVariable` objects that can later be reresolved to new values in the browser when the user's preferences change. Each of these contain a `ref` that can be used to associate them with HTML elements that depend on their evaluation.
+
+Each `if` div and span contains a `ref` that can be used client-side to associate the element with the `ref` of a `ClientFunction` or `ClientVariable`, which can be reresolved to update the display status of the element.
+
+Based on the resolved values of the `ClientFunction`s and `ClientVariable`s at compile time, the `html` renderer hides some elements, but includes the appropriate `ref` to allow for reresolution in the client.
+
+For an example rendered HTML snippet, see [the relevant test snapshot][3].
+
+### The reresolution of variables, and resulting toggle of element display status, falls outside the scope of this package
+
+The package provides re-resolution functions that can be used to re-evaluate `ClientVariable`s and `ClientFunctions` when variables change, to be used by the consumer of the package in whatever way they see fit.
 
 [1]: https://github.com/markdoc/markdoc
-[2]: ./test/integration/input.mdoc
-[3]: https://markdoc.dev/docs/syntax
-[4]: ./test/__snapshots__/ast.snap.json
-[5]: ./test/__snapshots__/renderableTree.snap.json
-[6]: ./test/__snapshots__/renderedHtml.snap.html
+[2]: ./test/__snapshots__/renderableTree.snap.json
+[3]: ./test/__snapshots__/renderedHtml.snap.html
