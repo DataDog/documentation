@@ -6,7 +6,7 @@ categories:
 - developer tools
 - issue tracking
 - source control
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: GitHub と Datadog を接続し、サービスのパフォーマンスに影響を与えるコミットやプルリクエストを監視する
 doc_link: https://docs.datadoghq.com/integrations/github/

@@ -23,7 +23,7 @@ author:
 categories:
 - OS & システム
 - イベント管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_on_public_website: true
@@ -114,7 +114,7 @@ yum install -y kernel-devel-$(uname -r)
     --privileged
     ```
 
-   カーネルバージョン 5.8 からは、`--privileged` パラメーターを `--cap-add CAP_BPF` に置き換えることができます。 
+   カーネルバージョン 5.8 からは、`--privileged` パラメーターを `--cap-add CAP_BPF` に置き換えることができます。
 
 *注**: Docker Swarm では `--privileged` モードはサポートされていません。
 

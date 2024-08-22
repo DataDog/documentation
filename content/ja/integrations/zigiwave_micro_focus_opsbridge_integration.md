@@ -17,7 +17,7 @@ categories:
 - インシデント
 - マーケットプレイス
 - メトリクス
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -96,10 +96,10 @@ Datadog オートディスカバリーは、OpsBridge データベースにな�
 ZigiOps は、Datadog のイベントを収集し、イベントとして OpsBridge に報告します。
 このプラットフォームは、メトリクスやトポロジーなど、関連するホストの詳細をすべて同期します。
 
-ZigiOps collects Datadog metrics and reports them, along with related host information, to the MF Operations 
-Connector. These metrics can then be 
-accessed by the OpsBridge Performance Perspective and used for 
-building dashboards. 
+ZigiOps collects Datadog metrics and reports them, along with related host information, to the MF Operations
+Connector. These metrics can then be
+accessed by the OpsBridge Performance Perspective and used for
+building dashboards.
 
 このインテグレーションにより、IT 運用チームは OpsBridge インフラストラクチャーを俯瞰的に把握し、問題が現実の問題となる前に検出できるようになります。
 

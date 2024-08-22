@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Cosmos DB for PostgreSQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb_for_postgresql/

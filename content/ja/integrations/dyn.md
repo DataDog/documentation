@@ -23,7 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -71,7 +71,7 @@ Oracle Cloud Infrastructure は 2016 年に Dyn を買収し、Dyn の製品と�
 
 Dyn で `datadog` 読み取り専用ユーザーをまだ作成していない場合は、[Dyn にログイン][1]し、以下の手順を実行します。
 
-1. ユーザー名とパスワードを選択します。 
+1. ユーザー名とパスワードを選択します。
    {{< img src="integrations/dyn/create_dyn_user.png" alt="dyn ユーザーを作成" style="width:75%;" popup="true">}}
 
 2. **READONLY** ユーザーグループを選択します。

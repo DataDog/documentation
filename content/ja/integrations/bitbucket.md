@@ -3,7 +3,7 @@ categories:
 - Source Control
 - Collaboration
 - issue tracking
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
 doc_link: https://docs.datadoghq.com/integrations/bitbucket/

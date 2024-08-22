@@ -5,7 +5,7 @@ categories:
 - 構成 & デプロイ
 - ログの収集
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 主要な AWS Certificate Manager メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_certificate_manager/

@@ -28,7 +28,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
 display_on_public_website: true
@@ -152,7 +152,7 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
       "init_config": {},
       "instances": [{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}]
     }
-  } 
+  }
 ```
 
 
@@ -177,7 +177,7 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
       "type": "file",
       "path": "/var/log/aerospike/aerospike.log",
       "source": "aerospike"
-    } 
+    }
   ]
 ```
 [1]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/

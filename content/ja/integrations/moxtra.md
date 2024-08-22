@@ -2,7 +2,7 @@
 categories:
 - cloud
 - collaboration
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog アラートとグラフを Moxtra に送信。
 doc_link: https://docs.datadoghq.com/integrations/moxtra/

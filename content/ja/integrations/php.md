@@ -3,7 +3,7 @@ categories:
 - languages
 - log collection
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: PHP アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。
 doc_link: https://docs.datadoghq.com/integrations/php/

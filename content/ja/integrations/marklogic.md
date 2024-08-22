@@ -34,7 +34,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_on_public_website: true
@@ -113,7 +113,7 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
 3. このクエリを実行し、Datadog Agent で使用するユーザーとパスワードを `<USER>` と `<PASSWORD>` に置き換えます。
     ```
     xquery version "1.0-ml";
-    import module namespace sec="http://marklogic.com/xdmp/security" at 
+    import module namespace sec="http://marklogic.com/xdmp/security" at
         "/MarkLogic/security.xqy";
 
     sec:create-user(
