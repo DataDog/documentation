@@ -22,7 +22,7 @@ author:
   support_email: dev@onemorecloud.com
 categories:
 - メトリクス
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_on_public_website: true

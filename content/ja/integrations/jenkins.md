@@ -1,7 +1,7 @@
 ---
 categories:
 - configuration & deployment
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
 description: Jenkins のメトリクス、イベント、サービスチェックを自動転送 to Datadog.
@@ -156,7 +156,7 @@ d.save()
    -  Datadog Agent で[ログ収集](#log-collection-for-agents)を有効にします。
    - ログ収集を有効にするには、`DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` 変数を `true` に設定します (デフォルトでは無効になっています)。
    - Datadog Agent のログ収集用ポートを指定する `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT` を設定します。
-5. (オプション) CI Visibility (トレース収集): 
+5. (オプション) CI Visibility (トレース収集):
    - CI Visibility を有効にするには、`DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` 変数を `true` に設定します (デフォルトでは無効になっています)。
    - Datadog Agent トレース収集ポート (デフォルトは `8126`) を指定する `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT` 変数を設定します。
    - CI Visibility の Jenkins インスタンスの名前を指定する `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME` 変数を設定します (デフォルトは `jenkins`)。
@@ -259,8 +259,8 @@ Test Visibility の自動構成を有効にするには、2 つのオプショ�
 pipeline {
     agent any
     options {
-        datadog(testVisibility: [ 
-            enabled: true, 
+        datadog(testVisibility: [
+            enabled: true,
             serviceName: "my-service", // the name of service or library being tested
             languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
@@ -437,7 +437,7 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 
 ## 問題の追跡
 
-このプラグイン [jenkinsci/datadog-plugin/issues][7]に関する問題はすべて、GitHub に搭載の問題追跡システムを使用して追跡を行います。 
+このプラグイン [jenkinsci/datadog-plugin/issues][7]に関する問題はすべて、GitHub に搭載の問題追跡システムを使用して追跡を行います。
 しかし、Jenkins プラグインのホスティング状況に応じて、JIRA に課題が作成される場合があります。関連する課題の投稿については、 [Jenkins の課題ページ][8]をご参照ください。
 
 **注**: [Datadog に関連する JIRA の課題で未解決のものが存在します][9]。

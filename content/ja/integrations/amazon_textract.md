@@ -5,7 +5,7 @@ categories:
 - クラウド
 - ログの収集
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Textract の主要なメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_textract/

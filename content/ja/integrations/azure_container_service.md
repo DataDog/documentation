@@ -5,7 +5,7 @@ categories:
 - cloud
 - コンテナ
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Kubernetes Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_service/

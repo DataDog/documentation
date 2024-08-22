@@ -26,7 +26,7 @@ author:
 categories:
 - セキュリティ
 - イベント管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cybersixgill_actionable_alerts/README.md
 display_on_public_website: true

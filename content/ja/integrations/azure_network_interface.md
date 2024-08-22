@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Network Interface のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/

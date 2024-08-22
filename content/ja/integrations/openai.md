@@ -33,7 +33,7 @@ categories:
 - ai/ml
 - モニター
 - コスト管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openai/README.md
 display_on_public_website: true

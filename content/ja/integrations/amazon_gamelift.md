@@ -4,7 +4,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Gamelift のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_gamelift/

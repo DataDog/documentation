@@ -10,7 +10,7 @@ author:
 categories:
 - 構成 & デプロイ
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/devcycle/README.md
 display_on_public_website: true
@@ -76,7 +76,7 @@ DevCycle の機能フラグ追跡インテグレーションは、RUM データ�
 
 const user = { user_id: "my_user" };
 const dvcOptions = { logLevel: "debug" };
-const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions); 
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 
 // すべての変数評価に対して
 

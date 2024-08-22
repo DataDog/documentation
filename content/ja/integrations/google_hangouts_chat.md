@@ -2,7 +2,7 @@
 categories:
 - コラボレーション
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog のアラートとグラフをチームの Google Chat スペースへ送信
 doc_link: https://docs.datadoghq.com/integrations/google_hangouts_chat/
@@ -58,7 +58,7 @@ Google Chat インテグレーションは、Datadog サイトの[インテグ�
 {{% /site-region %}}
 
 ## Datadog アカウントからのアンインストール
-{{% site-region region="us" %}} 
+{{% site-region region="us" %}}
 Google Chat を Datadog アカウントからアンインストールする方法には、次の 3 つがあります。
 1. `@Datadog remove account` コマンドを使用して、スペースメンバーは、選択した Datadog アカウントからチャットボットをアンインストールできます。
 2. Datadog アカウント内で、Google Chat インテグレーションタイルからスペースを削除できます。
@@ -66,7 +66,7 @@ Google Chat を Datadog アカウントからアンインストールする方�
 {{% /site-region %}}
 
 {{% site-region region="ap1,us5,us3,eu,gov" %}}
-Datadog アカウント内で、Google Chat インテグレーションタイルからスペースを削除できます。 
+Datadog アカウント内で、Google Chat インテグレーションタイルからスペースを削除できます。
 {{% /site-region %}}
 
 
