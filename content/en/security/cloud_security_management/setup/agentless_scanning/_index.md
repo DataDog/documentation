@@ -8,11 +8,18 @@ title: Agentless Scanning Quick Start for Cloud Security Management
 
 The Agentless Scanning Quick Start provides a streamlined setup workflow for Cloud Security Management, allowing you to start monitoring your AWS resources immediately.
 
+## About Agentless Scanning
+
+[Agentless Scanning][1] provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent.
+
 ## Prerequisites
 
 - AWS integration
 - Remote Configuration
-- Permissions <br><br>
+- IAM permissions<br>
+  
+  **Note**: The following IAM permissions are applied automatically as a part of the installation process.<br><br>
+
   {{< collapse-content title="IAM (host and container permissions)" level="h5" >}}
 ```
 ec2:DescribeVolumes
@@ -41,12 +48,6 @@ ebs:GetSnapshotBlock
 {{% tab "Agentless scanning (new AWS account)" %}}
 
 1. Set up the [Amazon Web Services][1] integration. You must also add the required [permissions][2] for resource collection.
-
-    When you add a new AWS account, the following screen appears:
-
-{{< img src="/security/agentless_scanning/agentless_scanning_aws_2.png" alt="Setup page for Agentless scanning for adding a new AWS account with adding a single AWS account selected" width="90%">}}
-</br>
-
 1. Click **Yes** under **Enable Cloud Security Management**, and enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
 1. Select an API key that is already configured for Remote Configuration. If you enter an API key that does not have Remote Configuration enabled, it will automatically be activated upon selection.
 1. Click **Launch CloudFormation Template**. The template includes all the necessary [permissions][3] to deploy and manage Agentless scanners. The template must run successfully to receive scans.
@@ -73,16 +74,11 @@ ebs:GetSnapshotBlock
 {{% /tab %}}
 {{< /tabs >}}
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent. 
-
-
-{{% csm-agentless-prereqs %}}
-
-## Resource exclusion
+## How to exclude resources from scans
 
 Set the tag `DatadogAgentlessScanner:false` on AWS hosts, containers, and Lambda functions (if applicable), to be excluded from scans. To add this tag to your resources, follow the [AWS documentation][3].
 
-## Disabling Agentless Scanning
+## Disable Agentless Scanning
 
 To disable Agentless Scanning in an AWS account, disable scanning for each cloud resource:
 1. On the [Cloud Security Management Setup][10] page, click **Cloud accounts > AWS**.
@@ -90,15 +86,15 @@ To disable Agentless Scanning in an AWS account, disable scanning for each cloud
 1. In the **Agentless Scanning** section, disable scanning for the cloud resources you want to stop monitoring.
 1. Click **Done**.
  
-### Uninstalling with CloudFormation
+### Uninstall with CloudFormation
 
 Go to your AWS console, and remove the CloudFormation stack that was created for Agentless Scanning.
 
-### Uninstalling with Terraform
+### Uninstall with Terraform
 
 Follow the instructions for [Terraform][9] uninstallation.
 
-[1]: /security/vulnerabilities
+[1]: /security/cloud_security_management/agentless_scanning
 [3]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 [8]: mailto:success@datadoghq.com
