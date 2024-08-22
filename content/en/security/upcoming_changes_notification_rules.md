@@ -31,7 +31,7 @@ As part of the upcoming changes to notification rules, you are no longer require
 This change has the following impact on how notifications are generated for CSM Misconfigurations:
 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
-2. You will now be able to choose whether you want to get notified for every new issue matching your query, or if you want to receive periodical notifications, summarizing new findings.
+2. You will now be able to choose whether you want to get notified for every new issue matching your query, or if you want to receive periodic notifications that summarize the new findings.
 3. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled and configured at the detection rule level.
 4. Support for CSM Misconfigurations signals will be deprecated in early 2025. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
@@ -70,7 +70,7 @@ To migrate notifications that are configured for individual detection rules:
 
 To migrate notification rules configured for cloud or infrastructure configuration signals, change the target from Cloud Configuration or Infrastructure Configuration to Vulnerability > Misconfiguration. 
 
-For any questions, please contact support. 
+If you have any questions, contact Datadog support. 
 
 ## Further Reading
 
