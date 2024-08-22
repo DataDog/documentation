@@ -14,13 +14,15 @@ The Agentless Scanning Quick Start provides a streamlined setup workflow for Clo
 
 ## Prerequisites
 
-- AWS integration
-- Remote Configuration is required to allow Datadog to send information to Agentless scanners, such as which cloud resources should be scanned
-- IAM permissions<br>
-  
-  **Note**: The following IAM permissions are applied automatically as a part of the installation process.<br><br>
+Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
-  {{< collapse-content title="IAM (host and container permissions)" level="h5" >}}
+- **AWS integration**: The [AWS integration][2] must be installed and configured for your AWS accounts.
+- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as specifying which cloud resources to scan.
+
+**Note**: Starting with Agent version 7.47.0, remote_configuration.enabled is set to true by default in the Agent.
+
+- **IAM permissions**: The Agentless Scanning instance requires specific IAM permissions to scan hosts, containers, and Lambda functions. These permissions are applied automatically as a part of the installation process.<br><br>
+  {{< collapse-content title="Host and container permissions" level="h5" >}}
 ```
 ec2:DescribeVolumes
 ec2:CreateTags
@@ -76,11 +78,12 @@ ebs:GetSnapshotBlock
 
 ## How to exclude resources from scans
 
-Set the tag `DatadogAgentlessScanner:false` on AWS hosts, containers, and Lambda functions (if applicable), to be excluded from scans. To add this tag to your resources, follow the [AWS documentation][3].
+Set the tag `DatadogAgentlessScanner:false` on AWS hosts, containers, and Lambda functions (if applicable), to be excluded from scans. To add this tag to your resources, follow the [AWS documentation][5].
 
 ## Disable Agentless Scanning
 
 To disable Agentless Scanning in an AWS account, disable scanning for each cloud resource:
+
 1. On the [Cloud Security Management Setup][10] page, click **Cloud accounts > AWS**.
 1. Click the **Edit scanning** button for the AWS account where you deployed the Agentless scanner.
 1. In the **Agentless Scanning** section, disable scanning for the cloud resources you want to stop monitoring.
@@ -95,8 +98,10 @@ Go to your AWS console, and remove the CloudFormation stack that was created for
 Follow the instructions for [Terraform][9] uninstallation.
 
 [1]: /security/cloud_security_management/agentless_scanning
-[3]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+[2]: /integrations/amazon_web_services/
+[3]: /agent/remote_config/?tab=configurationyamlfile#setup
 [4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
+[5]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
