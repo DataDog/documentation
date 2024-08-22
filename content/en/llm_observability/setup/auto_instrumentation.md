@@ -75,6 +75,8 @@ The LangChain integration instruments the following methods:
 - [Chains/LCEL][15]
   - `chain.invoke()`, `chain.ainvoke()`
   - `chain.batch()`, `chain.abatch()`
+- [Embeddings][17]
+  - OpenAI : `OpenAIEmbeddings.embed_documents()`, `OpenAIEmbeddings.embed_query()`
 
 **Note:** The LangChain integration does not yet support tracing streamed calls.
 
@@ -126,3 +128,4 @@ The Anthropic integration instruments the following methods:
 [14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
 [15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
 [16]: /llm_observability/setup/sdk/
+[17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
