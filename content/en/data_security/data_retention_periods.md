@@ -1,7 +1,7 @@
 ---
 title: Data Retention Periods
 disable_sidebar: true
-type: filter-search
+type: data_retention_periods
 aliases:
     - /developers/guide/data-collection-resolution-retention
 further_reading:
