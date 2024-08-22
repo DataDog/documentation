@@ -198,12 +198,14 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 ## Compatibility requirements
 
-The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTelemetry Node.js Trace API. Follow the detailed setup and example below to instrument a sample application.
+The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTelemetry Node.js Trace API.
 
 ## Setup
 
- 1. Follow the instructions in the "Imports and Setup" sections of the [Node.js Custom Instrumentation using OpenTelemetry API][18] page.
- 2. Complete the steps for instrumenting your service with your selected `opentelemetry-js-contrib` library.
+To use OpenTelemetry instrumentations with the Datadog Node.js SDK, perform the following steps:
+
+ 1. Follow the Setup instructions in [Node.js Custom Instrumentation using OpenTelemetry API][18].
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
 
 The following example demonstrates how to instrument the `http` and `express` OpenTelemetry integrations with the Datadog Node.js SDK:
 
@@ -246,9 +248,13 @@ const http = require('http')
 
 ## Configuration
 
-While not mandatory, it is recommended to disable the corresponding Datadog instrumentation to avoid duplicate spans.
+To avoid duplicate spans, disable the corresponding Datadog instrumentations.
 
-To do this, launch your application with the DD_TRACE_DISABLED_INSTRUMENTATIONS environment variable set to a comma-separated list of integration names to disable. For this application, you would use: DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net.
+Set the `DD_TRACE_DISABLED_INSTRUMENTATIONS` environment variable to a comma-separated list of integration names to disable. For example, to disable Datadog instrumentations for the libraries used in the Setup example, set the following:
+
+```sh
+DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net
+```
 
 [17]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/metapackages/auto-instrumentations-node#supported-instrumentations
 [18]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/#setup
