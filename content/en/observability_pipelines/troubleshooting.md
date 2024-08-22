@@ -27,7 +27,7 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
 ### Use `top` to find the component ID
 
-You need the source's or processors' component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
+You need the source's or processor's component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
 
 ```
 observability-pipelines-worker top
