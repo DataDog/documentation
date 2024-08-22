@@ -441,7 +441,7 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 #### Recommended configurations
 - This strategy can work for a given pod, but can become cumbersome with multiple apps using this strategy, as well run into issues if multiple replicas are using the same log path. If possible, Datadog recommends taking advantage of the [Autodiscovery template variable][17] `%%kube_pod_name%%`. For example, you can set your `path` to reference this variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`. Your application pod then needs to write its log files with respect to this new path as well. You can use the [Downward API][18] to help your application determine its Pod name.
 
-- When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed,  explicitly enable this in the annotation. For example:
+- When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed, explicitly enable this in the annotation. For example:
   ```yaml
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
     [
