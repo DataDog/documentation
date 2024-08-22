@@ -61,11 +61,11 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or later:
 3. Select the checkbox next to the plugin, and install using one of the two install buttons at the bottom of the screen.
 4. To verify that the plugin is installed, search for `Datadog Plugin` on the **Installed** tab.
 
-### Enable CI Visibility on the plugin
+## Enable CI Visibility on the plugin
 
 There are several ways you can configure the Datadog Jenkins plugin.
 
-#### Configure with the Jenkins configuration UI
+### Configure with the Jenkins configuration UI
 
 {{< tabs >}}
 {{% tab "Agentless (using an API key)" %}}
@@ -99,7 +99,7 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Configuration-as-code
+### Configuration-as-code
 
 {{< tabs >}}
 
@@ -252,7 +252,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Configure with Groovy
+### Configure with Groovy
 
 {{< tabs >}}
 {{% tab "Agentless (using an API key)" %}}
@@ -481,7 +481,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Use environment variables
+### Use environment variables
 
 {{< tabs >}}
 {{% tab "Agentless (using an API key)" %}}
