@@ -36,7 +36,7 @@ categories:
 - containers
 - configuration & deployment
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
 display_on_public_website: true

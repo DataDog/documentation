@@ -53,7 +53,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
 display_on_public_website: true
@@ -150,14 +150,14 @@ HAProxy チェックは [Datadog Agent][5] パッケージに含まれていま�
 
 1. HAProxy メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `haproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル haproxy.d/conf.yaml][1] を参照してください。
 
-   ```yaml  
+   ```yaml
    instances:
 
      ## @param use_openmetrics - boolean - optional - default: false
      ## Enable to preview the new version of the check which supports HAProxy version 2 or later
      ## or environments using the HAProxy exporter.
      ##
-     ## OpenMetrics-related options take effect only when this is set to `true`. 
+     ## OpenMetrics-related options take effect only when this is set to `true`.
      ##
      ## Uses the latest OpenMetrics V2 implementation for more features and better performance.
      ## Note: To see the configuration options for the OpenMetrics V1 implementation (Agent v7.33 or earlier),
@@ -506,7 +506,7 @@ HAProxy チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 ### エラー: ポート 514 はすでに使用中
-syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります: 
+syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります:
 `Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use`
 
 これは、デフォルトで syslog がポート 514 でリッスンしているために起こっています。このエラーを解決するには、syslog を無効にするか、ポート 514 と Agent がログをリッスンしている別のポートにログを転送するように HAProxy を構成することができます。Agent がリッスンするポートは、[こちら][11]で haproxy.d/conf.yaml ファイル定義することができます。

@@ -8,7 +8,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/

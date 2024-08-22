@@ -30,7 +30,7 @@ categories:
 - kubernetes
 - モニター
 - オーケストレーション
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/wayfinder/README.md
 display_on_public_website: true
@@ -78,7 +78,7 @@ tile:
 
 ## 概要
 
-[Wayfinder][1] は、一元構成によって開発者のセルフサービスを可能にするインフラストラクチャー管理プラットフォームです。このチェックでは、Datadog Agent を通じて Wayfinder のキー管理コンポーネントを監視します。 
+[Wayfinder][1] は、一元構成によって開発者のセルフサービスを可能にするインフラストラクチャー管理プラットフォームです。このチェックでは、Datadog Agent を通じて Wayfinder のキー管理コンポーネントを監視します。
 
 
 インテグレーションは Wayfinder API サーバー、コントローラー、Webhook コンポーネントからキーメトリクスを収集します。これらのメトリクスは、管理されたワークスペースの問題を明らかにします。

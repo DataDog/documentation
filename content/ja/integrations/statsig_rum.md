@@ -13,7 +13,7 @@ categories:
 - 構成とデプロイ
 - 開発ツール
 - イベント管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/statsig_rum/README.md
 display_on_public_website: true
@@ -74,12 +74,12 @@ Statsig の機能フラグ追跡インテグレーションは、Datadog RUM デ
 ```js
 await statsig.initialize('client-<STATSIG CLIENT KEY>',
   {userID: '<USER ID>'},
-  {     
+  {
     gateEvaluationCallback: (key, value) => {
       datadogRum.addFeatureFlagEvaluation(key, value);
     }
   }
-); 
+);
 ```
 
 ## サポート

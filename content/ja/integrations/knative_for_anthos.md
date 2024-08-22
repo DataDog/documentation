@@ -7,7 +7,7 @@ categories:
 - kubernetes
 - ログの収集
 - オーケストレーション
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Knative for Anthos クラスターからメトリクスおよびログを収集し、Datadog で分析
 doc_link: https://docs.datadoghq.com/integrations/knative_for_anthos/

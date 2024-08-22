@@ -27,7 +27,7 @@ author:
   vendor_id: bottomline
 categories:
 - mainframes
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
 display_on_public_website: true

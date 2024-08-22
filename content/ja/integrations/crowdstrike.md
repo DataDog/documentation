@@ -5,7 +5,7 @@ categories:
 - ログの収集
 - ネットワーク
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: CrowdStrike
 doc_link: https://docs.datadoghq.com/integrations/crowdstrike/

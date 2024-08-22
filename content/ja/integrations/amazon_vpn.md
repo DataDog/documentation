@@ -4,7 +4,7 @@ categories:
 - クラウド
 - ログの収集
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS VPN のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/

@@ -23,7 +23,7 @@ categories:
 - cloud
 - AWS
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md
 display_on_public_website: true
@@ -229,7 +229,7 @@ metadata:
    kubectl apply -n datadog-agent -f datadog-agent.yaml
    ```
 
-2. After the Cluster Agent reaches a running state and registers Admission Controller mutating webhooks, an Agent sidecar is automatically injected into any pod created with the label `agent.datadoghq.com/sidecar:fargate`. 
+2. After the Cluster Agent reaches a running state and registers Admission Controller mutating webhooks, an Agent sidecar is automatically injected into any pod created with the label `agent.datadoghq.com/sidecar:fargate`.
    **Admission Controller はすでに作成されたポッドを変更しません**。
 
 **結果例**
@@ -276,7 +276,7 @@ Agent やそのコンテナリソースをさらに構成するには、`Datadog
 
      **例**
 
-     In the following example, a selector targets all pods with the label `"app": redis`. The sidecar profile configures a `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable and resource settings. 
+     In the following example, a selector targets all pods with the label `"app": redis`. The sidecar profile configures a `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable and resource settings.
 
      ```yaml
         spec:

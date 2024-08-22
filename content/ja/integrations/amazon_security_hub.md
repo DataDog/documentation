@@ -3,7 +3,7 @@ categories:
 - cloud
 - AWS
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Security Hub イベントをログとして取り込みます。
 doc_link: ''

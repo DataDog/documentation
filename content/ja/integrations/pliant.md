@@ -26,7 +26,7 @@ categories:
 - notifications
 - orchestration
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
 display_on_public_website: true
@@ -150,7 +150,7 @@ Datadog の通知からトリガーするワークフローを作成します。
 3. "webhooks" までスクロールします。**New** をクリックして、Pliant ワークフローにリンクする新しい Webhook を追加します。まず、"name" フィールドで Webhook に名前を付けます。この例では *RestartHost* という名前を使用します。
 ![webhook コンフィグ2][11]
 
-ステップ 4 でコピーした URL を貼り付けます。例: 
+ステップ 4 でコピーした URL を貼り付けます。例:
 
 ```
 https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>
