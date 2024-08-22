@@ -12,6 +12,10 @@ import { FileNavigator } from './helperModules/FileNavigator';
 import { ConfigProcessor } from './helperModules/ConfigProcessor';
 import { PageBuildArgs, PageBuilder } from './helperModules/PageBuilder';
 
+/**
+ * The schema for the config object passed to the MarkdocHugoIntegration class
+ * from outside the module.
+ */
 const CompilationConfigSchema = z.object({
   directories: z
     .object({
@@ -29,6 +33,10 @@ const CompilationConfigSchema = z.object({
     .optional()
 });
 
+/**
+ * The type of the config object passed to the MarkdocHugoIntegration class
+ * from outside the module.
+ */
 type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
 
 export class MarkdocHugoIntegration {
