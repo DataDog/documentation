@@ -16,6 +16,9 @@ further_reading:
 - link: "/logs/log_configuration/archives"
   tag: "Documentation"
   text: "Log Archives"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Documentation"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview
