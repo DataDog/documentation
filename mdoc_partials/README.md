@@ -1,0 +1,1 @@
+This folder is just for development purposes. Once the Markdoc integration is in production, Markdoc partials can be included in the regular partials folder, or in a designated subfolder if desired.
