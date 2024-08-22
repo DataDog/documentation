@@ -29,7 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md
 display_on_public_website: true
@@ -68,7 +68,7 @@ tile:
 
 ## 概要
 
-The CockroachDB Cloud integration for Datadog enables data collection and alerting on a subset of CockroachDB metrics using the Datadog platform. 
+The CockroachDB Cloud integration for Datadog enables data collection and alerting on a subset of CockroachDB metrics using the Datadog platform.
 
 ## セットアップ
 
@@ -116,7 +116,7 @@ CockroachDB からのメトリクスエクスポートは、以下のような�
 - API キーが古くなっている。この場合、インテグレーションのステータスは `Unhealthy` になります。この問題を解決するには、新しい API キーを使って[インテグレーションを更新](#update-integration)してください。
 - CockroachDB が一時的に使用できない。この場合、インテグレーションのステータスは `Active` のままです。この問題を解決するには、**Datadog** パネルからインテグレーションを[非アクティブ化](#deactivate-integration)して再アクティブ化してみてください。それでも問題が解決しない場合は、[サポートチームにご連絡ください][10]。
 
-To monitor the health of metrics export, you can create a custom Monitor in Datadog. 
+To monitor the health of metrics export, you can create a custom Monitor in Datadog.
 
 ### インテグレーションの更新
 

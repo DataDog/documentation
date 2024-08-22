@@ -27,7 +27,7 @@ categories:
 - developer tools
 - ログの収集
 - orchestration
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_on_public_website: true

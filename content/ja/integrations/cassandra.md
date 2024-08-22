@@ -35,7 +35,7 @@ categories:
 - caching
 - data stores
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
 display_on_public_website: true
@@ -240,7 +240,7 @@ Cassandra Nodetool ログは Cassandra インテグレーションにより収�
 Cassandra_nodetool チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cassandra_nodetool" >}} 
+{{< get-service-checks-from-git "cassandra_nodetool" >}}
 
 
 ## トラブルシューティング

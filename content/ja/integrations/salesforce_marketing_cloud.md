@@ -2,7 +2,7 @@
 categories:
 - クラウド
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Salesforce Marketing Cloud
 doc_link: https://docs.datadoghq.com/integrations/salesforce_marketing_cloud/

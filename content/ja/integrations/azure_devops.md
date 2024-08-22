@@ -6,7 +6,7 @@ categories:
 - 問題追跡
 - プロビジョニング
 - ソースコントロール
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_devops

@@ -7,7 +7,7 @@ categories:
 - cloud
 - log collection
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/

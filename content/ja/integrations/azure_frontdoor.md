@@ -2,7 +2,7 @@
 categories:
 - cloud
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Front Door のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_frontdoor/

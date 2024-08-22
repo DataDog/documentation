@@ -3,7 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Step Functions のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/

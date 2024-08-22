@@ -33,7 +33,7 @@ categories:
 - data stores
 - os & system
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
 display_on_public_website: true

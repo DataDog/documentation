@@ -36,7 +36,7 @@ author:
 categories:
 - ログの収集
 - oracle
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weblogic/README.md
 display_on_public_website: true
@@ -198,7 +198,7 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
           name: new_log_start_with_date
           pattern: (\####)?<\w{3} (0?[1-9]|[12][0-9]|3[01]), \d{4}
     - type: file
-      path: <DOMAIN_DIR>/servers/*/logs/access.log 
+      path: <DOMAIN_DIR>/servers/*/logs/access.log
       source: weblogic
       service: http-access
       log_processing_rules:

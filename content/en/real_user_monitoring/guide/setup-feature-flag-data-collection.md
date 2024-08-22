@@ -819,16 +819,14 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Why doesn't my feature flag data reflect what I expect to see?
+### Feature flag data is not reflecting the expected information
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
 
 For example, to see what **Views** your feature flag is being evaluated on, you can use the RUM Explorer to make a similar query:
 
-
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
 
 Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
 

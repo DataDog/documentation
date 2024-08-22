@@ -22,7 +22,7 @@ author:
   support_email: support@gremlin.com
 categories:
 - 問題追跡
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
 display_on_public_website: true

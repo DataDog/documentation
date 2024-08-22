@@ -3,7 +3,7 @@ categories:
 - クラウド
 - インシデント
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: このインテグレーションにより、Datadog でトリガーされたアラートから Salesforce Incidents を作成し、既存のインシデントに新しい情報を随時更新することができます。
 doc_link: https://docs.datadoghq.com/integrations/salesforce_incidents/

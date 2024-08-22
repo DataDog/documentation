@@ -27,7 +27,7 @@ author:
   support_email: support@neotechnology.com
 categories:
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md
 display_on_public_website: true

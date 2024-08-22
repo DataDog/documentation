@@ -5,7 +5,7 @@ categories:
 - google cloud
 - log collection
 - mobile
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_datastore/

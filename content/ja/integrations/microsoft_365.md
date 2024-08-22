@@ -2,7 +2,7 @@
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Microsoft 365 に接続して組織の監査ログを Datadog のロギングプラットフォームにプル転送。
 doc_link: https://docs.datadoghq.com/integrations/microsoft_365/

@@ -76,12 +76,48 @@ function processData(i, param1, param2) {
 
     // Add an attribute to the span
     span.setAttribute('app.processedData', result.toString());
-    
     span.end();
     return result;
     });
 }
 {{< /highlight >}}
+
+
+## Adding span events
+
+You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name**: A string representing the event's name.
+- **Timestamp**: A UNIX timestamp representing the event's occurrence time.
+- **Attributes**: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+
+The following examples demonstrate different ways to add events to a span:
+
+```js
+span.addEvent('Web page unresponsive', { 'error.code': '403', 'unknown values': [1, ['h', 'a', [false]]] }, 1714536311886)
+span.addEvent('Web page loaded')
+span.addEvent('Button changed color', { colors: [112, 215, 70], 'response.time': 134.3, success: true })
+```
+
+Read the [OpenTelemetry][6] specification for more information.
+
+### Record exceptions
+
+To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```js
+span.recordException(new TestError(), Date.now())
+span.recordException(new TestError())
+```
+
+Read the [OpenTelemetry][7] specification for more information.
 
 ## Creating spans
 
@@ -136,3 +172,5 @@ Additionally, you can exclude traces based on their resource name to prevent the
 [3]: https://opentelemetry.io/docs/instrumentation/js/automatic/
 [4]: /tracing/security
 [5]: /tracing/guide/ignoring_apm_resources/
+[6]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[7]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

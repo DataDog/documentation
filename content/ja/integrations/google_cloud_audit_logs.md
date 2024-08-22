@@ -4,7 +4,7 @@ categories:
 - google cloud
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 監査ログダッシュボードを表示します。
 doc_link: ''
