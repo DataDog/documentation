@@ -40,7 +40,7 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 
 These are the batch settings for each destination:
 
-| **Destination**                        | **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Destination                            | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------------------------------|----------------|-----------------|---------------------|
 | Amazon OpenSearch                      | None           | 10,000,000      | 1                   |
 | Amazon S3 (Datadog Archives)           | None           | 100,000,000     | 900                 |
@@ -83,7 +83,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 10,000,000      | 1                   |
 
@@ -99,7 +99,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | 1,000          | 4,250,000       | 5                   |
 
@@ -117,7 +117,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 10,000,000      | 1                   |
 
@@ -135,7 +135,7 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 1,000,000       | 15                  |
 
@@ -153,7 +153,7 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 10,000,000      | 1                   |
 
@@ -187,7 +187,7 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 1,000,000       | 1                   |
 
@@ -205,7 +205,7 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 ### Batch settings
 
-| **Max Events** | **Max Bytes**   | **Timeout Seconds** |
+| Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 10,000,000      | 1                   |
 
