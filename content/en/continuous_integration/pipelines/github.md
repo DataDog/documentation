@@ -81,7 +81,7 @@ workflow job and workflow run events. To remove the events:
 2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you will have to repeat the process for each).
 3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
 
-### Enable log collection
+### Collect job logs
 
 <div class="alert alert-info">Log collection is not available for <a href="/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 

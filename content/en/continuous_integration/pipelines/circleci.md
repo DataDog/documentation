@@ -95,7 +95,7 @@ If a `key:value` pair contains any commas, surround it with quotes. For example,
 
 To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][8] team handle exactly.
 
-### Enable log collection
+### Collect job logs
 
 <div class="alert alert-info">Job log collection is not available for <a href="/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 

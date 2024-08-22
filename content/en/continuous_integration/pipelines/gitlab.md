@@ -243,7 +243,7 @@ The following table describes the message and domain correlated with each error 
 | `reached_max_descendant_pipelines_depth` | user   | Reached max descendant pipelines.                        |
 | `ip_restriction_failure`          | provider     | IP restriction failure.                                    |
 
-## Enable job log collection
+### Collect job logs
 
 <div class="alert alert-info">Job log collection is not available for <a href="/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 
