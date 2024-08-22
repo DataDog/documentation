@@ -39,12 +39,12 @@ User retention is a metric for measuring the percentage of active users who cont
 
 [User journeys][3] allow you to measure and report on the impact of every feature change - from backend bottlenecks to user frustrations - so that they can be appropriately optimized. Identify the ideal path for feature adoption and user conversion.
 
-{{< img src="/product_analytics/journeys/pa-funnel.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
 See different visualizations of the user experience when interacting with your application:
 
-- **[Funnel][4]**: Measure the conversion rate end-to-end of a given workflow.
-- **[Sankey][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
+- **[Pathways][4]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
+- **[Funnel][5]**: Measure the conversion rate end-to-end of a given workflow.
 - **[Conversion][6]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
 ## Create user segments
@@ -63,8 +63,8 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [1]: https://www.datadoghq.com/privacy/
 [2]: /product_analytics/user_retention
 [3]: /product_analytics/journeys
-[4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/sankey
+[4]: product_analytics/journeys/pathways
+[5]: /product_analytics/journeys/funnel_analysis
 [6]: /product_analytics/journeys#conversion
 [7]: /product_analytics/segmentation/
 [8]: /product_analytics/heatmaps

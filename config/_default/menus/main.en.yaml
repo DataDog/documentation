@@ -6155,10 +6155,10 @@ menu:
       parent: pa_journeys
       identifier: pa_funnel_analysis
       weight: 201
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
+    - name: Pathway Diagrams
+      url: product_analytics/journeys/pathways
       parent: pa_journeys
-      identifier: pa_sankey
+      identifier: pa_pathways
       weight: 202
     - name: Heatmaps
       url: product_analytics/heatmaps

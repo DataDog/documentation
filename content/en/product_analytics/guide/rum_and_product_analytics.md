@@ -19,7 +19,7 @@ Product Analytics is a dedicated offering built for product managers, product ow
 Previously, Product Analytics data was available as a preview in the RUM offering. All Product Analytics features that used to live in RUM are now exclusively in the Product Analytics UI, including the following:
 
 - Funnels
-- Sankey
+- Pathways
 - User Retention Analysis
 - Heatmaps
 
@@ -32,7 +32,7 @@ Session Replay remains a part of both RUM and Product Analytics.
 - Existing RUM customers on an annual commit (as of September 1, 2024) can continue to use the generally available features from Product Analytics they used previously (Funnels and Heatmaps) from within the RUM UI.
 - We can show data from the last 30 days (the standard RUM retention) but if you are on the 90-day retention plan, we do not backfill the additional 60 days.
 
-### Why can I no longer access Sankeys and Retention Analysis?
+### Why can I no longer access Pathways and Retention Analysis?
 - These features were part of a preview and available to RUM customers as a beta, but were not part of the core RUM offering. These features are now exclusively available to customers on a Product Analytics contract.
 
 ### How do you set up Product Analytics data?
@@ -69,7 +69,7 @@ See the full feature comparison table below.
 | RUM Synthetic tests | {{< X >}} (through Session Replay) | |
 | Retention Analysis | | {{< X >}} |
 | [Conversion page][tk] | | {{< X >}} |
-| User Journeys (Funnels, Sankeys) | | {{< X >}} |
+| User Journeys (Funnels, Pathways) | | {{< X >}} |
 | Segmentation | | {{< X >}} |
 | Heatmaps | | {{< X >}} |
 | Analytics Explorer/Search, Dashboards, Notebooks | {{< X >}} | {{< X >}} |
