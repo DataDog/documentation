@@ -70,7 +70,7 @@ To migrate notifications that are configured for individual detection rules:
 
 To migrate notification rules configured for cloud or infrastructure configuration signals, change the target from Cloud Configuration or Infrastructure Configuration to Vulnerability > Misconfiguration. 
 
-If you have any questions, contact Datadog support. 
+If you have any questions, contact [Datadog support][7]. 
 
 ## Further Reading
 
@@ -82,3 +82,4 @@ If you have any questions, contact Datadog support.
 [4]: /security/cloud_security_management/ 
 [5]: /security/application_security/
 [6]: /security/cloud_siem/
+[7]: /help/
