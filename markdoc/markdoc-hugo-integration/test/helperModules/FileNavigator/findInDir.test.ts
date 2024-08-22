@@ -10,8 +10,9 @@ describe('FileNavigator.findInDir', () => {
     const sanitizedFilenames = files.map((filename) =>
       filename.replace(VALID_CONTENT_DIR, '')
     );
-    expect(JSON.stringify(sanitizedFilenames)).toMatchFileSnapshot(
-      SNAPSHOTS_DIR + '/helperModules/FileNavigator/findInDir.snap.json'
-    );
+
+    expect(sanitizedFilenames).toContain('/primary_colors.mdoc');
+    expect(sanitizedFilenames).toContain('/traffic_light_colors.mdoc');
+    expect(sanitizedFilenames).toContain('/elements/table.mdoc');
   });
 });

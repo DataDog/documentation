@@ -7,7 +7,7 @@ import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
   resolvePagePrefs,
   resolveMinifiedPagePrefs
-} from '../../../src/helperModules/sharedRendering';
+} from '../../../src/helperModules/prefsResolution';
 import { ResolvedPagePrefsSchema } from '../../../src/schemas/resolvedPagePrefs';
 
 describe('SharedRenderer.resolvePagePrefs', () => {

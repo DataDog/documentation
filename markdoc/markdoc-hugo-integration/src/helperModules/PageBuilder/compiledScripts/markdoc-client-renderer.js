@@ -74,9 +74,9 @@
     }
   });
 
-  // dist/helperModules/sharedRendering.js
-  var require_sharedRendering = __commonJS({
-    "dist/helperModules/sharedRendering.js"(exports) {
+  // dist/helperModules/prefsResolution.js
+  var require_prefsResolution = __commonJS({
+    "dist/helperModules/prefsResolution.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.resolvePagePrefs = resolvePagePrefs;
@@ -2353,9 +2353,9 @@
     }
   });
 
-  // dist/helperModules/dataCompression.js
-  var require_dataCompression = __commonJS({
-    "dist/helperModules/dataCompression.js"(exports) {
+  // dist/helperModules/configMinification.js
+  var require_configMinification = __commonJS({
+    "dist/helperModules/configMinification.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.expandClientFunction = exports.minifyClientFunction = exports.minifyClientVariable = exports.expandClientVariable = exports.CLIENT_FUNCTION_MINIFY_MAP = exports.CLIENT_FUNCTION_EXPAND_MAP = void 0;
@@ -2461,9 +2461,9 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientRenderer = void 0;
       var Chooser_1 = require_Chooser();
-      var sharedRendering_1 = require_sharedRendering();
+      var prefsResolution_1 = require_prefsResolution();
       var reresolver_1 = require_reresolver();
-      var dataCompression_1 = require_dataCompression();
+      var configMinification_1 = require_configMinification();
       var ClientRenderer2 = class {
         constructor() {
           this.selectedValsByPrefId = {};
@@ -2673,7 +2673,7 @@
           const contentIsCustomizable = this.locateChooserElement();
           if (contentIsCustomizable) {
             Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-              this.ifFunctionsByRef[ref] = (0, dataCompression_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
+              this.ifFunctionsByRef[ref] = (0, configMinification_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
             });
             const overrideApplied = this.applyPrefOverrides();
             if (overrideApplied) {
@@ -2708,7 +2708,7 @@
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
             throw new Error("Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement");
           }
-          const resolvedPagePrefs = (0, sharedRendering_1.resolveMinifiedPagePrefs)({
+          const resolvedPagePrefs = (0, prefsResolution_1.resolveMinifiedPagePrefs)({
             pagePrefsConfig: this.pagePrefsConfig,
             prefOptionsConfig: this.prefOptionsConfig,
             valsByPrefId: this.selectedValsByPrefId

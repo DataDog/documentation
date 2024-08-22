@@ -1,7 +1,7 @@
 import {
   minifyClientFunction,
   expandClientFunction
-} from '../../src/helperModules/dataCompression';
+} from '../../src/helperModules/configMinification';
 import {
   ClientFunction,
   ClientFunctionSchema,
@@ -11,7 +11,7 @@ import {
 import _ from 'lodash';
 import { describe, test, expect } from 'vitest';
 
-describe('dataCompression', () => {
+describe('configMinification', () => {
   const simpleClientFunction: ClientFunction = {
     $$mdtype: 'Function',
     name: 'equals',
