@@ -1,5 +1,10 @@
 ---
-title: Feature Flag Tracking
+title: Setup Feature Flag Tracking
+beta: true
+description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
+aliases:
+- /real_user_monitoring/guide/getting-started-feature-flags/
+- /real_user_monitoring/guide/setup-feature-flag-data-collection/
 disable_toc: false
 further_reading:
 - link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
@@ -15,85 +20,796 @@ further_reading:
 
 ## Overview
 
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance. 
+Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
 
-By enriching your RUM data with feature flag data, you can: 
-- Be confident that your feature will successfully launch without unintentionally causing a bug or performance regression
-- Correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster
-- Streamline data collection and analysis and focus on troubleshooting
+By enriching your RUM data with feature flag data, you can be confident that your feature successfully launches without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
-## Set up feature flag data collection
+## Setup
 
-To see detailed set up instructions, see our guide to [get started with feature flag data collection][1]
 
-Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][2]. You need the Browser RUM SDK version >= 4.25.0.
+**Note**: The following special characters are not supported for Feature Flag Tracking: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
 
-You can start collecting feature flag data for [custom feature flag management solutions][3], or using one of our integration partners. 
+  ```javascript
+  datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+  ```
 
-We support integrations with:
+{{< tabs >}}
+{{% tab "Browser" %}}
 
+Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
+
+To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+
+<details open>
+  <summary>npm</summary>
+
+```javascript
+  import { datadogRum } from '@datadog/browser-rum';
+
+  // Initialize Datadog Browser SDK
+  datadogRum.init({
+    ...
+    enableExperimentalFeatures: ["feature_flags"],
+    ...
+});
+```
+
+</details>
+
+<details>
+  <summary>CDN async</summary>
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ["feature_flags"],
+      ...
+    })
+})
+```
+</details>
+
+<details>
+  <summary>CDN sync</summary>
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ["feature_flags"],
+      ...
+    })
+```
+</details>
+<br/>
+
+[1]: /real_user_monitoring/browser#setup
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Integrations
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
+
 
 </br>
 
-Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
+### Amplitude integration
 
-## View your Feature Flags
+{{< tabs >}}
+{{% tab "Browser" %}}
 
-Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][4] tab within RUM.
+Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
-From this view, you can investigate any questions you have about your feature flag's health and usage.
-- Monitor the number of users experiencing each variant and see summary statistics of your feature flag
-- Check the status of your feature flag to see if there are any that can be removed for code clean up
-- View which pages your feature flags are being evaluated on
+For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag's health and usage" style="width:90%;" >}}
-
-
-### Search and filter
-Search and filter your feature flags by typing in the search bar. You can also use the faceted search to narrow down, broaden, or shift your focus on subsets of feature flags you are interested in.
-
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
-
-### Feature Flag Status
-There are three possible feature flag statuses:
-- **Active**: The feature flag has evaluated different variants for the past 2 weeks
-- **Inactive**: For the past 2 weeks, there have only been feature flag evaluations for your control variant
-- **Out to 100%**: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
-
-## Analyze your feature flags
-To get more details about the health and performance of your feature flag, you can click the flag in the list to navigate to a dedicated feature flag analysis dashboard. The Feature Flag analysis dashboard provides an overview of the performance of your feature flag, displaying information about user sessions, changes in your Core Web Vitals, and error rates. 
-
-These out-of-the-box graphs are aggregated across your flag variants, making it easy to spot problems in your feature releases before they turn into serious issues. This dashboard provides an easy way to monitor your feature releases and allows you to quickly roll back as soon as you spot an issue so you can avoid negative user experiences. 
-
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-details-page.mp4" alt="Feature Flag details page - Users overview" video=true width=90% >}}
+```javascript
+  const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
+    exposureTrackingProvider: {
+      track(exposure: Exposure)  {
+        // Send the feature flag when Amplitude reports the exposure
+        datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
+      }
+    }
+  })
+```
 
 
-The **Users** tab provides some high level summary statistics of your feature flag and allows you to further analyze the users viewing each of your feature flag variants by any attribute. If you want to understand what it looks like for someone who experienced a certain variant versus another, you can watch a [Session Replay][5] for each case.
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
 
-The **Issues** tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. See if any issues detected by [Error Tracking][6] occurred for a specific variant of your feature flag and may be related to your changes.
+{{% /tab %}}
+{{% tab "iOS" %}}
 
-The **Performance** tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
+Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
 
-### Build custom views from Feature Flag data using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][7] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][8] and [monitors][9]. 
+For more information about initializing Amplitude's SDK, see Amplitude's [iOS SDK documentation][1].
 
-You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute to scope down and focus on events where users were shown a specific user experience.
+```swift
+  class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    func track(exposure: Exposure) {
+      // Send the feature flag when Amplitude reports the exposure
+      if let variant = exposure.variant {
+        RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+      }
+    }
+  }
 
-You can compare important metrics to you and your teams by grouping your query by `@feature_flags.{flag_name}`. For example, if you want to understand how your new checkout flow is affecting the conversion rate from the checkout page to users making a purchase, you can add a "Group by" on the conversion rate graph.
+  // In initialization:
+  ExperimentConfig config = ExperimentConfigBuilder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
+    .build()
+```
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-rum-explorer.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Amplitude's SDK, see Amplitude's [Android SDK documentation][1].
+
+```kotlin
+  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    override fun track(exposure: Exposure) {
+        // Send the feature flag when Amplitude reports the exposure
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
+            exposure.flagKey,
+            exposure.variant.orEmpty()
+        )
+    }
+  }
+
+  // In initialization:
+  val config = ExperimentConfig.Builder()
+      .exposureTrackingProvider(DatadogExposureTrackingProvider())
+      .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ConfigCat integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+When initializing the ConfigCat Javascript SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```javascript
+const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.AutoPoll,
+  {
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', (details) => {
+        datadogRum.addFeatureFlagEvaluation(details.key, details.value);
+      })
+  }
+);
+```
+
+For more information about initializing the ConfigCat Javascript SDK, see ConfigCat's [JavaScript SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/js
+
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+When initializing the ConfigCat Swift iOS SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```swift
+  let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: details.key, variation: details.value)
+    }
+  }
+```
+
+For more information about initializing the ConfigCat Swift (iOS) SDK, see ConfigCat's[Swift iOS SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/ios
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+When initializing the ConfigCat Android SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```java
+  ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
+    });
+  });
+```
+
+For more information about initializing the ConfigCat Android SDK, see ConfigCat's [Android SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/android
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+When initializing the ConfigCat Dart SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```dart
+  final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(
+        pollingMode: PollingMode.autoPoll(),
+        hooks: Hooks(
+            onFlagEvaluated: (details) => {
+              DatadogSdk.instance.rum?.addFeatureFlagEvaluation(details.key, details.value);
+            }
+        )
+    )
+  );
+```
+
+For more information about initializing the ConfigCat Dart (Flutter) SDK, see ConfigCat's [Dart SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/dart
+
+
+{{% /tab %}}
+
+
+{{% tab "React Native" %}}
+
+When initializing the ConfigCat React SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```typescript
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', (details) => {
+        DdRum.addFeatureFlagEvaluation(details.key, details.value);
+      }),
+  }}
+>
+  ...
+</ConfigCatProvider>
+```
+
+For more information about initializing the ConfigCat React SDK, see ConfigCat's [React SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/react
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Custom feature flag management
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```swift
+   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```kotlin
+   GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
+   ```
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```javascript
+   DdRum.addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### DevCycle integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize DevCycle's SDK and subscribe to the `variableEvaluated` event, choosing to subscribe to all variable evaluations `variableEvaluated:*` or particular variable evaluations `variableEvaluated:my-variable-key`.
+
+For more information about initializing DevCycle's SDK, see [DevCycle's JavaScript SDK documentation][5] and for more information about DevCycle's event system, see [DevCycle's SDK Event Documentation][6].
+
+```javascript
+const user = { user_id: "<USER_ID>" };
+const dvcOptions = { ... };
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
+...
+dvcClient.subscribe(
+    "variableEvaluated:*",
+    (key, variable) => {
+        // track all variable evaluations
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+...
+dvcClient.subscribe(
+    "variableEvaluated:my-variable-key",
+    (key, variable) => {
+        // track a particular variable evaluation
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+```
+
+
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Eppo integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1].
+
+```typescript
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    datadogRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
+  },
+};
+
+await eppoInit({
+  apiKey: "<API_KEY>",
+  assignmentLogger,
+});
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1].
+
+```swift
+func IAssignmentLogger(assignment: Assignment) {
+  RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
+}
+
+let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmentLogger)
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/ios
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's Android SDK documentation][1].
+
+```java
+AssignmentLogger logger = new AssignmentLogger() {
+    @Override
+    public void logAssignment(Assignment assignment) {
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getFeatureFlag(), assignment.getVariation());
+    }
+};
+
+EppoClient eppoClient = new EppoClient.Builder()
+    .apiKey("YOUR_API_KEY")
+    .assignmentLogger(logger)
+    .application(application)
+    .buildAndInit();
+```
+
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/android
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Eppo does not support this integration. [Contact Eppo][1] to request this feature.
+
+[1]: mailto:support@geteppo.com
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1].
+
+```typescript
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    DdRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
+  },
+};
+
+await eppoInit({
+  apiKey: "<API_KEY>",
+  assignmentLogger,
+});
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/react-native
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Flagsmith Integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+   Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
+
+   ```javascript
+    // Initialize the Flagsmith SDK
+    flagsmith.init({
+        datadogRum: {
+            client: datadogRum,
+            trackTraits: true,
+        },
+        ...
+    })
+   ```
+
+
+[1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### LaunchDarkly integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
+
+ For more information about initializing LaunchDarkly's SDK, see [LaunchDarkly's JavaScript SDK documentation][1].
+
+```javascript
+const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
+  inspectors: [
+    {
+      type: "flag-used",
+      name: "dd-inspector",
+      method: (key: string, detail: LDClient.LDEvaluationDetail) => {
+        datadogRum.addFeatureFlagEvaluation(key, detail.value);
+      },
+    },
+  ],
+});
+```
+
+
+[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Split Integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
+
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {
+          datadogRum
+              .addFeatureFlagEvaluation(
+                  impressionData.impression.feature,
+                  impressionData.impression.treatment
+              );
+    },
+  },
+});
+
+const client = factory.client();
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Split's SDK, see Split's [iOS SDK documentation][1].
+
+```swift
+  let config = SplitClientConfig()
+  // Send the feature flag when Split reports the impression
+  config.impressionListener = { impression in
+      if let feature = impression.feature,
+          let treatment = impression.treatment {
+          RUMMonitor.shared().addFeatureFlagEvaluation(name: feature, value: treatment)
+      }
+  }
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/360020401491-iOS-SDK
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
+
+```kotlin
+  internal class DatadogSplitImpressionListener : ImpressionListener {
+    override fun log(impression: Impression) {
+        // Send the feature flag when Split reports the impression
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
+            impression.split(),
+            impression.treatment()
+        )
+    }
+    override fun close() {
+    }
+  }
+
+  // In initialization:
+  val apikey = BuildConfig.SPLIT_API_KEY
+  val config = SplitClientConfig.builder()
+      .impressionListener(DatadogSplitImpressionListener())
+      .build()
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Split's SDK, see Split's [Flutter plugin documentation][1].
+
+```dart
+  StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
+    // Send the feature flag when Split reports the impression
+    final split = impression.split;
+    final treatment = impression.treatment;
+    if (split != null && treatment != null) {
+      DatadogSdk.instance.rum?.addFeatureFlagEvaluation(split, treatment);
+    }
+  });
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing Split's SDK, see Split's [React Native SDK documentation][1].
+
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {
+          DdRum
+              .addFeatureFlagEvaluation(
+                  impressionData.impression.feature,
+                  impressionData.impression.treatment
+              );
+    },
+  },
+});
+
+const client = factory.client();
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/4406066357901-React-Native-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+{{% /tab %}}
+{{< /tabs >}}
+
+### Statsig Integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Statsig's SDK with `statsig.initialize`.
+
+1. Update your Browser RUM SDK version 4.25.0 or above.
+2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.
+3. Initialize Statsig's SDK (`>= v4.34.0`) and implement the `gateEvaluationCallback` option as shown below:
+
+   ```javascript
+    await statsig.initialize('client-<STATSIG CLIENT KEY>',
+    {userID: '<USER ID>'},
+    {
+        gateEvaluationCallback: (key, value) => {
+            datadogRum.addFeatureFlagEvaluation(key, value);
+        }
+    }
+    );
+   ```
+
+[1]: https://docs.statsig.com/client/jsClientSDK
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Statsig does not support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Statsig does not support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Statsig does not support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Statsig does not currently support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Next steps
+
+[View][tk] and [analyze][tk] your feature flags.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/setup-feature-flag-data-collection/
-[2]: /real_user_monitoring/browser#setup
-[3]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
-[4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /real_user_monitoring/session_replay/browser/
-[6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
-[7]: https://app.datadoghq.com/rum/explorer
-[8]: /dashboards/
-[9]: /monitors/#create-monitors
