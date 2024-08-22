@@ -14,7 +14,7 @@
   {{ partial "translate_status_banner/translate_status_banner.html" . }} 
 
   
-  {{ $suite := slice }}
+  {{ $suites := slice }}
   <div
   class="filter-search-main row w-100"
   x-data="{
@@ -49,7 +49,7 @@
 
       const containsFilteredValue = filterValues.includes(this.filterValue.toLowerCase()) // checks first attr in dataset
       const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
-      console.log(filterValues, this.filterValue, containsFilteredValue)
+
       return containsSearchValues && containsFilteredValue
     },
     updateWithURLParams () {
@@ -90,17 +90,17 @@
             <td>{{ .data_type }}</td>
             <td>{{ .default_retention_period }}</td>
           </tr>
-            <!-- Build $suite slice for filtering section (.filters) -->
-          {{ $suite = $suite | append .suite }}
+            <!-- Build $suites slice for filtering section (.filters) -->
+          {{ $suites = $suites | append .suite }}
           {{ end }}
         </tbody>
       </table>
     </div>
 
     <nav id="filter-search-nav" class="mb-3">
-      {{/*  FILTER BTNS - Keep here. $suite slice needs to form */}}
+      {{/*  FILTER BTNS - Keep here. $suites slice needs to form */}}
       <div class="filters">
-        {{ if  $suite }}
+        {{ if  $suites }}
             <button
             @click="filterValue = ''; pushState()"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
@@ -108,12 +108,12 @@
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button>
         {{ end }}
 
-        {{ range $suite | uniq | sort }}
+        {{ range $suites | uniq | sort }}
             <button
-            @click="filterValue = '{{ . }}'; pushState()"
+            @click="filterValue = '{{ . | lower }}'; pushState()"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             :class="($el.dataset.filter === filterValue) && 'active'"
-            data-filter="{{ . }}"
+            data-filter="{{ . | lower }}"
             >
               {{ . | upper }}
             </button>
