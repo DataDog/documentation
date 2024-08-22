@@ -46,7 +46,7 @@ The core and APM/trace components of the Windows Agent run under the `ddagentuse
 
 ### Install with the GUI
 
-<div class="alert alert-info">The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you opt to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory to house the Datadog files.</div>
+<div class="alert alert-info">The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you opt to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory for the Datadog files.</div>
 
 1. Download the [Datadog Agent installer][4] to install the latest version of the Agent.
 2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
@@ -121,7 +121,7 @@ Follow the instructions below to install the latest version of the Datadog Agent
 
 #### Install via the GUI
 
-<div class="alert alert-info">The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you opt to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory to house the Datadog files.</div>
+<div class="alert alert-info">The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you opt to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory for the Datadog files.</div>
 
 1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
@@ -163,7 +163,7 @@ Each of the following configuration options can be added as a property to the co
 | `DDAGENTUSER_NAME`                          | String  | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
 | `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
 | `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
-| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_<br><br>If you opt to override the default directory, ensure that you specify a `Datadog` subdirectory to house the Datadog files.                                    |
+| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_<br><br>If you opt to override the default directory, ensure that you specify a `Datadog` subdirectory for the Datadog files.                                    |
 
 **Notes**
 
