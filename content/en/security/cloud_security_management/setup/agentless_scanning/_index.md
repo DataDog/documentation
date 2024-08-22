@@ -15,7 +15,7 @@ The Agentless Scanning Quick Start provides a streamlined setup workflow for Clo
 ## Prerequisites
 
 - AWS integration
-- Remote Configuration
+- Remote Configuration is required to allow Datadog to send information to Agentless scanners, such as which cloud resources should be scanned
 - IAM permissions<br>
   
   **Note**: The following IAM permissions are applied automatically as a part of the installation process.<br><br>
