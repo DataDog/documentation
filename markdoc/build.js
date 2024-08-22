@@ -1,3 +1,9 @@
+/**
+ * This script runs as part of the build, before Hugo has processed any files.
+ * It invokes the Markdoc integration to compile all .mdoc files
+ * found in the content directory, and updates the .gitignore file
+ * in that directory to ignore the compiled files.
+ */
 const fs = require('fs');
 const path = require('path');
 const MarkdocHugoIntegration = require('./markdoc-hugo-integration/dist').MarkdocHugoIntegration;
