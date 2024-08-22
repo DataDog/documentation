@@ -125,7 +125,7 @@ To learn more, read [Application Instrumentation][26].
 [14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
-[17]: https://app.datadoghq.com/monitors#/create
+[17]: https://app.datadoghq.com/monitors/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [20]: /tracing/trace_pipeline/ingestion_controls/
