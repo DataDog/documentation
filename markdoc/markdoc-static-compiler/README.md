@@ -18,7 +18,7 @@ The renderable tree contains `if` divs and spans that contain `ClientFunction` a
 
 Each `if` div and span contains a `ref` that can be used client-side to associate the element with the `ref` of a `ClientFunction` or `ClientVariable`, which can be reresolved to update the display status of the element.
 
-Based on the resolved values of the `ClientFunction`s and `ClientVariable`s at compile time, the `html` renderer hides some elements, but includes the appropriate `ref` to allow for reresolution in the client.
+Based on the resolved values of the `ClientFunction`s and `ClientVariable`s at compile time, the `html` renderer hides some elements by applying the `markdoc__hidden` class, and includes the appropriate `ref` in the element as a data attribute to allow for reresolution in the client.
 
 For an example rendered HTML snippet, see [the relevant test snapshot][3].
 
