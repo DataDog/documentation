@@ -656,71 +656,6 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-## Configure the Agent for log collection
-
-To enable [collecting logs from your jobs](#enable-job-log-collection), configure the Datadog Agent to listen for logs on a TCP port.
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` with the following. Ensure the `service` matches the CI instance name provided earlier on the Jenkins plugin UI.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml`  configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `%ProgramData%\Datadog\conf.d\jenkins.d\conf.yaml` with the following. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{% tab "macOS" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `~/.datadog-agent/conf.d/jenkins.d/conf.yaml` with the following contents. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{< /tabs >}}
-
-With this configuration, the Agent listens for logs on port `10518`.
-
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
-
 ### Correlate infrastructure metrics
 
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
@@ -1121,9 +1056,11 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     ```
 2. Restart your Jenkins instance.
-{{% /tab %}}
 
+{{% /tab %}}
 {{< /tabs >}}
+
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
 
 ## Enable Test Visibility
 
