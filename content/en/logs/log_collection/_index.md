@@ -105,12 +105,23 @@ Datadog integrations and log collection are tied together. You can use an integr
 1. Select an integration from the [Integrations page][6] and follow the setup instructions.
 2. Follow the integration's log collection instructions. This section covers how to uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment.
 
+## Reduce data transfer fees
+
+Use Datadog's [Network Performance Monitoring][7] to identify your organization’s highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
+
+For more information, see [How to send logs to Datadog while reducing data transfer fees][9].
+
 [1]: /logs/log_configuration/processors
 [2]: /logs/log_configuration/parsing
 [3]: /logs/explorer/facets/
 [4]: /agent/kubernetes/log/#autodiscovery
 [5]: /agent/docker/log/#log-integrations
 [6]: /integrations/#cat-log-collection
+[7]: /network_monitoring/performance/
+[8]: /cloud_cost_management/
+[9]: /logs/guide/reduce_data_transfer_fees/
+ 
+ 
 {{% /tab %}}
 {{< /tabs >}}
 
