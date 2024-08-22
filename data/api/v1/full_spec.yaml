@@ -13001,7 +13001,6 @@ components:
           items:
             description: Email address that can receive an invitation to access the
               shared dashboard.
-            format: email
             type: string
           nullable: true
           type: array
@@ -13186,7 +13185,6 @@ components:
           items:
             description: Email address that can receive an invitation to access the
               shared dashboard.
-            format: email
             type: string
           nullable: true
           type: array
@@ -21421,12 +21419,10 @@ components:
         email:
           description: The new email of the user.
           example: test@datadoghq.com
-          format: email
           type: string
         handle:
           description: The user handle, must be a valid email.
           example: test@datadoghq.com
-          format: email
           type: string
         icon:
           description: Gravatar icon associated to the user.
@@ -35830,7 +35826,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       responses:
         '200':
@@ -35875,7 +35870,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       responses:
         '200':
@@ -35917,7 +35911,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       requestBody:
         content:
