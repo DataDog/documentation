@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for .NET
+title: Enabling Code Security for .NET
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
