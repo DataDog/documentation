@@ -22,6 +22,7 @@ cascade:
 
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/agent/logs/advanced_log_collection" >}}Advanced log collection configurations{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/reduce_data_transfer_fees" >}}How to send logs to Datadog while reducing data transfer fees{{< /nextlink >}}    
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Amazon Data Firehose Destination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Set up Datadog Lambda Forwarder{{< /nextlink >}}
