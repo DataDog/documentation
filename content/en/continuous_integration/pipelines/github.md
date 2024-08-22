@@ -108,7 +108,7 @@ To see the metrics, click on a job span in the trace view. A window opens with a
 
 The [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][14].
+The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][19].
 
 ## Further reading
 
@@ -132,3 +132,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [16]: /glossary/#approval-wait-time
 [17]: /glossary/#custom-span
 [18]: /logs/guide/best-practices-for-log-management/
+[19]: /continuous_integration/search/#search-for-pipelines
