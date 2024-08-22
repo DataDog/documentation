@@ -19,7 +19,7 @@ To view information about the Observability Pipelines Workers running for an act
 
 ## Inspect events sent through your pipeline to identify setup issues
 
-You can `tap` into the data that is going through your sources, processors, and destinations to see the raw data flowing through each individual component of your pipeline.
+If you can access your Observability Pipelines Workers locally, use the `tap` command to see the raw data sent through your pipeline's source and processors.
 
 ### Enable the Observability Pipelines Worker API
 
@@ -27,7 +27,7 @@ You can `tap` into the data that is going through your sources, processors, and 
 
 ### Use `top` to find the component ID
 
-If you want to `tap` into a specific source, processor, or destination, use the `top` command to find the ID of the component you want to `tap` into.
+You need the source's or processors' component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
 
 ```
 observability-pipelines-worker top
