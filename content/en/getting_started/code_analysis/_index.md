@@ -316,14 +316,11 @@ Datadog associates code violations or libraries with relevant services by using 
 2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
 3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
 
-If one method succeeds, no further matching attempts are made. Each mapping method is detailed below.
+If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
 
 #### Identifying the code location in the Service Catalog
 
-The schema version `v3` and later of the Service Catalog allows you
-to add the mapping of your code location for your service. The `codeLocations`
-section specifies the locations of the code with the repository that
-contains the code and its associated `paths`.
+The schema version `v3` and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
 The `paths` attribute is a list of [globs][14]
 that should match paths in the repository.
@@ -350,17 +347,14 @@ it associates files `/modules/foo/bar.py` to service `foo`.
 
 #### Detecting service name in paths and repository names
 
-Datadog detects service name in paths and repository names and associates
-the file with the service if it finds a match.
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
 
 For a repository match, if there is a service called `myservice` and
 the repository URL is `https://github.com/myorganization/myservice.git`, then,
 it associates `myservice` to all files in the repository.
 
 If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service `myservice` and the path is
-`/path/to/myservice/foo.py`, it associates the file with `myservice` because
-the name of the service is part of the path. If two services are present
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
 in the path, the service name the closest to the filename is selected.
 
 
@@ -371,8 +365,9 @@ is associated with `myservice`, then the team `myservice` will be associated to 
 detected in this file.
 
 If no services or teams are found, Datadog uses the `CODEOWNERS` [file][15]
-in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. You need
-to correctly define the mapping between your Git provider teams and your Datadog teams for this feature to work.
+in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
 ## Further Reading
 
@@ -392,3 +387,4 @@ to correctly define the mapping between your Git provider teams and your Datadog
 [13]: https://app.datadoghq.com/services 
 [14]: https://en.wikipedia.org/wiki/Glob_(programming)
 [15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[16]: /account_management/teams/
