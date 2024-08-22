@@ -44,7 +44,7 @@ The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send d
 1. For each project, go to **Project Settings > Webhooks** in CircleCI and add a new webhook:
 
    * **Webhook Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
-   * **Receiver URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> where `<API_KEY>` is your [Datadog API key][3].
+   * **Webhook URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> where `<API_KEY>` is your [Datadog API key][3].
    * **Certificate verifications**: Enable this check.
    * **Events**: Select `Workflow Completed` and `Job Completed`.
 
