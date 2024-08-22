@@ -8,6 +8,7 @@ export default defineConfig({
         '**/markdoc-client-renderer.js',
         '**/debugBookmarklet.js',
         '**/compiledScripts/**',
+        '**/scripts/**',
         '**/test/**'
       ]
     }
