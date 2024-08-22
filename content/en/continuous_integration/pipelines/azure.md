@@ -68,6 +68,9 @@ To run the script, you need:
 - An Azure DevOps [API token][13]
 - An Azure DevOps organization name
 
+
+The script supports environment variables `DD_API_KEY` and `DD_SITE`, and flags parameters `--dd-api-key` and `--dd-site`.
+
 For more information, you can run the following command:
 
 ```shell
@@ -100,13 +103,12 @@ Example for enabling the hooks in specified projects:
     projectName1 projectName2
 ```
 
-The script supports environment variables `DD_API_KEY` and `DD_SITE`, and flags parameters `--dd-api-key` and `--dd-site`.
 
 ### Set custom tags 
 
 You can set custom tags for all pipeline and job spans from your Azure projects to improve traceability. For more information, see [Custom Tags and Measures][6].
 
-### Enable job log collection
+### Collect job logs
 
 <div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>. <br><br>  Job log collection is not available for <a href="/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 
