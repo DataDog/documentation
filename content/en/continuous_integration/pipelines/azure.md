@@ -48,6 +48,8 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
+    - **Run stage approval completed**
+    - **Run stage waiting for approval**
 
 4. Click **Next** to continue to the next step and set the following:
 
