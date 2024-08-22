@@ -201,7 +201,7 @@ Enhanced metrics are automatically enabled if you enable traces.
 
 ## Enable tracing
 
-Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` parameter to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTION_TRACE_ENABLED` parameter to the Datadog Forwarder and set the value to `true`.
+Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` tag to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTION_TRACE_ENABLED` environment variable to the Datadog Forwarder and set the value to `true`.
 
 Enhanced metrics are automatically enabled if you enable tracing.
 
