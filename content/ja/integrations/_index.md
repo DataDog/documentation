@@ -10,6 +10,8 @@ aliases:
 - /ja/integrations/shoreline_license/
 - /ja/integrations/shoreline_software_license/
 cascade:
+- params:
+    custom_kind: "integration"
 - _target:
     lang: en
     path: /integrations/akamai_datastream_2
