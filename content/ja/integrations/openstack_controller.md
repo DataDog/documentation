@@ -32,6 +32,7 @@ categories:
 - プロビジョニング
 - オーケストレーション
 - 構成とデプロイ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md
 display_on_public_website: true
@@ -39,9 +40,8 @@ draft: false
 git_integration_title: openstack_controller
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 6.5.0
+integration_version: 6.9.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: openstack_controller
 public_title: OpenStack Controller
@@ -63,10 +63,14 @@ tile:
   - Category::Configuration & Deployment
   - Submitted Data Type::Metrics
   - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/openstack-controller-integration/
   support: README.md#Support
   title: OpenStack Controller
 ---
@@ -110,7 +114,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 2. [Agent を再起動します][5]。
 
-**注**: インテグレーションを v5.0.0 以前から v6.0.0 以降にアップグレードする場合、新しい機能を使用するために `use_legacy_check_version` フラグを有効にする必要があります。また、互換性を維持するためには、構成を変更する必要が生じる場合もあります。詳しくは [openstack controller.d/conf.yaml のサンプル][4]を参照してください。 
+**注**: インテグレーションを v5.0.0 以前から v6.0.0 以降にアップグレードする場合、新しい機能を使用するために `use_legacy_check_version` フラグを有効にする必要があります。また、互換性を維持するためには、構成を変更する必要が生じる場合もあります。詳しくは [openstack controller.d/conf.yaml のサンプル][4]を参照してください。
 
 ##### ログ収集
 
@@ -136,7 +140,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `openstack_controller` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "openstack_controller" >}}

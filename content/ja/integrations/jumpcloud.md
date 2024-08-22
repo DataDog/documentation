@@ -1,28 +1,52 @@
 ---
+app_id: jumpcloud
+app_uuid: 37f8026f-e2ac-4a71-9270-0b03fab814cc
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 613
+    source_type_name: Jumpcloud
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - event management
 - セキュリティ
-- ログの収集
+custom_kind: integration
 dependencies: []
-description: Jumpcloud
-doc_link: https://docs.datadoghq.com/integrations/jumpcloud/
+display_on_public_website: true
 draft: false
 git_integration_title: jumpcloud
-has_logo: true
-integration_id: ''
+integration_id: jumpcloud
 integration_title: Jumpcloud
 integration_version: ''
 is_public: true
-custom_kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: jumpcloud
 public_title: Jumpcloud
-short_description: Jumpcloud からログを収集します。
-team: web-integrations
-version: '1.0'
+short_description: Datadog で Jumpcloud イベントを表示する
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::Security
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Datadog で Jumpcloud イベントを表示する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Jumpcloud
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 JumpCloud は、ユーザー認証とネットワーク管理を中心とした Active Directory と LDAP サービスの統合アプローチを提供するクラウドベースのディレクトリプラットフォームです。
@@ -49,27 +73,27 @@ JumpCloud インテグレーションにより、以下のアクセスが提供�
 
 詳細については、[Datadog で JumpCloud ディレクトリを監視する][1]および [Insights API リファレンス][2]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 詳しくは、インテグレーションタイルを参照してください。JumpCloud 管理ポータルからの API キーが必要です。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### ワークフローの自動化
+### Logs
 
 ログは、単一の API エンドポイントから収集されます。[インサイト API][2] をご確認ください。
 
-### データセキュリティ
+### メトリクス
 
 JumpCloud インテグレーションには、メトリクスは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

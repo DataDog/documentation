@@ -24,6 +24,10 @@ further_reading:
 title: ダッシュボードの概要
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Dashboarding">}}
+  Explore and register for Foundation Enablement sessions. Learn to customize your dashboards using our library of visualizations and the drag-and-drop Dashboard builder. Enable your team's success by sharing data with stakeholders via reports, public URLs, and notebooks.
+{{< /learning-center-callout >}}
+
 ## 概要
 
 ダッシュボードの使用を始める際は、まず定期的に確認したい事項について考えることが重要です。顧客がよく直面する問題や、問題解決のために知るべき項目は何でしょうか。
@@ -149,6 +153,6 @@ Y 軸の範囲、色、凡例を調整またはマーカーやイベントオー
 [14]: /ja/dashboards/sharing/
 [15]: /ja/integrations/slack/
 [16]: /ja/api/v1/dashboards/
-[17]: /ja/service_management/mobile/
+[17]: /ja/mobile/
 [18]: https://apps.apple.com/app/datadog/id1391380318
 [19]: https://play.google.com/store/apps/details?id=com.datadog.app

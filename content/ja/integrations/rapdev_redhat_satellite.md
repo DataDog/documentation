@@ -43,7 +43,7 @@ categories:
 - 構成とデプロイ
 - ログの収集
 - モニター
-custom_custom_kind: integration
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false

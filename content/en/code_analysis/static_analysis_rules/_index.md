@@ -87,6 +87,18 @@ rulesets:
     title: "React specific linting rules"
     description: |
       This plugin exports a `recommended` configuration that enforces React good practices.
+  php-best-practices:
+    title: "Follow best practices for writing PHP code"
+    description: |
+      Rules to enforce PHP best practices, enhancing code style, preventing bugs, and promoting performant, maintainable, and efficient PHP code.
+  php-code-style:
+    title: "Enforce PHP code style"
+    description: |
+      Rules to enforce PHP code style.
+  php-security:
+    title: "Security rules for PHP"
+    description: |
+      Rules focused on finding security issues in your PHP code.
   python-best-practices:
     title: "Follow best practices for writing Python code"
     description: |
