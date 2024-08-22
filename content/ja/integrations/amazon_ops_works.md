@@ -7,7 +7,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS OpsWorks のリソース使用状況を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ops_works/

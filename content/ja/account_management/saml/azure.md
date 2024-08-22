@@ -1,15 +1,16 @@
 ---
-title: Azure Active Directory SAML IdP
 aliases:
-  - /ja/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
-  - link: /account_management/multi_organization/
-    tag: Documentation
-    text: 複数のアカウントを持つチームとオーガニゼーションの構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Datadog アカウントのための SAML の構成
+- link: /account_management/multi_organization/
+  tag: Documentation
+  text: 複数のアカウントを持つチームとオーガニゼーションの構成
+title: Azure Active Directory SAML IdP
 ---
+
 ## セットアップ
 
 [Azure Active Directory シングルサインオン (SSO) とDatadog のインテグレーション][1]のチュートリアルに従って、Azure AD を SAML ID プロバイダー (IdP) として構成します。**注**: Azure AD サブスクリプションが必要です。サブスクリプションをお持ちでない場合は、[無料アカウント][2]に新規登録してください。

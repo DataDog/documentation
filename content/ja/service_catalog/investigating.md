@@ -3,7 +3,7 @@ algolia:
   tags:
   - service catalog
 aliases:
-- /tracing/service_catalog/investigating
+- /ja/tracing/service_catalog/investigating
 further_reading:
 - link: /tracing/service_catalog/service_definition_api/
   tag: ドキュメント

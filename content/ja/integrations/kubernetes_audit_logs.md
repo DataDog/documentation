@@ -5,6 +5,7 @@ categories:
 - ログの収集
 - コンテナ
 - オーケストレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
 description: Kubernetes クラスター内で起きるすべてのことを追跡
@@ -20,7 +21,6 @@ has_logo: true
 integration_id: kubernetes-audit-logs
 integration_title: Kubernetes 監査ログ
 is_public: true
-custom_kind: integration
 name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes 監査ログ
 short_description: Kubernetes クラスターの内部を追跡

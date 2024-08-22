@@ -24,7 +24,7 @@ categories:
 - aws
 - クラウド
 - モニター
-custom_custom_kind: integration
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,6 +45,7 @@ tile:
   - Category::Cloud
   - Category::Metrics
   - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon OpenSearch Serverless は、多様なワークロードを処理するために自動的に調整される検索コンフィギュレーションです。
   media: []
@@ -74,7 +75,7 @@ Amazon OpenSearch Serverlessは、OpenSearch 向けのオンデマンドのサ�
 
 ## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_opensearch_serverless" >}}
 
 

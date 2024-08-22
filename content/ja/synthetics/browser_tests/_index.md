@@ -20,7 +20,7 @@ further_reading:
   tag: Documentation
   text: Synthetic テストモニターについて
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
+  tag: 外部サイト
   text: Terraform による Synthetic ブラウザテストの作成と管理
 title: ブラウザテスト
 ---
@@ -36,17 +36,34 @@ title: ブラウザテスト
 ブラウザテストの構成を定義します。
 
 1. **Starting URL** を入力します。ブラウザテストがシナリオを開始する URL です。
-2. **Advanced Options** を追加します (オプション)。ブラウザテストに特定のオプションを設定します。
 
-   {{< tabs >}}
+ <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-   {{% tab "リクエストオプション" %}}
+2. **名前**を追加します。ブラウザテストの名前です。
+3. **環境と追加タグ**を選択します。ブラウザのテストにアタッチされる `env` と関連するタグを設定します。与えられた `<KEY>` に対する `<VALUE>` をフィルタリングするには、`<KEY>:<VALUE>` という形式を使用します。
+4. **ブラウザとデバイス**を選択します。テストを実行するブラウザ (`Chrome`、`Firefox`、`Edge` など) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small` など) です。
+   - 大型のラップトップデバイスの場合、寸法は 1440 ピクセル × 1100 ピクセルです。
+   - タブレットデバイスの場合、寸法は 768 ピクセル × 1020 ピクセルです。
+   - 小型のモバイルデバイスの場合、寸法は 320 ピクセル × 550 ピクセルです。
+5. **管理ロケーションとプライベートロケーション**を選択します。Datadog が管理する世界中のロケーションを選択するか、[プライベートロケーション][1]を作成して、カスタムロケーションやプライベートネットワーク内からブラウザテストを実行することができます。
 
-   クロスオリジンリソース共有 (CORS) ポリシーがテストをブロックするのを防ぐには、**Disable CORS** を選択します。コンテンツセキュリティポリシー (CSP) がテストをブロックするのを防ぐには、**Disable CSP** を選択します。
+   {{% managed-locations %}}
+
+   また、[Continuous Testing Tunnel][15] を使用すると、ローカルの開発環境や CI/CD パイプライン内でテストをトリガーし、内部環境をテストすることができます。
+
+6. **テスト頻度**を設定します。間隔は 5 分に 1 回から週に 1 回までさまざまです。1 分単位の頻度を希望する場合は、[サポートにお問い合わせ][2]ください。
+
+### 高度なオプション
+
+{{< tabs >}}
+
+   {{% tab "Request Options" %}}
+
+   Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test. To prevent the Content Security Policy (CSP) from blocking your test, select **Disable CSP**.
 
    * **Request Headers**: **Name** および **Value* フィールドでヘッダーを定義して、デフォルトのブラウザヘッダーに追加またはオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]できます。
    * **Cookies**: ブラウザのデフォルトのクッキーに追加するクッキーを定義します。1 行に 1 つのクッキーを入力し、[`Set-Cookie`][2] の構文を使用します。
-   * **HTTP Authentication**: HTTP Basic、Digest または NTLM を使用し、ユーザー名とパスワードで認証を行います。資格情報は、ブラウザテストのすべてのステップで使用されます。
+   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 
    リクエストオプションは、テストの実行ごとに設定され、記録時ではなく、実行時にブラウザテストのすべてのステップに適用されます。次の手順を記録するためにこれらのオプションをアクティブのままにしておく必要がある場合は、記録元のページにオプションを手動で適用し、テストの後続の手順を作成します。
 
@@ -90,21 +107,12 @@ title: ブラウザテスト
 
    {{% /tab %}}
 
+   {{% tab "Time & Language" %}}
+
+  By default, timezone is set to UTC, and language is set to English (en). To define a language, use the corresponding 2 or 3 digit [ISO code][19].
+
+   {{% /tab %}}
    {{< /tabs >}}
-
-3. **名前**を追加します。ブラウザテストの名前です。
-4. **環境と追加タグ**を選択します。ブラウザのテストにアタッチされる `env` と関連するタグを設定します。与えられた `<KEY>` に対する `<VALUE>` をフィルタリングするには、`<KEY>:<VALUE>` という形式を使用します。
-5. **ブラウザとデバイス**を選択します。テストを実行するブラウザ (`Chrome`、`Firefox`、`Edge` など) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small` など) です。
-   - 大型のラップトップデバイスの場合、寸法は 1440 ピクセル × 1100 ピクセルです。
-   - タブレットデバイスの場合、寸法は 768 ピクセル × 1020 ピクセルです。
-   - 小型のモバイルデバイスの場合、寸法は 320 ピクセル × 550 ピクセルです。
-6. **管理ロケーションとプライベートロケーション**を選択します。Datadog が管理する世界中のロケーションを選択するか、[プライベートロケーション][1]を作成して、カスタムロケーションやプライベートネットワーク内からブラウザテストを実行することができます。
-
-   {{% managed-locations %}}
-
-   また、[Continuous Testing Tunnel][15] を使用すると、ローカルの開発環境や CI/CD パイプライン内でテストをトリガーし、内部環境をテストすることができます。
-
-7. **テスト頻度**を設定します。間隔は 5 分に 1 回から週に 1 回までさまざまです。1 分単位の頻度を希望する場合は、[サポートにお問い合わせ][2]ください。
 
 {{% synthetics-variables %}}
 
@@ -145,7 +153,7 @@ title: ブラウザテスト
     | `{{^is_alert}}`            | モニターがアラートを発しない限り表示します。                                     |
     | `{{#is_recovery}}`         | モニターが `alert` から回復したときに表示します。                          |
     | `{{^is_recovery}}`         | モニターが `alert` から回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
     | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
     | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
     | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
@@ -211,3 +219,4 @@ title: ブラウザテスト
 [15]: /ja/continuous_testing/environments/proxy_firewall_vpn
 [16]: /ja/synthetics/guide/browser-tests-passkeys
 [17]: /ja/monitors/notify/variables/?tab=is_alert#conditional-variables
+[19] https://www.loc.gov/standards/iso639-2/php/code_list.php
