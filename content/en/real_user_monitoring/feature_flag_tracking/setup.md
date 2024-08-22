@@ -26,7 +26,6 @@ By enriching your RUM data with feature flag data, you can be confident that you
 
 ## Setup
 
-
 **Note**: The following special characters are not supported for Feature Flag Tracking: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
 
   ```javascript
@@ -807,9 +806,11 @@ Statsig does not currently support this integration. Contact support@statsig.com
 
 ### Next steps
 
-[View][tk] and [analyze][tk] your feature flags.
+[View][1] and [analyze][2] your feature flags.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /real_user_monitoring/feature_flag_tracking/view_your_feature_flags
+[2]: /real_user_monitoring/feature_flag_tracking/analyze_feature_flags
