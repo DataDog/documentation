@@ -11,7 +11,7 @@ categories:
 - 構成とデプロイ
 - 問題追跡
 - 開発ツール
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/split-rum/README.md
 display_on_public_website: true
@@ -77,7 +77,7 @@ const factory = SplitFactory({
       key: "<USER_ID>",
     },
     impressionListener: {
-      logImpression(impressionData) {              
+      logImpression(impressionData) {
           datadogRum
               .addFeatureFlagEvaluation(
                    impressionData.impression.feature,

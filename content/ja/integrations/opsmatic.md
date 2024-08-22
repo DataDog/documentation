@@ -1,7 +1,7 @@
 ---
 categories:
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
 doc_link: https://docs.datadoghq.com/integrations/opsmatic/

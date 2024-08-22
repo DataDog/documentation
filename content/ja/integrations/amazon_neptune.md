@@ -4,7 +4,7 @@ categories:
 - クラウド
 - data stores
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Neptune のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/

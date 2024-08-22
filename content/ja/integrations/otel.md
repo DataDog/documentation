@@ -31,7 +31,7 @@ categories:
 - developer tools
 - ネットワーク
 - OS & システム
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/otel/README.md
 display_on_public_website: true
@@ -137,7 +137,7 @@ CPU とディスクのメトリクスは、macOS では利用できません。
 OpenTelemetry コレクターのログで Datadog エクスポーターが有効化されており、正常に起動したことを確認してください。
 たとえば、上記のコンフィギュレーションの場合は以下のようなログメッセージを確認することができます。
 
-``` 
+```
 Exporter is enabled.    {"component_kind": "exporter", "exporter": "datadog"}
 Exporter is starting... {"component_kind": "exporter", "component_type": "datadog", "component_name": "datadog"}
 Exporter started.   {"component_kind": "exporter", "component_type": "datadog", "component_name": "datadog"}

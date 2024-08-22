@@ -5,7 +5,7 @@ categories:
 - コスト管理
 - ログの収集
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Trusted Advisor のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
@@ -78,7 +78,7 @@ AWS Trusted Advisor インテグレーションには、イベントは含まれ
 
 AWS Trusted Advisor インテグレーションには、サービスのチェック機能は含まれません。
 
-## ダッシュボード  
+## ダッシュボード
 
 AWS Trusted Advisor インテグレーションダッシュボードにデータを反映するには
 

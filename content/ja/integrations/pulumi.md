@@ -28,7 +28,7 @@ categories:
 - developer tools
 - orchestration
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
 display_on_public_website: true

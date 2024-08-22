@@ -3,7 +3,7 @@ categories:
 - コラボレーション
 - ログの収集
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Netlify ログを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/netlify/

@@ -5,7 +5,7 @@ categories:
 - aws
 - cloud
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: インデックスの使用率、正常に完了したリクエストの数などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/awscloudsearch/

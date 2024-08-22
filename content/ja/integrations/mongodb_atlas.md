@@ -32,7 +32,7 @@ author:
 categories:
 - ai/ml
 - モニター
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md
 display_on_public_website: true

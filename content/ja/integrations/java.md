@@ -4,7 +4,7 @@ categories:
 - network
 - oracle
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
 doc_link: https://docs.datadoghq.com/integrations/java/
@@ -54,7 +54,7 @@ JMX チェックには、インスタンスあたり 350 メトリクスの制�
 
 アプリケーションで [JMX][1] メトリクスが公開されている場合、Datadog Agent から軽量の Java プラグインである JMXFetch (Java 1.7 以上とのみ互換) が呼び出され、MBean サーバーに接続してアプリケーションのメトリクスを収集します。また、監視対象のインスタンスのステータスを報告するサービスチェックを送信することも可能です。このプラグインは、Agent 内で稼働する [DogStatsD][2] サーバーを使用して Datadog Agent にメトリクスを送信します。このインテグレーションでは以下の JMX メトリクスも同様に使用されます。
 
-- ActiveMQ 
+- ActiveMQ
 - Cassandra
 - Solr
 - Tomcat

@@ -6,7 +6,7 @@ categories:
 - security
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 許可およびブロックされたリクエストを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_waf/

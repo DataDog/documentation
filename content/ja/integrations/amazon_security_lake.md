@@ -6,7 +6,7 @@ categories:
 - ログの収集
 - ネットワーク
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Security Lake のログを取り込みます。
 doc_link: ''

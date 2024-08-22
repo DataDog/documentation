@@ -23,7 +23,7 @@ author:
   support_email: dev@goldstar.com
 categories:
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md
 display_on_public_website: true

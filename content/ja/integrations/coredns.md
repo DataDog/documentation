@@ -34,7 +34,7 @@ categories:
 - kubernetes
 - ログの収集
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_on_public_website: true
@@ -115,7 +115,7 @@ LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:91
 この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```yaml
-LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
+LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
 ```
 
 **注**:
@@ -161,7 +161,7 @@ metadata:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+          "openmetrics_endpoint": "http://%%host%%:9153/metrics",
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -186,7 +186,7 @@ metadata:
           "init_config": {},
           "instances": [
             {
-              "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+              "openmetrics_endpoint": "http://%%host%%:9153/metrics",
               "tags": ["dns-pod:%%host%%"]
             }
           ]
@@ -207,7 +207,7 @@ spec:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "prometheus_url": "http://%%host%%:9153/metrics", 
+          "prometheus_url": "http://%%host%%:9153/metrics",
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -218,7 +218,7 @@ spec:
 ```yaml
           "instances": [
             {
-              "prometheus_url": "http://%%host%%:9153/metrics", 
+              "prometheus_url": "http://%%host%%:9153/metrics",
               "tags": ["dns-pod:%%host%%"]
             }
           ]

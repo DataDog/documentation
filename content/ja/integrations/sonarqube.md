@@ -34,7 +34,7 @@ categories:
 - 自動化
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_on_public_website: true
@@ -295,7 +295,7 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 **デフォルト値**: `10`
 
 `include`
-: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。
 **デフォルト値**: 空のマップ
 
 `exclude`

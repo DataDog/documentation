@@ -13,7 +13,7 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true

@@ -36,7 +36,7 @@ categories:
 - ネットワーク
 - セキュリティ
 - kubernetes
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/calico/README.md
 display_on_public_website: true
@@ -92,7 +92,7 @@ Calico チェックは、Calico で設定した Kubernetes クラスターのネ
 
 ### インストール
 
-The Calico check is included in the [Datadog Agent][2] package. 
+The Calico check is included in the [Datadog Agent][2] package.
 
 #### Kubernetes クラスターベースの Agent でのインストール
 

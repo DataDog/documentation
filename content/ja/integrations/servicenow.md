@@ -4,7 +4,7 @@ categories:
 - incidents
 - issue tracking
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog アラートからチケットを自動的に生成および更新
 doc_link: https://docs.datadoghq.com/integrations/servicenow/

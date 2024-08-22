@@ -3,7 +3,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure DB for MariaDB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/

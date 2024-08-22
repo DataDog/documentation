@@ -5,7 +5,7 @@ categories:
 - aws
 - cloud
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ses/

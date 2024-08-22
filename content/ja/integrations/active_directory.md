@@ -29,7 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 display_on_public_website: true

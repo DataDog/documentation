@@ -11,7 +11,7 @@ categories:
 - 開発ツール
 - 言語
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/dylibso-webassembly/README.md
 display_on_public_website: true

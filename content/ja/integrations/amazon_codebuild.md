@@ -6,7 +6,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 行われているデプロイを表示し、その所要時間を追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/

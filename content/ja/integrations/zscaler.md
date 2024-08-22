@@ -26,7 +26,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - クラウド
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md
 description: TODO

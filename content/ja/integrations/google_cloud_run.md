@@ -5,7 +5,7 @@ categories:
 - google cloud
 - ログの収集
 - オーケストレーション
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析します。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/

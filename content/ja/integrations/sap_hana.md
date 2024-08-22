@@ -26,7 +26,7 @@ author:
 categories:
 - data stores
 - sap
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_on_public_website: true

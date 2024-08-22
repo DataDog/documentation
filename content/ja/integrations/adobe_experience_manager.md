@@ -3,7 +3,7 @@ aliases:
 - /ja/logs/log_collection/adobe_experience_manager
 categories:
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md
 description: Adobe Experience Manager のログを収集して、エラー、リクエスト応答時間、パフォーマンスが低い Web ページなどを追跡します。

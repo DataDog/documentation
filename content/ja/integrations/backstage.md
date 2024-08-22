@@ -22,7 +22,7 @@ author:
   support_email: oss@roadie.io
 categories:
 - developer tools
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/backstage/README.md
 display_on_public_website: true

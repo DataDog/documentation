@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_on_public_website: true
@@ -98,7 +98,7 @@ Linux: それには、次の sudoers ルールを構成します。
 dd-agent ALL=NOPASSWD: /usr/sbin/conntrack -S
 ```
 
-#### Kubernetes  
+#### Kubernetes
 
 Conntrack メトリクスは、Kubernetes v1.11 未満の場合はデフォルトで、Kubernetes v1.11 以上の場合は `host` ネットワークモードを使用している場合に使用できます。
 

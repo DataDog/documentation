@@ -27,7 +27,7 @@ author:
 categories:
 - cloud
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
 display_on_public_website: true
@@ -79,7 +79,7 @@ tile:
 ### インストール
 
 Citrix Hypervisor チェックは、[Datadog Agent][3] のパッケージに含まれています。
-サーバーに追加でインストールする必要はありません。 
+サーバーに追加でインストールする必要はありません。
 Citrix Hypervisor を監視する推奨方法は、各ハイパーバイザーに 1 つの Datadog Agent をインストールすることです。
 
 #### Datadog ユーザー

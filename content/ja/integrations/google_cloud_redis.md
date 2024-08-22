@@ -4,7 +4,7 @@ categories:
 - data stores
 - google cloud
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud Memorystore for Redis のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_redis/

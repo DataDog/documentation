@@ -22,7 +22,7 @@ author:
   support_email: support@getcortexapp.com
 categories:
 - インシデント
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_on_public_website: true

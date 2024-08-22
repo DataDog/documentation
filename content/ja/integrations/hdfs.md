@@ -1,5 +1,5 @@
 ---
-custom_kind: インテグレーション
+custom_kind: integration
 integration_title: Hdfs
 is_public: true
 short_description: クラスターのディスク使用状況、ボリューム障害、停止した DataNode などを追跡します。
@@ -13,7 +13,7 @@ short_description: クラスターのディスク使用状況、ボリューム�
 
 ## 概要
 
-各 HDFS DataNode のディスク使用率と障害ボリュームを追跡します。この Agent チェックはこれらのメトリクスに加えて、ブロックおよびキャッシュ関連のメトリクスを収集します。 このチェック (hdfs_datanode) とその対になるチェック (hdfs_namenode) を使用し、古いツーインワンチェック (hdfs) は使用しないでください。このチェックは非推奨です。 
+各 HDFS DataNode のディスク使用率と障害ボリュームを追跡します。この Agent チェックはこれらのメトリクスに加えて、ブロックおよびキャッシュ関連のメトリクスを収集します。 このチェック (hdfs_datanode) とその対になるチェック (hdfs_namenode) を使用し、古いツーインワンチェック (hdfs) は使用しないでください。このチェックは非推奨です。
 
 ## セットアップ
 

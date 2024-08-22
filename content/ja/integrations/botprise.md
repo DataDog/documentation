@@ -22,7 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - アラート設定
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
 display_on_public_website: true

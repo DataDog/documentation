@@ -6,7 +6,7 @@ categories:
 - ネットワーク
 - トレーシング
 creates_events: false
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
 display_name: AWS App Mesh

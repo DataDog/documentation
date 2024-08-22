@@ -5,7 +5,7 @@ aliases:
 categories:
 - os & system
 - configuration & deployment
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md
 description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。

@@ -4,7 +4,7 @@ categories:
 - キャッシュ
 - クラウド
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon DynamoDB Accelerator (DAX) のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb_accelerator/

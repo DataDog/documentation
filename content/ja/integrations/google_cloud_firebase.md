@@ -4,7 +4,7 @@ categories:
 - google cloud
 - log collection
 - mobile
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Firebase サービスに関するネットワークとデータストアの使用状況を追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_firebase/

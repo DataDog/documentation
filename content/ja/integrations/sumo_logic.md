@@ -4,7 +4,7 @@ aliases:
 categories:
 - notifications
 - event management
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
 doc_link: https://docs.datadoghq.com/integrations/sumologic/

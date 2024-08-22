@@ -29,7 +29,7 @@ categories:
 - ネットワーク
 - orchestration
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
 display_on_public_website: true
@@ -134,7 +134,7 @@ Operator Lifecycle Manager (OLM) を使用して Operator をデプロイした�
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 {{% /tab %}}
-{{< /tabs >}} 
+{{< /tabs >}}
 
 #### ログ収集
 

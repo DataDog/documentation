@@ -5,7 +5,7 @@ categories:
 - aws
 - cloud
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon EMR のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_emr/

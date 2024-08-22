@@ -23,7 +23,7 @@ author:
   sales_email: integrations-partnerships@postman.com
   support_email: integrations-partnerships@postman.com
 categories: []
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/postman/README.md
 display_on_public_website: true

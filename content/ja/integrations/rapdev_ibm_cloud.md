@@ -39,7 +39,7 @@ categories:
 - incident-teams
 - プロビジョニング
 - オーケストレーション
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -140,7 +140,7 @@ IBM Cloud Integration を使用すると、IBM Cloud アカウントから利用
 [3]: https://cloud.ibm.com/docs/account?topic=account-userapikey&interface=ui#create_user_key
 [4]: https://cloud.ibm.com/docs/key-protect?topic=key-protect-retrieve-instance-ID&interface=ui
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information 
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-ibm-cloud" target="_blank">こちらをクリック</a>してください。

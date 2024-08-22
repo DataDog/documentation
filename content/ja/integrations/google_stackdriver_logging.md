@@ -2,7 +2,7 @@
 categories:
 - cloud
 - google cloud
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud Logging に収集されたログのサイズを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_stackdriver_logging/

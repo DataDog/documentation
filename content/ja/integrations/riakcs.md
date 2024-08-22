@@ -29,7 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
 display_on_public_website: true

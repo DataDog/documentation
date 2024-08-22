@@ -95,7 +95,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - snmp
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -228,9 +228,9 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 ## Agent
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: support@rapdev.io 
+ - メール: support@rapdev.io
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222 
+ - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて

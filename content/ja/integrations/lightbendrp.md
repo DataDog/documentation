@@ -1,7 +1,7 @@
 ---
 categories:
 - cloud
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
 doc_link: https://docs.datadoghq.com/integrations/lightbendrp/

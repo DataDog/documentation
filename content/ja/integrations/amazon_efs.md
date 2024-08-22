@@ -7,7 +7,7 @@ categories:
 - data stores
 - log collection
 - os & system
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Elastic Filesystem のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_efs/

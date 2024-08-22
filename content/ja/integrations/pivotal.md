@@ -2,7 +2,7 @@
 categories:
 - Collaboration
 - issue tracking
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog イベントストリームでストーリーを参照してコメントを入力。
 doc_link: https://docs.datadoghq.com/integrations/pivotal/

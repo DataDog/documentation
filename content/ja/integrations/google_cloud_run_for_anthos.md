@@ -4,7 +4,7 @@ categories:
 - orchestration
 - google cloud
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Cloud Run for Anthos クラスターからメトリクスおよびログを収集し、Datadog で分析
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/

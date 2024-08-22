@@ -36,7 +36,7 @@ categories:
 - kubernetes
 - ai/ml
 - オーケストレーション
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
 display_on_public_website: true
@@ -271,7 +271,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    Default login credential is admin/admin
 
    Also, you can start to apply alamedascaler CR for the target you would like to monitor.
-   Review administration guide for further details. 
+   Review administration guide for further details.
    ========================================
    ========================================
    You can now access Federatorai REST API through https://<YOUR IP>:31011
@@ -302,7 +302,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
     - Federator.ai GUI を起動 -> Configuration -> Clusters -> "Add Cluster" をクリックします
     - API キーとアプリケーションキーを入力します
 
-    ![クラスターウィンドウを追加する][10] 
+    ![クラスターウィンドウを追加する][10]
 
 3. 詳細については、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]および[ユーザーガイド][12]を参照してください。
 

@@ -7,7 +7,7 @@ categories:
 - os & system
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ec2/
@@ -140,7 +140,7 @@ Datadog US サイトの場合は、`runCommand` をご使用の `<AWS_REGION>` (
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-**注**: 
+**注**:
    - Datadog - EC2 インテグレーションでは、デフォルトでは `aws.ec2.instance_age` メトリクスは収集されません。このメトリクスの収集を有効にするには、[Datadog サポート][21]までお問い合わせください。
    - Amazon EC2 インテグレーションでメトリクスの収集を無効にしても、`aws.ec2.host_ok` はデフォルトで収集され、インフラストラクチャーのリストに想定外のホストが表示される可能性があります。不要なホストを除外したい場合、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスで、そのタグを指定します。
 

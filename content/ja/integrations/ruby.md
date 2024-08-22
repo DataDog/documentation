@@ -3,7 +3,7 @@ categories:
 - languages
 - log collection
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/ruby/

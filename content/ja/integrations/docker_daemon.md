@@ -30,7 +30,7 @@ categories:
 - containers
 - ログの収集
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_on_public_website: true

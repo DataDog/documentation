@@ -25,7 +25,7 @@ author:
 categories:
 - 構成 & デプロイ
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
 display_on_public_website: true

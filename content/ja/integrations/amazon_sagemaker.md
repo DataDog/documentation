@@ -5,7 +5,7 @@ categories:
 - クラウド
 - ログの収集
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/

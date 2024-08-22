@@ -2,7 +2,7 @@
 categories:
 - コラボレーション
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/

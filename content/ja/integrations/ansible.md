@@ -5,7 +5,7 @@ categories:
 - log collection
 - orchestration
 - provisioning
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
 doc_link: https://docs.datadoghq.com/integrations/ansible/

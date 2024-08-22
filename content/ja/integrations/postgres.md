@@ -44,7 +44,7 @@ categories:
 - log collection
 - notifications
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_on_public_website: true

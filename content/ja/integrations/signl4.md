@@ -26,7 +26,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md
 display_on_public_website: true
@@ -205,10 +205,10 @@ Datadog インシデントについては、それぞれのアラートを承認
 
 以下の構成が必要です。
 
-- Datadog URL: Datadog インスタンスの URL。例えば、https://app.datadoghq.com/ や https://app.datadoghq.eu/ など。 
-- Datadog API Key: Datadog の API キー。API キーは、自分のアカウントの Datadog で、Organization Settings -> API Keys で検索または作成することができます。 
-- Datadog Application Key: Datadog のアプリケーションキー。アプリケーションキーは、自分のアカウントの Datadog で、Organization Settings -> Application Keys で検索または作成することができます。 
-- Acknowledgement as Stable: Acknowledgements は、インシデントのステータスを Stable に設定します。 
+- Datadog URL: Datadog インスタンスの URL。例えば、https://app.datadoghq.com/ や https://app.datadoghq.eu/ など。
+- Datadog API Key: Datadog の API キー。API キーは、自分のアカウントの Datadog で、Organization Settings -> API Keys で検索または作成することができます。
+- Datadog Application Key: Datadog のアプリケーションキー。アプリケーションキーは、自分のアカウントの Datadog で、Organization Settings -> Application Keys で検索または作成することができます。
+- Acknowledgement as Stable: Acknowledgements は、インシデントのステータスを Stable に設定します。
 
 ## 収集データ
 

@@ -5,7 +5,7 @@ categories:
 - AWS
 - クラウド
 - トレーシング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS サービス間で交わされるリクエストをトレース
 doc_link: https://docs.datadoghq.com/integrations/amazon_xray/

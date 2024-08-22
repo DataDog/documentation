@@ -5,7 +5,7 @@ categories:
 - languages
 - log collection
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/nodejs/

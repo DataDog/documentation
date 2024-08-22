@@ -1,7 +1,7 @@
 ---
 categories:
 - 言語
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/dotnet/
