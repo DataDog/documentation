@@ -3087,6 +3087,18 @@ menu:
           - GetTest
         unstable: []
         order: 28
+    - name: Fetch uptime for multiple tests
+      url: '#fetch-uptime-for-multiple-tests'
+      identifier: synthetics-fetch-uptime-for-multiple-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - FetchUptimes
+        unstable: []
+        order: 30
     - name: Trigger tests from CI/CD pipelines
       url: '#trigger-tests-from-ci/cd-pipelines'
       identifier: synthetics-trigger-tests-from-ci/cd-pipelines
