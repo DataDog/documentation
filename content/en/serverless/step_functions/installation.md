@@ -195,7 +195,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 ## Enable enhanced metrics
 
-Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. To enable this, add a `DD_ENHANCED_METRICS` parameter to each of your Step Functions and set the value to `true`.
+Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. To enable this, add a `DD_ENHANCED_METRICS` tag to each of your Step Functions and set the value to `true`.
 
 Enhanced metrics are automatically enabled if you enable traces.
 
