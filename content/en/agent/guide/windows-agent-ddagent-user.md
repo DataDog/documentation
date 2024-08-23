@@ -44,7 +44,7 @@ Requirements:
 
 **Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitor Users and Event Log Readers groups.
 
-**Note**: The user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
+**Note**: For Agent version < `7.40.0`, the user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
 
 ### Installation with group policy
 
