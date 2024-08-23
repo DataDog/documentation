@@ -40982,8 +40982,10 @@ tags:
     for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
-    Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
-    page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
+    Cloud Cost Management accounts for AWS and Azure. You can query your cost data
+    by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
+    and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
+    documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
