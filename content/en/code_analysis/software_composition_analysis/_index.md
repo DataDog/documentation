@@ -102,3 +102,4 @@ The content of the violation is shown in tabs:
 [2]: https://app.datadoghq.com/ci/setup/code-analysis
 [3]: /code_analysis/software_composition_analysis/setup
 [4]: https://app.datadoghq.com/ci/code-analysis
+[5]: /getting_started/code_analysis/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
