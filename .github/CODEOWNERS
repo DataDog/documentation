@@ -150,3 +150,6 @@ content/en/continuous_delivery/                   @Datadog/ci-app-backend @Datad
 content/en/dora_metrics/                          @Datadog/ci-app-backend @Datadog/documentation
 content/en/code_analysis/                         @Datadog/static-analysis @Datadog/documentation
 content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation
+
+# DDSQL Editor References
+content/en/dashboards/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
