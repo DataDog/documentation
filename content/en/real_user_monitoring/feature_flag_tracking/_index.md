@@ -17,14 +17,13 @@ further_reading:
 
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance and roll back the feature if needed.
 
-By enriching your RUM data with feature flag data, you can: 
+By enriching your RUM data with feature flag data, you can:
+
 - Be confident that your feature successfully launches without unintentionally causing a bug or performance regression
 - Correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster
 - Streamline data collection and analysis and focus on troubleshooting
 
-Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
-
-## What's supported
+## Supported frameworks
 
 Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][2]. You need the Browser RUM SDK version >= 4.25.0.
 
@@ -38,12 +37,11 @@ We support integrations with:
 
 ## Start using feature flags
 
-To get started with feature flags, set up feature flag tracking for the browser SDK or mobile SDK, then collect data using one of Datadog's integration partners or a custom feature flag management solution.
+To get started with feature flags, set up feature flag tracking for the browser SDK or mobile SDK, then start collecting data using one of Datadog's integration partners or a custom feature flag management solution.
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/feature_flag_tracking/setup">}}<u>Setup</u>: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/feature_flag_tracking/view_your_feature_flags">}}<u>View your feature flags</u>: View your feature flag's health and usage.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/feature_flag_tracking/analyze_feature_flags">}}<u>Analyze your feature flags</u>: Get details about the health and performance of your feature flag.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/feature_flag_tracking/using_feature_flags">}}<u>Use your feature flags</u>: Learn how to view and analyze your feature flag's health and usage.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

@@ -18,13 +18,108 @@ further_reading:
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-## Overview
-
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
 
 By enriching your RUM data with feature flag data, you can be confident that your feature successfully launches without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
-## Setup
+## Set up RUM monitoring
+
+Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, and React Native SDK.
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+To enable feature flag data collection for the Browser SDK:
+
+1. Set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
+
+2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+
+   <details open>
+     <summary>npm</summary>
+
+   ```javascript
+     import { datadogRum } from '@datadog/browser-rum';
+
+     // Initialize Datadog Browser SDK
+     datadogRum.init({
+       ...
+       enableExperimentalFeatures: ["feature_flags"],
+       ...
+   });
+   ```
+
+   </details>
+
+   <details>
+     <summary>CDN async</summary>
+
+   ```javascript
+   window.DD_RUM.onReady(function() {
+       window.DD_RUM.init({
+         ...
+         enableExperimentalFeatures: ["feature_flags"],
+         ...
+       })
+   })
+   ```
+   </details>
+
+   <details>
+     <summary>CDN sync</summary>
+
+   ```javascript
+   window.DD_RUM &&
+       window.DD_RUM.init({
+         ...
+         enableExperimentalFeatures: ["feature_flags"],
+         ...
+       })
+   ```
+   </details>
+   <br/>
+
+[1]: /real_user_monitoring/browser#setup
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+To enable feature flag data collection for your iOS application:
+
+1. Set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+{{% /tab %}}
+{{% tab "Android" %}}
+
+To enable feature flag data collection for your Android application:
+
+1. Set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+To enable feature flag data collection for your Flutter application:
+
+1. Set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+To enable feature flag data collection for your React Native application:
+
+1. Set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Set up a feature flag integration
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners listed below.
+
+<div class="alert alert-warning">
 
 **Note**: The following special characters are not supported for Feature Flag Tracking: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
 
@@ -32,92 +127,9 @@ By enriching your RUM data with feature flag data, you can be confident that you
   datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
   ```
 
-{{< tabs >}}
-{{% tab "Browser" %}}
+</div>
 
-Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
-
-To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-<details open>
-  <summary>npm</summary>
-
-```javascript
-  import { datadogRum } from '@datadog/browser-rum';
-
-  // Initialize Datadog Browser SDK
-  datadogRum.init({
-    ...
-    enableExperimentalFeatures: ["feature_flags"],
-    ...
-});
-```
-
-</details>
-
-<details>
-  <summary>CDN async</summary>
-
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-      ...
-      enableExperimentalFeatures: ["feature_flags"],
-      ...
-    })
-})
-```
-</details>
-
-<details>
-  <summary>CDN sync</summary>
-
-```javascript
-window.DD_RUM &&
-    window.DD_RUM.init({
-      ...
-      enableExperimentalFeatures: ["feature_flags"],
-      ...
-    })
-```
-</details>
-<br/>
-
-[1]: /real_user_monitoring/browser#setup
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
-{{% /tab %}}
-{{< /tabs >}}
-
-## Integrations
-
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
-
 
 </br>
 
@@ -806,11 +818,10 @@ Statsig does not currently support this integration. Contact support@statsig.com
 
 ### Next steps
 
-[View][1] and [analyze][2] your feature flags.
+[View and analyze][1] your feature flags.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/feature_flag_tracking/view_your_feature_flags
-[2]: /real_user_monitoring/feature_flag_tracking/analyze_feature_flags
+[1]: /real_user_monitoring/feature_flag_tracking/using_feature_flags
