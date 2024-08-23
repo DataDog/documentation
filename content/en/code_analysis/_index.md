@@ -38,13 +38,13 @@ Code Analysis is in public beta.
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-Code Analysis displays results for violations found by [Static Analysis][1] and [Software Composition Analysis (SCA)][2] scans in your repositories. 
+Code Analysis scans your repositories to find security vulnerabilities and code quality issues. It encompasses two capabilities: [Static Analysis][1] for your first-party code, and [Software Composition Analysis (SCA)][2] for open-source dependencies in your codebase. 
 
 Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
 
 Software Composition Analysis 
-: Scans the open source libraries that are imported into your repositories for known vulnerabilities. 
+: Scans the open source libraries that are imported into your repositories for known security vulnerabilities, license risks, and end-of-life libraries.
 
 
 ## Set up Code Analysis on your repository
@@ -113,11 +113,11 @@ With Static Analysis, you can receive automated feedback on poor coding practice
 
 ## Search and manage repositories
 
-After you have configured Code Analysis, you can see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories on the [**Code Analysis** page][9]. The summarized results are always for the latest scanned commit on the default branch of each repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
+After you have configured Code Analysis, you can see a summary of the results from the Static Analysis and SCA scans for each of your repositories on the [**Code Analysis** page][9]. By default, the summarized results are shown for the latest scanned commit on the default branch of the repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
 
 {{< img src="code_analysis/repositories.png" alt="A list of repositories with code and library scan results on the Code Analysis page" style="width:100%;">}}
 
-Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. 
+Select a repository from the list to search through and manage violations for that specific repository. By default, results are shown for the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. Results can also be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][12].
 
 Regardless of the selected branch or commit, all results are organized into the following views:
 
@@ -143,11 +143,11 @@ Identify and address poor coding practices detected by Static Analysis in the **
 Identify and address vulnerable open source libraries detected by SCA in the **Library Vulnerabilities** view.
 
 {{% /tab %}}
-{{% tab "Library List" %}}
+{{% tab "Library Catalog" %}}
 
 {{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
-Manage the full list of libraries detected by SCA that have imported into your codebase in the **Library List** view.
+Manage the full list of libraries detected by SCA that have imported into your codebase in the **Library Catalog** view.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -167,3 +167,4 @@ Manage the full list of libraries detected by SCA that have imported into your c
 [9]: https://app.datadoghq.com/ci/code-analysis
 [10]: /integrations/guide/source-code-integration/?tab=codeanalysis
 [11]: /code_analysis/ide_plugins/
+[12]: /getting_started/code_analysis/?tab=incipipelines#linking-services-to-code-violations-and-libraries
