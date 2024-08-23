@@ -67,7 +67,7 @@ SCA scans libraries contained in your lockfiles. The following lockfiles are sup
 ## Integrate Software Composition Analysis into your software development lifecycle
 
 ### CI providers
-{{< whatsnext desc="With Software Composition Analysis, you can identify vulnerable open source libraries that have been imported into your codebase. See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="You can run SCA on any CI platform provider of your choice. See provider-specific documentation to set up SCA in your CI pipelines:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -76,12 +76,12 @@ SCA scans libraries contained in your lockfiles. The following lockfiles are sup
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library List** results from Software Composition Analysis. 
+After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from Software Composition Analysis. 
 
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
-* The **Library List** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
+* The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
-To filter your results, use the facets to the left of the list, or search.
+To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets (learn how results are linked to Datadog services and teams [here][12]).
 
 Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
 

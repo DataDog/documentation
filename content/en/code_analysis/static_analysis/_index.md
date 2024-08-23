@@ -52,7 +52,7 @@ To get started, you can set up Static Analysis on the [**Code Analysis** page][1
 ## Integrate Static Analysis into your software development lifecycle
 
 ### CI providers
-{{< whatsnext desc="You can run Static Analysis on any CI platform provider ofy our choice. See provider-specific documentation to set up Static Analysis in your CI pipelines:">}}
+{{< whatsnext desc="You can run Static Analysis on any CI platform provider of your choice. See provider-specific documentation to set up Static Analysis in your CI pipelines:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Other CI Providers{{< /nextlink >}}
@@ -77,7 +77,7 @@ After you configure your CI pipelines to run the Datadog Static Analyzer, violat
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
-To filter your results, use the facets to the left of the list, or search. 
+To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets (learn how results are linked to Datadog services and teams [here][12]).
 
 Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, results are shown for the latest commit on the default branch of the repository you are viewing).
 
