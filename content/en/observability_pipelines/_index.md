@@ -41,7 +41,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 ## Overview
 
-{{< img src="observability_pipelines/op_marketecture_04182024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/op_marketecture_08232024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) so that you can easily build and deploy pipelines.
 
