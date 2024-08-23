@@ -60,7 +60,7 @@ It means that you are either:
 
 ### Results are not being surfaced in the Datadog UI
 
-If you are using GitHub, check the GitHub App and have the required permissions. 
+If you are using GitHub, ensure that you are using a GitHub App and have the required permissions. 
 
 If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master`, `main`, `prod`, `production` or `develop`). After you commit on your default branch, non-default branches are analyzed.
