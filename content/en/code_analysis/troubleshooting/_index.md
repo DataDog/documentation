@@ -44,7 +44,11 @@ For performance issues, include the following information:
 
 If you are experiencing issues unrelated to performance or if the Datadog Static Analyzer fails to exit, run the Datadog Static Analyzer with the `--debug true --performance-statistics` flag.
 
-## Issues with SARIF uploads
+### Getting a 403 error when running the analyzer
+
+Ensure that the following variables are correctly specified: `DD_APP_KEY`, `DD_API_KEY`, and `DD_SITE` when running the analyzer and `datadog-ci`.
+
+### Issues with SARIF uploads
 
 <div class="alert alert-info">
   SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
