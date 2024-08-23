@@ -10,7 +10,7 @@ further_reading:
 ---
 
 ### Requirements
-* The full Step Function execution length must be less than 90 minutes for full traces.
+* The full Step Function execution length must be less than 6 hours for full traces.
 * Linked Lambda traces are supported for Node.js (layer v112+) and Python (layer v95+) runtimes.
 
 ### How it works
@@ -40,7 +40,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
     serverless plugin install --name serverless-plugin-datadog
     ```
 
-2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][5].
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You may need to [update your Forwarder][5].
 
    Take note of your Forwarder's ARN.
 
@@ -79,7 +79,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
    ```shell
    npm install -g @datadog/datadog-ci
    ```
-2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][3].
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You may need to [update your Forwarder][3].
 
    Take note of your Forwarder's ARN.
 3. Instrument your Step Function.
@@ -113,7 +113,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
    {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
-2. Ensure you have deployed the [Datadog Lambda Forwarder][1], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][2]. When deploying the Forwarder on v3.121.0+, you can also set the `DdStepFunctionsTraceEnabled` parameter in CloudFormation to enable tracing for all your Step Functions at the Forwarder-level.
+2. Ensure you have deployed the [Datadog Lambda Forwarder][1], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You may need to [update your Forwarder][2]. When deploying the Forwarder on v3.121.0+, you can also set the `DdStepFunctionsTraceEnabled` parameter in CloudFormation to enable tracing for all your Step Functions at the Forwarder-level.
 
    Take note of your Forwarder's ARN.
 
@@ -195,13 +195,13 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 ## Enable enhanced metrics
 
-Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. To enable this, add a `DD_ENHANCED_METRICS` parameter to each of your Step Functions and set the value to `true`.
+Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. To enable this, add a `DD_ENHANCED_METRICS` tag to each of your Step Functions and set the value to `true`.
 
 Enhanced metrics are automatically enabled if you enable traces.
 
 ## Enable tracing
 
-Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` parameter to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTION_TRACE_ENABLED` parameter to the Datadog Forwarder and set the value to `true`.
+Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` tag to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTION_TRACE_ENABLED` environment variable to the Datadog Forwarder and set the value to `true`.
 
 Enhanced metrics are automatically enabled if you enable tracing.
 

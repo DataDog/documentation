@@ -59,7 +59,7 @@ When you enable or modify the IP allowlist, the system enforces constraints to m
 To find the [IP allowlist UI][6]:
 
 1. Navigate to **Organization Settings** from your account menu.
-1. Under **Access**, select **IP Allowlist**.
+1. Under **Security**, select **IP Allowlist**.
 
 The IP allowlist table lists the CIDR ranges contained in the IP allowlist.
 
