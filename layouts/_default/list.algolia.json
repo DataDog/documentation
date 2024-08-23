@@ -44,6 +44,7 @@
                 "category" $category
                 "subcategory" $subcategory
                 "rank" $rank
+                "order" -1
             ) }}
 
             {{ if $tags }}
