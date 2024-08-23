@@ -117,7 +117,7 @@ After you have configured Code Analysis, you can see a summary of the results fr
 
 {{< img src="code_analysis/repositories.png" alt="A list of repositories with code and library scan results on the Code Analysis page" style="width:100%;">}}
 
-Select a repository from the list to search through and manage violations for that specific repository. By default, the results are shown for the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. Results can also be filtered by service or team facets (learn how results are linked to Datadog services and teams [here][12]).
+Select a repository from the list to search through and manage violations for that specific repository. By default, results are shown for the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. Results can also be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][12].
 
 Regardless of the selected branch or commit, all results are organized into the following views:
 
