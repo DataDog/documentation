@@ -253,11 +253,14 @@ Resources:
 {{< /tabs >}}
 
 
-
 ## Scrubbing and filtering
 
 You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][46].
 You can also exclude or send only those logs that match a specific pattern by using the [filtering option][47].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support
