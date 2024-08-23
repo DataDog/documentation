@@ -1,9 +1,7 @@
 on:
-  push:
-    branches: [heston/DOCS-8410-workflow]
-  # schedule:
-  #  # At 08:00 on every day-of-week from Monday through Friday.
-  #  - cron: '0 8 * * 1-5'
+  schedule:
+    # At 08:00 on every day-of-week from Monday through Friday.
+    - cron: '0 8 * * 1-5'
 
 permissions: {}
 jobs:
@@ -12,7 +10,7 @@ jobs:
       contents: write # for git push
       pull-requests: write # to create pull request      
     runs-on: ubuntu-latest
-    name: Find latest synthetic-worker version
+    name: Find latest synthetics-worker version
     steps:
       - uses: actions/checkout@v4
 
@@ -33,8 +31,29 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
-          python local/bin/py/synthetics_worker_version.py
+          python local/bin/py/version_getter.py
       
-      - name: echo worker version
-        run: echo ${{ steps.set-worker-version.outputs.worker_version }}
+      - uses: actions/checkout@v4
+      - name: Write version
+        run: |-
+          git config user.name documentation-ci
+          git config user.email documentation-ci@datadoghq.com
+          git add ./data/synthetics-worker-versions.json
+          git commit -m "(Automated) Bump synthetics-worker version"
+          git push -f origin HEAD:refs/heads/synthetics-worker/versions
+      - uses: actions/github-script@v7
+        name: Propose change with latest versions
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "(Automated) Bump synthetics-worker version",
+              body: "### Merge instructions\n- [x] Please merge after reviewing",
+              head: "synthetics-worker/versions",
+              base: "master",
+              maintainer_can_modify: true
+            })
   
