@@ -66,8 +66,5 @@ if __name__ == "__main__":
     final_versions = get_versions(keys)
     print(final_versions)
     
-    # TODO:
     with open('data/synthetics_worker_versions.json', 'w') as f:
         f.write(json.dumps(final_versions, indent=4, sort_keys=True))
-
-    # Check for changes and open a PR if there are any
