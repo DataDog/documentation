@@ -167,4 +167,4 @@ Manage the full list of libraries detected by SCA that have imported into your c
 [9]: https://app.datadoghq.com/ci/code-analysis
 [10]: /integrations/guide/source-code-integration/?tab=codeanalysis
 [11]: /code_analysis/ide_plugins/
-[12]: https://docs.datadoghq.com/getting_started/code_analysis/?tab=incipipelines#linking-services-to-code-violations-and-libraries
+[12]: /getting_started/code_analysis/?tab=incipipelines#linking-services-to-code-violations-and-libraries
