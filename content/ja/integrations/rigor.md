@@ -22,6 +22,7 @@ author:
   support_email: support@rigor.com
 categories:
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: rigor
 integration_title: Rigor
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rigor
 public_title: Rigor
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Windows
   - Category::Testing
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
   media: []
@@ -64,11 +65,11 @@ Rigor により、開発ライフサイクル全体で総合的な監視と最�
 
 Rigor を使用すると、総合的なフロントエンドパフォーマンスメトリクスを収集して、そのメトリクスを Datadog にプッシュできます。アラートをイベントとして Datadog にプッシュすることもできます。
 
-## 計画と使用
+## セットアップ
 
 Rigor と Datadog とのインテグレーションには、メトリクスインテグレーションとイベントインテグレーションの 2 種類があります。
 
-### ブラウザトラブルシューティング
+### 構成
 #### メトリクスの収集
 
 管理者として、画面右上の "Admin Tools" メニューをクリックし、"Integrations" を選択します。
@@ -111,13 +112,13 @@ Real Browser チェックで [User Timings API][4] からタイミングを報�
 
 ![add-webhookto-check][9]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "rigor" >}}
 
 
-### ヘルプ
+### イベント
 
 Datadog イベントを介してアラートを発生するようチェックが構成されている場合は、次の 2 種類のイベントタイプが Datadog にプッシュされます。
 
@@ -126,11 +127,11 @@ Datadog イベントを介してアラートを発生するようチェックが
 
 ![events-example][11]
 
-### ヘルプ
+### サービスチェック
 
 Rigor インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Rigor サポート][12]までお問合せください。
 

@@ -21,7 +21,7 @@ title: Python サーバーレスアプリケーションのインスツルメン
 
 <div class="alert alert-warning">Python Lambda 関数が <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 以下</a>で書かれている場合、または以前に Datadog Forwarder を使って Lambda 関数をセットアップした場合は、<a href="/serverless/guide/datadog_forwarder_python">Datadog Forwarder を使ったインスツルメンテーション</a>をご覧ください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
 
-<div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/configuration/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
 ## インストール
 
@@ -258,7 +258,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.1.0"
+  version = "1.3.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -269,7 +269,7 @@ module "lambda-datadog" {
   }
 
   datadog_extension_layer_version = 58
-  datadog_python_layer_version = 95
+  datadog_python_layer_version = 96
 
   # aws_lambda_function arguments
 }
@@ -295,7 +295,7 @@ module "lambda-datadog" {
 
 ```
   datadog_extension_layer_version = 58
-  datadog_python_layer_version = 95
+  datadog_python_layer_version = 96
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -463,4 +463,4 @@ def get_message():
 [3]: /ja/serverless/configuration/
 [4]: /ja/serverless/custom_metrics?tab=python
 [5]: /ja/tracing/custom_instrumentation/python/
-[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework
+[6]: /ja/security/application_security/serverless/

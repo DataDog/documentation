@@ -2135,4 +2135,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [26]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [27]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [28]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
-[29]: /real_user_monitoring/session_replay/browser/privacy_options/#mask-action-names
+[29]: /data_security/real_user_monitoring/#mask-action-names

@@ -55,12 +55,12 @@ Configure network traffic paths to allow the Agent to automatically discover and
     For full configuration details, reference the [example config][3], or use the following:
 
     ```yaml
-      network_path:
-        connections_monitoring:
-          ## @param enabled - bool - required - default:false
-          ## Enable network path collection
-          #
-          enabled: true
+    network_path:
+      connections_monitoring:
+        ## @param enabled - bool - required - default:false
+        ## Enable network path collection
+        #
+        enabled: true
       collector:
         ## @param workers - int - optional - default:4
         ## Number of workers that can collect paths in parallel
