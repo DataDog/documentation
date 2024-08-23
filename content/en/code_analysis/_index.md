@@ -38,7 +38,7 @@ Code Analysis is in public beta.
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-Code Analysis scans your repositories to find security vulnerabilities and code quality issues. It encompasses two capabilities: [Static Analysis][1] for your first-party code, and [Software Composition Analysis (SCA)][2] for open source dependencies in your codebase. 
+Code Analysis scans your repositories to find security vulnerabilities and code quality issues. It encompasses two capabilities: [Static Analysis][1] for your first-party code, and [Software Composition Analysis (SCA)][2] for open-source dependencies in your codebase. 
 
 Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
