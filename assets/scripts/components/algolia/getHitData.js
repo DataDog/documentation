@@ -10,7 +10,8 @@ export function getHitData(hit, searchQuery = '') {
     const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
     const highlightTitle = (hit._highlightResult.title.value || title);
-    const highlightContent = (hit._highlightResult.content.value || '');
+    const highlightContent = cleanContent((hit._highlightResult.content.value || ''));
+    
 
     return {
         relpermalink: cleanRelPermalink,
@@ -20,6 +21,14 @@ export function getHitData(hit, searchQuery = '') {
         section_header: hit.section_header || null,
         highlighted_content: handleHighlightingSearchResultContent(highlightContent, regexQry)
     };
+}
+
+const cleanContent = (content) => {
+    // remove alert where the product is not available for the user's datadog site
+    // this is surfacing more now that we are using full page results and this alert is at the top of the file
+    // this is temporary
+    const regex = /.*\sis not supported for your selected Datadog site \(\)/gm;
+    return content.replace(regex, '')
 }
 
 /* 
