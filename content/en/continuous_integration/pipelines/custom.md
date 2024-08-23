@@ -53,7 +53,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    | Commit Author | The commit author email that triggered the pipeline. | `contributor@github.com` |
    | Commit SHA | The commit hash that triggered the pipeline. | `cf852e17dea14008ac83036430843a1c` |
    | Status | The final status of the pipeline. Allowed enum values: `success`, `error`, `canceled`, `skipped`, `blocked`, or `running`. | `success` |
-   | Partial Retry | Whether or not the pipeline was a partial retry of a previous attempt. A partial retry is one which only runs a subset of the original jobs. | `false` |
+   | Partial Retry | Whether or not the pipeline was a partial retry of a previous attempt. This field expects a boolean value (`true` or `false`). A partial retry is one which only runs a subset of the original jobs. | `false` |
    | Start | Time when the pipeline run started (it should not include any [queue time][12]). The time format must be RFC3339. | `2024-08-22T11:36:29-07:00` |
    | End | Time when the pipeline run finished. The time format must be RFC3339. | `2024-08-22T14:36:00-07:00` |
    | URL | The URL to look at the pipeline in the CI provider UI. | `http://your-ci-provider.com/pipeline/{pipeline-id}` |
