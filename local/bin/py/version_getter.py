@@ -5,24 +5,27 @@ import requests
 import defusedxml.ElementTree as ET
 import semver
 
-class InvalidTokenError(Exception):
-    '''
-    Represents an error when no token is provided
-    '''
+
+def get_highest_version(versions):
+    highest_version = '0.0.0'
+    for version in versions:
+        if semver.compare(version, highest_version) > 0:
+            highest_version = version
+    return highest_version
 
 def get_data():
-    url = 'https://dd-public-oss-mirror.s3.amazonaws.com/'
+    url = "https://dd-public-oss-mirror.s3.amazonaws.com/"
     response = requests.get(url)
     if response.status_code != 200:
         print(response.text)
-        raise Exception('Failed to retrieve data from the public oss mirror')
+        raise Exception("Failed to retrieve data from the public oss mirror")
     return response.text
 
 def get_keys(data):
     keys = []
     xml_data = ET.iterparse(StringIO(data))
     for _, element in xml_data:
-        _, _, element.tag = element.tag.rpartition('}') # strip namespace
+        _, _, element.tag = element.tag.rpartition("}") # strip namespace
     root = xml_data.root
     for elem in root.iter():
         if elem.tag == 'Key':
@@ -31,14 +34,21 @@ def get_keys(data):
                     keys.append(elem.text)
     return keys
 
-def get_tags(keys):
+def get_versions(keys):
     '''Get the highest version for each product tag'''
     versions = {}
+    version_array = []
     for product in PRODUCTS:
-        highest_version = '0.0.0'
         for key in keys:
-            version = key.split('/')[-1]
-            print(semver.Version.parse(version))
+            pattern = r"\d{1,4}.\d{1,4}.\d{1,4}"
+            try:
+                version = re.search(pattern, key).group()
+                version_array.append(version)
+            except:
+                continue
+        highest_version = get_highest_version(version_array)
+        versions[product] = highest_version
+    return versions    
 
 def return_latest_version(tags):
     return
@@ -49,23 +59,15 @@ def return_latest_version(tags):
 
 '''
 Gets the latest version tag from the public oss mirror
+Currently only supports synthetics-windows-pl
 '''
 if __name__ == "__main__":
-    PRODUCTS = ['synthetics-windows-pl']
+    PRODUCTS = ["synthetics-windows-pl"]
     data = get_data()
     keys = get_keys(data)
-    get_tags(keys)
+    final_versions = get_versions(keys)
+    print(final_versions)
     
-    
-    
-    
-    
-    # print(root)
-    
-    # tags = get_tags(data)
-    # latest_version = return_latest_version(tags)
-    # print(f'Latest version: {latest_version}')
-    
-    # Write the latest version to the output file
-    #with open(github_output, 'w', encoding='utf-8') as f:
-    #    f.write(f'worker_version={latest_version}\n')
+    # TODO:
+    # Write the latest version to a partial file
+    # Check for changes and open a PR if there are any
