@@ -84,9 +84,7 @@ For configuration instructions and details about using the API, see the Datadog 
 - Comprehensive tracing coverage:
    - Instruments your code and all dependencies, including the Go standard library
    - Instruments your code during compilation, preventing gaps in tracing coverage due to overlooked manual instrumentation
-- Exclusive [Application Security Management][7] features:
-   - Runtime Application Self-Protection (RASP)
-   - Local File Inclusion (LFI) self-protection
+- Exclusive [Application Security Management][7] **Exploit Prevention** feature. Exploit Prevention is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
 
 ### Requirements
 
@@ -202,7 +200,7 @@ You can use the [tracing library][4] in your Orchestrion-built application. This
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [6]: https://github.com/DataDog/orchestrion
-[7]: /security/application_security
+[7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
 [9]: https://www.datadoghq.com/support/
 [10]: https://pkg.go.dev/cmd/go#hdr-Modules__module_versions__and_more
