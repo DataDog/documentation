@@ -116,7 +116,7 @@ LLM Observability supports observability for LLM applications with varying compl
 
 LLM inference traces are composed of a single LLM span.
 
-{{< img src="llm_observability/llm-observability-llm-span_1.png" alt="A single LLM span" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-llm-span.png" alt="A single LLM span" style="width:100%;" >}}
 
 Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
 
@@ -133,7 +133,7 @@ The SDK provides integrations to automatically capture LLM calls to specific pro
 
 A workflow trace is composed of a root workflow span with nested LLM, task, tool, embedding, and retrieval spans.
 
-{{< img src="llm_observability/llm-observability-workflow-trace_1.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-workflow-trace.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
 
 Most LLM applications include operations that surround LLM calls and play a large role in your overall application performance - for example, tool calls to external APIs or preprocessing task steps.
 
@@ -145,7 +145,7 @@ For detailed examples, see the [LLM Monitoring Jupyter notebook][8] which demons
 
 An agent monitoring trace is composed of a root agent span with nested LLM, task, tool, embedding, retrieval, and workflow spans.
 
-{{< img src="llm_observability/llm-observability-agent-trace_1.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-agent-trace.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
 
 If your LLM application has complex autonomous logic, such as decision-making that can't be captured by a static workflow, you are likely using an LLM Agent. Agents may execute multiple different workflows depending on the user input.
 
