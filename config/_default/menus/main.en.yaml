@@ -1348,61 +1348,61 @@ menu:
       identifier: notebooks_guide
       weight: 1
     - name: DDSQL Editor
-      url: dashboards/ddsql_editor
+      url: ddsql_editor/
       pre: inventories
-      identifier: dashboards_ddsql_editor
+      identifier: ddsql_editor
       parent: platform_heading
       weight: 30000
     - name: Getting Started
-      url: dashboards/ddsql_editor/getting_started
-      parent: dashboards_ddsql_editor
-      identifier: dashboards_ddsql_editor_getting_started
-      weight: 1101
+      url: ddsql_editor/getting_started
+      parent: ddsql_editor
+      identifier: ddsql_editor_getting_started
+      weight: 1
     - name: Reference
-      url: dashboards/ddsql_editor/reference
-      parent: dashboards_ddsql_editor
-      identifier: dashboards_ddsql_editor_reference
-      weight: 1102
+      url: ddsql_editor/reference
+      parent: ddsql_editor
+      identifier: ddsql_editor_reference
+      weight: 2
     - name: Statements
-      url: dashboards/ddsql_editor/reference/statements
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_statements
-      weight: 11021
+      url: ddsql_editor/reference/statements
+      parent: ddsql_editor_reference
+      identifier: ddsql_editor_reference_statements
+      weight: 201
     - name: Expressions and Operators
-      url: dashboards/ddsql_editor/reference/expressions_and_operators
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_expressions_and_operators
-      weight: 11022
+      url: ddsql_editor/reference/expressions_and_operators
+      parent: ddsql_editor_reference
+      identifier: ddsql_editor_reference_expressions_and_operators
+      weight: 202
     - name: Data Types
-      url: dashboards/ddsql_editor/reference/data_types
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_data_types
-      weight: 11023
+      url: ddsql_editor/reference/data_types
+      parent: ddsql_editor_reference
+      identifier: ddsql_editor_reference_data_types
+      weight: 203
     - name: Scalar Functions
-      url: dashboards/ddsql_editor/reference/scalar_functions
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_scalar_functions
-      weight: 11024
+      url: ddsql_editor/reference/scalar_functions
+      parent: ddsql_editor_reference
+      identifier: ddsql_editor_reference_scalar_functions
+      weight: 204
     - name: Aggregation Functions
-      url: dashboards/ddsql_editor/reference/aggregation_functions
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_aggregation_functions
-      weight: 11025
+      url: ddsql_editor/reference/aggregation_functions
+      parent: ddsql_editor_reference
+      identifier: ddsql_editor_reference_aggregation_functions
+      weight: 205
     # - name: Window Functions
     #   url: dashboards/ddsql_editor/reference/window_functions
     #   parent: dashboards_ddsql_editor_reference
     #   identifier: dashboards_ddsql_editor_reference_window_functions
-    #   weight: 11026
+    #   weight: 206
     - name: Querying Tags
-      url: dashboards/ddsql_editor/reference/tags
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_tags
-      weight: 11027
+      url: ddsql_editor/reference/tags
+      parent: ddsql_editor_reference
+      identifier: ddsql_editor_reference_tags
+      weight: 207
     - name: Guides
-      url: dashboards/ddsql_editor/guide
-      parent: dashboards_ddsql_editor
-      identifier: dashboards_ddsql_editor_guide
-      weight: 1103
+      url: ddsql_editor/guide
+      parent: ddsql_editor
+      identifier: ddsql_editor_guide
+      weight: 10
     - name: Monitors and Alerting
       url: monitors/
       pre: monitor
