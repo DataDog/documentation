@@ -1,7 +1,7 @@
 ---
 title: DDSQL Common Queries and Use Cases
 further_reading:
-- link: "dashboards/ddsql_editor/reference"
+- link: "ddsql_editor/reference"
   tag: "Documentation"
   text: "Query References"
 ---

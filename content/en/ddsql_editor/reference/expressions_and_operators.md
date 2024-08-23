@@ -118,5 +118,5 @@ expression::type
 For example, `SELECT 1::text;`.
 
 
-[1]: /dashboards/ddsql_editor/reference/tags/
+[1]: /ddsql_editor/reference/tags/
 [2]: https://www.postgresql.org/docs/current/functions-comparison.html

@@ -10,5 +10,5 @@ cascade:
 ---
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="/dashboards/guide/ddsql_use_cases" >}}Common DDSQL queries and use cases{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/guide/ddsql_use_cases" >}}Common DDSQL queries and use cases{{< /nextlink >}}
 {{< /whatsnext >}}

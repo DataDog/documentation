@@ -13,12 +13,12 @@ DDSQL is a query language for Datadog data. It implements several standard SQL o
 You can use DDSQL to query your infrastructure in the [DDSQL Editor][2] in Datadog.
 
 {{< whatsnext desc="" >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/aggregation_functions" >}}Aggregation Functions{{< /nextlink >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/data_types" >}}Data Types{{< /nextlink >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/expressions_and_operators" >}}Expressions and Operators{{< /nextlink >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/scalar_functions" >}}Scalar Functions{{< /nextlink >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/statements" >}}Statements{{< /nextlink >}}
-    {{< nextlink href="dashboards/ddsql_editor/reference/tags" >}}Tags{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/reference/aggregation_functions" >}}Aggregation Functions{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/reference/data_types" >}}Data Types{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/reference/expressions_and_operators" >}}Expressions and Operators{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/reference/scalar_functions" >}}Scalar Functions{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/reference/statements" >}}Statements{{< /nextlink >}}
+    {{< nextlink href="ddsql_editor/reference/tags" >}}Tags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
