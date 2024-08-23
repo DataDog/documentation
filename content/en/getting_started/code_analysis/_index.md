@@ -300,7 +300,7 @@ You can access vulnerability reports and locate the source files where the vulne
 
 ## Explore results in the Service Catalog
 
-You can analyze CI pipelines associated with your services and code violations identified from Static Analysis to troubleshoot slowdowns and failures. Navigate to [**Service Management** > **Services** > **Service Catalog**][13] and click on the **Delivery** view to analyze the pre-production status of your services. 
+Investigate code violations associated with your services and code violations identified from Static Analysis to troubleshoot slowdowns and failures. Navigate to [**Service Management** > **Services** > **Service Catalog**][13] and click on the **Delivery** view to analyze the pre-production status of your services. 
 
 {{< img src="/getting_started/code_analysis/catalog_view.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
 
