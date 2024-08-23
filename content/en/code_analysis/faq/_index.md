@@ -15,11 +15,27 @@ further_reading:
 
 ## Overview
 
-[Datadog Code Analysis][10] helps you identify and address issues in your code with Static Analysis (SAST) and Software Composition Analysis (SCA). 
+[Datadog Code Analysis][10] helps you identify and address issues in your code with Static Analysis (SAST) and Software Composition Analysis (SCA).
 
 This page provides a non-exhaustive list of frequently asked questions about Code Analysis.
 
 ## Common questions
+
+### What to check if I see no results in the Datadog UI?
+
+If you are using GitHub, please check you use the GitHub App and have the required permissions.
+
+If you are using a Git provider other than GitHub, please first push results on your default branch. Your default
+branch should be one of the name along `master`, `main`, `prod`, `production` or `develop`. If your default
+branch is not one of those branches, you need to manually define it in the repository settings.
+
+If you run the tool within your CI pipeline, please make sure that `datadog-ci` runs **at the root** of the repository
+being analyzed.
+
+### I get a 403 error when running the analyzer
+
+Please make sure you correctly specify the variables `DD_APP_KEY`, `DD_API_KEY` and `DD_SITE` when running the
+analyzer and `datadog-ci`.
 
 ### What are Datadog-hosted scans?
 
