@@ -54,7 +54,7 @@ Ensure that the following variables are correctly specified: `DD_APP_KEY`, `DD_A
   SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
-When uploading results from third-party static analysis tools to Datadog, ensure that they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5].  Node.js version 14 or later is required.
+When uploading results from third-party static analysis tools to Datadog, ensure that they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. Node.js version 14 or later is required.
 
 To upload a SARIF report:
 
