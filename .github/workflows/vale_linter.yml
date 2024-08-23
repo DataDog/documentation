@@ -5,6 +5,9 @@ on:
     - 'content/en/**/*'
     - 'layouts/shortcodes/**/*.md'
 
+permissions:
+  contents: read
+
 jobs:
   vale:
     runs-on: ubuntu-latest
