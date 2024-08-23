@@ -69,7 +69,7 @@ export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   prefOptionsConfig: PrefOptionsConfig;
   defaultValsByPrefId: Record<string, string>;
-}): Readonly<RenderableTreeNode> {
+}): RenderableTreeNode {
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: p.defaultValsByPrefId,
     partials: p.parsedFile.partials,
