@@ -154,3 +154,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [8]: /code_analysis/static_analysis/setup/#customize-your-configuration
 [9]: /code_analysis/static_analysis/setup
 [10]: /code_analysis/github_pull_requests/
+[11]: /getting_started/code_analysis/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
