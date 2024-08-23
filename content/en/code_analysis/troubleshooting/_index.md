@@ -112,7 +112,8 @@ Ingestion of SBOM files is verified for the following third-party tools:
 - [osv-scanner][7]
 - [trivy][8]
 
-To ingest your SBOM file into Datadog:
+To ingest your SBOM file into Datadog, follow the steps below:
+
 1. Install the `datadog-ci` CLI (requires that Node.js is installed).
 2. Ensure that your `DD_SITE`, `DD_API_KEY` and `DD_APP_KEY` environment variables are set.
 3. Invoke the tool to upload the file to Datadog.
