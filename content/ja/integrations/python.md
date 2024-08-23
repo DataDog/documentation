@@ -3,8 +3,9 @@ categories:
 - languages
 - log collection
 - tracing
+custom_kind: integration
 dependencies: []
-description: Python アプリケーションからメトリクス、トレース、ログを収集。
+description: Python アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。
 doc_link: https://docs.datadoghq.com/integrations/python/
 draft: false
 further_reading:
@@ -20,11 +21,10 @@ integration_id: python
 integration_title: Python
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション
-short_description: Python アプリケーションからメトリクス、トレース、ログを収集。
+short_description: Python アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。
 version: '1.0'
 ---
 
@@ -33,7 +33,7 @@ version: '1.0'
 
 Python インテグレーションを利用して、Python アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
@@ -49,9 +49,13 @@ _Agent v6.0 以上で使用可能_
 
 ログを Datadog に転送するには、[Python ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
 
-## ヘルプ
+### プロファイルの収集
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+[Python プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -60,4 +64,5 @@ _Agent v6.0 以上で使用可能_
 [1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=python
 [2]: https://docs.datadoghq.com/ja/tracing/setup/python/
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/python/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/python/
+[5]: https://docs.datadoghq.com/ja/help/

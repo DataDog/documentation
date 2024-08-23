@@ -2,7 +2,7 @@
 categories:
 - cloud
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure App Services のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_app_services/

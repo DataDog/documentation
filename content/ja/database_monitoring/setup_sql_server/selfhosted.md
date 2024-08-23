@@ -72,6 +72,9 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Agent のインストール
 
 Agent を SQL Server ホストに直接インストールすることをお勧めします。そうすることで、SQL Server 固有のテレメトリーに加え、様々なシステムテレメトリー (CPU、メモリ、ディスク、ネットワーク) を収集することができるからです。

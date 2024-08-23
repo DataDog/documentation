@@ -2411,7 +2411,6 @@ components:
         author_email:
           description: The commit author email.
           example: author@example.com
-          format: email
           type: string
         author_name:
           description: The commit author name.
@@ -2436,7 +2435,6 @@ components:
         committer_email:
           description: The committer email.
           example: committer@example.com
-          format: email
           nullable: true
           type: string
         committer_name:
@@ -12705,10 +12703,13 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets where only included attribute is its title
+      description: Assets related to the object, including title and url.
       properties:
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricAssetDashboardRelationship:
@@ -12917,7 +12918,6 @@ components:
       - bob@example.com
       items:
         description: An email address.
-        format: email
         type: string
       type: array
     MetricBulkTagConfigNamePrefix:
@@ -13089,7 +13089,8 @@ components:
       - type
       type: object
     MetricDashboardAttributes:
-      description: Attributes related to the dashboard, including title and popularity.
+      description: Attributes related to the dashboard, including title, popularity,
+        and url.
       properties:
         popularity:
           description: Value from 0 to 5 that ranks popularity of the dashboard.
@@ -13099,6 +13100,9 @@ components:
           type: number
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricDashboardID:
@@ -14434,7 +14438,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
@@ -14497,7 +14500,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
-          format: url
           nullable: true
           type: string
         name:
@@ -14545,7 +14547,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           nullable: true
           type: string
         name:
@@ -19845,6 +19846,10 @@ components:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
           type: string
+        editable:
+          description: Whether the suppression rule is editable.
+          example: true
+          type: boolean
         enabled:
           description: Whether the suppression rule is enabled.
           example: true
@@ -20997,7 +21002,6 @@ components:
         email:
           description: "Service owner\u2019s email."
           example: contact@datadoghq.com
-          format: email
           type: string
         slack:
           description: "Service owner\u2019s Slack channel."
@@ -21258,7 +21262,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -21621,7 +21624,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -23007,7 +23009,6 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
-          format: url
           type: string
       required:
       - label

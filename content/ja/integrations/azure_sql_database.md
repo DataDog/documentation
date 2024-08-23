@@ -4,7 +4,7 @@ categories:
 - data stores
 - caching
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure SQL Database の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/

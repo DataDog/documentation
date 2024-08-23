@@ -7,7 +7,7 @@ categories:
 - log collection
 - network
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Route 53 メトリクスを追跡し、健全性チェックを監視。
 doc_link: https://docs.datadoghq.com/integrations/amazon_route53/

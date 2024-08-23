@@ -214,20 +214,20 @@ Datadog Agent は、広く使われているオペレーティングシステム
 
 <table>
   <thead>
-    <th>オペレーティングシステム</th>
-    <th>OS バージョン</th>
-    <th>Agent 5 バージョン</th>
-    <th>Agent 6 バージョン</th>
-    <th>Agent 7 バージョン</th>
-    <th>注</th>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 5 versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
+    <th>Notes</th>
   </thead>
   <tr>
-    <th rowspan=5><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
     <td><= 7.45.1</td>
-    <td>Server 2008 R2 には、<a href="https://github.com/golang/go/issues/24489">クロックドリフトと Go に関する既知の問題</a>があります。</td>
+    <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
     <td>2012</td>
@@ -244,14 +244,7 @@ Datadog Agent は、広く使われているオペレーティングシステム
     <td></td>
   </tr>
   <tr>
-    <td>2016</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>2022</td>
+    <td>>= 2016</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>

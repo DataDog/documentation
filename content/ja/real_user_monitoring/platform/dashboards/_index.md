@@ -1,6 +1,6 @@
 ---
 aliases:
-- /real_user_monitoring/dashboards
+- /ja/real_user_monitoring/dashboards
 description: すぐに使える RUM ダッシュボードを使用して、アプリケーションのデータとパフォーマンスについてさらに詳しく知ることができます。
 further_reading:
 - link: /real_user_monitoring/explorer

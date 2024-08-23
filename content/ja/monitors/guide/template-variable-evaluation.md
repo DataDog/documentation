@@ -25,7 +25,11 @@ title: テンプレート変数評価
 
 ### 例
 
-`{{last_triggered_at_epoch}}` テンプレート変数は、モニターが最後にトリガーされたときの UTC 時間をミリ秒のエポック形式で返します。評価演算子を使用すると、次のように 15 分（15 * 60 * 1000 ミリ秒）を減算できます。
+`{{last_triggered_at_epoch}}` テンプレート変数は、モニターが最後にトリガーされた UTC 時間をミリ秒単位のエポック形式で返します。
+
+### 特定の時間へのスコープリンク
+
+評価演算子は、次のように 15 分 (15 * 60 * 1000ミリ秒) を減算するために使用できます。
 
 ```
 {{eval "last_triggered_at_epoch-15*60*1000"}}
@@ -36,6 +40,17 @@ title: テンプレート変数評価
 ```
 https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*1000"}}&to_ts={{last_triggered_at_epoch}}&live=false
 ```
+
+### 時間帯に基づいて異なるチームに通知をルーティングする
+
+You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_match}}{{/is_match}}` to customize the routing of notifications based on time of day (UTC):
+```
+{{#is_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "14" "15" "16"}}  
+Handle that should receive notification if time is between 2PM and 5PM UTC
+{{/is_match}}
+```
+
+**Note:** If you need to evaluate your monitor on a schedule, see [Custom Schedules][2] instead.
 
 ## 関数
 
@@ -62,7 +77,7 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 | 関数            | 説明|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | round(var)          | 最も近い整数に丸められた var を返します|
-| round(var, n)       | 変数を指定した桁数 (n) に丸めた値を返します。<br>例: round(12.376, 2) = 12.38|
+| round(var, n)       | 指定した桁数 (n) に var を丸めた値を返します。<br>例: `round(12.376, 2) = 12.38`|
 | ceil(var)           | var の上限を返します（var 以上の最小の整数）|
 | floor(var)          | var の下限を返します（var 以下の最大の整数）|
 | sgn(var)            | var で評価される符号関数の値を返します:<br>var > 0 の場合、sgn(var) = 1<br>var = 0 の場合、sgn(var) = 0<br>var < 0 の場合、sgn(var) = -1|
@@ -100,3 +115,4 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 ```
 
 [1]: /ja/logs/explorer/
+[2]: /ja/monitors/guide/custom_schedules
