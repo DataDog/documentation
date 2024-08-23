@@ -20,7 +20,6 @@ There are two ways to install and configure Agentless scanning for your cloud en
 
 {{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
-
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [3]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts/?tab=aws
 [4]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
@@ -42,4 +41,10 @@ There are two ways to install and configure Agentless scanning for your cloud en
 
 
 {{% /tab %}}
-{{< /tabs >}} </br>
+{{< /tabs >}}
+
+### Uninstall with Terraform
+
+Follow the instructions for [Terraform][9] uninstallation.
+
+[9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
