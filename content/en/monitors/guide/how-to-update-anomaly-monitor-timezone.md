@@ -50,4 +50,4 @@ To update an anomaly detection monitor to account for a local timezone in the UI
 [1]: https://app.datadoghq.com/monitors/create/anomaly
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[5]: /api/v1/monitors/#edit-a-monitor
+[5]: /api/latest/monitors/#edit-a-monitor
