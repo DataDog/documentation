@@ -3,7 +3,7 @@ title: IP Allowlist
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-The IP allowlist feature is available for customers on Pro + and Entreprise plans only. Request access by contacting support.
+The IP allowlist feature is exclusively available to customers on the pro+ and enterprise plans. To request access, please contact support.
 {{< /callout >}}
 
 ## Overview
