@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import re
+import json
 from io import StringIO
 import requests
 import defusedxml.ElementTree as ET
@@ -36,26 +37,23 @@ def get_keys(data):
 
 def get_versions(keys):
     '''Get the highest version for each product tag'''
-    versions = {}
-    version_array = []
+    product_version = {}
+    product_version_array = []
+    all_versions = []
+    
     for product in PRODUCTS:
         for key in keys:
             pattern = r"\d{1,4}.\d{1,4}.\d{1,4}"
             try:
                 version = re.search(pattern, key).group()
-                version_array.append(version)
+                product_version_array.append(version)
             except:
                 continue
-        highest_version = get_highest_version(version_array)
-        versions[product] = highest_version
-    return versions    
-
-def return_latest_version(tags):
-    return
-    # valid_versions = []
-    # pattern = r"^(?:(?:[0-9]*)[.](?:[0-9]*)[.](?:[0-9]*))$"
-    #valid_versions = [version for version in tags if re.match(pattern, version)]
-    # return sorted(valid_versions)[-1]
+        highest_version = get_highest_version(product_version_array)
+        product_version["client"] = product
+        product_version["version"] = highest_version
+        all_versions.append(product_version)
+    return all_versions    
 
 '''
 Gets the latest version tag from the public oss mirror
@@ -69,5 +67,7 @@ if __name__ == "__main__":
     print(final_versions)
     
     # TODO:
-    # Write the latest version to a partial file
+    with open('data/synthetics_worker_versions.json', 'w') as f:
+        f.write(json.dumps(final_versions, indent=4, sort_keys=True))
+
     # Check for changes and open a PR if there are any
