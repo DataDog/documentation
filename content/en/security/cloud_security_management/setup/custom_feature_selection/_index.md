@@ -2,17 +2,9 @@
 title: Custom Feature Selection for Cloud Security Management
 ---
 
-The Custom Feature Selection workflow offers flexibility and customization during onboarding, enabling you to choose features that best fit your specific needs.
+The Custom Feature Selection workflow provides a flexible and customizable onboarding experience for [Cloud Security Management (CSM)][6], allowing you to choose features that best fit your specific needs.
 
-## Use cases
-
-## Getting started
-
-## Further reading
-
-Datadog provides a guided workflow for setting up [Cloud Security Management (CSM)][6]. The first step is to select the features you want to enable. After that, follow the instructions provided to configure the selected features.
-
-<div class="alert alert-info">The following instructions apply to new CSM users only. If you're an existing user and would like to enable additional CSM features, see <a href="/security/cloud_security_management/setup/#enable-additional-features">Enable additional features</a>.</div>
+## Installation
 
 1. On the [Intro to Cloud Security Management][10] page, click **Get Started with Cloud Security Management**.
 1. On the [Features][11] page, select the features you want to enable.
