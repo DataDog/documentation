@@ -56,7 +56,7 @@ Ensure that the following variables are correctly specified: `DD_APP_KEY`, `DD_A
 
 When uploading results from third-party static analysis tools to Datadog, ensure that they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. Node.js version 14 or later is required.
 
-To upload a SARIF report:
+To upload a SARIF report, follow the steps below:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
 2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
