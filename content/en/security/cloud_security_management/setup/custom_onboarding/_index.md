@@ -1,5 +1,5 @@
 ---
-title: Custom Feature Selection for Cloud Security Management
+title: Custom Onboarding for Cloud Security Management
 ---
 
 The Custom Feature Selection workflow provides a flexible and customizable onboarding experience for [Cloud Security Management (CSM)][6], allowing you to choose features that best fit your specific needs.
