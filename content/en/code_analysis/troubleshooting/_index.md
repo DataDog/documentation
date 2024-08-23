@@ -44,7 +44,36 @@ For performance issues, include the following information:
 
 If you are experiencing issues unrelated to performance or if the Datadog Static Analyzer fails to exit, run the Datadog Static Analyzer with the `--debug true --performance-statistics` flag.
 
-### Issue `GLIBC_X.YY not found`
+### Getting a 403 error when running the analyzer
+
+Ensure that the following variables are correctly specified: `DD_APP_KEY`, `DD_API_KEY`, and `DD_SITE` when running the analyzer and `datadog-ci`.
+
+### Issues with SARIF uploads
+
+<div class="alert alert-info">
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+</div>
+
+When uploading results from third-party static analysis tools to Datadog, ensure that they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. Node.js version 14 or later is required.
+
+To upload a SARIF report, follow the steps below:
+
+1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
+2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
+3. Install the `datadog-ci` utility:
+
+   ```bash
+   npm install -g @datadog/datadog-ci
+   ```
+
+4. Run the third-party static analysis tool on your code and output the results in the SARIF format.
+5. Upload the results to Datadog:
+
+   ```bash
+   datadog-ci sarif upload $OUTPUT_LOCATION
+   ```
+
+### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
 
@@ -60,10 +89,11 @@ It means that you are either:
 
 ### Results are not being surfaced in the Datadog UI
 
-If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master` or `main`). After you commit on your default branch, non-default branches are analyzed.
+**If you are running Code Analysis on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][4].
 
-You can always configure your default branch in-app under [Repository Settings][4].
+If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
+
 
 ## Software Composition Analysis
 
@@ -75,10 +105,31 @@ For issues with Datadog Software Composition Analysis, include the following inf
 - The name of the branch you ran the analysis on
 - The list of dependency files in your repository (such as `package-lock.json`, `requirements.txt`, or `pom.xml`)
 
+### Issues with SBOM uploads
+While the [Datadog SBOM generator][7] is recommended, Datadog supports the ingestion of any SBOM files. Please ensure your files adhere to either the Cyclone-DX 1.4 or Cyclone-DX 1.5 formats.
+
+Ingestion of SBOM files is verified for the following third-party tools:
+- [osv-scanner][7]
+- [trivy][8]
+
+To ingest your SBOM file into Datadog, follow the steps below:
+
+1. Install the `datadog-ci` CLI (requires that Node.js is installed).
+2. Ensure that your `DD_SITE`, `DD_API_KEY` and `DD_APP_KEY` environment variables are set.
+3. Invoke the tool to upload the file to Datadog.
+Installing and invoking the tool can be done using these two commands:
+```bash
+# Install datadog-ci
+npm install -g @datadog/datadog-ci
+
+# Upload SBOM file
+datadog-ci sbom upload /path/to/sbom-file.json
+```
+
 ### Results are not being surfaced in the Datadog UI
 
-If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master` or `main`). After you commit on your default branch, non-default branches are analyzed.
+**If you are running Code Analysis on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
 
 You can always configure your default branch in-app under [Repository Settings][4].
 
@@ -90,3 +141,7 @@ You can always configure your default branch in-app under [Repository Settings][
 [2]: /code_analysis/static_analysis/github_actions
 [3]: /code_analysis/static_analysis/github_actions#inputs
 [4]: https://app.datadoghq.com/ci/settings/repository
+[5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
+[6]: https://docs.datadoghq.com/code_analysis/static_analysis/setup/#diff-aware-scanning
+[7]: https://github.com/DataDog/osv-scanner
+[8]: https://github.com/aquasecurity/trivy
