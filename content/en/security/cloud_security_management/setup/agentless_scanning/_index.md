@@ -1,5 +1,12 @@
 ---
 title: Agentless Scanning Quick Start for Cloud Security Management
+further_reading:
+  - link: "/security/cloud_security_management/agentless_scanning"
+    tag: "Documentation"
+    text: "Cloud Security Management Agentless Scanning"
+  - link: "/security/cloud_security_management/guide/agentless_scanning_terraform"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning using Terraform"
 ---
 
 {{< site-region region="gov" >}}
@@ -43,10 +50,10 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
 1. Click **Quick Start**. The **Features** page is displayed, showing the features included with Agentless Scanning Quick Start.
 1. Click **Start Using Cloud Security Management** to continue.
 1. Select the AWS region where you want to create the CloudFormation stack.
-1. Select an API key that is already configured for Remote Configuration. If you enter an API key that does not have Remote Configuration enabled, it will automatically be activated upon selection.
-1. ...
-1. Click **Launch CloudFormation Template**.
-
+1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration will be automatically enabled for that key upon selection.
+1. Send **AWS Logs to Datadog** and **Enable Cloud Security Management** are automatically selected by default. Leave the default selections.
+1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. Click **Launch CloudFormation Template**. The template includes all the necessary permissions to deploy and manage Agentless scanners. The template must run successfully to receive scans.
 
 ## How to exclude resources from scans
 
@@ -60,7 +67,11 @@ To exclude AWS hosts, containers, and Lambda functions (if applicable) from scan
 1. Click **Done**.
 
 <div class="alert alert-info">To uninstall Agentless Scanning using CloudFormation, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.</div>
- 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/cloud_security_management/agentless_scanning
 [2]: /integrations/amazon_web_services/
 [3]: /agent/remote_config/?tab=configurationyamlfile#setup
@@ -69,4 +80,3 @@ To exclude AWS hosts, containers, and Lambda functions (if applicable) from scan
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
-

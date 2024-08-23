@@ -1,12 +1,15 @@
 ---
 title: Setting up Agentless Scanning using Terraform
+further_reading:
+  - link: "/security/cloud_security_management/agentless_scanning"
+    tag: "Documentation"
+    text: "Cloud Security Management Agentless Scanning"
+  - link: "/security/cloud_security_management/setup/agentless_scanning"
+    tag: "Documentation"
+    text: "Agentless Scanning Quick Start for Cloud Security Management"
 ---
 
-## Installation
-
-There are two ways to install and configure Agentless scanning for your cloud environments, manually using Terraform, or by using the CloudFormation template with the AWS Integration.
-
-### Terraform
+You can install and configure [Agentless Scanning][1] for your cloud environments either manually using Terraform or by utilizing the CloudFormation template with the AWS integration. This guide provides detailed instructions for the Terraform approach.
 
 {{< tabs >}}
 {{% tab "Agentless scanning (new AWS account)" %}}
@@ -47,4 +50,9 @@ There are two ways to install and configure Agentless scanning for your cloud en
 
 Follow the instructions for [Terraform][9] uninstallation.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/cloud_security_management/agentless_scanning
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall

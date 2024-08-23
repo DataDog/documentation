@@ -1,5 +1,15 @@
 ---
-title: Deploying CSM Agentless Scanning
+title: Deploying Agentless Scanning
+further_reading:
+  - link: "/security/cloud_security_management/agentless_scanning"
+    tag: "Documentation"
+    text: "Cloud Security Management Agentless Scanning"
+  - link: "/security/cloud_security_management/setup/agentless_scanning"
+    tag: "Documentation"
+    text: "Agentless Scanning Quick Start for Cloud Security Management"
+  - link: "/security/cloud_security_management/guide/agentless_scanning_terraform"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning using Terraform"
 ---
 
 There are two recommended ways to deploy Agentless scanners in your environment, either using cross-account scanning, or same account scanning.
@@ -37,3 +47,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 
 
 **Note**: The actual data that is scanned remains within your infrastructure, and only the collected list of packages, as well as information related to collected hosts (hostnames/EC2 Instances) are reported back to Datadog.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
