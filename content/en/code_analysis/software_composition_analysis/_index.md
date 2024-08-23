@@ -81,7 +81,7 @@ After you configure your CI pipelines to run Datadog SCA, violations are summari
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
 * The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
-To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets (learn how results are linked to Datadog services and teams [here][12]).
+To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][5].
 
 Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
 
