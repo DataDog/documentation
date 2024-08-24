@@ -22,13 +22,13 @@ further_reading:
 - link: https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json
   tag: 소스 코드
   text: Service Definition Schema (v2.2)
-title: Service Catalog APIs
+title: Service Catalog API
 ---
 
 ## 개요
 
 - 서비스 정의를 생성하고, 가져오고, 삭제하려면 [Service Definitions API 참조][1]를 확인하세요.
-- 서비스 스코어카드 규칙 및 결과를 생성하고 업데이트하려면 [Service Scorecard API 참조][2]를 확인하세요.
+- 서비스 스코어카드 규칙 및 결과를 생성하고 업데이트하려면 [Service Scorecards API 참조][2]를 확인하세요.
 
 
 
