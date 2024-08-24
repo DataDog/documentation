@@ -42,7 +42,7 @@ RUM Browser SDK는 [오픈 소스][1]이며 오픈 소스 [rrweb][2] 프로젝�
 
 세션 재생은 RUM Browser SDK에서 사용할 수 있으며, 세션 재생을 위한 데이터 수집을 시작하려면 RUM 애플리케이션 생성, 클라이언트 토큰 생성 및 RUM Browser SDK 초기화를 통해 [Datadog RUM 브라우저 모니터링][4]을 설정하세요. 모바일 환경에서의 설정은 [모바일 세션 재생][5]을 참조하세요.
 
-<div class="alert alert-info">Session Replay는  SDK 버전 3.6.0 또는 이후 버전에서 지원됩니다.</div>
+<div class="alert alert-info">Session Replay는  SDK 버전 3.6.0 또는 이상 버전에서 지원됩니다.</div>
 
 ## 사용법
 
