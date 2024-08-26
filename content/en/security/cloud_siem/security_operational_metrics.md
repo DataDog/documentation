@@ -25,20 +25,20 @@ Cloud SIEM provides security operational metrics to help you determine the effec
 ## Operational Metrics
 
 `datadog.security.siem_signal.time_to_detect`
-: **Name**: Mean Time to Detect (MTTD)
+: **Name**: Time to Detect (TTD)
 : **Description**:The average time from when a matching log is triggered to when a signal is generated.
 
 `datadog.security.siem_signal.time_to_acknowledge`
-: **Name**:  Mean Time to Acknowledge (MTTA)
+: **Name**:  Time to Acknowledge (TTA)
 : **Description**: The average time from when a signal is triggered to when an investigation on the signal begins.
 
 `datadog.security.siem_signal.time_to_resolve`
-: **Name**: Mean Time to Resolve (MTTR)
+: **Name**: Time to Resolve (TTR)
 : **Description**: The average time it takes to close a signal from the time when you are first notified of the detection.
 
 ## How the metrics are calculated
 
-The MTTD, MTTA, and MTTR metrics are calculated based on these timestamps:
+The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 
 1. The timestamp (`T0`) of the log that triggered a security signal.
 1. The timestamp (`T1`) of when the signal was generated.
@@ -47,9 +47,9 @@ The MTTD, MTTA, and MTTR metrics are calculated based on these timestamps:
 
 | Metric                                                                                | How the metric is calculated |
 | ------------------------------------------------------------------------------------- | ---------------------------- |
-| Mean Time to Detect (MTTD)<br>`datadog.security.siem_signal.time_to_detect`           | `T1 - T0`                    |
-| Mean Time to Acknowledge (MTTA)<br>`datadog.security.siem_signal.time_to_acknowledge` | `T2 - T1`                    |
-| Mean Time to Resolve (MTTR)<br>`datadog.security.siem_signal.time_to_resolve`         | `T3 - T1`                    |
+| Time to Detect (TTD)<br>`datadog.security.siem_signal.time_to_detect`           | `T1 - T0`                    |
+| Time to Acknowledge (TTA)<br>`datadog.security.siem_signal.time_to_acknowledge` | `T2 - T1`                    |
+| Time to Resolve (TTR)<br>`datadog.security.siem_signal.time_to_resolve`         | `T3 - T1`                    |
 
 ## Explore, visualize, and monitor the metrics
 
