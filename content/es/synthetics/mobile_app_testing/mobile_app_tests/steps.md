@@ -80,13 +80,7 @@ Crea este paso de aserción para que el test de tu aplicación móvil confirme q
 
 Además de grabar automáticamente los pasos basados en las interacciones de tu dispositivo, también puedes crear pasos manualmente haciendo clic en **Special Actions** (Acciones especiales).
 
-{{< img src="mobile_app_testing/special_actions.png" alt="Elegir un tipo de acción para añadir un paso de aserción" style="width:60%;" >}}
-
-#### Toque
-
-Al interactuar con los elementos mediante un toque en tu aplicación móvil se graba un paso.
-
-{{< img src="mobile_app_testing/tap.mp4" alt="Grabación de un paso de toque en un test móvil" video=true >}}
+{{< img src="mobile_app_testing/test_steps/special_actions_2.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
 
 #### Doble toque
 
@@ -94,17 +88,30 @@ Al interactuar con los elementos mediante un toque doble en tu aplicación móvi
 
 {{< img src="mobile_app_testing/double_tap.mp4" alt="Grabación de un paso de toque doble en un test móvil" video=true >}}
 
-#### Escribir texto
+#### Extraer variable del elemento
 
-Al interactuar con un campo de introducción de texto en tu aplicación móvil, añadir un nombre y configurar un valor se graba un paso.
+Esta acción permite extraer el valor de un elemento y guardarlo como variable.
 
-{{< img src="mobile_app_testing/type_text.mp4" alt="Grabación de un paso de introducción de texto en un test móvil" video=true >}}
+{{< img src="mobile_app_testing/test_steps/extract_variable_from_element.mp4" alt="Grabación de la manera de extraer una variable de un elemento en un test móvil" style="width:60%" video=true >}}
 
-Para ver todas las variables disponibles en los pasos añadidos manualmente, escribe `{{` en el campo de entrada.
+#### Abrir enlace profundo
 
-{{< img src="mobile_app_testing/injecting_variable.png" alt="Paso de introducción de texto para el uso de variables en un test móvil" style="width:25%" >}}
+Añade un nombre al paso e introduce un URI de enlace profundo.
 
-Para utilizar una variable en pasos grabados automáticamente, añade un nombre de paso y especifica el valor de la variable para introducirlo durante la grabación. 
+{{< img src="mobile_app_testing/open_deep_link.png" alt="Grabación de un paso de enlace profundo abierto en un test móvil" style="width:60%" >}}
+
+#### Reiniciar la aplicación
+
+Esta acción te permite reiniciar tu aplicación.
+Esta acción no reinstala la aplicación, sino que la cierra y la vuelve a iniciar. 
+
+{{< img src="mobile_app_testing/test_steps/restart_application.mp4" alt="Grabación de la manera de reiniciar tu aplicación" style="width:60%" video=true >}}
+
+#### Rotación del dispositivo
+
+Añade un nombre al paso y selecciona el modo **Retrato** o **Paisaje**.
+
+{{< img src="mobile_app_testing/rotate_device.png" alt="Grabación de un paso de rotación de dispositivo en un test móvil" style="width:60%" >}}
 
 #### Desplazamiento
 
@@ -122,11 +129,29 @@ Esta acción te permite desplazarte a un elemento específico horizontal o verti
 
 {{< img src="mobile_app_testing/test_steps/scroll_to_element_2.mp4" alt="Grabación el desplazamiento hasta un elemento en un test móvil" style="width:60%" video=true >}}
 
-#### Volver atrás
+#### Toque
 
-Al interactuar con el botón **Atrás** debajo de la aplicación móvil se graba un paso.
+Al interactuar con los elementos mediante un toque en tu aplicación móvil se graba un paso.
 
-{{< img src="mobile_app_testing/press_back.mp4" alt="Grabación de un paso volver atrás en un test móvil" video=true >}}
+{{< img src="mobile_app_testing/tap.mp4" alt="Grabación de un paso de toque en un test móvil" video=true >}}
+
+#### Activar Wi-Fi
+
+Esta acción le permite activar o desactivar Wi-Fi dentro de su prueba para Monitor cómo funciona su aplicación con o sin acceso a Internet.
+
+{{< img src="mobile_app_testing/test_steps/toggle_wifi.png" alt="Screenshot of the Toggle Wi-Fi special actions step" style="width:60%" >}}
+
+#### Escribir texto
+
+Al interactuar con un campo de introducción de texto en tu aplicación móvil, añadir un nombre y configurar un valor se graba un paso.
+
+{{< img src="mobile_app_testing/type_text.mp4" alt="Grabación de un paso de introducción de texto en un test móvil" video=true >}}
+
+Para ver todas las variables disponibles en los pasos añadidos manualmente, escribe `{{` en el campo de entrada.
+
+{{< img src="mobile_app_testing/injecting_variable.png" alt="Paso de introducción de texto para el uso de variables en un test móvil" style="width:25%" >}}
+
+Para utilizar una variable en pasos grabados automáticamente, añade un nombre de paso y especifica el valor de la variable para introducirlo durante la grabación. 
 
 #### Esperar
 
@@ -136,24 +161,13 @@ Si sabes que una página o un elemento de página tarda más de 60 segundos en c
 
 Por defecto, los tests de aplicaciones móviles esperan a que una página esté completamente cargada antes de realizar un paso o el paso siguiente con un tiempo de espera de 60 segundos. Este tiempo adicional se añade sistemáticamente a **cada ejecución** de la grabación de tu test de aplicación móvil.
 
-#### Rotación del dispositivo
+#### Volver atrás
 
-Añade un nombre al paso y selecciona el modo **Retrato** o **Paisaje**.
+Al interactuar con el botón **Atrás** debajo de la aplicación móvil se graba un paso.
 
-{{< img src="mobile_app_testing/rotate_device.png" alt="Grabación de un paso de rotación de dispositivo en un test móvil" style="width:60%" >}}
+{{< img src="mobile_app_testing/press_back.mp4" alt="Grabación de un paso volver atrás en un test móvil" video=true >}}
 
-#### Abrir enlace profundo
-
-Añade un nombre al paso e introduce un URI de enlace profundo.
-
-{{< img src="mobile_app_testing/open_deep_link.png" alt="Grabación de un paso de enlace profundo abierto en un test móvil" style="width:60%" >}}
-
-#### Reiniciar la aplicación
-
-Esta acción te permite reiniciar tu aplicación.
-Esta acción no reinstala la aplicación, sino que la cierra y la vuelve a iniciar. 
-
-{{< img src="mobile_app_testing/test_steps/restart_application.mp4" alt="Grabación de la manera de reiniciar tu aplicación" style="width:60%" video=true >}}
+</br>
 
 Para obtener más información sobre configuraciones adicionales en pasos de tests, consulta [Opciones avanzadas para pasos de test de aplicaciones móviles][4].
 
@@ -174,12 +188,6 @@ Si para ti no tiene sentido ejecutar un subtest de forma independiente, puedes d
 ### Variables
 Si tu subtest contiene variables, éstas serán heredadas por el test en el que las importes. 
 Para anular estas variables, crea una variable en el test principal con el mismo nombre que las variables del subtest. 
-
-#### Extraer variable del elemento
-
-Esta acción permite extraer el valor de un elemento y guardarlo como variable.
-
-{{< img src="mobile_app_testing/test_steps/extract_variable_from_element.mp4" alt="Grabación de la manera de extraer una variable de un elemento en un test móvil" style="width:60%" video=true >}}
 
 ## Gestiona el orden de los pasos
 
@@ -205,7 +213,7 @@ Para editar una grabación móvil una vez guardada:
 
 ## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 [1]: /es/mobile_app_testing/mobile_app_tests/#variables
 [2]: /es/synthetics/settings/#global-variables
