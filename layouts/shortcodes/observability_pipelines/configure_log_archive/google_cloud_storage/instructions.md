@@ -1,4 +1,4 @@
-### Create a storage bucket
+#### Create a storage bucket
 
 1. Navigate to [Google Cloud Storage][9091].
 1. On the Buckets page, click **Create** to create a bucket for your archives..
@@ -7,14 +7,14 @@
 1. Do not add a retention policy because the most recent data needs to be rewritten in some rare cases (typically a timeout case).
 1. Click **Create**.
 
-### Create a service account to allow Workers to write to the bucket
+#### Create a service account to allow Workers to write to the bucket
 
 1. Create a Google Cloud Storage [service account][9092].
 1. Follow these [instructions][9093] to create a service account key and download the JSON service account key file. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`.
 
 **Note**: If you are installing the Worker in Kubernetes, see [Referencing files in Kubernetes][9097] for information on how to reference the credentials file.
 
-### Connect the storage bucket to Datadog Log Archives
+#### Connect the storage bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][9094].
 1. Click **New archive**.
