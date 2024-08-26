@@ -28,6 +28,10 @@ cascade:
 
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/monitoring-and-slos/">}}
+  Datadog alerts use tags and machine learning to efficiently identify problems in your infrastructure, applications, and services. Every alert is specific, actionable, and contextual—even in large-scale and highly ephemeral environments—helping to minimize downtime and prevent alert fatigue. With native SLO and SLA tracking, you can prioritize and address the issues that matter most to your business.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Datadog Monitors provide vital visibility into your infrastructure, enabling proactive detection and real-time response to performance issues and outages. By configuring monitors to track key metrics and thresholds, organizations can receive immediate alerts and address problems before they impact customers or cause system downtime.
@@ -64,9 +68,6 @@ Reduce alerting fatigue so teams can focus on resolving alerts when it matters. 
 ## What's next
 
 Monitors and alerts are essential tools for ensuring the reliability, performance, and availability of IT systems and applications. They help maintain operational efficiency, improve user experience, and mitigate potential risks by enabling quick detection and response to issues before they escalate. Learn more about Monitor features: 
-1. [Select a monitor type.][4]
-1. [Configure monitors.][5]
-1. [Configure notification messages.][6]
 1. [Schedule downtimes to mute monitors.][7]
 1. [Organize and manage monitors.][8]
 1. [Resolve misconfigured monitors on the Monitor Quality page.][9]

@@ -7,7 +7,6 @@ dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
 title: Datadog Forwarder
 ---
-
 ## 概要
 
 Datadog Forwarder は、AWS から Datadog にログを送信する AWS Lambda 関数で、具体的には次のようなものです。
@@ -64,7 +63,7 @@ API キーと Forwarder の構成を分離することで、Forwarder のアッ�
 #### コンフィギュレーション例
 
 ```tf
-# AWS Secrets Manager に Datadog API キーを保存します
+
 variable "dd_api_key" {
   type        = string
   description = "Datadog API key"
@@ -119,7 +118,7 @@ class SampleRegistry
 
 指定されている CloudFormation テンプレートを使用して Forwarder をインストールできない場合は、以下の手順に従って Forwarder を手動でインストールできます。テンプレートの機能について改善できる点がございましたら、お気軽に問題やプルリクエストを開いてお知らせください。
 
-1. 最新の[リリース][101]から、 `aws-dd-forwarder-<VERSION>.zip` を使用して Python 3.10 Lambda 関数を作成します。
+1. 最新の[リリース][101]から、 `aws-dd-forwarder-<VERSION>.zip` を使用して Python 3.11 Lambda 関数を作成します。
 2. [Datadog API キー][102]を AWS Secrets Manager に保存し、環境変数 `DD_API_KEY_SECRET_ARN` に Lambda 関数のシークレット ARN を設定し、Lambda 実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加します。
 3. S3 バケットからログを転送する必要がある場合は、`s3:GetObject` アクセス許可を Lambda 実行ロールに追加します。
 4. Forwarder で環境変数 `DD_ENHANCED_METRICS` を `false` に設定します。これにより、Forwarder は拡張メトリクス自体を生成しなくなりますが、他の Lambda からカスタムメトリクスを転送します。
@@ -154,8 +153,8 @@ aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' o
 
 ### 古いバージョンを 3.106.0 以降にアップグレードする
 
-バージョン 3.106.0 から、Lambda 関数は `DD_S3_BUCKET_NAME` で構成された S3 バケットに保存されるキャッシュファイル名にプレフィックスを追加するよう更新されました。これにより、複数の関数のキャッシュファイルを同じバケットに保存できるようになります。 
-また、このバージョンから、フォワーダーは S3 にエクスポートされるすべてのログに、デフォルトでカスタム S3 バケットタグをアタッチするようになります。たとえば、サービスが宛先の S3 バケットにログを送信するよう構成された場合、フォワーダーはログを取得・転送する際にそのバケットのタグをログに追加します。
+Starting version 3.106.0 Lambda function has been updated to add a prefix to cache filenames stored in the S3 bucket configured in `DD_S3_BUCKET_NAME`. This allows to use the same bucket to store cache files from several functions.
+Additionally, starting this version, the forwarder will attach custom S3 bucket tags by default to all logs exported to S3. For example, if a service is configured to send logs to a destiantion S3 bucket, the forwarder will add the bucket's tags to the logs while pulling and forwarding the logs.
 
 ### 古いバージョンを 3.99.0 以降にアップグレードする
 
@@ -276,7 +275,7 @@ An error occurred when creating the trigger: Configuration is ambiguously define
    ```
 1. フォークにプッシュして、[プルリクエストを送信][12]します。
 
-## 高度な検索
+## アドバンスド
 
 ### 複数の宛先へのログ送信
 
@@ -393,12 +392,6 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 `DdForwardLog`
 : ログ転送を無効にするには、false に設定しますが、Lambda 関数からのメトリクスやトレースなど、他の可観測性データの転送は続行します。
 
-`DdFetchLambdaTags`
-: Forwarder が GetResources API 呼び出しを使用して Lambda タグをフェッチし、それらをログ、メトリクス、トレースに適用できるようにします。true に設定すると、アクセス許可 `tag:GetResources` が Lambda 実行 IAM ロールに自動的に追加されます。
-
-`DdFetchLogGroupTags`
-: Forwarder が ListTagsLogGroup を使用して Log Group タグをフェッチし、それらをログ、メトリクス、トレースに適用できるようにします。true に設定すると、アクセス許可 `logs:ListTagsLogGroup` が Lambda 実行 IAM ロールに自動的に追加されます。
-
 ### ログスクラビング (オプション)
 
 `RedactIp`
@@ -433,6 +426,18 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 ログに対してさまざまなパターンをテストするには、[デバッグログ](#troubleshooting)をオンにします。
 
 ### 高度 (オプション)
+
+`DdFetchLambdaTags`
+: Forwarder が GetResources API 呼び出しを使用して Lambda タグをフェッチし、それらをログ、メトリクス、トレースに適用できるようにします。true に設定すると、アクセス許可 `tag:GetResources` が Lambda 実行 IAM ロールに自動的に追加されます。
+
+`DdFetchLogGroupTags`
+: Forwarder が ListTagsLogGroup を使用して Log Group タグをフェッチし、それらをログ、メトリクス、トレースに適用できるようにします。true に設定すると、アクセス許可 `logs:ListTagsLogGroup` が Lambda 実行 IAM ロールに自動的に追加されます。
+
+`DdFetchStepFunctionsTags`
+: Forwarder が GetResources API 呼び出しを使用して Step Functions タグをフェッチし、それらをログとトレースに適用できるようにします (Step Functions のトレースが有効な場合)。true に設定すると、アクセス許可 `tag:GetResources` が Lambda 実行 IAM ロールに自動的に追加されます。
+
+`DdStepFunctionTraceEnabled`
+: Set to true to enable tracing for all Step Functions.
 
 `SourceZipUrl`
 : 実行内容を理解できない場合は、変更しないでください。関数のソースコードのデフォルトの場所を上書きします。

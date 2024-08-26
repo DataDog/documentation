@@ -24,11 +24,11 @@ title: Logging Without Limits™ ガイド
 
 クラウドベースのアプリケーションは、毎分数百万というペースでログを生成できますが。すべてのログに価値があるわけではなく、またその重要度もマチマチです。そこで、Datadog の [Logging without Limits™][1] は、[ログの取り込みとインデックス化][2]を切り離すことで柔軟に対応します。
 
-このガイドでは、ログエクスポローラーを構造化し KPI をモニターするのに役立つ、Logging Without Limits™ の主要な機能、 [パターン](#2-大量のログパターンを識別)、[除外フィルター](#3-除外フィルターログパターンを作成)、[ログベースのカスタムメトリクス](#4-除外されたログを追跡するメトリクスを作成)、 [モニター](#異常検知モニターを作成)を紹介します。
+This guide identifies key components of Logging Without LimitsTM such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-to-track-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitor your KPIs over time.
 
 ## 1. 最多ログのサービスステータスを特定
 
-最多ログサービスの中にはさまざまなログがあり、トラブルシューティングに関係のないものもあります。たとえば、大規模な障害時やイベントの際に、400 番台や 500 番台の応答コードログのみを調べる場合、ログエクスポローラーから 200 番台のものを除外することでトラブルシューティングを円滑に進めることができます。最初に対応するサービスを特定することで、最も多くのログを生み出すサービスステータスを特定し、[ログエクスポローラービュー][3]から除外すべきものを判断することができます。
+最多ログサービスの中にはさまざまなログがあり、トラブルシューティングに関係のないものもあります。たとえば、大規模な障害時やイベントの際に、400 番台や 500 番台の応答コードログのみを調べる場合、ログエクスポローラーから 200 番台のものを除外することでトラブルシューティングを円滑に進めることができます。最初に対応するサービスを特定することで、最も多くのログを生み出すサービスステータスを特定し、[ログエクスポローラービュー][3]から除外すべきものを判断することができます。
 
 {{< img src="logs/guide/getting-started-lwl/identify_logging_service.mp4" alt="最多ログのサービスステータスを特定" video=true style="width:100%;">}}
 
@@ -55,7 +55,7 @@ title: Logging Without Limits™ ガイド
 
 パターンビューは、ノイズの多いパターンを特定しフィルタリングする際に役立ちます。パターンに一致するログ数を、サービスとステータスに分けて表示します。一番上のパターンをクリックすると、ステータスに関連するイベントの詳細なログが表示されます。コンテキストパネルには、最もノイズの多いステータスパターンに関する情報が表示されます。
 
-## 3. 除外フィルターログパターンを作成
+## 3. Create a log pattern exclusion filter
 
 パターンのコンテキストパネルには、ログパターンのすべてのインスタンス（イベント）が一覧表示され、選択したパターンに基づいたカスタム検索クエリが作成されます。除外フィルターでこのクエリを使用して、インデックスからこれらのログを削除します。
 
@@ -84,28 +84,26 @@ title: Logging Without Limits™ ガイド
 
 **ログパターンに基づき新しいログベースのメトリクスを生成するには**:
 
-1. Datadog アカウントで、メインメニューの **Logs** にカーソルを合わせ、**Generate Metrics** を選択し、右上の **New Metric+** ボタンをクリック。
-2. **Define Query** で、コピーしてパターン除外フィルターに貼り付けた検索クエリを入力します（上のを例とすると、`service:web-store status:info "updating recommendations with customer_id" "url shops"`）。
-3. 追跡するフィールドを選択。`*` を選択し、クエリに一致するすべてのログのカウントを生成するか、メジャー (例、`@duration`) を入力して数値を集計し、集計メトリクスの対応するカウント、最小、最大、合計、平均を作成します。
-4. グループにディメンションを追加。生成されたログベースのメトリクスに適用するログ属性またはタグキーを選択し、 `<KEY>:<VALUE>` 形式に従いタグに変換します。ログベースのメトリクスは、カスタムメトリクスと見なされます。タイムスタンプ、ユーザー ID、リクエスト ID、セッション IDなど、無制限または極めてカーディナリティの高い属性を使うグループ化は避け、請求に影響を与えないようにします。
-5. メトリクスに名前を付ける。ログベースのメトリクスの名前は、メトリクスの命名規則に従う必要があります。
-
-{{< img src="logs/guide/getting-started-lwl/custom_metric.mp4" alt="カスタムメトリクスを生成" video=true style="width:100%;">}}
+1. [Generate Metrics][9] ページに移動します。
+1. 右上の **New Metric** をクリックします。
+1. メトリクスの名前を入力します。ログベースのメトリクスの名前は、メトリクスの命名規則に従う必要があります。
+1. **Define Query** で、コピーしてパターン除外フィルターに貼り付けた検索クエリを入力します。例として、上記の例では次のようになります: `service:web-store status:info "updating recommendations with customer_id" "url shops"`
+1. 追跡するフィールドを選択。`*` を選択し、クエリに一致するすべてのログのカウントを生成するか、メジャー (例、`@duration`) を入力して数値を集計し、集計メトリクスの対応するカウント、最小、最大、合計、平均を作成します。
+1. グループにディメンションを追加。生成されたログベースのメトリクスに適用するログ属性またはタグキーを選択し、 `<KEY>:<VALUE>` 形式に従いタグに変換します。ログベースのメトリクスは、カスタムメトリクスと見なされます。タイムスタンプ、ユーザー ID、リクエスト ID、セッション IDなど、無制限または極めてカーディナリティの高い属性を使うグループ化は避け、請求に悪影響を与えないようにします。
 
 ### 異常検知モニターの作成
 
-[異常検知][9]は、メトリクスが過去とは異なる挙動をしている時を特定するためのアルゴリズム機能です。除外されたログの異常検知モニターを作成すると、設定したアラート条件に基づき必要な際に警告が発せられます。
+[異常検知][10]は、メトリクスが過去とは異なる挙動をしている時を特定するためのアルゴリズム機能です。除外されたログの異常検知モニターを作成すると、設定したアラート条件に基づき必要な際に警告が発せられます。
 
 **異常検知モニターを設定するには**:
 
-1. メインのナビゲーションページで次のように移動します：**Monitors -> New Monitor -> Anomaly**.
-2. 前のセクションで定義したログベースのメトリクスを入力。
-3. アラート条件を設定し、ユーザーやユーザーのグループに現状を通知する際に必要な情報を追加します。
-4. モニターを保存。
+1. [New Monitor][11] ページに移動します。
+1. **Anomaly** を選択します。
+1. 前のセクションで定義したログベースのメトリクスを入力。
+1. アラート条件を設定し、ユーザーやユーザーのグループに現状を通知する際に必要な情報を追加します。
+1. **Create** をクリックします。
 
-{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.mp4" alt="異常検知モニター" video=true style="width:100%;">}}
-
-異常が検出されると、タグ付けされている全員にアラートが送信されます。このアラートは、[Monitors -> Triggered Monitors][10] でも確認できます。
+異常が検出されると、タグ付けされている全員にアラートが送信されます。このアラートは、[Triggered Monitors][12] ページでも確認できます。
 
 ## まとめ
 
@@ -120,7 +118,7 @@ title: Logging Without Limits™ ガイド
 
 Logging Without Limits™ の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -132,5 +130,7 @@ Logging Without Limits™ の詳細やログエクスポローラー、Live Tail
 [6]: /ja/logs/archives/
 [7]: /ja/metrics/
 [8]: /ja/logs/logs_to_metrics/
-[9]: /ja/monitors/types/anomaly/
-[10]: https://app.datadoghq.com/monitors#/triggered
+[9]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[10]: /ja/monitors/types/anomaly/
+[11]: https://app.datadoghq.com/monitors/create
+[12]: https://app.datadoghq.com/monitors#/triggered

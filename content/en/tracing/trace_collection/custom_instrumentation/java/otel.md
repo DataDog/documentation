@@ -200,6 +200,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [15]: /tracing/setup/java/
 [16]: /tracing/glossary/#trace
 [17]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
-[18]: /tracing/trace_collection/trace_context_propagation/java/
+[18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /tracing/security
 [20]: /tracing/guide/ignoring_apm_resources/

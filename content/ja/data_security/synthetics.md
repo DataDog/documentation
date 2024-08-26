@@ -32,7 +32,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Storage**: [Amazon S3 バケット][1]の暗号化。
+* **Storage**: [Amazon S3 バケット][1]の暗号化
 * **Transport**: [S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
@@ -42,7 +42,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 {{< site-region region="eu" >}}
 
-* **Storage**: GCS のサービスアカウント][1]による暗号化（[AES256][2]使用）。
+* [サービスアカウントを使用した GCS][1]による暗号化 ([AES256][2] 使用)。
 * **Transport**: [GCS の認証、整合性、暗号化][3]を用いた転送中の暗号化。
 
 [1]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
@@ -75,7 +75,7 @@ title: Synthetic モニタリングのデータセキュリティ
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
 * **Storage**: [AWS][1]の暗号化。
-* **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート（API キーによる認証）、そして Datadog からストレージへの、[S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
+* **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート (API キーによる認証)、そして Datadog からストレージへの転送中の暗号化: [S3 の AWS 署名バージョン4][2]を使用。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
@@ -84,8 +84,8 @@ title: Synthetic モニタリングのデータセキュリティ
 
 {{< site-region region="eu" >}}
 
-* **Storage**: GCS のサービスアカウント][1]による暗号化（[AES256][2]使用）。
-* **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート（API キーによる認証）、そして Datadog からストレージへの、[GCS の認証、整合性、暗号化][3]を用いた転送中の暗号化。
+* [サービスアカウントを使用した GCS][1]による暗号化 ([AES256][2] 使用)。
+* **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート (API キーによる認証)、そして Datadog からストレージへの転送中の暗号化: [GCS の認証、整合性、暗号化][3]を使用。
 
 [1]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
 [2]: https://cloud.google.com/security/encryption-at-rest/default-encryption
@@ -99,7 +99,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 ## シークレットの保存
 
-難読化機能を持つ[グローバル変数][4]にシークレットを保存して、グローバル変数の値をテストコンフィギュレーションおよびその結果に漏洩させないようにすることができます。その後、専用の[グローバル変数 RBAC アクセス許可][5]を使用して、グローバル変数へのアクセスを制限することができます。
+難読化機能を持つ[グローバル変数][4]にシークレットを保存して、グローバル変数の値がテスト構成やその結果に漏洩しないようにすることができます。その後、専用の[グローバル変数 RBAC 権限][5]を使用して、グローバル変数へのアクセスを制限することができます。
 
 ## プライバシーのオプション
 

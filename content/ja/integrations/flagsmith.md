@@ -25,6 +25,7 @@ author:
 categories:
 - 問題追跡
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: flagsmith
 integration_title: Flagsmith
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: flagsmith
 public_title: Flagsmith
@@ -52,7 +52,6 @@ tile:
   - Category::Issue Tracking
   - Category::Developer Tools
   - Offering::UI Extension
-  - Offering::Integration
   configuration: README.md#Setup
   description: Flagsmith のフラグ変更イベントが Datadog に表示されます
   media: []
@@ -78,7 +77,7 @@ Flagsmith は、Datadog と以下のインテグレーションを提供して�
 
 Flagsmith のダッシュボードウィジェットを使用すると、Flagsmith のフラグと監査ログを Datadog で直接確認することができます。
 
-## 計画と使用
+## セットアップ
 
 [Flagsmith ダッシュボード][2]の Integrations Menu を選択し、Datadog Integration を追加します。[Datadog API キー][3]を入力します。Base URL には、US Datadog サイトを使用している場合は `https://api.datadoghq.com`、EU Datadog サイトを使用している場合は `https://api.datadoghq.eu` を入力します。
 
@@ -95,21 +94,21 @@ Flagsmith のダッシュボードウィジェットを使用すると、Flagsmi
 1. ページサイズと、オプションでフィルターにかけるウィジェットタイトルと Flagsmith Tag を選択します。
 1. **Save** をクリックして、ダッシュボードウィジェットの構成を完了します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Flagsmith インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Flagsmith インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 すべての Flagsmith イベントが Datadog のイベントストリームに送信されます。
 
-## ヘルプ
+## トラブルシューティング
 
 サポートが必要な場合は、 [Flagsmith のドキュメント][5]をご覧いただくか、[Datadog サポート][6]までお問い合わせください。
 

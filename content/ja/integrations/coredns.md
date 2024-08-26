@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10038
     source_type_name: CoreDNS
-  logs:
-    source: coredns
   monitors:
     '[CoreDNS] Cache hits count low': assets/monitors/coredns_cache_hits_low.json
     '[CoreDNS] Request duration high': assets/monitors/coredns_request_duration_high.json
@@ -36,6 +34,7 @@ categories:
 - kubernetes
 - ログの収集
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_on_public_website: true
@@ -43,9 +42,8 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 3.2.1
+integration_version: 3.2.3
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: coredns
 public_title: CoreDNS
@@ -61,10 +59,18 @@ tile:
   - Category::Log Collection
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: CoreDNS は、Kubernetes の DNS メトリクスを収集します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/coredns-metrics/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/coredns-monitoring-tools/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-coredns-with-datadog/
   support: README.md#Support
   title: CoreDNS
 ---
@@ -76,7 +82,7 @@ tile:
 
 CoreDNS からリアルタイムにメトリクスを取得して、DNS エラーとキャッシュのヒットまたはミスを視覚化および監視します。
 
-## 計画と使用
+## セットアップ
 
 
 バージョン 1.11.0 から、この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳細は [OpenMetrics ベースのインテグレーションにおける最新バージョンとレガシーバージョン][1]を参照してください。
@@ -85,11 +91,11 @@ CoreDNS チェックの最新モードは Python 3 を必要とし、`.bucket` �
 
 Python 3 を使用できないホスト、または以前にこのインテグレーションモードを実装した場合は、`legacy` モードの[構成例][3]を参照してください。`coredns.d/auto_conf.yaml` ファイルに依存しているオートディスカバリーのユーザーのために、このファイルはデフォルトで `legacy` モードのチェックのために `prometheus_url` オプションを有効にします。デフォルトの構成オプションについては [coredns.d/auto_conf.yaml][4] のサンプルを、利用可能なすべての構成オプションについては [coredns.d/conf.yaml.example][5] のサンプルを参照してください。
 
-### インフラストラクチャーリスト
+### インストール
 
 CoreDNS チェックは [Datadog Agent][6] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 {{< tabs >}}
 {{% tab "Docker" %}}
 #### Docker
@@ -109,7 +115,7 @@ LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:91
 この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```yaml
-LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
+LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
 ```
 
 **注**:
@@ -118,7 +124,7 @@ LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/met
 - `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
 - ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-#### 収集データ
+#### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -134,7 +140,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -155,7 +161,7 @@ metadata:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+          "openmetrics_endpoint": "http://%%host%%:9153/metrics",
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -180,7 +186,7 @@ metadata:
           "init_config": {},
           "instances": [
             {
-              "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+              "openmetrics_endpoint": "http://%%host%%:9153/metrics",
               "tags": ["dns-pod:%%host%%"]
             }
           ]
@@ -201,7 +207,7 @@ spec:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "prometheus_url": "http://%%host%%:9153/metrics", 
+          "prometheus_url": "http://%%host%%:9153/metrics",
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -212,7 +218,7 @@ spec:
 ```yaml
           "instances": [
             {
-              "prometheus_url": "http://%%host%%:9153/metrics", 
+              "prometheus_url": "http://%%host%%:9153/metrics",
               "tags": ["dns-pod:%%host%%"]
             }
           ]
@@ -224,7 +230,7 @@ spec:
 - `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
 - ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-#### 収集データ
+#### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
@@ -285,7 +291,7 @@ metadata:
 - `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
 - ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
@@ -312,21 +318,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `coredns` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "coredns" >}}
 
 
-### ヘルプ
+### イベント
 
 CoreDNS チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "coredns" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

@@ -1,6 +1,7 @@
 ---
 categories:
 - mobile
+custom_kind: integration
 dependencies: []
 description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
 doc_link: https://docs.datadoghq.com/integrations/mparticle/
@@ -11,7 +12,6 @@ integration_id: mparticle
 integration_title: mParticle
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: mparticle
 public_title: Datadog-mParticle インテグレーション
@@ -31,9 +31,9 @@ mParticle により、実行時のパフォーマンスデータの詳細をモ�
 
 mParticle についての詳細は、[ブログ][1]や[ドキュメント][2]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. [mParticle アカウント][3]にログインします。
 2. 左側のナビゲーションバーにある紙飛行機アイコンをクリックして、Services Page に移動します。
@@ -41,21 +41,21 @@ mParticle についての詳細は、[ブログ][1]や[ドキュメント][2]を
 4. 設定パネルに [Datadog API キー][4]を入力し、Save をクリックします。
 5. Status をオンに切り替えると、Datadog にデータが転送されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションで利用できるメトリクスについては、[mParticle ドキュメント][2]を参照してください。
 
-### ヘルプ
+### イベント
 
 mParticle インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 mParticle インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

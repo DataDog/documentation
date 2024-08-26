@@ -56,7 +56,7 @@ title: weighted() の仕組みは？
 
 `weighted()` 関数は、送信率に対して関数を重み付けすることで、短命なタグの矛盾した挙動を改善します
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

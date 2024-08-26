@@ -45,11 +45,17 @@ For beta customers using v3.0, <code>application</code> has been replaced with <
 ##### Expanded data model
 v3.0 supports multiple kinds of entities. You can organize your systems using various components such as systems, services, queues, and datastores.
 
+##### Multi-ownership 
+You can assign multiple owners to any objects defined through the v3.0 schema to specify multiple points of contact.
+
 ##### Enhanced relationship mapping
 With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
 
 ##### Inheritance of system metadata
 Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+
+##### Precise code location
+You can add the mapping of your code location for your service. The `codeLocations` section in v3.0 specifies the locations of the code with the repository that contains the code and its associated `paths`. The `paths` attribute is a list of [globs][4] that should match paths in the repository. Learn more about how this addition improves your experience with [Datadog Code Analysis.][3] 
 
 #### Example YAML for `kind:system`
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
@@ -293,3 +299,5 @@ URL Parameter: `ref <kind>:<name>`
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [2]: https://github.com/DataDog/schema/tree/main/service-catalog
+[3]: https://docs.datadoghq.com/code_analysis/faq/#identifying-the-code-location-in-the-service-catalog
+[4]: https://en.wikipedia.org/wiki/Glob_(programming)

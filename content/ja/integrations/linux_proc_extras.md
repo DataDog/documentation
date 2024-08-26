@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: システム
 integration_title: Linux Proc Extras
 integration_version: 2.5.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: linux_proc_extras
 public_title: Linux Proc Extras
@@ -42,6 +42,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: linux_proc_extras の状態を視覚化および監視。
   media: []
@@ -60,13 +61,13 @@ linux_proc_extras サービスからメトリクスをリアルタイムに取�
 - linux_proc_extras の状態を視覚化および監視できます。
 - linux_proc_extras のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Linux_proc_extras チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `linux_proc_extras.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル linux_proc_extras.d/conf.yaml][3] を参照してください。
 
@@ -76,21 +77,21 @@ Linux_proc_extras チェックは [Datadog Agent][1] パッケージに含まれ
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `linux_proc_extras` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "linux_proc_extras" >}}
 
 
-### ヘルプ
+### イベント
 
 Linux Proc Extras チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Linux Proc Extras チェックには、サービスチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

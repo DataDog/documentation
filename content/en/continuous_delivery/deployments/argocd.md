@@ -35,7 +35,7 @@ For more information on how to set up Argo CD notifications using webhooks, see 
 The first step is to create the service containing the Datadog intake URL and the Datadog API Key:
 1. Add your [Datadog API Key][11] in the
 `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
-1. Add a service in the `argocd-notifications-cm` config map with the following format:
+1. Add a notification service in the `argocd-notifications-cm` config map with the following format:
 
 ```yaml
 apiVersion: v1
@@ -54,7 +54,7 @@ data:
       value: "application/json"
 ```
 
-`cd-visibility-webhook` is the name of the service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
+`cd-visibility-webhook` is the name of the notification service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
 
 The second step is to add the template in the same `argocd-notifications-cm` config map:
 
@@ -100,7 +100,7 @@ data:
 
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
-After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
+After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
 
 ```yaml
@@ -148,8 +148,8 @@ metadata:
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][14] and your Kubernetes resources should have the following labels:
-- `service` (required): specifies the Datadog service of this resource
-- `team` (optional): specifies the Datadog team of this resource
+- `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][16].
+- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
 
 Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
@@ -197,3 +197,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [13]: /tracing/service_catalog
 [14]: /containers/kubernetes
 [15]: https://app.datadoghq.com/orchestration/explorer
+[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1

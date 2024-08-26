@@ -19,14 +19,16 @@ For more information, see the OpenTelemetry project documentation for the [OTLP 
 
 Add the following lines to your Collector configuration:
 
+{{% otel-endpoint-note %}}
+
 ```yaml
 receivers:
   otlp:
    protocols:
       http:
-       endpoint: "localhost:4318"
+       endpoint: "0.0.0.0:4318"
       grpc:
-       endpoint: "localhost:4317"
+       endpoint: "0.0.0.0:4317"
 ```
 
 ## Data collected
@@ -71,7 +73,7 @@ Resource attributes:
      -> k8s.replicaset.name: Str(opentelemetry-demo-shippingservice-7f9b565549)
      -> kube_app_component: Str(shippingservice)
 ScopeSpans #0
-ScopeSpans SchemaURL: 
+ScopeSpans SchemaURL:
 InstrumentationScope opentelemetry-otlp 0.11.0
 Span #0
     Trace ID       : c4f6d4a8831a5d7b95727da5443ad8a4
@@ -82,7 +84,7 @@ Span #0
     Start time     : 2023-11-20 12:56:26.401728438 +0000 UTC
     End time       : 2023-11-20 12:56:26.403518138 +0000 UTC
     Status code    : Unset
-    Status message : 
+    Status message :
 Attributes:
      -> http.host: Str(opentelemetry-demo-quoteservice)
      -> http.url: Str(http://opentelemetry-demo-quoteservice:8080/getquote)
@@ -127,13 +129,13 @@ Resource attributes:
      -> kube_app_instance: Str(opentelemetry-collector)
      -> k8s.pod.name: Str(opentelemetry-collector-agent-4dm92)
 ScopeMetrics #0
-ScopeMetrics SchemaURL: 
+ScopeMetrics SchemaURL:
 InstrumentationScope otelcol/prometheusreceiver 0.88.0-dev
 Metric #0
 Descriptor:
      -> Name: otelcol_exporter_queue_capacity
      -> Description: Fixed capacity of the retry queue (in batches)
-     -> Unit: 
+     -> Unit:
      -> DataType: Gauge
 NumberDataPoints #0
 Data point attributes:
@@ -171,12 +173,12 @@ Resource attributes:
      -> kube_app_instance: Str(opentelemetry-collector)
      -> k8s.pod.start_time: Str(2023-11-20T12:53:23Z)
 ScopeLogs #0
-ScopeLogs SchemaURL: 
-InstrumentationScope  
+ScopeLogs SchemaURL:
+InstrumentationScope
 LogRecord #0
 ObservedTimestamp: 2023-11-20 13:02:04.332021519 +0000 UTC
 Timestamp: 2023-11-20 13:01:46.095736502 +0000 UTC
-SeverityText: 
+SeverityText:
 SeverityNumber: Unspecified(0)
 Body: Str( return wrapped_send(self, request, **kwargs))
 Attributes:
@@ -184,8 +186,8 @@ Attributes:
      -> time: Str(2023-11-20T13:01:46.095736502Z)
      -> logtag: Str(F)
      -> log.iostream: Str(stderr)
-Trace ID: 
-Span ID: 
+Trace ID:
+Span ID:
 Flags: 0
 ```
 
