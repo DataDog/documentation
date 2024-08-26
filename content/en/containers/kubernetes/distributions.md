@@ -390,8 +390,6 @@ spec:
       # In OpenShift 4.0+, set the hostNetwork parameter to allow access to your cloud provider metadata API endpoint.
       # This is necessary to retrieve host tags and aliases collected by Datadog cloud provider integrations. 
       hostNetwork: true
-      image:
-        name: gcr.io/datadoghq/agent:latest
       securityContext:
         runAsUser: 0
         seLinuxOptions:
@@ -411,8 +409,6 @@ spec:
     clusterAgent:
       serviceAccountName: datadog-agent-scc
       replicas: 2 # High-availability
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 {{% /tab %}}
