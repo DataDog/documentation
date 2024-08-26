@@ -5,11 +5,19 @@ disable_toc: false
 
 The Amazon S3 destination is available for the [Archive Logs template][1]. Use this destination to send your logs in Datadog-rehydratable format to an Amazon S3 bucket for archiving. You need to set up [Datadog Log Archives][2] if you haven't already, and then set up the destination in the pipeline UI.
 
+### Batch settings
+
+When one of these parameters is met, the batch of events is flushed. See [batch settings][3] for more information.
+
+| Max Events     | Max Bytes       | Timeout (seconds)   |
+|----------------| ----------------| --------------------|
+| None           | 100,000,000     | 900                 |
+
 ## Configure Log Archives
 
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
-You need to have Datadog's [AWS integration][3] installed to set up Datadog Log Archives.
+You need to have Datadog's [AWS integration][4] installed to set up Datadog Log Archives.
 
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
@@ -50,4 +58,5 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 
 [1]: /observability_pipelines/archive_logs/
 [2]: /logs/log_configuration/archives/
-[3]: /integrations/amazon_web_services/#setup
+[3]: /observability_pipelines/destinations/#batch-settings-intro
+[4]: /integrations/amazon_web_services/#setup
