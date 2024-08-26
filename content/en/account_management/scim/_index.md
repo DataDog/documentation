@@ -12,7 +12,7 @@ algolia:
 ---
 
 <div class="alert alert-info">
-SCIM is available in the Infra Pro plan and all higher-tier plans, including Enterprise.
+SCIM is available with the Infrastructure Pro and Infrastructure Entreprise plans.
 </div>
 
 ## Overview
