@@ -19,6 +19,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterCreatedAtStartParameter:
       description: Only include API keys created on or after the specified date.
       in: query
@@ -27,6 +29,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtEndParameter:
       description: Only include API keys modified on or before the specified date.
       in: query
@@ -35,6 +39,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtStartParameter:
       description: Only include API keys modified on or after the specified date.
       in: query
@@ -43,6 +49,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterParameter:
       description: Filter API keys by the specified string.
       in: query
@@ -93,6 +101,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterCreatedAtStartParameter:
       description: Only include application keys created on or after the specified
         date.
@@ -102,6 +112,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterParameter:
       description: Filter application keys by the specified string.
       in: query
@@ -1654,6 +1666,8 @@ components:
           description: The timestamp when the AWS CUR config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         error_messages:
           description: The error messages for the AWS CUR config.
           items:
@@ -1681,10 +1695,14 @@ components:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         updated_at:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - bucket_name
@@ -1835,6 +1853,8 @@ components:
           description: The timestamp when the Azure config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         dataset_type:
           description: The dataset type of the Azure config.
           example: actual
@@ -1874,6 +1894,8 @@ components:
           description: The timestamp when the Azure config status was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         storage_account:
           description: The name of the storage account where the Azure Export is saved.
           example: dd-storage-account
@@ -1887,6 +1909,8 @@ components:
           description: The timestamp when the Azure config was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - client_id
@@ -14980,6 +15004,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -14993,6 +15019,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
@@ -15022,6 +15050,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -15838,6 +15868,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationType'
       required:
@@ -15852,6 +15884,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         client_token:
           description: Client token of the RUM application.
           example: abcd1234efgh5678ijkl90abcd1234efgh0
@@ -15961,6 +15995,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
@@ -15974,6 +16010,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -16058,6 +16096,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationUpdateType'
       required:
@@ -35257,7 +35297,7 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
               {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
