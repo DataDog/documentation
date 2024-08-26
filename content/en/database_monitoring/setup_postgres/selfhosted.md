@@ -161,51 +161,8 @@ SECURITY DEFINER;
 ```
 
 ### Securely store your password
+
 {{% dbm-secret %}}
-
-### Verify
-
-To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
-
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-When it prompts for a password, use the password you entered when you created the `datadog` user.
 
 {{% /collapse-content %}}
 
