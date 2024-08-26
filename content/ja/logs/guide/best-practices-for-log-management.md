@@ -23,15 +23,15 @@ Datadog ログ管理は、ログの収集、処理、アーカイブ、探索、
 
 Therefore, this guide walks you through various Log Management best practices and account configurations that provide you flexibility in governance, usage attribution, and budget control. More specifically, how to:
 
-- [複数のインデックスを設定し、ログをセグメント化する](#set-up-multiple-indexes-for-log-segmentation)
-- [長期保存のための複数のアーカイブを設定する](#set-up-multiple-archives-for-long-term-storage)
-- [カスタムロールの RBAC を設定する](#set-up-rbac-for-custom-roles)
+- [複数のインデックスを設定し、ログをセグメント化する](#ログセグメンテーションのための複数のインデックスを設定する)
+- [長期保存のための複数のアーカイブを設定する](#長期保存のための複数のアーカイブを設定する)
+- [カスタムロールの RBAC を設定する](#カスタムロールの-rbac-を設定する)
 
 また、このガイドでは、ログの使用量を監視する方法について、以下のように説明します。
 
-- [予期せぬログトラフィックの急増にアラートを出す](#alert-on-unexpected-log-traffic-spikes)
-- [インデックス化されたログに対して、ボリュームがしきい値を超えた場合にアラートを出す](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
-- [大容量ログの除外フィルターを設定する](#set-up-exclusion-filters-on-high-volume-logs)
+- [予期せぬログトラフィックの急増にアラートを出す](#予期せぬログトラフィックの急増に対するアラート)
+- [インデックス化されたログに対して、ボリュームがしきい値を超えた場合にアラートを出す](#インデックス化されたログボリュームが指定されたしきい値を超えた場合のアラート)
+- [大容量ログの除外フィルターを設定する](#大量ログの除外フィルターを設定する)
 
 If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
 
