@@ -20,6 +20,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: ntp
 integration_title: NTP
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ntp
 public_title: NTP
@@ -45,6 +45,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
   media: []
@@ -89,7 +90,7 @@ Agent はデフォルトで  NTP チェックを有効にします。チェッ�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `ntp` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "ntp" >}}

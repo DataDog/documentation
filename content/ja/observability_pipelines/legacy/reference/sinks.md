@@ -1,6 +1,6 @@
 ---
 aliases:
-- /observability_pipelines/reference/sinks/
+- /ja/observability_pipelines/reference/sinks/
 legacy: true
 title: シンク
 ---

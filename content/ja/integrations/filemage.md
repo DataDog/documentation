@@ -27,6 +27,7 @@ author:
   support_email: tmoore@dopensource.com
 categories:
 - クラウド
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filemage/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: filemage
 integration_title: FileMage
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: filemage
 public_title: FileMage
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: FileMage サービス用モニタリング Agent
   media:
@@ -70,7 +71,7 @@ tile:
 
 このチェックは [FileMage][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ### パッケージのインストール
 
@@ -85,7 +86,7 @@ datadog-agent integration install -t datadog-filemage==1.0.0
 
 2. Agent ベースの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. FileMage の[メトリクス](#metrics)の収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `filemage.d/conf.yaml.example` ファイルを編集します。
    完了したら、変更したファイルを `filemage.d/conf.yaml` という名前で保存します。
@@ -120,19 +121,19 @@ datadog-agent integration install -t datadog-filemage==1.0.0
 ```
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
 このインテグレーションは、各 FTP コマンドの実行回数を追跡します。
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "filemage" >}}
 
 
-### ヘルプ
+### イベント
 
 FileMage インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要な場合は、[dOpenSource][10] までお問い合わせください。
 

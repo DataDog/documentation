@@ -27,6 +27,7 @@ categories:
 - metrics
 - cloud
 - data stores
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,7 +36,6 @@ integration_id: amazon-s3
 integration_title: Amazon S3
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_s3
 public_title: Amazon S3
@@ -48,6 +48,7 @@ tile:
   - Category::Metrics
   - Category::クラウド
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon S3 は、可用性と拡張性に優れたクラウドストレージサービスです。
   media: []
@@ -67,9 +68,9 @@ Amazon S3 は、可用性と拡張性に優れたクラウドストレージサ�
 
 注: S3 リクエストメトリクスはバケット自体で有効にする必要があります。[AWS ドキュメント][1]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -78,27 +79,27 @@ Amazon S3 は、可用性と拡張性に優れたクラウドストレージサ�
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `S3` が有効になっていることを確認します。
 2. [Datadog - Amazon S3 インテグレーション][4]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_s3" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon S3 インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
-Amazon S3 インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon S3 integration does not include any service checks.
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://app.datadoghq.com/integrations/amazon-billing
+[4]: https://app.datadoghq.com/integrations/amazon-s3
 [5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_s3/metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

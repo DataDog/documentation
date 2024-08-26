@@ -3,6 +3,7 @@ categories:
 - cloud
 - google cloud
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Google Cloud Dataproc のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataproc/
@@ -13,7 +14,6 @@ integration_id: google-cloud-dataproc
 integration_title: Google Cloud Dataproc
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_dataproc
 public_title: Datadog-Google Cloud Dataproc インテグレーション
@@ -28,9 +28,9 @@ Google Cloud Dataproc は、Apache Spark と Apache Hadoop のクラスターを
 
 Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Dataproc からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
@@ -45,21 +45,21 @@ Google Cloud Dataproc のログは Google Cloud Logging で収集され、Cloud 
 3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "google_cloud_dataproc" >}}
 
 
-### ヘルプ
+### イベント
 
 Google Cloud Dataproc インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Google Cloud Dataproc インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

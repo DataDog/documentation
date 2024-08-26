@@ -2,6 +2,7 @@
 categories:
 - クラウド
 - notifications
+custom_kind: integration
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/segment/
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: Segment
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: segment
 public_title: Datadog-Segment インテグレーション
@@ -37,28 +37,28 @@ Datadog のすぐに使えるダッシュボードとモニターを使用する
 
 **注**: これらのメトリクスは、Snowflake や Amplitude などの宛先への配信を目的としており、インスツルメントされたアプリケーションからセグメントへの配信を目的としていません。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [インテグレーションタイル][1]に移動し、`Add WorkSpace` リンクをクリックして Oauth2 フローを開始することで、Datadog にワークスペースへの `workspace:read` アクセス権を付与します。
 Datadog にワークスペースへのアクセスを付与するセグメントのユーザーには、`workspace owner` の役割がある必要があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "segment" >}}
 
 
-### ヘルプ
+### イベント
 
 Segment インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Segment インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

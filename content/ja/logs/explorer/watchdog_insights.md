@@ -1,6 +1,6 @@
 ---
 aliases:
-- /logs/explorer/insights
+- /ja/logs/explorer/insights
 description: 調査を開始またはフォローアップする地点に関するインサイトを得る
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
