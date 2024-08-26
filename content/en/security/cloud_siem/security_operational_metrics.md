@@ -29,7 +29,7 @@ Cloud SIEM provides security operational metrics to help you determine the effec
 : **Description**:The average time from when a matching log is triggered to when a signal is generated.
 
 `datadog.security.siem_signal.time_to_acknowledge`
-: **Name**:  Time to Acknowledge (TTA)
+: **Name**: Time to Acknowledge (TTA)
 : **Description**: The average time from when a signal is triggered to when an investigation on the signal begins.
 
 `datadog.security.siem_signal.time_to_resolve`
