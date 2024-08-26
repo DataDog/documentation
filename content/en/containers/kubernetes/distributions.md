@@ -29,7 +29,7 @@ further_reading:
 ## Overview
 
 This section aims to document specifics and to provide good base configuration for all major Kubernetes distributions.
-These configuration can then be customized to add any Datadog feature.
+These configurations can then be customized to add any Datadog feature.
 
 * [AWS Elastic Kubernetes Service (EKS)](#EKS)
 * [Azure Kubernetes Service (AKS)](#AKS)
@@ -50,7 +50,7 @@ If you are using AWS Bottlerocket OS on your nodes, add the following to enable 
 
 In an EKS cluster, you can install the Operator using [Helm][1] or as an [EKS add-on][2].
 
-The configuration below is meant to work with either setup (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
+The configuration below is meant to work with either set up (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
 
 ```yaml
 kind: DatadogAgent
@@ -99,7 +99,7 @@ datadog:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
+AKS requires a specific configuration for the `Kubelet` integration due to how AKS has set up the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -219,7 +219,7 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-Using `spec.nodeName` keeps TLS verification. In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when the cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case use the first AKS configuration provided: remove any settings for the Kubelet host path (defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**. Do NOT set the Kubelet host path and `tlsVerify: false` together.
+Using `spec.nodeName` keeps TLS verification. In some clusters, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when the cluster is set up in a Virtual Network using custom DNS on Linux nodes. In this case use the first AKS configuration provided: remove any settings for the Kubelet host path (defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**. Do NOT set the Kubelet host path and `tlsVerify: false` together.
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -334,49 +334,46 @@ agents:
 
 ## Red Hat OpenShift {#Openshift}
 
-OpenShift comes with hardened security by default (SELinux, SecurityContextConstraints), thus requiring some specific configuration:
-- Create SCC for Node Agent and Cluster Agent
-- Specific CRI socket path as OpenShift uses CRI-O container runtime
+OpenShift comes with hardened security by default with SELinux and SecurityContextConstraints (SCC), thus requiring some specific configurations:
+- Elevated SCC access for the Node Agent and Cluster Agent
 - Kubelet API certificates may not always be signed by cluster CA
 - Tolerations are required to schedule the Node Agent on `master` and `infra` nodes
 - Cluster name should be set as it cannot be retrieved automatically from cloud provider
+- *(Optional)* Setting `hostNetwork: true` in the Node Agent to allow the Agent to make requests to cloud provider metadata services (IMDS)
 
-This configuration supports OpenShift 3.11 and OpenShift 4, but works best with OpenShift 4.
+This core configuration supports OpenShift 3.11 and OpenShift 4, but works best with OpenShift 4.
+
+Additionally log collection and APM have slightly different requirements as well.
+
+The use of Unix Domain Socket (UDS) for APM and DogStatsD can work in OpenShift, however is inadvisable. As it requires additional privileged permissions and SCC access to **both** your Datadog Agent pod and your application pod. Without these your application pod can fail to deploy. Datadog recommends disabling the UDS option to avoid this, allowing the Admission Controller inject the appropriate [TCP/IP setting][7] or [Service setting][8] for APM connectivity.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-When using the Datadog Operator in OpenShift, it is recommended that you install it through OperatorHub or RedHat Marketplace.
-The configuration below is meant to work with this setup (due to SCC/ServiceAccount setup), when the
-Agent is installed in the same namespace as the Datadog Operator.
+When using the Datadog Operator in OpenShift, it is recommended that you use the Operator Lifecycle Manager to deploy the Datadog Operator from OperatorHub in your OpenShift Cluster web console. You can find the [Operator install steps here][1].
+
+The configuration below is meant to work with this set up which creates the [ClusterRole and ClusterRoleBinding based access to the SCC][2] for this specified ServiceAccount `datadog-agent-scc`. This `DatadogAgent` configuration is meant to be deployed in the same namespace as the Datadog Operator.
 
 ```yaml
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
+  namespace: openshift-operators # set as namespace as where the Datadog Operator was deployed
 spec:
   features:
     logCollection:
-      enabled: false
-    liveProcessCollection:
-      enabled: false
-    liveContainerCollection:
       enabled: true
+      containerCollectAll: true
     apm:
-      enabled: false
-    cspm:
-      enabled: false
-    cws:
-      enabled: false
-    npm:
-      enabled: false
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
-      port: 8443
+      enabled: true
+      hostPortConfig:
+        enabled: true
+      unixDomainSocketConfig:
+        enabled: false
+    dogstatsd:
+      unixDomainSocketConfig:
+        enabled: false
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
@@ -384,17 +381,14 @@ spec:
     clusterName: <CLUSTER_NAME>
     kubelet:
       tlsVerify: false
-    criSocketPath: /var/run/crio/crio.sock
   override:
     clusterAgent:
+      serviceAccountName: datadog-agent-scc
       image:
         name: gcr.io/datadoghq/cluster-agent:latest
-      containers:
-        cluster-agent:
-          securityContext:
-            readOnlyRootFilesystem: false
     nodeAgent:
       serviceAccountName: datadog-agent-scc
+      hostNetwork: true
       securityContext:
         runAsUser: 0
         seLinuxOptions:
@@ -413,10 +407,14 @@ spec:
           effect: NoSchedule
 ```
 
-**Note**: The nodeAgent Security Context override is necessary for Log Collection and APM Trace Collection with the `/var/run/datadog/apm/apm.socket` socket. If these features are not enabled, you can omit this override.
+**Note**: The `nodeAgent.securityContext.seLinuxOptions` override is necessary for log collection when deploying with the Operator. If log collection is not enabled, you can omit this override.
 
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
+[2]: https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#role-based-access-to-ssc_configuring-internal-oauth
 {{% /tab %}}
 {{% tab "Helm" %}}
+
+The configuration below creates custom SCCs for the Agent and Cluster Agent Service Accounts.
 
 Custom `datadog-values.yaml`:
 
@@ -425,15 +423,16 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   clusterName: <CLUSTER_NAME>
-  criSocketPath: /var/run/crio/crio.sock
-  # Depending on your DNS/SSL setup, it might not be possible to verify the Kubelet cert properly
-  # If you have proper CA, you can switch it to true
   kubelet:
     tlsVerify: false
+  apm:
+    portEnabled: true
+    socketEnabled: false
 agents:
   podSecurity:
     securityContextConstraints:
       create: true
+  useHostNetwork: true
   tolerations:
     - effect: NoSchedule
       key: node-role.kubernetes.io/master
@@ -445,9 +444,6 @@ clusterAgent:
   podSecurity:
     securityContextConstraints:
       create: true
-kube-state-metrics:
-  securityContext:
-    enabled: false
 ```
 
 {{% /tab %}}
@@ -619,3 +615,5 @@ agents:
 [4]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
 [5]: /getting_started/containers/datadog_operator
 [6]: /agent/guide/operator-eks-addon
+[7]: /containers/kubernetes/apm/?tab=tcp
+[8]: /tracing/guide/setting_up_apm_with_kubernetes_service
