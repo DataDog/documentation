@@ -5,13 +5,11 @@ private: true
 
 ## Overview
 
-[Continuous Profiler][3] can be enabled as part of the [Single Step APM Instrumentation][1]
-(SSI) setup. Since this mode of profiler enablement is in private beta it is not yet integrated in
-the UI of the agent installation page. This page provides instructions on how to set it up. You
-should first familiarize yourself with SSI in general.
+Make sure you are familiar with [Single Step APM Instrumentation][1] (SSI) before proceeding.
 
-After you enable Continuous Profiler as part of the SSI setup of Datadog agent, processes where
-the agent is deployed are going to be profiled.
+[Continuous Profiler][3] can be enabled as part of the SSI setup. Since this mode of profiler
+enablement is in private beta it is not yet integrated in the UI of the agent installation page.
+This page provides instructions on how to set it up.
 
 ## Supported operating systems and environments
 
