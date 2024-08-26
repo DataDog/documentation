@@ -15,7 +15,7 @@ integration_id: azure-filestorage
 integration_title: Stockage Fichier Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_file_storage
 public_title: Intégration Datadog/Stockage Fichier Microsoft Azure

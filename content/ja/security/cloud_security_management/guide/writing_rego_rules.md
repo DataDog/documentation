@@ -5,24 +5,12 @@ further_reading:
 - link: /security/default_rules
   tag: ドキュメント
   text: デフォルトの Posture Management クラウド構成検出ルールを調べる
-- link: /security/misconfigurations/frameworks_and_benchmarks
+- link: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
   tag: ガイド
   text: フレームワークおよび業界のベンチマークの詳細
 is_beta: true
-kind: ガイド
 title: Rego によるカスタムルールの作成
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations は、選択したサイトではご利用いただけません。
-</div>
-{{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true">}}
-カスタムルールの作成は、すべての Cloud Security Management Misconfigurations (CSM Misconfigurations) のお客様が利用できるベータ版機能です。フィードバックやご質問は、<a href="/help">Datadog サポート</a>までご連絡ください。
-{{< /callout >}} 
-
 
 ## 概要
 
@@ -209,7 +197,7 @@ eval(iam_service_account) = "fail" if {
 
 ルール、モジュール、パッケージ、内包の詳細や、カスタムルールの書き方については、 [Rego ドキュメント][2]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

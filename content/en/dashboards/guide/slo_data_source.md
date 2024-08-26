@@ -1,6 +1,5 @@
 ---
 title: Graph historical SLO data on Dashboards
-kind: guide
 disable_toc: false
 ---
 

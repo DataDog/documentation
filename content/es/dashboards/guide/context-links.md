@@ -3,7 +3,6 @@ further_reading:
 - link: /dashboards/widgets
   tag: Documentación
   text: Lista de widget de dashboards
-kind: guía
 title: Enlaces contextuales
 ---
 

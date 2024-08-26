@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/widgets/treemap/
   tag: Documentación
   text: Widget treemap
-kind: documentación
 title: Widget de gráfico circular
 widget_type: sunburst
 ---

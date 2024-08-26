@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: 설명서
   text: 모니터 관리
-kind: 설명서
 title: 모니터 상태
 ---
 

@@ -26,6 +26,7 @@ categories:
 - コンテナ
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: aqua
 integration_title: Aqua
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: aqua
 public_title: Aqua
@@ -53,6 +53,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
   media: []
@@ -70,11 +71,11 @@ tile:
 
 Aqua チェックは、脆弱性の深刻度が高い場合、あるいは Aqua に登録されていないホスト上でコンテナが実行されている場合に、ユーザーに警告します。Aqua は、実行時にブロックされたイベントに関するデータアラートも送信します。さらに多くの Aqua スキャナが必要な場合は、インフラストラクチャーをスケーリングする Webhook をトリガーすることも可能です。
 
-## 計画と使用
+## セットアップ
 
 Aqua チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -86,7 +87,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
@@ -103,7 +104,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
 
 2. [Agent を再起動します][7]。
 
-#### 収集データ
+#### ログ収集
 
 Aqua によって生成されるログには、次の 2 種類があります。
 
@@ -141,21 +142,21 @@ Aqua エンフォーサーログを収集するには、以下のようにしま
 
 [Agent の `status` サブコマンドを実行][11]し、Checks セクションで `aqua` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "aqua" >}}
 
 
-### ヘルプ
+### イベント
 
 Aqua には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "aqua" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 

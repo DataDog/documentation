@@ -8,7 +8,7 @@ dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/
 has_logo: true
 integration_title: CloudCheckr
 is_public: true
-kind: integration
+custom_kind: integration
 name: cloudcheckr
 public_title: Datadog-CloudCheckr Integration
 short_description: "Add Datadog metrics in CloudCheckr to monitor and optimize your AWS usage."

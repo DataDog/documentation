@@ -39,7 +39,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: 블로그
   text: Datadog를 통한 AWS WAF 활동 모니터링
-kind: 설명서
 title: 애플리케이션 보안 관리
 ---
 

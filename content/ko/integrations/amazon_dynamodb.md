@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon DynamoDB
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_dynamodb
 public_title: Datadog-Amazon DynamoDB 통합

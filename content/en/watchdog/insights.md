@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights
-kind: documentation
 description: View anomalies and outliers that match your search query with Watchdog Insights.
 further_reading:
 - link: "/logs/explorer/watchdog_insights/"
@@ -57,6 +56,7 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 ### Filter on Insight query
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+**Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
@@ -67,6 +67,14 @@ To share a given outlier, click on it in the insight panel to open the details s
 {{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
 
 The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
+
+## Explore graph insights with Watchdog explains
+{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
+Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
+- What is the source of the spike?
+- Does this anomaly affect everyone or is an isolated incident?
+
+For more information, see the [Watchdog Explains][14] documentation.
 
 ## Outlier types
 
@@ -266,15 +274,15 @@ An overlay is then set on the function, with pink pills highlighting the differe
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
+For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer. 
 
-[1]: /watchdog/#overview
+[1]: https://app.datadoghq.com/process
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kubernetes anomalies][1] for the current context of the Kubernetes Explorer.
 
-[1]: /watchdog/#overview
+[1]: https://app.datadoghq.com/orchestration/overview/pod
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -296,3 +304,4 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
+[14]: /dashboards/graph_insights/watchdog_explains

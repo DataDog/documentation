@@ -30,6 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - configuration & deployment
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
 display_on_public_website: true
@@ -39,7 +40,6 @@ integration_id: nomad
 integration_title: Nomad
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nomad
 public_title: Nomad
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
   media: []
@@ -77,13 +78,13 @@ Nomad クラスターからメトリクスを収集して、以下のことが�
 
 推奨されるモニターを使用して、さまざまな Nomad イベントに関する通知を受け取ることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Nomad は、メトリクスを DogStatsD を通じて Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][2]します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Datadog Agent がインストールされたら、クライアントとサーバーの Nomad 構成に Telemetry スタンザを追加します。
 
@@ -99,21 +100,21 @@ telemetry {
 
 次に、各ホストで Nomad エージェントをリロードまたは再起動します。これで、Nomad のメトリクスが Datadog アカウントに収集されるようになります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "nomad" >}}
 
 
-### ヘルプ
+### イベント
 
 Nomad チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Nomad チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

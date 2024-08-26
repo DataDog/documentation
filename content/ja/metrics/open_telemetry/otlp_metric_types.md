@@ -11,7 +11,6 @@ further_reading:
 - link: /opentelemetry/guide/otlp_delta_temporality/
   tag: ガイド
   text: OpenTelemetry によるデルタ一時性メトリクスの生成
-kind: documentation
 title: OTLP メトリクスタイプ
 ---
 
@@ -71,10 +70,10 @@ OTLP Histogram は、母集団の合計やカウントなどの特定の集計�
 - *Aggregation temporality*、これは累積とデルタがあります。デルタメトリクスはタイムウィンドウが重ならないが、累積メトリクスは時間的に固定された開始点からのタイムウィンドウを表します。
 
 デフォルトのマッピングは以下の通りです。
-1. デルタヒストグラムは、Datadog の分布として報告されます。利用可能な集計について理解するために、[分布についての詳細をお読みください][1]。
-2. 累積ヒストグラムの場合、連続するポイント間のデルタが計算され、分布として Datadog に報告されます。OTLP ペイロードの値を復元するために、個々の集計で [`cumsum` 算術関数][2]を使用することができます。
+1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations. Histograms with a count of 0 are dropped.
+2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
 
-**注**: OTLP のヒストグラムメトリクスは、ディストリビューションメトリクスにマッピングされています。OTLP がこのデータを送信する方法のため、最大、最小、およびパーセンタイルの集計は、正確な計算ではなく、近似値です。
+**Note**: Histogram metrics in OTLP are mapped by default to Distribution metrics. Because of how OTLP sends this data, percentile aggregations and the max and min (if not available on the original OTLP data) are approximations, not accurate calculations.
 
 Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、`histogram` サブセクションで Histogram エクスポートを変更することができます。
 - `mode` に `counters` を指定すると、以下のようなメトリクスが生成されます。
@@ -183,7 +182,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 また、`counters` モードを使用し、`send_aggregation_metrics` フラグを有効にし、ヒストグラムのバケットの境界を `[-inf, 2, inf]` とした場合、以下のメトリクスが報告されます。
 
-| メトリクス名                                 | 値  | Lambda のトレースされた起動の 1 時間単位使用量の取得                                | Datadog アプリ内タイプ |
+| メトリクス名                                 | 値  | タグ                                | Datadog アプリ内タイプ |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`    | `15`   | 非該当                                 | COUNT               |
@@ -198,7 +197,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 レガシー OTLP Summary のメトリクス、`request.response_time.summary` をあるウェブサーバーから送信しているとします。ある収集期間において、ウェブサーバーは `[1,1,1,2,2,3,3]` という値でメトリクスを報告したとします。最小分位数、最大分位数、および中央値分位数が有効になっている場合、次のメトリクスが報告されます。
 
-| メトリクス名                                   | 値  | Lambda のトレースされた起動の 1 時間単位使用量の取得                                | Datadog アプリ内タイプ |
+| メトリクス名                                   | 値  | タグ                                | Datadog アプリ内タイプ |
 | --------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`    | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`      | `15`   | 非該当                                 | COUNT               |
@@ -210,7 +209,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

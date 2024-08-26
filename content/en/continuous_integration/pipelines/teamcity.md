@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a TeamCity Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/teamcity
 further_reading:
@@ -30,7 +29,7 @@ Set up tracing in TeamCity to collect data about your pipeline executions, debug
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 
-The following TeamCity versions are supported: 
+The following TeamCity versions are supported:
 
 - TeamCity >= 2021.2 or later
 
@@ -53,8 +52,8 @@ the VCS Root attached and the [VCS Trigger][13] configured.
    * **datadog.ci.enabled**: `true` (`false`
    can be used to disable the plugin for a specific project).
 
-   These configuration parameters can be added either to TeamCity subprojects
-   or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
+   These configuration parameters should not have type **Password**, as that prevents the plugin from correctly reading their values.
+   They can be added either to TeamCity subprojects or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
    to all its subprojects. For example, to enable the plugin for all projects, add **datadog.ci.enabled** with the
    value `true` to the Root Project. More information on defining configuration parameters
    is available in the [TeamCity Project Hierarchy][9] documentation.

@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/mesos_master/
 - /ja/integrations/mesos_slave/
+custom_kind: integration
 integration_title: Mesos
 is_public: true
-kind: インテグレーション
 short_description: クラスターリソースの使用状況、マスターおよびスレーブの数、タスクのステータスなどを追跡します。
 ---
 
@@ -27,9 +27,9 @@ short_description: クラスターリソースの使用状況、マスターお�
 
 その他にも多数あります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 DC/OS の有無にかかわらず、Mesos でのインストールは同じです。各 Mesos マスターノードで datadog-agent コンテナを実行します。
 
@@ -46,7 +46,7 @@ docker run -d --name datadog-agent \
 
 上のコマンドの Datadog API キーと Mesos Master の API URL は、適切な値に置き換えてください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 正しい Master URL を渡して datadog-agent を起動した場合、Agent は、既にデフォルトの `mesos_master.d/conf.yaml` を使用してマスターからメトリクスを収集しています。使用可能なすべての構成オプションの詳細については、[サンプル mesos_master.d/conf.yaml][3] を参照してください。
 
@@ -87,21 +87,21 @@ Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][5
 
 Datadog で、メトリクスエクスプローラーを使用して `mesos.cluster` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mesos_master" >}}
 
 
-### ヘルプ
+### イベント
 
 Mesos-master チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "mesos_master" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
@@ -129,13 +129,13 @@ Mesos-master チェックには、イベントは含まれません。
 
 このチェックは、エグゼキュータータスクごとにサービスチェックも作成します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 DC/OS の Web UIを使用して各 Mesos エージェントノードに Datadog Agent をインストールするには、[DC/OS で Mesos に Datadog をインストールする][7]を参照してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### DC/OS
 
@@ -258,21 +258,21 @@ DC/OS Web UI の Services タブに、Datadog Agent が表示されます。Data
 
 DC/OS を使用していない場合は、正常に実行中のアプリケーションの一覧に datadog-agent が表示されます。Datadog で、メトリクスエクスプローラーを使用して `mesos.slave` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mesos_slave" >}}
 
 
-### ヘルプ
+### イベント
 
 Mesos スレーブチェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "mesos_slave" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

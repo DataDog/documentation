@@ -11,7 +11,6 @@ further_reading:
 - link: /dashboards/guide/context-links/#overview/
   tag: Documentación
   text: Enlaces contextuales
-kind: documentación
 title: Widget de lista principal
 widget_type: lista principal
 ---

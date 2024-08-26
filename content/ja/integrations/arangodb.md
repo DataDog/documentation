@@ -5,6 +5,7 @@ assets:
   dashboards:
     ArangoDB Overview: assets/dashboards/arangodb_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,12 +16,11 @@ assets:
       prefix: arangodb.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10266
     source_type_name: ArangoDB
-  logs:
-    source: arangodb
   monitors:
-    '[ArangoDB] High server Kernel mode percentage usage': assets/recommended_monitors/high_server_kernel_mode.json
-    '[ArangoDB] High server User mode percentage usage': assets/recommended_monitors/high_server_user_mode.json
+    '[ArangoDB] High server Kernel mode percentage usage': assets/monitors/high_server_kernel_mode.json
+    '[ArangoDB] High server User mode percentage usage': assets/monitors/high_server_user_mode.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,8 +28,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - キャッシュ
-- data store
+- data stores
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/arangodb/README.md
 display_on_public_website: true
@@ -37,9 +38,8 @@ draft: false
 git_integration_title: arangodb
 integration_id: arangodb
 integration_title: ArangoDB
-integration_version: 1.4.0
+integration_version: 2.2.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: arangodb
 public_title: ArangoDB
@@ -52,11 +52,12 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: ArangoDB の構成に関するメトリックスを追跡します。
   media: []
@@ -65,6 +66,7 @@ tile:
   title: ArangoDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -85,7 +87,7 @@ Datadog-ArangoDB インテグレーションを有効にすると、以下のこ
 
 ArangoDB チェックは [Datadog Agent][3] パッケージに含まれています。
 
-### コンフィギュレーション
+### 構成
 
 1. ArangoDB のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `arangodb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル arangodb.d/conf.yaml][4] を参照してください。
 
@@ -101,7 +103,7 @@ ArangoDB チェックは [Datadog Agent][3] パッケージに含まれていま
 {{< get-metrics-from-git "arangodb" >}}
 
 
-### ログの収集
+### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -118,7 +120,7 @@ ArangoDB インスタンスからログを収集するには、まず ArangoDB �
 ...
 
 [log]
-file = /var/log/arangodb3/arangod.log 
+file = /var/log/arangodb3/arangod.log
 
 ...
 ```
@@ -144,7 +146,7 @@ ArangoDB のログには、ログの冗長性と出力ファイルのための[�
 
 ArangoDB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "arangodb" >}}
 
 
@@ -155,7 +157,7 @@ ArangoDB インテグレーションには、イベントは含まれません�
 
 [1]: https://www.arangodb.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/arangodb/datadog_checks/arangodb/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

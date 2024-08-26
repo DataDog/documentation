@@ -1,6 +1,5 @@
 ---
 title: Python 3 Custom Check Migration
-kind: guide
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"

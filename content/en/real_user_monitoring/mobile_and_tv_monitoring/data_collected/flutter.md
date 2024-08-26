@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Data Collected
-kind: documentation
 description: Learn about the data collected by Flutter Monitoring.
 code_lang: flutter
 type: multi-code-lang

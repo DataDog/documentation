@@ -35,7 +35,7 @@ integration_id: cacti
 integration_title: Cacti
 integration_version: 2.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cacti
 public_title: Cacti

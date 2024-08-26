@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Determina qué contenedor debe incluirse en el Autodiscovery del Agent
-kind: documentation
 title: Identificadores de contenedor de Autodiscovery
 ---
 

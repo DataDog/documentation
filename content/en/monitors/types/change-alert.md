@@ -1,6 +1,5 @@
 ---
 title: Change Alert Monitor
-kind: Documentation
 disable_toc: false
 aliases:
 - monitors/guide/change-alert

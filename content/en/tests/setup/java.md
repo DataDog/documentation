@@ -1,6 +1,5 @@
 ---
 title: Java Tests
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -9,13 +8,22 @@ aliases:
   - /continuous_integration/tests/java
   - /continuous_integration/tests/setup/java
 further_reading:
-    - link: "/continuous_integration/tests/containers/"
+    - link: "/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/tests"
+    - link: "/tests/explorer"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/early_flake_detection"
+      tag: "Documentation"
+      text: "Detect test flakiness with Early Flake Detection"
+    - link: "/tests/auto_test_retries"
+      tag: "Documentation"
+      text: "Retry failing test cases with Auto Test Retries"
+    - link: "/tests/correlate_logs_and_tests"
+      tag: "Documentation"
+      text: "Correlate logs and test traces"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
 ---
@@ -23,10 +31,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
 
 ## Compatibility
 
@@ -58,26 +62,30 @@ Other build systems, such as Ant or Bazel, are supported with the following limi
 
 ## Setup
 
-Setting up Test Visibility for Java includes the following steps:
-1. Configure tracer reporting method.
-2. Download tracer library to the hosts where your tests are executed.
-3. Run your tests with the tracer attached.
+You may follow interactive setup steps on the [Datadog site][2] or the instructions below.
 
-You may follow interactive setup steps on the [Datadog site][2] or with the instructions below.
-
-### Configuring reporting method
-
-This step involves configuring how Datadog Java Tracer reports data to Datadog.
-There are two main options:
-* Reporting the data to Datadog Agent, which will forward it to Datadog.
-* Reporting the data directly to Datadog.
+Configuring the Datadog Java Tracer varies depending on your CI provider.
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{% tab "Github Actions" %}}
+You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
+If you do so, you can skip the **Downloading tracer library** and **Running your tests** steps below.
+
+[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% /tab %}}
+
+{{% tab "Jenkins" %}}
+You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
+If you do so, you can skip the "Downloading tracer library" and "Running your tests" steps below.
+
+[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
+{{% /tab %}}
+
+{{% tab "Other cloud CI provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}

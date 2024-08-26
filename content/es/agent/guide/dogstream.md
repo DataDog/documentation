@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/faq/dogstream
-kind: guía
 private: true
 title: Dogstream
 ---

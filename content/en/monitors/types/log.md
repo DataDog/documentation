@@ -1,6 +1,5 @@
 ---
 title: Logs Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/log
 - /monitors/create/types/log/

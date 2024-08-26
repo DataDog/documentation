@@ -12,7 +12,6 @@ further_reading:
 - link: monitors/
   tag: Documentation
   text: Créer et gérer des monitors pour informer vos équipes dès que nécessaire
-kind: documentation
 title: Métriques APM
 ---
 
@@ -20,12 +19,13 @@ title: Métriques APM
 
 Les [métriques d'application de tracing][1] sont recueillies après l'activation de la collecte de traces et de l'instrumentation de votre application. Elles sont disponibles pour les dashboards et les monitors. Ces métriques capturent le nombre de **requêtes**, le nombre d'**erreur** et les mesures de **latence**. Elles sont calculées pour l'ensemble du trafic de l'application, peu importe l'[échantillonnage de l'ingestion des traces][2] que vous avez configuré.
 
+Par défaut, ces métriques sont calculées par l'Agent Datadog en fonction des traces qu'il reçoit à partir d'une application instrumentée.
 
 Les spans et les traces ingérées sont conservées pendant 15 minutes. Les spans et les traces indexées conservées par les filtres de rétention sont stockées par Datadog pendant 15 jours. Néanmoins, si vous générez des métriques custom à partir des données ingérées, les métriques sont conservées pendant 15 mois.
 
 ## Métriques runtime
 
-Activez la [collecte de métriques runtime][3] dans les bibliothèques de tracing prises en charge pour obtenir des informations utiles sur les performances d'une application.
+Activez la [collecte de métriques runtime][3] dans les bibliothèques de tracing compatibles afin d'obtenir de précieuses informations sur les performances d'une application. Ces métriques sont envoyées à l'Agent Datadog via le port DogStatsD configuré.
 
 
 ## Étapes suivantes

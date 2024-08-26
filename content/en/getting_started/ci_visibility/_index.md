@@ -1,6 +1,5 @@
 ---
 title: Getting Started with CI Visibility
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/monitor-ci-pipelines/'
   tag: 'Blog'

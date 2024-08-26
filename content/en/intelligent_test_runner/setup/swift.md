@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for Swift
-kind: documentation
 is_beta: true
 code_lang: swift
 type: multi-code-lang
@@ -21,13 +20,13 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is only supported on `dd-sdk-swift>= 2.2.0`.
+Intelligent Test Runner is only supported on [`dd-sdk-swift-testing`][1] in versions `2.2.0`+.
 
 ## Setup
 
 ### Test Visibility
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Swift][1]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for Swift][2]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
 
 If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
@@ -46,4 +45,5 @@ To enable Intelligent Test Runner, set the following environment variables:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/swift
+[1]: https://github.com/DataDog/dd-sdk-swift-testing
+[2]: /continuous_integration/tests/swift

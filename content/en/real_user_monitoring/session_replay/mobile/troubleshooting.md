@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Mobile Session Replay
-kind: documentation
 description: How to troubleshoot Mobile Session Replay.
 aliases:
 further_reading:
@@ -26,7 +25,6 @@ further_reading:
 Mobile Session Replay only supports native frameworks. Within these frameworks, there may be certain components or screens missing, such as:
 
 - Screens built with SwiftUI (iOS) or Jetpack Compose (Android)
-- Web Views
 - Certain system elements, such as actionBar in Android, progress bars, and spinners
 - Rich system contents, such as video players, music player, and map widgets
 - Views that use direct canvas drawing

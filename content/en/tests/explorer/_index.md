@@ -1,6 +1,5 @@
 ---
 title: Test Visibility Explorer
-kind: documentation
 description: Learn how to search and filter your test runs in the Test Visibility Explorer.
 further_reading:
   - link: "/continuous_integration/tests/"
@@ -15,9 +14,9 @@ further_reading:
 
 The Test Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag. 
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**.
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. Each test level represents a different level of aggregation of tests.
 
-{{< img src="/continuous_integration/test_runs.png" text="Test Runs page" style="width:100%" >}}
+{{< img src="/tests/explorer/test_runs.png" text="A list of test run results in the Test Visibility Explorer" style="width:100%" >}}
 
 ## Common facets
 
@@ -62,10 +61,6 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Time Saved | The length of time saved for the session by Intelligent Test Runner usage. |
 | Early Flake Detection Enabled | Indicates if the test has been run using [Early Flake Detection][15]. |
 | Early Flake Detection Abort Reason | Indicates the Early Flake Detection abort reason for a test. |
-
-You can filter by test level: session, module, suite, and test run. Each test level represents a different level of aggregation of tests.
-
-{{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
 
 For more information about common facets that you can use as part of your search query in the Test Visibility Explorer, see [Test Run Facets][3].
 

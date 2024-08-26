@@ -9,7 +9,7 @@ dependencies:
 has_logo: true
 integration_title: Alcide
 is_public: true
-kind: integration
+custom_kind: integration
 name: alcide
 public_title: Intégration Datadog/Alcide
 short_description: Importer et traiter vos logs Alcide

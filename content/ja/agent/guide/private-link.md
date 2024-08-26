@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/amazon_web_services/#log-collection
   tag: ドキュメント
   text: AWS サービスからログを収集する
-kind: ガイド
 title: AWS PrivateLink を介して Datadog に接続する
 ---
 

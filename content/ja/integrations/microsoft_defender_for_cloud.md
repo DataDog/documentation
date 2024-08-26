@@ -22,6 +22,7 @@ categories:
 - クラウド
 - ログの収集
 - security
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -30,7 +31,6 @@ integration_id: microsoft-defender-for-cloud
 integration_title: Microsoft Defender for Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: microsoft_defender_for_cloud
 public_title: Microsoft Defender for Cloud
@@ -43,6 +43,7 @@ tile:
   - Category::Cloud
   - Category::Log Collection
   - Category::Security
+  - Offering::Integration
   configuration: README.md#Setup
   description: Microsoft Defender for Cloud を監視
   media: []
@@ -62,13 +63,13 @@ Defender for Cloud は、Microsoft Azure アプリケーションを監視し、
 
 Datadog Cloud SIEM を有効にすると、すぐに使えるセキュリティルールを使用して、他のセキュリティインフラストラクチャーと一緒に Azure 環境を監視できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 このインテグレーションでは、Datadog Azure インテグレーションが有効になっている必要があります。イベントハブを使用して Azure 経由で Datadog にログを転送します。インテグレーションには、ログフォワーダーのバージョンが少なくとも `1.0.1` 以降であることが必要です。
 
-### ブラウザトラブルシューティング
+### 構成
 
 イベントハブに[ログを継続的にエクスポートする][2]ように Defender for Cloud を構成します。Datadog 内で追加の構成は必要ありません。
 
@@ -84,21 +85,21 @@ Datadog Cloud SIEM を使用している場合は、Microsoft Defender for Cloud
 1. 下にスクロールして、**Azure** というセクションを展開します。リストをスクロールして、Microsoft Defender for Cloud ルールを見つけます。ルールがオンになっていることを確認します。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Microsoft Defender for Cloud には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Microsoft Defender for Cloud には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Microsoft Defender for Cloud には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 Cloud SIEM が Defender for Cloud アラートを受信していることを確認するには、以下の手順に従ってください。
 1. Datadog のメニューで、**Security** > **Configuration** に進み、**Cloud SIEM** を展開します。

@@ -1,6 +1,6 @@
 ---
 title: Monitor Your Next.js App With RUM
-kind: guide
+
 description: Guide for monitoring Next.js applications with RUM.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'

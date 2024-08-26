@@ -5,11 +5,10 @@ description: セッションリプレイで利用可能なプライバシーコ�
 further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
-  text: 送信 - Agent チェック
+  text: Session Replay
 - link: https://www.datadoghq.com/blog/default-privacy-session-replay/
   tag: ブログ
   text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
-kind: ドキュメント
 title: セッションリプレイブラウザのプライバシーオプション
 ---
 
@@ -21,11 +20,11 @@ title: セッションリプレイブラウザのプライバシーオプショ�
 
 セッションリプレイを有効にすることで、RUM ブラウザ SDK を通じて記録される機密要素を自動的にマスクすることができます。データがマスクされると、そのデータは Datadog の SDK によって元の形で収集されないため、バックエンドに送信されることはありません。
 
-## ブラウザトラブルシューティング
+## 構成
 
 <div class="alert alert-warning"><code>defaultPrivacyLevel</code> と <code>mask-user-input</code> は、SDK v3.6.0+ で利用できます。</div>
 
-プライバシー設定を有効にするには、JavaScript の構成で `defaultPrivacyLevel` を `mask`、`mask-user-input`、または `allow` に設定します。
+To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in your JavaScript configuration.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -54,8 +53,8 @@ datadogRum.init({
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="マスクモード" style="width:70%;">}}
 
-**注**: セッションリプレイを有効にした場合、デフォルトでは `mask` がプライバシー設定になります。
-**注**: マスクされたデータは、Datadog サーバーに保存されません。
+**Note:** By default, `mask` is the privacy setting when you enable Session Replay.
+**Note**: Masked data is not stored on Datadog servers.
 
 ### ユーザー入力マスクモード
 
@@ -123,6 +122,9 @@ datadogRum.init({
 例えば、以下の名前を `<div data-dd-action-name="Address" > → Action: "Click on Address"` でオーバーライドします。
 
 デフォルトのアクション名をオーバーライドするその他のユースケースとしては、RUM エクスプローラーで機密データをマスクする、カスタム命名規則で分析と検索を合理化するなどがあります。
+
+### Mask action names
+By default, if you wish to mask all action names, you can use the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation automatically substitutes all non-overridden action names with the placeholder `Masked Element`. This setting is also designed to be compatible with existing [HTML override attributes](#override-an-html-element).
 
 <div class="alert alert-info">
 

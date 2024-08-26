@@ -1,8 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
-1. Run the one-step command provided in the UI to re-install the Worker:
-    ```shell
-    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLES> <DESTINATION_ENV_VARIABLES> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
-    ```
+1. Run the one-step command provided in the UI to re-install the Worker.
+
+    **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
 1. Update your packages and install the latest version of Worker:

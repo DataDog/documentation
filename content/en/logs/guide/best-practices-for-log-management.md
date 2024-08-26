@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-kind: guide
+
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -54,6 +54,10 @@ To set up multiple indexes:
 7. Click **Save**.
 
 Setting daily quotas on your indexes can help prevent billing overages when new log sources are added or if a developer unintentionally changes the logging levels to debug mode. See [Alert on indexes reaching their daily quota](#alert-on-indexes-reaching-their-daily-quota) on how to set up a monitor to alert when a percentage of the daily quota is reached within the past 24 hours.
+
+### Set up storage for long-term retention
+
+If you want to retain logs for an extended time while maintaining querying speeds similar to Standard Indexing, configure [Flex Logs][30]. This tier is best suited for logs that require longer retention and occasionally need to be queried urgently. Flex Logs decouples storage from compute costs so you can cost effectively retain more logs for longer without sacrificing visibility. Logs that need to be frequently queried should be stored in standard indexes.
 
 ### Set up multiple archives for long-term storage
 
@@ -226,3 +230,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /observability_pipelines/
+[30]: /logs/log_configuration/flex_logs/

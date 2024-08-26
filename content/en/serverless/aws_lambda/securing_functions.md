@@ -1,6 +1,5 @@
 ---
 title: Securing Functions
-kind: documentation
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -23,4 +22,4 @@ You can [get started managing threats to your functions with ASM][3] today.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /security/application_security/
-[3]: /security/application_security/enabling/serverless/
+[3]: /security/application_security/serverless/

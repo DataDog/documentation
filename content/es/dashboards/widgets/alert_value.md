@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget de valor de alerta
 widget_type: alert_value
 ---

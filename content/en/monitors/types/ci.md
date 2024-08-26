@@ -1,6 +1,5 @@
 ---
 title: CI Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/

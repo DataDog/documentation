@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: 에이전트 트러블슈팅
   text: 에이전트 트러블슈팅
-kind: 설명서
 title: Windows 컨테이너 문제
 ---
 

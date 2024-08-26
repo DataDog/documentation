@@ -1,6 +1,5 @@
 ---
 title: Agent
-kind: documentation
 description: Install and configure the Agent to collect data
 further_reading:
 - link: "/logs/"
@@ -25,10 +24,12 @@ aliases:
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
 - _target:
-    path: /agent/basic_agent_usage/chef.md
+    path: /agent/basic_agent_usage/chef
+    lang: en
   tags: ['uninstall']
 - _target:
     path: /infrastructure/**/*
+    lang: en
   algolia:
     tags: ['agent']
     rank: 80

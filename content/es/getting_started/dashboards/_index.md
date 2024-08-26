@@ -22,7 +22,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva sobre mejores visualizaciones con dashboards
-kind: documentación
 title: Empezando con los dashboards
 ---
 

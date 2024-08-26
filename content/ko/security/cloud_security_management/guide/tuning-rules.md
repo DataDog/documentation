@@ -2,7 +2,6 @@
 aliases:
 - /ko/security_platform/cloud_workload_security/guide/tuning-rules/
 - /ko/security_platform/cloud_security_management/guide/tuning-rules/
-kind: 지침
 title: CSM 위협 보안 시그널 미세 조정하기
 ---
 

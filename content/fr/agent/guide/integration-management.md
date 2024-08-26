@@ -1,6 +1,5 @@
 ---
 title: Gestion des intégrations
-kind: guide
 ---
 
 ## Présentation

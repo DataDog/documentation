@@ -25,6 +25,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: contrastsecurity
 integration_title: Contrast Security
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: contrastsecurity
 public_title: Contrast Security
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で Contrast Security から攻撃や脆弱性をチェックする
   media: []
@@ -66,9 +67,9 @@ tile:
 
 Datadog-Contrast インテグレーションでは、Contrast のログを Datadog に収集することができます。
 
-## 計画と使用
+## セットアップ
 
-### 収集データ
+### ログ収集
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][1] を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -96,21 +97,21 @@ logs_enabled: true
 - [Datadog ログのドキュメント][4]
 - [Datadog ダッシュボード API][5]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Contrast インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Contrast インテグレーションは、イベントを送信しません。
 
-### ヘルプ
+### サービスチェック
 
 Contrast インテグレーションには、サービス チェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、このインテグレーションの[メインテナー][6]までお問い合わせください。
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/faq/dogstream
-kind: 가이드
 private: true
 title: Dogstream
 ---

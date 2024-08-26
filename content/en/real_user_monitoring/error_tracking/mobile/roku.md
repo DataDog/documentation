@@ -1,6 +1,5 @@
 ---
 title: Roku Crash Reporting and Error Tracking
-kind: documentation
 description: Set up Error Tracking for your Roku channels.
 aliases:
 - /real_user_monitoring/error_tracking/roku

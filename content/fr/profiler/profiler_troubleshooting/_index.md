@@ -5,7 +5,6 @@ further_reading:
 - link: /tracing/troubleshooting
   tag: Documentation
   text: Dépannage de l'APM
-kind: documentation
 title: Dépannage du profileur
 type: multi-code-lang
 ---

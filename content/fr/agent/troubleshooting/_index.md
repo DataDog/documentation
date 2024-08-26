@@ -27,7 +27,6 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: Documentation
   text: Utilisation intensive du processeur ou de la mémoire
-kind: documentation
 title: Dépannage de l'Agent
 ---
 

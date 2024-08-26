@@ -1,6 +1,5 @@
 ---
 title: Identify Synthetic Bots
-kind: documentation
 description: Identify incoming Synthetic requests
 aliases:
 - /synthetics/identify_synthetics_bots

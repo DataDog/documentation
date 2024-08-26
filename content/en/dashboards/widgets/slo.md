@@ -1,6 +1,5 @@
 ---
 title: SLO Widget
-kind: documentation
 widget_type: slo
 description: "Track your SLOs"
 aliases:

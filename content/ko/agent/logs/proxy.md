@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/
   tag: 설명서
   text: Collect your traces
-kind: 설명서
 title: 로그를 위한 TCP Agent 프록시
 ---
 

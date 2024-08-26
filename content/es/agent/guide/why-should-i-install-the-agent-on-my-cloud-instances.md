@@ -7,7 +7,6 @@ further_reading:
 - link: /integrations/guide/cloud-metric-delay/
   tag: Guía
   text: Tiempo de respuesta de las métricas en la nube
-kind: guía
 title: ¿Por qué debería instalar el Datadog Agent en mis instancias de nube?
 ---
 

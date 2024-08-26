@@ -1,5 +1,4 @@
 ---
-kind: 가이드
 title: Datadog의 TLS 인증서 신뢰 체인 변경 사항
 ---
 

@@ -1,5 +1,4 @@
 ---
-kind: 가이드
 title: Datadog 포워더를 사용해 Java 서버리스 애플리케이션 계측
 ---
 ## 개요
@@ -12,7 +11,7 @@ Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installat
 일부 예전 버전의 <code>datadog-lambda-java</code>에서는  <code>log4j <=2.14.0</code>을 전이 종속성으로 가져옵니다. <a href="#upgrading">업그레이드 지침</a>은 아래를 참고하세요.
 </div>
 
-## 필수 구성 요소
+## 사전 필수 요건
 
 AWS Lambda 트레이스, 향상된 메트릭, 커스텀 메트릭, 로그를 수집하려면 [Datadog 포워더 Lambda 함수][2]가 필요합니다.
 

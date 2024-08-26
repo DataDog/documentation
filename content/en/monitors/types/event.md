@@ -1,6 +1,5 @@
 ---
 title: Event Monitor
-kind: documentation
 description: "Monitor events gathered by Datadog"
 aliases :
     - /monitors/monitor_types/event

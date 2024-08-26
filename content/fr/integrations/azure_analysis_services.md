@@ -14,7 +14,7 @@ integration_id: azure-analysisservices
 integration_title: Microsoft Azure Analysis Services
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_analysis_services
 public_title: Intégration Datadog/Microsoft Azure Analysis Services

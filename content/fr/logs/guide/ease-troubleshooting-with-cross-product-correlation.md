@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Diagnostics simplifiés grâce à la mise en corrélation entre produits
 ---
 
@@ -62,11 +62,11 @@ Suivez les instructions pour [intégrer le tracing NGINX][5].
 
 ##### Injecter l'ID des traces dans les logs
 
-L'ID de trace est stocké dans la variable `opentracing_context_x_datadog_trace_id`. Pour modifier le format des logs NGINX, ajoutez le bloc de configuration suivant dans la section HTTP de votre fichier de configuration NGINX `/etc/nginx/nginx.conf` :
+L'ID de trace est stocké dans la variable `opentelemetry_trace_id`. Pour modifier le format des logs NGINX, ajoutez le bloc de configuration suivant dans la section HTTP de votre fichier de configuration NGINX `/etc/nginx/nginx.conf` :
 
 ```conf
 http {
-  log_format main '$remote_addr - $opentracing_context_x_datadog_trace_id $http_x_forwarded_user [$time_local] "$request" '
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for" ';
 

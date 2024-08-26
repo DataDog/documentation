@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: documentation
 further_reading:
 - link: "/tests/explorer/search_syntax/"
   tag: "Documentation"
@@ -31,7 +30,7 @@ You can also use saved views to share common queries and configurations with you
 
 To access your saved views, expand **> Views** to the left in the [Test Visibility Explorer][1].
 
-{{< img src="continuous_integration/saved-view-test-runs.png" alt="Access Saved Views by clicking the tab to the left of Test Visibility" width="50%" >}}
+{{< img src="/tests/explorer/saved_view.png" alt="Access Saved Views by clicking the tab to the left of Test Visibility" width="50%" >}}
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. 
 

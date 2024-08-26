@@ -7,7 +7,6 @@ aliases:
 cascade:
   algolia:
     rank: 70
-kind: documentation
 title: Métriques
 ---
 Cette page présente le fonctionnement des métriques dans Datadog et leurs avantages. Elle abord les sujets suivants :

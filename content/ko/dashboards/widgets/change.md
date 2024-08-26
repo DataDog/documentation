@@ -15,7 +15,6 @@ further_reading:
 - link: /dashboards/graphing_json/request_json/
   tag: 설명서
   text: JSON 스키마 요청
-kind: 설명서
 title: 변경 위젯
 widget_type: 변경
 ---

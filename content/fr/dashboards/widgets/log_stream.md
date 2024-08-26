@@ -2,7 +2,6 @@
 aliases:
 - /fr/graphing/widgets/log_stream/
 description: Affichez un flux de logs filtré dans vos dashboards Datadog.
-kind: documentation
 title: Widget Flux de logs
 widget_type: log_stream
 ---

@@ -14,6 +14,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -22,7 +23,6 @@ integration_id: twingate-inc-twingate
 integration_title: Twingate
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

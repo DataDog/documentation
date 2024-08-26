@@ -1,6 +1,5 @@
 ---
 title: Tracing .NET Core Applications
-kind: documentation
 aliases:
   - /tracing/dotnet-core
   - /tracing/languages/dotnet-core
@@ -115,8 +114,21 @@ To install the .NET Tracer machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh`
 
+#### Chiseled containers
+
+To install the .NET Tracer in chiseled or distroless Docker images (without a shell), use the following Dockerfile commands:
+
+- Use `ADD` to put the tracer files in the container.
+- Use `COPY --chown=$APP_UID` with an empty folder as source to create the logs path.
+
+For example, in your Dockerfile:
+
+```dockerfile
+ADD datadog-dotnet-apm-<TRACER_VERSION>.tar.gz /opt/datadog/
+COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
+```
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}

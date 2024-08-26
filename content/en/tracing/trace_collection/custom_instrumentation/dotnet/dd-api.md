@@ -1,6 +1,5 @@
 ---
 title: .NET Custom Instrumentation using Datadog API
-kind: documentation
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -233,4 +232,4 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 [9]: /tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
 [10]: /tracing/security
 [11]: /tracing/trace_collection/library_config/dotnet-core/
-[12]: /tracing/trace_collection/trace_context_propagation/dotnet/
+[12]: /tracing/trace_collection/trace_context_propagation/

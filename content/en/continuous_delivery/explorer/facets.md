@@ -1,6 +1,5 @@
 ---
 title: Deployment Execution Facets
-kind: documentation
 description: Learn about facets for filtering and grouping your deployment executions.
 further_reading:
 - link: 'continuous_delivery/explorer/'

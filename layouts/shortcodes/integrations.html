@@ -3,7 +3,7 @@
 <!-- From data file -->
 {{ $integration_list := site.Pages }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Section" "=" "integrations") }}
-{{ $integration_list := $integration_list | intersect (where $integration_list ".Params.kind" "=" "integration") }}
+{{ $integration_list := $integration_list | intersect (where $integration_list ".Params.custom_kind" "=" "integration") }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.beta" "!=" true) }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.is_public" "!=" false) }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.placeholder" "!=" true) }}

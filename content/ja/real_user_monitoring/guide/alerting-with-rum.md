@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/
   tag: ドキュメント
   text: アラート設定
-kind: ガイド
 title: RUM データによるアラート
 ---
 

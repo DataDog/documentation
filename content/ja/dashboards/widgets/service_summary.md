@@ -9,12 +9,11 @@ further_reading:
 - link: /tracing/services/service_page/
   tag: ドキュメント
   text: APM サービス詳細画面について
-kind: documentation
 title: サービスサマリーウィジェット
 widget_type: trace_service
 ---
 
-サービスサマリーは、選択された[サービス][1]のグラフをダッシュボードに表示します。
+サービスとは、例えば Web フレームワークやデータベースなど、同じ作業を行う一連のプロセスのことです。Datadog は、サービスページに表示されるような、サービス情報を表示するためのすぐに使えるグラフを提供します。サービスサマリーウィジェットを使用して、選択した[サービス][1]のグラフをダッシュボードに表示します。
 
 {{< img src="dashboards/widgets/service_summary/service_summary.png" alt="サービスサマリー" >}}
 

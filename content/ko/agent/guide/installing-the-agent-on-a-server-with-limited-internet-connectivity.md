@@ -16,7 +16,6 @@ further_reading:
 - link: /agent/configuration/proxy/
   tag: 설명서
   text: 프록시에 대해 자세히 알아보기
-kind: 가이드
 title: 인터넷 연결이 제한된 서버에 Agent 설치
 ---
 

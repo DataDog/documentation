@@ -12,7 +12,7 @@
 
     {{ partial "integration-labels/integration-labels.html" . }}
     
-    {{ if and (in .Params.Kind "integration") ($media | len) }}
+    {{ if and (in .Params.custom_kind "integration") ($media | len) }}
         {{ partial "integrations-carousel/integrations-carousel.html" (dict "context" . "media" $media) }}
     {{ end }}
 

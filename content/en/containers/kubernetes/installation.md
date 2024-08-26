@@ -1,6 +1,5 @@
 ---
 title: Install the Datadog Agent on Kubernetes
-kind: documentation
 aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm

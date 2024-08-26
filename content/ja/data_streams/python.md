@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
   text: サービスカタログ
-kind: documentation
 title: Data Streams Monitoring for Python のセットアップ
 ---
 
@@ -18,7 +17,10 @@ title: Data Streams Monitoring for Python のセットアップ
 
 Data Streams Monitoring を開始するには、Datadog Agent と Python ライブラリの最新バージョンが必要です。
 * [Datadog Agent v7.34.0 以降][1]
-* [Python Tracer v1.16.0 以降][2]
+* [Python Tracer][2]
+  * Kafka: v1.16.0 or later
+  * Amazon SQS and Amazon Kinesis: v1.20.0
+  * RabbitMQ: v2.6.0 or later
 
 ### インストール
 
@@ -31,10 +33,13 @@ environment:
 ```
 
 ### サポートされるライブラリ
-Data Streams Monitoring は、[confluent-kafka ライブラリ][3]をサポートしています。
+Data Streams Monitoring supports the [confluent-kafka library][3] and [kombu package][5].
 
 ### SQS パイプラインの監視
-Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して、SQS キューを通過するメッセージの経路を追跡します。AWS SQS は、メッセージごとに許可されるメッセージ属性の上限が 10 個であるため、データパイプラインを通じてストリーミングされるすべてのメッセージには、9 個以下のメッセージ属性が設定されている必要がありがあり、残りの属性は Data Streams Monitoring に使用できます。
+Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or less message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+
+### Monitoring Kinesis Pipelines
+There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
 
 ## その他の参考資料
 
@@ -44,3 +49,4 @@ Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して�
 [2]: /ja/tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[5]: https://pypi.org/project/kombu/

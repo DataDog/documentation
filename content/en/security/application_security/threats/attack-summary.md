@@ -1,6 +1,5 @@
 ---
 title: Attack Summary
-kind: documentation
 aliases:
   - /security/application_security/threats/threat-overview
 ---

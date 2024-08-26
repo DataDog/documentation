@@ -1,6 +1,6 @@
 ---
 title: Understand Datadog retention policy to efficiently retain trace data
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_pipeline/trace_retention/"
   tag: "Documentation"

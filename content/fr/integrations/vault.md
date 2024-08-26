@@ -30,7 +30,7 @@ guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
 integration_title: Vault
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: vault.

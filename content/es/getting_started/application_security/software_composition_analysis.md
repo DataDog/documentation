@@ -21,7 +21,6 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Laboratorios de seguridad
   text: Investigación sobre seguridad, informes, consejos y vídeos de Datadog
-kind: documentation
 title: Empezando con Software Composition Analysis
 ---
 

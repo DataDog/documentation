@@ -26,6 +26,7 @@ author:
 categories:
 - コラボレーション
 - ソースコントロール
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gitea/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: gitea
 integration_title: Gitea
 integration_version: 1.0.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: gitea
 public_title: Gitea
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Gitea のすべてのメトリクスを Datadog で追跡
   media: []
@@ -69,7 +70,7 @@ tile:
 
 このインテグレーションは、Datadog [Agent][2] を通じて Gitea インスタンスを監視します。
 
-## 計画と使用
+## セットアップ
 
 ### 前提条件
 
@@ -82,7 +83,7 @@ ENABLED = true
 
 詳しくは、公式の[ドキュメント][1]をご覧ください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Gitea インテグレーションは、デフォルトでは [Datadog Agent][3] パッケージに含まれていないため、インストールが必要です。
 
@@ -96,7 +97,7 @@ datadog-agent integration install -t datadog-gitea==<INTEGRATION_VERSION>
 
 2. Agent ベースの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Gitea データの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `gitea.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル gitea.d/conf.yaml][6] を参照してください。
 
@@ -106,21 +107,21 @@ datadog-agent integration install -t datadog-gitea==<INTEGRATION_VERSION>
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `gitea` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gitea" >}}
 
 
-### ヘルプ
+### イベント
 
 Gitea チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "gitea" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

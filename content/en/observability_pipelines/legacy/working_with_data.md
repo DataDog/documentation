@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Working with Data
-kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
   - /observability_pipelines/working_with_data/

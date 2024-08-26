@@ -1,6 +1,5 @@
 ---
 title: Manage Your User Profile
-kind: documentation
 ---
 
 Your user profile is where you can make updates to your personal information, such as your name and email address. You can also update your password or add a password to your account if you signed up to Cloudcraft using the **Sign in with Google** button.

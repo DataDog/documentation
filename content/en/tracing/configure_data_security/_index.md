@@ -1,6 +1,5 @@
 ---
 title: Data Security
-kind: documentation
 description: "Configure the Client library or Agent to control the collection of sensitive data in traces."
 aliases:
     - /tracing/security
@@ -463,9 +462,12 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1], or use `agents.containers.traceAgent.env` in the `values.yaml` file if you are using [helm chart][2].
+Set the `DD_APM_REPLACE_TAGS` environment variable:
+- For Datadog Operator, in `override.nodeAgent.env` in your `datadog-agent.yaml`
+- For Helm, in `agents.containers.traceAgent.env` in your `datadog-values.yaml`
+- For manual configuration, in the `trace-agent` container section of your manifest
 
-```datadog-agent.yaml
+```yaml
 - name: DD_APM_REPLACE_TAGS
   value: '[
             {
@@ -493,6 +495,42 @@ Put this environment variable in the trace-agent container if you are using the 
               "repl": "[REDACTED]"
             }
           ]'
+```
+
+#### Examples
+
+Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
+```
+
+Helm:
+
+```yaml
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
 ```
 
 [1]: /containers/kubernetes/installation/?tab=daemonset

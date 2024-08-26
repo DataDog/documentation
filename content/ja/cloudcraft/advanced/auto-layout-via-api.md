@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Cloudcraft API によるクラウドアカウントのスナップショットの自動化
 ---
 

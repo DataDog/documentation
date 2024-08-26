@@ -1,6 +1,5 @@
 ---
 title: Configuring APM Deployment Tracking for DORA Metrics
-kind: documentation
 description: Learn how to configure APM Deployment Tracking as a data source for DORA Metrics deployments.
 aliases:
 - /continuous_integration/dora_metrics/setup/apm

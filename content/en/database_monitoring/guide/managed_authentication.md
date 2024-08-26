@@ -1,6 +1,6 @@
 ---
 title: Connecting with Managed Authentication
-kind: guide
+
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].
@@ -33,7 +33,7 @@ Supported authentication types and Agent versions
 ## Configure IAM authentication
 
 
-AWS supports IAM authentication to RDS and Aurora databases. In order to configure the Agent to connect using IAM, do the following:
+AWS supports IAM authentication to RDS and Aurora databases. Only IAM authentication to database instances residing in the same account as the Datadog Agent is supported. In order to configure the Agent to connect using IAM, do the following:
 
 
 1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance.

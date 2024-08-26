@@ -39,7 +39,7 @@ integration_id: confluent-cloud
 integration_title: Confluent Cloud
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: confluent_cloud
 public_title: Confluent Cloud

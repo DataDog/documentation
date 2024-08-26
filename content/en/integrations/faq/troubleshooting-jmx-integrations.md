@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting JMX Integrations
-kind: faq
+
 further_reading:
 - link: "/integrations/java/"
   tag: "Documentation"

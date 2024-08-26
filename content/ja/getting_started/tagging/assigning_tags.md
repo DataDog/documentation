@@ -10,7 +10,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: Datadog でのタグの使用方法
-kind: ドキュメント
 title: タグの付け方
 ---
 

@@ -7,6 +7,7 @@ categories:
 - log collection
 - network
 - notifications
+custom_kind: integration
 dependencies: []
 description: Route 53 メトリクスを追跡し、健全性チェックを監視。
 doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
@@ -17,7 +18,6 @@ integration_id: ''
 integration_title: Amazon Route 53
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_route53
 public_title: Datadog-Amazon Route 53 インテグレーション

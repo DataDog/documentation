@@ -1,6 +1,5 @@
 ---
 title: "Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering"
-kind: documentation
 ---
 
 ## Overview

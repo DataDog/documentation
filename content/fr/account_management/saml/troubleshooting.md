@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.samltool.com/online_tools.php
   tag: Outils de développement
   text: Identifier vos assertions avec des outils de développement SAML
-kind: documentation
 title: Dépannage SAML
 ---
 

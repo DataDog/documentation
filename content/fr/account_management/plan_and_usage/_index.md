@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Paramètres de formule et d'utilisation
 ---
 

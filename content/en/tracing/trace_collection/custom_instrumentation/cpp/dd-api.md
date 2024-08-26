@@ -1,6 +1,5 @@
 ---
 title: C++ Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp
@@ -148,5 +147,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [2]: /tracing/glossary/#spans
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /tracing/error_tracking/
-[5]: /tracing/trace_collection/trace_context_propagation/cpp
+[5]: /tracing/trace_collection/trace_context_propagation/
 [6]: /tracing/security

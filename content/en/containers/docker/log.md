@@ -1,6 +1,5 @@
 ---
 title: Docker Log collection
-kind: documentation
 aliases:
     - /logs/docker
     - /logs/languages/docker

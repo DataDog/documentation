@@ -65,7 +65,7 @@ integration_id: azure
 integration_title: Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   '[Azure App Gateway] Backend Hosts': assets/monitors/app_gateway_backend_hosts.json

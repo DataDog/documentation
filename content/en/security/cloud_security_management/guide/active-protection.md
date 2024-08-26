@@ -1,11 +1,12 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
-kind: documentation
 further_reading:
 - link: "security/threats/workload_security_rules"
   tag: "Documentation"
   text: "CSM Threats Detection Rules"
 ---
+
+<div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
 <div class="alert alert-info">CSM Threats Active Protection is in beta.</div>
 

@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Troubleshooting
-kind: documentation
 disable_toc: false
 aliases:
   - /observability_pipelines/troubleshooting/

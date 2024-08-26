@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Dépannage de l'Agent
   text: Dépannage de l'Agent
-kind: documentation
 title: Problèmes avec les conteneurs Windows
 ---
 

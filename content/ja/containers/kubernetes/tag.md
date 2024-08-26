@@ -12,17 +12,14 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
-kind: documentation
 title: Kubernetes タグ抽出
 ---
 
-Agent は、タグを作成し、ラベルまたはアノテーションに基づいてポッドが発行するすべてのメトリクス、トレース、ログに割り当てることができます。
-
-ホスト上で Agent をバイナリとして実行している場合は、[Agent](?tab=agent) タブの手順を使用してタグ抽出を構成します。Kubernetes クラスターで Agent をコンテナとして実行している場合は、[コンテナ化された Agent](?tab=containerizedagent) タブの手順でタグ抽出を構成します。
+The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
 
 ## すぐに使えるタグ
 
-Agent は、タグを自動検出して、ポッド全体またはこのポッド内の個別のコンテナにより送信されたすべてのデータにアタッチします。自動的にアタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][1]に基づきます。
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
 
 <div style="overflow-x: auto;">
 
@@ -105,7 +102,7 @@ Agent v7.17 以降では、Agent は Docker ラベルからタグを自動検出
 com.datadoghq.ad.tags: '["<タグキー>:タグ値", "<タグキー_1>:<タグ値_1>"]'
 ```
 
-## データセキュリティ
+## タグ抽出
 ### タグとしてのノードラベル
 
 Agent v6.0 以降、Agent は指定されたノードのラベルを収集し、Datadog のこの `host` に関連するすべてのメトリクス、トレース、ログに関連付けるタグとして使用することができます。
@@ -176,8 +173,8 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
-特定のノードラベル `<NODE_LABEL>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
@@ -269,8 +266,8 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
-特定のポッドラベル `<POD_LABEL>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
@@ -343,7 +340,7 @@ spec:
 ```yaml
 datadog:
   podAnnotationsAsTags:
-    <POD_LABEL>: <TAG_KEY>
+    <POD_ANNOTATION>: <TAG_KEY>
 ```
 
 たとえば、次のように設定できます。
@@ -362,14 +359,14 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
-特定のポッドラベル `<POD_ANNOTATION>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
 ```
 
-たとえば、次のように設定できます。
+For example, you could set up:
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
@@ -455,8 +452,8 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
-特定のネームスペースラベル `<NAMESPACE_LABEL>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
@@ -536,8 +533,8 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
-特定の環境変数 `<ENV_VAR>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
@@ -614,8 +611,8 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
-特定のコンテナラベル `<CONTAINER_LABEL>` を抽出し、タグキー `<TAG_KEY>` に変換するには、次の環境変数を Datadog Agent に追加します。
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'

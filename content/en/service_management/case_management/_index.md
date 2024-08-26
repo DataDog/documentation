@@ -1,6 +1,5 @@
 ---
 title: Case Management
-kind: documentation
 aliases:
 - /monitors/case_management/
 further_reading:

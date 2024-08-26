@@ -2,7 +2,6 @@
 aliases:
 - /es/graphing/faq/dashboard-lists-api-doc
 - /es/graphing/guide/dashboard-lists-api-v1-doc
-kind: guía
 title: API de listas de dashboard (v1)
 ---
 

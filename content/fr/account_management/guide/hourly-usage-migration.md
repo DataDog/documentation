@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Paramètres de formule et d'utilisation
-kind: guide
 title: Passer de la version 1 à la version 2 des API d'utilisation horaire
 ---
 

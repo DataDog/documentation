@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/faq/screenboard-api-doc
 - /ja/graphing/guide/screenboard-api-doc
-kind: ガイド
 title: スクリーンボード API
 ---
 
@@ -23,7 +22,7 @@ title: スクリーンボード API
 * **`board_title`** [必須]:
     ダッシュボードの名前。
 * **`description`** [オプション、デフォルト = **None**]:
-    ダッシュボードの内容の説明。
+    A description of the dashboard's content.
 * **`widgets`** [必須]:
     ウィジェット定義のリスト。ウィジェット定義を取得するには、ウィジェット構成 UI で JSON タブを使用します。
 * **`template_variables`** [オプション、デフォルト = **None**]:

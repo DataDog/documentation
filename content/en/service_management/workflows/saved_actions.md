@@ -1,6 +1,5 @@
 ---
 title: "Save and Reuse Actions"
-kind: documentation
 description: Save and reuse an action and its parameters
 disable_toc: false
 disable_sidebar: false

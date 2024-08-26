@@ -1,6 +1,5 @@
 ---
 title: Advanced Configuration
-kind: documentation
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -398,7 +397,7 @@ The RUM Browser SDK ignores:
 
 ### Enrich RUM events with feature flags
 
-You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
+You can [enrich your RUM event data with feature flags][14] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 
 ### Modify the content of a RUM event
 

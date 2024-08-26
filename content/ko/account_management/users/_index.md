@@ -15,7 +15,6 @@ further_reading:
 - link: /api/v1/users/
   tag: 설명서
   text: USER API로 사용자 관리하기
-kind: 설명서
 title: 사용자 관리
 ---
 {{< site-region region="gov" >}}

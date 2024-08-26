@@ -35,7 +35,9 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog の Security Labs でセキュリティ関連のトピックを読む
-kind: documentation
+- link: https://www.datadoghq.com/blog/content-packs/
+  tag: ブログ
+  text: Cloud SIEM Content Pack でセキュリティログの取り込みと監視が容易に
 title: Cloud SIEM の概要
 ---
 
@@ -57,47 +59,82 @@ title: Cloud SIEM の概要
     - サードパーティセキュリティインテグレーション (例: Amazon GuardDuty)
 
 2. [Cloud SIEM][8] を有効にします。
+3. [コンテンツパック][9]を選択し、構成します。コンテンツパックは、重要なセキュリティログソースに対するすぐに使えるコンテンツを提供します。
+4. Cloud SIEM に分析させたい[追加のログソース][10]を選択し、構成します。
+5. **Activate** をクリックします。カスタム Cloud SIEM ログインデックス (`cloud-siem-xxxx`) が作成されます。
+6. Cloud SIEM のセットアップページで「Cloud SIEM index is not in first position」(Cloud SIEM インデックスが最初の位置にありません) という警告が表示された場合は、[Cloud SIEM インデックスの並び替え](#reorder-the-cloud-siem-index)セクションの手順に従ってください。
+
+### Cloud SIEM インデックスの並び替え
+
+{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="インデックス構成に注意が必要であることを示す黄色の警告ボックス" style="width:80%;">}}
+
+1. **Reorder index in Logs Configuration** をクリックします。
+
+2. モーダルタイトルに「Move cloud-siem-xxxx to...」と表示され、インデックス列の `cloud-siem-xxxx` テキストが薄紫色になっていることを確認します。
+
+{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="cloud-siem-xxxx インデックスが最後のインデックスであることを示すインデックスのリストを表示する Move cloud-siem-xxxx モーダル" style="width:60%;">}}
+
+3. インデックスの新しい配置を選択するには、`cloud-siem-xxxx` を配置したいインデックスの一番上の行をクリックします。例えば、`cloud-siem-xxxx` インデックスを最初のインデックスにしたい場合、現在の最初のインデックスの*上*の行をクリックします。新しい位置は青い太い線でハイライトされます。
+
+{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="最初のインデックスの上部に青い線を表示する Move cloud-SIEM-xxxx モーダル" style="width:65%;">}}
+
+4. テキストは選択された位置を確認します: "Select the new placement of your index: Position 1" (インデックスの新しい配置を選択: 位置 1)。**Move** をクリックします。
+
+5. 警告テキストを確認します。変更内容に問題がなければ、**Reorder** をクリックします。
+
+6. インデックスの順序を確認し、`cloud-siem-xxxx` インデックスが希望の位置にあることを確認します。インデックスを移動したい場合は、**Move to** アイコンをクリックし、手順 3 から 5 を実行します。
+
+7. [Cloud SIEM セットアップページ][11]に戻ります。
+
+Cloud SIEM インデックスは最初のインデックス位置にあるはずです。セットアップページでインデックス位置に関する警告がまだ表示される場合は、数分待ってからブラウザを更新します。
+
+インデックスが最初のインデックス位置に移動したら、[コンテンツパック][11]と[その他のログソース][11]の設定とステータスを確認します。警告またはエラーが表示されたインテグレーションごとに、そのインテグレーションをクリックし、指示に従って修正します。
 
 ## フェーズ 2: シグナルの確認
 
-1. [すぐに使える検出ルール][9]を確認し、お使いの環境における脅威の検出を開始します。検出ルールは、処理されたすべてのログに適用され、検出範囲を最大化します。詳細については、[検出ルール][10]のドキュメントを参照してください。
+1. [すぐに使える検出ルール][12]を確認し、お使いの環境における脅威の検出を開始します。検出ルールは、処理されたすべてのログに適用され、検出範囲を最大化します。詳細については、[検出ルール][13]のドキュメントを参照してください。
 
-2. [セキュリティシグナル][11]を確認します。検出ルールで脅威が検出されると、セキュリティシグナルが生成されます。詳しくは、[セキュリティシグナル][12]のドキュメントをご覧ください。
+2. [セキュリティシグナル][14]を確認します。検出ルールで脅威が検出されると、セキュリティシグナルが生成されます。詳しくは、[セキュリティシグナル][15]のドキュメントをご覧ください。
 
-    - [通知ルールの設定][13]を行い、シグナルが発生した際にアラートを出します。Slack、Jira、メール、Webhook、および他のインテグレーションを使用してアラートを出すことができます。詳しくは[通知ルール][14]のドキュメントを参照してください。
+    - [通知ルールの設定][16]を行い、シグナルが発生した際にアラートを出します。Slack、Jira、メール、Webhook、および他のインテグレーションを使用してアラートを出すことができます。詳しくは[通知ルール][17]のドキュメントを参照してください。
+    - 毎週の[脅威ダイジェスト][18]レポートを購読し、過去 7 日間に発見された最も重要なセキュリティ脅威の調査と対策を開始しましょう。
 
 ## フェーズ 3: 調査
 
-1. より迅速な修復のために、[Investigator][15] を確認します。詳しくは [Investigator][16] のドキュメントをご覧ください。
-2. 調査、レポート、モニタリングには、[すぐに使えるダッシュボード][17]を使用するか、または[独自のダッシュボードを作成][18]します。
+1. より迅速な修復のために、[Investigator][19] を確認します。詳しくは [Investigator][20] のドキュメントをご覧ください。
+2. 調査、レポート、モニタリングには、[すぐに使えるダッシュボード][21]を使用するか、または[独自のダッシュボードを作成][22]します。
 
 ## フェーズ 4: カスタマイズ
 
-1. [抑制ルール][19]を設定し、ノイズを低減します。
-2. [カスタム検出ルール][20]を作成します。[検出ルールを作成するためのベストプラクティス][21]を確認します。
+1. [抑制ルール][23]を設定し、ノイズを低減します。
+2. [カスタム検出ルール][24]を作成します。[検出ルールを作成するためのベストプラクティス][25]を確認します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/configuration
+[2]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [3]: /ja/logs/guide/best-practices-for-log-management/
 [4]: /ja/integrations/
 [5]: /ja/logs/log_configuration/pipelines/
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
-[8]: https://app.datadoghq.com/security/getting-started
-[9]: /ja/security/default_rules/#cat-cloud-siem-log-detection
-[10]: /ja/security/detection_rules/
-[11]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[12]: /ja/security/explorer
-[13]: https://app.datadoghq.com/security/configuration/notification-rules
-[14]: /ja/security/notifications/rules/
-[15]: https://app.datadoghq.com/security/investigator/
-[16]: /ja/security/cloud_siem/investigator
-[17]: https://app.datadoghq.com/dashboard/lists/preset/100
-[18]: /ja/dashboards/#overview
-[19]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
-[20]: /ja/security/cloud_siem/log_detection_rules/
-[21]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[8]: https://app.datadoghq.com/security/landing
+[9]: https://app.datadoghq.com/security/content-packs
+[10]: https://app.datadoghq.com/security/configuration/siem/log-sources
+[11]: https://app.datadoghq.com/security/configuration/siem/setup
+[12]: /ja/security/default_rules/#cat-cloud-siem-log-detection
+[13]: /ja/security/detection_rules/
+[14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[15]: /ja/security/cloud_siem/investigate_security_signals
+[16]: https://app.datadoghq.com/security/configuration/notification-rules
+[17]: /ja/security/notifications/rules/
+[18]: https://app.datadoghq.com/security/configuration/reports
+[19]: https://app.datadoghq.com/security/investigator/
+[20]: /ja/security/cloud_siem/investigator
+[21]: https://app.datadoghq.com/dashboard/lists/preset/100
+[22]: /ja/dashboards/#overview
+[23]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /ja/security/cloud_siem/log_detection_rules/
+[25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/

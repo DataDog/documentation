@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/tags/
   tag: Documentación
   text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
-kind: Documentación
 title: Rastrear aplicaciones de ECS
 ---
 

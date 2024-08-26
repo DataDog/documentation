@@ -18,7 +18,7 @@ integration_id: amazon-codedeploy
 integration_title: Amazon CodeDeploy
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_codedeploy
 public_title: Intégration Datadog/Amazon CodeDeploy

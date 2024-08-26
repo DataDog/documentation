@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: エラートラッキングエクスプローラーについて
 is_beta: true
-kind: documentation
 title: バックエンドエラーの追跡
 ---
 
@@ -18,7 +17,7 @@ Datadog でまだログを収集していない場合は、[ログドキュメ�
 
 ## セットアップ
 
-**Python**、**Java**、**Ruby** などの言語では、ログの `source` タグが正しく設定されていれば、追加の設定は必要ありません。必要な属性は全て自動的にタグ付けされ、Datadog に送信されます。
+For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog.
 
 **C#**、**.NET**、**Go**、**Node.js** などのバックエンド言語については、各セクションのコード例で、エラーログを適切に構成し、ログの `error.stack` に必要なスタックトレースをアタッチする方法を示しています。
 
@@ -26,9 +25,16 @@ Datadog でまだログを収集していない場合は、[ログドキュメ�
 
 課題でのインラインコードスニペットを構成するには、[ソースコードインテグレーション][9]を設定します。Error Tracking for Logs でコードスニペットを追加する場合、APM は必要ありません。エンリッチメントタグとリンク先のリポジトリは、どちらも同じです。
 
-#### エラー追跡の属性
+#### Attributes for Error Tracking
 
-Datadog 内には、専用の UI 表示を持つ特定の属性があります。エラー追跡でこれらの関数を有効にするには、以下の属性名を使用します。
+To enable Error Tracking, logs must include both of the following:
+
+- Either an `error.kind` or `error.stack` field. **Note**: if using `error.stack`, it must be a valid stack trace.
+- A status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`.
+
+The remaining attributes listed below are optional, but their presence improves error grouping.
+
+Specific attributes have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking, use the following attribute names:
 
 | 属性            | 説明                                                             |
 |----------------------|-------------------------------------------------------------------------|
@@ -38,7 +44,7 @@ Datadog 内には、専用の UI 表示を持つ特定の属性があります�
 
 **注**: インテグレーションパイプラインは、デフォルトのログライブラリパラメーターをこれらの属性に再マップし、スタックトレースをパースまたはトレースバックして、自動的に `error.message` と `error.kind` を抽出しようとします。
 
-詳しくは、[ソースコード属性の完全なドキュメント][11]をご覧ください。
+詳しくは、[ソースコードと属性ドキュメント][11]をご覧ください。
 
 ### C# と .NET
 
@@ -57,7 +63,7 @@ var log = new LoggerConfiguration()
 try {
   // ...
 } catch (Exception ex) {
-  // log 呼び出しの最初の引数として例外を渡す
+  // pass exception as first argument of log call
   log.Error(ex, "an exception occurred");
 }
 ```
@@ -125,7 +131,7 @@ Go のログ収集の設定をしていない場合は、[Go ログ収集ドキ�
 キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
 
 ```go
-// https://github.com/pkg/errors の場合
+// for https://github.com/pkg/errors
 type stackTracer interface {
     StackTrace() errors.StackTrace
 }
@@ -216,6 +222,26 @@ try {
 }
 ```
 
+### PHP
+
+#### Monolog (JSON)
+
+If you have not set up log collection for PHP, see the [PHP Log Collection documentation][12].
+
+キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+
+```php
+try {
+    // ...
+} catch (\Exception $e) {
+    $logger->error('An error occurred', [
+        'error.message' => $e->getMessage(),
+        'error.kind' => get_class($e),
+        'error.stack' => $e->getTraceAsString(),
+    ]);
+}
+```
+
 ### Python
 
 #### ロギング
@@ -233,11 +259,11 @@ except:
 
 ### Ruby on Rails
 
-#### カスタムロガーフォーマッター
+#### Custom logger formatter
 
-Ruby on Rails のログ収集の設定をしていない場合は、[Ruby on Rails ログ収集ドキュメント][7]を参照してください。
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7].
 
-手動でエラーを記録するには、JSON を使ってフォーマッターを作成し、例外値を正しいフィールドにマッピングします。
+To manually log an error, create a formatter using JSON and map the exception values to the correct fields:
 
 ```ruby
 require 'json'
@@ -268,30 +294,30 @@ class JsonWithErrorFieldFormatter < ::Logger::Formatter
 end
 ```
 
-そして、それをロガーで使用します。
+And use it in your logger:
 ```ruby
 logger = Logger.new(STDOUT)
 logger.formatter = JsonWithErrorFieldFormatter.new
 ```
 
-**Lograge** を使用する場合は、フォーマットされたエラーログを送信するように設定することもできます。
+If you use **Lograge**, you can also set it up to send formatted error logs:
 ``` ruby
 Rails.application.configure do
-    jsonLogger = Logger.new(STDOUT) # STDOUT または Agent の構成に応じたファイル
+    jsonLogger = Logger.new(STDOUT) # STDOUT or file depending on your agent configuration
     jsonLogger.formatter = JsonWithErrorFieldFormatter.new
 
-    # Rails のデフォルトの TaggedLogging ロガーを json フォーマッター付きの新規ロガーに置き換えます。
-    # TaggedLogging はより複雑な json 形式のメッセージと互換性がありません
+    # Replacing Rails default TaggedLogging logger with a new one with the json formatter.
+    # TaggedLogging is incompatible with more complex json format messages
     config.logger = jsonLogger
 
-    # Lograge の構成
+    # Lograge config
     config.lograge.enabled = true
     config.lograge.formatter = Lograge::Formatters::Raw.new
 
-    # ログの着色を無効にします
+    # Disables log coloration
     config.colorize_logging = false
 
-    # 例外のロギングを正しいフィールドに構成します
+    # Configure logging of exceptions to the correct fields
     config.lograge.custom_options = lambda do |event|
         if event.payload[:exception_object]
             return {
@@ -322,3 +348,4 @@ end
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /ja/logs/log_collection/
 [11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /ja/logs/log_collection/php/
