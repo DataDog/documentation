@@ -1,5 +1,7 @@
 ---
 title: Getting Started with DDSQL Editor
+aliases:
+- /dashboards/ddsql_editor/getting_started/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

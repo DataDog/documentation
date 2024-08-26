@@ -1,6 +1,8 @@
 ---
 title: DDSQL Window Functions
 private: true
+aliases:
+- /dashboards/ddsql_editor/reference/window_functions/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

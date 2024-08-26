@@ -1,5 +1,7 @@
 ---
 title: DDSQL Expressions and Operators
+aliases:
+- /dashboards/ddsql_editor/reference/expressions_and_operators/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

@@ -1,5 +1,7 @@
 ---
 title: Querying Tags in DDSQL
+aliases:
+- /dashboards/ddsql_editor/reference/tags/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

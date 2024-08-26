@@ -1,5 +1,7 @@
 ---
 title: DDSQL Editor
+aliases:
+- /dashboards/ddsql_editor/
 further_reading:
 - link: "/ddsql_editor/reference"
   tag: "Documentation"

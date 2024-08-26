@@ -1,5 +1,7 @@
 ---
 title: DDSQL Statements
+aliases:
+- /dashboards/ddsql_editor/reference/statements/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
