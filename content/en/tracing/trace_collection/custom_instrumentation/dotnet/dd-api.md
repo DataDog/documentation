@@ -197,7 +197,7 @@ catch(Exception e)
 ```
 
 This sets the following tags on the span:
-- `"error.msg":exception.Message`
+- `"error.message":exception.Message`
 - `"error.stack":exception.ToString()`
 - `"error.type":exception.GetType().ToString()`
 
