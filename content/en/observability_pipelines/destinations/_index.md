@@ -57,7 +57,6 @@ These are the batch settings for each destination:
 | Amazon S3 (Datadog Log Archives)           | None           | 100,000,000     | 900                 |
 | Azure Storage (Datadog Log Archives)       | None           | 100,000,000     | 900                 |
 | Datadog Logs                               | 1,000          | 4,250,000       | 5                   |
-| Datadog Metrics                            | 100,000        | None            | 2                   |
 | Elasticsearch                              | None           | 10,000,000      | 1                   |
 | Google Chronicle                           | None           | 1,000,000       | 15                  |
 | Google Cloud Storage (Datadog Log Archives)| None           | 100,000,000     | 900                 |
