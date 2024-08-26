@@ -1,5 +1,7 @@
 ---
 title: Getting Started with Code Analysis
+aliases:
+- /code_analysis/faq
 further_reading:
 - link: 'https://www.datadoghq.com/blog/datadog-code-analysis/'
   tag: 'Blog'
@@ -36,6 +38,10 @@ You can configure Code Analysis to run scans on code directly in Datadog or on c
 
 {{< tabs >}}
 {{% tab "Datadog Hosted" %}}
+
+With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline. Datadog reads your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results.
+
+Using Datadog-hosted scans eliminates the need for you to configure a CI pipeline so you can use Code Analysis.
 
 Enable Code Analysis on your GitHub repositories for each GitHub Account you’ve added by setting up the [GitHub integration][101].
 
@@ -294,13 +300,74 @@ You can access vulnerability reports and locate the source files where the vulne
 
 ## Explore results in the Service Catalog
 
-You can analyze CI pipelines associated with your services and code violations identified from Static Analysis to troubleshoot slowdowns and failures. Navigate to [**Service Management** > **Services** > **Service Catalog**][13] and click on the **Delivery** view to analyze the pre-production status of your services. 
+Investigate code violations associated with your services and code violations identified from Static Analysis to troubleshoot slowdowns and failures. Navigate to [**Service Management** > **Services** > **Service Catalog**][13] and click on the **Delivery** view to analyze the pre-production status of your services. 
 
 {{< img src="/getting_started/code_analysis/catalog_view.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
 
 Click on a service to access information about CI pipelines from Pipeline Visibility, in addition to security vulnerabilities and code quality issues from Code Analysis on the **Delivery** tab of the side panel.
 
 {{< img src="/getting_started/code_analysis/catalog_service.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
+
+### Linking services to code violations and libraries
+
+Datadog associates code violations or libraries with relevant services by using the following mechanisms:
+
+1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
+2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
+3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
+
+If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
+
+#### Identifying the code location in the Service Catalog
+
+The schema version `v3` and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+
+The `paths` attribute is a list of [globs][14]
+that should match paths in the repository.
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - /path/to/service/code/**
+{{< /code-block >}}
+
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and associate
+files with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name the closest to the filename is selected.
+
+
+### Linking teams to code violations and libraries
+
+Datadog automatically associates the team attached to a service when a code violation or library issue is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team `myservice` will be associated to any violation
+detected in this file.
+
+If no services or teams are found, Datadog uses the `CODEOWNERS` [file][15]
+in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
 ## Further Reading
 
@@ -318,3 +385,6 @@ Click on a service to access information about CI pipelines from Pipeline Visibi
 [11]: /code_analysis/github_pull_requests/#update-an-existing-github-app
 [12]: /code_analysis/github_pull_requests
 [13]: https://app.datadoghq.com/services 
+[14]: https://en.wikipedia.org/wiki/Glob_(programming)
+[15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[16]: /account_management/teams/
