@@ -1,9 +1,12 @@
 ---
 title: Datadog Data Collection and Resolution
-
 disable_sidebar: true
 aliases:
   - /developers/faq/data-collection-resolution-retention/
+further_reading:
+  - link: 'data_security/data_retention_periods'
+    tag: 'Documentation'
+    text: 'Datadog retention periods'
 algolia:
   tags: ['data retention']
 ---

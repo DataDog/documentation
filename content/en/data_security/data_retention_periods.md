@@ -7,12 +7,12 @@ aliases:
 further_reading:
     - link: 'developers/guide/data-collection-resolution'
       tag: 'Documentation'
-      text: 'Datadog Data Collection and Resolution'
+      text: 'Datadog data collection and resolution'
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
 filter_all: All
-content: "TK The following table lists the attributes automatically applied to data sent to Datadog by the Agent by each of the RUM, Logs, and APM products, as applicable to the data domain. Optionally, filter the list by product or search by keyword or description text to find the attributes you're interested in. TK"
+content: "The following table lists the retention period automatically applied to data sent to Datadog by the Agent by each of the AI, Digital Experience, Infrastructure, Logs, Platform, Security, Service Management, and Software Delivery products. Optionally, filter the list by product or search by keyword to find the attributes you're interested in."
 attributes: 
   - suite: AI
     product: Bits AI
