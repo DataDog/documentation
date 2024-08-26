@@ -3,7 +3,7 @@ title: Azure Storage Destination
 disable_toc: false
 ---
 
-The Azure Storage destination is available for the [Archive Logs template][1]. Use this destination to send your logs in Datadog-rehydratable format to an Azure Storage bucket for archiving. You need to set up [Datadog Log Archives][2] if you haven't already and then set up the destination in the pipeline UI.
+The Azure Storage destination is available for the [Archive Logs template][1]. Use this destination to send your logs in Datadog-rehydratable format to an Azure Storage bucket for archiving. You need to set up [Datadog Log Archives][2] if you haven't already, and then set up the destination in the pipeline UI.
 
 ## Configure Log Archives
 
