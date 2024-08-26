@@ -25017,6 +25017,7 @@ paths:
         name: metric_query
         schema:
           type: string
+        x-docs-curl-required: true
       - description: The POSIX timestamp of the start of the query in seconds.
         in: query
         name: start
