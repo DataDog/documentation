@@ -10,7 +10,7 @@ export function getHitData(hit, searchQuery = '') {
     const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
     const highlightTitle = (hit._highlightResult.title.value || title);
-    const highlightContent = cleanContent((hit._highlightResult.content.value || ''));
+    const highlightContent = (hit._highlightResult.content.value || '');
     
 
     return {
