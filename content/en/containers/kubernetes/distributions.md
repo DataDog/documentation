@@ -351,50 +351,47 @@ The configuration below is meant to work with this setup (due to SCC/ServiceAcco
 Agent is installed in the same namespace as the Datadog Operator.
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
+  namespace: openshift-operators # same namespace as where the Datadog Operator was deployed.
 spec:
-  features:
-    logCollection:
-      enabled: false
-    liveProcessCollection:
-      enabled: false
-    liveContainerCollection:
-      enabled: true
-    apm:
-      enabled: false
-    cspm:
-      enabled: false
-    cws:
-      enabled: false
-    npm:
-      enabled: false
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
-      port: 8443
   global:
     credentials:
-      apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+      apiSecret:
+        keyName: api-key
+        secretName: datadog-secret
+      appSecret:
+        keyName: app-key
+        secretName: datadog-secret
     clusterName: <CLUSTER_NAME>
-    kubelet:
-      tlsVerify: false
     criSocketPath: /var/run/crio/crio.sock
+    kubelet:
+      # This is needed if the kubelet certificate is self-signed.
+      # Alternatively, the CA certificate used to sign the kubelet certificate can be mounted.
+      tlsVerify: false
+  features:
+    apm:
+      enabled: true
+      hostPortConfig:
+        enabled: true
+      # Unix Domain Socket uses a `hostPath` volume, prevented by OpenShift default SecurityContextConstraints for applicative pods.
+      # More information: https://docs.datadoghq.com/containers/troubleshooting/admission-controller/?tab=datadogoperator#openshift
+      unixDomainSocketConfig:
+        enabled: false
+    dogstatsd:
+      hostPortConfig:
+        enabled: true
+      unixDomainSocketConfig:
+        enabled: false
   override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
-      containers:
-        cluster-agent:
-          securityContext:
-            readOnlyRootFilesystem: false
     nodeAgent:
-      serviceAccountName: datadog-agent-scc
+      # In OpenShift 4.0+, set the hostNetwork parameter to allow access to your cloud provider metadata API endpoint.
+      # This is necessary to retrieve host tags and aliases collected by Datadog cloud provider integrations. 
+      hostNetwork: true
+      image:
+        name: gcr.io/datadoghq/agent:latest
       securityContext:
         runAsUser: 0
         seLinuxOptions:
@@ -402,18 +399,21 @@ spec:
           role: system_r
           type: spc_t
           user: system_u
-      image:
-        name: gcr.io/datadoghq/agent:latest
+      serviceAccountName: datadog-agent-scc
+      # Tolerations matching OpenShift default taints on master nodes
       tolerations:
-        - key: node-role.kubernetes.io/master
-          operator: Exists
-          effect: NoSchedule
-        - key: node-role.kubernetes.io/infra
-          operator: Exists
-          effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
+    clusterAgent:
+      serviceAccountName: datadog-agent-scc
+      replicas: 2 # High-availability
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
 ```
-
-**Note**: The nodeAgent Security Context override is necessary for Log Collection and APM Trace Collection with the `/var/run/datadog/apm/apm.socket` socket. If these features are not enabled, you can omit this override.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
