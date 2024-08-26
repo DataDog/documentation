@@ -33,7 +33,7 @@ const updateSettings = (index) => {
             'unordered(content)'
         ],
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
-        customRanking: ['desc(rank)', 'order(asc)'],
+        customRanking: ['desc(rank)', 'asc(order)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         attributesToSnippet: ['content:20'],

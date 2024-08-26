@@ -28,7 +28,8 @@
                 {{ end }}
             {{ end }}
 
-            {{- $content = replaceRE `(\w|\s)*\sis not supported for your selected Datadog site \(\)` "" $content 1 -}}
+            {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
+            {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
 
             {{- /* record for each individual section (split by h2 header) */ -}}
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
