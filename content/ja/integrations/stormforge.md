@@ -37,9 +37,9 @@ integration_id: stormforge
 integration_title: StormForge
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: stormforge
+oauth: {}
 public_title: StormForge
 short_description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
 supported_os:

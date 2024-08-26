@@ -24,6 +24,8 @@ type: multi-code-lang
 
 ## 要件
 
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
+
 .NET Framework の対応オペレーティングシステム
 : Windows 10<br/>
 Windows Server バージョン 2012 以降
@@ -33,36 +35,41 @@ Windows Server バージョン 2012 以降
 Windows 10<br/>
 Windows Server バージョン 2012 以降
 
-サーバーレス
-: Azure App Services - 公開ベータ版 (Web アプリのみ、関数はサポートされていません)
+Serverless
+: Azure App Service Windows and Linux - Web Apps only, Function Apps are not supported
 
 対応する .NET ランタイム (64 ビットアプリケーション)
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1、3.1<br/>
 .NET 5<br/>
 .NET 6<br/>
-.NET 7
+.NET 7<br/>
+.NET 8
+
+<div class="alert alert-warning">
+  <strong>注:</strong> コンテナの場合、<strong>少なくとも 1 つのコア</strong>が必要です。詳しくは<a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">トラブルシューティングのドキュメント</a>をお読みください。
+</div>
 
 対応言語
 : C#、F#、Visual Basic など、.NET ランタイムをターゲットとするあらゆる言語。
 
 以下のプロファイリング機能は、`dd-trace-dotnet` ライブラリの以下の最小バージョンで利用可能です。
 
-|      機能         | 必要な `dd-trace-dotnet` のバージョン      | 必要な .NET Runtime のバージョン        |
-|----------------------|-----------------------------------------|---------------------------------------|
-| Wall Time プロファイリング        | 2.7.0+                     |サポートされているすべてのランタイムバージョン。      |
-| CPU プロファイリング        | 2.15.0+                       | サポートされているすべてのランタイムバージョン。      |
-| 例外プロファイリング        | 2.31.0+                       | サポートされているすべてのランタイムバージョン。      |
-| アロケーションプロファイリング        | ベータ版、2.18.0+                       | .NET 6+      |
-| ロックコンテンションプロファイリング        | 2.31.0+                       | .NET 5+      |
-| ライブヒーププロファイリング        | ベータ版、2.22.0+                       | .NET 7+      |
-| [Code Hotspots][12]        | 2.7.0+                       | サポートされているすべてのランタイムバージョン。      |
-| [Endpoint Profiling][13]            | 2.15.0+                       | サポートされているすべてのランタイムバージョン。      |
-| 沿革            | 2.30.0+                       | サポートされているすべてのランタイムバージョン (ガベージコレクションの詳細のために必要な .NET 5+ を除く) 。     |
+| 機能                   | 必要な `dd-trace-dotnet` のバージョン | 必要な .NET Runtime のバージョン                                                           |
+|---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
+| Wall Time プロファイリング       | 2.7.0+                             | サポートされているすべてのランタイムバージョン。                                                          |
+| CPU プロファイリング             | 2.15.0+                            | サポートされているすべてのランタイムバージョン。                                                          |
+| 例外プロファイリング      | 2.31.0+                            | サポートされているすべてのランタイムバージョン。                                                          |
+| アロケーションプロファイリング     | ベータ版、2.18.0+                      | .NET 6+                                                                                  |
+| ロックコンテンションプロファイリング | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
+| ライブヒーププロファイリング       | ベータ版、2.22.0+                      | .NET 7+                                                                                  |
+| [Code Hotspots][12]       | 2.7.0+                             | サポートされているすべてのランタイムバージョン。                                                          |
+| [Endpoint Profiling][13]  | 2.15.0+                            | サポートされているすべてのランタイムバージョン。                                                          |
+| 沿革                  | 2.30.0+                            | サポートされているすべてのランタイムバージョン (ガベージコレクションの詳細のために必要な .NET 5+ を除く) 。 |
 
 ## インストール
 
-すでに Datadog を使用している場合は、Agent をバージョン 7.20.2+ または 6.20.2+ にアップグレードしてください。プロファイラーにはトレーシングライブラリ (v2.8.0 以降) が付属していますので、既にアプリケーションで [APM を使用してトレースを収集][5]している場合は、ライブラリをインストールせずに直接[プロファイラーを有効にする](#enabling-the-profiler)に進んでください。
+Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
 
 そうでない場合は、お使いの OS に応じて、以下の手順でプロファイラーをインストールしてください。
 
@@ -122,16 +129,17 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
-{{% tab "Azure App Service (公開ベータ版)" %}}
+{{% tab "Azure App Service" %}}
 
 <div class="alert alert-warning">
-  <strong>注:</strong> Web アプリのみ対応しています。関数はサポートされていません。
+  <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
 .NET Profiler を Web アプリ単位でインストールするには
-1. Azure App Service [Datadog APM Extension][1] を Web アプリにインストールします。
+1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
 
-[1]: /ja/serverless/azure_app_services/?tab=net#installation
+[1]: /ja/serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /ja/serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -141,7 +149,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 ## プロファイラーの有効化
 
 <div class="alert alert-info">
-  <strong>注:</strong> Datadog では、マシンレベルまたはすべての IIS アプリケーションでプロファイラーを有効にすることを推奨していません。マシンレベルで有効にしている場合は、すべてのシステムアプリケーションでプロファイラーを有効にすることに関連するオーバーヘッドを削減するための情報として、<a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#enabling-the-profiler-machine-wide">トラブルシューティングドキュメント</a>を参照してください。
+  <strong>注</strong>: Datadog では、マシンレベルまたはすべての IIS アプリケーションでプロファイラーを有効にすることを推奨していません。マシンレベルで有効にしている場合は、すべてのシステムアプリケーションでプロファイラーを有効にすることに関連するオーバーヘッドを削減するための情報として、<a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">トラブルシューティングドキュメント</a>をお読みください。
 </div>
 
 {{< tabs >}}
@@ -164,6 +172,25 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
+
+{{% tab "Linux with Single Step Instrumentation" %}}
+
+1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+
+2. スタンドアロンアプリケーションの場合は、通常通り手動でアプリケーションを再起動します。
+
+3. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
+
+[1]: https://app.datadoghq.com/profiling
+[2]: https://docs.datadoghq.com/ja/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -354,17 +381,18 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
-{{% tab "Azure App Service (公開ベータ版)" %}}
+{{% tab "Azure App Service" %}}
 
-2. 以下の[インストールガイドライン][1]に従って、`DD_PROFILING_ENABLED:true` を設定し、プロファイラーを有効にします
+2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
 
-[1]: /ja/serverless/azure_app_services/?tab=net#installation
+[1]: /ja/serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /ja/serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
 
 
-## コンフィギュレーション
+## 構成
 
 プロファイラーを構成するには、以下の環境変数を使用します。これらの設定のほとんどは、トレーサーの構成にも適用されることに注意してください。これらの設定を変更した後は、アプリケーションを再起動します。
 
@@ -408,3 +436,4 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 [5]: /ja/tracing/trace_collection/
 [12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/

@@ -45,19 +45,19 @@ title: メトリクスエクスプローラー
 
 ### 関数と数式
 
-関数ボタンを使って、オプションで関数をクエリに追加することができます。すべての関数が、すべてのメトリクスタイプで利用できるわけではありません。詳しくは[クエリ][6]のドキュメントをご覧ください。
+関数ボタンを使って、オプションで関数をクエリに追加することができます。すべての関数が、すべてのメトリクスタイプで利用できるわけではありません。詳細については、[クエリ][6]のドキュメントを参照してください。
 
 ### エクスポート
 
 右上のボタンで、グラフをダッシュボードやノートブックにエクスポートします。また、**Split Graph in Notebook** を使用すると、データをリージョン、サービス、環境などで個別のグラフに分割して表示することも可能です。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /ja/notebooks/
 [3]: /ja/dashboards/#screenboards
-[4]: /ja/dashboards/#timeboards
+[4]: /ja/dashboards/#get-started
 [5]: /ja/metrics/introduction/#space-aggregation
 [6]: https://docs.datadoghq.com/ja/dashboards/querying/#advanced-graphing

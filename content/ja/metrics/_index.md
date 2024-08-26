@@ -12,19 +12,24 @@ cascade:
     - メトリクスの送信
 title: メトリクス
 ---
-Datadog のメトリクスとその有用性についてご紹介します。このセクションには以下のトピックが含まれます。
 
-{{< whatsnext desc="Datadog へのメトリクス送信" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>カスタムメトリクスの送信</u> - カスタムメトリクスとその送信方法をご紹介します。{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry メトリクスの送信</u> - Datadog Agent や OpenTelemetry Collector の構成方法について学びます。{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信できるメトリクスのタイプ。{{< /nextlink >}}
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  カスタムメトリクスのための Foundation Enablement セッションにご登録ください。カスタムメトリクスが、訪問者数、平均顧客バスケットサイズ、リクエストレイテンシー、カスタムアルゴリズムのパフォーマンス分布など、アプリケーション KPI の追跡にどのように役立つかを学びましょう。
+{{< /learning-center-callout >}}
+
+これは Datadog におけるメトリクスの紹介と、それらがなぜ有用であるかについての説明です。このセクションには以下のトピックが含まれます。
+
+{{< whatsnext desc="メトリクスを Datadog に送信する" >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>カスタムメトリクスの送信</u> - カスタムメトリクスの意味と送信方法をご紹介します。{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry メトリクスの送信</u> - Datadog Agent または OpenTelemetry Collector を構成します。{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信できるメトリクスの種類。{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>ディストリビューションメトリクス</u> - ディストリビューションメトリクスとグローバルに正確なパーセンタイルについてご紹介します。{{< /nextlink >}}
     {{< nextlink href="/metrics/units" >}}<u>メトリクス単位</u> - メトリクスに関連付けられる単位についてご紹介します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="メトリクスの視覚化とクエリ" >}}
+{{< whatsnext desc="メトリクスを可視化およびクエリする" >}}
     {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し、分析を行います。{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>メトリクスサマリー</u> - Datadog メトリクスのアクティブなレポートを理解します。{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>メトリクスサマリー</u> - Datadog メトリクスのアクティブなレポートについて理解します。{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスの範囲を絞り込みます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -62,7 +67,7 @@ Datadog では、メトリクスデータは値とタイムスタンプを持つ
 
 さらに、メトリクスは、顧客からの需要を満たすために環境の規模を調整するのに役立ちます。リソースをどれだけ消費する必要があるかを正確に知ることは、お金を節約したり、パフォーマンスを向上させたりするのに役立ちます。
 
-### Datadog へのメトリクスの送信
+### Submitting metrics to Datadog
 
 メトリクスは、いくつかの場所から Datadog に送信できます。
 
@@ -181,7 +186,7 @@ Aggregator を使用するときに適用できる集計には、_合計_、_最
 
 詳細については、[メトリクスの概要ドキュメント][22]をお読みください。
 
-## その他の参考資料
+## 参考資料
 
 {{< whatsnext desc="メトリクスに関するトピックを続行する場合は、以下を確認してください。">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - フィルターを使用して返されたメトリクスのスコープを絞り込みます。{{< /nextlink >}}

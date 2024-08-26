@@ -3,6 +3,8 @@ aliases:
 - /ja/integrations/sumologic/
 categories:
 - notifications
+- event management
+custom_kind: integration
 dependencies: []
 description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
 doc_link: https://docs.datadoghq.com/integrations/sumologic/
@@ -13,7 +15,6 @@ integration_id: ''
 integration_title: Sumo Logic
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: sumo_logic
 public_title: Datadog-Sumo Logic インテグレーション
@@ -26,9 +27,9 @@ version: '1.0'
 
 Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログデータを Datadog のイベントストリームに転送することも、Sumo Logic を Datadog アラートおよびイベントの通知チャンネルとして使用することもできます。つまり、サービス間で相互に通知を行うことができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 #### Datadog から Sumo Logic への送信
 

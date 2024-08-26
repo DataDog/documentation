@@ -12,9 +12,9 @@ further_reading:
 
 The following ASM capabilities are supported relative to each language's tracing library:
 
-| ASM capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
-|----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
-| Code Security                          | 1.15.0  | 2.42.0   | 4.18.0                                           | private beta  | not supported   | not supported | not supported |
+| Application Security capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
+|-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|
+| Code Security                                 | 1.15.0  | 2.42.0   | 4.18.0         | beta          | not supported   | not supported | not supported |
 
 Select your application language for details about framework compatibility and feature support.
 
