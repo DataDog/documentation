@@ -403,7 +403,7 @@ module "lambda-datadog" {
 {{< /tabs >}}
 
 ## Minimize Cold Start Duration (Beta)
-Starting version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%.. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next` 
+Starting version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next`.
 
 ## What's next?
 
