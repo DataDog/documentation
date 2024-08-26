@@ -37,7 +37,7 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 1. Add `DD_PROFILING_ENABLED=auto` as an additional environment variable before or after `DD_APM_INSTRUMENTATION_ENABLED` in the copied command. This turns on automatic profiler enablement for all processes.
 1. Proceed with rest of the installation instructions, using the modified installation command.
 
-## Enable automatic profiling
+## How does profiling work with SSI
 
 After the installation, all processes on the host or in the container are executed with the
 `DD_PROFILING_ENABLED=auto` environment variable. Datadog recommends using the `auto` value with SSI
