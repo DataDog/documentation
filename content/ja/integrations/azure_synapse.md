@@ -2,6 +2,7 @@
 categories:
 - クラウド
 - azure
+custom_kind: integration
 dependencies: []
 description: Synapse のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_synapse/
@@ -12,7 +13,6 @@ integration_id: azure-synapse
 integration_title: Microsoft Azure Synapse
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_synapse
 public_title: Datadog-Microsoft Azure Synapse インテグレーション
@@ -27,23 +27,23 @@ Azure Synapse Analytics は、データインテグレーション、エンタ�
 
 Datadog Azure インテグレーションを使用して、Azure Synapse からメトリクスを収集できます。
 
-## 計画と使用
-### インフラストラクチャーリスト
+## セットアップ
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_synapse" >}}
 
 
-### ヘルプ
+### イベント
 Azure Synapse インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 Azure Synapse インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

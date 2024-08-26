@@ -1,6 +1,10 @@
 ---
 title: Processors
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
+  tag: "blog"
+  text: "Transform and enrich your logs with Datadog Observability Pipelines"
 ---
 
 ## Overview
@@ -75,3 +79,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

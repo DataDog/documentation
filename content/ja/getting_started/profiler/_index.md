@@ -2,6 +2,7 @@
 aliases:
 - /ja/tracing/profiling/intro_to_profiling
 - /ja/tracing/profiler/intro_to_profiling
+- /ja/tracing/profiler/getting_started
 further_reading:
 - link: /profiler/
   tag: ドキュメント
@@ -15,6 +16,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: GitHub
   text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
+- link: https://www.datadoghq.com/blog/request-latency-profiling/
+  tag: ブログ
+  text: プロファイリングによるリクエストレイテンシーの理解
 title: Continuous Profiler の概要
 ---
 
@@ -241,7 +245,7 @@ docker-compose down
 
 このガイドでは、プロファイリングの概要をほんの少しだけ紹介しましたが、どのように始めればいいのかを理解していただけたかと思います。**[お使いのサービスで、早速プロファイラーを有効にしてみましょう][8]**。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

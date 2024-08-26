@@ -31,6 +31,7 @@ categories:
 - 構成 & デプロイ
 - コンテナ
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: gatekeeper
 integration_title: Gatekeeper
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: gatekeeper
 public_title: Gatekeeper
@@ -56,6 +56,7 @@ tile:
   - Category::Containers
   - Category::Security
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Gatekeeper インテグレーション
   media: []
@@ -73,11 +74,11 @@ tile:
 
 ![Gatekeeper 概要ダッシュボード][2]
 
-## 計画と使用
+## セットアップ
 
 Kubernetes クラスターで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。[オートディスカバリーのインテグレーションテンプレート][3]のガイドも参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 #### Agent バージョン >=7.26.0 または >=6.26.0
 
@@ -161,7 +162,7 @@ gatekeeper チェックを Kubernetes クラスターにインストールする
 
 12. Datadog Agent ポッドを再起動します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. gatekeeper のパフォーマンスデータの収集を開始するには、Agent ポッドに追加した `/confd` フォルダーの `gatekeeper/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cert_manager.d/conf.yaml][6] を参照してください。
 
@@ -171,21 +172,21 @@ gatekeeper チェックを Kubernetes クラスターにインストールする
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `gatekeeper` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gatekeeper" >}}
 
 
-### ヘルプ
+### イベント
 
 Gatekeeper には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "gatekeeper" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

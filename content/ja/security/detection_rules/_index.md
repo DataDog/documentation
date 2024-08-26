@@ -1,9 +1,9 @@
 ---
 aliases:
-- /security_monitoring/detection_rules/
-- /cloud_siem/detection_rules/
-- /security_platform/detection_rules/
-- /security/security_monitoring/log_detection_rules/
+- /ja/security_monitoring/detection_rules/
+- /ja/cloud_siem/detection_rules/
+- /ja/security_platform/detection_rules/
+- /ja/security/security_monitoring/log_detection_rules/
 further_reading:
 - link: /security/default_rules/#all
   tag: Documentation

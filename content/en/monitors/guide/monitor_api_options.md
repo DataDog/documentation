@@ -30,17 +30,9 @@ title: Monitor API Options
 
 ### Permissions options
 
-- **`locked`** a boolean indicating whether changes to this monitor should be restricted to the creator or users with the Org Management (`org_management`) permission. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
-- **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1]. `restricted_roles` is the successor to `locked`.
+- **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1].
 
-**Note:** Do not set both the `locked` and `restricted_roles` parameters on the same monitor. If both are set, the more restrictive parameter applies. Any role set in `restricted_roles` is considered more restrictive than `locked:true`.
-
-The following examples demonstrate how the `locked` and `restricted_roles` parameters interact:
-- If a monitor is set to `locked:false` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
-- If a monitor is set to `locked:true` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
-- If a monitor is set to `locked:true` and no `"restricted_roles"` parameter is set, the `locked:true` parameter applies.
-
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the [dedicated guide][2].
+**Note:** You can now set up permissions on monitors based on [Teams][4] and users, in addition to roles, with [Restriction Policies][5]. For more information on restricting permissions for monitors, see the [dedicated guide][2].
 
 ## Anomaly options
 
@@ -91,3 +83,5 @@ Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 [1]: /api/latest/roles/
 [2]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [3]: /monitors/guide/recovery-thresholds/
+[4]: /account_management/teams/
+[5]:/api/latest/restriction-policies/
