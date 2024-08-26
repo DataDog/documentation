@@ -98,4 +98,7 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /tests/setup/
+[2]: /tests/explorer/
+[3]: /tests/early_flake_detection
 [4]: https://app.datadoghq.com/ci/settings/test-service
