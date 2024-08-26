@@ -33,7 +33,7 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
 
 ### Batch settings {#batch-settings-intro}
 
-Observability Pipelines destinations batch events sent to the downstream integration. The following parameters define each destinations' batch settings:
+Observability Pipelines destinations batch events sent to the downstream integration. The following parameters define each destination's batch settings:
 
 - Maximum number of events
 - Maximum number of bytes
