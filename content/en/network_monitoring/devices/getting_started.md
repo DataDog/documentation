@@ -1,5 +1,5 @@
 ---
-title: Getting Started with NDM
+title: Getting Started
 description: Get started with your network-connected devices, such as routers, switches, servers, and firewalls.
 further_reading:
     - link: '/network_monitoring/devices/supported_devices'

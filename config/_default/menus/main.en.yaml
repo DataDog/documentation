@@ -2750,12 +2750,12 @@ menu:
       parent: nm_parent
       identifier: ndm
       weight: 3
-    - name: Getting Started with NDM
+    - name: Getting Started
       url: network_monitoring/devices/getting_started
       parent: ndm
       identifier: ndm_getting_started
       weight: 301
-    - name: Supported NDM Devices
+    - name: Supported Devices
       url: network_monitoring/devices/supported_devices
       parent: ndm
       identifier: ndm_supported_devices

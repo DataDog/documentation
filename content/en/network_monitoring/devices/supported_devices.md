@@ -1,5 +1,5 @@
 ---
-title: Supported NDM Devices
+title: Supported Devices
 further_reading:
     - link: 'https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/'
       tag: 'Blog'
@@ -102,10 +102,6 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 | Zyxel | [zyxel-switch.yaml][125] <br> |
 
 
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
 [2]: /network_monitoring/devices/profiles/
@@ -231,7 +227,6 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [123]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml
 [124]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml
 [125]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml
-
 
 
 ## Further Reading
