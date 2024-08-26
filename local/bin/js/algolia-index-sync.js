@@ -21,10 +21,9 @@ const getIndexName = () => {
 };
 
 const updateSettings = (index) => {
-    // Distinct: true means don't duplicate results.
-    // attributeForDistinct: using a page's base_url (without the anchor) to group results for the same page.
-    // This means we aren't returning every section of the same page as different results.
-    // custom ranking by order means when relevant we return the "Overview" or first section of a page.
+    // Distinct: true allows us to return a single result for each page despite indexing each section inidivdually.
+    // We use the page's base_url (without the anchor) to group together multiple results for one page using "attributeForDistinct"
+    // Custom ranking by order allows us to return the full page result whenever possible (we assign -1 order to full page results)
     const settings = {
         searchableAttributes: [
             'unordered(tags)',
