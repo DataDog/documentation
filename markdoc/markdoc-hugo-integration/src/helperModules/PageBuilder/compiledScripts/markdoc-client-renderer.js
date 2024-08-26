@@ -2478,6 +2478,8 @@
           if (!__classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance)) {
             __classPrivateFieldSet(_a, _a, new _a(), "f", _ClientRenderer_instance);
             __classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance).retrieveStoredPreferences();
+            window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
+            window.markdocAfterRerenderHooks = window.markdocAfterRerenderHooks || [];
           }
           return __classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance);
         }
@@ -2530,9 +2532,7 @@
             return;
           }
           this.selectedValsByPrefId[prefId] = optionId;
-          this.rerenderChooser();
-          this.rerenderPageContent();
-          this.populateRightNav();
+          this.rerender();
           this.syncUrlWithSelectedVals();
           this.updateStoredPreferences();
         }
@@ -2577,12 +2577,12 @@
             return;
           }
           rightNav.innerHTML = html;
-          window.TOCFunctions.buildTOCMap();
-          window.TOCFunctions.onScroll();
         }
         rerender() {
           this.rerenderChooser();
           this.rerenderPageContent();
+          this.populateRightNav();
+          markdocAfterRerenderHooks.forEach((hook) => hook());
         }
         /**
          * Rerender the section of the page that was derived
@@ -2681,9 +2681,9 @@
             } else {
               this.addChooserEventListeners();
             }
+            this.populateRightNav();
             this.revealPage();
           }
-          this.populateRightNav();
           this.updateEditButton();
           if (contentIsCustomizable) {
             this.syncUrlWithSelectedVals();
@@ -2691,6 +2691,7 @@
           }
         }
         revealPage() {
+          markdocBeforeRevealHooks.forEach((hook) => hook());
           if (this.chooserElement) {
             this.chooserElement.style.position = "sticky";
             this.chooserElement.style.top = "95px";

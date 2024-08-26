@@ -43,6 +43,10 @@ export class ClientRenderer {
     if (!ClientRenderer.#instance) {
       ClientRenderer.#instance = new ClientRenderer();
       ClientRenderer.#instance.retrieveStoredPreferences();
+      // @ts-ignore
+      window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
+      // @ts-ignore
+      window.markdocAfterRerenderHooks = window.markdocAfterRerenderHooks || [];
     }
 
     return ClientRenderer.#instance;
@@ -111,9 +115,7 @@ export class ClientRenderer {
     }
 
     this.selectedValsByPrefId[prefId] = optionId;
-    this.rerenderChooser();
-    this.rerenderPageContent();
-    this.populateRightNav();
+    this.rerender();
     this.syncUrlWithSelectedVals();
     this.updateStoredPreferences();
   }
@@ -166,15 +168,14 @@ export class ClientRenderer {
       return;
     }
     rightNav.innerHTML = html;
-    // @ts-ignore
-    window.TOCFunctions.buildTOCMap();
-    // @ts-ignore
-    window.TOCFunctions.onScroll();
   }
 
   rerender() {
     this.rerenderChooser();
     this.rerenderPageContent();
+    this.populateRightNav();
+    //@ts-ignore
+    markdocAfterRerenderHooks.forEach((hook) => hook());
   }
 
   /**
@@ -307,10 +308,10 @@ export class ClientRenderer {
       } else {
         this.addChooserEventListeners();
       }
+      this.populateRightNav();
       this.revealPage();
     }
 
-    this.populateRightNav();
     this.updateEditButton();
 
     if (contentIsCustomizable) {
@@ -320,6 +321,9 @@ export class ClientRenderer {
   }
 
   revealPage() {
+    // @ts-ignore
+    markdocBeforeRevealHooks.forEach((hook) => hook());
+
     // reveal markdoc-chooser and markdoc-content by ID
     if (this.chooserElement) {
       this.chooserElement.style.position = 'sticky';
