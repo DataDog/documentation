@@ -12,7 +12,8 @@
         "copy-compiled-scripts": "cp -r ./src/helperModules/PageBuilder/compiledScripts ./dist/helperModules/PageBuilder",
         "collect-tab-labels": "npm run build && node ./dist/scripts/collectTabLabels.js",
         "analyze-left-nav": "npm run build && node ./dist/scripts/analyzeLeftNav.js",
-        "analyze-shortcodes": "npm run build && node ./dist/scripts/collectShortcodeStats.js"
+        "analyze-shortcodes": "npm run build && node ./dist/scripts/collectShortcodeStats.js",
+        "analyze-codeblocks": "npm run build && node ./dist/scripts/analyzeCodeBlocks.js"
     },
     "dependencies": {
         "chroma-highlight": "^2.4.2",
