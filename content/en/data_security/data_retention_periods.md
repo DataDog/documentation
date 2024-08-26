@@ -5,6 +5,9 @@ type: data_retention_periods
 aliases:
     - /developers/guide/data-collection-resolution-retention
 further_reading:
+    - link: 'developers/guide/data-collection-resolution'
+      tag: 'Documentation'
+      text: 'Datadog Data Collection and Resolution'
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
