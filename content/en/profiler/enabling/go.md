@@ -82,6 +82,10 @@ To begin profiling applications:
 
 **Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
 
+If you have automatically instrumented your Go application with [Orchestrion][20],
+the continuous profiler code will already be added to your application.
+Enable the profiler at run time by setting the environment variable `DD_PROFILING_ENABLED=true`.
+
 ## Configuration
 
 You can set profiler parameters in code with these functions:
@@ -155,3 +159,4 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [17]: /getting_started/profiler/
 [18]: /profiler/enabling/supported_versions/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
