@@ -6,7 +6,7 @@ disable_sidebar: true
 
 ### Setup instructions by hosting type
 
-Select your hosting type:
+To learn how to set up Database Monitoring on a Postgres database, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-postgres" >}}
 
