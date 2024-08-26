@@ -56,6 +56,8 @@ The Datadog Agent requires read-only access to the database server in order to c
 
 The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
+{{% collapse-content title="DBM instructions" level="h3" %}}
+
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
  ```bash
@@ -204,6 +206,51 @@ psql -h localhost -U datadog postgres -A \
 {{< /tabs >}}
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Integration-only instructions" level="h3" %}}
+
+To get started with the standard PostgreSQL integration, create a read-only `datadog` user with proper access to your PostgreSQL server. Start `psql` on your PostgreSQL database.
+
+For PostgreSQL version 10 and above, run:
+
+```shell
+create user datadog with password '<PASSWORD>';
+grant pg_monitor to datadog;
+grant SELECT ON pg_stat_database to datadog;
+```
+
+For older PostgreSQL versions, run:
+
+```shell
+create user datadog with password '<PASSWORD>';
+grant SELECT ON pg_stat_database to datadog;
+```
+
+To verify the permissions are correct, run the following command:
+
+```shell
+psql -h localhost -U datadog postgres -c \
+"select * from pg_stat_database LIMIT(1);" \
+&& echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+|| echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+```
+
+When it prompts for a password, enter the one used in the first command.
+
+**Note**: For PostgreSQL versions 9.6 and below, run the following and create a `SECURITY DEFINER` to read from `pg_stat_activity`.
+
+```shell
+CREATE FUNCTION pg_stat_activity() RETURNS SETOF pg_catalog.pg_stat_activity AS
+$$ SELECT * from pg_catalog.pg_stat_activity; $$
+LANGUAGE sql VOLATILE SECURITY DEFINER;
+
+CREATE VIEW pg_stat_activity_dd AS SELECT * FROM pg_stat_activity();
+grant SELECT ON pg_stat_activity_dd to datadog;
+```
+
+{{% /collapse-content %}}
 
 ## Install the Agent
 
