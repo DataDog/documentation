@@ -55,6 +55,7 @@ The above screen can be reconstructed in 19 passes of the renderer:
 
 | Iteration | 4 | 5-9 | 10-12 |
 |-----------|---|---|---|
+| | | |
 | Description | | | Draw "image" and two "geometry" wireframes into viewport. Because wireframes are sorted in back-to-front order, it will overdraw existing portion of the frame. This is very much desirable. For semi-transparent elements, it can also do the job of proper blending "closer" elements with the "farer" ones. |
 
 | Iteration | 13-19 | Final result |
