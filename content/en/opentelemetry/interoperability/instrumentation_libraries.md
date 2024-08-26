@@ -45,7 +45,7 @@ Datadog SDKs implement the OpenTelemetry API by overriding the default implement
 | Java     | 1.35.0                   |
 | Python   | 2.10.0                   |
 | Ruby     | 2.1.0                    |
-| Go       | 1.65.0                   |
+| Go       | 1.67.0                   |
 | Node.js  | 4.3.0                    |
 | PHP      | 0.94.0                   |
 | .NET     | 2.53.0                   |
