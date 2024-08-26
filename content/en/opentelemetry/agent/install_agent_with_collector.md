@@ -304,8 +304,13 @@ For more information, see the [Collector Health Metrics][8] documentation.
 To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use the following Helm command:
 
 ```shell
-helm upgrade -i <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
+helm upgrade -i <RELEASE_NAME> datadog/datadog \
+  -f datadog-values.yaml \
+  --set-file datadog.otelCollector.config=otel-config.yaml
 ```
+Replace `<RELEASE_NAME>` with the Helm release name you are using.
+
+<div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
 This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the Agent deployment pattern. The Gateway deployment pattern is not supported.
 
