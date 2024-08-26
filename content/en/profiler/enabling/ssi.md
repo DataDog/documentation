@@ -15,8 +15,9 @@ the agent is deployed are going to be profiled.
 
 ## Supported operating systems and environments
 
-SSI is supported only on Linux, for both `x86_64` and `arm64` (ARM v8) architectures. The beta version of
-Continuous Profiler with SSI works for host and container deployments. Kubernetes deployments are not supported.
+SSI is supported only on Linux, for both `x86_64` and `arm64` (ARM v8) architectures. The beta
+version of Continuous Profiler with SSI works for host and container deployments. Kubernetes
+deployments are not supported.
 
 Beta of Continuous Profiler with SSI works with following languages on following minimum
 tracer library versions:
@@ -41,8 +42,11 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 ## Enable automatic profiling
 
 After the installation, all processes on the host or in the container are executed with the
-`DD_PROFILING_ENABLED=auto` environment variable. Datadog recommends using the `auto` value with SSI instead
-of the `true` value. Using `true` profiles all processes that a Datadog agent can inject a tracer library into. Not all processes are good candidates for profiling though. With the `auto` setting, the Datadog tracer library decides whether the application is a good candidate for profiling based on its behavior and turns on the profiler accordingly.
+`DD_PROFILING_ENABLED=auto` environment variable. Datadog recommends using the `auto` value with SSI
+instead of the `true` value. Using `true` profiles all processes that a Datadog agent can inject a
+tracer library into. Not all processes are good candidates for profiling though. With the `auto`
+setting, the Datadog tracer library decides whether the application is a good candidate for
+profiling based on its behavior and turns on the profiler accordingly.
 
 The logic for identifying a process as a good candidate varies by language. For Java,
 all processes that are profiled as Java applications are usually deployed as a single Java process on a
@@ -52,8 +56,8 @@ seconds and has created at least one tracing span.
 # Reverting
 
 The [Single Step APM Instrumentation][1] page contains instructions for removing all
-instrumentation. Removing instrumentation also removes profiling. Additionally, you can disable profiling
-by:
+instrumentation. Removing instrumentation also removes profiling. Additionally, you can disable
+profiling by:
 * repeating the installation instructions with `DD_PROFILING_ENABLED=false` value, or
 * removing the `DD_PROFILING_ENABLED` setting from the `/etc/environment` file on the host.
 
@@ -64,7 +68,8 @@ Finally, you can disable profiling on a per-process basis by explicitly setting
 
 For host installs, the `DD_PROFILING_ENABLED` environment variable is stored in the `/etc/environment`
 file, where most Linux systems automatically pick it up for all processes. Exceptions to this
-are systemd services which ignore the file. For applications deployed as systemd services, you need the following line to the application `.service` files:
+are systemd services which ignore the file. For applications deployed as systemd services, you need
+the following line to the application `.service` files:
 ```
 EnvironmentFile=/etc/environment
 ```
