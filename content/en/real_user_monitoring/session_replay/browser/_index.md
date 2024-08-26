@@ -28,7 +28,7 @@ Session Replay expands your user experience monitoring by allowing you to captur
 
 The RUM Browser SDK is [open source][1] and leverages the open source [rrweb][2] project.
 
-## Session Replay recorder
+## How it works
 
 The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps.
 
