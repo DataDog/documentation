@@ -39,19 +39,20 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 ## How does profiling work with SSI
 
 After the installation, all processes on the host or in the container are executed with the
-`DD_PROFILING_ENABLED=auto` environment variable. Datadog library will then dynamically select the processes  which are relevant to turn on the profiler.
+`DD_PROFILING_ENABLED=auto` environment variable. Datadog library will then dynamically select the processes which are relevant to turn on the profiler.
 
 The logic for identifying a process as a good candidate varies by language. For Java,
 all processes that are profiled as Java applications are usually deployed as a single Java process on a
 host. For Node and Python, profiler is only turned on if the application is running for more than 30
 seconds and has created at least one tracing span.
-SSI can also be configured to inject profiling on each and every process by using `DD_PROFILING_ENABLED=true`
+SSI can also be configured to inject profiling on each and every process by using `DD_PROFILING_ENABLED=true`.
 
-Note: Datadog recommends to use `DD_PROFILING_ENABLED=auto` to avoid profiling low value processes
+Note: Datadog recommends to use `DD_PROFILING_ENABLED=auto` to avoid profiling low value processes.
+
 # Reverting
 
 [Single Step APM Instrumentation][1] page contains instructions for removing all
-instrumentation. Removing instrumentation also removes profiling. 
+instrumentation. Removing instrumentation also removes profiling.
 
 Additionally, you can disable profiling by:
 * repeating the installation instructions with `DD_PROFILING_ENABLED=false` value, or
