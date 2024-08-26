@@ -76,7 +76,7 @@ For instance, if you want to access a span with the following attribute below, y
     }
   }
 ```
-**Note:** You don’t need to use `@` on the [reserved attributes][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
+**Note:** You do not need to use `@` on the [reserved attributes][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
 ### Tags search
 
