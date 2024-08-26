@@ -23,7 +23,7 @@ author:
 categories:
 - developer tools
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_on_public_website: true
@@ -130,7 +130,7 @@ spec:
       enabled: true
   override:
     nodeAgent:
-      volumes: 
+      volumes:
       - emptyDir: {}
         name: src
 ```

@@ -4,7 +4,7 @@ categories:
 - 構成 & デプロイ
 - google cloud
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud Load Balancing のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/

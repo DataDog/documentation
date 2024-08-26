@@ -14,7 +14,7 @@ categories:
 - マーケットプレイス
 - モバイル
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -135,7 +135,7 @@ Datadog から、Embrace プラットフォーム内のモバイル体験を最�
 ## サポート
 サポートやご質問は、以下のチャンネルから Embrace にお問い合わせください。
 
-メール: [datadogsupport@embrace.io][4] 
+メール: [datadogsupport@embrace.io][4]
 
 ### その他の参考資料
 

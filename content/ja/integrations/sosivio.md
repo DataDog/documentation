@@ -29,7 +29,7 @@ categories:
 - ネットワーク
 - notifications
 - orchestration
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sosivio/README.md
 display_on_public_website: true

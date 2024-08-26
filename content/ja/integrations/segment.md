@@ -2,7 +2,7 @@
 categories:
 - クラウド
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/segment/

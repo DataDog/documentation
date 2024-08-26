@@ -22,7 +22,7 @@ author:
   support_email: namrata.deshpande4@gmail.com
 categories:
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
 display_on_public_website: true

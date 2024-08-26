@@ -4,7 +4,7 @@ categories:
 - developer tools
 - issue tracking
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: This integration allows you to create tickets from triggered alerts in
   Datadog, and update existing tickets with new information as it arises. Additionally,

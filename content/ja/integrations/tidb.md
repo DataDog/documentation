@@ -29,7 +29,7 @@ categories:
 - data stores
 - cloud
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
 display_on_public_website: true
@@ -78,7 +78,7 @@ tile:
 
 > **注**:
 >
-> - このインテグレーションには TiDB 4.0 以降が必要です。 
+> - このインテグレーションには TiDB 4.0 以降が必要です。
 > - TiDB Cloud の場合は、[TiDB Cloud インテグレーション][2]をご覧ください。
 
 ## セットアップ

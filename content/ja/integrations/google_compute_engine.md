@@ -6,7 +6,7 @@ categories:
 - log collection
 - network
 - os & system
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較
 doc_link: https://docs.datadoghq.com/integrations/google_compute_engine/
@@ -94,7 +94,7 @@ Google Cloud Compute Engine インテグレーションには、サービスの�
 
 ## その他の参考資料
 
--   [Google Compute Engine のメトリクスの監視][9]  
+-   [Google Compute Engine のメトリクスの監視][9]
 -   [Google Compute Engine のメトリクスの収集方法][10]
 -   [Datadog を使用した Google Compute Engine の監視方法][11]
 
