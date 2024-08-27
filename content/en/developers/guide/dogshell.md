@@ -10,13 +10,13 @@ You can use the Datadog API on the command line using a wrapper called Dogshell.
 
 ## Install Dogshell
 
-Dogshell comes with the officially supported [datadogpy Python library][1], which is often used to send data to Datadog with [DogStatsD][2]. To install the library with PIP, run the following command:
+Dogshell comes with the officially supported [`datadogpy` Python library][1], which is often used to send data to Datadog with [`DogStatsD`][2]. To install the library with PIP, run the following command:
 
 {{< code-block lang="shell" >}}
 pip install datadog
 {{< /code-block >}}
 
-Depending on your environment, you might have to add the library to your PATH. See the [datadogpy GitHub repo][3] for alternate installation instructions.
+Depending on your environment, you might have to add the library to your PATH. See the [`datadogpy` GitHub repo][3] for alternative installation instructions.
 
 ## Configure Dogshell
 
@@ -36,7 +36,7 @@ touch ~/.dogrc
    api_host = https://{{< region-param key="dd_site">}}
    ```
 
-   <div class="alert alert-info">You can create multiple configuration files if you need to run commands against different environments. Use the <code>--config</code> flag to specify the path to an alternate configuration file.</div>
+   <div class="alert alert-info">You can create multiple configuration files if you need to run commands against different environments. Use the <code>--config</code> flag to specify the path to an alternative configuration file.</div>
 
 1. Test the `dogshell` command by posting a test metric:
    {{< code-block lang="shell" >}}
