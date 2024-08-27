@@ -3,7 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md
 description: Datadog オーガニゼーションの HSM 監査ログを収集

@@ -14,7 +14,7 @@ categories:
 - クラウド
 - kubernetes
 - マーケットプレイス
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -90,7 +90,7 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CloudNatix にお問い合わせください。
 
-- メール: [CloudNatix サポート][4] 
+- メール: [CloudNatix サポート][4]
 - Slack: [CloudNatix コミュニティ][3]
 
 [1]: https://cloudnatix.com/

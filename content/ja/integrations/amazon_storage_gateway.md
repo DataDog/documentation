@@ -6,7 +6,7 @@ categories:
 - data stores
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Storage Gateway のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_storage_gateway/

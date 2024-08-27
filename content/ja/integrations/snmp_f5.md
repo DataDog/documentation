@@ -22,7 +22,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md
 display_on_public_website: true

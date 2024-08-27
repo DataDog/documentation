@@ -3,7 +3,7 @@ aliases: []
 categories:
 - notifications
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: BigPanda と Datadog アラートを相関付け、アクションにつながるインシデントを作成します。
 doc_link: https://docs.datadoghq.com/integrations/bigpanda/

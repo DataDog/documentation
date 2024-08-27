@@ -24,7 +24,7 @@ author:
   support_email: hello@unitq.com
 categories:
 - メトリクス
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unitq/README.md
 display_on_public_website: true

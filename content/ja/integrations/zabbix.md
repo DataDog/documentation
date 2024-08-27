@@ -24,7 +24,7 @@ author:
 categories:
 - ネットワーク
 - イベント管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_on_public_website: true
@@ -115,7 +115,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 
 3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
-``` 
+```
     try {
         Zabbix.Log(4, '[datadog webhook] received value=' + value);
 

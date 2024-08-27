@@ -9,7 +9,7 @@ categories:
 - data stores
 - log collection
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -307,7 +307,7 @@ Amazon RDS インテグレーションには、DB インスタンス、セキュ
 
 ### サービスのチェック
 
-**aws.rds.read_replica_status**  
+**aws.rds.read_replica_status**
 [読み取りレプリケーション][8]のステータスを監視します。このチェックは、以下のいずれかのステータスを返します。
 
 - OK - レプリケート中または接続中

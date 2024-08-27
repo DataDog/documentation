@@ -4,7 +4,7 @@ categories:
 - google cloud
 - log collection
 - message queues
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud PubSub の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_pubsub/

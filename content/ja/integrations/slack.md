@@ -4,7 +4,7 @@ aliases:
 categories:
 - collaboration
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog のアラートとグラフをチームの Slack チャンネルに送信。
 doc_link: https://docs.datadoghq.com/integrations/slack/
@@ -158,7 +158,7 @@ Slack のモニターアラートメッセージに含まれるコンテンツ�
 - **一括アップグレード**: [Slack インテグレーションタイル][5]の各 Slack アカウントの構成の上部にある **Upgrade** ボタンをクリックして、すべてのモニターを一括アップグレードします。
 - **個別のアップグレード**: [Slack インテグレーションタイル][5]の新しい構成にチャンネルを手動で追加します。同じチャンネルへの重複参照を削除する必要があるかもしれません。
 
-## ダッシュボード  
+## ダッシュボード
 
 ダッシュボードウィジェットのスナップショットを任意の Slack チャンネルに投稿できます。サポートされているウィジェットのリストについては、[スケジュールレポート][6]を参照してください。
 
@@ -186,7 +186,7 @@ Anyone in your Slack org can declare an incident, regardless of whether they hav
 Slack から新しいインシデントを宣言するには
 
 ```
-/datadog incident 
+/datadog incident
 ```
 
 インシデントの状態 (重大度など) を更新するには

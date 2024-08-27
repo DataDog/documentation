@@ -2,7 +2,7 @@
 categories:
 - 構成 & デプロイ
 - コンテナ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog を使用した Docker メトリクスの監視
 doc_link: https://docs.datadoghq.com/integrations/docker/

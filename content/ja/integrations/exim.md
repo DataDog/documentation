@@ -23,7 +23,7 @@ author:
   support_email: JeanFred1@gmail.com
 categories:
 - メッセージキュー
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/exim/README.md
 display_on_public_website: true

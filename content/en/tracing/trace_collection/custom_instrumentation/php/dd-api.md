@@ -397,7 +397,7 @@ function doRiskyThing() {
 );
 ```
 
-Set the `error.msg` tag to manually flag a span as erroneous.
+Set the `error.message` tag to manually flag a span as erroneous.
 
 ```php
 <?php
@@ -410,7 +410,7 @@ function doRiskyThing() {
     'doRiskyThing',
     function(\DDTrace\SpanData $span, $args, $retval) {
         if ($retval === SOME_ERROR_CODE) {
-            $span->meta['error.msg'] = 'Foo error';
+            $span->meta['error.message'] = 'Foo error';
             // Optional:
             $span->meta['error.type'] = 'CustomError';
             $span->meta['error.stack'] = (new \Exception)->getTraceAsString();

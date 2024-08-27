@@ -6,7 +6,7 @@ categories:
 - クラウド
 - コンテナ
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Container Instances のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_instances/
