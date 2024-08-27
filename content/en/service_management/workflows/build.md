@@ -106,7 +106,7 @@ Creating useful workflows sometimes necessitates passing data from one step to a
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
-{{< img src="service_management/workflows/context-variables4.png" alt="The Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables5.png" alt="The Context Variables tab" >}}
 
 Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
 
@@ -120,7 +120,7 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 
 If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
-{{< img src="service_management/workflows/step-outputs1.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
+{{< img src="service_management/workflows/step-outputs2.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
 ### Input parameters
 
@@ -136,9 +136,9 @@ To add an input parameter:
 
 To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-{{< img src="service_management/workflows/input-parameter2.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
-
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
+
+{{< img src="service_management/workflows/input-parameter3.png" alt="Hover over a counter to see which steps are using the parameter." style="width:60%;">}}
 
 You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
 
@@ -150,7 +150,7 @@ Source object variables are properties of the triggering event that are resolved
 
 All the variables of the Source object are visible in the Context Variables tab.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
 
 ## Workflow notifications
 
@@ -190,12 +190,10 @@ You can add an error path for the workflow to follow if it encounters an error.
 
 To add an error path:
 1. Hover over the step where you'd like to add an error path.
-1. Click and drag the **Error path** icon to place a new error path on the canvas.
+1. Click and drag the **Error path** icon {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} to place a new error path on the canvas.
 1. Select a workflow step to add to the error path.
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
 1. When you're done configuring your error path steps, click **Save** to apply your changes.
-
-{{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
 
 ## Wait until condition
 
@@ -209,7 +207,7 @@ To add a condition:
    - Only the current step's output variables can be used in a custom conditional statement.
 1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
 
-{{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
+{{< img src="service_management/workflows/wait-until-condition2.png" alt="An example of wait until condition" style="width:100%;" >}}
 
 ## Edit a workflow with JSON
 
