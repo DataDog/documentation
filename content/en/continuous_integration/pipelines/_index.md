@@ -39,7 +39,7 @@ cascade:
     {{< nextlink href="continuous_integration/pipelines/teamcity" >}}TeamCity{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom" >}}Other CI Providers{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Custom Tags and measures{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Custom Tags and Measures{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Terminology

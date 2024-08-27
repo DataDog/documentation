@@ -23,7 +23,7 @@ This guide provides best practices for managing your custom metrics volumes thro
 - [Find and understand your metrics usage and costs](#visibility-and-attribution)
 - [Identify your largest cost drivers](#account-level-visibility)
 - [Attribute your largest cost drivers to the teams or services responsible for them](#team-level-visibility-and-attribution)
-- [Reduce costs on less valuable, unused metrics](#value-driven-metrics-governance)
+- [Reduce costs on less valuable, unused metrics](#value-based-metrics-governance)
 - [Monitor and control usage before incurring billing overages](#monitoring-and-prevention)
 
 
