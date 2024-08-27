@@ -16,8 +16,11 @@ import MarkdocStaticCompiler, {
   ClientFunctionSchema,
   Tag
 } from 'markdoc-static-compiler';
-import { MinifiedClientFunction, minifyClientFunction } from './configMinification';
-import { transformConfig } from '../markdocConfig';
+import {
+  MinifiedClientFunction,
+  minifyClientFunction
+} from './PageBuilder/pageConfigMinification';
+import { transformConfig } from '../markdocParserConfig';
 import { anchorize } from './stringProcessing';
 
 /**

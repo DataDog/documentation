@@ -1,15 +1,15 @@
 import { describe, test, expect } from 'vitest';
 import { VALID_PREF_OPTIONS_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../../config/constants';
-import { YamlProcessor } from '../../../src/helperModules/YamlProcessor';
+import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 
 const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid/prefsOptionsDirs`;
 
-describe('YamlProcessor', () => {
+describe('YamlConfigParser', () => {
   test('loads preference options from a directory', () => {
     const prefOptionsConfig =
-      YamlProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+      YamlConfigParser.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
     expect(JSON.stringify(prefOptionsConfig, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlProcessor/valid/ingestedPrefOptions.snap.json`
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/ingestedPrefOptions.snap.json`
     );
   });
 
@@ -27,17 +27,19 @@ describe('YamlProcessor', () => {
   invalidDirs.forEach((invalidDir) => {
     test(`throws an error when processing the '${invalidDir}' directory`, () => {
       expect(() =>
-        YamlProcessor.loadPrefOptionsFromDir(`${INVALID_PREF_MOCKS_DIR}/${invalidDir}`)
+        YamlConfigParser.loadPrefOptionsFromDir(`${INVALID_PREF_MOCKS_DIR}/${invalidDir}`)
       ).toThrow();
     });
 
     test(`throws an error that matches the snapshot for the '${invalidDir}' directory`, () => {
       try {
-        YamlProcessor.loadPrefOptionsFromDir(`${INVALID_PREF_MOCKS_DIR}/${invalidDir}`);
+        YamlConfigParser.loadPrefOptionsFromDir(
+          `${INVALID_PREF_MOCKS_DIR}/${invalidDir}`
+        );
       } catch (error) {
         const sanitizedErrorMessage = error.message.replace(INVALID_PREF_MOCKS_DIR, '');
         expect(sanitizedErrorMessage).toMatchFileSnapshot(
-          `${SNAPSHOTS_DIR}/helperModules/YamlProcessor/invalid/ingestedPrefOptionsError/${invalidDir}.snap.txt`
+          `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/invalid/ingestedPrefOptionsError/${invalidDir}.snap.txt`
         );
       }
     });

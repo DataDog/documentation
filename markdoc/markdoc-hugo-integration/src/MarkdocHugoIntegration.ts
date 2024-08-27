@@ -13,7 +13,7 @@ import {
   ParsedFile
 } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
-import { YamlProcessor } from './helperModules/YamlProcessor';
+import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuildArgs, PageBuilder } from './helperModules/PageBuilder';
 
 /**
@@ -125,7 +125,7 @@ export class MarkdocHugoIntegration {
     this.#resetErrors();
     this.compiledFiles = [];
 
-    const prefOptionsConfig = YamlProcessor.loadPrefOptionsFromDir(
+    const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
       this.directories.options
     );
     const markdocFilepaths =
@@ -209,7 +209,7 @@ export class MarkdocHugoIntegration {
     // verify that all possible placeholder values
     // yield an existing options set
     try {
-      prefOptionsConfigForPage = YamlProcessor.getPrefOptionsForPage(
+      prefOptionsConfigForPage = YamlConfigParser.getPrefOptionsForPage(
         p.pageBuildArgs.parsedFile.frontmatter,
         p.pageBuildArgs.prefOptionsConfig
       );

@@ -1,6 +1,6 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
 import { ParsedFile } from '../MdocFileParser';
-import { YamlProcessor } from '../YamlProcessor';
+import { YamlConfigParser } from '../YamlConfigParser';
 import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
@@ -9,7 +9,7 @@ import { buildFilterSelectorUi } from './components/ContentFilter';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { resolvePagePrefs } from '../prefsResolution';
-import { customComponents } from '../../markdocConfig';
+import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
@@ -52,7 +52,7 @@ export class PageBuilder {
    * This HTML output can be processed by Hugo to generate a static page.
    */
   static build(args: PageBuildArgs): string {
-    const defaultValsByPrefId = YamlProcessor.getDefaultValuesByPrefId(
+    const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       args.parsedFile.frontmatter,
       args.prefOptionsConfig
     );
@@ -198,14 +198,14 @@ export class PageBuilder {
 
       if (p.pageBuildArgs.debug) {
         prefOptionsConfigStr = JSON.stringify(
-          YamlProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
+          YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
           null,
           2
         );
         defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
         if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
           pagePrefsConfigStr = JSON.stringify(
-            YamlProcessor.minifyPagePrefsConfig(
+            YamlConfigParser.minifyPagePrefsConfig(
               p.pageBuildArgs.parsedFile.frontmatter.page_preferences
             ),
             null,
@@ -215,12 +215,12 @@ export class PageBuilder {
         ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
       } else {
         prefOptionsConfigStr = JSON.stringify(
-          YamlProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
+          YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
         );
         defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
         if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
           pagePrefsConfigStr = JSON.stringify(
-            YamlProcessor.minifyPagePrefsConfig(
+            YamlConfigParser.minifyPagePrefsConfig(
               p.pageBuildArgs.parsedFile.frontmatter.page_preferences
             )
           );

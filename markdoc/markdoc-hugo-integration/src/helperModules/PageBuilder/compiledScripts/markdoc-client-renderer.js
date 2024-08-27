@@ -2353,9 +2353,9 @@
     }
   });
 
-  // dist/helperModules/configMinification.js
-  var require_configMinification = __commonJS({
-    "dist/helperModules/configMinification.js"(exports) {
+  // dist/helperModules/PageBuilder/pageConfigMinification.js
+  var require_pageConfigMinification = __commonJS({
+    "dist/helperModules/PageBuilder/pageConfigMinification.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.expandClientFunction = exports.minifyClientFunction = exports.minifyClientVariable = exports.expandClientVariable = exports.CLIENT_FUNCTION_MINIFY_MAP = exports.CLIENT_FUNCTION_EXPAND_MAP = void 0;
@@ -2463,7 +2463,7 @@
       var ContentFilter_1 = require_ContentFilter();
       var prefsResolution_1 = require_prefsResolution();
       var reresolver_1 = require_reresolver();
-      var configMinification_1 = require_configMinification();
+      var pageConfigMinification_1 = require_pageConfigMinification();
       var ClientRenderer2 = class {
         constructor() {
           this.selectedValsByPrefId = {};
@@ -2673,7 +2673,7 @@
           const contentIsCustomizable = this.locateFilterSelectorEl();
           if (contentIsCustomizable) {
             Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-              this.ifFunctionsByRef[ref] = (0, configMinification_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
+              this.ifFunctionsByRef[ref] = (0, pageConfigMinification_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
             });
             const overrideApplied = this.applyPrefOverrides();
             if (overrideApplied) {

@@ -121,13 +121,13 @@
       ],
       "format": "cjs"
     },
-    "dist/helperModules/configMinification.js": {
+    "dist/helperModules/PageBuilder/pageConfigMinification.js": {
       "bytes": 3293,
       "imports": [],
       "format": "cjs"
     },
     "dist/helperModules/ClientRenderer.js": {
-      "bytes": 13694,
+      "bytes": 13718,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
@@ -145,9 +145,9 @@
           "original": "markdoc-static-compiler/src/reresolver"
         },
         {
-          "path": "dist/helperModules/configMinification.js",
+          "path": "dist/helperModules/PageBuilder/pageConfigMinification.js",
           "kind": "require-call",
-          "original": "./configMinification"
+          "original": "./PageBuilder/pageConfigMinification"
         }
       ],
       "format": "cjs"
@@ -202,7 +202,7 @@
         "../markdoc-static-compiler/src/reresolver/index.js": {
           "bytesInOutput": 1579
         },
-        "dist/helperModules/configMinification.js": {
+        "dist/helperModules/PageBuilder/pageConfigMinification.js": {
           "bytesInOutput": 1542
         },
         "dist/helperModules/ClientRenderer.js": {

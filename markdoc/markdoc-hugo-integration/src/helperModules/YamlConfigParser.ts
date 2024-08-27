@@ -27,7 +27,7 @@ import {
 } from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 
-export class YamlProcessor {
+export class YamlConfigParser {
   /**
    * Load all of the preference options files in a directory
    * into a single object, and validate the object as a whole.
@@ -264,7 +264,7 @@ export class YamlProcessor {
    *
    * @example
    * const segments = [['red', 'blue'], ['gloss', 'matte'], ['paint'], ['options']];
-   * YamlProcessor.buildSnakeCaseCombinations(segments);
+   * YamlConfigParser.buildSnakeCaseCombinations(segments);
    * // returns ['red_gloss_paint_options', 'red_matte_paint_options', 'blue_gloss_paint_options', 'blue_matte_paint_options']
    */
   static buildSnakeCaseCombinations(arr: any[], str: string = '', final: any[] = []) {
