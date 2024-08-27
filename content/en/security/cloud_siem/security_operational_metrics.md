@@ -27,14 +27,17 @@ Cloud SIEM provides security operational metrics to help you determine the effec
 `datadog.security.siem_signal.time_to_detect`
 : **Name**: Time to Detect (TTD)
 : **Description**: The time between when a matching log is triggered and when a signal is generated.
+: **Metric type**: [DISTRIBUTION][3]
 
 `datadog.security.siem_signal.time_to_acknowledge`
 : **Name**: Time to Acknowledge (TTA)
 : **Description**: The time between when a signal is triggered and when an investigation on the signal begins.
+: **Metric type**: [DISTRIBUTION][3]
 
 `datadog.security.siem_signal.time_to_resolve`
 : **Name**: Time to Resolve (TTR)
 : **Description**: The time it takes to close a signal starting from the time when you are first notified of the detection.
+: **Metric type**: [DISTRIBUTION][3]
 
 ## How the metrics are calculated
 
@@ -53,9 +56,9 @@ The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 
 ## Explore, visualize, and monitor the metrics
 
-Use the [Metrics Summary][3] to view details about the operational metrics, such as the tags and assets (dashboards, notebooks, monitors, SLOs) that are using those metrics.
+Use the [Metrics Summary][4] to view details about the operational metrics, such as the tags and assets (dashboards, notebooks, monitors, SLOs) that are using those metrics.
 
-Use tags to filter the metrics to specific teams, sources, and environments. You can then create [dashboards][4] for those metrics to visualize the data or create [monitors][5] to alert you if the metrics exceed a specified threshold.
+Use tags to filter the metrics to specific teams, sources, and environments. You can then create [dashboards][5] for those metrics to visualize the data or create [monitors][6] to alert you if the metrics exceed a specified threshold.
 
 ## Further reading
 
@@ -63,6 +66,7 @@ Use tags to filter the metrics to specific teams, sources, and environments. You
 
 [1]: https://app.datadoghq.com/dash/integration/30378/cloud-siem-overview
 [2]: https://app.datadoghq.com/security/configuration/reports
-[3]: https://app.datadoghq.com/metric/summary?filter=datadog.security.siem&window=604800
-[4]: /getting_started/dashboards/
-[5]: /getting_started/monitors/
+[3]: /metrics/types/?tab=distribution#metric-types
+[4]: https://app.datadoghq.com/metric/summary?filter=datadog.security.siem&window=604800
+[5]: /getting_started/dashboards/
+[6]: /getting_started/monitors/
