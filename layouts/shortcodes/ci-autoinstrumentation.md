@@ -2,7 +2,7 @@ We support auto-instrumentation for the following CI providers:
 | CI Provider | Auto-Instrumentation method |
 |---|---|
 | GitHub Actions | [Datadog Test Visibility Github Action][1] |
-| Jenkins | [UI-based configuration][2] |
+| Jenkins | [UI-based configuration][2] with Datadog Jenkins plugin |
 | GitLab | [Datadog Test Visibility GitLab Script][3] |
 | CircleCI | [Datadog Test Visibility CircleCI Orb][4] |
 
