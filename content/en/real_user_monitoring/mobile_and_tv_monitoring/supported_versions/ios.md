@@ -1,6 +1,5 @@
 ---
 title: RUM iOS and tvOS Monitoring Supported Versions
-kind: documentation
 beta: true
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 code_lang: ios
@@ -11,7 +10,7 @@ further_reading:
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"
-   tag: "Github"
+   tag: "Source Code"
    text: "Source code for dd-sdk-ios"
  - link: "/real_user_monitoring"
    tag: "Documentation"

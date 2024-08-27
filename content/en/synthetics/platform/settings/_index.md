@@ -1,6 +1,5 @@
 ---
 title: Synthetic Testing and Monitoring Settings
-kind: documentation
 aliases:
 - /synthetics/settings
 further_reading:
@@ -72,6 +71,30 @@ Choose or add the default tags for your [API test][4], [multistep API test][5], 
 
 When you are done selecting related tags, click **Save Default Tags**.
 
+### Default timeout
+
+Add the default timeouts for your [API test][4] details.
+
+When you are done entering the new timeouts, click **Save Default Timeouts**.
+
+### Default frequency
+
+Choose or add the default frequencies for your [API test][4], [browser test][6], or [mobile test][17] details.
+
+When you are done selecting related tags, click **Save Default Frequencies**.
+
+### Default retries
+
+Choose or add the default number of times you'd like your test to retry on failure for your [API test][4], [browser test][6], or [mobile test][17] details.
+
+When you are done entering the default retry values, click **Save Default Retries**.
+
+### Default mobile devices
+
+Choose or add the default mobile devices you want to use in your [mobile test][17] details.
+
+When you are done entering the default mobile devices, click **Save Default Devices**.
+
 ### Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
@@ -118,9 +141,36 @@ Choose the type of variable you want to create:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
 2. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
 3. Enter the **Value** you want to assign to your variable.
-4. Enable obfuscation of your variable to hide its value on test results (optional).
+4. Optionally, use built-ins to assign values to your variable. For example, click on the `{{ alphabetic(n) }}` built-in to populate the **Value** field with an example of an alphabetic value. 
+5. Optionally, enable obfuscation of your variable to hide its value on test results.
 
-{{< img src="synthetics/settings/variable_value_2.png" alt="Global Variable Specify Value" style="width:100%;">}}
+{{< img src="synthetics/settings/variable_value_3.png" alt="Global Variable Specify Value" style="width:100%;">}}
+
+The following built-ins are available:
+
+&#x7b;&#x7b; numeric(n) &#x7d;&#x7d;
+: Generates a numeric string with `n` digits.
+
+&#x7b;&#x7b; alphabetic(n) &#x7d;&#x7d;
+: Generates an alphabetic string with `n` letters.
+
+&#x7b;&#x7b; alphanumeric(n) &#x7d;&#x7d;
+: Generates an alphanumeric string with `n` characters.
+
+&#x7b;&#x7b; date(n unit, format) &#x7d;&#x7d;
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at, plus or minus `n` units.
+
+&#x7b;&#x7b; timestamp(n, unit) &#x7d;&#x7d;
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at, plus or minus `n` units.
+
+&#x7b;&#x7b; uuid &#x7d;&#x7d;
+: Generates a version 4 universally unique identifier (UUID).
+
+&#x7b;&#x7b; public-id &#x7d;&#x7d;
+: Injects the Public ID of your test.
+
+&#x7b;&#x7b; result-id &#x7d;&#x7d;
+: Injects the Result ID of your test run.
 
 {{% /tab %}}
 

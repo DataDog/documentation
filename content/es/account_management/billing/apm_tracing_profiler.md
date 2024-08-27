@@ -3,7 +3,6 @@ aliases:
 - /es/account_management/billing/profiler/
 - /es/account_management/billing/apm_distributed_tracing/
 - /es/account_management/billing/apm_tracing_profiling/
-kind: documentación
 title: Facturación de APM
 ---
 

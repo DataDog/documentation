@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Test Visibility
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/ci-test-visibility-with-rum/'
   tag: 'Blog'

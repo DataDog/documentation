@@ -6,14 +6,10 @@ further_reading:
   tag: Blog
   text: Mettez facilement en corrélation les données de télémétrie de DBM et d'APM
     afin d'analyser les performances des requêtes de bout en bout
-kind: documentation
 title: Associer la fonctionnalité Database Monitoring aux traces
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring n'est pas pris en charge pour ce site.</div>
-{{< /site-region >}}
 
-Ce guide part du principe que vous avez configuré [Database Monitoring][1] et que vous utilisez [APM][2]. Associer APM à DBM permet d'injecter les identifiants de trace APM dans les données DBM afin de mettre en corrélation ces deux sources de données. Vous pourrez ainsi visualiser les informations sur les bases de données dans la solution APM, et les données APM dans la solution DBM.
+Ce guide suppose que vous avez configuré [Database Monitoring][1] et que vous utilisez la solution [APM][2]. En connectant la solution APM et DBM, vous permettez dʼinjecter des identifiants de traces de la solutions APM dans les données collectées par DBM, ce qui permet de corréler ces deux sources de données. Cela permet aux caractéristiques du produit d'afficher les informations relatives à la base de données dans le produit APM et les données de la solution APM dans le produit DBM.
 
 ## Avant de commencer
 
@@ -21,45 +17,45 @@ Bases de données prises en charge
 : Postgres, MySQL, SQL Server, Oracle
 
 Versions de l'Agent prises en charge
-: 7.46+
+: 7.46 et versions ultérieures
 
 Confidentialité des données
-: L'activation de la propagation des commentaires SQL entraîne le stockage de données potentiellement confidentielles (noms des services) dans les bases de données ; ces données sont alors accessibles aux tierces parties ayant accès à la base de données.
+: l'activation de la propagation des commentaires SQL entraîne le stockage de données potentiellement confidentielles (noms des services) dans les bases de données ; ces données sont alors accessibles aux tierces parties ayant accès à la base de données.
 
 
-Les intégrations du traceur APM prennent en charge un *mode de propagation* qui contrôle la quantité d'informations transmises depuis les applications vers la base de données.
+Les intégrations du traceur de lʼAPM fonctionnent avec un *mode de propagation*, qui permet de contrôler la quantité de données que les applications transmettent à la base de données.
 
-- Le mode `full` envoie les informations complètes d'une trace à la base de données, ce qui vous permet d'analyser des traces individuelles au sein de DBM. Il s'agit de la solution recommandée pour la plupart des intégrations.
-- Le mode `service` envoie le nom du service, ce qui vous permet d'identifier les services contribuant à la charge de la base de données. Il s'agit du seul mode pris en charge pour les applications SQL Server.
-- Le mode `disabled` désactive la propagation et ne transmet aucune information provenant des applications.
+- Le mode `full` envoie des informations complètes sur les traces à la base de données, ce qui vous permet d'enquêter sur chaque trace dans DBM. C'est la solution conseillée pour la plupart des intégrations.
+- Le mode `service` envoie le nom du service, ce qui vous permet de comprendre quels services contribuent à la charge de la base de données. Il sʼagit du seul mode pris en charge pour les applications Oracle et SQL Server.
+- Le mode `disabled` désactive la propagation et n'envoie aucune information provenant des applications.
 
-SQL Server et Oracle ne prennent pas en charge le mode de propagation `full` en raison du comportement de mise en cache des instructions, qui peut entraîner des problèmes de performance lors de l'ajout du contexte complet d'une trace.
+SQL Server et Oracle ne prennent pas en charge le mode de propagation `full` en raison du comportement de mise en cache des instructions, susceptible dʼentraîner des problèmes de performances lors de l'ajout du contexte complet des traces.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
 |:------------------------|:---------:|:---------:|:----------:|:---------:|
 | `full`                  | {{< X >}} | {{< X >}} |            |           |
 | `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
 
-**Pilotes et traceurs d'application pris en charge**
+**Traceurs et pilotes d'applications pris en charge**
 
-| Langage                                 | Bibliothèque ou Framework   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
+| Langage                                 | Bibliothèque ou framework   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
 |:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
 | **Go :** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
-|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | mode `service` uniquement | mode `service` uniquement |
-|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | mode `service` uniquement | mode `service` uniquement |
-| **Java :** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | mode `service` uniquement | mode `service` uniquement |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | Mode `service` uniquement | Mode `service` uniquement |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | Mode `service` uniquement | Mode `service` uniquement |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | Mode `service` uniquement | Mode `service` uniquement |
 | **Ruby :** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
 | **Python :** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
-| **.NET :** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | mode `service` uniquement |                     |
-| **PHP :**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
+|                                          | [ADO.NET][24] *        |           |           | Mode `service` uniquement |                     |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
 | **Node.js :** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
@@ -67,21 +63,21 @@ SQL Server et Oracle ne prennent pas en charge le mode de propagation `full` en
 |                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
-\* [CommandType.StoredProcedure][25] n'est pas pris en charge
+\* [CommandType.StoredProcedure][25] nʼest pas pris en charge
 
 ## Configuration
-Pour garantir une expérience utilisateur optimale, assurez-vous que les variables d'environnement suivantes sont définies dans votre application :
+Afin de profiter de la meilleure expérience possible, assurez-vous que les variables dʼenvironnement suivantes sont définies dans votre application :
 
 ```
-DD_SERVICE=(nom de l'application)
-DD_ENV=(environnement de l'application)
-DD_VERSION=(version de l'application)
+DD_SERVICE=(application name)
+DD_ENV=(application environment)
+DD_VERSION=(application version)
 ```
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Mettez à jour les dépendances de votre application afin d'inclure [dd-trace-go@v1.44.0][1] ou une version ultérieure :
+Mettez à jour les dépendances de vos applications afin d'inclure [dd-trace-go@v1.44.0][1] ou une version ultérieure :
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
@@ -95,11 +91,11 @@ import (
 )
 ```
 
-Activez la fonctionnalité de propagation de Database Monitoring via l'une des méthodes suivantes :
+Activez la fonctionnalité de propagation de Database Monitoring via l'une des méthodes suivantes :
 1. Variable d'environnement :
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Utilisation de code pendant l'enregistrement du pilote :
+2. Utilisation de code durant l'enregistrement du pilote :
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
@@ -123,8 +119,8 @@ import (
 )
 
 func main() {
-    // La première étape consiste à définir le mode de propagation DBM lors de l'enregistrement du pilote. Notez qu'il est également
-    // possible de le faire sur sqltrace.Open pour avoir un contrôle plus granulaire sur la fonctionnalité.
+    // La première étape consiste à définir le mode de propagation DBM lors de l'enregistrement du pilote. Notez qu'il est également possible de le faire
+    // sur sqltrace.Open pour avoir un contrôle plus granulaire sur la fonctionnalité.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
     // On appelle ensuite Open.
@@ -148,19 +144,19 @@ func main() {
 
 {{% tab "Java" %}}
 
-Suivez les instructions d'instrumentation du [tracing Java][1] et installez la version `1.11.0` de l'Agent ou une version ultérieure.
+Suivez les instructions d'instrumentation pour le [tracing de Java][1] et installez la version `1.11.0` ou une version ultérieure de lʼAgent.
 
-Vous devez également activer l'[instrumentation][2] `jdbc-datasource`.
+Vous devez également activer lʼ[instrumentation][2] `jdbc-datasource`.
 
-Activez la fonctionnalité de propagation de DBM à l'aide de l'**une** des méthodes suivantes :
+Activez la fonctionnalité de propagation de Database Monitoring via **l'une** des méthodes suivantes :
 
-- Définissez la propriété système `dd.dbm.propagation.mode=full`
-- Définissez la variable d'environnement `DD_DBM_PROPAGATION_MODE=full`
+- Définir la propriété du système `dd.dbm.propagation.mode=full`
+- Définir la variable dʼenvironnement `DD_DBM_PROPAGATION_MODE=full`
 
 Exemple complet :
 ```
-# Lancez l'Agent Java avec les propriétés système requises
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar chemin/vers/votre/app.jar
+# Démarrer l'Agent Java avec les propriétés système requises
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
 
 Testez la fonctionnalité dans votre application :
@@ -182,7 +178,7 @@ public class Application {
 }
 ```
 
-**Remarque** : les instructions préparées ne sont pas prises en charge en mode `full`, et tous les appels de l'API JDBC qui utilisent des instructions préparées entraînent automatiquement le passage en mode `service`. Étant donné que la plupart des bibliothèques Java SQL utilisent des instructions préparées par défaut, cela signifie que **la plupart** des applications Java sont limitées au mode `service`.
+**Remarque** : les instructions préparées ne sont pas prises en charge en mode `full`, et tous les appels de lʼAPI JDBC qui utilisent des instructions préparées sont automatiquement rétrogradés en mode `service`. Comme la plupart des bibliothèques Java SQL utilisent des instructions préparées par défaut, cela signifie que **la plupart** des applications Java ne peuvent utiliser que le mode `service`.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/java/
 [2]: /fr/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -191,18 +187,18 @@ public class Application {
 
 {{% tab "Ruby" %}}
 
-Dans votre Gemfile, installez la version `1.8.0` de [dd-trace-rb][1] ou une version ultérieure :
+Dans votre Gemfile, installez le traceur [dd-trace-rb][1] ou mettez-le à jour vers la version  `1.6.0` ou ultérieur :
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'datadog' # Utilisez `'ddtrace', '>= 1.8.0'` avec les versions v1.x
 
 # Selon votre utilisation
 gem 'mysql2'
 gem 'pg'
 ```
 
-Activez la fonctionnalité de propagation de Database Monitoring via l'une des méthodes suivantes :
+Activez la fonctionnalité de propagation de Database Monitoring via l'une des méthodes suivantes :
 1. Variable d'environnement :
    `DD_DBM_PROPAGATION_MODE=full`
 
@@ -239,17 +235,17 @@ client.query("SELECT 1;")
 
 {{% tab "Python" %}}
 
-Mettez à jour les dépendances de votre application afin d'inclure [dd-trace-py>=1.9.0][1] :
+Mettez à jour les dépendances de vos applications afin d'inclure [dd-trace-py>=1.9.0][1] :
 ```
 pip install "ddtrace>=1.9.0"
 ```
 
-Installez [psycopg2][2] (**Remarque** : l'association de DBM et APM n'est pas prise en charge pour les clients MySQL) :
+Installez [psycopg2][2] :
 ```
 pip install psycopg2
 ```
 
-Activez la fonctionnalité de propagation de Database Monitoring via la variable d'environnement suivante :
+Activez la fonctionnalité de propagation de Database Monitoring en définissant la variable d'environnement suivante :
    - `DD_DBM_PROPAGATION_MODE=full`
 
 Exemple complet :
@@ -265,10 +261,10 @@ POSTGRES_CONFIG = {
     "dbname": "postgres_db_name",
 }
 
-# connexion à la base de données postgres
+# connectez-vous à postgres db
 conn = psycopg2.connect(**POSTGRES_CONFIG)
 cursor = conn.cursor()
-# exécution des requêtes sql
+# exécutez les requêtes sql
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
 ```
@@ -281,7 +277,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% tab ".NET" %}}
 
 <div class="alert alert-warning">
-Afin de pouvoir utiliser cette fonctionnalité, l'instrumentation automatique doit être activée pour votre service .NET.
+Cette fonctionnalité nécessite dʼactiver lʼinstrumentation automatique pour votre service .NET.
 </div>
 
 Suivez les [instructions relatives au tracing .NET Framework][1] ou [celles relatives au tracing .NET Core][2] afin d'installer le package d'instrumentation automatique et d'activer le tracing pour votre service.

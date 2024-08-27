@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: ドキュメント
   text: Heroku ログの収集
-kind: ガイド
 title: Datadog で Heroku の Ruby on Rails アプリケーションをインスツルメント
 ---
 
@@ -616,12 +615,12 @@ APM Agent
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Datadog の Ruby アプリケーショントレース" >}}
 
-[サービスカタログ][20] では、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認できます。
+[サービスカタログ][20]に移動して、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認してください。
 
 {{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のサービスカタログ" >}}
 {{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービス詳細ページ" >}}
 
-## ログ管理
+## Logs
 
 次に、Heroku ログドレインの設定により、ログを有効にします。
 
@@ -697,7 +696,7 @@ git push heroku main
 
 Heroku にはログドレインというネイティブのログルーターがあり、アプリケーションで動作しているすべてのダイノからログを収集し、Heroku に送信しています。このログには、アプリケーションのログ、Heroku ルーターのログ、Heroku システムのダイノのログが含まれます。これらのログを Datadog にルーティングするようにログドレインを設定することができます。ログドレインは、`ddsource=heroku` から Datadog に Heroku システムログを送信します。
 
-{{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku ログビュー" >}}
+{{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku logs view" >}}
 
 Heroku ログドレインをセットアップすると、dyno システムメトリクス（CPU、メモリ）を Datadog へ送ることも可能になります。
 
@@ -785,7 +784,7 @@ Logs -> Generate Metrics へ移動し "+ New Metric" ボタンをクリックし
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="ログとトレースの相関" >}}
 
-## Summary
+## サマリー
 
 このガイドでは、サンプル Rails アプリケーションを使用して Heroku にデプロイし、Datadog でインスツルメントしてメトリクス、dyno システムメトリクス、ログ、トレース、そしてインテグレーションの取得をセットアップしました。
 

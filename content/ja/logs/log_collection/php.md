@@ -23,7 +23,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: documentation
 title: PHP ログ収集
 ---
 
@@ -335,7 +334,7 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ``` 
+    ```
 
 3. 生成された JSON ファイルを Datadog に[ストリーミング](#configure-the-datadog-agent)します。
 
@@ -551,5 +550,5 @@ class AppServiceProvider extends ServiceProvider
 [10]: https://symfony.com/
 [11]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [12]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[13]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[13]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [14]: /ja/glossary/#tail

@@ -1,6 +1,5 @@
 ---
 description: Dépanner Data Streams Monitoring
-kind: documentation
 title: Dépannage de Data Streams Monitoring
 ---
 

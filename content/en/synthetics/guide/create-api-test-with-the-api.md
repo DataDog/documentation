@@ -1,6 +1,6 @@
 ---
 title: Create An API Test With The API
-kind: guide
+
 further_reading:
 - link: "/api/latest/synthetics/"
   tag: "API"

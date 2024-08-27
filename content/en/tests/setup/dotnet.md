@@ -1,6 +1,5 @@
 ---
 title: .NET Tests
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 0
@@ -26,10 +25,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
 
 ## Compatibility
 
@@ -59,17 +54,27 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{% tab "Github Actions" %}}
+You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
+If you do so, the rest of the setup steps below can be skipped.
 
+[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% /tab %}}
+
+{{% tab "Jenkins" %}}
+You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
+If you do so, the rest of the setup steps below can be skipped.
+
+[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
+{{% /tab %}}
+
+{{% tab "Other cloud CI provider" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
-
 {{% ci-agentless %}}
 
 {{% /tab %}}
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -119,6 +124,35 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 {{< /tabs >}}
 
 All tests are automatically instrumented.
+
+### Compatibility with Microsoft.CodeCoverage nuget package
+
+Since `Microsoft.CodeCoverage` version `17.2.0` Microsoft introduced [dynamic instrumentation using the `.NET CLR Profiling API`][16] enabled by default only on Windows. Datadog's automatic instrumentation relies on the `.NET CLR Profiling API`. This API allows only one subscriber (for example, `dd-trace`). The use of CodeCoverage dynamic instrumentation breaks the automatic test instrumentation.
+
+The solution is to switch from dynamic instrumentation to [static instrumentation][17]. Modify your `.runsettings` file with the following configuration knobs:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <DataCollectionRunSettings>
+        <DataCollectors>
+            <DataCollector friendlyName="Code Coverage">
+              <Configuration>
+                <CodeCoverage>
+                  <!-- Switching to static instrumentation (dynamic instrumentation collides with dd-trace instrumentation) -->
+                  <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
+                  <EnableDynamicManagedInstrumentation>False</EnableDynamicManagedInstrumentation>
+                  <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
+                  <EnableStaticNativeInstrumentation>True</EnableStaticNativeInstrumentation>
+                  <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
+                  ...
+                </CodeCoverage>
+              </Configuration>
+            </DataCollector>
+        </DataCollectors>
+    </DataCollectionRunSettings>
+</RunSettings>
+```
 
 ## Configuration settings
 
@@ -849,3 +883,5 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://www.nuget.org/packages/Datadog.Trace
 [15]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[16]: https://github.com/microsoft/codecoverage/blob/main/docs/instrumentation.md
+[17]: https://github.com/microsoft/codecoverage/blob/main/samples/Calculator/scenarios/scenario07/README.md

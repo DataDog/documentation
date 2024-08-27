@@ -5,7 +5,6 @@ further_reading:
 - link: /dashboards/guide/widget_colors/#categorical-palettes
   tag: 설명서
   text: 그래프에 적합한 색상 선택하기
-kind: 지침
 title: 호환 시맨틱 태그
 ---
 

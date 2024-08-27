@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터링 알림
-kind: 설명서
 title: 모니터 태그 정책
 ---
 

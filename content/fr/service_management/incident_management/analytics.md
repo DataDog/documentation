@@ -3,7 +3,6 @@ aliases:
 - /fr/monitors/incident_management/analytics
 description: Surveiller et analyser des statistiques agrégées de gestion des incidents
   dans des dashboards et notebooks
-kind: documentation
 title: Incident Management Analytics
 ---
 

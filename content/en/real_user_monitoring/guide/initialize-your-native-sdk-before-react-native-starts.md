@@ -1,6 +1,6 @@
 ---
 title: Initialize Your Native SDK Before React Native Starts
-kind: guide
+
 description: Learn how to initialize your native SDK before React Native starts
 further_reading:
 - link: real_user_monitoring/reactnative/

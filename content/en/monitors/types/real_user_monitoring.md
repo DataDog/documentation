@@ -1,6 +1,5 @@
 ---
 title: Real User Monitoring Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/real_user_monitoring
 - /monitors/create/types/real_user_monitoring/
@@ -93,7 +92,7 @@ For more information about advanced alert options such as evaluation delay, see 
 
 ### Notifications
 
-For more information about the **Say what's happening** and **Notify your team** sections, see [Notifications][7].
+For more information about the **Configure notifications and automations** section, see [Notifications][7].
 
 ## Further Reading
 

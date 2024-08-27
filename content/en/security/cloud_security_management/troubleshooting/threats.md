@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Cloud Security Management Threats
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/troubleshooting/
   - /security_platform/cloud_security_management/troubleshooting/

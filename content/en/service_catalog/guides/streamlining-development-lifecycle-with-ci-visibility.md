@@ -1,6 +1,6 @@
 ---
 title: Streamlining the Development Lifecycle with CI Visibility
-kind: guide
+
 aliases:
   - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
 further_reading:

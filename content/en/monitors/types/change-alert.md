@@ -1,6 +1,5 @@
 ---
 title: Change Alert Monitor
-kind: Documentation
 disable_toc: false
 aliases:
 - monitors/guide/change-alert
@@ -59,7 +58,7 @@ In both cases, `Change`, and `% Change` can be either positive or negative.
 
 ## Notifications
 
-For instructions on the **Notify your team** section, see the [Notifications][7] and [Monitor configuration][8] pages.
+For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## Troubleshooting a change alert evaluation
 
@@ -99,5 +98,5 @@ This is a break down of the query with the following conditions:
 [2]: /monitors/manage/status/#investigate-a-monitor-in-a-notebook
 [3]: /dashboards/functions/timeshift/
 [7]: /monitors/notify/
-[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
 [9]: https://app.datadoghq.com/monitors/create/metric/change

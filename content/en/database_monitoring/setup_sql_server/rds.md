@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for SQL Server on Amazon RDS
-kind: documentation
 description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:
 - link: "/integrations/sqlserver/"
@@ -63,6 +62,9 @@ CREATE USER datadog FOR LOGIN datadog;
 ```
 
 This is required because RDS does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ## Install the Agent
 

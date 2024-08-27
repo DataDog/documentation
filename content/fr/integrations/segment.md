@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Segment
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: segment
 public_title: Intégration Datadog/Segment

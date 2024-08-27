@@ -1,6 +1,5 @@
 ---
 title: Manage Cloud Traffic Costs with NPM
-kind: guide
 aliases:
     - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
 ---

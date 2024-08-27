@@ -5,6 +5,7 @@ categories:
 - cloud
 - 로그 수집
 - 네트워크
+custom_kind: integration
 dependencies: []
 description: Amazon VPC 로그를 수집합니다.
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: Amazon VPC
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: amazon_vpc
 public_title: Datadog-Amazon VPC 통합
@@ -49,12 +49,12 @@ Amazon Virtual Private Cloud(Amazon VPC)로 가상 네트워크에서 AWS 리소
 
 #### AWS에서 VPC 플로우 로그용 대상 리소스를 탐색 또는 생성하세요.
 
-Datadog에 전송하기 전 먼저 VPC 플로우 로그를 중간 대상에 전송해야 합니다. Kinesis Data Firehose로 직접 전송하거나 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 저장할 수 있습니다.
+Datadog에 전송하기 전 먼저 VPC 흐름 로그를 중간 대상에 전송해야 합니다. Kinesis Data Firehose로 직접 전송하거나 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 저장할 수 있습니다.
 
-부대비용이 적게 들고 비용 효율적인 옵션이므로 Kinesis Data Firehose로 VPC 플로우 로그를 Datadog으로 전송하시기를 권장합니다. 자세한 내용을 확인하려면 [Kinesis Data Firehose에 Amazon VPC Flow 로그 적용][4]하기를 참조하세요.
+Amazon Data Firehose는 운영 오버헤드가 적고 비용 효율적이므로 VPC 흐름 로그를 Datadog으로 보내는 데 권장되는 옵션입니다. 자세한 내용을 확인하려면 [Kinesis Data Firehose에 Amazon VPC 흐름 로그 적용하기][4]를 참조하세요.
 
 1. 새 항목을 만들거나 기존 항목을 선택합니다.
-   - Kinesis Data Firehose(권장). Datadog으로 로그를 전송하는 기존 Kinesis Data Firehose 전송 스트림이 아직 없는 경우, [ Datadog Kinesis Firehose 대상으로 AWS 서비스 로그 전송하기][5] 지침에 따라 생성합니다. **참고**: 옵션으로 VPC와는 별도로 다른 AWS 계정에서 전송 스트림을 선택하여 중앙 집중식 로그를 수집 및 전달할 수 있습니다.
+   - Amazon Data Firehose(권장). Datadog으로 로그를 전송하기 위한 기존 Amazon Data Firehose 전송 스트림이 아직 없는 경우 [Datadog Amazon Firehose 대상으로 AWS 서비스 로그 보내기][5] 가이드의 지침에 따라 스트림을 생성하세요. **참고:** 중앙 집중식 로그 수집 및 전송을 위해 필요한 경우 VPC와 별도의 다른 AWS 계정에서 전송 스트림을 선택할 수 있습니다.
    - S3 버킷 또는 폴더 경로.
    - 클라우드와치(CloudWatch) 로그 그룹.
 
@@ -67,13 +67,13 @@ Datadog에 전송하기 전 먼저 VPC 플로우 로그를 중간 대상에 전�
 2. **플로우 로그** 탭 로 이동합니다. 
 3. **플로우 로그 생성**을 클릭합니다.
 4. `All` 필터를 선택하면 승인된 연결과 거부된 연결을 모두 확인할 수 있습니다.
-5. 로그용 대상 유형(Kinesis Data Firehose, S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹)을 선택합니다.
+5. 로그에 대해 원하는 대상 유형(Amazon Data Firehose, S3 버킷 또는 CloudWatch 로그 그룹)을 선택합니다.
 6. 대상 리소스 세부 정보를 입력합니다.
 7. **플로우 로그 생성**을 클릭합니다.
 
 #### Datadog에 로그 전송
 
-Kinesis Data Firehose를 대상으로 선택하셨다면 모든 작업이 완료되었습니다!
+Amazon Data Firehose를 대상으로 선택했다면 모든 작업이 완료된 것입니다.
 
 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹을 대상으로 선택한 경우:
 

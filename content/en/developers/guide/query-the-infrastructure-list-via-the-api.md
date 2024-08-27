@@ -1,6 +1,6 @@
 ---
 title: Query the Infrastructure List with the API
-kind: guide
+
 aliases:
   - /developers/faq/query-the-infrastructure-list-via-the-api
 ---

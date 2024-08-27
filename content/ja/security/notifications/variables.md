@@ -8,9 +8,20 @@ further_reading:
 - link: /security/notifications/
   tag: ドキュメント
   text: セキュリティ通知について
-kind: documentation
+products:
+- icon: cloud-security-management
+  name: Cloud SIEM
+  url: /security/cloud_siem/
+- icon: cloud-security-management
+  name: Cloud Security Management
+  url: /security/cloud_security_management/
+- icon: app-sec
+  name: Application Security Management
+  url: /security/application_security/
 title: 変数
 ---
+
+{{< product-availability >}}
 
 ## 概要
 
@@ -22,17 +33,21 @@ title: 変数
 
 以下の変数が利用可能です。
 
-| 変数              | 説明                                                                                   |
-| --------------------- | --------------------------------------------------------------------------------------------- |
-| `{{severity}}`        | トリガーとなるルールケースの重大度 (整数、0-4)。                                      |
-| `{{timestamp}}`       | シグナルが作成された時間。例: `Mon Jan 01 00:00:00 UTC 1970`                     |
-| `{{timestamp_epoch}}` | シグナルが作成された時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。                 |
-| `{{first_seen}}`      | シグナルが最初に観測された時間。例: `Mon Jan 01 00:00:00 UTC 1970`                  |
-| `{{first_seen_epoch}}`| シグナルが最初に観測された時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。              |
-| `{{last_seen}}`       | シグナルが直近でトリガーされた時間。例: `Mon Jan 01 00:00:00 UTC 1970`     |
-| `{{last_seen_epoch}}` | シグナルが直近でトリガーされた時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。|
-| `{{rule_name}}`       | 関連するルールの名前。                                                                  |
-| `{{case_name}}`       | トリガーとなるルールケースの名前。                                                             |
+| 変数                                           | 説明                                                                                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `{{severity}}`                                     | トリガーとなるルールケースの重大度 (整数、0-4)。                                      |
+| `{{timestamp}}`                                    | シグナルが作成された時間。例: `Mon Jan 01 00:00:00 UTC 1970`                     |
+| `{{timestamp_epoch}}`                              | シグナルが作成された時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。                 |
+| `{{first_seen}}`                                   | シグナルが最初に観測された時間。例: `Mon Jan 01 00:00:00 UTC 1970`                  |
+| `{{first_seen_epoch}}`                             | シグナルが最初に観測された時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。              |
+| `{{last_seen}}`                                    | シグナルが直近でトリガーされた時間。例: `Mon Jan 01 00:00:00 UTC 1970`     |
+| `{{last_seen_epoch}}`                              | シグナルが直近でトリガーされた時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。|
+| `{{rule_name}}`                                    | 関連するルールの名前。                                                                  |
+| `{{case_name}}`                                    | トリガーとなるルールケースの名前。                                                             |
+| `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
+| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
+
+When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
 
 ### ダイナミックリンク
 
@@ -86,6 +101,8 @@ HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセス�
 
 シグナルのイベント属性のリストを表示するには、シグナルのサイドパネルの **Overview** タブの下部にある **JSON** をクリックします。ルール通知にこれらのイベント属性を追加するには、構文 `{{@attribute}}` を使用します。イベント属性の内部キーにアクセスするには、JSON のドット表記を使用します (例: `{{@attribute.inner_key}})`)。
 
+If the signal's JSON does not contain an attribute that is present in the related log's JSON, use the previously outlined syntax with the attribute name from the log's JSON. This attribute is then included in both the signal's JSON and the signal notifications.
+
 以下は、セキュリティシグナルに関連するイベント属性を持つ JSON オブジェクトの例です。
 
 {{< tabs >}}
@@ -120,7 +137,7 @@ HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセス�
 user@domain.com just logged in without MFA from 1.2.3.4.
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Application Security Management" %}}
 
@@ -260,7 +277,17 @@ if-else ロジックで属性が値と一致するかどうかを確認します
 {{ .matched }} ホスト名
 ```
 
-## その他の参考資料
+### URL エンコード
+
+If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your signal message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+
+```
+https://app.datadoghq.com/services/{{urlencode "service.name"}}
+```
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

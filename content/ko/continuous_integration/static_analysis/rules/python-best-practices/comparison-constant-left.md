@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 비교에서 변수를 왼쪽에 넣기
 ---
 ## 메타데이터

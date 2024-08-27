@@ -12,6 +12,7 @@ author:
   vendor_id: skykit
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -20,7 +21,6 @@ integration_id: skykit-digital-signage-license
 integration_title: Skykit Digital Signage
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -68,6 +68,11 @@ tile:
     image_url: images/Datadog_Dashboard_Marketplace_Graphic_04.jpg
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/showcase-datadog-dashboards-securely-with-skykit/
+  - resource_type: documentation
+    url: https://support.skykit.com/docs/getting-started-with-skykit-beam-and-datadog-dashboards
   support: README.md#Support
   title: Skykit Digital Signage
   uninstallation: README.md#Uninstallation
@@ -86,7 +91,7 @@ Skykit は、デジタルサイネージとワークプレイスエクスペリ�
 
 [Skykit の仕組みをご覧ください。][1]
 
-## Agent
+## サポート
 
 サポート、機能リクエスト、北米以外の組織の場合は、以下のチャンネルで Skykit にお問い合わせください。
 

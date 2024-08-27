@@ -1,6 +1,5 @@
 ---
 title: Unified Service Tagging
-kind: documentation
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -59,6 +58,8 @@ To start configuring unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
+- [Serverless](#serverless-environment)
+- [OpenTelemetry](#opentelemetry)
 
 ### Containerized environment
 
@@ -304,7 +305,7 @@ Depending on how you build and deploy your services' binaries or executables, yo
 To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], [RUM resources][10], [Synthetics tests][11], [StatsD metrics][12], or system metrics, either:
 
 1. Export the environment variables in the command for your executable:
-   
+
    ```
    DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
    ```
@@ -332,25 +333,23 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-   **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
-
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
    {{% tab "RUM & Session Replay" %}}
 
-   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file.
 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
 [1]: /real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/#setup
+[2]: /real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
 
-   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2]. 
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
 
    You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 
@@ -420,6 +419,71 @@ instances:
 ### Serverless environment
 
 For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
+
+### OpenTelemetry
+
+When using OpenTelemetry, map the following [resource attributes][16] to their corresponding Datadog conventions:
+
+| OpenTelemetry convention | Datadog convention |
+| --- | --- |
+| `deployment.environment` | `env` |
+| `service.name` | `service` |
+| `service.version` | `version` |
+
+<div class="alert alert-warning">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
+
+{{< tabs >}}
+{{% tab "Environment variables" %}}
+
+To set resource attributes using environment variables, set `OTEL_RESOURCE_ATTRIBUTES` with the appropriate values:
+
+```shell
+export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment=production,service.version=1.2.3"
+```
+
+{{% /tab %}}
+
+{{% tab "SDK" %}}
+
+To set resource attributes in your application code, create a `Resource` with the desired attributes and associate it with your `TracerProvider`.
+
+Here's an example using Python:
+
+```python
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+
+resource = Resource(attributes={
+   "service.name": "<SERVICE>",
+   "deployment.environment": "<ENV>",
+   "service.version": "<VERSION>"
+})
+tracer_provider = TracerProvider(resource=resource)
+```
+
+{{% /tab %}}
+
+{{% tab "Collector" %}}
+
+To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in your Collector configuration file. The transform processor allows you to modify attributes of the collected telemetry data before sending it to the Datadog exporter:
+
+```yaml
+processors:
+  transform:
+    trace_statements:
+      - context: resource
+        statements:
+          - set(attributes["service.name"], "my-service")
+          - set(attributes["deployment.environment"], "production")
+          - set(attributes["service.version"], "1.2.3")
+...
+```
+
+[100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -442,3 +506,4 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [16]: /watchdog/faulty_deployment_detection/
 [17]: /tracing/services/deployment_tracking/
 [18]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+[19]: https://opentelemetry.io/docs/languages/js/resources/

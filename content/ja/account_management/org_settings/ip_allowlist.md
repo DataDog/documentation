@@ -1,10 +1,9 @@
 ---
-kind: documentation
 title: IP 許可リスト
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-IP 許可リスト機能は、エンタープライズプランのお客様のみご利用いただけます。サポートに連絡してアクセスをリクエストしてください。
+The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
 {{< /callout >}}
 
 ## 概要
@@ -27,9 +26,10 @@ IP 許可リストを有効にすると、許可リストに含まれる IP ア�
 IP 許可リスト機能は、以下へのアクセスをブロックしません。
 - Agent がメトリクス、トレース、ログなどのデータを送信するデータ取り込みエンドポイント
 - Agent がデータを送信する前に使用する [validate API key][2] のエンドポイント
-- [公開ダッシュボード][3]
+- [Agent flare submission][3]
+- [Public dashboards][4]
 
-Agent からメトリクス、トレース、ログなどのテレメトリーを送信するアプリケーションやインテグレーション、およびユーザーから提供された API キーを使用するアプリケーションやインテグレーションは、IP 許可リストの影響を受けません。Datadog は、サードパーティからの IP アドレスを監視するために[監査証跡][4]を利用することを推奨します。
+Applications and integrations that submit telemetry from the Agent (metrics, traces, and logs), and those that use an API key provided by the user, are not impacted by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third party applications and integrations.
 
 ### 機能性
 
@@ -54,7 +54,7 @@ IP 許可リストを有効化または変更すると、あなたがデータ�
 
 **注:** IP 許可リスト ページは、Datadog 組織がこの機能をオンにしている場合にのみ UI に表示されます。
 
-[IP 許可リスト UI][5] を見つけるには
+To find the [IP allowlist UI][6]:
 
 1. アカウントメニューから、**Organization Settings** に移動します。
 1. **Access** の下で、**IP Allowlist** を選択します。
@@ -69,7 +69,7 @@ IP 許可リストのステータスを切り替えるには、**Enable** また
 
 ### IP アドレスまたは CIDR 範囲を追加する
 
-{{< img src="account_management/org_settings/add_ip.png" alt="Add IP to allowlist と題されたダイアログボックスを示すスクリーンショット" >}}
+{{< img src="account_management/org_settings/add_ip_2.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
 
 1. ページ右上の **Add IP** ボタンをクリックします。
 1. 有効な IP アドレスまたは CIDR 範囲を入力します。
@@ -90,15 +90,16 @@ IP 許可リストのステータスを切り替えるには、**Enable** また
 
 ## プログラムで IP 許可リストを管理する
 
-IP 許可リストを API で管理するには、[IP 許可リスト API ドキュメント][6]を参照してください。
+To manage the IP allowlist through the API, see the [IP Allowlist API documentation][7].
 
-Terraform で IP 許可リストを管理するには、[`ip_allowlist` リソース][7]をご覧ください。
+See the [`ip_allowlist` resource][8] to manage the IP allowlist in Terraform.
 
 
 [1]: /ja/api/latest/
 [2]: /ja/api/latest/authentication/#validate-api-key
-[3]: /ja/dashboards/sharing/
-[4]: /ja/account_management/audit_trail/
-[5]: https://app.datadoghq.com/organization-settings/ip-allowlist
-[6]: /ja/api/latest/ip-allowlist/
-[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
+[3]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare/
+[4]: /ja/dashboards/sharing/
+[5]: /ja/account_management/audit_trail/
+[6]: https://app.datadoghq.com/organization-settings/ip-allowlist
+[7]: /ja/api/latest/ip-allowlist/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist

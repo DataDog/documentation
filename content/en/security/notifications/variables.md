@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 aliases:
   - /security_platform/notifications/variables
 further_reading:

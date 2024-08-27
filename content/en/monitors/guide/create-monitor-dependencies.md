@@ -1,6 +1,5 @@
 ---
 title: Create monitor dependencies
-kind: guide
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

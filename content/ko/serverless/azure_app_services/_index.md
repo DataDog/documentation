@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services
   tag: 가격
   text: Azure App Service APM 가격
-kind: 설명서
 title: Azure App Service 모니터링
 ---
 
@@ -36,13 +35,16 @@ Datadog은 베이직, 스탠다드, 프리미엄 플랜에서 다음 Azure App S
 
 | OS | 런타임 |앱 유형|상태|설명서| 
 |----|---------|-----|----|--------------|
-|윈도우즈(Windows)|.NET|함수 앱 & 웹 앱|GA|[Windows .NET 설정][7]|
-|윈도우즈(Windows)|Java|함수 앱 & 웹 앱|베타|[Windows Java 설정][8]|
-|리눅스(Linux)|.NET|웹 앱|GA|[Linux .NET 설정][9]|
-|리눅스(Linux)|Node|웹 앱|GA|[Linux 노드 설정][9]|
-|리눅스(Linux)|PHP|웹 앱|GA|[Linux PHP 설정][9]|
-|리눅스(Linux)|Java|웹 앱|GA|[Linux Java 설정][10]|
-|리눅스(Linux)|파이썬(Python)|웹 앱|GA|[Linux Python 설정][9]|
+|Windows|.NET|Function App & Web App|GA|[Windows .NET 설정][7]|
+|Windows|Java|Web App|GA|[Windows Java 설정][8]|
+|Windows|Node|Web App|GA|[Windows Node 설정][13]|
+|Linux|.NET|Web App|GA|[Linux .NET 설정][9]|
+|Linux|Node|Web App|GA|[Linux Node 설정][9]|
+|Linux|PHP|Web App|GA|[Linux PHP 설정][9]|
+|Linux|Java|Web App|GA|[Linux Java 설정][10]|
+|Linux|Python|Web App|GA|[Linux Python 설정][9]|
+|Linux|컨테이너|Web App|GA|[Linux Container 설정][12]|
+
 
 기능:
 - 자동 계측을 사용한 전체 분산 APM 추적
@@ -66,3 +68,5 @@ Datadog은 베이직, 스탠다드, 프리미엄 플랜에서 다음 Azure App S
 [9]: /ko/serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
 [10]: /ko/serverless/azure_app_services/azure_app_services_linux?tab=java
 [11]: /ko/developers/dogstatsd/
+[12]: /ko/serverless/azure_app_services/azure_app_services_container
+[13]: /ko/serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup

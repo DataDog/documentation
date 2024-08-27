@@ -1,6 +1,5 @@
 ---
 title: Other Frameworks
-kind: documentation
 type: multi-code-lang
 aliases:
 - /real_user_monitoring/ios/swiftui/
@@ -33,6 +32,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#npm
+[1]: /real_user_monitoring/browser/setup/#npm
 [2]: /real_user_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios

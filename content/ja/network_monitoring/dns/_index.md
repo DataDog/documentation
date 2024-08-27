@@ -10,20 +10,19 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
   tag: ブログ
   text: Datadog での CoreDNS モニタリング
-- link: /network_monitoring/performance/network_page
+- link: /network_monitoring/performance/network_analytics
   tag: Documentation
   text: 各ソースと宛先間のネットワークデータを探索。
 - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
   tag: ブログ
   text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
-kind: documentation
 title: DNS モニタリング
 ---
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリング" >}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="Datadog の DNS モニタリングページ" >}}
 
 <div class="alert alert-info">
-DNS モニタリングを有効にするには、Agent バージョン 7.33 にアップグレードします。
+DNS モニタリングを有効にするには、Agent バージョン 7.33 以降にアップグレードします。
 </div>
 
 DNS モニタリングにより提供される DNS サーバーのパフォーマンス概要を把握することで、サーバー側およびクライアント側の DNS に関する問題を確認できます。フローレベルの DNS メトリクスを収集、表示するこのページを使用して、以下を確認できます。
@@ -42,29 +41,37 @@ DNS モニタリングの使用を開始する前に、[ネットワークパフ
 
 ## クエリ
 
-ページ上部のソースおよび宛先検索バーを使用して、DNS リクエストを作成するクライアント (_ソース_)、および DNS リクエストに応答する DNS サーバー (_宛先_) の間の依存関係を問い合わせます。宛先ポートは自動的に DNS ポート 53 に限定され、依存関係の検索結果がすべてこの形式 (クライアント → DNS サーバー) に一致するようになります。
+ページ上部の検索バーを使用して、(DNS リクエストを作成する) クライアント、および DNS リクエストに応答する DNS サーバーの間の依存関係をクエリします。宛先ポートは自動的に DNS ポート 53 に限定され、依存関係の検索結果がすべてこの形式 (クライアント → DNS サーバー) に一致するようになります。
 
-検索を特定のクライアントに絞るには、ソース検索バーでタグを使用して DNS トラフィックにフィルターをかけ集計します。デフォルトのビューでは、ソースに `service` タグが使用されています。したがって、表の各行は DNS サーバーへ DNS リクエストを作成しているサービスを表しています。
+検索を特定のクライアントに絞るには、検索バーでクライアントタグを使用して DNS トラフィックにフィルターをかけ集計します。デフォルトのビューでは、クライアントは自動的に最も一般的なタグでグループ化されます。したがって、表の各行は DNS サーバーへ DNS リクエストを作成しているサービスを表しています。
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリングデフォルトビュー" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_client_search.png" alt="検索バーに client_service:ad-server、View clients as に pod_name、View servers as に network.dns_query を入力した DNS モニタリングページ" style="width:100%;">}}
 
-検索を特定の DNS サーバーに絞るには、宛先検索バーでタグを使用します。宛先の表示を構成するには、**Group by** のドロップダウンメニューで以下のオプションの 1 つを選択します。
+検索を特定の DNS サーバーに絞るには、検索バーでサーバータグを使用します。**Group by** のドロップダウンメニューで以下のオプションの 1 つを使ってサーバーの表示を構成します。
 
 * `dns_server`: DNS リクエストを受信するサーバー。このタグには、`pod_name` または `task_name` と同じ値が与えられています。上記タブが使用できない場合は、`host_name` を使用します。
 * `host`: DNS サーバーのホスト名。
 * `service`: DNS サーバーで実行中のサービス。
 * `IP`: DNS サーバーの IP。
-* `dns_query`: **Agent バージョン 7.33 以降が必要** クエリされたドメイン。
+* `dns_query`: (Agent バージョン 7.33 以降が必要) クエリされたドメイン。
 
 この例は、本番環境のアベイラビリティーゾーンのポッドから、DNS リクエストを受信するホストへのすべてのフローを示しています。
 
-{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="複数の DNS サーバーへリクエストを送信するポッドのクエリ" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_query_example.png" alt="Search for フィールドに client_availability_zone:us-central1-b と client_env: prod を入力し、View clients as ドロップダウンで pod_name を選択し、View servers as ドロップダウンで host を選択したクエリ" style="width:100%;">}}
+
+### 推奨クエリ
+
+{{< img src="network_performance_monitoring/dns_monitoring/recommended_queries_dns.png" alt="クエリの説明を表示する DNS モニタリングページの推奨クエリ" style="width:100%;">}}
+
+DNS ページの上部には、[Network Analytics][4] ページに似た 3 つの推奨クエリがあります。これらは、DNS の健全性を調査し、概要 DNS メトリクスを表示するために一般的に使用される静的クエリです。推奨されるクエリを出発点として使用して、DNS 構成をさらに詳しく把握し、DNS の問題をトラブルシューティングしてください。
+
+推奨クエリにカーソルを合わせると、そのクエリの結果が意味する簡単な説明が表示されます。クエリを実行するにはクエリをクリックし、クエリを削除するには **Clear query** をクリックします。それぞれの推奨クエリには、推奨グラフのセットもあります。推奨クエリをクリアすると、グラフがデフォルト設定にリセットされます。
 
 ## メトリクス
 
 DNS メトリクスはグラフと関連する表を用いて表示されます。
 
-**注:** データは 30 秒ごとに収集され、5 分ごとに集計され、14 日間保持されます。
+**注**: データは 30 秒ごとに収集され、5 分ごとに集計され、14 日間保持されます。
 
 次の DNS メトリクスを使用できます。
 
@@ -73,7 +80,7 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 | **DNS requests**         | クライアントで作成された DNS リクエストの数。                                                                         |
 | **DNS requests / second** | クライアントにより作成された DNS リクエストの速度。                                                                             |
 | **DNS response time**    | クライアントからのリクエストへの DNS サーバーによる平均応答時間。                                                |
-| **Timeouts**             | クライアントからの DNS リクエストのタイムアウト回数（DNS の全応答に対するパーセンテージとして表示）。                    |
+| **Timeouts**             | クライアントからのタイムアウトした DNS リクエストの数 (全 DNS レスポンスに対する割合で表示されます)。<br  /><br />**注**: これらのタイムアウトは NPM が内部的に計算したメトリクスであり、NPM の外部から報告された DNS タイムアウトとは一致しない場合があります。DNS クライアントやサーバーが報告する DNS タイムアウトとは異なります。                |
 | **Errors**               | DNS エラーコードを生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
 | **SERVFAIL**             | SERVFAIL コード（DNS サーバーの応答失敗）を生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
 | **NXDOMAIN**             | NXDOMAIN コード（ドメイン名の存在なし）を生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
@@ -82,7 +89,7 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 
 ## 表
 
-ネットワークテーブルには、クエリで定義された各 _ソース_ と _宛先_ の依存関係別に、上記メトリクスの詳細が表示されます。
+ネットワークテーブルには、クエリで定義された各_クライアント_と_サーバー_の依存関係別に、上記メトリクスの詳細が表示されます。
 
 表の右上にある **Customize** ボタンを使い、表中の列を構成します。
 
@@ -96,7 +103,7 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 * クライアント側のコードでのアプリケーションエラー
 * 特定のポートまたは IP から発生している大量のリクエスト
 
-{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS モニタリングのサイドパネル" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel.png" alt="DNS モニタリングのサイドパネル" style="width:100%;">}}
 
 ## その他の参考資料
 
@@ -105,4 +112,5 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 
 [1]: /ja/network_monitoring/performance/
 [2]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /ja/network_monitoring/performance/network_page#table
+[3]: /ja/network_monitoring/performance/network_analytics#table
+[4]: /ja/network_monitoring/performance/network_analytics/#recommended-queries

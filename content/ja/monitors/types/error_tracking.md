@@ -3,15 +3,12 @@ aliases:
 - /ja/monitors/create/types/error_tracking/
 description: エラー追跡モニタータイプについて説明します。
 further_reading:
-- link: /real_user_monitoring/error_tracking/
+- link: /error_tracking/issue_states/
   tag: ドキュメント
-  text: Web アプリケーションとモバイルアプリケーションのエラー追跡について
-- link: /tracing/error_tracking/
+  text: Learn about Error Tracking states and how they impact monitors
+- link: /error_tracking/
   tag: ドキュメント
-  text: バックエンドサービスのエラー追跡について
-- link: /logs/error_tracking/
-  tag: ドキュメント
-  text: ログのエラー追跡について
+  text: Learn about Error Tracking for Web, Mobile, and Backend
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
@@ -21,13 +18,14 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: エラー追跡モニター
 ---
 
 ## 概要
 
-組織の[リアルユーザーモニタリング][1]、[APM][2]、[ログ][6]を有効にすると、Web またはモバイルアプリケーション、バックエンドサービス、ログで問題が発生したとき、影響が大きいとき、そして回帰が始まったときにアラートを発するエラー追跡モニターを作成することができるようになります。
+Datadog Error Tracking automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
+
+With [Error Tracking][1] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs is new, when it has a high impact, and when it starts regressing.
 
 ## エラー追跡モニターを作成する
 
@@ -37,16 +35,19 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
 
 ### アラート条件を選択する
 
-エラー数の多い課題に対してアラートを出すには **Count** を、初めて発生した課題に対してアラートを出すには **New Issue** を選択します。
+There are two types of alerting conditions you can configure your Error Tracking monitor with:
+
+| Alerting&nbsp;condition     | 説明    | 
+| ---  | ----------- |
+|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
+|New Issue| Alert when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
 
 ### 検索クエリを定義する
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
-ドロップダウンメニューから **Web and Mobile Apps** を選択します。**Backend Services** または **Logs** を選択した場合、**Error Occurrences** オプションのみ利用可能です。
-
-1. 監視するメトリクスを、カウント、ファセット、メジャーのいずれかから選択します。
+1. ドロップダウンメニューから **RUM Events**、**Traces**、または **Logs** を選択し、監視するメトリクス (カウント、ファセット、またはメジャー) を選択します。
    - エラーの発生については、課題 ID に基づいた全体のカウントで監視します。
    - 影響を受けたユーザーについては、課題 ID に基づくユーザーメールの一意のカウント、またはメジャーで監視します。
    - 影響を受けたセッションについては、課題 ID に基づくセッション ID の一意のカウントで監視します。
@@ -57,6 +58,8 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
    - **Error Occurrences**: エラーカウントが `above` または `above or equal to` のときにトリガーします。
    - **Impacted Users**: 影響を受けたユーザーのメール数が `above` または `above or equal to` のときにトリガーします。
    - **Impacted Sessions**: 影響を受けたセッション ID の数が `above` または `above or equal to` のときにトリガーします。
+
+   ドロップダウンメニューから **Traces** または **Logs** を選択した場合、**Error Occurrences** オプションのみが利用可能です。
 
 2. [RUM エクスプローラー検索][1]、[APM エクスプローラー検索][3]または[ログエクスプローラー検索][4]と同じロジックで、課題のエラー発生状況を検索するクエリを作成します。
 3. オプションで、アラートのグループ化ストラテジーを構成します。詳細については、[モニターの構成][2]を参照してください。
@@ -75,12 +78,12 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
 
 {{% tab "新しい課題" %}}
 
-新しい課題のリストには、過去 24 時間や過去 1 週間など、選択した時間枠の中で新しいとみなされる古い課題が表示される場合があります。
-
 1. 課題が最初に発生した後、モニターが新しい課題とみなすまでの期間を選択または入力します。選択されたしきい値は、指定された時間枠で評価されます。特定の期間を過ぎると、モニターはアラートを停止し、緑色に変わります。
-2. **Web and Mobile Apps**、**Backend Services** または **Logs** を選択し、カウントまたは[メジャー][1]で監視することを選択します。
+
+   上部の問題リストには、個別の時間枠セレクターがあります。この時間枠で新しいと思われる問題を見つけるために使用できます。
+2. **RUM Events**、**Traces**、または **Logs** を選択し、カウントまたは[メジャー][1]で監視することを選択します。
    - 特定の課題 ID の発生カウントを監視します。
-   - メジャーで監視します。メジャーを選択すると、モニターは (メトリクスモニターと同様に) RUM または APM ファセットの数値に対してアラートを出します。集計タイプ (`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
+   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. [RUM エクスプローラー検索][2]、[APM エクスプローラー検索][3]または[ログエクスプローラー検索][5]と同じロジックで、課題のエラー発生状況を検索するクエリを作成します。
 4. オプションで、アラートのグループ化ストラテジーを構成します。詳細については、[モニターの構成][4]を参照してください。
 
@@ -108,14 +111,21 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
 
 通知タイトルにトリガータグを表示するには、**Include triggering tags in notification title** をクリックします。
 
-**Notify your team** および **Say what's happening** セクションの詳細については、[通知][5]を参照してください。
+For more information about the **Configure notifications and automations** section, see [Notifications][5].
+
+
+### Muting monitors
+Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
+
+**Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
+
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/
-[2]: /ja/tracing/
+[1]: /ja/error_tracking/
+[2]: /ja/error_tracking/issue_states/
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /ja/monitors/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/notify/

@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Nuevos encabezados CSV para el resumen de organizaciones individuales
 ---
 

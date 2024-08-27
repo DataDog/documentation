@@ -10,13 +10,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: 블로그
   text: Datadog RUM의 기능 플래그 추적을 통해 릴리스 안전성 보장
-kind: 설명서
 title: 기능 플래그 추적
 ---
-
-<div class="alert alert-warning">
-    기능 플래그 추적은 베타 버전입니다.
-</div>
 
 ## 개요
 
@@ -45,14 +40,14 @@ title: 기능 플래그 추적
 
 ## 기능 플래그 보기
 
-기능 플래그 데이터 수집을 설정했으면 RUM 내의 [**Feature Flags**][4] 탭으로 이동하거나 **UX Monitoring** 아래의 [**Feature Flags**][4] 탭을 클릭합니다.
+기능 플래그 데이터 수집을 설정한 후 RUM 내의 [**Feature Flags**][4] 탭으로 이동합니다.
 
 이 보기에서 기능 플래그의 상태 및 사용에 대해 궁금한 점을 조사할 수 있습니다.
 - 각 변형을 경험하는 사용자 수를 모니터링하고 기능 플래그의 요약 통계를 확인하세요.
 - 기능 플래그의 상태를 확인하여 코드 정리를 위해 제거할 수 있는 기능이 있는지 확인하세요.
 - 기능 플래그가 평가되고 있는 페이지 보기
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="기능 플래그 목록을 확인하여 기능 플래그의 상태 및 사용에 대해 궁금한 점이 있으면 조사하세요." style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="기능 플래그 목록을 통해 기능 플래그의 상태 및 사용법을 자세히 파악하세요" style="width:90%;" >}}
 
 
 ### 검색 및 필터링
@@ -61,7 +56,8 @@ title: 기능 플래그 추적
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="기능 플래그 목록 검색창 및 필터링" style="width:90%;" >}}
 
 ### 기능 플래그 상태
-기능 플래그 상태에는 두 가지가 있습니다.
+세 가지의 기능 플래그 상태가 있습니다.
+- **Active**: 기능 플래그는 지난 2주 동안 다양한 변형을 평가했습니다.
 - **Inactive**: 지난 2주 동안 제어 변형에 대한 기능 플래그 평가만 있었습니다.
 
 - **Out to 100%**: 비제어 변형 중 하나에 대해서만 기능 플래그 평가가 있었습니다.
@@ -97,7 +93,7 @@ RUM 탐색기에서 세션, 보기 또는 오류를 검색할 수 있으며, `@f
 [2]: /ko/real_user_monitoring/browser#setup
 [3]: /ko/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
 [4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /ko/real_user_monitoring/session_replay/
+[5]: /ko/real_user_monitoring/session_replay/browser/
 [6]: /ko/real_user_monitoring/error_tracking/explorer/#explore-your-issues
 [7]: https://app.datadoghq.com/rum/explorer
 [8]: /ko/dashboards/

@@ -25,7 +25,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
   tag: Blog
   text: Surveiller une infrastructure gérée par Cilium avec Datadog
-kind: documentation
 title: Surveillance réseau
 ---
 

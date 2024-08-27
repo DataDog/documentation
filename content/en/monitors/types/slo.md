@@ -1,15 +1,14 @@
 ---
 title: SLO Alerts
-kind: documentation
 aliases :
   - /monitors/create/types/slo/
 further_reading:
-- link: "/service_management/service_level_objectives/monitor"
+- link: "/service_management/service_level_objectives/burn_rate"
   tag: "Documentation"
-  text: "Monitor-Based SLOs"
-- link: "/service_management/service_level_objectives/metric"
+  text: "Burn Rate Alerts"
+- link: "/service_management/service_level_objectives/error_budget"
   tag: "Documentation"
-  text: "Metric-Based SLOs"
+  text: "Error Budget Alerts"
 ---
 
 <div class="alert alert-info">
@@ -38,7 +37,7 @@ Two types of alerts are available:
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
 

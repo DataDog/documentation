@@ -11,7 +11,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: 설명서
   text: 공식 및 커뮤니티에서 생성한 API 및 DogStatsD 클라이언트 라이브러리
-kind: 설명서
 title: 메트릭 유형 한정자
 ---
 

@@ -5,16 +5,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: 블로그
   text: DBM과 애플리케이션 성능 모니터링(APM) 텔레메트리를 원활하게 상호 연결하여 엔드 투 엔드 쿼리 성능을 알아봅니다.
-kind: 설명서
 title: 데이터베이스 모니터링과 트레이스 상호 연결
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">이 사이트에는 데이터베이스 모니터링이 지원되지 않습니다.</div>
-{{< /site-region >}}
 
-본 지침에서는 [데이터베이스 모니터링][1]과 [APM][2]을 사용한다고 가정합니다. APM과 DBM에 연결하면 APM 트레이스 식별자가 DBM 데이터 수집에 삽입되고, 두 데이터 소스에 상관 관계가 생성됩니다. 이를 통해 APM 제품에 데이터베이스 정보를 표시하는 제품 기능을 사용할 수 있고, DBM 제품에 APM 데이터를 표시하는 기능을 사용할 수 있습니다.
+이 가이드는 [데이터베이스 모니터링][1]을 설정하였고 [애플리케이션 성능 모니터링(APM)][2]을 사용하고 있다고 가정합니다. APM 및 DBM을 연결하면 APM 트레이스 식별자가 DBM 데이터 수집으로 전달됩니다. 이를 통해 이들 두 데이터 소스를 연계할 수 있으며 APM 제품에서 데이터 정보를 표시하고 DBM 제품에서 APM 데이터를 표시하는 제품 기능을 활성화할 수 있습니다. 
 
-## 시작 전 확인할 사항
+## 시작 전 참고 사항
 
 지원되는 데이터베이스
 : Postgres, MySQL, SQL Server, Oracle
@@ -22,51 +18,54 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 지원되는 에이전트 버전
 : 7.46+
 
-데이터 프라이버시
-: SQL 주석 전파를 사용하면 기밀 데이터(서비스 이름)가 데이터베이스에 저장될 수 있고, 데이터베이스에 접근할 수 있는 제3자가 이 데이터에 액세스할 수 있습니다.
+데이터 개인정보 보호
+: 데이터베이스에 저장되어 있고 데이터베이스 액세스 권한이 부여된 기타 타사가 액세스할 수 있는 잠재적인 기밀 데이터(서비스 이름)에서 SQL 주석 전파 결과를 활성화합니다.
 
 
-APM 트레이서 통합에서는 애플리케이션에 데이터베이스로 전송되는 정보 양을 통제하는 *전파 모드*를 지원합니다.
+애플리케이션 성능 모니터링(APM) 트레이서 통합은 *전파 모드*를 지원하며 전파 모드는 애플리케이션에서 데이터베이스로 전달되는 정보량을 제어합니다.
 
-- `full` 모드에서는 전체 트레이스 정보를 데이터베이스로 전송하며, DBM에서 개별 트레이스를 조사할 수 있습니다. 대부분의 통합에서 사용하기를 권장하는 모드입니다.
-- `service` 모드에서는 서비스 이름을 전송하며, 데이터베이스 로드에 기여하는 서비스가 무엇인지 알 수 있습니다. 이 모드는 Oracle 및 SQL Server 애플리케이션에서만 사용할 수 있습니다.
-- `disabled` 모드에서는 전파를 비활성화하고 애플리케이션에서 어떤 정보도 전송하지 않습니다.
-Oracle 및 SQL Server는 전체 트레이스 텍스트를 포함할 시 성능 문제를 일으킬 수 있는 선언문 캐싱 동작 때문에 `full` 전파 모드를 지원하지 않습니다.
-| DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  | Oracle |
+- `full` 모드는 전체 트레이스 정보를 데이터베이스로 전송하여 DBM 내 개별 트레이스를 조사할 수 있도록 해줍니다. 대부분의 통합에서 이는 권장되는 솔루션입니다.
+- `service` 모드는 서비스 이름을 전송하여 어느 서비스가 데이터베이스 부하에 기여하는지 이해할 수 있도록 해줍니다. 이는 Oracle 및 SQL Server 애플리케이션에서만 지원되는 모드입니다.
+- `disabled` 모드는 전파를 비활성화하므로 애플리케이션에서 아무 정보도 전송하지 않습니다.
+
+SQL Server 및 Oracle은 구문 캐싱 동작 때문에 `full` 전파 모드를 지원하지 않으며 이는 전체 트레이스 컨텍스트를 포함하는 경우 성능 문제를 야기할 수 있습니다.
+
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL 서버 |  Oracle   |
 |:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full` | {{< X >}} | {{< X >}} | | |
-| `service` | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| `full`                  | {{< X >}} | {{< X >}} |            |           |
+| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
 
-**지원하는 애플리케이션 트레이서 및 드라이버**
+**지원되는 애플리케이션 트레이서 및 드라이버**
 
-| 언어 | 라이브러리 또는 프레임워크 | Postgres | MySQL | SQL Server | Oracle |
+| 언어                                 | 라이브러리 또는 프레임워크   | Postgres  |   MySQL   |     SQL 서버      |       Oracle        |
 |:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0 | | | | | |
-| | [database/sql][4] | {{< X >}} | {{< X >}} | `service` 모드만 지원 | `service` 모드만 지원 |
-| | [sqlx][5] | {{< X >}} | {{< X >}} | `service` 모드만 지원 | `service` 모드만 지원 |
-| **Java** [dd-trace-java][23] >= 1.11.0 | | | | | |
-| | [jdbc][22] | {{< X >}} | {{< X >}} | `service`  모드만 지원 | `service`  모드만 지원 |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0 | | | | | |
-| | [pg][8] | {{< X >}} | | | |
-| | [mysql2][7] | | {{< X >}} | | |
-| **Python:** [dd-trace-py][11] >= 1.9.0 | | | | | |
-| | [psycopg2][12] | {{< X >}} | | | |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 | | | | | |
-| | [Npgsql][16] * | {{< X >}} | | | |
-| | [MySql.Data][17] * | | {{< X >}} | | |
-| | [MySqlConnector][18] * | | {{< X >}} | | |
-| | [ADO.NET][24] * | | | `service`  모드만 지원 | |
-| **PHP** [dd-trace-php][19] >= 0.86.0 | | | | | |
-| | [pdo][20] | {{< X >}} | {{< X >}} | | |
-| | [MySQLi][21] | | {{< X >}} | | |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0 | | | | | |
-| | [postgres][10] | {{< X >}} | | | |
-| | [mysql][13] | | {{< X >}} | | |
-| | [mysql2][14] | | {{< X >}} | | |
-\* [CommandType.StoredProcedure][25]는 지원하지 않음
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
+|                                          | [pg][8]                | {{< X >}} |           |                     |                     |
+|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
+|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
+|                                          | [ADO.NET][24] *        |           |           | `service` 모드만 |                     |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
+|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
+|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
+|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |
+|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
+|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
+
+\* [CommandType.StoredProcedure][25] 지원 안 됨
 
 ## 설정
-최적의 경험을 하려면 애플리케이션에서 다음을 설정하세요.
+최상의 사용자 경험을 위해 다음 환경 변수가 애플리케이션에 설정되어 있는지 확인하세요.
 
 ```
 DD_SERVICE=(application name)
@@ -77,12 +76,12 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-앱 종속성을 [dd-trace-go@v1.44.0][1] 이상으로 업데이트 하세요.
+앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
-`contrib/database/sql` 패키지를 가져오도록 코드를 업데이트하세요.
+코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
@@ -91,50 +90,50 @@ import (
 )
 ```
 
-다음 메서드 중 하나를 사용해 데이터베이스 모니터링 전파 기능을 활성화합니다.
+다음 메서드 중 하나를 사용해 데이터베이스 모니터링 전파를 활성화합니다.
 1. 환경 변수:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. 드라이버 등록 중 코드 사용:
+2. 드라이버 등록 동안 코드 사용하기:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
-3. `sqltrace.Open`에서 코드 사용:
- ```go
-sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+3. `sqltrace.Open` 코드 사용하기:
+   ```go
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
-db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
-if err != nil {
-log.Fatal(err)
-}
-```
+   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
+   if err != nil {
+       log.Fatal(err)
+   }
+   ```
 
 전체 예시:
 ```go
 import (
-   "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "database/sql"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 
 func main() {
-// 첫 단계는 드라이버를 등록할 때 dbm 전파 모드를 설정하는 것입니다. 이 단계는
- // sqltrace에서도 가능합니다. 더 세세한 기능 통제를 하려면 오픈하세요.
-sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
+    // 첫 번째 단계는 드라이버 등록 시 DBM 전파 모드를 설정하는 것입니다. 이는 또한
+    // sqltrace에서도 가능하니 참고하세요. 열기를 통해 기능에 대한 보다 세분화된 통제를 확인하세요.
+    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-// 다음은 오픈 호출 뒤에 옵니다.
-db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
-if err != nil {
-log.Fatal(err)
-}
+    // 열기 호출을 진행합니다.
+    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
+    if err != nil {
+        log.Fatal(err)
+    }
 
-// 그 후 database/sql 패키지를 평소처럼 추적과 함께 사용합니다.
-rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
-if err != nil {
-log.Fatal(err)
-}
-defer rows.Close()
+    // 그 뒤 계속하여 평소처럼 데이터베이스 /sql 패키지와 트레이싱을 함께 사용합니다.
+    rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer rows.Close()
 }
 ```
 
@@ -144,22 +143,22 @@ defer rows.Close()
 
 {{% tab "Java" %}}
 
-[Java 추적][1] 계측 지침에 따라 에이전트 `1.11.0` 버전 이상을 설치합니다.
+[Java 트레이싱][1] 계측 지침에 따라 에이전트 `1.11.0` 버전 이상을 설치합니다.
 
-`jdbc-datasource` [계측][2] 또한 활성화해야 합니다.
+또한, `jdbc-datasource` [계측][2]을 활성화해야 합니다.
 
-다음 메서드 중 **하나**를 선택해 데이터베이스 모니터링 전파 기능을 활성화합니다.
+다음 방법 중 **하나**를 사용하여 데이터베이스 모니터링 전파 기능을 활성화합니다.
 
 - 시스템 속성 `dd.dbm.propagation.mode=full` 설정
 - 환경 변수 `DD_DBM_PROPAGATION_MODE=full` 설정
 
 전체 예시:
 ```
-# 필요한 시스템 속성을 갖춘 자바 에이전트로 시작
+# 필수 시스템 속성을 포함하는 자바(Java) 에이전트를 시작합니다.
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
 
-애플리케이션 기능 테스트:
+애플리케이션에서 기능 테스트:
 ```java
 public class Application {
     public static void main(String[] args) {
@@ -178,8 +177,7 @@ public class Application {
 }
 ```
 
-
-**참고**: 준비된 선언문은 `full` 모드에서 지원되지 않으며, 준비된 선언문을 사용하는 모든 JDBC API 호출은 자동으로 `service` 모드로 다운그레이드됩니다. Java SQL 라이브러리 대부분은 기본값으로 준비된 선언문을 사용하며, 이는 자바 애플리케이션 **대부분**이  `service` 모드만 사용 가능함을 뜻합니다.
+**참고**: 준비된 문장은 `full` 모드에서 지원되지 않으며, 준비된 문장을 사용하는 모든 JDBC API 호출은 자동으로 `service` 모드로 다운그레이드됩니다. 대부분의 자바(Java) SQL 라이브러리는 기본적으로 준비된 문장을 사용하므로, **대부분의** 자바(Java) 애플리케이션은 `service` 모드만 사용할 수 있습니다.
 
 [1]: /ko/tracing/trace_collection/dd_libraries/java/
 [2]: /ko/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -188,23 +186,22 @@ public class Application {
 
 {{% tab "Ruby" %}}
 
-
-Gemfile에서 [dd-trace-rb][1]를 `1.8.0`이상 버전으로 설치하거나 업데이트합니다.
+젬파일에서 [dd-trace-rb][1]을 버전 `1.8.0` 이상으로 설치하거나 업데이트합니다:
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'datadog' # v1.x을 사용하는 경우 `'ddtrace', '>= 1.8.0'`를 사용합니다.
 
-# 사용량에 따라 다름
+# 사용량에 따라 다음을 설정합니다.
 gem 'mysql2'
 gem 'pg'
 ```
 
-다음 메서드 중 하나를 선택해 데이터베이스 모니터링 전파 기능을 활성화합니다.
+다음 메서드 중 하나를 사용해 데이터베이스 모니터링 전파를 활성화합니다.
 1. 환경 변수:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. [mysql2][2]이나 [pg][3]의 경우 `comment_propagation` 옵션(기본값: `ENV['DD_DBM_PROPAGATION_MODE']`):
+2. [mysql2][2] 또는 [pg][3]의 경우 옵션 `comment_propagation`(기본값: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```rb
     Datadog.configure do |c|
         c.tracing.instrument :mysql2, comment_propagation: 'full'
@@ -237,12 +234,12 @@ client.query("SELECT 1;")
 
 {{% tab "Python" %}}
 
-앱 종속성에 [dd-trace-py>=1.9.0][1]을 포함하도록 업데이트합니다.
+[dd-trace-py>=1.9.0][1]을 포함하도록 앱 종속성 업데이트:
 ```
 pip install "ddtrace>=1.9.0"
 ```
 
-[psycopg2][2]를 설치합니다(**참고**: MySQL 클라이언트에는 DBM과 APM 연결이 지원되지 않습니다).
+[psycopg2][2] 설치:
 ```
 pip install psycopg2
 ```
@@ -263,10 +260,10 @@ POSTGRES_CONFIG = {
     "dbname": "postgres_db_name",
 }
 
-# postgres db에 연결
+# POSTGRES DB로 연결
 conn = psycopg2.connect(**POSTGRES_CONFIG)
 cursor = conn.cursor()
-# sql 쿼리 실행
+# SQL 쿼리 실행
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
 ```
@@ -279,7 +276,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% tab ".NET" %}}
 
 <div class="alert alert-warning">
-이 기능을 사용하려면  .NET 서비스에 자동 계측이 활성화되어 있어야 합니다.
+이 기능이 .NET 서비스에 대해 활성화되려면 자동 계측이 필요합니다.
 </div>
 
 [.NET Framework 추적 지침][1]이나 [.NET Core 추적 지침][2]을 따라 자동 계측 패키지를 설치하고 서비스 추적을 활성화합니다.

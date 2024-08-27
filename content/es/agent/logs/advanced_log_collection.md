@@ -25,7 +25,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada del glosario para «supervisar»
-kind: documentación
 title: Configuraciones avanzadas de recopilación de logs
 ---
 
@@ -103,7 +102,6 @@ Para aplicar una configuración específica a un contenedor determinado, Autodis
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -224,7 +222,6 @@ En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -316,7 +313,6 @@ En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -419,7 +415,6 @@ En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -524,7 +519,6 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en tu conte
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:

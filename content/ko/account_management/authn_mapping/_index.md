@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/rbac/log_management/
   tag: 설명서
   text: 로그 관리용 RBAC
-kind: 설명서
 title: 역할 매핑 API를 위한 타사 인증
 ---
 

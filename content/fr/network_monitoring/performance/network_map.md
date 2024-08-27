@@ -16,7 +16,6 @@ further_reading:
 - link: /network_monitoring/performance/setup
   tag: Documentation
   text: Recueillir vos données réseau avec l'Agent Datadog
-kind: documentation
 title: Network Map
 ---
 

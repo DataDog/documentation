@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/guide/build-container-agent
-kind: guide
 title: Datadog Agent 이미지 빌드
 ---
 

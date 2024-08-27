@@ -1,6 +1,5 @@
 ---
 title: Datadog Extension for Visual Studio
-kind: documentation
 is_beta: true
 aliases:
 - '/developers/ide_integrations/visual_studio/'
@@ -30,7 +29,7 @@ The Datadog extension for Visual Studio helps you find and fix bugs, security is
 
 ### Code insights
 
-Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], [Flaky Tests][10], and [Watchdog][7] profiling insights without leaving Visual Studio.
+Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], and [Flaky Tests][10] without leaving Visual Studio.
 
 {{< img src="/developers/ide_plugins/visual_studio/code-insights.png" alt="The Code Insights view" >}}
 
@@ -55,6 +54,7 @@ Navigate from Datadog to your source code with one click.
 {{< img src="/developers/ide_plugins/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button.">}}
 
 ### Static Analysis
+
 The Datadog extension runs [Static Analysis][19] rules on the source files you have open in your Solution. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes.
 
 Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][20]. For file types belonging to supported languages, rule violations are highlighted in the source code editor, and suggested fixes can be applied directly:
@@ -97,7 +97,6 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [5]: /tracing/error_tracking/
 [6]: /security/application_security/vulnerability_management/
-[7]: /watchdog/insights
 [8]: /profiler/
 [10]: /continuous_integration/guides/flaky_test_management/
 [12]: /integrations/guide/source-code-integration/

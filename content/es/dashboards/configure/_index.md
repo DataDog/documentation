@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/
   tag: Documentación
   text: Información general sobre los dashboards
-kind: Documentación
 title: Configurar
 ---
 

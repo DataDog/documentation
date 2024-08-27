@@ -1,6 +1,5 @@
 ---
 title: TCP Testing
-kind: documentation
 description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test
@@ -131,7 +130,7 @@ You can restrict access to a TCP test based on the roles in your organization. W
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: /monitors/notify/#notify-your-team
+[4]: /monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /synthetics/guide/synthetic-test-monitors

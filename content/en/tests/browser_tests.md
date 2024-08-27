@@ -1,6 +1,5 @@
 ---
 title: Instrument Your Browser Tests With RUM
-kind: documentation
 description: Learn how to use CI Visibility and RUM to connect your test results with browser sessions and session replays.
 aliases:
 - /continuous_integration/guides/rum_integration
@@ -40,6 +39,7 @@ RUM integration is supported for Cypress browser tests and Selenium-driven brows
 * `selenium-js` >= 4.11.0, `dd-trace-js` >= 5.11.0 / >= 4.35.0
 * `selenium-java` >= 3.141.59, `dd-trace-java` >= 1.34.0
 * `selenium-dotnet` >= 3.0.0, `dd-trace-dotnet` >= 2.51.0
+* `selenium-ruby` >= 4.0.0, `datadog-ci` >= 1.0.0.beta6
 * `browser-sdk` >= 5.15.0
 
 <blockquote class="alert alert-info">

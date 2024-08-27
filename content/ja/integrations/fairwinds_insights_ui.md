@@ -9,6 +9,7 @@ author:
   support_email: insights@fairwinds.com
 categories:
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/fairwinds_insights_ui/README.md
 display_on_public_website: true
@@ -18,7 +19,6 @@ integration_id: fairwinds-insights-ui
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: fairwinds_insights_ui
 public_title: Fairwinds Insights
@@ -55,7 +55,7 @@ Fairwinds Insights は、ミッションクリティカルな Kubernetes アプ�
 
 Fairwinds Insights は、セキュリティ、効率性、信頼性に関連する Kubernetes クラスターの問題を発見します。このアプリでは、最新のアクションアイテムを Datadog ダッシュボード内で直接確認することができ、組織の他のメンバーに割り当てたり、解決済みとしてマークしたりすることができます。
 
-## 計画と使用
+## セットアップ
 
 このアプリを使用するには、insights.fairwinds.com にアカウントを持つ必要があります。また、Datadog マーケットプレイスで Fairwinds Insights にサインアップすることも可能です。
 

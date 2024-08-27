@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: システム
 integration_title: Directory
 integration_version: 2.1.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: directory
 public_title: Directory
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
   media: []
@@ -66,13 +67,13 @@ tile:
 - 最終更新からの経過時間
 - 作成からの経過時間
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Directory のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `directory.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル directory.d/conf.yaml][3] を参照してください。
 
@@ -97,21 +98,21 @@ Directory チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `directory` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "directory" >}}
 
 
-### ヘルプ
+### イベント
 
 Directory チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "directory" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 非常に大きなディレクトリに対してチェックを実行し、再帰が true に設定されている場合、I/O と CPU に負荷がかかることに注意してください。デフォルトのチェック頻度である 15 秒ごとを調整する必要があるかもしれません。
 

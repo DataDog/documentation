@@ -7,7 +7,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags
   tag: Documentación
   text: Más información sobre cómo asignar etiquetas (tags)
-kind: guía
 title: Prácticas recomendadas para el etiquetado de eventos
 ---
 
@@ -46,7 +45,7 @@ Puedes añadir los siguientes atributos básicos a tus eventos:
 [1]: /es/getting_started/tagging/unified_service_tagging
 [2]: /es/service_management/events/explorer
 [3]: /es/api/latest/events/#post-an-event
-[4]: /es/getting_started/monitors/#notify-your-team
+[4]: /es/getting_started/monitors/#notify-your-services-and-your-team-members
 [5]: /es/getting_started/tagging/assigning_tags
 [6]: /es/integrations/
 [7]: https://app.datadoghq.com/event/explorer

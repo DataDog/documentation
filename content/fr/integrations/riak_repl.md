@@ -18,7 +18,7 @@ integration_id: riak-repl
 integration_title: Riak MDC Replication
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: britt.treece@gmail.com
 manifest_version: 1.0.0
 metric_prefix: riak_repl.

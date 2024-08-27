@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터 알림 설정
-kind: 가이드
 title: 현지 시간대를 고려하여 이상 감지 모니터를 업데이트하는 방법
 ---
 

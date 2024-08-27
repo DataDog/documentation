@@ -15,7 +15,7 @@ integration_id: akamai-mpulse
 integration_title: Akamai mPulse
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: akamai_mpulse
 public_title: Datadog/Akamai mPulse

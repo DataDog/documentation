@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/
   tag: 설명서
   text: 클러스터 Agent 시작하기
-kind: 도움말
 title: 도커(Docker) 환경용 컨테이너 이미지
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/types/anomaly/
   tag: 설명서
   text: 이상 징후 모니터
-kind: 가이드
 title: 비정적 임계값을 모니터링하는 방법
 ---
 

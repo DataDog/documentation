@@ -1,6 +1,5 @@
 ---
 title: Teams
-kind: documentation
 ---
 
 ## Overview

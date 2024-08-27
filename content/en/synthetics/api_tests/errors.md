@@ -1,6 +1,5 @@
 ---
 title: API Testing Errors
-kind: documentation
 description: Detailed description of API test errors
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -49,6 +48,6 @@ SSL errors can occur during an API test run. They are different from failing ass
 | `UNABLE_TO_DECRYPT_CERT_SIGNATURE`   | Unable to decrypt the signature of the certificate.                                                                                                                      |
 | `UNABLE_TO_DECRYPT_CRL_SIGNATURE`    | The CRL signature cannot be decrypted. (The actual signature value cannot be determined.)                                                                                |
 | `UNABLE_TO_GET_CRL`                  | The certificate revocation list (CRL) is not found.                                                                                                                      |
-| `UNABLE_TO_GET_ISSUER_CERT`          | Unable to find the certificate for one of the certificate authorities (CAs) in the signing hierarchy, and that CA is not trusted by the local application.               |
-| `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`  | The issuer certificate of a locally found certificate is not found. This usually means that the list of trusted certificates is not complete.                            |
+| `UNABLE_TO_GET_ISSUER_CERT`          | Unable to find the certificate for one of the certificate authorities (CAs) in the signing hierarchy, and that CA is not trusted by the local application. For example, this error may be thrown when the self-signed root CA, but not the intermediate CA, is missing from the list of trusted certificates.               |
+| `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`  | The issuer certificate of a locally found certificate is not found. This usually means that the list of trusted certificates is not complete. For example, this error may be thrown when the self-signed root CA and intermediate CA are both missing from the list of trusted certificates.                            |
 | `UNABLE_TO_VERIFY_LEAF_SIGNATURE`    | No signatures are verified because the certificate chain contains only one certificate, which is not self-signed, and the issuer is not trusted.                         |

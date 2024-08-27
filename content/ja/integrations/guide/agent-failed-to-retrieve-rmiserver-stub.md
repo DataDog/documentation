@@ -1,5 +1,4 @@
 ---
-kind: faq
 title: Agent が RMIServer スタブの取得に失敗します
 ---
 

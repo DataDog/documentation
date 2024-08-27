@@ -1,6 +1,5 @@
 ---
 title: Metrics FAQ
-kind: faq
 cascade:
   - private: true
 ---

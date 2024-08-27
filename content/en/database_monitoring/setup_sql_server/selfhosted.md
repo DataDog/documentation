@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self-hosted SQL Server
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted SQL Server
 further_reading:
 - link: "/integrations/sqlserver/"
@@ -73,6 +72,9 @@ CREATE USER datadog FOR LOGIN datadog;
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ## Install the Agent
 

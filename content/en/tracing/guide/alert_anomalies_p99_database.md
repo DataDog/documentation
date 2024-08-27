@@ -1,6 +1,6 @@
 ---
 title: Alert on anomalous p99 latency of a database service
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
@@ -47,8 +47,9 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][7].
 
-6. **Make sure your username appears in the *Notify your team* box** and add any additional team members that should be notified in case of a database latency anomaly.
-    **Note**: To add another user be sure to type `@` at the start. **Click on *Save***.
+6. **Make sure your username appears in the *Configure notifications and automations notification* field** and add any additional team members that should be notified in case of a database latency anomaly.
+
+    **Note**: To add another user, type `@` at the start. **Click *Save***.
 
     Your alert is now set, you can tweak any of the parameters from this screen and follow the metric performance.
 

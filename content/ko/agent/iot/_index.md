@@ -3,7 +3,6 @@ further_reading:
 - link: /getting_started/agent/
   tag: 설명서
   text: Agent 시작하기
-kind: 설명서
 title: IoT Agent
 ---
 
@@ -52,7 +51,7 @@ IoT Agent는 x64, arm64(ARMv8), ARMv7 아키텍처에서 실행 중인 Linux 기
 사용 중인 운영 체제와 칩셋 아키텍처에 적합한 IoT Agent를 자동으로 다운로드하여 설치하려면 다음 명령어를 사용하세요.
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 #### 수동
@@ -74,6 +73,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -120,6 +120,7 @@ RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public

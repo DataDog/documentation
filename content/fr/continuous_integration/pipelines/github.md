@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: blog
   text: Surveiller les workflows GitHub Actions avec CI Visibility de Datadog
-kind: documentation
 title: Configurer le tracing sur les workflows GitHub Actions
 ---
 

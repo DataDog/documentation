@@ -7,7 +7,6 @@ further_reading:
 - link: /integrations/guide/cloud-metric-delay/
   tag: Guide
   text: Délai de réception des métriques cloud
-kind: guide
 title: Pourquoi installer l'Agent Datadog sur mes instances cloud ?
 ---
 

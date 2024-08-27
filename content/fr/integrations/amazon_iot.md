@@ -16,7 +16,7 @@ integration_id: amazon-iot
 integration_title: Amazon Internet of Things
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_iot
 public_title: Intégration Datadog/Amazon Internet of Things

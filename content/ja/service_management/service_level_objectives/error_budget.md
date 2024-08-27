@@ -6,7 +6,6 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: サービスレベル目標の概要
-kind: documentation
 title: エラー予算アラート
 ---
 
@@ -14,11 +13,15 @@ title: エラー予算アラート
 
 SLO エラーバジェットアラートは閾値に基づき、SLO のエラーバジェットの一定の割合が消費されなかったときに通知します。たとえば、対象とする 7 日間でエラーバジェットの 75% が消費されたらアラート、50% が消費されたら警告（オプション）のように設定します。
 
-**注:** エラーバジェットアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
+**Note:** Error budget alerts are available for the following SLO types:
+
+- [Metric-based SLOs][1],
+- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
+- [Time Slice SLOs][8]
 
 *エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][3]を参照してください。
 
-{{< img src="service_management/service_level_objectives/error_budget_alert_config.png" alt="エラーバジェットアラートのコンフィギュレーション">}}
+{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
 
 ## モニターの作成
 
@@ -27,10 +30,10 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 3.  **Step 1: Setting alerting conditions** の **Error Budget**  タブを選択
 4. 過去の `target` 日数において、エラーバジェットの消費割合が `threshold` を超えるとアラートをトリガーするタイミングを設定します。
 。
-4. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][5]を追加します。
-5. SLO コンフィギュレーションページで **Save and Set Alert** ボタンをクリックします。
+4. Add [Notification information][5] in the **Configure notifications and automations** section.
+5. Click the **Create & Set Alert** button on the SLO configuration page.
 
-{{< img src="service_management/service_level_objectives/save_set_alert.png" alt="SLO を保存してエラーバジェットアラートをセットアップ">}}
+{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
 
 ### API および Terraform
 
@@ -52,7 +55,7 @@ resource "datadog_monitor" "metric-based-slo" {
     type  = "slo alert"
 
     query = <<EOT
-    error_budget("slo_id").over("time_window") > 75 
+    error_budget("slo_id").over("time_window") > 75
     EOT
 
     message = "Example monitor message"
@@ -75,3 +78,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [5]: /ja/monitors/notify/
 [6]: /ja/api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[8]: /ja/service_management/service_level_objectives/time_slice

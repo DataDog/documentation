@@ -1,6 +1,5 @@
 ---
 title: Watchdog Monitor
-kind: documentation
 description: "Algorithmically detects application and infrastructure issues."
 aliases:
 - /monitors/monitor_types/watchdog
@@ -41,7 +40,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 
 ### Notifications
 
-For more instructions on the **Notify your team** section, see the [Notifications][4] page.
+For more instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 ## Further Reading
 

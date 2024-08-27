@@ -1,6 +1,5 @@
 ---
 title: Deployment
-kind: documentation
 further_reading:
 - link: "/opentelemetry/collector_exporter/configuration/"
   tag: "Documentation"

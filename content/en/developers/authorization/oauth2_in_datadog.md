@@ -1,6 +1,5 @@
 ---
 title: OAuth2 in Datadog
-kind: documentation
 description: Learn about how Datadog uses OAuth 2.0.
 further_reading:
 - link: "/developers/authorization/oauth2_endpoints"

@@ -32,7 +32,6 @@ further_reading:
 - link: /tracing/services/resource_page/
   tag: Documentation
   text: Plonger au cœur des traces et des performances de vos ressources
-kind: documentation
 title: Syntaxe de requête
 ---
 

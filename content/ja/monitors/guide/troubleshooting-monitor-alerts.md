@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/set-and-monitor-slas/
   tag: ブログ
   text: Datadog によるサービスの監視と SLA 設定
-kind: ガイド
 title: モニターアラートのトラブルシューティング
 ---
 
@@ -81,6 +80,8 @@ title: モニターアラートのトラブルシューティング
 
 モニターで複数の `@opsgenie-[...]` 通知を使用している場合、同じエイリアスを持つそれらの通知を Opsgenie に送信します。
 [Opsgenie の機能][19]により、Opsgenie は重複とみなされたものを破棄します。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

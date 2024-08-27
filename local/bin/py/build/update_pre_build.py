@@ -44,9 +44,13 @@ class Build:
             join(self.tempdir, "extracted") + sep
         )
 
+        # Should match directory name in integrations_data/extracted
         self.apw_integrations = [
             'ably',
-            'akamai_mpulse'
+            'akamai_mpulse',
+            'avmconsulting_workday',
+            'bottomline_mainframe',
+            'nerdvision'
         ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):

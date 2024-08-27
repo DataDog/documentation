@@ -6,8 +6,8 @@ further_reading:
 - link: /ja/dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築
-kind: documentation
 title: イメージウィジェット
+widget_type: image
 ---
 
 イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、URLでアクセスできる場所でホストされている PNG、JPG、またはアニメーション GIF を使用できます。
@@ -26,9 +26,7 @@ title: イメージウィジェット
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
-
-イメージウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは **[Dashboards API][1]** で使用できます。[ウィジェット JSON スキーマ定義][2]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -36,5 +34,5 @@ title: イメージウィジェット
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/dashboards/
+[1]: /ja/api/latest/dashboards/
 [2]: /ja/dashboards/graphing_json/widget_json/

@@ -8,7 +8,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works//
   tag: Documentation
   text: Fonctionnement d'Application Security Management
-kind: documentation
 title: Qualification des traces
 ---
 

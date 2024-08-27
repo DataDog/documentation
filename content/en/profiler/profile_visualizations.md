@@ -1,6 +1,5 @@
 ---
 title: Profile Visualizations
-kind: documentation
 aliases:
     - /tracing/profiling/search_profiles/
     - /tracing/profiler/search_profiles/
@@ -15,6 +14,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiler-timeline-view/'
+      tag: 'Blog'
+      text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
 
 ## Search profiles
@@ -84,19 +86,13 @@ Four tabs are below the profile header:
 
 - Compare this profile with others
 - View repository commit
-- View traces for the same process and timeframe
+- View traces for the same process and time frame
 - Download the profile
 - Open the profile in full page
 
 ### Timeline view
 
-The timeline view is the equivalent of the flame graph, with a distribution over time.
-
-{{< img src="profiler/profiling_viz-timeline2.png" alt="A timeline" >}}
-
-It shows time-based patterns and work distribution over:
-- [The period of a single profile](#single-profile)
-- [A trace][6]
+The timeline view is equivalent to the flame graph, with time-based patterns and work distribution over [the period of a single profile](#single-profile), a single process in [profiling explorer][7] and [a trace][6].
 
 Compared to the flame graph, the timeline view can help you:
 
@@ -104,9 +100,16 @@ Compared to the flame graph, the timeline view can help you:
 - Sort out complex interactions between threads
 - Surface runtime activity that impacted the process
 
+{{< img src="profiler/profiling_viz-timeline3.png" alt="A timeline" >}}
+
+To access the timeline view:
+
+1. Go to [**APM** > **Profiles** > **Explorer**][7].
+2. Set the **Visualize as** option to **Thread Timeline**.
+
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -115,6 +118,13 @@ Lanes on top are runtime activities that may impact performance.
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
 
 [1]: https://www.datadoghq.com/blog/request-latency-profiling/
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+See [prerequisites][1] to learn how to enable this feature for Python.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+
+[1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 See [prerequisites][1] to learn how to enable this feature for Go.
@@ -183,3 +193,4 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 [4]: /profiler/profile_types/
 [5]: /dashboards/widgets/profiling_flame_graph
 [6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[7]: https://app.datadoghq.com/profiling/explorer?viz=thread_timeline

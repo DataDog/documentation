@@ -1,6 +1,5 @@
 ---
 title: Threat Intelligence
-kind: documentation
 further_reading:
 - link: "https://docs.datadoghq.com/security/threat_intelligence/"
   tag: "Documentation"

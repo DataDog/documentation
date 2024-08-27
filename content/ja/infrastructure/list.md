@@ -12,13 +12,12 @@ further_reading:
 - link: /infrastructure/process/
   tag: ドキュメント
   text: ライブプロセスモニタリング
-kind: documentation
 title: インフラストラクチャーリスト
 ---
 
 ## 概要
 
-インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。
+インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。Datadog で [**Infrastructure > Hosts**][10] に移動してインフラストラクチャーリストを表示します。
 
 ## ホスト
 
@@ -48,7 +47,7 @@ Load 15
 Apps
 : ホストのメトリクスをレポートする Datadog インテグレーション。
 
-Operating System 
+Operating System
 : 追跡対象のオペレーティングシステム
 
 Cloud Platform
@@ -93,7 +92,7 @@ Agent は、ホスト詳細パネルの `Agent Configuration` セクションに
 
 Agent 構成は、機密情報が取り除かれ、コンフィギュレーションファイルや環境変数を使って設定した構成のみが含まれます。構成の変更は 10 分ごとに更新されます。
 
-この機能は、Agent バージョン 7.47.0/6.47.0 以降でデフォルトで有効になっています。 
+この機能は、Agent バージョン 7.47.0/6.47.0 以降でデフォルトで有効になっています。
 
 
 この動作を変更するには、[Agent コンフィギュレーションファイル][6]の `inventories_configuration_enabled` の値を `true` に設定すると構成が送信され、`false` に設定すると無効になります。
@@ -152,7 +151,8 @@ for host in infra['rows']:
 [3]: /ja/metrics/
 [4]: /ja/infrastructure/livecontainers/?tab=helm#overview
 [5]: /ja/logs/
-[6]: /ja/agent/guide/agent-configuration-files/
+[6]: /ja/agent/configuration/agent-configuration-files/
 [7]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
+[10]: https://app.datadoghq.com/infrastructure

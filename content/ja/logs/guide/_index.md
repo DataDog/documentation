@@ -5,17 +5,16 @@ cascade:
     rank: 20
     subcategory: ログガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: ログガイド
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}
-    {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}ログ検索 API を使用してログデータにプログラマティックにアクセスする{{< /nextlink >}}
+    {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}ログ検索 API を使用してログデータにプログラムからアクセスする{{< /nextlink >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ ガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}ログとメトリクスの相関{{< /nextlink >}}
     {{< nextlink href="logs/guide/best-practices-for-log-management" >}}ログ管理のベストプラクティス{{< /nextlink >}}
-    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Terraform によるログとメトリクスの管理{{< /nextlink >}}
+    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Terraform を使用してログとメトリクスを管理する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -68,6 +67,7 @@ title: ログガイド
     {{< nextlink href="logs/guide/logs-rbac" >}}ログ用に RBAC を設定する方法{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}ログの RBAC アクセス許可の詳細{{< /nextlink >}}
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}クエリベースのアクセス制御を使用して機密データへのアクセスを制限する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}機密データを含むログを削除する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog インテグレーション" >}}

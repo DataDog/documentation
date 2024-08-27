@@ -1,6 +1,5 @@
 ---
 title: React Native Crash Reporting and Error Tracking
-kind: documentation
 description: Set up Error Tracking for your React Native projects.
 aliases:
 - /real_user_monitoring/error_tracking/reactnative
@@ -16,7 +15,7 @@ further_reading:
   text: Learn about Error Tracking
 - link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
   tag: Blog
-  text: RUM now offers React Native Crash Reporting and Error Tracking
+  text: Datadog now offers React Native Crash Reporting and Error Tracking
 
 ---
 
@@ -34,7 +33,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the RUM React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native RUM setup documentation][3].
+If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native setup documentation][3].
 
 ### Add Crash Reporting
 
@@ -44,7 +43,7 @@ Update your initialization snippet to enable native JavaScript crash reporting:
 const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true,
     true,
     true // enable JavaScript crash reporting
@@ -53,6 +52,10 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
 ## Get deobfuscated stack traces
+
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+For React Native applications, the matching of stack traces and sourcemaps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all sourcemaps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
@@ -80,6 +83,12 @@ project.ext.datadog = [
 #### Using the `datadog-ci react-native xcode` command
 
 Options for the `datadog-ci react-native xcode` command are available on the [command documentation page][12].
+
+#### Specifying a custom release version
+
+Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your sourcemaps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
+
+When the SDK is initialized with a version suffix, you must manually override the release version in order for the sourcemap and build versions to match.
 
 ## Limitations
 
@@ -111,7 +120,7 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 ## Test your implementation
 
-To verify your React Native Crash Reporting and Error Tracking configuration, you need to issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your React Native Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 

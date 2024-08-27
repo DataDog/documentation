@@ -7,7 +7,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: 에이전트 트러블슈팅
   text: 에이전트 점검의 상태 파악하기
-kind: 설명서
 title: CPU 또는 메모리 사용량이 높을 경우
 ---
 

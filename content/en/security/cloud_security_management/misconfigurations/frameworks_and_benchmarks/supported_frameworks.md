@@ -1,6 +1,5 @@
 ---
 title: Supported Frameworks
-kind: documentation
 aliases:
   - /security/misconfigurations/supported_frameworks
   - /security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
@@ -28,8 +27,8 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 | [CIS GCP Foundations Benchmark v1.3.0][22]  | `cis-gcp`         | Cloud                    |
 | [CIS Docker Benchmark v1.2.0][4]            | `cis-docker `     | Infrastructure           |
 | [CIS Kubernetes Benchmark v1.7.0**][5]      | `cis-kubernetes`  | Infrastructure           |
-| [CIS Kubernetes Benchmark v1.4.0**][5]      | `cis-aks`         | Cloud and Infrastructure |
-| [CIS Kubernetes Benchmark v1.3.0 **][5]     | `cis-eks`         | Cloud and Infrastructure |
+| [CIS Kubernetes (AKS) Benchmark v1.4.0**][5]      | `cis-aks`         | Cloud and Infrastructure |
+| [CIS Kubernetes (EKS) Benchmark v1.3.0 **][5]     | `cis-eks`         | Cloud and Infrastructure |
 | [CIS Ubuntu 20.04 v1.0.0][23]               | `cis-ubuntu2004`  | Infrastructure           |
 | [CIS Ubuntu 22.04 v1.0.0][23]               | `cis-ubuntu2204 ` | Infrastructure           |
 | [CIS Red Hat Linux 7 v3.1.1][24]            | `cis-rhel7`       | Infrastructure           |

@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: AWS DMS(Database Migration Service)
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_dms
 public_title: Datadog-AWS DMS(Database Migration Service) 통합

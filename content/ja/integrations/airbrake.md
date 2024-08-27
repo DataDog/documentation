@@ -24,6 +24,7 @@ categories:
 - metrics
 - event management
 - issue tracking
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +33,6 @@ integration_id: airbrake
 integration_title: Airbrake
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: airbrake
 public_title: Airbrake
@@ -44,6 +44,7 @@ tile:
   - Category::Metrics
   - Category::Event Management
   - Category::問題の追跡
+  - Offering::Integration
   configuration: README.md#Setup
   description: イベントストリームで Airbrake の例外を表示、検索、議論。
   media: []
@@ -63,9 +64,9 @@ Airbrake を Datadog に接続すると、以下のことができます。
 
 {{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake" popup="true">}}
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 Webhook を使用して Airbrake インテグレーションをセットアップします。
 
@@ -83,21 +84,21 @@ Webhook を使用して Airbrake インテグレーションをセットアッ�
 
 [イベントエクスプローラー][2]にアクセスすると、Airbrake からの新しいエラーが表示されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "airbrake" >}}
 
 
-### ヘルプ
+### イベント
 
 Airbrake インテグレーションは、Airbrake からのエラーをイベントとして表示します。
 
-### ヘルプ
+### サービスチェック
 
 Airbrake インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

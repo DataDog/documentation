@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/intelligent_test_runner
   tag: Documentation
   text: Intelligent Test Runner について
-kind: documentation
 title: CI Visibility のトラブルシューティング
 ---
 
@@ -29,27 +28,31 @@ title: CI Visibility のトラブルシューティング
 
 ## パイプラインが見つかりません
 
-[`running` パイプラインをサポートしていない CI プロバイダー][15]では、進行中のパイプラインから送られてくる不完全なデータをクリックすると、「パイプラインが見つかりません」というメッセージが表示されます。ステージ、ジョブ、カスタムコマンドのデータは、順次受信されます。パイプラインが終了するまで待ち、再度お試しください。
+[`running` パイプラインをサポートしていない CI プロバイダー][15]で、進行中のパイプラインから送られてくる不完全なデータをクリックすると、「パイプラインが見つかりません」というメッセージが表示されます。ステージ、ジョブ、カスタムコマンドのデータは、順次受信されます。パイプラインが終了するまで待ち、再度お試しください。
 
-## Pipelines ページにパイプラインが表示されない
+## Pipelines ページでパイプラインが欠落している
 
-パイプラインページには、Git 情報がないパイプライン、または Git 情報があり Git リポジトリのデフォルトブランチに属するパイプラインのみが表示されます。
+パイプラインページには、Git 情報のないパイプラインか、Git リポジトリのデフォルトブランチに属するGit 情報を持つパイプラインしか表示されません。
 
-## サマリーテーブルにステージやジョブがない
+## サマリーテーブルでステージやジョブが欠落している
 
-_Pipeline Details_ ページでステージやジョブが見つからないのは、構成が間違っている可能性があります。ステージまたはジョブの実行に保存されているパイプライン名が、その親パイプラインの**同じ**名前と一致していることを確認してください。カスタムパイプラインを使用している場合は、[公開 API エンドポイント仕様][15]を参照してください。
+_Pipeline Details_ ページでステージやジョブが見つからないのは、構成が間違っている可能性があります。ステージまたはジョブの実行に保存されているパイプライン名が、親パイプラインの**同じ**名前と一致していることを確認してください。カスタムパイプラインを使用している場合は、[公開 API エンドポイント仕様][15]を参照してください。
 
-### 実行中のパイプラインの制限
+## Missing variables in Gitlab pipelines
 
-#### Webhook イベントの配信は、CI プロバイダーによって保証されていない
+[User-defined variables in Gitlab][16] should be reported in the field `@ci.parameters` in CI Visibility. However, this information is only present in some cases like downstream pipelines, and may be missing for the rest of the cases since Gitlab [does not always report this information][17] to Datadog.
 
-実行中のパイプラインのサポートは、実行ステータスを示す CI プロバイダーから送信されるデータに依存しています。このデータが利用できない場合、Datadog で `Running` とマークされた実行はすでに終了している可能性があります。
+### Limitations on running pipelines
 
-#### パイプライン実行の最大期間
+#### Delivery of webhook events is not guaranteed by CI providers
 
-パイプライン実行は、最大 3 日間 `Running` ステータスを維持できます。それ以降も実行されている場合、パイプライン実行は CI Visibility に表示されません。パイプライン実行が 3 日後に終了した場合、終了したパイプライン実行は、対応する最終ステータス (`Success`、`Error`、`Canceled`、`Skipped`) と正しい期間とともに CI Visibility に表示されます。
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished.
 
-## その他の参考資料
+#### Maximum duration for a pipeline execution
+
+A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -68,3 +71,5 @@ _Pipeline Details_ ページでステージやジョブが見つからないの�
 [13]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
 [14]: /ja/continuous_integration/tests/#supported-features
 [15]: /ja/continuous_integration/pipelines/#supported-features
+[16]: https://docs.gitlab.com/ee/ci/variables/#define-a-cicd-variable-in-the-gitlab-ciyml-file
+[17]: https://gitlab.com/gitlab-org/gitlab/-/issues/29539

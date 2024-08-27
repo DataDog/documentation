@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: 컨테이너에서 호스트 이름 탐지
 ---
 
@@ -70,7 +69,6 @@ datadog:
 `DatadogAgent` Kubernetes 리소스:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -87,7 +85,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -138,7 +135,6 @@ datadog:
 `DatadogAgent` Kubernetes 리소스:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -159,7 +155,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:

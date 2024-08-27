@@ -16,7 +16,6 @@ further_reading:
 - link: /dashboards/functions/exclusion/
   tag: 설명서
   text: 제외 함수
-kind: 설명서
 title: 고급 필터링
 ---
 

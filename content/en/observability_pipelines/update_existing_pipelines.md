@@ -1,6 +1,5 @@
 ---
 title: Update Existing Pipelines
-kind: documentation
 disable_toc: false
 ---
 
@@ -21,11 +20,21 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 
 On the the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. If you want to update source environment variables, update the information based on your selected logs source.
+1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
 {{% tab "Datadog Agent" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
+
+{{% /tab %}}
+{{% tab "Fluent" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/fluent %}}
+
+{{% /tab %}}
+{{% tab "HTTP Client" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -43,12 +52,22 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
 
 {{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
+
+{{% /tab %}}
 {{< /tabs >}}
-1. If you want to update destination environment variables, update the information based on your selected logs destinations.
+1. If you want to update destination environment variables, update the information for your log destination.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -64,6 +83,31 @@ On the the Worker installation page:
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{< /tabs >}}

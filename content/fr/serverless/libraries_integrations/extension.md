@@ -3,7 +3,6 @@ aliases:
 - /fr/serverless/datadog_lambda_library/extension
 dependencies:
 - https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
-kind: documentation
 title: Extension Lambda Datadog
 ---
 [![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)

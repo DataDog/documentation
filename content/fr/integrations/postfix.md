@@ -26,7 +26,7 @@ integration_id: postfix
 integration_title: Postfix
 integration_version: 1.12.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: postfix.

@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: AWS에서 쿠버네티스(Kubernetes)를 사용해 호스트 복제
 ---
 

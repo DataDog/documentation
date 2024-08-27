@@ -10,7 +10,6 @@ further_reading:
 - link: real_user_monitoring/connect_rum_and_traces/
   tag: ドキュメント
   text: RUM とトレースの接続
-kind: documentation
 title: Watchdog Impact Analysis
 ---
 

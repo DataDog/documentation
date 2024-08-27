@@ -1,6 +1,5 @@
 ---
 title: Best practices for maintaining relevant dashboards
-kind: guide
 aliases:
   - /graphing/faq/maintain-relevant-dashboards
   - /graphing/guide/maintain-relevant-dashboards

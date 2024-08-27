@@ -14,7 +14,7 @@ has_logo: true
 integration_id: cloudcheckr
 integration_title: CloudCheckr
 is_public: true
-kind: integration
+custom_kind: integration
 name: cloudcheckr
 public_title: Datadog-CloudCheckr 통합
 short_description: CloudCheckr에 Datadog 메트릭을 추가해 AWS 사용량을 모니터링 및 최적화하세요.

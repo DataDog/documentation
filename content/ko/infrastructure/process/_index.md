@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/process-level-data/
   tag: 블로그
   text: 프로세스 수준 앱과 네트워크 데이터로 빠른 문제 해결
-kind: 도움말
 title: 실시간 프로세스
 ---
 
