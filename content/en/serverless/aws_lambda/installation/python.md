@@ -463,7 +463,7 @@ def get_message():
 [1]: https://app.datadoghq.com/functions
 [2]: /serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /serverless/configuration/
-[4]: /serverless/custom_metrics?tab=python
+[4]: /serverless/aws_lambda/metrics/?code-lang=python
 [5]: /tracing/custom_instrumentation/python/
 [6]: /security/application_security/serverless/
 [7]: https://github.com/DataDog/datadog-lambda-extension
