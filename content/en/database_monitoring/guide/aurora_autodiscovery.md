@@ -79,8 +79,17 @@ database_monitoring:
     aurora:
       enabled: true
 ```
-
+If your agent is on running on ecs fargate, you need agent [version 7.54.0](https://github.com/DataDog/datadog-agent/releases/tag/7.54.0) or above and specify the region as shown below:
+```yaml
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      region: your-region
+```
 By default, the listener only discovers Aurora clusters in the account and region where the Agent is running, and only those with the `datadoghq.com/scrape:true` tag. You can also configure the listener to discover clusters with specific tags.
+
+
 
 To specify custom tags for Aurora cluster discovery in the `datadog.yaml` file:
 
