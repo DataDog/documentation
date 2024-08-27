@@ -229,6 +229,7 @@ Makefile.config
 # data
 data/permissions.json
 data/agent_config.json
+data/workflow_bundles.json
 
 agent_config_types_list.txt
 
