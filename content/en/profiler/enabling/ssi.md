@@ -34,14 +34,14 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 1. Go to the [Agent Installation Page][2] and select one of Linux platforms or Docker.
 1. Toggle the "Enable APM Instrumentation" switch. (If there is no switch, the platform is not supported by SSI.) Toggling the switch adds the `DD_APM_INSTRUMENTATION_ENABLED=` environment variable to the installation command, configuring the installed agent to inject the tracer library into processes.
 1. Copy the installation command into a text editor.
-1. Add `DD_PROFILING_ENABLED=auto` as an additional environment variable after `DD_APM_INSTRUMENTATION_ENABLED` in the copied command. This turns on automatic profiler enablement for all processes.
+1. Add `DD_PROFILING_ENABLED=auto` as an additional environment variable after `DD_APM_INSTRUMENTATION_ENABLED` in the copied command. This turns on automatic profiler enablement for any new process worth profiling.
 1. Proceed with the rest of the installation instructions, using the modified installation command.
 
 ## How does profiling work with SSI
 
-After the installation, all processes on the host or in the container are executed with the
-`DD_PROFILING_ENABLED=auto` environment variable. The Datadog library dynamically turns on the
-profiler for the processes that are good profiling candidates.
+After the installation, all new processes on the host or in the container are executed with the
+`DD_PROFILING_ENABLED=auto` environment variable. Running processes will not be affected.
+The Datadog library dynamically turns on the profiler for the processes that are good profiling candidates.
 
 The logic for identifying a process as a good candidate varies by language. For Java,
 all processes that are profiled as Java applications are usually deployed as a single Java process on a
