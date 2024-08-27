@@ -31,6 +31,7 @@ author:
 categories:
 - マーケットプレイス
 - 開発ツール
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-snaplogic
 integration_title: SnapLogic
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -88,7 +88,7 @@ tile:
 ## 概要
 SnapLogic は、クラウドデータソース、SaaS アプリケーション、オンプレミスのビジネスアプリケーションを接続するための iPaaS (Integration Platform as a Service) ツールを提供するソフトウェア企業です。RapDev による SnapLogic インテグレーションは、Agent チェックベースのインテグレーションで、SnapLogic REST API にクエリを実行して、[Snaplex][8] とパイプラインのデータをメトリクスとして、組織のアクティビティをログとして取得します。
 
-### ワークフローの自動化
+### Logs
 このインテグレーションでは、`collect_activity_logs` が `conf.yaml` ファイルで有効になっている場合にのみ、 SnapLogic 組織のアクティビティログが収集されます。
 
 ## Agent
@@ -102,7 +102,7 @@ SnapLogic は、クラウドデータソース、SaaS アプリケーション�
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織にとって重要な機能が欠けていますか？[こちら][7]から私たちにメッセージをお送りいただければ、我々が作成いたします！！*
+*お探しのインテグレーションが見つかりませんか？組織にとって重要な機能が欠けていますか？[こちら][7]からメッセージをお送りいただければ、我々が作成いたします！！*
 
 ---
 [1]: mailto:sales@rapdev.io

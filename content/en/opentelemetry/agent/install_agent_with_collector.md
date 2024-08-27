@@ -7,9 +7,19 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
+<<<<<<< HEAD
 ## Overview
 
 The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source Collector distribution that includes:
+=======
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< /callout >}} 
+
+## Overview
+
+The Datadog Agent with embedded OpenTelemetry Collector is an open source Collector distribution that includes:
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 - Built-in Datadog pipelines and extensions
 - Support for traces, metrics, and logs
@@ -19,7 +29,11 @@ The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source
 
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
 
+<<<<<<< HEAD
 <div class="alert alert-info">If your application is already instrumented with the OTel SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
+=======
+<div class="alert alert-info">If your application is already instrumented with the OpenTelemetry SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 
 ## Requirements
@@ -38,7 +52,10 @@ Install and set up the following on your machine:
 - Helm (v3+)
 - [Docker][50]
 - [kubectl][5]
+<<<<<<< HEAD
 - Ensure all OTel components are compatible with the [embedded OpenTelemetry Collector version][51]
+=======
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 **Configuration**
 
@@ -84,8 +101,13 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
    ```shell
    touch datadog-values.yaml
    ```
+<<<<<<< HEAD
    <div class="alert alert-info">Unspecified parameters will use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
 1. Configure the Datadog API and Application key secrets:
+=======
+   <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
+1. Configure the Datadog API and application key secrets:
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   apiKeyExistingSecret: datadog-secret
@@ -115,9 +137,27 @@ datadog:
         hostPort: "4318"
         name: otel-http
    {{< /code-block >}}
+<<<<<<< HEAD
    <div class="alert alert-info"><p>It is required to set the <code>hostPort</code> in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.</p><p>Alternatively, if you doesn't want to expose the port, you can use the agent service instead via <code>&lt;SERVICE_NAME&gt;.&lt;SERVICE_NAMESPACE&gt;.svc.cluster.local</code>.</p></div>
 1. (Optional) Enable additional Datadog features.
    <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/"> pricing page</a> and talk to your CSM before proceeding.</div>
+=======
+   It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
+   
+   If you don't want to expose the port, you can use the Agent service instead:
+   1. Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
+   1. In your application's deployment file (`deployment.yaml`), configure the OTLP exporter to use the Agent service:
+      ```sh   
+      env:
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: 'http://<SERVICE_NAME>.<SERVICE_NAMESPACE>.svc.cluster.local'
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: 'grpc'
+      ```
+   
+1. (Optional) Enable additional Datadog features:
+   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   ...
@@ -132,6 +172,18 @@ datadog:
     enabled: true
     processCollection: true
    {{< /code-block >}}
+<<<<<<< HEAD
+=======
+1. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
+   <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  podLabelsAsTags:
+    app: kube_app
+    release: helm_release
+{{< /code-block >}}
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
 Your `datadog-values.yaml` file should look something like this:
@@ -175,7 +227,11 @@ datadog:
 
 ### Configure the OpenTelemetry Collector
 
+<<<<<<< HEAD
 The DataDog Helm chart provides a sample OpenTelemetry Collector configuration that's a great starting point for most projects. This section walks you through the predefined pipelines and included OpenTelemetry components.
+=======
+The Datadog Helm chart provides a sample OpenTelemetry Collector configuration that you can use as a starting point. This section walks you through the predefined pipelines and included OpenTelemetry components.
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 This is the full OpenTelemetry Collector configuration in `otel-config.yaml`:
 
@@ -232,6 +288,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
+<<<<<<< HEAD
 {{% collapse-content title="Component diagram" level="p" %}}
 {{< img src="/opentelemetry/embedded_collector/components.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 {{% /collapse-content %}}
@@ -239,6 +296,13 @@ To send telemetry data to Datadog, the following components are defined in the c
 ##### Datadog connector
 
 The [Datadog connector][6] computes Datadog APM Trace Metrics.
+=======
+{{< img src="/opentelemetry/embedded_collector/components.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+
+##### Datadog connector
+
+The [Datadog connector][6] computes Datadog APM trace metrics.
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 connectors:
@@ -262,7 +326,11 @@ exporters:
 
 ##### Prometheus receiver
 
+<<<<<<< HEAD
 The [Prometheus receiver][8] collects health metrics from the OpenTelemetry Collector for the Metrics pipeline.
+=======
+The [Prometheus receiver][8] collects health metrics from the OpenTelemetry Collector for the metrics pipeline.
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 receivers:
@@ -291,6 +359,7 @@ This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a Daem
 {{< img src="/opentelemetry/embedded_collector/deployment.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 {{% /collapse-content %}}
 
+<<<<<<< HEAD
 ## Instrument and configure the application
 
 To send your telemetry data to Datadog, you need to do the following:
@@ -298,6 +367,16 @@ To send your telemetry data to Datadog, you need to do the following:
 1. Instrument your application.
 2. Correlate your telemetry data.
 3. Run your application.
+=======
+## Send your telemetry to Datadog
+
+To send your telemetry data to Datadog:
+
+1. [Instrument your application](#instrument-the-application)
+2. [Configure the application](#configure-the-application)
+3. [Correlate observability data](#correlate-observability-data)
+4. [Run your application](#run-the-application)
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 ### Instrument the application
 
@@ -313,6 +392,7 @@ As an example, you can use the [Calendar sample application][9] that's already i
    ```shell
    cd opentelemetry-examples/apps/rest-services/java/calendar
    ```
+<<<<<<< HEAD
 1. The following code instruments [CalendarController.getDate()][10] method using the OpenTelemetry API:
    {{< code-block lang="java" filename="CalendarController.java" disable_copy="true" collapsible="true" >}}
 private String getDate() {
@@ -325,6 +405,15 @@ private String getDate() {
   } finally {
     span.end();
   }
+=======
+1. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
+   {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="true" >}}
+@WithSpan(kind = SpanKind.CLIENT)
+public String getDate() {
+    Span span = Span.current();
+    span.setAttribute("peer.service", "random-date-service");
+    ...
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 }
 {{< /code-block >}}
 
@@ -398,7 +487,11 @@ env:
       deployment.environment=$(OTEL_K8S_NAMESPACE)
    {{< /code-block >}}
 
+<<<<<<< HEAD
 ## Run the application
+=======
+### Run the application
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 To start generating and forwarding observability data to Datadog, you need to deploy the Calendar application with the OpenTelemetry SDK using Helm.
 
@@ -413,13 +506,21 @@ helm upgrade -i <CALENDAR_RELEASE_NAME> ./deploys/calendar/
    ```
 1. Verify that you receive a response like:
    ```text
+<<<<<<< HEAD
    {"date":"2022-12-30"}
+=======
+   {"date":"2024-12-30"}
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
    ```
 Each call to the Calendar application results in metrics, traces, and logs being forwarded to the Datadog backend.
 
 ## Explore observability data in Datadog
 
+<<<<<<< HEAD
 Use the Datadog UI to explore the observability data for the sample Calendar app.
+=======
+Use Datadog to explore the observability data for the sample Calendar app.
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 
 ### Fleet automation
 
@@ -529,7 +630,11 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
 [9]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
+<<<<<<< HEAD
 [10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/controller/CalendarController.java#L70-L86
+=======
+[10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 [11]: https://github.com/DataDog/datadog-agent/blob/386130a34dde43035c814f9a9b08bc72eb20e476/comp/otelcol/collector-contrib/impl/manifest.yaml
 [12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [13]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/deploys/calendar/templates/deployment.yaml#L71-L72

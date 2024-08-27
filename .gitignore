@@ -17,6 +17,7 @@ content/en/api/**/*.java
 content/en/api/**/*.pybeta
 content/en/api/**/*.rbbeta
 content/en/api/**/*.ts
+content/en/api/**/*.rs
 content/en/api/tsconfig.json
 
 # Ignoring all automated content
@@ -236,6 +237,7 @@ static/images/integrations_logos/2020w2.pdf
 # Generated resources from Hugo Pipes
 resources/_gen/
 static/jsconfig.json
+assets/jsconfig.json
 
 # Generated from GitHub actions
 .github/preview-links-template.md

@@ -7,7 +7,7 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: RUM データを視覚化する方法について
-- link: /real_user_monitoring/frustration_signals
+- link: /real_user_monitoring/browser/frustration_signals/
   tag: ドキュメント
   text: フラストレーションシグナルについて
 - link: /real_user_monitoring/session_replay
@@ -27,13 +27,13 @@ title: RUM とセッションリプレイを製品分析に活用する
 
 ## セットアップ
 
-Datadog RUM SDK をセットアップしたら、[ブラウザ][2]やモバイル ([iOS][3]、[Android][4]) データに属性を付加して、ユースケースに応じてデータをカスタマイズします。例えば、コンテキスト情報を追加することで、[特定のユーザーに紐づくセッションを特定する][4]ことができます。
+Datadog RUM SDK をセットアップした後、[ブラウザ][2]やモバイル ([iOS][3]、[Android][4]) データに属性を付加して、ユースケースに応じてデータをカスタマイズします。例えば、コンテキスト情報を追加することで、[特定のユーザーに紐づくセッションを特定する][4]ことができます。
 
 ## ページのトラフィックと機能の使用量を監視する
 
 ユーザーがどのボタンを最も多くクリックしたかを知りたい場合は、アプリケーションのページトラフィックとボタンの使用量を追跡することができます。
 
-1. [RUM エクスプローラー][5]に移動し、検索クエリの横にあるドロップダウンメニューから **Actions** を選択します。
+1. [RUM エクスプローラー][5]で、検索クエリの横にあるドロップダウンメニューから **Actions** を選択します。
 2. 検索クエリに `@view.name:/cart` を入力し、**Top List** の視覚化タイプを選択します。
 3. 上記の `Group into fields` セクションの `by` フィールドで、グループのドロップダウンから **Action Name** を選択します。
 
@@ -117,20 +117,20 @@ Web サイトのビューやアクションに基づいたファネルを作成�
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="カートページでクーポンの適用アクションを監視する RUM Feature Usage パワーパック" style="width:100%;" >}} 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/
-[2]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
-[3]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#enrich-user-sessions
 [4]: /ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /ja/real_user_monitoring/funnel_analysis/
+[6]: /ja/product_analytics/journeys/funnel_analysis
 [7]: /ja/real_user_monitoring/explorer/saved_views/
 [8]: /ja/real_user_monitoring/explorer/export/
 [9]: /ja/real_user_monitoring/error_tracking/
-[10]: /ja/real_user_monitoring/frustration_signals/
-[11]: /ja/real_user_monitoring/session_replay/
+[10]: /ja/real_user_monitoring/browser/frustration_signals/
+[11]: /ja/real_user_monitoring/session_replay/browser/
 [12]: /ja/dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists

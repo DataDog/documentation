@@ -105,7 +105,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 : (指数表記の) 整数に一致し、それを整数としてパースします。
 
 `word`
-: a から z、A から Z、0 から 9、および _ (アンダースコア) 文字からなる文字列に一致します。
+: 単語境界で始まり、a-z、A-Z、0-9 の文字と `_` (アンダースコア) 文字を含み、単語境界で終わる単語にマッチします。正規表現では `\b\w+\b` に相当します。
 
 `doubleQuotedString`
 : 二重引用符で囲まれた文字列に一致します。
@@ -633,6 +633,31 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
+
+### data matcher を使用して、不要なテキストを破棄する
+
+もし、必要な情報をパースした後のログで、それ以降のテキストは安全に破棄できるとわかっている場合、data matcher を使ってそれを行うことができます。以下のログの例では、`data` matcher を使って末尾の `%` を破棄することができます。
+
+**ログの例**
+
+```
+Usage: 24.3%
+```
+
+**規則の例**
+
+```
+MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
+```
+
+**Result**:
+
+```
+{
+  "usage": 24.3,
+  "ignore": "%"
+}
+```
 
 ### ASCII 制御文字
 

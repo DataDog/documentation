@@ -3,6 +3,8 @@ title: Log Facets
 description: 'Log Facets and Facet Panel'
 aliases:
     - /logs/facets
+algolia:
+  tags: ["log facets"]
 further_reading:
     - link: 'logs/explorer/analytics'
       tag: 'Documentation'
@@ -30,7 +32,7 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][30], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][9], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
@@ -239,7 +241,7 @@ To delete a facet, follow these steps:
 [6]: /notebooks/
 [7]: /logs/log_configuration/processors
 [8]: /logs/live_tail/
-[9]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[9]: /logs/explorer/
 [10]: /logs/logs_to_metrics/
 [11]: /logs/archives/
 [12]: /logs/archives/rehydrating/
@@ -260,4 +262,3 @@ To delete a facet, follow these steps:
 [27]: /logs/indexes/#indexes
 [28]: /logs/log_configuration/rehydrating
 [29]: /logs/log_configuration/parsing/?tab=matchers#nested-json
-[30]: /logs/explorer/

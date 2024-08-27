@@ -3,6 +3,13 @@ title: Datadog Agent with Embedded Collector
 private: true
 ---
 
+<<<<<<< HEAD
+=======
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< /callout >}} 
+
+>>>>>>> e0b45bf31048eee7886ce0f2fe91846bec7f1ad8
 ## Guides
 
 {{< whatsnext desc=" " >}}

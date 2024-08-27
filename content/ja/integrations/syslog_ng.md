@@ -3,6 +3,7 @@ aliases:
 - /ja/logs/log_collection/syslog_ng
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
@@ -11,7 +12,6 @@ has_logo: true
 integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
-custom_kind: integration
 name: syslog_ng
 public_title: Datadog-Syslog-ng インテグレーション
 short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集

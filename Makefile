@@ -24,7 +24,7 @@ include $(CONFIG_FILE)
 # API Code Examples
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
-EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
+EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript datadog-api-client-rust
 
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
@@ -68,6 +68,7 @@ server:
 
 # Download all dependencies and run the site
 start: dependencies ## Build and run docs including external content.
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -130,7 +131,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.37052508-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.42552816-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -143,6 +144,12 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
+# Automatically download the latest module from websites-sources repo
+update_websites_sources_module:
+	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+	node_modules/hugo-bin/vendor/hugo mod clean
+	node_modules/hugo-bin/vendor/hugo mod tidy
+	cat go.mod
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################
@@ -181,6 +188,7 @@ examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)):
 examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1) examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
 	-find examples/$(1)/examples -iname \*.py -exec mv {} {}beta \;
 	-find examples/$(1)/examples -iname \*.rb -exec mv {} {}beta \;
+	-find examples/$(1)/examples -maxdepth 1 -iname \*.rs -exec sh -c 'mkdir -p `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1" | xargs dirname` && mv {} `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1"`' \;
 	-cp -Rn examples/$(1)/examples/v* ./content/en/api
 endef
 
@@ -200,7 +208,6 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
-
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead

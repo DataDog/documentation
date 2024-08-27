@@ -991,6 +991,16 @@
     "description": "Get the list of interfaces of the device.",
     "summary": "Get the list of interfaces of the device"
   },
+  "ListDeviceUserTags": {
+    "description": "Get the list of tags for a device.",
+    "summary": "Get the list of tags for a device"
+  },
+  "UpdateDeviceUserTags": {
+    "description": "Update the tags for a device.",
+    "summary": "Update the tags for a device",
+    "request_description": "",
+    "request_schema_description": "List tags response."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -1100,7 +1110,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nPowerpacks               | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1236,6 +1246,12 @@
   "DeleteScorecardRule": {
     "description": "Deletes a single rule.",
     "summary": "Delete a rule"
+  },
+  "UpdateScorecardRule": {
+    "description": "Updates an existing rule.",
+    "summary": "Update an existing rule",
+    "request_description": "Rule attributes.",
+    "request_schema_description": "Request to update a scorecard rule."
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
@@ -1744,5 +1760,23 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "ListWorkflowInstances": {
+    "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",
+    "summary": "List workflow instances"
+  },
+  "CreateWorkflowInstance": {
+    "description": "Execute the given workflow. This API requires an application key scoped with the workflows_run permission.",
+    "summary": "Execute a workflow",
+    "request_description": "",
+    "request_schema_description": "Request used to create a workflow instance."
+  },
+  "GetWorkflowInstance": {
+    "description": "Get a specific execution of a given workflow. This API requires an application key scoped with the workflows_read permission.",
+    "summary": "Get a workflow instance"
+  },
+  "CancelWorkflowInstance": {
+    "description": "Cancels a specific execution of a given workflow. This API requires an application key scoped with the workflows_run permission.",
+    "summary": "Cancel a workflow instance"
   }
 }

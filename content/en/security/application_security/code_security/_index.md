@@ -19,7 +19,7 @@ further_reading:
 
 Datadog Code Security identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes.
 
-For a list of supported services, see [Library Compatibility Requirements][5].
+For a list of supported services, see the [Library Compatibility Requirements][5].
 
 Code Security uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM).
 
@@ -120,13 +120,13 @@ If you need additional help, contact [Datadog support][11].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/vm/code
-[2]: /security/application_security/enabling/tracing_libraries/code_security/java/
+[2]: /security/application_security/code_security/setup/java/
 [3]: /integrations/jira/
 [4]: /account_management/rbac/permissions/#integrations
-[5]: /security/application_security/enabling/compatibility/
+[5]: /security/application_security/code_security/setup/compatibility/
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /integrations/github/
-[8]: /security/application_security/enabling/single_step/code_security/?tab=linuxhostorvm
-[9]: /security/application_security/enabling/tracing_libraries/code_security/
+[8]: /security/application_security/code_security/setup/
+[9]: /security/application_security/code_security/setup/
 [10]: https://app.datadoghq.com/security/configuration/asm/setup
 [11]: https://www.datadoghq.com/support/
