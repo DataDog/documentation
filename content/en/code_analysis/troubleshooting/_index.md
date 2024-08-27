@@ -139,7 +139,7 @@ Our SBOM generator ([osv-scanner][7]) extracts dependencies from a `packages.loc
 this file, you can update your project definition to generate it. Follow [these instructions][9] to update
 your project definition to generate a `packages.lock.json` file.
 
-The generated lock file is used by [osv-scanner][7] to extract dependencies and generate an SBOM.
+The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
 
 ## Further reading
 
