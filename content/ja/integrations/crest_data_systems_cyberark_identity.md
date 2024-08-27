@@ -9,6 +9,7 @@ assets:
     CyberArk Identity MFA Dashboard: assets/dashboards/cds_cyberark_identity_mfa_details_security_overview.json
     CyberArk Identity User and Endpoint Dashboard: assets/dashboards/cds_cyberark_identity_user_and_endpoint_details.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,17 +20,19 @@ assets:
       prefix: cds.cyberark.identity
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10377
     source_type_name: crest_data_systems_cyberark_identity
 author:
-  homepage: https://www.crestdatasys.com
-  name: Crest Data Systems
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  homepage: https://crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - マーケットプレイス
 - セキュリティ
-- event management
+- イベント管理
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +41,6 @@ integration_id: crest-data-systems-cyberark-identity
 integration_title: CyberArk Identity
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -89,6 +91,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -105,22 +108,26 @@ CyberArk Identity は、アプリケーションへのアクセス、エンド�
 * このインテグレーションでは、CyberArk Identity をソースとして使用し、CyberArk Identity の redrock クエリエンドポイントを利用して、ポータルからユーザー、デバイス、アプリケーション、MFA 情報に関連するデータを収集します。
 
 
-## サポート
+## Agent
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- サポートメール: [datadog.integrations@crestdatasys.com][5]
-- 営業メール: [datadog-sales@crestdatasys.com][6]
-- Web サイト: [crestdatasys.com][3]
+- Support Email: [datadog.integrations@crestdata.ai][5]
+- Sales Email: [datadog-sales@crestdata.ai][6]
+- Web サイト: [crestdata.ai][3]
+- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][12]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://www.crestdatasys.com/
+[3]: https://www.crestdata.ai/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
-[5]: mailto:datadog.integrations@crestdatasys.com
-[6]: mailto:datadog-sales@crestdatasys.com
+[5]: mailto:datadog.integrations@crestdata.ai
+[6]: mailto:datadog-sales@crestdata.ai
 [7]: https://docs.cyberark.com/Product-Doc/OnlineHelp/Idaptive/Latest/en/Content/Integrations/SIEM/SIEM.htm?TocPath=Administrator%7CIntegrations%7C_____4#Step1AddandconfiguretheOAuth2ClientAppintheIdentityAdministrationportal
 [8]: https://docs.cyberark.com/Product-Doc/OnlineHelp/Idaptive/Latest/en/Content/Integrations/SIEM/SIEM.htm?TocPath=Administrator%7CIntegrations%7C_____4#Step2CreateaSIEMuserandaserviceaccountrole
-
+[9]: https://docs.crestdata.ai/datadog-integrations-readme/CyberArk_Identity.pdf
+[10]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[11]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[12]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cyberark-identity" target="_blank">こちらをクリック</a>してください。

@@ -39,7 +39,7 @@ Ruby      | [v2.0.0][11]
 Node.js   | [v5.16.0][12]
 PHP       | _Coming soon_
 .NET      | [v.2.53.2][13]
-C++       | _Coming soon_
+C++       | [v0.2.2][14]
 
 ## See sampling rates by resource in the Ingestion Control page
 
@@ -84,3 +84,4 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.53.2
+[14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2

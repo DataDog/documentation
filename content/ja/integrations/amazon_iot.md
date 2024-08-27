@@ -6,7 +6,7 @@ categories:
 - cloud
 - iot
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS IoT Core のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_iot/

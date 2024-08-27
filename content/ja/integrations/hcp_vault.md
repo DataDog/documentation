@@ -23,6 +23,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hcp_vault/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: hcp-vault
 integration_title: HCP Vault
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: hcp_vault
 public_title: HCP Vault
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: HCP Vault のインテグレーションにより、Vault クラスターの概要がわかります。
   media: []
@@ -66,9 +67,9 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 
 メトリクスの範囲と解釈の詳細については、HCP Vault メトリクスガイダンス][1]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 以下の構成方法に従ってください。
 
@@ -77,7 +78,7 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 - Datadog リージョンと [Datadog API キー][2]
 - HCP で割り当てられた Admin または Contributor [ロール][3]を持つアカウント
 
-### ブラウザトラブルシューティング
+### 構成
 
 メトリクスストリーミングを有効にするには
 
@@ -99,21 +100,21 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 6. Datadog に移動し、インテグレーションタイルの Install をクリックして、インテグレーションを有効にします。これにより、HCP Vault のテレメトリを最大限に活用するウィジェットを備えた HCP Vault ダッシュボードがインストールされます。ダッシュボード一覧で「HCP Vault Overview」を検索すると、ダッシュボードを見つけることができます。
    **注**: ダッシュボードで `cluster` と `project_id` の値を指定して、適切なクラスターのメトリクスを選択します。`cluster` はクラスター作成時に設定したクラスター名です。`project_id` は HCP ポータルの URL `https://portal.cloud.hashicorp.com/orgs/xxxx/projects/xxxx` に存在するものです。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 メトリクスの範囲と解釈の詳細については、HCP Vault メトリクスガイダンス][1]を参照してください。
 
-### ヘルプ
+### サービスチェック
 
 HCP Vault インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 HCP Vault インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

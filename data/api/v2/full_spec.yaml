@@ -19,6 +19,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterCreatedAtStartParameter:
       description: Only include API keys created on or after the specified date.
       in: query
@@ -27,6 +29,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtEndParameter:
       description: Only include API keys modified on or before the specified date.
       in: query
@@ -35,6 +39,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtStartParameter:
       description: Only include API keys modified on or after the specified date.
       in: query
@@ -43,6 +49,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterParameter:
       description: Filter API keys by the specified string.
       in: query
@@ -93,6 +101,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterCreatedAtStartParameter:
       description: Only include application keys created on or after the specified
         date.
@@ -102,6 +112,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterParameter:
       description: Filter application keys by the specified string.
       in: query
@@ -683,6 +695,8 @@ components:
       properties:
         errors:
           description: A list of errors.
+          example:
+          - Bad Request
           items:
             description: A list of items.
             example: Bad Request
@@ -1003,6 +1017,8 @@ components:
         owned_by:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyResponse:
       description: Response for retrieving an application key.
       properties:
@@ -1652,6 +1668,8 @@ components:
           description: The timestamp when the AWS CUR config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         error_messages:
           description: The error messages for the AWS CUR config.
           items:
@@ -1679,10 +1697,14 @@ components:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         updated_at:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - bucket_name
@@ -1833,6 +1855,8 @@ components:
           description: The timestamp when the Azure config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         dataset_type:
           description: The dataset type of the Azure config.
           example: actual
@@ -1872,6 +1896,8 @@ components:
           description: The timestamp when the Azure config status was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         storage_account:
           description: The name of the storage account where the Azure Export is saved.
           example: dd-storage-account
@@ -1885,6 +1911,8 @@ components:
           description: The timestamp when the Azure config was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - client_id
@@ -2409,7 +2437,6 @@ components:
         author_email:
           description: The commit author email.
           example: author@example.com
-          format: email
           type: string
         author_name:
           description: The commit author name.
@@ -2434,7 +2461,6 @@ components:
         committer_email:
           description: The committer email.
           example: committer@example.com
-          format: email
           nullable: true
           type: string
         committer_name:
@@ -6454,7 +6480,7 @@ components:
           description: Deployment ID.
           type: string
         service:
-          description: Service name from a service available in the Service Catalog.
+          description: Service name.
           example: shopist
           type: string
         started_at:
@@ -9449,6 +9475,19 @@ components:
             were created or updated by the request are
 
             returned.'
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9480,6 +9519,19 @@ components:
       properties:
         data:
           description: An array of incident attachments.
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9573,8 +9625,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentFieldAttributesSingleValue'
       - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
-      required:
-      - type
     IncidentFieldAttributesMultipleValue:
       description: A field with potentially multiple values selected.
       properties:
@@ -10691,6 +10741,8 @@ components:
       - $ref: '#/components/schemas/IncidentTodoAnonymousAssignee'
     IncidentTodoAssigneeArray:
       description: Array of todo assignees.
+      example:
+      - '@test.user@test.com'
       items:
         $ref: '#/components/schemas/IncidentTodoAssignee'
       type: array
@@ -11847,9 +11899,6 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
     LogsArchiveDefinition:
       description: The definition of an archive.
       properties:
@@ -11876,9 +11925,6 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
       type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
@@ -12683,10 +12729,13 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets where only included attribute is its title
+      description: Assets related to the object, including title and url.
       properties:
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricAssetDashboardRelationship:
@@ -12895,7 +12944,6 @@ components:
       - bob@example.com
       items:
         description: An email address.
-        format: email
         type: string
       type: array
     MetricBulkTagConfigNamePrefix:
@@ -13067,7 +13115,8 @@ components:
       - type
       type: object
     MetricDashboardAttributes:
-      description: Attributes related to the dashboard, including title and popularity.
+      description: Attributes related to the dashboard, including title, popularity,
+        and url.
       properties:
         popularity:
           description: Value from 0 to 5 that ranks popularity of the dashboard.
@@ -13077,6 +13126,9 @@ components:
           type: number
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricDashboardID:
@@ -13405,6 +13457,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - timestamp: 1575317847
+            value: 0.5
           items:
             $ref: '#/components/schemas/MetricPoint'
           type: array
@@ -14409,7 +14464,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
@@ -14472,7 +14526,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
-          format: url
           nullable: true
           type: string
         name:
@@ -14520,7 +14573,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           nullable: true
           type: string
         name:
@@ -14954,6 +15006,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -14967,6 +15021,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
@@ -14996,6 +15052,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -15812,6 +15870,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationType'
       required:
@@ -15826,6 +15886,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         client_token:
           description: Client token of the RUM application.
           example: abcd1234efgh5678ijkl90abcd1234efgh0
@@ -15935,6 +15997,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
@@ -15948,6 +16012,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -16032,6 +16098,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationUpdateType'
       required:
@@ -17949,6 +18017,10 @@ components:
       type: object
     ScalarFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - aggregator: avg
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/ScalarQuery'
       type: array
@@ -18907,6 +18979,8 @@ components:
       type: object
     SecurityMonitoringSignalIncidentIds:
       description: Array of incidents that are associated with this signal.
+      example:
+      - 2066
       items:
         description: Public ID attribute of the incident that is associated with the
           signal.
@@ -19814,6 +19888,10 @@ components:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
           type: string
+        editable:
+          description: Whether the suppression rule is editable.
+          example: true
+          type: boolean
         enabled:
           description: Whether the suppression rule is enabled.
           example: true
@@ -20966,7 +21044,6 @@ components:
         email:
           description: "Service owner\u2019s email."
           example: contact@datadoghq.com
-          format: email
           type: string
         slack:
           description: "Service owner\u2019s Slack channel."
@@ -21227,7 +21304,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -21590,7 +21666,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -22976,7 +23051,6 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
-          format: url
           type: string
       required:
       - label
@@ -23429,6 +23503,9 @@ components:
       type: object
     TimeseriesFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/TimeseriesQuery'
       type: array
@@ -35222,7 +35299,7 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
               {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
@@ -40947,8 +41024,10 @@ tags:
     for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
-    Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
-    page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
+    Cloud Cost Management accounts for AWS and Azure. You can query your cost data
+    by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
+    and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
+    documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)

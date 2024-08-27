@@ -1,8 +1,9 @@
 ---
-title: API を使ったインフラストラクチャーリストのクエリ
 aliases:
-  - /ja/developers/faq/query-the-infrastructure-list-via-the-api
+- /ja/developers/faq/query-the-infrastructure-list-via-the-api
+title: API を使ったインフラストラクチャーリストのクエリ
 ---
+
 上級の Datadog ユーザーは、[API][1] を使用して、ユーザーのインフラストラクチャーに関する一般データを問い合わせることができます。問い合わせることができるのは、[インフラストラクチャーリスト][2]や[ホストマップ][3]に表示されるデータです。それには、[api/v1/hosts][4] エンドポイントで API GET リクエストを行います。
 
 ## 例

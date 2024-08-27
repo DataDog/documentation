@@ -23,7 +23,7 @@ type: multi-code-lang
 
 ## ランタイムメトリクスの互換性
 
-- .NET Framework 4.6.1+ 
+- .NET Framework 4.6.1+
 - .NET Core 3.1
 - .NET 5
 - .NET 6
@@ -45,7 +45,7 @@ Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LO
 
 または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][7] を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 以下のメトリクスは .NET メトリクスを有効にした後、デフォルトで収集されます。
 
