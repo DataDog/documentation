@@ -82,9 +82,7 @@ To begin profiling applications:
 
 **Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
 
-If you have automatically instrumented your Go application with [Orchestrion][20],
-the continuous profiler code will already be added to your application.
-Enable the profiler at run time by setting the environment variable `DD_PROFILING_ENABLED=true`.
+If you automatically instrument your Go application with [Orchestrion][20], it adds the continuous profiler code to your application. To enable the profiler at run time, set the environment variable `DD_PROFILING_ENABLED=true`.
 
 ## Configuration
 
