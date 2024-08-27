@@ -50,9 +50,9 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 
 ## How the destination works
 
-### Batch settings
+### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See [event batching][3] for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching][3] for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------| ----------------| --------------------|

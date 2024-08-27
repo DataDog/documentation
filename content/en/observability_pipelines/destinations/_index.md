@@ -36,7 +36,7 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
 
 ### Event batching {#event-batching-intro}
 
-Observability Pipelines destinations send events in batches to the downstream integration. The batch of events is flushed when one of the following parameters is met:
+Observability Pipelines destinations send events in batches to the downstream integration. A batch of events is flushed when one of the following parameters is met:
 
 - Maximum number of events
 - Maximum number of bytes
@@ -70,7 +70,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -90,7 +90,7 @@ When one of these parameters is met, the batch of events is flushed. See the [ev
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -112,7 +112,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -134,7 +134,7 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -156,7 +156,7 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -196,7 +196,7 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -218,7 +218,7 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 #### Event batching
 
-When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
