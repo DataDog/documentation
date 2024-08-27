@@ -32,17 +32,17 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
     {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
-{{< /whatsnext >}} 
+{{< /whatsnext >}}
 
-### Batch settings {#batch-settings-intro}
+### Event batching {#event-batching-intro}
 
-Observability Pipelines destinations batch events sent to the downstream integration. The following parameters define each destination's batch settings:
+Observability Pipelines destinations send events in batches to the downstream integration. The batch of events is flushed when one of the following parameters is met:
 
 - Maximum number of events
 - Maximum number of bytes
 - Timeout (seconds)
 
-When one of these parameters is met, the batch of events is flushed. For example, if a destination's parameters are:
+For example, if a destination's parameters are:
 
 - Maximum number of events = 2
 - Maximum number of bytes = 10,0000
@@ -51,21 +51,6 @@ When one of these parameters is met, the batch of events is flushed. For example
 And the destination receives 1 event in a 5-second window, it flushes the batch at the 5-second timeout.
 
 If the destination receives 3 events within 2 seconds, it flushes a batch with 2 events and then flushes a second batch with the remaining event after 5 seconds. If the destination receives 1 event that is more than 10,0000 bytes, it flushes this batch with the 1 event.
-
-These are the batch settings for each destination:
-
-| Destination                                | Max Events     | Max Bytes       | Timeout (seconds)   |
-|--------------------------------------------|----------------|-----------------|---------------------|
-| Amazon OpenSearch                          | None           | 10,000,000      | 1                   |
-| Amazon S3 (Datadog Log Archives)           | None           | 100,000,000     | 900                 |
-| Azure Storage (Datadog Log Archives)       | None           | 100,000,000     | 900                 |
-| Datadog Logs                               | 1,000          | 4,250,000       | 5                   |
-| Elasticsearch                              | None           | 10,000,000      | 1                   |
-| Google Chronicle                           | None           | 1,000,000       | 15                  |
-| Google Cloud Storage (Datadog Log Archives)| None           | 100,000,000     | 900                 |
-| OpenSearch                                 | None           | 10,000,000      | 1                   |
-| Splunk HTTP Event Collector (HEC)          | None           | 1,000,000       | 1                   |
-| Sumo Logic Hosted Collecter                | None           | 10,000,000      | 1                   |
 
 **Note**: The Syslog destination does not batch events.
 
@@ -81,9 +66,11 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -99,9 +86,11 @@ See the [batch settings](#batch-settings-intro) section for more information.
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -119,9 +108,11 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -139,9 +130,11 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -159,9 +152,11 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -179,7 +174,9 @@ Set up the Rsyslog or Syslog-ng destination and its environment variables when y
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
 
-### Batch settings
+### How the destination works
+
+#### Event batching
 
 The Syslog destination does not batch events.
 
@@ -195,9 +192,11 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -215,9 +214,11 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
 
-### Batch settings
+### How the destination works
 
-See the [batch settings](#batch-settings-intro) section for more information.
+#### Event batching
+
+When one of these parameters is met, the batch of events is flushed. See the [event batching](#event-batching-intro) section for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
