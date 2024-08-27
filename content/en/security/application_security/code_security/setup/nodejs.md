@@ -98,7 +98,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 4. Restart your service.
 5. To see Code Security in action, browse your service and the code-level vulnerabilities appear in the [Vulnerability Explorer][5].
 
-{{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code-level vulnerability" video="true" >}}
+{{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
 If you need additional assistance, contact [Datadog support][6].
 
