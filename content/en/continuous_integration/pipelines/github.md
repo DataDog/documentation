@@ -78,7 +78,7 @@ To disable the CI Visibility GitHub Actions integration, make sure the GitHub ap
 workflow job and workflow run events. To remove the events:
 
 1. Go to the [GitHub Apps][9] page.
-2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you will have to repeat the process for each).
+2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you have to repeat the process for each).
 3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
 
 ### Collect job logs
@@ -94,7 +94,7 @@ To enable job logs collection:
 3. Enable Job Logs Collection for the whole account by clicking the toggle next to **Enable Job Logs Collection**.
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
 
-Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1GiB are truncated.
+Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1 GiB are truncated.
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.</div>
 

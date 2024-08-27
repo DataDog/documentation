@@ -213,7 +213,7 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
 
-The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed`  error message and an `unknown` error domain.
+The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed` error message and an `unknown` error domain.
 
 | Error Type                       | Error Domain | Error Message                                              |
 |---------------------------------|--------------|------------------------------------------------------------|
