@@ -28,11 +28,11 @@ To configure Dogshell:
 touch ~/.dogrc
 {{< /code-block >}}
 
-1. Add the following content to the file, replacing `DATADOG_API_KEY` and `YOUR_APPLICATION_KEY` with your API key and application key respectively:
+1. Add the following content to the file, replacing `DD_API_KEY` and `DD_APP_KEY` with your API key and application key respectively:
    ```conf
    [Connection]
-   apikey = <DATADOG_API_KEY>
-   appkey = <YOUR_APPLICATION_KEY>
+   apikey = DD_API_KEY
+   appkey = DD_APP_KEY
    api_host = https://{{< region-param key="dd_site">}}
    ```
 
