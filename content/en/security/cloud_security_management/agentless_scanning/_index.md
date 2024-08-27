@@ -1,17 +1,23 @@
 ---
 title: Cloud Security Management Agentless Scanning
 aliases:
- - /security/agentless_scanning
+  - /security/agentless_scanning
 further_reading:
-- link: "/security/cloud_security_management/setup/agentless_scanning"
-  tag: "Documentation"
-  text: "Setting up Agentless Scanning"
-- link: "https://www.datadoghq.com/blog/agentless-scanning/"
-  tag: "Blog"
-  text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
-- link: "/security/vulnerabilities"
-  tag: "Documentation"
-  text: "Read more about CSM Vulnerabilities"
+  - link: "/security/cloud_security_management/setup/agentless_scanning"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning"
+  - link: "/security/cloud_security_management/guide/agentless_scanning_terraform"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning using Terraform"
+  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning with the AWS Integration"
+  - link: "https://www.datadoghq.com/blog/agentless-scanning/"
+    tag: "Blog"
+    text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
+  - link: "/security/vulnerabilities"
+    tag: "Documentation"
+    text: "Read more about CSM Vulnerabilities"
 ---
 
 {{< site-region region="gov" >}}

@@ -7,13 +7,18 @@ further_reading:
   - link: "/security/cloud_security_management/guide/agentless_scanning_terraform"
     tag: "Documentation"
     text: "Setting up Agentless Scanning using Terraform"
+  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning with the AWS Integration"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The Agentless Scanning Quick Start provides a streamlined setup workflow for Cloud Security Management, allowing you to start monitoring your AWS resources immediately.
+The Agentless Scanning Quick Start provides a streamlined setup workflow for Cloud Security Management, enabling you to start monitoring your AWS resources immediately.
+
+<div class="alert alert-info">This guide provides instructions for setting up Agentless Scanning using the Cloud Security Management quick start workflow. Instructions for setting up Agentless Scanning using <a href="/security/cloud_security_management/guide/agentless_terraform">Terraform</a> or by utilizing the <a href="/security/cloud_security_management/guide/agentless_aws_integration">CloudFormation template with the AWS integration</a> are also available.</div>
 
 ## About Agentless Scanning
 

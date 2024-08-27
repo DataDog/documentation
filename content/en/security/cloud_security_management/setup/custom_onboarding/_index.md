@@ -1,5 +1,12 @@
 ---
 title: Custom Onboarding for Cloud Security Management
+further_reading:
+  - link: "/security/cloud_security_management/setup/supported_deployment_types"
+    tag: "Documentation"
+    text: "Supported Deployment Types"
+  - link: "/security/cloud_security_management/guide/agent_variables/"
+    tag: "Guide"
+    text: "Cloud Security Management Agent Variables"
 ---
 
 The custom onboarding workflow provides a flexible and customizable onboarding experience for [Cloud Security Management (CSM)][6], allowing you to choose features that best fit your specific needs.
@@ -80,8 +87,6 @@ The following table shows which sections appear on the Setup page for each featu
     </tr>
   </tbody>
 </table>
-
-<div class="alert alert-info">For instructions on setting up Agentless Scanning, see <a href="/security/cloud_security_management/setup/agentless_scanning">Setting up CSM Agentless Scanning</a>.</div>
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
