@@ -116,11 +116,12 @@ export function initializeGroupedListings() {
         const activeCategory = document.querySelector('.controls .active');
         const activeCategoryFilter = (activeCategory) ? activeCategory.dataset.filter : '';
 
-        if(searchValue){
+        if (searchValue) {
             url.searchParams.set('search', searchValue)
-        }else{
+        } else {
             url.searchParams.delete('search')
         }
+
         clearTimeout(keyupTimeout);
         
         keyupTimeout = setTimeout(() => {
