@@ -382,8 +382,6 @@ spec:
   override:
     clusterAgent:
       serviceAccountName: datadog-agent-scc
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
     nodeAgent:
       serviceAccountName: datadog-agent-scc
       hostNetwork: true
@@ -394,8 +392,6 @@ spec:
           role: system_r
           type: spc_t
           user: system_u
-      image:
-        name: gcr.io/datadoghq/agent:latest
       tolerations:
         - key: node-role.kubernetes.io/master
           operator: Exists
