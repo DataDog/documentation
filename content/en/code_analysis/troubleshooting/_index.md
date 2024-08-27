@@ -136,8 +136,7 @@ You can always configure your default branch in-app under [Repository Settings][
 ### No package detected for C# projects
 
 Our SBOM generator, ([`osv-scanner`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
-this file, you can update your project definition to generate it. Follow [these instructions][9] to update
-your project definition to generate a `packages.lock.json` file.
+this file, you can update your project definition to generate it. Follow these [instructions to update your project definition][9] to generate a `packages.lock.json` file.
 
 The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
 
