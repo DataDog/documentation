@@ -1,6 +1,6 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
 import { ParsedFile } from '../MdocFileParser';
-import { ConfigProcessor } from '../ConfigProcessor';
+import { YamlProcessor } from '../YamlProcessor';
 import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
@@ -52,7 +52,7 @@ export class PageBuilder {
    * This HTML output can be processed by Hugo to generate a static page.
    */
   static build(args: PageBuildArgs): string {
-    const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+    const defaultValsByPrefId = YamlProcessor.getDefaultValuesByPrefId(
       args.parsedFile.frontmatter,
       args.prefOptionsConfig
     );
@@ -198,14 +198,14 @@ export class PageBuilder {
 
       if (p.pageBuildArgs.debug) {
         prefOptionsConfigStr = JSON.stringify(
-          ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
+          YamlProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
           null,
           2
         );
         defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
         if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
           pagePrefsConfigStr = JSON.stringify(
-            ConfigProcessor.minifyPagePrefsConfig(
+            YamlProcessor.minifyPagePrefsConfig(
               p.pageBuildArgs.parsedFile.frontmatter.page_preferences
             ),
             null,
@@ -215,12 +215,12 @@ export class PageBuilder {
         ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
       } else {
         prefOptionsConfigStr = JSON.stringify(
-          ConfigProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
+          YamlProcessor.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
         );
         defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
         if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
           pagePrefsConfigStr = JSON.stringify(
-            ConfigProcessor.minifyPagePrefsConfig(
+            YamlProcessor.minifyPagePrefsConfig(
               p.pageBuildArgs.parsedFile.frontmatter.page_preferences
             )
           );

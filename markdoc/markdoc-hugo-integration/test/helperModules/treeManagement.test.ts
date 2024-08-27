@@ -7,16 +7,15 @@ import {
   VALID_PREF_OPTIONS_DIR
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
-import { ConfigProcessor } from '../../src/helperModules/ConfigProcessor';
+import { YamlProcessor } from '../../src/helperModules/YamlProcessor';
 
 describe('treeManagement', () => {
   const testFilePath = VALID_CONTENT_DIR + '/primary_colors.mdoc';
-  const prefOptionsConfig =
-    ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+  const prefOptionsConfig = YamlProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
   const parsedFile = MdocFileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
-  const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+  const defaultValsByPrefId = YamlProcessor.getDefaultValuesByPrefId(
     parsedFile.frontmatter,
     prefOptionsConfig
   );
