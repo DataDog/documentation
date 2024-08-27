@@ -10,6 +10,10 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< /callout >}} 
+
 If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
 
 To migrate to the Datadog Agent with embedded OpenTelemetry Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
@@ -144,11 +148,145 @@ In this case, you can proceed to installing the Agent with the embedded OpenTele
 
 ## Install the Agent with OpenTelemetry Collector
 
-First, install the Agent with embedded OpenTelemetry Collector by following [Install the Datadog Agent with OpenTelemetry Collector][2]. Specifically, complete the steps to:
+First, install the Agent with embedded OpenTelemetry Collector.
 
-1. [Add the Datadog Helm repository][5].
-2. [Set up Datadog API and application keys][6].
-3. [Configure the Datadog Agent][7].
+### Add the Datadog Helm Repository
+
+To add the Datadog repository to your Helm repositories:
+
+```shell
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+```
+
+### Set up Datadog API and application keys
+
+1. Get the Datadog [API][2] and [application keys][3].
+1. Store the keys as a Kubernetes secret:
+   ```shell
+   kubectl create secret generic datadog-secret \
+     --from-literal api-key=<DD_API_KEY> \
+     --from-literal app-key=<DD_APP_KEY>
+   ```
+   Replace `<DD_API_KEY>` and `<DD_APP_KEY>` with your actual Datadog API and application keys.
+
+### Configure the Datadog Agent
+
+Use a YAML file to specify the Helm chart parameters for the [Datadog Agent chart][4].
+
+1. Create an empty `datadog-values.yaml` file:
+   ```shell
+   touch datadog-values.yaml
+   ```
+   <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
+1. Configure the Datadog API and application key secrets:
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+   {{< /code-block >}}
+1. Switch the Datadog Agent Docker repository to use development builds:
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+agents:
+  image:
+    repository: datadog/agent-dev
+    tag: nightly-ot-beta-main-jmx
+    doNotCheckTag: true
+...
+   {{< /code-block >}}
+   <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>nightly-ot-beta-main</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+1. Enable the OpenTelemetry Collector and configure the essential ports:
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  otelCollector:
+    enabled: true
+    ports:
+      - containerPort: "4317" # default port for OpenTelemetry gRPC receiver.
+        hostPort: "4317"
+        name: otel-grpc
+      - containerPort: "4318" # default port for OpenTelemetry HTTP receiver
+        hostPort: "4318"
+        name: otel-http
+   {{< /code-block >}}
+   It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
+   
+   If you don't want to expose the port, you can use the Agent service instead:
+   1. Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
+   1. In your application's deployment file (`deployment.yaml`), configure the OTLP exporter to use the Agent service:
+      ```sh   
+      env:
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: 'http://<SERVICE_NAME>.<SERVICE_NAMESPACE>.svc.cluster.local'
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: 'grpc'
+      ```
+   
+1. (Optional) Enable additional Datadog features:
+   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  apm:
+    portEnabled: true
+    peer_tags_aggregation: true
+    compute_stats_by_span_kind: true
+    peer_service_aggregation: true
+  orchestratorExplorer:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+   {{< /code-block >}}
+1. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
+   <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  podLabelsAsTags:
+    app: kube_app
+    release: helm_release
+{{< /code-block >}}
+
+{{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
+Your `datadog-values.yaml` file should look something like this:
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
+agents:
+  image:
+    repository: datadog/agent-dev
+    tag: nightly-ot-beta-main-jmx
+    doNotCheckTag: true
+
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+
+  otelCollector:
+    enabled: true
+    ports:
+      - containerPort: "4317"
+        hostPort: "4317"
+        name: otel-grpc
+      - containerPort: "4318"
+        hostPort: "4318"
+        name: otel-http
+  apm:
+    portEnabled: true
+    peer_tags_aggregation: true
+    compute_stats_by_span_kind: true
+    peer_service_aggregation: true
+  orchestratorExplorer:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+
+  podLabelsAsTags:
+    app: kube_app
+    release: helm_release
+   {{< /code-block >}}
+
+{{% /collapse-content %}}
 
 ## Deploy the Agent with OpenTelemetry Collector
 
