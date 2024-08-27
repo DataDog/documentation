@@ -35,12 +35,12 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 1. Toggle the "Enable APM Instrumentation" switch. (If there is no switch, the platform is not supported by SSI.) Toggling the switch adds the `DD_APM_INSTRUMENTATION_ENABLED=` environment variable to the installation command, configuring the installed agent to inject the tracer library into processes.
 1. Copy the installation command into a text editor.
 1. Add `DD_PROFILING_ENABLED=auto` as an additional environment variable after `DD_APM_INSTRUMENTATION_ENABLED` in the copied command. This turns on automatic profiler enablement for all processes.
-1. Proceed with rest of the installation instructions, using the modified installation command.
+1. Proceed with the rest of the installation instructions, using the modified installation command.
 
 ## How does profiling work with SSI
 
 After the installation, all processes on the host or in the container are executed with the
-`DD_PROFILING_ENABLED=auto` environment variable. Datadog library then dynamically turns on the
+`DD_PROFILING_ENABLED=auto` environment variable. The Datadog library dynamically turns on the
 profiler for the processes that are good profiling candidates.
 
 The logic for identifying a process as a good candidate varies by language. For Java,
@@ -50,11 +50,11 @@ seconds and has created at least one tracing span.
 SSI can also be configured to inject profiling on each and every process by using
 `DD_PROFILING_ENABLED=true`.
 
-Note: Datadog recommends to use `DD_PROFILING_ENABLED=auto` to avoid profiling low value processes.
+**Note**: Datadog recommends using`DD_PROFILING_ENABLED=auto` to avoid profiling low value processes.
 
 # Reverting
 
-[Single Step APM Instrumentation][1] page contains instructions for removing all
+The [Single Step APM Instrumentation][1] page contains instructions for removing all
 instrumentation. Removing instrumentation also removes profiling.
 
 Additionally, you can disable profiling by:
@@ -74,7 +74,7 @@ the following line to the application `.service` files:
 EnvironmentFile=/etc/environment
 ```
 Applications deployed
-on host as something other than a systemd service, and container-deployed applications do not
+on a host as something other than a systemd service, or container-deployed applications do not
 need this extra step.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
