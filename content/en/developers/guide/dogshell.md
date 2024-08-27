@@ -20,7 +20,7 @@ Depending on your environment, you might have to add the library to your PATH. S
 
 ## Configure Dogshell
 
-Dogshell uses a configuration file called `.dogrc` to store your API and application keys, and Datadog site.
+Dogshell uses a configuration file called `.dogrc` to store your API key, application key, and Datadog site.
 
 To configure Dogshell:
 1. Create a `.dogrc` file in your home directory:
