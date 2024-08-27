@@ -1,5 +1,7 @@
 ---
 title: DDSQL Statements
+aliases:
+- /dashboards/ddsql_editor/reference/statements/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
@@ -187,8 +189,8 @@ SET variableName = expression
 {{< /code-block >}}
 
 [1]: /dashboards/functions/interpolation/#fill
-[2]: /dashboards/ddsql_editor/reference/aggr_functions
+[2]: /ddsql_editor/reference/aggr_functions
 [3]: /logs/explorer/search_syntax/#full-text-search
 [4]: /logs/log_configuration/indexes/
-[5]: /dashboards/ddsql_editor/reference#supported-sql-syntax
-[6]: /dashboards/ddsql_editor/reference/expressions_and_operators
+[5]: /ddsql_editor/reference#supported-sql-syntax
+[6]: /ddsql_editor/reference/expressions_and_operators

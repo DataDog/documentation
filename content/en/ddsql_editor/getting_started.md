@@ -1,5 +1,7 @@
 ---
 title: Getting Started with DDSQL Editor
+aliases:
+- /dashboards/ddsql_editor/getting_started/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
@@ -85,5 +87,5 @@ To generate a share link for the query:
 If you forget to save a useful query before navigating away from it, you can still access it in the **Recent Queries** pane. Click the clock icon in the left sidebar to view a list of recent queries.
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /dashboards/ddsql_editor/reference
-[3]: /dashboards/ddsql_editor/reference/tags
+[2]: /ddsql_editor/reference
+[3]: /ddsql_editor/reference/tags

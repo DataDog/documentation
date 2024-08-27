@@ -1,5 +1,7 @@
 ---
 title: DDSQL Aggregation Functions
+aliases:
+- /dashboards/ddsql_editor/reference/aggregation_functions
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

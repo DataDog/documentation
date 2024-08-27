@@ -1,5 +1,7 @@
 ---
 title: DDSQL Scalar Functions
+aliases:
+- /dashboards/ddsql_editor/reference/scalar_functions/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

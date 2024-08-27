@@ -1,10 +1,12 @@
 ---
 title: DDSQL Editor
+aliases:
+- /dashboards/ddsql_editor/
 further_reading:
-- link: "/dashboards/ddsql_editor/reference"
+- link: "/ddsql_editor/reference"
   tag: "Documentation"
   text: "References for DDSQL Queries"
-- link: "dashboards/guide/ddsql_use_cases"
+- link: "/ddsql_editor/guide/ddsql_use_cases"
   tag: "Guide"
   text: "Common queries and use cases"
 ---
@@ -62,4 +64,4 @@ Browse and re-run saved queries in the side panel.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /dashboards/ddsql_editor/reference
+[2]: /ddsql_editor/reference
