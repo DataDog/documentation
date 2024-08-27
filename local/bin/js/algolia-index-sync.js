@@ -104,6 +104,11 @@ const updateSynonyms = (index) => {
             objectID: 'sca',
             type: 'synonym',
             synonyms: ['sca', 'software composition analysis']
+        },
+        {
+            objectID: 'otel',
+            type: 'synonym',
+            synonyms: ['otel', 'opentelemetry']
         }
     ];
 
