@@ -1,5 +1,7 @@
 ---
 title: DDSQL Data Types
+aliases:
+- /dashboards/ddsql_editor/reference/data_types/
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

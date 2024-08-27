@@ -152,4 +152,4 @@ content/en/code_analysis/                         @Datadog/static-analysis @Data
 content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation
 
 # DDSQL Editor References
-content/en/dashboards/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
+content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
