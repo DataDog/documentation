@@ -23,6 +23,8 @@ Datadog collects Step Functions metrics from Cloudwatch through the [AWS Step Fu
 
 Datadog uses these ingested logs to generate [enhanced metrics][8] and traces for your Step Function executions.
 
+{{< img src="serverless/step_functions/telemetry_ingestion.png" alt="A diagram explaining how Step Functions telemetry is ingested and used in Datadog" style="width:100%;" >}}
+
 ### Setup
 
 Ensure that the [AWS Step Functions integration][9] is installed.
