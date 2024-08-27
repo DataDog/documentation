@@ -4,8 +4,8 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 20
 aliases:
-    - /tracing/llm_observability/sdk
-    - /llm_observability/sdk
+    - /tracing/llm_observability/sdk/python
+    - /llm_observability/sdk/python
 ---
 
 {{< site-region region="gov" >}}
