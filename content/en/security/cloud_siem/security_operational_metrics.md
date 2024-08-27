@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM provides security operational metrics to help you determine the effectiveness of your team in responding to and resolving security threats to your cloud environments. These metrics are shown in the out-of-the-box [Cloud SIEM dashboard][1] and also sent in the Cloud SIEM [weekly digest reports][2]. You can also create dashboards and monitors for them.
+Cloud SIEM provides security operational metrics to help you determine the effectiveness of your team in responding to and resolving security threats to your cloud environments. These metrics are shown in the out-of-the-box [Cloud SIEM dashboard][1] and are sent in the Cloud SIEM [weekly digest reports][2]. You can also create dashboards and monitors for them.
 
 {{< img src="security/security_monitoring/security_operational_metrics.png" alt="The security operational metrics section of the Cloud SIEM Overview dashboard" style="width:100%;" >}}
 
@@ -26,24 +26,24 @@ Cloud SIEM provides security operational metrics to help you determine the effec
 
 `datadog.security.siem_signal.time_to_detect`
 : **Name**: Time to Detect (TTD)
-: **Description**:The average time from when a matching log is triggered to when a signal is generated.
+: **Description**: The average time between when a matching log is triggered and when a signal is generated.
 
 `datadog.security.siem_signal.time_to_acknowledge`
 : **Name**: Time to Acknowledge (TTA)
-: **Description**: The average time from when a signal is triggered to when an investigation on the signal begins.
+: **Description**: The average time between when a signal is triggered and when an investigation on the signal begins.
 
 `datadog.security.siem_signal.time_to_resolve`
 : **Name**: Time to Resolve (TTR)
-: **Description**: The average time it takes to close a signal from the time when you are first notified of the detection.
+: **Description**: The average time it takes to close a signal starting from the time when you are first notified of the detection.
 
 ## How the metrics are calculated
 
 The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 
-1. The timestamp (`T0`) of the log that triggered a security signal.
-1. The timestamp (`T1`) of when the signal was generated.
-1. The timestamp (`T3`) of when the signal status was changed to `under_review`.
-1. The timestamp (`T4`) of when the signal status was changed to `archived`.
+1. The timestamp (`T0`) of the log that triggers a security signal.
+1. The timestamp (`T1`) of when the signal is generated.
+1. The timestamp (`T3`) of when the signal status is changed to `under_review`.
+1. The timestamp (`T4`) of when the signal status is changed to `archived`.
 
 | Metric                                                                                | How the metric is calculated |
 | ------------------------------------------------------------------------------------- | ---------------------------- |
@@ -55,7 +55,7 @@ The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 
 Use the [Metrics Summary][3] to view details about the operational metrics, such as the tags and assets (dashboards, notebooks, monitors, SLOs) that are using those metrics.
 
-Use tags to filter the metrics to specific teams, sources, and environments and then create [dashboards][4] for those metrics to visualize the data. You can also create [monitors][5] to alert you if the metrics exceed a specified threshold.
+Use tags to filter the metrics to specific teams, sources, and environments. You can then create [dashboards][4] for those metrics to visualize the data or create [monitors][5] to alert you if the metrics exceed a specified threshold.
 
 ## Further reading
 
