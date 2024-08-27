@@ -29,7 +29,7 @@ further_reading:
       text: "Cloud Security Management Agent Variables"
 ---
 
-To set up Cloud Security Management, you can choose between two main approaches: the streamlined Agentless Scanning quick start or the flexible custom onboarding workflow.
+To set up Cloud Security Management, you can choose between two main approaches: the streamlined [Agentless Scanning quick start](#quick-start) or the flexible [custom onboarding workflow](#custom-onboarding).
 
 ## Quick start
 

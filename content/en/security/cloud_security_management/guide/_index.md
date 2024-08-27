@@ -25,5 +25,5 @@ aliases:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agentless Scanning Guides" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/agentless_scanning_terraform" >}}Setting up Agentless Scanning using Terraform{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/agentless_terraform" >}}Setting up Agentless Scanning using Terraform{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -50,10 +50,10 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
 1. Click **Quick Start**. The **Features** page is displayed, showing the features included with Agentless Scanning Quick Start.
 1. Click **Start Using Cloud Security Management** to continue.
 1. Select the AWS region where you want to create the CloudFormation stack.
-1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration will be automatically enabled for that key upon selection.
-1. Send **AWS Logs to Datadog** and **Enable Cloud Security Management** are automatically selected by default. Leave the default selections.
+1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Send **AWS Logs to Datadog** and **Enable Cloud Security Management** are automatically selected by default. Leave the selections as is.
 1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
-1. Click **Launch CloudFormation Template**. The template includes all the necessary permissions to deploy and manage Agentless scanners. The template must run successfully to receive scans.
+1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners
 
 ## How to exclude resources from scans
 
@@ -66,7 +66,7 @@ To exclude AWS hosts, containers, and Lambda functions (if applicable) from scan
 1. To disable Agentless Scanning for an account, click the **Edit** button and switch the toggles in the **Agentless Scanning** section to the off position.
 1. Click **Done**.
 
-<div class="alert alert-info">To uninstall Agentless Scanning using CloudFormation, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.</div>
+<div class="alert alert-info">To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.</div>
 
 ## Further Reading
 
