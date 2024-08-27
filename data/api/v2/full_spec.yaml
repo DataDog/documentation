@@ -1017,6 +1017,8 @@ components:
         owned_by:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyResponse:
       description: Response for retrieving an application key.
       properties:
