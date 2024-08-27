@@ -39,7 +39,7 @@ jobs:
         run: |-
           git config user.name documentation-ci
           git config user.email documentation-ci@datadoghq.com
-          git add ./data/synthetics-worker-versions.json
+          git add ./data/synthetics_worker_versions.json
           git commit -m "(Automated) Bump synthetics-worker version"
           git push -f origin HEAD:refs/heads/synthetics-worker/versions
       - uses: actions/github-script@v7
