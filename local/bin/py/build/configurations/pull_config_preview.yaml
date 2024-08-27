@@ -582,17 +582,14 @@
 
       - repo_name: dd-source
         contents:
-        - action: workflows
+        - action: pull-and-push-file
           branch: main
           globs:
-            - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
-            - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
-            dest_path: '/service_management/workflows/actions_catalog/'
-            bundle_excludes:
-              - "com.datadoghq.test"
-              - "com.datadoghq.sample"
-              - "com.datadoghq.internal"
+            base_path: ""
+            dest_path: "/data/"
+            file_name: "workflow_bundles.json"
 
       - repo_name: web-ui
         contents:
