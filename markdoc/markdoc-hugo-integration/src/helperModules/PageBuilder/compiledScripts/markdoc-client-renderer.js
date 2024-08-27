@@ -34,30 +34,30 @@
   ));
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // dist/helperModules/PageBuilder/components/Chooser.js
-  var require_Chooser = __commonJS({
-    "dist/helperModules/PageBuilder/components/Chooser.js"(exports) {
+  // dist/helperModules/PageBuilder/components/ContentFilter.js
+  var require_ContentFilter = __commonJS({
+    "dist/helperModules/PageBuilder/components/ContentFilter.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.getChooserHtml = void 0;
-      var getChooserHtml = (resolvedPagePrefs) => {
-        let chooserHtml = "<div>";
+      exports.buildFilterSelectorUi = void 0;
+      var buildFilterSelectorUi = (resolvedPagePrefs) => {
+        let selectorHtml = "<div>";
         Object.keys(resolvedPagePrefs).forEach((prefId) => {
           const resolvedPref = resolvedPagePrefs[prefId];
           const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
-          chooserHtml += '<div class="markdoc-pref__container">';
-          chooserHtml += `<div class="markdoc-pref__label">${resolvedPref.displayName}</div>`;
+          selectorHtml += '<div class="mdoc-pref__container">';
+          selectorHtml += `<div class="mdoc-pref__label">${resolvedPref.displayName}</div>`;
           resolvedPref.options.forEach((option) => {
             const selected = option.id === currentValue ? "selected" : "";
-            chooserHtml += `<div class="markdoc-pref__pill ${selected}" data-pref-id="${resolvedPref.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+            selectorHtml += `<div class="mdoc-pref__pill ${selected}" data-pref-id="${resolvedPref.id}" data-option-id="${option.id}">${option.displayName}</div>`;
           });
-          chooserHtml += "</div>";
+          selectorHtml += "</div>";
         });
-        chooserHtml += "<hr />";
-        chooserHtml += "</div>";
-        return chooserHtml;
+        selectorHtml += "<hr />";
+        selectorHtml += "</div>";
+        return selectorHtml;
       };
-      exports.getChooserHtml = getChooserHtml;
+      exports.buildFilterSelectorUi = buildFilterSelectorUi;
     }
   });
 
@@ -2460,7 +2460,7 @@
       var _ClientRenderer_instance;
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientRenderer = void 0;
-      var Chooser_1 = require_Chooser();
+      var ContentFilter_1 = require_ContentFilter();
       var prefsResolution_1 = require_prefsResolution();
       var reresolver_1 = require_reresolver();
       var configMinification_1 = require_configMinification();
@@ -2538,12 +2538,12 @@
         }
         /**
          * Check whether the element or any of its ancestors
-         * have the class 'markdoc__hidden'.
+         * have the class 'mdoc__hidden'.
          */
         elementIsHidden(element) {
           let currentElement = element;
           while (currentElement) {
-            if (currentElement.classList.contains("markdoc__hidden")) {
+            if (currentElement.classList.contains("mdoc__hidden")) {
               return true;
             }
             currentElement = currentElement.parentElement;
@@ -2579,7 +2579,7 @@
           rightNav.innerHTML = html;
         }
         rerender() {
-          this.rerenderChooser();
+          this.rerenderFilterSelector();
           this.rerenderPageContent();
           this.populateRightNav();
           markdocAfterRerenderHooks.forEach((hook) => hook());
@@ -2601,7 +2601,7 @@
               newDisplayStatusByRef[ref] = resolvedFunction.value;
             }
           });
-          const toggleables = document.getElementsByClassName("markdoc__toggleable");
+          const toggleables = document.getElementsByClassName("mdoc__toggleable");
           for (let i = 0; i < toggleables.length; i++) {
             const toggleable = toggleables[i];
             const ref = toggleable.getAttribute("data-if");
@@ -2612,27 +2612,27 @@
               continue;
             }
             if (newDisplayStatusByRef[ref]) {
-              toggleable.classList.remove("markdoc__hidden");
+              toggleable.classList.remove("mdoc__hidden");
             } else {
-              toggleable.classList.add("markdoc__hidden");
+              toggleable.classList.add("mdoc__hidden");
             }
           }
         }
         /**
-         * Listen for selection changes in the chooser.
+         * Listen for changes in the filter selector.
          */
-        addChooserEventListeners() {
-          const prefPills = document.getElementsByClassName("markdoc-pref__pill");
+        addFilterSelectorEventListeners() {
+          const prefPills = document.getElementsByClassName("mdoc-pref__pill");
           for (let i = 0; i < prefPills.length; i++) {
             prefPills[i].addEventListener("click", (e) => this.handlePrefSelectionChange(e));
           }
         }
-        locateChooserElement() {
-          const chooserElement = document.getElementById("markdoc-chooser");
-          if (!chooserElement) {
+        locateFilterSelectorEl() {
+          const filterSelectorEl = document.getElementById("mdoc-selector");
+          if (!filterSelectorEl) {
             return false;
           } else {
-            this.chooserElement = chooserElement;
+            this.filterSelectorEl = filterSelectorEl;
             return true;
           }
         }
@@ -2670,7 +2670,7 @@
           this.pagePrefsConfig = p.pagePrefsConfig;
           this.selectedValsByPrefId = p.selectedValsByPrefId || {};
           this.ifFunctionsByRef = {};
-          const contentIsCustomizable = this.locateChooserElement();
+          const contentIsCustomizable = this.locateFilterSelectorEl();
           if (contentIsCustomizable) {
             Object.keys(p.ifFunctionsByRef).forEach((ref) => {
               this.ifFunctionsByRef[ref] = (0, configMinification_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
@@ -2679,7 +2679,7 @@
             if (overrideApplied) {
               this.rerender();
             } else {
-              this.addChooserEventListeners();
+              this.addFilterSelectorEventListeners();
             }
             this.populateRightNav();
             this.revealPage();
@@ -2692,22 +2692,22 @@
         }
         revealPage() {
           markdocBeforeRevealHooks.forEach((hook) => hook());
-          if (this.chooserElement) {
-            this.chooserElement.style.position = "sticky";
-            this.chooserElement.style.top = "95px";
-            this.chooserElement.style.backgroundColor = "white";
-            this.chooserElement.style.paddingTop = "10px";
-            this.chooserElement.style.visibility = "visible";
-            this.chooserElement.style.zIndex = "1000";
+          if (this.filterSelectorEl) {
+            this.filterSelectorEl.style.position = "sticky";
+            this.filterSelectorEl.style.top = "95px";
+            this.filterSelectorEl.style.backgroundColor = "white";
+            this.filterSelectorEl.style.paddingTop = "10px";
+            this.filterSelectorEl.style.visibility = "visible";
+            this.filterSelectorEl.style.zIndex = "1000";
           }
-          const content = document.getElementById("markdoc-content");
+          const content = document.getElementById("mdoc-content");
           if (content) {
             content.style.visibility = "visible";
           }
         }
-        rerenderChooser() {
-          if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
-            throw new Error("Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement");
+        rerenderFilterSelector() {
+          if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.filterSelectorEl) {
+            throw new Error("Cannot rerender filter selector without pagePrefsConfig, prefOptionsConfig, and filterSelectorEl");
           }
           const resolvedPagePrefs = (0, prefsResolution_1.resolveMinifiedPagePrefs)({
             pagePrefsConfig: this.pagePrefsConfig,
@@ -2718,9 +2718,9 @@
             const resolvedPref = resolvedPagePrefs[resolvedPrefId];
             this.selectedValsByPrefId[resolvedPref.id] = resolvedPref.currentValue;
           });
-          const newChooserHtml = (0, Chooser_1.getChooserHtml)(resolvedPagePrefs);
-          this.chooserElement.innerHTML = newChooserHtml;
-          this.addChooserEventListeners();
+          const newFilterSelectorHtml = (0, ContentFilter_1.buildFilterSelectorUi)(resolvedPagePrefs);
+          this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
+          this.addFilterSelectorEventListeners();
         }
       };
       exports.ClientRenderer = ClientRenderer2;

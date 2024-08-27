@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { FileParser } from '../../../src/helperModules/FileParser';
+import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
 import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
@@ -16,7 +16,7 @@ describe('PageBuilder.build', () => {
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
 
-  const parsedFile = FileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
+  const parsedFile = MdocFileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
 
   const prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
     parsedFile.frontmatter,

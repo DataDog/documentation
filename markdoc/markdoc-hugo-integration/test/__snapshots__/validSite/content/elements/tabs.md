@@ -2,8 +2,8 @@
 title: Tabs
 ---
 
-<div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><hr /></div></div>
-<div id="markdoc-content" class="customizable"><article>
+<div id="mdoc-selector"><div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Color</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><hr /></div></div>
+<div id="mdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>
@@ -31,13 +31,13 @@ title: Tabs
       >
         <div class="alert alert-info"><p>Here's an info alert.</p></div>
         <h3 id="customization-demo">Customization demo</h3>
-        <div class="markdoc__toggleable" data-if="0">
+        <div class="mdoc__toggleable" data-if="0">
           <p>The selected color is <strong>blue</strong>.</p>
         </div>
-        <div class="markdoc__toggleable markdoc__hidden" data-if="1">
+        <div class="mdoc__toggleable mdoc__hidden" data-if="1">
           <p>The selected color is <strong>yellow</strong>.</p>
         </div>
-        <div class="markdoc__toggleable markdoc__hidden" data-if="2">
+        <div class="mdoc__toggleable mdoc__hidden" data-if="2">
           <p>The selected color is <strong>red</strong>.</p>
         </div>
         <h3 id="partial-demo">Partial demo</h3>

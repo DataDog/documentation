@@ -1,7 +1,7 @@
 {
   "inputs": {
-    "dist/helperModules/PageBuilder/components/Chooser.js": {
-      "bytes": 1078,
+    "dist/helperModules/PageBuilder/components/ContentFilter.js": {
+      "bytes": 1105,
       "imports": [],
       "format": "cjs"
     },
@@ -11,7 +11,7 @@
       "format": "cjs"
     },
     "dist/helperModules/prefsResolution.js": {
-      "bytes": 6055,
+      "bytes": 6063,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -127,12 +127,12 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientRenderer.js": {
-      "bytes": 13663,
+      "bytes": 13694,
       "imports": [
         {
-          "path": "dist/helperModules/PageBuilder/components/Chooser.js",
+          "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
           "kind": "require-call",
-          "original": "./PageBuilder/components/Chooser"
+          "original": "./PageBuilder/components/ContentFilter"
         },
         {
           "path": "dist/helperModules/prefsResolution.js",
@@ -169,8 +169,8 @@
       "exports": [],
       "entryPoint": "src/markdoc-client-renderer.js",
       "inputs": {
-        "dist/helperModules/PageBuilder/components/Chooser.js": {
-          "bytesInOutput": 539
+        "dist/helperModules/PageBuilder/components/ContentFilter.js": {
+          "bytesInOutput": 544
         },
         "dist/schemas/regexes.js": {
           "bytesInOutput": 396
@@ -206,13 +206,13 @@
           "bytesInOutput": 1542
         },
         "dist/helperModules/ClientRenderer.js": {
-          "bytesInOutput": 5826
+          "bytesInOutput": 5882
         },
         "src/markdoc-client-renderer.js": {
           "bytesInOutput": 61
         }
       },
-      "bytes": 29374
+      "bytes": 29435
     }
   }
 }

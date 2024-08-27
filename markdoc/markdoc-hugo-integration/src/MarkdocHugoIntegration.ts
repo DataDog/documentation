@@ -7,7 +7,11 @@
 import fs from 'fs';
 import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { FileParser, ParsingErrorReport, ParsedFile } from './helperModules/FileParser';
+import {
+  MdocFileParser,
+  ParsingErrorReport,
+  ParsedFile
+} from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { ConfigProcessor } from './helperModules/ConfigProcessor';
 import { PageBuildArgs, PageBuilder } from './helperModules/PageBuilder';
@@ -96,7 +100,7 @@ export class MarkdocHugoIntegration {
    * @returns A ParsedFile object.
    */
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
-    const parsedFile = FileParser.parseMdocFile(
+    const parsedFile = MdocFileParser.parseMdocFile(
       markdocFilepath,
       this.directories.partials
     );

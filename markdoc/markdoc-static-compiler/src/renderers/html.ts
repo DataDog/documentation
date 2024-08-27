@@ -95,9 +95,9 @@ export default function render(
     if (config && config.variables !== undefined) {
       node = reresolve(node, config); // TODO: Fix with generic type
     }
-    let wrapperTagClasses = 'markdoc__toggleable';
+    let wrapperTagClasses = 'mdoc__toggleable';
     if (attributes?.display === 'false') {
-      wrapperTagClasses += ` markdoc__hidden`;
+      wrapperTagClasses += ` mdoc__hidden`;
     }
     let wrapperTagOutput = `<${name} class="${wrapperTagClasses}" ${ref}>`;
     wrapperTagOutput += render(children, config, components);

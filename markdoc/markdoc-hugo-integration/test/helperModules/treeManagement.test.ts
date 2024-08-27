@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { FileParser } from '../../src/helperModules/FileParser';
+import { MdocFileParser } from '../../src/helperModules/MdocFileParser';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -15,7 +15,7 @@ describe('treeManagement', () => {
     ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
-  const parsedFile = FileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
+  const parsedFile = MdocFileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
   const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
     parsedFile.frontmatter,
     prefOptionsConfig

@@ -1,11 +1,11 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
-import { ParsedFile } from '../FileParser';
+import { ParsedFile } from '../MdocFileParser';
 import { ConfigProcessor } from '../ConfigProcessor';
 import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { getChooserHtml } from './components/Chooser';
+import { buildFilterSelectorUi } from './components/ContentFilter';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { resolvePagePrefs } from '../prefsResolution';
@@ -41,7 +41,7 @@ export interface PageBuildArgs {
  * for building HTML or Markdown strings from parsed .mdoc files.
  *
  * The PageBuilder uses the parsed Markdoc file to build
- * a chooser component, the main HTML content, and a script
+ * the filter selector component, the main HTML content, and a script
  * that initializes the client-side renderer
  * with the necessary data to re-render the page
  * when the user changes a preference setting.
@@ -63,7 +63,7 @@ export class PageBuilder {
       defaultValsByPrefId
     });
 
-    const chooserHtml = this.#getChooserHtml({
+    const contentFilterHtml = this.#getFilterSelectorHtml({
       frontmatter: args.parsedFile.frontmatter,
       prefOptionsConfig: args.prefOptionsConfig,
       defaultValsByPrefId
@@ -86,8 +86,8 @@ export class PageBuilder {
     let pageContents = '';
     if (args.parsedFile.frontmatter.page_preferences) {
       pageContents = `
-<div id="markdoc-chooser">${chooserHtml}</div>
-<div id="markdoc-content" class="customizable">${articleHtml}</div>
+<div id="mdoc-selector">${contentFilterHtml}</div>
+<div id="mdoc-content" class="customizable">${articleHtml}</div>
 <div x-init='${pageInitScript}'></div>
 `;
     } else {
@@ -122,12 +122,12 @@ export class PageBuilder {
     return str.replace(/(\r\n|\n|\r)/gm, '');
   }
 
-  static #getChooserHtml(p: {
+  static #getFilterSelectorHtml(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
     defaultValsByPrefId: Record<string, string>;
   }): string {
-    let chooser = '';
+    let filterSelectorHtml = '';
 
     if (p.frontmatter.page_preferences) {
       const resolvedPagePrefs = resolvePagePrefs({
@@ -135,10 +135,10 @@ export class PageBuilder {
         prefOptionsConfig: p.prefOptionsConfig,
         valsByPrefId: p.defaultValsByPrefId
       });
-      chooser = getChooserHtml(resolvedPagePrefs);
+      filterSelectorHtml = buildFilterSelectorUi(resolvedPagePrefs);
     }
 
-    return chooser;
+    return filterSelectorHtml;
   }
 
   /**

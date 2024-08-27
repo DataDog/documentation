@@ -34,7 +34,7 @@ describe('rendering stages', () => {
   // in a different style than "shown" content
   const htmlWithStyles = `
   <style>
-    .markdoc__hidden {
+    .mdoc__hidden {
       background-color: dimgray;
       color: white;
     }
@@ -43,7 +43,7 @@ describe('rendering stages', () => {
       color: deeppink;
     }
 
-    .markdoc__hidden code {
+    .mdoc__hidden code {
       color: pink;
     }
   </style>
