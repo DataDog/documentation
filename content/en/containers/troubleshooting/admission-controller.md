@@ -77,7 +77,7 @@ Refer to the [Kubernetes Distributions][17] for more configuration details regar
 
 #### OpenShift
 
-OpenShift has `SecurityContextConstraints` (SCCs) that are required to deploy pods with extra permissions, such as a `volume` with a `hostPath`. Datadog components are deployed with SCCs to allow activity specific to Datadog pods, but Datadog does not create SCCs for other pods. So the Admission Controller may add the socket based configuration to your application pods, causing them to fail to deploy.
+OpenShift has `SecurityContextConstraints` (SCCs) that are required to deploy pods with extra permissions, such as a `volume` with a `hostPath`. Datadog components are deployed with SCCs to allow activity specific to Datadog pods, but Datadog does not create SCCs for other pods. The Admission Controller might add the socket based configuration to your application pods, causing them to fail to deploy.
 
 If you are using OpenShift, use `hostip` mode. The following configuration enables `hostip` mode by disabling the socket options:
 
@@ -102,7 +102,7 @@ spec:
       unixDomainSocketConfig:
         enabled: false
 ```
-You can alternatively set `features.admissionController.agentCommunicationMode` to `hostip` or `service` directly.
+Alternatively, you can set `features.admissionController.agentCommunicationMode` to `hostip` or `service` directly.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -112,11 +112,11 @@ datadog:
     portEnabled: true
     socketEnabled: false
 ```
-You can alternatively set `clusterAgent.admissionController.configMode` to `hostip` or `service` directly.
+Alternatively, you can set `clusterAgent.admissionController.configMode` to `hostip` or `service` directly.
 {{% /tab %}}
 {{< /tabs >}}
 
-Refer to the [Kubernetes Distributions][18] for more configuration details regarding OpenShift.
+Refer to [Kubernetes Distributions][18] for more configuration details regarding OpenShift.
 
 ## View Admission Controller status
 
