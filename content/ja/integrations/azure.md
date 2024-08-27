@@ -9,7 +9,7 @@ categories:
 - log collection
 - network
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: インスタンスや多数の Azure サービスからメトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/azure/
@@ -169,26 +169,26 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 
 ### 自動
 
-_全サイト:_  
+_全サイト:_
 Datadog と Azure の標準インテグレーションを自動的にセットアップする手順については、[標準 Azure インテグレーションプログラム管理ガイド][50]を参照してください。Terraform や Azure CLI を通じてインテグレーションをセットアップし、 Datadog Azure VM 拡張機能を通じて Datadog Agent をネイティブに Azure にデプロイし、 自動化スクリプトを実行してログ収集を有効にすることができます。
 
-_US3:_  
+_US3:_
 Terraform を使用して Datadog の Azure Native インテグレーションを Azure の Datadog リソースでセットアップする手順については、[Azure ネイティブインテグレーションプログラム管理ガイド][51]を参照してください。
 
 ### 手動
 
-_全サイト:_  
+_全サイト:_
 Azure ポータルや CLI を通じた Datadog と Azure のインテグレーションを手動でセットアップする手順や、VM 拡張機能または AKS Cluster 拡張機能を用いて Azure に Datadog Agent を直接デプロイする手順については、[標準 Azure インテグレーション手動セットアップガイド][52]を参照してください。
 
-_US3:_  
+_US3:_
 Azure Native と Datadog のインテグレーションを手動でセットアップする手順については、[Azure ネイティブインテグレーション手動セットアップガイド][53]を参照してください。これには、Azure における Datadog リソースの作成、VM 拡張機能または AKS Cluster 拡張機能による Datadog Agent の Azure への直接デプロイ、シングルサインオン (SSO) のオプション構成が含まれます。
 
 ## 収集データ
 
-_全サイト:_  
+_全サイト:_
 Azure ログを Datadog に送信する手順については、[Azure ログを Datadog に送信する][54]ガイドを参照してください。Datadog-Azure 関数と Azure Event Hub を介したログ収集を有効にするには、自動プロセスまたは手動プロセスのいずれかを選択できます。また、Azure Blob Storage Function を使用して、すべての Azure App Services からログを収集することもできます。
 
-_US3:_  
+_US3:_
 サブスクリプションレベル、Azure リソース、Azure Active Directory のログを Datadog に送信する手順については、[Datadog リソースで Azure ログを送信する][55]ガイドを参照してください。
 
 ## 収集データ
@@ -201,7 +201,7 @@ _US3:_
 
 ### イベント
 
-Azure インテグレーションは、自動的に Azure サービス健全性イベントを収集します。これを Datadog で表示するには、[イベントエクスプローラー][57]に移動し、`Azure Service Health` ネームスペースをフィルタリングします。 
+Azure インテグレーションは、自動的に Azure サービス健全性イベントを収集します。これを Datadog で表示するには、[イベントエクスプローラー][57]に移動し、`Azure Service Health` ネームスペースをフィルタリングします。
 
 ### サービスチェック
 

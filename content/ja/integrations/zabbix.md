@@ -23,6 +23,8 @@ author:
   support_email: KosukeKamiya@users.noreply.github.com
 categories:
 - ネットワーク
+- イベント管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_on_public_website: true
@@ -32,7 +34,6 @@ integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: zabbix
 public_title: zabbix
@@ -45,9 +46,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Network
+  - Category::Event Management
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
   media: []
@@ -66,11 +69,11 @@ Zabbix に接続して
 - Datadog Agent を介して [Zabbix][1] を監視します。
 - Zabbix アラートを Datadog に送信して、アラートを Datadog イベントストリームのイベントとして表示します。
 
-## 計画と使用
+## セットアップ
 
 Zabbix チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -82,7 +85,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Zabbix サーバーのタイムゾーンが UTC に設定されていることを確認してください。Zabbix のタイムゾーンの詳細については、[Zabbix ドキュメント][5]を参照してください。
 
@@ -112,7 +115,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 
 3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
-``` 
+```
     try {
         Zabbix.Log(4, '[datadog webhook] received value=' + value);
 
@@ -154,21 +157,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 [Agent のステータスサブコマンド][8]を実行し、Checks セクションで `zabbix` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### ヘルプ
+### イベント
 
 Zabbix アラートは Datadog イベントストリームのイベントとして収集されます。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "zabbix" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

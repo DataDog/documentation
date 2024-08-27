@@ -48,7 +48,7 @@ Datadog の Y 軸コントロールには以下の機能があります。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/#timeboards
+[1]: /ja/dashboards/#get-started
 [2]: /ja/api/v1/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/
 [4]: /ja/dashboards/template_variables/

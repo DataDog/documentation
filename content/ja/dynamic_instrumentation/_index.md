@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/dynamic_instrumentation/
-- /dynamic_instrumentation/how-it-works/
+- /ja/tracing/dynamic_instrumentation/
+- /ja/dynamic_instrumentation/how-it-works/
 further_reading:
 - link: /dynamic_instrumentation/expression-language/
   tag: ドキュメント

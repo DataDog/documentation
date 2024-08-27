@@ -10,6 +10,7 @@ author:
 categories:
 - メトリクス
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md
 display_on_public_website: true
@@ -19,7 +20,6 @@ integration_id: rum-angular
 integration_title: Angular
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rum_angular
 public_title: Angular
@@ -32,6 +32,7 @@ tile:
   - Category::Metrics
   - Category::Tracing
   - Supported OS::Any
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Angular アプリケーションの監視とメトリクス生成
   media: []
@@ -64,7 +65,7 @@ Angular アプリケーションをエンドツーエンドで監視します。
 
 
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -78,9 +79,9 @@ Angular アプリケーションは、自動的に Datadog にトレースを送
 
 Angular アプリケーションのログを Datadog に転送し始めるには、[JavaScript ログ収集][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Angular インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -92,7 +93,7 @@ Angular インテグレーションには、メトリクスは含まれていま
 
 Angular インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 

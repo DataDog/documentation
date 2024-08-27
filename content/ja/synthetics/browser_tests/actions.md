@@ -5,7 +5,7 @@ further_reading:
   tag: ドキュメント
   text: ブラウザテストの高度なオプションについて
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
-  tag: Terraform
+  tag: 外部サイト
   text: Terraform による Synthetic グローバル変数の作成と管理
 title: ブラウザテストのステップ
 ---
@@ -18,7 +18,7 @@ title: ブラウザテストのステップ
 
 ## 自動記録されたステップ
 
-**Start Recording** をクリックすると、[Datadog ブラウザテストレコーダー拡張機能][3]が自動的に Web サイト上のステップを検出し、記録します。
+Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### クリック
 
@@ -34,13 +34,13 @@ title: ブラウザテストのステップ
 
 ### テキストを入力する
 
-Datadog は、`select` ドロップダウンメニューからオプションを選択するなど、アプリケーション上で実行したステップを記録し、ステップとしてのリカバリーが表示されます。
+Datadog は、`select` ドロップダウンメニューからオプションを選択するなど、アプリケーション上で実行したステップを記録し、その要約がステップとして表示されます。
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="ブラウザテストテキスト入力ステップ" video="true" width="95%" >}}
 
 ### オプションを選択する
 
-Datadog は、`select` ドロップダウンメニューからオプションを選択するなど、アプリケーション上で実行したステップを記録し、左隅にステップとしてのリカバリーが表示されます。
+Datadog は、`select` ドロップダウンメニューからオプションを選択するなど、アプリケーション上で実行したステップを記録し、その要約が左隅にステップとして表示されます。
 
 {{< img src="synthetics/browser_tests/select_options.png" alt="オプション選択ステップ" style="width:70%;" >}}
 
@@ -51,7 +51,7 @@ Datadog は、`select` ドロップダウンメニューからオプションを
 * ブラウザからデスクトップを開く
 * ファイルを記録する iframe にドラッグアンドドロップする
 
-Datadog は、アップロードなどアプリケーション上で実行したステップを記録し、左隅にステップとしてのリカバリーが表示されます。アップロードできるファイルは 10 個までで、それぞれ 5MB までの制限があります。
+Datadog は、アップロードなどアプリケーション上で実行したステップを記録し、その要約が左隅にステップとして表示されます。アップロードできるファイルは 10 個までで、それぞれ 5MB までの制限があります。
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="ファイルのアップロードステップを作成する" style="width:70%;" >}}
 
@@ -65,7 +65,7 @@ Datadog は、アップロードなどアプリケーション上で実行した
 
 テストが期待通りの状態で終了することを確認するために、ブラウザテストは**アサーション**で終了させる必要があります。
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="ブラウザテストステップでのアサーションのオプション" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
 いくつかのアサーションは、アクティブなページ、つまりユーザーがページ要素上で**クリック**や**アサーション**など、最後に操作したページを検証します。
 
@@ -88,9 +88,12 @@ Datadog は、アップロードなどアプリケーション上で実行した
 
 ブラウザテストが正しい要素をターゲットにするように、ドロップダウンメニューから `CSS` または `XPath 1.0` を選択し、セレクタを追加してユーザーロケータを設定します。**Test** をクリックします。
 
-Datadog では、より精度を高めるために、上記の 2 つのアサーションを使用することを推奨しています。詳細については、[高度なオプション][1]を参照してください。
+#### Test the state of a checkbox or radio button
 
-[1]: /ja/synthetics/browser_tests/advanced_options#user-specified-locator
+Create this assertion step to have your browser test select a page element and validate the state of the assertion (unchecked or checked).
+
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
+
 {{% /tab %}}
 {{% tab "アクティブページコンテンツのテスト" %}}
 
@@ -124,7 +127,7 @@ Datadog では、より精度を高めるために、上記の 2 つのアサー
 
 JavaScript アサーション関数には以下のパラメーターが含まれており、return ステートメントが必要です。
 
-* `return` (必須) ステートメントは、テストステップが成功するためにアサーションが満たす必要がある条件を反映します。任意のタイプを返すことができますが、値はブール値として自動的にキャストされます。
+* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean. If a falsy value is returned, the test step fails.
 
 * `vars` (オプション): ブラウザテストの[変数][2]を含む文字列。JavaScript スニペットでブラウザテスト変数を参照するには、`vars.<YOUR_VARIABLE>` を使用します。たとえば、ブラウザテストに `USERNAME` 変数が含まれている場合は、`vars.USERNAME` を使用して JavaScript スニペットでそれを呼び出します。
 
@@ -161,6 +164,8 @@ return jQuery().jquery.startsWith('3.5.1')
 [3]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 {{% /tab %}}
 {{< /tabs >}}
+
+</br>
 
 ### ナビゲーション
 
@@ -212,11 +217,11 @@ return jQuery().jquery.startsWith('3.5.1')
 
 ブラウザテストでは、操作が必要な要素まで自動的にスクロールします。ほとんどの場合、手動でスクロールステップを追加する必要はありません。スクロールステップを使用するのは、無限スクロールのような追加の操作を発生させる必要がある場合です。
 
-ブラウザテストで縦横にスクロールさせたいピクセル数を指定します。
+ブラウザテストで縦方向および横方向にスクロールさせたいピクセル数を指定します。
 
 {{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="ブラウザテスト記録 Test Scroll Step の Scroll ステップ" style="width:50%;" >}}
 
-デフォルトでは、**Scroll** ステップは、ページ全体をスクロールします。特定の要素 (例えば、特定の `<div>`) でスクロールする必要がある場合、**Target Element** をクリックして、ブラウザテストでスクロールさせたい要素を選択します。
+デフォルトでは、**Scroll** ステップはページ全体をスクロールします。特定の要素 (例えば、特定の `<div>`) でスクロールする必要がある場合、**Target Element** をクリックして、ブラウザテストでスクロールさせたい要素を選択します。
 
 #### 待機
 
@@ -226,7 +231,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 {{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="ブラウザテスト記録の Wait ステップ" style="width:50%;" >}}
 
-この追加時間は、ブラウザテストの記録の**毎回の実行**に系統的に追加されます。
+この追加時間は、ブラウザテストの記録の**すべての実行**に系統的に追加されます。
 
 ### 変数
 
@@ -249,14 +254,14 @@ return jQuery().jquery.startsWith('3.5.1')
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
-`{{ uuid }}`
-: バージョン 4 の UUID (Universally unique identifier) を生成します。
-
 `{{ date(n unit, format) }}` 
 : テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
 `{{ timestamp(n, unit) }}` 
 : テストが + または - `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
+
+`{{ uuid }}`
+: バージョン 4 の UUID (Universally unique identifier) を生成します。
 
 テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
 
@@ -264,6 +269,13 @@ return jQuery().jquery.startsWith('3.5.1')
 
 `span` や `div` などのコンテンツから、要素のテキストを抽出して変数を作成します。
 
+#### メール本文
+
+[`regex`][13] または [`Xpath`][12] のいずれかの方法で、メール本文から変数を作成します。
+
+* [`Regex`][13] はメールのプレーンテキスト本文から最初に一致するパターン (例えば `/*./`) を検索して返します。パターンが見つからない場合は、HTML 本文を検索します。
+
+* [`Xpath`][12] はメールの本文に HTML が含まれている場合にのみ適用されます。これは対応する場所 (例えば `$`) の内容を返します。
 
 #### JavaScript
 
@@ -319,7 +331,7 @@ Datadog Synthetics のメールアドレスを作成し、テストステップ�
 
 既存のブラウザテストをサブテストとして使用するには、**Add New Subtest** をクリックし、**From Existing Test** タブのドロップダウンメニューからブラウザテストを選択し、**Add Subtest** をクリックします。
 
-現在のブラウザテストのステップをサブテストに変換するには、**Extract From Steps** タブをクリックし、抽出したい記録されたステップを選択し、**Convert to Subest** をクリックしてください。デフォルトでは、サブテストは親テストの前のステップと順番に実行されます。
+現在のブラウザテストのステップをサブテストに変換するには、**Extract From Steps** タブをクリックし、抽出したい記録されたステップを選択し、**Convert to Subtest** をクリックしてください。デフォルトでは、サブテストは親テストの前のステップと順番に実行されます。
 
 {{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="ブラウザテストでサブテストを追加する" style="width:60%;" >}}
 
@@ -391,13 +403,13 @@ HTTP リクエストを定義するには、
 
    {{< /tabs >}}
    </br>
-3. **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。応答プレビューが表示されます。
+3. **Test URL** をクリックして、リクエストの構成をテストします。応答プレビューが表示されます。
 
 {{< img src="synthetics/browser_tests/http_request2.png" alt="HTTP リクエストの作成" style="width:80%;" >}}
 
 #### アサーションの追加
 
-アサーションは、期待されるテスト結果が何であるかを定義します。**Test URL** をクリックすると、テストの応答をもとに `status code`、`response time`、`header` `content-type` に関する基本的なアサーションが追加されます。ブラウザテストにおける HTTP ステップでは、アサーションはオプションです。
+アサーションは、期待されるテスト結果を定義します。Test URL をクリックすると、テストの応答に基づいて、`status code`、`response time`、`header` の `content-type` に関する基本的なアサーションが追加されます。ブラウザテストにおける HTTP ステップでは、アサーションはオプションです。
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -445,13 +457,25 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 手動で追加したステップで利用可能なすべての変数を表示するには、入力フィールドに `{{` と入力します。
 
-自動記録されたステップで変数を使用するには、**Inject this variable** アイコンをクリックし、記録中に変数値を入力します。
+自動で記録されたステップで変数を使うには、**Inject this variable** アイコンをクリックし、記録中に変数の値を入力します。
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="テストステップをクリックすると、レコーダーページに値が挿入される" video="true" width="100%" >}}
 
-ブラウザのテストステップで変数に異なる値が割り当てられる場合 (サブテストなど)、変数は最初に割り当てられた値を体系的に使用します。
+ブラウザのテストステップで変数に異なる値が割り当てられる場合 (サブテストなど)、変数は最初に割り当てられた値を一貫して使用します。
 
-HTTP リクエストの変数や JavaScript のステップのように、実行時にしか計算されない変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` をフィーチャーした `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に体系的に置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
+HTTP リクエストや JavaScript ステップの変数など、実行時にのみ計算される変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` を使用する `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に一貫して置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
+
+## Edit a recording 
+
+To edit a browser recording after it's saved:
+
+- Navigate to [Synthetics > Tests.][14]
+- Click on a previously saved browser test.
+- Click the gear icon on the top right hand corner and then click "edit recording".
+- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+
+{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
+
 
 ## その他の参考資料
 
@@ -470,3 +494,4 @@ HTTP リクエストの変数や JavaScript のステップのように、実行
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: https://app.datadoghq.com/synthetics/tests
