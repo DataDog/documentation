@@ -888,6 +888,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AWSRelatedAccountAttributes:
       description: Attributes for an AWS related account.
       properties:
@@ -1003,6 +1005,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyCreateRequest:
       description: Request used to create an application key.
       properties:
@@ -1363,6 +1367,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AuthNMappingAttributes:
       description: Attributes of AuthN Mapping.
       properties:
@@ -1649,6 +1655,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigAttributes:
       description: Attributes for An AWS CUR config.
       properties:
@@ -1713,6 +1721,8 @@ components:
       - report_prefix
       - status
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchData:
       description: AWS CUR config Patch data.
       properties:
@@ -1724,6 +1734,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchRequest:
       description: AWS CUR config Patch Request.
       properties:
@@ -1924,6 +1936,8 @@ components:
       - storage_account
       - storage_container
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPair:
       description: Azure config pair.
       properties:
@@ -1939,6 +1953,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPairAttributes:
       description: Attributes for Azure config pair.
       properties:
@@ -4675,6 +4691,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
       properties:
@@ -4722,6 +4740,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountType:
       default: confluent-cloud-accounts
       description: The JSON:API type for this API. Should always be `confluent-cloud-accounts`.
@@ -4833,6 +4853,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponse:
       description: Response schema when interacting with a Confluent resource.
       properties:
@@ -4869,6 +4891,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponseData:
       description: Confluent Cloud resource data.
       properties:
@@ -4885,6 +4909,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceType:
       default: confluent-cloud-resources
       description: The JSON:API type for this request.
@@ -8666,6 +8692,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountAttributes:
       description: Attributes associated with your service account.
       properties:
@@ -8717,12 +8745,16 @@ components:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountCreateRequest:
       description: Data on your newly generated service account.
       properties:
         data:
           $ref: '#/components/schemas/GCPSTSServiceAccountData'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountData:
       description: Additional metadata on your generated service account.
       properties:
@@ -8731,6 +8763,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountResponse:
       description: The account creation response.
       properties:
@@ -9602,6 +9636,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     IncidentCreateRelationships:
       description: The relationships the incident will have with other resources once
         created.
@@ -10052,6 +10088,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     IncidentResponseIncludedItem:
       description: An object related to an incident that is included in the response.
       oneOf:
@@ -13181,6 +13219,8 @@ components:
         type:
           $ref: '#/components/schemas/MetricEstimateResourceType'
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateAttributes:
       description: Object containing the definition of a metric estimate attribute.
       properties:
@@ -13197,6 +13237,8 @@ components:
           format: int64
           type: integer
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateResourceType:
       default: metric_cardinality_estimate
       description: The metric estimate resource type.
@@ -14995,6 +15037,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
@@ -15044,6 +15088,8 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialApplicationKeyAttributes:
       description: Attributes of a partial application key.
       properties:
@@ -15203,6 +15249,8 @@ components:
           example: powerpack
           type: string
       type: object
+      x-merge-override:
+        required: false
     PowerpackGroupWidget:
       description: Powerpack group widget definition object.
       properties:
@@ -15487,6 +15535,8 @@ components:
         type:
           $ref: '#/components/schemas/ProcessSummaryType'
       type: object
+      x-merge-override:
+        required: false
     ProcessSummaryAttributes:
       description: Attributes for a process summary.
       properties:
@@ -15955,6 +16005,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
@@ -16005,6 +16057,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationListAttributes:
       description: RUM application list attributes.
       properties:
@@ -16533,6 +16587,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpactData:
       description: Relationship to impact object.
       properties:
@@ -16546,6 +16602,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpacts:
       description: Relationship to impacts.
       properties:
@@ -16573,6 +16631,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentIntegrationMetadatas:
       description: A relationship reference for multiple integration metadata objects.
       example:
@@ -16636,6 +16696,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentResponders:
       description: Relationship to incident responders.
       properties:
@@ -16660,6 +16722,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentUserDefinedFields:
       description: Relationship to incident user defined fields.
       properties:
@@ -16755,6 +16819,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToRoleData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoleData:
       description: Relationship to role object.
       properties:
@@ -16765,6 +16831,8 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoles:
       description: Relationship to roles.
       properties:
@@ -16774,6 +16842,8 @@ components:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRule:
       description: Scorecard create rule response relationship.
       properties:
@@ -16817,12 +16887,16 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeam:
       description: Relationship to team.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToTeamData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamData:
       description: Relationship to Team object.
       properties:
@@ -16833,6 +16907,8 @@ components:
         type:
           $ref: '#/components/schemas/TeamType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -16846,6 +16922,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinks:
       description: Relationship between a team and a team link
       properties:
@@ -16857,6 +16935,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -16888,6 +16968,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
       properties:
@@ -16901,6 +16983,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamTeam:
       description: Relationship between team membership and team
       properties:
@@ -16943,6 +17027,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUsers:
       description: Relationship to users.
       properties:
@@ -17619,6 +17705,8 @@ components:
       required:
       - attributes
       type: object
+      x-merge-override:
+        required: false
     RoleCreateRequest:
       description: Create a role.
       properties:
@@ -17846,6 +17934,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     SAMLAssertionAttributeAttributes:
       description: Key/Value pair of attributes used in SAML assertion attributes.
       properties:
@@ -22868,6 +22958,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamAttributes:
       description: Team attributes
       properties:
@@ -23114,6 +23206,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamPermissionSettingAttributes:
       description: Team permission setting attributes
       properties:
@@ -23870,6 +23964,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     UserCreateRequest:
       description: Create a user.
       properties:
@@ -23889,6 +23985,8 @@ components:
       - type
       - relationships
       type: object
+      x-merge-override:
+        required: false
     UserInvitationDataAttributes:
       description: Attributes of a user invitation.
       properties:
@@ -23934,6 +24032,8 @@ components:
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object
+      x-merge-override:
+        required: false
     UserInvitationsRequest:
       description: Object to invite users to join the organization.
       properties:
@@ -24040,6 +24140,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamAttributes:
       description: Team membership attributes
       properties:
@@ -24092,6 +24194,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamPermissionAttributes:
       description: User team permission attributes
       properties:
@@ -24237,6 +24341,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     UserUpdateRequest:
       description: Update a user.
       properties:
