@@ -372,7 +372,7 @@ After configuring your application, verify that data is flowing correctly to Dat
 
 ## Uninstall standalone Collector
 
-Once you've confirmed that all data is being collected correctly in Datadog, you can remove the standalone OpenTelemetry Collector:
+After you've confirmed that all data is being collected correctly in Datadog, you can remove the standalone OpenTelemetry Collector:
 
 1. Ensure all required data is being collected and displayed in Datadog.  
 1. Uninstall the open source OpenTelemetry Collector from your environment:
