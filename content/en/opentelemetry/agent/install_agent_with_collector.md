@@ -474,7 +474,7 @@ View runtime and infrastructure metrics to visualize, monitor, and measure the p
 
 View logs to monitor and troubleshoot application and system operations.
 
-{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Logs Explorer." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Log Explorer." style="width:100%;" >}}
 
 ### Traces
 

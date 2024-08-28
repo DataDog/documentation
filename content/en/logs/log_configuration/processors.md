@@ -424,7 +424,7 @@ Use the category processor to add a new attribute (without spaces or special cha
 
 **Notes**:
 
-* The syntax of the query is the one in the [Logs Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one in the [Log Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
 * Once defined in the category processor, you can map categories to log status using the [log status remapper](#log-status-remapper).
