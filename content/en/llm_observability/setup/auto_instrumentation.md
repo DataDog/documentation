@@ -114,12 +114,29 @@ The Anthropic integration instruments the following methods:
 - [Streamed chat messages][11]:
   - `Anthropic().messages.stream()`, `AsyncAnthropic().messages.stream()`
 
+[1]: https://platform.openai.com/docs/api-reference/introduction
+[2]: https://platform.openai.com/docs/api-reference/completions
+[3]: https://platform.openai.com/docs/api-reference/chat
+[4]: https://python.langchain.com/v0.2/docs/introduction/
+[5]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
+[6]: https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
+[7]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[8]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
+[9]: https://docs.anthropic.com/en/api/client-sdks#python
+[10]: https://docs.anthropic.com/en/api/messages
+[11]: https://docs.anthropic.com/en/api/messages-streaming
+[12]: /llm_observability/setup/sdk/python/#in-code-setup
+[13]: https://python.langchain.com/v0.2/docs/concepts/#llms
+[14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
+[15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
+[16]: /llm_observability/setup/sdk/python
+[17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 ## Overview
 
-Datadog's [LLM Observability Node.js SDK][18] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
+Datadog's [LLM Observability Node.js SDK][4] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 
 | Framework                               | Supported Versions |
@@ -143,7 +160,7 @@ const { llmobs } = tracer;
 ```
 
 To only enable specific integrations:
-1. Use the [in-code SDK setup][12], specifying `plugins: false`.
+1. Use the [in-code SDK setup][6], specifying `plugins: false`.
 2. Manually enable the integration with `tracer.use()` at the top of the entrypoint file of your LLM application:
 
 ```javascript
@@ -159,11 +176,11 @@ tracer.use('<INTEGRATION_NAME_IN_LOWERCASE>', true);
 Additionally, you can set the following environment variables for more specific control over library patching and the integration that starts the span:
 
 `DD_TRACE_DISABLED_PLUGINS`
-**Example**: `DD_TRACE_DISABLED_PLUGINS=openai,http`<br>
+: **Example**: `DD_TRACE_DISABLED_PLUGINS=openai,http`<br>
 A comma-separated string of integration names automatically disabled when the tracer is initialized.
 
 `DD_TRACE_DISABLED_INSTRUMENTATIONS`
-**Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`<br>
+: **Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`<br>
 A comma-separated string of library names that are not patched when the tracer is initialized.
 
 ## OpenAI
@@ -178,34 +195,19 @@ The OpenAI integration instruments the following methods, including streamed cal
   - `openai.completions.create()`
 - [Chat completions][3]:
   - `openai.chat.completions.create()`
-- [Embeddings][19]:
+- [Embeddings][5]:
   - `openai.embeddings.create()`
 
+[1]: https://platform.openai.com/docs/api-reference/introduction
+[2]: https://platform.openai.com/docs/api-reference/completions
+[3]: https://platform.openai.com/docs/api-reference/chat
+[4]: /llm_observability/setup/sdk/nodejs
+[5]: https://platform.openai.com/docs/api-reference/embeddings
+[6]: /llm_observability/setup/sdk/nodejs/#in-code-setup
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://platform.openai.com/docs/api-reference/introduction
-[2]: https://platform.openai.com/docs/api-reference/completions
-[3]: https://platform.openai.com/docs/api-reference/chat
-[4]: https://python.langchain.com/v0.2/docs/introduction/
-[5]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
-[6]: https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
-[7]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
-[8]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
-[9]: https://docs.anthropic.com/en/api/client-sdks#python
-[10]: https://docs.anthropic.com/en/api/messages
-[11]: https://docs.anthropic.com/en/api/messages-streaming
-[12]: /llm_observability/setup/sdk/python/#in-code-setup
-[13]: https://python.langchain.com/v0.2/docs/concepts/#llms
-[14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
-[15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
-[16]: /llm_observability/setup/sdk/python
-[17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
-[18]: /llm_observability/setup/sdk/nodejs
-[19]: https://platform.openai.com/docs/api-reference/embeddings
-[20]: /llm_observability/setup/sdk/nodejs/#in-code-setup
 
