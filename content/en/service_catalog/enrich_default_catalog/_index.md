@@ -1,5 +1,5 @@
 ---
-title: Manage Automatically Included Entries
+title: Enrich Default Catalog
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
