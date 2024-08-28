@@ -34,7 +34,7 @@ Configure the following environment variables:
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2] and should be stored as a secret.    | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.    | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][3] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
 Provide the following inputs:

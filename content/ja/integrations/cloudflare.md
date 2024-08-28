@@ -32,7 +32,7 @@ categories:
 - ログの収集
 - キャッシュ
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -97,7 +97,7 @@ IP アドレスのブロックや Datadog でのケースの作成など、同�
 
 ## セットアップ
 
-Before you begin, you need a [Datadog account][5], with an [API key][6], and access to [Cloudflare Logpush][7], which requires an Enterprise account plan. 
+Before you begin, you need a [Datadog account][5], with an [API key][6], and access to [Cloudflare Logpush][7], which requires an Enterprise account plan.
 
 Cloudflare API トークンを使用する場合は、**Zone** > **Zone** > **Read** および **Zone** > **Analytics** > **Read** の権限を保有していることを確認してください。
 
@@ -113,7 +113,7 @@ Install the integration with the Datadog [Cloudflare integration tile][8].
 
 ### ログ収集
 
-Cloudflare allows customers to push logs directly into Datadog using Cloudflare Logpush. You can manage the Logpush job with the [Cloudflare API](#cloudflare-api) or directly within your [Cloudflare dashboard](#cloudflare-dashboard). 
+Cloudflare allows customers to push logs directly into Datadog using Cloudflare Logpush. You can manage the Logpush job with the [Cloudflare API](#cloudflare-api) or directly within your [Cloudflare dashboard](#cloudflare-dashboard).
 
 Cloudflare インテグレーションパイプラインをインストールすると、特定の属性が自動的にリマップされます。どの属性がリマップされるかを確認するには
 
@@ -127,7 +127,7 @@ Cloudflare インテグレーションパイプラインをインストールす
 1. Logpush ジョブエンドポイントへ POST をリクエストし、Logpush ジョブを作成します。以下のフィールドを含めます。
     * `name` (任意): ドメイン名をジョブ名として使用。
     * `destination_conf`: 以下のパラメーターからなるログの出力先。
-        * `<DATADOG_ENDPOINT_URL>`: The Datadog HTTP logs intake endpoint, which can be either one below. You can find the difference at [Datadog API reference][10]. 
+        * `<DATADOG_ENDPOINT_URL>`: The Datadog HTTP logs intake endpoint, which can be either one below. You can find the difference at [Datadog API reference][10].
           * **v1:** `http-intake.logs.{{< region-param key="dd_site" >}}/v1/input`
           * **v2 (latest):** `http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs`
         * `<DATADOG_API_KEY>`: 使用する Datadog API キー。

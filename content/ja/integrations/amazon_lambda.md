@@ -7,7 +7,7 @@ categories:
 - cloud
 - log collection
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/

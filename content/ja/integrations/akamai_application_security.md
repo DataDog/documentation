@@ -21,7 +21,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -83,7 +83,7 @@ To capture security event logs generated from your Akamai security configuration
 2. Search for **Identity and Access Management**.
 3. Click **Create API Client**.
 4. Under **Select APIs**, search for **SIEM** and provide **READ-ONLY** access.
-5. Under **Select groups**, assign **Manage SIEM** to the group associated with your security policy. 
+5. Under **Select groups**, assign **Manage SIEM** to the group associated with your security policy.
 6. After creating the API client, click **Create credential** to generate your set of credentials.
 <!--4. Follow the instructions below to assign the respective permissions for your Akamai product. -->
 <!-- TODO: When another Akamai product is added, remove #4-6 from above, uncomment #4 above, uncomment this section, and include

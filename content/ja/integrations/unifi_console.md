@@ -22,7 +22,7 @@ author:
   sales_email: antonin.bruneau@gmail.com
   support_email: antonin.bruneau@gmail.com
 categories: []
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unifi_console/README.md
 display_on_public_website: true

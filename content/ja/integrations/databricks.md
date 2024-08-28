@@ -22,7 +22,7 @@ categories:
 - cloud
 - コスト管理
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
 display_on_public_website: true
@@ -326,7 +326,7 @@ Databricks UI を使用してクラスターを編集し、init スクリプト�
 5. **Environment variables** で、`DD_API_KEY` 環境変数と、オプションで `DD_ENV` と `DD_SITE` 環境変数を指定します。
 6. **Init Scripts** タブに移動します。
 7. In the **Destination** dropdown, select the `Workspace` destination type. If using **Unity Catalog Volume**, in the **Destination** dropdown, select the `Volume` destination type.
-8. Specify a path to the init script. 
+8. Specify a path to the init script.
 9. **Add** ボタンをクリックします。
 
 もし `datadog_init_script.sh` を `Shared` ワークスペースに直接保存した場合は、パス `/Shared/datadog_init_script.sh` でファイルにアクセスできます。

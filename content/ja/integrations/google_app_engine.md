@@ -3,7 +3,7 @@ categories:
 - cloud
 - configuration & deployment
 - google cloud
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。
 doc_link: https://docs.datadoghq.com/integrations/google_app_engine/

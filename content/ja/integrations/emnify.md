@@ -30,7 +30,7 @@ author:
 categories:
 - iot
 - メトリクス
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/emnify/README.md
 display_on_public_website: true
@@ -88,7 +88,7 @@ Datadog-EMnify インテグレーションを使用して、IoT EMnify デバイ
 使用パターンは人によって異なるため、モニターに特定のケースを反映させるには、作業量に応じた境界線と感度を定義する必要があります。
 詳細については、[予測値モニター][3]と[異常モニター][4]のドキュメントをお読みください。
 
-### ダッシュボード  
+### ダッシュボード
 
 [ダッシュボード][5]で時間帯を選択し、表示されるデータにフィルターをかけることができます。
 

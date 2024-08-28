@@ -4,7 +4,7 @@ categories:
 - google cloud
 - data stores
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: クエリ数、実行回数、アップロードされたバイト数および行数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_alloydb/

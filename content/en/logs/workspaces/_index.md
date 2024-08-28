@@ -1,6 +1,10 @@
 ---
 title: Log Workspaces
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/log-workspaces/"
+  tag: "Blog"
+  text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="false" >}}
@@ -222,6 +226,10 @@ An example of the resulting `transaction_record_with_names` dataset:
 Finally, a treemap visualization cell is created with the `transaction_record_with_names` dataset filtered for `status:error` logs and grouped by `dollar_value`, `account_status`, and `customer_name`.
 
 {{< img src="logs/workspace/treemap.png" alt="The workspace datasets" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/analysis-workspace/list
 [2]: https://app.datadoghq.com/logs

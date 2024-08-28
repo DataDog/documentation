@@ -30,7 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
 display_on_public_website: true
@@ -109,7 +109,7 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
 
    instances:
      ## @param directory - string - optional - default: /var/spool/postfix
-     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more 
+     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more
      ## information see https://docs.datadoghq.com/integrations/postfix/#using-sudo.
      #
      - directory: /var/spool/postfix
