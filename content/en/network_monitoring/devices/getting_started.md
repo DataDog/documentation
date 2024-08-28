@@ -48,7 +48,7 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 ### SD-WAN monitoring
 
-Alongside SNMP devices, you can monitor wireless and SD-WAN (Software-Defined Wide Area Network) environments for select vendors, such as metrics from wireless access points, and the health of SD-WAN tunnels and edge devices.
+Alongside SNMP devices, you can monitor wireless and SD-WAN (Software-Defined Wide Area Network) environments for select vendors. Collect metrics from wireless access points, and monitor the health of SD-WAN tunnels and edge devices.
 
 SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
 
@@ -65,7 +65,7 @@ Once NDM is configured on your devices, you can further enrich them by adding ne
 : The Agent can collect device tags when configuring [individual devices][2] or with [Autodiscovery][3].
 
 [Device profiles][16]
-: Configure the Agent to collect and customize specific metrics and tags by creating Device profiles directly in the app.
+: Configure the Agent to collect and customize specific metrics and tags by creating device profiles directly in the app.
 
 [ServiceNow integration][4]
 : Dynamically enrich network devices monitored by Datadog Network Device Monitoring with data defined in ServiceNow's CMDB (Configuration Management Database).
@@ -75,7 +75,7 @@ Once NDM is configured on your devices, you can further enrich them by adding ne
 
 ### Customize metrics and tags
 
-Customize metrics and tags on your devices by viewing the [Supported Devices][22] page to view our out-of-the-box device profiles. If you would like to edit/add more metrics, the following options are available:
+Customize metrics and tags on your devices by viewing the [Supported Devices][22] page to view out-of-the-box device profiles. If you would like to edit or add more metrics, the following options are available:
 
 [Device profiles][23]
 : Directly edit metrics and tags in the Datadog Agent `yaml` file with with device profiles.

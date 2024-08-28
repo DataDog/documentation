@@ -23,7 +23,7 @@ The [generic profile][114] collects metrics for all devices not supported by a v
 ### Vendor profiles
 
 The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't, you can:
-  - Customize your own YAML profile (see the [NDM troubleshooting FAQ page][1] for guidance).
+  - Customize your own YAML profile (see the [NDM troubleshooting page][1] for guidance).
   - Create new [profiles][2] to start monitoring new device models.
 
 | Vendor | Config files |
