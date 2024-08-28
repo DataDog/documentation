@@ -45,7 +45,7 @@ Here are two example Collector configuration files:
 {{< tabs >}}
 {{% tab "Custom Collector components" %}}
 
-This example uses a custom `kafkametrics` component in `collector-config.yaml`:
+This example uses a custom `metricstransform` component in `collector-config.yaml`:
 
 {{< highlight yaml "hl_lines=8-15 38" >}}
 receivers:
@@ -55,14 +55,6 @@ receivers:
          endpoint: 0.0.0.0:4317
       http:
          endpoint: 0.0.0.0:4318
-  kafkametrics:
-    brokers: "${env:KAFKA_BROKER_ADDRESS}"
-    protocol_version: 2.0.0
-    scrapers:
-      - brokers
-      - topics
-      - consumers
-    collection_interval: 5s
 exporters:
   datadog:
     api:
@@ -72,6 +64,11 @@ processors:
     cardinality: 2
   batch:
     timeout: 10s
+  metricstransform:
+    transforms:
+      - include: system.cpu.usage
+        action: update
+        new_name: system.cpu.usage_time
 connectors:
   datadog/connector:
     traces:
@@ -85,8 +82,8 @@ service:
       processors: [infraattributes, batch]
       exporters: [datadog/connector, datadog]
     metrics:
-      receivers: [otlp, datadog/connector, kafkametrics]
-      processors: [infraattributes, batch]
+      receivers: [otlp, datadog/connector]
+      processors: [metricstransform,infraattributes, batch]
       exporters: [datadog]
     logs:
       receivers: [otlp]
