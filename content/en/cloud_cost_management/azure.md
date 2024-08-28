@@ -81,6 +81,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
     - File partitioning: `Checked`
     - Overwrite Data: `Unchecked`
+        - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously `Checked`, make sure to clean the files in the directory or move them to another one.
 
    {{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
