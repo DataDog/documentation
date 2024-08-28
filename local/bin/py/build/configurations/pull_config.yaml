@@ -453,6 +453,8 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
               title: Continuous Testing and CI GitHub Actions
+              algolia:
+                tags: ['datadog lambda extension']
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
