@@ -16,6 +16,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
   tag: "Blog"
   text: "Import Backstage YAML files into Datadog"
+aliases:
+    - /service_catalog/manage_entries/
 ---
 
 ## Automatic discovery
