@@ -79,7 +79,7 @@ database_monitoring:
     aurora:
       enabled: true
 ```
-If your agent is on running on ecs fargate, you need agent [version 7.54.0](https://github.com/DataDog/datadog-agent/releases/tag/7.54.0) or above and specify the region as shown below:
+If your agent is on running on AWS Fargate for Amazon ECS, you must use [Agent version 7.54.0][12] or above and specify the region as follows:
 ```yaml
 database_monitoring:
   autodiscovery:
