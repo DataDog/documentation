@@ -64,7 +64,7 @@ instances:
   - min_collection_interval: 30
 {{< /code-block >}}
 
-The example below demonstrates changing the inverva; for a hypothetical custom check that monitors a service on two separate servers:
+The example below demonstrates changing the interval for a hypothetical custom check that monitors a service named `my_service` on two separate servers:
 
 {{< code-block lang="yaml" >}}
 init_config:
