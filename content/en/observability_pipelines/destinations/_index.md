@@ -70,7 +70,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -90,7 +90,7 @@ A batch of events is flushed when one of these parameters is met. See the [event
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -112,7 +112,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -134,7 +134,7 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -156,7 +156,7 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -196,7 +196,7 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
@@ -218,7 +218,7 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See the [event batching](#event-batching-intro) section for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching](#event-batching-intro) for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
