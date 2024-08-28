@@ -32,11 +32,6 @@ cascade:
       tags: ['cloud cost', 'cloud integrations', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp', 'data collected aws', 'data collected azure', 'data collected google cloud']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
   Explore your cloud provider costs and correlate them with real-time telemetry data. Gain actionable insights and alerts on where your cloud costs are coming from, how they are changing, and where to find potential optimizations.
 {{< /learning-center-callout >}}
@@ -62,7 +57,7 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
 
 ## Use cloud cost data
 
-Visualize infrastructure spend alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities. 
+Visualize infrastructure spend alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities.
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
@@ -76,13 +71,13 @@ Visualize daily Datadog spending alongside related utilization metrics with a re
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}} 
+{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your Datadog cost data by using the [Metrics API][2].
 
 ## Create tag rules
 
-Use [Tag Pipelines][5] to ensure comprehensive cost tracking by standardizing the tags across all cloud resources. This prevents any cost data from being overlooked. 
+Use [Tag Pipelines][5] to ensure comprehensive cost tracking by standardizing the tags across all cloud resources. This prevents any cost data from being overlooked.
 
 {{< img src="cloud_cost/tags_addnew.png" alt="Create a tag rule in Tag Pipelines to ensure your cloud resources use standard tags" style="width:60%;" >}}
 
