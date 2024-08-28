@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: 설명서
   text: 윈도우즈(Windows) Agent의 기본 사용법
-kind: 가이드
 title: 윈도우즈(Windows)용 Datadog Agent Manager
 ---
 

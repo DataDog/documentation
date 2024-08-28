@@ -1,6 +1,5 @@
 ---
 title: Adding Custom Tags and Measures to Pipeline Traces
-kind: documentation
 aliases:
   - /continuous_integration/pipelines/custom_tags_and_metrics
   - /continuous_integration/setup_pipelines/custom_tags_and_metrics
@@ -165,6 +164,6 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 [7]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [8]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [9]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
-[10]: /continuous_integration/pipelines/explorer
+[10]: /continuous_integration/explorer
 [11]: /continuous_integration/pipelines/
 [12]: /getting_started/site/

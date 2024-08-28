@@ -2,7 +2,6 @@
 aliases:
 - /ko/network_performance_monitoring/guide/
 disable_toc: true
-kind: 가이드
 private: true
 title: 네트워크 성능 모니터링 지침
 ---

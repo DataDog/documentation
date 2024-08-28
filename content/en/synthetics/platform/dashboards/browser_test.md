@@ -1,6 +1,5 @@
 ---
 title: Synthetic Browser Test Performance Dashboard
-kind: documentation
 description: Learn about the out-of-the-box Synthetic browser test performance dashboard.
 aliases:
 - /synthetics/dashboards/browser_test

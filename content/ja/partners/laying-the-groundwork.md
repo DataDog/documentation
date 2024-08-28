@@ -1,6 +1,5 @@
 ---
 description: どのように始めればよいのか、また、最初の段階でどのような重要な決定をすればよいのか。
-kind: documentation
 private: true
 title: 基礎固め
 ---

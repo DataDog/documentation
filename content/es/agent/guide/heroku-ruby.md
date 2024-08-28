@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: Documentación
   text: Recopilar logs de Heroku
-kind: guía
 title: Instrumentar una aplicación de Ruby on Rails en Heroku con Datadog
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Continuous Integration Visibility Explorer
-kind: documentation
 description: Learn how to search and filter your pipeline executions in the CI Visibility Explorer.
 further_reading:
   - link: "/continuous_integration/pipelines/"

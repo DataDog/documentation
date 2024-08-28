@@ -1,6 +1,5 @@
 ---
 title: Migrate to OpenTelemetry Collector version 0.95.0+
-kind: guide
 aliases:
 - /opentelemetry/guide/switch_from_processor_to_connector
 ---
@@ -61,7 +60,9 @@ receivers:
   otlp:
     protocols:
       http:
+        endpoint: 0.0.0.0:4318
       grpc:
+        endpoint: 0.0.0.0:4317
 processors:
   batch:
 connectors:

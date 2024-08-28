@@ -2,6 +2,7 @@
 categories:
 - alerting
 - notifications
+custom_kind: integration
 dependencies: []
 description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/victorops/
@@ -12,7 +13,6 @@ integration_id: victorops
 integration_title: VictorOps
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: victorops
 public_title: Datadog-VictorOps インテグレーション
@@ -29,30 +29,30 @@ Datadog-VictorOps インテグレーションを使用して、Datadog のアラ
 - スナップショットを取得して作成
 - メトリクスアラートがトリガーされたときに作成
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. VictorOps の設定ページで "Integrations" をクリックします。
 2. "Datadog" をクリックし、"Enable Integration" をクリックします。
 3. キーをコピーします。
 4. Datadog に戻り、API キーを次のセクションに貼り付けます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 VictorOps インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 VictorOps インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 VictorOps インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 

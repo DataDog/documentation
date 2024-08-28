@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: En savoir plus sur les tests Browser
-kind: guide
+
 title: Utiliser un shadow DOM dans vos tests Browser
 ---
 

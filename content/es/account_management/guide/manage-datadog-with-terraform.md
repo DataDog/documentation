@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-teams/
   tag: Blog
   text: Agiliza la colaboración en toda tu organización con Datadog Teams
-kind: guía
 title: Gestiona Datadog con Terraform
 ---
 

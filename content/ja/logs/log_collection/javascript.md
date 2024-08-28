@@ -4,7 +4,6 @@ algolia:
   - ブラウザログ
 aliases:
 - /ja/logs/log_collection/web_browser
-kind: documentation
 title: ブラウザログ収集
 ---
 
@@ -377,7 +376,7 @@ window.DD_LOGS.init({
 | `usePartitionedCrossSiteSessionCookie` | ブール値 | いいえ       | `false` | 分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
 | `useCrossSiteSessionCookie`            | ブール値 | いいえ       | `false` | **非推奨**、`usePartitionedCrossSiteSessionCookie` を参照してください。                                                                                                              |
 
-## API
+## 使用方法
 
 ### カスタムログ
 

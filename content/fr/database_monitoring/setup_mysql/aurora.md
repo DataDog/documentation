@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Intégration MySQL basique
-kind: documentation
 title: Configuration de Database Monitoring pour MySQL avec une gestion sur Aurora
 ---
 

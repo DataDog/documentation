@@ -1,6 +1,5 @@
 ---
 title: Parsing
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
     - /logs/parsing/

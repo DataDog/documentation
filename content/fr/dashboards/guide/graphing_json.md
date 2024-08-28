@@ -13,7 +13,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentation
   text: Widgets
-kind: documentation
 title: Graphiques JSON
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/users/
   tag: Documentación
   text: Gestión de usuarios
-kind: documentación
 title: Parámetros de organización
 ---
 ## Información general

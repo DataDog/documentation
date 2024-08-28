@@ -1,6 +1,5 @@
 ---
 title: Pipeline Execution Facets
-kind: documentation
 description: Learn about default facets that you can use to search your pipeline executions in the CI Visibility Explorer.
 further_reading:
 - link: 'continuous_integration/search/'

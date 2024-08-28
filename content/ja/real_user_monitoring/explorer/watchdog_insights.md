@@ -13,7 +13,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: RUM エクスプローラーでの検索方法について
-kind: documentation
 title: Watchdog Insights for RUM
 ---
 
@@ -75,5 +74,5 @@ Datadog Real User Monitoring (RUM) は、RUM Explorer のコンテキストイ�
 [1]: /ja/watchdog/insights/
 [2]: /ja/real_user_monitoring/explorer
 [3]: /ja/real_user_monitoring/explorer/search/#facets
-[4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [5]: /ja/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

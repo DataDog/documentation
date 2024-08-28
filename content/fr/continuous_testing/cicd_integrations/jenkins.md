@@ -10,7 +10,6 @@ further_reading:
 - link: /continuous_integration/setup_pipelines/jenkins/
   tag: Documentation
   text: Configurer le tracing sur un pipeline Jenkins
-kind: documentation
 title: Jenkins
 ---
 

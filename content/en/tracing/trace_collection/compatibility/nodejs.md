@@ -1,6 +1,5 @@
 ---
 title: Node.js Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Node.js tracer'
 aliases:
   - /tracing/compatibility_requirements/nodejs
@@ -77,12 +76,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
+| [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
 | [gRPC][11]              | `>=1.13` | Fully supported |                                            |
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | See note on Complex framework usage.<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
+| [next][18]              | `>=9.5`  | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
@@ -98,6 +98,7 @@ Prefix all commands you run with an environment variable:
 
 ```shell
 NODE_OPTIONS='--require dd-trace/init' npm start
+```
 
 Or, modify the `package.json` file if you typically start an application with npm or yarn run scripts:
 
@@ -152,7 +153,6 @@ Or, modify the `package.json` file if you typically start an application with np
 | [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
 | [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
 | [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [kafka-node][47]           |          | Coming Soon     |                                                        |
 | [rhea][48]                 | `>=1`    | Fully supported |                                                        |
 
 ### SDK compatibility
@@ -239,7 +239,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [44]: https://github.com/squaremo/amqp.node
 [45]: https://github.com/coopernurse/node-pool
 [46]: https://github.com/tulios/kafkajs
-[47]: https://github.com/SOHU-Co/kafka-node
 [48]: https://github.com/amqp/rhea
 [49]: https://github.com/aws/aws-sdk-js
 [50]: https://github.com/petkaantonov/bluebird
@@ -257,3 +256,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [64]: https://github.com/openai/openai-node
+[65]: https://github.com/dotansimha/graphql-yoga

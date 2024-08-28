@@ -7,7 +7,6 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: 설명서
   text: Pipeline Visibility에 대해 알아보기
-kind: 가이드
 title: CI Visibility용 수집 제어 설정
 ---
 

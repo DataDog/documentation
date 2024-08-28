@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centre d'apprentissage
   text: Améliorer vos dashboards
-kind: documentation
 title: Requêtes
 ---
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/exclusion/
-kind: 설명서
 title: 제외
 ---
 

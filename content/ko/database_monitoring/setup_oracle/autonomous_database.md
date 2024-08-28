@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/oracle/
   tag: 설명서
   text: 기본 Oracle 통합
-kind: 설명서
 title: Oracle Autonomous Database에 대한 데이터베이스 모니터링 설정
 ---
 

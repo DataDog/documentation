@@ -13,7 +13,6 @@ further_reading:
 - link: /containers/guide/clustercheckrunners
   tag: Documentación
   text: Ejecutores de checks de clúster
-kind: documentación
 title: Checks de clúster
 ---
 

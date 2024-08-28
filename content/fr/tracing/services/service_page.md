@@ -24,7 +24,6 @@ further_reading:
   tag: Blog
   text: Gagner en visibilité sur les risques, vulnérabilités et attaques avec la vue
     Security APM
-kind: documentation
 title: Page Service
 ---
 

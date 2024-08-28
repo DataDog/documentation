@@ -3,7 +3,6 @@ further_reading:
 - link: /containers/kubernetes/installation
   tag: 설명서
   text: 쿠버네티스에 Datadog 에이전트 설치하기
-kind: documentation
 title: DaemonSet를 사용하여 Kubernetes에 Datadog Agent를 수동으로 설치 및 설정
 ---
 

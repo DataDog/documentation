@@ -1,6 +1,5 @@
 ---
 title: NDM Data Collected
-kind: documentation
 disable_toc: true
 aliases:
     - /network_performance_monitoring/devices/data/

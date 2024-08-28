@@ -11,7 +11,6 @@ further_reading:
 - link: /dashboards/guide/context-links/#overview/
   tag: 설명서
   text: 컨텍스트 링크
-kind: 설명서
 title: 상위 목록 위젯
 widget_type: toplist
 ---

@@ -1,6 +1,5 @@
 ---
 title: Datadog Audit Trail
-kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -188,6 +187,8 @@ Give more visual context to your audit trail events with dashboards. To create a
 Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
 
 To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+
+**Note**: The **List** view does not have the option to export to a scheduled report.
 
 {{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
 

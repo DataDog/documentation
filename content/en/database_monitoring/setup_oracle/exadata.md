@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Oracle Exadata
-kind: documentation
 description: Install and configure Database Monitoring for Oracle Exadata
 further_reading:
 - link: "/integrations/oracle/"
@@ -42,6 +41,9 @@ Complete the following to enable Database Monitoring with your Oracle database:
 ### Create the Datadog user
 
 {{% dbm-create-oracle-user %}}
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ### Install the Agent
 

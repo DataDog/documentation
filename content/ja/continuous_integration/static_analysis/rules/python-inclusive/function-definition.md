@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 表現に問題がないか関数名をチェックする
 ---
 ## メタデータ

@@ -1,6 +1,5 @@
 ---
 title: Analytics
-kind: Documentation
 ---
 
 ## Overview

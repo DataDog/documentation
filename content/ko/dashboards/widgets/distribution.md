@@ -18,7 +18,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: 설명서
   text: 쿼리
-kind: 설명서
 title: 디스트리뷰션 위젯
 widget_type: 디스트리뷰션
 ---

@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: documentation
 descriptions: Learn how to create and share saved views in the CD Visibility Explorer.
 further_reading:
 - link: "/continuous_delivery/explorer/search_syntax/"

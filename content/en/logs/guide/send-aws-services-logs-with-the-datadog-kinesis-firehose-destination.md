@@ -1,6 +1,5 @@
 ---
 title: Send AWS Services Logs with the Datadog Amazon Data Firehose Destination
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"

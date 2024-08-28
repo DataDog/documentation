@@ -1,6 +1,5 @@
 ---
 title: Configuration at Runtime
-kind: documentation
 further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"

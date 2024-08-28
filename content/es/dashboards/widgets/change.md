@@ -15,7 +15,6 @@ further_reading:
 - link: /dashboards/graphing_json/request_json/
   tag: Documentación
   text: Solicitar un esquema JSON
-kind: documentación
 title: Widget de cambio
 widget_type: cambio
 ---

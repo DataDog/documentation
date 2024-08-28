@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: 설명서
   text: 플랜 및 사용량 설정
-kind: 지침
 title: V1 월간 사용량 API에서 V2로 마이그레이션
 ---
 

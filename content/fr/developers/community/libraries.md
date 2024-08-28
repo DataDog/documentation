@@ -3,7 +3,6 @@ aliases:
 - /fr/libraries/
 - /fr/developers/faq/monitoring-akka/
 - /fr/developers/libraries/
-kind: documentation
 title: Bibliothèques
 ---
 

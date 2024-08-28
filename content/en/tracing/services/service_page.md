@@ -1,6 +1,5 @@
 ---
 title: Service Page
-kind: documentation
 aliases:
 - /tracing/visualization/service/
 further_reading:
@@ -46,7 +45,7 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the private beta!" url="https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/viewform?edit_requested=true" >}}
+{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
   Service health is in private beta. To request access, complete the form.
 {{< /callout >}}
 
@@ -101,32 +100,11 @@ Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you 
 
 ## Out-of-the-box graphs
 
-Datadog provides [out-of-the-box graphs][8] for any given Service:
-
-* Requests - Choose to display:
-    *  The **Total amount of requests and errors**
-    *  The amount of **Requests and errors per second**
-* Latency - Choose to display:
-    * The **Latency** by Version
-    * The **Latency** by Percentile (Avg/p75/p90/p95/p99/p99.9/Max latency of your traced requests) as a timeseries
-    * The **Historical Latency** to compare the Latency distribution with the day and week before
-    * The **Latency Distribution** over the selected timeframe
-    * The **Latency** by Error to evaluate the latency impact of an error on traced requests
-    * The **Apdex score** for web services; [learn more about Apdex][9]
-* Error - Choose to display:
-    * The **Total amount of errors**
-    * The amount of **Errors per second**
-    * The **% Error Rate**
-* Dependency Map:
-    * The **Dependency Map** showing upstream and downstream services.
-* **Sub-services**: When there are multiple services involved, a fourth graph (in the same toggle option as the Dependency Map) breaks down your **%of time spent** of your service by *services* or *type*.
-
-    This represents the relative time spent by traces in downstream services from the current service to the other *services* or *type*.
-
-    **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
-[Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
+Datadog provides out-of-the-box graphs for any given service. Use the dropdown above each graph to change the displayed information.
 
 {{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs" style="width:100%;">}}
+
+{{% apm-ootb-graphs %}}
 
 ### Export
 
@@ -265,7 +243,6 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [6]: /service_management/incident_management/
 [7]: /watchdog/
 [8]: /tracing/metrics/metrics_namespace/
-[9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [10]: /dashboards/
 [11]: /tracing/glossary/#resources
 [12]: /tracing/services/deployment_tracking/#versions-deployed

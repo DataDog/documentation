@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Recommendations
-kind: documentation
 private: true
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
 further_reading:
@@ -8,10 +7,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
-{{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
 Cloud Cost Recommendations is in public beta with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.

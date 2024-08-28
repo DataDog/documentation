@@ -1,6 +1,5 @@
 ---
 title: Data Streams Monitoring
-kind: documentation
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

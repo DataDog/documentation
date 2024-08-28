@@ -1,6 +1,5 @@
 ---
 title: Python OpenTracing instrumentation
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/python
 - /tracing/trace_collection/open_standards/python

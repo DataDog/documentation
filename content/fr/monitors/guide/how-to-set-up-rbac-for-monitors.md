@@ -9,7 +9,7 @@ further_reading:
 - link: /monitors/notify/#autorisations
   tag: Documentation
   text: En savoir plus sur la création de monitors restreints via l'interface
-kind: guide
+
 title: Configuration du RBAC pour les monitors
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Connect to Datadog over Azure Private Link
-kind: guide
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}

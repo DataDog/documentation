@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Datadog Support
-kind: documentation
 further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: "Documentation"

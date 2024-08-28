@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Se familiariser avec Real User Monitoring (RUM)
-kind: documentation
 title: Dépannage
 ---
 

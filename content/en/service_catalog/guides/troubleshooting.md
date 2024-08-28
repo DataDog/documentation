@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Service Catalog
-kind: documentation
 aliases:
   - /tracing/service_catalog/troubleshooting
   - /service_catalog/troubleshooting

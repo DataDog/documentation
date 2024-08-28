@@ -15,7 +15,6 @@ further_reading:
 - link: /integrations/
   tag: Documentación
   text: Más información sobre integraciones
-kind: documentation
 title: Python
 type: documentation
 ---

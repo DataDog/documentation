@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentación
   text: Uso básico del Agent
-kind: guía
 title: Desinstalar el Agent
 ---
 

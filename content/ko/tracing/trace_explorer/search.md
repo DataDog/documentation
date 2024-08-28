@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/query_syntax
   tag: 설명서
   text: 쿼리 구문
-kind: 설명서
 title: 스팬(span) 검색
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: documentation
 description: 'Use Saved Views to automatically configure your Log Explorer.'
 further_reading:
     - link: 'logs/explorer/analytics'

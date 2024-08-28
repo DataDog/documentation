@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: guía
 title: Crear diagramas con Mermaid JS
 ---
 

@@ -2,7 +2,6 @@
 aliases:
 - /ko/graphing/faq/dashboard-lists-api-doc
 - /ko/graphing/guide/dashboard-lists-api-v1-doc
-kind: 가이드
 title: 대시보드 목록 API(v1)
 ---
 

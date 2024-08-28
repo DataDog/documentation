@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Empezando con los paquetes DevSecOps
 ---
 
@@ -137,7 +136,7 @@ Los paquetes de infraestructura DevSecOps combinan la monitorización de infraes
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infraestructura DevSecOps Pro incluye [Contenedores][1], [Serverless][2] y [CSM Pro][3]. También incluye más de [Más de 700 integraciones listas para usar][4].
+Infraestructura DevSecOps Pro incluye [Contenedores][1], [Serverless][2] y [CSM Pro][3]. También incluye más de [Más de 750 integraciones listas para usar][4].
 
 ### Configuración
 
@@ -177,7 +176,7 @@ Obtén más información sobre las funciones incluidas en la infraestructura Dev
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infraestructura DevSecOps Enterprise incluye [Containers][1], [Serverless][2], [Live Processes][3], y [CSM Enterprise][4]. También incluye más de [más de 700 integraciones listas para usar][5].
+Infraestructura DevSecOps Enterprise incluye [Containers][1], [Serverless][2], [Live Processes][3], y [CSM Enterprise][4]. También incluye más de [más de 750 integraciones listas para usar][5].
 
 ### Configuración
 

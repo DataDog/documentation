@@ -1,6 +1,5 @@
 ---
 title: Paiements par carte bancaire
-kind: documentation
 ---
 ## Présentation
 

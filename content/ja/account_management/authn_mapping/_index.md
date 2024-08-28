@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/rbac/log_management/
   tag: ドキュメント
   text: ログ管理のための RBAC
-kind: documentation
 title: Federated Authentication to Role Mapping API
 ---
 
@@ -26,7 +25,7 @@ Datadog UI では、ユーザー管理の **Mappings** タブでマッピング�
 
 AuthN Mapping を JSON の本文から新しく作成します。新規作成された AuthN Mapping を返します。
 
-| メソッド | エンドポイントのパス        | ペイロードの要件 |
+| Method | エンドポイントのパス        | ペイロードの要件 |
 |--------|----------------------|------------------|
 | `POST` | `/v2/authn_mappings` | JSON             |
 

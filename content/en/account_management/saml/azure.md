@@ -1,6 +1,5 @@
 ---
 title: Azure Active Directory SAML IdP
-kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 further_reading:

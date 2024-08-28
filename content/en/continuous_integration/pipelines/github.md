@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on GitHub Actions Workflows
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/github
 further_reading:
@@ -32,13 +31,15 @@ Set up tracing in GitHub Actions to track the execution of your workflows, ident
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Running pipelines][12] | Running pipelines | View pipeline executions that are running. |
+| [Running pipelines][12] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Partial retries][13] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for GitHub jobs. |
 | [Custom tags][12] [and measures at runtime][13] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Approval wait time][16] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
+| [Custom spans][17] | Custom spans | Configure custom spans for your pipelines. |
+
 
 The following GitHub versions are supported:
 
@@ -74,6 +75,8 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 ### Enable log collection
 
 The GitHub Actions CI Visibility integration also allows automatically forwarding workflow job logs to [Datadog Log Management][5].
+
+<div class="alert alert-info"><strong>Note</strong>: Log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 
 To enable logs, follow these steps:
 
@@ -129,3 +132,4 @@ workflow job and workflow run events. To remove the events:
 [14]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [15]: /glossary/#queue-time
 [16]: /glossary/#approval-wait-time
+[17]: /glossary/#custom-span

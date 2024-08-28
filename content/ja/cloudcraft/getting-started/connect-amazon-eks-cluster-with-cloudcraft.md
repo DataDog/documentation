@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Amazon EKS クラスターを Cloudcraft に接続する
 ---
 
@@ -64,7 +63,6 @@ ClusterRoleBinding は、ロールで定義されたアクセス許可を、ク�
 ```
 cat << EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
 metadata:
   name: cloudcraft-view-only
 subjects:

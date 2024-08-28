@@ -4,6 +4,7 @@ categories:
 - data stores
 - google cloud
 - log collection
+custom_kind: integration
 dependencies: []
 description: Spanner インスタンスのリソースの使用状況を追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_spanner/
@@ -14,7 +15,6 @@ integration_id: google-cloud-spanner
 integration_title: Google Spanner
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_spanner
 public_title: Datadog-Google Spanner インテグレーション
@@ -32,11 +32,11 @@ Google Spanner からメトリクスを取得して、以下のことができ�
 - Spanner データベースのパフォーマンスを視覚化。
 - Spanner データベースのパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
-#### インフラストラクチャーリスト
+#### インストール
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
@@ -44,31 +44,31 @@ Google Spanner からメトリクスを取得して、以下のことができ�
 
 Google Cloud Spanner のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
-これが完了したら、Google Cloud Spanner のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Spanner のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
 
 1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Spanner のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "google_cloud_spanner" >}}
 
 
-### ヘルプ
+### イベント
 
 Google Cloud Spanner インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Google Cloud Spanner インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

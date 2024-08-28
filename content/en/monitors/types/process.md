@@ -1,6 +1,5 @@
 ---
 title: Live Process Monitor
-kind: documentation
 description: "Check if a process is running on a host"
 aliases:
 - /monitors/monitor_types/process

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/arithmetic/
-kind: 설명서
 title: 산술
 ---
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/faq/agent-5-autodiscovery
-kind: 가이드
 private: true
 title: Agent v5를 활용한 자동탐지
 ---
@@ -237,7 +236,6 @@ annotations:
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -260,7 +258,6 @@ Deployments에서 팟을 정의한다면 템플릿 어노테이션을 Deployment
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # Don't add templates here
   name: apache-deployment
 spec:

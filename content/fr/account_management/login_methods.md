@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Configurer les méthodes de connexion
 ---
 

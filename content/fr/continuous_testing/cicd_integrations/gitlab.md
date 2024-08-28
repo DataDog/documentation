@@ -10,7 +10,6 @@ further_reading:
 - link: /continuous_integration/pipelines/gitlab/
   tag: Documentation
   text: Configurer le tracing sur un pipeline GitLab
-kind: documentation
 title: GitLab
 ---
 

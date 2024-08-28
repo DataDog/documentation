@@ -1,6 +1,5 @@
 ---
 title: Enabling the PHP Profiler
-kind: Documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70
@@ -14,6 +13,9 @@ further_reading:
     - link: 'profiler/profiler_troubleshooting/php'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: "https://www.datadoghq.com/blog/php-exception-profiling/"
+      tag: 'Blog'
+      text: 'Why care about exception profiling in PHP?'
 aliases:
   - /tracing/profiler/enabling/php/
 ---

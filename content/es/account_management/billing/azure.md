@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Facturación de la integración de Azure
 ---
 

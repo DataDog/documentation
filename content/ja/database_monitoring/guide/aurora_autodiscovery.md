@@ -1,11 +1,6 @@
 ---
-kind: ガイド
 title: Amazon Aurora DB クラスターに対する Database Monitoring の構成
 ---
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Aurora クラスターのオートディスカバリーはベータ機能です。この機能に関するフィードバックがありましたら、support@datadoghq.com までご連絡ください。
-{{< /beta-callout >}}
 
 このガイドでは、Amazon Aurora [Postgres][1] または [MySQL][11] データベースに対して Database Monitoring を構成していることを前提としています。
 
@@ -14,39 +9,21 @@ Aurora クラスターのオートディスカバリーはベータ機能です�
 対応データベース
 : Postgres、MySQL
 
-サポート対象の Agent バージョン
-: 7.53.0 以降 (ベータ版)
-
-この機能を使用するには、Agent のベータ版をインストールする必要があります。このページの [Datadog Agent 7.53.0 以降のインストール](#install-datadog-agent-7530)セクションを参照してください。
+Supported Agent versions
+: 7.53.0+
 
 ## 概要
 
-Datadog の[オートディスカバリー][4]を使用すると、動的インフラストラクチャーでモニタリングを構成することができます。この機能を使用すると、個々のデータベースホストエンドポイントをリストすることなく、Aurora クラスターを監視することができます。これは、接続性やワークロードの変動に応じて Aurora Replica の数を動的に調整する [Aurora Auto Scaling][6] を使用するクラスターに特に役立ちます。オートディスカバリーは、プライマリとレプリカの両方のエンドポイントインスタンスを自動的に発見し監視します。
+Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints (for example, `postgres.d/conf.yaml`). This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload. Autodiscovery automatically discovers and monitors both primary and replica endpoint instances.
 
 オートディスカバリーと Database Monitoring を使用すると、Postgres または MySQL チェックの構成テンプレートを定義し、各チェックを適用するクラスターを指定できます。
 
 ## Aurora クラスターでオートディスカバリーを有効にする
 
-1. [Datadog Agent 7.53.0 以降のインストール](#install-datadog-agent-7530)
-2. [AWS 権限の付与](#grant-aws-permissions)
-3. [Aurora タグの構成](#configure-aurora-tags)
-4. [Datadog Agent の構成](#configure-the-datadog-agent)
-5. [構成テンプレートの作成](#create-a-configuration-template)
-
-### Datadog Agent 7.53.0 以降のインストール
-
-この機能を使用するには、Agent の[ベータ版][9]をインストールする必要があります。
-
-以下のコマンドを実行することで、Agent インストールスクリプトを使用して正しいバージョンをインストールできます。
-
-```bash
-DD_API_KEY=<API_KEY> DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
-DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
-DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
-
-Datadog Agent のインストールの詳細については、[Amazon Linux の基本的な Agent の使い方][10]を参照してください。
+1. [AWS 権限の付与](#grant-aws-permissions)
+2. [Aurora タグの構成](#configure-aurora-tags)
+3. [Datadog Agent の構成](#configure-the-datadog-agent)
+4. [構成テンプレートの作成](#create-a-configuration-template)
 
 ### AWS 権限の付与
 
@@ -160,7 +137,7 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-この例では、テンプレート変数 `%%host%%`、`%%port%%`、`%%extra_dbclusteridentifier%%`、`%%extra_region%%` に Aurora クラスターからの情報が動的に入力されます。
+この例では、テンプレート変数 `%%host%%`、`%port%%`、`%extra_dbclusteridentifier%%`、`%extra_region%%` が Aurora クラスターからの情報で動的に置き換えられます。
 
 [IAM 認証][2]を使用して Aurora クラスターに接続するには、以下のテンプレートを使用します。
 

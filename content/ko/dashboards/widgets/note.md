@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드를 구축하는 방법 알아보기
-kind: 설명서
 title: 메모 및 링크 위젯
 widget_type: 메모
 ---

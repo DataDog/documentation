@@ -1,6 +1,5 @@
 ---
 title: String Builder Processor
-kind: Documentation
 
 ---
 

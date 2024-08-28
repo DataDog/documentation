@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: ブログ
   text: Datadog Open Source Hub のご紹介
-kind: documentation
 title: 開発者
 ---
 

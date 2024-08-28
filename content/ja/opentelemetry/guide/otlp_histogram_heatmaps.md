@@ -6,7 +6,6 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: Datadog の OpenTelemetry サポート
-kind: ガイド
 title: OTLP ヒストグラムのヒートマップとしての可視化
 ---
 
@@ -83,7 +82,7 @@ OTLP ヒストグラムをヒートマップウィジェットとして確認で
 
 [Datadog Agent OpenMetrics チェック][6]は、あらかじめビン化されたデータヒートマップウィジェットオプションとも互換性があります。OpenTelemetry に変換せずに直接 OpenMetrics チェックにメトリクスを送信したい場合は、インスタンスで `collect_histogram_buckets` フラグと `non_cumulative_histogram_buckets` フラグを有効にすると、データが互換性を持った形で Datadog に送信されるようになります。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

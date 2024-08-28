@@ -1,6 +1,5 @@
 ---
 title: Tracing PHP Applications
-kind: documentation
 aliases:
 - /tracing/languages/php
 - /agent/apm/php/
@@ -66,7 +65,7 @@ php datadog-setup.php --php-bin=all
 # APM + ASM
 php datadog-setup.php --php-bin=all --enable-appsec
 
-# APM + Profiling (Beta)
+# APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 

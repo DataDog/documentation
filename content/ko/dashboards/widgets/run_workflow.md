@@ -4,7 +4,6 @@ further_reading:
 - link: /service_management/workflows/
   tag: 설명서
   text: 워크플로우 자동화
-kind: 설명서
 title: 워크플로우 위젯 실행
 widget_type: run_workflow
 ---

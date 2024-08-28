@@ -1,6 +1,6 @@
 ---
 title: Instrument a custom method to get deep visibility into your business logic
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"

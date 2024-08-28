@@ -37,7 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: ブログ
   text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
-kind: ガイド
 title: AWS マニュアルセットアップガイド
 ---
 
@@ -136,6 +135,8 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 {{< /tabs >}}
 
 {{% aws-permissions %}}
+
+{{% aws-resource-collection %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

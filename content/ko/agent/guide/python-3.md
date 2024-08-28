@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: 설명서
   text: 파이썬(Python) 3과 Datadog Agent v6 사용하기
-kind: 가이드
 title: 파이썬(Python) 3 커스텀 점검 마이그레이션
 ---
 

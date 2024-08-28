@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/beta/
-kind: documentación
 title: Funciones beta
 ---
 

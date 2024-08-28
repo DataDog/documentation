@@ -14,7 +14,7 @@ integration_id: azure-usage-and-quotas
 integration_title: Microsoft Azure 사용량 및 할당량
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_usage_and_quotas
 public_title: Datadog-Microsoft Azure 사용량 및 할당량 통합

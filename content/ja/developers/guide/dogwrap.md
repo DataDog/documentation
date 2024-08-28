@@ -3,7 +3,6 @@ aliases:
 - /ja/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 - /ja/dashboards/faq/how-do-i-track-cron-jobs
 description: Dogwrap を使用してコマンドを呼び出し、その結果からイベントを生成する
-kind: ガイド
 title: Dogwrap
 ---
 
@@ -46,7 +45,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 ```
 {{< /site-region >}}
 
-**注**: `dogwrap` コマンドは、デフォルトで US の Datadog サイトにデータを送信します。他のサイトにデータを送信する必要がある場合は、`eu`、`us3`、`us5` などのターゲットサイトを指定する `-s` オプションを含める必要があります。
+**Note**: The `dogwrap` command sends data to the US Datadog site by default. If you need to send data to another site, you must include the `-s` option specifying a target site, such as `eu`, `us3`, `us5`, etc.
 
 次のプレースホルダーと組み合わせます。
 

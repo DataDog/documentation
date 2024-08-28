@@ -1,6 +1,5 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Service-entry Spans
-kind: documentation
 aliases:
 - /opentelemetry/guide/service_entry_spans_mapping/
 further_reading:

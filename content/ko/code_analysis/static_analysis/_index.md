@@ -11,7 +11,6 @@ further_reading:
   tag: 설명서
   text: Source Code Integration에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 정적 분석
 ---
 

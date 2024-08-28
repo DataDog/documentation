@@ -1,6 +1,5 @@
 ---
 title: Getting Started with CI Visibility
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/monitor-ci-pipelines/'
   tag: 'Blog'
@@ -14,6 +13,9 @@ further_reading:
 - link: '/monitors/types/ci'
   tag: 'Documentation'
   text: 'Learn about CI Pipeline Monitors'
+- link: '/account_management/billing/ci_visibility'
+  tag: 'Documentation'
+  text: 'Learn about billing considerations for CI Visibility'
 algolia:
   tags: ["pipeline visibility", "pipelines", "ci pipeline"]
 ---

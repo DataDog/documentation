@@ -1,6 +1,5 @@
 ---
 title: Install Serverless Monitoring for AWS Lambda
-kind: documentation
 aliases:
     - /serverless/installation/installing_the_library/
     - /serverless/installation

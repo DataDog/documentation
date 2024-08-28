@@ -1,6 +1,5 @@
 ---
 title: Powerpack Widget
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/guide/powerpacks-best-practices/"

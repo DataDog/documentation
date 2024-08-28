@@ -6,7 +6,7 @@ aliases:
 - /ja/agent/docker/apm
 further_reading:
 - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/trace
-  tag: Github
+  tag: ソースコード
   text: ソースコード
 - link: /integrations/amazon_ecs/#トレースの収集
   tag: ドキュメント
@@ -23,7 +23,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: ドキュメント
 title: Docker アプリケーションのトレース
 ---
 
@@ -75,26 +74,85 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 
 ## Docker APM Agent の環境変数
 
-Docker Agent 内のトレースに利用可能なすべての環境変数をリストします。
+Use the following environment variables to configure tracing for the Docker Agent. See the [sample `config_template.yaml` file][8] for more details.
 
-| 環境変数       | 説明                                                                                                                                                                                                                                                                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | [Datadog API キー][1]                                                                                                                                                                                                                                                                                                                                 |
-| `DD_PROXY_HTTPS`           | 使用するプロキシの URL をセットアップします。                                                                                                                                                                                                                                                                                                                 |
-| `DD_APM_REPLACE_TAGS`      | [スパンのタグから機密データをスクラブします][2]。                                                                                                                                                                                                                                                                                                     |
-| `DD_APM_FILTER_TAGS_REQUIRE`      | Datadog に送信されるためにトレースになくてはならない必須タグを定義します。                                                                                                                                                                                                                                                                                                     |
-| `DD_APM_FILTER_TAGS_REJECT`      | 拒否タグを定義します。Agent はこれらのタグを持つトレースを削除します。       |
-| `DD_HOSTNAME`              | 自動検出が失敗した場合、または Datadog Cluster Agent を実行する場合に、メトリクスに使用するホスト名を手動で設定します。                                                                                                                                                                                                                                        |
-| `DD_DOGSTATSD_PORT`        | DogStatsD ポートを設定します。                                                                                                                                                                                                                                                                                                                              |
-| `DD_APM_RECEIVER_SOCKET`   | 設定した場合、Unix Domain Sockets からトレースを収集し、ホスト名とポートコンフィギュレーションよりも優先します。デフォルトでは設定されていません。設定する場合は、有効な sock ファイルを指定する必要があります。                                                                                                                                                                       |
-| `DD_BIND_HOST`             | StatsD とレシーバーのホスト名を設定します。                                                                                                                                                                                                                                                                                                                  |
-| `DD_LOG_LEVEL`             | ログレベルを設定します。(`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                                                      |
-| `DD_APM_ENABLED`           | `true` に設定すると (デフォルト)、Datadog Agent はトレースとトレースメトリクスを受け付けます。                                                                                                                                                                                                                                                                                         |
-| `DD_APM_CONNECTION_LIMIT`  | 30 秒のタイムウィンドウに対する最大接続数の上限を設定します。デフォルトの上限は 2000 です。                                                                                                                                                                                                                                                    |
-| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイントを設定します: `https://trace.agent.{{< region-param key="dd_site" >}}`。デフォルトは `https://trace.agent.datadoghq.com` 。                                                                                                                                                                                                                            |
-| `DD_APM_RECEIVER_PORT`     | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                                                                                                                                                                                                                    |
-| `DD_APM_NON_LOCAL_TRAFFIC` | [他のコンテナからのトレース](#tracing-from-other-containers)時に、非ローカルトラフィックを許可します。                                                                                                                                                                                                                                                        |
-| `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。例: <code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                                |                                                                                                                                                                                                                                                                                        
+`DD_API_KEY`                      
+: required - _string_
+<br/>Your [Datadog API key][1].
+
+`DD_SITE`
+: optional - _string_
+<br/>Your [Datadog site][7]. Set this to `{{< region-param key="dd_site" >}}`.
+<br/>**Default**: `datadoghq.com`
+
+`DD_APM_ENABLED`                   
+: optional - _Boolean_ - **default**: `true`
+<br/>When set to `true` (default), the Datadog Agent accepts traces and trace metrics.
+
+`DD_APM_RECEIVER_PORT`             
+: optional - _integer_ - **default**: `8126` 
+<br/>Sets the port on which the Datadog Agent's trace receiver listens. Set to `0` to disable the HTTP receiver.
+
+`DD_APM_RECEIVER_SOCKET`           
+: optional - _string_
+<br/>To collect your traces through UNIX Domain Sockets, provide the path to the UNIX socket. If set, this takes priority over hostname and port configuration, and must point to a valid socket file. 
+
+`DD_APM_NON_LOCAL_TRAFFIC`         
+: optional - _Boolean_ - **default**: `false`
+<br/>When set to `true`, the Datadog Agent listens to non-local traffic. If you are [tracing from other containers](#tracing-from-other-containers), set this environment variable to `true`. 
+
+`DD_APM_DD_URL`                    
+: optional - _string_
+<br/>To use a proxy for APM, provide the endpoint and port as `<ENDPOINT>:<PORT>`. The proxy must be able to handle TCP connections.
+
+`DD_APM_CONNECTION_LIMIT`          
+: required - _integer_ - **default**: `2000`
+<br/>Sets the maximum APM connections for a 30 second time window. See [Agent Rate Limits][6] for more details.
+
+`DD_APM_IGNORE_RESOURCES`          
+: optional - _[string]_ 
+<br/>Provides an exclusion list of resources for the Datadog Agent to ignore. If a trace's resource name matches one or more of the regular expressions on this list, the trace is not sent to Datadog. 
+<br/>Example: `"GET /ignore-me","(GET\|POST) and-also-me"`.                                                                                                                                                                                                                                                                                   
+
+`DD_APM_FILTER_TAGS_REQUIRE`       
+: optional - _object_
+<br/>Defines rules for tag-based trace filtering. To be sent to Datadog, traces must have these tags. See [Ignoring Unwanted Resources in APM][5]. 
+
+`DD_APM_FILTER_TAGS_REGEX_REQUIRE` 
+: optional - _object_
+<br/>Supported in Agent 7.49+. Defines rules for tag-based trace filtering with regular expressions. To be sent to Datadog, traces must have tags that match these regex patterns. 
+
+`DD_APM_FILTER_TAGS_REJECT`        
+: optional - _object_ 
+<br/>Defines rules for tag-based trace filtering. If a trace has these tags, it is not sent to Datadog. See [Ignoring Unwanted Resources in APM][5] for more details. 
+
+`DD_APM_FILTER_TAGS_REGEX_REJECT`  
+: optional - _object_ 
+<br/>Supported in Agent 7.49+. Defines rules for tag-based trace filtering with regular expressions. If a trace has tags that match these regex patterns, the trace is not sent to Datadog. 
+
+`DD_APM_REPLACE_TAGS`              
+: optional - _[object]_ 
+<br/>Defines a set of rules to [replace or remove tags that contain potentially sensitive information][2].
+
+`DD_HOSTNAME`                      
+: optional - _string_ - **default**: automatically detected 
+<br/>Sets the hostname to use for metrics if automatic hostname detection fails, or when running the Datadog Cluster Agent.
+
+`DD_DOGSTATSD_PORT`                
+: optional - _integer_ - **default**: `8125` 
+<br/>Sets the DogStatsD port.
+
+`DD_PROXY_HTTPS`                   
+: optional - _string_
+<br/>To use a [proxy][4] to connect to the internet, provide the URL. 
+
+`DD_BIND_HOST`                     
+: optional - _string_ - **default**: `localhost` 
+<br/>Sets the host to listen on for DogStatsD and traces.
+
+`DD_LOG_LEVEL`                     
+: optional - _string_ - **default**: `info` 
+<br/>Sets the minimum logging level. Valid options: `trace`, `debug`, `info`, `warn`, `error`, `critical`, and `off`.
 
 ## 他のコンテナからのトレース
 
@@ -291,9 +349,45 @@ from ddtrace import tracer
 tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
+### Unix Domain Socket (UDS)
+To submit traces via socket, the socket should be mounted to the Agent container and your application container.
+
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network <NETWORK_NAME> \
+              --cgroupns host \
+              --pid host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -v /var/run/datadog/:/var/run/datadog/ \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+              gcr.io/datadoghq/agent:latest
+# Application
+docker run -d --name app \
+              --network <NETWORK_NAME> \
+              -v /var/run/datadog/:/var/run/datadog/ \
+              -e DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket \
+              company/app:latest
+```
+
+Refer to the [language-specific APM instrumentation docs][3] for tracer settings.
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/tracing/guide/security/#replace-rules
+[2]: /ja/tracing/configure_data_security/#replace-tags
+[3]: /ja/tracing/setup/
+[4]: /ja/agent/proxy
+[5]: /ja/tracing/guide/ignoring_apm_resources/
+[6]: /ja/tracing/troubleshooting/agent_rate_limits
+[7]: /ja/getting_started/site/
+[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

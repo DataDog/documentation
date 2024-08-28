@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: NotImplemented を発生させない - 存在しない
 ---
 ## メタデータ

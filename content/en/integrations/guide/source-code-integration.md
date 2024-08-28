@@ -1,6 +1,6 @@
 ---
 title: Datadog Source Code Integration
-kind: guide
+
 description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "/integrations/github/"
@@ -27,6 +27,9 @@ further_reading:
 - link: "/logs/error_tracking/"
   tag: "Documentation"
   text: "Learn about Error Tracking for logs"
+- link: "https://www.datadoghq.com/blog/live-debugging/"
+  tag:  "Blog"
+  text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
 
 ## Overview
@@ -304,6 +307,27 @@ If you are using Serverless, you have two options depending on your serverless a
 ##### Option 1: Datadog Tooling
 
 {{% sci-dd-serverless %}}
+
+##### Option 2: `DD_GIT_*` Environment Variables
+
+{{% sci-dd-git-env-variables %}}
+
+#### Host
+
+If you are using a host, configure your application with `DD_GIT_*` environment variables.
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+
+If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
+
+##### Option 1: Docker
+
+{{% sci-docker %}}
 
 ##### Option 2: `DD_GIT_*` Environment Variables
 

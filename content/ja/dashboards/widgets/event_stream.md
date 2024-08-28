@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/widgets/event_stream/
 description: イベントストリームからイベントを絞り込んで表示する
-kind: documentation
 private: true
 title: イベントストリームウィジェット
 ---

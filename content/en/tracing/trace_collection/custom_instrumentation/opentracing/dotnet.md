@@ -1,6 +1,5 @@
 ---
 title: .NET OpenTracing Instrumentation
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/dotnet
 - /tracing/trace_collection/open_standards/dotnet
@@ -10,7 +9,7 @@ type: multi-code-lang
 code_lang_weight: 70
 description: 'OpenTracing instrumentation for .NET'
 further_reading:
-    - link: 'tracing/trace_collection/trace_context_propagation/dotnet/'
+    - link: 'tracing/trace_collection/trace_context_propagation/'
       text: 'Propagating trace context'
 ---
 

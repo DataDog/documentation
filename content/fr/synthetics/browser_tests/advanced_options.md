@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/browser_tests/actions/
   tag: Documentation
   text: En savoir plus sur les étapes des tests Browser
-kind: documentation
 title: Options avancées pour les étapes des tests Browser
 ---
 

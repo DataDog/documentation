@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/live_tail/
   tag: Documentation
   text: Fonctionnalité Live Tail de Datadog
-kind: guide
+
 title: Mettre en corrélation vos logs et vos métriques
 ---
 

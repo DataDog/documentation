@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a Buildkite Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/buildkite
 further_reading:
@@ -23,7 +22,7 @@ further_reading:
 
 [Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
 
-Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle. 
+Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
 
 ### Compatibility
 
@@ -34,6 +33,7 @@ Set up tracing on Buildkite to optimize your resource usage, reduce overhead, an
 | [Manual steps][12] | Manual steps | View manually triggered pipelines. |
 | [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
+| [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 
 ## Configure the Datadog integration
 
@@ -139,3 +139,4 @@ These filters can also be applied through the facet panel on the left hand side 
 [11]: /glossary/#custom-measure
 [12]: /glossary/#manual-step
 [13]: /glossary/#queue-time
+[14]: /glossary/#custom-span

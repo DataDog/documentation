@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/
   tag: ドキュメント
   text: トレースの収集
-kind: documentation
 title: TCP Agent のログ用プロキシ
 ---
 
@@ -84,11 +83,11 @@ logs_config:
 ```
 logs_config:
   force_use_tcp: true
-  logs_dd_url: "<プロキシサーバードメイン>:10514"
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
   logs_no_ssl: true
 ```
 
-#### HAProxy コンフィギュレーション
+#### HAProxy 構成
 
 Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルを使用します (まだ構成していない場合)。
 
@@ -209,7 +208,7 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-次のコマンドで証明書をダウンロードしてください:
+次のコマンドで証明書をダウンロードしてください。
 
 * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
 * `yum install ca-certificates` (CentOS、Redhat)
@@ -292,4 +291,4 @@ stream {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/logs/log_transport?tab=https
-[2]: /ja/agent/proxy/
+[2]: /ja/agent/configuration/proxy/

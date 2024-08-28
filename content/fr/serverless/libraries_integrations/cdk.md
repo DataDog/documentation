@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md
-kind: documentation
 title: CDK Construct Datadog
 ---
 [![NPM](https://img.shields.io/npm/v/datadog-cdk-constructs?color=blue&label=npm+cdk+v1)](https://www.npmjs.com/package/datadog-cdk-constructs)

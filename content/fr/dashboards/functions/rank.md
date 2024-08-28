@@ -1,6 +1,5 @@
 ---
 title: Rang
-kind: documentation
 aliases:
   - /fr/graphing/functions/rank/
 ---

@@ -1,10 +1,9 @@
 ---
 description: Shadow DOM とセッションリプレイの互換性に関するガイド。
 further_reading:
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser/
   tag: Documentation
   text: セッションリプレイについて
-kind: ガイド
 title: Shadow DOM コンポーネントでセッションリプレイ機能を強化する
 ---
 

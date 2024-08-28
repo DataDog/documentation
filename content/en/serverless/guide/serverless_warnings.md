@@ -1,6 +1,6 @@
 ---
 title: Serverless Warnings
-kind: guide
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
@@ -100,6 +100,24 @@ Attack attempts were detected targeting the serverless application.
 
 **Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
 
+### Under provisioned
+
+CPU utilization for this function averaged more than 80%. This means your function may see increased performance from additional CPU resources.
+
+**Resolution:** Consider increasing the amount of [allocated memory][12] on your Lambda function. Increasing the amount of memory scales available CPU resources. Note this may affect your AWS bill.
+
+### Overallocated provisioned concurrency
+
+The function's provisioned concurrency utilization was below 60%. According to AWS, [provisioned concurrency is best optimized for cost when utilization is consistently greater than 60%][13].
+
+**Resolution:** Consider decreasing the amount of configured provisioned concurrency for your function.
+
+### Deprecated runtime
+
+The function's runtime is [no longer supported][14].
+
+**Resolution:** Upgrade to the latest runtime to ensure you are up to date on the latest security, performance, and reliability standards.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -115,3 +133,6 @@ Attack attempts were detected targeting the serverless application.
 [9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [10]: /integrations/amazon_lambda/#metrics
 [11]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+[12]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+[13]: https://aws.amazon.com/blogs/compute/optimizing-your-aws-lambda-costs-part-1/
+[14]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html

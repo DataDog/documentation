@@ -1,6 +1,5 @@
 ---
 title: Google Cloud Run
-kind: documentation
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'

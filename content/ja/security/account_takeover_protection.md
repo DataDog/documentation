@@ -10,7 +10,6 @@ further_reading:
 - link: security/application_security/guide/
   tag: ドキュメント
   text: Application Security Management ガイド
-kind: ドキュメント
 title: Account Takeover Protection
 ---
 
@@ -73,22 +72,21 @@ ATO の追跡には以下のユーザーアクティビティイベントが使�
 |-------------------------|-------------------|----------------------------------------------|
 | `users.login.success`     | 真              | アカウント乗っ取り検出ルール要件       |
 | `users.login.failure`     | 真              | アカウント乗っ取り検出ルール要件       |
-| `users.exists`            | 偽             | シグナルの確認と攻撃対象かどうかの判断 |
 | `users.password_reset`     | 偽             | パスワードリセットによるユーザー列挙を識別する検出ルール要件 |
+
+Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
 
 自動的にインスツルメンテーションされないイベントの追跡を有効にする手順については、[ユーザーの監視と保護][1]を参照してください。
 
 関連する検出とインスツルメンテーション要件の最新リストについては、[検出ルール][2]ページを参照してください。
 
-
-[自動インスツルメンテーション][3]は Datadog の機能で、ほとんどの認証実装に対してユーザーのログインの成功と失敗を自動的に識別します。`users.exists` のような推奨されるすべてのエンリッチメントに対してアプリケーションを追加インスツルメンテーションすることを推奨します。
+[Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for many authentication implementations.
 
 Datadog がこれらのエンリッチメントを定義する方法に制限はありません。多くのプラットフォーム製品では、顧客組織やユーザーロールの識別など、他のエンリッチメントを追加できます。
 
 ## リモート構成
 
-[リモート構成][4]を使用すると、ASM ユーザーは、`users.exists` やカスタム[ビジネスロジック][5]データなどのエンリッチメントをほぼリアルタイムでアプリにインスツルメンテーションできます。
-
+[Remote Configuration][4] enables ASM users to instrument apps with custom [business logic][5] data in near real time.
 
 ## 通知
 
@@ -251,7 +249,7 @@ Datadog は、攻撃者の属性の類似性によって攻撃者をクラスタ
 
 攻撃者のブロックに加え、侵害されたユーザーのブロックを検討してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

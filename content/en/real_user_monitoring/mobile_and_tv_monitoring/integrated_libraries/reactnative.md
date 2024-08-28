@@ -1,6 +1,5 @@
 ---
 title: React Native Libraries for RUM
-kind: documentation
 code_lang: reactnative
 type: multi-code-lang
 code_lang_weight: 20

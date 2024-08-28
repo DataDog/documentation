@@ -1,6 +1,5 @@
 ---
 title: Dashboard List
-kind: Documentation
 description: "Organize and manage dashboards with lists"
 disable_toc: false
 further_reading:
