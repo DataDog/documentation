@@ -23,17 +23,17 @@ The [generic profile][114] collects metrics for all devices not supported by a v
 ### Vendor profiles
 
 The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't, you can:
-  - Customize your own YAML profile (see the [NDM troubleshooting page][1] for guidance).
+  - Customize your own YAML profile (see the [NDM troubleshooting FAQ page][1] for guidance).
   - Create new [profiles][2] to start monitoring new device models.
 
 | Vendor | Config files |
 | ---  | ----------- |
-| 3com | [3com.yaml][3] <br> |
+| 3com | [3com.yaml][3] <br> [3com-huawei.yaml.yaml][126] <br>|
 | TP-Link | [tp-link.yaml][4] <br> |
 | A10 | [a10.yaml][5] <br> |
 | Alcatel-lucent | [alcatel-lucent.yaml][6] <br> |
 | Anue | [anue.yaml][7] <br> |
-| Apc | [_apc.yaml][8] <br>[apc_ups.yaml][9] <br> |
+| Apc | [_apc.yaml][8] <br>[apc_ups.yaml][9] [_apc-metadata.yaml][127]<br> |
 | [Arista][10] | [arista.yaml][11] <br>[_arista.yaml][12] <br> |
 | [Aruba][13] | [aruba-switch.yaml][14] <br>[_aruba-base.yaml][15] <br>[aruba-access-point.yaml][16] <br>[aruba.yaml][17] <br> |
 | Audiocodes | [audiocodes-mediant-sbc.yaml][18] <br> |
@@ -47,7 +47,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 | [Chatsworth][27] | [chatsworth_pdu.yaml][28] <br> |
 | Checkpoint | [checkpoint.yaml][29] <br>[checkpoint-firewall.yaml][30] <br> |
 | Chrysalis | [chrysalis.yaml][31] <br> |
-| [Cisco][32] </br> [Cisco ACI][33] </br> [Cisco ASA][34] </br> Cisco ASR </br> Cisco Catalyst </br> Cisco ICM </br> [Cisco ISE][35] </br> Cisco ISR </br> Cisco Nexus </br> Cisco SB </br> Cisco UCS  </br> Cisco WLC | [cisco-3850.yaml][36]</br> [cisco-asa.yaml][37]  </br>[cisco-asa-5525.yaml][38]  </br>[cisco-asr.yaml][39]  </br>[cisco-catalyst-wlc.yaml][40]  </br>[cisco-catalyst.yaml][41]  </br>[cisco-csr1000v.yaml][42]  </br>[cisco_icm.yaml][43]  </br>[cisco-ise.yaml][44]  </br>[cisco-isr.yaml][45]  </br>[cisco_isr_4431.yaml][46]  </br>[cisco-nexus.yaml][47]  </br>[cisco-sb.yaml][48]  </br>[cisco-ucs.yaml][49]  </br>[_cisco-metadata.yaml][50]  </br>[_cisco-wlc.yaml][51] </br>[cisco-legacy-wlc.yaml][52]  </br>[cisco_uc_virtual_machine.yaml][53] |
+| [Cisco][32] </br> [Cisco ACI][33] </br> [Cisco ASA][34] </br> Cisco ASR </br> Cisco Catalyst </br> Cisco ICM </br> [Cisco ISE][35] </br> Cisco ISR </br> Cisco Nexus </br> Cisco SB </br> Cisco UCS  </br> Cisco WLC | [cisco-3850.yaml][36]</br> [cisco-asa.yaml][37]  </br>[cisco-asa-5525.yaml][38]  </br>[cisco-asr.yaml][39]  </br>[cisco-catalyst-wlc.yaml][40]  </br>[cisco-catalyst.yaml][41]  </br>[cisco-csr1000v.yaml][42]  </br>[cisco_icm.yaml][43]  </br>[cisco-ise.yaml][44]  </br>[cisco-isr.yaml][45]  </br>[cisco_isr_4431.yaml][46]  </br>[cisco-nexus.yaml][47]  </br>[cisco-sb.yaml][48]  </br>[cisco-ucs.yaml][49]  </br>[_cisco-metadata.yaml][50]  </br>[_cisco-wlc.yaml][51] </br>[cisco-legacy-wlc.yaml][52]  </br>[cisco_uc_virtual_machine.yaml][53] </br>[_cisco-voice.yaml][128]|
 | Citrix | [citrix.yaml][54] <br> |
 | Cradlepoint | [cradlepoint.yaml][55] <br> |
 | Cyberpower | [cyberpower-pdu.yaml][56] <br> |
@@ -125,6 +125,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [20]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avocent-acs.yaml
 [21]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avtech.yaml
 [22]: https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/
+[23]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/barracuda.yaml
 [24]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/barracuda.yaml
 [25]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/bluecat-server.yaml
 [26]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml
@@ -227,7 +228,9 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [123]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml
 [124]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml
 [125]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml
-
+[126]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com-huawei.yaml
+[127]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc-metadata.yaml
+[128]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-voice.yaml
 
 ## Further Reading
 

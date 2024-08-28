@@ -94,7 +94,7 @@ Configure [NetFlow Monitoring][21] to visualize and monitor your flow records fr
 - Start monitoring your entire network infrastructure on the [Network Devices][17] page.
 - View metrics collected on Datadog's out-of-the-box dashboards:
   - [Overview of all devices monitored][8]
-  - [Across the performance on all interfaces][18]
+  - [Performance of interfaces on your network devices][18]
 - Use the Network [Device Topology Map][19] to identify and troubleshoot issues with your devices.
 
 ## Troubleshooting
