@@ -13,7 +13,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 1. [データベースのパラメーターを構成する](#configure-postgres-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-1. [Agent をインストールする](#install-the-agent)
+1. [Agent のインストールと構成](#install-and-configure-the-agent)
 1. [RDS インテグレーションをインストールする](#install-the-rds-integration)
 
 ## はじめに
@@ -137,6 +137,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### 検証する
 
 権限が正しいことを確認するために、以下のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取ることができることを確認します。
@@ -181,12 +184,18 @@ psql -h localhost -U datadog postgres -A \
 
 パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
 
-## Agent のインストール
+## Agent のインストールと構成
 
 Aurora ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][8]を参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
+
+### オートディスカバリーのセットアップ (推奨)
+
+Datadog Agent は、クラスター内のすべての Aurora エンドポイントのオートディスカバリーをサポートしています。インスタンスごとに異なる構成にしたい場合や、Aurora エンドポイントを手動で検索してリストアップしたい場合を除き、以下の手動セットアップセクションの代わりに [Aurora DB クラスターのオートディスカバリーセットアップ手順][3]に従ってください。
+
+### 手動セットアップ
 
 ホスト上で実行されている Agent のデータベースモニタリングメトリクスの収集を構成するには、次の手順に従ってください。(Agent で Aurora データベースからメトリクスを収集するために小規模な EC2 インスタンスをプロビジョニングする場合など)
 
@@ -199,7 +208,7 @@ Aurora ホストを監視するには、インフラストラクチャーに Dat
        host: '<AWS_INSTANCE_ENDPOINT>'
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        aws:
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
@@ -215,18 +224,16 @@ Aurora ホストを監視するには、インフラストラクチャーに Dat
 
 2. [Agent を再起動します][2]。
 
-**Datadog Agent は、クラスター内のすべての Aurora エンドポイントの[オートディスカバリー][14]をサポートしています。**
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[14]: /ja/database_monitoring/guide/aurora_autodiscovery/?tab=postgres
+[3]: /ja/database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 ECS や Fargate などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
 
 ### コマンドライン
 
@@ -250,7 +257,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
@@ -259,89 +266,83 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 ### Dockerfile
 
-`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーの構成を変更することなく、カスタム Agent を構築・デプロイすることができます。
+`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
 <div class="alert alert-warning"><strong>重要</strong>: クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントをホストとして使用します。</div>
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
-
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/configuration/secrets-management
-[3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
-Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。Postgres の構成は、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
+Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。Postgres のコンフィギュレーションは、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
 
-### Helm のコマンドライン
+### Helm
 
-以下の [Helm][3] コマンドを実行して、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
+以下の手順に従って、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールしてください。お使いのアカウントや環境に合わせて値を変更してください。
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Helm の [Datadog Agent インストール手順][3]に従います。
+2. YAML コンフィギュレーションファイル (Cluster Agent インストール手順の `datadog-values.yaml`) を更新して、以下を含めます。
+    ```yaml
+    clusterAgent:
+      confd:
+        postgres.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+            - dbm: true
+              host: '<AWS_INSTANCE_ENDPOINT>'
+              port: 5432
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
+              # pg_stat_statements_view: datadog.pg_stat_statements()
+              # pg_stat_activity_view: datadog.pg_stat_activity()
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterChecksRunner.enabled=true' \
-  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 5432
-    username: datadog
-    password: "<UNIQUEPASSWORD>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
+    Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
-```
+    ```yaml
+    pg_stat_statements_view: datadog.pg_stat_statements()
+    pg_stat_activity_view: datadog.pg_stat_activity()
+    ```
 
-### マウントされたファイルで構成する
+3. コマンドラインから上記のコンフィギュレーションファイルを使用して Agent をデプロイします。
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
 
-マウントされたコンフィギュレーションファイルでクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
+<div class="alert alert-info">
+Windows の場合は、<code>helm install</code> コマンドに <code>--set targetSystem=windows</code> を追加します。
+</div>
 
-```yaml
-cluster_check: true  # Make sure to include this flag
-init_config:
-instances:
-  - dbm: true
-    host: '<AWS_INSTANCE_ENDPOINT>'
-    port: 5432
-    username: datadog
-    password: '<PASSWORD>'
-    ## 必須: Postgres 9.6 の場合、セットアップで作成した関数を使用するために、以下の行のコメントを解除してください
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
-```
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 ```yaml
 apiVersion: v1
@@ -361,7 +362,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "ENC[datadog_user_database_password]"
         }
       ]
 spec:
@@ -373,16 +374,47 @@ spec:
 ```
 <div class="alert alert-warning"><strong>重要</strong>: ここでは、Aurora クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用してください。</div>
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
+複数のインスタンスを構成するには、以下の形式を使用できます。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      { 
+        "postgres": 
+        { "instances": 
+          [ 
+            { 
+              "dbm":true, 
+              "host":"your-host-1.us-east-2.rds.amazonaws.com", 
+              "password":"ENC[datadog_user_database_password]", 
+              "port":5432, 
+              "username":"<USERNAME>" 
+            }, 
+            { 
+              "dbm":true, 
+              "host":"your-host-2.us-east-2.rds.amazonaws.com", 
+              "password":"ENC[datadog_user_database_password]", 
+              "port":5432, 
+              "username": "<USERNAME>" 
+            } 
+          ] 
+        } 
+      }
+```
+
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-Cluster Agent は自動的にこの構成を登録し、Postgres チェックを開始します。
+Cluster Agent は自動的にこのコンフィギュレーションを登録し、Postgres チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
@@ -406,7 +438,7 @@ DBM でデータベースのテレメトリーとともに CPU などの AWS か
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][12]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

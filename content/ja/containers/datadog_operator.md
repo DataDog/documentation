@@ -7,10 +7,10 @@ further_reading:
   tag: ガイド
   text: Datadog Operator の概要
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
-  tag: GitHub
+  tag: ソースコード
   text: 'Datadog Operator: 高度なインストール'
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-  tag: GitHub
+  tag: ソースコード
   text: 'Datadog Operator: 構成'
 title: Datadog Operator
 ---

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /network_performance_monitoring/installation/
+- /ja/network_performance_monitoring/installation/
 description: Agent を使用したネットワークデータの収集
 further_reading:
 - link: https://www.datadoghq.com/blog/network-performance-monitoring

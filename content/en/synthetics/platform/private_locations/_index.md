@@ -236,7 +236,7 @@ This command starts a Docker container and makes your private location ready to 
 
 You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs/<filename>.pem` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs/<filename>.pem` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. **Note**: If you combine all your `.pem` files into one file, then the order in which the certificates are placed matters. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.
 
 For more information about private locations parameters for admins, see [Configuration][2].
 
@@ -269,7 +269,7 @@ For more information about private locations parameters for admins, see [Configu
 
 You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. **Note**: If you combine all your `.pem` files into one file, then the order in which the certificates are placed matters. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.
 
 For more information about private locations parameters for admins, see [Configuration][2].
 

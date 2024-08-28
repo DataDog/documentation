@@ -6159,6 +6159,30 @@ menu:
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
       generated: true
+    - name: Update the tags for a device
+      url: '#update-the-tags-for-a-device'
+      identifier: network-device-monitoring-update-the-tags-for-a-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeviceUserTags
+        unstable: []
+        order: 5
+    - name: Get the list of tags for a device
+      url: '#get-the-list-of-tags-for-a-device'
+      identifier: network-device-monitoring-get-the-list-of-tags-for-a-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeviceUserTags
+        unstable: []
+        order: 4
     - name: Get the list of interfaces of the device
       url: '#get-the-list-of-interfaces-of-the-device'
       identifier: network-device-monitoring-get-the-list-of-interfaces-of-the-device

@@ -2,6 +2,9 @@ on: [push]
 
 name: Datadog Static Analysis
 
+permissions:
+  contents: read
+
 jobs:
   static-analysis:
     runs-on: ubuntu-latest

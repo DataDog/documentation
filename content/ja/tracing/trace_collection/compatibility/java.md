@@ -20,17 +20,45 @@ Java Datadog Trace ライブラリはオープンソースです。詳細につ�
 
 ### サポートされている Java ランタイム
 
-Java トレーサーは、次の Oracle JDK および OpenJDK の JVM ランタイムの自動インスツルメンテーションをサポートします。
+The Java Tracer supports automatic instrumentation for the following Oracle JDK, OpenJDK JVM, and [GraalVM](#graalvm-native-image-support) runtimes.
 
-| Java バージョン | オペレーティングシステム                                                               | サポートレベル                       | トレーサーバージョン |
-| -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 18〜19     | Windows (x86、x86-64)<br>Linux (x86、x86-64、arm64)<br>Mac (x86、x86-64、arm64) | [ベータ版](#levels-of-support)               | 最新         |
-| 8〜17      | Linux (arm64)<br>Mac (arm64)                                                    | [ベータ版](#levels-of-support)               | 最新         |
-| 7            | Linux (arm64)<br>Mac (arm64)                                                    | [サポート終了](#levels-of-support)         | v0             |
-| 8〜17      | Windows (x86、x86-64)<br>Linux (x86、x86-64)<br>Mac (x86、x86-64)               | [GA](#levels-of-support)                   | 最新         |
-| 7            | Windows (x86、x86-64)<br>Linux (x86、x86-64)<br>Mac (x86、x86-64)               | [メンテナンス](#levels-of-support) | v0             |
+#### Java Tracer v1 (latest)
+
+<table>
+  <thead>
+    <th>Java versions</th>
+    <th>Operating Systems</th>
+    <th>Support level</th>
+  </thead>
+  <tr>
+    <td>from 22 and upward</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
+    <td><a href="#levels-of-support">Beta</a></td>
+  </tr>
+  <tr>
+    <td>from 18 to 21</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
+    <td><a href="#levels-of-support">GA</a></td>
+  </tr>
+  <tr>
+    <td rowspan="2">from 8 to 17</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)</td>
+    <td><a href="#levels-of-support">GA</a></td>
+  </tr>
+  <tr>
+    <td>Linux (arm64)<br>Mac (arm64)</td>
+    <td><a href="#levels-of-support">Beta</a></td>
+  </tr>
+</table>
 
 Datadog は、Java の早期アクセスバージョンを公式にサポートしていません。
+
+#### Java Tracer v0 (maintenance)
+
+| Java バージョン      | オペレーティングシステム                                                               | サポートレベル                     |
+|--------------------|---------------------------------------------------------------------------------|-----------------------------------|
+| 7 only             | Windows (x86、x86-64)<br>Linux (x86、x86-64)<br>Mac (x86、x86-64)               | [メンテナンス](#levels-of-support) |
+| 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [サポート終了](#levels-of-support) |
 
 ### サポートレベル
 
@@ -46,8 +74,8 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 ベータインテグレーションはデフォルトで無効になっていますが、個別に有効にできます。
 
-- システムプロパティ: `-Ddd.integration.<インテグレーション名>.enabled=true`
-- 環境変数: `DD_INTEGRATION_<インテグレーション名>_ENABLED=true`
+- システムプロパティ: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
+- 環境変数: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
 ### Web フレームワークの互換性
 
@@ -56,31 +84,31 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 **Web フレームワークのトレーシングでは以下の確認が可能です。**
 
 - HTTP リクエストの応答タイミング
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
+- tags for the HTTP request (status code, method, etc.)
 - エラーとスタックトレースの取得
 - Web リクエストと分散型トレーシングの間で作成された作業のリンク
 
-| サーバー                  | バージョン   | サポートの種類    | インスツルメンテーション名 (コンフィギュレーションに使用) |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- |
-| Akka-Http サーバー        | 10.0+      | 完全対応 | `akka-http`、`akka-http-server`                |
-| Finatra Web             | 2.9+       | 完全対応 | `finatra`                                      |
-| Grizzly                 | 2.0+       | 完全対応 | `grizzly`                                      |
-| Grizzly-HTTP            | 2.3.20+    | 完全対応 | `grizzly-filterchain`                          |
-| Java Servlet 互換 | 2.3+、3.0+ | 完全対応 | `servlet`、`servlet-2`、`servlet-3`            |
-| Jax-RS アノテーション      | JSR311-API | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-annotations`、`jax-rs-filter` |
-| Jetty                   | 7.0-12.x   | 完全対応 | `jetty`                                        |
-| Micronaut HTTP サーバー   | 2.x        | 完全対応 | `micronaut`                                    |
-| Mulesoft                | 4          | 完全対応 | `mule`                                         |
-| Netty HTTP サーバー       | 3.8+       | 完全対応 | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
-| Play                    | 2.3-2.8    | 完全対応 | `play`、`play-action`                          |
-| Ratpack                 | 1.5+       | 完全対応 | `ratpack`                                      |
-| Restlet HTTP サーバー     | 2.2 - 2.4  | 完全対応 | `restlet-http`.                                |
-| Spark Java              | 2.3+       | [ベータ版](#framework-integrations-disabled-by-default) | `sparkjava` (要 `jetty`) |
-| Spring Boot             | 1.5        | 完全対応 | `spring-web` または `spring-webflux`               |
-| Spring Web (MVC)        | 4.0+       | 完全対応 | `spring-web`                                   |
-| Spring WebFlux          | 5.0+       | 完全対応 | `spring-webflux`                               |
-| Tomcat                  | 5.5+       | 完全対応 | `tomcat`                                       |
-| Vert.x                  | 3.4-3.9.x  | 完全対応 | `vertx`、`vertx-3.4`                           |
+| サーバー                  | バージョン   | サポートの種類                                        | インスツルメンテーション名 (構成に使用)           |
+|-------------------------|------------|-----------------------------------------------------|----------------------------------------------------------|
+| Akka-Http サーバー        | 10.0+      | 完全対応                                     | `akka-http`、`akka-http-server`                          |
+| Finatra Web             | 2.9+       | 完全対応                                     | `finatra`                                                |
+| Grizzly                 | 2.0+       | 完全対応                                     | `grizzly`                                                |
+| Grizzly-HTTP            | 2.3.20+    | 完全対応                                     | `grizzly-filterchain`                                    |
+| Java Servlet 互換 | 2.3+、3.0+ | 完全対応                                     | `servlet`、`servlet-2`、`servlet-3`                      |
+| Jax-RS アノテーション      | JSR311-API | 完全対応                                     | `jax-rs`、`jaxrs`、`jax-rs-annotations`、`jax-rs-filter` |
+| Jetty                   | 7.0-12.x   | 完全対応                                     | `jetty`                                                  |
+| Micronaut HTTP サーバー   | 2.x        | 完全対応                                     | `micronaut`                                              |
+| Mulesoft                | 4          | 完全対応                                     | `mule`                                                   |
+| Netty HTTP サーバー       | 3.8+       | 完全対応                                     | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
+| Play                    | 2.3-2.8    | 完全対応                                     | `play`、`play-action`                                    |
+| Ratpack                 | 1.5+       | 完全対応                                     | `ratpack`                                                |
+| Restlet HTTP サーバー     | 2.2 - 2.4  | 完全対応                                     | `restlet-http`.                                          |
+| Spark Java              | 2.3+       | [ベータ版](#framework-integrations-disabled-by-default) | `sparkjava` (要 `jetty`)                           |
+| Spring Boot             | 1.5+       | 完全対応                                     | `spring-web` または `spring-webflux`                         |
+| Spring Web (MVC)        | 4.0+       | 完全対応                                     | `spring-web`                                             |
+| Spring WebFlux          | 5.0+       | 完全対応                                     | `spring-webflux`                                         |
+| Tomcat                  | 5.5+       | 完全対応                                     | `tomcat`                                                 |
+| Vert.x                  | 3.4+       | 完全対応                                     | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
 
 **注:** 多くのアプリケーションサーバーは Servlet 互換でそのインスツルメンテーションによって自動的にカバーされます (Websphere、Weblogic、JBoss)。
 また、Spring Boot (バージョン 3) のようなフレームワークは、通常、Tomcat、Jetty、Netty など、サポートされた組み込みアプリケーションサーバーを使うため、本質的に機能します。
@@ -89,14 +117,17 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 以下のインスツルメンテーションはデフォルトでは無効になっており、以下の設定により有効にすることができます。
 
-| インスツルメンテーション         | 有効にするには                                     |
-| ----------------------- |---------------------------------------------- |
-| JAX-WS                      | `-Ddd.integration.jax-ws.enabled=true`|
-| Mulesoft                  | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true`|
-| Grizzly                 | `-Ddd.integration.grizzly-client.enabled=true`|
-| Grizzly-HTTP            | `-Ddd.integration.grizzly-filterchain.enabled=true`|
-| Ning                    | `-Ddd.integration.ning.enabled=true`|
-| Spark Java              | `-Ddd.integration.sparkjava.enabled=true`|
+| インスツルメンテーション     | 有効にするには                                                                                                                                                 |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+
 
 **注**: JAX-WS インテグレーションは、@WebService (JAX-WS 1.x) および @WebServiceProvider (JAX-WS 2.x) でアノテーションされたエンドポイントを使用します。
 
@@ -113,30 +144,31 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 - エラーとスタックトレースの取得
 - 分散型トレーシング
 
-| フレームワーク                | バージョン    | サポートの種類    | インスツルメンテーション名 (構成に使用) |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Apache HTTP クライアント       | 4.0+        | 完全対応 | `httpclient`、`apache-httpclient`、`apache-http-client` |
-| Apache HTTP 非同期クライアント | 4.0+        | 完全対応 | `httpasyncclient`、`apache-httpasyncclient`    |
-| AWS Java SDK             | 1.11+、2.2+ | 完全対応 | `aws-sdk`                                      |
-| Camel-OpenTelemetry      | 3.12.0+     | ベータ            | [opentelemetry-1][5]                           |
-| Commons HTTP クライアント      | 2.0+        | 完全対応 | `commons-http-client`                          |
-| Google HTTP クライアント       | 1.19.0+     | 完全対応 | `google-http-client`                           |
-| Grizzly HTTP クライアント      | 1.9+        | [ベータ版](#framework-integrations-disabled-by-default) | `grizzly-client`     |
-| gRPC                     | 1.5+        | 完全対応 | `grpc`、`grpc-client`、`grpc-server`           |
-| HttpURLConnection        | すべて         | 完全対応 | `httpurlconnection`、`urlconnection`           |
-| Kafka-Clients            | 0.11+       | 完全対応 | `kafka`                                        |
-| Kafka-Streams            | 0.11+       | 完全対応 | `kafka`、`kafka-streams`                       |
-| Java RMI                 | すべて         | 分散型トレーシング非対応 | `rmi`、`rmi-client`、`rmi-server`              |
-| Jax RS クライアント           | 2.0+        | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
-| Jersey クライアント            | 1.9-2.29    | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
-| JMS                      | 1 と 2     | 完全対応 | `jms`、`jms-1`、`jms-2`                        |
-| Netty HTTP クライアント        | 4.0+        | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
-| Ning HTTP クライアント         | 1.9.0+      | [ベータ版](#framework-integrations-disabled-by-default) | `ning`               |
-| OkHTTP                   | 2.2+        | 完全対応 | `okhttp`、`okhttp-2`、`okhttp-3`                |
-| Play WSClient            | 1.0+        | 完全対応 | `play-ws`                                      |
-| Rabbit AMQP              | 2.7+        | 完全対応 | `amqp`、`rabbitmq`                             |
-| Spring SessionAwareMessageListener     | 3.1+            | 完全対応 | `spring-jms-3.1`             |
-| Spring WebClient         | 5.0+        | 完全対応 | `spring-webflux`、`spring-webflux-client`      |
+| フレームワーク                          | バージョン    | サポートの種類                                        | インスツルメンテーション名 (構成に使用)          |
+|------------------------------------|-------------|-----------------------------------------------------|---------------------------------------------------------|
+| Apache HTTP クライアント                 | 4.0+        | 完全対応                                     | `httpclient`、`apache-httpclient`、`apache-http-client` |
+| Apache HTTP 非同期クライアント           | 4.0+        | 完全対応                                     | `httpasyncclient`、`apache-httpasyncclient`             |
+| AWS Java SDK                       | 1.11+、2.2+ | 完全対応                                     | `aws-sdk`                                               |
+| Camel-OpenTelemetry                | 3.12.0+     | ベータ                                                | [opentelemetry-1][5]                                    |
+| Commons HTTP クライアント                | 2.0+        | 完全対応                                     | `commons-http-client`                                   |
+| Google HTTP クライアント                 | 1.19.0+     | 完全対応                                     | `google-http-client`                                    |
+| Google Pub/Sub                     | 1.116.0+    | 完全対応                                     | `google-pubsub`                                         |
+| Grizzly HTTP クライアント                | 1.9+        | [ベータ版](#framework-integrations-disabled-by-default) | `grizzly-client`                                        |
+| gRPC                               | 1.5+        | 完全対応                                     | `grpc`、`grpc-client`、`grpc-server`                    |
+| HttpURLConnection                  | すべて         | 完全対応                                     | `httpurlconnection`、`urlconnection`                    |
+| Kafka-Clients                      | 0.11+       | 完全対応                                     | `kafka`                                                 |
+| Kafka-Streams                      | 0.11+       | 完全対応                                     | `kafka`、`kafka-streams`                                |
+| Java RMI                           | すべて         | 分散型トレーシング非対応                   | `rmi`、`rmi-client`、`rmi-server`                       |
+| Jax RS クライアント                     | 2.0+        | 完全対応                                     | `jax-rs`、`jaxrs`、`jax-rs-client`                      |
+| Jersey クライアント                      | 1.9-2.29    | 完全対応                                     | `jax-rs`、`jaxrs`、`jax-rs-client`                      |
+| JMS / Jakarta JMS                  | 1-3.0+      | 完全対応                                     | `jms`, `jms-1`, `jms-2`, `jakarta-jms`                  |
+| Netty HTTP クライアント                  | 4.0+        | 完全対応                                     | `netty`、`netty-4.0`、`netty-4.1`                       |
+| Ning HTTP クライアント                   | 1.9.0+      | [ベータ版](#framework-integrations-disabled-by-default) | `ning`                                                  |
+| OkHTTP                             | 2.2+        | 完全対応                                     | `okhttp`、`okhttp-2`、`okhttp-3`                         |
+| Play WSClient                      | 1.0+        | 完全対応                                     | `play-ws`                                               |
+| Rabbit AMQP                        | 2.7+        | 完全対応                                     | `amqp`、`rabbitmq`                                      |
+| Spring SessionAwareMessageListener | 3.1+        | 完全対応                                     | `spring-jms-3.1`                                        |
+| Spring WebClient                   | 5.0+        | 完全対応                                     | `spring-webflux`、`spring-webflux-client`               |
 
 **Kafka に関する注記**: Datadog の Kafka インテグレーションは、ヘッダー API をサポートする Kafka のバージョン `0.11+` で機能します。この API はトレースコンテキストの挿入と抽出に使用されます。バージョンが混在する環境でシステムを稼働させている場合は、Kafka ブローカーが Kafka のより新しいバージョンを間違って報告する場合があります。この場合、トレーサーがローカルのプロデューサーでサポートされていないヘッダーを挿入しようとしたときに問題が発生することがあります。また、古いバージョンのコンシューマーはヘッダーが存在するためにメッセージを収集することができません。これらの問題を回避するために、0.11 より前の Kafka のバージョンが混在している環境では、環境変数: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false` を伴うコンテキストの伝搬を無効化するようにしてください。
 
@@ -156,25 +188,25 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 - クエリ情報 (サニタイジングされたクエリ文字列など)
 - エラーとスタックトレースの取得
 
-| データベース                | バージョン | サポートの種類    | インスツルメンテーション名 (構成に使用)                                           |
-| ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
-| Aerospike               | 4.0+     | 完全対応 | `aerospike`                                                                              |
-| Couchbase               | 2.0+     | 完全対応 | `couchbase`                                                                              |
-| Cassandra               | 3.0+     | 完全対応 | `cassandra`                                                                              |
-| Elasticsearch Transport | 2.0+     | 完全対応 | `elasticsearch`、`elasticsearch-transport`、`elasticsearch-transport-{2,5,6,7}` (1 つ選択)|
-| Elasticsearch Rest      | 5.0+     | 完全対応 | `elasticsearch`、`elasticsearch-rest`、`elasticsearch-rest-{5,6,7}` (1 つ選択)           |
-| JDBC                    | N/A      | 完全対応 | `jdbc`、`jdbc-datasource`                                                                |
-| Jedis                   | 1.4+     | 完全対応 | `jedis`、`redis`                                                                         |
-| Lettuce                 | 4.0+     | 完全対応 | `lettuce`、`lettuce-4-async`、`lettuce-5-rx`                                             |
-| MongoDB                 | 3.0-4.0+ | 完全対応 | `mongo`                                                                                  |
-| OpenSearch Rest         | 1.x-2.x  | 完全対応 | `opensearch`、`opensearch-rest`           |
-| OpenSearch Transport    | 1.0+     | 完全対応 | `opensearch`、`opensearch-transport`                                                     |
-| RediScala | 1.5+     | 完全対応 | `rediscala`、`redis`                                                                     |
-| Redisson | 2.x-3.x      | 完全対応 | `redisson`、`redis`                                                                     |
-| SpyMemcached            | 2.12+    | 完全対応 | `spymemcached`                                                                           |
-| Vert.x Cassandra クライアント | 3.9      | 完全対応 | `cassandra`                                                                              |
-| Vert.x Redis クライアント     | 3.9      | 完全対応 | `vertx-redis-client`                                                                     |
-| Vert.x MySQL クライアント     | 3.9      | 完全対応 | `vertx-sql-client`                                                                       |
+| データベース                | バージョン | サポートの種類    | インスツルメンテーション名 (構成に使用)                                             |
+|-------------------------|----------|-----------------|--------------------------------------------------------------------------------------------|
+| Aerospike               | 4.0+     | 完全対応 | `aerospike`                                                                                |
+| Couchbase               | 2.0+     | 完全対応 | `couchbase`                                                                                |
+| Cassandra               | 3.0+     | 完全対応 | `cassandra`                                                                                |
+| Elasticsearch Transport | 2.0+     | 完全対応 | `elasticsearch`、`elasticsearch-transport`、`elasticsearch-transport-{2,5,6,7}` (1 つ選択) |
+| Elasticsearch Rest      | 5.0+     | 完全対応 | `elasticsearch`、`elasticsearch-rest`、`elasticsearch-rest-{5,6,7}` (1 つ選択)             |
+| JDBC                    | N/A      | 完全対応 | `jdbc`、`jdbc-datasource`                                                                  |
+| Jedis                   | 1.4+     | 完全対応 | `jedis`、`redis`                                                                           |
+| Lettuce                 | 4.0+     | 完全対応 | `lettuce`、`lettuce-4-async`、`lettuce-5-rx`                                               |
+| MongoDB                 | 3.0-4.0+ | 完全対応 | `mongo`                                                                                    |
+| OpenSearch Rest         | 1.x-2.x  | 完全対応 | `opensearch`、`opensearch-rest`                                                            |
+| OpenSearch Transport    | 1.x-2.x  | 完全対応 | `opensearch`、`opensearch-transport`                                                       |
+| RediScala               | 1.5+     | 完全対応 | `rediscala`、`redis`                                                                       |
+| Redisson                | 2.x-3.x  | 完全対応 | `redisson`、`redis`                                                                        |
+| SpyMemcached            | 2.12+    | 完全対応 | `spymemcached`                                                                             |
+| Vert.x Cassandra クライアント | 3.9+           | 完全対応 | `cassandra`                                                                                                                                       |
+| Vert.x Redis クライアント     | 3.9      | 完全対応 | `vertx-redis-client`                                                                       |
+| Vert.x MySQL クライアント     | 3.9+     | 完全対応 | `vertx-sql-client`                                                                                                                            |
 
 `dd-java-agent` は、次を含む一般的な JDBC ドライバーとも互換性があります。
 
@@ -194,9 +226,9 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 以下のインスツルメンテーションはデフォルトでは無効になっており、以下の設定により有効にすることができます。
 
-| インスツルメンテーション         | 有効にするには                                     |
-| ----------------------- |---------------------------------------------- |
-| JDBC-Datasource         | `-Ddd.integration.jdbc-datasource.enabled=true` |
+| インスツルメンテーション   | 有効にするには                                                                  |
+|-------------------|-------------------------------------------------|
+| JDBC-Datasource        | - System Property: `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Environment Variable: `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
 
 希望するデータストアが見つかりませんか？Datadog では継続的にサポートを追加しています。サポートが必要な場合は、[Datadog サポート][2]にお問い合わせください。
 
@@ -204,21 +236,24 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 `dd-java-agent` には、次のフレームワークの自動トレースのサポートが含まれます。
 
-| フレームワーク         | バージョン | サポートの種類    | インスツルメンテーション名 (構成に使用) |
-| ----------------- | -------- | --------------- | ---------------------------------------------- |
-| Datanucleus JDO   | 4.0+     | 完全対応 | `datanucleus`                                  |
-| Dropwizard Views  | 0.7+     | 完全対応 | `dropwizard`、`dropwizard-view`                |
-| GraphQL         | 14.0+     | 完全対応 | `graphql-java`                  |
-| Hibernate         | 3.5+     | 完全対応 | `hibernate`、`hibernate-core`                  |
-| Hystrix           | 1.4+     | 完全対応 | `hystrix`                                      |
-| JSP Rendering     | 2.3+     | 完全対応 | `jsp`、`jsp-render`、`jsp-compile`             |
-| JUnit             | 4.1+、5.3+ | 完全対応 | `junit`、`junit-4`、`junit-5`                 |       
-| プロジェクトリアクタ   | 3.1+     | 完全対応 | `reactor-core`                                 |
-| Quartz            | 2.x      | 完全対応 | `quartz`                                       |
-| RxJava            | 2.x      | 完全対応 | `rxjava`                                       |
-| Spring Data       | 1.8+     | 完全対応 | `spring-data`                                  |
-| Spring Scheduling | 3.1+     | 完全対応 | `spring-scheduling`                            |
-| Twilio SDK        | < 8.0    | 完全対応 | `twilio-sdk`                                   |
+| フレームワーク         | バージョン   | サポートの種類                                                     | インスツルメンテーション名 (構成に使用) |
+|-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                                    | `cxf`                                          |
+| Datanucleus JDO     | 4.0+       | 完全対応                                                  | `datanucleus`                                  |
+| Dropwizard Views    | 0.7+       | 完全対応                                                  | `dropwizard`、`dropwizard-view`                |
+| GraphQL             | 14.0+      | 完全対応                                                  | `graphql-java`                                 |
+| Hazelcast (client)  | 3.6+       | [ベータ版](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate           | 3.5+       | 完全対応                                                  | `hibernate`、`hibernate-core`                  |
+| Hystrix             | 1.4+       | 完全対応                                                  | `hystrix`                                      |
+| JSP Rendering       | 2.3+       | 完全対応                                                  | `jsp`、`jsp-render`、`jsp-compile`             |
+| JUnit               | 4.1+、5.3+ | 完全対応                                                  | `junit`、`junit-4`、`junit-5`                  |
+| プロジェクトリアクタ     | 3.1+       | 完全対応                                                  | `reactor-core`                                 |
+| Quartz              | 2.x        | 完全対応                                                  | `quartz`                                       |
+| RxJava              | 2.x        | 完全対応                                                  | `rxjava`                                       |
+| Spring Data         | 1.8+       | 完全対応                                                  | `spring-data`                                  |
+| Spring Scheduling   | 3.1+       | 完全対応                                                  | `spring-scheduling`                            |
+| TIBCO BusinessWorks | 5.14.0+    | [ベータ版](#framework-integrations-disabled-by-default)              | `tibco`, `tibco_bw`                            |
+| Twilio SDK          | < 8.0      | 完全対応                                                  | `twilio-sdk`                                   |
 
 希望するフレームワークが見つかりませんか？Datadog では継続的にサポートを追加しています。フレームワークのリクエストは、[サポートチーム][2]までお気軽にお問い合わせください。
 
@@ -244,7 +279,125 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 ### 既知の問題
 
-Bitbucket での Java トレーサーの実行はサポートされていません。
+- Bitbucket での Java トレーサーの実行はサポートされていません。
+- Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
+
+## GraalVM Native Image support
+
+GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
+
+### 要件
+
+Use the latest versions of:
+
+- [GraalVM][7]
+- [Datadog Java tracer][1]
+
+### セットアップ
+
+{{< tabs >}}
+{{% tab "GraalVM" %}}
+To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
+
+1. Instrument your application, following the steps described on [Tracing Java Applications][6].
+2. When you build a native executable with the `native-image` command, add the `-J-javaagent:/path/to/dd-java-agent.jar` argument. For example:
+   ```shell
+   native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
+   ```
+3. (Optional) Enable the profiler integration by adding the following argument:
+`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+
+{{% tab "Quarkus Native" %}}
+To set up the Datadog Java tracer with Quarkus Native, follow these steps:
+
+1. Instrument your application, following the steps described in [Tracing Java Applications][6].
+2. When you build a native executable, use the `quarkus.native.additional-build-args` property. For example:
+   ```shell
+   ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
+   ```
+3. (Optional) Enable the profiler integration by adding the following argument:
+`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+
+{{% tab "Spring Native" %}}
+To set up the Datadog Java tracer with Spring Native, follow these steps:
+
+1. Instrument your application, following the steps described on [Tracing Java Applications][6].
+2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
+   - You can do this at the build tool level, like Maven:
+     ```yaml
+     <build>
+     <plugins>
+       <plugin>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-maven-plugin</artifactId>
+         <configuration>
+           <image>
+             ...
+             <env>
+               ...
+               <BP_DATADOG_ENABLED>true</BP_DATADOG_ENABLED>
+               ...
+             </env>
+           </image>
+         </configuration>
+       </plugin>
+     </plugins>
+     </build>
+     ```
+   - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[8]: https://github.com/paketo-buildpacks/datadog
+{{% /tab %}}
+
+{{< /tabs >}}
+
+#### 使用方法
+
+After completing the setup, the service should send traces to Datadog.
+
+You can view traces using the [Trace Explorer][9].
+
+{{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Native-image buildpack versions older than 5.12.2
+
+Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
+
+When this option is `false`, exceptions like the following can occur:
+
+```text
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
+instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
+```
+
+Solutions to this issue are:
+
+- Set `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM` explicitly to true in the image env configuration,
+- Or upgrade the `native-image` buildpack to version 5.12.2 or later. The best way to do this is by upgrading the `java-native-image` buildpack to 8.13.0 or later.
+
+##### Paketo buildpack for Datadog versions older than 4.6.0
+
+Paketo buildpack for Datadog had a bug in older versions that materialized with the following error message:
+
+```text
+disabling Datadog at launch time is unsupported for Node
+ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
+paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
+```
+
+The solution to this issue is to upgrade to version 4.6.0 or later.
+
+{{% /collapse-content %}}
 
 ## その他の参考資料
 
@@ -255,3 +408,6 @@ Bitbucket での Java トレーサーの実行はサポートされていませ�
 [3]: /ja/tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
 [5]: /ja/tracing/trace_collection/otel_instrumentation/java/
+[7]: https://www.graalvm.org/downloads/
+[9]: /ja/tracing/trace_explorer/
+[10]: /ja/opentelemetry/interoperability/instrumentation_libraries/?tab=java

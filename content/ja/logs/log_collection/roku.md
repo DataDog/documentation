@@ -2,8 +2,8 @@
 description: Roku チャンネルからログを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku ソースコード
+  tag: ソースコード
+  text: dd-sdk-roku のソースコード
 - link: logs/explorer
   tag: Documentation
   text: ログの調査方法
@@ -147,7 +147,7 @@ title: Roku ログ収集
 
    ```brightscript
    ' 0 = none; 1 = error; 2 = warning; 3 = info; 4 = verbose;
-   m.globalNode.addFields({ datadogVerbosity: 2 }) 
+   m.globalNode.addFields({ datadogVerbosity: 2 })
    ```
 
 4. 次のいずれかの関数で、カスタムログエントリを Datadog に直接送信します。
@@ -170,8 +170,8 @@ title: Roku ログ収集
 
    ```brightscript
     m.global.datadogLogsAgent.callfunc(
-        "logInfo", 
-        "Video started", 
+        "logInfo",
+        "Video started",
         { video_id: 42, video_type: "advert"}
     )
    ```
@@ -193,6 +193,6 @@ SDK がディスク容量を使いすぎないように、ディスク上のデ�
 [3]: /ja/account_management/api-app-keys/#api-keys
 [4]: /ja/logs/processing/attributes_naming_convention/
 [5]: /ja/tagging/
-[6]: /ja/real_user_monitoring/roku/?tab=us
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/?tab=us
 [7]: https://github.com/DataDog/dd-sdk-roku/releases
 [8]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs

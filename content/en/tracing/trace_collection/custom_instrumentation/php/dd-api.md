@@ -397,7 +397,7 @@ function doRiskyThing() {
 );
 ```
 
-Set the `error.msg` tag to manually flag a span as erroneous.
+Set the `error.message` tag to manually flag a span as erroneous.
 
 ```php
 <?php
@@ -410,7 +410,7 @@ function doRiskyThing() {
     'doRiskyThing',
     function(\DDTrace\SpanData $span, $args, $retval) {
         if ($retval === SOME_ERROR_CODE) {
-            $span->meta['error.msg'] = 'Foo error';
+            $span->meta['error.message'] = 'Foo error';
             // Optional:
             $span->meta['error.type'] = 'CustomError';
             $span->meta['error.stack'] = (new \Exception)->getTraceAsString();
@@ -778,5 +778,5 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [8]: /tracing/trace_collection/opentracing/php#opentracing
-[9]: /tracing/trace_collection/trace_context_propagation/php
+[9]: /tracing/trace_collection/trace_context_propagation/
 [10]: /tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information

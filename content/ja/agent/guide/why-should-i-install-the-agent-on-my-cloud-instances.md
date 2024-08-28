@@ -10,7 +10,7 @@ further_reading:
 title: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
 ---
 
-AWS、Azure、Google Cloud、その他のクラウドベースのメトリクスプロバイダーを使用している場合、インスタンスに Datadog Agent をインストールすると、いくつかのメリットがあります。以下はその例です。
+If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, installing the Datadog Agent on your instances gives you several benefits, for example:
 
 * **解像度の向上** - クラウドプロバイダーは、5～25 分ごとにホストをサンプリングして、外から何が起こっているかを観測可能です。さらに、AWS は API を通じて 1 分単位でメトリクスを提供しています。Datadog のメトリクスはすべて 1 秒の解像度で保存されているため、これらのメトリクスは後処理時に 60 で割られます。Datadog Agent は、15 秒ごとにパフォーマンス統計をキャプチャし、ホストの視点から何が起こっているかをより正確に理解することができます。
 
@@ -22,7 +22,7 @@ AWS、Azure、Google Cloud、その他のクラウドベースのメトリクス
 
   {{< img src="agent/guide/Agent_VS_AWSA.jpg" alt="Agent vs AWS CloudWatch" style="width:70%;">}}
 
-Datadog Agent は軽量で完全なオープンソースであるため、コードをレビューしたり、プルリクエストをして貢献することもできます。
+The Datadog Agent is lightweight and fully open source, so you can review the code and even contribute by making a pull request.
 
 ## その他の参考資料
 

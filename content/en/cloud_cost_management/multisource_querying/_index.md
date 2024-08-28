@@ -11,11 +11,9 @@ further_reading:
   text: "Learn about Container Cost Allocation"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">Multisource Querying is in private beta. To request access, contact your Customer Success Manager.</div>
+{{< callout url="https://www.datadoghq.com/private-beta/multisource-querying/" btn_hidden="false" header="Join the Beta!">}}
+Multisource Querying is in private beta. To request access, complete the form.
+{{< /callout >}}
 
 ## Overview
 
@@ -28,7 +26,7 @@ Use Multisource Querying to build cost views, understand the total cost of servi
 To use Multisource Querying, ensure you meet the following requirements:
 
 1. You have configured [Cloud Cost Management][10] and are actively ingesting costs in Datadog.
-1. Your cost data is in a single currency. Multiple currencies are not supported. 
+1. Your cost data is in a single currency. Multiple currencies are not supported.
 
 ## Query your cost data
 
@@ -36,7 +34,7 @@ You can select multiple providers in the **Provider** field on the [**Analytics*
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Analytics page" style="width:40%;" >}}
 
-Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
+Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**.
 
 {{< img src="cloud_cost/multisource_querying/filters.png" alt="The Service and Team filters highlighted below the search query on the Cloud Cost Analytics page" style="width:100%;" >}}
 

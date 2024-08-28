@@ -23,6 +23,7 @@ author:
 categories:
 - event management
 - ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: logz-io
 integration_title: Logz.io
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: logzio
 public_title: Logz.io
@@ -49,6 +49,7 @@ tile:
   - Category::Event Management
   - Category::AI/ML
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: サービスとしての AI 駆動型 ELK
   media: []
@@ -74,9 +75,9 @@ Logz.io は、ログ、メトリクス、トレースを収集・分析する統
 
 ![dashboard][2]
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 次の手順に従って Datadog にアラートをインポートします。
 
@@ -85,21 +86,21 @@ Logz.io は、ログ、メトリクス、トレースを収集・分析する統
 
 より詳細な設定方法は、[Logz.io と Datadog によるログ相関][4]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Logz.io チェックには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Logz.io チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Logz.io チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
