@@ -6,7 +6,7 @@ If you experience unexpected behavior with Datadog Logs, there are a few common 
 
 ## Missing logs - logs daily quota reached
 
-You have not made any changes to your log configuration, but the [Logs Explorer][2] shows that logs are missing for today. This may be happening because you have reached your daily quota.
+You have not made any changes to your log configuration, but the [Log Explorer][2] shows that logs are missing for today. This may be happening because you have reached your daily quota.
 
 {{< img src="logs/troubleshooting/daily_quota_reached.png" alt="A bar graph showing missing logs and a message saying daily quota reached" style="width:90%" >}}
 
@@ -33,7 +33,7 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 
 3. Set up the [log date remapper][6] to use the new attribute as the official timestamp.
 
-Go to [Logs Explorer][2] to see new JSON logs with their mapped timestamp.
+Go to [Log Explorer][2] to see new JSON logs with their mapped timestamp.
 
 ## Truncated logs
 

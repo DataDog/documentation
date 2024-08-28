@@ -37,7 +37,7 @@ To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors -->
 
 As you define the search query, the graph above the search fields updates.
 
-1. Construct a search query using the same logic as a [log explorer search][4].
+1. Construct a search query using the same logic as a [Log Explorer search][4].
 2. Choose to monitor over a log count, [facet][5], an attribute, or [measure][6]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select an attribute or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet or an attribute**: If a an attribute is selected, the monitor alerts over the `Unique value count` of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
