@@ -171,7 +171,7 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
-{{< img src="llm_observability/evaluations/topic_relevancy.png" alt="A Topic Relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/topic_relevancy_1.png" alt="A Topic Relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -181,7 +181,7 @@ This check identifies and flags user inputs that deviate from the configured acc
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-{{< img src="llm_observability/evaluations/failure_to_answer.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -191,7 +191,7 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
 
-{{< img src="llm_observability/evaluations/language_mismatch.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -201,7 +201,7 @@ This check identifies instances where the LLM generates responses in a different
 
 This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-{{< img src="llm_observability/evaluations/sentiment.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_1.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -213,7 +213,7 @@ This check helps understand the overall mood of the conversation, gauge user sat
 
 This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
-{{< img src="llm_observability/evaluations/toxicity.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_1.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -223,7 +223,7 @@ This check evaluates each input prompt from the user and the response from the L
 
 This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -233,7 +233,7 @@ This check identifies attempts by unauthorized or malicious authors to manipulat
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
