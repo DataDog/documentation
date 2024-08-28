@@ -32,7 +32,7 @@ integration_title: Network
 integration_version: 3.3.0
 is_public: true
 manifest_version: 2.0.0
-name: ネットワーク
+name: network
 public_title: Network
 short_description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
 supported_os:
