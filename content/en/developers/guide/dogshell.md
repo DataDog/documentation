@@ -76,10 +76,10 @@ The following syntax posts a metric to your Datadog account:
 dog metric post MY_METRIC_NAME METRIC_VALUE --tags "TAG_KEY_1:TAG_VALUE_1,TAG_KEY_2:TAG_VALUE_2"
 {{< /code-block >}}
 
-For example, the following command sends a metric named `test_dogshell_metric` to your account with a value of `1.0` and the tags `test:one` and `another_test`:
+For example, the following command sends a metric named `test_dogshell_metric` to your account with a value of `1.0` and the tags `test:one` and `example:one`:
 
 {{< code-block lang="shell" >}}
-dog metric post test_dogshell_metric 1.0 --tags "test:one,another_test"
+dog metric post test_dogshell_metric 1.0 --tags "test:one,example:one"
 {{< /code-block >}}
 
 After you run the command, search for `test_dogshell_metric` using the [Metrics Explorer][5].
