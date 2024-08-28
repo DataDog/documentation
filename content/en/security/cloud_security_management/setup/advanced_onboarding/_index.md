@@ -1,6 +1,9 @@
 ---
 title: Advanced Onboarding for Cloud Security Management
 further_reading:
+  - link: "/security/cloud_security_management/setup/agentless_quick_start"
+    tag: "Documentation"
+    text: "Agentless Scanning Quick Start for Cloud Security Management"
   - link: "/security/cloud_security_management/setup/supported_deployment_types"
     tag: "Documentation"
     text: "Supported Deployment Types"
