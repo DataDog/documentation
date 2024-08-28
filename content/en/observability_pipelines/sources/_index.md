@@ -29,7 +29,7 @@ Sources have different prerequisites and settings. Some sources also need to be 
     {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy and Universal Forwarders (TCP){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/syslog/" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog or syslog-ng{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

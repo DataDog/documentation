@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the Rsyslog or Syslog-ng source so that you route only useful logs to your destinations.
+Set up the Observability Pipelines Worker with the rsyslog or syslog-ng source so that you route only useful logs to your destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
@@ -24,7 +24,7 @@ This document walks you through the following steps:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Log Volume Control** template to create a new pipeline.
-1. Select **Rsyslog** or **Syslog-ng** as the source.
+1. Select **rsyslog** or **syslog-ng** as the source.
 
 ### Set up the source
 

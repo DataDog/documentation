@@ -19,7 +19,7 @@ Select your log source to get started:
 - [Splunk HTTP Event Collector (HEC)][4]
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
 - [Sumo Logic Hosted Collector][6]
-- [Rsyslog or Syslog-ng][7]
+- [rsyslog or syslog-ng][7]
 
 [1]: /observability_pipelines/split_logs/datadog_agent
 [2]: /observability_pipelines/split_logs/fluent

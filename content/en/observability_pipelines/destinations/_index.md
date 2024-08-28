@@ -29,7 +29,7 @@ Select and set up your destinations when you [set up a pipeline][2]. This is ste
     {{< nextlink href="observability_pipelines/destinations/#google-chronicle" >}}Google Chronicle{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}rsyslog or syslog-ng{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -162,9 +162,9 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-----------------|---------------------|
 | None           | 10,000,000      | 1                   |
 
-## Rsyslog or Syslog-ng
+## rsyslog or syslog-ng
 
-Set up the Rsyslog or Syslog-ng destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+Set up the rsyslog or syslog-ng destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
 
 ### Set up the destination
 
