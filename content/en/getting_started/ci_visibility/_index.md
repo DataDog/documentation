@@ -13,6 +13,9 @@ further_reading:
 - link: '/monitors/types/ci'
   tag: 'Documentation'
   text: 'Learn about CI Pipeline Monitors'
+- link: '/account_management/billing/ci_visibility'
+  tag: 'Documentation'
+  text: 'Learn about billing considerations for CI Visibility'
 algolia:
   tags: ["pipeline visibility", "pipelines", "ci pipeline"]
 ---
