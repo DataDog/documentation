@@ -450,6 +450,8 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
               title: Datadog Lambda Extension
+              algolia:
+                tags: ['datadog lambda extension']
               aliases:
                 - /serverless/datadog_lambda_library/extension
 
