@@ -10,8 +10,8 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
 {{< /callout >}} 
 
 If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
@@ -40,7 +40,7 @@ Before you begin, review your configuration to see if your existing config is su
 
 ### Example configuration
 
-For example, here are two example Collector configuration files:
+Here are two example Collector configuration files:
 
 {{< tabs >}}
 {{% tab "Custom Collector components" %}}
@@ -148,7 +148,7 @@ In this case, you can proceed to installing the Agent with the embedded OpenTele
 
 ## Install the Agent with OpenTelemetry Collector
 
-First, install the Agent with embedded OpenTelemetry Collector.
+Follow these steps to install the Agent with embedded OpenTelemetry Collector.
 
 ### Add the Datadog Helm Repository
 
