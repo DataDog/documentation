@@ -41,13 +41,13 @@ To only enable specific integrations:
 1. Use the [in-code SDK setup][12], specifying `integrations_enabled=False`.
 2. Manually enable the integration with `ddtrace.patch()` at the top of the entrypoint file of your LLM application:
 
-{{< code-block lang="python">}}
+```python
 from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
 patch(<INTEGRATION_NAME_IN_LOWERCASE>=True)
-{{< /code-block >}}
+```
 
 **Note**: Use `botocore` as the name of the [AWS Bedrock](#aws-bedrock) integration when manually enabling.
 
@@ -60,11 +60,11 @@ The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][
 The OpenAI integration instruments the following methods, including streamed calls:
 
 - [Completions][2]:
-   - `OpenAI().completions.create()`
-   - `AsyncOpenAI().completions.create()`
+  - `OpenAI().completions.create()`
+  - `AsyncOpenAI().completions.create()`
 - [Chat completions][3]:
-   - `OpenAI().chat.completions.create()`
-   - `AsyncOpenAI().chat.completions.create()`
+  - `OpenAI().chat.completions.create()`
+  - `AsyncOpenAI().chat.completions.create()`
 
 ## LangChain
 
@@ -134,19 +134,19 @@ All integrations are enabled by default.
 
 To disable all integrations, use the [in-code SDK setup][20] and specify `plugins: false` on the general tracer configuration.
 
-{{< code-block lang="javascript">}}
+```javascript
 const tracer = require('dd-trace').init({
   llmobs: { ... },
   plugins: false
 });
 const { llmobs } = tracer;
-{{< /code-block >}}
+```
 
 To only enable specific integrations:
 1. Use the [in-code SDK setup][12], specifying `plugins: false`.
 2. Manually enable the integration with `tracer.use()` at the top of the entrypoint file of your LLM application:
 
-{{ code-block lang="javascript" }}
+```javascript
 const tracer = require('dd-trace').init({
   llmobs: { ... },
   plugins: false
@@ -154,7 +154,7 @@ const tracer = require('dd-trace').init({
 
 const { llmobs } = tracer;
 tracer.use('<INTEGRATION_NAME_IN_LOWERCASE>', true);
-{{< /code-block >}}
+```
 
 Additionally, you can set the following environment variables for more specific control over library patching and the integration that starts the span:
 
@@ -175,11 +175,11 @@ The OpenAI integration provides automatic tracing for the [OpenAI Node.js SDK's]
 The OpenAI integration instruments the following methods, including streamed calls:
 
 - [Completions][2]:
-   - `openai.completions.create()`
+  - `openai.completions.create()`
 - [Chat completions][3]:
-   - `openai.chat.completions.create()`
+  - `openai.chat.completions.create()`
 - [Embeddings][19]:
-   - `openai.embeddings.create()`
+  - `openai.embeddings.create()`
 
 {{% /tab %}}
 {{< /tabs >}}
