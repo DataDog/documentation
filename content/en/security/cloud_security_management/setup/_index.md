@@ -39,8 +39,7 @@ The [Agentless Scanning quick start][1] provides a streamlined setup workflow fo
 
 - **Misconfigurations**: Detect and manage security misconfigurations.
 - **Identity Risks (CIEM)**: Identify and mitigate identity-related risks.
-- **Host Vulnerability Management**: Scan for vulnerabilities in your hosts.
-- **Container Vulnerability Management**: Ensure the security of your containerized applications.
+- **Vulnerability Management**: Scan for vulnerabilities in your hosts and containers.
 
 **Note:** Agentless Scanning supports only AWS environments.
 
