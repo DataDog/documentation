@@ -18,7 +18,7 @@ further_reading:
     - link: "/security/cloud_security_management/setup/supported_deployment_types"
       tag: "Documentation"
       text: "Supported Deployment Types"
-    - link: "/security/cloud_security_management/setup/agentless_scanning"
+    - link: "/security/cloud_security_management/setup/agentless_quick_start"
       tag: "Documentation"
       text: "Agentless Scanning Quick Start"
     - link: "/security/cloud_security_management/setup/custom_onboarding"
@@ -61,6 +61,6 @@ Use custom onboarding if you:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless_quick_start
 [2]: https://app.datadoghq.com/security/configuration/csm/features
 [3]: /security/cloud_security_management/setup/custom_onboarding

@@ -5182,9 +5182,9 @@ menu:
       identifier: csm_setup_deployment_types
       weight: 100
     - name: Agentless Scanning Quick Start
-      url: security/cloud_security_management/setup/agentless_scanning
+      url: security/cloud_security_management/setup/agentless_quick_start
       parent: csm_setup
-      identifier: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_quick_start
       weight: 101
     - name: Custom Onboarding
       url: security/cloud_security_management/setup/custom_onboarding

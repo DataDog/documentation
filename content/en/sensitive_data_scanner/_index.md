@@ -358,5 +358,5 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
 [14]: /observability_pipelines/sensitive_data_redaction/
 [16]: /security/cloud_security_management
-[17]: /security/cloud_security_management/setup/agentless_scanning
+[17]: /security/cloud_security_management/setup/agentless_quick_start
 [18]: /agent/remote_config

@@ -10,6 +10,8 @@ further_reading:
   - link: "/security/cloud_security_management/guide/agentless_aws_integration"
     tag: "Documentation"
     text: "Setting up Agentless Scanning with the AWS Integration"
+aliases:
+  - /security/cloud_security_management/setup/agentless_scanning
 ---
 
 {{< site-region region="gov" >}}

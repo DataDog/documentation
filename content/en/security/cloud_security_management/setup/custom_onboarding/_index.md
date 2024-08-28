@@ -104,7 +104,7 @@ You can enable additional CSM features at any time by returning to the [Features
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: /security/cloud_security_management/setup/agentless_scanning
+[4]: /security/cloud_security_management/setup/agentless_quick_start
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/cloud_security_management/
 [7]: /security/guide/aws_fargate_config_guide/
