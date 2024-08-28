@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your Rsyslog or Syslog-ng source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Configure your rsyslog or syslog-ng source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
@@ -73,7 +73,7 @@ You need to have the Datadog integration for your cloud provider installed to se
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the **Archive Logs** template to create a new pipeline.
-1. Select **Rsyslog** or **Syslog-ng** as the source.
+1. Select **rsyslog** or **syslog-ng** as the source.
 
 ### Set up the source
 
