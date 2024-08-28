@@ -35,7 +35,7 @@ To set up Cloud Security Management, you can choose between two main approaches:
 
 The [Agentless Scanning quick start][1] provides a streamlined setup workflow for Cloud Security Management, allowing you to start monitoring your AWS resources immediately.
 
-**Agentless Scanning supported features**:
+Agentless Scanning supported features include:
 
 - **Misconfigurations**: Detect and manage security misconfigurations.
 - **Identity Risks (CIEM)**: Identify and mitigate identity-related risks.

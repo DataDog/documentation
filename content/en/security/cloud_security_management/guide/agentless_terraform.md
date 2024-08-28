@@ -12,7 +12,7 @@ further_reading:
     text: "Setting up Agentless Scanning with the AWS Integration"
 ---
 
-You can install and configure [Agentless Scanning][1] for your cloud environments using the [quick start workflow][2], manually using Terraform, or by utilizing the [CloudFormation template with the AWS integration][3]. This guide provides detailed instructions for the Terraform approach.
+You can install and configure [Agentless Scanning][1] for your cloud environments using the [quick start workflow][2], manually using Terraform, or by [enabling Agentless Scanning from the AWS integration tile][3]. This guide provides detailed instructions for the Terraform approach.
 
 {{< tabs >}}
 {{% tab "Agentless scanning (new AWS account)" %}}

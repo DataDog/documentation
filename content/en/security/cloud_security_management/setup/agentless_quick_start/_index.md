@@ -20,7 +20,7 @@ aliases:
 
 The Agentless Scanning Quick Start provides a streamlined setup workflow for Cloud Security Management, enabling you to start monitoring your AWS resources immediately.
 
-<div class="alert alert-info">This guide provides instructions for setting up Agentless Scanning using the Cloud Security Management quick start workflow. Instructions for setting up Agentless Scanning using <a href="/security/cloud_security_management/guide/agentless_terraform">Terraform</a> or by utilizing the <a href="/security/cloud_security_management/guide/agentless_aws_integration">CloudFormation template with the AWS integration</a> are also available.</div>
+<div class="alert alert-info">This guide provides instructions for setting up Agentless Scanning using the Cloud Security Management quick start workflow. Instructions for setting up Agentless Scanning using <a href="/security/cloud_security_management/guide/agentless_terraform">Terraform</a> or by <a href="/security/cloud_security_management/guide/agentless_aws_integration">enabling Agentless Scanning from the AWS integration tile</a> are also available.</div>
 
 ## About Agentless Scanning
 
