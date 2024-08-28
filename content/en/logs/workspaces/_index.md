@@ -227,6 +227,10 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 
 {{< img src="logs/workspace/treemap.png" alt="The workspace datasets" >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/logs/analysis-workspace/list
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/log_configuration/parsing/
