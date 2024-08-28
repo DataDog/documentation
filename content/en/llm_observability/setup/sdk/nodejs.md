@@ -80,21 +80,25 @@ const tracer = require('dd-trace').init({
 const llmobs = tracer.llmobs;
 {{< /code-block >}}
 
-`ml_app`
+These options are set on the `llmobs` configuration:
+
+`mlApp`
 : optional - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
-`agentless_enabled`
+`agentlessEnabled`
 : optional - _boolean_ - **default**: `false`
-<br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Only required if you are not using the Datadog Agent, in which case this should be set to `true`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
+
+`apiKey`
+: optional - _string_ 
+<br />Your Datadog API key. If not provided, this defaults to the value of `DD_API_KEY`.
+
+These options can be set on the general tracer configuration:
 
 `site`
 : optional - _string_ 
 <br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
-
-`api_key`
-: optional - _string_ 
-<br />Your Datadog API key. If not provided, this defaults to the value of `DD_API_KEY`.
 
 `env`
 : optional - _string_
@@ -415,7 +419,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `span` 
 : optional - _Span_ - **default**: the current active span
-<br />The span to annotate. If `span` is not provided (as when using function decorators), the SDK annotates the current active span.
+<br />The span to annotate. If `span` is not provided (as when using function wrappers), the SDK annotates the current active span.
 
 `annotationOptions`
 : required - _object_
@@ -510,7 +514,7 @@ The `llmobs.exportSpan()` method accepts the following argument:
 
 `span`
 : optional - _Span_
-<br />The span to extract the span context (span and trace IDs) from. If not provided (as when using function decorators), the SDK exports the current active span.
+<br />The span to extract the span context (span and trace IDs) from. If not provided (as when using function wrappers), the SDK exports the current active span.
 
 #### Example
 
@@ -591,7 +595,7 @@ Additionally, the return value of this function is the return value of the funct
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
-  return llmobs.trace('workflow', { name: 'processMessage', sessionId: '<SESSION_ID>', mlApp: '<ML_APP>' }, () => {
+  return llmobs.trace('workflow', { name: 'processMessage', sessionId: '<SESSION_ID>', mlApp: '<ML_APP>' }, workflowSpan => {
     ... // user application logic
     return
   })
@@ -623,7 +627,34 @@ function separateTask(workflowSpan) {
 }
 {{< /code-block >}}
 
-#### Force flushing in serverless environments
+### Function decorators in TypeScript
+
+The Node.js LLM Observability SDK offers an `llmobs.decorate` function which serves as a function decorator for TypeScript applications. This functions tracing behavior is the same as `llmobs.wrap`.
+
+#### Example
+  
+{{< code-block lang="javascript" >}}
+// index.ts
+import tracer from 'dd-trace';
+tracer.init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>",
+  },
+});
+
+const { llmobs } = tracer;
+
+class MyAgent {
+  @llmobs.decorate('agent')
+  async runChain () {
+    ... // user application logic
+    return
+  }
+}
+
+{{< /code-block >}}
+
+### Force flushing in serverless environments
 
 `llmobs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
