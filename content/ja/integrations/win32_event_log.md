@@ -24,7 +24,7 @@ author:
 categories:
 - os & system
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md
 display_on_public_website: true
@@ -126,7 +126,7 @@ Get-WinEvent -ListLog * | sort RecordCount -Descending
 応答例
 
 ```text
-LogMode  MaximumSizeInBytes RecordCount LogName 
+LogMode  MaximumSizeInBytes RecordCount LogName
 Circular          134217728      249896 Security
 Circular            5242880        2932 <CHANNEL_2>
 ```
@@ -184,12 +184,12 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
   ```yaml
   init_config:
   instances:
-    - # Event Log API 
+    - # Event Log API
       path: Security
       legacy_mode: false
       filters: {}
 
-    - path: "<CHANNEL_2>" 
+    - path: "<CHANNEL_2>"
       legacy_mode: false
       filters: {}
   ```
@@ -266,13 +266,13 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows       
+    service: Windows
     query: '*[System[(Level=1 or Level=2 or Level=3)]]'
 
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows       
+    service: Windows
     query: |
       <QueryList>
         <Query Id="0" Path="Application">
@@ -291,7 +291,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Security
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: include_at_match
       name: relevant_security_events
@@ -300,7 +300,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Security
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: exclude_at_match
       name: relevant_security_events
@@ -309,7 +309,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: System
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: include_at_match
       name: system_errors_and_warnings
@@ -318,7 +318,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: include_at_match
       name: application_errors_and_warnings
@@ -602,7 +602,7 @@ Windows Event Log チェックには、サービスのチェック機能は含�
     - type: windows_event
       channel_path: System
       source: windows.events
-      service: Windows       
+      service: Windows
       log_processing_rules:
       - type: include_at_match
         name: system_errors_and_warnings

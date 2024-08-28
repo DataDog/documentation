@@ -19,6 +19,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterCreatedAtStartParameter:
       description: Only include API keys created on or after the specified date.
       in: query
@@ -27,6 +29,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtEndParameter:
       description: Only include API keys modified on or before the specified date.
       in: query
@@ -35,6 +39,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtStartParameter:
       description: Only include API keys modified on or after the specified date.
       in: query
@@ -43,6 +49,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterParameter:
       description: Filter API keys by the specified string.
       in: query
@@ -93,6 +101,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterCreatedAtStartParameter:
       description: Only include application keys created on or after the specified
         date.
@@ -102,6 +112,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterParameter:
       description: Filter application keys by the specified string.
       in: query
@@ -876,6 +888,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AWSRelatedAccountAttributes:
       description: Attributes for an AWS related account.
       properties:
@@ -991,6 +1005,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyCreateRequest:
       description: Request used to create an application key.
       properties:
@@ -1005,6 +1021,8 @@ components:
         owned_by:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyResponse:
       description: Response for retrieving an application key.
       properties:
@@ -1349,6 +1367,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AuthNMappingAttributes:
       description: Attributes of AuthN Mapping.
       properties:
@@ -1635,6 +1655,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigAttributes:
       description: Attributes for An AWS CUR config.
       properties:
@@ -1654,6 +1676,8 @@ components:
           description: The timestamp when the AWS CUR config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         error_messages:
           description: The error messages for the AWS CUR config.
           items:
@@ -1681,10 +1705,14 @@ components:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         updated_at:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - bucket_name
@@ -1693,6 +1721,8 @@ components:
       - report_prefix
       - status
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchData:
       description: AWS CUR config Patch data.
       properties:
@@ -1704,6 +1734,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchRequest:
       description: AWS CUR config Patch Request.
       properties:
@@ -1835,6 +1867,8 @@ components:
           description: The timestamp when the Azure config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         dataset_type:
           description: The dataset type of the Azure config.
           example: actual
@@ -1874,6 +1908,8 @@ components:
           description: The timestamp when the Azure config status was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         storage_account:
           description: The name of the storage account where the Azure Export is saved.
           example: dd-storage-account
@@ -1887,6 +1923,8 @@ components:
           description: The timestamp when the Azure config was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - client_id
@@ -1898,6 +1936,8 @@ components:
       - storage_account
       - storage_container
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPair:
       description: Azure config pair.
       properties:
@@ -1913,6 +1953,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPairAttributes:
       description: Attributes for Azure config pair.
       properties:
@@ -2411,7 +2453,6 @@ components:
         author_email:
           description: The commit author email.
           example: author@example.com
-          format: email
           type: string
         author_name:
           description: The commit author name.
@@ -2436,7 +2477,6 @@ components:
         committer_email:
           description: The committer email.
           example: committer@example.com
-          format: email
           nullable: true
           type: string
         committer_name:
@@ -4651,6 +4691,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
       properties:
@@ -4698,6 +4740,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountType:
       default: confluent-cloud-accounts
       description: The JSON:API type for this API. Should always be `confluent-cloud-accounts`.
@@ -4809,6 +4853,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponse:
       description: Response schema when interacting with a Confluent resource.
       properties:
@@ -4845,6 +4891,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponseData:
       description: Confluent Cloud resource data.
       properties:
@@ -4861,6 +4909,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceType:
       default: confluent-cloud-resources
       description: The JSON:API type for this request.
@@ -8642,6 +8692,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountAttributes:
       description: Attributes associated with your service account.
       properties:
@@ -8693,12 +8745,16 @@ components:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountCreateRequest:
       description: Data on your newly generated service account.
       properties:
         data:
           $ref: '#/components/schemas/GCPSTSServiceAccountData'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountData:
       description: Additional metadata on your generated service account.
       properties:
@@ -8707,6 +8763,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountResponse:
       description: The account creation response.
       properties:
@@ -9578,6 +9636,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     IncidentCreateRelationships:
       description: The relationships the incident will have with other resources once
         created.
@@ -10028,6 +10088,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     IncidentResponseIncludedItem:
       description: An object related to an incident that is included in the response.
       oneOf:
@@ -12705,10 +12767,13 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets where only included attribute is its title
+      description: Assets related to the object, including title and url.
       properties:
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricAssetDashboardRelationship:
@@ -12917,7 +12982,6 @@ components:
       - bob@example.com
       items:
         description: An email address.
-        format: email
         type: string
       type: array
     MetricBulkTagConfigNamePrefix:
@@ -13089,7 +13153,8 @@ components:
       - type
       type: object
     MetricDashboardAttributes:
-      description: Attributes related to the dashboard, including title and popularity.
+      description: Attributes related to the dashboard, including title, popularity,
+        and url.
       properties:
         popularity:
           description: Value from 0 to 5 that ranks popularity of the dashboard.
@@ -13099,6 +13164,9 @@ components:
           type: number
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricDashboardID:
@@ -13151,6 +13219,8 @@ components:
         type:
           $ref: '#/components/schemas/MetricEstimateResourceType'
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateAttributes:
       description: Object containing the definition of a metric estimate attribute.
       properties:
@@ -13167,6 +13237,8 @@ components:
           format: int64
           type: integer
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateResourceType:
       default: metric_cardinality_estimate
       description: The metric estimate resource type.
@@ -14434,7 +14506,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           type: string
         name:
           description: The name for the Opsgenie service.
@@ -14497,7 +14568,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: null
-          format: url
           nullable: true
           type: string
         name:
@@ -14545,7 +14615,6 @@ components:
         custom_url:
           description: The custom URL for a custom region.
           example: https://example.com
-          format: url
           nullable: true
           type: string
         name:
@@ -14968,6 +15037,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
@@ -14979,6 +15050,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -14992,6 +15065,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
@@ -15013,6 +15088,8 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialApplicationKeyAttributes:
       description: Attributes of a partial application key.
       properties:
@@ -15021,6 +15098,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -15170,6 +15249,8 @@ components:
           example: powerpack
           type: string
       type: object
+      x-merge-override:
+        required: false
     PowerpackGroupWidget:
       description: Powerpack group widget definition object.
       properties:
@@ -15454,6 +15535,8 @@ components:
         type:
           $ref: '#/components/schemas/ProcessSummaryType'
       type: object
+      x-merge-override:
+        required: false
     ProcessSummaryAttributes:
       description: Attributes for a process summary.
       properties:
@@ -15837,6 +15920,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationType'
       required:
@@ -15851,6 +15936,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         client_token:
           description: Client token of the RUM application.
           example: abcd1234efgh5678ijkl90abcd1234efgh0
@@ -15918,6 +16005,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
@@ -15960,12 +16049,16 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationListAttributes:
       description: RUM application list attributes.
       properties:
@@ -15973,6 +16066,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -16057,6 +16152,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationUpdateType'
       required:
@@ -16490,6 +16587,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpactData:
       description: Relationship to impact object.
       properties:
@@ -16503,6 +16602,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpacts:
       description: Relationship to impacts.
       properties:
@@ -16530,6 +16631,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentIntegrationMetadatas:
       description: A relationship reference for multiple integration metadata objects.
       example:
@@ -16593,6 +16696,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentResponders:
       description: Relationship to incident responders.
       properties:
@@ -16617,6 +16722,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentUserDefinedFields:
       description: Relationship to incident user defined fields.
       properties:
@@ -16712,6 +16819,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToRoleData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoleData:
       description: Relationship to role object.
       properties:
@@ -16722,6 +16831,8 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoles:
       description: Relationship to roles.
       properties:
@@ -16731,6 +16842,8 @@ components:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRule:
       description: Scorecard create rule response relationship.
       properties:
@@ -16774,12 +16887,16 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeam:
       description: Relationship to team.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToTeamData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamData:
       description: Relationship to Team object.
       properties:
@@ -16790,6 +16907,8 @@ components:
         type:
           $ref: '#/components/schemas/TeamType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -16803,6 +16922,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinks:
       description: Relationship between a team and a team link
       properties:
@@ -16814,6 +16935,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -16845,6 +16968,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
       properties:
@@ -16858,6 +16983,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamTeam:
       description: Relationship between team membership and team
       properties:
@@ -16900,6 +17027,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUsers:
       description: Relationship to users.
       properties:
@@ -17576,6 +17705,8 @@ components:
       required:
       - attributes
       type: object
+      x-merge-override:
+        required: false
     RoleCreateRequest:
       description: Create a role.
       properties:
@@ -17803,6 +17934,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     SAMLAssertionAttributeAttributes:
       description: Key/Value pair of attributes used in SAML assertion attributes.
       properties:
@@ -19845,6 +19978,10 @@ components:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
           type: string
+        editable:
+          description: Whether the suppression rule is editable.
+          example: true
+          type: boolean
         enabled:
           description: Whether the suppression rule is enabled.
           example: true
@@ -20997,7 +21134,6 @@ components:
         email:
           description: "Service owner\u2019s email."
           example: contact@datadoghq.com
-          format: email
           type: string
         slack:
           description: "Service owner\u2019s Slack channel."
@@ -21258,7 +21394,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -21621,7 +21756,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -22824,6 +22958,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamAttributes:
       description: Team attributes
       properties:
@@ -23007,7 +23143,6 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
-          format: url
           type: string
       required:
       - label
@@ -23071,6 +23206,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamPermissionSettingAttributes:
       description: Team permission setting attributes
       properties:
@@ -23827,6 +23964,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     UserCreateRequest:
       description: Create a user.
       properties:
@@ -23846,6 +23985,8 @@ components:
       - type
       - relationships
       type: object
+      x-merge-override:
+        required: false
     UserInvitationDataAttributes:
       description: Attributes of a user invitation.
       properties:
@@ -23891,6 +24032,8 @@ components:
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object
+      x-merge-override:
+        required: false
     UserInvitationsRequest:
       description: Object to invite users to join the organization.
       properties:
@@ -23997,6 +24140,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamAttributes:
       description: Team membership attributes
       properties:
@@ -24049,6 +24194,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamPermissionAttributes:
       description: User team permission attributes
       properties:
@@ -24194,6 +24341,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     UserUpdateRequest:
       description: Update a user.
       properties:
@@ -35256,7 +35405,7 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
               {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
@@ -40981,8 +41130,10 @@ tags:
     for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
-    Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
-    page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
+    Cloud Cost Management accounts for AWS and Azure. You can query your cost data
+    by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
+    and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
+    documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)

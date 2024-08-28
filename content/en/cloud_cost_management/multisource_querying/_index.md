@@ -15,10 +15,6 @@ further_reading:
 Multisource Querying is in private beta. To request access, complete the form.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
@@ -30,7 +26,7 @@ Use Multisource Querying to build cost views, understand the total cost of servi
 To use Multisource Querying, ensure you meet the following requirements:
 
 1. You have configured [Cloud Cost Management][10] and are actively ingesting costs in Datadog.
-1. Your cost data is in a single currency. Multiple currencies are not supported. 
+1. Your cost data is in a single currency. Multiple currencies are not supported.
 
 ## Query your cost data
 
@@ -38,7 +34,7 @@ You can select multiple providers in the **Provider** field on the [**Analytics*
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Analytics page" style="width:40%;" >}}
 
-Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
+Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**.
 
 {{< img src="cloud_cost/multisource_querying/filters.png" alt="The Service and Team filters highlighted below the search query on the Cloud Cost Analytics page" style="width:100%;" >}}
 

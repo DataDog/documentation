@@ -5,7 +5,7 @@ categories:
 - cloud
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Polly のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_polly/

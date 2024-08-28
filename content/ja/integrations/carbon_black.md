@@ -2,7 +2,7 @@
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md
 description: Carbon Black Defense ログを収集する

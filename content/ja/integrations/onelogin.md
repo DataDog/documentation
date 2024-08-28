@@ -20,7 +20,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: OneLogin
 display_on_public_website: true

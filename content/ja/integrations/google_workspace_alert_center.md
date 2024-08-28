@@ -2,7 +2,7 @@
 categories:
 - ログの収集
 - security
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Workspace Alert Center からログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/google_workspace_alert_center/

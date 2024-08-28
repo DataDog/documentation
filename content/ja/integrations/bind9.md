@@ -22,7 +22,7 @@ author:
   support_email: ashuvyas45@gmail.com
 categories:
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md
 display_on_public_website: true

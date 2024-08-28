@@ -26,7 +26,7 @@ author:
   support_email: noname@withgod.jp
 categories:
 - キャッシュ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
 display_on_public_website: true

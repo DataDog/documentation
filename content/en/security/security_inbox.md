@@ -10,9 +10,9 @@ further_reading:
 - link: "/security/default_rules/#all"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
-- link: "https://www.datadoghq.com/blog/security-inbox/"
+- link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
   tag: "Blog"
-  text: "Easily identify and prioritize your top security risks with Datadog Security Inbox"
+  text: "How Datadog Security Inbox prioritizes security risks"
 products:
 - name: Cloud Security Management
   url: /security/cloud_security_management/

@@ -4,7 +4,7 @@ categories:
 - google cloud
 - ログの収集
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud TPU のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_tpu/

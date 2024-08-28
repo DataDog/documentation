@@ -5,7 +5,7 @@ categories:
 - クラウド
 - AWS
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Verified Access ログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/aws_verified_access/

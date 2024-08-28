@@ -30,7 +30,7 @@ author:
 categories:
 - クラウド
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
 display_on_public_website: true
@@ -111,13 +111,13 @@ The Cloudera check requires version 7 of Cloudera Manager.
    init_config:
 
       ## @param workload_username - string - required
-      ## The Workload username. This value can be found in the `User Management` tab of the Management 
+      ## The Workload username. This value can be found in the `User Management` tab of the Management
       ## Console in the `Workload User Name`.
       #
       workload_username: <WORKLOAD_USERNAME>
 
       ## @param workload_password - string - required
-      ## The Workload password. This value can be found in the `User Management` tab of the Management 
+      ## The Workload password. This value can be found in the `User Management` tab of the Management
       ## Console in the `Workload Password`.
       #
       workload_password: <WORKLOAD_PASSWORD>
@@ -127,11 +127,11 @@ The Cloudera check requires version 7 of Cloudera Manager.
    instances:
 
       ## @param api_url - string - required
-      ## The URL endpoint for the Cloudera Manager API. This can be found under the Endpoints tab for 
-      ## your Data Hub to monitor. 
+      ## The URL endpoint for the Cloudera Manager API. This can be found under the Endpoints tab for
+      ## your Data Hub to monitor.
       ##
-      ## Note: The version of the Cloudera Manager API needs to be appended at the end of the URL. 
-      ## For example, using v48 of the API for Data Hub `cluster_1` should result with a URL similar 
+      ## Note: The version of the Cloudera Manager API needs to be appended at the end of the URL.
+      ## For example, using v48 of the API for Data Hub `cluster_1` should result with a URL similar
       ## to the following:
       ## `https://cluster1.cloudera.site/cluster_1/cdp-proxy-api/cm-api/v48`
       #
@@ -168,7 +168,7 @@ The Cloudera check requires version 7 of Cloudera Manager.
 **デフォルト値**: `None` (全クラスターが処理されます)
 
 - `include`
-: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。
 **デフォルト値**: empty map
 
 - `exclude`
@@ -176,7 +176,7 @@ The Cloudera check requires version 7 of Cloudera Manager.
 **デフォルト値**: empty list
 
 - `interval`
-: エンドポイントを通じて取得した最後のクラスター一覧の有効時間 (秒)。 
+: エンドポイントを通じて取得した最後のクラスター一覧の有効時間 (秒)。
 **デフォルト値**: `None` (キャッシュを使用しない)
 
 **例**:

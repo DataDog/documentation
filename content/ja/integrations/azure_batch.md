@@ -3,7 +3,7 @@ categories:
 - cloud
 - configuration & deployment
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Batch Service のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_batch/

@@ -25,7 +25,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
 display_on_public_website: true
@@ -69,7 +69,7 @@ tile:
 
 ## セットアップ
 
-すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。 
+すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。
 
 ### インストール
 

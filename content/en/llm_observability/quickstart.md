@@ -68,7 +68,7 @@ To generate an LLM Observability trace, you can run a Python script.
 
 1. View the trace of your LLM call on the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
 
-   {{< img src="llm_observability/quickstart_trace.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
+   {{< img src="llm_observability/quickstart_trace_1.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 

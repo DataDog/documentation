@@ -32,7 +32,7 @@ categories:
 - マーケットプレイス
 - プロビジョニング
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -166,7 +166,7 @@ Fairwinds Insights にサービスのチェックは含まれません。
 
 サポートまたはリクエストをご希望の場合は、以下のチャンネルから Fairwinds にお問い合わせください。
 
-- 電話: +1 617-202-3659 
+- 電話: +1 617-202-3659
 - メール: [sales@fairwinds.com][2]
 
 ### よくある質問

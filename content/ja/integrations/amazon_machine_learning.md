@@ -6,7 +6,7 @@ categories:
 - aws
 - log collection
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/

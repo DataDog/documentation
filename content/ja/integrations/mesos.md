@@ -2,7 +2,7 @@
 aliases:
 - /ja/integrations/mesos_master/
 - /ja/integrations/mesos_slave/
-custom_kind: インテグレーション
+custom_kind: integration
 integration_title: Mesos
 is_public: true
 short_description: クラスターリソースの使用状況、マスターおよびスレーブの数、タスクのステータスなどを追跡します。
