@@ -18,13 +18,13 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 {{< img src="real_user_monitoring/session_replay/mobile/mobile_replay.mp4" alt="An example of a Mobile Session Replay recording" video="true" style="width:60%;">}}
 
-## How it works
+## How the Session Replay recorder works
 
-The Session Replay recorder is part of the RUM Mobile SDK. While the recorder for the [RUM Browser SDK][1] relies on DOM and HTML to take snapshots, the RUM Mobile SDK does not have DOM and HTML, so the recorder instead turns the native view's hierarchies into a sequence of flat "wireframes" and takes incremental snapshots of the relevant wireframes.
+The Session Replay recorder is part of the RUM Mobile SDK. While [Browser Session Replay][1] relies on snapshots of the browser's DOM and CSS, while mobile apps don't have HTML, DOM, or CSS, so the recorder instead turns the native view's hierarchies into a sequence of flat "wireframes" and takes incremental snapshots of the relevant wireframes.
 
 ### Wireframe concept
 
-A _wireframe_ describes individual rectangular areas in the mobile app screen. It is an abstract type, which means it doesn't always correspond 1:1 to a native view, or live inside the views hierarchy.
+A _wireframe_ describes individual rectangular areas in the mobile app screen. Wireframes are constructed during the process of traversing the app's view-tree in a bottom-up (or generally "back-to-front") order and determining visible elements. It is an abstract type, which means it doesn't always correspond 1:1 to a native view, or live inside the views hierarchy.
 
 For further context, the following could be considered a wireframe:
 
@@ -38,7 +38,7 @@ For further context, the following could be considered a wireframe:
 
 Wireframes are constructed during the process of traverseing the app's view-tree in a bottom-up (or generally "back-to-front") order and determining visible elements. In the below example, the iOS app screen is built with 78 native _views_, but it can be broken into 19 wireframes:
 
-{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:30%;">}}
 
 These wireframes can be sent to the player while **preserving their rendering order** (back-to-front) and **using absolute positioning** (in screen coordinates). There is no "tree structure", nor child-parent relationship between wireframes, therefore making the structure "flat".
 
@@ -50,34 +50,43 @@ The above screen can be reconstructed in 19 passes of the renderer:
 
 | Iteration | 1 | 2 | 3 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:100%;">}} |
-| Description | Draw "geometry" wireframe into viewport (rectangle + background color). The first wireframe could dictate the viewport size, enabling player size adjustment for given device + rotation (landscape / portrait). | Draw "image" wireframe (rectangle + image with given UUID fetched from our backend) | Draw "text" wireframe (rectangle + "Twin Lake" text + font color, family and size). |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-1.png" alt="An example of a 'geometry' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
+| Description | Draw "geometry" wireframe into viewport (rectangle + background color). | Draw "image" wireframe (rectangle + image with given UUID fetched from the Datadog backend). | Draw "text" wireframe (rectangle + "Twin Lake" text + font color, family and size). |
+
+The first wireframe could dictate the viewport size, enabling player size adjustment for given device + rotation (landscape / portrait).
 
 | Iteration | 4 | 5-9 | 10-12 |
 |-----------|---|---|---|
-| | | |
-| Description | | | Draw "image" and two "geometry" wireframes into viewport. Because wireframes are sorted in back-to-front order, it will overdraw existing portion of the frame. This is very much desirable. For semi-transparent elements, it can also do the job of proper blending "closer" elements with the "farer" ones. |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-4.png" alt="An example of a 'geometry', 'image, and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-5-9-1.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-10-12.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
+| Description | Draw "image" and "text" wireframes into viewport.| Draw "image" and "text" wireframes into viewport. | Draw "image" and two "geometry" wireframes into viewport.  |
+
+Because wireframes are sorted in back-to-front order, it overdraws existing portion of the frame. This is very much desirable. For semi-transparent elements, it can also do the job of proper blending "closer" elements with the "farer" ones.
 
 | Iteration | 13-19 | Final result |
 |-----------|-------|--------------|
-| | | |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-13-19.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-final-result.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} |
 
 ### Full and incremental snapshots
 
 The sequence of all visible wireframes can be considered a full snapshot record if it is referring to the web format. Sending it per frame in the replay is not optimal, which is why the recorder takes incremental snapshots.
 
-To send incremental changes, the mobile SDK tags each wireframe with a unique identifier.
+To send incremental changes, the mobile SDK tags each wireframe with a unique identifier. Native views are objects, sot hey can be identified by reference.
 
-Incremental records are based on sending updates to only impacted wireframes.
+{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-wireframe-uuid.png" alt="An example of how each wireframe is given a `uuid` (from 1 to 19)." style="width:40%;">}}
 
+Except `uuid`, a wireframe can define 3 classes of attributes:
 
+- **Geometry**: Its `x`, `y`, `width`, and `height` using absolute screen coordinates.
+- **Appearance**: Information on its background color, font size, font color, and other styles.
+- **Content**: Depending on wireframe type, it can be a text from the label, reference to an image (such as an image's `uuid` or remote URL) or any other information essential for its rendering.
 
-Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
+Below are examples of how incremental records are based on sending updates to only impacted wireframes.
 
-The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the browser support table.
-
-
-To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
+| Example | Description |
+|---------|-------------|
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-1.mp4" alt="An example of how an incremental record." video="true" >}} | If a wireframe position changes, but its content and appearance isn't altered, the incremental snapshot only needs to include new positions for impacted wireframes and their `uuids`. This might correspond to a "slow scrolling" scenario or any other scenario where only a portion of the screen is moved. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-2.mp4" alt="An example of how an incremental record." video="true" >}} | If a wireframe disappears from the screen, an incremental snapshot may only include information on removed `uuids`. Alternatively, it could always include information on remaining `uuids`. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-3.mp4" alt="An example of how an incremental record." video="true" >}} | If only the content of a wireframe changes, an incremental update only includes new content and the `uuid` of altered wireframes. |
 
 ## Setup
 
