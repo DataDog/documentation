@@ -37,7 +37,7 @@ The default Datadog Agent package includes an embedded Collector with a [curated
     {{< nextlink href="/opentelemetry/agent/install_agent_with_collector" >}}Quick start with the default Agent package{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Use additional OpenTelemetry components
+### Use custom OpenTelemetry components
 
 If you need OpenTelemetry components beyond what's provided in the default package, you can use the bring-your-OTel-components workflow to extend the Datadog Agent's capabilities. This guide is suitable if you're:
 
@@ -45,7 +45,7 @@ If you need OpenTelemetry components beyond what's provided in the default packa
 - Building and deploying a customized Agent image with your required components
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/agent/agent_with_custom_components" >}}Use additional OpenTelemetry components{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/agent/agent_with_custom_components" >}}Use custom OpenTelemetry components{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Migrate from OpenTelemetry Collector to Datadog Agent
