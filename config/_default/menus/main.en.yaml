@@ -5186,34 +5186,34 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_quick_start
       weight: 101
-    - name: Custom Onboarding
-      url: security/cloud_security_management/setup/custom_onboarding
+    - name: Advanced Onboarding
+      url: security/cloud_security_management/setup/advanced_onboarding
       parent: csm_setup
-      identifier: csm_setup_custom_onboarding
+      identifier: csm_setup_advanced_onboarding
       weight: 102
     - name: Cloud Accounts
       url: security/cloud_security_management/setup/custom_onboarding/cloud_accounts
-      parent: csm_setup_custom_onboarding
+      parent: csm_setup_advanced_onboarding
       identifier: csm_setup_cloud_accounts
       weight: 1000
     - name: Agent
       url: security/cloud_security_management/setup/custom_onboarding/agent
-      parent: csm_setup_custom_onboarding
+      parent: csm_setup_advanced_onboarding
       identifier: csm_setup_agent
       weight: 1001
     - name: Serverless
       url: security/cloud_security_management/setup/custom_onboarding/serverless?tab=amazonecs#cloud-security-management
-      parent: csm_setup_custom_onboarding
+      parent: csm_setup_advanced_onboarding
       identifier: csm_setup_serverless
       weight: 1002
     - name: CloudTrail Logs
       url: security/cloud_security_management/setup/custom_onboarding/cloudtrail_logs
-      parent: csm_setup_custom_onboarding
+      parent: csm_setup_advanced_onboarding
       identifier: csm_setup_cloudtrail_logs
       weight: 1003
     - name: Source Code Integrations
       url: security/cloud_security_management/setup/custom_onboarding/source_code_integrations
-      parent: csm_setup_custom_onboarding
+      parent: csm_setup_advanced_onboarding
       identifier: csm_setup_source_code_integrations
       weight: 1004
     - name: Threats

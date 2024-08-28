@@ -1,5 +1,5 @@
 ---
-title: Custom Onboarding for Cloud Security Management
+title: Advanced Onboarding for Cloud Security Management
 further_reading:
   - link: "/security/cloud_security_management/setup/supported_deployment_types"
     tag: "Documentation"
@@ -9,7 +9,7 @@ further_reading:
     text: "Cloud Security Management Agent Variables"
 ---
 
-The custom onboarding workflow provides a flexible and customizable onboarding experience for [Cloud Security Management (CSM)][6], allowing you to choose features that best fit your specific needs.
+The advanced onboarding workflow provides a flexible and customizable onboarding experience for [Cloud Security Management (CSM)][6], allowing you to choose features that best fit your specific needs.
 
 ## Installation
 
