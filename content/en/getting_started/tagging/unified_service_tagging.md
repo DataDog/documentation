@@ -73,7 +73,14 @@ To setup unified service tagging in a containerized environment:
 
 3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
-#### Automatic version tagging for containerized environments
+#### Configuration
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
+If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
+
+##### Automatic version tagging for containerized environments
 You can use the `version` tag to [monitor deployments][17] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][16].
 
 Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
@@ -86,15 +93,7 @@ Datadog sets the `version` tag for you in the following priority order. If you m
 
 You need to install Datadog Agent Version 7.52.0 or greater and enable Git in the tracer to fully enable automatic version tagging. You can learn how to enable Git in the tracer by reading [Embed Git information in your build artifacts][18] 
 
-#### Configuration
-
-{{< tabs >}}
-{{% tab "Kubernetes" %}}
-
 {{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
-
-If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
-
 ##### Full configuration
 
 To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
@@ -211,6 +210,111 @@ containers:
 [6]: /integrations/statsd/
 
 {{< /collapse-content >}} 
+
+{{< collapse-content title="Set up with manual version tagging" level="h4" >}}
+##### Full configuration
+
+To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tags.datadoghq.com/env: "<ENV>"
+    tags.datadoghq.com/service: "<SERVICE>"
+...
+template:
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+  containers:
+  -  ...
+     env:
+          - name: DD_ENV
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['tags.datadoghq.com/env']
+          - name: DD_SERVICE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['tags.datadoghq.com/service']
+```
+
+##### Partial configuration
+
+###### Pod-level metrics
+
+To configure pod-level metrics, add the following standard labels (`tags.datadoghq.com`) to the pod spec of a Deployment, StatefulSet, or Job:
+
+```yaml
+template:
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+```
+These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV` and `DD_SERVICE` into your service's container through [Kubernetes's downward API][2].
+
+If you have multiple containers per pod, you can specify standard labels by container:
+
+```yaml
+tags.datadoghq.com/<container-name>.env
+tags.datadoghq.com/<container-name>.service
+```
+
+###### State metrics
+
+To configure [Kubernetes State Metrics][3]:
+
+1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
+
+2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+  spec:
+    template:
+      metadata:
+        labels:
+          tags.datadoghq.com/env: "<ENV>"
+          tags.datadoghq.com/service: "<SERVICE>"
+  ```
+
+###### APM tracer and StatsD client
+
+To configure [APM tracer][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
+
+```yaml
+containers:
+-  ...
+    env:
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+```
+
+
+[1]: /agent/cluster_agent/admission_controller/
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
+[5]: /tracing/send_traces/
+[6]: /integrations/statsd/
+
+{{< /collapse-content >}} 
+
 {{% /tab %}}
 
 
