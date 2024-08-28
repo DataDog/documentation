@@ -1,6 +1,10 @@
 ---
 title: Log Workspaces
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/log-workspaces/"
+  tag: "Blog"
+  text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="false" >}}
