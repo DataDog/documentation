@@ -91,8 +91,7 @@ You need to install Datadog Agent Version 7.52.0 or greater and enable Git in th
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-{{< tabs >}}
-{{% tab "Automatic Version Tagging" %}}
+{{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
 
 If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
@@ -210,13 +209,14 @@ containers:
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
+
+{{< /collapse-content >}} 
 {{% /tab %}}
-{{% /tab %}}
+
 
 {{% tab "Docker" %}}
-{{< tabs >}}
-{{% tab "Automatic Version Tagging" %}}
 
+{{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
@@ -260,12 +260,13 @@ com.datadoghq.tags.version
 ```
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
-{{% /tab %}}
+
+{{< /collapse-content >}} 
 {{% /tab %}}
 
 {{% tab "ECS" %}}
-{{< tabs >}}
-{{% tab "Automatic Version Tagging" %}}
+
+{{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
@@ -303,9 +304,8 @@ If your service has no need for the Datadog environment variables (for example, 
   "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
+{{< /collapse-content >}} 
 {{% /tab %}}
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Non-containerized environment
 
