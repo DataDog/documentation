@@ -45,12 +45,12 @@ Observability Pipelines destinations send events in batches to the downstream in
 For example, if a destination's parameters are:
 
 - Maximum number of events = 2
-- Maximum number of bytes = 10,0000
+- Maximum number of bytes = 100,000
 - Timeout (seconds) = 5
 
 And the destination receives 1 event in a 5-second window, it flushes the batch at the 5-second timeout.
 
-If the destination receives 3 events within 2 seconds, it flushes a batch with 2 events and then flushes a second batch with the remaining event after 5 seconds. If the destination receives 1 event that is more than 10,0000 bytes, it flushes this batch with the 1 event.
+If the destination receives 3 events within 2 seconds, it flushes a batch with 2 events and then flushes a second batch with the remaining event after 5 seconds. If the destination receives 1 event that is more than 100,000 bytes, it flushes this batch with the 1 event.
 
 **Note**: The Syslog destination does not batch events.
 
