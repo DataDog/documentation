@@ -149,7 +149,7 @@ In addition to capturing latency and errors, the integrations capture the input 
 
 All integrations are enabled by default.
 
-To disable all integrations, use the [in-code SDK setup][20] and specify `plugins: false` on the general tracer configuration.
+To disable all integrations, use the [in-code SDK setup][6] and specify `plugins: false` on the general tracer configuration.
 
 ```javascript
 const tracer = require('dd-trace').init({
