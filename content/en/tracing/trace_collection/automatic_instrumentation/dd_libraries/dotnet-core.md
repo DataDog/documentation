@@ -247,7 +247,7 @@ Custom instrumentation depends on your automatic instrumentation and includes ad
 
 To use custom instrumentation in your .NET application:
 
-1. Instrument your application using auomatic instrumentation.
+1. Instrument your application using automatic instrumentation.
 2. Add the `Datadog.Trace` [NuGet package][1] to your application.
 3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
@@ -261,7 +261,7 @@ To use custom instrumentation in your .NET application:
 </div>
 
 To use custom instrumentation in your .NET application:
-1. Instrument your application using auomatic instrumentation.
+1. Instrument your application using automatic instrumentation.
 2. Add the `Datadog.Trace` [NuGet package][1] to your application.
 3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
