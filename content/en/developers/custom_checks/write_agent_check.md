@@ -92,7 +92,7 @@ To verify your check is running, use the following command:
 sudo -u dd-agent -- datadog-agent check <CHECK_NAME>
 {{< /code-block >}}
 
-After you validate that your check is running, [restart the Agent][3] to include the check and start reporting data.
+After you verify that your check is running, [restart the Agent][3] to include the check and start reporting data.
 
 ## Writing checks that run command-line programs
 
