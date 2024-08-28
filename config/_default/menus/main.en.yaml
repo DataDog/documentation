@@ -1835,17 +1835,17 @@ menu:
       identifier: service_catalog_enrich_default_catalog
       weight: 3
     - name: Create Entries
-      url: service_catalog/create_entries
+      url: service_catalog/enrich_default_catalog/create_entries
       parent: service_catalog_enrich_default_catalog
       identifier: service_catalog_create_entry
       weight: 301
     - name: Import Entries from Datadog
-      url: service_catalog/import_entries_dd
+      url: service_catalog/enrich_default_catalog/import_entries_dd
       parent: service_catalog_enrich_default_catalog
       identifier: service_catalog_import_from_telemetries
       weight: 302
     - name: Import Entries from Integrations
-      url: service_catalog/import_entries_integrations
+      url: service_catalog/enrich_default_catalog/import_entries_integrations
       parent: service_catalog_enrich_default_catalog
       identifier: service_catalog_import_from_integrations
       weight: 303
