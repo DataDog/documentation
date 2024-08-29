@@ -23,7 +23,7 @@ Available for new users, the quick start workflow provides a streamlined setup p
 
 ## How to exclude resources from scans
 
-To exclude AWS hosts, containers, and Lambda functions (if applicable) from scans, set the tag `CompanyAgentlessScanner:false` on each of these resources. For detailed instructions on adding this tag, refer to the [AWS documentation][5].
+{{% csm-agentless-exclude-resources %}}
 
 ## Disable Agentless Scanning
 
@@ -42,7 +42,6 @@ To exclude AWS hosts, containers, and Lambda functions (if applicable) from scan
 [2]: /integrations/amazon_web_services/
 [3]: /agent/remote_config/?tab=configurationyamlfile#setup
 [4]: https://app.datadoghq.com/security/csm/intro
-[5]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [6]: mailto:success@datadoghq.com
 [7]: mailto:success@datadoghq.com
 [8]: mailto:success@datadoghq.com

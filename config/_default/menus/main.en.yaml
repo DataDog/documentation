@@ -5201,36 +5201,31 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_terraform
       weight: 10002
-    - name: Custom Onboarding
-      url: security/cloud_security_management/setup/custom_onboarding
+    - name: Agent
+      url: security/cloud_security_management/setup/agent
       parent: csm_setup
-      identifier: csm_setup_custom_onboarding
+      identifier: csm_setup_agent
       weight: 102
+    - name: CloudTrail Logs
+      url: security/cloud_security_management/setup/cloudtrail_logs
+      parent: csm_setup
+      identifier: csm_setup_cloudtrail_logs
+      weight: 103
+    - name: IaC Remediation
+      url: security/cloud_security_management/setup/iac_remediation
+      parent: csm_setup
+      identifier: csm_setup_iac_remediation
+      weight: 104
     - name: Cloud Accounts
-      url: security/cloud_security_management/setup/custom_onboarding/cloud_accounts
-      parent: csm_setup_custom_onboarding
+      url: security/cloud_security_management/setup/agent/cloud_accounts
+      parent: csm_setup_agent
       identifier: csm_setup_cloud_accounts
       weight: 1000
-    - name: Agent
-      url: security/cloud_security_management/setup/custom_onboarding/agent
-      parent: csm_setup_custom_onboarding
-      identifier: csm_setup_agent
-      weight: 1001
     - name: Serverless
-      url: security/cloud_security_management/setup/custom_onboarding/serverless?tab=amazonecs#cloud-security-management
-      parent: csm_setup_custom_onboarding
+      url: security/cloud_security_management/setup/agent/serverless?tab=amazonecs#cloud-security-management
+      parent: csm_setup_agent
       identifier: csm_setup_serverless
       weight: 1002
-    - name: CloudTrail Logs
-      url: security/cloud_security_management/setup/custom_onboarding/cloudtrail_logs
-      parent: csm_setup_custom_onboarding
-      identifier: csm_setup_cloudtrail_logs
-      weight: 1003
-    - name: Source Code Integrations
-      url: security/cloud_security_management/setup/custom_onboarding/source_code_integrations
-      parent: csm_setup_custom_onboarding
-      identifier: csm_setup_source_code_integrations
-      weight: 1004
     - name: Threats
       url: security/threats/
       parent: csm

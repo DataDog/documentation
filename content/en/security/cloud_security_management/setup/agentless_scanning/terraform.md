@@ -49,7 +49,11 @@ You can install and configure [Agentless Scanning][1] for your cloud environment
 {{% /tab %}}
 {{< /tabs >}}
 
-### Uninstall with Terraform
+## How to exclude resources from scans
+
+{{% csm-agentless-exclude-resources %}}
+
+## Uninstall with Terraform
 
 Follow the instructions for [Terraform][4] uninstallation.
 

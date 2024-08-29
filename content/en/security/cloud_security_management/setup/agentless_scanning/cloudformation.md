@@ -44,7 +44,11 @@ You can install and configure [Agentless Scanning][1] for your cloud environment
 {{% /tab %}}
 {{< /tabs >}}
 
-### Uninstall with CloudFormation
+## How to exclude resources from scans
+
+{{% csm-agentless-exclude-resources %}}
+
+## Uninstall with CloudFormation
 
 To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
 

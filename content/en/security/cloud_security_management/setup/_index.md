@@ -21,9 +21,6 @@ further_reading:
     - link: "/security/cloud_security_management/setup/agentless_scanning"
       tag: "Documentation"
       text: "Enabling Agentless Scanning"
-    - link: "/security/cloud_security_management/setup/custom_onboarding"
-      tag: "Documentation"
-      text: "Custom Onboarding for Cloud Security Management"
     - link: "/security/cloud_security_management/guide/agent_variables/"
       tag: "Guide"
       text: "Cloud Security Management Agent Variables"
@@ -38,9 +35,9 @@ To get started with Cloud Security Management, follow these steps:
 
 ## Enable Agentless Scanning
 
-The simplest way to get started with Cloud Security Management is with [Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
+The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. 
 
-For additional coverage, you can [deploy the Agent](#deploy-the-agent-for-additional-coverage) to your **X, Y, and Z**.
+To learn more about Agentless Scanning, see [Cloud Security Management Agentless Scanning][2].
 
 ## Deploy the Agent for additional coverage
 
@@ -59,14 +56,22 @@ For broader coverage and additional functionalities, deploy the Agent to your **
 | Threat detection                 | No                | Yes                                |
 | Host benchmark                   | No                | Yes                                |
 
+## Additional features
+
+### AWS CloudTrail Logs
+
+AWS CloudTrail Logs allows you to get the most out of CSM Identity Risks. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions.
+
+### Infrastructure as Code (IaC) remediation
+
+placeholder text.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/agentless_scanning
-[2]: https://app.datadoghq.com/security/configuration/csm/features
+[1]: /security/cloud_security_management/setup/agentless_scanning
+[2]: /security/cloud_security_management/agentless_scanning
 [3]: /security/cloud_security_management/setup/custom_onboarding
 [4]: /security/cloud_security_management/agentless_scanning
 [5]: /security/cloud_security_management/setup/agentless_scanning
-[6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
-[7]: /security/cloud_security_management/guide/agentless_terraform

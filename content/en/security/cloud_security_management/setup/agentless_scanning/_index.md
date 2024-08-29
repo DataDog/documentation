@@ -1,18 +1,12 @@
 ---
 title: Enabling Agentless Scanning
 further_reading:
+  - link: "/security/cloud_security_management/setup"
+    tag: "Documentation"
+    text: "Setting up Cloud Security Management"
   - link: "/security/cloud_security_management/agentless_scanning"
     tag: "Documentation"
     text: "Cloud Security Management Agentless Scanning"
-  - link: "/security/cloud_security_management/guide/agentless_terraform"
-    tag: "Documentation"
-    text: "Setting up Agentless Scanning using Terraform"
-  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
-    tag: "Documentation"
-    text: "Setting up Agentless Scanning with the AWS Integration"
-  - link: "/security/cloud_security_management/setup/custom_onboarding"
-    tag: "Documentation"
-    text: "Custom Onboarding for Cloud Security Management"
 aliases:
   - /security/cloud_security_management/setup/agentless_scanning
 ---
@@ -40,7 +34,7 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
     <li><code>ebs:ListChangedBlocks</code></li>
     <li><code>ebs:GetSnapshotBlock</code></li>
   </ul>
-  {{< /collapse-content >}} 
+  {{< /collapse-content >}}
 
   {{< collapse-content title="Lambda permissions" level="h5" >}}
   <ul><li><code>lambda:GetFunction</code></li></ul>
@@ -60,7 +54,7 @@ The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusab
 
 ### AWS CloudFormation
 
-Use the AWS CloudFormation template to create a CloudFormation stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
+Use the AWS CloudFormation template to create a CloudFormation stack. The template includes the IAM permissions required to deploy and manage Agentless scanners. For more information, see [Setting up Agentless Scanning using AWS CloudFormation][11].
 
 ## Further Reading
 
@@ -70,9 +64,10 @@ Use the AWS CloudFormation template to create a CloudFormation stack. The templa
 [2]: /integrations/amazon_web_services/
 [3]: /agent/remote_config/?tab=configurationyamlfile#setup
 [4]: https://app.datadoghq.com/security/csm/intro
-[5]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
-[6]: mailto:success@datadoghq.com
-[7]: mailto:success@datadoghq.com
+[5]: /security/cloud_security_management/setup/agentless_scanning/quick_start
+[6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
+[7]: /security/cloud_security_management/setup/agentless_scanning/terraform
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
+[11]: /security/cloud_security_management/setup/agentless_scanning/cloudformation

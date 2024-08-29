@@ -1,5 +1,5 @@
 ---
-title: Setting up Source Code Integrations for Cloud Security Management
+title: Setting up IaC Remediation for Cloud Security Management
 aliases:
   - /security/cloud_security_management/setup/source_code_integrations
 ---
