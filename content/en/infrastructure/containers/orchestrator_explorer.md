@@ -115,7 +115,7 @@ To prevent displaying a large number of irrelevant changes, updates affecting on
 
 The other tabs show more information for troubleshooting the selected resource:
 
-* [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
+* [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in the Log Explorer.
 * [**APM**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
 * **Processes**: View all processes running in the container of this resource.

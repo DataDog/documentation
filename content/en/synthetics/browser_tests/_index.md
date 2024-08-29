@@ -63,7 +63,7 @@ Define the configuration of your browser test.
 
    * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
-   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test.
+   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 
    Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
 
@@ -168,7 +168,7 @@ For more information, see [Using Synthetic Test Monitors][7].
 
 ## Record your steps
 
-Tests can be recorded from [Google Chrome][8] and [Microsoft Edge][18]. To record your test, download the [Datadog Record Test extension][9].
+Tests can be only recorded from [Google Chrome][8]. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
 
 You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][10]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
@@ -219,5 +219,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [15]: /continuous_testing/environments/proxy_firewall_vpn
 [16]: /synthetics/guide/browser-tests-passkeys
 [17]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[18]: https://www.microsoft.com/edge/download
 [19] https://www.loc.gov/standards/iso639-2/php/code_list.php

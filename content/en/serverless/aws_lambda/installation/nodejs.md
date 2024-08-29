@@ -377,6 +377,9 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize Cold Start Duration (Beta)
+Starting with version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next`. 
+
 ## What's next?
 
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
@@ -442,4 +445,5 @@ exports.handler = async (event) => {
 [4]: /serverless/custom_metrics?tab=nodejs
 [5]: /tracing/custom_instrumentation/nodejs/
 [6]: /security/application_security/serverless/
-
+[7]: https://github.com/DataDog/datadog-lambda-extension
+[8]: https://github.com/DataDog/datadog-lambda-extension/issues

@@ -25,6 +25,7 @@ author:
 categories:
 - 自動化
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: zebrium
 integration_title: Zebrium RCaaS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: zebrium
 public_title: Zebrium RCaaS
@@ -48,7 +48,6 @@ tile:
   classifier_tags:
   - Category::Automation
   - Category::Notifications
-  - Offering::Integration
   - Offering::UI Extension
   - Supported OS::Linux
   - Supported OS::Windows
@@ -67,6 +66,9 @@ tile:
     image_url: images/Zebrium_Root_Cause_Finder_With_Side_Panel.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
   support: README.md#Support
   title: Zebrium RCaaS
 ---
@@ -90,7 +92,7 @@ Zebrium アプリは、検出された問題を時系列で表示し、これら
 
 インテグレーションにより、Zebrium の検出イベントとメトリクスが Datadog に直接送信されます。それらを好きなように視覚化することができます (サンプルダッシュボードを提供)。この方法は、Zebrium のデータをダッシュボードに表示する方法をカスタマイズしたい場合に使用します。
 
-## 計画と使用
+## セットアップ
 
 ### イベントとメトリクスインテグレーション
 
@@ -114,11 +116,11 @@ Zebrium のイベントメトリクスインテグレーションは、[Datadog 
 9. オプションでウィジェットのタイトルを指定します。
 10. **Save** を押して、Datadog ダッシュボードウィジェットの構成を完了します。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## その他の参考資料
+## 参考資料
 
 お役に立つドキュメント、リンクや記事:
 

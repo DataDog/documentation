@@ -23,7 +23,7 @@ title: ブラウザテストの結果
 
 **Properties** セクションでは、テスト ID、テストの作成日および編集日、タグのリスト、テストの優先度、すぐに使える Synthetic [ブラウザテストダッシュボード][11]へのリンクが表示されます。
 
-**Overview** 
+**Overview**
 : このセクションでは、テスト URL、ロケーション数、デバイス数、テスト間隔、およびカスタムステップを含むテストステップ数について説明します。
 
 **Monitor**
@@ -115,7 +115,7 @@ Relative Time
 : インタラクション時間全体におけるリソースの継続期間。
 
 CDN
-: リソースを提供した CDN プロバイダー。CDN プロバイダーのアイコンにカーソルを合わせると、生のキャッシュのステータスが表示されます。 
+: リソースを提供した CDN プロバイダー。CDN プロバイダーのアイコンにカーソルを合わせると、生のキャッシュのステータスが表示されます。
 Datadog は、Akamai、Cloudflare、Fastly、Amazon Cloudfront、Netlify、Google Cloud CDN、Imperva、および Sucuri を検出します。
 
 Resource
@@ -153,9 +153,13 @@ Size
 
 テスト結果は、アサーションを満たさない場合、または別の理由によりステップが失敗した場合に `FAILED` とみなされます。スクリーンショットを確認し、ステップレベルでの[エラー](#errors-and-warnings)の可能性をチェックしたり、ステップにより生成された[リソース][17]と[バックエンドトレース](#backend-traces)を確認したりして、失敗したランのトラブルシューティングを実行します。
 
-一般的なブラウザテストのエラーには、以下が含まれます。
+### スクリーンショットを比較
+調査中に役立つように、**Compare Screenshots** をクリックすると、失敗した結果と最後に成功した実行のスクリーンショットが並べて表示されます。この比較により、テストに失敗した原因となる違いを見つけることができます。
+{{< img src="synthetics/browser_tests/test_results/compare_screenshots.png" alt="失敗した実行と成功した実行のスクリーンショットの比較" style="width:90%;" >}}
+**注**: 比較は、同じバージョン、開始 URL、デバイス、ブラウザ、および実行タイプ (スケジュール、手動トリガー、 CI/CD) を持つ 2 つのテスト実行間で実行されます。同じパラメーターで成功した先行実行がない場合、比較は行われません。
+### 一般的なブラウザテストのエラー
 
-`Element located but it's invisible` 
+`Element located but it's invisible`
 : 要素はページにあるものの、クリックできない。たとえば、別の要素で覆われている、など。
 
 `Cannot locate element`
@@ -183,7 +187,7 @@ Synthetic テストモニターからのアラートは、**Test Runs** の下�
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /ja/real_user_monitoring/
-[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [7]: /ja/tracing/trace_explorer/trace_view/
 [8]: /ja/synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [9]: /ja/synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator

@@ -10,7 +10,7 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
-    - link: "/tracing/trace_collection/trace_context_propagation/java/"
+    - link: "/tracing/trace_collection/trace_context_propagation/"
       tag: "Documentation"
       text: "Propagating trace context with headers"
     - link: "/opentelemetry/interoperability/environment_variable_support"
@@ -532,6 +532,6 @@ Deprecated since version 1.9.0
 [12]: /agent/amazon_ecs/#create-an-ecs-task
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
-[15]: /tracing/trace_collection/trace_context_propagation/java/
+[15]: /tracing/trace_collection/trace_context_propagation/
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support

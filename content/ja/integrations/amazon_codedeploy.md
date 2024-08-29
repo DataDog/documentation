@@ -8,6 +8,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
+custom_kind: integration
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
@@ -18,7 +19,6 @@ integration_id: amazon-codedeploy
 integration_title: AWS CodeDeploy
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_codedeploy
 public_title: Datadog-AWS CodeDeploy インテグレーション
@@ -26,7 +26,8 @@ short_description: 行われているデプロイをリアルタイムで表示�
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy デフォルトダッシュボード" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy のデフォルトダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -80,13 +81,13 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Codedeploy インテグレーションには、成功したデプロイ、失敗したデプロイ、および停止されたデプロイのイベントが含まれます。以下はイベントの例です。
+The AWS CodeDeploy integration includes events for successful, failed, and stopped deployments. See example events below:
 
-{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS Codedeploy イベント" >}}
+{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS CodeDeploy Events" >}}
 
 ### サービスのチェック
 
-AWS Codedeploy インテグレーションには、サービスのチェック機能は含まれません。
+The AWS CodeDeploy integration does not include any service checks.
 
 ## トラブルシューティング
 

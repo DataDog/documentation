@@ -28,7 +28,7 @@ categories:
 - 構成 & デプロイ
 - ネットワーク
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
 display_on_public_website: true

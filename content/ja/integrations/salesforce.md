@@ -2,17 +2,21 @@
 categories:
 - クラウド
 - network
+custom_kind: integration
 dependencies: []
 description: Salesforce のリアルタイムプラットフォームイベントを Datadog ログとして収集します。
 doc_link: https://docs.datadoghq.com/integrations/salesforce/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-salesforce-logs-datadog/
+  tag: ブログ
+  text: Datadog で Salesforce ログを監視する
 git_integration_title: salesforce
 has_logo: true
 integration_id: ''
 integration_title: セールスフォース・ドットコム
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: salesforce
 public_title: セールスフォース・ドットコム
@@ -21,13 +25,16 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/salesforce/salesforce_dashboard.png" alt="Datadog のすぐに使える Salesforce ダッシュボード" popup="true">}}
+
 ## 概要
 
-Salesforce は顧客関係管理サービスに加えて、カスタマーサービス、マーケティングオートメーション、アナリティクス、アプリケーション開発に特化したエンタープライズ向けアプリケーションスイートを無料で提供しています。
+Salesforce は顧客関係管理サービスと、カスタマーサービス、マーケティングオートメーション、アナリティクス、アプリケーション開発に特化したエンタープライズアプリケーションのスイートを提供しています。
 
 Salesforce と Datadog の統合により次のことが行えます:
 
-- [Datadog ログ管理][1]を使用してログを表示およびパースする。
+- [Datadog ログ管理][1]を使用して、Salesforce のユーザーアクティビティ、プラットフォームアクセスアクティビティ、セキュリティログを表示し、パースします。
 - Salesforce プラットフォームからの[イベント][3]に[モニター][2]を設定する。
 - Datadogの[セキュリティプラットフォーム][4]を活用して、Salesforce プラットフォームに対する脅威を監視および検知する。
 - Salesforce API の使用量を監視し、API の制限以下で運用を行っていることを確認する。
@@ -38,11 +45,11 @@ Salesforce と Datadog の統合により次のことが行えます:
 
 インストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 Datadog にデータを送信するよう Salesforce を構成するには、[Salesforce イベントモニタリング][5]にアクセスし、Salesforce イベント上のストレージを有効化して Salesforce の組織を Datadog に接続する必要があります。
 
-#### アクセス許可
+#### 権限
 
 [Salesforce Shield][6] を使用している場合、すべてのイベントに対して必要な権限が設定されています。Shield をご利用でない場合は、[イベントモニタリングアドオン][7]が必要です。
 
@@ -77,6 +84,8 @@ Datadog にデータを送信するよう Salesforce を構成するには、[Sa
 
 しばらくすると、`salesforce` のソース下に[ログ][1]が表示されます。Salesforce は頻繁にイベントログファイルに書き込むわけではないため、イベントログファイルベースのイベントが Datadog に表示されるまでに、1 時間以上かかる場合があります。
 
+{{< img src="integrations/salesforce/salesforce_dashboard_logs.png" alt="すぐに使える Salesforce ダッシュボードの Salesforce Log Stream ウィジェット" popup="true">}}
+
 ## 収集データ
 
 ### メトリクス
@@ -87,7 +96,7 @@ Datadog にデータを送信するよう Salesforce を構成するには、[Sa
 
 ログイベントの一覧は、[リアルタイムイベント監視データ保存][12]と [EventLogFile イベント][13]を参照してください。
 
-### サービスのチェック
+### サービスチェック
 
 Salesforce インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -95,7 +104,21 @@ Salesforce インテグレーションには、サービスのチェック機能
 
 Configuration タブで `The authenticated connection does not have access` エラーが発生した場合、要求されたイベントにアクセスするための権限が欠落している可能性があります。Salesforce の Datadog ロールの管理者権限を一時的に有効にして、不足しているアクセス権限を確認することができます。
 
+最低限、ユーザーには以下の権限が必要です。
+
+* API Enabled
+* View Setup and Configuration
+* View Real-Time Event Monitoring Events
+* View Event Log Files
+* View Threat Detection Events
+
+ユーザーは、構成で選択されている基礎となるイベントオブジェクトの読み取り権限も持っている必要があります。
+
 ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/
 [2]: /ja/monitors/monitor_types/
@@ -105,7 +128,7 @@ Configuration タブで `The authenticated connection does not have access` エ�
 [6]: https://www.salesforce.com/editions-pricing/platform/shield
 [7]: https://help.salesforce.com/s/articleView?id=000339868&type=1
 [8]: https://login.salesforce.com/
-[9]: https://app.datadoghq.com/account/settings#integrations/salesforce
+[9]: https://app.datadoghq.com/integrations/salesforce
 [10]: /ja/getting_started/tagging/using_tags/
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/salesforce/salesforce_metadata.csv
 [12]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events

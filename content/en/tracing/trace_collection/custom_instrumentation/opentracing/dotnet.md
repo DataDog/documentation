@@ -9,7 +9,7 @@ type: multi-code-lang
 code_lang_weight: 70
 description: 'OpenTracing instrumentation for .NET'
 further_reading:
-    - link: 'tracing/trace_collection/trace_context_propagation/dotnet/'
+    - link: 'tracing/trace_collection/trace_context_propagation/'
       text: 'Propagating trace context'
 ---
 

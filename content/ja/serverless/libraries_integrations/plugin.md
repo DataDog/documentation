@@ -37,7 +37,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `site`                        | データを送信する Datadog サイトを設定します。例えば、 `datadoghq.com` (デフォルト)、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com` または `ddog-gov.com` などに設定します。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する場合に必要です。                                                                                                                                                        |
 | `apiKey`                      | [Datadog API キー][7]。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する際に必要です。また、デプロイ環境で `DATADOG_API_KEY` 環境変数を設定することも可能です。                                                                                                                                                                                                    |
 | `appKey`                      | Datadog アプリキー。`monitors` フィールドが定義されている場合のみ必要です。また、デプロイ環境で `DATADOG_APP_KEY` 環境変数を設定することも可能です。                                                                                                                                                                                                                                                |
-| `apiKeySecretArn`             | `apiKey` フィールドを使用する代替です。AWS Secrets Manager に Datadog API キーを保存しているシークレットの ARN です。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加することを忘れないようにします。                                                                                                                                                                                                   |
+| `apiKeySecretArn`             | An alternative to using the `apiKey` field. The ARN of the secret that is storing the Datadog API key in AWS Secrets Manager. Remember to add the `secretsmanager:GetSecretValue` permission to the Lambda execution role.                                                                                                                                                                                                   |
 | `apiKMSKey`                   | `apiKey` フィールドを使用する代替です。Datadog API キーは KMS を使用して暗号化されています。Lambda の実行ロールに `kms:Decrypt` 権限を追加することを忘れないようにします。                                                                                                                                                                                                                                                                  |
 | `env`                         | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_ENV` 環境変数が追加されます。それ以外の場合、すべての Lambda 関数に `env` タグが追加され、指定した値が設定されます。デフォルトはサーバーレスデプロイメントの `stage` 値です。                                                                                                                                                  |
 | `service`                     | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_SERVICE` 環境変数が追加されます。それ以外の場合、すべての Lambda 関数に `service` タグが追加され、指定した値が設定されます。デフォルトはサーバーレスプロジェクトの `service` 値です。
@@ -59,7 +59,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `exclude`                     | 設定後、このプラグインは指定されたすべての関数を無視します。Datadog の機能に含まれてはならない関数がある場合は、このパラメーターを使用します。デフォルトは `[]` です。                                                                                                                                                                                                                                                         |
 | `enabled`                     | `false` に設定すると、Datadog プラグインが非アクティブ状態になります。デフォルトは `true` です。たとえば、`enabled: ${strToBool(${env:DD_PLUGIN_ENABLED, true})}` の環境変数を使用してこのオプションを制御し、デプロイ時にプラグインを有効化 / 無効化することができます。また、`--stage` を通じて渡された値を使用してこのオプションを制御することもできます。[こちらの例](#disable-plugin-for-particular-environment)をご覧ください。 |
 | `customHandler`               | 設定すると、指定されたハンドラーがすべての関数のハンドラーとして設定されます。                                                                                                                                                                                                                                                                                                                                                 |
-| `failOnError`                 | このプラグインを設定すると、Datadog カスタムモニターの作成または更新が失敗した場合にエラーが生成されます。これは、デプロイ後に発生しますが、`serverless deploy` の結果が 0 以外の終了コードを返す原因になります（ユーザー CI を失敗にするため）。デフォルトは `false` です。                                                                                                                                                                              |
+| `failOnError`                 | When set, this plugin throws an error if any custom Datadog monitors fail to create or update. This occurs after deploy, but will cause the result of `serverless deploy` to return a nonzero exit code (to fail user CI). Defaults to `false`.                                                                                                                                                                              |
 | `logLevel`                    | ログのレベル。拡張ロギングの場合 `DEBUG` に設定します。                                                                                                                                                                                                                                                                                                                                                                          |
 | `skipCloudformationOutputs`   | スタックに Datadog Cloudformation Outputs を追加するのをスキップしたい場合は、`true` に設定します。これは、スタックの作成に失敗する原因となる 200 の出力制限に遭遇している場合に有効です。                                                                                                                                                                                                                              |
 | `enableColdStartTracing`      | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                                 |
@@ -70,8 +70,8 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `encodeAuthorizerContext`     | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                       |
 | `decodeAuthorizerContext`     | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                |
 | `apmFlushDeadline`            | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。                                                                                                             |
-| `mergeStepFunctionAndLambdaTraces` | `true` に設定すると、Lambda トレースは呼び出し元の Step Function のトレースとマージされます。デフォルトは `false` です。                                                                                                                                                                                                                                                                                                                          |
 | `enableStepFunctionsTracing`    | Datadog Forwarder の Step Function ロググループと Step Function トレーシングへの自動サブスクリプションを有効にします。Step Function のロググループが構成されていない場合は、自動的に作成されます。`forwarderArn` の設定が必要です。デフォルトは `false` です。                                                                                                                                                                  |
+| `propagateUpstreamTrace` | `true` に設定すると、下流の Stepfunction の起動トレースは上流の Stepfunction の起動とマージされます。デフォルトは `false` です。 |
 | `redirectHandlers`    | オプションで、`false` に設定した場合にハンドラーのリダイレクトを無効にします。これは APM が完全に無効になっている場合にのみ `false` に設定してください。デフォルトは `true` です。                                                                                                                                                                  |
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 
@@ -127,7 +127,7 @@ custom:
 
 デフォルト値が事前構成された 7 つの推奨モニターがあります。
 
-|       モニター        |                                         データセキュリティ                                          | しきい値  | サーバーレスモニター ID  |
+|       モニター        |                                         メトリクス                                          | しきい値  | サーバーレスモニター ID  |
 | :------------------: | :--------------------------------------------------------------------------------------: | :--------: | :--------------------: |
 |   高いエラー率    |                       `aws.lambda.errors`/`aws.lambda.invocations`                       |   >= 10%   |   `high_error_rate`    |
 |       タイムアウト        |                      `aws.lambda.duration.max`/`aws.lambda.timeout`                      |    >= 1    |       `timeout`        |
@@ -174,7 +174,6 @@ custom:
             include_tags: true
             notify_audit: true
             thresholds:
-              ok: 0.025
               warning: 0.05
               critical: 0.1
 ```
@@ -205,7 +204,6 @@ custom:
             notify_audit: true
             notify_no_data: false
             thresholds:
-              ok: 1
               warning: 2
               critical: 3
 ```
@@ -243,7 +241,7 @@ plugins:
 
 このパッケージに問題が見つかり、修正された場合は、[手順][14]に従ってプルリクエストを開いてください。
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

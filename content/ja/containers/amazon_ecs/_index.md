@@ -3,7 +3,7 @@ algolia:
   tags:
   - ecs
 aliases:
-- /agent/amazon_ecs/
+- /ja/agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: ドキュメント
@@ -28,7 +28,7 @@ title: Amazon ECS
 Amazon ECS は、Docker コンテナに対応する、拡張性とパフォーマンスに優れたコンテナオーケストレーションサービスです。Datadog Agent を使用すると、クラスター内のすべての EC2 インスタンスの ECS コンテナおよびタスクを監視できます。
 
 <div class="alert alert-info">
-<strong>Fargate 上の ECS</strong> を監視したい場合は、<a href="/integrations/ecs_fargate/">AWS Fargate 上の Amazon ECS</a>を参照してください。
+If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.
 </div>
 
 ## セットアップ
@@ -45,7 +45,7 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
 
 ### ECS タスク定義の作成
 
-この [ECS タスク定義][30]は、必要な構成で Datadog Agent コンテナを起動します。Agent の構成を変更する必要がある場合、このタスク定義を更新し、デーモンサービスを再デプロイします。このタスク定義は、AWS Management Console または [AWS CLI][9] を使用して構成することができます。
+This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9].
 
 以下のサンプルは、コアインフラストラクチャーを監視するための最小限の構成です。しかし、様々な機能を有効にした追加のタスク定義のサンプルが [Agent の追加機能の設定](#setup-additional-agent-features)のセクションで提供されていますので、それらを代わりに使用することができます。
 
@@ -53,17 +53,17 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
 
 1. Linux コンテナの場合、[datadog-Agent-ecs.json][20] をダウンロードします。
     - Amazon Linux 1 (AL1、旧 Amazon Linux AMI) 使用している場合は、[datadog-agent-ecs1.json][21] を使用します。
-    - Windows を使用している場合は、[datadog-Agent-ecs-win.json][22] を使用します。
+    - If you are using Windows, use [datadog-agent-ecs-win.json][22]
 
    <div class="alert alert-info">
    These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
    </div>
 2. ベースとなるタスク定義ファイルを編集します。
     - `<YOUR_DATADOG_API_KEY>` をアカウントの [Datadog API キー][14]に置き換えて、`DD_API_KEY` 環境変数を設定します。または、[AWS Secrets Manager に保管されたシークレットの ARN を指定][16]することもできます。
-    - ご利用の [Datadog サイト][13]を `DD_SITE` 環境変数に設定します。サイトは次のとおりです: {{< region-param key="dd_site" code="true" >}}
+    - Set the `DD_SITE` environment variable to your [Datadog site][13]. Your site is: {{< region-param key="dd_site" code="true" >}}
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - オプションで、`DD_TAGS` 環境変数を追加して、追加のタグを指定します。
 
@@ -284,7 +284,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.3",
+            "image": "datadog/fips-proxy:1.1.4",
             "portMappings": [
                 {
                     "containerPort": 9803,
