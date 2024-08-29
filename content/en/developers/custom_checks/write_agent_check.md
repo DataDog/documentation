@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page takes you through the process of building a simple "Hello world!" custom Agent check. It also shows you how to change the minimum collection interval for the check.
+This page takes you through the process of building a basic "Hello world!" custom Agent check. It also shows you how to change the minimum collection interval for the check.
 
 ## Setup
 
@@ -98,7 +98,7 @@ After you verify that your check is running, [restart the Agent][3] to include t
 
 It's possible to create a custom check that runs a command-line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups.
 
-To run a subprocess within a check, use the [`get_subprocess_output()` function][5] from the module `datadog_checks.base.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and its arguments as a string within the list.
+Because the Python interpreter that runs the checks is embedded in the multi-threaded Go runtime, using the `subprocess` or `multithreading` modules from the Python standard library is not supported. To run a subprocess within a check, use the [`get_subprocess_output()` function][5] from the module `datadog_checks.base.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and its arguments as a string within the list.
 
 For example, a command that is entered at the command prompt like this:
 
@@ -111,8 +111,6 @@ must be passed to `get_subprocess_output()` like this:
 {{< code-block lang="python" >}}
 out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
 {{< /code-block >}}
-
-<div class="alert alert-info">Since the Python interpreter that runs the checks is embedded in the multi-threaded Go runtime, using the <code>subprocess</code> or <code>multithreading</code> modules from the Python standard library is not supported in Agent version 6 and later.</div>
 
 When you run the command-line program, the check captures the same output as running on the command line in the terminal. Do string processing on the output and call `int()` or `float()` on the result to return a numerical type.
 
