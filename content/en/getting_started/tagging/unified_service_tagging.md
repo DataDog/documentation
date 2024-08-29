@@ -345,7 +345,7 @@ docker run -e DD_ENV="<ENV>" \
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels:
 
 ```yaml
 com.datadoghq.tags.env
@@ -389,7 +389,7 @@ docker run -e DD_ENV="<ENV>" \
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels:
 
 ```yaml
 com.datadoghq.tags.env
@@ -432,7 +432,7 @@ Set the `DD_ENV` and `DD_SERVICE` environment variables and corresponding Docker
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {
@@ -470,7 +470,7 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {
