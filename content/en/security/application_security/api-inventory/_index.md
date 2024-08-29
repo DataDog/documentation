@@ -15,7 +15,7 @@ further_reading:
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
-- **Business Logic**: Business logic associated and business logic recommendations for this API.
+- **Business Logic**: Business logic associated and business logic suggestions for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
 - **Findings**: Security findings found on this API.
 - **Dependencies**: APIs and Databases the API depends on
@@ -24,7 +24,7 @@ Using the API Security Inventory you can:
 
 - See at a glance which endpoints process sensitive data, are authenticated, have vulnerabilities or findings or are in publically available.
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
-- See which endpoints are associated to your business's logic, and find business logic suggestion based on your endpoint's traffic history
+- See which endpoints are associated to your business's logic, and find business logic suggestions based on your endpoint's traffic history
 
 {{< img src="security/application_security/api/api_endpoints.png" alt="API Security Inventory main page">}}
 
@@ -85,7 +85,7 @@ These tags are determined by the presence of business logic traces, associated t
 
 #### Suggested Business Logic
 
-We can recommend a business logic tag for your endpoint based on its HTTP method, response status codes, and URL.
+We can suggest a business logic tag for your endpoint based on its HTTP method, response status codes, and URL.
 
 ### Publicly accessible
 
@@ -117,9 +117,9 @@ Datadog reports the type of authentication when available in a header through th
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
-### Contains exploitable vulnerabilities
+### Vulnerabilities count
 
-This risk is determined by [Code Security][8] for the endpoint and by [Software Composition Analysis][3] for the service it.
+Counts the [Code Security][8] vulnerabilities on the endpoint plus the [Software Composition Analysis][3] vulnerabilites of its service.
 
 ## Further reading
 
