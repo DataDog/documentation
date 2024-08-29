@@ -15,7 +15,7 @@ further_reading:
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
-- **Business Logic**: Business logic associated and business logic suggestions for this API.
+- **Business Logic**: Business logic tags associated and suggested business logic tags for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
 - **Findings**: Security findings found on this API.
 - **Dependencies**: APIs and Databases the API depends on.
