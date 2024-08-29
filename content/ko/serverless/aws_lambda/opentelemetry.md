@@ -106,13 +106,13 @@ OpenTelemetry API를 사용해 AWS Lambda를 계측하려면 Lambda 함수에서
    });
 
    ```
-   {{% /탭 %}}
-   {{< /탭 >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 1. `serverless.yml` 을 수정하여 런타임에 계측 을 적용하고, Datadog 확장 v53+ 을 추가하고, Datadog 확장에 환경 변수 `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` 를 `localhost:4318` (HTTP 용) 또는 `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 를 `localhost:4317` (gRPC 용)으로 설정하여 OpenTelemetry 를 활성화합니다. Datadog 추적 레이어는 추가하지 마세요.
 
-   {{< 탭 >}}
-   {{% 탭 "파이썬(Python)" %}}
+   {{< tabs >}}
+   {{% tab Python %}}
    ```yaml
   서비스: <YOUR_SERVICE_NAME>
 
@@ -146,8 +146,8 @@ OpenTelemetry API를 사용해 AWS Lambda를 계측하려면 Lambda 함수에서
        # 여기에 일반적인 핸들러 로직을 수행합니다.
        print(" 이벤트 처리 중")
    ```
-   {{% /탭 %}}
-   {{% 탭 "Node.js" %}}
+   {{% /tabs %}}
+   {{% tab "Node.js" %}}
    ```yaml
    # 서버리스.yml
 
