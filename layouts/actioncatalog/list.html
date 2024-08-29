@@ -35,8 +35,7 @@
       {{ $workflow_name := .name }}
       {{ $icon_id := .icon.id }}
       {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
-
-      <div class="js-group js-group-{{ $workflow_title }}" id="{{ $workflow_title | anchorize }}">
+      <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
         <div class="js-group-header mb-1 d-flex align-items-center active" id="">
           <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
             {{ with $logo_path }}
