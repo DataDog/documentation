@@ -21,6 +21,6 @@ Set up the rsyslog or syslog-ng destination and its environment variables when y
 
 #### Event batching
 
-The Syslog destination does not batch events.
+The rsyslog and syslog-ng destinations do not batch events.
 
 [1]: https://app.datadoghq.com/observability-pipelines
