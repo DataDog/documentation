@@ -15,8 +15,7 @@ further_reading:
 
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
 
-<div class="alert alert-info">If your application is already instrumented with the OpenTelemetry SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
-
+<div class="alert alert-info">If you need OpenTelemetry components beyond what's provided in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to bring-your-Otel-Components to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
 
 ## Requirements
 

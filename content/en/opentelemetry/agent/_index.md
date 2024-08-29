@@ -32,8 +32,7 @@ The default Datadog Agent package includes an embedded Collector with a [curated
 - Setting up monitoring from scratch without needing additional OpenTelemetry components
 - Using the Datadog Agent and want to test OpenTelemetry functionality with built-in components
 - Transitioning from OpenTelemetry Collector to Datadog Agent without requiring extra OpenTelemetry components
-
-<div class="alert alert-info">If you need OpenTelemetry components beyond what's provided in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to bring-your-Otel-Components to extend the Datadog Agent's capabilities.</div>
+- (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to bring-your-Otel-Components to extend the Datadog Agent's capabilities.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/agent/install_agent_with_collector" >}}Quick start with the default Agent package{{< /nextlink >}}
@@ -45,9 +44,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 
 - Transitioning from OpenTelemetry Collector while preserving your existing setup
 - Migrating your existing OpenTelemetry configurations to maintain continuity
-- (Optional) Customizing with additional components beyond the built-in options
-
-Follow this guide to add necessary OpenTelemetry components and migrate your configurations to Datadog, ensuring a smooth transition and maintaining continuity in your observability pipeline.
+- (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to bring-your-Otel-Components to extend the Datadog Agent's capabilities
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/agent/migration" >}}Migrate from OpenTelemetry Collector to Datadog Agent{{< /nextlink >}}
@@ -142,6 +139,7 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging/
+[2]: /opentelemetry/agent/agent_with_custom_components
 [3]: /containers/
 [4]: /sensitive_data_scanner/
 [5]: /universal_service_monitoring/

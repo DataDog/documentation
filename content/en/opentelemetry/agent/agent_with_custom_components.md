@@ -246,7 +246,7 @@ docker system prune -a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/agent/install_agent_with_collector#included-components
+[1]: /opentelemetry/agent/#included-components
 [2]: https://docs.docker.com/engine/install/
 [3]: https://github.com/DataDog/datadog-agent
 [4]: https://opentelemetry.io/docs/collector/custom-collector/
