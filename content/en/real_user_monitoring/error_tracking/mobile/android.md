@@ -259,7 +259,7 @@ To test your implementation:
 
 3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][1].
 
-## Behaviours
+## Behaviors
 
 When looking at RUM Crash Reporting behaviors for Android, consider the following:
 
