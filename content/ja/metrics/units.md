@@ -1,7 +1,7 @@
 ---
 aliases:
-- /developers/metrics/metrics_units
-- /developers/metrics/units/
+- /ja/developers/metrics/metrics_units
+- /ja/developers/metrics/units/
 further_reading:
 - link: /dashboards/
   tag: ドキュメント

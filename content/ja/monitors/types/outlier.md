@@ -14,6 +14,9 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスの参照
+- link: /watchdog/insights/
+  tag: ドキュメント
+  text: Outlier detection in Watchdog Insights
 title: 外れ値モニター
 ---
 
@@ -73,9 +76,9 @@ Datadog では、時系列上の外れ値を検出するために、簡略化し
 **パラメーター**<br>
 外れ値モニターで MAD を使用するには、パラメーター `tolerance` と `%` を構成します。
 
-許容値は、ポイントが外れ値と見なされるために、ポイントが中央値から離れている必要がある偏差の数を指定します。このパラメーターは、予想されるデータのばらつきに応じて調整する必要があります。たとえば、通常のデータ値が狭い範囲に収まる場合は、この値を小さくする必要があります。一方、ポイントのばらつきが大きい場合は、この値を大きくして、ばらつきによる誤検出を引き起こさないようにする必要があります。
+Tolerance specifies the number of deviations a point (independently of the groups) needs to be away from the median for it to be considered an outlier. This parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. Otherwise, if points can vary greatly, then set a higher scale so the variabilities do not trigger false positives.
 
-パーセントは、外れ値と見なされる系列内のポイントの割合を指します。この割合を超えると、系列全体が外れ値としてマークされます。
+Percent refers to the percentage of points in the group considered as outliers. If this percentage is exceeded, the whole group is marked as an outlier.
 
 [1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
 {{% /tab %}}
@@ -100,7 +103,7 @@ DBSCAN と MAD には、スケール調整バージョンがあります（scale
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][4]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 ## API
 

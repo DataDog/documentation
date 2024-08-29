@@ -10,7 +10,7 @@ For the capabilities and limitations of this feature, see [SCIM][1].
 
 ## Prerequisites
 
-SCIM in Datadog is an advanced feature included in the Enterprise plan.
+SCIM in Datadog is an advanced feature available with the Infrastructure Pro and Infrastructure Enterprise plans
 
 This documentation assumes your organization manages user identities using an identity provider.
 

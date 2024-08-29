@@ -53,13 +53,30 @@ Within a minute, you should see a new metric show up in the [Metric Summary][4] 
 
 ### Updating the collection interval
 
-To change the collection interval of your check, use `min_collection_interval` in your `custom_checkvalue.yaml` file. The default value is `15`. For Agent v6, the `min_collection_interval` must be added at an instance level and configured individually per instance. For example:
+To change the collection interval of your check, use `min_collection_interval` in your `custom_checkvalue.yaml` file. The default value is `15`. You must add the `min_collection_interval` at an instance level. If your custom check is set up to monitor multiple instances, you must configure the interval individually per instance.
+
+For a single instance, use this configuration:
 
 {{< code-block lang="yaml" filename="conf.d/custom_checkvalue.yaml" >}}
 init_config:
 
 instances:
   - min_collection_interval: 30
+{{< /code-block >}}
+
+The example below demonstrates changing the interval for a hypothetical custom check that monitors a service named `my_service` on two separate servers:
+
+{{< code-block lang="yaml" >}}
+init_config:
+
+instances:
+  - host: "http://localhost/"
+    service: my_service
+    min_collection_interval: 30
+
+  - host: "http://my_server/"
+    service: my_service
+    min_collection_interval: 30
 {{< /code-block >}}
 
 **Note**: If the `min_collection_interval` is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector tries to run the check every 30 seconds, but the check might need to wait in line, depending on how many integrations and checks are enabled on the same Agent. Also, if the `check` method takes more than 30 seconds to finish, the Agent notices that the check is still running and skips its execution until the next interval.

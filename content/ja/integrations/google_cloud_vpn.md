@@ -4,6 +4,7 @@ categories:
 - network
 - google cloud
 - log collection
+custom_kind: integration
 dependencies: []
 description: VPN トンネルのステータス、スループット、セッション数などを監視。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_vpn/
@@ -14,7 +15,6 @@ integration_id: google-cloud-vpn
 integration_title: Google VPN
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_vpn
 public_title: Datadog-Google VPN インテグレーション
@@ -32,9 +32,9 @@ Google VPN からメトリクスを取得して、以下のことができます
 - VPN のパフォーマンスを視覚化。
 - VPN のパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
@@ -42,28 +42,28 @@ Google VPN からメトリクスを取得して、以下のことができます
 
 Google Cloud VPN のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
-これが完了したら、Google Cloud VPN のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud VPN のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
 
 1. [Google Cloud Logging のページ][3]に移動し、Google Cloud PVN のログを絞り込みます。
 2. **Create Export** をクリックし、シンクに名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "google_cloud_vpn" >}}
 
 
-### ヘルプ
+### イベント
 
 Google Cloud VPN インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Google Cloud VPN インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

@@ -42,7 +42,7 @@ title: アナリティクスエクスプローラー
 
    {{< img src="product_analytics/analytics/view_type_selection.png" alt="ビュータイプの選択。" style="width:50%;">}}
 
-2. ユニークカウントをグラフ化するための測定項目を選択します。 
+2. ユニークカウントをグラフ化するための測定項目を選択します。
 
    {{< img src="product_analytics/analytics/measure_selection.png" alt="ユニークカウントをグラフ化する測定項目を選択する。" style="width:50%;">}}
 

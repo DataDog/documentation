@@ -18,10 +18,6 @@ further_reading:
   text: "Gain insights into your Google Cloud bill"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 Custom Cost is in public beta.
 {{< /beta-callout >}}
@@ -234,7 +230,7 @@ After your data is formatted to the requirements above, upload your CSV and JSON
 
 In Datadog:
 
-1. Navigate to [**Infrastructure > Cloud Costs > Settings > Custom Costs**][3]. 
+1. Navigate to [**Infrastructure > Cloud Costs > Settings > Custom Costs**][3].
 1. Click the **+ Upload Costs** button.
 
    {{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}

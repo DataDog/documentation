@@ -71,7 +71,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
-| Tor | tor | Policy violations for user activity | AWS, Cloud SIEM, and CWS |
+| Tor | tor | Policy violations for user activity | ASM, Cloud SIEM, and CWS |
 
 ### Threat Intelligence Categories
 

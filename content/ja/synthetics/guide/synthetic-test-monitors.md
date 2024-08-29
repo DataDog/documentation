@@ -55,7 +55,7 @@ Synthetic テストモニターは、メール、Slack、Pagerduty、Microsoft T
 
 詳しくは、[Statuspage とモニターのインテグレーション][8]をご覧ください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -8,12 +8,9 @@ further_reading:
   text: "Monitor your Anthropic applications with Datadog LLM Observability"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-LLM Observability is not available in the US1-FED site.
-</div>
-
-{{% /site-region %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -55,9 +52,19 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by LLM Observability" style="width:100%;" >}}
 
-<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
+<br>
+
+## Use integrations with LLM Observability
+
+The [LLM Observability SDK for Python][3] integrates with frameworks such as OpenAI, LangChain, AWS Bedrock, and Anthropic. It automatically traces and annotate LLM calls, capturing latency, errors, and token usage metrics—without code changes.
+
+<div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the LLM Observability offering.</div>
+
+For more information, see the [Auto Instrumentation documentation][8].
 
 ## Ready to start?
+
+<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
 
 See the [Setup documentation][5] for instructions on instrumenting your LLM application or follow the [Trace an LLM Application guide][6] to generate a trace using the [LLM Observability SDK for Python][3].
 
@@ -72,3 +79,4 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [5]: /llm_observability/setup
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
+[8]: /llm_observability/setup/auto_instrumentation
