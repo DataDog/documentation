@@ -2,13 +2,9 @@
 title: Agentless Scanning Quick Start for Cloud Security Management
 ---
 
-Available for new users, the quick start workflow provides a streamlined setup process for Cloud Security Management, enabling immediate monitoring of AWS resources.
+Available for new Cloud Security Management users, the Agentless Scanning quick start workflow provides a streamlined setup process, enabling immediate monitoring of AWS resources.
 
-<div class="alert alert-info">This guide provides instructions for setting up Agentless Scanning using the Cloud Security Management quick start workflow. Instructions for setting up Agentless Scanning using <a href="/security/cloud_security_management/guide/agentless_terraform">Terraform</a> or by <a href="/security/cloud_security_management/guide/agentless_aws_integration">enabling Agentless Scanning from the AWS integration tile</a> are also available.</div>
-
-## About Agentless Scanning
-
-[Agentless Scanning][1] provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent.
+<div class="alert alert-info">This guide provides instructions for setting up Agentless Scanning using the quick start workflow. Instructions for setting up Agentless Scanning using <a href="/security/cloud_security_management/setup/agentless_scanning/terraform">Terraform</a> or by <a href="/security/cloud_security_management/setup/agentless_scanning/cloudformation">using the AWS CloudFormation template</a> are also available.</div>
 
 ## Installation
 

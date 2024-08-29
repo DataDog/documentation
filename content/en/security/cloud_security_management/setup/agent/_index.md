@@ -8,7 +8,7 @@ aliases:
   - /security/cloud_security_management/setup/agent
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+Use the following instructions to enable Cloud Security Management features—Misconfigurations, Threat Detection, and Vulnerability Management—on the Datadog Agent.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
