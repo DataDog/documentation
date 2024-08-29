@@ -147,15 +147,15 @@ metadata:
 
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
-To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][14] and your Kubernetes resources should have the following labels:
-- `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][16].
+To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
+- `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
 - `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
 
 Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
 Add the following annotations to your Argo CD application:
 - `dd_multiservice`: `true`. This annotation specifies whether Datadog automatically infers the services deployed in a sync based on the changed Kubernetes resources.
-- `dd_k8s_cluster`: set to the name of the Kubernetes cluster that the Argo CD application deploys to. The name must match the name reported in the [Datadog Kubernetes product][15].
+- `dd_k8s_cluster`: set to the name of the Kubernetes cluster that the Argo CD application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16].
 
 For example:
 ```yaml
@@ -169,9 +169,44 @@ metadata:
     dd_k8s_cluster: example-cluster
 ```
 
+
 ## Visualize deployments in Datadog
 
 The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+
+
+## Correlate deployments with CI pipelines
+
+By default, the Git metadata reported in deployment events is associated with the repository that Argo CD monitors. However, a common setup is to:
+- Have an application repository, storing the source code, and a configuration repository, storing the Kubernetes manifests. Then, configure Argo CD to monitor the configuration repository, as outlined in the [Argo CD Best Practices page][17].
+- When a change occurs in the application repository, perform an automated commit that updates the configuration repository (for example, changing the current image of a Kubernetes resource).
+
+The following diagram represents an example of this kind of setup:
+
+{{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
+
+In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
+
+To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command between committing and pushing the changes to the configuration repository. This requires the `datadog-ci` CLI version to be `2.41.0` or later. See the [command syntax][14] for additional details:
+
+```yaml
+- job: JobToUpdateConfigurationRepository
+  run: |
+    # Update the configuration files
+    ...
+    git commit
+    # Correlate the deployment with the CI pipeline
+    export DD_BETA_COMMANDS_ENABLED=1
+    datadog-ci deployment correlate --provider argocd
+    git push
+```
+
+**Note**: Even if a single repository is used to store both the source code and the Kubernetes manifest, running this command is still required to correctly associate deployments and CI pipelines.
+
+
+### Validation
+
+If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new **Pipeline** tab representing the related CI pipeline trace.
 
 ## Troubleshooting
 
@@ -195,6 +230,8 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/service_catalog
-[14]: /containers/kubernetes
-[15]: https://app.datadoghq.com/orchestration/explorer
-[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+[15]: /containers/kubernetes
+[16]: https://app.datadoghq.com/orchestration/explorer
+[17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
+[18]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
