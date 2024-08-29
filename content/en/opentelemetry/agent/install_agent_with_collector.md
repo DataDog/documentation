@@ -477,7 +477,7 @@ View metrics from the embedded Collector to monitor the Collector health.
 
 By default, the Datadog Agent with embedded Collector ships with the following Collector components. You can also see the list in [YAML format][11].
 
-### Receivers
+{{% collapse-content title="Receivers" level="p" %}}
 
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
@@ -489,7 +489,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [zipkinreceiver][23]
 - [nopreceiver][24]
 
-### Processors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Processors" level="p" %}}
 
 - [attributesprocessor][25]
 - [batchprocessor][26]
@@ -505,7 +507,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
-### Exporters
+{{% /collapse-content %}}
+
+{{% collapse-content title="Exporters" level="p" %}}
 
 - [datadogexporter][38]
 - [debugexporter][39]
@@ -514,17 +518,23 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [sapmexporter][42]
 - [nopexporter][43]
 
-### Connectors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
 - [spanmetricsconnector][45]
 
-### Extensions
+{{% /collapse-content %}}
+
+{{% collapse-content title="Extensions" level="p" %}}
 
 - [healthcheckextension][46]
 - [observer][47]
 - [pprofextension][48]
 - [zpagesextension][49]
+
+{{% /collapse-content %}}
 
 ## Further reading
 
