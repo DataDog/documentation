@@ -51,7 +51,7 @@ Consult on this page:
 
 The **Service Health** banner and alert badges provides a real-time summary of service signals to help you understand if a service needs your attention.
 
-Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues) and surfaces the most critical alerts on the Service Page. 
+Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues), and surfaces the most critical alerts on the Service Page. 
 
 {{< img src="/tracing/services/service_page/service-health2.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
 
