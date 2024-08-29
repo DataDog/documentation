@@ -583,18 +583,18 @@ client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Kameleoon does not support this integration. Contact ~kameleoon support~ to request this feature
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Kameleoon does not support this integration. Contact ~kameleoon support~ to request this feature
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Kameleoon does not support this integration. Contact ~kameleoon support~ to request this feature
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature
 
 
 {{% /tab %}}
