@@ -1,21 +1,23 @@
 ---
-title: Frontend Error Tracking
+title: Backend Error Tracking
 is_beta: true
-private: false
+private: true
 further_reading:
-  - link: '/error_tracking/standalone_frontend/collecting_browser_errors/'
-    tag: Documentation
-    text: Collect Browser Errors
   - link: '/error_tracking/explorer/'
     tag: 'Documentation'
     text: 'Getting Started with the Error Tracking Explorer'
   - link: '/error_tracking/issue_states/'
     tag: 'Documentation'
     text: 'Error Tracking Issue States and Workflows'
+  - link: '/error_tracking/backend/exception_replay'
+    tag: 'Documentation'
+    text: 'Simplify production debugging with Datadog Exception Replay'
 ---
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Datadog's standalone frontend Error Tracking experience is in private beta.
-{{< /callout >}} 
+
+{{< beta-callout url="#" btn_hidden="false" url="" header="Join the Beta!">}}
+ Datadog's standalone backend Error Tracking is in active development and will open in a private beta. Sign up to be notified and added when the private beta opens. 
+{{< /beta-callout >}}
+
 
 ## Overview
 
@@ -29,18 +31,7 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise
 - Set monitors on error tracking events, such as high error volume or new issues
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
-- See a detailed timeline of steps a user took leading up to the error, simplifying the process to reproduce and resolve errors quickly
-
-## Setup
-{{< whatsnext desc="To get started with Datadog Error Tracking, see the corresponding documentation:" >}}
-    {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/android" >}}Android{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/ios" >}}iOS{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/expo" >}}Expo{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/reactnative" >}}React Native{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/flutter" >}}Flutter{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
-{{< /whatsnext >}}
+- Automatically captured local variable values so you can reproduce exceptions, simplifying the process to resolve errors quickly
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

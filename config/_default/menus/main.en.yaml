@@ -1991,22 +1991,31 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_rum
       weight: 103
+    - name: Logs
+      url: error_tracking/frontend/logs
+      parent: error_tracking_frontend
+      identifier: error_tracking__fe_logs
+      weight: 104
+    - name: Track Backend Errors
+      url: error_tracking/backend
+      parent: error_tracking
+      identifier: error_tracking_backend
+      weight: 9
+    - name: Exception Replay
+      url: error_tracking/backend/exception_replay
+      parent: error_tracking_backend
+      identifier: error_tracking_exception_replay
+      weight: 101
     - name: APM
       url: error_tracking/apm
       parent: error_tracking_backend
       identifier: error_tracking_apm
-      weight: 8
+      weight: 102
     - name: Logs
-      url: error_tracking/logs
-      parent: error_tracking_frontend
-      identifier: error_tracking_logs
-      weight: 9
-    - name: Logs
-      url: error_tracking/logs
+      url: error_tracking/backend/logs
       parent: error_tracking_backend
-      identifier: error_tracking_logs
-      weight: 9
-    
+      identifier: error_tracking_be_logs
+      weight: 103
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
