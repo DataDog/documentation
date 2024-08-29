@@ -47,6 +47,6 @@ For more instructions on the **Configure notifications and automations** section
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /watchdog/
-[2]: https://app.datadoghq.com/monitors#create/watchdog
+[2]: https://app.datadoghq.com/monitors/create/watchdog
 [3]: /monitors/configuration/?tab=thresholdalert#alert-grouping
 [4]: /monitors/notify/
