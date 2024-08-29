@@ -51,9 +51,9 @@ API Inventory Security uses [Remote Configuration][4] to manage and configure sc
 
 The following risks are calculated for each endpoint:
 
-### Service under attack
+### Security trace activity
 
-This risk is detected for API endpoints that have experienced [attacks][2] within the last day. You can find this week's security of the endpoint in the endpoint's side panel.
+See the number of [attacks][2] your API experienced within the last week.
 
 ### Processing sensitive data
 
@@ -83,7 +83,7 @@ The matching occurs within your application, and none of the sensitive data is s
 
 These tags are determined by the presence of business logic traces, associated to the endpoint.
 
-#### Recommended Business Logic
+#### Suggested Business Logic
 
 We can recommend a business logic tag for your endpoint based on its HTTP method, response status codes, and URL.
 
