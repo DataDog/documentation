@@ -29,11 +29,11 @@ further_reading:
       text: "Cloud Security Management Agent Variables"
 ---
 
-To set up Cloud Security Management, you can choose between two main approaches: the streamlined [Agentless Scanning quick start](#quick-start) or the flexible [custom onboarding workflow](#advanced-onboarding).
+To set up Cloud Security Management, you can choose between two main approaches: the streamlined [Agentless Scanning quick start](#quick-start) or the flexible [custom onboarding workflow](#custom-onboarding).
 
 ## Quick start
 
-The [Agentless Scanning quick start][1] provides a streamlined setup workflow for Cloud Security Management, allowing you to start monitoring your AWS resources immediately.
+The [quick start workflow][1] provides a streamlined setup process for Cloud Security Management, enabling you to start monitoring your AWS resources immediately using [Agentless Scanning][4].
 
 Agentless Scanning supported features include:
 
@@ -63,3 +63,4 @@ Use custom onboarding if you:
 [1]: /security/cloud_security_management/setup/agentless_quick_start
 [2]: https://app.datadoghq.com/security/configuration/csm/features
 [3]: /security/cloud_security_management/setup/custom_onboarding
+[4]: /security/cloud_security_management/agentless_scanning
