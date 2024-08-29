@@ -105,17 +105,99 @@ Datadog identifies individual resources that are under-utilized or over-provisio
 Downsize EC2 instances
 : EC2 instances not in an auto-scaling group, with less than 50% CPU and memory utilization.
 
-
-Overprovisioned Kubernetes Containers
+Over-provisioned Kubernetes Containers
 : Containers with less than 30% CPU and memory utilization.
 
-
-Overprovisioned EBS Volume Throughput
+Over-provisioned EBS Volume Throughput
 : EBS Volumes where the amount of throughput exceeds what is being used.
 
-
-Overprovisioned EBS Volume IOPS
+Over-provisioned EBS Volume IOPS
 : EBS Volumes where the amount of IOPS exceeds what is being used.
+
+### Over-provisioned recommendations
+
+Datadog identifies individual resources that are over-provisioned, which you can consider adjusting the size and configuration to reduce your costs and improve the performance of your resources.
+
+RDS Over-provisioned IOPS
+: An RDS instance using less than 80% of the provisioned IOPS used for reads and writes.
+
+EBS Over-provisioned IOPS
+: An EBS volume with less than 80% provisioned IOPS used for reads and writes.
+
+EBS Over-provisioned Storage
+: An EBS volume with less than 20% storage usage.
+
+EBS Over-provisioned Throughput
+: An EBS volume with less than 80% provisioned throughput used for reads and writes.
+
+Over-provisioned DynamoDB Capacity
+: A Provisioned DynamoDB table uses less than 80% of its read and write capacity, more than 80% of the time.
+
+### Rate optimization recommendations
+
+Datadog surfaces resources that are charged at on-demand rates or could benefit from rate optimization, which you can consider modifying to to reduce your costs.
+
+Purchase RDS RI
+: An RDS instance older than 45 days old is still charged with on-demand rates.
+
+Purchase ElastiCache RI
+: An ElastiCache node older than 45 days old is still charged with on-demand rates.
+
+Purchase OpenSearch RI
+: An OpenSearch instance older than 45 days old is still charged with on-demand rates.
+
+Purchase Redshift RI
+: An Redshift cluster older than 45 days old is still charged with on-demand rates.
+
+S3 Intelligent Tiering
+: A bucket’s costs are almost entirely in per-GB standard storage, but GET requests indicate few objects are actually accessed.
+
+S3 Current Version Expiration Lifecycle Rule
+: A standard S3 bucket without a current version expiration lifecycle and does not serve a website contains current version storage bytes older than 30 days old.
+
+S3 Non-current Version Expiration Lifecycle Rule
+: A standard S3 bucket without a non-current version expiration lifecycle and does not serve a website contains non-current version storage bytes older than 30 days old.
+
+Migrate DynamoDB to On-Demand Capacity Mode
+: A provisioned DynamoDB table has an hourly consumption of read and write capacity less than 18% at least once over the last two weeks.
+
+Migrate DynamoDB to Provisioned Capacity Mode
+: An on-demand DynamoDB table’s hourly consumption of read and write capacity is always greater than 18%.
+
+Migrate DynamoDB to Standard Table Class
+: Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage.
+
+Migrate DynamoDB to Infrequent Access Table Class
+: Migrating to the Infrequent Access (IA) table class offers more potential savings from storage rates compared to the additional costs from capacity rates.
+
+### Legacy or unused recommendations
+
+Datadog identifies resources that are running on legacy hardware or are not utilized efficiently, which you can consider upgrading or removing to reduce your costs and improve the performance of your resources.
+
+Extended Support for RDS
+: An RDS running an engine version that is no longer supported and incurring [extended support charges][7].
+
+Unused DynamoDB recommendations
+: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
+
+Unused DynamoDB Global Secondary Index
+: A DynamoDB table’s Global Secondary Index (GSI) has 0 consumed reads.
+
+ASGs with legacy instance types
+: An autoscaling group that includes legacy instance types.
+
+DynamoDB Delete Extra On-Demand Backups
+: A DynamoDB table has charges for more than 2 on-demand backups.
+
+### Architecture recommendations
+
+Datadog identifies individual resources related to NAT gateways, which you can consider optimizing to reduce unnecessary charges.
+
+NAT Gateway within VPC transfer charges
+: Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges.
+
+NAT Gateway cross-zone transfer charges
+: Resources that need a NAT gateway should use one that is in the same availability zone, or they will incur unnecessary cross-zone transfer charges.
 
 ## Further reading
 
@@ -127,3 +209,4 @@ Overprovisioned EBS Volume IOPS
 [4]: https://app.datadoghq.com/integrations/aws
 [5]: /agent/
 [6]: /integrations/amazon_s3_storage_lens/
+[7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support-charges.html
