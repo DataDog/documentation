@@ -3,6 +3,7 @@ title: Create a New Entry
 aliases:
   - /tracing/service_catalog/setup
   - /service_catalog/setup
+  - /service_catalog/create_entries/
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
@@ -19,8 +20,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
   tag: "Blog"
   text: "Import Backstage YAML files into Datadog"
-aliases:
-    - /service_catalog/create_entries/
 ---
 
 ## Create user-defined entries 
