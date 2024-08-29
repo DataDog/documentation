@@ -20,7 +20,7 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
 1. Set up your processors.
 1. Install the Observability Pipelines Worker.
 
-## Event batching {#event-batching-intro}
+## Event batching
 
 Observability Pipelines destinations send events in batches to the downstream integration. A batch of events is flushed when one of the following parameters is met:
 
