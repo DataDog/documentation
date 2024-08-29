@@ -258,6 +258,10 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
+#### Customize the notification based on the group
+
+{{< tabs >}}
+{{% tab "Host" %}}
 #### Query group by host
 
 If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
@@ -268,6 +272,20 @@ Some specific host metadata variables are available:
 - Machine: `{{host.metadata_machine}}`
 - Platform: `{{host.metadata_platform}}`
 - Processor: `{{host.metadata_processor}}`
+{{% /tab %}}
+
+{{% tab "Kubernetes Resources" %}}
+#### Query group by kube_namespace and kube_cluster_name
+
+If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
+
+Some specific namespace metadata variables are available:
+
+- Kubernetes Cluster: `{{kube_namespace.cluster_name}}`
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 #### Tag key with period
 
