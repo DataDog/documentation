@@ -14,13 +14,13 @@ import yaml from 'js-yaml';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
-const clientRendererScriptStr = fs.readFileSync(
-  path.resolve(__dirname, 'compiledScripts/markdoc-client-renderer.js'),
+const clientPrefsManagerScriptStr = fs.readFileSync(
+  path.resolve(__dirname, 'compiledScripts/markdoc-client-prefs-manager.js'),
   'utf8'
 );
 
-const minifiedClientRendererScriptStr = fs.readFileSync(
-  path.resolve(__dirname, 'compiledScripts/markdoc-client-renderer.min.js'),
+const minifiedClientPrefsManagerScriptStr = fs.readFileSync(
+  path.resolve(__dirname, 'compiledScripts/markdoc-client-prefs-manager.min.js'),
   'utf8'
 );
 
@@ -164,8 +164,8 @@ export class PageBuilder {
   /**
    * Provide the JavaScript code for the client-side renderer.
    */
-  static getClientRendererScriptStr(debug: boolean) {
-    return minifiedClientRendererScriptStr;
+  static getClientPrefsManagerScriptStr(debug: boolean) {
+    return minifiedClientPrefsManagerScriptStr;
   }
 
   /**
@@ -188,7 +188,7 @@ export class PageBuilder {
   }): string {
     let initFunctionStr = '';
     if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-      initFunctionStr = `const initPage = () => clientRenderer.initialize({});\n`;
+      initFunctionStr = `const initPage = () => clientPrefsManager.initialize({});\n`;
     } else {
       let prefOptionsConfigStr;
       let defaultValsByPrefIdStr;
@@ -228,7 +228,7 @@ export class PageBuilder {
         ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef);
       }
       initFunctionStr = `const initPage = () => { 
-  clientRenderer.initialize({
+  clientPrefsManager.initialize({
     pagePrefsConfig: ${pagePrefsConfigStr},
     prefOptionsConfig: ${prefOptionsConfigStr},
     selectedValsByPrefId: ${defaultValsByPrefIdStr},
@@ -267,7 +267,7 @@ export class PageBuilder {
 <html>
   <head>
     <script>
-      ${this.getClientRendererScriptStr(p.debug)}
+      ${this.getClientPrefsManagerScriptStr(p.debug)}
     </script>
     <style>
       ${this.getStylesStr(p.debug)}

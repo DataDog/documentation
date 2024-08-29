@@ -126,8 +126,8 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/ClientRenderer.js": {
-      "bytes": 13718,
+    "dist/helperModules/ClientPrefsManager.js": {
+      "bytes": 13778,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
@@ -152,22 +152,23 @@
       ],
       "format": "cjs"
     },
-    "src/markdoc-client-renderer.js": {
-      "bytes": 136,
+    "dist/markdoc-client-prefs-manager.js": {
+      "bytes": 245,
       "imports": [
         {
-          "path": "dist/helperModules/ClientRenderer.js",
+          "path": "dist/helperModules/ClientPrefsManager.js",
           "kind": "require-call",
-          "original": "../dist/helperModules/ClientRenderer"
+          "original": "./helperModules/ClientPrefsManager"
         }
-      ]
+      ],
+      "format": "cjs"
     }
   },
   "outputs": {
-    "src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.js": {
+    "dist/helperModules/PageBuilder/compiledScripts/markdoc-client-prefs-manager.js": {
       "imports": [],
       "exports": [],
-      "entryPoint": "src/markdoc-client-renderer.js",
+      "entryPoint": "dist/markdoc-client-prefs-manager.js",
       "inputs": {
         "dist/helperModules/PageBuilder/components/ContentFilter.js": {
           "bytesInOutput": 1245
@@ -205,14 +206,14 @@
         "dist/helperModules/PageBuilder/pageConfigMinification.js": {
           "bytesInOutput": 3111
         },
-        "dist/helperModules/ClientRenderer.js": {
-          "bytesInOutput": 12629
+        "dist/helperModules/ClientPrefsManager.js": {
+          "bytesInOutput": 12678
         },
-        "src/markdoc-client-renderer.js": {
-          "bytesInOutput": 115
+        "dist/markdoc-client-prefs-manager.js": {
+          "bytesInOutput": 340
         }
       },
-      "bytes": 91608
+      "bytes": 91934
     }
   }
 }

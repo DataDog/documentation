@@ -5,15 +5,11 @@
     "scripts": {
         "test": "npm run build; vitest run --coverage --reporter=verbose",
         "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets",
-        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.min.js'",
-        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./src/helperModules/PageBuilder/compiledScripts/markdoc-client-renderer.js'",
+        "build-prod-renderer": "npx esbuild ./dist/markdoc-client-prefs-manager.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/helperModules/PageBuilder/compiledScripts/markdoc-client-prefs-manager.min.js'",
+        "build-dev-renderer": "npx esbuild ./dist/markdoc-client-prefs-manager.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/helperModules/PageBuilder/compiledScripts/markdoc-client-prefs-manager.js'",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets && npm run copy-compiled-scripts",
         "copy-assets": "cp -r ./src/helperModules/PageBuilder/assets ./dist/helperModules/PageBuilder",
-        "copy-compiled-scripts": "cp -r ./src/helperModules/PageBuilder/compiledScripts ./dist/helperModules/PageBuilder",
-        "collect-tab-labels": "npm run build && node ./dist/scripts/collectTabLabels.js",
-        "analyze-left-nav": "npm run build && node ./dist/scripts/analyzeLeftNav.js",
-        "analyze-shortcodes": "npm run build && node ./dist/scripts/collectShortcodeStats.js",
-        "analyze-codeblocks": "npm run build && node ./dist/scripts/analyzeCodeBlocks.js"
+        "copy-compiled-scripts": "cp -r ./dist/helperModules/PageBuilder/compiledScripts ./src/helperModules/PageBuilder"
     },
     "dependencies": {
         "chroma-highlight": "^2.4.2",
