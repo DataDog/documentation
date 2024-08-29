@@ -18,9 +18,9 @@ further_reading:
     - link: "/security/cloud_security_management/setup/supported_deployment_types"
       tag: "Documentation"
       text: "Supported Deployment Types"
-    - link: "/security/cloud_security_management/setup/agentless_quick_start"
+    - link: "/security/cloud_security_management/setup/agentless_scanning"
       tag: "Documentation"
-      text: "Agentless Scanning Quick Start"
+      text: "Enabling Agentless Scanning"
     - link: "/security/cloud_security_management/setup/custom_onboarding"
       tag: "Documentation"
       text: "Custom Onboarding for Cloud Security Management"
@@ -29,38 +29,44 @@ further_reading:
       text: "Cloud Security Management Agent Variables"
 ---
 
-To set up Cloud Security Management, you can choose between two main approaches: the streamlined [Agentless Scanning quick start](#quick-start) or the flexible [custom onboarding workflow](#custom-onboarding).
+## Overview
 
-## Quick start
+To get started with Cloud Security Management, follow these steps:
 
-The [quick start workflow][1] provides a streamlined setup process for Cloud Security Management, enabling you to start monitoring your AWS resources immediately using [Agentless Scanning][4].
+1. [Enable Agentless Scanning](#enable-agentless-scanning)
+1. [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
 
-Agentless Scanning supported features include:
+## Enable Agentless Scanning
 
-- **Misconfigurations**: Detect and manage security misconfigurations.
-- **Identity Risks (CIEM)**: Identify and mitigate identity-related risks.
-- **Vulnerability Management**: Scan for vulnerabilities in your hosts and containers.
+The simplest way to get started with Cloud Security Management is with [Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
 
-**Note:** Agentless Scanning supports only AWS environments.
+For additional coverage, you can [deploy the Agent](#deploy-the-agent-for-additional-coverage) to your **X, Y, and Z**.
 
-Once the onboarding workflow is complete, you can configure additional features, including Agent-based capabilities, on the [Features][2] page to further enhance your security setup.
+## Deploy the Agent for additional coverage
 
-## Custom onboarding
+For broader coverage and additional functionalities, deploy the Agent to your **X, Y, and Z**. The following table outlines the improvements offered by Agent-based deployments.
 
-The [custom onboarding workflow][3] offers flexibility and customization during onboarding, enabling you to choose features that best fit your specific needs.
-
-### When to use custom onboarding
-
-Use custom onboarding if you:
-
-- Need to work with Azure or Google Cloud Platform (GCP).
-- Require Agent-based security features for enhanced visibility and control.
+| Feature                          | CSM Pro Agentless | CSM Pro Agentless + Agent          |
+|----------------------------------|-------------------|------------------------------------|
+| CIEM                             | Yes               | Yes                                |
+| Cloud Security Posture Management| Yes               | Yes                                |
+| AMI support                      | Yes               | Yes                                |
+| Security Inbox                   | Yes               | Yes, with more accurate insights   |
+| Vulnerability prioritization     | Yes               | Yes, with runtime context          |
+| Serverless support               | AWS Lambda        | AWS Lambda                         |
+| Coverage                         | All cloud hosts   | All cloud & non-cloud hosts        |
+| Vulnerability freshness          | 12 hours          | Real time                          |
+| Threat detection                 | No                | Yes                                |
+| Host benchmark                   | No                | Yes                                |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_quick_start
+[1]: /security/cloud_security_management/agentless_scanning
 [2]: https://app.datadoghq.com/security/configuration/csm/features
 [3]: /security/cloud_security_management/setup/custom_onboarding
 [4]: /security/cloud_security_management/agentless_scanning
+[5]: /security/cloud_security_management/setup/agentless_scanning
+[6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
+[7]: /security/cloud_security_management/guide/agentless_terraform

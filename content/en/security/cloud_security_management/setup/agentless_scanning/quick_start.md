@@ -1,58 +1,14 @@
 ---
 title: Agentless Scanning Quick Start for Cloud Security Management
-further_reading:
-  - link: "/security/cloud_security_management/agentless_scanning"
-    tag: "Documentation"
-    text: "Cloud Security Management Agentless Scanning"
-  - link: "/security/cloud_security_management/guide/agentless_terraform"
-    tag: "Documentation"
-    text: "Setting up Agentless Scanning using Terraform"
-  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
-    tag: "Documentation"
-    text: "Setting up Agentless Scanning with the AWS Integration"
-  - link: "/security/cloud_security_management/setup/custom_onboarding"
-    tag: "Documentation"
-    text: "Custom Onboarding for Cloud Security Management"
-aliases:
-  - /security/cloud_security_management/setup/agentless_scanning
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-The Agentless Scanning quick start provides a streamlined setup workflow for Cloud Security Management, enabling you to start monitoring your AWS resources immediately.
+Available for new users, the quick start workflow provides a streamlined setup process for Cloud Security Management, enabling immediate monitoring of AWS resources.
 
 <div class="alert alert-info">This guide provides instructions for setting up Agentless Scanning using the Cloud Security Management quick start workflow. Instructions for setting up Agentless Scanning using <a href="/security/cloud_security_management/guide/agentless_terraform">Terraform</a> or by <a href="/security/cloud_security_management/guide/agentless_aws_integration">enabling Agentless Scanning from the AWS integration tile</a> are also available.</div>
 
 ## About Agentless Scanning
 
 [Agentless Scanning][1] provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent.
-
-## Prerequisites
-
-Before setting up Agentless Scanning, ensure the following prerequisites are met:
-
-- **AWS integration**: The [AWS integration][2] must be installed and configured for your AWS accounts.
-- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as specifying which cloud resources to scan.
-- **IAM permissions**: The Agentless Scanning instance requires specific IAM permissions to scan hosts, containers, and Lambda functions. These permissions are automatically applied as part of the installation process.<br><br>
-  {{< collapse-content title="Host and container permissions" level="h5" >}}
-  <ul>
-    <li><code>ec2:DescribeVolumes</code></li>
-    <li><code>ec2:CreateTags</code></li>
-    <li><code>ec2:CreateSnapshot</code></li>
-    <li><code>ec2:DeleteSnapshot</code></li>
-    <li><code>ec2:DescribeSnapshots</code></li>
-    <li><code>ec2:DescribeSnapshotAttribute</code></li>
-    <li><code>ebs:ListSnapshotBlocks</code></li>
-    <li><code>ebs:ListChangedBlocks</code></li>
-    <li><code>ebs:GetSnapshotBlock</code></li>
-  </ul>
-  {{< /collapse-content >}} 
-
-  {{< collapse-content title="Lambda permissions" level="h5" >}}
-  <ul><li><code>lambda:GetFunction</code></li></ul>
-  {{< /collapse-content >}} 
 
 ## Installation
 
@@ -87,6 +43,8 @@ To exclude AWS hosts, containers, and Lambda functions (if applicable) from scan
 [3]: /agent/remote_config/?tab=configurationyamlfile#setup
 [4]: https://app.datadoghq.com/security/csm/intro
 [5]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+[6]: mailto:success@datadoghq.com
+[7]: mailto:success@datadoghq.com
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup

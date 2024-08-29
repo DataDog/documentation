@@ -1,10 +1,10 @@
 ---
-title: Setting up Agentless Scanning with the AWS Integration
+title: Setting up Agentless Scanning using AWS CloudFormation
 further_reading:
   - link: "/security/cloud_security_management/agentless_scanning"
     tag: "Documentation"
     text: "Cloud Security Management Agentless Scanning"
-  - link: "/security/cloud_security_management/setup/agentless_quick_start"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
     tag: "Documentation"
     text: "Agentless Scanning Quick Start for Cloud Security Management"
   - link: "/security/cloud_security_management/guide/agentless_terraform"
@@ -24,7 +24,7 @@ You can install and configure [Agentless Scanning][1] for your cloud environment
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
-[3]: /security/cloud_security_management/setup/agentless_quick_start#prerequisites
+[3]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
 
 {{% /tab %}}
 
@@ -53,5 +53,5 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/agentless_scanning
-[2]: /security/cloud_security_management/setup/agentless_quick_start
+[2]: /security/cloud_security_management/setup/agentless_scanning/quick_start
 [3]: /security/cloud_security_management/guide/agentless_terraform

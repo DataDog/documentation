@@ -3,7 +3,7 @@ title: Cloud Security Management Agentless Scanning
 aliases:
   - /security/agentless_scanning
 further_reading:
-  - link: "/security/cloud_security_management/setup/agentless_quick_start"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
     tag: "Documentation"
     text: "Agentless Scanning Quick Start for Cloud Security Management"
   - link: "/security/cloud_security_management/guide/agentless_terraform"
@@ -119,10 +119,10 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_quick_start
+[1]: /security/cloud_security_management/setup/agentless_scanning/quick_start
 [2]: /agent/remote_config/?tab=configurationyamlfile
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_quick_start#prerequisites
+[4]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
 [6]: /security/cloud_security_management/guide/agentless_terraform
 [7]: mailto:success@datadoghq.com

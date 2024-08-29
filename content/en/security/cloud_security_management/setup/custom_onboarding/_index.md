@@ -1,7 +1,7 @@
 ---
 title: Custom Onboarding for Cloud Security Management
 further_reading:
-  - link: "/security/cloud_security_management/setup/agentless_quick_start"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
     tag: "Documentation"
     text: "Agentless Scanning Quick Start for Cloud Security Management"
   - link: "/security/cloud_security_management/setup/supported_deployment_types"
@@ -98,7 +98,7 @@ You can enable additional CSM features at any time by returning to the [Features
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: /security/cloud_security_management/setup/agentless_quick_start
+[4]: /security/cloud_security_management/setup/agentless_scanning/quick_start
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/cloud_security_management/
 [7]: /security/guide/aws_fargate_config_guide/
