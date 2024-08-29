@@ -28,14 +28,16 @@ title: Code Block
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <pre
-          tabindex="0"
-          class="chroma"
-        ><code><span class="line"><span class="cl"><span class="c1">// Function to compute the product of p1 and p2
+        <span>
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// Function to compute the product of p1 and p2
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">p1</span> <span class="o">*</span> <span class="nx">p2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+        </span>
       </div>
     </div>
   </div>
@@ -55,14 +57,16 @@ title: Code Block
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <pre
-          tabindex="0"
-          class="chroma"
-        ><code><span class="line"><span class="cl">curl -L -X GET <span class="s1">&#39;https://api.<code class="mdoc js-region-param region-param" data-region-param="dd_site"></code>/api/v2/security_monitoring/configuration/security_filters&#39;</span> <span class="se">\
+        <span>
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl">curl -L -X GET <span class="s1">&#39;https://api.<code class="mdoc js-region-param region-param" data-region-param="dd_site"></code>/api/v2/security_monitoring/configuration/security_filters&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;DD-API-KEY: &lt;DATADOG_API_KEY&gt;&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;DD-APPLICATION-KEY: &lt;DATADOG_APP_KEY&gt;&#39;</span>
 </span></span></code></pre>
+        </span>
       </div>
     </div>
   </div>
@@ -87,13 +91,15 @@ title: Code Block
             <div class="code-button-wrapper position-absolute">
               <button class="btn text-primary js-copy-button">Copy</button>
             </div>
-            <pre
-              tabindex="0"
-              class="chroma"
-            ><code><span class="line"><span class="cl"><span class="c1"># Function to compute the product of p1 and p2</span>
+            <span>
+              <pre
+                tabindex="0"
+                class="chroma"
+              ><code><span class="line"><span class="cl"><span class="c1"># Function to compute the product of p1 and p2</span>
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">myFunction</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p2</span>
 </span></span></code></pre>
+            </span>
           </div>
         </div>
       </div>
@@ -123,14 +129,16 @@ title: Code Block
                 <div class="code-button-wrapper position-absolute">
                   <button class="btn text-primary js-copy-button">Copy</button>
                 </div>
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="c1">// Function to compute the product of p1 and p2
+                <span>
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="c1">// Function to compute the product of p1 and p2
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">p1</span> <span class="o">*</span> <span class="nx">p2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </span>
               </div>
             </div>
           </div>

@@ -91,11 +91,13 @@ title: Table
                 <div class="code-button-wrapper position-absolute">
                   <button class="btn text-primary js-copy-button">Copy</button>
                 </div>
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="nb">puts</span> <span class="s2">&#34;Some code here.&#34;</span>
+                <span>
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="nb">puts</span> <span class="s2">&#34;Some code here.&#34;</span>
 </span></span></code></pre>
+                </span>
               </div>
             </div>
           </div>

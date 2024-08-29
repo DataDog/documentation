@@ -1,7 +1,9 @@
-import { CustomHtmlComponent, Config, Node } from 'markdoc-static-compiler';
+import { CustomHtmlComponent } from 'markdoc-static-compiler';
 import { highlight } from 'chroma-highlight';
 import { v4 as uuidv4 } from 'uuid';
 import { renderers } from 'markdoc-static-compiler';
+import { CodeBlockTemplate } from './templates';
+import { renderToString } from 'react-dom/server';
 
 export const fenceDefinition = {
   render: 'Fence',
@@ -73,24 +75,7 @@ export class Fence extends CustomHtmlComponent {
       formattedCodeContents = formattedCodeContents.replace(uuid, html);
     });
 
-    return `<div class="code-snippet-wrapper">
-  <div class="code-filename-wrapper d-flex justify-content-end collapsible">
-    <div class="js-code-block-visibility-toggle">
-      <div class="chevron chevron-down d-none"></div>
-      <div class="chevron chevron-up"></div>
-    </div>  
-  </div>
-  <div class="code-snippet">
-    <div class="code-button-wrapper position-absolute">
-      <button class="btn text-primary js-copy-button">Copy</button>
-    </div>
-    <div class="highlight code-snippet js-appended-copy-btn">
-      <div class="code-button-wrapper position-absolute">
-        <button class="btn text-primary js-copy-button">Copy</button>
-      </div>
-      ${formattedCodeContents}
-    </div>
-    </div>
-</div>`;
+    const jsx = CodeBlockTemplate({ highlightedContents: formattedCodeContents });
+    return renderToString(jsx);
   }
 }
