@@ -51,12 +51,13 @@ You can install and configure [Agentless Scanning][1] for your cloud environment
 
 ### Uninstall with Terraform
 
-Follow the instructions for [Terraform][2] uninstallation.
+Follow the instructions for [Terraform][4] uninstallation.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/agentless_scanning
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
+[2]: /security/cloud_security_management/setup/agentless_quick_start
 [3]: /security/cloud_security_management/guide/agentless_aws_integration
+[4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
