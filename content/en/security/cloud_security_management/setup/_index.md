@@ -21,15 +21,15 @@ further_reading:
     - link: "/security/cloud_security_management/setup/agentless_quick_start"
       tag: "Documentation"
       text: "Agentless Scanning Quick Start"
-    - link: "/security/cloud_security_management/setup/advanced_onboarding"
+    - link: "/security/cloud_security_management/setup/custom_onboarding"
       tag: "Documentation"
-      text: "Advanced Onboarding for Cloud Security Management"
+      text: "Custom Onboarding for Cloud Security Management"
     - link: "/security/cloud_security_management/guide/agent_variables/"
       tag: "Guide"
       text: "Cloud Security Management Agent Variables"
 ---
 
-To set up Cloud Security Management, you can choose between two main approaches: the streamlined [Agentless Scanning quick start](#quick-start) or the flexible [advanced onboarding workflow](#advanced-onboarding).
+To set up Cloud Security Management, you can choose between two main approaches: the streamlined [Agentless Scanning quick start](#quick-start) or the flexible [custom onboarding workflow](#advanced-onboarding).
 
 ## Quick start
 
@@ -45,13 +45,13 @@ Agentless Scanning supported features include:
 
 Once the onboarding workflow is complete, you can configure additional features, including Agent-based capabilities, on the [Features][2] page to further enhance your security setup.
 
-## Advanced onboarding
+## Custom onboarding
 
-The [advanced onboarding workflow][3] offers flexibility and customization during onboarding, enabling you to choose features that best fit your specific needs.
+The [custom onboarding workflow][3] offers flexibility and customization during onboarding, enabling you to choose features that best fit your specific needs.
 
-### When to use advanced onboarding
+### When to use custom onboarding
 
-Use advanced onboarding if you:
+Use custom onboarding if you:
 
 - Need to work with Azure or Google Cloud Platform (GCP).
 - Require Agent-based security features for enhanced visibility and control.
@@ -62,4 +62,4 @@ Use advanced onboarding if you:
 
 [1]: /security/cloud_security_management/setup/agentless_quick_start
 [2]: https://app.datadoghq.com/security/configuration/csm/features
-[3]: /security/cloud_security_management/setup/advanced_onboarding
+[3]: /security/cloud_security_management/setup/custom_onboarding

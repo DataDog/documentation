@@ -10,9 +10,9 @@ further_reading:
   - link: "/security/cloud_security_management/guide/agentless_aws_integration"
     tag: "Documentation"
     text: "Setting up Agentless Scanning with the AWS Integration"
-  - link: "/security/cloud_security_management/setup/advanced_onboarding"
+  - link: "/security/cloud_security_management/setup/custom_onboarding"
     tag: "Documentation"
-    text: "Advanced Onboarding for Cloud Security Management"
+    text: "Custom Onboarding for Cloud Security Management"
 aliases:
   - /security/cloud_security_management/setup/agentless_scanning
 ---
