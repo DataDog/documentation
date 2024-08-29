@@ -59,7 +59,9 @@ There are two locations where you can redact your sensitive data:
 
 - With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
 
-- Another way to redact your sensitive data in your environment before shipping to your downstream destinations is by using [Observability Pipelines][14].
+**With Observability Pipelines:**
+
+ When you [set up a pipeline][20] in Observability Pipelines, add the [Sensitive Data Scanner processor][19] to redact sensitive data in your logs before they leave your environment. See [Observability Pipelines][14] for more information.
 
 ### Prerequisites
 
@@ -356,7 +358,9 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [11]: /logs/log_configuration/processors/?tab=ui#remapper
 [12]: https://app.datadoghq.com/logs/pipelines
 [13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
-[14]: /observability_pipelines/sensitive_data_redaction/
+[14]: /observability_pipelines/
 [16]: /security/cloud_security_management
 [17]: /security/cloud_security_management/setup/agentless_scanning
 [18]: /agent/remote_config
+[19]: /observability_pipelines/processors/#sensitive-data-scanner
+[20]: /observability_pipelines/set_up_pipelines/
