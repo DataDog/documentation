@@ -7,9 +7,13 @@
 import fs from 'fs';
 import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { FileParser, ParsingErrorReport, ParsedFile } from './helperModules/FileParser';
+import {
+  MdocFileParser,
+  ParsingErrorReport,
+  ParsedFile
+} from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
-import { ConfigProcessor } from './helperModules/ConfigProcessor';
+import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuildArgs, PageBuilder } from './helperModules/PageBuilder';
 
 /**
@@ -96,7 +100,7 @@ export class MarkdocHugoIntegration {
    * @returns A ParsedFile object.
    */
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
-    const parsedFile = FileParser.parseMdocFile(
+    const parsedFile = MdocFileParser.parseMdocFile(
       markdocFilepath,
       this.directories.partials
     );
@@ -121,7 +125,7 @@ export class MarkdocHugoIntegration {
     this.#resetErrors();
     this.compiledFiles = [];
 
-    const prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
+    const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
       this.directories.options
     );
     const markdocFilepaths =
@@ -205,7 +209,7 @@ export class MarkdocHugoIntegration {
     // verify that all possible placeholder values
     // yield an existing options set
     try {
-      prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
+      prefOptionsConfigForPage = YamlConfigParser.getPrefOptionsForPage(
         p.pageBuildArgs.parsedFile.frontmatter,
         p.pageBuildArgs.prefOptionsConfig
       );

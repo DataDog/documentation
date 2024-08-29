@@ -1,12 +1,12 @@
 import { describe, test, expect } from 'vitest';
-import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
+import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   PrefOptionsConfig,
   PrefOptionsConfigSchema
 } from '../../../src/schemas/yaml/prefOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
-describe('ConfigProcessor.getDefaultValuesByPrefId', () => {
+describe('YamlConfigParser.getDefaultValuesByPrefId', () => {
   const prefOptions: PrefOptionsConfig = {
     color_options: [
       { id: 'blue', display_name: 'Blue', default: true },
@@ -66,7 +66,7 @@ describe('ConfigProcessor.getDefaultValuesByPrefId', () => {
   FrontmatterSchema.parse(frontmatter);
 
   test('derives the default values for each preference', () => {
-    const defaultValuesByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+    const defaultValuesByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       frontmatter,
       prefOptions
     );

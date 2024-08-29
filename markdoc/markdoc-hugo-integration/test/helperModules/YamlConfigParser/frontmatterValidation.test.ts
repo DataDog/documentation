@@ -1,15 +1,15 @@
 import { describe, test, expect } from 'vitest';
-import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
+import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   paintColorsFrontmatter,
   paintColorsPrefOptionsConfig
 } from '../../mocks/valid/paintColorsConfig';
 import { Frontmatter } from '../../../src/schemas/yaml/frontMatter';
 
-describe('ConfigProcessor.getPrefOptionsForPage', () => {
+describe('YamlConfigParser.getPrefOptionsForPage', () => {
   test('processes valid frontmatter placeholders without errors', () => {
     expect(() =>
-      ConfigProcessor.getPrefOptionsForPage(
+      YamlConfigParser.getPrefOptionsForPage(
         paintColorsFrontmatter,
         paintColorsPrefOptionsConfig
       )
@@ -39,7 +39,7 @@ describe('ConfigProcessor.getPrefOptionsForPage', () => {
       ]
     };
     expect(() =>
-      ConfigProcessor.getPrefOptionsForPage(
+      YamlConfigParser.getPrefOptionsForPage(
         invalidFrontmatter,
         paintColorsPrefOptionsConfig
       )
@@ -52,17 +52,17 @@ describe('ConfigProcessor.getPrefOptionsForPage', () => {
     const { gloss_red_paint_options, ...invalidPrefOptions } =
       paintColorsPrefOptionsConfig;
     expect(() =>
-      ConfigProcessor.getPrefOptionsForPage(paintColorsFrontmatter, invalidPrefOptions)
+      YamlConfigParser.getPrefOptionsForPage(paintColorsFrontmatter, invalidPrefOptions)
     ).toThrowError(
       `Invalid options_source could be populated by the placeholders in <FINISH>_<COLOR>_paint_options: An options source with the ID 'gloss_red_paint_options' does not exist.`
     );
   });
 });
 
-describe('ConfigProcessor.buildSnakeCaseCombinations', () => {
+describe('YamlConfigParser.buildSnakeCaseCombinations', () => {
   test('returns all possible options source names', () => {
     const segments = [['red', 'blue'], ['gloss', 'matte'], ['paint'], ['options']];
-    expect(ConfigProcessor.buildSnakeCaseCombinations(segments)).toEqual([
+    expect(YamlConfigParser.buildSnakeCaseCombinations(segments)).toEqual([
       'red_gloss_paint_options',
       'red_matte_paint_options',
       'blue_gloss_paint_options',

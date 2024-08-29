@@ -118,7 +118,7 @@ export function onScroll() {
     const windowHeight = window.innerHeight;
     let localOffset = 65;
 
-    const isCustomizableDoc = document.getElementById('markdoc-chooser') ? true : false;
+    const isCustomizableDoc = document.getElementById('mdoc-selector') ? true : false;
     if (isCustomizableDoc) {
         localOffset += 65;
     }
@@ -245,12 +245,15 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-// Expose the buildTOCMap function for customizable docs,
-// so that the TOC can be rebuilt
-// after the user's content preferences change
-window.TOCFunctions = {
-    onScroll,
-    buildTOCMap
-};
+// Expose the necessary functions to the Markdoc-Hugo integration
+if (!window.markdocBeforeRevealHooks) {
+    window.markdocBeforeRevealHooks = [];
+}
+markdocBeforeRevealHooks.push(buildTOCMap);
+if (!window.markdocAfterRerenderHooks) {
+    window.markdocAfterRerenderHooks = [];
+}
+markdocAfterRerenderHooks.push(buildTOCMap);
+markdocAfterRerenderHooks.push(onScroll);
 
 DOMReady(handleAPIPage);

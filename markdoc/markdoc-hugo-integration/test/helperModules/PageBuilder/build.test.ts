@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
-import { FileParser } from '../../../src/helperModules/FileParser';
+import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
-import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
+import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -12,13 +12,13 @@ import {
 describe('PageBuilder.build', () => {
   const testFilePath = VALID_CONTENT_DIR + '/primary_colors.mdoc';
   const prefOptionsConfig =
-    ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+    YamlConfigParser.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
 
-  const parsedFile = FileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
+  const parsedFile = MdocFileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
 
-  const prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
+  const prefOptionsConfigForPage = YamlConfigParser.getPrefOptionsForPage(
     parsedFile.frontmatter,
     prefOptionsConfig
   );

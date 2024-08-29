@@ -2,8 +2,8 @@
 title: Traffic Light Colors
 ---
 
-<div id="markdoc-chooser"><div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Color</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="markdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="markdoc-pref__pill selected" data-pref-id="color" data-option-id="green">Green</div></div><div class="markdoc-pref__container"><div class="markdoc-pref__label">Item</div><div class="markdoc-pref__pill selected" data-pref-id="item" data-option-id="grass">Grass</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="emerald">Emerald</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="lime">Lime</div><div class="markdoc-pref__pill " data-pref-id="item" data-option-id="frog">Frog</div></div><hr /></div></div>
-<div id="markdoc-content" class="customizable"><article>
+<div id="mdoc-selector"><div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Color</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-pref__pill selected" data-pref-id="color" data-option-id="green">Green</div></div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Item</div><div class="mdoc-pref__pill selected" data-pref-id="item" data-option-id="grass">Grass</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="emerald">Emerald</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="lime">Lime</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="frog">Frog</div></div><hr /></div></div>
+<div id="mdoc-content" class="customizable"><article>
   <div class="alert alert-info">
     <p>This is just a test page. It's not real.</p>
   </div>
@@ -13,13 +13,13 @@ title: Traffic Light Colors
     seems contrived and odd, that's only because test pages are often both of
     those things.
   </p>
-  <div class="markdoc__toggleable" data-if="22">
+  <div class="mdoc__toggleable" data-if="22">
     <h2 id="green">Green</h2>
     <p>
       Green is a color that is often associated with nature, growth, and
       renewal.
     </p>
-    <div class="markdoc__toggleable" data-if="18">
+    <div class="mdoc__toggleable" data-if="18">
       <h3 id="grass">Grass</h3>
       <p>
         Grass is a common plant found in many environments, from lawns and
@@ -35,7 +35,7 @@ title: Traffic Light Colors
         and natural beauty.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="19">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="19">
       <h3 id="emerald">Emerald</h3>
       <p>
         Emeralds are a type of precious gemstone known for their rich green
@@ -50,7 +50,7 @@ title: Traffic Light Colors
         jewelry. They are believed to symbolize rebirth, love, and prosperity.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="20">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="20">
       <h3 id="lime">Lime</h3>
       <p>
         Limes are small, green citrus fruits known for their tart and tangy
@@ -65,7 +65,7 @@ title: Traffic Light Colors
         both sweet and savory dishes.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="21">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="21">
       <h3 id="frog">Frog</h3>
       <p>
         Frogs are amphibians known for their distinctive jumping abilities and
@@ -83,51 +83,51 @@ title: Traffic Light Colors
       </p>
     </div>
   </div>
-  <div class="markdoc__toggleable markdoc__hidden" data-if="23">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="23">
     <h2 id="yellow">Yellow</h2>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="25">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="25">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="26">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="26">
       <p>
         Sunflowers are a type of flower. They're known for their large, yellow
         petals.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="27">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="27">
       <p>
         Lemons are a type of citrus fruit. They're often used in drinks and
         cooking.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="28">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="28">
       <p>
         School buses are a type of vehicle. They're often used to transport
         students to and from school.
       </p>
     </div>
   </div>
-  <div class="markdoc__toggleable markdoc__hidden" data-if="24">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="24">
     <h2 id="red">Red</h2>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="29">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="29">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="30">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="30">
       <p>
         Apples are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="31">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="31">
       <p>
         Firetrucks are a type of vehicle. They're often used to transport
         firefighters and equipment to emergency situations.
       </p>
     </div>
-    <div class="markdoc__toggleable markdoc__hidden" data-if="32">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="32">
       <p>
         Stop signs are a type of traffic sign. They're used to indicate that
         drivers should stop their vehicles.

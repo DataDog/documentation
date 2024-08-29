@@ -1,11 +1,11 @@
-.markdoc__hidden {
+.mdoc__hidden {
     display: none;
 }
-#markdoc-chooser,
+#mdoc-selector,
 #markdoc-content.customizable {
     visibility: hidden;
 }
-.markdoc-pref__pill {
+.mdoc-pref__pill {
     display: inline-block;
     padding: 5px 10px;
     margin-right: 6px;
@@ -15,18 +15,18 @@
     font-weight: bold;
     border-radius: 5px;
 }
-.markdoc-pref__pill.selected {
+.mdoc-pref__pill.selected {
     color: white;
     background-color: #632ca6;
     border-color: #632ca6;
 }
-.markdoc-pref__label {
+.mdoc-pref__label {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 5px;
 }
-.markdoc-pref__container {
+.mdoc-pref__container {
     display: inline-block;
     margin-right: 25px;
 }
@@ -39,24 +39,24 @@
 .alert.alert-danger p {
     color: #82322f;
 }
-#markdoc-content .alert p {
+#mdoc-content .alert p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
     margin-bottom: 0;
 }
-#markdoc-content .alert p + p {
+#mdoc-content .alert p + p {
     margin-top: 16px;
 }
-#markdoc-content table ul,
-#markdoc-content table p {
+#mdoc-content table ul,
+#mdoc-content table p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
 }
-#markdoc-content.customizable h1,
-#markdoc-content.customizable h2,
-#markdoc-content.customizable h3,
-#markdoc-content.customizable h4,
-#markdoc-content.customizable h5,
-#markdoc-content.customizable h6 {
+#mdoc-content.customizable h1,
+#mdoc-content.customizable h2,
+#mdoc-content.customizable h3,
+#mdoc-content.customizable h4,
+#mdoc-content.customizable h5,
+#mdoc-content.customizable h6 {
     scroll-margin-top: 95px;
 }

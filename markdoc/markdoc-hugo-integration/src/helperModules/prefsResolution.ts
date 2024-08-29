@@ -31,7 +31,7 @@ import {
 
 /**
  * Resolve the page preferences object that is used
- * to populate the content filtering UI (AKA the chooser),
+ * to populate the content filtering UI (AKA the filter selector),
  * replacing any placeholders with actual values.
  */
 export function resolvePagePrefs(p: {

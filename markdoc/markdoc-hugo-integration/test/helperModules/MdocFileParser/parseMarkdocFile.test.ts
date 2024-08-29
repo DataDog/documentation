@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { FileParser } from '../../../src/helperModules/FileParser';
+import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -10,7 +10,7 @@ describe('FileParse.parseMdocFile', () => {
   const testFilePath = VALID_CONTENT_DIR + '/primary_colors.mdoc';
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
-  const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
+  const { ast, frontmatter, partials, errorReports } = MdocFileParser.parseMdocFile(
     testFilePath,
     VALID_PARTIALS_DIR
   );

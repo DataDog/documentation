@@ -1,7 +1,7 @@
 import {
   minifyClientFunction,
   expandClientFunction
-} from '../../src/helperModules/configMinification';
+} from '../../src/helperModules/PageBuilder/pageConfigMinification';
 import {
   ClientFunction,
   ClientFunctionSchema,
@@ -11,7 +11,7 @@ import {
 import _ from 'lodash';
 import { describe, test, expect } from 'vitest';
 
-describe('configMinification', () => {
+describe('pageConfigMinification', () => {
   const simpleClientFunction: ClientFunction = {
     $$mdtype: 'Function',
     name: 'equals',

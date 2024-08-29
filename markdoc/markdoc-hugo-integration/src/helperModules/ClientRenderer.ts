@@ -2,7 +2,7 @@
  * A class containing functions for rendering on the client.
  * When a new page loads, it should call ClientRenderer.initialize()
  * in order to set up the ClientRenderer with the necessary data
- * for re-rendering the content and the chooser
+ * for re-rendering the content and the filter UI
  * in response to user selection changes.
  *
  * There should only be one instance of the ClientRenderer
@@ -15,20 +15,23 @@
  * in the head of the main page layout.
  */
 
-import { getChooserHtml } from './PageBuilder/components/Chooser';
+import { buildFilterSelectorUi } from './PageBuilder/components/ContentFilter';
 import { MinifiedPrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { MinifiedPagePrefsConfig } from '../schemas/yaml/frontMatter';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { resolveMinifiedPagePrefs } from './prefsResolution';
 import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
-import { expandClientFunction, MinifiedClientFunction } from './configMinification';
+import {
+  expandClientFunction,
+  MinifiedClientFunction
+} from './PageBuilder/pageConfigMinification';
 
 export class ClientRenderer {
   static #instance: ClientRenderer;
 
   private prefOptionsConfig?: MinifiedPrefOptionsConfig;
   private pagePrefsConfig?: MinifiedPagePrefsConfig;
-  private chooserElement?: HTMLElement;
+  private filterSelectorEl?: HTMLElement;
   private selectedValsByPrefId: Record<string, string> = {};
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
   private storedPreferences: Record<string, string> = {};
@@ -43,6 +46,10 @@ export class ClientRenderer {
     if (!ClientRenderer.#instance) {
       ClientRenderer.#instance = new ClientRenderer();
       ClientRenderer.#instance.retrieveStoredPreferences();
+      // @ts-ignore
+      window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
+      // @ts-ignore
+      window.markdocAfterRerenderHooks = window.markdocAfterRerenderHooks || [];
     }
 
     return ClientRenderer.#instance;
@@ -111,22 +118,20 @@ export class ClientRenderer {
     }
 
     this.selectedValsByPrefId[prefId] = optionId;
-    this.rerenderChooser();
-    this.rerenderPageContent();
-    this.populateRightNav();
+    this.rerender();
     this.syncUrlWithSelectedVals();
     this.updateStoredPreferences();
   }
 
   /**
    * Check whether the element or any of its ancestors
-   * have the class 'markdoc__hidden'.
+   * have the class 'mdoc__hidden'.
    */
   elementIsHidden(element: Element) {
     // check whether the element or any of its parents are hidden
     let currentElement: Element | null = element;
     while (currentElement) {
-      if (currentElement.classList.contains('markdoc__hidden')) {
+      if (currentElement.classList.contains('mdoc__hidden')) {
         return true;
       }
       currentElement = currentElement.parentElement;
@@ -166,15 +171,14 @@ export class ClientRenderer {
       return;
     }
     rightNav.innerHTML = html;
-    // @ts-ignore
-    window.TOCFunctions.buildTOCMap();
-    // @ts-ignore
-    window.TOCFunctions.onScroll();
   }
 
   rerender() {
-    this.rerenderChooser();
+    this.rerenderFilterSelector();
     this.rerenderPageContent();
+    this.populateRightNav();
+    //@ts-ignore
+    markdocAfterRerenderHooks.forEach((hook) => hook());
   }
 
   /**
@@ -198,7 +202,7 @@ export class ClientRenderer {
       }
     });
 
-    const toggleables = document.getElementsByClassName('markdoc__toggleable');
+    const toggleables = document.getElementsByClassName('mdoc__toggleable');
     for (let i = 0; i < toggleables.length; i++) {
       const toggleable = toggleables[i];
 
@@ -212,29 +216,29 @@ export class ClientRenderer {
       }
 
       if (newDisplayStatusByRef[ref]) {
-        toggleable.classList.remove('markdoc__hidden');
+        toggleable.classList.remove('mdoc__hidden');
       } else {
-        toggleable.classList.add('markdoc__hidden');
+        toggleable.classList.add('mdoc__hidden');
       }
     }
   }
 
   /**
-   * Listen for selection changes in the chooser.
+   * Listen for changes in the filter selector.
    */
-  addChooserEventListeners() {
-    const prefPills = document.getElementsByClassName('markdoc-pref__pill');
+  addFilterSelectorEventListeners() {
+    const prefPills = document.getElementsByClassName('mdoc-pref__pill');
     for (let i = 0; i < prefPills.length; i++) {
       prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
     }
   }
 
-  locateChooserElement() {
-    const chooserElement = document.getElementById('markdoc-chooser');
-    if (!chooserElement) {
+  locateFilterSelectorEl() {
+    const filterSelectorEl = document.getElementById('mdoc-selector');
+    if (!filterSelectorEl) {
       return false;
     } else {
-      this.chooserElement = chooserElement;
+      this.filterSelectorEl = filterSelectorEl;
       return true;
     }
   }
@@ -292,7 +296,7 @@ export class ClientRenderer {
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.ifFunctionsByRef = {};
 
-    const contentIsCustomizable = this.locateChooserElement();
+    const contentIsCustomizable = this.locateFilterSelectorEl();
     if (contentIsCustomizable) {
       // Unminify conditional function data
       Object.keys(p.ifFunctionsByRef).forEach((ref) => {
@@ -305,12 +309,12 @@ export class ClientRenderer {
       if (overrideApplied) {
         this.rerender();
       } else {
-        this.addChooserEventListeners();
+        this.addFilterSelectorEventListeners();
       }
+      this.populateRightNav();
       this.revealPage();
     }
 
-    this.populateRightNav();
     this.updateEditButton();
 
     if (contentIsCustomizable) {
@@ -320,26 +324,28 @@ export class ClientRenderer {
   }
 
   revealPage() {
-    // reveal markdoc-chooser and markdoc-content by ID
-    if (this.chooserElement) {
-      this.chooserElement.style.position = 'sticky';
-      this.chooserElement.style.top = '95px';
-      this.chooserElement.style.backgroundColor = 'white';
-      this.chooserElement.style.paddingTop = '10px';
-      this.chooserElement.style.visibility = 'visible';
-      this.chooserElement.style.zIndex = '1000';
+    // @ts-ignore
+    markdocBeforeRevealHooks.forEach((hook) => hook());
+
+    if (this.filterSelectorEl) {
+      this.filterSelectorEl.style.position = 'sticky';
+      this.filterSelectorEl.style.top = '95px';
+      this.filterSelectorEl.style.backgroundColor = 'white';
+      this.filterSelectorEl.style.paddingTop = '10px';
+      this.filterSelectorEl.style.visibility = 'visible';
+      this.filterSelectorEl.style.zIndex = '1000';
     }
 
-    const content = document.getElementById('markdoc-content');
+    const content = document.getElementById('mdoc-content');
     if (content) {
       content.style.visibility = 'visible';
     }
   }
 
-  rerenderChooser() {
-    if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.chooserElement) {
+  rerenderFilterSelector() {
+    if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.filterSelectorEl) {
       throw new Error(
-        'Cannot rerender chooser without pagePrefsConfig, prefOptionsConfig, and chooserElement'
+        'Cannot rerender filter selector without pagePrefsConfig, prefOptionsConfig, and filterSelectorEl'
       );
     }
 
@@ -364,8 +370,8 @@ export class ClientRenderer {
       this.selectedValsByPrefId[resolvedPref.id] = resolvedPref.currentValue;
     });
 
-    const newChooserHtml = getChooserHtml(resolvedPagePrefs);
-    this.chooserElement.innerHTML = newChooserHtml;
-    this.addChooserEventListeners();
+    const newFilterSelectorHtml = buildFilterSelectorUi(resolvedPagePrefs);
+    this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
+    this.addFilterSelectorEventListeners();
   }
 }

@@ -75,7 +75,7 @@ describe('custom components', () => {
   // in a different style than "shown" content
   const htmlWithStyles = `
   <style>
-    .markdoc__hidden {
+    .mdoc__hidden {
       background-color: dimgray;
       color: white;
     }
@@ -84,7 +84,7 @@ describe('custom components', () => {
       color: deeppink;
     }
 
-    .markdoc__hidden code {
+    .mdoc__hidden code {
       color: pink;
     }
 

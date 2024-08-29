@@ -37,7 +37,7 @@ export interface ParsedFile {
  * such as ASTs and RenderableTreeNodes,
  * extracting any validation errors encountered during parsing.
  */
-export class FileParser {
+export class MdocFileParser {
   /**
    * Parse a Markdoc file and return its AST, frontmatter, partials,
    * and any validation errors encountered during parsing.

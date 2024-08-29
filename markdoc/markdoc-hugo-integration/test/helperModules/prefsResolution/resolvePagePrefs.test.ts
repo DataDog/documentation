@@ -3,7 +3,7 @@ import {
   paintColorsPrefOptionsConfig
 } from '../../mocks/valid/paintColorsConfig';
 import { describe, test, expect } from 'vitest';
-import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
+import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   resolvePagePrefs,
   resolveMinifiedPagePrefs
@@ -12,7 +12,7 @@ import { ResolvedPagePrefsSchema } from '../../../src/schemas/resolvedPagePrefs'
 
 describe('SharedRenderer.resolvePagePrefs', () => {
   test('resolves to the correct values for the default selections', () => {
-    const valsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+    const valsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       paintColorsFrontmatter,
       paintColorsPrefOptionsConfig
     );
@@ -34,7 +34,7 @@ describe('SharedRenderer.resolvePagePrefs', () => {
   });
 
   test('resolves to the correct values when selections are changed', () => {
-    const valsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+    const valsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       paintColorsFrontmatter,
       paintColorsPrefOptionsConfig
     );
@@ -59,16 +59,16 @@ describe('SharedRenderer.resolvePagePrefs', () => {
   });
 
   test('resolves to the correct values using minified page prefs', () => {
-    const valsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+    const valsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       paintColorsFrontmatter,
       paintColorsPrefOptionsConfig
     );
 
-    const minifiedPagePrefs = ConfigProcessor.minifyPagePrefsConfig(
+    const minifiedPagePrefs = YamlConfigParser.minifyPagePrefsConfig(
       paintColorsFrontmatter.page_preferences!
     );
 
-    const minifiedPrefOptionsConfig = ConfigProcessor.minifyPrefOptionsConfig(
+    const minifiedPrefOptionsConfig = YamlConfigParser.minifyPrefOptionsConfig(
       paintColorsPrefOptionsConfig
     );
 
