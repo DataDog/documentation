@@ -39,7 +39,34 @@ title: Code Block
       </div>
     </div>
   </div>
-  <h3 id="indented-code-blocks">Indented code blocks</h3>
+  <h2 id="example-with-region-param">Example with region-param</h2>
+  <div class="code-snippet-wrapper">
+    <div class="code-filename-wrapper d-flex justify-content-end collapsible">
+      <div class="js-code-block-visibility-toggle">
+        <div class="chevron chevron-down d-none"></div>
+        <div class="chevron chevron-up"></div>
+      </div>
+    </div>
+    <div class="code-snippet">
+      <div class="code-button-wrapper position-absolute">
+        <button class="btn text-primary js-copy-button">Copy</button>
+      </div>
+      <div class="highlight code-snippet js-appended-copy-btn">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <pre
+          tabindex="0"
+          class="chroma"
+        ><code><span class="line"><span class="cl">curl -L -X GET <span class="s1">&#39;https://api.<code class="mdoc js-region-param region-param" data-region-param="dd_site"></code>/api/v2/security_monitoring/configuration/security_filters&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;DD-API-KEY: &lt;DATADOG_API_KEY&gt;&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;DD-APPLICATION-KEY: &lt;DATADOG_APP_KEY&gt;&#39;</span>
+</span></span></code></pre>
+      </div>
+    </div>
+  </div>
+  <h2 id="indented-code-blocks">Indented code blocks</h2>
   <ol>
     <li>
       Item 1 includes some code:

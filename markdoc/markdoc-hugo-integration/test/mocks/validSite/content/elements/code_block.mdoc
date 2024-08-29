@@ -20,7 +20,16 @@ function myFunction(p1, p2) {
 }
 ```
 
-### Indented code blocks
+## Example with region-param
+
+```bash
+curl -L -X GET 'https://api.{% region-param key="dd_site" code="true" /%}/api/v2/security_monitoring/configuration/security_filters' \
+--header 'Content-Type: application/json' \
+--header 'DD-API-KEY: <DATADOG_API_KEY>' \
+--header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>'
+```
+
+## Indented code blocks
 
 1. Item 1 includes some code:
     ```python
