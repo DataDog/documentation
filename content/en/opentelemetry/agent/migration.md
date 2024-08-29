@@ -18,7 +18,7 @@ If you are already using a standalone OpenTelemetry (OTel) Collector for your OT
 
 To migrate to the Datadog Agent with embedded OpenTelemetry Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
 
-<div class="alert alert-danger">This guide covers migrating the OpenTelemetry Collector deployed as an <a href="https://opentelemetry.io/docs/collector/deployment/agent/">Agent</a>. The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">Gateway deployment pattern</a> is not supported.</div>
+<div class="alert alert-danger">This guide covers migrating the OpenTelemetry Collector deployed as an <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent</a>. The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">Gateway deployment pattern</a> is not supported.</div>
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ Here are two example Collector configuration files:
 
 This example uses a custom `metricstransform` component in `collector-config.yaml`:
 
-{{< highlight yaml "hl_lines=8-15 38" >}}
+{{< highlight yaml "hl_lines=17-21 36" >}}
 receivers:
   otlp:
     protocols:
@@ -83,7 +83,7 @@ service:
       exporters: [datadog/connector, datadog]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [metricstransform,infraattributes, batch]
+      processors: [metricstransform, infraattributes, batch]
       exporters: [datadog]
     logs:
       receivers: [otlp]

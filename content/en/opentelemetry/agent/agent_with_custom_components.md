@@ -164,7 +164,7 @@ Create a sample configuration file and run your custom Agent to ensure everythin
      pipelines:
        metrics:
          receivers: [otlp, datadog/connector]
-         processors: [metricstransform,batch]
+         processors: [metricstransform, batch]
          exporters: [datadog]
        traces:
          receivers: [otlp]
