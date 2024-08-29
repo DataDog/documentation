@@ -7,7 +7,7 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 - link: "/opentelemetry/agent/install_agent_with_collector"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
@@ -92,7 +92,7 @@ service:
 {{< /highlight >}}
 
 In this case, you need to follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
-
+[4]: /opentelemetry/agent/agent_with_custom_components
 {{% /tab %}}
 
 {{% tab "Default Agent components" %}}
