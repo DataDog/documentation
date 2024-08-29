@@ -32,6 +32,7 @@ To get started with Cloud Security Management, follow these steps:
 
 1. [Enable Agentless Scanning](#enable-agentless-scanning)
 1. [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
+1. [Enable additional features](#enable-additional-features)
 
 ## Enable Agentless Scanning
 
@@ -56,7 +57,7 @@ For broader coverage and additional functionalities, deploy the Agent to your **
 | Threat detection                 | No                | Yes                                |
 | Host benchmark                   | No                | Yes                                |
 
-## Additional features
+## Enable additional features
 
 ### AWS CloudTrail Logs
 
@@ -64,7 +65,7 @@ AWS CloudTrail Logs allows you to get the most out of CSM Identity Risks. With A
 
 ### Infrastructure as Code (IaC) remediation
 
-placeholder text.
+This is placeholder text.
 
 ## Further reading
 
