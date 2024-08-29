@@ -263,8 +263,8 @@ To test your implementation:
 
 When looking at RUM Crash Reporting behaviors for Android, consider the following:
 
-- The crashes can only be detected after the Datadog SDK is initialised, which is why it is recommended to initialize the SDK as soon as possible in the application's `onCreate` method
-- Crashes in RUM need to be tied to a RUM View. This means that if a crash occurs before a view is visible, or after the app is sent to the background and the end-user switches to another app, the crash will be muted and won't report to Datadog. This behavior can be mitigated using the `trackBackgroundEvents` [method](https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin#track-background-events) in the RumConfiguration builder.
+- Crashes can only be detected after the Datadog SDK is initialized. To catch as many crashes as possible, initialize the SDK as soon as you can in the application's `onCreate` method.
+- Crashes in RUM need to be tied to a RUM View. This means that if a crash occurs before a view is visible, or after the app is sent to the background and the end-user switches to another app, the crash is muted and does not report to Datadog. Mitigate this behavior using the `trackBackgroundEvents` [method][10] in the RumConfiguration builder.
 - Also crashes tied to sampled sessions will only be kept, meaning if a `sessionSampleRate` of less than 100% is applied, some crashes will be missed.
 
 
