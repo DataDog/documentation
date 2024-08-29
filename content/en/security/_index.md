@@ -51,6 +51,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadogs-approach-devsecops/"
     tag: "Blog"
     text: "Datadog's approach to DevSecOps"
+  - link: "https://www.datadoghq.com/blog/investigate-denial-of-service-attacks/"
+    tag: "Blog"
+    text: "Investigating a complex denial-of-service attack"
 cascade:
     algolia:
         rank: 70
