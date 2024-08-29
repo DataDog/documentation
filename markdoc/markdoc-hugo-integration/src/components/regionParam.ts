@@ -60,11 +60,11 @@ export class RegionParam extends CustomHtmlComponent {
     const { attributes } = this.tag;
 
     if (attributes.code) {
-      return `<code class="js-region-param region-param" data-region-param="${attributes.key}"></code>`;
+      return `<code class="mdoc js-region-param region-param" data-region-param="${attributes.key}"></code>`;
     } else if (attributes.link) {
-      return `<a class="js-region-param region-param" data-region-param="${attributes.key}" href="">${attributes.text}</a>`;
+      return `<a class="mdoc js-region-param region-param" data-region-param="${attributes.key}" href="">${attributes.text}</a>`;
     } else {
-      return `<span class="js-region-param region-param" data-region-param="${attributes.key}"></span>`;
+      return `<span class="mdoc js-region-param region-param" data-region-param="${attributes.key}"></span>`;
     }
   }
 }

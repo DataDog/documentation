@@ -1,5 +1,7 @@
 import { CustomHtmlComponent, Config, Node } from 'markdoc-static-compiler';
 import { highlight } from 'chroma-highlight';
+import { v4 as uuidv4 } from 'uuid';
+import { renderers } from 'markdoc-static-compiler';
 
 /**
  * Dynamic code block notes
@@ -7,6 +9,8 @@ import { highlight } from 'chroma-highlight';
  * Only natively processed tags can be in code blocks.
  * I should make a native copy of the region-param
  * shortcode as a test.
+ *
+ *
  */
 
 export const fenceDefinition = {
@@ -19,19 +23,43 @@ export const fenceDefinition = {
 };
 
 export class Fence extends CustomHtmlComponent {
+  getRenderedChildTagsByUuid(): Record<string, string> {
+    const renderedChildTagsByUuid: Record<string, string> = {};
+    this.tag.children.forEach((child) => {
+      if (
+        child &&
+        typeof child === 'object' &&
+        '$$mdtype' in child &&
+        child.$$mdtype === 'Tag'
+      ) {
+        const renderedChild = renderers.html(child, this.config, this.components);
+        renderedChildTagsByUuid[uuidv4()] = renderedChild;
+      }
+    });
+    return renderedChildTagsByUuid;
+  }
+
   render() {
-    console.log('\n\n\nfence tag', JSON.stringify(this.tag, null, 2));
-    console.log('\nfence contents', JSON.stringify(this.contents));
-    const codeContents = this.tag.children.join('\n');
+    const renderedChildTagsByUuid = this.getRenderedChildTagsByUuid();
+    let formattedCodeContents = this.contents;
+    Object.keys(renderedChildTagsByUuid).forEach((uuid) => {
+      const html = renderedChildTagsByUuid[uuid];
+      formattedCodeContents = formattedCodeContents.replace(html, uuid);
+    });
+
+    // TODO: Autodetect lexer if nothing is provided
     const language = this.tag.attributes.language || 'plaintext';
-    const regionParamHtml = `<code class="js-region-param region-param" data-region-param="dd_site">datadoghq.com</code>`;
-    const regionParamMarkup = `{{< region-param  key=\"dd_site\" code=\"true\" >}}`;
-    this.contents = this.contents.replace(regionParamMarkup, regionParamHtml);
-    const formattedCodeContents = highlight(
-      // codeContents,
-      this.contents,
+
+    formattedCodeContents = highlight(
+      formattedCodeContents,
       `--formatter html --html-only --lexer="${language}"`
     );
+
+    Object.keys(renderedChildTagsByUuid).forEach((uuid) => {
+      const html = renderedChildTagsByUuid[uuid];
+      formattedCodeContents = formattedCodeContents.replace(uuid, html);
+    });
+
     return `<div class="code-snippet-wrapper">
   <div class="code-filename-wrapper d-flex justify-content-end collapsible">
     <div class="js-code-block-visibility-toggle">
