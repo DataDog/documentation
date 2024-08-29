@@ -3,6 +3,7 @@ title: Create a New Entry
 aliases:
   - /tracing/service_catalog/setup
   - /service_catalog/setup
+  - /service_catalog/create_entries/
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"

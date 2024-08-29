@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure Rsyslog or Syslog-ng and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications, including Splunk.
+Configure rsyslog or syslog-ng and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications, including Splunk.
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
@@ -24,7 +24,7 @@ This document walks you through the following steps:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Dual Ship Logs** template to create a new pipeline.
-1. Select **Rsyslog** or **Syslog-ng** as the source.
+1. Select **rsyslog** or **syslog-ng** as the source.
 
 ### Set up the source
 

@@ -113,7 +113,7 @@ _Example: the latency of all user requests should be less than 250 ms 99% of the
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo/manage
-[2]: https://app.datadoghq.com/monitors#create/metric
+[2]: https://app.datadoghq.com/monitors/create/metric
 [3]: /metrics
 [4]: /integrations
 [5]: /tracing/trace_pipeline/generate_metrics/

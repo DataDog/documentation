@@ -134,7 +134,7 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [2]: /getting_started/agent/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
-[5]: https://app.datadoghq.com/monitors#create/metric
+[5]: https://app.datadoghq.com/monitors/create/metric
 [6]: /integrations/disk/
 [7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/variables/
