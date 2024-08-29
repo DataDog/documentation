@@ -158,7 +158,7 @@ helm repo update
 
 ### Set up Datadog API and application keys
 
-1. Get the Datadog [API][2] and [application keys][3].
+1. Get the Datadog [API][8] and [application keys][9].
 1. Store the keys as a Kubernetes secret:
    ```shell
    kubectl create secret generic datadog-secret \
@@ -388,3 +388,5 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [5]: /opentelemetry/agent/install_agent_with_collector#add-the-datadog-helm-repository
 [6]: /opentelemetry/agent/install_agent_with_collector#set-up-the-api-and-application-keys
 [7]: /opentelemetry/agent/install_agent_with_collector#configure-the-datadog-agent
+[8]: https://app.datadoghq.com/organization-settings/api-keys/
+[9]: https://app.datadoghq.com/organization-settings/application-keys
