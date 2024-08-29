@@ -83,17 +83,21 @@ Datadog sets the `version` tag for you in the following priority order. If you m
 | Priority         | Version Value |
 |--------------|------------|
 | 1    |  {your version value}       |
-| 2   | {image_tag}_{git_commit_sha}       |
-| 3         |  {image_tag} or {git_commit_sha} if only one is available      |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
 
-You need to install Datadog Agent Version 7.52.0 or greater and enable Git in the tracer to fully enable automatic version tagging. You can learn how to enable Git in the tracer by reading [Embed Git information in your build artifacts][19] 
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If running containerized and `image_tag` suffices, no further configuration necessary
+- If not running containerized or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][19] 
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
 If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
-{{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
+#### Set up with automatic version tagging
+
 ##### Full configuration
 
 To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
@@ -188,9 +192,9 @@ containers:
 ```
 
 
-{{< /collapse-content >}} 
 
-{{< collapse-content title="Set up with manual version tagging" level="h4" >}}
+{{< collapse-content title="Set up with manual version tagging" level="h6" >}}
+
 ##### Full configuration
 
 To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
@@ -310,8 +314,7 @@ containers:
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-
-{{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
+#### Set up with automatic version tagging
 ##### Full configuration
 
 Set the `DD_ENV` and `DD_SERVICE` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
@@ -351,9 +354,7 @@ com.datadoghq.tags.service
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
 
-{{< /collapse-content >}} 
-
-{{< collapse-content title="Set up with manual version tagging" level="h4" >}}
+{{< collapse-content title="Set up with manual version tagging" level="h6" >}}
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
@@ -407,7 +408,7 @@ As explained in the full configuration, these labels can be set in a Dockerfile 
 
 {{% tab "ECS" %}}
 
-{{< collapse-content title="Set up with automatic version tagging" level="h4" >}}
+#### Set up with automatic version tagging
 ##### Full configuration
 
 Set the `DD_ENV` and `DD_SERVICE` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
@@ -439,9 +440,8 @@ If your service has no need for the Datadog environment variables (for example, 
   "com.datadoghq.tags.service": "<SERVICE>"
 }
 ```
-{{< /collapse-content >}} 
 
-{{< collapse-content title="Set up with manual version tagging" level="h4" >}}
+{{< collapse-content title="Set up with manual version tagging" level="h6" >}}
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
