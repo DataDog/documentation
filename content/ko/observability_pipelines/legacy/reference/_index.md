@@ -7,6 +7,6 @@ cascade:
   type: 참조
 disable_sidebar: true
 disable_toc: true
-title: 레퍼런스
+title: 참조
 type: 참조
 ---
