@@ -118,7 +118,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs8798/add-tags-table
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
