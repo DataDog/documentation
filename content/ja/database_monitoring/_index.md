@@ -59,7 +59,7 @@ Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL 
 
 ### MongoDB
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">MongoDB 用 Database Monitoring は公開ベータ版です。ご興味のある方は、Datadog カスタマーサクセスマネージャーまでお問い合わせください。</div>
 {{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 
