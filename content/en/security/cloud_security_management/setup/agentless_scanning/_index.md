@@ -46,7 +46,7 @@ To enable Agentless Scanning, use one of the following workflows:
 
 ### Quick start
 
-Available for new users, the [quick start workflow][5] provides a streamlined setup process for Cloud Security Management, enabling immediate monitoring of AWS resources.
+Designed for new users, the [quick start workflow][5] offers an efficient setup process for Cloud Security Management, enabling immediate monitoring of AWS resources. It uses AWS CloudFormation to automate the configuration.
 
 ### Terraform
 

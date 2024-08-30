@@ -61,7 +61,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ### AWS CloudTrail Logs
 
-AWS CloudTrail Logs allows you to get the most out of CSM Identity Risks. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions. For more information, see [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
+AWS CloudTrail Logs allows you to get the most out of [CSM Identity Risks][6]. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions. For more information, see [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
 
 ### IaC remediation
 
@@ -76,3 +76,4 @@ With Infrastructure as Code (IaC) remediation, you can use Terraform to open a p
 [3]: /security/cloud_security_management/setup/agent
 [4]: /security/cloud_security_management/setup/cloudtrail_logs
 [5]: /security/cloud_security_management/setup/iac_remediation
+[6]: /security/cloud_security_management/identity_risks
