@@ -93,8 +93,8 @@ Datadog sets the `version` tag for you in the following priority order. If you m
 
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
-- If running containerized and `image_tag` suffices, no further configuration necessary
-- If not running containerized or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][9] 
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][9] 
 
 ##### Full configuration
 
@@ -299,8 +299,8 @@ Datadog sets the `version` tag for you in the following priority order. If you m
 
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
-- If running containerized and `image_tag` suffices, no further configuration necessary
-- If not running containerized or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
 
 ##### Full configuration
 
