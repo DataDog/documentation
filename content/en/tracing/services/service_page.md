@@ -49,25 +49,25 @@ Consult on this page:
   Service health is in private beta. To request access, complete the form.
 {{< /callout >}}
 
-The **Service Health** panel provides a real-time summary of service signals to help you understand if a service needs your attention.
+The **Service Health** banner and alert badges provides a real-time summary of service signals to help you understand if a service needs your attention.
 
-Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues) and surfaces the most critical alerts. Additionally, the Service Health panel provides links to associated incidents, which helps you to take necessary actions.
+Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues), and surfaces the most critical alerts on the Service Page. 
 
-{{< img src="/tracing/services/service_page/service-health.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+{{< img src="/tracing/services/service_page/service-health2.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
 
 To access service health:
 
 1. Go to [APM > Service Catalog][23].
 2. Hover over a service and click **Full Page**.
-3. Select **Service Health**.
+3. View the **Service Health** banner at the top of the page and the related alert badges in the vertical navigation. 
 
-The Service Health panel displays the status of your service as *Ok*, *Warning*, or *Alert* if at least one of the following conditions is met:
+The Service Health banner displays the status of your service as *Warning*, or *Alert* if at least one of the following conditions is met:
 
 |   Status    |                         Condition                          |
 |-------------|------------------------------------------------------------|
 |  **Alert**  | **Monitors**: <br>- A non-muted alerting P1 monitor is triggered.<br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |
 | **Warning** | **Monitors**: <br>- A non-muted alerting P2 monitor is triggered.<br>- A non-muted warning P1 monitor is triggered.<br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
-|   **Ok**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
+|   **No Alerts**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
 
 ## Service monitor
 
@@ -82,7 +82,7 @@ Enable them directly or create your own [APM monitors][3].
 
 ## Watchdog Insights
 
-The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19].
+The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Log Explorer][19].
 
 {{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog Insights" style="width:100%;">}}
 

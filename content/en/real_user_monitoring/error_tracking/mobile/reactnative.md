@@ -27,7 +27,7 @@ Enable React Native Crash Reporting and Error Tracking to get comprehensive cras
 -   Symbolicated React Native (JavaScript and native iOS or Android) crash reports
 -   Trend analysis with React Native Error Tracking
 
-In order to symbolicate your stack traces, manually upload your mapping files into Datadog.
+In order to symbolicate your stack traces, manually upload your source maps and native debug symbols into Datadog.
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -53,14 +53,14 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 
 ## Get deobfuscated stack traces
 
-Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-For React Native applications, the matching of stack traces and sourcemaps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all sourcemaps that match with these fields, Datadog uses the one with the highest `build_number` value.
+For React Native applications, the matching of stack traces and source maps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
--   JavaScript source map for your iOS JavaScript bundle
--   JavaScript source map for your Android JavaScript bundle
+-   JavaScript source maps for your iOS JavaScript bundle
+-   JavaScript source maps for your Android JavaScript bundle
 -   dSYMs for your iOS native code
 -   Proguard mapping files if you have enabled code obfuscation for your Android native code
 
@@ -86,9 +86,9 @@ Options for the `datadog-ci react-native xcode` command are available on the [co
 
 #### Specifying a custom release version
 
-Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your sourcemaps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
+Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your source maps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
 
-When the SDK is initialized with a version suffix, you must manually override the release version in order for the sourcemap and build versions to match.
+When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
 
 ## Limitations
 
@@ -136,7 +136,7 @@ To test your implementation:
 3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
 4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
 
-To make sure your sourcemaps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
+To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
 Install it with yarn or npm then re-install your pods:
 
@@ -155,7 +155,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new sourcemaps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
 
 To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
 

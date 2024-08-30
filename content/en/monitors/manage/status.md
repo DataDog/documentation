@@ -182,7 +182,7 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [10]: https://app.datadoghq.com/event/explorer
 [11]: /account_management/audit_trail/
 [12]: https://www.datadoghq.com/blog/audit-trail-best-practices/
-[13]: https://app.datadoghq.com/monitors#create/import
+[13]: https://app.datadoghq.com/monitors/create/import
 [14]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
 [30]: /monitors/manage/search/#query
 [31]: /getting_started/tagging/

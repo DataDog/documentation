@@ -127,7 +127,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types/metric/
-[2]: https://app.datadoghq.com/monitors#create/apm
+[2]: https://app.datadoghq.com/monitors/create/apm
 [3]: /monitors/notify/
 [4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map

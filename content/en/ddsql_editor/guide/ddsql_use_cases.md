@@ -12,7 +12,7 @@ further_reading:
 ### List all libraries across services in production
 
 {{< code-block lang="sql" disable_copy="false">}}
-SELECT 
+SELECT
     c.service_name,
     c.team,
     lib.library_name,
@@ -27,7 +27,7 @@ SELECT
     lib.license_type
 FROM service_definition c
 JOIN library lib ON lib.asset_name = c.service_name
-WHERE 
+WHERE
     lib.env = 'production'
     AND lib.relation = 'DIRECT'
     AND LOWER(c.domain) = 'domain_name'
@@ -46,7 +46,7 @@ WHERE client_library_version < '1.31.0';
 
 ## AWS
 
-### List RDS instances whose certificate will SSL / TLS certificate need rotating
+### List of RDS instances that require SSL/TLS certificate rotation
 
 {{< code-block lang="sql" disable_copy="false">}}
 SELECT account_id,
