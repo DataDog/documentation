@@ -145,9 +145,9 @@ window.DD_RUM.init({
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## Add your own performance timing
+## Create custom performance metrics
 
-### Custom vitals
+### Measure component-level performance with custom vitals
 
 Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction.
 
@@ -188,7 +188,7 @@ Instead of setting custom vital variables individually, you can report a custom 
 window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
 ```
 
-### Add custom performance timing
+### Track additional performance timings
 
 On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 
