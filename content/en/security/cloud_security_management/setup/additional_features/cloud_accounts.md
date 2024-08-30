@@ -6,7 +6,7 @@ aliases:
   - /security/cloud_security_management/setup/cloud_accounts
 ---
 
-Use the following instructions to enable Misconfigurations and Identity Risks (CIEM).
+Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on Azure and GCP.
 
 ## Enable resource scanning
 
