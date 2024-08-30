@@ -11,6 +11,7 @@ import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagem
 import { resolvePagePrefs } from '../prefsResolution';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
+import { s } from 'markdoc-static-compiler/dist/src/schema';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -63,7 +64,7 @@ export class PageBuilder {
       defaultValsByPrefId
     });
 
-    const contentFilterHtml = this.#getFilterSelectorHtml({
+    const filterSelectorHtml = this.#getFilterSelectorHtml({
       frontmatter: args.parsedFile.frontmatter,
       prefOptionsConfig: args.prefOptionsConfig,
       defaultValsByPrefId
@@ -86,7 +87,7 @@ export class PageBuilder {
     let pageContents = '';
     if (args.parsedFile.frontmatter.page_preferences) {
       pageContents = `
-<div id="mdoc-selector">${contentFilterHtml}</div>
+<div id="mdoc-selector">${filterSelectorHtml}</div>
 <div id="mdoc-content" class="customizable">${articleHtml}</div>
 <div x-init='${pageInitScript}'></div>
 `;
@@ -186,6 +187,12 @@ export class PageBuilder {
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
   }): string {
+    // If debug mode is enabled, pretty-print data structures
+    let stringificationSpace: undefined | number = undefined;
+    if (p.pageBuildArgs.debug) {
+      stringificationSpace = 2;
+    }
+
     let initFunctionStr = '';
     if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
       initFunctionStr = `const initPage = () => clientPrefsManager.initialize({});\n`;
@@ -196,37 +203,27 @@ export class PageBuilder {
       const ifFunctionsByRef = getMinifiedIfFunctionsByRef(p.renderableTree);
       let ifFunctionsByRefStr;
 
-      if (p.pageBuildArgs.debug) {
-        prefOptionsConfigStr = JSON.stringify(
-          YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
+      prefOptionsConfigStr = JSON.stringify(
+        YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
+        null,
+        stringificationSpace
+      );
+      defaultValsByPrefIdStr = JSON.stringify(
+        p.defaultValsByPrefId,
+        null,
+        stringificationSpace
+      );
+      if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+        pagePrefsConfigStr = JSON.stringify(
+          YamlConfigParser.minifyPagePrefsConfig(
+            p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+          ),
           null,
-          2
+          stringificationSpace
         );
-        defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
-        if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-          pagePrefsConfigStr = JSON.stringify(
-            YamlConfigParser.minifyPagePrefsConfig(
-              p.pageBuildArgs.parsedFile.frontmatter.page_preferences
-            ),
-            null,
-            2
-          );
-        }
-        ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
-      } else {
-        prefOptionsConfigStr = JSON.stringify(
-          YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
-        );
-        defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
-        if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-          pagePrefsConfigStr = JSON.stringify(
-            YamlConfigParser.minifyPagePrefsConfig(
-              p.pageBuildArgs.parsedFile.frontmatter.page_preferences
-            )
-          );
-        }
-        ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef);
       }
+      ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, stringificationSpace);
+
       initFunctionStr = `const initPage = () => { 
   clientPrefsManager.initialize({
     pagePrefsConfig: ${pagePrefsConfigStr},
