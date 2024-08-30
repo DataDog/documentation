@@ -27,6 +27,8 @@ If you already have a Datadog Log Archive configured for Observability Pipelines
 
 You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
 
+Select the cloud provider you are using to archive your logs.
+
 {{% collapse-content title="Amazon S3" level="h4" %}}
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
