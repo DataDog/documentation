@@ -16,27 +16,10 @@ import { renderToString } from 'react-dom/server';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
-const clientPrefsManagerScriptStr = fs.readFileSync(
-  path.resolve(__dirname, 'compiledScripts/markdoc-client-prefs-manager.js'),
-  'utf8'
-);
-
 const minifiedClientPrefsManagerScriptStr = fs.readFileSync(
   path.resolve(__dirname, 'compiledScripts/markdoc-client-prefs-manager.min.js'),
   'utf8'
 );
-
-/**
- * All of the data required to build an HTML or Markdown page
- * from an .mdoc file.
- */
-export interface PageBuildArgs {
-  parsedFile: ParsedFile;
-  prefOptionsConfig: PrefOptionsConfig;
-  includeAssetsInline: boolean;
-  debug: boolean;
-  outputFormat: 'html' | 'markdown';
-}
 
 /**
  * A class that functions as a module, providing methods
@@ -53,20 +36,24 @@ export class PageBuilder {
    * Build the HTML output for a given parsed .mdoc file.
    * This HTML output can be processed by Hugo to generate a static page.
    */
-  static build(args: PageBuildArgs): string {
+  static build(p: {
+    parsedFile: ParsedFile;
+    prefOptionsConfig: PrefOptionsConfig;
+  }): string {
     const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
-      args.parsedFile.frontmatter,
-      args.prefOptionsConfig
+      p.parsedFile.frontmatter,
+      p.prefOptionsConfig
     );
 
     const renderableTree = buildRenderableTree({
-      parsedFile: args.parsedFile,
-      prefOptionsConfig: args.prefOptionsConfig,
+      parsedFile: p.parsedFile,
+      prefOptionsConfig: p.prefOptionsConfig,
       defaultValsByPrefId
     });
 
     const pageInitScript = this.#getPageInitScript({
-      pageBuildArgs: args,
+      parsedFile: p.parsedFile,
+      prefOptionsConfig: p.prefOptionsConfig,
       defaultValsByPrefId,
       renderableTree
     });
@@ -80,8 +67,8 @@ export class PageBuilder {
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 
     const pageJsx = PageTemplate({
-      frontmatter: args.parsedFile.frontmatter,
-      prefOptionsConfig: args.prefOptionsConfig,
+      frontmatter: p.parsedFile.frontmatter,
+      prefOptionsConfig: p.prefOptionsConfig,
       valsByPrefId: defaultValsByPrefId,
       articleHtml
     });
@@ -89,23 +76,10 @@ export class PageBuilder {
     let pageHtml = renderToString(pageJsx);
     pageHtml += `\n<div x-init='${pageInitScript}'></div>`;
 
-    if (args.includeAssetsInline) {
-      pageHtml = this.#addInlineAssets({
-        pageContents: pageHtml,
-        debug: args.debug
-      });
-    }
-
-    if (args.debug) {
-      pageHtml = prettier.format(pageHtml, { parser: 'html' });
-    }
-
-    if (args.outputFormat === 'markdown') {
-      pageHtml = this.#addFrontmatter({
-        pageContents: pageHtml,
-        frontmatter: args.parsedFile.frontmatter
-      });
-    }
+    pageHtml = this.#addFrontmatter({
+      pageContents: pageHtml,
+      frontmatter: p.parsedFile.frontmatter
+    });
 
     return pageHtml;
   }
@@ -141,25 +115,14 @@ export class PageBuilder {
    * If debug mode is enabled, include additional styles
    * to reveal hidden elements on the page.
    */
-  static getStylesStr(debug: boolean) {
-    let result = stylesStr;
-    if (debug) {
-      result = `
-      ${result}
-      .markdoc__hidden {
-        background-color: lightgray;
-      }
-      `;
-    } else {
-      result = this.#removeLineBreaks(result);
-    }
-    return result;
+  static getStylesStr() {
+    return this.#removeLineBreaks(stylesStr);
   }
 
   /**
    * Provide the JavaScript code for the ClientPrefsManager.
    */
-  static getClientPrefsManagerScriptStr(debug: boolean) {
+  static getClientPrefsManagerScriptStr() {
     return minifiedClientPrefsManagerScriptStr;
   }
 
@@ -177,7 +140,8 @@ export class PageBuilder {
    * a preference setting.
    */
   static #getPageInitScript(p: {
-    pageBuildArgs: PageBuildArgs;
+    parsedFile: ParsedFile;
+    prefOptionsConfig: PrefOptionsConfig;
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
   }): string {
@@ -191,7 +155,7 @@ export class PageBuilder {
 
     // If the page does not have any preferences,
     // don't pass any data to the prefs manager
-    if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+    if (!p.parsedFile.frontmatter.page_preferences) {
       return this.#removeLineBreaks(
         `const ${initFunctionName} = () => clientPrefsManager.initialize({});\n` +
           docReadyExecutionScript
@@ -201,12 +165,10 @@ export class PageBuilder {
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientPrefsManager.initialize({
     pagePrefsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPagePrefsConfig(
-        p.pageBuildArgs.parsedFile.frontmatter.page_preferences
-      )
+      YamlConfigParser.minifyPagePrefsConfig(p.parsedFile.frontmatter.page_preferences)
     )},
     prefOptionsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
+      YamlConfigParser.minifyPrefOptionsConfig(p.prefOptionsConfig)
     )},
     selectedValsByPrefId: ${JSON.stringify(p.defaultValsByPrefId)},
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
@@ -214,30 +176,5 @@ clientPrefsManager.initialize({
 };\n`;
 
     return this.#removeLineBreaks(initFunctionStr + docReadyExecutionScript);
-  }
-
-  /**
-   * If the page should act as a standalone HTML page,
-   * wrap the page contents in an HTML document
-   * that includes the CSS and JavaScript assets that would
-   * normally be included in the head of the layout template.
-   */
-  static #addInlineAssets(p: { pageContents: string; debug: boolean }) {
-    return `
-<!DOCTYPE html>
-<html>
-  <head>
-    <script>
-      ${this.getClientPrefsManagerScriptStr(p.debug)}
-    </script>
-    <style>
-      ${this.getStylesStr(p.debug)}
-    </style>
-  </head>
-  <body>
-    ${p.pageContents}
-  </body>
-</html>
-`;
   }
 }

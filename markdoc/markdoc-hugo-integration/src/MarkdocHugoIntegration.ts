@@ -14,7 +14,7 @@ import {
 } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
-import { PageBuildArgs, PageBuilder } from './helperModules/PageBuilder';
+import { PageBuilder } from './helperModules/PageBuilder';
 
 /**
  * The schema for the config object passed to the MarkdocHugoIntegration class
@@ -49,11 +49,7 @@ export class MarkdocHugoIntegration {
     partials: string;
     options: string;
   };
-  config: {
-    includeAssetsInline: boolean;
-    debug: boolean;
-    outputFormat: 'html' | 'markdown';
-  };
+
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
@@ -69,11 +65,6 @@ export class MarkdocHugoIntegration {
   constructor(args: CompilationConfig) {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
-    this.config = {
-      includeAssetsInline: args.config?.includeAssetsInline || false,
-      debug: args.config?.debug || false,
-      outputFormat: args.config?.outputFormat || 'markdown'
-    };
   }
 
   /**
@@ -83,8 +74,8 @@ export class MarkdocHugoIntegration {
    * those are inlined in the compiled files.
    */
   buildAssetsPartial() {
-    const styles = PageBuilder.getStylesStr(this.config.debug);
-    const script = PageBuilder.getClientPrefsManagerScriptStr(this.config.debug);
+    const styles = PageBuilder.getStylesStr();
+    const script = PageBuilder.getClientPrefsManagerScriptStr();
     const partial = `
 <style>${styles}</style>
 <script>${script}</script>
@@ -139,13 +130,8 @@ export class MarkdocHugoIntegration {
 
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
-        pageBuildArgs: {
-          parsedFile,
-          prefOptionsConfig,
-          includeAssetsInline: this.config.includeAssetsInline,
-          debug: this.config.debug,
-          outputFormat: this.config.outputFormat
-        }
+        parsedFile,
+        prefOptionsConfig
       });
 
       if (compiledFilepath) {
@@ -202,7 +188,8 @@ export class MarkdocHugoIntegration {
    */
   #compileMdocFile(p: {
     markdocFilepath: string;
-    pageBuildArgs: PageBuildArgs;
+    parsedFile: ParsedFile;
+    prefOptionsConfig: PrefOptionsConfig;
   }): string | null {
     let prefOptionsConfigForPage: PrefOptionsConfig;
 
@@ -210,8 +197,8 @@ export class MarkdocHugoIntegration {
     // yield an existing options set
     try {
       prefOptionsConfigForPage = YamlConfigParser.getPrefOptionsForPage(
-        p.pageBuildArgs.parsedFile.frontmatter,
-        p.pageBuildArgs.prefOptionsConfig
+        p.parsedFile.frontmatter,
+        p.prefOptionsConfig
       );
     } catch (e) {
       if (e instanceof Error) {
@@ -227,15 +214,12 @@ export class MarkdocHugoIntegration {
     // build the HTMl string and write it to file
     try {
       const fileContents = PageBuilder.build({
-        parsedFile: p.pageBuildArgs.parsedFile,
-        prefOptionsConfig: prefOptionsConfigForPage,
-        includeAssetsInline: p.pageBuildArgs.includeAssetsInline,
-        debug: p.pageBuildArgs.debug,
-        outputFormat: p.pageBuildArgs.outputFormat
+        parsedFile: p.parsedFile,
+        prefOptionsConfig: prefOptionsConfigForPage
       });
 
       const compiledFilepath = this.#writeFile({
-        parsedFile: p.pageBuildArgs.parsedFile,
+        parsedFile: p.parsedFile,
         markdocFilepath: p.markdocFilepath,
         pageContents: fileContents
       });
@@ -279,18 +263,8 @@ export class MarkdocHugoIntegration {
     markdocFilepath: string;
     pageContents: string;
   }): string {
-    let writePath: string;
-    // HTML format
-    if (this.config.outputFormat === 'html') {
-      writePath = p.markdocFilepath.replace(/\.mdoc$/, '.html');
-      fs.writeFileSync(writePath, p.pageContents);
-      // Markdown format
-    } else if (this.config.outputFormat === 'markdown') {
-      writePath = p.markdocFilepath.replace(/\.mdoc$/, '.md');
-      fs.writeFileSync(writePath, p.pageContents);
-    } else {
-      throw new Error(`Invalid output format: ${this.config.outputFormat}`);
-    }
+    const writePath = p.markdocFilepath.replace(/\.mdoc$/, '.md');
+    fs.writeFileSync(writePath, p.pageContents);
     return writePath;
   }
 }

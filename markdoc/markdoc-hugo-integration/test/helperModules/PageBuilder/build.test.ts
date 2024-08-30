@@ -25,13 +25,10 @@ describe('PageBuilder.build', () => {
 
   const html = PageBuilder.build({
     parsedFile,
-    prefOptionsConfig: prefOptionsConfigForPage,
-    debug: true,
-    includeAssetsInline: false,
-    outputFormat: 'html'
+    prefOptionsConfig: prefOptionsConfigForPage
   });
 
-  test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
+  test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
     expect(html).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/PageBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
     );

@@ -22,11 +22,6 @@ const markdocIntegration = new MarkdocHugoIntegration({
         options: PREFS_CONFIG_DIR,
         partials: PARTIALS_DIR
     }
-    /*
-    config: {
-        debug: true
-    }
-    */
 });
 
 // Build the assets partial, and write it to the target file path
