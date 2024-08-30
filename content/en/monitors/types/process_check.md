@@ -84,7 +84,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/process/
-[2]: https://app.datadoghq.com/monitors#create/process
+[2]: https://app.datadoghq.com/monitors/create/process
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/configuration/#no-data
 [5]: /monitors/configuration/#auto-resolve
