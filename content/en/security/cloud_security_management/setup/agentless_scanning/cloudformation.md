@@ -12,33 +12,32 @@ further_reading:
     text: "Setting up Agentless Scanning using Terraform"
 ---
 
-For users who have already set up Cloud Security Management and want to add a new AWS account or enable Agentless Scanning on an existing integrated AWS account, you can install and configure [Agentless Scanning][1] using [Terraform][2] or AWS CloudFormation. This article provides detailed instructions for the AWS CloudFormation approach.
+If you've already set up Cloud Security Management and want to add a new AWS account or enable [Agentless Scanning][1] on an existing integrated AWS account, you can use either [Terraform][2] or AWS CloudFormation. This article provides detailed instructions for the AWS CloudFormation approach.
 
 <div class="alert alert-info">If you're setting up Cloud Security Management for the first time, you can follow the <a href="/security/cloud_security_management/setup/agentless_scanning/quick_start">quick start workflow</a>, which also uses AWS CloudFormation to enable Agentless Scanning.</div>
 
 {{< tabs >}}
-{{% tab "Agentless scanning (new AWS account)" %}}
+{{% tab "New AWS account" %}}
 
-1. Set up the [Amazon Web Services][1] integration. You must also add the required [permissions][2] for resource collection.
-1. Click **Yes** under **Enable Cloud Security Management**, and enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
-1. Select an API key that is already configured for Remote Configuration. If you enter an API key that does not have Remote Configuration enabled, it will automatically be activated upon selection.
-1. Click **Launch CloudFormation Template**. The template includes all the necessary [permissions][3] to deploy and manage Agentless scanners. The template must run successfully to receive scans.
+1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations** > **AWS**.
+1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
+1. Select the AWS region where you want to create the CloudFormation stack.
+1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Send **AWS Logs to Datadog** and **Enable Cloud Security Management** are automatically selected by default. Leave the selections as is.
+1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
-[1]: /integrations/amazon_web_services/
-[2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
-[3]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 
-{{% tab "Agentless scanning (existing AWS account)" %}}
+{{% tab "Existing AWS account" %}}
 
-1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**.
-1. Click the **Edit scanning** button for the AWS account where you intend to deploy the Agentless scanner.
-1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
-1. Go to your AWS console, create a new CloudFormation Stack using [this template][2], and then run it.
-1. Make sure the template runs successfully, then click **Done** to begin scanning. 
-
-{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
+1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations** > **AWS**.
+1. Click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} for the AWS account where you intend to deploy the Agentless scanner.
+1. **Enable Resource Scanning** should already be toggled on. If it isn't, switch the **Enable Resource Scanning** toggle to the on position.
+1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/cloudformation/main.yaml
@@ -46,9 +45,15 @@ For users who have already set up Cloud Security Management and want to add a ne
 {{% /tab %}}
 {{< /tabs >}}
 
-## How to exclude resources from scans
+## Exclude resources from scans
 
 {{% csm-agentless-exclude-resources %}}
+
+## Disable Agentless Scanning
+
+1. On the [Cloud Security Management Setup][3] page, click **Cloud Integrations** > **AWS**.
+1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and switch the toggles in the **Agentless Scanning** section to the off position.
+1. Click **Done**.
 
 ## Uninstall with CloudFormation
 
@@ -60,3 +65,4 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 
 [1]: /security/cloud_security_management/agentless_scanning
 [2]: /security/cloud_security_management/setup/agentless_scanning/terraform
+[3]: https://app.datadoghq.com/security/configuration/csm/setup

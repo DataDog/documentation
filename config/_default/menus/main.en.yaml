@@ -5216,11 +5216,21 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agent
       weight: 102
-    - name: Set Up Additional Features
+    - name: Set Up CloudTrail Logs
       url: security/cloud_security_management/setup/additional_features
       parent: csm_setup
       identifier: csm_setup_additional_features
       weight: 103
+    - name: Set Up Iac Remediation
+      url: security/cloud_security_management/setup/additional_features
+      parent: csm_setup
+      identifier: csm_setup_additional_features1
+      weight: 104
+    - name: Deploy on Azure and GCP
+      url: security/cloud_security_management/setup/additional_features
+      parent: csm_setup
+      identifier: csm_setup_additional_features11
+      weight: 105
     - name: CloudTrail Logs
       url: security/cloud_security_management/setup/additional_features/cloudtrail_logs
       parent: csm_setup_additional_features
