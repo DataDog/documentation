@@ -143,7 +143,7 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Fluent socket address and port. The Observability Pipelines Worker listens on this address for incoming log messages.
 
