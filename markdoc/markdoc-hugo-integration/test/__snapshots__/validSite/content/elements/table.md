@@ -1,7 +1,7 @@
 ---
 title: Table
 ---
-<div id="markdoc-content"><article>
+<div id="mdoc-content" class="customizable"><article>
   <h2 id="markdown-table-commonmark-table">
     Markdown table (CommonMark table)
   </h2>
@@ -186,4 +186,5 @@ title: Table
     </li>
   </ol>
 </article>
-</div><div x-init='    const initPage = () => clientPrefsManager.initialize({});    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>
+</div>
+<div x-init='    const initPage = () => clientPrefsManager.initialize({});    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>

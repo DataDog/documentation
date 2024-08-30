@@ -1,7 +1,7 @@
 ---
 title: Description List
 ---
-<div id="markdoc-content"><article>
+<div id="mdoc-content" class="customizable"><article>
   <h2 id="example">Example</h2>
   <dl>
     <dt>Service</dt>
@@ -29,4 +29,5 @@ title: Description List
     </dd>
   </dl>
 </article>
-</div><div x-init='    const initPage = () => clientPrefsManager.initialize({});    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>
+</div>
+<div x-init='    const initPage = () => clientPrefsManager.initialize({});    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>

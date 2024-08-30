@@ -3,9 +3,7 @@ title: Primary Colors
 aliases:
   - /primary_colors_alias/
 ---
-
-<div id="mdoc-selector"><div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Color</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Item</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="ocean">Ocean</div><div class="mdoc-pref__pill selected" data-pref-id="item" data-option-id="sky">Sky</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="jeans">Jeans</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div>
-<div id="mdoc-content" class="customizable"><article>
+<div id="mdoc-selector"><div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Color</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Item</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="ocean">Ocean</div><div class="mdoc-pref__pill selected" data-pref-id="item" data-option-id="sky">Sky</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="jeans">Jeans</div><div class="mdoc-pref__pill " data-pref-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>

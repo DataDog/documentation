@@ -191,22 +191,8 @@ export class PageBuilder {
     if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
       initFunctionStr = `const initPage = () => clientPrefsManager.initialize({});\n`;
     } else {
-      let prefOptionsConfigStr;
-      let defaultValsByPrefIdStr;
       let pagePrefsConfigStr;
-      const ifFunctionsByRef = getMinifiedIfFunctionsByRef(p.renderableTree);
-      let ifFunctionsByRefStr;
 
-      prefOptionsConfigStr = JSON.stringify(
-        YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
-        null,
-        stringificationSpace
-      );
-      defaultValsByPrefIdStr = JSON.stringify(
-        p.defaultValsByPrefId,
-        null,
-        stringificationSpace
-      );
       if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
         pagePrefsConfigStr = JSON.stringify(
           YamlConfigParser.minifyPagePrefsConfig(
@@ -216,14 +202,25 @@ export class PageBuilder {
           stringificationSpace
         );
       }
-      ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, stringificationSpace);
 
       initFunctionStr = `const initPage = () => { 
   clientPrefsManager.initialize({
     pagePrefsConfig: ${pagePrefsConfigStr},
-    prefOptionsConfig: ${prefOptionsConfigStr},
-    selectedValsByPrefId: ${defaultValsByPrefIdStr},
-    ifFunctionsByRef: ${ifFunctionsByRefStr}
+    prefOptionsConfig: ${JSON.stringify(
+      YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
+      null,
+      stringificationSpace
+    )},
+    selectedValsByPrefId: ${JSON.stringify(
+      p.defaultValsByPrefId,
+      null,
+      stringificationSpace
+    )},
+    ifFunctionsByRef: ${JSON.stringify(
+      getMinifiedIfFunctionsByRef(p.renderableTree),
+      null,
+      stringificationSpace
+    )}
   });
 };\n`;
     }
