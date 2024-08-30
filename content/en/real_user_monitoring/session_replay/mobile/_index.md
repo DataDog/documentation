@@ -20,11 +20,11 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 ## How the Session Replay recorder works
 
-The Session Replay recorder is part of the RUM Mobile SDK. While [Browser Session Replay][1] relies on snapshots of the browser's DOM and CSS, while mobile apps don't have HTML, DOM, or CSS, so the recorder instead turns the native view's hierarchies into a sequence of flat "wireframes" and takes incremental snapshots of the relevant wireframes.
+The Session Replay recorder is part of the RUM Mobile SDK. While [Browser Session Replay][1] relies on snapshots of the browser's DOM and CSS, mobile apps don't have HTML, DOM, or CSS, so the recorder instead turns the native view hierarchy into a sequence of flat "wireframes", and takes incremental snapshots of the relevant wireframes.
 
 ### Wireframe concept
 
-A _wireframe_ describes individual rectangular areas in the mobile app screen. Wireframes are constructed during the process of traversing the app's view-tree in a bottom-up (or generally "back-to-front") order and determining visible elements. It is an abstract type, which means it doesn't always correspond 1:1 to a native view, or live inside the views hierarchy.
+A _wireframe_ describes individual rectangular areas in the mobile app screen. It is an abstract type, which means it doesn't always correspond 1:1 to a native view, or live inside the views hierarchy.
 
 For further context, the following could be considered a wireframe:
 
@@ -40,27 +40,25 @@ Wireframes are constructed during the process of traverseing the app's view-tree
 
 {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:30%;">}}
 
-These wireframes can be sent to the player while **preserving their rendering order** (back-to-front) and **using absolute positioning** (in screen coordinates). There is no "tree structure", nor child-parent relationship between wireframes, therefore making the structure "flat".
+These wireframes are recorded while **preserving their rendering order** (back-to-front) and **using absolute positioning** (in screen coordinates). There is no "tree structure", nor child-parent relationship between wireframes, therefore making the structure "flat".
 
 ### Rendering algorithm
 
-To display a single replay frame, the player needs to iterate through all wireframes and render one another into the viewport using geometry information (x, y, width, height) from each wireframe. It must respect wireframes rendering order, so that succeeding ones overdraw existing portions of the viewport.
+To display the Replay of a single frame on Datadog, the Session Replay player iterates through all wireframes and renders one another into the viewport using geometry information (x, y, width, height) from each one. **It respects wireframes rendering order**, so that succeeding ones overdraw existing portions of the viewport.
 
-The above screen can be reconstructed in 19 passes of the renderer:
+For instance, the screenshot displayed above is reconstructed in 19 passes:
 
 | Iteration | 1 | 2 | 3 |
 |-----------|---|---|---|
 | Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-1.png" alt="An example of a 'geometry' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
-| Description | Draw "geometry" wireframe into viewport (rectangle + background color). | Draw "image" wireframe (rectangle + image with given UUID fetched from the Datadog backend). | Draw "text" wireframe (rectangle + "Twin Lake" text + font color, family and size). |
 
-The first wireframe could dictate the viewport size, enabling player size adjustment for given device + rotation (landscape / portrait).
+The first wireframe dictates the viewport size, enabling the Session Replay player to properly represent the device's screen size and orientation (landscape / portrait).
 
 | Iteration | 4 | 5-9 | 10-12 |
 |-----------|---|---|---|
 | Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-4.png" alt="An example of a 'geometry', 'image, and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-5-9-1.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-10-12.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
-| Description | Draw "image" and "text" wireframes into viewport.| Draw "image" and "text" wireframes into viewport. | Draw "image" and two "geometry" wireframes into viewport.  |
 
-Because wireframes are sorted in back-to-front order, it overdraws existing portion of the frame. This is very much desirable. For semi-transparent elements, it can also do the job of proper blending "closer" elements with the "farer" ones.
+Because wireframes are sorted in back-to-front order, it overdraws the existing portion of the frame, which is a desirable behavior, as it helps support several UI patterns (for instance semi-transparent elements).
 
 | Iteration | 13-19 | Final result |
 |-----------|-------|--------------|
@@ -68,17 +66,7 @@ Because wireframes are sorted in back-to-front order, it overdraws existing port
 
 ### Full and incremental snapshots
 
-The sequence of all visible wireframes can be considered a full snapshot record if it is referring to the web format. Sending it per frame in the replay is not optimal, which is why the recorder takes incremental snapshots.
-
-To send incremental changes, the mobile SDK tags each wireframe with a unique identifier. Native views are objects, sot hey can be identified by reference.
-
-{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-wireframe-uuid.png" alt="An example of how each wireframe is given a `uuid` (from 1 to 19)." style="width:40%;">}}
-
-Except `uuid`, a wireframe can define 3 classes of attributes:
-
-- **Geometry**: Its `x`, `y`, `width`, and `height` using absolute screen coordinates.
-- **Appearance**: Information on its background color, font size, font color, and other styles.
-- **Content**: Depending on wireframe type, it can be a text from the label, reference to an image (such as an image's `uuid` or remote URL) or any other information essential for its rendering.
+To tie Mobile Session Replay back to its [Browser counterpart][1], the sequence of all visible wireframes is considered a full snapshot. But to avoid re-recording the entire screen when only incremental changes occur in the UI, the mobile SDK tags each wireframe with a unique identifier and sends incremental snapshots to Datadog. Since native views are objects, they can be identified by reference.
 
 Below are examples of how incremental records are based on sending updates to only impacted wireframes.
 
