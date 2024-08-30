@@ -41,7 +41,7 @@ To set up Datadog Software Composition Analysis, navigate to [**Software Deliver
 SCA scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][6].
 
 ### Scan in CI pipelines
-SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys][3] and run SCA jobs in the respective CI provider.
+SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run SCA jobs in the respective CI provider.
 
 {{< whatsnext desc="See the documentation for your CI provider:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}

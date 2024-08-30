@@ -25,6 +25,8 @@ Infrastructure monitoring provides visibility into your entire IT environment, i
 
 Every Datadog Agent reports a service check called `datadog.agent.up` with the status `OK`. You can monitor this check across one or more hosts by using a host monitor.
 
+<div class="alert alert-warning">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
+
 ## Monitor creation
 
 To create a [host monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Host*.
@@ -84,6 +86,6 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/host
+[1]: https://app.datadoghq.com/monitors/create/host
 [2]: /monitors/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/

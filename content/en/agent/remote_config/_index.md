@@ -288,7 +288,7 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
-[6]: /security/application_security/enabling/compatibility/
+[6]: /security/application_security/
 [7]: /account_management/rbac/permissions#access-management
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security

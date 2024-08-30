@@ -348,7 +348,7 @@ spec:
     prometheusScrape:
       enabled: true
       enableServiceEndpoints: true
-      additionalConfigs:
+      additionalConfigs: |-
         - autodiscovery:
             kubernetes_container_names:
               - my-app

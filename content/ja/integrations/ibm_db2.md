@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10054
     source_type_name: IBM Db2
-  logs:
-    source: ibm_db2
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +26,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_on_public_website: true
@@ -37,7 +36,6 @@ integration_id: ibm-db2
 integration_title: IBM Db2
 integration_version: 2.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_db2
 public_title: IBM Db2
@@ -54,10 +52,14 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: IBM Db2 データベースからのテーブルスペース、バッファプールなどのメトリクスを監視
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-db2-with-datadog
   support: README.md#Support
   title: IBM Db2
 ---
@@ -71,9 +73,9 @@ tile:
 
 このチェックは、Datadog Agent を通じて [IBM Db2][2] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれています。
 
@@ -89,7 +91,7 @@ sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
 
 注: Python 2 が動作する Agent をお使いの場合は、`ibm_db=3.1.0` の代わりに `ibm_db==3.0.1` を使用してください。
 
-##### ログの収集
+##### Windows
 
 Agent バージョン < 6.11 の場合
 
@@ -106,7 +108,7 @@ Agent バージョン >= 6.12 および < 7.0 の場合
 Agent バージョン >= 7.0 の場合
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.0
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.4
 ```
 
 Linux では、XML 機能が必要になる場合があります。ビルドプロセス中にエラーが発生した場合は、
@@ -158,12 +160,12 @@ update dbm cfg using DFT_MON_BUFPOOL on
  Monitor health of instance and databases   (HEALTH_MON) = ON
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -173,7 +175,7 @@ update dbm cfg using DFT_MON_BUFPOOL on
 
 2. [Agent を再起動します][2]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -216,7 +218,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                                 |
 | `<INSTANCE_CONFIG>`  | `{"db": "<DB_NAME>", "username":"<USERNAME>", "password":"<PASSWORD>", "host":"%%host%%", "port":"%%port%%"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -235,21 +237,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `ibm_db2` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ibm_db2" >}}
 
 
-### ヘルプ
+### イベント
 
 - テーブルスペースの状態が変化するたびに、`ibm_db2.tablespace_state_change` がトリガーされます。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ibm_db2" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### CLI Driver SQL1531N エラー
 

@@ -194,13 +194,72 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 {{% /tab %}}
 
-<!-- {{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
 ## Compatibility requirements
 
+The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTelemetry Node.js Trace API.
+
 ## Setup
 
-{{% /tab %}} -->
+To use OpenTelemetry instrumentations with the Datadog Node.js SDK, perform the following steps:
+
+ 1. Follow the Setup instructions in [Node.js Custom Instrumentation using OpenTelemetry API][18].
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
+
+The following example demonstrates how to instrument the `http` and `express` OpenTelemetry integrations with the Datadog Node.js SDK:
+
+```js
+const tracer = require('dd-trace').init()
+const { TracerProvider } = tracer
+const provider = new TracerProvider()
+provider.register()
+
+const { registerInstrumentations } = require('@opentelemetry/instrumentation')
+const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http')
+const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express')
+
+// Register the instrumentation with the Datadog trace provider
+// and the OpenTelemetry instrumentation of your choice
+registerInstrumentations({
+  instrumentations: [
+    new HttpInstrumentation({
+      ignoreIncomingRequestHook (req) {
+        // Ignore spans created from requests to the agent
+        return req.path === '/v0.4/traces' || req.path === '/v0.7/config' ||
+        req.path === '/telemetry/proxy/api/v2/apmtelemetry'
+      },
+      ignoreOutgoingRequestHook (req) {
+        // Ignore spans created from requests to the agent
+        return req.path === '/v0.4/traces' || req.path === '/v0.7/config' ||
+        req.path === '/telemetry/proxy/api/v2/apmtelemetry'
+      }
+    }),
+    new ExpressInstrumentation()
+  ],
+  tracerProvider: provider
+})
+
+const express = require('express')
+const http = require('http')
+
+// app code below ....
+```
+
+## Configuration
+
+To avoid duplicate spans, disable the corresponding Datadog instrumentations.
+
+Set the `DD_TRACE_DISABLED_INSTRUMENTATIONS` environment variable to a comma-separated list of integration names to disable. For example, to disable Datadog instrumentations for the libraries used in the Setup example, set the following:
+
+```sh
+DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net
+```
+
+[17]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/metapackages/auto-instrumentations-node#supported-instrumentations
+[18]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/#setup
+
+{{% /tab %}}
 
 <!-- {{% tab "PHP" %}}
 
@@ -211,13 +270,33 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 {{% /tab %}} -->
 
-<!-- {{% tab ".NET" %}}
+{{% tab ".NET" %}}
 
 ## Compatibility requirements
 
+The Datadog .NET SDK supports library instrumentations that come with [built-in OpenTelemetry support][1].
+
 ## Setup
 
-{{% /tab %}} -->
+To use Opentelemetry instrumentation libraries with the Datadog .NET SDK:
+
+1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`
+
+## Verified OpenTelemetry Instrumentation Libraries
+
+| Library           | Versions | NuGet package                     | Integration Name     | Setup instructions            |
+| ----------------- | -------- | --------------------------------- | -------------------- | ----------------------------- |
+| Azure Service Bus | 7.14.0+ | [Azure.Messaging.ServiceBus][2]  | `AzureServiceBus`    | See `Azure SDK` section below |
+
+### Azure SDK
+
+The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][3] for more details.
+
+[1]: https://opentelemetry.io/docs/languages/net/libraries/#use-natively-instrumented-libraries
+[2]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[3]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+{{% /tab %}}
 
 {{< /tabs >}}
 

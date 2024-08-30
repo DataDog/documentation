@@ -47,20 +47,9 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 ### Declare the SDK as a dependency
 
-Declare the library as a dependency depending on your package manager:
+Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogRUM'
-```
-
-
-[1]: https://cocoapods.org/
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -74,6 +63,17 @@ DatadogCore
 DatadogRUM
 ```
 
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogRUM'
+```
+
+
+[1]: https://cocoapods.org/
 {{% /tab %}}
 {{% tab "Carthage" %}}
 
@@ -347,24 +347,24 @@ To monitor requests sent from the `URLSession` instance as resources, enable `UR
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[SessionDelegate alloc] init]
+                                                      delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
@@ -395,7 +395,7 @@ configuration.sessionSampleRate = 50;
 
 ### Instrument views
 
-The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -418,7 +418,7 @@ The `trackRUMView(name:)` method starts and stops a RUM view when the `SwiftUI` 
 
 ### Instrument tap actions
 
-The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 

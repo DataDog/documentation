@@ -19,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md
 display_on_public_website: true
@@ -26,9 +27,8 @@ draft: false
 git_integration_title: windows_service
 integration_id: windows-service
 integration_title: Windows Services
-integration_version: 4.8.0
+integration_version: 4.9.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: windows_service
 public_title: Windows Services
@@ -40,10 +40,18 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows Service の状態を監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-windows-server-2012
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/windows-server-monitoring
   support: README.md#Support
   title: Windows Services
 ---
@@ -55,13 +63,13 @@ tile:
 
 このチェックは、Windows Service の状態を監視し、サービスチェックを Datadog に送信します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Windows Service チェックは [Datadog Agent][1] パッケージに含まれています。Windows ホストに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 構成は、[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダ内の `windows_service.d/conf.yaml` ファイルに格納されています。利用可能なすべての構成オプションについては、[windows_service.d/conf.yaml のサンプル][3]を参照してください。コンフィギュレーションファイルの編集が終わったら、[Agent を再起動][4]して新しい構成を読み込んでください。
 
@@ -124,7 +132,7 @@ services:
     trigger_start: true
 ```
 
-#### Lambda のトレースされた起動の 1 時間単位使用量の取得
+#### タグ
 
 このチェックは `windows_service:<SERVICE>` タグ内の各サービスチェックに対して、Windows サービス名を自動的にタグ付けします。タグ内の `<SERVICE>` 名は小文字を使用し、特殊文字はアンダースコアに置き換えられます。詳しくは、[タグの概要][7]を参照してください。
 
@@ -132,25 +140,27 @@ services:
 
 Agent バージョン 7.40 以降、チェックはサービスのスタートアップタイプを示すために、各サービスチェックに `windows_service_startup_type:<STARTUP_TYPE>` タグを追加できます。各サービスチェックにこのタグを含めるには、`windows_service_startup_type_tag` オプションを設定します。
 
+Beginning with Agent version 7.55, the check can add a `display_name:<DISPLAY_NAME>` tag to each service check to indicate the display name of the service. Set the `collect_display_name_as_tag` option to `true` to include this tag with each service check.
+
 ### 検証
 
 [Agent の status サブコマンドを実行][9]し、**Checks** セクションで `windows_service` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Windows Service チェックには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Windows Service チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "windows_service" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

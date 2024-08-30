@@ -129,7 +129,7 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 ### Pulumi
 Pulumi 用の Datadog [リソースプロバイダー][67]を使用すると、Datadog リソースを構成することができます。
 
-### Windows
+### SaltStack
 
 * [Datadog SaltStack Formula][56]
 * [Luca Cipriani][58] が作成した [Datadog SaltStack][57]。
@@ -193,7 +193,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd

@@ -14,114 +14,86 @@ further_reading:
   text: "Custom Integrations"
 ---
 
-The Datadog Agent has two ways to collect logs: from Kubernetes log files, or from the Docker socket. Datadog recommends using Kubernetes log files when:
+The Datadog Agent has a few ways to collect logs in containerized environments:
 
-* Docker is not the runtime, **or**
-* More than 10 containers are used on each node
+- Accessing Kubernetes log files stored in `/var/log/pods`
+- Accessing Docker log files stored in `/var/lib/docker/containers`
+- Requesting Docker logs from the Docker API and Docker socket
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same node, collecting logs through the Docker socket may consume more resources than collecting logs through Kubernetes log files. 
+Datadog recommends that you use the log file approach for log collection because it is more resource-efficient. Additionally: in Kubernetes, most orchestrators use containerd as the container runtime instead of Docker, forcing the use of the log file method. Datadog's documentation uses the log file method by default. See [Docker log collection][1] and [Kubernetes log collection][2] for how to collect logs from log files.
 
-This page discusses log collection with the Docker socket. To use Kubernetes log files, see [Kubernetes log collection][1].
+This page discusses log collection with the Docker socket.
 
 ## Configuration
 
 Mount the Docker socket into the Datadog Agent:
 
-```yaml
-  # (...)
-    env:
-      - {name: "DD_CRI_SOCKET_PATH", value: "/host/var/run/docker.sock"}
-      - {name: "DOCKER_HOST", value: "unix:///host/var/run/docker.sock"}
-  # (...)
-    volumeMounts:
-    #  (...)
-      - name: dockersocketdir
-        mountPath: /host/var/run
-  # (...)
-  volumes:
-    # (...)
-    - hostPath:
-        path: /var/run
-      name: dockersocketdir
-  # (...)
+{{< tabs >}}
+{{% tab "Docker" %}}
+Ensure that the Docker socket (`/var/run/docker.sock`) is mounted into the Agent container. You can see the [Docker log collection docs][1] for samples. However, leave out the mount point for `/var/lib/docker/containers`.
+
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+
+```shell
+docker run -d --name datadog-agent \
+    --cgroupns host \
+    --pid host \
+    -e DD_API_KEY=<DATADOG_API_KEY> \
+    -e DD_LOGS_ENABLED=true \
+    -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+    -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+    -e DD_SITE=<DD_SITE>
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    -v /proc/:/host/proc/:ro \
+    -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+    gcr.io/datadoghq/agent:latest
 ```
 
-**Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the Agent from recovering after a Docker daemon restart.
+[1]: /containers/docker/log
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+In Kubernetes, the Datadog Operator and Helm chart mount the `/var/run` directory into the Datadog Agent (by default) to give access to `/var/run/docker.sock`. You must disable `containerCollectUsingFiles` in the Operator and Helm Chart to opt-in to this method.
 
-### Kubernetes
+**Note**: If your container runtime is not Docker (for example, CRI-O or containerd) this method does not work for log collection.
 
-To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
+#### Datadog Operator
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+      containerCollectUsingFiles: false
+```
+
+#### Helm
+```yaml
+datadog:
+  #(...)
+  logs:
+    enabled: true
+    containerCollectAll: true
+    containerCollectUsingFiles: false
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Autodiscovery
+After the socket is mounted, the same rules apply for the Agent for log discovery, tagging, and any custom Autodiscovery-based log integrations. The Agent accesses the underlying logs through the Docker socket instead.
+
+See the original docs for more information on setting up different Autodiscovery configurations for [Docker][1] and [Kubernetes][2].
 
 ### Short lived containers {#short-lived-container-socket}
 
 For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) once every second.
-Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
+Since Agent v6.14+, the Agent collects logs for all containers (running or stopped). This means that short-lived container logs that have started and stopped in the past second are still collected, as long as they are not removed.
 
-## Autodiscovery
-{{< tabs >}}
-{{% tab "Local files" %}}
-The Agent looks for Autodiscovery templates in the mounted `/conf.d` directory.
-
-The advantage of storing templates as local files (and mounting them inside the containerized Agent) is that this does not require an external service or a specific orchestration platform.
-
-The disadvantage is that you must restart your Agent containers each time you change, add, or remove templates.
-
-##### Custom auto-configuration files
-
-If you need a custom Datadog integration configuration to enable extra options, use different container identifiers—or use template variable indexing and write your own auto-configuration file:
-
-1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host and add your custom auto-configuration.
-   ```text
-   ad_identifiers:
-     <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-
-   logs:
-     <LOGS_CONFIG>
-   ```
-   See the [Autodiscovery Container Identifiers][1] documentation for information about `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
-2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
-
-[1]: /agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "ConfigMaps" %}}
-On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
-
-```text
-apiVersion: v1
-metadata:
-  name: "<NAME>-config-map"
-  namespace: default
-data:
-  <INTEGRATION_NAME>-config: |-
-    ad_identifiers:
-      <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-    logs:
-      <LOGS_CONFIG>
-```
-
-See the [Autodiscovery Container Identifiers][3] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
-
-[1]: /agent/kubernetes/integrations/#configmap
-[2]: /agent/kubernetes/integrations/
-[3]: /agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the Agent container.
-
-  ```yaml
-  confd:
-    <INTEGRATION_NAME>.yaml: |-
-      ad_identifiers:
-        - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-      init_config:
-      instances:
-        (...)
-      logs:
-        <LOGS_CONFIG>
-  ```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-[1]: /containers/kubernetes/log
+[1]: /containers/docker/log
+[2]: /containers/kubernetes/log

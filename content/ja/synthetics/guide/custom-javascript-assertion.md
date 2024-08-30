@@ -19,7 +19,7 @@ title: ブラウザテストでカスタム JavaScript アサーションを使�
 
 カスタム JavaScript を使用してアサーションを作成するには
 
-1. **Assertion** をクリックし、**Test your UI with custom JavaScript** を選択します。
+1. Click **Assertion** and select **Test custom JavaScript assertion**.
 2. アサーションの本文を記述します。
 3. オプションで、UI でターゲットとなる要素を選択します。
 4. **Apply** をクリックします。
@@ -46,7 +46,7 @@ return element.length === 0;
 
 ## ラジオボタンがチェックされたことをアサートする
 
-ラジオボタンがチェックされていることを確認するには、本文アサーションで `return document.querySelector("<SELECTORS>").checked = true;` を使用します。
+To verify that a radio button is checked, use `return document.querySelector("<SELECTORS>").checked === true;` in the body assertion.
 
 ## 指定されたローカルストレージの値を設定する
 
@@ -90,7 +90,7 @@ return await loadingTask.promise.then(function(pdf) {
 });
 {{< /code-block >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
