@@ -18,7 +18,7 @@ title: ブラウザテストのステップ
 
 ## 自動記録されたステップ
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
+**Start Recording** をクリックすると、[Datadog ブラウザテストレコーダー拡張機能][3]が自動的に Web サイト上の操作手順を検出し、記録します。
 
 ### クリック
 
@@ -65,7 +65,7 @@ Datadog は、アップロードなどアプリケーション上で実行した
 
 テストが期待通りの状態で終了することを確認するために、ブラウザテストは**アサーション**で終了させる必要があります。
 
-{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="ブラウザテストステップでのアサーションのオプション" style="width:70%;" >}}
 
 いくつかのアサーションは、アクティブなページ、つまりユーザーがページ要素上で**クリック**や**アサーション**など、最後に操作したページを検証します。
 
@@ -88,11 +88,11 @@ Datadog は、アップロードなどアプリケーション上で実行した
 
 ブラウザテストが正しい要素をターゲットにするように、ドロップダウンメニューから `CSS` または `XPath 1.0` を選択し、セレクタを追加してユーザーロケータを設定します。**Test** をクリックします。
 
-#### Test the state of a checkbox or radio button
+#### チェックボックスやラジオボタンの状態をテストする
 
-Create this assertion step to have your browser test select a page element and validate the state of the assertion (unchecked or checked).
+このアサーションステップを作成することで、ブラウザテストでページ要素を選択し、アサーションの状態 (未チェックまたはチェック済み) を検証することができます。
 
-{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="ブラウザテストステップでのアサーションのオプション" style="width:60%;" >}}
 
 {{% /tab %}}
 {{% tab "アクティブページコンテンツのテスト" %}}
@@ -127,7 +127,7 @@ Create this assertion step to have your browser test select a page element and v
 
 JavaScript アサーション関数には以下のパラメーターが含まれており、return ステートメントが必要です。
 
-* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean. If a falsy value is returned, the test step fails.
+* `return` (必須) ステートメントは、テストステップが成功するためにアサーションが満たす必要がある条件を反映します。任意のタイプを返すことができますが、値はブール値として自動的にキャストされます。偽の値が返された場合、テストステップは失敗します。
 
 * `vars` (オプション): ブラウザテストの[変数][2]を含む文字列。JavaScript スニペットでブラウザテスト変数を参照するには、`vars.<YOUR_VARIABLE>` を使用します。たとえば、ブラウザテストに `USERNAME` 変数が含まれている場合は、`vars.USERNAME` を使用して JavaScript スニペットでそれを呼び出します。
 
@@ -465,16 +465,16 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 HTTP リクエストや JavaScript ステップの変数など、実行時にのみ計算される変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` を使用する `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に一貫して置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
 
-## Edit a recording 
+## 記録を編集する
 
-To edit a browser recording after it's saved:
+ブラウザの記録を保存後に編集するには
 
-- Navigate to [Synthetics > Tests.][14]
-- Click on a previously saved browser test.
-- Click the gear icon on the top right hand corner and then click "edit recording".
-- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+- [Synthetics > Tests][14] に移動します。
+- 以前に保存したブラウザテストをクリックします。
+- 右上隅にある歯車アイコンをクリックし、"edit recording" をクリックします。
+- 削除または再生する複数のステップまたは単一のステップを選択し、**Save &amp; Quit** をクリックします。
 
-{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
+{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="ブラウザ記録の編集と、複数選択機能の使用"="70%" >}}
 
 
 ## その他の参考資料
