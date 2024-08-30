@@ -18,7 +18,7 @@ Product Analytics is in limited availability. To request access, complete the fo
 
 ## Overview
 
-{{< img src="product_analytics/overview.png" alt="Landing page of Product Analytics.">}}
+{{< img src="product_analytics/overview-1.png" alt="Landing page of Product Analytics.">}}
 
 Product Analytics helps you gain insight into user behavior and make data-driven decisions. It can help solve the following types of use cases in your application:
 

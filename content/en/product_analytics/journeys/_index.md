@@ -15,27 +15,27 @@ All features in Product Analytics are in limited availability. To request access
 
 Journeys help you track user journeys from end-to-end to discover the different ways users navigate through your application. You can extract the data to design your app in a way that users actually use it - not how you think they use it.
 
-## Funnel analysis
-
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
-
-With [funnel analysis][1], you can understand the end-to-end conversion of a single key workflow. You can get a detailed drilldown in the sidepanel to understand why conversation rates are what they are. For example, was there a performance issue that caused user dropoff? Are they experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
-
 ## Pathways
 
-{{< img src="/product_analytics/journeys/pa-pathways.png" alt="Use Pathways to visualize all user journeys across your application to analyze the critical path">}}
+{{< img src="/product_analytics/journeys/pa-pathways-2.png" alt="Use Pathways to visualize all user journeys across your application to analyze the critical path">}}
 
-[Pathway diagrams][2] allow you to visualize all user journeys across your application to identify the most important contributions to a flow.
+[Pathway diagrams][1] allow you to visualize all user journeys across your application to identify the most important contributions to a flow.
+
+## Funnel analysis
+
+{{< img src="/product_analytics/journeys/pa-funnel-2.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+
+With [funnel analysis][2], you can understand the end-to-end conversion of a single key workflow. You can get a detailed drilldown in the sidepanel to understand why conversation rates are what they are. For example, was there a performance issue that caused user dropoff? Are they experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
 
 ## Conversion
 
-{{< img src="/product_analytics/journeys/pa-conversions-1.png" alt="View conversion rate values over time in graphs ">}}
+{{< img src="/product_analytics/journeys/pa-conversions-2.png" alt="View conversion rate values over time in graphs ">}}
 
 You can view [conversion rates][3] over time by showing the conversion rate value in graphs.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/journeys/funnel_analysis
-[2]: /product_analytics/journeys/pathways
+[1]: /product_analytics/journeys/pathways
+[2]: /product_analytics/journeys/funnel_analysis
 [3]: https://app.datadoghq.com/product-analytics/user-journey/conversion?
