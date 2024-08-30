@@ -36,9 +36,9 @@ Datadog generates a set of recommendations by combining your observability data 
 
 Recommendations are run on a daily basis, and are automatically refreshed in your account. When new recommendations are released, Datadog automatically adds them to your account.
 
-### Terminate resource recommendations
+### Unused resource recommendations
 
-Datadog scans your cloud environment to identify and surface orphaned resources that can be removed.
+Datadog identifies resources that are running on legacy hardware or are not utilized efficiently in your cloud environment. You can consider upgrading or removing these resources to reduce your costs and improve the performance of your resources.
 
 Unused EC2 Instances
 : EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization.
@@ -85,7 +85,19 @@ Unused NAT Gateway
 Idle Elastic IP Address
 : Elastic IP addresses with idle charges in your AWS cost and usage report.
 
-### Migrate resource recommendations
+Unused DynamoDB Recommendations
+: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
+
+Unused DynamoDB Global Secondary Index
+: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
+
+ASGs with legacy instance types
+: An autoscaling group that includes legacy instance types.
+
+DynamoDB Delete Extra On-Demand Backups
+: A DynamoDB table has charges for more than 2 on-demand backups.
+
+### Previous generation resource recommendations
 
 Datadog surfaces resources that are running on legacy hardware, which you can consider upgrading to reduce your costs and improve the performance of your resources.
 
@@ -98,7 +110,10 @@ GP2 EBS Volumes
 I01 EBS Volumes
 : EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement.
 
-### Rightsize resource recommendations
+Extended Support for RDS
+: An RDS running an engine version that is no longer supported and incurring [extended support charges][7].
+
+### Over-provisioned resource recommendations
 
 Datadog identifies individual resources that are under-utilized or over-provisioned, which you can consider adjusting the size and configuration to reduce your costs and improve the performance of your resources.
 
@@ -113,10 +128,6 @@ Over-provisioned EBS Volume Throughput
 
 Over-provisioned EBS Volume IOPS
 : EBS Volumes where the amount of IOPS exceeds what is being used.
-
-### Over-provisioned recommendations
-
-Datadog identifies individual resources that are over-provisioned. You can consider adjusting the size and configuration to reduce your costs and improve the performance of your resources.
 
 RDS Over-provisioned IOPS
 : An RDS instance using less than 80% of the provisioned IOPS for reads and writes.
@@ -169,25 +180,6 @@ Migrate DynamoDB to Standard Table Class
 
 Migrate DynamoDB to Infrequent Access Table Class
 : Migrating to the Infrequent Access (IA) table class offers more potential savings from storage rates compared to the additional costs from capacity rates.
-
-### Legacy or unused recommendations
-
-Datadog identifies resources that are running on legacy hardware or are not utilized efficiently. You can consider upgrading or removing these resources to reduce your costs and improve the performance of your resources.
-
-Extended Support for RDS
-: An RDS running an engine version that is no longer supported and incurring [extended support charges][7].
-
-Unused DynamoDB recommendations
-: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
-
-Unused DynamoDB Global Secondary Index
-: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
-
-ASGs with legacy instance types
-: An autoscaling group that includes legacy instance types.
-
-DynamoDB Delete Extra On-Demand Backups
-: A DynamoDB table has charges for more than 2 on-demand backups.
 
 ### Architecture recommendations
 
