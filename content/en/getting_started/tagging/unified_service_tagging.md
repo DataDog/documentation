@@ -267,7 +267,7 @@ docker run -e DD_ENV="<ENV>" \
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels:
 
 ```yaml
 com.datadoghq.tags.env
@@ -336,7 +336,7 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {
