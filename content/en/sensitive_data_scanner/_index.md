@@ -322,7 +322,7 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 
 <div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
 
-If you have [Sensitive Data Scanner][6] and [Cloud Security Management][7] enabled, you can use Data Security to locate sensitive data and fix security issues impacting AWS S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][6] and [Cloud Security Management][7] enabled, you can use Data Security to locate sensitive data and fix security issues impacting Amazon S3 buckets and RDS instances.
 
 Data Security scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Data Security leverages rules provided by Sensitive Data Scanner to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Datastores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
