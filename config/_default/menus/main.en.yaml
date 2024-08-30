@@ -5181,7 +5181,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Agentless Scanning
+    - name: Enable Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
@@ -5201,31 +5201,31 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_terraform
       weight: 10002
-    - name: Agent
+    - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
       identifier: csm_setup_agent
       weight: 102
-    - name: CloudTrail Logs
-      url: security/cloud_security_management/setup/cloudtrail_logs
+    - name: Set Up Additional Features
+      url: security/cloud_security_management/setup/additional_features
       parent: csm_setup
-      identifier: csm_setup_cloudtrail_logs
+      identifier: csm_setup_additional_features
       weight: 103
+    - name: CloudTrail Logs
+      url: security/cloud_security_management/setup/additional_features/cloudtrail_logs
+      parent: csm_setup_additional_features
+      identifier: csm_setup_cloudtrail_logs
+      weight: 10010
     - name: IaC Remediation
-      url: security/cloud_security_management/setup/iac_remediation
-      parent: csm_setup
+      url: security/cloud_security_management/setup/additional_features/iac_remediation
+      parent: csm_setup_additional_features
       identifier: csm_setup_iac_remediation
-      weight: 104
-    - name: Cloud Accounts
-      url: security/cloud_security_management/setup/agent/cloud_accounts
-      parent: csm_setup_agent
+      weight: 10011
+    - name: Azure and GCP
+      url: security/cloud_security_management/setup/additional_features/cloud_accounts
+      parent: csm_setup_additional_features
       identifier: csm_setup_cloud_accounts
-      weight: 1000
-    - name: Serverless
-      url: security/cloud_security_management/setup/agent/serverless?tab=amazonecs#cloud-security-management
-      parent: csm_setup_agent
-      identifier: csm_setup_serverless
-      weight: 1002
+      weight: 10012
     - name: Threats
       url: security/threats/
       parent: csm

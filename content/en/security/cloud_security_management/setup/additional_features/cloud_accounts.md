@@ -1,5 +1,5 @@
 ---
-title: Setting up Cloud Security Management on Cloud Accounts
+title: Deploying Cloud Security Management on Azure and GCP
 aliases:
   - /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts

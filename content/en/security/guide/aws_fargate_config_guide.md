@@ -3,6 +3,7 @@ title: AWS Fargate Configuration Guide for Datadog Security
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate
+  - /security/cloud_security_management/setup/serverless
 further_reading:
 - link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
   tag: "Blog"
