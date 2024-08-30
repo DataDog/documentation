@@ -11,7 +11,8 @@ import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagem
 import { resolvePagePrefs } from '../prefsResolution';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
-import { s } from 'markdoc-static-compiler/dist/src/schema';
+import { PageTemplate } from './templates/PageTemplate';
+import { renderToString } from 'react-dom/server';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -64,12 +65,6 @@ export class PageBuilder {
       defaultValsByPrefId
     });
 
-    const filterSelectorHtml = this.#getFilterSelectorHtml({
-      frontmatter: args.parsedFile.frontmatter,
-      prefOptionsConfig: args.prefOptionsConfig,
-      defaultValsByPrefId
-    });
-
     const pageInitScript = this.#getPageInitScript({
       pageBuildArgs: args,
       defaultValsByPrefId,
@@ -84,36 +79,35 @@ export class PageBuilder {
 
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 
-    let pageContents = '';
-    if (args.parsedFile.frontmatter.page_preferences) {
-      pageContents = `
-<div id="mdoc-selector">${filterSelectorHtml}</div>
-<div id="mdoc-content" class="customizable">${articleHtml}</div>
-<div x-init='${pageInitScript}'></div>
-`;
-    } else {
-      pageContents = `<div id="markdoc-content">${articleHtml}</div><div x-init='${pageInitScript}'></div>`;
-    }
+    const pageJsx = PageTemplate({
+      frontmatter: args.parsedFile.frontmatter,
+      prefOptionsConfig: args.prefOptionsConfig,
+      valsByPrefId: defaultValsByPrefId,
+      articleHtml
+    });
+
+    let pageHtml = renderToString(pageJsx);
+    pageHtml += `\n<div x-init='${pageInitScript}'></div>`;
 
     if (args.includeAssetsInline) {
-      pageContents = this.#addInlineAssets({
-        pageContents,
+      pageHtml = this.#addInlineAssets({
+        pageContents: pageHtml,
         debug: args.debug
       });
     }
 
     if (args.debug) {
-      pageContents = prettier.format(pageContents, { parser: 'html' });
+      pageHtml = prettier.format(pageHtml, { parser: 'html' });
     }
 
     if (args.outputFormat === 'markdown') {
-      pageContents = this.#addFrontmatter({
-        pageContents,
+      pageHtml = this.#addFrontmatter({
+        pageContents: pageHtml,
         frontmatter: args.parsedFile.frontmatter
       });
     }
 
-    return pageContents;
+    return pageHtml;
   }
 
   /**

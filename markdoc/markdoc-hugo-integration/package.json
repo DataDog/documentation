@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "chroma-highlight": "^2.4.2",
+        "interweave": "^13.1.0",
         "js-yaml": "^4.1.0",
         "lit": "^3.1.4",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",

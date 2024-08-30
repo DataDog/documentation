@@ -3,12 +3,13 @@ import { buildFilterSelectorUi } from '../components/ContentFilter';
 import { Frontmatter } from '../../../schemas/yaml/frontMatter';
 import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
 
-export const DocumentTemplate = (props: {
+export const PageTemplate = (props: {
   frontmatter: Frontmatter;
   prefOptionsConfig: PrefOptionsConfig;
   valsByPrefId: Record<string, string>;
+  articleHtml: string;
 }) => {
-  const { frontmatter, prefOptionsConfig, valsByPrefId } = props;
+  const { frontmatter, prefOptionsConfig, valsByPrefId, articleHtml } = props;
 
   return (
     <>
@@ -16,6 +17,11 @@ export const DocumentTemplate = (props: {
         frontmatter={frontmatter}
         prefOptionsConfig={prefOptionsConfig}
         valsByPrefId={valsByPrefId}
+      />
+      <div
+        id="mdoc-content"
+        className="customizable"
+        dangerouslySetInnerHTML={{ __html: articleHtml }}
       />
     </>
   );
@@ -28,22 +34,22 @@ function FilterSelectorTemplate(props: {
 }) {
   const { frontmatter, prefOptionsConfig, valsByPrefId } = props;
 
+  if (!frontmatter.page_preferences) {
+    return null;
+  }
+
   return (
-    <>
-      {frontmatter.page_preferences && (
-        <div
-          id="mdoc-selector"
-          dangerouslySetInnerHTML={{
-            __html: buildFilterSelectorUi(
-              resolvePagePrefs({
-                pagePrefsConfig: frontmatter.page_preferences,
-                prefOptionsConfig: prefOptionsConfig,
-                valsByPrefId
-              })
-            )
-          }}
-        />
-      )}
-    </>
+    <div
+      id="mdoc-selector"
+      dangerouslySetInnerHTML={{
+        __html: buildFilterSelectorUi(
+          resolvePagePrefs({
+            pagePrefsConfig: frontmatter.page_preferences,
+            prefOptionsConfig: prefOptionsConfig,
+            valsByPrefId
+          })
+        )
+      }}
+    />
   );
 }
