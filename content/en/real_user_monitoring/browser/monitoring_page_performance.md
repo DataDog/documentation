@@ -147,48 +147,48 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 
 ## Add your own performance timing
 
-### Custom Vitals
+### Custom vitals
 
-The `customVital` API allows you to measure the performance of your application at the component level. You can use custom vitals to measure how quickly part of your page renders, or how long it takes for a component to respond to a user interaction.
+Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction.
 
-#### startDurationVital and stopDurationVital
+#### Start and stop duration measurements
 
-You can start a duration measurement by calling `startDurationVital` and stopping it later in your code with `stopDurationVital`:
+Start a duration measurement by calling `startDurationVital` and stop a measurement with `stopDurationVital`:
 
 ```javascript
 window.DD_RUM.startDurationVital("dropdownRendering")
 window.DD_RUM.stopDurationVital("dropdownRendering")
 ```
 
-Once you call the `stopDurationVital` method, the custom vital duration is sent to Datadog and can be queried using `@vital.name:dropdownRendering`. Let's use `@vital.duration:>10` to demonstrate how to filter for long durations.
+Once you call the `stopDurationVital` method, the custom vital duration is sent to Datadog and can be queried using `@vital.name:dropdownRendering`. You can also filter by duration, for example with `@vital.duration:>10`.
 
-#### reference and description
+#### Use references and descriptions
 
-Additionally, you can use the reference returned by `startDurationVital` and specify a `description` string to differentiate between different instances of the same custom vital, like when a component is used on multiple pages. For example, to track the duration of `dropdownRendering` in the `login` page:
+Use the reference returned by `startDurationVital` and specify a `description` string to differentiate between instances of the same custom vital across multiple pages. For example, to track the duration of `dropdownRendering` in the `login` page:
 
 ```javascript
 const reference = window.DD_RUM.startDurationVital("dropdownRendering", { description: "login" })
 window.DD_RUM.stopDurationVital(reference)
 ```
 
-This allows you to view the same component's rendering behavior across different pages by grouping by `@vital.description`.
+This code groups by `@vital.description` so you can track the same component's rendering behavior across different pages.
 
-You can also add additional context to your custom vital by using the `context` property:
+You can also add context to your custom vital using the `context` property:
 
 ```javascript
 window.DD_RUM.startDurationVital("dropdownRendering", {context: { clientId: "xxx" }})
 window.DD_RUM.stopDurationVital("dropdownRendering")
 ```
 
-#### addDurationVital
+#### Report a custom vital with `addDurationVital`
 
-Alternatively, you can report a custom vital in a single operation using `addDurationVital`:
+Instead of setting custom vital variables individually, you can report a custom vital in a single operation using `addDurationVital`:
 
 ```javascript
 window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
 ```
 
-### addTiming
+### Add custom performance timing
 
 On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 
