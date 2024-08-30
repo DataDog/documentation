@@ -42,7 +42,7 @@ To learn more about Agentless Scanning, see [Cloud Security Management Agentless
 
 ## Deploy the Agent for additional coverage
 
-For broader coverage and additional functionalities, deploy the Agent to your **X, Y, and Z**. The following table outlines the improvements offered by Agent-based deployments.
+For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, se [Setting up Cloud Security Management on the Agent][3].
 
 | Feature                          | CSM Pro Agentless | CSM Pro Agentless + Agent          |
 |----------------------------------|-------------------|------------------------------------|
@@ -61,11 +61,11 @@ For broader coverage and additional functionalities, deploy the Agent to your **
 
 ### AWS CloudTrail Logs
 
-AWS CloudTrail Logs allows you to get the most out of CSM Identity Risks. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions.
+AWS CloudTrail Logs allows you to get the most out of CSM Identity Risks. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions. For more information, see [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
 
-### Infrastructure as Code (IaC) remediation
+### IaC remediation
 
-This is placeholder text.
+With Infrastructure as Code (IaC) remediation, you can use Terraform to open a pull request in GitHub, applying code changes that fix a misconfiguration or identity risk. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
 
 ## Further reading
 
@@ -73,6 +73,6 @@ This is placeholder text.
 
 [1]: /security/cloud_security_management/setup/agentless_scanning
 [2]: /security/cloud_security_management/agentless_scanning
-[3]: /security/cloud_security_management/setup/custom_onboarding
-[4]: /security/cloud_security_management/agentless_scanning
-[5]: /security/cloud_security_management/setup/agentless_scanning
+[3]: /security/cloud_security_management/setup/agent
+[4]: /security/cloud_security_management/setup/cloudtrail_logs
+[5]: /security/cloud_security_management/setup/iac_remediation
