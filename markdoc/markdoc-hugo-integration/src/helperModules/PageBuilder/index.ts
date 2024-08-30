@@ -157,7 +157,7 @@ export class PageBuilder {
   }
 
   /**
-   * Provide the JavaScript code for the client-side renderer.
+   * Provide the JavaScript code for the ClientPrefsManager.
    */
   static getClientPrefsManagerScriptStr(debug: boolean) {
     return minifiedClientPrefsManagerScriptStr;
@@ -172,7 +172,7 @@ export class PageBuilder {
   }
 
   /**
-   * Build the snippet of JavaScript that is used to initialize the client-side renderer
+   * Build the snippet of JavaScript that is used to initialize the ClientPrefsManager
    * with all of the necessary data required to re-render the page when the user changes
    * a preference setting.
    */
@@ -181,66 +181,39 @@ export class PageBuilder {
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
   }): string {
-    // If debug mode is enabled, pretty-print data structures
-    let stringificationSpace: undefined | number = undefined;
-    if (p.pageBuildArgs.debug) {
-      stringificationSpace = 2;
+    const initFunctionName = 'initPage';
+    const docReadyExecutionScript = `if (document.readyState === "complete" || document.readyState === "interactive") {
+  setTimeout(initPage, 1);
+} else {
+  document.addEventListener("DOMContentLoaded", ${initFunctionName});
+}
+`;
+
+    // If the page does not have any preferences,
+    // don't pass any data to the prefs manager
+    if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
+      return this.#removeLineBreaks(
+        `const ${initFunctionName} = () => clientPrefsManager.initialize({});\n` +
+          docReadyExecutionScript
+      );
     }
 
-    let initFunctionStr = '';
-    if (!p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-      initFunctionStr = `const initPage = () => clientPrefsManager.initialize({});\n`;
-    } else {
-      let pagePrefsConfigStr;
-
-      if (p.pageBuildArgs.parsedFile.frontmatter.page_preferences) {
-        pagePrefsConfigStr = JSON.stringify(
-          YamlConfigParser.minifyPagePrefsConfig(
-            p.pageBuildArgs.parsedFile.frontmatter.page_preferences
-          ),
-          null,
-          stringificationSpace
-        );
-      }
-
-      initFunctionStr = `const initPage = () => { 
-  clientPrefsManager.initialize({
-    pagePrefsConfig: ${pagePrefsConfigStr},
+    const initFunctionStr = `const ${initFunctionName} = () => { 
+clientPrefsManager.initialize({
+    pagePrefsConfig: ${JSON.stringify(
+      YamlConfigParser.minifyPagePrefsConfig(
+        p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+      )
+    )},
     prefOptionsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig),
-      null,
-      stringificationSpace
+      YamlConfigParser.minifyPrefOptionsConfig(p.pageBuildArgs.prefOptionsConfig)
     )},
-    selectedValsByPrefId: ${JSON.stringify(
-      p.defaultValsByPrefId,
-      null,
-      stringificationSpace
-    )},
-    ifFunctionsByRef: ${JSON.stringify(
-      getMinifiedIfFunctionsByRef(p.renderableTree),
-      null,
-      stringificationSpace
-    )}
+    selectedValsByPrefId: ${JSON.stringify(p.defaultValsByPrefId)},
+    ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
   });
 };\n`;
-    }
 
-    let script = `
-    ${initFunctionStr}
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-      setTimeout(initPage, 1);
-    } else {
-      document.addEventListener("DOMContentLoaded", initPage);
-    }
-  `;
-
-    if (p.pageBuildArgs.debug) {
-      script = prettier.format(script, { parser: 'html' });
-    } else {
-      script = this.#removeLineBreaks(script);
-    }
-
-    return script;
+    return this.#removeLineBreaks(initFunctionStr + docReadyExecutionScript);
   }
 
   /**

@@ -147,4 +147,4 @@ title: Code Block
   </ol>
 </article>
 </div>
-<div x-init='    const initPage = () => {   clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],    prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},    selectedValsByPrefId: {"color":"blue"},    ifFunctionsByRef: {}  });};    if (document.readyState === "complete" || document.readyState === "interactive") {      setTimeout(initPage, 1);    } else {      document.addEventListener("DOMContentLoaded", initPage);    }  '></div>
+<div x-init='const initPage = () => { clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],    prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},    selectedValsByPrefId: {"color":"blue"},    ifFunctionsByRef: {}  });};if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
