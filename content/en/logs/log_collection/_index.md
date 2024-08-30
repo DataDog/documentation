@@ -327,6 +327,8 @@ The TCP endpoint is not supported for this site.
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
 
+There is an additional truncation that applies only to **indexed** logs. Messages truncate to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as logs grouped by that truncated field or similar operations that display that specific field.
+
 ### Attributes and tags
 
 Attributes prescribe [logs facets][9], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][10] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
