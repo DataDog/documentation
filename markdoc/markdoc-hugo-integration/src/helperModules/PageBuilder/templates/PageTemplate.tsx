@@ -3,6 +3,10 @@ import { buildFilterSelectorUi } from '../components/ContentFilter';
 import { Frontmatter } from '../../../schemas/yaml/frontMatter';
 import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
 
+/**
+ * A JSX template for the main content area of a page,
+ * including the filter selector if one should be present.
+ */
 export const PageTemplate = (props: {
   frontmatter: Frontmatter;
   prefOptionsConfig: PrefOptionsConfig;

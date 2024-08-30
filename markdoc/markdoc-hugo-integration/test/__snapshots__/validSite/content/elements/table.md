@@ -75,30 +75,18 @@ title: Table
       <tr>
         <td>
           <div class="code-snippet-wrapper">
-            <div
-              class="code-filename-wrapper d-flex justify-content-end collapsible"
-            >
-              <div class="js-code-block-visibility-toggle">
-                <div class="chevron chevron-down d-none"></div>
-                <div class="chevron chevron-up"></div>
-              </div>
-            </div>
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
             <div class="code-snippet">
               <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>
               </div>
-              <div class="highlight code-snippet js-appended-copy-btn">
-                <div class="code-button-wrapper position-absolute">
-                  <button class="btn text-primary js-copy-button">Copy</button>
-                </div>
-                <span>
-                  <pre
-                    tabindex="0"
-                    class="chroma"
-                  ><code><span class="line"><span class="cl"><span class="nb">puts</span> <span class="s2">&#34;Some code here.&#34;</span>
+              <span>
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="nb">puts</span> <span class="s2">&#34;Some code here.&#34;</span>
 </span></span></code></pre>
-                </span>
-              </div>
+              </span>
             </div>
           </div>
         </td>

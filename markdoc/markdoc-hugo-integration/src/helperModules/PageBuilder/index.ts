@@ -5,10 +5,8 @@ import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compil
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { buildFilterSelectorUi } from './components/ContentFilter';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
-import { resolvePagePrefs } from '../prefsResolution';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
@@ -16,7 +14,7 @@ import { renderToString } from 'react-dom/server';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
-const minifiedClientPrefsManagerScriptStr = fs.readFileSync(
+const clientPrefsManagerScriptStr = fs.readFileSync(
   path.resolve(__dirname, 'compiledScripts/markdoc-client-prefs-manager.min.js'),
   'utf8'
 );
@@ -91,25 +89,6 @@ export class PageBuilder {
     return str.replace(/(\r\n|\n|\r)/gm, '');
   }
 
-  static #getFilterSelectorHtml(p: {
-    frontmatter: Frontmatter;
-    prefOptionsConfig: PrefOptionsConfig;
-    defaultValsByPrefId: Record<string, string>;
-  }): string {
-    let filterSelectorHtml = '';
-
-    if (p.frontmatter.page_preferences) {
-      const resolvedPagePrefs = resolvePagePrefs({
-        pagePrefsConfig: p.frontmatter.page_preferences,
-        prefOptionsConfig: p.prefOptionsConfig,
-        valsByPrefId: p.defaultValsByPrefId
-      });
-      filterSelectorHtml = buildFilterSelectorUi(resolvedPagePrefs);
-    }
-
-    return filterSelectorHtml;
-  }
-
   /**
    * Provide the CSS styles for the rendered page.
    * If debug mode is enabled, include additional styles
@@ -123,7 +102,7 @@ export class PageBuilder {
    * Provide the JavaScript code for the ClientPrefsManager.
    */
   static getClientPrefsManagerScriptStr() {
-    return minifiedClientPrefsManagerScriptStr;
+    return clientPrefsManagerScriptStr;
   }
 
   /**

@@ -10,6 +10,21 @@ export const fenceDefinition = {
   attributes: {
     language: {
       type: String
+    },
+    filename: {
+      type: String
+    },
+    wrap: {
+      type: Boolean,
+      default: false
+    },
+    collapsible: {
+      type: Boolean,
+      default: false
+    },
+    disable_copy: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -50,6 +65,12 @@ export class Fence extends CustomHtmlComponent {
   }
 
   render() {
+    const defaultAttrs = {
+      wrap: false,
+      collapsible: false,
+      disable_copy: false
+    };
+
     // Remove any nested Markdoc tags, so they don't get highlighted
     const { sanitizedChildren, renderedChildTagsByUuid } =
       this.sanitizeChildrenForHighlighting();
@@ -61,12 +82,12 @@ export class Fence extends CustomHtmlComponent {
     });
 
     // TODO: Autodetect lexer if nothing is provided
-    const language = this.tag.attributes.language || 'plaintext';
+    const lang = this.tag.attributes.language || 'plaintext';
 
     // Highlight the sanitized contents
     formattedCodeContents = highlight(
       formattedCodeContents,
-      `--formatter html --html-only --lexer="${language}"`
+      `--formatter html --html-only --lexer="${lang}"`
     );
 
     // Restore any nested HTML that should be inside the highlighted code
@@ -75,7 +96,19 @@ export class Fence extends CustomHtmlComponent {
       formattedCodeContents = formattedCodeContents.replace(uuid, html);
     });
 
-    const jsx = CodeBlockTemplate({ highlightedContents: formattedCodeContents });
+    // Combine the default attributes with the author-provided attributes
+    const { language, ...rest } = this.tag.attributes;
+
+    const attrs = {
+      ...defaultAttrs,
+      ...rest
+    };
+
+    const jsx = CodeBlockTemplate({
+      highlightedContents: formattedCodeContents,
+      attrs
+    });
+
     return renderToString(jsx);
   }
 }
