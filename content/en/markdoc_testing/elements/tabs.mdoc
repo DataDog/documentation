@@ -46,14 +46,33 @@ Tabs can include partials, such as these two:
 
 {% partial file="google_link.mdoc" /%}
 
+### Code block
+
+This is a test code block.
+
+```javascript
+console.log('The DD site is {% region-param key="dd_site" code=true /%}');
+```
+
+Here's a code block in a list:
+
+1. Item 1 includes some code:
+    ```python {% filename="example.py" %}
+    # Function to compute the product of p1 and p2
+    print("The DD site is {% region-param key="dd_site" code=true /%}")
+    ```
+2. This is Item 2. It has no code.
+
 ### Links
 
 Links in Markdoc tabs behave the same as any other link on the page. There's no need to keep separate lists of links inside each tab. Example link: [Markdoc docs][1]. Tab 2 contains the second example link.
+
 {% /tab %}
 {% tab label="Tab 2" %}
 This is the content for Tab 2.
 
-Example link: [TypeScript docs][2].
+Here is the second example link: [TypeScript docs][2].
+
 {% /tab %}
 {% /tabs %}
 

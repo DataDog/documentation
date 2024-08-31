@@ -127,7 +127,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientPrefsManager.js": {
-      "bytes": 13778,
+      "bytes": 13770,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",

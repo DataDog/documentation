@@ -311,10 +311,10 @@ export class ClientPrefsManager {
       } else {
         this.addFilterSelectorEventListeners();
       }
-      this.populateRightNav();
-      this.revealPage();
     }
 
+    this.populateRightNav();
+    this.revealPage();
     this.updateEditButton();
 
     if (contentIsCustomizable) {

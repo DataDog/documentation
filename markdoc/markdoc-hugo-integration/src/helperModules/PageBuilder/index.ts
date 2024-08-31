@@ -136,7 +136,7 @@ export class PageBuilder {
     // don't pass any data to the prefs manager
     if (!p.parsedFile.frontmatter.page_preferences) {
       return this.#removeLineBreaks(
-        `const ${initFunctionName} = () => clientPrefsManager.initialize({});\n` +
+        `const ${initFunctionName} = () => clientPrefsManager.initialize({}); ` +
           docReadyExecutionScript
       );
     }
@@ -152,7 +152,7 @@ clientPrefsManager.initialize({
     selectedValsByPrefId: ${JSON.stringify(p.defaultValsByPrefId)},
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
   });
-};\n`;
+}; `;
 
     return this.#removeLineBreaks(initFunctionStr + docReadyExecutionScript);
   }

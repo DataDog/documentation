@@ -26,7 +26,7 @@ export const PageTemplate = (props: {
         id="mdoc-content"
         className="customizable"
         dangerouslySetInnerHTML={{ __html: articleHtml }}
-      />
+      ></div>
     </>
   );
 };
@@ -54,6 +54,6 @@ function FilterSelectorTemplate(props: {
           })
         )
       }}
-    />
+    ></div>
   );
 }

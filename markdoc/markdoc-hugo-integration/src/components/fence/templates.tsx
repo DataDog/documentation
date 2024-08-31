@@ -27,22 +27,38 @@ export const CodeBlockTemplate = (props: {
   return (
     <div className="code-snippet-wrapper">
       <div className={`code-filename-wrapper ${filenameWrapperClasses}`}>
-        {attrs.filename && <p className="code-filename my-0">{attrs.filename}</p>}
-        {attrs.collapsible && (
-          <div className="js-code-block-visibility-toggle">
-            <div className="chevron chevron-down d-none"></div>
-            <div className="chevron chevron-up"></div>
-          </div>
-        )}
+        {attrs.filename && <CodeFilename filename={attrs.filename} />}
+        {attrs.collapsible && <CollapseToggle />}
       </div>
       <div className={`code-snippet ${codeSnippetClasses}`}>
-        {!attrs.disable_copy && (
-          <div className="code-button-wrapper position-absolute">
-            <button className="btn text-primary js-copy-button">Copy</button>
-          </div>
-        )}
-        <span dangerouslySetInnerHTML={{ __html: highlightedContents }}></span>
+        {!attrs.disable_copy && <CopyButton />}
+        <CodeSnippet contents={highlightedContents} />
       </div>
     </div>
   );
 };
+
+function CodeSnippet(props: { contents: string }) {
+  return <span dangerouslySetInnerHTML={{ __html: props.contents }}></span>;
+}
+
+function CollapseToggle() {
+  return (
+    <div className="js-code-block-visibility-toggle">
+      <div className="chevron chevron-down d-none"></div>
+      <div className="chevron chevron-up"></div>
+    </div>
+  );
+}
+
+function CopyButton() {
+  return (
+    <div className="code-button-wrapper position-absolute">
+      <button className="btn text-primary js-copy-button">Copy</button>
+    </div>
+  );
+}
+
+function CodeFilename(props: { filename: string }) {
+  return <p className="code-filename my-0">{props.filename}</p>;
+}

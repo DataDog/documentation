@@ -60,6 +60,7 @@
 #mdoc-content.customizable h6 {
     scroll-margin-top: 95px;
 }
-span.s1 code.mdoc {
+span.s1 code.mdoc,
+span.s2 code.mdoc {
     color: #c41a16;
 }

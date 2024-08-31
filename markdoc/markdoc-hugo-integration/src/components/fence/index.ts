@@ -20,7 +20,7 @@ export const fenceDefinition = {
     },
     collapsible: {
       type: Boolean,
-      default: false
+      default: true
     },
     disable_copy: {
       type: Boolean,
@@ -65,12 +65,6 @@ export class Fence extends CustomHtmlComponent {
   }
 
   render() {
-    const defaultAttrs = {
-      wrap: false,
-      collapsible: false,
-      disable_copy: false
-    };
-
     // Remove any nested Markdoc tags, so they don't get highlighted
     const { sanitizedChildren, renderedChildTagsByUuid } =
       this.sanitizeChildrenForHighlighting();
@@ -97,15 +91,11 @@ export class Fence extends CustomHtmlComponent {
     });
 
     // Combine the default attributes with the author-provided attributes
-    const { language, ...rest } = this.tag.attributes;
-
-    const attrs = {
-      ...defaultAttrs,
-      ...rest
-    };
+    const { language, ...attrs } = this.tag.attributes;
 
     const jsx = CodeBlockTemplate({
       highlightedContents: formattedCodeContents,
+      // @ts-ignore
       attrs
     });
 

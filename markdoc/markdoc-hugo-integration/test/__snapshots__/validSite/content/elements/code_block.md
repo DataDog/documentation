@@ -12,7 +12,12 @@ title: Code Block
   </ul>
   <h2 id="simple-example">Simple example</h2>
   <div class="code-snippet-wrapper">
-    <div class="code-filename-wrapper d-flex justify-content-end"></div>
+    <div class="code-filename-wrapper d-flex justify-content-end collapsible">
+      <div class="js-code-block-visibility-toggle">
+        <div class="chevron chevron-down d-none"></div>
+        <div class="chevron chevron-up"></div>
+      </div>
+    </div>
     <div class="code-snippet">
       <div class="code-button-wrapper position-absolute">
         <button class="btn text-primary js-copy-button">Copy</button>
@@ -31,7 +36,12 @@ title: Code Block
   </div>
   <h2 id="example-with-region-param">Example with region-param</h2>
   <div class="code-snippet-wrapper">
-    <div class="code-filename-wrapper d-flex justify-content-end"></div>
+    <div class="code-filename-wrapper d-flex justify-content-end collapsible">
+      <div class="js-code-block-visibility-toggle">
+        <div class="chevron chevron-down d-none"></div>
+        <div class="chevron chevron-up"></div>
+      </div>
+    </div>
     <div class="code-snippet">
       <div class="code-button-wrapper position-absolute">
         <button class="btn text-primary js-copy-button">Copy</button>
@@ -53,7 +63,14 @@ title: Code Block
     <li>
       Item 1 includes some code:
       <div class="code-snippet-wrapper">
-        <div class="code-filename-wrapper d-flex justify-content-end"></div>
+        <div
+          class="code-filename-wrapper d-flex justify-content-end collapsible"
+        >
+          <div class="js-code-block-visibility-toggle">
+            <div class="chevron chevron-down d-none"></div>
+            <div class="chevron chevron-up"></div>
+          </div>
+        </div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
@@ -79,7 +96,14 @@ title: Code Block
         <li>
           Step 3: Step three would go here. It has some code:
           <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div
+              class="code-filename-wrapper d-flex justify-content-end collapsible"
+            >
+              <div class="js-code-block-visibility-toggle">
+                <div class="chevron chevron-down d-none"></div>
+                <div class="chevron chevron-up"></div>
+              </div>
+            </div>
             <div class="code-snippet">
               <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>
@@ -103,4 +127,4 @@ title: Code Block
   </ol>
 </article>
 </div>
-<div x-init='const initPage = () => { clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],    prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},    selectedValsByPrefId: {"color":"blue"},    ifFunctionsByRef: {}  });};if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],    prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},    selectedValsByPrefId: {"color":"blue"},    ifFunctionsByRef: {}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
