@@ -68,7 +68,7 @@ Additional requirements for profiling [Code Hotspots][12]:
 
 All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 
 ## Installation
 

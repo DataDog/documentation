@@ -422,7 +422,7 @@ apm_config:
     - name: "error.stack"
       pattern: "(?s).*"
     # Replace series of numbers in error messages
-    - name: "error.msg"
+    - name: "error.message"
       pattern: "[0-9]{10}"
       repl: "[REDACTED]"
 ```
@@ -452,7 +452,7 @@ DD_APM_REPLACE_TAGS=[
         "pattern": "(?s).*"
       },
       {
-        "name": "error.msg",
+        "name": "error.message",
         "pattern": "[0-9]{10}",
         "repl": "[REDACTED]"
       }
@@ -490,7 +490,7 @@ Set the `DD_APM_REPLACE_TAGS` environment variable:
               "pattern": "(?s).*"
             },
             {
-              "name": "error.msg",
+              "name": "error.message",
               "pattern": "[0-9]{10}",
               "repl": "[REDACTED]"
             }
@@ -539,7 +539,7 @@ agents:
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl":"$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"},{"name":"error.msg","pattern":"[0-9]{10}","repl":"[REDACTED]"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl":"$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"},{"name":"error.message","pattern":"[0-9]{10}","repl":"[REDACTED]"}]
 ```
 
 {{% /tab %}}

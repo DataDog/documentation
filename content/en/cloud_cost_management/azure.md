@@ -12,15 +12,12 @@ further_reading:
   text: "Gain insights into your Google Cloud bill"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can only set up at the Subscription level. Pay as you go (PAYG) and CSP accounts are not supported.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can only set up at the Subscription or Resource Group level. Pay as you go (PAYG) and CSP accounts are not supported.
 
 ## Setup
 
@@ -84,6 +81,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
     - File partitioning: `Checked`
     - Overwrite Data: `Unchecked`
+        - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously `Checked`, make sure to clean the files in the directory or move them to another one.
 
    {{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 

@@ -23,6 +23,8 @@ Datadog collects Step Functions metrics from Cloudwatch through the [AWS Step Fu
 
 Datadog uses these ingested logs to generate [enhanced metrics][8] and traces for your Step Function executions.
 
+{{< img src="serverless/step_functions/telemetry_ingestion.png" alt="A diagram explaining how Step Functions telemetry is ingested and used in Datadog" style="width:100%;" >}}
+
 ### Setup
 
 Ensure that the [AWS Step Functions integration][9] is installed.
@@ -201,7 +203,7 @@ Enhanced metrics are automatically enabled if you enable traces.
 
 ## Enable tracing
 
-Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` tag to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTION_TRACE_ENABLED` environment variable to the Datadog Forwarder and set the value to `true`.
+Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` tag to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTIONS_TRACE_ENABLED` environment variable to the Datadog Forwarder and set the value to `true`.
 
 Enhanced metrics are automatically enabled if you enable tracing.
 

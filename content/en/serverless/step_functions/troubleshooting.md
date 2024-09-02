@@ -44,7 +44,6 @@ When searching traces, select the **Live Search** option in the upper right corn
 
 ## Some step spans are missing in the traces
 - Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
-- AWS Step Functions activities are not supported.
 - `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
 
 ## Customized way to deploy Datadog Lambda Forwarder

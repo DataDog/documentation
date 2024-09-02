@@ -301,11 +301,24 @@ For more information, see the [Collector Health Metrics][8] documentation.
 
 ### Deploy the Agent with the OpenTelemetry Collector
 
-To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use the following Helm command:
+To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use one of the following Helm commands:
 
-```shell
-helm upgrade -i <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
-```
+- For default OpenTelemetry Collector configuration:
+   ```shell
+   helm upgrade -i <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
+   ```
+
+- For custom OpenTelemetry Collector configuration:
+   ```shell
+   helm upgrade -i <RELEASE_NAME> datadog/datadog \
+     -f datadog-values.yaml \
+     --set-file datadog.otelCollector.config=otel-config.yaml
+   ```
+   This command allows you to specify your own `otel-config.yaml` file.
+
+Replace `<RELEASE_NAME>` with the Helm release name you are using.
+
+<div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
 This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the Agent deployment pattern. The Gateway deployment pattern is not supported.
 
@@ -461,7 +474,7 @@ View runtime and infrastructure metrics to visualize, monitor, and measure the p
 
 View logs to monitor and troubleshoot application and system operations.
 
-{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Logs Explorer." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Log Explorer." style="width:100%;" >}}
 
 ### Traces
 
