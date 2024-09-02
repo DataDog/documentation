@@ -211,7 +211,7 @@ When configured, the SNMP check can also send ICMP pings to your devices. This c
 - To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
 
 	```yaml
-	network_devices:
+network_devices:
     autodiscovery:
 	    workers: 100
 	    discovery_interval: 3600
