@@ -24,7 +24,6 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 ## Calendar shift
 
-<div class="alert alert-info">The calendar shift feature is now available for all data sources.</div>
 
 | Function           | Description                                                                                   | Example                            |
 |:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
