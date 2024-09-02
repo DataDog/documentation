@@ -30,7 +30,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 |:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
 | `calendar_shift()` | Graph values from the previous day, week, or month from the current timestamp for the metric. | `calendar_shift(<METRIC_NAME>{*}, "<TIME_SHIFT_STRING>", "<TIME_ZONE_CODE>")` |
 
-To access the `calendar_shift()` function click the **Add function** button, select **Timeshift > Month before**. The calendar shift allows you to compare the same metric across equivalent timeframes. Here is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from two weeks ago compared to the current value.
+To access the `calendar_shift()` function click the **Add function** button, select **Timeshift > Month before**. The calendar shift allows you to compare the same metric across equivalent time frames. Below is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from two weeks ago compared to the current value.
 
 {{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from two weeks ago and the present" style="width:80%;" >}}
 
