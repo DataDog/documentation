@@ -41478,3 +41478,5 @@ tags:
     url: https://docs.datadoghq.com/service_management/workflows/
   name: Workflow Automation
 x-group-parameters: true
+x-merge-override:
+  paths: false

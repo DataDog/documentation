@@ -267,6 +267,15 @@ To test your implementation:
 
 3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][1].
 
+## Behaviors
+
+When looking at RUM Crash Reporting behaviors for Android, consider the following:
+
+- Crashes can only be detected after the Datadog SDK is initialized. To catch as many crashes as possible, initialize the SDK as soon as you can in the application's `onCreate` method.
+- Crashes in RUM need to be tied to a RUM View. This means that if a crash occurs before a view is visible, or after the app is sent to the background and the end-user switches to another app, the crash is muted and does not report to Datadog. Mitigate this behavior using the `trackBackgroundEvents` [method][10] in the RumConfiguration builder.
+- Only crashes tied to sampled sessions are kept. To capture all crashes, apply a `sessionSampleRate` of 100%.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -280,3 +289,4 @@ To test your implementation:
 [7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [8]: https://developer.android.com/tools/releases/platforms#11
 [9]: https://developer.android.com/tools/releases/platforms#10
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/#track-background-events
