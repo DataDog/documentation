@@ -141,7 +141,7 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 
 | Framework                               | Supported Versions |
 |-----------------------------------------|--------------------|
-| [OpenAI](#openai)                       | >= 3.0.0           |
+| [OpenAI](#openai) (common JS)           | >= 3.0.0           |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -198,12 +198,61 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][5]:
   - `openai.embeddings.create()`
 
+### ESM support
+
+The OpenAI integration for the Node.js tracer is not supported in ESM. To use OpenAI along with `dd-trace` in your ESM projects without errors, create the following script:
+
+```javascript
+// register.mjs
+
+import { register } from 'node:module';
+
+register("import-in-the-middle/hook.mjs", import.meta.url, {
+  parentURL: import.meta.url,
+  data: { include: ["openai"]}, // this is the important bit here
+});
+```
+
+And start your application with:
+
+```bash
+DD_SITE=<YOUR_DATADOG_SITE> node --import ./register.js --require dd-trace/init script.js
+```
+
+This will avoid any compatability issues with OpenAI and `dd-trace` in ESM projects.
+
+Tracing will not be used for OpenAI calls in this case. In order to add this tracing for LLM Observability, you can instrument your OpenAI calls with the [`llmobs.trace()`][7] method.
+
+```javascript
+const tracer = require('dd-trace').init({
+  llmobs: { ... }
+});
+
+// user application code
+
+function makeOpenAICall (input) {
+  // user code
+  const response = await llmobs.trace('llm', { name: 'openai.createChatCompletion', modelName: 'gpt-4', modelProvider: 'openai' }, async () => {
+    const res = await openai.chat.completions.create({ ... });
+    llmobs.annotate({
+      inputData: input,
+      outputData: res.choices[0].message.content
+    })
+
+    return res;
+  });
+
+  // user code to do something with `response`
+}
+```
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
 [4]: /llm_observability/setup/sdk/nodejs
 [5]: https://platform.openai.com/docs/api-reference/embeddings
 [6]: /llm_observability/setup/sdk/nodejs/#in-code-setup
+[7]: /llm_observability/setup/sdk/nodejs/#tracing-spans-using-inline-methods
 {{% /tab %}}
 {{< /tabs >}}
 
