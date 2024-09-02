@@ -25870,6 +25870,9 @@ paths:
         - name: authn_mapping_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/authn_mappings/{authn_mapping_id}:
     delete:
       description: Delete an AuthN Mapping specified by AuthN Mapping UUID.
@@ -26002,6 +26005,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      get: false
+      patch: false
   /api/v2/cases:
     get:
       description: Search cases.
