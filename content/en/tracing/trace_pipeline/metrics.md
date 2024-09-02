@@ -43,11 +43,19 @@ The following metrics are associated with ingested spans usage:
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.ingested_traces`
 
-Control the usage with `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered as a volume, not as a number of spans or traces. This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the ingestion volume.
+Control the usage with `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered as a volume, not as a number of spans or traces. This metric is tagged by `env`, `service` and `sampling_service` so you can spot which environments and services are contributing to the ingestion volume. Read more information about the `sampling_service` dimension [here](#what-is-the-sampling-service).
 
 This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the tracing libraries of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
 
 The `datadog.estimated_usage.apm.ingested_traces` metric measures the number of requests sampled per second, and only counts traces sampled by [head-based sampling][7]. This metric is also tagged by `env` and `service` so you can spot which services are starting the most traces.
+
+#### What is the sampling service?
+
+The `sampling_service` dimension on the `datadog.estimated_usage.apm.ingested_bytes` assigns ingested bytes to the **service that makes the sampling decision**, not the service from which the span is emitted. 
+
+Group the metric by `sampling_service` to spot which services are contributing the most to the total ingested volumes. For instance, if a service `A` starts the trace and a head-based sampling decision is made, then calls service `B` and `C`, all bytes from service `A`, `B`, and `C` will be attributed to `sampling_service:A` as the decision of sampling the trace was made on the service `A`.
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/sampling_service.png" style="width:80%;" alt="Ingested Bytes sampling service explanation" >}}
 
 ### Indexed spans
 
