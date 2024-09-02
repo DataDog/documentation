@@ -49,10 +49,12 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                 | Support level         | Package version                        |
-| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | latest                                 |
+| Processor architectures | Support level       | Package version       |
+| ----------------------- | ------------------- | --------------------- |
+| Windows x64 (`win-x64`) | [GA](#support-ga)   | latest                |
+| Windows x86 (`win-x86`) | [EOL](#support-eol) | < 3.0.0 (e.g. 2.56.0) |
+
+Note that running x86 applications on Windows x64 is supported.
 
 ## Integrations
 
