@@ -211,25 +211,25 @@ When configured, the SNMP check can also send ICMP pings to your devices. This c
 - To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
 
 	```yaml
-network_devices:
-    autodiscovery:
-	    workers: 100
-	    discovery_interval: 3600
-	    loader: core
-	    use_device_id_as_hostname: true
-	    configs:
-	      - network_address: 10.10.0.0/24
-	        loader: core
-	        snmp_version: 2
-	        port: 161
-	        community_string: '***'
-	        tags:
-	        - "key1:val1"
-	        - "key2:val2"
-	        ping:
-	          enabled: true            # (default false) enable the ping check
-	          linux:                   # (optional) Linux specific configuration
-	            use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+   network_devices:
+     autodiscovery:
+       workers: 100
+       discovery_interval: 3600
+       loader: core
+       use_device_id_as_hostname: true
+       configs:
+         - network_address: 10.10.0.0/24
+           loader: core
+           snmp_version: 2
+           port: 161
+           community_string: '***'
+           tags:
+           - "key1:val1"
+           - "key2:val2"
+           ping:
+             enabled: true            # (default false) enable the ping check
+             linux:                   # (optional) Linux specific configuration
+               use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 	```
 
 {{% /tab %}}
