@@ -2,6 +2,16 @@
 title: Setting up IaC Remediation for Cloud Security Management
 aliases:
   - /security/cloud_security_management/setup/source_code_integrations
+further_reading:
+    - link: "/security/cloud_security_management/setup"
+      tag: "Documentation"
+      text: "Setting up Cloud Security Management"
+    - link: "/security/cloud_security_management/misconfigurations"
+      tag: "Documentation"
+      text: "CSM Misconfigurations"
+    - link: "/security/cloud_security_management/identity_risks"
+      tag: "Guide"
+      text: "CSM Identity Risks"
 ---
 
 Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security Management (CSM). IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
@@ -22,6 +32,10 @@ After you set up the GitHub integration, enable IaC remediation for the reposito
 3. To enable IaC:
     - For all repositories, switch on the IAC toggle under Enable Infrastructure as Code (IaC).
     - For a single repository, switch on the IAC toggle for that repository.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/misconfigurations
 [2]: /security/cloud_security_management/identity_risks
