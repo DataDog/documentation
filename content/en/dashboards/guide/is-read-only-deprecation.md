@@ -1,5 +1,5 @@
 ---
-title: is_read_only API Attribute Deprecation and Removal
+title: API Deprecation - Removing is_read_only attribute
 ---
 
 ## Overview
