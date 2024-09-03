@@ -108,7 +108,7 @@ This function receives an object with the following properties:
 
 **Note**:
 
-- **JSP web applications** need to use the `\` escape character for the alternative proxy setup to properly propagate these parameters to the browser. For example:
+- **JSP web applications** need to use the `\` escape character to properly propagate these parameters to the browser. For example:
   ```javascript
   proxy: (options) => 'http://proxyURL:proxyPort\${options.path}?\${options.parameters}',
   ```
