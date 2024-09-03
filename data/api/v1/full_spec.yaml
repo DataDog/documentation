@@ -22104,6 +22104,13 @@ components:
       type: string
       x-enum-varnames:
       - ORDERED
+    WidgetLegacyLiveSpan:
+      additionalProperties: false
+      description: Wrapper for live span
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      type: object
     WidgetLegendSize:
       description: Available legend sizes for a widget. Should be one of "0", "2",
         "4", "8", "16", or "auto".
@@ -22170,6 +22177,24 @@ components:
       - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
+    WidgetLiveSpanUnit:
+      description: Unit of the time span.
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - year
+      example: minute
+      type: string
+      x-enum-varnames:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
     WidgetMargin:
       description: 'Size of the margins around the image.
 
@@ -22274,6 +22299,62 @@ components:
       - TRIGGERED_DESCENDING
       - PRIORITY_ASCENDING
       - PRIORITY_DESCENDING
+    WidgetNewFixedSpan:
+      description: Used for fixed span times, such as 'March 1 to March 7'.
+      properties:
+        from:
+          description: Start time in seconds since epoch.
+          example: 1712080128
+          format: int64
+          minimum: 0
+          type: integer
+        to:
+          description: End time in seconds since epoch.
+          example: 1712083128
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          $ref: '#/components/schemas/WidgetNewFixedSpanType'
+      required:
+      - type
+      - from
+      - to
+      type: object
+    WidgetNewFixedSpanType:
+      description: Type "fixed" denotes a fixed span.
+      enum:
+      - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+      - FIXED
+    WidgetNewLiveSpan:
+      description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
+      properties:
+        type:
+          $ref: '#/components/schemas/WidgetNewLiveSpanType'
+        unit:
+          $ref: '#/components/schemas/WidgetLiveSpanUnit'
+        value:
+          description: Value of the time span.
+          example: 4
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+      - type
+      - value
+      - unit
+      type: object
+    WidgetNewLiveSpanType:
+      description: Type "live" denotes a live span in the new format.
+      enum:
+      - live
+      example: live
+      type: string
+      x-enum-varnames:
+      - LIVE
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
@@ -22446,10 +22527,10 @@ components:
       - TOP
     WidgetTime:
       description: Time setting for the widget.
-      properties:
-        live_span:
-          $ref: '#/components/schemas/WidgetLiveSpan'
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewFixedSpan'
     WidgetTimeWindows:
       description: Define a time window.
       enum:
