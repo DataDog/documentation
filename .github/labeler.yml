@@ -18,3 +18,7 @@ FAQ:
 
 Guide:
 - content/en/*/guide/*
+
+eci: 
+# Emerging Cloud Integrations team
+- integrations-internal-core/oracle_cloud_infrastructure/**/*
