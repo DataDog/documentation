@@ -4,7 +4,7 @@ categories:
 - cloud
 - data stores
 - provisioning
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure SQL Elastic Pool の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/

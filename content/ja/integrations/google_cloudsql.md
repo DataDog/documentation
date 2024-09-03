@@ -4,7 +4,7 @@ categories:
 - data stores
 - google cloud
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloudsql/

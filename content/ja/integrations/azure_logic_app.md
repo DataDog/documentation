@@ -4,7 +4,7 @@ categories:
 - configuration & deployment
 - network
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_logic_app/

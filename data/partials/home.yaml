@@ -107,6 +107,10 @@ nav_sections:
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Error Tracking
+        link: error_tracking/
+        icon: error-tracking
+        desc: Identify critical errors and accelerate resolution across web, mobile, and backend
       - title: Real User Monitoring
         link: real_user_monitoring/
         icon: rum

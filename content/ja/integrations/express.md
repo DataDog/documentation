@@ -3,7 +3,7 @@ aliases:
 - /ja/integrations/expressjs/
 categories:
 - languages
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 全体的な応答時間と応答コード別のリクエスト率を監視。
 doc_link: https://docs.datadoghq.com/integrations/express/

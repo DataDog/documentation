@@ -45,6 +45,8 @@ The following profiling features are available in the following minimum versions
 | [Endpoint Profiling][13] | 0.54.0+                        |
 | [Timeline][15]           | 2.10.5+                        |
 
+Continuous Profiler is in beta support for some serverless platforms, such as [AWS Lambda][16].
+
 ## Installation
 
 Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
@@ -142,3 +144,4 @@ The [Getting Started with Profiler][7] guide takes a sample service with a perfo
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
 [15]: /profiler/profile_visualizations/#timeline-view
+[16]: /serverless/aws_lambda/profiling/

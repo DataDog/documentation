@@ -80,7 +80,7 @@ Reference Tables allow you to combine metadata with logs, providing more informa
 
 To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a threat intel reference table:
 
-{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog Log Explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 

@@ -13,7 +13,7 @@ categories:
 - apm
 - ネットワーク
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md
 display_on_public_website: true
@@ -104,7 +104,7 @@ React Native インテグレーションには、サービスのチェック機�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

@@ -2,7 +2,7 @@
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 description: Alcide のログを収集・処理

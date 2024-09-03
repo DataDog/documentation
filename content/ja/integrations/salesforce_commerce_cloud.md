@@ -18,7 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -66,14 +66,14 @@ Datadog がログデータをインポートするためのアクセスを Sales
 3. Business Manager インターフェイスの **Administration > Organization > WebDAV Client Permissions** の下に、以下の JSON を追加します。適切な場所にクライアント ID を挿入していることを確認してください。
 
 ```json
-{  
-   "clients":[  
-      {  
+{
+   "clients":[
+      {
          "client_id":"<your-client-id-here>",
-         "permissions":[  
-            {  
+         "permissions":[
+            {
                "path":"/logs",
-               "operations":[  
+               "operations":[
                   "read"
                ]
             }

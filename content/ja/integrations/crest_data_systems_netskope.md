@@ -41,7 +41,7 @@ categories:
 - data stores
 - alerting
 - イベント管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false

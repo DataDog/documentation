@@ -24,7 +24,7 @@ categories:
 - aws
 - cloud
 - コスト管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_on_public_website: true

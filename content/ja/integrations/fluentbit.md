@@ -1,7 +1,7 @@
 ---
 categories:
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
 description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
@@ -61,7 +61,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
     TLS               on
     compress          gzip
     apikey            <DATADOG_API_キー>
-    dd_service       <アプリケーション_サービス> 
+    dd_service       <アプリケーション_サービス>
     dd_source         <ソース>
     dd_message_key    log
     dd_tags           env:dev,<タグキー>:<タグ値>

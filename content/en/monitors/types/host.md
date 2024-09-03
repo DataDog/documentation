@@ -86,6 +86,6 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/host
+[1]: https://app.datadoghq.com/monitors/create/host
 [2]: /monitors/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/

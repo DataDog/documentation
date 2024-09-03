@@ -27,7 +27,7 @@ categories:
 - 自動化
 - 構成 & デプロイ
 - orchestration
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
 display_on_public_website: true
