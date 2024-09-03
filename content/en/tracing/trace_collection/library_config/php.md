@@ -244,7 +244,7 @@ When disabled, causal produce/consume relationships will be associated using spa
 `DD_TRACE_SYMFONY_MESSENGER_MIDDLEWARES`
 : **INI**: `datadog.trace.symfony_messenger_middlewares`<br>
 **Default**: `false`<br>
-Enables the tracing of Symfony Messenger Middlewares. Added in version `1.3.0`.
+Enables the tracing of Symfony Messenger middlewares. Added in version `1.3.0`.
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 : **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
