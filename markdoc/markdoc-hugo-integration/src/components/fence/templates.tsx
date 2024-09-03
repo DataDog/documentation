@@ -39,7 +39,7 @@ export const CodeBlockTemplate = (props: {
 };
 
 function CodeSnippet(props: { contents: string }) {
-  return <span dangerouslySetInnerHTML={{ __html: props.contents }}></span>;
+  return <div dangerouslySetInnerHTML={{ __html: props.contents }}></div>;
 }
 
 function CollapseToggle() {
