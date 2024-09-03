@@ -6,11 +6,11 @@ title: Configurar la monitorización de secuencias de datos para Go
 
 Para empezar con Data Streams Monitoring, necesitas versiones recientes de las bibliotecas del Datadog Agent y de Data Streams Monitoring:
 * [Datadog Agent v7.34.0 o más reciente][1]
-* [dd-rastrear-go v1.56.1 o más reciente][2]
+* [dd-trace-go v1.56.1 o más reciente][2]
 
 ### Instalación
 
-- Configure la variable de entorno `DD_DATA_STREAMS_ENABLED=true`.
+- Configura la variable de entorno `DD_DATA_STREAMS_ENABLED=true`.
 - [Inicia el rastreador][3].
 
 Existen dos tipos de instrumentación:
@@ -25,7 +25,7 @@ importar (
 )
 
 ...
-// CREA PRODUCTOR CON ESTA ENVOLTURA
+// CREA UN PRODUCTOR CON ESTA ENVOLTURA
 productor, error:= ddkafka.NewProducer(&kafka.ConfigMap{
         "bootstrap.servers": bootStrapServers,
 }, ddkafka.WithDataStreams())
