@@ -301,7 +301,7 @@ You can use the following methods in `Configuration.Builder` when creating the D
 : Enable or disable the collection of JVM crashes.
 
 `setBackpressureStrategy(BackPressureStrategy)` 
-: Define the strategy the SDK will use when handling large volumes of data and internal queues are full.
+: Define the strategy the SDK uses when handling large volumes of data and internal queues are full.
  
 You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM features:
 
@@ -327,7 +327,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the data scrubbing callbacks for views, actions, resources, and errors.
 
 `setSessionListener(RumSessionListener)` 
-: Sets a listerner to be notified on when new a new RUM Session is started.
+: Sets a listener to be notified on when a new RUM Session starts.
  
 ### Automatically track views
 
