@@ -143,7 +143,7 @@ Para más información, consulta la [Documentación de Monitor sobre monitorizac
 
 Las señales de frustración se generan a partir de los clics del ratón, no al pulsar el teclado.
 
-### El panel lateral no muestra que una sesión tiene un número diferente de señales de frustración que en la línea de tiempo de eventos 
+### El panel lateral no muestra que una sesión tiene un número diferente de señales de frustración que en la línea de tiempo del evento 
 
 Si una sesión está en vivo, está obteniendo información y puede hacer que los banners reflejen un número diferente a los de la línea de tiempo.
 
