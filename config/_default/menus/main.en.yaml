@@ -5217,35 +5217,20 @@ menu:
       identifier: csm_setup_agent
       weight: 102
     - name: Set Up CloudTrail Logs
-      url: security/cloud_security_management/setup/additional_features
+      url: security/cloud_security_management/setup/cloudtrail_logs
       parent: csm_setup
-      identifier: csm_setup_additional_features
+      identifier: csm_setup_cloudtrail
       weight: 103
     - name: Set Up Iac Remediation
-      url: security/cloud_security_management/setup/additional_features
+      url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
-      identifier: csm_setup_additional_features1
+      identifier: csm_setup_iac_remediation
       weight: 104
     - name: Deploy on Azure and GCP
-      url: security/cloud_security_management/setup/additional_features
+      url: security/cloud_security_management/setup/cloud_accounts
       parent: csm_setup
-      identifier: csm_setup_additional_features11
+      identifier: csm_setup_azure_gcp
       weight: 105
-    - name: CloudTrail Logs
-      url: security/cloud_security_management/setup/additional_features/cloudtrail_logs
-      parent: csm_setup_additional_features
-      identifier: csm_setup_cloudtrail_logs
-      weight: 10010
-    - name: IaC Remediation
-      url: security/cloud_security_management/setup/additional_features/iac_remediation
-      parent: csm_setup_additional_features
-      identifier: csm_setup_iac_remediation
-      weight: 10011
-    - name: Azure and GCP
-      url: security/cloud_security_management/setup/additional_features/cloud_accounts
-      parent: csm_setup_additional_features
-      identifier: csm_setup_cloud_accounts
-      weight: 10012
     - name: Threats
       url: security/threats/
       parent: csm

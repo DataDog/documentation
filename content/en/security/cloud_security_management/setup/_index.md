@@ -44,18 +44,18 @@ To learn more about Agentless Scanning, see [Cloud Security Management Agentless
 
 For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, se [Setting up Cloud Security Management on the Agent][3].
 
-| Feature                          | CSM Pro Agentless | CSM Pro Agentless + Agent          |
-|----------------------------------|-------------------|------------------------------------|
-| CIEM                             | Yes               | Yes                                |
-| Cloud Security Posture Management| Yes               | Yes                                |
-| AMI support                      | Yes               | Yes                                |
-| Security Inbox                   | Yes               | Yes, with more accurate insights   |
-| Vulnerability prioritization     | Yes               | Yes, with runtime context          |
-| Serverless support               | AWS Lambda        | AWS Lambda                         |
-| Coverage                         | All cloud hosts   | All cloud & non-cloud hosts        |
-| Vulnerability freshness          | 12 hours          | Real time                          |
-| Threat detection                 | No                | Yes                                |
-| Host benchmark                   | No                | Yes                                |
+| Feature                        | Agentless       | Agentless + Agent-based deployment |
+|--------------------------------|-----------------|------------------------------------|
+| CSM Identity Risks             | Yes             | Yes                                |
+| CSM Misconfigurations          | Yes             | Yes                                |
+| AMI support                    | Yes             | Yes                                |
+| Security Inbox                 | Yes             | Yes, with more accurate insights   |
+| Vulnerability prioritization   | Yes             | Yes, with runtime context          |
+| Serverless support             | AWS Lambda      | AWS Lambda                         |
+| Coverage                       | All cloud hosts | All cloud and non-cloud hosts      |
+| Vulnerability update frequency | 12 hours        | Real time                          |
+| Threat detection               | No              | Yes                                |
+| Host benchmarks                | No              | Yes                                |
 
 ## Enable additional features
 
@@ -67,6 +67,10 @@ AWS CloudTrail Logs allows you to get the most out of [CSM Identity Risks][6]. W
 
 With Infrastructure as Code (IaC) remediation, you can use Terraform to open a pull request in GitHub, applying code changes that fix a misconfiguration or identity risk. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
 
+### Azure and GCP
+
+At this time, Agentless Scanning is only available for AWS. To enable Cloud Security Management for Azure and Google Cloud Platform (GCP) resources, see [Deploying Cloud Security Management on Azure and GCP][7].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +81,4 @@ With Infrastructure as Code (IaC) remediation, you can use Terraform to open a p
 [4]: /security/cloud_security_management/setup/cloudtrail_logs
 [5]: /security/cloud_security_management/setup/iac_remediation
 [6]: /security/cloud_security_management/identity_risks
+[7]: /security/cloud_security_management/setup/cloud_accounts

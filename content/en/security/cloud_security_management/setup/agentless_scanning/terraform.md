@@ -21,7 +21,7 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 
 1. Follow the setup instructions for adding [AWS cloud accounts][3] to Cloud Security Management.
 1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**.
-1. Click the **Edit scanning** button for the AWS account where you intend to deploy the Agentless scanner.
+1. Click the **Edit scanning** button for the AWS account where you want to deploy the Agentless scanner.
 1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
 1. Follow the instructions for [Terraform][4] setup.
 1. Make sure the template runs successfully, then click **Done** to begin scanning. 
@@ -37,15 +37,15 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 {{% tab "Existing AWS account" %}}
 
 1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**.
-1. Click the **Edit scanning** button for the AWS account where you intend to deploy the Agentless scanner.
-1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless Scanning** section.
-1. Follow instructions for [Terraform][4] setup.
-1. Make sure the template runs successfully, then click **Done** to begin scanning. 
-
-{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
+1. Click the **Edit scanning** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} for the AWS account where you want to deploy the Agentless scanner.
+1. **Enable Resource Scanning** should already be toggled on. If it isn't, switch the **Enable Resource Scanning** toggle to the on position.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+[2]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
 
 {{% /tab %}}
 {{< /tabs >}}

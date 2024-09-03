@@ -8,6 +8,8 @@ aliases:
 
 Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on Azure and GCP.
 
+<div class="alert alert-info">For AWS instructions, see <a href="/security/cloud_security_management/setup/agentless_scanning/">Enabling Agentless Scanning</a>.</div>
+
 ## Enable resource scanning
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
