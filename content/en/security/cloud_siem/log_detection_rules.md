@@ -81,6 +81,10 @@ Click **Add Query** to add additional queries.
 
 **Note**: The query applies to all ingested logs.
 
+#### Unit testing
+
+{{% cloud-siem-unit-testing %}}
+
 #### Joining queries
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
@@ -120,6 +124,10 @@ For example, create a query for successful user authentication and set **Detect 
 
 You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
+#### Unit testing
+
+{{% cloud-siem-unit-testing %}}
+
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
@@ -134,6 +142,10 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
 **Note**: The query applies to all ingested logs.
+
+#### Unit testing
+
+{{% cloud-siem-unit-testing %}}
 
 {{% /tab %}}
 
@@ -159,6 +171,10 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
+#### Unit testing
+
+{{% cloud-siem-unit-testing %}}
+
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
 {{% /tab %}}
@@ -172,6 +188,10 @@ Construct a search query using the same logic as a [Log Explorer search][1]. The
 Click **Add Query** to add additional queries.
 
 **Note**: The query applies to all ingested logs.
+
+#### Unit testing
+
+{{% cloud-siem-unit-testing %}}
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
