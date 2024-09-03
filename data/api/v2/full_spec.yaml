@@ -28585,13 +28585,13 @@ paths:
         required: false
         schema:
           type: string
-      - description: Minimum timestamp for requested events.
+      - description: Minimum timestamp for requested events, in milliseconds.
         in: query
         name: filter[from]
         required: false
         schema:
           type: string
-      - description: Maximum timestamp for requested events.
+      - description: Maximum timestamp for requested events, in milliseconds.
         in: query
         name: filter[to]
         required: false
