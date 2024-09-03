@@ -34,7 +34,7 @@ To share an entire dashboard publicly, generate a URL:
 1. Click **Done** to return to the *Sharing: On* modal.
 1. Copy the URL and click **Done**.
 
-**Note**: The Log Stream widget doesn't show data either, but other log-based queries do.
+**Note**: The Log Stream widget does not display data on public dashboards, but other log-based queries do.
 
 ## Share a dashboard with individual email addresses
 
