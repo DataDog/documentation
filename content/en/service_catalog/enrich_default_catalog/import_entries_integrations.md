@@ -42,7 +42,7 @@ Upon import, the following occurs:
 - `spec.system` gets mapped to `application`
 - Other `spec` values get mapped to custom tags
 
-Note: *The Service Catalog processes the entire YAML file as a whole. Therefore, if any section of the YAML file does not have kind:Component, the entire catalog-info.yaml will be rejected.*
+**Note**: The Service Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:Component`, the entire `catalog-info.yaml file` is rejected.
 
 ## ServiceNow
 
