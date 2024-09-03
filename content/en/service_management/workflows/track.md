@@ -34,7 +34,7 @@ To see who edited a workflow, use Audit Trail.
 1. Hover over **Modified** and click **Only** to filter the results to show only workflow edits.
 
 
-## Run notifications
+## Notify about runs
 
 To receive notifications when your workflow runs, use one of the following methods.
 
