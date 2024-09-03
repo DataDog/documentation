@@ -42,6 +42,8 @@ Upon import, the following occurs:
 - `spec.system` gets mapped to `application`
 - Other `spec` values get mapped to custom tags
 
+Note: *The Service Catalog processes the entire YAML file as a whole. Therefore, if any section of the YAML file does not have kind:Component, the entire catalog-info.yaml will be rejected.*
+
 ## ServiceNow
 
 You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][2].
