@@ -129,6 +129,18 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 To trace a span, use `llmobs.wrap(spanKind, options, function)` as a function wrapper for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][8]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
 
+### Automatic argument, output, and function name Capturing
+
+`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript)) will try to automatically capure inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
+
+{{< code-block lang="javascript" >}}
+function processMessage () {
+  ... // user application logic
+  return
+}
+processMessage = llmobs.wrap('workflow', { name: 'differentFunctionName' }, processMessage)
+{{< /code-block >}}
+
 ### LLM span
 
 **Note**: If you are using any LLM providers or frameworks that are supported by [Datadog's LLM integrations][13], you do not need to manually start a LLM span to trace these operations.
