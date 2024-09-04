@@ -78,7 +78,7 @@ Complete the following steps to configure these three components.
 
 2. Open the created file. Paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
 
-    ```shell
+    ```yaml
     services: 
       otelcol:
         command: 

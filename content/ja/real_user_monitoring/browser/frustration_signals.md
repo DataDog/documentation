@@ -5,7 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
   tag: ブログ
   text: Datadog フラストレーションシグナルによるユーザーのペインポイントの検出
-- link: /real_user_monitoring/dashboards/usage#frustration-signals
+- link: /real_user_monitoring/platform/dashboards/usage#frustration-signals
   tag: ドキュメント
   text: フラストレーションシグナルダッシュボード
 - link: /real_user_monitoring/explorer
@@ -14,7 +14,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイについて
-title: コミュニティ
+title: フラストレーションシグナル
 ---
 
 ## 概要
@@ -40,25 +40,28 @@ RUM は 3 種類のフラストレーションシグナルを収集します。
 
 <details open>
   <summary>最新バージョン</summary>
-```
+
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
 ```
+
 </details>
 <details>
   <summary><code>v5.0.0</code> より前</summary>
-```
+
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-フラストレーションシグナルにはアクションが必要です。`trackFrustrations` を有効にすると、自動的に `trackUserInteractions` が有効になります。
+フラストレーションシグナルには対応が必要です。 `trackFrustrations` を有効にすると、自動的に `trackUserInteractions` も有効になります。
 </details>
 
-## API
+## 使用方法
 
 フラストレーションシグナルは、[**RUM Applications** ページ][1]にユーザーのフラストレーションの原因を表す高レベルのデータポイントとして表示されます。[RUM エクスプローラー][2]にフラストレーションカウントのリストを表示するには、**Options** ボタンをクリックして `@session.frustration.count` の列を追加してください。
 
@@ -106,7 +109,7 @@ Frustration Count
 
 {{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="What Happened のアクションで検出された複数のフラストレーションシグナルの種類" style="width:90%;" >}}
 
-#### CoScreen
+#### エラー
 
 **Errors** タブでエラーをクリックすると、エラーの詳細が表示されたサイドパネルが開きます。フラストレーションシグナルが発生したかどうかを確認することができます。
 
@@ -132,7 +135,7 @@ Frustration Count
 
 詳しくは、[リアルユーザーモニタリングモニターのドキュメント][9]をご覧ください。
 
-## ヘルプ
+## トラブルシューティング
 
 ### ユーザーがキーボードのキー (Delete など) を押したときに、なぜレイジクリックが作成されないのでしょうか？
 
@@ -156,11 +159,11 @@ Frustration Count
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /ja/real_user_monitoring/explorer/
-[3]: /ja/real_user_monitoring/dashboards/usage#frustration-signals
+[3]: /ja/real_user_monitoring/platform/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /ja/dashboards/
 [6]: /ja/monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /ja/real_user_monitoring/session_replay/
+[8]: /ja/real_user_monitoring/session_replay/browser/
 [9]: /ja/monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

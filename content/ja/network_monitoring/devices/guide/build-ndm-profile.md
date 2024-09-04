@@ -1,22 +1,22 @@
 ---
-title: NDM プロファイルの構築
 aliases:
-  - /ja/network_performance_monitoring/devices/guide/build-ndm-profile
+- /ja/network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:
-  - link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
-    tag: Documentation
-    text: プロファイル形式のリファレンス
-  - link: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
-    tag: Documentation
-    text: シミュレーションデータ形式のリファレンス
+- link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
+  tag: Documentation
+  text: プロファイル形式のリファレンス
+- link: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
+  tag: Documentation
+  text: シミュレーションデータ形式のリファレンス
+title: NDM プロファイルの構築 (高度)
 ---
+
 Datadog ネットワークデバイスモニタリングは、プロファイルを使用してネットワークデバイスからメトリクスを収集します。これらは MIB により狭義されており、特定のデバイスメーカーおよびモデルからメトリクスを収集します。このチュートリアルでは、HP iLO4 デバイスから OID メトリクスを収集する基本の NDM プロファイルを構築するためのステップをご説明します。
 
 NDM プロファイルは SNMP コンセプトを使用します。SNMP の基本情報については、[用語][1]を参照してください。
 
-<div class="alert alert-warning">
-このガイドは上級ユーザー向けです。ほとんどのデバイスは <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog プロファイル</a>を使用して構成することができます。
-</div>
+<div class="alert alert-info">
+このガイドは上級者向けです。ほとんどのデバイスは、<a href="/network_monitoring/devices/guide/device_profiles/">デバイスプロファイルの概要</a>ドキュメントにある GUI ベースのエクスペリエンス、または <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog プロファイル</a>を使用して構成することができます。</div>
 
 ## 調査
 
@@ -34,7 +34,7 @@ NDM プロファイルを構築する最初のステップは、デバイスを�
 
 - サポート対象の MIB (ASN1、テキスト形式)、OID、および関連する MIB ファイル。たとえば、HP は iLO デバイス向けのMIB パッケージを提供しています ([サイトはこちら][3])。**注**: メトリクスを収集するプロファイルでは MIB は不要です。
 
-**注**: デバイスのユースケースに関する詳細は、[ネットワークハードウェア][4]を参照してください。
+**Note**: For more details on device use cases, see [Networking hardware][4].
 
 ### メトリクスの選定
 
@@ -51,7 +51,7 @@ NDM プロファイルを構築する最初のステップは、デバイスを�
     - 温度: 温度センサー、熱的条件
     - 電源供給: オン/オフまたはブランチ合計
 
-## 実装
+## Implementation
 
 ### プロファイルの追加
 

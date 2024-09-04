@@ -45,6 +45,103 @@ Source maps are limited to **500** MB each.
 Source maps are limited to **500** MB each.
 {{< /site-region >}}
 
+## Collect errors manually
+
+You can monitor handled exceptions, handled promise rejections, and other errors that the Browser SDK does not automatically track. Learn more about [Collecting Browser Errors][2].
+
+
+To manually collect errors, use the `addError()` API:
+
+{{< code-block lang="javascript" >}}
+addError(
+    error: unknown,
+    context?: Context
+);
+{{< /code-block >}}
+
+**Note**: [Error Tracking][4] processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+// Send a custom error with context
+const error = new Error('Something wrong occurred.');
+
+datadogRum.addError(error, {
+    pageStatus: 'beta',
+});
+
+// Send a network error
+fetch('<SOME_URL>').catch(function(error) {
+    datadogRum.addError(error);
+})
+
+// Send a handled exception error
+try {
+    //Some code logic
+} catch (error) {
+    datadogRum.addError(error);
+}
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+// Send a custom error with context
+const error = new Error('Something wrong occurred.');
+
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.addError(error, {
+        pageStatus: 'beta',
+    });
+});
+
+// Send a network error
+fetch('<SOME_URL>').catch(function(error) {
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addError(error);
+    });
+})
+
+// Send a handled exception error
+try {
+    //Some code logic
+} catch (error) {
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addError(error);
+    })
+}
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+// Send a custom error with context
+const error = new Error('Something wrong occurred.');
+
+window.DD_RUM && window.DD_RUM.addError(error, {
+    pageStatus: 'beta',
+});
+
+// Send a network error
+fetch('<SOME_URL>').catch(function(error) {
+    window.DD_RUM && window.DD_RUM.addError(error);
+})
+
+// Send a handled exception error
+try {
+    //Some code logic
+} catch (error) {
+    window.DD_RUM && window.DD_RUM.addError(error);
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

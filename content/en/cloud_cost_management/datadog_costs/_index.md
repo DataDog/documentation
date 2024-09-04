@@ -22,11 +22,10 @@ further_reading:
 - link: "/cloud_cost_management/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
+- link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
+  tag: "Blog"
+  text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< beta-callout url="https://www.datadoghq.com/private-beta/daily-datadog-costs/" >}}
 Daily Datadog costs in Cloud Cost Management are in private beta. To request access, complete the form.
@@ -34,7 +33,7 @@ Daily Datadog costs in Cloud Cost Management are in private beta. To request acc
 
 ## Overview
 
-Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3]. 
+Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3].
 
 You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
@@ -54,7 +53,7 @@ Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) c
 
 Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Costs** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
-{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}} 
+{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
 You can use out-of-the-box tags to break down and allocate your Datadog cost data.
 

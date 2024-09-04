@@ -4835,6 +4835,54 @@ menu:
           - GetCloudCostActivity
         unstable: []
         order: 10
+    - name: Get Custom Costs file
+      url: '#get-custom-costs-file'
+      identifier: cloud-cost-management-get-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomCostsFile
+        unstable: []
+        order: 12
+    - name: Delete Custom Costs file
+      url: '#delete-custom-costs-file'
+      identifier: cloud-cost-management-delete-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomCostsFile
+        unstable: []
+        order: 13
+    - name: Upload Custom Costs file
+      url: '#upload-custom-costs-file'
+      identifier: cloud-cost-management-upload-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadCustomCostsFile
+        unstable: []
+        order: 11
+    - name: List Custom Costs files
+      url: '#list-custom-costs-files'
+      identifier: cloud-cost-management-list-custom-costs-files
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomCostsFiles
+        unstable: []
+        order: 10
     - name: Update Cloud Cost Management Azure config
       url: '#update-cloud-cost-management-azure-config'
       identifier: cloud-cost-management-update-cloud-cost-management-azure-config
@@ -6111,6 +6159,30 @@ menu:
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
       generated: true
+    - name: Update the tags for a device
+      url: '#update-the-tags-for-a-device'
+      identifier: network-device-monitoring-update-the-tags-for-a-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeviceUserTags
+        unstable: []
+        order: 5
+    - name: Get the list of tags for a device
+      url: '#get-the-list-of-tags-for-a-device'
+      identifier: network-device-monitoring-get-the-list-of-tags-for-a-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeviceUserTags
+        unstable: []
+        order: 4
     - name: Get the list of interfaces of the device
       url: '#get-the-list-of-interfaces-of-the-device'
       identifier: network-device-monitoring-get-the-list-of-interfaces-of-the-device
@@ -6899,6 +6971,19 @@ menu:
       url: /api/latest/service-scorecards/
       identifier: service-scorecards
       generated: true
+    - name: Update an existing rule
+      url: '#update-an-existing-rule'
+      identifier: service-scorecards-update-an-existing-rule
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardRule
+        unstable:
+          - v2
+        order: 4
     - name: Delete a rule
       url: '#delete-a-rule'
       identifier: service-scorecards-delete-a-rule
@@ -6964,6 +7049,46 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Software Catalog
+      url: /api/latest/software-catalog/
+      identifier: software-catalog
+      generated: true
+    - name: Delete a single entity
+      url: '#delete-a-single-entity'
+      identifier: software-catalog-delete-a-single-entity
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCatalogEntity
+        unstable: []
+        order: 3
+    - name: Create or update entities
+      url: '#create-or-update-entities'
+      identifier: software-catalog-create-or-update-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCatalogEntity
+        unstable: []
+        order: 2
+    - name: Get a list of entities
+      url: '#get-a-list-of-entities'
+      identifier: software-catalog-get-a-list-of-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogEntity
+        unstable: []
+        order: 1
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -7274,5 +7399,57 @@ menu:
           - v2
         operationids:
           - ListTeams
+        unstable: []
+        order: 1
+    - name: Workflow Automation
+      url: /api/latest/workflow-automation/
+      identifier: workflow-automation
+      generated: true
+    - name: Cancel a workflow instance
+      url: '#cancel-a-workflow-instance'
+      identifier: workflow-automation-cancel-a-workflow-instance
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelWorkflowInstance
+        unstable: []
+        order: 4
+    - name: Get a workflow instance
+      url: '#get-a-workflow-instance'
+      identifier: workflow-automation-get-a-workflow-instance
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflowInstance
+        unstable: []
+        order: 3
+    - name: Execute a workflow
+      url: '#execute-a-workflow'
+      identifier: workflow-automation-execute-a-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowInstance
+        unstable: []
+        order: 2
+    - name: List workflow instances
+      url: '#list-workflow-instances'
+      identifier: workflow-automation-list-workflow-instances
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflowInstances
         unstable: []
         order: 1

@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - https://github.com/DataDog/datadog-formula/blob/main/README.md
+- https://github.com/DataDog/datadog-formula/blob/main/README.md
 title: SaltStack
 ---
 Datadog SaltStack Formula は、Datadog Agent および Agent ベースのインテグレーション (チェック) のインストールに使用する計算式です。SaltStack Formula について詳しくは、[Salt 計算式のインストールと使用方法][1]を参照してください。
@@ -11,7 +11,7 @@ Datadog SaltStack Formula は、Datadog Agent および Agent ベースのイン
 
 Datadog SaltStack Formula は、Debian および RedHat ベースのシステムにのみインストールできます。
 
-### インストール
+### Installation
 
 以下の手順で、Datadog Formula を `base` Salt 環境に追加します。別の Salt 環境に追加する場合は、参照先の `base` を お使いの Salt 環境名に変更してください。
 
@@ -138,9 +138,9 @@ file_roots:
 ```text
 datadog:
   config:
-    api_key: <DD_API_キー>
+    api_key: <YOUR_DD_API_KEY>
   install_settings:
-    agent_version: <AGENT7_バージョン>
+    agent_version: <AGENT7_VERSION>
   checks:
     directory:
       config:
@@ -167,7 +167,7 @@ datadog:
       third_party: true
 ```
 
-##### ログ
+##### Logs
 
 ログ収集を有効にするには、メインのコンフィギュレーションで `logs_enabled` を `true` に設定します。
 ```text

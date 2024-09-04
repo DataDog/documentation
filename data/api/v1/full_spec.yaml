@@ -39,6 +39,8 @@ components:
       properties:
         errors:
           description: Array of errors returned by the API.
+          example:
+          - Bad Request
           items:
             description: Error description.
             example: Bad Request
@@ -804,7 +806,7 @@ components:
           type: string
         client_secret:
           description: Your Azure web application secret key.
-          example: testingx./Sw*g/Y33t..R1cH+hScMDt
+          example: TestingRh2nx664kUy5dIApvM54T4AtO
           type: string
         container_app_filters:
           description: 'Limit the Azure container apps that are pulled into Datadog
@@ -1683,6 +1685,10 @@ components:
           description: Points relating to the distribution point metric. All points
             must be tuples with timestamp and a list of values (cannot be a string).
             Timestamps should be in POSIX time in seconds.
+          example:
+          - - 1575317847.0
+            - - 0.5
+              - 1.0
           items:
             $ref: '#/components/schemas/DistributionPoint'
           type: array
@@ -4323,8 +4329,10 @@ components:
       - profiled_host_usage
       - rum_browser_mobile_sessions_usage
       - rum_replay_sessions_usage
+      - sca_fargate_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
+      - siem_analyzed_logs_add_on_usage
       - siem_ingested_bytes_usage
       - snmp_usage
       - universal_service_monitoring_usage
@@ -4394,8 +4402,10 @@ components:
       - PROFILED_HOST_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
+      - SCA_FARGATE_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -4833,11 +4843,11 @@ components:
           $ref: '#/components/schemas/WidgetEventSize'
         group_by:
           description: Group by configuration for the List Stream Widget. Group by
-            can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
+            can be used only with logs_pattern_stream (up to 4 items) or logs_transaction_stream
             (one group by item is required) list stream source.
           items:
             $ref: '#/components/schemas/ListStreamGroupByItems'
-          maxItems: 3
+          maxItems: 4
           type: array
         indexes:
           description: List of indexes.
@@ -5673,11 +5683,27 @@ components:
           description: The name of the index.
           example: main
           type: string
-        num_retention_days:
-          description: 'The number of days before logs are deleted from this index.
-            Available values depend on
+        num_flex_logs_retention_days:
+          description: 'The total number of days logs are stored in Standard and Flex
+            Tier before being deleted from the index.
 
-            retention plans specified in your organization''s contract/subscriptions.'
+            If Standard Tier is enabled on this index, logs are first retained in
+            Standard Tier for the number of days specified through `num_retention_days`,
+
+            and then stored in Flex Tier until the number of days specified in `num_flex_logs_retention_days`
+            is reached.
+
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.'
+          example: 360
+          format: int64
+          type: integer
+        num_retention_days:
+          description: 'The number of days logs are stored in Standard Tier before
+            aging into the Flex Tier or being deleted from the index.
+
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.'
           example: 15
           format: int64
           type: integer
@@ -5736,17 +5762,35 @@ components:
           type: array
         filter:
           $ref: '#/components/schemas/LogsFilter'
+        num_flex_logs_retention_days:
+          description: 'The total number of days logs are stored in Standard and Flex
+            Tier before being deleted from the index.
+
+            If Standard Tier is enabled on this index, logs are first retained in
+            Standard Tier for the number of days specified through `num_retention_days`,
+
+            and then stored in Flex Tier until the number of days specified in `num_flex_logs_retention_days`
+            is reached.
+
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.
+
+
+            **Note**: Changing this value affects all logs already in this index.
+            It may also affect billing.'
+          example: 360
+          format: int64
+          type: integer
         num_retention_days:
-          description: 'The number of days before logs are deleted from this index.
-            Available values depend on
+          description: 'The number of days logs are stored in Standard Tier before
+            aging into the Flex Tier or being deleted from the index.
 
-            retention plans specified in your organization''s contract/subscriptions.
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.
 
 
-            **Note:** Changing the retention for an index adjusts the length of retention
-            for all logs
-
-            already in this index. It may also affect billing.'
+            **Note**: Changing this value affects all logs already in this index.
+            It may also affect billing.'
           example: 15
           format: int64
           type: integer
@@ -6788,9 +6832,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -7128,8 +7173,9 @@ components:
             Error Tracking, Event, Logs, and RUM monitors.'
           type: string
         groupby_simple_monitor:
+          deprecated: true
           description: Whether the log alert monitor triggers a single alert or multiple
-            alerts when any group breaches a threshold.
+            alerts when any group breaches a threshold. Use `notify_by` instead.
           type: boolean
         include_tags:
           default: true
@@ -8090,10 +8136,14 @@ components:
       - rum_browser_mobile_sessions_percentage
       - ingested_spans_bytes_usage
       - ingested_spans_bytes_percentage
+      - siem_analyzed_logs_add_on_usage
+      - siem_analyzed_logs_add_on_percentage
       - siem_ingested_bytes_usage
       - siem_ingested_bytes_percentage
       - workflow_executions_usage
       - workflow_executions_percentage
+      - sca_fargate_usage
+      - sca_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -8227,10 +8277,14 @@ components:
       - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
       - INGESTED_SPANS_BYTES_USAGE
       - INGESTED_SPANS_BYTES_PERCENTAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_PERCENTAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SIEM_INGESTED_BYTES_PERCENTAGE
       - WORKFLOW_EXECUTIONS_USAGE
       - WORKFLOW_EXECUTIONS_PERCENTAGE
+      - SCA_FARGATE_USAGE
+      - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -8740,6 +8794,16 @@ components:
           description: The total RUM Session Replay usage by tag(s).
           format: double
           type: number
+        sca_fargate_percentage:
+          description: The percentage of Software Composition Analysis Fargate task
+            usage by tag(s).
+          format: double
+          type: number
+        sca_fargate_usage:
+          description: The total Software Composition Analysis Fargate task usage
+            by tag(s).
+          format: double
+          type: number
         sds_scanned_bytes_percentage:
           description: The percentage of Sensitive Data Scanner usage by tag(s).
           format: double
@@ -8754,6 +8818,15 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_percentage:
+          description: The percentage of log events analyzed by Cloud SIEM usage by
+            tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_usage:
+          description: The log events analyzed by Cloud SIEM usage by tag(s).
           format: double
           type: number
         siem_ingested_bytes_percentage:
@@ -9389,6 +9462,8 @@ components:
       properties:
         keys:
           description: Keys to split on.
+          example:
+          - environment
           items:
             description: A key to split on.
             example: environment
@@ -9396,6 +9471,8 @@ components:
           type: array
         tags:
           description: Tags to split on.
+          example:
+          - environment:staging
           items:
             description: A tag to split on.
             example: environment:staging
@@ -10608,6 +10685,7 @@ components:
       description: A formula and function query.
       example:
         data_source: metrics
+        name: query1
         query: sum:trace.servlet.request.hits{*} by {env}.as_count()
       oneOf:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
@@ -11672,6 +11750,8 @@ components:
         formulas:
           description: A list that contains exactly one formula, as only a single
             formula may be used in a time-slice SLO.
+          example:
+          - formula: query1 - default_zero(query2)
           items:
             $ref: '#/components/schemas/SLOFormula'
           maxItems: 1
@@ -11679,6 +11759,10 @@ components:
           type: array
         queries:
           description: A list of queries that are used to calculate the SLI value.
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
           items:
             $ref: '#/components/schemas/SLODataSourceQueryDefinition'
           type: array
@@ -12393,6 +12477,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - - 1575317847.0
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
@@ -12950,7 +13037,6 @@ components:
           items:
             description: Email address that can receive an invitation to access the
               shared dashboard.
-            format: email
             type: string
           nullable: true
           type: array
@@ -13135,7 +13221,6 @@ components:
           items:
             description: Email address that can receive an invitation to access the
               shared dashboard.
-            format: email
             type: string
           nullable: true
           type: array
@@ -13369,6 +13454,8 @@ components:
           $ref: '#/components/schemas/SplitSort'
         split_dimensions:
           description: The dimension(s) on which to split the graph
+          example:
+          - one_graph_per: service
           items:
             $ref: '#/components/schemas/SplitDimension'
           maxItems: 1
@@ -13664,7 +13751,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAPITestStep'
       - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
-      type: object
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -15350,6 +15436,12 @@ components:
           description: Unique identifier of the global variable.
           readOnly: true
           type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
         name:
           description: Name of the global variable. Unique across Synthetic global
             variables.
@@ -15413,17 +15505,18 @@ components:
       - type
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
-      description: Property of the Synthetic Test Response to use for a Synthetic
-        global variable.
+      description: Type of value to extract from a test for a Synthetic global variable.
       enum:
       - http_body
       - http_header
+      - http_status_code
       - local_variable
       example: http_body
       type: string
       x-enum-varnames:
       - HTTP_BODY
       - HTTP_HEADER
+      - HTTP_STATUS_CODE
       - LOCAL_VARIABLE
     SyntheticsGlobalVariableParserType:
       description: Type of parser for a Synthetic global variable from a synthetics
@@ -15440,6 +15533,53 @@ components:
       - JSON_PATH
       - REGEX
       - X_PATH
+    SyntheticsGlobalVariableRequest:
+      description: Details of the global variable to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      type: object
     SyntheticsGlobalVariableTOTPParameters:
       description: Parameters for the TOTP/MFA variable
       properties:
@@ -15495,6 +15635,23 @@ components:
             $ref: '#/components/schemas/SyntheticsTestDetails'
           type: array
       type: object
+    SyntheticsLocalVariableParsingOptionsType:
+      description: Property of the Synthetic Test Response to extract into a local
+        variable.
+      enum:
+      - grpc_message
+      - grpc_metadata
+      - http_body
+      - http_header
+      - http_status_code
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - GRPC_MESSAGE
+      - GRPC_METADATA
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
     SyntheticsLocation:
       description: 'Synthetic location that can be used when creating or editing a
 
@@ -15521,8 +15678,8 @@ components:
       example: {}
       properties:
         field:
-          description: When type is `http_header`, name of the header to use to extract
-            the value.
+          description: When type is `http_header` or `grpc_metadata`, name of the
+            header or metadatum to extract.
           example: content-type
           type: string
         name:
@@ -15534,7 +15691,7 @@ components:
           description: Determines whether or not the extracted value will be obfuscated.
           type: boolean
         type:
-          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+          $ref: '#/components/schemas/SyntheticsLocalVariableParsingOptionsType'
       type: object
     SyntheticsPatchTestBody:
       description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
@@ -16109,7 +16266,7 @@ components:
       type: object
     SyntheticsTestMetadata:
       additionalProperties:
-        description: A single Metadatum.
+        description: A single metadatum.
         type: string
       description: Metadata to include when performing the gRPC test.
       type: object
@@ -16371,10 +16528,7 @@ components:
           type: string
         dnsServerPort:
           description: DNS server port to use for DNS tests.
-          format: int32
-          maximum: 65535
-          minimum: 1
-          type: integer
+          type: string
         files:
           description: Files to be used as part of the request in the test.
           items:
@@ -16414,8 +16568,7 @@ components:
           type: boolean
         port:
           description: Port to use when performing the test.
-          format: int64
-          type: integer
+          type: string
         proxy:
           $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
@@ -19204,6 +19357,22 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current date for the given org.
@@ -19478,6 +19647,17 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner over
             all hours in the current date for all organizations.
@@ -19517,6 +19697,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -19902,6 +20087,22 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current date for the given org.
@@ -20181,6 +20382,17 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner over
             all hours in the current date for the given org.
@@ -20220,6 +20432,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -20609,6 +20826,21 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        flex_logs_starter_avg_sum:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         flex_stored_logs_avg_sum:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current months for all organizations.
@@ -20919,6 +21151,16 @@ components:
             October 1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg_sum:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm_sum:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner in
             the current month for all organizations.
@@ -20958,6 +21200,11 @@ components:
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and
             Google Cloud in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_agg_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         start_date:
@@ -21222,12 +21469,10 @@ components:
         email:
           description: The new email of the user.
           example: test@datadoghq.com
-          format: email
           type: string
         handle:
           description: The user handle, must be a valid email.
           example: test@datadoghq.com
-          format: email
           type: string
         icon:
           description: Gravatar icon associated to the user.
@@ -21860,6 +22105,13 @@ components:
       type: string
       x-enum-varnames:
       - ORDERED
+    WidgetLegacyLiveSpan:
+      additionalProperties: false
+      description: Wrapper for live span
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      type: object
     WidgetLegendSize:
       description: Available legend sizes for a widget. Should be one of "0", "2",
         "4", "8", "16", or "auto".
@@ -21926,6 +22178,24 @@ components:
       - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
+    WidgetLiveSpanUnit:
+      description: Unit of the time span.
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - year
+      example: minute
+      type: string
+      x-enum-varnames:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
     WidgetMargin:
       description: 'Size of the margins around the image.
 
@@ -22030,6 +22300,62 @@ components:
       - TRIGGERED_DESCENDING
       - PRIORITY_ASCENDING
       - PRIORITY_DESCENDING
+    WidgetNewFixedSpan:
+      description: Used for fixed span times, such as 'March 1 to March 7'.
+      properties:
+        from:
+          description: Start time in seconds since epoch.
+          example: 1712080128
+          format: int64
+          minimum: 0
+          type: integer
+        to:
+          description: End time in seconds since epoch.
+          example: 1712083128
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          $ref: '#/components/schemas/WidgetNewFixedSpanType'
+      required:
+      - type
+      - from
+      - to
+      type: object
+    WidgetNewFixedSpanType:
+      description: Type "fixed" denotes a fixed span.
+      enum:
+      - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+      - FIXED
+    WidgetNewLiveSpan:
+      description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
+      properties:
+        type:
+          $ref: '#/components/schemas/WidgetNewLiveSpanType'
+        unit:
+          $ref: '#/components/schemas/WidgetLiveSpanUnit'
+        value:
+          description: Value of the time span.
+          example: 4
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+      - type
+      - value
+      - unit
+      type: object
+    WidgetNewLiveSpanType:
+      description: Type "live" denotes a live span in the new format.
+      enum:
+      - live
+      example: live
+      type: string
+      x-enum-varnames:
+      - LIVE
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
@@ -22202,10 +22528,10 @@ components:
       - TOP
     WidgetTime:
       description: Time setting for the widget.
-      properties:
-        live_span:
-          $ref: '#/components/schemas/WidgetLiveSpan'
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewFixedSpan'
     WidgetTimeWindows:
       description: Define a time window.
       enum:
@@ -24826,6 +25152,7 @@ paths:
         name: metric_query
         schema:
           type: string
+        x-docs-curl-required: true
       - description: The POSIX timestamp of the start of the query in seconds.
         in: query
         name: start
@@ -26119,7 +26446,7 @@ paths:
             origin: request
             value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
               \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
-              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
@@ -32864,7 +33191,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+              $ref: '#/components/schemas/SyntheticsGlobalVariableRequest'
         description: Details of the global variable to create.
         required: true
       responses:
@@ -32886,6 +33213,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -33011,7 +33344,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+              $ref: '#/components/schemas/SyntheticsGlobalVariableRequest'
         description: Details of the global variable to update.
         required: true
       responses:
@@ -35625,7 +35958,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       responses:
         '200':
@@ -35670,7 +36002,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       responses:
         '200':
@@ -35712,7 +36043,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       requestBody:
         content:

@@ -320,4 +320,4 @@ module "lambda-datadog" {
 [3]: /tracing/custom_instrumentation/dotnet/
 [4]: /serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /serverless/configuration/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[6]: /security/application_security/serverless/

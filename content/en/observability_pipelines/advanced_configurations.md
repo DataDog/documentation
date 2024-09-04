@@ -44,36 +44,44 @@ To set bootstrap options, do one of the following:
 - Use environmental variables.
 - Create a `bootstrap.yaml` and start the Worker instance with `--bootstrap-config /path/to/bootstrap.yaml`.
 
+The following is a list of bootstrap options, their related pipeline environment variables, and which variables have a higher precedence (priority).
+
 `api_key`
-: env var: `DD_API_KEY`
+: **Pipeline environment variable**: `DD_API_KEY`
+: **Priority**: `DD_API_KEY`
 : Create a [Datadog API key][1] for this environment variable.
 
 `pipeline_id`
-: env var: `DD_OP_PIPELINE_ID`
+: **Pipeline environment variable**: `DD_OP_PIPELINE_ID`
+: **Priority**: `DD_OP_PIPELINE_ID`
 : Create an [Observability Pipelines pipeline ID][2] for this environment variable.
 
 `site`
-: env var: `DD_SITE`
+: **Pipeline environment variable**: `DD_SITE`
+: **Priority**: `DD_SITE`
 : Your Datadog site (optional, default: `datadoghq.com`).
 : See [Getting Started with Sites][3] for more information.
 
 `data_dir`
-: env var: `DD_OP_DATA_DIR`
+: **Pipeline environment variable**: `DD_OP_DATA_DIR`
+: **Priority**: `DD_OP_DATA_DIR`
 : The data directory (optional, default: `/var/lib/observability-pipelines-worker`). This is the file system directory that the Observability Pipelines Worker uses for local state.
 
 `tags: []`
-: env var: `DD_OP_TAGS`
+: **Pipeline environment variable**: `DD_OP_TAGS`
+: **Priority**: `DD_OP_TAGS`
 : The tags reported with internal metrics and can be used to filter Observability Pipelines instances for Remote Configuration deployments.
 
 `threads`
-: env var: `DD_OP_THREADS`
+: **Pipeline environment variable**: `DD_OP_THREADS`
+: **Priority**: `DD_OP_THREADS`
 : The number of threads to use for processing (optional, default: the number of available cores).
 
 `proxy`
 : This option is available for Observability Pipelines Worker 2.1 and later.
-: env variables: `DD_PROXY_HTTP`, `DD_PROXY_HTTPS`, `DD_PROXY_NO_PROXY`
+: **Pipeline environment variables**: `DD_PROXY_HTTP`, `DD_PROXY_HTTPS`, `DD_PROXY_NO_PROXY`
 : Set proxy servers for the Observability Pipelines Worker. The proxy configuration for the Worker works in the same way as it does for the [Datadog Agent][4].
-: The settings are applied to the entire Worker process. The HTTP proxy and HTTPS values are resolved in this order:
+: **Priority**: The settings are applied to the entire Worker process. The HTTP proxy and HTTPS values are resolved in this order:
 <br>&nbsp;&nbsp;&nbsp;1. `DD_PROXY_HTTP(S)`
 <br>&nbsp;&nbsp;&nbsp;2. `HTTP(S)_PROXY`
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`

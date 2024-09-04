@@ -4,6 +4,7 @@ categories:
 - network
 - oracle
 - tracing
+custom_kind: integration
 dependencies: []
 description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
 doc_link: https://docs.datadoghq.com/integrations/java/
@@ -33,7 +34,6 @@ integration_id: java
 integration_title: JMX
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: java
 public_title: Datadog-JMX インテグレーション
@@ -46,7 +46,7 @@ version: '1.0'
 
 Java インテグレーションを利用して、Java アプリケーションからメトリクス、トレース、ログを収集できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 <div class="alert alert-warning">
@@ -54,7 +54,7 @@ JMX チェックには、インスタンスあたり 350 メトリクスの制�
 
 アプリケーションで [JMX][1] メトリクスが公開されている場合、Datadog Agent から軽量の Java プラグインである JMXFetch (Java 1.7 以上とのみ互換) が呼び出され、MBean サーバーに接続してアプリケーションのメトリクスを収集します。また、監視対象のインスタンスのステータスを報告するサービスチェックを送信することも可能です。このプラグインは、Agent 内で稼働する [DogStatsD][2] サーバーを使用して Datadog Agent にメトリクスを送信します。このインテグレーションでは以下の JMX メトリクスも同様に使用されます。
 
-- ActiveMQ 
+- ActiveMQ
 - Cassandra
 - Solr
 - Tomcat
@@ -62,11 +62,11 @@ JMX チェックには、インスタンスあたり 350 メトリクスの制�
 
 **注**: DogStatsD を介して RATE メトリクスタイプを送信する場合、メトリクスは異なる Agent 間で適切な比較ができるようにアプリ内に GAUGE として表示されます。詳しくは[メトリクスの送信: DogStatsD のドキュメント][3]を参照してください。
 
-#### インフラストラクチャーリスト
+#### Installation
 
 [JMX リモート接続を開く][4]ことができるかをご確認ください。Datadog Agent が JVM に接続するためには、両者が同じホスト上にある場合でもリモート接続が必要です。セキュリティ上の理由から、リスニングアドレスには `0.0.0.0` を使用しないことをお勧めします。同じ場所に配置された JVM と Agent には `com.sun.management.jmxremote.host=127.0.0.1` を使用することをお勧めします。
 
-#### ブラウザトラブルシューティング
+#### 構成
 
 Agent をホスト上のバイナリとして実行している場合は、[他の Agent インテグレーション][5]同様に JMX チェックを構成します。Agent を Kubernetes の DaemonSet として実行している場合は、[オートディスカバリー][6]を使用して JMX チェックを構成します。
 
@@ -279,9 +279,9 @@ _Agent v6.0 以上で使用可能_
 
 [Agent でトレースコレクションを有効化][12]した後、[Java アプリケーションのインスツルメンテーション][13]に関するドキュメントを参照して Datadog にトレースを送信します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 {{< get-metrics-from-git >}}
 
@@ -294,11 +294,11 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
                       jvm.gc.major_collection_time
 ```
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "java" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 [JMX トラブルシューティングのコマンドと FAQ ][16]のリストを参照してください。
 

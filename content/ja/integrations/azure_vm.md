@@ -4,6 +4,7 @@ categories:
 - cloud
 - configuration & deployment
 - os & system
+custom_kind: integration
 dependencies: []
 description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_vm/
@@ -18,7 +19,6 @@ integration_id: azure-vm
 integration_title: Microsoft Azure VM
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_vm
 public_title: Datadog-Microsoft Azure VM インテグレーション
@@ -36,9 +36,9 @@ Azure VM からメトリクスを取得すると、以下のことができま�
 - VM のパフォーマンスを視覚化。
 - VM のパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -58,25 +58,25 @@ Azure VM がシャットダウンまたは停止したモニターをミュー�
 
 **注:** Datadog Agent を実行している場合、Azure VM の `host` タグは GUID です。目で見てわかりやすい名前も含めるには、通知の返信にメッセージのテンプレート変数 `{{host.name_tag}}` を使用します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 <div class="alert alert-warning"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化されました。
 
 ご不明な点は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までお問い合わせください。</div>
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_vm" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Virtual Machine インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Virtual Machine インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

@@ -28,14 +28,15 @@ assets:
     source_type_id: 10322
     source_type_name: crest_data_systems_netapp_eseries_santricity
 author:
-  homepage: https://www.crestdatasys.com
-  name: Crest Data Systems
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  homepage: https://www.crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - data stores
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -44,7 +45,6 @@ integration_id: crest-data-systems-netapp-eseries-santricity
 integration_title: NetApp ESeries SANtricity
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -116,22 +116,23 @@ tile:
 
 ## Agent
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- サポートメール: datadog.integrations@crestdatasys.com
-- 営業メール: datadog-sales@crestdatasys.com
-- Web サイト: [crestdatasys.com][3]
+- Support Email: [datadog.integrations@crestdata.ai][9]
+- Sales Email: [datadog-sales@crestdata.ai][10]
+- Web サイト: [crestdata.ai][3]
 - よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://www.crestdatasys.com/
+[3]: https://www.crestdata.ai/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
-[5]: https://www.crestdatasys.com/datadog-integrations-readme/NetApp_ESeries_SANtricity.pdf
+[5]: https://docs.crestdata.ai/datadog-integrations-readme/NetApp_ESeries_SANtricity.pdf
 [6]: https://docs.datadoghq.com/ja/agent/?tab=Linux
 [7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[8]: https://www.crestdatasys.com/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
-
+[8]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
+[9]: mailto:datadog.integrations@crestdata.ai
+[10]: mailto:datadog-sales@crestdata.ai
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-eseries-santricity" target="_blank">こちらをクリック</a>してください。

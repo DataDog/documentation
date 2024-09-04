@@ -24,27 +24,92 @@ further_reading:
     text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
+  Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
+{{< /learning-center-callout >}}
+
 Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
 Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
 
-## Get Started
+In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
+
+* An issue is or may be impacting customers or services.
+* You do not know whether you should call an incident. Notify other people and increase severity appropriately.
+
+## Usage
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents. You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
-You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
+**Note**: View your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
 {{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
-### Try it out
-{{< whatsnext desc="Learn more about Incident Management:">}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/intro-to-incident-management" >}}Learn about Datadog Incident Management by working through a hands-on examples{{< /nextlink >}}
-    {{< nextlink href="/getting_started/incident_management" >}}Work through an example workflow in the Getting Started with Incident Management guide.{{< /nextlink >}}
-{{< /whatsnext >}}
+### Creating an incident
+
+#### From a graph
+
+You can declare an incident directly from a graph by clicking the export button on the graph and then clicking **Declare incident**. The incident creation modal appears, and the graph is added to the incident as a signal.
+
+{{< img src="service_management/incidents/from-a-graph.png" alt="Create in incident from a graph" style="width:80%;">}}
+
+#### From the Clipboard
+
+Use the Datadog Clipboard to gather multiple monitors and graphs and to generate an incident. To add a dashboard to the Clipboard, copy any graph, and then select **Open Clipboard**. Add all of the relevant graphs and monitors to the Clipboard and then click **Add to New Incident**. Everything on the Clipboard is added to the incident as a signal.
+
+{{< img src="service_management/incidents/from-clipboard.png" alt="Add a dashboard to the clipboard" style="width:80%;">}}
+
+{{< img src="service_management/incidents/clipboard.png" alt="Create in incident from the clipboard" style="width:80%;">}}
+
+**Note**: In addition to exporting from an incident, data on the Clipboard can be exported to a new dashboard or a notebook.
+
+#### From a monitor
+
+You can declare an incident directly from a monitor by clicking **Declare incident**. The incident creation modal appears, and the monitor is added into the incident as a signal.
+
+{{< img src="service_management/incidents/incident-from-monitor.png" alt="Create an incident from a monitor" style="width:80%;">}}
+
+You can also add a monitor to an existing incident.
+
+{{< img src="service_management/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
+
+#### From a Security Signal
+
+Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+
+Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
+
+{{< img src="service_management/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
+
+#### From the Incidents page
+
+In the [Datadog UI][1], click **Declare Incident** to create an incident.
+
+{{< img src="/service_management/incidents/declare_incident_make_private.png" alt="Incident Declaration Modal" style="width:80%;">}}
+
+The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][6]. You also have the option to make the incident private to limit access to only responders.
+
+#### From Slack
+
+Once you have the [Datadog integration enabled on Slack][7], from any Slack channel you can use the slash command `/datadog incident` to declare a new incident.
+
+In the creation modal, you add a descriptive title, select whether customers were impacted (yes, no, or unknown) and select a severity level (1-5, unknown).
+
+If the user declaring the incident has connected their Slack to their Datadog account, then by default that user becomes the Incident Commander (IC). If the person declaring an incident is not a member of a Datadog account, then the IC is unassigned. You can change the IC on the [incidents page][1] later if necessary.
+
+After you declare an incident from Slack, it generates an incident channel.
+
+{{< img src="service_management/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
+
+Read more about using the Datadog Slack App [here][8].
+
+{{< site-region region="eu" >}}
+For {{< region-param key="dd_site_name" >}} customers who use Slack, stay informed about the Slack app by filing a ticket at https://help.datadoghq.com/.
+{{< /site-region >}}
 
 ## Describing the incident
 
-No matter where you [create an incident][100], it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
+No matter where you create an incident, it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
 
 When you create an incident, an incident modal comes up. This modal has several core elements:
 
@@ -63,7 +128,7 @@ An incident's status can be updated directly on the incident's overview page, or
 
 Update the impact section to specify customer impact, the start and end times of the impact, and whether the incident is still active. This section also requires a description of the scope of impact to be completed.
 
-In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels, video conferencing, and attached postmortem (if one has been added).
+In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels (if not using the Datadog Slack App, video conferencing, and attached postmortem (if one has been added).
 
 Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what's already investigated. As the author of the timeline notes, you can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
 
@@ -116,11 +181,15 @@ For more information about Incident Management graphs, see [Incident Management 
 In addition to integrating with [Slack][7], Incident Management also integrates with:
 
 - [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
+- [CoScreen][21] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Statuspage][19] to create and update Statuspage incidents.
 - [ServiceNow][20] to create a ServiceNow ticket for an incident.
 
+## Ready to try it out?
+
+Work through an example workflow in the [Getting Started with Incident Management][18] guide.
 
 ## Further Reading
 
@@ -146,4 +215,4 @@ In addition to integrating with [Slack][7], Incident Management also integrates 
 [18]: /getting_started/incident_management
 [19]: /integrations/statuspage/
 [20]: /integrations/servicenow/
-[100]: /service_management/incident_management/declare
+[21]: /coscreen

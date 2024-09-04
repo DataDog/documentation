@@ -132,6 +132,23 @@ sp.End()
 
 ```
 
+## Adding span events
+
+Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event timestamp and event attributes.
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, and `time` references the Go Standard Library time package. These packages must be imported in order to use this example.
+
+```go
+// Start a span.
+ctx, span := t.Start(context.Background(), "span_name")
+// Add an event.
+span.AddEvent("event1")
+// Add an event with a timestamp.
+span.AddEvent("event2", oteltrace.WithTimestamp(time.Now()))
+// Add an event with span attributes.
+span.AddEvent("event3", oteltrace.WithAttributes(attribute.String("key1", "value"), attribute.Int("key2", 1234)))
+s.End()
+```
+
 ## Adding spans
 
 Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
@@ -169,9 +186,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [6]: https://opentelemetry.io/docs/instrumentation/go/
-[9]: /tracing/trace_collection/trace_context_propagation/go/
+[9]: /tracing/trace_collection/trace_context_propagation/
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[13]: /tracing/trace_collection/trace_context_propagation/go/
+[13]: /tracing/trace_collection/trace_context_propagation/
 [14]: /tracing/security
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context

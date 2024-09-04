@@ -65,7 +65,7 @@ Assertions allow you to validate that your browser test is in the state you expe
 
 To confirm your test ends in an expected state, you must end your browser tests with an **assertion**.
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
 Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
 
@@ -88,9 +88,12 @@ Create this assertion step to have your browser test select a page element such 
 
 Set the user locator to ensure the browser test targets the correct element by selecting `CSS` or `XPath 1.0` from the dropdown menu and adding a selector. Click **Test**. 
 
-Datadog recommends using the two assertions listed above for better accuracy. For more information, see [Advanced Options][1].
+#### Test the state of a checkbox or radio button
 
-[1]: /synthetics/browser_tests/advanced_options#user-specified-locator
+Create this assertion step to have your browser test select a page element and validate the state of the assertion (unchecked or checked).
+
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
+
 {{% /tab %}}
 {{% tab "Test Active Page Content" %}}
 
@@ -161,6 +164,8 @@ For more information about how to test downloads, see [Test File Upload and Down
 [3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 {{% /tab %}}
 {{< /tabs >}}
+
+</br>
 
 ### Navigation
 
@@ -460,6 +465,18 @@ If a variable is assigned different values along your browser test steps (for ex
 
 Some variables only compute at runtime, such as a variable from an HTTP request or a JavaScript step. For example, assume you have a `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value. To record a step using one of these variables, record a step with the actual variable value, and replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` in the step's definition before saving your test. 
 
+## Edit a recording 
+
+To edit a browser recording after it's saved:
+
+- Navigate to [Synthetics > Tests.][14]
+- Click on a previously saved browser test.
+- Click the gear icon on the top right hand corner and then click "edit recording".
+- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+
+{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -477,3 +494,4 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: https://app.datadoghq.com/synthetics/tests

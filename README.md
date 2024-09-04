@@ -17,12 +17,12 @@ For more information on contributing, see the [contribution guidelines][18].
 ### Datadog Staff
 
 - Always branch off of master; never commit directly to master.
-- Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>`. If you don’t use this convention, the Gitlab pipeline won’t run and you won’t get a branch preview. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links.
+- Name your branch `slack_username/branch_name`. If you don't include the forward slash (`/`), the Gitlab pipeline won't run and you won't get a branch preview. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links. Using a [Slack username][21] ensures you get build notifications in Slack.
 - Consult our [contributing guidelines][8].
 - When you're ready to commit, create a new pull request to master from your branch.
 - Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 - If you've named your branch correctly, a GitHub bot posts a link to the docs preview website for your PR. After the preview build completes, you can use the link to preview your changes.
-- To run the build locally, see [Docs Build][20]. This is an optional step and requires setup.
+- Running the build locally is optional. If you followed the branch naming conventions above, your pull request should generate a preview. For information on local builds, see the [Build setup guide][20].
 
 ### Outside Contributors
 
@@ -66,4 +66,5 @@ Within 10 minutes of merging to master, it deploys automatically.
 [17]: https://docs.datadoghq.com
 [18]: /CONTRIBUTING.md
 [19]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
-[20]: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/2231206099/Docs+Build#Local-builds
+[20]: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/3960766866/Build+setup+guide
+[21]: https://slack.com/help/articles/221769328-Locate-your-Slack-URL-or-ID

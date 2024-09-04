@@ -8,9 +8,11 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
-Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
+Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB Atlas instances. This guide outlines the steps to set up Database Monitoring for MongoDB Atlas.
+
+{{% dbm-mongodb-beta-new-features %}}
 
 ## Before you begin
 
@@ -25,6 +27,7 @@ To enable Database Monitoring for your database:
 
 1. [Grant the Agent access to your MongoDB Atlas Cluster](#grant-the-agent-access-to-your-mongodb-atlas-cluster)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
+3. [(Optional) Install the MongoDB Atlas integration](#install-the-mongodb-atlas-integration)
 
 ### Grant the Agent access to your MongoDB Atlas Cluster
 
@@ -51,6 +54,9 @@ The Datadog Agent requires read-only access to the MongoDB Atlas Cluster to coll
 5. Under **Database User Privileges**, expand **Custom Roles** and select the custom monitoring role you created in the previous step.
 6. Click **Add User**.
 7. Note the username and password for the monitoring user, so you can configure the Agent.
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ### Install and configure the Agent
 
@@ -109,7 +115,7 @@ The output should be similar to:
 In this example, the individual `mongos` routers are:
 - `XXXXX-00-00.4zh9o.mongodb.net:27016`
 - `XXXXX-00-01.4zh9o.mongodb.net:27016`
-- `XXXXX-00-02.4zh9o.mongodb.net:27016`. 
+- `XXXXX-00-02.4zh9o.mongodb.net:27016`.
 
 You can use one of these hostnames to configure the Agent.
 
@@ -145,7 +151,7 @@ The output should be similar to:
 }
 {{< /code-block >}}
 
-In this example, the individual MongoDB instances for shard-0 are: 
+In this example, the individual MongoDB instances for shard-0 are:
 - `XXXXX-00-00.4zh9o.mongodb.net:27017`
 - `XXXXX-00-01.4zh9o.mongodb.net:27017`
 - `XXXXX-00-02.4zh9o.mongodb.net:27017`
@@ -205,5 +211,15 @@ Database Monitoring for MongoDB is available in the beta version of the Datadog 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Install the MongoDB Atlas integration
+
+To collect more comprehensive database metrics from MongoDB Atlas, install the [MongoDB Atlas integration][3] (optional).
+
+
+## Data Collected
+
+{{% dbm-mongodb-agent-data-collected %}}
+
 [1]: /database_monitoring/architecture/#cloud-managed-databases
 [2]: /account_management/api-app-keys/
+[3]: /integrations/mongodb_atlas/

@@ -8,9 +8,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works
   tag: Documentation
   text: Application Security Management の仕組み
-- link: /security/application_security/enabling/
-  tag: Documentation
-  text: ASM の有効化
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
@@ -63,7 +60,7 @@ ASM を活用できる、**攻撃に対して脆弱なサービスまたは攻�
 ### リモート構成で ASM を有効にする
 #### 前提条件:
 - Datadog Agent バージョン 7.42.0 以上がホストまたはコンテナにインストールされていること。
-- Datadog トレーサーのバージョンが、[リモート構成と互換性がある][16]こと。
+- Datadog Tracer versions are [compatible with Remote Configuration][17].
 
 #### リモート構成の設定 (まだ有効になっていない場合)
 Datadog UI で[リモート構成][17]を有効にする手順に従ってください。これには以下が含まれます。
@@ -99,7 +96,7 @@ ASM を有効にすると、アプリケーションの脆弱性を即座に識�
 
 さらなるベストプラクティスにご興味がおありですか？[製品内クイックスタートガイド][19]をご覧ください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -118,7 +115,6 @@ ASM を有効にすると、アプリケーションの脆弱性を即座に識�
 [13]: /ja/security/application_security/risk_management
 [14]: https://app.datadoghq.com/security/appsec/vm?&group=vulnerability
 [15]: https://docs.datadoghq.com/ja/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
-[16]: https://docs.datadoghq.com/fr/security/application_security/enabling/compatibility/
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [18]: https://app.datadoghq.com/security/appsec/landing
 [19]: https://app.datadoghq.com/security/configuration/asm/onboarding

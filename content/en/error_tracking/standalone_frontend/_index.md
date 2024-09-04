@@ -3,6 +3,9 @@ title: Frontend Error Tracking
 is_beta: true
 private: true
 further_reading:
+  - link: '/error_tracking/standalone_frontend/collecting_browser_errors/'
+    tag: Documentation
+    text: Collect Browser Errors
   - link: '/error_tracking/explorer/'
     tag: 'Documentation'
     text: 'Getting Started with the Error Tracking Explorer'

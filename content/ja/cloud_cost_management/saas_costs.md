@@ -16,43 +16,48 @@ further_reading:
 - link: /cloud_cost_management/custom
   tag: ドキュメント
   text: カスタムコストに関する洞察を得る
+- link: https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/
+  tag: ブログ
+  text: サービスに関連するクラウドや SaaS のコストを迅速かつ包括的に分析する
 is_beta: true
 private: true
 title: SaaS コストインテグレーション
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">このサイトでは Cloud Cost Management はサポートされていません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Cost Management はサポートされていません。</div>
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-SaaS Cost インテグレーションは公開ベータ版です。
+SaaS Cost Integrations are in public beta.
 {{< /beta-callout >}}
 
 ## 概要
 
-SaaS Cost インテグレーションでは、Datadog でクラウドコストデータに関連するアカウントを構成することで、**プロバイダーから直接**コストデータを送信することができます。
+SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
 
-プロバイダーがサポートされていない場合は、[カスタムコスト][1]を使用して任意のコストデータソースを Datadog にアップロードし、サービスの総コストを把握することができます。
+{{< partial name="cloud_cost/cost-integrations.html" >}}
+
+</br>
+
+If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
 
 ## セットアップ
 
-SaaS Cost インテグレーションを使用するには、AWS、Azure、または Google Cloud の [Cloud Cost Management][2] を構成する必要があります。
+To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud.
 
-クラウドプロバイダーの各ドキュメントを参照してください。
+各クラウドプロバイダーのドキュメントを参照してください。
 
 {{< partial name="cloud_cost/getting-started.html" >}}
 
 </br>
 
-[**Infrastructure > Cloud Costs > Settings > Accounts**][8] に移動し、プロバイダーの **Configure** をクリックしてコストデータを収集します。
+Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data.
 
-{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="AWS、Azure、Google Cloud のアカウントを追加してコストデータを収集します。Fastly、Snowflake、Confluent Cloud、MongoDB、Databricks、OpenAI、Twilio のアカウントも追加できます" style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
 
 {{< tabs >}}
 {{% tab "Databricks" %}}
-
-<div class="alert alert-warning">Databricks の SaaS Cost インテグレーションは非公開ベータ版です。</div>
 
 1. Datadog の [Databricks インテグレーションタイル][101]に移動し、**Add Account** をクリックします。
 2. Databricks インスタンスのデータウェアハウスに対応する `System Tables SQL Warehouse ID` を入力して、システムテーブルの請求データをクエリします。
@@ -67,8 +72,6 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
-
-<div class="alert alert-warning">Confluent Cloud SaaS Cost インテグレーションは公開ベータ版です。</div>
 
 1. Confluent Cloud の組織管理者ロールで API キーを作成または取得します。
 2. Datadog の [Confluent Cloud インテグレーションタイル][101]に移動し、**Add Account** をクリックします。
@@ -85,9 +88,7 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">MongoDB の SaaS Cost インテグレーションは非公開ベータ版です。</div>
-
-1. MongoDB で [API トークンを作成][101]し、`Organization Member` 権限を付与し、クラスターのリソースタグに `Organization Read Only` 権限を追加します。
+1. [Create an API token][101] in MongoDB with `Organizational Billing Viewer` permissions, and add `Organizational Read Only` permissions for cluster resource tags.
 2. Datadog の [MongoDB Cost Management インテグレーションタイル][102]に移動し、**Add New** をクリックします。
 3. MongoDB アカウント名、公開キー、秘密キー、組織 ID を入力し、オプションでタグを指定します。
 4. **Save** をクリックします。
@@ -102,13 +103,11 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">Snowflake の SaaS Cost インテグレーションは公開ベータ版です。</div>
-
 1. Datadog の [Snowflake インテグレーションタイル][101]に移動し、**Add Snowflake Account** をクリックします。
 2. 例えば、`https://xyz12345.us-east-1.snowflakecomputing.com` のように、Snowflake アカウントの URL を入力します。
 3. **Connect your Snowflake account** セクションで、Cloud Cost Management で Snowflake を有効にするトグルをクリックします。
 4. `User Name` フィールドに Snowflake のユーザー名を入力します。
-5. Snowflake を監視する Datadog 固有のロールとユーザーを作成します。
+5. Create a Datadog-specific role and user to monitor Snowflake.
 
    Snowflake で以下を実行してカスタムロールを作成します。
 
@@ -154,9 +153,29 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
 
 {{% /tab %}}
-{{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">OpenAI の SaaS Cost インテグレーションは公開ベータ版です。</div>
+
+{{% tab "Elastic Cloud" %}}
+
+1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
+2. Click **Create New Key**.
+3. Choose a **Name** and **Expiration Date** for your API key.
+4. Select the **Billing Admin** role.
+5. Click **Create Key** to generate the key.
+6. Go to the [Elastic Cloud integration tile][101] in Datadog
+7. Click **Add Account**.
+8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
+
+Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
+
+[101]: https://app.datadoghq.com/integrations/elastic-cloud-ccm
+[102]: https://cloud.elastic.co/account/keys
+
+{{% /tab %}}
+
+{{% tab "OpenAI" %}}
 
 1. OpenAI のアカウント設定で [API キーを作成][101]します。
 2. Datadog の [OpenAI インテグレーションタイル][102]に移動し、**Add Account** をクリックします。
@@ -174,11 +193,9 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">Fastly の SaaS Cost インテグレーションは公開ベータ版です。</div>
-
 1. Fastly の [Personal API tokens][101] ページで、少なくとも `"global:read"` スコープと `"Billing"` ロールを持つ API トークンを作成します。
 2. Datadog の [Fastly インテグレーションタイル][102]に移動し、**Add Account** をクリックします。
-3. Fastly アカウント名と API トークンを入力します。
+3. Enter your Fastly account name and API token.
 4. `Collect Billing Data` のチェックボックスをクリックします。
 5. **Save** をクリックします。
 
@@ -191,8 +208,6 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 
 {{% /tab %}}
 {{% tab "Twilio" %}}
-
-<div class="alert alert-warning">Twilio の SaaS Cost インテグレーションは、非公開ベータ版です。</div>
 
 1. Datadog の [Twilio インテグレーションタイル][101]に移動し、**Add Account** をクリックします。
 2. **Resources** セクションで、各アカウントのトグルをクリックして、`Twilio in Cloud Cost Management` を有効にします。
@@ -237,9 +252,6 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 | `network_access_type` | クラスターのネットワークアクセスタイプ。指定できる値は `INTERNET`、`TRANSIT_GATEWAY`、`PRIVATE_LINK`、`PEERED_VPC` です。 |
 | `product` | 製品名。指定できる値には `KAFKA`、`CONNECT`、`KSQL`、`AUDIT_LOG`、`STREAM_GOVERNANCE`、`CLUSTER_LINK`、`CUSTOM_CONNECT`、`FLINK`、`SUPPORT_CLOUD_BASIC`、`SUPPORT_CLOUD_DEVELOPER`、`SUPPORT_CLOUD_BUSINESS`、および `SUPPORT_CLOUD_PREMIER` が含まれます。 |
 
-{{% /tab %}}
-{{% tab "MongoDB" %}}
-
 | タグ名 | タグの説明 |
 |---|---|
 | `invoice_id` | 請求書の一意の識別子。 |
@@ -267,12 +279,22 @@ SaaS Cost インテグレーションを使用するには、AWS、Azure、ま�
 | `billing_type` | 課金またはクレジットの内容を示します。指定できる請求タイプは以下の通りです。<br>- **consumption**: コンピュートクレジット、ストレージコスト、データ転送コストに関連する使用量。<br>- **rebate**: 他の組織とデータを共有したときに組織に付与されたクレジットでカバーされる使用量。<br>- **priority support**: 優先サポートサービスの料金。この料金はアカウントではなく、契約に付随しています。<br>- **vps_deployment_fee**: 仮想プライベート Snowflake デプロイの料金。<br>- **support_credit**: Snowflake サポートが Snowflake の問題に起因する課金を取り消すためにアカウントに入金したクレジット。 |
 
 {{% /tab %}}
+{{% tab "Elastic Cloud" %}}
+| Tag Name | Tag Description |
+|---|---
+| `name` | The unique identifier of the Elastic Cloud resource. |
+| `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
+| `kind` | The type of resource. |
+
+{{% /tab %}}
+{{% tab "MongoDB" %}}
+
+{{% /tab %}}
 {{% tab "OpenAI" %}}
 
 | タグ名 | タグの説明 |
 |---|---|
 | `organization_id` | 組織の一意の識別子。 |
-| `project_id` | プロジェクトの一意の識別子 (NULL でも可)。 |
 | `project_name` | プロジェクトの名前。 |
 | `organization_name` | 組織の名前。 |
 

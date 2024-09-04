@@ -43,7 +43,7 @@ Use the dependency map to visualize service-to-service communication and gain in
 
 To opt in, Datadog recommends you adjust your:
 - [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
-- [APM tracing libraries](#apm-tracing-libary-configuration) configuration
+- [APM tracing libraries](#apm-tracing-library-configuration) configuration
 
 ### Datadog Agent configuration
 
@@ -128,7 +128,7 @@ exporters:
 {{< /code-block >}}
 
 
-### APM tracing libary configuration
+### APM tracing library configuration
 
 <div class="alert alert-warning">The following steps introduce a <b>breaking change</b>: Datadog will change the way service names are captured by default. Refer to <a href="#global-default-service-naming-migration">Global default service naming migration</a>, to determine if you need to take any migration actions.</div>
 

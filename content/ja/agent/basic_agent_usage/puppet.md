@@ -17,7 +17,7 @@ Datadog Puppet モジュールは Linux および Windows をサポートし、P
 puppet module install datadog-datadog_agent
 ```
 
-#### アップグレード
+#### Upgrading
 
 - デフォルトでは、Datadog Agent v7.x がインストールされます。以前のバージョンの Agent を使用するには、設定 `agent_major_version` を変更します。
 - `agent5_enable` は `agent_major_version` に置き換えられたため使用されなくなりました。
@@ -27,7 +27,7 @@ puppet module install datadog-datadog_agent
 - `conf_dir` と `conf6_dir` はすべての Agent バージョンで `conf_dir` になります。
 - Linux で作成されたリポジトリファイルの名前は、すべての Agent バージョンで `datadog5`/`datadog6` ではなく `datadog` になりました。
 
-### コンフィギュレーション
+### 構成
 
 `datadog_agent` モジュールが `puppetserver`/`puppetmaster`（またはマスターレスホスト）にインストールされたら、次の構成手順に従います。
 
@@ -305,7 +305,7 @@ class { "datadog_agent":
 | `non_local_traffic`                     | 他のノードがこのノードを介してトラフィックをリレーできるようにします。                                                                                                                                      |
 | `apm_enabled`                           | APM Agent を有効にするブール値（デフォルトは false）。                                                                                                                                           |
 | `process_enabled`                       | プロセス Agent を有効にするブール値（デフォルトは false）。                                                                                                                                       |
-| `scrub_args`                            | プロセスのコマンドラインスクラビングを有効にするブール値（デフォルトは true）。                                                                                                                            |
+| `scrub_args`                            | A boolean to enable the process cmdline scrubbing (defaults to true).                                                                                                                            |
 | `custom_sensitive_words`                | スクラビング機能で使用されるデフォルトのものを超える単語を追加するための配列（デフォルトは `[]`）。                                                                                             |
 | `logs_enabled`                          | ログ Agent を有効にするブール値（デフォルトは false）。                                                                                                                                          |
 | `windows_npm_install`                   | Windows NPM ドライバーのインストールを有効にするためのブール値 (デフォルトは false)。                                                                                                                     |

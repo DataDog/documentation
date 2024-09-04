@@ -1,14 +1,16 @@
 ---
-title: "Envoi de checks de service\_: DogStatsD"
-description: Présentation des fonctionnalités de DogStatsD, y compris des types de données et du tagging.
+description: Présentation des fonctionnalités de DogStatsD, y compris des types de
+  données et du tagging.
 further_reading:
-  - link: /developers/dogstatsd/
-    tag: Documentation
-    text: Présentation de DogStatsD
-  - link: /developers/community/libraries/
-    tag: Documentation
-    text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
+- link: /developers/dogstatsd/
+  tag: Documentation
+  text: Présentation de DogStatsD
+- link: /developers/community/libraries/
+  tag: Documentation
+  text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
+title: 'Envoi de checks de service : DogStatsD'
 ---
+
 Si StatsD n'accepte que les métriques, DogStatsD prend en charge les trois principaux types de données Datadog : métriques, événements et checks de service. Cette section propose des cas d'utilisation typiques des checks de service, accompagnés d'exemples de code.
 
 ## Fonction
@@ -26,7 +28,7 @@ Paramètres de la fonction check de service :
 | `<NOM_CHECK_SERVICE>` | Chaîne          | Oui      | -             | Le nom du check de service.                                                                             |
 | `<STATUT>`             | Nombre entier             | Oui      | -             | Une constante décrivant le statut du service : `0` pour OK, `1` pour WARN, `2` pour CRITICAL et `3` pour UNKNOWN. |
 | `<TAGS>`               | Liste de paires key:value | Non       | -             | La liste des tags à associer au check de service.                                                        |
-| `<HOSTNAME>`           | Chaîne          | Non       | Host actuel  | Hostname à associer à ce check de service.                                                          |
+| `<HOSTNAME>`           | Chaîne          | Non       | Current host  | Hostname à associer à ce check de service.                                                          |
 | `<MESSAGE>`            | Chaîne          | Non       | -             | Informations supplémentaires ou une description de la raison pour laquelle ce statut est généré.                                        |
 
 ### Exemples de code
@@ -131,7 +133,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             dogStatsdService.ServiceCheck("Service.check.name", 0, message: "Application is OK.", tags: new[] { "env:dev" });
         }
     }
@@ -159,11 +162,11 @@ $statsd->service_check('Service.check.name', 0);
 
 {{< /programming-lang-wrapper >}}
 
-Après la transmission d'un check de service, utilisez-le pour déclencher un [monitor de check custom][2].
+Après la transmission d'un check de service, utilisez-le pour déclencher un [monitor de check de service][2].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/dogstatsd/
-[2]: /fr/monitors/create/types/custom_check/
+[2]: /fr/monitors/types/service_check/
