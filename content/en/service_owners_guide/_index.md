@@ -2,15 +2,18 @@
 title: Datadog Service Owners Guide
 description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
-- link: "/service_owners_guide/plan"
+- link: "/service_owners_guide/overview"
   tag: "Documentation"
-  text: "Planning your Datadog implementation"
+  text: "Datadog Service Owners Guide overview"
+- link: "/service_owners_guide/plan/"
+  tag: "Documentation"
+  text: "Planning your Datadog Implementation"
 - link: "/service_owners_guide/build/"
   tag: "Documentation"
   text: "Building your Datadog Implementation"
 - link: "/service_owners_guide/run/"
   tag: "Documentation"
-  text: "Maintaining and running your Datadog Implementation"
+  text: "Maintaining and running your Datadog implementation"
 ---
 
 ## Welcome
@@ -30,32 +33,6 @@ This guide is organized into three sections that provide important concepts, pla
 * **[Run][4]**: Execute the internal and external tasks to maintain the Datadog service, maximize its power, and manage ongoing support.
 
 {{< img src="/service_owners_guide/plan_build_run.png" alt="Diagram of the plan, build, and run phases" style="width:80%;">}}
-
-## Getting help
-
-### Self-service resources
-
-As you go along in this guide, you can refer to the following self-service resources:
-
-* The Datadog [documentation][1], especially the [getting started][5] pages, to familiarize yourself with the platform further.  
-* The [Datadog UI][6], which provides in-context help that is accessible from any page.
-* For information on specific configuration boxes, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom left hand side within the interface.
-
-{{< img src="/service_owners_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
-
-On this page you can find resources such as:
-
-* [Bits-AI][7] (in-app), which is a platform-wide AI assisted troubleshooter that helps you identify and remediate issues in your applications and infrastructure.  
-* Datadog [training courses](#learn-datadog-basics).
-
-### File a support ticket
-
-Datadog makes it easy to get support when you've run into a problem without having to worry about gathering the relevant information and sharing it securely and efficiently.
-
-* [Datadog Support][8] is available to help with difficult issues, guide implementations, translate implementations into local conditions, identify bugs, and log feature requests.  
-* For an automated interaction with Datadog support, use Datadog Agent flare, which is a CLI tool that creates a new ticket, then automatically redacts sensitive information in all the relevant log files, debug level settings, and local configs before sending it in a zipped file to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][9].  
-* Additionally, In-App, Datadog's [Fleet Automation][10] can perform the Flare remotely, from within the Platform UI.
-
 
 ## Further Reading
 

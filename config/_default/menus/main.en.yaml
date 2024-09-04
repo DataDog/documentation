@@ -952,19 +952,19 @@ menu:
       weight: 1
     - name: Plan
       url: service_owners_guide/plan/
-      parent: service_owners_guide
+      parent: service_owners_guide_overview
       identifier: service_owners_guide_plan
-      weight: 2
+      weight: 101
     - name: Build
       url: service_owners_guide/build/
-      parent: service_owners_guide
+      parent: service_owners_guide_overview
       identifier: service_owners_guide_build
-      weight: 3
+      weight: 102
     - name: Run
       url: service_owners_guide/run/
-      parent: service_owners_guide
+      parent: service_owners_guide_overview
       identifier: service_owners_guide_run
-      weight: 4
+      weight: 103
     - name: API
       url: api/
       pre: api

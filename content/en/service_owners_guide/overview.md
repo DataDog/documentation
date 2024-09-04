@@ -2,6 +2,9 @@
 title: Service Owners Guide
 description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
+- link: "/service_owners_guide/plan/"
+  tag: "Documentation"
+  text: "Planning your Datadog Implementation"
 - link: "/service_owners_guide/build/"
   tag: "Documentation"
   text: "Building your Datadog Implementation"
@@ -20,25 +23,24 @@ When planning any new software implementation, it's crucial to understand its ca
 
 As you go along in this guide, you can refer to the following self-service resources:
 
-* The Datadog [documentation][1], especially the [getting started][5] pages, to familiarize yourself with the platform further.  
-* The [Datadog UI][6], which provides in-context help that is accessible from any page.
+* The Datadog [documentation][1], especially the [getting started][2] pages, to familiarize yourself with the platform further.  
+* The [Datadog UI][3], which provides in-context help that is accessible from any page.
 * For information on specific configuration boxes, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom left hand side within the interface.
 
 {{< img src="/service_owners_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
 
 On this page you can find resources such as:
 
-* [Bits-AI][7] (in-app), which is a platform-wide AI assisted troubleshooter that helps you identify and remediate issues in your applications and infrastructure.  
+* [Bits-AI][4] (in-app), which is a platform-wide AI assisted troubleshooter that helps you identify and remediate issues in your applications and infrastructure.  
 * Datadog [training courses](#learn-datadog-basics).
 
 ### File a support ticket
 
 Datadog makes it easy to get support when you've run into a problem without having to worry about gathering the relevant information and sharing it securely and efficiently.
 
-* [Datadog Support][8] is available to help with difficult issues, guide implementations, translate implementations into local conditions, identify bugs, and log feature requests.  
-* For an automated interaction with Datadog support, use Datadog Agent flare, which is a CLI tool that creates a new ticket, then automatically redacts sensitive information in all the relevant log files, debug level settings, and local configs before sending it in a zipped file to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][9].  
-* Additionally, In-App, Datadog's [Fleet Automation][10] can perform the Flare remotely, from within the Platform UI.
-
+* [Datadog Support][5] is available to help with difficult issues, guide implementations, translate implementations into local conditions, identify bugs, and log feature requests.  
+* For an automated interaction with Datadog support, use Datadog Agent flare, which is a CLI tool that creates a new ticket, then automatically redacts sensitive information in all the relevant log files, debug level settings, and local configs before sending it in a zipped file to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][6].  
+* Additionally, In-App, Datadog's [Fleet Automation][7] can perform the Flare remotely, from within the Platform UI.
 
 ## Learn Datadog basics
 
@@ -82,41 +84,21 @@ After a bit of training, start adding some of your own local conditions. Spend s
 
 #### In-App
 
-The [Datadog UI][2] is also the best place to start when embarking on substantial deployments of the core products. The platform is full of easy to use configuration assistance, live data auto-parsers, contextual auto-suggestions, and many other tools for the admin. The Datadog UI provides the best resources for aiding in some of these tasks. 
+The [Datadog UI][8] is also the best place to start when embarking on substantial deployments of the core products. The platform is full of easy to use configuration assistance, live data auto-parsers, contextual auto-suggestions, and many other tools for the admin. The Datadog UI provides the best resources for aiding in some of these tasks. 
 
 A few examples are:
 
-* [APM Service Setup][3]   
-* [Log Pipelines][2]   
-* [Monitor Templates][4] 
+* [APM Service Setup][9]   
+* [Log Pipelines][8]   
+* [Monitor Templates][10] 
 
 #### Host Agent Config Templates
 
-The [Datadog Agent][5] is open-source and published in Github. This is a useful resource for viewing configuration templates and specifications. Also, there are tools for host Agent Fleet Automation. Here are a few examples:
+The [Datadog Agent][2] is open-source and published in Github. This is a useful resource for viewing configuration templates and specifications. Also, there are tools for host Agent Fleet Automation. Here are a few examples:
 
-* [Agent Config Template][6]   
-* [Integration Config Specs][7]   
-* [Fleet Automation][8]
-
-## Design
-
-### Sizing exercise
-
-Setting and identifying the clear end goal is critical whenever we start a substantial product implementation. However, in a practical world, it is not possible to know everything you might need at the outset. Product engineers iterate their deployments, and systems operations control their changes, all to control risk. Implementing a large-scale Datadog deployment will similarly benefit from the effective application of standard project management practices. As part of that process, there are certain Datadog elements that should be included. Survey outlines are a great way to size and whiteboard your needs.
-
-A sample survey form might look like this: 
-
-*Application name:*  
-	*Language:*  
-		*Frameworks:*  
-	*Model Layer:*   
-	*View Layer:*  
-	*Controller layer:*  
-	*Infra Type:*  
-	*Operating systems:*
-
-**Recommendation:**   
-Start whiteboarding early, collecting or consolidating a mental survey of your outline. Create a comprehensive view of your ecosystems, application language, data storage, networking, and infrastructure.
+* [Agent Config Template][3]   
+* [Integration Config Specs][4]   
+* [Fleet Automation][5]
 
 
 ## Further Reading
@@ -125,18 +107,12 @@ Start whiteboarding early, collecting or consolidating a mental survey of your o
 
 
 [1]: https://learn.datadoghq.com/
-[2]: https://app.datadoghq.com/logs/pipelines/pipeline/add
-[3]: https://app.datadoghq.com/apm/service-setup
-[4]: https://app.datadoghq.com/monitors/recommended
-[5]: https://github.com/DataDog/datadog-agent
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config\_template.yaml
-[7]: https://github.com/DataDog/integrations-core
-[8]: https://app.datadoghq.com/fleet
-[9]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging/
-[10]: https://docs.datadoghq.com/getting\_started/tagging/
-[11]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging
-[12]: https://docs.datadoghq.com/account\_management/rbac/?tab=datadogapplication
-[13]: https://docs.datadoghq.com/account_management/multi_organization/
-[14]: https://docs.datadoghq.com/account\_management/org\_settings/service\_accounts/
-[15]: https://docs.datadoghq.com/account\_management/api-app-keys/
-[16]: https://docs.datadoghq.com/account\_management/teams/
+[2]: https://github.com/DataDog/datadog-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config\_template.yaml
+[4]: https://github.com/DataDog/integrations-core
+[5]: https://app.datadoghq.com/fleet
+[6]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging/
+[7]: https://docs.datadoghq.com/getting\_started/tagging/
+[8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
+[9]: https://app.datadoghq.com/apm/service-setup
+[10]: https://app.datadoghq.com/monitors/recommended
