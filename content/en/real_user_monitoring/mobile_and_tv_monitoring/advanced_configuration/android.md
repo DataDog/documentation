@@ -222,7 +222,7 @@ You can use the `StopInstance` API to stop the SDK instance assigned to the give
 
 ### Control event buildup
 
-Many operations, such as data processing and event input/output, are queued in background threads. To handle edge cases where the queue has grown so much that there could be delayed processing, high memory usage, or Application Not Responding (ANR) errors.
+Many operations, such as data processing and event input/output, are queued in background threads to handle edge cases where the queue has grown so much that there could be delayed processing, high memory usage, or Application Not Responding (ANR) errors.
 
 You can control the buildup of events on the SDK with the `setBackpressureStrategy` API. This API ignores new tasks if a queue reaches 1024 items.
 
@@ -248,7 +248,20 @@ You can define the minimum log level (priority) to send events to Datadog in a l
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][3] captured by the RUM Android SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Da                                                       |
+In addition to the [default RUM attributes][3] captured by the RUM Android SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
+
+### Track User Sessions
+
+Adding user information to your RUM sessions makes it easy to:
+* Follow the journey of a given user
+* Know which users are the most impacted by errors
+* Monitor performance for your most important users
+
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+
+The following attributes are **optional**, you should provide **at least one** of them:
+
+| Attribute  | Type | Description                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
 | usr.id    | String | Unique user identifier.                                                                                  |
 | usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
