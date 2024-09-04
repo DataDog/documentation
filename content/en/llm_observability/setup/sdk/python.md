@@ -342,6 +342,8 @@ To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators
 
 #### Example
 
+The following also includes an example of annotating a span. See [Annotating a span](#annotating-a-span) for more information.
+
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import retrieval
 
