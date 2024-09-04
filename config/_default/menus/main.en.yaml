@@ -581,7 +581,7 @@ menu:
       parent: opentelemetry_top_level
       weight: 2
     - name: OTLP Metrics Types
-      url: /metrics/open_telemetry/otlp_metric_types/
+      url: opentelemetry/otlp_metric_types/
       parent: otel_terms
       weight: 201
     - name: Collector and Exporter
@@ -1707,7 +1707,7 @@ menu:
       identifier: dev_tools_metrics_api
       weight: 106
     - name: Send OpenTelemetry Metrics to Datadog
-      url: opentelemetry/otel_metrics/
+      url: metrics/open_telemetry/otlp_metrics/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2

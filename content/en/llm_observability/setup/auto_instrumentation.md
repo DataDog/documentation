@@ -23,7 +23,9 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [AWS Bedrock](#aws-bedrock)             | >= 1.31.57         |
 | [Anthropic](#anthropic)                 | >= 0.28.0          |
 
-In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
+You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
+
+**Note:** When using the supported LLM Observability frameworks or libraries, no additional manual instrumentation (such as function decorators) is required to capture these calls. For custom or additional calls within your LLM application that are not automatically traced (like API calls, database queries, or internal functions), you can use [function decorators][18] to manually trace these operations and capture detailed spans for any part of your application that is not covered by auto-instrumentation.
 
 ## Enabling and disabling integrations
 
@@ -129,3 +131,4 @@ The Anthropic integration instruments the following methods:
 [15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
 [16]: /llm_observability/setup/sdk/
 [17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
+[18]: /llm_observability/setup/sdk/#tracing-spans
