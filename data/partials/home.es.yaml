@@ -74,7 +74,7 @@ nav_sections:
       icon: network
       link: network_monitoring/
       title: Monitorización de red
-    - desc: Controle su gasto en la nube con datos unificados sobre observabilidad
+    - desc: Controla tu gasto en la nube con datos unificados sobre observabilidad
         y costos
       icon: cloud-cost-management
       link: cloud_cost_management/
