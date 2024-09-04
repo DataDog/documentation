@@ -2033,26 +2033,31 @@ menu:
       parent: service_management_heading
       identifier: incidents
       weight: 20000
+    - name: Declare an Incident
+      url: service_management/incident_management/declare
+      parent: incidents
+      identifier: incident_declare
+      weight: 1
     - name: Incident Details
       url: service_management/incident_management/incident_details
       parent: incidents
       identifier: incident_details
-      weight: 1
+      weight: 2
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 2
+      weight: 3
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 3
+      weight: 4
     - name: Datadog Clipboard
       url: service_management/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
-      weight: 4
+      weight: 5
     - name: Guides
       url: service_management/incident_management/guides
       parent: incidents
