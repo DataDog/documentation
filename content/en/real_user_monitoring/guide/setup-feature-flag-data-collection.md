@@ -562,6 +562,62 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Kameleoon integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+For more information about the SDK, see [Kameleoon JavaScript SDK documentation][1].
+
+```javascript
+client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+Learn more about SDK initialization in the [Kameleoon React Native SDK documentation][1].
+
+```javascript
+const { onEvent } = useInitialize();
+
+onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### LaunchDarkly integration
 
 {{< tabs >}}

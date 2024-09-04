@@ -3,7 +3,7 @@ title: Syslog Source
 disable_toc: false
 ---
 
-Use Observability Pipelines' Rsyslog or Syslog-ng to receive logs sent to Rsyslog or Syslog-ng. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng. Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 

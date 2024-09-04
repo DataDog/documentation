@@ -581,7 +581,7 @@ menu:
       parent: opentelemetry_top_level
       weight: 2
     - name: OTLP Metrics Types
-      url: /metrics/open_telemetry/otlp_metric_types/
+      url: opentelemetry/otlp_metric_types/
       parent: otel_terms
       weight: 201
     - name: Collector and Exporter
@@ -1707,7 +1707,7 @@ menu:
       identifier: dev_tools_metrics_api
       weight: 106
     - name: Send OpenTelemetry Metrics to Datadog
-      url: opentelemetry/otel_metrics/
+      url: metrics/open_telemetry/otlp_metrics/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
@@ -1829,56 +1829,56 @@ menu:
       parent: service_catalog
       identifier: service_catalog_investigate
       weight: 2
-    - name: Create Entries
-      url: service_catalog/create_entries
+    - name: Enrich Default Catalog
+      url: service_catalog/enrich_default_catalog
       parent: service_catalog
-      identifier: service_catalog_create_entry
+      identifier: service_catalog_enrich_default_catalog
       weight: 3
+    - name: Create Entries
+      url: service_catalog/enrich_default_catalog/create_entries
+      parent: service_catalog_enrich_default_catalog
+      identifier: service_catalog_create_entry
+      weight: 301
     - name: Import Entries from Datadog
-      url: service_catalog/import_entries_dd
-      parent: service_catalog
+      url: service_catalog/enrich_default_catalog/import_entries_dd
+      parent: service_catalog_enrich_default_catalog
       identifier: service_catalog_import_from_telemetries
-      weight: 4
+      weight: 302
     - name: Import Entries from Integrations
-      url: service_catalog/import_entries_integrations
-      parent: service_catalog
+      url: service_catalog/enrich_default_catalog/import_entries_integrations
+      parent: service_catalog_enrich_default_catalog
       identifier: service_catalog_import_from_integrations
-      weight: 5
-    - name: Manage Entries
-      url: service_catalog/manage_entries
-      parent: service_catalog
-      identifier: service_catalog_managing_entries
-      weight: 6
+      weight: 303
     - name: Service Definitions
       url: service_catalog/service_definitions
       parent: service_catalog
       identifier: service_catalog_definitions_versions
-      weight: 7
+      weight: 4
     - name: Service Scorecards
       url: service_catalog/scorecards
       parent: service_catalog
       identifier: service_catalog_scorecards
-      weight: 8
+      weight: 5
     - name: Software Templates
       url: service_catalog/software_templates
       parent: service_catalog
       identifier: software_templates
-      weight: 9
+      weight: 6
     - name: APIs
       url: service_catalog/apis
       parent: service_catalog
       identifier: service_catalog_apis
-      weight: 10
+      weight: 7
     - name: Integrations
       url: service_catalog/integrations
       parent: service_catalog
       identifier: service_catalog_integrations
-      weight: 11
+      weight: 8
     - name: Troubleshooting and Best Practices
       url: service_catalog/guides
       parent: service_catalog
       identifier: troubleshooting_best_practices
-      weight: 12
+      weight: 9
     - name: API Catalog
       url: /api_catalog/
       pre: api-catalog
@@ -2787,41 +2787,51 @@ menu:
       parent: nm_parent
       identifier: ndm
       weight: 3
+    - name: Getting Started
+      url: network_monitoring/devices/getting_started
+      parent: ndm
+      identifier: ndm_getting_started
+      weight: 301
+    - name: Supported Devices
+      url: network_monitoring/devices/supported_devices
+      parent: ndm
+      identifier: ndm_supported_devices
+      weight: 302
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm
       identifier: ndm_snmp_metrics
-      weight: 301
+      weight: 303
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm
       identifier: ndm_snmptraps
-      weight: 302
+      weight: 304
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 304
+      weight: 305
     - name: Device Topology Map
       url: network_monitoring/devices/device_topology_map
       parent: ndm
       identifier: ndm_topology_map
-      weight: 305
+      weight: 306
     - name: Data Collected
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 307
+      weight: 308
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 308
+      weight: 309
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent

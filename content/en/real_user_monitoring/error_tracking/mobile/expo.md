@@ -108,7 +108,7 @@ To test your implementation:
 3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
 4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
 
-To make sure your sourcemaps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
+To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
 Install it with yarn or npm then re-install your pods:
 
@@ -127,7 +127,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new sourcemaps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
 ```
 
 ## Additional configuration options
@@ -158,7 +158,7 @@ If you want to disable **all file uploads**, remove `expo-datadog` from the list
 
 ### Using Expo with Datadog and Sentry
 
-Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the sourcemap. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
+Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
 To use both plugins, make sure to add the `expo-datadog` plugin first in order in your `app.json` file:
 
