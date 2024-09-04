@@ -56,7 +56,7 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 {{< /whatsnext >}}
 
 ## Monitoring the Cluster Agent
-The Datadog Agent includes an integration that automatically monitors the Cluster Agent. This runs on the regular Datadog Agent pod that is on the same node as the Cluster Agent. Refer to the [Datadog Cluster Agent integration documentation][4] for details.
+The Datadog Agent includes an integration that automatically monitors the Cluster Agent. This runs on the regular Datadog Agent pod that is on the same node as the Cluster Agent. It will not run in the Cluster Agent itself. Refer to the [Datadog Cluster Agent integration documentation][4] for details.
 
 ## Further Reading
 
