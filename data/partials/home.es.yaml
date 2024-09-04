@@ -118,8 +118,8 @@ nav_sections:
       icon: rum
       link: real_user_monitoring/
       title: Real User Monitoring
-    - desc: Obtén información sobre el comportamiento de los usuarios y toma decisiones
-        de productos controlados por datos.
+    - desc: Obtener información sobre el comportamiento de los usuarios y tomar decisiones
+        de productos controlados por datos
       icon: product-analytics
       link: product_analytics/
       title: Análisis de productos
