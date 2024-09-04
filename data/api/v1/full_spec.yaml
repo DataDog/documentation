@@ -7173,8 +7173,9 @@ components:
             Error Tracking, Event, Logs, and RUM monitors.'
           type: string
         groupby_simple_monitor:
+          deprecated: true
           description: Whether the log alert monitor triggers a single alert or multiple
-            alerts when any group breaches a threshold.
+            alerts when any group breaches a threshold. Use `notify_by` instead.
           type: boolean
         include_tags:
           default: true
