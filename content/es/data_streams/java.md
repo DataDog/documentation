@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: Documentación
   text: Catálogo de servicios
-title: Configurar la monitorización de flujos de datos para Java
+title: Configurar la monitorización de flujos (streams) de datos para Java
 ---
 
 {{< site-region region="ap1" >}}
