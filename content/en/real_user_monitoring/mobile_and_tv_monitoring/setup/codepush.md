@@ -83,14 +83,6 @@ export default function App() {
 
 As getting the CodePush version is an asynchronous step that needs to be performed before initializing the Datadog React Native SDK for RUM, there is no difference between `InitializationMode.SYNC` and `InitializationMode.ASYNC` when using `DatadogCodepushProvider`.
 
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
-
-Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
-This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
-
 ## Upload CodePush source maps
 
 Install [`@datadog/datadog-ci`][3] as a development dependency to your project.
@@ -162,6 +154,14 @@ In order to avoid potential version clashes, the `versionSuffix` adds a dash (`-
 To obtain the `codepushVersion`, you can hardcode it or use [`CodePush.getUpdateMetadata`][4].
 
 Then, upload your source maps using the [`datadog-ci react-native upload`][5] command, and ensure the `--release-version` argument matches the one set in the SDK configuration.
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Further reading
 
