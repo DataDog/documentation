@@ -27,6 +27,10 @@ rulesets:
     title: "Follow best practices with using Docker"
     description: |
       Best practices for using Docker.
+  github-actions:
+    title: "Secure your GitHub Actions"
+    description: |
+      Rules to check your GitHub Actions and detect unsafe patterns such as permissions or version pinning.
   go-best-practices:
     title: "Best Practices for Go"
     description: |
@@ -127,7 +131,7 @@ rulesets:
     title: "Good practices for data science with pandas"
     description: |
       A set of rules to check that pandas code is used appropriately.
-      
+
        - Ensures `import` declarations follow coding guidelines.
        - Avoid deprecated code and methods.
        - Avoid inefficient code whenever possible.
@@ -135,7 +139,7 @@ rulesets:
     title: "Ensure your Python code is safe and secure"
     description: |
       Rules focused on finding security and vulnerability issues in your Python code, including those found in the OWASP10 and SANS25.
-       
+
        - Use of bad encryption and hashing protocols
        - Lack of access control
        - Security misconfiguration
@@ -199,7 +203,7 @@ rulesets:
 cascade:
   modal:
     title: Try this rule and analyze your code with Datadog Code Analysis
-    top_box: 
+    top_box:
       title: How to use this rule
       steps:
         - Create a static-analysis.datadog.yml with the content above at the root of your repository
@@ -223,7 +227,7 @@ cascade:
         name: Datadog Code Analysis
         url: https://www.datadoghq.com/code-analysis/
 
-  banner: 
+  banner:
     title: "<span>Seamless integrations.</span> Try Datadog Code Analysis"
     link:
       name: Datadog Code Analysis
