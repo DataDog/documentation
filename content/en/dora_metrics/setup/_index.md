@@ -227,7 +227,7 @@ EOF
 [13]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
 [14]: https://app.datadoghq.com/ci/dora
 [15]: /tracing/services/deployment_tracking
-[16]: /service_catalog/add_metadata 
+[16]: /service_catalog/adding_metadata 
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [18]: /dora_metrics/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
 [20]: /dora_metrics/data_collected/#change-lead-time-metrics
