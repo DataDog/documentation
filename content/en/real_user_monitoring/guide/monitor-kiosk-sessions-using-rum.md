@@ -28,7 +28,7 @@ The `stopSession()` method differs depending on your installation method.
 {{% tab "NPM" %}}
 
 ```javascript
-datadogRum.stopSession()
+GlobalRumMonitor.get().stopSession()
 ```
 
 {{% /tab %}}

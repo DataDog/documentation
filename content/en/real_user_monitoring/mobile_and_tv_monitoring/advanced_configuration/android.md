@@ -179,26 +179,76 @@ In addition to [tracking resources automatically][6], you can also track specifi
 
 To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][9].
 
-   ```kotlin
-      GlobalRumMonitor.get().addError(message, source, throwable, attributes)
-   ```
+```kotlin
+   GlobalRumMonitor.get().addError(message, source, throwable, attributes)
+```
+
+### Add user properties
+
+You can use the `addUserProperties` API to append extra user properties to previously set properties.
+
+```kotlin
+fun addUserProperties(extraInfo: Map<String, Any?>, sdkCore: SdkCore = getInstance()) {
+    sdkCore.addUserProperties(extraInfo)
+}
+```
+
+## Event and data management
+
+The Android SDK first stores events and only uploads events when the [intake specifications][11] conditions are met.
+
+### Clear all data
+
+You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+
+```kotlin
+fun clearAllData(sdkCore: SdkCore = getInstance()) {
+    sdkCore.clearAllData()
+}
+```
+
+### Stop data collection
+
+You can use the `StopInstance` API to stop the SDK instance assigned to the given name (or the default instance if the name is null) from collecting and uploading data further.
+
+```kotlin
+   fun stopInstance(instanceName: String? = null) {
+       synchronized(registry) {
+           val instance = registry.unregister(instanceName)
+           (instance as? DatadogCore)?.stop()
+       }
+   }
+```
+
+### Control event buildup
+
+Many operations, such as data processing and event input/output, are queued in background threads. To handle edge cases where the queue has grown so much that there could be delayed processing, high memory usage, or Application Not Responding (ANR) errors.
+
+You can control the buildup of events on the SDK with the `setBackpressureStrategy` API. This API ignores new tasks if a queue reaches 1024 items.
+
+```kotlin
+   fun setBackpressureStrategy(backpressureStrategy: BackPressureStrategy): Builder {
+       coreConfig = coreConfig.copy(backpressureStrategy = backpressureStrategy)
+       return this
+   }
+```
+
+See an [example of this API][12] being used.
+
+### Set remote log threshold
+
+You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is -1 (allow all).
+
+```kotlin
+   fun setRemoteLogThreshold(minLogThreshold: Int): Builder {
+       minDatadogLogsPriority = minLogThreshold
+       return this
+   }
+```
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][3] captured by the RUM Android SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to slice and dice information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
-
-### Track User Sessions
-
-Adding user information to your RUM sessions makes it easy to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
-
-The following attributes are **optional**, you should provide **at least one** of them:
-
-| Attribute  | Type | Description                                                                                              |
+In addition to the [default RUM attributes][3] captured by the RUM Android SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Da                                                       |
 |------------|------|----------------------------------------------------------------------------------------------------|
 | usr.id    | String | Unique user identifier.                                                                                  |
 | usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
@@ -234,8 +284,26 @@ You can use the following methods in `Configuration.Builder` when creating the D
 
 `useSite(DatadogSite)` 
 : Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
+
+`setBatchSize([SMALL|MEDIUM|LARGE])` 
+: Defines the individual batch size for requests sent to Datadog.
+
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+: Defines the frequency for requests made to Datadog endpoints (if requests are available).
+
+`setBatchProcessingLevel(LOW|MEDIUM|HIGH)` 
+: Defines the number of batches sent in each upload cycle.
+
+`setEncryption(Encryption)` 
+: Set an encryption function applied to data stored locally on the device.
+
+`setCrashReportsEnabled(Boolean)` 
+: Enable or disable the collection of JVM crashes.
+
+`setBackpressureStrategy(BackPressureStrategy)` 
+: Define the strategy the SDK uses when handling large volumes of data and internal queues are full.
  
-You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM feature:
+You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM features:
 
 `trackUserInteractions(Array<ViewAttributesProvider>)` 
 : Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
@@ -246,11 +314,8 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `trackLongTasks(durationThreshold)` 
 : Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
-: Defines the individual batch size for requests sent to Datadog.
-
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
-: Defines the frequency for requests made to Datadog endpoints (if requests are available).
+`trackNonFatalAnrs(Boolean)` 
+: Enables tracking non-fatal ANRs. This is enabled by default on Android API 29 and below, and disabled by default on Android API 30 and above.
 
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
 : Sets the preferred frequency for collecting mobile vitals.
@@ -258,9 +323,11 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `setSessionSampleRate(<sampleRate>)` 
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setXxxEventMapper()` 
+`setXxxEventMapper(<event>)` 
 : Sets the data scrubbing callbacks for views, actions, resources, and errors.
 
+`setSessionListener(RumSessionListener)` 
+: Sets a listener to be notified on when a new RUM Session starts.
  
 ### Automatically track views
 
@@ -509,3 +576,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [8]: https://square.github.io/okhttp/features/events/
 [9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
 [10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/android/#sending-data-when-device-is-offline
+[12]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
