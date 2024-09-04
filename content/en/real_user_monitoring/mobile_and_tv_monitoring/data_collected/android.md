@@ -68,7 +68,7 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (System User-Agent).  |
 | `device.model`   | string | The device model as reported by the device (System User-Agent).    |
 | `device.name` | string | The device name as reported by the device (System User-Agent).  |
-| `device.architecture` | string | The CPU architecture of the device. |
+| `device.architecture` | string | The CPU architecture of the device that is reporting the error. |
 
 ### Connectivity
 
@@ -144,7 +144,7 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.last_view.name` | string | Name of the last view of the session. |
 | `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8]. |
 | `session.useragent` | string | System user agent info to interpret device info.  |
-| `session.has_replay` | boolean | Indicates if the session has a Session Replay recording attached. |
+| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 
 ### View metrics
 
@@ -220,9 +220,9 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
 | `error.resource.provider.domain`      | string | The resource provider domain.                                            |
 | `error.resource.provider.type`      | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                                            |
-| `error.is_crash` | string | Overrides the default RUM error source `is_crash` with a custom one. |
-| error.category | string | The specific category of the error. This provides a high-level grouping for different types of errors. Possible values are `ANR` or `Exception` |
-| `error.file` | string | File where the error has been found. |
+| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
+| error.category | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
+| `error.file` | string | File where the error happened for the Error Tracking issue. |
 
 ### Action timing metrics
 
