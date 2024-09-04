@@ -129,7 +129,7 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 To trace a span, use `llmobs.wrap(spanKind, options, function)` as a function wrapper for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][8]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
 
-### Automatic argument, output, and function name Capturing
+### Automatic function argument/output/name capturing
 
 `llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript)) will try to automatically capure inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
 
