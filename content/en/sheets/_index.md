@@ -12,13 +12,13 @@ Sheets is available in <strong>private beta</strong>. To qualify for this produc
 
 ## Overview
 
-Sheets is a spreadsheet tool that connects to Datadog data, enabling you to perform complex data analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don’t have to export and use another tool with stale data. 
+Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don’t have to export and use another tool with stale data. 
 
-Sheets lets you manipulate, transform and analyze logs, real user monitoring and cloud cost monitoring metrics data in a familiar spreadsheet interface. 
+Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. 
 
 ## Create a table
 
-Start by creating a table of data, either by building a new query from Sheets or transferring a query from the logs explorer, RUM explorer or metrics explore.
+Start by creating a table of data, either by building a new query from Sheets or transferring a query from the logs explorer, RUM explorer or metrics explorer.
 
 ### Add a new table in Sheets
 
@@ -32,16 +32,16 @@ Start by creating a table of data, either by building a new query from Sheets or
 
 ### Transfer your query to a spreadsheet
 
-1. From other product pages (such as the [Log Explorer][2]), build out the query of data you want to analyze. For example, filtering your Logs view to those that have `status:error`.
+1. On the page of a supported product (such as the [Log Explorer][2]), build the query of data you want to analyze, such as filtering your Logs view to those that have `status:error`.
 1. Click **Open in Sheets**. For a list of product pages you can create a table from, see the [Supported data sources](#supported-data-sources) section.
 1. You can create a **New Spreadsheet** or add this table of data to an **Existing Spreadsheet**.
 1. Click **Save and Open**.
 
-## Calculated Columns
+## Calculated columns
 
-You can add a calculated column to add calculations, extract data from a log message or add business logic to your data. Your calculated columns can be used in the pivot table you’ll create later.
+You can use a calculated column to add a formula, parse a log message, or add business logic to your data. Your calculated columns can be used in the pivot table you’ll create later.
 
-From the header of the far right column of your table, click the Plus icon to **Add calculated column**. Enter a function to view the syntax and description of the function. For a full list, see the [Functions and Operators][3] documentation.
+From the header of the far right column of your table, click the Plus icon to **Add calculated column**. Enter a function to view the syntax and description of the function. For a full list of supported functions, see the [Functions and Operators][3] documentation.
 
 {{< img src="/sheets/calculated_columns.png" alt="Added calculated column with the Plus icon, and an example IFS function" style="width:90%;" >}}
 
@@ -51,14 +51,14 @@ Lookup enriches your existing data and adds more context to your table. Click **
 
 {{< img src="/sheets/lookup.png" alt="Example Lookup which adds a user's team metadata sourced from a reference table" style="width:90%;" >}}
 
-For example, you have a table of RUM data with user emails and you want to know which teams these users belong to. You can add a lookup where you are taking a Reference Table which has user metadata, comparing the work email in the Reference table and comparing against the User Email in your Sheets table. Lookup pulls the team from the Reference table and adds it as a new column to your spreadsheet.
+For example, you have a table of RUM data with user emails, and you want to know which teams these users belong to. You can add a lookup that compares the user email column in your table with the work email column in a Reference Table. Lookup pulls the team from the Reference Table and adds it as a new column to your spreadsheet.
 
 ## Pivot table
 
-After you add a table of data to a spreadsheet, analyze and add context to your raw data with a Pivot table. Use pivot tables to summarize and organize large amounts of data into customized tables. It helps you analyze data to find patterns and trends, and see comparisons. For example, you can have a table of Error logs with a hundred rows, but with a pivot table you can break down that data into a summary table that counts your error logs by method or region. To create a pivot table:
-1. From an existing spreadsheet that already has a table of data click **Add Pivot Table**.
-1. In the Rows section, select the dimensions you want to analyze, for example, Status of logs.
-1. In the Calculations sections, select the dimensions you want to perform some calculations, including sum, average, count, min, and max.
+After you add a table of data to a spreadsheet, analyze and add context to your raw data with a Pivot table. Use pivot tables to summarize and organize large amounts of data into customized tables. It helps you analyze data to find patterns and trends, and see comparisons. For example, you can have a table of error logs with a hundred rows, but with a pivot table you can break down that data into a summary table that counts your error logs by method or region. To create a pivot table:
+1. From an existing spreadsheet that already has a table of data, click **Add Pivot Table**.
+1. In the **Rows** section, select the dimensions you want to analyze, such as the status of logs.
+1. In the **Calculations** section, select the dimensions you want to use in calculations, including sum, average, count, min, and max.
 
 ## Supported data sources
 
@@ -78,7 +78,7 @@ Create tables and analyze the data pulled from the following data sources:
 
 [1]: https://app.datadoghq.com/sheets
 [2]: https://app.datadoghq.com/logs
-[3]: PLACEHOLDER
+[3]: /sheets/functions_operators
 [4]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
 [5]: https://app.datadoghq.com/rum/sessions
 [6]: https://app.datadoghq.com/metric/explorer

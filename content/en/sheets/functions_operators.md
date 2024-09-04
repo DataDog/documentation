@@ -4,7 +4,7 @@ title: Functions and Operators
 
 ## Overview
 
-Use functions and operators in your Sheets Calculated Columns to add additional analysis and context to your data.
+Use functions and operators in your Sheets calculated columns to add additional analysis and context to your data.
 
 ## Operators
 
@@ -45,8 +45,8 @@ Use functions and operators in your Sheets Calculated Columns to add additional 
 | MOD(number1, number2)                                                  | Returns the result of the modulo operator, the remainder after a division operation.                                              | MOD(5, 2)                                                 |
 | POWER(number, power)                                                   | Returns a number raised to a power.                                                                                               | POWER(2, 3)                                               |
 | LEN(string)                                                            | Returns the length of a string.                                                                                                   | LEN("Hello World")                                        |
-| LOWER(string)                                                          | Return the string in lowercase.                                                                                                   | LOWER("HELLO WORLD")                                      |
-| UPPER(string)                                                          | Return the string in uppercase.                                                                                                   | UPPER("hello world")                                      |
+| LOWER(string)                                                          | Returns the string in lowercase.                                                                                                   | LOWER("HELLO WORLD")                                      |
+| UPPER(string)                                                          | Returns the string in uppercase.                                                                                                   | UPPER("hello world")                                      |
 | LEFT(string, number_of_characters)                                     | Returns a substring from the beginning of a specified string.                                                                     | LEFT("Datadog", 4)                                        |
 | RIGHT(string, number_of_characters)                                    | Returns a substring from the end of a specified string.                                                                           | RIGHT("DATADOG", 3)                                       |
 | CONCATENATE(string1, string2, ...)                                     | Appends strings to one another. Equivalent to the \`&\` operator.                                                                 | CONCATENATE("data", "dog")                                |
