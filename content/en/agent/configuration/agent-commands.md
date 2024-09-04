@@ -76,7 +76,7 @@ List of commands to display the status of the Datadog Agent:
 | macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app             |
 | Source          | `sudo service datadog-agent status`                                           |
 | Windows         | See the [Windows Agent documentation][5].                                     |
-| Cluster Agent (Kubernetes) | `datadog-cluster-agent status`                                     |
+| [Cluster Agent (Kubernetes)][8] | `datadog-cluster-agent status`                                     |
 
 ### Agent information
 
@@ -91,7 +91,7 @@ List of commands to display the status of your Datadog Agent and enabled integra
 | macOS      | `datadog-agent status` or through the [web GUI][4]   |
 | Source     | `sudo datadog-agent status`                          |
 | Windows    | See the [Windows Agent documentation][5].            |
-| Cluster Agent (Kubernetes) | `datadog-cluster-agent status`       |
+| [Cluster Agent (Kubernetes)][8] | `datadog-cluster-agent status`       |
 
 A properly configured integration is displayed under **Running Checks** with no warnings or errors, as seen below:
 
@@ -154,3 +154,4 @@ Some options have flags and options detailed under `--help`. For example, use he
 [5]: /agent/basic_agent_usage/windows/#status-and-information
 [6]: /agent/troubleshooting/config/
 [7]: /agent/troubleshooting/send_a_flare/
+[8]: /containers/cluster_agent/_index.md
