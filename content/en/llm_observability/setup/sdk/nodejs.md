@@ -349,6 +349,8 @@ To trace an LLM span, specify the span kind as `retrieval`, with optionally spec
 
 #### Example
 
+The following also includes an example of annotating a span. See [Annotating a span](#annotating-a-span) for more information.
+
 {{< code-block lang="javascript" >}}
 function getRelevantDocs (question) {
   const contextDocuments = ... // user application logic
