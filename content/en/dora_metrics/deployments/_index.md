@@ -32,10 +32,26 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 ## Selecting a deployment data source
 
-{{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up the data source for your deployment events:" >}}
-  {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< tabs >}}
+{{% tab "APM Deployment Tracking" %}}
+
+For service deployments tracked by APM to contribute to change lead time, ensure the following:
+
+- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+
+[101]: /integrations/github/
+
+{{% /tab %}}
+{{% tab "API or CLI" %}}
+
+For service deployments tracked by the DORA Metrics API or the `datadog-ci dora deployment` command to contribute to change lead time, ensure the following:
+
+- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+
+[101]: /integrations/github/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Calculating deployment frequency
 

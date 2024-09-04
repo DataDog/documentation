@@ -35,10 +35,57 @@ Failed deployments events, currently interpreted through incident events, are us
 
 ## Selecting an incident data source
 
-{{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up a data source for your deployment events:" >}}
-  {{< nextlink href="/dora_metrics/failures/pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/failures/incident_api" >}}Incident Event API{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< tabs >}}
+{{% tab "PagerDuty" %}}
+
+### Mapping PagerDuty services to Datadog services
+
+When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from the [Service Catalog][102].
+
+The matching algorithm works in the following scenarios:
+
+1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog:
+   
+   - If the incident service URL matches a single Datadog service, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
+   - If the incident service URL matches multiple Datadog services, the incident metrics and events are emitted with the Datadog team name.
+   
+   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][103].
+
+2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
+3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the corresponding Datadog team name.
+4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the Datadog team name.
+
+[101]: https://support.pagerduty.com/docs/services-and-integrations
+[102]: /service_catalog/
+[103]: /service_catalog/integrations/#pagerduty-integration
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+### Mapping services to Datadog services
+
+When sending incident events using the [DORA Metrics API][101], you need to ensure that these events are properly attributed to the correct Datadog service and team from the [Service Catalog][102].
+
+To apply the mapping instructions:
+
+1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog:
+
+   - If the incident event's `services` or `team` attribute matches a single Datadog service, the metrics are attributed to the specific Datadog service and team. Ensure that the `services` or `team` attribute in the incident event matches the corresponding Datadog service or team.
+   - If the incident event's `services` or `team` attribute matches multiple Datadog services, the metrics are attributed based on the Datadog team associated with those services. If there are multiple Datadog services, ensure that the `team` attribute reflects the Datadog team name associated with these services.
+
+2. If the incident event's `services` or `team` attribute matches a Datadog service name in the Service Catalog, the incident metrics are attributed to the Datadog service and team associated with this name. Ensure that the `services` or `team` attribute in your incident event matches exactly.
+
+3. If the incident event's `team` attribute matches a Datadog team name in the Service Catalog, the metrics are attributed to the corresponding Datadog team. Ensure that the incident event has the correct `team` attribute to match the Datadog team.
+
+4. If the incident event's `services` attribute matches a Datadog team name, the metrics are attributed to the Datadog team. Ensure that the `services` attribute is set correctly to match the Datadog team as needed.
+
+
+[101]: /dora_metrics/failures/incident_api
+[102]: /service_catalog/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Calculating change failure rate 
 Change failure rate requires both [deployment data][7] and [incident data](#configuring-failure-data-sources).

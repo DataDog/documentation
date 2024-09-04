@@ -52,22 +52,6 @@ The severity of the incident in the DORA Metrics product is based on the [incide
 
 **Note:** Upon webhook creation, a new secret is created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed using the API key instead.
 
-### Mapping PagerDuty services to Datadog services
-
-When an incident event is received for a specific [PagerDuty service][3], Datadog attempts to retrieve the related Datadog service and team from the [Service Catalog][4].
-
-The matching algorithm works in the following scenarios:
-
-1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog:
-   - If the incident service URL matches a single Datadog service, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
-   - If the incident service URL matches multiple Datadog services, the incident metrics and events are emitted with the Datadog team name.
-   
-For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][6].
-
-2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
-3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the corresponding Datadog team name.
-4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the Datadog team name.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
