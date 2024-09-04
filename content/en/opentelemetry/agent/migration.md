@@ -12,7 +12,7 @@ further_reading:
 
 {{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
   The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
-{{< /callout >}} 
+{{< /callout >}}
 
 If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
 
@@ -35,7 +35,7 @@ Before starting the migration process, ensure you have:
 Before you begin, review your configuration to see if your existing config is supported by default:
 
 1. Examine your existing OpenTelemetry Collector configuration file (`otel-config.yaml`).
-1. Compare it to the [list of components][1] included in the Datadog Agent by default. 
+1. Compare it to the [list of components][1] included in the Datadog Agent by default.
 1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
 
 ### Example configuration
@@ -67,8 +67,8 @@ processors:
   metricstransform:
     transforms:
       - include: system.cpu.usage
-        action: update
-        new_name: system.cpu.usage_time
+        action: insert
+        new_name: host.cpu.utilization
 connectors:
   datadog/connector:
     traces:
@@ -207,18 +207,18 @@ datadog:
         name: otel-http
    {{< /code-block >}}
    It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
-   
+
    If you don't want to expose the port, you can use the Agent service instead:
    1. Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
    1. In your application's deployment file (`deployment.yaml`), configure the OTLP exporter to use the Agent service:
-      ```sh   
+      ```sh
       env:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: 'http://<SERVICE_NAME>.<SERVICE_NAMESPACE>.svc.cluster.local'
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
           value: 'grpc'
       ```
-   
+
 1. (Optional) Enable additional Datadog features:
    <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
@@ -320,9 +320,9 @@ env:
 
 [Unified service tagging][3] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-To configure your application with unified service tagging, set the `OTEL_RESOURCE_ATTRIBUTES` environment variable: 
+To configure your application with unified service tagging, set the `OTEL_RESOURCE_ATTRIBUTES` environment variable:
 
-1. Go to your application's Deployment manifest file.  
+1. Go to your application's Deployment manifest file.
 1. Add following lines to enable the correlation between application traces and other observability data:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 env:
@@ -371,7 +371,7 @@ After configuring your application, verify that data is flowing correctly to Dat
 
 After you've confirmed that all data is being collected correctly in Datadog, you can remove the standalone OpenTelemetry Collector:
 
-1. Ensure all required data is being collected and displayed in Datadog.  
+1. Ensure all required data is being collected and displayed in Datadog.
 1. Uninstall the open source OpenTelemetry Collector from your environment:
    ```sh
    kubectl delete deployment old-otel-collector
