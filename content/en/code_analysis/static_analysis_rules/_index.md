@@ -30,7 +30,7 @@ rulesets:
   github-actions:
     title: "Secure your GitHub Actions"
     description: |
-      Rules to check your GitHub Actions and detect unsafe patterns such as permissions or version pinning.
+      Rules to check your GitHub Actions and detect unsafe patterns, such as permissions or version pinning.
   go-best-practices:
     title: "Best Practices for Go"
     description: |
