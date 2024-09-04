@@ -1,6 +1,6 @@
 {{/*  Local Partials start  */}}
 {{ define "partials/get-icon" }}
-  {{/*  Determine icon  */}}
+  {{/*  Determines icon  */}}
   {{ if and (eq .icon_type "INTEGRATION") .logo_path }}
     <img src="{{ .logo_path }}" height="17" alt="{{ .workflow_title }}"/>
   {{ else if and .icon_id (eq .icon_type "ICON") }}
