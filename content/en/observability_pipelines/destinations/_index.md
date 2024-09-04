@@ -20,6 +20,21 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
 1. Set up your processors.
 1. Install the Observability Pipelines Worker.
 
+{{< whatsnext desc="Select a destination for more information:" >}}
+    {{< nextlink href="observability_pipelines/destinations/amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Log Management{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog or syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/splunk_hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/sumo_logic_hosted_collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
+{{< /whatsnext >}}
+
+
 ## Event batching
 
 Observability Pipelines destinations send events in batches to the downstream integration. A batch of events is flushed when one of the following parameters is met:
