@@ -723,6 +723,46 @@ For example, if the current tracking consent is `.pending`:
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
+## Add user properties
+
+You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
+
+```swift
+   public static func addUserExtraInfo(
+       _ extraInfo: [AttributeKey: AttributeValue?],
+       in core: DatadogCoreProtocol = CoreRegistry.default
+   ) {
+       let core = core as? DatadogCore
+       core?.addUserExtraInfo(extraInfo)
+   }
+```
+
+## Data management
+
+The iOS SDK first stores events and only uploads events when the [intake specifications][11] conditions are met.
+
+### Clear all data
+
+You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+
+```swift
+   public static func clearAllData(in core: DatadogCoreProtocol = CoreRegistry.default) {
+       let core = core as? DatadogCore
+       core?.clearAllData()
+   }
+```
+
+### Stop data collection
+
+You can use the `StopInstance` API to stop the SDK instance assigned to the given name (or the default instance if the name is null) from collecting and uploading data further.
+
+```swift
+   public static func stopInstance(named instanceName: String = CoreRegistry.defaultInstanceName) {
+       let core = CoreRegistry.unregisterInstance(named: instanceName) as? DatadogCore
+       core?.stop()
+   }
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -736,3 +776,4 @@ For example, if the current tracking consent is `.pending`:
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios#
