@@ -66,7 +66,7 @@ After you declare an incident from Slack, it generates an incident channel.
 
 [1]: https://app.datadoghq.com/incidents
 [2]: /service_management/incident_management/incident_settings#information
-[3]: security/threats/security_signals/#declare-an-incident
+[3]: /security/threats/security_signals/#declare-an-incident
 [4]:/security/application_security/threats/security_signals/#declare-an-incident
 [5]: /service_management/case_management/view_and_manage
 [6]: /service_management/incident_management/datadog_clipboard
