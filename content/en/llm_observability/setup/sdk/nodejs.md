@@ -618,7 +618,7 @@ function processMessage () {
 
 To manually start and stop a span across different contexts or scopes:
 
-1. Start a span manually using `llmobs.startSpan(spaKind, options)`
+1. Start a span manually using `llmobs.startSpan(spanKind, options)`
 2. Pass the span object as an argument to other functions.
 3. Stop the span manually with the `span.finish()` method. **Note**: the span must be manually finished, otherwise it will not be submitted.
 
