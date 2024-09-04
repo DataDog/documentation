@@ -66,7 +66,7 @@ To generate an LLM Observability trace, you can run a Python script.
 
    For more information about required environment variables, see [the SDK documentation][9]. 
    
-   **Note**: `DD_LLMOBS_AGENTLESS_ENABLED` is only required if you do not have the Datadog Agent running. If the agent is running in your production environment, make sure this environment variable is unset.
+   **Note**: `DD_LLMOBS_AGENTLESS_ENABLED` is only required if you do not have the Datadog Agent running. If the Agent is running in your production environment, make sure this environment variable is unset.
 
 1. View the trace of your LLM call on the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
 
