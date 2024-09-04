@@ -6,6 +6,28 @@ further_reading:
   tag: "Documentation"
   text: "Build your Datadog Implementation"
 ---
+# Plan
+
+## Design
+
+### Sizing exercise
+
+Setting and identifying the clear end goal is critical whenever we start a substantial product implementation. However, in a practical world, it is not possible to know everything you might need at the outset. Product engineers iterate their deployments, and systems operations control their changes, all to control risk. Implementing a large-scale Datadog deployment will similarly benefit from the effective application of standard project management practices. As part of that process, there are certain Datadog elements that should be included. Survey outlines are a great way to size and whiteboard your needs.
+
+A sample survey form might look like this: 
+
+*Application name:*  
+	*Language:*  
+		*Frameworks:*  
+	*Model Layer:*   
+	*View Layer:*  
+	*Controller layer:*  
+	*Infra Type:*  
+	*Operating systems:*
+
+**Recommendation:**   
+Start whiteboarding early, collecting or consolidating a mental survey of your outline. Create a comprehensive view of your ecosystems, application language, data storage, networking, and infrastructure.
+
 
 ## General best practices 
 
