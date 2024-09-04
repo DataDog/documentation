@@ -1,9 +1,11 @@
 ---
-title: How to Set Up Incident Data for DORA Metrics
+title: Understanding Incident Data for DORA Metrics
 description: Learn how to send incident events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents
 - /dora_metrics/setup/incidents
+- /dora_metrics/failures/incident_api
+- /dora_metrics/failures/pagerduty
 is_beta: true
 further_reading:
 - link: "/continuous_integration/dora_metrics/setup/deployments"

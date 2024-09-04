@@ -4290,31 +4290,11 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_deployments
       weight: 2
-    - name: APM Deployment Tracking
-      url: dora_metrics/deployments/apm
-      parent: dora_metrics_deployments
-      identifier: dora_metrics_deployment_apm
-      weight: 201
-    - name: API
-      url: dora_metrics/deployments/deployment_api
-      parent: dora_metrics_deployments
-      identifier: dora_metrics_deployment_events_api
-      weight: 202
     - name: Failure Data Sources
       url: dora_metrics/failures/
       parent: dora_metrics
       identifier: dora_metrics_incidents
       weight: 3
-    - name: PagerDuty
-      url: dora_metrics/failures/pagerduty
-      parent: dora_metrics_incidents
-      identifier: dora_metrics_incident_pagerduty
-      weight: 301
-    - name: API
-      url: dora_metrics/failures/incident_api
-      parent: dora_metrics_incidents
-      identifier: dora_metrics_incident_events_api
-      weight: 302
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics

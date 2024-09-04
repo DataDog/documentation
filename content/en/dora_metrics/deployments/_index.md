@@ -1,9 +1,11 @@
 ---
-title: How to Set Up Deployment Data for DORA Metrics
+title: Understanding Deployment Data for DORA Metrics
 description: Learn how to send deployment events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/deployments
 - /dora_metrics/setup/deployments
+- /dora_metrics/deployments/apm
+- /dora_metrics/deployments/deployment_api
 is_beta: true
 further_reading:
 - link: "/dora_metrics/failures"
@@ -35,11 +37,19 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 {{< tabs >}}
 {{% tab "APM Deployment Tracking" %}}
 
+For deployments identified through APM Deployment Tracking, change lead time is computed from the time of first commit creation to when that commit is first seen in a new version. The `dora.deploy_time` metric is not available. 
+
 For service deployments tracked by APM to contribute to change lead time, ensure the following:
 
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+- Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
+- Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
 
-[101]: /integrations/github/
+For more information about change lead time metrics, see [Data Collected][104].
+
+[101]: https://app.datadoghq.com/source-code/setup/apm
+[102]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[103]: /integrations/github/
+[104]: /dora_metrics/data_collected/#change-lead-time-metrics
 
 {{% /tab %}}
 {{% tab "API or CLI" %}}
