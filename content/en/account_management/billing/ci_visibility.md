@@ -1,5 +1,7 @@
 ---
 title: CI Visibility Billing
+algolia:
+  tags: ['ci visibility', 'ci visibility billing', 'ci visibility billing questions', 'ci visibility pricing']
 further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
