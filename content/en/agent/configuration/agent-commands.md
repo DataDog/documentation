@@ -151,7 +151,7 @@ Some options have flags and options detailed under `--help`. For example, use he
 [2]: /agent/docker/
 [3]: /agent/basic_agent_usage/windows/
 [4]: /agent/basic_agent_usage/windows/#status-and-information
-[5]: /containers/cluster_agent/_index.md
+[5]: /containers/cluster_agent/
 [6]: /agent/basic_agent_usage/#gui
 [7]: /agent/troubleshooting/config/
 [8]: /agent/troubleshooting/send_a_flare/
