@@ -24,7 +24,7 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
     {{< nextlink href="observability_pipelines/destinations/amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Log Management{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Logs{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
