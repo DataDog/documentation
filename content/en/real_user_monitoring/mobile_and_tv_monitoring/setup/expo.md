@@ -71,7 +71,7 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 
 #### Automatic tracking
 
-Automatic view tracking is supported for the the following modules:
+Automatic view tracking is supported for the following modules:
 
 - React Navigation: [@Datadog/mobile-react-navigation][2]
 - React Native Navigation: [@Datadog/mobile-react-native-navigation][3]
@@ -158,6 +158,14 @@ yarn add -D @datadog/datadog-ci
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
 For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][5].
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Tracking Expo Router screens
 
