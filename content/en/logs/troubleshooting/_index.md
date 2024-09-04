@@ -41,7 +41,7 @@ Logs above 1MB are truncated. Fix the issue at the source by checking which `ser
 
 ## Truncated log messages
 
-There is an additional truncation that applies only to indexed logs: messages truncate to 75 KiB for the message field and 25 KiB for non-message fields. Datadog stores the full text, and it remains visible in regular list queries in the Log Explorer. However, the truncated version is displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
+There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog stores the full text, and it remains visible in regular list queries in the Log Explorer. However, the truncated version is displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/logs
