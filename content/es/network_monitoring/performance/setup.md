@@ -18,7 +18,7 @@ further_reading:
 title: Configuración de Network Performance Monitoring
 ---
 
-Datadog Network Performance Monitoring (NPM) te ofrece visibilidad del tráfico de red entre servicios, contenedores, zonas de disponibilidad y cualquier otra etiqueta en Datadog para que puedas:
+Datadog Network Performance Monitoring (NPM) te ofrece visibilidad del tráfico de red entre servicios, contenedores, zonas de disponibilidad y cualquier otra etiqueta (tag) en Datadog para que puedas:
 
 - Localizar dependencias de servicios inesperadas o latentes.
 - Optimizar la costosa comunicación entre regiones o nubes múltiples.
@@ -55,7 +55,7 @@ Datadog Network Performance Monitoring no es compatible con plataformas macOS.
 
 ### Contenedores
 
-NPM te ayuda a visualizar la arquitectura y el rendimiento de tus entornos contenedorizados y orquestados, con compatibilidad para [Docker][5], [Kubernetes][6], [ECS][7] y otras tecnologías de contenedor. Las integraciones de contenedores de Datadog te permiten agregar tráfico por entidades significativas, como contenedores, tareas, pods, clústeres y despliegues, con etiquetas (tags) predefinidas como `container_name`, `task_name` y `kube_service`.
+NPM te ayuda a visualizar la arquitectura y el rendimiento de tus entornos contenedorizados y orquestados, con compatibilidad para [Docker][5], [Kubernetes][6], [ECS][7] y otras tecnologías de contenedor. Las integraciones de contenedores de Datadog te permiten agregar tráfico por entidades significativas, como contenedores, tareas, pods, clústeres y despliegues, con etiquetas predefinidas como `container_name`, `task_name` y `kube_service`.
 
 NPM no es compatible con Autopilot de Google Kubernetes Engine (GKE).
 
@@ -78,8 +78,8 @@ Para obtener más información sobre la monitorización de tu entorno Istio con 
 #### Cilium
 
 Network Performance Monitoring es compatible con instalaciones **Cilium**, siempre que se cumplan los siguientes requisitos:
-1) Cilium v1.6 y superiores, y
-2) Kernel v5.1.16 y superior, o v4.19.57 y superior para kernels 4.19.x
+1) Cilium v1.6 y posteriores, y
+2) Kernel v5.1.16 y posteriores, o v4.19.57 y posteriores para kernels 4.19.x
 
 ### Sistemas de aprovisionamiento
 
