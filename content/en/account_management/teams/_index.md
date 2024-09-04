@@ -24,7 +24,10 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 1. Provide an optional **Description**.
 1. Click **Create**.
 
-**Note:** Allowed characters for team names are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores. Allowed characters for team handles are `a-z`, `0-9`, and `._-:/`, and the last character cannot be an underscore.
+**Notes**: 
+
+- Allowed characters for team names are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores. 
+- Allowed characters for team handles are `a-z`, `0-9`, and `._-:/`. The last character cannot be an underscore.
 
 ### Modify team
 
