@@ -206,7 +206,9 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.message` | string | A concise, human-readable one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 | `error.issue_id`   | string | The stack trace or complementary information about the error.     |
-
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
+| `error.file` | string | File where the error happened for the Error Tracking issue. |
+| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
 
 ### Network errors 
 
@@ -220,9 +222,6 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
 | `error.resource.provider.domain`      | string | The resource provider domain.                                            |
 | `error.resource.provider.type`      | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                                            |
-| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
-| error.category | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
-| `error.file` | string | File where the error happened for the Error Tracking issue. |
 
 ### Action timing metrics
 
