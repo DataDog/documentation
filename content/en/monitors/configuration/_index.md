@@ -157,22 +157,6 @@ In this case, you should enable notifications for missing data. The sections bel
 
 **Note**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
 
-
-{{< tabs >}}
-{{% tab "Metric-based monitors" %}}
-
-If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for `no data` produces a lot of notifications. In this case, you should not enable notifications for missing data. This option does not work unless it is enabled at a time when data has been reporting for a long period.
-
-| Option                                                     | Description                                                                                                                                        | Notes        |
-| ---------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| **Do not notify** if data is missing                       | No notification is sent if data is missing                                                                                                         | <u>Simple Alert</u>: the monitor skips evaluations and stays green until data returns that would change the status from OK <br> <u>Multi Alert</u>: if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.|
-| **Notify** if data is missing for more than **N** minutes. | You are notified if data is missing. The notification occurs when no data was received during the configured time window.| Datadog recommends that you set the missing data window to at least two times the evaluation period. |
-
-
-{{% /tab %}}
-
-{{% tab "Other monitor types" %}}
-
 If data is missing for `N` minutes, select an option from the dropdown menu:
 
 {{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:70%;">}}
@@ -196,9 +180,6 @@ The `Evaluate as zero` and `Show last known status` options are displayed based 
 
 - **Evaluate as zero:** This option is available for monitors using `Count` queries without the `default_zero()` function.
 - **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Auto resolve
 
