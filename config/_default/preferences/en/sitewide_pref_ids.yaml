@@ -1,3 +1,6 @@
+# TODO: This file is not in use yet, it will be used to
+# protect the consistency of sitewide pref IDs 
+# from page to page.
 sitewide_pref_ids:
   - id: host
     display_name: Host

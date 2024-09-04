@@ -27,14 +27,7 @@ const CompilationConfigSchema = z.object({
       partials: z.string(),
       options: z.string()
     })
-    .strict(),
-  config: z
-    .object({
-      outputFormat: z.enum(['html', 'markdown']).optional(),
-      includeAssetsInline: z.boolean().optional(),
-      debug: z.boolean().optional()
-    })
-    .optional()
+    .strict()
 });
 
 /**
@@ -55,7 +48,6 @@ export class MarkdocHugoIntegration {
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string> = {};
-  // Whether to create a self-contained HTML file (useful for testing)
   private compiledFiles: string[] = [];
 
   /**
@@ -74,13 +66,8 @@ export class MarkdocHugoIntegration {
    * those are inlined in the compiled files.
    */
   buildAssetsPartial() {
-    const styles = PageBuilder.getStylesStr();
-    const script = PageBuilder.getClientPrefsManagerScriptStr();
-    const partial = `
-<style>${styles}</style>
-<script>${script}</script>
-    `;
-    return partial;
+    return `<style>${PageBuilder.getStylesStr()}</style>
+<script>${PageBuilder.getClientPrefsManagerScriptStr()}</script>`;
   }
 
   /**
@@ -211,7 +198,7 @@ export class MarkdocHugoIntegration {
       return null;
     }
 
-    // build the HTMl string and write it to file
+    // build the HTML and write it to an .md file
     try {
       const fileContents = PageBuilder.build({
         parsedFile: p.parsedFile,

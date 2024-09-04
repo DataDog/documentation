@@ -21,18 +21,19 @@ const clientPrefsManagerScriptStr = fs.readFileSync(
 
 /**
  * A class that functions as a module, providing methods
- * for building HTML or Markdown strings from parsed .mdoc files.
+ * for building Hugo-compatible .md files from .mdoc files.
  *
- * The PageBuilder uses the parsed Markdoc file to build
- * the filter selector component, the main HTML content, and a script
- * that initializes the client-side renderer
- * with the necessary data to re-render the page
- * when the user changes a preference setting.
+ * The PageBuilder uses the parsed Markdoc file to build:
+ *
+ * - the filter selector component, if one is present
+ * - the main HTML content
+ * - a script that initializes the ClientPrefsManager
+ *   with the necessary data to re-render the page
+ *   when the user changes a preference setting.
  */
 export class PageBuilder {
   /**
-   * Build the HTML output for a given parsed .mdoc file.
-   * This HTML output can be processed by Hugo to generate a static page.
+   * Build the .md output for a given parsed .mdoc file.
    */
   static build(p: {
     parsedFile: ParsedFile;

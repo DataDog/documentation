@@ -1,3 +1,7 @@
+# TODO: This file is not in use yet, it will be used to
+# protect the consistency of sitewide pref values 
+# between various options sets, so applicable values
+# are recognized between different pages.
 sitewide_pref_values:
   - display_name: .NET
     id: dot_net

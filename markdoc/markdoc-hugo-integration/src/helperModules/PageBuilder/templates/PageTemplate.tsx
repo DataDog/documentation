@@ -6,6 +6,9 @@ import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
 /**
  * A JSX template for the main content area of a page,
  * including the filter selector if one should be present.
+ *
+ * JSX templates should not hold state, as they are
+ * only rendered once, at compile time.
  */
 export const PageTemplate = (props: {
   frontmatter: Frontmatter;

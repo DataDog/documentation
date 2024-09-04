@@ -19,6 +19,9 @@ export const imgDefinition = {
   }
 };
 
+// TODO: Currently "forwards" all attributes to the Hugo shortcode,
+// but will be processed natively once the Markdoc-Hugo integration
+// has access to the site configuration.
 export class Img extends CustomHtmlComponent {
   render() {
     return `\n<!-- prettier-ignore -->\n{{< img ${this.forwardNamedAttributes()} >}}\n`;

@@ -38,12 +38,13 @@ export class Fence extends CustomHtmlComponent {
    * The function returns the sanitized children and a mapping of UUIDs to the rendered
    * HTML strings, so the HTML strings can be substituted back in after highlighting.
    */
-  sanitizeChildrenForHighlighting(): {
+  sanitizeChildren(): {
     sanitizedChildren: string[];
     renderedChildTagsByUuid: Record<string, string>;
   } {
     const sanitizedChildren: string[] = [];
     const renderedChildTagsByUuid: Record<string, string> = {};
+
     this.tag.children.forEach((child) => {
       if (
         child &&
@@ -61,13 +62,13 @@ export class Fence extends CustomHtmlComponent {
         throw new Error(`Unrecognized child in fence: ${child}`);
       }
     });
+
     return { renderedChildTagsByUuid, sanitizedChildren };
   }
 
   render() {
-    // Remove any nested Markdoc tags, so they don't get highlighted
-    const { sanitizedChildren, renderedChildTagsByUuid } =
-      this.sanitizeChildrenForHighlighting();
+    // Temporarily remove any nested Markdoc tags, so they don't get highlighted
+    const { sanitizedChildren, renderedChildTagsByUuid } = this.sanitizeChildren();
 
     let formattedCodeContents = sanitizedChildren.join('');
     Object.keys(renderedChildTagsByUuid).forEach((uuid) => {
@@ -75,7 +76,6 @@ export class Fence extends CustomHtmlComponent {
       formattedCodeContents = formattedCodeContents.replace(html, uuid);
     });
 
-    // TODO: Autodetect lexer if nothing is provided
     const lang = this.tag.attributes.language || 'plaintext';
 
     // Highlight the sanitized contents

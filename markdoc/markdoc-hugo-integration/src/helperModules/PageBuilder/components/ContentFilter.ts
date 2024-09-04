@@ -1,5 +1,12 @@
 import { ResolvedPagePrefs } from '../../../schemas/resolvedPagePrefs';
 
+/**
+ * Given a resolved page prefs object, build the UI for the filter selector
+ * that goes at the top of the page.
+ *
+ * This runs at compile time, but also client-side on pref selection change,
+ * so JSX templating is not available.
+ */
 export const buildFilterSelectorUi = (resolvedPagePrefs: ResolvedPagePrefs): string => {
   let selectorHtml = '<div>';
   Object.keys(resolvedPagePrefs).forEach((prefId) => {

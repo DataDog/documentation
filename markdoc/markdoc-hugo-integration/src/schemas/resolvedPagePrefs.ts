@@ -23,12 +23,12 @@ export const ResolvedPagePrefSchema = z
   .strict();
 
 /**
- * A ResolvedPagePref object represents all of the available data
- * for a single page preference. Page prefs are resolved by
- * combining the frontmatter, configured options, and default or user-selected values
- * in order to populate an object that has a current value,
- * correctly populated options based on any placeholders that were
- * used in the frontmatter, and so on.
+ * A ResolvedPagePref object contains the current value
+ * and the current available options for a page pref.
+ * Page prefs are resolved by combining data from
+ * several sources, such as the page's URL, the frontmatter,
+ * the default value for the pref,
+ * and the user's stored preferences.
  *
  * @example
  * {
@@ -49,5 +49,24 @@ export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
 /**
  * A collection of ResolvedPagePref objects, indexed by their
  * unique IDs.
+ *
+ * Page prefs are resolved by combining data from
+ * several sources, such as the page's URL, the frontmatter,
+ * the default value for the pref,
+ * and the user's stored preferences.
+ *
+ * @example
+ * {
+ *   category: {
+ *      id: 'category',
+ *      displayName: 'Category',
+ *      defaultValue: 'all',
+ *      options: [
+ *        { id: 'all', displayName: 'All' },
+ *        { id: 'news', displayName: 'News' },
+ *        { id: 'events', displayName: 'Events' }
+ *      ]
+ *   }
+ * }
  */
 export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;

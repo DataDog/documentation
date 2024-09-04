@@ -1,3 +1,8 @@
+/**
+ * JSX templates for fenced code blocks. These cannot hold state,
+ * as they're converted to static HTML at compile time.
+ */
+
 export const CodeBlockTemplate = (props: {
   highlightedContents: string;
   attrs: {
