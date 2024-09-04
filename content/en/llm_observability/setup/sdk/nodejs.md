@@ -368,7 +368,7 @@ getRelevantDocs = llmobs.wrap('retrieval', getRelevantDocs)
 
 ### Conditions for finishing a span for a wrapped function
 
-`llmobs.wrap` extends the underlying behavior of `tracer.wrap`. The underlying span created when the function is called is finished under the following conditions:
+`llmobs.wrap` extends the underlying behavior of [`tracer.wrap`][14]. The underlying span created when the function is called is finished under the following conditions:
 
 1. The function returns a Promise, in which case the span will finish when the promise is resolved or rejected.
 2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
@@ -711,3 +711,4 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/nodejs/#supported-integrations
 [12]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 [13]: /llm_observability/setup/auto_instrumentation/
+[14]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper
