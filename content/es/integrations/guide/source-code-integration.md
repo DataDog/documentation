@@ -85,7 +85,7 @@ Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar
 
 #### Serverless
 
-Si utilizas la opción serverless, tiene tres opciones en función de la configuración de tu aplicación serverless.
+Si utilizas la opción serverless, tienes tres opciones en función de la configuración de tu aplicación serverless.
 
 ##### Opción 1: Herramientas de Datadog
 
@@ -143,7 +143,7 @@ Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar
 
 #### Serverless
 
-Si utilizas la opción serverless, tiene tres opciones en función de la configuración de tu aplicación serverless.
+Si utilizas la opción serverless, tienes tres opciones en función de la configuración de tu aplicación serverless.
 
 ##### Opción 1: Herramientas de Datadog
 
@@ -192,7 +192,7 @@ Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar
 
 #### Serverless
 
-Si utilizas la opción serverless, tiene tres opciones en función de la configuración de tu aplicación serverless.
+Si utilizas la opción serverless, tienes tres opciones en función de la configuración de tu aplicación serverless.
 
 ##### Opción 1: Herramientas de Datadog
 
@@ -237,7 +237,7 @@ Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configur
 
 #### Serverless
 
-Si utilizas la opción serverless, tiene dos opciones en función de la configuración de tu aplicación serverless.
+Si utilizas la opción serverless, tienes dos opciones en función de la configuración de tu aplicación serverless.
 
 ##### Opción 1: Herramientas de Datadog
 
@@ -272,7 +272,7 @@ Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configur
 
 #### Serverless
 
-Si utilizas la opción serverless, tiene dos opciones en función de la configuración de tu aplicación serverless.
+Si utilizas la opción serverless, tienes dos opciones en función de la configuración de tu aplicación serverless.
 
 ##### Opción 1: Herramientas de Datadog
 
@@ -305,7 +305,7 @@ Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configur
 
 #### Serverless
 
-Si utilizas la opción serverless, tiene dos opciones en función de la configuración de tu aplicación serverless.
+Si utilizas la opción serverless, tienes dos opciones en función de la configuración de tu aplicación serverless.
 
 ##### Opción 1: Herramientas de Datadog
 
