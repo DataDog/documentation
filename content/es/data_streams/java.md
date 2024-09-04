@@ -51,7 +51,7 @@ La monitorización de flujos de datos es compatible con la [biblioteca de conflu
 ### Monitorización de pipelines de SQS
 La monitorización de flujos de datos utiliza un [atributo de mensaje][4] para rastrear la ruta de un mensaje a través de una cola SQS. Como Amazon SQS tiene un límite máximo de 10 atributos de mensaje permitidos por mensaje, todos los mensajes transmitidos a través de los pipelines de datos deben tener 9 o menos atributos de mensaje configurados, lo que permite el atributo restante para la monitorización de flujos de datos.
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
