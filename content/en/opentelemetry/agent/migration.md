@@ -45,9 +45,9 @@ Here are two example Collector configuration files:
 {{< tabs >}}
 {{% tab "Custom Collector components" %}}
 
-This example uses a custom `metricstransform` component in `collector-config.yaml`:
+This example uses a custom `metricstransform` component:
 
-{{< highlight yaml "hl_lines=17-21 36" >}}
+{{< code-block lang="yaml" filename="collector-config.yaml" disable_copy="true" collapsible="true" >}}
 receivers:
   otlp:
     protocols:
@@ -89,9 +89,10 @@ service:
       receivers: [otlp]
       processors: [infraattributes, batch]
       exporters: [datadog]
-{{< /highlight >}}
+{{< /code-block >}}
 
 In this case, you need to follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+
 [4]: /opentelemetry/agent/agent_with_custom_components
 {{% /tab %}}
 
