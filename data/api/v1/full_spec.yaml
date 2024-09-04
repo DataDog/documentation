@@ -14109,6 +14109,7 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJavascript'
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -14225,6 +14226,27 @@ components:
         metaSchema:
           $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
+    SyntheticsAssertionJavascript:
+      description: A JavaScript assertion.
+      properties:
+        code:
+          description: The JavaScript code that performs the assertions.
+          example: dd.expect(dd.response.statusCode).to.equal(200);
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionJavascriptType'
+      required:
+      - type
+      - code
+      type: object
+    SyntheticsAssertionJavascriptType:
+      description: Type of the assertion.
+      enum:
+      - javascript
+      example: javascript
+      type: string
+      x-enum-varnames:
+      - JAVASCRIPT
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
