@@ -370,6 +370,14 @@ After completing the setup, the service should send traces to Datadog.
 You can view traces using the [Trace Explorer][9].
 
 {{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Features are not enabled or configured correctly for native images
+
+There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.
+
+Rather than passing in configuration to a native image via system properties (i.e. `-Ddd.property.name=value`), it is recommended to use environment variables (i.e. `DD_PROPERTY_NAME=value`).
+
+The exception to this rule is when enabling the profiler via passing `-J-Ddd.profiling.enabled=true` to the `native-image` tool at _build time_.
+
 ##### Native-image buildpack versions older than 5.12.2
 
 Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
