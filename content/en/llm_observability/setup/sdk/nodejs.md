@@ -374,6 +374,8 @@ getRelevantDocs = llmobs.wrap('retrieval', getRelevantDocs)
 2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
 3. The function doesn't accept a callback and doesn't return a Promise, in which case the span will finish at the end of the function execution.
 
+The following example demonstrates the second condition, where the last argument is a callback:
+
 #### Example
   
 {{< code-block lang="javascript" >}}
@@ -601,7 +603,7 @@ The `llmobs` SDK provides a corresponding inline method to automatically trace t
 2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
 3. The function doesn't accept a callback and doesn't return a Promise, in which case the span will finish at the end of the function execution.
 
-Additionally, the return value of this function is the return value of the function provided.
+The return type of this function will match the return type of the wrapped function.
 
 #### Example
 
@@ -616,7 +618,7 @@ function processMessage () {
 
 ### Persisting a span across contexts
 
-To manually start and stop a span across different contexts or scopes:
+The LLM Observability SDK provides the `llmobs.startSpan()` method to manually start and stop a span to be persisted across different contexts or scopes:
 
 1. Start a span manually using `llmobs.startSpan(spanKind, options)`
 2. Pass the span object as an argument to other functions.
