@@ -939,18 +939,44 @@ menu:
       parent: dev_tools
       identifier: dev_tools_guides
       weight: 9
+    - name: Service Owners Guide
+      url: service_owners_guide/
+      pre: cog
+      parent: essentials_heading
+      identifier: service_owners_guide
+      weight: 80000
+    - name: Overview
+      url: service_owners_guide/overview/
+      parent: service_owners_guide
+      identifier: service_owners_guide_overview
+      weight: 1
+    - name: Plan
+      url: service_owners_guide/plan/
+      parent: service_owners_guide
+      identifier: service_owners_guide_plan
+      weight: 2
+    - name: Build
+      url: service_owners_guide/build/
+      parent: service_owners_guide
+      identifier: service_owners_guide_build
+      weight: 3
+    - name: Run
+      url: service_owners_guide/run/
+      parent: service_owners_guide
+      identifier: service_owners_guide_run
+      weight: 4
     - name: API
       url: api/
       pre: api
       identifier: api
       parent: essentials_heading
-      weight: 80000
+      weight: 90000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 90000
+      weight: 100000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -961,7 +987,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 100000
+      weight: 110000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting

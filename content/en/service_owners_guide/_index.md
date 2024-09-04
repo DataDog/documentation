@@ -29,7 +29,7 @@ This guide is organized into three sections that provide important concepts, pla
 * **[Build][3]**: Understand what needs to be installed and the best way to get it done so you can implement a Datadog environment that is best suited to your needs.  
 * **[Run][4]**: Execute the internal and external tasks to maintain the Datadog service, maximize its power, and manage ongoing support.
 
-{{< img src="/developers/guide/service_owners_guide/plan_build_run.png" alt="Diagram of the plan, build, and run phases" style="width:80%;">}}
+{{< img src="/service_owners_guide/plan_build_run.png" alt="Diagram of the plan, build, and run phases" style="width:80%;">}}
 
 ## Getting help
 
@@ -41,7 +41,7 @@ As you go along in this guide, you can refer to the following self-service resou
 * The [Datadog UI][6], which provides in-context help that is accessible from any page.
 * For information on specific configuration boxes, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom left hand side within the interface.
 
-{{< img src="/developers/guide/service_owners_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
+{{< img src="/service_owners_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
 
 On this page you can find resources such as:
 

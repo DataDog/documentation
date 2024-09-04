@@ -57,13 +57,6 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Service Owners Guide:">}}
-{{< nextlink href="/service_owners_guide/" >}}<i class="icon-books" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Overview{{< /nextlink >}}
-{{< nextlink href="/service_owners_guide/plan" >}}<i class="icon-organization" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Plan{{< /nextlink >}}
-{{< nextlink href="/service_owners_guide/build" >}}<i class="icon-wrench" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Build{{< /nextlink >}}
-{{< nextlink href="/service_owners_guide/build" >}}<i class="icon-cog-multi" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Run{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< whatsnext desc="Administration:">}}
 {{< nextlink href="/account_management/guide" >}}<i class="icon-cog-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Account Management{{< /nextlink >}}
 {{< /whatsnext >}}
