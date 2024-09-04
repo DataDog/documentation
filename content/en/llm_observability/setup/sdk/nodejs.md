@@ -131,7 +131,7 @@ To trace a span, use `llmobs.wrap(spanKind, options, function)` as a function wr
 
 ### Automatic function argument/output/name capturing
 
-`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript)) will try to automatically capure inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
+`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for typescript) will try to automatically capure inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
