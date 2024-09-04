@@ -78,7 +78,7 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{% tab "Elasticsearch" %}}
 
 7. Enter a name for the destination.
-8. In the **Configure Destination** section, enter the following details:
+8. In the **Configure Destination** section, enter the following details:  
    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.  
    b. The name of the destination index where you want to send the logs.  
    c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
@@ -91,10 +91,13 @@ The following metrics report on logs that have been forwarded successfully, incl
 7. Enter a name for the destination.
 8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
 9. In the **Configure Destination** section, enter the following details:  
-   a. The Logs Ingestion endpoint on the Data Collection Endpoint (DCE) resource to which you want to send the logs. This can be found on the Overview page for the relevant DCE resource as "Logs Ingestion". An example of an endpoint: `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`.  
-   b. The Immutable ID of the Data Collection Rule (DCR) where the target logging routes are defined. This can be found on the Overview page for the relevant DCR resource as "Immutable Id". An example of an Immutable ID: `dcr-000a00a000a00000a000000aa000a0aa`.  
+   a. The Logs Ingestion endpoint on the Data Collection Endpoint (DCE) to which you want to send the logs. This can be found on the Overview page for the DCE resource as "Logs Ingestion".  
+   An example of an endpoint: `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`.  
+   b. The Immutable ID of the Data Collection Rule (DCR) where the target logging routes are defined. This can be found on the Overview page for the DCR resource as "Immutable Id".  
+   An example of an Immutable ID: `dcr-000a00a000a00000a000000aa000a0aa`.  
     **Note**: You must have the Monitoring Metrics Publisher role assigned to the App Registration attached to the DCR resource. This can be found in the DCR IAM settings.  
-   c. The name of the target Stream Declaration. This can be found by looking at the Resource JSON of the DCR under the `streamDeclarations`. An example of a Stream Declaration: `Custom-MyTable`.
+   c. The name of the target Stream Declaration. This can be found by looking at the Resource JSON of the DCR under the `streamDeclarations`.  
+   An example of a Stream Declaration: `Custom-MyTable`.
 
 {{% /tab %}}
 
