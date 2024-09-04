@@ -67,9 +67,9 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 7. Enter a name for the destination.
 8. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`.
-   **Note**: `/services/collector/event` is automatically appended to the endpoint.
+    **Note**: `/services/collector/event` is automatically appended to the endpoint.
 9. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
-   **Note**: The [indexer acknowledgment][2] needs to be disabled.
+    **Note**: The [indexer acknowledgment][2] needs to be disabled.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 [2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
@@ -79,8 +79,8 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 7. Enter a name for the destination.
 8. In the **Configure Destination** section, enter the following details:
-   a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
-   b. The name of the destination index where you want to send the logs.
+   a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.  
+   b. The name of the destination index where you want to send the logs.  
    c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
 9. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
 
@@ -91,9 +91,9 @@ The following metrics report on logs that have been forwarded successfully, incl
 7. Enter a name for the destination.
 8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
 9. In the **Configure Destination** section, enter the following details:
-   a. The Logs Ingestion endpoint on the Data Collection Endpoint (DCE) resource to which you want to send the logs. This can be found on the Overview page for the relevant DCE resource as "Logs Ingestion". An example of an endpoint: `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`.
-   b. The Immutable ID of the Data Collection Rule (DCR) where the target logging routes are defined. This can be found on the Overview page for the relevant DCR resource as "Immutable Id". An example of an Immutable ID: `dcr-000a00a000a00000a000000aa000a0aa`.
-      **Note**: You must have the Monitoring Metrics Publisher role assigned to the App Registration attached to the DCR resource. This can be found in the DCR IAM settings.
+   a. The Logs Ingestion endpoint on the Data Collection Endpoint (DCE) resource to which you want to send the logs. This can be found on the Overview page for the relevant DCE resource as "Logs Ingestion". An example of an endpoint: `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`.  
+   b. The Immutable ID of the Data Collection Rule (DCR) where the target logging routes are defined. This can be found on the Overview page for the relevant DCR resource as "Immutable Id". An example of an Immutable ID: `dcr-000a00a000a00000a000000aa000a0aa`.  
+    **Note**: You must have the Monitoring Metrics Publisher role assigned to the App Registration attached to the DCR resource. This can be found in the DCR IAM settings.
    c. The name of the target Stream Declaration. This can be found by looking at the Resource JSON of the DCR under the `streamDeclarations`. An example of a Stream Declaration: `Custom-MyTable`.
 
 {{% /tab %}}
