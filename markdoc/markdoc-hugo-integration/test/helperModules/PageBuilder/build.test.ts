@@ -25,7 +25,8 @@ describe('PageBuilder.build', () => {
 
   const html = PageBuilder.build({
     parsedFile,
-    prefOptionsConfig: prefOptionsConfigForPage
+    prefOptionsConfig: prefOptionsConfigForPage,
+    hugoConfig: { siteParams: { img_url: 'https://example.com' }, env: 'development' }
   });
 
   test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {

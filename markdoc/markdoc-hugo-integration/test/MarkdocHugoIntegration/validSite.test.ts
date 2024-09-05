@@ -12,10 +12,12 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       options: siteDir + '/preferences_config/options',
       partials: siteDir + '/partials'
     },
-    siteParams: {
-      img_url: 'https://example.com'
-    },
-    env: 'development'
+    hugoConfig: {
+      siteParams: {
+        img_url: 'https://example.com'
+      },
+      env: 'development'
+    }
   });
 
   test('each compiled file matches the snapshot', () => {

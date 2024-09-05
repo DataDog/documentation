@@ -11,8 +11,7 @@ import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
-import { RequiredSiteParams } from '../../schemas/requiredSiteParams';
-import { Env } from '../../schemas/env';
+import { HugoConfig } from '../../schemas/hugoConfig';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -40,8 +39,7 @@ export class PageBuilder {
   static build(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
-    siteParams: RequiredSiteParams;
-    env: Env;
+    hugoConfig: HugoConfig;
   }): string {
     const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,
@@ -52,7 +50,7 @@ export class PageBuilder {
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
       defaultValsByPrefId,
-      variables: { ...p.siteParams, env: p.env }
+      variables: { hugoConfig: { ...JSON.parse(JSON.stringify(p.hugoConfig)) } }
     });
 
     const pageInitScript = this.#getPageInitScript({

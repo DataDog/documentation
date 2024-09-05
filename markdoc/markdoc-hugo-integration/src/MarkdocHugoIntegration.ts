@@ -7,10 +7,7 @@
 import fs from 'fs';
 import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import {
-  RequiredSiteParamsSchema,
-  RequiredSiteParams
-} from './schemas/requiredSiteParams';
+import { HugoConfig, HugoConfigSchema } from './schemas/hugoConfig';
 import {
   MdocFileParser,
   ParsingErrorReport,
@@ -19,7 +16,6 @@ import {
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
-import { EnvSchema } from './schemas/env';
 
 /**
  * The schema for the config object passed to the MarkdocHugoIntegration class
@@ -33,8 +29,7 @@ const CompilationConfigSchema = z.object({
       options: z.string()
     })
     .strict(),
-  siteParams: RequiredSiteParamsSchema,
-  env: EnvSchema
+  hugoConfig: HugoConfigSchema
 });
 
 /**
@@ -49,7 +44,7 @@ export class MarkdocHugoIntegration {
     partials: string;
     options: string;
   };
-  siteParams: RequiredSiteParams;
+  hugoConfig: HugoConfig;
 
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
@@ -65,7 +60,7 @@ export class MarkdocHugoIntegration {
   constructor(args: CompilationConfig) {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
-    this.siteParams = args.siteParams;
+    this.hugoConfig = args.hugoConfig;
   }
 
   /**
@@ -212,7 +207,7 @@ export class MarkdocHugoIntegration {
       const fileContents = PageBuilder.build({
         parsedFile: p.parsedFile,
         prefOptionsConfig: prefOptionsConfigForPage,
-        siteParams: this.siteParams
+        hugoConfig: this.hugoConfig
       });
 
       const compiledFilepath = this.#writeFile({
