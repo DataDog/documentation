@@ -119,10 +119,10 @@ The following examples demonstrate different ways to add events to a span:
 ```php
 $span->addEvent("Event With No Attributes");
 $span->addEvent(
-    "Event With All Attributes", 
+    "Event With Some Attributes", 
     [ 
         'int_val' => 1, 
-        'string_val' => "2", 
+        'string_val' => "two", 
         'int_array' => [3, 4], 
         'string_array' => ["5", "6"],
         'bool_array' => [true, false]
@@ -132,7 +132,7 @@ $span->addEvent(
 
 Read the [OpenTelemetry][14] specification for more information.
 
-### Record exceptions
+### Recording Exceptions
 
 To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
 

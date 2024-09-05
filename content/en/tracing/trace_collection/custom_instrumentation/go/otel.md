@@ -132,7 +132,22 @@ sp.End()
 
 ```
 
-## Adding span events
+## Adding spans
+
+Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
+
+```go
+// Can only be done after the setup steps.
+
+// Here we can leverage context.Context to pass in Datadog-specifc start span options,
+// like 'ddtracer.Measured()'
+ctx, span := t.Start(
+	ddotel.ContextWithStartOptions(context.Background(), ddtracer.Measured()), "span_name")
+
+span.End()
+```
+
+## Adding Span Events
 
 Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event `timestamp` and event `attributes`.
 In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, this package must be imported in order to use this example.
@@ -149,27 +164,11 @@ In the following example, `oteltrace` is an alias for the go.opentelemetry.io/ot
 ```go
 // Start a span.
 ctx, span := t.Start(context.Background(), "span_name")
-// Add an event.
-span.AddEvent("Event Name")
-// Add an event with span attributes.
-span.AddEvent("Event Name", oteltrace.WithAttributes(attribute.Int("int_val", 1), attribute.String("string_val", "2"), attribute.Int64Slice("int_array", []int64{3, 4}), attribute.StringSlice("string_array", []string{"5", "6"}), attribute.BoolSlice("bool_array", []bool{false, true})))
+span.AddEvent("Event With No Attributes")
+span.AddEvent("Event With Some Attributes", oteltrace.WithAttributes(attribute.Int("int_val", 1), attribute.String("string_val", "two"), attribute.Int64Slice("int_array", []int64{3, 4}), attribute.StringSlice("string_array", []string{"5", "6"}), attribute.BoolSlice("bool_array", []bool{false, true})))
 s.End()
 ```
-
-## Adding spans
-
-Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
-
-```go
-// Can only be done after the setup steps.
-
-// Here we can leverage context.Context to pass in Datadog-specifc start span options,
-// like 'ddtracer.Measured()'
-ctx, span := t.Start(
-	ddotel.ContextWithStartOptions(context.Background(), ddtracer.Measured()), "span_name")
-
-span.End()
-```
+Read the [OpenTelemetry][17] specification for more information.
 
 ## Trace client and Agent configuration
 
@@ -199,3 +198,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [14]: /tracing/security
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context
+[17]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events

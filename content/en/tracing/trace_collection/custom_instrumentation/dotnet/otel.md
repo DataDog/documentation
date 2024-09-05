@@ -134,14 +134,14 @@ The following examples demonstrate different ways to add events to a span:
 var eventTags = new ActivityTagsCollection
 {
     { "int_val", 1 },
-    { "string_val", "2" },
+    { "string_val", "two" },
     { "int_array", new int[] { 3, 4 } },
     { "string_array", new string[] { "5", "6" } },
     { "bool_array", new bool[] { true, false } }
 };
 
 activity.AddEvent(new ActivityEvent("Event With No Attributes"));
-activity.AddEvent(new ActivityEvent("Event With All Attributes", DateTimeOffset.Now, eventTags));
+activity.AddEvent(new ActivityEvent("Event With Some Attributes", DateTimeOffset.Now, eventTags));
 ```
 
 Read the [OpenTelemetry][15] specification for more information.

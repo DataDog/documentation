@@ -85,12 +85,12 @@ The following examples demonstrate different ways to add events to a span:
 
 ```python
 span.add_event("Event With No Attributes")
-span.add_event("Event With All Attributes", {"int_val": 1, "string_val": "2", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [True, False]})
+span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [True, False]})
 ```
 
 Read the [OpenTelemetry][2] specification for more information.
 
-### Record exceptions
+### Recording Exceptions
 
 To record exceptions, use the `record_exception` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
 
