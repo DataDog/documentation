@@ -6202,7 +6202,7 @@ menu:
       parent: product_analytics
       identifier: pa_journeys
       weight: 2
-    - name: Pathway Diagrams
+    - name: Pathways
       url: product_analytics/journeys/pathways
       parent: pa_journeys
       identifier: pa_pathways
