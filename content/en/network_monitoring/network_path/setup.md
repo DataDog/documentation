@@ -96,8 +96,8 @@ Manually configure individual paths by specifying the exact endpoint you want to
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
      ## optional configs:
-     # max_ttl: 30 # max traderoute TTL, default is 30
-     # timeout: 1000 # timeout in seconds of traceroute calls, default is 1s
+     # max_ttl: 30 # max traceroute TTL, default is 30
+     # timeout: 1000 # timeout in seconds per hop, default is 1s
      - hostname: 1.1.1.1 # endpoint hostname or IP
        protocol: UDP
        port: 53
@@ -133,8 +133,8 @@ Manually configure individual paths by specifying the exact endpoint you want to
      # max_ttl: 30
 
      ## @param timeout - integer - optional - default: 1000
-     ## Specifies how much time traceroute should wait for a response
-     ## from each hop before timing out.
+     ## Specifies how much time in milliseconds traceroute should
+     ## wait for a response from each hop before timing out.
      #
      # timeout: 1000
 
