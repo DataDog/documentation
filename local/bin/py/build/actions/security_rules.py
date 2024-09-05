@@ -189,7 +189,7 @@ def security_rules(content, content_dir):
                 # add 'tags' as frontmatter
                 for tag in tags:
                     if ':' in tag:
-                        key, value = tag.split(':')
+                        key, value = tag.split(':', maxsplit=1)
                         page_data[key] = value
                 if data.get('source', ''):
                     page_data["source"] = data.get('source', '')
