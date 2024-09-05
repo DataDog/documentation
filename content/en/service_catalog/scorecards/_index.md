@@ -35,9 +35,9 @@ You can select the rules used to populate the Scorecards, and you can generate r
 ## Get started
 
 {{< whatsnext desc="Set up Service Scorecards and explore how they can help your team:" >}}
-    {{< nextlink href="/service_catalog/scorecards/configure_scorecards/" >}}Configure Service Scorecards{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/scorecards/create_custom_rules/" >}}Create custom rules{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/scorecards/use_scorecards/" >}}Learn what you can do with Service Scorecards{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/scorecards/scorecard_configuration/" >}}Configure Service Scorecards{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Service Scorecards{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
