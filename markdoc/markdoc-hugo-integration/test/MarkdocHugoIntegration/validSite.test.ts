@@ -16,7 +16,8 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       siteParams: {
         img_url: 'https://example.com'
       },
-      env: 'development'
+      env: 'development',
+      languages: ['en']
     }
   });
 

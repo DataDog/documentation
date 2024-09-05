@@ -18,21 +18,24 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
     {
       siteParams: {
         img_url: 'https://example.com'
-      }
+      },
+      languages: ['en']
     },
     // no img_url in siteParams
     {
       siteParams: {
         irrelevant_key: 'irrelevant_value'
       },
-      env: 'development'
+      env: 'development',
+      languages: ['en']
     },
     // no branch in siteParams when env is 'preview'
     {
       siteParams: {
         img_url: 'https://example.com'
       },
-      env: 'preview'
+      env: 'preview',
+      languages: ['en']
     }
   ];
 

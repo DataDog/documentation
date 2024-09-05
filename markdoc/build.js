@@ -11,9 +11,17 @@ const MarkdocHugoIntegration = require('./markdoc-hugo-integration/dist').Markdo
 
 const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 
-// Load the site params from the appropriate file
-const siteParamsFile = path.resolve(__dirname, `../config/${env}/params.yaml`);
-const siteParams = yaml.safeLoad(fs.readFileSync(siteParamsFile, 'utf8'));
+// Load the site params from the appropriate files
+const defaultSiteParamsFile = path.resolve(__dirname, '../config/_default/params.yaml');
+const defaultSiteParams = yaml.safeLoad(fs.readFileSync(defaultSiteParamsFile, 'utf8'));
+const envSiteParamsFile = path.resolve(__dirname, `../config/${env}/params.yaml`);
+const envSiteParams = yaml.safeLoad(fs.readFileSync(envSiteParamsFile, 'utf8'));
+const siteParams = Object.assign({}, defaultSiteParams, envSiteParams);
+
+// Load the languages from the appropriate file
+const languagesFile = path.resolve(__dirname, '../config/_default/languages.yaml');
+const languagesConfig = yaml.safeLoad(fs.readFileSync(languagesFile, 'utf8'));
+const languages = Object.keys(languagesConfig);
 
 console.time('Markdoc compilation execution time');
 
@@ -31,6 +39,7 @@ const markdocIntegration = new MarkdocHugoIntegration({
     },
     hugoConfig: {
         siteParams,
+        languages,
         env
     }
 });
