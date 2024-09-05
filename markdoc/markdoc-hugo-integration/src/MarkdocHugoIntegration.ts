@@ -8,6 +8,10 @@ import fs from 'fs';
 import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import {
+  RequiredSiteParamsSchema,
+  RequiredSiteParams
+} from './schemas/yaml/requiredSiteParams';
+import {
   MdocFileParser,
   ParsingErrorReport,
   ParsedFile
@@ -28,7 +32,7 @@ const CompilationConfigSchema = z.object({
       options: z.string()
     })
     .strict(),
-  siteParams: z.record(z.string(), z.any())
+  siteParams: RequiredSiteParamsSchema
 });
 
 /**
@@ -43,6 +47,7 @@ export class MarkdocHugoIntegration {
     partials: string;
     options: string;
   };
+  siteParams: RequiredSiteParams;
 
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
@@ -58,7 +63,7 @@ export class MarkdocHugoIntegration {
   constructor(args: CompilationConfig) {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
-    console.log('site params from inside integration', args.siteParams);
+    this.siteParams = args.siteParams;
   }
 
   /**
@@ -204,7 +209,8 @@ export class MarkdocHugoIntegration {
     try {
       const fileContents = PageBuilder.build({
         parsedFile: p.parsedFile,
-        prefOptionsConfig: prefOptionsConfigForPage
+        prefOptionsConfig: prefOptionsConfigForPage,
+        siteParams: this.siteParams
       });
 
       const compiledFilepath = this.#writeFile({

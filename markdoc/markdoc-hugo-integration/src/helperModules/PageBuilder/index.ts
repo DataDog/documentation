@@ -11,6 +11,7 @@ import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
+import { RequiredSiteParams } from '../../schemas/yaml/requiredSiteParams';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -38,6 +39,7 @@ export class PageBuilder {
   static build(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
+    siteParams: RequiredSiteParams;
   }): string {
     const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,
@@ -47,7 +49,8 @@ export class PageBuilder {
     const renderableTree = buildRenderableTree({
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
-      defaultValsByPrefId
+      defaultValsByPrefId,
+      variables: p.siteParams
     });
 
     const pageInitScript = this.#getPageInitScript({
