@@ -134,18 +134,25 @@ sp.End()
 
 ## Adding span events
 
-Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event timestamp and event attributes.
-In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, and `time` references the Go Standard Library time package. These packages must be imported in order to use this example.
+Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event `timestamp` and event `attributes`.
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, this package must be imported in order to use this example.
 
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects a `Time` object.
+  
 ```go
 // Start a span.
 ctx, span := t.Start(context.Background(), "span_name")
 // Add an event.
-span.AddEvent("event1")
-// Add an event with a timestamp.
-span.AddEvent("event2", oteltrace.WithTimestamp(time.Now()))
+span.AddEvent("Event Name")
 // Add an event with span attributes.
-span.AddEvent("event3", oteltrace.WithAttributes(attribute.String("key1", "value"), attribute.Int("key2", 1234)))
+span.AddEvent("Event Name", oteltrace.WithAttributes(attribute.Int("int_val", 1), attribute.String("string_val", "2"), attribute.Int64Slice("int_array", []int64{3, 4}), attribute.StringSlice("string_array", []string{"5", "6"}), attribute.BoolSlice("bool_array", []bool{false, true})))
 s.End()
 ```
 
