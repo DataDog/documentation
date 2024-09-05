@@ -4290,7 +4290,7 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_deployments
       weight: 2
-    - name: Failure Data Sources
+    - name: Incident Data Sources
       url: dora_metrics/failures/
       parent: dora_metrics
       identifier: dora_metrics_incidents
