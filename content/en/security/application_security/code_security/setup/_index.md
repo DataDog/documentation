@@ -207,6 +207,7 @@ docker run -d --name dd-agent \
   gcr.io/datadoghq/agent:7
 {{< /highlight >}}
 
+[3]: /getting_started/site/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /service_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
