@@ -374,9 +374,8 @@ You can view traces using the [Trace Explorer][9].
 
 There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.
 
-Rather than passing in configuration to a native image via system properties (i.e. `-Ddd.property.name=value`), it is recommended to use environment variables (i.e. `DD_PROPERTY_NAME=value`).
-
-The exception to this rule is when enabling the profiler via passing `-J-Ddd.profiling.enabled=true` to the `native-image` tool at _build time_.
+- For runtime configuration, use environment variables (`DD_PROPERTY_NAME=value`), instead of system properties (`-Ddd.property.name=value`).
+- The exception to this rule is when enabling the profiler. In this case, pass `-J-Ddd.profiling.enabled=true` to the `native-image` tool at _build time_.
 
 ##### Native-image buildpack versions older than 5.12.2
 
