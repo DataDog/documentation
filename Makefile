@@ -56,7 +56,7 @@ clean:  ## Clean generated files placed in the hugo site
 # so Hugo can include them in the site
 compile-markdoc:
 	@echo "Compiling .mdoc files to HTML";
-	@node ./markdoc/build.js;
+	@CI_ENVIRONMENT_NAME=$(CI_ENVIRONMENT_NAME) node ./markdoc/build.js;
 
 # if .dockerenv exists we are running from inside a docker container
 # if node_modules was generated in docker when using local or vice versa

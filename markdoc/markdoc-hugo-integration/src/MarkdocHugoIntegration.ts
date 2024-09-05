@@ -27,7 +27,8 @@ const CompilationConfigSchema = z.object({
       partials: z.string(),
       options: z.string()
     })
-    .strict()
+    .strict(),
+  siteParams: z.record(z.string(), z.any())
 });
 
 /**
@@ -57,6 +58,7 @@ export class MarkdocHugoIntegration {
   constructor(args: CompilationConfig) {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
+    console.log('site params from inside integration', args.siteParams);
   }
 
   /**

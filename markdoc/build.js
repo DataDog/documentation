@@ -6,7 +6,14 @@
  */
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 const MarkdocHugoIntegration = require('./markdoc-hugo-integration/dist').MarkdocHugoIntegration;
+
+const env = process.env.CI_ENVIRONMENT_NAME || 'development';
+
+// Load the site params from the appropriate file
+const siteParamsFile = path.resolve(__dirname, `../config/${env}/params.yaml`);
+const siteParams = yaml.safeLoad(fs.readFileSync(siteParamsFile, 'utf8'));
 
 console.time('Markdoc compilation execution time');
 
@@ -21,7 +28,8 @@ const markdocIntegration = new MarkdocHugoIntegration({
         content: CONTENT_DIR,
         options: PREFS_CONFIG_DIR,
         partials: PARTIALS_DIR
-    }
+    },
+    siteParams: siteParams
 });
 
 // Build the assets partial, and write it to the target file path

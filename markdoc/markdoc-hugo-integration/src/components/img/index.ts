@@ -5,7 +5,8 @@ export const imgDefinition = {
   children: [],
   attributes: {
     src: {
-      type: String
+      type: String,
+      required: true
     },
     alt: {
       type: String
