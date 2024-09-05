@@ -46,31 +46,36 @@ Datadog makes it easy to get support when you've run into a problem without havi
 
 Get up to speed with the parts of Datadog that are most important to your use-case. Start with enrolling in our free [Learning Center][1] courses. Datadog recommends incorporating, at minimum, the following courses into your onboarding workflows:
 
-{{< whatsnext desc="Datadog Service Owners:" >}}
+**Datadog Service Owners**:
+{{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Datadog Foundation{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Tagging Best Practices{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/managing-service-catalog" >}}Managing the Service Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Datadog Administrators:" >}}
+**Datadog Administrators**:
+{{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/agent-on-host" >}}The Agent on a Host{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/monitoring-k8s-cluster-agent" >}}Monitoring a Kubernetes Cluster{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dd-api-automation-iac" >}}Datadog API: Automation and Infrastructure as Code{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< /whatsnext >}} 
 
-{{< whatsnext desc="User Interface concentration:" >}}
+**User Interface concentration**:
+{{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Introduction to Dashboards{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}Discovering Graph Widgets{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dashboards-slos" >}}Using Dashboards and SLOs{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Datadog Responders:" >}}
+**Datadog Responders**:
+{{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-sre" >}}Site Reliability Engineer{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/apm-monitors-and-alerting" >}}APM Monitors and Alertin{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/core-web-vitals-lab" >}}Using Datadog RUM to track core web vitals{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Developer Concentration:" >}}
+**Developer Concentration**:
+{{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/apm-java-host" >}}Setup APM for Java applications{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-dev" >}}Datadog 101: Developer{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tracking-errors-rum-javascript" >}}Tracking errors with RUM for javascript web applications{{< /nextlink >}}
