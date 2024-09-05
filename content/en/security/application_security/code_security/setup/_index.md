@@ -135,23 +135,27 @@ For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+   DD_IAST_ENABLED=true DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
    docker run -d --name dd-agent \
      -e DD_API_KEY=${YOUR_DD_API_KEY} \
+     -e DD_SITE=${YOUR_DD_SITE} \
      -e DD_APM_ENABLED=true \
-     -e DD_IAST_ENABLED=true \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
-     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-     -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-     -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-     -v /opt/datadog/apm:/opt/datadog/apm \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     -v /proc/:/host/proc/:ro \
+     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
      gcr.io/datadoghq/agent:7
    ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
+   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
+
+   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
@@ -193,7 +197,6 @@ For example:
 docker run -d --name dd-agent \
   -e DD_API_KEY=${YOUR_DD_API_KEY} \
   -e DD_APM_ENABLED=true \
-  -e DD_IAST_ENABLED=true \ 
   -e DD_ENV=staging \
   -e DD_APM_NON_LOCAL_TRAFFIC=true \
   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
