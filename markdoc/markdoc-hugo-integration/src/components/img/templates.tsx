@@ -1,6 +1,5 @@
 /**
- * Before this template can be used, the Markdoc-Hugo integration needs the ability to
- * ingest Hugo's site params.
+ * This template is not yet in use.
  */
 export const ImgTemplate = (props: {
   src: string;
@@ -11,7 +10,9 @@ export const ImgTemplate = (props: {
   width: string;
   height: string;
   wide: boolean;
-}) => {};
+}) => {
+  const { src, alt, style, video, popup, width, height, wide } = props;
+};
 
 /**
  * {{ if  not (.Get "src") }}
@@ -29,7 +30,9 @@ export const ImgTemplate = (props: {
 {{- $video :=  .Get "video" -}}
 {{- $src := (.Get "src") -}}
 {{- $img := (print .Site.Params.img_url "images/" $src) -}}
+*/
 
+/*
 {{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}
 
 {{- $image_type_arr := split (.Get "src") "." -}}
@@ -39,6 +42,7 @@ export const ImgTemplate = (props: {
 {{- else -}}
     {{- $.Scratch.Set "imgix_w" "850" -}}
 {{- end -}}
+
 {{- $imgix_w := $.Scratch.Get "imgix_w" -}}
 {{- if .Get "img_param" | len -}}
   {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
@@ -118,4 +122,20 @@ export const ImgTemplate = (props: {
   </figure>
 </div>
 
+ */
+
+/**
+ * img resource partial:
+{{- $dot := .context -}}
+
+{{- with resources.Get .src -}}
+{{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
+
+{{- if and (eq hugo.Environment "preview") ($dot.Site.Params.branch) -}}
+{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
+{{- $full_permalink = replace $full_permalink $branch_name ""}}
+{{- end -}}
+
+{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
+{{- end -}}
  */

@@ -25,7 +25,8 @@ describe('treeManagement', () => {
     const tree = buildRenderableTree({
       parsedFile,
       prefOptionsConfig,
-      defaultValsByPrefId
+      defaultValsByPrefId,
+      variables: {}
     });
 
     expect(JSON.stringify(tree, null, 2)).toMatchFileSnapshot(

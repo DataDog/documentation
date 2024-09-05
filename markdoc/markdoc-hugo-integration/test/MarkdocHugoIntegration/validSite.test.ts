@@ -14,7 +14,8 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
     },
     siteParams: {
       img_url: 'https://example.com'
-    }
+    },
+    env: 'development'
   });
 
   test('each compiled file matches the snapshot', () => {

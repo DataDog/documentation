@@ -17,7 +17,8 @@ describe('MarkdocHugoIntegration', () => {
     },
     siteParams: {
       img_url: 'https://example.com'
-    }
+    },
+    env: 'development'
   });
 
   // compile the bad files

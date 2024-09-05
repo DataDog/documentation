@@ -11,7 +11,8 @@ import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
-import { RequiredSiteParams } from '../../schemas/yaml/requiredSiteParams';
+import { RequiredSiteParams } from '../../schemas/requiredSiteParams';
+import { Env } from '../../schemas/env';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -40,6 +41,7 @@ export class PageBuilder {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
     siteParams: RequiredSiteParams;
+    env: Env;
   }): string {
     const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,
@@ -50,7 +52,7 @@ export class PageBuilder {
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
       defaultValsByPrefId,
-      variables: p.siteParams
+      variables: { ...p.siteParams, env: p.env }
     });
 
     const pageInitScript = this.#getPageInitScript({

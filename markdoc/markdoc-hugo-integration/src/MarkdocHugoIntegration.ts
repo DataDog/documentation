@@ -10,7 +10,7 @@ import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import {
   RequiredSiteParamsSchema,
   RequiredSiteParams
-} from './schemas/yaml/requiredSiteParams';
+} from './schemas/requiredSiteParams';
 import {
   MdocFileParser,
   ParsingErrorReport,
@@ -19,6 +19,7 @@ import {
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
+import { EnvSchema } from './schemas/env';
 
 /**
  * The schema for the config object passed to the MarkdocHugoIntegration class
@@ -32,7 +33,8 @@ const CompilationConfigSchema = z.object({
       options: z.string()
     })
     .strict(),
-  siteParams: RequiredSiteParamsSchema
+  siteParams: RequiredSiteParamsSchema,
+  env: EnvSchema
 });
 
 /**
