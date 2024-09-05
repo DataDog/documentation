@@ -14,7 +14,7 @@ further_reading:
       tag: "Blog"
       text: "How to implement log management policies with your teams"
 algolia:
-  tags: ['log usage']
+  tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
