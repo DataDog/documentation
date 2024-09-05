@@ -24,21 +24,21 @@ title: データグラム形式とシェルの使用方法
 | パラメーター                           | 必須 | 説明                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<METRIC_NAME>`                     | はい      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][101]を参照してください。                                                  |
-| `<VALUE>`                           | Yes      | 整数または浮動小数点数。                                                                                                                                           |
+| `<VALUE>`                           | はい      | 整数または浮動小数点数。                                                                                                                                           |
 | `<TYPE>`                            | はい      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][102]を参照してください。                    |
-| `<SAMPLE_RATE>`                     | いいえ       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, DISTRIBUTION, and TIMER metrics. The default is `1`, which samples 100% of the time. |
+| `<SAMPLE_RATE>`                     | いいえ       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、DISTRIBUTION、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
 | `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | カンマで区切られた文字列のリスト。キー/値タグにはコロンを使用します (`env:prod`)。タグの定義に関するガイダンスについては、[タグの概要][103]を参照してください。              |
 
 以下に、データグラムの例を示します。
 
 - `page.views:1|c` : `page.views` COUNT メトリクスを増やします。
 - `fuel.level:0.5|g`: 燃料タンクが半分空になったことを記録します。
-- `song.length:240|h|@0.5`: Sample the `song.length` histogram as if it was sent half of the time.
+- `song.length:240|h|@0.5`: 半分の時間だけ送信したように `song.length` ヒストグラムをサンプリングします。
 - `users.uniques:1234|s`: サイトへのユニークビジターを追跡します。
 - `users.online:1|c|#country:china`: アクティブユーザー COUNT メトリクスを増やし、所属国ごとにタグ付けします。
 - `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
 
-### DogStatsD protocol v1.1
+### DogStatsD プロトコル v1.1
 
 Agent `>=v6.25.0` && `<v7.0.0` または `>=v7.25.0` からは、値のパッキングが可能になります。これは、 `SET` を除くすべてのメトリクスタイプでサポートされています。値は `:` で区切られ、例えば次のようになります。
 

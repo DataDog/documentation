@@ -174,7 +174,7 @@ To add custom rules to your Scorecards dashboard:
 [4]: /real_user_monitoring
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /integrations/servicenow/#service-ingestion
-[7]: /service_catalog/setup#import-data-from-other-sources
+[7]: /integrations/backstage/
 [8]: https://www.datadoghq.com/blog/github-actions-service-catalog
 [9]: https://backstage.io/docs/overview/what-is-backstage
 [10]:/api/latest/service-definition

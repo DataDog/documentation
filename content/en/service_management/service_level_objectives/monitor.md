@@ -129,7 +129,7 @@ SLO Replay also triggers when you change the underlying metric monitor's query t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create
+[1]: https://app.datadoghq.com/monitors/create
 [2]: https://app.datadoghq.com/slo
 [3]: /service_management/service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions

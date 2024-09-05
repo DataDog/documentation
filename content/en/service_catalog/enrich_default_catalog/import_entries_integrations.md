@@ -16,6 +16,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
   tag: "Blog"
   text: "Import Backstage YAML files into Datadog"
+aliases:
+    - /service_catalog/import_entries_integrations/
 ---
 
 ## Backstage 
@@ -39,6 +41,8 @@ Upon import, the following occurs:
 - `metadata.description` gets mapped to `description`
 - `spec.system` gets mapped to `application`
 - Other `spec` values get mapped to custom tags
+
+**Note**: The Service Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:Component`, the entire `catalog-info.yaml file` is rejected.
 
 ## ServiceNow
 

@@ -7,24 +7,15 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
 {{< /callout >}} 
 
 ## Overview
 
-The Datadog Agent with embedded OpenTelemetry Collector is an open source Collector distribution that includes:
-
-- Built-in Datadog pipelines and extensions
-- Support for traces, metrics, and logs
-- A curated set of components for optimal performance with Datadog
-
-{{< img src="/opentelemetry/embedded_collector/architecture.png" alt="Architecture overview for Collector embedded in the Datadog Agent." style="width:100%;" >}}
-
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
 
-<div class="alert alert-info">If your application is already instrumented with the OpenTelemetry SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
-
+<div class="alert alert-info">If you need OpenTelemetry components beyond what's provided in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to bring-your-Otel-Components to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
 
 ## Requirements
 
@@ -498,7 +489,7 @@ View metrics from the embedded Collector to monitor the Collector health.
 
 By default, the Datadog Agent with embedded Collector ships with the following Collector components. You can also see the list in [YAML format][11].
 
-### Receivers
+{{% collapse-content title="Receivers" level="p" %}}
 
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
@@ -510,7 +501,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [zipkinreceiver][23]
 - [nopreceiver][24]
 
-### Processors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Processors" level="p" %}}
 
 - [attributesprocessor][25]
 - [batchprocessor][26]
@@ -526,7 +519,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
-### Exporters
+{{% /collapse-content %}}
+
+{{% collapse-content title="Exporters" level="p" %}}
 
 - [datadogexporter][38]
 - [debugexporter][39]
@@ -535,17 +530,23 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [sapmexporter][42]
 - [nopexporter][43]
 
-### Connectors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
 - [spanmetricsconnector][45]
 
-### Extensions
+{{% /collapse-content %}}
+
+{{% collapse-content title="Extensions" level="p" %}}
 
 - [healthcheckextension][46]
 - [observer][47]
 - [pprofextension][48]
 - [zpagesextension][49]
+
+{{% /collapse-content %}}
 
 ## Further reading
 
