@@ -763,6 +763,32 @@ You can use the `StopInstance` API to stop the SDK instance assigned to the give
    }
 ```
 
+### Set remote log threshold
+
+You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is `debug` (allow all).
+
+```swift
+public init(
+    service: String? = nil,
+    name: String? = nil,
+    networkInfoEnabled: Bool = false,
+    bundleWithRumEnabled: Bool = true,
+    bundleWithTraceEnabled: Bool = true,
+    remoteSampleRate: Float = 100,
+    remoteLogThreshold: LogLevel = .debug,
+    consoleLogFormat: ConsoleLogFormat? = nil
+) {
+    self.service = service
+    self.name = name
+    self.networkInfoEnabled = networkInfoEnabled
+    self.bundleWithRumEnabled = bundleWithRumEnabled
+    self.bundleWithTraceEnabled = bundleWithTraceEnabled
+    self.remoteSampleRate = remoteSampleRate
+    self.remoteLogThreshold = remoteLogThreshold
+    self.consoleLogFormat = consoleLogFormat
+}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
