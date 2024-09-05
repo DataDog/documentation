@@ -56,7 +56,7 @@ View and filter the list of tables and fields in the schema side panel:
 
 Click a table name to view its columns and relationships:
 
-{{< img src="ddsql/table-details.png" alt="The details of a table, including its columns and relationships" style="width:60%;" >}}
+{{< img src="ddsql_editor/table-details.png" alt="The details of a table, including its columns and relationships" style="width:60%;" >}}
 
 ### Save and share queries
 
@@ -66,7 +66,7 @@ Save useful queries, or export the data as CSV.
 
 Browse and re-run saved queries in the side panel.
 
-{{< img src="ddsql/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
+{{< img src="ddsql_editor/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
 
 ## Further reading
 
