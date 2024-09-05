@@ -61,7 +61,7 @@ You can also view your Incidents list from your mobile device home screen and ma
 
 ## Describing the incident
 
-No matter where you [create an incident][100], it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
+No matter where you [create an incident][6], it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
 
 When you create an incident, an incident modal comes up. This modal has several core elements:
 
@@ -70,7 +70,7 @@ When you create an incident, an incident modal comes up. This modal has several 
 | Title | (Required) Give your incident a descriptive title. |
 | Severity Level| (Required) Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN. <br> **Note**: You can customize the description of each severity level to fit the requirements of your organization.|
 | Incident Commander | This person is assigned as the leader of the incident investigation. |
-| Attributes (Teams) | Assign the appropriate group of users to an incident using [Datadog Teams][9]. Members of the assigned team are automatically invited to the Slack channels. |
+| Attributes (Teams) | Assign the appropriate group of users to an incident using [Datadog Teams][7]. Members of the assigned team are automatically invited to the Slack channels. |
 | Notifications | Specify a user, Slack channel or external email to send notifications of this incident to.  |
 | Notes & Links | You can customize the description of each severity level to fit the requirements of your organization. Include links to graphs, monitors, or security signals for additional awareness. |
 
@@ -103,17 +103,17 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 
 #### Assessment fields
 
-Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][10]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
+Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][8]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
 
 * **Root Cause**: This text field allows you to enter the description of the root cause, triggers, and contributing factors of the incident.
 * **Detection Method**: Specify how the incident was detected with these default options: customer, employee, monitor, other, or unknown.
-* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][11].
+* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][9].
     * If you are not using Datadog APM, you can upload service names as a CSV. Any values uploaded via CSV are only be available within Incident Management for incident assessment purposes.
     * Datadog deduplicates service names case-insensitively, so if you use "My Service" or "my service", only the manually added one is shown.
     * Datadog overrides APM service names in favor of the manually uploaded list.
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM.
-* **Teams**: Choose from the [teams][9] defined in your organization. It is not necessary to upload a list of teams from a CSV file.
+* **Teams**: Choose from the [teams][7] defined in your organization. It is not necessary to upload a list of teams from a CSV file.
 
 ## Data collected
 
@@ -126,18 +126,18 @@ Incident Management collects the following analytic measures:
 * Time to Repair (customer impact end time - created time)
 * Time to Resolve (resolved time - created time)
 
-For more information about Incident Management graphs, see [Incident Management Analytics][12].
+For more information about Incident Management graphs, see [Incident Management Analytics][10].
 
 ## Integrations
 
-In addition to integrating with [Slack][7], Incident Management also integrates with:
+In addition to integrating with [Slack][11], Incident Management also integrates with:
 
-- [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
-- [CoScreen][21] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
+- [PagerDuty][12] and [OpsGenie][13] to send incident notifications to your on-call engineers.
+- [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
-- [Statuspage][19] to create and update Statuspage incidents.
-- [ServiceNow][20] to create a ServiceNow ticket for an incident.
+- [Statuspage][18] to create and update Statuspage incidents.
+- [ServiceNow][19] to create a ServiceNow ticket for an incident.
 
 
 ## Further Reading
@@ -149,20 +149,17 @@ In addition to integrating with [Slack][7], Incident Management also integrates 
 [3]: /mobile
 [4]: https://apps.apple.com/app/datadog/id1391380318
 [5]: https://play.google.com/store/apps/details?id=com.datadog.app
-[6]: /service_management/incident_management/incident_settings#information
-[7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[8]: /integrations/slack/
-[9]: /account_management/teams/
-[10]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[11]: /tracing/#2-instrument-your-application
-[12]: /service_management/incident_management/analytics/#overview
-[13]: /integrations/pagerduty/
-[14]: /integrations/opsgenie/
+[6]: /service_management/incident_management/declare
+[7]: /account_management/teams/
+[8]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[9]: /tracing/#2-instrument-your-application
+[10]: /service_management/incident_management/analytics/#overview
+[11]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[12]: /integrations/pagerduty/
+[13]: /integrations/opsgenie/
+[14]: /coscreen
 [15]: /integrations/jira/
 [16]: /integrations/webhooks/
 [17]: /integrations/webhooks/#sending-sms-through-twilio
-[18]: /getting_started/incident_management
-[19]: /integrations/statuspage/
-[20]: /integrations/servicenow/
-[21]: /coscreen
-[100]: /service_management/incident_management/declare
+[18]: /integrations/statuspage/
+[19]: /integrations/servicenow/
