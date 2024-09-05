@@ -127,9 +127,10 @@ The instructions below walk through a basic, initial setup using the Azure Porta
 If you already have an Event Hubs namespace configured with an Event Hub connection string, skip to [Add an Event Hub to your Event Hubs namespace](#add-an-event-hub-to-your-event-hubs-namespace).
 
 1. In the Azure portal, navigate to the [Event Hubs][208] overview and click **Create**.
-2. Fill in the **Project Details** and **Instance Details** sections as desired.  
+2. For logging from an Azure App Service, ensure that the Event Hub is created in the same region as the application. 
+3. Fill in the **Project Details** and **Instance Details** sections as desired.  
   **Note**: If you plan to collect [Azure resource logs][209], the Event Hub must be in the same **Location** as the resource you want to collect logs from. For activity logs or other account-wide log sources, you can choose any region.
-3. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
+4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
 See the [Azure Event Hubs Quickstart][201] for additional information.
 
