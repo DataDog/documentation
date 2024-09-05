@@ -35,12 +35,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: oracle
 integration_id: oracle
-integration_title: Oracle
+integration_title: Oracle Database
 integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: oracle
-public_title: Oracle
+public_title: Oracle Database
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 supported_os:
 - linux
@@ -61,7 +61,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Oracle
+  title: Oracle Database
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -135,7 +135,7 @@ Instant Client を使用していない場合は、この手順をスキップ�
 {{% tab "マルチテナント" %}}
 ##### マルチテナント
 
-###### Create user
+###### ユーザーの作成
 
 サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 

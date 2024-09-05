@@ -6,7 +6,7 @@ categories:
 - cloud
 - data stores
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Redshift のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/

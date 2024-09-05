@@ -3,7 +3,7 @@ categories:
 - azure
 - caching
 - cloud
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: キャッシュのヒット数、ミス数、エビクション数、接続クライアント数などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_redis_cache/

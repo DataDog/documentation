@@ -4,7 +4,7 @@ categories:
 - cloud
 - configuration & deployment
 - os & system
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_vm/

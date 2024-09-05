@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for .NET
+title: Enabling Code Security for .NET
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
@@ -135,6 +135,11 @@ ENV DD_IAST_ENABLED=true
 {{% /tab %}}
    {{< /tabs >}}
 
+To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+
+{{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
+
+If you need additional assistance, contact [Datadog support][5].
 
 ## Further Reading
 

@@ -35,7 +35,7 @@ categories:
 - issue tracking
 - log collection
 - source control
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
 display_on_public_website: true

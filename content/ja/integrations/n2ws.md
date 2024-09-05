@@ -70,8 +70,8 @@ tile:
 
 N2WS として知られる N2WS Backup & Recovery (CPM) は、Amazon Web Services (AWS) および Microsoft Azure 向けのエンタープライズクラスのバックアップ、リカバリ、およびディザスタリカバリソリューションです。N2WS は、クラウドネイティブテクノロジー (スナップショット) を使用して、AWS および Azure のバックアップや復元機能を提供します。
 
-Your N2WS Backup and Recovery instance supports the monitoring of backups, disaster recovery, copy to S3, alerts,
-and more with Datadog's monitoring service. This integration allows users to monitor and analyze the N2WS Backup and Recovery Dashboard metrics.
+N2WS Backup and Recovery インスタンスは、Datadog のモニタリングサービスを使用したバックアップのモニタリング、ディザスタリカバリ、S3 へのコピー、アラートなどをサポートします。
+このインテグレーションにより、ユーザーは N2WS Backup and Recovery ダッシュボードのメトリクスを監視、分析できます。
 
 ## セットアップ
 

@@ -22,7 +22,7 @@ author:
   support_email: support@statsig.com
 categories:
 - 構成 & デプロイ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md
 display_on_public_website: true

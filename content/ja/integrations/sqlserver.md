@@ -34,7 +34,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
 display_on_public_website: true
@@ -127,7 +127,7 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
    データベースごとにファイルサイズのメトリクスを収集するには、作成したユーザー (`datadog`) にデータベースへの[接続権限アクセス][6]があることを確認するために、以下を実行します。
 
    ```SQL
-       GRANT CONNECT ANY DATABASE to datadog; 
+       GRANT CONNECT ANY DATABASE to datadog;
    ```
 
 2. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。

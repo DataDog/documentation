@@ -9,7 +9,7 @@ author:
   support_email: insights@fairwinds.com
 categories:
 - kubernetes
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/fairwinds_insights_ui/README.md
 display_on_public_website: true

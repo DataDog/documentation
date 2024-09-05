@@ -37,7 +37,7 @@ author:
 categories:
 - kubernetes
 - 開発ツール
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluxcd/README.md
 display_on_public_website: true

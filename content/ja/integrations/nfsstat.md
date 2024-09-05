@@ -24,7 +24,7 @@ author:
 categories:
 - os & system
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
 display_on_public_website: true

@@ -5,7 +5,7 @@ categories:
 - クラウド
 - ログの収集
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon VPC ログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/

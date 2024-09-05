@@ -6,7 +6,7 @@ categories:
 - プロビジョニング
 - 構成 & デプロイ
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: VMware Tanzu Application Service (旧 Pivotal Cloud Foundry) VM とその実行ジョブの健全性を追跡します。

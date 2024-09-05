@@ -31,7 +31,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -121,7 +121,7 @@ Tenable は、組織によるサイバーリスクの管理と低減を支援す
   - Uninstall the current version of `crest_data_systems_tenable_one_platform` and install the latest version from the Datadog platform.
   - This latest version of the integration has more configuration parameters that give you more control over data collection and hence would need reconfiguration of conf.yaml for data collection to resume after the upgrade. You can refer to the example of `conf.yaml` from the `Set up conf.yaml` section that is mentioned above.
   > **NOTE**:
-  > - Make sure your `conf.yaml` has all the parameters mentioned in the above `Set up conf.yaml` section. 
+  > - Make sure your `conf.yaml` has all the parameters mentioned in the above `Set up conf.yaml` section.
   > - Create a separate instance in order to collect data for each data type i.e. (vulns/assets/plugins) and make sure 'io_collect_assets' for IO and 'sc_collect_assets' for SC have been enabled in order to continue the other types of data collection.
   - For instance, if you want to collect IO data, update your `conf.yaml` as shown below, where there are different instances for different data types.
     - **Older Version 1.0.5**:
@@ -157,7 +157,7 @@ Tenable は、組織によるサイバーリスクの管理と低減を支援す
               io_secret_key: <io-secret-key>
               is_sc_enabled: False
               io_collect_plugins: True
-              min_collection_interval: 7200     
+              min_collection_interval: 7200
         ```
   > **NOTE**: Checkpoint will be reset after the upgrade.
 

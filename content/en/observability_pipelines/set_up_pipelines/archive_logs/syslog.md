@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your Rsyslog or Syslog-ng source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Configure your rsyslog or syslog-ng source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
@@ -26,6 +26,8 @@ This document walks you through the following steps:
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
 
 You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
+
+Select the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h4" %}}
 
@@ -73,7 +75,7 @@ You need to have the Datadog integration for your cloud provider installed to se
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the **Archive Logs** template to create a new pipeline.
-1. Select **Rsyslog** or **Syslog-ng** as the source.
+1. Select **rsyslog** or **syslog-ng** as the source.
 
 ### Set up the source
 
@@ -90,11 +92,21 @@ Enter the following information based on your selected logs destination.
 
 Follow the instructions for the cloud provider you are using to archive your logs.
 
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
 {{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
 
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
 {{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -205,7 +217,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Syslog address. This is a Syslog-compatible endpoint, exposed by the Worker, that your applications send logs to. The Observability Pipelines Worker listens on this address for incoming logs.
 
@@ -213,11 +225,21 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
 {{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
 
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
 {{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}

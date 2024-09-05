@@ -25,7 +25,7 @@ author:
 categories:
 - containers
 - kubernetes
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ integration_title: コンテナ
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
-name: コンテナ
+name: container
 public_title: コンテナ
 short_description: コンテナのメトリクスを Datadog で追跡
 supported_os:

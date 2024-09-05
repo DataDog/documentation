@@ -7,7 +7,7 @@ categories:
 - iot
 - log collection
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化します。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_platform/

@@ -2,7 +2,7 @@
 categories:
 - cloud
 - AWS
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Network Firewall を監視します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_network_firewall/

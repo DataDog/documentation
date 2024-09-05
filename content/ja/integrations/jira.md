@@ -6,10 +6,8 @@ categories:
 - notifications
 custom_kind: インテグレーション
 dependencies: []
-description: This integration allows you to create tickets from triggered alerts in
-  Datadog, and update existing tickets with new information as it arises. Additionally,
-  you can see Jira ticket creations as events within Datadog to overlay with all of
-  your metrics.
+description: このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira
+  チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。
 doc_link: https://docs.datadoghq.com/integrations/jira/
 draft: false
 git_integration_title: jira

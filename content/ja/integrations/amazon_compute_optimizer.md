@@ -5,7 +5,7 @@ aliases:
 categories:
 - クラウド
 - AWS
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: ユーザーのワークロードを適正化するためのリソース構成に関する推奨を提供します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_compute_optimizer/

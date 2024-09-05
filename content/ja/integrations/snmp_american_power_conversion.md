@@ -21,7 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_american_power_conversion/README.md
 display_on_public_website: true

@@ -11,7 +11,7 @@ Datadog SaltStack Formula は、Datadog Agent および Agent ベースのイン
 
 Datadog SaltStack Formula は、Debian および RedHat ベースのシステムにのみインストールできます。
 
-### Installation
+### インストール
 
 以下の手順で、Datadog Formula を `base` Salt 環境に追加します。別の Salt 環境に追加する場合は、参照先の `base` を お使いの Salt 環境名に変更してください。
 
@@ -138,9 +138,9 @@ file_roots:
 ```text
 datadog:
   config:
-    api_key: <YOUR_DD_API_KEY>
+    api_key: <DD_API_キー>
   install_settings:
-    agent_version: <AGENT7_VERSION>
+    agent_version: <AGENT7_バージョン>
   checks:
     directory:
       config:

@@ -6,7 +6,7 @@ categories:
 - containers
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ecs/

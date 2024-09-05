@@ -4,7 +4,7 @@ categories:
 - google cloud
 - iot
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud IoT のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_iot/

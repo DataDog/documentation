@@ -19,7 +19,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories: []
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md
 display_on_public_website: true

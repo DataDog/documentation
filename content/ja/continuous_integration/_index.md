@@ -20,6 +20,9 @@ further_reading:
 - link: /continuous_integration/pipelines/
   tag: ドキュメント
   text: ビルドの問題を解決するためにパイプラインデータを調査する
+- link: /account_management/billing/ci_visibility
+  tag: ドキュメント
+  text: CI Visibility の請求に関する注意事項について
 - link: /continuous_integration/tests/
   tag: ドキュメント
   text: 問題のあるテストを見つけて修正するために、テストデータを調査する
@@ -28,7 +31,7 @@ further_reading:
   text: 静的 Web アプリケーションを監視するためのベストプラクティス
 - link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
   tag: ブログ
-  text: CI/CD モニタリングのベストプラクティス
+  text: CI/CD 監視のベストプラクティス
 - link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
   tag: ブログ
   text: CI/CD のソフトウェアテストを監視するためのベストプラクティス
@@ -44,8 +47,8 @@ title: Continuous Integration Visibility
 
 <div class="alert alert-info">このページでは、継続的インテグレーション (CI) のメトリクスとデータを Datadog のダッシュボードに取り込む方法について説明します。CI パイプラインで Continuous Testing テストを実行したい場合は、<a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing と CI/CD</a> のセクションを参照してください。</div>
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
-  Join the Introduction to CI Visibility session to understand how Datadog CI Visibility enhances the efficiency of CI pipelines and how to configure the Testing Visibility and Pipeline Visibility products. 
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Datadog CI Visibility がどのようにして CI パイプラインの効率を高めるのか、また、Testing Visibility と Pipeline Visibility 製品の構成方法について学ぶために、CI Visibility 入門セッションにご参加ください。
 {{< /learning-center-callout >}}
 
 

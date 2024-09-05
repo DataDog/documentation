@@ -11,7 +11,7 @@ author:
   support_email: akash.bhardwaj@harness.io
 categories:
 - コスト管理
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/harness_cloud_cost_management/README.md
 display_on_public_website: true

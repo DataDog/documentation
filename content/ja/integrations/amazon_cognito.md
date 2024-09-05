@@ -4,7 +4,7 @@ categories:
 - クラウド
 - ログの収集
 - モバイル
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Cognito のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/

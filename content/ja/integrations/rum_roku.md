@@ -12,7 +12,7 @@ categories:
 - モニター
 - ネットワーク
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_roku/README.md
 display_on_public_website: true
@@ -84,7 +84,7 @@ To start forwarding your Roku application's logs to Datadog, see [Roku Log Colle
 
 ### メトリクス
 
-The Roku integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5]. 
+The Roku integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5].
 
 ### イベント
 

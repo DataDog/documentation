@@ -388,7 +388,7 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
@@ -438,22 +438,19 @@ The equivalent volume and volumeMount path need to be set in the Agent container
       path: /var/log/example
     # (...)
 ```
+#### Recommended configurations
+- This strategy can work for a given pod, but can become cumbersome with multiple apps using this strategy. You can also run into issues if multiple replicas are using the same log path. If possible, Datadog recommends taking advantage of the [Autodiscovery template variable][17] `%%kube_pod_name%%`. For example, you can set your `path` to reference this variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`. Your application pod then needs to write its log files with respect to this new path as well. You can use the [Downward API][18] to help your application determine its Pod name.
 
-**Note**: This strategy can work for a given pod, but can become cumbersome with multiple apps using this strategy, as well run into issues if multiple replicas are using the same log path. If possible, Datadog recommends taking advantage of the [Autodiscovery template variable][17] `%%kube_pod_name%%`. For example, you can set your `path` to reference this variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`.
+- When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed, explicitly enable this in the annotation. For example:
+  ```yaml
+  ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
+    [
+      {"type":"file","path":"/var/log/example/app.log","source":"file","service":"example-service"},
+      {"source":"container","service":"example-service"}
+    ]
+  ```
 
-Your application pod then needs to write its log files with respect to this new path as well. You can use the [Downward API][18] to help your application determine its Pod name.
-
-**Note**: When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed,  explicitly enable this in the annotation. For example:
-
-```yaml
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
-  [
-    {"type":"file","path":"/var/log/example/app.log","source":"file","service":"example-service"},
-    {"source":"container","service":"example-service"}
-  ]
-```
-
-When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
+- When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
 
 ## Troubleshooting
 

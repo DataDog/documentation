@@ -2,7 +2,7 @@
 categories:
 - ログの収集
 - web
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
 description: uWSGI のログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡

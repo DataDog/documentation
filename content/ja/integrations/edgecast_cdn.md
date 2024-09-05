@@ -22,7 +22,7 @@ author:
 categories:
 - キャッシュ
 - モニター
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,7 +58,7 @@ Edgecast は、エッジコンピューティング、アプリケーション�
 ## セットアップ
 
 
-### Edgecast クライアントの作成 
+### Edgecast クライアントの作成
 
 1. [Edgecast VDMS アカウント][1]にログインし、**Clients** タブに移動します。
 2. **Create New Client** をクリックすると、New Client モーダルが表示されます。

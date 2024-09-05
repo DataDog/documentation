@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/

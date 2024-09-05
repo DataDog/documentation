@@ -3,7 +3,7 @@ categories:
 - collaboration
 - incidents
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
 doc_link: https://docs.datadoghq.com/integrations/pagerduty/

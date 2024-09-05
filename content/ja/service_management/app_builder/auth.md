@@ -7,95 +7,95 @@ title: アクセス・認証
 <div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では App Builder はサポートされていません。</div>
 {{< /site-region >}}
 
-A few tools control access and authentication for apps and their components.
+アプリとそのコンポーネントへのアクセスや認証を制御するツールがいくつかあります。
 
 ## アクションの資格情報
 
-Because app [actions][1] connect with external software systems, you may need to authenticate your Datadog account to a corresponding integration. An app can run successfully only if every action that requires authentication can verify the identity of your Datadog account.
+アプリの[アクション][1]は外部のソフトウェアシステムと接続するため、対応するインテグレーションに対して Datadog アカウントを認証する必要があります。アプリは、認証が必要なすべてのアクションが Datadog アカウントの認証を確認できた場合にのみ、正常に実行できます。
 
-Actions can be authenticated in the following ways:
+アクションは、次の方法で認証することができます。
 - インテグレーションタイルで構成された資格情報および権限
 - 接続の資格情報
 
-For more information on configuring credentials, see [Connections][2]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][3].
+資格情報の構成については、[接続][2]を参照してください。App Builder は、アクションカタログと各インテグレーションの接続資格情報を [Datadog Workflow Automation][3] と共有します。
 
-## App permissions
+## アプリの権限
 
 デフォルト:
-- While the app is in draft, the author of an app is the only user who has access to the app.
-- After the app is published, the author maintains **Editor** access, while the rest of the author's Datadog organization receives **Viewer** access to the app.
+- アプリがドラフト状態の間、アプリにアクセスできるユーザーはアプリの作者のみです。
+- アプリの公開後、作者は **Editor** 権限を維持し、作者の Datadog 組織の残りのユーザーは、アプリへの **Viewer** 権限を付与されます。
 
-You can expand access to a draft of published app using access control.
+公開済みアプリのドラフトへのアクセス権を拡大するには、アクセス制御を使用します。
 
-### Permissions and access control
+### 権限とアクセス制御
 
-Use [role-based access control (RBAC)][4] to control access to your apps and connections.
+[ロールベースのアクセス制御 (RBAC)][4] を使用して、アプリへのアクセスと接続を制御します。
 
-The coarse permissions that apply to apps include the following:
+アプリに適用される大まかな権限には、以下のようなものがあります。
 
 Apps View
-: View and run apps. Datadog Standard and Admin roles have view access to App Builder by default.
+: アプリの表示と実行。Datadog Standard と Admin のロールには、デフォルトで App Builder の表示アクセス権があります。
 
 Apps Write
-: Create and edit new and existing apps. Datadog Standard and Admin roles have write access to App Builder by default.
+: 新規アプリの作成と既存アプリの編集。Datadog Standard と Admin のロールには、デフォルトで App Builder の書き込みアクセス権があります。
 
 Connections Read
-: List and view available connections. Datadog Read Only, Standard, and Admin roles have read access to connections by default.
+: 利用可能な接続をリスト化および表示します。Datadog Read Only、Standard および Admin ロールには、デフォルトで接続の読み取りアクセス権があります。
 
-### Restrict access to a specific connection
+### 特定の接続へのアクセスの制限
 
-Set permissions on individual connections to restrict their use or limit modifications. App Builder provides the following permissions for each connection:
+個々の接続に権限を設定して、その使用を制限したり、変更を制限したりします。App Builder では、各接続について以下の権限が提供されます。
 
 Viewer
-: View the connection
+: 接続の表示
 
 Resolver
-: Resolve and view the connection
+: 接続の解決と表示
 
 Editor
-: Edit, resolve, and view the connection
+: 接続の編集、解決、表示
 
-By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
+デフォルトでは、接続の作成者のみが **Editor** 権限を付与されます。作成者は、追加のユーザー、ロール、またはチームにアクセス権を付与することを選択できます。
 
-**Note**: Permission to resolve a connection includes permission to get the connection object assigned to a step and retrieve the secret associated with it.
+**注**: 接続の解決権限には、ステップに割り当てられた接続オブジェクトを取得し、それに関連するシークレットを取得する権限が含まれます。
 
-Use the following steps to modify the permissions on a specific connection:
+特定の接続の権限を変更するには、以下の手順に従います。
 
-1. Navigate to the [App Builder page][5].
-1. Click the **Connections** tab. A list of connections appears.
-1. Hover over the connection that you would like to set granular permissions on. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. [App Builder ページ][5]に移動します。
+1. **Connections** タブをクリックします。接続の一覧が表示されます。
+1. 詳細な権限を設定したい接続にカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
 1. 南京錠 (** Permissions**) のアイコンをクリックします。
 1. **Restrict Access** を選択します。
-1. Select a role from the dropdown menu and click **Add**. The role you selected populates into the bottom of the dialog box.
-1. Next to the role name, select the desired permission from the dropdown menu.
+1. ドロップダウンメニューからロールを選択して、**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
+1. ロール名の横にあるドロップダウンメニューから、必要な権限を選択します。
 1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
 1. **Save** をクリックします。
 
-### Restrict access to a specific app
+### 特定のアプリへのアクセスの制限
 
-Set permissions on each app to restrict modifications to the app. By default:
-- The author of an app is the only user who has access to the app.
+各アプリに権限を設定し、アプリへの変更を制限します。デフォルトでは次のようになります。
+- アプリにアクセスできるユーザーはアプリの作者のみです。
 - アプリの公開後、作者は **Editor** 権限を維持し、作者の Datadog 組織の残りのユーザーは、アプリへの **Viewer** 権限を付与されます。
 
-App Builder provides the following permissions for each app:
+App Builder では、各アプリについて以下の権限が提供されます。
 
 Viewer
-: Run and view the app
+: アプリの実行と表示
 
 Editor
-: Edit, run, and view the app
+: アプリの編集、実行、表示
 
-To restrict access to the app, perform the following steps in the app canvas:
-1. Navigate to the detailed editing view for the app you want to restrict access to.
-1. In the app editor, click on the cog (**Settings**) icon.
-1. Select **Permissions** from the dropdown.
+アプリへのアクセスを制限するには、アプリキャンバスで以下の手順を実行します。
+1. アクセスを制限したいアプリの詳細編集ビューに移動します。
+1. アプリエディターで、歯車 (**Settings**) アイコンをクリックします。
+1. ドロップダウンから **Permissions** を選択します。
 1. **Restrict Access** を選択します。
 1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
 1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
 1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
 1. **Save** をクリックします。
 
-<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
+<br>質問やフィードバックがありますか？[Datadog Community Slack][6] の **#app-builder** チャンネルに参加してください。
 
 [1]: https://app.datadoghq.com/app-builder/action-catalog
 [2]: /ja/service_management/app_builder/connections/

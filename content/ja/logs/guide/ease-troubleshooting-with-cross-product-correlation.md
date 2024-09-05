@@ -72,11 +72,11 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 
 ##### ログのトレース ID の挿入
 
-トレース ID は、`opentracing_context_x_datadog_trace_id` 変数として保存されます。NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
+トレース ID は、`opentelemetry_trace_id` 変数として保存されます。NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
 
 ```conf
 http {
-  log_format main '$remote_addr - $opentracing_context_x_datadog_trace_id $http_x_forwarded_user [$time_local] "$request" '
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for" ';
 

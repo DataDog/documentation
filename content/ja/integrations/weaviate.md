@@ -31,7 +31,7 @@ author:
 categories:
 - ai/ml
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weaviate/README.md
 display_on_public_website: true
@@ -82,7 +82,7 @@ Weaviate is an open source, AI-native vector database that helps create AI-power
 - Monitor usage statistics (such as duration of insert, delete, and maintenance operations) to identify potential storage issues, bottlenecks, and assess the impact of data modifications on system responsiveness.
 - Track query latency, rate, and concurrent read/write requests to gain insight into the vector database's overall responsiveness and load handling capabilities.
 - Optimize write-heavy workloads with object statistics, like the average time taken for "put" (write) operations.
-- Ensure smooth and efficient data ingestion with import-related metrics that offer insights into operations like data loading process. 
+- Ensure smooth and efficient data ingestion with import-related metrics that offer insights into operations like data loading process.
 
 This check monitors [Weaviate][2] through the Datadog Agent. For more information, see [Weaviate monitoring][3]. To learn more about Datadog's suite of AI integrations, see this [blog][4].
 
@@ -92,7 +92,7 @@ Follow the instructions below to install and configure this check for an Agent r
 
 ### インストール
 
-Starting from Agent release 7.47.0, the Weaviate check is included in the [Datadog Agent][3] package. 
+Starting from Agent release 7.47.0, the Weaviate check is included in the [Datadog Agent][3] package.
 
 **注**: この機能を使用するには、Agent v7.47.0 以上が必要です。
 
@@ -115,7 +115,7 @@ Make sure that the Prometheus-formatted metrics are exposed in your Weaviate clu
 **注**: リストされたメトリクスは、利用可能な場合にのみ収集できます。一部のメトリクスは、特定のアクションが実行されたときにのみ生成されます。例えば、オブジェクト削除メトリクスは、オブジェクトが削除されたときにのみ公開されます。
 
 Weaviate チェックの構成で最も重要なパラメーターは以下の 2 つです。
-- `openmetrics_endpoint`: This parameter should be set to the location where the Prometheus-formatted metrics are exposed. The default port is `2112`, but it can be configured using the `PROMETHEUS_MONITORING_PORT` [environment variable][6]. In containerized environments, `%%host%%` should be used for [host autodetection][5]. 
+- `openmetrics_endpoint`: This parameter should be set to the location where the Prometheus-formatted metrics are exposed. The default port is `2112`, but it can be configured using the `PROMETHEUS_MONITORING_PORT` [environment variable][6]. In containerized environments, `%%host%%` should be used for [host autodetection][5].
 - `weaviate_api_endpoint`: This parameter is optional. By default, this parameter is set to `<hostname>:8080` and it specifies the configuration of the [RESTful API][7].
 
 If authentication is required for the RESTful API endpoints, the check can be configured to provide an API key as part of the [request header][10].

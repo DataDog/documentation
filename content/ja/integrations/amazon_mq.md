@@ -7,7 +7,7 @@ categories:
 - log collection
 custom_kind: インテグレーション
 dependencies: []
-description: Track key AWS MQ metrics.
+description: AWS MQ のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
 draft: false
 further_reading:

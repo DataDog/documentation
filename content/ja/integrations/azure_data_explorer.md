@@ -3,7 +3,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Data Explorer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/

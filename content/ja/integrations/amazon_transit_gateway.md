@@ -3,7 +3,7 @@ categories:
 - AWS
 - クラウド
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS Transit Gateway のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_transit_gateway/

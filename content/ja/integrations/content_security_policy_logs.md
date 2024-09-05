@@ -16,7 +16,7 @@ aliases:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md
 description: Datadog で CSP 違反の検出と集計を行う

@@ -39,7 +39,7 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 他の AWS サービスについては、[Amazon Web Services インテグレーションのページ][1]を参照してください
 
 
-## Setup
+## セットアップ
 
 ### インストール
 

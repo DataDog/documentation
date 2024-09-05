@@ -3,7 +3,7 @@ categories:
 - cloud
 - azure
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Machine Learning の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_machine_learning_services/

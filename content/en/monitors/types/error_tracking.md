@@ -111,6 +111,17 @@ For more information about advanced alert options such as evaluation frequency, 
 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
+In addition to [matching attribute variables][7], the following Error Tracking specific variables are available
+for alert message notifications:
+
+* `{{issue.attributes.error.type}}`
+* `{{issue.attributes.error.message}}`
+* `{{issue.attributes.error.stack}}`
+* `{{issue.attributes.error.file}}`
+* `{{issue.attributes.error.is_crash}}`
+* `{{issue.attributes.error.category}}`
+* `{{issue.attributes.error.handling}}`
+
 For more information about the **Configure notifications and automations** section, see [Notifications][5].
 
 
@@ -130,3 +141,4 @@ Error Tracking monitors use [Issue States][2] to ensure that your alerts stay fo
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
 [6]: /logs/
+[7]: /monitors/notify/variables/#matching-attributetag-variables

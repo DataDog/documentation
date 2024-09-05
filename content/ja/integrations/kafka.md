@@ -39,7 +39,7 @@ author:
 categories:
 - log collection
 - message queues
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
 display_on_public_website: true
@@ -261,7 +261,7 @@ Kafka チェックには、イベントは含まれません。
 
 ストリーミングデータパイプラインのトポロジーを可視化し、ボトルネックの根本原因を特定することが有益な場合は、[Data Streams Monitoring][2] の詳細をご覧ください。
 
-**注:** 
+**注:**
 - このインテグレーションでは、コンシューマーオフセットがブローカーオフセットの前にチェックされることが保証されます。最悪の場合、コンシューマーラグが少し過大評価されることがあります。これらのオフセットを逆の順序でチェックすると、コンシューマーラグが負の値になるまで過小評価される可能性があり、これは通常メッセージがスキップされていることを示す深刻なシナリオです。
 - Kafka ブローカーや Java ベースのコンシューマー/プロデューサーから JMX メトリクスを収集したい場合は、[Kafka Broker インテグレーション][17]を参照してください。
 

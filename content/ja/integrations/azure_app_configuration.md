@@ -2,7 +2,7 @@
 categories:
 - クラウド
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure App Configuration のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_app_configuration/

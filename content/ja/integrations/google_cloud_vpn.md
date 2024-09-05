@@ -4,7 +4,7 @@ categories:
 - network
 - google cloud
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: VPN トンネルのステータス、スループット、セッション数などを監視。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_vpn/

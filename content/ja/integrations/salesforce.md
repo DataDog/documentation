@@ -2,7 +2,7 @@
 categories:
 - クラウド
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Salesforce のリアルタイムプラットフォームイベントを Datadog ログとして収集します。
 doc_link: https://docs.datadoghq.com/integrations/salesforce/

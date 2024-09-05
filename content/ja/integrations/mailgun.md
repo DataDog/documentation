@@ -25,7 +25,7 @@ author:
 categories:
 - ログの収集
 - モニター
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog で Mailgun のメール配信とエンゲージメントの統計情報を監視します。
 display_on_public_website: true

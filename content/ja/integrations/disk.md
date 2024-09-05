@@ -38,7 +38,7 @@ manifest_version: 2.0.0
 metric_prefix: system.
 metric_to_check: system.disk.free
 monitors:
-  disk-space-forecast: assets/monitors/disk_monitor.json
+  Device is going to be full: assets/monitors/disk_monitor.json
 name: disk
 public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。

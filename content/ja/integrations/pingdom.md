@@ -1,7 +1,7 @@
 ---
 categories:
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
 doc_link: https://docs.datadoghq.com/integrations/pingdom/

@@ -4,7 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Azure Key Vault のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_key_vault/
@@ -54,7 +54,7 @@ Datadog は*資格情報期限切れイベント*を送信し、Azure アプリ�
 
 これらのイベントは[イベントエクスプローラー][3]で表示できます。
 
-**注**: 
+**注**:
 
 - Azure アプリ登録期限切れイベントを収集するには、[Microsoft Graph API へのアクセスを有効にします][4]。
 - 証明書とそれに関連するキーとシークレットがまったく同時に期限切れになる場合、すべてのリソースに対して 1 つの期限切れイベントが送信されます。

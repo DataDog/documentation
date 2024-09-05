@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md
 display_on_public_website: true
@@ -82,7 +82,7 @@ Datazoom インテグレーションは、Datadog にログを出力します。
 
 - Datazoom Datadog Connector の構成方法の詳細については、Datazoom のインテグレーション[ドキュメント][1]をご覧ください。
 
-### ダッシュボード  
+### ダッシュボード
 
 [Datazoom ログダッシュボード][3]をご覧ください。
 

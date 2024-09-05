@@ -6,7 +6,7 @@ categories:
 - kubernetes
 - ログの収集
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: GKE リソースの使用状況を監視します。
 doc_link: https://docs.datadoghq.com/integrations/google_kubernetes_engine/

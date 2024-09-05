@@ -80,7 +80,7 @@ Squadcast を Datadog に接続すると、以下のことができます。
 
 ### Squadcast
 
-Follow these steps in Squadcast:
+Squadcast で以下の手順に従います。
 
 1. 上部のチームピッカーで **Team** を選択します。
 

@@ -4,7 +4,7 @@ categories:
 - google cloud
 - ログの収集
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud Router のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_router/

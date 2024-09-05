@@ -5,7 +5,7 @@ categories:
 - cloud
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/

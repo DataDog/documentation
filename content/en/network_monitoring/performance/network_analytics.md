@@ -28,7 +28,7 @@ The Network Analytics page provides insights into your overall network health an
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network connections **with tags**. Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Tagging involves visualizing the network flow _between_ two sets of tags.
+To refine your search to traffic between particular endpoints, aggregate and filter your network connections **with tags**. Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. When utilizing tagging in Network Monitoring, you can take advantage of how network traffic flows across availability zones for a particular service or for your entire infrastructure. Grouping by `client` and `server` tags visualizes the network flow _between_ those two sets of tags.
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
@@ -37,6 +37,10 @@ For example, if you want to see network traffic between your **client** ordering
 {{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
 For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
+
+Additionally, the following diagram illustrates inbound and outbound requests when grouping by `client` and `server` tags. The client is where the connection originated, and the server is where the connection terminated.
+
+{{< img src="network_performance_monitoring/network_analytics/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 

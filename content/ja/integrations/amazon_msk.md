@@ -3,7 +3,7 @@ categories:
 - cloud
 - AWS
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon Managed Streaming for Apache Kafka (MSK) のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
@@ -52,7 +52,7 @@ Amazon MSK クローラーを有効にして、CloudWatch からの MSK メト�
 
 Amazon MSK から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
-**注**: 
+**注**:
 - S3 バケットにログを送る場合は、_Target prefix_ が `amazon_msk` に設定されているかを確認してください。
 - CloudWatch のロググループにログを送る場合は、その名前に `msk` という部分文字列が含まれていることを確認してください。
 

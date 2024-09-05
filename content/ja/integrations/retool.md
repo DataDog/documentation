@@ -24,7 +24,7 @@ author:
   support_email: support@retool.com
 categories:
 - developer tools
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
 display_on_public_website: true

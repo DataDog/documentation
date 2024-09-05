@@ -3,7 +3,7 @@ aliases:
 - /ja/logs/log_collection/rsyslog
 categories:
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
@@ -28,7 +28,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 ### ログの収集
 
-#### Rsyslog バージョン 8 以上 
+#### Rsyslog バージョン 8 以上
 <div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends <code>inotify</code> mode. Traditionally, <code>imfile</code> used polling mode, which is much more resource-intense (and slower) than <code>inotify</code> mode. </div>
 
 {{< tabs >}}

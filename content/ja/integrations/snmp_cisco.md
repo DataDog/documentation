@@ -20,7 +20,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
 display_on_public_website: true
@@ -70,7 +70,7 @@ Cisco アプライアンスから、以下を含む SNMP メトリクスを収�
 
 - Cisco Catalyst
 - [Cisco ASA (Adaptive Security Appliance: 適応型セキュリティアプライアンス)][1]
-- [Cisco Meraki][2] 
+- [Cisco Meraki][2]
    **注**: [Meraki インテグレーションタイル][3]を通じて、追加イベントを Meraki から収集することができます
 - Cisco Nexus
 - Cisco ICM

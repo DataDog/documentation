@@ -24,7 +24,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: keisuke.umegaki.630@gmail.com
 categories: []
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/grpc_check/README.md
 display_on_public_website: true

@@ -25,7 +25,7 @@ author:
 categories:
 - cloud
 - data stores
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
 display_on_public_website: true

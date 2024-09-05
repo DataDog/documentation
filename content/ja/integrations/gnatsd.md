@@ -62,7 +62,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
 Gnatsd サービスからメトリクスをリアルタイムに取得して、以下のことができます。
 

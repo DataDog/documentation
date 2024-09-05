@@ -2,7 +2,7 @@
 categories:
 - provisioning
 - configuration & deployment
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Puppet の実行を追跡。失敗、成功、大きな変更を把握。
 doc_link: https://docs.datadoghq.com/integrations/puppet/

@@ -109,7 +109,7 @@ try
 catch(Exception e)
 {
     activity?.SetTag("error", 1);
-    activity?.SetTag("error.msg", exception.Message);
+    activity?.SetTag("error.message", exception.Message);
     activity?.SetTag("error.stack", exception.ToString());
     activity?.SetTag("error.type", exception.GetType().ToString());
 }

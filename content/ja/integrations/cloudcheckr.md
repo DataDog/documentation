@@ -2,7 +2,7 @@
 categories:
 - cloud
 - configuration & deployment
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md
 description: CloudCheckr で Datadog のメトリクスを表示するために、インテグレーションを有効にします。

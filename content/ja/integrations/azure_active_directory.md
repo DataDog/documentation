@@ -21,7 +21,7 @@ categories:
 - クラウド
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md
 display_on_public_website: true
@@ -127,7 +127,7 @@ Datadog は、Azure アプリ登録、Key Vault キー、Key Vault シークレ�
 
 これらのイベントは[イベントエクスプローラー][5]で表示できます。
 
-**注**: 
+**注**:
 
 - Azure アプリ登録期限切れイベントを収集するには、[Microsoft Graph API へのアクセスを有効にします][6]。
 - 証明書とそれに関連するキーとシークレットがまったく同時に期限切れになる場合、すべてのリソースに対して 1 つの期限切れイベントが送信されます。

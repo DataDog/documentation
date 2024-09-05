@@ -4,7 +4,7 @@ categories:
 - developer tools
 - issue tracking
 - source control
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。
 doc_link: https://docs.datadoghq.com/integrations/git/
