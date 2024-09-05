@@ -36,7 +36,7 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 
 {{% tab "Existing AWS account" %}}
 
-1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**.
+1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations > AWS**.
 1. Click the **Edit scanning** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} for the AWS account where you want to deploy the Agentless scanner.
 1. **Enable Resource Scanning** should already be toggled on. If it isn't, switch the **Enable Resource Scanning** toggle to the on position.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
