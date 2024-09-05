@@ -19,7 +19,7 @@ further_reading:
 - link: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
   tag: faq
   text: ECS Fargate のインテグレーションセットアップ
-- link: /agent/guide/secrets-management/
+- link: /agent/configuration/secrets-management/
   tag: ドキュメント
   text: 機密情報管理
 title: 基本の Agent オートディスカバリー
@@ -136,6 +136,10 @@ autoconfig_include_features:
 オートディスカバリーが有効になると、Datadog Agent は、デフォルトのオートディスカバリーコンフィギュレーションファイルに基づいて、Apache や Redis を含む複数の[サービス][3]に対してオートディスカバリーを自動的に試行します。
 
 インテグレーションテンプレートは、Kubernetes ポッドアノテーション、Docker ラベル、Agent 内にマウントされた構成ファイル、ConfigMap、および key-value ストアとして、複数の形式で定義できます。詳しくは、[オートディスカバリーインテグレーションテンプレート][4]のドキュメントをご覧ください。
+
+### 注
+
+オートディスカバリーを使用していて、アプリケーションが新しいノードにデプロイされた場合、Datadog にメトリクスが表示されるのが遅れることがあります。新しいノードに切り替えると、Datadog Agent がアプリケーションからメタデータを収集するのに時間がかかります。
 
 ## その他の参考資料
 

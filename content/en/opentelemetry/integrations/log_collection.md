@@ -8,6 +8,10 @@ further_reading:
   text: "Setting Up the OpenTelemetry Collector"
 ---
 
+<div class="alert alert-info">
+The Datadog Agent logs pipeline is enabled by default in the Datadog Exporter in v0.108.0. This may cause a breaking change if <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/b52e760f184b77c6e1a9ccc5121ff7b88d2b8f75/exporter/datadogexporter/examples/collector.yaml#L456-L463"><code>logs::dump_payloads</code></a> is in use while upgrading, since this option is invalid when the Datadog Agent logs pipeline is enabled. To avoid this issue, remove the <code>logs::dump_payloads</code> config option or temporarily disable the <code>exporter.datadogexporter.UseLogsAgentExporter</code> feature gate.
+</div>
+
 ## Overview
 
 {{< img src="/opentelemetry/collector_exporter/log_collection.png" alt="An information log sent from OpenTelemetry" style="width:100%;" >}}

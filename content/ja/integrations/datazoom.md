@@ -24,6 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: datazoom
 integration_title: Datazoom
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: datazoom
 public_title: Datazoom
@@ -49,10 +49,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datazoom Collector のデータをログエクスプローラーで表示します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-datazoom/
   support: README.md#Support
   title: Datazoom
 ---
@@ -68,35 +72,35 @@ Datazoom は、コレクターのエコシステムを通じてエンドポイ�
 
 Datazoom は INFO レベルに設定されたデータを送信します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datazoom インテグレーションは、Datadog にログを出力します。Datadog 側でのインストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 - Datazoom Datadog Connector の構成方法の詳細については、Datazoom のインテグレーション[ドキュメント][1]をご覧ください。
 
-### ダッシュボード  
+### ダッシュボード
 
 [Datazoom ログダッシュボード][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Datazoom には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Datazoom には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Datazoom には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

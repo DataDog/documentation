@@ -7,24 +7,26 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/php
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
+- link: https://www.datadoghq.com/blog/php-exception-profiling/
+  tag: ブログ
+  text: Why care about exception profiling in PHP?
 title: PHP プロファイラーの有効化
 type: multi-code-lang
 ---
 
 ## 要件
 
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
+
 Datadog Profiler を使用するには、64 ビットの Linux で、少なくとも PHP 7.1 が必要です。
 
-以下は、**非対応**です。
-- PHP ZTS ビルド
-- PHP デバッグビルド
-- Fibers (PHP 8.1+)
+PHP ZTS builds are supported since `dd-trace-php` version 0.99+, while PHP debug builds are **not** supported.
 
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
@@ -50,12 +52,13 @@ apk add libgcc
 {{% /tab %}}
 {{< /tabs >}}
 
-以下のプロファイリング機能は、`dd-trace-php` ライブラリの以下の最小バージョンで利用可能です。
+The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
 
-|      機能         | 必要な `dd-trace-php` のバージョン          |
-|----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.71+                       |
-| [Endpoint Profiling][13]            | 0.79.0+                       |
+|      機能              | Required `dd-trace-php` version          |
+|---------------------------|------------------------------------------|
+| [Code Hotspots][12]       | 0.71+                                    |
+| [Endpoint Profiling][13]  | 0.79.0+                                  |
+| [Timeline][15]            | 0.98.0+ (beta since 0.89.0+)             |
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
@@ -63,62 +66,32 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 
 アプリケーションのプロファイリングを開始するには
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][1] 以降または [6.20.2][2] 以降にアップグレードしてください。
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. [GitHub リリースページ][3]から `datadog-setup.php` スクリプトをダウンロードします。バージョン 0.69.0 は、このインストーラーを含む最初のトレーサーのリリースです。
 
 3. トレーサーとプロファイラーの両方をインストールするために、例えば `php datadog-setup.php --enable-profiling` のようにインストーラーを実行します。このスクリプトは対話型で、検出された PHP の位置のどれにインストールするかを尋ねます。スクリプトの最後には、今後の使用のために非対話型バージョンのコマンド引数を出力します。
 
-   {{< tabs >}}
-{{% tab "CLI" %}}
+4. Configure the profiler using config mode through the `datadog-setup.php`:
 
-PHP を呼び出す前に環境変数を設定します。例:
+    ```
+    # `datadog.profiling.enabled` is not required for v0.82.0+.
+    php datadog-setup.php config set -d datadog.profiling.enabled=1
 
-```
-# DD_PROFILING_ENABLED は バージョン 0.82.0 以上では不要です。
-export DD_PROFILING_ENABLED=true
+    php datadog-setup.php config set \
+      -d datadog.service=app-name \
+      -d datadog.env=prod \
+      -d datadog.version=1.3.2
 
-export DD_SERVICE=app-name
-export DD_ENV=prod
-export DD_VERSION=1.3.2
+    php hello.php
+    ```
 
-php hello.php
-```
+    Apache, PHP-FPM and other servers require a restart after changing the INI
+settings.
 
-{{% /tab %}}
-{{% tab "PHP-FPM" %}}
+    See the [configuration docs][4] for more INI settings.
 
-php-fpm の `www.conf` ファイルの `env` ディレクティブを使用します。次に例を示します。
-
-```
-; DD_PROFILING_ENABLED は バージョン 0.82.0 以上では不要です。
-env[DD_PROFILING_ENABLED] = true
-
-env[DD_SERVICE] = app-name
-env[DD_ENV] = prod
-env[DD_VERSION] = 1.3.2
-```
-
-{{% /tab %}}
-{{% tab "Apache" %}}
-
-サーバー構成、バーチャルホスト、ディレクトリ、または `.htaccess` ファイルから `SetEnv` を使用します。
-
-```
-# DD_PROFILING_ENABLED は バージョン 0.82.0 以上では不要です。
-SetEnv DD_PROFILING_ENABLED true
-
-SetEnv DD_SERVICE app-name
-SetEnv DD_ENV prod
-SetEnv DD_VERSION 1.3.2
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-その他の環境変数については、[構成ドキュメント][4]を参照してください。
-
-4. リクエストを受け取ってから 1～2 分後、[APM > Profiler ページ][5]にプロファイルが表示されます。
+5. リクエストを受け取ってから 1～2 分後、[APM > Profiler ページ][5]にプロファイルが表示されます。
 
 ## 次のステップ
 
@@ -128,11 +101,13 @@ SetEnv DD_VERSION 1.3.2
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: https://github.com/DataDog/dd-trace-php/releases
 [4]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling
 [6]: /ja/getting_started/profiler/
 [12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/
+[15]: /ja/profiler/profile_visualizations/#timeline-view

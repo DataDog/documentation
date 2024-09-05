@@ -81,6 +81,6 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [6]: /tracing/trace_collection/dd_libraries/ruby/#additional-configuration
 [7]: /tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
 [8]: https://opentelemetry.io/docs/instrumentation/ruby/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/ruby/
+[9]: /tracing/trace_collection/trace_context_propagation/
 [10]: /tracing/trace_collection/dd_libraries/ruby/#custom-logging
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/

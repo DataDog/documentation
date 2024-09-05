@@ -7,6 +7,9 @@ on:
       - 'local/bin/py/build/configurations/pull_config_preview.yaml'
       - 'local/bin/py/build/configurations/pull_config.yaml'
 
+permissions:
+  contents: read
+
 # Stop the current running job if a new push is made to the PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}

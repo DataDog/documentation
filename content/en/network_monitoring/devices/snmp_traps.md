@@ -20,7 +20,7 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 To enable listening for SNMP Traps, add the following to `datadog.yaml`:
 
 ```yaml
-logs_enabled: true # Traps are forwarded as logs and can be found in the logs explorer with a `source:snmp-traps` query.
+logs_enabled: true # Traps are forwarded as logs and can be found in the Log Explorer with a `source:snmp-traps` query.
 network_devices:
   namespace: <NAMESPACE> # optional, defaults to "default".
   snmp_traps:
@@ -47,6 +47,8 @@ network_devices:
       privKey: myPrivKey2
       privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
+
+**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
 ## Device namespaces
 

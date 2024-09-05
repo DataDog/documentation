@@ -1,7 +1,7 @@
 ---
 description: モバイルおよび TV アプリケーションから RUM データを収集します。
 further_reading:
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser/
   tag: ドキュメント
   text: セッションリプレイ
 title: モバイルおよび TV モニタリング

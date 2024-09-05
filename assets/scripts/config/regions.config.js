@@ -266,5 +266,13 @@ export default {
      us3: `https://trace.agent.us3.datadoghq.com/api/v0.2/traces`,
      us5: `https://trace.agent.us5.datadoghq.com/api/v0.2/traces`,
      eu: `https://trace.agent.datadoghq.eu/api/v0.2/traces`
+    },
+    custom_costs_endpoint: {
+      us: 'api.datadoghq.com/api/v2/cost/custom_costs',
+      us3: 'api.us3.datadoghq.com/api/v2/cost/custom_costs',
+      us5: 'api.us5.datadoghq.com/api/v2/cost/custom_costs',
+      eu: 'api.datadoghq.eu/api/v2/cost/custom_costs.',
+      ap1: 'api.ap1.datadoghq.com/api/v2/cost/custom_costs',
+      gov: 'The custom costs endpoint for GOV is not supported.'
     }  
 };

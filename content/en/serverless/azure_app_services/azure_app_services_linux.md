@@ -19,7 +19,7 @@ This solution uses the startup command setting and Application Settings for Linu
 
 ### Setup
 #### Set application settings
-To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
+To instrument your application, begin by adding the following key-value pairs under **App settings** in your Azure "Environment variables" settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 

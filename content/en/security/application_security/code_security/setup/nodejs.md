@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Node.js
+title: Enabling Code Security for Node.js
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
@@ -7,32 +7,29 @@ aliases:
   - /security_platform/application_security/getting_started/nodejs
   - /security/application_security/getting_started/nodejs
 further_reading:
-    - link: "/security/application_security/add-user-info/"
-      tag: "Documentation"
-      text: "Adding user information to traces"
-    - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: "Source Code"
-      text: 'Node.js Datadog library source code'
-    - link: "/security/default_rules/?category=cat-application-security"
-      tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
-    - link: "/security/application_security/troubleshooting"
-      tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+  - link: "/security/application_security/code_security/#code-level-vulnerabilities-list"
+    tag: "Documentation"
+    text: "Supported code-level vulnerabilities list"
+  - link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
+    tag: "Blog"
+    text: "Enhance application security in production with Datadog Code Security"
+  - link: "https://www.datadoghq.com/blog/application-code-vulnerability-detection/"
+    tag: "Blog"
+    text: "Find vulnerabilities in your code with Datadog Code Security"
+  - link: "https://www.datadoghq.com/blog/code-security-owasp-benchmark/"
+    tag: "Blog"
+    text: "Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by using an IAST approach"
+  - link: "/security/application_security/troubleshooting"
+    tag: "Documentation"
+    text: "Troubleshooting Application Security"
 ---
 
-You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can detect code-level vulnerabilities and monitor application security in Node.js applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-{{% appsec-getstarted %}}
-
-## Enabling Code Security
-If your service runs a [tracing library version that supports code security vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
-
-
-To leverage code-level vulnerability detection capabilities for your service:
+Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on Code Security. For details, see [ASM capabilities support][3].
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    If you initialize the APM library on the command line using the `--require` option to Node.js:
@@ -99,9 +96,9 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Code Security in action, browse your service and the code-level vulnerabilities will appear in the [Vulnerability Explorer][5]. The `SOURCE` column shows the Code value.
+5. To see Code Security in action, browse your service and the code-level vulnerabilities appear in the [Vulnerability Explorer][5].
 
-{{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code-level vulnerability" video="true" >}}
+{{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
 If you need additional assistance, contact [Datadog support][6].
 
@@ -111,7 +108,7 @@ If you need additional assistance, contact [Datadog support][6].
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: /security/application_security/code_security/setup/nodejs/
-[3]: /security/application_security/code_security/setup/nodejs/
+[3]: /security/application_security/code_security/setup/compatibility/
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
-[5]: https://app.datadoghq.com/security/appsec/vm
+[5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help

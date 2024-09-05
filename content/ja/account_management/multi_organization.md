@@ -47,7 +47,7 @@ title: マルチオーガニゼーションアカウントの管理
     - 招待されたユーザーには、[Datadog Admin ロール][5]が割り当てられます。組織を作成後、
 組織の設定でさらにユーザーを招待することができます。
     - ユーザーがパスワードを持っていない場合、Datadog は、パスワードを設定し、新しい子組織に参加するためのリンクを持つ招待メールを送信します。
-4. **Create** をクリックします。
+4. **作成**をクリックします。
 
 新しい子組織は、親組織のプランを継承し、親組織の請求アカウントに追加されます。子組織の請求を更新する場合は、[営業担当者][6]にお問い合わせください。
 
@@ -82,7 +82,7 @@ SAML をマルチオーガニゼーションに構成するには
 SAML に厳しい親組織から作成された子組織に確実にログインするには、親組織で次の手順を実行します。
 1. 左ナビゲーションの下部にあるアカウントメニューで **Organization Settings** をクリックするか、Personal Settings ページの上部にあるドロップダウンで **Organization Settings** を選択します。
 2. 左ページのメニューで、**Users** を選択します。
-3. ユーザープロファイルを選択します。
+3. Select your user profile.
 4. **Override Default Login Methods** トグルをオンに設定します。
 5. **Select user's login methods** の下で、**Password** のチェックボックスにチェックを入れます。
 6. アカウントにパスワードが設定されていることを確認します。パスワードの設定にお困りの場合は、[Datadog サポート][1]にお問い合わせください。
@@ -93,7 +93,7 @@ SAML に厳しい親組織から作成された子組織に確実にログイン
 
 ## マルチオーガニゼーションの使用量
 
-親組織は、左下のユーザー名にカーソルを合わせ、**Plan & Usage** > **Usage** に進むと、すべての組織 (子組織と親組織) の使用量の合計と請求対象分を見ることができます。
+親組織は、左下のユーザー名にカーソルを合わせて [**Plan & Usage** > **Usage & Cost**][11] に進むことで、すべての組織 (子組織と親組織) の使用量の合計と請求対象分を見ることができます。
 
 Usage ページには、親組織およびそのすべての子組織の使用量の集計が表示されます。Usage ページには、2 つのタブがあります。
 
@@ -130,15 +130,13 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 
 **Individual Organizations** の使用量タブでは、子組織の使用量を絶対単位または総使用量に対する割合で表示することができます。
 
-{{< img src="account_management/multi-org-percent-billable-v2.png" alt="個々の使用率" >}}
-
 デフォルトのビューは "Billable" ビューで、最終的な請求に寄与する使用量が表示されます。このビューでは、トライアルオーガニゼーションなどの請求対象ではない子オーガニゼーションや、請求対象のより正確な要約を提供するその他の調整が削除されます。"All" ビューに切り替えると、親オーガニゼーションとすべての子オーガニゼーションの使用量を未調整かつ生の状態で確認することができます。どちらのビューも CSV ファイルとしてダウンロードできます。
 
-子組織の[使用量の詳細][11]を表示するには、子組織の名前をクリックします。
+子組織の[使用量の詳細][12]を表示するには、子組織の名前をクリックします。
 
 ## 使用属性
 
-親組織は、[Usage Attribution][12] ページで子組織の使用量を既存のタグキーによって確認できます。管理者が、左下にあるユーザー名にカーソルを置き、`Plan & Usage`--> `Usage Attribution` と移動して表示します。
+親組織は、[Usage Attribution][13] ページで既存のタグキーによって子組織の使用量を確認できます。管理者は左下にあるユーザー名にカーソルを合わせて、[**Plan & Usage > Usage Attribution**][14] に移動することで表示できます。
 
 親オーガニゼーションレベルで有効化されている場合、使用属性にはすべてのオーガニゼーションの使用量集計が表示されます。これは、子オーガニゼーションの使用量を特定のプロジェクトまたはチームの属性とするなど、グループ化する場合に便利です。
 
@@ -168,5 +166,7 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 [8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [9]: /ja/monitors/manage/
 [10]: /ja/account_management/saml/
-[11]: /ja/account_management/plan_and_usage/usage_details/
-[12]: /ja/account_management/billing/usage_attribution/
+[11]: https://app.datadoghq.com/billing/usage?cost_summary
+[12]: /ja/account_management/plan_and_usage/usage_details/
+[13]: /ja/account_management/billing/usage_attribution/
+[14]: https://app.datadoghq.com/billing/usage-attribution

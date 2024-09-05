@@ -7,7 +7,7 @@ title: Azure Container Apps
 ---
 
 ## 概要
-Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][1]を通して Container Apps のモニタリングとログ収集を提供しています。また、Datadog は現在ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Container Apps アプリケーションをインスツルメントするソリューションも提供しています。
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ### 前提条件
 
@@ -19,7 +19,7 @@ Azure Container Apps は、コンテナベースのアプリケーションを�
 
 ### Dockerfile
 
-Datadog は、serverless-init コンテナイメージの新しいリリースを Google の gcr.io、AWS の ECR、および Docker Hub に公開しています。
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS' ECR, and on Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
@@ -27,8 +27,8 @@ Datadog は、serverless-init コンテナイメージの新しいリリース�
 
 イメージはセマンティックバージョニングに基づいてタグ付けされ、新しいバージョンごとに 3 つの関連タグが付与されます。
 
-* `1`、`1-alpine`: 重大な変更を加えることなく、最新のマイナーリリースを追跡するために使用します。
-* `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めするために使用します。
+* `1`、`1-alpine`: 重大な変更がない最新のマイナーリリースを追跡する場合、これらを使用します
+* `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めする場合、これらを使用します
 * `latest`、`latest-alpine`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
 
 ## `serverless-init` の動作
@@ -95,13 +95,13 @@ az containerapp up \
   --resource-group RESOURCE_GROUP \
   --ingress external \
   --target-port 80 \
-  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE='datadoghq.com'" \
+  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE=datadoghq.com" \
   --image YOUR_REGISTRY/YOUR_PROJECT
 ```
 
 ### 3. 結果
 
-デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to [**Infrastructure > Serverless**][17] to see your serverless metrics and traces.
 
 ## 追加の構成
 
@@ -130,7 +130,7 @@ az containerapp up \
 | `DD_SOURCE`       | [統合サービスタグ付け][5]を参照してください。                                       |
 | `DD_TAGS`         | [統合サービスタグ付け][5]を参照してください。                                       |
 
-## ヘルプ
+## トラブルシューティング
 
 このインテグレーションは、お使いのランタイムが完全な SSL を実装しているかどうかに依存します。Node の slim イメージを使用している場合、証明書を含めるために Dockerfile に次のコマンドを追加する必要があるかもしれません。
 
@@ -138,7 +138,7 @@ az containerapp up \
 RUN apt-get update && apt-get install -y ca-certificates
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -159,3 +159,4 @@ RUN apt-get update && apt-get install -y ca-certificates
 [14]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
 [15]: /ja/tracing/other_telemetry/connect_logs_and_traces/go
 [16]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby
+[17]: https://app.datadoghq.com/functions?cloud=azure&entity_view=container_apps

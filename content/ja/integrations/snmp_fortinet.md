@@ -20,6 +20,7 @@ author:
 categories:
 - ネットワーク
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_fortinet/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: snmp-fortinet
 integration_title: Fortinet
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_fortinet
 public_title: Fortinet
@@ -46,10 +46,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Fortinet ネットワークデバイスから SNMP メトリクスを収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: Fortinet
 ---
@@ -63,29 +67,34 @@ tile:
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## 計画と使用
+## セットアップ
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
 
-## リアルユーザーモニタリング
+## ベンダープロファイル
 
-### データセキュリティ
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][3]のページで確認できます。
+
+## 収集データ
+
+### メトリクス
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-* [Datadog での SNMP モニタリング][4]
+* [Monitor SNMP with Datadog][5]
 
 
 
 [1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
 [2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
