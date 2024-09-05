@@ -1358,41 +1358,31 @@ menu:
       parent: ddsql_editor
       identifier: ddsql_editor_getting_started
       weight: 1
-    - name: Reference
-      url: ddsql_editor/reference
-      parent: ddsql_editor
-      identifier: ddsql_editor_reference
-      weight: 2
     - name: Statements
       url: ddsql_editor/reference/statements
-      parent: ddsql_editor_reference
-      identifier: ddsql_editor_reference_statements
-      weight: 201
+      parent: ddsql_editor
+      identifier: ddsql_editor_statements
+      weight: 2
     - name: Expressions and Operators
       url: ddsql_editor/reference/expressions_and_operators
-      parent: ddsql_editor_reference
-      identifier: ddsql_editor_reference_expressions_and_operators
-      weight: 202
+      parent: ddsql_editor
+      identifier: ddsql_editor_expressions_and_operators
+      weight: 3
     - name: Data Types
       url: ddsql_editor/reference/data_types
-      parent: ddsql_editor_reference
-      identifier: ddsql_editor_reference_data_types
-      weight: 203
-    - name: Scalar Functions
-      url: ddsql_editor/reference/scalar_functions
-      parent: ddsql_editor_reference
-      identifier: ddsql_editor_reference_scalar_functions
-      weight: 204
-    - name: Aggregation Functions
-      url: ddsql_editor/reference/aggregation_functions
-      parent: ddsql_editor_reference
-      identifier: ddsql_editor_reference_aggregation_functions
-      weight: 205
+      parent: ddsql_editor
+      identifier: ddsql_editor_data_types
+      weight: 4
+    - name: Functions
+      url: ddsql_editor/reference/functions
+      parent: ddsql_editor
+      identifier: ddsql_editor_functions
+      weight: 5
     - name: Querying Tags
       url: ddsql_editor/reference/tags
-      parent: ddsql_editor_reference
-      identifier: ddsql_editor_reference_tags
-      weight: 207
+      parent: ddsql_editor
+      identifier: ddsql_editor_tags
+      weight: 6
     - name: Guides
       url: ddsql_editor/guide
       parent: ddsql_editor
