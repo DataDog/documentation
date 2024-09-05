@@ -1,31 +1,32 @@
 ---
-title: Network Performance Monitoring Setup
+title: Cloud Network Monitoring Setup
 description: Collect your Network Data with the Agent.
 aliases:
     - /network_performance_monitoring/installation/
+    - /network_monitoring/performance/setup
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
-      text: 'Network Performance Monitoring'
+      text: 'Cloud Network Monitoring'
     - link: 'https://www.datadoghq.com/blog/monitor-containers-with-npm/'
       tag: 'Blog'
-      text: 'Datadog NPM with containers and service-meshed networks'
+      text: 'Datadog CNM with containers and service-meshed networks'
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
     - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
       tag: "Blog"
-      text: "Datadog NPM now supports Consul networking"
+      text: "Datadog CNM now supports Consul networking"
 ---
 
-Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
+Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
 
 - Pinpoint unexpected or latent service dependencies.
 - Optimize costly cross-regional or multi-cloud communication.
 - Identify outages of cloud provider regions and third-party tools.
 - Troubleshoot faulty service discovery with DNS server metrics.
 
-Network Performance Monitoring requires [Datadog Agent v6.14+][1]. Because metrics are automatically collected in higher versions of the Agent, see the [metrics setup section][2] to configure DNS Monitoring.
+Cloud Network Monitoring requires [Datadog Agent v6.14+][1]. Because metrics are automatically collected in higher versions of the Agent, see the [metrics setup section][2] to configure DNS Monitoring.
 
 ## Supported platforms
 
@@ -33,7 +34,7 @@ Network Performance Monitoring requires [Datadog Agent v6.14+][1]. Because metri
 
 #### Linux OS
 
-Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+ or have eBPF features backported. NPM supports the following Linux distributions:
+Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+ or have eBPF features backported. CNM supports the following Linux distributions:
 
 - Ubuntu 16.04+
 - Debian 9+
@@ -51,19 +52,19 @@ Data collection is done using a network kernel device driver. Support is availab
 
 #### macOS
 
-Datadog Network Performance Monitoring does not support macOS platforms.
+Datadog Cloud Network Monitoring does not support macOS platforms.
 
 ### Containers
 
-NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
+CNM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
-NPM is not supported for Google Kubernetes Engine (GKE) Autopilot.
+CNM is not supported for Google Kubernetes Engine (GKE) Autopilot.
 
 ### Network routing tools
 
 #### Istio
 
-With NPM, you can map network communication between containers, pods, and services over the Istio service mesh.
+With CNM, you can map network communication between containers, pods, and services over the Istio service mesh.
 
 Datadog monitors every aspect of your Istio environment, so you can also:
 
@@ -71,19 +72,19 @@ Datadog monitors every aspect of your Istio environment, so you can also:
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][8].
 - Examine distributed traces for applications transacting over the mesh with [APM][9].
 
-NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
+CNM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][10].
 
 #### Cilium
 
-Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
+Cloud Network Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
 2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
 
 ### Provisioning systems
 
-Network Performance Monitoring supports use of the following provisioning systems:
+Cloud Network Monitoring supports use of the following provisioning systems:
 
 - Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][11]
 - Chef 12.7+: See the [Datadog Chef recipe][12]
@@ -96,7 +97,7 @@ Given this tool's focus and strength is in analyzing traffic _between_ network e
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
 
-To enable network performance monitoring with the Datadog Agent, use the following configurations:
+To enable Cloud Network Monitoring with the Datadog Agent, use the following configurations:
 
 1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
 
@@ -111,7 +112,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```yaml
     network_config:   # use system_probe_config for Agent's older than 7.24.1
       ## @param enabled - boolean - optional - default: false
-      ## Set to true to enable Network Performance Monitoring.
+      ## Set to true to enable Cloud Network Monitoring.
       #
       enabled: true
     ```
@@ -139,7 +140,7 @@ On systems with SELinux enabled, the system-probe binary needs special permissio
 
 The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
 
-If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
+If you need to use Cloud Network Monitoring on other systems with SELinux enabled, do the following:
 
 1. Modify the base [SELinux policy][3] to match your SELinux configuration.
     Depending on your system, some types or attributes may not exist (or have different names).
@@ -179,11 +180,11 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 Data collection for Windows relies on a filter driver for collecting network data.
 
-To enable Network Performance Monitoring for Windows hosts:
+To enable Cloud Network Monitoring for Windows hosts:
 
 1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
 
-   [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
+   [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Cloud Network Monitoring" when running the Agent installation through the GUI.
 
 1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -201,7 +202,7 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
+**Note**: Cloud Network Monitoring monitors Windows hosts only, and not Windows containers.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
@@ -209,7 +210,7 @@ To enable Network Performance Monitoring for Windows hosts:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Network Performance Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+To enable Cloud Network Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
 **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
@@ -218,7 +219,7 @@ To enable Network Performance Monitoring with Kubernetes using Helm, add the fol
       enabled: true
   ```
 
-**Note**: If you receive a permissions error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
+**Note**: If you receive a permissions error when configuring CNM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
 
   ```yaml
   agents:
@@ -227,7 +228,7 @@ To enable Network Performance Monitoring with Kubernetes using Helm, add the fol
         enabled: true
   ```
 
-If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
+If you are not using Helm, you can enable Cloud Network Monitoring with Kubernetes from scratch:
 
 1. Download the [datadog-agent.yaml manifest][2] template.
 2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][3].
@@ -367,7 +368,7 @@ If you already have the [Agent running with a manifest][4]:
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-To enable Network Performance Monitoring in Operator, use the following configuration:
+To enable Cloud Network Monitoring in Operator, use the following configuration:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -384,7 +385,7 @@ spec:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
+To enable Cloud Network Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
 docker run --cgroupns host \
@@ -452,7 +453,7 @@ To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 {{< site-region region="us,us3,us5,eu" >}}
 ### Enhanced resolution
 
-Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+Optionally, enable resource collection for cloud integrations to allow Cloud Network Monitoring to discover cloud-managed entities.
 - Install the [Azure integration][101] for visibility into Azure load balancers and application gateways.
 - Install the [AWS Integration][102] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
@@ -467,7 +468,7 @@ To enable the Agent to start collecting data around failed connections, add the 
 ```yaml
 network_config:   # use system_probe_config for Agent versions older than 7.24.1
   ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable Network Performance Monitoring.
+  ## Set to true to enable Cloud Network Monitoring.
   #
   enabled: true
   enable_tcp_failed_connections: true
@@ -476,7 +477,7 @@ network_config:   # use system_probe_config for Agent versions older than 7.24.1
 
 [101]: /integrations/azure
 [102]: /integrations/amazon_web_services/#resource-collection
-[103]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+[103]: /network_monitoring/cloud_network_monitoring/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 

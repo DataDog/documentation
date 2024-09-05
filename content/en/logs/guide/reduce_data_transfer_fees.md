@@ -30,14 +30,14 @@ Send data over a private network to avoid the public internet and reduce your da
 ## Additional tools 
 
 After you switch to private links, you can use the following to monitor your usage and have more control over your data costs:
-- Datadog's [Network Performance Monitoring][1] identifies your organization’s highest throughput applications.
+- Datadog's [Cloud Network Monitoring][1] identifies your organization's highest throughput applications.
 - [Cloud Cost Management][2] tools can verify and monitor the reduction in your cloud costs.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/performance/
+[1]: /network_monitoring/cloud_network_monitoring/
 [2]: /cloud_cost_management/
 [3]: /agent/guide/private-link/
 [4]: /agent/guide/azure-private-link/

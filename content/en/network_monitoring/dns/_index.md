@@ -35,7 +35,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Network Performance Monitoring product.
+Before you can begin to use DNS Monitoring, [set up Cloud Network Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Cloud Network Monitoring product.
 
 Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
@@ -110,7 +110,7 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/performance/
+[1]: /network_monitoring/cloud_network_monitoring/
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /network_monitoring/performance/network_analytics#table
-[4]: /network_monitoring/performance/network_analytics/#recommended-queries
+[3]: /network_monitoring/cloud_network_monitoring/network_analytics#table
+[4]: /network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries

@@ -5,7 +5,7 @@ aliases:
 ---
 Traffic is expensive, especially in the cloud. Cloud providers charge different prices for traffic, depending on whether it is flowing within an availability zone (AZ), between AZs, between particular regions, or to the open internet. Cross-regional and egress traffic is not only the most expensive, but also the most vulnerable to errors, latency, and security threats. 
 
-Network Performance Monitoring (NPM) allows you to track all of the traffic patterns described above by mapping dependencies between any tags in Datadog, including service, container, availability zone, region, datacenter, etc. This insight into your dependencies and the traffic volume they produce (which is ultimately what cloud providers charge for) can be used to monitor and optimize your traffic-related costs. 
+Cloud Network Monitoring (CNM) allows you to track all of the traffic patterns described above by mapping dependencies between any tags in Datadog, including service, container, availability zone, region, datacenter, etc. This insight into your dependencies and the traffic volume they produce (which is ultimately what cloud providers charge for) can be used to monitor and optimize your traffic-related costs. 
 
 ## Datadog's story
 
