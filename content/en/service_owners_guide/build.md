@@ -7,7 +7,6 @@ further_reading:
   text: "Maintaining and running your Datadog Implementation"
 ---
 
-
 After focusing on design and best practices, the next phase should concentrate on the construction of Datadog itself, understanding what needs to be installed, and the best way to achieve that.
 
 As you scale your IT footprint, it's important to develop standards, methods, and practices for how software is installed and used. Engineering effort is dedicated to developing precise steps for installing and configuring software in a repeatable, standardized manner, while still allowing for a significant level of flexibility. Without these standards, service reliability can be severely impacted. In this section, we describe how Datadog would most efficiently interact with those standards, methods, and practices.

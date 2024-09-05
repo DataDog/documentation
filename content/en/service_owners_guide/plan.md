@@ -9,7 +9,6 @@ further_reading:
   tag: "Documentation"
   text: "Maintaining and running your Datadog Implementation"
 ---
----
 
 ## Design
 
@@ -30,7 +29,6 @@ A sample survey form might look like this:
 
 **Recommendation:**   
 Start whiteboarding early, collecting or consolidating a mental survey of your outline. Create a comprehensive view of your ecosystems, application language, data storage, networking, and infrastructure.
-
 
 ## General best practices 
 
@@ -167,7 +165,7 @@ We've highlighted some important wins and best practices with APM, RUM, Syntheti
 
 ### Availability, latency, and SSL expiration 
 
-Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP\_Check][27] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates.
+Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP_Check][27] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates.
 
 ### Network Monitoring
 
@@ -189,7 +187,7 @@ Without any additional setup, [event management][33] can be used to see 3rd part
 
 ### Error Tracking 
 
-See errors where they happen with Datadog’s [Error Tracking][34]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
+See errors where they happen with Datadog's [Error Tracking][34]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
 
 ### API Catalog 
 
@@ -198,6 +196,8 @@ Use [API Catalog][35] for resource endpoint-specific categorization, performance
 ### Fleet Automation  
 
 Centrally administer and manage all of your Datadog Agents with [Fleet Automation][36]. Fleet Automation can help you identify which Agents need upgraded, send a flare from within your organization to support, and help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.  
+
+{{< img src="/service_owners_guide/fleet_automation.png" alt="Fleet Management home screen" style="width:90%;">}}
 
 ### Remote Configuration
 
@@ -260,45 +260,45 @@ Datadog footprint is set up for success. You have identified and assembled your 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging/
-[2]: https://docs.datadoghq.com/getting\_started/tagging/
-[3]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging
-[4]: https://docs.datadoghq.com/account\_management/rbac/?tab=datadogapplication
+[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+[2]: https://docs.datadoghq.com/getting_started/tagging/
+[3]: https://docs.datadoghq.com/getting_started/tagging/unified\_service_tagging
+[4]: https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication
 [5]: https://docs.datadoghq.com/account_management/multi_organization/
-[6]: https://docs.datadoghq.com/account\_management/org\_settings/service\_accounts/
-[7]: https://docs.datadoghq.com/account\_management/api-app-keys/
-[8]: https://docs.datadoghq.com/account\_management/teams/
-[9]: https://docs.datadoghq.com/tracing/trace\_pipeline/ingestion\_controls/
-[10]: https://docs.datadoghq.com/tracing/trace\_pipeline/ingestion\_controls/\#managing-ingestion-for-all-services-at-the-agent-level
-[11]: https://docs.datadoghq.com/tracing/guide/ingestion\_sampling\_use\_cases/
-[12]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging/?tab=kubernetes
-[13]: https://docs.datadoghq.com/tracing/trace\_collection/tracing\_naming\_convention/
+[6]: https://docs.datadoghq.com/account_management/org_settings/service_accounts/
+[7]: https://docs.datadoghq.com/account_management/api-app-keys/
+[8]: https://docs.datadoghq.com/account_management/teams/
+[9]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/
+[10]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/\#managing-ingestion-for-all-services-at-the-agent-level
+[11]: https://docs.datadoghq.com/tracing/guide/ingestion_sampling_use_cases/
+[12]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[13]: https://docs.datadoghq.com/tracing/trace_collection/tracing_naming_convention/
 [14]: https://docs.datadoghq.com/logs/guide/getting-started-lwl/
 [15]: https://www.datadoghq.com/blog/engineering/introducing-husky/
 [16]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
-[17]: https://docs.datadoghq.com/logs/log\_configuration/logs\_to\_metrics/
-[18]: https://docs.datadoghq.com/logs/log\_configuration/archives/?tab=awss3
-[19]: https://docs.datadoghq.com/logs/log\_configuration/forwarding\_custom\_destinations/?tab=http
-[20]: https://docs.datadoghq.com/logs/log\_configuration/indexes
-[21]: https://docs.datadoghq.com/logs/log\_configuration/flex\_logs/
+[17]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/
+[18]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3
+[19]: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/?tab=http
+[20]: https://docs.datadoghq.com/logs/log_configuration/indexes
+[21]: https://docs.datadoghq.com/logs/log_configuration/flex_logs/
 [22]: https://docs.datadoghq.com/logs/guide/best-practices-for-log-management/
-[23]: https://docs.datadoghq.com/real\_user\_monitoring/guide/enrich-and-control-rum-data/?tab=event
-[24]: https://docs.datadoghq.com/real\_user\_monitoring/guide/best-practices-for-rum-sampling/
+[23]: https://docs.datadoghq.com/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event
+[24]: https://docs.datadoghq.com/real_user_monitoring/guide/best-practices-for-rum-sampling/
 [25]: https://www.datadoghq.com/pricing/?product=synthetic-testing--monitoring\#synthetic-testing--monitoring-common-questions
-[26]: https://docs.datadoghq.com/synthetics/browser\_tests/advanced\_options/\#subtests
-[27]: https://docs.datadoghq.com/integrations/http\_check/
+[26]: https://docs.datadoghq.com/synthetics/browser_tests/advanced_options/#subtests
+[27]: https://docs.datadoghq.com/integrations/http_check/
 [28]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
 [29]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows\#installation
 [30]: https://docs.datadoghq.com/integrations/network/
-[31]: https://docs.datadoghq.com/network\_monitoring/performance/
-[32]: https://docs.datadoghq.com/service\_catalog/
-[33]: https://docs.datadoghq.com/service\_management/events/
-[34]: https://docs.datadoghq.com/error\_tracking/
-[35]: https://docs.datadoghq.com/api\_catalog/
-[36]: https://docs.datadoghq.com/agent/fleet\_automation/
-[37]: https://docs.datadoghq.com/agent/remote\_config/
-[38]: https://docs.datadoghq.com/agent/remote\_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
+[31]: https://docs.datadoghq.com/network_monitoring/performance/
+[32]: https://docs.datadoghq.com/service_catalog/
+[33]: https://docs.datadoghq.com/service_management/events/
+[34]: https://docs.datadoghq.com/error_tracking/
+[35]: https://docs.datadoghq.com/api_catalog/
+[36]: https://docs.datadoghq.com/agent/fleet_automation/
+[37]: https://docs.datadoghq.com/agent/remote_config/
+[38]: https://docs.datadoghq.com/agent/remot\_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
 [39]: https://docs.datadoghq.com/notebooks/
-[40]: https://docs.datadoghq.com/getting\_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[41]: https://docs.datadoghq.com/account\_management/billing/aws/\#aws-resource-exclusion
+[40]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[41]: https://docs.datadoghq.com/account_management/billing/aws/\#aws-resource-exclusion
 [42]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension\#metric-collection

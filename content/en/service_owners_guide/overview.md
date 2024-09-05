@@ -76,7 +76,7 @@ Get up to speed with the parts of Datadog that are most important to your use-ca
     {{< nextlink href="https://learn.datadoghq.com/courses/tracking-errors-rum-javascript" >}}Tracking errors with RUM for javascript web applications{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Create a test environment
+## Create a test environment
 
 After a bit of training, start adding some of your own local conditions. Spend some time installing and experimenting with Datadog in a low-risk sandbox, to help familiarize yourself with the environment. The Datadog installation methods are useful for getting started, and it is always a critical activity for the Datadog service ownership team.  
 
@@ -108,11 +108,11 @@ The [Datadog Agent][2] is open-source and published in Github. This is a useful 
 
 [1]: https://learn.datadoghq.com/
 [2]: https://github.com/DataDog/datadog-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config\_template.yaml
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [4]: https://github.com/DataDog/integrations-core
 [5]: https://app.datadoghq.com/fleet
-[6]: https://docs.datadoghq.com/getting\_started/tagging/unified\_service\_tagging/
-[7]: https://docs.datadoghq.com/getting\_started/tagging/
+[6]: https://docs.datadoghq.com/getting_started/tagging/unified\_service\_tagging/
+[7]: https://docs.datadoghq.com/getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
 [10]: https://app.datadoghq.com/monitors/recommended
