@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate). 
+Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate).
 
 ## Selecting a deployment data source
 
@@ -136,11 +136,14 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 
 - Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
-- If commits on a feature branch are squashed into a single commit prior to being merged into the default branch, the commit history for that pull request is not included in the change lead time calculation. The first commit included in the calculation is the newly created single commit. 
+- If commits on a feature branch are rebased, the commits considered for the change lead time are the new commits created with the rebase and not the original commits.
+- "Squash and merge", when a pull request is squashed:
+  - For GitHub: the metrics are emitted for the original commits.
+  - For other providers: the metrics are emitted for the new commit added to the target branch.
 
 ## Calculating change failure rate
 
-Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event. 
+Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event.
 
 ## Further Reading
 

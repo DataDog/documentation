@@ -63,7 +63,14 @@ Datadog breaks down change lead time into the following metrics, which represent
 
 These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit does not have an associated PR, only `dora.time_to_deploy` and `dora.deploy_time` metrics are available.
 
-**Note:** These metrics are emitted for every commit and not per deployment.
+**Notes:**
+
+- These metrics are emitted for every commit and not per deployment.
+- Commits that are not meaningful changes (for example merge commits) are ignored.
+- If commits on a feature branch are rebased, the commits considered for the change lead time are the new commits created with the rebase and not the original commits.
+- "Squash and merge", when a pull request is squashed:
+  - For GitHub: the metrics are emitted for the original commits.
+  - For other providers: the metrics are emitted for the new commit added to the target branch.
 
 ## Examine metrics in Event Management
 
