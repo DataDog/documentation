@@ -63,7 +63,7 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [1]: https://www.datadoghq.com/privacy/
 [2]: /product_analytics/user_retention
 [3]: /product_analytics/journeys
-[4]: product_analytics/journeys/pathways
+[4]: /product_analytics/journeys/pathways
 [5]: /product_analytics/journeys/funnel_analysis
 [6]: /product_analytics/journeys#conversion
 [7]: /product_analytics/segmentation/
