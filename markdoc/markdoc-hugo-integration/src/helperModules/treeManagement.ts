@@ -74,13 +74,13 @@ export function buildRenderableTree(p: {
   defaultValsByPrefId: Record<string, string>;
   variables?: Record<string, any>;
 }): RenderableTreeNode {
-  const variables = {
-    ...p.defaultValsByPrefId,
-    ...JSON.parse(JSON.stringify(p.variables))
-  };
+  const variables = p.variables || {};
 
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
-    variables,
+    variables: {
+      ...p.defaultValsByPrefId,
+      ...JSON.parse(JSON.stringify(variables))
+    },
     partials: p.parsedFile.partials,
     ...transformConfig
   });

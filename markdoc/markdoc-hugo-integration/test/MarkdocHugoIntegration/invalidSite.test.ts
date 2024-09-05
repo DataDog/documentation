@@ -14,6 +14,9 @@ describe('MarkdocHugoIntegration', () => {
       content: contentDir,
       options: siteDir + '/preferences_config/options',
       partials: siteDir + '/partials'
+    },
+    siteParams: {
+      img_url: 'https://example.com'
     }
   });
 

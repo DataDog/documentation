@@ -11,6 +11,9 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       content: siteDir + '/content',
       options: siteDir + '/preferences_config/options',
       partials: siteDir + '/partials'
+    },
+    siteParams: {
+      img_url: 'https://example.com'
     }
   });
 
