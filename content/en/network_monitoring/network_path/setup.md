@@ -133,7 +133,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
      # max_ttl: 30
 
      ## @param timeout - integer - optional - default: 1000
-     ## Specifies how much time in milliseconds traceroute should
+     ## Specifies how much time in milliseconds the traceroute should
      ## wait for a response from each hop before timing out.
      #
      # timeout: 1000
