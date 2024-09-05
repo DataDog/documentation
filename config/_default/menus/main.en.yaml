@@ -75,41 +75,46 @@ menu:
       url: markdoc_testing/elements/alert/
       parent: markdoc_testing_elements
       weight: 201
+    - name: Callout
+      identifier: markdoc_testing_callout
+      url: markdoc_testing/elements/callout/
+      parent: markdoc_testing_elements
+      weight: 202
     - name: Code Block
       identifier: markdoc_testing_code_block
       url: markdoc_testing/elements/code_block/
       parent: markdoc_testing_elements
-      weight: 202
+      weight: 203
     - name: Description List
       identifier: markdoc_testing_description_list
       url: markdoc_testing/elements/description_list/
       parent: markdoc_testing_elements
-      weight: 203
+      weight: 204
     - name: Image/Video
       identifier: markdoc_testing_image
       url: markdoc_testing/elements/image/
       parent: markdoc_testing_elements
-      weight: 204
+      weight: 205
     - name: region-param
       identifier: markdoc_testing_region_param
       url: markdoc_testing/elements/region_param/
       parent: markdoc_testing_elements
-      weight: 205
+      weight: 206
     - name: site-region
       identifier: markdoc_testing_site_region
       url: markdoc_testing/elements/site_region/
       parent: markdoc_testing_elements
-      weight: 206
+      weight: 207
     - name: Table
       identifier: markdoc_testing_table
       url: markdoc_testing/elements/table/
       parent: markdoc_testing_elements
-      weight: 207
+      weight: 208
     - name: Tabs
       identifier: markdoc_testing_tabs
       url: markdoc_testing/elements/tabs/
       parent: markdoc_testing_elements
-      weight: 208
+      weight: 209
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/

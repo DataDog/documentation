@@ -10,6 +10,7 @@ import { tabDefinition, Tab } from './components/tab';
 import { tabsDefinition, Tabs } from './components/tabs';
 import { fenceDefinition, Fence } from './components/fence';
 import { xDefinition, X } from './components/x';
+import { calloutDefinition, Callout } from './components/callout';
 
 export const transformConfig = {
   tags: {
@@ -19,7 +20,8 @@ export const transformConfig = {
     'site-region': siteRegionDefinition,
     tabs: tabsDefinition,
     tab: tabDefinition,
-    x: xDefinition
+    x: xDefinition,
+    callout: calloutDefinition
   },
   nodes: {
     fence: fenceDefinition
@@ -34,5 +36,6 @@ export const customComponents = {
   Tabs,
   Tab,
   Fence,
-  X
+  X,
+  Callout
 };
