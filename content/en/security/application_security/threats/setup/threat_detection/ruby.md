@@ -6,6 +6,7 @@ code_lang_weight: 30
 aliases:
   - /security_platform/application_security/getting_started/ruby
   - /security/application_security/getting_started/ruby
+  - /security/application_security/enabling/tracing_libraries/threat_detection/ruby/
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

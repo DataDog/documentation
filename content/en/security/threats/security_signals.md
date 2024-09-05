@@ -55,8 +55,9 @@ Use [Case Management][6] to track, triage, and investigate security signals.
 Use [Incident Management][5] to create an incident for a security signal.
 
 1. On the [Signals Explorer][4], select a security signal.
-2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Declare incident**. Alternatively, select **Add to incident** to add the signal to an existing incident.
-3. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
+1. On the signal side panel under *Next Steps*, click the **Show all actions** dropdown menu and select **Declare incident**. 
+1. Alternatively, select **Add to incident** to add the signal to an existing incident.
+1. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
 4. Click **Declare Incident**.
 
 ## Run a workflow

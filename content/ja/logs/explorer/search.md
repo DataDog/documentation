@@ -19,7 +19,7 @@ title: ログを検索
 
 個々のログからの情報はリストとして視覚化すると便利ですが、集計することで価値ある情報にアクセスできる場合もあります。この情報にアクセスするには、[ログエクスプローラー][5]でログを検索し、時系列、トップリスト、ツリーマップ、円グラフまたはテーブルとして表示します。
 
-ログエクスプローラーの検索は、時間範囲と検索クエリからなり、`key:value` 検索と全文検索が混在しています。
+Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
 
 ## 検索クエリ
 
@@ -27,7 +27,7 @@ title: ログを検索
 
 {{< img src="logs/explorer/search_filter.png" alt="ログエクスプローラーで、Web ストアサービスの支払い拒否のエラーログをフィルターする検索クエリを作成する" style="width:100%;" >}}
 
-[インデックス化されたログ][1]は、全文検索と `key:value` 検索クエリの両方をサポートします。
+[Indexed Logs][1] support both [full-text search][6] and `key:value` search queries.
 
 **注**: `key:value` クエリでは、事前に[ファセットを宣言][2]する必要が**ありません**。
 
@@ -36,7 +36,7 @@ title: ログを検索
 検索バーのオートコンプリート機能を使用すると、以下を使用してクエリを完成させることができます。
 - ログ内の既存のキーと値
 - 自分が行った最近の検索 (他のユーザーが行った最近の検索は表示されません)
-- 保存済みビュー
+- 保存ビュー
 
 {{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="クエリとして service: が、オートコンプリートオプションとして emailer、balancer-checker、ad-server、vpc が表示されているログ検索バー" style="width:80%;">}}
 
@@ -94,3 +94,4 @@ title: ログを検索
 [3]: /ja/logs/search-syntax
 [4]: /ja/dashboards/guide/custom_time_frames
 [5]: /ja/logs/explorer/
+[6]: /ja/logs/explorer/search_syntax/#full-text-search

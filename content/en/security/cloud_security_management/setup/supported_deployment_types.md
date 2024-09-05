@@ -2,6 +2,8 @@
 title: Cloud Security Supported Deployment Types
 ---
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 The following table summarizes the CSM features available relative to each deployment type.
 
 | Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless Scanning |

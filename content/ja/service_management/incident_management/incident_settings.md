@@ -10,13 +10,13 @@ title: インシデント設定
 
 [インシデント設定][1]を使用して、組織全体のインシデント管理エクスペリエンスのさまざまな面をカスタマイズすることができます。個々の設定は、さまざまなサブセクションに分類され、分割されています。主なカテゴリは、General、Notifications、Remediation です。
 
-## コア
-
-### 一般
+## 一般
 
 インシデント設定の General サブセクションは、組織の深刻度レベルとステータスレベルを定義し、インシデントヘルパーテキストを宣言するために使用します。
 
-{{< img src="service_management/incidents/severity_settings.jpeg" alt="インシデントの重大度レベルの設定" style="width:80%;">}}
+### 情報
+
+{{< img src="service_management/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings" style="width:80%;">}}
 
 重大度レベルの設定を使用して次のことを行います。
 
@@ -27,7 +27,7 @@ title: インシデント設定
 
 **注**: 通知ルールで参照されている重大度を削除しようとすると、その決定を確認するプロンプトが表示されます。続行を選択すると、影響を受ける通知ルールは無効となります。重大度の削除または開始重大度の変更によって、[Incident Management Analytics][2] のクエリが自動的に更新されることはありません。
 
-{{< img src="service_management/incidents/status_settings.jpeg" alt="インシデントステータスレベルの設定" style="width:80%;">}}
+{{< img src="service_management/incidents/status_settings.jpeg" alt="Incident Status Level Settings" style="width:80%;">}}
 
 ステータスレベルの設定を使用して次のことを行います。
 
@@ -36,9 +36,13 @@ title: インシデント設定
 
 **注**: `Completed` ステータスを削除しても、すでに `Completed` ステータスになっているインシデントは自動的に更新されず、またそれを明示的に参照している [Incident Management Analytics][2] クエリも自動的に更新されません。また、`Completed` ステータスを参照している通知ルールは、そのルールが無効となるため、無効になります。
 
-{{< img src="service_management/incidents/helper_text_settings.jpeg" alt="インシデントヘルパーテキスト設定の宣言" style="width:80%;">}}
+{{< img src="service_management/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings" style="width:80%;">}}
 
 Declare Incident Helper Text 設定では、[インシデント作成モーダル][3]で重大度とステータスレベルの説明と一緒に表示されるヘルパーテキストをカスタマイズできます。ヘルパー テキストは Markdown をサポートしており、インデント リスト、テキスト フォーマット、およびインシデント対応者のための他の指示リソースへのハイパーリンクを使用できます。
+
+{{< img src="service_management/incidents/incident_settings/private_incidents_delete_incidents.png" alt="インシデントの非公開とインシデントの削除を有効または無効にするインシデント設定" style="width:80%;" >}}
+
+組織内のユーザーがインシデントを非公開にしたり、インシデントを削除できるようにします。インシデントを非公開にすると、機密情報を含むインシデントへのアクセスを制限し、インシデントの対応者のみが詳細を閲覧できるようになります。インシデントが非公開の場合、以前に作成された通知ルールは送信されません。インシデントの削除は、アナリティクスを含む UI からインシデントを削除する機能をユーザーに提供します。デフォルトでは、インシデントの削除は無効になっています。
 
 ### プロパティフィールド
 
@@ -67,10 +71,6 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 ドラッグハンドルのアイコンを使ってフィールドをドラッグアンドドロップすることで、任意のプロパティフィールドを別のテーブルに移動したり、同じテーブル内で並び替えたりすることができます。右上の **Preview** ボタンをクリックすると、プロパティフィールドがどのように見えるかをプレビューできます。
 
 #### カスタムプロパティフィールドと必須フィールド
-
-<div class="alert alert-warning">
-これはオープンベータ版の機能です。
-</div>
 
 5 つのデフォルトフィールドとメトリクスタグに基づくフィールドに加えて、カスタムプロパティフィールドを作成し、インシデントの作成時に必須としてマークすることができます。作成できるカスタムフィールドは 4 種類あります。
 
@@ -102,30 +102,32 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 2. 新しい対応者タイプに名前を付けます。
 3. 対応者タイプが `One person role` か `Multi person role` かを選択します。`One person role` はインシデントごとに 1 人が持つことができ、`Multi person role` はインシデントごとに無制限に持つことができます。
 4. 対応者タイプに説明をつけます。この説明は、チームメイトに割り当てるロールを選択するための UI に表示されます。
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 
 ### インテグレーション
 
-{{< img src="service_management/incidents/integration_settings.jpeg" alt="インテグレーション設定" style="width:80%;">}}
+インテグレーション設定では、[Slack][13] と [Microsoft Teams][14] のインシデント管理機能に関する追加構成が提供されます。[**Incidents > Settings** に移動し、**Integrations** を選択します][15]。
 
-インテグレーション設定は、Datadog [Slack アプリ][13]のインシデント管理機能を設定するための追加設定を提供します。構成するための設定は 2 つあります。
+**Automatically create a channel for each new incident** (新しいインシデントごとにチャンネルを自動的に作成する) オプションを切り替えて、以下を有効にします。
+- 新しいインシデントごとに Slack または Microsoft Teams チャンネルの自動作成と、それらのチャンネルの名前テンプレート。
+- インシデントの更新チャンネル。
 
-1. 新しいインシデントごとに Slack チャンネルを自動作成し、それらのチャンネルの名前テンプレートを有効にする
-2. インシデント更新チャンネルを有効にする
+これらの設定のいずれかを構成して、組織の[インテグレーションタイル][16]で設定した Slack または Microsoft Teams ワークスペースを使用します。*インシデント更新チャンネル*は、インシデントが宣言されたり、ステータス、重大度、インシデントコマンダーが変更されたりするたびにメッセージを送信します。
 
-いずれの設定も、組織の [Slack インテグレーションタイル][14]で設定した任意の Slack ワークスペースを使用するように設定できます。
+#### チャンネル名テンプレートのオプション
+<div class="alert alert-info">Datadog では、Slack のチャンネル名には 80 文字の制限があるため、プレフィックスを短くすることを推奨しています。</div>
 
-デフォルトでは、インシデント専用チャンネルは `incident-{public_id}` を名前テンプレートとして使用します。
+チャンネル名テンプレートを変更しても、既存のインシデントチャンネルの名前は変更されません。新しい名前テンプレートは今後のみ適用されます。デフォルトでは、専用のインシデントチャンネルは `incident-{public_id}` を名前テンプレートとして使用します。タイトルオプションを追加することで、Slack チャンネルの名前がより明確になります。
+- プレフィックス `incident` は*小文字*、数字、ダッシュからなる任意の文字列に変更することができます。
+- チャンネル名の重複を防ぐために、**Incident ID** チェックボックスをクリックします。
+- **Title of Incident** チェックボックスをクリックすると、インシデントのタイトルが変更された場合に、Datadog Slack アプリが自動的にチャンネル名を変更できるようになります。
 
-`incident` のプレフィックスは、*小文字*のアルファベット、数字、ダッシュからなる任意の文字列に変更することができます。Datadog では、Slack のチャンネル名には 80 文字の制限があるため、プレフィックスを短くすることを推奨しています。`{public_id}` 以外に、 `{date_created}` と `{title}` をチャンネル名のテンプレートに変数として追加することができます。
+#### Slack の機能
 
-**注:**
-
-- チャンネル名のテンプレートを変更しても、既存のインシデントチャンネルの名前は変更されません。新しい名前テンプレートは、今後にのみ適用されます。
-- `{public_id}` のチェックを外した場合、2 つのインシデントでチャンネル名が重複する可能性があります。この場合、Datadog Slack アプリは自動的にチャンネル名の末尾にランダムな小文字または数字を付加し、チャンネル作成プロセスが失敗することを防ぎます。
-- `{title}` をチェックすると、インシデントのタイトルが変更された場合、Datadog Slack アプリが自動的にチャンネル名を変更します。
-
-インシデント更新チャンネルは、インシデントが宣言されたり、ステータス、重大度、インシデントコマンダーが変更されるたびに、メッセージを送信します。
+The following features are available to use with the Incident Management Slack integration. Enable or configure these options in **[Service Management > Incidents > Settings > Integrations][15]**.
+- Mirror Slack channel messages, to import and retain all slack conversations in the incident timeline. **Note**: This counts every slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
+- You can also automatically add [team members][6] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
+- Automatically archive a slack channel after a certain amount of time.
 
 ## 通知
 
@@ -133,7 +135,7 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 
 {{< img src="service_management/incidents/message_templates_settings.jpeg" alt="メッセージテンプレートの設定" style="width:80%;">}}
 
-メッセージテンプレートは、動的で再利用可能なメッセージであり、[手動インシデント通知][15]や自動通知ルールで使用することができます。メッセージテンプレートは `{{incident.severity}}` のようなテンプレート変数を利用して、通知が送信されるインシデントから対応する値を動的に注入します。メッセージテンプレートは Markdown をサポートしており、インシデント通知にはテキストフォーマット、テーブル、インデントリスト、ハイパーリンクを含めることができます。多数のメッセージテンプレートをよりよく整理するために、各テンプレートは、作成プロセスでカテゴリを必要とします。
+メッセージテンプレートは、動的で再利用可能なメッセージであり、[手動インシデント通知][17]や自動通知ルールで使用することができます。メッセージテンプレートは `{{incident.severity}}` のようなテンプレート変数を利用して、通知が送信されるインシデントから対応する値を動的に注入します。メッセージテンプレートは Markdown をサポートしており、インシデント通知にはテキストフォーマット、テーブル、インデントリスト、ハイパーリンクを含めることができます。多数のメッセージテンプレートをよりよく整理するために、各テンプレートは、作成プロセスでカテゴリを必要とします。
 
 メッセージテンプレートを作成するには
 
@@ -158,9 +160,9 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 
 1. **New Rule** をクリックします。
 2. **For incidents matching…** の下に、通知を送信したいインシデントプロパティフィールド `key:value` のペアを選択します。デフォルトでは、これらのフィルターは空であり、通知ルールはあらゆるインシデントに対してトリガーされます。
-3. **Notify**: 通知の受信者を選択します。通知は、Datadog の既存の[通知インテグレーション][16]のいずれかに送信することができます。受信者のモバイルデバイスに通知する場合、受信者の名前に **(Mobile Push Notification)** を含むオプションを選択します。このオプションが表示されるには、受信者が [Datadog モバイルアプリ][17]で通知を有効にしている必要があります。
+3. **Notify**: 通知の受信者を選択します。通知は、Datadog の既存の[通知インテグレーション][18]のいずれかに送信することができます。受信者のモバイルデバイスに通知する場合、受信者の名前に **(Mobile Push Notification)** を含むオプションを選択します。このオプションが表示されるには、受信者が [Datadog モバイルアプリ][19]で通知を有効にしている必要があります。
 4. **With Template**: 通知ルールを使用したいメッセージテンプレートを選択します。
-5. **Renotify on updates to**: どのインシデントプロパティが再通知のトリガーになるかを選択します。選択したプロパティの 1 つまたは複数が変更されると、新しい通知が送信されます。フィルターに既に登録されているプロパティを再通知することはできません (上記のステップ 2 を参照) のでご注意ください。
+5. **Renotify on updates to**: Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change. **Note**: properties already in your filters (see step 2) are automatically included in these rules.
 6. **Save** をクリックします。
 
 通知ルールを管理するために、次の操作を行うことができます。
@@ -170,7 +172,7 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 - *Copy* - 該当する通知ルールの上にカーソルを合わせ、ルールのトグルボタンの隣にある **Copy** アイコンをクリックします
 - *Delete* - 該当する通知ルールの上にカーソルを合わせ、ルールのトグルボタンの隣にある **Delete** アイコンをクリックします
 
-{{< img src="service_management/incidents/notification_rules_list.jpeg" alt="通知ルールリスト" style="width:80%;">}}
+{{< img src="service_management/incidents/notification_rules_list.jpeg" alt="通知ルール一覧" style="width:80%;">}}
 
 ## 修復
 
@@ -201,7 +203,9 @@ Postmortem テンプレートを作成するには
 [11]: /ja/service_management/incident_management/incident_details/#response-team-section
 [12]: /ja/account_management/rbac/?tab=datadogapplication#pagetitle
 [13]: /ja/integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-[14]: https://app.datadoghq.com/account/settings#integrations/slack
-[15]: /ja/service_management/incident_management/incident_details/#notifications-section
-[16]: /ja/monitors/notifications/?tab=is_alert#notify-your-team
-[17]: /ja/service_management/mobile/
+[14]: /ja/integrations/microsoft_teams/#datadog-incident-management-in-microsoft-teams
+[15]: https://app.datadoghq.com/incidents/settings#Integrations
+[16]: https://app.datadoghq.com/account/settings#integrations
+[17]: /ja/service_management/incident_management/incident_details/#notifications-section
+[18]: /ja/monitors/notifications/?tab=is_alert#configure-notifications-and-automations
+[19]: /ja/mobile/

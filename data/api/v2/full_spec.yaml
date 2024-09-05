@@ -19,6 +19,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterCreatedAtStartParameter:
       description: Only include API keys created on or after the specified date.
       in: query
@@ -27,6 +29,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtEndParameter:
       description: Only include API keys modified on or before the specified date.
       in: query
@@ -35,6 +39,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterModifiedAtStartParameter:
       description: Only include API keys modified on or after the specified date.
       in: query
@@ -43,6 +49,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     APIKeyFilterParameter:
       description: Filter API keys by the specified string.
       in: query
@@ -93,6 +101,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterCreatedAtStartParameter:
       description: Only include application keys created on or after the specified
         date.
@@ -102,6 +112,8 @@ components:
       schema:
         example: '2020-11-24T18:46:21+00:00'
         type: string
+        x-merge-override:
+          format: false
     ApplicationKeyFilterParameter:
       description: Filter application keys by the specified string.
       in: query
@@ -202,6 +214,14 @@ components:
       required: true
       schema:
         type: string
+    EntityID:
+      description: UUID or Entity Ref
+      in: path
+      name: entity_id
+      required: true
+      schema:
+        example: service:myservice
+        type: string
     FastlyAccountID:
       description: Fastly Account id.
       in: path
@@ -223,6 +243,61 @@ components:
       required: true
       schema:
         type: string
+    FilterByExcludeSnapshot:
+      description: Filter entities by excluding snapshotted entities
+      in: query
+      name: fitler[exclude_snapshot]
+      required: false
+      schema:
+        type: string
+    FilterByID:
+      description: Filter entities by UUID
+      explode: true
+      in: query
+      name: fitler[id]
+      required: false
+      schema:
+        type: string
+    FilterByKind:
+      description: Filter entities by kind
+      explode: true
+      in: query
+      name: fitler[kind]
+      required: false
+      schema:
+        type: string
+    FilterByName:
+      description: Filter entities by name
+      explode: true
+      in: query
+      name: fitler[name]
+      required: false
+      schema:
+        type: string
+    FilterByOwner:
+      description: Filter entities by owner
+      explode: true
+      in: query
+      name: fitler[owner]
+      required: false
+      schema:
+        type: string
+    FilterByRef:
+      description: Filter entities by reference
+      explode: true
+      in: query
+      name: fitler[ref]
+      required: false
+      schema:
+        type: string
+    FilterByRelationType:
+      description: Filter entities by relation type
+      explode: true
+      in: query
+      name: fitler[relation][type]
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationType'
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -358,6 +433,14 @@ components:
       required: true
       schema:
         type: string
+    Include:
+      description: include relationship data
+      explode: true
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncludeType'
     InstanceId:
       description: The ID of the workflow instance.
       in: path
@@ -683,6 +766,8 @@ components:
       properties:
         errors:
           description: A list of errors.
+          example:
+          - Bad Request
           items:
             description: A list of items.
             example: Bad Request
@@ -694,10 +779,16 @@ components:
     APIKeyCreateAttributes:
       description: Attributes used to create an API Key.
       properties:
+        category:
+          description: The APIKeyCreateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyCreateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -712,6 +803,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyCreateRequest:
       description: Request used to create an API key.
       properties:
@@ -743,13 +836,20 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/LeakedKey'
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
+        category:
+          description: The APIKeyUpdateAttributes category.
+          type: string
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The APIKeyUpdateAttributes remote_config_read_enabled.
+          type: boolean
       required:
       - name
       type: object
@@ -769,6 +869,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     APIKeyUpdateRequest:
       description: Request used to update an API key.
       properties:
@@ -857,6 +959,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AWSRelatedAccountAttributes:
       description: Attributes for an AWS related account.
       properties:
@@ -972,6 +1076,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyCreateRequest:
       description: Request used to create an application key.
       properties:
@@ -986,6 +1092,8 @@ components:
         owned_by:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyResponse:
       description: Response for retrieving an application key.
       properties:
@@ -1002,6 +1110,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/LeakedKey'
     ApplicationKeyResponseMeta:
       description: Additional information related to the application key response.
       properties:
@@ -1055,6 +1164,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyUpdateRequest:
       description: Request used to update an application key.
       properties:
@@ -1327,6 +1438,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AuthNMappingAttributes:
       description: Attributes of AuthN Mapping.
       properties:
@@ -1613,6 +1726,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigAttributes:
       description: Attributes for An AWS CUR config.
       properties:
@@ -1632,6 +1747,8 @@ components:
           description: The timestamp when the AWS CUR config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         error_messages:
           description: The error messages for the AWS CUR config.
           items:
@@ -1659,10 +1776,14 @@ components:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         updated_at:
           description: The timestamp when the AWS CUR config status was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - bucket_name
@@ -1671,6 +1792,8 @@ components:
       - report_prefix
       - status
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchData:
       description: AWS CUR config Patch data.
       properties:
@@ -1682,6 +1805,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchRequest:
       description: AWS CUR config Patch Request.
       properties:
@@ -1813,6 +1938,8 @@ components:
           description: The timestamp when the Azure config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         dataset_type:
           description: The dataset type of the Azure config.
           example: actual
@@ -1852,6 +1979,8 @@ components:
           description: The timestamp when the Azure config status was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
         storage_account:
           description: The name of the storage account where the Azure Export is saved.
           example: dd-storage-account
@@ -1865,6 +1994,8 @@ components:
           description: The timestamp when the Azure config was last updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+          x-merge-override:
+            format: false
       required:
       - account_id
       - client_id
@@ -1876,6 +2007,8 @@ components:
       - storage_account
       - storage_container
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPair:
       description: Azure config pair.
       properties:
@@ -1891,6 +2024,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPairAttributes:
       description: Attributes for Azure config pair.
       properties:
@@ -2389,7 +2524,6 @@ components:
         author_email:
           description: The commit author email.
           example: author@example.com
-          format: email
           type: string
         author_name:
           description: The commit author name.
@@ -2414,7 +2548,6 @@ components:
         committer_email:
           description: The committer email.
           example: committer@example.com
-          format: email
           nullable: true
           type: string
         committer_name:
@@ -4476,6 +4609,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountType:
       default: cloudflare-accounts
       description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
@@ -4505,6 +4640,9 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
+        name:
+          description: The name of the Cloudflare account.
+          type: string
         resources:
           description: An allowlist of resources to restrict pulling metrics for.
           example:
@@ -4524,6 +4662,8 @@ components:
       required:
       - api_key
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountUpdateRequestData:
       description: Data object for updating a Cloudflare account.
       properties:
@@ -4532,6 +4672,8 @@ components:
         type:
           $ref: '#/components/schemas/CloudflareAccountType'
       type: object
+      x-merge-override:
+        required: false
     CloudflareAccountsResponse:
       description: The expected response schema when getting Cloudflare accounts.
       properties:
@@ -4620,6 +4762,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
       properties:
@@ -4667,6 +4811,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountType:
       default: confluent-cloud-accounts
       description: The JSON:API type for this API. Should always be `confluent-cloud-accounts`.
@@ -4778,6 +4924,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponse:
       description: Response schema when interacting with a Confluent resource.
       properties:
@@ -4814,6 +4962,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponseData:
       description: Confluent Cloud resource data.
       properties:
@@ -4830,6 +4980,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceType:
       default: confluent-cloud-resources
       description: The JSON:API type for this request.
@@ -5900,7 +6052,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
-      type: object
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6021,7 +6172,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6161,7 +6311,6 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
-      type: object
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -6275,7 +6424,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasic'
       - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeader'
-      type: object
     CustomDestinationResponseHttpDestinationAuthBasic:
       description: Basic access authentication.
       properties:
@@ -6417,8 +6565,9 @@ components:
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp in nanoseconds when the deployment finished.
-            It should not be older than 1 hour.
+          description: Unix timestamp when the deployment finished. It must be in
+            nanoseconds, milliseconds, or seconds, and it should not be older than
+            1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -6428,11 +6577,12 @@ components:
           description: Deployment ID.
           type: string
         service:
-          description: Service name from a service available in the Service Catalog.
+          description: Service name.
           example: shopist
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the deployment started.
+          description: Unix timestamp when the deployment started. It must be in nanoseconds,
+            milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
           type: integer
@@ -6509,8 +6659,8 @@ components:
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp in nanoseconds when the incident finished. It
-            should not be older than 1 hour.
+          description: Unix timestamp when the incident finished. It must be in nanoseconds,
+            milliseconds, or seconds, and it should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -6537,7 +6687,8 @@ components:
           example: High
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the incident started.
+          description: Unix timestamp when the incident started. It must be in nanoseconds,
+            milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
           type: integer
@@ -7556,6 +7707,814 @@ components:
       - type
       - attributes
       type: object
+    EntityAttributes:
+      description: Entity attributes.
+      properties:
+        apiVersion:
+          description: The api version.
+          type: string
+        description:
+          description: The description.
+          type: string
+        displayName:
+          description: The display name.
+          type: string
+        kind:
+          description: The kind.
+          type: string
+        name:
+          description: The name.
+          type: string
+        namespace:
+          description: The namespace.
+          type: string
+        owner:
+          description: The owner.
+          type: string
+        tags:
+          description: The tags.
+          items:
+            type: string
+          type: array
+      type: object
+    EntityData:
+      description: Entity data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityAttributes'
+        id:
+          description: Entity id.
+          type: string
+        meta:
+          $ref: '#/components/schemas/EntityMeta'
+        relationships:
+          $ref: '#/components/schemas/EntityRelationships'
+        type:
+          description: Entity.
+          type: string
+      type: object
+    EntityMeta:
+      description: Entity metadata.
+      properties:
+        createdAt:
+          description: The creation time.
+          type: string
+        ingestionSource:
+          description: The ingestion source.
+          type: string
+        modifiedAt:
+          description: The modification time.
+          type: string
+        origin:
+          description: The origin.
+          type: string
+      type: object
+    EntityRaw:
+      description: Entity definition in raw JSON/YAML representation.
+      example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice\n"
+      type: string
+    EntityRelationships:
+      description: Entity relationships.
+      properties:
+        incidents:
+          $ref: '#/components/schemas/EntityToIncidents'
+        oncall:
+          $ref: '#/components/schemas/EntityToOncalls'
+        rawSchema:
+          $ref: '#/components/schemas/EntityToRawSchema'
+        relatedEntities:
+          $ref: '#/components/schemas/EntityToRelatedEntities'
+        schema:
+          $ref: '#/components/schemas/EntityToSchema'
+      type: object
+    EntityResponseData:
+      description: List of entity data.
+      items:
+        $ref: '#/components/schemas/EntityData'
+      type: array
+    EntityResponseIncludedIncident:
+      description: Included incident.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedIncidentAttributes'
+        id:
+          description: Incident id.
+          type: string
+        type:
+          description: Incident description.
+          type: string
+      type: object
+    EntityResponseIncludedOncall:
+      description: Included oncall.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallAttributes'
+        id:
+          description: Oncall ID.
+          type: string
+        type:
+          description: Oncall type.
+          type: string
+      type: object
+    EntityResponseIncludedRawSchema:
+      description: Included raw schema.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRawSchemaAttributes'
+        id:
+          description: Raw schema id.
+          type: string
+        type:
+          description: Raw schema type.
+          type: string
+      type: object
+    EntityResponseIncludedRawSchemaAttributes:
+      description: Included raw schema attributes.
+      properties:
+        rawSchema:
+          description: Schema from user input in base64 encoding.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedEntity:
+      description: Included related entity.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityAttributes'
+        id:
+          description: Entity UUID.
+          type: string
+        meta:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityMeta'
+        type:
+          description: Related entity.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedEntityAttributes:
+      description: Related entity attributes.
+      properties:
+        kind:
+          description: Entity kind.
+          type: string
+        name:
+          description: Entity name.
+          type: string
+        namespace:
+          description: Entity namespace.
+          type: string
+        type:
+          description: Entity relation type to the associated entity.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedEntityMeta:
+      description: Included related entity meta.
+      properties:
+        createdAt:
+          description: Entity creation time.
+          format: date-time
+          type: string
+        defined_by:
+          description: Entity relation defined by.
+          type: string
+        modifiedAt:
+          description: Entity modification time.
+          format: date-time
+          type: string
+        source:
+          description: Entity relation source.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedIncidentAttributes:
+      description: Incident attributes.
+      properties:
+        createdAt:
+          description: Incident creation time.
+          format: date-time
+          type: string
+        htmlURL:
+          description: Incident URL.
+          type: string
+        provider:
+          description: Incident provider.
+          type: string
+        status:
+          description: Incident status.
+          type: string
+        title:
+          description: Incident title.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedOncallAttributes:
+      description: Included related oncall attributes.
+      properties:
+        escalations:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalations'
+        provider:
+          description: Oncall provider.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedOncallEscalationItem:
+      description: Oncall escalation
+      properties:
+        email:
+          description: Oncall email.
+          type: string
+        escalationLevel:
+          description: Oncall level.
+          format: int64
+          type: integer
+        name:
+          description: Oncall name.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedOncallEscalations:
+      description: Oncall escalations
+      items:
+        $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalationItem'
+      type: array
+    EntityResponseIncludedSchema:
+      description: Included detail entity schema.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedSchemaAttributes'
+        id:
+          description: Entity id.
+          type: string
+        type:
+          description: Schema type.
+          type: string
+      type: object
+    EntityResponseIncludedSchemaAttributes:
+      description: Included schema.
+      properties:
+        schema:
+          $ref: '#/components/schemas/EntityV3'
+      type: object
+    EntityResponseMeta:
+      description: Entity metadata.
+      properties:
+        count:
+          description: Total entities count.
+          format: int64
+          type: integer
+        includeCount:
+          description: Total included data count.
+          format: int64
+          type: integer
+      type: object
+    EntityToIncidents:
+      description: Entity to incidents relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipArray'
+      type: object
+    EntityToOncalls:
+      description: Entity to oncalls relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipArray'
+      type: object
+    EntityToRawSchema:
+      description: Entity to raw schema relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+      type: object
+    EntityToRelatedEntities:
+      description: Entity to related entities relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipArray'
+      type: object
+    EntityToSchema:
+      description: Entity to detail schema relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+      type: object
+    EntityV3:
+      description: Entity schema v3.
+      oneOf:
+      - $ref: '#/components/schemas/EntityV3Service'
+      - $ref: '#/components/schemas/EntityV3Datastore'
+      - $ref: '#/components/schemas/EntityV3Queue'
+      - $ref: '#/components/schemas/EntityV3System'
+    EntityV3APIVersion:
+      description: The schema version of entity type. The field is known as schema-version
+        in the previous version
+      enum:
+      - v3
+      example: v3
+      type: string
+      x-enum-varnames:
+      - V3
+    EntityV3DatadogCodeLocationItem:
+      additionalProperties: false
+      description: code location item.
+      properties:
+        paths:
+          description: The paths (glob) to the source code of the service
+          items:
+            type: string
+          type: array
+        repositoryURL:
+          description: The repository path of the source code of the entity
+          pattern: url
+          type: string
+      type: object
+    EntityV3DatadogCodeLocations:
+      additionalProperties: false
+      description: Schema for mapping source code locations to an entity
+      items:
+        $ref: '#/components/schemas/EntityV3DatadogCodeLocationItem'
+      type: array
+    EntityV3DatadogEventItem:
+      additionalProperties: false
+      description: Events association item.
+      properties:
+        name:
+          description: The name of the query
+          type: string
+        query:
+          description: The query to run
+          type: string
+      type: object
+    EntityV3DatadogEvents:
+      additionalProperties: false
+      description: Events associations
+      items:
+        $ref: '#/components/schemas/EntityV3DatadogEventItem'
+      type: array
+    EntityV3DatadogIntegrationOpsgenie:
+      additionalProperties: false
+      description: An Opsgenie integration schema
+      properties:
+        region:
+          description: The region for the Opsgenie integration.
+          minLength: 1
+          type: string
+        serviceURL:
+          description: The service url for the Opsgenie integration.
+          example: https://www.opsgenie.com/service/shopping-cart
+          minLength: 1
+          type: string
+      required:
+      - serviceURL
+      type: object
+    EntityV3DatadogIntegrationPagerduty:
+      additionalProperties: false
+      description: An PagerDuty integration schema
+      properties:
+        serviceURL:
+          description: The service url for the PagerDuty integration.
+          example: https://www.pagerduty.com/service-directory/Pshopping-cart
+          minLength: 1
+          type: string
+      required:
+      - serviceURL
+      type: object
+    EntityV3DatadogLogItem:
+      additionalProperties: false
+      description: log association item.
+      properties:
+        name:
+          description: The name of the query
+          type: string
+        query:
+          description: The query to run
+          type: string
+      type: object
+    EntityV3DatadogLogs:
+      additionalProperties: false
+      description: Logs association
+      items:
+        $ref: '#/components/schemas/EntityV3DatadogLogItem'
+      type: array
+    EntityV3DatadogPerformance:
+      additionalProperties: false
+      description: Performance stats association
+      properties:
+        tags:
+          description: A list of APM entity tags that associates the APM Stats data
+            with the entity
+          items:
+            type: string
+          type: array
+      type: object
+    EntityV3DatadogPipelines:
+      additionalProperties: false
+      description: CI Pipelines association
+      properties:
+        fingerprints:
+          description: A list of CI Fingerprints that associate CI Pipelines with
+            the entity
+          items:
+            type: string
+          type: array
+      type: object
+    EntityV3Datastore:
+      additionalProperties: false
+      description: Schema for datastore entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3DatastoreDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3DatastoreKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3DatastoreSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3DatastoreDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the datastore entity
+      properties:
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+      type: object
+    EntityV3DatastoreKind:
+      description: The definition of Entity V3 Datastore Kind object.
+      enum:
+      - datastore
+      example: datastore
+      type: string
+      x-enum-varnames:
+      - DATASTORE
+    EntityV3DatastoreSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Datastore Spec object.
+      properties:
+        lifecycle:
+          description: The lifecycle state of the datastore.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the datastore
+          minLength: 1
+          type: string
+        type:
+          description: The type of datastore
+          type: string
+      type: object
+    EntityV3Integrations:
+      additionalProperties: false
+      description: A base schema for defining third party integrations
+      properties:
+        opsgenie:
+          $ref: '#/components/schemas/EntityV3DatadogIntegrationOpsgenie'
+        pagerduty:
+          $ref: '#/components/schemas/EntityV3DatadogIntegrationPagerduty'
+      type: object
+    EntityV3Metadata:
+      additionalProperties: false
+      description: The definition of Entity V3 Metadata object.
+      properties:
+        additionalOwners:
+          additionalProperties: false
+          description: The additional owners of the entity, usually a team
+          items:
+            $ref: '#/components/schemas/EntityV3MetadataAdditionalOwnersItems'
+          type: array
+        contacts:
+          additionalProperties: false
+          description: A list of contacts for the entity
+          items:
+            $ref: '#/components/schemas/EntityV3MetadataContactsItems'
+          type: array
+        description:
+          description: Short description of the entity. The UI can leverage the description
+            for display
+          type: string
+        displayName:
+          description: User friendly name of the entity. The UI can leverage the display
+            name for display
+          type: string
+        id:
+          description: A read-only globally unique identifier for the entity generated
+            by Datadog.  User supplied values are ignored.
+          example: 4b163705-23c0-4573-b2fb-f6cea2163fcb
+          minLength: 1
+          type: string
+        inheritFrom:
+          description: The entity reference from which to inherit metadata
+          example: application:default/myapp
+          type: string
+        links:
+          additionalProperties: false
+          description: A list of links for the entity
+          items:
+            $ref: '#/components/schemas/EntityV3MetadataLinksItems'
+          type: array
+        managed:
+          additionalProperties: {}
+          description: A read-only set of Datadog managed attributes generated by
+            Datadog.  User supplied values are ignored.
+          type: object
+        name:
+          description: 'Unique name given to an entity under the kind/namespace '
+          example: myService
+          minLength: 1
+          type: string
+        namespace:
+          description: Namespace is a part of unique identifier. It has a default
+            value of 'default'
+          example: default
+          minLength: 1
+          type: string
+        owner:
+          $ref: '#/components/schemas/EntityV3MetadataOwner'
+        tags:
+          description: A set of custom tags
+          example:
+          - this:tag
+          - that:tag
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      type: object
+    EntityV3MetadataAdditionalOwnersItems:
+      description: The definition of Entity V3 Metadata Additional Owners Items object.
+      properties:
+        name:
+          description: Team name
+          example: ''
+          type: string
+        type:
+          description: Team type
+          type: string
+      required:
+      - name
+    EntityV3MetadataContactsItems:
+      additionalProperties: false
+      description: The definition of Entity V3 Metadata Contacts Items object.
+      properties:
+        contact:
+          description: Contact value
+          example: https://slack/
+          type: string
+        name:
+          description: Contact name
+          minLength: 2
+          type: string
+        type:
+          description: Contact type.
+          example: slack
+          type: string
+      required:
+      - type
+      - contact
+      type: object
+    EntityV3MetadataLinksItems:
+      additionalProperties: false
+      description: The definition of Entity V3 Metadata Links Items object.
+      properties:
+        name:
+          description: Link name
+          example: mylink
+          type: string
+        provider:
+          description: Link provider.
+          type: string
+        type:
+          default: other
+          description: Link type.
+          example: link
+          type: string
+        url:
+          description: Link url
+          example: https://mylink
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    EntityV3MetadataOwner:
+      additionalProperties: false
+      description: The owner of the entity, usually a team
+      properties:
+        name:
+          description: Team name
+          type: string
+    EntityV3Queue:
+      additionalProperties: false
+      description: Schema for queue entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3QueueDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3QueueKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3QueueSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3QueueDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the datastore entity
+      properties:
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+      type: object
+    EntityV3QueueKind:
+      description: The definition of Entity V3 Queue Kind object.
+      enum:
+      - queue
+      example: queue
+      type: string
+      x-enum-varnames:
+      - QUEUE
+    EntityV3QueueSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Queue Spec object.
+      properties:
+        lifecycle:
+          description: The lifecycle state of the queue.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the queue
+          minLength: 1
+          type: string
+        type:
+          description: The type of queue
+          type: string
+      type: object
+    EntityV3Service:
+      additionalProperties: false
+      description: Schema for service entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3ServiceDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3ServiceKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3ServiceSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3ServiceDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the service entity
+      properties:
+        codeLocations:
+          $ref: '#/components/schemas/EntityV3DatadogCodeLocations'
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+        pipelines:
+          $ref: '#/components/schemas/EntityV3DatadogPipelines'
+      type: object
+    EntityV3ServiceKind:
+      description: The definition of Entity V3 Service Kind object.
+      enum:
+      - service
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+    EntityV3ServiceSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Service Spec object.
+      properties:
+        dependsOn:
+          description: A list of components the service depends on
+          items:
+            type: string
+          type: array
+        languages:
+          description: The service's programming language.
+          items:
+            type: string
+          type: array
+        lifecycle:
+          description: The lifecycle state of the component.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the component
+          minLength: 1
+          type: string
+        type:
+          description: The type of service
+          type: string
+      type: object
+    EntityV3System:
+      additionalProperties: false
+      description: Schema for system entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3SystemDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3SystemKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3SystemSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3SystemDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the service entity
+      properties:
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+        pipelines:
+          $ref: '#/components/schemas/EntityV3DatadogPipelines'
+      type: object
+    EntityV3SystemKind:
+      description: The definition of Entity V3 System Kind object.
+      enum:
+      - system
+      example: system
+      type: string
+      x-enum-varnames:
+      - SYSTEM
+    EntityV3SystemSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 System Spec object.
+      properties:
+        components:
+          description: A list of components belongs to the system.
+          items:
+            type: string
+          type: array
+        lifecycle:
+          description: The lifecycle state of the component.
+          minLength: 1
+          type: string
+        tier:
+          description: An entity reference to the owner of the component.
+          minLength: 1
+          type: string
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -8149,6 +9108,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountType:
       default: fastly-accounts
       description: The JSON:API type for this API. Should always be `fastly-accounts`.
@@ -8173,7 +9134,12 @@ components:
           description: The API key of the Fastly account.
           example: ABCDEFG123
           type: string
+        name:
+          description: The name of the Fastly account.
+          type: string
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountUpdateRequestData:
       description: Data object for updating a Fastly account.
       properties:
@@ -8182,6 +9148,8 @@ components:
         type:
           $ref: '#/components/schemas/FastlyAccountType'
       type: object
+      x-merge-override:
+        required: false
     FastlyAccountsResponse:
       description: The expected response schema when getting Fastly accounts.
       properties:
@@ -8460,6 +9428,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
@@ -8469,6 +9439,7 @@ components:
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8487,6 +9458,7 @@ components:
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         name:
@@ -8510,12 +9482,15 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
       properties:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -8596,6 +9571,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountAttributes:
       description: Attributes associated with your service account.
       properties:
@@ -8647,12 +9624,16 @@ components:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountCreateRequest:
       description: Data on your newly generated service account.
       properties:
         data:
           $ref: '#/components/schemas/GCPSTSServiceAccountData'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountData:
       description: Additional metadata on your generated service account.
       properties:
@@ -8661,6 +9642,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountResponse:
       description: The account creation response.
       properties:
@@ -9405,6 +10388,19 @@ components:
             were created or updated by the request are
 
             returned.'
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9436,6 +10432,19 @@ components:
       properties:
         data:
           description: An array of incident attachments.
+          example:
+          - attributes:
+              attachment:
+                documentUrl: ''
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
           items:
             $ref: '#/components/schemas/IncidentAttachmentData'
           type: array
@@ -9506,6 +10515,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     IncidentCreateRelationships:
       description: The relationships the incident will have with other resources once
         created.
@@ -9529,8 +10540,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentFieldAttributesSingleValue'
       - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
-      required:
-      - type
     IncidentFieldAttributesMultipleValue:
       description: A field with potentially multiple values selected.
       properties:
@@ -9958,6 +10967,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     IncidentResponseIncludedItem:
       description: An object related to an incident that is included in the response.
       oneOf:
@@ -10647,6 +11658,8 @@ components:
       - $ref: '#/components/schemas/IncidentTodoAnonymousAssignee'
     IncidentTodoAssigneeArray:
       description: Array of todo assignees.
+      example:
+      - '@test.user@test.com'
       items:
         $ref: '#/components/schemas/IncidentTodoAssignee'
       type: array
@@ -11007,6 +12020,21 @@ components:
       required:
       - data
       type: object
+    IncludeType:
+      description: supported include types.
+      enum:
+      - schema
+      - raw_schema
+      - oncall
+      - incident
+      - relation
+      type: string
+      x-enum-varnames:
+      - SCHEMA
+      - RAW_SCHEMA
+      - ONCALL
+      - INCIDENT
+      - RELATION
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
@@ -11151,6 +12179,45 @@ components:
           description: Jira project key
           type: string
       type: object
+    LeakedKey:
+      description: The definition of LeakedKey object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LeakedKeyAttributes'
+        id:
+          description: The LeakedKey id.
+          example: id
+          type: string
+        type:
+          $ref: '#/components/schemas/LeakedKeyType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    LeakedKeyAttributes:
+      description: The definition of LeakedKeyAttributes object.
+      properties:
+        date:
+          description: The LeakedKeyAttributes date.
+          example: '2017-07-21T17:32:28Z'
+          format: date-time
+          type: string
+        leak_source:
+          description: The LeakedKeyAttributes leak_source.
+          type: string
+      required:
+      - date
+      type: object
+    LeakedKeyType:
+      default: leaked_keys
+      description: The definition of LeakedKeyType object.
+      enum:
+      - leaked_keys
+      example: leaked_keys
+      type: string
+      x-enum-varnames:
+      - LEAKED_KEYS
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -11260,6 +12327,44 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/DowntimeMeta'
+      type: object
+    ListEntityCatalogResponse:
+      description: List entity response.
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseData'
+        included:
+          $ref: '#/components/schemas/ListEntityCatalogResponseIncluded'
+        links:
+          $ref: '#/components/schemas/ListEntityCatalogResponseLinks'
+        meta:
+          $ref: '#/components/schemas/EntityResponseMeta'
+      type: object
+    ListEntityCatalogResponseIncluded:
+      description: List entity response included.
+      items:
+        $ref: '#/components/schemas/ListEntityCatalogResponseIncludedItem'
+      type: array
+    ListEntityCatalogResponseIncludedItem:
+      description: List entity response included item.
+      oneOf:
+      - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+      - $ref: '#/components/schemas/EntityResponseIncludedRawSchema'
+      - $ref: '#/components/schemas/EntityResponseIncludedRelatedEntity'
+      - $ref: '#/components/schemas/EntityResponseIncludedOncall'
+      - $ref: '#/components/schemas/EntityResponseIncludedIncident'
+    ListEntityCatalogResponseLinks:
+      description: List entity response links.
+      properties:
+        next:
+          description: next link.
+          type: string
+        previous:
+          description: previous link.
+          type: string
+        self:
+          description: current link.
+          type: string
       type: object
     ListFindingsData:
       description: Array of findings.
@@ -11764,9 +12869,6 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
     LogsArchiveDefinition:
       description: The definition of an archive.
       properties:
@@ -11793,9 +12895,7 @@ components:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
       - $ref: '#/components/schemas/LogsArchiveDestinationS3'
-      required:
-      - type
-      - integration
+      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -12599,10 +13699,13 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets where only included attribute is its title
+      description: Assets related to the object, including title and url.
       properties:
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricAssetDashboardRelationship:
@@ -12811,7 +13914,6 @@ components:
       - bob@example.com
       items:
         description: An email address.
-        format: email
         type: string
       type: array
     MetricBulkTagConfigNamePrefix:
@@ -12983,7 +14085,8 @@ components:
       - type
       type: object
     MetricDashboardAttributes:
-      description: Attributes related to the dashboard, including title and popularity.
+      description: Attributes related to the dashboard, including title, popularity,
+        and url.
       properties:
         popularity:
           description: Value from 0 to 5 that ranks popularity of the dashboard.
@@ -12993,6 +14096,9 @@ components:
           type: number
         title:
           description: Title of the asset.
+          type: string
+        url:
+          description: URL path of the asset.
           type: string
       type: object
     MetricDashboardID:
@@ -13045,6 +14151,8 @@ components:
         type:
           $ref: '#/components/schemas/MetricEstimateResourceType'
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateAttributes:
       description: Object containing the definition of a metric estimate attribute.
       properties:
@@ -13061,6 +14169,8 @@ components:
           format: int64
           type: integer
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateResourceType:
       default: metric_cardinality_estimate
       description: The metric estimate resource type.
@@ -13321,6 +14431,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - timestamp: 1575317847
+            value: 0.5
           items:
             $ref: '#/components/schemas/MetricPoint'
           type: array
@@ -14112,6 +15225,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     NullableUserRelationship:
       description: Relationship to user.
       nullable: true
@@ -14327,6 +15442,7 @@ components:
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14389,10 +15505,13 @@ components:
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceResponseData:
       description: Opsgenie service data from a response.
       properties:
@@ -14401,6 +15520,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14409,6 +15530,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceType:
       default: opsgenie-service
       description: Opsgenie service resource type.
@@ -14429,6 +15552,7 @@ components:
         name:
           description: The name for the Opsgenie service.
           example: fake-opsgenie-service-name
+          maxLength: 100
           type: string
         opsgenie_api_key:
           description: The Opsgenie API key for your Opsgenie service.
@@ -14437,6 +15561,8 @@ components:
         region:
           $ref: '#/components/schemas/OpsgenieServiceRegionType'
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateData:
       description: Opsgenie service for an update request.
       properties:
@@ -14445,6 +15571,8 @@ components:
         id:
           description: The ID of the Opsgenie service.
           example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/OpsgenieServiceType'
@@ -14453,6 +15581,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     OpsgenieServiceUpdateRequest:
       description: Update request for an Opsgenie service.
       properties:
@@ -14839,6 +15969,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
@@ -14850,6 +15982,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -14863,6 +15997,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         name:
           description: Name of the API key.
           example: API Key for submitting metrics
@@ -14884,6 +16020,8 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialApplicationKeyAttributes:
       description: Attributes of a partial application key.
       properties:
@@ -14892,6 +16030,8 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+          x-merge-override:
+            format: false
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -15041,6 +16181,8 @@ components:
           example: powerpack
           type: string
       type: object
+      x-merge-override:
+        required: false
     PowerpackGroupWidget:
       description: Powerpack group widget definition object.
       properties:
@@ -15325,6 +16467,8 @@ components:
         type:
           $ref: '#/components/schemas/ProcessSummaryType'
       type: object
+      x-merge-override:
+        required: false
     ProcessSummaryAttributes:
       description: Attributes for a process summary.
       properties:
@@ -15708,6 +16852,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationType'
       required:
@@ -15722,6 +16868,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         client_token:
           description: Client token of the RUM application.
           example: abcd1234efgh5678ijkl90abcd1234efgh0
@@ -15789,6 +16937,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
@@ -15831,12 +16981,16 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationListAttributes:
       description: RUM application list attributes.
       properties:
@@ -15844,6 +16998,8 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -15928,6 +17084,8 @@ components:
           description: RUM application ID.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+          x-merge-override:
+            format: false
         type:
           $ref: '#/components/schemas/RUMApplicationUpdateType'
       required:
@@ -16337,6 +17495,46 @@ components:
             from the other indexes
           type: string
       type: object
+    RelationType:
+      description: supported relation types
+      enum:
+      - RelationTypeOwns
+      - RelationTypeOwnedBy
+      - RelationTypeDependsOn
+      - RelationTypeDependencyOf
+      - RelationTypePartsOf
+      - RelationTypeHasPart
+      - RelationTypeOtherOwns
+      - RelationTypeOtherOwnedBy
+      - RelationTypeImplementedBy
+      - RelationTypeImplements
+      type: string
+      x-enum-varnames:
+      - RELATIONTYPEOWNS
+      - RELATIONTYPEOWNEDBY
+      - RELATIONTYPEDEPENDSON
+      - RELATIONTYPEDEPENDENCYOF
+      - RELATIONTYPEPARTSOF
+      - RELATIONTYPEHASPART
+      - RELATIONTYPEOTHEROWNS
+      - RELATIONTYPEOTHEROWNEDBY
+      - RELATIONTYPEIMPLEMENTEDBY
+      - RELATIONTYPEIMPLEMENTS
+    RelationshipArray:
+      description: Relationships.
+      items:
+        $ref: '#/components/schemas/RelationshipItem'
+      type: array
+    RelationshipItem:
+      description: Relationship entry.
+      properties:
+        id:
+          description: Associated data id.
+          type: string
+        type:
+          description: Relationship type.
+          type: string
+      type: object
     RelationshipToIncidentAttachment:
       description: A relationship reference for attachments.
       properties:
@@ -16361,6 +17559,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpactData:
       description: Relationship to impact object.
       properties:
@@ -16374,6 +17574,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpacts:
       description: Relationship to impacts.
       properties:
@@ -16401,6 +17603,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentIntegrationMetadatas:
       description: A relationship reference for multiple integration metadata objects.
       example:
@@ -16464,6 +17668,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentResponders:
       description: Relationship to incident responders.
       properties:
@@ -16488,6 +17694,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentUserDefinedFields:
       description: Relationship to incident user defined fields.
       properties:
@@ -16583,6 +17791,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToRoleData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoleData:
       description: Relationship to role object.
       properties:
@@ -16593,6 +17803,8 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoles:
       description: Relationship to roles.
       properties:
@@ -16602,6 +17814,8 @@ components:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRule:
       description: Scorecard create rule response relationship.
       properties:
@@ -16645,12 +17859,16 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeam:
       description: Relationship to team.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToTeamData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamData:
       description: Relationship to Team object.
       properties:
@@ -16661,6 +17879,8 @@ components:
         type:
           $ref: '#/components/schemas/TeamType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -16674,6 +17894,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinks:
       description: Relationship between a team and a team link
       properties:
@@ -16685,6 +17907,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -16706,6 +17930,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermission:
       description: Relationship between a user team permission and a team
       properties:
@@ -16714,6 +17940,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
       properties:
@@ -16727,6 +17955,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamTeam:
       description: Relationship between team membership and team
       properties:
@@ -16769,6 +17999,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUsers:
       description: Relationship to users.
       properties:
@@ -16953,7 +18185,6 @@ components:
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
-      type: object
     RestrictionQueryRole:
       description: Partial role object.
       properties:
@@ -17446,6 +18677,8 @@ components:
       required:
       - attributes
       type: object
+      x-merge-override:
+        required: false
     RoleCreateRequest:
       description: Create a role.
       properties:
@@ -17673,6 +18906,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     SAMLAssertionAttributeAttributes:
       description: Key/Value pair of attributes used in SAML assertion attributes.
       properties:
@@ -17844,6 +19079,10 @@ components:
       type: object
     ScalarFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - aggregator: avg
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/ScalarQuery'
       type: array
@@ -18270,8 +19509,7 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time. For third party rules, it should equal max signal
-        duration.'
+        and evaluates in real time. For third party rules, this field is not used.'
       enum:
       - 0
       - 60
@@ -18316,7 +19554,7 @@ components:
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
         if a case is matched at least once within\nthis keep alive window. For third
-        party rules, it should equal max signal duration."
+        party rules, this field is not used."
       enum:
       - 0
       - 60
@@ -18803,6 +20041,8 @@ components:
       type: object
     SecurityMonitoringSignalIncidentIds:
       description: Array of incidents that are associated with this signal.
+      example:
+      - 2066
       items:
         description: Public ID attribute of the incident that is associated with the
           signal.
@@ -19710,6 +20950,10 @@ components:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
           type: string
+        editable:
+          description: Whether the suppression rule is editable.
+          example: true
+          type: boolean
         enabled:
           description: Whether the suppression rule is enabled.
           example: true
@@ -20805,7 +22049,6 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
-      type: object
     ServiceDefinitionSchemaVersions:
       description: Schema versions
       enum:
@@ -20863,7 +22106,6 @@ components:
         email:
           description: "Service owner\u2019s email."
           example: contact@datadoghq.com
-          format: email
           type: string
         slack:
           description: "Service owner\u2019s Slack channel."
@@ -21124,7 +22366,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -21487,7 +22728,6 @@ components:
         contact:
           description: Contact value.
           example: contact@datadoghq.com
-          format: email
           type: string
         name:
           description: Contact email.
@@ -22690,6 +23930,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamAttributes:
       description: Team attributes
       properties:
@@ -22873,7 +24115,6 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
-          format: url
           type: string
       required:
       - label
@@ -22937,6 +24178,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamPermissionSettingAttributes:
       description: Team permission setting attributes
       properties:
@@ -23326,6 +24569,9 @@ components:
       type: object
     TimeseriesFormulaRequestQueries:
       description: List of queries to be run and used as inputs to the formulas.
+      example:
+      - data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       items:
         $ref: '#/components/schemas/TimeseriesQuery'
       type: array
@@ -23516,6 +24762,30 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+    UpsertCatalogEntityRequest:
+      description: Create / Update entity request.
+      oneOf:
+      - $ref: '#/components/schemas/EntityV3'
+      - $ref: '#/components/schemas/EntityRaw'
+    UpsertCatalogEntityResponse:
+      description: Upsert entity response.
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseData'
+        included:
+          $ref: '#/components/schemas/UpsertCatalogEntityResponseIncluded'
+        meta:
+          $ref: '#/components/schemas/EntityResponseMeta'
+      type: object
+    UpsertCatalogEntityResponseIncluded:
+      description: Upsert entity response included.
+      items:
+        $ref: '#/components/schemas/UpsertCatalogEntityResponseIncludedItem'
+      type: array
+    UpsertCatalogEntityResponseIncludedItem:
+      description: Upsert entity response included item.
+      oneOf:
+      - $ref: '#/components/schemas/EntityResponseIncludedSchema'
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -23614,6 +24884,8 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-merge-override:
+        required: false
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -23633,6 +24905,10 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        mfa_enabled:
+          description: If user has MFA enabled.
+          readOnly: true
+          type: boolean
         modified_at:
           description: Time that the user was last modified.
           format: date-time
@@ -23684,6 +24960,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     UserCreateRequest:
       description: Create a user.
       properties:
@@ -23703,6 +24981,8 @@ components:
       - type
       - relationships
       type: object
+      x-merge-override:
+        required: false
     UserInvitationDataAttributes:
       description: Attributes of a user invitation.
       properties:
@@ -23748,6 +25028,8 @@ components:
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object
+      x-merge-override:
+        required: false
     UserInvitationsRequest:
       description: Object to invite users to join the organization.
       properties:
@@ -23835,6 +25117,8 @@ components:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+      x-merge-override:
+        properties: false
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -23852,6 +25136,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamAttributes:
       description: Team membership attributes
       properties:
@@ -23904,6 +25190,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamPermissionAttributes:
       description: User team permission attributes
       properties:
@@ -24049,6 +25337,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     UserUpdateRequest:
       description: Update a user.
       properties:
@@ -24254,6 +25544,7 @@ components:
               access to the cloud cost data source in dashboards and notebooks.
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations.
+            code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
@@ -24294,10 +25585,6 @@ components:
               have permission to edit those SLOs.
             slos_read: View SLOs and status corrections.
             slos_write: Create, edit, and delete SLOs.
-            synthetics_default_settings_read: View the default settings for Synthetic
-              Monitoring.
-            synthetics_default_settings_write: Edit the default settings for Synthetic
-              Monitoring.
             synthetics_global_variable_read: View, search, and use Synthetics global
               variables.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -24437,6 +25724,8 @@ paths:
         - name: api_key_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      post: true
   /api/v2/api_keys/{api_key_id}:
     delete:
       description: Delete an API key.
@@ -24546,6 +25835,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/apicatalog/api:
     get:
       description: List APIs and their IDs.
@@ -25575,6 +26866,9 @@ paths:
         - name: authn_mapping_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/authn_mappings/{authn_mapping_id}:
     delete:
       description: Delete an AuthN Mapping specified by AuthN Mapping UUID.
@@ -25707,6 +27001,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      get: false
+      patch: false
   /api/v2/cases:
     get:
       description: Search cases.
@@ -26225,6 +27522,170 @@ paths:
       tags:
       - Case Management
       x-menu-order: 7
+      x-undo:
+        type: idempotent
+  /api/v2/catalog/entity:
+    get:
+      description: Get a list of entities from Software Catalog.
+      operationId: ListCatalogEntity
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of entities in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterByID'
+      - $ref: '#/components/parameters/FilterByRef'
+      - $ref: '#/components/parameters/FilterByName'
+      - $ref: '#/components/parameters/FilterByKind'
+      - $ref: '#/components/parameters/FilterByOwner'
+      - $ref: '#/components/parameters/FilterByRelationType'
+      - $ref: '#/components/parameters/FilterByExcludeSnapshot'
+      - $ref: '#/components/parameters/Include'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEntityCatalogResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entities
+      tags:
+      - Software Catalog
+      x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+    post:
+      description: Create or update entities in Software Catalog.
+      operationId: UpsertCatalogEntity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCatalogEntityRequest'
+        description: Entity YAML/JSON.
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsertCatalogEntityResponse'
+          description: ACCEPTED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create or update entities
+      tags:
+      - Software Catalog
+      x-codegen-request-body-name: body
+      x-given:
+        entity:
+          parameters:
+          - name: body
+            value: "{\n  \"apiVersion\": \"v3\",\n  \"kind\": \"service\",\n  \"metadata\":
+              {\n    \"name\": \"service-{{ unique_lower_alnum }}\",\n    \"displayName\":
+              \"Shopping Cart\",\n    \"inheritFrom\": \"service:otherService\",\n
+              \   \"tags\": [\n      \"tag:value\"\n    ],\n    \"links\": [\n      {\n
+              \       \"name\": \"shopping-cart runbook\",\n        \"type\": \"runbook\",\n
+              \       \"url\": \"https://runbook/shopping-cart\"\n      },\n      {\n
+              \       \"name\": \"shopping-cart architecture\",\n        \"provider\":
+              \"gdoc\",\n        \"url\": \"https://google.drive/shopping-cart-architecture\",\n
+              \       \"type\": \"doc\"\n      },\n      {\n        \"name\": \"shopping-cart
+              Wiki\",\n        \"provider\": \"wiki\",\n        \"url\": \"https://wiki/shopping-cart\",\n
+              \       \"type\": \"doc\"\n      },\n      {\n        \"name\": \"shopping-cart
+              source code\",\n        \"provider\": \"github\",\n        \"url\":
+              \"http://github/shopping-cart\",\n        \"type\": \"repo\"\n      }\n
+              \   ],\n    \"contacts\": [\n      {\n        \"name\": \"Support Email\",\n
+              \       \"type\": \"email\",\n        \"contact\": \"team@shopping.com\"\n
+              \     },\n      {\n        \"name\": \"Support Slack\",\n        \"type\":
+              \"slack\",\n        \"contact\": \"https://www.slack.com/archives/shopping-cart\"\n
+              \     }\n    ],\n    \"owner\": \"myteam\",\n    \"additionalOwners\":
+              [\n      {\n        \"name\": \"opsTeam\",\n        \"type\": \"operator\"\n
+              \     }\n    ]\n  },\n  \"integrations\": {\n    \"pagerduty\": {\n
+              \     \"serviceURL\": \"https://www.pagerduty.com/service-directory/Pshopping-cart\"\n
+              \   },\n    \"opsgenie\": {\n      \"serviceURL\": \"https://www.opsgenie.com/service/shopping-cart\",\n
+              \     \"region\": \"US\"\n    }\n  },\n  \"extensions\": {\n    \"datadoghq.com/shopping-cart\":
+              {\n      \"customField\": \"customValue\"\n    }\n  },\n  \"spec\":
+              {\n    \"lifecycle\": \"production\",\n    \"tier\": \"1\",\n    \"type\":
+              \"web\",\n    \"languages\": [\n      \"go\",\n      \"python\"\n    ],\n
+              \   \"dependsOn\": [\n      \"service:serviceA\",\n      \"service:serviceB\"\n
+              \   ]\n  },\n  \"datadog\": {\n    \"performanceData\": {\n      \"tags\":
+              [\n        \"service:shopping-cart\",\n        \"hostname:shopping-cart\"\n
+              \     ]\n    },\n    \"events\": [\n      {\n        \"name\": \"deployment
+              events\",\n        \"query\": \"app:myapp AND type:github\"\n      },\n
+              \     {\n        \"name\": \"event type B\",\n        \"query\": \"app:myapp
+              AND type:github\"\n      }\n    ],\n    \"logs\": [\n      {\n        \"name\":
+              \"critical logs\",\n        \"query\": \"app:myapp AND type:github\"\n
+              \     },\n      {\n        \"name\": \"ops logs\",\n        \"query\":
+              \"app:myapp AND type:github\"\n      }\n    ],\n    \"pipelines\": {\n
+              \     \"fingerprints\": [\n        \"fp1\",\n        \"fp2\"\n      ]\n
+              \   },\n    \"codeLocations\": [\n      {\n        \"repositoryURL\":
+              \"http://github/shopping-cart.git\",\n        \"paths\": [\n          \"baz/*.c\",\n
+              \         \"bat/**/*\",\n          \"../plop/*.java\"\n        ]\n      },\n
+              \     {\n        \"repositoryURL\": \"http://github/shopping-cart-2.git\",\n
+              \       \"paths\": [\n          \"baz/*.c\",\n          \"bat/**/*\",\n
+              \         \"../plop/*.java\"\n        ]\n      }\n    ]\n  }\n}"
+          step: there is a valid entity in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteCatalogEntity
+        parameters:
+        - name: entity_id
+          source: data[0].id
+        type: unsafe
+  /api/v2/catalog/entity/{entity_id}:
+    delete:
+      description: Delete a single entity in Software Catalog.
+      operationId: DeleteCatalogEntity
+      parameters:
+      - $ref: '#/components/parameters/EntityID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Delete a single entity
+      tags:
+      - Software Catalog
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v2/ci/pipeline:
@@ -27668,6 +29129,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -28283,13 +29745,13 @@ paths:
         required: false
         schema:
           type: string
-      - description: Minimum timestamp for requested events.
+      - description: Minimum timestamp for requested events, in milliseconds.
         in: query
         name: filter[from]
         required: false
         schema:
           type: string
-      - description: Maximum timestamp for requested events.
+      - description: Maximum timestamp for requested events, in milliseconds.
         in: query
         name: filter[to]
         required: false
@@ -29418,6 +30880,9 @@ paths:
         - name: integration_service_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
+      post: true
   /api/v2/integration/opsgenie/services/{integration_service_id}:
     delete:
       description: Delete a single service object in the Datadog Opsgenie integration.
@@ -29507,6 +30972,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: true
+      patch: true
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -29576,6 +31043,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/cloudflare/accounts/{account_id}:
     delete:
       description: Delete a Cloudflare account.
@@ -29673,6 +31142,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/confluent-cloud/accounts:
     get:
       description: List Confluent accounts.
@@ -29829,6 +31301,8 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+    x-merge-override:
+      delete: true
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources:
     get:
       description: Get a Confluent resource for the account associated with the provided
@@ -29981,6 +31455,8 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
   /api/v2/integrations/fastly/accounts:
     get:
       description: List Fastly accounts.
@@ -30049,6 +31525,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/fastly/accounts/{account_id}:
     delete:
       description: Delete a Fastly account.
@@ -30131,6 +31609,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      delete: true
+      patch: true
   /api/v2/integrations/fastly/accounts/{account_id}/services:
     get:
       description: List Fastly services for an account.
@@ -30196,6 +31677,7 @@ paths:
           source: data.id
         type: unsafe
     x-merge-override:
+      get: true
       post: true
   /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
     delete:
@@ -30283,6 +31765,7 @@ paths:
       x-undo:
         type: safe
     x-merge-override:
+      delete: true
       get: true
       patch: true
   /api/v2/integrations/okta/accounts:
@@ -30355,6 +31838,8 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: true
   /api/v2/integrations/okta/accounts/{account_id}:
     delete:
       description: Delete an Okta account.
@@ -30453,7 +31938,9 @@ paths:
       x-undo:
         type: idempotent
     x-merge-override:
+      delete: true
       get: true
+      patch: true
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -34310,34 +35797,38 @@ paths:
 
         - Service Level Objectives: `slo`
 
-        - Synthetic Global Variable: `synthetic-global-variable`
+        - Synthetic Global Variables: `synthetics-global-variable`
 
-        - Synthetic Test: `synthetic-test`
+        - Synthetic Tests: `synthetics-test`
 
-        - Synthetic Private Location: `synthetic-private-location`
+        - Synthetic Private Locations: `synthetics-private-location`
+
+        - Monitors: `monitor`
 
 
         #### Supported relations for resources
 
-        Resource Type              | Supported Relations
+        Resource Type               | Supported Relations
 
-        ---------------------------|--------------------------
+        ----------------------------|--------------------------
 
-        Dashboards                 | `viewer`, `editor`
+        Dashboards                  | `viewer`, `editor`
 
-        Notebooks                  | `viewer`, `editor`
+        Notebooks                   | `viewer`, `editor`
 
-        Powerpacks                 | `viewer`, `editor`
+        Powerpacks                  | `viewer`, `editor`
 
-        Security Rules             | `viewer`, `editor`
+        Security Rules              | `viewer`, `editor`
 
-        Service Level Objectives   | `viewer`, `editor`
+        Service Level Objectives    | `viewer`, `editor`
 
-        Synthetic Global Variable  | `viewer`, `editor`
+        Synthetic Global Variables  | `viewer`, `editor`
 
-        Synthetic Test             | `viewer`, `editor`
+        Synthetic Tests             | `viewer`, `editor`
 
-        Synthetic Private Location | `viewer`, `editor`'
+        Synthetic Private Locations | `viewer`, `editor`
+
+        Monitors                    | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -35080,7 +36571,7 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
               {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
@@ -40690,6 +42181,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_read
       summary: Get a workflow instance
       tags:
       - Workflow Automation
@@ -40800,8 +42296,10 @@ tags:
     for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
-    Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
-    page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
+    Cloud Cost Management accounts for AWS and Azure. You can query your cost data
+    by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
+    and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
+    documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
@@ -41096,6 +42594,10 @@ tags:
     This feature is currently in BETA. If you have any feedback, contact [Datadog
     support](https://docs.datadoghq.com/help/).'
   name: Service Scorecards
+- description: API to create, update, retrieve and delete Software Catalog entities.
+  externalDocs:
+    url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
+  name: Software Catalog
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
@@ -41146,3 +42648,5 @@ tags:
     url: https://docs.datadoghq.com/service_management/workflows/
   name: Workflow Automation
 x-group-parameters: true
+x-merge-override:
+  paths: false

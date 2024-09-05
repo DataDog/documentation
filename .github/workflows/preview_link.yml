@@ -4,6 +4,10 @@ on:
     paths:
     - 'content/en/**.md'
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   preview-link:
     if: contains(github.head_ref, '/')

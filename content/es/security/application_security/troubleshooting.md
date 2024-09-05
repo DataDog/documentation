@@ -1,17 +1,10 @@
 ---
 aliases:
-- /security_platform/application_security/troubleshooting
+- /es/security_platform/application_security/troubleshooting
 further_reading:
 - link: /security/application_security/
   tag: Documentación
   text: Monitorización de amenazas con Datadog Application Security Management
-- link: /security/application_security/enabling/
-  tag: Documentación
-  text: Habilitar la gestión de la seguridad de las aplicaciones para empezar a detectar
-    amenazas
-- link: /security/application_security/enabling/compatibility/
-  tag: Documentación
-  text: Compatibilidad de lenguajes y marcos de programación
 - link: /security/application_security/how-appsec-works/
   tag: Documentación
   text: Cómo funciona Application Security Management en Datadog
@@ -25,7 +18,7 @@ Si experimentas un comportamiento inesperado al utilizar Datadog Application Sec
 
 ## Límites de frecuencias de ASM
 
-Las trazas (traces) ASM tienen un límite de frecuencia de 100 trazas por segundo. Las trazas enviadas más allá del límite no se informan. Si necesitas cambiar el límite, ponte en contacto con el [servicio de asistencia de Datadog][1].
+Las trazas (traces) de ASM tienen un límite de frecuencia de 100 trazas por segundo. Las trazas enviadas más allá de este límite no se informan. Si necesitas cambiar el límite, ponte en contacto con el [servicio de asistencia de Datadog][1].
 
 ## ASM no detecta ninguna traza de seguridad
 
@@ -35,15 +28,15 @@ Existe una serie de pasos que deben ejecutarse correctamente para que la informa
 
 Para comprobar si ASM se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
-1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
+1. Ve a **Métricas > Resumen** en Datadog.
 2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando ASM. Si la métrica existe, los servicios se informan mediante las etiquetas (tags) de métricas `host` y `service`.
-3. Selecciona la métrica y busca `service` en la sección **Tags** (Etiquetas) para ver qué servicios están ejecutando ASM.
+3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando ASM.
 
 Si no ves `datadog.apm.appsec_host`, comprueba las [instrucciones en la aplicación][3] para confirmar que se han completado todos los pasos de la configuración inicial.
 
-Los datos de ASM se envían con trazas APM. Consulta [Solucionar problemas de APM][4] para [confirmar la configuración de APM][5] y comprobar si hay [errores de conexión][6].
+Los datos de ASM se envían con trazas de APM. Consulta [Solucionar problemas de APM][4] para [confirmar la configuración de APM][5] y comprobar si hay [errores de conexión][6].
 
-### Envío de un ataque de prueba a su aplicación
+### Envío de un ataque de prueba a tu aplicación
 
 Para probar tu configuración de ASM, activa la regla [Analizador de seguridad detectado][7], ejecutando un archivo que contenga el siguiente script curl:
 
@@ -148,20 +141,20 @@ done
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Unos minutos después de habilitar tu aplicación y ejercitarla, si todo sale como esperabas, aparece información sobre amenazas en el [Explorador de trazas y señales][2].
+Unos minutos después de habilitar tu aplicación y ejercitarla, si todo sale según lo esperado, aparecerá información sobre amenazas en el [Explorador de trazas y señales][2].
 
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Página con información sobre señales de seguridad que muestra etiquetas, métricas, pasos a seguir sugeridos y direcciones IP de atacantes asociadas a una amenaza." style="width:100%;" >}}
+{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Página con información sobre señales de seguridad, que muestra etiquetas, métricas, pasos a seguir sugeridos y direcciones IP de atacantes asociados a una amenaza." style="width:100%;" >}}
 
 ### Comprobar si las integraciones requeridas del rastreador están desactivadas
 
-ASM depende de ciertas integraciones de rastreador. Si están desactivadas, ASM no funcionará. Para ver si hay integraciones desactivadas, busca `disabled_integrations` en tus [logs de inicio][8].
+ASM depende de ciertas integraciones del rastreador. Si están desactivadas, ASM no funcionará. Para ver si hay integraciones desactivadas, busca `disabled_integrations` en tus [logs de inicio][8].
 
 Las integraciones requeridas varían según el lenguaje.
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
-Para [Java][1], si utilizas alguna de las siguientes tecnologías, se requiere la respectiva integración:
+Para Java, si utiliza alguna de las siguientes tecnologías, se requiere la respectiva integración:
 
 - grizzly
 - grizzly-filterchain
@@ -177,36 +170,35 @@ Para [Java][1], si utilizas alguna de las siguientes tecnologías, se requiere l
 - spring-web
 - tomcat
 
-[1]: /es/security/application_security/enabling/compatibility/java
+
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-Para [.NET][1], se requiere la integración ASP.NET.
+Para .NET, se requiere ASP.NET integración.
 
 **Nota:** Si ASP.NET Core está deshabilitado, ASM debería seguir funcionando con este marco.
 
-[1]: /es/security/application_security/enabling/compatibility/dotnet
+
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-No se requieren integraciones para [PHP][1].
+No se requiere integraciones para PHP.
 <p></p>
 
-[1]: /es/security/application_security/enabling/compatibility/php
+
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Los siguientes marcos [Go][1] deben instrumentarse utilizando las integraciones APM predefinidas:
+Los siguientes frameworks Go deben ser instrumentados utilizando el out-of-the-box APM integraciones :
 
 - [gRPC][2]
 - [net/http][3]
 - [Gorilla Mux][4]
-- [Eco] [5]
-- [Chi] [6]
+- [Eco][5]
+- [Chi][6]
 
 Si tu marco no es compatible, [crea una nueva incidencia][7] en el repositorio Go.
 
-[1]: /es/security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -216,18 +208,17 @@ Si tu marco no es compatible, [crea una nueva incidencia][7] en el repositorio G
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-Para [Node.js][1], se requiere la integración HTTP.
+Para Node.js, es necesario el HTTP integración.
 <p></p>
 
-[1]: /es/security/application_security/enabling/compatibility/nodejs
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Para [Ruby][1], se requiere la integración [Rack][2]. También se requiere la versión `1.0.0` del rastreador Ruby o una posterior. Consulta la información sobre [migración de 0.x a 1.x][3].
+Para Ruby, se requiere la versión [Rack][2] integración. También se requiere la versión Ruby tracer `1.0.0` o superior. Consulte la información sobre [migración de 0.x a 1.x][3].
 
 **Nota:** Rack puede añadirse manualmente o automáticamente con la integración [Rails][4] o [Sinatra][5]. Si se añade manualmente, el middleware del rastreador debe aparecer antes que el middleware de seguridad en el stack tecnológico de Rack.
 
-[1]: /es/security/application_security/enabling/compatibility/ruby
 [2]: /es/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /es/tracing/trace_collection/dd_libraries/ruby/#rails
@@ -236,11 +227,10 @@ Para [Ruby][1], se requiere la integración [Rack][2]. También se requiere la v
 
 {{< programming-lang lang="python" >}}
 
-Para [Python][1], se requiere la integración WSGI, junto con la integración del
-marco que estés utilizando, como por ejemplo una integración Django o Flask.
+Para Python, se requiere el WSGI integración junto con el integración para el
+framework que esté utilizando, como Django o Flask integración.
 <p></p>
 
-[1]: /es/security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -268,7 +258,7 @@ Si no se transmiten tramos, el rastreador contendrá logs con un aspecto parecid
 
 ## Solucionar problemas por lenguaje
 
-A continuación se indican los pasos adicionales para solucionar problemas para determinados lenguajes.
+A continuación se indican los pasos adicionales para solucionar problemas para lenguajes específicos.
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
@@ -285,7 +275,7 @@ Luego de que se inicia el servicio, el rastreador genera logs en un archivo espe
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-La biblioteca .NET genera logs en un archivo, pero no puede generar logs en `stdout`/`stderr`. El nivel de log por defecto es `INFO`. Para habilitar logs `DEBUG`, configura `DD_TRACE_DEBUG=true`.
+La biblioteca .NET genera logs en un archivo, pero no puede generar logs en `stdout`/`stderr`. El nivel de logs por defecto es `INFO`. Para habilitar logs `DEBUG`, configura `DD_TRACE_DEBUG=true`.
 
 Los archivos de log están disponibles en los siguientes directorios:
 
@@ -322,7 +312,7 @@ Si el script de instalación no puede encontrar la versión correcta de PHP, pue
 $ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
 ```
 ### Fallo en la conexión con el auxiliar
-Si la extensión ASM no puede comunicarse con el proceso del helper, se genera la siguiente advertencia:
+Si la extensión ASM no puede comunicarse con el proceso del auxiliar, se genera la siguiente advertencia:
 
 ```
 PHP Warning:  Unknown: [ddappsec] Connection to helper failed and we are not going to attempt to launch it: dd_error
@@ -342,7 +332,7 @@ PHP Warning:  Unknown: [ddappsec] Failed to unlink /tmp/ddappsec.sock: Operation
 
 Esto indica que el archivo de bloqueo o el archivo de socket utilizado por la extensión tiene permisos no válidos o que el usuario que ejecuta el proceso PHP no tiene acceso de escritura al directorio `tmp`.
 
-Si el archivo de bloqueo o el archivo de socket tienen permisos no válidos, puedes eliminarlos y reiniciar Apache/FPM o ajustar el `user:group` para que coincida con el utilizado por Apache/FPM, por ejemplo, `www-data`.
+Si el archivo de bloqueo o el archivo de socket tienen permisos no válidos, puedes eliminarlos y reiniciar Apache/FPM o ajustar el `user:group` para que coincida con el que Apache/FPM utiliza, por ejemplo, `www-data`.
 
 Si el usuario no tiene acceso de escritura al directorio tmp, puedes cambiar la localización del archivo de bloqueo y del archivo de socket modificando los siguientes parámetros en el archivo `.ini` de la extensión:
 
@@ -365,7 +355,7 @@ Por ejemplo, el siguiente log de inicio muestra que ASM está deshabilitado:
 
 #### Habilitar logs de depuración
 
-Habilita logs de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La biblioteca de ASM generará logs para el resultado de error estándar.
+Habilita logs de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La biblioteca ASM generará logs para el resultado de error estándar.
 
 **Nota:** ASM sólo envía logs cuando está habilitado. Utiliza la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar ASM.
 
@@ -377,7 +367,7 @@ Si has actualizado tu biblioteca Node.js de 1.x a 2.x, utiliza esta [guía de mi
 
 Si no ves información sobre amenazas ASM en el [Explorador de trazas y señales][2] para tu aplicación Node.js, sigue estos pasos para solucionar el problema:
 
-1. Confirma que se está ejecutando la última versión de ASM comprobando que `appsec_enabled` es `true` en los [logs de inicio][3]
+1. Confirma que se está ejecutando la última versión de ASM, comprobando que `appsec_enabled` es `true` en los [logs de inicio][3]
 
     a. Si no ves logs de inicio después de enviar una solicitud, añade la variable de entorno `DD_TRACE_STARTUP_LOGS=true` para habilitar los logs de inicio. Comprueba que los logs de inicio para `appsec_enabled` son `true`.
 
@@ -391,9 +381,9 @@ Si no ves información sobre amenazas ASM en el [Explorador de trazas y señales
 
 3. En el directorio de tu aplicación, ejecuta el comando `npm explore @datadog/native-appsec -- npm run install` y reinicia tu aplicación.
 
-    a. Si `@datadog/native-appsec` no se encuentra, significa que la instalación es incorrecta. Consulta las [instrucciones de instalación][4].
+    a. Si no se encuentra `@datadog/native-appsec`, la instalación es incorrecta.
 
-    b. Si `@datadog/native-appsec` se encuentra al iniciar tu aplicación, añade el comando a tu script de inicio del tiempo de ejecución.
+    b. Si `@datadog/native-appsec` es encontrado al iniciar tu aplicación, añade el comando a tu script de inicio del tiempo de ejecución.
 
     c. Si el rastreador sigue sin funcionar, es posible que estés ejecutando un tiempo de ejecución no compatible.
 
@@ -407,10 +397,9 @@ Si no ves información sobre amenazas ASM en el [Explorador de trazas y señales
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /es/tracing/troubleshooting/tracer_startup_logs/
-[4]: /es/security/application_security/enabling/nodejs/?tab=dockercli
 [5]: /es/tracing/troubleshooting/
 {{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
+{{< programming-lang lang="Python" >}}
 
 Si no ves información sobre amenazas ASM en el [Explorador de trazas y señales][1] para tu aplicación Python, comprueba que ASM se está ejecutando y que tu rastreador está funcionando.
 
@@ -448,7 +437,7 @@ Datadog.configure do |c|
 end
 ```
 
-Los logs de depuración contienen muchos datos pero son útiles. Si abres un ticket para el [servicio de asistencia de Datadog][1], reenvía los logs junto con su solicitud.
+Los logs de depuración contienen muchos datos pero son útiles. Si abres un ticket para el [servicio de asistencia de Datadog][1], reenvía los logs junto con tu solicitud.
 
 #### ¿Está ASM correctamente habilitado?
 
@@ -459,7 +448,7 @@ D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_debug, :func= >"parse", :file=>"parser_v2.cpp", :message=>"Loaded 124 rules out of 124 available in the ruleset"}
 ```
 
-Si no ves esos logs, comprueba lo siguiente:
+Si no ves estos logs, comprueba lo siguiente:
 
 - Si las variables de entorno de ASM correctas están configuradas para el proceso de tu aplicación.
 - Si la última versión del gem está instalada.
@@ -467,7 +456,7 @@ Si no ves esos logs, comprueba lo siguiente:
 
 #### ¿Se llama a ASM en cada solicitud HTTP?
 
-Para confirmar que se llama a ASM para en solicitud HTTP, activa un [ataque de prueba](#send-a-test-attack-to-your-application) y busca estos logs:
+Para confirmar que se llama a ASM en cada solicitud HTTP, activa un [ataque de prueba](#send-a-test-attack-to-your-application) y busca estos logs:
 
 ```
 D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
@@ -476,13 +465,13 @@ D, [2022-01-19T21:25:50.580371 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloek
 D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/contrib/rack/reactive/request.rb:34:in `block in subscribe') reacted to ["request.headers", "request.uri.raw", "request.query", "request.cookies", "request.body.raw"]: [{"version"=>"HTTP/1.1", "host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, "http://127.0.0.1:9292/", [], {}, ""]
 ```
 
-Si no ves esos logs, prueba lo siguiente:
+Si no ves estos logs, prueba lo siguiente:
 
-- Comprueba si otro sistema de seguridad anterior no está filtrando las solicitudes basándose en el valor de cabecera del test, lo que impediría que la solicitud llegue a la aplicación.
-- Envía otro [ataque de prueba](#send-a-test-attack-to-your-application) utilizando otro valor de Agent de usuario en el comando curl, para ver si la información sobre la amenaza se envía correctamente.
-- En la aplicación, busca logs de la solicitud exacta que ejecutaste, para confirmar que la solicitud ha llegado a la aplicación y no ha sido respondida por otro sistema anterior.
+- Comprueba si otro sistema de seguridad anterior no está filtrando las solicitudes basándose en el valor de cabecera del test, lo que impide que la solicitud llegue a la aplicación.
+- Envía otro [ataque de prueba](#send-a-test-attack-to-your-application) utilizando otro valor del Agent del usuario en el comando curl, para ver si la información sobre la amenaza se envía correctamente.
+- En la aplicación, busca los logs de la solicitud exacta que has ejecutado, para confirmar que la solicitud ha llegado a la aplicación y no ha sido respondida por otro sistema anterior.
 
-Si la integración Rack se ha configurado manualmente, algunas veces es un problema conocido el que impide el funcionamiento de ASM. Por ejemplo:
+Si la integración Rack se ha configurado manualmente, algunas veces el problema que impide el funcionamiento de ASM es uno conocido. Por ejemplo:
 
 ```ruby
 Datadog.configure do |c|
@@ -500,10 +489,10 @@ Para confirmar que ASM está detectando amenazas de seguridad, activa un [ataque
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/appsec/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::AppSec::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
 ```
-Si no ves esos logs, comprueba que otro sistema de seguridad anterior no está filtrando las solicitudes o alterándolas basándose en el valor de cabecera del test.
+Si no ves estos logs, comprueba que otro sistema de seguridad anterior no está filtrando las solicitudes o alterándolas basándose en el valor de cabecera del test.
 
 #### ¿El rastreador envía trazas con datos de seguridad?
-Los datos de ASM se envían con trazas de APM. Para confirmar que ASM detecta e inserta correctamente los datos de seguridad en trazas, activa un [ataque de prueba](#send-a-test-attack-to-your-application), y busca estos logs del rastreador:
+Los datos de ASM se envían con trazas de APM. Para confirmar que ASM detecta e inserta correctamente los datos de seguridad en las trazas, activa un [ataque de prueba](#send-a-test-attack-to-your-application) y busca los siguientes logs del rastreador:
 
 ```
 Tags: [
@@ -542,76 +531,76 @@ Espera un minuto a que el Agent reenvíe las trazas y luego comprueba que estas 
 
 ## El Análisis de composición del software no ha detectado vulnerabilidades
 
-Hay una serie de pasos que debes ejecutar correctamente para que la información sobre vulnerabilidades aparezca en la [vista de seguridad del catálogo de servicios][16] o en el [Explorador de vulnerabilidades][12]. Al investigar este problema, es importante comprobar cada paso.
+Hay una serie de pasos que debes ejecutar correctamente para que la información sobre las vulnerabilidades aparezca en la [vista de seguridad del catálogo de servicios][16] o en el [Explorador de vulnerabilidades][12]. Al investigar este problema, es importante comprobar cada paso.
 
 ### Confirmar que ASM está habilitado
 
 Para comprobar si ASM se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
-1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
-2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando ASM. Si la métrica existe, los servicios se informan mediante las etiquetas de métricas `host` y `service`.
-3. Selecciona la métrica y busca `service` en la sección **Tags** (Etiquetas) para ver qué servicios están ejecutando ASM.
+1. Ve a **Métricas > Resumen** en Datadog.
+2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando ASM. Si la métrica existe, los servicios se informan mediante las etiquetas (tags) de métricas `host` y `service`.
+3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando ASM.
 
 Si no ves `datadog.apm.appsec_host`, comprueba las [instrucciones en la aplicación][3] para confirmar que se han completado todos los pasos de la configuración inicial.
 
-Los datos de ASM se envían con trazas APM. Consulta [Solucionar problemas de APM][4] para [confirmar la configuración de APM][5] y comprobar si hay [errores de conexión][6].
+Los datos de ASM se envían con trazas de APM. Consulta [Solucionar problemas de APM][4] para [confirmar la configuración de APM][5] y comprobar si hay [errores de conexión][6].
 
 ### Confirmar que las versiones del rastreador están actualizadas
 
-Consulta la [documentación de configuración] [11] de la seguridad de las aplicaciones para confirmar que estás utilizando la versión correcta del rastreador. Estas versiones mínimas son requeridas para comenzar a enviar datos de telemetría que incluyen información de biblioteca.
+Consulte la documentación de configuración del producto Application Security para validar que está utilizando la versión correcta del rastreador. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de biblioteca.
 
-### Garantizar la comunicación de los datos telemétricos
+### Garantizar la comunicación de los datos de telemetría
 
-Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (`DD_TRACE_TELEMETRY_ENABLED` para NodeJS) está configurada como `true` o que la propiedad del sistema correspondiente a tu lenguaje está habilitada. Por ejemplo en Java: `-Ddd.instrumentation.telemetry.enabled=true`
+Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (`DD_TRACE_TELEMETRY_ENABLED` para NodeJS) está configurada como `true` o que la propiedad del sistema correspondiente a tu lenguaje está habilitada. Por ejemplo, en Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
 ## Deshabilitar la gestión de amenazas y la protección
 
 Para deshabilitar la gestión de amenazas, elimina la variable de entorno `DD_APPSEC_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio.
 
-Si no se has configurado ninguna variable de entorno `DD_APPSEC_ENABLED=true` para tu servicio, realiza una de las siguientes acciones:
+Si no has configurado ninguna variable de entorno `DD_APPSEC_ENABLED=true` para tu servicio, realiza una de las siguientes acciones:
 * Si se trata de un servicio PHP: configura explícitamente la variable de entorno como `DD_APPSEC_ENABLED=false` y reinicia tu servicio.
 * Si la gestión de amenazas se ha activado mediante [configuración remota][16], haz lo siguiente: 
   1. Ve a [Servicios][15] (**ASM** > **Catálogo** > **Servicios**).
-  2. Selecciona **Gestión de amenazas en modo Monitorización**.
-  3. En la faceta **Gestión de amenazas**, activa **Sólo monitorización**, **Sin datos** y **Listo para el bloqueo**.
+  2. Selecciona **Gestión de amenazas en modo monitorización**.
+  3. En la faceta **Gestión de amenazas**, activa **Monitoring Only**, **No data**, and **Ready to block** (Sólo monitorización, Sin datos y Listo para el bloqueo).
   4. Haz clic en un servicio.
-  5. En los detalles del servicio, en **Detección de amenazas**, haz clic en **Desactivar**.
+  5. En los detalles del servicio, en **Detección de amenazas**, haz clic en **Deactivate** (Desactivar).
 
-<div class="alert alert-info">Si la gestión de amenazas se ha activado mediante <a href="https://app.datadoghq.com/organization-settings/remote-config">Configuración remota</a>, puedes utilizar el botón <strong>Desactivar</strong>. Si la gestión de amenazas se ha activado mediante configuración local, el botón <strong>Desactivar</strong> no es una opción.</div>
+<div class="alert alert-info">Si la gestión de amenazas se ha activado mediante <a href="https://app.datadoghq.com/organization-settings/remote-config">Configuración remota</a>, puedes utilizar el botón <strong>Deactivate</strong> (Desactivar). Si la gestión de amenazas se ha activado mediante configuración local, el botón <strong>Desactivar</strong> no es una opción.</div>
 
-* Para desactivar la gestión de amenazas en tus servicios en bloque, haz lo siguiente: 
+* Para desactivar la gestión de amenazas en tus servicios masivos, haz lo siguiente: 
   1. Ve a [Servicios][15].
-  2. En la faceta **Gestión de amenazas**, activa **Sólo monitorización**, **Sin datos** y **Listo para el bloqueo**.
-  3. Seleccione las casillas de verificación de servicios en las que quieres deshabilitar la detección de amenazas.
-  4. En **Acciones en bloque**, selecciona **Desactivar detección de amenazas en (número) servicios**.
+  2. En la faceta **Gestión de amenazas**, activa **Monitoring Only**, **No data**, and **Ready to block** (Sólo monitorización, Sin datos y Listo para el bloqueo).
+  3. Selecciona las casillas de verificación de servicios en las que quieres deshabilitar la detección de amenazas.
+  4. En **Acciones masivas**, selecciona **Desactivar detección de amenazas en (número) servicios**.
 
 ## Deshabilitación del Análisis de composición del software
 
 Para deshabilitar el [Análisis de composición del software][14]:
 
-* Ve a [<txprotected>Servicios</txprotected>][15], selecciona **Análisis de composición del software (SCA)**, haz clic en tu servicio y, a continuación, haz clic en **Desactivar**.
-* Para deshabilitar el Análisis de composición del software en tus servicios en bloque, haz clic en la casilla de verificación de la cabecera de la lista y, a continuación, en **Acciones en bloque** selecciona **Desactivar el Análisis de composición del software (SCA) en (número) servicios.
-* Para deshabilitar r el Análisis de composición del software utilizando la variable de entorno`DD_APPSEC_SCA_ENABLED`, elimina la variable de entorno `DD_APPSEC_SCA_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio. Esto no se aplica a las aplicaciones PHP.
+* Ve a [Servicios][15], selecciona **Análisis de composición del software (SCA)**, haz clic en tu servicio y, a continuación, haz clic en **Deactivate** (Desactivar).
+* Para deshabilitar el Análisis de composición del software en tus servicios masivos, haz clic en la casilla de verificación de la cabecera de la lista y, a continuación, selecciona **Desactivar el Análisis de composición del software (SCA) en (número) servicios en **Acciones masivas**.
+* Para deshabilitarr el Análisis de composición del software utilizando la variable de entorno`DD_APPSEC_SCA_ENABLED`, elimina la variable de entorno `DD_APPSEC_SCA_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio. Esto no se aplica a las aplicaciones PHP.
 
 ## Deshabilitar la seguridad del código
 
-Para deshabilitar la detección de vulnerabilidades [Seguridad del código][13], elimine la variable de entorno `DD_IAST_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio. Esto no se aplica a las aplicaciones PHP. 
+Para deshabilitar la detección de vulnerabilidades [Seguridad del código][13], elimina la variable de entorno `DD_IAST_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio. Esto no se aplica a las aplicaciones PHP. 
 
 Si no hay ninguna variable de entorno `DD_IAST_ENABLED=true` para tu servicio, haz lo siguiente:
   1. Ve a [Servicios][15].
   2. Selecciona **Seguridad del código**.
   3. Haz clic en un servicio.
-  4. En los detalles del servicio, en **Detección de vulnerabilidades**, haz clic en **Desactivar**.
+  4. En los detalles del servicio, en **Detección de vulnerabilidades**, haz clic en **Deactivate** (Desactivar).
 
 ## No se detectan algunas o todas las vulnerabilidades IAST/Código personalizado
 
-### Confirmar que IAST está habilidad
+### Confirmar que IAST está habilidado
 
 Asegúrate de que la variable de entorno `DD_IAST_ENABLED` está configurada como `true` o que la propiedad del sistema correspondiente a tu lenguaje está habilitada.
 
-### Para Python+Flask, llama a la función de parche del punto de entrada
+### En Python+Flask, llama a la función de parche del punto de entrada
 
-Si estás ejecutando una aplicación Flask, asegúrate de que estás llamando a la función`ddtrace_iast_flask_patch()` en el nivel superior del módulo, antes de llamar a `app.run()`. Para obtener más información, consulta la [documentación de la integración Flask][17].
+Si estás ejecutando una aplicación Flask, asegúrate de que estás llamando a la función `ddtrace_iast_flask_patch()` en el nivel superior del módulo, antes de llamar a `app.run()`. Para obtener más información, consulta la [documentación de la integración Flask][17].
 
 ## ¿Necesitas más ayuda?
 
@@ -634,7 +623,6 @@ Si sigues teniendo problemas con ASM, ponte en contacto con el [servicio de asis
 [8]: /es/tracing/troubleshooting/tracer_startup_logs/
 [9]: /es/tracing/glossary/#spans
 [10]: /es/tracing/troubleshooting/#tracer-debug-logs
-[11]: /es/security/application_security/enabling/
 [12]: https://app.datadoghq.com/security/appsec/vm
 [13]: /es/security/application_security/code_security/
 [14]: /es/security/application_security/software_composition_analysis

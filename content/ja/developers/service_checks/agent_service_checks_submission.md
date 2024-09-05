@@ -1,10 +1,11 @@
 ---
-title: 'サービスチェック送信: Agent チェック'
 further_reading:
-  - link: /developers/custom_checks/write_agent_check/
-    tag: ドキュメント
-    text: Agent カスタムチェックの書き方
+- link: /developers/custom_checks/write_agent_check/
+  tag: ドキュメント
+  text: Agent カスタムチェックの書き方
+title: 'サービスチェック送信: Agent チェック'
 ---
+
 カスタム Agent チェック内で Datadog にサービスチェックを送信するには、`AgentCheck` クラスの定義済みの `service_check()` 関数を使用します。
 
 ```python
@@ -13,13 +14,13 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 
 以下は、`service_check()` 関数で利用可能な各種パラメーターとデータ型です。
 
-| パラメーター  | 種類            | 必須 | デフォルト値 | 説明                                                                                                   |
+| パラメーター  | タイプ            | 必須 | デフォルト値 | 説明                                                                                                   |
 |------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
-| `name`     | string          | はい      | -             | サービスチェックの名前。                                                                                |
+| `name`     | 文字列          | はい      | -             | サービスチェックの名前。                                                                                |
 | `status`   | 整数             | はい      | -             | サービスのステータスを説明する定数: OK には `0`、Warning には `1`、Critical には `2`、Unknown には `3`。 |
 | `tags`     | 文字列のリスト | いいえ       | `None`        | このサービスチェックに関連付けるタグのリスト                                                          |
-| `hostname` | string          | いいえ       | 現在のホスト  | このサービスチェックに関連付けるホスト名。デフォルトは現在のホストです。                                |
-| `message`  | string          | いいえ       | `None`        | このステータスが発生した補足情報や説明                                          |
+| `hostname` | 文字列          | いいえ       | 現在のホスト  | このサービスチェックに関連付けるホスト名。デフォルトは現在のホストです。                                |
+| `message`  | 文字列          | いいえ       | `None`        | このステータスが発生した補足情報や説明                                          |
 
 ## 例
 
@@ -76,12 +77,12 @@ class MyClass(AgentCheck):
 
 {{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="サービスチェック" style="width:80%;">}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/custom_checks/write_agent_check/
-[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
-[4]: /ja/agent/guide/agent-commands/#agent-information
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[4]: /ja/agent/configuration/agent-commands/#agent-information
 [5]: https://app.datadoghq.com/check/summary

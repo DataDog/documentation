@@ -11,32 +11,32 @@ aliases:
 - /ko/integrations/shoreline_software_license/
 cascade:
 - _target:
+    lang: en
     path: /integrations/akamai_datastream_2
-    lang: ko
   aliases:
-  - /ko/integrations/akamai_datastream
+  - /integrations/akamai_datastream
 - _target:
+    lang: en
     path: /integrations/azure
-    lang: ko
   algolia:
-    category: 설명서
+    category: 문서
     rank: 80
     subcategory: 통합
     tags:
     - azure
     - microsoft azure
 - _target:
+    lang: en
     path: /integrations/kubernetes_state_core
-    lang: ko
   algolia:
-    category: 설명서
+    category: 문서
     rank: 60
     subcategory: 통합
     tags:
     - ksm
 - _target:
+    lang: en
     path: /integrations/google_cloud_platform
-    lang: ko
   algolia:
     category: 설명서
     rank: 80
@@ -45,104 +45,103 @@ cascade:
     - gcp
     - google cloud platform
 - _target:
+    lang: en
     path: /integrations/amazon_web_services
-    lang: ko
   algolia:
-    category: 설명서
+    category: 문서
     rank: 80
     subcategory: 통합
     tags:
     - aws
     - amazon web services
 - _target:
+    lang: en
     path: /integrations/eks_fargate
-    lang: ko
   algolia:
-    category: 설명서
+    category: 문서
     rank: 60
     subcategory: 통합
     tags:
     - eks logging
 - _target:
+    lang: en
     path: /integrations/win32_event_log
-    lang: ko
   algolia:
-    category: 설명서
+    category: 문서
     rank: 60
     subcategory: 통합
     tags:
     - event viewer
   aliases:
-  - /ko/integrations/eventviewer/
+  - /integrations/eventviewer/
 - _target:
+    lang: en
     path: /integrations/lambdatest_license
-    lang: ko
   aliases:
-  - /ko/integrations/lambdatest_software_license/
+  - /integrations/lambdatest_software_license/
 - _target:
+    lang: en
     path: /integrations/mongo
-    lang: ko
   aliases:
-  - /ko/integrations/mongodb/
+  - /integrations/mongodb/
 - _target:
+    lang: en
     path: /integrations/rapdev_validator
-    lang: ko
   aliases:
-  - /ko/integrations/rapdev_dashboard_widget_pack/
+  - /integrations/rapdev_dashboard_widget_pack/
 - _target:
+    lang: en
     path: /integrations/wmi_check
-    lang: ko
   aliases:
-  - /ko/integrations/wmi/
+  - /integrations/wmi/
 - _target:
+    lang: en
     path: /integrations/jfrog_platform_self_hosted
-    lang: ko
   aliases:
-  - /ko/integrations/jfrog_platform/
+  - /integrations/jfrog_platform/
 - _target:
+    lang: en
     path: /integrations/komodor_license
-    lang: ko
   aliases:
-  - /ko/integrations/komodor_komodor/
+  - /integrations/komodor_komodor/
 - _target:
+    lang: en
     path: /integrations/stormforge_license
-    lang: ko
   aliases:
-  - /ko/integrations/stormforge_stormforge_license/
+  - /integrations/stormforge_stormforge_license/
 - _target:
+    lang: en
     path: /integrations/feed
-    lang: ko
   aliases:
-  - /ko/integrations/rss/
+  - /integrations/rss/
 - _target:
+    lang: en
     path: /integrations/java
-    lang: ko
   aliases:
-  - /ko/agent/faq/jmx_integrations/
-  - /ko/agent/faq/docker-jmx/
+  - /agent/faq/jmx_integrations/
+  - /agent/faq/docker-jmx/
 - _target:
+    lang: en
     path: /integrations/amazon_elb
-    lang: ko
   aliases:
-  - /ko/integrations/awselb
+  - /integrations/awselb
 - _target:
+    lang: en
     path: /integrations/elastic
-    lang: ko
   aliases:
-  - /ko/integrations/awses
+  - /integrations/awses
 - _target:
+    lang: en
     path: /integrations/amazon_s3
-    lang: ko
   aliases:
-  - /ko/integrations/awss3
+  - /integrations/awss3
 - _target:
+    lang: en
     path: /integrations/snowflake_web
-    lang: ko
   aliases:
-  - /ko/integrations/snowflake/
+  - /integrations/snowflake/
 description: 모든 시스템, 앱, 서비스에서 데이터를 수집하세요.
 disable_sidebar: true
-custom_kind: 설명서
 title: 통합
 ---
 

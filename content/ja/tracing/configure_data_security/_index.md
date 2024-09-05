@@ -8,6 +8,10 @@ aliases:
 - /ja/tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
 - /ja/tracing/setup_overview/configure_data_security/
 description: クライアントライブラリまたは Agent を構成して、トレース内の機密データの収集を制御します。
+further_reading:
+- link: /data_security/pci_compliance/
+  tag: ドキュメント
+  text: PCI 準拠の Datadog 組織をセットアップする
 title: データセキュリティ
 ---
 ## 概要
@@ -28,7 +32,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | 社内ユーザー (従業員) またはエンドユーザーのメールアドレス。                                                     |
 | クライアント IP           | 受信リクエストに関連するエンドユーザーの IP アドレス、または送信リクエストの外部 IP アドレス。 |
 | データベースステートメント | 実行されたデータベースステートメントで使用されるリテラル、リテラル列、バインド変数。                           |
-| 地理的位置 | 個人または世帯を特定するために使用できる経度と緯度の座標。                            |
+| 地理的位置情報 | 個人または世帯を特定するために使用できる経度と緯度の座標。                            |
 | URI パラメーター      | URI パスまたは URI クエリの変数部分のパラメーター値。                                            |
 | URI ユーザー情報        | ユーザー名を含むことができる URI のユーザー情報サブコンポーネント。                                                   |
 
@@ -44,7 +48,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | <i class="icon-check-bold"></i> |                                 |
 | クライアント IP           | <i class="icon-check-bold"></i> |                                 |
 | データベースステートメント | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| 地理的位置 |                                 |                                 |
+| 地理的位置情報 |                                 |                                 |
 | URI パラメーター      | <i class="icon-check-bold"></i> |                                 |
 | URI ユーザー情報        |                                 |                                 |
 
@@ -60,7 +64,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | <i class="icon-check-bold"></i> |                                 |
 | クライアント IP           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | データベースステートメント | <i class="icon-check-bold"></i> |                                 |
-| 地理的位置 |                                 |                                 |
+| 地理的位置情報 |                                 |                                 |
 | URI パラメーター      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI ユーザー情報        |                                 |                                 |
 
@@ -76,7 +80,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | <i class="icon-check-bold"></i> |                                 |
 | クライアント IP           | <i class="icon-check-bold"></i> |                                 |
 | データベースステートメント | <i class="icon-check-bold"></i> |                                 |
-| 地理的位置 |                                 |                                 |
+| 地理的位置情報 |                                 |                                 |
 | URI パラメーター      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI ユーザー情報        |                                 |                                 |
 
@@ -92,7 +96,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | <i class="icon-check-bold"></i> |                                 |
 | クライアント IP           | <i class="icon-check-bold"></i> |                                 |
 | データベースステートメント | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| 地理的位置 |                                 |                                 |
+| 地理的位置情報 |                                 |                                 |
 | URI パラメーター      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI ユーザー情報        | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 
@@ -108,7 +112,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | <i class="icon-check-bold"></i> |                                 |
 | クライアント IP           | <i class="icon-check-bold"></i> |                                 |
 | データベースステートメント | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| 地理的位置 | <i class="icon-check-bold"></i> |                                 |
+| 地理的位置情報 | <i class="icon-check-bold"></i> |                                 |
 | URI パラメーター      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI ユーザー情報        |                                 |                                 |
 
@@ -125,7 +129,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | メール               | <i class="icon-check-bold"></i> |                                 |
 | クライアント IP           | <i class="icon-check-bold"></i> |                                 |
 | データベースステートメント | <i class="icon-check-bold"></i> |                                 |
-| 地理的位置 |                                 |                                 |
+| 地理的位置情報 |                                 |                                 |
 | URI パラメーター      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI ユーザー情報        |                                 |                                 |
 
@@ -133,7 +137,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 
 {{% tab "Go" %}}
 
-**注:** クライアント IP はデフォルトでは収集されないため、有効にする必要があります。データベース ステートメントとクライアント URI は、Datadog Agent によって難読化されます。
+**注:** クライアント IP はデフォルトでは収集されないため、有効にする必要があります。データベースステートメントは、Datadog Agent によって難読化されます。
 
 | カテゴリー                | 収集                       | 難読化                      |
 |:------------------------|:-------------------------------:|:-------------------------------:|
@@ -143,7 +147,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 | データベースステートメント     | <i class="icon-check-bold"></i> |                                 |
 | 地理的位置情報     |                                 |                                 |
 | クライアント URI パス         | <i class="icon-check-bold"></i> |                                 |
-| クライアント URI クエリ文字列 | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| クライアント URI クエリ文字列 | <i class="icon-check-bold"></i> |                                 |
 | サーバー URI パス         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | サーバー URI クエリ文字列 | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP 本文               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -211,7 +215,7 @@ Datadog の APM トレーシングライブラリは、アプリケーション�
 
 {{% /tabs %}}
 
-Datadog Application Security Management (ASM) を使用している場合、トレーシングライブラリは HTTP リクエストデータを収集し、疑わしいリクエストの性質を理解するのに役立ちます。Datadog ASM は、特定のデータを自動的に編集し、独自の検出ルールを構成することができます。これらのデフォルトと構成オプションの詳細については、 Datadog ASM [データプライバシー][13]のドキュメントを参照してください。
+Datadog Application Security Management (ASM) を使用している場合、トレーシングライブラリは HTTP リクエストデータを収集し、セキュリティトレースの性質を理解するのに役立ちます。Datadog ASM は特定のデータを自動的に削除し、独自の検出ルールを構成することができます。これらのデフォルトと構成オプションの詳細については、 Datadog ASM [データプライバシー][13]のドキュメントを参照してください。
 
 ## Agent
 
@@ -381,7 +385,7 @@ apm_config:
     remove_stack_traces: true # default false
 ```
 
-これは環境変数 `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=false` で有効にすることもできます。
+This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=true`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -458,9 +462,12 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-この環境変数は、[daemonset configuration][1] を使用している場合は trace-agent コンテナに、[helm chart][2] を使用している場合は `values.yaml` ファイル内の `agents.containers.traceAgent.env` に記述してください。
+Set the `DD_APM_REPLACE_TAGS` environment variable:
+- For Datadog Operator, in `override.nodeAgent.env` in your `datadog-agent.yaml`
+- For Helm, in `agents.containers.traceAgent.env` in your `datadog-values.yaml`
+- For manual configuration, in the `trace-agent` container section of your manifest
 
-```datadog-agent.yaml
+```yaml
 - name: DD_APM_REPLACE_TAGS
   value: '[
             {
@@ -490,13 +497,49 @@ DD_APM_REPLACE_TAGS=[
           ]'
 ```
 
+#### 例
+
+Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
+```
+
+Helm:
+
+```yaml
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
+```
+
 [1]: /ja/containers/kubernetes/installation/?tab=daemonset
 [2]: /ja/containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl":"$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"},{"name":"error.msg","pattern":"[0-9]{10}","repl":"[REDACTED]"}]
 ```
 
 {{% /tab %}}
@@ -534,7 +577,7 @@ Datadog は、トレーシングライブラリ全体で[スパンタグのセ�
 
 #### ヘッダーの収集
 
-トレースヘッダータグを収集するには、大文字小文字を区別しないヘッダーキーとタグ名のマップを指定して `DD_TRACE_HEADER_TAGS` 環境変数を設定します。ライブラリは、マッチしたヘッダー値を root スパンのタグとして適用します。この設定は指定されたタグ名のないエントリも受け入れることができます。例:
+To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
 
 ```
 DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
@@ -542,7 +585,7 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 
 ### 処理
 
-いくつかのトレーシングライブラリは、トレースで収集された機密データを手動で修正または削除するためのスパンを処理するインターフェイスを提供します。
+Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 
 * Java: [TraceInterceptor インターフェイス][9]
 * Ruby: [処理パイプライン][10]
@@ -578,32 +621,27 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-APM の PCI 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
+PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
+To set up a PCI-compliant Datadog org, follow these steps:
 
-1. [Datadog サポート][2]または[カスタマーサクセスマネージャー][3]に連絡し、組織を PCI 準拠の組織として構成するようリクエストします。
-2. Datadog サポートまたはカスタマーサクセスが組織が PCI DSS に準拠していることを確認した後、PCI 準拠の専用エンドポイント (`https://trace-pci.agent.datadoghq.com`) にスパンを送信するように Agent コンフィギュレーションファイルを構成します。
-    ```
-    apm_config:
-      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
-    ```
+{{% pci-apm %}}
 
-ログ で PCI 準拠を実現するためには、[ログ管理の PCI DSS 準拠][5]を参照してください。
+See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
 
-[1]: /ja/getting_started/site/
-[2]: /ja/help/
-[3]: mailto:success@datadoghq.com
-[4]: /ja/account_management/audit_trail/
-[5]: /ja/data_security/logs/#pci-dss-compliance-for-log-management
-
+[1]: /ja/data_security/pci_compliance/
+[2]: /ja/data_security/pci_compliance/?tab=logmanagement
 
 {{< /site-region >}}
 
 {{< site-region region="us2,us3,us5,eu,gov" >}}
 APM の PCI 準拠は、{{< region-param key="dd_site_name" >}} サイトではご利用いただけません。
 {{< /site-region >}}
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help/
 [2]: /ja/tracing/glossary/#trace

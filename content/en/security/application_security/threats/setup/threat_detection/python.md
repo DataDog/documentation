@@ -6,6 +6,7 @@ code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/python
   - /security/application_security/getting_started/python
+  - /security/application_security/enabling/tracing_libraries/threat_detection/python
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

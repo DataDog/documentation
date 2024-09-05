@@ -1,6 +1,8 @@
 ---
 title: Enabling ASM Threat Detection using Datadog Tracing Libraries
 type: multi-code-lang
+aliases:
+- /security/application_security/enabling/tracing_libraries/threat_detection/
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

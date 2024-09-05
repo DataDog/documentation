@@ -267,7 +267,7 @@ Datadog 구성을 생성할 때 `Datadog.Configuration`에서 다음 속성을 �
 : 데이터를 받을 Datadog 서버 엔드포인트 설정.
 
 `batchSize`
-: Datadog에 업로드되는 배치 데이터의 선호하는 크기를 설정합니다. 이 값은 RUM iOS SDK가 처리하는 요청 수와 크기에 영향을 줍니다(배치가 적으면 각 요청의 크기가 적어지나 요청 수가 많아짐). `.small`, `.medium`, `.large` 값을 사용할 수 있습니다. 
+: Datadog에 업로드되는 배치 데이터의 선호하는 크기를 설정합니다. 이 값은 RUM iOS SDK가 처리하는 요청 수와 크기에 영향을 줍니다(배치가 적으면 각 요청의 크기가 적어지나 요청 수가 많아짐). `.small`, `.medium`, `.large` 값을 사용할 수 있습니다.
 
 `uploadFrequency`
 : Datadog에 데이터를 업로드하는 선호 주기를 설정합니다. 값은 `.frequent`, `.average`, `.rare`를 포함해 선택할 수 있습니다.
@@ -374,7 +374,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 앱의 아키텍처에 따라 더 역동적인 솔루션을 사용할 수도 있습니다.
 
-예를 들어 보기 컨트롤러가 일관되게 `accessibilityLabel`를 사용한다면 접근성 레이블값으로 보기 이름을 지정할 수 있습니다. 
+예를 들어 보기 컨트롤러가 일관되게 `accessibilityLabel`를 사용한다면 접근성 레이블값으로 보기 이름을 지정할 수 있습니다.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -427,13 +427,13 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -473,13 +473,13 @@ RUM.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -503,7 +503,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 {{% /tab %}}
 {{< /tabs >}}
 
-커스텀 속성을 리소스에 추가하려면 RUM을 활성화할 때 `URLSessionTracking.resourceAttributesProvider` 옵션을 사용하세요. 속성 제공자 클로저를 설정하면 추가 속성을 반환해 추적된 리소스에 연결할 수 있습니다. 
+커스텀 속성을 리소스에 추가하려면 RUM을 활성화할 때 `URLSessionTracking.resourceAttributesProvider` 옵션을 사용하세요. 속성 제공자 클로저를 설정하면 추가 속성을 반환해 추적된 리소스에 연결할 수 있습니다.
 
 예를 들어 HTTP 요청과 응답 헤더를 RUM 리소스에 추가할 수 있습니다.
 
@@ -529,7 +529,7 @@ RUM.enable(
 {{% tab "Swift" %}}
 ```swift
 ```swift
-URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
+URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}

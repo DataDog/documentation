@@ -1,8 +1,8 @@
 ---
 aliases:
-- /serverless/serverless_integrations
-- /serverless/datadog_lambda_library/
-- /serverless/libraries_integrations/library/
+- /ja/serverless/serverless_integrations
+- /ja/serverless/datadog_lambda_library/
+- /ja/serverless/libraries_integrations/library/
 title: サーバーレスライブラリとインテグレーション
 ---
 
