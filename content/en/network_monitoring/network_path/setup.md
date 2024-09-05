@@ -1,6 +1,6 @@
 ---
 title: Setup
-description: Setting up Network Path 
+description: Setting up Network Path
 is_beta: true
 further_reading:
 - link: "/network_monitoring/network_path/list_view"
@@ -42,7 +42,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
      enabled: true
    ```
 
-2. Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
+2. Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
 
     ```yaml
     network_path:
@@ -51,7 +51,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
       collector:
         workers: 10 # default 4
     ```
- 
+
     For full configuration details, reference the [example config][3], or use the following:
 
     ```yaml
@@ -82,13 +82,13 @@ Manually configure individual paths by specifying the exact endpoint you want to
      enabled: true
    ```
 
-2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file: 
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file:
 
    ```yaml
    init_config:
      min_collection_interval: 60 # in seconds, default 60 seconds
    instances:
-     # configure the endpoints you want to monitor, one check instance per endpoint 
+     # configure the endpoints you want to monitor, one check instance per endpoint
      - hostname: api.datadoghq.eu # endpoint hostname or IP
        protocol: TCP
        port: 443
@@ -97,7 +97,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
          - "tag_key2:tag_value2"
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
-     # timeout: 10 # timeout in seconds of traceroute calls, default is 10s
+     # timeout: 1000 # timeout in seconds of traceroute calls, default is 1s
      - hostname: 1.1.1.1 # endpoint hostname or IP
        protocol: UDP
        port: 53
@@ -105,7 +105,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
     ```
- 
+
    For full configuration details, reference the [example config][4], or use the following:
 
    ```yaml
@@ -120,7 +120,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
      ## Traceroute will be run against this endpoint with a sequence of different TTL.
      #
      - hostname: <HOSTNAME_OR_IP>
-  
+
      ## @param port - uint16 - optional - default:<RANDOM PORT>
      ## The port of the destination endpoint.
      ## By default, the port is random.
@@ -131,13 +131,13 @@ Manually configure individual paths by specifying the exact endpoint you want to
      ## The maximum traceroute TTL used during path collection.
      #
      # max_ttl: 30
-  
-     ## @param timeout - uint32 - optional - default:3000
-     ## The timeout of traceroute network calls.
-     ## The timeout is in millisecond.
+
+     ## @param timeout - integer - optional - default: 1000
+     ## Specifies how much time traceroute should wait for a response
+     ## from each hop before timing out.
      #
-     # timeout: 3000
-  
+     # timeout: 1000
+
      ## @param min_collection_interval - int - optional - default:60
      ## Interval between each traceroute runs for each destination.
      # min_collection_interval: <interval_in_seconds>
@@ -163,7 +163,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-**Note**: Network path is only supported for Linux environments. 
+**Note**: Network path is only supported for Linux environments.
 
 ## Further Reading
 
