@@ -13,6 +13,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Monitor Status"
+- link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
+  tag: "Blog"
+  text: "Manage your monitors more efficiently with Datadog Teams"
 ---
 
 ## Overview
