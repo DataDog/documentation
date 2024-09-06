@@ -307,6 +307,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -321,6 +322,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -330,7 +332,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
-   - You can do this at the build tool level, like Maven:
+    - You can do this at the build tool level, like Maven:
      ```yaml
      <build>
      <plugins>
@@ -353,6 +355,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
 3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog

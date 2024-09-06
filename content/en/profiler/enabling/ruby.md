@@ -53,7 +53,7 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.0'
+    gem 'datadog', '~> 2.3'
     ```
 3. Install the gems with `bundle install`.
 
@@ -98,7 +98,7 @@ end
     bundle exec ddprofrb exec bin/rails s
     ```
 
-    If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
+    If you're running a version of the gem older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
     **Note**
 

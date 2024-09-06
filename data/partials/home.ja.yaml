@@ -143,6 +143,10 @@ nav_sections:
       icon: pipelines
       link: observability_pipelines/
       title: Observability Pipelines
+    - desc: LLM アプリケーションを追跡、監視、保護する
+      icon: llm-observability
+      link: llm_observability/
+      title: LLM Observability
 - nav_section:
   - name: 構成
   - navtiles:

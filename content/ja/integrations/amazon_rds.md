@@ -9,7 +9,7 @@ categories:
 - data stores
 - log collection
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -32,9 +32,9 @@ integration_version: ''
 is_public: true
 manifest_version: '1.0'
 monitors:
-  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
-  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
-  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
+  Anomaly in database connections: assets/monitors/rds_database_connections_anomaly.json
+  CPU utilization is high: assets/monitors/rds_cpu_utilization.json
+  Storage utilization is high: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS に関連する大量のメトリクスを追跡する。
@@ -101,7 +101,7 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 
 インスタンスの作成中または作成後に RDS インスタンスの拡張モニタリングを有効にするには、**Instance Actions** の下にある **Modify** を選択します。監視の詳細度には `15` を選択することをお勧めします。
 
-The following instructions use KMS and the Lambda Management Console to create an encrypted version of your Datadog API key which can only be used with the RDS Enhanced Monitoring Lambda function. If you already have an encrypted API key from another Lambda such as the [Log Forwarder][1], see [the Lambda function's README][2] for other options.
+次の手順では、KMS と Lambda Management Console を使用して、RDS Enhanced Monitoring Lambda 関数でのみ使用できる Datadog API キーの暗号化バージョンを作成します。[Log Forwarder][1] などの別の Lambda 関数ですでに暗号化された API キーをお持ちの場合は、他のオプションについて [Lambda 関数の README][2] を参照してください。
 
 #### KMS キーの作成
 
@@ -307,7 +307,7 @@ Amazon RDS インテグレーションには、DB インスタンス、セキュ
 
 ### サービスのチェック
 
-**aws.rds.read_replica_status**
+**aws.rds.read_replica_status**  
 [読み取りレプリケーション][8]のステータスを監視します。このチェックは、以下のいずれかのステータスを返します。
 
 - OK - レプリケート中または接続中
