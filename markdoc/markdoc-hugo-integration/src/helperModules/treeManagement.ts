@@ -9,7 +9,7 @@
  */
 
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
-import { ParsedFile } from './MdocFileParser';
+import { ParsedFile } from '../schemas/compilation';
 import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode,

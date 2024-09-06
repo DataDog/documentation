@@ -1,5 +1,5 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
-import { ParsedFile } from '../MdocFileParser';
+import { ParsedFile } from '../../schemas/compilation';
 import { YamlConfigParser } from '../YamlConfigParser';
 import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';

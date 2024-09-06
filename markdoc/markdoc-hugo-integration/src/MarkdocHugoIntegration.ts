@@ -14,9 +14,10 @@ import { PageBuilder } from './helperModules/PageBuilder';
 import {
   CompilationConfig,
   CompilationConfigSchema,
-  CompilationResult
+  CompilationResult,
+  ParsingErrorReport,
+  ParsedFile
 } from './schemas/compilation';
-import { ParsingErrorReport, ParsedFile } from './schemas/errors';
 
 export class MarkdocHugoIntegration {
   directories: {
@@ -25,6 +26,7 @@ export class MarkdocHugoIntegration {
     options: string;
   };
   hugoConfig: HugoConfig;
+  prefOptionsConfig: PrefOptionsConfig;
 
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
@@ -41,6 +43,9 @@ export class MarkdocHugoIntegration {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
     this.hugoConfig = args.hugoConfig;
+    this.prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
+      this.directories.options
+    );
   }
 
   /**
@@ -78,8 +83,11 @@ export class MarkdocHugoIntegration {
   }
 
   /*
-  compileLanguageFolder(lang: string): {
+  compileLanguageFolder(lang: string): CompilationResult {
     const contentDir = `${this.directories.content}/${lang}`;
+    const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
+      this.directories.options + `/${lang}`
+    );
   }
   */
 
@@ -93,9 +101,6 @@ export class MarkdocHugoIntegration {
     this.#resetErrors();
     this.compiledFiles = [];
 
-    const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
-      this.directories.options
-    );
     const markdocFilepaths = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
 
     for (const markdocFilepath of markdocFilepaths) {
@@ -107,7 +112,7 @@ export class MarkdocHugoIntegration {
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         parsedFile,
-        prefOptionsConfig
+        prefOptionsConfig: this.prefOptionsConfig
       });
 
       if (compiledFilepath) {
