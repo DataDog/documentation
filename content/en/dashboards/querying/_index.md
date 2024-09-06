@@ -133,6 +133,34 @@ Next to the aggregation method dropdown, choose what constitutes a line or group
 
 Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
 
+#### Nested Queries
+
+Add an additional layer of aggregation on results of an existing query in time and /or spac using nested queries. We support: 
+
+1. Percentiles on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
+2. Standard deviation on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
+3. Multilayer aggregation (additional time/space aggregatinos) supported via the JSON tab or via API* (Dashboards only)
+4. Higher resultion queries over historical timeframes
+
+_ * Every [metrics query][17] in Datadog is evaluated with two layers of aggregation: first Time then Space. Multilayer aggregation applies additional layers of aggregations._
+
+Here are a few examples of nested queries you can craft:
+
+##### Percentiles
+This query 
+
+##### Standard Deviation
+This query
+
+##### Higher Resolution Queries
+This query
+
+Currently, nested queries are only available via JSON on dashboards and API.
+
+
+
+
+
 ### Advanced graphing
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
@@ -251,3 +279,4 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [14]: /logs/explorer/search_syntax/
 [15]: /dashboards/widgets/timeseries/#event-overlay
 [16]: /dashboards/template_variables/
+[17]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
