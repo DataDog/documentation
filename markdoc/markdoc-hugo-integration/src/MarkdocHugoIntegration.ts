@@ -5,9 +5,8 @@
  */
 
 import fs from 'fs';
-import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { HugoConfig, HugoConfigSchema } from './schemas/hugoConfig';
+import { HugoConfig } from './schemas/hugoConfig';
 import {
   MdocFileParser,
   ParsingErrorReport,
@@ -16,27 +15,7 @@ import {
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
-
-/**
- * The schema for the config object passed to the MarkdocHugoIntegration class
- * from outside the module.
- */
-const CompilationConfigSchema = z.object({
-  directories: z
-    .object({
-      content: z.string(),
-      partials: z.string(),
-      options: z.string()
-    })
-    .strict(),
-  hugoConfig: HugoConfigSchema
-});
-
-/**
- * The type of the config object passed to the MarkdocHugoIntegration class
- * from outside the module.
- */
-type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
+import { CompilationConfig, CompilationConfigSchema } from './schemas/compilation';
 
 export class MarkdocHugoIntegration {
   directories: {
@@ -97,21 +76,26 @@ export class MarkdocHugoIntegration {
     return parsedFile;
   }
 
+  /*
+  compileLanguageFolder(lang: string): {
+    const contentDir = `${this.directories.content}/${lang}`;
+  }
+  */
+
   /**
    * Compile all Markdoc files detected in the content folder
    * to Markdown or HTML, depending on the configuration.
    *
    * If an array of filepaths is provided, only compile those files.
    */
-  compileMdocFiles(filePaths?: string[]) {
+  compileMdocFiles() {
     this.#resetErrors();
     this.compiledFiles = [];
 
     const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
       this.directories.options
     );
-    const markdocFilepaths =
-      filePaths || FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
+    const markdocFilepaths = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
 
     for (const markdocFilepath of markdocFilepaths) {
       const parsedFile = this.#parseMdocFile(markdocFilepath);
