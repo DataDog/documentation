@@ -78,7 +78,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - Prerequisites:
   - Agent version 7.55.0 or greater
   - Java tracer version 1.39.0 or greater
-  - .Net tracer version 3.3 or greater
+  - .NET tracer version 3.3 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
