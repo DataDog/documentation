@@ -43,7 +43,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 3. Initialize the library.
 4. Initialize the RUM Monitor, `DatadogURLSessionDelegate`, to start sending data.
 
-**Note:** The minimum supported version for the Datadog iOS SDK is iOS v11+. The Datadog iOS SDK also supports tvOS.
+**Note:** The minimum supported version for the Datadog iOS SDK is iOS v12+. The Datadog iOS SDK also supports tvOS.
 
 ### Declare the SDK as a dependency
 

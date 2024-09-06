@@ -296,7 +296,7 @@ You can use the following properties in `Datadog.Configuration` when creating th
 : Data encryption to use for on-disk data persistency by providing an object that complies with the `DataEncryption` protocol.
 
 `serverDateProvider`
-: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a desynchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
+: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
 
 `backgroundTasksEnabled`
 : This flag determines if the `UIApplication` methods, `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. It may extend the amount of time the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering any upload blockers, such as no internet connection or low battery. By default, this setting is sent to `false`.
