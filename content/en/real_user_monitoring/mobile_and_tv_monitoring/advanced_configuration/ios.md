@@ -354,7 +354,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Sets the data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `onSessionStart`
-: RUM session start callback.
+: Enter a method that gets called when RUM starts the session.
 
 `customEndpoint`
 : A custom server URL for sending RUM data.
