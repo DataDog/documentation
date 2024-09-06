@@ -366,7 +366,7 @@ In the task definition, replace the "workload" container with the following:
 ### Installation
 
 #### Software Composition Analysis (SCA)
-[Software Composition Analysis (SCA)][22] works transparently in Fargate. Simply follow the [installation steps for applications that run in traditional hosts][23].
+[Software Composition Analysis (SCA)][22] works in Fargate. Follow the [installation steps for applications that run in traditional hosts][23].
 
 #### Threat Detection and Protection
 
