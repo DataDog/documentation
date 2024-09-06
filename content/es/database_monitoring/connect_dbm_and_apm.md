@@ -155,7 +155,7 @@ func main() {
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Java" %}}
 
