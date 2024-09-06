@@ -7,15 +7,12 @@
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { HugoConfig } from './schemas/hugoConfig';
-import {
-  MdocFileParser,
-  ParsingErrorReport,
-  ParsedFile
-} from './helperModules/MdocFileParser';
+import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
 import { CompilationConfig, CompilationConfigSchema } from './schemas/compilation';
+import { ParsingErrorReport, ParsedFile } from './schemas/errors';
 
 export class MarkdocHugoIntegration {
   directories: {
