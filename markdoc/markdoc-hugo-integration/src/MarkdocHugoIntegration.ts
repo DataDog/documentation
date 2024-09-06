@@ -11,7 +11,11 @@ import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
-import { CompilationConfig, CompilationConfigSchema } from './schemas/compilation';
+import {
+  CompilationConfig,
+  CompilationConfigSchema,
+  CompilationResult
+} from './schemas/compilation';
 import { ParsingErrorReport, ParsedFile } from './schemas/errors';
 
 export class MarkdocHugoIntegration {
@@ -85,7 +89,7 @@ export class MarkdocHugoIntegration {
    *
    * If an array of filepaths is provided, only compile those files.
    */
-  compileMdocFiles() {
+  compileMdocFiles(): CompilationResult {
     this.#resetErrors();
     this.compiledFiles = [];
 

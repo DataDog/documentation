@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { HugoConfigSchema } from './hugoConfig';
+import { ParsingErrorReport } from './errors';
 
 /**
  * The schema for the config object passed to the MarkdocHugoIntegration class
@@ -22,27 +23,9 @@ export const CompilationConfigSchema = z.object({
  */
 export type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
 
-/*
-Example compilation result:
-{
-      hasErrors: this.#hasErrors(),
-      parsingErrorReportsByFilePath: this.parsingErrorReportsByFilePath,
-      validationErrorsByFilePath: this.validationErrorsByFilePath,
-      compiledFiles: this.compiledFiles
-    }
-*/
-export const CompilationResultSchema = z.object({
-  hasErrors: z.boolean(),
-  /*
-  parsingErrorReportsByFilePath: z.record(
-    z.array(
-      z.object({
-        message: z.string(),
-        line: z.number()
-      })
-    )
-  ),
-  */
-  // validationErrorsByFilePath: z.record(z.string()),
-  compiledFiles: z.array(z.string())
-});
+export type CompilationResult = {
+  hasErrors: boolean;
+  parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
+  validationErrorsByFilePath: Record<string, string>;
+  compiledFiles: string[];
+};
