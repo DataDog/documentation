@@ -301,7 +301,7 @@ Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
-   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .Net tracer
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .NET tracers
    - For Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
