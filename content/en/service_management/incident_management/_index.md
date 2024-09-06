@@ -51,9 +51,17 @@ To view your incidents, go to the [Incidents][1] page to see a feed of all ongoi
 
 You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+
+### Try it out
+{{< whatsnext desc="Learn more about Incident Management:">}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/intro-to-incident-management" >}}Learn about Datadog Incident Management by working through a hands-on examples{{< /nextlink >}}
+    {{< nextlink href="/getting_started/incident_management" >}}Work through an example workflow in the Getting Started with Incident Management guide.{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Describing the incident
 
-No matter where you create an incident, it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
+No matter where you [create an incident][100], it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
 
 When you create an incident, an incident modal comes up. This modal has several core elements:
 
@@ -72,7 +80,7 @@ An incident's status can be updated directly on the incident's overview page, or
 
 Update the impact section to specify customer impact, the start and end times of the impact, and whether the incident is still active. This section also requires a description of the scope of impact to be completed.
 
-In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels (if not using the Datadog Slack App, video conferencing, and attached postmortem (if one has been added).
+In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels, video conferencing, and attached postmortem (if one has been added).
 
 Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what's already investigated. As the author of the timeline notes, you can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
 
@@ -131,9 +139,6 @@ In addition to integrating with [Slack][7], Incident Management also integrates 
 - [Statuspage][19] to create and update Statuspage incidents.
 - [ServiceNow][20] to create a ServiceNow ticket for an incident.
 
-## Ready to try it out?
-
-Work through an example workflow in the [Getting Started with Incident Management][18] guide.
 
 ## Further Reading
 
@@ -160,3 +165,4 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [19]: /integrations/statuspage/
 [20]: /integrations/servicenow/
 [21]: /coscreen
+[100]: /service_management/incident_management/declare
