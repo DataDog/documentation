@@ -214,7 +214,7 @@ For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, in
 - Using OpenTelemetry API support within Datadog tracers
 - Sending OpenTelemetry traces to the Datadog Lambda Extension
 
-See the serverless documentation for [AWS Lambda and OpenTelemetry][100].
+See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].
 
 [100]: /serverless/aws_lambda/opentelemetry/
 {{% /tab %}}
