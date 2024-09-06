@@ -142,7 +142,7 @@ Add an additional layer of aggregation on results of an existing query in time a
 3. Standard deviation on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
 4. Higher resultion queries over historical timeframes
 
-_ * Every [metrics query][17] in Datadog is evaluated with two layers of aggregation: first Time then Space. Multilayer aggregation applies additional layers of aggregations._
+_* Every [metrics query][17] in Datadog is evaluated with two layers of aggregation: first Time then Space. Multilayer aggregation applies additional layers of aggregations._
 
 #### Multilayer Aggregation Semantics
 There are two types of multilayer aggregation - time and space.
