@@ -35,7 +35,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \* Full propagation mode on Aurora MySQL requires version 3.
 
-\*\* SQL Server only supports full mode with the Java and .Net tracer.
+\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
