@@ -103,6 +103,8 @@ function performTask(iterations, param1, param2) {
 
 ## Adding span events
 
+_Minimum SDK version: 5.17.0 & 4.41.0._
+
 You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
 - **Name** [_required_]: A string representing the event's name.

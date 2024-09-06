@@ -70,6 +70,8 @@ current_span.set_attribute("attribute_key1", 1)
 
 ## Adding span events
 
+_Minimum SDK version: 2.9.0._
+
 You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
 - **Name** [_required_]: A string representing the event's name.

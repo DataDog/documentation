@@ -117,6 +117,8 @@ catch(Exception e)
 
 ## Adding span events
 
+_Minimum SDK version: 2.53.0._
+
 You can add span events using the `AddEvent` API. This method requires an `ActivityEvent`constructed with the `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span. 
 
 It requires an `ActivityEvent`, which is constructed with the following parameters:
