@@ -36,6 +36,7 @@ If you're managing Dashboards through Terraform:
 4. Run `terraform apply`.
 
 For an example of a Terraform resources, see the guide on [How to use Terraform to restrict the editing of a dashboard][3].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
