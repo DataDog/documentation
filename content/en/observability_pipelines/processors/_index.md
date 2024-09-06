@@ -23,7 +23,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-#### Select a processor for more information
+#### Select a processor for more information:
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="observability_pipelines/processors/add_hostname" >}}Add hostname{{< /nextlink >}}
