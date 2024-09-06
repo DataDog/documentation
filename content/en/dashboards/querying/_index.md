@@ -133,32 +133,119 @@ Next to the aggregation method dropdown, choose what constitutes a line or group
 
 Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
 
-#### Nested Queries
+### Nested Queries
 
 Add an additional layer of aggregation on results of an existing query in time and /or spac using nested queries. We support: 
 
-1. Percentiles on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
-2. Standard deviation on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
-3. Multilayer aggregation (additional time/space aggregatinos) supported via the JSON tab or via API* (Dashboards only)
+1. Multilayer aggregation (additional time/space aggregatinos) supported via the JSON tab or via API* (Dashboards only)
+2. Percentiles on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
+3. Standard deviation on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
 4. Higher resultion queries over historical timeframes
 
 _ * Every [metrics query][17] in Datadog is evaluated with two layers of aggregation: first Time then Space. Multilayer aggregation applies additional layers of aggregations._
 
-Here are a few examples of nested queries you can craft:
+#### Multilayer Aggregation Semantics
+There are two types of multilayer aggregation - time and space.
 
-##### Percentiles
-This query 
+Only the following functions are supported when using multilayer aggregation:
 
-##### Standard Deviation
-This query
+- arithmetic operators 
+    - `+, -, *, /`
+- timeshift (`<METRIC_NAME>{*}, -<TIME_IN_SECOND>`)
+    - `hour_before(<METRIC_NAME>{*})`
+    - `day_before(<METRIC_NAME>{*})`
+    - `week_before(<METRIC_NAME>{*})`
+    - `month_before(<METRIC_NAME>{*})`
+- `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`
 
-##### Higher Resolution Queries
-This query
+Other functinos cannot be combined with multilayer aggregation at this time.
 
-Currently, nested queries are only available via JSON on dashboards and API.
+Note that when multilayer aggregation is enabled, the old matrix functions min(), max() described [here][18] will be converted to minimum(), maximum().
 
+#### Multilayer time aggregation
 
+Multilayer Time aggregation can be expressed with `rollup`. The first `rollup` applied to a query will always determine its base level precision and aggregation as documented [here][19]. The first rollup supports the following aggregators:
 
+- `avg`
+- `sum`
+- `min`
+- `max`
+- `count`
+
+Additional layers of time aggregation support the following aggregators: 
+
+- `avg`
+- `sum`
+- `min`
+- `max`
+- `count`
+- `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
+- `stddev`
+
+This query calculates the 95th percentile of average CPU utilization for each EC2 instance grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes.
+
+```text
+"rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
+```
+
+An example of how to express this query in the JSON (or API):
+
+# {{< img src="/dashboards/querying/multilayer-time-agg-example.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
+
+#### Multilayer space aggregation
+
+Multilayer space aggregation is expressed with the name of the aggregator. 
+
+Aggregators expressed by their aggregation name such as `max()`, `stddev()`, `sum()`, will only have one argument: 
+- The tag key(s) to group-by.
+
+```text
+"sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})"
+```
+
+Percentile space aggregations require two arguments:
+- The `percentile` aggregator in the form of `pxx`.
+- The tag key(s) to group-by.
+
+```text
+"percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})"
+```
+An example of how to express this query in the JSON (or API):
+
+# {{< img src="/dashboards/querying/multilayer-space-agg-example.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
+
+#### Percentiles
+
+Here's a query that calculates the 95th percentile of average CPU utilization for each EC2 instance grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes.
+
+```text
+"rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
+```
+An example of how to express this query in the JSON (or API):
+
+# {{< img src="/dashboards/querying/nested-queries-percentiles-example.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
+
+#### Standard Deviation
+
+Here's a query that calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals and rolled up over 1-hour periods.
+
+```text
+"rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',3600)"
+```
+An example of how to express this query in the JSON (or API):
+
+# {{< img src="/dashboards/querying/nested-queries-standard-dev-example.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
+
+#### Higher Resolution Queries
+
+Here's a query that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and 4-hour reducer interval.
+
+```text
+"rollup(sum:dd.metrics.query.batch.count{*}.rollup(avg,300),`stddev`,14400)"
+```
+An example of how to express this query in the JSON (or API):
+
+# {{< img src="/dashboards/querying/nested-queries-higher-res-example.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 
 
 ### Advanced graphing
@@ -280,3 +367,5 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [15]: /dashboards/widgets/timeseries/#event-overlay
 [16]: /dashboards/template_variables/
 [17]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
+[18]: /dashboards/querying/#minimum-or-maximum-between-two-queries
+[19]: /dashboards/functions/rollup/
