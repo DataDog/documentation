@@ -1865,6 +1865,21 @@ menu:
       parent: service_catalog
       identifier: service_catalog_scorecards
       weight: 5
+    - name: Scorecard Configuration
+      url: service_catalog/scorecards/scorecard_configuration
+      parent: service_catalog_scorecards
+      identifier: scorecard_configuration
+      weight: 501
+    - name: Custom Rules
+      url: service_catalog/scorecards/custom_rules
+      parent: service_catalog_scorecards
+      identifier: scorecard_custom_rules
+      weight: 502
+    - name: Using Scorecards
+      url: service_catalog/scorecards/using_scorecards
+      parent: service_catalog_scorecards
+      identifier: using_scorecards
+      weight: 503
     - name: Software Templates
       url: service_catalog/software_templates
       parent: service_catalog
