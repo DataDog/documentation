@@ -17352,6 +17352,9 @@ components:
       properties:
         display:
           $ref: '#/components/schemas/ToplistWidgetDisplay'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
         scaling:
           $ref: '#/components/schemas/ToplistWidgetScaling'
       type: object

@@ -19,7 +19,8 @@
             "type": "stacked",
             "legend": "inline"
           },
-          "scaling": "relative"
+          "scaling": "relative",
+          "palette": "dog_classic"
         },
         "type": "toplist",
         "requests": [
