@@ -4698,7 +4698,7 @@ menu:
       identifier: observability_pipelines_destinations
       weight: 7
     - name: Amazon OpenSearch
-      url: observability_pipelines/destinations/#amazon-opensearch
+      url: observability_pipelines/destinations/amazon_opensearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_amazon_opensearch
       weight: 701
@@ -4712,18 +4712,18 @@ menu:
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
       weight: 703
-    - name: Datadog Log Management
-      url: observability_pipelines/destinations/#datadog-log-management
+    - name: Datadog Logs
+      url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_log_management
+      identifier: observability_pipelines_datadog_logs
       weight: 704
     - name: Elasticsearch
-      url: observability_pipelines/destinations/#elasticsearch
+      url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 705
     - name: Google Chronicle
-      url: observability_pipelines/destinations/#google-chronicle
+      url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
       weight: 706
@@ -4733,22 +4733,22 @@ menu:
       parent: observability_pipelines_destinations
       weight: 707
     - name: OpenSearch
-      url: observability_pipelines/destinations/#opensearch
+      url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 708
     - name: Syslog
-      url: observability_pipelines/destinations/#rsyslog-or-syslog-ng
+      url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
       weight: 709
     - name: Splunk HEC
-      url: observability_pipelines/destinations/#splunk-http-event-collector-hec
+      url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
       weight: 710
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/destinations/#sumo-logic-hosted-collector
+      url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
       weight: 711
