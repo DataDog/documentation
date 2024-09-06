@@ -274,7 +274,7 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 ### Live-heap profiler engine (beta)
 
-_Since: v1.39.0. Requires JDK 11.0.23+, 17.0.11+, 21.0.3+ or 22+_
+_Since: v1.39.0. Requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+._
 
 <div class="alert alert-warning">This is a beta feature, it is recommended to enable this feature with caution.</div>
 
