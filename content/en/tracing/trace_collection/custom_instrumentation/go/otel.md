@@ -163,7 +163,7 @@ In the following example, `oteltrace` is an alias for the go.opentelemetry.io/ot
   
 ```go
 // Start a span.
-ctx, span := t.StartSpan(context.Background(), "span_name")
+ctx, span := tracer.StartSpan(context.Background(), "span_name")
 span.AddEvent("Event With No Attributes")
 span.AddEvent("Event With Some Attributes", oteltrace.WithAttributes(attribute.Int("int_val", 1), attribute.String("string_val", "two"), attribute.Int64Slice("int_array", []int64{3, 4}), attribute.StringSlice("string_array", []string{"5", "6"}), attribute.BoolSlice("bool_array", []bool{false, true})))
 span.Finish()
