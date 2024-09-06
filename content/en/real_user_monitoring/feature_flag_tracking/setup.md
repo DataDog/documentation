@@ -18,7 +18,7 @@ further_reading:
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
+Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance.
 
 By enriching your RUM data with feature flag data, you can be confident that your feature successfully launches without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
