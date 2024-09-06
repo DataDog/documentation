@@ -4643,52 +4643,52 @@ menu:
       identifier: observability_pipelines_processors
       weight: 6
     - name: Add hostname
-      url: observability_pipelines/processors/#add-hostname
+      url: observability_pipelines/processors/add_hostname
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 601
     - name: Edit fields
-      url: observability_pipelines/processors/#edit-fields
+      url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
       weight: 602
     - name: Enrichment Table
-      url: observability_pipelines/processors/#enrichment-table
+      url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
       weight: 603
     - name: Filter
-      url: observability_pipelines/processors/#filter
+      url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
       weight: 604
     - name: Grok Parser
-      url: observability_pipelines/processors/#grok-parser
+      url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
       weight: 605
     - name: Parse JSON
-      url: observability_pipelines/processors/#parse-json
+      url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
       weight: 606
     - name: Quota
-      url: observability_pipelines/processors/#quota
+      url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
       weight: 607
     - name: Reduce
-      url: observability_pipelines/processors/#reduce
+      url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
       weight: 608
     - name: Sample
-      url: observability_pipelines/processors/#sample
+      url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
       weight: 609
     - name: Sensitive Data Scanner
-      url: observability_pipelines/processors/#sensitive-data-scanner
+      url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
       weight: 610
