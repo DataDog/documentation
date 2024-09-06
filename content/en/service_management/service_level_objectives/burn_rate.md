@@ -3,6 +3,10 @@ title: Burn Rate Alerts
 description: "Use Monitors to alert off of the burn rate of an SLO"
 aliases:
 - /monitors/service_level_objectives/burn_rate/
+further_reading:
+- link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
+  tag: "Blog"
+  text: "Burn rate is a better error rate"
 ---
 {{< jqmath-vanilla >}}
 
@@ -160,6 +164,9 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/service_level_objectives/metric/
 [2]: /service_management/service_level_objectives/monitor/
