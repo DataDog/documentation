@@ -2343,11 +2343,16 @@ menu:
       parent: workflows
       identifier: workflows_connections
       weight: 7
+    - name: Test and Debug
+      url: service_management/workflows/test_and_debug/
+      parent: workflows
+      identifier: workflows_test_and_debug
+      weight: 8
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 8
+      weight: 9
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
