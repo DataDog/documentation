@@ -68,11 +68,11 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
-  site: {{< region-param key="dd_site" >}}
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
    {{< /code-block >}}
-   Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to US1.
+   Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 1. Switch the Datadog Agent Docker repository to use development builds:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -146,7 +146,7 @@ agents:
     doNotCheckTag: true
 
 datadog:
-  site: {{< region-param key="dd_site" >}}
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
 
@@ -204,7 +204,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: {{< region-param key="dd_site" >}}
+      site: datadoghq.com
 processors:
   infraattributes:
     cardinality: 2
@@ -261,10 +261,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: {{< region-param key="dd_site" >}}
+      site: datadoghq.com
 {{< /code-block >}}
 
-Set `exporters.datadog.api.site` to your [Datadog site][52]. Otherwise, it defaults to US1.
+Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
 ##### Prometheus receiver
 
