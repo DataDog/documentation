@@ -1858,7 +1858,7 @@ The RUM application ID.
 A [Datadog client token][15].
 
 `site`
-: Required<br/>
+: Optional<br/>
 **Type**: String<br/>
 **Default**: `datadoghq.com`<br/>
 [The Datadog site parameter of your organization][16].
