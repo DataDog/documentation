@@ -206,6 +206,18 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:
+
+- Instrumenting your Lambda functions with OpenTelemetry
+- Using OpenTelemetry API support within Datadog tracers
+- Sending OpenTelemetry traces to the Datadog Lambda Extension
+
+See the serverless documentation for [AWS Lambda and OpenTelemetry][100].
+
+[100]: /serverless/aws_lambda/opentelemetry/
+{{% /tab %}}
 {{< /tabs >}}
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][6].
