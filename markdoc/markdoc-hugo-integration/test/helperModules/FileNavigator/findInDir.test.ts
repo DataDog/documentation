@@ -11,8 +11,8 @@ describe('FileNavigator.findInDir', () => {
       filename.replace(VALID_CONTENT_DIR, '')
     );
 
-    expect(sanitizedFilenames).toContain('/primary_colors.mdoc');
-    expect(sanitizedFilenames).toContain('/traffic_light_colors.mdoc');
-    expect(sanitizedFilenames).toContain('/elements/table.mdoc');
+    expect(sanitizedFilenames).toContain('/en/primary_colors.mdoc');
+    expect(sanitizedFilenames).toContain('/en/traffic_light_colors.mdoc');
+    expect(sanitizedFilenames).toContain('/en/elements/table.mdoc');
   });
 });

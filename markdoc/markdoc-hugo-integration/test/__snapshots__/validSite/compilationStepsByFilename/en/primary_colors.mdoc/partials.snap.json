@@ -1,0 +1,1242 @@
+{
+  "yellow.mdoc": {
+    "$$mdtype": "Node",
+    "errors": [],
+    "lines": [],
+    "inline": false,
+    "attributes": {},
+    "children": [
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          0,
+          1
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "yellow > banana"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 0
+          },
+          "end": {
+            "line": 1
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "banana"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              2,
+              3
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  2,
+                  3
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      2,
+                      3
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Bananas are a type of fruit. They're often eaten raw or used in baking."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 2
+                      },
+                      "end": {
+                        "line": 3
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 2
+                  },
+                  "end": {
+                    "line": 3
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 2
+              },
+              "end": {
+                "line": 3
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "banana"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 1
+          },
+          "end": {
+            "line": 2
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          4,
+          5
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "yellow > sunflower"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 4
+          },
+          "end": {
+            "line": 5
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "sunflower"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              6,
+              7
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  6,
+                  7
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      6,
+                      7
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Sunflowers are a type of flower. They're known for their large, yellow petals."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 6
+                      },
+                      "end": {
+                        "line": 7
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 6
+                  },
+                  "end": {
+                    "line": 7
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 6
+              },
+              "end": {
+                "line": 7
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "sunflower"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 5
+          },
+          "end": {
+            "line": 6
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          8,
+          9
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "yellow > lemon"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 8
+          },
+          "end": {
+            "line": 9
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "lemon"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              10,
+              11
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  10,
+                  11
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      10,
+                      11
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Lemons are a type of citrus fruit. They're often used in drinks and cooking."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 10
+                      },
+                      "end": {
+                        "line": 11
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 10
+                  },
+                  "end": {
+                    "line": 11
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 10
+              },
+              "end": {
+                "line": 11
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "lemon"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 9
+          },
+          "end": {
+            "line": 10
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          12,
+          13
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "yellow > school_bus"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 12
+          },
+          "end": {
+            "line": 13
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "school_bus"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              14,
+              15
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  14,
+                  15
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      14,
+                      15
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "School buses are a type of vehicle. They're often used to transport students to and from school."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 14
+                      },
+                      "end": {
+                        "line": 15
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 14
+                  },
+                  "end": {
+                    "line": 15
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 14
+              },
+              "end": {
+                "line": 15
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "school_bus"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 13
+          },
+          "end": {
+            "line": 14
+          }
+        }
+      }
+    ],
+    "type": "document",
+    "annotations": [],
+    "slots": {}
+  },
+  "red.mdoc": {
+    "$$mdtype": "Node",
+    "errors": [],
+    "lines": [],
+    "inline": false,
+    "attributes": {},
+    "children": [
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          0,
+          1
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "ruby"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 0
+          },
+          "end": {
+            "line": 1
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "ruby"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              2,
+              3
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  2,
+                  3
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      2,
+                      3
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Rubies are a type of gemstone. They're known for their deep red color."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 2
+                      },
+                      "end": {
+                        "line": 3
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 2
+                  },
+                  "end": {
+                    "line": 3
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 2
+              },
+              "end": {
+                "line": 3
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "ruby"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 1
+          },
+          "end": {
+            "line": 2
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          4,
+          5
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "apple"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 4
+          },
+          "end": {
+            "line": 5
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "apple"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              6,
+              7
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  6,
+                  7
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      6,
+                      7
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Apples are a type of fruit. They're often eaten raw or used in baking."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 6
+                      },
+                      "end": {
+                        "line": 7
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 6
+                  },
+                  "end": {
+                    "line": 7
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 6
+              },
+              "end": {
+                "line": 7
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "apple"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 5
+          },
+          "end": {
+            "line": 6
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          8,
+          9
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "firetruck"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 8
+          },
+          "end": {
+            "line": 9
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "firetruck"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              10,
+              11
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  10,
+                  11
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      10,
+                      11
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Firetrucks are a type of vehicle. They're often used to transport firefighters and equipment to emergency situations."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 10
+                      },
+                      "end": {
+                        "line": 11
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 10
+                  },
+                  "end": {
+                    "line": 11
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 10
+              },
+              "end": {
+                "line": 11
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "firetruck"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 9
+          },
+          "end": {
+            "line": 10
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          12,
+          13
+        ],
+        "inline": false,
+        "attributes": {
+          "content": "stop_sign"
+        },
+        "children": [],
+        "type": "comment",
+        "annotations": [],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 12
+          },
+          "end": {
+            "line": 13
+          }
+        }
+      },
+      {
+        "$$mdtype": "Node",
+        "errors": [],
+        "lines": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "inline": false,
+        "attributes": {
+          "primary": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "item"
+                ]
+              },
+              "1": "stop_sign"
+            }
+          }
+        },
+        "children": [
+          {
+            "$$mdtype": "Node",
+            "errors": [],
+            "lines": [
+              14,
+              15
+            ],
+            "inline": false,
+            "attributes": {},
+            "children": [
+              {
+                "$$mdtype": "Node",
+                "errors": [],
+                "lines": [
+                  14,
+                  15
+                ],
+                "inline": false,
+                "attributes": {},
+                "children": [
+                  {
+                    "$$mdtype": "Node",
+                    "errors": [],
+                    "lines": [
+                      14,
+                      15
+                    ],
+                    "inline": true,
+                    "attributes": {
+                      "content": "Stop signs are a type of traffic sign. They're used to indicate that drivers should stop their vehicles."
+                    },
+                    "children": [],
+                    "type": "text",
+                    "annotations": [],
+                    "slots": {},
+                    "location": {
+                      "start": {
+                        "line": 14
+                      },
+                      "end": {
+                        "line": 15
+                      }
+                    }
+                  }
+                ],
+                "type": "inline",
+                "annotations": [],
+                "slots": {},
+                "location": {
+                  "start": {
+                    "line": 14
+                  },
+                  "end": {
+                    "line": 15
+                  }
+                }
+              }
+            ],
+            "type": "paragraph",
+            "annotations": [],
+            "slots": {},
+            "location": {
+              "start": {
+                "line": 14
+              },
+              "end": {
+                "line": 15
+              }
+            }
+          }
+        ],
+        "type": "tag",
+        "tag": "if",
+        "annotations": [
+          {
+            "type": "attribute",
+            "name": "primary",
+            "value": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "stop_sign"
+              }
+            }
+          }
+        ],
+        "slots": {},
+        "location": {
+          "start": {
+            "line": 13
+          },
+          "end": {
+            "line": 14
+          }
+        }
+      }
+    ],
+    "type": "document",
+    "annotations": [],
+    "slots": {}
+  }
+}

@@ -26,7 +26,7 @@ const languages = Object.keys(languagesConfig);
 console.time('Markdoc compilation execution time');
 
 const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc-assets.html');
-const CONTENT_DIR = path.resolve(__dirname, '../content/en');
+const CONTENT_DIR = path.resolve(__dirname, '../content');
 const PARTIALS_DIR = path.resolve(__dirname, '../mdoc_partials');
 const PREFS_CONFIG_DIR = path.resolve(__dirname, '../config/_default/preferences/en/option_sets');
 

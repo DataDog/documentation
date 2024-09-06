@@ -10,7 +10,7 @@ import { buildRenderableTree } from '../../src/helperModules/treeManagement';
 import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
 
 describe('treeManagement', () => {
-  const testFilePath = VALID_CONTENT_DIR + '/primary_colors.mdoc';
+  const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
   const prefOptionsConfig =
     YamlConfigParser.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 

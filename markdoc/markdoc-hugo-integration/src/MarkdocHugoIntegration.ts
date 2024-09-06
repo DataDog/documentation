@@ -82,20 +82,9 @@ export class MarkdocHugoIntegration {
     return parsedFile;
   }
 
-  /*
-  compileLanguageFolder(lang: string): CompilationResult {
-    const contentDir = `${this.directories.content}/${lang}`;
-    const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
-      this.directories.options + `/${lang}`
-    );
-  }
-  */
-
   /**
    * Compile all Markdoc files detected in the content folder
-   * to Markdown or HTML, depending on the configuration.
-   *
-   * If an array of filepaths is provided, only compile those files.
+   * to Markdown.
    */
   compileMdocFiles(): CompilationResult {
     this.#resetErrors();
@@ -173,6 +162,14 @@ export class MarkdocHugoIntegration {
     prefOptionsConfig: PrefOptionsConfig;
   }): string | null {
     let prefOptionsConfigForPage: PrefOptionsConfig;
+    const lang = p.markdocFilepath.replace(this.directories.content, '').split('/')[1];
+
+    if (!this.hugoConfig.languages.includes(lang)) {
+      this.validationErrorsByFilePath[
+        p.markdocFilepath
+      ] = `Language "${lang}" is not supported.`;
+      return null;
+    }
 
     // verify that all possible placeholder values
     // yield an existing options set
