@@ -40,6 +40,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
   tag: "Blog"
   text: "Monitor AWS WAF activity with Datadog"
+- link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
+  tag: "Blog"
+  text: "How Datadog Security Inbox prioritizes security risks"
 ---
 
 {{< site-region region="gov" >}}

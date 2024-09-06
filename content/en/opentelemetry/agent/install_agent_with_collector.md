@@ -7,24 +7,15 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
-{{< /callout >}} 
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
+{{< /callout >}}
 
 ## Overview
 
-The Datadog Agent with embedded OpenTelemetry Collector is an open source Collector distribution that includes:
-
-- Built-in Datadog pipelines and extensions
-- Support for traces, metrics, and logs
-- A curated set of components for optimal performance with Datadog
-
-{{< img src="/opentelemetry/embedded_collector/architecture.png" alt="Architecture overview for Collector embedded in the Datadog Agent." style="width:100%;" >}}
-
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
 
-<div class="alert alert-info">If your application is already instrumented with the OpenTelemetry SDK or if you want to build a Datadog Agent image with additional OpenTelemetry components, read <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components with Datadog Agent</a>.<br>For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
-
+<div class="alert alert-info">If you need OpenTelemetry components beyond what's provided in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to bring-your-Otel-Components to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
 
 ## Requirements
 
@@ -42,20 +33,6 @@ Install and set up the following on your machine:
 - Helm (v3+)
 - [Docker][50]
 - [kubectl][5]
-
-**Configuration**
-
-Configure your local Kubernetes context to point at the cluster.
-
-1. To view available contexts, run:
-   ```shell
-   kubectl config get-contexts
-   ```
-1. Configure `kubectl` to interact with your cluster:
-   ```shell
-   kubectl config use-context <your-cluster-context>
-   ```
-   Replace <your-cluster-context> with the name of your Kubernetes cluster context.
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
@@ -91,9 +68,11 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
    {{< /code-block >}}
+   Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 1. Switch the Datadog Agent Docker repository to use development builds:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -119,18 +98,18 @@ datadog:
         name: otel-http
    {{< /code-block >}}
    It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
-   
+
    If you don't want to expose the port, you can use the Agent service instead:
    1. Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
    1. In your application's deployment file (`deployment.yaml`), configure the OTLP exporter to use the Agent service:
-      ```sh   
+      ```sh
       env:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: 'http://<SERVICE_NAME>.<SERVICE_NAMESPACE>.svc.cluster.local'
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
           value: 'grpc'
       ```
-   
+
 1. (Optional) Enable additional Datadog features:
    <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
@@ -167,6 +146,7 @@ agents:
     doNotCheckTag: true
 
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
 
@@ -224,6 +204,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+      site: datadoghq.com
 processors:
   infraattributes:
     cardinality: 2
@@ -280,7 +261,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+      site: datadoghq.com
 {{< /code-block >}}
+
+Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
 ##### Prometheus receiver
 
@@ -301,11 +285,24 @@ For more information, see the [Collector Health Metrics][8] documentation.
 
 ### Deploy the Agent with the OpenTelemetry Collector
 
-To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use the following Helm command:
+To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use one of the following Helm commands:
 
-```shell
-helm upgrade -i <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
-```
+- For default OpenTelemetry Collector configuration:
+   ```shell
+   helm upgrade -i <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
+   ```
+
+- For custom OpenTelemetry Collector configuration:
+   ```shell
+   helm upgrade -i <RELEASE_NAME> datadog/datadog \
+     -f datadog-values.yaml \
+     --set-file datadog.otelCollector.config=otel-config.yaml
+   ```
+   This command allows you to specify your own `otel-config.yaml` file.
+
+Replace `<RELEASE_NAME>` with the Helm release name you are using.
+
+<div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
 This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the Agent deployment pattern. The Gateway deployment pattern is not supported.
 
@@ -461,7 +458,7 @@ View runtime and infrastructure metrics to visualize, monitor, and measure the p
 
 View logs to monitor and troubleshoot application and system operations.
 
-{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Logs Explorer." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Log Explorer." style="width:100%;" >}}
 
 ### Traces
 
@@ -485,7 +482,7 @@ View metrics from the embedded Collector to monitor the Collector health.
 
 By default, the Datadog Agent with embedded Collector ships with the following Collector components. You can also see the list in [YAML format][11].
 
-### Receivers
+{{% collapse-content title="Receivers" level="p" %}}
 
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
@@ -497,7 +494,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [zipkinreceiver][23]
 - [nopreceiver][24]
 
-### Processors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Processors" level="p" %}}
 
 - [attributesprocessor][25]
 - [batchprocessor][26]
@@ -513,7 +512,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
-### Exporters
+{{% /collapse-content %}}
+
+{{% collapse-content title="Exporters" level="p" %}}
 
 - [datadogexporter][38]
 - [debugexporter][39]
@@ -522,17 +523,23 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 - [sapmexporter][42]
 - [nopexporter][43]
 
-### Connectors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
 - [spanmetricsconnector][45]
 
-### Extensions
+{{% /collapse-content %}}
+
+{{% collapse-content title="Extensions" level="p" %}}
 
 - [healthcheckextension][46]
 - [observer][47]
 - [pprofextension][48]
 - [zpagesextension][49]
+
+{{% /collapse-content %}}
 
 ## Further reading
 
@@ -589,3 +596,4 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [49]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/extension/zpagesextension/README.md
 [50]: https://docs.docker.com/engine/install/
 [51]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml#L7
+[52]: /getting_started/site/

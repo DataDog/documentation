@@ -39,7 +39,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 See the [Developer Tools section][1] for more implementation details. 
 
-**Note:** Because distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+**Note:** Because distributions metric data is stored differently from other types, any metric name used for a `distribution` should not be used for any other metric types.
 
 ## Enabling advanced query functionality
 

@@ -73,7 +73,7 @@ To get the individual MongoDB instance hostname and port, you can use the `dig` 
 
 ##### Replica set members
 
-For a sharded cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
+For a non-sharded (replica set) cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
 {{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net

@@ -42,6 +42,8 @@ Configuration files for Agent checks and integrations are stored in the `conf.d`
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows                              | `%ProgramData%\Datadog\conf.d` |
 
+**Note**: Files in this directory with zero length are ignored by the agent. This allows for provisioning systems that do not support skipping empty template outputs.
+
 ### Check configuration files
 
 An example for each Agent check configuration file is found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` to enable the associated check. **Note**: The Agent loads valid YAML files contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This allows complex configurations to be broken down into multiple files. For example, a configuration for the `http_check` might look like this:

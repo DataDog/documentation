@@ -78,6 +78,8 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
 
 ### Instalación del Agent
 
@@ -95,17 +97,17 @@ Crea el archivo de configuración de Oracle Agent `/etc/datadog-agent/conf.d/ora
 init_config:
 instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # El nombre del servicio de Oracle CDB
+    service_name: "<SERVICE_NAME>" # Nombre del servicio Oracle CDB
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # El nombre del servicio de Oracle CDB
+    service_name: "<SERVICE_NAME>" # Nombre del servicio Oracle CDB
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'

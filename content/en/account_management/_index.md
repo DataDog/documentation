@@ -32,6 +32,9 @@ You can manage your timezone, visual accessibility preference, and email subscri
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
+{{< site-region region="us3,us5,gov,ap1" >}}
+<div class="alert alert-warning">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 * Daily Digest
 * Weekly Digest

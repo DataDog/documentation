@@ -22,7 +22,7 @@ When using any Datadog cloud integration (AWS, Azure, Google Cloud, etc.), metri
 | Alibaba    | Every 10 minutes |
 | AWS        | Every 10 minutes |
 | Azure      | Every 2 minutes  |
-| Cloudflare | Every 15 minutes |
+| Cloudflare | Every 5 minutes |
 | GCP        | Every 5 minutes  |
 
 ## Cloud providers
