@@ -20,6 +20,10 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
+{{< callout url="#" btn_hidden="true" header="false" >}}
+Service Scorecards are in beta.
+{{< /callout >}}
+
 Datadog provides the following out-of-the-box scorecards based on a default set of rules: Production Readiness, Observability Best Practices, and Ownership & Documentation. 
 
 ## Set up default scorecards
