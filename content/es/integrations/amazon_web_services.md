@@ -101,10 +101,10 @@ Existen dos formas de enviar los logs de los servicios de AWS a Datadog:
 
 Existen dos formas de enviar las métricas de AWS a Datadog:
 
-- [Sondeo de métricas][13]: El sondeo de la API viene predefinido con la integración AWS. Un rastreo métrica-por-métrica de la API CloudWatch extrae datos y los envía a Datadog. En promedio, se extraen nuevas métricas cada diez minutos.
-- [Metric Streams con Amazon Data Firehose][14]: Puedes utilizar Amazon CloudWatch Metric Streams y Amazon Data Firehose para ver tus métricas. **Nota**: Este método tiene una latencia de dos a tres minutos y requiere una configuración aparte.
+- [Sondeo de métricas][13]: El sondeo de la API se incluye de forma predefinida con la integración AWS. Un rastreo métrica-por-métrica de la API CloudWatch extrae datos y los envía a Datadog. En promedio, se extraen nuevas métricas cada diez minutos.
+- [Metric Streams con Amazon Data Firehose][14]: Puedes utilizar Amazon CloudWatch Metric Streams y Amazon Data Firehose para ver tus métricas. **Nota**: Este método tiene una latencia de dos a tres minutos y requiere una configuración individual.
 
-En la página [Integraciones][3] encontrarás una lista completa de las sub-integraciones disponibles. Muchas de estas integraciones se instalan por defecto cuando Datadog reconoce los datos procedentes de tu cuenta AWS. Para conocer las opciones de exclusión de recursos específicos y controlar los costes, consulta la página [Facturación de integraciones AWS][15].
+En la página [Integraciones][3] encontrarás una lista completa de las sub-integraciones disponibles. Muchas de estas integraciones se instalan por defecto cuando Datadog reconoce los datos procedentes de tu cuenta AWS. Para conocer las opciones de exclusión de recursos específicos y controlar tus costes, consulta la página [Facturación de integraciones AWS][15].
 
 ## Recopilación de recursos
 
