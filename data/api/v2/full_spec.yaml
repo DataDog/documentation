@@ -8132,6 +8132,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8156,6 +8157,7 @@ components:
         performanceData:
           $ref: '#/components/schemas/EntityV3DatadogPerformance'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3DatastoreKind:
       description: The definition of Entity V3 Datastore Kind object.
       enum:
@@ -8335,6 +8337,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8359,6 +8362,7 @@ components:
         performanceData:
           $ref: '#/components/schemas/EntityV3DatadogPerformance'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3QueueKind:
       description: The definition of Entity V3 Queue Kind object.
       enum:
@@ -8396,6 +8400,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8471,6 +8476,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
