@@ -28,6 +28,16 @@ Select and set up your source when you build a pipeline in the UI. This is step 
 
 Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
 
+{{< whatsnext desc="Select a source for more information:" >}}
+    {{< nextlink href="observability_pipelines/sources/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd and Fluent Bit{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/http_client/" >}}HTTP/S Client{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy and Universal Forwarders (TCP){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog or syslog-ng{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Standard metadata fields
 
 All sources add the following standard metadata fields to ingested events:
