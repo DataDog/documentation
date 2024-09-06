@@ -246,7 +246,7 @@ client.query("SELECT 1;")
 [2]: /es/tracing/trace_collection/dd_libraries/ruby/#mysql2
 [3]: /es/tracing/trace_collection/dd_libraries/ruby/#postgres
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Python" %}}
 
@@ -287,7 +287,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 [1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
 [2]: https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
@@ -307,7 +307,7 @@ Habilita la función de propagación de la monitorización de base de datos al e
 [1]: /es/tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /es/tracing/trace_collection/dd_libraries/dotnet-core
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "PHP" %}}
 
@@ -324,7 +324,7 @@ Habilita la función de propagación de la monitorización de base de datos al e
 
 [1]: https://docs.datadoghq.com/es/tracing/trace_collection/dd_libraries/php?tab=containers
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Node.js" %}}
 
@@ -383,9 +383,9 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 [1]: https://github.com/DataDog/dd-trace-js
 
-{{% /pestaña %}}
+{{% /tab %}}
 
-{{< /pestañas >}}
+{{< /tabs >}}
 
 ## Explorar la conexión de APM en DBM
 
