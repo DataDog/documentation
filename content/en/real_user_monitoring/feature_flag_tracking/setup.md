@@ -135,6 +135,8 @@ You can start collecting feature flag data with [custom feature flag management 
 
 ### Amplitude integration
 
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -219,6 +221,8 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 {{< /tabs >}}
 
 ### ConfigCat integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -334,6 +338,8 @@ For more information about initializing the ConfigCat React SDK, see ConfigCat's
 
 ### Custom feature flag management
 
+Before you initialize a custom feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -383,6 +389,8 @@ Each time a feature flag is evaluated, add the following function to send the fe
 
 ### DevCycle integration
 
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -418,31 +426,37 @@ dvcClient.subscribe(
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Eppo integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -541,6 +555,8 @@ await eppoInit({
 
 ### Flagsmith Integration
 
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -586,6 +602,8 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{< /tabs >}}
 
 ### LaunchDarkly integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -639,6 +657,8 @@ LaunchDarkly does not currently support this integration. Create a ticket with L
 
 
 ### Split Integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -771,6 +791,8 @@ const client = factory.client();
 {{< /tabs >}}
 
 ### Statsig Integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
