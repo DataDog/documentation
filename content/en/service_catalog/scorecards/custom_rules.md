@@ -20,6 +20,10 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
+{{< callout url="#" btn_hidden="true" header="false" >}}
+Service Scorecards are in beta.
+{{< /callout >}}
+
 Datadog provides [default rules][1] so you can get started quickly with Service Scorecards, but you can also create custom rules.
 
 ## Create custom rules
