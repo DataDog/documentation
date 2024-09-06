@@ -19,6 +19,14 @@ This topic explains how to create custom Datadog Agent and detection rules for [
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
+## RBAC for custom rule management
+
+To prevent users with the [Datadog Standard out-of-the-box role][11] from creating/updating, disabling, and deploying a changed rule via remote configuration, do the following:
+
+1. A user within the Datadog Admin role must create a new role containing the `security_monitoring_cws_agent_rules_write` permission. 
+2. Add only those users that manage agent rules to this role.
+
+
 ## Custom detection rules summary
 
 Custom detection rules depend on Agent rules. They are composed of existing, deployed Agent rules and additional expression parameters. 
@@ -196,3 +204,4 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 [8]: /security/threats/
 [9]: /security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
+[11]: /account_management/rbac/permissions/
