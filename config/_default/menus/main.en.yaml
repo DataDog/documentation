@@ -581,7 +581,7 @@ menu:
       parent: opentelemetry_top_level
       weight: 2
     - name: OTLP Metrics Types
-      url: /metrics/open_telemetry/otlp_metric_types/
+      url: opentelemetry/otlp_metric_types/
       parent: otel_terms
       weight: 201
     - name: Collector and Exporter
@@ -1388,11 +1388,6 @@ menu:
       parent: ddsql_editor_reference
       identifier: ddsql_editor_reference_aggregation_functions
       weight: 205
-    # - name: Window Functions
-    #   url: dashboards/ddsql_editor/reference/window_functions
-    #   parent: dashboards_ddsql_editor_reference
-    #   identifier: dashboards_ddsql_editor_reference_window_functions
-    #   weight: 206
     - name: Querying Tags
       url: ddsql_editor/reference/tags
       parent: ddsql_editor_reference
@@ -1403,12 +1398,23 @@ menu:
       parent: ddsql_editor
       identifier: ddsql_editor_guide
       weight: 10
+    - name: Sheets
+      url: sheets/
+      pre: inventories
+      identifier: sheets
+      parent: platform_heading
+      weight: 40000
+    - name: Functions and Operators
+      url: sheets/functions_operators/
+      parent: sheets
+      identifier: sheets_functions_and_operators
+      weight: 1
     - name: Monitors and Alerting
       url: monitors/
       pre: monitor
       identifier: alerting
       parent: platform_heading
-      weight: 40000
+      weight: 50000
     - name: Configure Monitors
       url: monitors/configuration/
       parent: alerting
@@ -1609,7 +1615,7 @@ menu:
       identifier: infrastructure
       pre: host-map
       parent: platform_heading
-      weight: 50000
+      weight: 60000
     - name: Host and Container Maps
       url: infrastructure/hostmap/
       parent: infrastructure
@@ -1670,7 +1676,7 @@ menu:
       identifier: metrics_top_level
       pre: metric
       parent: platform_heading
-      weight: 60000
+      weight: 70000
     - name: Custom Metrics
       url: metrics/custom_metrics/
       parent: metrics_top_level
@@ -1707,7 +1713,7 @@ menu:
       identifier: dev_tools_metrics_api
       weight: 106
     - name: Send OpenTelemetry Metrics to Datadog
-      url: opentelemetry/otel_metrics/
+      url: metrics/open_telemetry/otlp_metrics/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
@@ -1766,7 +1772,7 @@ menu:
       identifier: watchdog_top_level
       pre: watchdog
       parent: platform_heading
-      weight: 70000
+      weight: 80000
     - name: Alerts
       url: watchdog/alerts
       identifier: watchdog_alerts
@@ -1797,7 +1803,7 @@ menu:
       pre: bits-ai
       identifier: bits_ai
       parent: platform_heading
-      weight: 80000
+      weight: 90000
     - name: Getting Started
       url: bits_ai/getting_started
       identifier: bits_ai_getting_started
@@ -1818,7 +1824,7 @@ menu:
       pre: service-catalog
       parent: platform_heading
       identifier: service_catalog
-      weight: 90000
+      weight: 100000
     - name: Navigate the Service Catalog
       url: service_catalog/navigating
       parent: service_catalog
@@ -1884,7 +1890,7 @@ menu:
       pre: api-catalog
       parent: platform_heading
       identifier: api_catalog
-      weight: 100000
+      weight: 110000
     - name: Exploring APIs
       url: /api_catalog/explore_apis/
       identifier: api_catalog_explore
@@ -1930,7 +1936,7 @@ menu:
       pre: error-tracking
       parent: platform_heading
       identifier: error_tracking
-      weight: 110000
+      weight: 120000
     - name: Explorer
       url: error_tracking/explorer
       parent: error_tracking
@@ -2033,26 +2039,31 @@ menu:
       parent: service_management_heading
       identifier: incidents
       weight: 20000
+    - name: Declare an Incident
+      url: service_management/incident_management/declare
+      parent: incidents
+      identifier: incident_declare
+      weight: 1
     - name: Incident Details
       url: service_management/incident_management/incident_details
       parent: incidents
       identifier: incident_details
-      weight: 1
+      weight: 2
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 2
+      weight: 3
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 3
+      weight: 4
     - name: Datadog Clipboard
       url: service_management/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
-      weight: 4
+      weight: 5
     - name: Guides
       url: service_management/incident_management/guides
       parent: incidents
