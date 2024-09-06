@@ -50,7 +50,7 @@ Conecta Amazon Web Services (AWS) para:
 
 Para empezar a utilizar la integración de AWS cuanto antes, consulta la [guía sobre cómo empezar con AWS][1].
 
-La integración de Amazon Web Services en Datadog recopila logs, eventos y [todas las métricas de CloudWatch][2] para más de [90 servicios AWS][3].
+La integración Amazon Web Services de Datadog recopila logs, eventos y [todas las métricas de CloudWatch][2] para más de [90 servicios AWS][3].
 
 ## Configuración
 
@@ -62,13 +62,13 @@ Usa uno de los siguientes métodos para integrar tus cuentas de AWS en Datadog c
       Para configurar la integración de AWS con CloudFormation, consulta la [guía sobre cómo empezar con AWS][1].
 
   * **Terraform**  
-    Para configurar la integración de AWS con Terraform, consulta la [integración de AWS con Terraform][4].
+    Para configurar la integración AWS con Terraform, consulta la [integración AWS con Terraform][4].
 
-  * **Torre de control.  
+  * **Control Tower**  
     Para configurar la integración AWS al proporcionar una nueva cuenta AWS con [Control Tower Account Factory][5], consulta la [guía de configuración de Control Tower][6].
 
   * **Configuración de varias cuentas para AWS Organizations**
-    Para configurar la integración de AWS para varias cuentas dentro de una organización AWS, consulta la [guía de configuración de AWS Organizations][7].
+    Para configurar la integración AWS para varias cuentas dentro de una organización AWS, consulta la [guía de configuración de AWS Organizations][7].
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -95,7 +95,7 @@ Si estás utilizando el sitio US1-FED de Datadog, debes configurar la integraci�
 Existen dos formas de enviar los logs de los servicios de AWS a Datadog:
 
 - [Destino Amazon Data Firehose][11]: Utiliza el destino Datadog en tu flujo de entrega de Amazon Data Firehose para reenviar logs a Datadog. Recomendamos utilizar esta estrategia para el envío de grandes volúmenes de logs desde CloudWatch.
-- [Función Lambda del Forwarder][12]: Despliega la función Lambda del Datadog Forwarder, que se suscribe a buckets de S3 o a tus grupos de logs de CloudWatch y reenvía logs a Datadog. Datadog también te recomienda utilizar esta estrategia para enviar logs desde S3 u otros recursos que no puedan transmitir datos directamente a Amazon Data Firehose.
+- [Función Lambda del Forwarder][12]: Despliega la función Lambda del Datadog Forwarder, que está suscripta a buckets de S3 o a tus grupos de logs de CloudWatch y reenvía logs a Datadog. Datadog también te recomienda utilizar esta estrategia para enviar logs desde S3 u otros recursos que no puedan transmitir datos directamente a Amazon Data Firehose.
 
 ## Recopilación de métricas
 
