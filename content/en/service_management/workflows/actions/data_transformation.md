@@ -51,10 +51,10 @@ You can use Bits AI to help you write the JavaScript for a **Function** step. To
 
 ## Test expressions and functions
 
-See the test and debug page to learn how to [test expressions and functions][3].
+See the test and debug page to learn how to [test a workflow step][3].
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
 [1]: https://lodash.com/
 [2]: https://datadoghq.slack.com/
-[3]: /service_management/workflows/test_and_debug/#test-expressions-and-functions
+[3]: /service_management/workflows/test_and_debug/#test-a-step
