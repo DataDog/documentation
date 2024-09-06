@@ -36595,6 +36595,9 @@ paths:
         - name: id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/rum/applications/{id}:
     delete:
       description: Delete an existing RUM application in your organization.
@@ -36690,6 +36693,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
+      patch: false
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
