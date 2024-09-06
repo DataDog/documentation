@@ -9,7 +9,7 @@ further_reading:
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], [Software Composition Analysis (SCA)] and [Cloud SIEM][5] on AWS Fargate.
 
 {{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
@@ -31,8 +31,8 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
-        <td>Application Security Management</td>
-        <td>Application Security Management</td>
+        <td>Software Composition Analysis (SCA) and Code Security</td>
+        <td>Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
@@ -365,6 +365,10 @@ In the task definition, replace the "workload" container with the following:
 
 ### Installation
 
+#### Software Composition Analysis (SCA)
+
+The installation of SCA for Fargate applications follows the same steps as SCA for traditional hosts: there are no differences in the requirements and steps. [Simply follow the standard SCA set up instructions][22]. 
+
 #### Threat Detection and Protection
 
 For step-by-step instructions, see the following articles:
@@ -427,3 +431,4 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [19]: /security/application_security/code_security/setup/dotnet/
 [20]: /security/application_security/code_security/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
+[22]: /security/application_security/software_composition_analysis/setup/
