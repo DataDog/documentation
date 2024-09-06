@@ -29,8 +29,8 @@ from actions.format_link import format_link_file
 from actions.comment_conversion import replace_comments
 
 try:
-    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
-    CLASSIFIER_TAGS = get_all_classifier_names()
+    from assetlib.classifiers import get_customer_facing_classifiers, get_non_deprecated_classifiers
+    CLASSIFIER_TAGS = get_customer_facing_classifiers()
 except ImportError:
     CLASSIFIER_TAGS = []
     if getenv("CI_COMMIT_REF_NAME"):
