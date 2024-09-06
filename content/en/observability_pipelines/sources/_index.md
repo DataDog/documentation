@@ -2,13 +2,13 @@
 title: Sources
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
-- link: "observability_pipelines/processors/"
+- link: "/observability_pipelines/processors/"
   tag: "Documentation"
   text: "Processors for your pipelines"
-- link: "observability_pipelines/destinations/"
+- link: "/observability_pipelines/destinations/"
   tag: "Documentation"
   text: "Observability Pipelines destinations"
 ---
