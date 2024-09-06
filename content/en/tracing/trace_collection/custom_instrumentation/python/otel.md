@@ -68,7 +68,7 @@ current_span = trace.get_current_span()
 current_span.set_attribute("attribute_key1", 1)
 ```
 
-## Adding Span Events
+## Adding span events
 
 You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
@@ -90,9 +90,9 @@ span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two",
 
 Read the [OpenTelemetry][2] specification for more information.
 
-### Recording Exceptions
+### Recording exceptions
 
-To record exceptions, use the `record_exception` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+To record exceptions, use the `record_exception` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
 
 The following examples demonstrate different ways to record exceptions:
 

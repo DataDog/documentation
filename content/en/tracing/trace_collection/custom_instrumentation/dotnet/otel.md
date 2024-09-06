@@ -115,9 +115,11 @@ catch(Exception e)
 }
 ```
 
-## Adding Span Events
+## Adding span events
 
-You can add span events using the `AddEvent` API. This method requires an `ActivityEvent` which is constructed using a `name` parameter and optionally accepts the `timestamp` and `attributes` parameters together. The method creates a new span event with the specified properties and associates it with the corresponding span.
+You can add span events using the `AddEvent` API. This method requires an `ActivityEvent`constructed with the `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span. 
+
+It requires an `ActivityEvent`, which is constructed with the following parameters:
 
 - **Name** [_required_]: A string representing the event's name.
 - **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects a `DateTimeOffset` object.

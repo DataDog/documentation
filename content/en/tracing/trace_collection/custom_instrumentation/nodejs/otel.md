@@ -101,7 +101,7 @@ function performTask(iterations, param1, param2) {
 }
 {{< /highlight >}}
 
-## Adding Span Events
+## Adding span events
 
 You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
@@ -123,9 +123,9 @@ span.addEvent('Event With Some Attributes', {"int_val": 1, "string_val": "two", 
 
 Read the [OpenTelemetry][6] specification for more information.
 
-### Recording Exceptions
+### Recording exceptions
 
-To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+To record exceptions, use the `recordException` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
 
 The following examples demonstrate different ways to record exceptions:
 

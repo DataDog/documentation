@@ -147,10 +147,9 @@ ctx, span := t.Start(
 span.End()
 ```
 
-## Adding Span Events
+## Adding span events
 
-Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event `timestamp` and event `attributes`.
-In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package and `attribute` refers to the go.opentelemetry.io/otel/attribute package. These packages must be imported in order to use this example.
+You can add span events using the `AddEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
 - **Name** [_required_]: A string representing the event's name.
 - **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
@@ -161,6 +160,8 @@ In the following example, `oteltrace` is an alias for the go.opentelemetry.io/ot
   - Nested arrays and arrays containing elements of different data types are not allowed.
 - **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects a `Time` object.
   
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package and `attribute` refers to the go.opentelemetry.io/otel/attribute package. These packages must be imported in order to use this example.
+
 ```go
 // Start a span.
 ctx, span := tracer.StartSpan(context.Background(), "span_name")

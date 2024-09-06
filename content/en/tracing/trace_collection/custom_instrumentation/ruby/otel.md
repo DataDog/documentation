@@ -69,7 +69,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][7] and [OpenTelemetry Automatic instrumentation][8] also.
 
-## Adding Span Events
+## Adding span events
 
 You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
@@ -94,13 +94,16 @@ span.add_event(
 
 Read the [OpenTelemetry][13] specification for more information.
 
-### Recording Exceptions
+### Recording exceptions
 
-To record exceptions, use the `record_exception` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+To record exceptions, use the `record_exception` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
 
 The following examples demonstrate different ways to record exceptions:
 
 ```ruby
+span.record_exception(
+  StandardError.new('Error Message')
+)
 span.record_exception(
   StandardError.new('Error Message'),
   attributes: { 'status' => 'failed' }
