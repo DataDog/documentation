@@ -831,6 +831,8 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+          x-merge-override:
+            items: false
       type: object
     APIKeyResponseIncludedItem:
       description: An object related to an API key.
@@ -892,6 +894,8 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+          x-merge-override:
+            items: false
         meta:
           $ref: '#/components/schemas/APIKeysResponseMeta'
       type: object
@@ -1065,6 +1069,8 @@ components:
       required:
       - name
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyCreateData:
       description: Object used to create an application key.
       properties:
@@ -1148,6 +1154,8 @@ components:
           nullable: true
           type: array
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
       properties:
@@ -9522,6 +9530,8 @@ components:
           nullable: true
           type: array
       type: object
+      x-merge-override:
+        properties: false
     GCPSTSDelegateAccount:
       description: Datadog principal service account info.
       properties:
@@ -25786,6 +25796,8 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-merge-override:
+        parameters: false
       x-undo:
         type: safe
     patch:
@@ -26635,6 +26647,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
