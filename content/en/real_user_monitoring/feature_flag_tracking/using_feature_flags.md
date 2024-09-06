@@ -21,9 +21,9 @@ further_reading:
 Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][1] tab within RUM.
 
 From this view, you can investigate any questions you have about your feature flag's health and usage.
-- Monitor the number of users experiencing each variant and see summary statistics of your feature flag
-- Check the [status](#feature-flag-status) of your feature flag to see if there are any that can be removed for code clean up
-- View which pages your feature flags are being evaluated on
+- Monitor the number of users experiencing each variant and see summary statistics of your feature flag.
+- Check the [status](#feature-flag-status) of your feature flag to see if there are any that can be removed for code clean up.
+- View which pages your feature flags are being evaluated against.
 
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
@@ -38,17 +38,17 @@ Search and filter your feature flags by typing in the search bar. You can also u
 There are three possible feature flag statuses:
 
 Active
-: The feature flag has evaluated different variants for the past 2 weeks
+: The feature flag has evaluated different variants for the past 2 weeks.
 
 Inactive
-: For the past 2 weeks, there have only been feature flag evaluations for your control variant
+: For the past 2 weeks, there have only been feature flag evaluations for your control variant.
 
 Out to 100%
-: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
+: For the past 2 weeks, there have only been feature flag evaluations for one of your _non-control_ variants.
 
 
 ## Analyze your feature flags
-To get more details about the health and performance of your feature flag, you can click the flag in the list to navigate to a dedicated feature flag analysis dashboard. The Feature Flag analysis dashboard provides an overview of the performance of your feature flag, displaying information about user sessions, changes in your Core Web Vitals, and error rates. 
+To get more details about the health and performance of your feature flag, you can click the flag in the list to navigate to a dedicated Feature Flag analysis dashboard. The Feature Flag analysis dashboard provides an overview of the performance of your feature flag, displaying information about user sessions, changes in your Core Web Vitals, and error rates. 
 
 These out-of-the-box graphs are aggregated across your flag variants, making it easy to spot problems in your feature releases before they turn into serious issues. This dashboard provides an easy way to monitor your feature releases and allows you to quickly roll back as soon as you spot an issue so you can avoid negative user experiences. 
 
@@ -56,7 +56,7 @@ These out-of-the-box graphs are aggregated across your flag variants, making it 
 
 - The **Users** tab provides some high level summary statistics of your feature flag and allows you to further analyze the users viewing each of your feature flag variants by any attribute. If you want to understand what it looks like for someone who experienced a certain variant versus another, you can watch a [Session Replay][2] for each case.
 
-- The **Issues** tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. See if any issues detected by [Error Tracking][3] occurred for a specific variant of your feature flag and may be related to your changes.
+- The **Issues** tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. Check if any issues detected by [Error Tracking][3] occurred for a specific variant of your feature flag and might be related to your changes.
 
 - The **Performance** tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
 

@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance and roll back the feature if needed.
+Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance. If needed, you can roll back the feature.
 
 By enriching your RUM data with feature flag data, you can:
 
