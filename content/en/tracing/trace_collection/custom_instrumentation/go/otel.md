@@ -150,7 +150,7 @@ span.End()
 ## Adding Span Events
 
 Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event `timestamp` and event `attributes`.
-In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, this package must be imported in order to use this example.
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package and `attribute` refers to the go.opentelemetry.io/otel/attribute package. These packages must be imported in order to use this example.
 
 - **Name** [_required_]: A string representing the event's name.
 - **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
