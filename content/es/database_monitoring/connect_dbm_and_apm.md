@@ -198,7 +198,7 @@ public class Application {
 [1]: /es/tracing/trace_collection/dd_libraries/java/
 [2]: /es/tracing/trace_collection/compatibility/java/#data-store-compatibility
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Ruby" %}}
 
