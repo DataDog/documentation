@@ -72,6 +72,12 @@ In some cases, such as in the event of a pop-up, you may want to make some steps
 
 {{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="Timeout" style="width:25%">}}
 
+## Exit on success
+
+Configure this option to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure.
+
+{{< img src="synthetics/browser_tests/advanced_options/success_exit.png" alt="Exit on success" style="width:50%">}}
+
 ## Prevent screenshot capture
 
 You can prevent a step screenshot from being captured at test execution. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].

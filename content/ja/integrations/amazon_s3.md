@@ -27,7 +27,7 @@ categories:
 - metrics
 - cloud
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -91,7 +91,7 @@ Amazon S3 インテグレーションには、イベントは含まれません�
 
 ### サービスチェック
 
-The Amazon S3 integration does not include any service checks.
+Amazon S3 インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
