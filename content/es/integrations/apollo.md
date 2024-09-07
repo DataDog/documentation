@@ -85,15 +85,15 @@ Estas métricas se agregan en intervalos de 60 segundos y se etiquetan con el no
 
 Estas métricas también se etiquetan con el ID del gráfico de Studio asociado (como `graph:<graph-id>`) y el nombre de la variante asociada (como `variant:<variant-name>`), por lo que varios gráficos de Studio pueden enviar datos a la misma cuenta Datadog. Si no has definido un nombre de variante, se utiliza `current`.
 
-(Las integraciones configuradas antes de octubre de 2020 tienen nombres de métrica que empiezan por `apollo.engine.operations` en lugar de `apollo.operations` y utilizan una etiqueta  `service` en lugar de `graph`. Puedes migrar a los nuevos nombres de métricas en la página Integraciones de tu gráfico en Apollo Studio).
+(Las integraciones configuradas antes de octubre de 2020 tienen nombres de métrica que empiezan por `apollo.engine.operations` en lugar de `apollo.operations` y utilizan una etiqueta (tag) `service` en lugar de `graph`. Puedes migrar a los nuevos nombres de métricas en la página Integraciones de tu gráfico en Apollo Studio).
 
 ## Configuración
 
 ### Configuración
 
-La configuración con la integración de Apollo en Datadog es tan simple como proporcionar una clave de API y una región de Datadog a Studio. No es necesaria ninguna otra configuración.
+La configuración con la integración Apollo en Datadog es tan simple como proporcionar una clave de API y una región de Datadog a Studio. No es necesaria ninguna otra configuración.
 
-1. Ve a tu [página de integraciones de Datadog][2] y haz clic en el cuadro Apolo. A continuación, ve a la pestaña **Configuración** y haz clic en **Install Integration** (Instalar integración) en la parte inferior.
+1. Ve a tu [página de integraciones Datadog][2] y haz clic en el cuadro Apolo. A continuación, ve a la pestaña **Configuración** y haz clic en **Install Integration** (Instalar integración) en la parte inferior.
 
 2. Ve a tu [página de las API de Datadog][3] y crea una clave de API.
 
