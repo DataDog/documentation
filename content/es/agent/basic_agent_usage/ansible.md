@@ -53,7 +53,7 @@ ansible-galaxy collection install datadog.dd:==5.0.0
 
 Para obtener más detalles, consulta el [uso de colecciones de Ansible](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html).
 
-La colección Ansible de Datadog también se encuentra disponible a través de [Red Hat Automation Hub](https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/), donde está certificada oficialmente por Red Hat.
+La colección Ansible en Datadog también se encuentra disponible a través de [Red Hat Automation Hub](https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/), donde está certificada oficialmente por Red Hat.
 
 ## Casos de uso
 
