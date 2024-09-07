@@ -13,8 +13,8 @@ further_reading:
 
 If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
-- Operating system type and version (for example, Ubuntu Linux 22.04)
-- Runtime type, version, and vendor (for example, Ruby 2.7.3)
+- Operating system type and version (for example, Ubuntu Linux 24.04)
+- Runtime type, version, and vendor (for example, Ruby 3.3.1)
 
 ## Missing profiles for Resque jobs
 
@@ -30,7 +30,7 @@ There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 an
 
 To fix this, update your operating system or Docker image so that the GCC version is something more recent than v4.8.
 
-For further help with this issue, [contact support][2] and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` and the resulting `mkmf.log` file.
+For further help with this issue, [contact support][2] and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install datadog` and the resulting `mkmf.log` file.
 
 ## Frames omitted when backtraces are very deep
 
