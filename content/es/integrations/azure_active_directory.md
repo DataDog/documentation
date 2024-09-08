@@ -36,7 +36,7 @@ name: azure_active_directory
 public_title: Azure Active Directory
 short_description: Analizar tus logs de actividad de Azure Active Directory
 supported_os:
-- linux
+- Linux
 - Windows
 - macOS
 tile:
@@ -51,7 +51,7 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Instalación
-  description: Analiza tus logs de actividad de Azure Active Directory
+  description: Analizar tus logs de actividad de Azure Active Directory
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -76,14 +76,14 @@ Esta integración reenvía logs a Datadog utilizando Azure con centros de evento
 
 1. Configura el pipeline de reenvío de logs desde Azure a Datadog utilizando centros de eventos siguiendo la guía [Enviar logs de Azure a Datadog][2].
 
-2. En el portal Azure, selecciona _Azure Active Directory > Monitoriing > Audit logs_.
+2. En el portal de Azure, selecciona _Azure Active Directory > Monitoriing > Audit logs_.
 
 3. Selecciona **Exportar configuración**.
 
 4. En el panel de configuración de Diagnóstico, realiza una de las siguientes acciones:
 
    - Para modificar la configuración existente, selecciona **Editar configuración**.
-   - Para añadir una nueva configuración, selecciona **Añadir configuración de diagnóstico**. Puedes tener hasta tres configuraciones.
+   - Para añadir configuraciones nuevas, selecciona **Añadir configuración de diagnóstico**. Puedes tener hasta tres configuraciones.
 
 5. Selecciona la casilla de check **Flujo (stream) a un centro de eventos** y, a continuación, selecciona **Centro de eventos/Configurar**.
 
