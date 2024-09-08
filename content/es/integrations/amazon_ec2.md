@@ -48,7 +48,7 @@ Si aún no lo has hecho, configura la [integración Amazon Web Services][1].
 
 1. En la [página de la integración AWS][2], asegúrate de que `EC2` está habilitado en la pestaña `Metric Collection`.
 
-2. Añade los siguientes permisos requeridos a tu [política IAM de Datadog][3] para poder recopilar métricas de Amazon EC2. Para obtener más información, consulta las [políticas de EC2][3] en el sitio web de AWS.
+2. Añade los siguientes permisos requeridos a tu [política IAM de Datadog][3] para poder recopilar métricas de Amazon EC2. Para obtener más información, consulta las [políticas de EC2][4] en el sitio web de AWS.
 
    | Permiso AWS                    | Descripción |
     | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,7 +76,7 @@ Sigue los pasos que se indican a continuación para instalar el Datadog Agent en
 
 #### Instalación del Agent a través de la interfaz de usuario de Amazon Systems Manager (recomendado)
 
-1. Configura el [rol de IAM][8] en tus instancias EC2 para que el [permiso AmazonSSMManagedInstanceCore][9] esté habilitado.
+1. Configura el [rol IAM][8] en tus instancias EC2 para que el [permiso AmazonSSMManagedInstanceCore][9] esté habilitado.
 
 2. Ve a la [pestaña del documento de AWS SSM][10]. 
 3. Busca `datadog`. Nota: Puede que necesites buscar el documento correspondiente a tu región cambiando de región en la barra de navegación superior de la consola de AWS Management.
@@ -130,7 +130,7 @@ En [Ejecutar comando][16], haz clic en el botón **Run command** (Ejecutar coman
 
 Haz clic en el botón **Run** (Ejecutar) y aparecerá una página de confirmación que muestra el estado. Espera a que finalice y luego consulta la [lista de infraestructuras][17] en Datadog.
 
-### APM
+### Recopilación de logs
 
 Utiliza el [Datadog Agent][18] u otro [transvasador de logs][19] para enviar tus logs a Datadog.
 
@@ -144,7 +144,7 @@ A cada una de las métricas recuperadas de AWS se le asignan las mismas etiqueta
 
 **Notas**: 
    - `aws.ec2.instance_age` no se recopila de forma predeterminada con la integración EC2 en Datadog. Para habilitar la recopilación de esta métrica, ponte en contacto con el [servicio de asistencia de Datadog][21].
-   - `aws.ec2.host_ok` se recopila de forma predeterminada, incluso si deshabilitas la recopilación de métricas para la integración Amazon EC2, y puede provocar la aparición inesperada de hosts en la lista de infraestructuras. Para garantizar que sólo se monitoricen los hosts elegidos, asigna una etiqueta AWS, como `datadog:true`, a esas instancias EC2. A continuación, especifica esa etiqueta en el cuadro de texto **Limitar la recopilación de métricas a recursos específicos** en la pestaña **Recopilación de métricas** de la [página de tu integración Datadog AWS][2].
+   - `aws.ec2.host_ok` se recopila de forma predeterminada, incluso si deshabilitas la recopilación de métricas para la integración Amazon EC2, y puede provocar la aparición inesperada de hosts en la lista de infraestructuras. Para garantizar que sólo se monitoricen los hosts elegidos, asigna una etiqueta AWS, como `datadog:true`, a esas instancias EC2. A continuación, especifica esa etiqueta en el cuadro de texto **Limitar la recopilación de métricas a recursos específicos** en la pestaña **Recopilación de métricas** de la [página de tu integración AWS en Datadog][2].
 
 ### Checks de servicios
 {{< get-service-checks-from-git "amazon_ec2" >}}
