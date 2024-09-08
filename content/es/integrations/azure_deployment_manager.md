@@ -193,7 +193,7 @@ Si se encuentra `overall_status: OK`, se considera que el check está en buen es
 
 ### Métricas
 
-Azure Deployment Manager no informa de ningún métrica.
+Azure Deployment Manager no informa de ninguna métrica.
 
 ### Eventos
 
