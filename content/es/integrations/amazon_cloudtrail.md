@@ -34,7 +34,7 @@ Si estás configurando AWS CloudTrail para Cloud SIEM, consulta la guía <a href
 
 AWS CloudTrail proporciona una ruta de auditoría para tu cuenta AWS. Datadog lee esta ruta de auditoría y crea eventos. Busca estos eventos con el Explorador de eventos de Datadog o utilízalos para la correlación en tus dashboards. El siguiente es un ejemplo de un evento CloudTrail:
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="Evento CloudTrail" popup="true">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="Evento de CloudTrail" popup="true">}}
 
 Para obtener información sobre otros servicios AWS, consulta la [página de la integración Amazon Web Services][1].
 
@@ -49,7 +49,7 @@ Si aún no lo has hecho, configura la [integración Amazon Web Services][2].
 
 **Nota**: La integración CloudTrail en Datadog requiere que se recopilen eventos en un bucket de CloudTrail.
 
-1. Añade los siguientes permisos a tu política IAM Datadog para recopilar eventos CloudTrail AWS. Para obtener más información sobre las políticas de CloudTrail, consulta la [referencia de la API de CloudTrail AWS][3]. CloudTrail también requiere algunos permisos de S3 para acceder a las rutas. **Sólo se requieren para buckets de CloudTrail**. Para obtener más información sobre las políticas de Amazon S3, consulta la [referencia de la API de Amazon S3][4].
+1. Añade los siguientes permisos a tu política IAM Datadog para recopilar eventos de CloudTrail AWS. Para obtener más información sobre las políticas de CloudTrail, consulta la [referencia de la API de CloudTrail AWS][3]. CloudTrail también requiere algunos permisos de S3 para acceder a las rutas. **Sólo se requieren para buckets de CloudTrail**. Para obtener más información sobre las políticas de Amazon S3, consulta la [referencia de la API de Amazon S3][4].
 
     | Permiso AWS                  | Descripción |
     | --------------------------- | --------------------------------------------------------------- |
@@ -105,7 +105,7 @@ Para obtener más información sobre la recopilación de logs de servicios AWS, 
 
 ### Métricas
 
-La integración de AWS CloudTrail no incluye métricas.
+La integración AWS CloudTrail no incluye métricas.
 
 ### Eventos
 
@@ -146,7 +146,7 @@ Eventos de CloudTrail que se pueden configurar con una prioridad normal (aparece
 
 ### Checks de servicios
 
-La integración de AWS CloudTrail no incluye checks de servicios.
+La integración AWS CloudTrail no incluye checks de servicios.
 
 ## Resolución de problemas
 
