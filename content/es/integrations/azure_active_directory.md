@@ -87,7 +87,7 @@ Esta integración reenvía logs a Datadog utilizando Azure con centros de evento
 
 5. Selecciona la casilla de check **Flujo (stream) a un centro de eventos** y, a continuación, selecciona **Centro de eventos/Configurar**.
 
-6. Selecciona la suscripción Azure y el nombre de espacio de centros de eventos que creaste anteriormente para enrutar los Logs hacia ellos.
+6. Selecciona la suscripción de Azure y el nombre de espacio de centros de eventos que creaste anteriormente para enrutar los Logs hacia ellos.
 
 7. Selecciona OK para salir de la configuración del centro de eventos.
 
