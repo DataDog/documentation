@@ -731,10 +731,7 @@ If you use load balancers with your services, enable additional cloud integratio
 
 Requires Agent version 7.42 or greater.
 
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-
-Add the following configuration to the `system-probe.yaml`:
+1. Add the following configuration to the `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -742,16 +739,11 @@ service_monitoring_config:
   process_service_inference:
     enabled: true
 ```
-
-{{% /tab %}}
-{{% tab "Environment variable" %}}
+2. And the following environment variable:
 
 ```conf
 DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 ```
-{{% /tab %}}
-{{< /tabs >}}
-
    
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
