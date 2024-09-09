@@ -729,7 +729,7 @@ If you use load balancers with your services, enable additional cloud integratio
    ```
 **For non-IIS services:**
 
-Discovery of non-IIS services is enabled by default starting with Agent version 7.57. Previous agent versions may require the following configuration change to `system-probe.yaml`:
+Discovery of non-IIS services is enabled by default starting with Agent version 7.57. Previous Agent versions may require the following configuration change to `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
