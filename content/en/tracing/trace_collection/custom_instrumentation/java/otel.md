@@ -181,6 +181,51 @@ public class Example {
 }
 ```
 
+## Adding span events
+
+_Minimum SDK version: 1.40.0._
+
+You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects an `Instant` object.
+
+The following examples demonstrate different ways to add events to a span:
+
+```java
+Attributes eventAttributes = Attributes.of(
+    AttributeKey.longKey("int_val"), 1,
+    AttributeKey.stringKey("string_val"), "two",
+    AttributeKey.longArrayKey("int_array"), Arrays.asList(3, 4),
+    AttributeKey.stringArrayKey("string_array"), Arrays.asList("5", "6"),
+    AttributeKey.booleanArrayKey("bool_array"), Arrays.asList(true, false)
+);
+
+span.addEvent("Event With No Attributes");
+span.addEvent("Event With Some Attributes", eventAttributes);
+```
+
+Read the [OpenTelemetry][21] specification for more information.
+
+### Recording exceptions
+
+To record exceptions, use the `recordException` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```java
+span.recordException(new Exception("Error Message"));
+span.recordException(new Exception("Error Message"), Attributes.of(stringKey("status"), "failed"));
+```
+
+Read the [OpenTelemetry][22] specification for more information.
+
 ## Trace client and Agent configuration
 
 Both the tracing client and Datadog Agent offer additional configuration options for context propagation. You can also exclude specific resources from sending traces to Datadog if you don't want those traces to be included in calculated metrics, such as traces related to health checks.
@@ -203,3 +248,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /tracing/security
 [20]: /tracing/guide/ignoring_apm_resources/
+[21]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[22]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception
