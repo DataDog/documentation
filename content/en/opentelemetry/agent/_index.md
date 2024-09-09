@@ -16,7 +16,7 @@ further_reading:
 The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source solution that combines the flexibility of OpenTelemetry with the comprehensive observability capabilities of Datadog. This integrated solution includes:
 
 - A curated set of [OpenTelemetry components](#included-components) optimized for performance and reliability with Datadog, with ability to add additional components of your choosing
-- Full data collection and processing capabilities of the Datadog Agent for seamless integration and robust monitoring
+- Full data collection and processing capabilities of the Datadog Agent for seamless integration and robust monitoring, including [Datadog Fleet Automation][9] support for the embedded OTel Collector, see [key benefits](#Key benefits) 
 - Built-in Datadog pipelines and extensions designed to deliver the best onboarding experience
 
 {{< img src="/opentelemetry/embedded_collector/architecture2.png" alt="Architecture overview for Collector embedded in the Datadog Agent." style="width:100%;" >}}
