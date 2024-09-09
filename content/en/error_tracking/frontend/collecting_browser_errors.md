@@ -15,7 +15,7 @@ further_reading:
 ---
 ## Overview
 
-Front-end errors are collected with with Browser SDK. The error message and stack trace are included when available.
+Front-end errors are collected with Browser SDK. The error message and stack trace are included when available.
 
 ## Error sources
 Front-end errors come from several different sources:
