@@ -14,12 +14,13 @@ further_reading:
 
 Observability Pipelines allows you to collect and process logs, as well as determine where you want to route them, all before the data leaves your on-premises or cloud environment.
 
-The value of your logs is not all equal. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can end up diluting the overall value of your data and cause you to exceed your budget.
+Not all logs have equal value. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can end up diluting the overall value of your data and cause you to exceed your budget.
 
 The following situations can also unnecessarily increase your log volume and cost:
 
-- An application team inadvertently turns on debug logging and a new build triggers a flood of errors.
-- Teams attempt to add as much performance and metric data into the logs because it's easier than separating out the data.
+- An application team inadvertently turns on debug logging.
+- A flood of errors is triggered when shipping a new build with an error loop condition.
+- Teams attempt to add as much performance and metric data into the logs because it seems easier than implementing other telemetry solutions.
 - Logs contain extra fields and values that are never used.
 
 This guide walks you through strategies on how to reduce your log volume using Observability Pipelines' processors, so that you can stay cost-compliant and increase the value of your stored data.
