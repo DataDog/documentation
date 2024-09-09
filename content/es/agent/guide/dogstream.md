@@ -13,7 +13,7 @@ Se trata de una función obsoleta del Agent 5. Se interrumpen las nuevas version
 
 Los archivos de logs contienen toneladas de valiosos datos  de aplicaciones y de negocios.
 Lamentablemente, a menudo este valor nunca se aprovecha porque los archivos de logs se ignoran.
-El Datadog Agent puede ayudar a remediarlo mediante el análisis de métricas y eventos de
+El Datadog Agent puede ayudar a remediarlo mediante el análisis de métricas y eventos desde
 logs, de modo que los datos que contienen puedan representarse gráficamente en tiempo real, todo el tiempo.
 
 ## Análisis de métricas
