@@ -65,10 +65,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-rb` 1.21.1+.
-
-To additionally enable showing [GC in timeline](#span-execution-timeline-view):
-- set `DD_PROFILING_FORCE_ENABLE_GC=true`
+The new [timeline feature](#span-execution-timeline-view), including GC information, is enabled by default in `dd-trace-rb` 1.22.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -286,8 +283,6 @@ Requires `dd-trace-go` version 1.37.0+ and works best with Go version 1.18 or ne
 {{< programming-lang lang="ruby" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Ruby service][1].
-
-Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
