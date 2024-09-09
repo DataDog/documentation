@@ -47,15 +47,15 @@ You can use your apps from the Apps page or [access them directly from within yo
 
 {{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
-### Out-of-the-box apps
+### Apps created by Datadog
 
-Out-of-the-box are apps that are embedded in Integration dashboards. They work without having to build them; all you need to do is choose a connection.
+Apps created by Datadog are apps that are embedded in Integration dashboards. They work without having to build them; all you need to do is choose a connection.
 
 For example, the [EC2 integration dashboard][7] offers an EC2 instance management app. When you load the dashboard, the app is populated with demo data:
 
 {{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="EC2 out-of-the-box app with demo data" style="width:100%;" >}}
 
-To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. Once you save your selection, the app displays data from your connection.
+To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
 
 You can change the selected connection by clicking **Change Connection** in the app.
 
