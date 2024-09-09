@@ -358,7 +358,7 @@ Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN npm install --prefix /dd_tracer/node dd-trace  --save
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -378,7 +378,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 2. Copy the Datadog Node.JS tracer into your Docker image.
 
    ```dockerfile
-   RUN npm install --prefix /dd_tracer/node dd-trace  --save
+   RUN npm install --prefix /dd_tracer/node dd-trace --save
    ```
 
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
@@ -408,7 +408,7 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN npm install --prefix /dd_tracer/node dd-trace  --save
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -420,7 +420,7 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN npm install --prefix /dd_tracer/node dd-trace  --save
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
