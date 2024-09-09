@@ -53,7 +53,7 @@ Apps created by Datadog are apps that are embedded in Integration dashboards. Th
 
 For example, the [EC2 integration dashboard][7] offers an EC2 instance management app. When you load the dashboard, the app is populated with demo data:
 
-{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="EC2 out-of-the-box app with demo data" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="EC2 app created by Datadog, populated with demo data" style="width:100%;" >}}
 
 To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
 
