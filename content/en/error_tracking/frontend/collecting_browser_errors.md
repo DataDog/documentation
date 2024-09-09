@@ -1,5 +1,7 @@
 ---
 title: Collecting Browser Errors
+aliases:
+ - /error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:
   - link: "/error_tracking/explorer/"
     tag: "Documentation"

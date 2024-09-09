@@ -2,6 +2,7 @@
 title: Browser Error Tracking
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors
+- /error_tracking/standalone_frontend/browser
 further_reading:
 - link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
   tag: "Source Code"

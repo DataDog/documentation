@@ -2,6 +2,8 @@
 title: Track Backend Error Logs
 description: Learn how to track backend errors from your logs.
 is_beta: true
+aliases:
+  - /error_tracking/logs
 further_reading:
   - link: 'https://www.datadoghq.com/blog/error-tracking/'
     tag: 'Blog'
