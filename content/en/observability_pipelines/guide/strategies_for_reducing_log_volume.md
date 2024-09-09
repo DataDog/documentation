@@ -14,7 +14,7 @@ further_reading:
 
 Observability Pipelines allows you to collect and process logs, as well as determine where you want to route them, all before the data leaves your on-premises or cloud environment.
 
-Not all logs have equal value. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can end up diluting the overall value of your data and cause you to exceed your budget.
+Logs are not equal value. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can end up diluting the overall value of your data and cause you to exceed your budget.
 
 The following situations can also unnecessarily increase your log volume and cost:
 
