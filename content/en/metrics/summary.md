@@ -35,7 +35,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
+- ** Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). Learn more about the different metric origin types [here][].
 
 **Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
 
@@ -180,6 +180,36 @@ For custom metrics of the count, gauge, or rate metric type, you can further ref
 More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
 
 **Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
+
+### Metric Origin Definitions
+
+This table shows the mapping between the metric origin as seen on the metric origin and where it was submitted from: 
+
+| Metric Origin           | Submitted from                                                                |
+| ------------------------| ----------------------------------------------------------------------------- |
+| API Catalog             | Timeseries sent by Datadog's API Catalog product via APIM Endpoint.
+| APM                     | Timeseries sent by Datadog's APM platform, including APM traces, usage metrics, and spans.
+| Agent                   | Timeseries sent by Datadog Agent's Integration platform or built-in integrations (link).
+| CSM                     | Timeseries sent by Datadog's Cloud Security Monitoring platform.
+| Cloud Integrations      | Timeseries sent out by AWS, Azure, or Google Cloud Integrations.
+| DBM                     | Timeseries sent by Datadog's Database Monitoring platform, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
+| DSM                     | Timeseries sent by Datadog's Data Streams Monitoring, including DSM spans and traces.
+| Datadog Exporter        | Timeseries sent by OpenTelemetry Collector's Datadog Exporter and other metrics that don’t have a DD integration counterpart.
+| Datadog Platform        | Timeseries sent by metrics intake that are used to report metrics usage.
+| Events                  | Custom metrics generated from the Datadog Events platform.
+| LLM Observability       | Timeseries sent by LLM Observability as llmobs to merics.
+| Logs                    | Custom metrics generated from Datadog's Logs platform.
+| Metrics API             | Timeseries sent via Datadog's OTLP endpoint and Otel receivers with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
+| NPM                     | Timeseries sent by Datadog's Network Performance Monitoring platform.
+| Observability Pipelines | Timeseries sent by Datadog's Observability Pipielines including error and performance metrics.
+| Other                   | Timeseries sent by Datadog's Agent's OTLP ingest and other receivers or metrics that don’t have a DD integration counterpart.
+| Processes               | Custom metrics generated from Datadog's Processes product.
+| RUM                     | Custom metrics generated from the Datadog's Real User Monitoring platform.
+| SAAS Integrations       | Timeseries submitted by Web Integrations.
+| Severless               | Timeseries sent by the Datadog's Severless platform including App Services, Cloud Run, Container App, Lambda, and Stepfunctions Metrics.
+| Service Catalog         | Timeseries sent by Datadog's Server Catalog platform including scorecard metrics.
+| Synthetics              | Synthetic monitoring and continutous testing metrics generated from Datadog's Synthetics platform. 
+| USM                     | Custom metrics generated from Datadog's Universal Serice Monitoring platform. 
 
 ## Further reading
 
