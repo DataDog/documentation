@@ -137,11 +137,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
          instrumentation:
            enabled: true
            libVersions:
-             java: 1
-             dotnet: 3
-             python: 2
-             js: 5
-             ruby: 2
+             java: "1"
+             dotnet: "3"
+             python: "2"
+             js: "5"
+             ruby: "2"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -178,11 +178,11 @@ To enable Single Step Instrumentation with Helm:
       instrumentation:
          enabled: true
          libVersions:
-            java: 1
-            dotnet: 3
-            python: 2
-            js: 5
-            ruby: 2
+            java: "1"
+            dotnet: "3"
+            python: "2"
+            js: "5"
+            ruby: "2"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -411,9 +411,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: v3.2.0
-            python: v1.20.6
-            js: v4.17.0
+            dotnet: "3.2.0"
+            python: "1.20.6"
+            js: "4.17.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -428,9 +428,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: v3.2.0
-            python: v1.20.6
-            js: v4.17.0
+            dotnet: "3.2.0"
+            python: "1.20.6"
+            js: "4.17.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
