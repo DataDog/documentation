@@ -20,7 +20,7 @@ Supported Linux platforms
 CentOS or RHEL 8.0 and greater
 
 Supported Windows platforms
-: IIS on Windows 2012 R2 and greater
+: Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
@@ -38,11 +38,8 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 - If on Linux:
     - Your service is running in a container.
     - **Beta:** For non-containerized services see the [instructions here](#additional-configuration).
-- If on Windows
-  - IIS:
+- If on Windows:
     - Your service is running on a virtual machine.
-  - Non-IIS:
-    - **Beta:** For non-IIS services see the [instructions here](#additional-configuration).
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
@@ -730,19 +727,7 @@ If you use load balancers with your services, enable additional cloud integratio
    service_monitoring_config:
      enabled: true
    ```
-[1]: /agent/basic_agent_usage/windows/?tab=commandline
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## Additional configuration
-
-The following systems or services require additional configuration:
-
-{{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
-<div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
-</div>
+**For non-IIS services:**
 
 Requires Agent version 7.42 or greater.
 
@@ -765,13 +750,21 @@ service_monitoring_config:
 DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 ```
 {{% /tab %}}
+{{< /tabs >}}
+
+   
+[1]: /agent/basic_agent_usage/windows/?tab=commandline
+{{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}}
 
-{{< collapse-content title="Non-IIS service discovery on Windows" level="h4" >}}
+## Additional configuration
+
+The following systems or services require additional configuration:
+
+{{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor non IIS services running on Windows environments.
+Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
 </div>
 
 Requires Agent version 7.42 or greater.
