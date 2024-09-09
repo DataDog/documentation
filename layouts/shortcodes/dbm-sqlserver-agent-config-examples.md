@@ -55,6 +55,7 @@ instances:
 ### Monitoring SQL Server Agent Jobs
 
 **Note: For monitoring SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database**.
+Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
 
 ```yaml
 instances:
