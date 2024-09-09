@@ -19,13 +19,13 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 
 1. The SNMP Trap functionality sends data as logs to Datadog. To receive this data, ensure that log collection is enabled by adding the following configuration to your `datadog.yaml` file.
 
-```yaml
-logs_enabled: true # Traps are forwarded as logs and can be found in the Log Explorer with a `source:snmp-traps` query.
-```
+   ```yaml
+   logs_enabled: true # Traps are forwarded as logs and can be found in the Log Explorer with a `source:snmp-traps` query.
+   ```
 
 2. In addition to enabling log collection on your Agent, to enable listening for SNMP Traps, add the following to your `datadog.yaml` file:
 
-```yaml
+   ```yaml
 network_devices:
   namespace: <NAMESPACE> # optional, defaults to "default".
   snmp_traps:
@@ -51,11 +51,11 @@ network_devices:
       authProtocol: "SHA"
       privKey: myPrivKey2
       privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
-```
+   ```
 
-  **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
+   **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
-3. Once configured, search in the [Log Explorer][5] for `source:snmp_traps` to locate SNMP trap data:
+3. Search for `source:snmp_traps` in the [Log Explorer][5] to locate SNMP trap data:
 
 {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp_traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
 
