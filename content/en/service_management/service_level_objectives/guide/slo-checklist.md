@@ -13,6 +13,9 @@ further_reading:
 - link: "/service_management/service_level_objectives/guide/slo_types_comparison/"
   tag: "Documentation"
   text: "Comparison of Datadog SLO Types"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
 ---
 
 

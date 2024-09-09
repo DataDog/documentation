@@ -21,7 +21,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-key-questions/"
   tag: "Blog"
   text: "Key questions to ask when setting SLOs"
-- link: "https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
   tag: "Blog"
   text: "Best practices for managing your SLOs with Datadog"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
