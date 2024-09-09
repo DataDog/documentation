@@ -14,7 +14,7 @@ further_reading:
       tag: "Blog"
       text: "How to implement log management policies with your teams"
 algolia:
-  tags: ['log usage']
+  tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -129,7 +129,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 1. Navigate to the [Log Explorer][14].
 2. Enter a [search query][15] that includes the index name (for example, `index:main`) to capture the log volume you want to monitor.
-3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
+3. Click **More...** and select **Create monitor**.
 4. Add tags (for example, `host, `services, and so on) to the **group by** field.
 5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
 6. Add a notification title, for example: 
