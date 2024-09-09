@@ -290,7 +290,7 @@ Si trabajas en un entorno sin conexión o con una red restringida donde no es po
    tar -xvf linuxx64_odbc_cli.tar.gz
    ```
 
-1. Define la variable de entorno `IBM_DB_HOME` como la localización de donde extrajiste`/clidriver` de `linuxx64_odbc_cli.tar.gz`. Esto evitará que la biblioteca `ibm_db` instale una nueva versión de la ODBC y la CLI, ya que eso generaría un error.
+1. Define la variable de entorno `IBM_DB_HOME` como la localización de donde extrajiste `/clidriver` de `linuxx64_odbc_cli.tar.gz`. Esto evitará que la biblioteca `ibm_db` instale una nueva versión de la ODBC y la CLI, ya que eso generaría un error.
 
    ```
    export IBM_DB_HOME=/path/to/clidriver
@@ -321,7 +321,7 @@ Si obtienes el siguiente error:
       [end of output]
 ```
 
-Es posible que necesites instalar `gcc`.
+Es posible que debas instalar `gcc`.
 
 ¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
 
