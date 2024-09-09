@@ -76,15 +76,7 @@ You can edit a step in the workflow at any time by clicking on it. Click and dra
 
 ## Test a step
 
-To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
-
-To test a workflow step:
-1. Click **Test** in the step **Inputs** section.
-1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
-1. Click **Test** to test the action.
-1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
-
-Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
+See the test and debug page for information on [how to test a step][11].
 
 ## Publish a workflow
 
@@ -231,3 +223,4 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
+[11]: /service_management/workflows/test_and_debug/#test-a-step
