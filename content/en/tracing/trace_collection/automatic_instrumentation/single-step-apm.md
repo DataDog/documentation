@@ -20,6 +20,7 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
    - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
    - Docker
    - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
+     - NOTE: Windows pods are not supported. Use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
 
 ## Enabling APM on your applications
 
