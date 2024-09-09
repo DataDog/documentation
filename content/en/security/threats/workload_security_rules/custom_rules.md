@@ -21,10 +21,10 @@ In addition to the out of the box (OOTB) [default Agent and detection rules][7],
 
 ## RBAC for custom rule management
 
-To prevent users with the [Datadog Standard out-of-the-box role][11] from creating/updating, disabling, and deploying a changed rule via remote configuration, do the following:
+To prevent users with the [Datadog Standard out-of-the-box role][11] from creating, updating, disabling, and deploying a changed rule using remote configuration:
 
-1. A user within the Datadog Admin role must create a new role containing the `security_monitoring_cws_agent_rules_write` permission. 
-2. Add only those users that manage agent rules to this role.
+1. A user within the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_write` permission. 
+2. Add only those users that manage Agent rules to this role.
 
 
 ## Custom detection rules summary
