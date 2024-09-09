@@ -29,7 +29,7 @@ There are three supported versions of the schema:
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
 - V2.2 supports user annotation and overwriting auto-detected service type and languages using the fields `type` and `languages`. It also adds support for associating CI pipelines with a service using the field `ci-pipeline-fingerprints`. This version also includes less restrictive validation logic for `contact.type` and `link.type`, so users should expect fewer warnings while submitting YAML.
-- V3.0 adds a `kind` field that supports schemas for additional component types including applications, internal and external libraries, queues, and datastores. Any components within an `application` implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
+- V3.0 adds a `kind` field that supports schemas for additional component types including systems, internal and external libraries, queues, and datastores. Any components within a `system` implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
 
 For more information about the latest updates, see the schemas on GitHub.
 
@@ -41,13 +41,13 @@ The Entity Definition Schema is a structure that contains basic information abou
 
 #### New features in v3.0 
 ##### Analysis units
-Beyond services, you can organize your systems using various components such as applications, services, queues, and datastores. This holistic view supports better analysis and management.
+Beyond services, you can organize your systems using various components such as systems, services, queues, and datastores. This holistic view supports better analysis and management.
 
 ##### Map relationships
-With APM/USM data, you can automatically detect dependencies among components. The schema supports manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
+With APM/USM data, you can automatically detect dependencies among components. The schema supports manual declaration to augment auto-detected system topology. This ensures a complete overview of how components interact within your systems.
 
-##### Inheritance of application metadata
-Components within an application automatically inherit the application's metadata, simplifying management and visibility.
+##### Inheritance of system metadata
+Components within a system automatically inherit the system's metadata, simplifying management and visibility.
 
 ##### Multi-ownership
 For improved collaboration, you can assign multiple owners to any entity within your system, ensuring responsibilities are accurately defined.
@@ -55,11 +55,11 @@ For improved collaboration, you can assign multiple owners to any entity within 
 ##### Custom filters for APM metrics, logs, and events
 With the `datadog` field in v3.0 schema, you can specify custom filters for logs and events associated with each component.
 
-#### Example entity definition (`kind:application`)
+#### Example entity definition (`kind:system`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
-kind: application
+kind: system
 metadata:
   name: myapp
   displayName: My App
