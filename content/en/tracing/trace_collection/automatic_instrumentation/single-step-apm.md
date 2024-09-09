@@ -177,12 +177,12 @@ To enable Single Step Instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
-      libVersions:
-        java: 1
-        dotnet: 3
-        python: 2
-        js: 5
-        ruby: 2
+         libVersions:
+            java: 1
+            dotnet: 3
+            python: 2
+            js: 5
+            ruby: 2
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
