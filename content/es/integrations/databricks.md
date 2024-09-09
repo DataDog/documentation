@@ -89,7 +89,7 @@ Para más detalles, consulta [Monitorizar Databricks con Datadog][4].
 
 ### Instalación
 
-Monitoriza Databricks Spark con la [integración de Datadog Spark][5]. Instala el [Datadog Agent ][6] en tus clústeres siguiendo las instrucciones para la [configuración](#configuration) para tu clúster apropiado. Después, instala la [integración de Spark][5] en Datadog para autoinstalar el dashboard de Databricks Overview.
+Monitoriza Databricks Spark con la [integración de Datadog Spark][5]. Instala el [Datadog Agent ][6] en tus clústeres siguiendo las instrucciones para la [configuración](#configuration) para tu clúster apropiado. Después, instala la [integración de Spark][5] en Datadog para autoinstalar el dashboard de Información general de Databricks.
 
 ### Configuración
 
@@ -101,7 +101,7 @@ Cada script descrito a continuación puede modificarse para adaptarlo a tus nece
 
 
 {{% site-region region="us,us3,us5,eu,gov,ap1" %}}
-También puedes definir o modificar variables de entorno con la ruta del script de inicio del ámbito del clúster a través de la interfaz de usuario, de la CLI de Databricsk o invocando la API de clústeres.
+También puedes definir o modificar variables de entorno con la ruta del script de inicio del ámbito del clúster a través de la interfaz de usuario, de la CLI de Databricks o invocando la API de clústeres.
   - Configura `DD_API_KEY` para identificar mejor tus clústeres.
   - Configura `DD_ENV` para identificar mejor tus clústeres.
   - Configura `DD_SITE` en tu sitio: {{< region-param key="dd_site" code="true" >}}. De modo predeterminado es `datadoghq.com`
@@ -112,7 +112,7 @@ También puedes definir o modificar variables de entorno con la ruta del script 
 
 
 
-#### Con un script inicial global
+#### Con un script de inicio global
 
 Un script de inicial global se ejecuta en cada clúster creado en tu espacio de trabajo. Las secuencias de scripts de inicio globales son útiles cuando se desea aplicar configuraciones o pantallas de seguridad de bibliotecas en toda la organización. 
 
