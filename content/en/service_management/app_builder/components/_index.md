@@ -246,6 +246,36 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="File input" level="h3" %}}
+File input components have the following properties.
+
+### General
+
+Accepted File Types
+: **Values**: .csv, .json
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="JSON input" level="h3" %}}
 JSON input components have the following properties.
