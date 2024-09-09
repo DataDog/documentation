@@ -64,7 +64,6 @@ When you create an incident, an incident modal comes up. This modal has several 
 | Incident Commander | This person is assigned as the leader of the incident investigation. |
 | Attributes (Teams) | Assign the appropriate group of users to an incident using [Datadog Teams][9]. Members of the assigned team are automatically invited to the Slack channels. |
 | Notifications | Specify a user, Slack channel or external email to send notifications of this incident to.  |
-| Notes & Links | You can customize the description of each severity level to fit the requirements of your organization. Include links to graphs, monitors, or security signals for additional awareness. |
 
 ### Updating the incident and the incident timeline
 
