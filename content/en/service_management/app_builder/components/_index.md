@@ -252,7 +252,8 @@ File input components have the following properties.
 ### General
 
 Accepted File Types
-: **Values**: .csv, .json
+: Determines which file types the file input component accepts.<br>
+**Values**: .csv, .json
 
 ### Appearance
 
