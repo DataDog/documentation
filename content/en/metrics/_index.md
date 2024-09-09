@@ -174,6 +174,8 @@ Space aggregation splits a single metric into multiple timeseries by tags such a
 
 There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
 
+Add an additional layer of aggregation on results of an existing query in time and/or space using nested queries. Learn more about nested queries [here][26].
+
 ### View real-time information about metrics
 
 The [Metrics Summary page][20] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
@@ -218,3 +220,4 @@ Read the [metrics summary documentation][22] for more details.
 [23]: /dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /dashboards/functions/
 [25]: /metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /dashboards/querying/#nested-queries

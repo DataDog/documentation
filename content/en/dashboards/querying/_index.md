@@ -135,7 +135,7 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 ### Nested Queries
 
-Add an additional layer of aggregation on results of an existing query in time and /or spac using nested queries. We support: 
+Add an additional layer of aggregation on results of an existing query in time and/or space using nested queries. We support: 
 
 1. Multilayer aggregation (additional time/space aggregatinos) supported via the JSON tab or via API* (Dashboards only)
 2. Percentiles on counts/rates/gauges via the JSON tab or via API* (Dashboards only)
