@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/disk/README.md
 display_name: Disk
@@ -38,7 +38,7 @@ manifest_version: 2.0.0
 metric_prefix: system.
 metric_to_check: system.disk.free
 monitors:
-  disk-space-forecast: assets/monitors/disk_monitor.json
+  Device is going to be full: assets/monitors/disk_monitor.json
 name: disk
 public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。

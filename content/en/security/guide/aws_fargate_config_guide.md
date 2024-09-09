@@ -9,7 +9,7 @@ further_reading:
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
 {{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
@@ -31,8 +31,8 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
-        <td>Application Security Management</td>
-        <td>Application Security Management</td>
+        <td>Software Composition Analysis (SCA) and Code Security</td>
+        <td>ASM - Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
@@ -354,7 +354,7 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Application Security Management
+## Application Security
 
 ### Prerequisites
 
@@ -364,6 +364,9 @@ In the task definition, replace the "workload" container with the following:
 <div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
 
 ### Installation
+
+#### Software Composition Analysis (SCA)
+[Software Composition Analysis (SCA)][22] works in Fargate. Follow the [installation steps for applications that run in traditional hosts][23].
 
 #### Threat Detection and Protection
 
@@ -427,3 +430,5 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [19]: /security/application_security/code_security/setup/dotnet/
 [20]: /security/application_security/code_security/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
+[22]: /security/application_security/software_composition_analysis/
+[23]: /security/application_security/software_composition_analysis/setup/
