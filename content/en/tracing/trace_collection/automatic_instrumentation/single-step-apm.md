@@ -37,7 +37,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
@@ -62,7 +62,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -138,7 +138,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
            enabled: true
            libVersions:
              java: 1
-             dotnet: 2
+             dotnet: 3
              python: 2
              js: 5
              ruby: 2
@@ -179,7 +179,7 @@ To enable Single Step Instrumentation with Helm:
          enabled: true
       libVersions:
         java: 1
-        dotnet: 2
+        dotnet: 3
         python: 2
         js: 5
         ruby: 2
@@ -411,7 +411,7 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: v2.46.0
+            dotnet: v3.2.0
             python: v1.20.6
             js: v4.17.0
 {{< /highlight >}}
@@ -428,7 +428,7 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: v2.46.0
+            dotnet: v3.2.0
             python: v1.20.6
             js: v4.17.0
 {{< /highlight >}}
