@@ -729,20 +729,13 @@ If you use load balancers with your services, enable additional cloud integratio
    ```
 **For non-IIS services:**
 
-Requires Agent version 7.42 or greater.
-
-1. Add the following configuration to the `system-probe.yaml`:
+Discovery of non-IIS services is enabled by default starting with Agent version 7.57. Previous agent versions may require the following configuration change to `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
   enabled: true
   process_service_inference:
     enabled: true
-```
-2. And the following environment variable:
-
-```conf
-DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 ```
    
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
