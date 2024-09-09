@@ -31,7 +31,7 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise
 - Set monitors on error tracking events, such as high error volume or new issues
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
-- Automatically captured local variable values so you can reproduce exceptions, simplifying the process to resolve errors quickly
+- Automatically capture local variable values so you can reproduce exceptions, simplifying the process to resolve errors quickly
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
