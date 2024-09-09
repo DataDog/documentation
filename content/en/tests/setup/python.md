@@ -167,7 +167,7 @@ assert True
 
 ### Using manual testing API
 
-<div class="alert alert-warning"><strong>Note</strong>: The Test Visibility Manual API is currently in <strong>beta</strong> and subject to change.</div>
+<div class="alert alert-warning"><strong>Note</strong>: The Test Visibility Manual API is in <strong>beta</strong> and subject to change.</div>
 
 As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Visibility API (`ddtrace.ext.test_visibility`) as a way to submit test visibility results in an ad-hoc manner.
 
@@ -179,7 +179,7 @@ Execution of tests is split into two phases:
 - discovery: used to inform the API of items to expect
 - execution: submitting results (using start and finish calls)
 
-The discovery and execution phases are distinct from one another to allow for cases where tests are not started immediately after they are collected by the test runner process.
+The distinct discovery and execution phases allow for cases where tests are not started immediately after they are collected by the test runner process.
 
 API users must provide consistent identifiers (described below) that are used as references for Test Visibility items within the API's state storage.
 
@@ -197,7 +197,7 @@ Modules, suites, and tests form a hierarchy in the Python Test Visibility API, r
 
 ##### Test session
 
-A test session represents a project's test execution, typically corresponding to the execution of a test command by a user or by a CI script. Only one session can be discovered, started, and finished in the execution of Test Visibility program.
+A test session represents a project's test execution, typically corresponding to the execution of a test command. Only one session can be discovered, started, and finished in the execution of Test Visibility program.
 
 Call `ddtrace.ext.test_visibility.api.TestSession.discover()` to discover the session, passing the test command, a given framework name, and version.
 
@@ -216,10 +216,10 @@ Call `ddtrace.ext.test_visibility.api.TestModule.discover()`, passing the `TestM
 
 Call `ddtrace.ext.test_visibility.api.TestModule.start()`, passing the `TestModuleId` object as an argument, to start the module.
 
-Once all the children items within the module have completed, call `ddtrace.ext.test_visibility.api.TestModule.finish()`, passing the `TestModuleId` object as an argument.
+After all the children items within the module have completed, call `ddtrace.ext.test_visibility.api.TestModule.finish()`, passing the `TestModuleId` object as an argument.
 
 
-##### Test Suite
+##### Test suite
 
 A test suite represents a subset of tests within a project's modules (`.py` file, for example).
 
@@ -229,7 +229,7 @@ Call `ddtrace.ext.test_visibility.api.TestSuite.discover()`, passing the `TestSu
 
 Call `ddtrace.ext.test_visibility.api.TestSuite.start()`, passing the `TestSuiteId` object as an argument, to start the suite.
 
-Once all the children items within the suite have completed, call `ddtrace.ext.test_visibility.api.TestSuite.finish()`, passing the `TestSuiteId` object as an argument.
+After all the children items within the suite have completed, call `ddtrace.ext.test_visibility.api.TestSuite.finish()`, passing the `TestSuiteId` object as an argument.
 
 ##### Test
 
@@ -243,7 +243,7 @@ Call `ddtrace.ext.test_visibility.api.Test.start()`, passing the `TestId` object
 
 Call `ddtrace.ext.test_visibility.api.Test.mark_pass()`, passing the `TestId` object as an argument, to mark that the test has passed successfully.
 Call `ddtrace.ext.test_visibility.api.Test.mark_fail()`, passing the `TestId` object as an argument, to mark that the test has failed. `mark_fail()` accepts an optional `TestExcInfo` object as the `exc_info` parameter.
-Call `ddtrace.ext.test_visibility.api.Test.mark_skip()`, passing the `TestId` object as an argument, to mark that the test was skipped. `mark_skip()` accepts an optional string  as the `skip_reason` parameter.
+Call `ddtrace.ext.test_visibility.api.Test.mark_skip()`, passing the `TestId` object as an argument, to mark that the test was skipped. `mark_skip()` accepts an optional string as the `skip_reason` parameter.
 
 ###### Exception information
 
@@ -258,12 +258,12 @@ The `ddtrace.ext.test_visibility.api.TestExcInfo()` method takes three positiona
 
 The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional list of strings as the `codeowners` parameter.
 
-###### Test Source File information
+###### Test source file information
 
 The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional `TestSourceFileInfo` object as the `source_file_info` parameter. A `TestSourceFileInfo` object represents the path and, optionally, the start and end lines for a given test.
 
 The `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` method accepts three positional parameters:
-- `path`: a `pathlib.Path` object, which will be made relative to the repo root by the `Test Visibility` API
+- `path`: a `pathlib.Path` object (made relative to the repo root by the `Test Visibility` API)
 - `start_line`: an optional integer representing the start line of the test in the file
 - `end_line`: an optional integer representing the end line of the test in the file
 
@@ -271,11 +271,11 @@ The `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` method accepts three 
 
 The `ddtrace.ext.test_visibility.api.Test.set_parameters()` classmethod accepts a `TestId` object as an argument, and a JSON-parseable string, to set the `parameters` for the test.
 
-Note that this will overwrite the parameters associated with the test, but will not modify the `TestId` object's `parameters` field.
+**Note:** this overwrites the parameters associated with the test, but does not modify the `TestId` object's `parameters` field.
 
 Setting parameters after a test has been discovered requires that the `TestId` object be unique even without the `parameters` field being set.
 
-#### Code Example
+#### Code example
 
 ```python
 from ddtrace.ext.test_visibility import api
