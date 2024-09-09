@@ -18,7 +18,7 @@ Additional features are available depending on the source of the error. See [sup
 
 ## Supported error sources
 
-Error Tracking captures and processes errors across your web, mobile, and backend applications. You can instrument your applications and services using the [Browser SDK][6], [Mobile SDK][7], or ingests errors from your Logs, Traces, and Real User Monitoring events APM. 
+Error Tracking captures and processes errors across your web, mobile, and backend applications. You can instrument your applications and services using the [Browser SDK][6], [Mobile SDK][7], or ingest errors from your Logs, Traces, and Real User Monitoring events APM. 
 
 Additional features are available depending on the source of the error. For example, in errors originating from an APM trace, the [Execution Replay][4] feature automatically captures production variable values. 
 
