@@ -27,16 +27,16 @@ Con Amazon CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener mét
 
 A continuación se indican las principales diferencias entre el uso de CloudWatch Metric Streams y el sondeo de API.
 
-- **Filtrado de espacios de nombres en AWS**: los valores predeterminados por espacio de nombres y las configuraciones a nivel de cuenta en la página AWS integration solo se aplican al enfoque de sondeo de API. Gestiona todas las reglas para incluir y excluir espacios de nombres/métricas en los flujos mediante la configuración de CloudWatch Metric Streams en tus cuentas de AWS.
+- **Filtrado de espacios de nombres en AWS**: los valores predeterminados por espacio de nombres y las configuraciones a nivel de cuenta en la página de integración de AWS solo se aplican al enfoque de sondeo de API. Gestiona todas las reglas para incluir y excluir espacios de nombres/métricas en los flujos mediante la configuración de CloudWatch Metric Streams en tus cuentas de AWS.
 
 - **Métricas que informan con un retraso de más de dos horas**: el sondeo de API continúa recopilando métricas como `aws.s3.bucket_size_bytes` y `aws.billing.estimated_charges` después de que se habilita la transmisión de métricas, ya que estas no se pueden enviar a través de CloudWatch Metric Stream.
 
 #### Cambio del sondeo de API a los flujos de métricas
-Si ya recibes métricas para un espacio de nombres de CloudWatch determinado a través del método de sondeo de API, Datadog lo detecta automáticamente y deja de sondear las métricas para ese espacio de nombres una vez que comienzas a transmitirlas. Deja la configuración en la página AWS integration sin cambios, ya que Datadog continúa usando el sondeo de API para recopilar etiquetas (tags) personalizadas y otros metadatos para las métricas transmitidas.
+Si ya recibes métricas para un espacio de nombres de CloudWatch determinado a través del método de sondeo de API, Datadog lo detecta automáticamente y deja de sondear las métricas para ese espacio de nombres una vez que comienzas a transmitirlas. Deja la configuración en la página de integración de AWS sin cambios, ya que Datadog continúa usando el sondeo de API para recopilar etiquetas (tags) personalizadas y otros metadatos para las métricas transmitidas.
 
 #### Cambio de los flujos de métricas al sondeo de API
 
-Si más adelante decides que no deseas transmitir métricas para una cuenta y una región de AWS determinadas, o incluso solo para un espacio de nombres específico, Datadog comienza automáticamente a recopilar esas métricas mediante el sondeo de API nuevamente según los ajustes de configuración de la página AWS integration. Si deseas dejar de transmitir todas las métricas para una cuenta y una región de AWS, sigue las instrucciones de la [sección Deshabilitar la transmisión de métricas](#disable-metric-streaming) de este documento.
+Si más adelante decides que no deseas transmitir métricas para una cuenta y una región de AWS determinadas, o incluso solo para un espacio de nombres específico, Datadog comienza automáticamente a recopilar esas métricas mediante el sondeo de API nuevamente según los ajustes de configuración de la página de integración de AWS. Si deseas dejar de transmitir todas las métricas para una cuenta y una región de AWS, sigue las instrucciones de la [sección Deshabilitar la transmisión de métricas](#disable-metric-streaming) de este documento.
 
 ### Facturación
 
@@ -63,10 +63,10 @@ Datadog recomienda utilizar CloudFormation porque es automático y más sencillo
 
 **Nota**: Actualmente, la transmisión de métricas a Datadog solo admite el formato de salida OpenTelemetry v0.7.
 
-1. En tu sitio de Datadog, ve a la pestaña **Configuration** de la [página AWS integration][1].
+1. En tu sitio de Datadog, ve a la pestaña **Configuration** de la [página de integración de AWS][1].
 2. Haz clic en la cuenta de AWS para configurar la transmisión de métricas.
 3. En **Metric Collection**, haz clic en **Automatically Using CloudFormation** en **CloudWatch Metric Streams** para iniciar un stack tecnológico en la consola de AWS.
- {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-setup.png" alt="La sección CloudWatch Metric Streams de la pestaña Metric Collection de la página AWS integration con el botón Automatically Using CloudFormation resaltado" responsive="true" style="width:60%;" >}}
+ {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-setup.png" alt="La sección CloudWatch Metric Streams de la pestaña Metric Collection de la página de integración de AWS con el botón Automatically Using CloudFormation resaltado" responsive="true" style="width:60%;" >}}
 4. Completa los parámetros necesarios:
    - **ApiKey**: añade tu [clave de API de Datadog][2].
    - **DdSite**: selecciona tu [sitio de Datadog][3]. Tu sitio es: {{< region-param key="dd_site" code="true" >}}
@@ -79,9 +79,9 @@ Datadog recomienda utilizar CloudFormation porque es automático y más sencillo
 
 ### Resultados
 
-Una vez que el stack tecnológico se haya creado correctamente, espera cinco minutos para que Datadog reconozca el cambio. Para validar la finalización, ve a la pestaña **Metric Collection** en la [página AWS integration][1] de Datadog y verifica que las regiones activadas aparezcan para la cuenta seleccionada.
+Una vez que el stack tecnológico se haya creado correctamente, espera cinco minutos para que Datadog reconozca el cambio. Para validar la finalización, ve a la pestaña **Metric Collection** en la [página de integración de AWS][1] de Datadog y verifica que las regiones activadas aparezcan para la cuenta seleccionada.
 
-{{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="La sección CloudWatch Metric Streams de la pestaña Metric Collection de la página AWS integration con una región activada" responsive="true" style="width:60%;">}}
+{{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="La sección CloudWatch Metric Streams de la pestaña Metric Collection de la página de integración de AWS con una región activada" responsive="true" style="width:60%;">}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://app.datadoghq.com/organization-settings/api-keys
