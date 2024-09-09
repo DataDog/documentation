@@ -64,7 +64,7 @@ Event
 : **Value**: click
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
 
 For more information on events, see [Events][1].
 
@@ -176,7 +176,7 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 For more information on events, see [Events][1].
 
@@ -274,7 +274,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 For more information on events, see [Events][1].
 
@@ -310,7 +310,7 @@ Event
 : **Values**: toggleOpen, close, open
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Function
 : setIsOpen<br>
@@ -370,7 +370,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Function
 : setValue<br>
@@ -436,7 +436,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Function
 : setValue<br>
@@ -484,7 +484,7 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Function
 : setValue<br>
@@ -557,7 +557,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Function
 : setValue<br>
@@ -575,6 +575,62 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Tab" level="h3" %}}
+Tab components have the following properties.
+
+### Tabs
+
+A list of tab views. Use the **+ (plus)** to add additional views.
+
+
+### Style
+
+Style
+: The coloring style used for the tab component.<br>
+**Provided values**: Default, purple, pink, orange, red, green
+
+Alignment
+: The way the tabs are aligned within the tab component.<br>
+**Provided values**: Horizontal (→), vertical (↓)
+
+Impact
+: Controls whether the selected tab's background is fully colored or only a small band at the bottom is colored.<br>
+**Provided values**: High, low
+
+
+### Appearance
+
+Hide Tabs
+: Controls whether the tab markers are displayed.<br>
+**Provided values**: on, off
+
+Hide Body
+: Controls whether the body of the tabs are displayed.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: setTabIndex<br>
+**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
 
 {{% collapse-content title="Table" level="h3" %}}
 Table components have the following properties.
@@ -677,7 +733,7 @@ Event
 : **Values**: pageChange, tableRowClick
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : setSelectedRow<br>
@@ -738,6 +794,50 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Text area" level="h3" %}}
+Text area components have the following properties.
+
+Label
+: The text that displays at the top of the component.<br>
+**Value**: string or expression
+
+Default value
+: The value that is selected when the text area loads.<br>
+**Value**: string or expression
+
+Placeholder text
+: The text that displays when no value is entered.<br>
+**Value**: string or expression
+
+### Appearance
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: change, submit
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: setValue<br>
+**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="Text input" level="h3" %}}
 Text input components have the following properties.
@@ -770,7 +870,7 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Function
 : setValue<br>

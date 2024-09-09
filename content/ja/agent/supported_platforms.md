@@ -222,7 +222,7 @@ Datadog Agent は、広く使われているオペレーティングシステム
     <th>注</th>
   </thead>
   <tr>
-    <th rowspan=5><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
@@ -244,14 +244,7 @@ Datadog Agent は、広く使われているオペレーティングシステム
     <td></td>
   </tr>
   <tr>
-    <td>2016</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>2022</td>
+    <td>>= 2016</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>

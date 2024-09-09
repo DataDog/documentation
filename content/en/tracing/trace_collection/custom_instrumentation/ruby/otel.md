@@ -69,6 +69,51 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][7] and [OpenTelemetry Automatic instrumentation][8] also.
 
+## Adding span events
+
+_Minimum SDK version: 2.3.0._
+
+You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects `seconds(Float)`.
+
+The following examples demonstrate different ways to add events to a span:
+
+```ruby
+span.add_event('Event With No Attributes')
+span.add_event(
+  'Event With All Attributes',
+  attributes: { 'int_val' => 1, 'string_val' => 'two', 'int_array' => [3, 4], 'string_array' => ['5', '6'], 'bool_array' => [false, true]}
+)
+```
+
+Read the [OpenTelemetry][13] specification for more information.
+
+### Recording exceptions
+
+To record exceptions, use the `record_exception` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```ruby
+span.record_exception(
+  StandardError.new('Error Message')
+)
+span.record_exception(
+  StandardError.new('Error Message'),
+  attributes: { 'status' => 'failed' }
+)
+```
+
+Read the [OpenTelemetry][14] specification for more information.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -81,6 +126,8 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [6]: /tracing/trace_collection/dd_libraries/ruby/#additional-configuration
 [7]: /tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
 [8]: https://opentelemetry.io/docs/instrumentation/ruby/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/ruby/
+[9]: /tracing/trace_collection/trace_context_propagation/
 [10]: /tracing/trace_collection/dd_libraries/ruby/#custom-logging
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
+[13]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[14]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

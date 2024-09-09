@@ -64,6 +64,9 @@ CREATE USER datadog FOR LOGIN datadog;
 
 This is required because RDS does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Install the Agent
 
 Because AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.

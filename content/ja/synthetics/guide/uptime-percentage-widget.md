@@ -1,7 +1,7 @@
 ---
 aliases:
-- /graphing/guide/uptime-percentage-widget
-- /dashboards/guide/uptime-percentage-widget
+- /ja/graphing/guide/uptime-percentage-widget
+- /ja/dashboards/guide/uptime-percentage-widget
 further_reading:
 - link: /monitors/monitor_uptime_widget/
   tag: ドキュメント

@@ -1,4 +1,4 @@
-### Create an IAM user
+#### Create an IAM user
 
 Create an IAM user and attach the IAM policy you created earlier to it.
 

@@ -1,13 +1,13 @@
 ---
 aliases:
-- /integrations/gcp/
+- /ja/integrations/gcp/
 categories:
 - cloud
 - google cloud
 - iot
 - log collection
 - network
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化します。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_platform/
@@ -138,7 +138,7 @@ Datadog の Google Cloud インテグレーションをセットアップして�
 12. **Configuration** (構成) タブで、**Upload Key File** (キーファイルのアップロード) を選択して、このプロジェクトを Datadog とインテグレーションします。
 13. オプションで、タグを使用して、このインテグレーションからホストを除外することができます。これに関する詳しい説明は [構成セクション](#configuration)にあります。
 
-    {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt=“設定" popup="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="設定" popup="true" style="width:80%;">}}
 
 14. _Install/Update_ (インストール/更新) をクリックします。
 15. 複数のプロジェクトを監視する場合は、次の方法のいずれかを使用します。
@@ -300,13 +300,13 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
 
 ##### 必要なアクセス許可
 
-[Dataflow Admin][62]   
+[Dataflow Admin][62]
 : `roles/dataflow.admin` <br> このサービスアカウントが Dataflow の管理者タスクを実行することを許可します。
 
 [Dataflow Worker][63]
 : `roles/dataflow.worker` <br> このサービスアカウントが Dataflow のジョブオペレーションを実行することを許可します。
 
-[Pub/Sub Viewer][64] 
+[Pub/Sub Viewer][64]
 : `roles/pubsub.viewer` <br> このサービスアカウントが Google Cloud ログで Pub/Sub サブスクリプションからのメッセージを表示することを許可します。
 
 [Pub/Sub Subscriber][65]
@@ -328,13 +328,13 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
 1. Google Cloud コンソールの [Logs Explorer ページ][69]に移動します。
 2. **Log Router** タブより、**Create Sink** を選択します。
 3. シンクに名前を設定します。
-4. 宛先として _Cloud Pub/Sub_ を選択し、その目的で作成された Cloud Pub/Sub トピックを選択します。**注**: Cloud Pub/Sub トピックは別のプロジェクトに存在する場合があります。 
+4. 宛先として _Cloud Pub/Sub_ を選択し、その目的で作成された Cloud Pub/Sub トピックを選択します。**注**: Cloud Pub/Sub トピックは別のプロジェクトに存在する場合があります。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
-5. オプションの包含または除外フィルターを使用して、シンクに含めるログを選択します。検索クエリでログをフィルタリングするか、[サンプル関数][70]を使用できます。例えば、`severity` (重大度) レベルが `ERROR` のログの 10% のみを含めるには、`severity="ERROR" AND sample(insertId, 0.01)` の包含フィルターを作成します。
+5. Choose the logs you want to include in the sink with an optional inclusion or exclusion filter. You can filter the logs with a search query, or use the [sample function][70]. For example, to include only 10% of the logs with a `severity` level of `ERROR`, create an inclusion filter with `severity="ERROR" AND sample(insertId, 0.1)`.
 
-    {{< img src="integrations/google_cloud_platform/sink_inclusion_filter.png" alt="severity=ERROR and sample(insertId, 0.1) のクエリによる Google Cloud ロギングシンクの包含フィルター" >}}
+    {{< img src="integrations/google_cloud_platform/sink_inclusion_filter_2.png" alt="The inclusion filter for a Google Cloud logging sink with a query of severity=ERROR and sample(insertId, 0.1)" >}}
 
 6. **Create Sink** をクリックします。
 
@@ -344,7 +344,7 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
 
 1. Google Cloud コンソールの[テンプレートからジョブを作成する][71]ページに移動します。
 2. ジョブに名前を付け、Dataflow 地域エンドポイントを選択します。
-3. **Dataflow template** ドロップダウンで `Pub/Sub to Datadog` を選択すると、**Required parameters** セクションが表示されます。 
+3. **Dataflow template** ドロップダウンで `Pub/Sub to Datadog` を選択すると、**Required parameters** セクションが表示されます。
    a. **Pub/Sub input subscription** ドロップダウンで入力サブスクリプションを選択します。
    b. **Datadog Logs API URL** フィールドに以下の値を入力します。
 
@@ -357,13 +357,13 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
    c. **Output deadletter Pub/Sub topic** ドロップダウンで、メッセージの失敗を受信するために作成されたトピックを選択します。
    d. **Temporary location** フィールドで、ストレージバケット内の一時ファイルのパスを指定します。
 
-{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Datadog Dataflow テンプレートの必須パラメーター" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Datadog Dataflow テンプレートの必須パラメーター" style="width:80%;">}}
 
 4. **Optional Parameters** で `Include full Pub/Sub message in the payload` にチェックを入れます。
 
 5. [ステップ 1](#1-create-a-cloud-pubsub-topic-and-subscription) で言及したように Datadog API キーの値で Secret Manager にシークレットを作成した場合は、シークレットの**リソース名**を **Google Cloud Secret Manager ID** フィールドに入力します。
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow テンプレートのオプションパラメーター。Google Cloud Secret Manager ID と Source of the API key passed フィールドが両方ハイライトされています" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow テンプレートのオプションパラメーター。Google Cloud Secret Manager ID と Source of the API key passed フィールドが両方ハイライトされています" style="width:80%;">}}
 
 その他の使用可能なオプションの詳細については、Dataflow テンプレートの[テンプレートパラメーター][56]を参照してください。
 
@@ -401,7 +401,7 @@ Datadog の [Google Cloud Dataflow インテグレーション][9]を使用し�
 
 ### リソース変更の収集
 
-Google の [Cloud Asset Inventory][79] がクラウドリソースの変更を検出すると、Datadog でリソースイベントを受け取ることができます。 
+Google の [Cloud Asset Inventory][79] がクラウドリソースの変更を検出すると、Datadog でリソースイベントを受け取ることができます。
 
 Google Cloud インテグレーションページの [Resource Collection タブ][80]で **Enable Resource Collection** を選択していることを確認します。次に、以下の手順に従って、変更イベントを Pub/Sub トピックから Datadog [イベントエクスプローラー][81] に転送します。
 
@@ -433,12 +433,12 @@ Google Cloud インテグレーションページの [Resource Collection タブ
 
 #### アセットフィードを作成する
 
-[Cloud Shell][83] または [gcloud CLI][84] で以下のコマンドを実行し、上記で作成した Pub/Sub トピックに変更イベントを送信する Cloud Asset Inventory フィードを作成します。  
+[Cloud Shell][83] または [gcloud CLI][84] で以下のコマンドを実行し、上記で作成した Pub/Sub トピックに変更イベントを送信する Cloud Asset Inventory フィードを作成します。
 
 {{< tabs >}}
 {{% tab "プロジェクト" %}}
 ```bash
-gcloud asset feeds create <FEED_NAME> 
+gcloud asset feeds create <FEED_NAME>
 --project=<PROJECT_ID>
 --pubsub-topic=projects/<PROJECT_ID>/topics/<TOPIC_NAME>
 --asset-names=<ASSET_NAMES>
@@ -455,7 +455,7 @@ gcloud asset feeds create <FEED_NAME>
 
 {{% tab "フォルダー" %}}
 ```bash
-gcloud asset feeds create <FEED_NAME> 
+gcloud asset feeds create <FEED_NAME>
 --folder=<FOLDER_ID>
 --pubsub-topic=projects/<PROJECT_ID>/topics/<TOPIC_NAME>
 --asset-names=<ASSET_NAMES>
@@ -472,7 +472,7 @@ gcloud asset feeds create <FEED_NAME>
 
 {{% tab "組織" %}}
 ```bash
-gcloud asset feeds create <FEED_NAME> 
+gcloud asset feeds create <FEED_NAME>
 --organization=<ORGANIZATION_ID>
 --pubsub-topic=projects/<PROJECT_ID>/topics/<TOPIC_NAME>
 --asset-names=<ASSET_NAMES>

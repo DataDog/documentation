@@ -30,6 +30,6 @@ title: クラスターアラートを作成し、グループの何割かが重�
 
 このモニターは、過去 10 分以内に CPU 使用率が 50% を超えたホストの割合を追跡し、それらのホストの 40% 以上が指定された条件を満たした場合に通知を生成します。
 
-{{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

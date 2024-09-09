@@ -8,7 +8,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     include_ao_metrics: true  # Optional: For AlwaysOn users

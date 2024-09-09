@@ -5,6 +5,7 @@ assets:
   dashboards:
     tokumx: assets/dashboards/tokumx_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,9 +14,9 @@ assets:
       check: tokumx.uptime
       metadata_path: metadata.csv
       prefix: tokumx.
-    process_signatures: []
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 74
     source_type_name: TokuMX
   saved_views:
     tokumx_processes: assets/saved_views/tokumx_processes.json
@@ -26,7 +27,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - caching
-- data store
+- data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_on_public_website: true
@@ -36,7 +38,6 @@ integration_id: tokumx
 integration_title: TokuMX
 integration_version: 3.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tokumx
 public_title: TokuMX
@@ -49,18 +50,23 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::キャッシュ
-  - Category::データストア
+  - Category::Data Stores
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications
   support: README.md#Support
   title: TokuMX
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -77,7 +83,7 @@ tile:
 
 TokuMX チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### TokuMX の準備
 
@@ -117,11 +123,11 @@ TokuMX チェックは [Datadog Agent][1] パッケージに含まれていま�
 MongoDB でのユーザーの作成と管理の詳細については、[MongoDB Security のドキュメント][2]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `tokumx.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tokumx.d/conf.yaml][2] を参照してください。
@@ -139,7 +145,7 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 [2]: https://github.com/DataDog/integrations-core/blob/master/tokumx/datadog_checks/tokumx/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -147,9 +153,9 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 
 | パラメーター            | 値                                                      |
 | -------------------- | ---------------------------------------------------------- |
-| `<インテグレーション名>` | `tokumx`                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "mongodb://<ユーザー>:<パスワード>@%%host%%:27017"}` |
+| `<INTEGRATION_NAME>` | `tokumx`                                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{"server": "mongodb://<ユーザー>:<パスワード>@%%host%%:27017"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -171,7 +177,7 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 
 このチェックは、TokuMX ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "tokumx" >}}
 
 
@@ -184,7 +190,7 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 - [MongoDB アプリケーションの TokuMX キーメトリクスの監視][5]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.mongodb.com/manual/security/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

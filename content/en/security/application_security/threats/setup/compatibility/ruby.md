@@ -38,7 +38,8 @@ The minimum tracer version to get all supported application security capabilitie
 **Supported Ruby interpreters**
 The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
 
-- [MRI][2] versions 2.1 to 3.1
+- [MRI][2] versions 2.5 to 3.3
+- [JRuby][3] versions 9.2.21.0+ and 9.3
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, aarch64
@@ -61,12 +62,14 @@ These are supported on the following architectures:
 | Grape         |  {{< X >}} |  {{< X >}} |
 | Unicorn       |  {{< X >}} |  {{< X >}} |
 | Passenger     |  {{< X >}} |  {{< X >}} |
+| GraphQL       |  {{< X >}} |  {{< X >}} |
 
-| Framework Web Server    | Minimum Framework Version   |
-| ----------------------- | --------------------------- |
-| Rack                    | 1.1                         |
-| Rails                   | 3.2 (also depends on Ruby version) |
-| Sinatra                 | 1.4                         |
+| Framework Web Server    | Minimum Framework Version   | Minimum Tracer Version |
+| ----------------------- | --------------------------- | ---------------------- |
+| Rack                    | 1.1                         | 1.9.0                  |
+| Rails                   | 3.2 (also depends on Ruby version) | 1.9.0           |
+| Sinatra                 | 1.4                         | 1.9.0                  |
+| GraphQL                 | 2.0.19                      | 2.3.0                  |
 
 ### Networking framework compatibility
 
@@ -120,3 +123,4 @@ These are supported on the following architectures:
 
 [1]: /tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/
+[3]: https://www.jruby.org/

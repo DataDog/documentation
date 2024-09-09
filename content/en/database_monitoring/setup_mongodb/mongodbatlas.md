@@ -12,6 +12,8 @@ further_reading:
 
 Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB Atlas instances. This guide outlines the steps to set up Database Monitoring for MongoDB Atlas.
 
+{{% dbm-mongodb-beta-new-features %}}
+
 ## Before you begin
 
 Supported MongoDB major versions
@@ -53,6 +55,9 @@ The Datadog Agent requires read-only access to the MongoDB Atlas Cluster to coll
 6. Click **Add User**.
 7. Note the username and password for the monitoring user, so you can configure the Agent.
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install and configure the Agent
 
 To monitor your MongoDB Atlas Cluster, you must install and configure the Datadog Agent on a host that can [remotely access][1] your MongoDB Atlas Cluster. This host can be a Linux host, a Docker container, or a Kubernetes pod.
@@ -68,7 +73,7 @@ To get the individual MongoDB instance hostname and port, you can use the `dig` 
 
 ##### Replica set members
 
-For a sharded cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
+For a non-sharded (replica set) cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
 {{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net

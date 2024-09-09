@@ -71,7 +71,7 @@ sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a} / sum:my_metric.has
 | 2019-03-29 12:30:00 | 1                | 1                  |
 ```
 
-変更後のクエリ
+Modified query:
 
 ```text
 sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a}.fill(last,900) / sum:my_metric.has_gaps.gauge{timer:offset,env:a}.fill(last,900)

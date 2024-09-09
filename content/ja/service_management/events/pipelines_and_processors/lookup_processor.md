@@ -19,7 +19,7 @@ title: ルックアッププロセッサー
 
 
 **Reference Table**
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー" 
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー"
     style="width:80%;">}}
 
 

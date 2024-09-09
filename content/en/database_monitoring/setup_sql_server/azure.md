@@ -122,6 +122,9 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Install and configure the Agent
 
 Because Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
@@ -139,7 +142,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     tags:  # Optional
@@ -212,7 +215,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     tags:  # Optional
@@ -308,14 +311,14 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        sqlserver.yaml: -|
+        sqlserver.yaml: |-
           cluster_check: true
           init_config:
           instances:
           - dbm: true
             host: <HOSTNAME>,1433
-            username: data
-            password: '<PASSWORD>'
+            username: datadog
+            password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             include_ao_metrics: true  # Optional: For AlwaysOn users
@@ -354,7 +357,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
     driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
@@ -385,7 +388,7 @@ metadata:
           "dbm": true,
           "host": "<HOSTNAME>,<SQL_PORT>",
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional

@@ -41,9 +41,9 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 ## Overview
 
-{{< img src="observability_pipelines/op_marketecture_04182024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/op_marketecture_08232024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) so that you can easily build and deploy pipelines.
+Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
 
 The Observability Pipelines Worker is the software that runs in your infrastructure. It centrally aggregates, processes, and routes your logs based on your use case. This means you can redact sensitive data, pre-process logs, and determine which destinations they should go to, all before the logs leave your environment.
 
@@ -61,13 +61,15 @@ To set up a pipeline:
     - [Archive logs to Datadog Archives][5]
     - [Sensitive data redaction][6]
     - [Log Enrichment][7]
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up you processors.
+1. Select and set up your [source][10].
+1. Select and set up your [destinations][11].
+1. Set up you [processors][12].
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
 
-See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
+See [Set Up Pipelines][8] for more information.
+
+See [Advanced Configurations][9] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Explore Observability Pipelines
 
@@ -130,4 +132,8 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [5]: /observability_pipelines/archive_logs/
 [6]: /observability_pipelines/sensitive_data_redaction/
 [7]: /observability_pipelines/log_enrichment/
-[8]: /observability_pipelines/advanced_configurations/
+[8]: /observability_pipelines/set_up_pipelines/
+[9]: /observability_pipelines/advanced_configurations/
+[10]: /observability_pipelines/sources/
+[11]: /observability_pipelines/destinations/
+[12]: /observability_pipelines/processors/

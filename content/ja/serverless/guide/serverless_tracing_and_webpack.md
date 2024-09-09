@@ -44,7 +44,7 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
             - datadog-lambda-js
         packagerOptions:
           scripts:
-            # optional, only needed when they are included as transitive dependencies 
+            # optional, only needed when they are included as transitive dependencies
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 

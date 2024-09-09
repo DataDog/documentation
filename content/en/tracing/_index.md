@@ -99,6 +99,10 @@ Datadog APM provides tools to manage the volume and retention of your trace data
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
 
+## Troubleshooting
+
+For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -131,3 +135,4 @@ Datadog APM provides tools to manage the volume and retention of your trace data
 [26]: /tracing/services/service_page/
 [27]: /tracing/trace_collection/single-step-apm/
 [28]: /tracing/services/resource_page/
+[29]: /tracing/troubleshooting/
