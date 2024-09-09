@@ -24,12 +24,12 @@ title: RDS Oracle のデータベースモニタリングの設定
 プロキシ、ロードバランサー、コネクションプーラー
 : Agent は、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
 
-Data security considerations
-: See [Sensitive information][6] for information about what data the Agent collects from your databases and how to ensure it is secure.
+データセキュリティへの配慮
+: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][6]を参照してください。
 
 ## セットアップ
 
-Complete the following steps to enable Database Monitoring with your Oracle database:
+Oracle データベースで Database Monitoring を有効にするには、次の手順を完了してください。
 
 1. [Datadog ユーザーの作成](#create-the-datadog-user)
 1. [ユーザーにデータベースへのアクセス権を付与する](#grant-the-user-access-to-the-database)
@@ -78,18 +78,18 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### Agent のインストール
 
 Agent をどこにインストールするかについては、[DBM セットアップアーキテクチャ][10]のドキュメントを参照してください。Agent は外部の Oracle クライアントを必要としません。
 
-For installation steps, see the [Agent installation instructions][8].
+インストール手順については、[Agent インストール手順][8]を参照してください。
 
 ### Agent の構成
 
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][9] for all available configuration options.
+Oracle Agent のコンフィギュレーションファイル `/etc/datadog-agent/conf.d/oracle.d/conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][9]を参照してください。
 
 **注:** `7.53.0` 未満の Agent リリースの構成サブディレクトリは `oracle-dbm.d` です。
 
@@ -97,30 +97,30 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`
 init_config:
 instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
     username: 'datadog'
     password: 'ENC[datadog_user_database_password]'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
     username: 'datadog'
     password: 'ENC[datadog_user_database_password]'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
 
-Once all Agent configuration is complete, [restart the Datadog Agent][2].
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][2]します。
 
 ### Oracle インテグレーションをインストールまたは検証する
 
 #### 初めてインストールする場合
 
-On the Integrations page in Datadog, install the [Oracle integration][7] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
+Datadog の Integrations ページで、組織用の [Oracle インテグレーション][7]をインストールしてください。これにより、Oracle データベースのパフォーマンスをモニタリングするために使用できる [Oracle ダッシュボード][5]がアカウントにインストールされます。
 
 #### すでにインストール済みの場合
 
@@ -128,11 +128,11 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 ### セットアップの検証
 
-[Run the Agent's status subcommand][3] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][5] and [Databases][4] page in Datadog to get started.
+[Agent の status サブコマンドを実行][3]し、**Checks** セクションで `oracle` を探します。Datadog の[ダッシュボード][5]と[データベース][4]のページに移動して開始します。
 
 ## カスタムクエリ
 
-Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][9] to learn more about the configuration options available.
+Database Monitoring は、Oracle データベースのカスタムクエリをサポートしています。使用可能な構成オプションの詳細については、[conf.yaml.example][9] を参照してください。
 
 <div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 

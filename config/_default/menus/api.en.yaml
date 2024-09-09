@@ -7049,6 +7049,46 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Software Catalog
+      url: /api/latest/software-catalog/
+      identifier: software-catalog
+      generated: true
+    - name: Delete a single entity
+      url: '#delete-a-single-entity'
+      identifier: software-catalog-delete-a-single-entity
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCatalogEntity
+        unstable: []
+        order: 3
+    - name: Create or update entities
+      url: '#create-or-update-entities'
+      identifier: software-catalog-create-or-update-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCatalogEntity
+        unstable: []
+        order: 2
+    - name: Get a list of entities
+      url: '#get-a-list-of-entities'
+      identifier: software-catalog-get-a-list-of-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogEntity
+        unstable: []
+        order: 1
     - name: Spans
       url: /api/latest/spans/
       identifier: spans

@@ -471,7 +471,7 @@ Processes are normally collected at 10s resolution. While actively working with 
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /monitors/types/process/
-[7]: https://app.datadoghq.com/monitors#create/live_process
+[7]: https://app.datadoghq.com/monitors/create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/

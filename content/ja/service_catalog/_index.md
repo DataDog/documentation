@@ -40,21 +40,20 @@ further_reading:
   text: Datadog サービスカタログを使ったエンドツーエンドのサービス所有権管理のベストプラクティス
 - link: https://www.datadoghq.com/blog/service-catalog-schema-v3/
   tag: ブログ
-  text: Improve developer experience and collaboration with Service Catalog schema
-    version 3.0
+  text: サービスカタログのスキーマバージョン 3.0 で、開発者の体験とコラボレーションを向上
 title: Datadog サービスカタログ
 ---
 
-{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="サービスカタログのナビゲーション" style="width:100%;" >}}
 
 ## 概要
 
-Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
+Datadog [サービスカタログ][1]は、所有権メタデータ、パフォーマンスインサイト、セキュリティ分析、コスト配分などを統合し、サービス全体を一つのビューで提供します。これにより、組織はスケールに応じたエンドツーエンドのサービス所有権を簡単に実現し、リアルタイムのパフォーマンスインサイトを取得し、信頼性やセキュリティリスクを検出・対応し、アプリケーションの依存関係を一元的に管理することができます。
 
 ### ユースケース
 
-#### Service discovery
-- Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
+#### サービスの発見
+- Datadog サービスカタログには、APM、USM、RUM から発見されたすべてのサービスがデフォルトで含まれています。これらの製品を使用している場合、カタログは事前にエントリで満たされています。
 - 環境内のさまざまなアプリケーションをインスツルメントすると、それらは自動的にサービスカタログに追加されます。
 
 #### 依存関係のマッピングと管理
@@ -65,20 +64,20 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 #### ガバナンスと最適化
 - [サービススコアカード][9]を通じて、エンジニアリング担当の幹部社員に、チームやサービス全体のベストプラクティスの概要を提供する。
 - サービスの依存関係の中に存在する既知のセキュリティ脆弱性を見つけて修正することで、アプリケーションのリスクを低減する。
-- Understanding trends and identifying inefficiencies in the costs related to your services.
+- サービスに関連するコストの傾向を把握し、非効率性を特定する。
 
 #### 知識の共有 
 - 数多くのリポジトリ、チャンネル、ドキュメントページを探し回ることなく、情報を見つける。
 - 新しいチームメンバーのオンボーディング時にランブックや wiki ページの検索時間を短縮する。
 - リアルタイムで自動生成されるトポロジーマップを活用して、システムのアーキテクチャを理解する。
 
-#### Evaluate monitoring coverage  
-- Detecting which services aren’t reporting observability data or having that data monitored.
-- Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
+#### モニタリングカバー範囲を評価
+- 可観測性データを報告していないサービスや、そのデータが監視されていないサービスを検出する。
+- [タグ付けのベストプラクティス][6]を促進し、推奨されるセットアップ構成を確認して、[クロステレメトリーインサイト][7]を最適化する。
 - SLO、モニター、オーナーシップのないサービスなどの問題を発見する。
 
 #### インシデント発生中のコラボレーションをスムーズに
-- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
+- 正しい所有者情報とコミュニケーションチャンネルを確立し、モニタリングとトラブルシューティングの詳細へのアクセスを合理化することで、すべての人のオンコール経験を向上させる。
 - エンジニアが既に使用している可観測性ツールに、ランブックやドキュメントなどのソリューションやトラブルシューティングツールへのリンクを直接埋め込む。
 - 信頼性を高め、上流と下流のサービスや依存関係の所有者を簡単に特定することで、インシデントの復旧をスピードアップする。
 
@@ -92,7 +91,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 ## ロールベースアクセスおよび権限
 
-For general information, see [Role Based Access Control][2] and [Role Permissions][3].
+一般的な情報は、[ロールベースアクセスコントロール][2]および[ロール権限][3]を参照してください。
 ### 読み取り権限
 
 サービスカタログの読み取り権限により、サービスカタログのデータを読み取ることができ、以下の機能が有効になります。
@@ -114,7 +113,7 @@ For general information, see [Role Based Access Control][2] and [Role Permission
 
 ## サービスタイプ
 
-Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
+アプリケーションによって監視されるすべてのサービスは、タイプに関連付けられています。Datadog は、受信したスパンデータに付けられた `span.type` 属性に基づいて、このタイプを自動的に決定します。このタイプは、Datadog Agent が統合しているアプリケーションやフレームワークの名前を指定します。
 
 たとえば、Flask の公式インテグレーションを使用している場合は、`Type` が "Web" にセットされ、カスタムアプリケーションを監視している場合は、`Type` が "Custom" にセットされます。
 
@@ -129,7 +128,7 @@ Every monitored service is associated with a type. Datadog automatically determi
 いくつかのインテグレーションは、タイプのエイリアスになります。例えば、Postgres、MySQL、Cassandraは "DB" というタイプに対応します。Redis と Memcache のインテグレーションは、"Cache" というタイプにマッピングされます。
 
 ## データ保持
-The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
+**サービスリスト**と**サービスページ**のサービスとリソースの統計、およびスパンのサマリーは、最大で 30 日間保持されます。APM トレースメトリクスをカスタムクエリするには、メトリクスエクスプローラーを使用してください。[APM のデータ保持の詳細はこちら][4]。
 
 
 ## 参考資料

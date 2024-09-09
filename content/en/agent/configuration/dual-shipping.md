@@ -220,7 +220,7 @@ HTTPS requires Agent version >= 6.13.
 In `datadog.yaml`:
 ```yaml
 logs_config:
-  use_http: true
+  force_use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
     Host: "agent-http-intake.logs.datadoghq.com"
@@ -233,7 +233,7 @@ logs_config:
 Requires Agent >= 6.18 or 7.18.
 
 ```bash
-DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
@@ -249,21 +249,21 @@ In `datadog.yaml`:
 ```yaml
 database_monitoring:
   samples:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   activity:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "dbquery-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   metrics:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "dbm-metrics-intake.datadoghq.com"
@@ -294,7 +294,7 @@ In `datadog.yaml`:
 ```yaml
 network_devices:
   metadata:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "ndm-intake.datadoghq.com"
@@ -302,7 +302,7 @@ network_devices:
       is_reliable: true
   snmp_traps:
     forwarder:
-      use_http: true
+      force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
         Host: "ndm-intake.datadoghq.com"
@@ -310,7 +310,7 @@ network_devices:
         is_reliable: true
   netflow:
     forwarder:
-      use_http: true
+      force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
         Host: "ndm-intake.datadoghq.com"
@@ -362,7 +362,7 @@ In `datadog.yaml`:
 ```yaml
 compliance_config:
   endpoints:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "https://<VERSION>-app.agent.datadoghq.eu"
@@ -386,7 +386,7 @@ In `datadog.yaml`:
 ```yaml
 runtime_security_config:
   endpoints:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "https://<VERSION>-app.agent.datadoghq.eu"
@@ -427,7 +427,7 @@ and add the relevant settings to `customAgentConfig`.
       - apikey4
 
     logs_config:
-      use_http: true
+      force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
         Host: "agent-http-intake.logs.datadoghq.com"
@@ -480,7 +480,7 @@ spec:
               "https://app.datadoghq.eu":
               - apikey4
             logs_config:
-              use_http: true
+              force_use_http: true
               additional_endpoints:
               - api_key: "apiKey2"
                 Host: "agent-http-intake.logs.datadoghq.com"

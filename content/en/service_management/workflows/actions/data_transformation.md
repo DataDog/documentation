@@ -51,28 +51,10 @@ You can use Bits AI to help you write the JavaScript for a **Function** step. To
 
 ## Test expressions and functions
 
-To test an expression or function action, click **Test** in the **Inputs** section. If the action uses an output variable from a previous step, comment out the variable in your code and replace it with test data. For example, consider the following action that assigns variables to the workflow name and to the `Steps.List_monitors` output from a previous step:
-
-```js
-let name = $.WorkflowName;
-let object = $.Steps.List_monitors;
-
-...
-```
-
-To test the action, comment out the existing variable assignments and replace them with hardcoded test data:
-
-```js
-\\ let name = $.WorkflowName;
-let name = 'Test workflow'
-\\ let object = $.Steps.List_monitors;
-let object = {0:{
-  'name': 'Test monitor'
-}}
-...
-```
+See the test and debug page to learn how to [test a workflow step][3].
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
 [1]: https://lodash.com/
 [2]: https://datadoghq.slack.com/
+[3]: /service_management/workflows/test_and_debug/#test-a-step
