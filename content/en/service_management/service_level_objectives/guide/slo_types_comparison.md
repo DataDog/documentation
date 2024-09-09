@@ -46,9 +46,9 @@ When creating SLOs, you can choose from the following types:
 
 ## Best practices for choosing an SLO Type
 
-- Whenever possible, use Metric-based SLOs. Best practice for SLOs is to have am error budget with a number of events and the SLO is volume weighted.
-- If you want a time based SLI calculation or SLO tracking uptime, use Time slice SLOs since you won’t have to maintain an underlying monitor.
-- If you need non-metric monitors or multiple monitors, then use monitor based SLOs.
+- Whenever possible, use metric-based SLOs. It's best practice to have SLOs where the error budget reflects the number of bad events you have left before you breach your SLO. Your SLO calculations will also be volume weighted based on the number of events.
+- If, instead, you want an SLO that tracks uptime and uses a time-based SLI calculation, use time slice SLOs. Unlike monitor-based SLOs, time slice SLOs don't require you to maintain an underlying monitor for your SLO.
+- Finally, consider monitor-based SLOs for use cases that are not covered by time slice SLOs, which include SLOs based on non-metric monitors or multiple monitors.
 
 
 ## Further Reading
