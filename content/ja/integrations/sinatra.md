@@ -3,6 +3,7 @@ aliases:
 - /ja/logs/log_collection/nxlog
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
 description: Sinatra アプリケーションログを収集
@@ -10,7 +11,6 @@ has_logo: true
 integration_id: sinatra
 integration_title: Sinatra
 is_public: true
-kind: インテグレーション
 name: Sinatra
 public_title: Datadog-Sinatra インテグレーション
 short_description: Sinatra アプリケーションログを収集

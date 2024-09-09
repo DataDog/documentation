@@ -8,7 +8,6 @@ further_reading:
 - link: api/latest/downtimes/
   tag: Documentación
   text: Referencia de la API de tiempo de inactividad
-kind: Documentación
 title: Ejemplos
 ---
 

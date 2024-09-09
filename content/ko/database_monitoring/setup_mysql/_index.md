@@ -1,7 +1,6 @@
 ---
 description: MySQL 데이터베이스에서 데이터베이스 모니터링 설정
 disable_sidebar: true
-kind: documentation
 title: MySQL 설정
 ---
 

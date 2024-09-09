@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/monitors/faq/how-can-i-export-alert-history
-kind: guía
 title: Exportar alertas de monitor a CSV
 ---
 

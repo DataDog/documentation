@@ -1,6 +1,5 @@
 ---
 title: Span Tag Semantics
-kind: documentation
 further_reading:
     - link: 'logs/log_configuration/attributes_naming_convention'
       tag: 'Documentation'

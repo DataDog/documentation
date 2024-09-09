@@ -77,7 +77,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 `DD_FIPS_MODE` 환경 변수를 설정하면 에이전트와 함께 FIPS 패키지가 설치되고 에이전트가 프록시를 사용하도록 설정됩니다. 이 방법을 사용하는 경우 추가 설정 단계는 없지만 [설치 확인](#virify-your-installation)을 실행해야 합니다.

@@ -8,7 +8,6 @@ further_reading:
 - link: /tests/explorer/facets
   tag: Documentación
   text: Más información sobre las facetas
-kind: documentación
 title: Sintaxis de búsqueda del Explorador de visibilidad de tests
 ---
 

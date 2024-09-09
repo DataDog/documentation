@@ -15,7 +15,6 @@ further_reading:
   tag: Documentación
   text: Crear un monitor de rastreo de errores
 is_beta: true
-kind: documentación
 title: Seguimiento de errores para Logs
 ---
 

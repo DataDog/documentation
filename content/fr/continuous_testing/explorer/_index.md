@@ -17,7 +17,6 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: Documentation
   text: Découvrir comment effectuer des recherches dans vos exécutions de tests
-kind: documentation
 title: Explorateur de surveillance Synthetic et de tests en continu
 ---
 

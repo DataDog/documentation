@@ -1,5 +1,5 @@
 {{- $options := (dict "enableSourceMap" true) -}}
-{{- $isLocalServer := .Site.IsServer -}}
+{{- $isLocalServer := hugo.IsServer -}}
 {{- $inputStyleFile := "styles/style.scss" -}}
 {{- $outputStyles := "" -}}
 

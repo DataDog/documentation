@@ -6,7 +6,6 @@ further_reading:
 - link: /network_monitoring/devices
   tag: Documentation
   text: ネットワークデバイスモニタリング
-kind: ガイド
 npm_provider: azure
 title: NPM Azure でサポートされるデバイス
 ---

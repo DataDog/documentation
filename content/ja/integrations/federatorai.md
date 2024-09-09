@@ -36,6 +36,7 @@ categories:
 - kubernetes
 - ai/ml
 - オーケストレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
 display_on_public_website: true
@@ -45,7 +46,6 @@ integration_id: federatorai
 integration_title: Federator.ai
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: federatorai
 public_title: Federator.ai
@@ -60,6 +60,7 @@ tile:
   - Category::AI/ML
   - Category::Orchestration
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
   media: []
@@ -209,11 +210,11 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    - このグラフは、現在のクラスターのネームスペースの最高予測コスト（月次）を示しています。
 
 
-## 計画と使用
+## セットアップ
 
 * 以下の手順に従って、Federator.ai をダウンロードおよび設定してください。
 
-### インフラストラクチャーリスト
+### インストール
 
 1. OpenShift/Kubernetes クラスターにログインします
 2. 次のコマンドで OpenShift/Kubernetes 用の Federator.ai をインストールします
@@ -270,7 +271,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    Default login credential is admin/admin
 
    Also, you can start to apply alamedascaler CR for the target you would like to monitor.
-   Review administration guide for further details. 
+   Review administration guide for further details.
    ========================================
    ========================================
    You can now access Federatorai REST API through https://<YOUR IP>:31011
@@ -293,7 +294,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
 4. Federator.ai GUI にログインします。URL とログイン資格情報は、ステップ 2 の出力で確認できます。
 
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. お使いのアカウントで Datadog にログインし、Datadog API を使用するための [API キーとアプリケーションキー][9]を取得します。
 
@@ -301,27 +302,27 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
     - Federator.ai GUI を起動 -> Configuration -> Clusters -> "Add Cluster" をクリックします
     - API キーとアプリケーションキーを入力します
 
-    ![クラスターウィンドウを追加する][10] 
+    ![クラスターウィンドウを追加する][10]
 
 3. 詳細については、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]および[ユーザーガイド][12]を参照してください。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "federatorai" >}}
 
 
 
-### ヘルプ
+### サービスチェック
 
 Federator.ai には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Federator.ai には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]をご覧いただくか、[Datadog サポート][14]までお問い合わせください。
 

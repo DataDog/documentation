@@ -1,7 +1,6 @@
 ---
 description: Feuille de route pour la formation des nouveaux fournisseurs de services
   gérés au processus d'ingénierie commerciale de Datadog
-kind: documentation
 private: true
 title: Guide de formation aux processus de vente pour les partenaires
 ---

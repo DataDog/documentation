@@ -10,7 +10,6 @@ further_reading:
   tag: Blog
   text: Organiser et analyser les Session Replays connexes grâce aux playlists dans
     Datadog RUM
-kind: documentation
 title: Playlists Session Replay
 ---
 

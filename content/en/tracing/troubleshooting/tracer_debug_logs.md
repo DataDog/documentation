@@ -1,6 +1,5 @@
 ---
 title: Tracer Debug Logs
-kind: Documentation
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"

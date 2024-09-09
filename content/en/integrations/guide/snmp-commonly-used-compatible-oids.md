@@ -1,6 +1,6 @@
 ---
 title: SNMP commonly used and compatible OIDs
-kind: guide
+
 aliases:
   - /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
 ---

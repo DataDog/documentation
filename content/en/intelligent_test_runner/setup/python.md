@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for Python
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 30

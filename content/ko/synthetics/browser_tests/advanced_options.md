@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/browser_tests/actions/
   tag: 설명서
   text: 브라우저 테스트 단계 더 알아보기
-kind: 설명서
 title: 브라우저 테스트 단계 고급 옵션
 ---
 

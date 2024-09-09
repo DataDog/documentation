@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-lambda-telemetry-api/
   tag: 블로그
   text: AWS Lambda Telemetry API를 통해 확장된 Datadog Lambda 확장 기능
-kind: 설명서
 title: Lambda 함수 로그 수집 트러블슈팅 가이드
 ---
 

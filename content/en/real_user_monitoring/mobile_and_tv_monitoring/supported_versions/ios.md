@@ -1,6 +1,5 @@
 ---
 title: RUM iOS and tvOS Monitoring Supported Versions
-kind: documentation
 beta: true
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 code_lang: ios

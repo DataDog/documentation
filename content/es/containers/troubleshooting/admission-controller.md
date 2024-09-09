@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: Documentación
   text: Inyección de biblioteca de Kubernetes
-kind: documentación
 title: Solucionar problemas con el Controlador de admisiones (Admission Controller)
 ---
 

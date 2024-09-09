@@ -1,6 +1,6 @@
 ---
 title: FAQ Integrations
-kind: faq
+
 cascade:
   - private: true
 aliases:

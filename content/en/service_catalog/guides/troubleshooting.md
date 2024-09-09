@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Service Catalog
-kind: documentation
 aliases:
   - /tracing/service_catalog/troubleshooting
   - /service_catalog/troubleshooting
@@ -36,7 +35,7 @@ If you have many services that share the same metadata, you do not need separate
 
 ## Associated monitors not displayed in the Setup Guidance section
 
-The Service Catalog associates monitors to services when you tag the monitor with `service` and [APM primary tags][3]. 
+The Service Catalog associates monitors to services when they are tagged, scoped, or grouped with service or [APM primary tags][3]. 
 
 The total monitor count displayed on the **Setup Guidance** tab for a single service does not include muted monitors and groups. 
 

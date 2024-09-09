@@ -1,6 +1,5 @@
 ---
 title: Private Location Monitoring
-kind: documentation
 description: Monitor your private locations
 aliases:
 - /synthetics/private_locations/monitoring

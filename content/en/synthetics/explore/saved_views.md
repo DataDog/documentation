@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: documentation
 aliases:
 - /synthetics/search/saved_views
 further_reading:

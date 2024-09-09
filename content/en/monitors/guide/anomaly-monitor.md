@@ -1,6 +1,5 @@
 ---
 title: Anomaly Monitors
-kind: guide
 aliases:
 - /monitors/faq/anomaly-monitor.md
 ---

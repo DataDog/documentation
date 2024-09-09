@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/guide/changing_container_registry
-kind: guide
 title: 컨테이너 레지스트리 변경하기
 ---
 

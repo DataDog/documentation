@@ -1,6 +1,6 @@
 ---
 title: Monitor An Application That Requires Authentication With Browser Testing
-kind: guide
+
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 aliases:
   - /synthetics/guide/app-that-requires-login
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview 
 
-<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send feedback</a> to help Datadog work on the systems that matter the most to your teams.</div>
+<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section</a></div>
 
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 

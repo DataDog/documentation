@@ -1,6 +1,5 @@
 ---
 title: Java Tests
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -33,10 +32,6 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
-
 ## Compatibility
 
 Supported test frameworks:
@@ -67,26 +62,20 @@ Other build systems, such as Ant or Bazel, are supported with the following limi
 
 ## Setup
 
-Setting up Test Visibility for Java includes the following steps:
-1. Configure tracer reporting method.
-2. Download tracer library to the hosts where your tests are executed.
-3. Run your tests with the tracer attached.
+You may follow interactive setup steps on the [Datadog site][2] or the instructions below.
 
-You may follow interactive setup steps on the [Datadog site][2] or with the instructions below.
-
-### Configuring reporting method
-
-This step involves configuring how Datadog Java Tracer reports data to Datadog.
-There are two main options:
-* Reporting the data to Datadog Agent, which will forward it to Datadog.
-* Reporting the data directly to Datadog.
+Configuring the Datadog Java Tracer varies depending on your CI provider.
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
+{{% /tab %}}
+
+{{% tab "Other Cloud CI Provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}

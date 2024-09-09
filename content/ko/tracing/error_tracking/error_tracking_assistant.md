@@ -8,7 +8,6 @@ further_reading:
   tag: 설명서
   text: 백엔드 서비스 오류 추적에 대해 알아보기
 is_beta: true
-kind: documentation
 private: true
 title: 오류 추적 어시스턴트
 ---

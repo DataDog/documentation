@@ -16,7 +16,6 @@ further_reading:
 - link: /tests/code_coverage/
   tag: ドキュメント
   text: コードカバレッジについて
-kind: ドキュメント
 title: Intelligent Test Runner の概要
 ---
 
@@ -156,6 +155,6 @@ Time Saved
 [5]: /ja/tests/code_coverage
 [6]: /ja/dashboards/
 [7]: https://app.datadoghq.com/dash/integration/30941/ci-visibility---intelligent-test-runner
-[8]: /ja/continuous_integration/explorer?tab=testruns
+[8]: /ja/tests/explorer/
 [9]: /ja/continuous_integration/explorer/facets/?tab=testruns
 [10]: /ja/intelligent_test_runner/how_it_works/

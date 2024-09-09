@@ -1,6 +1,5 @@
 ---
 title: Error Tracking Exception Replay
-kind: documentation
 is_beta: true
 description: Learn about Exception Replay in Error Tracking.
 further_reading:
@@ -30,18 +29,24 @@ Exception Replay in APM Error Tracking automatically captures production variabl
 
 ## Requirements
 Supported languages
-: Python
+: Python, Java, .NET
 
 - Your Datadog Agent must be configured for APM.
-- Your application must be instrumented with `ddtrace`.
+- Your application must be instrumented with:
+  - `ddtrace` for Python
+  - `dd-trace-java` for Java
+  - `dd-trace-dotnet` for .NET
 
 Exception Replay is only available in APM Error Tracking. Error Tracking for Logs and RUM is not supported.
 
 ## Setup
 
 1. Install or upgrade your Agent to version `7.44.0` or higher.
-2. Ensure that you are using `ddtrace` version `1.16.0` or higher.
-3. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
+2. Ensure that you are using:
+  * `ddtrace` version `1.16.0` or higher.
+  * `dd-trace-java` version `1.35.0` or higher.
+  * `dd-trace-dotnet` version `2.53.0` or higher.
+4. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
 
 ### Redacting sensitive data
 

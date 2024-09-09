@@ -2,7 +2,6 @@
 aliases:
 - /ko/monitors/incident_management/analytics
 description: 대시보드 및 노트북에서 집계된 사건 관리 통계를 추적하고 분석합니다.
-kind: 설명서
 title: 인시던트 관리 분석
 ---
 

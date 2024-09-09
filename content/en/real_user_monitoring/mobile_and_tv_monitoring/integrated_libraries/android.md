@@ -1,6 +1,5 @@
 ---
 title: Android and Android TV Libraries for RUM
-kind: documentation
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10

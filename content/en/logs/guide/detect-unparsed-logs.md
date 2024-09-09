@@ -1,6 +1,6 @@
 ---
 title: Monitor and query for unparsed logs
-kind: guide
+
 further_reading:
   - link: /logs/explorer/
     tag: Documentation

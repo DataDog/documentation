@@ -1,6 +1,5 @@
 ---
 title: Exploring Database Hosts
-kind: documentation
 description: Explore and dig into your database host health and configuration
 
 ---
@@ -58,13 +57,9 @@ On the **Metrics** tab of the host details panel, you can view and filter metric
 
 ## Active connections
 
-The **Active Connections** tab of the host details panel displays the live queries being executed on the host.
+The **Active Connections** tab of the host details panel displays the live queries being executed on the host. Click on a query statement to open a panel that includes event attributes, related traces, and other relevant details.
 
 {{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
-
-Click on a query statement to open a panel that includes event attributes, related traces, and other relevant details.
-
-{{< img src="database_monitoring/db-list-active-connection-details-2.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
 
 ## Schema
 

@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10073
     source_type_name: MapR
-  logs:
-    source: mapr
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +26,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
 display_on_public_website: true
@@ -37,7 +36,6 @@ integration_id: mapr
 integration_title: MapR
 integration_version: 1.11.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: mapr
 public_title: MapR
@@ -50,6 +48,7 @@ tile:
   - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
   media: []
@@ -65,15 +64,15 @@ tile:
 
 このチェックは、Datadog Agent を通して [MapR][1] 6.1 以降を監視します。
 
-## 計画と使用
+## セットアップ
 
 以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### インフラストラクチャーリスト
+### インストール
 
 MapR チェックは [Datadog Agent][2] パッケージに含まれていますが、追加のセットアップが必要です。
 
-#### 前提条件
+#### Prerequisites
 
 - [MapR モニタリング][3]が問題なく実行されている。
 - `/var/mapr/mapr.monitoring/metricstreams` ストリームで 'consume' を許可された利用可能な [MapR ユーザー][4] (ユーザー名、パスワード、UID、GID あり) がある。既存のユーザーの場合と、新規作成ユーザーの場合があります。
@@ -100,7 +99,7 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 - 本番環境で gcc (mapr-streams-library の構築に必要) などのコンパイルツールを利用できない場合は、環境インスタンスでライブラリのコンパイル済み Wheel を生成して、本番ホストに配布できます。開発ホストと本番ホストは、双方でコンパイル済み Wheel を使用できるよう、同様である必要があります。`sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` を実行して、開発マシンで Wheel  ファイルを作成できます。次に、本番マシンで `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <WHEEL_ファイル>` を実行します。
 - Python 3 で Agent v7 を使用されている場合は、_mapr-streams-library_ をインストールする際に、必ず `pip` を `pip3` に置き換えてください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
@@ -108,7 +107,7 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 2. 作成済みの長期チケットのパスに対するコンフィグに `ticket_location` パラメーターを設定します。
 3. [Agent を再起動します][9]。
 
-#### 収集データ
+#### ログ収集
 
 MapR はログに fluentD を使用します。[fluentD Datadog プラグイン][10]を使用して、MapR ログを収集します。下記のコマンドを使用して、プラグインをダウンロードし、適切なディレクトリにインストールします。
 
@@ -139,11 +138,11 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 
 ### 検証
 
-[Agent の status サブコマンド][11]を実行し、Checks セクションで `mapr` を探します。
+Run the [Agent's status subcommand][11] and look for `mapr` under the Checks section.
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mapr" >}}
 
 
@@ -151,7 +150,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 
 MapR チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "mapr" >}}
 
 

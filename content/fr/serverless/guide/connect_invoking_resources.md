@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/serverless/troubleshooting/connect_invoking_resources/
-kind: guide
+
 title: Bénéficier d'une visibilité accrue sur les ressources appelant des fonctions
   Lambda
 ---

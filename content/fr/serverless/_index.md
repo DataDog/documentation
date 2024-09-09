@@ -41,7 +41,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/
   tag: Blog
   text: Surveiller l'utilisation du stockage éphémère de vos fonctions AWS Lambda
-kind: documentation
 title: Informatique sans serveur
 ---
 

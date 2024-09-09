@@ -1,6 +1,5 @@
 ---
 title: DNS Testing
-kind: documentation
 description: Monitor resolvability and lookup times of your DNS records
 aliases:
   - /synthetics/dns_test
@@ -60,6 +59,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | response time       |                                                                 | `is less than`                                     | _Integer (ms)_             |
 | every available record        | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
 | at least one record | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
+
+**Note**: SOA records are not available for testing using Synthetic tests.
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 

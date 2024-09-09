@@ -1,6 +1,5 @@
 ---
 title: Generate Custom Metrics From RUM Events
-kind: documentation
 description: "Create custom metrics from your RUM events."
 aliases:
 - /real_user_monitoring/generate_metrics

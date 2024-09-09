@@ -1,6 +1,6 @@
 ---
 title: Log Collection Troubleshooting Guide
-kind: guide
+
 aliases:
   - /logs/faq/log-collection-troubleshooting-guide
 further_reading:

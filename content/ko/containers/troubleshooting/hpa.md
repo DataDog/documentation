@@ -6,7 +6,6 @@ further_reading:
 - link: /containers/guide/cluster_agent_autoscaling_metrics
   tag: 설명서
   text: Datadog 메트릭으로 Kubernetes 워크로드 오토스케일링
-kind: documentation
 title: 커스텀 메트릭 서버 및 HPA 트러블슈팅
 ---
 

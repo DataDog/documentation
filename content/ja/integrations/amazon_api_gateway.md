@@ -30,6 +30,7 @@ categories:
 - aws
 - metrics
 - cloud
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: amazon-api-gateway
 integration_title: Amazon API Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_api_gateway
 public_title: Amazon API Gateway インテグレーション
@@ -50,6 +50,7 @@ tile:
   - Category::AWS
   - Category::Metrics
   - Category::クラウド
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon API Gateway は API のマネージドサービスです。
   media: []
@@ -65,9 +66,9 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
 
 このインテグレーションを有効にすると、Datadog にすべての API Gateway メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、セットアップします。
 
@@ -87,7 +88,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 **注**: CloudWatch の詳細メトリクスを有効にしている場合、ステージ内のすべてのリソースまたはルートで有効にする必要があります。無効の場合、Datadog の集計値が不正確になります。
 
-### 収集データ
+### ログ収集
 
 API Gateway ログを有効にするには
 
@@ -123,22 +124,22 @@ API Gateway ログを有効にするには
 
 完了したら、[Logs ページ][6]に移動し、ログの検索を開始します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
-### ヘルプ
+### イベント
 
 Amazon API Gateway インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon API Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

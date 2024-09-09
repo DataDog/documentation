@@ -19,13 +19,36 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
-kind: documentation
 title: Datadog Cluster Agent のセットアップ
 ---
 
 Helm chart v2.7.0+ または Datadog Operator v0.7.0+ を使用して Datadog Agent をデプロイした場合、Cluster Agent はデフォルトで有効化されます。
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+The Cluster Agent is enabled by default since Datadog Operator v1.0.0. The Operator creates the necessary RBACs, deploys the Cluster Agent, and modifies the Agent DaemonSet configuration.
+
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token by setting the `global.clusterAgentToken` field. You can alternatively set this by referencing the name of an existing `Secret` and the data key containing this token.
+
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+      clusterAgentTokenSecret:
+        secretName: <SECRET_NAME>
+        keyName: <KEY_NAME>
+  ```
+
+When set manually, this token must be 32 alphanumeric characters.
+
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
+{{% /tab %}}
 {{% tab "Helm" %}}
 
 Helm チャート v2.7.0 以降、Cluster Agent はデフォルトで有効になっています。
@@ -42,35 +65,11 @@ Helm チャート v2.7.0 以降、Cluster Agent はデフォルトで有効に�
 
 これにより、Cluster Agent と Datadog Agent に必要な RBAC ファイルが自動的に更新されます。両方の Agent が同じ API キーを使用します。
 
-また、Cluster Agent と Datadog Agent の両方で共有される `Secret` にランダムなトークンを自動生成し、通信を安全にします。このトークンは `clusterAgent.token` 構成を使用して手動で指定することができます。また、`clusterAgent.tokenExistingSecret` 構成により、`token` 値を含む既存の `Secret` の名前を参照することでも設定できます。
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token using the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
 
-手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
+When set manually, this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-Datadog Operator v1.0.0 から Cluster Agent はデフォルトで有効になっています。 Operator は必要な RBAC の作成、Cluster Agent のデプロイ、Agent DaemonSet の構成を変更します。
-
-また、Cluster Agent と Datadog Agent の両方で共有される `Secret` にランダムなトークンを自動生成し、通信の安全性を確保します。このトークンは `global.clusterAgentToken` フィールドを設定することで、手動で指定することができます。また、既存の `Secret` の名前と、このトークンを含むデータキーを参照することでも設定できます。
-
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiKey: <DATADOG_API_KEY>
-      clusterAgentTokenSecret:
-        secretName: <SECRET_NAME>
-        keyName: <KEY_NAME>
-  ```
-
-手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
-
-[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{% tab "手動 (DaemonSet)" %}}
 
@@ -78,7 +77,7 @@ DaemonSet を使用して Datadog Cluster Agent をセットアップするに�
 1. [Cluster Agent RBAC 権限を構成します](#configure-cluster-agent-rbac-permissions)。
 2. [Cluster Agent と Agent 間の通信を確立します](#secure-cluster-agent-to-agent-communication)。
 3. [Cluster Agent とそのサービスを作成します](#create-the-cluster-agent-and-its-service)。
-4. [Cluster Agent と通信するためにノード Agent を構成します](#configure-datadog-agent-communication)。
+4. [Configure the node Agent to communicate with the Cluster Agent](#configure-datadog-agent-communication).
 
 ### Cluster Agent RBAC 権限の構成
 
@@ -255,7 +254,7 @@ Datadog Cluster Agent は、Linux ノードにのみデプロイ可能です。
 
 Windows コンテナを監視するには、混在クラスターに 2 つの Helm チャートをインストールします。最初の Helm チャートは、Linux ノード用に Datadog Cluster Agent と Agent DaemonSet をデプロイします (`targetSystem: linux` を使用)。2 つ目の Helm チャート (`targetSystem: windows` を使用) は、Windows ノードにのみ Agent をデプロイし、最初の Helm チャートの一部としてデプロイされた既存の Cluster Agent に接続します。
 
-Windows ノードにデプロイされた Agent と Cluster Agent 間の通信を構成するには、次の `values.yaml` ファイルを使用します。
+Use the following `datadog-values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
 ```yaml
 targetSystem: windows
@@ -277,9 +276,9 @@ datadog:
 
 ## AWS の管理型サービスを監視
 
-MSK、ElastiCache、RDS などの AWS マネージドサービスを監視するには、`clusterChecksRunner` を設定して、Helm チャートの serviceAccountAnnotation を介して割り当てられた IAM ロールを持つポッドを作成します。次に、`clusterAgent.confd` の下にインテグレーションコンフィギュレーションを設定します。
+To monitor an AWS managed service like Amazon Managed Streaming for Apache Kafka (MSK), ElastiCache, or Relational Database Service (RDS), set `clusterChecksRunner` in your Helm chart to create a Pod with an IAM role assigned through `serviceAccountAnnotation`. Then, set the integration configurations under `clusterAgent.confd`.
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml">}}
 clusterChecksRunner:
   enabled: true
   rbac:
@@ -301,5 +300,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/ja/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

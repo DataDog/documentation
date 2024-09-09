@@ -1,6 +1,5 @@
 ---
 title: Pipeline Scanner
-kind: documentation
 disable_toc: false
 further_reading:
     - link: "https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/"

@@ -1,6 +1,5 @@
 ---
 title: Incident Settings
-kind: documentation
 description: Configure and customize your Incident Management experience
 aliases:
 - /monitors/incident_management/notification_rules
@@ -63,7 +62,7 @@ The `Teams` property field automatically populates from the [teams][6] defined i
 
 You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][7]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
 
-Property fields are organized into three tables that correspond to where the fields appear in the [Overview section][8] of the Incident Details page:
+Property fields are organized into three tables that correspond to where the fields appear in the [Overview tab][8] of the Incident Details page:
 
 1. `What Happened`
 2. `Why It Happened`
@@ -209,4 +208,4 @@ To create a postmortem template:
 [16]: https://app.datadoghq.com/account/settings#integrations
 [17]: /service_management/incident_management/incident_details/#notifications-section
 [18]: /monitors/notifications/?tab=is_alert#configure-notifications-and-automations
-[19]: /service_management/mobile/
+[19]: /mobile/

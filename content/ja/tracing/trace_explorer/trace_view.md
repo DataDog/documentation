@@ -20,7 +20,6 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: ドキュメント
   text: Datadog トレースの読み方を理解する
-kind: documentation
 title: トレースビュー
 ---
 
@@ -28,7 +27,7 @@ title: トレースビュー
 
 ## 概要
 
-個々の[トレース][1]を表示すると、その[スパン][2]と関連するメタデータをすべて見ることができます。各トレースは、フレームグラフ、スパンリスト、ウォーターフォール、またはマップとして視覚化できます。
+個別の[トレース][1]を表示して、そのすべての[スパン][2]と関連メタデータを確認できます。各トレースはフレームグラフ、スパンリスト、ウォーターフォール、またはマップとして視覚化可能です。
 
 トレースヘッダーには、ルートスパンのサービス名、リソース名、トレース ID、エンドツーエンドのトレース期間、トレース開始時刻などの重要なトレース情報が表示されます。トレースへのパーマリンクを取得するには、**Open Full Page** をクリックし、URL を保存します。
 
@@ -46,7 +45,7 @@ title: トレースビュー
 
 グラフを操作するには、スクロールしてズームし、クリックしてドラッグして移動し、ミニマップを使用して選択したスパンにズームインしたり、フルトレースにズームアウトします。
 
-凡例は、フレームグラフの色分けを詳細に示します。**Service** (デフォルト)、**Host**、または **Container** のいずれかでスパンをグループ化します。グループごとに、トレース実行時間の割合 (**% Exec Time**) またはスパン数 (**Spans**) のいずれかを選択して表示します。トレース内のスパンにエラーが存在する場合は、**Filter Spans** の下にある **Errors** チェックボックスを選択することで、フレームグラフでこれらをハイライトします。
+凡例ではフレームグラフの色分けに関する詳細を示しています。スパンは **Service** (デフォルト)、**Host**、または **Container** ごとにグループ化できます。グループごとに、トレース実行時間の割合 (**% Exec Time**) またはスパン数 (**Spans**) のいずれかを選択して表示します。トレース内のスパンにエラーが存在する場合は、**Filter Spans** の下にある **Errors** チェックボックスを選択することで、フレームグラフでこれらをハイライトします。
 
 {{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="フレームグラフの凡例" video="true" style="width:90%;">}}
 
@@ -67,22 +66,21 @@ title: トレースビュー
 [1]: /ja/tracing/glossary/#resources
 [2]: /ja/tracing/glossary/#services
 {{% /tab %}}
-{{% tab "ウォーターフォール (ベータ版)" %}}
+{{% tab "Waterfall" %}}
 
-<div class="alert alert-info"><strong>ベータ版に参加！</strong><br />
-ウォーターフォールの非公開ベータ版に参加するには、<a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">このフォームにご記入ください</a>。</div>
+{{< img src="tracing/trace_view/waterfall2.png" alt="Waterfall" style="width:100%;">}}
 
-{{< img src="tracing/trace_view/waterfall.png" alt="ウォーターフォール" style="width:90%;">}}
+Displays all spans for a trace on a timeline where each row corresponds to a span. This visualization is useful for isolating and focusing on relevant parts of a trace.
 
-関連するトレースのすべてのスパンを、個別の行とタイムライン上に色分けして表示します。この視覚化は、トレースの関連する部分を分離して焦点を当てるのに便利です。
+Each row (span) indicates the following:
 
-各行で (つまりスパンごとに):
-* バー (サービスごとに色分け)。その長さは、トレース全体の期間の割合に対応します
-* サービス名、オペレーション名、リソース名。フォントスタイル: **サービス**オペレーション<span style="color:gray">リソース</span>
-* 絶対および相対スパン期間情報
-* (該当する場合) エラーアイコンまたは HTTP ステータスコード
+- **Relative span duration**: The length of the color-coded bar corresponds to the percentage of total trace duration.
+- **Absolute span duration**: The absolute time in milliseconds (ms).
+- **Span details**: The corresponding service name and resource name are displayed.
+- **Statuses**: When applicable, an HTTP status code is displayed.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
-スパンの子孫を展開または折りたたむには、任意の行のプラスまたはマイナスボタンをクリックします。すべてのスパンを展開するには、タイムスケールの左側にあるプラスボタンをクリックします。
+To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
 {{% /tab %}}
 {{% tab "マップ" %}}
@@ -105,7 +103,7 @@ title: トレースビュー
 {{< img src="tracing/trace_view/span_header.png" alt="スパンヘッダー" style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "スパン情報" %}} 
+{{% tab "スパン情報" %}}
 
 カスタムタグを含む、すべてのスパンのメタデータを表示します。スパンタグをクリックして、トレースエクスプローラーで検索クエリを更新するか、タグの値をクリップボードにコピーします。
 
@@ -168,6 +166,15 @@ title: トレースビュー
 {{< img src="tracing/trace_view/security_tab.png" alt="Security タブ" style="width:90%;">}}
 
 [1]: /ja/security/application_security/how-appsec-works/
+{{% /tab %}}
+{{% tab "Code Hotspots" %}}
+
+View [Code Hotspots][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
+
+{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
+
+[1]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+
 {{% /tab %}}
 {{% tab "スパンリンク (ベータ版)" %}}
 

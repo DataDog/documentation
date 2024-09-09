@@ -11,7 +11,7 @@ further_reading:
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: guide
+
 title: 로그 분실을 방지하기 위한 메커니즘
 ---
 

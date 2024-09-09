@@ -1,6 +1,6 @@
 ---
 title: Clone Your Synthetic Tests
-kind: guide
+
 aliases:
   - /synthetics/faq/clone-test/
 further_reading:

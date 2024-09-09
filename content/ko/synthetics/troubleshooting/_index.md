@@ -13,7 +13,6 @@ further_reading:
 - link: /synthetics/private_locations/
   tag: 설명서
   text: 프라이빗 위치 생성
-kind: 설명서
 title: 신서틱(Synthetic) 모니터링 트러블슈팅
 ---
 

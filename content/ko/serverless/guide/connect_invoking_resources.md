@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/serverless/troubleshooting/connect_invoking_resources/
-kind: 가이드
 title: Lambda 함수를 호출하는 리소스에 대한 심층적인 가시성
 ---
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/guide/sync_container_images
-kind: guía
 title: Sincroniza las imágenes de Datadog con un registro privado.
 ---
 

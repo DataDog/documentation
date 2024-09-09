@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self hosted MySQL
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted MySQL.
 further_reading:
 - link: "/integrations/mysql/"
@@ -157,6 +156,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Install the Agent
 
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
@@ -177,10 +179,8 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
-
-**Note**: Wrap your password in single quotes in case a special character is present.
 
 Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 

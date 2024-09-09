@@ -1,6 +1,5 @@
 ---
 title: NDM Guides
-kind: guide
 private: true
 disable_toc: true
 aliases:

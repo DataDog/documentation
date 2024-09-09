@@ -17,7 +17,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Datadog プラットフォームで開発する方法について
-kind: documentation
 title: インテグレーションの構築
 ---
 ## 概要
@@ -114,7 +113,7 @@ API ベースのインテグレーションでは、[Datadog API][12] を使用�
 * ログパイプライン (ログインテグレーションのみ)
 * 推奨モニター (メトリクスを送信するインテグレーション)
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

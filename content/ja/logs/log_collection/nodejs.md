@@ -20,7 +20,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: documentation
 title: Node.js ログ収集
 ---
 
@@ -201,9 +200,9 @@ logstash.on('error', function(err) {
 [5]: /ja/api/v1/logs/#send-logs
 [6]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [7]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[8]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[9]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[10]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[8]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[9]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [11]: /ja/logs/log_configuration/parsing/?tab=matchers
 [12]: /ja/logs/explorer/#overview
 [13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport

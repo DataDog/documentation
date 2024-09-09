@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Intelligent Test Runner
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/'
   tag: 'Blog'

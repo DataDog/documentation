@@ -1,6 +1,5 @@
 ---
 description: MySQL データベースモニタリングの高度なコンフィギュレーション
-kind: documentation
 title: MySQL データベースモニタリングの高度なコンフィギュレーション
 ---
 

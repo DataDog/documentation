@@ -3,6 +3,7 @@ app_id: rbltracker
 app_uuid: 4b512bd9-ca9d-4d6a-b4f2-5fec54ce75bc
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: rbltracker.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10007
     source_type_name: RBLTracker
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md
 display_on_public_website: true
@@ -29,7 +32,6 @@ integration_id: rbltracker
 integration_title: RBLTracker
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rbltracker
 public_title: RBLTracker
@@ -45,6 +47,7 @@ tile:
   - Supported OS::Windows
   - Category::Security
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: RBLTracker は、操作が簡単なリアルタイムのブラックリスト監視機能を提供します。
   media: []
@@ -53,6 +56,7 @@ tile:
   title: RBLTracker
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 RBLTracker は、電子メール、Web サイト、およびソーシャルメディアに関して、使いやすいリアルタイムのブラックリスト監視機能を提供します。
@@ -83,13 +87,13 @@ RBLTracker チェックには、メトリクスは含まれません。
 
 RBLTracker リスト/リスト除外イベントを [Datadog のイベントストリーム][4]にプッシュします。
 
-### サービスのチェック
+### サービスチェック
 
 RBLTracker チェックには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://rbltracker.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys

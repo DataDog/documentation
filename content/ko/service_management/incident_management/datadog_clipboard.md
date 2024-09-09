@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: 블로그
   text: Datadog 클립보드로 원활하게 데이터를 내보내세요.
-kind: 설명서
 title: Datadog 클립보드
 ---
 

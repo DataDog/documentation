@@ -1,6 +1,5 @@
 ---
 title: Monitoring Performance Vitals
-kind: documentation
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"

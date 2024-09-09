@@ -1,6 +1,5 @@
 ---
 title: Monitor Status
-kind: documentation
 description: "Get an overview of your monitor status over time"
 aliases:
 - /monitors/monitor_status/
@@ -84,6 +83,7 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * The monitor is newly created and has not evaluated yet.
 * The monitor's query was recently changed.
 * The monitor's timeframe is too short for a metric that provides data infrequently.
+* The monitor is set to require a full window of data for a metric that provides data infrequently, see [Advanced Alert Conditions][32].
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 * The query you are filtering by is not working as expected.
 
@@ -182,7 +182,8 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [10]: https://app.datadoghq.com/event/explorer
 [11]: /account_management/audit_trail/
 [12]: https://www.datadoghq.com/blog/audit-trail-best-practices/
-[13]: https://app.datadoghq.com/monitors#create/import
-[14]: /monitors/configuration/?tab=thresholdalert#notification-aggregation
+[13]: https://app.datadoghq.com/monitors/create/import
+[14]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
 [30]: /monitors/manage/search/#query
 [31]: /getting_started/tagging/
+[32]: /monitors/types/metric/?tab=threshold#advanced-alert-conditions

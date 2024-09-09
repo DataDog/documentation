@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/guide/docker-deprecation
-kind: documentation
 title: Obsolescencia de Docker en Kubernetes
 ---
 

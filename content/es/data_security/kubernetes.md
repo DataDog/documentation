@@ -3,7 +3,6 @@ further_reading:
 - link: /data_security/
   tag: Documentación
   text: Revisar las principales categorías de datos enviados a Datadog
-kind: Documentación
 title: Seguridad de los datos de Kubernetes
 ---
 

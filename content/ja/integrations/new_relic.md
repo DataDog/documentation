@@ -23,6 +23,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - notifications
+- event management
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,7 +33,6 @@ integration_id: new-relic
 integration_title: New Relic
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: new_relic
 public_title: New Relic
@@ -41,6 +42,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Notifications
+  - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: New Relic は、Web アプリケーションとモバイルアプリケーション向けのアプリケーションモニタリングサービスです。
   media: []

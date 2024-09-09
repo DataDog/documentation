@@ -24,7 +24,6 @@ further_reading:
 - link: /integrations/guide/prometheus-metrics/
   tag: Documentation
   text: Mappage de métriques Prometheus avec des métriques Datadog
-kind: documentation
 title: Collecte de métriques Prometheus et OpenMetrics avec Kubernetes
 ---
 

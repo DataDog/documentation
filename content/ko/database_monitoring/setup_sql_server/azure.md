@@ -7,7 +7,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: 설명서
   text: 일반적인 문제 트러블슈팅
-kind: 설명서
 title: Azure SQL Server에서 데이터베이스 모니터링 설정
 ---
 

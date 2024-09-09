@@ -1,6 +1,6 @@
 ---
 title: Integrate Statuspage with Datadog Incident Management
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "integrations/statuspage/"

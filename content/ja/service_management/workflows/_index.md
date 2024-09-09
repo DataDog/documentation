@@ -2,7 +2,7 @@
 algolia:
   tags:
   - ワークフロー
-  - tracing_otel_inst_java
+  - workflows/
   - ワークフローの自動化
 aliases:
 - /ja/workflows
@@ -20,7 +20,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-workflow-automation/
   tag: ブログ
   text: Datadog Workflow Automation で Azure アプリケーションの問題を迅速に修復する
-kind: documentation
 title: ワークフローの自動化
 ---
 
@@ -46,7 +45,7 @@ Datadog では、あらかじめ構成されたフローをすぐに使える[�
 
 ## Workflows Overview ダッシュボード
 
-Workflows Overview ダッシュボードは、Datadog ワークフローと実行のおおまかな概要を提供します。ダッシュボードを見つけるには、**Dashboards > Dashboards list** に移動し、`Workflows Overview` を検索します。
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
 
 {{< img src="service_management/workflows/workflows-dashboard.png" alt="Workflows Overview ダッシュボード" style="width:100%;" >}}
 
@@ -62,5 +61,9 @@ Workflows Overview ダッシュボードは、Datadog ワークフローと実�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][4].
+
 [1]: /ja/service_management/workflows/actions_catalog/
 [2]: /ja/workflows/build/#build-a-workflow-from-a-blueprint
+[3]: https://app.datadoghq.com/dashboard/lists
+[4]: https://datadoghq.slack.com/

@@ -1,6 +1,5 @@
 ---
 title: SLO Guides
-kind: documentation
 private: true
 disable_toc: true
 ---

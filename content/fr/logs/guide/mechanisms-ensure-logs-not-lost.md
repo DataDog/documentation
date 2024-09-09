@@ -11,7 +11,7 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail »
-kind: guide
+
 title: Mécanismes permettant d'éviter toute perte de log
 ---
 

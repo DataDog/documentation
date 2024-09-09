@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
   tag: 블로그
   text: 데이터 스트림 모니터링으로 SQS 모니터링
-kind: 설명서
 title: 데이터 스트림 모니터링
 ---
 

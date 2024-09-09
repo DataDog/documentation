@@ -11,7 +11,6 @@ further_reading:
 - link: /developers/integrations/oauth_for_integrations/
   tag: Documentation
   text: Learn about using OAuth for integrations
-kind: documentation
 title: Integration Assets Reference
 ---
 ## Overview

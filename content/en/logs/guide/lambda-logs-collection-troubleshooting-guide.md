@@ -1,6 +1,5 @@
 ---
 title: Lambda Function Log Collection Troubleshooting Guide
-kind: documentation
 further_reading:
     - link: "https://www.datadoghq.com/blog/aws-lambda-telemetry-api/"
       tag: "Blog"

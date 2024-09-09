@@ -33,7 +33,6 @@ aliases:
 - /fr/videos/apm
 - /fr/videos/aws
 - /fr/videos/host-map
-kind: documentation
 title: Centre d'apprentissage Datadog
 ---
 

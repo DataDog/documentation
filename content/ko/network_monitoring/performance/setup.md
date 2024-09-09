@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: 블로그
   text: Datadog NPM는 콘술 네트워킹을 지원합니다.
-kind: 설명서
 title: 네트워크 성능 모니터링 설정
 ---
 
@@ -50,7 +49,7 @@ Datadog 네트워크 성능 모니터링(NPM)은 서비스, 컨테이너, 가용
 
 데이터 수집은 네트워크 커널 장치 드라이버를 사용하여 진행됩니다. Windows 버전 2012 R2 (및 Windows 10을 포함한 동급 데스크톱 OS) 이상에서, Datadog Agent 버전 7.27.1부터 지원됩니다.
 
-#### 맥OS(macOS)
+#### macOS
 
 Datadog 네트워크 성능 모니터링은 macOS 플랫폼을 지원하지 않습니다.
 
@@ -126,7 +125,7 @@ Datadog 에이전트로 네트워크 성능 모니터링 기능을 사용하도�
 
     **참고**: 시스템에서 `systemctl` 명령을 사용할 수 없는 경우, `sudo service datadog-agent-sysprobe start`명령을 대신 실행합니다. 그 다음 `datadog-agent` 시작 전에, 부팅 시 시작되도록 설정합니다.
 
-5. [에이전트를 다시 시작합니다][2].
+5. [Agent를 재시작합니다][2].
 
     ```shell
     sudo systemctl restart datadog-agent
@@ -165,7 +164,7 @@ SELinux가 활성화된 다른 시스템에서 네트워크 성능 모니터링 
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [에이전트를 다시 시작합니다][2].
+5. [Agent를 재시작합니다][2].
 
 **참고**: 이 지침을 사용하려면 시스템에 대부분의 표준 배포판(우분투(Ubuntu), 데비안(Debian), RHEL, CentOS, SUSE)에서 사용할 수 있는 SELinux 유틸리티(`checkmodule`, `semodule`, `semodule_package`, `semanage`,`restorecon`)가 설치되어 있어야 합니다. 설치 방법에 대한 자세한 내용을 확인하려면 사용 중인 배포판을 확인하세요.
 
@@ -192,7 +191,7 @@ Windows 호스트용 네트워크 성능 모니터링을 활성화하려면 다�
     network_config:
         enabled: true
     ```
-3. [에이전트를 다시 시작합니다][2].
+3. [Agent를 재시작합니다][2].
 
     PowerShell (`powershell.exe`)의 경우:
     ```shell
@@ -210,14 +209,23 @@ Windows 호스트용 네트워크 성능 모니터링을 활성화하려면 다�
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Helm으로 쿠버네티스(Kubernetes)용 네트워크 성능 모니터링을 활성화하려면 다음을 추가합니다.
+Helm을 사용하여 Kubernetes에서 네트워크 성능 모니터링을 활성화하려면 `values.yaml` 파일에 다음을 추가하세요.</br>
+**Helm 차트 v2.4.39+가 필요합니다**. 자세한 내용은 [Datadog Helm 차트 문서][1]를 참조하세요.
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-values.yaml에 추가하려면, **Helm 차트 v2.4.39 버전 이상이 필요**합니다. 자세한 내용을 확인하려면 [Datadog 헬름 차트 문서][1]를 참조하세요.
+
+**참고**: Kubernetes 환경에서 NPM을 구성할 때 `Error: error enabling protocol classifier: permission denied` 권한 오류가 발생하는 경우 `values.yaml`에 다음을 추가하세요(Helm 차트의 [섹션][5] 참조).
+
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
 
 Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서 네트워크 성능 모니터링을 사용하도록 설정할 수 있습니다:
 
@@ -352,6 +360,7 @@ Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /ko/agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
 <div class="alert alert-warning">Datadog 오퍼레이터는 일반적으로 `1.0.0` 버전과 함께 사용할 수 있으며, DatadogAgent 커스텀 리소스의 `v2alpha1`버전을 조정합니다.</div>
@@ -361,7 +370,6 @@ Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서
 오퍼레이터에서 네트워크 성능 모니터링 기능을 사용하도록 구성하려면 다음과 같이 설정하세요.
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
@@ -374,7 +382,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "Docker" %}}
+{{% tab "도커" %}}
 
 도커(Docker)에서 네트워크 성능 모니터링 기능을 사용하도록 구성하려면 컨테이너 에이전트를 시작할 때 다음 설정을 활용하세요.
 
@@ -442,17 +450,33 @@ services:
 {{< /tabs >}}
 
 {{< site-region region="us,us3,us5,eu" >}}
-### 향상된 확인 기능
+### Enhanced resolution
 
 옵션으로 클라우드 통합용 리소스 수집을 활성화하여 네트워크 성능 모니터링에서 클라우드 관리 엔터티를 검색할 수 있습니다.
-- Azure 로드 밸런서 및 애플리케이션 게이트웨이에 대한 가시성을 확보하려면 [Azure 통합][1]을 설치하세요.
-- AWS 로드 밸런서에 대한 가시성을 확보하기 위해  [AWS 통합][2]을 설치합니다. **ENI 및 EC2 메트릭 수집을 활성화해야 합니다**.
+- AWS Load Balancer 및 애플리케이션 게이트웨이에 대한 가시성을 확보하려면 [Azure 통합][101]을 설치하세요.
+- AWS Load Balancer에 대한 가시성을 확보하려면 [AWS 통합][102]을 설치하세요. **ENI 및 EC2 메트릭 수집을 활성화해야 합니다**
 
-해당 기능에 대한 자세한 내용을 확인하려면 [향상된 클라우드 서비스 확인 기능][3]을 참조하세요.
+이러한 기능에 대한 자세한 내용은 [Cloud service enhanced resolution][103]을 참조하세요.
 
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+### Failed connections (비공개 베타)
+
+<div class="alert alert-warning">Failed Connections는 비공개 베타 버전입니다. <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">실패한 연결 메트릭</a>을 보려면 Datadog 담당자에게 액세스 권한을 요청하세요.</div>
+
+Agent가 실패한 연결에 대한 데이터 수집을 시작하도록 하려면 `/etc/datadog-agent/system-probe.yaml` 파일에 다음 플래그를 추가하세요(Windows의 경우 `C:\ProgramData\Datadog\system-probe.yaml`).
+
+```yaml
+network_config:   # 7.24.1 이전  Agent 버전의 경우 system_probe_config를 사용하세요.
+  ## @param enabled - boolean - optional - default: false
+  ## 네트워크 성능 모니터링을 활성화하려면 true로 설정합니다.
+  #
+  enabled: true
+  enable_tcp_failed_connections: true
+
+```
+
+[101]: /ko/integrations/azure
+[102]: /ko/integrations/amazon_web_services/#resource-collection
+[103]: /ko/network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 

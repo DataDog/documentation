@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/clusterchecks
   tag: Documentation
   text: Checks de cluster
-kind: guide
 title: Network Device Monitoring avec l'Agent de cluster
 ---
 

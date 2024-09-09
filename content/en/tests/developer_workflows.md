@@ -1,6 +1,5 @@
 ---
 title: Enhancing Developer Workflows with Datadog 
-kind: documentation
 description: Learn how to use Datadog Test Visibility with additional Datadog features to accelerate your development process.
 aliases:
 - /continuous_integration/guides/developer_workflows

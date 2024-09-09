@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: 설명서
   text: 모니터링 관리
-kind: 설명서
 title: 알림
 ---
 

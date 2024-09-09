@@ -67,7 +67,7 @@ Datadog은 최신 기능에 액세스할 수 있도록 정기적으로 Agents를
 1. **Debug mode**를 활성화하면 Datadog 지원 담당자가 문제를 더 빨리 해결할 수 있습니다. 플레어를 보낸 후 로그 레벨이 이전 설정으로 재설정됩니다.
 1. **Send Ticket*을 클릭합니다.
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="Send Ticket 버튼은 기존 또는 새 지원 티켓에 대한 플레어를 보내는 양식을 실행합니다" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="Send Ticket 버튼은 기존 또는 새 지원 티켓에 대한 플레어를 보내는 양식을 실행합니다" style="width:100%;" >}}
 
 ## 플릿 자동화에 대한 액세스 제어
 

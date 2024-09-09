@@ -1,6 +1,5 @@
 ---
 title: Datadog Service Catalog
-kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
   - /tracing/services/services_list/
@@ -37,6 +36,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
   tag: "Blog"
   text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
+- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
+  tag: "Blog"
+  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
 algolia:
   tags: ['service catalog']
 ---

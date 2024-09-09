@@ -1,6 +1,5 @@
 ---
 title: DORA Metrics Data Collected
-kind: documentation
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'

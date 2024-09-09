@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: assertRaises의 경우 구체적인 예외인지 확인하기
 ---
 ## 메타데이터

@@ -18,7 +18,7 @@ integration_id: azure-vm
 integration_title: Microsoft Azure VM
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_vm
 public_title: Datadog-Microsoft Azure VM 통합

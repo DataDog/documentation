@@ -1,6 +1,5 @@
 ---
 title: Runtime Metrics
-kind: documentation
 type: multi-code-lang
 aliases:
   - /tracing/advanced/runtime_metrics/

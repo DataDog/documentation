@@ -1,6 +1,6 @@
 ---
 title: Logging Without Limits™ Guide
-kind: guide
+
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"

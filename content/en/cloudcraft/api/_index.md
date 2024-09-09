@@ -7,11 +7,11 @@ cascade:
 
 {{< openapi-ref-docs url="cloudcraft.json" >}}
 
-## Client libraries
+## SDKs
 
-By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official client library languages. To install each library:
+By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official SDKs. To install each SDK:
 
-{{< programming-lang-wrapper langs="go,python" class="api-reference" >}}
+{{< programming-lang-wrapper langs="go,python,nodejs" class="api-reference" >}}
 
 {{< programming-lang lang="go" >}}
 #### Installation
@@ -38,4 +38,19 @@ from cloudcraftco import Cloudcraft
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+#### Installation
+```sh
+npm install cloudcraft
+```
+#### Usage
+```javascript
+import { Cloudcraft } from 'cloudcraft';
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
+
+Or check out the SDKs directly:
+
+{{< partial name="cloudcraft/sdk-languages.html" >}}

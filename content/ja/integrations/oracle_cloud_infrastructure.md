@@ -2,6 +2,8 @@
 app_id: oracle-cloud-infrastructure
 app_uuid: c2b4d38f-dd23-4ca2-8bc4-b70360868e8c
 assets:
+  dashboards:
+    OCI-Overview-Beta: assets/dashboards/oci-overview-beta-dashboard.json
   integration:
     auto_install: false
     events:
@@ -17,7 +19,7 @@ assets:
     source_type_name: Oracle Cloud Infrastructure
 author:
   homepage: https://www.datadoghq.com
-  name: Ruby
+  name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
@@ -25,6 +27,7 @@ categories:
 - ログの収集
 - ネットワーク
 - oracle
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,12 +36,11 @@ integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: oracle_cloud_infrastructure
 public_title: Oracle Cloud Infrastructure
-short_description: Oracle Cloud Infrastructure (OCI) は、高性能コンピューティングとシンプルな移行を実現する IaaS
-  プラットフォームです。
+short_description: OCI delivers high-performance computing and migrations. The OCI
+  metrics integration is in private beta.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -47,9 +49,10 @@ tile:
   - Category::Log Collection
   - Category::Network
   - Category::Oracle
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Oracle Cloud Infrastructure (OCI) は、高性能コンピューティングとシンプルな移行を実現する IaaS
-    プラットフォームです。
+  description: OCI delivers high-performance computing and migrations. The OCI metrics
+    integration is in private beta.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -63,9 +66,9 @@ Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業�
 
 Datadog インテグレーションにより、OCI ユーザーはすべてのログを Datadog に直接ストリーミングでき、そこで無期限に保存し、トラブルシューティングのために分析し、セキュリティとコンプライアンスの姿勢を監視できます。
 
-## 計画と使用
+## セットアップ
 
-### 収集データ
+### ログ収集
 
 次のいずれかのプロセスに従って、Oracle Cloud Infrastructure から Datadog にログを送信します。
 
@@ -113,7 +116,7 @@ OCI ログの詳細については、[リソースのログを有効にする][1
 
 OCI オブジェクトストレージの詳細については、[Oracle のサービスコネクタのブログ記事][6]を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
@@ -197,5 +200,4 @@ OCI オブジェクトストレージの詳細については、[イベント入
 [6]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/requirements.txt
 [7]: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm
 {{% /tab %}}
-
 {{< /tabs >}}

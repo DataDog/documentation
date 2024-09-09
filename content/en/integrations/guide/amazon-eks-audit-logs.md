@@ -1,6 +1,6 @@
 ---
 title: Log Collection for Amazon EKS Audit Logs
-kind: guide
+
 ---
 
 ## Overview

@@ -24,7 +24,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: 설명서
   text: 신서틱 테스트 모니터에 대해 알아보기
-kind: 설명서
 title: API 테스트 시작하기
 ---
 

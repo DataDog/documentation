@@ -6,7 +6,6 @@ further_reading:
 - link: /metrics/introduction/#combining-time-series
   tag: Documentation
   text: Agrégation spatiale
-kind: faq
 title: Le fait de basculer entre les agrégateurs sum/min/max/avg nʼentraîne pas de
   modification de la valeur
 ---

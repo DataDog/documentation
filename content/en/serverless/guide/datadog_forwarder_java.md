@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Java Serverless Applications Using the Datadog Forwarder
-kind: guide
+
 ---
 ## Overview
 

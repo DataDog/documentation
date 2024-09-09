@@ -2,7 +2,7 @@
 aliases:
 - /fr/security_monitoring/guide/
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides sur la plateforme de sécurité
 cascade:

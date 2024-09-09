@@ -1,6 +1,5 @@
 ---
 title: Live Processes
-kind: documentation
 aliases:
     - /guides/process
     - /graphing/infrastructure/process/
@@ -455,7 +454,7 @@ When you inspect a dependency in the [Network Analytics][11] page, you can view 
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+Processes are normally collected at 10s resolution. While actively working with the Live Processes page, metrics are collected at 2s resolution and displayed in real time, which is important for volatile metrics such as CPU. However, for historical context, metrics are ingested at the default 10s resolution.
 
 ## Additional information
 
@@ -472,7 +471,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /monitors/types/process/
-[7]: https://app.datadoghq.com/monitors#create/live_process
+[7]: https://app.datadoghq.com/monitors/create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/

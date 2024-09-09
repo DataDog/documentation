@@ -25,7 +25,6 @@ further_reading:
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para conocer mejor la monitorización en
     Kubernetes
-kind: documentación
 title: Kubernetes
 ---
 

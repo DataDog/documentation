@@ -1,6 +1,6 @@
 ---
 title: Send Amazon EKS Fargate Logs with Amazon Data Firehose
-kind: guide
+
 further_reading:
 - link: https://docs.datadoghq.com/logs/log_configuration/processors/
   tag: Documentation
@@ -55,6 +55,8 @@ kubectl create namespace aws-observability
 
 2. Create the following Kubernetes ConfigMap for Fluent Bit as `aws-logging-configmap.yaml`. Substitute the name of your delivery stream.
 
+<div class="alert alert-info">For the new higher performance <a href="https://docs.fluentbit.io/manual/pipeline/outputs/firehose">Kinesis Firehose plugin</a> use the plugin name <code>kinesis_firehose</code> instead of <code>amazon_data_firehose</code>. </div>
+
 {{< code-block lang="yaml" filename="" disable_copy="false" collapsible="false" >}}
 apiVersion: v1
 kind: ConfigMap
@@ -74,7 +76,7 @@ data:
 
   output.conf: |
     [OUTPUT]
-        Name amazon_data_firehose
+        Name kinesis_firehose
         Match kube.*
         region <REGION>
         delivery_stream <YOUR-DELIVERY-STREAM-NAME>

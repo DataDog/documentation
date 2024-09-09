@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: Blog
   text: Explorer facilement vos données avec le presse-papiers Datadog
-kind: documentation
 title: Presse-papiers Datadog
 ---
 

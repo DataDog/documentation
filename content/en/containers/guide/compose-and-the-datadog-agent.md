@@ -1,6 +1,5 @@
 ---
 title: Compose and the Datadog Agent
-kind: guide
 further_reading:
     - link: 'https://github.com/DataDog/docker-compose-example'
       tag: "Source Code"

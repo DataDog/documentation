@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/mysql/
   tag: 설명서
   text: Datadog-MySQL 통합
-kind: 가이드
 title: SQL 서버 커스텀 메트릭 수집
 ---
 

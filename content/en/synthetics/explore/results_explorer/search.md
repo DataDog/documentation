@@ -1,6 +1,5 @@
 ---
 title: Search Test Batches
-kind: documentation
 description: Examine batches of executed CI jobs and troubleshoot failing test results.
 aliases:
   - /synthetics/explorer/search

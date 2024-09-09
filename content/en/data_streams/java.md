@@ -1,6 +1,5 @@
 ---
 title: Setup Data Streams Monitoring for Java
-kind: documentation
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -38,7 +37,7 @@ environment:
 As an alternative, you can set the `-Ddd.data.streams.enabled=true` system property by running the following when you start your Java application:
 
 ```bash
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.trace.remove.integration.service.names.enabled=true -jar path/to/your/app.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.trace.remove.integration-service-names.enabled=true -jar path/to/your/app.jar
 ```
 
 ### One-Click Installation

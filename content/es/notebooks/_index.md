@@ -18,7 +18,6 @@ further_reading:
   tag: blog
   text: Automatiza tareas de seguridad habituales y protégete frente a las amenazas
     con Datadog Workflows y Cloud SIEM
-kind: documentación
 title: Notebooks
 ---
 

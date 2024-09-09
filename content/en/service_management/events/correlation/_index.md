@@ -1,6 +1,5 @@
 ---
 title: Correlation
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "service_management/events/"

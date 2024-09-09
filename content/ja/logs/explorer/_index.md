@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: ブログ
   text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
-kind: documentation
 title: ログエクスプローラー
 ---
 

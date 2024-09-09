@@ -9,7 +9,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/go
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
-kind: documentation
 title: Go 互換性要件
 type: multi-code-lang
 ---
@@ -20,7 +19,10 @@ Go Datadog Trace ライブラリはオープンソースです。詳細につい
 
 Go Datadog トレースライブラリは、Go のバージョンに対して[バージョンサポートポリシー][2]が定義されています。Go の 2 つの最新リリースは完全にサポートされ、3 つ目の最新リリースは[メンテナンス][3]中と見なされています。古いバージョンも機能しますが、デフォルトではサポートは提供されません。特別なリクエストは、[サポートに連絡][4]してください。
 
-Datadog Agent v5.21.1+ を実行している必要があります。
+### 要件
+
+- Datadog Agent v5.21.1+。
+- インテグレーションを構成する前に、[Datadog Go トレーサーを追加して初期化][77]してください。
 
 ### インテグレーション
 
@@ -164,3 +166,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクト�
 [74]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
+[77]: /ja/tracing/trace_collection/library_config/go/

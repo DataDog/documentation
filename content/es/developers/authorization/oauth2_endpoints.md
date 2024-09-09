@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/
   tag: Documentación
   text: Más información sobre la autorización OAuth2
-kind: documentación
 title: Referencia de endpoints de autorización OAuth2
 ---
 

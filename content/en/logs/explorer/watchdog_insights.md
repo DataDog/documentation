@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights for Logs
-kind: documentation
 description: 'Get Insights on where to Start or Follow-Up your Investigations'
 aliases:
     - /logs/explorer/insights

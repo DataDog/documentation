@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Aurora managed Postgres
-kind: documentation
 description: Install and configure Database Monitoring for Postgres on Amazon Aurora.
 further_reading:
 - link: "/integrations/postgres/"
@@ -138,6 +137,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -189,6 +191,12 @@ To monitor Aurora hosts, install the Datadog Agent in your infrastructure and co
 {{< tabs >}}
 {{% tab "Host" %}}
 
+### Autodiscovery setup (recommended)
+
+The Datadog Agent supports Autodiscovery of all Aurora endpoints in a cluster. Unless you want different configurations for different instances, or want to find and list Aurora endpoints manually, follow the [Autodiscovery setup instructions for Aurora DB clusters][3] instead of the manual setup section below.
+
+### Manual setup
+
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
@@ -200,7 +208,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        host: '<AWS_INSTANCE_ENDPOINT>'
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        aws:
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
@@ -216,12 +224,10 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 2. [Restart the Agent][2].
 
-**The Datadog Agent supports [Autodiscovery][14] of all Aurora endpoints in a cluster.** 
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[14]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
+[3]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -267,7 +273,7 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
@@ -279,12 +285,8 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
-
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/configuration/secrets-management
-[3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -301,15 +303,15 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: -|
+        postgres.yaml: |-
           cluster_check: true
           init_config:
-            instances:
+          instances:
             - dbm: true
               host: '<AWS_INSTANCE_ENDPOINT>'
               port: 5432
               username: datadog
-              password: '<PASSWORD>'
+              password: 'ENC[datadog_user_database_password]'
               ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
               # pg_stat_statements_view: datadog.pg_stat_statements()
               # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -360,7 +362,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "ENC[datadog_user_database_password]"
         }
       ]
 spec:
@@ -371,6 +373,37 @@ spec:
     name: postgres
 ```
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
+
+To configure more than one instance, you can use the format below:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      { 
+        "postgres": 
+        { "instances": 
+          [ 
+            { 
+              "dbm":true, 
+              "host":"your-host-1.us-east-2.rds.amazonaws.com", 
+              "password":"ENC[datadog_user_database_password]", 
+              "port":5432, 
+              "username":"<USERNAME>" 
+            }, 
+            { 
+              "dbm":true, 
+              "host":"your-host-2.us-east-2.rds.amazonaws.com", 
+              "password":"ENC[datadog_user_database_password]", 
+              "port":5432, 
+              "username": "<USERNAME>" 
+            } 
+          ] 
+        } 
+      }
+```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 

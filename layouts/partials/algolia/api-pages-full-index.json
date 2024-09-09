@@ -33,7 +33,10 @@
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
             {{ range $endpoint_data }}
-                {{ if in .tags $title }}
+                {{ $tags := slice }}
+                {{ with $endpoint_data.tags }}{{ $tags = . }}{{ end }}
+
+                {{ if in $tags $title }}
 
                     {{ 
                         $params := (dict
@@ -56,7 +59,10 @@
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
             {{ range $endpoint_data }}
-                {{ if in .tags $title }}
+                {{ $tags := slice }}
+                {{ with $endpoint_data.tags }}{{ $tags = . }}{{ end }}
+
+                {{ if in $tags $title }}
 
                     {{ 
                         $params := (dict 

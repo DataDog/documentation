@@ -1,6 +1,5 @@
 ---
 title: Monitoring Available Disk Space
-kind: documentation
 ---
 
 

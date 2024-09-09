@@ -7,7 +7,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal
   tag: 설명서
   text: Azure Native 통합 관리
-kind: guide
+
 title: Azure 네이티브 통합을 위한 프로그램 관리 가이드
 ---
 

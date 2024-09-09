@@ -1,6 +1,5 @@
 ---
 title: Network Monitor
-kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
 aliases:
 - /monitors/monitor_types/network
@@ -94,7 +93,7 @@ Create a network metric monitor by following the instructions in the [metric mon
 
 [1]: /integrations/http_check/
 [2]: /integrations/tcp_check/
-[3]: https://app.datadoghq.com/monitors#create/network
+[3]: https://app.datadoghq.com/monitors/create/network
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/configuration/#no-data
 [6]: /monitors/configuration/#auto-resolve

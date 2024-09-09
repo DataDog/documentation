@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler for AWS Lambda
-kind: documentation
 further_reading:
     - link: '/profiler/'
       tag: 'Documentation'

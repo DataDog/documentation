@@ -1,6 +1,5 @@
 ---
 title: Browser Testing
-kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:
   - /synthetics/browser_check
@@ -37,9 +36,26 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 Define the configuration of your browser test.
 
 1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
-2. Add **Advanced Options** (optional): Set specific options for your browser test.
 
-   {{< tabs >}}
+ <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+
+2. Add a **name**: The name of your browser test.
+3. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+4. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
+   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
+   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
+5. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
+
+   {{% managed-locations %}}
+
+   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
+
+6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
+
+### Advanced options
+
+{{< tabs >}}
 
    {{% tab "Request Options" %}}
 
@@ -47,7 +63,7 @@ Define the configuration of your browser test.
 
    * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
-   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test.
+   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 
    Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
 
@@ -91,21 +107,12 @@ Define the configuration of your browser test.
 
    {{% /tab %}}
 
+   {{% tab "Time & Language" %}}
+   
+  By default, timezone is set to UTC, and language is set to English (en). To define a language, use the corresponding 2 or 3 digit [ISO code][19].
+
+   {{% /tab %}}
    {{< /tabs >}}
-
-3. Add a **name**: The name of your browser test.
-4. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
-   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
-   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
-   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
-6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
-
-   {{% managed-locations %}}
-
-   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
-
-7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
 {{% synthetics-variables %}}
 
@@ -212,3 +219,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [15]: /continuous_testing/environments/proxy_firewall_vpn
 [16]: /synthetics/guide/browser-tests-passkeys
 [17]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[19] https://www.loc.gov/standards/iso639-2/php/code_list.php

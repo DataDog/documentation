@@ -395,6 +395,26 @@
       "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_985012506",
+      "description": "Create a new timeseries widget with incident_analytics data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4262729673",
+      "description": "Create a new timeseries widget with legacy live span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3451918078",
+      "description": "Create a new timeseries widget with new fixed span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3066042014",
+      "description": "Create a new timeseries widget with new live span time format"
     }
   ],
   "CreatePublicDashboard": [
@@ -724,6 +744,23 @@
       "description": "Update an SLO returns \"OK\" response"
     }
   ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_3298562511",
+      "description": "Create a FIDO global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_3397718516",
+      "description": "Create a TOTP global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
+    }
+  ],
   "CreateSyntheticsBrowserTest": [
     {
       "group": "synthetics",
@@ -741,21 +778,12 @@
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
-  "CreateGlobalVariable": [
-    {
-      "group": "synthetics",
-      "suffix": "_1068962881",
-      "description": "Create a global variable from test returns \"OK\" response"
-    }
-  ],
-  "CreatePrivateLocation": [
-    {
-      "group": "synthetics",
-      "suffix": "",
-      "description": "Create a private location returns \"OK\" response"
-    }
-  ],
   "CreateSyntheticsAPITest": [
+    {
+      "group": "synthetics",
+      "suffix": "_1717840259",
+      "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
     {
       "group": "synthetics",
       "suffix": "_1402674167",
@@ -800,6 +828,13 @@
       "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreatePrivateLocation": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a private location returns \"OK\" response"
     }
   ],
   "UpdateAPITest": [

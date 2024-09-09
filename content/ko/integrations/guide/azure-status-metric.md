@@ -2,7 +2,6 @@
 aliases:
 - /ko/integrations/faq/azure-vm-status-is-not-reporting
 - /ko/integrations/faq/azure-status-metric
-kind: 가이드
 title: Azure 상태 및 개수 메트릭
 ---
 

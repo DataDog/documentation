@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Alertas de Watchdog
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Visualize
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -84,14 +83,6 @@ Visualize a single [measure][5] (or a [facet][5] unique count of values) on the 
 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
-## Funnels
-Learn about [funnel analysis][9].
-## Tree Maps
-A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
-
-The following tree map shows the percentage breakdown by **View Name**.
-
-{{< img src="real_user_monitoring/explorer/visualize/tree-map.png" alt="Tree map in the RUM Explorer" style="width:90%;">}}
 ## Pie charts
 A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
 
@@ -101,11 +92,9 @@ The following pie chart shows the percentage breakdown by **View Path**.
 
 ## Related events
 
-For all visualizations besides the [funnel](#funnels), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
+For all visualizations, select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
 {{< img src="real_user_monitoring/explorer/visualize/related-events-2.png" alt="Related events link available when you click on the graph" width="90%" >}}
-
-For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
 
 For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
 
@@ -121,4 +110,3 @@ For the remaining visualization options, click on the graph and click **View eve
 [6]: /notebooks
 [7]: /real_user_monitoring/explorer/export/
 [8]: /dashboards/widgets/list/
-[9]: /real_user_monitoring/product_analytics/funnel_analysis

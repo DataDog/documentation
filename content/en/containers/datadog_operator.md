@@ -1,6 +1,5 @@
 ---
 title: Datadog Operator
-kind: documentation
 aliases:
   - /agent/kubernetes/operator_configuration
   - /containers/kubernetes/operator_configuration

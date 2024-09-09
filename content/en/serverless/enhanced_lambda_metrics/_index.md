@@ -3,7 +3,6 @@ title: Enhanced Lambda Metrics
 aliases:
     - /serverless/real-time-enhanced-metrics
     - /serverless/real_time_enhanced_metrics
-kind: documentation
 ---
 
 {{< img src="serverless/lambda-metrics-dashboard.jpeg" alt="Lambda Enhanced Metrics Default Dashboard" >}}

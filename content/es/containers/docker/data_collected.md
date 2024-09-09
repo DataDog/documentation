@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/docker/data_collected
-kind: documentación
 title: Datos recopilados de Docker
 ---
 

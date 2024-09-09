@@ -1,6 +1,5 @@
 ---
 title: Partner Sales Enablement Guide
-kind: documentation
 description: "A training roadmap for a new MSP to be ready to lead a Datadog sales engineering process"
 private: true
 ---

@@ -27,7 +27,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging Without Limits*
-kind: Documentation
 title: Collecte de logs et intégrations
 ---
 

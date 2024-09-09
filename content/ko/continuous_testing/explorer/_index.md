@@ -17,7 +17,6 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: 설명서
   text: 테스트 실행을 통해 검색하는 방법 알아보기
-kind: 설명서
 title: 신서티 모니터링 및 및 테스트 결과 탐색기
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Service Check Monitor
-kind: documentation
 description: "Monitor status of arbitrary service checks."
 aliases :
     - /monitors/monitor_types/custom_check

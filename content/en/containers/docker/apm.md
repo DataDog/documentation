@@ -1,6 +1,5 @@
 ---
 title: Tracing Docker Applications
-kind: Documentation
 aliases:
     - /tracing/docker/
     - /tracing/setup/docker/

@@ -1,6 +1,5 @@
 ---
 title: Mobile App Testing
-kind: documentation
 description: Learn how to start monitoring key business flows with mobile app tests.
 aliases:
 - /mobile_testing/mobile_app_tests

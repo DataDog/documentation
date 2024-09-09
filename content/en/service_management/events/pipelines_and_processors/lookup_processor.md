@@ -1,6 +1,5 @@
 ---
 title: Lookup Processor
-kind: Documentation
 
 ---
 

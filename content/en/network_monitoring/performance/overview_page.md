@@ -1,6 +1,5 @@
 ---
 title: Overview Page
-kind: documentation
 description: The Network Performance Monitoring Overview Page in the Datadog UI.
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'

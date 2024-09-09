@@ -1,6 +1,5 @@
 ---
 title: Increase Process Retention
-kind: documentation
 aliases:
     - /infrastructure/process/generate_process_metrics/
     - /processes/processing/process_to_metrics/

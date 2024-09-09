@@ -1,6 +1,5 @@
 ---
 description: Postgres データベースモニタリングの高度なコンフィギュレーション
-kind: documentation
 title: Postgres データベースモニタリングの高度なコンフィギュレーション
 ---
 

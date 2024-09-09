@@ -1,6 +1,5 @@
 ---
 title: Cloud Service Discovery and Additional Protocols
-kind: documentation
 is_beta: true
 private: true
 further_reading:

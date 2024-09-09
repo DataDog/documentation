@@ -1,6 +1,5 @@
 ---
 title: Early Flake Detection
-kind: documentation
 description: Detect flakiness before it impacts your default branch using Early Flake Detection.
 further_reading:
   - link: "/tests"

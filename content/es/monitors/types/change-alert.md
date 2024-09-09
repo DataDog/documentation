@@ -9,7 +9,6 @@ further_reading:
 - link: /monitors/configuration/
   tag: Documentación
   text: Aprender a configurar un monitor
-kind: Documentación
 title: Monitor de alerta de cambios
 ---
 

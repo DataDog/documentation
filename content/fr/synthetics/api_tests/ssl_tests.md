@@ -1,6 +1,5 @@
 ---
 title: Tests SSL
-kind: documentation
 description: Surveillez vos certificats SSL depuis divers emplacements dans le monde
 aliases:
   - /fr/synthetics/ssl_test

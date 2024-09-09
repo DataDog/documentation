@@ -1,6 +1,5 @@
 ---
 title: Java Log Collection
-kind: documentation
 aliases:
   - /logs/languages/java
 further_reading:

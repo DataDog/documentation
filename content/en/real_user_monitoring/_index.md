@@ -1,6 +1,5 @@
 ---
 title: RUM & Session Replay
-kind: documentation
 description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
 disable_sidebar: true
 aliases:
@@ -53,9 +52,14 @@ cascade:
         rank: 70
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  Discover how to create custom user actions tailored to specific business needs, enabling precise tracking of user behavior.
+{{< /learning-center-callout >}}
 
 ## What is Real User Monitoring?
+
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
 
 Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. RUM solves four types of use cases for monitoring web and mobile applications:
 
@@ -100,7 +104,6 @@ The following table shows which RUM capabilities are supported on each platform:
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
-| Heatmaps | {{< X >}} |  |  |  |  |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains

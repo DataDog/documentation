@@ -1,6 +1,5 @@
 ---
 title: Domain Allowlist
-kind: documentation
 private: true
 is_beta: true
 further_reading:

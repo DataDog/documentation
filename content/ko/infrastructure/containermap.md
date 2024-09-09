@@ -9,7 +9,6 @@ further_reading:
 - link: /infrastructure/process/
   tag: 그래프화
   text: 시스템의 모든 레벨에서 발생하는 상황 파악
-kind: 설명서
 title: 컨테이너 맵
 ---
 

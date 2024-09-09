@@ -14,7 +14,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: ガイド
 title: コンテナ Agent を使用してホストからログを追跡する
 ---
 
@@ -165,4 +164,4 @@ Logs Agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7

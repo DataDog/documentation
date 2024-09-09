@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
   tag: Blog
   text: Recueillez des métriques Amazon CloudWatch à l'aide des flux de métriques.
-kind: guide
+
 title: Flux de métriques AWS CloudWatch avec Amazon Data Firehose
 ---
 {{% site-region region="us3,gov" %}}

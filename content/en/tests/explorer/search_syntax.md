@@ -1,6 +1,5 @@
 ---
 title: Test Visibility Explorer Search Syntax
-kind: documentation
 description: Learn how to search for all of your test runs in the Test Visibility Explorer.
 further_reading:
 - link: "/tests/search"

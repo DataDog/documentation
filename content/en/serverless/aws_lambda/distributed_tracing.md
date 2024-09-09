@@ -1,6 +1,5 @@
 ---
 title: Distributed Tracing with AWS Lambda Serverless Applications
-kind: documentation
 aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/
@@ -155,12 +154,14 @@ Both the AWS X-Ray SDK and Datadog APM client libraries (`dd-trace`) add metadat
 
 ### Tracing across AWS Lambda and hosts
 
+#### Context propagation with the Datadog tracing libraries
 If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
+#### Context propagation with the X-Ray integration
 If `dd-trace` is installed on your hosts with the Datadog Agent, and your Node.js or Python serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
 
 1. You have installed the [AWS X-Ray integration][18] for tracing your Lambda functions, enabling both AWS X-Ray active tracing and installing the X-Ray client libraries.
-2. You have installed the [Datadog Lambda Library for your Lambda runtime][5], and the `DD_TRACE_ENABLED` environment variable is set to `false`.
+2. You have installed the [Datadog Lambda Library for your Lambda runtime][5], and the `DD_TRACE_ENABLED` environment variable is set to `true`.
 3. [Datadog APM][20] is configured on your hosts and container-based infrastructure.
 
 Then, for X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the same `env` tag.

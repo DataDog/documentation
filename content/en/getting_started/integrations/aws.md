@@ -1,6 +1,5 @@
 ---
 title: Getting Started with AWS
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
@@ -140,8 +139,8 @@ Read the [Enable logging for your AWS service][14] section to get logs flowing f
 
 ### Validation
 
-Once you have enabled logs, find them in the [Logs Explorer][15] using either the `source` or `service` facets from the facet panel, such as this example from S3:
-{{< img src="getting_started/integrations/logs-explorer.png" alt="The Logs Explorer page of the Datadog account. Along the left the image displays the Source and Service facets, both checked with 's3'. Along the right, some log entries are displayed in a list format.">}}
+Once you have enabled logs, find them in the [Log Explorer][15] using either the `source` or `service` facets from the facet panel, such as this example from S3:
+{{< img src="getting_started/integrations/logs-explorer.png" alt="The Log Explorer page of the Datadog account. Along the left the image displays the Source and Service facets, both checked with 's3'. Along the right, some log entries are displayed in a list format.">}}
 
 ## Get more from the Datadog platform
 

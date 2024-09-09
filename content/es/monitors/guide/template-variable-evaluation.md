@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Evaluación de variables de plantilla
 ---
 

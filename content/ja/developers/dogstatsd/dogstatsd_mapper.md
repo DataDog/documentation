@@ -1,18 +1,15 @@
 ---
-title: DogStatsD Mapper
-kind: ドキュメント
 description: DogStatsD のマッピング規則を使用して、statsd メトリクス名の一部をタグに変換。
 further_reading:
-  - link: developers/dogstatsd
-    tag: ドキュメント
-    text: DogStatsD 入門
-  - link: developers/libraries
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: DogStatsD ソースコード
+- link: developers/dogstatsd
+  tag: ドキュメント
+  text: DogStatsD 入門
+- link: developers/libraries
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+title: DogStatsD Mapper
 ---
+
 Agent バージョン 7.17+ では、DogStatsD Mapper 機能でマッピング規則とワイルドカード、正規表現パターンを使用して、DogStatsD に送信されたメトリクス名の一部をタグに変換できるようになりました。たとえば、以下のようなメトリクスの変換が可能です。
 
 - `airflow.job.duration.<ジョブ種類>.<ジョブ名>`
@@ -57,7 +54,10 @@ dogstatsd_mapper_profiles:
 
 ## ワイルドカードの一致パターン
 
-ワイルドカードの一致パターンは、`*` をワイルドカードに用いたドット区切りのメトリクス名と一致します。このパターンを使用する場合、メトリクス名には英数字、`.`、`_` のみ使用できます。抽出されたグループは `$1`、`$2`、`$3`... などの `$n` 形式、または `${1}`、`${2}`、`${3}`... などの `${n}` 形式でのみ展開が可能です。
+ワイルドカードの一致パターンは、`*` をワイルドカードに用いたドット区切りのメトリクス名と一致します。このパターンを使用する場合、メトリクス名には英数字、`.`、`_` のみ使用できます。抽出されたグループは、以下のいずれかで展開が可能です。
+
+- `$n` 形式: `$1`、`$2`、`$3` など
+- `${n}` 形式: `${1}`、`${2}`、`${3}` など
 
 たとえば、以下のマッピンググループコンフィギュレーションを持つメトリクス `custom_metric.process.value_1.value_2` について見てみましょう。
 
@@ -78,8 +78,10 @@ dogstatsd_mapper_profiles:
 
 ## 正規表現の一致パターン
 
-正規表現の一致パターンは、正規表現パターンを使用したメトリクス名と一致します。ワイルドカードの一致パターンとは異なり、`.` を含むキャプチャされたグループを定義することができます。
-抽出されたグループは `$1`、`$2`、`$3`... などの `$n` 形式、または `${1}`、`${2}`、`${3}`... などの `${n}` 形式でのみ展開が可能です。
+正規表現の一致パターンは、正規表現パターンを使用したメトリクス名と一致します。ワイルドカードの一致パターンとは異なり、`.` を含むキャプチャされたグループを定義することができます。抽出されたグループは、以下のいずれかで展開が可能です。
+
+- `$n` 形式: `$1`、`$2`、`$3` など
+- `${n}` 形式: `${1}`、`${2}`、`${3}` など
 
 たとえば、以下のマッピンググループコンフィギュレーションを持つメトリクス `custom_metric.process.value_1.value.with.dots._2` について見てみましょう。
 
@@ -120,4 +122,4 @@ dogstatsd_mapper_profiles:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file

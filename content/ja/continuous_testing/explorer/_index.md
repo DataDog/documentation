@@ -17,7 +17,6 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: ドキュメント
   text: テスト実行を検索する方法を学ぶ
-kind: documentation
 title: Synthetic Monitoring & Testing Results Explorer
 ---
 

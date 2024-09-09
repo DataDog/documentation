@@ -170,10 +170,10 @@ Les signaux renvoient le contexte pertinent au sein d'alertes de sécurité. Bie
 
 Dans CSM Threats, les logs runtime de l'Agent sont générés à partir des événements kernel recueillis. Vous pouvez prévisualiser les logs dans le volet latéral des signaux, sans avoir à changer d'interface.
 
-1. Accédez au volet latéral des détails d'un signal, puis cliquez sur l'onglet Event.
+1. Accédez au volet latéral des détails d'un signal, puis cliquez sur l'onglet Events.
 2. Cliquez sur **View in Log Explorer** pour accéder à la solution Log Management, qui affiche la liste complète des logs qui ont déclenché ce signal.
    Cette liste peut comporter un grand volume de logs. Pour cette raison, le volet latéral du signal combine ces logs, ainsi que leurs attributs communs, au sein d'une structure JSON.
-3. Revenez à l'onglet Event, puis faites défiler jusqu'à la fin de la page. Développez le menu JSON pour accéder à tous les attributs de log contenus dans les événements runtime de l'Agent.
+3. Revenez à l'onglet Events, puis faites défiler jusqu'à la fin de la page. Développez le menu JSON pour accéder à tous les attributs de log contenus dans les événements runtime de l'Agent.
 4. Identifiez des paires key/value pour supprimer des signaux en fonction de clés communes, par exemple `@process.args`, `@process.group`, `@process.ancestors.comm` ou `@process.ancestors.args`.
 5. Ouvrez la règle dans l'éditeur dédié et dans la section **Exclude benign activity with suppression queries**. Ajoutez la liste des paires key/value qui vous semblent pertinentes.
 

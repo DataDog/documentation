@@ -1,6 +1,5 @@
 ---
 title: Serverless and OpenTelemetry
-kind: documentation
 further_reading:
   - link: '/opentelemetry/'
     tag: 'Documentation'

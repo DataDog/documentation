@@ -1,6 +1,5 @@
 ---
 title: Exploring SQL Server AlwaysOn Availability Groups
-kind: documentation
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

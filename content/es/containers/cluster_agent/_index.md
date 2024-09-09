@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
   text: Autoescalar sus cargas de trabajo Kubernetes con cualquier métrica Datadog
-kind: documentación
 title: Cluster Agent para Kubernetes
 ---
 

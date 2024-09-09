@@ -1,6 +1,6 @@
 ---
 title: Understanding the RUM Event Hierarchy
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'

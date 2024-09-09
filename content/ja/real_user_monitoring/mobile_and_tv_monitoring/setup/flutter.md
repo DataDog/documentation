@@ -10,7 +10,7 @@ further_reading:
   tag: ドキュメント
   text: RUM Flutter の高度なコンフィギュレーション
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: ソースコード
   text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: ブログ
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
-kind: ドキュメント
 title: RUM Flutter モニタリングのセットアップ
 type: multi-code-lang
 ---
@@ -30,7 +29,7 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 
 ### UI でアプリケーションの詳細を指定
 
-1. [Datadog アプリ][1]で、**UX Monitoring** > **RUM Applications** > **New Application** へ移動します。
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. アプリケーションタイプとして `Flutter` を選択します。
 3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
 4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。詳しくは、[RUM Flutter データ収集][7]をご覧ください。
@@ -44,8 +43,19 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 まず、各プラットフォームに対して環境が適切にセットアップされていることを確認します。
 
 <div class="alert alert-info">
-Datadog は、Flutter 2.8+ の iOS と Android の Flutter Monitoring をサポートしています。Flutter Web のサポートはアルファ版です。
+Datadog は、Flutter 3.0 以上の iOS と Android の Flutter Monitoring をサポートしています。
 </div>
+
+Datadog は Flutter Web を公式にはサポートしていませんが、現在のモバイルアプリ用 Flutter SDK を使えば、すぐに使えるモニタリングが可能です。以下は既知の制限事項です。
+  * Flutter から報告されるすべてのアクションはタイプ `custom` でラベル付けされます。
+  * 長時間実行されるアクション (`startAction` / `stopAction`) はサポートされていません。
+  * RUM リソースの手動報告 (`startResource` / `stopResource`) はサポートされていません。
+  * イベントマッパーは現在サポートされていません。
+  * ロガーのタグは現在サポートされていません。
+  * `addUserExtraInfo` はサポートされていません。
+  * `stopSession` はサポートされていません。
+
+Flutter Web のサポートは予定されていませんが、Datadog の優先順位はお客様のフィードバックに基づいてしばしば再評価されます。Flutter Web アプリをお持ちで、Datadog RUM を使用してパフォーマンスを監視したい場合は、カスタマーサポートチームにご連絡の上、この機能リクエストをエスカレーションしてください。
 
 #### iOS
 
@@ -61,45 +71,45 @@ platform :ios, '11.0'
 
 #### Android
 
-Android の場合、`minSdkVersion` のバージョンは 19 以上でなければならず、Kotlin を使用している場合はバージョン 1.6.21 以上であるべきです。これらの制約は、通常 `android/app/build.gradle` ファイルにあります。
+Android の場合、`minSdkVersion` のバージョンは 21 以上でなければならず、Kotlin を使用している場合はバージョン 1.8.0 以上であるべきです。これらの制約は、通常 `android/app/build.gradle` ファイルにあります。
 
-#### Web
+### Web
 
-Web の場合、`index.html` の `head` タグ内に以下のコードを追加します (**{{<region-param key="dd_site_name">}}** サイトの場合): 
+Web の場合、`index.html` の `head` タグ内に以下のコードを追加します (**{{<region-param key="dd_site_name">}}** サイトの場合):
 {{< site-region region="us" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="ap1" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="us3" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="us5" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="gov" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v5.js"></script>
 ```
 {{</ site-region>}}
 
@@ -111,7 +121,7 @@ Web の場合、`index.html` の `head` タグ内に以下のコードを追加�
 
    ```yaml
    dependencies:
-     datadog_flutter_plugin: ^1.3.0
+     datadog_flutter_plugin: ^2.0.0
    ```
 2. 以下のスニペットで、Datadog の各機能 (ログや RUM など) の構成オブジェクトを作成します。ある機能に対して構成を渡さない場合、その機能は無効化されます。
 
@@ -350,11 +360,11 @@ Container(
 [4]: /ja/real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /ja/serverless/distributed_tracing
-[7]: /ja/real_user_monitoring/flutter/data_collected/
+[7]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
-[12]: /ja/real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking
+[12]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html

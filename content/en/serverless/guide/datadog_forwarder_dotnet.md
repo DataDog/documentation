@@ -1,6 +1,6 @@
 ---
 title: Instrumenting .NET Serverless Applications Using the Datadog Forwarder
-kind: guide
+
 ---
 ## Overview
 

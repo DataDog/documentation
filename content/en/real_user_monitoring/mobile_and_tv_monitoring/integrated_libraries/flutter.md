@@ -1,6 +1,5 @@
 ---
 title: Flutter Libraries for RUM
-kind: documentation
 code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30

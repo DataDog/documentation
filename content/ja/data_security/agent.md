@@ -6,7 +6,6 @@ further_reading:
 - link: /data_security/
   tag: ドキュメント
   text: Datadog に送信されるデータの主要カテゴリを確認する
-kind: documentation
 title: Agent のデータセキュリティ
 ---
 
@@ -19,17 +18,33 @@ title: Agent のデータセキュリティ
 Agent の公式リポジトリおよびバイナリパッケージは署名されています。次の公開鍵のいずれかに対して署名を確認して、ディストリビューションチャンネルを確認します。
 
 - Linux DEB パッケージとリポジトリメタデータ:
-  - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
+  - [D18886567EABAD8B2D2526900D826EB906462314][22]
+  - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
+  - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Linux RPM パッケージとリポジトリメタデータ:
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][21]
+  - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
-- Windows MSI:
-  - DigiCert certificate fingerprint `21fe8679bdfb16b879a87df228003758b62abf5e`
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
 Debian および Ubuntu では、`datadog-agent` パッケージに `datadog-signing-keys` パッケージのソフト依存性があるため、上記のキーが APT により信頼されます。パッケージを最新に更新しておくと、最新の署名キーをシステムに保つことができます。
+
+### Windows MSI
+
+Windows 上で Datadog Agent インストーラファイルの署名を検証するには、`Get-AuthenticodeSignature` の出力を `FormatList` (`fl`) にパイプし、次のことを確認します。
+- ステータスが有効であること
+- 証明書が `Datadog, Inc` によって署名されていること
+- 発行者が `DigiCert` であること
+
+例えば、`ddagent-cli-7.49.1.msi` という名前の .msi ファイルを検証する場合:
+{{< code-block lang="powershell" >}}
+Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
+{{< /code-block >}}
+
+コマンドの出力が `A certificate chain could not be built to a trusted root authority` (信頼できる root 認証局への証明書チェーンを構築できなかった) の場合、そのマシンは DigiCert root CA の更新が必要になるかもしれません。
 
 ## 情報セキュリティ
 
@@ -84,7 +99,7 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 [5]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [7]: /ja/agent/faq/network/
-[8]: /ja/agent/proxy/
+[8]: /ja/agent/configuration/proxy/
 [9]: /ja/agent/troubleshooting/
 [10]: https://coreos.com/clair
 [11]: https://snyk.io
@@ -94,4 +109,8 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 [15]: https://www.datadoghq.com/8869756E.asc.txt
 [16]: /ja/agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /ja/agent/guide/secrets-management/
+[18]: /ja/agent/configuration/secrets-management/
+[19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
+[20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[21]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+[22]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public

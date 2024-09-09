@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
   tag: 블로그
   text: 버전 기록을 통해 Datadog 대시보드 및 노트북의 변경 사항 추적
-kind: 도움말
 title: 노트북 버전 기록
 ---
 

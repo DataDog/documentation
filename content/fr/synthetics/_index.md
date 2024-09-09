@@ -35,7 +35,6 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive pour améliorer vos capacités de testing
     Synthetic
-kind: documentation
 title: Surveillance Synthetic
 ---
 

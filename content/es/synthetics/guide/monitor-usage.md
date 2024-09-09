@@ -14,15 +14,14 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentación
   text: Crear un test de navegador
-kind: guía
-title: Utilizar las métricas de uso estimado
+title: Utilizar métricas de uso estimado
 ---
 
 ## Información general
 
 Los tests de Synthetics vienen con [métricas de uso estimado][1] que te permiten llevar un seguimiento de tu uso. Gracias a ellas conseguirás lo siguiente:
 
-* Saber cómo cambia tu uso a lo largo del tiempo
+* Saber cómo cambia tu uso a lo largo del tiempo.
 * Ver qué equipos, aplicaciones o servicios representan el grueso del uso que haces de Synthetics
 * Recibir alertas cuando se producen picos de uso imprevistos que repercutirán en tu factura
 
@@ -36,7 +35,7 @@ Para conseguir una mayor precisión, acota o agrupa las métricas por las etique
 
 Puedes representar las métricas en un gráfico y monitorizarlas tomando como referencia umbrales fijos. También tienes la posibilidad de aplicar algoritmos de machine learning para [detectar anomalías][5] o [hacer predicciones][6], con el fin de no recibir alertas cuando se produce un aumento esperado del uso.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: pivot 또는 unstack 대신 pivot_table 사용하기
 ---
 ## 메타데이터

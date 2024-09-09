@@ -1,7 +1,7 @@
 ---
 description: Découvrez la différence entre les dernières versions (V2) et les anciennes
   versions (V1) des intégrations basées sur OpenMetrics.
-kind: guide
+
 title: Gestion des versions actuelles et anciennes pour les intégrations basées sur
   OpenMetrics
 ---

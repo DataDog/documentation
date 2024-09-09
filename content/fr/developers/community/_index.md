@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: Blog
   text: Présentation du portail Open Source Datadog
-kind: documentation
 title: Communauté
 ---
 

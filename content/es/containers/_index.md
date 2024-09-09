@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/container-report/
   tag: Búsquedas Datadog
   text: Informe sobre la situación anual de contenedores de Datadog
-kind: documentación
 title: Monitorización de contenedores
 ---
 

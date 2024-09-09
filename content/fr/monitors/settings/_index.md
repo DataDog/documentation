@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Notifications de monitor
-kind: documentation
 title: Politiques de tagging de monitor
 ---
 

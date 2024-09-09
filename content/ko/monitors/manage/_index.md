@@ -12,7 +12,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: 블로그
   text: 모니터 태그 지정 모범 사례
-kind: 설명서
 title: 모니터 관리
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Category Processor
-kind: Documentation
 
 ---
 

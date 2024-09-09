@@ -65,11 +65,11 @@ From the configuration modal that opens, you can pause an existing report or cre
 Users need the **Dashboards Report Write** [permission][2] to create and edit report schedules.
 This permission can be granted by another user with the **User Access Manage** permission.
 
-{{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
+{{< img src="dashboards/scheduled_reports/permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
 Users with the **Org Management** permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
 
-{{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
+{{< img src="dashboards/scheduled_reports/org_preference.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
 ## Unsupported widget types
 

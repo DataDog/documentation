@@ -5,7 +5,6 @@ further_reading:
 - link: /tracing/troubleshooting
   tag: Documentation
   text: Dépannage de l'APM
-kind: Documentation
 title: Dépannage du profileur Java
 type: multi-code-lang
 ---

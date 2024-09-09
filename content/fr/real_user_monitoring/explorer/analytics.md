@@ -15,7 +15,6 @@ further_reading:
   tag: Blog
   text: Utiliser l'analyse de l'entonnoir pour comprendre et optimiser vos flux utilisateur
     clés
-kind: documentation
 title: RUM Analytics
 ---
 

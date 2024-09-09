@@ -1,6 +1,5 @@
 ---
 title: Test Run Facets
-kind: documentation
 description: Learn about default facets that you can use to search your test runs in the Test Visibility Explorer.
 further_reading:
 - link: 'tests/search/'

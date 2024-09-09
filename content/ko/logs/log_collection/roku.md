@@ -2,12 +2,11 @@
 description: Roku 채널에서 로그를 수집합니다.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku Source code
+  tag: 소스 코드
+  text: dd-sdk-roku용 소스 코드
 - link: logs/explorer
   tag: 설명서
   text: 로그 탐색 방법 알아보기
-kind: 설명서
 title: Roku 로그 수집
 ---
 

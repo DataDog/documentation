@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Amazon RDS managed Postgres
-kind: documentation
 description: Install and configure Database Monitoring for Postgres on Amazon RDS.
 further_reading:
 - link: "/integrations/postgres/"
@@ -162,6 +161,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -222,7 +224,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        host: '<AWS_INSTANCE_ENDPOINT>'
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
@@ -289,7 +291,7 @@ export DD_AGENT_VERSION=7.36.1
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -l com.datadoghq.ad.checks='{"postgres": {
-    "init_config": [{}],
+    "init_config": {},
     "instances": [{
       "dbm": true,
       "host": "<AWS_INSTANCE_ENDPOINT>",
@@ -318,7 +320,7 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>","tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]","tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -350,7 +352,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: -|
+        postgres.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -358,7 +360,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             host: <INSTANCE_ADDRESS>
             port: 5432
             username: datadog
-            password: '<UNIQUE_PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             tags:
               - 'dbinstanceidentifier:<DB_INSTANCE_NAME>'
 
@@ -398,7 +400,7 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - dbinstanceidentifier:<DB_INSTANCE_NAME>
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
@@ -429,7 +431,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "tags": [
             "dbinstanceidentifier:<DB_INSTANCE_NAME>"
           ]

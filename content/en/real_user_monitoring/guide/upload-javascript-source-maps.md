@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'

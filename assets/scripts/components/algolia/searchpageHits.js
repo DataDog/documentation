@@ -1,5 +1,4 @@
-import { getHitData } from './getHitData';
-import { truncateContentAtHighlight } from '../../helpers/truncateContent';
+import { getHitData, getSnippetForDisplay } from './getHitData';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -22,14 +21,9 @@ const renderHits = (renderOptions, isFirstRender) => {
         const category = `<p class="ais-Hits-category">${hit.category}</p>`;
         const subcategory = `<p class="ais-Hits-subcategory">${hit.subcategory}</p>`;
         const pageTitle = `<p class="ais-Hits-title">${hit.title}</p>`;
-        const baseTitleHierarchy =
-            hit.subcategory === hit.title.replace(/(<mark>|<\/mark>)/gm, '')
+        return hit.subcategory === hit.title.replace(/(<mark>|<\/mark>)/gm, '')
                 ? `${category}${spacer}${pageTitle}`
                 : `${category}${spacer}${subcategory}${spacer}${pageTitle}`;
-
-        return hit.section_header
-            ? `${baseTitleHierarchy}${spacer}<p class="ais-Hits-title">${hit.section_header}</p>`
-            : `${baseTitleHierarchy}`;
     };
 
     // Returns a bunch of <li>s
@@ -37,7 +31,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         return hitsArray
             .map((item) => {
                 const hit = getHitData(item, renderOptions.results.query);
-                const displayContent = truncateContentAtHighlight(hit.content, 300);
+                const displayContent = getSnippetForDisplay(hit, false);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `

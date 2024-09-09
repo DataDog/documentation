@@ -11,7 +11,6 @@ further_reading:
 - link: /monitors/
   tag: 설명서
   text: 모니터링에 대해 알아보기
-kind: 가이드
 title: RUM 사용량 모니터링
 ---
 

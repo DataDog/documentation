@@ -7,7 +7,6 @@ cascade:
     rank: 20
     subcategory: Synthetic モニタリングガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: Synthetic モニタリングガイド
 ---
@@ -50,7 +49,7 @@ title: Synthetic モニタリングガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="メトリクス:" >}}
-    {{< nextlink href="synthetics/guide/monitor-usage/" >}}推定使用量メトリクスの使用{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/monitor-usage/" >}}推定使用量メトリクスを使用する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/using-synthetic-metrics/" >}}Synthetic メトリクスをモニターで使用する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングを理解し、ばらつきのトラブルシューティングを行う{{< /nextlink >}}
 {{< /whatsnext >}}

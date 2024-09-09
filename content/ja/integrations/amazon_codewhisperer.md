@@ -28,6 +28,7 @@ categories:
 - クラウド
 - ai/ml
 - 開発ツール
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,7 +37,6 @@ integration_id: amazon-codewhisperer
 integration_title: Amazon CodeWhisperer
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_codewhisperer
 public_title: Amazon CodeWhisperer
@@ -51,6 +51,7 @@ tile:
   - Category::AI/ML
   - Category::Developer Tools
   - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon CodeWhisperer は ML を搭載したコード提案サービスです。
   media: []
@@ -77,7 +78,7 @@ Amazon CodeWhisperer は、自然言語によるコメントと統合開発環�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CodeWhisperer` が有効になっていることを確認します。
 2. [Datadog - Amazon CodeWhisperer インテグレーション][3]をインストールします。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_codewhisperer" >}}

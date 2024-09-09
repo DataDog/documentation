@@ -8,7 +8,6 @@ further_reading:
 - link: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
   tag: 설명서
   text: 시뮬레이션 데이터 형식 참조
-kind: 가이드
 title: NDM 프로필 만들기
 ---
 

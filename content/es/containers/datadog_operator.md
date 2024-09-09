@@ -12,7 +12,6 @@ further_reading:
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
   tag: Código fuente
   text: 'Datadog Operator: configuración'
-kind: documentation
 title: Datadog Operator
 ---
 

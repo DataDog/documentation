@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Usar la inyección de biblioteca para auto-instrumentar el rastreo de aplicaciones
     Kubernetes con Datadog APM
-kind: documentación
 title: Controlador de admisión de Datadog
 ---
 

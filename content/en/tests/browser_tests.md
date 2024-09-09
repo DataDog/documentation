@@ -1,6 +1,5 @@
 ---
 title: Instrument Your Browser Tests With RUM
-kind: documentation
 description: Learn how to use CI Visibility and RUM to connect your test results with browser sessions and session replays.
 aliases:
 - /continuous_integration/guides/rum_integration

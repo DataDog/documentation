@@ -6,7 +6,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: Prise en charge d'OpenTelemetry dans Datadog
-kind: guide
+
 title: Visualisation des histogrammes OTLP sous forme de cartes thermiques
 ---
 

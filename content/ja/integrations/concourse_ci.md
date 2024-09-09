@@ -22,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: concourse-ci
 integration_title: Concourse-CI
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: concourse_ci
 public_title: Concourse-CI
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Concourse CI から送信されるメトリクスを収集
   media: []
@@ -65,13 +66,13 @@ Concourse CI で Datadog メトリクスエミッターを構成すると、以�
 - パイプラインの処理時間、コンテナの数、およびマウントされたワーカーボリュームを可視化できます。
 - 低速なリクエストを識別してルートを構築できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Concourse CI には Datadog メトリクスエミッターが付属しています。起動時にメトリクスを送信するように [ATC][1] を構成するには、[Datadog Agent][2] がインストールされていることが前提条件です。
 
-### ブラウザトラブルシューティング
+### 構成
 
 以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、`concourse.ci` というプレフィックスを使用することが重要です。
 
@@ -86,13 +87,13 @@ Metric Emitter (Datadog):
     --datadog-prefix=           Prefix for all metrics to easily find them in Datadog [$CONCOURSE_DATADOG_PREFIX]
 ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "concourse_ci" >}}
 
 
-### ヘルプ
+### イベント
 
 このインテグレーションは、イベントをサポートしていません。
 
@@ -100,7 +101,7 @@ Metric Emitter (Datadog):
 
 このインテグレーションは、サービスチェックを収集しません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

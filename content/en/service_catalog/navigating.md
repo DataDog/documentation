@@ -1,6 +1,5 @@
 ---
 title: Navigate the Service Catalog
-kind: documentation
 aliases:
   - /tracing/service_catalog/browsing
   - /service_catalog/browsing
@@ -125,7 +124,7 @@ To access additional details describing your CI status and static analysis viola
 
 
 [1]: https://app.datadoghq.com/services
-[2]: /tracing/service_catalog/setup/
+[2]: /service_catalog/enrich_default_catalog/
 [3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [4]: /tracing/metrics/metrics_namespace/
 [5]: /tracing/guide/configuring-primary-operation/

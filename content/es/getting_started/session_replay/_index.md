@@ -16,7 +16,6 @@ further_reading:
 - link: /real_user_monitoring/browser/troubleshooting/
   tag: Documentación
   text: Solucionar problemas
-kind: documentación
 title: Empezando con Session Replay
 ---
 

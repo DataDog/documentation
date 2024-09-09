@@ -1,11 +1,16 @@
 ---
 title: Create notifications and third party tickets 
-kind: documentation
 further_reading:
 - link: "/service_management/case_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
 ---
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
 ## Overview
 

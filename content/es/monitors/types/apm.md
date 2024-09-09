@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
-kind: Documentación
 title: Monitor de APM
 ---
 

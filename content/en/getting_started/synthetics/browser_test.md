@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Browser Tests
-kind: documentation
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'

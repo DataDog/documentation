@@ -6,11 +6,21 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知
-kind: documentation
-title: モニタータグポリシー
+- link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
+  tag: ブログ
+  text: モニターのタグ付けのベストプラクティス
+title: モニター設定
 ---
 
 ## 概要
+
+[モニタリングの設定ページ][1]で、次のトピックにアクセスして制御することができます。
+
+* [タグポリシー](#tag-policies)
+* [削除されたモニター](#deleted-monitors)
+
+
+## タグポリシー
 
 モニタータグポリシーにより、Datadog モニターのタグとタグ値に対するデータの検証を実行することができます。これにより、アラートが、トリアージと処理のための正しいダウンストリームシステムおよびワークフローに送信されることが保証されます。
 
@@ -19,10 +29,10 @@ title: モニタータグポリシー
 - 新規に作成するタグは、組織のタグポリシーに準拠していなければなりません。
 - 既存のモニターが組織のタグポリシーに違反している場合、引き続きアラートと通知は提供されますが、その他の設定を変更する前に、既存のモニターを更新してタグポリシーに合致させる必要があります。
 
-## モニタータグポリシーの構成
+### モニタータグポリシーの構成
 
-1. **Monitors** > **Settings** ページに移動します。
-2. タグポリシーを構成します。タグポリシーを通じて実行されるデータ検証ルールは 3 種類存在します。
+1. Navigate to the [**Monitors Settings**][1] page.
+2. "Tag policies" タブを開きます。タグポリシーを通じて実行されるデータ検証ルールは 3 種類存在します。
     - タグと指定された値が必要
     - タグのみ必要
     - オプションのタグと指定された値
@@ -48,15 +58,26 @@ title: モニタータグポリシー
 
 {{< img src="monitors/settings/monitor_tag_enforcement_optional_key_with_values.png" alt="オプションのタグと指定された値に関するタグポリシーが表示されているモニター設定ページ" >}}
 
-## アクセス許可
+### 権限
 
 モニターのタグポリシーを構成するには、`MONITOR_CONFIG_POLICY_WRITE_PERMISSION` の権限を持つロールを割り当てられている必要があります。
 
-詳しくは、[ロールベースアクセスコントロール][1]および[ロール権限][2]を参照してください。
+詳しくは、[ロールベースアクセスコントロール][2]および[ロール権限][3]を参照してください。
+
+
+## 削除されたモニター
+モニターは 7 日間保持された後、完全に削除されます。最近削除された Datadog モニターを復元するには
+1. [**Monitors** > **Settings**][1] ページに移動します。
+1. Open the **Deleted Monitors** tab.
+1. Select the monitor(s) you want to restore.
+1. Click the **Restore** button at the top of the table.
+
+{{< img src="monitors/settings/recently_deleted.png" alt="削除されたモニターの復元" style="width:100%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/rbac/
-[2]: /ja/account_management/rbac/permissions/
+[1]: https://app.datadoghq.com/monitors/settings
+[2]: /ja/account_management/rbac/
+[3]: /ja/account_management/rbac/permissions/

@@ -3,7 +3,6 @@ aliases:
 - /ja/tracing/visualization/search/
 - /ja/tracing/trace_search_and_analytics/
 - /ja/tracing/advanced_usage/
-kind: ドキュメント
 title: App Analytics
 ---
 

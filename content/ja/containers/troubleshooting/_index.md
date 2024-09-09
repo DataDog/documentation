@@ -4,7 +4,6 @@ further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentation
   text: AWS (EC2 または EKS) 上の Kubernetes によるホストの重複
-kind: documentation
 title: コンテナのトラブルシューティング
 ---
 
@@ -16,7 +15,7 @@ Agent のデプロイ方法には、以下の 3 つがあります。
 
 2. [Amazon ECS][2] や [Amazon ECS 環境の Fargate][3]、[Amazon EKS][4] などの**クラウド環境**で
 
-3. [Kubernetes 環境][2]で
+3. In a [Kubernetes environment][16]
 
 これらの異なる方法には、独自のデプロイメント上の課題があります。このページは、問題を解決するための出発点として使用してください。問題が解決しない場合は、[Datadog サポート][6]に連絡してください。
 
@@ -32,7 +31,7 @@ Agent のリリース更新や変更の詳細については、Datadog の[リ�
 
 以下が正しいことを確認します。
 
-- メトリクスエンドポイントは露出しており、Agent が到達できる状態になっている。
+- The metrics endpoint is exposed and is open for the Agent to reach.
 
 - Agent がエンドポイントにアクセスするのを妨げるようなプロキシやファイアウォールは存在しない。
 
@@ -85,7 +84,7 @@ IAM ポリシーが更新されていることを確認します。
 
   - [ECS][12]: ログを収集するコンテナにログルーターがアタッチされていることを確認します。
 
-  - [EKS][13]: EKS Fargate 環境において Agent がログを収集する一般的な方法は 2 つあります。CloudWatch のログを利用したログ転送と、[Kinesis Data Firehose][14] を利用したログ転送です。Kinesis Data Firehose を使用してログを収集するには、Kinesis Data Firehose の配信ストリームを正常に実装する必要があり、いくつかのコマンドラインツールも必要です。
+  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Amazon Data Firehose][14]. Using Amazon Data Firehose to collect logs requires the successful implementation of the Amazon Data Firehose delivery stream, as well as some command line tools. 
 
 
 ## Kubernetes
@@ -170,3 +169,4 @@ $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 [13]: https://docs.datadoghq.com/ja/integrations/eks_fargate/#log-collection
 [14]: https://docs.datadoghq.com/ja/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
 [15]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare
+[16]: https://docs.datadoghq.com/ja/containers/kubernetes/installation/?tab=operator

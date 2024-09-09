@@ -27,8 +27,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 38
     source_type_name: HAProxy
-  logs:
-    source: haproxy
   monitors:
     '[HAProxy] Anomalous frontend request rate for host {{host.name}}': assets/monitors/request_rate.json
     '[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_5xx.json
@@ -55,6 +53,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
 display_on_public_website: true
@@ -62,9 +61,8 @@ draft: false
 git_integration_title: haproxy
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 5.2.0
+integration_version: 5.2.2
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: haproxy
 public_title: HAProxy
@@ -80,10 +78,20 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/integrations/faq/haproxy-multi-process/
   support: README.md#Support
   title: HAProxy
 ---
@@ -101,7 +109,7 @@ Datadog で HAProxy のアクティビティをキャプチャして、以下の
 - サーバーがダウンしたときに気付くことができます。
 - HAProxy のパフォーマンスを他のアプリケーションと関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションでは、Prometheus エンドポイント (推奨) または stats エンドポイントを介したソケットベースのインテグレーション (非推奨) からメトリクスを収集できます。Prometheus エンドポイントを使用するには、HAProxy バージョン 2 (エンタープライズバージョン 1.9rc1) 以降が必要です。
 
@@ -113,11 +121,11 @@ Prometheus エンドポイントを使用する場合、バージョン 1.10.0 �
 
 `[OpenMetrics V1]` または `[OpenMetrics V2]` とマークされたメトリクスは、HAProxy インテグレーションの対応するモードを使用してのみ利用可能です。`[OpenMetrics V1 and V2]` とマークされたメトリクスは、どちらのモードでも収集されます。
 
-### インフラストラクチャーリスト
+### インストール
 
 HAProxy チェックは [Datadog Agent][5] パッケージに含まれています。HAProxy サーバーには何もインストールする必要がありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### Prometheus の使用
 
@@ -135,21 +143,21 @@ HAProxy チェックは [Datadog Agent][5] パッケージに含まれていま�
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ##### メトリクスの収集
 ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. HAProxy メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `haproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル haproxy.d/conf.yaml][1] を参照してください。
 
-   ```yaml  
+   ```yaml
    instances:
 
      ## @param use_openmetrics - boolean - optional - default: false
      ## Enable to preview the new version of the check which supports HAProxy version 2 or later
      ## or environments using the HAProxy exporter.
      ##
-     ## OpenMetrics-related options take effect only when this is set to `true`. 
+     ## OpenMetrics-related options take effect only when this is set to `true`.
      ##
      ## Uses the latest OpenMetrics V2 implementation for more features and better performance.
      ## Note: To see the configuration options for the OpenMetrics V1 implementation (Agent v7.33 or earlier),
@@ -244,7 +252,7 @@ Agent は、メトリクスを統計エンドポイントを使って収集し�
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -268,7 +276,7 @@ Agent は、メトリクスを統計エンドポイントを使って収集し�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 デフォルトで、Haproxy はログを UDP 経由で 514 ポートに送信します。Agent はこのポートでログをリッスンできますが、1024 よりも下のポート番号にバインディングするため、管理者特権が必要になります。以下ではこの設定方法について説明します。別のポートを使用することも可能で、その場合は手順 3 をスキップしてください。
 
@@ -331,7 +339,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"url": "https://%%host%%/admin?stats"}]'
 ```
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -347,7 +355,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -400,7 +408,7 @@ spec:
     - name: haproxy
 ```
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -452,7 +460,7 @@ spec:
 }
 ```
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -482,23 +490,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][10]し、Checks セクションで `haproxy` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "haproxy" >}}
 
 
-### ヘルプ
+### イベント
 
 HAProxy チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "haproxy" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 ### エラー: ポート 514 はすでに使用中
-syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります: 
+syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります:
 `Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use`
 
 これは、デフォルトで syslog がポート 514 でリッスンしているために起こっています。このエラーを解決するには、syslog を無効にするか、ポート 514 と Agent がログをリッスンしている別のポートにログを転送するように HAProxy を構成することができます。Agent がリッスンするポートは、[こちら][11]で haproxy.d/conf.yaml ファイル定義することができます。

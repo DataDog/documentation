@@ -1,6 +1,5 @@
 ---
 title: Platform
-kind: documentation
 description: Learn how to leverage Datadog platform capabilities to maximize Synthetics capabilities.
 further_reading:
 - link: '/continuous_testing/explorer'

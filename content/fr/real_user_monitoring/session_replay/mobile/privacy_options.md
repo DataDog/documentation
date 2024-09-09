@@ -17,7 +17,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: Documentation
   text: Session Replay
-kind: documentation
 title: Options de confidentialité de Mobile Session Replay
 ---
 

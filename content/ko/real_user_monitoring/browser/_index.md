@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/log_collection/javascript/
   tag: 설명서
   text: 로그를 위한 Datadog Browser SDK에 대해 자세히 알아보기
-kind: 설명서
 title: RUM 브라우저 모니터링
 ---
 

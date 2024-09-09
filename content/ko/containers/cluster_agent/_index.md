@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: 블로그
   text: Datadog 메트릭으로 Kubernetes 워크로드 자동 확장
-kind: 설명서
 title: Kubernetes용 클러스터 에이전트
 ---
 

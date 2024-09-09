@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the Continuous Profiler
-kind: documentation
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling

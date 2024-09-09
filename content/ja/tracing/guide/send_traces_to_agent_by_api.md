@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: APM の用語と概要
-kind: ガイド
 title: API で Agent にトレースを送信する
 ---
 

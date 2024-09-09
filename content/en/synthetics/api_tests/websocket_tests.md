@@ -1,6 +1,5 @@
 ---
 title: WebSocket Testing
-kind: documentation
 description: Simulate WebSocket requests to monitor public and internal API endpoints
 aliases:
 further_reading:

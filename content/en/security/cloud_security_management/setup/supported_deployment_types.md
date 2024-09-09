@@ -2,30 +2,33 @@
 title: Cloud Security Supported Deployment Types
 ---
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 The following table summarizes the CSM features available relative to each deployment type.
 
 | Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless Scanning |
 |---------------------|------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
-| AWS Account         |                        | {{< X >}}             |             |                     | {{< X >}}          | beta                   |
+| AWS Account         |                        | {{< X >}}             |             |                     | {{< X >}}          | {{< X >}}              |
 | Azure Account       |                        | {{< X >}}             |             |                     | {{< X >}}          |                        |
 | GCP Account         |                        | {{< X >}}             |             |                     |                    |                        |
-| Terraform           |                        |                       |             |                     |                    | beta                   |
+| Terraform           |                        |                       |             |                     |                    | {{< X >}}              |
 | Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
 | Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
-| Windows             | {{< X >}}              |                       | {{< X >}}   |                     |                    |                        |
+| Windows             | {{< X >}}              |                       | {{< X >}}   | beta                |                    |                        |
 | AWS Fargate ECS/EKS | {{< X >}}              |                       | beta        |                     |                    |                        |
 
 The following table summarizes the scope of coverage available relative to each CSM feature.
 | Resources monitored             | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless scanning |
 |---------------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
-| Resources in AWS Account        | {{< X >}}             |             |                     |                    | {{< X >}}              |
+| Resources in AWS Account        | {{< X >}}             |             | {{< X >}}           |                    | {{< X >}}              |
 | Resources in Azure Subscription | {{< X >}}             |             |                     |                    |                        |
 | Resources in GCP Project        | {{< X >}}             |             |                     |                    |                        |
 | Kubernetes Cluster              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
 | Docker Host                     | {{< X >}}             |             |                     |                    |                        |
 | Linux Host                      | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    | {{< X >}}              |
+| Windows Host                    |                       | {{< X >}}   | beta                |                    |                        |
 | Docker Container                |                       | {{< X >}}   |                     |                    |                        |
 | Container Image                 |                       |             | {{< X >}}           |                    | {{< X >}}              |
 | IAM in AWS Account              |                       |             |                     | {{< X >}}          |                        |

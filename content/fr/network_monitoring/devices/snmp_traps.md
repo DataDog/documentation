@@ -5,7 +5,6 @@ further_reading:
   tag: Blog
   text: Surveiller et résoudre des problèmes de performances réseau avec des interruptions
     SNMP
-kind: documentation
 title: Traps SNMP
 ---
 

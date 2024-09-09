@@ -4,7 +4,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Más información sobre las opciones de notificación
-kind: Documentación
 title: Notificaciones
 ---
 

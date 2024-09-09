@@ -4,7 +4,6 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: 설명서
   text: Agent 기본 사용법
-kind: 설명서
 title: 지원되는 플랫폼
 ---
 

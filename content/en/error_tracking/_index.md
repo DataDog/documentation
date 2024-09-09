@@ -1,6 +1,5 @@
 ---
 title: Error Tracking
-kind: documentation
 disable_toc: false
 ---
 

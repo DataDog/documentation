@@ -43,7 +43,6 @@ further_reading:
   tag: Blog
   text: Meilleures pratiques pour sʼapproprier un service de bout en bout grâce au
     catalogue de services de Datadog
-kind: documentation
 title: Catalogue des services Datadog
 ---
 

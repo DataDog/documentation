@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Cloud Security Management
-kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
@@ -20,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/security-posture-csm/"
   tag: "Blog"
   text: "Report on changes to your security posture with Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/agentless-scanning/"
+  tag: "Blog"
+  text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"

@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: 설명서
   text: Datadog 클러스터 에이전트 트러블슈팅
-kind: 설명서
 title: 클러스터 에이전트 명령 및 옵션
 ---
 

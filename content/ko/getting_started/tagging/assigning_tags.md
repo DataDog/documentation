@@ -11,7 +11,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: 설명서
   text: Datadog 태그 사용법 알아보기
-kind: 설명서
 title: 태그 할당
 ---
 

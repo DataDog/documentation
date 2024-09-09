@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/types/ci
   tag: Documentación
   text: Más información sobre los monitores de CI
-kind: guía
 title: Añadir medidas personalizadas a los tests
 ---
 

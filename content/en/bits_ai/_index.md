@@ -16,6 +16,9 @@ further_reading:
     - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-bits-an-ai-assistant-to-help-engineers-quickly-resolve-application-issues/"
       tag: "Press release"
       text: "Bits AI announcement"
+    - link: "https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/"
+      tag: "Blog"
+      text: "Reimagining the way you run operations with autonomous investigations"
 ---
 
 Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.

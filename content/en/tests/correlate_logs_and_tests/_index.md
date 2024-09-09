@@ -1,6 +1,5 @@
 ---
 title: Correlate Logs and Tests
-kind: documentation
 description: Correlate your logs with your test traces.
 further_reading:
   - link: "/tests"

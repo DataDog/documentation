@@ -1,6 +1,5 @@
 ---
 title: List View
-kind: documentation
 description: Investigate the Network Path List View
 is_beta: true
 further_reading:

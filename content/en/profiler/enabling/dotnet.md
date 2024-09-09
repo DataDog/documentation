@@ -1,6 +1,5 @@
 ---
 title: Enabling the .NET Profiler
-kind: Documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60
@@ -68,6 +67,8 @@ The following profiling features are available in the following minimum versions
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
+Continuous Profiler is not supported for AWS Lambda.
+
 ## Installation
 
 Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
@@ -100,7 +101,7 @@ To install the .NET Profiler machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases

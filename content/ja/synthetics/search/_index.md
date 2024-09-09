@@ -12,11 +12,10 @@ further_reading:
   text: 保存ビューについて
 - link: /continuous_testing/explorer
   tag: ドキュメント
-  text: Synthetic Monitoring &amp; Continuous Testing Explorer について
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 - link: /service_management/events/explorer
   tag: ドキュメント
   text: イベントエクスプローラーについて
-kind: documentation
 title: Synthetic テストの検索と管理
 ---
 
@@ -24,16 +23,12 @@ title: Synthetic テストの検索と管理
 
 [Synthetic Tests ページ][1]では、すべてのテストへのアクセス、[検索](#search-for-tests)、[管理](#manage-tests)が可能です。
 
-{{< img src="synthetics/search/synthetic_tests_page.png" alt="Synthetic Monitoring Tests ページ" style="width:100%" >}}
+{{< img src="synthetics/search/synthetic_tests_page_2.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
 
 [ファセット](#facets-and-tags)を使うことで、以下のアクションを実現できます。
 
 - 特定の Synthetic テストを検索する
-- すべての CI/CD ジョブの実行を調査して、失敗したテスト実行を特定してトラブルシューティングします
-- CI/CD パイプラインでのテストの進行状況を追跡します
-- 修正する不安定なテストを特定します
 - 一括アクションでテストを管理する
-- Synthetic Monitoring の構成に対する変更を追跡するためのイベントを監視する
 
 ## テストを検索する
 
@@ -48,6 +43,7 @@ title: Synthetic テストの検索と管理
 | `Type`         | Synthetic テストの種類: `browser`、`api`、`api-multi`、`api-websocket`、`api-ssl`、`api-dns`、`api-tcp`、`api-udp`、`api-icmp`、または `api-grpc` |
 | `Status`       | Synthetic テストのステータス: `OK`、`Alert`、または `No Data`                       |
 | `Creator`      | Synthetic テストの作成者                                            |
+| `Team`         | Synthetic テストへの対応を担当するチーム                    |
 | `Region`       | Synthetic テストが実行されている管理およびプライベートロケーション         |
 | `State`        | Synthetic テストの状態: `live` または `paused`                          |
 | `Notification` | 通知の Synthetic テストで使用されるハンドル                      |
@@ -60,7 +56,6 @@ title: Synthetic テストの検索と管理
 
 | タグ          | 説明                                                                     |
 |----------------|-------------------------------------------------------------------------------|
-| `Team`         | Synthetic テストへの対応を担当するチーム                    |
 | `Tag`          | Synthetic テストに割り当てられたタグ                                       |
 | `Service`      | Synthetic テストが実行されているサービス                                 |
 | `Private Locations`| プライベートロケーションを有効にするかどうか: `true` または `false`          |
@@ -82,7 +77,7 @@ title: Synthetic テストの検索と管理
 
 Synthetics テストの種類を検索するには、**Type** ファセットでテストの種類を選択します。
 
-{{< img src="synthetics/search/facet_search.mp4" alt="Tests ページでファセットを使ってテストを検索する" video=true >}}
+{{< img src="synthetics/search/facet_search_2.mp4" alt="Search for tests using facets in the Tests page" video=true >}}
 
 ## テストの管理
 
@@ -90,19 +85,19 @@ Synthetics テストの種類を検索するには、**Type** ファセットで
 
 [Synthetic Tests ページ][1]で 1 つまたは複数のテストを選択し、**Edit Tags**、**Run Tests Now**、**Delete** をクリックして、Synthetic テストを一括で管理します。
 
-{{< img src="synthetics/search/edit_tags.mp4" alt="Synthetic テストの一括タグ編集" video=true >}}
+{{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
 ### テストアクション
 
-テストにカーソルを合わせると、右側に `Pause`、`Run Test Now`、`Edit`、`Clone`、`Delete` などのオプションアイコンが表示されます。ブラウザテストでは、`Edit Recording` オプションを使用することができます。
+テストの右側にあるケバブメニューをクリックすると、`Pause`、`Run Test Now`、`Edit Test`、`Clone`、`Delete` といったオプションアイコンが表示されます。`Edit Recording` オプションはブラウザテストで使用できます。
 
-{{< img src="synthetics/search/manage_test_options.mp4" alt="Synthetic テストにカーソルを合わせると表示されるアクショントレイオプション" video="true" width="100%">}}
+{{< img src="synthetics/search/test_option_2.mp4" alt="Options appear when you click on the kebab menu to the right of a Synthetic test" video="true" width="100%">}}
 
 ### イベントの追跡
 
 Synthetic テスト、グローバル変数、プライベートロケーションを作成、追加、削除すると、[イベントエクスプローラー][6]にイベントが発生します。イベントには、発生した変更が記述され、その変更を行ったユーザーが表示されます。
 
-{{< img src="synthetics/search/synthetic_events.png" alt="イベントエクスプローラーの Synthetic テストアラート" style="width:100%" >}}
+{{< img src="synthetics/search/synthetic_events_2.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
 
 テストモニターのアラートを検索バーで検索するか、**Event** テンプレート変数でイベントの種類を選択して、Synthetic 関連のすべての変更を検索します。例えば、`Event Type:synthetics_alert` です。
 

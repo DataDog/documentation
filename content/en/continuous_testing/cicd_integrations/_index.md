@@ -1,6 +1,5 @@
 ---
 title: Continuous Testing and CI/CD
-kind: documentation
 description: Run Continuous Testing tests on-demand or at predefined intervals in your CI/CD pipelines.
 aliases: 
   - /synthetics/ci

@@ -23,7 +23,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여해 쿠버네티스 모니터링과 관련한 인사이트를 얻으세요.
-kind: 설명서
 title: 쿠버네티스(Kubernetes)
 ---
 

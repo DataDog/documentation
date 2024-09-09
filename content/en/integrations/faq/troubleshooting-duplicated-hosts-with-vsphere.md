@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting duplicated hosts with vSphere
-kind: faq
+
 ---
 
 ## Duplicated hosts issue context

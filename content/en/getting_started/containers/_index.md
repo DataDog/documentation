@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Containers
-kind: documentation
 ---
 
 {{< whatsnext desc=" " >}}

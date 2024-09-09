@@ -1,6 +1,6 @@
 ---
 title: Manage Your Browser Tests Programmatically
-kind: guide
+
 further_reading:
 - link: '/api/latest/synthetics'
   tag: 'API'

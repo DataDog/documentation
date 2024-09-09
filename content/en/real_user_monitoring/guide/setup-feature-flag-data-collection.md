@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Feature Flag Data in RUM
-kind: guide
+
 beta: true
 description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:
@@ -562,6 +562,62 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Kameleoon integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+For more information about the SDK, see [Kameleoon JavaScript SDK documentation][1].
+
+```javascript
+client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+Learn more about SDK initialization in the [Kameleoon React Native SDK documentation][1].
+
+```javascript
+const { onEvent } = useInitialize();
+
+onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### LaunchDarkly integration
 
 {{< tabs >}}
@@ -819,16 +875,14 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Why doesn't my feature flag data reflect what I expect to see?
+### Feature flag data is not reflecting the expected information
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
 
 For example, to see what **Views** your feature flag is being evaluated on, you can use the RUM Explorer to make a similar query:
 
-
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
 
 Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
 

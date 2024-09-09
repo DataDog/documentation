@@ -1,6 +1,5 @@
 ---
 title: AWS Lambda and OpenTelemetry
-kind: documentation
 further_reading:
   - link: '/opentelemetry/'
     tag: 'Documentation'

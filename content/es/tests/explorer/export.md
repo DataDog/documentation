@@ -9,7 +9,6 @@ further_reading:
 - link: /monitors/types/ci/
   tag: Documentación
   text: Más información sobre Monitores de pruebas de CI
-kind: documentación
 title: Exportar ejecuciones de prueba
 ---
 

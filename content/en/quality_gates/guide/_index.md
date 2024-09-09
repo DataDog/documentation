@@ -1,6 +1,6 @@
 ---
 title: Quality Gates Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:

@@ -3,7 +3,6 @@ aliases:
 - /ko/serverless/serverless_integrations/plugin
 dependencies:
 - https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md
-kind: 설명서
 title: Datadog 서버리스 프레임워크 플러그인
 ---
 ![빌드](https://github.com/DataDog/serverless-plugin-datadog/workflows/build/badge.svg)

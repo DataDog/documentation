@@ -22,7 +22,6 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: ドキュメント
   text: エラー追跡モニターを作成する
-kind: ドキュメント
 title: Web アプリケーションとモバイルアプリケーションのエラー追跡
 ---
 
@@ -36,7 +35,7 @@ RUM エラーの課題には、スタックトレース、ユーザーセッシ�
 
 Error Tracking の主な機能は、[Error Tracking エクスプローラー][3]のドキュメントで確認することができます。RUM 用のエラートラッキングエクスプローラーを表示するには、[**Digital Experience** > **Error Tracking**][1] に移動します。
 
-## 計画と使用
+## セットアップ
 
 {{< whatsnext desc="RUM 用の Datadog Error Tracking を始めるには、対応するドキュメントを参照してください。" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}

@@ -1,11 +1,9 @@
 ---
 title: Cross-Organization Visibility
-private: true
-is_beta: true
 ---
 
-{{< callout url="#" header="false" btn_hidden="true">}}
-  Cross-organization visibility is in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
+{{< callout url="#" btn_hidden="true">}}
+  Cross-organization visibility is in beta.
 {{< /callout >}} 
 
 
@@ -38,11 +36,11 @@ All types of metrics are supported, including [custom metrics][3], [trace metric
 
 ### List connections
 
-To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections.
+To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections. Listing connections requires the _Org Connections Read_ permission.
 
 ### Create a connection
 
-Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
+Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization. Creating connections requires the _Org Connections Write_ permission.
 
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
 1. On the [cross-organization visibility page][6], click **New Connection**. The **New Connection** dialog box appears.
@@ -51,7 +49,7 @@ Creating a cross-organization connection allows you to query metrics from the so
 
 ### Delete a connection
 
-Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics.
+Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics. Deleting connections requires the _Org Connections Write_ permission.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
 1. Hover over the connection you wish to delete. A trash can (**Delete**) icon appears on the right.
@@ -84,7 +82,7 @@ The following screenshot shows an example of a cross-organization formula query.
 ### In the API
 
 <div class="alert alert-info">
-The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support cross-organization queries.
+The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. But a dashboard with widgets with cross-org queries may be Terraformed through proper JSON export.
 </div>
 
 You can define cross-organization queries in the following endpoint:

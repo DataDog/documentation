@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-kind: guide
+
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -14,7 +14,7 @@ further_reading:
       tag: "Blog"
       text: "How to implement log management policies with your teams"
 algolia:
-  tags: ['log usage']
+  tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -54,6 +54,10 @@ To set up multiple indexes:
 7. Click **Save**.
 
 Setting daily quotas on your indexes can help prevent billing overages when new log sources are added or if a developer unintentionally changes the logging levels to debug mode. See [Alert on indexes reaching their daily quota](#alert-on-indexes-reaching-their-daily-quota) on how to set up a monitor to alert when a percentage of the daily quota is reached within the past 24 hours.
+
+### Set up storage for long-term retention
+
+If you want to retain logs for an extended time while maintaining querying speeds similar to Standard Indexing, configure [Flex Logs][30]. This tier is best suited for logs that require longer retention and occasionally need to be queried urgently. Flex Logs decouples storage from compute costs so you can cost effectively retain more logs for longer without sacrificing visibility. Logs that need to be frequently queried should be stored in standard indexes.
 
 ### Set up multiple archives for long-term storage
 
@@ -125,7 +129,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 1. Navigate to the [Log Explorer][14].
 2. Enter a [search query][15] that includes the index name (for example, `index:main`) to capture the log volume you want to monitor.
-3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
+3. Click **More...** and select **Create monitor**.
 4. Add tags (for example, `host, `services, and so on) to the **group by** field.
 5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
 6. Add a notification title, for example: 
@@ -226,3 +230,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /observability_pipelines/
+[30]: /logs/log_configuration/flex_logs/

@@ -26,7 +26,6 @@ further_reading:
   text: Utiliser l'instrumentation dynamique de Datadog pour ajouter des logs d'application
     sans aucun redéploiement
 is_beta: false
-kind: documentation
 private: false
 title: Instrumentation dynamique
 ---

@@ -1,6 +1,5 @@
 ---
 title: Mobile and TV Monitoring Supported Versions
-kind: documentation
 type: multi-code-lang
 ---
 

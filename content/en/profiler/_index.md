@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler
-kind: Documentation
 aliases:
     - /tracing/profiling/
     - /tracing/profiler/
@@ -35,6 +34,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
+      tag: 'Blog'
+      text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
 cascade:
     algolia:
         rank: 70

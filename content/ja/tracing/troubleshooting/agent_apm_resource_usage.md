@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: APM による Agent のリソース使用量
 ---
 

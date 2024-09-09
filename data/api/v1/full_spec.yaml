@@ -39,6 +39,8 @@ components:
       properties:
         errors:
           description: Array of errors returned by the API.
+          example:
+          - Bad Request
           items:
             description: Error description.
             example: Bad Request
@@ -804,7 +806,7 @@ components:
           type: string
         client_secret:
           description: Your Azure web application secret key.
-          example: testingx./Sw*g/Y33t..R1cH+hScMDt
+          example: TestingRh2nx664kUy5dIApvM54T4AtO
           type: string
         container_app_filters:
           description: 'Limit the Azure container apps that are pulled into Datadog
@@ -840,6 +842,8 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
+        metrics_config:
+          $ref: '#/components/schemas/AzureAccountMetricsConfig'
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -864,6 +868,27 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    AzureAccountMetricsConfig:
+      description: 'Dictionary containing the key `excluded_resource_providers` which
+        has to be a list of Microsoft Azure Resource Provider names.
+
+        This feature is currently being beta tested.
+
+        In order to enable all resource providers for metric collection, pass:
+
+        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
+        for `excluded_resource_providers`).'
+      properties:
+        excluded_resource_providers:
+          description: List of Microsoft Azure Resource Providers to exclude from
+            metric collection.
+          example:
+          - Microsoft.Sql
+          - Microsoft.Cdn
+          items:
+            type: string
+          type: array
+      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1116,6 +1141,17 @@ components:
           type: string
       readOnly: true
       type: object
+    CrossOrgUuids:
+      description: The source organization UUID for cross organization queries. Feature
+        in Private Beta.
+      example:
+      - 6434abde-xxxx-yyyy-zzzz-da7ad0900001
+      items:
+        description: The source organization UUID.
+        example: 6434abde-xxxx-yyyy-zzzz-da7ad0900001
+        type: string
+      maxItems: 1
+      type: array
     Dashboard:
       description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,
         and displaying\nkey performance metrics, which enable you to monitor the health
@@ -1649,6 +1685,10 @@ components:
           description: Points relating to the distribution point metric. All points
             must be tuples with timestamp and a list of values (cannot be a string).
             Timestamps should be in POSIX time in seconds.
+          example:
+          - - 1575317847.0
+            - - 0.5
+              - 1.0
           items:
             $ref: '#/components/schemas/DistributionPoint'
           type: array
@@ -2287,6 +2327,14 @@ components:
             $ref: '#/components/schemas/EmbeddableGraph'
           type: array
       type: object
+    EnableEmbeddableGraphResponseSchema:
+      description: A JSON object containing the success message
+      properties:
+        success:
+          description: Message.
+          example: Embed 00000000000 successfully enabled.
+          type: string
+      type: object
     Event:
       description: Object representing an event.
       properties:
@@ -2618,6 +2666,8 @@ components:
     FormulaAndFunctionApmDependencyStatsQueryDefinition:
       description: A formula and functions APM dependency stats query.
       properties:
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsDataSource'
         env:
@@ -2705,6 +2755,8 @@ components:
     FormulaAndFunctionApmResourceStatsQueryDefinition:
       description: APM resource stats query using formulas and functions.
       properties:
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsDataSource'
         env:
@@ -2770,6 +2822,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/WidgetAggregator'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionCloudCostDataSource'
         name:
@@ -2820,6 +2874,8 @@ components:
       properties:
         compute:
           $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionCompute'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
@@ -2924,6 +2980,7 @@ components:
       - events
       - ci_tests
       - ci_pipelines
+      - incident_analytics
       example: logs
       type: string
       x-enum-varnames:
@@ -2937,6 +2994,7 @@ components:
       - EVENTS
       - CI_TESTS
       - CI_PIPELINES
+      - INCIDENT_ANALYTICS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -2976,6 +3034,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
         name:
@@ -3006,6 +3066,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
         is_normalized_cpu:
@@ -3113,6 +3175,8 @@ components:
           description: Additional filters applied to the SLO query.
           example: host:host_a,env:prod
           type: string
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
         group_mode:
@@ -3138,10 +3202,12 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
       enum:
@@ -4263,8 +4329,10 @@ components:
       - profiled_host_usage
       - rum_browser_mobile_sessions_usage
       - rum_replay_sessions_usage
+      - sca_fargate_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
+      - siem_analyzed_logs_add_on_usage
       - siem_ingested_bytes_usage
       - snmp_usage
       - universal_service_monitoring_usage
@@ -4334,8 +4402,10 @@ components:
       - PROFILED_HOST_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
+      - SCA_FARGATE_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -4773,11 +4843,11 @@ components:
           $ref: '#/components/schemas/WidgetEventSize'
         group_by:
           description: Group by configuration for the List Stream Widget. Group by
-            can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
+            can be used only with logs_pattern_stream (up to 4 items) or logs_transaction_stream
             (one group by item is required) list stream source.
           items:
             $ref: '#/components/schemas/ListStreamGroupByItems'
-          maxItems: 3
+          maxItems: 4
           type: array
         indexes:
           description: List of indexes.
@@ -4822,6 +4892,7 @@ components:
       - logs_pattern_stream
       - logs_transaction_stream
       - event_stream
+      - rum_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4836,6 +4907,7 @@ components:
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
+      - RUM_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -5611,11 +5683,27 @@ components:
           description: The name of the index.
           example: main
           type: string
-        num_retention_days:
-          description: 'The number of days before logs are deleted from this index.
-            Available values depend on
+        num_flex_logs_retention_days:
+          description: 'The total number of days logs are stored in Standard and Flex
+            Tier before being deleted from the index.
 
-            retention plans specified in your organization''s contract/subscriptions.'
+            If Standard Tier is enabled on this index, logs are first retained in
+            Standard Tier for the number of days specified through `num_retention_days`,
+
+            and then stored in Flex Tier until the number of days specified in `num_flex_logs_retention_days`
+            is reached.
+
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.'
+          example: 360
+          format: int64
+          type: integer
+        num_retention_days:
+          description: 'The number of days logs are stored in Standard Tier before
+            aging into the Flex Tier or being deleted from the index.
+
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.'
           example: 15
           format: int64
           type: integer
@@ -5674,17 +5762,35 @@ components:
           type: array
         filter:
           $ref: '#/components/schemas/LogsFilter'
+        num_flex_logs_retention_days:
+          description: 'The total number of days logs are stored in Standard and Flex
+            Tier before being deleted from the index.
+
+            If Standard Tier is enabled on this index, logs are first retained in
+            Standard Tier for the number of days specified through `num_retention_days`,
+
+            and then stored in Flex Tier until the number of days specified in `num_flex_logs_retention_days`
+            is reached.
+
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.
+
+
+            **Note**: Changing this value affects all logs already in this index.
+            It may also affect billing.'
+          example: 360
+          format: int64
+          type: integer
         num_retention_days:
-          description: 'The number of days before logs are deleted from this index.
-            Available values depend on
+          description: 'The number of days logs are stored in Standard Tier before
+            aging into the Flex Tier or being deleted from the index.
 
-            retention plans specified in your organization''s contract/subscriptions.
+            The available values depend on retention plans specified in your organization''s
+            contract/subscriptions.
 
 
-            **Note:** Changing the retention for an index adjusts the length of retention
-            for all logs
-
-            already in this index. It may also affect billing.'
+            **Note**: Changing this value affects all logs already in this index.
+            It may also affect billing.'
           example: 15
           format: int64
           type: integer
@@ -6714,8 +6820,6 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
           nullable: true
           type: integer
         query:
@@ -6728,9 +6832,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -6907,6 +7012,7 @@ components:
       - logs
       - spans
       - database_queries
+      - network
       example: rum
       type: string
       x-enum-varnames:
@@ -6918,6 +7024,7 @@ components:
       - LOGS
       - SPANS
       - DATABASE_QUERIES
+      - NETWORK
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -7066,8 +7173,9 @@ components:
             Error Tracking, Event, Logs, and RUM monitors.'
           type: string
         groupby_simple_monitor:
+          deprecated: true
           description: Whether the log alert monitor triggers a single alert or multiple
-            alerts when any group breaches a threshold.
+            alerts when any group breaches a threshold. Use `notify_by` instead.
           type: boolean
         include_tags:
           default: true
@@ -7741,6 +7849,7 @@ components:
       - ci-tests alert
       - error-tracking alert
       - database-monitoring alert
+      - network-performance alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7761,6 +7870,7 @@ components:
       - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
       - DATABASE_MONITORING_ALERT
+      - NETWORK_PERFORMANCE_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7804,8 +7914,7 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -8027,10 +8136,14 @@ components:
       - rum_browser_mobile_sessions_percentage
       - ingested_spans_bytes_usage
       - ingested_spans_bytes_percentage
+      - siem_analyzed_logs_add_on_usage
+      - siem_analyzed_logs_add_on_percentage
       - siem_ingested_bytes_usage
       - siem_ingested_bytes_percentage
       - workflow_executions_usage
       - workflow_executions_percentage
+      - sca_fargate_usage
+      - sca_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -8164,10 +8277,14 @@ components:
       - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
       - INGESTED_SPANS_BYTES_USAGE
       - INGESTED_SPANS_BYTES_PERCENTAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_PERCENTAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SIEM_INGESTED_BYTES_PERCENTAGE
       - WORKFLOW_EXECUTIONS_USAGE
       - WORKFLOW_EXECUTIONS_PERCENTAGE
+      - SCA_FARGATE_USAGE
+      - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -8670,11 +8787,21 @@ components:
           format: double
           type: number
         rum_replay_sessions_percentage:
-          description: The percentage of RUM Replay Sessions usage by tag(s).
+          description: The percentage of RUM Session Replay usage by tag(s).
           format: double
           type: number
         rum_replay_sessions_usage:
-          description: The total RUM Replay Sessions usage by tag(s).
+          description: The total RUM Session Replay usage by tag(s).
+          format: double
+          type: number
+        sca_fargate_percentage:
+          description: The percentage of Software Composition Analysis Fargate task
+            usage by tag(s).
+          format: double
+          type: number
+        sca_fargate_usage:
+          description: The total Software Composition Analysis Fargate task usage
+            by tag(s).
           format: double
           type: number
         sds_scanned_bytes_percentage:
@@ -8691,6 +8818,15 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_percentage:
+          description: The percentage of log events analyzed by Cloud SIEM usage by
+            tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_usage:
+          description: The log events analyzed by Cloud SIEM usage by tag(s).
           format: double
           type: number
         siem_ingested_bytes_percentage:
@@ -9326,6 +9462,8 @@ components:
       properties:
         keys:
           description: Keys to split on.
+          example:
+          - environment
           items:
             description: A key to split on.
             example: environment
@@ -9333,6 +9471,8 @@ components:
           type: array
         tags:
           description: Tags to split on.
+          example:
+          - environment:staging
           items:
             description: A tag to split on.
             example: environment:staging
@@ -10545,6 +10685,7 @@ components:
       description: A formula and function query.
       example:
         data_source: metrics
+        name: query1
         query: sum:trace.servlet.request.hits{*} by {env}.as_count()
       oneOf:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
@@ -11609,6 +11750,8 @@ components:
         formulas:
           description: A list that contains exactly one formula, as only a single
             formula may be used in a time-slice SLO.
+          example:
+          - formula: query1 - default_zero(query2)
           items:
             $ref: '#/components/schemas/SLOFormula'
           maxItems: 1
@@ -11616,6 +11759,10 @@ components:
           type: array
         queries:
           description: A list of queries that are used to calculate the SLI value.
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
           items:
             $ref: '#/components/schemas/SLODataSourceQueryDefinition'
           type: array
@@ -12330,6 +12477,9 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
+          example:
+          - - 1575317847.0
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
@@ -12887,7 +13037,6 @@ components:
           items:
             description: Email address that can receive an invitation to access the
               shared dashboard.
-            format: email
             type: string
           nullable: true
           type: array
@@ -13072,7 +13221,6 @@ components:
           items:
             description: Email address that can receive an invitation to access the
               shared dashboard.
-            format: email
             type: string
           nullable: true
           type: array
@@ -13306,6 +13454,8 @@ components:
           $ref: '#/components/schemas/SplitSort'
         split_dimensions:
           description: The dimension(s) on which to split the graph
+          example:
+          - one_graph_per: service
           items:
             $ref: '#/components/schemas/SplitDimension'
           maxItems: 1
@@ -13597,60 +13747,10 @@ components:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
-      description: The steps used in a Synthetic multistep API test.
-      properties:
-        allowFailure:
-          description: Determines whether or not to continue with test if this step
-            fails.
-          type: boolean
-        assertions:
-          default: []
-          description: Array of assertions used for the test.
-          example:
-          - operator: lessThan
-            target: 1000
-            type: responseTime
-          items:
-            $ref: '#/components/schemas/SyntheticsAssertion'
-          type: array
-        extractedValues:
-          description: Array of values to parse and save as variables from the response.
-          items:
-            $ref: '#/components/schemas/SyntheticsParsingOptions'
-          type: array
-        isCritical:
-          description: 'Determines whether or not to consider the entire test as failed
-            if this step fails.
-
-            Can be used only if `allowFailure` is `true`.'
-          type: boolean
-        name:
-          description: The name of the step.
-          example: Example step name
-          type: string
-        request:
-          $ref: '#/components/schemas/SyntheticsTestRequest'
-        retry:
-          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
-        subtype:
-          $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
-      required:
-      - assertions
-      - request
-      - name
-      - subtype
-      type: object
-    SyntheticsAPIStepSubtype:
-      description: The subtype of the Synthetic multistep API test step, currently
-        only supporting `http`.
-      enum:
-      - http
-      - grpc
-      example: http
-      type: string
-      x-enum-varnames:
-      - HTTP
-      - GRPC
+      description: The steps used in a Synthetic multi-step API test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAPITestStep'
+      - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -13839,6 +13939,60 @@ components:
         timings:
           $ref: '#/components/schemas/SyntheticsTiming'
       type: object
+    SyntheticsAPITestStep:
+      description: The Test step used in a Synthetic multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        extractedValues:
+          description: Array of values to parse and save as variables from the response.
+          items:
+            $ref: '#/components/schemas/SyntheticsParsingOptions'
+          type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPITestStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
+      type: object
+    SyntheticsAPITestStepSubtype:
+      description: The subtype of the Synthetic multi-step API test step.
+      enum:
+      - http
+      - grpc
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
+      - GRPC
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -13848,6 +14002,36 @@ components:
       type: string
       x-enum-varnames:
       - API
+    SyntheticsAPIWaitStep:
+      description: The Wait step used in a Synthetic multi-step API test.
+      properties:
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPIWaitStepSubtype'
+        value:
+          description: 'The time to wait in seconds. Minimum value: 0. Maximum value:
+            180.'
+          example: 5
+          format: int32
+          maximum: 180
+          minimum: 0
+          type: integer
+      required:
+      - name
+      - subtype
+      - value
+      type: object
+    SyntheticsAPIWaitStepSubtype:
+      description: The subtype of the Synthetic multi-step API wait step.
+      enum:
+      - wait
+      example: wait
+      type: string
+      x-enum-varnames:
+      - WAIT
     SyntheticsApiTestFailureCode:
       description: Error code that can be returned by a Synthetic test.
       enum:
@@ -13925,6 +14109,7 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJavascript'
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -14041,6 +14226,27 @@ components:
         metaSchema:
           $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
+    SyntheticsAssertionJavascript:
+      description: A JavaScript assertion.
+      properties:
+        code:
+          description: The JavaScript code that performs the assertions.
+          example: dd.expect(dd.response.statusCode).to.equal(200);
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionJavascriptType'
+      required:
+      - type
+      - code
+      type: object
+    SyntheticsAssertionJavascriptType:
+      description: Type of the assertion.
+      enum:
+      - javascript
+      example: javascript
+      type: string
+      x-enum-varnames:
+      - JAVASCRIPT
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
@@ -14211,6 +14417,7 @@ components:
       required:
       - password
       - username
+      - type
       type: object
     SyntheticsBasicAuthDigestType:
       default: digest
@@ -14294,6 +14501,7 @@ components:
       - tokenApiAuthentication
       - clientId
       - clientSecret
+      - type
       type: object
     SyntheticsBasicAuthOauthClientType:
       default: oauth-client
@@ -14349,6 +14557,7 @@ components:
       - password
       - tokenApiAuthentication
       - username
+      - type
       type: object
     SyntheticsBasicAuthOauthROPType:
       default: oauth-rop
@@ -15112,6 +15321,13 @@ components:
 
         to delete.'
       properties:
+        force_delete_dependencies:
+          description: 'Delete the Synthetic test even if it''s referenced by other
+            resources
+
+            (for example, SLOs and composite monitors).'
+          example: false
+          type: boolean
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
           example: []
@@ -15242,6 +15458,12 @@ components:
           description: Unique identifier of the global variable.
           readOnly: true
           type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
         name:
           description: Name of the global variable. Unique across Synthetic global
             variables.
@@ -15305,17 +15527,18 @@ components:
       - type
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
-      description: Property of the Synthetic Test Response to use for a Synthetic
-        global variable.
+      description: Type of value to extract from a test for a Synthetic global variable.
       enum:
       - http_body
       - http_header
+      - http_status_code
       - local_variable
       example: http_body
       type: string
       x-enum-varnames:
       - HTTP_BODY
       - HTTP_HEADER
+      - HTTP_STATUS_CODE
       - LOCAL_VARIABLE
     SyntheticsGlobalVariableParserType:
       description: Type of parser for a Synthetic global variable from a synthetics
@@ -15332,6 +15555,53 @@ components:
       - JSON_PATH
       - REGEX
       - X_PATH
+    SyntheticsGlobalVariableRequest:
+      description: Details of the global variable to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      type: object
     SyntheticsGlobalVariableTOTPParameters:
       description: Parameters for the TOTP/MFA variable
       properties:
@@ -15387,6 +15657,23 @@ components:
             $ref: '#/components/schemas/SyntheticsTestDetails'
           type: array
       type: object
+    SyntheticsLocalVariableParsingOptionsType:
+      description: Property of the Synthetic Test Response to extract into a local
+        variable.
+      enum:
+      - grpc_message
+      - grpc_metadata
+      - http_body
+      - http_header
+      - http_status_code
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - GRPC_MESSAGE
+      - GRPC_METADATA
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
     SyntheticsLocation:
       description: 'Synthetic location that can be used when creating or editing a
 
@@ -15413,8 +15700,8 @@ components:
       example: {}
       properties:
         field:
-          description: When type is `http_header`, name of the header to use to extract
-            the value.
+          description: When type is `http_header` or `grpc_metadata`, name of the
+            header or metadatum to extract.
           example: content-type
           type: string
         name:
@@ -15426,7 +15713,7 @@ components:
           description: Determines whether or not the extracted value will be obfuscated.
           type: boolean
         type:
-          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+          $ref: '#/components/schemas/SyntheticsLocalVariableParsingOptionsType'
       type: object
     SyntheticsPatchTestBody:
       description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
@@ -16001,7 +16288,7 @@ components:
       type: object
     SyntheticsTestMetadata:
       additionalProperties:
-        description: A single Metadatum.
+        description: A single metadatum.
         type: string
       description: Metadata to include when performing the gRPC test.
       type: object
@@ -16052,6 +16339,14 @@ components:
           type: boolean
         disableCsp:
           description: Disable Content Security Policy for browser tests.
+          type: boolean
+        enableProfiling:
+          description: Enable profiling for browser tests.
+          type: boolean
+        enableSecurityTesting:
+          deprecated: true
+          description: Enable security testing for browser tests. Security testing
+            is not available anymore. This field is deprecated and won't be used.
           type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
@@ -16255,10 +16550,7 @@ components:
           type: string
         dnsServerPort:
           description: DNS server port to use for DNS tests.
-          format: int32
-          maximum: 65535
-          minimum: 1
-          type: integer
+          type: string
         files:
           description: Files to be used as part of the request in the test.
           items:
@@ -16298,8 +16590,7 @@ components:
           type: boolean
         port:
           description: Port to use when performing the test.
-          format: int64
-          type: integer
+          type: string
         proxy:
           $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
@@ -17061,6 +17352,9 @@ components:
       properties:
         display:
           $ref: '#/components/schemas/ToplistWidgetDisplay'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
         scaling:
           $ref: '#/components/schemas/ToplistWidgetScaling'
       type: object
@@ -17396,6 +17690,12 @@ components:
     UsageBillableSummaryHour:
       description: Response with monthly summary of data billed by Datadog.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         billing_plan:
           description: The billing plan.
           type: string
@@ -18495,7 +18795,7 @@ components:
       x-enum-varnames:
       - REPORTS
     UsageRumSessionsHour:
-      description: Number of RUM Sessions recorded for each hour for a given organization.
+      description: Number of RUM sessions recorded for each hour for a given organization.
       properties:
         hour:
           description: The hour for the usage.
@@ -18508,46 +18808,46 @@ components:
           description: The organization public ID.
           type: string
         replay_session_count:
-          description: Contains the number of RUM Replay Sessions (data available
+          description: Contains the number of RUM Session Replay counts (data available
             beginning November 1, 2021).
           format: int64
           type: integer
         session_count:
-          description: Contains the number of browser RUM Lite Sessions.
+          description: Contains the number of browser RUM lite Sessions.
           format: int64
           nullable: true
           type: integer
         session_count_android:
-          description: Contains the number of mobile RUM Sessions on Android (data
+          description: Contains the number of mobile RUM sessions on Android (data
             available beginning December 1, 2020).
           format: int64
           nullable: true
           type: integer
         session_count_flutter:
-          description: Contains the number of mobile RUM Sessions on Flutter (data
+          description: Contains the number of mobile RUM sessions on Flutter (data
             available beginning March 1, 2023).
           format: int64
           nullable: true
           type: integer
         session_count_ios:
-          description: Contains the number of mobile RUM Sessions on iOS (data available
+          description: Contains the number of mobile RUM sessions on iOS (data available
             beginning December 1, 2020).
           format: int64
           nullable: true
           type: integer
         session_count_reactnative:
-          description: Contains the number of mobile RUM Sessions on React Native
+          description: Contains the number of mobile RUM sessions on React Native
             (data available beginning May 1, 2022).
           format: int64
           nullable: true
           type: integer
       type: object
     UsageRumSessionsResponse:
-      description: Response containing the number of RUM Sessions for each hour for
+      description: Response containing the number of RUM sessions for each hour for
         a given organization.
       properties:
         usage:
-          description: Get hourly usage for RUM Sessions.
+          description: Get hourly usage for RUM sessions.
           items:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
@@ -18803,7 +19103,8 @@ components:
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm:
@@ -18841,18 +19142,22 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current date for all organizations.
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         browser_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current date for all organizations.
+            current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -19077,6 +19382,22 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current date for the given org.
@@ -19128,43 +19449,58 @@ components:
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current date for all organizations (To be deprecated
+            on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current date for all organizations
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current date for all organizations.
+            current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ndm_netflow_events_sum:
@@ -19173,8 +19509,10 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         npm_host_top99p:
@@ -19221,22 +19559,128 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations.
+            legacy sessions over all hours in the current month for all organizations
+            (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM legacy Sessions on Flutter
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current date for all organizations
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rum_total_session_count_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current date for all organizations.
           format: int64
           type: integer
         rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current date for all organizations.
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
+          format: int64
+          type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -19278,6 +19722,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -19335,6 +19784,12 @@ components:
       description: Global hourly report of all data billed by Datadog for a given
         organization.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public id.
+          type: string
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current date for the given org.
@@ -19373,7 +19828,8 @@ components:
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current date for the given org.
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm:
@@ -19411,18 +19867,21 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current date for the given org.
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -19653,6 +20112,22 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_starter_avg:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current date for the given org.
@@ -19682,8 +20157,9 @@ components:
           format: int64
           type: integer
         indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         infra_host_top99p:
@@ -19707,43 +20183,56 @@ components:
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         name:
@@ -19755,8 +20244,9 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         npm_host_top99p:
@@ -19804,22 +20294,128 @@ components:
           type: string
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current date for the given org.
+            legacy sessions over all hours in the current date for the given org (To
+            be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Flutter
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         rum_total_session_count_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current date for the given org.
           format: int64
           type: integer
         rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current date for the given org.
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
+          format: int64
+          type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -19861,6 +20457,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -19956,7 +20557,8 @@ components:
         audit_logs_lines_indexed_agg_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current month for all organizations.
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm_sum:
@@ -20000,18 +20602,23 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_agg_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current month for all organizations.
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         browser_rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -20244,6 +20851,21 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        flex_logs_starter_avg_sum:
+          description: Shows the average number of Flex Logs Starter Instances over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_index_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Index
+            Instances over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_starter_storage_retention_adjustment_avg_sum:
+          description: Shows the average number of Flex Logs Starter Storage Retention
+            Adjustment Instances over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         flex_stored_logs_avg_sum:
           description: Shows the average of all Flex Stored Logs over all hours in
             the current months for all organizations.
@@ -20271,8 +20893,10 @@ components:
           format: int64
           type: integer
         indexed_events_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         infra_host_top99p_sum:
@@ -20301,9 +20925,9 @@ components:
           format: date-time
           type: string
         live_indexed_events_agg_sum:
+          deprecated: true
           description: Shows the sum of all live logs indexed over all hours in the
-            current month for all organizations (data available as of December 1,
-            2020).
+            current month for all organization (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         live_ingested_bytes_agg_sum:
@@ -20315,43 +20939,59 @@ components:
         logs_by_retention:
           $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_lite_session_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current month for all organizations (To be deprecated
+            on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         ndm_netflow_events_agg_sum:
@@ -20360,8 +21000,10 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         npm_host_top99p_sum:
@@ -20407,9 +21049,10 @@ components:
           format: int64
           type: integer
         rehydrated_indexed_events_agg_sum:
+          deprecated: true
           description: Shows the sum of all rehydrated logs indexed over all hours
-            in the current month for all organizations (data available as of December
-            1, 2020).
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rehydrated_ingested_bytes_agg_sum:
@@ -20420,22 +21063,127 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations.
+            legacy sessions over all hours in the current month for all organizations
+            (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_agg_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_agg_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_agg_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_agg_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Flutter
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current month for all organizations (To be introduced on
+            October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_agg_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
           format: int64
           type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current month for all organizations.
           format: int64
           type: integer
         rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current month for all organizations.
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
+          format: int64
+          type: integer
+        sca_fargate_count_avg_sum:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm_sum:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current months for all organizations.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -20477,6 +21225,11 @@ components:
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and
             Google Cloud in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_agg_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         start_date:
@@ -20741,12 +21494,10 @@ components:
         email:
           description: The new email of the user.
           example: test@datadoghq.com
-          format: email
           type: string
         handle:
           description: The user handle, must be a valid email.
           example: test@datadoghq.com
-          format: email
           type: string
         icon:
           description: Gravatar icon associated to the user.
@@ -21379,6 +22130,13 @@ components:
       type: string
       x-enum-varnames:
       - ORDERED
+    WidgetLegacyLiveSpan:
+      additionalProperties: false
+      description: Wrapper for live span
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      type: object
     WidgetLegendSize:
       description: Available legend sizes for a widget. Should be one of "0", "2",
         "4", "8", "16", or "auto".
@@ -21445,6 +22203,24 @@ components:
       - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
+    WidgetLiveSpanUnit:
+      description: Unit of the time span.
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - year
+      example: minute
+      type: string
+      x-enum-varnames:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
     WidgetMargin:
       description: 'Size of the margins around the image.
 
@@ -21549,6 +22325,62 @@ components:
       - TRIGGERED_DESCENDING
       - PRIORITY_ASCENDING
       - PRIORITY_DESCENDING
+    WidgetNewFixedSpan:
+      description: Used for fixed span times, such as 'March 1 to March 7'.
+      properties:
+        from:
+          description: Start time in seconds since epoch.
+          example: 1712080128
+          format: int64
+          minimum: 0
+          type: integer
+        to:
+          description: End time in seconds since epoch.
+          example: 1712083128
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          $ref: '#/components/schemas/WidgetNewFixedSpanType'
+      required:
+      - type
+      - from
+      - to
+      type: object
+    WidgetNewFixedSpanType:
+      description: Type "fixed" denotes a fixed span.
+      enum:
+      - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+      - FIXED
+    WidgetNewLiveSpan:
+      description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
+      properties:
+        type:
+          $ref: '#/components/schemas/WidgetNewLiveSpanType'
+        unit:
+          $ref: '#/components/schemas/WidgetLiveSpanUnit'
+        value:
+          description: Value of the time span.
+          example: 4
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+      - type
+      - value
+      - unit
+      type: object
+    WidgetNewLiveSpanType:
+      description: Type "live" denotes a live span in the new format.
+      enum:
+      - live
+      example: live
+      type: string
+      x-enum-varnames:
+      - LIVE
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
@@ -21721,10 +22553,10 @@ components:
       - TOP
     WidgetTime:
       description: Time setting for the widget.
-      properties:
-        live_span:
-          $ref: '#/components/schemas/WidgetLiveSpan'
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewFixedSpan'
     WidgetTimeWindows:
       description: Define a time window.
       enum:
@@ -24163,10 +24995,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all embeds
       tags:
       - Embeddable Graphs
@@ -24255,10 +25083,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get specific embed
       tags:
       - Embeddable Graphs
@@ -24281,13 +25105,7 @@ paths:
           content:
             application/json:
               schema:
-                description: A JSON containing the success message
-                properties:
-                  success:
-                    description: Message.
-                    example: Embed 00000000000 successfully enabled.
-                    type: string
-                type: object
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -24325,13 +25143,7 @@ paths:
           content:
             application/json:
               schema:
-                description: A JSON containing the success message
-                properties:
-                  success:
-                    description: Message.
-                    example: Embed 0000000000000 successfully revoked.
-                    type: string
-                type: object
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -24365,6 +25177,7 @@ paths:
         name: metric_query
         schema:
           type: string
+        x-docs-curl-required: true
       - description: The POSIX timestamp of the start of the query in seconds.
         in: query
         name: start
@@ -24565,7 +25378,9 @@ paths:
         required: false
         schema:
           type: string
-      - description: Host result to start search from.
+      - description: Specify the starting point for the host search results. For example,
+          if you set `count` to 100 and the first 100 results have already been returned,
+          you can set `start` to `101` to get the next 100 results.
         in: query
         name: start
         required: false
@@ -25395,10 +26210,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Check that an AWS Lambda Function exists
       tags:
       - AWS Logs Integration
@@ -25660,12 +26471,13 @@ paths:
             origin: request
             value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
               \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
-              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
-              \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
+              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
+              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
@@ -27670,8 +28482,6 @@ paths:
 
         - custom: `service check`
 
-        - event: `event alert`
-
         - forecast: `query alert`
 
         - host: `service check`
@@ -27703,6 +28513,8 @@ paths:
         - error-tracking: `error-tracking alert`
 
         - database-monitoring: `database-monitoring alert`
+
+        - network-performance: `network-performance alert`
 
 
         **Notes**:
@@ -28000,6 +28812,28 @@ paths:
 
 
         Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
+
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **Network Performance Alert Query**
+
+
+        Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_window)
         operator #`
 
 
@@ -32382,7 +33216,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+              $ref: '#/components/schemas/SyntheticsGlobalVariableRequest'
         description: Details of the global variable to create.
         required: true
       responses:
@@ -32404,6 +33238,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -32529,7 +33369,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+              $ref: '#/components/schemas/SyntheticsGlobalVariableRequest'
         description: Details of the global variable to update.
         required: true
       responses:
@@ -33022,6 +33862,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -34652,6 +35501,15 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -35125,7 +35983,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       responses:
         '200':
@@ -35170,7 +36027,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       responses:
         '200':
@@ -35212,7 +36068,6 @@ paths:
         required: true
         schema:
           example: test@datadoghq.com
-          format: email
           type: string
       requestBody:
         content:

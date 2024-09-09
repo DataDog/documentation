@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Software Composition Analysis
-kind: documentation
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:
@@ -16,12 +15,12 @@ further_reading:
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Management works"
-- link: "/security/application_security/getting_started"
-  tag: "Documentation"
-  text: "Enabling ASM"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://www.datadoghq.com/blog/sca-supply-chain-security/"
+  tag: "Blog"
+  text: "Beyond vulnerabilities, towards a holistic approach to securing the software supply chain"
 ---
 
 
@@ -32,7 +31,7 @@ Datadog [Software Composition Analysis][1] (SCA) continuously monitors your prod
 This guide walks you through best practices for getting your team up and running with SCA.
 
 ## Phase 1: Enable
-1. Check [ASM Compatibility][2] to see if your service is supported.
+1. Check the ASM Library Compatibility for each ASM product to see if your service is supported.
 2. Enable Software Composition Analysis on your services. 
    - Navigate to the [Quick Start Guide][4].
    - Expand **Enable Vulnerability Detection**.
@@ -111,8 +110,6 @@ This guide walks you through best practices for getting your team up and running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/vulnerability_management/
-[2]: /security/application_security/enabling/compatibility/
-[3]: /security/application_security/enabling/
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services

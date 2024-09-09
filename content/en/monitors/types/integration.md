@@ -1,6 +1,5 @@
 ---
 title: Integration Monitor
-kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 aliases:
 - /monitors/monitor_types/integration
@@ -106,7 +105,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
-[2]: https://app.datadoghq.com/monitors#create/integration
+[2]: https://app.datadoghq.com/monitors/create/integration
 [3]: /monitors/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /monitors/configuration/#advanced-alert-conditions

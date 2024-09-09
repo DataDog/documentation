@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
   tag: Blog
   text: Comment Datadog gère ses incidents
-kind: documentation
 title: Débuter avec Incident Management
 ---
 

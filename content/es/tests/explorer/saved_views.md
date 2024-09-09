@@ -6,7 +6,6 @@ further_reading:
 - link: /tests/explorer
   tag: Documentación
   text: Más información sobre el Explorador de visibilidad de tests
-kind: documentación
 title: Vistas guardadas
 ---
 

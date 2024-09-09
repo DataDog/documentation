@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
   tag: 블로그
   text: Datadog 데이터베이스 모니터링으로 AlwaysOn 가용성 그룹 모니터링
-kind: 설명서
 title: 자체 호스팅 SQL Server에 데이터베이스 모니터링 설정
 ---
 
@@ -73,16 +72,19 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
 ## 에이전트 설치
 
 에이전트가 SQL Server에 지정된 텔레메트리 외에도 다양한 시스템 텔레메트리(CPU, 메모리, 디스크, 네트워크)를 수집하도록 하려면 SQL Server 호스트에 바로 에이전트를 설치하는 것이 좋습니다.
 
 {{< tabs >}}
-{{% tab "Windows 호스트" %}}
+{{% tab "Windows Host" %}}
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
-{{% tab "Linux 호스트" %}}
+{{% tab "Linux Host" %}}
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
@@ -90,7 +92,7 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-docker %}}
 {{% /tab %}}
-{{% tab "쿠버네티스" %}}
+{{% tab "Kubernetes" %}}
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}

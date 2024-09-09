@@ -21,6 +21,7 @@ author:
 categories:
 - developer tools
 - クラウド
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ngrok/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: ngrok
 integration_title: ngrok
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ngrok
 public_title: ngrok
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Queried Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: ngrok HTTP イベントで貴重なアプリケーションインサイトを視覚化
   media:
@@ -62,6 +63,9 @@ tile:
     image_url: images/diag2.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://ngrok.com/solutions
   support: README.md#Support
   title: ngrok
 ---
@@ -75,7 +79,7 @@ ngrok プラットフォームには、Datadog イベント宛先インテグレ
 
 
 
-## 計画と使用
+## セットアップ
 
 ngrok イベントを Datadog に転送するには、2 つの構成が必要です。
 
@@ -121,7 +125,7 @@ ngrok イベントを Datadog に転送するには、2 つの構成が必要で
 - object.http.request.method
 - object.http.request.url.path
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[ngrok サポート][7] に連絡するか、[ngrok ドキュメント][8]を参照してください。
 

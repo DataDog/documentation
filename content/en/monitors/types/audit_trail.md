@@ -1,6 +1,5 @@
 ---
 title: Audit Trail Monitor
-kind: documentation
 aliases:
     - /monitors/create/types/audit_logs/
     - /monitors/create/types/audit_trail/

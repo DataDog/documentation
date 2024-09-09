@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application with the Admission Controller
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"

@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/log_configuration/pipelines/
   tag: Documentation
   text: Learn about log pipelines
-kind: documentation
 title: Create a Log Pipeline
 description: Learn how to create a Datadog Log integration.
 ---

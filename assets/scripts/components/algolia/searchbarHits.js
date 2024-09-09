@@ -1,5 +1,4 @@
-import { getHitData } from './getHitData';
-import { truncateContentAtHighlight } from '../../helpers/truncateContent';
+import { getHitData, getSnippetForDisplay } from './getHitData';
 import { bodyClassContains } from '../../helpers/helpers';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
@@ -88,16 +87,15 @@ const renderHits = (renderOptions, isFirstRender) => {
         const joinedListItems = hitsArray
             .map((item) => {
                 const hit = getHitData(item, renderOptions.results.query);
-                const displayContent = truncateContentAtHighlight(hit.content, 145);
+                const displayContent = getSnippetForDisplay(hit, false);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
-                const section_header = hit.section_header ? `&raquo; ${hit.section_header}` : '';
 
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <p class="ais-Hits-subcategory">${hit.subcategory}</p>
                             <div>
-                                <p class="ais-Hits-title"><strong>${hit.title} ${section_header}</strong></p>
+                                <p class="ais-Hits-title"><strong>${hit.title}</strong></p>
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>
                         </a>

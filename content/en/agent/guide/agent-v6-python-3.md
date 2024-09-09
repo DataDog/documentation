@@ -54,7 +54,7 @@ To switch from Python 2 to Python 3, update the image tag used to deploy the Age
 {{% tab "Helm" %}}
 By default, the [Datadog Helm chart][1] uses the Agent 7 image that embeds the Python 3 runtime.
 
-To keep the Datadog Agent updated, edit your `values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
+To keep the Datadog Agent updated, edit your `datadog-values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
 
 To use a specific container registry, set it with `agent.image.repository` and `clusterChecksRunner.image.repository`. Ensure that `agents.image.tag` and  `clusterChecksRunner.image.tag` are undefined.
 
@@ -191,7 +191,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
 In your DaemonSet manifest, update the image tag in each container definition:
 

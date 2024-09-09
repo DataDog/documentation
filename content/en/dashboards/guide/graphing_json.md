@@ -48,7 +48,7 @@ Dashboard template variables apply a new scope to one or more graphs on your das
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#timeboards
+[1]: /dashboards/#get-started
 [2]: /api/v1/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
 [4]: /dashboards/template_variables/

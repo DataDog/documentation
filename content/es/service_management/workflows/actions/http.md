@@ -5,7 +5,6 @@ further_reading:
   tag: Documentación
   text: Más información sobre las credenciales de conexión para la automatización
     de flujos de trabajo
-kind: Documentación
 title: Solicitudes HTTP
 ---
 

@@ -8,7 +8,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentation
   text: Résoudre les problèmes courants
-kind: documentation
 title: Configuration de Database Monitoring pour Azure SQL Server
 ---
 

@@ -32,7 +32,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: Blog
   text: Conseils à suivre pour utiliser les tests continus Datadog
-kind: documentation
 title: Tests continus
 ---
 

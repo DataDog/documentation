@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay
-kind: documentation
 description: Setting up Session Replay for mobile devices.
 aliases:
 further_reading:
@@ -33,6 +32,8 @@ See [How Mobile Session Replay Impacts App Performance][3].
 ## Troubleshooting
 
 Learn how to [Troubleshoot Mobile Session Replay][4].
+
+<div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but it is not supported for smart TVs or wearables.</div>
 
 ## Further reading
 

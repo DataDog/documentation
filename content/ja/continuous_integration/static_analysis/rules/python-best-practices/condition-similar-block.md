@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: if 条件が異なるコードブロックでなければならない
 ---
 ## メタデータ

@@ -4,7 +4,7 @@ aliases:
 - /fr/dashboards/faq/how-do-i-track-cron-jobs
 description: Appeler des commandes et générer des événements à partir des résultats
   avec Dogwrap
-kind: guide
+
 title: Dogwrap
 ---
 

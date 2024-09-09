@@ -1,6 +1,5 @@
 ---
 title: Service Level Objectives
-kind: documentation
 description: "Track the status of your SLOs"
 aliases:
 - /monitors/monitor_uptime_widget/
@@ -33,6 +32,10 @@ further_reading:
 {{< jqmath-vanilla >}}
 
 <br />
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=SLOs&tags.topics-1=Monitors">}}
+  Explore and register for Foundation Enablement sessions. Learn how you can prioritize and address the issues that matter most to your business with native SLO and SLA tracking.
+{{< /learning-center-callout >}}
 
 ## Overview
 

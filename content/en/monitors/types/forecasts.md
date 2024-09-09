@@ -1,6 +1,5 @@
 ---
 title: Forecasts Monitor
-kind: documentation
 aliases:
 - /guides/forecasts/
 - /monitors/monitor_types/forecasts
@@ -139,7 +138,7 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/forecast
+[1]: https://app.datadoghq.com/monitors/create/forecast
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /monitors/guide/recovery-thresholds/
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/

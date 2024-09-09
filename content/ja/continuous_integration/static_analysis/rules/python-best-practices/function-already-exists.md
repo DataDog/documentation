@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 関数は一度だけ定義しなければならない
 ---
 ## メタデータ

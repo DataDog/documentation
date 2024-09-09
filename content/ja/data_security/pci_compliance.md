@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: ブログ
   text: Datadog から PCI に準拠したログ管理と APM を発表
-kind: ドキュメント
 title: PCI DSS 準拠
 ---
 
@@ -31,23 +30,11 @@ Datadog は、PCI に準拠したログ管理およびアプリケーション�
 
 {{% tab "ログ管理" %}}
 
-<div class="alert alert-danger">
-PCI DSS 準拠のためには、<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">監査証跡</a>を有効にし、その状態を維持する必要があります。
-</div>
-
-PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
-
 {{% pci-logs %}}
 
 {{% /tab %}}
 
 {{% tab "APM" %}}
-
-<div class="alert alert-danger">
-PCI DSS 準拠のためには、<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">監査証跡</a>を有効にし、その状態を維持する必要があります。
-</div>
-
-PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
 
 {{% pci-apm %}}
 

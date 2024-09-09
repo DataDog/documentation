@@ -28,7 +28,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: Blog
   text: Monitoriza tus instancias EC2 impulsadas por Graviton3 con Datadog
-kind: documentación
 title: Empezando con AWS
 ---
 

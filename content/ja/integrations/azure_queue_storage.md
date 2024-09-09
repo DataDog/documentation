@@ -2,6 +2,7 @@
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Queue Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_queue_storage/
@@ -12,7 +13,6 @@ integration_id: azure-queue-storage
 integration_title: Microsoft Azure Queue Storage
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_queue_storage
 public_title: Datadog-Microsoft Azure Queue Storage インテグレーション
@@ -30,27 +30,27 @@ Azure Queue Storage からメトリクスを取得すると、以下のことが
 - Queue Storage のパフォーマンスを視覚化できます。
 - Queue Storage のパフォーマンスをアプリケーションと関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_queue_storage" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Queue Storage インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Queue Storage インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: 도움말
   text: 커스텀 통합
-kind: 도움말
 title: Kubernetes 클러스터 이름 자동 탐지
 ---
 

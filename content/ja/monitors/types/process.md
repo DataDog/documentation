@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
   tag: ブログ
   text: AWS Fargate 上で実行されるプロセスを Datadog で監視する
-kind: documentation
 title: ライブプロセスモニター
 ---
 

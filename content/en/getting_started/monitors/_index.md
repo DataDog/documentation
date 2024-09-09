@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Monitors
-kind: documentation
 aliases:
   - /getting_started/application/monitors
 further_reading:
@@ -105,21 +104,21 @@ To add conditional messages based on alert vs. warning thresholds, see the avail
 
 #### Notify your services and your team members
 
-Send notifications to your team through email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. 
+Send notifications to your team through email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box.
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members by using the `@team` handle.
+To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members using the `@team` handle.
 
 Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
 ### Permissions
 
-Click **Edit Access** to restrict the editing of your monitor to its creator and to specific roles in your org. Optionally, select `Notify` to be alerted when the monitor is modified.
+Click **Edit Access** to restrict the editing of your monitor to its creator, teams, users, groups, or to specific roles in your organization. Optionally, select `Notify` to be alerted when the monitor is modified.
 
 {{< img src="getting_started/monitors/monitor_permissions.png" alt="Set access permissions for a monitor and options for audit notifications" style="width:80%;" >}}
 
-For more information about roles, see [Role Based Access Control][10].
+For more information, see [Granular Access Control][10].
 
 ## View Monitors and Triage Alerts on Mobile
 
@@ -135,13 +134,13 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [2]: /getting_started/agent/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
-[5]: https://app.datadoghq.com/monitors#create/metric
+[5]: https://app.datadoghq.com/monitors/create/metric
 [6]: /integrations/disk/
 [7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/variables/
 [9]: /monitors/configuration/?tab=thresholdalert#alert-grouping
-[10]: /account_management/rbac/
-[11]: /service_management/mobile/
+[10]: /account_management/rbac/granular_access/
+[11]: /mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /service_management/workflows/

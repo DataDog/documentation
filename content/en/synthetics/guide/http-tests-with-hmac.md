@@ -1,6 +1,5 @@
 ---
 title: Creating HTTP Tests with HMAC Authentication
-kind: documentation
 description: Learn how to create an HTTP test with HMAC.
 further_reading:
 - link: "/synthetics/api_tests/http_tests"

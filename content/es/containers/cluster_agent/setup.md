@@ -20,7 +20,6 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Datadog Cluster Agent
-kind: documentación
 title: Configurar el Datadog Cluster Agent
 ---
 

@@ -16,7 +16,6 @@ further_reading:
 - link: /developers/
   tag: Documentación
   text: Aprende a desarrollar en la plataforma Datadog
-kind: documentation
 title: Crear una integración de Agent
 ---
 ## Información general

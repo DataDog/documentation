@@ -9,8 +9,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Prácticas recomendadas para crear tests de extremo a extremo
-kind: guía
-title: Reutilizar recorridos de tests de navegador en el conjunto de tests
+title: Reutiliza los recorridos de tests del navegador en todo el conjunto de tests
 ---
 
 ## Información general

@@ -1,6 +1,5 @@
 ---
 title: SSL Testing
-kind: documentation
 description: Monitor your SSL certificates from locations around the world
 aliases:
   - /synthetics/ssl_test

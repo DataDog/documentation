@@ -11,7 +11,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar una caída del sistema para silenciar un monitor
-kind: guía
 title: Crear relaciones de monitor
 ---
 

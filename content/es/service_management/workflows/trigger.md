@@ -27,7 +27,6 @@ further_reading:
   tag: Documentación
   text: Automatiza flujos de trabajo de seguridad con la automatización de flujos
     de trabajo
-kind: documentation
 title: Activar un flujo de trabajo
 ---
 

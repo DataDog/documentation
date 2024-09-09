@@ -1,6 +1,5 @@
 ---
 title: Enabling the Java Profiler
-kind: Documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -69,7 +68,7 @@ Additional requirements for profiling [Code Hotspots][12]:
 
 All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 
 ## Installation
 
@@ -111,7 +110,6 @@ java \
     -Ddd.env=<YOUR_ENVIRONMENT> \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.profiling.enabled=true \
-    -XX:FlightRecorderOptions=stackdepth=256 \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
@@ -125,7 +123,6 @@ export DD_VERSION=<YOUR_VERSION>
 export DD_PROFILING_ENABLED=true
 java \
     -javaagent:dd-java-agent.jar \
-    -XX:FlightRecorderOptions=stackdepth=256 \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
@@ -253,7 +250,7 @@ or:
 {{% tab "Datadog Profiler" %}}
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
-In dd-java-agent earlier than v1.28.0 it is **disabled** by default. The allocation profiler relies on JVMTI APIs which could crash before OpenJDK 21.0.3 and is disabled on older JDK versions. Enable it 
+In dd-java-agent earlier than v1.28.0 it is **disabled** by default. The allocation profiler relies on JVMTI APIs which could crash before OpenJDK 21.0.3 and is disabled on older JDK versions. Enable it
 with:
 
 ```
@@ -275,11 +272,11 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 {{< /tabs >}}
 
-### Live-heap profiler engine (alpha)
+### Live-heap profiler engine (beta)
 
-_Since: v1.17.0. Requires JDK 11+._
+_Since: v1.39.0. Requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+._
 
-<div class="alert alert-warning">This is an alpha feature, it is not recommended to enable this feature in production environments.</a></div>
+<div class="alert alert-warning">This is a beta feature, it is recommended to enable this feature with caution.</div>
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.

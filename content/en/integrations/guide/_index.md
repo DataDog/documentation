@@ -1,6 +1,6 @@
 ---
 title: Integration Guides
-kind: guide
+
 disable_toc: true
 private: true
 cascade:

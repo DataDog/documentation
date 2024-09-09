@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Collector and Datadog Exporter
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/

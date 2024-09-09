@@ -1,6 +1,5 @@
 ---
 title: Amazon ECS Tag Extraction
-kind: documentation
 aliases:
   - /agent/amazon_ecs/tags
 further_reading:

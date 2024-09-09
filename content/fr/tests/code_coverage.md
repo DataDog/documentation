@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/types/ci
   tag: Documentation
   text: En savoir plus sur les monitors CI
-kind: documentation
 title: Couverture du code dans Datadog
 ---
 

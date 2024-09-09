@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/developers/faq/query-the-infrastructure-list-via-the-api
-kind: 가이드
 title: API를 사용한 인프라스트럭처 목록 쿼리
 ---
 

@@ -26,7 +26,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging Without Limits*
-kind: Documentation
 title: ログの収集とインテグレーション
 ---
 
@@ -41,7 +40,7 @@ title: ログの収集とインテグレーション
 ## セットアップ
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 1. [Datadog Agent][1] をインストールします。
 2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
@@ -52,7 +51,7 @@ title: ログの収集とインテグレーション
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
 [5]: /ja/agent/logs/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "アプリケーション" %}}
 
@@ -64,7 +63,7 @@ title: ログの収集とインテグレーション
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/logs/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "コンテナ" %}}
 
@@ -93,7 +92,7 @@ title: ログの収集とインテグレーション
 環境から Datadog にログを送信する AWS Lambda 関数である Datadog Forwarder を使用します。AWS サーバーレス環境でログ収集を有効にするには、[Datadog Forwarder のドキュメント][1]を参照してください。
 
 [1]: /ja/serverless/forwarder
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "クラウド/インテグレーション" %}}
 
@@ -312,7 +311,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 * HTTPS API は、最大で 1MB のサイズのログをサポートします。ただし、最適なパフォーマンスには各ログが 25K バイトを超えないことをおすすめします。ログ作成に Datadog Agent を使用する場合、ログは 256kB (256000 バイト) に分割されるよう構成されています。
 * 1 つのログイベントが持つことができるタグは 100 個以下です。1 日あたり最大 1,000 万個の一意のタグに対して、各タグは 256 文字を超えてはなりません。
-* JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 10 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
+* JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 20 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
 * ログイベントは、過去 18 時間までの[タイムスタンプ][14]で送信可能です。
 
 上の制限に準拠しないログイベントは、システムによって変換されるか、切り詰められます。または、所定のタイムレンジ外の場合はインデックス化されません。ただし、Datadog はユーザーデータを可能な限り維持するよう全力を尽くします。

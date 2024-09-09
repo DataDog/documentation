@@ -17,7 +17,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive sur la création de monitors efficaces
-kind: documentation
 title: Débuter avec les monitors
 ---
 

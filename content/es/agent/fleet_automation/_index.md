@@ -60,7 +60,7 @@ Antes de enviar un flare, asegúrate de que la configuración remota está [habi
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
 
 ## Control de acceso a la automatización de flotas
 

@@ -1,6 +1,5 @@
 ---
 title: Tracing Python Applications
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10

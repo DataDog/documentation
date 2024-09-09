@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitor
-kind: Documentation
 further_reading:
 - link: "/network_monitoring/performance/"
   tag: "Documentation"
@@ -14,7 +13,7 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "/network_monitoring/performance/recommended_monitors"
+- link: "/monitors/recommended/"
   tag: "Documentation"
   text: "Recommended NPM Monitors"
 ---

@@ -3,6 +3,7 @@ categories:
 - cloud
 - azure
 - ai/ml
+custom_kind: integration
 dependencies: []
 description: Azure Machine Learning の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_machine_learning_services/
@@ -17,7 +18,6 @@ integration_id: ''
 integration_title: Microsoft Azure Machine Learning
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_machine_learning_services
 public_title: Datadog-Microsoft Azure Machine Learning インテグレーション
@@ -41,7 +41,7 @@ Azure Machine Learning からメトリクスを取得すると、以下のこと
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## データ収集
+## 収集データ
 ### メトリクス
 {{< get-metrics-from-git "azure_machine_learning_services" >}}
 

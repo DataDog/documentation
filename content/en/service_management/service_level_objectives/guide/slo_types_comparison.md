@@ -1,6 +1,6 @@
 ---
 title: SLO Type Comparison
-kind: Guide
+
 further_reading:
 - link: "/service_management/service_level_objectives/"
   tag: "Documentation"

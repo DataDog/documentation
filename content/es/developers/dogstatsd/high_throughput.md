@@ -7,7 +7,6 @@ further_reading:
 - link: developers/libraries
   tag: Documentación
   text: API oficiales y creadas por la comunidad, y bibliotecas cliente de DogStatsD
-kind: documentación
 title: Envío de grandes volúmenes de métricas
 ---
 

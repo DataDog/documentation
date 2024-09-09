@@ -1,6 +1,5 @@
 ---
 title: Search Test Runs
-kind: documentation
 description: Examine all of your test runs and troubleshoot failing test results.
 aliases:
 - /continuous_testing/explorer/search_runs/

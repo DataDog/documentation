@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
   tag: 설명서
   text: 페이지 매김으로 여러 로그 수집
-kind: 가이드
 title: 로그 분석 API를 사용해 커스텀 보고서 빌드하기
 ---
 

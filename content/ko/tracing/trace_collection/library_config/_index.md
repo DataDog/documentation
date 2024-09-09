@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: Datadog 추적 라이브러리 설정
 type: multi-code-lang
 ---

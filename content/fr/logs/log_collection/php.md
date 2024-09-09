@@ -23,7 +23,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail »
-kind: documentation
 title: Collecte de logs avec PHP
 ---
 

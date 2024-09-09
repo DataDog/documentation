@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: 블로그
   text: 퍼널 분석을 사용하여 주요 사용자 흐름을 이해하고 최적화
-kind: 설명서
 title: RUM 분석
 ---
 

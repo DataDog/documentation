@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
   tag: Blog
   text: Surveiller des processus s'exécutant sur AWS Fargate avec Datadog
-kind: documentation
 title: Monitor de live processes
 ---
 
