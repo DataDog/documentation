@@ -125,6 +125,8 @@ This section describes the manual setup process to forward your Azure logs to Da
 
 The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
 
+**Note**: Resources can only stream to Event Hubs in the same Azure region.
+
 #### Create an Azure Event Hub
 
 ##### Create an Event Hubs namespace
