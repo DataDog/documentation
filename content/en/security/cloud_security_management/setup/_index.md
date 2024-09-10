@@ -36,7 +36,7 @@ To get started with Cloud Security Management, follow these steps:
 
 ## Enable Agentless Scanning
 
-The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. 
+The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
 
 To learn more about Agentless Scanning, see [Cloud Security Management Agentless Scanning][2].
 
@@ -69,7 +69,7 @@ With Infrastructure as Code (IaC) remediation, you can use Terraform to open a p
 
 ### Deploy via cloud integrations
 
-To enable Cloud Security Management for Azure and Google Cloud Platform (GCP) resources, see [Deploying Cloud Security Management via Cloud Integrations][7].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security Management via Cloud Integrations][7].
 
 ## Further reading
 
