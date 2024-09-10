@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-To get started with Cloud Security Management, follow these steps:
+To get started with Cloud Security Management (CSM), follow these steps:
 
 1. [Enable Agentless Scanning](#enable-agentless-scanning)
 1. [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
