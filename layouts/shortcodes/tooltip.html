@@ -3,6 +3,7 @@
 {{ $glossary := .Get "glossary" }}
 {{ $displayText := $text }}
 {{ $tooltipContent := $tooltip }}
+{{ $fullDefinitionLink := "" }}
 
 {{ if $glossary }}
   {{ $glossaryTerm := replace $glossary " " "_" }}
@@ -11,6 +12,7 @@
     {{ $displayText = $glossary }}
     {{ if .Params.short_definition }}
       {{ $tooltipContent = .Params.short_definition }}
+      {{ $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) }}
     {{ else }}
       {{ $content := .Content | plainify }}
       {{ $tooltipContent = $content | replaceRE `\n\[\d+\]:\s+.*` "" | replaceRE `\[([^\]]+)\]\[\d+\]` "$1" | safeHTML }}
@@ -22,9 +24,12 @@
 {{ end }}
 
 <span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-  <span class="tooltip-trigger">{{ $displayText }}</span>
+  <button class="tooltip-trigger">{{ $displayText }}</button>
   <span id="tooltip-{{ $displayText | urlize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">
     {{ $tooltipContent }}
+    {{ if $fullDefinitionLink }}
+    <a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>
+    {{ end }}
     <svg class="tooltip-arrow" width="14" height="7" viewBox="0 0 14 7">
       <path d="M7 7L0 0h14z" fill="currentColor"></path>
     </svg>
