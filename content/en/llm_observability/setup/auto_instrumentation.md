@@ -18,10 +18,11 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 
 | Framework                               | Supported Versions |
 |-----------------------------------------|--------------------|
-| [OpenAI](#openai)                       | >= 0.26.5          |
+| [OpenAI, AzureOpenAI](#openai)          | >= 0.26.5          |
 | [Langchain](#langchain)                 | >= 0.0.192         |
 | [AWS Bedrock](#aws-bedrock)             | >= 1.31.57         |
 | [Anthropic](#anthropic)                 | >= 0.28.0          |
+| [Google Gemini](#google-gemini)         | >= 0.7.2           |
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -49,18 +50,18 @@ patch(<INTEGRATION_NAME_IN_LOWERCASE>=True)
 
 ## OpenAI
 
-The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][1] completion and chat completion endpoints.
+The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][1] completion and chat completion endpoints to OpenAI and Azure OpenAI.
 
 ### Traced methods
 
 The OpenAI integration instruments the following methods, including streamed calls:
 
 - [Completions][2]:
-   - `OpenAI().completions.create()`
-   - `AsyncOpenAI().completions.create()`
+   - `OpenAI().completions.create()`, `AzureOpenAI().completions.create()`
+   - `AsyncOpenAI().completions.create()`, `AsyncAzureOpenAI().completions.create()`
 - [Chat completions][3]:
-   - `OpenAI().chat.completions.create()`
-   - `AsyncOpenAI().chat.completions.create()`
+   - `OpenAI().chat.completions.create()`, `AzureOpenAI().chat.completions.create()`
+   - `AsyncOpenAI().chat.completions.create()`, `AsyncAzureOpenAI().chat.completions.create()`
 
 ## LangChain
 
@@ -110,6 +111,18 @@ The Anthropic integration instruments the following methods:
 - [Streamed chat messages][11]:
   - `Anthropic().messages.stream()`, `AsyncAnthropic().messages.stream()`
 
+## Google Gemini
+
+The Google Gemini integration provides automatic tracing for the [Google AI Python SDK's][9] content generation calls. 
+
+### Traced methods
+
+The Google Gemini integration instruments the following methods:
+
+- [Generating content][19] (including streamed calls):
+  - `model.generate_content()` (Also captures `chat.send_message()`)
+  - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -132,3 +145,4 @@ The Anthropic integration instruments the following methods:
 [16]: /llm_observability/setup/sdk/
 [17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
 [18]: /llm_observability/setup/sdk/#tracing-spans
+[19]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
