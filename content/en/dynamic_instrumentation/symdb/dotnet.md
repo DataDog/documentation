@@ -1,5 +1,5 @@
 ---
-title: Enable Autocomplete and Search for Dotnet
+title: Enable Autocomplete and Search for .NET
 is_beta: true
 private: false
 code_lang: dotnet
@@ -31,14 +31,14 @@ If autocomplete suggestions do not appear for your package or module, it may be 
 
 To ensure that your code is properly recognized and to enable accurate autocomplete and search functionality, you can configure the third-party detection settings using the following options:
 
-```
+```shell
 export DD_THIRD_PARTY_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
 export DD_THIRD_PARTY_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES>
 ```
 
-Where a list means a comma separated list of package prefixes, for example
+Where a list means a comma separated list of package prefixes, for example:
 
-```
+```shell
 export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
 ```
 
