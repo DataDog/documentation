@@ -7,8 +7,8 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
 {{< /callout >}} 
 
 This guide explains how to build a Datadog Agent image with additional OpenTelemetry components not included in the default Datadog Agent. To see a list of components already included in the Agent by default, see [Included components][1].
@@ -57,8 +57,8 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
    curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/main/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).  
-   The highlighted line in this example adds a [Kafka metrics receiver][7]:
-   {{< highlight json "hl_lines=32" >}}
+   The highlighted line in this example adds a [metrics transform processor][7]:
+   {{< highlight json "hl_lines=19" >}}
 dist:
   module: github.com/DataDog/comp/otelcol/collector-contrib
   name: otelcol-contrib
@@ -76,8 +76,8 @@ exporters:
 # Add your desired exporters here
 
 processors:
-# You will see a list of processors already included by Datadog 
-# Add your desired processors here
+# adding metrics transform processor to modify metrics
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v0.104.0
 
 receivers:
   - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v0.104.0
@@ -89,8 +89,6 @@ receivers:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v0.104.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.104.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v0.104.0
-# adding Kafka metrics receiver to collect Kafka metrics in OTLP format
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkametricsreceiver v0.104.0
 
 connectors:
 # You will see a list of connectors already included by Datadog 
@@ -127,7 +125,7 @@ agents:
 Create a sample configuration file and run your custom Agent to ensure everything is working correctly.
 
 1. Create a sample OpenTelemetry configuration file with the additional components.  
-  The following example configures an additional [Kafka metrics receiver][7]:
+  The following example configures an additional [metrics transform processor][7]:
    ```yaml
    receivers:
      otlp:
@@ -136,19 +134,18 @@ Create a sample configuration file and run your custom Agent to ensure everythin
            endpoint: "0.0.0.0:4318"
          grpc:
            endpoint: "0.0.0.0:4317"
-     kafkametrics:
-       brokers: "${env:KAFKA_BROKER_ADDRESS}"
-       protocol_version: 2.0.0
-       scrapers:
-         - brokers
-         - topics
-         - consumers
    
    processors:
      batch:
        send_batch_max_size: 1000
        send_batch_size: 100
        timeout: 10s
+     # Rename system.cpu.usage to system.cpu.usage_time  
+     metricstransform:
+       transforms:
+         - include: system.cpu.usage
+           action: update
+           new_name: system.cpu.usage_time
    
    exporters:
      datadog:
@@ -166,8 +163,8 @@ Create a sample configuration file and run your custom Agent to ensure everythin
    service:
      pipelines:
        metrics:
-         receivers: [otlp, datadog/connector,kafkametrics]
-         processors: [batch]
+         receivers: [otlp, datadog/connector]
+         processors: [metricstransform, batch]
          exporters: [datadog]
        traces:
          receivers: [otlp]
@@ -249,12 +246,12 @@ docker system prune -a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/agent/install_agent_with_collector#included-components
+[1]: /opentelemetry/agent/#included-components
 [2]: https://docs.docker.com/engine/install/
 [3]: https://github.com/DataDog/datadog-agent
 [4]: https://opentelemetry.io/docs/collector/custom-collector/
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/cmd/builder/README.md
 [6]: https://docs.docker.com/build/building/multi-stage/
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver/README.md
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/metricstransformprocessor/README.md
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/jmxreceiver/README.md
 [9]: /opentelemetry/agent/install_agent_with_collector

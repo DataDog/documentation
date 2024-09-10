@@ -80,7 +80,7 @@ To monitor individual devices:
 
 - [Restart the Agent][5].
 
-After setup, the Agent collects relevant metrics by matching your devices to one of [Datadog's device profiles][6].
+After setup, the Agent collects relevant metrics by matching your devices to one of [Datadog's supported device profiles][6].
 
 To expand your setup:
 
@@ -91,7 +91,7 @@ To expand your setup:
 
 An alternative to specifying individual devices is to use Autodiscovery to automatically discover all the devices on your network.
 
-Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
+Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's supported device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
 
 To use Autodiscovery with Network Device Monitoring:
 
@@ -211,25 +211,25 @@ When configured, the SNMP check can also send ICMP pings to your devices. This c
 - To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
 
 	```yaml
-	network_devices:
-    autodiscovery:
-	    workers: 100
-	    discovery_interval: 3600
-	    loader: core
-	    use_device_id_as_hostname: true
-	    configs:
-	      - network_address: 10.10.0.0/24
-	        loader: core
-	        snmp_version: 2
-	        port: 161
-	        community_string: '***'
-	        tags:
-	        - "key1:val1"
-	        - "key2:val2"
-	        ping:
-	          enabled: true            # (default false) enable the ping check
-	          linux:                   # (optional) Linux specific configuration
-	            use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+   network_devices:
+     autodiscovery:
+       workers: 100
+       discovery_interval: 3600
+       loader: core
+       use_device_id_as_hostname: true
+       configs:
+         - network_address: 10.10.0.0/24
+           loader: core
+           snmp_version: 2
+           port: 161
+           community_string: '***'
+           tags:
+           - "key1:val1"
+           - "key2:val2"
+           ping:
+             enabled: true            # (default false) enable the ping check
+             linux:                   # (optional) Linux specific configuration
+               use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 	```
 
 {{% /tab %}}
@@ -287,7 +287,7 @@ The following metrics are made available after enabling ping:
 [3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [5]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[6]: https://docs.datadoghq.com/network_monitoring/devices/supported_devices
 [7]: /agent
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: /agent/configuration/agent-commands/#agent-status-and-information

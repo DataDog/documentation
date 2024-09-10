@@ -150,6 +150,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
 ### 확인
 
 다음 명령을 사용해 `<UNIQUEPASSWORD>`를 위에서 생성한 비밀번호로 변경하여 사용자가 성공적으로 생성되었는지 확인합니다.
@@ -188,16 +191,13 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>' # 앞의 CREATE USER 단계에서
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    #프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Google Cloud(GCP) 통합을 설정합니다.
+    # 프로젝트 및 인스턴스를 추가한 후 GCP(Datadog Google Cloud) 통합을 통해 CPU, 메모리 등 추가 클라우드 데이터를 풀링합니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
-
-**참고**: 특수 문자가 있는 경우 비밀번호를 작은따옴표로 묶어 입력하세요.
-
 
 설정 `project_id` 및 `instance_id` 필드에 대한 자세한 내용은 [MySQL 통합 사양][3]을 참조하세요.
 
@@ -249,17 +249,13 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 설정 `project_id` 및 `instance_id` 필드에 대한 자세한 내용은 [MySQL 통합 사양][2]을 참조하세요.
 
-일반 텍스트에서 `datadog` 사용자의 암호가 노출되지 않도록 하려면 에이전트의 [비밀 관리 패키지][3]를 사용하고`ENC[]` 구문을 사용하여 암호를 선언하세요. 또는 환경 변수로 암호를 전달하는 방법에 대해 알아보려면 [자동탐지 템플릿 변수 설명서][2]를 참조하세요.
-
 
 [1]: /ko/agent/docker/integrations/?tab=docker
-[2]: /ko/agent/faq/template_variables/
-[3]: /ko/agent/configuration/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -276,18 +272,18 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: <INSTANCE_ADDRESS>
-                port: 3306
-                username: datadog
-                password: '<UNIQUEPASSWORD>'
-                gcp:
-                  project_id: '<PROJECT_ID>'
-                  instance_id: '<INSTANCE_ID>'
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              gcp:
+                project_id: '<PROJECT_ID>'
+                instance_id: '<INSTANCE_ID>'
 
     clusterChecksRunner:
       enabled: true
@@ -311,15 +307,15 @@ Windows의 경우 <code>--set targetSystem=windows</code>를 <code>helm 설치</
 연결된 구성 파일로 클러스터 검사를 구성하려면 `/conf.d/mysql.yaml` 경로의 Cluster 에이전트 컨테이너에서 설정 파일을 연결하세요.
 
 ```yaml
-cluster_check: true  # 다음 플래그를 포함해야 합니다.
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
-    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Google Cloud (GCP) 통합을 설정합니다.
+    password: 'ENC[datadog_user_database_password]'
+    # 프로젝트 및 인스턴스를 추가한 후 GCP(Datadog Google Cloud) 통합을 통해 CPU, 메모리 등 추가 클라우드 데이터를 풀링합니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -347,7 +343,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -366,12 +362,9 @@ spec:
 
 Cluster 에이전트가 자동으로 이 설정을 등록하고 MySQL 검사를 실행합니다. 
 
-`datadog` 사용자 암호가 일반 텍스트로 노출되는 것을 예방하려면 에이전트의 [비밀 관리 패키지][4]를 이용해`ENC[]` 구문을 사용하여 암호를 선언하세요.
-
 [1]: /ko/agent/cluster_agent
 [2]: /ko/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ko/agent/configuration/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}

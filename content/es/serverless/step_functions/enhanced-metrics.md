@@ -30,9 +30,6 @@ Están disponibles las siguientes métricas mejoradas de Step Functions.
 `aws.states.enhanced.task.execution.task_duration`
 : Distribución de las duraciones de las tareas individuales.
 
-`aws.states.enhanced.task.execution.tasks_timed_out`
-: Counts el número total de tareas que han agotado el tiempo de espera.
-
 `aws.states.enhanced.state.run_duration`
 : gauge para las duraciones de las ejecuciones de un estado.
 

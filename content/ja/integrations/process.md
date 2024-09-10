@@ -1,5 +1,5 @@
 ---
-app_id: システム
+app_id: system
 app_uuid: 43bff15c-c943-4153-a0dc-25bb557ac763
 assets:
   integration:
@@ -13,7 +13,7 @@ assets:
       prefix: system.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: プロセス
+    source_type_name: Process
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -26,13 +26,13 @@ dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/process/README.md
 display_on_public_website: true
 draft: false
-git_integration_title: プロセス
-integration_id: システム
+git_integration_title: process
+integration_id: system
 integration_title: プロセス
 integration_version: 3.4.0
 is_public: true
 manifest_version: 2.0.0
-name: プロセス
+name: process
 public_title: プロセス
 short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
 supported_os:

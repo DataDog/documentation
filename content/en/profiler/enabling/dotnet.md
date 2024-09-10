@@ -67,6 +67,8 @@ The following profiling features are available in the following minimum versions
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
+Continuous Profiler is not supported for AWS Lambda.
+
 ## Installation
 
 Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
@@ -172,25 +174,6 @@ To install the .NET Profiler per-webapp:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
-
-{{% tab "Linux with Single Step Instrumentation" %}}
-
-1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
-
-   ```
-   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
-   DD_PROFILING_ENABLED=1
-   DD_ENV=production
-   DD_VERSION=1.2.3
-   ```
-
-2. For standalone applications, manually restart the application as you normally would.
-
-3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
-
-[1]: https://app.datadoghq.com/profiling
-[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}

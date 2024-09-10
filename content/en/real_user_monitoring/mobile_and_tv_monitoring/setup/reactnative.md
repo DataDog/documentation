@@ -359,6 +359,15 @@ Use one of Datadog's integrations to automatically track views for the following
 
 If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][16] as a reference.
 
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native RUM SDK does not use too much disk space.
+
+
 ## Track background events
 
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
