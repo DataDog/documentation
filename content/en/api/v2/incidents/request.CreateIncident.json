@@ -4,6 +4,11 @@
     "attributes": {
       "title": "Example-Incident",
       "customer_impacted": false,
+      "notification_handles": [
+          {"handle": "@some.user@acme.com"},
+          {"handle": "@slack-channel"},
+          {"handle": "@workflow-from-incident"}
+      ], 
       "fields": {
         "state": {
           "type": "dropdown",
