@@ -322,7 +322,7 @@ In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE`
 
 ### SQL Server Agent Jobs are not being collected with error "The SELECT permission was denied on the object 'sysjobs'"
 
-The SQL Server Agent Jobs check requires the `SELECT` permission on the `msdb` database. If you are seeing the error `The SELECT permission was denied on the object 'sysjobs'`, you should grant the `SELECT` permission to the user that the agent is using to connect to the SQL Server instance.
+The SQL Server Agent Jobs check requires the `SELECT` permission on the `msdb` database. If you are seeing the error `The SELECT permission was denied on the object 'sysjobs'`, you should grant the `SELECT` permission to the user that the Agent is using to connect to the SQL Server instance.
 
 ```SQL
 USE msdb;
