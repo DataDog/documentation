@@ -25596,6 +25596,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
+            security_pipelines_read: View Security Pipelines.
+            security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -33831,6 +33833,8 @@ paths:
             \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
             }}\"]\n    }\n  }\n}"
         type: unsafe
+    x-merge-override:
+      delete: false
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: List tags and aggregations that are actively queried on dashboards,
@@ -42246,6 +42250,9 @@ paths:
       x-undo:
         type: safe
   x-merge-override:
+    /api/v2/rum/analytics/aggregate: true
+    /api/v2/rum/events: true
+    /api/v2/rum/events/search: true
     /api/v2/team/{team_id}/links: true
     /api/v2/team/{team_id}/links/{link_id}: true
 security:
