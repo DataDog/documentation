@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 변수 이름은 snake_case이어야 함
 ---
 ## 메타데이터

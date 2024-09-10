@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing
   tag: 가격
   text: Datadog 가격
-kind: 설명서
 title: 가격
 ---
 

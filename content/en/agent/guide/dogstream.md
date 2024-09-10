@@ -1,6 +1,5 @@
 ---
 title: Dogstream
-kind: guide
 private: true
 aliases:
   - /agent/faq/dogstream

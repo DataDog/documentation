@@ -1,13 +1,10 @@
 ---
-title: Setting up CSM Agentless Scanning
-kind: documentation
+title: Setting up Agentless Scanning for Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent. 
 

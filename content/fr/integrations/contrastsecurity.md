@@ -19,7 +19,7 @@ integration_id: contrastsecurity
 integration_title: Contrast Security
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: kristiana.mitchell@contrastsecurity.com
 manifest_version: 1.0.0
 metric_prefix: contrastsecurity.

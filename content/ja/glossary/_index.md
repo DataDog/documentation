@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/glossary/terms/wall_time/
 cascade:
   disable_toc: true
 filter_all: All

@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: Documentación
   text: Más información sobre el Explorador de trazas
-kind: documentación
 title: Facetas de tramos (spans)
 ---
 

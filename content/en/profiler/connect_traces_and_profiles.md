@@ -1,6 +1,5 @@
 ---
 title: Investigate Slow Traces or Endpoints
-kind: Documentation
 further_reading:
     - link: 'tracing'
       tag: 'Documentation'
@@ -55,16 +54,18 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-py` version 0.44.0+.
 
+To enable the [timeline feature](#span-execution-timeline-view):
+
+- Upgrade `dd-trace-py` to version 2.10.5 or later
+- Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
+
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
-
-To additionally enable showing [GC in timeline](#span-execution-timeline-view):
-- set `DD_PROFILING_FORCE_ENABLE_GC=true`
+The new [timeline feature](#span-execution-timeline-view), including GC information, is enabled by default in `dd-trace-rb` 1.22.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -74,7 +75,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -82,7 +83,7 @@ The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by d
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below:
+To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -98,7 +99,7 @@ You can find this data:
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
-This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or later (1.21 or later for timeline beta).
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
@@ -122,7 +123,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
+To enable the [timeline feature](#span-execution-timeline-view):
 - Upgrade to `dd-trace-php` version 0.98+.
 - Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
@@ -189,7 +190,7 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -198,6 +199,11 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
 
 [1]: https://www.datadoghq.com/blog/request-latency-profiling/
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Python.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
@@ -277,8 +283,6 @@ Requires `dd-trace-go` version 1.37.0+ and works best with Go version 1.18 or ne
 {{< programming-lang lang="ruby" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Ruby service][1].
-
-Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}

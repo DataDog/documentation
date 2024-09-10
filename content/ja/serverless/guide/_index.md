@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: サーバーレスモニタリングガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: サーバーレスモニタリングガイド
 ---
@@ -14,10 +13,14 @@ title: サーバーレスモニタリングガイド
 
 {{< whatsnext desc="サーバーレスアプリケーションを監視するためのベストプラクティス" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 関数を呼び出すリソースの詳細な視覚化{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_warnings" >}}サーバーレスの警告{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}サーバーレスのタグ付け{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent 構成{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/opentelemetry" >}}サーバーレスと OpenTelemetry{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Azure App Service と Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Azure Sidecar を使用した Azure App Service 上の Linux コンテナのインスツルメンテーション{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder を使ったインストール

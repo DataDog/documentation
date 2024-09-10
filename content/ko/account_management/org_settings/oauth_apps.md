@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/org_settings/
   tag: 설명서
   text: 조직 설정 자세히 알아보기
-kind: 설명서
 title: OAuth 앱
 ---
 ## 개요

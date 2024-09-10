@@ -21,7 +21,6 @@ further_reading:
 - link: /metrics/#querying-metrics
   tag: Documentación
   text: Consulta de métricas
-kind: documentación
 title: Funciones
 ---
 

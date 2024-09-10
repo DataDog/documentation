@@ -1,6 +1,5 @@
 ---
 title: Error Tracking Explorer
-kind: documentation
 description: Learn about the Error Tracking Explorer.
 further_reading:
 - link: '/monitors/types/error_tracking'

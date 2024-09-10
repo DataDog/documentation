@@ -1,6 +1,5 @@
 ---
 title: Setting Up Cloud SIEM for AWS
-kind: guide
 aliases:
   - /security_platform/guide/setting-up-security-monitoring-for-aws
   - /security_platform/cloud_siem/guide/setting-up-security-monitoring-for-aws

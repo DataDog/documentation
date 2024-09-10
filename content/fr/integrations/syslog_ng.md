@@ -12,7 +12,7 @@ has_logo: true
 integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
-kind: integration
+custom_kind: integration
 name: syslog_ng
 public_title: Intégration Datadog/Syslog-ng
 short_description: Configurez Syslog-ng pour rassembler les logs de votre host, de

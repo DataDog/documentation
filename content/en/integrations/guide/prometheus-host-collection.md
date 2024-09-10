@@ -1,6 +1,5 @@
 ---
 title: Prometheus and OpenMetrics metrics collection from a host
-kind: documentation
 further_reading:
     - link: 'logs/log_collection'
       tag: 'Documentation'

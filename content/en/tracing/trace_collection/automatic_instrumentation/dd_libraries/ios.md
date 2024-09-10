@@ -1,6 +1,5 @@
 ---
 title: Tracing iOS Applications
-kind: documentation
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/
@@ -11,7 +10,7 @@ type: multi-code-lang
 code_lang_weight: 90
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-ios Source code
 - link: tracing/visualization/
   tag: Documentation
@@ -28,20 +27,9 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 
 ## Setup
 
-1. Declare the library as a dependency depending on your package manager:
+1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][4] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogTrace'
-```
-
-[4]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -54,6 +42,17 @@ In your project, link the following libraries:
 DatadogCore
 DatadogTrace
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][4] to install `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogTrace'
+```
+
+[4]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -294,7 +293,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog tracer implements the [Open Tracing standard][8]. Configure and enable the shared an Open Tracing `Tracer` as `Tracer.shared()`:
+3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -465,13 +464,13 @@ Trace.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self,
+        delegateClass: <YourSessionDelegate>.self,
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -533,3 +532,4 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 [9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
 [10]: https://docs.datadoghq.com/tracing/
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[12]: /tracing/trace_collection/custom_instrumentation/ios/otel

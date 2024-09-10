@@ -2,7 +2,6 @@
 aliases:
 - /ko/network_performance_monitoring/devices/data/
 disable_toc: true
-kind: 설명서
 title: 수집된 NDM 데이터
 ---
 

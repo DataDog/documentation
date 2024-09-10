@@ -1,6 +1,5 @@
 ---
 title: Anomaly Monitor
-kind: documentation
 aliases:
     - /guides/anomalies
     - /monitors/monitor_types/anomaly
@@ -158,7 +157,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
 
 ## API
 
@@ -249,7 +248,7 @@ A standard configuration of thresholds and threshold window looks like:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/anomaly
+[1]: https://app.datadoghq.com/monitors/create/anomaly
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/

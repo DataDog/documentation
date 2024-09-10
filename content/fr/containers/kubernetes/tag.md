@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Limiter la collecte de données à un sous-ensemble de conteneurs
-kind: documentation
 title: Extraction de tags dans Kubernetes
 ---
 

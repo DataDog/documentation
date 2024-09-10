@@ -24,7 +24,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentation
   text: Découvrir les widgets disponibles pour votre dashboard
-kind: documentation
 title: Template variables
 ---
 

@@ -8,7 +8,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-slo
   tag: Centro de aprendizaje
   text: Introducción a Objetivos de nivel de servicio (SLOs)
-kind: guía
 title: Lista de verificación SLO
 ---
 

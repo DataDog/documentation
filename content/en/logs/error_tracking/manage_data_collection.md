@@ -1,6 +1,5 @@
 ---
 title: Manage Data Collection
-kind: documentation
 is_beta: true
 private: true
 description: Learn how to control costs in Error Tracking.

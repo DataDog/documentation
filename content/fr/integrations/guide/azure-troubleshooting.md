@@ -5,7 +5,7 @@ further_reading:
 - link: /integrations/azure/
   tag: Documentation
   text: Intégration Azure
-kind: guide
+
 title: Dépannage Azure
 ---
 

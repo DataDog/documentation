@@ -1,6 +1,5 @@
 ---
 title: Detection Rules
-kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/

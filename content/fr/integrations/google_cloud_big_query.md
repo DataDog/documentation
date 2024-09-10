@@ -15,7 +15,7 @@ integration_id: google-cloud-bigquery
 integration_title: Google BigQuery
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_big_query
 public_title: "Intégration Datadog/Google\_BigQuery"

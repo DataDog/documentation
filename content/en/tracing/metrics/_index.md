@@ -1,6 +1,5 @@
 ---
 title: APM Metrics
-kind: documentation
 description: 'Learn about useful metrics you can generate from APM data.'
 further_reading:
     - link: 'tracing/trace_pipeline/'

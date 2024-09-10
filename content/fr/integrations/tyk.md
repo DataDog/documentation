@@ -28,7 +28,7 @@ integration_id: tyk
 integration_title: Tyk
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: yaara@tyk.io
 manifest_version: 1.0.0
 metric_prefix: tyk.

@@ -6,7 +6,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags
   tag: 설명서
   text: 태그 할당에 대해 알아보기
-kind: 지침
 title: Tagging Events에 대한 모범 사례
 ---
 

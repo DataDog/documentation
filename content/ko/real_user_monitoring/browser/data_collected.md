@@ -22,7 +22,6 @@ further_reading:
 - link: /logs/log_configuration/attributes_naming_convention
   tag: 설명서
   text: Datadog 표준 속성
-kind: 설명서
 title: 수집된 RUM 브라우저 데이터
 ---
 

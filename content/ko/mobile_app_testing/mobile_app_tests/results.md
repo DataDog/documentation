@@ -9,16 +9,19 @@ further_reading:
 - link: /service_management/events/explorer
   tag: 설명서
   text: 이벤트 탐색기에 대해 알아보기
-kind: documentation
 title: 모바일 앱 테스트 결과
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing은 일반적으로 US1, US5, EU 사이트에서 이용 가능합니다.</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,ap1" >}}
 <div class="alert alert-warning">모바일 애플리케이션 테스트는 이 사이트에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">모바일 애플리케이션 테스트는 제한적으로 제공되며 Datadog US1 사이트에 대해서만 지원됩니다.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">모바일 애플리케이션 테스트는 이 사이트에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요
@@ -33,8 +36,8 @@ title: 모바일 앱 테스트 결과
 
 **Properties** 섹션에서는 테스트 ID, 테스트 생성 및 편집 날짜, 테스트 우선 순위, 환경 태그 및 추가 태그를 확인할 수 있습니다.
 
-**Overview**
-: 이 섹션에서는 모바일 애플리케이션, 버전, 위치, 장치 수, 테스트 간격 및 테스트 단계 수를 포함한 신서틱(Synthetic) 테스트 세부 정보에 대해 설명합니다.
+**개요**
+: 이 섹션에서는 모바일 애플리케이션, 버전, 위치, 장치 수, 테스트 간격, 테스트 단계 수를 포함한 신서틱(Synthetic) 테스트 세부 사항을 설명합니다.
 
 **Monitor**
 : [신서틱(Synthetic) 테스트 모니터][1]의 이름과 설정된 알림 메시지를 포함합니다.
@@ -44,7 +47,7 @@ title: 모바일 앱 테스트 결과
 
 ## 테스트 이력
 
-**History** 섹션에는 주어진 시간 간격 동안 모든 테스트 위치의 총 가동 시간을 표시하는 **Global Uptime** 그래프를 볼 수 있습니다. 전역 가동 시간은 테스트를 위해 설정된 [경고 조건][4]을 고려합니다.
+**History** 섹션에서는 지정된 시간 간격 동안 모든 테스트 위치의 총 가동 시간을 표시하는 **Global Uptime** 그래프를 볼 수 있습니다. 전역 가동 시간은 테스트를 위해 구성된 [알림 조건][4]을 고려합니다.
 
 {{< img src="mobile_app_testing/history.png" alt="이력 그래프에 전역 가동 시간 표시" style="width=80%" >}}
 

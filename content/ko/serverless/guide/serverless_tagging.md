@@ -6,7 +6,6 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
   tag: 설명서
   text: 통합 서비스 태깅
-kind: 가이드
 title: 서버리스 태깅
 ---
 

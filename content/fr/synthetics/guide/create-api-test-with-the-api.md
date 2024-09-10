@@ -9,7 +9,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Créer et gérer des tests API Synthetic avec Terraform
-kind: guide
+
 title: Créer un test API avec l'API
 ---
 

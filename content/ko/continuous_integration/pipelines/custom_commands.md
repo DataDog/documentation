@@ -5,7 +5,6 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_commands/
   tag: 설명서
   text: CI 문제 해결
-kind: 설명서
 title: 파이프라인 트레이스에 커스텀 명령 추가
 ---
 

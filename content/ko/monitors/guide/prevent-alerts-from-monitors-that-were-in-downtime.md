@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임에 관해 자세히 보기
-kind: 가이드
 title: 다운타임 상태의 모니터에서 전송되는 경고 방지
 ---
 

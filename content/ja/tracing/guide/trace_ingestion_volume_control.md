@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: 取り込み制御ページ
-kind: ガイド
 title: APM 分散型トレーシングによる取り込み量制御
 ---
 
@@ -22,7 +21,9 @@ title: APM 分散型トレーシングによる取り込み量制御
 
 特定のサービスの取り込み量を減らすことにしても、**リクエスト、エラー、およびレイテンシーの[メトリクス][3]** (RED (Requests, Errors, and Duration) メトリクスとして知られている) は、サンプリング構成に関係なく、アプリケーションの 100% のトラフィックに基づいて計算されているため、100% の精度を維持します。これらのメトリクスは、Datadog APM の購入時に含まれています。アプリケーションのトラフィックを完全に可視化するために、これらのメトリクスを使用して、ダッシュボード、モニター、SLO を作成し、サービスやリソースの潜在的なエラーを発見することができます。
 
-**注**: アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、SDK レベルやコレクターレベルでサンプリングを設定した場合、APM メトリクスはデフォルトで**サンプル**データセットに基づきます。[Datadog Processor][17] を使用すると、コレクターレベルのサンプリングを使用しながら、メトリクスの精度を維持することができます。詳しくは [OpenTelemetry による取り込みサンプリング][4]をご覧ください。
+**注**: アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、SDK レベルやコレクターレベルでサンプリングを設定した場合、APM メトリクスはデフォルトで**サンプル**データセットに基づきます。詳しくは [OpenTelemetry による取り込みサンプリング][4]をご覧ください。
+
+<div class="alert alert-info"><strong>ベータ版</strong>: あるいは、<a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> を使用して、サンプリングされていないデータの APM メトリクスを計算します。詳しくは<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスを Datadog プロセッサから Datadog Connector に切り替える</a>をお読みください。</div>
 
 トレースデータは非常に反復性が高いため、取り込みサンプリングでも問題を調査するためのトレースサンプルは利用可能です。高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。取り込み制御は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
 
@@ -32,7 +33,7 @@ title: APM 分散型トレーシングによる取り込み量制御
 
 取り込みサンプリングレートを下げると、**count** タイプのメトリクスに影響があります。** Distribution** タイプのメトリクス、例えば `duration` メトリクスは、サンプリングがほぼ均一で、レイテンシーの分布がトラフィックを代表するままであるため、影響を受けません。
 
-#### アラート設定
+#### モニター
 
 [スパンからのメトリクス](#metrics-from-span)を使用するすべての ** metric** モニターは、取り込み量の減少の影響を受けます。**trace.__** メトリクスに基づくメトリクスモニターは、100% のトラフィックに基づいて計算されるため、正確さを維持します。
 
@@ -72,7 +73,7 @@ Downstream Bytes/s レートが高く、サンプリングレートも高いサ�
 
 ### Agent レベルで取り込みサンプリングレートをグローバルに構成する
 
-**Configuration** の列は、サービスにサンプリングルールが構成されているかどうかを示しています。上位のサービスが `AUTOMATIC` 構成である場合、**Agent configuration** を変更すると、サービス全体でボリュームが減少します。
+The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally accross services.
 
 Agent レベルで取り込み量を減らすには、`DD_APM_MAX_TPS` (デフォルトでは `10` に設定) を構成して、ヘッドベースのサンプリング量のシェアを減らしてください。[デフォルトのサンプリングメカニズム][7]について詳しくはこちら。
 
@@ -154,4 +155,3 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [16]: /ja/tracing/legacy_app_analytics
-[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor

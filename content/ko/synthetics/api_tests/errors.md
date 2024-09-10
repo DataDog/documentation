@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: 설명서
   text: 브라우저 테스트 설정
-kind: 설명서
 title: API 테스트 오류
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: RUM iOS Advanced Configuration
-kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -8,11 +7,14 @@ aliases:
     - /real_user_monitoring/ios/advanced_configuration
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: "Github"
+    tag: "Source Code"
     text: "Source code for dd-sdk-ios"
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
+  - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+    tag: "Documentation"
+    text: "RUM iOS and tvOS monitoring supported versions"
 ---
 
 If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].
@@ -221,9 +223,11 @@ Custom attributes allow you to filter and group information about observed user 
 
 To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
 
-* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some value")`.
-* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some other value")`.
-* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some key")`.
+* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
+* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
+* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
+
+**Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
 ### Track user sessions
 
@@ -306,6 +310,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `vitalsUpdateFrequency`
 : Sets the preferred frequency of collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (disable vitals monitoring).
+
+`appHangThreshold`
+: Sets the threshold for reporting app hangs. The minimum allowed value for this option is `0.1` seconds. To disable app hangs reporting, set this to `nil`. For more information, see [Add app hang reporting][10].
 
 ### Automatically track views
 
@@ -428,28 +435,30 @@ To automatically track resources (network requests) and get their timing informa
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[SessionDelegate alloc] init]
+                                                      delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
@@ -474,13 +483,13 @@ RUM.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -529,13 +538,12 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-```swift
-URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
+URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[DDURLSessionInstrumentation disableWithDelegateClass:[SessionDelegate class]];
+[DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -598,20 +606,20 @@ To modify attributes of a RUM event before it is sent to Datadog or to drop an e
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
-    viewEventMapper: { viewEvent in
-        return viewEvent
+    viewEventMapper: { RUMViewEvent in
+        return RUMViewEvent
     }
-    resourceEventMapper: { resourceEvent in
-        return resourceEvent
+    resourceEventMapper: { RUMResourceEvent in
+        return RUMResourceEvent
     }
-    actionEventMapper: { actionEvent in
-        return actionEvent
+    actionEventMapper: { RUMActionEvent in
+        return RUMActionEvent
     }
-    errorEventMapper: { errorEvent in
-        return errorEvent
+    errorEventMapper: { RUMErrorEvent in
+        return RUMErrorEvent
     }
-    longTaskEventMapper: { longTaskEvent in
-        return longTaskEvent
+    longTaskEventMapper: { RUMLongTaskEvent in
+        return RUMLongTaskEvent
     }
 )
 ```
@@ -620,24 +628,24 @@ let configuration = RUM.Configuration(
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
-[configuration setViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull viewEvent) {
-    return viewEvent;
+[configuration setViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull RUMViewEvent) {
+    return RUMViewEvent;
 }];
 
-[configuration setErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull errorEvent) {
-    return errorEvent;
+[configuration setErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull RUMErrorEvent) {
+    return RUMErrorEvent;
 }];
 
-[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
-    return resourceEvent;
+[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
+    return RUMResourceEvent;
 }];
 
-[configuration setActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull actionEvent) {
-    return actionEvent;
+[configuration setActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull RUMActionEvent) {
+    return RUMActionEvent;
 }];
 
-[configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull longTaskEvent) {
-    return longTaskEvent;
+[configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull RUMLongTaskEvent) {
+    return RUMLongTaskEvent;
 }];
 ```
 {{% /tab %}}
@@ -652,10 +660,10 @@ For example, to redact sensitive information in a RUM Resource's `url`, implemen
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
-    resourceEventMapper: { resourceEvent in
-        var resourceEvent = resourceEvent
-        resourceEvent.resource.url = redacted(resourceEvent.resource.url)
-        return resourceEvent
+    resourceEventMapper: { RUMResourceEvent in
+        var RUMResourceEvent = RUMResourceEvent
+        RUMResourceEvent.resource.url = redacted(RUMResourceEvent.resource.url)
+        return RUMResourceEvent
     }
 )
 ```
@@ -664,8 +672,8 @@ let configuration = RUM.Configuration(
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
-[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
-    return resourceEvent;
+[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
+    return RUMResourceEvent;
 }];
 ```
 {{% /tab %}}
@@ -677,16 +685,28 @@ Depending on the event's type, only some specific properties can be modified:
 
 | Event Type       | Attribute key                     | Description                             |
 |------------------|-----------------------------------|-----------------------------------------|
-| RUMViewEvent     | `viewEvent.view.name`             | Name of the view.                        |
-|                  | `viewEvent.view.url`              | URL of the view.                         |
-| RUMActionEvent   | `actionEvent.action.target?.name` | Name of the action.                      |
-|                  | `actionEvent.view.url`            | URL of the view linked to this action.   |
-| RUMErrorEvent    | `errorEvent.error.message`        | Error message.                           |
-|                  | `errorEvent.error.stack`          | Stacktrace of the error.                 |
-|                  | `errorEvent.error.resource?.url`  | URL of the resource the error refers to. |
-|                  | `errorEvent.view.url`             | URL of the view linked to this error.    |
-| RUMResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                     |
-|                  | `resourceEvent.view.url`          | URL of the view linked to this resource. |
+| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
+|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
+|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
+| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
+|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                 |
+|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to. |
+|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.    |
+| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
+|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```swift
+RumMonitor.shared().currentSessionID(completion: { sessionId in
+  currentSessionId = sessionId
+})
+```
 
 ## Set tracking consent (GDPR compliance)
 
@@ -705,14 +725,6 @@ For example, if the current tracking consent is `.pending`:
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -725,3 +737,4 @@ This means that even if users open your application while offline, no data is lo
 [6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
+[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting

@@ -11,12 +11,11 @@ code_lang: java
 code_lang_weight: 0
 further_reading:
 - link: https://github.com/DataDog/dd-trace-java
-  tag: GitHub
+  tag: ソースコード
   text: Datadog Java APM ソースコード
-- link: tracing/trace_collection/otel_instrumentation/java/
+- link: tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
-kind: ドキュメント
 title: Java アプリケーションのトレース
 type: multi-code-lang
 ---
@@ -59,6 +58,8 @@ Datadog Agent をインストールして構成したら、次はアプリケー
    **注:** 特定の**メジャー**バージョンの最新ビルドをダウンロードするには、代わりに `https://dtdg.co/java-tracer-vX` リンクを使用してください。ここで `X` は希望するメジャーバージョンです。
 例えば、バージョン 1 の最新ビルドには `https://dtdg.co/java-tracer-v1` を使用します。マイナーバージョン番号は含めてはいけません。または、特定のバージョンについては Datadog の [Maven リポジトリ][3]を参照してください。
 
+   **Note**: Release Candidate versions are made available in GitHub [DataDog/dd-trace-java releases][21]. These have "RC" in the version and are recommended for testing outside of your production environment. You can [subscribe to GitHub release notifications][20] to be informed when new Release Candidates are available for testing. If you experience any issues with Release Candidates, reach out to [Datadog support][22].
+
 2. IDE、Maven または Gradle アプリケーションスクリプト、`java -jar` コマンドから、Continuous Profiler、デプロイ追跡、ログ挿入（Datadog へログを送信する場合）を使用してアプリケーションを実行するには、`-javaagent` JVM 引数と、該当する以下のコンフィギュレーションオプションを追加します。
 
     ```text
@@ -72,7 +73,7 @@ Datadog Agent をインストールして構成したら、次はアプリケー
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | アプリケーション環境（`production`、`staging` など） |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Datadog のトレース ID とスパン ID に対する MDC キーの自動挿入を有効にします。詳細については、[高度な使用方法][6]を参照してください。 <br><br>**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_LOGS_INJECTION` を設定できます。 |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | [継続的プロファイラー][5]を有効化 |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continuous Profiler][5] |
 | `DD_SERVICE`   | `dd.service`     | 同一のジョブを実行するプロセスセットの名前。アプリケーションの統計のグループ化に使われます。 |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   すべてのサービスのトレースのルートでサンプリングレートを設定します。<br><br>**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_TRACE_SAMPLE_RATE` を設定できます。     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   指定したルールに合致するサービスのトレースのルートでのサンプリングレートを設定します。    |
@@ -101,18 +102,41 @@ JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Tomcat 起動スクリプトファイル (たとえば、Linux では `setenv.sh`) を開き、次を追加します。
+#### Linux
 
+To enable tracing when running Tomcat on Linux:
+
+1. Open your Tomcat startup script file, for example `setenv.sh`.
+2. Add the following to `setenv.sh`:
+   ```text
+   CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+   ```
+
+#### Windows (Tomcat as a Windows service)
+
+To enable tracing when running Tomcat as a Windows service:
+
+1. Open a Command Prompt.
+1. Run the following command to update your Tomcat service configuration:
+    ```shell
+    tomcat8 //US//<SERVICE_NAME> --Environment="CATALINA_OPTS=%CATALINA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar\""
+    ```
+   Replace `<SERVICE_NAME>` with the name of your Tomcat service and replace the path to `dd-java-agent.jar`.
+1. Restart your Tomcat service for changes to take effect.
+
+#### Windows (Tomcat with environment setup script)
+
+To enable tracing when running Tomcat with an environment setup script:
+
+1. Create `setenv.bat` in the `./bin` directory of the Tomcat project folder, if it doesn't already exist.
+1. Add the following to `setenv.bat`:
+   ```text
+   set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+   ```
+If the previous step doesn't work, try adding the following instead:
 ```text
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
-
-Windows では、`setenv.bat`:
-
-```text
-set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
-```
-`setenv` ファイルが存在しない場合は、Tomcat プロジェクトフォルダーの `./bin` ディレクトリで作成します。
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
@@ -203,7 +227,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 - アプリケーションによって処理されていないエラーとスタックトレース
 - システムを通過するトレース (リクエスト) の合計数
 
-## セッションリプレイ
+## 構成
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][9]を参照してください。
 
@@ -227,3 +251,6 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 [17]: https://app.datadoghq.com/services
 [18]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
+[20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
+[21]: https://github.com/DataDog/dd-trace-java/releases
+[22]: https://docs.datadoghq.com/ja/getting_started/support/

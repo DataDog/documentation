@@ -1,6 +1,5 @@
 ---
 title: Tracing Java Applications
-kind: documentation
 aliases:
     - /tracing/java
     - /tracing/languages/java
@@ -14,7 +13,7 @@ type: multi-code-lang
 code_lang_weight: 0
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Datadog Java APM source code'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -74,7 +73,7 @@ To begin tracing your applications:
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continuous Profiler][5] |
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
@@ -103,18 +102,41 @@ For more information, see the [Spring Boot documentation][1].
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
+#### Linux
 
+To enable tracing when running Tomcat on Linux:
+
+1. Open your Tomcat startup script file, for example `setenv.sh`.
+2. Add the following to `setenv.sh`:
+   ```text
+   CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+   ```
+
+#### Windows (Tomcat as a Windows service)
+
+To enable tracing when running Tomcat as a Windows service:
+
+1. Open a Command Prompt.
+1. Run the following command to update your Tomcat service configuration:
+    ```shell
+    tomcat8 //US//<SERVICE_NAME> --Environment="CATALINA_OPTS=%CATALINA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar\""
+    ```
+   Replace `<SERVICE_NAME>` with the name of your Tomcat service and replace the path to `dd-java-agent.jar`.
+1. Restart your Tomcat service for changes to take effect.
+
+#### Windows (Tomcat with environment setup script)
+
+To enable tracing when running Tomcat with an environment setup script:
+
+1. Create `setenv.bat` in the `./bin` directory of the Tomcat project folder, if it doesn't already exist.
+1. Add the following to `setenv.bat`:
+   ```text
+   set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+   ```
+If the previous step doesn't work, try adding the following instead:
 ```text
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
-
-Or on Windows, `setenv.bat`:
-
-```text
-set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
-```
-If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}

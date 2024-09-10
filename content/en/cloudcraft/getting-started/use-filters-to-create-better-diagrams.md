@@ -1,6 +1,5 @@
 ---
 title: Using Filters to Create Better Diagrams
-kind: documentation
 ---
 
 The number of components rendered at once for large environment diagrams can introduce performance and readability issues, making for a poor experience.

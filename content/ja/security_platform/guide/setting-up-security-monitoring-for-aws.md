@@ -1,6 +1,5 @@
 ---
 title: AWS の Cloud SIEM のセットアップ
-kind: ガイド
 ---
 
 ## 概要

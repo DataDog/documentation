@@ -26,7 +26,7 @@ integration_id: hivemq
 integration_title: HiveMQ
 integration_version: 1.6.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: hivemq.

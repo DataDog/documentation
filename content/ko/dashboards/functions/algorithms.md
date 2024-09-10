@@ -5,7 +5,6 @@ algolia:
   - 이상 그래프
 aliases:
 - /ko/graphing/functions/algorithms/
-kind: 설명서
 title: 알고리즘
 ---
 

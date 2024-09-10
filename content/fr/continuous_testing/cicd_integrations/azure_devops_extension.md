@@ -5,7 +5,6 @@ dependencies:
 - https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
 description: Utilisez Synthetics et l'extension Datadog CI pour créer des tâches et
   les intégrer à un pipeline de CI.
-kind: documentation
 title: Tests continus et extension Datadog CI d'Azure DevOps
 ---
 [![Version du marketplace Visual Studio](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]

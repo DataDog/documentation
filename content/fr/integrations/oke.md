@@ -30,7 +30,7 @@ integration_id: oke
 integration_title: Oracle Container Engine for Kubernetes
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: oke
 public_title: Oracle Container Engine for Kubernetes

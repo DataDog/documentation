@@ -1,6 +1,5 @@
 ---
 title: Generate Metrics from Spans
-kind: documentation
 description: 'Generate custom metrics from ingested spans.'
 aliases:
 - /tracing/span_to_metrics/
@@ -13,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: 'Use Analytics queries and monitors based on retained traces.'
     - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric'
-      tag: "Terraform"
+      tag: "External Site"
       text: 'Create and manage span-based metrics with Terraform'
 ---
 

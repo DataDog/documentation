@@ -1,6 +1,6 @@
 ---
 title: Log Parsing - Best Practices
-kind: guide
+
 aliases:
   - /logs/faq/log-parsing-best-practice
 further_reading:

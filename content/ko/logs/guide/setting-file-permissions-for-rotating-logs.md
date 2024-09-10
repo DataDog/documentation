@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: 설명서
   text: 파싱에 대해 배우기
-kind: 가이드
 title: 로그 로테이션을 위한 파일 권한 설정(Linux)
 ---
 

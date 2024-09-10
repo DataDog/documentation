@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: 설명서
   text: RUM 및 세션 재생에 대해 알아보기
-kind: documentation
 title: RUM 및 세션 재생 청구
 ---
 

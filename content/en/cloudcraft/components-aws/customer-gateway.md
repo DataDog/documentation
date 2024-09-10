@@ -1,6 +1,5 @@
 ---
 title: "Customer Gateway Component"
-kind: documentation
 ---
 ## Overview
 

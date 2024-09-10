@@ -1,6 +1,5 @@
 ---
 title: Event Management
-kind: documentation
 is_beta: true
 aliases:
 - /guides/eventcorrelation/
@@ -19,6 +18,9 @@ further_reading:
 - link: "https://app.datadoghq.com/event/configuration/quick-start"
   tag: "App"
   text: "Quick Start Guide"
+- link: "https://www.datadoghq.com/blog/datadog-event-management"
+  tag: "Blog"
+  text: "Aggregate, correlate, and act on alerts faster with AIOps-powered Event Management"
 ---
 
 {{< site-region region="gov" >}}

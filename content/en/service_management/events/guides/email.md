@@ -1,6 +1,6 @@
 ---
 title: Events with email
-kind: guide
+
 aliases:
 - /developers/events/email/
 - /guides/eventsemail

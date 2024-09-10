@@ -23,7 +23,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
   tag: 블로그
   text: 클라우드 환경에 대한 충분한 보안 커버리지 구축
-kind: 설명서
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
 title: Cloud SIEM
 ---
 ## 개요

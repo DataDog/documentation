@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Install the Datadog Agent Integration Developer Tool
 description: Install the Datadog Agent Integration Developer Tool.
 ---
@@ -104,9 +103,9 @@ You have 2 options to install the `ddev` CLI.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. Download the file using the `curl` command. The `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
+1. Download the file using the `curl` command. The -L option allows for redirects, and the -o option specifies the file name to which the downloaded package is written. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
    ```shell
-   curl -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
+   curl -L -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
 2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include `sudo` on the command to grant write permissions to those folders.
    ```shell

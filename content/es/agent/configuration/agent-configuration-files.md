@@ -10,7 +10,6 @@ algolia:
 aliases:
 - /es/agent/faq/agent-configuration-files
 - /es/agent/guide/agent-configuration-files
-kind: guía
 title: Archivos de configuración del Agent
 ---
 

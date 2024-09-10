@@ -17,7 +17,7 @@ integration_id: amazon-storage-gateway
 integration_title: Amazon Storage Gateway
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_storage_gateway
 public_title: Intégration Datadog/Amazon Storage Gateway

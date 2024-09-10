@@ -1,26 +1,31 @@
 ---
-"categories":
-- "monitoring"
-- "notification"
-"ddtype": "crawler"
-"dependencies": []
-"description": "Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照。"
-"doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
-"draft": false
-"git_integration_title": "pingdom"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Pingdom"
-"is_public": true
-"kind": "インテグレーション"
-"manifest_version": "1.0"
-"name": "pingdom"
-"public_title": "Datadog-Pingdom インテグレーション"
-"short_description": "Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照。"
-"version": "1.0"
+categories:
+- notifications
+custom_kind: integration
+dependencies: []
+description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
+doc_link: https://docs.datadoghq.com/integrations/pingdom/
+draft: false
+git_integration_title: pingdom
+has_logo: true
+integration_id: ''
+integration_title: Pingdom Legacy API (V2.1)
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: pingdom
+public_title: Datadog-Pingdom Legacy API (V2.1) インテグレーション
+short_description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
+team: web-integrations
+version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
+
+<div class="alert alert-danger">
+このインテグレーションは非推奨であり、依存する API はいつサポートを失うかわかりません。代わりに <a href="https://docs.datadoghq.com/integrations/pingdom_v3/" class="alert-link">Datadog Pingdom V3 インテグレーション</a>を使用してください。
+</div>
 
 他のイベントやメトリクスに関連付けて、ユーザー中心の Pingdom パフォーマンスメトリクスを Datadog で追跡します。
 
@@ -50,7 +55,7 @@ Datadog は、Pingdom Web サイトで構成されているすべてのサイト
 
 Pingdom インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
 
@@ -65,14 +70,13 @@ Pingdom インテグレーションは、トランザクションチェックを
 
 ## トラブルシューティング
 
-### ユーザー/パスワードの更新時にエラーを受け取るのはなぜですか
+### ユーザー名またはパスワードの更新時にエラーが発生する
 
-Pingdom 認証情報の保存時に以下が表示されることがあります。
+Pingdom 認証情報の保存時に以下のエラーが表示されることがあります。
 
 `“There was an issue while testing your Pingdom configuration: Not permitted for account type”`.
 
 Pingdom アカウント所有者の電子メールアドレスを **(Optional) Account to query** フィールドに追加し、保存してください。
 
-[1]: https://app.datadoghq.com/monitors#create/integration
+[1]: https://app.datadoghq.com/monitors/create/integration
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/pingdom/pingdom_metadata.csv
-

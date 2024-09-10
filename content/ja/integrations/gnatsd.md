@@ -24,6 +24,7 @@ author:
 categories:
 - message queues
 - notifications
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: gnatsd
 integration_title: Gnatsd
 integration_version: 2.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: gnatsd
 public_title: Gnatsd
@@ -50,6 +50,7 @@ tile:
   - Supported OS::Windows
   - Category::Message Queues
   - Category::Notifications
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で gnatsd クラスターを監視。
   media: []
@@ -68,11 +69,11 @@ Gnatsd サービスからメトリクスをリアルタイムに取得して、�
 - Gnatsd の状態を視覚化および監視できます。
 - Gnatsd のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
 Gnatsd チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Gnatsd チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2
 ]をご参照ください。
@@ -85,7 +86,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Gnatsd チェ�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Gnatsd [メトリクス](#メトリクス)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーで `gnatsd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gnatsd.d/conf.yaml][5] を参照してください。
 
@@ -99,24 +100,24 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Gnatsd チェ�
 
 gnatsd チェックは、すべての主要プラットフォームと互換性があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gnatsd" >}}
 
 
 **注**: カスタム Nats クラスター名を使用する場合、メトリクスは次のようになります。
 `gnatsd.connz.connections.cluster_name.in_msgs`
 
-### ヘルプ
+### イベント
 
 gnatsd チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "gnatsd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

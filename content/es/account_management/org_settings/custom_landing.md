@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Página de destino personalizada de una organización
 ---
 

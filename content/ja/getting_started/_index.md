@@ -14,7 +14,9 @@ further_reading:
 - link: https://datadoghq.com/blog/
   tag: ブログ
   text: Datadog の新しい製品や機能、インテグレーションについて学びましょう
-kind: documentation
+- link: https://app.datadoghq.com/help/quick_start
+  tag: アプリ
+  text: クイックスタートガイドを見る
 title: はじめに
 ---
 
@@ -33,8 +35,8 @@ Datadog は、任意のスタックでのソフトウェア開発の各フェー
         <td><p><strong>開発</strong></p></td>
         <td>
         <ul>
-        <li><a href="/coscreen/">CoScreen</a> を使って遠隔ペアプログラミングセッションを促進します。</li>
-        <li><a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a> を使って、テキストエディタや GitHub 上でコードの脆弱性を明示します。</li></ul>
+        <li><a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a> を使って、テキストエディタや GitHub 上でコードの脆弱性を明示します。</li>
+        <li><a href="/coscreen/">CoScreen</a> を使って遠隔ペアプログラミングセッションを促進します。</li></ul>
         </td>
     </tr>
     <tr>
@@ -51,7 +53,7 @@ Datadog は、任意のスタックでのソフトウェア開発の各フェー
         <td>
             <ul>
                 <li>処理、集計、<a href="/monitors/">アラート</a>をきめ細かく制御しながら、<a href="/logs/">ログ</a>、<a href="/metrics/">メトリクス</a>、<a href="/events/">イベント</a>、<a href="/tracing/glossary/#trace">ネットワークトレース</a>を取り込みます。</li>
-                <li> Continuous Profiler</a> を使ってホストのパフォーマンスを評価します。</li>
+                <li><a href="/profiler/">Continuous Profiler</a> を使ってホストのパフォーマンスを評価します。</li>
                 <li><a href="/tracing/">Application Performance Monitoring</a> を使って、アプリケーションパフォーマンスを評価します。</li>
             </ul>
         </td>
@@ -77,7 +79,11 @@ Datadog は、任意のスタックでのソフトウェア開発の各フェー
 
 さらに、何百もの[インテグレーション][1]により、既に使用しているテクノロジーに Datadog の機能を統合することができます。例えば、[AWS インテグレーション][2]は、90 以上の AWS サービスからログ、イベント、メトリクスを収集します。
 
-## 詳細はこちら
+## 詳細を見る
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
+  この基礎セミナーでは、「Datadog とは何か、そしてそれが自分にとって何をしてくれるのか？」という重要な質問に答える手助けをします。Datadog にデータを送信する方法や、さまざまな環境、アプリケーション、インフラストラクチャーの状態をよりよく理解するためにどのページを訪れるべきかを学びます。
+{{< /learning-center-callout >}}
 
 ### コースを受講
 Datadog ラーニングセンターでは、Datadog プラットフォームを実際に体験することができます。[はじめにコース][3]では、可観測性の実践や Datadog のキーコンセプトなどを学ぶことができます。
@@ -112,15 +118,16 @@ Datadog を操作するための最速の入門コースとして、[クイッ�
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Continuous Profiler を使用して、コードのパフォーマンス問題を発見し、修正します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: データベースの健全性とパフォーマンスを表示し、発生した問題を迅速にトラブルシューティングします。{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Synthetic テストを使って、API エンドポイントと主要なビジネスジャーニーのテストと監視を開始します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Session Replay を利用して、ユーザーが製品とどのようにやり取りしているかを詳細に観察できます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: CI パイプラインや IDE でエンドツーエンドの Synthetic テストを実行します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Session Replay を利用して、ユーザーが製品とどのようにやり取りしているかを詳細に確認します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: ASM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: CSM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Cloud SIEM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: 最初のログを送信し、ログ処理を使ってログを充実させましょう。{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: CI プロバイダーとのインテグレーションをセットアップすることで、CI パイプラインデータを収集します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}<u>ログ</u>: 最初のログを送信し、ログ処理を使ってログを充実させましょう。{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Datadog でテストサービスをセットアップして、CI テストデータを収集します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: コード変更に関連するテストのみを実行することで、テストスイートを最適化し、CI コストを削減します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_analysis" >}}<u>Code Analysis</u>: リポジトリに品質やセキュリティ上の問題がないか分析します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

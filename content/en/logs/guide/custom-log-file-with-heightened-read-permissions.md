@@ -1,6 +1,6 @@
 ---
 title: Send Logs from a Custom Log File with Heightened Read Permissions
-kind: guide
+
 aliases:
   - /logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions
 further_reading:

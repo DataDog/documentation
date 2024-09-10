@@ -31,7 +31,7 @@ integration_id: couchdb
 integration_title: CouchDB
 integration_version: 5.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: couch.

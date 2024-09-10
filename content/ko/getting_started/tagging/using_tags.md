@@ -12,7 +12,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags/
   tag: 설명서
   text: 태그 지정 방법 알아보기
-kind: 설명서
 title: 태그 사용
 ---
 

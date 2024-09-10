@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter
   tag: 블로그
   text: Datadog 익스포터를 사용하여 OpenTelemetry 컬렉터에서 로그를 전달합니다.
-kind: 설명서
 title: Datadog에서 OpenTelemetry 시작하기
 ---
 

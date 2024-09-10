@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: 블로그
   text: Audit Trail을 사용해 중요 Datadog 자산 및 설정 모니터링
-kind: 설명서
 title: Datadog Audit Trail
 ---
 

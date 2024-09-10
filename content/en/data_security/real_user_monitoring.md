@@ -1,6 +1,5 @@
 ---
 title: Real User Monitoring Data Security
-kind: documentation
 aliases:
     - /real_user_monitoring/security/
 further_reading:
@@ -40,7 +39,7 @@ Developers are responsible for:
 RUM can be configured for compliance with many standards and regulatory frameworks, including, but not limited to:
 
 - GDPR
-- HIPAA 
+- HIPAA
 - ISO
 - CCPA/CPRA
 
@@ -65,7 +64,7 @@ Because the client token is only used to send data to Datadog, there is no risk 
 - Automatically [filtering out bots][19] when capturing RUM data
 
 #### Authenticated proxy
-One method of using the client token to filter out bots is an authenticated proxy. In this method, a placeholder string is substituted for the `clientToken` when initializing the Datadog RUM Browser SDK. The proxy knows the real client token, but the end user does not. 
+One method of using the client token to filter out bots is an authenticated proxy. In this method, a placeholder string is substituted for the `clientToken` when initializing the Datadog RUM Browser SDK. The proxy knows the real client token, but the end user does not.
 
 The proxy is configured to check for valid user information before passing the session data to Datadog, thereby confirming that a real user is signed in and transmitting traffic to be monitored. When receiving traffic, the proxy verifies that the data includes the placeholder string and replaces it with the real `clientToken` before forwarding the data to Datadog.
 
@@ -108,6 +107,9 @@ You have some options available for removing Personally Identifiable Information
 - Action names on buttons (for example, "View full credit card number")
 - Names shown in URLs
 - Custom tracked events instrumented by the developers of the app
+
+#### Mask action names
+By default, if you wish to mask all action names, you can use the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation automatically substitutes all non-overridden action names with the placeholder `Masked Element`. This setting is also designed to be compatible with existing [HTML override attributes][21].
 
 #### Unstructured data
 PII inadvertently included in unstructured data, such as an individual's name in a text box, can only be removed through a data deletion requisition for a specified timeframe.
@@ -152,7 +154,8 @@ See [privacy options specific to Session Replay][12].
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
 [16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
-[17]: /real_user_monitoring/browser/#configuration
+[17]: /real_user_monitoring/browser/setup/#configuration
 [18]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [19]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [20]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[21]: /real_user_monitoring/session_replay/privacy_options#override-an-html-element

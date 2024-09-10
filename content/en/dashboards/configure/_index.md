@@ -1,6 +1,5 @@
 ---
 title: Configure
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -81,7 +80,7 @@ Use this option to permanently delete your dashboard. Use the preset **Recently 
 
 ## Permissions
 
-<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
+<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available upon request to anyone on a paid plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 

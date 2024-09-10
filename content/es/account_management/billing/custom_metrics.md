@@ -4,7 +4,6 @@ algolia:
   - facturación de métricas personalizadas
 aliases:
 - /es/integrations/faq/what-standard-integrations-emit-custom-metrics/
-kind: documentación
 title: Facturación de métricas personalizadas
 ---
 

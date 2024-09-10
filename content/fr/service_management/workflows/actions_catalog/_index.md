@@ -9,7 +9,6 @@ cascade:
   type: actioncatalog
 disable_sidebar: false
 disable_toc: true
-kind: documentation
 title: Catalogue des actions
 type: actioncatalog
 ---

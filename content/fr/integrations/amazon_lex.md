@@ -14,7 +14,7 @@ integration_id: amazon-lex
 integration_title: "Amazon\_Lex"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_lex
 public_title: "Intégration Datadog/Amazon\_Lex"

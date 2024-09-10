@@ -12,7 +12,7 @@ integration_id: moxtra
 integration_title: Moxtra
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: moxtra
 public_title: Intégration Datadog/Moxtra

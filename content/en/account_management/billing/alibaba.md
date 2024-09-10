@@ -1,6 +1,5 @@
 ---
 title: Alibaba Integration Billing
-kind: documentation
 ---
 
 ## Overview

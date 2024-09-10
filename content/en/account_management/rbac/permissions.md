@@ -1,6 +1,5 @@
 ---
 title: Datadog Role Permissions
-kind: documentation
 aliases:
   - /account_management/faq/managing-global-role-permissions
 disable_toc: true

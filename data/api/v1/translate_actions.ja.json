@@ -281,6 +281,22 @@
     "description": "特定の Datadog-AWS インテグレーションのすべてのネームスペース規則をリストします。このエンドポイントは引数を受け取りません。",
     "summary": "ネームスペース規則のリスト"
   },
+  "DeleteAWSEventBridgeSource": {
+    "description": "Amazon EventBridge ソースを削除します。",
+    "summary": "AWS インテグレーションの作成",
+    "request_description": "指定された名前、リージョン、および関連する AWS アカウントを持つ Amazon EventBridge ソースを削除します。",
+    "request_schema_description": "EventBridge ソースを削除するために使用されるオブジェクト。"
+  },
+  "ListAWSEventBridgeSources": {
+    "description": "すべての Amazon EventBridge ソースを取得します。",
+    "summary": "AWS インテグレーションの更新"
+  },
+  "CreateAWSEventBridgeSource": {
+    "description": "Amazon EventBridge ソースを作成します。",
+    "summary": "ネームスペース規則のリスト",
+    "request_description": "指定された名前とリージョンを持つ AWS アカウントの Amazon EventBridge ソースを作成します。",
+    "request_schema_description": "EventBridge ソースを作成するために使用されるオブジェクト。"
+  },
   "DeleteAWSTagFilter": {
     "description": "タグのフィルタリングエントリを削除します。",
     "summary": "タグのフィルタリング入力を削除する",
@@ -584,7 +600,7 @@
     "summary": "全モニターの詳細を取得"
   },
   "CreateMonitor": {
-    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニタータイプ\n\n次から選択したモニターのタイプ:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `query alert`\n- ネットワーク: `service check`\n-外れ値: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event alert`\n- event-v2: `event-v2 alert`\n- 監査: `audit alert`\n- エラー追跡: `error-tracking alert`\n- データベースモニタリング: `database-monitoring alert`\n\n**注**: Synthetic モニターは Synthetics API を使って作成します。詳しくは、[Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) ドキュメントを参照してください。\n\n#### クエリタイプ\n\n##### メトリクスアラートクエリ\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、または pct_change\n- `time_window`: `last_#m` (モニタータイプに応じて、1〜10080 の `#`) または `last_#h`(モニタータイプに応じて、1〜168 の `#`) または `last_1d`、または `last_1w`\n- `space_aggr`: avg、sum、min、または max\n- `tags`: 1 つまたは複数のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文における 'key'、グループ内の各タグに対して個別のアラートを定義します (マルチアラート)\n- `operator`: <、<=、>、>=、==、または !=\n- `#`: しきい値の設定に用いる整数または 10 進数\n\n`_change_` または `_pct_change_` の時間アグリゲータを使用している場合は、代わりに以下を使用\n`change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #`:\n\n- `change_aggr` change、pct_change\n- `time_aggr` avg、sum、max、min [詳細](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (モニタータイプに応じて、1〜2880)、last\\_#h (モニタータイプに応じて、1〜48)、または last_#d (1 or 2)\n- `timeshift` #m_ago (5、10、15、または 30)、#h_ago (1、2、または 4)、または 1d_ago\n\nこれを利用して、以下のクエリで異常値モニターを作成します。\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### サービスチェッククエリ\n\n例: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `check` チェックの名前。例: `datadog.agent.up`\n- `tags` 1 つ以上の引用符付きタグ (カンマ区切り)、または \"*\"。 例: `.over(\"env:prod\", \"role:db\")`、`over` を空白にすることはできません。\n- `count` 最大しきい値 (`options` で定義) 以上でなければなりません。最大値は 100 です。\n例えば、1 つの critical、3 つの ok、2 つの warn のステータスに対して通知するように指定した場合、`count` は最低でも 3 でなければなりません。\n- `group` チェックモニターに指定する必要があります。一部のサービスチェックでは、チェックごとのグループ化がすでに明示的に知られています。\n例えば、Postgres インテグレーションモニターは `db`、`host`、`port` でタグ付けされ、ネットワークモニターは `host`、`instance`、`url` でタグ付けされます。詳しくは [サービスチェック](https://docs.datadoghq.com/api/latest/service-checks/)のドキュメントを参照してください。\n\n##### イベントアラートクエリ\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- `event`、イベントのクエリ文字列:\n- `string_query` イベントのタイトルとテキストにマッチするフリーテキストクエリ。\n- `sources` イベントソース (カンマ区切り)。\n- `status` イベントステータス (カンマ区切り)。有効なオプション: error、warn、info\n- `priority`イベントの優先順位 (カンマ区切り)。有効なオプション: low、normal、all\n- `host` イベント報告ホスト (カンマ区切り)。\n- `tags` イベントタグ (カンマ区切り)。\n- `excluded_tags` 除外されたイベントタグ (カンマ区切り)。\n- `rollup` 統計のロールアップの方法。現在では `count` が唯一のサポート方法です。\n- `last` カウントをロールアップする時間枠。例: 45m、4h。サポートされるタイムフレーム: m、h、d。この値は 48 時間を超えてはなりません。\n\n**注** イベントアラートクエリは非推奨になり、イベント V2 アラートクエリに置き換わります。詳細については、[イベント移行ガイド](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/)を参照してください。\n\n##### イベント V2 アラートクエリ\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48).\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に使用する整数または 10 進数。\n\n##### プロセスアラートクエリ\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- `search` プロセスをクエリするためのフリーテキスト検索文字列。\n一致したプロセスは、[Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- `tags` 1 つ以上のタグ (カンマ区切り)\n- `timeframe` カウントをロールアップする時間枠。例: 10m、4h。サポートされているタイムフレーム: S、M、H、D\n- `operator` <、<=、>、>=、==、または !=\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n##### ログアラートクエリ\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `index_name` 複数インデックスの組織の場合、リクエストが実行されるログインデックス。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n##### 複合条件クエリ\n\n例: `12345 && 67890`、ここで `12345` と `67890` は非複合条件モニターの ID\n\n* `name` [*必須*、*デフォルト* = **動的、クエリに基づく**]: アラートの名前。\n* `message` [*必須*、*デフォルト* = **動的、クエリに基づく**]: このモニターに対する通知に含めるメッセージ。\nイベントと同じ「@ユーザー名」表記で、特定のユーザーに対してメール通知を行うことができます。\n* `tags` [*オプション*、*デフォルト* = **空リスト**]: モニターに関連付けるタグの一覧。\nAPI 経由ですべてのモニターの詳細を取得する場合、`monitor_tags` 引数を使用して、これらのタグで結果をフィルタリングします。\nこれは、API 経由でのみ利用可能で、Datadog UI では表示も編集もできません。\n\n##### SLO アラートクエリ\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: 警告を構成する SLO の英数字の SLO ID。\n- `time_window`: 警告したい SLO ターゲットのタイムウィンドウ。有効なオプション: 7d`、`30d`、`90d`。\n- `operator`: `>=` または `>`\n\n##### 監査アラートクエリ\n\n例: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**注** US1-FED でのみ利用可能で、US1、EU、US3、US5 ではクローズドベータ版となります。\n\n##### CI パイプラインのアラートクエリ\n\n例: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**注** CI Pipeline のモニターは、US1、EU、US3、US5 ではアルファ版です。\n\n##### CI テストアラートクエリ\n\n例: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップメソッド - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に使用する整数または 10 進数。\n\n**注** CI テストモニターは、US1、EU、US3、US5 のクローズドベータ版でのみ利用可能です。\n\n##### エラー追跡アラートクエリ\n\n例(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n例(APM トレース): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**データベースモニタリングアラートクエリ**\n\n例: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**注** データベースモニタリングモニターは、US1 でアルファ版です。",
+    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニタータイプ\n\n次から選択したモニターのタイプ:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `query alert`\n- ネットワーク: `service check`\n- 外れ値: `query alert`\n- プロセス: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- 監査: `audit alert`\n- エラー追跡: `error-tracking alert`\n- データベースモニタリング: `database-monitoring alert`\n- ネットワークパフォーマンス: `network-performance alert`\n\n**注**:\n- Synthetic モニターは Synthetics API を使って作成します。詳しくは、[Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/) ドキュメントを参照してください。\n- ログモニターには、スコープされていないアプリキーが必要です。\n\n#### クエリタイプ\n\n##### メトリクスアラートクエリ\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、または pct_change\n- `time_window`: `last_#m` (モニタータイプに応じて、1〜10080 の `#`) または `last_#h`(モニタータイプに応じて、1〜168 の `#`) または `last_1d`、または `last_1w`\n- `space_aggr`: avg、sum、min、または max\n- `tags`: 1 つまたは複数のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文における 'key'、グループ内の各タグに対して個別のアラートを定義します (マルチアラート)\n- `operator`: <、<=、>、>=、==、または !=\n- `#`: しきい値の設定に用いる整数または 10 進数\n\n`_change_` または `_pct_change_` の時間アグリゲータを使用している場合は、代わりに `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` を使用します。\n\n- `change_aggr` change、pct_change\n- `time_aggr` avg、sum、max、min [詳細](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (モニタータイプに応じて、1〜2880)、last\\_#h (モニタータイプに応じて、1〜48)、または last_#d (1 or 2)\n- `timeshift` #m_ago (5、10、15、または 30)、#h_ago (1、2、または 4)、または 1d_ago\n\nこれを利用して、以下のクエリで外れ値モニターを作成します。\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### サービスチェッククエリ\n\n例: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `check` チェックの名前。例: `datadog.agent.up`\n- `tags` 1 つ以上の引用符付きタグ (カンマ区切り)、または \"*\"。 例: `.over(\"env:prod\", \"role:db\")`、`over` を空白にすることはできません。\n- `count` 最大しきい値 (`options` で定義) 以上でなければなりません。最大値は 100 です。\n例えば、1 つの critical、3 つの ok、2 つの warn のステータスに対して通知するように指定した場合、`count` は最低でも 3 でなければなりません。\n- `group` チェックモニターに指定する必要があります。一部のサービスチェックでは、チェックごとのグループ化がすでに明示的に知られています。\n例えば、Postgres インテグレーションモニターは `db`、`host`、`port` でタグ付けされ、ネットワークモニターは `host`、`instance`、`url` でタグ付けされます。詳しくは [サービスチェック](https://docs.datadoghq.com/api/latest/service-checks/)のドキュメントを参照してください。\n\n##### イベントアラートクエリ\n\n**注** イベントアラートクエリは、イベント V2 アラートクエリに置き換わりました。詳細については、[イベント移行ガイド](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/)を参照してください。\n\n##### イベント V2 アラートクエリ\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48).\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に使用する整数または 10 進数。\n\n##### プロセスアラートクエリ\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- `search` プロセスをクエリするためのフリーテキスト検索文字列。\n一致したプロセスは、[Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- `tags` 1 つ以上のタグ (カンマ区切り)\n- `timeframe` カウントをロールアップする時間枠。例: 10m、4h。サポートされているタイムフレーム: S、M、H、D\n- `operator` <、<=、>、>=、==、または !=\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n##### ログアラートクエリ\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `index_name` 複数インデックスの組織の場合、リクエストが実行されるログインデックス。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n##### 複合条件クエリ\n\n例: `12345 && 67890`、ここで `12345` と `67890` は非複合条件モニターの ID\n\n* `name` [*必須*、*デフォルト* = **動的、クエリに基づく**]: アラートの名前。\n* `message` [*必須*、*デフォルト* = **動的、クエリに基づく**]: このモニターに対する通知に含めるメッセージ。\nイベントと同じ「@ユーザー名」表記で、特定のユーザーに対してメール通知を行うことができます。\n* `tags` [*オプション*、*デフォルト* = **空リスト**]: モニターに関連付けるタグの一覧。\nAPI 経由ですべてのモニターの詳細を取得する場合、`monitor_tags` 引数を使用して、これらのタグで結果をフィルタリングします。\nこれは、API 経由でのみ利用可能で、Datadog UI では表示も編集もできません。\n\n##### SLO アラートクエリ\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: 警告を構成する SLO の英数字の SLO ID。\n- `time_window`: 警告したい SLO ターゲットのタイムウィンドウ。有効なオプション: 7d`、`30d`、`90d`。\n- `operator`: `>=` または `>`\n\n##### 監査アラートクエリ\n\n例: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n##### CI パイプラインのアラートクエリ\n\n例: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n##### CI テストアラートクエリ\n\n例: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップメソッド - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に使用する整数または 10 進数。\n\n##### エラー追跡アラートクエリ\n\n例(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n例(APM トレース): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**データベースモニタリングアラートクエリ**\n\n例: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**ネットワークパフォーマンスアラートクエリ**\n\n例: `network-performance(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ -[ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計ロールアップ方法 - `count`、`avg`、`cardinality` をサポートしています。\n- `measure` `avg` およびカーディナリティ `rollup_method` 用 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値を設定するための整数または 10 進数。",
     "summary": "モニターの作成",
     "request_description": "モニターのリクエスト本文を作成します。",
     "request_schema_description": "モニターを記述するオブジェクト。"
@@ -698,7 +714,8 @@
   "UploadIdPForOrg": {
     "description": "SAML IdP に含まれる ID プロバイダー (IdP) のメタデータを\n更新するオプションはいくつかあります。\n\n* **マルチパートフォームデータ**: フォームポストを使用して IdP のメタデータファイルをポストします。\n\n* **XML 本文**: IdP のメタデータファイルをリクエスト本文としてポストします。",
     "summary": "IdP メタデータをアップロード",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "IdP 構成を記述するオブジェクト。"
   },
   "QueryMetrics": {
     "description": "時系列ポイントのクエリ。",
@@ -914,6 +931,12 @@
     "description": "Synthetic テストに関連する詳細なコンフィギュレーションを取得します。",
     "summary": "テストコンフィギュレーションを取得する"
   },
+  "PatchTest": {
+    "description": "部分的なデータを使用して Synthetic テストの構成をパッチします。",
+    "summary": "Synthetic テストにパッチを適用",
+    "request_description": "[JSON Patch](https://jsonpatch.com/) 準拠の操作リスト",
+    "request_schema_description": "テストで実行する [JSON Patch](https://jsonpatch.com) 操作の配列を包むラッパー"
+  },
   "UpdateTest": {
     "description": "このエンドポイントは非推奨です。テストを編集するには、[Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) または [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test) を使用してください。",
     "summary": "テストの編集",
@@ -983,47 +1006,43 @@
     "request_schema_description": "ホストに関連付けられているタグセット。"
   },
   "GetUsageAnalyzedLogs": {
-    "description": "解析済みログ (セキュリティモニタリング) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "解析済みログ (セキュリティモニタリング) の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "分析されたログの 1 時間あたり使用量の取得"
-  },
-  "GetUsageAttribution": {
-    "description": "使用量属性を取得します。\n**注:** このエンドポイントは、2022 年 12 月 1 日に完全に非推奨となります。\n関連する移行ガイドについては、[Usage Attribution API の v1 から v2 への移行](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)を参照してください。",
-    "summary": "使用属性を取得します"
   },
   "GetUsageAuditLogs": {
     "description": "監査ログの時間単位の使用量を取得します。\n**注:** このエンドポイントは非推奨となりました。",
     "summary": "監査ログの 1 時間あたり使用量の取得"
   },
   "GetUsageLambda": {
-    "description": "lambda の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
-    "summary": "Lambda の 1 時間ごとの使用量を取得する"
+    "description": "Lambda の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "summary": "Lambda の 1 時間あたり使用量の取得"
   },
   "GetUsageBillableSummary": {
-    "description": "アカウント全体の請求対象使用量を取得します。",
+    "description": "アカウント全体の請求対象の使用量を取得します。\n\nこのエンドポイントは、[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)のみがアクセスできます。",
     "summary": "アカウント全体の請求対象使用量を取得します"
   },
   "GetUsageCIApp": {
-    "description": "CI visibility (テスト、パイプライン、スパン) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "CI visibility (テスト、パイプライン、スパン) の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "CI Visibility の 1 時間ごとの使用量を取得する"
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "Cloud Security Management (CSM) Pro の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリー別に毎時使用量を取得する API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "Cloud Security Management (CSM) Pro の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[製品ファミリー別に毎時使用量を取得する API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "CSM Pro の 1 時間あたり使用量の取得"
   },
   "GetUsageCWS": {
-    "description": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得する"
   },
   "GetUsageDBM": {
-    "description": "データベースモニタリングの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "データベースモニタリングの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "データベースモニタリングの 1 時間ごとの使用量を取得する"
   },
   "GetUsageFargate": {
-    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Fargate の 1 時間あたり使用量の取得"
   },
   "GetUsageHosts": {
-    "description": "ホストとコンテナの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "ホストとコンテナの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ホストとコンテナの 1 時間あたり使用量の取得"
   },
   "GetHourlyUsageAttribution": {
@@ -1031,27 +1050,27 @@
     "summary": "1 時間ごとの使用量属性を取得する"
   },
   "GetIncidentManagement": {
-    "description": "インシデント管理の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "インシデント管理の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "インシデント管理の 1 時間あたり使用量を取得する"
   },
   "GetUsageIndexedSpans": {
-    "description": "インデックス化スパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "インデックス化スパンの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "インデックス化されたスパンの 1 時間あたり使用量を取得"
   },
   "GetIngestedSpans": {
-    "description": "取り込みスパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "取り込みスパンの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "取り込まれたスパンの 1 時間あたり使用量を取得"
   },
   "GetUsageInternetOfThings": {
-    "description": "IoT の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "IoT の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "IoT の 1 時間あたりの使用量を取得する"
   },
   "GetUsageLogs": {
-    "description": "ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "ログの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByRetention": {
-    "description": "保持期間別のインデックス化されたログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "保持期間別のインデックス化されたログの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "保持によるログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByIndex": {
@@ -1063,55 +1082,55 @@
     "summary": "月次使用量属性を取得する"
   },
   "GetUsageNetworkFlows": {
-    "description": "ネットワークフローの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "ネットワークフローの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ネットワークフローの 1 時間ごとの使用量を取得する"
   },
   "GetUsageNetworkHosts": {
-    "description": "ネットワークホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "ネットワークホストの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ネットワークホストの 1 時間ごとの使用量を取得する"
   },
   "GetUsageOnlineArchive": {
-    "description": "オンラインアーカイブの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "オンラインアーカイブの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "オンラインアーカイブの 1 時間ごとの使用量を取得する"
   },
   "GetUsageProfiling": {
-    "description": "プロファイルされたホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "プロファイルされたホストの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "プロファイルされたホストの 1 時間あたり使用量の取得"
   },
   "GetUsageRumUnits": {
-    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "RUM ユニットの 1 時間ごとの使用量を取得する"
   },
   "GetUsageRumSessions": {
-    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "RUM セッションの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSDS": {
-    "description": "機密データスキャナーの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "機密データスキャナーの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "機密データスキャナーの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSNMP": {
-    "description": "SNMP デバイスの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "SNMP デバイスの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "SNMP デバイスの 1 時間あたり使用量の取得"
   },
   "GetUsageSummary": {
-    "description": "アカウント全体のすべての使用量を取得します。",
+    "description": "アカウント全体のすべての使用量を取得します。\n\nこのエンドポイントは、[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)のみがアクセスできます。",
     "summary": "アカウント全体の使用量を取得する"
   },
   "GetUsageSynthetics": {
-    "description": "[synthetics チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "[synthetics チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Synthetics チェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSyntheticsAPI": {
-    "description": "[synthetics API チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "[synthetics API チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Synthetics API チェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSyntheticsBrowser": {
-    "description": "synthetics ブラウザチェックの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "synthetics ブラウザチェックの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Synthetics ブラウザチェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageTimeseries": {
-    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "カスタムメトリクスの 1 時間あたり使用量の取得"
   },
   "GetUsageTopAvgMetrics": {

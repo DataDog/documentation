@@ -1,4 +1,4 @@
-{{ $integrations := where (where .Site.Pages "Params.kind" "=" "integration") ".Params.beta" "!=" "true" }}
+{{ $integrations := where (where .Site.Pages "Params.custom_kind" "=" "integration") ".Params.beta" "!=" "true" }}
 
 {{ $lower := sort $integrations "Params.integration_title" }}
 

@@ -1,6 +1,5 @@
 ---
 title: Access Your Support Ticket
-kind: documentation
 aliases:
   - /developers/faq/access-your-support-ticket
   - /account_management/faq/access-your-support-ticket

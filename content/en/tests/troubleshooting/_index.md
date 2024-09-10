@@ -1,6 +1,5 @@
 ---
 title: Test Visibility Troubleshooting
-kind: documentation
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
@@ -86,7 +85,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
 ### The total test time is empty
-If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][15]. If test suite level visibility is supported, update your tracer to the latest version.
+If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][14]. If test suite level visibility is supported, update your tracer to the latest version.
 
 If you still don't see the total time after updating the tracer version, contact [Datadog support][2] for help.
 
@@ -170,3 +169,4 @@ The best way to fix this is to make sure that the test parameters are the same b
 [11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /continuous_integration/intelligent_test_runner/
 [13]: /tests/#parameterized-test-configurations
+[14]: /tests/#supported-features

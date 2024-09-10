@@ -12,7 +12,6 @@ further_reading:
 - link: service_management/case_management/
   tag: Documentación
   text: Case Management
-kind: Documentación
 title: Correlación
 ---
 ## Información general

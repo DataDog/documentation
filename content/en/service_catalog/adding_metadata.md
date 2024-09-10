@@ -1,6 +1,5 @@
 ---
 title: Adding Metadata
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -9,7 +8,7 @@ further_reading:
   tag: "Documentation"
   text: "Service Definition API"
 - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Service Definition Schema"
 aliases:
   - /tracing/service_catalog/service_metadata_structure
@@ -37,7 +36,7 @@ For more information about the latest updates, see the schemas on GitHub.
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
 
-### Metadata Schema v3.0 (beta) 
+### Metadata Schema v3.0 (beta)
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][16].
 
 #### New features in v3.0 
@@ -63,7 +62,6 @@ apiVersion: v3
 kind: application
 metadata:
   name: myapp
-  namespace: default
   displayName: My App
   tags:
     - tag:value
@@ -135,7 +133,6 @@ apiVersion: v3
 kind: service
 metadata:
   name: shopping-cart
-  namespace: default
   displayName: Shopping Cart
   inheritFrom: service:otherService
   tags:

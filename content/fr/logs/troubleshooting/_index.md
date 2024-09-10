@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Dépannage des logs
 ---
 
@@ -21,7 +20,7 @@ Les logs dont le timestamp date de plus de 18 heures sont ignorés lors de l'ad
 
 Si vous ne parvenez pas à convertir le timestamp de logs JSON en un [format de date reconnu][4] avant leur ingestion par Datadog, suivez les étapes suivantes pour convertir et mapper les timestamps à l'aide du [processeur arithmétique][5] de Datadog et du [remappeur de dates de log][6] :
 
-1. Accédez à **Logs > Configuration**.
+1. Accédez à la page [Pipelines][1].
 
 2. Depuis la section **Pipelines**, passez le curseur sur **Preprocessing for JSON logs**, puis cliquez sur l'icône en forme de crayon.
 
@@ -45,3 +44,4 @@ Les logs dont la taille dépasse 1 Mo sont tronqués. Pour corriger ce problèm
 [4]: /fr/logs/log_configuration/pipelines/?tab=date#date-attribute
 [5]: /fr/logs/log_configuration/processors/?tab=ui#arithmetic-processor
 [6]: /fr/logs/log_configuration/processors/?tab=ui#log-date-remapper
+[7]: https://app.datadoghq.com/logs/pipelines

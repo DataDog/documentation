@@ -12,7 +12,8 @@ categories:
 - モニター
 - apm
 - ネットワーク
-- profiler_troubleshooting
+- tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_flutter/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: rum-flutter
 integration_title: Flutter
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_flutter
 public_title: Flutter
@@ -40,6 +40,7 @@ tile:
   - Category::Tracing
   - Supported OS::Android
   - Supported OS::iOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Flutter アプリケーションの監視とメトリクス生成
   media: []
@@ -72,7 +73,7 @@ Flutter アプリケーションのエンドツーエンドの健全性を監視
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -86,9 +87,9 @@ Flutter アプリケーションは、自動的に Datadog にトレースを送
 
 Flutter アプリケーションのログを Datadog に転送し始めるには、[Flutter ログ収集][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Flutter インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -100,11 +101,11 @@ Flutter インテグレーションには、メトリクスは含まれていま
 
 Flutter インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

@@ -1,6 +1,5 @@
 ---
 title: Application Instrumentation
-kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
     - /tracing/setup

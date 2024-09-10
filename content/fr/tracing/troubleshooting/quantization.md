@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/library_config/
   tag: Documentation
   text: Configuration de la bibliothèque de tracing
-kind: Documentation
 title: Quantification des données de la solution APM
 ---
 

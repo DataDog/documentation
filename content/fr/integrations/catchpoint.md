@@ -12,7 +12,7 @@ integration_id: catchpoint
 integration_title: Catchpoint
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: catchpoint
 public_title: Intégration Datadog/Catchpoint

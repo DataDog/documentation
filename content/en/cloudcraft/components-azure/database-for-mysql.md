@@ -1,6 +1,5 @@
 ---
 title: "Database for MySQL Component"
-kind: documentation
 ---
 
 ## Overview

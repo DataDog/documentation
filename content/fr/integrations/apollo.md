@@ -21,7 +21,7 @@ integration_id: apollo
 integration_title: Apollo
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: sachin@apollographql.com
 manifest_version: 1.0.0
 metric_prefix: apollo.

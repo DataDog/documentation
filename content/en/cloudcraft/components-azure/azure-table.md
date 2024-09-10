@@ -1,6 +1,5 @@
 ---
 title: "Azure Table Component"
-kind: documentation
 ---
 
 ## Overview

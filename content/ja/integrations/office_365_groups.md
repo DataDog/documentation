@@ -10,7 +10,7 @@ git_integration_title: office_365_groups
 has_logo: true
 integration_title: Office 365 グループ
 is_public: false
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: office_365_groups
 public_title: Datadog-Office 365 Groups インテグレーション

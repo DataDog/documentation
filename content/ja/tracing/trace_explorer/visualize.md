@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: ドキュメント
   text: トレースエクスプローラー
-kind: documentation
 title: スパンの視覚化
 ---
 
@@ -28,7 +27,15 @@ title: スパンの視覚化
 
 列のコンフィギュレーションは、トラブルシューティングコンテキストの他の要素と一緒に保存ビューに保存されます。
 
-トレースが不正または不完全な場合、トレースの `Latency Breakdown` はいくつかのスパンについて欠落している可能性があります。例えば、エラーや稀なサンプラーは、完全なトレースをキャプチャする保証はありませんが、トレースの断片をキャプチャします。この場合、トレースが完全である場合にのみ意味をなす、一貫性のない誤解を招くレイテンシー情報の表示を避けるために、データが省略されます。
+トレースが不正または不完全な場合、トレースの `Latency Breakdown` はいくつかのスパンで欠落している可能性があります。例えば、エラーサンプラーやレアサンプラーは、完全なトレースをキャプチャする保証なく、トレースの断片をキャプチャします。この場合、トレースが完全である場合にのみ意味をなす、一貫性のないまたは誤解を招くレイテンシー情報を表示するのを避けるために、データが省略されます。
+
+When the query is filtered on error spans, select the **Group into Issues** option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
+
+{{< img src="tracing/trace_explorer/visualize/trace_explorer_issue_grouping.png" alt="Error Tracking Issue Grouping" style="width:100%;">}}
+
+From the issue details, click `See all errors` to view individual error spans grouped under this issue.
+
+**Note**:Switch back to the `Errors` grouping to view individual errors, including non fingerprinted errors, i.e. errors without associated issue.
 
 ## Timeseries
 
@@ -90,3 +97,4 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 [2]: /ja/tracing/trace_explorer/query_syntax/#time-range
 [3]: /ja/tracing/trace_explorer/facets/#quantitative-facets-measures
 [4]: /ja/tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
+[5]: /ja/tracing/error_tracking/

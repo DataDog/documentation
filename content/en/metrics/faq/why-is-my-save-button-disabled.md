@@ -1,6 +1,5 @@
 ---
 title: Why is my "Save" button disabled when configuring metrics tags?
-kind: faq
 is_beta: false
 ---
 It is possible for a proposed configuration to result in an indexed custom metrics volume that is larger than the original ingested volume. The "Save" button is intentionally disabled in infrequent scenarios where it is more cost effective to leave a metric entirely unconfigured without using Metrics without Limits™. 

@@ -1,6 +1,5 @@
 ---
 title: Guides pour la solution NDM
-kind: guide
 private: true
 disable_sidebar: true
 aliases:

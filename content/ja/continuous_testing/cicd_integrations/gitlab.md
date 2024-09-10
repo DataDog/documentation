@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/pipelines/gitlab/
   tag: ドキュメント
   text: GitLab パイプラインでトレースを設定する
-kind: documentation
 title: GitLab
 ---
 
@@ -95,7 +94,7 @@ synthetic-tests:
 {{< img src="synthetics/cicd_integrations/gitlab/successful_test_run.png" alt="GitLab パイプラインでの Synthetic テスト実行結果の成功例" style="width:100%;" >}}
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

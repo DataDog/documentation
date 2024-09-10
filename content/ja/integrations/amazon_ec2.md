@@ -7,6 +7,7 @@ categories:
 - os & system
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ec2/
@@ -17,7 +18,6 @@ integration_id: amazon-ec2
 integration_title: Amazon EC2
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 monitors:
   ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json
@@ -36,13 +36,13 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 このインテグレーションを有効にすると、すべての EC2 メトリクスと、スケジュール設定されたメンテナンスなどの追加イベントが Datadog に表示されます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EC2` が有効になっていることを確認します。
 
@@ -132,19 +132,19 @@ Datadog US サイトの場合は、`runCommand` をご使用の `<AWS_REGION>` (
 
 [Datadog Agent][18] または別の[ログシッパー][19]を使用して、Datadog にログを送信します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_ec2" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-**注**: 
+**注**:
    - Datadog - EC2 インテグレーションでは、デフォルトでは `aws.ec2.instance_age` メトリクスは収集されません。このメトリクスの収集を有効にするには、[Datadog サポート][21]までお問い合わせください。
    - Amazon EC2 インテグレーションでメトリクスの収集を無効にしても、`aws.ec2.host_ok` はデフォルトで収集され、インフラストラクチャーのリストに想定外のホストが表示される可能性があります。不要なホストを除外したい場合、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスで、そのタグを指定します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "amazon_ec2" >}}
 
 
@@ -155,7 +155,7 @@ Amazon EC2 インテグレーションは、パフォーマンスを監視し最
 - Amazon EC2 Overview ダッシュボード: すぐに使える [Amazon EC2 Overview ダッシュボード][23]を使用して、EC2 インスタンスの包括的な概要を得ることができます。
 - 推奨モニター: [Amazon EC2 の推奨モニター][24]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][21]までお問合せください。
 

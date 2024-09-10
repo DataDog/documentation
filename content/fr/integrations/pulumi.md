@@ -25,7 +25,7 @@ integration_id: pulumi
 integration_title: Pulumi
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: team@pulumi.com
 manifest_version: 1.0.0
 metric_prefix: pulumi.

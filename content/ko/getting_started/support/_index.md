@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: 설명서
   text: Agent 트러블슈팅
-kind: 도움말
 title: Datadog 지원팀과 시작하기
 ---
 

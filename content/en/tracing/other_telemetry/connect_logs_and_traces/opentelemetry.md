@@ -1,6 +1,5 @@
 ---
 title: Correlating OpenTelemetry Traces and Logs
-kind: documentation
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 code_lang: opentelemetry
 type: multi-code-lang
@@ -12,7 +11,7 @@ further_reading:
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"

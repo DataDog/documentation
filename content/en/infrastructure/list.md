@@ -1,6 +1,5 @@
 ---
 title: Infrastructure List
-kind: documentation
 aliases:
   - /hostnames
   - /graphing/infrastructure/list/
@@ -56,6 +55,9 @@ Cloud Platform
 
 Datadog Agent
 : Agent version that is collecting data on the host.
+
+OpenTelemetry
+: OpenTelemetry Collector version that is collecting data on the host.
 
 ### Hostname
 

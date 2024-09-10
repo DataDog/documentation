@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: AWS Auto Scaling
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_auto_scaling
 public_title: Datadog-AWS Auto Scaling 통합

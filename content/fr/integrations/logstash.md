@@ -21,7 +21,7 @@ guid: 9d110885-cbdf-44e5-83b8-7a6514724e98
 integration_id: logstash
 integration_title: Logstash
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: ervansetiawan@gmail.com
 manifest_version: 1.0.0
 metric_prefix: logstash.

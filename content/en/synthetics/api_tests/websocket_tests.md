@@ -1,6 +1,5 @@
 ---
-title: WebSocket Tests
-kind: documentation
+title: WebSocket Testing
 description: Simulate WebSocket requests to monitor public and internal API endpoints
 aliases:
 further_reading:
@@ -158,7 +157,7 @@ You can restrict access to a WebSocket test based on the roles in your organizat
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: /synthetics/settings/#global-variables
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

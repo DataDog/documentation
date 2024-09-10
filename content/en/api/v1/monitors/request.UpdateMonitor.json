@@ -1,5 +1,6 @@
 {
   "name": "My monitor-updated",
+  "priority": null,
   "options": {
     "evaluation_delay": null,
     "new_group_delay": 600,

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/agent/faq/dogstream
-kind: guide
 private: true
 title: Dogstream
 ---
@@ -62,7 +61,7 @@ Si votre parser de logs personnalisé ne fonctionne pas, vérifiez tout d'abord 
 * Si tout fonctionne comme prévu, vous devriez voir `dogstream: parsing {nom du fichier} with {nom de la fonction} (requested {texte option de configuration})`.
 
 <div class="alert alert-warning">
-Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent surveille uniquement la fin de chaque fichier de log et ne remarque donc pas les modifications effectuées ailleurs dans le fichier.
+Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent effectue uniquement un <a href="/glossary/#tail">suivi</a> de la fin de chaque fichier de log et ne remarque donc pas les modifications effectuées ailleurs dans le fichier.
 </div>
 
 ### Rédaction de fonctions de parsing
@@ -152,7 +151,7 @@ Imaginons que vous souhaitez recueillir des événements à partir de logs auxqu
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-Vous pouvez définir un parser de logs comme indiqué ci-dessous, afin de créer un événement à partir des données loguées dans votre [flux d'événements][4] Datadog :
+Vous pouvez configurer un parser de logs, comme indiqué ci-dessous, pour créer un événement à partir de ces données de log dans votre vue [Event Explorer][4] Datadog :
 
 ```python
 
@@ -246,9 +245,9 @@ Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de lo
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
 [4]: /fr/events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /fr/agent/guide/agent-log-files/
+[6]: /fr/agent/configuration/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /fr/agent/guide/agent-commands/
+[8]: /fr/agent/configuration/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /fr/help/
 [11]: /fr/agent/troubleshooting/send_a_flare/

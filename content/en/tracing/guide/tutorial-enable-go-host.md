@@ -1,24 +1,24 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
-  tags: Documentation
+  tag: "Documentation"
   text: Ingestion mechanisms
 - link: https://github.com/DataDog/dd-trace-Go
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -44,7 +44,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"{{< /code-block >}}
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"{{< /code-block >}}
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 

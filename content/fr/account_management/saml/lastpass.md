@@ -1,6 +1,5 @@
 ---
 title: Configurer LastPass en tant que fournisseur d'identité SAML
-kind: documentation
 aliases:
   - /fr/account_management/saml/nopassword
   - /fr/account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/

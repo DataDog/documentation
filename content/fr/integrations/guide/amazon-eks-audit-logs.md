@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Collecte de logs d'audit Amazon EKS
 ---
 

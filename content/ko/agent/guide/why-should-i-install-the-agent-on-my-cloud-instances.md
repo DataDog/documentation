@@ -7,7 +7,6 @@ further_reading:
 - link: /integrations/guide/cloud-metric-delay/
   tag: 길라잡이
   text: 클라우드 메트릭 지연
-kind: 가이드
 title: 클라우드 인스턴스에 Datadog Agent를 설치해야 하는 이유
 ---
 

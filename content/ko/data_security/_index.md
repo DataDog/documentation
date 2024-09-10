@@ -12,23 +12,22 @@ further_reading:
 - link: /data_security/synthetics/
   tag: 설명서
   text: 신서틱(Synthetic) 모니터링 데이터 보안
-- link: /continuous_testing/settings
+- link: /tracing/configure_data_security/
   tag: 설명서
   text: 데이터 트레이싱 보안
 - link: /data_security/real_user_monitoring/
   tag: 설명서
   text: RUM 데이터 보안
-- link: /real_user_monitoring/session_replay/privacy_options
+- link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: 설명서
   text: 세션 리플레이 프라이버시 옵션
 - link: /sensitive_data_scanner/
   tag: 설명서
   text: Sensitive Data Scanner
-kind: 설명서
 title: 데이터 관련 리스크 줄이기
 ---
 
-<div class="alert alert-info">이 페이지는 Datadog으로 전송된 데이터를 보호하기 위한 도구 및 보안에 관한 것입니다. 클라우드 및 애플리케이션 보안 제품과 기능을 찾고 있다면 <a href="/security/" target="_blank">Security</a> 섹션을 참조하세요.
+<div class="alert alert-info">이 페이지는 Datadog으로 전송된 데이터를 보호하기 위한 도구 및 보안에 대해 다룹니다. 클라우드 및 애플리케이션 보안 제품과 기능을 찾고 있다면 <a href="/security/" target="_blank">Security</a> 섹션을 참조하세요.</div>
 
 일반적으로 Datadog를 의도한 목적에 맞추어 사용하는 과정에서 사용자 여러분은 Datadog로 데이터를 전송하게 됩니다. Datadog는 전송 데이터를 적절한 수준으로 제한하는 도구를 지원하며, 사용자와 협력해 전송 중이거나 전송 완료된 데이터를 보호합니다. 또한, 이를 통해 데이터와 관련된 리스크를 줄입니다.
 
@@ -163,7 +162,7 @@ Continuous Integration 파이프라인과 테스트
 [19]: /ko/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ko/data_security/synthetics/
 [21]: /ko/real_user_monitoring/browser/advanced_configuration/
-[22]: /ko/real_user_monitoring/session_replay/privacy_options
+[22]: /ko/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /ko/database_monitoring/data_collected/#sensitive-information
 [24]: /ko/getting_started/tagging/
 [25]: /ko/tracing/glossary/

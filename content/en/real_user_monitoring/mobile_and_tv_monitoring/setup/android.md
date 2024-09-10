@@ -1,6 +1,5 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -11,7 +10,7 @@ further_reading:
   tag: Documentation
   text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
@@ -353,19 +352,32 @@ See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHostsWithHeaderType = mapOf(
+    "example.com" to setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT),
+    "example.eu" to  setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT))
 val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
+    .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
+final Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+final Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
-    .addInterceptor(new DatadogInterceptor())
+    .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build();
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+
 
 This records each request processed by the `OkHttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10].
 
@@ -421,6 +433,14 @@ Usage of the local resources can be tracked by using `getRawResAsRumResource` ex
 ```kotlin
 val inputStream = context.getRawResAsRumResource(id)
 ```
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Further Reading
 

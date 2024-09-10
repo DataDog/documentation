@@ -41,7 +41,6 @@ integration_id: ably
 integration_title: Ably
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: ably
 public_title: Ably
@@ -83,7 +82,7 @@ Ably の Datadog インテグレーションを使用すると、次のことが
 - Ably メッセージ、チャンネル、接続の使用状況を相関させ、Datadog ダッシュボードで共同分析を行う
 - Datadog で Ably の利用統計を表示・追跡する
 
-## 計画と使用
+## セットアップ
 
 - **Datadog で**: **Integrations** に移動し、Ably タイルを選択し、**Install Integration** をクリックします。
 
@@ -107,19 +106,19 @@ Ably の Datadog インテグレーションを使用すると、次のことが
 
 Ably App の統計情報が Datadog に表示されるようになりました。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 Ably 統計の詳細については、[アプリケーション統計ドキュメント][2]をお読みください。
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ably" >}}
 
 
-### ヘルプ
+### イベント
 
 Ably インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Ably インテグレーションには、サービスのチェック機能は含まれません。
 

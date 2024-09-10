@@ -4,50 +4,62 @@ aliases:
 further_reading:
 - link: /security/cloud_security_management
   tag: ドキュメント
-  text: 検索構文
+  text: Cloud Security Management
 - link: /service_management/workflows/
   tag: ドキュメント
   text: Workflow Automation
-kind: ドキュメント
+products:
+- icon: cloud-security-management
+  name: CSM Threats
+  url: /security/threats/
+- icon: cloud-security-management
+  name: CSM Misconfigurations
+  url: /security/cloud_security_management/misconfigurations/
+- icon: cloud-security-management
+  name: CSM Identity Risks
+  url: /security/cloud_security_management/identity_risks/
 title: Workflow Automation によるセキュリティワークフローの自動化
 ---
 
+{{< product-availability >}}
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management Misconfigurations はサポートされていません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
 {{< /site-region >}}
 
-[Datadog ワークフローオートメーション][1]では、インフラストラクチャーやツールに接続するアクションで構成されるワークフローを構築することで、エンドツーエンドのプロセスをオーケストレーションし、自動化することができます。
+[Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
-[Cloud Security Management (CSM)][2] で Workflow Automation を使って、セキュリティ関連のワークフローを自動化します。例えば、[対話型の Slack メッセージ経由で公開 Amazon S3 バケットへのアクセスをブロックする](#block-access-to-aws-s3-bucket-via-slack)ことや、[自動的に Jira 課題を作成してチームに割り当てる](#automatically-create-and-assign-a-jira-issue) ことを可能にするワークフローを作成できます。
+Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## トリガーとソースの仕組みを理解する
 
-Workflow Automation では、モニター、セキュリティシグナル、またはカスタムスケジュールから手動または自動的にワークフローをトリガーすることができます。本記事のワークフロー例では、サイドパネルの **Actions** > **Run Workflow** ボタンをクリックすることで、ワークフローが手動でトリガーされています。
+Workflow Automation allows you to trigger a workflow manually or automatically. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the side panels.
 
-ワークフローをトリガーするとき、トリガーイベントのソース ID をワークフローの次のステップに渡さなければなりません。この記事の例では、トリガーイベントは新しいセキュリティの所見です。どちらの場合も、ソース ID はワークフローの最初のステップで[ソースオブジェクト変数][7]を使用して指定されます。
+When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][7].
 
 ## ワークフローの構築
 
 ワークフローを構築するには、すぐに使えるブループリントからあらかじめ構成されたフローを使用することも、カスタムワークフローを作成することもできます。ワークフローの作成方法の詳細については、[Workflow Automation のドキュメント][3]を参照してください。
-### Slack 経由で Amazon S3 バケットへのアクセスをブロックする
 
-この例では、公開 Amazon S3 バケットが検出されたときに、対話型の Slack メッセージを送信する修復ワークフローを作成します。**Approve** または **Reject** をクリックすることで、S3 バケットへのアクセスを自動的にブロックしたり、措置を取らないことを選択することができます。
+### Block access to Amazon S3 bucket via Slack
+
+This example creates a remediation workflow that sends an interactive Slack message when a public Amazon S3 bucket is detected. By clicking **Approve** or **Reject**, you can automatically block access to the S3 bucket or decline to take action.
 
 **注**: このワークフローを構築するには、[Slack インテグレーション][5]を構成する必要があります。
 
 1. [Workflow Automation ページ][4]で、**New Workflow** をクリックします。
-2. ワークフローの名前を入力します。
-3. トリガーに **Manual** を選択し、**Create** をクリックします。
-4. ワークフロービルダーを使ってワークフローにステップを追加するには **Add a step to get started** をクリックします。または、JSON エディターを使用してワークフローを構築するには **Edit JSON Spec** をクリックします。
+1. Click **Add Trigger** > **Security**. A workflow must have the security trigger before you can run it.
+1. Enter a name for the workflow and click **Save**.
 
 #### セキュリティ誤構成の取得
 
 セキュリティ誤構成を取得してワークフローに渡すには、**Get security finding** アクションを使用します。このアクションは `{{ Source.securityFinding.id }}` ソースオブジェクト変数を使用して、[**Get a finding**][8] API エンドポイントから誤構成の詳細を取得します。
 
-1. **Add a step to get started** をクリックして、ワークフローに最初のステップを追加します。
-2. **Get security finding** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックして構成します。
-4. **Finding ID** には、`{{ Source.securityFinding.id }}` を入力します。
+1. Click **Add Step** to add the first step to your workflow.
+1. **Get security finding** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
+1. ワークフローキャンバスのステップをクリックして構成します。
+1. **Finding ID** には、`{{ Source.securityFinding.id }}` を入力します。
+1. **Save** をクリックしてワークフローを保存します。
 
 #### JS 関数の追加
 
@@ -79,12 +91,12 @@ Workflow Automation では、モニター、セキュリティシグナル、ま
 3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
     - **Workspace**: Slack ワークスペースの名前。
     - **Channel**: Slack メッセージの送信先チャンネル。
-    - **Prompt text**: Slack メッセージの選択ボタンのすぐ上の表示テキスト。例: "リージョン `{{ Steps.GetRegion.data }}` で `{{ Steps.Get_security_finding.resource }}` のパブリックアクセスをブロックしますか？"
+    - **Prompt text**: The text that appears immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region `{{ Steps.GetRegion.data }}`?"
 
 ##### ワークフローの承認
 
 1. ワークフローキャンバスの **Approve** の下にあるプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. Amazon S3 の **Block Public Access** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
+2. Search for the **Block Public Access** action for Amazon S3 and select it to add it as a step on your workflow canvas.
 3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
     - **Connection**: AWS インテグレーションのワークフロー接続名。
     - **Region**: `{{ Steps.GetRegion.data }}`
@@ -114,62 +126,38 @@ Workflow Automation では、モニター、セキュリティシグナル、ま
 
 ### Jira 課題の自動作成と割り当て
 
-この例では、セキュリティの所見が検出されたときに、Jira 課題を作成し、適切なチームに割り当てる自動的なチケットルーティングワークフローを作成します。
+This example creates an automated ticket routing workflow that creates and assigns a Jira issue to the appropriate team when a security finding is detected.
 
 **注**: このワークフローを構築するには、[Jira インテグレーション][6]を構成する必要があります。
 
 1. [Workflow Automation ページ][4]で、**New Workflow** をクリックします。
-2. ワークフローの名前を入力します。
-3. トリガーに **Manual** を選択し、**Create** をクリックします。
-4. ワークフロービルダーを使ってワークフローにステップを追加するには **Add a step to get started** をクリックします。または、JSON エディターを使用してワークフローを構築するには **Edit JSON Spec** をクリックします。
+1. Click **Add Trigger** > **Security**. A workflow must have the security trigger before you can run it.
+1. Enter a name for the workflow and click **Save**.
 
-#### セキュリティ問題を取得する
+#### セキュリティ所見を取得する
 
-所見を取得してワークフローに渡すには、**Get security finding** アクションを使用します。このアクションは `{{ Source.securityFinding.id }}` ソースオブジェクト変数を使用して、[**Get a finding**][8] API エンドポイントから所見の詳細を取得します。
+To retrieve the finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][8] API endpoint.
 
-1. **Add a step to get started** をクリックして、ワークフローに最初のステップを追加します。
-2. **Get security finding** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックして構成します。
-4. **Security ID** には、`{{ Source.securityFinding.id }}` を入力します。
-
-#### JS 関数の追加
-
-次に、JavaScript データ変換関数アクションをキャンバスに追加し、所見のタグからチーム名を返すように構成します。
-
-1. ワークフローキャンバスのプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. **JS Function** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、スクリプトエディターに以下を貼り付けます。
-   {{< code-block lang="javascript" >}}
-    // 所見タグからチーム情報を取得します
-    // トリガーやステップのデータにアクセスするには `$` を使用します。
-    // Lodash にアクセスするには `_` を使用します。
-    // https://lodash.com/ を参照してください。
-
-    let tags = $.Steps.Get_security_finding.tags
-
-    let team = tags.filter(t => t.includes('team:'))
-    if(region.length == 1){
-        return team[0].split(':')[1]
-    } else {
-        return '';
-    }
-    {{< /code-block >}}
+1. Click **Add Step** to add the first step to your workflow.
+1. **Get security finding** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
+1. ワークフローキャンバスのステップをクリックして構成します。
+1. For **Security ID**, enter `{{ Source.securityFinding.id }}`.
 
 #### Jira アクションの追加
 
 1. ワークフローキャンバスのプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. **Create issue Jira** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
+2. Search for the **Create issue** Jira action and select it to add it as a step on your workflow canvas.
 3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
     - **Jira account**: Jira アカウントの URL。
-    - **Project**: `{{ Steps.GetTeamInfo.data }}`
-    - **Summary**: `{{ Steps.Get_security_finding.rule.name }}`
+    - **Project**: `{{ Source.securityFinding.tags_value.team }}`
+    - **Summary**: `{{ Source.securityFinding.rule.name }}`
 4. **Save** をクリックします。
 
 ## ワークフローをトリガーする
 
-所見、誤構成、リソースの各サイドパネルから既存のワークフローをトリガーできます。
+You can trigger an existing workflow from the finding, misconfiguration, and resource side panels.
 
-サイドパネルで、**Actions** > **Run Workflow** をクリックし、実行するワークフローを選択します。ワークフローによっては、インシデントの詳細や重大度、影響を受ける S3 バケット名、アラートの送信先 Slack チャンネルなど、追加の入力パラメーターを入力する必要がある場合があります。
+In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. The workflow must have a security trigger to appear in the list. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
 
 {{< img src="/security/csm/run_workflow_side_panel.png" alt="実行するアクションの一覧が表示されている誤構成サイドパネルの Actions メニュー" width="100%">}}
 

@@ -17,7 +17,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva sobre la creación de monitores eficaces
-kind: documentación
 title: Empezando con Monitors
 ---
 

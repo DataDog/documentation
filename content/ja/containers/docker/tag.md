@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
-kind: documentation
 title: Docker タグの抽出
 ---
 
@@ -96,7 +95,7 @@ container_labels_as_tags:
 ```
 
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -154,7 +153,7 @@ container_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 

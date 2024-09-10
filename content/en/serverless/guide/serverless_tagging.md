@@ -1,6 +1,6 @@
 ---
 title: Serverless Tagging
-kind: guide
+
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/#aws-lambda-functions"
   tag: "Documentation"

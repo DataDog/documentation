@@ -36,7 +36,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: \u0008기초 구축
   text: 대시보드를 통해 보다 나은 시각화를 위한 대화형 세션 참여
-kind: 설명서
 title: 대시보드
 ---
 

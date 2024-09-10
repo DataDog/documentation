@@ -9,12 +9,11 @@ code_lang: flutter
 code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-flutter Source code
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-kind: documentation
 title: Flutter Crash Reporting and Error Tracking
 ---
 ## Overview
@@ -25,7 +24,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][2] or see the [Flutter setup documentation][3].
+If you have not set up the Datadog Flutter SDK for yet, follow the [in-app setup instructions][2] or see the [Flutter setup documentation][3].
 
 ### Add Dart error tracking
 
@@ -73,6 +72,10 @@ If your application suffers a fatal crash, the Datadog Flutter SDK uploads a cra
 
 ## Get deobfuscated stack traces
 
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+For Flutter applications, the matching of stack traces and source maps relies on their `service`, `version`, `variant`, and `architecture` fields.
+
 ### Upload symbol files to Datadog
 
 Native iOS crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires that you upload .dSYM files, which are generated in your application's build process.
@@ -115,7 +118,7 @@ Source maps and dSYM files are limited to **500** MB each.
 
 ## Test your implementation
 
-To verify your Flutter Crash Reporting and Error Tracking configuration, issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your Flutter Crash Reporting and Error Tracking configuration, issue an error in your application and confirm that the error appears in Datadog.
 
 1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
 2. Execute code containing an error or crash. For example:

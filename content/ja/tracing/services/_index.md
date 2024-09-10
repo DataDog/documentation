@@ -4,7 +4,6 @@ further_reading:
 - link: getting_started/tagging/unified_service_tagging/
   tag: ドキュメント
   text: 統合サービスタグ付けと予約済みタグについて学ぶ
-kind: documentation
 title: サービス観測可能性
 ---
 
@@ -13,7 +12,7 @@ title: サービス観測可能性
 
 スパンとトレースデータをサービスのレンズを通して見ることで、トラブルシューティングを容易にし、注意を優先させ、問題を警告し、ビジネス目標を達成するのに役立ちます。
 
-{{< img src="tracing/visualization/service_obs_catalog.png" alt="サービスカタログ" >}}
+{{< img src="tracing/visualization/service_obs_catalog.png" alt="Service Catalog" >}}
 
 {{< whatsnext desc="以下の視覚化およびツールを使用して、分散型サービスの監視、レポート、および問題解決を行います" >}}
     {{< nextlink href="service_catalog/" >}}サービスカタログ{{< /nextlink >}}

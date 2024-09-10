@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Agentless Scanning
-kind: documentation
 aliases:
  - /security/agentless_scanning
 further_reading:
@@ -18,8 +17,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 ## Overview
 
@@ -54,7 +51,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 2. For Lambda functions, the scanners fetch the function's code.
 3. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
-4. After the scan is complete, only the list of packages is transmitted to Datadog, while all other data remains within your infrastructure. Snapshots created during the scan cycle are deleted.
+4. After the scan is complete, the list of packages and information related to collected hosts (hostnames/EC2 instances) are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
 5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
@@ -63,7 +60,7 @@ The following diagram illustrates how Agentless Scanning works:
 - The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
-The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private information is ever transmitted outside of your infrastructure.
+The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
 
 Datadog does **not** send:
 - System and package configurations
@@ -96,6 +93,16 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 {{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
 
+## Data Security
+
+<div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
+
+If you have [Sensitive Data Scanner][8] and [Cloud Security Management][9] enabled, you can use Data Security to locate sensitive data and fix security issues impacting AWS S3 buckets and RDS instances.
+
+Data Security scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Data Security leverages rules provided by Sensitive Data Scanner to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Datastores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+
+Along with displaying sensitive data matches, Data Security surfaces any security issues detected by Cloud Security Management affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+
 ## Cloud service provider cost
 
 When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking. 
@@ -113,3 +120,6 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [5]: https://app.datadoghq.com/security/csm/vm
 [6]: /security/cloud_security_management/setup/agentless_scanning#terraform
 [7]: mailto:success@datadoghq.com
+[8]: /sensitive_data_scanner
+[9]: /security/cloud_security_management
+[10]: /agent/remote_config

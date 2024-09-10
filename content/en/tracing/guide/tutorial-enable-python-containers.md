@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-py
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 

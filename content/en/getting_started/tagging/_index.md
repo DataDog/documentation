@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Tags
-kind: documentation
 description: 'Learn how to assign and use tags in Datadog.'
 aliases:
     - /getting_started/getting_started_with_tags
@@ -38,6 +37,7 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | `service` | Scoping of application specific data across metrics, traces, and logs. |
 | `env`     | Scoping of application specific data across metrics, traces, and logs. |
 | `version` | Scoping of application specific data across metrics, traces, and logs. |
+| `team`    | Assign ownership to any resources                                     |
 
 Datadog recommends looking at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 

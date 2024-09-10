@@ -3,7 +3,6 @@ aliases:
 - /ko/serverless/datadog_lambda_library/extension
 dependencies:
 - https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
-kind: 설명서
 title: Datadog 람다 확장
 ---
 [![슬랙](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)

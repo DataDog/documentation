@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/tracing/troubleshooting/apm_rate_limits
-kind: Documentation
 title: Limites de débit de l'Agent
 ---
 

@@ -266,9 +266,12 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
             const handleResizeDebounced = debounce(handleResize, 500, false);
 
-            window.addEventListener('resize', handleResizeDebounced);
-
             handleResizeDebounced();
+            
+            // Bugfix for disappearing android keyboard on search input focus/autoresizing
+            if (!navigator.userAgent.toLowerCase().match(/android/i)) {
+                window.addEventListener('resize', handleResizeDebounced);
+            } 
         }
     }
 }

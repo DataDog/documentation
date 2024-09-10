@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: Documentación
   text: Reglas generales de procesamiento
-kind: documentación
 title: Transporte de logs del Agent
 ---
 
@@ -35,7 +34,7 @@ Para comprobar qué transporte utiliza el Agent, ejecuta el [comando de estado d
 **Notas**:
 
 * En las versiones anteriores del Agent, se utiliza el transporte TCP de forma predeterminada. Datadog recomienda encarecidamente aplicar el protocolo de transporte HTTPS si se ejecutan las versiones 6.14/7.14 y posteriores, y el HTTPS comprimido si se ejecutan las versiones 6.16/7.16 y posteriores.
-* Cuando utilices un proxy, aplica siempre un canal de transporte específico (ya sea TCP o HTTPS) para reenviar los logs a Datadog. 
+* Cuando utilices un proxy, aplica siempre un canal de transporte específico (ya sea TCP o HTTPS) para reenviar los logs a Datadog.
 
 ## Aplica un transporte específico
 
@@ -115,12 +114,12 @@ Para aplicar el transporte TCP, actualiza el [archivo de configuración principa
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 Para enviar logs con variables de entorno, configura lo siguiente:
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 De forma predeterminada, el Datadog Agent envía sus logs a Datadog mediante el protocolo TCP con cifrado TLS. Esto requiere comunicación de salida (en el puerto `10516` para el sitio de Datadog de EE. UU. y en el puerto `443` para el sitio de Datadog de la UE).
 

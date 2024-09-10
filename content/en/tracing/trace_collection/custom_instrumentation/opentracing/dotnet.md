@@ -1,6 +1,5 @@
 ---
 title: .NET OpenTracing Instrumentation
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/dotnet
 - /tracing/trace_collection/open_standards/dotnet
@@ -10,7 +9,7 @@ type: multi-code-lang
 code_lang_weight: 70
 description: 'OpenTracing instrumentation for .NET'
 further_reading:
-    - link: 'tracing/trace_collection/trace_context_propagation/dotnet/'
+    - link: 'tracing/trace_collection/trace_context_propagation/'
       text: 'Propagating trace context'
 ---
 
@@ -19,6 +18,11 @@ further_reading:
 For more details and information, view the [OpenTracing API][1].
 
 ## Setup
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Starting with v3.0.0, OpenTracing support requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
+</div>
+
 For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing SDK:
 
 ```csharp

@@ -14,7 +14,7 @@ integration_id: amazon-mediatailor
 integration_title: "Amazon\_Elemental\_MediaTailor"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mediatailor
 public_title: "Intégration Datadog/Amazon\_Elemental_MediaTailor"

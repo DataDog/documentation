@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: GitHub
   text: Surveiller les métriques runtime .NET avec Datadog
-kind: documentation
 title: Métriques runtime .NET
 type: multi-code-lang
 ---

@@ -12,7 +12,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking
   tag: 블로그
   text: RUM의 배포 추적을 통해 잘못된 프론트엔드 배포 문제 해결
-kind: guide
+
 title: RUM 배포 추적 시작하기
 ---
 

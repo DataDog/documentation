@@ -3,7 +3,6 @@ aliases:
 - /es/monitors/incident_management/notification_rules
 - /es/monitors/incident_management/incident_settings
 description: Configurar y personalizar tu experiencia de gestión de incidencias
-kind: documentation
 title: Portapapeles de Datadog
 ---
 

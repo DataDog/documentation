@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: 설명서
   text: 트레이스 보존
-kind: 설명서
 title: 메트릭 활용
 ---
 

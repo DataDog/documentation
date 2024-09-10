@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: 학습 센터
   text: 더 나은 대시보드 빌드
-kind: 설명서
 title: 쿼리
 ---
 

@@ -17,7 +17,7 @@ integration_id: amazon-opsworks
 integration_title: Amazon OpsWorks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_ops_works
 public_title: Intégration Datadog/Amazon OpsWorks

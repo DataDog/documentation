@@ -3,7 +3,6 @@ aliases:
 - /fr/serverless/serverless_integrations
 - /fr/serverless/datadog_lambda_library/
 - /fr/serverless/libraries_integrations/library/
-kind: documentation
 title: Bibliothèques et intégrations sans serveur
 ---
 
@@ -18,7 +17,7 @@ title: Bibliothèques et intégrations sans serveur
 
 ## Extension Lambda Datadog et Forwarder
 
-{{< whatsnext desc="Vous aurez besoin de l'extension Lambda ou du Forwarder pour envoyer des données de télémétrie depuis vos fonctions Lambda. Vous aurez également peut-être besoin de faire en sorte que le Forwarder recueille les logs des ressources sans serveur non Lambda, telles qu'AWS API Gateway." >}}
+{{< whatsnext desc="Vous aurez besoin de l'extension Lambda ou du Forwarder pour envoyer des données de télémétrie depuis vos fonctions Lambda. Vous aurez également peut-être besoin de faire en sorte que le Forwarder recueille les logs des ressources sans serveur non Lambda, telles qu'Amazon API Gateway." >}}
     {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Extension Lambda Datadog{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Fonction Lambda du Forwarder Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -38,7 +37,7 @@ title: Bibliothèques et intégrations sans serveur
     {{< nextlink href="/integrations/amazon_lambda/" >}}Intégration AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_step_functions/" >}}Intégration AWS Step Functions{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_appsync/" >}}Intégration AWS AppSync{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_api_gateway/" >}}Intégration AWS API Gateway{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_sqs/" >}}Intégration AWS SQS{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_sns/" >}}Intégration AWS SNS{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_api_gateway/" >}}Intégration Amazon API Gateway{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sqs/" >}}Intégration Amazon SQS{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sns/" >}}Intégration Amazon SNS{{< /nextlink >}}
 {{< /whatsnext >}}

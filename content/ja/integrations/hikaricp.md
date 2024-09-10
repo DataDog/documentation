@@ -22,6 +22,7 @@ author:
   sales_email: damien.bertau@blablacar.com
   support_email: damien.bertau@blablacar.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hikaricp/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: hikaricp
 integration_title: HikariCP
 integration_version: 1.2.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: hikaricp
 public_title: HikariCP
@@ -46,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: HikariCP と openmetrics v2 とのインテグレーション
   media: []
@@ -61,9 +62,9 @@ tile:
 [HikariCP][1] は、軽量かつ高速な JDBC コネクションプーリングフレームワークです。
 このチェックでは、Datadog Agent を通じて HikariCP を監視しています。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 HikariCP チェックをホストにインストールするには
 
@@ -79,7 +80,7 @@ HikariCP チェックをホストにインストールするには
  `datadog-agent integration install -w
  path/to/hikaricp/dist/<ARTIFACT_NAME>.whl`.
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. HikariCP のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hikaricp/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hikaricp/conf.yaml][4] を参照してください。
 
@@ -89,17 +90,17 @@ HikariCP チェックをホストにインストールするには
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `hikaricp` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hikaricp" >}}
 
 
-### ヘルプ
+### イベント
 
 HikariCP には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

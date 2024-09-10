@@ -1,6 +1,5 @@
 ---
 title: Pipelines and Processors
-kind: Documentation
 
 ---
 

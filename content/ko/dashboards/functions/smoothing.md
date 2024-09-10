@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/smoothing/
-kind: 설명서
 title: 평활화
 ---
 

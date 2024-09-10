@@ -15,7 +15,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드
-kind: 설명서
 title: 브라우저 오류 수집
 ---
 ## 개요

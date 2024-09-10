@@ -13,7 +13,6 @@ further_reading:
 - link: profiler/profiler_troubleshooting/php
   tag: Documentation
   text: Résoudre les problèmes rencontrés en utilisant le profileur
-kind: Documentation
 title: Activer le profileur PHP
 type: multi-code-lang
 ---

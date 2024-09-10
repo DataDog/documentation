@@ -1,6 +1,5 @@
 ---
 title: Installing the Agent on a server with limited internet connectivity
-kind: guide
 aliases:
   - /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 further_reading:

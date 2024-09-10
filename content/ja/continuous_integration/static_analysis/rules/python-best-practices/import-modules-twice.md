@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: モジュールが 2 度インポートされた
 ---
 ## メタデータ

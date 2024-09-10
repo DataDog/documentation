@@ -9,7 +9,6 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentación
   text: Configurar equipos y organizaciones con varias cuentas
-kind: documentación
 title: LastPass SAML IdP
 ---
 

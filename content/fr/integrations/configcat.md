@@ -18,7 +18,7 @@ integration_id: configcat
 integration_title: ConfigCat
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: developer@configcat.com
 manifest_version: 1.0.0
 name: configcat

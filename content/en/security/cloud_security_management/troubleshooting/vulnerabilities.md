@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Cloud Security Management Vulnerabilities
-kind: documentation
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
@@ -46,15 +45,6 @@ ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 
 ```
 
 The workaround for this issue is to set the configuration option `discard_unpacked_layers=false` in the containerd configuration file.
-
-## View related metrics
-
-1. Go to **[Metrics > Summary][4]** in Datadog.
-2. Search for the following metrics to aid in troubleshooting:
-    -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
-    -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
-    -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
-    -  `datadog.agent.export_size`: The size of the archive written on disk. 
 
 ## Further Reading
 

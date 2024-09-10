@@ -6,7 +6,6 @@ further_reading:
 - link: /network_monitoring/devices
   tag: Documentation
   text: Network Device Monitoring
-kind: guide
 npm_provider: azure
 title: Services Azure pris en charge par NPM
 ---

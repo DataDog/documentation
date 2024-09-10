@@ -24,6 +24,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: keisuke.umegaki.630@gmail.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/grpc_check/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: grpc-check
 integration_title: gRPC Health
 integration_version: 1.0.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: grpc_check
 public_title: gRPC Health
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: gRPC Health Checking Protocol に基づく gRPC サーバーの監視
   media: []
@@ -63,13 +64,13 @@ tile:
 
 このチェックは、Datadog Agent を通じて [gRPC Health Checking Protocol][1] を実装しているエンドポイントを監視するものです。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
-#### メトリクスベース SLO
+#### ホスト
 
 grpc_check チェックをホストにインストールするには
 
@@ -87,7 +88,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
   && /opt/datadog-agent/embedded/bin/pip3 install grpcio grpcio-health-checking
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. grpc_check のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `grpc_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル grpc_check.d/conf.yaml][3] を参照してください。
 
@@ -97,21 +98,21 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `grpc_check` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "grpc_check" >}}
 
 
-### ヘルプ
+### イベント
 
 grpc_check インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "grpc_check" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

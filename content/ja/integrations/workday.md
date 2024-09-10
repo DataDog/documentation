@@ -12,12 +12,13 @@ assets:
     source_type_name: Workday
 author:
   homepage: https://www.datadoghq.com
-  name: Ruby
+  name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,7 +27,6 @@ integration_id: workday
 integration_title: Workday ユーザーアクティビティログ
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: workday
 public_title: Workday ユーザーアクティビティログ
@@ -44,6 +44,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で Workday のログを確認し、コンプライアンスおよび Cloud SIEM 分析のために利用します。
   media: []
@@ -69,9 +70,9 @@ Datadog の Workday インテグレーションでは、[Workday の User Activi
 - 行われたリクエストの総量
 - デバイスの種類や IP アドレスなど、イベントに関連するその他のメタデータ
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 **ステップ 1: テナントレベルでユーザーアクティビティロギングを有効にする**
 
@@ -120,23 +121,23 @@ Datadog の Workday インテグレーションでは、[Workday の User Activi
    - 保存した値を Datadog Configuration タブに入力します。
    - URL のドメイン部分を入力します: **https://DOMAIN/**
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Workday には、メトリクスは含まれません。
 
-### ワークフローの自動化
+### Logs
 
-### ヘルプ
+### イベント
 
 Workday インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "workday" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

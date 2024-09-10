@@ -1,6 +1,6 @@
 ---
 title: Running JMX commands in Windows
-kind: guide
+
 aliases:
   - /integrations/faq/how-to-run-jmx-commands-in-windows
 ---

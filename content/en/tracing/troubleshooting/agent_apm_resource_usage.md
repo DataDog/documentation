@@ -1,6 +1,5 @@
 ---
 title: Agent Resource Usage by APM
-kind: Documentation
 ---
 
 

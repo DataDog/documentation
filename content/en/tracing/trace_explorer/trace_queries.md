@@ -1,6 +1,5 @@
 ---
 title: Trace Queries
-kind: documentation
 description: "Trace Queries"
 is_beta: true
 aliases:
@@ -52,6 +51,7 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 | `\|\|` | **Or**: One or the other span are in the trace | Traces that contain spans from the service `web-store` or from the service `mobile-store`: <br/>`service:web-store \|\| service:mobile-store` |
 | `->` | **Indirect relationship**: Traces that contain a span matching the left query that is upstream of spans matching the right query | Traces where the service `checkoutservice` is upstream of the service `quoteservice`: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
+| `NOT` | **Exclusion**: Traces that **do not** contain spans matching the query | Traces that contain spans from the service `web-store`, but not from the service `payments-go`:  <br/>`service:web-store && NOT(service:payments-go)` |
 
 ### Trace-level filters
 
@@ -102,15 +102,27 @@ For example, if you query for traces that contain a span from the service `web-s
 
 ## How Trace Queries source data
 
+Datadog uses the [Intelligent Retention Filter][3] to index data for Trace Queries. It does so by performing: 
+
+- [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
+- [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
+
+These two sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
+
 {{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
 
-Trace Queries are based on a **uniform 1% sample** of [ingested spans][3]. To learn more, read [one percent flat sampling][6].
+**Note**: Spans indexed by flat sampling and diversity sampling do not count towards the usage of indexed spans, and therefore, **do not impact your bill**.
 
-The flat 1% sampling is applied based on the `trace_id`, meaning that all spans that belong to the same trace share the same sampling decision. Spans indexed by the 1% sampling can also be queried and found in the [Trace explorer][4].
+### 1% flat sampling
+`retained_by:flat_sampled`
 
-Spans indexed by [tag-based retention filters][5] cannot be used in Trace Queries because retention filters do not guarantee that all the spans from a trace are indexed.
+Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][4].
 
-**Note**: Spans indexed by the flat 1% sampling are not counted towards your usage of indexed spans, and so **do not impact your bill**.
+### Diversity sampling
+`retained_by:diversity_sampling`
+
+Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][5].
+
 
 ## Further Reading
 
@@ -118,7 +130,6 @@ Spans indexed by [tag-based retention filters][5] cannot be used in Trace Querie
 
 [1]: /tracing/trace_explorer/query_syntax/
 [2]: /tracing/trace_explorer/visualize/#timeseries
-[3]: /tracing/trace_pipeline/ingestion_controls/
-[4]: /tracing/trace_explorer/
-[5]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
-[6]: /tracing/trace_retention/#one-percent-flat-sampling
+[3]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
+[4]: /tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling
+[5]: /tracing/trace_pipeline/trace_retention/#diversity-sampling

@@ -33,7 +33,7 @@ integration_id: circleci
 integration_title: CircleCI
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: circleci
 public_title: CircleCI

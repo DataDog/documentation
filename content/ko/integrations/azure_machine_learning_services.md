@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Microsoft Azure Machine Learning
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_machine_learning_services
 public_title: Datadog-Microsoft Azure Machine Learning 통합

@@ -3,7 +3,6 @@ aliases:
 - /ko/integrations/faq/gathering-kubernetes-events
 - /ko/agent/kubernetes/event_collection
 - /ko/agent/kubernetes/event_collection
-kind: documentation
 title: Kubernetes에서 Datadog Agent 추가 설정
 ---
 

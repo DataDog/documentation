@@ -14,7 +14,6 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_tags_and_metrics/
   tag: 설명서
   text: 커스텀 태그 및 메트릭을 추가하여 Pipeline Visibility 확장
-kind: 설명서
 title: CircleCI 워크플로우에서 트레이스 설정
 ---
 

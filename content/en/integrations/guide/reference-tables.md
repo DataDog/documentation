@@ -1,6 +1,6 @@
 ---
 title: Add Custom Metadata with Reference Tables
-kind: guide
+
 beta: true
 aliases:
   - /logs/guide/enrichment-tables/

@@ -25,7 +25,7 @@ guid: 873153b6-5184-438a-8a32-1e2d2e490dde
 integration_id: ibm-mq
 integration_title: "IBM\_MQ"
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: ibm_mq.

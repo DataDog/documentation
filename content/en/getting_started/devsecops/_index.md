@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the DevSecOps Bundles
-kind: documentation
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
@@ -40,7 +39,6 @@ Learn more about the features included with APM DevSecOps:
 [5]: /agent/
 [6]: /tracing/trace_collection/
 [7]: /universal_service_monitoring/setup/
-[8]: /security/application_security/enabling/
 [9]: /tracing/metrics/
 [10]: /getting_started/application_security/vulnerability_management/
 
@@ -121,7 +119,6 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [9]: /universal_service_monitoring/setup/
 [10]: /data_streams/#setup
 [11]: /profiler/enabling
-[12]: /security/application_security/enabling/
 [13]: /tracing/metrics/
 [14]: /getting_started/application_security/vulnerability_management/
 
@@ -137,7 +134,7 @@ The Infrastructure DevSecOps bundles combine infrastructure monitoring with the 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [700+ out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [750+ out-of-the-box integrations][4].
 
 ### Setup
 
@@ -177,7 +174,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [700+ out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [750+ out-of-the-box integrations][5].
 
 ### Setup
 

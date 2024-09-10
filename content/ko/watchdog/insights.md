@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-insights-apm/
   tag: 블로그
   text: Watchdog Insights for APM으로 오류 및 레이턴시 패턴을 자동으로 감지
-kind: 설명서
 title: Watchdog Insights
 ---
 

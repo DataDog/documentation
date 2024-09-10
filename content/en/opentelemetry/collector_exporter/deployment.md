@@ -1,12 +1,11 @@
 ---
 title: Deployment
-kind: documentation
 further_reading:
 - link: "/opentelemetry/collector_exporter/configuration/"
   tag: "Documentation"
   text: "Configuring the OpenTelemetry Collector"
 - link: "https://opentelemetry.io/docs/collector/deployment/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "OpenTelemetry Collector Deployment"
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: Blog
   text: Explora tus datos sin esfuerzo con el portapapeles de Datadog
-kind: documentation
 title: Clipboard de Datadog
 ---
 

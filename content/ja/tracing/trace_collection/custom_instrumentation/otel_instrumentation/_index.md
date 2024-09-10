@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: ブログ
   text: Datadog および OpenTelemetry のイニシアティブのイニシアティブについて
-kind: ドキュメント
 title: OpenTelemetry API を使ったカスタムインスツルメンテーション
 type: multi-code-lang
 ---

@@ -1,6 +1,5 @@
 ---
 title: Free Text Widget
-kind: documentation
 widget_type: free_text
 description: "Display text in a dashboard widget."
 aliases:

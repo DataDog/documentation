@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/configuration/proxy/#environment-variables
   tag: Documentación
   text: Variables de entorno del proxy
-kind: guía
 title: Variables de entorno del Agent
 ---
 

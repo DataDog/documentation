@@ -1,6 +1,5 @@
 ---
 title: Best Practices for Live Process Monitoring
-kind: Guide
 ---
 
 ## Overview

@@ -35,7 +35,7 @@ integration_id: ibm-db2
 integration_title: IBM Db2
 integration_version: 1.11.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_db2
 public_title: IBM Db2

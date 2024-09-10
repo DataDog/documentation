@@ -1,6 +1,5 @@
 ---
 disable_toc: true
-kind: guide
 private: true
 title: 컨테이너 가이드
 ---

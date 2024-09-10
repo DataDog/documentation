@@ -3,7 +3,6 @@ aliases:
 - /ko/account_management/billing/profiler/
 - /ko/account_management/billing/apm_distributed_tracing/
 - /ko/account_management/billing/apm_tracing_profiling/
-kind: 설명서
 title: 애플리케이션 성능 모니터링(APM) 빌링
 ---
 

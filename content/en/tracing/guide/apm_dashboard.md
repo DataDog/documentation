@@ -1,6 +1,6 @@
 ---
 title: Create a Dashboard to track and correlate APM metrics
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"

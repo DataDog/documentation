@@ -1,6 +1,5 @@
 ---
 title: CERTIFICATE_VERIFY_FAILED error
-kind: faq
 ---
 
 ### What happened?

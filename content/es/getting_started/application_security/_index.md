@@ -1,6 +1,5 @@
 ---
 title: Empezando con la gestión de la seguridad de las aplicaciones
-kind: documentación
 aliases:
 - /security/security_monitoring/getting_started/
 further_reading:

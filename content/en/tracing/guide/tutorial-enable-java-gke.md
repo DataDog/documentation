@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on Google Kubernetes Engine
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 

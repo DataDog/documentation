@@ -1,6 +1,5 @@
 ---
 title: Custom Instrumentation with Datadog Libraries
-kind: documentation
 type: multi-code-lang
 description: 'Customize your instrumentation and observability within your Datadog traces.'
 aliases:

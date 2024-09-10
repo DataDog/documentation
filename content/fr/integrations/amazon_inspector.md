@@ -14,7 +14,6 @@ integration_id: amazon-inspector
 integration_title: "Amazon\_Inspector"
 integration_version: ''
 is_public: true
-kind: Lighthouse
 manifest_version: '1.0'
 name: amazon_inspector
 public_title: "Intégration Datadog/Amazon\_Inspector"

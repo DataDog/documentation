@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: exception이 기본 exception 하위에 있는지 확인하기
 ---
 ## 메타데이터

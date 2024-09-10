@@ -1,6 +1,5 @@
 ---
 title: Monitoring Sparse Metrics
-kind: guide
 further_reading:
 - link: "/api/latest/monitors/#edit-a-monitor"
   tag: "Documentation"

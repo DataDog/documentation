@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - オンラインアーカイブ
 description: ログの長期保存に対応したコスト効率の高いライブクエリ機能
 further_reading:
 - link: /logs/log_configuration/indexes/#indexes-filters
@@ -10,8 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/online-archives-datadog/
   tag: ブログ
   text: Online Archives による履歴ログ解析・調査
-is_beta: true
-kind: documentation
 private: true
 title: Online Archives
 ---
@@ -75,7 +76,7 @@ Online Archives は、Log インデックスごとに設定されています。
 2. このインデックスの Online Archives を有効にします。
 3. インデックス `status:Debug` に、除外率を 90% に設定した除外フィルターを追加します。この除外フィルターは、インデックスにのみ適用されます。
 
-{{< img src="logs/log_configuration/online_archives/retain.png" alt="インデックスからモノを除外する方法" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from the index" style="width:100%;">}}
 
 ### セキュリティチームは、すべてのログを Online Archives に保存したくて、インデックスには保存したくない
 

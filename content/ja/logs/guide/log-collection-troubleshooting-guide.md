@@ -14,7 +14,6 @@ further_reading:
 - link: /logs/guide/logs-show-info-status-for-warnings-or-errors/
   tag: ガイド
   text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
-kind: ガイド
 title: ログ収集のトラブルシューティングガイド
 ---
 
@@ -255,12 +254,12 @@ sudo grep -i error /var/log/datadog/agent.log
 
 [Datadog Live Tail][11] にログが表示されるか確認します。
 
-Live Tail に表示される場合は、インデックス構成ページで、ログと一致する [除外フィルター][12]がないか確認してください。
-Live Tail に表示されない場合、タイムスタンプが 18 時間以上過去のものであれば、ドロップされた可能性があります。`datadog.estimated_usage.logs.drop_count` メトリクスで、どの `service` と `source` が影響を受けているかを確認できます。
+Live Tail に表示される場合は、インデックス構成ページで、ログと一致する可能性のある[除外フィルター][12]がないか確認してください。
+Live Tail に表示されない場合、タイムスタンプが 18 時間以上過去のものであれば、削除された可能性があります。`datadog.estimated_usage.logs.drop_count` メトリクスで、どの `service` と `source` が影響を受ける可能性があるかを確認できます。
 
-## ログの切り捨て
+## 切り捨てられたログ
 
-1MB を超えるログは切り捨てられます。どの `service` と `source` が影響を受けているかは `datadog.estimated_usage.logs.truncated_count` と `datadog.estimated_usage.logs.truncated_bytes` メトリクスで確認できます。
+1MB 以上のログは切り捨てられます。どの `service` と `source` が影響を受けているかは `datadog.estimated_usage.logs.truncated_count` と `datadog.estimated_usage.logs.truncated_bytes` メトリクスで確認できます。
 
 
 ## その他の参考資料

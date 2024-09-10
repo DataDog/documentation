@@ -5,7 +5,6 @@ further_reading:
 - link: /agent/configuration/network/
   tag: Guía
   text: Tráfico de red
-kind: guía
 title: Envío doble
 ---
 

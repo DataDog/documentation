@@ -1,6 +1,5 @@
 ---
-description: Datadog パートナー向けドキュメント
-kind: documentation
+description: セールス・サービスパートナー向けの Datadog の始め方
 private: true
 title: パートナー
 ---
@@ -14,7 +13,7 @@ Datadog は、クライアントのハイブリッドクラウドインフラス
 - [基礎固め][1]: どのように始めるか、最初の段階でどのような重要な決定を下すかについての情報が記載されています。
 - [データの取り込み][2]: Datadog にデータを取り込む方法と、環境で満たす必要のある前提条件について説明します。
 - [価値の提供][3]: Datadog にデータを流した後の推奨ステップを説明します。
-- [請求と使用量報告][4]: 複数組織のアカウント設定における、Datadog プラットフォームの個々のクライアントおよび集計使用量の監視について説明します。
+- [Billing and Usage Reporting][4]: Covers monitoring individual client and aggregate usage of the Datadog platform in single and multi-organization account setups.
 
 ## パートナーセールスイネーブルメントガイド
 
@@ -61,9 +60,13 @@ Datadog の最新情報を入手するためのその他の重要なリソース
     {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE" >}}ヒントとコツのプレイリスト{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Dash Conferences のプレイリスト" >}}
-    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaPkMoleskq9YcWMWvYfBCRB" >}}Dash 2019{{< /nextlink >}}
+{{< whatsnext desc="Dash Conferences playlists" >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaPhn1p7Sz6nc_6-9YInd__u" >}}Dash 2023{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaOlLse2WlvFXYRJ8iirG2QO" >}}Dash 2022{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaO-_rgnDSBn221gWacNCkDr" >}}Dash 2021{{< /nextlink >}}
     {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaMlgvtlJRyXGgt4i-9Oiyi1" >}}Dash 2020{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaPkMoleskq9YcWMWvYfBCRB" >}}Dash 2019{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 [1]: /ja/partners/laying-the-groundwork/

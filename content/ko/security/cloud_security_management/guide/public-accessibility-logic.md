@@ -6,7 +6,6 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-security-management
   tag: 설명서
   text: 기본 탐지 규칙
-kind: 가이드
 title: Datadog에서 리소스가 공용인지 확인하는 방법
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Java Profiler
-kind: Documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -94,7 +93,8 @@ jdk.ObjectAllocationOutsideTLAB#enabled=false
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ## Memory leak detection slowing down garbage collector
-
+{{< tabs >}}
+{{% tab "JFR" %}}
 To turn off memory leak detection, disable the following event in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
 
 ```
@@ -102,6 +102,17 @@ jdk.OldObjectSample#enabled=false
 ```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+{{% /tab %}}
+{{% tab "Datadog Profiler" %}}
+If you are using the alpha feature of live heap profiling, you can tune the overhead by changing the percentage
+of the tracked allocation samples.
+```shell
+# track only 10% of the allocation samples
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.ddprof.liveheap.enabled=true -Ddd.profiling.ddprof.liveheap.sample_percent=10 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Exceptions overwhelming the profiler
 

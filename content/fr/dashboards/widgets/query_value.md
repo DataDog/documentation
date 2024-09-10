@@ -1,6 +1,5 @@
 ---
 title: Widget Valeur de requête
-kind: documentation
 description: Afficher une valeur agrégée pour une requête de métrique donnée
 aliases:
   - /fr/graphing/widgets/query_value/

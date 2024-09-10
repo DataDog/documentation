@@ -8,7 +8,6 @@ cascade:
     rank: 20
     subcategory: Guías para crear gráficos
 disable_toc: true
-kind: guía
 private: true
 title: Guías para crear gráficos
 ---

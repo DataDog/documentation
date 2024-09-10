@@ -1,6 +1,5 @@
 ---
 title: PCI DSS Compliance
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
@@ -31,23 +30,11 @@ Datadog offers PCI-compliant Log Management and Application Performance Monitori
 
 {{% tab "Log Management" %}}
 
-<div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
-</div>
-
-To set up a PCI-compliant Datadog organization, follow these steps:
-
 {{% pci-logs %}}
 
 {{% /tab %}}
 
 {{% tab "APM" %}}
-
-<div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
-</div>
-
-To set up a PCI-compliant Datadog organization, follow these steps:
 
 {{% pci-apm %}}
 

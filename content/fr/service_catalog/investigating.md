@@ -30,7 +30,6 @@ further_reading:
   tag: Blog
   text: Pourquoi les actions GitHub sont indispensables pour le catalogue des services
     Datadog
-kind: documentation
 title: Enquêter sur un service
 ---
 

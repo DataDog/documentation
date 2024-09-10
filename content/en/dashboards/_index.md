@@ -1,6 +1,5 @@
 ---
 title: Dashboards
-kind: documentation
 aliases:
     - /guides/templating/
     - /graphing/dashboards/
@@ -27,7 +26,7 @@ further_reading:
     tag: "Blog"
     text: "The new Datadog dashboards experience"
   - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
-    tag: "Developer docs"
+    tag: "Best Practices"
     text: "Create great integration dashboards"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
@@ -108,9 +107,11 @@ View your dashboards in a mobile-friendly format with the Datadog Mobile App, av
 
 ## Further Reading
 
+{{< learning-center-callout header="Try Creating Graph Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explore timeseries, query value, top list, table, distribution, and pie chart widgets. Learn how to configure the widgets and develop an understanding of when each widget type should be utilized. {{< /learning-center-callout >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/mobile/
+[1]: /mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists

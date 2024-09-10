@@ -14,7 +14,7 @@ integration_id: amazon-rekognition
 integration_title: "Amazon\_Rekognition"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_rekognition
 public_title: "Intégration Datadog/Amazon\_Rekognition"

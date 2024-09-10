@@ -1,6 +1,5 @@
 ---
 title: Install the Datadog Agent on Kubernetes
-kind: documentation
 aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
@@ -10,16 +9,16 @@ further_reading:
       tag: 'Documentation'
       text: 'Further Configure the Datadog Agent on Kubernetes'
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Datadog Helm chart - All configuration options'
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Upgrading Datadog Helm'
 ---
 
 ## Overview
 
-This page provides instructions on installing the Datadog Agent in a Kubernetes environment. 
+This page provides instructions on installing the Datadog Agent in a Kubernetes environment.
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
 
@@ -264,7 +263,7 @@ For more information, see [Changing your container registry][17].
 {{% tab "Datadog Operator" %}}
 ```shell
 kubectl delete datadogagent datadog
-helm delete my-datadog-operator
+helm delete datadog-operator
 ```
 
 This command deletes all Kubernetes resources created by installing Datadog Operator and deploying the Datadog Agent.

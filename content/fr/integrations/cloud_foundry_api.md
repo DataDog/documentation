@@ -22,7 +22,7 @@ guid: 82e5b924-c8c3-4467-bfde-5838857b6447
 integration_id: api-cloud-foundry
 integration_title: "API Cloud\_Foundry"
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: api_cloud_foundry.

@@ -5,7 +5,6 @@ further_reading:
 - link: /agent/
   tag: Documentation
   text: En savoir plus sur l'Agent Datadog
-kind: guide
 title: Désinstaller l'Agent
 ---
 

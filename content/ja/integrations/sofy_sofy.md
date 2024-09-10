@@ -5,13 +5,16 @@ assets:
   dashboards:
     Sofy Overview: assets/dashboards/sofy_sofy_overview.json
   integration:
+    auto_install: true
     metrics:
       check: sofy.step.cpu_utilization
       metadata_path: metadata.csv
       prefix: sofy.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10353
     source_type_name: Sofy
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://sofy.ai
   name: Sofy
@@ -21,6 +24,7 @@ author:
 categories:
 - テスト
 - モバイル
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/README.md
 display_on_public_website: true
@@ -30,7 +34,6 @@ integration_id: sofy
 integration_title: Sofy
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: sofy_sofy
 pricing: []
@@ -66,10 +69,17 @@ tile:
     image_url: images/datadog_testperform.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/sofy-mobile-tests/
+  - resource_type: documentation
+    url: https://docs.sofy.ai
   support: README.md#Support
   title: Sofy
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -110,8 +120,8 @@ Sofy インテグレーションを設定するには
 
 ## その他の参考資料
 お役に立つドキュメント、リンクや記事:
-* [ブログ記事][7]
-* [ドキュメント][8]
+* [Monitor your mobile tests with Sofy's offering in the Datadog Marketplace][7]
+* [Sofy Documentation][8]
 
 
 [1]: https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/metadata.csv
@@ -120,5 +130,5 @@ Sofy インテグレーションを設定するには
 [4]: https://portal.sofy.ai
 [5]: https://app.datadoghq.com/organization-settings/api-keys?filter=Sofy
 [6]: https://support.sofy.ai/support/tickets/new
-[7]: https://sofy.ai/blog/
+[7]: https://www.datadoghq.com/blog/sofy-mobile-tests/
 [8]: https://docs.sofy.ai

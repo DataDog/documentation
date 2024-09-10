@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/monitors/faq/anomaly-monitor.md
-kind: 가이드
 title: 이상 징후 모니터
 ---
 

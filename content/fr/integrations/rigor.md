@@ -18,7 +18,7 @@ integration_id: rigor
 integration_title: Rigor
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@rigor.com
 manifest_version: 1.0.0
 metric_prefix: rigor.

@@ -1,6 +1,5 @@
 ---
 title: "Auto Scaling Group Component"
-kind: documentation
 ---
 ## Overview
 

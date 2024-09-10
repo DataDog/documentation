@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 辞書の重複キーを避ける
 ---
 ## メタデータ

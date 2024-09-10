@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for Python
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 30
@@ -20,7 +19,7 @@ further_reading:
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `pytest>=6.8.0` up to `<=7.0.0`
+* `pytest>=7.2.0`
   * From `ddtrace>=2.1.0`.
   * From `Python>=3.7`.
   * Requires `coverage>=5.5`.

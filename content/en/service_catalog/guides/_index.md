@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting and Best Practices Guides
-kind: guide
+
 private: true
 aliases:
   - /tracing/service_catalog/guides/

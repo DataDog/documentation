@@ -3,7 +3,7 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
   text: Contrôle de l'indexation de trace pour la rétention
-kind: guide
+
 title: Comprendre la stratégie de rétention de Datadog pour conserver efficacement
   les données de trace
 ---

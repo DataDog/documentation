@@ -13,7 +13,7 @@ integration_id: lightbendrp
 integration_title: Lightbend
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: lightbendrp
 public_title: Intégration Datadog/Lightbend

@@ -23,7 +23,7 @@ integration_id: node
 integration_title: NodeJS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: node
 public_title: Intégration Datadog/NodeJS

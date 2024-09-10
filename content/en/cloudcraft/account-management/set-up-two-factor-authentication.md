@@ -1,6 +1,5 @@
 ---
 title: Set up Two-Factor Authentication
-kind: documentation
 ---
 
 Two-factor authentication (2FA) provides an extra layer of security for your account. When you enable 2FA, your Cloudcraft account can only be accessed on devices you trust. 

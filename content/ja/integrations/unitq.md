@@ -24,6 +24,7 @@ author:
   support_email: hello@unitq.com
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unitq/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: unitq
 integration_title: unitQ
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: unitq
 public_title: unitQ
@@ -67,9 +67,9 @@ unitQ は、ユーザーの声を集約し、検索可能なプラットフォ�
 
 unitQ Datadog インテグレーションにより、unitQ から Datadog にメトリクスを転送することができるようになります。unitQ のメトリクスを Datadog に転送することで、Datadog のグラフ化やアラート機能を活用し、ユーザーからのフィードバックを追跡することができ、顧客満足度を高めることができます。
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. unitQ で、**Integrations** に移動します。
 2. Datadog タイルを選択します
@@ -79,21 +79,21 @@ unitQ Datadog インテグレーションにより、unitQ から Datadog にメ
      - Datadog EU リージョンを使用する場合は、`https://api.datadoghq.eu` と入力します。
    - **API Key**: [Datadog API キー][1]を入力します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "unitq" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 unitQ には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 unitQ には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

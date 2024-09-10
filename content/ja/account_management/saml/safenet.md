@@ -1,11 +1,11 @@
 ---
-title: SafeNet SAML IdP
-kind: documentation
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Datadog アカウントのための SAML の構成
+title: SafeNet SAML IdP
 ---
+
 ## セットアップ
 
 [メインの SAML コンフィギュレーション手順ガイド][1]に従い、[SafeNet Trusted Access for Datadog][2] のドキュメントを参照して、SafeNet をSAML IdP として設定します。

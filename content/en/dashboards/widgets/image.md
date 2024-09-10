@@ -1,6 +1,5 @@
 ---
 title: Image Widget
-kind: documentation
 widget_type: image
 description: "Include an image or a gif in your Datadog dashboards."
 aliases:

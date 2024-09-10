@@ -15,7 +15,6 @@ further_reading:
 - link: logs/explorer/saved_views
   tag: Documentation
   text: Configurer automatiquement votre vue Log Explorer
-kind: documentation
 title: Facettes de log
 ---
 
@@ -31,39 +30,9 @@ Les facettes sont des tags et des attributs définis par les utilisateurs à par
 
 Grâce aux facettes, vous pouvez également manipuler vos logs dans vos [log monitors][4], dans les widgets de logs des [dashboards][5] ainsi que dans les [notebooks][6].
 
-{{< site-region region="gov,us3,us5" >}}
-
-**Remarque** : le [traitement des logs][1], la [recherche pour le live tailing][2], la transmission d'[archives][3], la réintégration ou la [création de métriques][4] à partir de logs ne nécessitent pas l'utilisation de facettes. De même, vous n'avez pas besoin de définir une facette pour transmettre des logs par l'intermédiaire des [pipelines][5] et des [index][6] via des filtres, ou pour exclure des logs d'un index ou les échantillonner avec [des filtres d'exclusion][7].
+**Remarque** : le [traitement des logs][7], la [recherche pour le live tailing][8], les [recherches dans le Log Explorer][30], la [création de métriques][10] à partir de logs, la transmission d'[archives][11] ou la [réintégration][12] ne nécessitent pas l'utilisation de facettes. De même, vous n'avez pas besoin de définir une facette pour transmettre des logs par l'intermédiaire des [pipelines][13] et des [index][14] via des filtres, ou pour exclure des logs d'un index ou les échantillonner avec [des filtres d'exclusion][15].
 
 Pour ces cas d'utilisation, les fonctionnalités de remplissage automatique reposent sur des facettes existantes. Cependant, vous pouvez également saisir des valeurs correspondant aux logs entrants.
-
-[1]: /fr/logs/log_configuration/processors
-[2]: /fr/logs/live_tail/
-[3]: /fr/logs/archives/
-[4]: /fr/logs/logs_to_metrics/
-[5]: /fr/logs/log_configuration/pipelines
-[6]: /fr/logs/indexes/#indexes-filters
-[7]: /fr/logs/indexes/#exclusion-filters
-
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-
-**Remarque** : le [traitement des logs][1], la [recherche pour le live tailing][2], les [recherches dans le Log Explorer][8], la [création de métriques][4] à partir de logs, la transmission d'[archives][3] ou la [réintégration][9] ne nécessitent pas l'utilisation de facettes. De même, vous n'avez pas besoin de définir une facette pour transmettre des logs par l'intermédiaire des [pipelines][5] et des [index][6] via des filtres, ou pour exclure des logs d'un index ou les échantillonner avec [des filtres d'exclusion][7].
-
-Pour ces cas d'utilisation, les fonctionnalités de remplissage automatique reposent sur des facettes existantes. Cependant, vous pouvez également saisir des valeurs correspondant aux logs entrants.
-
-[1]: /fr/logs/log_configuration/processors
-[2]: /fr/logs/live_tail/
-[3]: /fr/logs/archives/
-[4]: /fr/logs/logs_to_metrics/
-[5]: /fr/logs/log_configuration/pipelines
-[6]: /fr/logs/indexes/#indexes-filters
-[7]: /fr/logs/indexes/#exclusion-filters
-[8]: /fr/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[9]: /fr/logs/archives/rehydrating/
-
-{{< /site-region >}}
 
 ### Facettes qualitatives
 
@@ -71,24 +40,11 @@ Pour ces cas d'utilisation, les fonctionnalités de remplissage automatique repo
 
 Les dimensions vous permettent d'accomplir les tâches suivantes :
 
-- **Obtenir des informations relatives** pour certaines valeurs. Vous pouvez par exemple créer une facette sur `http.network.client.geoip.country.iso_code` pour visualiser les principaux pays concernés par chaque erreur 5XX dans vos logs d'accès Web [NGINX][16], en bénéficiant d'informations supplémentaires fournies par le [processeur GeoIP][17] Datadog.<br/><br/>
-
+- **Obtenir des informations relatives** pour certaines valeurs. Vous pouvez par exemple créer une facette sur `http.network.client.geoip.country.iso_code` pour visualiser les principaux pays concernés par chaque erreur 5XX dans vos logs d'accès Web [NGINX][16], en bénéficiant d'informations supplémentaires fournies par le [processeur GeoIP][17] Datadog.
 - **Compter des valeurs uniques**. Vous pouvez par exemple créer une facette sur `user.email` à partir de vos logs [Kong][18] afin de déterminer le nombre d'utilisateurs se connectant chaque jour à votre site Web.
-
-{{< site-region region="gov,us3,us5" >}}
-- **Filtrer** vos logs selon certaines valeurs. Vous pouvez par exemple créer une facette sur le [tag][1] `environment` pour réduire vos recherches aux environnements de production, de développement et intermédiaires.
-
-[1]: /fr/getting_started/tagging/assigning_tags/
-
-{{< /site-region >}}
-{{< site-region region="us,eu" >}}
-- **Filtrer** régulièrement vos logs selon des valeurs données. Vous pouvez par exemple créer une facette sur le [tag][1] `environment` pour réduire vos recherches aux environnements de production, de développement et intermédiaires.
+- **Filtrer** régulièrement vos logs selon des valeurs données. Vous pouvez par exemple créer une facette sur le [tag][19] `environment` pour réduire vos recherches aux environnements de production, de développement et intermédiaires.
 
 **Remarque** : bien que vous n'ayez pas besoin de créer des facettes pour appliquer un filtre basé sur des valeurs d'attributs, vous pouvez réduire votre durée de résolution en définissant des facettes sur les attributs que vous utilisez régulièrement.
-
-[1]: /fr/getting_started/tagging/assigning_tags/
-
-{{< /site-region >}}
 
 #### Types
 
@@ -113,7 +69,7 @@ Les mesures ont une unité de **temps** ou de **taille** afin de gérer les ordr
 
 | type        | unité(s)                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| OCTETS       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
+| BYTES       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
 | DURÉE        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
 
 L'unité est une propriété de la mesure, et non du champ. Imaginons par exemple une mesure `duration` exprimée en nanosecondes. Vous disposez de logs du service `service:A`, pour lesquels `duration:1000` désigne une durée de 1 000 millisecondes, et d'autres logs du service `service:B`, pour lesquels `duration:500` désigne une durée de 500 microsecondes :
@@ -157,9 +113,17 @@ Lorsque vous masquez des facettes, vous les retirez de votre contexte de dépann
 
 ### Regrouper des facettes
 
-Afin de faciliter la navigation dans leur liste, les facettes sont regroupées selon différents thèmes pertinents. Les opérations d'attribution ou de réattribution d'une facette à un groupe (voir la [gestion des facettes](#gerer-des-facettes)) servent uniquement à modifier l'apparence de la liste des facettes. Cela n'a aucune incidence sur les fonctionnalités de recherche et d'analyse.
+Afin de faciliter la navigation dans leur liste, les facettes sont regroupées selon différents thèmes pertinents. Les opérations d'attribution ou de réattribution d'une facette à un groupe servent uniquement à modifier l'apparence de la liste des facettes. Cela n'a aucune incidence sur les fonctionnalités de recherche et d'analyse.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Regrouper une facette" style="width:30%;">}}
+
+Pour regrouper des facettes :
+
+1. Cliquez sur l'icône en forme d'engrenage correspondant à la facette.
+2. Sélectionnez **Edit facet**.
+3. Cliquez sur la section **Advanced options** pour la développer.
+4. Dans le champ **Group**, saisissez le nom du groupe dans lequel vous souhaitez inclure la facette.
+5. Cliquez sur **Update**.
 
 ### Filtrer des facettes
 
@@ -191,7 +155,7 @@ Vous pouvez accéder par défaut aux facettes sur les [attributs réservés][25]
 
 ### Facette d'index
 
-Les facettes d'index sont des facettes particulières qui vous sont uniquement proposées lorsque votre organisation dispose de [plusieurs index][27] ou lorsque vous possédez des [vues historiques][15] actives. Ces facettes vous permettent de filtrer votre requête sur un sous-ensemble d'index.
+Les facettes d'index sont des facettes particulières qui vous sont uniquement proposées lorsque votre organisation dispose de [plusieurs index][27] ou lorsque vous possédez des [vues historiques][28] actives. Ces facettes vous permettent de filtrer votre requête sur un sous-ensemble d'index.
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="Créer une facette" style="width:30%;">}}
 
@@ -199,7 +163,9 @@ Les facettes d'index sont des facettes particulières qui vous sont uniquement p
 
 À titre de bonne pratique, essayez toujours d'utiliser une facette existante, plutôt que d'en créer une (voir la section [Alias de facettes](#alias-de-facettes)). En utilisant une seule facette pour des informations similaires, vous favorisez la collaboration entre les différentes équipes.
 
-**Remarque** : une fois votre facette créée, elle récupère **tous les nouveaux logs** transmis à **l'un** des index. Pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 1 000 facettes.
+Pour créer une facette sur un tableau d'objets JSON, il faut d'abord utiliser un [grok parser][29] pour extraire l'attribut, puis créer une facette pour cet attribut.
+
+**Remarque** : une fois votre facette créée, elle récupère **tous les nouveaux logs**. Pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 1 000 facettes.
 
 #### Volet latéral des logs
 
@@ -268,13 +234,22 @@ Pour supprimer une facette, procédez comme suit :
 [1]: /fr/logs/search_syntax/
 [2]: /fr/logs/explorer/patterns/
 [3]: /fr/logs/explorer/analytics/
-[4]: /fr/monitors/create/types/log/
+[4]: /fr/monitors/types/log/
 [5]: /fr/dashboards/widgets/
 [6]: /fr/notebooks/
-[15]: /fr/logs/log_configuration/rehydrating
+[7]: /fr/logs/log_configuration/processors
+[8]: /fr/logs/live_tail/
+[9]: /fr/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[10]: /fr/logs/logs_to_metrics/
+[11]: /fr/logs/archives/
+[12]: /fr/logs/archives/rehydrating/
+[13]: /fr/logs/log_configuration/pipelines
+[14]: /fr/logs/indexes/#indexes-filters
+[15]: /fr/logs/indexes/#exclusion-filters
 [16]: /fr/integrations/nginx/
 [17]: /fr/logs/log_configuration/processors/#geoip-parser
 [18]: /fr/integrations/kong/
+[19]: /fr/getting_started/tagging/assigning_tags/
 [20]: /fr/integrations/varnish/
 [21]: /fr/integrations/ansible/
 [22]: /fr/integrations/python/
@@ -283,3 +258,6 @@ Pour supprimer une facette, procédez comme suit :
 [25]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /fr/logs/log_configuration/attributes_naming_convention
 [27]: /fr/logs/indexes/#indexes
+[28]: /fr/logs/log_configuration/rehydrating
+[29]: /fr/logs/log_configuration/parsing/?tab=matchers#nested-json
+[30]: /fr/logs/explorer/

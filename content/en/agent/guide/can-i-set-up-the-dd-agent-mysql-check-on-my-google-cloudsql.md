@@ -1,6 +1,5 @@
 ---
 title: Can I set up the dd-agent mysql check on my Google CloudSQL?
-kind: guide
 aliases:
   - /agent/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
   - /integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/

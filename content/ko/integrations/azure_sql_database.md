@@ -14,7 +14,7 @@ integration_id: azure-sql-database
 integration_title: Microsoft Azure SQL Database
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_sql_database
 public_title: Datadog-Microsoft Azure SQL Database 통합

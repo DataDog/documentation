@@ -18,7 +18,7 @@ integration_id: portworx
 integration_title: Portworx
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: paul@portworx.com
 manifest_version: 1.0.0
 metric_prefix: portworx.

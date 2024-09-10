@@ -1,6 +1,5 @@
 ---
 title: Collect Google Cloud Logs with a Pub/Sub Push Subscription
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -11,6 +10,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 <div class="alert alert-danger">
