@@ -23,7 +23,9 @@ When you graph this metric as a timeseries, you would have 3 x 4 = 12 lines on y
 
 Add a threshold value. The `clamp_min()` sets all datapoints below the threshold to equal that value, while `clamp_max()` limits datapoints above the threshold.
 
-Note: `clamp_min()` and `clamp_max()` will set NaN values to the threshold. To avoid this behaviour, apply the `default_zero()` before the `clamp_min()` / `clamp_max()` function.
+Note: `clamp_min()` and `clamp_max()` will set NaN values to the threshold :  `clamp_min(NaN, X) -> X` and `clamp_max(NaN, X) -> X`.
+
+To avoid this behaviour, apply the `default_zero()` before the `clamp_min()` / `clamp_max()` function.
 
 ## Cutoff
 
