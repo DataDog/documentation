@@ -74,14 +74,14 @@ Configura Amazon Route 53 para registrar información sobre las consultas que re
 4. Haz clic en **Configure query logging** (Configurar el registro de consultas).
 5. Selecciona el grupo de logs CloudWatch o crea uno nuevo al que enviar logs. Asegúrate de incluir "route53" en el nombre del grupo de logs.
 
-#### Habilitar el registro de consultas de resolvers Route53
+#### Habilitar el registro de consultas de resolvers Route 53
 
 1. En el panel de configuración de Route 53 de la izquierda, selecciona **Registro de consultas** en Resolver.
 2. Haz clic en **Configure query logging** (Configurar el registro de consultas).
 3. Introduce un nombre para la consulta del resolver. 
 4. Selecciona el grupo de logs CloudWatch al que quieras que el resolver envíe logs de consultas. Asegúrate de incluir "route53" en el nombre del grupo de logs.
 5. Añade las VPC para las que quieres registrar consultas de resolver.
-6. Si quieres, puedes añadir etiquetas (tags). 
+6. Si quieres, puedes añadir etiquetas. 
 7. Haz clic en **Configure query logging** (Configurar el registro de consultas).
 
 #### Enviar logs a Datadog
