@@ -46,8 +46,8 @@ LLM Observability categorizes spans by their *span kind*, which defines the type
 
 LLM Observability supports the following span kinds:
 
-| Kind      | Represents   | Root span?   | Examples |
-|-----------|--------------|--------------|-------------|----|
+| Kind      | Represents   | Valid Root span?   | Examples |
+|-----------|--------------|--------------|-------------|
 | [LLM](#llm-span)      | A call to an LLM. | Yes | A call to a model, such as OpenAI GPT-4. |
 | [Workflow](#workflow-span)  | Any predetermined sequence of operations which include LLM calls and any surrounding contextual operations. | Yes | A service that takes a URL and returns a summary of the page, requiring a tool call to fetch the page, some text processing tasks, and an LLM summarization. |
 | [Agent](#agent-span)     | A series of decisions and operations made by an autonomous agent, which usually consist of nested workflows, LLMs, tools, and task calls. | Yes | A chatbot that answers customer questions.
