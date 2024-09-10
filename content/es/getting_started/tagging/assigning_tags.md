@@ -6,18 +6,18 @@ description: Descubre cómo asignar etiquetas (tags) en Datadog.
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentación
-  text: Empezando con las etiquetas
+  text: Empezando con las etiquetas (tags)
 - link: /getting_started/tagging/using_tags/
   tag: Documentación
-  text: Descubre cómo utilizar etiquetas en Datadog.
+  text: Descubre cómo utilizar etiquetas (tags) en Datadog.
 title: Asignar etiquetas (tags)
 ---
 
 ## Información general
 
-En Datadog, el etiquetado sirve para realizar consultas sobre las máquinas y métricas monitorizadas. Si no existiese la posibilidad de asignar y filtrar elementos mediante etiquetas, resultaría difícil buscar los problemas que afectan al entorno y acotar los resultados lo suficiente como para descubrir sus causas reales. Antes de continuar, obtén más información sobre cómo [definir las etiquetas][1] en Datadog.
+En Datadog, el etiquetado sirve para realizar consultas sobre las máquinas y métricas monitorizadas. Si no existiese la posibilidad de asignar y filtrar elementos mediante etiquetas (tags), resultaría difícil buscar los problemas que afectan al entorno y acotar los resultados lo suficiente como para descubrir sus causas reales. Antes de continuar, obtén más información sobre cómo [definir las etiquetas][1] en Datadog.
 
-Las etiquetas se pueden configurar de varias formas diferentes:
+Las etiquetas (tags) se pueden configurar de varias formas diferentes:
 
 - En el [archivo de configuración](#configuration-file) del Datadog Agent o en el de cualquier integración particular
 - A través de la [interfaz de usuario](#ui) de Datadog
@@ -26,15 +26,15 @@ Las etiquetas se pueden configurar de varias formas diferentes:
 
 {{< tabs >}}
 {{% tab "Entornos no contenedorizados" %}}
-En los entornos no contenedorizados, el Agent asigna automáticamente la [etiqueta del host](#host-tags) y hereda las etiquetas de las integraciones. Estas etiquetas, así como las etiquetas adicionales que puedes añadir manualmente, se configuran en el [archivo de configuración del Datadog Agent](#configuration-file).
+En los entornos no contenedorizados, el Agent asigna automáticamente la [etiqueta (tag) del host](#host-tags) y hereda las etiquetas de las integraciones. Estas etiquetas, así como las etiquetas adicionales que puedes añadir manualmente, se configuran en el [archivo de configuración del Datadog Agent](#configuration-file).
 {{% /tab %}}
 
 {{% tab "Entornos contenedorizados" %}}
 En los entornos contenedorizados, Datadog recomienda utilizar [Autodiscovery][1], puesto que permite emplear el [etiquetado de servicios unificado][2], que es el método recomendado para definir un único punto de configuración en toda la telemetría de Datadog.
 
-El objetivo de Autodiscovery consiste en aplicar la configuración de una integración de Datadog al efectuar un check del Agent en un contenedor determinado. Cuando se utiliza Autodiscovery, el Datadog Agent identifica automáticamente los servicios que se ejecutan en el nuevo contenedor, busca la configuración más adecuada para la monitorización e inicia la recopilación de métricas. A continuación, las etiquetas pueden configurarse desde la [plantilla de configuración][3] de Autodiscovery.
+El objetivo de Autodiscovery consiste en aplicar la configuración de una integración de Datadog al efectuar un check del Agent en un contenedor determinado. Cuando se utiliza Autodiscovery, el Datadog Agent identifica automáticamente los servicios que se ejecutan en el nuevo contenedor, busca la configuración más adecuada para la monitorización e inicia la recopilación de métricas. A continuación, las etiquetas (tags) se pueden configurar desde la [plantilla de configuración][3] de Autodiscovery.
 
-Si no se utiliza Autodiscovery, el Agent asigna automáticamente la [etiqueta del host](#host-tags) y hereda las etiquetas de las integraciones, al igual que ocurre en los entornos no contenedorizados. Estas etiquetas, así como las etiquetas que se hayan añadido manualmente, se configuran en el [archivo de configuración del Datadog Agent](#configuration-file).
+Si no se utiliza Autodiscovery, el Agent asigna automáticamente la [etiqueta (tag) del host](#host-tags) y hereda las etiquetas de las integraciones, al igual que ocurre en los entornos no contenedorizados. Estas etiquetas, así como las etiquetas que se hayan añadido manualmente, se configuran en el [archivo de configuración del Datadog Agent](#configuration-file).
 
 
 [1]: /es/getting_started/agent/autodiscovery/
@@ -43,7 +43,7 @@ Si no se utiliza Autodiscovery, el Agent asigna automáticamente la [etiqueta de
 {{% /tab %}}
 {{< /tabs >}}
 
-## Métodos para asignar etiquetas
+## Métodos para asignar etiquetas (tags)
 
 ### Archivo de configuración
 
@@ -52,9 +52,9 @@ Si no se utiliza Autodiscovery, el Agent asigna automáticamente la [etiqueta de
 
 #### Localización de los archivos
 
-El archivo de configuración del Agent (`datadog.yaml`) se utiliza para configurar las etiquetas de host que se aplican a todas las métricas, trazas (traces) y logs reenviados por el Datadog Agent.
+El archivo de configuración del Agent (`datadog.yaml`) se utiliza para configurar las etiquetas (tags) de host que se aplican a todas las métricas, trazas (traces) y logs reenviados por el Datadog Agent.
 
-Las etiquetas de las [integraciones][1] instaladas con el Agent se configuran con archivos YAML localizados en el directorio **conf.d** de la instalación del Agent. Para localizar los archivos de configuración, consulta la sección [Archivos de configuración del Agent][2].
+Las etiquetas (tags) de las [integraciones][1] instaladas con el Agent se configuran con archivos YAML localizados en el directorio **conf.d** de la instalación del Agent. Para localizar los archivos de configuración, consulta la sección [Archivos de configuración del Agent][2].
 
 #### Formato YAML
 
