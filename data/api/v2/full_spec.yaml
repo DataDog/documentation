@@ -831,6 +831,8 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+          x-merge-override:
+            items: false
       type: object
     APIKeyResponseIncludedItem:
       description: An object related to an API key.
@@ -892,6 +894,8 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+          x-merge-override:
+            items: false
         meta:
           $ref: '#/components/schemas/APIKeysResponseMeta'
       type: object
@@ -1065,6 +1069,8 @@ components:
       required:
       - name
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyCreateData:
       description: Object used to create an application key.
       properties:
@@ -1148,6 +1154,8 @@ components:
           nullable: true
           type: array
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
       properties:
@@ -8124,6 +8132,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8148,6 +8157,7 @@ components:
         performanceData:
           $ref: '#/components/schemas/EntityV3DatadogPerformance'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3DatastoreKind:
       description: The definition of Entity V3 Datastore Kind object.
       enum:
@@ -8327,6 +8337,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8351,6 +8362,7 @@ components:
         performanceData:
           $ref: '#/components/schemas/EntityV3DatadogPerformance'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3QueueKind:
       description: The definition of Entity V3 Queue Kind object.
       enum:
@@ -8388,6 +8400,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8463,6 +8476,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -9522,6 +9536,8 @@ components:
           nullable: true
           type: array
       type: object
+      x-merge-override:
+        properties: false
     GCPSTSDelegateAccount:
       description: Datadog principal service account info.
       properties:
@@ -25786,6 +25802,8 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-merge-override:
+        parameters: false
       x-undo:
         type: safe
     patch:
@@ -26635,6 +26653,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -36582,6 +36601,9 @@ paths:
         - name: id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/rum/applications/{id}:
     delete:
       description: Delete an existing RUM application in your organization.
@@ -36677,6 +36699,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
+      patch: false
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.

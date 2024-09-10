@@ -1865,6 +1865,21 @@ menu:
       parent: service_catalog
       identifier: service_catalog_scorecards
       weight: 5
+    - name: Scorecard Configuration
+      url: service_catalog/scorecards/scorecard_configuration
+      parent: service_catalog_scorecards
+      identifier: scorecard_configuration
+      weight: 501
+    - name: Custom Rules
+      url: service_catalog/scorecards/custom_rules
+      parent: service_catalog_scorecards
+      identifier: scorecard_custom_rules
+      weight: 502
+    - name: Using Scorecards
+      url: service_catalog/scorecards/using_scorecards
+      parent: service_catalog_scorecards
+      identifier: using_scorecards
+      weight: 503
     - name: Software Templates
       url: service_catalog/software_templates
       parent: service_catalog
@@ -2328,11 +2343,16 @@ menu:
       parent: workflows
       identifier: workflows_connections
       weight: 7
+    - name: Test and Debug
+      url: service_management/workflows/test_and_debug/
+      parent: workflows
+      identifier: workflows_test_and_debug
+      weight: 8
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 8
+      weight: 9
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -4643,62 +4663,67 @@ menu:
       identifier: observability_pipelines_processors
       weight: 6
     - name: Add hostname
-      url: observability_pipelines/processors/#add-hostname
+      url: observability_pipelines/processors/add_hostname
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 601
+    - name: Deduplicate
+      url: observability_pipelines/processors/dedupe
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_dedupe
+      weight: 602
     - name: Edit fields
-      url: observability_pipelines/processors/#edit-fields
+      url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 602
+      weight: 604
     - name: Enrichment Table
-      url: observability_pipelines/processors/#enrichment-table
+      url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 603
+      weight: 605
     - name: Filter
-      url: observability_pipelines/processors/#filter
+      url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 604
+      weight: 606
     - name: Grok Parser
-      url: observability_pipelines/processors/#grok-parser
+      url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 605
+      weight: 607
     - name: Parse JSON
-      url: observability_pipelines/processors/#parse-json
+      url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 606
+      weight: 608
     - name: Quota
-      url: observability_pipelines/processors/#quota
+      url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 607
+      weight: 609
     - name: Reduce
-      url: observability_pipelines/processors/#reduce
+      url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 608
+      weight: 610
     - name: Sample
-      url: observability_pipelines/processors/#sample
+      url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 609
+      weight: 611
     - name: Sensitive Data Scanner
-      url: observability_pipelines/processors/#sensitive-data-scanner
+      url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 610
+      weight: 612
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
       identifier: observability_pipelines_destinations
       weight: 7
     - name: Amazon OpenSearch
-      url: observability_pipelines/destinations/#amazon-opensearch
+      url: observability_pipelines/destinations/amazon_opensearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_amazon_opensearch
       weight: 701
@@ -4712,18 +4737,18 @@ menu:
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
       weight: 703
-    - name: Datadog Log Management
-      url: observability_pipelines/destinations/#datadog-log-management
+    - name: Datadog Logs
+      url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_log_management
+      identifier: observability_pipelines_datadog_logs
       weight: 704
     - name: Elasticsearch
-      url: observability_pipelines/destinations/#elasticsearch
+      url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 705
     - name: Google Chronicle
-      url: observability_pipelines/destinations/#google-chronicle
+      url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
       weight: 706
@@ -4733,22 +4758,22 @@ menu:
       parent: observability_pipelines_destinations
       weight: 707
     - name: OpenSearch
-      url: observability_pipelines/destinations/#opensearch
+      url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 708
     - name: Syslog
-      url: observability_pipelines/destinations/#rsyslog-or-syslog-ng
+      url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
       weight: 709
     - name: Splunk HEC
-      url: observability_pipelines/destinations/#splunk-http-event-collector-hec
+      url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
       weight: 710
     - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/destinations/#sumo-logic-hosted-collector
+      url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
       weight: 711

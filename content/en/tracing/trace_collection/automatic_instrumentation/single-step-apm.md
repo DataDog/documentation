@@ -20,6 +20,7 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
    - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
    - Docker
    - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
+     - NOTE: Windows pods are not supported. Use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
 
 ## Enabling APM on your applications
 
@@ -37,7 +38,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
@@ -62,7 +63,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -111,6 +112,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
 1. Install the [Datadog Operator][36] v1.5.0+ with Helm:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
+   helm repo update
    helm install my-datadog-operator datadog/datadog-operator
    ```
 2. Create a Kubernetes secret to store your Datadog [API key][10]:
@@ -137,11 +139,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
          instrumentation:
            enabled: true
            libVersions:
-             java: 1
-             dotnet: 2
-             python: 2
-             js: 5
-             ruby: 2
+             java: "1"
+             dotnet: "3"
+             python: "2"
+             js: "5"
+             ruby: "2"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -177,12 +179,12 @@ To enable Single Step Instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
-      libVersions:
-        java: 1
-        dotnet: 2
-        python: 2
-        js: 5
-        ruby: 2
+         libVersions:
+            java: "1"
+            dotnet: "3"
+            python: "2"
+            js: "5"
+            ruby: "2"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -411,9 +413,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: v2.46.0
-            python: v1.20.6
-            js: v4.17.0
+            dotnet: "3.2.0"
+            python: "1.20.6"
+            js: "4.17.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -428,9 +430,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: v2.46.0
-            python: v1.20.6
-            js: v4.17.0
+            dotnet: "3.2.0"
+            python: "1.20.6"
+            js: "4.17.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
