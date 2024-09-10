@@ -6,42 +6,24 @@
 
 {{ if $glossary }}
   {{ $glossaryTerm := replace $glossary " " "_" }}
-  {{ $glossaryPath := printf "content/en/glossary/terms/%s.md" $glossaryTerm }}
-  {{ if fileExists $glossaryPath }}
-    {{ $rawContent := readFile $glossaryPath }}
-    {{ $contentParts := split $rawContent "---" }}
-    {{ if ge (len $contentParts) 3 }}
-      {{ $mainContent := index $contentParts 2 | strings.TrimLeft "\n" }}
-      {{ $displayText = $glossary }}
-      {{ $processedContent := $mainContent }}
-      
-      {{ $processedContent = replaceRE `\n\[\d+\]:\s+.*` "" $processedContent }}
-      
-      {{ $processedContent = replaceRE `\[([^\]]+)\]\[\d+\]` "$1" $processedContent }}
-      
-      {{ $tooltipContent = $processedContent | replaceRE "<a[^>]+>(.+?)</a>" "$1" | replaceRE "</?[^>]+/?>" "" | safeHTML }}
+  {{ $headless := .Site.GetPage "/glossary/terms" }}
+  {{ with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) }}
+    {{ $displayText = $glossary }}
+    {{ if .Params.short_definition }}
+      {{ $tooltipContent = .Params.short_definition }}
     {{ else }}
-      {{ warnf "Unexpected format in glossary file: %s" $glossaryPath }}
-      {{ $tooltipContent = printf "Error processing glossary term '%s'" $glossary }}
+      {{ $content := .Content | plainify }}
+      {{ $tooltipContent = $content | replaceRE `\n\[\d+\]:\s+.*` "" | replaceRE `\[([^\]]+)\]\[\d+\]` "$1" | safeHTML }}
     {{ end }}
   {{ else }}
-    {{ warnf "Glossary file not found: %s" $glossaryPath }}
+    {{ warnf "Glossary term '%s' not found" $glossary }}
     {{ $tooltipContent = printf "Glossary term '%s' not found" $glossary }}
   {{ end }}
 {{ end }}
 
 <span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-  <button class="tooltip-trigger" aria-describedby="tooltip-{{ $displayText | urlize }}">
-    {{ $displayText }}
-  </button>
-  <span id="tooltip-{{ $displayText | urlize }}" class="tooltip-content" x-show="open" x-cloak
-    x-transition:enter="transition ease-out duration-200"
-    x-transition:enter-start="opacity-0 transform scale-95"
-    x-transition:enter-end="opacity-100 transform scale-100"
-    x-transition:leave="transition ease-in duration-150"
-    x-transition:leave-start="opacity-100 transform scale-100"
-    x-transition:leave-end="opacity-0 transform scale-95"
-    role="tooltip">
+  <span class="tooltip-trigger">{{ $displayText }}</span>
+  <span id="tooltip-{{ $displayText | urlize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">
     {{ $tooltipContent }}
     <svg class="tooltip-arrow" width="14" height="7" viewBox="0 0 14 7">
       <path d="M7 7L0 0h14z" fill="currentColor"></path>
