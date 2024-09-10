@@ -44,18 +44,60 @@ To learn more about Agentless Scanning, see [Cloud Security Management Agentless
 
 For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security Management on the Agent][3].
 
-| Feature                        | Agentless       | Agentless + Agent-based deployment |
-|--------------------------------|-----------------|------------------------------------|
-| CSM Identity Risks             | Yes             | Yes                                |
-| CSM Misconfigurations          | Yes             | Yes                                |
-| AMI support                    | Yes             | Yes                                |
-| Security Inbox                 | Yes             | Yes, with more accurate insights   |
-| Vulnerability prioritization   | Yes             | Yes, with runtime context          |
-| Serverless support             | AWS Lambda      | AWS Lambda                         |
-| Coverage                       | All cloud hosts | All cloud and non-cloud hosts      |
-| Vulnerability update frequency | 12 hours        | Real time                          |
-| Threat detection               | No              | Yes                                |
-| Host benchmarks                | No              | Yes                                |
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Agentless</th>
+      <th>Agentless &#43; Agent-based deployment</th>
+    </tr>
+  </thead>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Host benchmarks</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Vulnerability prioritization</td>
+    <td>Yes</td>
+    <td>Yes, with runtime context</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Vulnerability update frequency</td>
+    <td>12 hours</td>
+    <td>Real time</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Threat detection</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
+    <td>Yes</td>
+    <td>Yes, with more accurate insights</td>
+  </tr>
+</table>
 
 ## Enable additional features
 
