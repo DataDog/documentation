@@ -4,7 +4,7 @@ description: Setting up Database Monitoring on a MongoDB cluster
 disable_sidebar: true
 ---
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">Database Monitoring for MongoDB is in preview. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
 ### MongoDB versions supported
 
