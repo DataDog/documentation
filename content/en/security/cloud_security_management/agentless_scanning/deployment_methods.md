@@ -48,7 +48,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< /tabs >}}
 
 
-**Note**: The actual data that is scanned remains within your infrastructure, and only the collected list of packages, as well as information related to collected hosts (hostnames/EC2 Instances) are reported back to Datadog.
+**Note**: The actual scanned data remains in your infrastructure, and only the collected list of packages, as well as information related to collected hosts (hostnames/EC2 Instances), are reported back to Datadog.
 
 ## Further reading
 

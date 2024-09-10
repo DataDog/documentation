@@ -20,7 +20,7 @@ aliases:
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
 - **AWS integration**: The [AWS integration][2] must be installed and configured for your AWS accounts.
-- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as specifying which cloud resources to scan.
+- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
 - **IAM permissions**: The Agentless Scanning instance requires specific IAM permissions to scan hosts, containers, and Lambda functions. These permissions are automatically applied as part of the installation process.<br><br>
   {{< collapse-content title="Host and container permissions" level="h5" >}}
   <ul>

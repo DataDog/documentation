@@ -24,7 +24,7 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
 1. Send **AWS Logs to Datadog** and **Enable Cloud Security Management** are automatically selected by default. Leave the selections as is.
-1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. In the **Agentless Scanning** section, toggle **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -35,8 +35,8 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 
 1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. Click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} for the AWS account where you want to deploy the Agentless scanner.
-1. **Enable Resource Scanning** should already be toggled on. If it isn't, switch the **Enable Resource Scanning** toggle to the on position and complete Steps 3-7 in [New AWS Account][2].
-1. In the **Agentless Scanning** section, switch the toggles for **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. Verify that **Enable Resource Scanning** is toggled on. If it isn't, switch the **Enable Resource Scanning** toggle to the on position and complete Steps 3-7 in [New AWS Account][2].
+1. In the **Agentless Scanning** section, toggle **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -52,7 +52,7 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 ## Disable Agentless Scanning
 
 1. On the [Cloud Security Management Setup][3] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and switch the toggles in the **Agentless Scanning** section to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle the **Agentless Scanning** section to the off position.
 1. Click **Done**.
 
 ## Uninstall with CloudFormation
