@@ -36,14 +36,16 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
-| AWS Persistent Volume Allocation | 7.46.0 | 1.11.0  |
+| GPU Container Cost Allocation | 7.54.0 | 1.11.0 |
+| AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
+| Data Transfer Cost Allocation    | 7.46.0 | 1.11.0 |
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
+1. To enable Data transfer cost allocation, set up [Network Performance Monitoring][107] (note: additional charges may apply).
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -51,6 +53,7 @@ The following table presents the list of collected features and the minimal Agen
 [104]: /containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [106]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
+[107]: https://docs.datadoghq.com/network_monitoring/performance/setup
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -62,7 +65,7 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| GPU Container Cost Allocation | 7.54.0 | 1.11.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
@@ -83,7 +86,7 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| GPU Container Cost Allocation | 7.54.0 | 1.11.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
@@ -267,7 +270,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | {{< ccm-details title="Persistent volumes" >}}Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles.{{< /ccm-details >}} | {{< X >}} |  |  |
 | {{< ccm-details title="Managed service fees" >}}Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options.{{< /ccm-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | ECS costs | {{< X >}} | N/A | N/A |
-| Networking costs |  | Limited* | Limited* |
+| Data transfer costs | {{< X >}} | Limited* | Limited* |
 | GPU | {{< X >}} | {{< X >}} | {{< X >}}  |
 | {{< ccm-details title="Local storage" >}}Directly-attached storage resources for a node.{{< /ccm-details >}} |  | Limited* | Limited* |
 
@@ -353,6 +356,22 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
 
+### Data transfer
+
+The following non-exhaustive list of out-of-the-box tags are applied to cost metrics associated with Kubernetes workloads:
+
+| Out-of-the-box tag      |  Description |
+| ---                     | ------------ |
+| `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities. |
+| `source_availability_zone` | The availability zone name where data transfer originated. |
+| `source_availability_zone_id` | The availability zone id where data transfer originated. |
+| `source_region` | The region where data transfer originated. |
+| `destination_availability_zone` | The availability zone name where data transfer was sent to. |
+| `destination_availability_zone_id` | The availability zone id where data transfer was sent to. |
+| `destination_region` | The region where data transfer was sent to. |
+
+In addition, some Kubernetes pod tags that are common between all pods on the same node are also applied.
+
 {{% /tab %}}
 {{% tab "Azure" %}}
 
@@ -368,7 +387,6 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
-| `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Azure services or workloads. |
 | `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
 
 {{% /tab %}}
@@ -387,7 +405,6 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
 | `allocated_spend_type:not_monitored` | The tracking and allocation of [Agentless Kubernetes costs](#agentless-kubernetes-costs) associated with resources used by Google Cloud services or workloads, and the Datadog Agent is not monitoring those resources. |
-| `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Google Cloud services or workloads. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
 | `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Google Cloud services or workloads. |
 
