@@ -33831,6 +33831,8 @@ paths:
             \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
             }}\"]\n    }\n  }\n}"
         type: unsafe
+    x-merge-override:
+      delete: false
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: List tags and aggregations that are actively queried on dashboards,
