@@ -211,10 +211,10 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.message`  | string | A concise, human-readable, one-line message explaining the event.                |
 | `error.stack`    | string | The stack trace or complementary information about the error.                    |
 | `error.issue_id` | string | The stack trace or complementary information about the error.   
-| `error.category` | string | The high-level grouping for the type of error. Possible values are `Memory Warning` or `Watchdog Termination`, `App Hang`, or `Exception`. |
-| `error.file` | string | File where the error happened for the Error Tracking issue. |
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `Memory Warning`, `Watchdog Termination`, `App Hang`, or `Exception`. |
+| `error.file` | string | File where the issue found by Error Tracking occurred. |
 | `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
-| `freeze.duration` | int64 | Duration of the main thread freeze (in ns). This is only supported for App Hangs. |
+| `freeze.duration` | int64 | Duration of the main thread freeze (in nanoseconds). This is only supported for App Hangs. |
 
 ### Network errors 
 
