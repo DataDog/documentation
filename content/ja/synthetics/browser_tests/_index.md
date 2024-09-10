@@ -37,7 +37,7 @@ title: ブラウザテスト
 
 1. **Starting URL** を入力します。ブラウザテストがシナリオを開始する URL です。
 
- <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+ <div class="alert alert-info">その他のオプションについては、<a href=#advanced-options>高度なオプション</a>をご覧ください。</div>
 
 2. **名前**を追加します。ブラウザテストの名前です。
 3. **環境と追加タグ**を選択します。ブラウザのテストにアタッチされる `env` と関連するタグを設定します。与えられた `<KEY>` に対する `<VALUE>` をフィルタリングするには、`<KEY>:<VALUE>` という形式を使用します。
@@ -57,13 +57,13 @@ title: ブラウザテスト
 
 {{< tabs >}}
 
-   {{% tab "Request Options" %}}
+   {{% tab "リクエストオプション" %}}
 
-   Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test. To prevent the Content Security Policy (CSP) from blocking your test, select **Disable CSP**.
+  クロスオリジンリソース共有 (CORS) ポリシーがテストをブロックするのを防ぐには、**Disable CORS** を選択します。コンテンツセキュリティポリシー (CSP) がテストをブロックするのを防ぐには、**Disable CSP** を選択します。
 
    * **Request Headers**: **Name** および **Value* フィールドでヘッダーを定義して、デフォルトのブラウザヘッダーに追加またはオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]できます。
    * **Cookies**: ブラウザのデフォルトのクッキーに追加するクッキーを定義します。1 行に 1 つのクッキーを入力し、[`Set-Cookie`][2] の構文を使用します。
-   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
+   * **HTTP Authentication**: HTTP Basic、Digest または NTLM を使用し、ユーザー名とパスワードで認証を行います。資格情報は、ブラウザテストのすべてのステップで使用されます。**注**: HTTP Basic 認証は、ブラウザのシステムプロンプトでユーザー資格情報をリクエストする Web サイトで使用できます。
 
    リクエストオプションは、テストの実行ごとに設定され、記録時ではなく、実行時にブラウザテストのすべてのステップに適用されます。次の手順を記録するためにこれらのオプションをアクティブのままにしておく必要がある場合は、記録元のページにオプションを手動で適用し、テストの後続の手順を作成します。
 
@@ -107,9 +107,9 @@ title: ブラウザテスト
 
    {{% /tab %}}
 
-   {{% tab "Time & Language" %}}
+   {{% tab "時間と言語" %}}
 
-  By default, timezone is set to UTC, and language is set to English (en). To define a language, use the corresponding 2 or 3 digit [ISO code][19].
+  デフォルトでは、タイムゾーンは UTC に、言語は英語 (en) に設定されています。言語を定義するには、2 桁または 3 桁の [ISO コード][19]を使用します。
 
    {{% /tab %}}
    {{< /tabs >}}
@@ -153,7 +153,7 @@ title: ブラウザテスト
     | `{{^is_alert}}`            | モニターがアラートを発しない限り表示します。                                     |
     | `{{#is_recovery}}`         | モニターが `alert` から回復したときに表示します。                          |
     | `{{^is_recovery}}`         | モニターが `alert` から回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
     | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
     | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
     | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |

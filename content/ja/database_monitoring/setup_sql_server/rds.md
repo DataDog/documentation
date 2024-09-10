@@ -61,7 +61,7 @@ CREATE USER datadog FOR LOGIN datadog;
 
 これは、RDS が `CONNECT ANY DATABASE` の付与を許可していないため、必要です。Datadog Agent は、データベース固有のファイル I/O 統計情報を収集するために、各データベースに接続する必要があります。
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ## Agent のインストール

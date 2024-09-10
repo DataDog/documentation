@@ -30,6 +30,13 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 - Views that use direct canvas drawing
 - Advanced text styling
 
+### Images do not render properly
+Depending on the SDK configuration of Mobile Session Replay, images may not always be displayed. 
+If privacy settings allow for it, Mobile Session Replay only captures Android images up to 100x100dp and iOS bundled images. All other images are replaced by a placeholder indicating the image size in the UI.
+
+Images follow a separate processing pipeline, which may introduce a small delay between uploading a replay and the image being available for rendering in the web player.
+In this case, wait a few minutes and then reload the replay. 
+
 ### The session replay rendering looks does not exactly mirror my application
 Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images.
 
