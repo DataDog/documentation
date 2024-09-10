@@ -42246,6 +42246,9 @@ paths:
       x-undo:
         type: safe
   x-merge-override:
+    /api/v2/rum/analytics/aggregate: true
+    /api/v2/rum/events: true
+    /api/v2/rum/events/search: true
     /api/v2/team/{team_id}/links: true
     /api/v2/team/{team_id}/links/{link_id}: true
 security:
