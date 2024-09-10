@@ -60,6 +60,8 @@ You can also [view the contents of the script](https://github.com/DataDog/datado
 To send Azure platform logs (including resource logs), you can deploy an Event Hub and log forwarder function pair. 
 After deploying, create diagnostic settings for each of the log sources to stream logs to Datadog.
 
+**Note**: Resources can only stream to Event Hubs in the same Azure region.
+
 1. In the Azure portal, navigate to your **Cloud Shell**.
 
 2. Run the Powershell command below to download the automation script into your Cloud Shell environment. 
