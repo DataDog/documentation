@@ -29,7 +29,7 @@ from actions.format_link import format_link_file
 from actions.comment_conversion import replace_comments
 
 try:
-    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
+    from assetlib.classifiers import get_all_classifier_names, get_customer_facing_classifiers
     CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
     CLASSIFIER_TAGS = []
@@ -42,7 +42,7 @@ finally:
     else:
         file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in get_non_deprecated_classifiers():
+            for tag in get_customer_facing_classifiers():
                 file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
             file.write(''.join(file_content) + '\n')
 

@@ -1,4 +1,4 @@
-The dedupe processor removes copies of data to reduce volume and noise. It caches 5000 messages at a time and compares your incoming logs traffic against the cached messages. For example, this processor can be used to keep only unique warning logs in the case where multiple identical warning logs are sent in succession.
+The deduplicate processor removes copies of data to reduce volume and noise. It caches 5,000 messages at a time and compares your incoming logs traffic against the cached messages. For example, this processor can be used to keep only unique warning logs in the case where multiple identical warning logs are sent in succession.
 
 To set up the deduplicate processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline.
