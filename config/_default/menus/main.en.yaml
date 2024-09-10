@@ -5262,10 +5262,10 @@ menu:
       parent: csm_setup
       identifier: csm_setup_iac_remediation
       weight: 104
-    - name: Deploy on Azure and GCP
-      url: security/cloud_security_management/setup/cloud_accounts
+    - name: Deploy via Cloud Integrations
+      url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
-      identifier: csm_setup_azure_gcp
+      identifier: csm_setup_cloud_integrations
       weight: 105
     - name: Threats
       url: security/threats/

@@ -1,14 +1,12 @@
 ---
-title: Deploying Cloud Security Management on Azure and GCP
+title: Deploying Cloud Security Management via Cloud Integrations
 aliases:
   - /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts
   - /security/cloud_security_management/setup/cloud_accounts
 ---
 
-Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on Azure and GCP.
-
-<div class="alert alert-info">For AWS instructions, see <a href="/security/cloud_security_management/setup/agentless_scanning/">Enabling Agentless Scanning</a>.</div>
+Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on AWS, Azure, and GCP.
 
 ## Enable resource scanning
 

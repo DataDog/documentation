@@ -42,7 +42,7 @@ To learn more about Agentless Scanning, see [Cloud Security Management Agentless
 
 ## Deploy the Agent for additional coverage
 
-For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, se [Setting up Cloud Security Management on the Agent][3].
+For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security Management on the Agent][3].
 
 | Feature                        | Agentless       | Agentless + Agent-based deployment |
 |--------------------------------|-----------------|------------------------------------|
@@ -67,9 +67,9 @@ AWS CloudTrail Logs allows you to get the most out of [CSM Identity Risks][6]. W
 
 With Infrastructure as Code (IaC) remediation, you can use Terraform to open a pull request in GitHub, applying code changes that fix a misconfiguration or identity risk. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
 
-### Azure and GCP
+### Deploy via cloud integrations
 
-At this time, Agentless Scanning is only available for AWS. To enable Cloud Security Management for Azure and Google Cloud Platform (GCP) resources, see [Deploying Cloud Security Management on Azure and GCP][7].
+To enable Cloud Security Management for Azure and Google Cloud Platform (GCP) resources, see [Deploying Cloud Security Management via Cloud Integrations][7].
 
 ## Further reading
 
