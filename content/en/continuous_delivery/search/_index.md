@@ -48,6 +48,12 @@ The [**Deployment Executions** page][2] shows all the times that a deployment ra
 
 {{< img src="continuous_delivery/search/details_side_panel.png" alt="Deployment Details side panel on the Deployments page" style="width:100%;">}}
 
+When a deployment is correctly associated to a pipeline in CI Visibility, the deployment executions panel contains a new **Pipeline** tab from which the pipeline trace is visible. From this tab, you can navigate to CI Visibility by clicking the **View Full Pipeline** link at the top:
+
+{{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
+
+Additional setup might be required to associate a deployment to a CI pipeline. For more information, see the setup page for your CD provider.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

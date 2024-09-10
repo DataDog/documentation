@@ -754,7 +754,7 @@ window.DD_LOGS.onReady(function () {
     level: 'info',
     handler: 'http',
     context: { env: 'staging' }
-  )
+  })
 })
 ```
 

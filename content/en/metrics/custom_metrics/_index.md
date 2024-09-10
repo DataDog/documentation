@@ -35,7 +35,12 @@ algolia:
 
 ## Overview
 
-Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. 
+Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In the example below, the metric `request.Latency` has four unique tag value combinations from its two tag keys:
+
+- `endpoint`, which has the value `endpoint:X` or `endpoint:Y`.
+- `status`, which has the value `status:200` or `status:400`.
+
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" style="width:80%;">}}
 
 The following are also considered custom metrics:
 - In general, any metric submitted through [DogStatsD][3] or through a [custom Agent Check][4]

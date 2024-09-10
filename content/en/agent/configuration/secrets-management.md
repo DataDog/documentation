@@ -295,6 +295,7 @@ If `Secret: database-secret` exists in `Namespace: database` and contains the da
 This requires additional permissions that are manually granted to the Agent's Service Account. For example, consider the following the RBAC policy:
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
   name: datadog-secret-reader
   namespace: database
@@ -305,6 +306,7 @@ rules:
     verbs: ["get", "watch", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
   name: datadog-read-secrets
   namespace: database

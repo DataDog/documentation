@@ -80,6 +80,22 @@ To setup unified service tagging in a containerized environment:
 
 If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
+##### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][7] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][8].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
+
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][9] 
+
 ##### Full configuration
 
 To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
@@ -91,14 +107,14 @@ metadata:
   labels:
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
+    # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
 ...
 template:
   metadata:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
   containers:
   -  ...
      env:
@@ -110,10 +126,10 @@ template:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.labels['tags.datadoghq.com/service']
-          - name: DD_VERSION
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['tags.datadoghq.com/version']
+          # - name: DD_VERSION #Uncomment this line to manually tag your version
+          #   valueFrom: #Uncomment this line to manually tag your version
+          #     fieldRef: #Uncomment this line to manually tag your version
+          #       fieldPath: metadata.labels['tags.datadoghq.com/version'] #Uncomment this line to manually tag your version
 ```
 
 ##### Partial configuration
@@ -128,7 +144,7 @@ template:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
 ```
 These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
@@ -137,7 +153,7 @@ If you have multiple containers per pod, you can specify standard labels by cont
 ```yaml
 tags.datadoghq.com/<container-name>.env
 tags.datadoghq.com/<container-name>.service
-tags.datadoghq.com/<container-name>.version
+# tags.datadoghq.com/<container-name>.version #Uncomment this line to manually tag your version
 ```
 
 ###### State metrics
@@ -155,14 +171,14 @@ To configure [Kubernetes State Metrics][3]:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
   spec:
     template:
       metadata:
         labels:
           tags.datadoghq.com/env: "<ENV>"
           tags.datadoghq.com/service: "<SERVICE>"
-          tags.datadoghq.com/version: "<VERSION>"
+          # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
   ```
 
 ###### APM tracer and StatsD client
@@ -181,12 +197,11 @@ containers:
           valueFrom:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.labels['tags.datadoghq.com/version']
+        # - name: DD_VERSION #Uncomment this line to manually tag your version
+        #   valueFrom: #Uncomment this line to manually tag your version
+        #     fieldRef: #Uncomment this line to manually tag your version
+        #       fieldPath: metadata.labels['tags.datadoghq.com/version'] #Uncomment this line to manually tag your version
 ```
-
 
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
@@ -194,21 +209,42 @@ containers:
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
+[7]: /tracing/services/deployment_tracking/
+[8]: /watchdog/faulty_deployment_detection/
+[9]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
+##### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
+
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`(optional with automatic version tagging) environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 
 ```yaml
 ENV DD_SERVICE <SERVICE>
-ENV DD_VERSION <VERSION>
+# ENV DD_VERSION <VERSION> #Uncomment this line to manually tag your version
 
 LABEL com.datadoghq.tags.service="<SERVICE>"
-LABEL com.datadoghq.tags.version="<VERSION>"
+# LABEL com.datadoghq.tags.version="<VERSION>" #Uncomment this line to manually tag your version
 ```
 
 Since `env` is likely determined at deploy time, you can inject the environment variable and label later:
@@ -222,31 +258,53 @@ You may also prefer to set everything at deploy time:
 ```shell
 docker run -e DD_ENV="<ENV>" \
            -e DD_SERVICE="<SERVICE>" \
-           -e DD_VERSION="<VERSION>" \
+           # -e DD_VERSION="<VERSION>" \ #Uncomment this line to manually tag your version
            -l com.datadoghq.tags.env="<ENV>" \
            -l com.datadoghq.tags.service="<SERVICE>" \
-           -l com.datadoghq.tags.version="<VERSION>" \
+           # -l com.datadoghq.tags.version="<VERSION>" \ #Uncomment this line to manually tag your version
            ...
 ```
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels:
 
 ```yaml
 com.datadoghq.tags.env
 com.datadoghq.tags.service
-com.datadoghq.tags.version
+# com.datadoghq.tags.version #Uncomment this line to manually tag your version
 ```
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
+ 
+
+[1]: /tracing/services/deployment_tracking/
+[2]: /watchdog/faulty_deployment_detection/
+[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 
 {{% /tab %}}
 
 {{% tab "ECS" %}}
+
+##### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
+
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic version tagging) environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
 ```
 "environment": [
@@ -257,33 +315,46 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
   {
     "name": "DD_SERVICE",
     "value": "<SERVICE>"
-  },
-  {
-    "name": "DD_VERSION",
-    "value": "<VERSION>"
   }
+  /**
+   * Only include this block for manual version tagging
+   * ,{
+   *   "name": "DD_VERSION",
+   *   "value": "<VERSION>"
+   * }
+   **/
 ],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
-  "com.datadoghq.tags.service": "<SERVICE>",
-  "com.datadoghq.tags.version": "<VERSION>"
+  "com.datadoghq.tags.service": "<SERVICE>"
+  /**
+   * Only include this block for manual version tagging
+   * ,"com.datadoghq.tags.version": "<VERSION>"
+   **/
 }
 ```
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
-  "com.datadoghq.tags.service": "<SERVICE>",
-  "com.datadoghq.tags.version": "<VERSION>"
+  "com.datadoghq.tags.service": "<SERVICE>"
+  /**
+   * Only include this block for manual version tagging
+   * ,"com.datadoghq.tags.version": "<VERSION>"
+   **/
 }
 ```
 
+[1]: /tracing/services/deployment_tracking/
+[2]: /watchdog/faulty_deployment_detection/
+[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
 {{% /tab %}}
-{{< /tabs >}}
+{{% /tabs %}}
 
 ### Non-containerized environment
 

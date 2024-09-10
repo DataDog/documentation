@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/faq/log-parsing-best-practice
   tag: Documentación
   text: Prácticas recomendadas para el análisis de logs
-kind: Guía
 title: Monitorizar y consultar logs sin analizar
 ---
 

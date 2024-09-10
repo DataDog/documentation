@@ -25,7 +25,7 @@ title: ランク
     - `sum`: すべてのメトリクス値の合計。
     - `last`: 最後のメトリクス値。
     - `l2norm`: 時系列の[ノルム][1]を使用して (常に正の値)、系列をランク付けします。
-    - `area`: Signed area under the curve being graphed, which can be negative
+    - `area`: グラフの曲線の下の符号付き面積。負の場合もあります。
 
 * `DIR`: ランク付けの方向。以下のいずれかを選択します。
     - `asc`: 結果を昇順でランク付けします。

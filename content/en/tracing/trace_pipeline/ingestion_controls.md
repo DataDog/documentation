@@ -70,7 +70,7 @@ Ingested Bytes/s
 : Average number of bytes per second ingested into Datadog for the service over the past one hour.
 
 Downstream Bytes/s
-: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism.
+: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism. This column's data is based on the `sampling_service` dimension, set on the `datadog.estimated_usage.apm.ingested_bytes` metrics. For more information, read [APM usage metrics][15].
 
 Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
@@ -161,3 +161,4 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [14]: /agent/remote_config/#enabling-remote-configuration
+[15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
