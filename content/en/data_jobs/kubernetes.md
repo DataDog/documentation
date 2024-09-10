@@ -138,13 +138,13 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 When you run your Spark job, use the following configurations:
 
-`spark.kubernetes.driver.label.admission.datadoghq.com/enabled` (Required)
+`spark.kubernetes.{driver,executor}.label.admission.datadoghq.com/enabled` (Required)
 : `true`
 
-`spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version` (Required)
+`spark.kubernetes.{driver,executor}.annotation.admission.datadoghq.com/java-lib.version` (Required)
 : `latest`
 
-`spark.driver.extraJavaOptions`
+`spark.{driver,executor}.extraJavaOptions`
 :  `-Ddd.data.jobs.enabled=true` (Required)
    : `true`
 
@@ -160,9 +160,6 @@ When you run your Spark job, use the following configurations:
    `-Ddd.tags` (Optional)
    : Other tags you wish to add, in the format `<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>`.
 
-   `-Ddd.trace.experimental.long-running.enabled` (Optional)
-   : `true` To view jobs while they are still running
-
 
 #### Example: spark-submit
 
@@ -174,9 +171,13 @@ spark-submit \
   --deploy-mode cluster \
   --conf spark.kubernetes.namespace=<NAMESPACE> \
   --conf spark.kubernetes.authenticate.driver.serviceAccountName=<SERVICE_ACCOUNT> \
+  --conf spark.kubernetes.authenticate.executor.serviceAccountName=<SERVICE_ACCOUNT> \
   --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true \
+  --conf spark.kubernetes.executor.label.admission.datadoghq.com/enabled=true \
   --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest \
-  --conf spark.driver.extraJavaOptions="-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2> -Ddd.trace.experimental.long-running.enabled=true" \
+  --conf spark.kubernetes.executor.annotation.admission.datadoghq.com/java-lib.version=latest \
+  --conf spark.driver.extraJavaOptions="-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
+  --conf spark.executor.extraJavaOptions="-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
   local:///usr/lib/spark/examples/jars/spark-examples.jar 20
 ```
 
@@ -191,7 +192,7 @@ aws emr-containers start-job-run \
 --job-driver '{
   "sparkSubmitJobDriver": {
     "entryPoint": "s3://BUCKET/spark-examples.jar",
-    "sparkSubmitParameters": "--class <MAIN_CLASS> --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.driver.extraJavaOptions=\"-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2> -Ddd.trace.experimental.long-running.enabled=true\""
+    "sparkSubmitParameters": "--class <MAIN_CLASS> --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.executor.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.kubernetes.executor.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.driver.extraJavaOptions=\"-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>  --conf spark.executor.extraJavaOptions=\"-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>\""
   }
 }
 
