@@ -23,14 +23,13 @@ Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
 
 ### Store your Datadog API key in Google Cloud Secret Manager (Recommended)
 1. Take note of your [Datadog API key][1].
-TODO. There's a datad0g key in the init script for the moment.
-<!-- 1. In [GCP Secret Manager][2], choose **Create secret**.
+1. In [GCP Secret Manager][2], choose **Create secret**.
    - Under **Name**, enter a **Secret name**. You can use `datadog_dd_api_key`.
    - Under **Secret value**, paste your Datadog API key in the **Secret value** text box.
       {{< img src="data_jobs/dataproc/key_value.png" alt="GCP Secret Manager, Create secret. A section titled 'Secret details'. On the top, a text box containing 'datatdog_dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
    - Then, click **Create Secret**.
 1. Under **Rotation** page, you can optionally turn on [automatic rotation][3].
-1. In AWS Secrets Manager, open the secret you created. Take note of the **Secret ARN**. -->
+1. In AWS Secrets Manager, open the secret you created. Take note of the Resource ID, which is under the form "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
 
 ### Create and configure your Dataproc cluster
 
@@ -45,10 +44,13 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    DD_SITE={{< region-param key="dd_site" code="true" >}}
 
    # Set required parameter DD_API_KEY with Datadog API key.
-   # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as datadog_dd_api_key.
+   # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as datadog_dd_api_key and the project <PROJECT_NAME>.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
+   # Change the project name, which you can find on the secret page. The resource ID is under the form "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
+   PROJECT_NAME = <PROJECT_NAME>
+   gcloud config set project $PROJECT_NAME
    SECRET_NAME=datadog_dd_api_key
-   DD_API_KEY=TODO
+   DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
 
    # Optional parameters
    # Uncomment the following line to allow adding init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully.
