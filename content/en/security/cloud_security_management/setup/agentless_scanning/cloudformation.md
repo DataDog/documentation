@@ -10,6 +10,8 @@ further_reading:
   - link: "/security/cloud_security_management/setup/agentless_scanning/terraform"
     tag: "Documentation"
     text: "Setting up Agentless Scanning using Terraform"
+aliases:
+  - /security/cloud_security_management/guide/agentless_aws_integration
 ---
 
 If you've already [set up Cloud Security Management][3] and want to add a new AWS account or enable [Agentless Scanning][1] on an existing integrated AWS account, you can use either [Terraform][2] or AWS CloudFormation. This article provides detailed instructions for the AWS CloudFormation approach.

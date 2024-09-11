@@ -6,10 +6,10 @@ further_reading:
   - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
     tag: "Documentation"
     text: "Agentless Scanning Quick Start for Cloud Security Management"
-  - link: "/security/cloud_security_management/guide/agentless_terraform"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/terraform"
     tag: "Documentation"
     text: "Setting up Agentless Scanning using Terraform"
-  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/cloudformation"
     tag: "Documentation"
     text: "Setting up Agentless Scanning with the AWS Integration"
   - link: "https://www.datadoghq.com/blog/agentless-scanning/"
@@ -124,7 +124,7 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [3]: https://cyclonedx.org/
 [4]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
-[6]: /security/cloud_security_management/guide/agentless_terraform
+[6]: /security/cloud_security_management/setup/agentless_scanning/terraform
 [7]: mailto:success@datadoghq.com
 [8]: /sensitive_data_scanner
 [9]: /security/cloud_security_management
