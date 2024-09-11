@@ -117,7 +117,7 @@ To enable tracing when running Tomcat on Linux:
 To enable tracing when running Tomcat as a Windows service:
 
 1. Open the "tomcat@VERSION_MAJOR@w.exe" maintenance utility located in the `./bin` directory of the Tomcat project folder.
-2. Navigate to the Java tab, and add the following to `Java Options`:
+2. Navigate to the **Java** tab, and add the following to `Java Options`:
 ```text
 -javaagent:C:\path\to\dd-java-agent.jar
 ```
