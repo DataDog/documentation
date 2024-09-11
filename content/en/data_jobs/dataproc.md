@@ -16,8 +16,7 @@ TODO -> Do we need a specific version of GCP Dataproc ?
 
 Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
 
-1. [Store your Datadog API key](#store-your-datadog-api-key-in-aws-secrets-manager-recommended) in AWS Secrets Manager (Recommended).
-1. [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
+1. [Store your Datadog API key](#store-your-datadog-api-key-in-google-cloud-secret-manager-recommended) in GCP Secret Manager (Recommended).
 1. [Create and configure your Dataproc cluster](#create-and-configure-your-dataproc-cluster).
 1. [Specify service tagging per Spark application](#specify-service-tagging-per-spark-application).
 
@@ -29,7 +28,7 @@ Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
       {{< img src="data_jobs/dataproc/key_value.png" alt="GCP Secret Manager, Create secret. A section titled 'Secret details'. On the top, a text box containing 'datatdog_dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
    - Then, click **Create Secret**.
 1. Under **Rotation** page, you can optionally turn on [automatic rotation][3].
-1. In AWS Secrets Manager, open the secret you created. Take note of the Resource ID, which is under the form "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
+1. In [GCP Secret Manager][2], open the secret you created. Take note of the Resource ID, which is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
 
 ### Create and configure your Dataproc cluster
 
@@ -46,8 +45,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    # Set required parameter DD_API_KEY with Datadog API key.
    # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as datadog_dd_api_key and the project <PROJECT_NAME>.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
-   # Change the project name, which you can find on the secret page. The resource ID is under the form "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
-   PROJECT_NAME = <PROJECT_NAME>
+   # Change the project name, which you can find on the secrets page. The resource ID is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
    gcloud config set project $PROJECT_NAME
    SECRET_NAME=datadog_dd_api_key
    DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
@@ -61,16 +59,14 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the file name in the URL with `` to use the last stable version.
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the file name in the URL with `TODO` to use the last stable version.
 
 1. On the **Customize cluster** page, find the **Initialization actions** section. Click **Browse** to bring up the **Select object** dialog.
    {{< img src="data_jobs/dataproc/browse-buckets.png" alt="Google Cloud, Dataproc, Create a Dataproc cluster on Compute Engine, Add Initialization Action dialog. Text fields for browsing buckets" style="width:80%;" >}}
-   - Use the Search function to find your bucket
-   - Click select once you have selected the init script
+   - Use the Search function to find the bucket you chose at the previous step
+   - Click select once you have found the init script
 
-1. On the **Create Cluster** page, find the **Identity and Access Management (IAM) roles** section. For **instance profile** dropdown, select the IAM role you have granted permissions in [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
-
-When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
+When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 
 ### Specify service tagging per Spark application
 
@@ -101,11 +97,9 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://console.cloud.google.com/security/secret-manager
-[3]:https://cloud.google.com/secret-manager/docs/secret-rotation?_gl=1*144zyx0*_ga*MTk0ODY1OTU1OS4xNzI0NzA5NDM4*_ga_WH2QY8WWF5*MTcyNTk1MDU4Mi4yMy4xLjE3MjU5Nzk3NzUuNDEuMC4w
-[4]: https://console.cloud.google.com/
+[3]: https://cloud.google.com/secret-manager/docs/secret-rotation?_gl=1*144zyx0*_ga*MTk0ODY1OTU1OS4xNzI0NzA5NDM4*_ga_WH2QY8WWF5*MTcyNTk1MDU4Mi4yMy4xLjE3MjU5Nzk3NzUuNDEuMC4w
+[4]: https://console.cloud.google.com/dataproc/
 [5]: https://console.cloud.google.com/iam-admin/iam
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
-[10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
-[11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
