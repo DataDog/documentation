@@ -61,8 +61,8 @@ tile:
   title: Amazon SQS
 ---
 
-<!--  SOURCED FROM https://github.com/Datadog/integraciones-internal-core -->
-{{< img src="integraciones/amazon_sqs/sqsdashboard.png" alt="SQS dashboard" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="Dashboard de SQS" popup="true">}}
 
 ## Información general
 
@@ -94,7 +94,7 @@ Si todavía no lo has hecho, configura la [integración de Amazon Web Services p
 
 Para configurar tu ruta, consulta [Registro de llamadas a la API de Amazon SQS mediante AWS CloudTrail][6]. Cuando definas tus rutas, selecciona un bucket de S3 en el que escribir los logs:
 
-{{< img src="integraciones/amazon_cloudtrail/cloudtrail_logging.png" alt="CloudTrail logging" popup="true" style="width:70%;">}}
+{{< img src="integraciones/amazon_cloudtrail/cloudtrail_logging.png" alt="Registro CloudTrail" popup="true" style="width:70%;">}}
 
 #### Enviar logs a Datadog
 
@@ -112,7 +112,7 @@ Una vez añadido el activador, utilice el [Datadog loguear Explorer][8] para ver
 {{< get-metrics-from-git "amazon_sqs" >}}
 
 
-A cada uno de los métricas recuperados de AWS se le asignan los mismos etiquetas (tags) que aparecen en la consola AWS, incluyendo, entre otros, host nombre, grupos de seguridad, etc.
+A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, donde se incluyen, entre otros, el nombre del host, los grupos de seguridad y más.
 
 ### Eventos
 
@@ -126,7 +126,7 @@ La integración Amazon SQS no incluye checks de servicios.
 
 La integración de Amazon SQS proporciona capacidades de monitorización listas para utilizar para monitorizar y optimizar el rendimiento.
 
-- Dashboard de Amazon SQS: Obtén información general global de tus colas SQS utilizando el [dashboard de Amazon SQS][9] predefinido.
+- Dashboard de Amazon SQS: Obtén información general global de tus colas SQS utilizando el [dashboard de Amazon SQS][10] predefinido.
 - recomendado Monitors: Habilite [recomendado Amazon SQS monitors][11] para detectar proactivamente los problemas y recibir alertas oportunas.
 
 ## Solucionar problemas
