@@ -14,12 +14,12 @@ further_reading:
 
 Observability Pipelines allows you to collect and process logs, as well as determine where you want to route them, all before the data leaves your on-premises or cloud environment.
 
-Logs are not equal value. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can end up diluting the overall value of your data and cause you to exceed your budget.
+Logs are not equal value. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can dilute the overall value of your data and cause you to exceed your budget.
 
 The following situations can also unnecessarily increase your log volume and cost:
 
 - An application team inadvertently turns on debug logging.
-- A flood of errors is triggered when shipping a new build with an error loop condition.
+- You ship a new build with an error loop condition that triggers a flood of errors.
 - Teams attempt to add as much performance and metric data into the logs because it seems easier than implementing other telemetry solutions.
 - Logs contain extra fields and values that are never used.
 
@@ -35,15 +35,15 @@ Reduce your overall log volume by dropping a percentage of high-volume logs that
 
 ### Filter your logs
 
-Not all logs are valuable and need to be stored. For example, keeping debug logs from non-production systems is most likely not critical for your organization. Therefore, use the [filter processor][2] to drop those logs, so they do not get sent to your log management solutions.
+Not all logs are valuable and need to be stored. For example, keeping debug logs from non-production systems is likely not critical for your organization. Therefore, use the [filter processor][2] to drop those logs, so they do not get sent to your log management solutions.
 
 ### Drop attributes in your logs
 
-Sometimes logs can contain hundreds of attributes, and often only a small number of attributes are used for investigation and analysis. Use the [edit fields][3] processor to reduce the overall size of your logs by dropping unused or non-useful attributes, thus lowering your log ingestion cost.
+Logs can contain hundreds of attributes, and often only a small number of attributes are used for investigation and analysis. Use the [edit fields][3] processor to reduce the overall size of your logs by dropping unused or unuseful attributes, which lowers your log ingestion cost.
 
 ### Reduce your logs
 
-Some systems can emit hundreds, if not thousands, of logs per second. Many of these logs can be collapsed into a single event by merging fields using different strategies, such as concatenation, summing, creating an array of the values, and more. Use the [reduce processor][4] to collapse multiple log events into one event, based on the selected merge strategy. This reduces the total number of events that get sent to your destination.
+Systems can emit hundreds, if not thousands, of logs per second. Collapse these logs into a single event by merging fields using different strategies, such as concatenation, summing, creating an array of the values, and more. Use the [reduce processor][4] to collapse multiple log events into one event, based on the selected merge strategy. This reduces the total number of events that get sent to your destination.
 
 ### Deduplicate your logs
 
@@ -51,7 +51,7 @@ Deduplicating your logs can help maintain the accuracy and consistency of your d
 
 ### Implement quotas
 
-You can govern and control your logs at different levels using quotas. For example, at a granular level, you can apply a quota limit to specific application logs (`app:xyz`) or, at a higher level, apply a limit to info logs (`status:info`). This can help you meet budget and usage requirements.
+Govern and control your logs at different levels using quotas. For example, at a granular level, you can apply a quota limit to specific application logs (`app:xyz`) or, at a higher level, apply a limit to info logs (`status:info`). This can help you meet budget and usage requirements.
 
 Use the [quota processor][6] to:
 1. Define a filter for the logs you are interested in. This could filter logs at a high level, such as for an environment or at a more granular level like for a specific team. You can also filter using a combination of log attributes.
@@ -59,7 +59,7 @@ Use the [quota processor][6] to:
 
 ### Route your logs directly to an archive
 
-Route logs directly to your own cloud storage (Amazon S3, Google Cloud Storage, or Azure Storage) in a Datadog-rehydratable format. You can then rehydrate the archive into Datadog on an ad-hoc as-needed basis. See [Archive Logs][7] for more information.
+Route logs directly to your own cloud storage (Amazon S3, Google Cloud Storage, or Azure Storage) in a Datadog-rehydratable format. You can then rehydrate the archive into Datadog on an as-needed basis. See [Archive Logs][7] for more information.
 
 ## Strong candidates for log volume reduction strategies
 
