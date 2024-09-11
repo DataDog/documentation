@@ -3,10 +3,13 @@
   display: inline-block;
 }
 
+.tooltip-container .tooltip-trigger {
+  cursor: help;
+}
+
 .tooltip-trigger {
   background: none;
   border: none;
-  cursor: help;
   text-decoration: underline;
   text-decoration-style: dotted;
   text-decoration-thickness: 1px;
@@ -16,6 +19,11 @@
   padding: 0;
   margin: 0;
   transition: color 0.3s ease;
+
+}
+
+.tooltip-trigger:hover {
+  color: $ddpurple;
 }
 
 .tooltip-content {
@@ -25,7 +33,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(5px);
   padding: 0.6rem 1rem;
-  background: linear-gradient(135deg, #9130A8 0%, #632ca6 100%);
+  background: linear-gradient(135deg, #9130A8 0%, $ddpurple 100%);
   color: white;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -85,7 +93,7 @@
   bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
-  color: #632ca6;
+  color: $ddpurple;
 }
 
 @media (prefers-reduced-motion: reduce) {
