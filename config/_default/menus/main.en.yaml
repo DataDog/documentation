@@ -1987,21 +1987,56 @@ menu:
       parent: error_tracking
       identifier: error_tracking_suspect_commits
       weight: 7
-    - name: APM
-      url: error_tracking/apm
+    - name: Track Browser and Mobile Errors
+      url: error_tracking/frontend
       parent: error_tracking
-      identifier: error_tracking_apm
+      identifier: error_tracking_frontend
       weight: 8
-    - name: Logs
-      url: error_tracking/logs
-      parent: error_tracking
-      identifier: error_tracking_logs
-      weight: 9
+    - name: Browser Error Tracking
+      url: error_tracking/frontend/browser
+      parent: error_tracking_frontend
+      identifier: error_tracking_browser
+      weight: 100
+    - name: Collecting Browser Errors
+      url: error_tracking/frontend/collecting_browser_errors
+      parent: error_tracking_frontend
+      identifier: error_tracking_collect_errors
+      weight: 101
+    - name: Mobile Crash Tracking
+      url: error_tracking/frontend/mobile
+      parent: error_tracking_frontend
+      identifier: error_tracking_mobile
+      weight: 102
     - name: Real User Monitoring
       url: error_tracking/rum
-      parent: error_tracking
+      parent: error_tracking_frontend
       identifier: error_tracking_rum
-      weight: 10
+      weight: 103
+    - name: Logs
+      url: error_tracking/frontend/logs
+      parent: error_tracking_frontend
+      identifier: error_tracking__fe_logs
+      weight: 104
+    - name: Track Backend Errors
+      url: error_tracking/backend
+      parent: error_tracking
+      identifier: error_tracking_backend
+      weight: 9
+    - name: Exception Replay
+      url: error_tracking/backend/exception_replay
+      parent: error_tracking_backend
+      identifier: error_tracking_exception_replay
+      weight: 101
+    - name: APM
+      url: error_tracking/apm
+      parent: error_tracking_backend
+      identifier: error_tracking_apm
+      weight: 102
+    - name: Logs
+      url: error_tracking/backend/logs
+      parent: error_tracking_backend
+      identifier: error_tracking_be_logs
+      weight: 103
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
