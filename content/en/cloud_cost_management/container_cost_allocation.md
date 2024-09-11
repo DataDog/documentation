@@ -36,7 +36,7 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| GPU Container Cost Allocation | 7.54.0 | 1.11.0 |
+| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 | AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 | Data Transfer Cost Allocation    | 7.46.0 | 1.11.0 |
 
@@ -65,7 +65,7 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| GPU Container Cost Allocation | 7.54.0 | 1.11.0 |
+| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
@@ -86,7 +86,7 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| GPU Container Cost Allocation | 7.54.0 | 1.11.0 |
+| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
