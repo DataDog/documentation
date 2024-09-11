@@ -56,6 +56,17 @@ To set up Mobile Session Replay for Android:
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
 [3]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin#declare-the-sdk-as-a-dependency
 
+> Note that Session Replay will start recording immediately by default. In some cases you may want to begin manually recording only from a particular point in your application. For such scenarios you may use the optional `startRecordingImmediately` api as shown below.
+
+   {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    // in case you need material extension support
+    .addExtensionSupport(MaterialExtensionSupport()) 
+    .startRecordingImmediately(false)
+    .build()
+   SessionReplay.enable(sessionReplayConfig)
+   {{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
