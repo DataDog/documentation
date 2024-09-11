@@ -100,7 +100,6 @@ Manually configure individual paths by specifying the exact endpoint you want to
      # timeout: 10 # timeout in seconds of traceroute calls, default is 10s
      - hostname: 1.1.1.1 # endpoint hostname or IP
        protocol: UDP
-       port: 53
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
@@ -123,6 +122,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
   
      ## @param port - uint16 - optional - default:<RANDOM PORT>
      ## The port of the destination endpoint.
+     ## For UDP, we recommende not setting the port since it can make probes less reliable.
      ## By default, the port is random.
      #
      # port: <PORT>
