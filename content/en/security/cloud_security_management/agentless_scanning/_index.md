@@ -1,17 +1,23 @@
 ---
 title: Cloud Security Management Agentless Scanning
 aliases:
- - /security/agentless_scanning
+  - /security/agentless_scanning
 further_reading:
-- link: "/security/cloud_security_management/setup/agentless_scanning"
-  tag: "Documentation"
-  text: "Setting up Agentless Scanning"
-- link: "https://www.datadoghq.com/blog/agentless-scanning/"
-  tag: "Blog"
-  text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
-- link: "/security/vulnerabilities"
-  tag: "Documentation"
-  text: "Read more about CSM Vulnerabilities"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
+    tag: "Documentation"
+    text: "Agentless Scanning Quick Start for Cloud Security Management"
+  - link: "/security/cloud_security_management/guide/agentless_terraform"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning using Terraform"
+  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning with the AWS Integration"
+  - link: "https://www.datadoghq.com/blog/agentless-scanning/"
+    tag: "Blog"
+    text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
+  - link: "/security/vulnerabilities"
+    tag: "Documentation"
+    text: "Read more about CSM Vulnerabilities"
 ---
 
 {{< site-region region="gov" >}}
@@ -113,12 +119,12 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless_scanning/quick_start
 [2]: /agent/remote_config/?tab=configurationyamlfile
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_scanning/#permissions
+[4]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
-[6]: /security/cloud_security_management/setup/agentless_scanning#terraform
+[6]: /security/cloud_security_management/guide/agentless_terraform
 [7]: mailto:success@datadoghq.com
 [8]: /sensitive_data_scanner
 [9]: /security/cloud_security_management
