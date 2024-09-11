@@ -31,7 +31,7 @@ To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code A
 
 ## Select where to run Static Analysis scans
 ### Scan in CI pipelines
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
+Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Analysis in the respective CI provider.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
@@ -47,7 +47,7 @@ If GitHub is your source code management provider, you must configure a GitHub A
 When installing a GitHub App, the following permissions are required to enable certain features:
 
 - `Content: Read`, which allows you to see code snippets displayed in Datadog
-- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11], as well as open pull requests to [fix vulnerabilities][12]
 
 ### Other source code management providers
 If you are using another source code management provider, configure Static Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
@@ -279,3 +279,4 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [10]: /integrations/guide/source-code-integration
 [11]: /code_analysis/github_pull_requests/
+[12]: /code_analysis/github_pull_requests#fixing-a-vulnerability-directly-from-datadog

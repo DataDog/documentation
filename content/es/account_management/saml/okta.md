@@ -30,7 +30,7 @@ Sigue las instrucciones de Okta [Create custom SAML app integrations (crear inte
 | Campo de entrada del proveedor de identificación Okta        | Valor esperado                                                                                                                 |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | URL de inicio de sesión único          | URL del servicio de consumidor de afirmaciones (Encuentra esta URL en la [Configure SAML page (configurar página SAML)][3], en el campo *Assertion Consumer Service URL* [URL del servicio de consumidor de afirmaciones]). |
-| URL del receptor               | URL del servicio de consumidor de afirmaciones (o haz clic en *Use this for Recipient URL and Destination URL* [Utilizar esta URL del receptor y URL de destino])                        |
+| URL del receptor               | URL del servicio de consumidor de afirmaciones (o haz clic en la casilla *Use this for Recipient URL and Destination URL* [Utilizar esta URL del receptor y URL de destino])                        |
 | URL de destino             | URL del servicio de consumidor de afirmaciones (o haz clic en la casilla *Use this for Recipient URL and Destination URL* [Utilizar esta URL del receptor y URL de destino])                        |
 | URI de audiencia (ID de entidad del proveedor de servicios) | ID de entidad proveedora de servicios (Encuentra este ID en la [Configure SAML page (página Configurar SAML)][3], en el campo *Service Provider Entity ID* [ID de entidad proveedora de servicios]).         |
 | Formato de ID de nombre              | EmailAddress                                                                                                                   |
@@ -64,7 +64,7 @@ Encontrarás información adicional sobre la configuración de SAML para tu cuen
 
 En el caso de que necesitas para cargar un archivo `IDP.XML` a Datadog antes de ser capaz de completamente configurar la aplicación en Okta, ve [acquiring the idp.xml metadata file for a SAML template App article (el artículo sobre la adquisición del archivo de metadatos idp.xml para una app de plantilla SAML][6] para las instrucciones de marcador de posición de campo.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

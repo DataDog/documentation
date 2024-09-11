@@ -16,6 +16,6 @@ title: コミュニティ
     {{< nextlink href="developers/community/libraries" >}}Datadog およびコミュニティによってサポートされるオープンソースライブラリと SDK。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

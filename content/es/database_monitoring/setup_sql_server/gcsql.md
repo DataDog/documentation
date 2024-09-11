@@ -80,11 +80,14 @@ Para utilizar la [autenticación de Windows][4], configura `connection_string: "
 
 Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][5].
 
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
+
 ### Controladores compatibles
 
 #### Microsoft ADO
 
-El proveedor [ADO][6] recomendado es el [controlador de bases de datos Microsoft OLE][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
+El proveedor [ADO][6] recomendado es el [controlador de Microsoft OLE DB][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
 ```yaml
 connector: adodbapi
 adoprovider: MSOLEDBSQL19  # Sustituye por MSOLEDBSQL para las versiones 18 y anteriores
@@ -103,9 +106,9 @@ driver: '{ODBC Driver 18 for SQL Server}'
 
 Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][9].
 
-### Confirmar
+### Validar
 
-[Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][11] de Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][11] de Datadog para empezar.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -135,13 +138,13 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # Después de añadir tu proyecto y tu instancia, configura la integración el Datadog Google Cloud (GCP) para extraer datos de nube adicionales, como CPU, memoria, etc.
+    # Después de añadir tu proyecto y tu instancia, configura la integración Datadog Google Cloud (GCP) para extraer datos de nube adicionales, como CPU, memoria, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -153,9 +156,9 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 
 Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][6].
 
-### Confirmar
+### Validar
 
-[Ejecuta el subcomando de estado del Agent][7] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][8] de Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][7] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][8] de Datadog para empezar.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
@@ -206,9 +209,9 @@ Para obtener información adicional sobre la configuración de los campos `proje
 
 Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][4].
 
-### Confirmar
+### Validar
 
-[Ejecuta el subcomando de estado del Agent][5] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][6] de Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][5] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][6] de Datadog para empezar.
 
 [1]: /es/agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
@@ -239,7 +242,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
             host: <HOSTNAME>
             port: 1433
             username: datadog
-            password: '<PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             tags:  # Optional
@@ -266,7 +269,7 @@ Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>he
 [2]: /es/getting_started/site
 [3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
-### Configuración con archivos montados
+### Configuración con archivos integrados
 
 Para configurar un check de clúster con un archivo de configuración montado, monta el archivo de configuración del contenedor del Cluster Agent en la ruta: `/conf.d/postgres.yaml`:
 
@@ -278,21 +281,21 @@ instances:
     host: '<HOSTNAME>'
     port: <SQL_PORT>
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
     driver: "ODBC Driver 18 for SQL Server"
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # Después de añadir tu proyecto y tu instancia, configura la integración Datadog Azure para extraer datos de nube adicionales, como CPU, memoria, etc.
+    # Después de añadir tu proyecto y tu instancia, configura la integración Datadog Google Cloud (GCP) para extraer datos de nube adicionales, como CPU, memoria, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-### Configurar con anotaciones de servicios de Kubernetes
+### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
 
 ```yaml
@@ -310,7 +313,7 @@ metadata:
           "host": "<HOSTNAME>",
           "port": <SQL_PORT>,
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Opcional

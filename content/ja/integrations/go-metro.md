@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - languages
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: go-metro
 integration_title: Go-Metro
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: go-metro
 public_title: Go-Metro
@@ -42,6 +42,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::言語
+  - Offering::Integration
   configuration: README.md#Setup
   description: ホスト間の TCP RTT を受動的に計算
   media: []
@@ -59,11 +60,11 @@ TCP RTT チェックは、Agent が実行されているホストと Agent の�
 
 このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。このチェックは Datadog Agent v6 では**使用できません**。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 [go-metro][2] とも呼ばれる TCP RTT チェックは、Agent にパッケージ化されていますが、追加のシステムライブラリが必要です。このチェックは、発信パケットから対応する TCP 受信確認までの時間を計算するために、PCAP ライブラリで提供されているタイムスタンプを使用します。そのため、PCAP をインストールして構成する必要があります。
 
@@ -87,7 +88,7 @@ sudo yum install compat-libcap1
 sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 Agent の `conf.d` ディレクトリで、`go-metro.yaml` ファイルを編集します。利用可能なすべてのコンフィギュレーションのオプションについては、[サンプル go-metro.yaml][3] を参照してください。
 app.datadoghq.com と 192.168.0.22 について、TCP RTT 時間を示すファイルの例を以下に挙げます。
@@ -152,21 +153,21 @@ TCP RTT チェックが開始している場合は、上のような go-metro �
 
 **これは受動チェックなので、yaml ファイルで指定されているホストにパケットがアクティブに送信されない限り、メトリクスは報告されません。**
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "go-metro" >}}
 
 
-### ヘルプ
+### イベント
 
 Go-metro チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Go-metro チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

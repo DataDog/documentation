@@ -25,6 +25,7 @@ author:
 categories:
 - インシデント
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/steadybit/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: steadybit
 integration_title: Steadybit
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: steadybit
 public_title: Steadybit
@@ -82,7 +82,7 @@ tile:
 
 Steadybit インテグレーションは、カオスエンジニアリングの実験内で Datadog モニターのステータスを使用します。このインテグレーションは、実験の環境、開始・終了時間、実験の結果など、カオスエンジニアリングのアクティビティを Datadog のイベントを通じてチームに洞察させるものです。
 
-## 計画と使用
+## セットアップ
 
 Datadog と Steadybit のインテグレーションは、[Steadybit Datadog 拡張機能][2]を介して行われます。この拡張機能は、Datadog の API と対話し、モニターに関する情報を収集し、Datadog にイベントを報告します。
 
@@ -90,7 +90,7 @@ Datadog と Steadybit のインテグレーションは、[Steadybit Datadog 拡
 
 Steadybit の[無償または有償ライセンス][3]が必要です。インテグレーションは、Steadybit の SAAS とオンプレミスの提供をサポートしています。
 
-### インフラストラクチャーリスト
+### インストール
 
 いくつかの[インストール方法がサポートされています][4]。最高の体験を得るためには、以下のように専用の Helm チャートを介して Steadybit Datadog 拡張機能をインストールしてください。`datadog.siteParameter` と `datadog.siteUrl` にサポートされている値については、[Datadog サイト][5]のページを参照してください。
 
@@ -115,21 +115,21 @@ helm upgrade steadybit-extension-datadog \
 
 Steadybit Datadog 拡張機能を実行すると、Steadybit の *Landscape* タブ内に Datadog モニターのリストが表示されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Steadybit には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Steadybit には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Steadybit は、カオスエンジニアリングのアクティビティを示すイベントを Datadog に報告します。そのようなイベントにはすべて `source:steadybit` タグが付きます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Steadybit のサポートチーム][6]までお問い合わせください。
 

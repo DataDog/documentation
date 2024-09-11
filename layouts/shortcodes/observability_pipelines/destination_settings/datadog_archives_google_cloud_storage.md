@@ -1,5 +1,3 @@
-#### Google Cloud Storage
-
 1. Enter the name of the Google Cloud storage bucket you created earlier.
 1. Enter the path to the credentials JSON file you downloaded [earlier](#create-a-service-account-to-allow-workers-to-write-to-the-bucket).
 1. Select the storage class for the created objects.

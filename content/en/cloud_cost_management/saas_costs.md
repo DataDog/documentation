@@ -24,10 +24,6 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 SaaS Cost Integrations are in public beta.
 {{< /beta-callout >}}
@@ -156,7 +152,6 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 
 
 {{% tab "Elastic Cloud" %}}
-In Cloud Cost Management, you can access your Elastic Cloud cost data for the past 15 months after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
 2. Click **Create New Key**.
@@ -167,9 +162,11 @@ In Cloud Cost Management, you can access your Elastic Cloud cost data for the pa
 7. Click **Add Account**.
 8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
 
+Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
 {{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
 
-[101]: https://app.datadoghq.com/integrations/elastic_cloud_ccm
+[101]: https://app.datadoghq.com/integrations/elastic-cloud-ccm
 [102]: https://cloud.elastic.co/account/keys
 
 {{% /tab %}}

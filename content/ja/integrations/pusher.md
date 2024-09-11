@@ -15,6 +15,7 @@ assets:
       prefix: pusher.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 165
     source_type_name: Pusher
 author:
   homepage: https://www.datadoghq.com
@@ -23,7 +24,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
-- messaging
+- message queues
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +34,6 @@ integration_id: pusher
 integration_title: Pusher
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pusher
 public_title: Pusher
@@ -42,14 +43,21 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Metrics
-  - Category::メッセージング
+  - Category::Message Queues
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pusher から Datadog にメトリクスを取り込み、アプリエンゲージメントを参照および監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/pusher-monitoring/
   support: README.md#Support
   title: Pusher
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/pusher/pusher_dashboard.png" alt="Pusher ダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -62,7 +70,7 @@ Pusher アプリ全体のリアルタイムメッセージと接続分析を監�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Pusher からのメトリクスを監視するには、以下の手順に従ってください。
 
@@ -88,7 +96,7 @@ Pusher からのメトリクスを監視するには、以下の手順に従っ�
 
 Pusher インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Pusher インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -96,7 +104,14 @@ Pusher インテグレーションには、サービスのチェック機能は�
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Pusher のリアルタイムモニタリングの導入][5]
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://dashboard.pusher.com/accounts/sign_in
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/pusher/pusher_metadata.csv
 [4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/pusher-monitoring/

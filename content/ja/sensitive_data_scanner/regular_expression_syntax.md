@@ -11,7 +11,7 @@ title: 正規表現の構文
 
 [Sensitive Data Scanner][1] では、スキャンルールによってデータ内でマッチする機密情報を検出します。機密情報のスキャンのために[スキャンルールライブラリ][2]のルールを使用することも、正規表現 (regex) パターンを使ってカスタムスキャンルールを作成することも可能です。Sensitive Data Scanner の正規表現構文は、[PCRE2][3] のサブセットです。
 
-{{< whatsnext desc=“カスタムルールで使用可能な正規表現構文は以下のカテゴリーに分けられます。" >}}
+{{< whatsnext desc="カスタムルールで使用可能な正規表現構文は以下のカテゴリーに分けられます。" >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#alternation" >}}交替{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#assertions" >}}アサーション{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#ascii-classes" >}}ASCII クラス{{< /nextlink >}}

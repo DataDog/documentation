@@ -23,8 +23,6 @@ further_reading:
 
 When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard. When you generate a URL, you enable *Sharing*, and the dashboard becomes a **public dashboard**. Public dashboards refresh every 30 seconds and this [refresh rate][1] cannot be customized. 
 
-**Note**: Widgets based on APM trace queries do not display data on public dashboards.
-
 ## Share a dashboard by public URL
 
 To share an entire dashboard publicly, generate a URL:
@@ -36,7 +34,7 @@ To share an entire dashboard publicly, generate a URL:
 1. Click **Done** to return to the *Sharing: On* modal.
 1. Copy the URL and click **Done**.
 
-**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
+**Note**: The Log Stream widget does not display data on public dashboards, but other log-based queries do.
 
 ## Share a dashboard with individual email addresses
 

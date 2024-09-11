@@ -10,13 +10,15 @@ further_reading:
   text: "Notification Rules"
 ---
 
-This article outlines upcoming changes to how [notification rules][1] are configured. Although the most significant changes apply to [Cloud Security Management (CSM)][4], they also impact [Application Security Management][5] and [Cloud SIEM][6].
+This article outlines upcoming changes to how [notification rules][1] are configured. These changes mostly impact [Cloud Security Management (CSM)][4], and more specifically cloud configuration and infrastructure configuration signals. 
+
+Note that for the time being, the changes will only affect how you get notified after manually upgrading a notification rule, or after the final deprecation date is reached (early 2025). 
 
 ## Signals deprecation for CSM Misconfigurations
 
-Currently, notifications for [CSM Misconfigurations][2] can only be configured for detection rules that have signals enabled, as shown in the following diagram:
+Until today, notifications for [CSM Misconfigurations][2] would only be sent out for detection rules that have signals enabled, as shown in the following diagram:
 
-**Current workflow**:
+**Previous workflow**:
 
 {{< img src="security/csm/notification_rules_old_workflow.png" alt="Diagram that shows the current workflow for enabling notifications for CSM Misconfigurations" width="80%">}}
 
@@ -29,11 +31,11 @@ As part of the upcoming changes to notification rules, you are no longer require
 This change has the following impact on how notifications are generated for CSM Misconfigurations:
 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
-2. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled for individual detection rules.
+2. You will now be able to choose whether you want to get notified for every new issue matching your query, or if you want to receive periodic notifications that summarize the new findings.
+3. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled and configured at the detection rule level.
+4. Support for CSM Misconfigurations signals will be deprecated in early 2025. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
-<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can use the new time aggregation mechanism.</div>
-
-3. Support for CSM Misconfigurations signals will be deprecated in late 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge).
+<div class="alert alert-warning">While there will be no immediate change in behavior, depending on how you configure your new notification rules, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can refine your query and use the new time aggregation mechanism. At this time, this feature is only available for vulnerabilities.</div>
 
 ## Notification rules source types selector
 
@@ -46,9 +48,9 @@ When you create a notification rule, you are now required to choose between two 
 
 ## Additional changes
 
-- Notification rules can now be configured for identity risks and attack paths.
+- Notification rules can now be configured for identity risks and attack paths, as well as container image vulnerabilities.
 - CSM Misconfigurations notifications now contain the full finding metadata. Previously, the notification contained only limited signal metadata.
-- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date. Terraform support for Notification Rules will be available at a later date. 
+- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date (early 2025). Terraform support for Notification Rules will be available in late 2024. 
 
 ## How to migrate existing notifications
 
@@ -64,6 +66,12 @@ To migrate notifications that are configured for individual detection rules:
 3. Modify the settings, if desired.
 4. Click **Save and Activate**.
 
+### Notification rules configured for cloud or infrastructure configuration signals
+
+To migrate notification rules configured for cloud or infrastructure configuration signals, change the target from Cloud Configuration or Infrastructure Configuration to Vulnerability > Misconfiguration. 
+
+If you have any questions, contact [Datadog support][7]. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -74,3 +82,4 @@ To migrate notifications that are configured for individual detection rules:
 [4]: /security/cloud_security_management/ 
 [5]: /security/application_security/
 [6]: /security/cloud_siem/
+[7]: /help/

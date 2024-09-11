@@ -5,7 +5,7 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - メトリクス
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
 doc_link: https://docs.datadoghq.com/integrations/travis_ci/

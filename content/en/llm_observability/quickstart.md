@@ -58,17 +58,19 @@ To generate an LLM Observability trace, you can run a Python script.
 
 1. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
 
-   {{< code-block lang="shell" >}}
+   ```shell
    DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
-   DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE={{< region-param key="dd_site_name" >}} \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE={{< region-param key="dd_site" >}} \
    DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
-   {{< /code-block >}}
+   ```
 
-   For more information about required environment variables, see [the SDK documentation][9].
+   For more information about required environment variables, see [the SDK documentation][9]. 
+   
+   **Note**: `DD_LLMOBS_AGENTLESS_ENABLED` is only required if you do not have the Datadog Agent running. If the Agent is running in your production environment, make sure this environment variable is unset.
 
 1. View the trace of your LLM call on the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
 
-   {{< img src="llm_observability/quickstart_trace.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
+   {{< img src="llm_observability/quickstart_trace_1.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 

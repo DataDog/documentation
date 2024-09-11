@@ -7,9 +7,9 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/python
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
@@ -21,9 +21,11 @@ type: multi-code-lang
 
 ## 要件
 
-Datadog Profiler には Python 2.7+ と Agent バージョン [7.20.2][2] 以降または [6.20.2][3] 以降が必要です。
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
 
-以下のプロファイリング機能は、お使いの Python のバージョンに応じて利用可能です。詳しくは、[プロファイルタイプ][7]をお読みください。
+The Datadog Profiler requires Python 2.7+.
+
+The following profiling features are available depending on your Python version. For more details, read [Profile Types][8]:
 
 |      機能         | サポート対象の Python バージョン          |
 |----------------------|------------------------------------|
@@ -37,12 +39,15 @@ Datadog Profiler には Python 2.7+ と Agent バージョン [7.20.2][2] 以降
 
 以下のプロファイリング機能は、`dd-trace-py` ライブラリの以下の最小バージョンで利用可能です。
 
-|      機能         | 必要な `dd-trace-py` のバージョン          |
-|----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.44.0 以降                       |
-| [エンドポイントプロファイリング][13]            | 0.54.0 以降                       |
+| 機能                  | 必要な `dd-trace-py` のバージョン |
+|--------------------------|--------------------------------|
+| [Code Hotspots][12]      | 0.44.0 以降                        |
+| [Endpoint Profiling][13] | 0.54.0 以降                        |
+| [Timeline][15]           | 2.10.5+                        |
 
 ## インストール
+
+Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 トレーシングとプロファイリング機能の双方を提供する `ddtrace` をインストールします。
 
@@ -71,7 +76,9 @@ apk install gcc musl-dev linux-headers
 
 より高度な使い方については、[構成](#configuration)を参照してください。
 
-数分後、[Datadog APM > Profiler ページ][4]でプロファイルを視覚化します。
+Optionally, set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
+
+After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][5].
 
 プロファイラーのライフサイクルを手動で制御するには、`ddtrace.profiling.Profiler` オブジェクトを使用します。
 
@@ -102,9 +109,9 @@ prof = Profiler(...)
 prof.start()  # できるだけ早く、例えば他のインポートより前に、すべてのプロファイルを確保する必要があります
 ```
 
-## コンフィギュレーション
+## 構成
 
-[環境変数][5]を使用してプロファイラーを構成できます。
+You can configure the profiler using the [environment variables][6].
 
 ### コードプロベナンス
 
@@ -112,18 +119,21 @@ Python プロファイラーはコードプロベナンスレポートをサポ�
 
 ## 次のステップ
 
-[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+[プロファイラーの概要][7]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://app.datadoghq.com/profiling
-[5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
-[6]: /ja/getting_started/profiler/
-[7]: /ja/profiler/profile_types/?code-lang=python
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
+[4]: /ja/integrations/guide/source-code-integration/?tab=python
+[5]: https://app.datadoghq.com/profiling
+[6]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
+[7]: /ja/getting_started/profiler/
+[8]: /ja/profiler/profile_types/?code-lang=python
 [12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/
+[15]: /ja/profiler/profile_visualizations/#timeline-view

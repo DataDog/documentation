@@ -35,9 +35,9 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
-| .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
 | .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
 Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
@@ -48,11 +48,61 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | latest                                 |
 | Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
+| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | < 3.0.0 (e.g. 2.56.0)                  |
 | Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
 | Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
 | Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
+| Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     | .NET 6+ only, added in version 3.2.0   |
+
+Note that running 32-bit applications on Windows x64 is supported.
+
+## Supported operating systems
+
+The .NET Tracer supports automatic instrumentation on Windows and Linux operating systems. It supports macOS for CI Test Visibility only.
+
+### Windows
+
+| Operating System             | Version     | Support level         | Package version                        |
+| -----------------------------|-------------|-----------------------|----------------------------------------|
+| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
+| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+
+Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
+
+### Linux
+
+The .NET Tracer supports Linux distributions as best-effort, based on minimum libc version compatibility:
+
+- x64: [glibc][20] 2.17 (from CentOS 7)
+- Arm64: [glibc][20] 2.23 (from Debian 10)
+- Alpine x64: [musl][21] 1.2.2 (from Alpine 3.14)
+- Alpine arm64: [musl][21] 1.2.4 (from Alpine 3.18)
+
+| Operating System         | Version | Architectures | Support level         | Package version              |
+| -------------------------|---------|---------------|-----------------------|------------------------------|
+| Alpine Linux (x64)       | 3.14+   |  x64,         | [GA](#support-ga)     | latest (.NET 5+ only, v1.27.0+) |
+| Alpine Linux (arm64)     | 3.18+   |  Arm64        | [GA](#support-ga)     | latest (.NET 6+ only, v3.2.0+) |
+| CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
+| CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
+| Debian                   | 10+     |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| Fedora                   | 29+     |  x64          | [GA](#support-ga)     | latest                       |
+| openSUSE                 | 15+     |  x64          | [GA](#support-ga)     | latest                       |
+| Red Hat Enterprise Linux | 7+      |  x64          | [GA](#support-ga)     | latest                       |
+| Ubuntu                   | 18.04+  |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+
+### macOS
+
+The .NET Tracer supports macOS for CI Test Visibility only
+
+| Operating System         | Version | Architectures | Support level         | Package version              |
+| -------------------------|---------|---------------|-----------------------|------------------------------|
+| macOS                    | 12.0+   |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
+| macOS                    | 11.0    |  Arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
 
 ## Integrations
 
@@ -157,3 +207,6 @@ Version updates imply the following changes to runtime support:
 [16]: https://github.com/dotnet/runtime/issues/11885
 [17]: https://github.com/dotnet/runtime/issues/85777
 [18]: https://github.com/dotnet/runtime/pull/76431
+[19]: https://github.com/dotnet/core/tree/main/release-notes
+[20]: https://www.gnu.org/software/libc/
+[21]: https://musl.libc.org/

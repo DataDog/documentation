@@ -55,7 +55,9 @@ You can access the resulting traces in the **Traces** tab on the [**LLM Observab
 
 ### Creating spans
 
-To create a span, the LLM Observability SDK provides two options:
+To create a span, the LLM Observability SDK provides two options: using a function decorator or using a context manager inline. 
+
+Using a function decorator is the preferred method. Using a context manager is more advanced and allows more fine-grained control over tracing.
 
 Decorators
 : Use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a decorator on the function you'd like to trace, replacing `<SPAN_KIND>` with the desired [span kind][4].
@@ -71,8 +73,8 @@ The examples below create a workflow span.
 from ddtrace.llmobs.decorators import workflow
 
 @workflow
-def process_message():
-    ... # user application logic
+def extract_data(document):
+    ... # LLM-powered workflow that extracts structure data from a document
     return
 {{< /code-block >}}
 {{% /tab %}}
@@ -81,46 +83,9 @@ def process_message():
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
-def process_message():
-    with LLMObs.workflow() as span:
-        ... # user application logic
-    return
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
-
-### Nesting spans
-
-Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
-
-The examples below create a trace with two spans.
-
-{{< tabs >}}
-{{% tab "Decorators" %}}
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import task, workflow
-
-@workflow
-def process_message():
-    perform_preprocessing()
-    ... # user application logic
-    return
-
-@task
-def perform_preprocessing():
-    ... # user application logic
-    return
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Inline" %}}
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-def process_message():
-    with LLMObs.workflow(name="process_message") as workflow_span:
-        with LLMObs.task(name="perform_preprocessing") as task_span:
-            ... # user application logic
+def extract_data(document):
+    with LLMObs.workflow(name="extract_data") as span:
+        ... # LLM-powered workflow that extracts structure data from a document
     return
 {{< /code-block >}}
 {{% /tab %}}
@@ -138,16 +103,58 @@ The examples below annotate the workflow span created in the [example above](#cr
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(name="process_message")
-def process_message():
-    ... # user application logic
+@workflow
+def extract_data(document: str, generate_summary: bool):
+    extracted_data = ... # user application logic
     LLMObs.annotate(
-        input_data="<ARGUMENT>",
-        output_data="<OUTPUT>",
-        metadata={},
-        metrics={"input_tokens": 15, "output_tokens": 24},
-        tags={},
+        input_data=document,
+        output_data=extracted_data,
+        metadata={"generate_summary": generate_summary},
+        tags={"env": "dev"},
     )
+    return extracted_data
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Inline" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def extract_data(document: str, generate_summary: bool):
+    with LLMObs.workflow(name="extract_data") as span:
+        ... # user application logic
+        extracted_data = ... # user application logic
+        LLMObs.annotate(
+            input_data=document,
+            output_data=extracted_data,
+            metadata={"generate_summary": generate_summary},
+            tags={"env": "dev"},
+        )
+        return extracted_data
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Nesting spans
+
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+The examples below create a trace with two spans.
+
+{{< tabs >}}
+{{% tab "Decorators" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def extract_data(document):
+    preprocess_document(document)
+    ... # performs data extraction on the document
+    return
+
+@task
+def preprocess_document():
+    ... # preprocesses a document for data extraction
     return
 {{< /code-block >}}
 {{% /tab %}}
@@ -156,17 +163,11 @@ def process_message():
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
-def process_message():
-    with LLMObs.workflow() as span:
-        ... # user application logic
-        LLMObs.annotate(
-            span=span,
-            input_data="<ARGUMENT>",
-            output_data="<OUTPUT>",
-            metadata={},
-            metrics={"input_tokens": 15, "output_tokens": 24},
-            tags={},
-        )
+def extract_data():
+    with LLMObs.workflow(name="extract_data") as workflow_span:
+        with LLMObs.task(name="preprocess_document") as task_span:
+            ... # preprocesses a document for data extraction
+        ... # performs data extraction on the document
     return
 {{< /code-block >}}
 {{% /tab %}}

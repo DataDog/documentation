@@ -2,7 +2,7 @@
 algolia:
   tags:
   - pipeline visibility
-  - usm
+  - pipelines
   - CI パイプライン
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
@@ -137,7 +137,7 @@ Test Visibility を設定した後、パイプライン実行のサイドパネ�
 1. CI パイプラインの一般的なモニタータイプを選択して開始します。たとえば、パイプラインの実行時間が長すぎる場合に警告をトリガーする `Long Running Pipeline` や、ジョブの失敗に対して警告をトリガーする `Failed Job` を選択するか、独自の検索クエリをカスタマイズします。この例では、`@ci.pipeline.name:test_and_deploy_cart` を入力し、`Duration (@duration)` の平均を選択します。
 1. `Evaluate the query over the` セクションで、**last 1 day** を選択します。
 1. 評価された値がしきい値を**超えたとき**に警告をトリガーするように警告条件を設定し、`Alert threshold > 300000000000` のように警告や注意のしきい値を指定します。
-1. `Notify your team` セクションで、モニターの通知設定を構成します。
+1. In the `Configure notifications and automations` section, configure your monitor's notification settings.
 1. モニターの権限を設定します。
 1. **Create** をクリックします。
 
@@ -153,7 +153,7 @@ Test Visibility を設定した後、パイプライン実行のサイドパネ�
 [6]: https://app.datadoghq.com/dash/integration/30516/ci-visibility---pipelines-dashboard
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: /ja/continuous_integration/search/
-[9]: /ja/continuous_integration/explorer?tab=pipelineexecutions
+[9]: /ja/continuous_integration/explorer
 [10]: /ja/tests/guides/flaky_test_management/
 [11]: /ja/continuous_integration/pipelines/?tab=githubactions#supported-features
 [12]: /ja/continuous_integration/guides/infrastructure_metrics_with_gitlab/

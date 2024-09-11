@@ -26,6 +26,7 @@ categories:
 - コラボレーション
 - インシデント
 - モバイル
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: alertnow
 integration_title: AlertNow
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: alertnow
 public_title: AlertNow
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog のアラートと AlertNow のアラートを同期させる
   media: []
@@ -81,7 +82,7 @@ AlertNow が提供するもの
 
 ![alertnow 概要][1]
 
-## 計画と使用
+## セットアップ
 
 ### AlertNow
 
@@ -103,7 +104,7 @@ Datadog と AlertNow を接続するには、Datadog で Webhook とモニター
     ![datadog 詳細][4]
 
 
-### Ruby
+### Datadog
 
 Datadog のアカウントで、以下の手順を実行します。
 
@@ -163,7 +164,7 @@ Datadog のアカウントで、以下の手順を実行します。
 
 
 
-## Agent
+## サポート
 
 ご不明な点は、[AlertNow サポート][8]までお問い合わせください。
 
