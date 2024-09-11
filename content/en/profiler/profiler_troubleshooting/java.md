@@ -73,6 +73,7 @@ jdk.OldObjectSample#enabled=true
 
 ## Enabling the heap histogram metrics
 <div class="aler alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
+
 To enable the heap histogram metrics, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable.
 
 ## Removing sensitive information from profiles
