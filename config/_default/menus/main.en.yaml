@@ -2804,7 +2804,7 @@ menu:
       identifier: cnm_map
       weight: 104
     - name: Guides
-      url: network_monitoring/cloud_network_monitoringe/guide/
+      url: network_monitoring/cloud_network_monitoring/guide/
       identifier: cnm_guides
       parent: cnm
       weight: 105
