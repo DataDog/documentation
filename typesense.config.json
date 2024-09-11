@@ -1,0 +1,74 @@
+{
+    "collections": [
+        {
+            "name": "docs_main_v1",
+            "short_name": "docs",
+            "synonyms": [
+                {
+                    "id": "agent",
+                    "synonyms": ["agent", "datadog agent"]
+                },
+                {
+                    "id": "azure",
+                    "synonyms": ["microsoft azure", "azure"]
+                },
+                {
+                    "id": "gcp",
+                    "synonyms": ["gcp", "google cloud platform"]
+                },
+                {
+                    "id": "aws",
+                    "synonyms": ["aws", "amazon web service"]
+                },
+                {
+                    "id": "rum",
+                    "synonyms": ["RUM", "rum", "real user monitoring"]
+                },
+                {
+                    "id": "permissions",
+                    "synonyms": ["permissions", "Role Permissions"]
+                },
+                {
+                    "id": "dbm",
+                    "synonyms": ["dbm", "database monitoring"]
+                },
+                {
+                    "id": "npm",
+                    "synonyms": ["npm", "network performance monitoring"]
+                },
+                {
+                    "id": "ksm",
+                    "synonyms": ["ksm", "ksm core", "kubernetes state metrics"]
+                },
+                {
+                    "id": "sast",
+                    "synonyms": ["sast", "static analysis", "static application security testing"]
+                },
+                {
+                    "id": "sca",
+                    "synonyms": ["sca", "software composition analysis"]
+                },
+                {
+                    "id": "otel",
+                    "synonyms": ["otel", "opentelemetry"]
+                }
+            ],
+            "presets": [
+                  {
+                      "name": "docs_alias_view",
+                      "search_parameters": {
+                          "sort_by": "rank:desc,order:asc",
+                          "query_by": "tags,title,section_header,content"
+                      }
+                  },
+                  {
+                      "name": "docs_alias_api_view",
+                      "search_parameters": {
+                          "sort_by": "rank:asc",
+                          "query_by": "tags,title,section_header,content"
+                      }
+                  }
+              ]
+        }
+    ]
+}
