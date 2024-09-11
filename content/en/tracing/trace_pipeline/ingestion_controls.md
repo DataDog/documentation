@@ -1,6 +1,5 @@
 ---
 title: Ingestion Controls
-kind: documentation
 aliases:
     - /tracing/trace_ingestion/control_page
     - /tracing/trace_ingestion/ingestion_control_page
@@ -39,8 +38,6 @@ If the monthly usage is under `100%`, the projected ingested data fits in your [
 
 ## Managing ingestion for all services at the Agent level
 
-<div class="alert alert-info"><strong> Remote configuration for ingestion configuration in the Agent is in beta.</strong></div>
-
 Click **Remotely Configure Agent Ingestion** to manage ingestion sampling for your services globally. You can remotely configure Agent sampling parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
@@ -73,7 +70,7 @@ Ingested Bytes/s
 : Average number of bytes per second ingested into Datadog for the service over the past one hour.
 
 Downstream Bytes/s
-: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism.
+: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism. This column's data is based on the `sampling_service` dimension, set on the `datadog.estimated_usage.apm.ingested_bytes` metrics. For more information, read [APM usage metrics][15].
 
 Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
@@ -131,6 +128,8 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 
 ### Configure the service ingestion rate
 
+<div class="alert alert-info"><strong>Remotely configured sampling rules are in Beta</strong>. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a> to be able to dynamically set this configuration from the Datadog UI without having to redeploy your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling">Resource-based sampling guide</a> to get started.</div>
+
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Change the Service Ingestion Rate" >}}
@@ -162,3 +161,4 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [14]: /agent/remote_config/#enabling-remote-configuration
+[15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service

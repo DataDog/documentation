@@ -6,7 +6,6 @@ further_reading:
 - link: /security_platform/notifications/
   tag: ドキュメント
   text: Security Platform の通知について
-kind: documentation
 title: 変数
 ---
 

@@ -13,7 +13,7 @@ integration_id: papertrail
 integration_title: PaperTrail
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: papertrail
 public_title: Intégration Datadog/PaperTrail

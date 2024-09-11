@@ -1,6 +1,5 @@
 ---
 title: Send AWS Services Logs with the Datadog Amazon Data Firehose Destination
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -11,9 +10,12 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: "Blog"
   text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview

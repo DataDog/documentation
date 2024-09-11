@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/kubernetes/host_setup
-- /ja/agent/kubernetes/apm
 further_reading:
 - link: /agent/kubernetes/log/
   tag: ドキュメント
@@ -18,122 +17,31 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
 title: Kubernetes APM - トレース収集
 ---
 
-アプリケーションのトレースを収集するには、[Kubernetes クラスターで Datadog Agent を実行する][1]必要があります。
+{{< learning-center-callout header="ラーニングセンターで Kubernetes のモニタリング入門をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
+  Datadog のトライアルアカウントと実際のクラウドコンピュートキャパシティを使用して、コストをかけずに学ぶことができます。ハンズオンラボを開始して、Kubernetes 固有のメトリクス、ログ、APM トレースを使いこなしましょう。
+{{< /learning-center-callout >}}
 
-## セットアップ
-
-TCP (`IP:Port`)、Unix Domain Socket (UDS) のいずれか、または両方を使用して、Agent がトレースを取り込むように構成することができます。Agent は、必要に応じて両方のセットアップから同時にトレースを受信することができます。
+このページでは、Kubernetes アプリケーションを対象とした [Application Performance Monitoring (APM)][10] のセットアップと構成について説明します。
 
 {{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="APM のトラブルシューティングパイプライン: トレーサーは、アプリケーションポッドから Agent ポッドにトレースとメトリクスデータを送信し、Agent ポッドはそれを Datadog バックエンドに送信して Datadog UI に表示させることができます。">}}
 
-### トレースを受け取るように Datadog Agent を構成する
+トレースは Unix Domain Socket (UDS)、TCP (`IP:Port`)、または Kubernetes サービスを介して送信できます。Datadog では UDS の使用を推奨していますが、必要であれば 3 つすべてを同時に使用することも可能です。
+
+## セットアップ
+1. まだインストールしていない場合は、お使いの Kubernetes 環境に応じた [Datadog Agent][1] をインストールしてください。
+2. トレースを収集するように [Datadog Agent を構成します](#configure-the-datadog-agent-to-collect-traces)。
+3. トレースを Datadog Agent に送信するように[アプリケーションポッドを構成します](#configure-your-application-pods-to-submit-traces-to-datadog-agent)。
+
+### トレースを収集するように Datadog Agent を構成する
+
+このセクションの説明では、UDS でトレースを受信するように Datadog Agent を構成します。TCP を使用するには、[その他の構成](#additional-configuration)セクションを参照してください。Kubernetes サービスを使用するには、[Kubernetes サービスを使用して APM を設定する][9]を参照してください。
+
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-- Helm チャートをまだ[インストール][1]していない場合は、インストールしてください。
-
-デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`datadog.apm.hostSocketPath` と `datadog.apm.socketPath` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
-
-この機能は `datadog.apm.socketEnabled` で無効にすることができます。
-
-#### オプション - TCP 経由でトレースを受け取るように Datadog Agent を構成する
-
-Datadog Agent は、TCP 経由でトレースを受信するように構成することも可能です。この機能を有効にするには:
-
-- 以下の APM コンフィギュレーションを使用して、`values.yaml` ファイルを更新します。
-    ```yaml
-    datadog:
-      ## Enable apm agent and provide custom configs
-      apm:
-        # datadog.apm.portEnabled -- Enable APM over TCP communication (port 8126 by default)
-        ## ref: https://docs.datadoghq.com/agent/kubernetes/apm/
-        portEnabled: true
-    ```
-
-続いて、次のコマンド `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog` を使用して Datadog Helm チャートをアップグレードします。`values.yaml` にオペレーディングシステムを設定していない場合は、このコマンドに `--set targetSystem=linux` または `--set targetSystem=windows` を追加します。
-
-**警告**: `datadog.apm.portEnabled` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
-
-[1]: /ja/agent/kubernetes/?tab=helm
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-
-APM トレースの収集を有効にするには、DaemonSet コンフィギュレーションファイルを開いて以下を編集します。
-
-- ポート `8126` からの受信データ (ホストからエージェントへのトラフィックを転送) を `trace-agent` コンテナ内で許可するようにします。
-    ```yaml
-      # (...)
-      containers:
-        - name: trace-agent
-          # (...)
-          ports:
-            - containerPort: 8126
-              hostPort: 8126
-              name: traceport
-              protocol: TCP
-      # (...)
-    ```
-
-- **古いバージョンの Agent (7.17 以前) を使用している場合は**、上記の手順に加えて、`datadog.yaml` トレース Agent マニフェストの `env` セクションで `DD_APM_NON_LOCAL_TRAFFIC` 変数と `DD_APM_ENABLED` 変数を `true` に設定してください。
-
-  ```yaml
-    # (...)
-    containers:
-      - name: trace-agent
-        # (...)
-        env:
-          - name: DD_APM_ENABLED
-            value: 'true'
-          - name: DD_APM_NON_LOCAL_TRAFFIC
-            value: "true"
-          # (...)
-  ```
-
-**警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
-
-
-{{% /tab %}}
-{{% tab "DaemonSet (UDS)" %}}
-
-APM トレースの収集を有効にするには、DaemonSet コンフィギュレーションファイルを開いて以下を編集します。
-
-  ```yaml
-    # (...)
-    containers:
-    - name: trace-agent
-      # (...)
-      env:
-      - name: DD_APM_ENABLED
-        value: "true"
-      - name: DD_APM_RECEIVER_SOCKET
-        value: "/var/run/datadog/apm.socket"
-    # (...)
-      volumeMounts:
-      - name: apmsocket
-        mountPath: /var/run/datadog/
-    volumes:
-    - hostPath:
-        path: /var/run/datadog/
-        type: DirectoryOrCreate
-    # (...)
-  ```
-
-このコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。Agent はそのディレクトリに `DD_APM_RECEIVER_SOCKET` の値を `/var/run/datadog/apm.socket` としたソケットファイルを作成し、リッスンするようにします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-APM が有効になると、デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`features.apm.unixDomainSocketConfig.path` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
-
-#### オプション - TCP 経由でトレースを受け取るように Datadog Agent を構成する
-
-Datadog Agent は、TCP 経由でトレースを受信するように構成することも可能です。この機能を有効にするには:
-
-`DatadogAgent` のマニフェストを以下のように更新します。
+{{% tab "Datadog Operator" %}}
+`datadog-agent.yaml` を編集して `features.liveProcessCollection.enabled` を `true` に設定します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -144,31 +52,53 @@ spec:
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-    site: <DATADOG_SITE>
 
   features:
     apm:
       enabled: true
-      hostPortConfig:
-        enabled: true
-```
-`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
-
-完全な例については、[APM とメトリクス収集が有効になっているマニフェスト][1]の例を参照してください。
-
-次に、新しいコンフィギュレーションを適用します。
-
-```shell
-kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+      unixDomainSocketConfig:
+        path: /var/run/datadog/apm.socket # default
 ```
 
-**警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
+APM が有効になると、デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`features.apm.unixDomainSocketConfig.path` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
+{{% k8s-operator-redeploy %}}
+
+**注**: minikube では、`Unable to detect the kubelet URL automatically`（キューブレット URL を自動的に検出できません）というエラーが表示される場合があります。この場合、`global.kubelet.tlsVerify` を `false` に設定します。
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+[Datadog Agent のインストールに Helm を使用した][1]場合、APM は UDS または Windows の名前付きパイプで**デフォルトで有効**になっています。
+
+確認するには、`datadog-values.yaml` で `datadog.apm.socketEnabled` が `true` に設定されていることを確認してください。
+
+```yaml
+datadog:
+  apm:
+    socketEnabled: true    
+```
+
+デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`datadog.apm.hostSocketPath` と `datadog.apm.socketPath` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
+
+```yaml
+datadog:
+  apm:
+    # the following values are default:
+    socketEnabled: true
+    hostSocketPath: /var/run/datadog/
+    socketPath: /var/run/datadog/apm.socket
+```
+
+APM を無効にするには、`datadog.apm.socketEnabled` を`false` に設定します。
+
+{{% k8s-helm-redeploy %}}
+
+**注**: minikube では、`Unable to detect the kubelet URL automatically`（キューブレット URL を自動的に検出できません）というエラーが表示される場合があります。この場合、`datadog.kubelet.tlsVerify` を `false` に設定します。
+
+[1]: /ja/containers/kubernetes/installation?tab=helm#installation
 {{% /tab %}}
 {{< /tabs >}}
-
-**注**: minikube では、`Unable to detect the kubelet URL automatically`（キューブレット URL を自動的に検出できません）というエラーが表示される場合があります。この場合、`DD_KUBELET_TLS_VERIFY=false` を設定します。
 
 ### Datadog Agent にトレースを送信するためのアプリケーションポッドの構成
 
@@ -183,8 +113,8 @@ Datadog Admission Controller を使用して環境変数を挿入し、新しい
 [2]: /ja/tracing/trace_collection/library_injection_local/
 {{% /tab %}}
 
-{{% tab "UDS" %}}
-Unix Domain Socket (UDS) を使用して Agent にトレースを送信する場合は、ソケットのあるホストディレクトリ (Agent が作成したもの) をアプリケーションコンテナにマウントし、ソケットへのパスを `DD_TRACE_AGENT_URL` で指定します。
+{{% tab "Unix Domain Socket (UDS)" %}}
+UDS を使用して Agent にトレースを送信する場合は、ソケットのあるホストディレクトリ (Agent が作成したもの) をアプリケーションコンテナにマウントし、ソケットへのパスを `DD_TRACE_AGENT_URL` で指定します。
 
 ```yaml
 apiVersion: apps/v1
@@ -208,9 +138,9 @@ kind: Deployment
 ```
 
 ### アプリケーショントレーサーがトレースを発するように構成します。
-Datadog Agent がトレースを収集するように構成し、アプリケーションポッドにトレースの送信先に関する構成を行った後、Datadog トレーサーをアプリケーションにインストールして、トレースを送信します。これが完了すると、トレーサーは適切な `DD_AGENT_HOST` (`IP:Port` の場合) または `DD_TRACE_AGENT_URL` (UDS の場合) のエンドポイントにトレースを送出します。
+Datadog Agent がトレースを収集するように構成し、アプリケーションポッドにトレースの送信先に関する構成を行った後、Datadog トレーサーをアプリケーションにインストールして、トレースを送信します。これが完了すると、トレーサーは適切な `DD_TRACE_AGENT_URL` エンドポイントにトレースを自動的に送出します。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 
 {{% tab TCP %}}
@@ -233,49 +163,144 @@ kind: Deployment
 **注:** この構成では、Agent が TCP 上のトレースを受け入れるように構成されている必要があります。
 
 ### アプリケーショントレーサーがトレースを発するように構成します。
-Datadog Agent がトレースを収集するように構成し、アプリケーションポッドにトレースの送信先に関する構成を行った後、Datadog トレーサーをアプリケーションにインストールして、トレースを送信します。これが完了すると、トレーサーは自動的に適切な `DD_AGENT_HOST` (`IP:Port` の場合) または `DD_TRACE_AGENT_URL` (UDS の場合) のエンドポイントにトレースを送出します。
+Datadog Agent がトレースを収集するように構成し、アプリケーションポッドにトレースの送信先に関する構成を行った後、Datadog トレーサーをアプリケーションにインストールして、トレースを送信します。これが完了すると、トレーサーは適切な `DD_AGENT_HOST` エンドポイントにトレースを自動的に送出します。
 
 [1]: /ja/agent/cluster_agent/admission_controller/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 その他の例については、[言語ごとの APM インスツルメンテーションドキュメント][2]を参照してください。
 
+## 追加構成
 
-## Agent 環境変数
+### TCP 経由でトレースを受け取るように Datadog Agent を構成する
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
-**注**: Datadog では、タグを付ける際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][3]ドキュメントをご参照ください。
+`datadog-agent.yaml` を以下のように更新します。
 
-Kubernetes で稼働する Agent 内のトレースに利用可能なすべての環境変数をリストします。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
 
-| 環境変数       | 説明                                                                                                                                                                                                                                                                                                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | Datadog API キー                                                                                                                                                                                                                                                                                                        |
-| `DD_PROXY_HTTPS`           | 使用するプロキシの URL をセットアップします。                                                                                                                                                                                                                                                                                        |
-| `DD_APM_REPLACE_TAGS`      | [スパンのタグから機密データをスクラブします][4]。                                                                                                                                                                                                                                                                            |
-| `DD_HOSTNAME`              | 自動検出が失敗した場合、または Datadog Cluster Agent を実行する場合に、メトリクスに使用するホスト名を手動で設定します。                                                                                                                                                                                                               |
-| `DD_DOGSTATSD_PORT`        | DogStatsD ポートを設定します。                                                                                                                                                                                                                                                                                                     |
-| `DD_APM_RECEIVER_SOCKET`  | 設定した場合、Unix Domain Sockets からトレースを収集し、ホスト名とポートコンフィギュレーションよりも優先します。デフォルトでは設定されていません。設定する場合は、有効な sock ファイルを指定する必要があります。                                                                                                                                            |
-| `DD_BIND_HOST`             | StatsD とレシーバーのホスト名を設定します。                                                                                                                                                                                                                                                                                         |
-| `DD_LOG_LEVEL`             | ログレベルを設定します。(`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                             |
-| `DD_APM_ENABLED`           | `true` に設定すると、Datadog Agent はトレースメトリクスを受け取ります。デフォルト値は `true` です（Agent 7.18 以上）。                                                                                                                                                                                                                                                                |
-| `DD_APM_CONNECTION_LIMIT`  | 30 秒のタイムウィンドウに対する最大接続制限を設定します。                                                                                                                                                                                                                                                              |
-| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイントを設定します: `https://trace.agent.{{< region-param key="dd_site" >}}`。デフォルトは `https://trace.agent.datadoghq.com` 。                                                                                                                                                                                                   |
-| `DD_APM_RECEIVER_PORT`     | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                                                                                                                                                                                           |
-| `DD_APM_NON_LOCAL_TRAFFIC` | 他のコンテナからのトレース時に、非ローカルトラフィックを許可します。デフォルト値は `true` です（Agent 7.18 以上）。                                                                                                                                                                                                                               |
-| `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。例: <code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                       |
-| `DD_ENV`                   | Agent によって発行されたすべてのデータにグローバル `env` を設定します。トレースデータに `env` が存在しない場合、この変数が使用されます。詳細については、[APM 環境設定][5]を参照してください。
+  features:
+    apm:
+      enabled: true
+      hostPortConfig:
+        enabled: true
+        hostPort: 8126 # default
+```
 
+{{% k8s-operator-redeploy %}}
 
-### オペレーター環境変数
-| 環境変数       | 説明                                                                                                                                                                                                                                                                                                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agent.apm.enabled`                                                                                          | これを有効にすると、ポート 8126 で APM とトレースが有効になります。[Datadog Docker のドキュメント][6]を参照してください。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `agent.apm.env`                                                                                              | Datadog Agent は、多くの[環境変数][7]をサポートしています。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `agent.apm.hostPort`                                                                                         | ホストで公開するポートの数。指定する場合、これは有効なポート番号 0 < x < 65536 である必要があります。`HostNetwork` を指定する場合、これは `ContainerPort` と一致する必要があります。ほとんどのコンテナはこれを必要としません。                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `agent.apm.resources.limits`                                                                                 | 制限は、許可されるコンピューティングリソースの最大量を表します。詳細については、[Kubernetes のドキュメント][8]を参照してください。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `agent.apm.resources.requests`                                                                               | リクエストには、必要なコンピューティングリソースの最小量を表します。コンテナの `requests` が省略されている場合、明示的に指定されている場合はデフォルトで `limits` になり、それ以外の場合は実装定義の値になります。詳細については、[Kubernetes のドキュメント][8]を参照してください。     |                                                                                                                                                                                                                                                                                                                               |
+**警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+以下の APM コンフィギュレーションを使用して、`datadog-values.yaml` ファイルを更新します。
+
+```yaml
+datadog:
+  apm:
+    portEnabled: true
+    port: 8126 # default
+```
+
+{{% k8s-helm-redeploy %}}
+
+**警告**:  `datadog.apm.portEnabled` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
+{{% /tab %}}
+{{< /tabs >}}
+
+## APM 環境変数
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+`override.nodeAgent.containers.trace-agent.env` にその他の APM 環境変数を設定します。
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+`agents.containers.traceAgent.env` にその他の APM 環境変数を設定します。
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: <ENV_VAR_NAME>
+          value: <ENV_VAR_VALUE>
+{{< /code-block >}}
+
+{{% /tab %}}{{% tab "DaemonSet" %}}DaemonSet または Deployment (Datadog Cluster Agent 用) に環境変数を追加します。
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog
+spec:
+  template:
+    spec:
+      containers:
+        - name: agent
+          ...
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+APM の構成で利用可能な環境変数のリスト: 
+
+| 環境変数 | 説明 |
+| -------------------- | ----------- |
+| `DD_APM_ENABLED`           | `true` に設定すると、Datadog Agent はトレースメトリクスを受け取ります。<br/>**デフォルト**: `true` (Agent 7.18 以上)。 |
+| `DD_APM_ENV`           | 収集したトレースに `env:` タグを設定します。  |
+| `DD_APM_RECEIVER_SOCKET` | UDS 経由のトレース用。設定されている場合、有効なソケットファイルを指す必要があります。 |
+| `DD_APM_RECEIVER_PORT`     | TCP 経由のトレースの場合、Datadog Agent のトレースレシーバーがリッスンするポート。<br/>**デフォルト**: `8126` |
+| `DD_APM_NON_LOCAL_TRAFFIC` | 他のコンテナからのトレース時に、非ローカルトラフィックを許可します。<br/>**デフォルト**: `true` (Agent 7.18 以上)。 |
+| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイント: `https://trace.agent.{{< region-param key="dd_site" >}}`。<br/>**デフォルト**: `https://trace.agent.datadoghq.com` |
+| `DD_APM_TARGET_TPS`     | サンプリングする 1 秒あたりのトレースの目標数。<br/>**デフォルト**: `10` |
+| `DD_APM_ERROR_TPS`     | 1 秒あたりに受け取るエラートレースチャンクの目標数。<br/>**デフォルト**: `10` |
+| `DD_APM_MAX_EPS`     | サンプリングする 1 秒あたりの APM イベントの最大数。<br/>**デフォルト**: `200` |
+| `DD_APM_MAX_MEMORY`     | Datadog Agent のメモリ使用量の目標値。この値を超えると、API は受信リクエストを制限します。<br/>**デフォルト**: `500000000` |
+| `DD_APM_MAX_CPU_PERCENT`     | Datadog Agent の CPU 使用率の目標値。この値を超えると、API は受信リクエストを制限します。<br/>**デフォルト**: `50` |
+| `DD_APM_FILTER_TAGS_REQUIRE`     | 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。<br/>[APM で不要なリソースを無視する][11]を参照してください。 |
+| `DD_APM_FILTER_TAGS_REJECT`     | 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。<br/>[APM で不要なリソースを無視する][11]を参照してください。 |
+| `DD_APM_REPLACE_TAGS` | [スパンのタグから機密データをスクラブします][4]。 |
+| `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。フォーマットはカンマ区切りの正規表現です。<br/>例: `GET /ignore-me,(GET\|POST) /and-also-me` |
+| `DD_APM_LOG_FILE`  | APM ログが書き込まれるファイルへのパス。 |
+| `DD_APM_CONNECTION_LIMIT`  | 30 秒のタイムウィンドウに対する最大接続数の上限。<br/>**デフォルト**: 2000 |
+| `DD_APM_ADDITONAL_ENDPOINTS`     | 複数のエンドポイントや複数の API キーにデータを送信します。<br/>[デュアルシッピング][12]を参照してください。 |
+| `DD_APM_DEBUG_PORT`     | トレース Agent のデバッグエンドポイント用ポート。サーバーを無効にするには、`0` に設定します。<br/>**デフォルト**: `5012`。 |
+| `DD_BIND_HOST`             | StatsD とレシーバーのホスト名を設定します。 |
+| `DD_DOGSTATSD_PORT`        | TCP 経由のトレースの場合、DogStatsD ポートを設定します。 |
+| `DD_ENV`                   | Agent が発するすべてのデータにグローバル `env` を設定します。トレースデータに `env` が存在しない場合、この変数が使用されます。 |
+| `DD_HOSTNAME`         | 自動検出が失敗した場合、または Datadog Cluster Agent を実行する場合に、メトリクスに使用するホスト名を手動で設定します。 |
+| `DD_LOG_LEVEL`             | ログレベルを設定します。<br/>**値**: `trace`、`debug`、`info`、`warn`、`error`、`critical`、`off` |
+| `DD_PROXY_HTTPS`     | 使用するプロキシの URL をセットアップします。 |
 
 
 ## その他の参考資料
@@ -283,11 +308,15 @@ Kubernetes で稼働する Agent 内のトレースに利用可能なすべて�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/agent/kubernetes/
+[1]: /ja/containers/kubernetes/installation
 [2]: /ja/tracing/setup/
 [3]: /ja/getting_started/tagging/unified_service_tagging
-[4]: /ja/tracing/configure_data_security#scrub-sensitive-data-from-your-spans
+[4]: /ja/tracing/configure_data_security/?tab=kubernetes#replace-tags
 [5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 [6]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [7]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#environment-variables
 [8]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+[9]: /ja/tracing/guide/setting_up_apm_with_kubernetes_service/
+[10]: /ja/tracing
+[11]: /ja/tracing/guide/ignoring_apm_resources/?tab=kubernetes
+[12]: /ja/agent/configuration/dual-shipping/

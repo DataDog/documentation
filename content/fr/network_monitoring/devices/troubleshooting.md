@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Surveiller des périphériques SNMP avec Datadog
-kind: documentation
 title: Dépannage du Network Device Monitoring
 ---
 

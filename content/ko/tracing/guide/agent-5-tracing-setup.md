@@ -1,14 +1,13 @@
 ---
 aliases:
 - /ko/tracing/faq/agent-5-tracing-setup
-kind: 가이드
 private: true
 title: Agent v5와 APM & Continuous Profiler
 ---
 
 ## 시작하기
 
-애플리케이션 성능 모니터링(APM)은 리눅스(Linux) 및 도커(Docker) Agent 원라인 설치의 일환으로 Datadog Agent 버전 5.11 이상부터 가능합니다. [맥(Mac)][1]과 [윈도우즈(Windows)][2] 사용자는 별도의 설치 프로세스를 통해 APM Agent('트레이스 Agent'라고도 합니다)를 수동 설치해야 합니다.
+APM은 Linux 및 Docker Agent에 대한 한 줄 설치 명령의 일부로 Datadog Agent 버전 5.11 이상에서 사용할 수 있습니다. [Mac][1] 및 [Windows][2] 사용자는 별도의 설치 과정을 통해 APM Agent(Trace Agent라고도 함)를 수동으로 설치해야 합니다.
 
 Agent는 [Datadog Agent 설정 파일][3]에 다음을 포함시켜 활성화할 수 있습니다.
 
@@ -58,7 +57,7 @@ Datadog Agent는 인프라스트럭처 모니터링과 APM 설정 옵션 모두�
 | `apm_enabled`           | `DD_APM_ENABLED`           | Datadog Agent는 값이 `true`로 설정된 경우 트레이스 메트릭을 활용합니다. 기본 값은 `true`입니다.                                                            |
 | `receiver_port`         | `DD_RECEIVER_PORT`         | Datadog Agent의 트레이스 리시버가 사용하는 포트입니다. 기본 값은 `8126`입니다.                                                                  |
 | `connection_limit`      | `DD_CONNECTION_LIMIT`      | 한 번의 30초 임대시간(Lease Time) 동안 허용할 단일 클라이언트 연결 횟수입니다. 기본 값은 `2000`입니다.                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE`       | 리소스 이름으로 트레이스를 필터링하는 정규식 블랙리스트입니다.                                                                                  |
+| `resource`              | `DD_IGNORE_RESOURCE`       | 리소스 이름을 기준으로 트레이스를 필터링하기 위한 정규식 제외 목록입니다.                                                                                  |
 
 Datadog Agent를 더 자세히 알아보려면 [전용 설명서 페이지][9]나 [`datadog.conf.example` 파일][10]을 참조하세요.
 
@@ -73,8 +72,8 @@ Agent 5.25.0 이상의 버전은 트레이스 검색을 지원합니다. 더 자
 [1]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /ko/agent/faq/where-is-the-configuration-file-for-the-agent/
-[4]: /ko/tracing/visualization/#trace-metrics
-[5]: https://app.datadoghq.com/account/settings#agent
+[4]: /ko/tracing/glossary/#trace-metrics
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /ko/tracing/docker/
 [8]: /ko/tracing/guide/send_traces_to_agent_by_api/

@@ -1,6 +1,5 @@
 ---
 title: SafeNet SAML IdP
-kind: documentation
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"

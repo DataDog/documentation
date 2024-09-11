@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: Documentation
   text: Agent のトラブルシューティング
-kind: documentation
 title: Datadog サポートの概要
 ---
 
@@ -31,7 +30,7 @@ Datadog は、サポートを求めるお客様に 2 つの主要チャンネル
 
 ## チャットかサポートチケットか？
 
-以下の表を参考に、[サポートチケット][1]を開くか、チャットで連絡を取るかを決定してください。日本語でのチャットは、日本時間 (JST) 平日の 10:00～16:00 の間であれば、いつでもご利用いただけます。(土日、日本の祝日および年末年始 (12月29日〜1月3日) を除く。)
+Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat).
 
 | サポートチケット                  | チャット        |
 | ------------------------------- | ----------- |
@@ -44,9 +43,11 @@ Datadog は、サポートを求めるお客様に 2 つの主要チャンネル
 
 ## チャットでのお問い合わせ
 
-開始するには、Datadog アカウントの左パネルにある **Live Chat** をクリックします。
+<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
-{{< img src="getting_started/chat/chat_button.png" alt="Datadog でハイライトされるチャットボタン" style="width:80%" >}}
+To get started, click **Support** on the bottom-left corner of the navigation menu.
+
+{{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
 
 新しいチャットが開かれると、**技術的な**質問か**販売に関する**質問か尋ねられます。
    - 技術的な質問の場合、最初に対応可能なテクニカルサポートエンジニアに転送されます。Datadog の使用や構成に関する質問には最適です。
@@ -64,7 +65,7 @@ Datadog は、サポートを求めるお客様に 2 つの主要チャンネル
 
 追加調査が必要な場合、チケットは適切な分野の専門家に転送され、チャット中に提供された詳細とコンテキストが完全に転送されます。このチケットは、Datadog サポートチームとさらに連絡を取るために使用します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

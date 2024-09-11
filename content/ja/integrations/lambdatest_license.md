@@ -17,6 +17,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - コラボレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,7 +26,6 @@ integration_id: lambdatest-software-license
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -72,6 +72,9 @@ tile:
     image_url: images/realtime-testing.jpg
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-user-bugs-with-lambdatest/
   support: README.md#Support
   title: LambdaTest
   uninstallation: README.md#Uninstallation
@@ -98,7 +101,7 @@ LambdaTest を使用すると、以下にアクセスできます。
 Datadog Marketplace を通じて、LambdaTest のサブスクリプションを購入することができます。LambdaTest のアカウントを設定したら (または既に LambdaTest のお客様である場合)、[インテグレーションタイル][1]に移動して、Datadog へのデータ送信を開始してください。
 
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 

@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Monitoring Setup
-kind: documentation
 description: Collect RUM data from your Flutter projects.
 aliases:
     - /real_user_monitoring/flutter/
@@ -13,7 +12,7 @@ further_reading:
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -31,7 +30,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 ### Specify application details in the UI
 
-1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Flutter Data Collected][7].
@@ -351,6 +350,15 @@ Container(
   ),
 );
 ```
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter RUM SDK does not use too much disk space.
+
 
 ## Further reading
 

@@ -1,7 +1,7 @@
 ---
 title: NXLog
 name: nxlog
-kind: integration
+custom_kind: integration
 description: 'Configure NXLog to gather logs from your host, containers, & services.'
 short_description: 'Configure NXLog to gather logs from your host, containers, & services.'
 categories:
@@ -27,6 +27,10 @@ Configure NXLog to gather logs from your host, containers, & services.
 ## Setup
 
 ### Log collection
+
+{{< site-region region="gov,us5,ap1" >}}
+<div class="alert alert-warning">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}

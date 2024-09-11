@@ -1,6 +1,5 @@
 ---
 title: Deployment  Tracking
-kind: documentation
 description: 'Use Datadog to track your deployments through version tags'
 aliases:
     - /tracing/version_tracking
@@ -88,6 +87,10 @@ You can find the following information on version comparison page:
 Similar to the graphs on the Service page, Requests and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
 
 {{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="Deployment Comparison Graphs" style="width:100%;">}}
+
+If [Continuous Profiler is enabled][5], you also see comparisons of key performance metrics, such as CPU Time or Allocated Memory, broken down per APM resource. From there, you can pivot to the [Profile Comparison Page][6]:
+
+{{< img src="tracing/deployment_tracking/DeploymentTrackingProfileComparison.png" alt="Deployment Profiling Comparison Graphs" style="width:100%;">}}
 
 ### Error comparison
 
@@ -232,3 +235,5 @@ Max time between deployments:
 [2]: /metrics/types/?tab=distribution#metric-types
 [3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: /watchdog/faulty_deployment_detection/
+[5]: /profiler/enabling/
+[6]: /profiler/compare_profiles

@@ -1,6 +1,5 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -11,7 +10,7 @@ further_reading:
   tag: Documentation
   text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
@@ -57,7 +56,7 @@ dependencies {
 
 ### Specify application details in the UI
 
-1. Navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][2].
+1. Navigate to [**Digital Experience** > **Add an Application**][2].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][13].
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Android Data Collected][15].
@@ -297,6 +296,18 @@ The initialization credentials require your application's variant name and uses 
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated RUM error stack traces. For more information, see the [Track Android Errors][8].
 
+### Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+        // Here 75% of the RUM sessions are sent to Datadog
+        .setSessionSampleRate(75.0f)
+        .build()
+Rum.enable(rumConfig)
+```
+
 ### Enable RUM feature to start sending data
 
 {{< tabs >}}
@@ -341,19 +352,32 @@ See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHostsWithHeaderType = mapOf(
+    "example.com" to setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT),
+    "example.eu" to  setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT))
 val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
+    .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
+final Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+final Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
-    .addInterceptor(new DatadogInterceptor())
+    .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build();
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+
 
 This records each request processed by the `OkHttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10].
 
@@ -361,7 +385,7 @@ This records each request processed by the `OkHttpClient` as a resource in RUM, 
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][11] for third-party providers and network requests.
 
-### Track background events
+## Track background events
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
 
@@ -382,9 +406,9 @@ Add the following snippet during RUM configuration:
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
 </div>
 
-### Kotlin Extensions
+## Kotlin Extensions
 
-#### `Closeable` extension
+### `Closeable` extension
 
 You can monitor `Closeable` instance usage by using `useMonitored` method, it will report any error happened to Datadog and close the resource afterwards.
 
@@ -396,7 +420,7 @@ closeable.useMonitored {
 
 ```
 
-#### Track local assets as RUM resources
+### Track local assets as RUM resources
 
 You can track access to the assets by using `getAssetAsRumResource` extension method:
 
@@ -409,6 +433,14 @@ Usage of the local resources can be tracked by using `getRawResAsRumResource` ex
 ```kotlin
 val inputStream = context.getRawResAsRumResource(id)
 ```
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Further Reading
 

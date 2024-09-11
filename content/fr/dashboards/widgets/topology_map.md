@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentation
   text: Service Map
-kind: documentation
 title: Widget Topology Map
 widget_type: topology_map
 ---

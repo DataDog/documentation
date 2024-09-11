@@ -16,7 +16,6 @@ further_reading:
 - link: serverless/custom_metrics/
   tag: Documentation
   text: Envoyer des métriques custom depuis des applications sans serveur
-kind: documentation
 title: Instrumenter des applications Node.js sans serveur
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Investigate Sensitive Data Issues
-kind: documentation
 further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"
@@ -59,4 +58,4 @@ Additionally, you can also:
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 [2]: /service_management/case_management/
 [3]: /service_management/incident_management/
-[4]: /audit-trail
+[4]: /account_management/audit_trail

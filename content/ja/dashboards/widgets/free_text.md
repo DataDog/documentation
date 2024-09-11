@@ -6,7 +6,6 @@ further_reading:
 - link: /ja/dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築
-kind: documentation
 title: フリーテキストウィジェット
 widget_type: free_text
 ---
@@ -19,7 +18,7 @@ widget_type: free_text
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. 表示するテキストを入力します。
 2. テキストの書式を選択します。

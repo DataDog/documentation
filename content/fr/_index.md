@@ -1,6 +1,5 @@
 ---
 title: Documentation de Datadog
-kind: documentation
 aliases:
   - /fr/basic_agent_usage/
   - /fr/guides/

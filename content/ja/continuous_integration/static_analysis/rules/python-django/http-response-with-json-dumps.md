@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: JSON データを送信するには、HttpResponse の代わりに JsonResponse を使う
 ---
 ## メタデータ

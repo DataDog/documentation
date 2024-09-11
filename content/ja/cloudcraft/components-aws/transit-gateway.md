@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Transit Gateway コンポーネント
 ---
 ## 概要
@@ -17,7 +16,7 @@ Transit Gateway コンポーネントを使用して、Amazon Web Services ア�
 - **Data processed**: ひと月に処理されたデータの総量 (ギガバイト単位)。
 - **Rotate**: コンポーネントを回転させ、その方向を変更します。
 
-## ヘルプ
+## API
 
 [Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 

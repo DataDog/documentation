@@ -12,7 +12,7 @@ further_reading:
   tag: Blog
   text: Surveillance sans serveur de Datadog pour Amazon API Gateway, SQS, Kinesis
     et autres
-kind: guide
+
 title: Créer des événements Datadog à partir d'e-mails Amazon SNS
 ---
 

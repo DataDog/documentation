@@ -22,7 +22,7 @@ integration_id: cert-manager
 integration_title: cert-manager
 integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: ara.pulido@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: cert_manager.

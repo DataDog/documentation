@@ -22,7 +22,7 @@ integration_id: embrace-mobile
 integration_title: Embrace Mobile
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
 public_title: Embrace Mobile

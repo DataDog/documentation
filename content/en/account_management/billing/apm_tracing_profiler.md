@@ -1,6 +1,5 @@
 ---
 title: APM Billing
-kind: documentation
 aliases:
 - /account_management/billing/profiler/
 - /account_management/billing/apm_distributed_tracing/

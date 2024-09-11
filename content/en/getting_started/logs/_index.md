@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Logs
-kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'
@@ -8,6 +7,15 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/going-deeper-with-logs-processing'
       tag: 'Learning Center'
       text: 'Going Deeper with Logs Processing'
+    - link: 'https://learn.datadoghq.com/courses/log-indexes'
+      tag: 'Learning Center'
+      text: 'Manage and Monitor Indexed Log Volumes'
+    - link: 'https://learn.datadoghq.com/courses/log-pipelines'
+      tag: 'Learning Center'
+      text: 'Build and Manage Log Pipelines'
+    - link: 'https://learn.datadoghq.com/courses/integration-pipelines'
+      tag: 'Learning Center'
+      text: 'Process Logs Out of the Box with Integration Pipelines'
     - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'
@@ -96,13 +104,13 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
-For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
+For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Group into Patterns][17] to see which part of your service is logging the most errors.
 
-{{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
+{{< img src="/getting_started/logs/error-pattern-2024.png" alt="Filtering in the Log Explorer by error pattern">}}
 
-Aggregate your logs by `Field` of `Source` and switch to the **Top List** visualization option to see your top logging services. Select a source, such as `error`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
+Aggregate your logs into `Fields` and visualize as **Top List** to see your top logging services. Select a source, such as `info` or `warn`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
 
-{{< img src="/getting_started/logs/top-list-view.png" alt="A top list in the Log Explorer">}}
+{{< img src="/getting_started/logs/top-list-view-2024.png" alt="A top list in the Log Explorer">}}
 
 ## What's next?
 
@@ -112,7 +120,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 
 * Set [attributes and aliasing][18] to unify your logs environment.
 * Control how your logs are processed with [pipelines][19] and [processors][20].
-* As Logging without Limits* decouples log ingestion and indexing, you can [configure your logs][21] by choosing which to index, retain, or archive.
+* As Logging without Limits* decouples log ingestion and indexing, you can [configure your logs][21] and choose which logs to [index][22], [retain][23], or [archive][24].
 
 ### Log correlation
 
@@ -121,9 +129,9 @@ Once a logging source is configured, and your logs are available in the Log Expl
 
 ### Guides
 
-* [Best practices for Log Management][22]
-* Dive further into [Logging without Limits*][23]
-* Manage sensitive log data with [RBAC settings][24]
+* [Best practices for Log Management][25]
+* Dive further into [Logging without Limits*][26]
+* Manage sensitive log data with [RBAC settings][27]
 
 ## Further reading
 
@@ -148,11 +156,14 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
 [16]: /logs/explorer/
-[17]: /logs/explorer/#patterns
+[17]: /logs/explorer/analytics/patterns/
 [18]: /logs/log_configuration/attributes_naming_convention/
 [19]: /logs/log_configuration/pipelines/
 [20]: /logs/log_configuration/processors/
 [21]: /logs/log_configuration/
-[22]: /logs/guide/best-practices-for-log-management/
-[23]: /logs/guide/getting-started-lwl/
-[24]: /logs/guide/logs-rbac/
+[22]: https://docs.datadoghq.com/logs/log_configuration/indexes
+[23]: https://docs.datadoghq.com/logs/log_configuration/flex_logs
+[24]: https://docs.datadoghq.com/logs/log_configuration/archives
+[25]: /logs/guide/best-practices-for-log-management/
+[26]: /logs/guide/getting-started-lwl/
+[27]: /logs/guide/logs-rbac/

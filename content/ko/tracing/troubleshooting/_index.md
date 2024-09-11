@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/troubleshooting/agent_apm_metrics/
   tag: 설명서
   text: Datadog 에이전트로 전송한 애플리케이션 성능 모니터링(APM) 메트릭
-kind: 설명서
 title: 애플리케이션 성능 모니터링(APM) 트러블슈팅
 ---
 

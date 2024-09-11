@@ -24,7 +24,7 @@ guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink
 integration_title: Flink
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: flink.

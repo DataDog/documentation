@@ -22,6 +22,7 @@ author:
   support_email: oss@roadie.io
 categories:
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/backstage/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: backstage
 integration_title: Backstage
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: backstage
 public_title: Backstage
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
   media: []
@@ -62,9 +63,9 @@ tile:
 
 [Backstage][1] は、デベロッパーポータルを構築するためのオープンプラットフォームです。このインテグレーションにより、Datadog のグラフやダッシュボードを Backstage インスタンスに埋め込むことができるようになります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. Datadog プラグインを Backstage にインストールします。
 
@@ -92,21 +93,21 @@ metadata:
 
 Backstage インスタンスの Overview タブを開き、Datadog のダッシュボードやグラフが期待通りにレンダリングされることを確認します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Backstage インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Backstage インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Backstage インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 サポートが必要な場合は、[Backstage Community][4] にお問い合わせください。
 

@@ -1,6 +1,5 @@
 ---
-title: SLO Summary Widget
-kind: documentation
+title: SLO Widget
 widget_type: slo
 description: "Track your SLOs"
 aliases:
@@ -17,14 +16,14 @@ further_reading:
   text: "Scope metric-based SLO queries"
 ---
 
-SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service. The SLO summary widget visualizes the status, budget, and remaining error budget of the existing SLOs. It displays all underlying groups of the SLO and lets you sort the groups by any of the time windows in the widget. Use this widget to build out meaningful dashboards with the most critical SLO information:
+SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service. The SLO widget visualizes the status, budget, and remaining error budget of the existing SLOs. It displays all underlying groups of the SLO and lets you sort the groups by any of the time windows in the widget. Use this widget to build out meaningful dashboards with the most critical SLO information:
 - **View all of the SLO groups directly in the widget**: This is helpful for SLOs containing a lot of groups, as the widget provides key information related to SLO groups.
 - **Set your preferred sorting order for the SLO groups in the widget**: For all SLO types, sort groups based on any of the available time windows in the widget. Quickly identify the best and worst performing SLO groups for different time periods.
-- **Easily identify time periods with missing data in an SLO**: For all SLO types, the SLO summary widget shows time periods with missing data as "-". The "-" is displayed for any time window where the entire window is missing data.
+- **Easily identify time periods with missing data in an SLO**: For all SLO types, the SLO widget shows time periods with missing data as "-". The "-" is displayed for any time window where the entire window is missing data.
 
 ## Setup
 
-Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
+Use the SLO widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
 {{< img src="/dashboards/widgets/slo/slo-summary-widget-new.png" alt="metric-based slo summary widget graph editor " >}}
 
@@ -44,9 +43,9 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 Select up to three different time windows from the following:
 - **Rolling time windows**: 7, 30, or 90 days
 - **Calendar time windows**: week to date, previous week, month to date, or previous month
-- **Global time** (supported for metric-based and Time Slice SLOs): This option allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days
+- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 3 months of historical info for monitor-based SLOs. For Time Slice and metric-based SLOs, the supported historical view matches your account's metrics retention duration (by default, this is 15 months).
   
-  **Note:** To display an error budget and color-code your `Global time` SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown, and the font color remains gray.
+**Note:** To display an error budget and color-code your `Global time` SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown, and the font color remains gray.
 
 #### Display preferences
 
@@ -63,8 +62,6 @@ If you are visualizing an SLO with multiple groups or a monitor-based SLO with m
   - `Overall`: displays the overall SLO status percentages and targets
   - `Monitors`: displays a table of status percentages for each monitor
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
-
-**Note:** For monitor-based SLOs, you can only use the `Overall` view mode when the `Global Time` time window option is selected. 
 
 When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.

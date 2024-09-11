@@ -1,6 +1,6 @@
 ---
 title: Logs Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -22,6 +22,7 @@ cascade:
 
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/agent/logs/advanced_log_collection" >}}Advanced log collection configurations{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/reduce_data_transfer_fees" >}}How to send logs to Datadog while reducing data transfer fees{{< /nextlink >}}    
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Amazon Data Firehose Destination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Set up Datadog Lambda Forwarder{{< /nextlink >}}
@@ -68,6 +69,7 @@ cascade:
     {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}Delete Logs with Sensitive Data{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations" >}}

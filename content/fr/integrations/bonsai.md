@@ -18,7 +18,6 @@ integration_id: bonsai
 integration_title: Intégration
 integration_version: ''
 is_public: true
-kind: Bonsai
 maintainer: dev@onemorecloud.com
 manifest_version: 1.0.0
 metric_prefix: bonsai.

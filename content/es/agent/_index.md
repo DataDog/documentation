@@ -1,9 +1,15 @@
 ---
+algolia:
+  tags:
+  - agent
 aliases:
 - /es/agent/faq/agent-check-directory-structure
 - /es/agent/faq/install-core-extra
 - /es/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
 - /es/agent/faq/the-datadog-agent-for-logs-or-traces-only
+cascade:
+  algolia:
+    rank: 70
 description: Instalar y configurar el Agent para recopilar datos
 further_reading:
 - link: /logs/
@@ -21,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
   tag: Blog
   text: No temas al Agent
-kind: documentación
 title: Agent
 ---
 
@@ -42,30 +47,30 @@ Los paquetes también están disponibles para arquitecturas Arm v8 y x86 de 64 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 <div class="alert alert-info"><p>
-Datadog recomienda actualizar el Datadog Agent con todas las novedades y parches por mínimos que sean. O, al menos, actualizarlo una vez al mes. </p>
+Datadog recomienda actualizar el Datadog Agent con cada versión secundaria y de parche. O bien, al menos, actualizarlo una vez al mes. </p>
 <p>
-Actualizar a una versión principal del Datadog Agent y mantenerla al día es la única forma admitida de obtener las últimas funciones y correcciones del Agent. Sin embargo, salen nuevas actualizaciones para el Agent con frecuencia, y gestionar las actualizaciones a escala empresarial puede resultar complicado. Esto no significa que debas esperar por los lanzamientos principales para actualizarlo. La frecuencia de actualización adecuada para tu organización depende de la infraestructura y la forma de gestionar la configuración, aunque lo aconsejable es actualizarlo una vez al mes.</p>
+Actualizar a una versión principal del Datadog Agent y mantenerla actualizada es la única forma compatible de obtener las últimas funcionalidades y correcciones del Agent. Sin embargo, el Agent cuenta con actualizaciones frecuentes y puede ser todo un reto gestionarlas a escala empresarial. Esto no significa que debas esperar a las versiones principales para actualizarlo. La frecuencia de actualización adecuada para tu organización depende de la infraestructura y la forma de gestionar la configuración, pero lo aconsejable es que sea mensual.</p>
 <p>
-Para llevar a cabo la actualización básica del Datadog Agent entre dos versiones menores de un host determinado, ejecuta <a href="https://app.datadoghq.com/account/settings#agent">el comando de instalación correspondiente para tu plataforma</a>.</p>
+Para llevar a cabo la actualización básica del Datadog Agent entre dos versiones secundarias de un host determinado, ejecuta <a href="https://app.datadoghq.com/account/settings/agent/latest">el comando de instalación correspondiente para tu plataforma</a>.</p>
 <p>
-La numeración de los lanzamientos del Datadog Agent sigue las reglas de <a href="https://semver.org/">SemVer</a>.</p>
+La numeración de las versiones del Datadog Agent sigue las reglas de <a href="https://semver.org/">SemVer</a>.</p>
 </div>
 
 {{< whatsnext desc="Esta sección incluye los siguientes temas:">}}
-  {{< nextlink href="/agent/basic_agent_usage">}}<u>Uso básico del Agent</u>: obtén más información sobre el Datadog Agent, incluyendo los detalles de la arquitectura, CLI, sobrecarga y herramientas de gestión de la configuración.{{< /nextlink >}}
+  {{< nextlink href="/agent/basic_agent_usage">}}<u>Uso básico del Agent</u>: obtén más información sobre el Datadog Agent, incluido los detalles de la arquitectura, CLI, sobrecarga y herramientas de gestión de la configuración.{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: instala y configura el Datadog Agent en Docker. {{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: instala y configura el Datadog Agent en Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: instala y configura el Cluster Agent para Kubernetes, una versión del Datadog Agent integrada para recopilar de forma eficaz datos de monitorización de un clúster orquestado.{{< /nextlink >}}
+  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: instala y configura el Cluster Agent para Kubernetes, una versión del Datadog Agent creada para recopilar de manera eficaz datos de monitorización de un clúster orquestado.{{< /nextlink >}}
   {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: instala y configura el Datadog Agent en Amazon ECS.{{< /nextlink >}}
-  {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: instala y configura el Datadog Agent con Amazon ECS en AWS Fargate{{< /nextlink >}}
-  {{< nextlink href="/agent/iot">}}<u>IoT</u>: instala y configura el Datadog IoT Agent, una versión del Datadog Agent optimizada para monitorizar dispositivos del internet de las cosas y aplicaciones integradas.{{< /nextlink >}}
-  {{< nextlink href="/agent/logs">}}<u>Recopilación de logs</u>: activa y configura la recopilación de logs en el Datadog Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/proxy">}}<u>Proxy</u>: si la configuración de tu red restringe el tráfico saliente, usa un proxy para el tráfico del Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/versions/">}}<u>Versiones</u>: Agent 7 es la última versión más importante del Datadog Agent. Descubre los cambios entre las versiones más importantes del Agent y cómo actualizarlo.{{< /nextlink >}}
+  {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: instala y configura el Datadog Agent con Amazon ECS en AWS Fargate.{{< /nextlink >}}
+  {{< nextlink href="/agent/iot">}}<u>IoT</u>: instala y configura el Datadog IoT Agent, una versión del Datadog Agent optimizada para monitorizar dispositivos IoT y aplicaciones integradas.{{< /nextlink >}}
+  {{< nextlink href="/agent/logs">}}<u>Recopilación de logs</u>: habilita y configura la recopilación de logs en el Datadog Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/configuration/proxy">}}<u>Proxy</u>: si la configuración de tu red restringe el tráfico saliente, utiliza un proxy para el tráfico del Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/">}}<u>Versiones</u>: el Agent 7 es la última versión principal del Datadog Agent. Conoce los cambios entre las versiones principales del Agent y cómo actualizar.{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>Solución de problemas</u>: encuentra información para solucionar problemas relacionados con el Datadog Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/guide">}}<u>Guías</u>: tutoriales completos paso a paso para utilizar el Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/security">}}<u>Seguridad</u>: información sobre las principales funciones y opciones de seguridad disponibles para clientes que garantizan que su entorno es seguro.{{< /nextlink >}}
-  {{< nextlink href="/observability_pipelines/guide/configure_observability_pipelines_with_datadog">}}<u>Configuración de pipelines de observabilidad con Datadog</u>: despliega el worker de pipelines de observabilidad como un agregador para recopilar, transformar y redirigir todos tus logs, métricas y trazas hacia cualquier destino.{{< /nextlink >}}
+  {{< nextlink href="/agent/guide">}}<u>Guías</u>: tutoriales paso a paso detallados para utilizar el Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/security">}}<u>Seguridad</u>: información sobre las principales capacidades y características de seguridad disponibles para los clientes que garantizan que su entorno sea seguro.{{< /nextlink >}}
+  {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configuración de pipelines de observabilidad y Datadog</u>: despliega el worker de pipelines de observabilidad como un agregador para recopilar, transformar y redirigir todos tus logs y métricas a cualquier destino.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Leer más
@@ -73,5 +78,5 @@ La numeración de los lanzamientos del Datadog Agent sigue las reglas de <a href
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: https://app.datadoghq.com/account/settings#agent/aws
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [3]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/dogstatsd/alpine

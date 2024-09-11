@@ -1,6 +1,6 @@
 ---
 title: Azure Native Integration Manual Setup Guide
-kind: guide
+
 description: "Steps for manually setting up the Datadog Azure native integration"
 further_reading:
 - link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"

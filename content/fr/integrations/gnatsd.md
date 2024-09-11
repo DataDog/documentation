@@ -21,7 +21,7 @@ integration_id: gnatsd
 integration_title: Gnatsd
 integration_version: 2.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: dev@goldstar.com
 manifest_version: 1.0.0
 metric_prefix: gnatsd.

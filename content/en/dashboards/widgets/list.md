@@ -1,6 +1,5 @@
 ---
 title: List Widget
-kind: documentation
 widget_type: list_stream
 further_reading:
 - link: "/dashboards/graphing_json/"
@@ -81,6 +80,18 @@ For Events, you can choose how they're displayed in the widget:
 
 * Small (title only)
 * Large (full event)
+
+### Incidents
+
+#### Sorting by
+
+For incidents, you can sort by:
+
+* Created time
+* Severity
+* Status
+
+Ascending or descending
 
 ## API
 

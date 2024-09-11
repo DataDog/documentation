@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Paramètres d'organisation
 ---
 ## Présentation

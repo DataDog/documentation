@@ -11,32 +11,31 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: ガイド
 title: ログの紛失を防ぐメカニズム
 ---
 
-**Datadog Agent には、ログが失われないようにするためのメカニズムがいくつかあります**。
+**The Datadog Agent has several mechanisms to ensure that no logs are lost**.
 
-## ログのローテーション
+## Log rotate
 
-ファイルがローテーションされると、Agent は古いファイルの[テール][1]を継続しながら、新しく作成されたファイルのテールを並行して開始します。
-Agent は古いファイルをテールし続けますが、Agent が最新のファイルをテールするためにリソースを使用していることを確認するために、ログローテーション後に 60 秒のタイムアウトが設定されます。
+When a file is rotated, the Agent keeps [tailing][1] the old file while starting to tail the newly created file in parallel.
+Although the Agent continues to tail the old file, a 60-second timeout after the log rotation is set to ensure the agent is using its resources to tail the most up-to-date files.
 
-## ネットワークの問題
+## Network issues
 
-### ファイルテール
+### File tailing
 
-Agent は、各テールファイルのポインタを保存します。ネットワーク接続に問題がある場合、Agent は接続が回復するまでログの送信を停止し、ログが失われないように停止した場所を自動的にピックアップします。
+The Agent stores a pointer for each tailed file. If there is a network connection issue, the Agent stops sending logs until the connection is restored and automatically picks up where it stopped to ensure no logs are lost.
 
-### ポートリスニング
+### Port listening
 
-Agent が TCP または UDP ポートをリッスンしていてネットワークの問題に直面した場合、ネットワークが再び利用可能になるまで、ログはローカルバッファに保存されます。
-ただし、メモリの問題を避けるために、このバッファにはいくつかの制限があります。バッファがいっぱいになると、新しいログは削除されます。
+If the Agent is listening to a TCP or UDP port and faces a network issue, the logs are stored in a local buffer until the network is available again.
+However, there are some limits for this buffer in order to avoid memory issues. New logs are dropped when the buffer is full.
 
 ### コンテナログ
 
-ファイルに関しては、Datadog はテールされたコンテナ毎にポインタを保存します。そのため、ネットワークに問題が発生した場合、Agent はどのログがまだ送信されていないかを知ることができます。
-ただし、ネットワークが再び利用可能になる前にテールコンテナが削除されると、ログにはアクセスできなくなります。
+As for files, Datadog stores a pointer for each tailed container. Therefore, in the case of network issues, it is possible for the Agent to know which logs have not been sent yet.
+However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}
 

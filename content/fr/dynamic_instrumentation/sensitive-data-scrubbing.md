@@ -6,7 +6,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: Documentation
   text: Scanner de données sensibles
-kind: documentation
 title: Nettoyage de données sensibles pour l'instrumentation dynamique
 ---
 

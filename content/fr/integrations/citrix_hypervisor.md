@@ -28,7 +28,7 @@ integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
 integration_version: 2.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: citrix_hypervisor.

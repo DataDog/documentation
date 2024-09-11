@@ -1,6 +1,6 @@
 ---
 title: Root Cause Not Showing
-kind: faq
+
 further_reading:
 - link: "/watchdog/#root-cause-analysis-for-apm-beta"
   tag: "Documentation"

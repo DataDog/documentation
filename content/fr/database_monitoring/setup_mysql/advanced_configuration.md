@@ -1,12 +1,7 @@
 ---
 description: Configuration avancée de Database Monitoring pour MySQL
-kind: documentation
 title: Configuration avancée de Database Monitoring pour MySQL
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 ## Tronquer `events_statements_summary_by_digest`
 

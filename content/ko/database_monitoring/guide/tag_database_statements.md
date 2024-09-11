@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: SQL 구문 태깅
 ---
 {{< site-region region="gov" >}}

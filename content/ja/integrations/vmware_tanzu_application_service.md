@@ -6,6 +6,7 @@ categories:
 - プロビジョニング
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: VMware Tanzu Application Service (旧 Pivotal Cloud Foundry) VM とその実行ジョブの健全性を追跡します。
@@ -14,10 +15,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
   tag: GitHub
   text: Datadog による Pivotal プラットフォームの監視
+- link: /integrations/guide/application-monitoring-vmware-tanzu/
+  tag: ドキュメント
+  text: VMware Tanzu のための Datadog アプリケーションモニタリング
+- link: /integrations/guide/cluster-monitoring-vmware-tanzu/
+  tag: ドキュメント
+  text: VMware Tanzu のための Datadog クラスターモニタリング
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: integration
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) インテグレーション
@@ -37,7 +43,7 @@ VMware Tanzu Application Service と Datadog のインテグレーションに�
 
 [VMware Tanzu のインストールと構成][4]ガイドを使用して、Tanzu Ops Manager を使用してインテグレーションをインストールします。手動セットアップの手順については、手動セットアップガイドの[アプリケーションの監視][5]セクションをお読みください。
 
-### コンフィギュレーション
+### 構成
 
 #### メトリクスの収集
 
@@ -54,7 +60,7 @@ cf restage <アプリ>
 
 Datadog Trace Agent (APM) はデフォルトで有効になっています。特定の言語でのセットアップの詳細については、[APM のセットアップ][6]と[プロファイリングのセットアップ][7]を参照してください。
 
-#### ログの収集
+#### トラブルシューティング
 
 {{% site-region region="us3" %}}
 
@@ -104,9 +110,9 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### プロキシの構成が誤っている場合の通知
 
-Agent バージョン 6.12 以降では、ビルドパックで[プロキシ構成][8]を使用した場合、接続が確立できるかどうかの検証が行われます。このテストの結果に応じて、ログ収集が開始されます。
+Agent バージョン 6.12 以降では、ビルドパックで[プロキシ構成][101]を使用した場合、接続が確立できるかどうかの検証が行われます。このテストの結果に応じて、ログ収集が開始されます。
 
-接続の確立に失敗し、ログ収集が開始されない場合、[イベントエクスプローラー][9]にこのようなイベントが表示されます。これらのイベントを追跡するモニターを設定し、誤構成された Buildpack がデプロイされたときに通知されるようにします。
+接続が確立できずログ収集が開始されない場合、[イベントエクスプローラー][102]にこのようなイベントが表示されます。これらのイベントを追跡するモニターを設定し、誤構成された Buildpack がデプロイされたときに通知されるようにします。
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Datadog で Log endpoint cannot be reached - Log collection not started というタイトルのイベントと、TCP 接続が確立できなかったというメッセージが表示される" >}}
 
@@ -121,9 +127,12 @@ cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
 cf restage <YOUR_APP>
 ```
 
+[101]: /ja/agent/logs/proxy/
+[102]: /ja/events/explorer/
+
 {{% /site-region %}}
 
-### DogStatsD
+### 組織の設定
 
 [DogStatsD][10] を使用すると、カスタムアプリケーションメトリクスを Datadog に送信することができます。詳しくは[メトリクス送信: DogStatsD][11] を参照してください。様々なアプリケーションと互換性のある [DogStatsD ライブラリ][12]のリストがあります。
 
@@ -150,7 +159,7 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup
 [3]: /ja/integrations/faq/pivotal_architecture
-[4]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[4]: /ja/integrations/guide/application-monitoring-vmware-tanzu/
 [5]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
 [6]: /ja/tracing/setup/
 [7]: /ja/profiler/enabling/
@@ -159,8 +168,8 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [10]: /ja/developers/dogstatsd/
 [11]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [12]: /ja/libraries/
-[13]: https://docs.pivotal.io/partners/datadog/installing.html
-[14]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-pivotal-cloud-foundry-cluster
+[13]: /ja/integrations/guide/cluster-monitoring-vmware-tanzu/#installation
+[14]: /ja/integrations/guide/cloud-foundry-setup/#monitor-your-cloud-foundry-cluster
 [15]: /ja/integrations/system/#metrics
 [16]: /ja/integrations/network/#metrics
 [17]: /ja/integrations/disk/#metrics

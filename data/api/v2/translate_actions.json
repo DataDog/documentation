@@ -23,6 +23,10 @@
     "request_description": "",
     "request_schema_description": "Request used to update an API key."
   },
+  "ListAPIs": {
+    "description": "List APIs and their IDs.",
+    "summary": "List APIs"
+  },
   "DeleteOpenAPI": {
     "description": "Delete a specific API by ID.",
     "summary": "Delete an API"
@@ -38,7 +42,7 @@
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
   },
   "CreateOpenAPI": {
-    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nIt supports version `2.0`, `3.0` and `3.1` of the specification. A specific extension section, `x-datadog`,\nlet you specify the `teamHandle` for your team responsible for the API in Datadog.\nIt returns the created API ID.\n",
+    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nSee the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/) for additional\ninformation about the possible metadata.\nIt returns the created API ID.\n",
     "summary": "Create a new API",
     "request_description": "",
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
@@ -72,7 +76,7 @@
     "summary": "List all APM retention filters"
   },
   "CreateApmRetentionFilter": {
-    "description": "Create a retention filter to index spans in your organization.\nReturns the retention filter definition when the request is successful.",
+    "description": "Create a retention filter to index spans in your organization.\nReturns the retention filter definition when the request is successful.\n\nDefault filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor cannot be created.",
     "summary": "Create a retention filter",
     "request_description": "The definition of the new retention filter.",
     "request_schema_description": "The body of the retention filter to be created."
@@ -84,7 +88,7 @@
     "request_schema_description": "A list of retention filters to reorder."
   },
   "DeleteApmRetentionFilter": {
-    "description": "Delete a specific retention filter from your organization.",
+    "description": "Delete a specific retention filter from your organization.\n\nDefault filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor cannot be deleted.",
     "summary": "Delete a retention filter"
   },
   "GetApmRetentionFilter": {
@@ -92,7 +96,7 @@
     "summary": "Get a given APM retention filter"
   },
   "UpdateApmRetentionFilter": {
-    "description": "Update a retention filter from your organization.",
+    "description": "Update a retention filter from your organization.\n\nDefault filters (filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor) cannot be renamed or removed.",
     "summary": "Update a retention filter",
     "request_description": "The updated definition of the retention filter.",
     "request_schema_description": "The body of the retention filter to be updated."
@@ -217,6 +221,20 @@
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
   },
+  "ListCatalogEntity": {
+    "description": "Get a list of entities from Software Catalog.",
+    "summary": "Get a list of entities"
+  },
+  "UpsertCatalogEntity": {
+    "description": "Create or update entities in Software Catalog.",
+    "summary": "Create or update entities",
+    "request_description": "Entity YAML/JSON.",
+    "request_schema_description": "Create / Update entity request."
+  },
+  "DeleteCatalogEntity": {
+    "description": "Delete a single entity in Software Catalog.",
+    "summary": "Delete a single entity"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
@@ -307,6 +325,24 @@
     "request_description": "",
     "request_schema_description": "Azure config Patch Request."
   },
+  "ListCustomCostsFiles": {
+    "description": "List the Custom Costs files.",
+    "summary": "List Custom Costs files"
+  },
+  "UploadCustomCostsFile": {
+    "description": "Upload a Custom Costs file.",
+    "summary": "Upload Custom Costs file",
+    "request_description": "",
+    "request_schema_description": "Request for uploading a Custom Costs file."
+  },
+  "DeleteCustomCostsFile": {
+    "description": "Delete the specified Custom Costs file.",
+    "summary": "Delete Custom Costs file"
+  },
+  "GetCustomCostsFile": {
+    "description": "Fetch the specified Custom Costs file.",
+    "summary": "Get Custom Costs file"
+  },
   "GetCloudCostActivity": {
     "description": "Get the Cloud Cost Management activity.",
     "summary": "Cloud Cost Enabled"
@@ -316,7 +352,7 @@
     "summary": "Get active billing dimensions for cost attribution"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get Monthly Cost Attribution"
   },
   "ListCurrentUserApplicationKeys": {
@@ -957,6 +993,42 @@
     "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get active downtimes for a monitor"
   },
+  "ListDevices": {
+    "description": "Get the list of devices.",
+    "summary": "Get the list of devices"
+  },
+  "GetDevice": {
+    "description": "Get the device details.",
+    "summary": "Get the device details"
+  },
+  "GetInterfaces": {
+    "description": "Get the list of interfaces of the device.",
+    "summary": "Get the list of interfaces of the device"
+  },
+  "ListDeviceUserTags": {
+    "description": "Get the list of tags for a device.",
+    "summary": "Get the list of tags for a device"
+  },
+  "UpdateDeviceUserTags": {
+    "description": "Update the tags for a device.",
+    "summary": "Update the tags for a device",
+    "request_description": "",
+    "request_schema_description": "List tags response."
+  },
+  "ListOrgConfigs": {
+    "description": "Returns all Org Configs (name, description, and value).",
+    "summary": "List Org Configs"
+  },
+  "GetOrgConfig": {
+    "description": "Return the name, description, and value of a specific Org Config.",
+    "summary": "Get a specific Org Config value"
+  },
+  "UpdateOrgConfig": {
+    "description": "Update the value of a specific Org Config.",
+    "summary": "Update a specific Org Config",
+    "request_description": "",
+    "request_schema_description": "A request to update an Org Config."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
@@ -1052,7 +1124,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nConnections              | `viewer`, `editor`, `resolver`\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1189,6 +1261,12 @@
     "description": "Deletes a single rule.",
     "summary": "Delete a rule"
   },
+  "UpdateScorecardRule": {
+    "description": "Updates an existing rule.",
+    "summary": "Update an existing rule",
+    "request_description": "Rule attributes.",
+    "request_schema_description": "Request to update a scorecard rule."
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
     "summary": "Get the latest Cloud Workload Security policy"
@@ -1275,11 +1353,23 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
+    "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "summary": "Convert a rule from JSON to Terraform",
+    "request_description": "",
+    "request_schema_description": "Convert a rule from JSON to Terraform."
+  },
+  "TestSecurityMonitoringRule": {
+    "description": "Test a rule.",
+    "summary": "Test a rule",
+    "request_description": "",
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
+  },
   "ValidateSecurityMonitoringRule": {
     "description": "Validate a detection rule.",
     "summary": "Validate a detection rule",
     "request_description": "",
-    "request_schema_description": "Create a new rule."
+    "request_schema_description": "Validate a rule."
   },
   "DeleteSecurityMonitoringRule": {
     "description": "Delete an existing rule. Default rules cannot be deleted.",
@@ -1290,10 +1380,20 @@
     "summary": "Get a rule's details"
   },
   "UpdateSecurityMonitoringRule": {
-    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled and to change notifications.",
+    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled, to change notifications, or to update\nthe tags (default tags cannot be removed).",
     "summary": "Update an existing rule",
     "request_description": "",
     "request_schema_description": "Update an existing rule."
+  },
+  "ConvertExistingSecurityMonitoringRule": {
+    "description": "Convert an existing rule from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "summary": "Convert an existing rule from JSON to Terraform"
+  },
+  "TestExistingSecurityMonitoringRule": {
+    "description": "Test an existing rule.",
+    "summary": "Test an existing rule",
+    "request_description": "",
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
@@ -1455,6 +1555,20 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "CreateSLOReportJob": {
+    "description": "Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.\n\nCheck the status of the job and download the CSV report using the returned `report_id`.",
+    "summary": "Create a new SLO report",
+    "request_description": "Create SLO report job request body.",
+    "request_schema_description": "The SLO report request body."
+  },
+  "GetSLOReport": {
+    "description": "Download an SLO report. This can only be performed after the report job has completed.\n\nReports are not guaranteed to exist indefinitely. Datadog recommends that you download the report as soon as it is available.",
+    "summary": "Get SLO report"
+  },
+  "GetSLOReportJobStatus": {
+    "description": "Get the status of the SLO report job.",
+    "summary": "Get SLO report status"
+  },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
     "summary": "Aggregate spans",
@@ -1588,15 +1702,15 @@
     "summary": "Get hourly usage for application security"
   },
   "GetCostByOrg": {
-    "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.",
+    "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get cost across multi-org account"
   },
   "GetEstimatedCostByOrg": {
-    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month\nand is delayed by up to 72 hours from when it was incurred.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.",
+    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month\nand is delayed by up to 72 hours from when it was incurred.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get estimated cost across your account"
   },
   "GetHistoricalCostByOrg": {
-    "description": "Get historical cost across multi-org and single root-org accounts.\nCost data for a given month becomes available no later than the 16th of the following month.",
+    "description": "Get historical cost across multi-org and single root-org accounts.\nCost data for a given month becomes available no later than the 16th of the following month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get historical cost across your account"
   },
   "GetHourlyUsage": {
@@ -1612,7 +1726,7 @@
     "summary": "Get hourly usage for observability pipelines"
   },
   "GetProjectedCost": {
-    "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\nThis endpoint requires the usage_read authorization scope.",
+    "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
   },
   "SendInvitations": {
@@ -1660,5 +1774,23 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "ListWorkflowInstances": {
+    "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",
+    "summary": "List workflow instances"
+  },
+  "CreateWorkflowInstance": {
+    "description": "Execute the given workflow. This API requires an application key scoped with the workflows_run permission.",
+    "summary": "Execute a workflow",
+    "request_description": "",
+    "request_schema_description": "Request used to create a workflow instance."
+  },
+  "GetWorkflowInstance": {
+    "description": "Get a specific execution of a given workflow. This API requires an application key scoped with the workflows_read permission.",
+    "summary": "Get a workflow instance"
+  },
+  "CancelWorkflowInstance": {
+    "description": "Cancels a specific execution of a given workflow. This API requires an application key scoped with the workflows_run permission.",
+    "summary": "Cancel a workflow instance"
   }
 }

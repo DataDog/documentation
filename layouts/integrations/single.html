@@ -1,4 +1,6 @@
 {{ define "main" }}
+    {{ $media := .Params.tile.media | default .Params.media | default "" }}
+
     <div class="row">
         <div class="col-12 order-1">
             <h1 id="pagetitle">{{ .Params.integration_title | default .Title }}</h1>
@@ -7,10 +9,11 @@
             {{ partial "breadcrumbs.html" . }}
         </div>
     </div>
+
     {{ partial "integration-labels/integration-labels.html" . }}
     
-    {{ if and (in .Params.Kind "integration") (.Params.tile) (.Params.tile.media | len) }}
-    {{ partial "integrations-carousel/integrations-carousel.html" . }}
+    {{ if and (in .Params.custom_kind "integration") ($media | len) }}
+        {{ partial "integrations-carousel/integrations-carousel.html" (dict "context" . "media" $media) }}
     {{ end }}
 
     {{ .Content }}

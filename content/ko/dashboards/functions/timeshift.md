@@ -5,7 +5,6 @@ further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
   tag: FAQ
   text: 이전 값과 현재 값 사이의 백분율 변화를 그래프화합니다.
-kind: 설명서
 title: 타임시프트
 ---
 

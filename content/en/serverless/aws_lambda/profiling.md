@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler for AWS Lambda
-kind: documentation
 further_reading:
     - link: '/profiler/'
       tag: 'Documentation'
@@ -36,8 +35,8 @@ Depending on your runtime, this feature requires the following tracer and layer 
 
 | Runtime | Minimum tracer version | Minimum layer version |
 | ------- | ---------------------- | --------------------- |
-| Python | 4.62.0 | 62 |
-| Node.js | 6.87.0 | 87 |
+| Python | 1.4.0 | 62 |
+| Node.js | 2.22.1, 3.9.0 | 87 |
 
 ## Further Reading
 

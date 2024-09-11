@@ -1,6 +1,6 @@
 ---
 title: Is it possible to integrate with ThousandEyes?
-kind: faq
+
 ---
 
 While there is no official integration with [ThousandEyes][1], it's possible to use a [Python script][2] to pull data from ThousandEyes and push it to Datadog for dashboards and alerting.

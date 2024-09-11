@@ -1,6 +1,5 @@
 ---
 title: Host Map Widget
-kind: documentation
 widget_type: hostmap
 description: "Display the Datadog host map in your dashboards."
 aliases:

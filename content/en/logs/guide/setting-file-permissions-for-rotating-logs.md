@@ -1,6 +1,6 @@
 ---
 title: Setting file permissions for rotating logs (Linux)
-kind: guide
+
 aliases:
   - /logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:

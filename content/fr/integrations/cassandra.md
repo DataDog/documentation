@@ -44,7 +44,7 @@ integration_id: cassandra
 integration_title: Cassandra
 integration_version: 1.16.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cassandra
 public_title: Cassandra

@@ -2,7 +2,6 @@
 title: OpenTelemetry .NET Runtime Metrics
 aliases:
 - /opentelemetry/runtime_metrics/dotnet/
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 20

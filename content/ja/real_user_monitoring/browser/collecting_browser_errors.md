@@ -15,25 +15,24 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
-kind: documentation
 title: ブラウザエラーの収集
 ---
 ## 概要
 
-フロントエンドのエラーはリアルユーザーモニタリング (RUM) で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
+Front-end errors are collected with with Browser SDK. The error message and stack trace are included when available.
 
 ## エラーソース
 フロントエンドのエラーは、いくつかの異なるソースから発生します。
 
 - **agent**: SDK の実行から
 - **console**: `console.error()` API コールから
-- **custom**: [RUM `addError` API](#collect-errors-manually) と共に送信される
+- **custom**: Sent with the [`addError` API](#collect-errors-manually)
 - **report**: `ReportingObserver` API から
 - **source**: ソースコードの未処理の例外または未処理の約束拒否から
 
 ## エラー属性
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][1]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][2]をご覧ください。
+For information about the default attributes for all event types, see [Data Collected][1]. For information about configuring for sampling or global context see [Modifying Data and Context][2].
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -52,7 +51,7 @@ title: ブラウザエラーの収集
 
 ## エラーを手動で収集する
 
-`addError()` API を使用して、RUM ブラウザ SDK により自動的に追跡されない処理済みの例外、処理済みのプロミス拒否、およびその他のエラーを監視します。
+Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the Browser SDK with the `addError()` API:
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -61,7 +60,7 @@ addError(
 );
 {{< /code-block >}}
 
-**注**: [エラー追跡][4]機能は、ソースを `custom` または `source` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
+**Note**: [Error Tracking][4] processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -89,7 +88,7 @@ try {
 }
 ```
 {{% /tab %}}
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 // コンテキスト付きでカスタムエラーを送信
@@ -118,7 +117,7 @@ try {
 }
 ```
 {{% /tab %}}
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 // コンテキスト付きでカスタムエラーを送信
@@ -143,7 +142,7 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### React エラー境界のインスツルメンテーション
+### React error boundaries instrumentation
 
 React [エラー境界][5]をインスツルメンテーションして、RUM ブラウザ SDK の `addError()` API を使用して React のレンダリングエラーを監視できます。
 
@@ -174,7 +173,7 @@ class ErrorBoundary extends React.Component {
 ```
 
 {{% /tab %}}
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 class ErrorBoundary extends React.Component {
@@ -196,7 +195,7 @@ class ErrorBoundary extends React.Component {
 ```
 
 {{% /tab %}}
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 class ErrorBoundary extends React.Component {
@@ -221,7 +220,7 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### スクリプトエラー
 

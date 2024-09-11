@@ -1,5 +1,5 @@
 {{/*
-  This navigation is used on the left of the site, and is the main documentation nav.
+  This navigation is used on the left of the site, and is the main API documentation nav.
   Looking for the header nav? see website-modules
 */}}
 
@@ -20,12 +20,12 @@
 <!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
 {{ $currentEnURL := $currentPage.RelPermalink }}
 {{ if ne $currentPage.Lang "en" }}
-    {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
+    {{ $currentEnURL = (strings.Replace $currentPage.RelPermalink (printf "/%s" .Lang) "") }}
 {{ end }}
 
 
 {{/*
-    build array ($engMenuChildren) of english menu items with parents from "menus.en.yaml".
+    build array ($engMenuChildren) of english menu items with parents from "api.en.yaml".
     for use in providing english names for anchoring the nav-links (.nav-link)
 */}}
 {{ if ne $currentPage.Lang "en" }}

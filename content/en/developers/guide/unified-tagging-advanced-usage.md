@@ -1,6 +1,6 @@
 ---
 title: Unified Tagging Advanced Usage Guide
-kind: guide
+
 ---
 
 ## Overview

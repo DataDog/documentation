@@ -17,8 +17,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-kind: documentation
-title: Java ログとトレースの接続
+title: Java ログとトレースの相関付け
 type: multi-code-lang
 ---
 ## はじめに
@@ -29,7 +28,11 @@ type: multi-code-lang
 
 バージョン 0.74.0 以降、Java トレーサーは自動的にトレース相関識別子を JSON 形式のログに挿入します。それ以前のバージョンでは、システムプロパティとして `dd.logs.injection=true` を追加するか、環境変数 `DD_LOGS_INJECTION=true` を使用して、Java トレーサーの自動挿入を有効にします。コンフィギュレーションの詳細については、[Java トレーサーのコンフィギュレーション][2]ページを参照してください。
 
-**注**: トレース ID の `attribute.path` が `dd.trace_id` では*ない* 場合は’、当該トレース ID の `attribute.path` 向け予約済み属性設定アカウントを確認してください。詳しくは、[関連するログがトレース ID パネルに表示されない][3]を参照してください。
+**注**:
+- Automatic injection of trace correlation is available for Log4j2, Log4j, or SLF4J and Logback.
+- If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][3].
+
+<div class="alert alert-info"><strong>ベータ版</strong>: バージョン 1.18.3 から、サービスが実行される場所で <a href="/agent/remote_config/">Agent リモート構成</a>が有効になっている場合、<a href="/tracing/service_catalog">サービスカタログ</a> の UI で <code>DD_LOGS_INJECTION</code> を設定できます。</div>
 
 ## 手動挿入
 
@@ -72,6 +75,25 @@ try {
 } finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
+}
+```
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+```java
+import org.tinylog.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// There must be spans started and active before this block.
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// Log something
+
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
 }
 ```
 {{% /tab %}}

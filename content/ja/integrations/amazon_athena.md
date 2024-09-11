@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Athena のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_athena/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Amazon Athena
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_athena
 public_title: Datadog-Amazon Athena インテグレーション
@@ -28,9 +28,9 @@ Amazon Athena は、標準 SQL を使用して Amazon Simple Storage Service (Am
 
 このインテグレーションを有効にすると、Datadog にすべての Athena メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -39,21 +39,21 @@ Amazon Athena は、標準 SQL を使用して Amazon Simple Storage Service (Am
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Athena` が有効になっていることを確認します。
 2. [Datadog - Amazon Athena インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_athena" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon Athena インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon Athena インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

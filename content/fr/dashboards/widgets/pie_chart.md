@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/widgets/treemap/
   tag: Documentation
   text: Widget Treemap
-kind: documentation
 title: Widget Graphique circulaire
 ---
 

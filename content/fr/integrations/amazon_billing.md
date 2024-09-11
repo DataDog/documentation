@@ -18,7 +18,7 @@ integration_id: amazon-billing
 integration_title: AWS Billing
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_billing
 public_title: "Intégration Datadog/AWS\_Billing"

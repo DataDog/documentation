@@ -7,7 +7,6 @@ further_reading:
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-kind: documentation
 title: 大量のメトリクスの送信
 ---
 
@@ -445,7 +444,7 @@ DogStatsD クライアントによってドロップされたバイト数。
 : **メトリクスタイプ**: カウント<br>
 Agent に正常に送信されたデータグラムの数。
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントによってドロップされたデータグラムの数。
 
@@ -488,7 +487,7 @@ DogStatsD クライアントによってドロップされたバイト数。
 : **メトリクスタイプ**: カウント<br>
 Agent に正常に送信されたデータグラムの数。
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントによってドロップされたデータグラムの数。
 
@@ -555,7 +554,7 @@ DogStatsD クライアントのキューが一杯だったためにドロップ�
 : **メトリクスタイプ**: カウント<br>
 Datadog への書き込み時に、ネットワークのタイムアウトやエラーによりドロップされたデータグラム数。
 
-`datadog.dogstatsd.client.metric_dropped_on_receive` 
+`datadog.dogstatsd.client.metric_dropped_on_receive`
 : **メトリクスタイプ**: カウント<br>
 内部の受信チャンネルが満杯であるためにドロップされたメトリクスの数 (`WithChannelMode()` 使用時)。`WithChannelMode()` が有効な場合の Go クライアントの v3.6.0 以降。
 
@@ -610,7 +609,7 @@ Agent に正常に送信されたデータグラムの数。
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントによってドロップされたデータグラムの数。
 
-`datadog.dogstatsd.client.packets_dropped_queue` 
+`datadog.dogstatsd.client.packets_dropped_queue`
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントのキューが一杯だったためにドロップされたデータグラムの数。
 
@@ -669,7 +668,7 @@ DogStatsD クライアントによってドロップされたバイト数。
 : **メトリクスタイプ**: カウント<br>
 Agent に正常に送信されたデータグラムの数。
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントによってドロップされたデータグラムの数。
 

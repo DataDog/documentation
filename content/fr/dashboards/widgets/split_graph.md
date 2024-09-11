@@ -3,7 +3,6 @@ further_reading:
 - link: /dashboards/guide/graphing_json/
   tag: Guide
   text: Créer des dashboards avec JSON
-kind: documentation
 title: Widget Graphique scindé
 widget_type: split_group
 ---

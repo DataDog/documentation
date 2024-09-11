@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 함수가 한 번만 정의되었는지 확인하기
 ---
 ## 메타데이터

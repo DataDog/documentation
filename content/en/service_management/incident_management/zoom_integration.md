@@ -1,6 +1,5 @@
 ---
 title: Zoom Integration
-kind: documentation
 description: Connect Zoom to Datadog to help your team collaborate
 private: true
 ---

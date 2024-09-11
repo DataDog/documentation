@@ -5,7 +5,7 @@ cascade:
     rank: 20
     subcategory: Guides d'utilisation de la surveillance sans serveur
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides d'utilisation de la surveillance sans serveur
 ---
@@ -17,7 +17,7 @@ title: Guides d'utilisation de la surveillance sans serveur
     {{< nextlink href="/serverless/guide/serverless_warnings" >}}Avertissements de la surveillance sans serveur{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Tagging de fonctions sans serveur{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/agent_configuration" >}}Configuration de l'Agent sans serveur{{< /nextlink >}}
-{{< /whatsnext >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}Surveillance sans serveur et OpenTelemetry{{< /nextlink >}}{{< /whatsnext >}}
 
 ## Effectuer l'installation avec le Forwarder Datadog
 
@@ -37,4 +37,5 @@ title: Guides d'utilisation de la surveillance sans serveur
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Tracing Lambda Node.js et compatibilité de Webpack{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Correction des erreurs de package sans serveur trop volumineux{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/handler_wrapper" >}}Incorporer la fonction Lambda du gestionnaire dans le code{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}Dépannage des erreurs relatives aux couches non autorisées{{< /nextlink >}}
 {{< /whatsnext >}}

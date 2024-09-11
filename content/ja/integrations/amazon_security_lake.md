@@ -2,10 +2,11 @@
 categories:
 - AWS
 - クラウド
-- data store
+- data stores
 - ログの収集
 - ネットワーク
 - セキュリティ
+custom_kind: integration
 dependencies: []
 description: Amazon Security Lake のログを取り込みます。
 doc_link: ''
@@ -20,7 +21,6 @@ integration_id: amazon-security-lake
 integration_title: Amazon Security Lake
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: amazon_security_lake
 public_title: Datadog-Amazon Security Lake インテグレーション
@@ -28,6 +28,7 @@ short_description: Amazon Security Lake のログを取り込みます。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Security Lake は、セキュリティログやイベントデータを集計・管理するためのセキュリティデータレイクです。
@@ -44,7 +45,7 @@ Amazon Security Lake は、セキュリティログやイベントデータを�
 
 **注:** この AWS アカウントを統合して Amazon Security Lake の統合を使用したいだけであれば、[AWS インテグレーションページ][5]でメトリクスの収集を無効にすることができますので、Datadog はお客様の AWS インフラストラクチャーを監視せず、お客様は[インフラストラクチャーモニタリング][6]に対する請求を受けません。
 
-### ログの収集
+### 収集データ
 1. Datadog がセキュリティレイクに追加された新しいログファイルを取り込むことができるように、既存の `DatadogIntegrationRole` IAM ロールに次の IAM ポリシーを追加してください。
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -62,7 +63,7 @@ Amazon Security Lake は、セキュリティログやイベントデータを�
 }
 {{< /code-block >}}
 
-2. Amazon Security Lake の AWS コンソールで、Datadog のサブスクライバーを作成し、フォームに必要事項を入力します。AWS Security Lake のサブスクライバーの詳細については、[Amazon Security Lake ユーザーガイド][1]を参照してください。
+2. Amazon Security Lake の AWS コンソールで、Datadog のサブスクライバーを作成し、フォームに必要事項を入力します。Amazon Security Lake のサブスクライバーの詳細については、[Amazon Security Lake ユーザーガイド][1]を参照してください。
    - サブスクライバー名に `Datadog` と入力します。
    - Datadog に送信する `All log and event sources` または `Specific log and event sources` を選択します。
    - データアクセスメソッドとして `S3` を選択します。
@@ -116,13 +117,13 @@ Amazon Security Lake インテグレーションには、メトリクスは含�
 
 Amazon Security Lake インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon Security Lake インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-### アクセス許可
+### 権限
 
 [トラブルシューティングガイド][9]を確認し、AWS アカウントで Datadog 用の IAM ロールが正しく設定されていることを確認してください。
 

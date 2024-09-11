@@ -8,7 +8,6 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: 설명서
   text: 여러 계정으로 팀 & 조직 설정하기
-kind: 설명서
 title: Azure Active Directory SAML IdP
 ---
 

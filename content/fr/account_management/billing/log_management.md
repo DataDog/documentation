@@ -1,6 +1,5 @@
 ---
 title: Facturation du service Log Management
-kind: documentation
 ---
 ## Tarification
 

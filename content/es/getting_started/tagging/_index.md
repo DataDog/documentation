@@ -17,7 +17,9 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentación
   text: Descubre cómo usar las etiquetas
-kind: documentación
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva sobre la eficacia del etiquetado con Datadog
 title: Empezando con las etiquetas (tags)
 ---
 
@@ -55,7 +57,7 @@ Estos son los requisitos de etiquetado de Datadog:
 
     Los demás caracteres especiales se convertirán en guiones bajos.
 
-2. Las etiquetas pueden tener **hasta 200 caracteres** y son compatibles con Unicode (que abarca la mayoría de los conjuntos de caracteres, incluyendo idiomas como el japonés).
+2. Las etiquetas (tags) pueden tener **hasta 200 caracteres** y admiten letras Unicode (que incluyen la mayoría de conjuntos de caracteres, incluidos idiomas como el japonés).
 3. Las etiquetas se cambiarán a minúsculas. Por tanto, no se recomiendan las etiquetas `CamelCase`. Las integraciones basadas en (un rastreador de) autenticación convierten ese tipo de ortografía en guiones bajos. Ejemplo: `TestTag` --> `test_tag`.
 4. Una etiqueta puede estar en formato `value` o `<KEY>:<VALUE>`. Las claves de etiquetas más utilizadas son `env`, `instance` y `name`. La clave siempre precede a los primeros dos puntos de la definición de la etiqueta global. Ejemplo:
 
@@ -67,7 +69,7 @@ Estos son los requisitos de etiquetado de Datadog:
 5. Las etiquetas no deben originarse en fuentes sin enlazar, como marcas de tiempo epoch, ID de usuario o ID de solicitud. De ser así, [la cantidad de métricas podría aumentar][2] infinitamente en tu organización y afectar a tu facturación.
 6. Las limitaciones (como el cambio a minúsculas) solo se aplican a las etiquetas de métricas, no a los atributos de logs ni a las etiquetas de tramos.
 
-## Asignar etiquetas
+## Asignación de etiquetas
 
 ### Métodos de etiquetado
 
@@ -85,7 +87,7 @@ Para más información, consulta la sección [Asignar etiquetas (tags)][7].
 
 Datadog recomienda utilizar el etiquetado de servicios unificado al asignar etiquetas. Este sistema asocia toda la telemetría de Datadog mediante el uso de tres etiquetas estándar: `env`, `service` y `version`. Para saber cómo configurar tu entorno con el etiquetado unificado, consulta la sección [Etiquetado de servicios unificado][8].
 
-## Uso
+## Utilización
 
 Cuando tengas las [etiquetas asignadas][7] en el host y la [integración][9], empieza a usarlas para filtrar y agrupar tus métricas, trazas y logs. Las etiquetas se utilizan en las siguientes áreas de tu plataforma Datadog.
 
@@ -99,14 +101,16 @@ Cuando tengas las [etiquetas asignadas][7] en el host y la [integración][9], em
 | [Integrations (Integraciones)][15]   | Limitar opcionalmente las métricas de AWS, Google Cloud y Azure.                                        |
 | [APM][16]            | Filtrar servicios, trazas y perfiles, o navegar a otras áreas con el Mapa de servicios.           |
 | [RUM y Session Replay][17] | Filtrar la búsqueda de eventos, análisis, patrones, reproducciones y problemas en el navegador RUM.        |
-| [Synthetics][18]     | Filtrar y agrupar tests Synthetic o tests que se ejecutan en los pipelines de integración continua (CI) en el navegador de resultados de CI.   |
+| [Monitorización y pruebas continuas de Synthetic][18]     | Filtra y agrupa las pruebas de Synthetic o las pruebas que se ejecutan en los pipelines CI con el explorador de monitorización y pruebas continuas de Synthetic.   |
 | [Notebooks][19]      | Filtrar y agrupar métricas en gráficos.                                                               |
 | [Logs][20]           | Filtrar la búsqueda de logs, análisis, patrones, Live Tail y pipelines.                                |
 | [SLOs][21]           | Buscar SLOs, SLOs basados en métricas agrupadas y SLOs basados en monitores agrupados.                       |
 | [Developers (Desarrolladores)][22]     | Obtener información o configurar distintas áreas en la IU con la API.                                 |
 | [Billing (Facturación)][23]        | Generar informes sobre el uso de Datadog eligiendo hasta tres etiquetas, por ejemplo: `env`, `team` y `account_id`. |
+| [Visibilidad CI][24]  | Filtra y agrupa ejecuciones de pruebas o pipelines con el explorador de visibilidad CI. |
 
 Para más información, consulta la sección [Usar etiquetas][1].
+
 ## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -134,3 +138,4 @@ Para más información, consulta la sección [Usar etiquetas][1].
 [21]: /es/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /es/getting_started/tagging/using_tags/#developers
 [23]: /es/account_management/billing/usage_attribution/
+[24]: /es/getting_started/tagging/using_tags/#ci-visibility

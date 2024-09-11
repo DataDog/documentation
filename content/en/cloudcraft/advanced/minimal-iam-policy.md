@@ -1,6 +1,5 @@
 ---
 title: Create a custom IAM policy to use with Cloudcraft
-kind: guide
 ---
 
 Cloudcraft uses a _read-only_ IAM role to scan your AWS account and reverse-engineer the service relationships between components to autogenerate a diagram of your architecture.

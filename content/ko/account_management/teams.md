@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: Teams
 ---
 
@@ -14,14 +13,7 @@ Teams를 사용해 대시보드, 서비스, 모니터, 인시던트 등의 리�
 
 ### 탐색
 
-[팀 디렉터리 페이지][1]를 찾으려면 다음을 따르세요.
-
-1. 계정 메뉴에서 **Organization Settings**으로 이동합니다.
-1. **Groups**에서 **Teams**를 선택합니다.
-
-[팀 디렉터리 페이지][1]에는 조직 내 팀 목록이 모두 나타납니다. 오른쪽 상단에 있는 **Only My Teams** 슬라이더를 사용해 내 팀 보기와 조직 전체 팀 보기를 토글할 수 있습니다.
-
-{{< img src="account_management/teams-directory.jpg" alt="Organization Settings 페이지, Teams 탭에 있는 패널에 캐싱 팀이 강조 표시됨. " >}}
+[Organization Settings][1]에서 또는 [**Service Management > Teams**][2]로 이동하여 팀 디렉터리 페이지에 액세스합니다. [팀 디렉터리 페이지][1]에는 조직 내의 모든 팀이 나열됩니다.
 
 ### 팀 생성
 
@@ -32,12 +24,14 @@ Teams를 사용해 대시보드, 서비스, 모니터, 인시던트 등의 리�
 1. 드롭다운 메뉴를 사용하여 팀 구성원을 선택합니다.
 1. **생성**을 클릭합니다.
 
+**참고:** 팀 이름과 팀 핸들에 허용되는 문자는 `a-z`, `A-Z`, `0-9` 및 `._-:/`입니다. 공백을 밑줄로 바꾸세요.
+
 ### 팀 수정
 
-1. [팀 디렉터리 페이지][1]에서 수정할 팀을 클릭합니다. 측면 패널에 팀 상세 정보가 나타납니다.
-1. 수정할 항목 위에 마우스를 놓습니다. 연필 아이콘이 나타납니다.
-1. 연필 아이콘을 클릭하면 팝업 창이 나타납니다.
-1. 변경한 후 해당 버튼을 클릭하여 변경 내용을 저장합니다.
+1. [팀 디렉터리 페이지][1]에서 수정하려는 팀을 클릭합니다.
+1. 화면 상단의 **Settings** 톱니바퀴를 클릭하면 팝업 창이 나타납니다.
+1. 수정하려는 항목을 선택합니다.
+1. 수정 후 **Save**를 클릭합니다.
 
 ### 프로비저닝 소스 선택
 
@@ -52,11 +46,10 @@ SAML
 모든 소스
 : SAML을 시작점으로 사용하고 UI 및 API를 통해 재정의 허용
 
-1. [팀 디렉터리 페이지][1]에서 팀을 선택합니다. 측면 패널에 팀 상세 정보가 나타납니다.
-1. **Settings**를 클릭합니다.
+1. [팀 디렉터리 페이지][1]에서 **Teams Settings**를 클릭합니다.
 1. **Team Provisioning Sources**에서 옵션 하나를 선택합니다.
 
-기존 구성원이 있는 팀이 있는 경우 엄격한 SAML 옵션을 선택하면 내 설정을 무시하고 해당 팀에서 팀 구성원이 제거됩니다. All Source 옵션을 선택하면 기존 구성원 자격이 유지됩니다. SAML 특성을 사용해 팀과 팀 구성원 자격을 관리하려면 [맵 SAML 특성을 팀에 연결][2]를 참고하세요.
+기존 구성원이 포함된 팀이 있는 경우 SAML strict 옵션을 선택하면 설정이 재정의되고 해당 팀에서 팀 구성원이 제거됩니다. 모든 소스 옵션을 선택하면 기존 멤버십이 유지됩니다. SAML 속성을 사용하여 팀 및 팀 멤버십을 관리하려면 [SAML 속성을 Teams에 매핑][3]을 참조하세요.
 
 ## 팀 핸들
 
@@ -74,13 +67,22 @@ Datadog에서 정의된 팀과 연결되지 않은 팀 핸들은 태그와 유�
 
 Datadog에서는 다음 리소스를 팀 핸들과 연결할 수 있도록 지원합니다.
 
-- [대시보드][3]
-- [인시던트][4]
-- [모니터][5]
-- [리소스 카테고리][6]
-- [서비스 카테고리][7]
-- [서비스 수준 목표][8]
+- [대시보드][4]
+- [인시던트][5]
+- [모니터][6]
+- [리소스 카탈로그][7]
+- [서비스 카탈로그][8]
+- [서비스 수준 목표(Service Level Objectives)][9]
 - 신서틱 테스트, 전역 변수, 프라이빗 위치
+
+### 특정 커뮤니케이션 채널에 알림 보내기
+
+Slack 또는 Microsoft Teams와 같은 커뮤니케이션 채널로 알림을 라우팅하려면 팀에 알림 채널을 추가하세요.  `@team-<handle>`을 대상으로 하는 모니터 알림이 선택한 채널로 리디렉션됩니다.
+
+1. [팀 디렉터리 페이지][1]에서 수정하려는 팀을 클릭합니다.
+1. 화면 상단의 **Settings** 톱니바퀴를 클릭하면 팝업 창이 나타납니다.
+1. **Notifications**를 선택합니다.
+1. 채널을 추가한 후 **Save**를 클릭합니다.
 
 ## 필터
 
@@ -97,19 +99,21 @@ Datadog에서는 다음 리소스를 팀 핸들과 연결할 수 있도록 지�
 
 | 제품 목록 페이지       | 필터 기준                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [대시보드][9]         | 팀 핸들                                                                      |
-| [카테고리 리소스][6]   | 팀 핸들                                                                      |
-| [서비스 카테고리][10]    | 팀 핸들                                                                      |
-| [인시던트][11]          | 팀 핸들                                                                      |
-| [모니터][12]          | 팀 핸들                                                                      |
-| [APM 오류 추적][13] | 팀이 소유한 서비스([서비스 카탈로그][10] 내의 소유권에 따라 결정) |
-| [로그 오류 추적][14] | 팀이 소유한 서비스([서비스 카탈로그][10] 내의 소유권에 따라 결정) |
-| [서비스 수준 목표][15] | 팀 핸들                                                                 |
-| [데이터 스트림 모니터링][16]  | 팀 핸들                                                                 |
-| [신서틱 테스트][17]          | 팀 핸들                                                                 |
+| [대시보드][10]         | 팀 핸들                                                                      |
+| [리소스 카탈로그][7]   | 팀 핸들                                                                      |
+| [서비스 카탈로그][11]    | 팀 핸들                                                                      |
+| [인시던트][12]          | 팀 핸들                                                                      |
+| [모니터][13]          | 팀 핸들                                                                      |
+| [APM 오류 추적][14] | 팀이 소유한 서비스([서비스 카탈로그][11] 내 소유권으로 결정) |
+| [로그 오류 추적][15] | 팀이 소유한 서비스([서비스 카탈로그][11] 내 소유권으로 결정) |
+| [서비스 수준 목표(Service Level Objectives)][16] | 팀 핸들                                                                 |
+| [데이터 스트림 모니터링][17]  | 팀 핸들                                                                 |
+| [신서틱(Synthetic) 테스트][18]          | 팀 핸들                                                                 |
+| [노트북][19]          | 팀 핸들                                                                      |
 
 
-## 권한 허용
+
+## 권한
 
 팀 관리 권한이 있는 역할이 있는 사용자는 팀을 만들고, 팀 이름을 바꾸고, 팀을 삭제하고, 팀 핸들을 변경할 수 있으며, `user_access_manage` 권한이 있는 사용자는 팀 구성원과 관리자를 추가, 삭제, 승격할 수 있습니다.
 
@@ -129,7 +133,7 @@ Datadog에서는 다음 리소스를 팀 핸들과 연결할 수 있도록 지�
 
 ### SAML 속성 매핑
 
-SAML 속성을 사용해 팀과 팀 구성원 자격을 관리하려면 [Map SAML 속성을 팀에 매핑][2]을 참고하세요.
+SAML 속성을 사용해 팀과 팀 멤버십을 관리하려면 [SAML 속성을 Teams에 매핑][3]을 참고하세요.
 
 ### 팀 관리 권한 위임
 
@@ -139,20 +143,23 @@ SAML 속성을 사용해 팀과 팀 구성원 자격을 관리하려면 [Map SAM
 
 엄격한 구성원 자격 모델을 적용하려면 **user_access_manage** 권한이 있는 사용자만 구성원을 추가하거나 제거할 수 있도록 기본 팀 설정을 설정합니다. 조직 관리자에게만 `teams_manage` 권한을 할당합니다.
 
+
 [1]: https://app.datadoghq.com/organization-settings/teams
-[2]: /ko/account_management/saml/mapping/#map-saml-attributes-to-teams
-[3]: /ko/dashboards/#edit-details
-[4]: /ko/service_management/incident_management/incident_details#overview-section
-[5]: /ko/monitors/configuration/?tab=thresholdalert#add-metadata
-[6]: /ko/security/misconfigurations/resource_catalog
-[7]: /ko/tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
-[8]: /ko/service_management/service_level_objectives/#slo-tags
-[9]: https://app.datadoghq.com/dashboard/lists
-[10]: https://app.datadoghq.com/services
-[11]: https://app.datadoghq.com/incidents
-[12]: https://app.datadoghq.com/monitors/manage
-[13]: https://app.datadoghq.com/apm/error-tracking
-[14]: https://app.datadoghq.com/logs/error-tracking
-[15]: https://app.datadoghq.com/slo/manage
-[16]: https://app.datadoghq.com/data-streams
-[17]: https://app.datadoghq.com/synthetics
+[2]: https://app.datadoghq.com/teams
+[3]: /ko/account_management/saml/mapping/#map-saml-attributes-to-teams
+[4]: /ko/dashboards/#dashboard-details
+[5]: /ko/service_management/incident_management/incident_details#overview-section
+[6]: /ko/monitors/configuration/?tab=thresholdalert#add-metadata
+[7]: /ko/infrastructure/resource_catalog/
+[8]: /ko/tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /ko/service_management/service_level_objectives/#slo-tags
+[10]: https://app.datadoghq.com/dashboard/lists
+[11]: https://app.datadoghq.com/services
+[12]: https://app.datadoghq.com/incidents
+[13]: https://app.datadoghq.com/monitors/manage
+[14]: https://app.datadoghq.com/apm/error-tracking
+[15]: https://app.datadoghq.com/logs/error-tracking
+[16]: https://app.datadoghq.com/slo/manage
+[17]: https://app.datadoghq.com/data-streams
+[18]: https://app.datadoghq.com/synthetics
+[19]: https://app.datadoghq.com/notebook/list/

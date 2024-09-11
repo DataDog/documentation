@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/tags/
   tag: Documentation
   text: Attribuer des tags à toutes les données envoyées par un conteneur
-kind: Documentation
 title: Tracing d'applications ECS
 ---
 
@@ -23,7 +22,7 @@ Une fois la collecte activée, le conteneur de l'Agent Datadog recueille les tra
 ## Configurer l'Agent Datadog pour qu'il accepte les traces
 1. Pour recueillir toutes les traces à partir de vos conteneurs ECS exécutés, mettez à jour la définition de tâche de votre Agent issue de la [configuration ECS d'origine][6] en spécifiant la configuration ci-dessous.
 
-   Utilisez [datadog-agent-ecs-apm.json][3] comme point de référence pour la configuration de base requise. Dans la définition de tâche du conteneur de l'Agent Datadog, sous la section `portMappings`, définissez le port du host et le port du conteneur sur `8126` avec le protocole `tcp`.
+   Utilisez [datadog-agent-ecs-apm.json][3] comme modèle de référence pour connaître la configuration de base requise. Dans la définition de tâche du conteneur de l'Agent Datadog, sous la section `portMappings`, définissez le port du host et le port du conteneur sur `8126` avec le protocole `tcp`.
 
     ```json
     {

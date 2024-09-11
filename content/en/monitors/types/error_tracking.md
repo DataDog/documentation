@@ -1,19 +1,15 @@
 ---
 title: Error Tracking Monitor
-kind: documentation
 description: Learn about the Error Tracking monitor type.
 aliases :
   - /monitors/create/types/error_tracking/
 further_reading:
-- link: "/real_user_monitoring/error_tracking/"
+- link: "/error_tracking/issue_states/"
   tag: "Documentation"
-  text: "Learn about Error Tracking for Web and Mobile Applications"
-- link: "/tracing/error_tracking/"
+  text: "Learn about Error Tracking states and how they impact monitors"
+- link: "/error_tracking/"
   tag: "Documentation"
-  text: "Learn about Error Tracking for Backend Services"
-- link: "/logs/error_tracking/"
-  tag: "Documentation"
-  text: "Learn about Error Tracking for Logs"
+  text: "Learn about Error Tracking for Web, Mobile, and Backend"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -29,7 +25,7 @@ further_reading:
 
 Datadog Error Tracking automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
 
-With [Real User Monitoring][1], [APM][2], or [Logs][6] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs starts, when it has a high impact, and when it starts regressing.
+With [Error Tracking][1] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs is new, when it has a high impact, and when it starts regressing.
 
 ## Create an Error Tracking monitor
 
@@ -43,8 +39,8 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 | Alerting&nbsp;condition     | Description    | 
 | ---  | ----------- |
-|Count| Alert on issues with a high number of errors. For example, alert for your service whenever more than 500 occurrences of your error happen. |
-|New Issue| Triggers when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
+|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
+|New Issue| Alert when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
 
 ### Define the search query
 
@@ -115,15 +111,34 @@ For more information about advanced alert options such as evaluation frequency, 
 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
-For more information about the **Notify your team** and **Say what's happening** sections, see [Notifications][5].
+In addition to [matching attribute variables][7], the following Error Tracking specific variables are available
+for alert message notifications:
+
+* `{{issue.attributes.error.type}}`
+* `{{issue.attributes.error.message}}`
+* `{{issue.attributes.error.stack}}`
+* `{{issue.attributes.error.file}}`
+* `{{issue.attributes.error.is_crash}}`
+* `{{issue.attributes.error.category}}`
+* `{{issue.attributes.error.handling}}`
+
+For more information about the **Configure notifications and automations** section, see [Notifications][5].
+
+
+### Muting monitors
+Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
+
+**Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/
-[2]: /tracing/
+[1]: /error_tracking/
+[2]: /error_tracking/issue_states/
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
 [6]: /logs/
+[7]: /monitors/notify/variables/#matching-attributetag-variables

@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: 설명서
   text: 커스텀 링크
-kind: 설명서
 title: 위젯
 ---
 
@@ -85,7 +84,7 @@ title: 위젯
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} 워크플로우 실행{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### 모니터 관리
+### 아키텍처
 {{< whatsnext desc="인프라스트럭처 및 아키텍처 데이터 시각화: ">}}
     {{< nextlink href="/dashboards/widgets/hostmap" 
         img="dashboards/widgets/icons/host-map_light_large.png">}} 호스트맵{{< /nextlink >}}
@@ -96,14 +95,7 @@ title: 위젯
 {{< /whatsnext >}}
 
 ### 성능 및 안정성
-{{< whatsnext desc="사이트 안정성 시각화: ">}}
-    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
-        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 화염 그래프 프로파일링{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
-        img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO) 목록{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< whatsnext desc="사이트 안정성 시각화: ">}} {{< nextlink href="/dashboards/widgets/profiling_flame_graph" img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 불꽃 그래프 프로파일링 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo" img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo_list" img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO){{< /nextlink >}}{{< /whatsnext >}}
 
 ## 전체 화면
 
@@ -139,6 +131,14 @@ title: 위젯
     {{< nextlink href="/logs/explorer/facets/#units">}} 이벤트 기반 쿼리 단위 설정{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## 글로벌 시간 선택기
+
+글로벌 시간 선택기를 사용하려면 하나 이상의 시간 기반 위젯이 `Global Time`을(를) 사용하도록 설정해야 합니다. **Set display preferences**에 있는 위젯 편집기에서 선택하거나, 위젯을 추가하세요(글로벌 시간이 기본 시간 설정임).
+
+글로벌 시간 선택기는 동일한 대시보드에서 `Global Time` 옵션을 사용하여 모든 위젯에 대한 동일 시간 프레임을 설정합니다. 과거 이동 기간을 선택(예: `Past 1 Hour` 또는 `Past 1 Day`)하거나 `Select from calendar...` 옵션을 사용해 고정 기간을 선택합니다. 또는 [커스텀 시간대를 입력하세요][11]. 이동 기간을 선택한 경우 위젯이 업데이트되어 해당 기간으로 이동합니다.
+
+글로벌 시간에 연결되지 않은 위젯은 글로벌 윈도우에 적용된 현지 시간 프레임의 데이터를 표시합니다. 예를 들어, 글로벌 시간 선택기가 2019년 1월 1일부터 2019년 1월 2일로 설정된 경우 `Past 1 Minute`에 대한 현지 시간 프레임으로 설정된 위젯은 오후 11시 59분부터 2019년 1월 2일 마지막 분까지를 표시합니다.
+
 ## 위젯 복사 및 붙여넣기
 
 <div class="alert alert-warning">이 기능을 사용하려면 <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>대시보드 대중 공유</code> 권한</a>이 있어야 하고<a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"> 조직 설정에서 <strong>정적 공개 데이터 공유</strong></a>를 활성화해야 합니다.</div>
@@ -162,15 +162,30 @@ title: 위젯
 
 **참고**: 이 기능은 Datadog 내에서 공유할 때만 작동합니다. 미리보기 이미지를 생성하지 않습니다.
 
-## 그래프 내보내기
+## 위젯 그래프
 
-### PNG
+### 내보내기
 
-위젯을 PNG 형식으로 다운로드하려면 위젯 오른쪽 상단에 있는 내보내기 버튼을 클릭하고 **PNG로 다운로드**를 선택하세요.
+| 형식 | 설명서            |
+| -----  | ----------------------- |
+| PNG    | 위젯을 PNG 형식으로 다운로드하려면 위젯 오른쪽 상단에 있는 내보내기 버튼을 클릭하고 **PNG로 다운로드**를 선택하세요. |
+| CSV    | 시계열, 표, 상위 목록 위젯의 데이터를 CSV 형식으로 다운로드하려면 위젯 오른쪽 상단에 있는 내보내기 버튼을 클릭하고 **CSV로 다운로드**를 선택하세요.|
 
-### CSV
+### 그래프 메뉴
 
-시계열, 표, 상위 목록 위젯의 데이터를 CSV 형식으로 다운로드하려면 위젯 오른쪽 상단에 있는 내보내기 버튼을 클릭하고 **CSV로 다운로드**를 선택하세요.
+대시보드 그래프를 클릭하여 옵션 메뉴를 엽니다.
+
+| 옵션                 | 설명                                                        |
+|------------------------|--------------------------------------------------------------------|
+| 스냅샷 전송          | 그래프의 스냅샷을 생성하고 전송합니다.                          |
+| 상관 관계에 있는 메트릭 찾기| APM 서비스, 통합 및 대시보드에서 상관관계를 찾습니다. |
+| 전체 화면으로 보기    | [전체 화면 모드][5]로 그래프 보기                           |
+| 커서 잠금            | 페이지에서 커서를 제자리에 잠금 처리합니다.                              |
+| 관련 프로세스 보기 | 그래프 범위가 지정된 [Live Processes][6] 페이지로 이동합니다.         |
+| 관련 호스트 보기     | 그래프 범위가 지정된 [Host Map][7] 페이지로 이동합니다.               |
+| 관련 로그 보기      | 그래프 범위가 지정된 [Log Explorer][8] 페이지로 이동합니다.           |
+| 관련 트레이스 보기    | 그래프 범위가 지정된 [Traces][9] 패널을 채웁니다.                 |
+| 관련 프로필 보기  | 그래프 범위의 [프로파일링][10] 페이지로 건너뜁니다.             |
 
 ## 참고 자료
 
@@ -183,3 +198,7 @@ title: 위젯
 [5]: /ko/notebooks/
 [6]: /ko/tracing/services/service_page/
 [7]: /ko/tracing/services/resource_page/
+[8]: /ko/logs/explorer/
+[9]: /ko/tracing/trace_explorer/
+[10]: /ko/profiler/profile_visualizations/
+[11]: /ko/dashboards/guide/custom_time_frames/

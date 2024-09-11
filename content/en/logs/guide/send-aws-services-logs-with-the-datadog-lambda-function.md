@@ -1,6 +1,5 @@
 ---
 title: Send AWS Services Logs With The Datadog Lambda Function
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -11,6 +10,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 AWS service logs can be collected with the Datadog Forwarder Lambda function. This Lambda—which triggers on S3 Buckets, CloudWatch log groups, and EventBridge events—forwards logs to Datadog.
@@ -47,7 +49,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] log collection.                                                                                                 |
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
 | [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
-| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] log collection.                                                                                                 |
+| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] log collection.                                                                                                 |
 
 
@@ -251,11 +253,14 @@ Resources:
 {{< /tabs >}}
 
 
-
 ## Scrubbing and filtering
 
 You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][46].
 You can also exclude or send only those logs that match a specific pattern by using the [filtering option][47].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support

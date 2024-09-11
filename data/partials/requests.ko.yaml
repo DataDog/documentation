@@ -1,0 +1,76 @@
+requests:
+- description: 에이전트에는 Prometheus 엔드포인트를 스크래핑할 수 있는 OpenMetric 점검이 포함되어 있습니다. 본 통합으로
+    검색한 메트릭은 [커스텀 메트릭](https://docs.datadoghq.com/metrics/custom_metrics/)으로 간주됩니다.
+  image: int_openmetrics.png
+  link: /integrations/openmetrics/
+  name: OpenMetrics
+- description: JMX 통합을 사용하면 JVM 기반 애플리케이션에서 메트릭, 로그, 트레이스를 수집할 수 있습니다. 예를 들어, JMX
+    통합은 이미 Solr, Tomcat, Cassandra 등과 같은 공식 통합에서 사용되고 있습니다. Datadog이 기본적으로 지원하지 않는
+    JMX 기반 통합을 통해 생성된 메트릭은 [커스텀 메트릭](https://docs.datadoghq.com/metrics/custom_metrics/)으로
+    간주됩니다.
+  image: int_jmx.png
+  link: /integrations/java
+  name: JMX Beans
+- description: '[DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/)와 [API](https://docs.datadoghq.com/api/latest/metrics/)를
+    사용하여 비즈니스 통계용 커스텀 메트릭을 전송하세요. Datadog 에이전트 통합은 메트릭을 쿼링하는 파이썬(Python) 파일입니다. 에이전트
+    코드는 모두 오픈 소스이므로, [커스텀 에이전트 점검](https://docs.datadoghq.com/developers/custom_checks/)
+    또는 [커스텀 에이전트 통합](https://docs.datadoghq.com/developers/integrations/)을 작성할 수 있습니다.
+    [통합-엑스트라스 GitHub 리포지토리]에는 (https://github.com/DataDog/integrations-extras) 수많은
+    커뮤니티 개발 커스텀 통합이 포함됩니다.'
+  image: int_custom_metrics.png
+  link: metrics/custom_metrics
+  name: 커스텀 메트릭 및 통합
+- description: 로그 관리 기능으로 애플리케이션 및 인프라스트럭처에서 로그를 확인, 모니터링, 분석하세요. [Datadog 에이전트](https://docs.datadoghq.com/agent/logs/)는
+    로그를 Datadog 계정으로 전송하는 고급 기능을 제공하지만, 로그를 [로그 API](https://docs.datadoghq.com/api/latest/logs/)에
+    직접 전송할 수도 있습니다.
+  image: int_logs.png
+  link: /logs
+  name: 로그
+- description: APM 및 Continuous Profiler는 즉시 사용할 수 있는 '웹 서비스, 대기열, 데이터베이스용 대시보드'를
+    제공하여 요청, 오류, 레이턴시를 모니터링할 수 있도록 도와드립니다. [프록시 추적](https://docs.datadoghq.com/tracing/trace_collection/proxy_setup/)
+    또는 [AWS Lambda 함수](https://docs.datadoghq.com/serverless/distributed_tracing/)  전반
+    및 호스트 추적, 자동 계측 사용, dd-trace-api 또는  [OpenTelemetry](https://docs.datadoghq.com/tracing/trace_collection/open_standards/)
+    사용 여부에 따라 환경 및 언어별 [Datadog 추적 라이브러리](https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/)를
+    사용할 수 있습니다.
+  image: int_apm.png
+  link: /tracing
+  name: APM
+- description: '[프로세스 통합](https://docs.datadoghq.com/integrations/process/)으로 CPU,
+    메모리, I/O 등 모든 호스트에서 실행 중인 특정 프로세스에 대한 리소스 사용량 메트릭을 수집합니다. [라이브 프로세스 모니터링](https://docs.datadoghq.com/infrastructure/process/)
+    (SSH를 사용하지 않아도 되는 htop와 같음)을 활용하여 실행 중인 전 프로세스에서 쿼리를 수집합니다.'
+  image: int_processes.png
+  link: /infrastructure/process
+  name: 프로세스
+- description: 디렉토리 점검으로 파일의 수명, 디렉토리에 있는 파일 수 또는 디렉토리의 크기를 측정합니다.
+  image: int_files.png
+  link: /integrations/directory
+  name: 파일 및 디렉토리
+- description: 에이전트 기반 [HTTP 점검] 기능을 활용하거나 (https://docs.datadoghq.com/integrations/http_check/)
+    Datadog 애플리케이션에서 [신서틱 모니터링](https://docs.datadoghq.com/synthetics/)을 설정하여 엔드포인트
+    또는 URL이 실행 중이고 접근 가능한지 확인합니다. 옵션 중 하나를 선택하여 공개 및 비공개 엔드포인트를 모두 테스트합니다. [서비스 레벨
+    오브젝트 또는 SLO](https://docs.datadoghq.com/service_management/service_level_objectives/)와
+    조합하여 명확한 성능 목표를 설정합니다.
+  image: int_endpoint.png
+  link: /synthetics
+  name: 엔드포인트
+- description: '[네트워크 기기 모니터링](https://docs.datadoghq.com/network_monitoring/devices/)를
+    사용하면 라우터, 스위치, 프린터 등의 네트워크 장치에서 전송하는 [SNMP](https://docs.datadoghq.com/integrations/snmp/)(간단한
+    네트워크 관리 프로토콜) 메트릭을 수집할 수 있습니다. [네트워크 성능 모니터링](https://docs.datadoghq.com/network_monitoring/performance/)은
+    호스트 내외부의 모든 네트워크 트래픽을 추적하여 서비스, 컨테이너, 가용성 영역 및 Datadog의 기타 태그 간의 네트워크 트래픽에 대한
+    가시성을 제공해 드립니다. IP, 포트, PID 수준의 연결 데이터는 유용한 `소스`와 `대상` 엔드포인트 간의 애플리케이션 레이어 종속성으로
+    집계됩니다.'
+  image: int_network.png
+  link: /network_monitoring
+  name: SNMP 및 네트워크 트래픽
+- description: '모든 주요 클라우드 제공업체([AWS](https://docs.datadoghq.com/integrations/amazon_web_services/),
+    [Azure](https://docs.datadoghq.com/integrations/azure/), [GCP](https://docs.datadoghq.com/integrations/google_cloud_platform/),
+    [알리바바](https://docs.datadoghq.com/integrations/alibaba_cloud/))는 API를 통해 메트릭을
+    전송합니다. 계정의 [Datadog 통합 타일](https://app.datadoghq.com/integrations)을 사용하여 해당 통합을
+    설정합니다. 이를 Datadog 서버가 메트릭 크롤링에 활용합니다. '
+  image: int_cloud.png
+  link: /integrations/#cat-cloud
+  name: 클라우드 제공업체
+- description: 윈도우즈(Windows) 성능 카운터 통합을 사용하여 윈도우즈(Windows) 환경에서 성능 및 동작을 모니터링합니다.
+  image: int_wpc.png
+  link: /integrations/windows_performance_counters/
+  name: 윈도우즈(Windows) 성능 카운터

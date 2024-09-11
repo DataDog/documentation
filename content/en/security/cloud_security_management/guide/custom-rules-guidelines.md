@@ -1,6 +1,5 @@
 ---
 title: Guidelines for Writing Custom CSM Threats Rules
-kind: guide
 further_reading:
 - link: "/security/threats/workload_security_rules"
   tag: "Documentation"

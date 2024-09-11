@@ -1,6 +1,5 @@
 ---
 title: Create Jira Issues for Cloud Security Management Issues
-kind: guide
 further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"

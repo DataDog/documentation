@@ -22,7 +22,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/remote-configuration-for-datadog/
   tag: 블로그
   text: 원격 구성으로 Datadog 구성 요소에 실시간 업데이트 적용
-kind: 도움말
 title: 원격 구성
 ---
 

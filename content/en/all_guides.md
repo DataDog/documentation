@@ -1,6 +1,6 @@
 ---
 title: Datadog Documentation Guides
-kind: guide
+
 disable_toc: true
 ---
 
@@ -41,20 +41,20 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/continuous_integration/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CI Visibility{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Log Management:">}}
-{{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
-{{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< whatsnext desc="Security:">}}
 {{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
 {{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security Management{{< /nextlink >}}
 {{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Application Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="User Experience Monitoring:">}}
+{{< whatsnext desc="Digital Experience:">}}
 {{< nextlink href="/synthetics/guide" >}}<i class="icon-synthetics" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Synthetic Monitoring{{< /nextlink >}}
 {{< nextlink href="/real_user_monitoring/guide" >}}<i class="icon-rum" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Real User Monitoring{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Log Management:">}}
+{{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
+{{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Administration:">}}

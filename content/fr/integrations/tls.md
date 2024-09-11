@@ -24,7 +24,7 @@ integration_id: tls
 integration_title: TLS
 integration_version: 2.8.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: tls.

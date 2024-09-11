@@ -1,6 +1,5 @@
 ---
 title: "Block Blob Component"
-kind: documentation
 ---
 
 ## Overview

@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: ネットワークモニター
 ---
 
@@ -82,11 +81,11 @@ Datadog で[ネットワークモニター][3]を作成するには、メイン�
 
 #### 通知
 
-**Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページをご確認ください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
 ### ネットワークメトリクス
 
-[メトリクスモニター][10]ドキュメントの手順に従って、ネットワークメトリクスモニターを作成します。モニタータイプにネットワークメトリクスを選択すると、[モニターの管理][9]ページで、確実にネットワークモニタータイプのファセットでモニターを選択できるようになります。
+Create a network metric monitor by following the instructions in the [metric monitor][10] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
 ## その他の参考資料
 

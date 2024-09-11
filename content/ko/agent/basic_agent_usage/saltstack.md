@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/datadog-formula/blob/main/README.md
-kind: 설명서
 title: SaltStack
 ---
 Datadog SaltStack 공식은 Datadog Agent와 Agent 기반 통합(점검)을 설치할 때 사용합니다. SaltStack 공식을 자세히 알아보려면 [Salt 공식 설치 및 사용 가이드][1]를 참조하시기 바랍니다.

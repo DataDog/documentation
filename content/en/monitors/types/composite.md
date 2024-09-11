@@ -1,6 +1,5 @@
 ---
 title: Composite Monitor
-kind: documentation
 aliases:
     - /guides/composite_monitors
     - /monitors/monitor_types/composite
@@ -82,7 +81,7 @@ For detailed instructions on the advanced alert options (auto resolve, etc.), se
 
 ### Notifications
 
-For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ### API
 
@@ -200,7 +199,7 @@ However, consider monitor `3`, a multi alert per `host,url`. Monitor `1` and mon
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/composite
+[1]: https://app.datadoghq.com/monitors/create/composite
 [2]: /monitors/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/
 [4]: /monitors/notify/variables/?tab=is_alert#composite-monitor-variables

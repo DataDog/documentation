@@ -9,7 +9,6 @@ further_reading:
 - link: security_platform/cspm/frameworks_and_benchmarks
   tag: ドキュメント
   text: フレームワークおよび業界のベンチマークについて
-kind: documentation
 title: CSPM の概要
 ---
 

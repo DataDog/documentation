@@ -8,7 +8,6 @@ further_reading:
 - link: /getting_started/tagging
   tag: 설명서
   text: 태그 시작하기
-kind: 가이드
 title: 정규식으로 NDM 태그
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Metrics Mapping
-kind: documentation
 aliases:
 - /opentelemetry/guide/metrics_mapping/
 further_reading:
@@ -97,6 +96,59 @@ The following table shows what Datadog container metric names are associated wit
 | `container.net.rcvd`              | `container.network.io. usage.rx_bytes`     | The number of network bytes received (per interface)   |
 | `container.net.rcvd.packets`      | `container.network.io. usage.rx_packets`   | The number of network packets received (per interface)    |
 
+## Kafka metrics
+
+| OpenTelemetry Metric | Datadog Metric | Source | Transform done on Datadog Metric |
+|---|---|---|---|
+| otel.kafka.producer.request-rate | kafka.producer.request_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| otel.kafka.producer.response-rate | kafka.producer.response_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| otel.kafka.producer.request-latency-avg|kafka.producer.request_latency_avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer}| |
+| kafka.producer.outgoing-byte-rate | kafka.producer.outgoing-byte-rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer}| |
+| kafka.producer.io-wait-time-ns-avg | kafka.producer.io_wait | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer}| |
+| kafka.producer.byte-rate | kafka.producer.bytes_out | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| kafka.consumer.total.bytes-consumed-rate | kafka.consumer.bytes_in | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
+| kafka.consumer.total.records-consumed-rate | kafka.consumer.messages_in | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
+| kafka.network.io{state:out} | kafka.net.bytes_out.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.network.io{state:in} | kafka.net.bytes_in.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.purgatory.size{type:produce} | kafka.request.producer_request_purgatory.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.purgatory.size{type:fetch} | kafka.request.fetch_request_purgatory.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.partition.under_replicated | kafka.replication.under_replicated_partitions | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.isr.operation.count{operation:shrink} | kafka.replication.isr_shrinks.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.isr.operation.count{operation:expand} | kafka.replication.isr_expands.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge | 
+| kafka.leader.election.rate | kafka.replication.leader_elections.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge | 
+| kafka.partition.offline | kafka.replication.offline_partitions_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.request.time.avg{type:produce} | kafka.request.produce.time.avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.request.time.avg{type:fetchconsumer} | kafka.request.fetch_consumer.time.avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.request.time.avg{type:fetchfollower} | kafka.request.fetch_follower.time.avg |JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.message.count |kafka.messages_in.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.request.failed{type:produce} | kafka.request.produce.failed.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.request.failed{type:fetch} | kafka.request.fetch.failed.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.request.time.99p{type:produce} | kafka.request.produce.time.99percentile | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.request.time.99p{type:fetchconsumer} | kafka.request.fetch_consumer.time.99percentile | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.request.time.99p{type:fetchfollower} | kafka.request.fetch_follower.time.99percentile | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.partition.count | kafka.replication.partition_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.max.lag | kafka.replication.max_lag | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.controller.active.count | kafka.replication.active_controller_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.unclean.election.rate | kafka.replication.unclean_leader_elections.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.request.queue | kafka.request.channel.queue.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
+| kafka.logs.flush.time.count | kafka.log.flush_rate.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.consumer.bytes-consumed-rate | kafka.consumer.bytes_consumed | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
+| kafka.consumer.records-consumed-rate | kafka.consumer.records_consumed | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
+| otel.kafka.consumer.fetch-size-avg | kafka.consumer.fetch_size_avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
+| otel.kafka.producer.compression-rate | kafka.producer.compression-rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| otel.kafka.producer.record-error-rate | kafka.producer.record_error_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| otel.kafka.producer.record-retry-rate | kafka.producer.record_retry_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| otel.kafka.producer.record-send-rate | kafka.producer.record_send_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
+| kafka.partition.current_offset | kafka.broker_offset | kafkametricsreceiver | |
+| kafka.consumer_group.lag | kafka.consumer_lag | kafkametricsreceiver
+| kafka.consumer_group.offset | kafka.consumer_offset | kafkametricsreceiver
+| jvm.gc.collections.count{name:Copy && name:PS Scavenge && name:ParNew && name:G1 Young Generation} | jvm.gc.min&&_collection_count | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
+| jvm.gc.maj&&_collection_count{name:MarkSweepCompact && name:PS MarkSweep &&name:ConcurrentMarkSweep &&name:G1 Mixed Generation && G1 Old Generation && Shenandoah Cycles && ZGC} | jvm.gc.maj&&_collection_count | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
+| jvm.gc.collections.elapsed{name:Copy && name:PS Scavenge && name:ParNew && name:G1 Young Generation} | jvm.gc.min&&_collection_time | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
+| jvm.gc.collections.elapsed{name:MarkSweepCompact && name:PS MarkSweep &&name:ConcurrentMarkSweep &&name:G1 Mixed Generation && G1 Old Generation && Shenandoah Cycles && ZGC} | jvm.gc.major_collection_time | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge
+
+**Note:** In Datadog `-` gets translated to `_`. For the metrics prepended by `otel.`, this means that the OTel metric name and the Datadog metric name are the same (for example, `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, the OTel metric is then prepended with `otel.`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -107,7 +159,7 @@ The following table shows what Datadog container metric names are associated wit
 [4]: /opentelemetry/guide/semantic_mapping/
 [5]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [6]: https://app.datadoghq.com/infrastructure
-[7]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#out-of-the-box-dashboards
+[7]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
 [8]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [9]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [10]: /tracing/trace_explorer/trace_view/

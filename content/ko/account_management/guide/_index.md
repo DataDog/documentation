@@ -4,7 +4,6 @@ cascade:
     category: 지침
     rank: 20
     subcategory: 계정 관리 가이드
-kind: 가이드
 private: true
 title: 계정 관리 가이드
 ---

@@ -1,12 +1,7 @@
 ---
 title: Troubleshooting DBM Setup for Oracle
-kind: documentation
 description: Troubleshoot Database Monitoring setup for Oracle
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with Oracle, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
@@ -19,7 +14,7 @@ Check the connectivity between the Agent and the monitored database by running o
 - `curl <DB_SERVER>:<PORT>`
 - `telnet <DB_SERVER> <PORT>`
 
-It's important to specify the exact values for `<DB_SERVER>` and `<PORT>` that are configured for that instance in the `oracle-dbm` configuration file.
+It's important to specify the exact values for `<DB_SERVER>` and `<PORT>` that are configured for that instance in the `oracle` configuration file.
 
 Using the `telnet` command as an example, the expected output for a correctly configured connection is
 

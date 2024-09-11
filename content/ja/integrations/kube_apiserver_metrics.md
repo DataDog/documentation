@@ -5,6 +5,7 @@ assets:
   dashboards:
     Kubernetes API Server - Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: kube_apiserver.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10197
     source_type_name: Kubernetes API サーバーメトリクス
 author:
   homepage: https://www.datadoghq.com
@@ -24,6 +26,7 @@ author:
 categories:
 - コンテナ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_on_public_website: true
@@ -31,9 +34,8 @@ draft: false
 git_integration_title: kube_apiserver_metrics
 integration_id: kube-apiserver-metrics
 integration_title: Kubernetes API サーバーメトリクス
-integration_version: 4.0.0
+integration_version: 4.3.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_apiserver_metrics
 public_title: Kubernetes API サーバーメトリクス
@@ -50,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubernetes APIServer からメトリクスを収集
   media: []
@@ -58,6 +61,7 @@ tile:
   title: Kubernetes API サーバーメトリクス
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Kubernetes API Server ダッシュボード][1]
@@ -72,7 +76,7 @@ tile:
 
 Kube_apiserver_metrics チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 kube_apiserver_metrics チェックを実行する主な使用例としては、クラスターレベルのチェックがあります。
 詳細については、[クラスターレベルのチェック][4]に関するドキュメントを参照してください。
@@ -93,7 +97,7 @@ annotations:
 
 チェックを実行する Agent は、デフォルトで、APIServer に対する認証に使用するサービスアカウントのベアラートークンを取得しようとします。RBAC を使用していない場合は、`bearer_token_auth` を `false` に設定してください。
 
-最後に、Datadog Agent をマスターノードで実行する場合は、[オートディスカバリー][8]に依存してチェックをスケジューリングできます。公式のイメージ `registry.k8s.io/kube-apiserver` を実行している場合は自動です。
+最後に、Datadog Agent をマスターノードで実行する場合は、[オートディスカバリー][8]に依存してチェックをスケジューリングできます。公式イメージ `registry.k8s.io/kube-apiserver` を使用している場合、自動的に行われます。
 
 ### 検証
 
@@ -105,7 +109,7 @@ annotations:
 {{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 Kube_apiserver_metrics には、サービスのチェック機能は含まれません。
 

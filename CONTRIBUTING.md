@@ -7,7 +7,7 @@ Some of these guidelines are enforced by [the Datadog docs implementation of the
 ## Language
 
 - Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.  
-- Use the standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
+- Don't contribute updates to the translated content (fr, ja, ko, es), as the content in GitHub is not the managed source. If there is a mistake in the English source file, fix the English source file. If the mistake is only in the translated version, let us know and we will get it addressed in the source.
 
 ## General principles
 
@@ -175,7 +175,9 @@ See the documentation wiki to learn more about [image partials][6].
 
 ### Links
 
-Avoid vague link text, let readers know where you're sending them. Any sentence containing a link should read just as well if it didn't contain the link.
+Format links using numbered [reference-style links][8], and use relative paths for other pages published on the documentation site. For example, instead of embedding the URL directly in the text, write `read the [Getting Started with Azure][1]` and define the link reference at the bottom of the file like `[1]: /getting_started/azure/`.
+
+Avoid vague link text, let readers know where you're sending them. Any sentence containing a link should read just as well if it didn't have the link.
 - **Recommended**: To learn more about tagging, see the `[Guide to Tagging]`.
 - **Not recommended**: To learn more about tagging, see `[here]`.
 
@@ -202,3 +204,4 @@ Use text formatting to clarify and enhance content.
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/
+[8]: https://www.markdownguide.org/basic-syntax/#reference-style-links

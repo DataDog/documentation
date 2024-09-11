@@ -14,10 +14,10 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 213
-    source_type_name: Aurora
+    source_type_name: CircleCI
 author:
   homepage: https://www.datadoghq.com
-  name: Ruby
+  name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
@@ -25,6 +25,7 @@ categories:
 - configuration & deployment
 - 自動化
 - 開発ツール
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,10 +34,9 @@ integration_id: circleci
 integration_title: CircleCI
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: circleci
-public_title: Aurora
+public_title: CircleCI
 short_description: CircleCI のプラットフォームは、高品質のソフトウェアを迅速に構築し、リリースすることを容易にします。
 supported_os: []
 tile:
@@ -46,6 +46,7 @@ tile:
   - Category::Configuration & Deployment
   - Category::Automation
   - Category::Developer Tools
+  - Offering::Integration
   configuration: README.md#Setup
   description: CircleCI のプラットフォームは、高品質のソフトウェアを迅速に構築し、リリースすることを容易にします。
   media:
@@ -53,8 +54,11 @@ tile:
     image_url: images/circleci_synthetics.jpg
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
   support: README.md#Support
-  title: Aurora
+  title: CircleCI
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -67,13 +71,13 @@ CircleCI に接続して、
 - Synthetics で Orb ワークフローのデータを表示する
 - CircleCI のジョブログを収集し、Datadog に取り込む
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 CircleCI インテグレーションは、[インテグレーションタイル][1]からインストールできます。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. CircleCI 設定で、Personal API Tokens に移動し、生成したキーをフォームに入力します。名前は CircleCI ラベルと同じである必要はありませんが、一意でなければなりません。
 2. 「Organization/repo*name」、「Organization/repo*\*」、「Organization/\*」などの式を使用してリポジトリを絞り込みます。**フィルタリングは、追跡対象のプロジェクトに対して行われ、このリストは CircleCI 側でセットアップする必要があります。**
@@ -83,25 +87,25 @@ CircleCI インテグレーションは、[インテグレーションタイル]
 
 API トークンは複数設定でき、トークン 1 個につき複数のプロジェクトを追跡できます。Datadog にリポジトリの情報を表示するには、ユーザーがそのリポジトリのコントリビューターとして設定されている必要があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "circleci" >}}
 
 
-### ヘルプ
+### イベント
 
 CircleCI インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 CircleCI インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## その他の参考資料
+## 参考資料
 
 - [Datadog で CircleCI 環境を監視する][5]
 

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Native Profiler for Compiled Languages
-kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
 code_lang_weight: 90

@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner
-kind: documentation
 aliases:
 - /continuous_integration/intelligent_test_runner/
 further_reading:
@@ -43,17 +42,17 @@ There are several configuration mechanisms that you can use in these scenarios t
 - If you are authoring a risky commit and you'd like to run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 - You can add a list of [excluded branches](#excluded-branches), which disables Intelligent Test Runner in those branches.
 
-
 ## Set up a Datadog library
 
 Before setting up Intelligent Test Runner, you must configure [Test Visibility][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
@@ -61,6 +60,10 @@ Before setting up Intelligent Test Runner, you must configure [Test Visibility][
 Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][5] page. Enabling Intelligent Test Runner requires the `Intelligent Test Runner Activation Write` permission.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
+
+### Git executable
+
+For Intelligent Test Runner to work, [Git][6] needs to be available in the host running tests.
 
 ### Excluded branches
 
@@ -80,7 +83,7 @@ Tracked files are non-code files that can potentially impact your tests. Changes
 
 When you specify a set of tracked files, Intelligent Test Runner runs all tests if any of these files change.
 
-You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
+All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
 {{< img src="continuous_integration/itr_configuration2.png" alt="Select branches to exclude and tracked files" style="width:80%;">}}
 
@@ -92,11 +95,11 @@ You can explore the time savings you get from Intelligent Test Runner by looking
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings." style="width:80%;">}}
 
-When Intelligent Test Runner is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can identify which test sessions are using Intelligent Test Runner on the [Test Runs][6] page.
+When Intelligent Test Runner is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can identify which test sessions are using Intelligent Test Runner on the [Test Runs][7] page.
 
 ## Explore adoption and global savings
 
-Track your organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][7]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
+Track your organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][8]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
 
 {{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
 
@@ -113,5 +116,6 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [3]: /continuous_integration/intelligent_test_runner/setup
 [4]: /continuous_integration/tests/
 [5]: https://app.datadoghq.com/ci/settings/test-service
-[6]: https://app.datadoghq.com/ci/test-runs
-[7]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
+[6]: https://git-scm.com/
+[7]: https://app.datadoghq.com/ci/test-runs
+[8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner

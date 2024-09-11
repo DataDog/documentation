@@ -17,7 +17,7 @@ further_reading:
   tag: Blog
   text: Détecter les checks de qualité ayant échoué avec Datadog et les règles de
     protection de déploiement de GitHub
-kind: guide
+
 title: Contrôler la progression de vos déploiements GitHub Actions grâce aux monitors
   Datadog
 ---

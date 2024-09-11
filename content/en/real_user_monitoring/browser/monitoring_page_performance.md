@@ -1,6 +1,5 @@
 ---
 title: Monitoring Page Performance
-kind: documentation
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"
@@ -24,7 +23,7 @@ further_reading:
 
 ## Overview
 
-RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
+RUM view events collect extensive performance metrics for every pageview. Monitor your application's pageviews and explore performance metrics in dashboards and the RUM Explorer.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
@@ -44,7 +43,7 @@ You can access performance metrics for your views in:
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
+- Metrics collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -146,7 +145,50 @@ window.DD_RUM.init({
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## Add your own performance timing
+## Create custom performance metrics
+
+### Measure component-level performance with custom vitals
+
+Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction.
+
+#### Start and stop duration measurements
+
+Start a duration measurement by calling `startDurationVital` and stop a measurement with `stopDurationVital`:
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering")
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+Once you call the `stopDurationVital` method, the custom vital duration is sent to Datadog and can be queried using `@vital.name:dropdownRendering`. You can also filter by duration, for example with `@vital.duration:>10`.
+
+#### Use references and descriptions
+
+Use the reference returned by `startDurationVital` and specify a `description` string to differentiate between instances of the same custom vital across multiple pages. For example, to track the duration of `dropdownRendering` in the `login` page:
+
+```javascript
+const reference = window.DD_RUM.startDurationVital("dropdownRendering", { description: "login" })
+window.DD_RUM.stopDurationVital(reference)
+```
+
+This code groups by `@vital.description` so you can track the same component's rendering behavior across different pages.
+
+You can also add context to your custom vital using the `context` property:
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering", {context: { clientId: "xxx" }})
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+#### Report a custom vital with `addDurationVital`
+
+Instead of setting custom vital variables individually, you can report a custom vital in a single operation using `addDurationVital`:
+
+```javascript
+window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
+```
+
+### Track additional performance timings
 
 On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 

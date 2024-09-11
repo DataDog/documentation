@@ -1,6 +1,5 @@
 ---
 title: Unified Service Tagging
-kind: documentation
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -43,7 +42,7 @@ With these three tags, you can:
 | Language         | Minimum Tracer Version |
 |--------------|------------|
 | .NET    |  1.17.0+       |
-| C++    |  1.1.4+       |
+| C++    |  0.1.0+       |
 | Go         |  1.24.0+       |
 | Java   |  0.50.0+      |
 | Node    |  0.20.3+       |
@@ -59,6 +58,8 @@ To start configuring unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
+- [Serverless](#serverless-environment)
+- [OpenTelemetry](#opentelemetry)
 
 ### Containerized environment
 
@@ -79,6 +80,22 @@ To setup unified service tagging in a containerized environment:
 
 If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
+##### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][7] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][8].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
+
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][9] 
+
 ##### Full configuration
 
 To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
@@ -90,14 +107,14 @@ metadata:
   labels:
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
+    # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
 ...
 template:
   metadata:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
   containers:
   -  ...
      env:
@@ -109,10 +126,10 @@ template:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.labels['tags.datadoghq.com/service']
-          - name: DD_VERSION
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['tags.datadoghq.com/version']
+          # - name: DD_VERSION #Uncomment this line to manually tag your version
+          #   valueFrom: #Uncomment this line to manually tag your version
+          #     fieldRef: #Uncomment this line to manually tag your version
+          #       fieldPath: metadata.labels['tags.datadoghq.com/version'] #Uncomment this line to manually tag your version
 ```
 
 ##### Partial configuration
@@ -127,7 +144,7 @@ template:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
 ```
 These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
@@ -136,7 +153,7 @@ If you have multiple containers per pod, you can specify standard labels by cont
 ```yaml
 tags.datadoghq.com/<container-name>.env
 tags.datadoghq.com/<container-name>.service
-tags.datadoghq.com/<container-name>.version
+# tags.datadoghq.com/<container-name>.version #Uncomment this line to manually tag your version
 ```
 
 ###### State metrics
@@ -154,14 +171,14 @@ To configure [Kubernetes State Metrics][3]:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
   spec:
     template:
       metadata:
         labels:
           tags.datadoghq.com/env: "<ENV>"
           tags.datadoghq.com/service: "<SERVICE>"
-          tags.datadoghq.com/version: "<VERSION>"
+          # tags.datadoghq.com/version: "<VERSION>" #Uncomment this line to manually tag your version
   ```
 
 ###### APM tracer and StatsD client
@@ -180,12 +197,11 @@ containers:
           valueFrom:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.labels['tags.datadoghq.com/version']
+        # - name: DD_VERSION #Uncomment this line to manually tag your version
+        #   valueFrom: #Uncomment this line to manually tag your version
+        #     fieldRef: #Uncomment this line to manually tag your version
+        #       fieldPath: metadata.labels['tags.datadoghq.com/version'] #Uncomment this line to manually tag your version
 ```
-
 
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
@@ -193,21 +209,42 @@ containers:
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
+[7]: /tracing/services/deployment_tracking/
+[8]: /watchdog/faulty_deployment_detection/
+[9]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
+##### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
+
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`(optional with automatic version tagging) environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 
 ```yaml
 ENV DD_SERVICE <SERVICE>
-ENV DD_VERSION <VERSION>
+# ENV DD_VERSION <VERSION> #Uncomment this line to manually tag your version
 
 LABEL com.datadoghq.tags.service="<SERVICE>"
-LABEL com.datadoghq.tags.version="<VERSION>"
+# LABEL com.datadoghq.tags.version="<VERSION>" #Uncomment this line to manually tag your version
 ```
 
 Since `env` is likely determined at deploy time, you can inject the environment variable and label later:
@@ -221,31 +258,53 @@ You may also prefer to set everything at deploy time:
 ```shell
 docker run -e DD_ENV="<ENV>" \
            -e DD_SERVICE="<SERVICE>" \
-           -e DD_VERSION="<VERSION>" \
+           # -e DD_VERSION="<VERSION>" \ #Uncomment this line to manually tag your version
            -l com.datadoghq.tags.env="<ENV>" \
            -l com.datadoghq.tags.service="<SERVICE>" \
-           -l com.datadoghq.tags.version="<VERSION>" \
+           # -l com.datadoghq.tags.version="<VERSION>" \ #Uncomment this line to manually tag your version
            ...
 ```
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels:
 
 ```yaml
 com.datadoghq.tags.env
 com.datadoghq.tags.service
-com.datadoghq.tags.version
+# com.datadoghq.tags.version #Uncomment this line to manually tag your version
 ```
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
+ 
+
+[1]: /tracing/services/deployment_tracking/
+[2]: /watchdog/faulty_deployment_detection/
+[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 
 {{% /tab %}}
 
 {{% tab "ECS" %}}
+
+##### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
+
+Requirements: 
+- Datadog Agent Version 7.52.0 or greater
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
+- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic version tagging) environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
 ```
 "environment": [
@@ -256,33 +315,46 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
   {
     "name": "DD_SERVICE",
     "value": "<SERVICE>"
-  },
-  {
-    "name": "DD_VERSION",
-    "value": "<VERSION>"
   }
+  /**
+   * Only include this block for manual version tagging
+   * ,{
+   *   "name": "DD_VERSION",
+   *   "value": "<VERSION>"
+   * }
+   **/
 ],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
-  "com.datadoghq.tags.service": "<SERVICE>",
-  "com.datadoghq.tags.version": "<VERSION>"
+  "com.datadoghq.tags.service": "<SERVICE>"
+  /**
+   * Only include this block for manual version tagging
+   * ,"com.datadoghq.tags.version": "<VERSION>"
+   **/
 }
 ```
 
 ##### Partial configuration
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
-  "com.datadoghq.tags.service": "<SERVICE>",
-  "com.datadoghq.tags.version": "<VERSION>"
+  "com.datadoghq.tags.service": "<SERVICE>"
+  /**
+   * Only include this block for manual version tagging
+   * ,"com.datadoghq.tags.version": "<VERSION>"
+   **/
 }
 ```
 
+[1]: /tracing/services/deployment_tracking/
+[2]: /watchdog/faulty_deployment_detection/
+[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
 {{% /tab %}}
-{{< /tabs >}}
+{{% /tabs %}}
 
 ### Non-containerized environment
 
@@ -291,7 +363,7 @@ Depending on how you build and deploy your services' binaries or executables, yo
 To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], [RUM resources][10], [Synthetics tests][11], [StatsD metrics][12], or system metrics, either:
 
 1. Export the environment variables in the command for your executable:
-   
+
    ```
    DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
    ```
@@ -319,25 +391,23 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-   **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
-
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
    {{% tab "RUM & Session Replay" %}}
 
-   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file.
 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
 [1]: /real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/#setup
+[2]: /real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
 
-   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2]. 
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
 
    You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 
@@ -407,6 +477,71 @@ instances:
 ### Serverless environment
 
 For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
+
+### OpenTelemetry
+
+When using OpenTelemetry, map the following [resource attributes][16] to their corresponding Datadog conventions:
+
+| OpenTelemetry convention | Datadog convention |
+| --- | --- |
+| `deployment.environment` | `env` |
+| `service.name` | `service` |
+| `service.version` | `version` |
+
+<div class="alert alert-warning">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
+
+{{< tabs >}}
+{{% tab "Environment variables" %}}
+
+To set resource attributes using environment variables, set `OTEL_RESOURCE_ATTRIBUTES` with the appropriate values:
+
+```shell
+export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment=production,service.version=1.2.3"
+```
+
+{{% /tab %}}
+
+{{% tab "SDK" %}}
+
+To set resource attributes in your application code, create a `Resource` with the desired attributes and associate it with your `TracerProvider`.
+
+Here's an example using Python:
+
+```python
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+
+resource = Resource(attributes={
+   "service.name": "<SERVICE>",
+   "deployment.environment": "<ENV>",
+   "service.version": "<VERSION>"
+})
+tracer_provider = TracerProvider(resource=resource)
+```
+
+{{% /tab %}}
+
+{{% tab "Collector" %}}
+
+To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in your Collector configuration file. The transform processor allows you to modify attributes of the collected telemetry data before sending it to the Datadog exporter:
+
+```yaml
+processors:
+  transform:
+    trace_statements:
+      - context: resource
+        statements:
+          - set(attributes["service.name"], "my-service")
+          - set(attributes["deployment.environment"], "production")
+          - set(attributes["service.version"], "1.2.3")
+...
+```
+
+[100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -426,3 +561,4 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
+[16]: https://opentelemetry.io/docs/languages/js/resources/

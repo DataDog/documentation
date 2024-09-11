@@ -1,13 +1,15 @@
 ---
 app_id: data-runner
 app_uuid: ad7b5a3c-497d-45e0-9bcf-50f2d1365247
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://datadoghq.com
   name: Datadog
   sales_email: sales@datadog.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/data_runner/README.md
 display_on_public_website: true
@@ -17,7 +19,6 @@ integration_id: data-runner
 integration_title: The Data Runner
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: data_runner
 public_title: The Data Runner
@@ -55,7 +56,7 @@ Data Runner は、プレイヤーが指定したメトリクスを、キャラ�
 
 Data Runner の詳細については、GitHub の [stuartlangridge/data-runner][2] を参照してください。
 
-## 計画と使用
+## セットアップ
 
 1. Data Runner をダッシュボードに表示するには、ウィジェットを追加したい[ダッシュボード][3]を開きます。
 
@@ -63,17 +64,17 @@ Data Runner の詳細については、GitHub の [stuartlangridge/data-runner][
 
 3. ゲームキャラクターが探すメトリクスを選びます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Data Runner は、メトリクスを提供しません。
 
-### ヘルプ
+### イベント
 
 Data Runner には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Data Runner には、サービスのチェック機能は含まれません。
 

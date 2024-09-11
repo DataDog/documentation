@@ -1,6 +1,5 @@
 ---
 title: Universal Service Monitoring
-kind: documentation
 aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
@@ -57,7 +56,7 @@ After you configure the Agent, wait about five minutes for your service to appea
 
 The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
-{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation dropdown menu on the Services tab shows the available operation names" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/select_service_operation_cropped.png" alt="The operation dropdown menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
 After enabling Universal Service Monitoring, you can:
 

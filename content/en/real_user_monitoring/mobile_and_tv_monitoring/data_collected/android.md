@@ -1,6 +1,5 @@
 ---
 title: RUM Android Data Collected
-kind: documentation
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
@@ -8,7 +7,7 @@ aliases:
 - /real_user_monitoring/android/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
@@ -36,6 +35,15 @@ The following diagram illustrates the RUM event hierarchy:
 
 {{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" >}}
 
+## Application launch
+
+During initialization, the RUM Android SDK creates a view called "ApplicationLaunch". This view's start time matches the start of the Android process, and can be used to track your application launch time.
+
+The `ApplicationLaunch` view includes any logs, actions, and resources created before your first call to `startView`. Use the duration of this view to determine time to first view. This view has an action, `application_start`, with a duration that depends on Android version:
+
+- In *Android 7.0* and above, this view/action captures the period before any application code is executed (right before `Application.onCreate`) and when the first RUM event is recorded.
+- In versions before *Android 7.0*, the view/action captures the period between the `RumFeature` class loads and when the first RUM event is recorded.
+
 ## Default attributes
 
 RUM collects common attributes for all events and attributes specific to each event listed below [automatically][1]. You can also choose to enrich your user session data by tracking [additional events][2] or by [adding custom attributes][3] to default events specific to your application monitoring and business analytics needs.
@@ -60,6 +68,7 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (System User-Agent).  |
 | `device.model`   | string | The device model as reported by the device (System User-Agent).    |
 | `device.name` | string | The device name as reported by the device (System User-Agent).  |
+| `device.architecture` | string | The CPU architecture of the device that is reporting the error. |
 
 ### Connectivity
 
@@ -72,7 +81,6 @@ The following network-related attributes are attached automatically to Resource 
 | `connectivity.cellular.technology` | string | The type of a radio technology used for cellular connection. |
 | `connectivity.cellular.carrier_name` | string | The name of the SIM carrier. |
 
-
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -82,7 +90,6 @@ The following OS-related attributes are attached automatically to all events col
 | `os.name`       | string | The OS name as reported by the device (System User-Agent).       |
 | `os.version`  | string | The OS version as reported by the device (System User-Agent).  |
 | `os.version_major`   | string | The OS version major as reported by the device (System User-Agent).   |
-
 
 ### Geo-location
 
@@ -98,8 +105,6 @@ The below attributes are related to the geo-location of IP addresses.
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `San Francisco`, `Paris`, or `New York`).                                                                                   |
-
-
 ### Global user attributes
 
 You can enable [tracking user info][5] globally to collect and apply user attributes to all RUM events.
@@ -139,6 +144,7 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.last_view.name` | string | Name of the last view of the session. |
 | `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8]. |
 | `session.useragent` | string | System user agent info to interpret device info.  |
+| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 
 ### View metrics
 
@@ -200,7 +206,9 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.message` | string | A concise, human-readable one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 | `error.issue_id`   | string | The stack trace or complementary information about the error.     |
-
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
+| `error.file` | string | File where the error happened for the Error Tracking issue. |
+| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
 
 ### Network errors 
 
@@ -233,9 +241,20 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.name` | string | Name of the user action. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-## Data Storage
+## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][6], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+
+## Data upload
+
+The RUM Android SDK allows you to get the data you need to Datadog while considering user bandwidth impact. The Datadog SDK batches and uploads events as follows:
+
+- On _event collected_, the Datadog SDK appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
+- On _upload_ (when the batch is considered "closed"), the Datadog SDK:
+  - Reads the batch and extract events
+  - Drops redundant View events in RUM (no optimizations in other tracks)
+  - Builds payloads specific to each track
+  - Compresses the payload and sends it
 
 ## Direct Boot mode support
 

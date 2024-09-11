@@ -1,6 +1,5 @@
 ---
 title: Log Search Syntax
-kind: documentation
 description: "Search through all of your logs."
 aliases:
     - /logs/search-syntax
@@ -41,7 +40,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Full-text search 
 
-<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, rehydration filters, or in Live Tail. </div>
 
 Use the syntax `*:search_term` to perform a full-text search across all log attributes, including the log message.
 
@@ -76,7 +75,7 @@ The full-text search syntax `*:"hello world" "i am here"` is equivalent to `*:"h
 
 ## Escape special characters and spaces
 
-The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
+The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#`, and spaces require escaping with the `\` character. 
 `/` is not considered a special character and doesn't need to be escaped.
 
 You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
@@ -99,7 +98,7 @@ For instance, if your attribute name is **url** and you want to filter on the **
 
 1. It is **not** required to define a facet to search on attributes and tags.
 
-2. Attributes searches are case sensitive. Use free text search to get case insensitive results, see [Wildcards](#wildcards) for more information on free text search. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+2. Attributes searches are case sensitive. Use [full-text search](#full-text-search) to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
     - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
@@ -129,7 +128,7 @@ The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Lo
 
 ## Wildcards
 
-You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search-across-all-log-attributes) if you want to search for a value in a log attribute.
+You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search](#full-text-search) if you want to search for a value in a log attribute.
 
 ### Multi-character wildcard
 

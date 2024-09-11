@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-kind: documentation
 disable_sidebar: true
 aliases:
     - /overview
@@ -9,6 +8,12 @@ further_reading:
     - link: 'https://learn.datadoghq.com/'
       tag: 'Learning Center'
       text: 'Take a course to get started with Datadog'
+    - link: 'https://datadoghq.com/blog/'
+      tag: 'Blog'
+      text: 'Learn about new Datadog products and features, integrations, and more'
+    - link: 'https://app.datadoghq.com/help/quick_start'
+      tag: 'App'
+      text: 'Explore the Quick Start Guide'
 cascade:
     algolia:
         rank: 50
@@ -30,8 +35,8 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li>
-        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li></ul>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li>
+        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li></ul>
         </td>
     </tr>
     <tr>
@@ -76,6 +81,10 @@ Additionally, hundreds of [integrations][1] allow you to layer Datadog features 
 
 ## Learn more
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
+  This foundation enablement session helps answer the key question: "What is Datadog, and what can it do for me?" You will learn how to send data to Datadog and which pages to visit to better understand the state of your various environments, applications, and infrastructure.
+{{< /learning-center-callout >}}
+
 ### Take a course
 The Datadog Learning Center offers hands-on experience with the Datadog platform. The [Getting Started courses][3] cover observability practices, key Datadog concepts, and more.
 
@@ -87,29 +96,43 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/site" >}}<u>Datadog Site</u>: Select the appropriate Datadog site for your region and security requirements.{{< /nextlink >}}
 {{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps Bundles</u>: Get started with the APM DevSecOps and Infrastructure DevSecOps bundles.{{< /nextlink >}}
 {{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Send metrics and events from your hosts to Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
-{{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
-{{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
-{{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: Learn how to send OpenTelemetry metrics, traces, and logs to Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
-{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
-{{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
-{{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
-{{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started with the Datadog HTTP API.{{< /nextlink >}}
-{{< nextlink href="/getting_started/service_catalog" >}}<u>Service Catalog</u>: Manage service ownership, reliability, and performance at scale in Service Catalog. {{< /nextlink >}}
-{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
-{{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Run Synthetic end-to-end tests in your CI pipelines and IDEs.{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
-{{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
-{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
-{{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
-{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
+{{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
+{{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: Learn how to send OpenTelemetry metrics, traces, and logs to Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="Platform Services:">}}
+{{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
+{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
+{{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
+{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Product:">}}
+{{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
+{{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
+{{< nextlink href="/getting_started/service_catalog" >}}<u>Service Catalog</u>: Manage service ownership, reliability, and performance at scale in Service Catalog. {{< /nextlink >}}
+{{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
+{{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
+{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
+{{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Run end-to-end Synthetic tests in your CI pipelines and IDEs.{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
+{{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
+{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_analysis" >}}<u>Code Analysis</u>: Analyze your repositories for quality and security issues.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/integrations/
 [2]: /integrations/amazon_web_services/

@@ -1,12 +1,7 @@
 ---
 description: MySQL データベースモニタリングの高度なコンフィギュレーション
-kind: documentation
 title: MySQL データベースモニタリングの高度なコンフィギュレーション
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 ## `events_statements_summary_by_digest` の切り捨て
 

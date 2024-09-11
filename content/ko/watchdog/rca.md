@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
   tag: 블로그
   text: 자동 근본 원인 분석
-kind: 설명서
 title: Watchdog RCA
 ---
 

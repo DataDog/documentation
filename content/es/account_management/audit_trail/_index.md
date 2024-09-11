@@ -8,6 +8,9 @@ further_reading:
 - link: /account_management/org_settings/
   tag: Documentación
   text: Información sobre los parámetros de organización
+- link: /data_security/pci_compliance/
+  tag: Documentación
+  text: Crear una organización de Datadog que cumpla la normativa PCI
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
   text: Mejora el control, la gestión y la transparencia en todos tus equipos con
@@ -15,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: Blog
   text: Monitorizar activos y configuraciones críticos de Datadog con Audit Trail
-kind: documentación
 title: Datadog Audit Trail
 ---
 
@@ -41,25 +43,30 @@ Desde el punto de vista de los administradores de seguridad o equipos de InfoSec
 
 - De los inicios de sesión de los usuarios, la cuenta o los cambios de rol en tu organización.
 
-## Configuración
+**Nota**: Consulta [Cumplimiento DSS de la normativa PCI][2] para obtener información sobre la creación de una organización que cumpla con la normativa PCI de Datadog.
 
-Para activar Datadog Audit Trail, accede a [Organization Settings][2] (Parámetros de organización) y selecciona *Audit Trail Settings* (Parámetros de Audit Trail) en *Security* (Seguridad). Haz clic en el botón **Enable** (Activar).
+## Python
+
+Para activar Datadog Audit Trail, consulta los [parámetros de tu organización][3], selecciona *Audit Trail Settings* (Configuración de Audit Trail), en *COMPLIANCE* (Cumplimiento), y haz clic en el botón **Enable** (Habilitar).
 
 {{< img src="account_management/audit_logs/audit_trail_settings.png" alt="Página de los parámetros de Audit Trail donde se ve que está deshabilitado" style="width:85%;">}}
 
 Si deseas comprobar quién activó Audit Trail:
-1. Accede a [Events Explorer][3] (Navegador de eventos).
+1. Ve al [navegador de eventos][4].
 2. Introduce `Datadog Audit Trail was enabled by` en la barra de búsqueda. Es posible que debas seleccionar un intervalo de tiempo más amplio para detectar el evento.
 3. El evento más reciente con el título "A user enabled Datadog Audit Trail" (Un usuario activó Datadog Audit Trail) muestra quién lo habilitó por última vez.
 
-## Configuración
+## Dashboards
 
+
+### Python
+Sólo los usuarios con un permiso `Audit Trail Write` pueden habilitar o deshabilitar Audit Trail. Además, los usuarios necesitan el permiso `Audit Trail Read` para visualizar eventos de auditorías utilizando el navegador de auditorías. 
 
 ### Archivar
 
 Archivar es una función opcional de Audit Trail. Puedes usarla para escribir en Amazon S3, Google Cloud Storage o Azure Storage y hacer que el sistema SIEM lea los eventos desde ahí. Después de crear o actualizar las configuraciones de tu archivo, pueden pasar varios minutos antes de que se vuelva a intentar cargar el archivo. Los eventos se cargan en el archivo cada 15 minutos, así que comprueba tu bucket de almacenamiento una vez que haya transcurrido ese tiempo para ver si los archivos se están cargando correctamente desde tu cuenta de Datadog.
 
-Para activar la función de archivar de Audit Trail, accede a [Organization Settings][2] (Parámetros de organización) y selecciona *Audit Trail Settings* (Parámetros de trazas de auditoría) en *Compliance* (Cumplimiento). Desplázate hacia abajo hasta Archiving (Archivar) y habilita la opción Store Events (Almacenar eventos).
+Para habilitar el archivado de Audit Trail, ve a los [parámetros de tu organización][3] y selecciona *Audit Trail Settings* (Configuración de Audit Trail), en *Compliance* (Cumplimiento). Desplázate hasta Archiving (Archivado) y haz clic en el conmutador de eventos de almacenes para habilitar la función.
 
 ### Retención
 
@@ -71,11 +78,11 @@ El período de retención predeterminado para un evento de trazas de auditoría 
 
 ## Explorar eventos de auditoría
 
-Para explorar un evento de auditoría, accede a la sección [Audit Trail][1], también accesible desde [Organization Settings][2], donde están tus parámetros de organización en Datadog.
+Para explorar un evento de auditoría, navega hasta la sección [Audit Trail][1], también accesible desde los [parámetros de tu organización][3] en Datadog.
 
 {{< img src="account_management/audit_logs/audit_side_nav.png" alt="Parámetros de Audit Trail en el menú Organization Settings style="width:30%;">}}
 
-Los eventos de Audit Trail tienen la misma función que los logs en el [Navegador de logs][4]:
+Los eventos de Audit Trail tienen la misma funcionalidad que los logs del [navegador de logs][5]:
 
 - Para examinar los eventos de trazas de auditoría, puedes filtrarlos por nombres de evento (dashboards, monitores, autenticación, etc.), atributos de autenticación (actor, ID de la clave de API, correo electrónico de usuario, etc.), `Status` (`Error`, `Warn`, `Info`), método (`POST`, `GET`, `DELETE`) y otras variables.
 
@@ -91,7 +98,7 @@ Para solucionar problemas de forma eficaz, es necesario que los datos estén en 
 Todas las vistas guardadas, menos la vista predeterminada, se comparten en toda tu organización:
 
 * Las **vistas guardadas de integración** están incluidas de forma predefinida en Audit Trail. Estas vistas son de solo lectura y se identifican con el logotipo de Datadog.
-* Las **vistas guardadas personalizadas** las crean los usuarios. Cualquier usuario de tu organización puede editarlas (excepto los [usuarios de solo lectura][5]), y se identifican con el avatar del usuario que las creó. Haz clic en el botón **Save** (Guardar) para crear una nueva vista guardada personalizada a partir del contenido actual de tu navegador.
+* Las **vistas guardadas personalizadas** son creadas por los usuarios. Cualquier usuario de tu organización puede editarlas, (excepto los [usuarios de sólo lectura][6]), y están identificadas con el avatar del usuario que las ha creado. Haz clic en el botón **Save** (Guardar) para crear una nueva vista guardada personalizada a partir del contenido actual de tu explorador.
 
 En cualquier momento, desde la entrada de la vista guardada en el panel Views (Vistas), puedes:
 
@@ -101,7 +108,7 @@ En cualquier momento, desde la entrada de la vista guardada en el panel Views (V
 * **Compartir** una vista guardada mediante un enlace corto.
 * **Marcar con una estrella** (convertir en favorita) una vista guardada para que aparezca en la parte superior de tu lista de vistas guardadas y puedas acceder a ella directamente desde el menú de navegación.
 
-**Nota:** Las acciones de actualizar, cambiar el nombre y eliminar no están disponibles para las vistas guardadas de integración ni para [usuarios de solo lectura][5].
+**Nota:** Las acciones de actualizar, renombrar y borrar están deshabilitadas para las vistas guardadas en integraciones y para los [usuarios de sólo lectura][6].
 
 
 ### Vista predeterminada
@@ -144,18 +151,25 @@ En la pestaña Inspect Changes (Diff) (Inspeccionar cambios [diferencias]) del p
 
 {{< img src="account_management/audit_logs/inspect_changes.png" alt="Panel lateral de eventos de auditoría que muestra los cambios en la configuración de un monitor compuesto, en el que el texto resaltado en verde es lo que se ha cambiado y el texto resaltado en rojo es lo que se ha eliminado." style="width:70%;">}}
 
+### Auditoría de claves de API
+
+<div class="alert alert-warning">La auditoría de claves de API está en fase beta privada.</div>
+
+Los usuarios de Log Management pueden auditar el uso de claves de API utilizando Audit Trail. Para auditar claves de API, los logs tienen una etiqueta (tag) `datadog.api_key_uuid` que contiene el UUID de la clave de API utilizada para recopilar esos logs. Utiliza la siguiente información para determinar:
+- Cómo se utilizan las claves de API en tu organización y las fuentes de telemetría.
+- Rotación y gestión de claves de API.
 
 ## Crear un monitor
 
-Para crear un monitor sobre un tipo de evento de trazas de auditoría o mediante atributos específicos de trazas, consulta la [documentación sobre monitores de Audit Trail][6]. Por ejemplo, puedes establecer un monitor para que se active cuando un usuario específico inicie sesión, o establecerlo para cuando se elimine un dashboard.
+Para crear un monitor en un tipo de evento de Audit Trail o a través de atributos específicos de Trail, consulta la [documentación del monitor de Audit Trail][7]. Por ejemplo, configura un monitor que se active cuando un usuario específico inicia sesión o configura un monitor para cada ocasión en que se elimina un dashboard.
 
 ## Crear un dashboard o un gráfico
 
 Aporta un contexto más visual a los eventos de trazas de auditoría con los dashboards. Para crear un dashboard de auditoría:
 
-1. Crea un [nuevo dashboard][7] en Datadog.
-2. Selecciona el tipo de visualización que deseas. Los eventos de auditoría se pueden visualizar como [listas principales][8], [cronologías][9] y [listas][10].
-3. [Representa gráficamente tus datos][11]. Al editar, selecciona *Audit Events* (Eventos de auditoría) como fuente de datos y crea una consulta. Los eventos de auditoría se filtran por número y pueden agruparse por diferentes variables. Selecciona una de ellas y establece un límite.
+1. Crea un [nuevo dashboard][8] en Datadog.
+2. Selecciona tu visualización. Puedes visualizar eventos de auditorías como [listas principales][9], [series temporales][10] y [listas][11].
+3. [Grafica tus datos][12]: En Edit (Editar), selecciona *Audit Events* (Auditar eventos) como origen de datos y crea una consulta. Los eventos de auditorías se filtran por recuento y pueden agruparse por diferentes facetas. Selecciona una faceta y limítala.
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Configura Audit Trail como fuente de datos para representar gráficamente tus datos" style="width:100%;">}}
 4. Define tus preferencias de visualización y pon un título al gráfico. Haz clic en el botón *Save* (Guardar) para crear el dashboard.
 
@@ -165,7 +179,7 @@ Con Datadog Audit Trail, puedes enviar vistas de análisis de auditoría de form
 
 Para exportar una consulta de análisis de auditoría a modo de informe, crea una cronología, lista principal o consulta de tabla y haz clic en **More…** (Más…) > **Export as scheduled report** (Exportar como informe programado) para iniciar el proceso.
 
-{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Función para exportar un informe programado del menú deplegable More…" style="width:90%;" >}}
+{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Función para exportar un informe programado del menú desplegable More…" style="width:90%;" >}}
 
 1. Introduce un nombre para el dashboard, que se crea con el widget de consulta. Se creará un nuevo dashboard para cada informe programado. Podrás consultar y modificar este dashboard más adelante en caso de que necesites cambiar el contenido o la programación del informe.
 2. Personaliza la frecuencia y la franja horaria del informe para programar su envío por correo electrónico.
@@ -175,9 +189,19 @@ Para exportar una consulta de análisis de auditoría a modo de informe, crea un
 
 {{< img src="account_management/audit_logs/export_workflow.png" alt="Exportar una vista de análisis de auditoría a un correo electrónico programado" style="width:80%;" >}}
 
+## Descargar eventos de auditorías como CSV
+
+Audit Trail de Datadog te permite descargar localmente hasta 100.000 eventos de auditorías en forma de archivos CSV. Estos eventos pueden analizarse localmente, cargarse en otra herramienta para su posterior análisis o compartirse con los miembros adecuados del equipo, como parte de un ejercicio de seguridad y cumplimiento.
+
+Para exportar eventos de auditorías como CSV:
+1. Ejecuta la consulta de búsqueda adecuada para capturar los eventos que te interesan en
+2. Añade campos de eventos como columnas, en la vista que elijas como parte del CSV
+3. Haz clic en Download as CSV (Descargar como CSV)
+4. Selecciona el número de eventos para exportar y expórtalos como CSV
+
 ## Dashboard predefinido
 
-Datadog Audit Trail cuenta con un [dashboard predefinido][12] que muestra varios eventos de auditoría, como cambios en la retención de índices, en el pipeline de logs, en el dashboard, etc. Clona este dashboard para personalizar las consultas y visualizaciones y adaptarlas a las necesidades de tu auditoría.
+Audit Trail de Datadog trae un [dashboard listo para utilizar][13] que muestra varios eventos de auditorías, tales como cambios en la retención de índices, cambios en los pipelines de logs, cambios en el dashboard y más. Clona este dashboard para personalizar las consultas y las visualizaciones, según tus necesidades de auditoría.
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Dashboard de Audit Trail" style="width:100%;">}}
 
@@ -186,14 +210,15 @@ Datadog Audit Trail cuenta con un [dashboard predefinido][12] que muestra varios
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit-trail
-[2]: https://app.datadoghq.com/organization-settings/
-[3]: https://app.datadoghq.com/event/explorer
-[4]: /es/logs/explorer/
-[5]: https://docs.datadoghq.com/es/account_management/rbac/permissions/?tab=ui#general-permissions
-[6]: /es/monitors/types/audit_trail/
-[7]: /es/dashboards/
-[8]: /es/dashboards/widgets/top_list/
-[9]: /es/dashboards/widgets/timeseries/
-[10]: /es/dashboards/widgets/list/
-[11]: /es/dashboards/querying/#define-the-metric/
-[12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[2]: /es/data_security/pci_compliance/
+[3]: https://app.datadoghq.com/organization-settings/
+[4]: https://app.datadoghq.com/event/explorer
+[5]: /es/logs/explorer/
+[6]: https://docs.datadoghq.com/es/account_management/rbac/permissions/?tab=ui#general-permissions
+[7]: /es/monitors/types/audit_trail/
+[8]: /es/dashboards/
+[9]: /es/dashboards/widgets/top_list/
+[10]: /es/dashboards/widgets/timeseries/
+[11]: /es/dashboards/widgets/list/
+[12]: /es/dashboards/querying/#define-the-metric/
+[13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

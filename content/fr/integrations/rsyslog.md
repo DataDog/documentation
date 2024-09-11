@@ -12,7 +12,7 @@ has_logo: true
 integration_id: rsyslog
 integration_title: rsyslog
 is_public: true
-kind: integration
+custom_kind: integration
 name: rsyslog
 public_title: Intégration Datadog/Rsyslog
 short_description: Configurez Rsyslog pour rassembler les logs de votre host, de vos

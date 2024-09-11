@@ -1,6 +1,5 @@
 ---
 title: Configurer Azure Active Directory en tant que fournisseur d'identité SAML
-kind: documentation
 aliases:
   - /fr/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 further_reading:

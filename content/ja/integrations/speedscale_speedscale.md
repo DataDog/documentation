@@ -15,6 +15,7 @@ categories:
 - kubernetes
 - マーケットプレイス
 - テスト
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,7 +24,6 @@ integration_id: speedscale-speedscale
 integration_title: Speedscale
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -64,6 +64,11 @@ tile:
     image_url: images/spd-3-datadog-dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/stress-test-kubernetes-with-speedscale/
+  - resource_type: documentation
+    url: https://docs.speedscale.com/
   support: README.md#Support
   title: Speedscale
   uninstallation: README.md#Uninstallation
@@ -77,7 +82,7 @@ tile:
 
 Speedscale のトラフィックリプレイ結果を Datadog に公開するには、[Speedscale インテグレーション][1]をインストールします。このインテグレーションにより、Datadog の観測可能性データと Speedscale の特定のリプレイ結果を組み合わせて、パフォーマンス低下の根本原因を調査することができます。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Speedscale にお問い合わせください。
 

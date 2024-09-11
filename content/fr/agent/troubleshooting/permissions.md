@@ -1,6 +1,5 @@
 ---
 title: Problèmes d'autorisation
-kind: documentation
 aliases:
   - /fr/agent/faq/how-to-solve-permission-denied-errors
   - /fr/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric

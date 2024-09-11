@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Instrumenter des applications Python sans serveur avec le Forwarder Datadog
 ---
 ## Présentation

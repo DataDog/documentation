@@ -2,6 +2,7 @@
 categories:
 - 言語
 - トレーシング
+custom_kind: integration
 dependencies: []
 description: Datadog のクライアントライブラリを使用して Go アプリケーションからランタイムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/go/
@@ -10,13 +11,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/go-logging/
   tag: ブログ
   text: Golang ログの収集、標準化、一元化方法
+- link: https://www.datadoghq.com/blog/go-memory-metrics/
+  tag: ブログ
+  text: Go のメモリメトリクスを解明
 git_integration_title: go
 has_logo: true
 integration_id: go
 integration_title: Go
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: go
 public_title: Datadog-Go インテグレーション
@@ -24,6 +27,7 @@ short_description: Datadog のクライアントライブラリを使用して G
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Go インテグレーションを利用して、Go アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
@@ -38,11 +42,15 @@ Go インテグレーションを利用して、Go アプリケーションの�
 
 トレースを Datadog に送信するには、[Go アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
 
-### ログの収集
+### 収集データ
 
 _Agent v6.0 以上で使用可能_
 
 ログを Datadog に転送するには、[Go ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
+
+### プロファイルの収集
+
+[Go プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
 
 ## 収集データ
 
@@ -54,13 +62,13 @@ _Agent v6.0 以上で使用可能_
 
 Go インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Go インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -69,4 +77,5 @@ Go インテグレーションには、サービスのチェック機能は含�
 [1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=go
 [2]: https://docs.datadoghq.com/ja/tracing/setup/go/
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/go/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/go/
+[5]: https://docs.datadoghq.com/ja/help/

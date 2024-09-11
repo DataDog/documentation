@@ -22,7 +22,7 @@ integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@algorithmia.io
 manifest_version: 1.0.0
 metric_prefix: algorithmia.

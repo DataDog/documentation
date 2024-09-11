@@ -1,6 +1,5 @@
 ---
-title: Using Integrations with Service Catalog
-kind: documentation
+title: Use Integrations with Service Catalog
 aliases:
   - /tracing/service_catalog/integrations
 further_reading:
@@ -14,7 +13,12 @@ further_reading:
   tag: "Documentation"
   text: "Learn about the PagerDuty integration"
 ---
-
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+PagerDuty and OpsGenie integrations for Service Catalog are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
+  
 ## Overview
 
 When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Service Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
@@ -71,7 +75,8 @@ You can add OpsGenie metadata to a service so that the Service Catalog displays 
 Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Service Catalog.
 
 {{< img src="tracing/service_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Service Catalog" style="width:85%;" >}}
-## IDE integrations
+
+## IDE Plugins
 
 Datadog provides a [JSON Schema][6] for service definitions so that when you are editing a service definition in a [supporting IDE][7], features such as autocomplete and validation are provided.
 

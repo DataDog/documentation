@@ -22,6 +22,7 @@ author:
   support_email: support@getcortexapp.com
 categories:
 - インシデント
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: cortex
 integration_title: Cortex
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: cortex
 public_title: Cortex
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cortex ダッシュボードから直接 Datadog インシデントを作成
   media: []
@@ -62,11 +63,11 @@ tile:
 
 [Cortex][1] インテグレーションにより、Cortex ダッシュボードから直接 Datadog インシデントをトリガーできます。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションをセットアップするには、Cortex アカウント、Datadog API 、アプリケーションキーが必要です。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. 初めてのお客様でデモをご希望の場合、Cortex までお問い合わせください。
 2. [Datadog API キー][2]を作成します。
@@ -83,21 +84,21 @@ tile:
 6. 画面に以下のメッセージが表示されます。「インシデントがトリガーされました。Datadog で確認するには、こちらをクリックします。」
 7. また、新しいインシデントは "Incidents" でも確認できます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Cortex には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Cortex には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Cortex には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[support@getcortexapp.com][7] までお問い合わせください。
 

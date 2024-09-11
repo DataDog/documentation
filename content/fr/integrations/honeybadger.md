@@ -13,7 +13,7 @@ integration_id: honeybadger
 integration_title: Honeybadger
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: honeybadger
 public_title: Intégration Datadog/Honeybadger

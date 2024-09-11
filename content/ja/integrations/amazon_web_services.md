@@ -10,6 +10,8 @@ categories:
 - cloud
 - iot
 - log collection
+- event management
+custom_kind: integration
 dependencies: []
 description: AWS サービスを Datadog と統合。
 doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
@@ -27,7 +29,6 @@ integration_id: amazon-web-services
 integration_title: AWS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Datadog-AWS インテグレーション
@@ -51,80 +52,80 @@ AWS インテグレーションをすぐに使い始めるには、[AWS スタ�
 
 Datadog の Amazon Web Services インテグレーションは、[90 以上の AWS サービス][3]のログ、イベント、[CloudWatch からの全メトリクス][2]を収集します。
 
-## 計画と使用
+## セットアップ
 
 以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、イベント、タグ、ログを収集します。
 
 ### 自動
 
-  * **CloudFormation (手早く始めるには最適)**  
+  * **CloudFormation (手早く始めるには最適)**
     CloudFormation で AWS インテグレーションを設定するには、[AWS スタートガイド][1]を参照してください。
 
-  * **Terraform**  
-    AWS と Terraform のインテグレーションを設定するには、[AWS と Terraform のインテグレーション][4]を参照してください。
+  * **Terraform**
+      To set up the AWS integration with Terraform, see [the AWS integration with Terraform][4].
 
-  * **Control Tower**  
+  * **Control Tower**
     [Control Tower Account Factory][5] で新規に AWS アカウントをプロビジョニングする際の AWS インテグレーション設定は、[Control Tower セットアップガイド][6]をご覧ください。
 
   * **AWS 組織向けマルチアカウント設定**
     AWS 組織内の複数のアカウントに対して AWS インテグレーションを設定するには、[AWS 組織セットアップガイド][7]を参照してください。
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+  Datadog の US1-FED サイトを使用している場合、このインテグレーションはアクセスキーで構成する必要があります。<a href="https://docs.datadoghq.com/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly">AWS マニュアルセットアップガイド</a>の手順に従ってください。
+</div>{{% /site-region %}}
+
 ### 手動
 
-   * **ロールの委任**  
+   * **ロールの委任**
      AWS インテグレーションをロールの委任で手動設定する場合は、[手動設定ガイド][8]を参照してください。
 
-   * **アクセスキー (GovCloud または中国\*のみ)**  
+   * **アクセスキー (GovCloud または中国\*のみ)**
      アクセスキーを使用して AWS インテグレーションをセットアップするには、[手動セットアップガイド][9]をご覧ください。
 
       *\* 中国本土における (または中国本土内の環境に関連する) Datadog サービスの使用はすべて、当社 Web サイトの[サービス制限地域][10]セクションに掲載されている免責事項に従うものとします。*
 
 {{% aws-permissions %}}
 
-## ログの収集
+{{% aws-resource-collection %}}
+
+## ログ収集
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][11]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
-- [Forwarder Lambda 関数][12]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
+- [Amazon Data Firehose destination][11]: Amazon Data Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Forwarder Lambda 関数][12]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。また、S3 またはデータを Amazon Data Firehose に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
 
 ## メトリクスの収集
 
 メトリクスを Datadog に送信する方法は 2 つあります。
 
 - [メトリクスのポーリング][13]: AWS インテグレーションで利用できる API ポーリングです。CloudWatch API をメトリクス別にクロールしてデータを取得し、Datadog に送信します。新しいメトリクスの取得は平均 10 分毎に行われます。
-- [Kinesis Firehose でのメトリクスストリーム][14]: Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
+- [Amazon Data Firehose でのメトリクスストリーム][14]: Amazon CloudWatch Metric Streams と Amazon Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
 
-コスト管理のために特定のリソースを除外するオプションについては、[AWS Integration Billing ページ][15]を参照してください。
+You can find a full list of the available sub-integrations on the [Integrations page][3]. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account. See the [AWS Integration Billing page][15] for options to exclude specific resources for cost control.
 
 ## リソース収集
 
 一部の Datadog 製品は、AWS リソース (S3 バケット、RDS スナップショット、CloudFront ディストリビューションなど) の構成方法に関する情報を活用します。Datadog は、AWS アカウントに対して読み取り専用の API 呼び出しを行うことにより、この情報を収集します。
 
-### Cloud Security Management Misconfigurations
+{{% aws-resource-collection %}}
+
+### Cloud Security Management
 
 #### セットアップ
 
-お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][16]を完了させます。Cloud Security Management Misconfigurations が有効化されていることを適宜ご確認ください。
+お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][16]を完了させます。Cloud Security Management が有効化されていることを適宜ご確認ください。
 
 **注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
 
-既存の AWS インテグレーションに Cloud Security Management Misconfigurations を追加するには、以下の手順でリソース収集を有効にしてください。
+既存の AWS インテグレーションに Cloud Security Management を追加するには、以下の手順でリソース収集を有効にしてください。
 
-1. 自動**または**手動手順で Datadog IAM ロールに必要な権限を提供します。
-
-   **自動** - CloudFormation テンプレートを更新します。
-   a. CloudFormation コンソールで Datadog インテグレーションのインストールに使用した主要なスタックを探し、`Update` を選択します。
-   b. `Replace current template` を選択します。
-   c. `Amazon S3 URL` を選択して `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` を入力し、`Next` をクリックします。
-   d. `CloudSecurityPostureManagementPermissions` を `true` に設定し、`Next` をクリックします。`Review` ページに到達するまでその他の既存のパラメーターは変更しないでください。ここで変更点をプレビューおよび確認します。
-   e. 下部にある 2 つの確認ボックスをオンにし、`Update stack` をクリックします。
-
-   **手動** - [AWS が管理する `SecurityAudit` ポリシー][17]を Datadog AWS IAM ロールに関連付けます。このポリシーは [AWS コンソール][17]にあります。
+1. Datadog の AWS IAM ロールに、AWS が管理している `SecurityAudit` ポリシーをアタッチして、Datadog の IAM ロールに必要な権限を付与します。このポリシーは [AWS コンソール][17]にあります。
 
 2. [Datadog AWS インテグレーションページ][18]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][8] API エンドポイントを利用することも可能です。
 
-   1. リソース収集を有効化したい AWS アカウントをクリックします。
+   1. リソース収集を有効化したい AWS アカウントを選択します。
    2. そのアカウントの **Resource collection** タブに移動し、`Cloud Security Posture Management Collection` を有効にします。
    3. ページの右下にある `Save` をクリックします。
 
@@ -192,7 +193,7 @@ AWS インテグレーションにより以下のタグが収集されます。*
 | [VPC][59]              | `nategatewayid`、`vpnid`、`tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][60]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "amazon_web_services" >}}
 
 

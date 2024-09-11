@@ -1,6 +1,5 @@
 ---
 title: Investigate Security Signals
-kind: documentation
 disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
@@ -12,6 +11,9 @@ further_reading:
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
+  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
+    tag: "Blog"
+    text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
 
 [Cloud Security Management Threats][9] (CSM Threats) security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
@@ -37,6 +39,10 @@ You can triage a signal by assigning it to a user for further investigation. The
 
 ## Create a case
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Use [Case Management][6] to track, triage, and investigate security signals.
 
 1. On the [Signals Explorer][4], select a security signal.
@@ -49,8 +55,9 @@ Use [Case Management][6] to track, triage, and investigate security signals.
 Use [Incident Management][5] to create an incident for a security signal.
 
 1. On the [Signals Explorer][4], select a security signal.
-2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Declare incident**. Alternatively, select **Add to incident** to add the signal to an existing incident.
-3. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
+1. On the signal side panel under *Next Steps*, click the **Show all actions** dropdown menu and select **Declare incident**. 
+1. Alternatively, select **Add to incident** to add the signal to an existing incident.
+1. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
 4. Click **Declare Incident**.
 
 ## Run a workflow
@@ -60,7 +67,7 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 1. On the [Signals Explorer][4], select a security signal.
 2. On the signal side panel, click the **Workflows** tab.
 3. Click **Run Workflow**.
-4. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
+4. On the workflow modal, select the workflow you want to run. The workflow must have a security trigger to appear in the list. Depending on the workflow, you may be required to enter additional input parameters.
 5. Click **Run**.
 
 ## Further Reading

@@ -12,7 +12,9 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging
   tag: Documentación
   text: Descubre cómo configurar el etiquetado de servicios unificados
-kind: documentación
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para optimizar tu gestión de logs
 title: Empezando con los logs
 ---
 
@@ -69,7 +71,7 @@ Para empezar a recopilar logs a partir de un servicio de contenedor, sigue las [
 
 ### Nube
 
-Puedes desviar logs hacia Datadog desde varios proveedores de soluciones en la nube, como AWS, Azure y GCP. Cada proveedor tiene sus propias instrucciones de configuración.
+Puedes reenviar logs desde varios proveedores de nube, como AWS, Azure y Google Cloud, a Datadog. Cada proveedor de nube tiene su propio conjunto de instrucciones de configuración.
 
 Por ejemplo, los logs de los servicios de AWS suelen almacenarse en buckets de S3 o en grupos de logs de CloudWatch. Puedes suscribirte a estos logs y desviarlos hacia un flujo (stream) de Amazon Kinesis para luego transferirlos a uno o varios destinos. Uno de los destinos predeterminados de los flujos de entrega de Amazon Kinesis es Datadog.
 
@@ -79,7 +81,7 @@ Para empezar a recopilar logs a partir de un servicio en la nube, sigue las [ins
 
 Datadog autoriza la recopilación de logs desde clientes a través de SDK o bibliotecas. Por ejemplo, puedes usar el SDK `datadog-logs` para enviar logs a Datadog desde clientes de JavaScript.
 
-Para empezar a recopilar logs a partir de un servicio en la nube, sigue las [instrucciones de la aplicación][14].
+Para empezar a recopilar logs de un cliente, sigue las [instrucciones de la aplicación][14].
 
 ### Otro
 

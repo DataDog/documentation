@@ -10,7 +10,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: ¿Por qué debería instalar el Datadog Agent en mis instancias de nube?
-kind: documentación
 title: Empezando con el Agent
 ---
 
@@ -106,7 +105,7 @@ En la IU de Datadog, dirígete a **Integrations > Agent** (Integraciones > Agent
 Ejemplo de comando de instalación de una línea en Ubuntu:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 En la aplicación, dirígete a la página [Instalación del Agent)][18] correspondiente a tu sistema operativo y consulta las instrucciones de instalación más recientes.

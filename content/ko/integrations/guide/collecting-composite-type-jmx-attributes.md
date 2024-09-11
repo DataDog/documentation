@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/collecting-composite-type-jmx-attributes/
-kind: 가이드
 title: 복합 유형 JMX 속성 수집
 ---
 

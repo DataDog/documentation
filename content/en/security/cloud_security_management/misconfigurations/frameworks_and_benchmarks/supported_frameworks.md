@@ -1,6 +1,5 @@
 ---
 title: Supported Frameworks
-kind: documentation
 aliases:
   - /security/misconfigurations/supported_frameworks
   - /security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
@@ -19,10 +18,6 @@ further_reading:
   text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 | Framework                                   | Framework Tag     | Rule Type                |
@@ -32,8 +27,8 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 | [CIS GCP Foundations Benchmark v1.3.0][22]  | `cis-gcp`         | Cloud                    |
 | [CIS Docker Benchmark v1.2.0][4]            | `cis-docker `     | Infrastructure           |
 | [CIS Kubernetes Benchmark v1.7.0**][5]      | `cis-kubernetes`  | Infrastructure           |
-| [CIS Kubernetes Benchmark v1.4.0**][5]      | `cis-aks`         | Cloud and Infrastructure |
-| [CIS Kubernetes Benchmark v1.3.0 **][5]     | `cis-eks`         | Cloud and Infrastructure |
+| [CIS Kubernetes (AKS) Benchmark v1.4.0**][5]      | `cis-aks`         | Cloud and Infrastructure |
+| [CIS Kubernetes (EKS) Benchmark v1.3.0 **][5]     | `cis-eks`         | Cloud and Infrastructure |
 | [CIS Ubuntu 20.04 v1.0.0][23]               | `cis-ubuntu2004`  | Infrastructure           |
 | [CIS Ubuntu 22.04 v1.0.0][23]               | `cis-ubuntu2204 ` | Infrastructure           |
 | [CIS Red Hat Linux 7 v3.1.1][24]            | `cis-rhel7`       | Infrastructure           |

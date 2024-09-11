@@ -33,11 +33,7 @@
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
-    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."
-  },
-  "cloud-workload-security": {
-    "name": "Cloud Workload Security",
-    "description": "Workload activity security rules for generating events using the Datadog security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/) for more information."
+    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
@@ -127,6 +123,10 @@
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
   },
+  "network-device-monitoring": {
+    "name": "Network Device Monitoring",
+    "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
   "okta-integration": {
     "name": "Okta Integration",
     "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
@@ -175,9 +175,17 @@
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
   },
+  "service-level-objectives": {
+    "name": "Service Level Objectives",
+    "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."
+  },
   "service-scorecards": {
     "name": "Service Scorecards",
-    "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+  },
+  "software-catalog": {
+    "name": "Software Catalog",
+    "description": "API to create, update, retrieve and delete Software Catalog entities."
   },
   "spans": {
     "name": "Spans",
@@ -197,10 +205,14 @@
   },
   "usage-metering": {
     "name": "Usage Metering",
-    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
   },
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
+  },
+  "workflow-automation": {
+    "name": "Workflow Automation",
+    "description": "Automate your teams operational processes with Datadog Workflow Automation."
   }
 }

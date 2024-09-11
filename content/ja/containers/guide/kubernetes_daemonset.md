@@ -3,7 +3,6 @@ further_reading:
 - link: /containers/kubernetes/installation
   tag: Documentation
   text: Kubernetes に Datadog Agent をインストールする
-kind: documentation
 title: Kubernetes 上の Datadog Agent を DaemonSet で手動でインストール、構成する
 ---
 
@@ -76,9 +75,79 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     datadog   2         2         2         2            2           <none>          10s
     ```
 
-## コンフィギュレーション
+## 構成
 
-### ログの収集
+### トレースの収集
+
+{{< tabs >}}
+{{% tab "TCP" %}}
+
+TCP 経由で APM トレースの収集を有効にするには、DaemonSet コンフィギュレーションファイルを開いて以下を編集します。
+
+- ポート `8126` からの受信データ (ホストからエージェントへのトラフィックを転送) を `trace-agent` コンテナ内で許可するようにします。
+    ```yaml
+      # (...)
+      containers:
+        - name: trace-agent
+          # (...)
+          ports:
+            - containerPort: 8126
+              hostPort: 8126
+              name: traceport
+              protocol: TCP
+      # (...)
+    ```
+
+- **7.17 以前のバージョンの Agent を使用している場合は**、上記の手順に加えて、`datadog.yaml` トレース Agent マニフェストの `env` セクションで `DD_APM_NON_LOCAL_TRAFFIC` 変数と `DD_APM_ENABLED` 変数を `true` に設定してください。
+
+  ```yaml
+    # (...)
+    containers:
+      - name: trace-agent
+        # (...)
+        env:
+          - name: DD_APM_ENABLED
+            value: 'true'
+          - name: DD_APM_NON_LOCAL_TRAFFIC
+            value: "true"
+          # (...)
+  ```
+
+**警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
+
+
+{{% /tab %}}
+{{% tab "Unix Domain Socket (UDS)" %}}
+
+UDS 経由で APM トレースの収集を有効にするには、DaemonSet コンフィギュレーションファイルを開いて以下を編集します。
+
+  ```yaml
+    # (...)
+    containers:
+    - name: trace-agent
+      # (...)
+      env:
+      - name: DD_APM_ENABLED
+        value: "true"
+      - name: DD_APM_RECEIVER_SOCKET
+        value: "/var/run/datadog/apm.socket"
+    # (...)
+      volumeMounts:
+      - name: apmsocket
+        mountPath: /var/run/datadog/
+    volumes:
+    - hostPath:
+        path: /var/run/datadog/
+        type: DirectoryOrCreate
+    # (...)
+  ```
+
+このコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。Agent はそのディレクトリに `DD_APM_RECEIVER_SOCKET` の値を `/var/run/datadog/apm.socket` としたソケットファイルを作成し、リッスンするようにします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ログ収集
 
 **注**: このオプションは Windows ではサポートされません。代わりに [Helm][22] オプションを使用してください。
 
@@ -260,6 +329,15 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。
 
+### オートディスカバリー
+
+| 環境変数                 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_LISTENERS`               | 実行するオートディスカバリーリスナー。                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `DD_EXTRA_LISTENERS`         | 実行するオートディスカバリーリスナーを追加します。これは `datadog.yaml` コンフィギュレーションファイルの `listeners` セクションで定義された変数に加えて追加されます。                                                                                                                                                                                                                                                                                                                                    |
+| `DD_CONFIG_PROVIDERS`        | Agent がチェック構成を収集するために呼び出すべきプロバイダー。利用可能なプロバイダーは次の通りです。 <br>`kubelet` - ポッドアノテーションに埋め込まれたテンプレートを処理します。 <br>`docker` - コンテナラベルに埋め込まれたテンプレートを処理します。 <br>`clusterchecks` - Cluster Agent からクラスターレベルのチェック構成を取得します。 <br>`kube_services` - クラスターのチェックのために Kubernetes サービスを監視します。 |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | 使用するオートディスカバリー構成プロバイダーを追加します。これは `datadog.yaml` コンフィギュレーションファイルの `config_providers` セクションで定義された変数に加えて追加されます。 |
+
 ### その他
 
 | 環境変数                        | 説明                                                                                                                                                                                                                                                         |
@@ -267,8 +345,6 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | コンテナソースの自動検出を上書きして、1 つのソースに制限します。例: `"docker"`、`"ecs_fargate"`、`"kubelet"`。Agent v7.35.0 以降、不要になりました。                                                                                                     |
 | `DD_HEALTH_PORT`                    | これを `5555` に設定すると、Agent のヘルスチェックをポート `5555` で公開します。                                                                                                                                                                                                 |
 | `DD_CLUSTER_NAME`                   | カスタム Kubernetes クラスター識別子を設定して、ホストエイリアスの衝突を回避します。クラスター名は最大 40 文字で、小文字、数字、およびハイフンのみという制限があります。また、文字で始める必要があり、 数字または文字で終わる必要があります。 |
-
-リスナーおよび構成プロバイダーを追加するには、`DD_EXTRA_LISTENERS` と `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を使用します。これらは `datadog.yaml` 構成ファイルの `listeners` セクションと `config_providers` セクションに定義する変数に追加されます。
 
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
@@ -293,7 +369,7 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 [20]: /ja/getting_started/site/
 [21]: /ja/agent/docker/?tab=standard#ignore-containers
 [22]: /ja/containers/kubernetes/log
-[23]: /ja/agent/proxy/#agent-v6
+[23]: /ja/agent/configuration/proxy/#agent-v6
 [24]: /ja/developers/dogstatsd/
 [25]: /ja/developers/dogstatsd/unix_socket/
 [26]: /ja/containers/kubernetes/tag/

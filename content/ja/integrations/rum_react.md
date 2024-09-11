@@ -11,6 +11,7 @@ categories:
 - メトリクス
 - ネットワーク
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: rum-react
 integration_title: React
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_react
 public_title: React
@@ -42,6 +42,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::iOS
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した React アプリケーションの監視とメトリクス生成
   media: []
@@ -69,7 +70,7 @@ React アプリケーションをエンドツーエンドで監視します。
 - ユーザー ID、電子メール、名前などの属性で、すべてのユーザーセッションを分析し、コンテキストを作成
 - フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -83,9 +84,9 @@ React アプリケーションは、自動的に Datadog にトレースを送�
 
 React アプリケーションのログを Datadog に転送し始めるには、[React ログ収集][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 React インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -97,11 +98,11 @@ React インテグレーションには、メトリクスは含まれていま�
 
 React インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

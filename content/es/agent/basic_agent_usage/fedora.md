@@ -13,11 +13,10 @@ further_reading:
   text: Recopilar tus trazas
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentación
-  text: Obtén más información sobre la arquitectura del Agent
-- link: /agent/guide/network#configure-ports
+  text: Más información sobre la arquitectura del Agent
+- link: /agent/configuration/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Fedora
 title: Uso básico del Agent para Fedora
 ---
@@ -100,20 +99,71 @@ Archivos de configuración para las [integraciones][1]:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Desinstalar el Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 y v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+Este comando borra el Agent, pero no elimina:
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/datadog-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
+* Archivos de log de Datadog
+
+Si también quieres eliminar estos elementos, ejecuta este comando después de eliminar el Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+Este comando borra el Agent, pero no elimina:
+
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/dd-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
+* Archivos de log de Datadog
+
+Si también quieres eliminar estos elementos, ejecuta este comando después de eliminar el Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Solucionar problemas
 
 Consulta la [documentación sobre cómo solucionar problemas del Agent][2].
 
 ## Trabajar con el Agent integrado
 
-El Agent tiene un entorno Python integrado en `/opt/datadog-agent/embedded/`. Los sistemas binarios comunes como `python` y `pip` se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
+El Agent tiene un entorno de Python integrado en `/opt/datadog-agent/embedded/`. Los archivos binarios comunes, como `python` y `pip`, se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
 
-Si deseas obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
+Si quieres obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
 
-
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/fedora
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=fedora
 [2]: /es/agent/troubleshooting/
 [3]: /es/developers/guide/custom-python-package/

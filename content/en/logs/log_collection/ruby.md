@@ -1,11 +1,10 @@
 ---
 title: Ruby on Rails Log Collection
-kind: documentation
 aliases:
   - /logs/languages/ruby
 further_reading:
 - link: "https://github.com/roidrage/lograge"
-  tag: "Github"
+  tag: "Source Code"
   text: "Lograge Documentation"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"

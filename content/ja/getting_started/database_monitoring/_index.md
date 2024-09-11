@@ -12,7 +12,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
-kind: documentation
 title: Database モニタリングの概要
 ---
 
@@ -22,7 +21,7 @@ title: Database モニタリングの概要
 
 ## 概要
 
-Datadog データベースモニタリングを使用すると、データベースの状態とパフォーマンスの理解を深め、問題の根本原因をすばやく特定しやすくなります。
+Datadog データベースモニタリングを使用すると、データベースの状態とパフォーマンスの理解を深め、問題の根本原因を特定しやすくなります。
 
 1 つの場所で、次を表示できます。
 
@@ -47,24 +46,24 @@ Datadog データベースモニタリングを使用すると、データベー
 以下の手順に従って、サンプルアプリケーションを MacOS または Linux にインストールします。
 
 1. サンプルアプリケーションを含む[リポジトリ][5]のクローンを作成します。
-```
-git clone https://github.com/DataDog/dd-database-monitoring-example
-```
+    ```
+    git clone https://github.com/DataDog/dd-database-monitoring-example
+    ```
 
 2. `dd-database-monitoring-example` ディレクトリに変更します。
-```
-cd dd-database-monitoring-example
-```
+    ```
+    cd dd-database-monitoring-example
+    ```
 
 3. 環境変数 `DD_API_KEY` を Datadog API キーに設定します。
-```
-export DD_API_KEY=<API_KEY>
-```
+    ```
+    export DD_API_KEY=<API_KEY>
+    ```
 
 4. アプリケーションを起動します。
-```
-make postgres
-```
+    ```
+    make postgres
+    ```
 
 Ctrl + C を押してコマンドを停止するまで、コマンドは実行され続けます。
 
@@ -72,27 +71,31 @@ Ctrl + C を押してコマンドを停止するまで、コマンドは実行�
 
 どのクエリが最もデータベース時間を消費するかを調べるには、クエリメトリクスビューを使用します。
 
-1. UI で **APM > Databases** をクリックして、データベースモニタリングに移動します。クエリメトリクスビューが開きます。
+1. [Database Monitoring][6] ページで、UI の **Query metrics** タブをクリックします。
 
 2. 正規化されたクエリテーブルを **Percent time** で並べ替えて、データベースの実行に最も多くの時間を費やしているクエリを確認します。
 
-データベース時間を最も消費するクエリが最初の行に表示されます。
+   データベース時間を最も消費するクエリが最初の行に表示されます。
 
-{{< img src="database_monitoring/dbm_qm_sort_time.png" alt="パーセント時間でソートされた正規化されたクエリ" style="width:100%;">}}
+   {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="パーセント時間でソートされた正規化されたクエリ" style="width:100%;">}}
 
 ## 遅いクエリをトラブルシューティングする
 
 遅いクエリを識別するだけでなく、Datadog データベースモニタリングはその診断にも役立ちます。クエリの説明プランは、データベースがクエリを解決するために実行する手順を説明します。クエリサンプルビューでサンプルをクリックして、説明プランを表示します。
 
-UI の **[APM > Databases][6]** をクリックし、**Query Samples** タブを選択して、データベースモニタリング内の Query Samples ビューに移動します。
+1. [Database Monitoring][6] 内の **Samples** タブを選択して、Query Samples ビューに移動します。
 
-正規化されたクエリテーブルを **Duration** で並べ替えます。
+2. **In** ドロップダウンで、**Explain Plans** を選択します。
 
-{{< img src="database_monitoring/dbm_qs_sort_duration.png" alt="期間でソートされた正規化されたクエリサンプル" style="width:100%;">}}
+3. 正規化されたクエリテーブルを **Duration** で並べ替えます。
 
-**Explain Plan** 列のデータを含むテーブルでクエリを見つけ、それをクリックして Sample Details ページを開きます。Sample Details の下部にあるこの説明プランは、クエリに _Index Scan_ が必要であることを示しています。
+   {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="期間でソートされた正規化されたクエリサンプル">}}
 
-{{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="インデックススキャンを示すクエリ説明プラン" style="width:100%;">}}
+4. テーブル内の **Explain Plan** 列にデータがあるクエリを見つけてクリックし、Sample Details ページを開きます。
+
+5. **Explain Plan** の下で、**List View** をクリックします。Explain Plan Sample ページの下部にあるこの実行計画では、クエリに _Index Scan_ が必要であることが示されています。
+
+   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="インデックススキャンを示すクエリ実行計画">}}
 
 ## データベースの状態とパフォーマンスを視覚化する
 
@@ -114,21 +117,17 @@ UI の **[APM > Databases][6]** をクリックし、**Query Samples** タブを
 
 5. ウィジェットがホストごとにクエリを集計するように、**Break it down by** ドロップダウンで `host` を選択します。
 
-{{< img src="database_monitoring/dashboard_change_postgres.png" alt="postgres クエリメトリクスの変更ウィジェットを構成する" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_postgres.png" alt="postgres クエリメトリクスの変更ウィジェットを構成する" style="width:100%;">}}
 
 7. **Save** ボタンをクリックします。ダッシュボードに新しいウィジェットが表示されます。
 
-{{< img src="database_monitoring/dashboard_change_widget.png" alt="クエリカウントを表示するウィジェットを変更する" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_widget.png" alt="クエリカウントを表示するウィジェットを変更する" style="width:100%;">}}
 
-### デフォルトのダッシュボードを表示する
+### すぐに使えるダッシュボードを表示する
 
 Datadog データベースモニタリングが提供するすぐに使用できるダッシュボードで、現在のデータベースアクティビティ、リソース使用率などを確認します。
 
-ダッシュボードにアクセスするには
-
-1. UI で **APM > Databases** をクリックして、データベースモニタリングに移動します。
-
-2. **Dashboards** タブを選択し、表示するダッシュボードを選択します。
+ダッシュボードにアクセスするには、[Database Monitoring][6] ページから **Dashboards** タブを選択し、表示したいダッシュボードを選択します。
 
 必要に応じて、すぐに使用できるダッシュボードのクローンを作成して変更できます。
 

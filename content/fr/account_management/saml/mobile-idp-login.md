@@ -1,6 +1,5 @@
 ---
 title: Application mobile Datadog avec connexion SAML initiée par un fournisseur d'identité
-kind: documentation
 is_public: true
 aliases:
   - /fr/account_management/faq/how-do-i-use-the-mobile-app-with-saml/

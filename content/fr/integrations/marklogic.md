@@ -29,7 +29,7 @@ integration_id: marklogic
 integration_title: MarkLogic
 integration_version: 3.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: marklogic.

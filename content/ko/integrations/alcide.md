@@ -10,7 +10,7 @@ has_logo: true
 integration_id: alcide
 integration_title: Alcide
 is_public: true
-kind: 통합
+custom_kind: integration
 name: alcide
 public_title: Datadog-Alcide 통합
 short_description: Alcide 로그 수집 및 처리

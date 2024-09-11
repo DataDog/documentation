@@ -2,6 +2,7 @@
 categories:
 - コラボレーション
 - notifications
+custom_kind: integration
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: Microsoft Teams
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: microsoft_teams
 public_title: Datadog-Microsoft Teams インテグレーション
@@ -32,7 +32,44 @@ Microsoft Teams と統合して、以下のことができます。
 
 ### セットアップ
 
-Datadog を Microsoft Teams チャンネルと統合するには、以下のようにします。
+Microsoft のテナントを Datadog に接続します。
+
+1. Datadogで、[**Integrations > Microsoft Teams**][1] の順に移動します。
+2. **Add Tenant** をクリックすると、Microsoft に移動します。
+3. 画面の指示に従って、**OK** をクリックします。
+
+Datadog 通知を受信させたいすべてのチームに Datadog アプリが追加されていることを確認します。
+
+1. Microsoft Teams の左サイドバーで、**Apps** をクリックし、Datadog アプリを検索します。
+2. **Add** ボタンの横にあるドロップダウン矢印をクリックし、**Add to a team** をクリックします。
+3. Datadog 通知を受信させたいチームを選択します。
+4. **Set up a bot** をクリックします。
+
+ボットをチームに追加したら、Datadog で通知ハンドルを構成します。
+
+1. 構成されたテナントの下で、**Add Handle** をクリックします。ハンドルに名前を付け、ドロップダウンメニューから希望のチームとチャンネルを選択し、**Save** をクリックします。
+
+{{< site-region region="us,ap1,us5,us3,eu" >}}
+### 旧来コネクタのテナントベースインテグレーションへの移行
+
+Microsoft は、Microsoft Teams 用の Office 365 コネクタが非推奨となり、2025 年 12 月 31 日 (従来は 2024 年 10 月 1 日) に機能停止することを発表しました。コネクタの新規作成は 2024 年 8 月 15 日からブロックされます。詳細は同社の[ブログ記事][1]を参照してください。
+旧来の Office 365 コネクタを現在使用しているすべての通知ハンドルを Datadog のテナントベースのインテグレーションに移行するには、以下の手順に従います。
+
+1. [セットアップ手順](#setup) に従って Microsoft テナントを Datadog に接続します。
+2. 旧来の Office 365 コネクタが構成されているすべてのチームに Datadog アプリを追加します。
+3. [Microsoft Teams インテグレーションタイル][2]の各レガシー通知コネクタハンドルについて:
+   1. 構成されているテナントの下にある **Add Handle** をクリックします。
+   2. 新しいハンドルに、コネクタハンドルと同じ名前を付けます。例えば、旧来のコネクタハンドルの名前が `channel-123` の場合、テナント構成に `channel-123` という名前で新しいハンドルを作成します。
+   3. 旧来のコネクタハンドルがメッセージを送信していたドロップダウンメニューから希望するチームとチャンネルを選択し、**Save** をクリックします。この新しいハンドルは既存の旧来のコネクタハンドルをオーバーライドします。
+
+[1]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
+[2]: https://app.datadoghq.com/integrations/microsoft-teams
+{{< /site-region >}}
+
+### コネクターのセットアップ (レガシー)
+<div class="alert alert-info">
+レガシー通知ハンドルは、同じ <code>@teams-HANDLE_NAME</code> を<em>使用しない限り</em>新しいセットアップの影響を受けませんが、使用する場合は新しい構成がレガシー構成をオーバーライドします。
+</div>
 
 1. チャンネルのリストで、チャンネル名の横にある `...` ボタンを選択し、**Connectors** を選択します。
 
@@ -44,12 +81,12 @@ Datadog を Microsoft Teams チャンネルと統合するには、以下のよ�
 
 3. コネクタ構成モーダルで、Webhook URL をコピーします。
 4. Datadogで、[**Integrations > Microsoft Teams**][1] の順に移動します。
-5. Configuration タブで、**Add Channel** をクリックしてチャンネルに名前を付け、webhook URL を貼り付けます。
+5. Configuration タブで、**Add Handle** をクリックしてハンドルに名前を付け、webhook URL を貼り付けます。
 6. コネクタ構成モーダルで、**Save** をクリックします。
 
 ### 使用方法
 
-Datadog モニターから、[`@-notification` 機能][2]を使用して、Microsoft Teams に通知を送信します。通知を `@teams-<CHANNEL>` というアドレスに送信し、`<CHANNEL>` を Microsoft Teams のチャンネル名に置き換えます。
+Datadog モニターから、[`@-notification` 機能][2]を使用して、Microsoft Teams に通知を送信します。通知を `@teams-<HANDLE>` というアドレスに送信し、`<HANDLE>` を Microsoft Teams のハンドル名に置き換えます。
 
 ## Microsoft Teams における Datadog Incident Management
 
@@ -60,14 +97,17 @@ Datadog モニターから、[`@-notification` 機能][2]を使用して、Micro
 1. Microsoft Teams を開きます。
 2. 垂直ツールバーの **Apps** をクリックします。
 3. "Datadog" を検索し、タイルをクリックします。
-4. Datadog アプリをインストールするには、**Add** をクリックします。
+4. Datadog アプリをインストールするには、 **Add** をクリックします。「Add」ボタンの隣にあるドロップダウンメニューを開き、 **Add to a team** を選択します。
 
-{{< img src="integrations/microsoft_teams/microsoft_teams_install_datadog_app_in_teams.png" alt="Microsoft Teams の Datadog インストールアプリタイル" >}}
+{{< img src="integrations/microsoft_teams/microsoft_teams_install_datadog_in_teams_v2.png" alt="Microsoft Teams の Datadog インストールアプリタイル" >}}
+
+5. ドロップダウンメニューで、アプリを追加するチームを選択し、 **Set Up** をクリックしてインストールを完了します。
+
 
 次に、Microsoft のテナントを Datadog に接続します。
 
 1. Datadog で、[Microsoft Teams Integration Tile][1] に移動します。
-2. **Add Account** をクリックすると、Microsoft に移動します。
+2. **Add Tenant** をクリックすると、Microsoft に移動します。
 3. 画面の指示に従って、**OK** をクリックします。
 
 Datadog Incident Management の一部の機能では、テナント上でアクションを実行するための権限が必要です。たとえば、インシデント用の新しいチームを作成する場合などです。テナント全体に対する管理者の同意を得るには、Microsoft 組織を代表して同意を与える権限を持つ人物が必要です。例えば、*Global Admin* ロールが割り当てられたユーザーが該当します。Datadog アプリケーションにテナント全体に対する管理者の同意を付与できる人物についての詳細は、[Microsoft Entra ID ドキュメント][3]をご覧ください。
@@ -75,8 +115,9 @@ Datadog Incident Management の一部の機能では、テナント上でアク�
 同意を付与するには
 
 1. Datadog で [Microsoft Teams インテグレーションタイル][1]に移動します。
-2. **Authorize** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
-3. 画面の指示に従って、**OK** をクリックします。
+2. Incident Management を使用したいテナントで、右側の歯車アイコンをクリックします。
+3. **Authorize Tenant** をクリックすると、Microsoft にリダイレクトされます。テナント全体の管理者同意を付与できるユーザーが、この手順を実行する必要があります。このユーザーは Datadog アカウントを持っている必要がありますが、Datadog アカウントで使用するメールアドレスは Microsoft アカウントのメールアドレスと一致する必要はありません。
+4. 画面の指示に従って、**OK** をクリックします。
 
 ### ユーザー設定
 
@@ -106,13 +147,26 @@ Datadog からアカウントを接続することも可能です。
 
 ### 使用方法
 
+#### ダッシュボード
+
+ダッシュボードウィジェットのスナップショットを任意のチームまたはチャットに投稿できます。サポートされているウィジェットのリストについては、[スケジュールレポート][4]を参照してください。
+
+Teams でダッシュボードウィジェットを共有するには
+
+1. Datadog でダッシュボードウィジェットにカーソルを合わせ、`CMD + C` または `CTRL + C` を押すか、共有メニューから **Copy** ボタンをクリックします。
+1. リンクを Teams に貼り付けます。
+
+{{< img src="integrations/microsoft_teams/dashboard_share.png" alt="Microsoft Teams でのダッシュボードウィジェットの共有">}}
+
+#### インシデント
+
 Microsoft Teams から新しいインシデントを宣言するには
 
 1. 任意のチームで会話を開始します。
 2. `@Datadog` と入力するか、`...` ボタンで **Messaging extensions** メニューを開き、**Datadog** アプリを選択します。
 3. **Create an Incident** を選択します。
 4. 希望の情報をフォームに入力します。
-5. **作成**をクリックします。
+5. **Create** をクリックします。
 
 Datadog へのアクセス権の有無を問わず、Microsoft Teams テナント内の誰でもインシデントを宣言できます。
 
@@ -146,13 +200,15 @@ Microsoft Teams アプリがインストールされたら、**Incident Settings
 
 #### インシデントチャンネルの設定方法
 
-1. [Incidents Settings][4] に移動します。
-2. Microsoft Teams インテグレーションの **Incident Updates Channel** セクションを探します。
-3. インシデントアップデートのために、正しいテナント、チーム、チャンネルを選択します。
+1. [Incidents Settings][5] に移動します。
+2. Microsoft Teams セクションで、接続している Microsoft Teams テナントを選択します。
+3. **Automatically create a Microsoft Teams channel for every incident** (インシデントごとに Microsoft Teams チャンネルを自動的に作成する) をオンに切り替えます。
+4. 新しいチャンネルを自動的に作成するチームを選択します。
+5. 設定を保存します。
 
-{{< img src="integrations/microsoft_teams/ms_teams_incident_updates.png" alt="Microsoft Teams インシデントアップデートチャンネル設定。" >}}
+{{< img src="integration/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Microsoft Teams インシデント更新チャンネル設定." >}}
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 
@@ -166,20 +222,61 @@ Microsoft Teams インテグレーションには、イベントは含まれま�
 
 Microsoft Teams インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## 権限
 
-Datadog for Microsoft Teams には、以下の権限が必要です。詳細については、[Microsoft Graph 権限リファレンス][5]を参照してください。
+Microsoft Teams インテグレーションは、追加されたチームに対して以下の権限を受け取ります。詳細については、[Microsoft アプリ権限リファレンス][6]を参照してください。
 
-| API / 権限名               | タイプ        | リクエスト理由                                                                                  |
-|--------------------------------------|-------------|-------------------------------------------------------------------------------------------------|
-| `ChannelSettings.ReadWrite.All`      | Application | Datadog Incident Management を使用して、インシデントを修復するためのチャンネルを作成および変更します。 |
-| `GroupMember.Read.All`               | Application | Datadog Incident Management の構成に、チーム名とチャンネル名のオートコンプリート候補を提供します。        |
-| `Team.Create`                        | Application | Datadog Incident Management を使用して、インシデントを管理および修復するチームを作成します。               |
-| `TeamMember.ReadWrite.All`           | Application | Datadog Incident Management でインシデントを管理するユーザーを Teams に追加します。 |
-| `TeamsAppInstallation.ReadWrite.All` | Application | Datadog Incident Management によって作成されたチームに Datadog アプリを追加します。  |
-| `TeamSettings.ReadWrite.All`         | Application | Datadog Incident Management が、インシデントチームの状態を最新の状態に保つようにします。            |
+| 権限の説明                                                                                                                                                                   | リクエスト理由                                                                           |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| 私が提供するメッセージとデータを受信します。                                                                                                                                          | ユーザーは、Datadog アプリと個人チャットでやり取りすることができます。                                |
+| 私にメッセージや通知を送信します。                                                                                                                                                      | ユーザーは、Datadog アプリと個人チャットでやり取りすることができます。                                |
+| 名前、メールアドレス、会社名、使用言語など、私のプロフィール情報にアクセスします。                                                                                      | Datadog UI 内で Microsoft Teams の通知やワークフローを構成することができます。 |
+| チームやチャットのメンバーがチャンネルやチャットで提供するメッセージやデータを受信します。                                                                                                  | ユーザーは、@Datadog コマンドを通して Datadog とやり取りすることができます。                           |
+| チャンネルやチャットでメッセージや通知を送信します。                                                                                                                                    | 構成されたターゲットに Datadog 通知を送信します。                                        |
+| チームやチャットの情報 (チーム名やチャット名、チャンネルリスト、名簿 (チームやチャットメンバーの名前やメールアドレスを含む)) にアクセスし、それを使って連絡を取ることができます。 | ユーザーが Datadog 内で Microsoft Teams の通知やワークフローを構成できるようにします。 |
 
-## ヘルプ
+
+Microsoft Teams インテグレーションで Incident Management 機能を使用するには、追加の権限が必要です。これらは、テナント全体の権限を持つユーザーによって認可される必要があります (詳細な手順については、 [Microsoft Teams の Datadog Incident Management: アカウントのセットアップ](#account-setup)を参照してください)。これらの権限の詳細については、 [Microsoft Graph 権限リファレンス][7]を参照してください。
+
+<table>
+  <tr>
+    <td style="width:40%;"><strong>API / 権限の名前</strong></td>
+    <td style="width:15%;"><strong>タイプ</strong></td>
+    <td><strong>リクエスト理由</strong></td>
+  </tr>
+  <tr>
+    <td style="width:40%;"><code>ChannelSettings.ReadWrite.All</code></td>
+    <td style="width:15%;">アプリケーション</td>
+    <td>Datadog Incident Management を使用してインシデントを解決するために、チャンネルを作成および変更します。</td>
+  </tr>
+  <tr>
+    <td style="width:40%;"><code>GroupMember.Read.All</code></td>
+    <td style="width:15%;">アプリケーション</td>
+    <td>Datadog Incident Management の構成用に、チームおよびチャンネル名のオートコンプリート候補を提供します。</td>
+  </tr>
+  <tr>
+    <td style="width:40%;"><code>Team.Create</code></td>
+    <td style="width:15%;">アプリケーション</td>
+    <td>Datadog Incident Management を使用してインシデントを管理および解決するために、チームを作成します。</td>
+  </tr>
+  <tr>
+    <td style="width:40%;"><code>TeamMember.ReadWrite.All</code></td>
+    <td style="width:15%;">アプリケーション</td>
+    <td>Datadog Incident Management を使用してインシデントを管理するために、ユーザーをチームに追加します。</td>
+  </tr>
+  <tr>
+    <td style="width:40%;"><code>TeamsAppInstallation.ReadWrite.All</code></td>
+    <td style="width:15%;">アプリケーション</td>
+    <td>Datadog Incident Management によって作成されたチームに Datadog アプリを追加します。</td>
+  </tr>
+  <tr>
+    <td style="width:40%;"><code>TeamSettings.ReadWrite.All</code></td>
+    <td style="width:15%;">アプリケーション</td>
+    <td>インシデントチームの状態で Datadog Incident Management を最新に保ちます。</td>
+  </tr>
+</table>
+
+## トラブルシューティング
 
 ### SSO の使用
 
@@ -189,11 +286,35 @@ Datadog for Microsoft Teams には、以下の権限が必要です。詳細に�
 
 2. セットアップ手順 3 で MS Teams ページから Datadog にリダイレクトされたら、新しいタブを開き、SSO で Datadog にログインします。次に、セットアップ手順 4 を個別に実行します。
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+### インテグレーションタイルにチームが表示されないのはなぜですか？
+テナントを Datadog に追加する前にボットをチームに追加した場合、Datadog はチーム参加イベントを見逃し、チームの存在を知ることができません。
+以下のいずれかを試すことができます。
+- Datadog アプリをチームから削除し、再度追加します。**注**: この操作により、そのチームの構成コネクタが削除されます。そのチームのすべてのコネクタをテナントベースのインテグレーションに移動する準備ができたら、このアクションを実行してください。
+1. 左サイドバーのチーム名の横にある 3 つの点をクリックします。
+2. **Manage Team** をクリックします。
+3. **Apps** というラベルの付いたタブに移動します。
+4. Datadog アプリの横にある 3 つの点をクリックします。
+5. **Remove** をクリックします。
+6. [セットアップ手順](#setup)に従って Datadog アプリを追加します。
+- Datadog が利用可能なすべての Microsoft Teams チャンネルをクロールするための管理者同意を認可します。
+1. Datadog で [Microsoft Teams インテグレーションタイル][1]に移動します。
+2. 管理者同意を付与したいテナントで、右側の歯車アイコンをクリックします。
+3. **Authorize Tenant** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。**注**: Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
+4. 画面の指示に従って、**OK** をクリックします。
+5. 数時間以内にクローラーが実行され、利用可能なすべてのチームとチャンネルが入力されます。
+
+### プライベートチャンネルはボットでサポートされていますか？
+[Microsoft Teams][8] のプライベートチャンネルの制限により、プライベートチャンネルはボットでサポートされていません。
+
+
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/integrations/microsoft-teams
 [2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
-[4]: https://app.datadoghq.com/incidents/settings#Integrations
-[5]: https://learn.microsoft.com/en-us/graph/permissions-reference
-[6]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/dashboards/scheduled_reports/
+[5]: https://app.datadoghq.com/incidents/settings#Integrations
+[6]: https://learn.microsoft.com/en-us/microsoftteams/app-permissions#what-can-apps-do-in-teams
+[7]: https://learn.microsoft.com/en-us/graph/permissions-reference
+[8]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
+[9]: https://docs.datadoghq.com/ja/help/

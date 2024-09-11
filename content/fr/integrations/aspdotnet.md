@@ -23,7 +23,7 @@ guid: 475b0c6c-02e5-49ef-806b-9fab377f0839
 integration_id: aspdotnet
 integration_title: ASP.NET
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: aspdotnet.

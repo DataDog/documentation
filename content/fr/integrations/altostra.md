@@ -24,7 +24,7 @@ integration_id: altostra
 integration_title: Altostra
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@altostra.com
 manifest_version: 1.0.0
 metric_prefix: altostra.

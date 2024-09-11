@@ -8,6 +8,10 @@ further_reading:
   text: "Setting Up the OpenTelemetry Collector"
 ---
 
+<div class="alert alert-info">
+The Datadog Agent logs pipeline is enabled by default in the Datadog Exporter in v0.108.0. This may cause a breaking change if <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/b52e760f184b77c6e1a9ccc5121ff7b88d2b8f75/exporter/datadogexporter/examples/collector.yaml#L456-L463"><code>logs::dump_payloads</code></a> is in use while upgrading, since this option is invalid when the Datadog Agent logs pipeline is enabled. To avoid this issue, remove the <code>logs::dump_payloads</code> config option or temporarily disable the <code>exporter.datadogexporter.UseLogsAgentExporter</code> feature gate.
+</div>
+
 ## Overview
 
 {{< img src="/opentelemetry/collector_exporter/log_collection.png" alt="An information log sent from OpenTelemetry" style="width:100%;" >}}
@@ -31,7 +35,7 @@ receivers:
     poll_interval: 500ms
     include:
       - /var/log/*/app.log
-   operators:
+    operators:
       - type: json_parser
       # Layout must match log timestamp format. If this section is removed, timestamp will correspond to the time of log intake by Datadog.
       - type: time_parser
@@ -81,6 +85,17 @@ filelog:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Custom tags
+In order to add custom Datadog tags to logs, set the `ddtags` attribute on the logs. For example, this can be done with the [transform processor][3]:
+```yaml
+processors:
+  transform:
+    log_statements:
+      - context: log
+        statements:
+          - set(attributes["ddtags"], "first_custom:tag, second_custom:tag")
+```
 
 ## Data collected
 
@@ -141,3 +156,4 @@ Flags: 0
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/logs.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor

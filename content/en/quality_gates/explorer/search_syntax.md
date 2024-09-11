@@ -1,6 +1,5 @@
 ---
 title: Quality Gates Explorer Search Syntax
-kind: documentation
 description: Search all of your quality gates or rule executions.
 further_reading:
 - link: "/quality_gates/search"

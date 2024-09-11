@@ -6,7 +6,6 @@ further_reading:
 - link: /notebooks/
   tag: 설명서
   text: 노트북
-kind: 설명서
 title: 목록 위젯
 ---
 

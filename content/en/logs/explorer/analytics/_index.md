@@ -1,6 +1,5 @@
 ---
 title: Log Analytics
-kind: documentation
 description: 'Group queried logs into fields, patterns, and transactions, and create multiple search queries, formulas, and functions for in-depth analysis.'
 aliases:
     - /logs/explorer/group
@@ -25,7 +24,7 @@ further_reading:
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. 
 
 {{< whatsnext desc="In order to expose this information, you can group your logs into:" >}}
-    {{< nextlink href="logs/explorer/analytics/#fields" >}}Fields{{< /nextlink >}}
+    {{< nextlink href="logs/explorer/analytics/#group-logs-by-fields" >}}Fields{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/patterns" >}}Patterns{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/transactions" >}}Transactions{{< /nextlink >}}
 {{< /whatsnext >}}

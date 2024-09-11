@@ -1,6 +1,5 @@
 ---
 title: Agent Environment Variables
-kind: guide
 further_reading:
   - link: "/agent/docker/#environment-variables"
     tag: "Documentation"

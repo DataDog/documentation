@@ -18,7 +18,6 @@ further_reading:
 - link: /synthetics/cicd_integrations
   tag: 설명서
   text: CI 파이프라인에서 신서틱 테스트 실행하는 방법 알아보기
-kind: 설명서
 title: 신서틱(Synthetic) 모니터링 시작하기
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Create a Cloud SIEM Detection Rule
-kind: Documentation
 description: Learn how to create a Cloud SIEM detection rule for your integration.
 aliases:
 - /developers/integrations/create-an-integration-detection-rule
@@ -21,7 +20,8 @@ To create a Datadog integration, see [Create a New Integration][3].
 ## Create a detection rule
 ### Build a detection rule JSON schema
 
-1. Navigate to **[Security > Cloud SIEM > Detection Rules > New Rule][4]** and create a new rule. Note: Only threshold based rules are currently supported.
+1. From **Detection Rules**, [create a new rule][4].
+
 
 2. Follow the [best practices](#configuration-best-practices) in this guide to configure your detection rule.
  
@@ -33,7 +33,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 ### Open a pull request
 
-1. Save the detection rule JSON file to your integration's `assets/security` folder.  
+1. Save the detection rule JSON file to your integration's `assets/security` folder.
 
 2. Open a pull request (PR) to update the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. The PR should include your detection rule JSON file, along with any new integration files.
 

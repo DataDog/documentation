@@ -5,7 +5,6 @@ further_reading:
 - link: /tracing/troubleshooting
   tag: Documentation
   text: APM トラブルシューティング
-kind: Documentation
 title: Python プロファイラーのトラブルシューティング
 type: multi-code-lang
 ---

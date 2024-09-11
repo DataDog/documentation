@@ -5,7 +5,6 @@ algolia:
 aliases:
 - /ja/network_performance_monitoring/devices/
 description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
-disable_sidebar: true
 further_reading:
 - link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
   tag: ナレッジセンター
@@ -25,13 +24,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: ブログ
   text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
-kind: documentation
 title: ネットワークデバイスモニタリング
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">ネットワークデバイスモニタリングはこのサイトではサポートされていません。</div>
-{{< /site-region >}}
 
 ## 概要
 
@@ -39,62 +33,17 @@ title: ネットワークデバイスモニタリング
 
 <br/>
 
-ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化します。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
+Network Device Monitoring (NDM) は、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよび仮想ネットワークデバイスの可視化を提供します。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数などのメトリクスを収集し、デバイスが稼働中か停止中かを判断します。
 
-## はじめに
+{{< whatsnext desc="このセクションには以下のトピックが含まれています。">}}
+    {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>はじめに</u>: Network Device Monitoring の導入{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>サポートされているデバイス</u>: サポートされている NDM デバイスの確認{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>SNMP メトリクス</u>: ネットワークデバイスから SNMP メトリクスを収集{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/device_topology_map" >}}<u>デバイストポロジーマップ</u>: ネットワークの物理接続を確認{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>デバイスオンボーディング体験</u>: デバイスプロファイルの導入{{< /nextlink >}}
+{{< /whatsnext >}}
 
-1. Datadog Agent をインストールします (通常、監視対象デバイスではないサーバーにインストールします)。
-2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
-3. [ネットワークデバイス][7]ページで、ネットワークインフラストラクチャー全体の監視を開始します。
-4. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
-    - [監視対象のデバイス一覧][3]
-    - [すべてのインターフェイスのパフォーマンス全体][4]
-5. [SNMP メトリクス][5]の積極的な監視で問題が発生する前に把握します。
-
-## サポートされるデバイス
-
-### 一般的なプロファイル
-
-一般的なプロファイルはベンダープロファイルでサポートされないデバイスのメトリクスを収集します。メトリクスには、TCP、UDP、IP の他、帯域幅使用率や送受信量などのインターフェイスメトリクスが含まれます。
-
-### ベンダープロファイル
-
-以下のベンダーのデバイスは、専用のプロファイルでサポートされます。ベンダー/デバイスの種類がサポートされながら、特定のモデルがサポートされていない場合は、[よくあるご質問][6]を参照してください。
-
--   Cisco Catalyst
--   Cisco ASA
--   Cisco CSR 1000v
--   Cisco ISR 4431
--   Cisco Nexus
--   Cisco ICM
--   Cisco UC Virtual Machines
--   Arista
--   Aruba
--   Checkpoint Firewall
--   Chatsworth PDU
--   APC UPS
--   F5 Big IP
--   Fortinet FortiGate
--   HP iLO
--   HP Proliant
--   Dell iDRAC
--   EMC Isilon
--   Juniper EX シリーズ
--   Juniper MX シリーズ
--   Juniper SRX
--   Meraki Cloud
--   Meraki On-Prem
--   NetApp
--   Palo Alto
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /ja/network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
-[2]: /ja/network_monitoring/devices/snmp_metrics/#autodiscovery
-[3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
-[4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /ja/monitors/types/metric/
-[6]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
-[7]: https://app.datadoghq.com/devices

@@ -1,6 +1,6 @@
 ---
 title: The AWS Integration with Terraform
-kind: guide
+
 aliases:
     - /integrations/faq/aws-integration-with-terraform/
 disable_toc: true

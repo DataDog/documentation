@@ -12,7 +12,7 @@ further_reading:
 - link: /logs/logs_to_metrics/
   tag: Documentation
   text: Découvrir comment générer des métriques à partir de logs ingérés
-kind: guide
+
 title: Guide de la fonctionnalité Logging without Limits™
 ---
 

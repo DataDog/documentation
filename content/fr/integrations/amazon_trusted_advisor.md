@@ -1,37 +1,40 @@
 ---
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- aws
+- cloud
+- cost management
+- log collection
+- provisioning
 dependencies: []
-description: "Surveillez des métriques clés d'Amazon\_Trusted\_Advisor."
+description: Surveillez des métriques clés d'AWS Trusted Advisor.
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/
-    tag: FAQ
-    text: "Pourquoi mon dashboard AWS Trusted Advisor n'affiche-t-il aucune donnée\_?"
+- link: https://www.datadoghq.com/blog/monitor-aws-trusted-advisor/
+  tag: Blog
+  text: Surveiller des checks de limite de service AWS Trusted Advisor avec Datadog
 git_integration_title: amazon_trusted_advisor
 has_logo: true
-integration_id: amazon-trusted-advisor
-integration_title: "Amazon\_Trusted\_Advisor"
+integration_id: ''
+integration_title: AWS Trusted Advisor
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_trusted_advisor
-public_title: "Intégration Datadog/Amazon\_Trusted\_Advisor"
-short_description: "Surveillez des métriques clés d'Amazon\_Trusted\_Advisor."
+public_title: Intégration Datadog/AWS Trusted Advisor
+short_description: Surveillez des métriques clés d'AWS Trusted Advisor.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
-AWS Trusted Advisor est un outil en ligne fournissant des conseils en temps réel pour vous aider à provisionner vos ressources conformément aux bonnes pratiques AWS.
+AWS Trusted Advisor est un outil en ligne fournissant des conseils en temps réel pour vous aider à provisionner vos ressources conformément aux bonnes pratiques AWS.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Trusted Advisor.
 
-**Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'un programme support Business ou Enterprise.
+**Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'une formule Business ou Entreprise.
 
 ## Configuration
 
@@ -42,20 +45,20 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de métriques
 
 1. Depuis la console IAM, ajoutez `support:describe*` et `support:refresh*` en tant qu'action dans le champ de document de stratégie. Pour en savoir plus sur l'API AWS Support, consultez la section [Actions, ressources et clés de condition pour AWS Support][2].
-2. Dans le [carré de l'intégration AWS][3], assurez-vous que l'option `TrustedAdvisor` est cochée dans la section concernant la collecte des métriques.
-3. Installez l'[intégration Datadog/Amazon Trusted Advisor][4].
+2. Dans la [page de l'intégration AWS][3], vérifiez que `Trusted Advisor` est activé dans l'onglet `Metric Collection`.
+3. Installez l'[intégration Datadog/AWS Trusted Advisor][4].
 
 ### Collecte de logs
 
 #### Activer le logging
 
-Configurez Amazon Trusted Advisor de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
+Configurez AWS Trusted Advisor de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_trusted_advisor` est défini en tant que _Target prefix_.
 
-#### Envoyer des logs à Datadog
+#### Envoi de logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Trusted Advisor dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][6]
@@ -69,15 +72,25 @@ Configurez Amazon Trusted Advisor de façon à ce que ses logs soient envoyés v
 
 ### Événements
 
-L'intégration Amazon Trusted Advisor n'inclut aucun événement.
+L'intégration AWS Trusted Advisor n'inclut aucun événement.
 
 ### Checks de service
 
 L'intégration Amazon Trusted Advisor n'inclut aucun check de service.
 
+## Dashboard
+
+Pour ajouter des données au dashboard de l'intégration AWS Trusted Advisor, procédez comme suit :
+
+1. Configurez des autorisations d'assistance.
+    - Dans la console IAM, ajoutez `support:describe*` et `support: refresh*` en tant qu'action dans la zone de texte du document de stratégie.
+1.  Vérifiez que vous disposez d'une offre d'assistance AWS payante.
+
+Le dashboard Datadog Trusted Advisor doit accéder à l'ensemble complet des [checks AWS Trusted Advisor][9]. Ces checks ne sont disponibles qu'avec une offre d'assistance AWS payante. Vérifiez donc que vous disposez d'une offre AWS adéquate.
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
@@ -87,10 +100,11 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssupport.html
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon-trusted-advisor
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://app.datadoghq.com/integrations/amazon-trusted-advisor
+[5]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_trusted_advisor/amazon_trusted_advisor_metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[9]: https://aws.amazon.com/premiumsupport/trustedadvisor
+[10]: https://docs.datadoghq.com/fr/help/

@@ -1,6 +1,5 @@
 ---
 title: Python Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your Python application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/python

@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: 블로그
   text: Cloud Run 서비스에서 트레이스, 로그, 커스텀 메트릭 수집
-kind: documentation
 title: Google Cloud Run
 ---
 
@@ -29,7 +28,7 @@ Datadog은 `serverless-init` 컨테이너 이미지의 새 릴리스를 Google�
 
 이미지에는 시맨틱 버전 관리를 기반으로 태그가 지정되며, 새 버전마다 3개의 관련 태그가 지정됩니다:
 
-* `1`, `1-alpine`: 주요 변경 사항이 없는 최신 마이너 릴리스를 추적할 때 사용하세요.
+* `1`, `1-alpine`: 이를 사용하여 변경 사항 중단 없이 최신 마이너 릴리스를 추적하세요
 * `1.x.x`, `1.x.x-alpine`: 정확한 버전의 라이브러리에 고정할 때 사용하세요.
 * `latest`, `latest-alpine`: 주요 변경 사항이 포함된 최신 버전 릴리스를 따를 때 사용하세요.
 

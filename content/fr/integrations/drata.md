@@ -29,7 +29,7 @@ integration_id: drata-integration
 integration_title: Drata
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: drata
 public_title: Drata

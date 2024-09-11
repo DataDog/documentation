@@ -1,6 +1,5 @@
 ---
 title: Datadog Clipboard
-kind: documentation
 description: Create and manage incidents
 aliases:
 - /monitors/incident_management/datadog_clipboard

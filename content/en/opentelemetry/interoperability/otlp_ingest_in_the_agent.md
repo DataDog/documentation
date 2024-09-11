@@ -1,6 +1,5 @@
 ---
 title: OTLP Ingestion by the Datadog Agent
-kind: documentation
 aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
@@ -38,6 +37,8 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 
 OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports.
 
+{{% otel-endpoint-note %}}
+
 For gRPC, default port 4317:
 
 ```yaml
@@ -45,7 +46,7 @@ otlp_config:
   receiver:
     protocols:
       grpc:
-        endpoint: localhost:4317
+        endpoint: 0.0.0.0:4317
 ```
 For HTTP, default port 4318:
 
@@ -54,7 +55,7 @@ otlp_config:
   receiver:
     protocols:
       http:
-        endpoint: localhost:4318
+        endpoint: 0.0.0.0:4318
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
@@ -166,6 +167,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
     receiver:
       protocols:
         grpc:
+          endpoint: 0.0.0.0:4317
           enabled: true
    ```
 
@@ -175,6 +177,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
     receiver:
       protocols:
         http:
+          endpoint: 0.0.0.0:4318
           enabled: true
    ```
 
@@ -203,6 +206,18 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:
+
+- Instrumenting your Lambda functions with OpenTelemetry
+- Using OpenTelemetry API support within Datadog tracers
+- Sending OpenTelemetry traces to the Datadog Lambda Extension
+
+See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].
+
+[100]: /serverless/aws_lambda/opentelemetry/
+{{% /tab %}}
 {{< /tabs >}}
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][6].
@@ -223,44 +238,35 @@ There are many other environment variables and settings supported in the Datadog
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
+In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable.
 
-   For gRPC:
-   ```
-   env:
-    - name: HOST_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
-   ```
+For gRPC:
+```yaml
+env:
+ - name: HOST_IP
+   valueFrom:
+     fieldRef:
+       fieldPath: status.hostIP
+ - name: OTEL_EXPORTER_OTLP_ENDPOINT
+   value: "http://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
+```
 
-   For HTTP:
-   ```
-   env:
-    - name: HOST_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
-   ```
+For HTTP:
+```yaml
+env:
+ - name: HOST_IP
+   valueFrom:
+     fieldRef:
+       fieldPath: status.hostIP
+ - name: OTEL_EXPORTER_OTLP_ENDPOINT
+   value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
+```
+**Note**: To enrich container tags for custom metrics, set the appropriate resource attributes in the application code where your OTLP metrics are generated. For example, set the `container.id` resource attribute to the pod's UID.
+
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them must send traces to <code>/v1/traces</code> instead of the <code>/</code> root path.</div>
-
-## Out-of-the-box dashboards
-
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
-
-1. Install the [OpenTelemetry integration][9].
-2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
-
-   {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
-
-The **Host Metrics** dashboard is for data collected from the [host metrics receiver][7]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][8] you choose to enable.
+<div class="alert alert-info">When configuring the endpoint for sending traces, ensure you use the correct path required by your OTLP library. Some libraries expect traces to be sent to the <code>/v1/traces</code> path, while others use the root path <code>/</code>.</div>
 
 ## Further reading
 
@@ -271,8 +277,5 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[9]: https://app.datadoghq.com/integrations/otel
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [10]: /opentelemetry/runtime_metrics/

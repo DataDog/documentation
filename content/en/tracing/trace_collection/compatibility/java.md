@@ -1,6 +1,5 @@
 ---
 title: Java Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Java tracer'
 code_lang: java
 type: multi-code-lang
@@ -105,10 +104,11 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported                                     | `ratpack`                                                |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                     | `restlet-http`.                                          |
 | Spark Java              | 2.3+       | [Beta](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5        | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
+| Spring Boot             | 1.5+       | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
 | Spring Web (MVC)        | 4.0+       | Fully Supported                                     | `spring-web`                                             |
 | Spring WebFlux          | 5.0+       | Fully Supported                                     | `spring-webflux`                                         |
 | Tomcat                  | 5.5+       | Fully Supported                                     | `tomcat`                                                 |
+| Undertow                | 2.0+       | Fully Supported                                     | `undertow`                                               |
 | Vert.x                  | 3.4+       | Fully Supported                                     | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
@@ -118,15 +118,17 @@ Also, frameworks like Spring Boot (version 3) inherently work because they usual
 
 The following instrumentations are disabled by default and can be enabled with the following settings:
 
-| Instrumentation | To Enable 									                                                                                                                       |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS		        | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft		      | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Grizzly         | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
-| Grizzly-HTTP    | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
-| Ning            | `-Ddd.integration.ning.enabled=true`                                                                                                      |
-| Spark Java      | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
-| Hazelcast       | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                               |
+| Instrumentation     | To Enable 									                                                                                                              |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
@@ -199,7 +201,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                               |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                    |
 | OpenSearch Rest         | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-rest`                                                            |
-| OpenSearch Transport    | 1.0+     | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
+| OpenSearch Transport    | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
 | RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                       |
 | Redisson                | 2.x-3.x  | Fully Supported | `redisson`, `redis`                                                                        |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                             |
@@ -227,7 +229,7 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation   | To Enable 									                             |
 |-------------------|-------------------------------------------------|
-| JDBC-Datasource		 | `-Ddd.integration.jdbc-datasource.enabled=true` |
+| JDBC-Datasource		 | - System Property: `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Environment Variable: `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
@@ -237,20 +239,22 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
 |-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
-| Datanucleus JDO   | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
-| Dropwizard Views  | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
-| GraphQL           | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
-| Hazelcast         | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
-| Hibernate         | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
-| Hystrix           | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
-| JSP Rendering     | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit             | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
-| Project Reactor   | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
-| Quartz            | 2.x        | Fully Supported                                                  | `quartz`                                       |
-| RxJava            | 2.x        | Fully Supported                                                  | `rxjava`                                       |
-| Spring Data       | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
-| Spring Scheduling | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
-| Twilio SDK        | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
+| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                                    | `cxf`                                          |
+| Datanucleus JDO     | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
+| Dropwizard Views    | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
+| GraphQL             | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
+| Hazelcast (client)  | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate           | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
+| Hystrix             | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
+| JSP Rendering       | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit               | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
+| Project Reactor     | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
+| Quartz              | 2.x        | Fully Supported                                                  | `quartz`                                       |
+| RxJava              | 2.x        | Fully Supported                                                  | `rxjava`                                       |
+| Spring Data         | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
+| Spring Scheduling   | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
+| TIBCO BusinessWorks | 5.14.0+    | [Beta](#framework-integrations-disabled-by-default)              | `tibco`, `tibco_bw`                            |
+| Twilio SDK          | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 
@@ -303,6 +307,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -317,6 +322,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -326,7 +332,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
-   - You can do this at the build tool level, like Maven:
+    - You can do this at the build tool level, like Maven:
      ```yaml
      <build>
      <plugins>
@@ -349,6 +355,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
 3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog
@@ -363,6 +370,13 @@ After completing the setup, the service should send traces to Datadog.
 You can view traces using the [Trace Explorer][9].
 
 {{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Features are not enabled or configured correctly for native images
+
+There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.
+
+- For runtime configuration, use environment variables (`DD_PROPERTY_NAME=value`), instead of system properties (`-Ddd.property.name=value`).
+- The exception to this rule is when enabling the profiler. In this case, pass `-J-Ddd.profiling.enabled=true` to the `native-image` tool at _build time_.
+
 ##### Native-image buildpack versions older than 5.12.2
 
 Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
@@ -370,10 +384,10 @@ Older native-image buildpack versions expose the following option: `USE_NATIVE_I
 When this option is `false`, exceptions like the following can occur:
 
 ```text
-Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
-com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
-No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
-as this class should be initialized at image runtime. To see how this object got 
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
 instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
 ```
 
@@ -407,3 +421,4 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [5]: /tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
+[10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java

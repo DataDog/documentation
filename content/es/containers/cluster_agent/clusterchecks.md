@@ -7,13 +7,12 @@ further_reading:
 - link: /containers/cluster_agent/
   tag: Documentación
   text: Datadog Cluster Agent
-- link: /containers/cluster_agent/troubleshooting#cluster-checks
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: Documentación
   text: Solucionar problemas en los checks de clúster
 - link: /containers/guide/clustercheckrunners
   tag: Documentación
   text: Ejecutores de checks de clúster
-kind: documentación
 title: Checks de clúster
 ---
 
@@ -513,5 +512,5 @@ Ahora, ejecuta el [subcomando `status` del Agent de nodo][14] y busca el nombre 
 [10]: /es/integrations/http_check/
 [11]: /es/agent/faq/template_variables/
 [12]: /es/integrations/nginx/
-[13]: /es/containers/cluster_agent/troubleshooting/#dispatching-logic-in-the-cluster-agent
+[13]: /es/containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
 [14]: /es/containers/cluster_agent/commands/#cluster-agent-commands

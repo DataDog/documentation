@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: 블로그
   text: ASP.NET Core 애플리케이션을 Azure App Service에 배포
-kind: 설명서
 title: Azure App Service - Windows 코드
 ---
 

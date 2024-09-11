@@ -30,7 +30,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
-kind: documentation
+- link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
+  tag: ブログ
+  text: Datadog でのインシデント管理方法
 title: Incident Management の概要
 ---
 
@@ -52,11 +54,11 @@ Datadog Incident Management は、メトリクス、トレース、またはロ�
 
 このガイドでは、[Datadog クリップボード][2]を使ってインシデントを宣言する方法を説明します。クリップボードを使うと、グラフ、モニター、ダッシュボード全体、または[ノートブック][3]など、さまざまなソースから情報を収集することができます。これにより、インシデントを宣言する際に可能な限り多くの情報を収集することができます。
 
-1. 画面左側の Datadog メニューで、**Dashboard** > **Dashboard lists** に進み、**System - Metrics** を選択します。
+1. Datadog で [**Dashboard List**][15] に移動し、**System - Metrics** を選択します。
 2. グラフのひとつにカーソルを合わせ、次のいずれかのコマンドを使用してクリップボードにコピーします。
     - **Ctrl**/**Cmd** + **C**
     - グラフ上で **Export** アイコンをクリックして **Copy** を選択します。
-3. 画面左側の Datadog メニューで **Monitors** > **Manage Monitors** を開き、**[Auto] Clock in sync with NTP** を選択します。
+3. 左側の Datadog メニューから [**Monitors** > **Monitors List**][16] に進み、**[Auto] Clock in sync with NTP** を選択します。
 4. **Ctrl**/**Cmd** + **Shift** + **K** でクリップボードを開きます。
 5. クリップボードの **Add current page** をクリックして、モニターをクリップボードに追加します。
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="クリップボードにコピー" responsive="true" style="width:100%;">}}
@@ -77,7 +79,7 @@ Datadog Incident Management は、メトリクス、トレース、またはロ�
 
 新しいインシデントが発生すると、そのインシデント専用の新しい Slack チャンネルが自動的に作成され、チームとのコミュニケーションをそこに集約してトラブルシューティングを開始することができます。所属するオーガニゼーションの Slack インテグレーションがグローバルなインシデントチャンネルを更新するよう設定されている場合は、そのチャンネルが新しいインシデントで更新されます。
 
-この例では、新しいインシデントチャンネルに追加されたのはあなたのユーザーのみです。実際のインシデントで _Notifications_ に人やサービスを追加すると、その全員が自動的にインシデントチャンネルに追加されます。
+In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
 
 Slack インテグレーションが有効になっていない場合は、**Add Chat** をクリックして、インシデントに関するやり取りに使用しているチャットサービスへのリンクを追加します。
 
@@ -89,7 +91,7 @@ Slack インテグレーションが有効になっていない場合は、**Add
 
 #### 概要
 
-**シナリオ:** いくつか調査を行った結果、根本的な原因はホストのメモリ不足であることがわかりました。また、一部のお客様が影響を受けており、ページの読み込みが遅くなっているとの情報も得ました。15 分前に最初のお客様からの報告があり、インシデントのレベルは SEV-3 です。
+**Scenario:** After some investigation, you discover that the root cause is a host running out of memory. You've also been informed that a small subset of customers are being affected and seeing slow loading of pages. The first customer report came in 15 minutes ago. It is a SEV-3 incident.
 
 _Overview_ セクションで、調査が進むにつれてインシデントのフィールドや顧客の影響を更新することができます。
 
@@ -133,7 +135,7 @@ _Timeline_ には、インシデントのフィールドや情報の追加・変
  _Remediation_ セクションでは、問題の調査やインシデント発生後の修復タスクについてのドキュメントやタスクを記録することができます。
 
 1. **Remediation** タブをクリックします。
-2. _Documents_ ボックスのプラスアイコン `+` をクリックして、[Datadog ノートブック][7]へのリンクを追加します。_Documents_ セクションの更新内容はすべて、_Incident Update_ タイプとしてタイムラインに追加されます。
+2. Click the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
 3. _Incident Tasks_ ボックスにタスクの説明を追加して、タスクを追加することができます。例: `Run the steps in the notebook.`
 4. **Create Task** をクリックします。
 5. **Assign To** をクリックして自分自身をタスクに割り当てます。
@@ -204,6 +206,8 @@ Incident Management をカスタマイズするには、[インシデント設�
 [9]: /ja/service_management/incident_management/#status-levels
 [10]: /ja/service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /ja/service_management/mobile/
+[12]: /ja/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

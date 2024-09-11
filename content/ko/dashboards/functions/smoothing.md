@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/smoothing/
-kind: 설명서
 title: 평활화
 ---
 
@@ -121,6 +120,25 @@ title: 평활화
 
 참고: 스팬 값은 데이터 포인트의 수입니다. 따라서 `median_9()`은(는) 마지막 9개의 데이터 포인트를 사용하여 중앙값을 계산합니다.
 
+## 가중치 
+<div class="alert alert-info">Weighted()는 게이지 타입 메트릭에서 `SUM BY`를 쿼링할 때만 사용할 수 있습니다.</div> 
+
+| 함수       | 설명                                                           | 예시                        |
+| :----          | :-------                                                              | :---------                     |
+| `weighted()`   | 트랜지션 태그의 적절한 가중치를 유지하면서 노이즈를 자동으로 제거합니다. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
+
+`weighted()` 함수는 인위적인 스파이크를 방지하기 위해 공간에서 게이지 메트릭 합산 시 일시적인 변동 태그 값의 짧은 수명을 설명합니다.
+
+함수는 다음 두 조건이 모두 충족되면 게이지 메트릭의 쿼리에 자동 추가됩니다.
+1. 본 메트릭에는 메트릭 요약에 지정된 규칙적이며 일관된 제출 간격이 존재합니다.
+2. 메트릭은 `SUM by`로 집계됩니다(예: `sum: mygaugemetric{*}`).
+
+다음은 부정확한 스파이크가 있는 원본 쿼리(보라색)와 적절한 가중치 계산이 적용된 쿼리(녹색)의 그래프 예시입니다. 
+
+{{< img src="dashboards/functions/smoothing/weighted.png" alt="가중치 수정자가 있는 경우와 없는 경우의 쿼리를 비교한 예시 그래프" style="width:80%;">}}
+
+weighted() 수정자에 대한 더 자세한 정보를 확인하려면 [weighted()는 어떻게 작동하나요?][3] 항목을 참조하세요.
+
 ## 기타 함수
 
 {{< whatsnext desc="사용 가능한 다른 함수를 참조하세요." >}}
@@ -136,5 +154,6 @@ title: 평활화
     {{< nextlink href="/dashboards/functions/timeshift" >}}타임시프트: 타임라인을 따라 메트릭 데이터 포인트를 이동합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://futuredata.stanford.edu/asap
+[1]: https://github.com/stanford-futuredata/ASAP
 [2]: https://www.datadoghq.com/blog/auto-smoother-asap
+[3]: /ko/dashboards/guide/how-weighted-works

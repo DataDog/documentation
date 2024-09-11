@@ -1,6 +1,5 @@
 ---
 title: Audit Trail Events
-kind: documentation
 aliases:
     - /account_management/audit_trail_events/
 further_reading:
@@ -60,10 +59,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Role created or deleted][7] | A role is created or deleted in the org. | `@evt.name:"Access Management" @asset.type:role @action:(created OR deleted)` |
 | [Role access request][8] | A user created, responded to, or deleted an access request for a role, and the value of the access request. | `@evt.name:"Access Management" @asset.type:role_request` |
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
-| [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [Password][9] | A user modified their password in the org. Password update events are delivered to all orgs that user is active in, even if the org does not have password authentication configured.| `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][10] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 | [Email update (Support)][11] | A user's email was updated by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:modified` |
 | [User invite (Support)][12] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
+| [User's role (Support)][100] | A user was added or deleted from a role in the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
+| [Role modified (Support)][101] | A role was modified by Datadog Support, and what the previous and new permissions are. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
 
 ### Agent
 
@@ -162,12 +163,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Archive configuration][53] | A user created, modified, or deleted the configuration of an archive and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:archive` |
 | [Custom metric][54] | A user created, modified, or deleted a custom metric for logs and the previous and new values for the custom metric configuration. | `@evt.name:"Log Management" @asset.type:"custom metric"` |
 | [Exclusion filter configuration][55] | A user created, modified, or deleted the configuration of an exclusion filter and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:"exclusion filter"` |
-| [Facet][56] | A user created, modified, or deleted a facet in the log explorer and the previous and new values for the facet configuration.| `@evt.name:"Log Management" @asset.type:facet` |
+| [Facet][56] | A user created, modified, or deleted a facet in the Log Explorer and the previous and new values for the facet configuration.| `@evt.name:"Log Management" @asset.type:facet` |
 | [Historical view][57] | A user created, modified, aborted, or deleted a historical view for logs and the previous and new values for the historical view configuration. | `@evt.name:"Log Management" @asset.type:historical_view` |
 | [Index configuration][58] | A user created, modified, or deleted the configuration of an index and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:index` |
 | [Log pipeline][59] | A user created, modified, or deleted a log pipeline or nested pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline` |
 | [Processor][60] | A user created, modified, or deleted a processor within a pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline_processor` |
-| [Query][61] (Public Beta)| A user ran a Log Management List query either in log explorer, Dashboards or through the Public API. | `@evt.name:"Log Management" @asset.type:logs_query` |
+| [Query][61] (Public Beta)| A user ran a Log Management List query either in Log Explorer, Dashboards or through the Public API. | `@evt.name:"Log Management" @asset.type:logs_query` |
 | [Restriction query configuration][62] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | [Standard attribute configuration][63] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
 | [Download as CSV][64] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
@@ -222,6 +223,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Token leaked][81] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
 | [Login method override][82] | Datadog has detected a user login method override that is different from the default login methods set for the organization.| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
 | [Unusual login][83] | Datadog has detected a unusual login event.| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
+| [User invited with throwaway email][102] | Datadog has detected that a user with an email from a free or disposable email provider was invited to the organization.| `@evt.name:"Security Notification" @asset.type:user_invite @action:notification` |
 
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -368,3 +370,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [97]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_schedule%20%40action%3A%28modified%20OR%20created%20OR%20deleted%29
 [98]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_action%20%40action%3Aresponded
 [99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Custom%20Connections%22%20%40asset.type%3Acustom_connection
+[100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
+[101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
+[102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser_invite

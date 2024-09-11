@@ -22,7 +22,7 @@ integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_run
 public_title: Datadog-Google Cloud Run 통합
@@ -53,11 +53,11 @@ Cloud Run for Anthos에 대한 자세한 내용은 [Google Cloud Run for Anthos 
 Google Cloud Run은 [감사 로그][4]도 노출합니다.
 Google Cloud Run 로그는 Google Cloud Logging으로 수집되어 Cloud Pub/Sub 주제를 통해 Dataflow 작업으로 전송됩니다. 아직 설정하지 않았다면 [Datadog Dataflow 템플릿을 사용하여 로깅을 설정][5]하세요.
 
-이 작업이 완료되면 Google Cloud Logging에서 Google Cloud Run 로그를 pub/sub로 내보냅니다.
+이 작업이 완료되면 Google Cloud Logging에서 Google Cloud Run 로그를 Pub/Sub 주제로 내보냅니다.
 
 1. [Google Cloud Logging 페이지][6]로 이동하여 Google Cloud Run 로그를 필터링하세요.
 2. **Create Sink**를 클릭하고 그에 따라 싱크 이름을 지정합니다.
-3. 대상으로 "Cloud Pub/Sub"를 선택하고 해당 목적으로 생성된 pub/sub를 선택합니다. **참고**: pub/sub는 다른 프로젝트에 있을 수 있습니다.
+3. "Cloud Pub/Sub"를 대상으로 선택하고 해당 목적으로 생성된 Pub/Sub 주제를 선택합니다. **참고**: Pub/Sub 주제는 다른 프로젝트에 있을 수 있습니다.
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub 로그를 Pub Sub로 내보내기" >}}
 

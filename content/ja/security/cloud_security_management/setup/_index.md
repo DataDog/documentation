@@ -8,105 +8,126 @@ aliases:
 - /ja/security/cspm/getting_started
 - /ja/security/cspm/setup
 - /ja/security/misconfigurations/setup
+- /ja/security/vulnerabilities/setup
+- /ja/security/infrastructure_vulnerabilities/setup/
+- /ja/security/cloud_security_management/setup/csm_enterprise
+- /ja/security/cloud_security_management/setup/csm_cloud_workload_security
+- /ja/security/cloud_security_management/setup/csm_pro
 further_reading:
-- link: /getting_started/cloud_security_management
+- link: /security/cloud_security_management/setup/supported_deployment_types
   tag: ドキュメント
-  text: Cloud Security Management の概要
-- link: security/default_rules
-  tag: ドキュメント
-  text: デフォルトのクラウド構成コンプライアンスルールを探る
-- link: https://www.datadoghq.com/blog/datadog-runtime-security/
-  tag: ブログ
-  text: Datadog クラウドランタイムセキュリティの詳細はこちら
-- link: https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/
-  tag: ブログ
-  text: システムの Linux プロセスからセキュリティ脅威を検出する方法
-- link: https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/
-  tag: ブログ
-  text: 'PwnKit の脆弱性: 概要、検出、対処法'
-- link: https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/
-  tag: ブログ
-  text: 'Dirty Pipe の脆弱性: 概要、検出、対処法'
-- link: https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/
-  tag: ブログ
-  text: Dirty Pipe の脆弱性を利用したコンテナからの脱却
-- link: https://www.datadoghq.com/blog/dns-based-threat-detection/
-  tag: ブログ
-  text: DNS ベースの脅威検出を使用してネットワーク層で攻撃を捉える
-kind: ドキュメント
+  text: サポートされるデプロイメントタイプ
+- link: /security/cloud_security_management/guide/agent_variables/
+  tag: ガイド
+  text: Cloud Security Management Agent 変数
 title: Cloud Security Management の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management はサポートされていません。</div>
-{{< /site-region >}}
+Datadog は、[Cloud Security Management (CSM)][6] のセットアップをサポートするガイド付きワークフローを提供しています。最初のステップは、使用したい機能を選択することです。その後、選択した機能の設定手順に従って構成を行います。
 
-<div class="alert alert-info">Cloud Security Management は、現在、CSM Enterprise、CSM Pro、CSM Workload Security の 3 つのパッケージで別々に提供されています。詳細は、<a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Datadog Cloud Security Management の変更点</a>をご覧ください。</div>
+<div class="alert alert-info">以下の手順は、新規の CSM ユーザー向けです。既存ユーザーで追加機能の有効化を希望する場合は、<a href="/security/cloud_security_management/setup/#enable-additional-features">追加機能を有効にする</a>を参照してください。</div>
 
-Cloud Security Management (CSM) は、クラウドインフラストラクチャー全体にわたってリアルタイムの脅威検出と継続的な構成監査を行い、そのすべてを統合ビューで表示することで、シームレスなコラボレーションと迅速な修復を実現します。
+1. [Cloud Security Management の紹介][10]ページで、**Get Started with Cloud Security Management** をクリックします。
+1. [Features][11] ページで、有効にしたい機能を選択します。
+1. **Start Using Cloud Security Management** をクリックし、選択内容を確認します。
 
-CSM には [CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] の 3 つのパッケージがあります。各パッケージには、次の表に示すように、特定の機能セットへのアクセスが含まれます。
+{{< img src="security/csm/setup/features_selection_new_user2.png" alt="CSM Features ページ" width="100%">}}
+
+選択内容を確認後、[Setup][3] ページが表示されます。このページの指示は選択した機能に基づいてカスタマイズされます。例えば、**Misconfigurations** を有効にすると、**Cloud Accounts** と **Hosts and Containers** セクションのみが表示されます。
+
+次の表は、各機能に応じて Setup ページに表示されるセクションを示しています。
 
 <table>
+  <thead>
     <tr>
-        <th>パッケージ</th>
-        <th>機能</th>
+      <th style="width: 50%;">機能</th>
+      <th style="width: 50%;">セットアップページ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Misconfigurations</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/source_code_integrations">Source Code Integrations</a></li>
+        </ul>
+      </td>
     </tr>
     <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">脅威</a></li><li style="font-size:16px"><a href="/security/misconfigurations">誤構成 (クラウドアカウントと Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">アイデンティティリスク</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">脆弱性 (コンテナイメージとホスト)</a></li></ul></td>
+      <td>Threat Detection</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless Resources</a></li>
+        </ul>
+      </td>
     </tr>
     <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">誤構成 (クラウドアカウント)</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">脆弱性 (コンテナイメージ)</a></li></ul></td>
+      <td>Identity Risks (CIEM)<br><em>*要 Misconfigurations</em></td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
+        </ul>
+      </td>
     </tr>
     <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">脅威</a></li></ul></td>
+      <td>Host Vulnerability Management</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+        </ul>
+      </td>
     </tr>
+    <tr>
+      <td>Container Vulnerability Management</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>AWS CloudTrail Logs<br><em>*要 Cloud SIEM</em></td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-**注**: 
+<div class="alert alert-info">Agentless Scanning のセットアップ方法については、<a href="/security/cloud_security_management/setup/agentless_scanning">CSM Agentless Scanning のセットアップ</a>を参照してください。</div>
 
-- パッケージに含まれていない機能は、[CSM Setup ページ][4]の指示に従っていつでも有効にすることができます。
-- CSM Identity Risks と CSM Vulnerabilities はベータ版です。設定方法については、[Cloud Security Management Identity Risks][5] および [Cloud Security Management Vulnerabilities の設定][6]を参照してください。
+{{< partial name="security-platform/CSW-billing-note.html" >}}
 
-## 前提条件
 
-{{< tabs >}}
-{{% tab "CSM Enterprise" %}}
+## 追加機能を有効にする
 
-{{% csm-prereqs-enterprise-ws %}}
+[Features][11] ページに戻り、追加したい機能の **Enable** をクリックすることで、いつでも CSM の追加機能を有効にできます。このページはステータスページとしても機能しており、有効な機能や、構成が未完了の機能、未有効の機能が確認できます。
 
-{{% /tab %}}
+{{< img src="security/csm/setup/features_page.png" alt="CSM Features ページ" width="100%">}}
 
-{{% tab "CSM Pro" %}}
-
-[CSM Pro を有効にする][1]には、まず AWS、Azure、Google Cloud Platform の Datadog クラウドアカウントインテグレーションを設定する必要があります。
-
-[1]: /ja/security/cloud_security_management/setup/csm_pro
-
-{{% /tab %}}
-
-{{% tab "CSM Workload Security" %}}
-
-{{% csm-prereqs-enterprise-ws %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## 次のステップ
-
-CSM のセットアップを開始するには、Datadog の [**Security** > **Setup**][4] セクションに移動します。ここに、CSM のセットアップと構成の詳細な手順が記載されています。詳細な手順については、[CSM Enterprise][1]、[CSM Pro][2]、[CSM Workload Security][3] のセットアップドキュメントを参照してください。
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/cloud_security_management/setup/csm_enterprise
-[2]: /ja/security/cloud_security_management/setup/csm_pro
-[3]: /ja/security/cloud_security_management/setup/csm_workload_security
-[4]: https://app.datadoghq.com/security/configuration/csm/setup
-[5]: /ja/security/identity_risks/#setup
-[6]: /ja/security/infrastructure_vulnerabilities/setup
+[1]: /ja/security/cloud_security_management/setup/agent
+[2]: /ja/security/cloud_security_management/setup/cloud_accounts
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
+[4]: /ja/security/cloud_security_management/setup/agentless_scanning
+[5]: https://app.datadoghq.com/security/csm
+[6]: /ja/security/cloud_security_management/
+[7]: /ja/security/guide/aws_fargate_config_guide/
+[9]: https://app.datadoghq.com/security/getting-started
+[10]: https://app.datadoghq.com/security/csm/intro
+[11]: https://app.datadoghq.com/security/configuration/csm/features
+[12]: /ja/security/cloud_security_management/setup/threat_detection
+[13]: /ja/security/cloud_security_management/setup/identity_risks_ciem
+[14]: /ja/security/cloud_security_management/setup/host_vulnerability_management
+[15]: /ja/security/cloud_security_management/setup/container_vulnerability_management

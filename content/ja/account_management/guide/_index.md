@@ -4,15 +4,15 @@ cascade:
     category: ガイド
     rank: 20
     subcategory: アカウントの管理ガイド
-kind: ガイド
 private: true
 title: アカウントの管理ガイド
 ---
 
-{{< whatsnext desc="使用量計測 API の移行ガイド" >}}
-    {{< nextlink href="account_management/guide/hourly-usage-migration" >}}Hourly Usage API の v1 から v2 への移行{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/usage-attribution-migration" >}}Usage Attribution API の v1 から v2 への移行{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/csv-headers-billing-migration" >}}2023 年 9 月 18 日付の Plan & Usage CSV ヘッダーへの更新{{< /nextlink >}}
+{{< whatsnext desc="Usage metering API migration guides:" >}}
+    {{< nextlink href="account_management/guide/relevant-usage-migration" >}}Migrate Indexed Logs and RUM in the Hourly Usage and Summary Usage APIs{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/hourly-usage-migration" >}}Migrating from the v1 Hourly Usage APIs to v2{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/usage-attribution-migration" >}}Migrating from v1 to v2 of the Usage Attribution API{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/csv-headers-billing-migration" >}}Updates to Plan & Usage CSV Headers as of September 18, 2023{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="一般的なアカウント管理:" >}}

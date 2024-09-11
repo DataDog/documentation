@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: finally 블록에서 break이나 continue 사용하지 않기
 ---
 ## 메타데이터

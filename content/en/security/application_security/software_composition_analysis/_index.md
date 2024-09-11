@@ -1,6 +1,5 @@
 ---
 title: Software Composition Analysis
-kind: documentation
 aliases:
   - /security/application_security/risk_management/
   - /security/application_security/vulnerability_management/
@@ -23,6 +22,9 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/"
   tag: "Blog"
   text: "Finding malicious PyPI packages through static code analysis: Meet GuardDog"
+- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+  tag: "Blog"
+  text: "Prioritize vulnerability remediation with Datadog SCA"
 algolia:
   tags: ['Software Composition Analysis', 'Vulnerability Management', 'SCA', 'AVM', 'GuardDog']
 ---
@@ -40,8 +42,7 @@ What makes Datadog SCA unique is its end-to-end coverage of your software develo
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories. Additionally, the Datadog Security research team evaluates vulnerabilities and malware findings. For more information, see the [GuardDog][13] GitHub project.
 
 
-Check [ASM Compatibility][6] to see if your service is supported.
-
+Check the ASM Compatibility for each ASM product to see if your service is supported.
 
 
 ## Library Inventory
@@ -53,6 +54,8 @@ Since Datadog SCA covers your software development lifecycle end-to-end, the lib
 {{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
 ## Explore and manage SCA vulnerabilities
+
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, see <a href="/code_analysis/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
 
 The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them. 
 
@@ -93,21 +96,15 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 
 {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
-## Configure Code Analysis 
+## Configure Software Composition Analysis
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
+Software Composition Analysis (SCA) contains additional capabilities to allow you to scan for vulnerabilities in your CI pipelines by using [Code Analysis][9]. With SCA for Code Analysis, you can identify vulnerable open source libraries that have been imported into your codebase.
 
-Software Composition Analysis contains additional capabilities to allow you to scan for vulnerabilities in your CI pipelines by using [Code Analysis][9]. With SCA for Code Analysis, you can identify vulnerable open source libraries that have been imported into your codebase.
+To configure vulnerabilities in your CI pipelines, navigate to [Security -> Application Security -> Settings][12].
 
-To configure vulnerabilities in your CI pipelines, navigate to [Security -> Configuration -> Application Security -> Setup][12].
-
-Click **Get Started** to enable Software Composition Analysis for static analysis in source code, and select and configure your CI/CD provider.
+In **Software Composition Analysis (SCA)**, click **Get Started** to enable Software Composition Analysis, and select your repositories and services.
 
 See [Getting Started with Software Composition Analysis][7] for more detailed instructions.
-
-{{< img src="getting_started/appsec/asm_sca_ci_setup.png" alt="Software Composition Analysis setup page, showing CI setup." style="width:100%;" >}}
 
 ## Risk information in APM views
 
@@ -124,7 +121,6 @@ Software Composition Analysis enriches the information APM is already collecting
 [3]: https://app.datadoghq.com/security/appsec/vm
 [4]: https://app.datadoghq.com/security/appsec
 [5]: https://app.datadoghq.com/security/appsec/landing
-[6]: /security/application_security/enabling/compatibility
 [7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions

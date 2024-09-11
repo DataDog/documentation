@@ -1,6 +1,5 @@
 ---
 description: Filtrer la liste des monitors à l'aide d'une recherche à facettes
-kind: documentation
 title: Rechercher des monitors
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags
   tag: Documentation
   text: タグの割り当てについて
-kind: ガイド
 title: イベントへのタグ付けのベストプラクティス
 ---
 
@@ -38,14 +37,14 @@ Datadog では、以下のような利点から、すべてのイベントに[�
 | ホスト          | ホスト名。以下のことが可能になります。<br>- インテーク時のイベントを追加のホストタグで自動的にリッチ化する<br>- [イベントエクスプローラー][7]の **Host Infrastructure** と ** Metrics** タブにピボットする                             |
 | チーム          | イベントを所有し、必要に応じて通知されるチーム。                                                                                                                       |                                                          |
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: /ja/service_management/events/explorer
 [3]: /ja/api/latest/events/#post-an-event
-[4]: /ja/getting_started/monitors/#notify-your-team
+[4]: /ja/getting_started/monitors/#notify-your-services-and-your-team-members
 [5]: /ja/getting_started/tagging/assigning_tags
 [6]: /ja/integrations/
 [7]: https://app.datadoghq.com/event/explorer

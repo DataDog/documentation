@@ -14,7 +14,6 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: 가이드
   text: 에이전트 명령
-kind: guide
 title: 에이전트 v6 상태 페이지
 ---
 

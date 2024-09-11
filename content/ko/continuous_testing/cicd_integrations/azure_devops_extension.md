@@ -4,7 +4,6 @@ aliases:
 dependencies:
 - https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
 description: Synthetics 및 Datadog CI 확장 기능을 활용하여 CI 파이프라인에서 사용할 수 있는 작업을 생성하세요.
-kind: 설명서
 title: Continuous Testing 및 Datadog CI Azure DevOps 확장 기능
 ---
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]

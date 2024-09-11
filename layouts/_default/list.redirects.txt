@@ -5,4 +5,14 @@
         {{- $target := strings.TrimSuffix "/" $p.RelPermalink -}}
         {{- printf "%s/ %s\n" $alias $p.RelPermalink -}}
     {{- end -}}
+    {{- with $p.Params.external_redirect -}}
+        {{- $redirect_link := . -}}
+        {{- $temp := strings.TrimPrefix "/" $p.RelPermalink -}}
+        {{- $target := strings.TrimSuffix "/" $temp -}}
+        {{- if not (strings.HasPrefix $redirect_link "https://") -}}
+            {{- printf "%s/ %s\n" $target $redirect_link -}}
+        {{- else -}}
+            {{- printf "%s/ %s %s\n" $target $redirect_link "external" -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}

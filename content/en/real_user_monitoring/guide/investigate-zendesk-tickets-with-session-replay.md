@@ -1,6 +1,6 @@
 ---
 title: Investigate Zendesk Tickets with Session Replay
-kind: guide
+
 ---
 
 ## Overview

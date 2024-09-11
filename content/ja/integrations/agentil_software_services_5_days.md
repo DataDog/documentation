@@ -13,6 +13,7 @@ author:
 categories:
 - マーケットプレイス
 - sap
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,7 +22,6 @@ integration_id: agentil-software-services-5-days
 integration_title: サービス
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

@@ -1,15 +1,10 @@
 ---
 title: Error Tracking Explorer
-kind: documentation
 description: Learn about the Error Tracking Explorer.
 further_reading:
 - link: '/monitors/types/error_tracking'
   tag: 'Documentation'
   text: 'Learn about Error Tracking Monitors'
-aliases:
-  - /real_user_monitoring/error_tracking/explorer
-  - /logs/error_tracking/explorer
-  - /tracing/error_tracking/explorer
 ---
 
 ## Overview

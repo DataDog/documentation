@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Oracle Exadata
-kind: documentation
 description: Install and configure Database Monitoring for Oracle Exadata
 further_reading:
 - link: "/integrations/oracle/"
@@ -9,13 +8,9 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 {{% dbm-oracle-definition %}}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. 
+The Agent collects telemetry directly from the database by logging in as a read-only user.
 
 ## Before you begin
 
@@ -47,6 +42,9 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 {{% dbm-create-oracle-user %}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install the Agent
 
 See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
@@ -75,7 +73,7 @@ On the Integrations page in Datadog, install the [Oracle integration][10] for yo
 
 ### Validate the setup
 
-[Run the Agent's status subcommand][1] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][11] and the [Databases][2] page in Datadog to get started.
+[Run the Agent's status subcommand][1] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][11] and the [Databases][2] page in Datadog to get started.
 
 ## Custom queries
 
@@ -87,8 +85,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [2]: https://app.datadoghq.com/databases
 [3]: /database_monitoring/setup_oracle/selfhosted
 [4]: /database_monitoring/setup_oracle/rac
-[5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[6]: /agent/basic_agent_usage#agent-overhead
+[5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
+[6]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [7]: /database_monitoring/data_collected/#sensitive-information
 [8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [9]: https://app.datadoghq.com/account/settings/agent/latest

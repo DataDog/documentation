@@ -1,6 +1,5 @@
 ---
 title: Host Metrics with the Container Agent
-kind: faq
 aliases:
 - /agent/faq/getting-further-with-docker/
 further_reading:

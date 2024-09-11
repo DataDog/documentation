@@ -3,6 +3,7 @@ app_id: hbase-master
 app_uuid: e53ed650-6454-4f69-abfc-2cedd35ec2c3
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: hbase.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10228
     source_type_name: HBase master
   logs:
     source: hbase
@@ -22,8 +24,9 @@ author:
   sales_email: everpeace@gmail.com
   support_email: everpeace@gmail.com
 categories:
-- data store
+- data stores
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md
 display_on_public_website: true
@@ -31,9 +34,8 @@ draft: false
 git_integration_title: hbase_master
 integration_id: hbase-master
 integration_title: Hbase Master
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: hbase_master
 public_title: Hbase Master
@@ -48,8 +50,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: HBase master インテグレーション。
   media: []
@@ -58,6 +61,7 @@ tile:
   title: Hbase Master
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -83,7 +87,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Hbase_master の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーで `hbase_master.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_master.d/conf.yaml][5] を参照してください。
 
@@ -104,7 +108,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 
 2. [Agent を再起動します][7]。
 
-### ログの収集
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -140,7 +144,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 
 Hbase_master チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Hbase_master チェックには、サービスのチェック機能は含まれません。
 
@@ -151,6 +155,7 @@ Hbase_master チェックには、サービスのチェック機能は含まれ�
 
 
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## HBase RegionServer インテグレーション
 
 ## 概要
@@ -176,13 +181,13 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い HBase RegionSe
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Hbase RegionServer の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーで `hbase_regionserver.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_regionserver.d/conf.yaml][10] を参照してください。
 
 2. [Agent を再起動します][7]。
 
-### ログの収集
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -218,7 +223,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い HBase RegionSe
 
 HBase RegionServer チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 HBase RegionServer チェックには、サービスのチェック機能は含まれません。
 
@@ -228,7 +233,7 @@ HBase RegionServer チェックには、サービスのチェック機能は含�
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

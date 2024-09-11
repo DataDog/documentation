@@ -1,6 +1,5 @@
 ---
 title: Secrets Management
-kind: documentation
 aliases:
   - /agent/faq/kubernetes-secrets
   - /agent/guide/secrets-management

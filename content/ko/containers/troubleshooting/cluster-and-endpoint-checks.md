@@ -9,7 +9,6 @@ further_reading:
 - link: /containers/cluster_agent/endpointschecks/
   tag: 설명서
   text: 자동탐지로 엔드포인트 검사 실행
-kind: 설명서
 title: 클러스터와 엔드포인트 검사 트러블슈팅
 ---
 

@@ -44,6 +44,11 @@
         "subtype": "http"
       },
       {
+        "name": "Wait",
+        "subtype": "wait",
+        "value": 1
+      },
+      {
         "name": "GRPC CALL",
         "subtype": "grpc",
         "extractedValues": [],
@@ -62,7 +67,7 @@
         ],
         "request": {
           "host": "grpcbin.test.k6.io",
-          "port": 9000,
+          "port": "9000",
           "service": "grpcbin.GRPCBin",
           "method": "Index",
           "message": "{}",

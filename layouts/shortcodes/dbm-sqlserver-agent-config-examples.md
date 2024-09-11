@@ -20,7 +20,7 @@
     [datadog]
     Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
     ```
-    
+
 4. Update the `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` file with your DSN information.
 
     Example:
@@ -29,15 +29,34 @@
       - dbm: true
         host: 'localhost,1433'
         username: datadog
-        password: '<PASSWORD>'
+        password: 'ENC[datadog_user_database_password]'
         connector: 'odbc'
         driver: '{ODBC Driver 18 for SQL Server}' # This is the section header of odbcinst.ini
         dsn: 'datadog' # This is the section header of odbc.ini
     ```
 5. Restart the Agent.
 
-### Using Always On
-When monitoring Always On clusters, the Agent must be installed on a separate server from the SQL Servers and connect to the cluster through the listener endpoint.
+### Using AlwaysOn
+
+**Note: For AlwaysOn users, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint**. This is because information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps to keep it up and running in the event of a failover.
+
+```yaml
+instances:
+  - dbm: true
+    host: 'shopist-prod,1433'
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    connector: adodbapi
+    adoprovider: MSOLEDBSQL
+    include_ao_metrics: true  # If Availability Groups is enabled
+    include_fci_metrics: true   # If Failover Clustering is enabled
+```
+
+### Monitoring SQL Server Agent Jobs
+
+**Note: For monitoring SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database**. Monitoring of SQL Server Agent jobs is supported on SQL Server versions 2016 and newer.
+Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
+
 ```yaml
 instances:
   - dbm: true
@@ -46,8 +65,10 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    include_ao_metrics: true  # If Availability Groups is enabled
-    include_fci_metrics: true   # If Failover Clustering is enabled
+    agent_jobs:
+      enabled: true
+      collection_interval: 15
+      history_row_limit: 10000
 ```
 
 ### One Agent connecting to multiple hosts
@@ -61,7 +82,7 @@ instances:
     username: datadog
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -71,7 +92,7 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -81,25 +102,12 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
       - 'service:example-service'
     [...]
-```
-
-### Storing passwords securely
-While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/configuration/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
-```yaml
-init_config:
-instances:
-  - dbm: true
-    host: 'localhost,1433'
-    connector: adodbapi
-    adoprovider: MSOLEDBSQL
-    username: datadog
-    password: 'ENC[datadog_user_database_password]'
 ```
 
 ### Running custom queries
@@ -112,7 +120,7 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     custom_queries:
     - query: SELECT age, salary, hours_worked, name FROM hr.employees;
       columns:
@@ -137,14 +145,14 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     reported_hostname: products-primary
   - dbm: true
     host: 'localhost,1433'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     reported_hostname: products-replica-1
 ```
 

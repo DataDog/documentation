@@ -1,6 +1,5 @@
 ---
 title: Quick Graphs
-kind: documentation
 ---
 
 ## Overview

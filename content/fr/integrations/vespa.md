@@ -18,7 +18,7 @@ integration_id: vespa
 integration_title: Vespa
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: dd@vespa.ai
 manifest_version: 1.0.0
 metric_prefix: vespa.

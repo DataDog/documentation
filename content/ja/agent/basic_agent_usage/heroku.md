@@ -3,7 +3,6 @@ aliases:
 - /ja/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
-kind: documentation
 title: Datadog Heroku ビルドパック
 ---
 [Heroku ビルドパック][1]は、Datadog Agent を Heroku dyno にインストールして、システムメトリクス、カスタムアプリケーションメトリクス、トレースを収集します。カスタムアプリケーションメトリクスとトレースを収集するには、[DogStatsD または Datadog APM ライブラリ][2]をアプリケーションに含める必要があります。
@@ -103,7 +102,7 @@ git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
 
-## コンフィギュレーション
+## 構成
 
 上で示した環境変数のほかにも、いくつか設定できる変数があります。
 
@@ -118,7 +117,7 @@ git push heroku main
 | `DISABLE_DATADOG_AGENT`    | オプション。設定した場合、Datadog Agent は実行されません。                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `DD_APM_ENABLED`           | オプション。トレースの収集はデフォルトで有効になっています。これを `false` に設定すると、トレースの収集が無効になります。このオプションを変更した場合は、スラグを再コンパイルする必要があります。                                                                                                                                                                                                                                                          |
 | `DD_PROCESS_AGENT`         | オプション。Datadog Process Agent は、デフォルトでは無効になっています。Process Agent を有効にするには、これを `true` に設定します。このオプションを変更した場合は、スラグを再コンパイルする必要があります。                                                                                                                                                                                                                                                 |
-| `DD_SITE`                  | オプション。app.datadoghq.eu サービスを使用する場合は、これを `datadoghq.eu` に設定します。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `DD_SITE`                  | *Optional.* If you use the app.datadoghq.eu service, set this to `datadoghq.eu`. Defaults to `datadoghq.com`.                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `DD_AGENT_VERSION`         | *オプション。*ビルドパックは、デフォルトで、パッケージリポジトリから入手できる最新バージョンの Datadog Agent をインストールします。この変数を使用すると、Datadog Agent の以前のバージョンをインストールできます。**注**: Agent のすべてのバージョンをインストールできるわけではありません。このオプションは `DD_AGENT_MAJOR_VERSION` よりも優先されます。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイル](#upgrading-and-slug-recompilation)を参照してください。                                           |
 | `DD_AGENT_MAJOR_VERSION`   | *オプション。*ビルドパックは、デフォルトで、パッケージリポジトリから入手できる最新の 6.x バージョンの Datadog Agent をインストールします。最新の 7.x バージョンの Datadog Agent をインストールするには、この変数を `6` に設定します。Agent バージョンと Python バージョンの関係の詳細については、[Python バージョンのセクション](#python-and-agent-versions)を確認してください。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイル](#upgrading-and-slug-recompilation)を参照してください。     |
 | `DD_DISABLE_HOST_METRICS`  | *オプション。* ビルドパックは、デフォルトで、dyno を実行しているホストマシンのシステムメトリクスを報告します。システムメトリクスの収集を無効にするには、これを `true` に設定します。詳細は、以下の[システムメトリクスのセクション](#system-metrics)を参照してください。                                                                                                                                                                                                                                                                                  |
@@ -184,6 +183,10 @@ heroku config:set DD_ENABLE_HEROKU_REDIS=true
 接続 URL が別の環境変数で定義されている場合、または複数の Redis インスタンスを構成したい場合は、`DD_REDIS_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Heroku Redis と Redis Enterprise Cloud の両方を利用している場合は、それに従って `DD_REDIS_URL_VAR` を設定します。
 
 ```
+heroku config:set REDIS_URL="redis://aaaaa:bbbbb@redis-url"
+heroku config:set REDISCLOUD_URL="redis://xxxxx:yyyyy@redis-cloud-url"
+
+# この環境変数は他の環境変数を指す必要があります。
 heroku config:set DD_REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
 ```
 
@@ -200,6 +203,10 @@ heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
 接続 URL が別の環境変数で定義されている場合、または複数の Postgres インスタンスを構成したい場合は、`DD_POSTGRES_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Postgres インスタンスが 2 つあり、接続文字列が `POSTGRES_URL1` と `POSTGRES_URL2` に格納されている場合は、それに従って `DD_POSTGRES_URL_VAR` を設定します。
 
 ```
+heroku config:set POSTGRES_URL1="postgres://aaaaa:bbbbb@postgres-url-1:5432/dbname"
+heroku config:set POSTGRES_URL2="postgres://xxxxx:yyyyy@postgres-url-2:5432/dbname"
+
+# この環境変数は他の環境変数を指す必要があります。
 heroku config:set DD_POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
 ```
 
@@ -323,7 +330,7 @@ heroku config:add DD_LOG_LEVEL=ERROR
 
 スラグサイズを削減するには、APM 機能を使用していない場合は `DD_APM_ENABLED` を `false` に設定し、プロセスモニタリングを使用していない場合は `DD_PROCESS_AGENT` を `true` に設定します。
 
-## デバッグ作業
+## デバッグ
 
 [情報またはデバッグコマンド][26]のいずれかを実行するには、`agent-wrapper` コマンドを使用します。
 
@@ -368,8 +375,10 @@ RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.co
 RUN touch ${DATADOG_APT_KEYRING}
 RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
+RUN curl -o /tmp/DATADOG_APT_KEY_06462314.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_06462314.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_06462314.public
 RUN curl -o /tmp/DATADOG_APT_KEY_C0962C7D.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_C0962C7D.public" && \
-gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
 RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_F14F620E.public
 RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_382E94DE.public" && \
@@ -385,7 +394,7 @@ COPY entrypoint.sh /
 # DogStatsD および trace-agent ポートを公開
 EXPOSE 8125/udp 8126/tcp
 
-# Datadog コンフィギュレーションをコピー
+# Datadog 構成をコピー
 COPY datadog-config/ /etc/datadog-agent/
 
 CMD ["/entrypoint.sh"]
@@ -448,7 +457,7 @@ Agent (v7.27.0)
 
 ```
 
-### デバッグ作業
+### デバッグ
 
 #### Datadog にデータがない
 

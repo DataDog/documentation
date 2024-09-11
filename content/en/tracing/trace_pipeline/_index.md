@@ -1,6 +1,5 @@
 ---
 title: The Trace Pipeline
-kind: documentation
 aliases:
     - /tracing/ingestion/
     - /tracing/trace_ingestion/
@@ -10,7 +9,7 @@ description: "Learn how to control span ingestion"
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
 
-Collect traces from your intrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through you microservices and easily investigate errors and performance issues.
+Collect traces from your intrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
 
 With APM, both the **ingestion** and the **retention** of traces are fully customizable.
 

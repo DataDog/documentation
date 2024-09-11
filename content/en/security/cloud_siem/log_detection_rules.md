@@ -73,7 +73,7 @@ Third Party allows you to forward alerts from an outside vendor or application. 
 
 {{< img src="security/security_monitoring/detection_rules/threshold.png" alt="Define the search query" style="width:80%;" >}}
 
-Construct a search query using the same logic as a [log explorer search][1].
+Construct a search query using the same logic as a [Log Explorer search][1].
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
@@ -106,7 +106,7 @@ In this example, when greater than five failed logins and a successful login exi
 
 {{< img src="security/security_monitoring/detection_rules/new_term.png" alt="Define the search query" style="width:80%;" >}}
 
-Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+Construct a search query using the same logic as a [Log Explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
 **Note**: The query applies to all ingested logs.
 
@@ -127,7 +127,7 @@ You can also identify users and entities using multiple values in a single query
 
 ### Search query
 
-Construct a search query using the same logic as a log explorer search.
+Construct a search query using the same logic as a Log Explorer search.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
 
@@ -141,7 +141,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 ### Search query
 
-Construct a search query using the same logic as a [log explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
+Construct a search query using the same logic as a [Log Explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
 
 #### User attribute
 
@@ -167,7 +167,7 @@ Do not click the checkbox if you want Datadog to detect all impossible travel be
 
 ### Root query
 
-Construct a search query using the same logic as a [log explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+Construct a search query using the same logic as a [Log Explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
 
 Click **Add Query** to add additional queries.
 
@@ -302,9 +302,9 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 ## Suppression rules
 
-<div class="alert alert-warning"> <a href="https://docs.datadoghq.com/security/suppressions/"> Suppression rules</a> are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="https://docs.datadoghq.com/security/suppressions/#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
-
 Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
+
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
 ## Rule deprecation
 

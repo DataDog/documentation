@@ -1,6 +1,5 @@
 ---
 title: Log Management
-kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
@@ -38,10 +37,17 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/"
     tag: "Blog"
     text: "Filter and correlate logs dynamically using Subqueries"
+  - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+    tag: "Blog"
+    text: "Monitor DNS logs for network and security analysis"
 cascade:
     algolia:
         rank: 70
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  Join an introductory or intermediate enablement session to learn how Datadog Log Management unifies logs, metrics, and traces in a single view, giving you rich context for analyzing log data.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -87,6 +93,11 @@ Start exploring your ingested logs in the [Log Explorer][1].
 - [Analytics][10]: Perform Log Analytics over your indexed logs.
 - [Patterns][11]: Spot log patterns by clustering your indexed logs together.
 - [Saved Views][12]: Use saved views to automatically configure your Log Explorer.
+
+
+{{< learning-center-callout header="Try Introduction to Log Management in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about log collection, querying, analytics, metrics, monitoring, processing, storage, and access control.
+{{< /learning-center-callout >}}
 
 ## Further Reading
 

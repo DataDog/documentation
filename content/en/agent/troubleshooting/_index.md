@@ -1,6 +1,5 @@
 ---
 title: Agent Troubleshooting
-kind: documentation
 aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
     - /agent/faq/common-windows-agent-installation-error-1721

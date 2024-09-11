@@ -1,6 +1,6 @@
 ---
 title: Agent failed to retrieve RMIServer stub
-kind: faq
+
 ---
 
 ```text

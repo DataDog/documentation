@@ -1,8 +1,15 @@
 ---
 is_beta: false
-kind: ガイド
 title: CoScreen の最適化およびトラブルシューティング
 ---
+
+### Why does the audio quality degrade when using the microphone of my Bluetooth headset as input in CoScreen, Zoom, and other tools?
+
+If you're using a Bluetooth headset, the playback quality may degrade when your headset's microphone is selected as an audio input device. You may notice this if you play audio (for example, play a YouTube video) while you are in a CoScreen session. This can occur because your Bluetooth headset has switched to using a different Bluetooth profile.
+
+When only playing audio, Bluetooth headsets typically use the [A2DP profile][2], which is optimized for high audio quality but does not support using the microphone. If you choose your headset microphone as audio input (for example, during a CoScreen session or Zoom meeting) the headset switches to a different profile, usually [HFP][3] or [HSP][4], which supports microphone usage but has lower sound quality. Most Bluetooth headsets can use only one profile at a time.
+
+To avoid this issue, you can use a different audio input—such as a laptop's built-in microphone. You may need to restart your application to regain high  quality audio.
 
 ### 画面共有の品質やリモートコントロールのレイテンシーを最適化するにはどうすればよいですか？
 
@@ -37,11 +44,15 @@ UI がグレーアウトした参加フェーズで止まっているのに、"U
 
 {{< img src="coscreen/assign-to-none.png" alt="macOS のドックのスクリーンショット。CoScreen を右クリックするとメニューが表示され、'Options' にカーソルを合わせると、2 つ目のメニューが表示されます。'Assign To' で、ユーザーは 'None' を選択しています。" style="width:60%;" >}}
 
-### Windows 10 でのトラブルシューティング
+### Windows でのトラブルシューティング
+
+#### CoScreen は Windows の管理者モードでどのように動作しますか？
+
+CoScreen を管理者モードで実行し、同じく管理者モードで起動されたアプリを共有する場合、すべてのリモートユーザーは共有されたウィンドウを操作することができます。しかし、非管理者モードで CoScreen を実行し、管理者モードで起動されたアプリを共有する場合、リモートユーザーはそのウィンドウを操作できません。
 
 #### CoScreen の UI が小さく表示される
 
-Windows 10 コンピューターで CoScreen UI が他のアプリより小さく表示される場合、ディスプレイ設定で構成されたスケーリング係数と CoScreen との相互作用が関係しています。画面のスケーリングと解像度を下げることで、エクスペリエンスを改善することができます。
+Windows コンピューターで CoScreen UI が他のアプリより小さく表示される場合、ディスプレイ設定で構成されたスケーリング係数と CoScreen との相互作用が関係しています。画面のスケーリングと解像度を下げることで、エクスペリエンスを改善することができます。
 
 #### 私の声が聞き取りにくい、またはロボットみたいだ
 
@@ -50,3 +61,6 @@ Windows 10 コンピューターで CoScreen UI が他のアプリより小さ�
 {{< img src="coscreen/windows_screenshot.png" alt="Realtek Audio Console の Windows ダイアログのスクリーンショット。'Voice Recognition' のトグルはオフに設定されています。" style="width:70%;" >}}
 
 [1]: https://packetlosstest.com/
+[2]: https://www.bluetooth.com/specifications/specs/advanced-audio-distribution-profile-1-4/
+[3]: https://www.bluetooth.com/specifications/specs/hands-free-profile/
+[4]: https://www.bluetooth.com/specifications/specs/headset-profile-1-2/

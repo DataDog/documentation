@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
   tag: 설명서
   text: 페이지 매김으로 여러 로그 수집
-kind: 가이드
 title: 로그 분석 API를 사용해 커스텀 보고서 빌드하기
 ---
 
@@ -26,7 +25,7 @@ title: 로그 분석 API를 사용해 커스텀 보고서 빌드하기
 * [여러 그룹별, 고유 개수, 메트릭](#multiple-group-bys-unique-counts-and-metrics) 
 * [페이지 매김](#pagination)
 
-## 필수 구성 요소
+## 사전 필수 요건
 
 - 로그 분석 API를 사용하려면 [API 키][2]와 [애플리케이션 키][3]가 있어야 합니다. 애플리케이션 키를 생성한 사용자는 데이터에 접근할 수 있는 적절한 권한이 있어야 합니다. 아래 예시를 사용할 때 `<DATADOG_API_KEY>`와 `<DATADOG_APP_KEY>`를 내 Datadog API 키와 Datadog 애플리케이션 키로 각각 대체하세요.
 

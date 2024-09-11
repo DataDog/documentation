@@ -1,6 +1,5 @@
 ---
 title: Error Tracking Assistant
-kind: documentation
 is_beta: true
 private: true
 description: Learn about the Error Tracking Assistant.

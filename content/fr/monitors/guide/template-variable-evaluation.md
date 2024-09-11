@@ -1,7 +1,8 @@
 ---
+
 title: Évaluer des template variables
-kind: guide
 ---
+
 Dans les messages de notification de monitor, vous pouvez modifier la sortie des template variables à l'aide de la syntaxe `eval`, qui permet d'effectuer plusieurs opérations et fonctions mathématiques différentes sur des template variables présentant une valeur numérique.
 
 ## Opérateurs
@@ -62,6 +63,7 @@ Les fonctions suivantes utilisent la valeur d'une template variable numérique e
 | Fonction            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | round(var)          | Renvoie la var arrondie au nombre entier le plus proche|
+| round(var, n)       | Renvoie la var arrondie selon le nombre de décimales significatives (n) défini. <br>Exemple : round(12.376, 2) = 12.38|
 | ceil(var)           | Renvoie le plafond de la var (le plus petit nombre entier qui est supérieur ou égal à la var)|
 | floor(var)          | Renvoie le plancher de la var (le plus grand nombre entier qui est inférieur ou égal à la var)|
 | sgn(var)            | Renvoie la valeur de la fonction signe évaluée pour la var :<br>sgn(var) = 1 si var > 0<br>sgn(var) = 0 si var = 0<br>sgn(var) = -1 si var < 0|

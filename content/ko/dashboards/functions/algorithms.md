@@ -1,7 +1,10 @@
 ---
+algolia:
+  tags:
+  - 이상
+  - 이상 그래프
 aliases:
 - /ko/graphing/functions/algorithms/
-kind: 설명서
 title: 알고리즘
 ---
 
@@ -20,7 +23,9 @@ title: 알고리즘
 
 다음은 2분 분량의 동영상 안내입니다.
 
-{{< vimeo 188833506 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/188833506/rendition/1080p/file.mp4?loc=external&signature=96eacc46a18438ce0f45d5b57952cd924482f8f18e011ceb7b76b6ce1b4587a2" poster="/images/poster/algorithms.png" >}}
+
+**계절성**: 기본적으로 `robust` 및 `agile` 알고리즘은 [주간 계절성][4]을 사용합니다. 이를 위해서는 기준선을 계산하기 위해 3주간의 기록 데이터가 필요합니다.
 
 자세한 내용은 [Anomaly Monitor][1] 페이지를 참조하세요.
 
@@ -66,6 +71,7 @@ title: 알고리즘
     {{< nextlink href="/dashboards/functions/timeshift" >}}타임시프트: 타임라인을 따라 메트릭 데이터 포인트를 이동합니다. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ko/monitors/create/types/anomaly/
-[2]: /ko/monitors/create/types/outlier/
-[3]: /ko/monitors/create/types/forecasts/#forecast-algorithms
+[1]: /ko/monitors/types/anomaly/
+[2]: /ko/monitors/types/outlier/
+[3]: /ko/monitors/types/forecasts/?tab=linear#algorithms
+[4]: /ko/monitors/types/anomaly/?s=anomaly%20algorithm#seasonality

@@ -26,7 +26,7 @@ guid: 8a60c34f-ecde-4269-bcae-636e6cbce98f
 integration_id: ceph
 integration_title: Ceph
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: ceph.

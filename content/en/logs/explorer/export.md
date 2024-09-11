@@ -1,6 +1,5 @@
 ---
 title: Export Logs
-kind: documentation
 description: 'Export your Log Explorer view to reuse it later or in different contexts.'
 aliases:
     - /logs/export
@@ -28,7 +27,7 @@ At any moment, and depending on your current aggregation, **export** or **save**
 - **CSV** (for individual logs and transactions). You can export up to 100,000 logs at once for individual logs, 300 for Patterns, and 500 for Transactions. You can also download a timeseries, top list, or table view as a CSV file.
 - **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][6] available for this feature.
 
-{{< img src="logs/explorer/export2.png" alt="Search Filter" style="width:100%;" >}}
+{{< img src="logs/explorer/export3.png" alt="Search Filter" style="width:100%;" >}}
 
 You can also save individual logs to a notebook by selecting `Save to notebook` in the log event side panel. Logs saved to notebooks are displayed in a reader-friendly format, and this display is saved in the Notebook even after the log event itself has aged out of retention.
 

@@ -21,7 +21,7 @@ guid: 406b274b-c44d-4499-a329-efd053b3f538
 integration_id: kube-apiserver-metrics
 integration_title: Métriques du serveur d'API Kubernetes
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: kube_apiserver.

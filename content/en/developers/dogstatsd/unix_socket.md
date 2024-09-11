@@ -1,6 +1,5 @@
 ---
 title: DogStatsD over Unix Domain Socket
-kind: documentation
 description: 'Usage documentation for DogStatsD over Unix Domain Sockets'
 aliases:
     - /developers/metrics/unix_socket/

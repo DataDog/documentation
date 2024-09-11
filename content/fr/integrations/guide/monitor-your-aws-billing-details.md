@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/how-do-i-monitor-my-aws-billing-details
-kind: guide
+
 title: Surveiller votre facture AWS
 ---
 

@@ -18,13 +18,12 @@ further_reading:
 - link: /data_security/real_user_monitoring/
   tag: ドキュメント
   text: RUM のデータセキュリティ
-- link: /real_user_monitoring/session_replay/privacy_options
+- link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
 - link: /sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
-kind: documentation
 title: データ関連リスクの低減
 ---
 
@@ -76,7 +75,7 @@ Datadog の目的は、お客様のインフラストラクチャーやサービ
 
 ログデータのセキュリティに関するリスクを低減するための重要なアプローチは、アクセス制御です。Datadog でこれを行う方法については、[ログに RBAC を設定する方法][14]と[ログの RBAC 権限][15]をお読みください。
 
-### ライブプロセスとコンテナ
+### Live processes and containers
 
 ライブプロセスやライブコンテナを監視しているときに機密データが漏れるのを防ぐために、Datadog はプロセスの引数や Helm チャートで、いくつかのデフォルトの機密キーワードスクラビングを提供します。[`custom_sensitive_words` 設定][16]を使用してプロセスコマンドまたは引数内の追加の機密シーケンスを難読化し、[`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` 環境変数][17]を使用してコンテナスクラビングワードリストに追加できます。
 
@@ -84,9 +83,9 @@ Datadog の目的は、お客様のインフラストラクチャーやサービ
 
 Datadog のトレーシングライブラリは、アプリケーション、サービス、テスト、パイプラインをインスツルメントし、Agent を通じて Datadog にパフォーマンスデータを送信するために使用されます。トレースとスパンのデータ (およびその他多数) は、以下の製品で使用するために生成されます。
 
-- アプリケーションパフォーマンスモニタリング (APM)
+- Application Performance Monitoring (APM)
 - Continuous Profiler
-- CI Visibility （CI/CDの可視化）
+- CI Visibility
 - Application Security Management
 
 トレーシングライブラリのソースデータの管理方法、デフォルトの基本的なセキュリティ設定、トレース関連要素のカスタム難読化、スクラビング、除外、および変更についての詳細情報は、[トレースデータのセキュリティのための Agent とトレーサーの構成][18]を参照してください。
@@ -95,7 +94,7 @@ Datadog のトレーシングライブラリは、アプリケーション、サ
 
 Datadog を使用すると、AWS Lambda 関数の JSON リクエストおよびレスポンスのペイロードを収集し、視覚化することができます。リクエストまたはレスポンスの JSON オブジェクト内の機密データ (アカウント ID やアドレスなど) が Datadog に送信されないようにするには、特定のパラメーターが Datadog に送信されないようにスクラブすることができます。詳しくは、[AWS Lambda のペイロードコンテンツの難読化][19]をお読みください。
 
-### Synthetic モニタリング
+### Synthetic Monitoring
 
 Synthetic テストは、世界中のテスト拠点からのリクエストとビジネストランザクションをシミュレートします。構成、アセット、結果、資格情報の暗号化に関する考慮事項や、テストのプライバシーオプションの使用方法については、[Synthetic モニタリングのデータセキュリティ][20]をお読みください。
 
@@ -105,7 +104,7 @@ Synthetic テストは、世界中のテスト拠点からのリクエストと�
 
 セッションリプレイのプライバシー オプションのデフォルトは、エンドユーザーのプライバシーを保護し、組織の機密情報が収集されないようにすることです。セッションリプレイの要素のマスク、オーバーライド、非表示については、[セッションリプレイのプライバシー オプション][22]を参照してください。
 
-### データベース モニタリング
+### Database Monitoring
 
 データベースモニタリング Agent は、Datadog インテークに送信されたすべてのクエリのバインドパラメータを難読化します。このため、データベースに保存されているパスワード、PII (個人を特定できる情報) などの機密情報は、クエリのメトリクス、クエリサンプル、または説明プランで表示不可能になります。データベースのパフォーマンスモニタリングに関わる他の種類のデータに対するリスク軽減については、[データベースモニタリングデータの収集][23]をお読みください。
 
@@ -163,7 +162,7 @@ Continuous Integration のパイプラインとテスト
 [19]: /ja/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ja/data_security/synthetics/
 [21]: /ja/real_user_monitoring/browser/advanced_configuration/
-[22]: /ja/real_user_monitoring/session_replay/privacy_options
+[22]: /ja/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /ja/database_monitoring/data_collected/#sensitive-information
 [24]: /ja/getting_started/tagging/
 [25]: /ja/tracing/glossary/

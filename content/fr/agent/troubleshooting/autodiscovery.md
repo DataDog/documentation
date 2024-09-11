@@ -1,6 +1,5 @@
 ---
 title: Dépannage d'Autodiscovery
-kind: documentation
 aliases:
   - /fr/agent/autodiscovery/troubleshooting
 further_reading:

@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Centre d'alerte Google Workspace
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_workspace_alert_center
 public_title: Centre d'alerte Google Workspace

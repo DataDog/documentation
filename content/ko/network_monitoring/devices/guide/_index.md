@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-meraki/
   tag: 블로그
   text: Datadog으로 Cisco Meraki 모니터링하기
-kind: 가이드
 private: true
 title: NDM 가이드
 ---

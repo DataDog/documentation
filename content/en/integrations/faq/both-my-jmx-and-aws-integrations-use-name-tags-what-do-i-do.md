@@ -1,6 +1,6 @@
 ---
 title: Both my JMX and AWS integrations use "name" tags. What do I do?
-kind: faq
+
 ---
 
 The "name" tag is one of many host-level tags that are applied by default from the [AWS integration][1]. But it is also a tag that's often applied by default at the metric-level by our JMX-based integrations (based on the "bean names" matched in JMX). Both tags are useful, but using both at the same time can cause tag-conflicts that result in inappropriately aggregated values. So what to do about this?

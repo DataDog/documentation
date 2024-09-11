@@ -1,6 +1,5 @@
 ---
 title: Exploring APIs
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"
@@ -28,7 +27,7 @@ The [API Catalog][1] shows all endpoints in all environments in your Datadog org
 
 The following example shows how to scope the displayed data to a specific environment and `cluster-name`:
 
-{{< img src="tracing/api_catalog/api-catalog-scope4.mp4" alt="Showing how changing scope settings changes the metrics shown in API Catalog" video="true" >}}
+{{< img src="tracing/api_catalog/api-catalog-scope4.png" alt="Showing how changing scope settings changes the metrics shown in API Catalog" >}}
 
 ## Detecting underperforming APIs and identifying opportunities for optimization
 
@@ -42,7 +41,7 @@ In the details page, you can:
 - View the **Requests & Errors** graph and correlated **Response Code** graph to identify issues.
 - Navigate to related telemetry like traces, logs, and errors.
 
-{{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces2.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
+{{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces3.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
 
 The graphs on the details page are initially scoped to the same settings as the **Explorer** page. You can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
 

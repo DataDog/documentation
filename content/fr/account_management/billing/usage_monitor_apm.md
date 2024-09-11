@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Consulter les données d'utilisation de l'APM et configurer des alertes
 ---
 
@@ -8,42 +7,49 @@ Consultez la page [Tarification d'APM][2] pour comprendre comment l'APM et le tr
 
 ## Informations sur l'utilisation de l'APM
 
-Si vous êtes administrateur, vous pouvez consulter les informations relatives à l'utilisation de votre compte sur la page [Usage][3], qui est mise à jour toutes les 72 heures.
+Si vous êtes administrateur, vous pouvez consulter les informations relatives à l'utilisation de votre compte sur la page [Usage][3], qui est mise à jour toutes les 24 heures.
 
-| Métrique         | Description                                                                              |
-|----------------|------------------------------------------------------------------------------------------|
-| Hosts d'APM      | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel. |
-| Indexed Spans | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.         |
-| Fargate Tasks  | Affiche le nombre total moyen de tâches Fargate pour toutes les heures du mois actuel.              |
+| Dimension          | Description                                                                                    |
+|--------------------|------------------------------------------------------------------------------------------------|
+| Hosts d'APM          | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel.       |
+| Tâches Fargate d'APM  | Affiche la moyenne de tâches Fargate distinctes pour les périodes de 5 minutes du mois actuel.   |
+| Ingested Spans     | Affiche la somme de tous les octets ingérés depuis des spans ingérés au cours du mois actuel.                      |
+| Indexed Spans      | Affiche la somme des spans indexés pendant le mois en cours.                                   |
 
-## Définir une alerte pour un host d'APM
+Chaque host APM et tâche APM Fargate vous octroie une partie du volume ingéré et indexé : 
+- Spans ingérés : 150 Go de spans ingérés par host APM et 10 Go de spans ingérés par tâche APM Fargate.
+- Spans indéxés : 1 million de spans indéxés par host APM et 65 000 spans indéxés par tâche APM Fargate.
 
-Pour être notifié lorsqu'un déploiement de code accroît le nombre de hosts qui envoient des traces, configurez un monitor sur le nombre de hosts APM. Vous recevrez alors une notification dès que le nombre de hosts au sein de votre infrastructure augmente de manière imprévue, peu importe la portée définie (`prod`, `availability-zone`, etc.) :
+## Définir des alertes basées sur les volumes ingérés/indexés
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Vue Analytics" video="true" style="width:90%;">}}
+### Définir des alertes sur les octets ingérés
 
-1. Accédez à Monitors -> New Monitor.
-2. Configurez un [nouveau monitor de métrique[4] avec `datadog.apm.host_instance`.
-3. Définissez un seuil d'avertissement ou d'erreur.
-4. Indiquez une notification explicite. Exemple : « Le nombre de hosts sur cet environnement vient de dépasser la valeur seuil spécifiée. Réduisez le nombre de hosts d'APM activés.
+Pour vous assurer que l'utilisation de spans reste dans les limites de l'allocation que les hosts APM et les tâches APM Fargate vous accordent, configurez des monitors pour vous alerter lorsque votre utilisation mensuelle sʼapproche de la limite de votre allocation.
 
-## Définir une alerte sur des spans indexées
+1. Créez un [monitor de métrique][8].
+2. Saisissez `datadog.estimated_usage.apm.ingested_bytes` pour la requête métrique.
+3. Définissez la fenêtre d'évaluation du monitor sur `current month (MTD)`. Cela permet de s'assurer que le monitor observe l'utilisation depuis le début du mois. Pour en savoir plus sur les fenêtres de temps cumulé, consultez la documentation relative aux [monitors][9].
+4. Définissez le **seuil d'alerte** et un **seuil d'avertissement** facultatif pour vous alerter lorsque le volume ingéré atteint 80 % ou 90 % de votre allocation. 
+5. Saisissez un nom pour le monitor. Définissez la notification pour envoyer une alerte à votre équipe lorsque les volumes ingérés sont trop élevés.
 
-Pour être notifié lorsqu'un déploiement de code entraîne une augmentation soudaine du nombre de spans indexées générés, configurez des [monitors d'analyse][5] pour les spans indexées. Vous recevrez alors une notification dès que le nombre de spans indexées au sein d'une infrastructure augmente de manière imprévue, peu importe le contexte défini (par exemple `service` ou `availability-zone`) :
+{{< img src="account_management/billing/monitor_usage_apm.png" alt="Une page de configuration de monitor de métrique affichant datadog.estimated_usage.apm.ingested_bytes comme requête de métrique" width="80%" >}}
 
-1. Accédez à la [vue Analytics][6] dans l'APM.
-2. Sélectionnez `env` (vous pouvez sélectionner `*`).
-3. Sélectionnez `count` (vous pouvez sélectionner `*`).
-4. Sélectionnez Export -> Export to Monitor.
-5. Définissez le nombre de spans indexées à partir duquel envoyer un avertissement ou une erreur.
-6. Indiquez une notification explicite. Exemple : « Le nombre de spans indexées pour ce service vient de dépasser le seuil spécifié. Définissez un filtre d'exclusion supplémentaire ou augmentez le taux d'échantillonnage pour revenir à des valeurs normales. »
+Pour réduire efficacement vos volumes ingérés, consultez ce [guide][7] ou la documentation sur les [mécanismes d'ingestion][10].
 
-En savoir plus sur les [filtres de rétention][7].
+### Définir des alertes sur des spans indexées
+
+De même, vous pouvez définir des alertes pour vous assurer que votre budget pour vos spans indexés ne dépasse pas certaines limites. Créez un monitor de métrique à l'aide de la métrique `datadog.estimated_usage.apm.indexed_spans` pour recevoir des alertes lorsque votre volume de spans indexés depuis le début du mois dépasse un seuil défini.
+
+Pour réduire le nombre de spans indexés, vérifiez la présence de filtres de rétention dans votre configuration. Pour en savoir plus sur les filtres de rétention, consultez la documentation relative à la [rétention de traces][11].
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /fr/monitors/create/types/apm/?tab=traceanalytics#monitor-creation
-[6]: https://app.datadoghq.com/apm/analytics
-[7]: /fr/tracing/trace_retention/
+[5]: /fr/monitors/types/apm/?tab=traceanalytics#monitor-creation
+[6]: https://app.datadoghq.com/apm/traces?viz=timeseries
+[7]: /fr/tracing/guide/trace_ingestion_volume_control/
+[8]: https://app.datadoghq.com/monitors/create/metric
+[9]: /fr/monitors/configuration/?tab=thresholdalert#cumulative-time-windows
+[10]: /fr/tracing/trace_pipeline/ingestion_mechanisms/
+[11]: /fr/tracing/trace_pipeline/trace_retention/

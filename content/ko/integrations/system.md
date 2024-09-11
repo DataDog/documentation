@@ -13,7 +13,7 @@ git_integration_title: 시스템
 integration_id: 시스템
 integration_title: 시스템 점검
 is_public: true
-kind: 통합
+custom_kind: integration
 name: 시스템
 newhlevel: true
 public_title: Datadog-시스템 통합

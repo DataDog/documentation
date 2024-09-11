@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/
   tag: ドキュメント
   text: トレースライブラリをアプリケーションに追加する
-kind: documentation
 title: 互換性要件
 type: multi-code-lang
 ---

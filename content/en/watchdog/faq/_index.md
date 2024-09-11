@@ -1,6 +1,6 @@
 ---
 title: Watchdog FAQ
-kind: faq
+
 cascade:
   - private: true
 ---

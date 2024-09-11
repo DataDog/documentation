@@ -17,13 +17,15 @@ further_reading:
 - link: /service_management/workflows/
   tag: ドキュメント
   text: Workflow Automation について
-kind: ドキュメント
+- link: https://www.datadoghq.com/blog/datadog-ciem-aws-iam-access-analyzer/
+  tag: ブログ
+  text: AWS の権限ギャップを Datadog CIEM と AWS IAM Access Analyzer で特定し、是正
 title: Cloud Security Management Identity Risks
 ---
 
-Cloud Security Management Identity Risks (CSM Identity Risks) は、組織の IAM リスクを詳細に視覚化します。IAM ベースの攻撃からクラウドインフラストラクチャーを保護するために、プロアクティブかつ継続的にアイデンティティリスクを検出して解決することができます。
+Cloud Security Management Identity Risks (CSM Identity Risks) は、クラウド全体での権限リスクを軽減する Cloud Infrastructure Entitlement Management (CIEM) 製品です。クラウドインフラストラクチャーを継続的にスキャンし、残存する管理権限、権限昇格、権限ギャップ、広範囲にわたる影響範囲、アカウント間アクセスなどの問題を検出します。また、IAM を介した攻撃からクラウドインフラストラクチャーを保護するため、継続的かつ積極的にアイデンティティリスクを解決することができます。迅速な是正策として、[縮小版ポリシー][4]、[Datadog Workflows][3] ベースの是正策、クラウドコンソールへのディープリンクを提案します。
 
-<div class="alert alert-info">現時点では、CSM Identity Risks は AWS でのみ利用可能です。</div>
+<div class="alert alert-info">CSM Identity Risks は、AWS、Azure、GCP で利用可能です。</div>
 
 ## アイデンティティリスクの確認
 
@@ -33,21 +35,35 @@ CSM Identity Risk の検出対象には、ユーザー、ロール、グルー�
 
 {{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Explorers ページ" width="100%">}}
 
-## アイデンティティリスクの修正
+## アイデンティティリスクの是正
 
-詳細な洞察と修正のヘルプについては、**Insights** タブをクリックしてください。次の例では、**Insights** タブにプロビジョニングされた権限の使用状況が表示されます。
+詳細な洞察や是正のヘルプは、**Remediation** タブをクリックしてください。次の例では、**Remediation** タブにプロビジョニングされた権限の使用状況が表示されています。
 
-{{< img src="security/identity_risks/side_panel_insights_tab.png" alt="アイデンティティリスクサイドパネルの Insights タブには、プロビジョニングされた権限の使用状況が表示されます" width="80%">}}
+{{< img src="security/identity_risks/side_panel_remediation_tab.png" alt="アイデンティティリスクのサイドパネルにある Remediation タブでは、プロビジョニングされた権限の使用状況が表示されます" width="80%">}}
 
-**View Suggested Policy** をクリックすると、実際の使用状況に基づいてポリシーの縮小案が表示されます。
+実際の使用状況に基づいて提案された縮小版ポリシーを確認するには、**View Suggested Policy** をクリックしてください。
 
-{{< img src="security/identity_risks/downsized_policy.png" alt="Suggested downsized policy ダイアログでポリシー縮小の提案を確認します" width="100%">}}
+{{< img src="security/identity_risks/downsized_policy.png" alt="Suggested downsized policy ダイアログでポリシーの縮小に関する提案を確認する" width="100%">}}
 
-アイデンティティリスクを修正するには、**Fix in AWS** をクリックして AWS IAM コンソールのリソースを更新します。Jira 課題を作成してチームに割り当てるには、**Create Jira issue** をクリックします。詳細については、[Cloud Security Management 課題のための Jira 課題の作成][2]を参照してください。
+アイデンティティリスクを是正するには、**Fix in AWS** をクリックして AWS IAM コンソール内のリソースを更新します。Jira の問題を作成してチームに割り当てるには、**Add Jira issue** をクリックします。詳細は、[Cloud Security Management の問題に関する Jira 課題を作成する][2]を参照してください。
 
-{{< img src="security/identity_risks/side_panel_action_buttons.png" alt="サイドパネルのアクションボタンを使用してアイデンティティリスクを修正" width="100%">}}
+{{< img src="security/identity_risks/side_panel_action_buttons_2.png" alt="サイドパネルのアクションボタンを使ってアイデンティティリスクを是正する" width="100%">}}
 
-また、[Workflow Automation][3] を活用することで、アイデンティティリスクに対する自動化されたワークフローを作成することもできます (人の関与の有無は問いません)。詳細については、[Workflow Automation によるセキュリティワークフローの自動化][3]を参照してください。
+Terraform の是正機能を利用して、根本的なアイデンティティリスクを修正するコード変更を GitHub でプルリクエストとして生成したり、[Workflow Automation][3] を活用して、アイデンティティリスクの自動ワークフロー (人間が関与する場合としない場合の両方) を作成したりすることも可能です。
+
+## AWS IAM Access Analyzer インテグレーション
+
+Datadog CIEM は、[AWS IAM Access Analyzer][5] と統合して、権限ギャップの検出精度を向上させます。AWS IAM Access Analyzer を使用している場合、Datadog CIEM は自動的に未使用のアクセス情報を活用し、権限ギャップの検出や縮小版ポリシーの提案を強化します。
+
+<div class="alert alert-info">AWS IAM Access Analyzer を初めて有効にする場合、この有効化に関連して追加の AWS 費用が発生する可能性があり、AWS IAM Access Analyzer のインサイトが利用可能になるまで最大 2 時間かかる場合があります。</div>
+
+{{< img src="security/identity_risks/aws_iam_access_analyzer.png" alt="権限ギャップの検出とポリシーの提案を強化する AWS IAM Access Analyzer に関するバナー" width="100%">}}
+
+## ビデオウォークスルー
+
+次のビデオでは、CSM Identity Risks を有効にして使用する方法の概要を説明しています。
+
+{{< img src="security/csm/how-to-use-csm-identity-risks.mp4" alt="CSM Identity Risks のインストールと使用方法の概要を説明するビデオ" video=true >}}
 
 ## その他の参考資料
 
@@ -56,3 +72,5 @@ CSM Identity Risk の検出対象には、ユーザー、ロール、グルー�
 [1]: https://app.datadoghq.com/security/identities
 [2]: /ja/security/cloud_security_management/guide/jira
 [3]: /ja/security/cloud_security_management/workflows
+[4]: /ja/security/cloud_security_management/identity_risks/#:~:text=Click%20View%20Suggested%20Policy%20to%20view%20a%20suggested%20downsized%20policy%20based%20on%20the%20actual%20usage.
+[5]: https://aws.amazon.com/iam/access-analyzer/

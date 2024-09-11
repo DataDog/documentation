@@ -1,6 +1,5 @@
 ---
 title: Review and Remediate
-kind: guide
 disable_toc: true
 ---
 

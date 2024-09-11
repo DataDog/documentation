@@ -22,6 +22,7 @@ author:
 categories:
 - クラウド
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: mendix
 integration_title: Mendix
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: mendix
 public_title: Mendix
@@ -79,27 +79,27 @@ Mendix では、アプリケーションの作成、変更、インテグレー�
 
 **注**: このインテグレーションは、Mendix Cloud および Mendix Cloud Dedicated のデプロイメントモデルに適用されます。
 
-## 計画と使用
+## セットアップ
 
 Mendix Cloud 上で動作する Mendix アプリケーションの Datadog インテグレーションを有効にするには、[Datadog for Mendix cloud のドキュメント][4]をご覧ください。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 インテグレーションを有効にすると利用できるメトリクスの一覧は、[Mendix 公式ドキュメント][5]をご覧ください。
 
-### ヘルプ
+### イベント
 
 Mendix インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Mendix インテグレーションには、サービスのチェック機能は含まれません。
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Mendix サポート][6]までお問い合わせください。
 

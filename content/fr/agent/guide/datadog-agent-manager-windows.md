@@ -1,11 +1,11 @@
 ---
-title: Datadog Agent Manager pour Windows
-kind: guide
 further_reading:
-  - link: /agent/basic_agent_usage/windows/
-    tag: Documentation
-    text: Utilisation de base de l'Agent pour l'Agent Windows
+- link: /agent/basic_agent_usage/windows/
+  tag: Documentation
+  text: Utilisation de base de l'Agent pour l'Agent Windows
+title: Datadog Agent Manager pour Windows
 ---
+
 ## Présentation
 
 L'interface graphique de Datadog Agent Manager repose sur l'utilisation d'un navigateur. Vous pouvez configurer le port sur lequel elle s'exécute dans votre fichier `datadog.yaml`. L'interface graphique est désactivée lorsque le port est défini sur `-1`. Par défaut, elle est activée sur le port 5002, pour Windows et Mac, et désactivée sur Linux.
@@ -40,8 +40,7 @@ Une fois l'Agent [installé][1] sur votre host Windows, lancez Datadog Agent Man
 * Faites un clic droit sur Datadog Agent Manager.
 * Choisissez `Exécuter en tant qu'administrateur`.
 
-Depuis une invite Powershell avec élévation de privilèges :
-
+Depuis une invite PowerShell avec élévation de privilèges :
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
 ```

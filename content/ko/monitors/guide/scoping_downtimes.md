@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/guide/suppress-alert-with-downtimes
   tag: 가이드
   text: 다운타임 API 및 UI를 통해 경고 억제
-kind: 가이드
 title: 다운타임 범위 지정
 ---
 

@@ -18,7 +18,6 @@ further_reading:
 - link: network_monitoring/performance/guide/
   tag: Documentation
   text: Apprendre à explorer vos données RUM
-kind: documentation
 title: Configuration de la surveillance RUM pour React Native
 type: multi-code-lang
 ---

@@ -1,6 +1,5 @@
 ---
 title: Migrating from the V1 Hourly Usage APIs to V2
-kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

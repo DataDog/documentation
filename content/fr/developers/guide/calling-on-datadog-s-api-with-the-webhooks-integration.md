@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
-kind: guide
+
 title: Appeler l'API de Datadog avec l'intégration Webhooks
 ---
 

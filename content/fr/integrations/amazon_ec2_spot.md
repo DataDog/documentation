@@ -14,7 +14,7 @@ integration_id: amazon-ec2-spot
 integration_title: "Amazon\_EC2\_Spot"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_ec2_spot
 public_title: "Intégration Datadog/Amazon\_EC2\_Spot"

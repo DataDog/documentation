@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: Dépannage de l'Agent
   text: Envoyer un flare avec l'Agent
-kind: documentation
 title: Statut d'un check de l'Agent
 ---
 

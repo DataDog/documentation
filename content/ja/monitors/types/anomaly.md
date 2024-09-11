@@ -1,4 +1,9 @@
 ---
+algolia:
+  rank: 70
+  tags:
+  - 異常値
+  - 異常値モニター
 aliases:
 - /ja/guides/anomalies
 - /ja/monitors/monitor_types/anomaly
@@ -17,7 +22,6 @@ further_reading:
 - link: dashboards/functions/algorithms/#anomalies
   tag: ドキュメント
   text: 異常関数
-kind: documentation
 title: 異常検知モニター
 ---
 
@@ -53,8 +57,19 @@ Datadog にレポートが送信されるメトリクスはすべて、モニタ
 トリガーウィンドウ
 : メトリクスの異常が検知されアラートを発するまでに必要な時間。**注意**: アラート設定ウィンドウがあまりに短いと、疑似ノイズにより不正アラームが発せられることがあります。
 
-リカバリウィンドウ
-: メトリクスを異常とみなさないでアラートをリカバリするために必要な時間。
+リカバリーウィンドウ
+: メトリクスが異常とみなされなくなり、アラートが回復するまでに必要な時間。**Recovery Window** は、**Trigger Window** と同じ値に設定することをお勧めします。
+
+**注**: **Recovery Window** の許容値の範囲は、モニターが回復とアラート条件を同時に満たすことができないように、**Trigger Window** と **Alert Threshold** に依存します。
+例:
+* `Threshold`: 50%
+* `Trigger window`: 4h
+リカバリーウィンドウの許容値の範囲は、121 分 (`4h*(1-0.5) +1 min = 121 minutes`) から 4 時間の間です。リカバリーウィンドウを 121 分未満に設定すると、4 時間の時間枠で 50% の異常ポイントが発生し、最後の 120 分では異常ポイントが発生しない可能性があります。
+
+他の例:
+* `Threshold`: 80%
+* `Trigger window`: 4h
+リカバリーウィンドウの許容値の範囲は 49 分 (`4h*(1-0.8) +1 min = 49 minutes`) から 4 時間の間です。
 
 ### 高度なオプション
 
@@ -145,13 +160,13 @@ Robust
 
 ## 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][10]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
 
 ## API
 
-エンタープライズレベルのお客様は、[モニターの作成 API エンドポイント][11]を使用して異常検知モニターを作成できます。Datadog では、[モニターの JSON をエクスポート][12]して API のクエリを作成することを**強く推奨**しています。Datadog の[モニター作成ページ][1]を使用することで、顧客はプレビューグラフと自動パラメーター調整の恩恵を受け、不適切に構成されたモニターを回避できます。
+Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-**注**: 異常検知モニターは、エンタープライズレベルのお客様専用のサービスです。プロレベルのお客様で、異常検知モニターのご利用を希望される場合は、カスタマーサクセス担当者にお問い合わせいただくか、[Datadog 請求担当チーム][13]にメールでお問い合わせください。
+**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
 異常モニターは、他のモニターと[同じ API][14] を使用して管理されます。これらのフィールドは、異常モニターに固有です。
 

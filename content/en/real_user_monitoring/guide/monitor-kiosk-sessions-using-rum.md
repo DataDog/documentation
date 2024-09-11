@@ -1,6 +1,6 @@
 ---
 title: Monitor Kiosk Sessions Using RUM
-kind: guide
+
 description: Guide for monitoring kiosk sessions with RUM.
 further_reading:
 - link: '/real_user_monitoring/platform/dashboards/'
@@ -80,7 +80,7 @@ RUMMonitor.shared().stopSession()
 This feature requires RUM Android SDK version >= 1.19.0. See installation instructions [here][1]. 
 
 ```kotlin
-GlobalRum.get().stopSession()
+GlobalRumMonitor.get().stopSession()
 ```
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/android/

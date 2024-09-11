@@ -15,7 +15,6 @@ further_reading:
   tag: Documentation
   text: Résoudre les problèmes courants rencontrés avec la solution Application Security
     Management de Datadog
-kind: documentation
 title: Règles WAF In-App
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Utilisation de base de l'Agent pour Amazon\_Linux"
-kind: documentation
 platform: "Amazon\_Linux"
 aliases:
   - /fr/guides/basic_agent_usage/amazonlinux/

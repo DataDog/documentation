@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: Blog
   text: Conseils utiles pour dimensionner parfaitement vos workloads Kubernetes
-kind: documentation
 title: Utilisation des ressources Kubernetes
 ---
 

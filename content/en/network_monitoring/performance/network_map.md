@@ -1,6 +1,5 @@
 ---
 title: Network Map
-kind: documentation
 description: Map your Network data across all your tags.
 aliases:
     - /network_performance_monitoring/network_map/

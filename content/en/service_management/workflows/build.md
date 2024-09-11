@@ -1,6 +1,5 @@
 ---
 title: Build workflows
-kind: documentation
 disable_toc: false
 aliases:
 - /workflows/build
@@ -43,14 +42,10 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 
 ## Create a workflow with AI
 
-{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
-AI functionality for Workflow Automation is in private beta.
-{{< /callout >}}
-
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
 1. From the [Workflow Automation][1] page, click **New Workflow**.
-1. Click **Auto Generate**.
+1. Click **<i class="icon-bits-ai"></i> Build with Bits AI**.
 1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to create your app.
 
@@ -74,22 +69,14 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. Click **Add Step** to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
-1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
+1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon (**+**) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
 ## Test a step
 
-To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
-
-To test a workflow step:
-1. Click **Test** in the step **Inputs** section.
-1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
-1. Click **Test** to test the action.
-1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
-
-Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
+See the test and debug page for information on [how to test a step][11].
 
 ## Publish a workflow
 
@@ -111,7 +98,7 @@ Creating useful workflows sometimes necessitates passing data from one step to a
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
-{{< img src="service_management/workflows/context-variables4.png" alt="The Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables5.png" alt="The Context Variables tab" >}}
 
 Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
 
@@ -125,11 +112,11 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 
 If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
-{{< img src="service_management/workflows/step-outputs1.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
+{{< img src="service_management/workflows/step-outputs2.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
 ### Input parameters
 
-Use input parameters to pass data into a workflow. You can use input parameters in workflows that:
+Input parameters are immutable key-value pairs that you can use to pass data into a workflow. You can use input parameters in workflows that:
 - are triggered manually, such as from a Dashboard.
 - use mention triggers, such as Monitors and Security Signal Notification Rules.
 
@@ -141,9 +128,9 @@ To add an input parameter:
 
 To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-{{< img src="service_management/workflows/input-parameter2.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
-
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
+
+{{< img src="service_management/workflows/input-parameter3.png" alt="Hover over a counter to see which steps are using the parameter." style="width:60%;">}}
 
 You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
 
@@ -155,7 +142,28 @@ Source object variables are properties of the triggering event that are resolved
 
 All the variables of the Source object are visible in the Context Variables tab.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
+
+## Workflow notifications
+
+You can configure your workflow to send you a notification on success or failure. The following integrations are supported:
+- Slack
+- Microsoft Teams
+- PagerDuty
+- Email
+
+To add a notification:
+1. In the workflow configuration panel, scroll down to the **Notifications** section.
+1. To add a notification if the workflow succeeds:
+   1. Click the plus (`+`) icon next to **Notify on success**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+1. To add a notification if the workflow fails:
+   1. Click the plus (`+`) icon next to **Notify on failure**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
 
 ## Error handling
 
@@ -174,14 +182,26 @@ You can add an error path for the workflow to follow if it encounters an error.
 
 To add an error path:
 1. Hover over the step where you'd like to add an error path.
-1. Click and drag the **Error path** icon to place a new error path on the canvas.
+1. Click and drag the **Error path** icon {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} to place a new error path on the canvas.
 1. Select a workflow step to add to the error path.
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
 1. When you're done configuring your error path steps, click **Save** to apply your changes.
 
-{{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
+## Wait until condition
 
-### Edit a workflow with JSON
+Some actions allow you to add a condition that must be met before a workflow can mark a step as complete and continue.
+
+To add a condition:
+1. Click on the step in the workflow canvas.
+1. In the **Wait until condition** section, use the dropdown to select a preconfigured condition, or select **Configure custom wait condition** and build your own conditional.
+   - The list of available preconfigured conditions depends on the action.
+   - Conditional statement variables can be either a String, a Number, a Boolean, or a step output variable.
+   - Only the current step's output variables can be used in a custom conditional statement.
+1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
+
+{{< img src="service_management/workflows/wait-until-condition2.png" alt="An example of wait until condition" style="width:100%;" >}}
+
+## Edit a workflow with JSON
 
 Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
 - **Format JSON**: Beautify your JSON.
@@ -190,6 +210,8 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
 
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
@@ -200,4 +222,5 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
-
+[10]: https://datadoghq.slack.com/
+[11]: /service_management/workflows/test_and_debug/#test-a-step

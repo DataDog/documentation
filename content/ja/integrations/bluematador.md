@@ -23,6 +23,7 @@ author:
 categories:
 - アラート設定
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: blue-matador
 integration_title: Blue Matador
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: bluematador
 public_title: Blue Matador
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
   media: []
@@ -72,27 +73,27 @@ Blue Matador の Datadog インテグレーションを使用すると、Blue Ma
 
 Blue Matador で監視し、Datadog にインポートできるイベントやメトリクスの一覧については、Blue Matador の[モニターのページ][3]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 Blue Matador のイベントを Datadog にインポートするには、[Datadog API キー][4]を使用して、新しい通知メソッドを Blue Matador に作成します。
 
 **注**: 既に存在しているイベントは Datadog にインポートされず、新しいイベントが発生するとインポートされます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Blue Matador インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 すべてのイベントが Datadog のイベントストリームに送信されます。
 
-### ヘルプ
+### サービスチェック
 
 Blue Matador インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、このインテグレーションの[メインテナー][5]までお問い合わせください。
 

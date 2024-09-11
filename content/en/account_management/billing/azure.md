@@ -1,6 +1,5 @@
 ---
 title: Azure Integration Billing
-kind: documentation
 ---
 
 ## Overview

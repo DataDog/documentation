@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Private Locations
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'
@@ -28,7 +27,9 @@ You can also use private locations to:
 - **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic tests in your CI/CD pipelines][1].
 - **Compare the application performance** from inside and outside your internal network.
 
-Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].
+Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].**\*** 
+
+**\*** **Use and operation of this software is governed by the End User License Agreement available [here][14].**
 
 Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location. 
 
@@ -38,7 +39,7 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
+1. In the Datadog site, hover over **Digital Experience** and select **Settings** > [**Private Locations][5]**. 
 2. Click **Add Private Location**.
 3. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
 4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
@@ -66,7 +67,7 @@ Your private locations test results display identically to your managed location
     If you are using Windows, [run the Synthetics Private Location Installer with a GUI][12] or run the `msiexec` command on the command line inside the directory where you downloaded the installer:
 
     ```shell
-    msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
+    msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
     ```
 
 10. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
@@ -97,11 +98,13 @@ Use your new private location just like a managed location in your Synthetic tes
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
 [1]: /continuous_testing/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
-[5]: https://app.datadoghq.com/synthetics/list
+[5]: https://app.datadoghq.com/synthetics/settings/private-locations
 [6]: /synthetics/private_locations/configuration/#configuration-options
 [7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
@@ -109,4 +112,5 @@ Use your new private location just like a managed location in your Synthetic tes
 [10]: https://podman.io/
 [11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [12]: /synthetics/private_locations?tab=windows#install-your-private-location
-[13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[13]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
+[14]: https://www.datadoghq.com/legal/eula/

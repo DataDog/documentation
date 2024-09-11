@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/sharing/
   tag: ドキュメント
   text: グラフの共有
-kind: ガイド
 title: テンプレート変数による埋め込み可能なグラフ
 ---
 

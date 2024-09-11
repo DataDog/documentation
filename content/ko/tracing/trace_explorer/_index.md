@@ -8,7 +8,6 @@ further_reading:
 - link: tracing/trace_explorer/search
   tag: 설명서
   text: 설정
-kind: 설명서
 title: 서비스 맵
 ---
 

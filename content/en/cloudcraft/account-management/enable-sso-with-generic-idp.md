@@ -1,6 +1,5 @@
 ---
 title: Enable SSO with a Generic Identity Provider
-kind: documentation
 ---
 
 Enabling Single Sign-On (SSO) in Cloudcraft allows you to simplify authentication and login access to Cloudcraft.
@@ -14,8 +13,7 @@ For more general information on using SSO with Cloudcraft, check out [Enable SSO
 
 ## Setting up SAML/SSO
 
-<div class="alert alert-info">The SAML Enterprise SSO feature is only available for the Enterprise plan, and can only be configured by the Cloudcraft Account Owner role.
-</div>
+<div class="alert alert-info">Only the account owner can configure the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.</div>
 
 1. In Cloudcraft, navigate to **User** > **Security & SSO**.
 2. The details you need to create a new application with Azure can be found in the **Cloudcraft service provider details** section.

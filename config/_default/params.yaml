@@ -64,13 +64,18 @@ code_languages:
     syntax: typescript
     command: tsc
     example_file: example.ts
+  'rs':
+    extension: rs
+    name: rust
+    syntax: rust
+    command: rustc
+    example_file: src/main.rs
 
 code_language_ids:
     android: Android
     ios: iOS
     expo: Expo
     flutter: Flutter
-    otel: OTel
     reactnative: React Native
     codepush: CodePush
     roku: Roku
@@ -108,6 +113,10 @@ code_language_ids:
     docker: "Docker"
     hosts: "Hosts"
     ecs_ec2: "ECS EC2"
+    elixir: "Elixir"
+    rust: "Rust"
+    dd-api: "Datadog API"
+    otel: "OpenTelemetry API"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -160,7 +169,7 @@ core_product:
     - name: cloud siem
       requires_all_keyvals:
         - 'core_product:security'
-    - name: code profiling
+    - name: continuous profiler
     - name: continuous testing
       requires_all_keyvals:
         - 'core_product:synthetic monitoring'

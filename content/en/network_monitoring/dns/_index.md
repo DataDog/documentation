@@ -1,6 +1,5 @@
 ---
 title: DNS Monitoring
-kind: documentation
 description: Diagnose and debug DNS server issues
 aliases:
     - /network_performance_monitoring/network_table

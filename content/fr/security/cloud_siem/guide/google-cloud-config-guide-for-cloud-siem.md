@@ -16,7 +16,6 @@ further_reading:
   tag: Blog
   text: Visualiser l'activité de votre environnement Google Cloud avec l'outil Investigator
     de Cloud SIEM Datadog
-kind: documentation
 title: Guide de configuration de Google Cloud pour Cloud SIEM
 ---
 

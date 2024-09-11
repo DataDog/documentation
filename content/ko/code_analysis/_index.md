@@ -18,7 +18,6 @@ further_reading:
   tag: 설명서
   text: 소프트웨어 구성 요소 분석에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 코드 분석
 ---
 
@@ -111,8 +110,8 @@ title: 코드 분석
 
 [1]: /ko/code_analysis/static_analysis
 [2]: /ko/code_analysis/software_composition_analysis
-[3]: /ko/developers/ide_integrations/vscode/#static-analysis
-[4]: /ko/developers/ide_integrations/idea/#static-analysis
+[3]: /ko/developers/ide_plugins/vscode/#static-analysis
+[4]: /ko/developers/ide_plugins/idea/#static-analysis
 [5]: /ko/code_analysis/github_pull_requests/
 [6]: /ko/code_analysis/static_analysis_rules
 [7]: /ko/integrations/github/#link-a-repository-in-your-organization-or-personal-account

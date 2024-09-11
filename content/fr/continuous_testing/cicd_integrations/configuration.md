@@ -20,7 +20,6 @@ further_reading:
 - link: /continuous_testing/testing_tunnel
   tag: Documentation
   text: En savoir plus sur le Tunnel de test en continu
-kind: documentation
 title: Configuration des tests continus et du CI/CD
 ---
 <div class="alert alert-info">Cette page explique comment configurer des tests continus dans vos pipelines d'intégration continue (CI) et de livraison continue (CD). Si vous souhaitez intégrer vos métriques et données de CI/CD dans des dashboards Datadog, consultez plutôt la section <a href="https://docs.datadoghq.com/continuous_integration/" target="_blank">CI Visibility</a>.</div>

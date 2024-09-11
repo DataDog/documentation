@@ -1,6 +1,5 @@
 ---
 title: Manage CSM Misconfigurations Compliance Rules
-kind: documentation
 aliases:
   - /security_platform/cspm/configuration_rules
   - /security/cspm/configuration_rules
@@ -19,10 +18,6 @@ further_reading:
     text: Misconfigurations Reports
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Cloud Security Management Misconfigurations (CSM Misconfigurations) [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 
 The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For CSM Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
@@ -36,7 +31,7 @@ CSM Misconfigurations uses the following rule types to validate the configuratio
 
 To filter the default compliance rules by cloud provider:
 
-1. Navigate to **Security** > **Cloud Security Management** > **Compliance** > **Compliance Rules**.
+1. Navigate to the [**Misconfiguration Rules**][13] page.
 2. Choose one of the following values from the **Tag** facet.
     - **AWS**: cloud_provider:aws
     - **Azure**: cloud_provider:azure
@@ -104,7 +99,7 @@ The rule deprecation process is as follows:
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
 [7]: /security/notifications/
-[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
+[13]: https://app.datadoghq.com/security/configuration/compliance/rules
 [14]: /integrations/slack/
 [15]: /integrations/jira/
 [16]: /integrations/pagerduty

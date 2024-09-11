@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/rbac/log_management/
   tag: ドキュメント
   text: ログ管理のための RBAC
-kind: documentation
 title: Federated Authentication to Role Mapping API
 ---
 

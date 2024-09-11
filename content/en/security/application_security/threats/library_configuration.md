@@ -1,6 +1,5 @@
 ---
 title: Library Configuration
-kind: documentation
 aliases:
   - /security_platform/application_security/setup_and_configure
   - /security/application_security/setup_and_configure
@@ -9,10 +8,7 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against Threats with Datadog Application Security Management"
-- link: "/security/application_security/enabling/"
-  tag: "Documentation"
-  text: "Enabling ASM for Your Services"
-- link: "/security/default_rules/#cat-application-security"
+- link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "Out-of-the-Box Application Security Management Rules"
 - link: "/security/application_security/add-user-info/"

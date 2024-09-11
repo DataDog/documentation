@@ -1,20 +1,23 @@
 ---
+algolia:
+  tags:
+  - アンインストール
+  - アンインストール
 further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: ドキュメント
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: ドキュメント
   text: インバウンドポートの構成
 - link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: GitHub
   text: Datadog Unix Agent を使用した AIX の監視
-kind: documentation
 title: AIX 用 Agent の基本的な使用方法
 ---
 
 <div class="alert alert-info">
-Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発されており、Windows、Linux、MacOS Agent とは異なります。
+Datadog UNIX Agent は特定のシステムアーキテクチャ向けに開発されており、Windows、Linux、MacOS Agent とは異なります。
 </div>
 
 このページでは、AIX 用 Datadog UNIX Agent のインストールと構成について説明します。
@@ -63,9 +66,9 @@ Agent のインストールログは、`dd-aix-install.log` ファイルに記�
 | フレアの送信                      | `datadog-agent flare`       |
 | コマンドの使用方法の表示           | `datadog-agent --help`      |
 
-## コンフィギュレーション
+## 構成
 
-Agent のコンフィギュレーションファイルおよびフォルダーは `/etc/datadog-agent/datadog.yaml` にあります
+The configuration files and folders for the Agent are located in `/etc/datadog-agent/datadog.yaml`
 
 コンフィギュレーションファイルのサンプルが `/etc/datadog-agent/datadog.yaml.example` にあります。
 
@@ -121,20 +124,24 @@ dogstatsd:                        # DogStatsD 構成オプション
 
 既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
 
-## アンインストール
+## Monitor Agent uptime
 
-インストールされている Agent を削除するには、次の `installp` コマンドを実行します。
+You can use the metric `datadog.agent.running` to monitor the uptime of an Agent. The metric emits a value of `1` if the Agent is reporting to Datadog.
+
+## Uninstall the Agent
+
+To remove an installed Agent, run the following `installp` command:
 
 {{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
-注: Agent のアンインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、アンインストールコマンドの `-e` パラメーターを削除します。
+Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aix
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 [3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

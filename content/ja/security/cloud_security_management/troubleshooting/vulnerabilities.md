@@ -11,41 +11,20 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: ブログ
   text: Datadog Container Monitoring のコンテナイメージによるトラブルシューティングワークフローの強化
-kind: ドキュメント
 title: Cloud Security Management Vulnerabilities のトラブルシューティング
 ---
 
 ## 概要
 
-Cloud Security Management (CSM) Vulnerabilities に関する問題が発生した場合は、以下のトラブルシューティングガイドラインを使用してください。さらにサポートが必要な場合は、[Datadog サポート][1]にお問い合わせください。
+If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
-## CSM Vulnerabilities が有効になっていることを確認する
+## Error messages
 
-[Agent を脆弱性スキャン用に構成する][2]ためのドキュメントを確認し、ホストとコンテナがソフトウェア部品表 (SBOM) の収集用に構成されていることを確認してください。さらに、アプリ内の [Cloud Security Management][3] の説明を確認し、初期セットアップのすべての手順が完了していることを確認してください。
-
-## 前提条件
-
-CSM Vulnerabilities の前提条件がすべて満たされていることを確認します。
-
-| コンポーネント                | バージョン/要件                     |
-| ------------------------ | ----------------------------------------|
-| [Helm Chart][6]            | v3.49.6 以降 (Kubernetes のみ)      |
-| [containerd][7]              | v1.5.6 以降 (Kubernetes とホストのみ)|</br>
-
-CSM Vulnerabilities は以下の環境では**利用できません**。
-
-  - ログの収集
-  - AWS Fargate 
-  - CRI-O ランタイム
-  - podman ランタイム
-
-## エラーメッセージ
-
-### ディスク容量要件
+### Disk space requirements
 
 最大のコンテナイメージのサイズに等しいディスクの空き容量があることを確認してください。この空き容量は、Datadog Agent がコンテナイメージの脆弱性をスキャンするために必要です (デフォルトでは 1 GB)。
 
-その結果、次のようなエラーが表示されます。
+The resulting error appears as:
 ```sh
 Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
 ```
@@ -55,26 +34,26 @@ Error: failed to check current disk usage: not enough disk space to safely colle
 - 利用可能なディスク容量を少なくとも 1 GB に増やしてください。イメージが 1 GB を超える場合は、それに応じてディスク容量を増やしてください。
 - すべてのイメージが 1 GB 未満の場合、環境変数 `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` を使用して、デフォルトの Agent 要求ディスク容量を減らすことができます (デフォルト値は 1GB です)。
 
-### 非圧縮コンテナイメージレイヤー
+### Uncompressed container image layers
 
-SBOM スキャンは、非圧縮コンテナイメージレイヤーでのみ動作します。一部の Kubernetes ディストリビューション (AWS EKS、minikube、kind など) では、コンテナランタイムが非圧縮レイヤーを破棄するように構成されているため、スキャンに失敗します。
+The SBOM scan only works with uncompressed container image layers. Certain Kubernetes distributions (such as AWS EKS, minikube, and kind), configure their container runtime to discard the uncompressed layers, causing the scan to fail.
 
-その結果、次のようなエラーが表示されます。
+The resulting error appears as:
 
 ```sh
 ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 in func2) | Failed to generate SBOM for containerd image: unable to marshal report to sbom format, err: analyze error: failed to analyze layer:  : unable to get uncompressed layer
 ```
 
-この問題の回避策は、containerd コンフィギュレーションファイルで `discard_unpacked_layers=false` という構成オプションを設定することです。
+The workaround for this issue is to set the configuration option `discard_unpacked_layers=false` in the containerd configuration file.
 
-## 関連メトリクスを表示
+## View related metrics
 
-1. Datadog の **[Metrics > Summary][4]** に移動します。
-2. トラブルシューティングに役立つ以下のメトリクスを検索します。
-    -  `datadog.agent.sbom_attempts`: sbom 収集の試行を `source` と `type` で追跡します。
-    -  `datadog.agent.sbom_generation_duration`: SBOM の生成にかかる時間を秒単位で測定します。
-    -  `datadog.agent.sbom_errors`: `source`、`type`、`reason` ごとの sbom の失敗数。
-    -  `datadog.agent.export_size`: ディスクに書き込まれるアーカイブのサイズ。
+1. Go to **[Metrics > Summary][4]** in Datadog.
+2. Search for the following metrics to aid in troubleshooting:
+    -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
+    -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
+    -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
+    -  `datadog.agent.export_size`: The size of the archive written on disk. 
 
 ## その他の参考資料
 
@@ -84,5 +63,3 @@ ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 
 [2]: /ja/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
-[6]: /ja/security/cloud_security_management/troubleshooting
-[7]: /ja/containers/kubernetes/installation/?tab=helm

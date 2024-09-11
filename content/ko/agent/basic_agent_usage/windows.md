@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: 설명서
   text: 인바운드 포트 구성
-kind: 설명서
 platform: 윈도우즈(Windows)
 title: 윈도우즈용 에이전트 기본 사용법
 ---

@@ -16,7 +16,6 @@ further_reading:
 - link: /real_user_monitoring/ios/data_collected
   tag: ドキュメント
   text: 収集された RUM iOS データ
-kind: ガイド
 title: RUM データによる Apdex とカスタムパフォーマンス指標の算出
 ---
 

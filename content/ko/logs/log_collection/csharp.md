@@ -24,9 +24,8 @@ further_reading:
   tag: FAQ
   text: 로그 수집 문제 해결 가이드
 - link: /glossary/#tail
-  tag: 설정
+  tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: C# 로그 수집
 ---
 

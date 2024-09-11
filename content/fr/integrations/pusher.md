@@ -12,7 +12,7 @@ has_logo: true
 integration_id: pusher
 integration_title: Pusher
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: pusher
 public_title: Intégration Datadog/Pusher

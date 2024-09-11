@@ -1,6 +1,5 @@
 ---
 title: Windows Containers Issues
-kind: documentation
 further_reading:
 - link: "/agent/docker/?tab=windows"
   tag: "Documentation"
@@ -9,7 +8,7 @@ further_reading:
   tag: "Documentation"
   text: Kubernetes Agent
 - link: "/agent/troubleshooting/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent Troubleshooting"
 ---
 
