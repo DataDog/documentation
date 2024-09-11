@@ -4,7 +4,7 @@
   {{ if and (eq .icon_type "INTEGRATION") .logo_path }}
     <img src="{{ .logo_path }}" height="17" alt="{{ .workflow_title }}"/>
   {{ else if and .icon_id (eq .icon_type "ICON") }}
-    {{ partial "icon" (dict "name" .icon_id "size" "17px" "vertical_align" "-5px") }}
+    {{ partial "icon" (dict "name" (.icon_id | lower) "size" "17px" "vertical_align" "-5px") }}
   {{ else }}
     <img height="17" src='{{ partial "img-resource.html" (dict "context" .page_ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x' />
   {{ end }}
