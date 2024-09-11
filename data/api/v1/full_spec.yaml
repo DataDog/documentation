@@ -16589,8 +16589,7 @@ components:
           description: Persist cookies across redirects.
           type: boolean
         port:
-          description: Port to use when performing the test.
-          type: string
+          $ref: '#/components/schemas/SyntheticsTestRequestPort'
         proxy:
           $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
@@ -16694,6 +16693,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestNumericalPort:
+      description: Integer Port number to use when performing the test.
+      format: int64
+      type: integer
+    SyntheticsTestRequestPort:
+      description: Port to use when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariablePort'
     SyntheticsTestRequestProxy:
       description: The proxy to perform the test.
       properties:
@@ -16706,6 +16714,10 @@ components:
       required:
       - url
       type: object
+    SyntheticsTestRequestVariablePort:
+      description: String Port number to use when performing the test. Supports templated
+        variables.
+      type: string
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
