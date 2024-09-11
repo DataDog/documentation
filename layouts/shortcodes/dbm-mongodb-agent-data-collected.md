@@ -19,5 +19,5 @@ Database Monitoring for MongoDB generates an event each time there is a change i
 
 ### Collection Schemas and Indexes
 
-Database Monitoring for MongoDB collects inferred schema and indexes of MongoDB collections. This information is used to provide insights into the structure and organization of your collections.
+Database Monitoring for MongoDB collects inferred schemas and indexes of MongoDB collections. This information is used to provide insights into the structure and organization of your collections.
 When analyzing MongoDB collections, we collect inferred schema information by sampling documents using the `$sample` aggregation stage. From this analysis, we only gather and send metadata about the schema to Datadog, including field names, field prevalence (how often each field appears), and their respective data types. We do not collect or transmit the actual content of documents or any customer business data. This ensures that sensitive data remains protected while still providing valuable insights into the structure and organization of your collections.
