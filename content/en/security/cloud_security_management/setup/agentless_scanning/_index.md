@@ -7,8 +7,6 @@ further_reading:
   - link: "/security/cloud_security_management/agentless_scanning"
     tag: "Documentation"
     text: "Cloud Security Management Agentless Scanning"
-aliases:
-  - /security/cloud_security_management/setup/agentless_scanning
 ---
 
 {{< site-region region="gov" >}}
