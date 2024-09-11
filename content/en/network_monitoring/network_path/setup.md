@@ -122,7 +122,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
   
      ## @param port - uint16 - optional - default:<RANDOM PORT>
      ## The port of the destination endpoint.
-     ## For UDP, we recommende not setting the port since it can make probes less reliable.
+     ## For UDP, we recommend not setting the port since it can make probes less reliable.
      ## By default, the port is random.
      #
      # port: <PORT>
