@@ -752,10 +752,10 @@ Por ejemplo, supongamos que hay un `signupLogger`, definido con todos los demás
 ```javascript
 window.DD_LOGS.onReady(function () {
   const signupLogger = window.DD_LOGS.createLogger('signupLogger', {
-    level: 'info',
-    handler: 'http',
-    context: { env: 'staging' }
-  )
+    nivel: 'info',
+    controlador: 'http',
+    contexto: { variable de entorno: 'staging' }
+  })
 })
 ```
 

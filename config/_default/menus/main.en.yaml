@@ -1987,21 +1987,56 @@ menu:
       parent: error_tracking
       identifier: error_tracking_suspect_commits
       weight: 7
-    - name: APM
-      url: error_tracking/apm
+    - name: Track Browser and Mobile Errors
+      url: error_tracking/frontend
       parent: error_tracking
-      identifier: error_tracking_apm
+      identifier: error_tracking_frontend
       weight: 8
-    - name: Logs
-      url: error_tracking/logs
-      parent: error_tracking
-      identifier: error_tracking_logs
-      weight: 9
+    - name: Browser Error Tracking
+      url: error_tracking/frontend/browser
+      parent: error_tracking_frontend
+      identifier: error_tracking_browser
+      weight: 100
+    - name: Collecting Browser Errors
+      url: error_tracking/frontend/collecting_browser_errors
+      parent: error_tracking_frontend
+      identifier: error_tracking_collect_errors
+      weight: 101
+    - name: Mobile Crash Tracking
+      url: error_tracking/frontend/mobile
+      parent: error_tracking_frontend
+      identifier: error_tracking_mobile
+      weight: 102
     - name: Real User Monitoring
       url: error_tracking/rum
-      parent: error_tracking
+      parent: error_tracking_frontend
       identifier: error_tracking_rum
-      weight: 10
+      weight: 103
+    - name: Logs
+      url: error_tracking/frontend/logs
+      parent: error_tracking_frontend
+      identifier: error_tracking__fe_logs
+      weight: 104
+    - name: Track Backend Errors
+      url: error_tracking/backend
+      parent: error_tracking
+      identifier: error_tracking_backend
+      weight: 9
+    - name: Exception Replay
+      url: error_tracking/backend/exception_replay
+      parent: error_tracking_backend
+      identifier: error_tracking_exception_replay
+      weight: 101
+    - name: APM
+      url: error_tracking/apm
+      parent: error_tracking_backend
+      identifier: error_tracking_apm
+      weight: 102
+    - name: Logs
+      url: error_tracking/backend/logs
+      parent: error_tracking_backend
+      identifier: error_tracking_be_logs
+      weight: 103
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
@@ -4667,51 +4702,56 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 601
+    - name: Deduplicate
+      url: observability_pipelines/processors/dedupe
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_dedupe
+      weight: 602
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 602
+      weight: 604
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 603
+      weight: 605
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 604
+      weight: 606
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 605
+      weight: 607
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 606
+      weight: 608
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 607
+      weight: 609
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 608
+      weight: 610
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 609
+      weight: 611
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 610
+      weight: 612
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -5222,36 +5262,46 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Cloud Accounts
-      url: security/cloud_security_management/setup/cloud_accounts
-      parent: csm_setup
-      identifier: csm_setup_cloud_accounts
-      weight: 102
-    - name: Agent
-      url: security/cloud_security_management/setup/agent
-      parent: csm_setup
-      identifier: csm_setup_agent
-      weight: 103
-    - name: Agentless Scanning
+    - name: Enable Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
-      weight: 104
-    - name: Serverless
-      url: security/cloud_security_management/setup/serverless?tab=amazonecs#cloud-security-management
+      weight: 101
+    - name: Quick Start
+      url: security/cloud_security_management/setup/agentless_scanning/quick_start
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_quick_start
+      weight: 10000
+    - name: CloudFormation
+      url: security/cloud_security_management/setup/agentless_scanning/cloudformation
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_cloudformation
+      weight: 10001
+    - name: Terraform
+      url: security/cloud_security_management/setup/agentless_scanning/terraform
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_terraform
+      weight: 10002
+    - name: Deploy the Agent
+      url: security/cloud_security_management/setup/agent
       parent: csm_setup
-      identifier: csm_setup_serverless
-      weight: 105
-    - name: CloudTrail Logs
+      identifier: csm_setup_agent
+      weight: 102
+    - name: Set Up CloudTrail Logs
       url: security/cloud_security_management/setup/cloudtrail_logs
       parent: csm_setup
-      identifier: csm_setup_cloudtrail_logs
-      weight: 106
-    - name: Source Code Integrations
-      url: security/cloud_security_management/setup/source_code_integrations
+      identifier: csm_setup_cloudtrail
+      weight: 103
+    - name: Set Up Iac Remediation
+      url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
-      identifier: csm_setup_source_code_integrations
-      weight: 106
+      identifier: csm_setup_iac_remediation
+      weight: 104
+    - name: Deploy via Cloud Integrations
+      url: security/cloud_security_management/setup/cloud_integrations
+      parent: csm_setup
+      identifier: csm_setup_cloud_integrations
+      weight: 105
     - name: Threats
       url: security/threats/
       parent: csm
@@ -5367,6 +5417,11 @@ menu:
       parent: csm_agentless
       identifier: csm_agentless_compatibility
       weight: 101
+    - name: Deployment Methods
+      url: security/cloud_security_management/agentless_scanning/deployment_methods
+      parent: csm_agentless
+      identifier: csm_agentless_deployment_methods
+      weight: 102
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
