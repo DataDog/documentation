@@ -55,7 +55,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    # export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
 
    # Download and run the latest init script
-   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash -c "$(curl -L TODO LINK TO GCS PUBLIC BUCKET WITH THE INIT SCRIPT" || true
+   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/dataproc/dataproc_init_latest.sh) || true
 
    ```
 
