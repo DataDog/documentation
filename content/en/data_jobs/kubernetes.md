@@ -9,7 +9,7 @@ further_reading:
 [Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
 
 ## Setup
-<div class="alert alert-info">Data Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.55.0 and later, <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 and later.</div>
+<div class="alert alert-info">Data Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.55.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
 
 Follow these steps to enable Data Jobs Monitoring for Spark on Kubernetes.
 
