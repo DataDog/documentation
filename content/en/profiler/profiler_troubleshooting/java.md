@@ -71,6 +71,10 @@ jdk.OldObjectSample#enabled=true
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
+## Enabling the heap histogram metrics
+<div class="aler alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
+To enable the heap histogram metrics, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable.
+
 ## Removing sensitive information from profiles
 
 If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:
