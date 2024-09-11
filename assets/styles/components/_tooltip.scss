@@ -1,29 +1,37 @@
+// Define custom properties for easy maintenance and consistency
+:root {
+  --tooltip-bg-start: #9130A8;
+  --tooltip-bg-end: #{$ddpurple};
+  --tooltip-text-color: #ffffff;
+  --tooltip-link-color: rgba(255, 255, 255, 0.7);
+  --tooltip-transition-duration: 200ms;
+  --tooltip-box-shadow: 0 4px 15px rgba(99, 44, 166, 0.1), 0 2px 5px rgba(99, 44, 166, 0.08);
+}
+
 .tooltip-container {
   position: relative;
   display: inline-block;
 }
 
-.tooltip-container .tooltip-trigger {
-  cursor: help;
-}
-
 .tooltip-trigger {
   background: none;
   border: none;
-  text-decoration: underline;
-  text-decoration-style: dotted;
+  text-decoration: underline dotted;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
   color: inherit;
   font: inherit;
   padding: 0;
   margin: 0;
-  transition: color 0.3s ease;
+  transition: color var(--tooltip-transition-duration) ease;
 
+  &:hover {
+    color: var(--tooltip-bg-end);
+  }
 }
 
-.tooltip-trigger:hover {
-  color: $ddpurple;
+.tooltip-container .tooltip-trigger {
+  cursor: help;
 }
 
 .tooltip-content {
@@ -33,42 +41,50 @@
   left: 50%;
   transform: translateX(-50%) translateY(5px);
   padding: 0.6rem 1rem;
-  background: linear-gradient(135deg, #9130A8 0%, $ddpurple 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--tooltip-bg-start) 0%, var(--tooltip-bg-end) 100%);
+  color: var(--tooltip-text-color);
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.4;
   max-width: 300px;
   width: max-content;
-  box-shadow: 0 4px 15px rgba(99,44,166,0.1), 0 2px 5px rgba(99,44,166,0.08);
-  word-wrap: break-word;
+  box-shadow: var(--tooltip-box-shadow);
   overflow-wrap: break-word;
   text-align: left;
   
   opacity: 0;
   visibility: hidden;
   transition: 
-    opacity 200ms ease-out,
-    transform 200ms ease-out,
-    visibility 0ms linear 200ms;
-  will-change: opacity, transform, visibility;
+    opacity var(--tooltip-transition-duration) ease-out,
+    transform var(--tooltip-transition-duration) ease-out,
+    visibility 0s linear var(--tooltip-transition-duration);
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    transition: 
+      opacity var(--tooltip-transition-duration) ease-out,
+      transform var(--tooltip-transition-duration) ease-out,
+      visibility 0s linear;
+  }
 
   .tooltip-full-link {
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    color: var(--tooltip-link-color);
+    transition: color var(--tooltip-transition-duration) ease-in-out, 
+                border-color var(--tooltip-transition-duration) ease-in-out;
     text-decoration: none;
-    display: inline-block;
     font-size: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid var(--tooltip-link-color);
     line-height: 1.2;
     
     &:hover, &:focus {
-      color: #ffffff;
-      border-color: #ffffff;
+      color: var(--tooltip-text-color);
+      border-color: var(--tooltip-text-color);
     }
   
     &::after {
@@ -78,26 +94,18 @@
     }
   }
 }
-.tooltip-content.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  transition: 
-    opacity 200ms ease-out,
-    transform 200ms ease-out,
-    visibility 0ms linear;
-}
 
 .tooltip-arrow {
   position: absolute;
   bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
-  color: $ddpurple;
+  color: var(--tooltip-bg-end);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tooltip-content {
-    transition: none;
+  .tooltip-container,
+  .tooltip-container * {
+    transition: none !important;
   }
 }
