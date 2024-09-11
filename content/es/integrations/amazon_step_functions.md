@@ -57,9 +57,9 @@ Datadog también puede generar [métricas mejoradas][7] para tus Step Functions 
 1. Configura AWS Step Functions para [enviar logs a CloudWatch][8]. **Nota**: Utiliza el prefijo del grupo de logs de CloudWatch predeterminado `/aws/vendedlogs/states` de Datadog para identificar el origen de los logs y analizarlos automáticamente.
 2. [Envía los logs a Datadog][9].
 
-### Recopilación de trazas
+### Recopilación de trazas (traces)
 
-Puedes habilitar la recopilación de trazas (traces) de dos formas: a través de [Datadog APM para Step Functions][1] o a través de AWS X-Ray. 
+Puedes habilitar la recopilación de trazas de dos formas: a través de [Datadog APM para Step Functions][1] o a través de AWS X-Ray. 
 
 #### Habilitar el rastreo a través de Datadog APM para AWS Step Functions
 
