@@ -2049,6 +2049,8 @@ components:
       required:
       - configs
       type: object
+      x-merge-override:
+        properties: false
     AzureUCConfigPairType:
       default: azure_uc_configs
       description: Type of Azure config pair.
@@ -18046,6 +18048,8 @@ components:
         page:
           $ref: '#/components/schemas/Pagination'
       type: object
+      x-merge-override:
+        properties: false
     RestrictionPolicy:
       description: Restriction policy object.
       properties:
@@ -30727,6 +30731,9 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/integration/gcp/accounts/{account_id}:
     delete:
       description: Delete an STS enabled GCP account from within Datadog.
@@ -30781,6 +30788,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: false
   /api/v2/integration/gcp/sts_delegate:
     get:
       description: List your Datadog-GCP STS delegate account configured in your Datadog

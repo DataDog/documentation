@@ -4,20 +4,6 @@
     "attributes": {
       "title": "Example-Incident",
       "customer_impacted": false,
-      "notification_handles": [
-        {
-          "handle": "@user@email.com",
-          "display_name": "Jane Doe"
-        },
-        {
-          "handle": "@slack-channel",
-          "display_name": "Slack Channel"
-        },
-        {
-          "handle": "@workflow-from-incident",
-          "display_name": "Incident Workflow"
-        }
-      ],
       "fields": {
         "state": {
           "type": "dropdown",
