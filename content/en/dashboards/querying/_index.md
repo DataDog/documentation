@@ -147,14 +147,11 @@ _* Every [metrics query][17] in Datadog is evaluated with two layers of aggregat
 #### Multilayer Aggregation Semantics
 In Datadog, multilayer aggregation can be performed in two dimensions: time and space. Each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of aggregation beyond the default.
 
-- arithmetic operators 
-    - `+, -, *, /`
-- timeshift (`<METRIC_NAME>{*}, -<TIME_IN_SECOND>`)
-    - `hour_before(<METRIC_NAME>{*})`
-    - `day_before(<METRIC_NAME>{*})`
-    - `week_before(<METRIC_NAME>{*})`
-    - `month_before(<METRIC_NAME>{*})`
-- `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`
+| Supported Functions   | Description                                                                                    |
+|-----------------------|-----------------------------------------------------------------------------------------------|
+| Arithmetic operators   | `+, -, *, /`                                                                                  |
+| Timeshift functions    | `<METRIC_NAME>{*}, -<TIME_IN_SECOND>`<br> `hour_before(<METRIC_NAME>{*})`<br> `day_before(<METRIC_NAME>{*})`<br> `week_before(<METRIC_NAME>{*})`<br> `month_before(<METRIC_NAME>{*})` |
+| Top-k selection        | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`                                         |
 
 Other functinos cannot be combined with multilayer aggregation at this time.
 
