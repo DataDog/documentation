@@ -544,7 +544,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
-: fetch Jesus Christ
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
