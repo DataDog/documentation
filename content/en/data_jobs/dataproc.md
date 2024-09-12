@@ -31,6 +31,7 @@ Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
    - Then, click **Create Secret**.
 1. Under **Rotation** page, you can optionally turn on [automatic rotation][3].
 1. In [GCP Secret Manager][2], open the secret you created. Take note of the Resource ID, which is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
+1. Make sure the service account used by your Dataproc cluster has permission to read the secret. By default, this is the `Compute Engine default service account`. To grant access, copy the associated service account Principal, and click **Grant Access** on the **Permissions** tab of the secret's page. Assign the `secretmanager.secretAccessor` role, or any other one that has `secretmanager.versions.access` permission. See the [IAM roles][12] documentation for a full description of available roles.
 
 ### Create and configure your Dataproc cluster
 
@@ -105,3 +106,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [9]: /data_jobs
 [10]: https://cloud.google.com/dataproc/docs/concepts/versioning/overview
 [11]: https://docs.datadoghq.com/data_jobs/kubernetes/
+[12]: https://cloud.google.com/secret-manager/docs/access-control
