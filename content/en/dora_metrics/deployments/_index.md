@@ -135,12 +135,12 @@ Deployment frequency is calculated based on the `dora.deployments.count` metric 
 
 For a single Git commit, change lead time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
 
-To calculate change lead time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related change lead time values. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
+To calculate change lead time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related change lead time values for all these commits. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
 {{< tabs >}}
 {{% tab "APM Deployment Tracking" %}}
 
-For deployments identified through APM Deployment Tracking, change lead time is computed from the time of first commit creation to when that commit is first seen in a new version. The `dora.deploy_time` metric is not available. 
+For deployments identified through APM Deployment Tracking, the change lead time of a commit is computed from the time of commit creation to when that commit is first seen in a new version. It means that the `dora.deploy_time` metric is not available.
 
 For service deployments tracked by APM to contribute to change lead time, ensure the following:
 
