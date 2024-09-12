@@ -123,8 +123,6 @@ Downsize EC2 instances
 Over-provisioned Kubernetes Containers
 : Containers with less than 30% CPU and memory utilization.
 
-Over-provisioned EBS Volume Throughput
-: EBS Volumes where the amount of throughput exceeds what is being used.
 
 Over-provisioned EBS Volume IOPS
 : EBS Volumes where the amount of IOPS exceeds what is being used.
