@@ -243,9 +243,9 @@ The following attributes are **optional**, you should provide **at least one** o
 
 | Attribute   | Type   | Description                                                                                              |
 |-------------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| `usr.id`    | String | Unique user identifier.                                                                                  |
+| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  
 
 To identify user sessions, use the `setUserInfo(id:name:email:)` API.
 
@@ -347,11 +347,11 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `trackWatchdogTerminations`
 : This setting determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
 
-`uiKitViewsPredicate`
-: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
-
 `uiKitActionsPredicate`
 : Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMActionsPredicate`](#automatically-track-user-actions) customized for your app.
+
+`uiKitViewsPredicate`
+: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
 
 `urlSessionTracking`
 : Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
@@ -731,7 +731,6 @@ Depending on the event's type, only some specific properties can be modified:
 
 | Event Type       | Attribute key                     | Description                             |
 |------------------|-----------------------------------|-----------------------------------------|
-
 | RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
 |                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
 | RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
