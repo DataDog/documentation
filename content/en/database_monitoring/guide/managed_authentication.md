@@ -266,7 +266,11 @@ instances:
 {{< tabs >}}
 {{% tab "EC2" %}}
 
-1. Create an IAM role in the account where the RDS instance is located and attach the IAM policy created in step 2 to the role.
+1. Create an IAM role in the account where the RDS instance is located, and attach the IAM policy created for DB authentication to the role using the example below.
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
+   - Replace `<YOUR_AGENT_EC2_ROLE>` with the IAM role of the EC2 instance where the Agent is running
+   - Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created for DB authentication
 
 ```bash
 # Create an IAM role in the account where the RDS instance is located
