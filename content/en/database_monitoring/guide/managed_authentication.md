@@ -33,7 +33,7 @@ Supported authentication types and Agent versions
 ## Configure IAM authentication
 
 
-AWS supports IAM authentication to RDS and Aurora databases. Starting Datadog Agent version 7.57, cross-account IAM authentication is supported for RDS and Aurora databases.
+AWS supports IAM authentication to RDS and Aurora databases. Starting with Datadog Agent version 7.57, cross-account IAM authentication is supported for RDS and Aurora databases.
 In order to configure the Agent to connect using IAM, follow the steps to complete the setup for the database and the Datadog Agent.
 
 ### Enable IAM authentication for your database
