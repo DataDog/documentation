@@ -413,8 +413,8 @@ aws iam update-assume-role-policy --role-name <YOUR_AGENT_EKS_ROLE> --policy-doc
 # Create an IAM OIDC provider for your cluster
 # Replace `<YOUR_EKS_REGION>` and `<YOUR_EKS_CLUSTER>` with the region and name of your EKS cluster
 $ eksctl utils associate-iam-oidc-provider \
-  --region <YOUR_ESK_REGION> \
-  --cluster <YOUR_ESK_CLUSTER> \
+  --region <YOUR_EKS_REGION> \
+  --cluster <YOUR_EKS_CLUSTER> \
   --approve
 
 # Create a service account
