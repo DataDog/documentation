@@ -88,9 +88,9 @@ The following products and features are supported with Remote Configuration:
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-### Sensitive Data Scanner (SDS) via Agent
+### Sensitive Data Scanner (SDS) through the Datadog Agent
 
-- **Redact sensitive information in your logs within your premises (Private Beta)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to Agent in your environment. See [Sensitive Data Scanner][28] for more information.
+- **Redact sensitive information in your logs within your premises (Private Beta)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
 
 ## Security considerations
 
