@@ -271,7 +271,7 @@ instances:
 ```bash
 # Create an IAM role in the account where the RDS instance is located
 # Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
-# Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account where the Agent is running
+# Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
 # Replace `<YOUR_AGENT_EC2_ROLE>` with the IAM role of the EC2 instance where the Agent is running
 aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
   "Version": "2012-10-17",
