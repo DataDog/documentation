@@ -46,13 +46,13 @@ setValue
 : Sets the value of an element to the value that you provide to the function.<br>
 **Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, **text area**, and **text input** components.
 
-To see what state functions are available for a given component, see [Components][1].
-
 The following state function is also available for components that offer the custom event reaction type, as well as in post-query hooks.
 
 fetch
 : Executes the query that you run this function on.<br>
 **Example**: `query0.fetch()` executes the query named `query0`.
+
+To see what state functions are available for a given component, see [Components][1].
 
 ## Further reading
 
