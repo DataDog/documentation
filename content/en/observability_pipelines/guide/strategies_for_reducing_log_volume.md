@@ -33,6 +33,8 @@ Follow these strategies to reduce your log volume:
 
 Reduce your overall log volume by dropping a percentage of high-volume logs that you know are repetitive, noisy, or less valuable. Use the [sample processor][1] to match a subset of logs based on the filter query and keep only the percentage of logs you've specified. This provides you a representative view of high volume log streams, while maintaining visibility and the ability for analysis.
 
+{{< img src="observability_pipelines/guide/strategies_for_reducing_log_volume/sample_example.png" alt="A sample processor that retains 50% of logs that match the filter query for http.status_code:200 and http.method:GET" style="width:100%;" >}}
+
 ### Filter your logs
 
 Not all logs are valuable and need to be stored. For example, keeping debug logs from non-production systems is likely not critical for your organization. Therefore, use the [filter processor][2] to drop those logs, so they do not get sent to your log management solutions.
@@ -56,6 +58,8 @@ Govern and control your logs at different levels using quotas. For example, at a
 Use the [quota processor][6] to:
 1. Define a filter for the logs you are interested in. This could filter logs at a high level, such as for an environment or at a more granular level like for a specific team. You can also filter using a combination of log attributes.
 1. Define a quota based on the number of bytes or events. You can choose to drop the logs received after the quota has been met, or just be alerted that the limit has been reached so that you can investigate and remediate.
+
+{{< img src="observability_pipelines/guide/strategies_for_reducing_log_volume/quota_example.png" alt="A quota processor with a filter query for http.status_code:200 and a limit set to 1 TB per day" style="width:100%;" >}}
 
 ### Route your logs directly to an archive
 
