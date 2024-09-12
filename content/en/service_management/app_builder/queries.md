@@ -62,7 +62,7 @@ return arr
 
 Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
 
-You can use [state functions][12] in post query hooks.
+You can use [state functions][12] in post-query hooks.
 
 ### Error notifications
 
