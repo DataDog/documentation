@@ -229,7 +229,7 @@ In JSON or API format:
 
 #### Higher Resolution Queries
 
-Here's a query that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and 4-hour reducer interval.
+High-resolution queries allow you to obtain more granular data over extended periods. Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval:
 
 ```text
 "rollup(sum:dd.metrics.query.batch.count{*}.rollup(avg,300),`stddev`,14400)"
