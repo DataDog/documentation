@@ -28,7 +28,7 @@ App Builder provides functions for some types of app state changes in custom eve
 
 
 fetch
-: Executes the query that you run this function on. This function is available for components that offer the custom event reaction type and in post-query hooks.<br>
+: Executes the query that you run this function on. This function is available for all components that offer the custom event reaction type.<br>
 **Example**: `query0.fetch()` executes the query named `query0`.
 
 setIsOpen
