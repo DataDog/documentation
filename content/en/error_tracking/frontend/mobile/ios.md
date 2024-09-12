@@ -1,6 +1,5 @@
 ---
 title: iOS Crash Reporting and Error Tracking
-disable_toc: true
 ---
 
 ## Overview

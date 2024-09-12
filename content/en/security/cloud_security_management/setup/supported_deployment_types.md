@@ -38,4 +38,3 @@ The following table summarizes the scope of coverage available relative to each 
 [1]: /security/cloud_security_management/setup/#csm-threats
 [2]: /security/cloud_security_management/setup/#csm-vulnerabilities
 [3]: /security/cloud_security_management/setup/#csm-identity-risks
-[4]: /security/cloud_security_management/setup/agentless_scanning?tab=crossaccountscanning#prerequisites

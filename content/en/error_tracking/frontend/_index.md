@@ -1,7 +1,7 @@
 ---
 title: Frontend Error Tracking
 is_beta: true
-private: true
+private: false
 further_reading:
   - link: '/error_tracking/standalone_frontend/collecting_browser_errors/'
     tag: Documentation
@@ -14,7 +14,7 @@ further_reading:
     text: 'Error Tracking Issue States and Workflows'
 ---
 {{< callout url="#" btn_hidden="true" header="false">}}
-  Datadog's standalone frontend Error Tracking experience is in private alpha. This product is in active development and may evolve with your usage.
+  Datadog's standalone frontend Error Tracking experience is in private beta.
 {{< /callout >}} 
 
 ## Overview
@@ -33,12 +33,13 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 
 ## Setup
 {{< whatsnext desc="To get started with Datadog Error Tracking, see the corresponding documentation:" >}}
-    {{< nextlink href="error_tracking/standalone_frontend/browser" >}}Browser{{< /nextlink >}}
-    {{< nextlink href="error_tracking/standalone_frontend/android" >}}Android{{< /nextlink >}}
-    {{< nextlink href="error_tracking/standalone_frontend/ios" >}}iOS{{< /nextlink >}}
-    {{< nextlink href="error_tracking/standalone_frontend/expo" >}}Expo{{< /nextlink >}}
-    {{< nextlink href="error_tracking/standalone_frontend/reactnative" >}}React Native{{< /nextlink >}}
-    {{< nextlink href="error_tracking/standalone_frontend/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
+    {{< nextlink href="error_tracking/mobile/android" >}}Android{{< /nextlink >}}
+    {{< nextlink href="error_tracking/mobile/ios" >}}iOS{{< /nextlink >}}
+    {{< nextlink href="error_tracking/mobile/expo" >}}Expo{{< /nextlink >}}
+    {{< nextlink href="error_tracking/mobile/reactnative" >}}React Native{{< /nextlink >}}
+    {{< nextlink href="error_tracking/mobile/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
