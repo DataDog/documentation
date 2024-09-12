@@ -259,7 +259,7 @@ instances:
         enabled: true
 ```
 
-### Enable IAM authentication for the Agent host resides in a different AWS account than the RDS instance
+### Enable IAM authentication for the Agent host in a different AWS account than the RDS instance
 
 **NOTE: Cross-account IAM authentication is supported starting from Agent version 7.57.**
 
