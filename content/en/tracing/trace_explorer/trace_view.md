@@ -95,7 +95,7 @@ Hover over a service to highlight its parent and children, and click on it to fo
 
 ## Span search
 
-In the Waterfall and Flamegraph visualizations, the search option allows you to quickly find the spans that meet specific queries. Spans that match the search query are highlighted in the trace view and you can navigate between these matches using the arrows next to the search bar.
+In the Waterfall and Flamegraph visualizations, the search option allows you to find the spans that meet specific queries. Spans that match the search query are highlighted in the trace view and you can navigate between these matches using the arrows next to the search bar.
 
 <img src="https://github.com/user-attachments/assets/4c6fc35a-65b7-42ee-bc24-fcb9adb9d0b8" alt="Search bar" style="width:90%;">
 
