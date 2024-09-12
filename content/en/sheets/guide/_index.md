@@ -10,6 +10,6 @@ cascade:
 ---
 
 {{< whatsnext desc="Use cases:" >}}
-    {{< nextlink href="sheets/guide/log_analysis" >}}Use sheets for Logs Analysis{{< /nextlink >}}
-    {{< nextlink href="sheets/guide/rum" >}}Use sheets for RUM data{{< /nextlink >}}
+    {{< nextlink href="sheets/guide/log_analysis" >}}Extract details from log messages to identify patterns{{< /nextlink >}}
+    {{< nextlink href="sheets/guide/rum" >}}Enrich RUM data to analyze impacted users{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,5 +1,5 @@
 ---
-title: Analyzing Error Logs Using Sheets
+title: Analyze Error Logs Using Sheets
 further_reading:
 - link: "/sheets/"
   tag: "Documentation"
