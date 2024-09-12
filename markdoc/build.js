@@ -13,7 +13,8 @@ const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 
 // Load the site params from the appropriate files
 const defaultSiteParamsFile = path.resolve(__dirname, '../config/_default/params.yaml');
-const defaultSiteParams = yaml.safeLoad(fs.readFileSync(defaultSiteParamsFile, 'utf8'));
+// const defaultSiteParams = yaml.safeLoad(fs.readFileSync(defaultSiteParamsFile, 'utf8'));
+const defaultSiteParams = {};
 const envSiteParamsFile = path.resolve(__dirname, `../config/${env}/params.yaml`);
 const envSiteParams = yaml.safeLoad(fs.readFileSync(envSiteParamsFile, 'utf8'));
 const siteParams = Object.assign({}, defaultSiteParams, envSiteParams);
