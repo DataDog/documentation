@@ -16,7 +16,7 @@
   {{ $headless := .Site.GetPage "/glossary/terms" }}
   <!-- Find the matching glossary term file -->
   {{ with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) }}
-    {{ $displayText = $glossary }}
+    {{ $displayText = .Title }}
     <!-- Use short definition if available, otherwise use full content -->
     {{ if .Params.short_definition }}
       {{ $tooltipContent = .Params.short_definition }}
