@@ -117,7 +117,7 @@ Extended Support for RDS
 
 Datadog identifies individual resources that are under-utilized or over-provisioned, which you can consider adjusting the size and configuration to reduce your costs and improve the performance of your resources.
 
-Downsize EC2 instances
+Over-provisioned EC2 instances
 : EC2 instances not in an auto-scaling group, with less than 50% CPU and memory utilization.
 
 Over-provisioned Kubernetes Containers
