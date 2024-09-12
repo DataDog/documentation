@@ -387,7 +387,7 @@ aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-doc
 aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
 ```
 
-2. Modify the IAM Role for the EKS Service Account where the Agent is running to allow assuming the IAM role created in previous step.
+2. Modify the IAM role for the EKS Service Account where the Agent is running to allow assuming the IAM role created in the previous step.
 
 ```bash
 # Replace `<YOUR_AGENT_ECK_ROLE>` with the IAM role of the EKS Service Account IAM role where the Agent is running
