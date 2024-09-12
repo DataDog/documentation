@@ -119,7 +119,7 @@ Boolean expression: `service:event-query OR terminator`
 Range expression: `duration:>200ms`
 
 
-Note: Numberical values suport `<`, `>`, `<=`, and `>=` expressions.
+**Note**: Numerical values support `<`, `>`, `<=`, and `>=` expressions.
 
 
 ## More information
