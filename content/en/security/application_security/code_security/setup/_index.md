@@ -24,7 +24,7 @@ Before setting up Code Security, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and traces are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Code Security capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
 
 ## Code Security Enablement Types
 
@@ -55,7 +55,7 @@ By following these steps, you'll successfully set up Code Security for your appl
 
 ### Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent] with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_code_security.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and ASM for Code Security." style="width:100%;" >}}
@@ -373,10 +373,6 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{< /tabs >}}
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/remote_config
-
-
 ## Using Datadog Tracing Libraries
 
 Select your application language for details on how to enable Code Security for your language and infrastructure types.
@@ -390,4 +386,3 @@ Select your application language for details on how to enable Code Security for 
 
 
 [1]: /security/application_security/code_security/setup/compatibility/
-[2]: /security/application_security/code_security/setup/
