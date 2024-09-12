@@ -59,7 +59,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the file name in the URL with `TODO` to use the last stable version.
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the file name in the URL with `dataproc_init_<version_tag>.sh`, such as `dataproc_init_1.5.0.sh` to use the specific version you want.
 
 1. On the **Customize cluster** page, find the **Initialization actions** section. Click **Browse** to bring up the **Select object** dialog.
    {{< img src="data_jobs/dataproc/browse-buckets.png" alt="Google Cloud, Dataproc, Create a Dataproc cluster on Compute Engine, Add Initialization Action dialog. Text fields for browsing buckets" style="width:80%;" >}}
