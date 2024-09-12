@@ -268,48 +268,84 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
-`clientToken`
-: Either the RUM client token (which supports RUM, Logging, and APM) or the regular client token (which supports Logging and APM).
-
-`env`
-: The environment name that is sent to Datadog. This can be used to filter events by different environments (such as `staging` or `production`).
-
-`site`
-: Sets the Datadog server endpoint that data is sent to. The default value is `.us1`.
-
-`service`
-: The service name associated with data sent to Datadog. The default value is set to the application bundle identifier.
-
-`bundle`
-: The bundle object that contains the current executable.
+`backgroundTasksEnabled`
+: This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`.
 
 `batchSize`
 : Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the RUM iOS SDK (small batches mean more requests, but each request becomes smaller in size). Available values include: `.small`, `.medium`, and `.large`.
 
-`uploadFrequency`
-: Sets the preferred frequency of uploading data to Datadog. Available values include: `.frequent`, `.average`, and `.rare`.
+`bundle`
+: The bundle object that contains the current executable.
 
-`proxyConfiguration`
-: A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
+`clientToken`
+: Either the RUM client token (which supports RUM, Logging, and APM) or the regular client token (which supports Logging and APM).
 
 `encryption`
 : Data encryption to use for on-disk data persistency by providing an object that complies with the `DataEncryption` protocol.
 
+`env`
+: The environment name that is sent to Datadog. This can be used to filter events by different environments (such as `staging` or `production`).
+
+`proxyConfiguration`
+: A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
+
 `serverDateProvider`
 : A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
 
-`backgroundTasksEnabled`
-: This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`.
+`service`
+: The service name associated with data sent to Datadog. The default value is set to the application bundle identifier.
+
+`site`
+: Sets the Datadog server endpoint that data is sent to. The default value is `.us1`.
+
+`uploadFrequency`
+: Sets the preferred frequency of uploading data to Datadog. Available values include: `.frequent`, `.average`, and `.rare`.
 
 ### RUM configuration
 
 You can use the following properties in `RUM.Configuration` when enabling RUM:
 
+`actionEventMapper`
+: Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
+`appHangThreshold`
+: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable app hangs reporting, set this to `nil`. For more information, see [Add app hang reporting][10].
+
 `applicationID`
 : The RUM application identifier.
 
+`customEndpoint`
+: A custom server URL for sending RUM data.
+
+`errorEventMapper`
+: Sets the data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
+`longTaskEventMapper`
+: Sets the data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
+`longTaskThreshold`
+: The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
+
+`onSessionStart`
+: Enter a method that gets called when RUM starts the session.
+
+`resourceEventMapper`
+: Sets the data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
 `sessionSampleRate`
 : Sets the sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, `100.0` means all sessions are sent to Datadog. If not configured, the default value of `100.0` is used.
+
+`telemetrySampleRate`
+: The sampling rate for the SDK internal telemetry utilized by Datadog. This must be a value between `0` and `100`. By default, this is set to `20`.
+
+`trackFrustrations`
+: Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
+
+`trackBackgroundEvents`
+: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+
+`trackWatchdogTerminations`
+: This setting determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
 
 `uiKitViewsPredicate`
 : Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
@@ -320,47 +356,11 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `urlSessionTracking`
 : Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
 
-`trackFrustrations`
-: Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
-
-`trackBackgroundEvents`
-: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
-
-`longTaskThreshold`
-: The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
-
-`appHangThreshold`
-: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable app hangs reporting, set this to `nil`. For more information, see [Add app hang reporting][10].
-
-`trackWatchdogTerminations`
-: This setting determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
-
-`vitalsUpdateFrequency`
-: Sets the preferred frequency for collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (which disables vitals monitoring).
-
 `viewEventMapper`
 : Sets the data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`resourceEventMapper`
-: Sets the data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`actionEventMapper`
-: Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`errorEventMapper`
-: Sets the data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`longTaskEventMapper`
-: Sets the data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`onSessionStart`
-: Enter a method that gets called when RUM starts the session.
-
-`customEndpoint`
-: A custom server URL for sending RUM data.
-
-`telemetrySampleRate`
-: The sampling rate for the SDK internal telemetry utilized by Datadog. This must be a value between `0` and `100`. By default, this is set to `20`.
+`vitalsUpdateFrequency`
+: Sets the preferred frequency for collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (which disables vitals monitoring).
 
 ### Automatically track views
 
@@ -731,8 +731,7 @@ Depending on the event's type, only some specific properties can be modified:
 
 | Event Type       | Attribute key                     | Description                             |
 |------------------|-----------------------------------|-----------------------------------------|
-| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
-|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+
 | RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
 |                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
 | RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
@@ -741,6 +740,8 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.    |
 | RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
 |                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
+| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
+|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
 
 ## Retrieve the RUM session ID
 
