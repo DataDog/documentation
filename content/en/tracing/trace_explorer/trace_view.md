@@ -99,7 +99,7 @@ In the Waterfall and Flamegraph visualizations, the search option allows you to 
 
 <img src="https://github.com/user-attachments/assets/4c6fc35a-65b7-42ee-bc24-fcb9adb9d0b8" alt="Search bar" style="width:90%;">
 
-Note: When the `Error` checkbox is selected, the search results return spans that match the query and are in an error state.
+**Note**: When the `Error` checkbox is selected, the search results return spans that match the query and are in an error state.
 
 The search query on trace side panel supports the following options:
 
