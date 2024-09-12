@@ -296,7 +296,7 @@ aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOU
 ```bash
 # Replace `<YOUR_AGENT_EC2_ROLE>` with the IAM role of the EC2 instance where the Agent is running
 # Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
-# Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account where the RDS instance is located
+# Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located
 aws iam update-assume-role-policy --role-name <YOUR_AGENT_EC2_ROLE> --policy-document '{
   "Version": "2012-10-17",
   "Statement": [
