@@ -30,8 +30,8 @@ By enabling Mobile Session Replay, you can automatically mask sensitive elements
 
 ## Configuring masking modes
 
-## Fine Grained Masking
-Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine grained - you can override masking for text and input, images and touches individually to have a custom level that is right for you. 
+## Fine-Grained Masking
+Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained — you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs. 
 
 ### Text and input masking
 
@@ -40,7 +40,7 @@ By default, the `mask_all` setting is enabled for all data. With this setting en
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="What your application screen may resemble when `mask` is enabled." style="width:50%;">}}
 
 #### Mask sensitive inputs
-With the `mask_sensitive_inputs` setting enabled, all text and input are shown except those considered to be sensitive such as password fields. 
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields. 
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -55,6 +55,15 @@ With the `mask_sensitive_inputs` setting enabled, all text and input are shown e
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: .maskSensitiveInputs,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -75,6 +84,15 @@ With the `mask_all_inputs` setting enabled, all inputs fields are masked in the 
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: .maskAllInputs,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -95,6 +113,15 @@ With the `mask_all` setting enabled, all text and input fields are masked in the
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: .maskAll,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -104,7 +131,7 @@ With the `mask_all` setting enabled, all text and input fields are masked in the
 By default, the `mask_all` setting is enabled for all images. With this setting enabled, all images on screen are masked.
 
 #### Mask all images
-With the `mask_all` setting enabled, all images are replaced by placeholders labelled 'Image' in the replay.
+With the `mask_all` setting enabled, all images are replaced by placeholders labeled 'Image' in the replay.
 
 {{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-all.png" alt="What your application screen may resemble when `mask-all` is enabled." style="width:50%;">}}
 
@@ -121,20 +148,32 @@ With the `mask_all` setting enabled, all images are replaced by placeholders lab
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: .maskAll,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Mask content images
-To handle the issue of masking content while showing system images, users can make use of the following mechanisms.
+To manage content masking while still showing system images, users can choose the following options:
 
-On IOS - users can choose the setting `mask_non_bundled_only` - this replaces any image that is not a system image with a placeholder labelled "Content Image".
-On Android - users can choose the setting `mask_large_only` - this replaces any image whose dimensions exceed 100x100dp with a placeholder labelled "Content Image". Note that these dimensions refer to the dimensions of the drawable resource, and not to the dimensions of the view.
+On iOS, users can select the `mask_non_bundled_only` setting, which replaces any image that is not part of the system with a "Content Image" placeholder.
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-large-only.png" alt="What your application screen may resemble when `mask-large-only` is enabled." style="width:50%;">}}
+On Android, users can select the `mask_large_only`  setting, which replaces images whose dimensions exceed 100x100dp with a "Content Image" placeholder. Note that these dimensions refer to the drawable resource, not the view's size.
 
 {{< tabs >}}
+
 {{% tab "Android" %}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-large-only.png" alt="What your application screen may resemble when `mask_large_only` is enabled on Android." style="width:50%;">}}
+
+
 {{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
@@ -143,9 +182,24 @@ On Android - users can choose the setting `mask_large_only` - this replaces any 
     SessionReplay.enable(sessionReplayConfig)
 
 {{< /code-block >}}
-{{% /tab %}}
+
+{{< /tab >}}
+
+
 {{% tab "iOS" %}}
+
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-non-bundled-only.png" alt="What your application screen may resemble when `mask_non_bundled_only` is enabled on iOS." style="width:50%;">}}
+
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: .maskNonBundledOnly,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -166,6 +220,15 @@ With the `mask_none` setting enabled, all images are shown in the replay.
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: .maskNone,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -189,6 +252,15 @@ With the `hide` setting enabled, all touches that occur during the replay will b
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: .hide
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -209,12 +281,21 @@ With the `show` setting enabled, all touches that occur during the replay will b
 {{% /tab %}}
 {{% tab "iOS" %}}
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: .show
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Legacy masking - Deprecated
-Note that this masking api is deprecated and will be removed in a future version. Users should migrate to using fine grained masking as described above
+Please note that this masking API is deprecated and will be removed in a future version. Users are encouraged to migrate to the fine-grained masking options described above.
 
 ### Mask all text elements
 

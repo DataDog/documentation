@@ -56,17 +56,6 @@ To set up Mobile Session Replay for Android:
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
 [3]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin#declare-the-sdk-as-a-dependency
 
-> Note that Session Replay will start recording immediately by default. In some cases you may want to begin manually recording only from a particular point in your application. For such scenarios you may use the optional `startRecordingImmediately` api as shown below.
-
-   {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-    // in case you need material extension support
-    .addExtensionSupport(MaterialExtensionSupport()) 
-    .startRecordingImmediately(false)
-    .build()
-   SessionReplay.enable(sessionReplayConfig)
-   {{< /code-block >}}
-
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -163,6 +152,37 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 var sessionReplayConfig = SessionReplay.Configuration(
     replaySampleRate: sampleRate
 )
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Start the recording manually
+
+By default, Session Replay will start recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+        .startRecordingImmediately(false)
+        .build()
+    // Do something 
+    SessionReplay.startRecording()
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate,
+        startRecordingImmediately: false
+    )
+    // Do something 
+    SessionReplay.startRecording()
 {{< /code-block >}}
 
 {{% /tab %}}
