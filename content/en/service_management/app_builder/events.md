@@ -48,6 +48,12 @@ setValue
 
 To see what state functions are available for a given component, see [Components][1].
 
+The following state function is also available for components that offer the custom event reaction type, as well as in post-query hooks.
+
+fetch
+: Executes the query that you run this function on.<br>
+**Example**: `query0.fetch()` executes the query named `query0`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
