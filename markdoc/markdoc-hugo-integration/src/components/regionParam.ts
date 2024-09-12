@@ -5,7 +5,8 @@ export const regionParamDefinition = {
   children: [],
   attributes: {
     link: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     key: {
       type: String,
@@ -44,10 +45,12 @@ export const regionParamDefinition = {
         'aws_private_link_remote_config_service_name',
         'ip_ranges_url',
         'otlp_trace_endpoint'
-      ]
+      ],
+      required: true
     },
     code: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     text: {
       type: String
