@@ -319,7 +319,7 @@ aws iam update-assume-role-policy --role-name <YOUR_AGENT_EC2_ROLE> --policy-doc
 ```bash
 # Create an IAM role for ECS task
 # Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
-# Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account where the Agent is running
+# Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
 # Replace `<YOUR_AGENT_ECS_ROLE>` with the IAM role of the ECS task where the Agent is running
 aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
   "Version": "2012-10-17",
