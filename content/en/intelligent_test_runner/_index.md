@@ -40,6 +40,7 @@ There are several configuration mechanisms that you can use in these scenarios t
 - You can mark certain files in your repository as [tracked files](#tracked-files), which causes all tests to run whenever these files are changed. Dockerfiles, Makefiles, dependency files, and other build configuration files are good candidates for tracked files.
 - You can mark certain tests in your source as unskippable to ensure they are always run. This is a good fit for data-driven tests or tests that interact with external systems. More information in the [setup page][3].
 - If you are authoring a risky commit and you'd like to run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
+- If GitHub is your source code management provider, you can label your pull requests with the `ITR:NoSkip` (case insensitive) label. The `ITR:NoSkip` label will disable tests skipping inside pull requests. You must configure the GitHub App using the [GitHub integration tile][9] with the `Software Delivery: Collect Pull Request Information` feature enabled to use this feature.
 - You can add a list of [excluded branches](#excluded-branches), which disables Intelligent Test Runner in those branches.
 
 ## Set up a Datadog library
@@ -118,4 +119,6 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [5]: https://app.datadoghq.com/ci/settings/test-service
 [6]: https://git-scm.com/
 [7]: https://app.datadoghq.com/ci/test-runs
-[8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
+[8]: https://app.datadoghq.com/dash/integration/30941/
+[9]: /integrations/github/
+ci-visibility-intelligent-test-runner
