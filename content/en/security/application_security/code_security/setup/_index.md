@@ -55,7 +55,7 @@ By following these steps, you'll successfully set up Code Security for your appl
 
 ### Enabling in one step
 
-If you [install or update a Datadog Agent] with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you install or update a Datadog Agent with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_code_security.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and ASM for Code Security." style="width:100%;" >}}
