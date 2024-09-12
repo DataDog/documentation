@@ -101,7 +101,7 @@ In the Waterfall and Flamegraph visualizations, the search option allows you to 
 
 **Note**: When the `Error` checkbox is selected, the search results return spans that match the query and are in an error state.
 
-The search query on trace side panel supports the following options:
+The search query on the trace side panel supports the following options:
 
 **Free text search:**
 Free-form text search allows filtering by service, resource or operation name. It highlights the spans containing the specified text within these categories.
