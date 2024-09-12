@@ -17,7 +17,7 @@ Database Monitoring for MongoDB gathers operation samples using the `currentOp` 
 
 Database Monitoring for MongoDB generates an event each time there is a change in the replication state within the MongoDB instance. This ensures that any changes in replication are promptly detected and reported.
 
-### Collection Schemas and Indexes
+### Collection of Schemas and Indexes
 
 Database Monitoring for MongoDB collects inferred schemas and indexes of MongoDB collections. This information is used to provide insights into the structure and organization of your collections.
 When analyzing MongoDB collections, Datadog collects inferred schema information by sampling documents using the `$sample` aggregation stage. From this analysis, only metadata about the schema is gathered and sent to Datadog, including field names, field prevalence (how often each field appears), and their respective data types. Datadog does not collect or transmit the actual content of documents or any customer business data. This ensures that sensitive data remains protected while still providing valuable insights into the structure and organization of your collections.
