@@ -149,7 +149,8 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
       d. **Temporary location** フィールドで、ストレージバケット内の一時ファイルのパスを指定します。
 1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:  
    a. **Optional Parameters** をクリックして、追加フィールドを表示します。
-   b. **Google Cloud Secret Manager ID** フィールドにシークレットのリソース名を入力します。リソース名を取得するには、[Secret Manager][8] の自分のシークレットに移動します。シークレットをクリックします。**Action** の下にある 3 つの点をクリックし、**Copy resource name** を選択します。
+   b. **Google Cloud Secret Manager ID** フィールドにシークレットのリソース名を入力します。
+        リソース名を取得するには、[Secret Manager][8] の自分のシークレットに移動します。シークレットをクリックします。**Action** の下にある 3 つの点をクリックし、**Copy resource name** を選択します。
    c. **Source of the API key passed** フィールドに `SECRET_MANAGER` と入力します。
 1. Datadog API キーの値にシークレットを使用していない場合:
     - **推奨**:
