@@ -145,9 +145,7 @@ Datadog’s nested queries feature allows you to add additional layers of aggreg
 _* Every [metrics query][17] in Datadog is evaluated with two layers of aggregation: first Time then Space. Multilayer aggregation applies additional layers of aggregations._
 
 #### Multilayer Aggregation Semantics
-There are two types of multilayer aggregation - time and space.
-
-Only the following functions are supported when using multilayer aggregation:
+In Datadog, multilayer aggregation can be performed in two dimensions: time and space. Each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of aggregation beyond the default.
 
 - arithmetic operators 
     - `+, -, *, /`
