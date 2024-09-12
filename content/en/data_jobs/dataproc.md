@@ -9,6 +9,7 @@ further_reading:
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Google Cloud Dataproc.
 
 ## Requirements
+This guide is for Dataproc clusters on Compute Engine. If you are using Dataproc on GKE, refer to the [Kubernetes Installation Guide][11] instead.
 
 [Dataproc Release 2.0.x][10] or later is required. All of Debian, Rocky Linux, and Ubuntu Dataproc standard images are supported.
 
@@ -24,9 +25,9 @@ Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
 ### Store your Datadog API key in Google Cloud Secret Manager (Recommended)
 1. Take note of your [Datadog API key][1].
 1. In [GCP Secret Manager][2], choose **Create secret**.
-   - Under **Name**, enter a **Secret name**. You can use `datadog_dd_api_key`.
+   - Under **Name**, enter a **Secret name**. You can use `dd_api_key`.
    - Under **Secret value**, paste your Datadog API key in the **Secret value** text box.
-      {{< img src="data_jobs/dataproc/key_value.png" alt="GCP Secret Manager, Create secret. A section titled 'Secret details'. On the top, a text box containing 'datatdog_dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
+      {{< img src="data_jobs/dataproc/key_value.png" alt="GCP Secret Manager, Create secret. A section titled 'Secret details'. On the top, a text box containing 'dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
    - Then, click **Create Secret**.
 1. Under **Rotation** page, you can optionally turn on [automatic rotation][3].
 1. In [GCP Secret Manager][2], open the secret you created. Take note of the Resource ID, which is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
@@ -44,11 +45,11 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    DD_SITE={{< region-param key="dd_site" code="true" >}}
 
    # Set required parameter DD_API_KEY with Datadog API key.
-   # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as datadog_dd_api_key and the project <PROJECT_NAME>.
+   # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as  dd_api_key and the project <PROJECT_NAME>.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    # Change the project name, which you can find on the secrets page. The resource ID is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
    gcloud config set project $PROJECT_NAME
-   SECRET_NAME=datadog_dd_api_key
+   SECRET_NAME=dd_api_key
    DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
 
    # Optional parameters
@@ -62,10 +63,8 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
    The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the file name in the URL with `dataproc_init_<version_tag>.sh`, such as `dataproc_init_1.5.0.sh` to use the specific version you want.
 
-1. On the **Customize cluster** page, find the **Initialization actions** section. Click **Browse** to bring up the **Select object** dialog.
-   {{< img src="data_jobs/dataproc/browse-buckets.png" alt="Google Cloud, Dataproc, Create a Dataproc cluster on Compute Engine, Add Initialization Action dialog. Text fields for browsing buckets" style="width:80%;" >}}
-   - Use the Search function to find the bucket you chose at the previous step
-   - Click select once you have found the init script
+1. On the **Customize cluster** page, locate the **Initialization Actions** section. Enter the path where you saved the script from the previous step.
+
 
 When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 
@@ -105,3 +104,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
 [10]: https://cloud.google.com/dataproc/docs/concepts/versioning/overview
+[11]: https://docs.datadoghq.com/data_jobs/kubernetes/
