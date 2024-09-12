@@ -29,9 +29,9 @@ Datadog Real User Monitoring (RUM) te permite visualizar y analizar el rendimien
 
 ### Especificar los detalles de la aplicación en la interfaz de usuario
 
-1. En Datadog, ve a [**Experiencia digital** > **Añadir una aplicación**][1].
+1. En Datadog, navega a [**Digital Experience** > **Add an Application**][1] (Experiencia digital > Añadir una aplicación).
 2. Elige `Flutter` como tipo de aplicación.
-3. Proporciona un nombre de aplicación para generar un ID de aplicación Datadog y un token de cliente únicos.
+3. Proporciona un nombre de aplicación para generar un ID de aplicación de Datadog y un token de cliente únicos.
 4. Para desactivar la recopilación automática de datos del usuario para la IP del cliente o los datos de geolocalización, desactiva las casillas de esas configuraciones. Para obtener más información, consulta [Recopilación de datos de RUM Flutter][7].
 
    {{< img src="real_user_monitoring/flutter/flutter-new-application.png" alt="Crear una aplicación RUM para Flutter en Datadog" style="width:90%;">}}
@@ -43,23 +43,23 @@ Para garantizar la seguridad de tus datos, utiliza un token de cliente. Para obt
 En primer lugar, asegúrate de tener tu entorno configurado correctamente para cada plataforma.
 
 <div class="alert alert-info">
-Datadog es compatible con la <txprotected>monitorización</txprotected> de Flutter para iOS y Android para Flutter 3.0+.
+Datadog es compatible con la monitorización de Flutter para iOS y Android para Flutter 3.0+.
 </div>
 
-Datadog no es compatible oficialmente con Flutter Web, pero el actual SDK de Flutter para aplicaciones móviles permite obtener alguna <txprotected>monitorización</txprotected> predefinida. Estas son las limitaciones conocidas:
+Datadog no es compatible oficialmente con Flutter Web, pero el actual SDK de Flutter para aplicaciones móviles permite obtener alguna monitorización predefinida. Estas son las limitaciones conocidas:
   * Todas las acciones notificadas desde Flutter se etiquetan con el tipo `custom`.
   * No se admiten acciones de ejecución prolongada (`startAction` / `stopAction`).
-  * No se admite la notificación manual de recursos RUM (`startResource` / `stopResource`).
+  * No se admite la notificación manual de recursos de RUM (`startResource` / `stopResource`).
   * Los asignadores de eventos no son compatibles actualmente.
   * Las etiquetas (tags) en los registradores no son compatibles actualmente.
   * `addUserExtraInfo` no es compatible.
   * `stopSession` no es compatible.
 
-No está prevista la compatibilidad con Flutter Web, pero las prioridades de Datadog se reevalúan a menudo en función de tus comentarios. Si tienes una aplicación Flutter Web y quieres utilizar Datadog RUM para monitorizar tu rendimiento, ponte en contacto con tu equipo de atención al cliente y solicita esta función.
+No está prevista la compatibilidad con Flutter Web, pero las prioridades de Datadog se reevalúan a menudo en función de tus comentarios. Si tienes una aplicación Flutter Web y quieres utilizar Datadog RUM para monitorizar tu rendimiento, ponte en contacto con tu equipo de atención al cliente y solicita esta característica.
 
 #### iOS
 
-Tu archivo Podfile iOS, ubicado en `ios/Podfile`, debe tener `use_frameworks!` configurado en true (que es el valor predeterminado en Flutter) y debe configurar su versión de iOS de destino >= 11.0.
+Tu archivo iOS Podfile, ubicado en `ios/Podfile`, debe tener `use_frameworks!` configurado en true (que es el valor predeterminado en Flutter) y debes configurar su versión de iOS de destino >= 11.0.
 
 Esta restricción suele comentarse en la línea superior del Podfile y debe decir:
 
@@ -75,7 +75,7 @@ Para Android, tu versión de `minSdkVersion` debe ser >= 21 y si estás utilizan
 
 ### Web
 
-Para Web, añade lo siguiente a tu `index.html` debajo de la etiqueta `head` etiquetar, para el sitio **{{<region-param key="dd_site_name">}}**:
+Para Web, añade lo siguiente a tu `index.html` debajo de la etiqueta `head` , para el sitio **{{<region-param key="dd_site_name">}}**:
 {{< site-region region="us" >}}
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
@@ -123,7 +123,7 @@ Esto carga los SDK del navegador Datadog entregados por CDN para logs y RUM. La 
    dependencies:
      datadog_flutter_plugin: ^2.0.0
    ```
-2. Crea un objeto de configuración para cada función de Datadog (como logs o RUM) con el siguiente fragmento. Si no pasas una configuración para una función determinada, esa función se desactiva.
+2. Crea un objeto de configuración para cada característica de Datadog (como logs o RUM) con el siguiente fragmento. Si no pasas una configuración para una característica determinada, esa característica se desactiva.
 
    ```dart
    // Determine the user's consent to be tracked
@@ -140,7 +140,7 @@ Esto carga los SDK del navegador Datadog entregados por CDN para logs y RUM. La 
    );
    ```
 
-Para más información sobre las opciones disponibles de configuración, consulta la [Documentación del objeto de Configuración Datadog][3].
+Para más información sobre las opciones disponibles de configuración, consulta la [Documentación del objeto DatadogConfiguration][3].
 
 Para garantizar la seguridad de tus datos, utiliza un token de cliente. No puedes utilizar claves de la API de Datadog para configurar el complemento de Datadog Flutter.
 
@@ -149,7 +149,7 @@ Para garantizar la seguridad de tus datos, utiliza un token de cliente. No puede
 
 ## Instrumentar tu solicitud
 
-### Inicializar el biblioteca
+### Inicializar la biblioteca
 
 Puedes inicializar RUM utilizando uno de dos métodos de tu archivo `main.dart`.
 
@@ -161,7 +161,7 @@ Puedes inicializar RUM utilizando uno de dos métodos de tu archivo `main.dart`.
    })
    ```
 
-2. Como alternativa, configura manualmente [Rastreo de errores][4] y el rastreo de recursos. `DatadogSdk.runApp` llama a `WidgetsFlutterBinding.ensureInitialized`, por lo que si no utilizas `DatadogSdk.runApp`, deberá llamar a este método antes de llamar a `DatadogSdk.instance.initialize`.
+2. Como alternativa, configura manualmente [Rastreo de errores][4] y el rastreo de recursos. `DatadogSdk.runApp` llama a `WidgetsFlutterBinding.ensureInitialized`, por lo que si no utilizas `DatadogSdk.runApp`, deberás llamar a este método antes de llamar a `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
@@ -183,15 +183,15 @@ Puedes inicializar RUM utilizando uno de dos métodos de tu archivo `main.dart`.
    runApp(const MyApp());
    ```
 
-### Muestrear sesiones de RUM
+### Muestreo de sesiones de RUM
 
-Para controlar los datos que tu aplicación envía a Datadog RUM, puedes especificar una frecuencia de muestreo para las sesiones RUM mientras inicializas el SDK de Flutter RUM como un porcentaje entre 0 y 100. De forma predeterminada, `sessionSamplingRate` se configura en 100 (mantener todas las sesiones).
+Para controlar los datos que tu aplicación envía a Datadog RUM, puedes especificar una frecuencia de muestreo para las sesiones de RUM, mientras inicializas el SDK de Flutter RUM como un porcentaje entre 0 y 100. De forma predeterminada, `sessionSamplingRate` se configura en 100 (conservar todas las sesiones).
 
-Por ejemplo, para conservar solo el 50% de las sesiones, utiliza:
+Por ejemplo, para conservar solo el 50 % de las sesiones, utiliza:
 
 ```dart
-final config = DatadogConfiguration(
-    // other configuration...
+configuración final = DatadogConfiguration(
+    // otra configuración...
     rumConfiguration: DatadogRumConfiguration(
         applicationId: '<YOUR_APPLICATION_ID>',
         sessionSamplingRate: 50.0,
@@ -201,13 +201,13 @@ final config = DatadogConfiguration(
 
 ### Configurar el consentimiento del rastreo
 
-Para cumplir con la normativa GDPR, el SDK de Datadog Flutter requiere el valor `trackingConsent` en la inicialización.
+Para cumplir con la normativa del Reglamento general de protección de datos (RGPD), el SDK de Datadog Flutter requiere el valor `trackingConsent` en la inicialización.
 
 Configura `trackingConsent` en uno de los siguientes valores:
 
 - `TrackingConsent.pending`: El SDK de Datadog Flutter comienza a recopilar y procesar los datos por lotes, pero no los envía a Datadog. Espera al nuevo valor de consentimiento de rastreo para decidir qué hacer con los datos procesados por lotes.
 - `TrackingConsent.granted`: El SDK de Datadog Flutter comienza a recopilar los datos y los envía a Datadog.
-- `TrackingConsent.notGranted`: El SDK de Flutter Datadog no recopila ningún dato, lo que significa que no se envía ningún log, traza (trace) ni <txprotected>eventos</txprotected> de RUM a Datadog.
+- `TrackingConsent.notGranted`: El SDK de Flutter Datadog no recopila ningún dato, lo que significa que no se envía ningún log, traza (trace) ni evento de RUM a Datadog.
 
 Para cambiar el valor del consentimiento del rastreo después de la inicialización del SDK, utiliza la llamada a la API `DatadogSdk.setTrackingConsent`.
 
@@ -224,7 +224,7 @@ El complemento de Datadog Flutter puede rastrear automáticamente rutas con nomb
 
 ```dart
 MaterialApp(
-  home: HomeScreen(),
+  inicio: HomeScreen(),
   navigatorObservers: [
     DatadogNavigationObserver(DatadogSdk.instance),
   ],
@@ -299,12 +299,12 @@ Para activar [Rastreo distribuido][6] de Datadog, configura la propiedad `Datado
 
 - `firstPartyHosts` no permite comodines, pero coincide con cualquier subdominio de un dominio determinado. Por ejemplo, `api.example.com` coincide con `staging.api.example.com` y `prod.api.example.com`, no con `news.example.com`.
 
-- `DatadogRumConfiguration.traceSampleRate` configura una tasa de muestreo por defecto del 20%. Si deseas que todas las solicitudes de recursos generen una traza distribuida completa, configura este valor en `100.0`.
+- `DatadogRumConfiguration.traceSampleRate` configura una tasa de muestreo por defecto del 20 %. Si deseas que todas las solicitudes de recursos generen una traza distribuida completa, configura este valor en `100.0`.
 
 
 ## Rastreo automático de las acciones
 
-Utiliza [`RumUserActionDetector`][13] para rastrear las pulsaciones del usuario que se producen en un determinado árbol de widget:
+Utiliza [`RumUserActionDetector`][13] para rastrear las pulsaciones del usuario que se producen en un determinado árbol de widgets:
 
 ``dart
 RumUserActionDetector(
@@ -318,11 +318,11 @@ RumUserActionDetector(
 );
 ```
 
-`RumUserActionDetector` detecta automáticamente las acciones pulsadas del usuario que se producen en su árbol y las envía a RUM. Detecta interacciones con varios <txprotected>widgets</txprotected> frecuentes de Flutter.
+`RumUserActionDetector` detecta automáticamente las acciones pulsadas del usuario que se producen en su árbol y las envía a RUM. Detecta interacciones con varios widgets frecuentes de Flutter.
 
 Para la mayoría de los tipos de botones, el detector busca un widget `Text` secundario, que utiliza para la descripción de la acción. En otros casos, busca un objeto `Semantics` secundario o un `Icon` con su propiedad `Icon.semanticsLabel` configurada.
 
-Alternativamente, puede encerrar cualquier árbol de widgets con una [`RumUserActionAnnotation`][14], que utiliza la descripción proporcionada al informar de las acciones del usuario detectadas en el árbol secundario, sin cambiar la semántica del árbol.
+Alternativamente, puedes encerrar cualquier árbol de widgets con una [`RumUserActionAnnotation`][14], que utiliza la descripción proporcionada al informar de las acciones del usuario detectadas en el árbol secundario, sin cambiar la semántica del árbol.
 
 ```dart
 Contenedor(
@@ -349,6 +349,15 @@ Contenedor(
   ),
 );
 ```
+
+## Envío de datos cuando el dispositivo está desconectado
+
+RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En los casos de zonas con baja conexión de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local por lotes. Se envían en cuanto red está disponible y la carga de la batería es lo suficientemente alta como para garantizar que el SDK de RUM de Flutter no afecte a la experiencia del usuario final. Si la red no está disponible cuando la aplicación se ejecuta en primer plano o si falla una carga de datos, el lote se guarda hasta que pueda enviarse correctamente.
+
+Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato.
+
+**Nota**: Los datos del disco se eliminan automáticamente si se vuelven demasiado antiguos para garantizar que el SDK de Flutter RUM no utilice demasiado espacio del disco.
+
 
 ## Referencias adicionales
 
