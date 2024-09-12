@@ -422,7 +422,7 @@ $ eksctl utils associate-iam-oidc-provider \
 # Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account
 # Replace `<YOUR_AGENT_EKS_ROLE>` with the IAM role to be used by the EKS pods where the Agent is running
 $ eksctl create iamserviceaccount \
-  --cluster <YOUR_ESK_CLUSTER> \
+  --cluster <YOUR_EKS_CLUSTER> \
   --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
   --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
   --role-name arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EKS_ROLE> \
