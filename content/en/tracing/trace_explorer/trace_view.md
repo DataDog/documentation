@@ -111,7 +111,7 @@ Example: `web`
 Use key:value expression to filter spans with specific key-value pairs.
 Example: `service:web-ui`
 
-Note: Wildcard is not supported for Trace search bar.
+**Note**: Wildcards are not supported in the Trace search bar.
 
 **Supported experssions:**
 Group expression: `language:(go OR python)`
