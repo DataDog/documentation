@@ -123,20 +123,19 @@ Downsize EC2 instances
 Over-provisioned Kubernetes Containers
 : Containers with less than 30% CPU and memory utilization.
 
-
 Over-provisioned EBS Volume IOPS
 : EBS Volumes where the amount of IOPS exceeds what is being used.
 
-RDS Over-provisioned IOPS
+Over-provisioned RDS IOPS
 : An RDS instance using less than 80% of the provisioned IOPS for reads and writes.
 
-EBS Over-provisioned IOPS
+Over-provisioned EBS IOPS
 : An EBS volume using less than 80% of the provisioned IOPS for reads and writes.
 
-EBS Over-provisioned Storage
+Over-provisioned EBS Storage
 : An EBS volume with less than 20% of its storage capacity used.
 
-EBS Over-provisioned Throughput
+Over-provisioned EBS Throughput
 : An EBS volume using less than 80% of the provisioned throughput for reads and writes.
 
 Over-provisioned DynamoDB Capacity
