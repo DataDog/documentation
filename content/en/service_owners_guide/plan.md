@@ -53,7 +53,7 @@ For example, the [getting started with tagging][2] is a great place to start wit
 **Recommendation**:  
 As early as possible, understand [Datadog Unified Service Tagging][3].  Once developed, you can seamlessly map your infrastructure with your collected tags, unify your data streams to pivot between service metrics, logs and request traces, and assign owners to services to build informative alerts.
 
-{{< img src="/service_owners_guide/unified_service_tagging.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
+{{< img src="/service_owners_guide/unified_service_tagging_2.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
 
 ### RBAC
 
