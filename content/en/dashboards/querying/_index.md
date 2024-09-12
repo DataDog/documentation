@@ -218,7 +218,7 @@ An example of how to express this query in the JSON (or API):
 
 #### Standard Deviation
 
-Here's a query that calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals and rolled up over 1-hour periods.
+Standard deviation helps measure the variability or dispersion of a dataset. The following query calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals, and rolled up over 1-hour periods:
 
 ```text
 "rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',3600)"
