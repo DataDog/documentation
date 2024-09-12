@@ -390,7 +390,7 @@ aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOU
 2. Modify the IAM role for the EKS Service Account where the Agent is running to allow assuming the IAM role created in the previous step.
 
 ```bash
-# Replace `<YOUR_AGENT_ECK_ROLE>` with the IAM role of the EKS Service Account IAM role where the Agent is running
+# Replace `<YOUR_AGENT_EKS_ROLE>` with the EKS Service Account IAM role the Agent is using
 # Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
 # Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account where the RDS instance is located
 aws iam update-assume-role-policy --role-name <YOUR_AGENT_EKS_ROLE> --policy-document '{
