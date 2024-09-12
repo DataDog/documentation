@@ -6,11 +6,12 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-[Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
+[Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Google Cloud Dataproc.
 
 ## Requirements
 
-TODO -> Do we need a specific version of GCP Dataproc ?
+[Dataproc Release 2.0.x][10] or later is required. All of Debian, Rocky Linux, and Ubuntu Dataproc standard images are supported.
+
 
 ## Setup
 
@@ -103,3 +104,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
+[10]: https://cloud.google.com/dataproc/docs/concepts/versioning/overview
