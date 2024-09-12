@@ -115,7 +115,7 @@ Example: `service:web-ui`
 
 **Supported experssions:**
 Group expression: `language:(go OR python)`
-Boolean expression: `service: event-query OR terminator`
+Boolean expression: `service:event-query OR terminator`
 Range expression: `duration:>200ms`
 
 
