@@ -137,9 +137,16 @@ Based on resources the task has used, Datadog assigns the appropriate portion of
 
 ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM enriches that data by adding out-of-the-box tags and container tags to the AWS Fargate cost.
 
+### Data transfer
+
+For Kubernetes data transfer allocation, a Kubernetes node is joined with its associated data transfer costs from the [CUR][103]. The node's cluster name and all node tags are added to the entire data transfer cost for the node. This allows you to associate cluster-level dimensions with the cost of the data transfer, without considering the pods scheduled to the node.
+
+Datadog currently supports data transfer cost allocation only via the [standard 6 workload resources][104]. If you use custom workload resources their data transfer costs may only be allocated down to the cluster level and not the node/namespace level.
+
 [101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
+[104]: https://kubernetes.io/docs/concepts/workloads/
 
 {{% /tab %}}
 {{% tab "Azure" %}}
