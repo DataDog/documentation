@@ -104,7 +104,7 @@ In the Waterfall and Flamegraph visualizations, the search option allows you to 
 The search query on the trace side panel supports the following options:
 
 **Free text search:**
-Free-form text search allows filtering by service, resource or operation name. It highlights the spans containing the specified text within these categories.
+Free-form text search allows filtering by service, resource, or operation name. It highlights the spans containing the specified text within these categories.
 Example: `web`
 
 **Key-value search:**
