@@ -223,7 +223,7 @@ Here's a query that calculates the standard deviation of the sum of API request 
 ```text
 "rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',3600)"
 ```
-An example of how to express this query in the JSON (or API):
+In JSON or API format:
 
 # {{< img src="/dashboards/querying/nested-queries-standard-dev-example.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
 
