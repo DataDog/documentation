@@ -35,14 +35,14 @@ El Datadog Agent requiere acceso de sólo lectura al servidor de la base de dato
 
 Crea un inicio de sesión de sólo lectura para conectarte a tu servidor y concede los permisos necesarios: [Roles Azure SQL][1]:
 ```SQL
-CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-CREATE USER datadog FOR LOGIN datadog;
-ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
-ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+CREAR INICIO DE SESIÓN datadog CON CONTRASEÑA = '<PASSWORD>';
+CREAR USUARIO datadog PARA INICIO DE SESIÓN datadog;
+ALTERAR ROLE DEL SERVIDOR ##MS_ServerStateReader## AÑADIR MIEMBRO datadog;
+ALTERAR ROLE DEL SERVIDOR ##MS_DefinitionReader## AÑADIR MIEMBRO datadog;
+-- Para utilizar la monitorización Log Shipping (disponible en el Agent v7.50 o superior), descomenta las siguientes tres líneas:
+-- UTILIZAR msdb;
+-- CREAR USUARIO datadog PARA INICIO DE SESIÓN datadog;
+-- CONCEDER SELECCIÓN a datadog;
 ```
 
 Concede al Agent acceso a cada Azure SQL Database adicional en este servidor:
@@ -93,15 +93,15 @@ Crea un inicio de sesión de sólo lectura para conectarte a tu servidor y conce
 #### Para las versiones 2014 o posteriores de SQL Server
 
 ```SQL
-CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-CREATE USER datadog FOR LOGIN datadog;
-GRANT CONNECT ANY DATABASE to datadog;
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
--- Para utilizar Log Shipping Monitoring (disponible en el Agent v7.50 o posterior), descomenta las siguientes tres líneas:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+CREAR INICIO DE SESIÓN datadog CON CONTRASEÑA = '<PASSWORD>';
+CREAR USUARIO datadog PARA INICIO DE SESIÓN datadog;
+CONCEDER CONEXIÓN A CUALQUIER BASE DE DATOS a datadog;
+CONCEDER VISUALIZACIÓN DEL ESTADO DEL SERVIDOR a datadog;
+CONCEDER VISUALIZACIÓN DE CUALQUIER DEFINICIÓN a datadog;
+-- Para utilizar la monitorización Log Shipping (disponible en el Agent v7.50 o superior), descomenta las siguientes tres líneas:
+-- UTILIZAR msdb;
+-- CREAR USUARIO datadog PARA INICIO DE SESIÓN datadog;
+-- CONCEDER SELECCIÓN a datadog;
 ```
 
 **Nota:** También se admite la autenticación de identidad gestionada por Azure. Para saber cómo configurarla en tu instancia Azure SQL DB, consulta [la guía][1].
@@ -118,6 +118,9 @@ Para [SQL Server en máquinas virtuales Windows Azure][1], sigue la documentaci�
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
 
 ## Instalación y configuración del Agent
 
@@ -136,7 +139,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     tags:  # Opcional
@@ -158,10 +161,10 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 
 #### Microsoft ADO
 
-El proveedor [ADO][6] recomendado es el [controlador de bases de datos Microsoft OLE][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
+El proveedor [ADO][6] recomendado es el [controlador de Microsoft OLE DB][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL19  # Sustituye por MSOLEDBSQL para las versiones 18 y anteriores
+adoprovider: MSOLEDBSQL19  # Sustituir por MSOLEDBSQL para las versiones 18 y anteriores
 ```
 
 Los otros dos proveedores, `SQLOLEDB` y `SQLNCLI`, se consideran obsoletos por Microsoft y ya no deben ser utilizados.
@@ -177,9 +180,9 @@ driver: '{ODBC Driver 18 for SQL Server}'
 
 Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][9].
 
-### Confirmar
+### Validar
 
-[Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][11] de Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][11] de Datadog para empezar.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -209,13 +212,13 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # Después de añadir tu proyecto y tu instancia, configurar la integración Datadog Azure para extraer datos de nube adicionales, como CPU, memoria, etc.
+    # Después de añadir tu proyecto y tu instancia, configura la integración Datadog Azure para extraer datos de nube adicionales, como CPU, memoria, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
@@ -227,9 +230,9 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 
 Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][6].
 
-### Confirmar
+### Validar
 
-[Ejecuta el subcomando de estado del Agent][7] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][8] de Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][7] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][8] de Datadog para empezar.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
@@ -279,7 +282,7 @@ Para obtener información adicional sobre la configuración de los campos `deplo
 
 Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][4].
 
-### Confirmar
+### Validar
 
 [Ejecuta el subcomando de estado del Agent][5] y busca `sqlserver` en la sección Checks o visita la página [Bases de datos][6] de Datadog para empezar.
 
@@ -312,7 +315,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
           - dbm: true
             host: <HOSTNAME>,1433
             username: datadog
-            password: '<PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             include_ao_metrics: true  # Optional: For AlwaysOn users
@@ -340,7 +343,7 @@ Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>he
 [2]: /es/getting_started/site
 [3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
-### Configuración con archivos montados
+### Configuración con archivos integrados
 
 Para configurar un check de clúster con un archivo de configuración montado, monta el archivo de configuración del contenedor del Cluster Agent en la ruta: `/conf.d/postgres.yaml`:
 
@@ -351,7 +354,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
     driver: "ODBC Driver 18 for SQL Server"
     tags:  # Opcional
@@ -363,9 +366,9 @@ instances:
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
-### Configurar con anotaciones de servicios de Kubernetes
+### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
 
 ```yaml
@@ -382,7 +385,7 @@ metadata:
           "dbm": true,
           "host": "<HOSTNAME>,<SQL_PORT>",
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Opcional

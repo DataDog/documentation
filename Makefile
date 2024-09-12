@@ -102,21 +102,11 @@ node_modules: package.json yarn.lock
 	@yarn install --immutable
 
 source-dd-source:
-	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
+	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
 
 # All the requirements for a full build
 dependencies: clean source-dd-source
-	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders derefs
-
-# make directories
-data/workflows/:
-	mkdir -p $@
-
-# dereference any source jsonschema files
-derefs: $(patsubst integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json, data/workflows/%.json, $(wildcard integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/*/manifest.json))
-
-data/workflows/%.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json node_modules | data/workflows/
-	@node ./assets/scripts/workflow-process.js $< $@
+	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
@@ -139,7 +129,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.41265762-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.43732323-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython

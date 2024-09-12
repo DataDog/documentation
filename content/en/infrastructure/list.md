@@ -56,6 +56,9 @@ Cloud Platform
 Datadog Agent
 : Agent version that is collecting data on the host.
 
+OpenTelemetry
+: OpenTelemetry Collector version that is collecting data on the host.
+
 ### Hostname
 
 The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].

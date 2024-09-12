@@ -24,6 +24,7 @@ categories:
 - automation
 - developer tools
 - event management
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: buddy
 integration_title: Buddy
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: buddy
 public_title: Buddy
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
   media: []
@@ -63,7 +64,7 @@ tile:
 
 
 ## 概要
-Buddy は、Web サイトやアプリケーションのビルド、テスト、デプロイに使用できる継続的インテグレーション自動化プラットフォームです。
+Buddy は Web サイトやアプリケーションのビルド、テスト、デプロイを行うための継続的インテグレーション自動化プラットフォームです。
 
 Buddy インテグレーションにより、以下のことが可能になります。
 
@@ -73,7 +74,7 @@ Buddy インテグレーションにより、以下のことが可能になり�
 
 ![Datadog インテグレーション][1]
 
-## 計画と使用
+## セットアップ
 
 - Datadog のアカウント設定で、[Integrations -> APIs][2] に移動し、**API キー**トークンをコピーします。
 
@@ -97,21 +98,21 @@ ${'${execution.to_revision.revision} - ${execution.to_revision.message}'}
 
 ![スナップショット][5]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Buddy チェックには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 すべての Buddy デプロイイベントが [Datadog のイベントストリーム][6]に送信されます。
 
-### ヘルプ
+### サービスチェック
 
 Buddy チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

@@ -2,7 +2,7 @@
 categories:
 - developer tools
 - notifications
-custom_custom_kind: integration
+custom_kind: integration
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 doc_link: https://docs.datadoghq.com/integrations/webhooks/
@@ -117,7 +117,7 @@ $ID
 
 $INCIDENT_ATTACHMENTS
 : インシデントの添付 (事後分析やドキュメントなど) のある JSON オブジェクトのリスト。<br />
-**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]` 
+**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]`
 
 $INCIDENT_COMMANDER
 : JSON オブジェクトとインシデントコマンダーのハンドル、uuid、名前、メール、およびアイコン
@@ -257,13 +257,13 @@ $SNAPSHOT
 $SYNTHETICS_TEST_NAME
 : Synthetics テストの名前。
 
-$SYNTHETICS_FIRST_FAILING_STEP_NAME 
+$SYNTHETICS_FIRST_FAILING_STEP_NAME
 : Synthetics テストの最初の失敗したステップの名前。
 
 $SYNTHETICS_SUMMARY
-: Synthetic テストの詳細の概要<br />
-**例**:
-```
+: Summary of Synthetic test details.<br />
+**Example**:
+: {{< code-block lang="json">}}
 {
   "result_id": "1871796423670117676",
   "test_type": "browser",
@@ -283,7 +283,7 @@ $SYNTHETICS_SUMMARY
     }
   ]
 }
-```
+{{< /code-block >}}
 
 $TAGS
 : イベントタグのカンマ区切りリスト。<br />
@@ -398,10 +398,10 @@ URL として使用する:
 | `query_alert_monitor` | メトリクス、異常値、予測 |
 | `rum_alert` | RUM |
 | `service_check` | ホスト、サービスチェック |
-| `synthetics_alert` | テストを一時停止または開始する |
+| `synthetics_alert` | Synthetics |
 | `trace_analytics_alert` | トレース分析 |
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

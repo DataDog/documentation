@@ -23,7 +23,7 @@ This guide provides best practices for managing your custom metrics volumes thro
 - [Find and understand your metrics usage and costs](#visibility-and-attribution)
 - [Identify your largest cost drivers](#account-level-visibility)
 - [Attribute your largest cost drivers to the teams or services responsible for them](#team-level-visibility-and-attribution)
-- [Reduce costs on less valuable, unused metrics](#value-driven-metrics-governance)
+- [Reduce costs on less valuable, unused metrics](#value-based-metrics-governance)
 - [Monitor and control usage before incurring billing overages](#monitoring-and-prevention)
 
 
@@ -135,9 +135,10 @@ To ensure you're not removing valuable visibility while reducing costs, you need
 
 Identify your organization's entire list of unqueried metrics over the past 30 days: 
 1. On the [Metrics Summary page][6], find the **Query Activity (past 30 days)** facet on the left side.
-2. Select **Not Actively Queried**. 
-3. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
-4. (Optional) To export this list, click **Export as CSV** above the metric table.
+2. Select **Not Actively Queried**.
+3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these two facets provides you a list of unqueried custom metrics that haven't yet been configured that you can receive immediate cost savings from.
+4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
+5. (Optional) To export this list, click **Export as CSV** above the metric table.
 
 After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
 

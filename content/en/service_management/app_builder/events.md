@@ -26,21 +26,25 @@ For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button
 
 App Builder provides functions for some types of app state changes on specific components.
 
-setValue
-: Sets the value of an element to the value that you provide to the function.<br>
-**Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, and **text input** components.
-
 setIsOpen
 : Sets the status of a modal to open or closed based on the boolean value that you provide.<br>
 **Example**: See the [Components][1] documentation page section for the **modal** component.
+
+setPageIndex
+: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.<br>
+**Example**: See the [Components][1] documentation page section for the **table** component.
 
 setSelectedRow
 : Sets the `selectedRow` property of the table component to the row that you specify.<br>
 **Example**: See the [Components][1] documentation page section for the **table** component.
 
-setPageIndex
-: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.<br>
-**Example**: See the [Components][1] documentation page section for the **table** component.
+setTabIndex
+: Sets the `selectedTabIndex` property of the table component to the tab index that you specify.<br>
+**Example**: See the [Components][1] documentation page section for the **tab** component.
+
+setValue
+: Sets the value of an element to the value that you provide to the function.<br>
+**Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, **text area**, and **text input** components.
 
 To see what state functions are available for a given component, see [Components][1].
 

@@ -35,7 +35,7 @@ widget_type: 変化
     * an hour before (1 時間前)
     * a day before (1 日前)
     * a week before (1 週間前)
-    * a month before (1 か月前)
+    * a month before
 6. `relative` または `absolute` 変化を選択します。
 7. メトリクスの順序を決めるフィールドを選択します。
     * `change`
@@ -65,4 +65,4 @@ widget_type: 変化
 [2]: /ja/api/latest/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/
 [6]: /ja/monitors/types/metric/?tab=change
-[7]: /ja/monitors/guide/change-alert/
+[7]: /ja/monitors/types/change-alert/

@@ -8,6 +8,9 @@ further_reading:
     - link: '/dashboards/guide/context-links/'
       tag: 'Documentation'
       text: 'Custom Links'
+    - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
+      tag: "blog"
+      text: "Transform and enrich your logs with Datadog Observability Pipelines"
 
 ---
 

@@ -11,6 +11,7 @@ categories:
 - 言語
 - メトリクス
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: rum-javascript
 integration_title: JavaScript
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rum_javascript
 public_title: JavaScript
@@ -34,6 +34,7 @@ tile:
   - Category::Metrics
   - Category::Tracing
   - Supported OS::Any
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
   media: []
@@ -62,7 +63,7 @@ JavaScript アプリケーションをエンドツーエンドで監視します
 - フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
 
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -76,9 +77,9 @@ JavaScript アプリケーションのトレースを Datadog に送信し始め
 
 JavaScript アプリケーションのログを Datadog に転送し始めるには、[ブラウザログ収集][4]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 JavaScript インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
 
@@ -90,11 +91,11 @@ JavaScript インテグレーションには、メトリクスは含まれてい
 
 JavaScript インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

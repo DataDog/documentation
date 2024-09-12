@@ -1324,7 +1324,7 @@
             {
               "attributes": {
                 "attachment": {
-                  "documentUrl": "https://app.datadoghq.com/notebook/123",
+                  "documentUrl": "",
                   "title": "Postmortem IR-123"
                 },
                 "attachment_type": "postmortem"
@@ -1451,7 +1451,7 @@
             {
               "attributes": {
                 "attachment": {
-                  "documentUrl": "https://app.datadoghq.com/notebook/123",
+                  "documentUrl": "",
                   "title": "Postmortem IR-123"
                 },
                 "attachment_type": "postmortem"
@@ -2291,9 +2291,9 @@
               "attributes": {
                 "assignees": [
                   {
-                    "description": "undefined",
-                    "example": "undefined",
-                    "type": "undefined"
+                    "description": "@test.user@test.com",
+                    "example": "@test.user@test.com",
+                    "type": "@test.user@test.com"
                   }
                 ],
                 "completed": "2023-03-06T22:00:00.000000+00:00",
@@ -2438,9 +2438,9 @@
             "attributes": {
               "assignees": [
                 {
-                  "description": "undefined",
-                  "example": "undefined",
-                  "type": "undefined"
+                  "description": "@test.user@test.com",
+                  "example": "@test.user@test.com",
+                  "type": "@test.user@test.com"
                 }
               ],
               "completed": "2023-03-06T22:00:00.000000+00:00",
@@ -2580,9 +2580,9 @@
           "attributes": {
             "assignees": [
               {
-                "description": "undefined",
-                "example": "undefined",
-                "type": "undefined"
+                "description": "@test.user@test.com",
+                "example": "@test.user@test.com",
+                "type": "@test.user@test.com"
               }
             ],
             "completed": "2023-03-06T22:00:00.000000+00:00",
@@ -2653,9 +2653,9 @@
             "attributes": {
               "assignees": [
                 {
-                  "description": "undefined",
-                  "example": "undefined",
-                  "type": "undefined"
+                  "description": "@test.user@test.com",
+                  "example": "@test.user@test.com",
+                  "type": "@test.user@test.com"
                 }
               ],
               "completed": "2023-03-06T22:00:00.000000+00:00",
@@ -2792,9 +2792,9 @@
             "attributes": {
               "assignees": [
                 {
-                  "description": "undefined",
-                  "example": "undefined",
-                  "type": "undefined"
+                  "description": "@test.user@test.com",
+                  "example": "@test.user@test.com",
+                  "type": "@test.user@test.com"
                 }
               ],
               "completed": "2023-03-06T22:00:00.000000+00:00",
@@ -2934,9 +2934,9 @@
           "attributes": {
             "assignees": [
               {
-                "description": "undefined",
-                "example": "undefined",
-                "type": "undefined"
+                "description": "@test.user@test.com",
+                "example": "@test.user@test.com",
+                "type": "@test.user@test.com"
               }
             ],
             "completed": "2023-03-06T22:00:00.000000+00:00",

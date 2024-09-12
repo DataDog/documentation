@@ -24,6 +24,7 @@ author:
 categories:
 - ネットワーク
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: pihole
 integration_title: Pi-hole
 integration_version: 3.14.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pihole
 public_title: Pi-hole
@@ -50,6 +50,7 @@ tile:
   - Supported OS::Windows
   - Category::Network
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pi-hole のデフォルトメトリクスを収集するインテグレーション
   media: []
@@ -65,11 +66,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Pi-hole][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Pi-hole チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Pi-hole チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -81,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Pi-hole チェ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Pi-hole のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `pihole.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pihole.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -91,7 +92,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Pi-hole チェ
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `pihole` を探します。
 
-### 収集データ
+### ログ収集
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][8]を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -107,21 +108,21 @@ logs_enabled: true
         source: pihole
     ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "pihole" >}}
 
 
-### ヘルプ
+### イベント
 
 Pi-hole には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "pihole" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

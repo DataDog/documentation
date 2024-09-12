@@ -1,7 +1,8 @@
 ---
 app_id: vantage
 app_uuid: 2784a986-2673-4189-a3b8-320755f6c2b4
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.vantage.sh
   name: Vantage
@@ -10,6 +11,7 @@ author:
 categories:
 - コスト管理
 - クラウド
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vantage/README.md
 display_on_public_website: true
@@ -19,9 +21,6 @@ integration_id: vantage
 integration_title: Vantage
 integration_version: ''
 is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/terms-of-service.pdf
 manifest_version: 2.0.0
 name: vantage
 public_title: Vantage
@@ -43,13 +42,13 @@ tile:
   description: Datadog のコストをインポートし、他のインフラストラクチャー費用と一緒に追跡することができます
   media:
   - caption: Datadog の月額コストと予算
-    image_url: assets/images/vantage-datadog-budget-forecast.png
+    image_url: images/vantage-datadog-budget-forecast.png
     media_type: image
   - caption: Datadog のコスト - サービス別グループ分け
-    image_url: assets/images/vantage-datadog-grouped-report.png
+    image_url: images/vantage-datadog-grouped-report.png
     media_type: image
   - caption: プロバイダー比較の概要
-    image_url: assets/images/vantage-datadog-provider-summary.png
+    image_url: images/vantage-datadog-provider-summary.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -57,6 +56,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,7 +69,7 @@ Vantage は、クラウドコストの透明性と最適化のためのプラッ
 
 [Vantage][1] にアクセスし、無料で登録します。登録が完了したら、[Vantage インテグレーションページ][2]にアクセスし、Datadog インテグレーションを追加してください。これにより、Datadog OAUTH2 フローを使用して、Vantage が請求および使用量にアクセスできるようになります。
 
-### コンフィギュレーション
+### 構成
 
 インテグレーションが完了したら、Vantage で Datadog のコスト調査を開始します。特定の Datadog 組織およびサービスに対するフィルターを作成し、サポートされている他の Vantage プロバイダーのコストと一緒に表示することができます。
 
@@ -79,7 +79,7 @@ Vantage から Datadog インテグレーションを削除するには、[Vanta
 
 さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][3]でインテグレーション名を検索して確認してください。
 
-## サポート
+## Agent
 
 ご不明な点は、[Vantage のサポートチーム][4]までお問い合わせください。
 

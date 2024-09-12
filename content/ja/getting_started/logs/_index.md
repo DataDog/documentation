@@ -6,15 +6,24 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: ラーニングセンター
   text: ログ処理を極める
+- link: https://learn.datadoghq.com/courses/log-indexes
+  tag: ラーニングセンター
+  text: インデックス化ログボリュームの管理と監視
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: ラーニングセンター
+  text: ログパイプラインの構築と管理
+- link: https://learn.datadoghq.com/courses/integration-pipelines
+  tag: ラーニングセンター
+  text: インテグレーションパイプラインですぐに使えるログの処理
 - link: /logs/log_collection/
-  tag: Documentation
-  text: ログの収集とインテグレーション
+  tag: ドキュメント
+  text: ログ収集とインテグレーション
 - link: /getting_started/tagging/unified_service_tagging
   tag: ドキュメント
   text: 統合サービスタグ付けの構成方法を学ぶ
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
+  text: ログ管理を最適化するためのインタラクティブセッションにご参加ください
 title: ログの使用を開始する
 ---
 
@@ -95,13 +104,13 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 
 ロギングソースを構成すると、ログを[ログエクスプローラー][16]で確認できます。ここでログをフィルタリング・集約・可視化することができます。
 
-例えば、あるサービスから流れてくるログをさらに調査するには、`service` でフィルタリングします。さらに、`ERROR` などの `status` などでフィルタリングし、[パターン別集計][17]を選択すると、サービスのどの部分で最も多くのエラーが記録されているかを確認することができます。
+例えば、あるサービスから流れてくるログをさらに調査するには、`service` でフィルタリングします。さらに、`ERROR` などの `status` などでフィルタリングし、[Group into Patterns][17] を選択すると、サービスのどの部分で最も多くのエラーが記録されているかを確認することができます。
 
-{{< img src="/getting_started/logs/error-pattern.png" alt="ログエクスプローラーでのエラーパターンによるフィルタリング">}}
+{{< img src="/getting_started/logs/error-pattern-2024.png" alt="Log Explorer でのエラーパターンによるフィルタリング">}}
 
-`Source` の `Field` でログを集計し、**トップリスト**の表示オプションに切り替えると、上位のログサービスを確認することができます。`error` のようなソースを選択し、ドロップダウンメニューから **View Logs** を選択します。サイドパネルにはエラーに基づくログが表示されるため、注意が必要なホストやサービスをすぐに確認することができます。
+ログを `Fields` に集計し、**トップリスト**として可視化すると、上位のログサービスを確認することができます。`info` や `warn` のようなソースを選択し、ドロップダウンメニューから **View Logs** を選択します。サイドパネルにはエラーに基づくログが表示されるため、注意が必要なホストやサービスをすぐに確認することができます。
 
-{{< img src="/getting_started/logs/top-list-view.png" alt="ログエクスプローラーのトップリスト">}}
+{{< img src="/getting_started/logs/top-list-view-2024.png" alt="Log Explorer のトップリスト">}}
 
 ## 次のステップ
 
@@ -111,7 +120,7 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 
 * [属性とエイリアス][18]を設定して、ログ環境を統一します。
 * [パイプライン][19]や[プロセッサー][20]を使って、ログの処理方法をコントロールすることができます。
-* Logging without Limits* では、ログの取り込みとインデックス処理を分離しているため、インデックス化するもの、保持するもの、アーカイブするものを選択して[ログを構成[21]することができます。
+* Logging without Limits* では、ログの取り込みとインデックス処理を分離しているため、[ログを構成][21]して、[インデックス化][22]するログ、[保持][23]するログ、[アーカイブ][24]するログを選択することができます。
 
 ### ログの相関付け
 
@@ -120,11 +129,11 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 
 ### ガイド
 
-* [ログ管理のベストプラクティス][22]
-* [Logging without Limits*][23] の詳細
-* [RBAC 設定][24]による機密ログデータの管理
+* [ログ管理のベストプラクティス][25]
+* [Logging without Limits*][26] の詳細
+* [RBAC 設定][27]による機密ログデータの管理
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -147,11 +156,14 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
 [16]: /ja/logs/explorer/
-[17]: /ja/logs/explorer/#patterns
+[17]: /ja/logs/explorer/analytics/patterns/
 [18]: /ja/logs/log_configuration/attributes_naming_convention/
 [19]: /ja/logs/log_configuration/pipelines/
 [20]: /ja/logs/log_configuration/processors/
 [21]: /ja/logs/log_configuration/
-[22]: /ja/logs/guide/best-practices-for-log-management/
-[23]: /ja/logs/guide/getting-started-lwl/
-[24]: /ja/logs/guide/logs-rbac/
+[22]: https://docs.datadoghq.com/ja/logs/log_configuration/indexes
+[23]: https://docs.datadoghq.com/ja/logs/log_configuration/flex_logs
+[24]: https://docs.datadoghq.com/ja/logs/log_configuration/archives
+[25]: /ja/logs/guide/best-practices-for-log-management/
+[26]: /ja/logs/guide/getting-started-lwl/
+[27]: /ja/logs/guide/logs-rbac/

@@ -3,7 +3,7 @@ algolia:
   tags:
   - ecs
 aliases:
-- /agent/amazon_ecs/
+- /ja/agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: ドキュメント
@@ -53,7 +53,7 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
 
 1. Linux コンテナの場合、[datadog-Agent-ecs.json][20] をダウンロードします。
     - Amazon Linux 1 (AL1、旧 Amazon Linux AMI) 使用している場合は、[datadog-agent-ecs1.json][21] を使用します。
-    - Windows を使用している場合は、[datadog-Agent-ecs-win.json][22] を使用します。
+    - Windows を使用している場合は、[datadog-agent-ecs-win.json][22] を使用します。
 
    <div class="alert alert-info">
    These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
@@ -63,7 +63,7 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
     - ご利用の [Datadog サイト][13]を `DD_SITE` 環境変数に設定します。サイトは次のとおりです: {{< region-param key="dd_site" code="true" >}}
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - オプションで、`DD_TAGS` 環境変数を追加して、追加のタグを指定します。
 
@@ -284,7 +284,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.3",
+            "image": "datadog/fips-proxy:1.1.4",
             "portMappings": [
                 {
                     "containerPort": 9803,
