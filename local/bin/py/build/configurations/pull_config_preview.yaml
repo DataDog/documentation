@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -94,7 +94,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: docs8718/update-azure-ad
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
