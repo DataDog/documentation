@@ -24,7 +24,7 @@ For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button
 
 ### State functions
 
-App Builder provides functions for some types of app state changes in custom event reactions for specific components and in post-query hooks.
+App Builder provides functions for some types of app state changes. These functions are available in custom event reactions for specific components and in post-query hooks.
 
 
 fetch
