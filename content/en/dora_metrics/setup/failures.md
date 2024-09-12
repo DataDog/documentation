@@ -6,6 +6,7 @@ aliases:
 - /dora_metrics/setup/incidents
 - /dora_metrics/failures/incident_api
 - /dora_metrics/failures/pagerduty
+- /dora_metrics/failures/
 is_beta: true
 further_reading:
 - link: "/continuous_integration/dora_metrics/setup/deployments"
@@ -35,10 +36,31 @@ further_reading:
 
 Failed deployments events, currently interpreted through incident events, are used to compute [change failure rate](#calculating-change-failure-rate) and [mean time to restore (MTTR)](#calculating-mean-time-to-restore). 
 
-## Selecting an incident data source
+## Configuring an incident data source
 
 {{< tabs >}}
 {{% tab "PagerDuty" %}}
+[PagerDuty][104] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
+
+To integrate your PagerDuty account with DORA Metrics: 
+
+1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
+
+1. Click **+ New Webhook** and enter the following details:
+
+   | Variable | Description |
+   |---|---|
+   | Webhook URL | Add `https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/`. |
+   | Scope Type | Select **Account** to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type. |
+   | Description | A description helps distinguish the webhook. Add something like `Datadog DORA Metrics integration`. |
+   | Event Subscription | Select the following events:<br>-`incident.acknowledged`<br>-`incident.annotated`<br>-`incident.custom_field_values.updated`<br>-`incident.delegated`<br>-`incident.escalated`<br>-`incident.priority_updated`<br>-`incident.reassigned`<br>-`incident.reopened`<br>-`incident.resolved`<br>-`incident.triggered`<br>-`incident.unacknowledged` |
+   | Custom Headers | Click **Add custom header**, enter `DD-API-KEY` as the name, and input your [Datadog API key][105] as the value.<br>  <br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name `dd_env` and the desired environment as the value. |
+
+1. To save the webhook, click **Add Webhook**.
+
+The severity of the incident in the DORA Metrics product is based on the [incident priority][106] in PagerDuty.
+
+**Note:** Upon webhook creation, a new secret is created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed using the API key instead.
 
 ### Mapping PagerDuty services to Datadog services
 
@@ -60,39 +82,9 @@ The matching algorithm works in the following scenarios:
 [101]: https://support.pagerduty.com/docs/services-and-integrations
 [102]: /service_catalog/
 [103]: /service_catalog/integrations/#pagerduty-integration
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Configuring an incident data source
-
-{{< tabs >}}
-{{% tab "PagerDuty" %}}
-[PagerDuty][10] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
-
-To integrate your PagerDuty account with DORA Metrics: 
-
-1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
-
-1. Click **+ New Webhook** and enter the following details:
-
-   | Variable | Description |
-   |---|---|
-   | Webhook URL | Add `https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/`. |
-   | Scope Type | Select **Account** to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type. |
-   | Description | A description helps distinguish the webhook. Add something like `Datadog DORA Metrics integration`. |
-   | Event Subscription | Select the following events:<br>-`incident.acknowledged`<br>-`incident.annotated`<br>-`incident.custom_field_values.updated`<br>-`incident.delegated`<br>-`incident.escalated`<br>-`incident.priority_updated`<br>-`incident.reassigned`<br>-`incident.reopened`<br>-`incident.resolved`<br>-`incident.triggered`<br>-`incident.unacknowledged` |
-   | Custom Headers | Click **Add custom header**, enter `DD-API-KEY` as the name, and input your [Datadog API key][11] as the value.<br>  <br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name `dd_env` and the desired environment as the value. |
-
-1. To save the webhook, click **Add Webhook**.
-
-The severity of the incident in the DORA Metrics product is based on the [incident priority][12] in PagerDuty.
-
-**Note:** Upon webhook creation, a new secret is created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed using the API key instead.
-
-[10]: /integrations/pagerduty/
-[11]: https://app.datadoghq.com/organization-settings/api-keys
-[12]: https://support.pagerduty.com/main/docs/incident-priority
+[104]: /integrations/pagerduty/
+[105]: https://app.datadoghq.com/organization-settings/api-keys
+[106]: https://support.pagerduty.com/main/docs/incident-priority
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -174,4 +166,4 @@ DORA Metrics generates the `dora.time_to_restore` metric by recording the start 
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
-[7]: /dora_metrics/deployments
+[7]: /dora_metrics/setup/deployments

@@ -6,9 +6,10 @@ aliases:
 - /dora_metrics/setup/deployments
 - /dora_metrics/deployments/apm
 - /dora_metrics/deployments/deployment_api
+- /dora_metrics/deployments
 is_beta: true
 further_reading:
-- link: "/dora_metrics/failures"
+- link: "/dora_metrics/setup/failures"
   tag: "Documentation"
   text: "Learn about setting up failure data in DORA Metrics"
 - link: "/tracing/service_catalog"
@@ -49,7 +50,7 @@ For more information about ensuring service deployments that are tracked by APM 
 [15]: /tracing/services/deployment_tracking
 [16]: /service_catalog/adding_metadata 
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
-[18]: /dora_metrics/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
+[18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
 
 {{% /tab %}}
 {{% tab "API or CLI" %}}
