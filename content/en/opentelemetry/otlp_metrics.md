@@ -54,7 +54,11 @@ To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
 
 ### Configure the exporter
 
-To send OTLP data to the Datadog OTLP metrics intake endpoint, you need to use the OTLP HTTP Protobuf exporter. The process differs depending on whether you are using automatic or manual instrumentation for OpenTelemetry.
+To send OTLP data to the Datadog OTLP metrics intake endpoint, use the OTLP HTTP exporter. For metrics, the exporter supports both HTTP Protobuf and HTTP JSON. HTTP Protobuf is recommended for better performance.
+
+The process differs depending on whether you're using automatic or manual instrumentation for OpenTelemetry.
+
+<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}: Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_metrics_endpoint" code="true" >}}.</div>
 
 #### Ensure only delta metrics are sent
 
@@ -77,8 +81,6 @@ export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="delta"
 #### Manual instrumentation
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically.
-
-<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}: Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_metrics_endpoint" code="true" >}}.</div>
 
 {{< tabs >}}
 {{% tab "JavaScript" %}}
