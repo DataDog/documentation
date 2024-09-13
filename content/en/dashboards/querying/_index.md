@@ -234,7 +234,7 @@ High-resolution queries allow you to obtain more granular data over extended per
 ```text
 "rollup(sum:dd.metrics.query.batch.count{*}.rollup(avg,300),`stddev`,14400)"
 ```
-An example of how to express this query in the JSON (or API):
+In JSON or API format:
 
 # {{< img src="/dashboards/querying/nested-queries-higher-res-example.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 
