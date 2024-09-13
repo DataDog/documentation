@@ -212,7 +212,7 @@ Here's a query that calculates the 95th percentile of average CPU utilization fo
 ```text
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
-An example of how to express this query in the JSON (or API):
+In JSON or API format:
 
 # {{< img src="/dashboards/querying/nested-queries-percentiles-example.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 
