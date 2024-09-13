@@ -153,7 +153,7 @@ Other functions cannot be combined with multilayer aggregation.
 
 #### Multilayer time aggregation
 
-Multilayer Time aggregation can be expressed with `rollup`. The first `rollup` applied to a query will always determine its base level precision and aggregation as documented [here][19]. The first rollup supports the following aggregators:
+Multilayer time aggregation is expressed with the `rollup` function. The first `rollup` applied to a query determines its base level precision and aggregation. For more information, see the [Rollup][19] documentation. Subsequent rollups allow for additional layers of time aggregation.
 
 - `avg`
 - `sum`
