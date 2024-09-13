@@ -489,7 +489,7 @@ When using OpenTelemetry, map the following [resource attributes][16] to their c
 | `service.name` | `service` |
 | `service.version` | `version` |
 
-* `deployment.environment` has been deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][3]
+* `deployment.environment` has been deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][17]
 * `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog exporter v0.110.0+
 
 <div class="alert alert-warning">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
@@ -566,3 +566,4 @@ processors:
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
 [16]: https://opentelemetry.io/docs/languages/js/resources/
+[17]: https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.27.0
