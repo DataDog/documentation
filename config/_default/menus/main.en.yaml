@@ -4817,6 +4817,11 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
       weight: 8
+    - name: Guides
+      url: observability_pipelines/guide/
+      parent: observability_pipelines
+      identifier: observability_pipelines_guide
+      weight: 9
     - name: Log Management
       url: logs/
       pre: log
