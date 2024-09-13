@@ -24414,12 +24414,6 @@ components:
           format: int64
           nullable: true
           type: integer
-        color:
-          description: An identifier for the color representing the team
-          format: int32
-          maximum: 13
-          minimum: 0
-          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -40176,6 +40170,9 @@ paths:
         - name: team_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
@@ -40313,6 +40310,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
+      patch: false
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
