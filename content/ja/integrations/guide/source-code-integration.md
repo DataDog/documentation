@@ -473,7 +473,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 2. 課題をクリックします。右側に **Issue Details** パネルが表示されます。
 3. **Latest Event** の下で、フレームの右側にある **View** ボタンをクリックするか、**View file**、**View Git blame**、**View commit** を選択すると、ソースコード管理ツールにリダイレクトされます。
 
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="Error Tracking のエラースタックトレースの右側に表示される、3 つのオプション (ファイルの表示、注釈の表示、コミットの表示) を備えたリポジトリの表示ボタンと、スタックトレース内のインラインコードスニペット” style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="Error Tracking のエラースタックトレースの右側に表示される、3 つのオプション (ファイルの表示、注釈の表示、コミットの表示) を備えたリポジトリの表示ボタンと、スタックトレース内のインラインコードスニペット" style="width:100%;">}}
 
 GitHub インテグレーションを使用している場合、または GitLab SaaS インスタンス (gitlab.com) でリポジトリをホストしている場合は、スタックフレームの **Connect to preview** をクリックします。スタックトレースでインラインコードスニペットを直接見ることができます。
 
