@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -118,7 +118,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs8870/config-events-setup
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
