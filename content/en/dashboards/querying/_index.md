@@ -178,7 +178,7 @@ This query calculates the 95th percentile of average CPU utilization for each EC
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
 
-An example of how to express this query in the JSON (or API):
+In JSON or API format, it would look as follows:
 
 # {{< img src="/dashboards/querying/multilayer-time-agg-example.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
 
