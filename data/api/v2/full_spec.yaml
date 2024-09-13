@@ -10567,6 +10567,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             at creation.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
@@ -10855,7 +10862,8 @@ components:
           example: Jane Doe
           type: string
         handle:
-          description: The email address used for the notification.
+          description: The handle used for the notification. This includes an email
+            address, Slack channel, or workflow.
           example: '@test.user@test.com'
           type: string
       type: object
@@ -10968,6 +10976,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           nullable: true
@@ -11937,6 +11952,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
