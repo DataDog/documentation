@@ -88,9 +88,9 @@ If you are using manual instrumentation with OpenTelemetry SDKs, configure the O
 The JavaScript exporter is [`@opentelemetry/exporter-metrics-otlp-proto`][100]. To configure the exporter, use the following code snippet:
 
 ```javascript
-const { OTLPmetricExporter } = require('@opentelemetry/exporter-metrics-otlp-proto'); 
+const { OTLPMetricExporter } = require('@opentelemetry/exporter-metrics-otlp-proto'); 
 
-const exporter = new OTLPmetricExporter({
+const exporter = new OTLPMetricExporter({
   url: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
   temporalityPreference: AggregationTemporalityPreference.DELTA, // Ensure delta temporality
   headers: {
