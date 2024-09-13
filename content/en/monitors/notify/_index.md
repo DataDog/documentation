@@ -168,7 +168,7 @@ Test notifications are supported for the [monitor types][15]: host, metric, anom
 
 2. From the test notifications pop-up, choose the monitor transition to test and the group (available only if the query has [grouping][16]). You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][17] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
 3. Click **Run Test** to send notifications to the people and services listed in the monitor.
 
