@@ -4,6 +4,9 @@ further_reading:
 - link: "/sheets/"
   tag: "Documentation"
   text: "Learn more about Datadog Sheets"
+- link: "/sheets/functions_operators/"
+  tag: "Documentation"
+  text: "Sheets Functions and Operators"
 ---
 
 ## Overview
