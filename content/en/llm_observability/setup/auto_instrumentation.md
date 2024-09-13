@@ -113,13 +113,13 @@ The Anthropic integration instruments the following methods:
 
 ## Google Gemini
 
-The Google Gemini integration provides automatic tracing for the [Google AI Python SDK's][9] content generation calls. 
+The Google Gemini integration provides automatic tracing for the [Google AI Python SDK's][19] content generation calls.
 
 ### Traced methods
 
 The Google Gemini integration instruments the following methods:
 
-- [Generating content][19] (including streamed calls):
+- [Generating content][20] (including streamed calls):
   - `model.generate_content()` (Also captures `chat.send_message()`)
   - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
 
@@ -145,4 +145,5 @@ The Google Gemini integration instruments the following methods:
 [16]: /llm_observability/setup/sdk/
 [17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
 [18]: /llm_observability/setup/sdk/#tracing-spans
-[19]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
+[19]: https://ai.google.dev/gemini-api/docs
+[20]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
