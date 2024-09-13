@@ -484,13 +484,13 @@ When using OpenTelemetry, map the following [resource attributes][16] to their c
 
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |
-| `deployment.environment`* | `env` |
-| `deployment.environment.name`* | `env` |
+| `deployment.environment` <sup>1</sup>  | `env` |
+| `deployment.environment.name` <sup>2</sup> | `env` |
 | `service.name` | `service` |
 | `service.version` | `version` |
 
-* `deployment.environment` has been deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][17]
-* `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog exporter v0.110.0+
+1: `deployment.environment` is deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][17].  
+2: `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog Exporter v0.110.0+.
 
 <div class="alert alert-warning">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
 

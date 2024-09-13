@@ -20,15 +20,15 @@ OpenTelemetry makes use of a number of [semantic conventions][1] that specify na
 
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |
-| `deployment.environment`* | `env` |
-| `deployment.environment.name`* | `env` |
+| `deployment.environment` <sup>1</sup>  | `env` |
+| `deployment.environment.name` <sup>2</sup> | `env` |
 | `service.name` | `service` |
 | `service.version` | `version` |
 
 For more information, see [Unified Service Tagging][2].
 
-* `deployment.environment` has been deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][4]
-* `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog exporter v0.110.0+
+1: `deployment.environment` has been deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][4]  
+2: `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog Exporter v0.110.0+
 
 ### Containers
 
