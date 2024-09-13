@@ -1,5 +1,5 @@
 ---
-title: Understanding Deployment Data for DORA Metrics
+title: How to Set Up Deployment Data for DORA Metrics
 description: Learn how to send deployment events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/deployments
@@ -33,7 +33,7 @@ further_reading:
 
 Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate). 
 
-## Configuring a deployment data source
+## Selecting and configuring a deployment data source
 
 {{< tabs >}}
 {{% tab "APM Deployment Tracking" %}}

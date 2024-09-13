@@ -29,15 +29,15 @@ The four DORA Metrics are calculated based on two types of events which support 
 ### Select a deployment data source
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up the data source for your deployment events:" >}}
-  {{< nextlink href="/dora_metrics/setup/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/setup/deployments/deployment_api" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/deployments?tab=apmdeploymenttracking" >}}APM Deployment Tracking{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/deployments?tab=apiorcli" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Select an incident data source
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for incident events. See the respective documentation to set up a data source for your incident events:" >}}
-  {{< nextlink href="/dora_metrics/setup/failures/pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/setup/failures/incident_api" >}}Incident Event API{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=pagerduty" >}}PagerDuty{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=incident_api" >}}Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Limitations

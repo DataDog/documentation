@@ -1,5 +1,5 @@
 ---
-title: Understanding Incident Data for DORA Metrics
+title: How to Set Up Incident Data for DORA Metrics
 description: Learn how to send incident events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents
@@ -36,7 +36,7 @@ further_reading:
 
 Failed deployments events, currently interpreted through incident events, are used to compute [change failure rate](#calculating-change-failure-rate) and [mean time to restore (MTTR)](#calculating-mean-time-to-restore). 
 
-## Configuring an incident data source
+## Selecting and configuring an incident data source
 
 {{< tabs >}}
 {{% tab "PagerDuty" %}}
