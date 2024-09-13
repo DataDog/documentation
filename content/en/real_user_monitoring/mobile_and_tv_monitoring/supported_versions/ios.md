@@ -35,8 +35,8 @@ The RUM iOS SDK supports the following iOS versions:
 | iPadOS | {{< X >}} | 12+ | |
 | macOS (Designed for iPad) | {{< X >}} | 11+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
-| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
-| visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogCrashReporting` is not supported on visionOS due to a lack of support on the [PLCrashreporter][1] side. |
+| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
+| visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogCrashReporting` is not supported on visionOS due to a lack of support on the [PLCrashReporter][1] side. |
 | watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: only `DatadogLogs` and `DatadogTrace` can build on watchOS. |
 | Linux | | n/a | |
 
