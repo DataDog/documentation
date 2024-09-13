@@ -370,7 +370,7 @@ The following list of out-of-the-box tags are applied to cost metrics associated
 | Out-of-the-box tag      |  Description |
 | ---                     | ------------ |
 | `source_availability_zone` | The availability zone name where data transfer originated. |
-| `source_availability_zone_id` | The availability zone id where data transfer originated. |
+| `source_availability_zone_id` | The availability zone ID where data transfer originated. |
 | `source_region` | The region where data transfer originated. |
 | `destination_availability_zone` | The availability zone name where data transfer was sent to. |
 | `destination_availability_zone_id` | The availability zone id where data transfer was sent to. |
