@@ -22,7 +22,7 @@ Notifications are a key component of monitors that keep your team informed of is
 ## Configure notifications and automations
 
 Use the **Configure notifications and automations** section to:
-- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
+- Send notifications to your team through email, Slack, PagerDuty, and other integrations.
 - Trigger a workflow or create a workflow from a monitor.
 - Add a case to your monitor.
 
@@ -166,7 +166,7 @@ Test notifications are supported for the [monitor types][15]: host, metric, anom
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][16] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor transition to test and the group (available only if the query has [grouping][16]). You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][17] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -205,4 +205,5 @@ Message variables auto-populate with a randomly selected group based on the scop
 [13]: /monitors/notify/variables/?tab=is_renotify#examples
 [14]: /events/
 [15]: /monitors/types
-[16]: /monitors/guide/recovery-thresholds/
+[16]: /monitors/configuration/
+[17]: /monitors/guide/recovery-thresholds/
