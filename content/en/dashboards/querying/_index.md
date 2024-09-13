@@ -204,7 +204,7 @@ In JSON or API format, it would look as follows:
 
 #### Percentiles
 
-Here's a query that calculates the 95th percentile of average CPU utilization for each EC2 instance grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes.
+Percentile calculations allow for a deeper understanding of data distribution. Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
 
 ```text
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
