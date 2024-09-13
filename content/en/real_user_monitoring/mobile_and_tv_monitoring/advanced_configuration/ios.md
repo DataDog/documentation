@@ -787,7 +787,7 @@ You can use the `addUserExtraInfo` API to append extra user properties to previo
 
 ## Data management
 
-The iOS SDK first stores events and only uploads events when the [intake specifications][11] conditions are met.
+The iOS SDK first stores events locally and only uploads events when the [intake specifications][11] conditions are met.
 
 ### Clear all data
 

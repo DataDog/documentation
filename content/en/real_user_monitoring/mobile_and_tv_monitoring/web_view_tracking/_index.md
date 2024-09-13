@@ -36,7 +36,7 @@ You can also record the entire user journey across both web and native views on 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
 [1]: /real_user_monitoring/browser/setup/#npm
 
@@ -45,7 +45,11 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
-To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][3]. Then, add the package according to your dependency manager and update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
+To enable Crash Reporting:
+
+1. Make sure to also enable [RUM][2] and, or [Logs][3].
+2. Add the package according to your dependency manager.
+3. Update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
 
 {{% collapse-content title="CocoaPods" level="h4" %}}
 You can use [CocoaPods][1] to install `dd-sdk-ios`:
