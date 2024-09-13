@@ -45,7 +45,7 @@ The following table presents the list of collected features and the minimal Agen
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
-1. To enable Data transfer cost allocation, set up [Network Performance Monitoring][107]. (note: additional charges apply)
+1. To enable Data transfer cost allocation, set up [Network Performance Monitoring][107]. **Note**: additional charges apply
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
