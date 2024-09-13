@@ -267,6 +267,12 @@ export default {
      us5: `https://trace.agent.us5.datadoghq.com/api/v0.2/traces`,
      eu: `https://trace.agent.datadoghq.eu/api/v0.2/traces`
     },
+    otlp_metrics_endpoint: {
+     us: `https://api.datadoghq.com/api/intake/otlp/v1/metrics `,
+     us3: `https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics`,
+     us5: `https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics`,
+     eu: `https://api.datadoghq.eu/api/intake/otlp/v1/metrics`
+    },
     custom_costs_endpoint: {
       us: 'api.datadoghq.com/api/v2/cost/custom_costs',
       us3: 'api.us3.datadoghq.com/api/v2/cost/custom_costs',
