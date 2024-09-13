@@ -75,7 +75,7 @@ rules:
           - '/swagger*'
           - '/version'
 
-    # limita el nivel a los Metadatos para que no se incluya el token en las especificaciones/el estado
+    # limita el nivel a los Metadatos para que el token no se incluya en las especificaciones/el estado
     - level: Metadata
       omitStages:
           - RequestReceived
