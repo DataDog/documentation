@@ -149,9 +149,7 @@ In Datadog, multilayer aggregation can be performed in two dimensions: time and 
 | Timeshift functions    | `<METRIC_NAME>{*}, -<TIME_IN_SECOND>`<br> `hour_before(<METRIC_NAME>{*})`<br> `day_before(<METRIC_NAME>{*})`<br> `week_before(<METRIC_NAME>{*})`<br> `month_before(<METRIC_NAME>{*})` |
 | Top-k selection        | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`                                         |
 
-Other functinos cannot be combined with multilayer aggregation at this time.
-
-Note that when multilayer aggregation is enabled, the old matrix functions min(), max() described [here][18] will be converted to minimum(), maximum().
+Other functions cannot be combined with multilayer aggregation.
 
 #### Multilayer time aggregation
 
