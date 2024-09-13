@@ -51,7 +51,7 @@ To see RUM sessions populate in Datadog, you need to implement view tracking, wh
 
 #### Manual tracking
 
-You can manually start and stop a view using the following `startView()` and `stopview()` methods.
+You can manually start and stop a view using the following `startView()` and `stopView()` methods.
 
 ```js
 import {
