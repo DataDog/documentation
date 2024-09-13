@@ -38,8 +38,8 @@ is_public: true
 manifest_version: 2.0.0
 name: launchdarkly
 public_title: LaunchDarkly
-short_description: Controla con confianza los lanzamientos de funciones y los cambios
-  en la infraestructura.
+short_description: Controla con confianza los lanzamientos de características y los
+  cambios en la infraestructura.
 supported_os:
 - Linux
 - Windows
@@ -54,7 +54,7 @@ tile:
   - Sistema operativo compatible::Windows
   - Sistema operativo compatible::macOS
   configuration: README.md#Configuración
-  description: Controla con confianza los lanzamientos de funciones y los cambios
+  description: Controla con confianza los lanzamientos de características y los cambios
     en la infraestructura.
   media:
   - caption: Breve descripción general de LaunchDarkly.
@@ -138,7 +138,7 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 ### Widget del dashboard
 
-1. En el [cuadro de la integración LaunchDarkly][6], asegúrate de que esté instalada la integración LaunchDarkly.
+1. En el [cuadro de la integración de LaunchDarkly][6], asegúrate de que esté instalada la integración de LaunchDarkly.
 1. En Datadog, ve a un dashboard existente o crea uno nuevo.
 1. Pulsa el botón **Add Widgets** (Añadir widgets) para abrir el cajón de widgets.
 1. Busca en **LaunchDarkly** para encontrar el widget de LaunchDarkly en la sección **Aplicaciones** del cajón de widgets.
@@ -158,7 +158,7 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 ### Métricas del proxy de retransmisión
 
-Para configurar esta función, consulta la [documentación sobre integraciones de métricas][8] del proxy de retransmisión.
+Para configurar esta característica, consulta la [documentación sobre integraciones de métricas][8] del proxy de retransmisión.
 
 ## Datos recopilados
 
@@ -176,7 +176,7 @@ La integración de eventos de LaunchDarkly envía eventos de indicadores, proyec
 
 ### Checks de servicio
 
-La integración LaunchDarkly no incluye checks de servicios.
+La integración de LaunchDarkly no incluye checks de servicios.
 
 ## Compatibilidad
 
