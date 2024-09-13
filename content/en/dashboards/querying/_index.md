@@ -185,7 +185,6 @@ In JSON or API format, it would look as follows:
 #### Multilayer space aggregation
 
 Multilayer space aggregation is expressed with the name of the aggregator. Aggregators such as max(), stddev(), sum() have one argument, which is the tag key(s) to group by. Percentile space aggregation, on the other hand, requires two arguments: The percentile aggregator in the form of pxx and the tag key(s) to group-by.
-- The tag key(s) to group-by.
 
 ```text
 "sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})"
