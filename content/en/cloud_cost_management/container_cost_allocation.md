@@ -365,7 +365,7 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 ### Data transfer
 
-The following non-exhaustive list of out-of-the-box tags are applied to cost metrics associated with Kubernetes workloads:
+The following list of out-of-the-box tags are applied to cost metrics associated with Kubernetes workloads:
 
 | Out-of-the-box tag      |  Description |
 | ---                     | ------------ |
