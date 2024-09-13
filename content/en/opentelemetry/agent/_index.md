@@ -199,5 +199,5 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [50]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
 [51]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/converter#readme
 [52]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/ddflareextension#readme
-[53]: https://docs.datadoghq.com/containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
-[54]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[53]: /containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
+[54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
