@@ -120,7 +120,7 @@ Enables [automatic collection of user frustrations][11]. Only error taps are sup
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false` <br/>
-Enables crash reporting for native plaforms (iOS, Android).
+Enables crash reporting for native platforms (iOS, Android).
 
 `sampleRate`
 : Optional - **Deprecated**<br/>
