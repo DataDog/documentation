@@ -94,7 +94,7 @@ LaunchDarkly proporciona las siguientes integraciones con Datadog:
 
 ### Integración de eventos
 
-La integración de eventos [LaunchDarkly][1] en Datadog aporta marcadores de eventos de indicadores a tus dashboards de monitorización para que puedas ver los efectos de tus despliegues de características de LaunchDarkly en los servicios o sistemas de tus clientes. Por ejemplo, si una característica desplegada hace que un servicio se ralentice, puedes ver la causa en Datadog.
+La integración de eventos de [LaunchDarkly][1] en Datadog aporta marcadores de eventos de indicadores a tus dashboards de monitorización para que puedas ver los efectos de tus despliegues de características de LaunchDarkly en los servicios o sistemas de tus clientes. Por ejemplo, si una característica desplegada hace que un servicio se ralentice, puedes ver la causa en Datadog.
 
 ### Integración del seguimiento de indicadores de características
 
@@ -112,7 +112,7 @@ Si utilizas el [proxy de retransmisión de LaunchDarkly][2], puedes configurarlo
 
 ### Integración de eventos
 
-La integración de eventos de LaunchDarkly utiliza una [clave de API Datadog][3] que puede ser creada por un administrador Datadog. Una vez obtenida la clave de API Datadog, consulta la [documentación de LaunchDarkly para la integración en Datadog][4] para aprender a configurar la integración de eventos LaunchDarkly en Datadog.
+La integración de eventos de LaunchDarkly utiliza una [clave de API Datadog][3] que puede ser creada por un administrador Datadog. Una vez obtenida la clave de API Datadog, consulta la [documentación de LaunchDarkly para la integración en Datadog][4] para aprender a configurar la integración de eventos de LaunchDarkly en Datadog.
 
 ### Configuración del seguimiento de indicadores de características
 
@@ -172,7 +172,7 @@ El proxy de retransmisión LaunchDarkly puede configurarse para enviar las sigui
 
 ### Eventos
 
-La integración de eventos LaunchDarkly envía eventos de indicadores, proyectos y entornos desde LaunchDarkly a Datadog.
+La integración de eventos de LaunchDarkly envía eventos de indicadores, proyectos y entornos desde LaunchDarkly a Datadog.
 
 ### Checks de servicio
 
