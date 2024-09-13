@@ -185,17 +185,18 @@ In JSON or API format, it would look as follows:
 #### Multilayer space aggregation
 
 Multilayer space aggregation is expressed with the name of the aggregator. Aggregators such as max(), stddev(), sum() have one argument, which is the tag key(s) to group by. Percentile space aggregation, on the other hand, requires two arguments: The percentile aggregator in the form of pxx and the tag key(s) to group-by.
+##### Example Queries
+
+The following query calculates the sum of average CPU utilization, grouped by environment:
 
 ```text
-"sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})"
+sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})
 ```
 
-Percentile space aggregations require two arguments:
-- The `percentile` aggregator in the form of `pxx`.
-- The tag key(s) to group-by.
+For percentile space aggregation, the following query calculates the 95th percentile of average CPU utilization, grouped by environment:
 
 ```text
-"percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})"
+percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})
 ```
 An example of how to express this query in the JSON (or API):
 
