@@ -198,7 +198,7 @@ For percentile space aggregation, the following query calculates the 95th percen
 ```text
 percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})
 ```
-An example of how to express this query in the JSON (or API):
+In JSON or API format, it would look as follows:
 
 # {{< img src="/dashboards/querying/multilayer-space-agg-example.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
 
