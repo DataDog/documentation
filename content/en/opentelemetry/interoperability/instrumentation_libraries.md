@@ -271,7 +271,7 @@ OpenTelemetry provides an [example][26] for instrumenting a sample application.
 
 ## Setup
 
-To use OpenTelemetry integrations with the Datadog PHP SDK, perform the following steps:
+To use OpenTelemetry integrations with the Datadog PHP SDK:
 
   1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
   2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
@@ -280,7 +280,7 @@ You can also find [the sample Slim4OtelDropIn PHP application with OpenTelemetry
 
 ## Configuration
 
-To avoid duplicate spans, you have the option of disabling the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]). 
+To avoid duplicate spans, you can disable the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]). 
 
 Use the integration name when setting integration-specific configuration for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
