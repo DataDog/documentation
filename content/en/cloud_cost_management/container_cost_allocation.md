@@ -52,8 +52,8 @@ The following table presents the list of collected features and the minimal Agen
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: /containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
-[106]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
-[107]: https://docs.datadoghq.com/network_monitoring/performance/setup
+[106]: /integrations/dcgm/?tab=kubernetes#installation
+[107]: /network_monitoring/performance/setup
 
 {{% /tab %}}
 {{% tab "Azure" %}}
