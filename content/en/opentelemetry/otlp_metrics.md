@@ -173,9 +173,6 @@ exporter = OTLPMetricExporter(
 ### (Optional) Configure the metric translator
 
 Use the `dd-otel-metric-config` header to configure how metrics are translated and sent to Datadog. The JSON header contains the following fields:
-### Configure the metric translator
-
-Use the `dd-otel-metric-config` header to configure how metrics are translated and sent to Datadog. The JSON header contains the following fields:
 
 `resource_attributes_as_tags`
 : **Type**: Boolean <br>
@@ -243,7 +240,7 @@ service:
       processors: [batch, cumulativetodelta]
       exporters: [otlphttp]
 ```
-<div class="alert alert-info">Pay extra attention to the <code>cumulativetodelta</code> processor in the pipeline, which converts cumulative metrics to delta metrics. For more information, see <a href="/opentelemetry/guide/otlp_delta_temporality/">Configure delta temporality in OpenTelemetry</a>.</div>
+<div class="alert alert-info">Note the <code>cumulativetodelta</code> processor in the pipeline, which converts cumulative metrics to delta metrics. Delta metrics are required for the OTLP metrics intake endpoint. For more information, see <a href="/opentelemetry/guide/otlp_delta_temporality/">Configure delta temporality in OpenTelemetry</a>.</div>
 
 ## Troubleshooting
 
