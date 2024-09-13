@@ -325,7 +325,7 @@ You can use the following methods in `Configuration.Builder` when creating the D
 `setCrashReportsEnabled(Boolean)` 
 : Enable or disable the collection of JVM crashes.
 
-`setPersistenceStategyFactory`
+`setPersistenceStrategyFactory`
 : Allows you to use a custom persistence strategy.
 
 `setCrashReportsEnabled`
@@ -393,7 +393,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the EventMapper for the RUM ResourceEvent. You can use this interface implementation to modify the ResourceEvent attributes before serialization.
 
 `setActionEventMapper`
-: Sets the EventMapper for the RUM ActionEvent. You can use this inteface implementation to modify the ActionEvent attributes before serialization.
+: Sets the EventMapper for the RUM ActionEvent. You can use this interface implementation to modify the ActionEvent attributes before serialization.
 
 `setErrorEventMapper`
 : Sets the EventMapper for the RUM ErrorEvent. you can use this interface implementation to modify the ErrorEvent attributes before serialization.
