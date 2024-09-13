@@ -2383,11 +2383,16 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
+    - name: Limits
+      url: service_management/workflows/limits/
+      parent: workflows
+      identifier: workflows_limits
+      weight: 9
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 9
+      weight: 10
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
