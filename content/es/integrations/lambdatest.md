@@ -79,7 +79,7 @@ Realiza una integración con LambdaTest y permite a tus equipos colaborar y real
 
 LambdaTest es compatible con marcos de tests manuales y de automatización como Selenium, Cypress, TestCafe, etc.
 
-Con la integración deLambdaTest, registra errores al realizar tests en los navegadores de tus sitios web (y aplicaciones web) a través de la plataforma LambdaTest. LambdaTest incluye automáticamente información sobre los tests de entornos, como la versión del navegador, el sistema operativo, la resolución, los comentarios y las capturas de pantalla en Datadog.
+Con la integración de LambdaTest, registra errores al realizar tests entre los navegadores de tus sitios web (y aplicaciones web) a través de la plataforma LambdaTest. LambdaTest incluye automáticamente información sobre los tests de entornos, como la versión del navegador, el sistema operativo, la resolución, los comentarios y las capturas de pantalla en Datadog.
 
 A continuación podrás ver todo lo que puedes hacer con LambdaTest:
 
@@ -98,7 +98,7 @@ Toda la configuración ocurre en el dashboard de LambdaTest. Consulta la documen
 
 A continuación se explica cómo realizar un seguimiento de los problemas en Datadog con LambdaTest:
 
-1. Haz clic en **Connect Accounts** (Conectar cuentas) para iniciar la autorización de la integración LambdaTest desde la página de inicio de sesión en LambdaTest.
+1. Haz clic en **Connect Accounts** (Conectar cuentas) para iniciar la autorización de la integración de LambdaTest desde la página de inicio de sesión en LambdaTest.
 2. Inicia sesión en tu cuenta de LambdaTest, en el sitio web de LambdaTest, para que se te redirija a la página de autorización de Datadog.
 3. Haz clic en **Authorize** (Autorizar) para completar el proceso de integración.
 4. Una vez que se haya completado la configuración de la integración se enviará un correo electrónico de confirmación.
@@ -116,7 +116,7 @@ Para recibir asistencia o solicitar funciones, ponte en contacto con LambdaTest 
 
 Correo electrónico: support@lambdatest.com
 Teléfono: +1-(866)-430-7087
-Página web: https://www.lambdatest.com/
+Sitio web: https://www.lambdatest.com/
 
 [1]: https://www.lambdatest.com/support/docs/datadog-integration/
 [2]: https://app.datadoghq.com/organization-settings/api-keys?filter=LambdaTest
