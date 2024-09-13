@@ -40,15 +40,7 @@ To receive notifications when your workflow runs, use one of the following metho
 
 ### Notifications in Workflow Automation
 
-To send a notification after a workflow succeeds:
-
-1. In the configuration for your workflow, under **Notifications**, click the **+ (plus)** icon next to **Notify on success** to add a notification rule.
-1. Choose your desired notification method and fill in the required fields.<br>The rule automatically saves.
-
-To send a notification after a workflow fails:
-
-1. In the configuration for your workflow, under **Notifications**, click the **+ (plus)** icon next to **Notify on failure** to add a notification rule.
-1. Choose your desired notification method and fill in the required fields.<br>The rule automatically saves.
+See [Workflow notifications][3] for instructions on using built-in workflow notifications.
 
 ### Datadog monitor
 
@@ -63,3 +55,4 @@ To send a notification after a workflow fails:
 
 [1]: https://datadoghq.slack.com/
 [2]: https://app.datadoghq.com/dashboard/lists
+[3]: /service_management/workflows/build/#workflow-notifications
