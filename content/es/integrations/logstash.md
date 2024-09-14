@@ -227,9 +227,9 @@ filter {
 
 Esta acción activa la [configuración automática de la integración][6] en Datadog.
 
-##### Etiquetas personalizadas
+##### Etiquetas (tags) personalizadas
 
-Las [etiquetas (tags) de host][7] se configuran automáticamente en tus logs si existe un nombre de host coincidente en tu [lista de infraestructuras][8]. Utiliza el atributo `ddtags` para añadir etiquetas personalizados a tus logs:
+Las [etiquetas de host][7] se configuran automáticamente en tus logs si existe un nombre de host coincidente en tu [lista de infraestructuras][8]. Utiliza el atributo `ddtags` para añadir etiquetas personalizadas a tus logs:
 
 ```conf
 filter {
