@@ -172,7 +172,7 @@ La integración de Lighthouse no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de de Datadog][14].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][14].
 
 [1]: https://developers.google.com/web/tools/lighthouse
 [2]: https://app.datadoghq.com/account/settings/agent/latest
