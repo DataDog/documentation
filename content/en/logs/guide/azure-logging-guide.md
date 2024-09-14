@@ -21,7 +21,7 @@ Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSe
 
 {{< tabs >}}
 
-{{% tab "Automated Installation" %}}
+{{% tab "Automated installation" %}}
 
 To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you.
 
