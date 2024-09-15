@@ -428,6 +428,14 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
+## IDE Plugins
+
+Datadog provides a [JSON Schema][17] for service definitions so you can use features like autocomplete and validation when editing a service definition in a [supported IDE][18]. The [JSON Schema for Datadog service definitions][19] is registered with the open source [Schema Store][18].
+
+The plugin supports the new v3.0 schema and includes information that will tell your IDEs which filenames it applies to—specifically, the files entity.datadog.yaml, entity.datadog.yml, and entity.datadog.json to quickly and accurately complete your entity definition file without referencing documentation. In the example below, the IDE automatically creates keys as you fill out the entity definition.
+
+{{< img src="tracing/service_catalog/service_catalog_ide.mp4" video=true alt="A developer using the IDE plugin to autocomplete and validate definitions" style="width:100%;" >}}
+
 ## Build custom extensions 
 
 The `extensions` field is supported in all versions including v2. You can incorporate this custom field into deployment processes to standardize and codify best practices.
@@ -468,4 +476,6 @@ extensions:
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [15]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json
 [16]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
-
+[17]: http://json-schema.org/
+[18]: https://www.schemastore.org/json/
+[19]: https://raw.githubusercontent.com/DataDog/schema/main/service-catalog/version.schema.json
