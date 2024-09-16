@@ -112,6 +112,8 @@ You can set custom tags for all pipeline and job spans from your Azure projects 
 
 ### Collect job logs
 
+<div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
+
 Datadog supports log collection for your Azure DevOps pipelines.
 
 To enable job log collection:
