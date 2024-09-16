@@ -176,7 +176,7 @@ _Requires: Ruby 2.7+_ and [manual enablement][2]
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
-CPU (beta, v5.11.0+, v4.35.0+, v3.56.0+)
+CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
 
 Wall Time
