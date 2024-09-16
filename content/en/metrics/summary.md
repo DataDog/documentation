@@ -183,7 +183,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 ### Metric Origin Definitions
 
-This table shows the mapping between the metric origin as seen on the metric origin and where it was submitted from: 
+This table shows the mapping between the metric origin as seen in the facet and where it was submitted from:
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
