@@ -21,7 +21,7 @@ title: DORA Metrics のための  PagerDuty の構成
 ---
 
 {{< site-region region="gov" >}}
-DORA Metrics は、選択されたサイト ({{&lt; region-param key="dd_site_name" &gt;}}) では現在利用できません。{{&lt; /site-region &gt;}} DORA Metrics は公開ベータ版です。
+DORA Metrics は、選択されたサイト ({{< region-param key="dd_site_name" >}}) では現在利用できません。{{< /site-region >}} DORA Metrics は公開ベータ版です。
 
 ## 概要
 
