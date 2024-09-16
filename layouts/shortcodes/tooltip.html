@@ -9,7 +9,7 @@
 {{ $fullDefinitionLink := "" }}
 
 <!-- Handle glossary terms if provided -->
-{{/*  {{ if $glossary }}
+{{ if $glossary }}
   <!-- Add underscore to multi-word terms to match file name -->
   {{ $glossaryTerm := replace $glossary " " "_" }}
   <!-- Get the bundle of glossary term -->
@@ -30,11 +30,10 @@
     {{ warnf "Glossary term '%s' not found" $glossary }}
     {{ $tooltipContent = printf "Glossary term '%s' not found" $glossary }}
   {{ end }}
-{{ end }}  */}}
+{{ end }}
 
 <!-- Render the tooltip -->
-<span>hi</span>
-{{/*  <span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+<span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
   <button class="tooltip-trigger">{{ $displayText }}</button>
   <span id="tooltip-{{ $displayText | urlize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">
     {{ $tooltipContent }}
@@ -45,4 +44,4 @@
       <path d="M7 7L0 0h14z" fill="currentColor"></path>
     </svg>
   </span>
-</span>  */}}
+</span>
