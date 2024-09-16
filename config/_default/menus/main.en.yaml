@@ -1682,26 +1682,31 @@ menu:
       parent: metrics_custom_metrics
       identifier: metrics_historical_metrics
       weight: 102
+    - name: Dynamic Metrics without Limits™ Workflow Automation
+      url: metrics/custom_metrics/automated_mwl_workflow/
+      parent: metrics_custom_metrics
+      identifier: metrics_automated_mwl_workflow
+      weight: 103
     - name: 'Submission - Agent Check '
       url: metrics/custom_metrics/agent_metrics_submission/
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_agent
-      weight: 103
+      weight: 104
     - name: Submission - DogStatsD
       url: metrics/custom_metrics/dogstatsd_metrics_submission/
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_dogstatsd
-      weight: 104
+      weight: 105
     - name: Submission - Powershell
       url: metrics/custom_metrics/powershell_metrics_submission
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_powershell
-      weight: 105
+      weight: 106
     - name: 'Submission - API '
       url: api/latest/metrics/#submit-metrics
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
-      weight: 106
+      weight: 107
     - name: Send OpenTelemetry Metrics to Datadog
       url: metrics/open_telemetry/otlp_metrics/
       parent: metrics_top_level
