@@ -98,8 +98,6 @@ Configure incident notifications to share incident updates with all stakeholders
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-
 [1]: /service_management/incident_management/declare
 [2]: /account_management/teams/
 [3]: /service_management/incident_management/incident_settings/#responder-types

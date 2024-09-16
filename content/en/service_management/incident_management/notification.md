@@ -4,6 +4,9 @@ further_reading:
 - link: "/service_management/incident_management/incident_settings"
   tag: "Documentation"
   text: "Customize notifications in Incident Settings"
+- link: "/monitors/notify/variables/?tab=is_alert"
+  tag: "Documentation"
+  text: "Monitor notification variables"
 ---
 
 ## Overview
@@ -38,37 +41,18 @@ The **Sent** list also displays if a notification was manually or automatically 
 
 Notification Rules allows you to notify stakeholders automatically based on the matching criteria of the incident. Matching criteria include incident severity, affected services, status, root cause category, and a specific resource name. For example, you can set up a rule that automatically notifies your leadership team by email every time there is a SEV-1 incident. With this rule, the individual declaring the incident does not have to know whom to involve in every scenario.
 
-{{< img src="/service_management/incidents/notification/notification_rule.png" alt="Example configuration for a notification rule that sends a message for SEV-1 or SEV-2 incidents" style="width:80%;" >}}
-
-To configure a new notification rule:
-1. Navigate to the [Incident Settings Notifications Rules][3] page.
-1. Click **New Rule**.
-1. Select the incident property field `key:value` pairs you want notifications to be sent for (such as severity or service). By default, these filters are empty, and a notification rule triggers for any incident.
-1. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][4]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][5] for this option to appear.
-1. **With Template**: Select the desired message template you want the notification rule to use.
-1. **Renotify on updates to**: Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change. **Note**: properties already in your filters (see step 2) are automatically included in these rules.
-1. Click **Save**.
-
-From Incident Settings, you can search, toggle to enable or disable, copy, and delete rules.
+For more information on how to configure a new notification rule, see the [Incident Settings][1] documentation.
 
 ## Message templates
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To organize a large number of message templates, each template requires a category during the creation process.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message’s title and body.
 
-To create a message template:
-1. Navigate to the [Incident Settings Templates Messages][6] page.
-1. Click the **+ New Message Template** button.
-1. Give the template a name.
-1. Assign it a new or existing category. For new categories, start typing in the **Category** field and select the **Add option: \<your new category\> option**.
-1. Give the template a subject line (for emails).
-1. Write the template’s message.
-1. Click **Save**.
+For more information on how to create a message template, see the [Incident Settings][3] documentation.
 
-**Note**: Template variables are supported in both the message’s title and body.
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/incident_management/incident_settings#rules
 [2]: /monitors/notify/variables/?tab=is_alert
-[3]: https://app.datadoghq.com/incidents/settings#Rules
-[4]: /monitors/notify/#integrations
-[5]: /mobile/?tab=ios
-[6]: https://app.datadoghq.com/incidents/settings#Messages
+[3]: /service_management/incident_management/incident_settings/#message-templates
