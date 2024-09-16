@@ -38,7 +38,7 @@ Open the [workflow blueprint][4] and follow the instructions below.
 
 #### Configure Slack notifications
 
-The workflow blueprint contains several Slack integration tiles.
+The workflow blueprint contains several Slack integration tiles that need to be updated.
 
 1. For the **Make a decision** and **Make a decision 1** tiles:
    - Select a Slack workspace
