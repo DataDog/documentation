@@ -39,7 +39,7 @@ Datadog 에이전트와 [Datadog-개방형메트릭][1] 또는 [Datadog-프로�
     init_config:
 
     instances:
-        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+        - openmetrics_endpoint: 'localhost:<PORT>/<ENDPOINT>'
           namespace: '<NAMESPACE>'
           metrics:
               - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
@@ -63,10 +63,10 @@ Datadog 에이전트와 [Datadog-개방형메트릭][1] 또는 [Datadog-프로�
 
 | 이름                                    | 유형                                    | 필요 | 기본값 | 설명                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prometheus_url`                        | 스트링                                  | 필수  | 없음          | 프로메테우스/개방형메트릭에 의해 애플리케이션 메트릭이 노출되는 URL입니다.                                                                                                                                                                                        |
+| `openmetrics_endpoint`                        | 스트링                                  | 필수  | 없음          | OpenMetrics 형식으로 메트릭을 노출하는 URL.                                                                           |
 | `namespace`                             | 스트링                                  | 필수  | 없음          | 모든 메트릭 네임스페이스 앞에 네임스페이스 을 추가해야 합니다. 메트릭은 `namespace.metric_name` 형식으로 수집됩니다.                                                                                                                                          |
 | `metrics`                               | 문자열 또는 `key:value` 요소 목록 | 필수  | 없음          | 프로메테우스 엔드포인트에서 가져온 메트릭 `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` 쌍의 목록입니다. <br>`<NEW_METRIC_NAME>`은 선택적입니다. 설정된 경우 Datadog 이름을 변경합니다. 이 목록은 최소 하나의 메트릭을 포함해야 합니다.                            |
-| `prometheus_metrics_prefix`             | 문자열                                  | 선택 사항  | 없음          | 노출된 프로메테우스/개방형메트릭 접두어                                                                                                                                                                                                                   |
+| `raw_metric_prefix`             | 문자열                                  | 선택 사항  | 없음          | 노출된 모든 메트릭 이름(있는 경우)에서 제거되는 접두사.                                                                                                                 |
 | `health_service_check`                  | 부울                                 | 선택 사항  | true          | 프로메테우스 엔드포인트의 상태에 대한 서비스 점검 보고를 전송하세요. 점검 이름은 `<NAMESPACE>.prometheus.health`입니다.                                                                                                                                         |
 | `label_to_hostname`                     | 스트링                                  | 선택 사항  | 없음          | 하나의 라벨 값을 사용해 호스트 이름을 덮어씁니다.                                                                                                                                                                                                                   |
 | `label_joins`                           | object                                  | 선택 사항  | 없음          | 레이블 병합을 사용하면 메트릭을 타깃팅하고 1:1 매핑을 사용하여 해당 레이블을 검색할 수 있습니다.                                                                                                                                                                               |
@@ -105,7 +105,7 @@ Datadog 에이전트와 [Datadog-개방형메트릭][1] 또는 [Datadog-프로�
     init_config:
 
     instances:
-        - prometheus_url: http://localhost:9090/metrics
+        - openmetrics_endpoint: http://localhost:9090/metrics
           namespace: 'documentation_example'
           metrics:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total

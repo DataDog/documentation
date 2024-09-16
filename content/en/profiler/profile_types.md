@@ -26,21 +26,19 @@ CPU
 
 Allocations
 : The number of heap allocations made by each method, including allocations which were subsequently freed.<br />
-_Requires: Java 11_ 
+_Requires: Java 11_
 
 Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
-_Requires: Java 11_ 
+_Requires: Java 11_
 
-Heap Live Objects
+Heap Live Objects (beta, 1.17.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Java 11_ <br />
-_Since: 1.17.0_
 
-Heap Live Size
+Heap Live Size (beta, 1.39.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11_ <br />
-_Since: 1.17.0_
+_Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
 
 Wall Time in Native Code
 : The elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
@@ -158,15 +156,15 @@ CPU
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
-Allocations (beta, v1.21.1+)
+Allocations (v2.3.0+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
 _Requires:_ [Manual enablement][3]
 
-Heap Live Objects (alpha, v1.21.1+)
+Heap Live Objects (alpha, v2.3.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Ruby 2.7+_ and [manual enablement][2]
 
-Heap Live Size (alpha, v1.21.1+)
+Heap Live Size (alpha, v2.3.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Ruby 2.7+_ and [manual enablement][2]
 
@@ -178,7 +176,7 @@ _Requires: Ruby 2.7+_ and [manual enablement][2]
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
-CPU (beta, v5.11.0+, v4.35.0+, v3.56.0+)
+CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
 
 Wall Time

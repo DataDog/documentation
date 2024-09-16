@@ -52,7 +52,7 @@ To get started, you can set up Static Analysis on the [**Code Analysis** page][1
 ## Integrate Static Analysis into your software development lifecycle
 
 ### CI providers
-{{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of your choice. See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="You can run Static Analysis on any CI platform provider of your choice. See provider-specific documentation to set up Static Analysis in your CI pipelines:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Other CI Providers{{< /nextlink >}}
@@ -64,7 +64,7 @@ To get started, you can set up Static Analysis on the [**Code Analysis** page][1
 {{< /whatsnext >}}
 
 ### IDEs
-{{< whatsnext desc="With Static Analysis, you can identify code vulnerabilities as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="You can identify code vulnerabilities in real time as you edit a file in your Integrated Development Environment (IDE). See integration-specific documentation for more information:">}}
     {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
@@ -77,9 +77,9 @@ After you configure your CI pipelines to run the Datadog Static Analyzer, violat
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
-To filter your results, use the facets to the left of the list, or search. 
+To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][11].
 
-Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default the latest commit on the default branch of the repository you are viewing).
+Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, results are shown for the latest commit on the default branch of the repository you are viewing).
 
 Click on a violation to open a side panel that contains information about the scope of the violation and where it originated.
 {{< img src="code_analysis/static_analysis/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
@@ -91,8 +91,6 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the Static Analysis violation event.
 
 ### Using suggested fixes
-<div class="alert alert-warning">AI Suggested Fixes are in private beta. To request access, contact <a href="/help/">Support.</div>
-
 {{< img src="code_analysis/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
 
 In Datadog Static Analysis, there are two types of suggested fixes:
@@ -107,6 +105,8 @@ The two types of fixes are distinguished visually in the UI with different label
 
 *AI Suggested Fixes:*
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
+
+<div class="alert alert-warning">AI Suggested Fixes are in private beta. To request access, contact <a href="/help/">Support.</div>
 
 ### Fixing a vulnerability or quality issue directly from Datadog
 {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}
@@ -134,7 +134,7 @@ To commit a suggested fix:
 
 ### Customizing your configuration
 
-To learn how Static Analyis is configured in your repositories, see the [Setup documentation][8].
+To customize which Static Analysis rules are configured in your repositories, see the [Setup documentation][8].
 
 ### Reporting false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
@@ -154,3 +154,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [8]: /code_analysis/static_analysis/setup/#customize-your-configuration
 [9]: /code_analysis/static_analysis/setup
 [10]: /code_analysis/github_pull_requests/
+[11]: /getting_started/code_analysis/?tab=datadoghosted#linking-services-to-code-violations-and-libraries

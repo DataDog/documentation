@@ -221,6 +221,20 @@
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
   },
+  "ListCatalogEntity": {
+    "description": "Get a list of entities from Software Catalog.",
+    "summary": "Get a list of entities"
+  },
+  "UpsertCatalogEntity": {
+    "description": "Create or update entities in Software Catalog.",
+    "summary": "Create or update entities",
+    "request_description": "Entity YAML/JSON.",
+    "request_schema_description": "Create / Update entity request."
+  },
+  "DeleteCatalogEntity": {
+    "description": "Delete a single entity in Software Catalog.",
+    "summary": "Delete a single entity"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",

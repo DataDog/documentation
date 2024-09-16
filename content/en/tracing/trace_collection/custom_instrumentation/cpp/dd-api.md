@@ -108,7 +108,7 @@ span. For example:
 span.set_error(true);
 ```
 
-Add more specific information about the error by setting any combination of `error.msg`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][4] for more information about error tags.
+Add more specific information about the error by setting any combination of `error.message`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][4] for more information about error tags.
 
 An example of adding a combination of error tags:
 

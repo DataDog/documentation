@@ -4,9 +4,6 @@ aliases:
 title: OAuth for Integrations
 description: Use OAuth to authenticate integrations.
 ---
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
 
 ## Overview
 
@@ -110,11 +107,12 @@ As a part of your pull request, complete the following steps:
 
 To start the publishing process in the [Developer Platform][4]:
 
-1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. Your OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
+1. Navigate to the **Publishing** tab under **General** and click **Next: Send App Details to Datadog**. At the top of this tab, you receive your published client ID and secret. Your OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
 
-2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
+2. Under the Integration Publishing section, follow the steps to add the OAuth client information to your pull request. This includes updating the `manifest.json` file and adding a file to the `assets` directory.
 
-3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under the Integration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
+3. Add a link to the GitHub directory or pull request in the appropriate field.
+4. Click **Finish & Send**.
 
 Once an OAuth client is submitted for publishing, the team is notified. When your pull request is approved by all required parties and is ready to be merged, at that point your OAuth client gets published as well. Your integration tile is then published to your sandbox account (_not_ for all customers), and your OAuth client can then be authorized by any Datadog organization (not only your Sandbox organization).
 

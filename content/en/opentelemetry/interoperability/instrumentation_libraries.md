@@ -45,7 +45,7 @@ Datadog SDKs implement the OpenTelemetry API by overriding the default implement
 | Java     | 1.35.0                   |
 | Python   | 2.10.0                   |
 | Ruby     | 2.1.0                    |
-| Go       | 1.65.0                   |
+| Go       | 1.67.0                   |
 | Node.js  | 4.3.0                    |
 | PHP      | 0.94.0                   |
 | .NET     | 2.53.0                   |
@@ -194,22 +194,107 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 {{% /tab %}}
 
-<!-- {{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
 ## Compatibility requirements
 
+The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTelemetry Node.js Trace API.
+
 ## Setup
 
-{{% /tab %}} -->
+To use OpenTelemetry instrumentations with the Datadog Node.js SDK, perform the following steps:
 
-<!-- {{% tab "PHP" %}}
+ 1. Follow the Setup instructions in [Node.js Custom Instrumentation using OpenTelemetry API][18].
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
+
+The following example demonstrates how to instrument the `http` and `express` OpenTelemetry integrations with the Datadog Node.js SDK:
+
+```js
+const tracer = require('dd-trace').init()
+const { TracerProvider } = tracer
+const provider = new TracerProvider()
+provider.register()
+
+const { registerInstrumentations } = require('@opentelemetry/instrumentation')
+const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http')
+const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express')
+
+// Register the instrumentation with the Datadog trace provider
+// and the OpenTelemetry instrumentation of your choice
+registerInstrumentations({
+  instrumentations: [
+    new HttpInstrumentation({
+      ignoreIncomingRequestHook (req) {
+        // Ignore spans created from requests to the agent
+        return req.path === '/v0.4/traces' || req.path === '/v0.7/config' ||
+        req.path === '/telemetry/proxy/api/v2/apmtelemetry'
+      },
+      ignoreOutgoingRequestHook (req) {
+        // Ignore spans created from requests to the agent
+        return req.path === '/v0.4/traces' || req.path === '/v0.7/config' ||
+        req.path === '/telemetry/proxy/api/v2/apmtelemetry'
+      }
+    }),
+    new ExpressInstrumentation()
+  ],
+  tracerProvider: provider
+})
+
+const express = require('express')
+const http = require('http')
+
+// app code below ....
+```
+
+## Configuration
+
+To avoid duplicate spans, disable the corresponding Datadog instrumentations.
+
+Set the `DD_TRACE_DISABLED_INSTRUMENTATIONS` environment variable to a comma-separated list of integration names to disable. For example, to disable Datadog instrumentations for the libraries used in the Setup example, set the following:
+
+```sh
+DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net
+```
+
+[17]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/metapackages/auto-instrumentations-node#supported-instrumentations
+[18]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/#setup
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
 
 ## Compatibility requirements
 
+The Datadog PHP SDK supports library [instrumentation][25] using the `stable` OpenTelemetry PHP Trace API.
+
+OpenTelemetry provides an [example][26] for instrumenting a sample application.
+
 ## Setup
 
+To use OpenTelemetry integrations with the Datadog PHP SDK:
 
-{{% /tab %}} -->
+  1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
+  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
+
+You can also find [the sample Slim4OtelDropIn PHP application with OpenTelemetry and Datadog auto instrumentations][28] in the `DataDog/trace-examples` GitHub repository.
+
+## Configuration
+
+To avoid duplicate spans, you can disable the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]). 
+
+Use the integration name when setting integration-specific configuration for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
+
+```sh
+DD_TRACE_LARAVEL_ENABLED=false
+```
+
+[25]: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation
+[26]: https://opentelemetry.io/docs/zero-code/php/
+[27]: /tracing/trace_collection/custom_instrumentation/php/otel/#setup
+[28]: https://github.com/DataDog/trace-examples/tree/master/php/Slim4OtelDropIn
+[29]: /tracing/trace_collection/library_config/php/#integration-names
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
@@ -219,7 +304,7 @@ The Datadog .NET SDK supports library instrumentations that come with [built-in 
 
 ## Setup
 
-To use Opentelemetry instrumentation libraries with the Datadog .NET SDK:
+To use OpenTelemetry instrumentation libraries with the Datadog .NET SDK:
 
 1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`

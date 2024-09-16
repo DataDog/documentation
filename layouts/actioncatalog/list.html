@@ -1,19 +1,16 @@
-
 {{ define "main" }}
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
+{{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
 
-<!-- From imported files -->
-{{ $list := sort .Pages }}
+{{ if lt (len $workflow_bundles) 1 }}
+  {{ $err_msg := "Could not load workflow bundles data" }}
 
-<!-- build filters -->
-{{ $.Scratch.Set "filters" (slice)}}
-{{ range $index, $element := $list }}
-    {{ range $e := $element.Params.rule_category }}
-        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
-            {{ $.Scratch.Add "filters" ($e | lower) }}
-        {{ end }}
-    {{ end }}
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf $err_msg }}
+  {{ else }}
+    {{ errorf $err_msg }}
+  {{ end }}
 {{ end }}
 
 <div class="row">
@@ -26,11 +23,53 @@
 </div>
 
 {{ .Content }}
+<div class="form-group clearfix">
+  <input type="input" data-ref="search" class="form-control grouped-item-search mb-3 position-relative" id="keywords" placeholder="Search here" aria-label="keywords"/>
+</div>
+
 <form id="rules">
-  {{- with $list -}}
-      {{- if isset (index . 0).Params "bundle_title" -}}
-        {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "bundle_title") ) -}}
-      {{- end -}}
-  {{- end -}}
+  <div>
+    <div class="js-empty-results d-none font-semibold"></div>
+    {{ range sort $workflow_bundles "title" }}
+      {{ $workflow_title := .title }}
+      {{ $workflow_name := .name }}
+      {{ $icon_id := .icon.id }}
+      {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
+
+      <div class="js-group js-group-{{ $workflow_title }}" id="{{ $workflow_title | anchorize }}">
+        <div class="js-group-header mb-1 d-flex align-items-center active" id="">
+          <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
+            {{ with $logo_path }}
+              <img src="{{ . }}" height="17" alt="{{ $workflow_title }}"/>
+            {{ else }}
+              <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
+            {{ end }}
+          </div>
+          <div class="font-semibold ms-1 group-header-text">
+            <span>{{ $workflow_title }}</span>
+            <span class="icon-wrapper" data-anchor="#{{ $workflow_title | anchorize }}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $workflow_title)) }}</span>
+            <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+          </div>
+          <div class="js-group-header__arrow">></div>
+        </div>
+        <div class="group-{{ $workflow_title }} mb-2 ms-4 d-none">
+          {{ range $action_name, $action_data := .actions }}
+            {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#/" }}
+            {{ $full_url := print $base_url $workflow_name "/" $workflow_name "." $action_name }}
+
+            <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}" data-name="{{ lower $workflow_title }} {{ lower $action_name }} {{ .File.TranslationBaseName }}">
+              {{ with $logo_path }}
+                <img src="{{ . }}" height="17" alt="{{ $workflow_name }}"/>
+              {{ else }}
+                <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
+              {{ end }}
+              <span class="ps-1">{{ .title }}</span>
+              <br>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
 </form>
 {{ end }}
