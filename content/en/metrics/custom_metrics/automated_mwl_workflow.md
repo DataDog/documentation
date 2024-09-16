@@ -55,7 +55,7 @@ The workflow blueprint contains several Slack integration tiles.
 3. Click **Save**.
 4. Click **Publish**.
 
-#### Configure monitor notifications
+### Configure monitor notifications
 
 1. Click the **Monitor** tile at the beginning of the workflow.
 2. Copy the **Mention handle** from the side panel that opens on the right.
