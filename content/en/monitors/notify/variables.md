@@ -282,9 +282,35 @@ If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_na
 Some specific namespace metadata variables are available:
 
 - Kubernetes Cluster: `{{kube_namespace.cluster_name}}`
+- Kubernetes Name: `{{kube_namespace.display_name}}`
+- Status: `{{kube_namespace.status}}`
+- Labels: `{{kube_namespace.labels}}`
+
+The full list of available attributes is:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
+
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Query group by pod_name and kube_namespace and cluster_name
+If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `cluster_name`, then you can access any attribute of the pod. 
+
+Some specific pod metadata variables are available:
+- Pod Cluster: `{{pod_name.cluster_name}}`
+- Pos Name: `{{pod_name.name}}`
+- Phase: `{{pod_name.phase}}`
+
+The full list of available attributes is:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
 #### Tag key with period
