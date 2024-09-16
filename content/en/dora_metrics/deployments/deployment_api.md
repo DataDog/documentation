@@ -101,7 +101,7 @@ If the deployment CI job is running on the exact same Git revision that is being
 
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
-[1]: https://www.npmjs.com/package/@datadog/datadog-ci
+[1]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
