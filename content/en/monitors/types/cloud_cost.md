@@ -45,8 +45,8 @@ You can choose from the following monitor types.
 | ---  | ----------- | ----------- |
 | Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
 | Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
-| Cost Forecast | Set alerts based on forecasted costs exceeding a threshold by the end of the current month. | Alert daily if the forecasted total cost for the current exceeds $500. |
-| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. | Alert if three days from the past week show significant cost anomalies compared to historical data. |
+| Cost Forecast | Set alerts based on forecasted costs exceeding a threshold by the end of the current month. | Alert daily if the forecasted cost for this month is projected to exceed $500. |
+| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 
 ## Specify which costs to track
 
@@ -69,7 +69,7 @@ If you are using the **Cost Changes** monitor type, you can trigger an alert whe
 
 If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to`, `equal to`, or `not equal to` a threshold.  
 
-If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service.  
+If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service. The `agile` [anomaly algorithm][4] is used with 2 bounds and monthly seasonality.
 
 ## Configure notifications and automations
 
@@ -82,3 +82,4 @@ For detailed instructions on the **Configure notifications and automations** sec
 [1]: https://docs.datadoghq.com/cloud_cost_management/
 [2]: https://app.datadoghq.com/cost/analytics
 [3]: /monitors/notify/
+[4]: https://docs.datadoghq.com/dashboards/functions/algorithms/
