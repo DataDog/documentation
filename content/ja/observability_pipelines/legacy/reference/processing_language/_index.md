@@ -1,6 +1,6 @@
 ---
 aliases:
-- /observability_pipelines/reference/processing_language/
+- /ja/observability_pipelines/reference/processing_language/
 title: (レガシー) Datadog Processing Language / Vector Remap Language
 ---
 

@@ -293,6 +293,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_794302680",
+      "description": "Create a new dashboard with query_table widget and text formatting"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2349863258",
       "description": "Create a new dashboard with query_value widget"
     },
@@ -400,6 +405,21 @@
       "group": "dashboards",
       "suffix": "_985012506",
       "description": "Create a new timeseries widget with incident_analytics data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4262729673",
+      "description": "Create a new timeseries widget with legacy live span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3451918078",
+      "description": "Create a new timeseries widget with new fixed span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3066042014",
+      "description": "Create a new timeseries widget with new live span time format"
     }
   ],
   "CreatePublicDashboard": [
@@ -729,6 +749,23 @@
       "description": "Update an SLO returns \"OK\" response"
     }
   ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_3298562511",
+      "description": "Create a FIDO global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_3397718516",
+      "description": "Create a TOTP global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
+    }
+  ],
   "CreateSyntheticsBrowserTest": [
     {
       "group": "synthetics",
@@ -744,13 +781,6 @@
       "group": "synthetics",
       "suffix": "_397420811",
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
-    }
-  ],
-  "CreateGlobalVariable": [
-    {
-      "group": "synthetics",
-      "suffix": "_1068962881",
-      "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
   "CreateSyntheticsAPITest": [

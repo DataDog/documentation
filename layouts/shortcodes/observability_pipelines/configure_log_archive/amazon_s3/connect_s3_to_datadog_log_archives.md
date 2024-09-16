@@ -1,4 +1,4 @@
-### Connect the S3 bucket to Datadog Log Archives
+#### Connect the S3 bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][201].
 1. Click **New archive**.

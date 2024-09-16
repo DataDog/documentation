@@ -158,7 +158,7 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 詳細については、[ StatsD メトリクスをカウントグラフで視覚化する方法][9]を参照してください。
 [StatsD/DogStatsD][10] のドキュメントもご覧いただけます。
 
-[1]: /ja/dashboards/#timeboards
+[1]: /ja/dashboards/#get-started
 [2]: /ja/dashboards/#screenboards
 [3]: /ja/agent/
 [4]: /ja/metrics/custom_metrics/

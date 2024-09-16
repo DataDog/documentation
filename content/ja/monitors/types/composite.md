@@ -81,7 +81,7 @@ a || b && !c
 
 ### 通知
 
-複合条件モニターの構成モニターのテンプレート変数を通知に使用する方法については、[複合条件モニター変数][4]を参照してください。**Say what's happening** セクションと **Notify your team** セクションの詳細な説明は、[通知][3]のページを参照してください。
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ### API
 

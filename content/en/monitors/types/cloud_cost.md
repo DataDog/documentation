@@ -31,11 +31,15 @@ Cloud Cost monitors are evaluated with a 48 hour delayed evaluation window, beca
 
 ## Monitor creation
 
-To create a Cloud Cost monitor in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Cloud Cost**.
+To create a Cloud Cost monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Cloud Cost**][4].
 
-You can also create Cloud Cost monitors from [Cloud Costs Analytics][2]. Click on **+Export to Monitor** above the table of costs.
+You can also create Cloud Cost monitors from the [Cloud Cost Explorer][2]. Click **More...** next to the Options button and select **Create monitor**. 
 
-{{< img src="/monitors/monitor_types/cloud_cost/cloud_cost_analytics.png" alt="'Export to Monitor' button in Cloud Costs Analytics page" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/explorer.png" alt="Option to create a monitor from the Cloud Cost Explorer page" style="width:100%;" >}}
+
+Optionally, click the **+ Create Monitor** button in the cost report side panel.
+
+{{< img src="/monitors/monitor_types/cloud_cost/sidepanel.png" alt="The Create Monitor button on a cost report side panel in the Cloud Cost Explorer" style="width:100%;" >}}
 
 ## Select a cost monitor type
 
@@ -69,7 +73,7 @@ If you are using the **Cost Changes** monitor type, you can trigger an alert whe
 
 If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to`, `equal to`, or `not equal to` a threshold.  
 
-If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service. The `agile` [anomaly algorithm][4] is used with 2 bounds and monthly seasonality.
+If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service. The `agile` [anomaly algorithm][5] is used with 2 bounds and monthly seasonality.
 
 ## Configure notifications and automations
 
@@ -79,7 +83,8 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/cloud_cost_management/
-[2]: https://app.datadoghq.com/cost/analytics
+[1]: /cloud_cost_management/
+[2]: https://app.datadoghq.com/cost/explorer
 [3]: /monitors/notify/
-[4]: https://docs.datadoghq.com/dashboards/functions/algorithms/
+[4]: https://app.datadoghq.com/monitors/create/cost
+[5]: https://docs.datadoghq.com/dashboards/functions/algorithms/

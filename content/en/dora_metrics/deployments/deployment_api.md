@@ -34,12 +34,12 @@ further_reading:
 
 ## Overview
 
-To send your own deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. 
+To send your own deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command.
 
 The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (see [Adding Entries to Service Catalog][4]) with metadata set up (see [Adding Metadata][5]). The `team` ownership of the service is automatically inferred from the Service Catalog and associated with all metrics.
+- `service`: The service that was deployed. If the provided service is registered in the [Service Catalog][3] with metadata set up (see [Adding Metadata][5]), the `team` of the service is automatically retrieved and associated with all metrics.
 
 The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. You can optionally specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][7].
 
@@ -101,7 +101,7 @@ If the deployment CI job is running on the exact same Git revision that is being
 
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
-[1]: https://www.npmjs.com/package/@datadog/datadog-ci
+[1]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}

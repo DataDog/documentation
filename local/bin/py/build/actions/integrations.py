@@ -29,7 +29,7 @@ from actions.format_link import format_link_file
 from actions.comment_conversion import replace_comments
 
 try:
-    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
+    from assetlib.classifiers import get_all_classifier_names, get_customer_facing_classifiers
     CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
     CLASSIFIER_TAGS = []
@@ -42,7 +42,7 @@ finally:
     else:
         file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in get_non_deprecated_classifiers():
+            for tag in get_customer_facing_classifiers():
                 file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
             file.write(''.join(file_content) + '\n')
 
@@ -394,10 +394,13 @@ class Integrations:
         Take a single metadata or metric spec file and formats it to yaml
         :param file_name: path to a metadata csv or yaml file
         """
-        if file_name.endswith("/metadata.csv") or file_name.endswith("/metric-spec.yaml"):
+        if file_name.endswith("/metadata.csv"):
             key_name = basename(
                 dirname(normpath(file_name))
             )
+        elif file_name.endswith("/assets/metrics/metric-spec.yaml"):
+            file_list = file_name.split(sep)
+            key_name = file_list[len(file_list)-4]
         else:
             key_name = basename(
                 file_name.replace("_metadata.csv", "")
@@ -411,7 +414,7 @@ class Integrations:
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
             )
-        if file_name.endswith("/metric-spec.yaml"):
+        if file_name.endswith("/assets/metrics/metric-spec.yaml"):
             self.format_metric_spec_yaml(key_name, file_name, new_file_name)
         else:
             self.metric_csv_to_yaml(key_name, file_name, new_file_name)
@@ -667,6 +670,7 @@ class Integrations:
     def get_collision_alternate_name(self, file_name):
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
+        dir_path = dir_path.replace('/metrics', '') if dir_path.endswith('metrics') else dir_path
         dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
         collision_name = dir_name
         manifest_json_path = f'{dir_path}/manifest.json'
@@ -698,7 +702,7 @@ class Integrations:
         tab_logic = False
         # Prioritize having metric-spec.yaml over metadata.csv
         metrics = glob.glob(
-            f"{dirname(file_name)}{sep}**{sep}metric-spec.yaml", recursive=True
+            f"{dirname(file_name)}{sep}**{sep}*metric-spec.yaml", recursive=True
         )
         if metrics:
             metrics = metrics[0] if len(metrics) > 0 else None

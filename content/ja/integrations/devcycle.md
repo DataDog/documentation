@@ -10,6 +10,7 @@ author:
 categories:
 - 構成 & デプロイ
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/devcycle/README.md
 display_on_public_website: true
@@ -19,7 +20,6 @@ integration_id: devcycle
 integration_title: DevCycle
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: devcycle
 public_title: DevCycle
@@ -41,6 +41,11 @@ tile:
   description: コード通りに動作する機能フラグ
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://devcycle.com
+  - resource_type: documentation
+    url: https://docs.devcycle.com/tools-and-integrations/datadog-rum
   support: README.md#Support
   title: DevCycle
 ---
@@ -56,7 +61,7 @@ DevCycle は、Datadog と以下のインテグレーションを提供してい
 
 DevCycle の機能フラグ追跡インテグレーションは、RUM データを機能の変数評価で強化し、パフォーマンスの監視と行動の変化を可視化します。どのユーザーに特定のユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断します。
 
-## 計画と使用
+## セットアップ
 
 ### 機能フラグ追跡の設定
 
@@ -71,7 +76,7 @@ DevCycle の機能フラグ追跡インテグレーションは、RUM データ�
 
 const user = { user_id: "my_user" };
 const dvcOptions = { logLevel: "debug" };
-const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions); 
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 
 // すべての変数評価に対して
 
@@ -92,21 +97,21 @@ dvcClient.subscribe(
 )
 ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 DevCycle インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 DevCycle インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 DevCycle インテグレーションには、サービスのチェック機能は含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問い合わせください。
 

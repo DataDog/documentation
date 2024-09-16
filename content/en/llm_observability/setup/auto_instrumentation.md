@@ -9,6 +9,8 @@ further_reading:
       text: 'Learn about the LLM Observability SDK for Python'
 ---
 
+<div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the LLM Observability offering.</div>
+
 ## Overview
 
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
@@ -17,11 +19,13 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | Framework                               | Supported Versions |
 |-----------------------------------------|--------------------|
 | [OpenAI](#openai)                       | >= 0.26.5          |
-| [Langchain](#langchain)                 | >= 0.0.192,<0.2.0  |
+| [Langchain](#langchain)                 | >= 0.0.192         |
 | [AWS Bedrock](#aws-bedrock)             | >= 1.31.57         |
 | [Anthropic](#anthropic)                 | >= 0.28.0          |
 
-In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
+You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
+
+**Note:** When using the supported LLM Observability frameworks or libraries, no additional manual instrumentation (such as function decorators) is required to capture these calls. For custom or additional calls within your LLM application that are not automatically traced (like API calls, database queries, or internal functions), you can use [function decorators][18] to manually trace these operations and capture detailed spans for any part of your application that is not covered by auto-instrumentation.
 
 ## Enabling and disabling integrations
 
@@ -73,6 +77,8 @@ The LangChain integration instruments the following methods:
 - [Chains/LCEL][15]
   - `chain.invoke()`, `chain.ainvoke()`
   - `chain.batch()`, `chain.abatch()`
+- [Embeddings][17]
+  - OpenAI : `OpenAIEmbeddings.embed_documents()`, `OpenAIEmbeddings.embed_query()`
 
 **Note:** The LangChain integration does not yet support tracing streamed calls.
 
@@ -124,3 +130,5 @@ The Anthropic integration instruments the following methods:
 [14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
 [15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
 [16]: /llm_observability/setup/sdk/
+[17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
+[18]: /llm_observability/setup/sdk/#tracing-spans

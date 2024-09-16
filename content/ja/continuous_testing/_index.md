@@ -58,7 +58,7 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 </br>
 
-[Datadog Terraform プロバイダー][10]を使って、テストの作成と状態管理をコントロールすることができます。Synthetic テストをステージング、プリプロダクト、カナリアデプロイメントの[インテグレーションおよびエンドツーエンドテスト][11]として活用したり、[CI パイプライン][11]で直接実行することができます。
+You can use the [Datadog Terraform provider][10] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][11] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][11].
 
 ## トラブルシューティングの高速化
 
@@ -84,7 +84,7 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
   Datadog ラーニングセンターには、このトピックについて学ぶのに役立つ実践的なコースが満載です。無料で登録して、CI/CD パイプラインで Datadog Synthetic テストを実行する方法を学びましょう。
 {{< /learning-center-callout >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -22,6 +22,7 @@ author:
   support_email: dev@onemorecloud.com
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: bonsai
 integration_title: Bonsai
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: bonsai
 public_title: Bonsai
@@ -45,6 +45,7 @@ tile:
   - Supported OS::Linux
   - Category::Metrics
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: 'Bonsai: マネージド型 Elasticsearch'
   media: []
@@ -66,7 +67,7 @@ Bonsai クラスターのリクエストレベルのメトリクスを追跡す�
 
 ![スナップショット][1]
 
-## 計画と使用
+## セットアップ
 
 クラスターを Datadog と統合するには、API キーを bonsai アプリに送信する必要があります。
 
@@ -92,9 +93,9 @@ Datadog で、[Integrations --> API][2] に移動して、API キーをコピー
 
 数分以内に、Datadog のダッシュボードでリクエストメトリクスを使用できるようになります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "bonsai" >}}
 
 
@@ -104,15 +105,15 @@ Datadog で、[Integrations --> API][2] に移動して、API キーをコピー
 cluster:my-cluster-slug
 ```
 
-### ヘルプ
+### イベント
 
 Bonsai インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Bonsai インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

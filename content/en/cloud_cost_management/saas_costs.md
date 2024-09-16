@@ -24,10 +24,6 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 SaaS Cost Integrations are in public beta.
 {{< /beta-callout >}}
@@ -156,7 +152,6 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 
 
 {{% tab "Elastic Cloud" %}}
-In Cloud Cost Management, you can access your Elastic Cloud cost data for the past 15 months after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
 2. Click **Create New Key**.
@@ -167,9 +162,11 @@ In Cloud Cost Management, you can access your Elastic Cloud cost data for the pa
 7. Click **Add Account**.
 8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
 
+Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
 {{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
 
-[101]: https://app.datadoghq.com/integrations/elastic_cloud_ccm
+[101]: https://app.datadoghq.com/integrations/elastic-cloud-ccm
 [102]: https://cloud.elastic.co/account/keys
 
 {{% /tab %}}
@@ -251,17 +248,6 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
 | `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
 
-{{% /tab %}}
-{{% tab "Elastic Cloud" %}}
-| Tag Name | Tag Description |
-|---|---
-| `name` | The unique identifier of the Elastic Cloud resource. |
-| `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
-| `kind` | The type of resource. |
-
-{{% /tab %}}
-{{% tab "MongoDB" %}}
-
 | Tag Name | Tag Description |
 |---|---|
 | `invoice_id` | The unique identifier of the invoice. |
@@ -287,6 +273,17 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `service_type` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **cloud_services**: Refer to Cloud service credit usage.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering**: Refer to Virtual warehouse credit usage. Does not indicate usage of serverless or cloud services compute. |
 | `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
 | `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
+
+{{% /tab %}}
+{{% tab "Elastic Cloud" %}}
+| Tag Name | Tag Description |
+|---|---
+| `name` | The unique identifier of the Elastic Cloud resource. |
+| `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
+| `kind` | The type of resource. |
+
+{{% /tab %}}
+{{% tab "MongoDB" %}}
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}
