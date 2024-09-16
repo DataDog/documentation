@@ -1,0 +1,57 @@
+---
+title: Run Mobile App tests from Private Locations
+description: "Run Mobile App tests from private locations"
+further_reading:
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
+- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+  tag: "Documentation"
+  text: "Learn how to create Synthetic mobile app tests"
+- link: "/synthetics/mobile_app_testing/settings"
+  tag: "Documentation"
+  text: "Learn how to upload your iOS or Android mobile applications"
+cascade:
+  algolia:
+    tags: ['mobile_testing']
+---
+
+# Overview
+
+Mobile App Testing for private locations enable you to monitor mobile tests conducted on networks that are not publicly accessible.
+
+Add the following IP address ranges to your Agent [network allow list][1] to allow traffic from Mobile app tests to access restricted networks, such as staging environments, development environments, and other non-public apps or apps that requiring VPN access.
+
+[AWS Device Farm][1]:
+
+IP CIDR ranges:
+
+`54.244.50.32/27`</br>
+`99.78.197.0/29`</br>
+`15.248.40.40/29`</br>
+`54.239.50.200/29`
+
+[Saucelabs][2]:
+
+`34.125.90.96/27`</br>
+`34.125.246.157/32`</br>
+`44.225.33.89/32`</br>
+`66.85.48.0/21`</br>
+`162.222.72.0/21`
+
+`34.107.82.96/27`</br>
+`34.141.28.96/32`</br>
+`162.222.79.0/27`</br>
+`185.94.24.0/22`
+
+Sauce Connect Proxy IP CIDR ranges:
+
+`34.96.70.78`
+
+[1]: /agent/configuration/network/
+[2]: https://repost.aws/knowledge-center/device-farm-ip-range
+[3]: https://docs.saucelabs.com/basics/data-center-endpoints/#us-west-data-center-1
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
