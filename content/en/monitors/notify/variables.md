@@ -292,9 +292,6 @@ The full list of available attributes is:
 |-------------------|------------------------|
 | `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
 
-{{% /tab %}}
-{{< /tabs >}}
-
 #### Query group by pod_name and kube_namespace and cluster_name
 If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `cluster_name`, then you can access any attribute of the pod. 
 
