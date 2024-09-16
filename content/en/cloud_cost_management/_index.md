@@ -25,6 +25,9 @@ further_reading:
   - link: "/cloud_cost_management/tag_pipelines"
     tag: "Documentation"
     text: "Standardize tags across Cloud Cost Management with Tag Pipelines"
+  - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
+    tag: "Blog"
+    text: "Key learnings from the State of Cloud Costs study"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

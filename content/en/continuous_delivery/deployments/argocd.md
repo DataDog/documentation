@@ -183,7 +183,7 @@ By default, the Git metadata reported in deployment events is associated with th
 
 The following diagram represents an example of this kind of setup:
 
-{{< img src="ci/cd-argocd-ci-correlation-setup-git-2024.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
+{{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
 In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
 

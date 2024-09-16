@@ -266,6 +266,16 @@ A range of errors can be accepted. By default 4xx errors are reported as errors 
 **Default**: `500-599`<br>
 A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
 
+`dd.grpc.client.error.statuses`
+: **Environment Variable**: `DD_GRPC_CLIENT_ERROR_STATUSES`<br>
+**Default**: `1-16`<br>
+A range of errors can be accepted. By default, gRPC status codes 1 to 16 are reported as errors for gRPC clients. This configuration overrides that. Ex. `dd.grpc.client.error.statuses=1-4,7-10`
+
+`dd.grpc.server.error.statuses`
+: **Environment Variable**: `DD_GRPC_SERVER_ERROR_STATUSES`<br>
+**Default**: `2-16`<br>
+A range of errors can be accepted. By default, gRPC status codes 2 to 16 are reported as errors for gRPC servers. This configuration overrides that. Ex. `dd.grpc.server.error.statuses=2-4,7-10`
+
 ### Logs
 
 `dd.logs.injection`
