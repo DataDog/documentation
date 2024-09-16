@@ -460,7 +460,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError("Crash the app")
+     fatalError("Crash the app")
    }
    ```
 

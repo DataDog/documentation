@@ -51,7 +51,7 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 | サービスとして実行中の Agent の停止    | `sudo systemctl stop datadog-agent`                    |
 | サービスとして実行中の Agent の再起動 | `sudo systemctl restart datadog-agent`                 |
 | Agent サービスのステータス            | `sudo systemctl status datadog-agent`                  |
-| Status page of running Agent       | `sudo datadog-agent status`                            |
+| 実行中の Agent のステータスページ       | `sudo datadog-agent status`                            |
 | フレアの送信                         | `sudo datadog-agent flare`                             |
 | コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
 | チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |

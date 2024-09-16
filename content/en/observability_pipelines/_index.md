@@ -14,6 +14,9 @@ further_reading:
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
   tag: "documentation"
   text: "Dual shipping with Observability Pipelines"
+- link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
+  tag: "documentation"
+  text: "Strategies for Reducing Log Volume"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
   tag: "blog"
   text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
@@ -43,7 +46,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 {{< img src="observability_pipelines/op_marketecture_08232024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) so that you can easily build and deploy pipelines.
+Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
 
 The Observability Pipelines Worker is the software that runs in your infrastructure. It centrally aggregates, processes, and routes your logs based on your use case. This means you can redact sensitive data, pre-process logs, and determine which destinations they should go to, all before the logs leave your environment.
 

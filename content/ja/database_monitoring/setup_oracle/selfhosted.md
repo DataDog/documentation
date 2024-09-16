@@ -87,7 +87,7 @@ CREATE USER datadog IDENTIFIED BY &password ;
 
 {{< /tabs >}}
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### ビューの作成
@@ -126,19 +126,19 @@ Oracle Agent のコンフィギュレーションファイル `/etc/datadog-agen
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
     password: 'ENC[datadog_user_database_password]'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
     password: 'ENC[datadog_user_database_password]'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```

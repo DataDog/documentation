@@ -39,6 +39,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: ブログ
   text: Datadog を使用した AWS WAF のアクティビティの監視
+- link: https://www.datadoghq.com/blog/security-inbox-prioritization/
+  tag: ブログ
+  text: Datadog Security Inbox によるセキュリティリスクの優先順位付け方法
 title: Application Security Management
 ---
 
@@ -68,7 +71,7 @@ Application Security Management がどのように構成され、トレースデ
 
 [独自の規則][4]を利用する ASM なら、手動でコンフィギュレーションをせずに脅威を検出できます。すでに Datadog [APM][1] を物理ホストまたは仮想ホストにすでに構成している場合、環境変数を 1 つ設定するだけですぐに開始できます。
 
-To start configuring your environment to detect and protect threats with ASM, follow the enabling documentation for each product. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
+ASM を使用して脅威を検出し保護するために環境を構成し始めるには、各製品の有効化ドキュメントに従ってください。ASM の構成が完了したら、[Security Signals Explorer][6] でセキュリティシグナルの調査および修復を開始できます。 
 
 ## セキュリティシグナルの調査と修復
 
@@ -78,9 +81,9 @@ To start configuring your environment to detect and protect threats with ASM, fo
 
 [Software Composition Analysis (SCA)][8] は、サービスが、既知の脆弱性を持つオープンソースライブラリを使用している、またはそれに依存しているためにリスクにさらされている場合を示します。脆弱性の発見について調査し、修正アドバイスに従ったり、脆弱性の原因を研究したりすることで、ソフトウェアを安全に保護します。
 
-## Detect vulnerabilities in your application's code
+## アプリケーションのコードの脆弱性を検出する
 
-[Code Security][9] identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM) and it enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling.
+[Code Security][9] は、サービス内のコードレベルの脆弱性を特定し、実用的な洞察と修正の提案を提供します。アプリケーションコード内の脆弱性を検出するために、インタラクティブ・アプリケーション・セキュリティ・テスト (IAST) のアプローチを採用しています。IAST は、アプリケーションパフォーマンスモニタリング (APM) と同様にコード内に埋め込まれたインスツルメンテーションを利用して、追加の構成や定期的なスケジューリングを必要とする外部テストに依存することなく、Datadog が正規のアプリケーショントラフィックを使用して脆弱性を特定することを可能にします。
 
 ## 次のステップ
 

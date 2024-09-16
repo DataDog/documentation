@@ -1,8 +1,7 @@
 ---
 code_lang: reactnative
 code_lang_weight: 50
-description: Aprenda a solucionar problemas con la <txprotected>monitorización</txprotected>
-  de React Native.
+description: Aprenda a solucionar problemas con la monitorización de React Native.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: Código fuente
@@ -20,9 +19,9 @@ Si experimentas un comportamiento inesperado con Datadog React Native RUM, utili
 
 ## No se envían datos a Datadog
 
-Sigue estas instrucciones en orden cuando se haya instalado el SDK y la aplicación compile, pero Datadog no reciba ningún dato.
+Sigue estas instrucciones en orden cuando se haya instalado el SDK y la compilación de la aplicación, pero Datadog no reciba ningún dato.
 
-### Haz un check de la configuración
+### Check la configuración
 
 A veces, no se envía ningún dato debido a un pequeño error en la configuración.
 
@@ -33,7 +32,7 @@ Estas son algunas de las cosas más frecuentes para hacer un check:
 - Si has configurado un `Proxy` en la configuración de Datadog, check que se haya configurado correctamente.
 - Check que estés **rastreando vistas** (todos los eventos deben estar adjuntos a una vista) y **enviando eventos**.
 
-### Revisar logs de SDK en React Native
+### Revisar los logs de SDK en React Native
 
 - Configura `config.verbosity = SdkVerbosity.DEBUG`, que importa `SdkVerbosity` desde `@datadog/mobile-react-native`.
 - Los logs comienzan a aparecer en la consola de JavaScript, como la siguiente salida:
@@ -67,14 +66,14 @@ Si utilizas `DdSdkReactNative.initialize` para iniciar el SDK de Datadog, llama 
 
 A partir de la versión del SDK `1.2.0`, puedes inicializar el SDK utilizando el componente `DatadogProvider`. Este componente incluye un buffer de eventos de RUM que se asegura de que el SDK se inicialice antes de enviar cualquier dato a Datadog, lo que evita que se produzca este problema.
 
-Para utilizarlo, consulta la [Guía de migración al proveedor de Datadog][1].
+Para utilizarlo, consulta la [Guía para la migración al proveedor de Datadog][1].
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
 
 {{% /pestaña %}}
 {{< /pestañas >}}
 
-### Revisión de logs nativos
+### Revisión de los logs nativos
 
 Revisar los logs nativos puede darte más información sobre lo que podría estar fallando.
 
@@ -86,7 +85,7 @@ Revisar los logs nativos puede darte más información sobre lo que podría esta
 
   {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="Revisar los logs nativos puede ayudarte a averiguar por qué no se está enviando ningún dato" >}}
 
-Puedes filtrar Logs por "DATADOG" y buscar cualquier error.
+Puedes filtrar los logs por "DATADOG" y buscar cualquier error.
 
 Si efectivamente estás enviando eventos, deberías ver los siguientes logs:
 
@@ -117,7 +116,7 @@ Si utilizas `DdSdkReactNative.initialize` para iniciar el SDK de Datadog, llama 
 
 A partir de la versión del SDK `1.2.0`, puedes inicializar el SDK utilizando el componente `DatadogProvider`. Este componente incluye un buffer de eventos de RUM que se asegura de que el SDK se inicialice antes de enviar cualquier dato a Datadog, lo que evita que se produzca este problema.
 
-Para utilizarlo, consulta la [Guía de migración al proveedor de Datadog ][1].
+Para utilizarlo, consulta la [Guía para la migración al proveedor de Datadog ][1].
 
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
@@ -158,7 +157,7 @@ En este ejemplo, el último log indica que el lote de datos de RUM se ha enviado
 Si aparece el siguiente mensaje de error
 
 ```
-Símbolos indefinidos para la arquitectura x86_64:
+Símbolos no definidos para la arquitectura x86_64:
   "static Foundation.JSONEncoder.OutputFormatting.withoutEscapingSlashes.getter : Foundation.JSONEncoder.OutputFormatting", referenciado desde:
       static (extensión en Datadog):Foundation.JSONEncoder.default() -> Foundation.JSONEncoder en libDatadogSDK.a(JSONEncoder.o)
 ...
@@ -206,7 +205,7 @@ Fallo en la ejecución de la tarea ':app:processReleaseMainManifest'.
 > No es posible que Java.lang.String Java.io.File.path final privado de campo sea accesible: el módulo Java.base no "abre Java.io" al módulo sin nombre @1bbf7f0e
 ```
 
-Estás utilizando Java 17, que no es compatible con tu versión de React Native. Cambia a Java 11 para resolver el problema.
+Estás utilizando Java 17, que no es compatible con tu versión de React Native. Cambia a Java 11 para solucionar el problema.
 
 ### java.lang.UnsupportedClassVersionError
 
@@ -279,18 +278,9 @@ dependencias {
 }
 ```
 
-## Envío de datos cuando el dispositivo está desconectado
-
-RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En casos de zonas con bajas conexiones de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local en lotes. Se envían tan pronto como la red esté disponible y la carga de la batería sea lo suficientemente alta como para asegurar que el SDK de React Native de RUM no afecte a la experiencia del usuario final. Si la red no está disponible cuando tu aplicación está ejecutándose en primer plano o si falla una carga de datos, el lote se conserva hasta que pueda enviarse correctamente.
-
-Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato.
-
-**Nota**: Los datos del disco se eliminan automáticamente si se vuelven demasiado antiguos para garantizar que el SDK de React Native de RUM no utilice demasiado espacio del disco.
-
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
-
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help
 [2]: https://github.com/JakeWharton/pidcat

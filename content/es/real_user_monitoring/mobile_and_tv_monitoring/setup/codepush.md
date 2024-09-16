@@ -108,7 +108,7 @@ Crea un archivo gitignored `datadog-ci.json` en la raíz de tu proyecto que cont
 }
 ```
 
-También puedes exportarlas como variables de entorno `Datadog_API_KEY` y `Datadog_SITE`.
+También puedes exportarlas como variables de entorno `DATADOG_API_KEY` y `DATADOG_SITE`.
 
 Cuando lances un nuevo paquete de CodePush, especifica un directorio de salida para los mapas de fuente y el paquete:
 
@@ -154,6 +154,14 @@ Para evitar posibles conflictos de versiones, `versionSuffix` añade un guión (
 Para obtener la `codepushVersion`, puedes codificarla o utilizar [`CodePush.getUpdateMetadata`][4].
 
 A continuación, carga tus mapas de fuente mediante el comando [`datadog-ci react-native upload`][5] y asegúrate de que el argumento `--release-version` coincide con lo establecido en la configuración del SDK.
+
+## Envío de datos cuando el dispositivo está desconectado
+
+RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En caso de zonas con baja conexión de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local en lotes. 
+
+Cada lote sigue la especificación de entrada. Se envían tan pronto como la red está disponible y la batería está lo suficientemente cargada como para garantizar que el SDK de Datadog no afecte la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano o si falla una carga de datos, el lote se conserva hasta que se lo pueda enviar con éxito.
+
+Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato. Para garantizar que el SDK no utilice demasiado espacio de disco, los datos del disco se descartan automáticamente si son demasiado antiguos.
 
 ## Referencias adicionales
 

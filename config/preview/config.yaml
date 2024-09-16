@@ -17,11 +17,11 @@ deployment:
     targets:
     - name: "preview"
       URL: "s3://datadog-docs-preview?region=us-east-1&prefix=$CI_COMMIT_REF_NAME/"
-      exclude: "**.{go,java,py,rb,jpg,jpeg,png,gif,mp4,svg}"
+      exclude: "**.{go,java,py,rb,pybeta,rbbeta,ts,jpg,jpeg,png,gif,mp4,mov,svg}"
       cloudFrontDistributionID: E3EYIYXXL26MK1
     - name: "previewAssets"
       URL: "s3://dd-staging-static-assets?region=us-east-1&prefix=documentation/"
-      include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"
+      include: "**.{jpg,jpeg,png,gif,mp4,mov,svg,json}"
 
     matchers:
       # temporarily lets nocache this sh file
