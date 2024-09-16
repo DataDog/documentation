@@ -155,4 +155,4 @@ content/en/quality_gates/                         @Datadog/ci-app-backend @Datad
 content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
 
 # Partners
-content/en/partners                              @Datadog/partner-tech-solutions @Datadog/documentation
+content/en/partners/**/*.md                              @Datadog/partner-tech-solutions @Datadog/documentation
