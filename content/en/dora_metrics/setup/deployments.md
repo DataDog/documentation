@@ -94,7 +94,7 @@ EOF
 
 ### CLI Example
 
-The [`datadog-ci`][28] CLI tool provides a shortcut to send deployment events within your Continuous Integration environment.
+The [`datadog-ci`][22] CLI tool provides a shortcut to send deployment events within your Continuous Integration environment.
 
 For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][27]:
 ```shell
@@ -117,13 +117,12 @@ If the deployment CI job is running on the exact same Git revision that is being
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
 [21]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
-[22]: https://www.npmjs.com/package/@datadog/datadog-ci
+[22]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [23]: /tracing/service_catalog
 [24]: /tracing/service_catalog/adding_metadata
 [25]: https://app.datadoghq.com/ci/dora
 [26]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [27]: https://app.datadoghq.com/organization-settings/api-keys
-[28]: https://www.npmjs.com/package/@datadog/datadog-ci
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -264,7 +263,7 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
+[2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [3]: /tracing/service_catalog
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
