@@ -1682,7 +1682,7 @@ menu:
       parent: metrics_custom_metrics
       identifier: metrics_historical_metrics
       weight: 102
-    - name: Dynamic Metrics without Limits™ Workflow Automation
+    - name: Dynamic Metrics Without Limits™ Workflow Automation
       url: metrics/custom_metrics/automated_mwl_workflow/
       parent: metrics_custom_metrics
       identifier: metrics_automated_mwl_workflow
