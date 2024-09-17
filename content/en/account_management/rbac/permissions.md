@@ -20,6 +20,14 @@ algolia:
 
 Permissions define the type of access a user has to a given resource. Typically, permissions give a user the right to read, edit, or delete an object. Permissions underlie the access rights of all roles, including the three out-of-the-box roles and custom roles.
 
+### Sensitive permissions
+Some Datadog permissions provide access to more privileged functionality that is important to be aware of, such as:
+- Access to change organization settings
+- Access to read potentially sensitive data
+- Access to perform privileged operations
+
+Sensitive permissions are flagged in the Roles and Permissions interfaces to identify that they may need increased scrutiny. As a best practice, administrators configuring roles should pay special attention to these permissions, and confirm which of these permissions are assigned to their roles and users.
+
 ### Out-of-the-box roles
 
 By default, existing users are associated with one of the three out-of-the-box roles:
@@ -35,14 +43,6 @@ All users with one of these roles can read all data types, except for [individua
 Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3].
 
 **Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user to enforce the new role permissions.
-
-### Sensitive Permissions
-Some Datadog permissions provide access to more privileged functionality that is important to be aware of, such as:
-- Access to change organization settings
-- Access to read potentially sensitive data
-- Access to perform privileged operations
-
-Sensitive permissions are flagged in the Roles and Permissions interfaces to identify that they may need increased scrutiny. As a best practice, administrators configuring roles should pay special attention to these permissions, and confirm which of these permissions are assigned to their roles and users.
 
 ## Permissions list
 
