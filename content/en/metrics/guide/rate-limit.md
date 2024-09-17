@@ -24,6 +24,8 @@ This guide explains:
 
 ## Datadog rate limit events
 
+{{< img src="/metrics/guide/rate_limit/rate_limit_events.png" alt="Rate limit events in the Events Explorer with an example event in the detail side panel" style="width:100%;" >}}
+
 When Datadog notices an increase in cardinality, before any rate limits are applied, an [event][2] is created as a warning. If the metric cardinality continues to increase, we may apply a rate limit. If your metric is rate limited, a second event is generated stating a rate limit has been placed. View these events in the [Event Explorer][3]. 
 
 <div class="alert alert-warning">Datadog does not send a notification for every subsequent rate limiting event. We recommend that you build an Event Monitor to alert when your metrics are rate limited in the future.</div>
