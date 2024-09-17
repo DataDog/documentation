@@ -26,8 +26,9 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for ho
 
 Cloud Security Management Vulnerabilities supports scanning for containers from running the following container runtimes:
 
-| Container Runtime        | Supported Versions                                  | Package Managers / Source |
-|--------------------------|-----------------------------------------------------|---------------------------|
-| containerd               | All                                                 | ?  |
-| Cri-O                    | Not Supported                                       | ?  |
-| Podman                   | Not Supported                                       | ?  |
+| Container Runtime        | Supported Versions                                  | 
+|--------------------------|-----------------------------------------------------|
+| containerd               | v1.5.9+                                                 |
+| docker                   | All                                                 |
+| Cri-O                    | Not Supported                                       |
+| Podman                   | Not Supported                                       |
