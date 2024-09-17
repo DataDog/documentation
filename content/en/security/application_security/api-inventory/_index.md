@@ -30,9 +30,9 @@ Using the API Security Inventory you can:
 
 ## Configuration
 
-The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
+In order to use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
 
-|Technology|Minimum version| Support for sensitive data scanning |
+|Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
 |Java      | v1.31.0  | Requests only |
@@ -42,6 +42,8 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Ruby      | v1.15.0  | Requests only |
 |Golang    | v1.59.0  | Requests only |
 |Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
+
+**Warning** On .NET Core and .Net Fx tracers you will need to set `DD_API_SECURITY_ENABLED=true` in your environement variables
 
 ## How it works
 
