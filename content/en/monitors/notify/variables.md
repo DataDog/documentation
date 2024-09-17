@@ -260,8 +260,7 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 #### Customize the notification based on the group
 
-{{< tabs >}}
-{{% tab "Host" %}}
+
 #### Query group by host
 
 If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
@@ -272,9 +271,7 @@ Some specific host metadata variables are available:
 - Machine: `{{host.metadata_machine}}`
 - Platform: `{{host.metadata_platform}}`
 - Processor: `{{host.metadata_processor}}`
-{{% /tab %}}
 
-{{% tab "Kubernetes Resources" %}}
 #### Query group by kube_namespace and kube_cluster_name
 
 If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
@@ -306,8 +303,6 @@ The full list of available attributes is:
 |-------------------|------------------------|
 | `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
 
-{{% /tab %}}
-{{< /tabs >}}
 
 
 #### Tag key with period
