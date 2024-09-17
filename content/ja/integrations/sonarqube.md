@@ -22,7 +22,7 @@ assets:
     source_type_id: 10132
     source_type_name: SonarQube
   monitors:
-    SonarQube vulnerabilities: assets/monitors/vulnerabilities.json
+    Sonarqube has vulnerabilities: assets/monitors/vulnerabilities.json
   saved_views:
     status_overview: assets/saved_views/status_overview.json
 author:
@@ -34,7 +34,7 @@ categories:
 - 自動化
 - ログの収集
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_on_public_website: true
@@ -295,7 +295,7 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 **デフォルト値**: `10`
 
 `include`
-: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
 **デフォルト値**: 空のマップ
 
 `exclude`
