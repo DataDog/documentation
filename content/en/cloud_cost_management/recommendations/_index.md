@@ -8,8 +8,8 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Cloud Cost Recommendations is in public beta with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.
+{{< callout btn_hidden="true" header="Join the Preview!">}}
+Cloud Cost Recommendations are in preview with support for AWS, and are automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.
 {{< /callout >}}
 
 ## Overview
