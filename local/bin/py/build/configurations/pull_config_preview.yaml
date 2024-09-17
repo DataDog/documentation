@@ -585,7 +585,7 @@
       - repo_name: dd-source
         contents:
         - action: pull-and-push-file
-          branch: waleed/fixing-documentation-icons
+          branch: main
           globs:
             - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
