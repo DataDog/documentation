@@ -103,7 +103,7 @@ The two types of fixes are distinguished visually in the UI with different label
 *AI Suggested Fixes:*
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
-<div class="alert alert-warning">AI Suggested Fixes are in private beta. To request access, contact <a href="/help/">Support.</div>
+<div class="alert alert-warning">AI Suggested Fixes are in preview. To request access, contact <a href="/help/">Support.</div>
 
 ### Fixing a vulnerability or quality issue directly from Datadog
 {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}
