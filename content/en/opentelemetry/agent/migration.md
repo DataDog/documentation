@@ -187,8 +187,8 @@ datadog:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
-    repository: datadog/agent-dev
-    tag: nightly-ot-beta-main-jmx
+    repository: datadog/agent
+    tag: 7.57.0-v1.0-ot-beta-jmx
     doNotCheckTag: true
 ...
    {{< /code-block >}}
@@ -251,8 +251,8 @@ Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
 agents:
   image:
-    repository: datadog/agent-dev
-    tag: nightly-ot-beta-main-jmx
+    repository: datadog/agent
+    tag: 7.57.0-v1.0-ot-beta-jmx
     doNotCheckTag: true
 
 datadog:
@@ -295,7 +295,7 @@ datadog:
      --set-file datadog.otelCollector.config=collector-config.yaml
    ```
 1. Navigate to **Integrations** > **Fleet Automation**.
-1. Select the **OTel Collector Version** facet. 
+1. Select the **OTel Collector Version** facet.
 1. Select an Agent and inspect its configuration to verify the new Agent with OpenTelemetry Collector is installed successfully.
 
 ## Configure your application
