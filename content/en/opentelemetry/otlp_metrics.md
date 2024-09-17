@@ -58,7 +58,7 @@ To send OTLP data to the Datadog OTLP metrics intake endpoint, use the OTLP HTTP
 
 The process differs depending on whether you're using automatic or manual instrumentation for OpenTelemetry.
 
-<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}: Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_metrics_endpoint" code="true" >}}.</div>
+<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}: Replace your endpoint with {{< region-param key="otlp_metrics_endpoint" code="true" >}} in the following examples.</div>
 
 #### Ensure only delta metrics are sent
 

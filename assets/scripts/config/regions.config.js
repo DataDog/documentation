@@ -268,7 +268,7 @@ export default {
      eu: `https://trace.agent.datadoghq.eu/api/v0.2/traces`
     },
     otlp_metrics_endpoint: {
-     us: `https://api.datadoghq.com/api/intake/otlp/v1/metrics `,
+     us: `https://api.datadoghq.com/api/intake/otlp/v1/metrics`,
      us3: `https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics`,
      us5: `https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics`,
      eu: `https://api.datadoghq.eu/api/intake/otlp/v1/metrics`
