@@ -1,7 +1,6 @@
 ---
 title: Service Definitions and Supported Versions
 aliases:
-- /service_catalog/service_definitions
 - /service_catalog/adding_metadata
 - /tracing/service_catalog/service_metadata_structure
 - /tracing/service_catalog/adding_metadata
@@ -118,7 +117,7 @@ extensions:
 [1]: /service_catalog/service_definitions/v3-0
 [2]: /service_catalog/service_definitions/v2-2
 [3]: /service_catalog/service_definitions/v2-1
-[4]: /service_catalog/service_definitions/v2
+[4]: /service_catalog/service_definitions/v2-0
 [5]: https://app.datadoghq.com/services
 [6]: /integrations/github/
 [7]: https://app.datadoghq.com/integrations/github
