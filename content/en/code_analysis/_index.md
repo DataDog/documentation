@@ -1,7 +1,7 @@
 ---
 title: Code Analysis
 description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
-is_beta: true
+is_beta: false
 aliases:
 - /code_analysis/faq
 further_reading:
@@ -29,10 +29,6 @@ algolia:
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 

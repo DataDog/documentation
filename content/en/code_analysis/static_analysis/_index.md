@@ -4,7 +4,7 @@ description: Learn about Datadog Static Analysis to scan code for quality issues
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -22,9 +22,6 @@ algolia:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 

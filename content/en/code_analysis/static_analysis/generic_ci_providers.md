@@ -1,7 +1,7 @@
 ---
 title: Generic CI Providers
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -15,10 +15,6 @@ algolia:
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 

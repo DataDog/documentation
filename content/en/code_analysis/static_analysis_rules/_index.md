@@ -4,7 +4,7 @@ description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
-is_beta: true
+is_beta: false
 type: static-analysis
 rulesets:
   csharp-best-practices:
@@ -244,10 +244,6 @@ further_reading:
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 
