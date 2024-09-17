@@ -11,7 +11,9 @@ In the previous two sections, we viewed Datadog through the lens of the plan and
 
 ## Service tasks
 
-By releasing your new individual Datadog services in a rational and sequential pattern, gaining confidence as the service develops, we can reduce the risks of the implementation, and increase adoption from our users. In this section we will list a particular sequence of service item releases that will optimize your Datadog service user's experience. It is not practical to discuss all the intricacies involved in these items, as the diversity of the IT architecture at this level is too extensive to be captured in a single document. Here are a few highlights:
+By releasing your new individual Datadog services in a rational and sequential pattern, gaining confidence as the service develops, we can reduce the risks of the implementation, and increase adoption from our users. In this section we will list a particular sequence of service item releases that will optimize your Datadog service user's experience. It is not practical to discuss all the intricacies involved in these items, as the diversity of the IT architecture at this level is too extensive to be captured in a single document. 
+
+Here are a few highlights:
 
 ### Onboarding a new infrastructure instance
 
@@ -89,10 +91,6 @@ Include Datadog upgrades within existing patch management standards and upgrade 
 ## Run summary
 
 Datadog service ownership does have a few common activities, but the needs in this regard are few. These activities will slot well into your existing process standards. Be sure to fold Datadog into your standard systems for key rotation, patch updates, service onboarding and IaC.  Publish these standards early so that users know how to get started using your new Datadog service. 
-
-# Summary
-
-Datadog provides a straightforward solution to the highly complex challenges of enterprise observability. In this document, we covered how to maximize the platform’s value. Starting in the planning phase, we explored developing an architectural knowledge-base, experimenting with the product, and creating an implementation design. Next, in the build phase, we interpreted the documentation to create a detailed roll-out methodology. Finally, during the run phase, we outlined a maintenance schedule to ensure the service remains healthy.   
 
 ## Further Reading
 

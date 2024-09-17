@@ -2,19 +2,19 @@
 title: Plan your Datadog implementation
 description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
-- link: "/service_owners_guide/build/"
+- link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
-  text: "Build your Datadog Implementation"
-- link: "/service_owners_guide/run/"
+  text: "Getting Started with Unified Service Tagging"
+- link: "/getting_started/tracing/"
   tag: "Documentation"
-  text: "Maintaining and running your Datadog Implementation"
+  text: "Getting Started with APM Tracing"
 ---
 
 ## Design
 
 ### Sizing exercise
 
-Setting and identifying the clear end goal is critical whenever we start a substantial product implementation. However, in a practical world, it is not possible to know everything you might need at the outset. Product engineers iterate their deployments, and systems operations control their changes, all to control risk. Implementing a large-scale Datadog deployment will similarly benefit from the effective application of standard project management practices. As part of that process, there are certain Datadog elements that should be included. Survey outlines are a great way to size and whiteboard your needs.
+Defining a clear end goal is essential when starting a significant product implementation. However, it's impractical to know all requirements from the beginning. Product engineers iterate deployments, and systems operations manage changes to mitigate risk. Similarly, a large-scale Datadog deployment benefits from standard project management practices. Certain Datadog elements should be included in this process. Survey outlines are useful for assessing and planning your needs.
 
 A sample survey form might look like this: 
 
@@ -36,7 +36,7 @@ Datadog has specialized tool-tips designed for every kind of material.  After co
 
 ### Resource tagging 
 
-Datadog is a tool for correlating machine data across multi-dimensions of cardinality. It cross-references an individual data against any other one, regardless of type. For example, query telemetry on Database hosts can be compared to worker thread pool size on web server hosts, with all the logs from both hosts displayed in-line. 
+Datadog is a tool for correlating machine data across multiple dimensions of cardinality. It cross-references an individual data points regardless of type. For example, you can compare database host telemetry with web server host thread pool sizes, displaying all logs in-line. 
 
 Hostname, cloud regions, OS version, and IP, are just some of the machine-generated unified vocabulary. Additionally, Datadog allows you to generate custom data terms such as cost-code, AppName, environment, and version.
 
@@ -93,18 +93,16 @@ The Datadog log management capabilities are rich, robust, and streamlined to all
 
 The primary design consideration for Datadog's log index architecture is a distributed, time-series, columnar store optimized around serving large scan and aggregation queries.  
 
-See [introducing husky][15] and [husky deep dive][16] for more information about Datadog's logging architecture. 
-
 Due to the robust nature of Datadog's logging platform, it can be configured with many layers of logs storage. Each has its own use-cases outlined here:
 
 |  | Platform Available | Retention | Retrieval to Datadog | Cost Driver |
 | :---- | :---- | :---- | :---- | :---- |
 | Ignored | No | None | None | NA |
-| [Ingested][17] | Logs-to-Metrics | 15m in LiveTail | None | Volume |
-| [Archive][18] | Upon Rehydrate | Infinite | Slow | Volume |
-| [Forward Logs][19] | Same as Ingested | Determined by Target | None | Volume |
-| [Index][20] | Yes | 3,7,15,30 days | Immediate | Volume & Message Count |
-| [Flex Logs][21] | Yes\* |  | Rapid | Retrieval Volume |
+| [Ingested][15] | Logs-to-Metrics | 15m in LiveTail | None | Volume |
+| [Archive][16] | Upon Rehydrate | Infinite | Slow | Volume |
+| [Forward Logs][17] | Same as Ingested | Determined by Target | None | Volume |
+| [Index][18] | Yes | 3,7,15,30 days | Immediate | Volume & Message Count |
+| [Flex Logs][19] | Yes\* |  | Rapid | Retrieval Volume |
 
 \* Flex logs capability does not include monitors/alerting and Watchdog, however you can still perform log-to-metrics on the ingestion stream before logs are indexed (in either standard or flex) and use those metrics in monitors. Correlation with other telemetry, e.g. traces/APM, is supported.
 
@@ -130,8 +128,8 @@ Global SIEM
 
 **Recommendations:**   
 - Understand [Logging without Limits][14]™ (identify most logged service status, high volume logging patterns, log pattern exclusion filters).  
-- Develop a log ingestion plan and review [best practices][22] for log management.  
-- Configure [log archives][18].
+- Develop a log ingestion plan and review [best practices][20] for log management.  
+- Configure [log archives][16].
 
 ### Real User Monitoring
 
@@ -139,8 +137,8 @@ Real User Monitoring and Session Replay can give highly granular insights into w
 
 **Recommendations:** 
 
-- [Discard front-end errors][23]  
-- Configure your [RUM sampling rate][24]  
+- [Discard front-end errors][21]  
+- Configure your [RUM sampling rate][22]  
 - Limit RUM and Session Replay deployments to production and near-production environments.
 
 ### Synthetic monitoring
@@ -149,11 +147,11 @@ Datadog has a full synthetic application suite, including testing for browser, m
 
 **Recommendations:**
 
-- Review [Synthetics Consumption Considerations][25]  
-- Reduce test maintenance by using [sub-tests][26].
+- Review [Synthetics Consumption Considerations][23]  
+- Reduce test maintenance by using [sub-tests][24].
 - Make rational choices in test location selection. Users are often from different regions around the world. Test from where your customers actually are.    
 - Use Synthetics in conjunction with APM and RUM .  
-- Define the use cases for Synthetics vs [HTTP Checks][27].  
+- Define the use cases for Synthetics vs [HTTP Checks][25].  
 
 ## Additional resources
 
@@ -161,15 +159,15 @@ We've highlighted some important wins and best practices with APM, RUM, Syntheti
 
 ### Live processes 
 
-[Live processes][28] can be used to view all of your running processes in one place. For example, it can provide PID-level information of a running Apache process, to help you understand and troubleshoot transient issues. Additionally, you can query for processes running on a specific host, in a specific availability zone, or running a specific workload. [Configure][29] live processes on your hosts, containers, or AWS ECS Fargate instances to take advantage of this feature.
+[Live processes][26] can be used to view all of your running processes in one place. For example, it can provide PID-level information of a running Apache process, to help you understand and troubleshoot transient issues. Additionally, you can query for processes running on a specific host, in a specific availability zone, or running a specific workload. [Configure][27] live processes on your hosts, containers, or AWS ECS Fargate instances to take advantage of this feature.
 
 ### Availability, latency, and SSL expiration 
 
-Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP_Check][27] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates.
+Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates.
 
 ### Network Monitoring
 
-Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits.  Use Datadog’s [network integration][30] and enable [Network Performance Monitoring][31] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
+Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits.  Use Datadog’s [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
 
 ## Ancillary products
 
@@ -177,35 +175,35 @@ Datadog is a platform of tremendous value. From years of collective experience w
 
 ### Service Catalog
 
-Services are the base object of observability. Utilizing the [service catalog][32] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
+Services are the base object of observability. Utilizing the [service catalog][30] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
 
 {{< img src="/service_owners_guide/service_catalog.png" alt="Service Catalog home screen" style="width:90%;">}}
 
 ### Event Management 
 
-Without any additional setup, [event management][33] can be used to see 3rd party event statuses, events generated from the Agent and installed integrations, and more. 
+Without any additional setup, [event management][31] can be used to see 3rd party event statuses, events generated from the Agent and installed integrations, and more. 
 
 ### Error Tracking 
 
-See errors where they happen with Datadog's [Error Tracking][34]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
+See errors where they happen with Datadog's [Error Tracking][32]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
 
 ### API Catalog 
 
-Use [API Catalog][35] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
+Use [API Catalog][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
 ### Fleet Automation  
 
-Centrally administer and manage all of your Datadog Agents with [Fleet Automation][36]. Fleet Automation can help you identify which Agents need upgraded, send a flare from within your organization to support, and help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.  
+Centrally administer and manage all of your Datadog Agents with [Fleet Automation][34]. Fleet Automation can help you identify which Agents need upgraded, send a flare from within your organization to support, and help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.  
 
 {{< img src="/service_owners_guide/fleet_automation.png" alt="Fleet Management home screen" style="width:90%;">}}
 
 ### Remote Configuration
 
-Use Datadog's [Remote Configuration][37] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. See [supported products and capabilities][38] for more information.
+Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. See [supported products and capabilities][36] for more information.
 
 ### Notebooks 
 
-Use Datadog [Notebooks][39] to share with team members to aid in troubleshooting investigations or incidents.
+Use Datadog [Notebooks][37] to share with team members to aid in troubleshooting investigations or incidents.
 
 ## Optimizing data collection 
 
@@ -213,9 +211,9 @@ Datadog can collect and observe many things in your environments, however, it is
 
 ### Infrastructure
 
-Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (K8s, rancher, docker), and public cloud providers(AWS, Azure, GCP).  Datadog's unique ability allows the platform to [autodiscover][40] new objects (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) that are created within those environments. There are reasons to control this collection as many of these objects have billing implications to be aware of.
+Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (K8s, rancher, docker), and public cloud providers(AWS, Azure, GCP).  Datadog's unique ability allows the platform to [autodiscover][38] new objects (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) that are created within those environments. There are reasons to control this collection as many of these objects have billing implications to be aware of.
 
-The usage of Datadog within these auto-discovered environment types is critical to understand. These include linkages for excluding billable objects for [AWS][41], GCP, [Azure][42], HyperV, PCF, and vSphere.
+The usage of Datadog within these auto-discovered environment types is critical to understand. These include linkages for excluding billable objects for [AWS][39], GCP, [Azure][40], HyperV, PCF, and vSphere.
 
 **Recommendations:**    
 For each virtualization framework, define the exclusion methodology. Enumerate specific tags, labels, namespaces, and annotations that will be used for collection control.
@@ -254,10 +252,15 @@ Not every tool is fit for every job.  Evaluate the Datadog product use cases, an
 It is important to develop and plan a realistic course through the implementation of Datadog. In this section we have covered the planning and best practices phase, and at this stage, your   
 Datadog footprint is set up for success. You have identified and assembled your knowledge base and team members, developed your deployment models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations will assist you in the next phases of Datadog service ownership, build and run.  
 
+## Next Steps
+
+Create a detailed roll-out methodology in the [build][41] phase by focusing on the construction of Datadog itself, iterate on your environment, establish some internal support mechanisms, and prepare for production.
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 
 [1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
@@ -274,31 +277,30 @@ Datadog footprint is set up for success. You have identified and assembled your 
 [12]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [13]: https://docs.datadoghq.com/tracing/trace_collection/tracing_naming_convention/
 [14]: https://docs.datadoghq.com/logs/guide/getting-started-lwl/
-[15]: https://www.datadoghq.com/blog/engineering/introducing-husky/
-[16]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
-[17]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/
-[18]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3
-[19]: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/?tab=http
-[20]: https://docs.datadoghq.com/logs/log_configuration/indexes
-[21]: https://docs.datadoghq.com/logs/log_configuration/flex_logs/
-[22]: https://docs.datadoghq.com/logs/guide/best-practices-for-log-management/
-[23]: https://docs.datadoghq.com/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event
-[24]: https://docs.datadoghq.com/real_user_monitoring/guide/best-practices-for-rum-sampling/
-[25]: https://www.datadoghq.com/pricing/?product=synthetic-testing--monitoring\#synthetic-testing--monitoring-common-questions
-[26]: https://docs.datadoghq.com/synthetics/browser_tests/advanced_options/#subtests
-[27]: https://docs.datadoghq.com/integrations/http_check/
-[28]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
-[29]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows\#installation
-[30]: https://docs.datadoghq.com/integrations/network/
-[31]: https://docs.datadoghq.com/network_monitoring/performance/
-[32]: https://docs.datadoghq.com/service_catalog/
-[33]: https://docs.datadoghq.com/service_management/events/
-[34]: https://docs.datadoghq.com/error_tracking/
-[35]: https://docs.datadoghq.com/api_catalog/
-[36]: https://docs.datadoghq.com/agent/fleet_automation/
-[37]: https://docs.datadoghq.com/agent/remote_config/
-[38]: https://docs.datadoghq.com/agent/remot\_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
-[39]: https://docs.datadoghq.com/notebooks/
-[40]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[41]: https://docs.datadoghq.com/account_management/billing/aws/\#aws-resource-exclusion
-[42]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension\#metric-collection
+[15]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/
+[16]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3
+[17]: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/?tab=http
+[18]: https://docs.datadoghq.com/logs/log_configuration/indexes
+[19]: https://docs.datadoghq.com/logs/log_configuration/flex_logs/
+[20]: https://docs.datadoghq.com/logs/guide/best-practices-for-log-management/
+[21]: https://docs.datadoghq.com/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event
+[22]: https://docs.datadoghq.com/real_user_monitoring/guide/best-practices-for-rum-sampling/
+[23]: https://www.datadoghq.com/pricing/?product=synthetic-testing--monitoring\#synthetic-testing--monitoring-common-questions
+[24]: https://docs.datadoghq.com/synthetics/browser_tests/advanced_options/#subtests
+[25]: https://docs.datadoghq.com/integrations/http_check/
+[26]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
+[27]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows\#installation
+[28]: https://docs.datadoghq.com/integrations/network/
+[29]: https://docs.datadoghq.com/network_monitoring/performance/
+[30]: https://docs.datadoghq.com/service_catalog/
+[31]: https://docs.datadoghq.com/service_management/events/
+[32]: https://docs.datadoghq.com/error_tracking/
+[33]: https://docs.datadoghq.com/api_catalog/
+[34]: https://docs.datadoghq.com/agent/fleet_automation/
+[35]: https://docs.datadoghq.com/agent/remote_config/
+[36]: https://docs.datadoghq.com/agent/remot\_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
+[37]: https://docs.datadoghq.com/notebooks/
+[38]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[39]: https://docs.datadoghq.com/account_management/billing/aws/\#aws-resource-exclusion
+[40]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension\#metric-collection
+[41]: /service_owners_guide/build

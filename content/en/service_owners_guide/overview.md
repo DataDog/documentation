@@ -2,15 +2,9 @@
 title: Service Owners Guide
 description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
-- link: "/service_owners_guide/plan/"
+- link: "/getting_started/support/"
   tag: "Documentation"
-  text: "Planning your Datadog Implementation"
-- link: "/service_owners_guide/build/"
-  tag: "Documentation"
-  text: "Building your Datadog Implementation"
-- link: "/service_owners_guide/run/"
-  tag: "Documentation"
-  text: "Maintaining and running your Datadog Implementation"
+  text: "Getting Started with Datadog Support"
 ---
 
 ## Overview
@@ -105,6 +99,9 @@ The [Datadog Agent][2] is open-source and published in Github. This is a useful 
 * [Integration Config Specs][4]   
 * [Fleet Automation][5]
 
+## Next Steps
+
+To successfully create a new Datadog deployment, review the [plan][11] page to learn how to create a sizing exercise, setup [resource tagging][12], learn some product best practices, add some ancillary products, and optimize your data collection to ensure a smooth implementation.
 
 ## Further Reading
 
@@ -121,3 +118,5 @@ The [Datadog Agent][2] is open-source and published in Github. This is a useful 
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
 [10]: https://app.datadoghq.com/monitors/recommended
+[11]: /service_owners_guide/plan
+[12]: /service_owners_guide/plan/#resource-tagging

@@ -2,14 +2,14 @@
 title: Build your Datadog implementation
 description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
-- link: "/service_owners_guide/run/"
+- link: "/getting_started/integrations/"
   tag: "Documentation"
-  text: "Maintaining and running your Datadog Implementation"
+  text: "Getting Started with Integrations"
 ---
 
-After focusing on design and best practices, the next phase should concentrate on the construction of Datadog itself, understanding what needs to be installed, and the best way to achieve that.
+After emphasizing design and best practices, the next phase should focus on constructing Datadog, determining the necessary installations, and identifying the optimal methods to achieve them.
 
-As you scale your IT footprint, it's important to develop standards, methods, and practices for how software is installed and used. Engineering effort is dedicated to developing precise steps for installing and configuring software in a repeatable, standardized manner, while still allowing for a significant level of flexibility. Without these standards, service reliability can be severely impacted. In this section, we describe how Datadog would most efficiently interact with those standards, methods, and practices.
+As your IT footprint grows, establishing standards, methods, and practices for software installation and usage becomes crucial. Engineering efforts focus on creating precise, repeatable steps for installing and configuring software, while maintaining flexibility. Without these standards, service reliability can suffer. This section outlines how Datadog can efficiently integrate with these standards, methods, and practices.
 
 ## Iterating on your environment
 
@@ -60,8 +60,7 @@ All the objects you create in Datadog, such as the dashboards, alerts, notebooks
 
 ## Provisioning
 
-At the core of every enterprise IT environment lies a provisioning process, the "means of production" for the various software titles and instances that make up an IT architecture.  
-To successfully manage Datadog at scale, it must be integrated into this provisioning process.  There are many ways to accomplish this, thanks to the simple installation model of the Datadog host Agent.    
+In every enterprise IT environment, a provisioning process is essential for managing software titles and instances within the IT architecture. To effectively manage Datadog at scale, it should be integrated into this provisioning process. The straightforward installation model of the Datadog host Agent offers multiple ways to achieve this.   
 
 ### Modular architecture
 
@@ -79,15 +78,18 @@ These things are the basic operations that must be completed in order to install
 
 **Service**: Use of IaC, or shell scripting
 
-**IaC:** Infrastructure-As-Code has matured in sophistication and robustness. Though it is nearly ubiquitous in cloud infrastructures, it is usually a retrofit to long-standing on-premise infrastructures. Its simple file/package/service structure has been leveraged to deploy significant Datadog footprints with IaC “tools” as rudimentary as a bash script. While this is not recommended, it stands as encouragement to begin the IaC adoption of Datadog as soon as possible, and when you do, you will find Datadog at the ready with sample code and integrations for Ansible, Puppet, Chef, Powershell, Bash, CloudFormations, Terraform, and more.  
+**IaC:** Infrastructure-As-Code has matured in sophistication and robustness. Though it is nearly ubiquitous in cloud infrastructures, it is usually a retrofit to long-standing on-premise infrastructures. Its simple file/package/service structure has been leveraged to deploy significant Datadog footprints with IaC "tools" as rudimentary as a bash script. While this is not recommended, it stands as encouragement to begin the IaC adoption of Datadog as soon as possible, and when you do, you will find Datadog at the ready with sample code and integrations for Ansible, Puppet, Chef, Powershell, Bash, CloudFormations, Terraform, and more.  
 
 **Recommendation:**   
 When it comes to deploying Datadog Agent software, it is advisable to re-use as much of your existing provisioning systems as possible. Datadog software design is flat and compliant to industry standard methods.  
 
 ## Build summary
 
-Datadog's agent design is flat and simple so that it can easily fit into any existing system. Utilize your existing capabilities for file/package/service, and incorporate Datadog into them. There are mechanisms within the platform that help, but it is your local conditions that will most greatly dictate what is the best method in any given situation.    
+Datadog's Agent design is straightforward and adaptable, making it easy to integrate into any existing system. Leverage your current file, package, and service capabilities to incorporate Datadog. While the platform provides helpful mechanisms, the best method will depend on your specific local conditions.  
 
+## Next steps
+
+Review the Service Owners Guide [run][4] documentation to outline a maintenance schedule, perform Datadog Agent upgrades, build out Dashboards, and ensure your Datadog implementation remains healthy.
 
 ## Further Reading
 
@@ -96,3 +98,4 @@ Datadog's agent design is flat and simple so that it can easily fit into any exi
 [1]: https://docs.datadoghq.com/api/latest/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [3]: https://github.com/DataDog/datadog-sync-cli
+[4]: /service_owners_guide/run
