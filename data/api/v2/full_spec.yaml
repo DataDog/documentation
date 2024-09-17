@@ -993,6 +993,64 @@ components:
             $ref: '#/components/schemas/AWSRelatedAccount'
           type: array
       type: object
+    AbbreviatedTeam:
+      description: The definition of `AbbreviatedTeam` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AbbreviatedTeamAttributes'
+        id:
+          description: ID of the team
+          type: string
+        type:
+          $ref: '#/components/schemas/AbbreviatedTeamType'
+      required:
+      - attributes
+      - type
+      type: object
+    AbbreviatedTeamAttributes:
+      description: The definition of `AbbreviatedTeamAttributes` object.
+      properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          type: integer
+        handle:
+          description: The team's identifier
+          example: ''
+          type: string
+        handles:
+          description: The `AbbreviatedTeamAttributes` `handles`.
+          type: string
+        is_open_membership:
+          description: The `AbbreviatedTeamAttributes` `is_open_membership`.
+          readOnly: true
+          type: boolean
+        name:
+          description: The name of the team
+          example: ''
+          type: string
+        summary:
+          description: A brief summary of the team
+          readOnly: true
+          type: string
+      required:
+      - handle
+      - name
+      type: object
+    AbbreviatedTeamType:
+      default: team
+      description: The definition of `AbbreviatedTeamType` object.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -2049,6 +2107,8 @@ components:
       required:
       - configs
       type: object
+      x-merge-override:
+        properties: false
     AzureUCConfigPairType:
       default: azure_uc_configs
       description: Type of Azure config pair.
@@ -8132,6 +8192,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8156,6 +8217,7 @@ components:
         performanceData:
           $ref: '#/components/schemas/EntityV3DatadogPerformance'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3DatastoreKind:
       description: The definition of Entity V3 Datastore Kind object.
       enum:
@@ -8335,6 +8397,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8359,6 +8422,7 @@ components:
         performanceData:
           $ref: '#/components/schemas/EntityV3DatadogPerformance'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3QueueKind:
       description: The definition of Entity V3 Queue Kind object.
       enum:
@@ -8396,6 +8460,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -8471,6 +8536,7 @@ components:
           description: Custom extensions. This is the free-formed field to send client
             side metadata. No Datadog features are affected by this field.
           type: object
+          x-ignore-duplicate-object: true
         integrations:
           $ref: '#/components/schemas/EntityV3Integrations'
         kind:
@@ -10501,6 +10567,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             at creation.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
@@ -10789,7 +10862,8 @@ components:
           example: Jane Doe
           type: string
         handle:
-          description: The email address used for the notification.
+          description: The handle used for the notification. This includes an email
+            address, Slack channel, or workflow.
           example: '@test.user@test.com'
           type: string
       type: object
@@ -10902,6 +10976,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           nullable: true
@@ -11871,6 +11952,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
@@ -18040,6 +18128,8 @@ components:
         page:
           $ref: '#/components/schemas/Pagination'
       type: object
+      x-merge-override:
+        properties: false
     RestrictionPolicy:
       description: Restriction policy object.
       properties:
@@ -24346,12 +24436,6 @@ components:
           format: int64
           nullable: true
           type: integer
-        color:
-          description: An identifier for the color representing the team
-          format: int32
-          maximum: 13
-          minimum: 0
-          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -25185,6 +25269,8 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/AbbreviatedTeam'
+      - $ref: '#/components/schemas/UserTeamUser'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -25290,6 +25376,42 @@ components:
           $ref: '#/components/schemas/UserTeamUpdate'
       required:
       - data
+      type: object
+    UserTeamUser:
+      description: The definition of `UserTeamUser` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamUserAttributes'
+        id:
+          description: The `UserTeamUser` ID.
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamUserType'
+      required:
+      - type
+      type: object
+    UserTeamUserAttributes:
+      description: The definition of `UserTeamUserAttributes` object.
+      properties:
+        disabled:
+          description: The `UserTeamUserAttributes` `disabled`.
+          type: boolean
+        email:
+          description: The `UserTeamUserAttributes` `email`.
+          type: string
+        handle:
+          description: The `UserTeamUserAttributes` `handle`.
+          type: string
+        icon:
+          description: The `UserTeamUserAttributes` `icon`.
+          type: string
+        name:
+          description: The `UserTeamUserAttributes` `name`.
+          nullable: true
+          type: string
+        service_account:
+          description: The `UserTeamUserAttributes` `service_account`.
+          type: boolean
       type: object
     UserTeamUserType:
       default: users
@@ -25590,6 +25712,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
+            security_pipelines_read: View Security Pipelines.
+            security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -26905,11 +27029,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Delete an AuthN Mapping
       tags:
       - AuthN Mappings
@@ -26942,10 +27061,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an AuthN Mapping by UUID
       tags:
       - AuthN Mappings
@@ -27002,11 +27117,6 @@ paths:
           description: Unprocessable Entity
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Edit an AuthN Mapping
       tags:
       - AuthN Mappings
@@ -30148,11 +30258,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - incident_read
       summary: Get a list of attachments
       tags:
       - Incidents
@@ -30719,6 +30824,9 @@ paths:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/integration/gcp/accounts/{account_id}:
     delete:
       description: Delete an STS enabled GCP account from within Datadog.
@@ -30773,6 +30881,8 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: false
   /api/v2/integration/gcp/sts_delegate:
     get:
       description: List your Datadog-GCP STS delegate account configured in your Datadog
@@ -33825,6 +33935,8 @@ paths:
             \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
             }}\"]\n    }\n  }\n}"
         type: unsafe
+    x-merge-override:
+      delete: false
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: List tags and aggregations that are actively queried on dashboards,
@@ -34799,9 +34911,6 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Org Configs
       tags:
       - Organizations
@@ -34831,9 +34940,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get a specific Org Config value
       tags:
       - Organizations
@@ -35759,6 +35865,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Delete a restriction policy
       tags:
       - Restriction Policies
@@ -35786,6 +35893,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Get a restriction policy
       tags:
       - Restriction Policies
@@ -35868,6 +35976,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Update a restriction policy
       tags:
       - Restriction Policies
@@ -40083,6 +40192,9 @@ paths:
         - name: team_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
@@ -40220,6 +40332,8 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
+      patch: false
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -40486,6 +40600,7 @@ paths:
         name: filter[keyword]
         required: false
         schema:
+          description: Search query, can be user email or name.
           type: string
       responses:
         '200':
@@ -40585,6 +40700,10 @@ paths:
         - name: user_id
           source: data.relationships.user.data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      patch: false
+      post: false
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
@@ -40679,6 +40798,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: false
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -42240,6 +42360,9 @@ paths:
       x-undo:
         type: safe
   x-merge-override:
+    /api/v2/rum/analytics/aggregate: true
+    /api/v2/rum/events: true
+    /api/v2/rum/events/search: true
     /api/v2/team/{team_id}/links: true
     /api/v2/team/{team_id}/links/{link_id}: true
 security:

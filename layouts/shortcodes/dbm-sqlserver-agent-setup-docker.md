@@ -21,6 +21,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<PASSWORD>",
     "include_ao_metrics": true,  # Optional: For AlwaysOn users
+    "agent_jobs": {              # Optional: For monitoring SQL Server Agent jobs
+      "enabled": true
+      "collection_interval": 15
+      "history_row_limit": 10000
+    }
     "tags": [
       "service:<CUSTOM_SERVICE>"
       "env:<CUSTOM_ENV>"

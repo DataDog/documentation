@@ -80,7 +80,7 @@ To monitor individual devices:
 
 - [Restart the Agent][5].
 
-After setup, the Agent collects relevant metrics by matching your devices to one of [Datadog's device profiles][6].
+After setup, the Agent collects relevant metrics by matching your devices to one of [Datadog's supported device profiles][6].
 
 To expand your setup:
 
@@ -91,7 +91,7 @@ To expand your setup:
 
 An alternative to specifying individual devices is to use Autodiscovery to automatically discover all the devices on your network.
 
-Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
+Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's supported device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
 
 To use Autodiscovery with Network Device Monitoring:
 
@@ -287,7 +287,7 @@ The following metrics are made available after enabling ping:
 [3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [5]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[6]: https://docs.datadoghq.com/network_monitoring/devices/supported_devices
 [7]: /agent
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: /agent/configuration/agent-commands/#agent-status-and-information

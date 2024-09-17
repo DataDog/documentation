@@ -53,6 +53,7 @@ You can also view your Incidents list from your mobile device home screen and ma
 
 {{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
+
 ## Describing the incident
 
 When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a title, severity level, incident commanders, and notifications. Effective incident management documentation includes:
