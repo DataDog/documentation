@@ -119,6 +119,5 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [5]: https://app.datadoghq.com/ci/settings/test-service
 [6]: https://git-scm.com/
 [7]: https://app.datadoghq.com/ci/test-runs
-[8]: https://app.datadoghq.com/dash/integration/30941/
+[8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
 [9]: /integrations/github/
-ci-visibility-intelligent-test-runner
