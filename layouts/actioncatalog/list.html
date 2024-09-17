@@ -1,46 +1,51 @@
 {{/*  Local Partials start  */}}
 {{ define "partials/verify-icon"}}
-  {{/*  Determine if icon font exists  */}}
+  {{/*  Determine if icon exists in our iconfont. Store verification value  */}}
   <span x-data="{
-    shouldShowIcon () {
+    setVerificationValue () {
+      // Look for `content` property.
       const icon = $refs.icon
       const iconBefore = window.getComputedStyle(icon, ':before')
+      const shouldShowIcon = iconBefore.getPropertyValue('content') !== 'none'
 
-      const showIcon = iconBefore.getPropertyValue('content') !== 'none'
-      return showIcon
+      // Set the verfication value in the hidden icon data attribute
+      $refs.icon.dataset.iconExists = shouldShowIcon
     }
-  }">
-    <i x-ref="icon" class="icon-{{ .name }}" style="display: none"></i>
-    <span x-init='$nextTick(() => {
-      if (shouldShowIcon()) {
-        document.getElementById("icon-{{.name}}").innerText = "true";
-      } else {
-        document.getElementById("icon-{{.name}}").innerText = "false";
-      }
-    })'></span>
+  }" x-init='$nextTick(() => setVerificationValue())' style="display: none">
+    <i x-ref="icon" id="icon-{{ .name }}" class="icon-{{ .name }}" data-icon-exists=""></i>
 </span>
 {{ end }}
 
 {{ define "partials/get-icon" }}
-  {{/*  Determines icon  */}}
+  {{/*  Determines icon to display  */}}
+
   {{ if and (eq .icon_type "INTEGRATION") .logo_path }}
+    {{/*  Using INTEGRATION logo  */}}
     <img src="{{ .logo_path }}" height="17" alt="{{ .workflow_title }}"/>
   {{ else if and .icon_name (eq .icon_type "ICON") }}
-  
-  {{ $kebab_icon_name := (replaceRE `(.)([A-Z][a-z]+)` (print "$1" "-" "$2") .icon_name) | lower }}
-  {{ partial "partials/verify-icon" (dict "name" $kebab_icon_name) }}
-  <span id="icon-{{($kebab_icon_name)}}" style="display: none"></span>
-  <span x-data="{showIcon: false}" x-init='$nextTick(() => {
-    showIcon = document.getElementById("icon-{{$kebab_icon_name}}").innerText === "true";
-  })'>  
-    <template x-if="showIcon">
-      {{ partial "icon" (dict "name" $kebab_icon_name "size" "17px" "vertical_align" "-5px") }}
-    </template>
-    <template x-if="!showIcon">
-      <img src="{{ .dd_logo_path }}" height="17" alt="{{ .workflow_title }}"/>
-    </template>
-  </span>
+    {{/*  
+      Using ICON from iconfont 
+      1. Change icon name to kebab case to match our iconfont names (e.g. SecurityPlatform --> security-platform)
+      2. Icon Verfication
+      3. Conditionally render icon or default datadog integration logo
+    */}}
+    {{ $kebab_icon_name := (replaceRE `(.)([A-Z][a-z]+)` (print "$1" "-" "$2") .icon_name) | lower }}
+    {{ partial "partials/verify-icon" (dict "name" $kebab_icon_name) }}
+
+    <span x-data="{showIcon: false}" x-init='$nextTick(() => {
+      // Evaluate value set in `verify-icon` partial
+      const icon = document.getElementById("icon-{{$kebab_icon_name}}")
+      showIcon = icon.dataset.iconExists === "true";
+    })'>  
+      <template x-if="showIcon">
+        {{ partial "icon" (dict "name" $kebab_icon_name "size" "17px" "vertical_align" "-5px") }}
+      </template>
+      <template x-if="!showIcon">
+        <img src="{{ .dd_logo_path }}" height="17" alt="{{ .workflow_title }}"/>
+      </template>
+    </span>
   {{ else }}
+    {{/*  Using default INTEGRATION Agent logo  */}}
     <img height="17" src='{{ partial "img-resource.html" (dict "context" .page_ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x' />
   {{ end }}
 {{ end }}
