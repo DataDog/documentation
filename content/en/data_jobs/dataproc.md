@@ -1,5 +1,5 @@
 ---
-title: Enable Data Jobs Monitoring for Spark on Dataproc - Google Cloud
+title: Enable Data Jobs Monitoring for Spark on Google Cloud Dataproc
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -18,7 +18,7 @@ This guide is for Dataproc clusters on Compute Engine. If you are using Dataproc
 
 Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
 
-1. [Store your Datadog API key](#store-your-datadog-api-key-in-google-cloud-secret-manager-recommended) in GCP Secret Manager (Recommended).
+1. [Store your Datadog API key](#store-your-datadog-api-key-in-google-cloud-secret-manager-recommended) in GCP Secret Manager (recommended).
 1. [Create and configure your Dataproc cluster](#create-and-configure-your-dataproc-cluster).
 1. [Specify service tagging per Spark application](#specify-service-tagging-per-spark-application).
 
@@ -27,9 +27,9 @@ Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
 1. In [GCP Secret Manager][2], choose **Create secret**.
    - Under **Name**, enter a **Secret name**. You can use `dd_api_key`.
    - Under **Secret value**, paste your Datadog API key in the **Secret value** text box.
-      {{< img src="data_jobs/dataproc/key_value.png" alt="GCP Secret Manager, Create secret. A section titled 'Secret details'. On the top, a text box containing 'dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
-   - Then, click **Create Secret**.
-1. Under **Rotation** page, you can optionally turn on [automatic rotation][3].
+      {{< img src="data_jobs/dataproc/key_value.png" alt="A section of the secret creation page titled 'Secret details'. On the top, a name field containing 'dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
+   - Click **Create Secret**.
+1. Optionally, under **Rotation**, you can turn on [automatic rotation][3].
 1. In [GCP Secret Manager][2], open the secret you created. Take note of the Resource ID, which is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
 1. Make sure the service account used by your Dataproc cluster has permission to read the secret. By default, this is the `Compute Engine default service account`. To grant access, copy the associated service account Principal, and click **Grant Access** on the **Permissions** tab of the secret's page. Assign the `secretmanager.secretAccessor` role, or any other one that has `secretmanager.versions.access` permission. See the [IAM roles][12] documentation for a full description of available roles.
 
@@ -46,7 +46,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    DD_SITE={{< region-param key="dd_site" code="true" >}}
 
    # Set required parameter DD_API_KEY with Datadog API key.
-   # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as  dd_api_key and the project <PROJECT_NAME>.
+   # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as dd_api_key and the project <PROJECT_NAME>.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    # Change the project name, which you can find on the secrets page. The resource ID is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
    gcloud config set project $PROJECT_NAME
