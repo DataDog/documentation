@@ -1,5 +1,5 @@
 ---
-title: Manage Cloud Traffic Costs with NPM
+title: Manage Cloud Traffic Costs with CNM
 aliases:
     - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
 ---
