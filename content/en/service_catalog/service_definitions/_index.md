@@ -59,7 +59,7 @@ For detailed information about each version, including full schemas and example 
 2. Click **Create New Entry**.
 3. Specify the service you are adding metadata to.
 4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
-5. Switch to the **Code** view to see the generated JSON and cURL.
+5. Switch to **YAML** or **JSON** to see the generated code and cURL command.
 6. If you have the [Service Catalog Write][12] permission, you can submit the metadata by clicking **Save Entry** or by running the provided cURL command.
 
 ### Add metadata with automation
