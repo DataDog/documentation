@@ -33,7 +33,7 @@
 {{ end }}
 
 <!-- Render the tooltip -->
-<span class="" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+<span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
   <button class="tooltip-trigger">{{ $displayText }}</button>
   <span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">
     {{ $tooltipContent }}
