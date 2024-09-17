@@ -21,7 +21,9 @@ algolia:
 Permissions define the type of access a user has to a given resource. Typically, permissions give a user the right to read, edit, or delete an object. Permissions underlie the access rights of all roles, including the three out-of-the-box roles and custom roles.
 
 ### Sensitive permissions
+
 Some Datadog permissions provide access to more privileged functionality that is important to be aware of, such as:
+
 - Access to change organization settings
 - Access to read potentially sensitive data
 - Access to perform privileged operations
