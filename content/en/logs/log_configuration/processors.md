@@ -163,7 +163,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
+**Note**: Note: If multiple log status remapper processors are applied to a log within a pipeline, only the first one in the pipeline’s order is considered. Additionally, across all pipelines that match the log, only the first status remapper encountered (from all applicable pipelines) will be applied.
 
 {{< tabs >}}
 {{% tab "UI" %}}
