@@ -21,7 +21,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple event status remapper processors are applied to a given event within the pipeline, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple event status remapper processors are applied to a given event within a pipeline, only the first one in the pipeline’s order is considered. Additionally, across all pipelines that match the event, only the first status remapper encountered (from all applicable pipelines) will be applied.
 
 Example status remapper 
 
