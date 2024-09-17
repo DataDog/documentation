@@ -202,6 +202,8 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 
 {{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
+You can also pass the result of a child workflow back to the parent workflow by defining **Output parameters** in the child workflow. The **Trigger workflow** step in the parent workflow retrieves the output parameters from the child workflow.
+
 ## Run history
 
 After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views. Use run history to watch the progress of a triggered workflow or [debug a failed step][13].
