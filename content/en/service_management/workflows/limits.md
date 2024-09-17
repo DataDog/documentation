@@ -42,7 +42,7 @@ When an organization exceeds these thresholds, pending execution requests queue 
 
 ## Workflow-level limits
 
-* A workflow can contain up to 100 steps. If you need more than 100 steps in a workflow, you can use the **Trigger workflow** step to call a child workflow. Use output parameters to pass the output of a child workflow back to your main workflow.
+* A workflow can contain up to 100 steps. If you need more than 100 steps in a workflow, you can use the **Trigger workflow** step to [call a child workflow][2]. Use output parameters to pass the output of a child workflow back to your main workflow.
 * A workflow can run for up to 24 hours. Workflows terminate when they attempt to run for longer than 24 hours.
 * A workflow can start up to 30 steps per minute. If you exceed this rate, steps are throttled and start at a rate of 30 per minute.
 * The sum of all step outputs for a workflow can be up to 150 MB.
@@ -68,4 +68,5 @@ Each end user can execute up to 100 actions per minute across App Builder and Wo
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
 
 [1]: /service_management/workflows/actions/flow_control/#for-loop
+[2]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-workflow
 [9]: https://datadoghq.slack.com/
