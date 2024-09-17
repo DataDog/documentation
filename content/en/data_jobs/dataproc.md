@@ -49,6 +49,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as dd_api_key and the project <PROJECT_NAME>.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    # Change the project name, which you can find on the secrets page. The resource ID is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
+   PROJECT_NAME=<PROJECT_NAME>
    gcloud config set project $PROJECT_NAME
    SECRET_NAME=dd_api_key
    DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
