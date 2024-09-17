@@ -22,7 +22,7 @@ Follow these steps to enable Data Jobs Monitoring for GCP Dataproc.
 1. [Create and configure your Dataproc cluster](#create-and-configure-your-dataproc-cluster).
 1. [Specify service tagging per Spark application](#specify-service-tagging-per-spark-application).
 
-### Store your Datadog API key in Google Cloud Secret Manager (Recommended)
+### Store your Datadog API key in Google Cloud Secret Manager (recommended)
 1. Take note of your [Datadog API key][1].
 1. In [GCP Secret Manager][2], choose **Create secret**.
    - Under **Name**, enter a **Secret name**. You can use `dd_api_key`.
