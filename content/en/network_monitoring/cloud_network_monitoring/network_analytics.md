@@ -25,7 +25,7 @@ further_reading:
 
 The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm_4.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_network_analytics.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
 
 ## Queries
 
@@ -33,9 +33,9 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic between your **client** ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
+For example, if you want to see network traffic between your **client** service called `ad_server` and all of your availability zones, use `client_service:ad-server` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
 
-{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag_2.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
 For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
 
@@ -45,11 +45,11 @@ Additionally, the following diagram illustrates inbound and outbound requests wh
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm3.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_default_view.png" alt="CNM Default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_analytics/flow_table_region_az2.png" alt="Aggregate connection table filtered" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_flow_table_region.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
 You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
@@ -59,7 +59,7 @@ Additionally, set the timeframe over which traffic is aggregated using the time 
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/network_analytics/recommended_query_options.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
+{{< img src="network_performance_monitoring/network_analytics/recommended_queries.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
 
 Recommended queries allow you to begin investigating into your network—whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. The recommended queries help you quickly find relevant network information without needing to search for or group the traffic. For example, the recommended query `Find dependencies of service: web-store` populates the search bar with the query `client_service: web-store` and displays the top services that the service web-store is sending traffic to within the network, and therefore its downstream dependencies.
 

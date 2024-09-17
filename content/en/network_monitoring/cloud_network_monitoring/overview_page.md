@@ -13,7 +13,7 @@ further_reading:
 
 The [CNM overview page][3] provides a high-level overview of your network, from costly network traffic to DNS health to service top talkers. Use the Overview page to filter network traffic by environment or team with tags, and adjust the time frame for your network data. 
 
-{{< img src="/network_performance_monitoring/overview_page/overview_page_2.png" alt="The network overview page in Datadog" style="width:100%;">}}
+{{< img src="/network_performance_monitoring/overview_page/cnm_overview_page.png" alt="The network overview page in Datadog" style="width:110%;">}}
 
 ## External network traffic
 

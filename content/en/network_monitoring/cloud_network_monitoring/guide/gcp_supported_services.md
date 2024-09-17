@@ -1,5 +1,5 @@
 ---
-title: NPM Google Cloud Supported Services
+title: CNM Google Cloud Supported Services
 npm_provider: gcp
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
