@@ -10,7 +10,7 @@ further_reading:
 ---
 **Custom tooltip shortcode**
 
-Here's an example of a {{< tooltip text="tooltip" tooltip="This is additional information that appears in the tooltip" >}} in action.
+Here's an example of a {{< tooltip text="tooltip" tooltip="This is additional information that appears in the tooltip" >}} in action. This is a real glossary tooltip {{< tooltip glossary="alert value" tooltip="This is additional information that appears in the tooltip" >}}.
 
 **Glossary shortcode (default)**
 
