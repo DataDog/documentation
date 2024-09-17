@@ -2084,26 +2084,36 @@ menu:
       parent: incidents
       identifier: incident_declare
       weight: 1
+    - name: Describe an Incident
+      url: service_management/incident_management/describe
+      parent: incidents
+      identifier: incident_describe
+      weight: 2
+    - name: Notification
+      url: service_management/incident_management/notification
+      parent: incidents
+      identifier: incident_notification
+      weight: 3
     - name: Incident Details
       url: service_management/incident_management/incident_details
       parent: incidents
       identifier: incident_details
-      weight: 2
+      weight: 4
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 3
+      weight: 5
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 4
+      weight: 6
     - name: Datadog Clipboard
       url: service_management/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
-      weight: 5
+      weight: 7
     - name: Guides
       url: service_management/incident_management/guides
       parent: incidents
