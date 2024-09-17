@@ -28,6 +28,6 @@ Cloud Security Management Vulnerabilities supports scanning for containers from 
 
 | Container Runtime        | Supported Versions                                  | Package Managers / Source |
 |--------------------------|-----------------------------------------------------|---------------------------|
-| containerd               | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk                       |
-| Cri-O                    | Not Supported                                       | apk                       |
-| Podman                   | Not Supported                                       | apk                       |
+| containerd               | All                                                 | ?  |
+| Cri-O                    | Not Supported                                       | ?  |
+| Podman                   | Not Supported                                       | ?  |
