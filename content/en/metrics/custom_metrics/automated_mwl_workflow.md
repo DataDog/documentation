@@ -12,9 +12,14 @@ further_reading:
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
 algolia:
   tags: ['custom metrics']
+is_beta: true
 ---
 
 ## Overview
+
+{{< callout url="#" btn_hidden="true">}}
+  This feature is currently in beta.
+{{< /callout >}} 
 
 [Metrics without Limits™][1] enables flexibility and control over your custom metric ingestion and indexing. However, manual configuration of custom metrics becomes unscalable as organizations' custom metrics usage grows to hundreds of millions of metrics. 
 
