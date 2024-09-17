@@ -50,13 +50,13 @@ You can select from the following monitor types.
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
+| Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5%. |
 
 {{% /tab %}}
 {{% tab "Threshold" %}}
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
+| Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000. |
 
 {{% /tab %}}
 {{% tab "Forecast" %}}
@@ -69,7 +69,7 @@ You can select from the following monitor types.
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,7 +108,7 @@ If you are using the **Cost Threshold** monitor type, you can trigger an alert w
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
-If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to`, `equal to`, or `not equal to` a threshold.  
+If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, `below or equal to`, `equal to`, or `not equal to` a threshold.  
 
 {{% /tab %}}
 {{% tab "Anomalies" %}}
