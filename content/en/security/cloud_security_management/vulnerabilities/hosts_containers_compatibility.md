@@ -2,7 +2,7 @@
 title: CSM Vulnerabilities Hosts and Containers Compatibility
 ---
 
-Cloud Security Management Vulnerabilities supports vulnerability scanning for hosts and containers running the following operating system versions:
+Cloud Security Management Vulnerabilities supports vulnerability scanning for hosts and containers running the following host operating system versions:
 
 | Operating System         | Supported Versions                                  | Package Managers / Source |
 |--------------------------|-----------------------------------------------------|---------------------------|
@@ -22,3 +22,12 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for ho
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg                  |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg                  |
 | Windows                  | Windows server 2016, 2019, 2022                     | Windows OS                |
+
+
+Cloud Security Management Vulnerabilities supports scanning for containers from running the following container runtimes:
+
+| Container Runtime        | Supported Versions                                  | Package Managers / Source |
+|--------------------------|-----------------------------------------------------|---------------------------|
+| containerd               | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk                       |
+| Cri-O                    | Not Supported                                       | apk                       |
+| Podman                   | Not Supported                                       | apk                       |
