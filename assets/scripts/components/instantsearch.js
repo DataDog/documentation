@@ -2,9 +2,9 @@ import { getConfig } from '../helpers/getConfig';
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { configure, searchBox } from 'instantsearch.js/es/widgets';
-import { searchbarHits } from './algolia/searchbarHits';
-import { searchpageHits } from './algolia/searchpageHits';
-import { customPagination } from './algolia/customPagination';
+import { searchbarHits } from './instantsearch/searchbarHits';
+import { searchpageHits } from './instantsearch/searchpageHits';
+import { customPagination } from './instantsearch/customPagination';
 import { debounce } from '../utils/debounce';
 
 const { env } = document.documentElement.dataset;
@@ -118,7 +118,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     }
                 }
             },
-            // Handle hitting algolia API based on query and page
+            // Handle hitting Typesense API based on query and page
             searchFunction(helper) {
                 if (helper.state.query) {
                     helper.search();
@@ -200,7 +200,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             };
 
             const handleOutsideSearchbarClick = (e) => {
-                // Intercept user clicks within algolia dropdown to send custom RUM event before redirect.
+                // Intercept user clicks within instantSearch dropdown to send custom RUM event before redirect.
                 if (hitsContainer.contains(e.target)) {
                     e.preventDefault();
                 }

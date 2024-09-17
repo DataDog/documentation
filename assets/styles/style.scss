@@ -21,7 +21,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'vendor/chroma-styles';
 
 // instantsearch
-@import 'algolia_instantsearch';
+@import 'instantsearch.scss';
 
 // global to all pages
 @import 'pages/global';

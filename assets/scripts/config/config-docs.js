@@ -22,6 +22,12 @@ module.exports = {
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'
         },
+        typesense: {
+            host: 'dnm1k9zrpctsvjowp',
+            public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
+            index: 'docs_alias',
+            api_index: 'docs_api_alias'
+        },
         imgUrl: 'https://datadog-docs-staging.imgix.net/',
         gaTag: 'UA-21102638-9'
     },
@@ -33,6 +39,12 @@ module.exports = {
             api_index: 'docs_preview_api',
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'
+        },
+        typesense: {
+            host: 'dnm1k9zrpctsvjowp',
+            public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
+            index: 'docs_alias',
+            api_index: 'docs_api_alias'
         },
         imgUrl: 'http://localhost:1313/',
         gaTag: 'UA-21102638-9'
