@@ -1,6 +1,6 @@
 import { getConfig } from '../helpers/getConfig';
-import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
+import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import { configure, searchBox } from 'instantsearch.js/es/widgets';
 import { searchbarHits } from './instantsearch/searchbarHits';
 import { searchpageHits } from './instantsearch/searchpageHits';
@@ -9,9 +9,28 @@ import { debounce } from '../utils/debounce';
 
 const { env } = document.documentElement.dataset;
 const pageLanguage = getPageLanguage();
-const algoliaConfig = getConfig(env).algoliaConfig;
-const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-let indexName = algoliaConfig.index;
+const typesenseConfig = getConfig(env).typesense;
+
+const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter({
+    server: {
+        apiKey: typesenseConfig.public_key,
+        nodes: [
+            {
+                host: `${typesenseConfig.host}.a1.typesense.net`,
+                port: 443,
+                protocol: 'https'
+            }
+        ],
+        cacheSearchResultsForSeconds: 2 * 60
+    },
+    additionalSearchParameters: {
+        // TODO: Update this as needed
+        query_by: 'title'
+    }
+});
+
+const searchClient = typesenseInstantSearchAdapter.searchClient;
+let indexName = typesenseConfig.index;
 
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
@@ -30,33 +49,33 @@ function sendSearchRumAction(searchQuery, clickthroughLink = '', clickedLinkPosi
             query: searchQuery.toLowerCase(),
             page: window.location.pathname,
             lang: getPageLanguage()
-        }
+        };
 
         if (clickthroughLink) {
-            userSearchData.clickthroughLink = clickthroughLink
+            userSearchData.clickthroughLink = clickthroughLink;
         }
 
         if (clickedLinkPosition >= 0) {
-            userSearchData.clickPosition = clickedLinkPosition
+            userSearchData.clickPosition = clickedLinkPosition;
         }
 
-        window.DD_RUM.addAction('userSearch', userSearchData)
+        window.DD_RUM.addAction('userSearch', userSearchData);
     }
 }
 
 const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHitsPerPage, currentPage) => {
-    let clickedTargetRelPermalink = clickedTargetHref
+    let clickedTargetRelPermalink = clickedTargetHref;
 
     if (env === 'preview') {
-        const commitRef = document.documentElement.dataset.commitRef
-        clickedTargetRelPermalink = clickedTargetRelPermalink.replace(`/${commitRef}`, '')
+        const commitRef = document.documentElement.dataset.commitRef;
+        clickedTargetRelPermalink = clickedTargetRelPermalink.replace(`/${commitRef}`, '');
     }
 
-    const { pathname, hash } = new URL(clickedTargetRelPermalink)
-    const relPath = `${pathname}${hash}`
-    const clickedSearchResultIndexOnPage = hitsArray.findIndex(hit => hit.relpermalink == relPath)
-    return clickedSearchResultIndexOnPage + (currentPage * numberOfHitsPerPage)
-}
+    const { pathname, hash } = new URL(clickedTargetRelPermalink);
+    const relPath = `${pathname}${hash}`;
+    const clickedSearchResultIndexOnPage = hitsArray.findIndex((hit) => hit.relpermalink == relPath);
+    return clickedSearchResultIndexOnPage + currentPage * numberOfHitsPerPage;
+};
 
 function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
@@ -87,7 +106,8 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     }
 
     if (apiPage) {
-        indexName = algoliaConfig.api_index;
+        // TODO: Use this when api collection has been created in Typesense
+        // indexName = typesenseConfig.api_index;
     }
 
     if (searchResultsPage) {
@@ -119,6 +139,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 }
             },
             // Handle hitting Typesense API based on query and page
+            // TODO: Replace searchFunction with `onStateChange`
             searchFunction(helper) {
                 if (helper.state.query) {
                     helper.search();
@@ -134,6 +155,9 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                         helper.search();
                     }
                 }
+            },
+            future: {
+                preserveSharedStateOnUnmount: true
             }
         });
 
@@ -152,8 +176,9 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 showSubmit: true,
                 templates: {
                     submit({ cssClasses }, { html }) {
-                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span
-                            ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
+                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span>
+
+                            <i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
                     }
                 }
             }),
@@ -233,16 +258,16 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
                 do {
                     if (target.href) {
-                        const hitsArray = search.helper.lastResults.hits
-                        const page = search.helper.state.page
-                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page)
+                        const hitsArray = search.helper.lastResults.hits;
+                        const page = search.helper.state.page;
+                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page);
                         sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
                         window.history.pushState({}, '', target.href);
 
                         if (e.metaKey || e.ctrlKey) {
-                            window.open(target.href, "_blank")
+                            window.open(target.href, '_blank');
                         } else {
-                            window.location.reload()
+                            window.location.reload();
                         }
                     }
 
@@ -267,11 +292,11 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             const handleResizeDebounced = debounce(handleResize, 500, false);
 
             handleResizeDebounced();
-            
+
             // Bugfix for disappearing android keyboard on search input focus/autoresizing
             if (!navigator.userAgent.toLowerCase().match(/android/i)) {
                 window.addEventListener('resize', handleResizeDebounced);
-            } 
+            }
         }
     }
 }
