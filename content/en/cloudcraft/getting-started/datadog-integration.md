@@ -6,7 +6,7 @@ title: Datadog Integration
 
 The integration between Datadog and Cloudcraft provides users with a streamlined workflow for monitoring and visualizing their cloud infrastructure.
 
-By leveraging Datadog’s powerful monitoring platform, users can log in to Cloudcraft with their Datadog account, move seamlessly from any resource in Cloudcraft to the most relevant views in Datadog, and automatically synchronize cloud accounts that have already been configured in Datadog for use in Cloudcraft.
+By leveraging Datadog’s powerful monitoring platform, users can log in to Cloudcraft with their Datadog account, move seamlessly from any resource in Cloudcraft to the most relevant views in Datadog, and automatically pull cloud accounts that have already been configured in Datadog for use in Cloudcraft.
 
 ## Datadog Single Sign-On (SSO)
 
@@ -25,25 +25,39 @@ By using Datadog SSO, you automatically gain access to:
 
 If you originally signed up with a different login method, for example, Google SSO or a standard username and password, you won’t have access to the full set of Datadog integration features. To switch to Datadog SSO, [contact the Cloudcraft support team][1] and they will assist you in converting your account.
 
-## Sync cloud accounts
+## Pull cloud accounts
 
 <div class="alert alert-info">This feature supports only Amazon Web Services (AWS) accounts. Syncing with Azure or other cloud providers is not available at this time.</div>
 
-The integration between Cloudcraft and Datadog streamlines cloud account management, allowing your cloud accounts to sync between the two platforms. When you add your cloud account to Datadog, the cloud account is automatically added to and synced with Cloudcraft, so there's no need to add the account separately in Cloudcraft.
+The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically pulled into Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog.
 
 ### How it works
 
-1. **Add your cloud account to Datadog**: Once you integrate your AWS account with Datadog, Cloudcraft automatically recognizes the account without further action on your part.
-2. **Resource Collection**: Ensure that **Resource Collection** is enabled in Datadog for this feature to function properly. Without this setting, the sync between Datadog and Cloudcraft does not work.
+1. **Pulling cloud accounts**: Once your AWS account is integrated with Datadog, Cloudcraft automatically pulls the account, so you don’t need to manually add it to Cloudcraft.
+2. **Resource Collection in Datadog**: To visualize and diagram resources in Cloudcraft, ensure resource collection is enabled in Datadog. Without this feature, your AWS accounts will still be pulled into Cloudcraft, but no resources from them will be available for diagramming. Refer to the [AWS integration documentation][2] for steps on enabling resource collection.
+3. **No AWS accounts in Datadog?**: If you don't have any AWS accounts added in Datadog, you'll need to add them first. Follow the instructions in the [AWS integration guide][3].
 
-For detailed instructions on how to add your AWS account to Datadog and enable Resource collection, please refer to the [AWS integration documentation][2].
+### Manage pulled AWS accounts in Cloudcraft
+
+AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the **Live** tab in Cloudcraft. These accounts are shared with the entire team by default.
+
+To manage the visibility settings of these accounts:
+
+1. Go to **User > AWS Accounts**.
+2. Select the **Edit** icon (the pencil icon next to the account name).
+3. Toggle the **Visibility on Live** tab option to control whether the account is visible to the team.
+
+### Performance benefits
+
+AWS accounts pulled from Datadog offer improved performance when creating diagrams in Cloudcraft compared to accounts added directly in Cloudcraft, as Cloudcraft uses Datadog APIs, which are optimized for faster performance, instead of AWS APIs.
 
 ## The Bits menu
 
 The Bits menu in Cloudcraft is your gateway to accessing relevant Datadog insights from any resource in your architecture diagram. Whether you need to look at logs, view APM traces, or analyze metrics, the Bits menu offers seamless, context-driven navigation from Cloudcraft to Datadog with just a click.
 
-For more detailed information on how to use the Bits menu, please refer to [the full documentation][3].
+For more detailed information on how to use the Bits menu, please refer to [the full documentation][4].
 
 [1]: https://app.cloudcraft.co/app/support
-[2]: /integrations/amazon_web_services/
-[3]: /cloudcraft/getting-started/using-bits-menu/
+[2]: /integrations/amazon_web_services/#resource-collection
+[3]: /integrations/amazon_web_services/
+[4]: /cloudcraft/getting-started/using-bits-menu/
