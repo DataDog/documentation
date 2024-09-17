@@ -109,6 +109,13 @@ extensions:
           schedule: "* * * * 1"
 {{< /code-block >}}
 
+## IDE Plugins
+
+Datadog provides a [JSON Schema][13] for service definitions so that when you are editing a service definition in a [supporting IDE][14], features such as autocomplete and validation are provided.
+
+{{< img src="tracing/service_catalog/ide_plugin.png" alt="VSCode recognizing problem to fix" style="width:100%;" >}}
+
+The [JSON schema for Datadog service definitions][15] is registered with the open source [Schema Store][14].
 
 ## Further reading
 
@@ -126,3 +133,6 @@ extensions:
 [10]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [11]: /tracing/service_catalog/service_definition_api/
 [12]: https://app.datadoghq.com/personal-settings/profile
+[13]: http://json-schema.org/
+[14]: https://www.schemastore.org/json/
+[15]: https://raw.githubusercontent.com/DataDog/schema/main/service-catalog/version.schema.json
