@@ -36,6 +36,14 @@ Create a custom role to combine permissions into new roles. A custom role gives 
 
 **Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user to enforce the new role permissions.
 
+### Sensitive Permissions
+Some Datadog permissions provide access to more privileged functionality that is important to be aware of, such as:
+- Access to change organization settings
+- Access to read potentially sensitive data
+- Access to perform privileged operations
+
+Sensitive permissions are flagged in the Roles and Permissions interfaces to identify that they may need increased scrutiny. As a best practice, administrators configuring roles should pay special attention to these permissions, and confirm which of these permissions are assigned to their roles and users.
+
 ## Permissions list
 
 The following table lists the name, description, and default role for all available permissions in Datadog. Each asset type has corresponding read and write permissions. 
