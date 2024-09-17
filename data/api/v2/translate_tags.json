@@ -79,10 +79,6 @@
     "name": "IP Allowlist",
     "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
   },
-  "incident-services": {
-    "name": "Incident Services",
-    "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
-  },
   "incident-teams": {
     "name": "Incident Teams",
     "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."

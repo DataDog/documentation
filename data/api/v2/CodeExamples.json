@@ -384,20 +384,6 @@
       "description": "Update IP Allowlist returns \"OK\" response"
     }
   ],
-  "CreateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Create a new incident service returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Update an existing incident service returns \"OK\" response"
-    }
-  ],
   "CreateIncidentTeam": [
     {
       "group": "incident_teams",
