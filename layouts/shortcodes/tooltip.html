@@ -35,7 +35,7 @@
 <!-- Render the tooltip -->
 <span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
   <button class="tooltip-trigger">{{ $displayText }}</button>
-  <span id="tooltip-{{ $displayText | urlize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">
+  <span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">
     {{ $tooltipContent }}
     {{ if $fullDefinitionLink }}
     <a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>
