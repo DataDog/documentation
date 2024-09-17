@@ -55,9 +55,9 @@ You can also view your Incidents list from your mobile device home screen and ma
 
 ## Describing the incident
 
-When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a titles, severity levels, incident commanders, and notifications. Effective incident management documentation includes:
+When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a title, severity level, incident commanders, and notifications. Effective incident management documentation includes:
 - Updating incident details, including its status, impact, root cause, detection methods, and service impacts. 
-- Forming and managing a response team, utilizing custom responder roles, and leveraging metadata attributes for detailed incident assessment. 
+- Forming and managing a response team, using custom responder roles, and leveraging metadata attributes for detailed incident assessment. 
 - Configuring notifications to keep all stakeholders informed throughout the incident resolution process.
 
 For more information, see the [Describe an Incident][20] documentation.

@@ -18,7 +18,7 @@ All stakeholder notifications for an incident are consolidated in the incidentâ€
 To create a manual notification:
 1. Navigate to the **Notifications** tab of an incident.
 1. Click the **+ New Notification** button in the top right of the section.
-1. Enter your desired recipients. These can be any notification handles supported by Datadog including emails, Slack channels, PagerDuty handles, and webhooks.
+1. Enter your desired recipients. These can be any notification handles supported by Datadog, including emails, Slack channels, PagerDuty handles, and webhooks.
 1. Select a [Message Template](#message-template).
 1. Edit the title and message of your notification using Markdown and any supported incident template variable by typing `{{`.
     - [Template variables][2] are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.

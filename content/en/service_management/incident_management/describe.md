@@ -28,12 +28,12 @@ When you declare an incident, an incident modal comes up. This modal has several
 | Severity Level     | (Required) Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN. <br> **Note**: You can customize the description of each severity level to fit the requirements of your organization.|
 | Incident Commander | (Required) This person is assigned as the leader of the incident investigation. |
 | Attributes (Teams) | Assign the appropriate group of users to an incident using [Datadog Teams][2]. Members of the assigned team are automatically invited to the Slack channels. |
-| Notifications      | Specify a user, Slack channel or external email to send notifications of this incident to.  |
+| Notifications      | Specify a user, Slack channel, or external email to send notifications of this incident to.  |
 | Notes & Links      | You can customize the description of each severity level to fit the requirements of your organization. Include links to graphs, monitors, or security signals for additional awareness. |
 
 ## Incident details
 
-An incident's status and details can be updated on the incident's Overview tab. Within an incident, fill out the Overview tab with relevant details---including incident description, customer impact, affected services, incident responders, root cause, detection method, and severity---to give your teams all the information they need to investigate and resolve an incident. 
+An incident's status and details can be updated on the incident's Overview tab. Within an incident, fill out the Overview tab with relevant details—including incident description, customer impact, affected services, incident responders, root cause, detection method, and severity—to give your teams all the information they need to investigate and resolve an incident. 
 
 Update the impact section to specify customer impact, the start and end times of the impact, and whether the incident is still active. This section also requires a description of the scope of impact to be completed.
 
