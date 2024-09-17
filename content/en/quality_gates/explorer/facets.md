@@ -14,10 +14,6 @@ further_reading:
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
-
 ## Overview
 
 Facets are user-defined tags and attributes from your rules or executions. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-measures) data analysis. Facets allow you to manipulate your rules or executions in search queries that appear on [dashboards][2] and in [notebooks][3].

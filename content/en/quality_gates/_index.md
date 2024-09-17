@@ -1,7 +1,7 @@
 ---
 title: Quality Gates
 description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
