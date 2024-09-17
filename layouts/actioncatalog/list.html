@@ -16,7 +16,7 @@
 </span>
 {{ end }}
 
-{{ define "partials/get-icon" }}
+{{ define "partials/get-action-catalog-icon" }}
   {{/*  Determines icon to display  */}}
 
   {{ if and (eq .icon_type "INTEGRATION") .logo_path }}
@@ -95,7 +95,7 @@
       <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
         <div class="js-group-header mb-1 d-flex align-items-center active" id="">
           <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
-            {{ partial "partials/get-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
+            {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
           </div>
           <div class="font-semibold ms-1 group-header-text">
             <span>{{ $workflow_title }}</span>
@@ -110,7 +110,7 @@
             {{ $full_url := print $base_url $workflow_name "/" $workflow_name "." $action_name }}
 
             <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}" data-name="{{ lower $workflow_title }} {{ lower $action_name }} {{ .File.TranslationBaseName }}">
-              {{ partial "partials/get-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
+              {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
               <span class="ps-1">{{ .title }}</span>
               <br>
             </a>
