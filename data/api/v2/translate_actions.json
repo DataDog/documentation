@@ -1513,16 +1513,6 @@
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
   },
-  "ListIncidentServices": {
-    "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
-    "summary": "Get a list of all incident services"
-  },
-  "CreateIncidentService": {
-    "description": "Creates a new incident service.",
-    "summary": "Create a new incident service",
-    "request_description": "Incident Service Payload.",
-    "request_schema_description": "Create request with an incident service payload."
-  },
   "ListServiceDefinitions": {
     "description": "Get a list of all service definitions from the Datadog Service Catalog.",
     "summary": "Get all service definitions"
@@ -1540,20 +1530,6 @@
   "GetServiceDefinition": {
     "description": "Get a single service definition from the Datadog Service Catalog.",
     "summary": "Get a single service definition"
-  },
-  "DeleteIncidentService": {
-    "description": "Deletes an existing incident service.",
-    "summary": "Delete an existing incident service"
-  },
-  "GetIncidentService": {
-    "description": "Get details of an incident service. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident services.",
-    "summary": "Get details of an incident service"
-  },
-  "UpdateIncidentService": {
-    "description": "Updates an existing incident service. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing incident service",
-    "request_description": "Incident Service Payload.",
-    "request_schema_description": "Update request with an incident service payload."
   },
   "CreateSLOReportJob": {
     "description": "Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.\n\nCheck the status of the job and download the CSV report using the returned `report_id`.",
