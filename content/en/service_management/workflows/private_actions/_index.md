@@ -40,9 +40,15 @@ The following is a general overview diagram for private actions:
 
 ### Mode differences
 
-Distinctions between App Builder and Workflows modes include their triggering mechanisms and operational models. App Builder is human-driven, meaning that each action is initiated by user interaction with an App. In contrast, Workflows can run automatically without direct human intervention. Another key difference is that App Builder mode operates through a push model, where actions are triggered by directly accessing a URL on the runner. Conversely, Workflows use a pull model, where the runner periodically checks for tasks to execute. This difference in models results in distinct data handling practices. In Workflows mode, the runner reports the result of private action executions to Datadog. In contrast, App Builder mode does not send your data to Datadog, keeping it in your private environment.
+The following table explains some distinctions between App Builder and Workflows modes, including their triggering mechanisms and operational models.
 
-The difference in models can result in varying latencies. The push model in App Builder mode might lead to more immediate responses, whereas the pull model in Workflows mode might introduce delays based on polling frequency.
+| Distinction              | App Builder mode | Workflows mode |
+|--------------------------| -----------------|----------------|
+| **Trigger<br>mechanism** | Human-driven - each action is initiated by user interaction with an App      | Can run automatically without direct human intervention    |
+| **Trigger<br>model**     | Push model - actions are triggered by directly accessing a URL on the runner | Pull model - periodically checks for tasks to execute      |
+| **Data<br>handling**     | Keeps data in your private environment and does not send it to Datadog       | Reports the result of private action executions to Datadog |
+
+The difference in models can result in varying latencies. App Builder mode's push model might lead to more immediate responses, whereas the pull model in Workflows mode might introduce delays based on polling frequency.
 
 ### App Builder mode
 
