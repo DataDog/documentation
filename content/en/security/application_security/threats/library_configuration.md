@@ -60,6 +60,8 @@ To protect users’ data, **sensitive data scanning is activated by default in A
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
 
+
+
 <div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong>
 
 <p>You can also configure scanning patterns in code:</p>
@@ -92,6 +94,9 @@ The following are examples of data that are flagged as sensitive by default:
 
 See [APM Data Security][3] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
 
+See [Automatic user activity event tracking modes][10] for information on automatic user activity tracking modes and how to configure them. See how Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident|anon|disabled`.
+
+
 ## Configure a custom blocking page or payload
 
 {{% asm-protection-page-configuration %}}
@@ -111,5 +116,5 @@ See [APM Data Security][3] for information about other mechanisms in the Datadog
 [7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 [8]: https://app.datadoghq.com/security/configuration/asm/services-config
 [9]: https://github.com/google/re2/wiki/Syntax
-
+[10]: /security/application_security/threats/add-user-info/?tab=set_user#automatic-user-activity-event-tracking-modes
 
