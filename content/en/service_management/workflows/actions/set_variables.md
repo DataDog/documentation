@@ -28,7 +28,7 @@ To set a variable:
    - To create an array, click the **Create array** <span id="icon-array">[ ]</span> button.
 
 If you need to change the value of a variable after setting it, you must add an additional **Set variable** step and either reassign the variable or create a new variable. The example workflow below:
-- Sets a variable called `int_list` with a list of integers: `[1,2,3,4]`
+- Sets a variable called `intList` with a list of integers: `[1,2,3,4]`
 - Uses an expression to filter out the odd numbers: `$.Variables.intList.filter(number => number % 2 === 0)`.
 - Assigns the result from the expression to a new variable named `evenList`: `[2,4]`.
 - Uses an Echo step to echo the value of `evenList`.
