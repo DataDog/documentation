@@ -61,9 +61,9 @@ You have a retail web application that generates a series of error logs related 
       ```
       status:error service:shopist-returns-prod returns
       ```
-      {{< img src="/sheets/guide/logs_analysis/error_logs_returns.png" alt="Logs Explorer showing a query for Error logs from an example retail application that contain 'returns' in the log message" style="width:80%;" >}}
+      {{< img src="/sheets/guide/logs_analysis/error_logs_returns.png" alt="Logs Explorer showing a query for Error logs from an example retail application that contain 'returns' in the log message" style="width:100%;" >}}
 1. Click **Open in Sheets** to create a new table to analyze these logs.
-      {{< img src="/sheets/guide/logs_analysis/open_in_sheets.png" alt="Modal to add a title to your new spreadsheet from Logs, such as 'Returns error analysis'" style="width:80%;" >}}
+      {{< img src="/sheets/guide/logs_analysis/open_in_sheets.png" alt="Modal to add a title to your new spreadsheet from Logs, such as 'Returns error analysis'" style="width:100%;" >}}
 
 ### Extract specific error data
 Add a calculated column in Sheets to pull out the specific issue with the return using the `REGEXEXTRACT` function:
