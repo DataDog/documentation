@@ -42,16 +42,36 @@ export class MarkdocHugoIntegration {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
     this.hugoConfig = args.hugoConfig;
+
+    // Load English pref configuration
     this.prefOptionsConfig = {
       en: YamlConfigParser.loadPrefOptionsFromDir(
         this.directories.prefsConfig + '/en/option_sets'
       )
     };
+
+    // Load translated pref configurations, backfilling with English
     this.hugoConfig.languages.forEach((lang) => {
-      const translatedPrefsConfig = YamlConfigParser.loadPrefOptionsFromDir(
-        this.directories.prefsConfig + '/' + lang + '/option_sets'
-      );
-      // Overwrite the English options with translated options when available
+      if (lang === 'en') {
+        return;
+      }
+
+      let translatedPrefsConfig: PrefOptionsConfig;
+      try {
+        translatedPrefsConfig = YamlConfigParser.loadPrefOptionsFromDir(
+          this.directories.prefsConfig + '/' + lang + '/option_sets'
+        );
+      } catch (e) {
+        console.log(JSON.stringify(e));
+        // If no prefs config directory exists for this language,
+        // assume no translated prefs exist
+        if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
+          translatedPrefsConfig = {};
+        } else {
+          throw e;
+        }
+      }
+
       this.prefOptionsConfig[lang] = {
         ...this.prefOptionsConfig.en,
         ...translatedPrefsConfig
