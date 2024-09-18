@@ -4,7 +4,8 @@ description: Install the Datadog Agent Integration Developer Tool.
 aliases:
 - /developers/integrations/python
 ---
-This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and developer tool.
+
+This document covers how to set up a Python environment to work on Agent-based Integrations, including installing the Python interpreter and developer tool.
 
 ## Install Python
 
@@ -12,7 +13,7 @@ Many operating systems come with a pre-installed version of Python. However, the
 
 {{< tabs >}}
 
-{{% tab "MacOS" %}}
+{{% tab "macOS" %}}
 Install Python 3.11 using [Homebrew][1]:
 
 1. Update Homebrew:
@@ -37,7 +38,7 @@ Install Python 3.11 using [Homebrew][1]:
      ```
      /opt/homebrew/bin/python3.11
      ```
-   - MacOS on Intel machines:
+   - macOS on Intel machines:
      ```
      /usr/local/bin/python3.11
      ```
@@ -71,13 +72,13 @@ For Linux installations, avoid modifying your system Python. Datadog recommends 
 
 ## Install developer tooling
 
-You have 2 options to install the `ddev` CLI.
+On macOS or Windows, you can install `ddev` from the CLI or use a GUI installer for your operating system. On Linux, [use a standalone binary](#install-from-a-standalone-binary).
 
 ### Install using a GUI
 
 {{< tabs >}}
-{{% tab "MacOS" %}}
-1. In your browser, download the `.pkg` file: [ddev-{{< sdk-version "integrations-core" >}}.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg)
+{{% tab "macOS" %}}
+1. In your browser, download the `.pkg` file: [ddev-{{< sdk-version "integrations-core" >}}.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg).
 2. Run your downloaded file and follow the on-screen instructions.
 3. Restart your terminal.
 4. To verify that the `ddev` command has been added to your `PATH`, run the following command to retrieve the `ddev` version:
@@ -85,6 +86,7 @@ You have 2 options to install the `ddev` CLI.
    ddev --version
    {{< sdk-version "integrations-core" >}}
    ```
+   If your version does not match, ensure you're using the correct version of Python.
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -98,27 +100,36 @@ You have 2 options to install the `ddev` CLI.
    ddev --version
    {{< sdk-version "integrations-core" >}}
    ```
+   If your version does not match, ensure you're using the correct version of Python.
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Install from the command line
 
 {{< tabs >}}
-{{% tab "MacOS" %}}
-1. Download the file using the `curl` command. The -L option allows for redirects, and the -o option specifies the file name to which the downloaded package is written. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
+{{% tab "macOS" %}}
+1. Download the PKG file using the `curl` command:
    ```shell
    curl -L -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
-2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include `sudo` on the command to grant write permissions to those folders.
+   - The `-L` option allows for redirects.
+   - The `-o` option specifies a file name for the downloaded package. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
+
+2. Run the macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source:
    ```shell
    sudo installer -pkg ./ddev-{{< sdk-version "integrations-core" >}}.pkg -target /
    ```
+   - The `-pkg` parameter specifies the name of the package to install.
+   - The `-target /` parameter specifies the drive in which to install the package. 
+   - The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory. You must include `sudo` on the command to grant permissions to write to the `/etc/` directory.
+
 3. Restart your terminal.
 4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```shell
    ddev --version
    {{< sdk-version "integrations-core" >}}
    ```
+   If your version does not match, ensure you're using the correct version of Python.
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -137,6 +148,7 @@ You have 2 options to install the `ddev` CLI.
    ddev --version
    {{< sdk-version "integrations-core" >}}
    ```
+   If your version does not match, ensure you're using the correct version of Python.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -145,7 +157,7 @@ You have 2 options to install the `ddev` CLI.
 After downloading the archive corresponding to your platform and architecture, extract the binary to a directory that is on your `PATH` and rename the binary to `ddev`.
 
 {{< tabs >}}
-{{% tab "MacOS" %}}
+{{% tab "macOS" %}}
 - [ddev-{{< sdk-version "integrations-core" >}}-aarch64-apple-darwin.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}-aarch64-apple-darwin.tar.gz)
 - [ddev-{{< sdk-version "integrations-core" >}}-x86_64-apple-darwin.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}-x86_64-apple-darwin.tar.gz)
 {{% /tab %}}
