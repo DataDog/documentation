@@ -3,7 +3,7 @@ title: Cross-Organization Connections API
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  Cross-organization visibility is in beta.
+  Cross-organization visibility is in Preview.
 {{< /callout >}} 
 
 [Cross-organization visibility][1] allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
