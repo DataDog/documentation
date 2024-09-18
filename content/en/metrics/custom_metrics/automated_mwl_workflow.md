@@ -13,6 +13,7 @@ further_reading:
 algolia:
   tags: ['custom metrics']
 is_beta: true
+private: true
 ---
 
 ## Overview
