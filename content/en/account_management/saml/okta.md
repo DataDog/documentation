@@ -14,10 +14,10 @@ further_reading:
 This page tells you how to set up the Datadog application in Okta. 
 
 Before proceeding, make sure that you are using the latest version of the Datadog application:
-1. In Okta, click **Applications**
-1. Open the Datadog application
+1. In Okta, click **Applications**.
+1. Open the Datadog application.
 1. Select the **General** tab.
-1. Look for a field labeled **SSO Base URL**
+1. Look for a field labeled **SSO Base URL**.
 
 {{< img src="account_management/saml/okta/sso_base_url.png" alt="Datadog application configuration in Okta, highlighting the SSO base URL" style="width:80%;" >}}
 
@@ -38,23 +38,23 @@ The following instructions allow you to set up Okta as the SAML identity provide
 
 ### In Okta
 
-1. Log in to your Okta admin dashboard
-1. In the left navigation, click **Applications**
-1. Click **Browse App Catalog**
-1. Use the search bar to search for "Datadog"
-1. Select the Datadog app for SAML and SCIM
-1. Click **Add Integration**. The General Settings dialog appears
-1. Populate the **SSO Base URL** field with your [Datadog website URL][3]
-1. Click **Done**
+1. Log in to your Okta admin dashboard.
+1. In the left navigation, click **Applications**.
+1. Click **Browse App Catalog**.
+1. Use the search bar to search for "Datadog".
+1. Select the Datadog app for SAML and SCIM.
+1. Click **Add Integration**. The General Settings dialog appears.
+1. Populate the **SSO Base URL** field with your [Datadog website URL][3].
+1. Click **Done**.
 
 **Note:** The SSO Base URL field accepts custom subdomains if you are not using a standard Datadog website URL.
 
 Next, download the metadata details to upload to Datadog:
-1. While in the settings dialog for the Datadog application in Okta, click the **Sign on** tab
-1. Scroll down until you see the **Metadata URL**
-1. Click **Copy**
-1. Open a new browser tab and paste the metadata URL into the address bar
-1. Use your browser to save the content of the metadata URL as an XML file
+1. While in the settings dialog for the Datadog application in Okta, click the **Sign on** tab.
+1. Scroll down until you see the **Metadata URL**.
+1. Click **Copy**.
+1. Open a new browser tab and paste the metadata URL into the address bar.
+1. Use your browser to save the content of the metadata URL as an XML file.
 
 {{< img src="account_management/saml/okta/metadata_url.png" alt="Sign on configuration in Okta" style="width:80%;" >}}
 
@@ -76,7 +76,7 @@ For the Datadog application to function correctly, you must activate IdP initiat
 
 To activate IdP initiated login, execute the following steps:
 1. Navigate to the [SAML configuration page][6].
-1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**. 
+1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**.
 1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Note this company ID, as you need to enter it in Okta to finalize your configuration.
 1. Click **Save Changes**.
 
@@ -102,7 +102,7 @@ The Datadog [SAML configuration page][6] displays the SSO URL next to the **Sing
 
 ### Email
 1. Navigate to the Datadog website URL for your organization.
-1. Select **Using Single Sign-On?**
+1. Select **Using Single Sign-On?**.
 1. Enter your email address, and click **Next**.
 1. Check your email for a message containing the SSO URL, listed as **Login URL**.
 
