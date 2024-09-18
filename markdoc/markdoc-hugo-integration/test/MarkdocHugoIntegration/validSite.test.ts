@@ -17,12 +17,17 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
         img_url: 'https://example.com'
       },
       env: 'development',
-      languages: ['en']
+      languages: ['en', 'ja']
     }
   });
 
+  const { compiledFiles, hasErrors } = compiler.compileMdocFiles();
+
+  if (hasErrors) {
+    compiler.logErrorsToConsole();
+  }
+
   test('each compiled file matches the snapshot', () => {
-    const { compiledFiles } = compiler.compileMdocFiles();
     for (const compiledFile of compiledFiles) {
       const compiledContent = fs.readFileSync(compiledFile, 'utf8');
       const sanitizedFilename = compiledFile.replace(`${siteDir}/content`, '');
@@ -30,5 +35,9 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
         SNAPSHOTS_DIR + '/validSite/content/' + sanitizedFilename
       );
     }
+  });
+
+  test('no errors occurred during compilation', () => {
+    expect(hasErrors).toBe(false);
   });
 });

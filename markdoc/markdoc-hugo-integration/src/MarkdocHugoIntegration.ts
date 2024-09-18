@@ -42,11 +42,20 @@ export class MarkdocHugoIntegration {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
     this.hugoConfig = args.hugoConfig;
-    this.prefOptionsConfig = {};
+    this.prefOptionsConfig = {
+      en: YamlConfigParser.loadPrefOptionsFromDir(
+        this.directories.prefsConfig + '/en/option_sets'
+      )
+    };
     this.hugoConfig.languages.forEach((lang) => {
-      this.prefOptionsConfig[lang] = YamlConfigParser.loadPrefOptionsFromDir(
+      const translatedPrefsConfig = YamlConfigParser.loadPrefOptionsFromDir(
         this.directories.prefsConfig + '/' + lang + '/option_sets'
       );
+      // Overwrite the English options with translated options when available
+      this.prefOptionsConfig[lang] = {
+        ...this.prefOptionsConfig.en,
+        ...translatedPrefsConfig
+      };
     });
   }
 
@@ -109,6 +118,11 @@ export class MarkdocHugoIntegration {
       }
 
       const lang = this.#getFileLanguage(markdocFilepath);
+
+      // Skip files that are not in the list of languages to compile
+      if (!this.hugoConfig.languages.includes(lang)) {
+        continue;
+      }
 
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
