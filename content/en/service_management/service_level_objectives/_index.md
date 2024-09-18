@@ -308,9 +308,9 @@ To view, edit, and delete existing status corrections, click on the **Correction
 
 #### Visualizing status corrections
 
-For metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. Note that your overall SLO status and error budget will always take status corrections into consideration. The toggle just controls the charts and data in the "History" section of the SLO detail view.
+For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the "History" section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration. 
 
-{{< img src="service_management/service_level_objectives/slo-correction-toggle.gif" alt="SLO correction UI" style="width:100%;">}}
+{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 
 ## SLO calendar view
 

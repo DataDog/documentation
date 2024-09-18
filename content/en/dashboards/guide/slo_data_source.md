@@ -36,9 +36,9 @@ For the *Measure* parameter, see the table below for more information on what ea
 
 #### SLO status corrections
 
-For SLOs that have [status corrections][2], you can decide whether you want to enable or disable corrections in charts using the SLO data source. By default, corrections will be enabled and applied to the chart. You can update the behavior for displaying corrections via the advanced options menu options:
+For SLOs that have [status corrections][2], you can enable or disable corrections in charts using the SLO data source. By default, corrections are enabled and applied to the chart; you can disable with the advanced options menu options:
 
-{{< img src="dashboards/guide/slo_data_type/slo-data-source-correction.gif" alt="Graph editor configuration with the slo data type selected and the good events measure selected" style="width:100%;" >}}
+{{< img src="dashboards/guide/slo_data_type/slo-data-source-correction.mp4" alt="Graph editor configuration with the slo data type selected and the good events measure selected" video="true" style="width:100%;" >}}
 
 
 [1]: /dashboards/sharing/scheduled_reports/
