@@ -387,6 +387,10 @@ The `LLMObs.annotate()` method accepts the following arguments:
 : optional - _JSON serializable type or list of dictionaries_ 
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
+`prompt` 
+: optional - _dictionary_ 
+<br />A dictionary represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": dict[str, str]}`.  **Note**: This argument is only applicable to LLM spans.
+
 `metadata` 
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
@@ -404,13 +408,22 @@ The `LLMObs.annotate()` method accepts the following arguments:
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import embedding, llm, retrieval, workflow
+from ddtrace.llmobs.utils import Prompt
 
 @llm(model="model_name", model_provider="model_provider")
 def llm_call(prompt):
     resp = ... # llm call here
     LLMObs.annotate(
         span=None,
-        input_data=[{"role": "user", "content": "Hello world!"}],
+        prompt = Prompt(
+            id = "respond_to_user",
+            version = "0.0.1",
+            template = "Respond to this message in a friendy manner: {user_message}",
+            variables = {
+                "user_message": "Hello world!"
+            },
+        )
+        input_data=[{"role": "user", "content": "Respond to this message in a friendy manner: Hello world!"}],
         output_data=[{"role": "assistant", "content": "How can I help?"}],
         metadata={"temperature": 0, "max_tokens": 200},
         metrics={"input_tokens": 4, "output_tokens": 6, "total_tokens": 10},

@@ -93,7 +93,7 @@ def extract_data(document):
 
 ### Annotating spans
 
-To add extra information to a span such as inputs, outputs, metadata, metrics, or tags, use the LLM Observability SDK's [`LLMObs.annotate()`][11] method.
+To add extra information to a span such as inputs, outputs, prompt templates, metadata, metrics, or tags, use the LLM Observability SDK's [`LLMObs.annotate()`][11] method.
 
 The examples below annotate the workflow span created in the [example above](#creating-spans):
 
@@ -131,6 +131,25 @@ def extract_data(document: str, generate_summary: bool):
             tags={"env": "dev"},
         )
         return extracted_data
+{{< /code-block >}}
+
+{{% tab "Annotating Prompt Templates" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def llm_call(user_message: str):
+    with LLMObs.llm(name="extract_data") as span:
+        ... # user application logic
+        LLMObs.annotate(
+            prompt = {
+                "variables": {"user_message": user_message},
+                "template": prompt_template,
+                "id": "generate_response",
+                "version": "0.0.1"
+            },
+            input_data= ...,
+            output_data= ...,
+        )
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
