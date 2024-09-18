@@ -43,7 +43,7 @@ In order to use API Security on your services, **you must have ASM Threats Prote
 |Golang    | v1.59.0  | Requests only |
 |Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
-**Warning** On .NET Core and .Net Fx tracers you will need to set `DD_API_SECURITY_ENABLED=true` in your environement variables
+**Warning** On .NET Core and .NET Fx tracers, you need to set `DD_API_SECURITY_ENABLED=true` in your environement variables for API Security features to work properly.
 
 ## How it works
 
