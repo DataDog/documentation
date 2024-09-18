@@ -67,7 +67,7 @@ You have a web application and want to understand how errors are impacting your 
 1. Click **Open in Sheets** to create a table with the filtered sessions.
 
 ### Enrich Data
-1. Upload a CSV file to a Reference Table with additional user metadata (such as premium status or team).
+1. [Upload a CSV file to a Reference Table](#uploading-data-to-reference-tables) with additional user metadata (such as premium status or team).
 1. Use the `Lookup` function in Sheets to add the user metadata about premium status to your RUM sessions table.
    {{< img src="/sheets/guide/rum_analysis/lookup_function.png" alt="Configure a Lookup with the external dataset and the additional metadata you want to pull from that dataset"style="width:80%;" >}}
 
