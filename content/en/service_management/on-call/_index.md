@@ -10,7 +10,7 @@ cascade:
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/on-call/" >}}
-  On-Call is in private beta. Complete the form to request access.
+  On-Call is in Preview. Complete the form to request access.
 {{< /callout >}} 
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
