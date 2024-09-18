@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
-  Domain Allowlist is available in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
+  Domain Allowlist is available in Preview for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
 {{< /callout >}} 
 
 [Domain Allowlist][1] enables you to restrict the email domains to which notifications can be sent. 
