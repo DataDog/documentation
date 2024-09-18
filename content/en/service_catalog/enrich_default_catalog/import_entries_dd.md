@@ -1,9 +1,6 @@
 ---
 title: Import Entries from Datadog Telemetries
 further_reading:
-- link: "/tracing/service_catalog/adding_metadata"
-  tag: "Documentation"
-  text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
   text: "Create and manage service definitions with Terraform"

@@ -38,6 +38,7 @@ The Code Security detection rules support the following languages.
 | Critical | NoSQL Injection                       | FALSE | TRUE  | TRUE    | FALSE  |
 | Critical | SQL Injection                         | TRUE  | TRUE  | TRUE    | TRUE   |
 | Critical | Server-Side Request Forgery (SSRF)    | TRUE  | TRUE  | TRUE    | TRUE   |
+| Critical | Code Injection                        | FALSE | FALSE | TRUE    | FALSE  |
 | Critical | Command Injection                     | TRUE  | TRUE  | TRUE    | TRUE   |
 | High     | LDAP Injection                        | TRUE  | TRUE  | TRUE    | FALSE  |
 | High     | Hardcoded Secrets                     | TRUE  | TRUE  | TRUE    | FALSE  |
@@ -45,6 +46,7 @@ The Code Security detection rules support the following languages.
 | High     | Path Traversal                        | TRUE  | TRUE  | TRUE    | TRUE   |
 | High     | Trust Boundary Violation              | TRUE  | TRUE  | FALSE   | FALSE  |
 | High     | Cross-Site Scripting (XSS)            | TRUE  | TRUE  | FALSE   | FALSE  |
+| High     | Untrusted Deserialization             | TRUE  | FALSE | FALSE   | FALSE  |
 | High     | Unvalidated Redirect                  | TRUE  | TRUE  | TRUE    | FALSE  |
 | High     | XPath Injection                       | TRUE  | TRUE  | FALSE   | FALSE  |
 | High     | Header Injection                      | TRUE  | TRUE  | TRUE    | TRUE   |
