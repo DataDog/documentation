@@ -14,7 +14,7 @@ further_reading:
 
 Submitting metrics to Datadog with large numbers of unique tag values on a given key can result in high [cardinality][1]. Most often, this is caused by unbounded tags.
 
-Unbounded and high cardinality tags can impact your account’s performance and stability. To protect your account, Datadog monitors metric increases and notifies you when these submissions are rate-limited.
+Unbounded and high cardinality tags can impact your account's performance and stability. To protect your account, Datadog monitors metric increases and notifies you when these submissions are rate-limited.
 
 This guide explains:
 - What rate limit events are
@@ -59,7 +59,7 @@ After making the changes to remove the unbounded tags, submit a request to [Data
 - Confirmation a configuration change was done to remove the unbounded tags. 
 
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
