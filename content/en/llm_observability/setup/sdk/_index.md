@@ -389,7 +389,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `prompt` 
 : optional - _dictionary_ 
-<br />A dictionary represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": dict[str, str]}`.  **Note**: This argument is only applicable to LLM spans.
+<br />A dictionary represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.  **Note**: This argument is only applicable to LLM spans.
 
 `metadata` 
 : optional - _dictionary_
