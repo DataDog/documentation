@@ -29,7 +29,7 @@ To set a variable:
 
 If you need to change the value of a variable after setting it, you must add an additional **Set variable** step and either reassign the variable or create a new variable.
 
-Here is an example of a workflow that uses the **Set variable** step:
+Here is an example of a workflow that demonstrates the **Set variable** step:
 
 1. In your workflow, start with a **Set variable** step to declare a variable called `intList` and give it the value `[1,2,3,4]`.
 1. Add a data transformation **expression** step with the expression `$.Variables.intList.filter(number => number % 2 === 0)` to filter out the odd numbers.
