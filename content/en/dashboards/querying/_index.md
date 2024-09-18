@@ -58,9 +58,9 @@ Your chosen metric can be filtered by host or tag using the **from** dropdown to
 {{< img src="dashboards/querying/filter-3.png" alt="Filter the graph with the 'from' field, using template variables and boolean logic" style="width:100%;" >}}
 
 - Use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries.
-- Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][16].
+- Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][8].
 
-To learn more about tags, see the [Tagging documentation][8].
+To learn more about tags, see the [Tagging documentation][9].
 
 ### Aggregate and rollup
 
@@ -72,9 +72,9 @@ Aggregation method is next to the filter dropdown. This defaults to `avg by` but
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
-In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][9]. See the [Rollup][10] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
+In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][10]. See the [Rollup][11] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
 
-To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
+To manually rollup the data, use the [rollup function][12]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
@@ -137,114 +137,18 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 Datadog’s nested queries feature allows you to add additional layers of aggregation on the results of existing queries in time and space. This functionality is available through the JSON tab or the API, and it supports various aggregation functions to enhance data analysis. Nested queries help you achieve multilayer aggregation, compute percentiles, and standard deviations on metrics, and run higher resolution queries over historical time frames.
 
-
-_* Every [metrics query][17] in Datadog is evaluated with two layers of aggregation: first time then space. Multilayer aggregation applies additional layers of aggregations._
-
-#### Multilayer Aggregation Semantics
-In Datadog, multilayer aggregation can be performed in two dimensions: time and space. Each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of aggregation beyond the default.
-
-| Supported Functions   | Description                                                                                    |
-|-----------------------|-----------------------------------------------------------------------------------------------|
-| Arithmetic operators   | `+, -, *, /`                                                                                  |
-| Timeshift functions    | `<METRIC_NAME>{*}, -<TIME_IN_SECOND>`<br> `hour_before(<METRIC_NAME>{*})`<br> `day_before(<METRIC_NAME>{*})`<br> `week_before(<METRIC_NAME>{*})`<br> `month_before(<METRIC_NAME>{*})` |
-| Top-k selection        | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`                                         |
-
-Other functions cannot be combined with multilayer aggregation.
-
-#### Multilayer time aggregation
-
-Multilayer time aggregation is expressed with the `rollup` function. The first `rollup` applied to a query determines its base level precision and aggregation. For more information, see the [Rollup][19] documentation. Subsequent rollups allow for additional layers of time aggregation.
-
-The first rollup supports the following aggregators:
-- `avg`
-- `sum`
-- `min`
-- `max`
-- `count`
-
-Additional layers of time aggregation support:
-
-- `avg`
-- `sum`
-- `min`
-- `max`
-- `count`
-- `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
-- `stddev`
-
-This query calculates the 95th percentile of average CPU utilization for each EC2 instance grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes.
-
-```text
-"rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
-```
-
-In JSON or API format, it would look as follows:
-
-# {{< img src="/dashboards/querying/multilayer-time-agg-example.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
-
-#### Multilayer space aggregation
-
-Multilayer space aggregation is expressed with the name of the aggregator. Aggregators such as max(), stddev(), sum() have one argument, which is the tag key(s) to group by. Percentile space aggregation, on the other hand, requires two arguments: The percentile aggregator in the form of pxx and the tag key(s) to group-by.
-##### Example Queries
-
-The following query calculates the sum of average CPU utilization, grouped by environment:
-
-```text
-sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})
-```
-
-For percentile space aggregation, the following query calculates the 95th percentile of average CPU utilization, grouped by environment:
-
-```text
-percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})
-```
-In JSON or API format, it would look as follows:
-
-# {{< img src="/dashboards/querying/multilayer-space-agg-example.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
-
-#### Percentiles
-
-Percentile calculations allow for a deeper understanding of data distribution. Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
-
-```text
-"rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
-```
-In JSON or API format:
-
-# {{< img src="/dashboards/querying/nested-queries-percentiles-example.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
-
-#### Standard Deviation
-
-Standard deviation helps measure the variability or dispersion of a dataset. The following query calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals, and rolled up over 1-hour periods:
-
-```text
-"rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',3600)"
-```
-In JSON or API format:
-
-# {{< img src="/dashboards/querying/nested-queries-standard-dev-example.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
-
-#### Higher Resolution Queries
-
-High-resolution queries allow you to obtain more granular data over extended periods. Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval:
-
-```text
-"rollup(sum:dd.metrics.query.batch.count{*}.rollup(avg,300),`stddev`,14400)"
-```
-In JSON or API format:
-
-# {{< img src="/dashboards/querying/nested-queries-higher-res-example.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
+For more information, see the [Nested Queries][] documentation
 
 
 ### Advanced graphing
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][13].
 
 Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][13] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][14] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
@@ -313,7 +217,7 @@ Click **Done** to save your work and exit the editor. You can always come back t
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][14].
+View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][16].
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
 
@@ -345,15 +249,12 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
 [7]: /metrics/advanced-filtering/
-[8]: /getting_started/tagging/
-[9]: /metrics/#time-aggregation
-[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /dashboards/functions/rollup/
-[12]: /dashboards/functions/#function-types
-[13]: /metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /logs/explorer/search_syntax/
+[8]: /dashboards/template_variables/
+[9]: /getting_started/tagging/
+[10]: /metrics/#time-aggregation
+[11]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[12]: /dashboards/functions/rollup/
+[13]: /dashboards/functions/#function-types
+[14]: /metrics/advanced-filtering/#boolean-filtered-queries
 [15]: /dashboards/widgets/timeseries/#event-overlay
-[16]: /dashboards/template_variables/
-[17]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
-[18]: /dashboards/querying/#minimum-or-maximum-between-two-queries
-[19]: /dashboards/functions/rollup/
+[16]: /logs/explorer/search_syntax/
