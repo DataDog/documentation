@@ -38,12 +38,17 @@ To see who edited a workflow, use Audit Trail.
 
 To receive notifications when your workflow runs, use one of the following methods.
 
-### Notifications in Workflow Automation
+### Workflow Automation
 
 See [Workflow notifications][3] for instructions on using built-in workflow notifications.
 
 ### Datadog monitor
 
+To create a monitor that tracks when a workflow starts, perform the following steps:
+
+1. Go to [New Monitor][4] and select the **Metric** monitor type.
+1. Under **Define the metric**, for **a**, fill in `datadog.workflows.executions.started`.
+1. To restrict the monitor to a specific workflow, for **from**, fill in `workflow_id:[WORKFLOW-ID]`, replacing `[WORKFLOW-ID]` with the ID for your workflow.
 
 
 ## Further reading
@@ -56,3 +61,4 @@ See [Workflow notifications][3] for instructions on using built-in workflow noti
 [1]: https://datadoghq.slack.com/
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /service_management/workflows/build/#workflow-notifications
+[4]: https://app.datadoghq.com/monitors/create
