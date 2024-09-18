@@ -69,7 +69,7 @@ For Google Cloud tags, select **Google** from the dropdown menu on the top right
 
 For Datadog tags, select **Datadog** from the dropdown menu on the top right corner.
 
-{{< img src="cloud_cost/tag_explorer/datadog.png" alt="Search through the list of your Datadog cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
+{{< img src="cloud_cost/tag_explorer/datadog_1.png" alt="Search through the list of your Datadog cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}

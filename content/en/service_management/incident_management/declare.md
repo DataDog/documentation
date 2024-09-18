@@ -61,7 +61,7 @@ After you declare an incident from Slack, it generates an incident channel.
 ## What's next
 
 {{< whatsnext desc="Add helpful information to your incident and give context to everyone that is involved in the investigation.">}}
-    {{< nextlink href="/service_management/incident_management/#describing-the-incident" >}}Describe the Incident: Add context and details{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/describe" >}}Describe the Incident: Add context and details{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents
