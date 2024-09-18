@@ -1,5 +1,5 @@
 ---
-title: Single Step APM Instrumentation (Beta)
+title: Single Step APM Instrumentation (Preview)
 is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm
