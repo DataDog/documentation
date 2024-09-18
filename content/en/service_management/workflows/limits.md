@@ -22,7 +22,7 @@ This page describes rate limits and throttles that apply to Workflow Automation.
 
 Each organization:
 
-* Can have up to 500 workflows at once.
+* Can create up to 500 workflows per minute.
 * Can execute up to 200 workflows per minute.
 * Can execute up to 50 workflows per minute for a source (such as a specific monitor).
 * Can buffer up to 500 requests.
@@ -33,7 +33,7 @@ When an organization exceeds these thresholds, pending execution requests queue 
 
 Each organization:
 
-* Can have up to 20 workflows at once.
+* Can create up to 20 workflows per minute.
 * Can execute up to 50 workflows per 20 minute.
 * Can execute up to 20 workflows per minute for a source (such as a specific monitor).
 * Can buffer up to 100 requests.
