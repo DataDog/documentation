@@ -12,7 +12,7 @@ describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({
     directories: {
       content: contentDir,
-      options: siteDir + '/preferences_config/options',
+      prefsConfig: siteDir + '/preferences_config',
       partials: siteDir + '/partials'
     },
     hugoConfig: {

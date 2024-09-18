@@ -9,7 +9,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
   const compiler = new MarkdocHugoIntegration({
     directories: {
       content: siteDir + '/content',
-      options: siteDir + '/preferences_config/options',
+      prefsConfig: siteDir + '/preferences_config',
       partials: siteDir + '/partials'
     },
     hugoConfig: {

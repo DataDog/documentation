@@ -11,8 +11,9 @@ import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
 
 describe('treeManagement', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
-  const prefOptionsConfig =
-    YamlConfigParser.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+  const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
+    VALID_PREF_OPTIONS_DIR + '/en/option_sets'
+  );
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
   const parsedFile = MdocFileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);

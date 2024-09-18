@@ -11,8 +11,9 @@ import {
 
 describe('PageBuilder.build', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
-  const prefOptionsConfig =
-    YamlConfigParser.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+  const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
+    VALID_PREF_OPTIONS_DIR + '/en/option_sets'
+  );
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
 
@@ -26,7 +27,11 @@ describe('PageBuilder.build', () => {
   const html = PageBuilder.build({
     parsedFile,
     prefOptionsConfig: prefOptionsConfigForPage,
-    hugoConfig: { siteParams: { img_url: 'https://example.com' }, env: 'development' }
+    hugoConfig: {
+      siteParams: { img_url: 'https://example.com' },
+      env: 'development',
+      languages: ['en']
+    }
   });
 
   test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {

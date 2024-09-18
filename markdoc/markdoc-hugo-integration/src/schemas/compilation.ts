@@ -12,7 +12,7 @@ export const CompilationConfigSchema = z.object({
     .object({
       content: z.string(),
       partials: z.string(),
-      options: z.string()
+      prefsConfig: z.string()
     })
     .strict(),
   hugoConfig: HugoConfigSchema

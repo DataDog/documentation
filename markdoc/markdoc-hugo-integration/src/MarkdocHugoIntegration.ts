@@ -23,10 +23,10 @@ export class MarkdocHugoIntegration {
   directories: {
     content: string;
     partials: string;
-    options: string;
+    prefsConfig: string;
   };
   hugoConfig: HugoConfig;
-  prefOptionsConfig: PrefOptionsConfig;
+  prefOptionsConfig: Record<string, PrefOptionsConfig>; // keyed by language code, e.g. 'en'
 
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
@@ -36,27 +36,37 @@ export class MarkdocHugoIntegration {
   private compiledFiles: string[] = [];
 
   /**
-   * Ingest the available configuration files
-   * and scan the content directory for Markdoc files.
+   * Validate and store the provided configuration.
    */
   constructor(args: CompilationConfig) {
     CompilationConfigSchema.parse(args);
     this.directories = args.directories;
     this.hugoConfig = args.hugoConfig;
-    this.prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
-      this.directories.options
-    );
+    this.prefOptionsConfig = {};
+    this.hugoConfig.languages.forEach((lang) => {
+      this.prefOptionsConfig[lang] = YamlConfigParser.loadPrefOptionsFromDir(
+        this.directories.prefsConfig + '/' + lang + '/option_sets'
+      );
+    });
   }
 
   /**
    * Provide a string that includes the shared styles and scripts
    * required to display and re-render any page.
    * Any page-specific content or scripts are not included;
-   * those are inlined in the compiled files.
+   * those are inline in the compiled files.
    */
   buildAssetsPartial() {
     return `<style>${PageBuilder.getStylesStr()}</style>
 <script>${PageBuilder.getClientPrefsManagerScriptStr()}</script>`;
+  }
+
+  #getFileLanguage(markdocFilepath: string): string {
+    const lang = markdocFilepath.replace(this.directories.content, '').split('/')[1];
+    if (!lang) {
+      throw new Error(`No language detected in file path: ${markdocFilepath}`);
+    }
+    return lang;
   }
 
   /**
@@ -98,10 +108,12 @@ export class MarkdocHugoIntegration {
         continue;
       }
 
+      const lang = this.#getFileLanguage(markdocFilepath);
+
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         parsedFile,
-        prefOptionsConfig: this.prefOptionsConfig
+        prefOptionsConfig: this.prefOptionsConfig[lang]
       });
 
       if (compiledFilepath) {

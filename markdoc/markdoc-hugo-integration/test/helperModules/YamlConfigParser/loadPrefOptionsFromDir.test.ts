@@ -6,8 +6,9 @@ const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid/prefsOptionsDirs`;
 
 describe('YamlConfigParser', () => {
   test('loads preference options from a directory', () => {
-    const prefOptionsConfig =
-      YamlConfigParser.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+    const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
+      VALID_PREF_OPTIONS_DIR + '/en'
+    );
     expect(JSON.stringify(prefOptionsConfig, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/ingestedPrefOptions.snap.json`
     );

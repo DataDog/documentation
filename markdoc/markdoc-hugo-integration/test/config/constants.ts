@@ -8,7 +8,7 @@ export const MOCKS_DIR = path.join(__dirname, '..', 'mocks');
 
 // Valid example site
 export const VALID_SITE_DIR = path.join(__dirname, '..', 'mocks', 'validSite');
-export const VALID_PREF_OPTIONS_DIR = VALID_SITE_DIR + '/preferences_config/options';
+export const VALID_PREF_OPTIONS_DIR = VALID_SITE_DIR + '/preferences_config';
 export const VALID_SITEWIDE_PREFS_FILE =
   VALID_SITE_DIR + '/preferences_config/sitewide_preferences.yaml';
 export const VALID_CONTENT_DIR = VALID_SITE_DIR + '/content';
