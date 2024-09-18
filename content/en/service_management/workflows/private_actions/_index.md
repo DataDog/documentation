@@ -30,11 +30,13 @@ Private actions allow your Datadog workflows and apps to interact with services 
 
 The runner authenticates using a private key that is generated when you first start the runner. This private key is never accessible by Datadog and ensures you exclusive access. Datadog uses a public key derived from the private key as the means to authenticate specific runners.
 
-{{< img src="service_management/private_action_runner-diagram_general.png" alt="Overview diagram illustrating how Private actions interact with Datadog and the user's browser" style="width:100%;" >}}
-
 ## Modes
 
 A private action runner can be used with App Builder, Workflow Automation, or both.
+
+The following is a general overview diagram for private actions:
+
+{{< img src="service_management/private_action_runner-diagram_general.png" alt="Overview diagram illustrating how Private actions interact with Datadog and the user's browser" style="width:100%;" >}}
 
 ### Mode differences
 
