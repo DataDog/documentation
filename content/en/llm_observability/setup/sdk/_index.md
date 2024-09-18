@@ -422,7 +422,7 @@ def llm_call(prompt):
             variables = {
                 "user_message": "Hello world!"
             },
-        )
+        ),
         input_data=[{"role": "user", "content": "Respond to this message in a friendy manner: Hello world!"}],
         output_data=[{"role": "assistant", "content": "How can I help?"}],
         metadata={"temperature": 0, "max_tokens": 200},
