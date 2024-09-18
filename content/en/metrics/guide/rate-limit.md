@@ -19,7 +19,7 @@ Unbounded and high cardinality tags can impact your account’s performance and 
 This guide explains:
 - What rate limit events are
 - How to monitor rate-limiting events so you are aware of which metrics are being rate-limited
-- Actions to take to reduce cardinality to remove metric rate limitation
+- Actions to take to for unbounded tags and to remove metric rate limitation
 
 
 ## Datadog rate limit events
@@ -43,9 +43,9 @@ An [Event Monitor][3] can be configured to send a notification for any rate limi
 
 {{< img src="/metrics/guide/rate_limit/event_monitor_config.png" alt="Event monitor configuration for a rate limit event" style="width:90%;" >}}
 
-## Reduce metric cardinality
+## What to do with unbounded tags
 
-To remove the rate limit, you need to review the unbounded tags that are shown in the event. We recommend checking if all the tags are necessary and adjust the submission of the metric so that these tags are not present in such high cardinality.
+To remove the rate limit, you need to review the unbounded tags that are shown in the event. We recommend checking if all tags-values reported in the event are necessary and adjust the submission of the metric so that these tags are contributing to valuable insights.
 
 For more information, see the [Best Practices for Custom Metrics Governance][4] guide.
 
