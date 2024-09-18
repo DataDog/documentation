@@ -52,14 +52,14 @@ RUM ブラウザの[標準属性][1]の完全なリストをご覧ください�
 
 ### セッションメトリクス
 
-| メトリクス  | Type   | 説明                |
+| メトリクス  | タイプ   | 説明                |
 |------------|--------|----------------------------|
 | `session.time_spent` | 数値（ns） | ユーザーセッションの期間。 |
 | `session.view.count`        | 数値      | このセッションで収集されたすべてのビューの数。 |
-| `session.error.count`      | number      | このセッションで収集されたすべてのエラーの数。  |
+| `session.error.count`      | 数値      | このセッションで収集されたすべてのエラーの数。  |
 | `session.resource.count`         | 数値      | このセッションで収集されたすべてのリソースの数。 |
 | `session.action.count`      | 数値      | このセッションで収集されたすべてのアクションの数。 |
-| `session.long_task.count`      | 数値      | Count of all long tasks collected for this session. |
+| `session.long_task.count`      | 数値      | このセッションで収集されたすべてのロングタスクの数。 |
 
 ### セッション属性
 

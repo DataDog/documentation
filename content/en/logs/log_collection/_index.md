@@ -27,6 +27,8 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -326,6 +328,8 @@ The TCP endpoint is not supported for this site.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
+
+There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
 
 ### Attributes and tags
 

@@ -35,7 +35,7 @@ yarn add @datadog/mobile-react-navigation
 ```
 
 ### Track view navigation
-To track changes in navigation as RUM Views, set the `onready` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
+To track changes in navigation as RUM Views, set the `onReady` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
 
 Returning `null` in the `ViewNamePredicate` prevents the new RUM View from being created. The previous RUM View remains active.
 

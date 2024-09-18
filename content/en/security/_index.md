@@ -54,6 +54,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/investigate-denial-of-service-attacks/"
     tag: "Blog"
     text: "Investigating a complex denial-of-service attack"
+  - link: "https://www.datadoghq.com/blog/optimize-and-secure-azure-functions/"
+    tag: "Blog"
+    text: "Tips to optimize and secure Azure Functions"
 cascade:
     algolia:
         rank: 70

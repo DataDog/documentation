@@ -56,7 +56,7 @@ Requires `dd-trace-py` version 0.44.0+.
 
 To enable the [timeline feature](#span-execution-timeline-view):
 
-- Upgrade `dd-trace-py` to version 2.10.5 or later
+- Upgrade `dd-trace-py` to version 2.12.0+, 2.11.4+, or 2.10.7+.
 - Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
 
 [1]: /profiler/enabling/python
@@ -65,10 +65,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-rb` 1.21.1+.
-
-To additionally enable showing [GC in timeline](#span-execution-timeline-view):
-- set `DD_PROFILING_FORCE_ENABLE_GC=true`
+The new [timeline feature](#span-execution-timeline-view), including GC information, is enabled by default in `dd-trace-rb` 1.22.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -159,7 +156,7 @@ The values on the left side represent the time spent in that method call during 
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-- **CPU** shows the time taken executing CPU tasks. Only shown for profiles collected with the Node.js experimental CPU profiler.
+- **CPU** shows the time taken executing CPU tasks.
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -286,8 +283,6 @@ Requires `dd-trace-go` version 1.37.0+ and works best with Go version 1.18 or ne
 {{< programming-lang lang="ruby" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Ruby service][1].
-
-Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}

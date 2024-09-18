@@ -4,9 +4,6 @@ aliases:
 title: OAuth for Integrations
 description: Use OAuth to authenticate integrations.
 ---
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
 
 ## Overview
 
