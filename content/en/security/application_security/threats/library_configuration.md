@@ -55,7 +55,7 @@ The data that you collect with Datadog can contain sensitive information that yo
 
 By default, ASM collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This enables you to observe that although the request was suspicious, the request data was not collected because of data security concerns. 
 
-To protect users’ data, **sensitive data scanning is activated by default in ASM**. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2]. To customize scanning, set the value of these environment variables to a valid RE2 pattern:
+To protect users’ data, **sensitive data scanning is activated by default in ASM**. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2]. To customize scanning, set the value of these environment variables to a valid [RE2][9] pattern:
 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
@@ -110,5 +110,6 @@ See [APM Data Security][3] for information about other mechanisms in the Datadog
 [6]: /help/
 [7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 [8]: https://app.datadoghq.com/security/configuration/asm/services-config
+[9]: https://github.com/google/re2/wiki/Syntax
 
 
