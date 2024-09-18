@@ -1758,7 +1758,7 @@ menu:
       identifier: metrics_advanced_filtering
       weight: 8
     - name: Nested Queries
-      url: metrics/nested-queries/
+      url: metrics/nested_queries/
       parent: metrics_top_level
       identifier: metrics_nested_queries
       weight: 9

@@ -254,7 +254,7 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [10]: /metrics/#time-aggregation
 [11]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [12]: /dashboards/functions/rollup/
-[13]: /metrics/nested_queries
+[13]: /metrics/nested_queries/
 [14]: /dashboards/functions/#function-types
 [15]: /metrics/advanced-filtering/#boolean-filtered-queries
 [16]: /dashboards/widgets/timeseries/#event-overlay
