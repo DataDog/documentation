@@ -58,7 +58,7 @@ You have a web application and want to understand how errors are impacting your 
 
 
 ### Filter RUM Sessions
-1. Start from the [RUM Sessions Explorer][3] and build a query to filter sessions with two or more errors.
+1. Start from the [RUM Sessions Explorer][3] and build a query to filter sessions with two or more errors. For example:
 
      ```
      @session.error.count:>=2 @session.type:user
@@ -68,7 +68,7 @@ You have a web application and want to understand how errors are impacting your 
 
 ### Enrich Data
 1. Upload a CSV file to a Reference Table with additional user metadata (such as premium status or team).
-1. Use the Lookup function in Sheets to add the premium status to your RUM sessions table.
+1. Use the `Lookup` function in Sheets to add the user metadata about premium status to your RUM sessions table.
    {{< img src="/sheets/guide/rum_analysis/lookup_function.png" alt="Configure a Lookup with the external dataset and the additional metadata you want to pull from that dataset"style="width:80%;" >}}
 
 ### Analyze with Pivot Tables

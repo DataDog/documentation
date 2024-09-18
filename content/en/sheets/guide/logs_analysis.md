@@ -66,13 +66,13 @@ You have a retail web application that generates a series of error logs related 
       {{< img src="/sheets/guide/logs_analysis/open_in_sheets.png" alt="Modal to add a title to your new spreadsheet from Logs, such as 'Returns error analysis'" style="width:80%;" >}}
 
 ### Extract specific error data
-1. Add a calculated column in Sheets to pull out the specific issue with the return using the `REGEXEXTRACT` function:
+Add a calculated column in Sheets to pull out the specific issue with the return using the `REGEXEXTRACT` function:
      ```
      =REGEXEXTRACT(#'Message', "Failed (?:to )?(\w+)")
      ```
 
 ### Analyze error types
-1. Create a pivot table to count the number of errors per error type (getting, calculating, handling).
+1. Create a pivot table to count the number of errors per error type (`getting`, `calculating`, and `handling`).
 1. Summarize the data to understand the distribution and total impact of each error type.
       {{< img src="/sheets/guide/logs_analysis/calculated_column_pivot_table.mp4" alt="Video walkthrough of the steps to analyze error logs" video=true >}}
 
