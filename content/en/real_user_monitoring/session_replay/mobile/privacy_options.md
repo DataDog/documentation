@@ -44,7 +44,7 @@ With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown 
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
@@ -73,7 +73,7 @@ With the `mask_all_inputs` setting enabled, all inputs fields are masked in the 
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_ALL_INPUTS)
@@ -102,7 +102,7 @@ With the `mask_all` setting enabled, all text and input fields are masked in the
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_ALL)
@@ -137,7 +137,7 @@ With the `mask_all` setting enabled, all images are replaced by placeholders lab
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setImagePrivacy(ImagePrivacy.MASK_ALL)
@@ -174,7 +174,7 @@ On Android, users can select the `mask_large_only`  setting, which replaces imag
 {{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-large-only.png" alt="What your application screen may resemble when `mask_large_only` is enabled on Android." style="width:50%;">}}
 
 
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setImagePrivacy(ImagePrivacy.MASK_LARGE_ONLY)
@@ -209,7 +209,7 @@ With the `mask_none` setting enabled, all images are shown in the replay.
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setImagePrivacy(ImagePrivacy.MASK_NONE)
@@ -241,7 +241,7 @@ With the `hide` setting enabled, all touches that occur during the replay will b
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setTouchPrivacy(TouchPrivacy.HIDE)
@@ -270,7 +270,7 @@ With the `show` setting enabled, all touches that occur during the replay will b
 
 {{< tabs >}}
 {{% tab "Android" %}}
-{{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     .setTouchPrivacy(TouchPrivacy.SHOW)
@@ -306,7 +306,7 @@ By default, the `mask` setting is enabled for all data. With this setting enable
 {{< tabs >}}
 {{% tab "Android" %}}
 
-   {{< code-block lang="kotlin" filename="applicaton.kt" disable_copy="false" collapsible="true" >}}
+   {{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
 
    // mask all text elements
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
@@ -516,6 +516,16 @@ The following chart shows how we apply different touch interaction strategies, u
 |------|-------------|------------|-------------------|
 | [Other attributes](#other-attributes) |  |  |  |
 | [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
+
+### Image masking
+
+The following chart shows how we apply different image masking strategies:
+
+| Type           | Mask None | Mark Large Only (Android) <br/> / Mask Non Bundled Only (iOS) | Mask All 
+|----------------|-----------|---------------------------------------------------------------|---------|
+| Content Image  | Shown     | Masked                                                        | Masked |
+| System Image   | Shown     | Shown                                                         | Masked |
+
 
 ## Further reading
 
