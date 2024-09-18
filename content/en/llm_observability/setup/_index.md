@@ -132,6 +132,7 @@ def extract_data(document: str, generate_summary: bool):
         )
         return extracted_data
 {{< /code-block >}}
+{{% /tab %}}
 
 {{% tab "Annotating Prompt Templates" %}}
 {{< code-block lang="python" >}}
