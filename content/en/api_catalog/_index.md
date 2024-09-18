@@ -1,6 +1,5 @@
 ---
 title: Datadog API Catalog
-is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
   tag: "Blog"
@@ -25,10 +24,6 @@ aliases:
 {{< site-region region="gov,ap1" >}}
 <div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< beta-callout url="" btn_hidden="true">}}
-Datadog API Catalog is in beta.
-{{< /beta-callout >}}
 
 {{< img src="tracing/api_catalog/api-catalog-catalog-api-details.png" alt="API Catalog showing a list of endpoints for an API called Checkout, along with information about ownership, service and environment, tags, and links to related monitors, tests, and performance data." style="width:100%;" >}}
 
@@ -98,7 +93,7 @@ API
 API endpoint
 : The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint is responsible for making the API call response.<br /><br/>
 API Catalog displays API endpoints as the HTTP method (for example, `GET`), the URL path (for example, `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`).<br /><br/>
-API Catalog in **beta** supports only **HTTP** endpoints. 
+API Catalog only supports **HTTP** endpoints. 
 
 Public APIs
 : Customer-facing API endpoints that are accessible from the internet.
