@@ -57,13 +57,13 @@ You have a retail web application that generates a series of error logs related 
 
 ### Analyze error logs
 
-1. From the [Logs Explorer][1], build a logs query that filters down to Error logs from your retail application with the words “returns” in the log message.
+1. From the [Logs Explorer][1], build a logs query that filters down to Error logs from your retail application with `returns` in the log message. For example:
       ```
       status:error service:shopist-returns-prod returns
       ```
-      {{< img src="/sheets/guide/logs_analysis/error_logs_returns.png" alt="Logs Explorer showing the query for Erros Logs from example retail application that contain the word returns in the log message" style="width:80%;" >}}
+      {{< img src="/sheets/guide/logs_analysis/error_logs_returns.png" alt="Logs Explorer showing a query for Error logs from an example retail application that contain 'returns' in the log message" style="width:80%;" >}}
 1. Click **Open in Sheets** to create a new table to analyze these logs.
-      {{< img src="/sheets/guide/logs_analysis/open_in_sheets.png" alt="Modal to add a title to your new spreadsheet from Logs, for example: Returns error analysis" style="width:80%;" >}}
+      {{< img src="/sheets/guide/logs_analysis/open_in_sheets.png" alt="Modal to add a title to your new spreadsheet from Logs, such as 'Returns error analysis'" style="width:80%;" >}}
 
 ### Extract specific error data
 1. Add a calculated column in Sheets to pull out the specific issue with the return using the `REGEXEXTRACT` function:
@@ -71,7 +71,7 @@ You have a retail web application that generates a series of error logs related 
      =REGEXEXTRACT(#'Message', "Failed (?:to )?(\w+)")
      ```
 
-### Analyze error types:
+### Analyze error types
 1. Create a pivot table to count the number of errors per error type (getting, calculating, handling).
 1. Summarize the data to understand the distribution and total impact of each error type.
       {{< img src="/sheets/guide/logs_analysis/calculated_column_pivot_table.mp4" alt="Video walkthrough of the steps to analyze error logs" video=true >}}
