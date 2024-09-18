@@ -31,7 +31,7 @@ To add an expression action:
 - In a new workflow, click **Add step** and search for `expression`. Select the **Expression** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
 
-In an expression step, all available variables are a deep copy of the execution context. Mutating a variable has no effect on the variable's value. To assign the result of an expression to a variable, see [Set variables][4].
+In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Set variables][4].
 
 ## Function
 

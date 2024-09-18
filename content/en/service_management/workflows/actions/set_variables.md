@@ -10,10 +10,10 @@ further_reading:
 
 ---
 
-To set a mutable workflow variable, use the [Set variable][1] action. You can use the action to declare, update and access variables throughout your workflow. Setting a variable allows you to perform more complex workflow operations. For example:
+To set a mutable workflow variable, use the [Set variable][1] action. You can use this action to declare, update, and access variables throughout your workflow, which allows you to perform more complex workflow operations. For example:
 - _Handling API pagination_: API requests sometimes require you to keep track of a page token or offset.
 - _Handling lists_: You can use a variable to initialize an array and perform actions like map and reduce.
-- _Iteration_: Variables allow you to manipulate and store data inside a [for loop][2] and then use that data in the rest of the workflow.
+- _Iteration_: Variables allow you to manipulate and store data inside a [for loop][2]. You can then use that data in the rest of the workflow.
 
 ## Set a variable
 
@@ -21,19 +21,22 @@ To set a variable:
 1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
 1. Search for and select the **Set variable** step.
 1. Click the **Set variable** step and enter a **Step name**.
-1. Enter a **variable name**. Variable names must be strings with alphanumeric characters and underscores and must start with a letter.
+1. Enter a **variable name**. Variable names must start with a letter and can contain only alphanumeric characters and underscores.
 1. Enter a value for the variable.
    - Type ``{{`` if you want to use a workflow context variable.
    - To create an object, click the **Create object** <i class="icon-api"></i> button.
    - To create an array, click the **Create array** <span id="icon-array">[ ]</span> button.
 
-If you need to change the value of a variable after setting it, you must add an additional **Set variable** step and either reassign the variable or create a new variable. The example workflow below:
-- Sets a variable called `intList` with a list of integers: `[1,2,3,4]`
-- Uses an expression to filter out the odd numbers: `$.Variables.intList.filter(number => number % 2 === 0)`.
-- Assigns the result from the expression to a new variable named `evenList`: `[2,4]`.
-- Uses an Echo step to echo the value of `evenList`.
+If you need to change the value of a variable after setting it, you must add an additional **Set variable** step and either reassign the variable or create a new variable.
 
-{{< img src="service_management/workflows/set-variable.png" alt="This workflow sets a variable, performs an Expression step on it, and then sets a new variable with the result of the expression. Finally, it echoes the result of the final variable" style="width:100%;" >}}
+Here is an example of a workflow that uses the **Set variable** step:
+
+1. In your workflow, start with a **Set variable** step to declare a variable called `intList` and give it the value `[1,2,3,4]`.
+1. Add a data transformation **expression** step with the expression `$.Variables.intList.filter(number => number % 2 === 0)` to filter out the odd numbers.
+1. Use another **Set variable** step to assign the result from the expression (`[2,4]`) to a new variable named `evenList`.
+1. Add an **Echo** step to echo the value of `evenList`.
+
+{{< img src="service_management/workflows/set-variable.png" alt="This workflow sets a variable, performs an Expression step on it, and then sets a new variable with the result of the expression. Finally, it echoes the result of the final variable." style="width:100%;" >}}
 
 ## Access a variable
 
