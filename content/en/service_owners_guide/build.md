@@ -64,7 +64,7 @@ In every enterprise IT environment, a provisioning process is essential for mana
 
 ### Modular architecture
 
-Like most enterprise software products, Datadog installations can be broken into three separate operations, each a part of the modular architecture referred to as the file/package/service model.
+Like most enterprise software products, Datadog installations can be broken into three separate operations, each a part of the [modular architecture][6] referred to as the file/package/service model.
 
 **File(s)**: Contains configurations  
 **Package**: Holds binaries and controls their deployment  
@@ -100,3 +100,4 @@ Review the Service Owners Guide [run][4] documentation to outline a maintenance 
 [3]: https://github.com/DataDog/datadog-sync-cli
 [4]: /service_owners_guide/run
 [5]: /agent/basic_agent_usage/
+[6]: /agent/architecture/

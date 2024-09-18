@@ -228,11 +228,11 @@ During the planning phase, it is common to realize that not every instance of ob
 ### Deployment patterns 
 
 At this stage, we have developed two distinct bodies of knowledge. The first, is an understanding of our IT landscape from the observability lens. We understand the types of components it consists of and have a general idea of the observability data we need to extract from it. The second, is a decent understanding of Datadog capabilities and prerequisites.    
-Now it's time to put it all together. In a typical 3-tier, web-scale application, Datadog has about five main capabilities (metrics, logs, traces, synthetics, RUM, and DBM), and many optional subcomponents and customizations. They are all managed from as few points as possible, but the most efficient deployment of Datadog requires some degree of pattern creation.
+Now it's time to put it all together. In a typical 3-tier, web-scale application, Datadog has about five main capabilities (metrics, logs, traces, synthetics, RUM, and DBM), and many optional sub-components and customizations. They are all managed from as few points as possible, but the most efficient deployment of Datadog requires some degree of pattern creation.
 
 #### Software Development Lifecycle
 
-To begin mapping out your deployment patterns, use the technology survey(\#anchor link), combine it with the [Datadog 101][7] training, and begin to develop a plan of action. Below is an example intended to be modified to suit your individual needs. It outlines the deployment pattern from the dimension of SDLC environment (dev,qa,stage,prod), but should be customized to the local standards and conditions. Begin setting expectations within your own Datadog user base what the term "Standard Datadog Deployment" actually means. 
+To begin mapping out your deployment patterns, use the technology survey, combine it with the [Datadog 101][7] training, and begin to develop a plan of action. Below is an example intended to be modified to suit your individual needs. It outlines the deployment pattern from the dimension of SDLC environment (dev,qa,stage,prod), but should be customized to the local standards and conditions. Begin setting expectations within your own Datadog user base what the term "Standard Datadog Deployment" actually means. 
 
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
