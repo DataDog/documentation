@@ -96,6 +96,7 @@ A few examples are:
 The [Datadog Agent][2] is open-source and published in Github. This is a useful resource for viewing configuration templates and specifications. Also, there are tools for host Agent Fleet Automation. Here are a few examples:
 
 * [Agent Config Template][3]   
+* [Agent Example Configs][13] 
 * [Integration Config Specs][4]   
 * [Fleet Automation][5]
 
@@ -120,3 +121,4 @@ To successfully create a new Datadog deployment, review the [plan][11] page to l
 [10]: https://app.datadoghq.com/monitors/recommended
 [11]: /service_owners_guide/plan
 [12]: /service_owners_guide/plan/#resource-tagging
+[13]: https://github.com/DataDog/datadog-agent/tree/main/examples

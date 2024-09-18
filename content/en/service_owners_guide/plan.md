@@ -32,19 +32,19 @@ Start whiteboarding early, collecting or consolidating a mental survey of your o
 
 ## General best practices 
 
-Datadog has specialized tool-tips designed for every kind of material.  After completing the sizing exercise, you will understand the types of technologies you're working with, and can start mapping those to core products in Datadog.
+Datadog has specialized tool-tips designed for every kind of material. After completing the sizing exercise, you will understand the types of technologies you're working with, and can start mapping those to core products in Datadog. The first crucial step in your deployment is setting up and configuring proper tagging. Large-scale applications often run across multiple ephemeral containers or instances, and without proper tagging, monitoring these complex systems can become ineffective.
 
 ### Resource tagging 
 
-Datadog is a tool for correlating machine data across multiple dimensions of cardinality. It cross-references an individual data points regardless of type. For example, you can compare database host telemetry with web server host thread pool sizes, displaying all logs in-line. 
+Datadog is a tool for correlating telemetry data from multiple sources based on related dimensions. Those dimensions are defined by tags. This allows, for example, comparison between database host metrics, with web server host thread pools, with logs from both hosts, all in a single view.
 
 Hostname, cloud regions, OS version, and IP, are just some of the machine-generated unified vocabulary. Additionally, Datadog allows you to generate custom data terms such as cost-code, AppName, environment, and version.
 
-The real power of Datadog is its ability to contain and manage this unified vocabulary. The Datadog platform also has out-of-the-box data that is included. The application of the unified vocabulary concept, its management system, and Datadog's out-of-the-box options are combined into a concept called [Unified Service Tagging][1]
+The real power of Datadog is its ability to contain and manage this unified vocabulary. The Datadog platform also has out-of-the-box data that is included. The application of the unified vocabulary concept, its management system, and Datadog's out-of-the-box options are combined into a concept called [Unified Service Tagging][1].
 
 It is important to understand that tags are essentially `key:value` pairs or simple values such as "file-server" or "database", which add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, it's important to take advantage of the tagging capabilities that your platforms offer as Datadog automatically imports these tags through its integrations.
 
-For example, the [getting started with tagging][2] is a great place to start with this topic, but here are some additional highlights:
+For example, [Getting started with tagging][2], as well as Datadog's e-book on [Tagging Best Practices][42], is a great place to start with this topic, but here are some additional highlights:
 
 - A service is defined as a single application footprint, something with its own code repository.  
 - Abbreviations and acronyms can be simplified, for example "Prod" != "Production".  
@@ -163,11 +163,11 @@ We've highlighted some important wins and best practices with APM, RUM, Syntheti
 
 ### Availability, latency, and SSL expiration 
 
-Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates.
+Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates. Additionally the [ping][43] check can be utilized to test the reachability of a host and measures the round-trip time for messages sent from the check to the destination host.
 
 ### Network Monitoring
 
-Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits.  Use Datadog’s [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
+Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits.  Use Datadog's [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
 
 ## Ancillary products
 
@@ -304,3 +304,5 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [39]: https://docs.datadoghq.com/account_management/billing/aws/\#aws-resource-exclusion
 [40]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension\#metric-collection
 [41]: /service_owners_guide/build
+[42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
+[43]: /integrations/ping/

@@ -71,7 +71,7 @@ A common OOTB Dashboard is the AWS EC2 Overview Dashboard:
 The Datadog platform uses standard Restful API Key Authentication, and recommends that standard [API Key Security][14] and rotation be practiced. In addition, it is useful to organize the assignment of these keys to logical working groups to optimize the security profile and rotation operation.
 
 **Recommendation:**   
-Incorporate Datadog API and App Keys into local systems for key management. Organize keys into groups that can be easily maintained.   
+Incorporate Datadog API and App Keys into local systems for key management. Organize keys into groups that can be easily maintained. API keys can also be maintained using our [API key management][19] documentation.  
 
 ### RBAC objects roles, teams, and permission sets
 
@@ -114,3 +114,4 @@ Datadog service ownership does have a few common activities, but the needs in th
 [16]: https://docs.datadoghq.com/integrations/
 [17]: https://github.com/DataDog/datadog-agent/releases
 [18]: https://app.datadoghq.com/fleet
+[19]: /api/latest/key-management/

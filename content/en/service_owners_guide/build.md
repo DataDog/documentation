@@ -60,7 +60,7 @@ All the objects you create in Datadog, such as the dashboards, alerts, notebooks
 
 ## Provisioning
 
-In every enterprise IT environment, a provisioning process is essential for managing software titles and instances within the IT architecture. To effectively manage Datadog at scale, it should be integrated into this provisioning process. The straightforward installation model of the Datadog host Agent offers multiple ways to achieve this.   
+In every enterprise IT environment, a provisioning process is essential for managing software titles and instances within the IT architecture. To effectively manage Datadog at scale, it should be integrated into this provisioning process. The straightforward installation model of the [Datadog host Agent][5] offers multiple ways to achieve this.   
 
 ### Modular architecture
 
@@ -99,3 +99,4 @@ Review the Service Owners Guide [run][4] documentation to outline a maintenance 
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [3]: https://github.com/DataDog/datadog-sync-cli
 [4]: /service_owners_guide/run
+[5]: /agent/basic_agent_usage/

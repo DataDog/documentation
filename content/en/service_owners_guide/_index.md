@@ -11,7 +11,7 @@ further_reading:
 
 Datadog is a single observability platform that provides visibility into the health and performance of your underlying infrastructure, services, applications, and more. Its features and capabilities are vast and powerful, but it can be hard to know where to start or how to configure it optimally to fit your use case.
 
-If you've been tasked with designing, implementing, and managing an enterprise-grade installation of Datadog, you've come to the right place. Not to be confused with our [documentation][1], this guide provides best practices, standards, and examples to help you set up a production environment that matches your workloads and deployment needs, while avoiding large pitfalls down the road.
+If you've been tasked with designing, implementing, and managing an enterprise-grade installation of Datadog, you've come to the right place. In conjunction with our [documentation][1], this guide provides best practices, standards, and examples to help you set up a production environment that matches your workloads and deployment needs, while avoiding large pitfalls down the road.
 
 Once you've followed this guide to implement Datadog to scale with your organization, you can start managing your product efficiently without worrying about hardware refreshes, OS patches, server updates, or cluster re-balance details. Instead, you can focus on the refinements, analytics, and the data that comes with a well-formed observability system.  
 
