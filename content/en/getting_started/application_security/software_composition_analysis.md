@@ -46,7 +46,7 @@ This guide walks you through best practices for getting your team up and running
       1. To enable Software Composition Analysis (SCA) on GitHub repositories, click **Select Repositories** on your desired GitHub account and toggle **Enable Software Composition Analysis (SCA)** to enable for all repositories. If you do not see any GitHub accounts listed, [create a new GitHub App][14] to get started.
       {{< img src="/security/application_security/software_composition_analysis/SCA-github-all-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
       Optionally, you can select specific GitHub repositories to enable SCA by clicking the toggle for each repository.
-      {{< img src="/security/application_security/software_composition_analysis/SCA-github-all-repositories2.png" alt="enable SCA for all repositories" style="width:100%;" >}}
+      {{< img src="/security/application_security/software_composition_analysis/SCA-github-enabled-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
       2. To enable SCA on running services, click **Select Services**. A list of services should appear. 
          1. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. You should now see the number of selected services and their names. 
          2. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
