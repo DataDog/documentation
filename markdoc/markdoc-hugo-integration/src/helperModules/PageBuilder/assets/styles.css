@@ -13,6 +13,7 @@
     border: 1px solid lightgray;
     cursor: pointer;
     font-weight: bold;
+    font-size: 16px;
     border-radius: 5px;
 }
 .mdoc-pref__pill.selected {

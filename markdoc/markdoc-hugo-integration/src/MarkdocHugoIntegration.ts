@@ -62,7 +62,6 @@ export class MarkdocHugoIntegration {
           this.directories.prefsConfig + '/' + lang + '/option_sets'
         );
       } catch (e) {
-        console.log(JSON.stringify(e));
         // If no prefs config directory exists for this language,
         // assume no translated prefs exist
         if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
