@@ -42,7 +42,17 @@ The available operators in order of precedence:
     {{< nextlink href="/logs/explorer/calculated_fields/expression_language#logical" >}}Logical{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
 ### Arithmetic
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `abs(num value)` | Returns the absolute value of a number. | A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 <br> **Formula:** abs(`@client_latency` - `@server_latency`) <br> **Result:** 1 |
+| `ceil(num value)` | Rounds number up to the nearest integer. | A log event has the following attribute: `@value` = 2.2 <br> **Formula:** ceil(`@value`) <br> **Result:** 3 |
+| `floor(num value)` | Rounds number down to the nearest integer. | A log event has the following attribute: `@value` = 9.99 <br> **Formula:** floor(`@value`) <br> **Result:** 9 |
+| `max(num value [, num value, …])` | Finds maximum value amongst a set of numbers. | A log event has the following attribute: `@list_of_values` = [-1, 1, 5, 5] <br> **Formula:** max(`@list_of_values`) <br> **Result:** 5 |
+| `min(num value [, num value, …])` | Finds the minimum value amongst a set of numbers. | A log event has the following attribute: `@list_of_values` = [-1, 1, 5, 5] <br> **Formula:** min(`@list_of_values`) <br> **Result:** -1 |
+| `round(num value, int precision)` | Rounds a number. Optionally, define how many decimal places to maintain. | A log event has the following attribute: `@randInt` = -1234.01 <br> **Formula:** round(`@randInt`, -1) <br> **Result:** -1230 |
 
 <h4>abs(<i>num</i> value)</h4>
 
@@ -113,6 +123,20 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 </details>
 
 ### String
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `concat(str value [, expr value, …])` | Combines multiple values into a single string. | A log event has the following attributes: <br> - `@first_name` = "Bob" <br> - `@last_name` = "Smith" <br> **Formula:** concat(`@first_name`, `@last_name`) <br> **Result:** "Bob Smith" |
+| `lower(str string)` | Converts string to lowercase. | A log event has the following attribute: `@first_name` = "Bob" <br> **Formula:** lower(`@first_name`) <br> **Result:** "bob" |
+| `prefix(str string, int num_chars)` | Extracts a portion of text from the beginning of a string. | A log event has the following attribute: `@country` = "Canada" <br> **Formula:** upper(prefix(`@country`, 3)) <br> **Result:** "CAN" |
+| `proper(str string)` | Converts string to proper case. | A log event has the following attribute: `@name` = "bob SMITH" <br> **Formula:** proper(`@name`) <br> **Result:** "Bob Smith" |
+| `split_before(str string, str separator, int occurrence)` | Extracts the portion of text preceding a certain pattern in a string. | A log event has the following attribute: `@row_value` = "1,Bob,Smith" <br> **Formula:** split_before(`@row_value`, ",") <br> **Result:** "1" |
+| `split_after(str string, str separator, int occurrence)` | Extracts the portion of text following a certain pattern in a string. | A log event has the following attribute: `@row_value` = "1,Bob,Smith" <br> **Formula:** split_after(`@row_value`, ",", 2) <br> **Result:** "Smith" |
+| `substring(str string, int start, int end)` | Extracts a portion of text from the middle of a string. | A log event has the following attribute: `@row_value` = "1,Bob,Smith" <br> **Formula:** substring(`@row_value`, 3, 3) <br> **Result:** "Bob" |
+| `suffix(str string, int num_chars)` | Extracts a portion of text from the end of a string. | A log event has the following attribute: `@url` = "www.datadoghq.com" <br> **Formula:** suffix(`@url`, 4) <br> **Result:** ".com" |
+| `textjoin(str delimiter, expr value [, expr value, …])` | Combines multiple values into a single string with a delimiter in between. | A log event has the following attributes: <br> - `@first_name` = "Bob" <br> - `@last_name` = "Smith" <br> **Formula:** textjoin(", ", `@last_name`, `@first_name`) <br> **Result:** "Smith, Bob" |
+| `upper(str string)` | Converts string to uppercase. | A log event has the following attribute: `@first_name` = "Bob" <br> **Formula:** upper(`@first_name`) <br> **Result:** "BOB" |
+
 
 <h4>concat(<i>str</i> value [, <i>expr</i> value, …])</h4>
 
@@ -229,6 +253,13 @@ Converts string to uppercase.
 </details>
 
 ### Logical
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `case(expr condition, expr value_if_true [, expr condition, expr value_if_true …], expr value_else)` | Evaluates a series of conditions and returns a value accordingly. | |
+| `if(expr condition, expr if_true, expr if_false)` | Evaluates a condition and returns a value accordingly. | A log event has the following attributes: <br> - `@origin_country` = "USA" <br> - `@destination_country` = "Canada" <br> - `@origin_continent` = "NA" <br> - `@destination_continent` = "NA" <br> **Formula:** if(`@origin_country` == `@destination_country`, "national", if(`@origin_continent` == `@destination_continent`, "continental", "intercontinental")) <br> **Result:** "continental" |
+| `is_null(expr value)` | Checks if an attribute or expression is null. | A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 <br> **Formula:** is_null(`@users_online` / `@max_capacity`) <br> **Result:** TRUE |
+
 
 <h4>case(<i>expr</i> condition, <i>expr</i> value_if_true [, <i>expr</i> condition, <i>expr</i> value_if_true …], <i>expr</i> value_else)</h4>
 
