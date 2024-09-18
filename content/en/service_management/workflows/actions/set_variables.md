@@ -46,7 +46,7 @@ You can access a variable in your workflow using `{{ Variables.variableName }}`.
 
 Setting a variable inside a **For loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a variable and append the data you need to it on each iteration. Outside of the loop, you can access the variable and handle the data you collected.
 
-To avoid type errors resulting from undefined variables, assign a variable before you use it in a loop. In the example below, the variable `evenList` is set to an empty array before it is used in the loop.
+To avoid a type error resulting from an undefined variable, assign a variable before you use it in a loop. In the example below, the variable `evenList` is set to an empty array before it is used in the loop.
 
 {{< img src="service_management/workflows/loop.png" alt="This workflow sets a variable before it is used in a loop." style="width:100%;" >}}
 
