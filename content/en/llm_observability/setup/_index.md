@@ -134,25 +134,6 @@ def extract_data(document: str, generate_summary: bool):
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Annotating Prompt Templates" %}}
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-def llm_call(user_message: str):
-    with LLMObs.llm(name="extract_data") as span:
-        ... # user application logic
-        LLMObs.annotate(
-            prompt = {
-                "variables": {"user_message": user_message},
-                "template": prompt_template,
-                "id": "generate_response",
-                "version": "0.0.1"
-            },
-            input_data= ...,
-            output_data= ...,
-        )
-{{< /code-block >}}
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Nesting spans
