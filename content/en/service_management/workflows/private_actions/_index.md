@@ -36,7 +36,7 @@ A private action runner can be used with App Builder, Workflow Automation, or bo
 
 The following is a general overview diagram for private actions:
 
-{{< img src="service_management/private_action_runner-diagram_general.png" alt="Overview diagram illustrating how Private actions interact with Datadog and the user's browser" style="width:100%;" >}}
+{{< img src="service_management/private_action_runner-diagram_general.png" alt="Overview diagram illustrating how Private actions interact with Datadog and the user's browser" style="width:90%;" >}}
 
 ### Mode differences
 
@@ -50,7 +50,7 @@ When your private action runner is in App Builder mode, queries that call your p
 
 In the following diagram, **App Management** refers to backend App Builder actions that are unrelated to the Private Action runner, such as deleting an app.
 
-{{< img src="service_management/private_action_runner-diagram_app_builder.png" alt="Overview diagram illustrating how Private actions work in App Builder mode, including authentication" style="width:100%;" >}}
+{{< img src="service_management/private_action_runner-diagram_app_builder.png" alt="Overview diagram illustrating how Private actions work in App Builder mode, including authentication" style="width:90%;" >}}
 
 #### Authentication
 
@@ -64,7 +64,7 @@ In App Builder mode, the user's browser talks directly to your private action ru
 
 If your private action runner runs in Workflows-only mode, you do not need to perform any setup beyond the initial enrollment. The private actions runner continuously polls for tasks from your Datadog account, executes them by interacting with your internal service, and reports the result back to Datadog.
 
-{{< img src="service_management/private_action_runner-diagram_workflow.png" alt="Overview diagram illustrating how Private actions work in Workflow Automation mode" style="width:100%;" >}}
+{{< img src="service_management/private_action_runner-diagram_workflow.png" alt="Overview diagram illustrating how Private actions work in Workflow Automation mode" style="width:90%;" >}}
 
 ### Both
 
