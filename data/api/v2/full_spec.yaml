@@ -16463,6 +16463,18 @@ components:
     PowerpackTemplateVariable:
       description: Powerpack template variables.
       properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
         defaults:
           description: One or many template variable default values within the saved
             view, which are unioned together using `OR` if more than one is specified.
@@ -16474,6 +16486,12 @@ components:
         name:
           description: The name of the variable.
           example: datacenter
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with
+            this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
           type: string
       required:
       - name
