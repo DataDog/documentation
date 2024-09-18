@@ -3,7 +3,7 @@ title: Nested Queries
 further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
-  text: "Dashboard Quering"
+  text: "Dashboard Querying"
 ---
 
 ## Overview
@@ -119,10 +119,8 @@ In JSON or API format:
  {{< img src="/dashboards/querying/nested-queries-higher-res-example.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
-
-
-[1]: /dashboards/functions/rollup/
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /dashboards/functions/rollup/

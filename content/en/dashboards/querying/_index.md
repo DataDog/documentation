@@ -137,18 +137,18 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 Datadog’s nested queries feature allows you to add additional layers of aggregation on the results of existing queries in time and space. This functionality is available through the JSON tab or the API, and it supports various aggregation functions to enhance data analysis. Nested queries help you achieve multilayer aggregation, compute percentiles, and standard deviations on metrics, and run higher resolution queries over historical time frames.
 
-For more information, see the [Nested Queries][] documentation
+For more information, see the [Nested Queries][13] documentation.
 
 
 ### Advanced graphing
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][13].
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][14].
 
 Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][14] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
@@ -217,7 +217,7 @@ Click **Done** to save your work and exit the editor. You can always come back t
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][16].
+View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][16] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][17].
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
 
@@ -254,7 +254,8 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [10]: /metrics/#time-aggregation
 [11]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [12]: /dashboards/functions/rollup/
-[13]: /dashboards/functions/#function-types
-[14]: /metrics/advanced-filtering/#boolean-filtered-queries
-[15]: /dashboards/widgets/timeseries/#event-overlay
-[16]: /logs/explorer/search_syntax/
+[13]: /metrics/nested_queries
+[14]: /dashboards/functions/#function-types
+[15]: /metrics/advanced-filtering/#boolean-filtered-queries
+[16]: /dashboards/widgets/timeseries/#event-overlay
+[17]: /logs/explorer/search_syntax/
