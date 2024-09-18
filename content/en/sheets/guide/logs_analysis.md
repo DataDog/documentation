@@ -71,7 +71,7 @@ You have a retail web application that generates a series of error logs related 
      =REGEXEXTRACT(#'Message', "Failed (?:to )?(\w+)")
      ```
 
-### Analyze error types**:
+### Analyze error types:
 1. Create a pivot table to count the number of errors per error type (getting, calculating, handling).
 1. Summarize the data to understand the distribution and total impact of each error type.
       {{< img src="/sheets/guide/logs_analysis/calculated_column_pivot_table.mp4" alt="Video walkthrough of the steps to analyze error logs" video=true >}}
