@@ -13,7 +13,7 @@ further_reading:
 
 Datadog Sheets is a spreadsheet tool that you can populate with Datadog data to perform complex analyses and build reports without requiring technical expertise. 
 
-This guide walks through creating a table of error logs, adding calculated columns to extract specific error details from error messages, using pivot tables to summarize the data and identify patterns, and offers an [example use case](#example-use-case-analyzing-retail-application-error-logs) of this workflow.
+This guide walks through creating a table of error logs, adding calculated columns to extract specific error details from error messages, and using pivot tables to summarize the data and identify patterns. It also offers an [example use case](#example-use-case-analyzing-retail-application-error-logs) of this workflow.
 
 ## Creating a Table in Sheets
 
@@ -49,7 +49,7 @@ Pivot tables help you summarize and organize large datasets to find patterns and
 
 ### Problem Statement
 
-You have a retail web application that generates a series of error logs related to "returns." You want to analyze different types of errors causing these issues.
+You have a retail web application that generates a series of error logs related to `returns`. You want to analyze what types of errors are causing these issues.
 
 ### Example Logs
 
@@ -80,7 +80,7 @@ You have a retail web application that generates a series of error logs related 
    - Summarize the data to understand the distribution and total impact of each error type.
         {{< img src="/sheets/guide/logs_analysis/calculated_column_pivot_table.mp4" alt="Video walkthrough of the steps to analyze error logs" video=true >}}
 
-By following these steps, you can effectively analyze your error logs, identify patterns, and gain insights into the underlying issues causing errors in your retail application. Apply this example to your use case to gain a deeper understanding of your logs and make data-driven decisions.
+By following these steps, you can effectively analyze your error logs, identify patterns, and gain insights into the underlying issues causing errors in your retail application. Apply this example to your logs to gain a deeper understanding of your logs and make data-driven decisions.
 
 
 ## Further reading

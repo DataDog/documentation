@@ -56,7 +56,7 @@ Pivot tables help you summarize and organize large datasets to find patterns and
 
 ### Problem Statement
 
-You have a web application and want to understand how errors are impacting your premium users.
+You have a web application and want to understand how errors are impacting your application's premium users.
 
 ### Steps to Analyze
 
