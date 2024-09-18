@@ -2254,6 +2254,73 @@ components:
       - storage_account
       - storage_container
       type: object
+    BillingDimensionsMappingBody:
+      description: Billing dimensions mapping data.
+      items:
+        $ref: '#/components/schemas/BillingDimensionsMappingBodyItem'
+      type: array
+    BillingDimensionsMappingBodyItem:
+      description: The definition of `BillingDimensionsMappingBodyItem` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BillingDimensionsMappingBodyItemAttributes'
+        id:
+          description: ID of the billing dimension.
+          type: string
+        type:
+          $ref: '#/components/schemas/ActiveBillingDimensionsType'
+      type: object
+    BillingDimensionsMappingBodyItemAttributes:
+      description: Mapping of billing dimensions to endpoint keys.
+      properties:
+        endpoints:
+          description: List of supported endpoints with their keys mapped to the billing_dimension.
+          items:
+            $ref: '#/components/schemas/BillingDimensionsMappingBodyItemAttributesEndpointsItems'
+          type: array
+        in_app_label:
+          description: Label used for the billing dimension in the Plan & Usage charts.
+          example: APM Hosts
+          type: string
+        timestamp:
+          description: 'Month in ISO-8601 format, UTC, precise to second: `[YYYY-MM-DDThh:mm:ss]`.'
+          format: date-time
+          type: string
+      type: object
+    BillingDimensionsMappingBodyItemAttributesEndpointsItems:
+      description: An endpoint's keys mapped to the billing_dimension.
+      properties:
+        id:
+          description: The URL for the endpoint.
+          example: api/v1/usage/billable-summary
+          type: string
+        keys:
+          description: The billing dimension.
+          example:
+          - apm_host_top99p
+          - apm_host_sum
+          items:
+            example: apm_host_top99p
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/BillingDimensionsMappingBodyItemAttributesEndpointsItemsStatus'
+      type: object
+    BillingDimensionsMappingBodyItemAttributesEndpointsItemsStatus:
+      description: Denotes whether or not mapping keys were available for this endpoint.
+      enum:
+      - OK
+      - NOT_FOUND
+      type: string
+      x-enum-varnames:
+      - OK
+      - NOT_FOUND
+    BillingDimensionsMappingResponse:
+      description: Billing dimensions mapping response.
+      properties:
+        data:
+          $ref: '#/components/schemas/BillingDimensionsMappingBody'
+      type: object
     BulkMuteFindingsRequest:
       description: The new bulk mute finding request.
       properties:
@@ -41179,6 +41246,71 @@ paths:
       x-menu-order: 38
       x-undo:
         type: safe
+  /api/v2/usage/billing_dimension_mapping:
+    get:
+      description: 'Get a mapping of billing dimensions to the corresponding keys
+        for the supported usage metering public API endpoints.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
+      operationId: GetBillingDimensionMapping
+      parameters:
+      - description: Datetime in ISO-8601 format, UTC, for mappings beginning this
+          month. Defaults to the current month.
+        in: query
+        name: filter[month]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: String to specify whether to retrieve active billing dimension
+          mappings for the contract or all available mappings. Allowed views are `active`
+          and `all`. Defaults to `active`.
+        in: query
+        name: filter[view]
+        required: false
+        schema:
+          default: active
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/BillingDimensionsMappingResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get billing dimension mapping for usage endpoints
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/usage/cost_by_org:
     get:
       deprecated: true
