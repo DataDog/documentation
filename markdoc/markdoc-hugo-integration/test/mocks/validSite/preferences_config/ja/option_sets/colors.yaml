@@ -1,0 +1,17 @@
+traffic_light_color_options:
+  - display_name: Red
+    id: red
+  - display_name: Yellow
+    id: yellow
+  - display_name: Green
+    id: green
+    default: true
+
+primary_color_options:
+  - display_name: Red
+    id: red
+  - display_name: Yellow
+    id: yellow
+  - display_name: Blue
+    id: blue
+    default: true
