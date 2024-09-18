@@ -28,7 +28,7 @@ Private Actions are in beta. Use this form to request access today.
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network using Docker or [Kubernetes][1] and pair the runner with a [connection][2].
 
-The runner authenticates using a private key that is generated when you first start the runner. This private key is never accessible by Datadog and ensures you exclusive access. Datadog uses a public key derived from the private key as the means to authenticate specific runners.
+When you first start the runner, it generates a private key for authentication with Datadog's servers. This private key is never accessible by Datadog and ensures you exclusive access. Datadog uses a public key derived from the private key as the means to authenticate specific runners.
 
 ## Modes
 
@@ -42,11 +42,11 @@ The following is a general overview diagram for private actions:
 
 Distinctions between App Builder and Workflows modes include their triggering mechanisms and operational models. App Builder is human-driven, meaning that each action is initiated by user interaction with an App. In contrast, Workflows can run automatically without direct human intervention. Another key difference is that App Builder mode operates through a push model, where actions are triggered by directly accessing a URL on the runner. Conversely, Workflows use a pull model, where the runner periodically checks for tasks to execute. This difference in models results in distinct data handling practices. In Workflows mode, the runner reports the result of private action executions to Datadog. In contrast, App Builder mode does not send your data to Datadog, keeping it in your private environment.
 
-The difference in models can also result in varying latencies. The push model in App Builder mode might lead to more immediate responses, whereas the pull model in Workflows mode might introduce delays based on polling frequency.
+The difference in models can result in varying latencies. The push model in App Builder mode might lead to more immediate responses, whereas the pull model in Workflows mode might introduce delays based on polling frequency.
 
 ### App Builder mode
 
-When your private action runner is in App Builder mode, queries that call your private services are sent directly from the user's browser to the private action runner, which then proxies requests to your services. At no point does your data enter Datadog when the runner is in App Builder mode; it communicates with Datadog only for enrollment and authentication purposes.
+When your private action runner is in App Builder mode, queries that call your private services are sent directly from the user's browser to the private action runner, which proxies requests to your services. At no point does your data enter Datadog when the runner is in App Builder mode; it communicates with Datadog only for enrollment and authentication purposes.
 
 In the following diagram, **App Management** refers to backend App Builder actions that are unrelated to the Private Action runner, such as deleting an app.
 
@@ -62,7 +62,7 @@ In App Builder mode, the user's browser talks directly to your private action ru
 
 ### Workflow Automation mode
 
-If your private action runner runs in Workflows-only mode, you do not need to perform any setup beyond the initial enrollment. The private actions runner continuously polls for tasks from your Datadog account, executes them by interacting with your internal service, and reports the result back to Datadog.
+If your private action runner runs in Workflows-only mode, you do not need to perform any setup beyond the initial enrollment. The private action runner continuously polls for tasks from your Datadog account, executes them by interacting with your internal service, and reports the result back to Datadog.
 
 {{< img src="service_management/private_action_runner-diagram_workflow.png" alt="Overview diagram illustrating how Private actions work in Workflow Automation mode" style="width:90%;" >}}
 
