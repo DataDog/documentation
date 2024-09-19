@@ -250,8 +250,6 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Wrap your password in single quotes if a special character is present.
-
 2. [Restart the Agent][10].
 
 ### Collecting logs (optional)
@@ -307,6 +305,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
 ## Example Agent Configurations
+
 {{% dbm-postgres-agent-config-examples %}}
 
 ## Troubleshooting
