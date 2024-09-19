@@ -11,7 +11,7 @@ further_reading:
   text: "Domain Allowlist API"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
+{{< callout url="https://www.datadoghq.com/preview/domain-allowlist/" >}}
   Domain Allowlist is available in Preview for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
 {{< /callout >}} 
 
