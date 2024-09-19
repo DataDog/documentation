@@ -67,7 +67,7 @@ Use [Synthetic browser tests][14] to monitor how your customers experience your 
 
 Use [Synthetic mobile application tests][21] to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
 
-{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
+{{< img src="synthetics/mobile_app_main_page.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
 ## Launch private locations
 
