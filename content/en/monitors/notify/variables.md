@@ -299,13 +299,14 @@ If your facet has periods, use brackets around the facet, for example:
 {{< /tabs >}}
 
 #### Customize the notification based on the group
-When your query is grouped by specific dimensions you can further enrich the notification to dynamically include metadata associated with the group.
+
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group.
 
 ##### Query group by host
 
 If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
 
-Some specific host metadata variables are available:
+Specific host metadata variables:
 
 - Agent Version: `{{host.metadata_agent_version}}`
 - Machine: `{{host.metadata_machine}}`
@@ -316,28 +317,29 @@ Some specific host metadata variables are available:
 
 If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
 
-Some specific namespace metadata variables are available:
+Namespace metadata variables:
 
 - Cluster name: `{{kube_namespace.cluster_name}}`
 - Namespace name: `{{kube_namespace.display_name}}`
 - Namespace status: `{{kube_namespace.status}}`
 - Namespace labels: `{{kube_namespace.labels}}`
 
-The full list of available attributes is:
+The following table contains all available attributes:
 
 | Variable syntax   | First level attributes |
 |-------------------|------------------------|
 | `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
 
 ##### Query group by pod_name and kube_namespace and kube_cluster_name
+
 If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
 
-Some specific pod metadata variables are available:
+Pod metadata variables:
 - Cluster name: `{{pod_name.cluster_name}}`
 - Pod name: `{{pod_name.name}}`
 - Pod phase: `{{pod_name.phase}}`
 
-The full list of available attributes is:
+The following table contains all available attributes:
 
 | Variable syntax   | First level attributes |
 |-------------------|------------------------|
@@ -503,7 +505,9 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
 
-If you build dynamic handles with attributes that might not be present, the variable renders empty in the notification message and the handle will be invalid. To avoid missing notifications, when using dynamic handles with these variables make sure to add a fallback handle:   
+When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle. 
+
+To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
 ```text
 {{#is_match "kube_namespace.owner" ""}}
