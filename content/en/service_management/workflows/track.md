@@ -38,16 +38,41 @@ To see who edited a workflow, use Audit Trail.
 
 See [Workflow notifications][3] for instructions on using built-in workflow notifications.
 
+
 ## Track Workflow metrics with a Datadog monitor
 
-To create a monitor that tracks when a workflow starts, perform the following steps:
+You can use Datadog monitors to track various Workflow metrics.
+
+For example, to create a monitor that tracks whether daily workflow executions exceed a certain threshold, perform the following steps:
 
 1. Go to [New Monitor][4] and select the **Metric** monitor type.
 1. Under **Define the metric**, for **a**, fill in `datadog.workflows.executions.started`.
+1. _Optionally_, to restrict the monitor to a specific workflow, for **from**, fill in `workflow_id:[WORKFLOW-ID]`, replacing `[WORKFLOW-ID]` with the ID for your workflow.
+1. For **Evaluation Details**, use the following values:
+    - **Evaluate the**: `sum`
+    - **Of the query over the**: `last 1 day`.
+1. For **Set alert conditions**, choose **above**, then fill in an alert and warning treshold. For example, you could fill in an **Alert threshold** of `200` and a **Warning threshold** of `150`.
+1. Under **Configure notifications & automations**, name your workflow, then fill in message text. For example, you could use message text like the following:
+
+    {{< code-block lang="none" >}}@slack-alert-channel
+
+{{#is_warning}}
+Workflow has executed {{warn_threshold}} times in the last day; manual action might be needed to avoid alerting.
+{{/is_warning}}
+{{#is_alert}}
+Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
+{{/is_alert}}
+{{< /code-block >}}
+1. Click **Create**.
 
 
+## View workflow events in Event Manager
 
-Optionally, to restrict a monitor to a specific workflow, for **from**, you can fill in `workflow_id:[WORKFLOW-ID]`, replacing `[WORKFLOW-ID]` with the ID for your workflow.
+You can use [Event Manager][5] to view workflow start and completion events by filtering on `source:workflow_automation`.
+
+To see events for a specific workflow, in the **Search facets** box, search for `workflow.workflow_id`. You can select a specific set of IDs to view only events for those workflows.
+
+You can also filter the output by **Status** to see only `info`, `warn`, or `error` messages.
 
 
 ## Further reading
@@ -61,3 +86,4 @@ Optionally, to restrict a monitor to a specific workflow, for **from**, you can 
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /service_management/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create
+[5]: https://app.datadoghq.com/event/explorer?query=source%3Aworkflow_automation
