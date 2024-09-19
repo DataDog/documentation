@@ -31,7 +31,7 @@ If you originally signed up with a different login method, for example, Google S
 
 The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically added to Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog and these accounts are shared with the entire team by default.
 
-{{< img src="cloudcraft/getting-started/datadog-integration/manage-aws-accounts.png" alt="" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/datadog-integration/manage-aws-accounts.png" alt="Manage AWS accounts interface in Cloudcraft with Datadog integration." responsive="true" style="width:100%;">}}
 
 To visualize and diagram resources in Cloudcraft, [ensure resource collection is enabled in Datadog][2]. When resource collection is enabled, Datadog collects information about your AWS resources by making read-only API calls to your AWS account. Cloudcraft relies on this information for visualizing your infrastructure. Without this feature, your AWS accounts will still be added to Cloudcraft, but no resources from them will be available for diagramming.
 
@@ -47,7 +47,7 @@ If you don't have any AWS accounts added in Datadog, you'll need to add them fir
 
 AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the **Live** tab in Cloudcraft.
 
-{{< img src="cloudcraft/getting-started/datadog-integration/bits-icon.png" alt="" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/datadog-integration/bits-icon.png" alt="Cloud account selector displaying AWS accounts managed in Cloudcraft and Datadog integration." responsive="true" style="width:100%;">}}
 
 To manage the visibility settings of these accounts:
 
