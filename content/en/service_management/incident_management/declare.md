@@ -45,7 +45,7 @@ You can declare an incident directly from a graph by clicking the export button 
 
 ## From a Synthetic test
 
-Create incidents directly from your [Synthetic tests page][8] from the Actions dropdown. Select **Declare incident** to open an incident creation modal, where a summary of the test is added to your incident timeline, allowing you to pursue the investigation from there.
+Create incidents directly from a [Synthetic test][8] through the Actions dropdown. Select **Declare incident** to open an incident creation modal, where a summary of the test is added to your incident timeline, allowing you to pursue the investigation from there.
 
 {{< img src="service_management/incidents/declare/synthetics_declare_incident.png" alt="Declare an incident from a Synthetic test." style="width:90%;" >}}
 
