@@ -56,8 +56,7 @@ For example, you can:
 - Get valuable insights about your customers' behavior by
 making data-driven decisions to improve your store
 - Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
-- Use [funnel analysis][4] to better understand the customer journey, or
-- [Generate metrics][5] from those newly captured sessions
+- [Generate metrics][5] from newly captured sessions
 
 ## Further Reading
 
