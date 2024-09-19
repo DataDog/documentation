@@ -32,22 +32,22 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Enable
 
-1. Refer to the [Library Compatibility Requirements][12] page to verify if the Datadog Tracing Library used by your application or service supports the Software Composition Analysis (SCA) capability for your application's or service's programming language.
+1. See the [Library Compatibility Requirements][12] page to verify if the Datadog Tracing Library used by your application or service supports the Software Composition Analysis (SCA) capability for your application's or service's programming language.
 2. Enable Software Composition Analysis on your services.
-   1. By the Quick Start Guide:
-      1. In Datadog, go to [Application Security > Settings > Quick Start Guide][4].
-      2. Expand **Enable Vulnerability Detection**, select **Open source vulnerabilities**, and click **Start Activation**. A list of services appears.
-      3. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. The number of selected services and their names are listed.
-      4. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
+   a. By the Quick Start Guide:
+      i. In Datadog, go to [Application Security > Settings > Quick Start Guide][4].
+      ii. Expand **Enable Vulnerability Detection**, select **Open source vulnerabilities**, and click **Start Activation**. A list of services appears.
+      iii. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. The number of selected services and their names are listed.
+      iv. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
       {{< img src="/security/application_security/software_composition_analysis/APM_SCA-enablement-quick-start-guide.mp4" alt="quick start guide in the Datadog UI" video="true">}}
-3. By the Settings page:
-   1. In **Datadog**, go to [Application Security > Settings][13].
-   2. Click Get Started to expand the Software Composition Analysis (SCA) capability.
-      1. To enable Software Composition Analysis (SCA) on GitHub repositories, click **Select Repositories** on your desired GitHub account and toggle **Enable Software Composition Analysis (SCA)** to enable for all repositories. If you do not see any GitHub accounts listed, [create a new GitHub App][14] to get started.
+   b. By the Settings page:
+   a. In **Datadog**, go to [Application Security > Settings][13].
+   b. Click Get Started to expand the Software Composition Analysis (SCA) capability.
+      i. To enable Software Composition Analysis (SCA) on GitHub repositories, click **Select Repositories** on your desired GitHub account and toggle **Enable Software Composition Analysis (SCA)** to enable for all repositories. If you do not see any GitHub accounts listed, [create a new GitHub App][14] to get started.
       {{< img src="/security/application_security/software_composition_analysis/SCA-github-all-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
       Optionally, you can select specific GitHub repositories to enable SCA by clicking the toggle for each repository.
       {{< img src="/security/application_security/software_composition_analysis/SCA-github-enabled-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
-      2. To enable SCA on running services, click **Select Services**. A list of services should appear. 
+      ii. To enable SCA on running services, click **Select Services**. A list of services should appear. 
          1. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. You should now see the number of selected services and their names. 
          2. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
         {{< img src="/security/application_security/software_composition_analysis/SCA-enablement-settings-services.mp4" alt="SCA enablement in the Datadog UI" video="true">}}
