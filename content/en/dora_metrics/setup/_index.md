@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The four DORA Metrics are calculated based on two types of events which support different data sources.
+The four DORA Metrics are calculated based on two types of events that support different data sources.
 
 [**Deployment events**][8]
 : Indicate that a new deployment has occurred for a service in a specific environment. Deployment events are used to compute deployment frequency, change lead time, and change failure rate.
@@ -37,7 +37,7 @@ The four DORA Metrics are calculated based on two types of events which support 
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for incident events. See the respective documentation to set up a data source for your incident events:" >}}
   {{< nextlink href="/dora_metrics/setup/failures?tab=pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/setup/failures?tab=incident_api" >}}Incident Event API{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=api" >}}Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Limitations

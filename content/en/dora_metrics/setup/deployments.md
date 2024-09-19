@@ -62,7 +62,7 @@ The following attributes are required:
 - `finished_at`: The time the deployment finished.
 - `service`: The service that was deployed. If the provided service is registered in the [Service Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
 
-The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. You can optionally specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
+The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. Optionally, you can specify a `team` attribute to associate a deployment with a different `team` than is found automatically for the service. You can also specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
 
 ### API (cURL) Example
 
@@ -85,7 +85,8 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
           "commit_sha": "66adc9350f2cc9b250b69abddab733dd55e1a588",
           "repository_url": "https://github.com/organization/example-repository"
         },
-        "env": "prod"
+        "env": "prod",
+        "team": "backend"
       }
     }
   }
