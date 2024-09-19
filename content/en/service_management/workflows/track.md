@@ -47,11 +47,11 @@ The list of available metrics is:
 
 | Metric | Description |
 | ------ | ----------- |
-| `datadog.workflows.executions.started`         | Tracks the number of workflow instances that have been started.   |
-| `datadog.workflows.executions.completed`       | Tracks the number of workflow instances that have completed.      |
-| `datadog.workflows.steps.executions.started`   | Tracks the number of workflow instance steps that have started.   |
-| `datadog.workflows.steps.executions.completed` | Tracks the number of workflow instance steps that have completed. |
-| `datadog.workflows.count`                      | Tracks the number of non-deleted workflows.                       |
+| `datadog.workflows.count`                      | Number of non-deleted workflows.                       |
+| `datadog.workflows.executions.started`         | Number of workflow instances that have started.   |
+| `datadog.workflows.executions.completed`       | Number of workflow instances that have completed.      |
+| `datadog.workflows.steps.executions.started`   | Number of workflow instance steps that have started.   |
+| `datadog.workflows.steps.executions.completed` | Number of workflow instance steps that have completed. |
 
 To create a monitor that tracks whether daily workflow executions exceed a certain threshold, perform the following steps:
 
