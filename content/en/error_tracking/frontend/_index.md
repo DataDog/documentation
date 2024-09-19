@@ -2,6 +2,8 @@
 title: Frontend Error Tracking
 is_beta: true
 private: false
+aliases:
+  - /error_tracking/standalone_frontend/
 further_reading:
   - link: '/error_tracking/standalone_frontend/collecting_browser_errors/'
     tag: Documentation

@@ -23,7 +23,7 @@ assets:
     source_type_name: RapDev ServiceNow
   logs: {}
   monitors:
-    ServiceNow Pending Approval: assets/monitors/servicenow_pending_approval_monitor.json
+    ServiceNow Records Pending Approval: assets/monitors/servicenow_pending_approval_monitor.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -34,7 +34,7 @@ categories:
 - クラウド
 - インシデント
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
