@@ -389,7 +389,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `prompt` 
 : optional - _dictionary_ 
-<br />A dictionary that represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`. The `Prompt` object can also be imported from `ddtrace.utils` and passed in as the `prompt` argument. **Note**: This argument is only applicable to LLM spans.
+<br />A dictionary that represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`. `prompt`  can also be set using the `ddtrace.llmobs.utils.Prompt` constructor class. **Note**: This argument is only applicable to LLM spans.
 
 `metadata` 
 : optional - _dictionary_
