@@ -5,8 +5,9 @@ further_reading:
 - link: "/integrations/mongo/"
   tag: "Documentation"
   text: "Basic MongoDB Integration"
-
 ---
+
+<div class="alert alert-info">Database Monitoring for MongoDB is in Preview. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
 Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB Atlas instances. This guide outlines the steps to set up Database Monitoring for MongoDB Atlas.
 
