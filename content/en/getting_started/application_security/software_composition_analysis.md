@@ -62,8 +62,8 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 
 #### Enable SCA on running services
 
-1. click **Select Services**. A list of services should appear.
-2. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. You should now see the number of selected services and their names.
+1. Click **Select Services**. A list of services should appear.
+2. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. You should see the number of selected services and their names.
 3. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
 <br>      
 
@@ -114,7 +114,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
+3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:
