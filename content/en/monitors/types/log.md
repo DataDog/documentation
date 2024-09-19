@@ -114,7 +114,7 @@ Include a sample of 10 logs in the alert notification:
 
 [1]: /logs/
 [2]: /logs/log_configuration/indexes/
-[3]: https://app.datadoghq.com/monitors#create/log
+[3]: https://app.datadoghq.com/monitors/create/log
 [4]: /logs/explorer/search/
 [5]: /logs/explorer/facets/
 [6]: /logs/explorer/facets/#measures

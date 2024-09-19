@@ -12,7 +12,7 @@ further_reading:
   tag: 설명서
   text: Service Definition API로 서비스 등록하기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-  tag: Terraform
+  tag: 외부 사이트
   text: Terraform을 사용하여 서비스 정의 생성 및 관리
 - link: /tracing/service_catalog/guides/understanding-service-configuration
   tag: 가이드
@@ -38,6 +38,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
   tag: 블로그
   text: Datadog Service Catalog를 사용한 엔드투엔드 서비스 소유권 모범 사례
+- link: https://www.datadoghq.com/blog/service-catalog-schema-v3/
+  tag: 블로그
+  text: Service Catalog 스키마 버전 3.0으로 개발자 경험 및 협업 개선
 title: Datadog 서비스 카탈로그
 ---
 
@@ -74,7 +77,7 @@ Datadog [Service Catalog][1]는 소유권 메타데이터, 성능 인사이트, 
 - 누락된 SLO, 모니터 또는 소유권이 없는 서비스와 같은 문제를 발견합니다.
 
 #### 인시던트 발생 시 협업 간소화
-- 모니터링 및 문제 해결 세부 사항에 대한 간소화된 액세스와 함께 올바른 소유권 정보 및 커뮤니케이션 채널을 설정하여 모든 사람의 비상대기 경험을 개선합니다.
+- 모니터링 및 문제 해결 세부 사항에 대한 간소화된 액세스와 함께 올바른 소유권 정보 및 커뮤니케이션 채널을 설정하여 모든 사람의 비상대기 경험을 개선합니다.
 - 엔지니어가 이미 사용하고 있는 옵저버빌리티 도구에 직접 솔루션 및 문제 해결 도구(예: 런북 및 설명서)에 대한 링크를 포함합니다.
 - 신뢰도를 높이고 업스트림 및 다운스트림 서비스와 종속성의 소유자를 찾는 작업을 간소화하여 인시던트 복구 속도를 높입니다.
 

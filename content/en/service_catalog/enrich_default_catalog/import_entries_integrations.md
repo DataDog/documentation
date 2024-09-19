@@ -1,9 +1,6 @@
 ---
 title: Import Entries from External Integrations
 further_reading:
-- link: "/tracing/service_catalog/adding_metadata"
-  tag: "Documentation"
-  text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
   text: "Create and manage service definitions with Terraform"
@@ -41,6 +38,8 @@ Upon import, the following occurs:
 - `metadata.description` gets mapped to `description`
 - `spec.system` gets mapped to `application`
 - Other `spec` values get mapped to custom tags
+
+**Note**: The Service Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:Component`, the entire `catalog-info.yaml file` is rejected.
 
 ## ServiceNow
 
