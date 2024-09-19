@@ -95,7 +95,7 @@ Return to Okta for the next set of configuration steps.
 
 ## Service Provider (SP) initiated login
 
-To log in to Datadog from the service provider, you need the single sign-on (SSO) URL. You can find your SSO URL in two ways: on the SAML configuration page, or through email.
+To log in to Datadog using service provider-initiated login (SP-initiated SSO), you need the single sign-on (SSO) URL. You can find your SSO URL in two ways: on the SAML configuration page, or through email.
 
 ### SAML configuration page
 The Datadog [SAML configuration page][6] displays the SSO URL next to the **Single Sign-on URL** heading.
