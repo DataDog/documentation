@@ -43,7 +43,17 @@ See [Workflow notifications][3] for instructions on using built-in workflow noti
 
 You can use Datadog monitors to track various Workflow metrics.
 
-For example, to create a monitor that tracks whether daily workflow executions exceed a certain threshold, perform the following steps:
+The list of available metrics is:
+
+| Metric | Description |
+| ------ | ----------- |
+| `datadog.workflows.executions.started` | Tracks the number of workflow instances that have been started. |
+| `datadog.workflows.executions.completed` | Tracks the number of workflow instances that have completed. |
+| `datadog.workflows.steps.executions.started` | Tracks the number of workflow instance steps that have started. |
+| `datadog.workflows.steps.executions.completed` | Tracks the number of workflow instance steps that have completed. |
+| `datadog.workflows.count` | Tracks the number of non-deleted workflows. |
+
+To create a monitor that tracks whether daily workflow executions exceed a certain threshold, perform the following steps:
 
 1. Go to [New Monitor][4] and select the **Metric** monitor type.
 1. Under **Define the metric**, for **a**, fill in `datadog.workflows.executions.started`.
