@@ -8,10 +8,10 @@ further_reading:
   tag: "Documentation"
   text: "Incident Settings"
 - link: "https://app.datadoghq.com/dash/integration/30523/incident-management-overview"
-  tag: "In-App"
+  tag: "In the app"
   text: "OOTB Incident Management Overview Dashboard"
 - link: "https://app.datadoghq.com/notebook/template/11/incident-management-overview"
-  tag: "In-App"
+  tag: "In the app"
   text: "OOTB Incident Report Template"
 ---
 
