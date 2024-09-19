@@ -19,27 +19,31 @@ To get started, choose the **Sign up with Datadog** option during the Cloudcraft
 By using Datadog SSO, you automatically gain access to:
 
 - **Cross-platform functionality**: Move effortlessly between Cloudcraft and Datadog to analyze your cloud infrastructure and its performance.
-- **Automated cloud account synchronization**: Cloud accounts configured in Datadog sync automatically with Cloudcraft, giving you a complete view of your infrastructure in both platforms.
+- **Automated cloud account integration**: Cloud accounts configured in Datadog are automatically added to Cloudcraft, giving you a complete view of your infrastructure in both platforms.
 
 ### Enable Datadog SSO for existing accounts
 
 If you originally signed up with a different login method, for example, Google SSO or a standard username and password, you won’t have access to the full set of Datadog integration features. To switch to Datadog SSO, [contact the Cloudcraft support team][1] and they will assist you in converting your account.
 
-## Pull cloud accounts
+## Cloud account integration
 
 <div class="alert alert-info">This feature supports only Amazon Web Services (AWS) accounts. Syncing with Azure or other cloud providers is not available at this time.</div>
 
-The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically pulled into Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog.
+The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically pulled into Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog and these accounts are shared with the entire team by default.
+
+{{< img src="cloudcraft/getting-started/datadog-integration/manage-aws-accounts.png" alt="" responsive="true" style="width:100%;">}}
 
 ### How it works
 
 1. **Pulling cloud accounts**: Once your AWS account is integrated with Datadog, Cloudcraft automatically pulls the account, so you don’t need to manually add it to Cloudcraft.
-2. **Resource Collection in Datadog**: To visualize and diagram resources in Cloudcraft, ensure resource collection is enabled in Datadog. Without this feature, your AWS accounts will still be pulled into Cloudcraft, but no resources from them will be available for diagramming. Refer to the [AWS integration documentation][2] for steps on enabling resource collection.
+2. **Resource Collection in Datadog**: To visualize and diagram resources in Cloudcraft, ensure resource collection is enabled in Datadog. Without this feature, your AWS accounts will still be added into Cloudcraft, but no resources from them will be available for diagramming. Refer to the [AWS integration documentation][2] for steps on enabling resource collection.
 3. **No AWS accounts in Datadog?**: If you don't have any AWS accounts added in Datadog, you'll need to add them first. Follow the instructions in the [AWS integration guide][3].
 
 ### Manage pulled AWS accounts in Cloudcraft
 
-AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the **Live** tab in Cloudcraft. These accounts are shared with the entire team by default.
+AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the **Live** tab in Cloudcraft.
+
+{{< img src="cloudcraft/getting-started/datadog-integration/bits-icon.png" alt="" responsive="true" style="width:100%;">}}
 
 To manage the visibility settings of these accounts:
 
@@ -47,9 +51,17 @@ To manage the visibility settings of these accounts:
 2. Select the **Edit** icon (the pencil icon next to the account name).
 3. Toggle the **Visibility on Live** tab option to control whether the account is visible to the team.
 
+To manage the name of the account:
+
+1. Go to **User > AWS Accounts**.
+2. Select the **Edit** icon (the pencil icon next to the account name).
+3. Update the account name in the **Name** field.
+
+<div class="alert alert-info">Changes to name or visibility settings will not impact the account in Datadog.</div>
+
 ### Performance benefits
 
-AWS accounts pulled from Datadog offer improved performance when creating diagrams in Cloudcraft compared to accounts added directly in Cloudcraft, as Cloudcraft uses Datadog APIs, which are optimized for faster performance, instead of AWS APIs.
+AWS accounts pulled from Datadog offer improved performance when creating diagrams in Cloudcraft compared to accounts added directly in Cloudcraft, as Cloudcraft uses data already collected by Datadog instead of AWS APIs.
 
 ## The Bits menu
 
