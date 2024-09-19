@@ -259,7 +259,7 @@ This renders the `value` associated with the `key` in each alert notification. I
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
 #### Customize the notification based on the group
-
+When your query is grouped by specific dimensions you can further enrich the notification to dynamically include metadata associated with the group.
 
 #### Query group by host
 
@@ -278,10 +278,10 @@ If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_na
 
 Some specific namespace metadata variables are available:
 
-- Kubernetes Cluster: `{{kube_namespace.cluster_name}}`
-- Kubernetes Name: `{{kube_namespace.display_name}}`
-- Status: `{{kube_namespace.status}}`
-- Labels: `{{kube_namespace.labels}}`
+- Cluster name: `{{kube_namespace.cluster_name}}`
+- Namespace name: `{{kube_namespace.display_name}}`
+- Namespace status: `{{kube_namespace.status}}`
+- Namespace labels: `{{kube_namespace.labels}}`
 
 The full list of available attributes is:
 
@@ -293,9 +293,9 @@ The full list of available attributes is:
 If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
 
 Some specific pod metadata variables are available:
-- Pod Cluster: `{{pod_name.cluster_name}}`
-- Pod Name: `{{pod_name.name}}`
-- Phase: `{{pod_name.phase}}`
+- Cluster name: `{{pod_name.cluster_name}}`
+- Pod name: `{{pod_name.name}}`
+- Pod phase: `{{pod_name.phase}}`
 
 The full list of available attributes is:
 
