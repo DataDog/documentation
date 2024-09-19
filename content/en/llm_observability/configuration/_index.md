@@ -18,7 +18,7 @@ further_reading:
 You can configure your LLM applications on the [Configuration page][1] with settings that can optimize your application's performance and security. 
 
 Topics
-: Helps identify and filter out irrelevant or malicious input, ensuring your LLM application stays focused on its intended purpose. 
+: Helps identify irrelevant input for the `topic relevancy`, an out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
 
 Evaluations
 : Enables Datadog to assess your LLM application against respective dimensions like Quality and Security and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. 
