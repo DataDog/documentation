@@ -79,7 +79,7 @@ Ably Datadog 통합은 [Ably 통계][2] 메트릭을 직접 Datadog 계정으로
 
 Ably의 Datadog 통합을 사용하면 다음이 가능합니다.
 - Datadog의 기타 핵심 메트릭과 함께 [Ably 통계][2] 사용
-- Datadog 대시보드에서 협업 분석을 위해 Ably 메시지, 채널, 연결 사용량 연계
+- Datadog 대시보드에서 협업 분석을 위해 Ably 메시지, 채널, 연결 사용량 상관관계 파악
 - Datadog에서 Ably 사용량 통계 보기 및 추적
 
 ## 설정
