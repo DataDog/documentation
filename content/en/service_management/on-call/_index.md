@@ -9,9 +9,13 @@ cascade:
         rank: 70
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/on-call/" >}}
+{{< callout url="https://www.datadoghq.com/preview/on-call/" >}}
   On-Call is in Preview. Complete the form to request access.
 {{< /callout >}} 
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">This feature is not available for the Datadog for Government site.</div>
+{{< /site-region >}}
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 
