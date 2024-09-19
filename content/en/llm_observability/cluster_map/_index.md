@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-You can monitor, optimize, and identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information. 
+You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information. 
 
-The Cluster Map allows you to view input or output (such as prompts or responses in your LLM application), with each type grouped by [topic][2] based on semantic similarity. Inputs and outputs are clustered separately, with the map or plot displaying either inputs or outputs in distinct groupings. Topics are determined by clustering the selected input or output into text embeddings in high dimensions, then projecting them into a 2D space. 
+The Cluster Map allows you to view input or output, with each type grouped by [topic][2]. Inputs and outputs are clustered separately. Topics are determined by clustering the selected input or output into text embeddings in high dimensions, then projecting them into a 2D space. 
 
 {{< img src="llm_observability/cluster_map/scatter.png" alt="The scatter plot displays clusters of traces with color-coded topics and includes a panel listing clusters, trace counts, and failure rates." style="width:100%;" >}}
 
