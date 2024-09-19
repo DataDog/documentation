@@ -1399,6 +1399,11 @@ menu:
       parent: sheets
       identifier: sheets_functions_and_operators
       weight: 1
+    - name: Guides
+      url: sheets/guide/
+      parent: sheets
+      identifier: sheets_guide
+      weight: 2
     - name: Monitors and Alerting
       url: monitors/
       pre: monitor
@@ -1846,10 +1851,30 @@ menu:
       identifier: service_catalog_import_from_integrations
       weight: 303
     - name: Service Definitions
-      url: service_catalog/service_definitions
+      url: service_catalog/service_definitions/
       parent: service_catalog
       identifier: service_catalog_definitions_versions
       weight: 4
+    - name: v3.0
+      url: /service_catalog/service_definitions/v3-0/
+      parent: service_catalog_definitions_versions
+      identifier: service_catalog_definitions_3-0
+      weight: 401
+    - name: v2.2
+      url: /service_catalog/service_definitions/v2-2/
+      parent: service_catalog_definitions_versions
+      identifier: service_catalog_definitions_2-2
+      weight: 402
+    - name: v2.1
+      url: /service_catalog/service_definitions/v2-1/
+      parent: service_catalog_definitions_versions
+      identifier: service_catalog_definitions_2-1
+      weight: 403
+    - name: v2.0
+      url: /service_catalog/service_definitions/v2-0/
+      parent: service_catalog_definitions_versions
+      identifier: service_catalog_definitions_2-0
+      weight: 404
     - name: Service Scorecards
       url: service_catalog/scorecards
       parent: service_catalog
@@ -2084,26 +2109,36 @@ menu:
       parent: incidents
       identifier: incident_declare
       weight: 1
+    - name: Describe an Incident
+      url: service_management/incident_management/describe
+      parent: incidents
+      identifier: incident_describe
+      weight: 2
+    - name: Notification
+      url: service_management/incident_management/notification
+      parent: incidents
+      identifier: incident_notification
+      weight: 3
     - name: Incident Details
       url: service_management/incident_management/incident_details
       parent: incidents
       identifier: incident_details
-      weight: 2
+      weight: 4
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 3
+      weight: 5
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 4
+      weight: 6
     - name: Datadog Clipboard
       url: service_management/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
-      weight: 5
+      weight: 7
     - name: Guides
       url: service_management/incident_management/guides
       parent: incidents

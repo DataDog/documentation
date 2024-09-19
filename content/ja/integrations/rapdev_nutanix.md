@@ -26,10 +26,10 @@ assets:
     source_type_name: RapDev Nutanix
   logs: {}
   monitors:
-    Nutanix Cluster CPU: assets/monitors/nutanix_cpu_monitor.json
-    Nutanix Compression Saving: assets/monitors/nutanix_compression_saving_monitor.json
-    Nutanix Deduplication: assets/monitors/nutanix_deduplication_monitor.json
-    Nutanix Storage Usage: assets/monitors/nutanix_storage_monitor.json
+    CPU utilization is high: assets/monitors/nutanix_cpu_monitor.json
+    Compression saving ratio is low: assets/monitors/nutanix_compression_saving_monitor.json
+    Deduplication ratio is low: assets/monitors/nutanix_deduplication_monitor.json
+    Storage is reaching saturation: assets/monitors/nutanix_storage_monitor.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -38,7 +38,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
