@@ -294,7 +294,7 @@ If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `
 
 Some specific pod metadata variables are available:
 - Pod Cluster: `{{pod_name.cluster_name}}`
-- Pos Name: `{{pod_name.name}}`
+- Pod Name: `{{pod_name.name}}`
 - Phase: `{{pod_name.phase}}`
 
 The full list of available attributes is:
