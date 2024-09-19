@@ -503,6 +503,15 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
 
+If you build dynamic handles with attributes based on the group that might not be present, the variable renders empty in the notification message and the handle will be invalid. To avoid missing notifications, when using dynamic handles with these variables make sure to add a fallback handle:   
+
+```text
+{{#is_match "kube_namespace.owner" ""}}
+  @slack-example
+{{/is_match}}
+```
+
+
 ### Dynamic links
 
 Use [tag variables](#attribute-and-tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
