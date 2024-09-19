@@ -31,6 +31,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
+  tag: "Blog"
+  text: "Best practices for monitoring and remediating connection churn"
 algolia:
   tags: ['cnm', 'cloud network monitoring']
 ---

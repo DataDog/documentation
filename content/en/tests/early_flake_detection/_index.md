@@ -84,6 +84,12 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 
 {{% /tab %}}
 
+{{% tab "Ruby" %}}
+
+`datadog-ci-rb>=1.5.0`
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
