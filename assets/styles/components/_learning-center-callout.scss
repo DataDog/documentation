@@ -5,6 +5,7 @@
 
     .card-content {
         @media(min-width: 768px) {
+            display: flex;
             column-gap: 20px;
         }
         img {
