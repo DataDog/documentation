@@ -66,11 +66,18 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     import { datadogRum } from '@datadog/browser-rum'
 
     datadogRum.init({
-        applicationId: '<DATADOG_APPLICATION_ID>',
-        clientToken: '<DATADOG_CLIENT_TOKEN>',
-        ...otherConfig,
-        service: "my-web-application",
-        allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not specified, defaults to 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
     })
     ```
 
