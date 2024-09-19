@@ -15,6 +15,9 @@ further_reading:
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
+- link: "/service_management/workflows/actions/set_variables"
+  tag: "Documentation"
+  text: "Set variables"
 ---
 
 {{< site-region region="gov" >}}
@@ -136,6 +139,8 @@ You can add an implicit input parameter (a parameter that doesn't already exist 
 
 If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
 
+For information about creating mutable workflow variables, see the [Set variable][12] action.
+
 ### Source object variables
 
 Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
@@ -224,3 +229,4 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
+[12]: /service_management/workflows/actions/set_variables

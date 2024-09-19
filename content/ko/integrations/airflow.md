@@ -21,8 +21,8 @@ assets:
     source_type_id: 10083
     source_type_name: Airflow
   monitors:
-    Heartbeat Failure: assets/monitors/heartbeat_failures.json
-    Ongoing Duration: assets/monitors/ongoing_duration.json
+    DAG task ongoing duration is high: assets/monitors/ongoing_duration.json
+    Task instances are failing: assets/monitors/heartbeat_failures.json
   saved_views:
     airflow_overview: assets/saved_views/airflow_overview.json
 author:
@@ -59,6 +59,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - 제공::통합
   configuration: README.md#Setup
   description: DAG, 작업, 풀, 실행기 등과 관련한 메트릭 추적
   media: []
@@ -89,7 +90,7 @@ Datadog 에이전트는 메트릭에 더해 Airflow의 상태와 관련한 서�
 
 Airflow 통합이 잘 작동하도록 하려면 다음 단계를 올바로 따라야 합니다. 시작하기 전에 먼저 [Datadog 에이전트를 설치][3]하세요. 설치 버전은 `>=6.17`이나 `>=7.17`이어야 합니다. 이 버전에 StatsD/DogStatsD 매핑 기능이 포함되어 있습니다.
 
-### 설정
+### 구성
 Airflow 통합에는 두 가지 형식이 있습니다. Datadog 에이전트 통합의 경우 Airflow용으로 제공된 엔드포인트로 요청을 보내 연결이 가능하고 정상 상태인지 보고합니다. Airflow StatsD의 경우 Datadog 에이전트로 메트릭을 전송하도록 Airflow를 구성하고, 이를 통해 Airflow 주석을 Datadog 주석으로 리매핑할 수 있습니다.
 
 {{< tabs >}}
@@ -277,14 +278,14 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
 
 _Agent 버전 6.0 이상에서 사용 가능_
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml` 파일에서 로그 수집을 사용하도록 설정합니다.
+1. Datadog Agent에서 로그 수집은 기본적으로 비활성화되어 있으므로 `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true
    ```
 
 2. `airflow.d/conf.yaml` 맨 아래에 있는 다음 구성 블록에 코멘트를 지우고 편집합니다.
-  `path`와 `service` 파라미터 값을 변경하고 내 환경에 맞게 구성합니다.
+  `path`와 `service` 파라미터 값을 변경하고 환경에 맞게 구성합니다.
 
    - DAG 프로세서 매니저와 스케쥴러 로그를 구성합니다.
 
