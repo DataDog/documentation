@@ -29,9 +29,13 @@ If you originally signed up with a different login method, for example, Google S
 
 <div class="alert alert-info">This feature supports only Amazon Web Services (AWS) accounts. Syncing with Azure or other cloud providers is not available at this time.</div>
 
-The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically pulled into Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog and these accounts are shared with the entire team by default.
+The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically added to Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog and these accounts are shared with the entire team by default.
 
 {{< img src="cloudcraft/getting-started/datadog-integration/manage-aws-accounts.png" alt="" responsive="true" style="width:100%;">}}
+
+To visualize and diagram resources in Cloudcraft, [ensure resource collection is enabled in Datadog][2]. When resource collection is enabled, Datadog collects information about your AWS resources by making read-only API calls to your AWS account. Cloudcraft relies on this information for visualizing your infrastructure. Without this feature, your AWS accounts will still be added to Cloudcraft, but no resources from them will be available for diagramming.
+
+If you don't have any AWS accounts added in Datadog, you'll need to add them first. Follow the instructions in the [AWS integration guide][3].
 
 ### How it works
 
