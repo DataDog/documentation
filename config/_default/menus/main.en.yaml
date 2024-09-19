@@ -1399,6 +1399,11 @@ menu:
       parent: sheets
       identifier: sheets_functions_and_operators
       weight: 1
+    - name: Guides
+      url: sheets/guide/
+      parent: sheets
+      identifier: sheets_guide
+      weight: 2
     - name: Monitors and Alerting
       url: monitors/
       pre: monitor
@@ -2378,6 +2383,11 @@ menu:
       parent: workflows_actions
       identifier: workflows_http
       weight: 404
+    - name: Set variables
+      url: service_management/workflows/actions/set_variables/
+      parent: workflows_actions
+      identifier: workflows_set_variables
+      weight: 405
     - name: Private Actions
       url: service_management/workflows/private_actions/
       parent: workflows

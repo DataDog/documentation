@@ -1,7 +1,7 @@
 ---
 core_product:
 - apm
-- code profiling
+- 연속 프로파일러
 title: 플레임(Flame) 그래프
 ---
 플레임 그래프는 트레이스를 시각화한 그래프로, 막대는 스팬(span)을 나타내며 스팬(span) 의 실행 시간, 호출자, 호출 내용을 표시합니다. 
