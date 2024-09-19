@@ -50,7 +50,7 @@ When an organization exceeds a threshold, pending execution requests queue up to
 
 ## End user limits
 
-Each end user can execute up to 100 actions per minute across App Builder and Workflow Automation.
+Each end user can execute up to 100 actions per minute across App Builder and Workflow Automation. When a user exceeds this threshold, workflow executions are throttled.
 
 ## Action limits
 
