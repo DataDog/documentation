@@ -30,7 +30,7 @@ Using the API Security Inventory you can:
 
 ## Configuration
 
-In order to use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
+To use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
 
 |Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
@@ -43,7 +43,7 @@ In order to use API Security on your services, **you must have ASM Threats Prote
 |Golang    | v1.59.0  | Requests only |
 |Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
-**Warning** On .NET Core and .NET Fx tracers, you need to set `DD_API_SECURITY_ENABLED=true` in your environement variables for API Security features to work properly.
+**Note**: On .NET Core and .NET Fx tracers, you need to set the environment variable `DD_API_SECURITY_ENABLED=true` for API Security features to work properly.
 
 ## How it works
 
