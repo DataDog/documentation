@@ -61,7 +61,7 @@ To create a monitor that tracks whether daily workflow executions exceed a certa
 1. For **Evaluation Details**, use the following values:
     - **Evaluate the**: `sum`
     - **Of the query over the**: `last 1 day`.
-1. For **Set alert conditions**, choose **above**, then fill in an alert and warning treshold. For example, you could fill in an **Alert threshold** of `200` and a **Warning threshold** of `150`.
+1. For **Set alert conditions**, choose **above**, then fill in an alert and warning threshold. For example, you could fill in an **Alert threshold** of `200` and a **Warning threshold** of `150`.
 1. Under **Configure notifications & automations**, name your workflow, then fill in message text. For example, you could use message text like the following:
 
     {{< code-block lang="none" >}}@slack-alert-channel
