@@ -416,12 +416,10 @@ def llm_call(prompt):
     LLMObs.annotate(
         span=None,
         prompt = Prompt(
-            id = "respond_to_user",
-            version = "0.0.1",
-            template = "Respond to this message in a friendy manner: {user_message}",
-            variables = {
-                "user_message": "Hello world!"
-            },
+            id="respond_to_user",
+            version="0.0.1",
+            template="Respond to this message in a friendy manner: {user_message}",
+            variables={"user_message": "Hello world!"},
         ),
         input_data=[{"role": "user", "content": "Respond to this message in a friendy manner: Hello world!"}],
         output_data=[{"role": "assistant", "content": "How can I help?"}],
