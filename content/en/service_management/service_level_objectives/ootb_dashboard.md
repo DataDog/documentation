@@ -15,7 +15,7 @@ The SLO Performance Summary Dashboard supports aggregated views of SLOs to help 
 - Customize your SLO groupings to be based on service, team, user journey, or any other tag that has been added to your SLOs.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 
-{{< callout url="http://datadoghq.com/preview/ootb-slo-dashboard/" btn_hidden="false" header="Try Out the SLO Performance Summary Dashboard">}}
+{{< callout url="https://www.datadoghq.com/preview/slo-performance-dashboard-for-leadership/" btn_hidden="false" header="Try Out the SLO Performance Summary Dashboard">}}
 The SLO Performance Summary Dashboard is in Preview. Complete the form to request access.
 {{< /callout >}}
 
