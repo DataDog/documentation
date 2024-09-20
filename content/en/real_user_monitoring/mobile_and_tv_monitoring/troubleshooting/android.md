@@ -39,7 +39,7 @@ If you've been using the SDK v1, there are some breaking changes introduced in v
 
 ## "Deobfuscation failed" warning
 
-A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][3] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][4].
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][3] to view all your uploaded mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][4].
 
 ## Further Reading
 

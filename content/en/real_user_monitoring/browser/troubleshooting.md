@@ -132,7 +132,7 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 
 ## "Deobfuscation failed" warning
 
-A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][14] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][15].
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][14] to view all your uploaded source maps. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][15].
 
 ## Further Reading
 
