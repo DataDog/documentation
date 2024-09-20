@@ -29,7 +29,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities. 
 
-**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during Preview, you may need to update them if the naming scheme changes. Read more about migration steps in the [opt-in instructions](#opt-in).
+**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the Preview, you may need to update them if the naming scheme changes. Read more about migration steps in the [opt-in instructions](#opt-in).
 
 ### Service page Dependency map
 
