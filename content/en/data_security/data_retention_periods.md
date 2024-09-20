@@ -32,32 +32,36 @@ attributes:
     default_retention_period: 1 month
   - suite: Applications
     product: APM
-    data_type: Indexed spans through [Custom Retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter)
-    default_retention_period: Maximum 30 days
+    data_type: Errors
+    default_retention_period: 15 days
   - suite: Applications
     product: APM
-    data_type: Sampled traces
+    data_type: Indexed spans through [Custom Retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter)
+    default_retention_period: 15 days
+  - suite: Applications
+    product: APM
+    data_type: Indexed spans through [Datadog intelligent retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter)
     default_retention_period: 30 days
   - suite: Applications
     product: APM
-    data_type: Viewed traces in UI
-    default_retention_period: Indefinite
+    data_type: Services/resources statistics and span summaries
+    default_retention_period: 30 days
   - suite: Applications
     product: APM
     data_type: Trace metrics
+    default_retention_period: 15 months
+  - suite: Applications
+    product: APM
+    data_type: Viewed traces in UI
     default_retention_period: 15 months
   - suite: Applications
     product: Database Monitoring
     data_type: Query metrics
     default_retention_period: 15 months
   - suite: Applications
-    product: Database Monitoring
+    product: Data Streams Monitoring
     data_type: Query samples
     default_retention_period: 15 days
-  - suite: Applications
-    product: Data Streams Monitoring
-    data_type: Traces
-    default_retention_period: 30 days
   - suite: Applications
     product: Data Streams Monitoring
     data_type: Metrics
@@ -67,29 +71,29 @@ attributes:
     data_type: Service metadata
     default_retention_period: Indefinite
   - suite: Applications
-    product: Cloud
-    data_type: API crawlers
-    default_retention_period: 15 months
-  - suite: Applications
     product: Data Jobs Monitoring
     data_type: Job traces
-    default_retention_period: 15 days
+    default_retention_period: 90 days
   - suite: Digital Experience
     product: Error Tracking
     data_type: Errors
-    default_retention_period: Errors deleted after 1 year of inactivity
+    default_retention_period: 1 year after last access
+  - suite: Digital Experience
+    product: RUM
+    data_type: Errors
+    default_retention_period: 30 days (90 days upon request)
   - suite: Digital Experience
     product: Browser RUM
     data_type: Events
-    default_retention_period: Maximum 30 days
+    default_retention_period: 30 days
   - suite: Digital Experience
     product: Mobile RUM
     data_type: Events
-    default_retention_period: Maximum 30 days
+    default_retention_period: 30 days
   - suite: Digital Experience
     product: Synthetics
     data_type: Test results
-    default_retention_period: If in UI, 15 months; if not in UI, 2 months
+    default_retention_period: 2 months (15 months if displayed in UI)
   - suite: Digital Experience
     product: Mobile App Testing
     data_type: Test results
