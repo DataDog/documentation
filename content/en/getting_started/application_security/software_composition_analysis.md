@@ -26,17 +26,17 @@ further_reading:
 
 ## Overview
 
-Datadog [Software Composition Analysis][1] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
+Datadog [Software Composition Analysis][15] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
 
 This guide walks you through best practices for getting your team up and running with SCA.
 
 ## Phase 1: Enable
 
-First, see the [Library Compatibility Requirements][12] page to verify if the Datadog Tracing Library used by your application or service supports the Software Composition Analysis (SCA) capability for your application's or service's programming language.
+First, see the [Library Compatibility][12] requirements page to verify if the Datadog Tracing Library used by your application or service supports the Software Composition Analysis (SCA) capability for your application's or service's programming language.
 
 ### Enable SCA on your services using the Quick Start Guide
 
-1. In Datadog, go to [Application Security > Settings > Quick Start Guide][4].
+1. In Datadog, go to **[Application Security > Settings > Quick Start Guide][4]**.
 2. Expand **Enable Vulnerability Detection**, select **Open source vulnerabilities**, and click **Start Activation**. A list of services appears.
 3. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. The number of selected services and their names are listed.
 4. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
@@ -46,7 +46,7 @@ First, see the [Library Compatibility Requirements][12] page to verify if the Da
 
 ### Enable SCA on your services using the Settings page
 
-1. In **Datadog**, go to [Application Security > Settings][13].
+1. In Datadog, go to **[Application Security > Settings][13]**.
 2. Click **Get Started** to expand the Software Composition Analysis (SCA) capability.
 
 
@@ -146,3 +146,4 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 [12]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [13]: https://app.datadoghq.com/security/configuration/asm/setup
 [14]: https://docs.datadoghq.com/integrations/github/
+[15]: /security/application_security/software_composition_analysis/setup/compatibility/

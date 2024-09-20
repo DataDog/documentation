@@ -29951,6 +29951,8 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+    x-merge-override:
+      get: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -29991,6 +29993,8 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+    x-merge-override:
+      post: false
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -39221,6 +39225,8 @@ paths:
         - name: service_account_id
           source: data.relationships.owned_by.data.id
         type: unsafe
+    x-merge-override:
+      get: false
   /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
     delete:
       description: Delete an application key owned by this service account.
