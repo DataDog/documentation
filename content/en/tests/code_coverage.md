@@ -37,11 +37,11 @@ Ensure that [Test Visibility][1] is already set up for your language.
   <strong>Note</strong>: The DataDog Tracer does not generate code coverage. If your tests are run with code coverage enabled, <code>dd-trace</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
 </div>
 
-#### Mocha and Cucumber-js
+#### Mocha/Cucumber-js
 
 Only [`Istanbul`][1] code coverage is supported for `mocha` and `cucumber-js`.
 
-To report total code coverage from your `mocha` and `cucumber-js` test sessions, install `nyc` and wrap your test commands:
+To report total code coverage from your `mocha` and `cucumber-js` test sessions, install [`nyc`][2] and wrap your test commands:
 
 1. Install `nyc`:
 ```
@@ -69,10 +69,10 @@ Jest includes Istanbul by default, so you don't need to install `nyc`. Simply pa
 }
 ```
 
-The only supported [`coverageProvider`][2] is `babel`, which is the default.
+The only supported [`coverageProvider`][3] is `babel`, which is the default.
 
 #### Vitest
-Vitest requires extra dependencies for running with code coverage. See [vitest docs][3] for more information. After the dependencies are installed, pass `--coverage` to your test command:
+Vitest requires extra dependencies for running with code coverage. See [vitest docs][4] for more information. After the dependencies are installed, pass `--coverage` to your test command:
 
 ```json
 {
@@ -89,8 +89,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 
 [1]: https://istanbul.js.org/
-[2]: https://jestjs.io/docs/configuration#coverageprovider-string
-[3]: https://vitest.dev/guide/coverage.html
+[2]: https://github.com/istanbuljs/nyc
+[3]: https://jestjs.io/docs/configuration#coverageprovider-string
+[4]: https://vitest.dev/guide/coverage.html
 {{% /tab %}}
 
 {{% tab ".NET" %}}
