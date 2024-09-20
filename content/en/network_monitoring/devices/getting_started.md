@@ -21,6 +21,12 @@ This guide explains how to configure Network Device Monitoring on your hosts, en
 
 {{< img src="network_device_monitoring/getting_started/ndm_landing_page.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
 
+## How it works
+
+<insert info>
+
+{{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="NDM Diagram showing the flow for Syslog, trap and Netflow collection." style="width:100%;" >}}
+
 ## Phase 1: Prerequisites
 
 ### Install the Agent

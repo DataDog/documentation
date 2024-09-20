@@ -30,6 +30,12 @@ Choose your collection strategy based on the number of devices present on your n
 
 Regardless of the collection strategy, leverage Datadog's [sysObjectID mapped device profiles][2] to automatically collect relevant metrics from your devices.
 
+## How it works
+
+<insert info>
+
+{{< img src="/network_device_monitoring/snmp/snmp_device_polling.png" alt="NDM Diagram showing the flow for SNMP device polling." style="width:100%;" >}}
+
 ### Monitoring individual devices
 
 To monitor individual devices:
