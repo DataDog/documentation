@@ -39221,6 +39221,8 @@ paths:
         - name: service_account_id
           source: data.relationships.owned_by.data.id
         type: unsafe
+    x-merge-override:
+      get: false
   /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
     delete:
       description: Delete an application key owned by this service account.
