@@ -45,7 +45,7 @@ The following profiling features are available in the following minimum versions
 | [Endpoint Profiling][13] | 0.54.0+                        |
 | [Timeline][15]           | 2.12.0+, 2.11.4+, or 2.10.7+   |
 
-Continuous Profiler is in beta support for some serverless platforms, such as [AWS Lambda][16].
+Continuous Profiler is supported for some serverless platforms, such as [AWS Lambda][16].
 
 ## Installation
 

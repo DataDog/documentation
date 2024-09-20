@@ -3,7 +3,7 @@ title: Single Step Instrumentation for Profiling
 private: true
 ---
 
-<div class="alert alert-info">Enabling Profiling using Single Step Instrumentation is in private beta.</div>
+<div class="alert alert-info">Enabling Profiling using Single Step Instrumentation is in Preview.</div>
 
 ## Overview
 
@@ -14,7 +14,7 @@ how to set it up.
 
 ## Supported operating systems and environments
 
-SSI is supported only on Linux, for both `x86_64` and `arm64` (ARM v8) architectures. The beta
+SSI is supported only on Linux, for both `x86_64` and `arm64` (ARM v8) architectures. The Preview
 version of Continuous Profiler with SSI works for host and container deployments. Kubernetes
 deployments are not yet supported.
 
