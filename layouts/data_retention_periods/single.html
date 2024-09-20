@@ -87,8 +87,8 @@
           >
             <td>{{ .suite }}</td>
             <td>{{ .product }}</td>
-            <td>{{ .data_type }}</td>
-            <td>{{ .default_retention_period }}</td>
+            <td>{{ .data_type | markdownify }}</td>
+            <td>{{ .default_retention_period | markdownify }}</td>
           </tr>
             <!-- Build $suites slice for filtering section (.filters) -->
           {{ $suites = $suites | append .suite }}
