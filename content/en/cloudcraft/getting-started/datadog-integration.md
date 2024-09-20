@@ -29,7 +29,9 @@ If you originally signed up with a different login method, for example, Google S
 
 <div class="alert alert-info">This feature supports only Amazon Web Services (AWS) accounts. Syncing with Azure or other cloud providers is not available at this time.</div>
 
-The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically added to Cloudcraft. No additional setup is required in Cloudcraft as long as resource collection is enabled in Datadog and these accounts are shared with the entire team by default.
+The integration between Cloudcraft and Datadog streamlines cloud account management, allowing accounts already configured in Datadog to be automatically added to Cloudcraft. No additional setup is required in Cloudcraft.
+
+By default, these accounts are shared with all members of your Cloudcraft team, ensuring easy access for everyone.
 
 {{< img src="cloudcraft/getting-started/datadog-integration/manage-aws-accounts.png" alt="Manage AWS accounts interface in Cloudcraft with Datadog integration." responsive="true" style="width:100%;">}}
 
@@ -37,17 +39,13 @@ To visualize and diagram resources in Cloudcraft, [ensure resource collection is
 
 If you don't have any AWS accounts added in Datadog, you'll need to add them first. Follow the instructions in the [AWS integration guide][3].
 
-### How it works
-
-1. **Pulling cloud accounts**: Once your AWS account is integrated with Datadog, Cloudcraft automatically pulls the account, so you don’t need to manually add it to Cloudcraft.
-2. **Resource Collection in Datadog**: To visualize and diagram resources in Cloudcraft, ensure resource collection is enabled in Datadog. Without this feature, your AWS accounts will still be added into Cloudcraft, but no resources from them will be available for diagramming. Refer to the [AWS integration documentation][2] for steps on enabling resource collection.
-3. **No AWS accounts in Datadog?**: If you don't have any AWS accounts added in Datadog, you'll need to add them first. Follow the instructions in the [AWS integration guide][3].
-
 ### Manage pulled AWS accounts in Cloudcraft
 
 AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the **Live** tab in Cloudcraft.
 
 {{< img src="cloudcraft/getting-started/datadog-integration/bits-icon.png" alt="Cloud account selector displaying AWS accounts managed in Cloudcraft and Datadog integration." responsive="true" style="width:100%;">}}
+
+If you have many accounts but only need to focus on a few, you can use the visibility settings to hide specific accounts from the account selector in the **Live** tab.
 
 To manage the visibility settings of these accounts:
 
