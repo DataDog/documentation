@@ -36,6 +36,8 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ### Android
 
+All uncaught exceptions and ANRs resulting in a crash will be reported by the Kotlin Multiplatform SDK (see [limitations](#collection)). On top of these crashes, you can configure the SDK to report NDK crashes, and control the reporting of non-fatal ANRs.
+
 #### Add NDK crash reporting
 
 Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK library. 
@@ -69,6 +71,10 @@ ANRs are only reported through the RUM (not through Logs) and more information a
 
 ### iOS
 
+**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise application may hang if crash tracking is enabled due to the compatibility with `PLCrashReporter`. See other dependencies in the [setup][10] instructions.
+
+All uncaught exceptions resulting in a crash will be reported by the Kotlin Multiplatform SDK.
+
 #### Add app hang reporting
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
@@ -82,6 +88,12 @@ App hangs are only reported through the RUM (not through Logs) and more informat
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
 Use the following guides to see how mapping file (Android) or dSYMs (iOS) can be uploaded to Datadog: [Android][7], [iOS][8].
+
+## Limitations
+
+### File sizing
+
+Individual debug symbols (mapping files and dSYMs) are limited to 500 MB each.
 
 ### Collection
 
@@ -121,3 +133,4 @@ To test your implementation:
 [7]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#track-background-events
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios

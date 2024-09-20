@@ -21,7 +21,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in private beta.
+Kotlin Multiplatform Monitoring is in preview.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
