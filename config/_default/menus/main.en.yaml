@@ -2129,6 +2129,36 @@ menu:
       parent: incidents
       identifier: incidents_settings
       weight: 5
+    - name: Information
+      url: service_management/incident_management/incident_settings/information
+      parent: incidents_settings
+      identifier: incidents_settings_information
+      weight: 501
+    - name: Property Fields
+      url: service_management/incident_management/incident_settings/property_fields
+      parent: incidents_settings
+      identifier: incidents_settings_property_fields
+      weight: 502
+    - name: Responder Types
+      url: service_management/incident_management/incident_settings/responder_types
+      parent: incidents_settings
+      identifier: incidents_settings_responder_types
+      weight: 503
+    - name: Integrations
+      url: service_management/incident_management/incident_settings/integrations
+      parent: incidents_settings
+      identifier: incidents_settings_integrations
+      weight: 504
+    - name: Notification Rules
+      url: service_management/incident_management/incident_settings/notification_rules
+      parent: incidents_settings
+      identifier: incidents_settings_notification_rules
+      weight: 505
+    - name: Templates
+      url: service_management/incident_management/incident_settings/templates
+      parent: incidents_settings
+      identifier: incidents_settings_templates
+      weight: 506
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
