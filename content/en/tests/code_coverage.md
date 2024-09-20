@@ -41,7 +41,7 @@ Ensure that [Test Visibility][1] is already set up for your language.
 
 Only [`Istanbul`][1] code coverage is supported for `mocha` and `cucumber-js`.
 
-To report total code coverage from your `mocha` and `cucumber-js` test sessions, follow these steps:
+To report total code coverage from your `mocha` and `cucumber-js` test sessions, install `nyc` and wrap your test commands:
 
 1. Install `nyc`:
 ```
@@ -53,9 +53,7 @@ npm install --save-dev nyc
 {
   "scripts": {
     "test": "mocha",
-    "coverage": "nyc npm run test",
-    "test:cucumber": "cucumber-js",
-    "cucumber:coverage": "nyc npm run test:cucumber"
+    "coverage": "nyc npm run test"
   }
 }
 ```
@@ -75,7 +73,6 @@ The only supported [`coverageProvider`][2] is `babel`, which is the default.
 
 #### Vitest
 Vitest requires extra dependencies for running with code coverage. See [vitest docs][3] for more information. After the dependencies are installed, pass `--coverage` to your test command:
-</div>
 
 ```json
 {
@@ -85,7 +82,7 @@ Vitest requires extra dependencies for running with code coverage. See [vitest d
 }
 ```
 
-3. Run your test with the new `coverage` command:
+After modifying your test commands, run your tests with the new `coverage` command:
 ```
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
