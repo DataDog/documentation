@@ -18,7 +18,7 @@ To see the processing rule of your On-Call Team, simply click on its name in the
 
 Processing rule follow the common query syntax of Datadog. Supported attributes include:
 
-* `tags`: the tags set on the incoming alert. For example, `tags:"env:prod"`.
+* `tags`: the tags set on the incoming alert. For example, `tags.env:prod`.
 * `groups`: checks if the incoming alert relates to a specific Monitor group. For example, `groups:"service:checkout-service"`.
 * `priority`: value of the priority field of the Monitor. Possible values include 1, 2, 3, 4, or 5. For instance, `priority:(1 OR 2)`.
 * `alert_status`: value of the Monitor's status. Possible values include `error`, `warn`, `success`. Usage example: `alert_status:(error OR warn)`.
