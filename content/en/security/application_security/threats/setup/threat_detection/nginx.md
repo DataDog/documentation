@@ -67,8 +67,6 @@ As of version 1.3.0, the available functionality has the following important lim
 
 * The request body is not inspected, regardless of its content type.
 
-- AppSec excludes 1-click activation (AppSec must be explicitly enabled or disabled in the nginx configuration).
-
 * It's not possible to block the request based on characteristics of the
   response, such as its status code, headers, or body.
 
