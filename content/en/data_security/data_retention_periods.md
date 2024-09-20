@@ -15,28 +15,24 @@ filter_all: All
 content: "The following table lists the retention period automatically applied to data sent to Datadog by the Agent by each of the AI, Digital Experience, Infrastructure, Logs, Platform, Security, Service Management, and Software Delivery products. Optionally, filter the list by product or search by keyword to find the attributes you're interested in."
 attributes: 
   - suite: AI
-    product: Bits AI
-    data_type: Prompts/Responses
-    default_retention_period: 120 days
-  - suite: AI
-    product: Event Management
-    data_type: Events
+    product: LLM Observability
+    data_type: Metrics
     default_retention_period: 15 months
   - suite: AI
     product: LLM Observability
-    data_type: Input and Output texts
+    data_type: Traces and spans (includes input and output texts)
     default_retention_period: 15 days
   - suite: Applications
     product: Continuous Profiler
     data_type: Profiles
-    default_retention_period: 8 days, 1 year for profiles visualized in UI
+    default_retention_period: 8 days (1 year if displayed in UI)
   - suite: Applications
     product: Continuous Profiler
     data_type: Profile metrics
-    default_retention_period: 6 months
+    default_retention_period: 1 month
   - suite: Applications
     product: APM
-    data_type: Indexed spans
+    data_type: Indexed spans through [Custom Retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter)
     default_retention_period: Maximum 30 days
   - suite: Applications
     product: APM
