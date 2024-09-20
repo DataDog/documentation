@@ -24,9 +24,9 @@ Datadog Service Catalog is pre-populated with entries detected through [APM][2],
 With APM, Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn't been instrumented yet. These uninstrumented dependencies are categorized as separate *services*. With the new [inferred entities experience][7], you can filter Service Catalog entries by entity type, such as database, queue, or third-party API. 
 
 ## Enrich auto-detected services with metadata 
-To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][3] by [submitting a request][4].
+To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the Preview for [schema 3.0][3] by [submitting a request][4].
 
-{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
+{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for metadata schema v3.0!" >}}
 {{< /callout >}}
 
 ### Service Definition Schema (v2.2) (Recommended)

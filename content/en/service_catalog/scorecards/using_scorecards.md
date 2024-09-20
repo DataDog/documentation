@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Service Scorecards are in beta.
+Service Scorecards are in Preview.
 {{< /callout >}}
 
 After configuring your Scorecards, you can view service-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.

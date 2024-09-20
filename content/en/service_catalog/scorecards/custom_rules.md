@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Service Scorecards are in beta.
+Service Scorecards are in Preview.
 {{< /callout >}}
 
 Datadog provides [default rules][1] so you can get started quickly with Service Scorecards, but you can also create custom rules.
