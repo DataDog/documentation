@@ -36,7 +36,7 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ### Android
 
-All uncaught exceptions and ANRs resulting in a crash will be reported by the Kotlin Multiplatform SDK (see [limitations](#collection)). On top of these crashes, you can configure the SDK to report NDK crashes, and control the reporting of non-fatal ANRs.
+All uncaught exceptions and ANRs resulting in a crash will be reported by the Kotlin Multiplatform SDK (see [limitations](#limitations)). On top of these crashes, you can configure the SDK to report NDK crashes, and control the reporting of non-fatal ANRs.
 
 #### Add NDK crash reporting
 
