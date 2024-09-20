@@ -1,4 +1,4 @@
-### Create a storage account
+#### Create a storage account
 
 Create an [Azure storage account][9051] if you don't already have one.
 
@@ -12,7 +12,7 @@ Create an [Azure storage account][9051] if you don't already have one.
 1. In the **Blob storage** section, select **Hot** or **Cool** storage.
 1. Click **Review + create**.
 
-### Create a storage bucket
+#### Create a storage bucket
 
 1. In your storage account, click **Containers** under **Data storage** in the left navigation menu.
 1. Click **+ Container** at the top to create a new container.
@@ -20,7 +20,7 @@ Create an [Azure storage account][9051] if you don't already have one.
 
 **Note**: Do not set [immutability policies][9053] because the most recent data might need to be rewritten in rare cases (typically when there is a timeout).
 
-### Connect the Azure container to Datadog Log Archives
+#### Connect the Azure container to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][9054].
 1. Click **New archive**.

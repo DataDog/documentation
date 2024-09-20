@@ -27,9 +27,9 @@ assets:
     source_type_name: RapDev Zoom
   logs: {}
   monitors:
-    Zoom API Limit Was Encountered: assets/monitors/zoom_api_rate_limit.json
-    Zoom Room's Component is Offline or Not Working Properly: assets/monitors/zoom_room_component_has_problem.json
-    Zoom Room's Health is in Warning or Critical State: assets/monitors/zoom_room_has_problem.json
+    API usage has hit the rate limit: assets/monitors/zoom_api_rate_limit.json
+    Zoom Room has a problem: assets/monitors/zoom_room_has_problem.json
+    Zoom Room's Component has a problem: assets/monitors/zoom_room_component_has_problem.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -40,7 +40,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - コラボレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false

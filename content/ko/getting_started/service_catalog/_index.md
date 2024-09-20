@@ -26,7 +26,7 @@ Datadog 서비스 카탈로그는 소유권 메타데이터, 성능 인사이트
 
 이 페이지는 Datadog에서 서비스 카탈로그를 시작하는 방법을 안내합니다.
 
-## 사전 필수 요건
+## 사전 필수 조건
 
 아직 하지 않았다면 [Datadog 계정][1]을 생성하세요.
 
@@ -50,7 +50,7 @@ application: shopping-app
 tier: "1"
 type: web
 languages:
-  - 고
+  - go
   - 파이썬(Python)
 연락처:
   - 유형: 슬랙
@@ -174,7 +174,7 @@ Datadog 스코어카드에는 통합 가시성 관행, 소유권 태깅, 프로�
 [4]: /ko/real_user_monitoring
 [5]: /ko/getting_started/tagging/unified_service_tagging
 [6]: /ko/integrations/servicenow/#service-ingestion
-[7]: /ko/service_catalog/setup#import-data-from-other-sources
+[7]: /ko/integrations/backstage/
 [8]: https://www.datadoghq.com/blog/github-actions-service-catalog
 [9]: https://backstage.io/docs/overview/what-is-backstage
 [10]:/ko/api/latest/service-definition
