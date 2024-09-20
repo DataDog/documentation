@@ -15,8 +15,8 @@ further_reading:
   text: "Add the Datadog Tracing Library"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
-Inferred service dependencies are in private beta. To request access, complete the form.
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the Preview!" >}}
+Inferred service dependencies are in Preview. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
@@ -29,7 +29,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities. 
 
-**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes. Read more about migration steps in the [opt-in instructions](#opt-in).
+**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during Preview, you may need to update them if the naming scheme changes. Read more about migration steps in the [opt-in instructions](#opt-in).
 
 ### Service page Dependency map
 

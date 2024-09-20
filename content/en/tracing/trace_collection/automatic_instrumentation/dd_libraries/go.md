@@ -60,15 +60,15 @@ If needed, configure the tracing library to send application performance telemet
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Compile-time instrumentation (private beta)" level="p" %}}
+{{% collapse-content title="Compile-time instrumentation (in Preview)" level="p" %}}
 
 <div class="card callout-card mb-4">
   <div class="card-body d-flex flex-column">
-    <h5 class="card-title text-black mt-0 mb-1">Orchestrion is currently in private beta</h5>
+    <h5 class="card-title text-black mt-0 mb-1">Orchestrion is in Preview</h5>
     <p class="card-text">
       Orchestrion is under active development, and Datadog is eager to hear from you. Request access if you are interested and would like to share your experience.
     </p>
-    <a href="https://www.datadoghq.com/private-beta/compile-time-auto-instrumentation-for-go-lang-datadog-orchestrion/"
+    <a href="https://www.datadoghq.com/preview/compile-time-auto-instrumentation-for-go-lang-datadog-orchestrion/"
       target="_blank"
       class="btn btn-outline-primary pb-1 align-self-end d-flex flex-column justify-content-center"
     >

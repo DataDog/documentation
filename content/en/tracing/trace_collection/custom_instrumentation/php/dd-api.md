@@ -422,9 +422,9 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding span links (Beta)
+## Adding span links
 
-<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
+<div class="alert alert-info">Span links requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 

@@ -204,9 +204,7 @@ View [Code Hotspots][1] to identify lines of code related to performance issues.
 [1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
-{{% tab "Span Links (Beta)" %}}
-
-<div class="alert alert-info">Span link support is in beta.</div>
+{{% tab "Span Links" %}}
 
 [Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
