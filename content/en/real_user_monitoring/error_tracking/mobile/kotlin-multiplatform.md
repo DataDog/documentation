@@ -36,11 +36,11 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ### Android
 
-All uncaught exceptions and ANRs resulting in a crash will be reported by the Kotlin Multiplatform SDK (see [limitations](#limitations)). On top of these crashes, you can configure the SDK to report NDK crashes, and control the reporting of non-fatal ANRs.
+All uncaught exceptions and ANRs resulting in a crash are reported by the Kotlin Multiplatform SDK (see [limitations](#limitations)). On top of these crashes, you can configure the SDK to report NDK crashes, and control the reporting of non-fatal ANRs.
 
 #### Add NDK crash reporting
 
-Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK library. 
+Your Android application may be running native code (C/C++) for performance or code reusability. To enable NDK crash reporting, use the Datadog NDK library. 
 
 1. Add the Gradle dependency to your Android source set by declaring the library as a dependency in your `build.gradle.kts` file:
 
@@ -67,11 +67,11 @@ An "Application Not Responding" ([ANR][4]) is an Android-specific type of error 
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK.
 
-ANRs are only reported through the RUM (not through Logs) and more information about ANR reporting can be found [here][5].
+ANRs are only reported through RUM (not through logs). For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][5].
 
 ### iOS
 
-**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise application may hang if crash tracking is enabled due to the compatibility with `PLCrashReporter`. See other dependencies in the [setup][10] instructions.
+**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled. See other dependencies in the [setup][10] instructions.
 
 All uncaught exceptions resulting in a crash will be reported by the Kotlin Multiplatform SDK.
 

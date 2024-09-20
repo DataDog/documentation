@@ -4,7 +4,7 @@ description: Collect logs from your Kotlin Multiplatform applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
-  text: dd-sdk-kotlin-multiplatform Source code
+  text: dd-sdk-kotlin-multiplatform source code
 - link: logs/explorer
   tag: Documentation
   text: Learn how to explore your logs
@@ -13,21 +13,21 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in preview.
+Kotlin Multiplatform Monitoring is in Preview.
 {{< /beta-callout >}}
 
-Send logs to Datadog from your Android or iOS applications with [Datadog's `dd-sdk-kotlin-multiplatform-logs` client-side logging library][1] and leverage the following features:
+Send logs to Datadog from your Android or iOS applications with [Datadog's `dd-sdk-kotlin-multiplatform-logs` client-side logging library][1] and use the following features:
 
 * Log to Datadog in JSON format natively.
 * Add `context` and extra custom attributes to each log sent.
 * Forward Java or Kotlin caught exceptions.
 * Forward iOS errors.
 * Record real client IP addresses and User-Agents.
-* Optimized network usage with automatic bulk posts.
+* Optimize network usage with automatic bulk posts.
 
 ## Setup
 
-1. Add the Gradle dependency to the common source set by declaring the library as a dependency in the module-level `build.gradle.kts` file. Make sure to replace `x.x.x` in the following example with the latest version of [dd-sdk-kotlin-multiplatform-logs][2].
+1. Add the Gradle dependency to the common source set by declaring the library as a dependency in the module-level `build.gradle.kts` file. Make sure to replace `x.x.x` in the following example with the latest version of [`dd-sdk-kotlin-multiplatform-logs`][2].
 
 ```kotlin
 kotlin {
@@ -41,9 +41,9 @@ kotlin {
 
 2. Add native dependencies for iOS.
 
-    **Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise application may hang if crash tracking is enabled due to the compatibility with `PLCrashReporter`.
+    **Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled .
 
-    Add the following Datadog iOS SDK dependencies (they are needed for linking step):
+    Add the following Datadog iOS SDK dependencies, which are needed for the linking step:
 
     * `DatadogObjc`
     * `DatadogCrashReporting`
@@ -55,9 +55,9 @@ kotlin {
     | 0.0.1                                    | 2.14.1                  |
     | 0.0.2                                    | 2.17.0                  |
 
-    #### Adding native iOS dependencies using Cocoapods plugin
+    #### Adding native iOS dependencies using the CocoaPods plugin
 
-    If you are using Kotlin Multiplatform library as Cocoapods dependency for your iOS application, you can add dependencies as following:
+    If you are using Kotlin Multiplatform library as a CocoaPods dependency for your iOS application, you can add dependencies as following:
 
     ```kotlin
     cocoapods {
@@ -81,15 +81,15 @@ kotlin {
 
     #### Adding native iOS dependencies using Xcode
 
-    If you are integrating Kotlin Multiplatform library as a framework via `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in the Xcode as following:
+    If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as following:
 
-    1. Click on your project in Xcode and go to **Package Dependencies** tab.
-    2. Add iOS SDK package dependency by adding https://github.com/DataDog/dd-sdk-ios.git as a package URL.
+    1. Click on your project in Xcode and go to the **Package Dependencies** tab.
+    2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
     3. Select the version from the table above.
-    4. Click on the necessary application target, open **General** tab.
+    4. Click on the necessary application target and open the **General** tab.
     5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies mentioned above.
 
-3. Initialize Datadog SDK with your application context (only for Android, can be `null` in case of iOS), tracking consent, as well as the [Datadog client token][2]. For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the Datadog SDK, as they would be exposed client-side in the Android application APK byte code.
+3. Initialize the Datadog SDK with your application context (only for Android; can be `null` for iOS), tracking consent, and the [Datadog client token][2]. For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the Datadog SDK, as they would be exposed client-side in the Android application APK byte code.
 
    For more information about setting up a client token, see the [client token documentation][2].
 
@@ -229,7 +229,7 @@ kotlin {
    ```
    {{< /site-region >}}
 
-    To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+    To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
     Tracking consent can be one of the following values:
 
     - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
@@ -251,12 +251,12 @@ kotlin {
    }
    ```
 
-   When writing your application, you can enable development logs by calling the `setVerbosity` method. All internal messages in the library with a priority equal to or higher than the provided level are then logged to Logcat in case of Android or to debugger console in Xcode in case of iOS:
+   When writing your application, you can enable development logs by calling the `setVerbosity` method. All internal messages in the library with a priority equal to or higher than the provided level are then logged to Logcat (Android) or Xcode's debugger console (iOS):
    ```kotlin
    Datadog.setVerbosity(SdkLogVerbosity.INFO)
    ```
 
-4. Configure and enable Logs feature:
+4. Configure and enable the Logs feature:
 
    ```kotlin
    val logsConfig = LogsConfiguration.Builder().build()
@@ -279,8 +279,8 @@ kotlin {
 
     ```kotlin
     logger.debug("A debug message.")
-    logger.info("Some relevant information ?")
-    logger.warn("An important warning…")
+    logger.info("Some relevant information?")
+    logger.warn("An important warning...")
     logger.error("An error was met!")
     logger.critical("What a Terrible Failure!")
     ```
@@ -303,7 +303,7 @@ kotlin {
    logger.info("onPageStarted", attributes = mapOf("http.url" to url))
    ```
 
-9. If you need to modify some attributes in your Log events before batching you can do so by providing an implementation of `EventMapper<LogEvent>` when initializing Logs feature:
+9. If you need to modify some attributes in your Log events before batching, you can do so by providing an implementation of `EventMapper<LogEvent>` when initializing the Logs feature:
 
    ```kotlin
    val logsConfig = LogsConfiguration.Builder()
@@ -318,11 +318,11 @@ kotlin {
 
 ### Logger initialization
 
-The following methods in `Logger.Builder` can be used when initializing the logger to send logs to Datadog:
+You can use the following methods in `Logger.Builder` when initializing the logger to send logs to Datadog:
 
 | Method                           | Description                                                                                                                                                                                                                                                             |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `setNetworkInfoEnabled(true)`    | Add the `network.client.connectivity` attribute to all logs.<br/>**Android**: The data logged by default is `connectivity` (`Wifi`, `3G`, `4G`...) and `carrier_name` (`AT&T - US`). `carrier_name` is only available for Android API level 28+. <br/>**iOS**: The data logged by default is: `reachability` (`yes`, `no`, `maybe`), `available_interfaces` (`wifi`, `cellular`, and more), `sim_carrier.name` (for example: `AT&T - US`), `sim_carrier.technology` (`3G`, `LTE`, and more) and `sim_carrier.iso_country` (for example: `US`).                                     |
+| `setNetworkInfoEnabled(true)`    | Add the `network.client.connectivity` attribute to all logs.<br/>**Android**: The data logged by default is:<ul><li/> `connectivity` <ul><li/>`Wifi`, `3G`, `4G`, etc.</ul> <li/>`carrier_name` - only available for Android API level 28+ <ul><li/>`AT&T - US`</ul></ul>. **iOS**: The data logged by default is: <ul> <li/>`reachability` <ul> <li/>`yes`, `no`, `maybe`</ul><li/>`available_interfaces` <ul> <li/>`wifi`, `cellular`, etc.</ul><li/> `sim_carrier.name` <ul> <li/>for example: `AT&T - US`</ul><li/>`sim_carrier.technology` <ul> <li/>`3G`, `LTE`, etc.</ul><li/> `sim_carrier.iso_country` <ul> <li/>for example: `US`</ul></ul>                                    |
 | `setService(<SERVICE_NAME>)` | Set `<SERVICE_NAME>` as value for the `service` [standard attribute][4] attached to all logs sent to Datadog.                                                                                                                                                           |
 | `setPrintLogsToConsole(true)`     | Set to `true` to use Logcat as a logger (Android) or print logs to debugger console in Xcode (iOS).                                                                                                                                                                                                                                  |
 | `setBundleWithTraceEnabled(true)`| Set to `true` (default) to bundle the logs with the active trace in your application. This parameter lets you display all the logs sent during a specific trace by using the Datadog dashboard.                                                        |
@@ -334,7 +334,7 @@ The following methods in `Logger.Builder` can be used when initializing the logg
 
 ### Global configuration
 
-Find below functions to add/remove tags and attributes to all logs sent by a given logger.
+Use the following functions to add or remove tags and attributes to all logs sent by a given logger.
 
 #### Global tags
 
@@ -398,11 +398,11 @@ logger.removeAttribute("version_name")
 
 ## Batch collection
 
-All the logs are first stored on the local device in batches. Each batch follows the intake specification. They are sent as soon as network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+All the logs are first stored on the local device in batches. Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
-This means that even if users open your application while being offline, no data will be lost.
+This means that even if users open your application while offline, no data is lost.
 
-The data on disk will automatically be discarded if it gets too old to ensure the SDK does not use too much disk space.
+The data on disk is automatically discarded if it gets too old. This ensures that the SDK does not use too much disk space.
 
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory.
 
