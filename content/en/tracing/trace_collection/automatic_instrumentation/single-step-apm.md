@@ -1,6 +1,5 @@
 ---
 title: Single Step APM Instrumentation (Preview)
-is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm
 further_reading:
@@ -24,7 +23,7 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
 
 ## Enabling APM on your applications
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
+If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (Preview)** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
 
 The following examples show how it works for each deployment type.
 
