@@ -66,11 +66,12 @@ These metrics are only computed when the source of the repository metadata is Gi
 **Notes:**
 
 - These metrics are emitted for every commit and not per deployment.
-- Commits that are not meaningful changes (for example merge commits) are ignored.
-- If commits on a feature branch are rebased, the commits considered for the change lead time are the new commits created with the rebase and not the original commits.
-- "Squash and merge", when a pull request is squashed:
-  - For GitHub: the metrics are emitted for the original commits.
-  - For other providers: the metrics are emitted for the new commit added to the target branch.
+- Commits without meaningful changes (for example, merge commits) are ignored.
+- For rebased feature branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
+- ```
+- When using "Squash and merge" for pull requests:
+  - For GitHub: Metrics are emitted for the original commits.
+  - For other providers: Metrics are emitted for the new commit added to the target branch.
 
 ## Examine metrics in Event Management
 
