@@ -27,14 +27,13 @@ Ensure that [Test Visibility][1] is already set up for your language.
 
 ### Compatibility
 
-* `dd-trace>=3.20.0`.
+* `dd-trace>=4.45.0` and `dd-trace>=5.21.0`.
 * `jest>=24.8.0`, only when run with `jest-circus`.
-* `mocha>=5.2.0`, only if `all` option in `nyc` is not explicitly set to `true`.
-* `cucumber-js>=7.0.0`, only if `all` option in `nyc` is not explicitly set to `true`.
-* Only [`Istanbul`][1] code coverage is supported.
+* `mocha>=5.2.0`. Only [`Istanbul`][1] code coverage is supported for mocha.
+* `cucumber-js>=7.0.0`. Only [`Istanbul`][1] code coverage is supported for cucumber-js.
+* `vitest>=2.0.0`. Both [`v8`][2] and [`Istanbul`][1] code coverage is supported.
 
-
-When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
+When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][3].
 
 To report total code coverage from your test sessions, follow these steps:
 
@@ -65,6 +64,18 @@ npm install --save-dev nyc
 }
 ```
 
+<div class="alert alert-warning">
+  <strong>Note</strong>: Vitest requires extra dependencies for running with code coverage. See <a href="https://vitest.dev/guide/coverage.html">vitest docs</a> for more information. Once the dependencies are installed, pass <code>--coverage</code>:
+</div>
+
+```json
+{
+  "scripts": {
+    "coverage": "vitest run --coverage"
+  }
+}
+```
+
 3. Run your test with the new `coverage` command:
 ```
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
@@ -72,11 +83,12 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 ### Known limitations
 
-If the `all` option is set to `true` when running `nyc` (see [nyc docs][3]), the total code coverage reported in the test session does not coincide with the value reported by `nyc`. This is because it does not include uncovered files (the ones that are not touched by your tests).
+If the `all` option is set to `true` when running `nyc` (see [nyc docs][4]), the total code coverage reported in the test session does not coincide with the value reported by `nyc`. This is because it does not include uncovered files (the ones that are not touched by your tests).
 
 [1]: https://istanbul.js.org/
-[2]: https://github.com/istanbuljs/nyc
-[3]: https://github.com/istanbuljs/nyc?tab=readme-ov-file#common-configuration-options
+[2]: https://v8.dev/blog/javascript-code-coverage
+[3]: https://github.com/istanbuljs/nyc
+[4]: https://github.com/istanbuljs/nyc?tab=readme-ov-file#common-configuration-options
 {{% /tab %}}
 
 {{% tab ".NET" %}}
