@@ -18,10 +18,10 @@ This page lists integrated libraries you can use for Kotlin Multiplatform applic
 
 ## Ktor
 
-If you use Ktor to make network requests in your application, you can integrate `Datadog Ktor Plugin` to collect RUM information about them:
+If you use Ktor to make network requests in your application, you can integrate the Datadog Ktor plugin to collect RUM information about them:
 
-1. Install Datadog Kotlin Multiplatform SDK and enable RUM by following the [guide][1].
-2. Add a common dependency on `dd-sdk-kotlin-multiplatform-ktor`
+1. [Install the Datadog Kotlin Multiplatform SDK and enable RUM][1].
+2. Add a common dependency on `dd-sdk-kotlin-multiplatform-ktor`:
 
 ```kotlin
 kotlin {
@@ -34,7 +34,7 @@ kotlin {
     }
 }
 ```
-3. Add the provided `Datadog Ktor Plugin` to your Ktor `HttpClient`
+3. Add the provided `Datadog Ktor Plugin` to your Ktor `HttpClient`:
 
 ```kotlin
 val ktorClient = HttpClient {

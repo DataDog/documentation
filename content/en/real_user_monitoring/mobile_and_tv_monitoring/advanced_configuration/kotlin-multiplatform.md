@@ -49,7 +49,7 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
-Note the action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
+The action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
 
 ```kotlin
 fun onUserInteraction() { 
@@ -95,7 +95,7 @@ Datadog.addUserExtraInfo(extraInfo)
 
 ## Event and data management
 
-The Kotlin Multiplatform SDK first stores events and only uploads events when the [intake specifications][9] conditions are met.
+The Kotlin Multiplatform SDK first stores events. It only uploads these events when the [intake specification][9] conditions are met.
 
 ### Clear all data
 
@@ -127,16 +127,16 @@ val logger = Logger.Builder()
 
 In addition to the [default RUM attributes][3] captured by the RUM Kotlin Multiplatform SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
-### Track User Sessions
+### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions helps you to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-The following attributes are **optional**, you should provide **at least one** of them:
+The following attributes are optional, but you should provide **at least one** of them:
 
 | Attribute  | Type | Description                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
@@ -165,7 +165,7 @@ GlobalRumMonitor.get().removeAttribute(key)
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
 `useSite(DatadogSite)` 
-: Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
+: Switches target data to EU, US1, US3, US5, US1_FED, and AP1 sites.
 
 `setBatchSize([SMALL|MEDIUM|LARGE])` 
 : Defines the individual batch size for requests sent to Datadog.
@@ -235,13 +235,13 @@ These methods can be accessed only from Android source set.
 ### iOS configuration methods
 
 `trackUiKitViews(UIKitRUMViewsPredicate)` 
-: Enable automatic tracking of `UIViewControllers` as RUM views. See [Automatically track views](#automatically-track-views) for more information.
+: Enable automatic tracking of `UIViewController`s as RUM views. See [Automatically track views](#automatically-track-views) for more information.
 
 `trackUiKitActions(UIKitRUMActionsPredicate)` 
 : Enable automatic tracking of `UITouch` events as RUM actions. The predicate implementation should return RUM action parameters if the given interaction should be accepted, or `null` to ignore it. By default, all touches are accepted.
 
 `setAppHangThreshold(Long)` 
-: Enables App Hangs monitoring with the given threshold (in milliseconds). See [Add app hang reporting][10] for more information.
+: Enables app hangs monitoring with the given threshold (in milliseconds). See [Add app hang reporting][10] for more information.
  
 ### Automatically track views
 
@@ -305,7 +305,7 @@ val strategy = ActivityViewTrackingStrategy(
 
 #### iOS
 
-To automatically track views `UIViewControllers`, use the `trackUiKitViews` method when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `uiKitViewsPredicate` which conforms to `UIKitRUMViewsPredicate` interface.
+To automatically track views (`UIViewController`s), use the `trackUiKitViews` method when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `uiKitViewsPredicate` that conforms to `UIKitRUMViewsPredicate` interface.
 
 Inside the `createView(viewController: UIViewController)` implementation, your app should decide if a given `UIViewController` instance should start the RUM view (return value) or not (return `null`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
 
@@ -326,7 +326,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 You can even come up with a more dynamic solution depending on your app's architecture.
 
-**Note**: By default, the UIKit view tracking is not enabled.
+**Note**: By default, UIKit view tracking is not enabled.
 
 ### Automatically track long tasks
 
@@ -370,25 +370,21 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`           | Name of the view.                                |
-   | ActionEvent   |                    |                                                 |
-   |               | `action.target.name` | Target name.                                     |
+   | ActionEvent   | `action.target.name` | Target name.                                     |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`           | Name of the view.                               |
-   | ErrorEvent    |                      |                                                 |
-   |               | `error.message`      | Error message.                                   |
+   | ErrorEvent    | `error.message`      | Error message.                                   |
    |               | `error.stack`        | Stacktrace of the error.                         |
    |               | `error.resource.url` | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`           | Name of the view.                                |
-   | ResourceEvent |                    |                                                 |
-   |               | `resource.url`       | URL of the resource.                             |
+   | ResourceEvent | `resource.url`       | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`           | Name of the view.                                |
-   | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | URL that linked to the initial view of the page. |
+   | LongTaskEvent | `view.referrer`       | URL that linked to the initial view of the page. |
    |               | `view.url`            | URL of the view.                                 |
    |               | `view.name`           | Name of the view.                                |
    

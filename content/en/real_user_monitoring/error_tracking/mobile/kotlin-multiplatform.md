@@ -73,7 +73,7 @@ ANRs are only reported through RUM (not through logs). For more information, see
 
 **Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled. See other dependencies in the [setup][10] instructions.
 
-All uncaught exceptions resulting in a crash will be reported by the Kotlin Multiplatform SDK.
+All uncaught exceptions resulting in a crash are reported by the Kotlin Multiplatform SDK.
 
 #### Add app hang reporting
 
@@ -81,13 +81,13 @@ App hangs are an iOS-specific type of error that happens when the application is
 
 By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method.
 
-App hangs are only reported through the RUM (not through Logs) and more information about ANR reporting can be found [here][6].
+App hangs are only reported through RUM (not through logs). For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
 
 ## Get deobfuscated stack traces
 
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-Use the following guides to see how mapping file (Android) or dSYMs (iOS) can be uploaded to Datadog: [Android][7], [iOS][8].
+Use the following guides to see how you can upload mapping files (Android) or dSYMs (iOS) to Datadog: [Android][7], [iOS][8].
 
 ## Limitations
 
@@ -99,7 +99,7 @@ Individual debug symbols (mapping files and dSYMs) are limited to 500 MB each.
 
 The SDK handles crash reporting with the following behaviors:
 
-- The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application.
+- The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
 - RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
 - Only crashes that occur in sampled sessions are kept.
 

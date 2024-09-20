@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-If you experience unexpected behavior with Datadog Kotlin Multiplatform SDK, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
+If you experience unexpected behavior with the Datadog Kotlin Multiplatform SDK, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Check if Datadog RUM is initialized
 Use the utility method `isInitialized` to check if the SDK is properly initialized:
@@ -35,7 +35,7 @@ Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 
 ## Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
 Tracking consent can be one of the following values:
 
 - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
@@ -73,7 +73,7 @@ Undefined symbols for architecture arm64:
        in DatadogCrashReporting[arm64][15](PLCrashReporterIntegration.o)
 ```
 
-Then you need to explicitly pass `CrashReporter` framework name to the linker:
+Then you need to explicitly pass the `CrashReporter` framework name to the linker:
 
 ```kotlin
 targets.withType(KotlinNativeTarget::class.java) {

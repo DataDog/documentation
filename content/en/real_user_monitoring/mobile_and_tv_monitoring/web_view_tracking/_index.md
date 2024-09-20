@@ -211,8 +211,8 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
-1. If you want to forward RUM events coming from web pages, download the [latest version][1] of RUM Kotlin Multiplatform SDK and setup RUM feature following the [dedicated guide][2].
-2. If you want to forward Log events coming from web pages, download the [latest version][3] of Logs Kotlin Multiplatform SDK and setup Logs feature following the [dedicated guide][4].
+1. If you want to forward RUM events coming from web pages, download the [latest version][1] of the RUM Kotlin Multiplatform SDK and set up RUM by following the [dedicated guide][2].
+2. If you want to forward log events coming from web pages, download the [latest version][3] of the Logs Kotlin Multiplatform SDK and set up logs by following the [dedicated guide][4].
 3. Add the Gradle dependency for the common source set by declaring the `dd-sdk-kotlin-multiplatform-webview` library as a dependency in the module-level `build.gradle.kts` file:
 
     ```kotlin
@@ -240,7 +240,7 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
      WebViewTracking.disable(webView, allowedHosts)
    ```
 
-`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` matches the given hosts and their subdomain. No regular expressions are allowed.
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-rum
 [2]: /real_user_monitoring/kotlin-multiplatform/#setup

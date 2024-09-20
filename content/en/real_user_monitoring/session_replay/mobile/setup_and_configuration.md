@@ -96,9 +96,9 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 1. Make sure you've [setup and initialized the Datadog Kotlin Multiplatform RUM SDK][2] with views instrumentation enabled.
 
-2. Add `DatadogSessionReplay` iOS library as a link-only dependency, check the [guide][3] to see how to do it.
+2. Add the `DatadogSessionReplay` iOS library as a link-only dependency. For instructions, see the [guide][3].
 
-2. Declare the Datadog Session Replay as a dependency:
+2. Declare Datadog Session Replay as a dependency:
   {{< code-block lang="kotlin" filename="build.gradle.kts" disable_copy="false" collapsible="true" >}}
     kotlin {
       sourceSets {
@@ -124,7 +124,7 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
-4. In case you need Material support on Android, call `SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())` method available in the Android source set.
+4. In case you need Material support on Android, call the `SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())` method, available in the Android source set.
 
 [1]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
 [2]: /real_user_monitoring/kotlin-multiplatform/
@@ -173,7 +173,7 @@ To instrument your consolidated web and native Session Replay views for iOS:
 
 To instrument your consolidated web and native Session Replay views for Kotlin Multiplatform:
 
-1. Enable [webview tracking][1] for your mobile application.
+1. Enable [web view tracking][1] for your mobile application.
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
 

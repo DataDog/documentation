@@ -21,7 +21,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in preview.
+Kotlin Multiplatform Monitoring is in Preview.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
@@ -30,16 +30,16 @@ The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iO
 
 ## Setup
 
-1. Declare Datadog RUM SDK as a dependency.
+1. Declare the Datadog RUM SDK as a dependency.
 2. Add native dependencies for iOS.
 3. Specify application details in the UI.
-4. Initialize Datadog SDK.
-5. Enable RUM feature to start sending data.
-6. Initialize RUM Ktor plugin to track network events made with Ktor.
+4. Initialize the Datadog SDK.
+5. Enable RUM to start sending data.
+6. Initialize the RUM Ktor plugin to track network events made with Ktor.
 
 ### Declare the Datadog RUM SDK as a dependency
 
-Declare [dd-sdk-kotlin-multiplatform-rum][1] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
+Declare [`dd-sdk-kotlin-multiplatform-rum`][1] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
 
 ```kotlin
 kotlin {
@@ -57,9 +57,9 @@ kotlin {
 
 ### Add native dependencies for iOS
 
-**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise application may hang if crash tracking is enabled due to the compatibility with `PLCrashReporter`.
+**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled.
 
-Add the following Datadog iOS SDK dependencies (they are needed for the linking):
+Add the following Datadog iOS SDK dependencies, which are needed for the linking step:
 
 * `DatadogObjc`
 * `DatadogCrashReporting`
@@ -71,9 +71,9 @@ Add the following Datadog iOS SDK dependencies (they are needed for the linking)
 | 0.0.1                                    | 2.14.1                  |
 | 0.0.2                                    | 2.17.0                  |
 
-#### Adding native iOS dependencies using Cocoapods plugin
+#### Adding native iOS dependencies using the CocoaPods plugin
 
-If you are using Kotlin Multiplatform library as Cocoapods dependency for your iOS application, you can add dependencies as following:
+If you are using Kotlin Multiplatform library as a CocoaPods dependency for your iOS application, you can add dependencies as following:
 
 ```kotlin
 cocoapods {
@@ -97,12 +97,12 @@ cocoapods {
 
 #### Adding native iOS dependencies using Xcode
 
-If you are integrating Kotlin Multiplatform library as a framework via `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in the Xcode as following:
+If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as following:
 
-1. Click on your project in Xcode and go to **Package Dependencies** tab.
-2. Add iOS SDK package dependency by adding https://github.com/DataDog/dd-sdk-ios.git as a package URL.
+1. Click on your project in Xcode and go to the **Package Dependencies** tab.
+2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
 3. Select the version from the table above.
-4. Click on the necessary application target, open **General** tab.
+4. Click on the necessary application target and open the **General** tab.
 5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies mentioned above.
 
 ### Specify application details in the UI
@@ -117,7 +117,7 @@ For more information about setting up a client token, see the [Client Token docu
 
 ### Initialize Datadog SDK
 
-In the initialization snippet, set an environment name, and variant name (if exists, only for Android). For more information, see [Using Tags][9].
+In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][9].
 
 See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][6] to initialize the library.
 
@@ -270,7 +270,7 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 Rum.enable(rumConfig)
 ```
 
-### Enable RUM feature to start sending data
+### Enable RUM to start sending data
 
 ```kotlin
 // in a common source set
@@ -307,11 +307,11 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [`Automatically track views`][5] to enable automatic tracking of all your views.
+See [Automatically track views][5] to enable automatic tracking of all your views.
 
 ### Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
 Tracking consent can be one of the following values:
 
 - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
@@ -325,7 +325,7 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
-### Initialize RUM Ktor plugin to track network events made with Ktor
+### Initialize the RUM Ktor plugin to track network events made with Ktor
 
 1. Add the Gradle dependency to the `dd-sdk-kotlin-multiplatform-ktor` library in the your `build.gradle.kts` file:
 
@@ -341,7 +341,7 @@ kotlin {
 }
 ```
 
-2. To track your Ktor requests as resources, add the provided [Datadog Ktor Plugin][7]:
+2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][7]:
 
 ```kotlin
 val ktorClient = HttpClient {
