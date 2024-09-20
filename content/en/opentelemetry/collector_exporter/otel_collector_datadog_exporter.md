@@ -630,7 +630,7 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 ### Containers overview dashboard
 
-<div class="alert alert-info">The Container Overview dashboard is in private beta. <a href="https://forms.gle/g3ndvTnepWY4Bvuh7">Fill out this form</a> to try it out.</div>
+<div class="alert alert-info">The Container Overview dashboard is in Preview. <a href="https://forms.gle/g3ndvTnepWY4Bvuh7">Fill out this form</a> to try it out.</div>
 
 <div class="alert alert-warning">This feature is affected by <a href="/containers/guide/docker-deprecation/">Docker deprecation in Kubernetes</a> and you might not be able to use <code>dockerstatsreceiver</code> for OpenTelemetry with Kubernetes version 1.24+.</div>
 
