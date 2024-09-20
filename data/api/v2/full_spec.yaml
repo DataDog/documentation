@@ -29951,6 +29951,8 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+    x-merge-override:
+      get: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -29991,6 +29993,8 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+    x-merge-override:
+      post: false
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
