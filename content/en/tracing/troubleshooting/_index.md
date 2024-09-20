@@ -185,7 +185,7 @@ A span can show this message for two possible reasons:
 - The span contains an unhandled exception.
 - An HTTP response within the span returned an HTTP status code between 400 and 599.
 
-When an exception is handled in a try/catch block, `error.msg`, `error.type`, and `error.stack` span tags are not populated. To populate the detailed error span tags, use [Custom Instrumentation][18] code.
+When an exception is handled in a try/catch block, `error.message`, `error.type`, and `error.stack` span tags are not populated. To populate the detailed error span tags, use [Custom Instrumentation][18] code.
 
 {{% /collapse-content %}}
 

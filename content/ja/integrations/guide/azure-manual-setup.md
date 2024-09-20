@@ -24,22 +24,22 @@ title: Azure インテグレーション手動セットアップガイド
 
 ## 概要
 
-Use this guide to manually set up the [Datadog Azure integration][1] through an app registration with read permissions to the monitored subscriptions.
+監視するサブスクリプションの読み取り権限を持つアプリ登録を通じて [Datadog Azure インテグレーション][1]を手動でセットアップするには、このガイドをご利用ください。
 
-**All sites**: All Datadog sites can use the steps on this page to complete the app registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
+**All sites**: すべての Datadog サイトは、このページのステップを使用して、Azure メトリクス収集のためのアプリ登録の認証プロセスと、Azure プラットフォームログを送信するための Event Hub のセットアップを完了することができます。
 
-**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][12] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Azure Native manual setup][13] guide for more information.
+**US3**: 組織が Datadog US3 サイトにある場合、Azure Native インテグレーションを使用して、Azure 環境の管理とデータ収集を効率化することができます。Datadog では、可能な限りこの方法を使用することを推奨しています。セットアップには、[Azure 内の Datadog リソース][12]を作成して、Azure サブスクリプションを Datadog 組織にリンクします。これは、メトリクス収集のためのアプリ登録の認証プロセスとログ転送のための Event Hub のセットアップに取って代わるものです。詳細は、[Azure Native の手動セットアップ][13]ガイドを参照してください。
 
 ## セットアップ
 
 ### Azure CLI を使用して統合する
 
-To integrate Datadog with Azure using the Azure CLI, Datadog recommends using the [Azure Cloud Shell][7].
+Azure CLI を使用して Datadog と Azure を統合する場合、Datadog は [Azure Cloud Shell][7] を使用することを推奨しています。
 
 {{< tabs >}}
 {{% tab "Azure CLI" %}}
 
-First, log into the Azure account you want to integrate with Datadog:
+最初に、Datadog と統合する Azure アカウントにログインします。
 
 ```shell
 az login
@@ -74,11 +74,11 @@ az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{sub
 ```
 
 - このコマンドは、監視するサブスクリプションに対する `monitoring reader` ロールをサービスプリンシパルに付与します。
-- The `appID` generated from this command must be entered in the [Datadog Azure integration tile][1] under **Client ID**.
-- Enter the generated `Tenant ID` value in the [Datadog Azure integration tile][1] under **Tenant name/ID**.
+- このコマンドによって生成された ` appID ` を [Datadog Azure インテグレーションタイル][1]の **Client ID** に入力する必要があります。
+- 生成された`Tenant ID` 値を [Datadog Azure インテグレーションタイル][1]の **Tenant name/ID** に入力します。
 - `--scope` は複数の値をサポートすることができ、一度に複数のサブスクリプションまたは管理グループを追加することができます。**[az ad sp][2]** ドキュメントにある例を参照してください。
 - 自分で選択した名前を使用する場合は、`--name <CUSTOM_NAME>` を追加します。それ以外の場合は、Azure によって一意の名前が生成されます。この名前は、セットアッププロセスでは使用されません。
-- Add `--password <CUSTOM_PASSWORD>` to use a hand-picked password. Otherwise Azure generates a unique one. This password must be entered in the [Datadog Azure integration tile][1] under **Client Secret**.
+- 自分で選択したパスワードを使用する場合は、`--password <CUSTOM_PASSWORD>` を追加します。それ以外の場合は、Azure によって一意のパスワードが生成されます。このパスワードは、[Datadog Azure インテグレーションタイル][1]の **Client Secret** に入力する必要があります。
 
 管理グループは、スコープとして有効かつ推奨されるオプションです。例:
 
@@ -115,7 +115,7 @@ azure ad sp create -n <NAME> -p <PASSWORD>
 ```
 
 - `<NAME>` は使用されませんが、セットアッププロセスの一環として必要です。
-- The `<PASSWORD>` you choose must be entered in the [Datadog Azure integration tile][1] under **Client Secret**.
+- 選択した `<PASSWORD>` は、[Datadog Azure インテグレーションタイル][1]の **Client Secret** に入力する必要があります。
 - このコマンドから返される`オブジェクト ID` を、次のコマンドの `<OBJECT_ID>` の代わりに使用します。
 
 次の形式を使用して、サービスプリンシパルとなるアプリケーションを作成します。
@@ -125,7 +125,7 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
 ```
 
 - このコマンドは、監視するサブスクリプションに対する `monitoring reader` ロールをサービスプリンシパルに付与します。
-- The `Service Principal Name` generated from this command must be entered in the [Datadog Azure integration tile][1] under **Client ID**.
+- このコマンドによって生成された `Service Principal Name` を [Datadog Azure インテグレーションタイル][1]の **Client ID** に入力する必要があります。
 - `<SUBSCRIPTION_ID>` は監視対象の Azure サブスクリプションです。これは、`azure account show` コマンドを使用すると、またはポータルに `ID` として一覧表示されます。
 
 [1]: https://app.datadoghq.com/integrations/azure
@@ -135,47 +135,47 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
 ### Azure ポータルを使用して統合する
 
 {{< tabs >}}
-{{% tab "ARM template" %}}
+{{% tab "ARM テンプレート" %}}
 
-1. In the Azure integration tile, select **Configuration** > **New App Registration** > **Using Azure Portal**.
+1. Azure インテグレーションタイルで、**Configuration** > **New App Registration** > **Using Azure Portal** を選択します。
 
-2. Select **Management Group (Auto-Discover)** or **Individual Subscriptions**.
-   - If you select Management Group, Datadog automatically discovers and monitors any subscriptions within that selected scope, including any subscriptions created in the future. You must have the owner role in the Management Group selected.
-   - If you select Individual Subscriptions, you must have the owner role in any subscriptions you want to monitor.
+2. **Management Group (Auto-Discover)** または **Individual Subscriptions** を選択します。
+   - Management Group を選択した場合、Datadog は、その選択されたスコープ内のすべてのサブスクリプション (将来作成されるサブスクリプションを含む) を自動的に検出して監視します。選択した管理グループの所有者ロールが必要です。
+   - Individual Subscriptions を選択した場合、監視するサブスクリプションの所有者ロールが必要です。
 
-3. Click **Open Template**.
+3. **Open Template** をクリックします。
 
-{{< img src="integrations/guide/azure_manual_setup/azure_tile_arm_template.png" alt="The Azure tile in the Datadog integrations page with Using Azure Portal and Management Group selected" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/azure_tile_arm_template.png" alt="Using Azure Portal と Management Group が選択された、Datadog インテグレーションページの Azure タイル " popup="true" style="width:80%;" >}}
 
-4. Select the **Region**, **Subscription**, and **Resource Group** for the template to be deployed.
+4. テンプレートをデプロイする **Region**、**Subscription**、**Resource Group** を選択します。
 
-   **Note**: The selection of region, subscription, and resource group only defines where this template is deployed. It has no impact on which subscriptions are monitored by Datadog.
+   **注**: 地域、サブスクリプション、リソースグループの選択は、このテンプレートがデプロイされる場所を定義するためだけのものです。どのサブスクリプションが Datadog によって監視されるかには影響しません。
 
 5. **Next** をクリックします。
 
-6. Select the _Create new_ option in **Service principal type**. 
-7. Click the **Change selection** link in **Service principal**.
-A form to create a new app registration is displayed:
+6. **Service principal type** で _Create new_ オプションを選択します。 
+7. **Service principal** で **Change selection** のリンクをクリックします。
+新規アプリ登録の作成フォームが表示されます。
 
-{{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal.png" alt="The service principal page in the Azure ARM template with the option to Create New selected and the link to Change Selection highlighted" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal.png" alt="Create New のオプションが選択され、Change Selection のリンクがハイライト表示された、Azure ARM テンプレートのサービスプリンシパルページ" popup="true" style="width:80%;" >}}
 
-8. Enter a name for the app registration, select the supported account types, and click **Register**.
+8. アプリ登録の名前を入力し、サポートされているアカウントの種類を選択して、**Register** をクリックします。
 
-9. A page opens to create a client secret. Click **+ New client secret** to add a client secret.
+9. クライアントシークレットを作成するページが開きます。クライアントシークレットを追加するには、**+ New client secret** をクリックします。
 
-10. Copy the value of the client secret, and click the close **(X)** button in the top-right corner of the screen.
+10. クライアントシークレットの値をコピーし、画面右上の閉じる **(X)** ボタンをクリックします。
 
-11. Paste the value of the client secret in the corresponding field on the template, and click **Next**.
+11. クライアントシークレットの値をテンプレートの対応するフィールドに貼り付け、**Next** をクリックします。
 
-12. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
+12. 対応するフィールドに、Datadog API キーと Datadog アプリケーションキーの値を入力します。Datadog の Azure インテグレーションページからテンプレートを起動した場合は、そこで提供されたキーをコピーできます。それ以外の場合は、組織設定の Access セクションで API キーとアプリキーを確認することができます。
 
-    **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
+    **注**: 管理グループではなく個別のサブスクリプションを監視する選択をした場合は、**Subscriptions to monitor** ドロップダウンから監視するサブスクリプションを選択します。
 
-13. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security Management][17].
+13. Datadog サイト、およびホストフィルターや [Cloud Security Management][17] 用のリソースを収集するかどうかなど、その他のインテグレーション構成オプションを選択します。
 
-14. Click **Review + create**, then click **Create**.
+14. **Review + create** をクリックし、次に **Create** をクリックします。
 
-15. Once the deployment has completed, click **Done** in the Azure integration page in Datadog to refresh the list and review your newly added App Registration.
+15. デプロイが完了したら、Datadog の Azure インテグレーションページで **Done** をクリックしてリストを更新し、新しく追加されたアプリ登録を確認します。
 
 [17]: /ja/security/cloud_security_management/
 class SampleRegistry
@@ -222,20 +222,20 @@ class SampleRegistry
 4. **Role** には、**Monitoring Reader** を選択します。**Select** では、前の手順で作成したアプリケーションの名前を選択します。
 
 5. **Save** をクリックします。
-6. Repeat this process for any additional subscriptions you want to monitor with Datadog.
-**Note**: Users of Azure Lighthouse can add subscriptions from customer tenants.
+6. Datadog で監視したいサブスクリプションが他にもある場合は、この手順を繰り返します。
+**注**: Azure Lighthouse のユーザーは、顧客のテナントからサブスクリプションを追加できます。
 
-**Note**: Diagnostics must be enabled for ARM deployed VMs to collect metrics, see [Enable diagnostics][11].
+**注**: ARM によってデプロイされた VM がメトリクスを収集できるようにするには、診断を有効にする必要があります。[診断の有効化][11]を参照してください。
 
 #### インテグレーションを完了する
 
-1. Under **App Registrations**, select the App you created, copy the **Application ID** and **Tenant ID**, and paste the values in the [Datadog Azure integration tile][10] under **Client ID** and **Tenant ID**.
+1. **App Registrations** で、作成したアプリを選択します。**Application ID** と **Tenant ID** をコピーし、[Datadog Azure インテグレーションタイル][10]の **Client ID** と **Tenant ID** に貼り付けます。
 2. 同じアプリで、**Manage** > **Certificates and secrets** と移動します。
 3. `datadogClientSecret` という新しい **Client Secret** を追加し、**Expires** に期間を選択して **Add** をクリックします。
 
     {{< img src="integrations/guide/azure_manual_setup/Azure_client_secret.png" alt="Azure のクライアントシークレット" popup="true" style="width:80%">}}
 
-4. When the key value is shown, copy and paste the value in the [Datadog Azure integration tile][10] under **Client Secret** and click **Install Integration** or **Update Configuration**.
+4. キー値が表示されたら、コピーして [Datadog Azure インテグレーションタイル][10]の **Client Secret** に貼り付け、**Install Integration** または **Update Configuration** をクリックします。
 
 **注**: Azure コンフィギュレーションの変更が Datadog で反映されるまで、最大で 20 分ほどかかります。
 
@@ -246,7 +246,7 @@ class SampleRegistry
 
 ### 構成
 
-To limit metric collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
+Azure ベースのホストのメトリクス収集を制限するには、Azure のインテグレーションタイルを開きます。**Configuration** タブを選択し、**App Registrations** を開きます。**Metric Collection Filters** の下のテキストボックスにタグのリストを入力します。
 
 この `<KEY>:<VALUE>` 形式のタグリストはカンマ区切りで、メトリクスを収集する際に使用されるフィルターを定義します。`?` (1 文字) や `*` (複数文字) などのワイルドカードも使用できます。
 
@@ -264,11 +264,11 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 Datadog は、始めるためのテンプレートとして使用できる推奨モニターを提供します。推奨モニターを使用するには、
 
-1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][8] tab.
+1. Datadog で、**Monitors** -> **New Monitor** と進み、[Recommended Monitors][8] タブを選択します。
 2. `[Azure] Integration Errors` というタイトルの推奨モニターを選択します。
 3. 検索クエリまたはアラート条件に必要な修正を加えます。デフォルトでは、モニターは新しいエラーが検出されるたびにトリガーされ、過去 15 分間エラーが検出されなかったときに解決されます。
 4. 必要に応じて、通知メッセージと再通知メッセージを更新します。イベント自体には、イベントに関する適切な情報が含まれており、自動的に通知に含まれることに注意してください。これには、範囲、エラー応答、修復のための一般的な手順に関する詳細な情報が含まれます。
-5. [Configure notifications][9] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
+5. Azure のデータ収集に影響を与える問題についてチームにアラートが届くように、好みのチャンネル (メール、Slack、PagerDuty など) を通じて[通知の構成][9]を行います。
 
 ### メトリクスの収集
 
@@ -283,7 +283,7 @@ Azure 拡張機能を使用して、Windows VM、Linux x64 VM、および Linux 
 
 1. [Azure ポータル][4]で、該当する VM を選択します。
 2. 左サイドバーから、**Settings** の下にある **Extensions + applications** を選択します。
-3. Click **+ Add**.
+3. **+ Add** をクリックします。
 4. `Datadog Agent` 拡張機能を検索して選択します。
 5. **Next** をクリックします。
 6. [Datadog API キー][2]と[Datadog サイト][1]を入力し、**OK** をクリックします。
@@ -314,7 +314,7 @@ Datadog AKS クラスター拡張機能を使用すると、Azure AKS 内に Dat
 
 #### Sending logs
 
-See the [Azure Logging guide][5] to set up log forwarding from your Azure environment to Datadog.
+Azure 環境から Datadog へのログ転送を設定するには、[Azure ログガイド][5]を参照してください。
 
 {{< partial name="whats-next/whats-next.html" >}}
 

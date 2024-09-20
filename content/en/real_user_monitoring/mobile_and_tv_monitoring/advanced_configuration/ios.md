@@ -458,6 +458,8 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
+If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
+
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
@@ -705,23 +707,6 @@ RumMonitor.shared().currentSessionID(completion: { sessionId in
   currentSessionId = sessionId
 })
 ```
-
-## Set tracking consent (GDPR compliance)
-
-To be compliant with the GDPR regulation, the RUM iOS SDK requires the tracking consent value at initialization.
-
-The `trackingConsent` setting can be one of the following values:
-
-1. `.pending`: The RUM iOS SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOS SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `.granted`: The RUM iOS SDK starts collecting the data and sends it to Datadog.
-3. `.notGranted`: The RUM iOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
-
-To change the tracking consent value after the RUM iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM iOS SDK changes its behavior according to the new value.
-
-For example, if the current tracking consent is `.pending`:
-
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
-- If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
 ## Further Reading
 

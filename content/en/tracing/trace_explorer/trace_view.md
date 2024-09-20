@@ -93,6 +93,35 @@ Hover over a service to highlight its parent and children, and click on it to fo
 {{% /tab %}}
 {{< /tabs >}}
 
+## Span search
+
+In the Waterfall and Flamegraph visualizations, the search option allows you to find the spans that meet specific queries. Spans that match the search query are highlighted in the trace view and you can navigate between these matches using the arrows next to the search bar.
+
+<img src="https://github.com/user-attachments/assets/4c6fc35a-65b7-42ee-bc24-fcb9adb9d0b8" alt="Search bar" style="width:90%;">
+
+**Note**: When the `Error` checkbox is selected, the search results return spans that match the query and are in an error state.
+
+The search query on the trace side panel supports the following options:
+
+**Free text search:**
+Free-form text search allows filtering by service, resource, or operation name. It highlights the spans containing the specified text within these categories.
+Example: `web`
+
+**Key-value search:**
+Use key:value expression to filter spans with specific key-value pairs.
+Example: `service:web-ui`
+
+**Note**: Wildcards are not supported in the Trace search bar.
+
+**Supported experssions:**
+Group expression: `language:(go OR python)`
+Boolean expression: `service:event-query OR terminator`
+Range expression: `duration:>200ms`
+
+
+**Note**: Numerical values support `<`, `>`, `<=`, and `>=` expressions.
+
+
 ## More information
 
 The height-adjustable bottom of the Trace View shows selected span and trace information. 
@@ -127,7 +156,7 @@ See associated tags, as well as critical host/container metrics graphs including
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [log explorer search][1].
+See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [Log Explorer search][1].
 
 {{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
 

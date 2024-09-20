@@ -4,7 +4,7 @@ import { truncateContent, truncateContentAtHighlight } from "../../helpers/trunc
 export function getHitData(hit, searchQuery = '') {
     const title = hit.title ? hit.title : hit.type;
     const cleanRelPermalink =
-        hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
+        hit.language == 'en' ? hit.distinct_base_url : hit.distinct_base_url.replace(`/${hit.language}/`, '');
 
     const matchingWordsArray = getFilteredMatchingWords(searchQuery).map(word => replaceSpecialCharacters(word))
     const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');

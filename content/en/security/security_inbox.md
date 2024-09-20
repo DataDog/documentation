@@ -10,9 +10,9 @@ further_reading:
 - link: "/security/default_rules/#all"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
-- link: "https://www.datadoghq.com/blog/security-inbox/"
+- link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
   tag: "Blog"
-  text: "Easily identify and prioritize your top security risks with Datadog Security Inbox"
+  text: "How Datadog Security Inbox prioritizes security risks"
 products:
 - name: Cloud Security Management
   url: /security/cloud_security_management/
@@ -30,10 +30,10 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security Management (CSM). These include the following types of findings:
+The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security Management (CSM). By default, these include the following types of findings:
 
-- [Misconfigurations][1] for [CSM Misconfigurations][2].
-- [Identity risks][1] for [CSM Identity Risks][3].
+- A curated set of [misconfigurations][1] for [CSM Misconfigurations][2], compiled by Datadog Security Research.
+- A curated set of [identity risks][1] for [CSM Identity Risks][3], compiled by Datadog Security Research.
 - Application library vulnerabilities for [Software Composition Analysis(SCA)][4]. All high and critical application library vulnerabilities on production services under attack appear in the inbox.
 - Application code vulnerabilities for [Code Security vulnerabilities][5]. All high and critical application code vulnerabilities appear in the inbox.
 - [Attack Paths][1]. An attack path outlines a series of interconnected misconfigurations, container image, host, and application vulnerabilities that malicious actors could leverage to gain unauthorized access, escalate privileges, or compromise sensitive data in your cloud environment. All attack paths are listed in Security Inbox by default.
@@ -44,7 +44,7 @@ Security Inbox also takes the following detected risks into consideration when d
 - **Privileged access**: Resources with privileged access carry elevated risk as they grant elevated permissions that can expand the attack surface.
 - **Under attack**: Resources that are seeing suspicious security activity carry elevated risks. Resources are flagged as "Under Attack" if a security signal has been detected on the resource in the last 15 days.
 - **Exploit available**: Vulnerabilities with public exploits available carry elevated risks. The availability of a public exploit is verified with different exploit databases, such as [cisa.gov][7], [exploit-db.com][8], and [nvd.nist.gov][9].
-- **In production**: Vulnerabilities in production environments carry elevated risks. The environment is computed from the `env` tag.
+- **In production**: Vulnerabilities in production environments carry elevated risks. The environment is computed from the `env` and `environment` tags.
 
 ## How Security Inbox prioritization works
 
@@ -60,7 +60,7 @@ Security Inbox ranks issues by considering the severity of a finding first, foll
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/?category=cat-csm-security-issues#all
+[1]: /security/default_rules/?category=all#all
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/cloud_security_management/identity_risks/
 [4]: /security/application_security/software_composition_analysis

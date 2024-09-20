@@ -95,7 +95,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
     sbom:
       enabled: true
       host:
-        enabled:true
+        enabled: true
     
     ```
 4. [Restart the Datadog Agent][6] to enable CSM Vulnerability Management.
