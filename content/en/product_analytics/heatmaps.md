@@ -103,7 +103,7 @@ Heatmaps are based on Product Analytics view names. Depending on how your Produc
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the [background](#background) of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the [background](#backgrounds) of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-background-selector.mp4" alt="Select a different background via the choose background button" video=true >}}
 
