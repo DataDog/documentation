@@ -1,7 +1,7 @@
 ---
 title: NetFlow Monitor
 further_reading:
-- link: "/network_monitoring/devices/netflow/#visualization"
+- link: "/network_monitoring/netflow/#visualization"
   tag: "Documentation"
   text: "Learn more about NetFlow Monitoring"
 - link: "/monitors/notify/"
@@ -64,9 +64,9 @@ For more information about events you can create NetFlow monitors on, see the [N
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/devices/
-[2]: /network_monitoring/devices/netflow/
+[2]: /network_monitoring/netflow/
 [3]: https://app.datadoghq.com/monitors/create/netflow
-[4]: /network_monitoring/devices/netflow/#visualization
+[4]: /network_monitoring/netflow/#visualization
 [5]: /dashboards/functions/
 [6]: /monitors/configuration/
 [7]: /monitors/notify/
