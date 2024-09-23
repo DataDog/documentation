@@ -6,5 +6,8 @@
 
 {{ with $permissions }}
   {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
-  This endpoint requires the <code>{{ delimit . ", "}}</code> permissions, operator {{ $operator }}
+  This endpoint requires the following permissions, operator {{ $operator }}:
+    {{ range . }}
+      * {{ . }}
+    {{ end }}
 {{ end }}
