@@ -463,7 +463,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `name` 
 : optional - _str_
-<br />Set to override the span name for any auto-instrumented spans started within the annotation context.
+<br />Overrides the span name for any auto-instrumented spans started within the annotation context.
 
 `prompt` 
 : optional - _dictionary_ 
