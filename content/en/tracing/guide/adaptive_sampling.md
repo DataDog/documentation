@@ -16,7 +16,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
-Adaptive sampling is in **Preview**. To request access, complete the form.
+Adaptive sampling is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
