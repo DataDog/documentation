@@ -3,8 +3,7 @@ title: Autodiscovery with JMX
 aliases:
   - /agent/guide/autodiscovery-with-jmx
 algolia:
-  tags: ["JMX", "JMX Metrics", "Missing Web Logic", "JMX Limit
-", "Cassandra", "Kafka", "Tomcat", "Weblogic"]
+  tags: ["JMX", "JMX Metrics", "Missing Web Logic", "JMX Limit", "Cassandra", "Kafka", "Tomcat", "Weblogic"]
 further_reading:
     - link: '/agent/kubernetes/integrations/'
       tag: 'Documentation'
