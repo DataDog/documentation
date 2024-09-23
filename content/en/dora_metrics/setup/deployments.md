@@ -3,7 +3,6 @@ title: How to Set Up Deployment Data for DORA Metrics
 description: Learn how to send deployment events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/deployments
-- /dora_metrics/setup/deployments
 - /dora_metrics/deployments/apm
 - /dora_metrics/deployments/deployment_api
 - /dora_metrics/deployments
