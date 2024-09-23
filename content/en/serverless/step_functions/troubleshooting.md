@@ -57,7 +57,6 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 
 
 #### Notes
-Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.
 
 If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces cannot be merged.
 
