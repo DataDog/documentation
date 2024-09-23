@@ -455,7 +455,7 @@ def similarity_search():
 
 ## Modifying auto-instrumented spans
 
-The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify auto-instrumented spans started while the annotation context is active.
+The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
 
 ### Arguments
 
