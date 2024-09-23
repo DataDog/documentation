@@ -26,6 +26,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - クラウド
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md
 description: TODO
@@ -38,7 +39,6 @@ integration_id: z-scaler
 integration_title: Zscaler
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: zscaler
 public_title: Zscaler
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
   media: []
@@ -74,7 +75,7 @@ version: '1.0'
 
 Zscaler Cloud NSS のサブスクリプションが必要です。
 
-## 計画と使用
+## セットアップ
 
 ### ZIA の Web ログ
 
@@ -85,7 +86,7 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
    * NSS タイプ: `NSS for Web`
    * SIEM タイプ: `Other`
    * バッチサイズ: `16`
-   * API URL: `https://http-intake.logs.datadoghq.com/v1/input?ddsource=zscaler`
+   * API URL: `{{< region-param key="http_endpoint" code="true" >}}/v1/input?ddsource=zscaler`
    * HTTP ヘッダー:
       * キー: `Content-Type`、値: `application/json`
       * キー: `DD-API-KEY`、値: `<YOUR_DATADOG_API_KEY>`
@@ -111,7 +112,7 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
    * バッチサイズ: `16`
    * API URL: `https://http-intake.logs.datadoghq.com/v1/input?ddsource=zscaler`
    * HTTP ヘッダー:
-      * キー: `Content-Type`、値: `application/json`
+      * Key: `Content-Type`; Value: `application/json`
       * キー: `DD-API-KEY`、値: `<YOUR_DATADOG_API_KEY>`
 4. **Formatting** で、以下の値を入力または選択します。
    * ログタイプ: `Firewall logs`
@@ -177,21 +178,21 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `zscaler` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Zscaler には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Zscaler には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Zscaler には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

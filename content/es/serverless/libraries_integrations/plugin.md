@@ -123,7 +123,7 @@ personalizado:
     activado: ${self:custom.staged.dd_enabled, true}
 ```
 
-### Serverless Monitores
+### Serverless Monitors
 
 Hay siete monitors recomendados con valores por defecto preconfigurados.
 
@@ -173,8 +173,7 @@ personalizado:
           opciones:
             include_tags: true
             notify_audit: true
-            umbrales:
-              ok: 0.025
+            Umbrales:
               advertencia: 0.05
               crítico: 0.1
 ```
@@ -194,18 +193,17 @@ personalizado:
     monitors:
       - custom_monitor_id:
           nombre: "Custom Monitor"
-          consulta: "max(next_1w):forecast(avg:system.load.1{*}, 'linear', 1, interval='60m', history='1w', model='default') >= 3"
+          consulta :"max(next_1w):forecast(avg:system.load.1{*}, 'linear', 1, interval='60m', history='1w', model='default') >= 3"
           mensaje: "Custom message for custom monitor. Notify @data.dog@datadoghq.com @slack-serverless-monitors"
           etiquetas: ["custom_monitor", "serverless"]
           prioridad: 3
-          opciones:
+          options:
             enable_logs_sample: true
             require_full_window: true
             include_tags: false
             notify_audit: true
             notify_no_data: false
-            thresholds:
-              ok: 1
+            umbrales:
               advertencia: 2
               crítico: 3
 ```
@@ -214,7 +212,7 @@ personalizado:
 
 [**v5.0.0**](https://github.com/DataDog/serverless-plugin-datadog/releases/tag/v5.0.0)
 
-- Cuando se utiliza junto con la extensión Datadog, este complemento configura las etiquetas `service` y `env` a través de las variables de entorno, en lugar de las etiquetas (tags) de recursos Lambda.
+- Cuando se utiliza junto con la extensión Datadog, este complemento configura las etiquetas `service` y `env` a través de las variables de entorno, en lugar de las etiquetas de recursos Lambda.
 - El parámetro `enableTags` se sustituyó por los nuevos parámetros `service`, `env`.
 
 [**v4.0.0**](https://github.com/DataDog/serverless-plugin-datadog/releases/tag/v4.0.0)

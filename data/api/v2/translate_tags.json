@@ -33,7 +33,7 @@
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
-    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."
+    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
@@ -181,7 +181,11 @@
   },
   "service-scorecards": {
     "name": "Service Scorecards",
-    "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+  },
+  "software-catalog": {
+    "name": "Software Catalog",
+    "description": "API to create, update, retrieve and delete Software Catalog entities."
   },
   "spans": {
     "name": "Spans",
@@ -206,5 +210,9 @@
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
+  },
+  "workflow-automation": {
+    "name": "Workflow Automation",
+    "description": "Automate your teams operational processes with Datadog Workflow Automation."
   }
 }

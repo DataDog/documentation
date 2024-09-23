@@ -8,7 +8,7 @@ further_reading:
 - link: /tracing/metrics/runtime_metrics/dotnet/
   tag: ドキュメント
   text: ランタイムメトリクス
-- link: /tracing/trace_collection/trace_context_propagation/dotnet/
+- link: /tracing/trace_collection/trace_context_propagation/
   tag: ドキュメント
   text: トレースコンテキストの伝搬
 - link: /serverless/azure_app_services/
@@ -27,11 +27,14 @@ further_reading:
   tag: ブログ
   text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
-  tag: GitHub
+  tag: ソースコード
   text: カスタムインスツルメンテーションの例
 - link: https://github.com/DataDog/dd-trace-dotnet
-  tag: GitHub
+  tag: ソースコード
   text: ソースコード
+- link: /opentelemetry/interoperability/environment_variable_support
+  tag: ドキュメント
+  text: OpenTelemetry Environment Variable Configurations
 title: .NET Framework トレーシングライブラリの構成
 type: multi-code-lang
 ---
@@ -113,11 +116,11 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 {{< /tabs >}}
 
-### コンフィギュレーション設定
+## 構成設定
 
 上記の方法を使用して、次の変数を使用してトレースコンフィギュレーションをカスタマイズします。環境変数またはコンフィギュレーションファイルを設定するときは、環境変数の名前 (たとえば、`DD_TRACE_AGENT_URL`) を使用します。コードの設定を変更するときには、TracerSettings プロパティの名前 (たとえば、`Exporter.AgentUri`) を使用します。
 
-#### 統合サービスタグ付け
+### 統合サービスタグ付け
 
 [統合サービスタグ付け][4]を使用するには、サービスに対して次の設定を構成します。
 
@@ -133,67 +136,41 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : **TracerSettings プロパティ**: `ServiceVersion`<br>
 指定した場合、サービスのバージョンを設定します。バージョン 1.17.0 で追加されました。
 
-#### 任意のコンフィギュレーション
+### 任意のコンフィギュレーション
 
 自動インスツルメンテーションとカスタムインスツルメンテーションの両方で、次の構成変数を利用できます。
 
-`DD_TRACE_AGENT_URL`
-: **TracerSettings プロパティ**: `Exporter.AgentUri`<br>
-トレースが送信される URL のエンドポイントを設定します。設定されている場合は `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。[Agent 構成][13]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` はそれにマッチしなければなりません。<br>
-**デフォルト**: 設定されている場合は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`、または `http://localhost:8126`。
+#### トレース
 
-`DD_AGENT_HOST`
-: Agent が接続をリッスンするホストを設定します。ホスト名または IP アドレスを指定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
-**デフォルト**: `localhost`
+`DD_TRACE_AGENT_URL`
+: **TracerSettings property**: `Exporter.AgentUri`<br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
+Note that Unix Domain Sockets (UDS) are not supported on .NET Framework.<br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
 
 `DD_TRACE_AGENT_PORT`
 : Agent が接続を待機している TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。[Agent 構成][13]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` はそれにマッチしなければなりません。<br>
 **デフォルト**: `8126`
 
 `DD_TRACE_SAMPLE_RATE`
-: **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
-**デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
-取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
-詳しくは、[取り込みメカニズム][6]を参照してください。<br><br>
-**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_SAMPLE_RATE` を設定できます。
+: **TracerSettings property**: `GlobalSamplingRate` <br>
+**Default**: Defaults to the rates returned by the Datadog Agent<br>
+Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
+For more information, see [Ingestion Mechanisms][6]. <br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings プロパティ**: `CustomSamplingRules`<br>
 **デフォルト**: `null`<br>
-オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
-詳しくは、[取り込みメカニズム][6]を参照してください。<br>
-**例:**<br>
-  - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
-  - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+オブジェクトの JSON 配列。各オブジェクトは `sample_rate` を持たなければなりません。`name` と `service` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
+詳しくは、[取り込みメカニズム][6]を参照してください。<br>**例:**<br>
+  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings プロパティ**: `MaxTracesSubmittedPerSecond` <br>
 1 秒間に送信できるトレースの数 (`DD_MAX_TRACES_PER_SECOND` は非推奨)。 <br>
 **デフォルト**: `DD_TRACE_SAMPLE_RATE` が設定されている場合、`100`。それ以外の場合は、Datadog Agent にレート制限を委ねます。
-
-`DD_SPAN_SAMPLING_RULES`
-: **デフォルト**: `null`<br>
-<br>オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は、0.0 から 1.0 までの間でなければなりません (この値を含む)。詳しくは、[取り込みメカニズム][1]を参照してください。
-**例**: サービス名 `my-service` と操作名 `http.request` のスパンのサンプルレートを 50% に設定し、最大で 1 秒間に 50 個のトレースにします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
-自動インスツルメンテーションオプションコンフィギュレーション
-
-`DD_TRACE_HEADER_TAGS`
-: **TracerSettings プロパティ**:`HeaderTags` <br>
-大文字と小文字を区別しないヘッダーキーとタグ名のキーと値のペアのカンマ区切りリストを受け入れ、一致するヘッダー値をルートスパンのタグとして自動的に適用します。特定のタグ名のないエントリも受け入れます。<br>
-**例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。<br><br>
-**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_HEADER_TAGS` を設定できます。
-
-`DD_TRACE_CLIENT_IP_ENABLED`
-: 関連する IP ヘッダーからクライアント IP を収集できるようにします。<br>
-バージョン `2.19.0` で追加されました。<br>
-**デフォルト**: `false`<br>
-
-`DD_TRACE_CLIENT_IP_HEADER`
-: クライアント IP の収集に使用する IP ヘッダー、例: `x-forwarded-for` <br>
-バージョン `2.19.0` で追加されました。<br>
-**デフォルト**: Datadog は以下をパースします: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"` 複数存在する場合は、何も報告されません。<br>
 
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
@@ -202,12 +179,34 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **注**: デリミタはコンマとスペース: `, ` です。<br>
 バージョン 1.17.0 で追加されました。<br>
 
-`DD_TRACE_LOG_DIRECTORY`
-: .NET Tracer ログのディレクトリを設定します。<br>
-**デフォルト**: `%ProgramData%\Datadog .NET Tracer\logs\`
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `null`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
+**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
 
-`DD_TRACE_LOGGING_RATE`
-: ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。
+自動インスツルメンテーションオプションコンフィギュレーション
+
+`DD_TRACE_HEADER_TAGS`
+: **TracerSettings property**:`HeaderTags` <br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+**Example** (with specified tag names): `User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
+**Example** (without specified tag names): `User-ID`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
+If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
+Added in version 1.18.3.<br>
+Response header support and entries without tag names added in version 1.26.0.<br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
+
+`DD_TRACE_CLIENT_IP_ENABLED`
+: 関連する IP ヘッダーからクライアント IP を収集できるようにします。<br>
+バージョン `2.19.0` で追加されました。<br>
+**デフォルト**: `false`<br>
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
+Added in version `2.19.0`.<br>
+**Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, none will be reported.<br>
 
 `DD_TRACE_SERVICE_MAPPING`
 : コンフィギュレーションを使用してサービスの名前を変更します。名前を変更するサービス名のキーと、代わりに使う名前のペアをカンマ区切りで `[from-key]:[to-name]` の形式で受け入れます。<br>
@@ -225,41 +224,47 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : `DD_HTTP_SERVER_TAG_QUERY_STRING` が true の場合、この正規表現は `http.url` タグで報告されるリクエストのクエリ文字列から機密データを削除します (マッチすると `<redacted>` に置き換えられます)。この正規表現は、受信するリクエストごとに実行されます。
 
+#### Agent
+
+`DD_AGENT_HOST`
+: Agent が接続をリッスンするホストを設定します。ホスト名または IP アドレスを指定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
+**デフォルト**: `localhost`
+
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : Datadog は、製品の改良のため、[システムの環境・診断情報][6]を収集することがあります。false の場合、このテレメトリーデータは収集されません。<br>
 **デフォルト**: `true`
 
-#### 自動インスツルメンテーションオプション構成
+#### Diagnostic logs
+
+`DD_TRACE_LOG_DIRECTORY`
+: .NET Tracer ログのディレクトリを設定します。<br>
+**デフォルト**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: トレーサーの起動中に、この構成は、トレーサーの現在のログディレクトリを使用して、指定された日数と同じかそれよりも古いログファイルを削除します。バージョン 2.19.0 で追加されました。 <br>
+**デフォルト**: `31`
+
+`DD_TRACE_LOGGING_RATE`
+: ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。
+
+#### OpenTelemetry
+
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
+### 自動インスツルメンテーションオプション構成
 
 以下の構成変数は、自動インスツルメンテーションの使用時に**のみ**利用できます。
 
+#### トレース
+
 `DD_TRACE_ENABLED`
-: **TracerSettings プロパティ**: `TraceEnabled`<br>
-<br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false` です。
-**デフォルト**: `true`
-
-`DD_DBM_PROPAGATION_MODE`
-: `'service'` または `'full'` に設定すると、APM から送信されるデータとデータベースモニタリング製品との連携が可能になります。`'service'` オプションは、DBM と APM のサービス間の接続を有効にします。`'full'` オプションは、データベースクエリイベントを持つデータベーススパン間の接続を有効にします。Postgres と MySQL で利用可能です。<br>
-**デフォルト**: `'disabled'`
-
-`DD_HTTP_CLIENT_ERROR_STATUSES`
-: HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
-**デフォルト**: `400-499`
-
-`DD_HTTP_SERVER_ERROR_STATUSES`
-: HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
-**デフォルト**: `500-599`
-
-`DD_LOGS_INJECTION`
-: **TracerSettings プロパティ**: `LogsInjectionEnabled` <br>
-アプリケーションログに相関識別子を自動的に注入することを有効または無効にします。 <br>
-ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。<br><br>
-**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_LOGS_INJECTION` を設定できます。
-
-`DD_RUNTIME_METRICS_ENABLED`
-: .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。<br>
-**デフォルト**: `false`<br>
-バージョン 1.23.0 で追加されました。
+: **TracerSettings property**: `TraceEnabled`<br>
+Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
+**Default**: `true`
+**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : ASP.NET/ASP.NET Core 用アプリケーションのすべてのルートパラメーター (ID パラメーターを除く) を拡張します<br>
@@ -279,7 +284,38 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
 `false` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。このパラメーターを `false` に設定すると、コンシューマースパンはすぐに閉じられます。トレースする子スパンがある場合は、コンテキストを手動で抽出する必要があります。詳しくは、[ヘッダーの抽出と挿入][12]をお読みください。
 
-#### 自動インスツルメンテーションインテグレーション構成
+#### データベースモニタリング
+
+`DD_DBM_PROPAGATION_MODE`
+: Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+**Default**: `disabled`
+
+#### ランタイムメトリクス
+
+`DD_RUNTIME_METRICS_ENABLED`
+: .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。<br>
+**デフォルト**: `false`<br>
+バージョン 1.23.0 で追加されました。
+
+#### エラー
+
+`DD_HTTP_CLIENT_ERROR_STATUSES`
+: HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
+**デフォルト**: `400-499`
+
+`DD_HTTP_SERVER_ERROR_STATUSES`
+: HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
+**デフォルト**: `500-599`
+
+#### Logs
+
+`DD_LOGS_INJECTION`
+: **TracerSettings property**: `LogsInjectionEnabled` <br>
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5]. <br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
+
+### 自動インスツルメンテーションインテグレーション構成
 
 次の表に、自動インスツルメンテーションを使用しており、インテグレーションごとの設定が可能な場合に**のみ**使用できる構成変数を示します。
 
@@ -292,7 +328,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 <br>特定のインテグレーションを有効または無効にします。有効な値は、`true` (デフォルト) または `false` です。インテグレーション名は、[インテグレーション][7]セクションにリストされています。
 **デフォルト**: `true`
 
-#### 試験機能
+### 試験機能
 
 以下の構成変数は現在利用可能な機能ですが、今後のリリースで変更される場合があります。
 
@@ -300,7 +336,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : Datadog Agent への大規模トレースのフラッシュをインクリメント形式で有効化し、Agent に拒否される可能性を低減します。保持期間が長いトレースまたは多数のスパンを持つトレースがある場合にのみ使用してください。有効な値は `true` または `false` です。バージョン 1.26.0 で追加され、Datadog Agent 7.26.0 以降とのみ互換性を有しています。<br>
 **デフォルト**: `false`
 
-#### 非推奨の設定
+### 非推奨の設定
 
 `DD_TRACE_LOG_PATH`
 : 自動インスツルメンテーションログファイルにパスを設定し、他の .NET Tracer ログファイルすべてのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合、無視されます。
@@ -323,8 +359,11 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[13]: /ja/agent/guide/network/#configure-ports
+[13]: /ja/agent/configuration/network/#configure-ports
 [14]: /ja/tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /ja/tracing/configure_data_security#telemetry-collection
 [16]: /ja/agent/remote_config/
 [17]: https://app.datadoghq.com/services
+[18]: /ja/tracing/trace_collection/otel_instrumentation/dotnet/
+[19]: /ja/tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
+[20]: /ja/opentelemetry/interoperability/environment_variable_support

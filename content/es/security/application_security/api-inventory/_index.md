@@ -42,11 +42,11 @@ Las siguientes versiones de biblioteca son compatible con el Inventario de segur
 
 ## Cómo funciona
 
-El Inventario de seguridad de la API aprovecha la biblioteca de rastreo de Datadog [ASM habilitado][5] para recopilar metadatos de seguridad sobre el tráfico de la API, incluido el esquema de la API, los tipos de datos confidenciales procesados y el esquema de autenticación.
+El inventario de la API aprovecha la biblioteca de rastreo de Datadog con ASM habilitado para recopilar metadatos de seguridad sobre el tráfico de la API, incluido el esquema de la API, los tipos de datos confidenciales procesados y el esquema de autenticación.
 
 El Inventario de seguridad de la API utiliza la [configuración remota][4] para gestionar y configurar reglas de análisis que detectan datos confidenciales y autenticaciones.
 
-En cada enspoint se calculan los siguientes riesgos:
+En cada endpoint se calculan los siguientes riesgos:
 
 ### Servicio en producción
 
@@ -119,6 +119,5 @@ Por defecto, el Inventario de seguridad de la API evalúa una de cada diez solic
 [2]: /es/security/application_security/threats/
 [3]: /es/security/application_security/software_composition_analysis/
 [4]: /es/agent/remote_config/
-[5]: /es/security/application_security/enabling/
 [6]: /es/security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis

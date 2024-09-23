@@ -123,6 +123,7 @@
           - "*/metadata.csv"
           - "*/manifest.json"
           - "*/assets/service_checks.json"
+          - "*/assets/metrics/metric-spec.yaml"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
@@ -452,6 +453,8 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
               title: Continuous Testing and CI GitHub Actions
+              algolia:
+                tags: ['datadog lambda extension']
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
@@ -579,17 +582,14 @@
 
       - repo_name: dd-source
         contents:
-        - action: workflows
+        - action: pull-and-push-file
           branch: main
           globs:
-            - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
-            - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
-            dest_path: '/service_management/workflows/actions_catalog/'
-            bundle_excludes:
-              - "com.datadoghq.test"
-              - "com.datadoghq.sample"
-              - "com.datadoghq.internal"
+            base_path: ""
+            dest_path: "/data/"
+            file_name: "workflow_bundles.json"
 
       - repo_name: web-ui
         contents:

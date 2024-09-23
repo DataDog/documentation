@@ -81,6 +81,18 @@ For Events, you can choose how they're displayed in the widget:
 * Small (title only)
 * Large (full event)
 
+### Incidents
+
+#### Sorting by
+
+For incidents, you can sort by:
+
+* Created time
+* Severity
+* Status
+
+Ascending or descending
+
 ## API
 
 This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:

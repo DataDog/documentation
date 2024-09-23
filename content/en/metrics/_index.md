@@ -11,7 +11,7 @@ cascade:
         tags: ["submit metrics", "metrics submission"]
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
   Explore and register for Foundation Enablement sessions for custom metrics. Learn how custom metrics help you track your application KPIs, such as the number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
 {{< /learning-center-callout >}}
 

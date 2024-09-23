@@ -435,28 +435,30 @@ To automatically track resources (network requests) and get their timing informa
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[SessionDelegate alloc] init]
+                                                      delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
@@ -481,13 +483,13 @@ RUM.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -536,12 +538,12 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
+URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[DDURLSessionInstrumentation disableWithDelegateClass:[SessionDelegate class]];
+[DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -705,23 +707,6 @@ RumMonitor.shared().currentSessionID(completion: { sessionId in
   currentSessionId = sessionId
 })
 ```
-
-## Set tracking consent (GDPR compliance)
-
-To be compliant with the GDPR regulation, the RUM iOS SDK requires the tracking consent value at initialization.
-
-The `trackingConsent` setting can be one of the following values:
-
-1. `.pending`: The RUM iOS SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOS SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `.granted`: The RUM iOS SDK starts collecting the data and sends it to Datadog.
-3. `.notGranted`: The RUM iOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
-
-To change the tracking consent value after the RUM iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM iOS SDK changes its behavior according to the new value.
-
-For example, if the current tracking consent is `.pending`:
-
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
-- If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
 ## Further Reading
 

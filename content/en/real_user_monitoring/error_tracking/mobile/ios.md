@@ -308,7 +308,7 @@ When enabled, a watchdog termination is reported and attached to the previous RU
 
 - The application was not upgraded in the meantime,
 
-- And it did not call neither `exit`, nor `abort`,
+- And it did not call either `exit`, or `abort`,
 
 - And it did not crash, either because of an exception, or because of a fatal [app hang][13],
 
@@ -460,7 +460,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError("Crash the app")
+     fatalError("Crash the app")
    }
    ```
 

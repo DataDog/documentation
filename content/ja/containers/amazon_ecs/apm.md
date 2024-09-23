@@ -190,7 +190,7 @@ const axios = require('axios');
 トレーサーがホスト名を明示的に設定するように、コードを更新することもできます。
 
 ```ruby
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 require 'net/http'
 
 Datadog.configure do |c|
@@ -326,7 +326,7 @@ IMDSv2 を使用する場合、同等の `entryPoint` の構成は以下のよ�
 ]
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

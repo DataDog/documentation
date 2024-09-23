@@ -1,5 +1,5 @@
 ---
-title: ASM Terms and Concepts
+title: Terms and Concepts
 disable_toc: false
 further_reading:
 - link: "/security/application_security/how-appsec-works"
@@ -17,10 +17,10 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Datadog Application Security is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Datadog Application Security Management (ASM) monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
+Datadog Application Security monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General application security terms
 
@@ -29,14 +29,14 @@ attack attempt
 
 Datadog library
 : _also_ tracer, tracing library
-: A programming language-specific library embedded in web applications. ASM uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
+: A programming language-specific library embedded in web applications. Datadog Application Security uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
 
 detection rule
 : A conditional logic definition that is applied to ingested data and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a _security signal_.
 : See [Detection rules][10].
 
 passlist (formerly exclusion filter)
-: A mechanism for discarding security traces flagged through the ASM library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
+: A mechanism for discarding security traces flagged through the Datadog Application Security library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
 : See [Exclusion filters][11] in the app.
 
 In-App WAF rules (formerly event rules)
@@ -47,7 +47,7 @@ interactive application security testing (IAST)
 : An application security testing method that proactively detects vulnerabilities while the app is run by an automated test, human tester, or any activity interacting with the application functionality.
 
 Remote Configuration
-: A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by ASM to update In-App WAF rules, activate the product, and block attackers.
+: A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by Datadog Application Security to update In-App WAF rules, activate the product, and block attackers.
 : See [How Remote Configuration Works][8].
 
 service

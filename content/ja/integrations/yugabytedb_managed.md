@@ -29,6 +29,7 @@ categories:
 - Azure
 - Google Cloud
 - モニター
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/yugabytedb_managed/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: yugabytedb-managed
 integration_title: YugabyteDB Managed
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: yugabytedb_managed
 public_title: YugabyteDB Managed
@@ -56,6 +56,7 @@ tile:
   - Category::Google Cloud
   - Category::Metrics
   - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: YugabyteDB Managed クラスターのメトリクスを Datadog にエクスポートする
   media:
@@ -95,10 +96,10 @@ tile:
 - 読み取り/書き込み操作のスループットとレイテンシー (YSQL と YCQL の両方)。
 - 高度なマスターとタブレットサーバーのテレメトリー (例えば、内部 RPC スループット/レイテンシー、WAL 読み取り/書き込みスループット)。
 
-## 計画と使用
+## セットアップ
 **注**: この機能は [Sandbox Clusters][3] では使用できません。
 
-### インフラストラクチャーリスト
+### インストール
 
 YugabyteDB Managed と Datadog のインテグレーションを有効にするには
 
@@ -130,21 +131,21 @@ Datadog にエクスポートされるメトリクスを無効にするには
 
 **注**: クラスターは、一時停止中または別の操作が進行中の場合、構成を関連付けることはできません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "yugabytedb_managed" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 YugabyteDB Managed には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 YugabyteDB Managed には、イベントは含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[YugabyteDB のサポートチーム][8]までお問い合わせください。
 

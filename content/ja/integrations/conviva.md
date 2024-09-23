@@ -1,6 +1,7 @@
 ---
 categories:
 - メトリクス
+custom_kind: integration
 dependencies: []
 description: 動画配信プラットフォームの Conviva Quality Insights メトリクスを監視します。
 doc_link: https://docs.datadoghq.com/integrations/conviva/
@@ -11,7 +12,6 @@ integration_id: ''
 integration_title: Conviva
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: conviva
 public_title: Datadog-Conviva インテグレーション
@@ -25,13 +25,13 @@ version: '1.0'
 
 Datadog と Conviva アカウントを接続して、エクスペリエンスの品質 (QoE) MetricLens メトリクスを確認します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog の [Conviva インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 1. Datadog [Conviva インテグレーションタイル][1]内のコンフィギュレーションタブに移動します。
 2. **Add New Credentials** をクリックして、Conviva API キーと API シークレットを入力します。Datadog で、この認証情報に紐づけされたアカウントが検索されます。
 3. 認証情報に関連付けられたアカウントが Datadog に見つかったら、_MetricLens_ を追加して Datadog に取り込むメトリクスを決定します。MetricLens の名前と、_フィルター_および_ディメンション_を指定します。名前は、その指定した MetricLens に自動的にタグ付けされます。
@@ -39,30 +39,30 @@ Datadog の [Conviva インテグレーションタイル][1]を使用して、�
 5. **Add New** をクリックしてその後の手順に従い、さらに _MetricLens_ を追加します。
 6. **Add New Credentials** ボタンを使用して、追加の Conviva 認証方法でこのステップを繰り返します。
 
-### ダッシュボード  
+### ダッシュボード
 インテグレーションの構成後、すぐに使える Conviva ダッシュボードを使用して MetricLens メトリクスの概要を取得します。デフォルトでは、すべての MetricLens で収集されたすべてのメトリクスが表示されます。
 
 {{< img src="integrations/conviva/conviva_dashboard.png" alt="Conviva インテグレーションのすぐに使えるダッシュボード" popup="true" style="width:100%" >}}
 
 `metriclens` でフィルタリングすることで、各タイルに設定された MetricLens ごとにメトリクスの内訳を表示できます。さらに、`dimension` のフィルターで絞り込むと、単一のディメンションエンティティ別にメトリクスを確認できます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "conviva" >}}
 
 
-### ヘルプ
+### イベント
 
 Conviva インテグレーションは [Datadog イベントストリーム][3]にアラートを送信します。
 
 {{< img src="integrations/conviva/conviva_eventstream.png" alt="Datadog Conviva イベントストリームの監視アラート" popup="true" style="width:100%" >}}
 
-### ヘルプ
+### サービスチェック
 
 Conviva インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

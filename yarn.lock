@@ -2714,48 +2714,48 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datadog/browser-core@npm:5.20.0":
-  version: 5.20.0
-  resolution: "@datadog/browser-core@npm:5.20.0"
-  checksum: 82fb37ee0d02bda6f958549fd7b0c7f075613172bcb27133d2fa2fb91b22f6b4b1002042c0e96960993ebf0cde1d14aa55cdfaa2bc99bc358a793e491563d5c2
+"@datadog/browser-core@npm:5.27.0":
+  version: 5.27.0
+  resolution: "@datadog/browser-core@npm:5.27.0"
+  checksum: 9233fb8865199785741ebfa6ce0c06d1aabd8363216503933c6315bfc8c1dffe53184ca0e6b37397c6c9191781afd0aaae3912dd51d919e29e3e6928ca18d475
   languageName: node
   linkType: hard
 
-"@datadog/browser-logs@npm:^5.20.0":
-  version: 5.20.0
-  resolution: "@datadog/browser-logs@npm:5.20.0"
+"@datadog/browser-logs@npm:^5.27.0":
+  version: 5.27.0
+  resolution: "@datadog/browser-logs@npm:5.27.0"
   dependencies:
-    "@datadog/browser-core": 5.20.0
+    "@datadog/browser-core": 5.27.0
   peerDependencies:
-    "@datadog/browser-rum": 5.20.0
+    "@datadog/browser-rum": 5.27.0
   peerDependenciesMeta:
     "@datadog/browser-rum":
       optional: true
-  checksum: d3ead69bb892e7d4015c58bdf180a318e0e2efcb572e503334852a458c31014b26b9948b1aec759b6b5a2fc743045b071be6a58685b191249b3bc4235b407fca
+  checksum: 8552d9834120220d1e3cb2239b16de8f59a4af8f51862d15e3a1e516654725dacc419416ae467abff520c07abf8e21d320f89188d55db081f876ec34fc83dcea
   languageName: node
   linkType: hard
 
-"@datadog/browser-rum-core@npm:5.20.0":
-  version: 5.20.0
-  resolution: "@datadog/browser-rum-core@npm:5.20.0"
+"@datadog/browser-rum-core@npm:5.27.0":
+  version: 5.27.0
+  resolution: "@datadog/browser-rum-core@npm:5.27.0"
   dependencies:
-    "@datadog/browser-core": 5.20.0
-  checksum: cec616fe07c37877abef7a02f5ef67efc54b4bd790372628049350d94d4c3fa852c9c4d9d3a9998d30c8c0927b426ceddbc52a4211e3521dbe477aa37def2b1a
+    "@datadog/browser-core": 5.27.0
+  checksum: 55a80145029b1ca5dbfadfd66e0f9b14a43fa6d1669e68067a0cf2eff9d5342d270da68a62767cfc9d58f59282d7376f367e71a8dfc9d1a8f6e8da9e30299857
   languageName: node
   linkType: hard
 
-"@datadog/browser-rum@npm:^5.20.0":
-  version: 5.20.0
-  resolution: "@datadog/browser-rum@npm:5.20.0"
+"@datadog/browser-rum@npm:^5.27.0":
+  version: 5.27.0
+  resolution: "@datadog/browser-rum@npm:5.27.0"
   dependencies:
-    "@datadog/browser-core": 5.20.0
-    "@datadog/browser-rum-core": 5.20.0
+    "@datadog/browser-core": 5.27.0
+    "@datadog/browser-rum-core": 5.27.0
   peerDependencies:
-    "@datadog/browser-logs": 5.20.0
+    "@datadog/browser-logs": 5.27.0
   peerDependenciesMeta:
     "@datadog/browser-logs":
       optional: true
-  checksum: 22da9ed6f07642db87540ce9c085a16a86a9cbf0f9b41d0eb6605c66631ed1769a66a14fa3ff70e8b36d27f9e8780b806cb4569a97aa87ab1202383a57068bcb
+  checksum: 18f2d8485c462a8360349e9c5bda1781d6f9d47fedf7a9edfa0249af4fd74a60a9fbcf301535ce1612da565aea251c2133524426d7df24d146095235984536e2
   languageName: node
   linkType: hard
 
@@ -6407,8 +6407,8 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.20.7
     "@babel/polyfill": ^7.12.1
     "@babel/preset-env": ^7.24.0
-    "@datadog/browser-logs": ^5.20.0
-    "@datadog/browser-rum": ^5.20.0
+    "@datadog/browser-logs": ^5.27.0
+    "@datadog/browser-rum": ^5.27.0
     "@datadog/datadog-ci": ^2.36.0
     "@popperjs/core": ^2.11.8
     acorn: ^7.4.1

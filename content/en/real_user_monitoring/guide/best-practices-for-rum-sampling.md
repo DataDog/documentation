@@ -21,7 +21,7 @@ This guide walks you through best practices for RUM sampling so you can capture 
 Sessions are randomly sampled based on the percentage listed in the [SDK configuration][1]. To that end, make sure to use the correct configuration variable names for the SDK version being used.
 
 ### Configure the sampling rate
-Before each new user session, the SDK draws a random floating-point number between 0 and 1, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the value is higher, the session is not kept and events are not collected until the end of the session.
+Before each new user session, the SDK draws a random floating-point number between 0 and 100, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the random number is higher, the session is not kept and events are not collected until the end of the session.
 
 You can set the sampling rate with the SDK ([Browser][2], [Android][3], [iOS][4], [React Native][5], [Flutter][6], [Roku][7]), then deploy it in the application code.
 

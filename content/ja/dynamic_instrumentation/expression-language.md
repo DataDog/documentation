@@ -5,7 +5,7 @@ title: ダイナミックインスツルメンテーション式言語
 
 ## 概要
 
-ダイナミックインスツルメンテーション式言語は、ログプローブメッセージテンプレート、メトリクスプローブ式、スパンタグ値、およびプローブ条件を定式化するのに役立つ言語です。一般的なプログラミング言語から構文要素を借用していますが、独自のルールもあります。この言語では、オブジェクト内のローカル変数、メソッドパラメーター、ネストされたフィールドにアクセスでき、比較演算子および論理演算子の使用をサポートしています。
+The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
 
 例えば、`count(myCollection)` をメトリクス式として使用すると、コレクションのサイズからヒストグラムを作成することができます。メトリクス式は数値として評価されなければなりません。
 
@@ -15,13 +15,15 @@ title: ダイナミックインスツルメンテーション式言語
 
 一般的に、式言語は以下をサポートしています。
 * オブジェクト内のローカル変数、メソッドのパラメーター、深くネストされたフィールドや属性へのアクセス。
-* 比較演算子 (`<`、`>`、`>=`、`<=`、`==`、`!=`) を使って、変数、フィールド、定数を比較。例: `localVar1.field1.field2 != 15`
+* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * 論理演算子 (`&&`、`||`、`not` または `!`) を使って複雑なブール値を構築。
 * `null` リテラル (Python の `nil` に相当) を使用。
 
 以下はサポートして**いません**。
 * メソッドの呼び出し。ダイナミックインスツルメンテーションは副作用のあるコードの実行を許可しません。しかし、`private` フィールドに直接アクセスすることはできます。
 * このページで説明されている以外のネイティブプログラミング言語の構文。
+
+Try the [autocomplete and search open beta][6] for an improved user experience using the Expression Language.
 
 以下のセクションでは、ダイナミックインスツルメンテーション式言語がサポートする変数と 操作について説明します。
 
@@ -32,6 +34,7 @@ title: ダイナミックインスツルメンテーション式言語
 | `@return`   | 戻り値へのアクセスを提供します                                        |
 | `@duration` | 呼び出し実行期間へのアクセスを提供します                             |
 | `@it`       | コレクションの反復操作における現在値へのアクセスを提供します    |
+| `@exception`| Provides access to the current uncaught exception                          |
 
 
 ## 文字列演算子
@@ -63,3 +66,4 @@ title: ダイナミックインスツルメンテーション式言語
 [3]: /ja/metrics/types/?tab=histogram#metric-types
 [4]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [5]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[6]: /ja/dynamic_instrumentation/symdb/

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /network_performance_monitoring/installation/
+- /ja/network_performance_monitoring/installation/
 description: Agent を使用したネットワークデータの収集
 further_reading:
 - link: https://www.datadoghq.com/blog/network-performance-monitoring
@@ -457,22 +457,6 @@ Amazon ECS での設定については、[Amazon ECS][1] ドキュメントペ�
 - AWS ロードバランサーを可視化するには、[AWS インテグレーション][102]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
 
 これらの機能に関する追加情報は、[クラウドサービスエンハンスドレゾリューション][103]を参照してください。
-
-### 失敗した接続 (非公開ベータ版)
-
-<div class="alert alert-warning">失敗した接続は非公開ベータ版です。<a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">失敗した接続のメトリクス</a>の確認を始めるには、Datadog の担当者に連絡し、アクセスをリクエストしてください。</div>
-
-失敗した接続に関するデータの収集を開始するよう Agent を有効にするには、次のフラグを `/etc/datadog-agent/system-probe.yaml` ファイル (Windows の場合は `C:\ProgramData\Datadog\system-probe.yaml`) に追加します。
-
-```yaml
-network_config:   # Agent のバージョンが 7.24.1 よりも古い場合は system_probe_config を使用します
-  ## @param enabled - ブール値 - オプション - デフォルト: false
-  ## ネットワークパフォーマンスモニタリングを有効にするには true に設定します。
-  #
-  enabled: true
-  enable_tcp_failed_connections: true
-
-```
 
 [101]: /ja/integrations/azure
 [102]: /ja/integrations/amazon_web_services/#resource-collection

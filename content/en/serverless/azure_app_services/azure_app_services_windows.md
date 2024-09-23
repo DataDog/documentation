@@ -161,7 +161,7 @@ Learn more about [custom metrics][12].
 [12]: /metrics/
 [13]: /integrations/guide/azure-portal/#app-service-extension
 [14]: /integrations/guide/azure-portal/
-[15]: /security/application_security/enabling/serverless/?tab=serverlessframework#azure-app-service
+[15]: /security/application_security/serverless/?tab=serverlessframework#azure-app-service
 {{% /tab %}}
 {{% tab "Java" %}}
 ### Requirements
@@ -322,7 +322,7 @@ Learn more about [custom metrics][10].
 [8]: https://github.com/brightcove/hot-shots
 [9]: /developers/dogstatsd/?tab=java#code
 [10]: /metrics/
-[11]: /security/application_security/enabling/nodejs/
+[11]: /security/application_security/serverless/
 [12]: /developers/dogstatsd/
 {{% /tab %}}
 {{< /tabs >}}

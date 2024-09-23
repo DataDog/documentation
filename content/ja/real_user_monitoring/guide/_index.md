@@ -22,7 +22,6 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}RUM サンプリングのベストプラクティス{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}RUM で UTM キャンペーンを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザ RUM:" >}}
@@ -40,6 +39,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce ストアで RUM を有効にする{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}RUM を使用した Next.js アプリケーションの監視{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Capacitor アプリケーションの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}

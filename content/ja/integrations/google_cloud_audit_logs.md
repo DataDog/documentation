@@ -4,6 +4,7 @@ categories:
 - google cloud
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies: []
 description: 監査ログダッシュボードを表示します。
 doc_link: ''
@@ -14,7 +15,6 @@ integration_id: google-cloud-audit-logs
 integration_title: Datadog Google 監査ログダッシュボード
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_audit_logs
 public_title: Datadog Google 監査ログダッシュボードのインテグレーション

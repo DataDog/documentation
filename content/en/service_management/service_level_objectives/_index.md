@@ -21,9 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-key-questions/"
   tag: "Blog"
   text: "Key questions to ask when setting SLOs"
-- link: "https://dtdg.co/fe"
-  tag: "Foundation Enablement"
-  text: "Join an interactive session on creating effective monitors and SLOs"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
   tag: "External Site"
   text: "Create and manage SLOs with Terraform"
@@ -33,7 +33,7 @@ further_reading:
 
 <br />
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=SLOs&tags.topics-1=Monitors">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=SLOs&tags.topics-1=Monitors">}}
   Explore and register for Foundation Enablement sessions. Learn how you can prioritize and address the issues that matter most to your business with native SLO and SLA tracking.
 {{< /learning-center-callout >}}
 
@@ -308,9 +308,9 @@ To view, edit, and delete existing status corrections, click on the **Correction
 
 ## SLO calendar view
 
-The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
+The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Daily", "Weekly", or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO calendar view" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="SLO calendar view" >}}
 
 ## SLO CSV export
 
