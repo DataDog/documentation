@@ -393,8 +393,8 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `true`, enables the .NET Profiler. Defaults to `false`.  |
 | `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | If set to `false`, disables the Wall time profiling. Defaults to `true`.  |
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `false`, disables the CPU profiling. Defaults to `true`.  |
-| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables Exceptions profiling. Defaults to `false`.  |
-| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables Allocations profiling. Defaults to `false`.  |
+| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables Exception profiling. Defaults to `false`.  |
+| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables Allocation profiling. Defaults to `false`.  |
 | `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables Lock Contention profiling. Defaults to `false`.  |
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables Live Heap profiling. Defaults to `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disable Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
