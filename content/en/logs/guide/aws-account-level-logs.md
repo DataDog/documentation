@@ -256,6 +256,9 @@ aws logs put-account-policy \
 Go to the [Log Explorer][2] and enter the search query `@aws.firehose.arn:"<FIREHOSE_ARN>"`.
    - Replace `<FIREHOSE_ARN>` with the ARN of the [Firehose][3] created by the CloudFormation template.
 
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://console.aws.amazon.com/cloudformation/home
 [2]: https://app.datadoghq.com/logs
 [3]: https://console.aws.amazon.com/firehose/home
