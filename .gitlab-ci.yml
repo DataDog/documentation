@@ -303,21 +303,21 @@ algolia_sync_live:
       CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
       yarn run algolia:sync
 
-typesense_sync_live:
-  <<: *base_template
-  <<: *live_rules
-  stage: post-deploy
-  environment: "live"
-  allow_failure: true
-  interruptible: true
-  timeout: 2h
-  dependencies:
-    - build_live
-  script:
-    - >
-      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
-      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
-      yarn run typesense:sync
+#typesense_sync_live:
+#  <<: *base_template
+#  <<: *live_rules
+#  stage: post-deploy
+#  environment: "live"
+#  allow_failure: true
+#  interruptible: true
+#  timeout: 2h
+#  dependencies:
+#    - build_live
+#  script:
+#    - >
+#      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
+#      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
+#      yarn run typesense:sync
 
 sourcemaps_preview:
   <<: *base_template
