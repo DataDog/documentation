@@ -8,10 +8,6 @@ further_reading:
   text: "OpenTelemetry Trace Metrics"
 ---
 
-<div class="alert alert-info">
-This feature is in Preview. If you have any feedback, contact <a href="/help/">Datadog support</a>.
-</div>
-
 ## Overview
 Datadog uses [service-entry spans][1] throughout the platform for features such as [Trace Metrics][2] and the [APM Trace Explorer][3]. This convention is unique to Datadog, but can be mapped from the [`SpanKind`][4] attribute in OpenTelemetry by following the opt-in guide below.
 
