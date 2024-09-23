@@ -479,7 +479,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(model="model_name", model_provider="model_provider")
+@workflow
 def rag_workflow(user_question):
     context_str = retrieve_documents(user_question).join(" ")
 
