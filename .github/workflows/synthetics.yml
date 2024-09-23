@@ -56,3 +56,4 @@ jobs:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
           config_path: 'repo/datadog-ci.preview.json'
+          variables: 'DOCS_PREVIEW_SITE=https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME'
