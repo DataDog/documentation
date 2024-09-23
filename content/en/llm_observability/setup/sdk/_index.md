@@ -453,6 +453,55 @@ def similarity_search():
 
 {{< /code-block >}}
 
+## Modifying auto-instrumented spans
+
+The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify auto-instrumented spans started while the annotation context is active.
+
+### Arguments
+
+The `LLMObs.annotation_context()` method accepts the following arguments:
+
+`name` 
+: optional - _str_
+<br />Set to override the span name for any auto-instrumented spans started within the annotation context.
+
+`prompt` 
+: optional - _dictionary_ 
+<br />A dictionary that represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`. The `Prompt` object can also be imported from `ddtrace.utils` and passed in as the `prompt` argument. **Note**: This argument is only applicable to LLM spans.
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(model="model_name", model_provider="model_provider")
+def rag_workflow(user_question):
+    context_str = retrieve_documents(user_question).join(" ")
+
+    with LLMObs.annotation_context(
+        prompt = Prompt(
+            variables = {
+                "question": user_question,
+                "context": context_str,
+            },
+            template = "Please answer the..."
+        ),
+        tags = {
+            "retrieval_strategy": "semantic_similarity"
+        },
+        name = "augmented_generation"
+    ):
+        completion = openai_client.chat.completions.create(...)
+    return completion.choices[0].message.content
+
+{{< /code-block >}}
+
+
 ## Evaluations
 
 The LLM Observability SDK provides the methods `LLMObs.export_span()` and `LLMObs.submit_evaluation()` to help your traced LLM application submit evaluations to LLM Observability.
