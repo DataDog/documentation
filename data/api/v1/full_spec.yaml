@@ -6832,9 +6832,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -7172,8 +7173,9 @@ components:
             Error Tracking, Event, Logs, and RUM monitors.'
           type: string
         groupby_simple_monitor:
+          deprecated: true
           description: Whether the log alert monitor triggers a single alert or multiple
-            alerts when any group breaches a threshold.
+            alerts when any group breaches a threshold. Use `notify_by` instead.
           type: boolean
         include_tags:
           default: true
@@ -14107,6 +14109,7 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJavascript'
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -14223,6 +14226,27 @@ components:
         metaSchema:
           $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
+    SyntheticsAssertionJavascript:
+      description: A JavaScript assertion.
+      properties:
+        code:
+          description: The JavaScript code that performs the assertions.
+          example: dd.expect(dd.response.statusCode).to.equal(200);
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionJavascriptType'
+      required:
+      - type
+      - code
+      type: object
+    SyntheticsAssertionJavascriptType:
+      description: Type of the assertion.
+      enum:
+      - javascript
+      example: javascript
+      type: string
+      x-enum-varnames:
+      - JAVASCRIPT
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
@@ -15503,17 +15527,18 @@ components:
       - type
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
-      description: Property of the Synthetic Test Response to use for a Synthetic
-        global variable.
+      description: Type of value to extract from a test for a Synthetic global variable.
       enum:
       - http_body
       - http_header
+      - http_status_code
       - local_variable
       example: http_body
       type: string
       x-enum-varnames:
       - HTTP_BODY
       - HTTP_HEADER
+      - HTTP_STATUS_CODE
       - LOCAL_VARIABLE
     SyntheticsGlobalVariableParserType:
       description: Type of parser for a Synthetic global variable from a synthetics
@@ -15632,6 +15657,23 @@ components:
             $ref: '#/components/schemas/SyntheticsTestDetails'
           type: array
       type: object
+    SyntheticsLocalVariableParsingOptionsType:
+      description: Property of the Synthetic Test Response to extract into a local
+        variable.
+      enum:
+      - grpc_message
+      - grpc_metadata
+      - http_body
+      - http_header
+      - http_status_code
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - GRPC_MESSAGE
+      - GRPC_METADATA
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
     SyntheticsLocation:
       description: 'Synthetic location that can be used when creating or editing a
 
@@ -15658,8 +15700,8 @@ components:
       example: {}
       properties:
         field:
-          description: When type is `http_header`, name of the header to use to extract
-            the value.
+          description: When type is `http_header` or `grpc_metadata`, name of the
+            header or metadatum to extract.
           example: content-type
           type: string
         name:
@@ -15671,7 +15713,7 @@ components:
           description: Determines whether or not the extracted value will be obfuscated.
           type: boolean
         type:
-          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+          $ref: '#/components/schemas/SyntheticsLocalVariableParsingOptionsType'
       type: object
     SyntheticsPatchTestBody:
       description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
@@ -16246,7 +16288,7 @@ components:
       type: object
     SyntheticsTestMetadata:
       additionalProperties:
-        description: A single Metadatum.
+        description: A single metadatum.
         type: string
       description: Metadata to include when performing the gRPC test.
       type: object
@@ -16547,8 +16589,7 @@ components:
           description: Persist cookies across redirects.
           type: boolean
         port:
-          description: Port to use when performing the test.
-          type: string
+          $ref: '#/components/schemas/SyntheticsTestRequestPort'
         proxy:
           $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
@@ -16652,6 +16693,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestNumericalPort:
+      description: Integer Port number to use when performing the test.
+      format: int64
+      type: integer
+    SyntheticsTestRequestPort:
+      description: Port to use when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariablePort'
     SyntheticsTestRequestProxy:
       description: The proxy to perform the test.
       properties:
@@ -16664,6 +16714,10 @@ components:
       required:
       - url
       type: object
+    SyntheticsTestRequestVariablePort:
+      description: String Port number to use when performing the test. Supports templated
+        variables.
+      type: string
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -16935,6 +16989,181 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
+        text_formats:
+          description: List of text formats for columns produced by tags.
+          items:
+            $ref: '#/components/schemas/TableWidgetTextFormat'
+          type: array
+      type: object
+    TableWidgetTextFormat:
+      description: Text format rules for a tag-based column within a table widget.
+      example:
+      - match:
+          type: is
+          value: fruit
+        replace:
+          type: all
+          with: vegetable
+      - match:
+          type: is
+          value: cake
+        palette: white_on_green
+      items:
+        $ref: '#/components/schemas/TableWidgetTextFormatRule'
+      minItems: 1
+      type: array
+    TableWidgetTextFormatMatch:
+      description: Match rule for the table widget text format.
+      example:
+        type: is
+        value: fruit
+      properties:
+        type:
+          $ref: '#/components/schemas/TableWidgetTextFormatMatchType'
+        value:
+          description: Table Widget Match String.
+          example: Match Value
+          type: string
+      required:
+      - type
+      - value
+      type: object
+    TableWidgetTextFormatMatchType:
+      description: Match or compare option.
+      enum:
+      - is
+      - is_not
+      - contains
+      - does_not_contain
+      - starts_with
+      - ends_with
+      example: is
+      type: string
+      x-enum-varnames:
+      - IS
+      - IS_NOT
+      - CONTAINS
+      - DOES_NOT_CONTAIN
+      - STARTS_WITH
+      - ENDS_WITH
+    TableWidgetTextFormatPalette:
+      default: white_on_green
+      description: Color-on-color palette to highlight replaced text.
+      enum:
+      - white_on_red
+      - white_on_yellow
+      - white_on_green
+      - black_on_light_red
+      - black_on_light_yellow
+      - black_on_light_green
+      - red_on_white
+      - yellow_on_white
+      - green_on_white
+      - custom_bg
+      - custom_text
+      type: string
+      x-enum-varnames:
+      - WHITE_ON_RED
+      - WHITE_ON_YELLOW
+      - WHITE_ON_GREEN
+      - BLACK_ON_LIGHT_RED
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - RED_ON_WHITE
+      - YELLOW_ON_WHITE
+      - GREEN_ON_WHITE
+      - CUSTOM_BG
+      - CUSTOM_TEXT
+    TableWidgetTextFormatReplace:
+      description: Replace rule for the table widget text format.
+      example:
+        type: all
+        with: vegetable
+      oneOf:
+      - $ref: '#/components/schemas/TableWidgetTextFormatReplaceAll'
+      - $ref: '#/components/schemas/TableWidgetTextFormatReplaceSubstring'
+    TableWidgetTextFormatReplaceAll:
+      description: Match All definition.
+      example:
+        type: all
+        with: vegetable
+      properties:
+        type:
+          $ref: '#/components/schemas/TableWidgetTextFormatReplaceAllType'
+        with:
+          description: Replace All type.
+          example: all
+          type: string
+      required:
+      - type
+      - with
+      type: object
+    TableWidgetTextFormatReplaceAllType:
+      description: Table widget text format replace all type.
+      enum:
+      - all
+      example: all
+      type: string
+      x-enum-varnames:
+      - ALL
+    TableWidgetTextFormatReplaceSubstring:
+      description: Match Sub-string definition.
+      example:
+        substring: fruit
+        type: substring
+        with: vegetable
+      properties:
+        substring:
+          description: Text that will be replaced.
+          example: string to replace
+          type: string
+        type:
+          $ref: '#/components/schemas/TableWidgetTextFormatReplaceSubstringType'
+        with:
+          description: Text that will replace original sub-string.
+          example: replacement
+          type: string
+      required:
+      - type
+      - with
+      - substring
+      type: object
+    TableWidgetTextFormatReplaceSubstringType:
+      description: Table widget text format replace sub-string type.
+      enum:
+      - substring
+      example: substring
+      type: string
+      x-enum-varnames:
+      - SUBSTRING
+    TableWidgetTextFormatRule:
+      description: Text format rules.
+      example:
+        match:
+          type: is
+          value: apple
+        replace:
+          type: all
+          with: vegetable
+      properties:
+        custom_bg_color:
+          description: Hex representation of the custom background color. Used with
+            custom background palette option.
+          example: '#632ca6'
+          type: string
+        custom_fg_color:
+          description: Hex representation of the custom text color. Used with custom
+            text palette option.
+          example: '#632ca6'
+          type: string
+        match:
+          $ref: '#/components/schemas/TableWidgetTextFormatMatch'
+        palette:
+          $ref: '#/components/schemas/TableWidgetTextFormatPalette'
+        replace:
+          $ref: '#/components/schemas/TableWidgetTextFormatReplace'
+      required:
+      - match
       type: object
     TagToHosts:
       description: In this object, the key is the tag, the value is a list of host
@@ -17310,6 +17539,9 @@ components:
       properties:
         display:
           $ref: '#/components/schemas/ToplistWidgetDisplay'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
         scaling:
           $ref: '#/components/schemas/ToplistWidgetScaling'
       type: object
@@ -22085,6 +22317,13 @@ components:
       type: string
       x-enum-varnames:
       - ORDERED
+    WidgetLegacyLiveSpan:
+      additionalProperties: false
+      description: Wrapper for live span
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      type: object
     WidgetLegendSize:
       description: Available legend sizes for a widget. Should be one of "0", "2",
         "4", "8", "16", or "auto".
@@ -22151,6 +22390,24 @@ components:
       - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
+    WidgetLiveSpanUnit:
+      description: Unit of the time span.
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - year
+      example: minute
+      type: string
+      x-enum-varnames:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
     WidgetMargin:
       description: 'Size of the margins around the image.
 
@@ -22255,6 +22512,62 @@ components:
       - TRIGGERED_DESCENDING
       - PRIORITY_ASCENDING
       - PRIORITY_DESCENDING
+    WidgetNewFixedSpan:
+      description: Used for fixed span times, such as 'March 1 to March 7'.
+      properties:
+        from:
+          description: Start time in seconds since epoch.
+          example: 1712080128
+          format: int64
+          minimum: 0
+          type: integer
+        to:
+          description: End time in seconds since epoch.
+          example: 1712083128
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          $ref: '#/components/schemas/WidgetNewFixedSpanType'
+      required:
+      - type
+      - from
+      - to
+      type: object
+    WidgetNewFixedSpanType:
+      description: Type "fixed" denotes a fixed span.
+      enum:
+      - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+      - FIXED
+    WidgetNewLiveSpan:
+      description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
+      properties:
+        type:
+          $ref: '#/components/schemas/WidgetNewLiveSpanType'
+        unit:
+          $ref: '#/components/schemas/WidgetLiveSpanUnit'
+        value:
+          description: Value of the time span.
+          example: 4
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+      - type
+      - value
+      - unit
+      type: object
+    WidgetNewLiveSpanType:
+      description: Type "live" denotes a live span in the new format.
+      enum:
+      - live
+      example: live
+      type: string
+      x-enum-varnames:
+      - LIVE
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
@@ -22427,10 +22740,10 @@ components:
       - TOP
     WidgetTime:
       description: Time setting for the widget.
-      properties:
-        live_span:
-          $ref: '#/components/schemas/WidgetLiveSpan'
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewLiveSpan'
+      - $ref: '#/components/schemas/WidgetNewFixedSpan'
     WidgetTimeWindows:
       description: Define a time window.
       enum:
@@ -22506,6 +22819,7 @@ components:
               access to the cloud cost data source in dashboards and notebooks.
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations.
+            code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
@@ -22541,6 +22855,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
+            security_pipelines_read: View Security Pipelines.
+            security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -22680,6 +22996,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     post:
@@ -22717,6 +23037,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -22765,6 +23089,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_delete
       x-undo:
         type: idempotent
     get:
@@ -22802,6 +23130,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     put:
@@ -22852,6 +23184,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         type: idempotent
   /api/v1/application_key:
@@ -22877,6 +23213,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+        - user_app_keys
       x-undo:
         type: safe
     post:
@@ -22920,6 +23261,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         operationId: DeleteApplicationKey
         parameters:
@@ -22962,6 +23307,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
+        - user_app_keys
       x-undo:
         type: idempotent
     get:
@@ -22999,6 +23349,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+        - user_app_keys
       x-undo:
         type: safe
     put:
@@ -23055,6 +23410,11 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
+        - user_app_keys
       x-undo:
         type: idempotent
   /api/v1/check_run:
@@ -23178,6 +23538,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 41
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/daily_custom_reports/{report_id}:
@@ -23226,6 +23590,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 42
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/dashboard:
@@ -23281,6 +23649,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -23351,6 +23723,10 @@ paths:
         limitParam: count
         pageOffsetParam: start
         resultsPath: dashboards
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     patch:
@@ -23405,6 +23781,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     post:
@@ -23464,6 +23844,10 @@ paths:
             name: body
           step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -23498,6 +23882,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -23547,6 +23935,10 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}\"\n}"
           step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeleteDashboardList
         parameters:
@@ -23595,6 +23987,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -23638,6 +24034,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -23695,6 +24095,10 @@ paths:
       - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
   /api/v1/dashboard/public:
@@ -23761,6 +24165,10 @@ paths:
               \   \"live_span\": \"1h\"\n  }\n}"
           step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -23809,6 +24217,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
     get:
@@ -23853,6 +24265,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -23925,6 +24341,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -23980,6 +24400,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
     get:
@@ -24037,6 +24461,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
     post:
@@ -24111,6 +24539,10 @@ paths:
               \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
           step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -24167,6 +24599,10 @@ paths:
             source: dashboard.id
           step: the "dashboard" was deleted
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -24209,6 +24645,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -24265,6 +24705,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
@@ -24380,6 +24824,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -24445,6 +24893,10 @@ paths:
               [\"canceled\"]\n}"
           step: there is a valid "downtime" for a "monitor" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         operationId: CancelDowntime
         parameters:
@@ -24503,6 +24955,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
@@ -24546,6 +25002,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
     get:
@@ -24592,6 +25052,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     put:
@@ -24653,6 +25117,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v1/events:
@@ -24766,6 +25234,10 @@ paths:
       tags:
       - Events
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
     post:
@@ -24848,6 +25320,10 @@ paths:
       tags:
       - Events
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
   /api/v1/graph/embed:
@@ -24873,6 +25349,9 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -24921,6 +25400,10 @@ paths:
       - Embeddable Graphs
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -24961,6 +25444,9 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/enable:
@@ -24999,6 +25485,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -25037,6 +25527,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -25135,6 +25629,9 @@ paths:
       tags:
       - Snapshots
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/host/{host_name}/mute:
@@ -25320,6 +25817,10 @@ paths:
       tags:
       - Hosts
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - hosts_read
       x-undo:
         type: safe
   /api/v1/hosts/totals:
@@ -25369,6 +25870,10 @@ paths:
       tags:
       - Hosts
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - hosts_read
       x-undo:
         type: safe
   /api/v1/integration/aws:
@@ -25415,6 +25920,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -25464,6 +25973,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -25526,6 +26039,10 @@ paths:
               \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
       x-undo:
         operationId: DeleteAWSAccount
         parameters:
@@ -25599,6 +26116,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
@@ -25631,6 +26152,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/aws/event_bridge:
@@ -25671,6 +26196,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -25702,6 +26231,9 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -25741,6 +26273,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteAWSEventBridgeSource
         parameters: []
@@ -25784,6 +26320,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
     get:
@@ -25821,6 +26361,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -25864,6 +26408,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: DeleteAWSTagFilter
         parameters: []
@@ -25910,6 +26458,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/aws/logs:
@@ -25950,6 +26502,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
     get:
@@ -25993,6 +26549,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26032,6 +26592,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: DeleteAWSLambdaARN
         parameters: []
@@ -26089,6 +26653,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/aws/logs/services:
@@ -26131,6 +26699,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26170,6 +26742,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: TODO
         type: unsafe
@@ -26216,6 +26792,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/azure:
@@ -26256,6 +26836,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -26287,6 +26871,10 @@ paths:
       tags:
       - Azure Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_read
       x-undo:
         type: safe
     post:
@@ -26354,6 +26942,10 @@ paths:
               \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configurations_manage
       x-undo:
         operationId: DeleteAzureIntegration
         parameters:
@@ -26406,6 +26998,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/azure/host_filters:
@@ -26447,6 +27043,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_edit
       x-undo:
         type: safe
   /api/v1/integration/gcp:
@@ -26489,6 +27089,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -26521,6 +27125,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -26578,6 +27186,10 @@ paths:
               \ \"type\": \"service_account\"\n}"
           step: there is a valid "gcp_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         operationId: DeleteGCPIntegration
         parameters:
@@ -26628,6 +27240,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
@@ -26667,6 +27283,10 @@ paths:
       - PagerDuty Integration
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeletePagerDutyIntegrationService
         parameters:
@@ -26705,6 +27325,10 @@ paths:
       tags:
       - PagerDuty Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -26742,6 +27366,10 @@ paths:
       tags:
       - PagerDuty Integration
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -26789,6 +27417,10 @@ paths:
       - PagerDuty Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
   /api/v1/integration/slack:
@@ -26972,6 +27604,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -27018,6 +27654,10 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
@@ -27054,6 +27694,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27093,6 +27737,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -27140,6 +27788,10 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
@@ -27186,6 +27838,10 @@ paths:
               \ \"is_secret\": false\n}"
           step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
         parameters:
@@ -27224,6 +27880,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27272,6 +27932,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27323,6 +27987,10 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
@@ -27373,6 +28041,10 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
           step: there is a valid "webhook" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - create_webhooks
       x-undo:
         operationId: DeleteWebhooksIntegration
         parameters:
@@ -27411,6 +28083,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27454,6 +28130,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27505,6 +28185,10 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v1/logs-queries/list:
@@ -27558,6 +28242,10 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -27584,6 +28272,9 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -27625,6 +28316,10 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
       x-undo:
         type: idempotent
   /api/v1/logs/config/indexes:
@@ -27656,6 +28351,9 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -27695,6 +28393,10 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
       x-undo:
         operationId: TODO
         parameters: []
@@ -27815,6 +28517,9 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -27869,6 +28574,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipelines:
@@ -27896,6 +28605,9 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -27934,6 +28646,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         operationId: DeleteLogsPipeline
         parameters:
@@ -27974,6 +28690,10 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
     get:
@@ -28013,6 +28733,9 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -28061,6 +28784,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
   /api/v1/metrics:
@@ -28124,6 +28851,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v1/metrics/{metric_name}:
@@ -28167,6 +28898,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
     put:
@@ -28219,6 +28954,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_metadata_write
       x-undo:
         type: idempotent
   /api/v1/monitor:
@@ -28336,6 +29075,10 @@ paths:
       x-pagination:
         limitParam: page_size
         pageParam: page
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -28782,6 +29525,10 @@ paths:
             name: body
           step: there is a valid "monitor" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         operationId: DeleteMonitor
         parameters:
@@ -28841,6 +29588,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/groups/search:
@@ -28928,6 +29679,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/search:
@@ -29017,6 +29772,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/validate:
@@ -29065,6 +29824,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -29130,6 +29893,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
     get:
@@ -29194,6 +29961,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     put:
@@ -29258,6 +30029,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
@@ -29307,6 +30082,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/mute:
@@ -29372,6 +30151,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
@@ -29437,6 +30220,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/validate:
@@ -29491,6 +30278,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
@@ -29554,6 +30345,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 43
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/monthly_custom_reports/{report_id}:
@@ -29608,6 +30403,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 44
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/notebooks:
@@ -29738,6 +30537,10 @@ paths:
         limitParam: count
         pageOffsetParam: start
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_read
       x-undo:
         type: safe
     post:
@@ -29819,6 +30622,10 @@ paths:
             name: body
           step: there is a valid "notebook" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         operationId: DeleteNotebook
         parameters:
@@ -29864,6 +30671,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         type: idempotent
     get:
@@ -29908,6 +30719,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_read
       x-undo:
         type: safe
     put:
@@ -30004,6 +30819,10 @@ paths:
       - Notebooks
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         type: idempotent
   /api/v1/org:
@@ -30029,6 +30848,10 @@ paths:
       tags:
       - Organizations
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: safe
     post:
@@ -30083,6 +30906,10 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         operationId: TODO
         parameters: []
@@ -30328,6 +31155,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: safe
   /api/v1/search:
@@ -30371,6 +31202,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
@@ -30420,6 +31254,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -30467,6 +31305,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
@@ -30514,6 +31356,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/series:
@@ -30839,6 +31685,10 @@ paths:
         limitParam: limit
         pageOffsetParam: offset
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     post:
@@ -30892,6 +31742,10 @@ paths:
               \ }\n}"
           step: there is a valid "slo" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         operationId: DeleteSLO
         parameters:
@@ -30949,6 +31803,10 @@ paths:
       - Service Level Objectives
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
   /api/v1/slo/can_delete:
@@ -31002,6 +31860,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/correction:
@@ -31053,6 +31915,10 @@ paths:
         limitParam: limit
         pageOffsetParam: offset
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     post:
@@ -31112,6 +31978,10 @@ paths:
               \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_corrections
       x-undo:
         operationId: DeleteSLOCorrection
         parameters:
@@ -31306,6 +32176,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/{slo_id}:
@@ -31367,6 +32241,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
     get:
@@ -31416,6 +32294,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     put:
@@ -31472,6 +32354,10 @@ paths:
       - Service Level Objectives
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
   /api/v1/slo/{slo_id}/corrections:
@@ -31521,6 +32407,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/{slo_id}/history:
@@ -31610,6 +32500,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/synthetics/ci/batch/{batch_id}:
@@ -31647,6 +32541,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -31673,6 +32571,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_read
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -31717,6 +32619,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -31756,6 +32662,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         type: idempotent
     get:
@@ -31794,6 +32704,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_read
       x-undo:
         type: safe
     put:
@@ -31840,6 +32754,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/settings/default_locations:
@@ -31859,6 +32777,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_default_settings_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests:
@@ -31916,6 +32838,10 @@ paths:
         limitParam: page_size
         pageParam: page_number
         resultsPath: tests
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     post:
@@ -31970,6 +32896,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: TODO
         parameters: []
@@ -32159,6 +33089,10 @@ paths:
             name: body
           step: there is a "synthetics_api_test_with_wrong_dns" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -32210,6 +33144,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -32272,6 +33210,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser:
@@ -32324,6 +33266,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -32375,6 +33321,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -32437,6 +33387,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -32508,6 +33462,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -32561,6 +33519,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -32618,6 +33580,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -32663,6 +33629,10 @@ paths:
               }}"}]}'
           step: the "synthetics_api_test_with_wrong_dns" is triggered
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
@@ -32701,6 +33671,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -32746,6 +33720,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     patch:
@@ -32808,6 +33786,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
     put:
@@ -32872,6 +33854,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -32941,6 +33927,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -32992,6 +33982,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -33051,6 +34045,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -33081,6 +34079,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_read
       x-undo:
         type: safe
     post:
@@ -33136,6 +34138,10 @@ paths:
             name: body
           step: there is a valid "synthetics_global_variable" in the system
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -33185,6 +34191,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         type: idempotent
     get:
@@ -33277,6 +34287,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -33320,6 +34334,9 @@ paths:
       tags:
       - Tags
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/tags/hosts/{host_name}:
@@ -33593,6 +34610,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/audit_logs:
@@ -33655,6 +34676,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -33718,6 +34743,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -33779,6 +34808,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/ci-app:
@@ -33844,6 +34877,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 35
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/cspm:
@@ -33909,6 +34946,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -33974,6 +35015,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -34039,6 +35084,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -34102,6 +35151,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -34165,6 +35218,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/hourly-attribution:
@@ -34256,6 +35313,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/incident-management:
@@ -34321,6 +35382,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -34384,6 +35449,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -34449,6 +35518,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -34514,6 +35587,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -34577,6 +35654,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs-by-retention:
@@ -34642,6 +35723,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -34707,6 +35792,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/monthly-attribution:
@@ -34819,6 +35908,10 @@ paths:
             value: '"infra_host_usage"'
           step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/network_flows:
@@ -34884,6 +35977,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -34947,6 +36044,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/online-archive:
@@ -35012,6 +36113,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 36
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -35077,6 +36182,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/rum:
@@ -35141,6 +36250,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 33
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -35211,6 +36324,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/sds:
@@ -35276,6 +36393,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 32
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -35341,6 +36462,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -35418,6 +36543,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -35481,6 +36610,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -35544,6 +36677,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -35607,6 +36744,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -35670,6 +36811,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -35756,6 +36901,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/user:
@@ -35786,6 +36935,10 @@ paths:
       tags:
       - Users
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -35835,6 +36988,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         operationId: DisableUser
         parameters:
@@ -36010,6 +37167,9 @@ paths:
       tags:
       - Authentication
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /v1/input:

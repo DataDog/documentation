@@ -48,6 +48,11 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{< tabs >}}
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}

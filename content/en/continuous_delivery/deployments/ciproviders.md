@@ -26,7 +26,7 @@ CD Visibility for CI providers deployments is in private beta. To request access
 If you are executing deployments using a CI provider, you can monitor your deployments with Deployment Visibility. Ensure the following requirements are met:
 
 1. You are using [Pipeline Visibility][1] to monitor your CI pipelines.
-2. Your CI provider supports the **Custom tags and metrics at runtime** feature, which allows you to add [user-defined text and numerical tags][2] to pipelines and jobs in Pipeline Visibility. 
+2. Your CI provider supports the **Custom tags and measures at runtime** feature, which allows you to add [user-defined text and numerical tags][2] to pipelines and jobs in Pipeline Visibility. 
 3. You are executing deployments in a CI job (or a [related level][9] in your CI provider). The concept of a CI job may vary depending on your provider. For more information about how Datadog defines a CI job, see the [Terminology section][9].
 
 ## Setup

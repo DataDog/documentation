@@ -21,6 +21,9 @@ const getIndexName = () => {
 };
 
 const updateSettings = (index) => {
+    // Distinct: true allows us to return a single result for each page despite indexing each section inidivdually.
+    // We use the page's base_url (without the anchor) to group together multiple results for one page using "attributeForDistinct"
+    // Custom ranking by order allows us to return the full page result whenever possible (we assign -1 order to full page results)
     const settings = {
         searchableAttributes: [
             'unordered(tags)',
@@ -29,7 +32,7 @@ const updateSettings = (index) => {
             'unordered(content)'
         ],
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
-        customRanking: ['desc(rank)'],
+        customRanking: ['desc(rank)', 'asc(order)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         attributesToSnippet: ['content:20'],

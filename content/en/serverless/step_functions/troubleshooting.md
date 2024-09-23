@@ -44,7 +44,6 @@ When searching traces, select the **Live Search** option in the upper right corn
 
 ## Some step spans are missing in the traces
 - Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
-- AWS Step Functions activities are not supported.
 - `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
 
 ## Customized way to deploy Datadog Lambda Forwarder
@@ -58,8 +57,6 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 
 
 #### Notes
-Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.
-
 If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces cannot be merged.
 
 [1]: https://app.datadoghq.com/logs

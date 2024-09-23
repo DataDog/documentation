@@ -214,6 +214,14 @@ components:
       required: true
       schema:
         type: string
+    EntityID:
+      description: UUID or Entity Ref
+      in: path
+      name: entity_id
+      required: true
+      schema:
+        example: service:myservice
+        type: string
     FastlyAccountID:
       description: Fastly Account id.
       in: path
@@ -235,6 +243,61 @@ components:
       required: true
       schema:
         type: string
+    FilterByExcludeSnapshot:
+      description: Filter entities by excluding snapshotted entities
+      in: query
+      name: fitler[exclude_snapshot]
+      required: false
+      schema:
+        type: string
+    FilterByID:
+      description: Filter entities by UUID
+      explode: true
+      in: query
+      name: fitler[id]
+      required: false
+      schema:
+        type: string
+    FilterByKind:
+      description: Filter entities by kind
+      explode: true
+      in: query
+      name: fitler[kind]
+      required: false
+      schema:
+        type: string
+    FilterByName:
+      description: Filter entities by name
+      explode: true
+      in: query
+      name: fitler[name]
+      required: false
+      schema:
+        type: string
+    FilterByOwner:
+      description: Filter entities by owner
+      explode: true
+      in: query
+      name: fitler[owner]
+      required: false
+      schema:
+        type: string
+    FilterByRef:
+      description: Filter entities by reference
+      explode: true
+      in: query
+      name: fitler[ref]
+      required: false
+      schema:
+        type: string
+    FilterByRelationType:
+      description: Filter entities by relation type
+      explode: true
+      in: query
+      name: fitler[relation][type]
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationType'
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -370,6 +433,14 @@ components:
       required: true
       schema:
         type: string
+    Include:
+      description: include relationship data
+      explode: true
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncludeType'
     InstanceId:
       description: The ID of the workflow instance.
       in: path
@@ -760,6 +831,8 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+          x-merge-override:
+            items: false
       type: object
     APIKeyResponseIncludedItem:
       description: An object related to an API key.
@@ -821,6 +894,8 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+          x-merge-override:
+            items: false
         meta:
           $ref: '#/components/schemas/APIKeysResponseMeta'
       type: object
@@ -888,6 +963,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AWSRelatedAccountAttributes:
       description: Attributes for an AWS related account.
       properties:
@@ -916,6 +993,64 @@ components:
             $ref: '#/components/schemas/AWSRelatedAccount'
           type: array
       type: object
+    AbbreviatedTeam:
+      description: The definition of `AbbreviatedTeam` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AbbreviatedTeamAttributes'
+        id:
+          description: ID of the team
+          type: string
+        type:
+          $ref: '#/components/schemas/AbbreviatedTeamType'
+      required:
+      - attributes
+      - type
+      type: object
+    AbbreviatedTeamAttributes:
+      description: The definition of `AbbreviatedTeamAttributes` object.
+      properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          type: integer
+        handle:
+          description: The team's identifier
+          example: ''
+          type: string
+        handles:
+          description: The `AbbreviatedTeamAttributes` `handles`.
+          type: string
+        is_open_membership:
+          description: The `AbbreviatedTeamAttributes` `is_open_membership`.
+          readOnly: true
+          type: boolean
+        name:
+          description: The name of the team
+          example: ''
+          type: string
+        summary:
+          description: A brief summary of the team
+          readOnly: true
+          type: string
+      required:
+      - handle
+      - name
+      type: object
+    AbbreviatedTeamType:
+      default: team
+      description: The definition of `AbbreviatedTeamType` object.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -992,6 +1127,8 @@ components:
       required:
       - name
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyCreateData:
       description: Object used to create an application key.
       properties:
@@ -1003,6 +1140,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     ApplicationKeyCreateRequest:
       description: Request used to create an application key.
       properties:
@@ -1073,6 +1212,8 @@ components:
           nullable: true
           type: array
       type: object
+      x-merge-override:
+        properties: false
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
       properties:
@@ -1363,6 +1504,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     AuthNMappingAttributes:
       description: Attributes of AuthN Mapping.
       properties:
@@ -1649,6 +1792,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigAttributes:
       description: Attributes for An AWS CUR config.
       properties:
@@ -1713,6 +1858,8 @@ components:
       - report_prefix
       - status
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchData:
       description: AWS CUR config Patch data.
       properties:
@@ -1724,6 +1871,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AwsCURConfigPatchRequest:
       description: AWS CUR config Patch Request.
       properties:
@@ -1924,6 +2073,8 @@ components:
       - storage_account
       - storage_container
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPair:
       description: Azure config pair.
       properties:
@@ -1939,6 +2090,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     AzureUCConfigPairAttributes:
       description: Attributes for Azure config pair.
       properties:
@@ -1954,6 +2107,8 @@ components:
       required:
       - configs
       type: object
+      x-merge-override:
+        properties: false
     AzureUCConfigPairType:
       default: azure_uc_configs
       description: Type of Azure config pair.
@@ -4675,6 +4830,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
       properties:
@@ -4722,6 +4879,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     ConfluentAccountType:
       default: confluent-cloud-accounts
       description: The JSON:API type for this API. Should always be `confluent-cloud-accounts`.
@@ -4833,6 +4992,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponse:
       description: Response schema when interacting with a Confluent resource.
       properties:
@@ -4869,6 +5030,8 @@ components:
       required:
       - resource_type
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceResponseData:
       description: Confluent Cloud resource data.
       properties:
@@ -4885,6 +5048,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     ConfluentResourceType:
       default: confluent-cloud-resources
       description: The JSON:API type for this request.
@@ -7610,6 +7775,820 @@ components:
       - type
       - attributes
       type: object
+    EntityAttributes:
+      description: Entity attributes.
+      properties:
+        apiVersion:
+          description: The api version.
+          type: string
+        description:
+          description: The description.
+          type: string
+        displayName:
+          description: The display name.
+          type: string
+        kind:
+          description: The kind.
+          type: string
+        name:
+          description: The name.
+          type: string
+        namespace:
+          description: The namespace.
+          type: string
+        owner:
+          description: The owner.
+          type: string
+        tags:
+          description: The tags.
+          items:
+            type: string
+          type: array
+      type: object
+    EntityData:
+      description: Entity data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityAttributes'
+        id:
+          description: Entity id.
+          type: string
+        meta:
+          $ref: '#/components/schemas/EntityMeta'
+        relationships:
+          $ref: '#/components/schemas/EntityRelationships'
+        type:
+          description: Entity.
+          type: string
+      type: object
+    EntityMeta:
+      description: Entity metadata.
+      properties:
+        createdAt:
+          description: The creation time.
+          type: string
+        ingestionSource:
+          description: The ingestion source.
+          type: string
+        modifiedAt:
+          description: The modification time.
+          type: string
+        origin:
+          description: The origin.
+          type: string
+      type: object
+    EntityRaw:
+      description: Entity definition in raw JSON/YAML representation.
+      example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice\n"
+      type: string
+    EntityRelationships:
+      description: Entity relationships.
+      properties:
+        incidents:
+          $ref: '#/components/schemas/EntityToIncidents'
+        oncall:
+          $ref: '#/components/schemas/EntityToOncalls'
+        rawSchema:
+          $ref: '#/components/schemas/EntityToRawSchema'
+        relatedEntities:
+          $ref: '#/components/schemas/EntityToRelatedEntities'
+        schema:
+          $ref: '#/components/schemas/EntityToSchema'
+      type: object
+    EntityResponseData:
+      description: List of entity data.
+      items:
+        $ref: '#/components/schemas/EntityData'
+      type: array
+    EntityResponseIncludedIncident:
+      description: Included incident.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedIncidentAttributes'
+        id:
+          description: Incident id.
+          type: string
+        type:
+          description: Incident description.
+          type: string
+      type: object
+    EntityResponseIncludedOncall:
+      description: Included oncall.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallAttributes'
+        id:
+          description: Oncall ID.
+          type: string
+        type:
+          description: Oncall type.
+          type: string
+      type: object
+    EntityResponseIncludedRawSchema:
+      description: Included raw schema.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRawSchemaAttributes'
+        id:
+          description: Raw schema id.
+          type: string
+        type:
+          description: Raw schema type.
+          type: string
+      type: object
+    EntityResponseIncludedRawSchemaAttributes:
+      description: Included raw schema attributes.
+      properties:
+        rawSchema:
+          description: Schema from user input in base64 encoding.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedEntity:
+      description: Included related entity.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityAttributes'
+        id:
+          description: Entity UUID.
+          type: string
+        meta:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityMeta'
+        type:
+          description: Related entity.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedEntityAttributes:
+      description: Related entity attributes.
+      properties:
+        kind:
+          description: Entity kind.
+          type: string
+        name:
+          description: Entity name.
+          type: string
+        namespace:
+          description: Entity namespace.
+          type: string
+        type:
+          description: Entity relation type to the associated entity.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedEntityMeta:
+      description: Included related entity meta.
+      properties:
+        createdAt:
+          description: Entity creation time.
+          format: date-time
+          type: string
+        defined_by:
+          description: Entity relation defined by.
+          type: string
+        modifiedAt:
+          description: Entity modification time.
+          format: date-time
+          type: string
+        source:
+          description: Entity relation source.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedIncidentAttributes:
+      description: Incident attributes.
+      properties:
+        createdAt:
+          description: Incident creation time.
+          format: date-time
+          type: string
+        htmlURL:
+          description: Incident URL.
+          type: string
+        provider:
+          description: Incident provider.
+          type: string
+        status:
+          description: Incident status.
+          type: string
+        title:
+          description: Incident title.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedOncallAttributes:
+      description: Included related oncall attributes.
+      properties:
+        escalations:
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalations'
+        provider:
+          description: Oncall provider.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedOncallEscalationItem:
+      description: Oncall escalation
+      properties:
+        email:
+          description: Oncall email.
+          type: string
+        escalationLevel:
+          description: Oncall level.
+          format: int64
+          type: integer
+        name:
+          description: Oncall name.
+          type: string
+      type: object
+    EntityResponseIncludedRelatedOncallEscalations:
+      description: Oncall escalations
+      items:
+        $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalationItem'
+      type: array
+    EntityResponseIncludedSchema:
+      description: Included detail entity schema.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseIncludedSchemaAttributes'
+        id:
+          description: Entity id.
+          type: string
+        type:
+          description: Schema type.
+          type: string
+      type: object
+    EntityResponseIncludedSchemaAttributes:
+      description: Included schema.
+      properties:
+        schema:
+          $ref: '#/components/schemas/EntityV3'
+      type: object
+    EntityResponseMeta:
+      description: Entity metadata.
+      properties:
+        count:
+          description: Total entities count.
+          format: int64
+          type: integer
+        includeCount:
+          description: Total included data count.
+          format: int64
+          type: integer
+      type: object
+    EntityToIncidents:
+      description: Entity to incidents relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipArray'
+      type: object
+    EntityToOncalls:
+      description: Entity to oncalls relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipArray'
+      type: object
+    EntityToRawSchema:
+      description: Entity to raw schema relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+      type: object
+    EntityToRelatedEntities:
+      description: Entity to related entities relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipArray'
+      type: object
+    EntityToSchema:
+      description: Entity to detail schema relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+      type: object
+    EntityV3:
+      description: Entity schema v3.
+      oneOf:
+      - $ref: '#/components/schemas/EntityV3Service'
+      - $ref: '#/components/schemas/EntityV3Datastore'
+      - $ref: '#/components/schemas/EntityV3Queue'
+      - $ref: '#/components/schemas/EntityV3System'
+    EntityV3APIVersion:
+      description: The schema version of entity type. The field is known as schema-version
+        in the previous version
+      enum:
+      - v3
+      example: v3
+      type: string
+      x-enum-varnames:
+      - V3
+    EntityV3DatadogCodeLocationItem:
+      additionalProperties: false
+      description: code location item.
+      properties:
+        paths:
+          description: The paths (glob) to the source code of the service
+          items:
+            type: string
+          type: array
+        repositoryURL:
+          description: The repository path of the source code of the entity
+          pattern: url
+          type: string
+      type: object
+    EntityV3DatadogCodeLocations:
+      additionalProperties: false
+      description: Schema for mapping source code locations to an entity
+      items:
+        $ref: '#/components/schemas/EntityV3DatadogCodeLocationItem'
+      type: array
+    EntityV3DatadogEventItem:
+      additionalProperties: false
+      description: Events association item.
+      properties:
+        name:
+          description: The name of the query
+          type: string
+        query:
+          description: The query to run
+          type: string
+      type: object
+    EntityV3DatadogEvents:
+      additionalProperties: false
+      description: Events associations
+      items:
+        $ref: '#/components/schemas/EntityV3DatadogEventItem'
+      type: array
+    EntityV3DatadogIntegrationOpsgenie:
+      additionalProperties: false
+      description: An Opsgenie integration schema
+      properties:
+        region:
+          description: The region for the Opsgenie integration.
+          minLength: 1
+          type: string
+        serviceURL:
+          description: The service url for the Opsgenie integration.
+          example: https://www.opsgenie.com/service/shopping-cart
+          minLength: 1
+          type: string
+      required:
+      - serviceURL
+      type: object
+    EntityV3DatadogIntegrationPagerduty:
+      additionalProperties: false
+      description: An PagerDuty integration schema
+      properties:
+        serviceURL:
+          description: The service url for the PagerDuty integration.
+          example: https://www.pagerduty.com/service-directory/Pshopping-cart
+          minLength: 1
+          type: string
+      required:
+      - serviceURL
+      type: object
+    EntityV3DatadogLogItem:
+      additionalProperties: false
+      description: log association item.
+      properties:
+        name:
+          description: The name of the query
+          type: string
+        query:
+          description: The query to run
+          type: string
+      type: object
+    EntityV3DatadogLogs:
+      additionalProperties: false
+      description: Logs association
+      items:
+        $ref: '#/components/schemas/EntityV3DatadogLogItem'
+      type: array
+    EntityV3DatadogPerformance:
+      additionalProperties: false
+      description: Performance stats association
+      properties:
+        tags:
+          description: A list of APM entity tags that associates the APM Stats data
+            with the entity
+          items:
+            type: string
+          type: array
+      type: object
+    EntityV3DatadogPipelines:
+      additionalProperties: false
+      description: CI Pipelines association
+      properties:
+        fingerprints:
+          description: A list of CI Fingerprints that associate CI Pipelines with
+            the entity
+          items:
+            type: string
+          type: array
+      type: object
+    EntityV3Datastore:
+      additionalProperties: false
+      description: Schema for datastore entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3DatastoreDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+          x-ignore-duplicate-object: true
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3DatastoreKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3DatastoreSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3DatastoreDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the datastore entity
+      properties:
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+      type: object
+      x-ignore-duplicate-object: true
+    EntityV3DatastoreKind:
+      description: The definition of Entity V3 Datastore Kind object.
+      enum:
+      - datastore
+      example: datastore
+      type: string
+      x-enum-varnames:
+      - DATASTORE
+    EntityV3DatastoreSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Datastore Spec object.
+      properties:
+        lifecycle:
+          description: The lifecycle state of the datastore.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the datastore
+          minLength: 1
+          type: string
+        type:
+          description: The type of datastore
+          type: string
+      type: object
+    EntityV3Integrations:
+      additionalProperties: false
+      description: A base schema for defining third party integrations
+      properties:
+        opsgenie:
+          $ref: '#/components/schemas/EntityV3DatadogIntegrationOpsgenie'
+        pagerduty:
+          $ref: '#/components/schemas/EntityV3DatadogIntegrationPagerduty'
+      type: object
+    EntityV3Metadata:
+      additionalProperties: false
+      description: The definition of Entity V3 Metadata object.
+      properties:
+        additionalOwners:
+          additionalProperties: false
+          description: The additional owners of the entity, usually a team
+          items:
+            $ref: '#/components/schemas/EntityV3MetadataAdditionalOwnersItems'
+          type: array
+        contacts:
+          additionalProperties: false
+          description: A list of contacts for the entity
+          items:
+            $ref: '#/components/schemas/EntityV3MetadataContactsItems'
+          type: array
+        description:
+          description: Short description of the entity. The UI can leverage the description
+            for display
+          type: string
+        displayName:
+          description: User friendly name of the entity. The UI can leverage the display
+            name for display
+          type: string
+        id:
+          description: A read-only globally unique identifier for the entity generated
+            by Datadog.  User supplied values are ignored.
+          example: 4b163705-23c0-4573-b2fb-f6cea2163fcb
+          minLength: 1
+          type: string
+        inheritFrom:
+          description: The entity reference from which to inherit metadata
+          example: application:default/myapp
+          type: string
+        links:
+          additionalProperties: false
+          description: A list of links for the entity
+          items:
+            $ref: '#/components/schemas/EntityV3MetadataLinksItems'
+          type: array
+        managed:
+          additionalProperties: {}
+          description: A read-only set of Datadog managed attributes generated by
+            Datadog.  User supplied values are ignored.
+          type: object
+        name:
+          description: 'Unique name given to an entity under the kind/namespace '
+          example: myService
+          minLength: 1
+          type: string
+        namespace:
+          description: Namespace is a part of unique identifier. It has a default
+            value of 'default'
+          example: default
+          minLength: 1
+          type: string
+        owner:
+          $ref: '#/components/schemas/EntityV3MetadataOwner'
+        tags:
+          description: A set of custom tags
+          example:
+          - this:tag
+          - that:tag
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      type: object
+    EntityV3MetadataAdditionalOwnersItems:
+      description: The definition of Entity V3 Metadata Additional Owners Items object.
+      properties:
+        name:
+          description: Team name
+          example: ''
+          type: string
+        type:
+          description: Team type
+          type: string
+      required:
+      - name
+    EntityV3MetadataContactsItems:
+      additionalProperties: false
+      description: The definition of Entity V3 Metadata Contacts Items object.
+      properties:
+        contact:
+          description: Contact value
+          example: https://slack/
+          type: string
+        name:
+          description: Contact name
+          minLength: 2
+          type: string
+        type:
+          description: Contact type.
+          example: slack
+          type: string
+      required:
+      - type
+      - contact
+      type: object
+    EntityV3MetadataLinksItems:
+      additionalProperties: false
+      description: The definition of Entity V3 Metadata Links Items object.
+      properties:
+        name:
+          description: Link name
+          example: mylink
+          type: string
+        provider:
+          description: Link provider.
+          type: string
+        type:
+          default: other
+          description: Link type.
+          example: link
+          type: string
+        url:
+          description: Link url
+          example: https://mylink
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    EntityV3MetadataOwner:
+      additionalProperties: false
+      description: The owner of the entity, usually a team
+      properties:
+        name:
+          description: Team name
+          type: string
+    EntityV3Queue:
+      additionalProperties: false
+      description: Schema for queue entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3QueueDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+          x-ignore-duplicate-object: true
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3QueueKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3QueueSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3QueueDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the datastore entity
+      properties:
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+      type: object
+      x-ignore-duplicate-object: true
+    EntityV3QueueKind:
+      description: The definition of Entity V3 Queue Kind object.
+      enum:
+      - queue
+      example: queue
+      type: string
+      x-enum-varnames:
+      - QUEUE
+    EntityV3QueueSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Queue Spec object.
+      properties:
+        lifecycle:
+          description: The lifecycle state of the queue.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the queue
+          minLength: 1
+          type: string
+        type:
+          description: The type of queue
+          type: string
+      type: object
+    EntityV3Service:
+      additionalProperties: false
+      description: Schema for service entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3ServiceDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+          x-ignore-duplicate-object: true
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3ServiceKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3ServiceSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3ServiceDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the service entity
+      properties:
+        codeLocations:
+          $ref: '#/components/schemas/EntityV3DatadogCodeLocations'
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+        pipelines:
+          $ref: '#/components/schemas/EntityV3DatadogPipelines'
+      type: object
+    EntityV3ServiceKind:
+      description: The definition of Entity V3 Service Kind object.
+      enum:
+      - service
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+    EntityV3ServiceSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Service Spec object.
+      properties:
+        dependsOn:
+          description: A list of components the service depends on
+          items:
+            type: string
+          type: array
+        languages:
+          description: The service's programming language.
+          items:
+            type: string
+          type: array
+        lifecycle:
+          description: The lifecycle state of the component.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the component
+          minLength: 1
+          type: string
+        type:
+          description: The type of service
+          type: string
+      type: object
+    EntityV3System:
+      additionalProperties: false
+      description: Schema for system entities
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3SystemDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client
+            side metadata. No Datadog features are affected by this field.
+          type: object
+          x-ignore-duplicate-object: true
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3SystemKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3SystemSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3SystemDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the service entity
+      properties:
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+        pipelines:
+          $ref: '#/components/schemas/EntityV3DatadogPipelines'
+      type: object
+    EntityV3SystemKind:
+      description: The definition of Entity V3 System Kind object.
+      enum:
+      - system
+      example: system
+      type: string
+      x-enum-varnames:
+      - SYSTEM
+    EntityV3SystemSpec:
+      additionalProperties: false
+      description: The definition of Entity V3 System Spec object.
+      properties:
+        components:
+          description: A list of components belongs to the system.
+          items:
+            type: string
+          type: array
+        lifecycle:
+          description: The lifecycle state of the component.
+          minLength: 1
+          type: string
+        tier:
+          description: An entity reference to the owner of the component.
+          minLength: 1
+          type: string
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -8617,6 +9596,8 @@ components:
           nullable: true
           type: array
       type: object
+      x-merge-override:
+        properties: false
     GCPSTSDelegateAccount:
       description: Datadog principal service account info.
       properties:
@@ -8666,6 +9647,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountAttributes:
       description: Attributes associated with your service account.
       properties:
@@ -8717,12 +9700,16 @@ components:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountCreateRequest:
       description: Data on your newly generated service account.
       properties:
         data:
           $ref: '#/components/schemas/GCPSTSServiceAccountData'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountData:
       description: Additional metadata on your generated service account.
       properties:
@@ -8731,6 +9718,8 @@ components:
         type:
           $ref: '#/components/schemas/GCPServiceAccountType'
       type: object
+      x-merge-override:
+        required: false
     GCPSTSServiceAccountResponse:
       description: The account creation response.
       properties:
@@ -9578,6 +10567,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             at creation.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
@@ -9602,6 +10598,8 @@ components:
       - type
       - attributes
       type: object
+      x-merge-override:
+        required: false
     IncidentCreateRelationships:
       description: The relationships the incident will have with other resources once
         created.
@@ -9864,7 +10862,8 @@ components:
           example: Jane Doe
           type: string
         handle:
-          description: The email address used for the notification.
+          description: The handle used for the notification. This includes an email
+            address, Slack channel, or workflow.
           example: '@test.user@test.com'
           type: string
       type: object
@@ -9977,6 +10976,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           nullable: true
@@ -10052,6 +11058,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     IncidentResponseIncludedItem:
       description: An object related to an incident that is included in the response.
       oneOf:
@@ -10944,6 +11952,13 @@ components:
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
+          example:
+          - display_name: Jane Doe
+            handle: '@user@email.com'
+          - display_name: Slack Channel
+            handle: '@slack-channel'
+          - display_name: Incident Workflow
+            handle: '@workflow-from-incident'
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
@@ -11103,6 +12118,21 @@ components:
       required:
       - data
       type: object
+    IncludeType:
+      description: supported include types.
+      enum:
+      - schema
+      - raw_schema
+      - oncall
+      - incident
+      - relation
+      type: string
+      x-enum-varnames:
+      - SCHEMA
+      - RAW_SCHEMA
+      - ONCALL
+      - INCIDENT
+      - RELATION
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
@@ -11395,6 +12425,44 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/DowntimeMeta'
+      type: object
+    ListEntityCatalogResponse:
+      description: List entity response.
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseData'
+        included:
+          $ref: '#/components/schemas/ListEntityCatalogResponseIncluded'
+        links:
+          $ref: '#/components/schemas/ListEntityCatalogResponseLinks'
+        meta:
+          $ref: '#/components/schemas/EntityResponseMeta'
+      type: object
+    ListEntityCatalogResponseIncluded:
+      description: List entity response included.
+      items:
+        $ref: '#/components/schemas/ListEntityCatalogResponseIncludedItem'
+      type: array
+    ListEntityCatalogResponseIncludedItem:
+      description: List entity response included item.
+      oneOf:
+      - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+      - $ref: '#/components/schemas/EntityResponseIncludedRawSchema'
+      - $ref: '#/components/schemas/EntityResponseIncludedRelatedEntity'
+      - $ref: '#/components/schemas/EntityResponseIncludedOncall'
+      - $ref: '#/components/schemas/EntityResponseIncludedIncident'
+    ListEntityCatalogResponseLinks:
+      description: List entity response links.
+      properties:
+        next:
+          description: next link.
+          type: string
+        previous:
+          description: previous link.
+          type: string
+        self:
+          description: current link.
+          type: string
       type: object
     ListFindingsData:
       description: Array of findings.
@@ -13181,6 +14249,8 @@ components:
         type:
           $ref: '#/components/schemas/MetricEstimateResourceType'
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateAttributes:
       description: Object containing the definition of a metric estimate attribute.
       properties:
@@ -13197,6 +14267,8 @@ components:
           format: int64
           type: integer
       type: object
+      x-merge-override:
+        required: false
     MetricEstimateResourceType:
       default: metric_cardinality_estimate
       description: The metric estimate resource type.
@@ -14995,6 +16067,8 @@ components:
         type:
           $ref: '#/components/schemas/APIKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
@@ -15044,6 +16118,8 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       type: object
+      x-merge-override:
+        required: false
     PartialApplicationKeyAttributes:
       description: Attributes of a partial application key.
       properties:
@@ -15203,6 +16279,8 @@ components:
           example: powerpack
           type: string
       type: object
+      x-merge-override:
+        required: false
     PowerpackGroupWidget:
       description: Powerpack group widget definition object.
       properties:
@@ -15385,6 +16463,18 @@ components:
     PowerpackTemplateVariable:
       description: Powerpack template variables.
       properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
         defaults:
           description: One or many template variable default values within the saved
             view, which are unioned together using `OR` if more than one is specified.
@@ -15396,6 +16486,12 @@ components:
         name:
           description: The name of the variable.
           example: datacenter
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with
+            this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
           type: string
       required:
       - name
@@ -15487,6 +16583,8 @@ components:
         type:
           $ref: '#/components/schemas/ProcessSummaryType'
       type: object
+      x-merge-override:
+        required: false
     ProcessSummaryAttributes:
       description: Attributes for a process summary.
       properties:
@@ -15955,6 +17053,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
@@ -16005,6 +17105,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     RUMApplicationListAttributes:
       description: RUM application list attributes.
       properties:
@@ -16509,6 +17611,46 @@ components:
             from the other indexes
           type: string
       type: object
+    RelationType:
+      description: supported relation types
+      enum:
+      - RelationTypeOwns
+      - RelationTypeOwnedBy
+      - RelationTypeDependsOn
+      - RelationTypeDependencyOf
+      - RelationTypePartsOf
+      - RelationTypeHasPart
+      - RelationTypeOtherOwns
+      - RelationTypeOtherOwnedBy
+      - RelationTypeImplementedBy
+      - RelationTypeImplements
+      type: string
+      x-enum-varnames:
+      - RELATIONTYPEOWNS
+      - RELATIONTYPEOWNEDBY
+      - RELATIONTYPEDEPENDSON
+      - RELATIONTYPEDEPENDENCYOF
+      - RELATIONTYPEPARTSOF
+      - RELATIONTYPEHASPART
+      - RELATIONTYPEOTHEROWNS
+      - RELATIONTYPEOTHEROWNEDBY
+      - RELATIONTYPEIMPLEMENTEDBY
+      - RELATIONTYPEIMPLEMENTS
+    RelationshipArray:
+      description: Relationships.
+      items:
+        $ref: '#/components/schemas/RelationshipItem'
+      type: array
+    RelationshipItem:
+      description: Relationship entry.
+      properties:
+        id:
+          description: Associated data id.
+          type: string
+        type:
+          description: Relationship type.
+          type: string
+      type: object
     RelationshipToIncidentAttachment:
       description: A relationship reference for attachments.
       properties:
@@ -16533,6 +17675,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpactData:
       description: Relationship to impact object.
       properties:
@@ -16546,6 +17690,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentImpacts:
       description: Relationship to impacts.
       properties:
@@ -16573,6 +17719,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentIntegrationMetadatas:
       description: A relationship reference for multiple integration metadata objects.
       example:
@@ -16636,6 +17784,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentResponders:
       description: Relationship to incident responders.
       properties:
@@ -16660,6 +17810,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToIncidentUserDefinedFields:
       description: Relationship to incident user defined fields.
       properties:
@@ -16755,6 +17907,8 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipToRoleData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoleData:
       description: Relationship to role object.
       properties:
@@ -16765,6 +17919,8 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRoles:
       description: Relationship to roles.
       properties:
@@ -16774,6 +17930,8 @@ components:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
       type: object
+      x-merge-override:
+        required: false
     RelationshipToRule:
       description: Scorecard create rule response relationship.
       properties:
@@ -16817,12 +17975,16 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeam:
       description: Relationship to team.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToTeamData'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamData:
       description: Relationship to Team object.
       properties:
@@ -16833,6 +17995,8 @@ components:
         type:
           $ref: '#/components/schemas/TeamType'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -16846,6 +18010,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToTeamLinks:
       description: Relationship between a team and a team link
       properties:
@@ -16857,6 +18023,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -16888,6 +18056,8 @@ components:
         links:
           $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
       properties:
@@ -16901,6 +18071,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUserTeamTeam:
       description: Relationship between team membership and team
       properties:
@@ -16943,6 +18115,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     RelationshipToUsers:
       description: Relationship to users.
       properties:
@@ -16972,6 +18146,8 @@ components:
         page:
           $ref: '#/components/schemas/Pagination'
       type: object
+      x-merge-override:
+        properties: false
     RestrictionPolicy:
       description: Restriction policy object.
       properties:
@@ -17619,6 +18795,8 @@ components:
       required:
       - attributes
       type: object
+      x-merge-override:
+        required: false
     RoleCreateRequest:
       description: Create a role.
       properties:
@@ -17846,6 +19024,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     SAMLAssertionAttributeAttributes:
       description: Key/Value pair of attributes used in SAML assertion attributes.
       properties:
@@ -22868,6 +24048,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamAttributes:
       description: Team attributes
       properties:
@@ -23114,6 +24296,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     TeamPermissionSettingAttributes:
       description: Team permission setting attributes
       properties:
@@ -23269,12 +24453,6 @@ components:
           description: Banner selection for the team
           format: int64
           nullable: true
-          type: integer
-        color:
-          description: An identifier for the color representing the team
-          format: int32
-          maximum: 13
-          minimum: 0
           type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
@@ -23696,6 +24874,30 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+    UpsertCatalogEntityRequest:
+      description: Create / Update entity request.
+      oneOf:
+      - $ref: '#/components/schemas/EntityV3'
+      - $ref: '#/components/schemas/EntityRaw'
+    UpsertCatalogEntityResponse:
+      description: Upsert entity response.
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseData'
+        included:
+          $ref: '#/components/schemas/UpsertCatalogEntityResponseIncluded'
+        meta:
+          $ref: '#/components/schemas/EntityResponseMeta'
+      type: object
+    UpsertCatalogEntityResponseIncluded:
+      description: Upsert entity response included.
+      items:
+        $ref: '#/components/schemas/UpsertCatalogEntityResponseIncludedItem'
+      type: array
+    UpsertCatalogEntityResponseIncludedItem:
+      description: Upsert entity response included item.
+      oneOf:
+      - $ref: '#/components/schemas/EntityResponseIncludedSchema'
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -23870,6 +25072,8 @@ components:
       - attributes
       - type
       type: object
+      x-merge-override:
+        required: false
     UserCreateRequest:
       description: Create a user.
       properties:
@@ -23889,6 +25093,8 @@ components:
       - type
       - relationships
       type: object
+      x-merge-override:
+        required: false
     UserInvitationDataAttributes:
       description: Attributes of a user invitation.
       properties:
@@ -23934,6 +25140,8 @@ components:
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object
+      x-merge-override:
+        required: false
     UserInvitationsRequest:
       description: Object to invite users to join the organization.
       properties:
@@ -24040,6 +25248,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamAttributes:
       description: Team membership attributes
       properties:
@@ -24077,6 +25287,8 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/AbbreviatedTeam'
+      - $ref: '#/components/schemas/UserTeamUser'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -24092,6 +25304,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     UserTeamPermissionAttributes:
       description: User team permission attributes
       properties:
@@ -24181,6 +25395,42 @@ components:
       required:
       - data
       type: object
+    UserTeamUser:
+      description: The definition of `UserTeamUser` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamUserAttributes'
+        id:
+          description: The `UserTeamUser` ID.
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamUserType'
+      required:
+      - type
+      type: object
+    UserTeamUserAttributes:
+      description: The definition of `UserTeamUserAttributes` object.
+      properties:
+        disabled:
+          description: The `UserTeamUserAttributes` `disabled`.
+          type: boolean
+        email:
+          description: The `UserTeamUserAttributes` `email`.
+          type: string
+        handle:
+          description: The `UserTeamUserAttributes` `handle`.
+          type: string
+        icon:
+          description: The `UserTeamUserAttributes` `icon`.
+          type: string
+        name:
+          description: The `UserTeamUserAttributes` `name`.
+          nullable: true
+          type: string
+        service_account:
+          description: The `UserTeamUserAttributes` `service_account`.
+          type: boolean
+      type: object
     UserTeamUserType:
       default: users
       description: User team user type
@@ -24237,6 +25487,8 @@ components:
       - type
       - id
       type: object
+      x-merge-override:
+        required: false
     UserUpdateRequest:
       description: Update a user.
       properties:
@@ -24478,6 +25730,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
+            security_pipelines_read: View Security Pipelines.
+            security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -24572,6 +25826,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     post:
@@ -24616,6 +25874,10 @@ paths:
               unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
           step: there is a valid "api_key" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -24651,6 +25913,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_delete
       x-undo:
         type: idempotent
     get:
@@ -24684,6 +25950,12 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-merge-override:
+        parameters: false
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     patch:
@@ -24729,6 +26001,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -25049,6 +26325,10 @@ paths:
       tags:
       - Spans Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
     post:
@@ -25096,6 +26376,10 @@ paths:
               \   \"type\": \"spans_metrics\"\n  }\n}"
           step: there is a valid "spans_metric" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_generate_metrics
       x-undo:
         operationId: DeleteSpansMetric
         parameters:
@@ -25121,6 +26405,10 @@ paths:
       tags:
       - Spans Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_generate_metrics
       x-undo:
         type: idempotent
     get:
@@ -25145,6 +26433,10 @@ paths:
       tags:
       - Spans Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
     patch:
@@ -25182,6 +26474,10 @@ paths:
       - Spans Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_generate_metrics
       x-undo:
         type: idempotent
   /api/v2/apm/config/retention-filters:
@@ -25203,6 +26499,11 @@ paths:
       tags:
       - APM Retention Filters
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_read
+        - apm_pipelines_read
       x-undo:
         type: safe
     post:
@@ -25252,6 +26553,11 @@ paths:
               \   }\n}"
           step: there is a valid "retention_filter" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         operationId: DeleteApmRetentionFilter
         parameters:
@@ -25283,6 +26589,11 @@ paths:
       - APM Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         type: idempotent
   /api/v2/apm/config/retention-filters/{filter_id}:
@@ -25308,6 +26619,11 @@ paths:
       tags:
       - APM Retention Filters
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         type: idempotent
     get:
@@ -25332,6 +26648,11 @@ paths:
       tags:
       - APM Retention Filters
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_read
+        - apm_pipelines_read
       x-undo:
         type: safe
     put:
@@ -25370,6 +26691,11 @@ paths:
       - APM Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         type: idempotent
   /api/v2/application_keys:
@@ -25415,6 +26741,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
       x-undo:
         type: safe
   /api/v2/application_keys/{app_key_id}:
@@ -25445,6 +26775,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
       x-undo:
         type: idempotent
     get:
@@ -25484,6 +26818,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
       x-undo:
         type: safe
     patch:
@@ -25529,10 +26867,15 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
       x-undo:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
   /api/v2/audit/events:
     get:
       description: 'List endpoint returns events that match a Audit Logs search query.
@@ -25615,6 +26958,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - audit_logs_read
       x-undo:
         type: safe
   /api/v2/audit/events/search:
@@ -25659,6 +27006,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - audit_logs_read
       x-undo:
         type: safe
   /api/v2/authn_mappings:
@@ -25704,6 +27055,9 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -25758,12 +27112,19 @@ paths:
               \"authn_mappings\"\n  }\n}"
           step: there is a valid "authn_mapping" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteAuthNMapping
         parameters:
         - name: authn_mapping_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/authn_mappings/{authn_mapping_id}:
     delete:
       description: Delete an AuthN Mapping specified by AuthN Mapping UUID.
@@ -25787,15 +27148,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Delete an AuthN Mapping
       tags:
       - AuthN Mappings
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     get:
@@ -25824,14 +27184,13 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an AuthN Mapping by UUID
       tags:
       - AuthN Mappings
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     patch:
@@ -25884,18 +27243,20 @@ paths:
           description: Unprocessable Entity
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Edit an AuthN Mapping
       tags:
       - AuthN Mappings
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
+    x-merge-override:
+      get: false
+      patch: false
   /api/v2/cases:
     get:
       description: Search cases.
@@ -26416,6 +27777,170 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+  /api/v2/catalog/entity:
+    get:
+      description: Get a list of entities from Software Catalog.
+      operationId: ListCatalogEntity
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of entities in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterByID'
+      - $ref: '#/components/parameters/FilterByRef'
+      - $ref: '#/components/parameters/FilterByName'
+      - $ref: '#/components/parameters/FilterByKind'
+      - $ref: '#/components/parameters/FilterByOwner'
+      - $ref: '#/components/parameters/FilterByRelationType'
+      - $ref: '#/components/parameters/FilterByExcludeSnapshot'
+      - $ref: '#/components/parameters/Include'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEntityCatalogResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entities
+      tags:
+      - Software Catalog
+      x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+    post:
+      description: Create or update entities in Software Catalog.
+      operationId: UpsertCatalogEntity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCatalogEntityRequest'
+        description: Entity YAML/JSON.
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsertCatalogEntityResponse'
+          description: ACCEPTED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create or update entities
+      tags:
+      - Software Catalog
+      x-codegen-request-body-name: body
+      x-given:
+        entity:
+          parameters:
+          - name: body
+            value: "{\n  \"apiVersion\": \"v3\",\n  \"kind\": \"service\",\n  \"metadata\":
+              {\n    \"name\": \"service-{{ unique_lower_alnum }}\",\n    \"displayName\":
+              \"Shopping Cart\",\n    \"inheritFrom\": \"service:otherService\",\n
+              \   \"tags\": [\n      \"tag:value\"\n    ],\n    \"links\": [\n      {\n
+              \       \"name\": \"shopping-cart runbook\",\n        \"type\": \"runbook\",\n
+              \       \"url\": \"https://runbook/shopping-cart\"\n      },\n      {\n
+              \       \"name\": \"shopping-cart architecture\",\n        \"provider\":
+              \"gdoc\",\n        \"url\": \"https://google.drive/shopping-cart-architecture\",\n
+              \       \"type\": \"doc\"\n      },\n      {\n        \"name\": \"shopping-cart
+              Wiki\",\n        \"provider\": \"wiki\",\n        \"url\": \"https://wiki/shopping-cart\",\n
+              \       \"type\": \"doc\"\n      },\n      {\n        \"name\": \"shopping-cart
+              source code\",\n        \"provider\": \"github\",\n        \"url\":
+              \"http://github/shopping-cart\",\n        \"type\": \"repo\"\n      }\n
+              \   ],\n    \"contacts\": [\n      {\n        \"name\": \"Support Email\",\n
+              \       \"type\": \"email\",\n        \"contact\": \"team@shopping.com\"\n
+              \     },\n      {\n        \"name\": \"Support Slack\",\n        \"type\":
+              \"slack\",\n        \"contact\": \"https://www.slack.com/archives/shopping-cart\"\n
+              \     }\n    ],\n    \"owner\": \"myteam\",\n    \"additionalOwners\":
+              [\n      {\n        \"name\": \"opsTeam\",\n        \"type\": \"operator\"\n
+              \     }\n    ]\n  },\n  \"integrations\": {\n    \"pagerduty\": {\n
+              \     \"serviceURL\": \"https://www.pagerduty.com/service-directory/Pshopping-cart\"\n
+              \   },\n    \"opsgenie\": {\n      \"serviceURL\": \"https://www.opsgenie.com/service/shopping-cart\",\n
+              \     \"region\": \"US\"\n    }\n  },\n  \"extensions\": {\n    \"datadoghq.com/shopping-cart\":
+              {\n      \"customField\": \"customValue\"\n    }\n  },\n  \"spec\":
+              {\n    \"lifecycle\": \"production\",\n    \"tier\": \"1\",\n    \"type\":
+              \"web\",\n    \"languages\": [\n      \"go\",\n      \"python\"\n    ],\n
+              \   \"dependsOn\": [\n      \"service:serviceA\",\n      \"service:serviceB\"\n
+              \   ]\n  },\n  \"datadog\": {\n    \"performanceData\": {\n      \"tags\":
+              [\n        \"service:shopping-cart\",\n        \"hostname:shopping-cart\"\n
+              \     ]\n    },\n    \"events\": [\n      {\n        \"name\": \"deployment
+              events\",\n        \"query\": \"app:myapp AND type:github\"\n      },\n
+              \     {\n        \"name\": \"event type B\",\n        \"query\": \"app:myapp
+              AND type:github\"\n      }\n    ],\n    \"logs\": [\n      {\n        \"name\":
+              \"critical logs\",\n        \"query\": \"app:myapp AND type:github\"\n
+              \     },\n      {\n        \"name\": \"ops logs\",\n        \"query\":
+              \"app:myapp AND type:github\"\n      }\n    ],\n    \"pipelines\": {\n
+              \     \"fingerprints\": [\n        \"fp1\",\n        \"fp2\"\n      ]\n
+              \   },\n    \"codeLocations\": [\n      {\n        \"repositoryURL\":
+              \"http://github/shopping-cart.git\",\n        \"paths\": [\n          \"baz/*.c\",\n
+              \         \"bat/**/*\",\n          \"../plop/*.java\"\n        ]\n      },\n
+              \     {\n        \"repositoryURL\": \"http://github/shopping-cart-2.git\",\n
+              \       \"paths\": [\n          \"baz/*.c\",\n          \"bat/**/*\",\n
+              \         \"../plop/*.java\"\n        ]\n      }\n    ]\n  }\n}"
+          step: there is a valid entity in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteCatalogEntity
+        parameters:
+        - name: entity_id
+          source: data[0].id
+        type: unsafe
+  /api/v2/catalog/entity/{entity_id}:
+    delete:
+      description: Delete a single entity in Software Catalog.
+      operationId: DeleteCatalogEntity
+      parameters:
+      - $ref: '#/components/parameters/EntityID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Delete a single entity
+      tags:
+      - Software Catalog
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v2/ci/pipeline:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
@@ -26530,6 +28055,10 @@ paths:
       - CI Visibility Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/pipelines/events:
@@ -26617,6 +28146,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/pipelines/events/search:
@@ -26663,6 +28196,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/tests/analytics/aggregate:
@@ -26699,6 +28236,10 @@ paths:
       - CI Visibility Tests
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events:
@@ -26786,6 +28327,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events/search:
@@ -26832,6 +28377,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/container_images:
@@ -26912,6 +28461,9 @@ paths:
         cursorPath: meta.pagination.next_cursor
         limitParam: page[size]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/containers:
@@ -26992,6 +28544,9 @@ paths:
         cursorPath: meta.pagination.next_cursor
         limitParam: page[size]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/cost/aws_cur_config:
@@ -27022,6 +28577,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
     post:
@@ -27063,6 +28622,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/aws_cur_config/{cloud_account_id}:
@@ -27097,6 +28660,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
     patch:
@@ -27134,6 +28701,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/aws_related_accounts:
@@ -27180,6 +28751,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost/azure_uc_config:
@@ -27210,6 +28785,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
     post:
@@ -27251,6 +28830,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/azure_uc_config/{cloud_account_id}:
@@ -27285,6 +28868,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
     patch:
@@ -27328,6 +28915,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -27484,6 +29075,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
@@ -27525,6 +29120,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -27651,6 +29250,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -27699,6 +29302,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: safe
     post:
@@ -27743,6 +29350,10 @@ paths:
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
         parameters:
@@ -27776,6 +29387,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: idempotent
     get:
@@ -27808,6 +29423,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: safe
     patch:
@@ -27853,6 +29472,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: idempotent
     x-merge-override:
@@ -27952,6 +29575,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -28242,6 +29869,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: safe
     post:
@@ -28295,6 +29926,10 @@ paths:
               \   \"type\": \"downtime\"\n  }\n}"
           step: there is a valid "downtime_v2" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         operationId: CancelDowntime
         parameters:
@@ -28339,6 +29974,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
     get:
@@ -28398,6 +30037,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: safe
     patch:
@@ -28455,6 +30098,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v2/events:
@@ -28473,13 +30120,13 @@ paths:
         required: false
         schema:
           type: string
-      - description: Minimum timestamp for requested events.
+      - description: Minimum timestamp for requested events, in milliseconds.
         in: query
         name: filter[from]
         required: false
         schema:
           type: string
-      - description: Maximum timestamp for requested events.
+      - description: Maximum timestamp for requested events, in milliseconds.
         in: query
         name: filter[to]
         required: false
@@ -28536,8 +30183,14 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
+    x-merge-override:
+      get: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -28576,8 +30229,14 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
+    x-merge-override:
+      post: false
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -28616,6 +30275,10 @@ paths:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28666,6 +30329,10 @@ paths:
               \"incidents\"\n  }\n}"
           step: there is a valid "incident" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         operationId: DeleteIncident
         parameters:
@@ -28715,6 +30382,10 @@ paths:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data.attributes.incidents
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28748,6 +30419,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28785,6 +30460,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28831,6 +30510,10 @@ paths:
       - Incidents
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28863,15 +30546,14 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - incident_read
       summary: Get a list of attachments
       tags:
       - Incidents
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28924,6 +30606,10 @@ paths:
               \"incident_attachments\"\n    }\n  ]\n}"
           step: the "incident" has an "incident_attachment"
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28961,6 +30647,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29019,6 +30709,10 @@ paths:
               \ }\n}"
           step: the "incident" has an "incident_integration_metadata"
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         operationId: DeleteIncidentIntegration
         parameters:
@@ -29179,6 +30873,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29237,6 +30935,10 @@ paths:
               \ }\n}"
           step: the "incident" has an "incident_todo"
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         operationId: DeleteIncidentTodo
         parameters:
@@ -29277,6 +30979,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29314,6 +31020,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29359,6 +31069,10 @@ paths:
       - Incidents
       x-codegen-request-body-name: body
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29386,6 +31100,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -29428,12 +31146,19 @@ paths:
               \   },\n    \"type\": \"gcp_service_account\"\n  }\n}"
           step: there is a valid "gcp_sts_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         operationId: DeleteGCPSTSAccount
         parameters:
         - name: account_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/integration/gcp/accounts/{account_id}:
     delete:
       description: Delete an STS enabled GCP account from within Datadog.
@@ -29453,6 +31178,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         type: idempotent
     patch:
@@ -29486,8 +31215,14 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: false
   /api/v2/integration/gcp/sts_delegate:
     get:
       description: List your Datadog-GCP STS delegate account configured in your Datadog
@@ -29509,6 +31244,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -29540,6 +31279,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
   /api/v2/integration/opsgenie/services:
@@ -29561,6 +31304,10 @@ paths:
       tags:
       - Opsgenie Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -29602,6 +31349,10 @@ paths:
               \ }\n}"
           step: there is a valid "opsgenie_service" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteOpsgenieService
         parameters:
@@ -29632,6 +31383,10 @@ paths:
       tags:
       - Opsgenie Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -29660,6 +31415,10 @@ paths:
       tags:
       - Opsgenie Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -29696,6 +31455,10 @@ paths:
       - Opsgenie Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -29725,6 +31488,10 @@ paths:
       tags:
       - Cloudflare Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -29765,6 +31532,10 @@ paths:
               \"zone-id-2\"],\n      \"resources\": [\"web\", \"dns\"]\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteCloudflareAccount
         parameters:
@@ -29799,6 +31570,10 @@ paths:
       tags:
       - Cloudflare Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -29830,6 +31605,10 @@ paths:
       tags:
       - Cloudflare Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -29868,6 +31647,10 @@ paths:
       - Cloudflare Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -29896,6 +31679,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -29940,6 +31727,10 @@ paths:
               \         ]\n        }\n      ]\n    }\n  }\n}"
           step: there is a valid "confluent_account" in the system
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteConfluentAccount
         parameters:
@@ -29967,6 +31758,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     get:
@@ -29993,6 +31788,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -30027,6 +31826,10 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     x-merge-override:
@@ -30057,6 +31860,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -30092,6 +31899,10 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources/{resource_id}:
@@ -30117,6 +31928,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     get:
@@ -30145,6 +31960,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -30181,6 +32000,10 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -30208,6 +32031,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -30247,6 +32074,10 @@ paths:
               unique }}\",\n      \"services\": []\n    }\n  }\n}"
           step: there is a valid "fastly_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteFastlyAccount
         parameters:
@@ -30276,6 +32107,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -30302,6 +32137,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -30335,6 +32174,10 @@ paths:
       - Fastly Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -30365,6 +32208,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -30398,6 +32245,10 @@ paths:
       - Fastly Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteFastlyService
         parameters:
@@ -30429,6 +32280,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     get:
@@ -30456,6 +32311,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -30490,6 +32349,10 @@ paths:
       - Fastly Integration
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     x-merge-override:
@@ -30519,6 +32382,10 @@ paths:
       tags:
       - Okta Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -30560,6 +32427,10 @@ paths:
               \ }\n}"
           step: there is a valid "okta_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteOktaAccount
         parameters:
@@ -30594,6 +32465,10 @@ paths:
       tags:
       - Okta Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -30625,6 +32500,10 @@ paths:
       tags:
       - Okta Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -30663,6 +32542,10 @@ paths:
       - Okta Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -30695,6 +32578,10 @@ paths:
       tags:
       - IP Allowlist
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: safe
     patch:
@@ -30751,6 +32638,10 @@ paths:
               \ }\n}"
           step: the "ip_allowlist_nonempty_disabled" has two entries and is disabled
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: idempotent
   /api/v2/logs:
@@ -31012,6 +32903,10 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v2/logs/config/archive-order:
@@ -31039,6 +32934,9 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 9
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -31092,6 +32990,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: safe
   /api/v2/logs/config/archives:
@@ -31117,6 +33019,10 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_archives
       x-undo:
         type: safe
     post:
@@ -31155,6 +33061,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         operationId: DeleteLogsArchive
         parameters:
@@ -31194,6 +33104,10 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: idempotent
     get:
@@ -31232,6 +33146,10 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_archives
       x-undo:
         type: safe
     put:
@@ -31283,6 +33201,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: safe
   /api/v2/logs/config/archives/{archive_id}/readers:
@@ -31325,6 +33247,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: idempotent
     get:
@@ -31364,6 +33290,9 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -31405,6 +33334,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: unsafe
   /api/v2/logs/config/custom-destinations:
@@ -31431,6 +33364,10 @@ paths:
       tags:
       - Logs Custom Destinations
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
     post:
@@ -31477,6 +33414,10 @@ paths:
               \ }\n}"
           step: there is a valid "custom_destination" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_forwarding_rules
       x-undo:
         operationId: DeleteLogsCustomDestination
         parameters:
@@ -31504,6 +33445,10 @@ paths:
       tags:
       - Logs Custom Destinations
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_forwarding_rules
       x-undo:
         type: idempotent
     get:
@@ -31530,6 +33475,10 @@ paths:
       tags:
       - Logs Custom Destinations
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
     patch:
@@ -31567,6 +33516,10 @@ paths:
       - Logs Custom Destinations
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_forwarding_rules
       x-undo:
         type: idempotent
   /api/v2/logs/config/metrics:
@@ -31588,6 +33541,9 @@ paths:
       tags:
       - Logs Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -31641,6 +33597,10 @@ paths:
               \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
           step: there is a valid "logs_metric_percentile" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_generate_metrics
       x-undo:
         operationId: DeleteLogsMetric
         parameters:
@@ -31666,6 +33626,10 @@ paths:
       tags:
       - Logs Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_generate_metrics
       x-undo:
         type: idempotent
     get:
@@ -31690,6 +33654,9 @@ paths:
       tags:
       - Logs Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     patch:
@@ -31727,6 +33694,10 @@ paths:
       - Logs Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_generate_metrics
       x-undo:
         type: idempotent
   /api/v2/logs/config/restriction_queries:
@@ -31755,6 +33726,9 @@ paths:
       tags:
       - Logs Restriction Queries
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -31795,6 +33769,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteRestrictionQuery
         parameters:
@@ -31835,6 +33813,9 @@ paths:
       tags:
       - Logs Restriction Queries
       x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -31871,6 +33852,9 @@ paths:
       tags:
       - Logs Restriction Queries
       x-menu-order: 9
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -31910,6 +33894,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -31953,6 +33941,9 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -32001,6 +33992,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -32046,6 +34041,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -32090,6 +34089,9 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -32134,6 +34136,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -32252,6 +34258,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v2/logs/events/search:
@@ -32304,6 +34314,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v2/metrics:
@@ -32409,6 +34423,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/config/bulk-tags:
@@ -32466,6 +34484,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         type: idempotent
     post:
@@ -32532,6 +34554,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
@@ -32540,6 +34566,8 @@ paths:
             \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
             }}\"]\n    }\n  }\n}"
         type: unsafe
+    x-merge-override:
+      delete: false
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: List tags and aggregations that are actively queried on dashboards,
@@ -32593,6 +34621,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/all-tags:
@@ -32641,6 +34673,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/assets:
@@ -32781,6 +34817,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 11
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:
@@ -32816,6 +34855,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         type: idempotent
     get:
@@ -32857,6 +34900,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
     patch:
@@ -32918,6 +34965,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         type: idempotent
     post:
@@ -32991,6 +35042,10 @@ paths:
               }}\"\n  }\n}"
           step: there is a valid "metric_tag_configuration" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         operationId: DeleteTagConfiguration
         parameters:
@@ -33042,6 +35097,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 8
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/monitor/policy:
@@ -33072,6 +35130,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -33119,6 +35181,10 @@ paths:
               [\"prod\", \"staging\"]\n      }\n    }\n  }\n}"
           step: there is a valid "monitor_configuration_policy" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         operationId: DeleteMonitorConfigPolicy
         parameters:
@@ -33164,6 +35230,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
     get:
@@ -33207,6 +35277,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     patch:
@@ -33259,6 +35333,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
   /api/v2/monitor/{monitor_id}/downtime_matches:
@@ -33312,6 +35390,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: safe
   /api/v2/ndm/devices:
@@ -33514,13 +35596,13 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Org Configs
       tags:
       - Organizations
       x-menu-order: 100
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/org_configs/{org_config_name}:
@@ -33546,13 +35628,13 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get a specific Org Config value
       tags:
       - Organizations
       x-menu-order: 101
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     patch:
@@ -33587,6 +35669,10 @@ paths:
       tags:
       - Organizations
       x-menu-order: 102
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: idempotent
   /api/v2/permissions:
@@ -33916,6 +36002,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -33959,6 +36049,10 @@ paths:
             name: body
           step: there is a valid "powerpack" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeletePowerpack
         parameters:
@@ -33996,6 +36090,10 @@ paths:
       tags:
       - Powerpack
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -34032,6 +36130,10 @@ paths:
       tags:
       - Powerpack
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     patch:
@@ -34082,6 +36184,10 @@ paths:
       - Powerpack
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -34182,6 +36288,9 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/query/scalar:
@@ -34224,6 +36333,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
@@ -34269,6 +36382,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
@@ -34474,10 +36591,14 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Delete a restriction policy
       tags:
       - Restriction Policies
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: idempotent
     get:
@@ -34501,10 +36622,14 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Get a restriction policy
       tags:
       - Restriction Policies
       x-menu-order: 2
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -34583,11 +36708,15 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Update a restriction policy
       tags:
       - Restriction Policies
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: idempotent
   /api/v2/roles:
@@ -34645,6 +36774,10 @@ paths:
       tags:
       - Roles
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -34694,6 +36827,10 @@ paths:
               unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
           step: there is a valid "role" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -34828,6 +36965,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     x-merge-override:
@@ -34888,6 +37029,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -34945,6 +37090,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     get:
@@ -35042,6 +37191,10 @@ paths:
               \"{{ permission.type }}\"\n  }\n}"
           step: the "permission" is granted to the "role"
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: safe
     x-merge-override:
@@ -35097,6 +37250,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     get:
@@ -35213,6 +37370,10 @@ paths:
               \"{{ user.data.type }}\"\n  }\n}"
           step: the "user" has the "role"
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: safe
   /api/v2/rum/analytics/aggregate:
@@ -35248,6 +37409,9 @@ paths:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/rum/applications:
@@ -35269,6 +37433,10 @@ paths:
       tags:
       - RUM
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
     post:
@@ -35304,12 +37472,19 @@ paths:
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_write
       x-undo:
         operationId: DeleteRUMApplication
         parameters:
         - name: id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/rum/applications/{id}:
     delete:
       description: Delete an existing RUM application in your organization.
@@ -35332,6 +37507,10 @@ paths:
       tags:
       - RUM
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_write
       x-undo:
         type: idempotent
     get:
@@ -35359,6 +37538,10 @@ paths:
       tags:
       - RUM
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
     patch:
@@ -35401,10 +37584,16 @@ paths:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_write
       x-undo:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
+      patch: false
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -35491,6 +37680,9 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/rum/events/search:
@@ -35538,6 +37730,9 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/saml_configurations/idp_metadata:
@@ -35575,6 +37770,10 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: idempotent
   /api/v2/scorecard/outcomes:
@@ -35953,6 +38152,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
@@ -35974,6 +38177,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
     post:
@@ -36015,6 +38222,10 @@ paths:
               \     \"enabled\": true\n     }\n  }\n}"
           step: there is a valid "agent_rule" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_write
       x-undo:
         operationId: DeleteCloudWorkloadSecurityAgentRule
         parameters:
@@ -36040,6 +38251,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_write
       x-undo:
         type: idempotent
     get:
@@ -36064,6 +38279,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
     patch:
@@ -36102,6 +38321,10 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:
@@ -36128,6 +38351,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
       x-undo:
         type: safe
     post:
@@ -36181,6 +38408,10 @@ paths:
               true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         operationId: DeleteSecurityFilter
         parameters:
@@ -36211,6 +38442,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
     get:
@@ -36245,6 +38480,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
       x-undo:
         type: safe
     patch:
@@ -36288,6 +38527,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/configuration/suppressions:
@@ -36488,6 +38731,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: safe
     post:
@@ -36570,6 +38817,10 @@ paths:
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
@@ -36616,6 +38867,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/test:
@@ -36655,6 +38910,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/validation:
@@ -36686,6 +38945,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
@@ -36712,6 +38975,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
     get:
@@ -36739,6 +39006,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: safe
     put:
@@ -36788,6 +39059,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}/convert:
@@ -36822,6 +39097,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}/test:
@@ -36863,6 +39142,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals:
@@ -36949,6 +39232,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/search:
@@ -36993,6 +39280,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}:
@@ -37021,6 +39312,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -37068,6 +39363,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/incidents:
@@ -37115,6 +39414,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/state:
@@ -37162,6 +39465,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config:
@@ -37196,6 +39503,10 @@ paths:
         configuration:
           step: a valid "configuration" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_read
       x-undo:
         type: safe
     patch:
@@ -37233,6 +39544,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config/groups:
@@ -37293,6 +39608,10 @@ paths:
               \     }\n    }\n  },\n  \"meta\": {}\n}"
           step: there is a valid "scanning_group" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         operationId: DeleteScanningGroup
         parameters:
@@ -37341,6 +39660,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
     patch:
@@ -37390,6 +39713,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config/rules:
@@ -37451,6 +39778,10 @@ paths:
               \   }\n  },\n  \"meta\": {}\n}"
           step: the "scanning_group" has a "scanning_rule"
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         operationId: DeleteScanningRule
         parameters:
@@ -37499,6 +39830,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
     patch:
@@ -37547,6 +39882,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config/standard-patterns:
@@ -37578,6 +39917,10 @@ paths:
       tags:
       - Sensitive Data Scanner
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_read
       x-undo:
         type: safe
   /api/v2/series:
@@ -37698,6 +40041,10 @@ paths:
               true\n     },\n     \"type\": \"users\"\n  }\n}"
           step: there is a valid "service_account_user" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         operationId: DisableUser
         parameters:
@@ -37748,6 +40095,10 @@ paths:
       tags:
       - Service Accounts
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: safe
     post:
@@ -37796,6 +40147,10 @@ paths:
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "service_account_application_key" for "service_account_user"
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         operationId: DeleteServiceAccountApplicationKey
         parameters:
@@ -37804,6 +40159,8 @@ paths:
         - name: service_account_id
           source: data.relationships.owned_by.data.id
         type: unsafe
+    x-merge-override:
+      get: false
   /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
     delete:
       description: Delete an application key owned by this service account.
@@ -37832,6 +40189,10 @@ paths:
       tags:
       - Service Accounts
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: idempotent
     get:
@@ -37865,6 +40226,10 @@ paths:
       tags:
       - Service Accounts
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: safe
     patch:
@@ -37911,6 +40276,10 @@ paths:
       - Service Accounts
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -37953,6 +40322,10 @@ paths:
       tags:
       - Incident Services
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -38001,6 +40374,10 @@ paths:
               unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
           step: there is a valid "service" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         operationId: DeleteIncidentService
         parameters:
@@ -38041,6 +40418,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
     post:
@@ -38095,6 +40476,10 @@ paths:
               \ \"team\": \"super-team\"\n}"
           step: there is a valid "service_definition" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_write
       x-undo:
         operationId: DeleteServiceDefinition
         parameters:
@@ -38127,6 +40512,10 @@ paths:
       tags:
       - Service Definition
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_write
       x-undo:
         type: idempotent
     get:
@@ -38161,6 +40550,10 @@ paths:
       tags:
       - Service Definition
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
   /api/v2/services/{service_id}:
@@ -38192,6 +40585,10 @@ paths:
       tags:
       - Incident Services
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -38231,6 +40628,10 @@ paths:
       tags:
       - Incident Services
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -38275,6 +40676,10 @@ paths:
       - Incident Services
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -38475,6 +40880,10 @@ paths:
       - Spans
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
   /api/v2/spans/events:
@@ -38639,6 +41048,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - billing_read
       x-undo:
         type: safe
     post:
@@ -38665,6 +41078,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - billing_edit
       x-undo:
         type: safe
   /api/v2/team:
@@ -38738,6 +41155,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     post:
@@ -38787,12 +41208,20 @@ paths:
               \   },\n    \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_read
+        - teams_manage
       x-undo:
         operationId: DeleteTeam
         parameters:
         - name: team_id
           source: data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      post: false
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
@@ -38827,6 +41256,11 @@ paths:
       tags:
       - Teams
       x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_read
+        - teams_manage
       x-undo:
         type: idempotent
     get:
@@ -38865,6 +41299,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     patch:
@@ -38926,10 +41364,16 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
+      patch: false
   /api/v2/team/{team_id}/links:
     get:
       description: Get all links for a given team.
@@ -38967,6 +41411,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     post:
@@ -39028,6 +41476,10 @@ paths:
               \   \"type\": \"team_links\"\n  }\n}"
           step: there is a valid "team_link" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         operationId: DeleteTeamLink
         parameters:
@@ -39075,6 +41527,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     get:
@@ -39119,6 +41575,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     patch:
@@ -39170,6 +41630,10 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
   /api/v2/team/{team_id}/memberships:
@@ -39196,6 +41660,7 @@ paths:
         name: filter[keyword]
         required: false
         schema:
+          description: Search query, can be user email or name.
           type: string
       responses:
         '200':
@@ -39227,6 +41692,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     post:
@@ -39287,6 +41756,10 @@ paths:
               \       }\n      }\n    },\n    \"type\": \"team_memberships\"\n  }\n}"
           step: there is a valid "team_membership" in the system
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         operationId: DeleteTeamMembership
         parameters:
@@ -39295,6 +41768,10 @@ paths:
         - name: user_id
           source: data.relationships.user.data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      patch: false
+      post: false
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
@@ -39334,6 +41811,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     patch:
@@ -39385,10 +41866,15 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: false
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -39426,6 +41912,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
   /api/v2/team/{team_id}/permission-settings/{action}:
@@ -39478,6 +41968,10 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
   /api/v2/teams:
@@ -39518,6 +42012,10 @@ paths:
       tags:
       - Incident Teams
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -39566,6 +42064,10 @@ paths:
               unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
           step: there is a valid "team" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         operationId: DeleteIncidentTeam
         parameters:
@@ -39602,6 +42104,10 @@ paths:
       tags:
       - Incident Teams
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -39641,6 +42147,10 @@ paths:
       tags:
       - Incident Teams
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -39685,6 +42195,10 @@ paths:
       - Incident Teams
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -39749,6 +42263,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 38
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/cost_by_org:
@@ -39819,6 +42337,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 45
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -39922,6 +42444,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -40002,6 +42528,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -40139,6 +42669,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
@@ -40202,6 +42736,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 37
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:
@@ -40265,6 +42803,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/projected_cost:
@@ -40329,6 +42871,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/user_invitations:
@@ -40381,6 +42927,10 @@ paths:
           source: data[0]
           step: the "user" has a "user_invitation"
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         type: safe
   /api/v2/user_invitations/{user_invitation_uuid}:
@@ -40426,6 +42976,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         type: safe
   /api/v2/users:
@@ -40510,6 +43064,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -40560,6 +43118,10 @@ paths:
               \    \"type\": \"users\"\n  }\n}"
           step: there is a valid "user" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         operationId: DisableUser
         parameters:
@@ -40601,6 +43163,11 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - service_account_write
       x-undo:
         type: idempotent
     get:
@@ -40639,6 +43206,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     patch:
@@ -40697,6 +43268,11 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - service_account_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -40740,6 +43316,9 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/users/{user_id}/permissions:
@@ -40780,6 +43359,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     x-merge-override:
@@ -40819,6 +43402,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
   /api/v2/workflows/{workflow_id}/instances:
@@ -40852,6 +43439,10 @@ paths:
       tags:
       - Workflow Automation
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_read
       x-undo:
         type: safe
     post:
@@ -40884,6 +43475,10 @@ paths:
       - Workflow Automation
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_run
       x-undo:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}:
@@ -40918,6 +43513,10 @@ paths:
       tags:
       - Workflow Automation
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_read
       x-undo:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
@@ -40947,9 +43546,16 @@ paths:
       tags:
       - Workflow Automation
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_run
       x-undo:
         type: safe
   x-merge-override:
+    /api/v2/rum/analytics/aggregate: true
+    /api/v2/rum/events: true
+    /api/v2/rum/events/search: true
     /api/v2/team/{team_id}/links: true
     /api/v2/team/{team_id}/links/{link_id}: true
 security:
@@ -41322,6 +43928,10 @@ tags:
     This feature is currently in BETA. If you have any feedback, contact [Datadog
     support](https://docs.datadoghq.com/help/).'
   name: Service Scorecards
+- description: API to create, update, retrieve and delete Software Catalog entities.
+  externalDocs:
+    url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
+  name: Software Catalog
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
@@ -41372,3 +43982,5 @@ tags:
     url: https://docs.datadoghq.com/service_management/workflows/
   name: Workflow Automation
 x-group-parameters: true
+x-merge-override:
+  paths: false
