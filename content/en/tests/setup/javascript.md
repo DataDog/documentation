@@ -622,10 +622,6 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
   <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
 </div>
 
-<div class="alert alert-warning">
-  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
-</div>
-
 If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
