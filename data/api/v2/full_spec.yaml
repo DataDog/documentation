@@ -9307,7 +9307,7 @@ components:
         data:
           description: The JSON:API data schema.
           items:
-            $ref: '#/components/schemas/FastlyServiceResponse'
+            $ref: '#/components/schemas/FastlyServiceData'
           type: array
       type: object
     Finding:
