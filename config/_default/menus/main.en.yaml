@@ -5190,31 +5190,51 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
+    - name: Security Pipelines
+      url: security/security_pipelines/
+      parent: security_platform
+      identifier: security_pipelines
+      weight: 4
+    - name: Mute
+      url: security/security_pipelines/mute
+      parent: security_pipelines
+      identifier: security_pipelines_mute
+      weight: 10001
+    - name: Security Inbox
+      url: security/security_pipelines/security_inbox
+      parent: security_pipelines
+      identifier: security_pipelines_inbox
+      weight: 10002
+    - name: Due Date
+      url: security/security_pipelines/due_date
+      parent: security_pipelines
+      identifier: security_pipelines_due_date
+      weight: 10003
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
       identifier: security_inbox
-      weight: 4
+      weight: 5
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
       idenfier: security_threat_intelligence
-      weight: 5
+      weight: 6
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 6
+      weight: 7
     - name: Account Takeover Protection
       url: security/account_takeover_protection
       parent: security_platform
       identifier: security_ato_protection
-      weight: 7
+      weight: 8
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 8
+      weight: 9
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
