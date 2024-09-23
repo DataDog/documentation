@@ -9,11 +9,13 @@ further_reading:
 [Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
 
 ## Setup
+<div class="alert alert-info">Data Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.55.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
 
 Follow these steps to enable Data Jobs Monitoring for Spark on Kubernetes.
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
 2. [Inject Spark instrumentation](#inject-spark-instrumentation).
+
 
 ### Install the Datadog Agent on your Kubernetes cluster
 
@@ -70,11 +72,15 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
            keyName: app-key
      override:
        nodeAgent:
+         image:
+           tag: <DATADOG_AGENT_VERSION>
          env:
            - name: DD_DJM_CONFIG_ENABLED
              value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+
+   Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 1. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -109,12 +115,18 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        - name: DD_DJM_CONFIG_ENABLED
          value: "true"
 
+   agents:
+     image:
+       tag: <DATADOG_AGENT_VERSION>
+
    clusterAgent:
      admissionController:
        enabled: true
        muteUnlabelled: false
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+
+   Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 1. Run the following command:
    ```shell
    helm install <RELEASE_NAME> \
@@ -217,3 +229,4 @@ In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your da
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
+

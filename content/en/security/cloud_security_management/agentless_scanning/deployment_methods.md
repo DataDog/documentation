@@ -7,10 +7,10 @@ further_reading:
   - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
     tag: "Documentation"
     text: "Agentless Scanning Quick Start for Cloud Security Management"
-  - link: "/security/cloud_security_management/guide/agentless_terraform"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/terraform"
     tag: "Documentation"
     text: "Setting up Agentless Scanning using Terraform"
-  - link: "/security/cloud_security_management/guide/agentless_aws_integration"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/cloudformation"
     tag: "Documentation"
     text: "Setting up Agentless Scanning with the AWS Integration"
 ---

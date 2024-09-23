@@ -52,7 +52,7 @@ To evaluate and add custom rules in the Scorecards UI:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /scorecards/scorecard_configuration/
+[1]: /service_catalog/scorecards/scorecard_configuration/
 [2]: /api/latest/service-scorecards/
 
 

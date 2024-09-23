@@ -1,6 +1,8 @@
 ---
 title: Track Browser and Mobile Error Logs
 description: Learn how to track browser and mobile errors from your logs.
+aliases:
+  - /error_tracking/standalone_frontend/logs
 is_beta: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/error-tracking/'

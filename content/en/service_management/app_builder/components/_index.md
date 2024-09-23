@@ -66,6 +66,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -178,6 +182,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -234,6 +242,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -268,6 +280,10 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
@@ -307,6 +323,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -343,7 +363,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setIsOpen<br>
 **Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
 
@@ -403,7 +425,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
 
@@ -469,7 +493,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
 
@@ -517,7 +543,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
@@ -590,7 +618,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
 
@@ -651,7 +681,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setTabIndex<br>
 **Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
 
@@ -740,6 +772,10 @@ Reaction
 : The reaction type the button triggers.
 **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 ### Appearance
 
 Is Loading
@@ -767,6 +803,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
 : setPageIndex<br>
@@ -858,7 +896,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
 
@@ -903,7 +943,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: fetch<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
 
@@ -934,3 +976,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [6]: /service_management/app_builder/components/tables/
 [7]: /service_management/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/
+[9]: /service_management/app_builder/events/#state-functions

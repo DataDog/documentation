@@ -3,6 +3,10 @@ title: Log Volume Control
 disable_toc: false
 aliases:
     - /observability_pipelines/log_volume_control/
+further_reading:
+- link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
+  tag: "documentation"
+  text: "Strategies for Reducing Log Volume"
 ---
 
 ## Overview
@@ -26,6 +30,10 @@ Select a log source to get started:
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
 - [Sumo Logic Hosted Collector][6]
 - [rsyslog or syslog-ng][7]
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/log_volume_control/datadog_agent
 [2]: /observability_pipelines/log_volume_control/fluent
