@@ -46,7 +46,7 @@ This endpoint is particularly useful in the following scenarios:
 
 To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
 
-1. [Ensure only delta metrics are sent](#ensure-delta-temporality).
+1. [Ensure only delta metrics are sent](#ensure-only-delta-metrics-are-sent).
 1. [Configure the OTLP HTTP exporter](#configure-the-exporter).
    - Set the Datadog OTLP metrics intake endpoint.
    - Configure the required HTTP headers.

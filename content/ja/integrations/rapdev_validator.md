@@ -24,8 +24,8 @@ assets:
     source_type_name: RapDev Validator
   logs: {}
   monitors:
-    Host has non-compliant value for tag key: assets/monitors/host_non_compliant_value.json
-    Host is missing required tag key: assets/monitors/host_missing_tag_key.json
+    Host has a non-compliant value for their tag key: assets/monitors/host_non_compliant_value.json
+    Host is missing their required tag key: assets/monitors/host_missing_tag_key.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -36,7 +36,7 @@ categories:
 - コンプライアンス
 - 構成 & デプロイ
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
