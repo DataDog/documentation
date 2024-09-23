@@ -1,17 +1,10 @@
 {{ $context := .context }}
 {{ $endpoint := .endpoint }}
 {{ $tag := .tag }}
+{{ $operator := $endpoint.action.x-permission.operator }}
+{{ $permissions := $endpoint.action.x-permission.permissions }}
 
-{{ $authZ := slice }}
-{{ range $endpoint.action.security }}
-  {{ range $sec_key, $sec_val := . }}
-    {{ if eq $sec_key "AuthZ" }}
-      {{ $authZ = . }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{ with $authZ }}
+{{ with $permissions }}
   {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
-  This endpoint requires the <code>{{ delimit . ", "}}</code> authorization <a href="{{ "api/latest/scopes/" | absLangURL }}#{{ $slug }}">scope</a>.
+  This endpoint requires the <code>{{ delimit . ", "}}</code> permissions, operator {{ $operator }}
 {{ end }}
