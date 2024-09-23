@@ -761,11 +761,11 @@ The following modes are deprecated:
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
-## Disabling automatic user activity event tracking
+## Disabling automatic user activity event tracking 
 
-If you wish to disable the detection of these events, you should set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false`. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+You can disable automated user activity detection trough your [ASM service catalog][14], changing the automatic instrumentation mode to `disabled` on the service you want to deactivate.
 
-The previous environment variable was named `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING`.
+You can also set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
 ## Further Reading
 
@@ -782,3 +782,4 @@ The previous environment variable was named `DD_APPSEC_AUTOMATED_USER_EVENTS_TRA
 [11]: https://guid.one/guid
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
+[14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
