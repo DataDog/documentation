@@ -6,5 +6,6 @@
   },
   "subdomain": "dd-corpsite",
   "timeout": 220000,
-  "headers": {"gitlab":  "true"}
+  "headers": {"gitlab":  "true"},
+  "variables": {"DOCS_PREVIEW_SITE": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}"}
 }
