@@ -51,7 +51,10 @@ The following table lists minimum tracing library version required for Adaptive 
 
 ## View sampling rates by resource
 
-To see configured sampling rates, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
+To see configured sampling rates:
+
+1. Navigate to the Ingestion controls [Service Ingestion summary][1].
+2. View the table listing applied sampling rates by resource of the service.
 
 {{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
