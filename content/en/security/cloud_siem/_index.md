@@ -27,6 +27,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/akamai-zero-trust-application-security/"
+  tag: "Blog"
+  text: "Monitor Akamai Zero Trust and Application Security with Datadog Cloud SIEM"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}

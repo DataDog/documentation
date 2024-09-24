@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/profiler/enabling/linux/
-- /tracing/profiler/enabling/ddprof/
+- /es/tracing/profiler/enabling/linux/
+- /es/tracing/profiler/enabling/ddprof/
 code_lang: ddprof
 code_lang_weight: 90
 further_reading:
@@ -35,7 +35,7 @@ Arquitectura compatible
 Serverless
 : `ddprof` no es compatible con plataformas serverless, como AWS Lambda.
 
-Configuración del SO
+Configuración del sistema operativo
 : la configuración del kernel `perf_event_paranoid` es 2 o inferior (consulta [Solucionar problemas][1])
 
 Información de depuración

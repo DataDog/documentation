@@ -384,7 +384,7 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 
 ### Namespace labels as tags
 
-Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
+Starting with Agent 7.55.0+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}

@@ -74,13 +74,7 @@ UI components can trigger reactions on an [Event][11].
 
 [Queries][12] populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
-### Variables
-
-Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using [dashboard template variables][3].
-
-Variables are enclosed in braces and are preceded by a dollar sign (`${}`). To use a variable, enter the query or UI component name. Access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestion menu with all available variables.
-
-{{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestion menu with all available variables" video=true >}}
+You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
 ### Interact with an app in JSON
 
@@ -118,3 +112,4 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 [10]: https://app.datadoghq.com/app-builder/action-catalog
 [11]: /service_management/app_builder/events
 [12]: /service_management/app_builder/queries
+[13]: /service_management/app_builder/expressions

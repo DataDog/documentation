@@ -25,17 +25,17 @@ Data privacy
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
-- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle and SQL Server applications.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle applications.
 - `disabled` mode disables propagation and does not send any information from applications.
-
-SQL Server and Oracle do not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |            |           |
+| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
+
+\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
@@ -45,7 +45,7 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` mode only |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -61,7 +61,7 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | `service` mode only |                     |
+|                                          | [ADO.NET][24] *        |           |           | {{< X >}} **       |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -71,6 +71,14 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] not supported
+
+\*\* Full mode SQL Server/Java:
+- The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
+- If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
+- Prerequisites:
+  - Agent version 7.55.0 or greater
+  - Java tracer version 1.39.0 or greater
+  - .NET tracer version 3.3 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -293,7 +301,8 @@ Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
-   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .NET tracers
+   - For Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core

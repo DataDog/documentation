@@ -6,6 +6,7 @@ code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/nginx
   - /security/application_security/getting_started/nginx
+  - /security/application_security/enabling/tracing_libraries/threat_detection/nginx/
 further_reading:
     - link: 'https://github.com/DataDog/nginx-datadog/'
       tag: "Source Code"
@@ -62,11 +63,10 @@ The Datadog nginx tracing module has experimental support for threat detection a
 
 ## Limitations
 
-As of version 1.2.0, the available functionality has the following important limitations:
+As of version 1.3.0, the available functionality has the following important limitations:
 
 * The request body is not inspected, regardless of its content type.
 
-- There is no remote configuration for AppSec. Consequently, AppSec excludes 1-click activation (AppSec must be explicitly enabled or disabled in the nginx configuration), rules cannot be updated/enabled/disabled, and blocking users by IP address is prevented, since the list cannot be transmitted to the nginx module.
 * It's not possible to block the request based on characteristics of the
   response, such as its status code, headers, or body.
 

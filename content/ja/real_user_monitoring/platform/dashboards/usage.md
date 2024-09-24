@@ -1,9 +1,9 @@
 ---
 aliases:
-- /real_user_monitoring/dashboards/frustration_signals_dashboard
-- /real_user_monitoring/dashboards/user_sessions_dashboard
-- /real_user_monitoring/platform/dashboards/frustration_signals_dashboard
-- /real_user_monitoring/platform/dashboards/user_sessions_dashboard
+- /ja/real_user_monitoring/dashboards/frustration_signals_dashboard
+- /ja/real_user_monitoring/dashboards/user_sessions_dashboard
+- /ja/real_user_monitoring/platform/dashboards/frustration_signals_dashboard
+- /ja/real_user_monitoring/platform/dashboards/user_sessions_dashboard
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
@@ -52,7 +52,7 @@ RUM モバイルアプリ使用量ダッシュボードは、顧客がアプリ�
 
 RUM ユーザーデモグラフィックダッシュボードでは、アプリケーションの地理的な採用状況を把握することができます。
 
-- **Global Data**: 
+- **Global Data**:
   ユーザーのグローバルビューを取得し、どの国、地域、都市が最もアプリケーションを使用しているかを確認できます。
 - **Compare Continents and Compare Countries**:
   ユーザーの大陸や国によって、アプリケーションの体験がどのように異なるかを確認できます。

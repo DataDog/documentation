@@ -1,7 +1,7 @@
 ---
 aliases:
-- /logs/explorer/group
-- /logs/group
+- /ja/logs/explorer/group
+- /ja/logs/group
 description: クエリされたログをフィールド、パターン、トランザクションにグループ化し、複数の検索クエリ、計算式、関数を作成して詳細な分析が可能です。
 further_reading:
 - link: logs/explorer/search

@@ -4,7 +4,8 @@ aliases:
 categories:
 - azure
 - クラウド
-- data store
+- data stores
+custom_kind: integration
 dependencies: []
 description: Azure DB for PostgreSQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_postgresql/
@@ -15,7 +16,6 @@ integration_id: azure-db-for-postgresql
 integration_title: Microsoft Azure DB for PostgreSQL
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_db_for_postgresql
 public_title: Datadog-Microsoft Azure DB for PostgreSQL インテグレーション
@@ -23,6 +23,7 @@ short_description: Azure DB for PostgreSQL のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Database for PostgreSQL は、サービスとして、エンタープライズ対応のフルマネージド型コミュニティ PostgreSQL データベースを提供します。
@@ -48,7 +49,7 @@ Azure DB for PostgreSQL からメトリクスを取得すると、以下のこ�
 
 Azure DB for PostgreSQL インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure DB for PostgreSQL インテグレーションには、サービスのチェック機能は含まれません。
 

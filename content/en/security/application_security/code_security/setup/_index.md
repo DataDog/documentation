@@ -1,6 +1,9 @@
 ---
 title: Code Security Setup
 disable_toc: false
+aliases:
+- /security/application_security/enabling/single_step/code_security/
+- /security/application_security/enabling/tracing_libraries/code_security/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -21,7 +24,7 @@ Before setting up Code Security, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and traces are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Code Security capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
 
 ## Code Security Enablement Types
 
@@ -52,7 +55,7 @@ By following these steps, you'll successfully set up Code Security for your appl
 
 ### Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you install or update a Datadog Agent with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_code_security.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and ASM for Code Security." style="width:100%;" >}}
@@ -132,23 +135,27 @@ For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+   DD_IAST_ENABLED=true DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
    docker run -d --name dd-agent \
      -e DD_API_KEY=${YOUR_DD_API_KEY} \
+     -e DD_SITE=${YOUR_DD_SITE} \
      -e DD_APM_ENABLED=true \
-     -e DD_IAST_ENABLED=true \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
-     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-     -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-     -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-     -v /opt/datadog/apm:/opt/datadog/apm \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     -v /proc/:/host/proc/:ro \
+     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
      gcr.io/datadoghq/agent:7
    ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
+   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
+
+   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
@@ -190,7 +197,6 @@ For example:
 docker run -d --name dd-agent \
   -e DD_API_KEY=${YOUR_DD_API_KEY} \
   -e DD_APM_ENABLED=true \
-  -e DD_IAST_ENABLED=true \ 
   -e DD_ENV=staging \
   -e DD_APM_NON_LOCAL_TRAFFIC=true \
   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
@@ -201,6 +207,7 @@ docker run -d --name dd-agent \
   gcr.io/datadoghq/agent:7
 {{< /highlight >}}
 
+[3]: /getting_started/site/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /service_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
@@ -366,10 +373,6 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{< /tabs >}}
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/remote_config
-
-
 ## Using Datadog Tracing Libraries
 
 Select your application language for details on how to enable Code Security for your language and infrastructure types.
@@ -383,4 +386,3 @@ Select your application language for details on how to enable Code Security for 
 
 
 [1]: /security/application_security/code_security/setup/compatibility/
-[2]: /security/application_security/code_security/setup/

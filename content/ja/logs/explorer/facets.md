@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - log facets
 aliases:
 - /ja/logs/facets
 description: ログファセットとファセットパネル
@@ -30,7 +33,7 @@ title: ログファセット
 
 ファセットを使用すると、[ログモニター][4]のログ、[ダッシュボード][5]のログウィジェット、[ノートブック][6]を操作することもできます。
 
-**注**: [ログ処理][7]、[ライブテイル検索][8]、[ログエクスプローラー検索][30]、ログからの[メトリクス生成][10]、[アーカイブ][11]転送、または[リハイドレート][12]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][13]および[インデックス][14]にログをルーティングするためのファセットや、[除外フィルター][15]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][9], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
 
 これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
 
@@ -113,9 +116,17 @@ title: ログファセット
 
 ### ファセットをグループ化
 
-ファセットは、ファセットリスト内のナビゲーションを容易にするために、意味のあるテーマにグループ化されます。ファセットグループの割り当てや再割り当て（[ファセットの管理](#manage-facets)方法を参照）は、ファセットリストの表示に関する問題に過ぎず、検索や分析機能には影響しません。
+ファセットは、ファセット一覧でのナビゲーションを容易にするために、意味のあるテーマにグループ化されます。ファセットのグループの割り当てや再割り当ては、ファセット一覧の表示にのみ影響し、検索や分析機能には影響しません。
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="ファセットをグループ化" style="width:30%;">}}
+
+ファセットをグループ化するには
+
+1. ファセットの歯車をクリックします。
+2. **Edit facet** を選択します。
+3. **Advanced options** セクションをクリックして展開します。
+4. **Group** フィールドに、ファセットを所属させたいグループ名を入力します。
+5. **Update** をクリックします。
 
 ### ファセットをフィルター
 
@@ -157,7 +168,7 @@ title: ログファセット
 
 JSON オブジェクトの配列にファセットを作成するには、まず [grok パーサー][29]を使って属性を抽出し、その属性のファセットを作成します。
 
-**注**: ファセットが作成されると、そのコンテンツは**どちらか**のインデックスに流れる**すべての新しいログに対して**入力されます。ログ管理ソリューションを最適な形で利用するため、Datadog では最大 1000 ファセットで使用することをおすすめしています。
+**注**: ファセットが作成されると、そのコンテンツは**すべての新しいログに対して**反映されます。ログ管理ソリューションの最適な利用のために、Datadog では最大で 1000 のファセットの使用を推奨しています。
 
 #### ログサイドパネル
 
@@ -231,7 +242,7 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 [6]: /ja/notebooks/
 [7]: /ja/logs/log_configuration/processors
 [8]: /ja/logs/live_tail/
-[9]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[9]: /ja/logs/explorer/
 [10]: /ja/logs/logs_to_metrics/
 [11]: /ja/logs/archives/
 [12]: /ja/logs/archives/rehydrating/
@@ -252,4 +263,3 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 [27]: /ja/logs/indexes/#indexes
 [28]: /ja/logs/log_configuration/rehydrating
 [29]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json
-[30]: /ja/logs/explorer/

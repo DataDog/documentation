@@ -16,8 +16,8 @@ title: Azure Datadog 拡張機能をインストールするコマンド
 Datadog は、Azure インスタンスへの Agent デプロイを支援する Azure 拡張機能を提供しています。
 
 * [ワンクリックで Datadog をデプロイできる Azure モニタリングのご紹介][1]
-* [Azure Native インテグレーション][2] _US3 のみ_
-* [標準の Azure インテグレーション][7] _全サイト_
+* [Azure Native integration][2] _US3 only_
+* [Standard Azure integration][7] _All sites_
 
 GUI のインストールに代わる方法として、コマンドラインがあります。
 Azure インスタンスで Datadog Agent を拡張機能として実行するには、環境に合ったコマンドを使用します。`<SITE_PARAMETER>` を [Datadog サイトページ][3]の Datadog アカウント**サイトパラメーター**値に、`<DATADOG_API_KEY>` を [Datadog API キー][4]に置き換えます。
@@ -39,7 +39,7 @@ Azure 拡張機能は、通常の設定と保護された設定の両方を受�
 |----------|------|--------------|
 | `site` | 文字列 | Datadog インテークサイトを設定します。例: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | 文字列 | `x.y.z` または `latest` というフォーマットの、インストールする Agent のバージョン |
-| `agentConfiguration` | URI | (オプション) Agent の構成が ZIP で格納されている Azure blob への URL。 |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
 | `agentConfigurationChecksum` | 文字列 | Agent 構成 zip ファイルの SHA256 チェックサム。`agentConfiguration` が指定された場合、必須です。 |
 
 保護された設定は以下の通りです。
@@ -78,7 +78,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 {{< code-block lang="bash" >}}
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 {{< /code-block >}}
-Azure インスタンス拡張機能を設定するための構文の詳細は、[Azure Extension CLI リファレンス][1]に記載されています。
+Azure インスタンス拡張機能を設定する構文の詳細については、[Azure Extension CLI リファレンス][1]を参照してください。
 
 Azure 拡張機能は、通常の設定と保護された設定の両方を受け入れることができます。
 
@@ -88,7 +88,7 @@ Azure 拡張機能は、通常の設定と保護された設定の両方を受�
 |----------|------|--------------|
 | `site` | 文字列 | Datadog インテークサイトを設定します。例: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | 文字列 | `x.y.z` または `latest` というフォーマットの、インストールする Agent のバージョン |
-| `agentConfiguration` | URI | (オプション) Agent の構成が ZIP で格納されている Azure blob への URL。 |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
 | `agentConfigurationChecksum` | 文字列 | Agent 構成 zip ファイルの SHA256 チェックサム。`agentConfiguration` が指定された場合、必須です。 |
 
 保護された設定は以下の通りです。
@@ -121,7 +121,7 @@ az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --ver
 {{< tabs >}}
 {{% tab "Windows" %}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="powershell" >}}
 az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME> -g <RESOURCE_GROUP> --publisher Datadog.Agent --type DatadogWindowsAgent --location <LOCATION> --settings '{"site":"<SITE_PARAMETER>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}'
 {{< /code-block >}}
 
@@ -137,12 +137,12 @@ az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME>
 
 Azure `connectedmachine` 拡張機能を設定するための構文の詳細については、[az connectedmachine 拡張機能][6]ページに記載されています。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
-[2]: /ja/integrations/guide/azure-native-manual-setup/#virtual-machine-agent
+[2]: /ja/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
 [3]: /ja/getting_started/site/#access-the-datadog-site
 [4]: /ja/account_management/api-app-keys/#api-keys
 [5]: /ja/integrations/azure_arc/

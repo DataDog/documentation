@@ -323,22 +323,6 @@ You can access the RUM session ID at runtime without waiting for the `sessionSta
 final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
 ```
 
-## Set tracking consent (GDPR & CCPA compliance)
-
-In order to be compliant with data protection and privacy policies, the Flutter RUM SDK requires the tracking consent value at initialization.
-
-The `trackingConsent` setting can be one of the following values:
-
-1. `TrackingConsent.pending`: The Flutter RUM SDK starts collecting and batching the data but does not send it to Datadog. The Flutter RUM SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `TrackingConsent.granted`: The Flutter RUM SDK starts collecting the data and sends it to Datadog.
-3. `TrackingConsent.notGranted`: The Flutter RUM SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
-
-To change the tracking consent value after the Flutter RUM SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call. The Flutter RUM SDK changes its behavior according to the new value.
-
-For example, if the current tracking consent is `TrackingConsent.pending` and you change the value to `TrackingConsent.granted`, the Flutter RUM SDK sends all previously recorded and future data to Datadog.
-
-Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
-
 ## Flutter-specific performance metrics
 
 To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][17].

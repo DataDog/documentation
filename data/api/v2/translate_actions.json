@@ -221,6 +221,20 @@
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
   },
+  "ListCatalogEntity": {
+    "description": "Get a list of entities from Software Catalog.",
+    "summary": "Get a list of entities"
+  },
+  "UpsertCatalogEntity": {
+    "description": "Create or update entities in Software Catalog.",
+    "summary": "Create or update entities",
+    "request_description": "Entity YAML/JSON.",
+    "request_schema_description": "Create / Update entity request."
+  },
+  "DeleteCatalogEntity": {
+    "description": "Delete a single entity in Software Catalog.",
+    "summary": "Delete a single entity"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
@@ -1110,7 +1124,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variable: `synthetic-global-variable`\n- Synthetic Test: `synthetic-test`\n- Synthetic Private Location: `synthetic-private-location`\n\n#### Supported relations for resources\nResource Type              | Supported Relations\n---------------------------|--------------------------\nDashboards                 | `viewer`, `editor`\nNotebooks                  | `viewer`, `editor`\nPowerpacks                 | `viewer`, `editor`\nSecurity Rules             | `viewer`, `editor`\nService Level Objectives   | `viewer`, `editor`\nSynthetic Global Variable  | `viewer`, `editor`\nSynthetic Test             | `viewer`, `editor`\nSynthetic Private Location | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."

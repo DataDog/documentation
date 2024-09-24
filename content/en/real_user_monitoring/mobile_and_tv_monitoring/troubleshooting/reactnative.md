@@ -29,7 +29,7 @@ Sometimes, no data is sent due to a small misstep in the configuration.
 Here are some common things to check for:
 
 - Ensure your `clientToken` and `applicationId` are correct.
-- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might be sent.
+- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might not be sent.
 - If you've set up a `Proxy` in the Datadog configuration, check that it has been correctly configured.
 - Check that you are **tracking views** (all events must be attached to a view) and **sending events**.
 
@@ -278,14 +278,6 @@ dependencies {
     }
 }
 ```
-
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native RUM SDK does not use too much disk space.
 
 ## Further Reading
 

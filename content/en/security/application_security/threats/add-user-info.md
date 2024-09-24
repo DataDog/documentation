@@ -714,7 +714,7 @@ Once saved, the rule is deployed to instances of the service that have Remote Co
 
 ## Automatic user activity event tracking
 
-When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+When ASM is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
 
 The events that can be automatically detected are:
 
@@ -722,21 +722,50 @@ The events that can be automatically detected are:
 - `users.login.failure`
 - `users.signup`
 
-### Automatic user activity event tracking mode
+### Automatic user activity event tracking modes
 
-Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+Automatic user activity tracking offers the following modes:
 
-In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `identification` mode (short name: `ident`): 
+  - This mode is the default and always collects the user ID or best effort.
+  - The user ID is collected on login success and login failure. With failure, the user ID is collected regardless of whether the user exists or not.
+  - When the instrumented framework doesn’t clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
+    - `id`
+    - `email`
+    - `username`
+    - `login`
+    - `user`
+  - If no user ID is available or found, the user event is not emitted.
+- `anonymization` mode (short name: `anon`):
+  - This mode is the same as `identification`, but anonymizes the user ID.
+- `disabled` mode:
+  - ASM libraries do *not* collect any user ID from their automated instrumentations. 
+  - User login events are not emitted.
 
-In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
 
-To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident`|`anon`|`disabled`.
 
-**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+The default mode is `identification` mode (short name: `ident`).
 
-## Disabling automatic user activity event tracking
+For example, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
-If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+### Deprecated modes
+
+<div class="alert alert-info">Previous modes are deprecated, but compatibility will be maintained until the next major release.</div>
+
+The following modes are deprecated:
+
+- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `extended` mode: The trace library tries to collect the user ID, and the user email. In this mode, Datadog does not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+## Disabling automatic user activity event tracking 
+
+You can disable automated user activity detection through your [ASM service catalog][14] by changing the automatic instrumentation mode to `disabled` on the service you want to deactivate.
+
+You can also set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
 ## Further Reading
 
@@ -753,3 +782,4 @@ If you wish to disable the detection of these events, you should set the environ
 [11]: https://guid.one/guid
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
+[14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities

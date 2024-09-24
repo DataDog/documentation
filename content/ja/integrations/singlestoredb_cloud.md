@@ -25,6 +25,7 @@ author:
   support_email: support@singlestore.com
 categories:
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: singlestoredb-cloud
 integration_title: SingleStoreDB Cloud
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: singlestoredb_cloud
 public_title: SingleStoreDB Cloud
@@ -75,7 +75,7 @@ SinglestoreDB Cloud を Datadog に接続すると、以下のことができま
 - クエリレートとパフォーマンスを観測する
 - SinglestoreDB のパフォーマンスをアプリケーションの他の部分と相関付ける
 
-## 計画と使用
+## セットアップ
 
 ### Datadog に SingleStoreDB Cloud インテグレーションをインストールする
 
@@ -108,21 +108,21 @@ Datadog を使用して SingleStoreDB Cloud データベースを監視できる
 
 特定のワークスペースグループの監視を停止する (インテグレーションは保持する) には、SingleStore DB Cloud Portal に移動し、**Delete** (**Cloud Portal > Monitoring > Integration**) を選択して、このワークスペースグループの Datadog 構成を削除します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "singlestoredb_cloud" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 SingleStoreDB Cloud には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 SingleStoreDB Cloud には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

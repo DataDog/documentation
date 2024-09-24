@@ -177,7 +177,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    } 
+    }
     {{< /code-block >}}
 
 5. **Test URL** をクリックします。これにより、ステップ 2 で抽出した商品が、ステップ 1 で作成したカートに追加され、チェックアウト URL が返されます。
