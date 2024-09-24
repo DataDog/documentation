@@ -2360,7 +2360,7 @@ menu:
       weight: 2
     - name: Variables and parameters
       url: service_management/workflows/variables/
-      parent: workflows_actions
+      parent: workflows
       identifier: workflows_variables
       weight: 3
     - name: Trigger Workflows
