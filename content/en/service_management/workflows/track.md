@@ -22,7 +22,7 @@ This page explains how to track different kinds of workflow activity and workflo
 
 The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][2] and search for **Workflows Overview**.
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:90%;" >}}
+{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:80%;" >}}
 
 
 ## View editors
