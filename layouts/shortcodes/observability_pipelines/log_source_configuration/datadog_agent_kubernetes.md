@@ -6,7 +6,7 @@ datadog:
     - name: DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED
       value: true
     - name: DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL
-      value: "http://opw-observability-pipelines-worker:8282"
+      value: "http://<OPW_HOST>:8282"
 ```
 
 `<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. 
