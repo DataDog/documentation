@@ -19520,6 +19520,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        data_jobs_monitoring_host_hr_sum:
+          description: Shows the sum of all Data Jobs Monitoring hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         date:
           description: The date for the usage.
           format: date-time
@@ -20255,6 +20260,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        data_jobs_monitoring_host_hr_sum:
+          description: Shows the sum of all Data Jobs Monitoring hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         dbm_host_top99p_sum:
           description: Shows the 99th percentile of all Database Monitoring hosts
             over all hours in the current month for the given org.
@@ -20987,6 +20997,11 @@ components:
         cws_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        data_jobs_monitoring_host_hr_agg_sum:
+          description: Shows the sum of Data Jobs Monitoring hosts over all hours
+            in the current months for all organizations
           format: int64
           type: integer
         dbm_host_top99p_sum:
