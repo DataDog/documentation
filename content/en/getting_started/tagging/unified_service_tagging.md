@@ -80,11 +80,11 @@ To setup unified service tagging in a containerized environment:
 
 If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
-##### Automatic version tagging for containerized environments
+##### Automatic version tagging for APM data in containerized environments
 
-<div class="alert alert-info">This feature is only available for the <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> product.</div>
+<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
-You can use the `version` tag to [monitor deployments][7] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][8].
+You can use the `version` tag in APM to [monitor deployments][7] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][8].
 
 For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
 
@@ -110,14 +110,14 @@ metadata:
   labels:
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>" #Comment out this line to use automatic version tagging in APM
+    tags.datadoghq.com/version: "<VERSION>" 
 ...
 template:
   metadata:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" #Comment out this line to use automatic version tagging in APM
+      tags.datadoghq.com/version: "<VERSION>" 
   containers:
   -  ...
      env:
@@ -129,10 +129,10 @@ template:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.labels['tags.datadoghq.com/service']
-          - name: DD_VERSION #Comment out this line to use automatic version tagging in APM
-            valueFrom: #Comment out this line to use automatic version tagging in APM
-              fieldRef: #Comment out this line to use automatic version tagging in APM
-                fieldPath: metadata.labels['tags.datadoghq.com/version'] #Comment out this line to use automatic version tagging in APM
+          - name: DD_VERSION 
+            valueFrom: 
+              fieldRef: 
+                fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
 ##### Partial configuration
@@ -147,7 +147,7 @@ template:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" #Comment out this line to use automatic version tagging in APM
+      tags.datadoghq.com/version: "<VERSION>" 
 ```
 These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
@@ -156,7 +156,7 @@ If you have multiple containers per pod, you can specify standard labels by cont
 ```yaml
 tags.datadoghq.com/<container-name>.env
 tags.datadoghq.com/<container-name>.service
-tags.datadoghq.com/<container-name>.version #Comment out this line to use automatic version tagging in APM
+tags.datadoghq.com/<container-name>.version 
 ```
 
 ###### State metrics
@@ -174,14 +174,14 @@ To configure [Kubernetes State Metrics][3]:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" #Comment out this line to use automatic version tagging in APM
+      tags.datadoghq.com/version: "<VERSION>" 
   spec:
     template:
       metadata:
         labels:
           tags.datadoghq.com/env: "<ENV>"
           tags.datadoghq.com/service: "<SERVICE>"
-          tags.datadoghq.com/version: "<VERSION>" #Comment out this line to use automatic version tagging in APM
+          tags.datadoghq.com/version: "<VERSION>" 
   ```
 
 ###### APM tracer and StatsD client
@@ -200,10 +200,10 @@ containers:
           valueFrom:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION #Comment out this line to use automatic version tagging in APM
-          valueFrom: #Comment out this line to use automatic version tagging in APM
-            fieldRef: #Comment out this line to use automatic version tagging in APM
-              fieldPath: metadata.labels['tags.datadoghq.com/version'] #Comment out this line to use automatic version tagging in APM
+        - name: DD_VERSION 
+          valueFrom: 
+            fieldRef: 
+              fieldPath: metadata.labels['tags.datadoghq.com/version'] 
 ```
 
 [1]: /agent/cluster_agent/admission_controller/
@@ -220,11 +220,11 @@ containers:
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-##### Automatic version tagging for containerized environments
+##### Automatic version tagging for APM data in containerized environments
 
-<div class="alert alert-info">This feature is only available for the <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> product.</div>
+<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
-You can use the `version` tag to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
 
 For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
 
@@ -241,16 +241,16 @@ Requirements:
 
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`(optional with automatic version tagging) environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 
 ```yaml
 ENV DD_SERVICE <SERVICE>
-ENV DD_VERSION <VERSION> #Comment out this line to use automatic version tagging in APM
+ENV DD_VERSION <VERSION> 
 
 LABEL com.datadoghq.tags.service="<SERVICE>"
-LABEL com.datadoghq.tags.version="<VERSION>" #Comment out this line to use automatic version tagging in APM
+LABEL com.datadoghq.tags.version="<VERSION>" 
 ```
 
 Since `env` is likely determined at deploy time, you can inject the environment variable and label later:
@@ -264,10 +264,10 @@ You may also prefer to set everything at deploy time:
 ```shell
 docker run -e DD_ENV="<ENV>" \
            -e DD_SERVICE="<SERVICE>" \
-           -e DD_VERSION="<VERSION>" \ #Comment out this line to use automatic version tagging in APM
+           -e DD_VERSION="<VERSION>" \ 
            -l com.datadoghq.tags.env="<ENV>" \
            -l com.datadoghq.tags.service="<SERVICE>" \
-           -l com.datadoghq.tags.version="<VERSION>" \ #Comment out this line to use automatic version tagging in APM
+           -l com.datadoghq.tags.version="<VERSION>" \ 
            ...
 ```
 
@@ -278,7 +278,7 @@ If your service has no need for the Datadog environment variables (for example, 
 ```yaml
 com.datadoghq.tags.env
 com.datadoghq.tags.service
-com.datadoghq.tags.version #Comment out this line to use automatic version tagging in APM
+com.datadoghq.tags.version 
 ```
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
@@ -292,11 +292,11 @@ As explained in the full configuration, these labels can be set in a Dockerfile 
 
 {{% tab "ECS" %}}
 
-##### Automatic version tagging for containerized environments
+##### Automatic version tagging for APM data in containerized environments
 
-<div class="alert alert-info">This feature is only available for the <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> product.</div>
+<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
-You can use the `version` tag to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
 
 For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
 
@@ -324,11 +324,8 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
   {
     "name": "DD_SERVICE",
     "value": "<SERVICE>"
-  }
-  /**
-   * Exclude the following block to use automatic version tagging in APM
-   **/
-  ,{
+  },
+  {
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
@@ -336,11 +333,8 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
 ],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
-  "com.datadoghq.tags.service": "<SERVICE>"
-  /**
-   * Exclude the following line to use automatic version tagging in APM
-   **/
-  ,"com.datadoghq.tags.version": "<VERSION>"
+  "com.datadoghq.tags.service": "<SERVICE>",
+  "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
 
@@ -351,11 +345,8 @@ If your service has no need for the Datadog environment variables (for example, 
 ```
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
-  "com.datadoghq.tags.service": "<SERVICE>"
-  /**
-   * Exclude the following line to use automatic version tagging in APM
-   **/
-  ,"com.datadoghq.tags.version": "<VERSION>"
+  "com.datadoghq.tags.service": "<SERVICE>",
+  "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
 
