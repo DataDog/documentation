@@ -304,4 +304,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql
-[13]: /database_monitoring/setup_mysql/troubleshooting/#known-limitations
+[13]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations

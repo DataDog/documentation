@@ -368,4 +368,4 @@ If you have installed and configured the integrations and Agent as described and
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
-[11]: /database_monitoring/setup_mysql/troubleshooting/#known-limitations
+[11]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
