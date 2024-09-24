@@ -24,8 +24,9 @@ const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter({
         cacheSearchResultsForSeconds: 2 * 60
     },
     additionalSearchParameters: {
-        // TODO: Update this as needed
-        query_by: 'title'
+        preset: "docs_alias_view",
+        group_by: 'title',
+        group_limit: 1
     }
 });
 
