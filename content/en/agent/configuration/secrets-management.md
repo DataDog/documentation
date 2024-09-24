@@ -157,10 +157,12 @@ The expected payload is a JSON object, where each key is one of the handles requ
 * `value`: a string; the actual secret value to be used in the check configurations (can be null in the case of error).
 * `error`: a string; the error message, if needed. If error is anything other than null, the integration configuration that uses this handle is considered erroneous and is dropped.
 
-##### Example executable
+##### Example executables
 
-The following is a dummy Go program prefixing every secret with `decrypted_`:
+ Some sample dummy programs prefixing every secret with `decrypted_`:
 
+{{< tabs >}}
+{{% tab "Go" %}}
 ```go
 package main
 
@@ -201,6 +203,21 @@ func main() {
   fmt.Printf(string(output))
 }
 ```
+{{% /tab %}}
+{{% tab "PowerShell" %}}
+```powershell
+$secretsJson = Read-Host | ConvertFrom-Json
+for ($index = 0; $index -lt $secretsJson.secrets.count; $index++) {
+    $secretKey = $secretsJson.secrets[$index]
+    $secretsJson.secrets[$index] = @{
+        value = "decrypted_$($secretKey)"
+        error = $null
+    } | ConvertTo-Json
+}
+Write-Host ($secretsJson | ConvertTo-Json | Out-String)
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 This updates this configuration (in the check file):
 
