@@ -28,7 +28,7 @@ https://datadog-cloudformation-template.s3.amazonaws.com/aws_account_level_logs/
 6. Click **Next**.
 7. In the **Stack name** field, provide a descriptive name such as `datadog-account-level-logs-stack`.
 8. In the **ApiKey** field, paste a valid [Datadog API key][4] value.
-9. In the **Regions** field, enter a comma-separated list of regions to enable metric streaming.
+9. In the **Regions** field, enter a comma-separated list of AWS region codes (for example, `us-east-1`) corresponding to the regions to include for the account-level logs subscription.
 10. In the **DatadogHttpEndpointUrl** field, select the URL corresponding to your [Datadog site][5].
 11. Click **Next**.
 12. Configure additional stack options as desired.
