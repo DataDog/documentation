@@ -6,7 +6,7 @@ title: Postgres 설정
 
 ### 호스팅 유형별 설정 지침
 
-Postgres 데이터베이스에서 데이터베이스 모니터링을 설정하는 방법을 알아보려면 호스팅 유형을 선택하세요.
+Postgres 데이터베이스에서 데이터베이스 모니터링 설정 방법을 알아보려면 호스팅 유형을 선택하세요.
 
 {{< partial name="dbm/dbm-setup-postgres" >}}
 
