@@ -57,14 +57,14 @@
                   {
                       "name": "docs_alias_view",
                       "search_parameters": {
-                          "sort_by": "rank:desc,order:asc",
+                          "sort_by": "rank:desc,order:asc,_text_match:desc",
                           "query_by": "tags,title,section_header,content"
                       }
                   },
                   {
                       "name": "docs_alias_api_view",
                       "search_parameters": {
-                          "sort_by": "rank:asc",
+                          "sort_by": "rank:asc,_text_match:desc",
                           "query_by": "tags,title,section_header,content"
                       }
                   }
