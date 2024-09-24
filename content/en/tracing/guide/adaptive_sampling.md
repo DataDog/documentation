@@ -15,7 +15,7 @@ further_reading:
   text: "Resource-based sampling"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
 Adaptive sampling is in Preview. To request access, complete the form.
 {{< /callout >}}
 
