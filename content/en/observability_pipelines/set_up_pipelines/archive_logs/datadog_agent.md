@@ -323,7 +323,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 
-Use the Agent configuration file or the Agent helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
+Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 
 {{< tabs >}}
 {{% tab "Agent configuration file" %}}
@@ -331,7 +331,7 @@ Use the Agent configuration file or the Agent helm chart values file to connect 
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
 
 {{% /tab %}}
-{{% tab "Helm values file" %}}
+{{% tab "Agent Helm values file" %}}
 
 {{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
 
