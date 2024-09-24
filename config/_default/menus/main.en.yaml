@@ -2358,15 +2358,15 @@ menu:
       parent: workflows
       identifier: workflows_access
       weight: 2
-    - name: Variables and parameters
-      url: service_management/workflows/variables/
-      parent: workflows
-      identifier: workflows_variables
-      weight: 3
     - name: Trigger Workflows
       url: service_management/workflows/trigger/
       parent: workflows
       identifier: workflows_trigger
+      weight: 3
+    - name: Variables and parameters
+      url: service_management/workflows/variables/
+      parent: workflows
+      identifier: workflows_variables
       weight: 4
     - name: Actions
       url: service_management/workflows/actions/
