@@ -66,7 +66,7 @@ These metrics are only computed when the source of the repository metadata is Gi
 **Notes:**
 
 - These metrics are emitted for every commit and not per deployment.
-- Make sure to familiarize with the [DORA metrics limitations][12].
+- There are several edge cases depending on the way the commits were introduced to the deployment, view the [limitations][12].
 
 ## Examine metrics in Event Management
 
