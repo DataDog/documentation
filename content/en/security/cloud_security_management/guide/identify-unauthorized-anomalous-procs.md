@@ -2,12 +2,12 @@
 title: Identifying Unauthorized and Anomalous Processes
 disable_toc: false
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "security/threats/workload_security_rules/custom_rules"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Creating Custom Detection Rules"
 ---
 
-You can use CMS Threats to identify if unauthorized or anomalous processes are running or executed on your IT systems.
+You can use CSM Threats to identify if unauthorized or anomalous processes are running or executed on your IT systems.
 
 For example, you can create a process allowlist and query for processes running on hosts and containers outside of the allowlist. 
 
@@ -33,6 +33,8 @@ exec.file.name not in ["vault"] && container.id == "ca5534a51dd04bbcebe9b23ba05f
 
 ## Detection for dynamic anomalies
 
+<div class="alert alert-info">Detection for dynamic anomalies is only supported with containers.</div>
+
 If you don't want to create an allowlist when querying for processes, you can create a custom rule to query for drift events dynamically.
 
 The custom rule query is `@agent.rule_id:anomaly_detection`. 
@@ -40,5 +42,9 @@ The custom rule query is `@agent.rule_id:anomaly_detection`.
 If you want to query for anomalies in a particular container image, you can use the `image_name` tag. For example, `@agent.rule_id:anomaly_detection image_name:IMAGE_NAME`.
 
 {{< img src="/security/cloud_security_management/guide/csm_threats_anomaly_image_query.png" alt="query for anomalies in a particular container image" style="width:100%;" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats/workload_security_rules/custom_rules
