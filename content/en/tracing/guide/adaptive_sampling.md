@@ -49,7 +49,7 @@ The following table lists minimum tracing library version required for Adaptive 
 | C++/Proxies | [v0.2.2][14]             |
 | PHP         |  Not available           |
 
-## See sampling rates by resource in the Ingestion Control page
+## View sampling rates by resource
 
 To see configured sampling rates, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
 
