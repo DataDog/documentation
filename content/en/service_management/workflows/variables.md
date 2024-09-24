@@ -12,6 +12,9 @@ further_reading:
 
 ---
 
+You can use different types of variables and parameters in a workflow: context variables, input parameters, output parameters, and custom variables.
+
+
 ## Context variables
 
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
@@ -42,7 +45,16 @@ If you're not sure what variable you're looking for, Datadog suggests existing s
 
 {{< img src="service_management/workflows/step-outputs2.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
-### Input parameters
+### Source object variables
+
+Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
+
+All the variables of the Source object are visible in the Context Variables tab.
+
+{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
+
+
+## Input parameters
 
 Input parameters are immutable key-value pairs that you can use to pass data into a workflow. You can use input parameters in workflows that:
 - are triggered manually, such as from a Dashboard.
@@ -64,15 +76,20 @@ You can add an implicit input parameter (a parameter that doesn't already exist 
 
 If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
 
-For information about creating mutable workflow variables, see the [Set variable][12] action.
 
-### Source object variables
+## Output parameters
 
-Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
+You can pass the result of a workflow using output parameters.
 
-All the variables of the Source object are visible in the Context Variables tab.
+To add an output parameter:
+1. Click on the workflow canvas.
+1. Click the **+** icon next to **Output Parameters**.
+1. Add a parameter name, value, and data type for the parameter.
+1. Optionally, add a default value for the parameter. If you add a default value, the parameter is optional at runtime.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
+The **Output Parameters** section displays the names of all existing output parameters together with a counter.
+
+For an example of how to use output parameters to pass information between Workflows and App Builder, see [return workflow results to an app][6].
 
 ## Custom variables
 
@@ -127,3 +144,4 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 [3]: https://datadoghq.slack.com/
 [4]: https://handlebarsjs.com/guide/expressions.html#expressions
 [5]: /service_management/workflows/trigger
+[6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
