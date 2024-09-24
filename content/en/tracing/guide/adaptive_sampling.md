@@ -70,6 +70,7 @@ The table includes:
 ## Remotely configure sampling rules for the service
 
 To configure adaptive sampling for the service:
+1. Navigate to the [Datadog Ingestion Control page][1].
 1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
    {{< img src="/tracing/guide/adaptive_sampling/ingestion_control_page.png" alt="Ingestion Control Page" style="width:100%;">}}
 1. Configure a **Monthly Ingestion Target** for adaptive sampling.
