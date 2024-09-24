@@ -166,9 +166,9 @@ Windows에 에이전트를 설치할 때 다음 각 구성 옵션을 명령줄�
 | `TAGS`                                      | 문자열  | 구성 파일에 할당할 쉼표로 구분된 태그 목록입니다. 예: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                         |
 | `HOSTNAME`                                  | 문자열  | 에이전트가 Datadog에 보고한 호스트 이름을 구성합니다(런타임에 계산된 호스트 이름을 재정의함).                                                                                                                            |
 | `DDAGENTUSER_NAME`                          | 문자열  | 에이전트 설치 _(v6.11.0+)_ 중에 사용된 기본 `ddagentuser` 사용자 이름을 재정의합니다. [ Datadog Windows 에이전트 User에 대해 자세히 알아보세요][3].                                                                                      |
-| `DDAGENTUSER_PASSWORD`                      | 문자열  | 에이전트 설치_(v6.11.0+)_ 중에 `ddagentuser` 사용자에 대해 암호화된 보안 비밀번호를 재정의합니다. 도메인 서버 설치를 위해 반드시 제공되어야 합니다. [ Datadog Windows 에이전트 User에 대해 자세히 알아보세요][3].  |
+| `DDAGENTUSER_PASSWORD`                      | 문자열  | 에이전트 설치_(v6.11.0+)_ 중에 `ddagentuser` 사용자에 대해 암호화된 보안 비밀번호를 재정의합니다. 도메인 서버 설치를 위해 반드시 제공되어야 합니다. [ Datadog Windows Agent User에 대해 자세히 알아보세요][3].  |
 | `APPLICATIONDATADIRECTORY`                  | 경로    | 구성 파일 디렉터리 트리에 사용할 디렉터리를 재정의합니다. 최초 설치 시에만 제공될 수 있으며, 업그레이드에는 유효하지 않습니다. 기본: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
-| `PROJECTLOCATION`                           | 경로    | 바이너리 파일 디렉터리 트리에 사용할 디렉터리를 재정의합니다. 최초 설치 시에만 제공될 수 있으며, 업그레이드에는 유효하지 않습니다. 기본: `%ProgramFiles%\Datadog\Datadog 에이전트`. _(v6.11.0+)_<br><br>기본 디렉터리를 재정의하는 경우 Datadog 파일의 `Datadog` 하위 디렉터리를 지정해야 합니다.                                    |
+| `PROJECTLOCATION`                           | 경로    | 바이너리 파일 디렉터리 트리에 사용할 디렉터리를 재정의합니다. 최초 설치 시에만 제공될 수 있으며, 업그레이드에는 유효하지 않습니다. 기본: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_<br><br>기본 디렉터리를 재정의하는 경우 Datadog 파일의 `Datadog` 하위 디렉터리를 지정해야 합니다.                                    |
 
 **참고**
 
@@ -216,8 +216,8 @@ Datadog 에이전트 버전 5.12.0 미만에서 업그레이드하는 경우, �
 에이전트 실행은 Windows Service Control Manager에 의해 제어됩니다.
 
 * 주요 실행 파일 이름은 `agent.exe`입니다. 에이전트 버전에 따라 위치는 다음과 같습니다.
-    - 에이전트 버전 6.11 이하: `"C:\Program Files\Datadog\Datadog 에이전트\embedded\agent.exe"`
-    - 에이전트 버전 6.12 이상: `"C:\Program Files\Datadog\Datadog 에이전트\bin\agent.exe"`
+    - 에이전트 버전 6.11 이하: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
+    - 에이전트 버전 6.12 이상: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * 구성 GUI는 브라우저 기반 구성 애플리케이션입니다(Windows 64비트 전용).
 * `<PATH_TO_AGENT.EXE> <COMMAND>` 구문을 사용하여 **승격된(Admin으로 실행)** 명령줄(PowerShell 또는 Command Prompt)에서 명령을 실행할 수 있습니다.
 * 명령줄 옵션은 다음과 같습니다.
@@ -230,7 +230,7 @@ Datadog 에이전트 버전 5.12.0 미만에서 업그레이드하는 경우, �
 | help            | 모든 명령에 대한 도움말을 가져옵니다.                                                     |
 | hostname        |  에이전트가 사용하는 호스트 이름을 출력합니다.                                           |
 | import          | 이전 버전의 에이전트에서 구성 파일을 가져오고 변환합니다.    |
-| launch-gui      | Datadog 에이전트 Manager를 시작합니다.                                                |
+| launch-gui      | Datadog Agent Manager를 시작합니다.                                                |
 | restart-service | Service Control Manager 내에서 에이전트를 다시 시작합니다.                           |
 | run             | 에이전트를 시작합니다.                                                                |
 | start           | 에이전트를 시작합니다. (더 이상 사용되지 않지만 허용됩니다. 대안으로 `run`을 사용하세요.) |
@@ -258,7 +258,7 @@ Datadog 에이전트 버전 5.12.0 미만에서 업그레이드하는 경우, �
 
 ## 설정
 
-[Datadog 에이전트 Manager][6]를 사용하여 검사를 활성화, 비활성화 및 구성합니다. 변경 사항을 적용하려면 에이전트를 다시 시작하세요.
+[Datadog Agent Manager][6]를 사용하여 검사를 활성화, 비활성화 및 구성합니다. 변경 사항을 적용하려면 에이전트를 다시 시작하세요.
 
 
 주요 에이전트 구성 파일은 다음 위치에 있습니다.
@@ -286,7 +286,7 @@ Windows에서 에이전트를 제거하는 방법에는 두 가지가 있습니�
 재부팅하지 않고 에이전트를 제거하려면 다음 PowerShell 명령을 사용합니다.
 
 {{< code-block lang="powershell" >}}
-$productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse) | Where {$_.GetValue("DisplayName") -like "Datadog 에이전트" }).PSChildName
+$productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse) | Where {$_.GetValue("DisplayName") -like "Datadog Agent" }).PSChildName
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', "$productCode", 'REBOOT=ReallySuppress')
 {{< /code-block >}}
 
@@ -294,9 +294,9 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 
 ### 에이전트 상태 및 정보
 
-에이전트가 실행 중인지 확인하려면  Services 패널의 `Datadog에이전트` 서비스가 *Started*로 나타나는지 확인합니다. *Datadog Metrics 에이전트*(`agent.exe`)라는 프로세스도 Task Manager에 있어야 합니다.
+에이전트가 실행 중인지 확인하려면  Services 패널의 `DatadogAgent` 서비스가 *Started*로 나타나는지 확인합니다. *Datadog Metrics 에이전트*(`agent.exe`)라는 프로세스도 Task Manager에 있어야 합니다.
 
-에이전트 상태에 대한 자세한 정보를 얻으려면 Datadog 에이전트 Manager를 시작하세요.
+에이전트 상태에 대한 자세한 정보를 얻으려면 Datadog Agent Manager를 시작하세요.
 
 * Datadog 에이전트 시스템 트레이 아이콘 -> Configure을 클릭하거나
 * **상승된(Admin으로 실행)** 명령줄에서 `launch-gui` 명령을 실행합니다.
@@ -310,13 +310,13 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 상태 명령은 PowerShell에서 사용할 수 있습니다.
 
 ```powershell
-& "$env:ProgramFiles\Datadog\Datadog 에이전트\bin\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 또는 cmd.exe:
 
 ```cmd
-"%ProgramFiles%\Datadog\Datadog 에이전트\bin\agent.exe" status
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 ### 로그 위치
