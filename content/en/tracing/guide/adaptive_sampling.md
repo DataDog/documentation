@@ -43,10 +43,10 @@ Find below the minimum tracing library version required for the feature:
 |-------------|--------------------------|
 | Java        | [v1.34.0][5]             |
 | Go          | [v1.68.0][6]             |
-| Python      | [v.2.9.6][10]            |
+| Python      | [v2.9.6][10]             |
 | Ruby        | [v2.0.0][11]             |
 | Node.js     | [v5.16.0][12]            |
-| .NET        | [v.2.54.0][13]           |
+| .NET        | [v2.54.0][13]            |
 | C++/Proxies | [v0.2.2][14]             |
 | PHP         | _Coming soon_            |
 
