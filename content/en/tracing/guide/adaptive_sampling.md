@@ -58,12 +58,14 @@ To see configured sampling rates:
 
 {{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
-- The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
-- The `Configuration` column surfaces where the resource sampling rate is being applied from: 
-  - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
-  - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
-  - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules][15].
-  - `Adaptive` if the sampling rules are set remotely by Datadog.
+The table includes:
+- `Ingested bytes`: Ingested bytes from spans of the service and resource.
+- `Downstream bytes`: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
+- `Configuration`: Source of the resource sampling rate:
+  - `Automatic`: [Default head-based sampling mechanism][8] from the Agent.
+  - `Local Configured`: [Sampling rule][7] set locally in the tracing library.
+  - `Remote Configured`: Remote sampling rule set from the Datadog UI.
+  - `Adaptive`: Sampling rules set remotely by Datadog.
 
 ## Remotely configure sampling rules for the service
 
