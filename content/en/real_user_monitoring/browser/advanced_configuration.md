@@ -93,12 +93,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% tab "NPM" %}}
    ```javascript
    datadogRum.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3',
-     context: {
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3',
+    context: {
       team: 'payment'
-     },
+    },
    })
    ```
 
@@ -111,7 +111,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
         service: 'purchase',
         version: '1.2.3',
         context: {
-        team: 'payment'
+          team: 'payment'
         },
       })
    })
@@ -120,12 +120,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% tab "CDN sync" %}}
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3',
-     context: {
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3',
+    context: {
       team: 'payment'
-     },
+    },
    })
    ```
    {{% /tab %}}
@@ -507,7 +507,7 @@ You can update the following event properties:
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
-|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context), then [View Context API](#view-context) or when generating events manually (for example, `addError` and **`addAction`******).                                                                                 |
+|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context), then [View Context API](#view-context) or when generating events manually (for example, `addError` and **`addAction`**).                                                                                 |
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
@@ -858,7 +858,7 @@ Enrich or modify the context of RUM view events and corresponding children event
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.setViewContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // Code example
 datadogRum.setViewContextProperty('activity', {
