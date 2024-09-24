@@ -43,7 +43,7 @@ title: 위젯
     {{< nextlink href="/dashboards/widgets/timeseries"
         img="dashboards/widgets/icons/timeseries_light_large.png">}} 시계열{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
-        img="dashboards/widgets/icons/top-list_light_large.png">}} 상위 목록{< /nextlink >}}
+        img="dashboards/widgets/icons/top-list_light_large.png">}} 상위 목록{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups
