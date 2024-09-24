@@ -6,11 +6,11 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-You can use account-level log subscriptions in your AWS environment to automatically forward all of your CloudWatch logs to Datadog. With this setup, you don't need to manually configure log forwarding when you have a new log source, or when AWS releases a new service. You can also define your own selection criteria or filter pattern for granular control over which logs are forwarded.
+You can use account-level log subscriptions in your AWS environment to automatically forward all of your CloudWatch logs to Datadog. With an account-level log subscription, you don't need to manually configure log forwarding when you have a new log source, or when AWS releases a new service. You can also define your own selection criteria or filter pattern for granular control over which logs are forwarded.
 
 ## Create an account-level log subscription
 
-For the simplest setup, use [CloudFormation](#cloudformation-recommended) to create a Kinesis Firehose and associated resources in each of your selected regions.
+For the simplest setup, use [CloudFormation](#cloudformation-recommended) to create an Amazon Data Firehose and associated resources in each of your selected regions.
 
 ### CloudFormation (recommended)
 
@@ -253,7 +253,7 @@ aws logs put-account-policy \
 
 ### Validation
 
-Go to the [Log Explorer][2] and enter the search query `@aws.firehose.arn:"<FIREHOSE_ARN>"`.
+Go to the [Log Explorer][2] and enter the search query `@aws.firehose.arn:"<FIREHOSE_ARN>"` to view logs forwarded by the Amazon Data Firehose.
    - Replace `<FIREHOSE_ARN>` with the ARN of the log-streaming [Firehose][3].
 
 ## Further reading
