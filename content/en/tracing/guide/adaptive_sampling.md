@@ -47,7 +47,7 @@ Find below the minimum tracing library version required for the feature:
 | Node.js     | [v5.16.0][12]            |
 | .NET        | [v2.54.0][13]            |
 | C++/Proxies | [v0.2.2][14]             |
-| PHP         | _Coming soon_            |
+| PHP         |  Not available           |
 
 ## See sampling rates by resource in the Ingestion Control page
 
