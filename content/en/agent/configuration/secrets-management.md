@@ -206,16 +206,18 @@ func main() {
 {{% /tab %}}
 {{% tab "PowerShell" %}}
 ```powershell
-$secretsJson = '{"version": "1.0", "secrets": ["secret1", "secret2"]}' | ConvertFrom-Json
+$secretsJson = Read-Host | ConvertFrom-Json
 $secrets = @{}
 for ($index = 0; $index -lt $secretsJson.secrets.count; $index++) {
     $secretKey = $secretsJson.secrets[$index]
+    # Add code to fetch secret here
+    # For example: $secretValue = Get-Secret -Name $secretKey -Vault SecretStore
     $secrets[$secretKey] = @{
         value = "decrypted_$($secretKey)"
         error = $null
-    } | ConvertTo-Json
+    }
 }
-Write-Host ($secrets | ConvertTo-Json | Out-String)
+Write-Host ($secrets | ConvertTo-Json)
 ```
 {{% /tab %}}
 {{< /tabs >}}
