@@ -67,24 +67,20 @@ The table includes:
   - `Remote Configured`: Remote sampling rule set from the Datadog UI.
   - `Adaptive`: Sampling rules set remotely by Datadog.
 
-## Remotely configure sampling rules for the service
+## Configure adaptive sampling for the service
 
 To configure adaptive sampling for the service:
-1. Navigate to the [Datadog Ingestion Control page][1].
-1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
-   {{< img src="/tracing/guide/adaptive_sampling/ingestion_control_page.png" alt="Ingestion Control Page" style="width:100%;">}}
+1. Navigate to the [Datadog Ingestion Control page][16].
 1. Configure a **Monthly Ingestion Target** for adaptive sampling.
-   {{< img src="/tracing/guide/adaptive_sampling/monthly_ingestion_target.png" alt="Monthly Ingestion Target" style="width:100%;">}}
-1. For your service, go to **Manage Ingestion Rate**
-   {{< img src="/tracing/guide/adaptive_sampling/enroll_service.png" alt="Enroll Service to Adaptive Sampling" style="width:100%;">}}
+1. Navigate to the [Service Ingestion Summary page][1] for your service.
+1. Click **Manage Ingestion Rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
 1. Set your service's sampling strategy to **Datadog Adaptive Sampling Rates** and click **Apply** to save the configuration.
-   {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_rate.png" alt="Datadog Adaptive Sampling Rates" style="width:100%;">}}
 1. (Optional) Set **Sampling Rates for some Resources** in addition to  **Datadog Adaptive Sampling Rates** for additional control of your ingestion.
-   {{< img src="/tracing/guide/adaptive_sampling/resource_sampling.png" alt="Resource-Based Sampling Rules" style="width:100%;">}}
 
-The configuration should take effect in less than a minute. You can observe the configuration changes from the [Live Search Explorer][9].
+The configuration should take effect in 5-6 minutes. You can observe the configuration changes from the [Live Search Explorer][9].
 
-From the **Service Ingestion Summary**, resources for which the sampling rate are remotely applied should show as `Remote Configured` in the **Configuration** column.
+From the **Datadog Ingestion Control page** services that use adaptive sampling should show as `Adaptive` `Remote` in the **Configuration** column.
+
 
 ## Further reading
 
@@ -105,3 +101,4 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.54.0
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2
 [15]: /tracing/guide/resource_based_sampling/
+[16]: /tracing/trace_pipeline/ingestion_controls
