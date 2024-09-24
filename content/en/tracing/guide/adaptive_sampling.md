@@ -21,12 +21,11 @@ Adaptive sampling is in Preview. To request access, complete the form.
 
 ## Overview
 
-Datadog Adaptive Sampling will help you capture more relevant traces while remaining close to a specific budget (ingested gigabytes). By specifying a target monthly volume and enrolling one or multiple services to adaptive sampling, ensure that the consumption of these services matches the target volume at the end of the month, while keeping visibility over all services and endpoints.
+Datadog Adaptive Sampling helps you capture more relevant traces while remaining close to a specific budget (ingested gigabytes). This feature allows you to set a target monthly volume for trace ingestion and enroll one or more services to adaptive sampling. This ensures that the consumption of these services matches the target volume at the end of the month, while keeping visibility over all services and endpoints.
 
-## How does it work?
-Datadog supports more granular configuration of existing [sampling rules][7], allowing the configuration of different sampling rates by resource. Thanks to [Remote configuration capabilities][3], based on the observed ingested traffic, Datadog is able to manage sampling rates by service, environment and resource to ensure to map the specified budget at the end of the month, while ensuring to capture visibility over low-traffic services and endpoints.
+Adaptive Sampling uses granular configuration of existing [sampling rules][7] to adjust rates based on resource, service, and environment. Using [remote configuration][3], Datadog dynamically manages these rates to match your specified monthly budget and ensure visibility for low-traffic services and endpoints.
 
-Enroll new services to adaptive sampling and manage ingested volumes from the [Datadog Ingestion control page][1] by following the steps listed below.
+To enroll new services to adaptive sampling and manage ingested volumes from the [Datadog Ingestion control page][1], follow the instructions listed below.
 
 
 ## Requirements
