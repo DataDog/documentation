@@ -48,10 +48,6 @@ When an organization exceeds a threshold, pending execution requests queue up to
 * The sum of all step outputs for a workflow can be up to 150 MB.
 * A workflow's output size can be up to 500 KB.
 
-## End user limits
-
-Each end user can execute up to 100 actions per minute across App Builder and Workflow Automation. When a user exceeds this threshold, workflow executions are throttled.
-
 ## Action limits
 
 * An action's input can be up to 15 MB.
