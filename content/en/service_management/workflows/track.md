@@ -1,5 +1,5 @@
 ---
-title: Track Workflows
+title: Track workflows
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
