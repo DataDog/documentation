@@ -254,7 +254,7 @@ aws logs put-account-policy \
 ### Validation
 
 Go to the [Log Explorer][2] and enter the search query `@aws.firehose.arn:"<FIREHOSE_ARN>"`.
-   - Replace `<FIREHOSE_ARN>` with the ARN of the [Firehose][3] created by the CloudFormation template.
+   - Replace `<FIREHOSE_ARN>` with the ARN of the log-streaming [Firehose][3].
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
