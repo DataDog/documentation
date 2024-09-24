@@ -36,7 +36,7 @@ To enroll new services to adaptive sampling and manage ingested volumes from the
 
 ### Tracing library version
 
-Find below the minimum tracing library version required for the feature:
+The following table lists minimum tracing library version required for Adaptive Sampling:
 
 | Language    | Minimum version required |
 |-------------|--------------------------|
