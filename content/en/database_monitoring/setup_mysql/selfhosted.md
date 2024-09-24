@@ -21,6 +21,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
+Supported MariaDB versions
+: 10.5, 10.6, 10.11, or 11.1 <br/><br/>
+Database Monitoring for MariaDB is supported with [known limitations][13].
+
 Supported Agent versions
 : 7.36.1+
 
@@ -300,3 +304,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql
+[13]: /database_monitoring/setup_mysql/troubleshooting/#known-limitations
