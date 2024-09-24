@@ -25046,16 +25046,36 @@ components:
     UserCreateAttributes:
       description: Attributes of the created user.
       properties:
+        created_at:
+          description: The `UserCreateAttributes` `created_at`.
+          format: date-time
+          type: string
+        disabled:
+          description: The `UserCreateAttributes` `disabled`.
+          type: boolean
         email:
           description: The email of the user.
           example: jane.doe@example.com
           type: string
+        handle:
+          description: The `UserCreateAttributes` `handle`.
+          type: string
+        modified_at:
+          description: The `UserCreateAttributes` `modified_at`.
+          format: date-time
+          type: string
         name:
           description: The name of the user.
           type: string
+        service_account:
+          description: The `UserCreateAttributes` `service_account`.
+          type: boolean
         title:
           description: The title of the user.
           type: string
+        verified:
+          description: The `UserCreateAttributes` `verified`.
+          type: boolean
       required:
       - email
       type: object
@@ -25108,6 +25128,10 @@ components:
           type: string
         invite_type:
           description: Type of invitation.
+          type: string
+        login_method:
+          description: The `UserInvitationDataAttributes` `login_method`.
+          nullable: true
           type: string
         uuid:
           description: UUID of the user invitation.
@@ -25172,6 +25196,79 @@ components:
       type: string
       x-enum-varnames:
       - USER_INVITATIONS
+    UserOrgsSerializable:
+      description: The definition of `UserOrgsSerializable` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserOrgsSerializableAttributes'
+        id:
+          description: The `UserOrgsSerializable` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/UserOrgsSerializableType'
+      required:
+      - type
+      type: object
+    UserOrgsSerializableAttributes:
+      description: The definition of `UserOrgsSerializableAttributes` object.
+      properties:
+        disabled:
+          description: The `UserOrgsSerializableAttributes` `disabled`.
+          type: boolean
+        email:
+          description: The `UserOrgsSerializableAttributes` `email`.
+          type: string
+        name:
+          description: The `UserOrgsSerializableAttributes` `name`.
+          type: string
+        org_id:
+          description: The `UserOrgsSerializableAttributes` `org_id`.
+          type: string
+        title:
+          description: The `UserOrgsSerializableAttributes` `title`.
+          type: string
+        verified:
+          description: The `UserOrgsSerializableAttributes` `verified`.
+          type: boolean
+      type: object
+    UserOrgsSerializableType:
+      default: users
+      description: The definition of `UserOrgsSerializableType` object.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    UserOverrideIdentityProvider:
+      description: The definition of `UserOverrideIdentityProvider` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserOverrideIdentityProviderAttributes'
+        id:
+          description: The `UserOverrideIdentityProvider` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/UserOverrideIdentityProviderType'
+      required:
+      - type
+      type: object
+    UserOverrideIdentityProviderAttributes:
+      description: The definition of `UserOverrideIdentityProviderAttributes` object.
+      properties:
+        authentication_method:
+          description: The `UserOverrideIdentityProviderAttributes` `authentication_method`.
+          type: string
+      type: object
+    UserOverrideIdentityProviderType:
+      default: identity_providers
+      description: The definition of `UserOverrideIdentityProviderType` object.
+      enum:
+      - identity_providers
+      example: identity_providers
+      type: string
+      x-enum-varnames:
+      - IDENTITY_PROVIDERS
     UserRelationshipData:
       description: Relationship to user object.
       properties:
@@ -25217,6 +25314,8 @@ components:
       - $ref: '#/components/schemas/Organization'
       - $ref: '#/components/schemas/Permission'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/UserOverrideIdentityProvider'
+      - $ref: '#/components/schemas/UserOrgsSerializable'
     UserResponseRelationships:
       description: Relationships of the user object returned by the API.
       properties:
@@ -25461,15 +25560,36 @@ components:
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
+        created_at:
+          description: The `UserUpdateAttributes` `created_at`.
+          format: date-time
+          type: string
         disabled:
           description: If the user is enabled or disabled.
           type: boolean
         email:
           description: The email of the user.
           type: string
+        handle:
+          description: The `UserUpdateAttributes` `handle`.
+          type: string
+        modified_at:
+          description: The `UserUpdateAttributes` `modified_at`.
+          format: date-time
+          type: string
         name:
           description: The name of the user.
           type: string
+        service_account:
+          description: The `UserUpdateAttributes` `service_account`.
+          type: boolean
+        title:
+          description: The `UserUpdateAttributes` `title`.
+          nullable: true
+          type: string
+        verified:
+          description: The `UserUpdateAttributes` `verified`.
+          type: boolean
       type: object
     UserUpdateData:
       description: Object to update a user.
