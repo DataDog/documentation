@@ -49,7 +49,7 @@ There are two types of alerting conditions you can configure your Error Tracking
 High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States here][1]
 
 1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose what metric you want to monitor. There are three quick filter options to access the most frequently used facets:
+2. Choose what metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
     - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
     - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
@@ -77,7 +77,7 @@ New monitors alert on issues that are **For Review** and that meet your alerting
 
 
 1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose what metric you want to monitor. There are three quick filter options to access the most frequently used facets:
+2. Choose what metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
     - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
     - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
@@ -85,7 +85,7 @@ New monitors alert on issues that are **For Review** and that meet your alerting
 
     If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
 
-    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts over the count of unique value of the  facet.
+    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts over the count of unique value of the facet.
 
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][3].
 
@@ -133,7 +133,7 @@ Error Tracking monitors use [Issue States][2] to ensure that your alerts stay fo
 ## Troubleshooting New Issue monitors
 As of September 2024, New Issue monitors are no longer time-based by default to help ensure no errors are missed. Previously, monitors created before this change included filters `issue.age` and/or `issue.regression.age`, which are no longer added by default. While not recommended, these filters can still be used if manually specified.
 
-New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as  **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
+New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
 
 If your monitors are generating too much noise, consider the following adjustments:
 - **Triage your alerts**: Set issues to **Reviewed**, **Ignored**, or **Resolved** when appropriate
