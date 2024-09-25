@@ -44,17 +44,17 @@ With inferred service dependencies, service overrides might pollute service list
 
 The service override (`auth-dotnet-postgres`) breaks the direct connection between the base service and the inferred service. It is not useful anymore as the database dependency is now properly represented by the inferred service.
 
-## How are service overrides set ?
+## How service overrides are set
 
 #### Integration service overrides
 
-Datadog tracing libraries automatically set different service names on client spans to represent databases, queues, or third-party service dependencies in integrations. We will refer to these types of service overrides as **integration service overrides** in the rest of the guide.
+Datadog tracing libraries automatically set different service names on client spans to represent databases, queues, or third-party service dependencies in integrations. These types of service overrides are referred to as **integration service overrides** in the rest of the guide.
 
 #### Custom service overrides
 
-Service names can also be set manually by users, for instance to gain visibility on specific components of the service (shared libraries, middleware layers). We will refer to these types of service overrides as **custom service overrides** in the rest of the guide.
+Service names can also be set manually by users, for instance to gain visibility on specific components of the service (shared libraries, middleware layers). These types of service overrides are referred to as **custom service overrides** in the rest of the guide.
 
-## How are service overrides represented in the product ?
+## How service overrides are represented in Datadog
 
 To give less importance to service overrides, these are treated differently visually speaking in various APM product pages.
 
@@ -89,7 +89,7 @@ This ensures the `service` attribute always uses the base service name instead o
 
 <div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
 
-It is recommended to remove service overrides progressively, proceeding service by service, in order to ensure that no critical assets (dashboards, monitors, retention filters, etc...) are affected by the change. Follow the [step-by-step process](#a-step-by-step-process-to-remove-service-overrides) to ensure a smooth transition to the new model.
+It is recommended to remove service overrides progressively, proceeding service by service, to ensure that no critical assets (such as dashboards, monitors, retention filters, and so on) are affected by the change. Follow the [detailed instructions](#a-step-by-step-process-to-remove-service-overrides) to ensure a smooth transition to the new model.
 
 ### Examples 
 
@@ -112,26 +112,26 @@ Similarly, for a span representing a call to a mySQL database:
 | *Without* inferred services and *with* service overrides | `service:my-service-mysql` or `service:mysql` | No `peer.*` tags set |
 | *With* inferred services and *without* service overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
 
-### A step-by-step process to remove service overrides
+### Remove service overrides progressively
 
-1. Identify the service override that you are willing to remove and navigate to its **service page**.
-2. Hover on the service override pill in the header of the page to identify underlying base service names. These are the services from which the spans containing service overrides are emitted from, hence are the instrumented services on which you need to need action in their configuration.
+1. Identify the service override you want to remove and navigate to its **service page**.
+2. Hover over the service override pill in the page header and note the underlying base service names. These are the original services emitting spans with overrides. You need to update the configuration for these instrumented services.
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
 
-3. Scan through your existing assets that might contain queries using this override service name:
+3. Scan through your existing assets that might contain queries using the override service name:
 
-  - Any monitors, dashboards, or notebooks queries based on [APM Trace metrics][5]
-  - [APM metrics from spans][2]
-  - [Trace analytics monitors][3] (based on indexed spans)
-  - [Retention filters][4]
-  - Sensitive data scannner pipelines
+   - Any monitors, dashboards, or notebooks queries based on [APM Trace metrics][5]
+   - [APM metrics from spans][2]
+   - [Trace analytics monitors][3] (based on indexed spans)
+   - [Retention filters][4]
+   - Sensitive data scanner pipelines
 
-4. Change these queries to use the base service name instead (`service:<DD_SERVICE>`), for queries to continue to match when you remove service overrides
+4. Update these queries to use the base service name (`service:<DD_SERVICE>`). This allows queries to continue to match when you remove service overrides
 
-5. Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` for integration service overrdes
+5. Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` for integration service overrides.
 
-**NB**: the above configuration only removes [integration service overrides](#integration-service-overrides). For custom service overrides, these need to be removed directly in the code.
+**Note**: The configuration above only removes [integration service overrides](#integration-service-overrides). Custom service overrides must be removed directly in the code.
 
 ## Further reading
 
