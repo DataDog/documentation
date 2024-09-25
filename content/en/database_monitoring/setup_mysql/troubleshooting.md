@@ -214,9 +214,9 @@ The `schema` tag (also known as "database") is present on MySQL Query Metrics an
 
 If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
 
-## MariaDB Known Limitations
+## MariaDB known limitations
 
-### Incompatible InnoDB Metrics
+### Incompatible InnoDB metrics
 
 The following InnoDB metrics are not available for certain MariaDB versions:
 
