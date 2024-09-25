@@ -130,7 +130,7 @@ Error Tracking monitors use [Issue States][2] to ensure that your alerts stay fo
 
 **Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
 
-## Troubleshooting New Issue monitors
+## New Issue monitors are generating too much noise
 As of September 2024, New Issue monitors are no longer time-based by default to help ensure no errors are missed. Previously, monitors created before this change included filters `issue.age` and/or `issue.regression.age`, which are no longer added by default. While not recommended, these filters can still be used if manually specified.
 
 New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
