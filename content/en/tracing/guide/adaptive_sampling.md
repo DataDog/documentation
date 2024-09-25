@@ -21,12 +21,16 @@ Adaptive sampling is in Preview. To request access, complete the form.
 
 ## Overview
 
-Datadog Adaptive Sampling helps you capture more relevant traces while remaining close to a specific budget (ingested gigabytes). This feature allows you to set a target monthly volume for trace ingestion and enroll one or more services to adaptive sampling. This ensures that the consumption of these services matches the target volume at the end of the month, while keeping visibility over all services and endpoints.
+Datadog **Adaptive Sampling** helps you capture more relevant traces while remaining close to a specific budget (ingested gigabytes). It only takes simple steps to get started:
+1. Set a target monthly volume for trace ingestion
+2. Enroll one or more services to adaptive sampling. 
+This ensures that the consumption of these services matches the target volume at the end of the month, while keeping visibility over its endpoints.
 
-Adaptive Sampling uses granular configuration of existing [sampling rules][7] to adjust rates based on resource, service, and environment. Using [remote configuration][3], Datadog dynamically manages these rates to match your specified monthly budget and ensure visibility for low-traffic services and endpoints.
+Adaptive Sampling relies on [remote configuration][3] and on the existing [sampling rules][7] mechanisms to dynamically adjust sampling rates for each environment, service and resource combination, in order to:
+- match your specified monthly budget
+- ensure **visibility for low-traffic services and endpoints** by capturing at least one trace for each combination of service, resource and environment every 5 minutes.
 
 To enroll new services to adaptive sampling and manage ingested volumes from the [Datadog Ingestion control page][1], follow the instructions listed below.
-
 
 ## Requirements
 
@@ -64,22 +68,31 @@ The table includes:
 - `Configuration`: Source of the resource sampling rate:
   - `Automatic`: [Default head-based sampling mechanism][8] from the Agent.
   - `Local Configured`: [Sampling rule][7] set locally in the tracing library.
-  - `Remote Configured`: Remote sampling rule set from the Datadog UI.
-  - `Adaptive`: Sampling rules set remotely by Datadog.
+  - `Remote Configured`: [Remote sampling rule(s)][15] set from the Datadog UI.
+  - `Adaptive`: Adaptive sampling rules set by Datadog.
 
-## Configure adaptive sampling for the service
+## Configure adaptive sampling for a service
 
-To configure adaptive sampling for the service:
+To configure adaptive sampling for a service:
 1. Navigate to the [Datadog Ingestion Control page][16].
-1. Configure a **Monthly Ingestion Target** for adaptive sampling.
-1. Navigate to the [Service Ingestion Summary page][1] for your service.
-1. Click **Manage Ingestion Rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
-1. Set your service's sampling strategy to **Datadog Adaptive Sampling Rates** and click **Apply** to save the configuration.
-1. (Optional) Set **Sampling Rates for some Resources** in addition to  **Datadog Adaptive Sampling Rates** for additional control of your ingestion.
 
-The configuration should take effect in 5-6 minutes. You can observe the configuration changes from the [Live Search Explorer][9].
+{{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_budget_cta.png" alt="Call to action to set adaptive sampling budget" style="width:100%;">}}
 
-From the **Datadog Ingestion Control page** services that use adaptive sampling should show as `Adaptive` `Remote` in the **Configuration** column.
+
+2. Open the modal to set/edit the **Monthly Ingestion Target** for adaptive sampling. Make sure that the ingestion volume target is `>0` when enrolling a first service to adaptive sampling. For subsequent services, you can increase the allocated budget after the new service is onboarded to account for the new volume. 
+
+**Note**: the configured budget is only allocated to services enrolled to adaptive sampling. It does not account for the additional volume from services that use local sampling rules or other [sampling mechanisms][8] configured locally in the Agent or the tracing library.
+
+{{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_budget_modal.png" alt="Adaptive sampling budget modal" style="width:70%;">}}
+
+3. Navigate to the [Service Ingestion Summary page][1] for your service.
+4. Click **Manage Ingestion Rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
+5. Set your service's sampling strategy to **Datadog Adaptive Sampling Rates** and click **Apply** to save the configuration.
+6. _[Optional]_ Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (e.g. 100% of `GET /checkout` endpoints) or less (e.g. 0.1% of `/health` requests) data.
+
+{{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_setting_modal.png" alt="Adaptive sampling setting modal" style="width:70%;">}}
+
+The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources controlled by adaptive sampling will appear marked as `Adaptive Remote` in the **Configuration** column.
 
 
 ## Further reading
