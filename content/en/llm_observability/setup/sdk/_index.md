@@ -471,7 +471,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span (example: `session`, `env`, `system`, `version`, and so on). For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
