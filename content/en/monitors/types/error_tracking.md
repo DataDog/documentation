@@ -46,7 +46,7 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 {{< tabs >}}
 {{% tab "High Impact" %}}
-High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States here][1]
+High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
 
 1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 2. Choose what metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
