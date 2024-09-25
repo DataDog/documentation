@@ -737,7 +737,7 @@ Automatic user activity tracking offers the following modes:
     - `user`
   - If no user ID is available or found, the user event is not emitted.
 - `anonymization` mode (short name: `anon`):
-  - This mode is the same as `identification`, but anonymizes the user ID.
+  - This mode is the same as `identification`, but anonymizes the user ID by hashing (SHA256) it and cropping the resulting hash.
 - `disabled` mode:
   - ASM libraries do *not* collect any user ID from their automated instrumentations. 
   - User login events are not emitted.
