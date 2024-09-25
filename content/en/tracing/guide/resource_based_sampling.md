@@ -1,6 +1,5 @@
 ---
 title: Resource-based sampling
-
 disable_toc: false
 private: true
 further_reading:
@@ -12,8 +11,8 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
-Remotely configured sampling rules are in Beta. To request access, complete the form.
+{{< callout url="https://www.datadoghq.com/preview/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the Preview!" >}}
+Remotely configured sampling rules are in Preview. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview

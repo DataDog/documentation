@@ -33,7 +33,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * For Python, uWSGI applications are not supported at this time.
-* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
+* For Ruby, library injection support is in Preview. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
@@ -264,7 +264,7 @@ The library injection mechanism for Python only supports injecting the Python li
 
 {{% tab "Host" %}}
 
-<div class="alert alert-info">Tracing Library Injection on a host is in beta.</div>
+<div class="alert alert-info">Tracing Library Injection on a host is in Preview.</div>
 
 When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -360,7 +360,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% tab "Agent on host, app in containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</div>
+<div class="alert alert-info">Tracing Library Injection on hosts and containers is in Preview.</div>
 
 
 When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
@@ -411,7 +411,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% tab "Agent and app in separate containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection in containers is in beta.</div>
+<div class="alert alert-info">Tracing Library Injection in containers is in Preview.</div>
 
 When your Agent and services are running in separate Docker containers on the same host, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
