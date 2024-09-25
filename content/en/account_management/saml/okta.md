@@ -126,5 +126,5 @@ Follow the steps below to map Okta attributes to Datadog entities. This step is 
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: https://app.datadoghq.com/organization-settings/login-methods
 [5]: https://app.datadoghq.com/organization-settings/login-methods/saml
-[6]: account_management/faq/okta/#group-attribute-statements-optional
+[6]: /account_management/faq/okta/#group-attribute-statements-optional
 [7]: /account_management/saml/mapping/
