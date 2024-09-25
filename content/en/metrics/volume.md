@@ -16,7 +16,6 @@ further_reading:
 
 ## Overview
 
-// need to update this image to show 1 - 1000 custom metrics and the beta facet needs to be changed as well
 {{< img src="metrics/volume/metrics_volume_overview.png" alt="Metrics Volume page set to a timeframe of the past hour (by default) showing the search, filter, facet and column sorting features available" style="width:100%;" >}}
 
 Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Individual teams are less incentivized to be proactive in helping manage this growth because they have limited insights into the costs of the metrics and tags they're submitting.
