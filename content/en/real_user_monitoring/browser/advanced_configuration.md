@@ -81,7 +81,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
-   - Context: Starting with version 5.28.0, you can add context to view and view children events.
+   - Context: Starting with [version 5.28.0][21], you can add context to view and view children events.
 
    For more information, see [Setup Browser Monitoring][4].
 
@@ -843,7 +843,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ## View context
 
-Starting with version 5.28.0, the contexts of view events are modifiable. The context adds to the current view only and populate its children events (such as `action`, `error` and `timing`) with `startView`, `setViewContext` and `setViewContextProperty`.
+Starting with [version 5.28.0][21], the contexts of view events are modifiable. The context adds to the current view only and populate its children events (such as `action`, `error` and `timing`) with `startView`, `setViewContext` and `setViewContextProperty`.
 
 ### Start view with context
 
@@ -1186,3 +1186,5 @@ However, this feature comes with some **limitations**:
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [20]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[21]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+
