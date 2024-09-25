@@ -66,10 +66,10 @@ The table includes:
 - `Ingested bytes`: Ingested bytes from spans of the service and resource.
 - `Downstream bytes`: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
 - `Configuration`: Source of the resource sampling rate:
-  - `Automatic`: [Default head-based sampling mechanism][8] from the Agent.
-  - `Local Configured`: [Sampling rule][7] set locally in the tracing library.
-  - `Remote Configured`: Remote sampling rule set from the Datadog UI.
-  - `Adaptive`: Sampling rules set remotely by Datadog.
+  - `AUTOMATIC`: [Default head-based sampling mechanism][8] from the Agent.
+  - `LOCAL CONFIGURED`: [Sampling rule][7] set locally in the tracing library.
+  - `REMOTE CONFIGURED`: Remote sampling rule set from the Datadog UI.
+  - `ADAPTIVE REMOTE`: Adaptive sampling rules set by Datadog.
 
 ## Configure adaptive sampling for a service
 
@@ -77,7 +77,6 @@ To configure adaptive sampling for the service:
 1. Navigate to the [Datadog Ingestion Control page][16].
 
 {{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_budget_cta.png" alt="Call to action to set adaptive sampling budget" style="width:100%;">}}
-
 
 2. Open the modal to set/edit the **Monthly Ingestion Target** for adaptive sampling. Make sure that the ingestion volume target is `>0` when enrolling a first service to adaptive sampling. For subsequent services, you can increase the allocated budget after the new service is onboarded to account for the new volume. 
 
@@ -93,8 +92,6 @@ To configure adaptive sampling for the service:
 {{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_setting_modal.png" alt="Adaptive sampling setting modal" style="width:70%;">}}
 
 The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources controlled by adaptive sampling will appear marked as `Adaptive Remote` in the **Configuration** column.
-
-From the **Datadog Ingestion Control page** services that use adaptive sampling should show as `ADAPTIVE` `REMOTE` in the **Configuration** column.
 
 ## Further reading
 
