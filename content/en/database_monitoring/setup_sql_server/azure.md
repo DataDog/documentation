@@ -110,7 +110,7 @@ GRANT SELECT to datadog;
 
 **Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
 
-[3]: /database_monitoring/guide/managed_authentication
+[1]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "SQL Server on Windows Azure VM" %}}
