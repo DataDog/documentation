@@ -11,7 +11,7 @@ const { env } = document.documentElement.dataset;
 const pageLanguage = getPageLanguage();
 const typesenseConfig = getConfig(env).typesense;
 
-const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter({
+const adapterOptions = {
     server: {
         apiKey: typesenseConfig.public_key,
         nodes: [
@@ -24,11 +24,10 @@ const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter({
         cacheSearchResultsForSeconds: 2 * 60
     },
     additionalSearchParameters: {
-        preset: "docs_alias_view"/*,
-        group_by: 'title',
-        group_limit: 1*/
+        preset: "docs_alias_view"
     }
-});
+};
+const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterOptions);
 
 const searchClient = typesenseInstantSearchAdapter.searchClient;
 let indexName = typesenseConfig.index;
@@ -107,8 +106,11 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     }
 
     if (apiPage) {
-        // TODO: Use this when api collection has been created in Typesense
-        // indexName = typesenseConfig.api_index;
+        typesenseInstantSearchAdapter.updateConfiguration({...adapterOptions, ...{
+          additionalSearchParameters: {
+            preset: "docs_alias_api_view"
+          }
+        }});
     }
 
     if (searchResultsPage) {
