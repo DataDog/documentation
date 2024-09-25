@@ -88,6 +88,7 @@ DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
 This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example,`*-postgres`, `*-http-client`).
 
 <div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
+
 It is recommended to remove service overrides progressively, proceeding service by service, in order to ensure that no critical assets (dashboards, monitors, retention filters, etc...) are affected by the change. Follow the [step-by-step process](#a-step-by-step-process-to-remove-service-overrides) to ensure a smooth transition to the new model.
 
 ### Examples 
@@ -113,9 +114,31 @@ Similarly, for a span representing a call to a mySQL database:
 
 ### A step-by-step process to remove service overrides
 
+1. Identify the service override that you are willing to remove and navigate to its **service page**.
+2. Hover on the service override pill in the header of the page to identify underlying base service names. These are the services from which the spans containing service overrides are emitted from, hence are the instrumented services on which you need to need action in their configuration.
+
+{{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
+
+3. Scan through your existing assets that might contain queries using this override service name:
+
+  - Any monitors, dashboards, or notebooks queries based on [APM Trace metrics][5]
+  - [APM metrics from spans][2]
+  - [Trace analytics monitors][3] (based on indexed spans)
+  - [Retention filters][4]
+  - Sensitive data scannner pipelines
+
+4. Change these queries to use the base service name instead (`service:<DD_SERVICE>`), for queries to continue to match when you remove service overrides
+
+5. Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` for integration service overrdes
+
+**NB**: the above configuration only removes [integration service overrides](#integration-service-overrides). For custom service overrides, these need to be removed directly in the code.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/guide/inferred-service-opt-in
+[2]: /tracing/trace_pipeline/generate_metrics
+[3]: /monitors/types/apm/?tab=traceanalytics
+[4]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[5]: /tracing/metrics/metrics_namespace/
