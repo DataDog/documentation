@@ -26,7 +26,7 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
+<div class="alert alert-info">Resource Catalog is in Preview.</div>
 
 ## Overview
 
@@ -129,14 +129,14 @@ Clicking on any resource opens a side panel with details including:
 ### Recent changes
 
 {{< callout url="https://www.datadoghq.com/private-beta/recent-changes-tab/" >}}
-  The <strong>Recent Changes</strong> tab is in private beta, but you can easily request access! Use this form to submit your request today.
+  The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
 {{< /callout >}} 
 
 Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
 
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
-   - You have [access to the private beta][9].
+   - You have [access to the Preview][9].
 
 #### AWS
 
