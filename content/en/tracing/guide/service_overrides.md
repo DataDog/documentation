@@ -1,40 +1,44 @@
 ---
 title: Service Overrides
-
 disable_toc: false
 private: true
 further_reading:
 - link: "/tracing/guide/inferred-service-opt-in"
-  tag: "Guide"
+  tag: "Documentation"
   text: "Opting-in to the new service representation"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
-Inferred service dependencies are in preview. To request access, complete the form. For opt-in instructions, refer to this <a url="https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/">guide</a>.
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
+Inferred service dependencies are in Preview. To request access, complete the form. For opt-in instructions, see the <a href="/tracing/guide/inferred-service-opt-in/">Inferred Service dependencies guide</a>.
 {{< /callout >}}
 
 ## Overview
 
-Prior to [inferred services][1], Datadog used to change service names of client spans (`span.kind:client`) to better represent databases, queues and third party dependencies in most integrations. For instance, a span representing a client call from a service `A` to a postgres database would be tagged with `service:postgres` or `service:A-postgres`. 
+Inferred services improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
 
-With the new service reprensentation and the introduction of inferred services, doing so is not required anymore as dependencies are automatically inferred from a set of span attributes collected on client spans (e.g. `db.system`, `db.name`, etc...).
+### Before inferred services
 
-- **Before inferred services**: the client span is tagged with a different service name (`auth-dotnet-postgres`). In service maps, the database is represented as a different service. This is an inferred service
+Datadog changed service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. 
+
+In this approach, a span representing a client call from a service `auth-dotnet` to a PostgreSQL database would be tagged with `service:auth-dotnet-postgres`. In service maps, these dependencies were represented as separate services, as shown below:
 
 {{< img src="/tracing/guide/service_overrides/old_service_rep.png" alt="Old Service Representation" style="width:80%;">}}
 
+### With inferred services
 
-- **With inferred services**: the client span is tagged with the base service name, i.e. `auth-dotnet`, and the database is inferred using other attributes (`db.name:user-db`, `db.system:postgres`, etc...). As a result, there's no need to change the `service` attribute on the client span anymore. 
+Dependencies are automatically inferred from span attributes collected on client spans (for example, `db.system`, `db.name`). The client span retains the base service name, and the database is inferred using other attributes. As a result, there's no need to change the `service` attribute on the client span anymore.
+
+Using the previous example, the client span would now be tagged with the base service name `auth-dotnet`, and the database would be inferred from attributes like `db.name:user-db` and `db.system:postgres`. The service map representation would look like this:
 
 {{< img src="/tracing/guide/service_overrides/new_service_rep.png" alt="New Service Representation" style="width:70%;">}}
 
 
-### Overriding service names is not useful anymore
+### Impact on service overrides
 
-When starting using the new inferred service dependencies feature set, service overrides might pollute service lists and maps. In service maps, you will see, in that order: 
-- The base service node, e.g. `auth-dotnet`.
-- The service override node, e.g. `auth-dotnet-postgres`.
-- The new inferred service node, e.g. `user-db`.
+With inferred service dependencies, service overrides might pollute service lists and maps. In service maps, you would see the following nodes in order:
+1. The base service node, for example: `auth-dotnet`.
+1. The service override node, for example: `auth-dotnet-postgres`.
+1. The new inferred service node, for example: `user-db`.
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_new_service_rep.png" alt="Service Overrides" style="width:100%;">}}
 
@@ -73,29 +77,39 @@ In the trace side panel, the client span header represents the call going from t
 {{< img src="/tracing/guide/service_overrides/service_overrides_traces.png" alt="Trace side panel service overrides" style="width:80%;">}}
 
 
-## How to remove service overrides ?
+## Remove service overrides
 
-To remove **integration** service overrides, set the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable to `true` in the tracing library. This will ensure the `service` attribute is always set to the base service name instead of appending the integation name (e.g. `*-postgres`, `*-http-client`) to better represent dependencies.
+To remove *integration service overrides*, set the environment variable:
 
-<div class="alert alert-warning">Removing service overrides is a <b>breaking change</b>. Any metric, monitor or dashboard query based on the overriden service name will stop matching when removing integration service overrides.</div>
+```sh
+DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
+```
 
+This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example,`*-postgres`, `*-http-client`).
+
+<div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
 It is recommended to remove service overrides progressively, proceeding service by service, in order to ensure that no critical assets (dashboards, monitors, retention filters, etc...) are affected by the change. Follow the [step-by-step process](#a-step-by-step-process-to-remove-service-overrides) to ensure a smooth transition to the new model.
 
 ### Examples 
 
-For example, .NET tagged gRPC calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
+For example:
 
-_ | Without inferred services and with service overrides | With inferred services and without service overrides
---|-------|--------
-Service name | `service:my-service-grpc-client` or `service:grpc-client` | `service:myservice` 
-additional `peer.*` attributes | _No `peer.*` tags set_ | `@peer.service:otherservice` (`otherservice` being the name of the remote service being called with gRPC)
+- .NET tags gRPC calls as `service:<DD_SERVICE>-grpc-client`
+- Python tags gRPC calls as `service:grpc-client`
+
+With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This provides a *global default service name*.
+
+| Scenario | Service Name | Additional `peer.*` Attributes |
+|----------|--------------|--------------------------------|
+| *Without* inferred services and *with* service overrides | `service:my-service-grpc-client` or `service:grpc-client` | No `peer.*` tags set |
+| *With* inferred services and *without* service overrides | `service:myservice` | `@peer.service:otherservice` (where `otherservice` is the name of the remote service being called with gRPC) |
 
 Similarly, for a span representing a call to a mySQL database:
 
-_ | Without inferred services and with service overrides | With inferred services and without service overrides
---|-------|--------
-Service name | `service:my-service-mysql` or `service:mysql` | `service:myservice` 
-additional `peer.*` attributes | _No `peer.*` tags set_ | `@peer.db.name:user-db`, `@peer.db.system:mysql`
+| Scenario | Service Name | Additional `peer.*` Attributes |
+|----------|--------------|--------------------------------|
+| *Without* inferred services and *with* service overrides | `service:my-service-mysql` or `service:mysql` | No `peer.*` tags set |
+| *With* inferred services and *without* service overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
 
 ### A step-by-step process to remove service overrides
 
