@@ -75,7 +75,7 @@ For the Datadog application to function correctly, you must activate IdP initiat
 <div class="alert alert-info">After you activate IdP initiated login, users can log in to Datadog from Okta</div>
 
 To activate IdP initiated login, execute the following steps:
-1. Navigate to the [SAML configuration page][6].
+1. Navigate to the [SAML configuration page][5].
 1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**.
 1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Take note of this company ID, as you need to enter it in Okta to finalize your configuration.
 1. Click **Save Changes**.
@@ -98,7 +98,7 @@ Return to Okta for the next set of configuration steps.
 To log in to Datadog using service provider-initiated login (SP-initiated SSO), you need the single sign-on (SSO) URL. You can find your SSO URL in two ways: on the SAML configuration page, or through email.
 
 ### SAML configuration page
-The Datadog [SAML configuration page][6] displays the SSO URL next to the **Single Sign-on URL** heading.
+The Datadog [SAML configuration page][5] displays the SSO URL next to the **Single Sign-on URL** heading.
 
 ### Email
 1. Navigate to the Datadog website URL for your organization.
@@ -114,8 +114,8 @@ Follow the steps below to map Okta attributes to Datadog entities. This step is 
 
 1. Navigate to the Okta admin dashboard.
 1. Select the **Sign on** tab.
-1. Populate the **Attributes** with your [group attribute statements][7].
-1. Set up your desired [mappings][8] in Datadog.
+1. Populate the **Attributes** with your [group attribute statements][6].
+1. Set up your desired [mappings][7] in Datadog.
 
 ## Further Reading
 
@@ -125,7 +125,6 @@ Follow the steps below to map Okta attributes to Datadog entities. This step is 
 [2]: https://help.okta.com/en/prod/Content/Topics/Reference/glossary.htm
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: https://app.datadoghq.com/organization-settings/login-methods
-[5]: https://app.datadoghq.com/organization-settings/
-[6]: https://app.datadoghq.com/organization-settings/login-methods/saml
-[7]: /account_management/saml/okta/#group-attribute-statements-optional
-[8]: /account_management/saml/mapping/
+[5]: https://app.datadoghq.com/organization-settings/login-methods/saml
+[6]: account_management/faq/okta/#group-attribute-statements-optional
+[7]: /account_management/saml/mapping/
