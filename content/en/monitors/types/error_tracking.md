@@ -140,7 +140,7 @@ If your monitors are generating too much noise, consider the following adjustmen
 - **Expand the evaluation time window**: The default evaluation window is 1 day. If errors occur infrequently (e.g., every other day), the monitor may switch between OK and ALERT states. Expanding the window helps prevent re-triggering and keeps the monitor in the ALERT state.
 - **Increase the alerting theshold**: The default threshold is set to `0`, meaning alerts fire on the first occurrence of a new issue. To reduce noise from one-off or sporadic errors, increase the threshold to alert only after multiple occurrences of an error
 
-### Why should issue age be avoided?
+### Avoid time-based monitors
 `issue.age` and `issue.regression.age` are not added by default because they can cause missed alerts. For instance, if an issue first appears in `env:staging` and then a week later appears in `env:prod` for the first time, the issue would be considered a week old and wouldn't trigger an alert in `env:prod` for the first time. 
 
 As a result, Datadog does not recommend using `issue.age` and `issue.regression.age`. However, If state-based monitor behavior is not suitable for you, these filters can still be used if manually specified.
