@@ -34,7 +34,7 @@ For definitions of the terms above, see the Okta [glossary][2].
 
 ## Setup
 
-The following instructions allow you to set up Okta as the SAML identity provider (IdP) for Datadog. Completing the setup process requires you to alternate between your Okta and Datadog accounts.
+Set up Okta as the SAML identity provider (IdP) for Datadog with the following instructions. The setup process requires you to alternate between your Okta and Datadog accounts.
 
 ### In Okta
 
@@ -62,7 +62,7 @@ Next, download the metadata details to upload to Datadog:
 
 #### Upload metadata details
 
-1. Navigate to [Login Methods][4] under [Organization Settings][5].
+1. Navigate to [Login Methods][4] under Organization Settings.
 1. In the SAML component, click **Configure** or **Update**, depending on whether you have previously configured SAML. The SAML configuration page appears.
 1. Click **Choose File**, and select the metadata file you previously downloaded from Okta.
 
@@ -77,7 +77,7 @@ For the Datadog application to function correctly, you must activate IdP initiat
 To activate IdP initiated login, execute the following steps:
 1. Navigate to the [SAML configuration page][6].
 1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**.
-1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Note this company ID, as you need to enter it in Okta to finalize your configuration.
+1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Take note of this company ID, as you need to enter it in Okta to finalize your configuration.
 1. Click **Save Changes**.
 
 {{< img src="account_management/saml/okta/company_id.png" alt="SAML configuration in Datadog, highlighting the company ID portion of the assertion consumer service URL" style="width:100%;" >}}
