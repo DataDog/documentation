@@ -43,7 +43,7 @@ The following Jenkins versions are supported:
 - Jenkins >= 2.346.1
 
 This integration supports both Agentless and Agent-based installation.
-Installing the Agent is required for infrastructure metrics correlation, and is the recommended way.
+Installing the Agent is required for infrastructure metrics correlation.
 
 ## Install the Datadog Agent
 
@@ -1419,13 +1419,13 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 
 ### Generate diagnostic flare
 
-When reporting an issue to the Datadog support team, please generate a plugin diagnostic flare and provide it along with the issue description.
+When reporting an issue to the Datadog support team, generate a plugin diagnostic flare and provide it along with the issue description.
 
 To generate the flare do the following:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Troubleshooting > Datadog**.
-2. In the Diagnostic Flare form check which information you want to include in the flare (default selection works best, the more information provided the easier it is to diagnose your issue).
-3. Click `Download` to generate and download the flare archive.
+2. In the Diagnostic Flare form, check which information you want to include in the flare. The default selection works best. The more information you provide, the easier it is to diagnose your issue.
+3. Click **Download** to generate and download the flare archive.
 
 ### Enable DEBUG log level for the Datadog Plugin
 
