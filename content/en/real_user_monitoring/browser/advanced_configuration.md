@@ -93,12 +93,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% tab "NPM" %}}
    ```javascript
    datadogRum.startView({
-    name: 'checkout',
-    service: 'purchase',
-    version: '1.2.3',
-    context: {
-      team: 'payment'
-    },
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
 
@@ -107,12 +107,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    ```javascript
    window.DD_RUM.onReady(function() {
       window.DD_RUM.startView({
-        name: 'checkout',
-        service: 'purchase',
-        version: '1.2.3',
-        context: {
-          team: 'payment'
-        },
+            name: 'checkout',
+            service: 'purchase',
+            version: '1.2.3',
+            context: {
+                payment: 'Done'
+            },
       })
    })
    ```
@@ -120,12 +120,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% tab "CDN sync" %}}
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
-    name: 'checkout',
-    service: 'purchase',
-    version: '1.2.3',
-    context: {
-      team: 'payment'
-    },
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
    {{% /tab %}}
@@ -1186,4 +1186,3 @@ However, this feature comes with some **limitations**:
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [20]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-
