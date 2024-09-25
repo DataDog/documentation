@@ -89,7 +89,7 @@ This ensures the `service` attribute always uses the base service name instead o
 
 <div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
 
-It is recommended to remove service overrides progressively, proceeding service by service, to ensure that no critical assets (such as dashboards, monitors, retention filters, and so on) are affected by the change. Follow the [detailed instructions](#a-step-by-step-process-to-remove-service-overrides) to ensure a smooth transition to the new model.
+It is recommended to remove service overrides progressively, proceeding service by service, to ensure that no critical assets (such as dashboards, monitors, retention filters, and so on) are affected by the change. Follow the [detailed instructions](#remove-service-overrides-progressively) to ensure a smooth transition to the new model.
 
 ### Examples 
 
