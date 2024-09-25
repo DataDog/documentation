@@ -242,7 +242,7 @@ The following InnoDB metrics are not available for certain MariaDB versions:
 | `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
 | `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
 
-### MariaDB Explain Plan
+### MariaDB explain plan
 
 MariaDB does not produce the same JSON format as MySQL for explain plans. Certain explain plan fields may be missing from MariaDB explain plans, including `cost_info`, `rows_examined_per_scan`, `rows_produced_per_join`, and `used_columns`.
 
