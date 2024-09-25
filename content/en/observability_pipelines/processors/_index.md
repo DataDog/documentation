@@ -27,6 +27,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="observability_pipelines/processors/add_hostname" >}}Add hostname{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/dedupe" >}}Deduplicate{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/edit_fields" >}}Edit fields{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/enrichment_table" >}}Enrichment table{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/filter" >}}Filter{{< /nextlink >}}

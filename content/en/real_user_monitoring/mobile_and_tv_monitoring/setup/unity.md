@@ -87,7 +87,7 @@ The following parameters are available:
 | Forward Unity Logs | No | Whether to forward logs made from Unity's `Debug.Log` calls to Datadog's default logger. |
 | Remote Log Threshold | Yes | The level at which the default logger forwards logs to Datadog. Logs below this level are not sent. |
 | Enable RUM | No | Whether to enable sending data from Datadog's Real User Monitoring APIs |
-| Enable Automatic Scene Tracking | No | Whether Datadog should automatically track new Views by interceping Unity's `SceneManager` loading. |
+| Enable Automatic Scene Tracking | No | Whether Datadog should automatically track new Views by intercepting Unity's `SceneManager` loading. |
 | RUM Application ID | Yes (if RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
 | Session Sample Rate | Yes | The percentage of sessions to send to Datadog. Between 0 and 100. |
 | Trace Sample Rate | Yes | The percentage of distributed traces to send to Datadog. Between 0 and 100. |

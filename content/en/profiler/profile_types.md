@@ -158,7 +158,7 @@ Wall Time
 
 Allocations (v2.3.0+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
-_Requires:_ [Manual enablement][3]
+_Requires:_ [Manual enablement][2]
 
 Heap Live Objects (alpha, v2.3.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
@@ -169,14 +169,13 @@ Heap Live Size (alpha, v2.3.0+)
 _Requires: Ruby 2.7+_ and [manual enablement][2]
 
 [1]: /profiler/enabling/ruby/#requirements
-[2]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.19.0#:~:text=You%20can%20enable%20these%20features%3A
-[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.21.0
+[2]: /profiler/enabling/ruby/#configuration
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
-CPU (beta, v5.11.0+, v4.35.0+, v3.56.0+)
+CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
 
 Wall Time
