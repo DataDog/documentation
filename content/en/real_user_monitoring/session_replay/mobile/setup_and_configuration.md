@@ -28,17 +28,17 @@ further_reading:
 {{< tabs >}}
 {{% tab "Android" %}}
 
-All Session Replay SDK versions can be found in the [Maven Snapshots Repository][1].
+All Session Replay SDK versions can be found in the [Maven Central Repository][1].
 
 To set up Mobile Session Replay for Android:
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2] with views instrumentation enabled.
 
 2. Declare the Datadog Session Replay as a dependency:
-  {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+  {{< code-block lang="kotlin" filename="build.gradle.kts" disable_copy="false" collapsible="true" >}}
     implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
     implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
-    // in case you need material support
+    // in case you need Material support
     implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
    {{< /code-block >}}
 
@@ -46,15 +46,14 @@ To set up Mobile Session Replay for Android:
 
    {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-    // in case you need material extension support
+    // in case you need Material extension support
     .addExtensionSupport(MaterialExtensionSupport()) 
     .build()
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
-[1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
-[2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
-[3]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin#declare-the-sdk-as-a-dependency
+[1]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-android-session-replay/versions
+[2]: /real_user_monitoring/android/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -83,10 +82,53 @@ To set up Mobile Session Replay for iOS:
    )
    {{< /code-block >}}
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: /real_user_monitoring/ios/?tab=swift
 [2]: https://cocoapods.org/
 [3]: https://www.swift.org/package-manager/
 [4]: https://github.com/Carthage/Carthage
+
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+All Session Replay SDK versions can be found in the [Maven Central Repository][1].
+
+To set up Mobile Session Replay for Kotlin Multiplatform:
+
+1. Make sure you've [setup and initialized the Datadog Kotlin Multiplatform RUM SDK][2] with views instrumentation enabled.
+
+2. Add the `DatadogSessionReplay` iOS library as a link-only dependency. For instructions, see the [guide][3].
+
+2. Declare Datadog Session Replay as a dependency:
+  {{< code-block lang="kotlin" filename="build.gradle.kts" disable_copy="false" collapsible="true" >}}
+    kotlin {
+      sourceSets {
+        commonMain.dependencies {
+          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]")
+          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]")
+        }
+
+        // in case you need Material support on Android
+        androidMain.dependencies {
+          implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+        }
+      }
+    }
+   {{< /code-block >}}
+
+3. Enable Session Replay in your app:
+
+   {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+   // in common source set
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .build()
+   SessionReplay.enable(sessionReplayConfig)
+   {{< /code-block >}}
+
+4. In case you need Material support on Android, call the `SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())` method, available in the Android source set.
+
+[1]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
+[2]: /real_user_monitoring/kotlin-multiplatform/
+[3]: /real_user_monitoring/kotlin-multiplatform/#add-native-dependencies-for-ios
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,7 +150,7 @@ To instrument your consolidated web and native Session Replay views for Android:
 4. Enable Session Replay for your mobile application (see setup instructions above).
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/
-[2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
+[2]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
 [4]: /real_user_monitoring/session_replay/browser/#setup
 
@@ -127,6 +169,18 @@ To instrument your consolidated web and native Session Replay views for iOS:
 [3]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+To instrument your consolidated web and native Session Replay views for Kotlin Multiplatform:
+
+1. Enable [web view tracking][1] for your mobile application.
+2. Enable [Session Replay][2] for your web application.
+3. Enable Session Replay for your mobile application (see setup instructions above).
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
+[2]: /real_user_monitoring/session_replay/browser/#setup
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Additional configuration
@@ -141,8 +195,8 @@ This sample rate is applied in addition to the RUM sample rate. For example, if 
 
 {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
 val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
- ...
-.build()
+  ...
+  .build()
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -152,6 +206,15 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 var sessionReplayConfig = SessionReplay.Configuration(
     replaySampleRate: sampleRate
 )
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  ...
+  .build()
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -182,6 +245,13 @@ If everything is fine, following logs should appear in the Xcode debug console i
 [DATADOG SDK] 🐶 → 10:21:29.812 ⏳ (session-replay) Uploading batch...
 [DATADOG SDK] 🐶 → 10:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]
 
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 {{< /code-block >}}
 
 {{% /tab %}}
