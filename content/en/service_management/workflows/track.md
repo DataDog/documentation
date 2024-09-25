@@ -25,13 +25,15 @@ The Workflows Overview dashboard provides a high-level overview of your Datadog 
 {{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:80%;" >}}
 
 
-## View editors
+## View workflow edits and runs in Audit Trail
 
-To see who edited a workflow, use Audit Trail.
+You can view workflow edits and runs using Audit Trail.
+
+For example, to see who edited a workflow:
 
 1. From your workflow, click the <i class="icon-cog-2"></i> **(gear)** in the upper right corner and click **View audit events**.<br>An Audit Trail search filtered to your workflow opens.
 1. In the left, under the **Core** filters, expand **Action**.
-1. Hover over **Modified** and click **Only** to filter the results to show only workflow edits.
+1. Hover over **Modified** and click **Only** to filter the results to show only workflow edits.<br>The **User ID** column displays the username of the person who performed each edit.
 
 
 ## Notify about runs
