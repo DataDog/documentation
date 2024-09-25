@@ -145,7 +145,7 @@ If your monitors are generating too much noise, consider the following adjustmen
 
 As a result, Datadog does not recommend using `issue.age` and `issue.regression.age`. However, If state-based monitor behavior is not suitable for you, these filters can still be used if manually specified.
 
-**Note**: if you plan to use `issue.age` and `issue.regression.age` in your monitor that this filter key is not consistent across products (for example, `@issue.age` versus `issue.age`).
+**Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be`@issue.age` or `issue.age`.
 
 ## Further Reading
 
