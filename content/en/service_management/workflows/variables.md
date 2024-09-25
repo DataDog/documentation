@@ -12,8 +12,11 @@ further_reading:
 
 ---
 
-You can use different types of variables and parameters in a workflow: context variables, input parameters, output parameters, and custom variables.
-
+The following variables and parameters are available in workflows:
+- [context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
+- [input parameters](#input-parameters): Input parameters are immutable key-value pairs that you can use to pass data into a workflow at runtime.
+- [output parameters](#output-parameters): Output parameters allow you to pass the result of a workflow to another workflow.
+- [custom variables](#custom-variables): Custom variables are mutable. They allow you to declare, update, and access variables throughout your workflow.
 
 ## Context variables
 
@@ -53,7 +56,6 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 {{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
 
-
 ## Input parameters
 
 Input parameters are immutable key-value pairs that you can use to pass data into a workflow. You can use input parameters in workflows that:
@@ -75,7 +77,6 @@ The **Input Parameters** section displays the names of all existing input parame
 You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][5].
 
 If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
-
 
 ## Output parameters
 

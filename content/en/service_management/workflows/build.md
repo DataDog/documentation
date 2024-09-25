@@ -167,4 +167,3 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
-[12]: /service_management/workflows/actions/set_variables
