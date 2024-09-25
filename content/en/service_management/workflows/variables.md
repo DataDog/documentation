@@ -13,10 +13,10 @@ further_reading:
 ---
 
 The following variables and parameters are available in workflows:
-- [context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
-- [input parameters](#input-parameters): Input parameters are immutable key-value pairs that you can use to pass data into a workflow at runtime.
-- [output parameters](#output-parameters): Output parameters allow you to pass the result of a workflow to another workflow.
-- [custom variables](#custom-variables): Custom variables are mutable. They allow you to declare, update, and access variables throughout your workflow.
+- [Context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
+- [Input parameters](#input-parameters): Input parameters are immutable key-value pairs that you can use to pass data into a workflow at runtime.
+- [Output parameters](#output-parameters): Output parameters allow you to pass the result of a workflow to another workflow.
+- [Custom variables](#custom-variables): Custom variables are mutable. They allow you to declare, update, and access variables throughout your workflow.
 
 ## Context variables
 
