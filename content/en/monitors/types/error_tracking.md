@@ -145,7 +145,7 @@ If your monitors are generating too much noise, consider the following adjustmen
 
 Thus, it is no longer recommended to use `issue.age` and `issue.regression.age`. However, If state based monitor behavior is not suitable for you, these filters can still be used if manually specified.
 
-Note: if you plan to use `issue.age` and `issue.regression.age` in your monitor that this filter key is not consistent across products (i.e `@issue.age` vs. `issue.age`)
+**Note**: if you plan to use `issue.age` and `issue.regression.age` in your monitor that this filter key is not consistent across products (for example, `@issue.age` versus `issue.age`).
 
 ## Further Reading
 
