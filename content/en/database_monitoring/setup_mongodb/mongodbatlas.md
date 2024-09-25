@@ -172,7 +172,7 @@ You can use one of these hostnames to configure the Agent.
 
 #### Install the beta version of the Datadog Agent
 
-Database Monitoring for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment. A [Datadog API key][2] is required.
+Database Monitoring for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment. A [Datadog API key][3] is required.
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
@@ -213,7 +213,7 @@ Database Monitoring for MongoDB is available in the beta version of the Datadog 
 
 ### Install the MongoDB Atlas integration
 
-To collect more comprehensive database metrics from MongoDB Atlas, install the [MongoDB Atlas integration][3] (optional).
+To collect more comprehensive database metrics from MongoDB Atlas, install the [MongoDB Atlas integration][2] (optional).
 
 
 ## Data Collected
@@ -221,5 +221,5 @@ To collect more comprehensive database metrics from MongoDB Atlas, install the [
 {{% dbm-mongodb-agent-data-collected %}}
 
 [1]: /database_monitoring/architecture/#cloud-managed-databases
-[2]: /account_management/api-app-keys/
-[3]: /integrations/mongodb_atlas/
+[2]: /integrations/mongodb_atlas/
+[3]: /account_management/api-app-keys/
