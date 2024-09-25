@@ -143,7 +143,7 @@ If your monitors are generating too much noise, consider the following adjustmen
 ### Why should issue age be avoided?
 `issue.age` and `issue.regression.age` are not added by default because they can cause missed alerts. For instance, if an issue first appears in `env:staging` and then a week later appears in `env:prod` for the first time, the issue would be considered a week old and wouldn't trigger an alert in `env:prod` for the first time. 
 
-Thus, it is no longer recommended to use `issue.age` and `issue.regression.age`. However, If state based monitor behavior is not suitable for you, these filters can still be used if manually specified.
+As a result, Datadog does not recommend using `issue.age` and `issue.regression.age`. However, If state-based monitor behavior is not suitable for you, these filters can still be used if manually specified.
 
 **Note**: if you plan to use `issue.age` and `issue.regression.age` in your monitor that this filter key is not consistent across products (for example, `@issue.age` versus `issue.age`).
 
