@@ -455,7 +455,7 @@ def similarity_search():
 
 ### Annotating auto-instrumented spans
 
-The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify auto-instrumented spans started while the annotation context is active.
+The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
 
 #### Arguments
 
@@ -463,7 +463,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `name` 
 : optional - _str_
-<br />Set to override the span name for any auto-instrumented spans started within the annotation context.
+<br />Overrides the span name for any auto-instrumented spans started within the annotation context.
 
 `prompt` 
 : optional - _dictionary_ 
@@ -471,7 +471,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span (example: `session`, `env`, `system`, `version`, and so on). For more information about tags, see [Getting Started with Tags][9].
 
 #### Example
 
@@ -479,7 +479,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(model="model_name", model_provider="model_provider")
+@workflow
 def rag_workflow(user_question):
     context_str = retrieve_documents(user_question).join(" ")
 
