@@ -42,19 +42,29 @@ The following Jenkins versions are supported:
 
 - Jenkins >= 2.346.1
 
-This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent) installation. For infrastructure metric correlation, installing with the Agent-based mode is recommended.
+This integration supports both Agentless and Agent-based installation.
+Installing the Agent is required for infrastructure metrics correlation, and is the recommended way.
 
 ## Install the Datadog Agent
 
-The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin.
+Skip this step if you do not need infrastructure metrics correlation.
 
-If you want to report the logs of your Jenkins jobs to Datadog, make sure that custom log collection over TCP is [enabled and configured][29] in the Agent.
+Install Datadog Agent on your Jenkins controller node and on your worker nodes by following the [Agent installation instructions][14].
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
+If you want to report the logs of your Jenkins jobs to Datadog, make sure that custom log collection over TCP is [enabled and configured][29] in the Agent.
+
+If your Agent runs in a container, add the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true` environment variable to it and make sure the following ports are accessible by the Jenkins controller:
+- [DogStadsD][30] port, defaults to `8125/udp`
+- [APM traces port][31], defaults to `8126/tcp`
+- [log collection port][29], defaults to `10518/tcp`
+
 <div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
 
-## Install the Datadog Jenkins plugin (agentless)
+## Install the Datadog Jenkins plugin
+
+<div class="alert alert-info">Whether you choose to use Agentless mode or the Agent-based mode to report your data to Datadog, you are <strong>required</strong> to use the plugin.</div>
 
 Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or later:
 
@@ -1407,6 +1417,16 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 
 ## Troubleshooting
 
+### Generate diagnostic flare
+
+When reporting an issue to the Datadog support team, please generate a plugin diagnostic flare and provide it along with the issue description.
+
+To generate the flare do the following:
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Troubleshooting > Datadog**.
+2. In the Diagnostic Flare form check which information you want to include in the flare (default selection works best, the more information provided the easier it is to diagnose your issue).
+3. Click `Download` to generate and download the flare archive.
+
 ### Enable DEBUG log level for the Datadog Plugin
 
 If you have any issues with the Datadog Plugin, you can set the logs for the plugin in `DEBUG` level. Using this level you are able to see stacktrace details if an exception is thrown.
@@ -1475,14 +1495,6 @@ If the CI Visibility option does not appear in the Datadog Plugin section, make 
 3. Check that the installed version is correct.
 4. Restart your Jenkins instance using the `/safeRestart` URL path.
 
-### The Plugin's Tracer fails to initialize due to APM Java Tracer is being used to instrument Jenkins.
-
-If this error message appears in the **Jenkins Log**, make sure that you are using the Jenkins plugin v3.1.0+
-
-{{< code-block lang="text" >}}
-Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
-{{< /code-block >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1513,3 +1525,5 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [27]: /logs/guide/best-practices-for-log-management/
 [28]: /continuous_integration/search/#search-for-pipelines
 [29]: /agent/logs/?tab=tcpudp#custom-log-collection
+[30]: /developers/dogstatsd/
+[31]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
