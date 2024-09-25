@@ -1,5 +1,5 @@
 import { getQueryParameterByName } from '../helpers/browser';
-import { getCookieByName, chromeHashFix } from '../helpers/helpers';
+import { getCookieByName } from '../helpers/helpers';
 import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
@@ -105,13 +105,11 @@ const initCodeTabs = () => {
                 }
             }else{
                 activateCodeTab(firstTab)
-                chromeHashFix();
             }
         } else {
             if (codeTabsList.length > 0) {
                 activateCodeTab(firstTab)
             }
-            chromeHashFix();
         }
     }
 
