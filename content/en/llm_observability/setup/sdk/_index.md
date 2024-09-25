@@ -453,11 +453,11 @@ def similarity_search():
 
 {{< /code-block >}}
 
-## Modifying auto-instrumented spans
+### Annotating auto-instrumented spans
 
 The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify auto-instrumented spans started while the annotation context is active.
 
-### Arguments
+#### Arguments
 
 The `LLMObs.annotation_context()` method accepts the following arguments:
 
@@ -473,7 +473,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
 
-### Example
+#### Example
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
