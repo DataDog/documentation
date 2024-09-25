@@ -898,7 +898,7 @@ window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
 
 ### Replace View Context
 
-Replace the context of your RUM view events and corresponding children events with `setViewContext(context: object)` API.
+Replace the context of your RUM view events and corresponding children events with `setViewContext(context: Context)` API.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
