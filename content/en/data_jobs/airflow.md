@@ -42,7 +42,8 @@ OPENLINEAGE_URL=https://data-obs-intake.{{< region-param key="dd_site" code="tru
 OPENLINEAGE_ENDPOINT=api/v1/lineage
 OPENLINEAGE_API_KEY=<YOUR DATADOG API KEY>
 ```
-See [Astronomer official guide][5] for managing environment variables for a Deployment.
+
+See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][14] for other supported configurations of `openlineage` provider.
 
 3. Trigger a update to your Deployment and wait for it to finish.
 
@@ -75,7 +76,9 @@ OPENLINEAGE_ENDPOINT=api/v1/lineage
 OPENLINEAGE_API_KEY=<YOUR DATADOG API KEY>
 ```
 
-3. Trigger a redploy of your Airflow pods.
+Check official documentation [configuration-openlineage][14] for other supported configurations of `openlineage` provider.
+
+3. Trigger a update to your Airflow pods and wait for them to finish.
 
 **Important:**
 * install and configure `openlineage` provider for both Airflow schedulers and Airflow workers.
@@ -108,6 +111,8 @@ export OPENLINEAGE_URL=https://data-obs-intake.{{< region-param key="dd_site" co
 export OPENLINEAGE_ENDPOINT=api/v1/lineage
 export OPENLINEAGE_API_KEY=<YOUR DATADOG API KEY>
 ```
+
+check official documentation [configuration-openlineage][14] for other supported configurations of `openlineage` provider.
 
 3. Deploy your updated `requirements.txt` and [Amazon MWAA start script][8] to your Amazon S3 folder you configured for your Amazon MWAA Environment.
 
@@ -162,3 +167,4 @@ See [Lineage job & run macros][12] for definition of referenced macros.
 [11]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#lazy-load-plugins
 [12]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/macros.html#lineage-job-run-macros
 [13]: https://www.astronomer.io/docs/astro/cli/develop-project
+[14]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
