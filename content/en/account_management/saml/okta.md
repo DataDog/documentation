@@ -21,7 +21,7 @@ Before proceeding, make sure that you are using the latest version of the Datado
 
 {{< img src="account_management/saml/okta/sso_base_url.png" alt="Datadog application configuration in Okta, highlighting the SSO base URL" style="width:80%;" >}}
 
-If you can see the SSO Base URL, you are using the latest version and should follow the instructions on this page. If you don't see the SSO Base URL, configure Okta using the [legacy instructions][1].
+If you don't see the SSO Base URL field, configure Okta using the [legacy instructions][1].
 
 ## Supported features
 
