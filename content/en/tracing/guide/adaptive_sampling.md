@@ -15,7 +15,7 @@ further_reading:
   text: "Resource-based sampling"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
+{{< callout url="<https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/>" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
 Adaptive sampling is in Preview. To request access, complete the form.
 {{< /callout >}}
 
@@ -25,8 +25,7 @@ Datadog Adaptive Sampling helps you capture more relevant traces while remaining
 
 Adaptive Sampling uses granular configuration of existing [sampling rules][7] to adjust rates based on resource, service, and environment. Using [remote configuration][3], Datadog dynamically manages these rates to match your specified monthly budget and ensure visibility for low-traffic services and endpoints.
 
-To enroll new services to adaptive sampling and manage ingested volumes from the [Datadog Ingestion control page][1], follow the instructions listed below.
-
+To enroll new services to adaptive sampling and manage ingested volumes from the [Datadog Ingestion Control page][1], follow the instructions listed below.
 
 ## Requirements
 
@@ -34,9 +33,9 @@ To enroll new services to adaptive sampling and manage ingested volumes from the
 - [Remote Configuration][3]  enabled for your Agent.
 - `APM Remote Configuration Write` [permissions][4]. If you don’t have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
-### Tracing library version
+### Tracing library versions
 
-The following table lists minimum tracing library version required for Adaptive Sampling:
+The following table lists minimum tracing library versions required for Adaptive Sampling:
 
 | Language    | Minimum version required |
 |-------------|--------------------------|
@@ -53,34 +52,35 @@ The following table lists minimum tracing library version required for Adaptive 
 
 To see configured sampling rates:
 
-1. Navigate to the Ingestion controls [Service Ingestion summary][1].
-2. View the table listing applied sampling rates by resource of the service.
+1. Navigate to the Ingestion Controls [Service Ingestion Summary][1].
+2. View the table listing the applied sampling rates by resource of the service.
 
 {{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 The table includes:
-- `Ingested bytes`: Ingested bytes from spans of the service and resource.
-- `Downstream bytes`: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
-- `Configuration`: Source of the resource sampling rate:
-  - `Automatic`: [Default head-based sampling mechanism][8] from the Agent.
-  - `Local Configured`: [Sampling rule][7] set locally in the tracing library.
-  - `Remote Configured`: Remote sampling rule set from the Datadog UI.
-  - `Adaptive`: Sampling rules set remotely by Datadog.
+
+- `INGESTED BYTES`: Ingested bytes from spans of the service and resource.
+- `DOWNSTREAM BYTES`: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
+- `CONFIGURATION`: Source of the resource sampling rate:
+  - `AUTOMATIC`: [Default head-based sampling mechanism][8] from the Agent.
+  - `LOCAL` `CONFIGURED`: [Sampling rule][7] set locally in the tracing library.
+  - `REMOTE` `CONFIGURED`: Remote sampling rule set from the Datadog UI.
+  - `ADAPTIVE`: Sampling rules set remotely by Datadog, adaptively adjusting to your services' traffic conditions.
 
 ## Configure adaptive sampling for the service
 
 To configure adaptive sampling for the service:
+
 1. Navigate to the [Datadog Ingestion Control page][16].
-1. Configure a **Monthly Ingestion Target** for adaptive sampling.
+1. Configure a **Monthly Ingestion Target** for adaptive sampling. This target bytes applies only to the services using adaptive sampling. Other services are not affected.
 1. Navigate to the [Service Ingestion Summary page][1] for your service.
 1. Click **Manage Ingestion Rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
 1. Set your service's sampling strategy to **Datadog Adaptive Sampling Rates** and click **Apply** to save the configuration.
 1. (Optional) Set **Sampling Rates for some Resources** in addition to  **Datadog Adaptive Sampling Rates** for additional control of your ingestion.
 
-The configuration should take effect in 5-6 minutes. You can observe the configuration changes from the [Live Search Explorer][9].
+The configuration should take effect in less than 5 minutes. You can observe the configuration changes from the [Live Search Explorer][9].
 
-From the **Datadog Ingestion Control page** services that use adaptive sampling should show as `Adaptive` `Remote` in the **Configuration** column.
-
+From the **Datadog Ingestion Control page** services that use adaptive sampling should show as `ADAPTIVE` `REMOTE` in the **Configuration** column.
 
 ## Further reading
 
@@ -100,5 +100,3 @@ From the **Datadog Ingestion Control page** services that use adaptive sampling 
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.54.0
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2
-[15]: /tracing/guide/resource_based_sampling/
-[16]: /tracing/trace_pipeline/ingestion_controls
