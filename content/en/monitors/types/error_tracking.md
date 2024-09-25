@@ -73,7 +73,7 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 
 {{% tab "New Issue" %}}
 
-New monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, regression are automatically monitored with New Issue monitors. 
+New monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, they are automatically monitored with New Issue monitors. 
 
 
 1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
