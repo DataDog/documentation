@@ -20,6 +20,8 @@ cascade:
 
 Mobile App Testing for restricted networks enables you to monitor mobile tests conducted on networks that are not publicly accessible.
 
+{{< img src="/mobile_app_testing/mobile_app_restricted_networks.png" alt="Diagram showing testing of mobile apps behind a firewall or restricted networks" style="width:100%;">}}
+
 Add the following IP address ranges to your Agent [network allow list][1] to allow traffic from Mobile app tests to access restricted networks, such as staging environments, development environments, and other non-public apps or apps that requiring VPN access.
 
 
