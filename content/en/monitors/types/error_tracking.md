@@ -141,7 +141,7 @@ If your monitors are generating too much noise, consider the following adjustmen
 - **Increase the alerting theshold**: The default threshold is set to `0`, meaning alerts fire on the first occurrence of a new issue. To reduce noise from one-off or sporadic errors, increase the threshold to alert only after multiple occurrences of an error
 
 ### Why should issue age be avoided?
-`issue.age` and `issue.regression.age` are no longer added by default because they can cause missed alerts. For instance, if an issue first appears in `env:staging` and then a week later appears in `env:prod` for the first time, the issue would be considered a week old and wouldn't trigger an alert in `env:prod` for the first time. 
+`issue.age` and `issue.regression.age` are not added by default because they can cause missed alerts. For instance, if an issue first appears in `env:staging` and then a week later appears in `env:prod` for the first time, the issue would be considered a week old and wouldn't trigger an alert in `env:prod` for the first time. 
 
 Thus, it is no longer recommended to use `issue.age` and `issue.regression.age`. However, If state based monitor behavior is not suitable for you, these filters can still be used if manually specified.
 
