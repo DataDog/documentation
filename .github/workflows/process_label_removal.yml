@@ -1,0 +1,24 @@
+name: Process label removal
+on: 
+  pull_request:
+    types:
+      - unlabeled
+
+jobs:
+  notify-docs-if-approved:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'Do Not Merge'
+    name: Process removal of 'Do Not Merge' label
+    steps:
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.DOCS_GH_APP_ID }}
+          private-key: ${{ secrets.DOCS_GH_APP_PRIVATE_KEY }}
+      - name: Notify Slack if PR is already approved
+        uses: DataDog/github-actions/external-actor-on-team-approved-pr@v2.2.0
+        with: 
+          github-token: ${{ steps.generate-token.outputs.token }}
+          slack-webhook-url: ${{ secrets.MERGE_READINESS_SLACK_WEBHOOK_URL }}
+          team-slug: "documentation"
