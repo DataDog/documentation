@@ -8,7 +8,7 @@ Add the configuration details for the MongoDB check from the previous step in th
 
 ```shell
 export DD_API_KEY=<DD_API_KEY>
-export DD_AGENT_VERSION=7.57.0-dbm-mongo-1.5
+export DD_AGENT_VERSION=7.58.0-dbm-mongo-1.6
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \

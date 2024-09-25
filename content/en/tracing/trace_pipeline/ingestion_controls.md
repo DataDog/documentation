@@ -19,10 +19,13 @@ further_reading:
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
 
-Ingestion controls affect what traces are sent by your applications to Datadog. [APM metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
+Ingestion controls affect what traces are sent by your applications to Datadog. [APM Metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
 
 The Ingestion Control page provides visibility at the Agent and tracing libraries level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:
-- Gain visibility on your service-level ingestion configuration and adjust trace sampling rates for high throughput services.
+
+- Gain visibility on your service-level ingestion configuration.
+- Adjust trace sampling rates for high throughput services or endpoints to better manage ingestion budget.
+- Adjust trace sampling rates for low throughput, rare traffic services or endpoints to increase visibility.
 - Understand which ingestion mechanisms are responsible for sampling most of your traces.
 - Investigate and act on potential ingestion configuration issues, such as limited CPU or RAM resources for the Agent.
 
@@ -34,7 +37,7 @@ All metrics used in the page are based on live traffic data of the **past 1 hour
 
 Get an overview of the total ingested data over the past hour, and an estimation of your monthly usage against your monthly allocation, calculated with the active APM infrastructure (hosts, Fargate tasks, and serverless functions).
 
-If the monthly usage is under `100%`, the projected ingested data fits in your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
+If the monthly usage is under `100%`, the projected ingested data fits within your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
 
 ## Managing ingestion for all services at the Agent level
 
@@ -43,9 +46,10 @@ Click **Remotely Configure Agent Ingestion** to manage ingestion sampling for yo
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
 
 Three ingestion sampling mechanisms are controllable from the Datadog Agent:
+
 - **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied for your services, targeting **10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_MAX_TPS` locally at the Agent level.
--  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces **up to 10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_ERROR_TPS` locally at the Agent level.
--  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces **up to 5 traces per second per Agent**. This setting is disabled by default. Enable the collection of rare traces in Datadog, or set `DD_APM_ENABLE_RARE_SAMPLER` locally at the Agent level.
+- **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces **up to 10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_ERROR_TPS` locally at the Agent level.
+- **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces **up to 5 traces per second per Agent**. This setting is disabled by default. Enable the collection of rare traces in Datadog, or set `DD_APM_ENABLE_RARE_SAMPLER` locally at the Agent level.
 
 With remote configuration, you don't have to restart the Agent to update these parameters. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
 
@@ -70,7 +74,7 @@ Ingested Bytes/s
 : Average number of bytes per second ingested into Datadog for the service over the past one hour.
 
 Downstream Bytes/s
-: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism.
+: Average number of bytes per second ingested for which the service _makes the sampling decision_. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism. This column's data is based on the `sampling_service` dimension, set on the `datadog.estimated_usage.apm.ingested_bytes` metrics. For more information, read [APM usage metrics][15].
 
 Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
@@ -128,7 +132,9 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 
 ### Configure the service ingestion rate
 
-<div class="alert alert-info"><strong>Remotely configured sampling rules are in Beta</strong>. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a> to be able to dynamically set this configuration from the Datadog UI without having to redeploy your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling">Resource-based sampling guide</a> to get started.</div>
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" btn_hidden="false" header="Remote sampling rules and Adaptive sampling are in Preview!" >}}
+<b>Remote sampling rules</b> let you dynamically configure sampling rules from the Datadog UI, without redeploying your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling/">resource-based sampling guide</a> to get started. <b>Adaptive sampling rates</b> let Datadog control sampling rates on your behalf to match a configured monthly ingested volume budget. Follow the instructions in the <a href="/tracing/guide/adaptive_sampling">Adaptive sampling guide</a> to get started. To request access to both features, complete the following form.
+{{< /callout >}}
 
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 
@@ -141,7 +147,6 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 3. Choose the desired ingestion percentage.
 4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. **Note**: The service name value is case sensitive. It should match the case of your service name.
 5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
-
 
 ## Further Reading
 
@@ -161,3 +166,4 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [14]: /agent/remote_config/#enabling-remote-configuration
+[15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service

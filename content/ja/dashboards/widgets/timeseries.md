@@ -33,7 +33,7 @@ widget_type: Timeseries
    * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][4]を参照してください。
    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][5]を参照してください。
 
-2. Customize your graph with the available [options](#display-options).
+2. [オプション](#display-options)を使用して、グラフをカスタマイズします。
 
 ## 表示オプション
 

@@ -13,6 +13,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: "Blog"
   text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview
