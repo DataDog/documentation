@@ -7,6 +7,7 @@
 {{ $displayText := $text }}
 {{ $tooltipContent := $tooltip }}
 {{ $fullDefinitionLink := "" }}
+{{ $glossaryMatch := "true" }}
 
 <!-- Handle glossary terms if provided -->
 {{ if $glossary }}
@@ -27,10 +28,15 @@
       {{ $tooltipContent = $content | replaceRE `\n\[\d+\]:\s+.*` "" | replaceRE `\[([^\]]+)\]\[\d+\]` "$1" | safeHTML }}
     {{ end }}
   {{ else }}
+    {{ $glossaryMatch := "false" }}
+    {{ $displayText = $glossary }}
     {{ warnf "Glossary term '%s' not found" $glossary }}
-    {{ $tooltipContent = printf "Glossary term '%s' not found" $glossary }}
   {{ end }}
 {{ end }}
 
+{{ if $glossaryMatch = "true" }}
 <!-- Render the tooltip -->
 <span class="tooltip-container" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false"><button class="tooltip-trigger">{{ $displayText }}</button><span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" x-bind:class="{ 'show': open }" role="tooltip">{{ $tooltipContent }}{{ if $fullDefinitionLink }}<a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{ end }}<svg class="tooltip-arrow" width="14" height="7" viewBox="0 0 14 7"><path d="M7 7L0 0h14z" fill="currentColor"></path></svg></span></span>
+{{ else }}
+  {{ $displayText }}
+{{ end }}

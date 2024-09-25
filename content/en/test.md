@@ -20,6 +20,10 @@ By default, the {{< tooltip glossary="Agent" >}} is installed in a sandbox locat
 
 1. Define the retention query by adding any span tag. Choose to retain all spans with the defined tags, only service entry spans (selected by default), or only a {{< tooltip glossary="trace root span" >}}.
 
+**Glossary shortcode (short)**
+
+1. Define the retention query by adding any span tag. Choose to retain all spans with the defined tags, only service entry spans (selected by default), or only a {{< tooltip glossary="not here" >}}.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
