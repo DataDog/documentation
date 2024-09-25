@@ -132,10 +132,8 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 
 ### Configure the service ingestion rate
 
-<div class="alert alert-info"><strong>Adaptive sampling rates are in Preview</strong>. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a> to have Datadog adapt to your traffic to keep you under your configured monthly ingestion target. Follow the instructions in the <a href="/tracing/guide/adaptive_sampling">Adaptive sampling guide</a> to get started.</div>
-
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" btn_hidden="false" header="Remotely configured sampling rules are in Preview!" >}}
-This feature lets you dynamically set sampling rule configuration from the Datadog UI, without redeploying your service. Follow the instructions in <a href="/tracing/guide/resource_based_sampling/">Resource-based sampling</a> to get started. To request access, complete the form.
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" btn_hidden="false" header="Remote sampling rules and Adaptive sampling are in Preview!" >}}
+<b>Remote sampling rules</b> let you dynamically configure sampling rules from the Datadog UI, without redeploying your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling/">resource-based sampling guide</a> to get started. <b>Adaptive sampling rates</b> let Datadog control sampling rates on your behalf to match a configured monthly ingested volume budget. Follow the instructions in the <a href="/tracing/guide/adaptive_sampling">Adaptive sampling guide</a> to get started. To request access to both features, complete the following form.
 {{< /callout >}}
 
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
