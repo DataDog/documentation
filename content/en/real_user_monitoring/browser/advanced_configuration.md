@@ -841,9 +841,9 @@ acceptCookieBannerButton.addEventListener('click', () => {
 {{% /tab %}}
 {{< /tabs >}}
 
-## View Context
+## View context
 
-Starting with version 5.28.0, the contexts of view events are modifiable. The added context will scope to the current view only and populate its children events (such as `action`, `error` and `timing`) with `startView`, `setViewContext` and `setViewContextProperty`.
+Starting with version 5.28.0, the contexts of view events are modifiable. The context adds to the current view only and populate its children events (such as `action`, `error` and `timing`) with `startView`, `setViewContext` and `setViewContextProperty`.
 
 ### Start view with context
 
@@ -896,7 +896,7 @@ window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
 {{< /tabs >}}
 
 
-### Replace View Context
+### Replace view context
 
 Replace the context of your RUM view events and corresponding children events with `setViewContext(context: Context)` API.
 
@@ -1186,3 +1186,4 @@ However, this feature comes with some **limitations**:
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [20]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+
