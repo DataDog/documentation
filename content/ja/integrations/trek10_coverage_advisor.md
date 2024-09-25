@@ -18,8 +18,8 @@ assets:
     source_type_id: 10114
     source_type_name: Trek10 AWS Coverage Advisor
   monitors:
-    Trek10 AWS Coverage Advisor - New Unmonited Metric Available: assets/monitors/monitor_new.json
-    Trek10 AWS Coverage Advisor - New Unmonitored Metric Discovered: assets/monitors/monitor_existing.json
+    New unmonitored metric available: assets/monitors/monitor_new.json
+    New unmonitored metric discovered: assets/monitors/monitor_existing.json
 author:
   homepage: https://www.trek10.com
   name: Trek10
@@ -29,7 +29,7 @@ author:
 categories:
 - マーケットプレイス
 - AWS
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -109,7 +109,7 @@ Coverage Advisor は Datadog アカウントの重要な AWS CloudWatch メト�
 このインテグレーションでは、アカウントで保有する AWS メトリクスのうち、対応するモニターがないものをすばやく確認することができます。毎週ダッシュボードにチェックインしてレポートを生成したり、モニターをセットアップして毎日アラートを送信したりと、使いやすい方法で運用することができます。
 
 ### ベンダー情報
-* Trek10
+* Trek10 
 * 会社紹介: Trek10 はテクノロジーとシステム構築を心から愛するメンバーの集まりです。AWS と Datadog を長年活用してきた経験から、これまで多くの企業の専門サービスの導入やトレーニングを支援してきました。社内では主に、AWS 向け管理型サービスのツールとして Datadog を使用しています。クライアントのアカウントにモニターを追加する必要がある場合に通知を送信する内部ツールを、お客様が使いやすいよう変更して提供しています。
 * ウェブサイト: trek10.com
 

@@ -156,7 +156,7 @@ The values on the left side represent the time spent in that method call during 
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-- **CPU** shows the time taken executing CPU tasks. Only shown for profiles collected with the Node.js experimental CPU profiler.
+- **CPU** shows the time taken executing CPU tasks.
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}

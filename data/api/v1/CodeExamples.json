@@ -293,6 +293,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_794302680",
+      "description": "Create a new dashboard with query_table widget and text formatting"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2349863258",
       "description": "Create a new dashboard with query_value widget"
     },
