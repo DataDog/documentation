@@ -49,7 +49,7 @@ There are two types of alerting conditions you can configure your Error Tracking
 High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
 
 1. Select **RUM**, **APM**, or **Logs** and build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose what metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
+2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
     - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
     - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
