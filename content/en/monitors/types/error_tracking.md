@@ -132,12 +132,12 @@ Error Tracking monitors use [Issue States][2] to ensure that your alerts stay fo
 
 ## Troubleshooting
 
-### Not seeing time-based alerts
+### New Issue monitors do not take into account issue age
 `issue.age` and `issue.regression.age` are not added by default because they can cause missed alerts. For instance, if an issue first appears in `env:staging` and then a week later appears in `env:prod` for the first time, the issue would be considered a week old and wouldn't trigger an alert in `env:prod` for the first time.
 
 As a result, Datadog does not recommend using `issue.age` and `issue.regression.age`. However, If state-based monitor behavior is not suitable for you, these filters can still be used if manually specified.
 
-**Note**: if you plan to use `issue.age` and `issue.regression.age` in your monitor that this filter key is not consistent across products (for example, `@issue.age` versus `issue.age`).
+**Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be`@issue.age` or `issue.age`.
 
 ### New Issue monitors are generating too much noise
 New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
@@ -146,14 +146,6 @@ If your monitors are generating too much noise, consider the following adjustmen
 - **Triage your alerts**: Set issues to **Reviewed**, **Ignored**, or **Resolved** when appropriate
 - **Expand the evaluation time window**: The default evaluation window is 1 day. If errors occur infrequently (for example, every other day), the monitor may switch between OK and ALERT states. Expanding the window helps prevent re-triggering and keeps the monitor in the ALERT state.
 - **Increase the alerting threshold**: The default threshold is set to `0`, meaning alerts fire on the first occurrence of a new issue. To reduce noise from one-off or sporadic errors, increase the threshold to alert only after multiple occurrences of an error
-
-
-
-- **Increase the alerting threshold**: The default threshold is set to `0`, meaning alerts fire on the first occurrence of a new issue. To reduce noise from one-off or sporadic errors, increase the threshold to alert only after multiple occurrences of an error
-
-
-
-**Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be`@issue.age` or `issue.age`.
 
 ## Further Reading
 
