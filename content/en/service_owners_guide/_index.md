@@ -15,6 +15,10 @@ If you've been tasked with designing, implementing, and managing an enterprise-g
 
 Once you've followed this guide to implement Datadog to scale with your organization, you can start managing your product efficiently without worrying about hardware refreshes, OS patches, server updates, or cluster re-balance details. Instead, you can focus on the refinements, analytics, and the data that comes with a well-formed observability system.  
 
+## Why to use this guide
+
+Like any large system, Datadog is built on a foundational design concept that has been developed and proven as a world leader in observability solutions. This guide will explain that underlying concept in terms of administrative activities and provide specific, actionable steps to avoid the most common pitfalls, such as a fragmented data model, unstructured user grouping, ungoverned consumption, and unrealized value.
+
 ## How to use this guide
 
 This guide is organized into three sections that provide important concepts, plans, tasks, and structures to create and streamline your Datadog ownership experience:

@@ -153,6 +153,26 @@ Datadog has a full synthetic application suite, including testing for browser, m
 - Use Synthetics in conjunction with APM and RUM .  
 - Define the use cases for Synthetics vs [HTTP Checks][25].  
 
+## Optimizing data collection 
+
+Datadog can collect and observe many things in your environments, however, it is important to limit the amount of collection points and establish guard rails. In this section we will discuss the mechanisms that control the telemetry collection, and discuss how these can be codified into local standards.
+
+### Infrastructure
+
+Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (K8s, rancher, docker), and public cloud providers(AWS, Azure, GCP).  Datadog's unique ability allows the platform to [autodiscover][38] new objects (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) that are created within those environments. It is important to limit the number of monitored objects, as they have billing implications to consider.
+
+The usage of Datadog within these auto-discovered environment types is critical to understand. These include linkages for excluding billable objects for [AWS][39], GCP, [Azure][40], HyperV, PCF, and vSphere.
+
+**Recommendations:**    
+For each virtualization framework, define the exclusion methodology. Enumerate specific tags, labels, namespaces, and annotations that will be used for collection control.
+
+### Service levels
+
+During the planning phase, it is common to realize that not every instance of observability is as important as others. Some footprints are mission critical, while others are not. For this reason, it is useful to devise patterns for coverage levels, and which environments you want to monitor with Datadog. For example, a production environment might be monitored at every level, but a development instance of the same application might only have the developer-focused tooling.
+
+**Recommendations:**  
+Establish estimates of service levels early on. They do not need to be precise at first, but will be useful as adoption scales up.
+
 ## Additional resources
 
 We've highlighted some important wins and best practices with APM, RUM, Synthetic Monitoring, Logs, and Dashboards to help you achieve success in getting started with those products and components. Some additional resources that are important when planning your implementation phase are outlined below.
@@ -205,32 +225,12 @@ Use Datadog's [Remote Configuration][35] (enabled by default), to remotely confi
 
 Use Datadog [Notebooks][37] to share with team members to aid in troubleshooting investigations or incidents.
 
-## Optimizing data collection 
-
-Datadog can collect and observe many things in your environments, however, it is important to limit the amount of collection points and establish guard rails. In this section we will discuss the mechanisms that control the telemetry collection, and discuss how these can be codified into local standards.
-
-### Infrastructure
-
-Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (K8s, rancher, docker), and public cloud providers(AWS, Azure, GCP).  Datadog's unique ability allows the platform to [autodiscover][38] new objects (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) that are created within those environments. There are reasons to control this collection as many of these objects have billing implications to be aware of.
-
-The usage of Datadog within these auto-discovered environment types is critical to understand. These include linkages for excluding billable objects for [AWS][39], GCP, [Azure][40], HyperV, PCF, and vSphere.
-
-**Recommendations:**    
-For each virtualization framework, define the exclusion methodology. Enumerate specific tags, labels, namespaces, and annotations that will be used for collection control.
-
-### Service levels
-
-During the planning phase, it is common to realize that not every instance of observability is as important as others. Some footprints are mission critical, while others are not. For this reason, it is useful to devise patterns for coverage levels, and which environments you want to monitor with Datadog. For example, a production environment might be monitored at every level, but a development instance of the same application might only have the developer-focused tooling.
-
-**Recommendations:**  
-\- Establish estimates of service levels early on. They do not need to be precise at first, but will be useful as adoption scales up.
-
-### Deployment patterns 
+## Deployment patterns 
 
 At this stage, we have developed two distinct bodies of knowledge. The first, is an understanding of our IT landscape from the observability lens. We understand the types of components it consists of and have a general idea of the observability data we need to extract from it. The second, is a decent understanding of Datadog capabilities and prerequisites.    
 Now it's time to put it all together. In a typical 3-tier, web-scale application, Datadog has about five main capabilities (metrics, logs, traces, synthetics, RUM, and DBM), and many optional sub-components and customizations. They are all managed from as few points as possible, but the most efficient deployment of Datadog requires some degree of pattern creation.
 
-#### Software Development Lifecycle
+### Software Development Lifecycle
 
 To begin mapping out your deployment patterns, use the technology survey, combine it with the [Datadog 101][7] training, and begin to develop a plan of action. Below is an example intended to be modified to suit your individual needs. It outlines the deployment pattern from the dimension of SDLC environment (dev,qa,stage,prod), but should be customized to the local standards and conditions. Begin setting expectations within your own Datadog user base what the term "Standard Datadog Deployment" actually means. 
 
