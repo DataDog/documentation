@@ -159,7 +159,7 @@ var sessionReplayConfig = SessionReplay.Configuration(
 
 ### Start the recording manually
 
-By default, Session Replay will start recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`.
+By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`.
 
 {{< tabs >}}
 {{% tab "Android" %}}

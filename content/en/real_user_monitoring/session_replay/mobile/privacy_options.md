@@ -31,7 +31,7 @@ By enabling Mobile Session Replay, you can automatically mask sensitive elements
 ## Configuring masking modes
 
 ## Fine-Grained Masking
-Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained — you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs. 
+Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs. 
 
 ### Text and input masking
 
@@ -166,7 +166,9 @@ To manage content masking while still showing system images, users can choose th
 
 On iOS, users can select the `mask_non_bundled_only` setting, which replaces any image that is not part of the system with a "Content Image" placeholder.
 
-On Android, users can select the `mask_large_only`  setting, which replaces images whose dimensions exceed 100x100dp with a "Content Image" placeholder. Note that these dimensions refer to the drawable resource, not the view's size.
+On Android, users can select the `mask_large_only` setting, which replaces images with dimensions that exceed 100x100dp with a "Content Image" placeholder. 
+
+**Note**: that these dimensions refer to the drawable resource, not the view's size.
 
 {{< tabs >}}
 
@@ -237,7 +239,7 @@ With the `mask_none` setting enabled, all images are shown in the replay.
 By default, the `hide` setting is enabled for all touches. With this setting enabled, all touches on screen are hidden.
 
 #### Hide all touches
-With the `hide` setting enabled, all touches that occur during the replay will be hidden. This is the default setting. 
+With the `hide` setting enabled, all touches that occur during the replay are hidden. This is the default setting. 
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -266,7 +268,7 @@ With the `hide` setting enabled, all touches that occur during the replay will b
 {{< /tabs >}}
 
 #### Show all touches
-With the `show` setting enabled, all touches that occur during the replay will be shown. 
+With the `show` setting enabled, all touches that occur during the replay are shown. 
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -295,7 +297,7 @@ With the `show` setting enabled, all touches that occur during the replay will b
 {{< /tabs >}}
 
 ## Legacy masking - Deprecated
-Please note that this masking API is deprecated and will be removed in a future version. Users are encouraged to migrate to the fine-grained masking options described above.
+This masking API is deprecated. Users are encouraged to migrate to the fine-grained masking options described above.
 
 ### Mask all text elements
 
@@ -335,7 +337,9 @@ By default, the `mask` setting is enabled for all data. With this setting enable
 
 ### Mask only input elements
 
-With the `mask user input` setting enabled, any input field is replaced with anonymized text. Note that in addition to this, touches are hidden, and some images (>100x100dp images on android/non-system images on ios) are replaced with placeholders.
+With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
+
+**Note**: In addition to this behavior, touches are hidden, and some images (>100x100dp images on android/non-system images on ios) are replaced with placeholders.
 
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input-2.png" alt="What your application screen may resemble when user input fields are masked." style="width:50%;">}}
 
