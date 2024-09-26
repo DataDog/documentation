@@ -17,7 +17,7 @@ further_reading:
 {{% tab "Astronomer" %}}
 
 <div class="alert alert-warning">
-For Astronomer customers using Astro, the following setup may have lineage feature rely on the Airflow Openlineage installed in Astro Runtimes, the following setup could affect those features. see <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>this</a> for context.
+For Astronomer customers using Astro, the following setup may affect the lineage feature offered by Astro. see <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>this</a> for context.
 </div>
 
 ## Requirements
