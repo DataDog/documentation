@@ -1526,4 +1526,4 @@ If the CI Visibility option does not appear in the Datadog Plugin section, make 
 [28]: /continuous_integration/search/#search-for-pipelines
 [29]: /agent/logs/?tab=tcpudp#custom-log-collection
 [30]: /developers/dogstatsd/
-[31]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[31]: /containers/docker/apm/#tracing-from-the-host
