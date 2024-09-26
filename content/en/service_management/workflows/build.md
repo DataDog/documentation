@@ -15,6 +15,9 @@ further_reading:
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
+- link: "/service_management/workflows/actions/set_variables"
+  tag: "Documentation"
+  text: "Set variables"
 ---
 
 {{< site-region region="gov" >}}
@@ -76,15 +79,7 @@ You can edit a step in the workflow at any time by clicking on it. Click and dra
 
 ## Test a step
 
-To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
-
-To test a workflow step:
-1. Click **Test** in the step **Inputs** section.
-1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
-1. Click **Test** to test the action.
-1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
-
-Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
+See the test and debug page for information on [how to test a step][11].
 
 ## Publish a workflow
 
@@ -143,6 +138,8 @@ The **Input Parameters** section displays the names of all existing input parame
 You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
 
 If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
+
+For information about creating mutable workflow variables, see the [Set variable][12] action.
 
 ### Source object variables
 
@@ -231,3 +228,5 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
+[11]: /service_management/workflows/test_and_debug/#test-a-step
+[12]: /service_management/workflows/actions/set_variables

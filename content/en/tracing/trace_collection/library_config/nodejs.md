@@ -64,11 +64,6 @@ Enable debug logging in the tracer.
 **Default**: `true`<br>
 Whether to enable tracing.
 
-`DD_TRACE_DEBUG`
-: **Configuration**: N/A<br>
-**Default**: `false`<br>
-Enable debug logging in the tracer.
-
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.

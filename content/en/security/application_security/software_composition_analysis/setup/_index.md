@@ -29,7 +29,7 @@ Before setting up Software Composition Analysis, ensure the following prerequisi
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and traces are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the **Library Compatibility** page for each ASM product.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][5] page for each ASM product.
 
 ## Software Composition Analysis enablement types
 
@@ -44,9 +44,9 @@ Before setting up Software Composition Analysis, ensure the following prerequisi
 
 ### Settings page
 
-Alternatively, you can enable Software Composition Analysis through the [Settings][3] page.
+Alternatively, you can enable Software Composition Analysis through the [Settings] page.
 
-1. Navigate to the [Settings][3] page and select **Get Started in Software Composition Analysis (SCA)**.
+1. Navigate to the [Settings] page and select **Get Started in Software Composition Analysis (SCA)**.
 2. For static analysis in source code, select **Select Repositories**.
 3. Select **Add Github Account** and follow the [instructions][4] to create a new GitHub Application.
 4. Once the GitHub account is set up, select **Select Repositories** and enable **Software Composition Analysis (SCA)**.
@@ -182,3 +182,4 @@ java -javaagent:dd-java-agent.jar \
 [2]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [3]: https://app.datadoghq.com/security/configuration/asm/setup
 [4]: /integrations/github/
+[5]: /security/application_security/software_composition_analysis/setup/compatibility/

@@ -35,6 +35,7 @@ The table below describes the personal data categories collected by the automati
 | Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                            |
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
+| Login ID            | Can include an account/user ID, name, or email address.                                                                |
 
 The table below describes the default behavior of each language tracing library with regard to whether a data category is collected and whether it is obfuscated by default.
 
@@ -51,6 +52,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> |                                 |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -67,6 +69,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -83,6 +86,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -99,6 +103,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -115,6 +120,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location | <i class="icon-check-bold"></i> |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 [1]: /tracing/trace_collection/compatibility/python/#datastore-compatibility
 {{% /tab %}}
@@ -132,6 +138,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -153,6 +160,7 @@ The table below describes the default behavior of each language tracing library 
 | HTTP body               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP cookies            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP headers            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Login ID                | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -172,6 +180,7 @@ The table below describes the default behavior of each language tracing library 
 | HTTP body               |                                 |            |
 | HTTP cookies            |                                 |            |
 | HTTP headers            |                                 |            |
+| Login ID                | <i class="icon-check-bold"></i> |            |
 
 {{% /tab %}}
 
@@ -191,6 +200,7 @@ The table below describes the default behavior of each language tracing library 
 | HTTP body               |                                 |            |
 | HTTP cookies            |                                 |            |
 | HTTP headers            |                                 |            |
+| Login ID                | <i class="icon-check-bold"></i> |            |
 
 {{% /tab %}}
 
@@ -210,6 +220,7 @@ The table below describes the default behavior of each language tracing library 
 | HTTP body               |                                 |            |
 | HTTP cookies            |                                 |            |
 | HTTP headers            |                                 |            |
+| Login ID                | <i class="icon-check-bold"></i> |            |
 
 {{% /tab %}}
 

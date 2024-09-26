@@ -43,7 +43,7 @@ The following profiling features are available in the following minimum versions
 |--------------------------|--------------------------------|
 | [Code Hotspots][12]      | 0.44.0+                        |
 | [Endpoint Profiling][13] | 0.54.0+                        |
-| [Timeline][15]           | 2.10.5+                        |
+| [Timeline][15]           | 2.12.0+, 2.11.4+, or 2.10.7+   |
 
 Continuous Profiler is in beta support for some serverless platforms, such as [AWS Lambda][16].
 

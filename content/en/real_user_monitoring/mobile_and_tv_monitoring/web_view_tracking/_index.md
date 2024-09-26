@@ -5,10 +5,23 @@ aliases:
   - /real_user_monitoring/ios/web_view_tracking
   - /real_user_monitoring/flutter/web_view_tracking
   - /real_user_monitoring/reactnative/web_view_tracking
+  - /real_user_monitoring/kotlin-multiplatform/web_view_tracking
 further_reading:
   - link: https://github.com/DataDog/dd-sdk-android
     tag: "Source Code"
     text: Source code for dd-sdk-android
+  - link: https://github.com/DataDog/dd-sdk-ios
+    tag: "Source Code"
+    text: Source code for dd-sdk-ios
+  - link: https://github.com/DataDog/dd-sdk-flutter
+    tag: "Source Code"
+    text: Source code for dd-sdk-flutter
+  - link: https://github.com/DataDog/dd-sdk-reactnative
+    tag: "Source Code"
+    text: Source code for dd-sdk-reactnative
+  - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
+    tag: "Source Code"
+    text: Source code for dd-sdk-kotlin-multiplatform
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
@@ -35,9 +48,11 @@ You can also record the entire user journey across both web and native views on 
 
 Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][2].
 
-### Declare `DatadogWebViewTracking` as a dependency (iOS only)
+### Declare `DatadogWebViewTracking` as a dependency (iOS or Kotlin Multiplatform only)
 
-To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialization snippet.
+#### iOS
+
+To enable Web View tracking, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialization snippet.
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -80,6 +95,10 @@ DatadogWebViewTracking.xcframework
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Kotlin Multiplatform
+
+Add `DatadogWebViewTracking` library to your application by following the guide [here][7].
 
 ### Instrument your web views
 
@@ -190,6 +209,45 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 [1]: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+1. If you want to forward RUM events coming from web pages, download the [latest version][1] of the RUM Kotlin Multiplatform SDK and set up RUM by following the [dedicated guide][2].
+2. If you want to forward log events coming from web pages, download the [latest version][3] of the Logs Kotlin Multiplatform SDK and set up logs by following the [dedicated guide][4].
+3. Add the Gradle dependency for the common source set by declaring the `dd-sdk-kotlin-multiplatform-webview` library as a dependency in the module-level `build.gradle.kts` file:
+
+    ```kotlin
+    kotlin {
+      // ...
+      sourceSets {
+        commonMain.dependencies {
+          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-webview:x.x.x")
+        }
+      }
+    }
+    ```
+
+4. Enable tracking for web views with the following code snippet:
+
+   ```kotlin
+     // call it in Android or iOS source set, not in the common one
+     WebViewTracking.enable(webView, allowedHosts)
+   ```
+
+5. Disable tracking of web views once web view instance can be released (iOS only):
+
+   ```kotlin
+     // call it in iOS source set, not in the common one
+     WebViewTracking.disable(webView, allowedHosts)
+   ```
+
+`allowedHosts` matches the given hosts and their subdomain. No regular expressions are allowed.
+
+[1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-rum
+[2]: /real_user_monitoring/kotlin-multiplatform/#setup
+[3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-logs
+[4]: /logs/log_collection/kotlin-multiplatform/#setup
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Access your web views
@@ -213,6 +271,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 [1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
 [2]: /real_user_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/ios/
-[4]: https://docs.datadoghq.com/logs/log_collection/ios
+[4]: /logs/log_collection/ios
 [5]: https://app.datadoghq.com/rum/explorer
 [6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios

@@ -45,7 +45,7 @@ Datadog SDKs implement the OpenTelemetry API by overriding the default implement
 | Java     | 1.35.0                   |
 | Python   | 2.10.0                   |
 | Ruby     | 2.1.0                    |
-| Go       | 1.65.0                   |
+| Go       | 1.67.0                   |
 | Node.js  | 4.3.0                    |
 | PHP      | 0.94.0                   |
 | .NET     | 2.53.0                   |
@@ -261,14 +261,40 @@ DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net
 
 {{% /tab %}}
 
-<!-- {{% tab "PHP" %}}
+{{% tab "PHP" %}}
 
 ## Compatibility requirements
 
+The Datadog PHP SDK supports library [instrumentation][25] using the `stable` OpenTelemetry PHP Trace API.
+
+OpenTelemetry provides an [example][26] for instrumenting a sample application.
+
 ## Setup
 
+To use OpenTelemetry integrations with the Datadog PHP SDK:
 
-{{% /tab %}} -->
+  1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
+  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
+
+You can also find [the sample Slim4OtelDropIn PHP application with OpenTelemetry and Datadog auto instrumentations][28] in the `DataDog/trace-examples` GitHub repository.
+
+## Configuration
+
+To avoid duplicate spans, you can disable the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]). 
+
+Use the integration name when setting integration-specific configuration for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
+
+```sh
+DD_TRACE_LARAVEL_ENABLED=false
+```
+
+[25]: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation
+[26]: https://opentelemetry.io/docs/zero-code/php/
+[27]: /tracing/trace_collection/custom_instrumentation/php/otel/#setup
+[28]: https://github.com/DataDog/trace-examples/tree/master/php/Slim4OtelDropIn
+[29]: /tracing/trace_collection/library_config/php/#integration-names
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
@@ -278,7 +304,7 @@ The Datadog .NET SDK supports library instrumentations that come with [built-in 
 
 ## Setup
 
-To use Opentelemetry instrumentation libraries with the Datadog .NET SDK:
+To use OpenTelemetry instrumentation libraries with the Datadog .NET SDK:
 
 1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`
