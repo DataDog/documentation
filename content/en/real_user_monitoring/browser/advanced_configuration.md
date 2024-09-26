@@ -843,7 +843,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ## View context
 
-Starting with [version 5.28.0][21], the contexts of view events are modifiable. The context adds to the current view only and populate its children events (such as `action`, `error` and `timing`) with `startView`, `setViewContext` and `setViewContextProperty`.
+Starting with [version 5.28.0][21], the context of view events is modifiable. Context can be added to the current view only, and populates its child events (such as `action`, `error`, and `timing`) with `startView`, `setViewContext`, and `setViewContextProperty` functions.
 
 ### Start view with context
 
