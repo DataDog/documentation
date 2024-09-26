@@ -134,7 +134,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 </details>
 <details>
 <summary>before <code>v5.28.0</code></summary>
-The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
+The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. It uses <code>checkout</code> for the view name and associates the <code>purchase</code> service with version <code>1.2.3</code>.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
