@@ -81,7 +81,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
-   - Context: Starting with [version 5.28.0][21], you can add context to view and view children events.
+   - Context: Starting with [version 5.28.0][21], you can add context to views and the child events of views.
 
    For more information, see [Setup Browser Monitoring][4].
 
