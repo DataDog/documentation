@@ -21,11 +21,11 @@ The following setups are supported:
 - (Preview) OTel API + OTel SDK + Datadog Agent with embedded Collector
 - **Full Datadog setup**: DD API + DD SDK + Datadog Agent
 
-## Feature Compatibility
+## Feature compatibility
 
 The following tables show feature compatibility across different setups:
 
-### Fully Supported Features
+### Fully supported features
 
 | Feature                                | All Setups |
 |----------------------------------------|------------|
@@ -33,7 +33,7 @@ The following tables show feature compatibility across different setups:
 | Correlated Traces, Metrics, Logs       | {{< X >}} |
 | Real User Monitoring (RUM)             | {{< X >}} |
 
-### Partially Supported Features
+### Partially supported features
 
 | Feature                                | OTel API + DD SDK + Agent | DD API + DD SDK + Agent     | OTel API + OTel SDK + OTel Collector | OTel API + OTel SDK + OTLP Ingest in Agent | OTel API + OTel SDK + Agent with embedded Collector |
 |----------------------------------------|---------------------------|-----------------------------|--------------------------------------|--------------------------------------------|-----------------------------------------------------|
