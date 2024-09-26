@@ -16,6 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           ref: ${{ github.ref }}
           path: repo
           sparse-checkout: |
