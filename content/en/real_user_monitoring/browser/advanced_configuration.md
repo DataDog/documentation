@@ -851,7 +851,7 @@ Optionally define the context while starting a view with [`startView` options](#
 
 ### Add view context
 
-Enrich or modify the context of RUM view events and corresponding children events with  `setViewContextProperty(key: string, value: any)` API.
+Enrich or modify the context of RUM view events and corresponding child events with the `setViewContextProperty(key: string, value: any)` API.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
