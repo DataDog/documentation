@@ -87,6 +87,15 @@ To see events for a specific workflow, in the **Search facets** box, search for 
 You can also filter the output by **Status** to see only `info`, `warn`, or `error` messages.
 
 
+## Track workflow billing in Usage Attribution
+
+To track billing for your workflow executions, perform the following steps:
+
+1. Navigate to the Billing [Usage Attribution][6] page.
+1. Under **Products** on the left, search for **Workflow Executions**.
+1. Hover over **Workflow Executions** and click **Only** to view usage attribution for only workflows.<br>A list of workflow execution counts organized by organization, data center, and team appears.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -99,3 +108,4 @@ You can also filter the output by **Status** to see only `info`, `warn`, or `err
 [3]: /service_management/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Aworkflow_automation
+[6]: https://app.datadoghq.com/billing/usage-attribution
