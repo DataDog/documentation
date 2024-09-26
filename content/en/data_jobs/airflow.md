@@ -11,6 +11,10 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
+{{< callout url="#" header="false" btn_hidden="true" >}}
+  Data Jobs Monitoring for Apache Airflow is in preview.
+{{< /callout >}}
+
 [Data Jobs Monitoring][1] gives visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
 
 {{< tabs >}}
@@ -22,8 +26,8 @@ For Astronomer customers using Astro, the following setup may affect the lineage
 
 ## Requirements
 
-* [Apache Airflow 2.7.0][1] or later is required.
-* [apache-airflow-providers-openlineage][2] 1.7.0 or later is required.
+* [Apache Airflow 2.8.0][1] or later is required.
+* [apache-airflow-providers-openlineage][2] 1.12.0 or later is required.
 
 ## Setup
 
@@ -52,7 +56,7 @@ To get started, follow the instructions below.
 
 3. Trigger a update to your Deployment and wait for it to finish.
 
-[1]: https://github.com/apache/airflow/releases/tag/2.7.0
+[1]: https://github.com/apache/airflow/releases/tag/2.8.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://www.astronomer.io/docs/astro/runtime-provider-reference
 [4]: https://www.astronomer.io/docs/astro/cli/develop-project
