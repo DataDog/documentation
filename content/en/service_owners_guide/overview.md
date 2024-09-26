@@ -77,7 +77,7 @@ Get up to speed with the parts of Datadog that are most important to your use-ca
 
 ## Create a test environment
 
-After a bit of training, start adding some of your own local conditions. Spend some time installing and experimenting with Datadog in a low-risk sandbox, to help familiarize yourself with the environment. The Datadog installation methods are useful for getting started, and it is always a critical activity for the Datadog service ownership team.  
+After a bit of training, start adding some of your own local conditions. Spend some time installing and experimenting with Datadog in a low-risk sandbox, to help familiarize yourself with the environment. The Datadog installation methods are helpful for the initial setup. It is critical for the Datadog service ownership team to have a straightforward and accessible environment to develop your monitoring profile before broader deployment. 
 
 ### Configuring your test environment
 
