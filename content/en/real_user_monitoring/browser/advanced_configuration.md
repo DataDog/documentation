@@ -81,7 +81,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
-   - Context: Starting with [version 5.28.0][21], you can add context to views and the child events of views.
+   - Context: Starting with [version 5.28.0][20], you can add context to views and the child events of views.
 
    For more information, see [Setup Browser Monitoring][4].
 
@@ -843,7 +843,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ## View context
 
-Starting with [version 5.28.0][21], the context of view events is modifiable. Context can be added to the current view only, and populates its child events (such as `action`, `error`, and `timing`) with `startView`, `setViewContext`, and `setViewContextProperty` functions.
+Starting with [version 5.28.0][20], the context of view events is modifiable. Context can be added to the current view only, and populates its child events (such as `action`, `error`, and `timing`) with `startView`, `setViewContext`, and `setViewContextProperty` functions.
 
 ### Start view with context
 
@@ -1185,6 +1185,5 @@ However, this feature comes with some **limitations**:
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[20]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[21]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
 
