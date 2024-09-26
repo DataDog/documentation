@@ -9,7 +9,7 @@
 
 .tooltip-container {
   position: relative;
-  display: inline;
+  display: inline-block;
 }
 
 .tooltip-trigger {
@@ -22,6 +22,7 @@
   font: inherit;
   padding: 0;
   margin: 0;
+  cursor: help;
   transition: color var(--tooltip-transition-duration) ease;
 
   &:hover {
@@ -29,44 +30,52 @@
   }
 }
 
-.tooltip-container .tooltip-trigger {
-  cursor: help;
-}
-
 .tooltip-content {
   position: absolute;
   z-index: 10;
-  bottom: calc(100% + 5px);
-  left: 50%;
-  transform: translateX(-50%) translateY(5px);
-  padding: 0.6rem 1rem;
   background: linear-gradient(135deg, var(--tooltip-bg-start) 0%, var(--tooltip-bg-end) 100%);
   color: var(--tooltip-text-color);
   border-radius: 6px;
+  padding: 0.6rem 1rem;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.4;
+  box-shadow: var(--tooltip-box-shadow);
   max-width: 300px;
   width: max-content;
-  box-shadow: var(--tooltip-box-shadow);
-  overflow-wrap: break-word;
-  text-align: left;
-  
   opacity: 0;
   visibility: hidden;
   transition: 
     opacity var(--tooltip-transition-duration) ease-out,
-    transform var(--tooltip-transition-duration) ease-out,
-    visibility 0s linear var(--tooltip-transition-duration);
-
+    visibility 0s linear var(--tooltip-transition-duration),
+    width var(--tooltip-transition-duration) ease-out;
+  
   &.show {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
     transition: 
       opacity var(--tooltip-transition-duration) ease-out,
-      transform var(--tooltip-transition-duration) ease-out,
-      visibility 0s linear;
+      visibility 0s linear,
+      width var(--tooltip-transition-duration) ease-out;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+  }
+
+  &:not(.bottom)::after {
+    bottom: -16px;
+    border-color: var(--tooltip-bg-end) transparent transparent transparent;
+  }
+
+  &.bottom::after {
+    top: -16px;
+    border-color: transparent transparent var(--tooltip-bg-end) transparent;
   }
 
   .tooltip-full-link {
@@ -94,18 +103,9 @@
   }
 }
 
-.tooltip-arrow {
-  position: absolute;
-  bottom: -7px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--tooltip-bg-end);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .tooltip-container,
   .tooltip-container * {
     transition: none !important;
   }
 }
-
