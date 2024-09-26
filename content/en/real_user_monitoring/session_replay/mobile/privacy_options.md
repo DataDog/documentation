@@ -168,7 +168,7 @@ On iOS, users can select the `mask_non_bundled_only` setting, which replaces any
 
 On Android, users can select the `mask_large_only` setting, which replaces images with dimensions that exceed 100x100dp with a "Content Image" placeholder. 
 
-**Note**: that these dimensions refer to the drawable resource, not the view's size.
+**Note**: These dimensions refer to the drawable resource, not the view's size.
 
 {{< tabs >}}
 
