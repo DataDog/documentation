@@ -173,7 +173,7 @@ As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Visibil
 
 #### API execution
 
-The API uses classes to provide namespaced methods that are intended to be used without the caller maintaining state.
+The API uses classes to provide namespaced methods to submit test visibility events.
 
 Execution of tests is split into two phases:
 - discovery: used to inform the API of items to expect
