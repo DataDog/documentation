@@ -50,6 +50,20 @@ See [Astronomer official guide][5] for managing environment variables for a Depl
 **Important:**
 * replace `<YOUR DATADOG API KEY>` fully with your valid [Datadog API key][4].
 
+[1]: /data_jobs
+[2]: https://github.com/apache/airflow/releases/tag/2.7.0
+[3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
+[4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[5]: https://www.astronomer.io/docs/astro/manage-env-vars
+[6]: https://www.astronomer.io/docs/astro/runtime-provider-reference
+[7]: https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui
+[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+[9]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
+[10]: https://app.datadoghq.com/data-jobs/
+[11]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#lazy-load-plugins
+[12]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/macros.html#lineage-job-run-macros
+[13]: https://www.astronomer.io/docs/astro/cli/develop-project
+[14]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -84,6 +98,20 @@ Check official documentation [configuration-openlineage][14] for other supported
 * install and configure `openlineage` provider for both Airflow schedulers and Airflow workers.
 * replace `<YOUR DATADOG API KEY>` fully with your valid [Datadog API key][4].
 
+[1]: /data_jobs
+[2]: https://github.com/apache/airflow/releases/tag/2.7.0
+[3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
+[4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[5]: https://www.astronomer.io/docs/astro/manage-env-vars
+[6]: https://www.astronomer.io/docs/astro/runtime-provider-reference
+[7]: https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui
+[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+[9]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
+[10]: https://app.datadoghq.com/data-jobs/
+[11]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#lazy-load-plugins
+[12]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/macros.html#lineage-job-run-macros
+[13]: https://www.astronomer.io/docs/astro/cli/develop-project
+[14]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 {{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
@@ -120,6 +148,21 @@ check official documentation [configuration-openlineage][14] for other supported
 
 **Important:**
 * replace `<YOUR DATADOG API KEY>` fully with your valid [Datadog API key][4].
+
+[1]: /data_jobs
+[2]: https://github.com/apache/airflow/releases/tag/2.7.0
+[3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
+[4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[5]: https://www.astronomer.io/docs/astro/manage-env-vars
+[6]: https://www.astronomer.io/docs/astro/runtime-provider-reference
+[7]: https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui
+[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+[9]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
+[10]: https://app.datadoghq.com/data-jobs/
+[11]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#lazy-load-plugins
+[12]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/macros.html#lineage-job-run-macros
+[13]: https://www.astronomer.io/docs/astro/cli/develop-project
+[14]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 {{% /tab %}}
 {{< /tabs >}}
 
