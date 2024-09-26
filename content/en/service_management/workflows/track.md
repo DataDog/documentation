@@ -10,6 +10,9 @@ further_reading:
 - link: "/account_management/audit_trail/"
   tag: "Documentation"
   text: "Datadog Audit Trail"
+- link: "/account_management/billing/usage_attribution/"
+  tag: "Documentation"
+  text: "Usage Attribution"
 ---
 
 {{< site-region region="gov" >}}
@@ -88,6 +91,10 @@ You can also filter the output by **Status** to see only `info`, `warn`, or `err
 
 
 ## Track workflow billing in Usage Attribution
+
+<div class="alert alert-warning">
+Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
 
 To track billing for your workflow executions, perform the following steps:
 
