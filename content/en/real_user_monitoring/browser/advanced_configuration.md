@@ -847,7 +847,7 @@ Starting with [version 5.28.0][21], the context of view events is modifiable. Co
 
 ### Start view with context
 
-Optionally define the context while starting view with [`startView` options](#override-default-rum-view-names).
+Optionally define the context while starting a view with [`startView` options](#override-default-rum-view-names).
 
 ### Add view context
 
