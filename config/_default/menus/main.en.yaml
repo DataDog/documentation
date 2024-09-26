@@ -2418,11 +2418,16 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
+    - name: Limits
+      url: service_management/workflows/limits/
+      parent: workflows
+      identifier: workflows_limits
+      weight: 9
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 9
+      weight: 10
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -4883,51 +4888,56 @@ menu:
       url: logs/log_collection/roku/
       parent: log_collection
       weight: 106
+    - name: Kotlin Multiplatform
+      identifier: log_kotlin_multiplatform
+      url: logs/log_collection/kotlin-multiplatform/
+      parent: log_collection
+      weight: 107
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 107
+      weight: 108
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 108
+      weight: 109
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 109
+      weight: 110
     - name: NodeJS
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 110
+      weight: 111
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 111
+      weight: 112
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 112
+      weight: 113
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 113
+      weight: 114
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
       identifier: log_collection_opentelemetry
-      weight: 114
+      weight: 115
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 115
+      weight: 116
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
