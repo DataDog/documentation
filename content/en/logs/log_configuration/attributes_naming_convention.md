@@ -65,7 +65,7 @@ The standard attribute table comes with a set of [predefined standard attributes
 1. Navigate to the standard attribute [configuration page][3].
 1. Click **New Standard Attribute**.
 1. Define the standard attribute:
-    - `Path`: The path of the Standard attributes as you would find it in your JSON (for example, network.client.ip).
+    - `Path`: The path of the standard attributes as you would find it in your JSON (for example, network.client.ip).
     - `Type`: (`string`, `integer`, `double`, `boolean`): The type of the attribute, which is used to cast elements of the remapping list.
     - `Description`: Human-readable description of the attribute.
     - (Optional)`Remapping list`: Comma-separated list of non-compliant attributes that should be remapped to the standard attribute.
