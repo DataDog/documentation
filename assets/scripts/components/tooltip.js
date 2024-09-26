@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tooltipContainers = document.querySelectorAll('.tooltip-container');
     let activeTooltip = null;
+    let hideTimeout = null;
   
     function positionTooltip(tooltip, trigger) {
       const tooltipRect = tooltip.getBoundingClientRect();
@@ -23,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const updatedTooltipRect = tooltip.getBoundingClientRect();
   
       // Position above by default
-      let topPosition = -updatedTooltipRect.height - 10; // 10px gap
+      let topPosition = -updatedTooltipRect.height - 5; // Reduced from 10px to 5px
   
       // Check if tooltip goes above viewport
       if (triggerRect.top + topPosition < 0) {
         // Position below if it goes above viewport
-        topPosition = triggerRect.height + 10;
+        topPosition = triggerRect.height + 5; // Also reduced to 5px
         tooltip.classList.add('bottom');
       } else {
         tooltip.classList.remove('bottom');
@@ -52,12 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     function showTooltip(tooltip, trigger) {
+      clearHideTimeout();
       if (activeTooltip && activeTooltip !== tooltip) {
         hideTooltip(activeTooltip);
       }
       tooltip.classList.add('show');
       positionTooltip(tooltip, trigger);
       activeTooltip = tooltip;
+    }
+    
+    function setHideTimeout(tooltip) {
+      hideTimeout = setTimeout(() => {
+        hideTooltip(tooltip);
+      }, 100); // 100ms delay before hiding
+    }
+
+    function clearHideTimeout() {
+      if (hideTimeout) {
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+      }
     }
   
     function hideTooltip(tooltip) {
@@ -72,7 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!trigger || !tooltip) return;
   
       trigger.addEventListener('mouseenter', () => showTooltip(tooltip, trigger));
-      trigger.addEventListener('mouseleave', () => hideTooltip(tooltip));
+      trigger.addEventListener('mouseleave', () => setHideTimeout(tooltip));
+
+      tooltip.addEventListener('mouseenter', clearHideTimeout);
+      tooltip.addEventListener('mouseleave', () => setHideTimeout(tooltip));
   
       // For mobile devices
       trigger.addEventListener('touchstart', (e) => {
@@ -100,4 +118,4 @@ document.addEventListener('DOMContentLoaded', () => {
         positionTooltip(activeTooltip, trigger);
       }
     });
-  });
+});
