@@ -171,7 +171,7 @@ If you are using a host, you have two options.
 
 <div class="alert alert-info">The .NET client library version 2.24.1 or later is required.</div>
 
-As a first step, ensure that your .pdb files are deployed alongside your .NET assemblies (.dll or .exe) in the same folder. 
+As a first step, ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder. 
 Then, follow the rest of the instructions based on your specific deployment model:
 
 #### Containers
