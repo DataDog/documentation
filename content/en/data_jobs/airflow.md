@@ -35,7 +35,7 @@ Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-air
 
 To get started, follow the instructions below.
 
-1. Ariflow provider `openlineage` is already installed in [Astro Runtimes][3]. Customize the provider version by adding the following to your `requirements.txt` file into your [Astro project][4].
+1. Airflow provider `openlineage` is already installed in [Astro Runtimes][3]. Customize the provider version by adding the following to your `requirements.txt` file into your [Astro project][4].
    
    ```text
    apache-airflow-providers-openlineage==<AIRLOW_OPENLINEAGE_PROVIDER_VERSION>
