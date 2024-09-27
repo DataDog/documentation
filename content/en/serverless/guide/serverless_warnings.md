@@ -124,7 +124,7 @@ At least one invocation in the selected time range approached the maximum durati
 
 [Distributed tracing][7] can help you pinpoint slow API calls in your application.
 
-**Resolution:** Lambda functions running for close to the maximum timeout limit of 15 minutes are at risk of being killed by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider improving the performance of your Lambda, using smaller lambdas in a Step Function, or moving your workload to a longer running environment like ECS Fargate.
+**Resolution:** Lambda functions approaching the maximum timeout limit of 15 minutes risk termination by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider improving the performance of your Lambda function, using smaller lambdas in a Step Function, or moving your workload to a longer running environment like ECS Fargate.
 
 ## Further Reading
 
