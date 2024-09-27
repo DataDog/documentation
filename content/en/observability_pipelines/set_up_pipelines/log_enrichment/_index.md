@@ -21,6 +21,7 @@ Select a source to get started:
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
 - [HTTP Client][3]
+- [Logstash][8]
 - [Splunk HTTP Event Collector (HEC)][4]
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
 - [Sumo Logic Hosted Collector][6]
@@ -33,3 +34,4 @@ Select a source to get started:
 [5]: /observability_pipelines/log_enrichment/splunk_tcp
 [6]: /observability_pipelines/log_enrichment/sumo_logic_hosted_collector
 [7]: /observability_pipelines/log_enrichment/syslog
+[8]: /observability_pipelines/set_up_pipelines/log_enrichment/logstash

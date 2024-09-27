@@ -4462,6 +4462,11 @@ menu:
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_syslog
       weight: 1017
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/log_volume_control/logstash/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_logstash
+      weight: 1018
     - name: Dual Ship Logs
       url: observability_pipelines/set_up_pipelines/dual_ship_logs/
       parent: observability_pipelines_set_up_pipelines
@@ -4502,6 +4507,11 @@ menu:
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_syslog
       weight: 2017
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/logstash/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_logstash
+      weight: 2018
     - name: Archive Logs
       url: observability_pipelines/set_up_pipelines/archive_logs/
       parent: observability_pipelines_set_up_pipelines
@@ -4542,6 +4552,11 @@ menu:
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_syslog
       weight: 3017
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/archive_logs/logstash/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_logstash
+      weight: 3018
     - name: Split Logs
       url: observability_pipelines/set_up_pipelines/split_logs/
       parent: observability_pipelines_set_up_pipelines
@@ -4582,6 +4597,11 @@ menu:
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_syslog
       weight: 4017
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/split_logs/logstash/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_logstash
+      weight: 4018
     - name: Sensitive Data Redaction
       url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/
       parent: observability_pipelines_set_up_pipelines
@@ -4622,6 +4642,11 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_syslog
       weight: 5017
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/logstash/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_logstash
+      weight: 5018
     - name: Log Enrichment
       url: observability_pipelines/set_up_pipelines/log_enrichment/
       parent: observability_pipelines_set_up_pipelines
@@ -4662,6 +4687,11 @@ menu:
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_syslog
       weight: 6017
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/log_enrichment/logstash/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_logstash
+      weight: 6018
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
@@ -4692,26 +4722,31 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
       weight: 403
+    - name: Logstash
+      url: observability_pipelines/sources/logstash/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_logstash
+      weight: 404
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 404
+      weight: 405
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 405
+      weight: 406
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 406
+      weight: 407
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 407
+      weight: 408
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
