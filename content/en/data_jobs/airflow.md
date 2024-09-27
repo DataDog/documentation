@@ -44,15 +44,16 @@ To get started, follow the instructions below.
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables [using the Astro UI][5]:
    
    ```shell
-   OPENLINEAGE_URL=https://data-obs-intake.{{< region-param key="dd_site" code="true" >}}
+   OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    OPENLINEAGE_ENDPOINT=api/v1/lineage
    OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
 
-   See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][6] for other supported configurations of `openlineage` provider.
-
    **Important:**
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.{{< region-param key="dd_site" >}}`.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][7].
+
+   See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][6] for other supported configurations of `openlineage` provider.
 
 3. Trigger a update to your Deployment and wait for it to finish.
 
@@ -87,16 +88,17 @@ To get started, follow the instructions below.
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables and make them available to pods where you run Airflow schedulers and Airflow workers:
    
    ```shell
-   OPENLINEAGE_URL=https://data-obs-intake.{{< region-param key="dd_site" code="true" >}}
+   OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    OPENLINEAGE_ENDPOINT=api/v1/lineage
    OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
 
-   Check official documentation [configuration-openlineage][3] for other supported configurations of `openlineage` provider.
-
    **Important:**
    * install and configure `openlineage` provider for both Airflow schedulers and Airflow workers.
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.{{< region-param key="dd_site" >}}`.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][4].
+
+   Check official documentation [configuration-openlineage][3] for other supported configurations of `openlineage` provider.
 
 3. Trigger a update to your Airflow pods and wait for them to finish.
 
@@ -129,7 +131,7 @@ To get started, follow the instructions below.
    ```shell
    #!/bin/sh
    
-   export OPENLINEAGE_URL=https://data-obs-intake.{{< region-param key="dd_site" code="true" >}}
+   export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_ENDPOINT=api/v1/lineage
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
@@ -137,6 +139,7 @@ To get started, follow the instructions below.
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
    **Important:**
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.{{< region-param key="dd_site" >}}`.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
 3. Deploy your updated `requirements.txt` and [Amazon MWAA start script][3] to your Amazon S3 folder you configured for your Amazon MWAA Environment.
