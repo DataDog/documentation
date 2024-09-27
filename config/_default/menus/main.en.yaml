@@ -2418,11 +2418,21 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 9
+    - name: Track Workflows
+      url: service_management/workflows/track
+      parent: workflows
+      identifier: workflows_track
+      weight: 10
+    - name: Limits
+      url: service_management/workflows/limits/
+      parent: workflows
+      identifier: workflows_limits
+      weight: 11
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 10
+      weight: 12
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
