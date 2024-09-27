@@ -103,7 +103,7 @@ nav_sections:
       title: Monitorización de trabajos de datos
     - desc: Descubrir, asignar y supervisar servicios sin cambiar el código
       icon: usm
-      link: continuous_testing/
+      link: universal_service_monitoring/
       title: Universal Service Monitoring
     - desc: Garantizar el tiempo de actividad, avisar de problemas regionales y probar
         el rendimiento de aplicaciones
@@ -184,14 +184,14 @@ nav_sections:
       title: Desarrolladores
 popular_searches:
 - link: api/
-  title: API documentation
+  title: documentación de API
   weight: 10
 - link: getting_started/agent/
   title: instalación del Agent
   weight: 20
 - link: logs/log_collection/
-  title: collection of Logs
+  title: recopilación de logs
   weight: 30
 - link: integrations/
-  title: integration configuration
+  title: configuración de integraciones
   weight: 40
