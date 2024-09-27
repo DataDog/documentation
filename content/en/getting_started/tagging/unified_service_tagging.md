@@ -116,6 +116,19 @@ template:
                 fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
+You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags.
+
+```yaml
+  containers:
+  -  ...
+     env:
+         - name: OTEL_RESOURCE_ATTRIBUTES
+           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment=<ENV>"
+         - name: OTEL_SERVICE_NAME
+           value: "<SERVICE>"
+```
+Note that the `OTEL_SERVICE_NAME` environment variable takes precedence over the `service.name` attribute in the `OTEL_RESOURCE_ATTRIBUTES` environment variable.
+
 ##### Partial configuration
 
 ###### Pod-level metrics
