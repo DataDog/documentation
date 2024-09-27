@@ -87,6 +87,10 @@ Scheduled and triggered workflows don't trigger automatically until you've publi
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
+## Variables and parameters
+
+For information on using variables and parameters in your workflows, see [Variables and parameters][].
+
 ## Workflow notifications
 
 You can configure your workflow to send you a notification on success or failure. The following integrations are supported:
@@ -167,3 +171,4 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
+[12]: /service_management/workflows/variables/
