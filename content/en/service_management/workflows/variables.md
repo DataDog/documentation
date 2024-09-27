@@ -80,7 +80,7 @@ If you're looking for an existing input parameter, start typing `{{ Trigger.` to
 
 ## Output parameters
 
-You can pass the result of a workflow using output parameters.
+Output parameters allow you to access the result of a workflow. This is useful when you want to pass the result of a workflow to another workflow or an App Builder app.
 
 To add an output parameter:
 1. Click on the workflow canvas.
@@ -96,12 +96,12 @@ For an example of how to use output parameters to pass information between Workf
 
 ## Custom variables
 
-To set a custom mutable workflow variable, use the [Set variable][1] action. You can use this action to declare, update, and access variables throughout your workflow, which allows you to perform more complex workflow operations. For example:
+To set a mutable workflow variable, use the [Set variable][1] action. You can use this action to declare, update, and access custom variables throughout your workflow, which allows you to perform more complex workflow operations. For example:
 - _Handling API pagination_: API requests sometimes require you to keep track of a page token or offset.
 - _Handling lists_: You can use a variable to initialize an array and perform actions like map and reduce.
 - _Iteration_: Variables allow you to manipulate and store data inside a [for loop][2]. You can then use that data in the rest of the workflow.
 
-### Set a variable
+### Set a custom variable
 
 To set a custom variable:
 1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
