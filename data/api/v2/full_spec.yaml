@@ -15372,6 +15372,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     OktaAccountType:
       default: okta-accounts
       description: Account type for an Okta account.
