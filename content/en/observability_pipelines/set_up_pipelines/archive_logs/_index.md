@@ -19,6 +19,7 @@ Select a source to get started:
 
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
+- [Google Pub/Sub][10]
 - [HTTP Client][3]
 - [HTTP Server][9]
 - [Logstash][7]
@@ -36,3 +37,4 @@ Select a source to get started:
 [7]: /observability_pipelines/set_up_pipelines/archive_logs/logstash
 [8]: /observability_pipelines/archive_logs/syslog
 [9]: /observability_pipelines/set_up_pipelines/archive_logs/http_server
+[10]: /observability_pipelines/set_up_pipelines/archive_logs/google_pubsub

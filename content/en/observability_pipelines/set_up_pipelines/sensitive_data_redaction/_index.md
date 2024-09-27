@@ -17,7 +17,9 @@ Select a log source to get started:
 
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
+- [Google Pub/Sub][10]
 - [HTTP Client][3]
+- [HTTP Server][9]
 - [Logstash][8]
 - [Splunk HTTP Event Collector (HEC)][4]
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
@@ -32,3 +34,5 @@ Select a log source to get started:
 [6]: /observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector
 [7]: /observability_pipelines/sensitive_data_redaction/syslog
 [8]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/logstash
+[9]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/http_server
+[10]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/google_pubsub

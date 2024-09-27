@@ -4437,41 +4437,46 @@ menu:
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_fluent
       weight: 1012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/log_volume_control/google_pubsub/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_google_pubsub
+      weight: 1013
     - name: HTTP Client
       url: observability_pipelines/set_up_pipelines/log_volume_control/http_client/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_http_client
-      weight: 1013
+      weight: 1014
     - name: HTTP Server
       url: observability_pipelines/set_up_pipelines/log_volume_control/http_server/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_http_server
-      weight: 1014
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/set_up_pipelines/log_volume_control/splunk_hec/
-      parent: observability_pipelines_log_volume_control
-      identifier: observability_pipelines_log_volume_control_splunk_hec
       weight: 1015
-    - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/set_up_pipelines/log_volume_control/splunk_tcp/
-      parent: observability_pipelines_log_volume_control
-      identifier: observability_pipelines_log_volume_control_splunk_tcp
-      weight: 1016
-    - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/set_up_pipelines/log_volume_control/sumo_logic_hosted_collector/
-      parent: observability_pipelines_log_volume_control
-      identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
-      weight: 1017
-    - name: Syslog
-      url: observability_pipelines/set_up_pipelines/log_volume_control/syslog/
-      parent: observability_pipelines_log_volume_control
-      identifier: observability_pipelines_log_volume_control_syslog
-      weight: 1018
     - name: Logstash
       url: observability_pipelines/set_up_pipelines/log_volume_control/logstash/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_logstash
+      weight: 1016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/log_volume_control/splunk_hec/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_splunk_hec
+      weight: 1017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/log_volume_control/splunk_tcp/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_splunk_tcp
+      weight: 1018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/log_volume_control/sumo_logic_hosted_collector/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
       weight: 1019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/log_volume_control/syslog/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_syslog
+      weight: 1020
     - name: Dual Ship Logs
       url: observability_pipelines/set_up_pipelines/dual_ship_logs/
       parent: observability_pipelines_set_up_pipelines
@@ -4487,41 +4492,46 @@ menu:
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_fluent
       weight: 2012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/google_pubsub/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_google_pubsub
+      weight: 2013
     - name: HTTP Client
       url: observability_pipelines/set_up_pipelines/dual_ship_logs/http_client/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_http_client
-      weight: 2013
+      weight: 2014
     - name: HTTP Server
       url: observability_pipelines/set_up_pipelines/dual_ship_logs/http_server/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_http_server
-      weight: 2014
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/set_up_pipelines/dual_ship_logs/splunk_hec/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_splunk_hec
       weight: 2015
-    - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/set_up_pipelines/dual_ship_logs/splunk_tcp/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_splunk_tcp
-      weight: 2016
-    - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/set_up_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
-      weight: 2017
-    - name: Syslog
-      url: observability_pipelines/set_up_pipelines/dual_ship_logs/syslog/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_syslog
-      weight: 2018
     - name: Logstash
       url: observability_pipelines/set_up_pipelines/dual_ship_logs/logstash/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_logstash
+      weight: 2016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/splunk_hec/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_splunk_hec
+      weight: 2017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/splunk_tcp/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_splunk_tcp
+      weight: 2018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
       weight: 2019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/syslog/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_syslog
+      weight: 2020
     - name: Archive Logs
       url: observability_pipelines/set_up_pipelines/archive_logs/
       parent: observability_pipelines_set_up_pipelines
@@ -4537,41 +4547,46 @@ menu:
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_fluent
       weight: 3012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/archive_logs/google_pub_sub/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_google_pub_sub
+      weight: 3013
     - name: HTTP Client
       url: observability_pipelines/set_up_pipelines/archive_logs/http_client/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_http_client
-      weight: 3013
+      weight: 3014
     - name: HTTP Server
       url: observability_pipelines/set_up_pipelines/archive_logs/http_server/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_http_server
-      weight: 3013
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/set_up_pipelines/archive_logs/splunk_hec/
-      parent: observability_pipelines_archive_logs
-      identifier: observability_pipelines_archive_logs_splunk_hec
-      weight: 3014
-    - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/set_up_pipelines/archive_logs/splunk_tcp/
-      parent: observability_pipelines_archive_logs
-      identifier: observability_pipelines_archive_logs_splunk_tcp
       weight: 3015
-    - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/set_up_pipelines/archive_logs/sumo_logic_hosted_collector/
-      parent: observability_pipelines_archive_logs
-      identifier: observability_pipelines_archive_logs_sumo_logic_hosted_collector
-      weight: 3016
-    - name: Syslog
-      url: observability_pipelines/set_up_pipelines/archive_logs/syslog/
-      parent: observability_pipelines_archive_logs
-      identifier: observability_pipelines_archive_logs_syslog
-      weight: 3017
     - name: Logstash
       url: observability_pipelines/set_up_pipelines/archive_logs/logstash/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_logstash
+      weight: 3016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/archive_logs/splunk_hec/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_splunk_hec
+      weight: 3017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/archive_logs/splunk_tcp/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_splunk_tcp
       weight: 3018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/archive_logs/sumo_logic_hosted_collector/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_sumo_logic_hosted_collector
+      weight: 3019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/archive_logs/syslog/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_syslog
+      weight: 3020
     - name: Split Logs
       url: observability_pipelines/set_up_pipelines/split_logs/
       parent: observability_pipelines_set_up_pipelines
@@ -4587,41 +4602,46 @@ menu:
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_fluent
       weight: 4012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/split_logs/google_pubsub/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_google_pubsub
+      weight: 4013
     - name: HTTP Client
       url: observability_pipelines/set_up_pipelines/split_logs/http_client/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_http_client
-      weight: 4013
+      weight: 4014
     - name: HTTP Server
       url: observability_pipelines/set_up_pipelines/split_logs/http_server/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_http_server
-      weight: 4014
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/set_up_pipelines/split_logs/splunk_hec/
-      parent: observability_pipelines_split_logs
-      identifier: observability_pipelines_split_logs_splunk_hec
       weight: 4015
-    - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/set_up_pipelines/split_logs/splunk_tcp/
-      parent: observability_pipelines_split_logs
-      identifier: observability_pipelines_split_logs_splunk_tcp
-      weight: 4016
-    - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/set_up_pipelines/split_logs/sumo_logic_hosted_collector/
-      parent: observability_pipelines_split_logs
-      identifier: observability_pipelines_split_logs_sumo_logic_hosted_collector
-      weight: 4017
-    - name: Syslog
-      url: observability_pipelines/set_up_pipelines/split_logs/syslog/
-      parent: observability_pipelines_split_logs
-      identifier: observability_pipelines_split_logs_syslog
-      weight: 4018
     - name: Logstash
       url: observability_pipelines/set_up_pipelines/split_logs/logstash/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_logstash
+      weight: 4016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/split_logs/splunk_hec/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_splunk_hec
+      weight: 4017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/split_logs/splunk_tcp/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_splunk_tcp
+      weight: 4018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/split_logs/sumo_logic_hosted_collector/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_sumo_logic_hosted_collector
       weight: 4019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/split_logs/syslog/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_syslog
+      weight: 4020
     - name: Sensitive Data Redaction
       url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/
       parent: observability_pipelines_set_up_pipelines
@@ -4637,41 +4657,46 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_fluent
       weight: 5012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/google_pubsub/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_google_pubsub
+      weight: 5013
     - name: HTTP Client
       url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/http_client/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_http_client
-      weight: 5013
+      weight: 5014
     - name: HTTP Server
       url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/http_server/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_http_server
-      weight: 5014
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/splunk_hec/
-      parent: observability_pipelines_sensitive_data_redaction
-      identifier: observability_pipelines_sensitive_data_redaction_splunk_hec
       weight: 5015
-    - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/splunk_tcp/
-      parent: observability_pipelines_sensitive_data_redaction
-      identifier: observability_pipelines_sensitive_data_redaction_splunk_tcp
-      weight: 5016
-    - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector/
-      parent: observability_pipelines_sensitive_data_redaction
-      identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
-      weight: 5017
-    - name: Syslog
-      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/syslog/
-      parent: observability_pipelines_sensitive_data_redaction
-      identifier: observability_pipelines_sensitive_data_redaction_syslog
-      weight: 5018
     - name: Logstash
       url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/logstash/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_logstash
+      weight: 5016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/splunk_hec/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_splunk_hec
+      weight: 5017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/splunk_tcp/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_splunk_tcp
+      weight: 5018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
       weight: 5019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/syslog/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_syslog
+      weight: 5020
     - name: Log Enrichment
       url: observability_pipelines/set_up_pipelines/log_enrichment/
       parent: observability_pipelines_set_up_pipelines
@@ -4687,41 +4712,46 @@ menu:
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_fluent
       weight: 6012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/log_enrichment/google_pubsub/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_google_pubsub
+      weight: 6013
     - name: HTTP Client
       url: observability_pipelines/set_up_pipelines/log_enrichment/http_client/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_http_client
-      weight: 6013
+      weight: 6014
     - name: HTTP Server
       url: observability_pipelines/set_up_pipelines/log_enrichment/http_server/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_http_server
-      weight: 6014
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/set_up_pipelines/log_enrichment/splunk_hec/
-      parent: observability_pipelines_log_enrichment
-      identifier: observability_pipelines_log_enrichment_splunk_hec
       weight: 6015
-    - name: Splunk Forwarders (TCP)
-      url: observability_pipelines/set_up_pipelines/log_enrichment/splunk_tcp/
-      parent: observability_pipelines_log_enrichment
-      identifier: observability_pipelines_log_enrichment_splunk_tcp
-      weight: 6016
-    - name: Sumo Logic Hosted Collector
-      url: observability_pipelines/set_up_pipelines/log_enrichment/sumo_logic_hosted_collector/
-      parent: observability_pipelines_log_enrichment
-      identifier: observability_pipelines_log_enrichment_sumo_logic_hosted_collector
-      weight: 6017
-    - name: Syslog
-      url: observability_pipelines/set_up_pipelines/log_enrichment/syslog/
-      parent: observability_pipelines_log_enrichment
-      identifier: observability_pipelines_log_enrichment_syslog
-      weight: 6018
     - name: Logstash
       url: observability_pipelines/set_up_pipelines/log_enrichment/logstash/
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_logstash
+      weight: 6016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/log_enrichment/splunk_hec/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_splunk_hec
+      weight: 6017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/log_enrichment/splunk_tcp/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_splunk_tcp
+      weight: 6018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/log_enrichment/sumo_logic_hosted_collector/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_sumo_logic_hosted_collector
       weight: 6019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/log_enrichment/syslog/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_syslog
+      weight: 6020
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
@@ -4746,6 +4776,11 @@ menu:
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
+      weight: 402
+    - name: Google Pub/Sub
+      url: observability_pipelines/sources/google_pubsub/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_google_pubsub
       weight: 402
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
