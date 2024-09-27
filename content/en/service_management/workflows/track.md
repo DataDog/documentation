@@ -100,7 +100,7 @@ To track billing for your workflow executions, perform the following steps:
 
 1. Navigate to the [Usage Attribution][6] page.
 1. Under **Products** on the left, search for **Workflow Executions**.
-1. Hover over **Workflow Executions** and click **Only** to view usage attribution for only workflows.<br>A list of workflow execution counts organized by organization, data center, and team appears.
+1. Hover over **Workflow Executions** and click **Only** to view usage attribution for only workflows.
 
 
 ## Further reading
