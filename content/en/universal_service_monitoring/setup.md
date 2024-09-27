@@ -24,7 +24,14 @@ Supported Windows platforms
 
 Supported application-layer protocols
 : HTTP<br/>
-HTTPS (OpenSSL)
+HTTP2/gRPC<br/>
+
+Supported TLS implementations
+: GnuTLS<br/>
+Go TLS<br/>
+Istio TLS<br/>
+NodeJS TLS<br/>
+OpenSSL<br/>
 
 Known limitations
 : Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
