@@ -50,7 +50,7 @@ To get started, follow the instructions below.
    ```
 
    **Important:**
-   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.{{< region-param key="dd_site" >}}`.
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][7].
 
    See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][6] for other supported configurations of `openlineage` provider.
@@ -95,7 +95,7 @@ To get started, follow the instructions below.
 
    **Important:**
    * install and configure `openlineage` provider for both Airflow schedulers and Airflow workers.
-   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.{{< region-param key="dd_site" >}}`.
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][4].
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of `openlineage` provider.
@@ -139,7 +139,7 @@ To get started, follow the instructions below.
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
    **Important:**
-   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.{{< region-param key="dd_site" >}}`.
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
 3. Deploy your updated `requirements.txt` and [Amazon MWAA start script][3] to your Amazon S3 folder you configured for your Amazon MWAA Environment.
