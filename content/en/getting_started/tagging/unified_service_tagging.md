@@ -266,7 +266,7 @@ As explained in the full configuration, these labels can be set in a Dockerfile 
 
 ##### Automatic version tagging for APM data in containerized environments
 
-<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
+<div class="alert alert-info">This feature is only enabled for <a href="/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
 You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
 
@@ -332,7 +332,7 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ##### Automatic version tagging for APM data in containerized environments
 
-<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
+<div class="alert alert-info">This feature is only enabled for <a href="/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
 You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
 
