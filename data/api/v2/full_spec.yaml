@@ -15372,6 +15372,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     OktaAccountType:
       default: okta-accounts
       description: Account type for an Okta account.
@@ -34653,8 +34655,7 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with. Estimates are based on historical data, and unspecified fields default
-          to the minimum 49 hours.
+          with. If unspecified, it defaults to 0 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -34683,7 +34684,7 @@ paths:
         schema:
           type: boolean
       - description: A window, in hours, from the look back to estimate cardinality
-          with.
+          with. The minimum and default is 1 hour.
         example: 6
         in: query
         name: filter[timespan_h]
