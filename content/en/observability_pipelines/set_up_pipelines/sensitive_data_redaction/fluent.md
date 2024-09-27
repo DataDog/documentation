@@ -72,9 +72,9 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_settings/opensearch %}}
 
 {{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
+{{% tab "New Relic" %}}
 
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+{{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -143,6 +143,16 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
@@ -189,6 +199,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
