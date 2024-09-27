@@ -118,6 +118,14 @@ The function's runtime is [no longer supported][14].
 
 **Resolution:** Upgrade to the latest runtime to ensure you are up to date on the latest security, performance, and reliability standards.
 
+### Reaching maximum duration
+
+At least one invocation in the selected time range approached the maximum duration limit of 15 minutes.
+
+[Distributed tracing][7] can help you pinpoint slow API calls in your application.
+
+**Resolution:** Lambda functions approaching the maximum timeout limit of 15 minutes risk termination by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider improving the performance of your Lambda function, using smaller lambdas in a Step Function, or moving your workload to a longer running environment like ECS Fargate.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
