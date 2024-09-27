@@ -1,38 +1,111 @@
 ---
-title: Log Enrichment for Logstash
+title: Archive Logs for HTTP Server
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Logstash to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+Configure your HTTP Server so that the Observability Pipelines Worker formats the logs collected from HTTP client requests into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
-{{% observability_pipelines/use_case_images/log_enrichment %}}
+{{% observability_pipelines/use_case_images/archive_logs %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
+1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-logstash)
+1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/logstash %}}
+{{% observability_pipelines/prerequisites/http_server %}}
+
+## Configure Log Archives
+
+If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
+
+You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
+
+Select the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{% /collapse-content %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Log Enrichment** template to create a new pipeline.
-1. Select the **Logstash** source.
+1. Select the **Archive Logs** template to create a new pipeline.
+1. Select the **HTTP Server** source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/logstash%}}
+{{% observability_pipelines/source_settings/http_server%}}
 
 ### Set up the destinations
 
 Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_note %}}
+
+Follow the instructions for the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -158,9 +231,28 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Logstash address and port. For example, `0.0.0.0:9997`. The Observability Pipelines Worker listens on this address for incoming log messages.
+1. Enter the HTTP/S server address. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder. For example, `0.0.0.0:9997`.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog %}}
@@ -246,8 +338,11 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker over Logstash
+## Send logs to the Observability Pipelines Worker
 
-{{% observability_pipelines/log_source_configuration/logstash %}}
+{{% observability_pipelines/log_source_configuration/http_server%}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
+[1]: /integrations/amazon_web_services/#setup
+[2]: /integrations/google_cloud_platform/#setup
+[3]: /integrations/azure/#setup
+[4]: https://app.datadoghq.com/observability-pipelines

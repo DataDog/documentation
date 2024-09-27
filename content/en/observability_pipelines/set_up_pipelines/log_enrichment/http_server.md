@@ -1,32 +1,33 @@
 ---
-title: Log Enrichment for Logstash
+title: Log Enrichment for HTTP Server
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Logstash to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+Configure your HTTP Server to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-logstash)
+1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-http_server)
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/logstash %}}
+{{% observability_pipelines/prerequisites/http_server %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Log Enrichment** template to create a new pipeline.
-1. Select the **Logstash** source.
+1. Select the **HTTP Server** source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/logstash%}}
+{{% observability_pipelines/source_settings/http_server%}}
 
 ### Set up the destinations
 
@@ -158,7 +159,7 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Logstash address and port. For example, `0.0.0.0:9997`. The Observability Pipelines Worker listens on this address for incoming log messages.
+1. Enter the HTTP/S server address. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder. For example, `0.0.0.0:9997`.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}
@@ -246,8 +247,8 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker over Logstash
+## Send logs to the Observability Pipelines Worker over Http_server
 
-{{% observability_pipelines/log_source_configuration/logstash %}}
+{{% observability_pipelines/log_source_configuration/http_server %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

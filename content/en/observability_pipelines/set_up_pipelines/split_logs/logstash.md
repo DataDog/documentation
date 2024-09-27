@@ -22,7 +22,7 @@ This document walks you through the following steps:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Split Logs** template to create a new pipeline.
-1. Select **Logstash** as the source.
+1. Select the **Logstash** source.
 
 ### Set up the source
 

@@ -3,11 +3,11 @@ title: Logstash Source
 disable_toc: false
 ---
 
-Use Observability Pipelines' logstash source to receive logs from your TKTK. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' logstash source to receive logs from your Logstash agent. Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/logstash %}}
+{{% observability_pipelines/prerequisites/logstash%}}
 
 ## Set up the source in the pipeline UI
 
