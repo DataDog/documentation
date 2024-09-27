@@ -162,6 +162,13 @@ For more information about how to test downloads, see [Test File Upload and Down
 [1]: /synthetics/guide/email-validation
 [2]: /synthetics/browser_tests/actions#use-variables
 [3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+
+#### Test HTTP Request Count
+
+Create this assertion step to test the number of HTTP requests made to a specific URL pattern. Enter the expected request count and the target URL regex to test against.
+
+{{< img src="synthetics/browser_tests/number_and_target_2.png" alt="Test number and target of requests option with the requests made dropdown shown" style="width:60%;" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
