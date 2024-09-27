@@ -253,7 +253,7 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 - Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
-- When using "Squash and merge" for pull requests:
+- When using "Squash" to merge pull requests:
   - For GitHub: Metrics are emitted for the original commits.
   - For other git providers: Metrics are emitted for the new commit added to the target branch.
 
