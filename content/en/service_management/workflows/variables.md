@@ -90,6 +90,8 @@ To add an output parameter:
 
 The **Output Parameters** section displays the names of all existing output parameters together with a counter.
 
+For information on passing data between workflows, see [Access the result of a child workflow][7].
+
 For an example of how to use output parameters to pass information between Workflows and App Builder, see [return workflow results to an app][6].
 
 ## Custom variables
@@ -146,3 +148,4 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 [4]: https://handlebarsjs.com/guide/expressions.html#expressions
 [5]: /service_management/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
+[7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
