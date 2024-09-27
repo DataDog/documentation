@@ -10,6 +10,8 @@ further_reading:
 
 Datadog’s nested queries feature allows you to add additional layers of aggregation on the results of existing queries in time and space. This functionality is available through the JSON tab or the API, and it supports various aggregation functions to enhance data analysis. Nested queries help you achieve multilayer aggregation, compute percentiles, and standard deviations on metrics, and run higher resolution queries over historical time frames.
 
+Datadog currently allows for [time and space aggregation][2] of your metric queries allowing for custom roll-up  capaibilities but were limited to up to 1 time and 1 space aggregation per query. With nested queries, you are now able to add an additional layer of aggregation on the results of existing queries in time and space. This unlocks new querying functionality including multilayer aggregation, standard deviation
+
 ## Multilayer aggregation
 
 In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of aggregation beyond the default.
@@ -124,3 +126,4 @@ In JSON or API format:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/functions/rollup/
+[2]: /metrics/#configure-time-aggregation
