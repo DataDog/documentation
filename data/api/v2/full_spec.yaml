@@ -993,6 +993,64 @@ components:
             $ref: '#/components/schemas/AWSRelatedAccount'
           type: array
       type: object
+    AbbreviatedTeam:
+      description: The definition of `AbbreviatedTeam` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AbbreviatedTeamAttributes'
+        id:
+          description: ID of the team
+          type: string
+        type:
+          $ref: '#/components/schemas/AbbreviatedTeamType'
+      required:
+      - attributes
+      - type
+      type: object
+    AbbreviatedTeamAttributes:
+      description: The definition of `AbbreviatedTeamAttributes` object.
+      properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          type: integer
+        handle:
+          description: The team's identifier
+          example: ''
+          type: string
+        handles:
+          description: The `AbbreviatedTeamAttributes` `handles`.
+          type: string
+        is_open_membership:
+          description: The `AbbreviatedTeamAttributes` `is_open_membership`.
+          readOnly: true
+          type: boolean
+        name:
+          description: The name of the team
+          example: ''
+          type: string
+        summary:
+          description: A brief summary of the team
+          readOnly: true
+          type: string
+      required:
+      - handle
+      - name
+      type: object
+    AbbreviatedTeamType:
+      default: team
+      description: The definition of `AbbreviatedTeamType` object.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -18034,27 +18092,6 @@ components:
       type: object
       x-merge-override:
         required: false
-    RelationshipToUserTeamTeam:
-      description: Relationship between team membership and team
-      properties:
-        data:
-          $ref: '#/components/schemas/RelationshipToUserTeamTeamData'
-      required:
-      - data
-      type: object
-    RelationshipToUserTeamTeamData:
-      description: The team associated with the membership
-      properties:
-        id:
-          description: The ID of the team associated with the membership
-          example: d7e15d9d-d346-43da-81d8-3d9e71d9a5e9
-          type: string
-        type:
-          $ref: '#/components/schemas/UserTeamTeamType'
-      required:
-      - id
-      - type
-      type: object
     RelationshipToUserTeamUser:
       description: Relationship between team membership and user
       properties:
@@ -25246,8 +25283,8 @@ components:
     UserTeamIncluded:
       description: Included resources related to the team membership
       oneOf:
-      - $ref: '#/components/schemas/User'
-      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/AbbreviatedTeam'
+      - $ref: '#/components/schemas/UserTeamUser'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -25286,8 +25323,6 @@ components:
     UserTeamRelationships:
       description: Relationship between membership and a user
       properties:
-        team:
-          $ref: '#/components/schemas/RelationshipToUserTeamTeam'
         user:
           $ref: '#/components/schemas/RelationshipToUserTeamUser'
       type: object
@@ -25318,15 +25353,6 @@ components:
       type: string
       x-enum-varnames:
       - ADMIN
-    UserTeamTeamType:
-      default: team
-      description: User team team type
-      enum:
-      - team
-      example: team
-      type: string
-      x-enum-varnames:
-      - TEAM
     UserTeamType:
       default: team_memberships
       description: Team membership type
@@ -25353,6 +25379,42 @@ components:
           $ref: '#/components/schemas/UserTeamUpdate'
       required:
       - data
+      type: object
+    UserTeamUser:
+      description: The definition of `UserTeamUser` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamUserAttributes'
+        id:
+          description: The `UserTeamUser` ID.
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamUserType'
+      required:
+      - type
+      type: object
+    UserTeamUserAttributes:
+      description: The definition of `UserTeamUserAttributes` object.
+      properties:
+        disabled:
+          description: The `UserTeamUserAttributes` `disabled`.
+          type: boolean
+        email:
+          description: The `UserTeamUserAttributes` `email`.
+          type: string
+        handle:
+          description: The `UserTeamUserAttributes` `handle`.
+          type: string
+        icon:
+          description: The `UserTeamUserAttributes` `icon`.
+          type: string
+        name:
+          description: The `UserTeamUserAttributes` `name`.
+          nullable: true
+          type: string
+        service_account:
+          description: The `UserTeamUserAttributes` `service_account`.
+          type: boolean
       type: object
     UserTeamUserType:
       default: users
@@ -41582,6 +41644,7 @@ paths:
         name: filter[keyword]
         required: false
         schema:
+          description: Search query, can be user email or name.
           type: string
       responses:
         '200':
@@ -41689,6 +41752,10 @@ paths:
         - name: user_id
           source: data.relationships.user.data.id
         type: unsafe
+    x-merge-override:
+      get: false
+      patch: false
+      post: false
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
@@ -41791,6 +41858,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      patch: false
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
