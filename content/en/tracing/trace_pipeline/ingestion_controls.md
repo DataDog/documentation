@@ -156,7 +156,7 @@ If sampling rules are set in multiple different locations, the following precede
 1. [Locally configured sampling rules][8] (`DD_TRACE_SAMPLING_RULES`)
 1. [Remotely configured global sampling rate][8]
 1. [Locally configured global sampling rate][8] (`DD_TRACE_SAMPLE_RATE`)
-1. [Rates from the trace agent controlled indirectly via Agent settings][18] remotely or locally, like `DD_APM_TARGET_TPS` and `DD_APM_MAX_TPS`
+1. [Rates from the trace agent controlled indirectly with Agent settings][18] remotely or locally, like `DD_APM_TARGET_TPS` and `DD_APM_MAX_TPS`
 1. In the absence of any sampling rates, the default is 100%, meaning keep all traces
 
 In simpler terms, we follow the following precedence rules
