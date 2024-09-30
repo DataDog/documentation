@@ -27,7 +27,7 @@ For Astronomer customers using Astro, the following setup may affect the lineage
 ## Requirements
 
 * [Apache Airflow 2.8.0][1] or later is required.
-* [apache-airflow-providers-openlineage][2] 1.12.0 or later is required.
+* [apache-airflow-providers-openlineage][2] 1.11.0 or later is required.
 
 ## Setup
 
@@ -35,10 +35,12 @@ Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-air
 
 To get started, follow the instructions below.
 
-1. Airflow provider `openlineage` is already installed in [Astro Runtimes][3]. Customize the provider version by adding the following to your `requirements.txt` file into your [Astro project][4].
+1. Airflow provider `openlineage` is already installed in [Astro Runtimes][3] if you are using Astro. Ensure your [Astro Runtime][3] comes with the package version greater or equal to `1.11.0` for `apache-airflow-providers-openlineage`. 
    
+   Alternatively, add the following to your `requirements.txt` file inside your [Astro project][4] if you use a customized image.
+
    ```text
-   apache-airflow-providers-openlineage==<AIRLOW_OPENLINEAGE_PROVIDER_VERSION>
+   apache-airflow-providers-openlineage>=1.11.0
    ```
 
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables [using the Astro UI][5]:
