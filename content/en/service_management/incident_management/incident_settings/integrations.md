@@ -1,7 +1,5 @@
 ---
 title: Integrations
-futher_reading:
-- link: 
 ---
 
 ## Overview
