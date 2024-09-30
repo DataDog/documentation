@@ -1,0 +1,7 @@
+Error reading or parsing the options allowlist file at /duplicate_option_id/options.yaml: [
+  {
+    "code": "custom",
+    "message": "Invalid input",
+    "path": []
+  }
+]

@@ -8,7 +8,11 @@ export const AllowlistEntrySchema = z
   })
   .strict();
 
-export const AllowlistSchema = z.array(AllowlistEntrySchema);
+export const AllowlistSchema = z.array(AllowlistEntrySchema).refine((entries) => {
+  const ids = entries.map((entry) => entry.id);
+  const uniqueIds = new Set(ids);
+  return ids.length === uniqueIds.size;
+});
 
 export type AllowlistEntry = z.infer<typeof AllowlistEntrySchema>;
 export type Allowlist = z.infer<typeof AllowlistSchema>;
