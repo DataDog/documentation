@@ -46,7 +46,7 @@ title: 로그 관리
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
-  초급 또는 중금 활성화 세션에 참가해 Datadog  Log Management를 사용해 로그, 메트릭, 트레이스를 하나로 통합해 보는 방법을 알아보세요. 이를 통해 로그 데이터 분석에 풍성한 컨텍스트를 얻을 수 있습니다.
+  초급 또는 중급 활성화 세션에 참가해 Datadog  Log Management를 사용해 로그, 메트릭, 트레이스를 하나로 통합해 보는 방법을 알아보세요. 이를 통해 로그 데이터 분석에 풍성한 컨텍스트를 얻을 수 있습니다.
 {{< /learning-center-callout >}}
 
 ## 개요
