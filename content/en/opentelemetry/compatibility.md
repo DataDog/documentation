@@ -29,7 +29,7 @@ The following setups are supported:
 
 The following table shows feature compatibility across different setups:
 
-| Feature                                | Full OTel                          | OTel to Datadog (OTLP)             | OTel API with Datadog API and Agent | OTel with embedded Datadog Collector (Preview) | Full Datadog                       |
+| Feature                                | Full OTel                          | OTel to Datadog (OTLP)             | OTel API with Datadog SDK and Agent | OTel with embedded Datadog Collector (Preview) | Full Datadog                       |
 |----------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------|------------------------------------|
 | Application Security Monitoring (ASM)  |                                    |                                    | {{< X >}}                           |                                                | {{< X >}}                          |
 | Continuous Profiler                    |                                    |                                    | {{< X >}}                           |                                                | {{< X >}}                          |
@@ -45,74 +45,43 @@ The following table shows feature compatibility across different setups:
 | Network Performance Monitoring (NPM)   |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                      | {{< X >}}                          |
 | Real User Monitoring (RUM)             | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                      | {{< X >}}                          |
 | Runtime Metrics                        | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}                           | {{< X >}}                                      | {{< X >}}<br>(Java, .NET, Go only) |
-| Source code integration                | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                      | {{< X >}}                          |
+| Source code integration                | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           |                                                | {{< X >}}                          |
 
 ## More details
 
-### Application Security Monitoring (ASM)
+### Runtime Metrics
 
-Currently only supported in setups using the Datadog SDK.
-
-### Cloud SIEM
-
-Supported across all setups.
-
-### Continuous Profiler
-
-Currently available only in setups using the Datadog SDK.
-
-### Correlated Traces, Metrics, and Logs
-
-All setups support correlated traces, metrics, and logs, providing a unified view of your application's performance.
-
-### Data Journaling Monitoring (DJM)
-
-This feature is currently only supported in setups using the Datadog SDK.
-
-### Database Monitoring (DBM)
-
-This feature is currently only supported in setups using the Datadog SDK.
-
-### Digital Security Monitoring (DSM)
-
-This feature is currently only supported in setups using the Datadog SDK.
-
-### Live Container Monitoring/K8s Explorer
-
-Supported in most setups except for the pure OpenTelemetry configuration. Follow internal documentation for specific requirements.
-
-### Live Processes
-
-Supported in setups using the Datadog Agent. Requires enabling the process agent and container IDs.
-
-### Mobile SDKs
-
-Full iOS and Android support is available for setups using the Datadog SDK.
-
-### Network Performance Monitoring (NPM)
-
-Supported in setups using the Datadog Agent, providing visibility into network traffic between services and containers. Note: Span level/endpoint monitoring is not currently supported.
+Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1] specification.
 
 ### Real User Monitoring (RUM)
 
-Supported across all setups. OpenTelemetry setups require injecting supported headers.
+To enable full RUM functionality, you need to [inject supported headers][2] to correlate RUM and traces.
 
-### Runtime Metrics
+### Network Performance Monitoring (NPM)
 
-OpenTelemetry setups support runtime metrics for Java, .NET, and Go. Datadog SDK setups support runtime metrics for all supported languages.
+For **OTel to Datadog (OTLP)** and **OTel with embedded Datadog Collector (Preview)** setups, span-level or endpoint-level monitoring is **not** supported.
+
+For more information, see [Network Performance Monitoring Setup][3].
+
+### Live Processes
+
+For **OTel to Datadog (OTLP)**, you must enable the [Process Agent][4].
 
 ### Source Code Integration
 
-Supported in most setups. For unsupported languages, follow the guide on configuring telemetry tagging.
-
-### Universal Service Monitoring (USM)
-
-Currently only supported in setups using the Datadog SDK.
+For unsupported languages in OpenTelemetry setups, [configure telemetry tagging][5] to link data to a specific commit.
 
 ## Best practices
 
-**Avoid Mixed Instrumentation**: Don't use both Datadog SDK and OpenTelemetry SDK to instrument the same application.
+- **Avoid Mixed Instrumentation**: Don't use both Datadog SDK and OpenTelemetry SDK to instrument the same application.
+- **Avoid Agent and Separate Collector**: Don't use the Datadog Agent and a separate OpenTelemetry Collector at the same time.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /opentelemetry/integrations/runtime_metrics/
+[2]: /real_user_monitoring/platform/connect_rum_and_traces/
+[3]: /network_monitoring/performance/setup/
+[4]: /infrastructure/process/
+[5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging
