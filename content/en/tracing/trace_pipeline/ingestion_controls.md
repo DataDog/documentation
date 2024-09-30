@@ -159,7 +159,7 @@ If sampling rules are set in multiple different locations, the following precede
 1. [Rates from the trace agent controlled indirectly with Agent settings][18] remotely or locally, like `DD_APM_TARGET_TPS` and `DD_APM_MAX_TPS`
 1. In the absence of any sampling rates, the default is 100%, meaning keep all traces
 
-In simpler terms, we follow the following precedence rules
+To phrase it another way, Datadog uses the following precedence rules:
 - Tracer settings > Agent settings
 - Sampling rules > Global sampling rate
 - Remote > Local
