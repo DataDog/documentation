@@ -2175,6 +2175,11 @@ menu:
       parent: oncall
       identifier: oncall_profile_settings
       weight: 5
+    - name: Processing Rules
+      url: service_management/on-call/processing_rules/
+      parent: oncall
+      identifier: oncall_processing_rules
+      weight: 6
     - name: Event Management
       url: service_management/events/
       pre: events

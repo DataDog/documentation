@@ -29,5 +29,9 @@ If no specific filter should be applied, use `*`.
 
 Ordering of Processing Rules matters. The system goes from top to bottom and will stop matching rules if one matches. If no query or time filter matches the incoming alert, the default processing rule will be used.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
