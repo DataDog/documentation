@@ -47,7 +47,7 @@ export DD_THIRD_PARTY_DETECTION_EXCLUDES=<LIST_OF_USER_CODE_MODULES>
 export DD_THIRD_PARTY_DETECTION_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_MODULES>
 ```
 
-where `<LIST_OF_USER_CODE_MODULES>` and `<LIST_OF_ADDITIONAL_THIRD_PARTY_MODULES>` are comma separated lists of package prefixes.
+where `<LIST_OF_USER_CODE_MODULES>` and `<LIST_OF_ADDITIONAL_THIRD_PARTY_MODULES>` are comma separated lists of package prefixes. For example:
 
 ```
 export DD_THIRD_PARTY_DETECTION_EXCLUDES=shopping,database
