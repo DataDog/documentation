@@ -11,8 +11,18 @@ export const AllowlistEntrySchema = z
 export const AllowlistSchema = z.array(AllowlistEntrySchema).refine((entries) => {
   const ids = entries.map((entry) => entry.id);
   const uniqueIds = new Set(ids);
-  return ids.length === uniqueIds.size;
+  if (ids.length !== uniqueIds.size) {
+    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+    console.error(`Duplicate IDs found in allowlist: ${duplicates.join(', ')}`);
+    return false;
+  }
+  return true;
 });
+
+export const RawAllowlistSchema = z.object({
+  allowed: AllowlistSchema
+});
+export type RawAllowlist = z.infer<typeof RawAllowlistSchema>;
 
 export type AllowlistEntry = z.infer<typeof AllowlistEntrySchema>;
 export type Allowlist = z.infer<typeof AllowlistSchema>;

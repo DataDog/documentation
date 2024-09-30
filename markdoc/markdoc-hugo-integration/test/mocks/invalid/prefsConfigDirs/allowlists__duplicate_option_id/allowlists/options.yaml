@@ -1,3 +1,4 @@
+allowed:
 - id: red
   display_name: Red
 - id: green

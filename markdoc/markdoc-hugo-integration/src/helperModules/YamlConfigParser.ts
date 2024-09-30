@@ -21,7 +21,12 @@ import {
   MinifiedPagePrefsConfigSchema,
   PagePrefsConfig
 } from '../schemas/yaml/frontMatter';
-import { AllowlistsByType, Allowlist, AllowlistSchema } from '../schemas/yaml/allowlist';
+import {
+  AllowlistsByType,
+  Allowlist,
+  AllowlistSchema,
+  RawAllowlistSchema
+} from '../schemas/yaml/allowlist';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import {
@@ -72,8 +77,8 @@ export class YamlConfigParser {
     const prefsAllowlistFilePath = `${dir}/allowlists/prefs.yaml`;
     try {
       const prefsAllowlistStr = fs.readFileSync(prefsAllowlistFilePath, 'utf8');
-      const prefsAllowlist = AllowlistSchema.parse(yaml.load(prefsAllowlistStr));
-      result.prefs = prefsAllowlist;
+      const prefsAllowlist = RawAllowlistSchema.parse(yaml.load(prefsAllowlistStr));
+      result.prefs = prefsAllowlist.allowed;
     } catch (e) {
       // If the file is not found, use an empty list
       if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
@@ -87,8 +92,8 @@ export class YamlConfigParser {
     const optionsAllowlistFilePath = `${dir}/allowlists/options.yaml`;
     try {
       const optionsAllowlistStr = fs.readFileSync(optionsAllowlistFilePath, 'utf8');
-      const optionsAllowlist = AllowlistSchema.parse(yaml.load(optionsAllowlistStr));
-      result.options = optionsAllowlist;
+      const optionsAllowlist = RawAllowlistSchema.parse(yaml.load(optionsAllowlistStr));
+      result.options = optionsAllowlist.allowed;
     } catch (e) {
       // If the file is not found, use an empty list
       if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
@@ -111,7 +116,7 @@ export class YamlConfigParser {
    */
   private static loadPrefOptionsFromDir(dir: string): RawPrefOptionsConfig {
     const filenames = FileNavigator.findInDir(dir, /\.ya?ml$/);
-    const prefOptions: PrefOptionsConfig = {};
+    const rawPrefOptions: RawPrefOptionsConfig = {};
 
     filenames.forEach((filename) => {
       const prefOptionsConfig = RawPrefOptionsConfigSchema.parse(
@@ -119,16 +124,16 @@ export class YamlConfigParser {
       );
       for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
         // Verify that no duplicate options set IDs exist
-        if (prefOptions[optionsListId]) {
+        if (rawPrefOptions[optionsListId]) {
           throw new Error(
             `Duplicate options list ID '${optionsListId}' found in file ${filename}`
           );
         }
-        prefOptions[optionsListId] = optionsList;
+        rawPrefOptions[optionsListId] = optionsList;
       }
     });
 
-    return prefOptions;
+    return rawPrefOptions;
   }
 
   /**
@@ -137,7 +142,7 @@ export class YamlConfigParser {
    * @param yamlFile The path to a YAML file containing preference options.
    * @returns A read-only PrefOptionsConfig object.
    */
-  static loadPrefsYamlFromStr(yamlFile: string): Readonly<PrefOptionsConfig> {
+  static loadPrefsYamlFromStr(yamlFile: string): RawPrefOptionsConfig {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent);
     return RawPrefOptionsConfigSchema.parse(parsedYaml);
