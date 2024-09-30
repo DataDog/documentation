@@ -63,9 +63,8 @@ After you have set up your Datadog library for Test Visibility, you can configur
 The required test framework and dd-trace versions are:
 
 `dd-trace-js`:
-* `>=5.12.0` for the 5.x release.
-* `>=4.36.0` for the 4.x release.
-* `>=3.57.0` for the 3.x release.
+* `>=5.23.0` for the 5.x release.
+* `>=4.47.0` for the 4.x release.
 
 The test framework compatibility is the same as [Test Visibility Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
