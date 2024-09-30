@@ -54,7 +54,7 @@ To get started, follow the instructions below.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][7].
 
    **Optionally:**
-   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to logically separate jobs emitted from different Airflow instances.
+   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
    * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][6] for other supported configurations of `openlineage` provider.
@@ -103,7 +103,7 @@ To get started, follow the instructions below.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][4].
    
    **Optionally:**
-   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to logically separate jobs emitted from different Airflow instances.
+   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
    * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of `openlineage` provider.
@@ -149,7 +149,7 @@ To get started, follow the instructions below.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
    **Optionally:**
-   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to logically separate jobs emitted from different Airflow instances.
+   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
    * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
