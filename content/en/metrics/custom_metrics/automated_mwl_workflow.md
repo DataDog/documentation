@@ -19,7 +19,7 @@ private: true
 ## Overview
 
 {{< callout url="#" btn_hidden="true">}}
-  This feature is currently in beta.
+  This feature is currently in Preview.
 {{< /callout >}} 
 
 [Metrics without Limits™][1] enables flexibility and control over your custom metric ingestion and indexing. However, manual configuration of custom metrics becomes unscalable as organizations' custom metrics usage grows to hundreds of millions of metrics. 
