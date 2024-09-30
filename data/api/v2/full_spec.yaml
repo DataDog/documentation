@@ -993,64 +993,6 @@ components:
             $ref: '#/components/schemas/AWSRelatedAccount'
           type: array
       type: object
-    AbbreviatedTeam:
-      description: The definition of `AbbreviatedTeam` object.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/AbbreviatedTeamAttributes'
-        id:
-          description: ID of the team
-          type: string
-        type:
-          $ref: '#/components/schemas/AbbreviatedTeamType'
-      required:
-      - attributes
-      - type
-      type: object
-    AbbreviatedTeamAttributes:
-      description: The definition of `AbbreviatedTeamAttributes` object.
-      properties:
-        avatar:
-          description: Unicode representation of the avatar for the team, limited
-            to a single grapheme
-          nullable: true
-          type: string
-        banner:
-          description: Banner selection for the team
-          format: int64
-          type: integer
-        handle:
-          description: The team's identifier
-          example: ''
-          type: string
-        handles:
-          description: The `AbbreviatedTeamAttributes` `handles`.
-          type: string
-        is_open_membership:
-          description: The `AbbreviatedTeamAttributes` `is_open_membership`.
-          readOnly: true
-          type: boolean
-        name:
-          description: The name of the team
-          example: ''
-          type: string
-        summary:
-          description: A brief summary of the team
-          readOnly: true
-          type: string
-      required:
-      - handle
-      - name
-      type: object
-    AbbreviatedTeamType:
-      default: team
-      description: The definition of `AbbreviatedTeamType` object.
-      enum:
-      - team
-      example: team
-      type: string
-      x-enum-varnames:
-      - TEAM
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -6654,6 +6596,12 @@ components:
           example: 1693491974000000000
           format: int64
           type: integer
+        team:
+          description: Name of the team owning the deployed service. If not provided,
+            this is automatically populated with the team associated with the service
+            in the Service Catalog.
+          example: backend
+          type: string
         version:
           description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
           example: v1.12.07
@@ -9307,7 +9255,7 @@ components:
         data:
           description: The JSON:API data schema.
           items:
-            $ref: '#/components/schemas/FastlyServiceResponse'
+            $ref: '#/components/schemas/FastlyServiceData'
           type: array
       type: object
     Finding:
@@ -14129,8 +14077,8 @@ components:
         - time: sum, space: sum
 
 
-        Can only be applied to metrics that have a `metric_type` of `count`, `rate`,
-        or `gauge`.'
+        Can only be applied to non_distribution metrics that have a `metric_type`
+        of `count`, `rate`, or `gauge`.'
       example:
       - space: sum
         time: sum
@@ -14742,6 +14690,17 @@ components:
       required:
       - data
       type: object
+    MetricTagConfigurationMetricTypeCategory:
+      default: distribution
+      description: The metric's type category.
+      enum:
+      - non_distribution
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - NON_DISTRIBUTION
+      - DISTRIBUTION
     MetricTagConfigurationMetricTypes:
       default: gauge
       description: The metric's type.
@@ -15424,6 +15383,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     OktaAccountType:
       default: okta-accounts
       description: Account type for an Okta account.
@@ -16463,6 +16424,18 @@ components:
     PowerpackTemplateVariable:
       description: Powerpack template variables.
       properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
         defaults:
           description: One or many template variable default values within the saved
             view, which are unioned together using `OR` if more than one is specified.
@@ -16474,6 +16447,12 @@ components:
         name:
           description: The name of the variable.
           example: datacenter
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with
+            this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
           type: string
       required:
       - name
@@ -25269,8 +25248,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/AbbreviatedTeam'
-      - $ref: '#/components/schemas/UserTeamUser'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -25376,42 +25353,6 @@ components:
           $ref: '#/components/schemas/UserTeamUpdate'
       required:
       - data
-      type: object
-    UserTeamUser:
-      description: The definition of `UserTeamUser` object.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/UserTeamUserAttributes'
-        id:
-          description: The `UserTeamUser` ID.
-          type: string
-        type:
-          $ref: '#/components/schemas/UserTeamUserType'
-      required:
-      - type
-      type: object
-    UserTeamUserAttributes:
-      description: The definition of `UserTeamUserAttributes` object.
-      properties:
-        disabled:
-          description: The `UserTeamUserAttributes` `disabled`.
-          type: boolean
-        email:
-          description: The `UserTeamUserAttributes` `email`.
-          type: string
-        handle:
-          description: The `UserTeamUserAttributes` `handle`.
-          type: string
-        icon:
-          description: The `UserTeamUserAttributes` `icon`.
-          type: string
-        name:
-          description: The `UserTeamUserAttributes` `name`.
-          nullable: true
-          type: string
-        service_account:
-          description: The `UserTeamUserAttributes` `service_account`.
-          type: boolean
       type: object
     UserTeamUserType:
       default: users
@@ -25808,6 +25749,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     post:
@@ -25852,6 +25797,10 @@ paths:
               unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
           step: there is a valid "api_key" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -25887,6 +25836,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_delete
       x-undo:
         type: idempotent
     get:
@@ -25922,6 +25875,10 @@ paths:
       x-menu-order: 3
       x-merge-override:
         parameters: false
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     patch:
@@ -25967,6 +25924,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -26287,6 +26248,10 @@ paths:
       tags:
       - Spans Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
     post:
@@ -26334,6 +26299,10 @@ paths:
               \   \"type\": \"spans_metrics\"\n  }\n}"
           step: there is a valid "spans_metric" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_generate_metrics
       x-undo:
         operationId: DeleteSpansMetric
         parameters:
@@ -26359,6 +26328,10 @@ paths:
       tags:
       - Spans Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_generate_metrics
       x-undo:
         type: idempotent
     get:
@@ -26383,6 +26356,10 @@ paths:
       tags:
       - Spans Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
     patch:
@@ -26420,6 +26397,10 @@ paths:
       - Spans Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_generate_metrics
       x-undo:
         type: idempotent
   /api/v2/apm/config/retention-filters:
@@ -26441,6 +26422,11 @@ paths:
       tags:
       - APM Retention Filters
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_read
+        - apm_pipelines_read
       x-undo:
         type: safe
     post:
@@ -26490,6 +26476,11 @@ paths:
               \   }\n}"
           step: there is a valid "retention_filter" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         operationId: DeleteApmRetentionFilter
         parameters:
@@ -26521,6 +26512,11 @@ paths:
       - APM Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         type: idempotent
   /api/v2/apm/config/retention-filters/{filter_id}:
@@ -26546,6 +26542,11 @@ paths:
       tags:
       - APM Retention Filters
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         type: idempotent
     get:
@@ -26570,6 +26571,11 @@ paths:
       tags:
       - APM Retention Filters
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_read
+        - apm_pipelines_read
       x-undo:
         type: safe
     put:
@@ -26608,6 +26614,11 @@ paths:
       - APM Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_retention_filter_write
+        - apm_pipelines_write
       x-undo:
         type: idempotent
   /api/v2/application_keys:
@@ -26653,6 +26664,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
       x-undo:
         type: safe
   /api/v2/application_keys/{app_key_id}:
@@ -26683,6 +26698,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
       x-undo:
         type: idempotent
     get:
@@ -26722,6 +26741,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
       x-undo:
         type: safe
     patch:
@@ -26767,6 +26790,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -26854,6 +26881,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - audit_logs_read
       x-undo:
         type: safe
   /api/v2/audit/events/search:
@@ -26898,6 +26929,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - audit_logs_read
       x-undo:
         type: safe
   /api/v2/authn_mappings:
@@ -26943,6 +26978,9 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -26997,6 +27035,10 @@ paths:
               \"authn_mappings\"\n  }\n}"
           step: there is a valid "authn_mapping" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteAuthNMapping
         parameters:
@@ -27033,6 +27075,10 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     get:
@@ -27065,6 +27111,9 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     patch:
@@ -27122,6 +27171,10 @@ paths:
       - AuthN Mappings
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     x-merge-override:
@@ -27925,6 +27978,10 @@ paths:
       - CI Visibility Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/pipelines/events:
@@ -28012,6 +28069,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/pipelines/events/search:
@@ -28058,6 +28119,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/tests/analytics/aggregate:
@@ -28094,6 +28159,10 @@ paths:
       - CI Visibility Tests
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events:
@@ -28181,6 +28250,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events/search:
@@ -28227,6 +28300,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - ci_visibility_read
       x-undo:
         type: safe
   /api/v2/container_images:
@@ -28307,6 +28384,9 @@ paths:
         cursorPath: meta.pagination.next_cursor
         limitParam: page[size]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/containers:
@@ -28387,6 +28467,9 @@ paths:
         cursorPath: meta.pagination.next_cursor
         limitParam: page[size]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/cost/aws_cur_config:
@@ -28417,6 +28500,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
     post:
@@ -28458,6 +28545,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/aws_cur_config/{cloud_account_id}:
@@ -28492,6 +28583,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
     patch:
@@ -28529,6 +28624,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/aws_related_accounts:
@@ -28575,6 +28674,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost/azure_uc_config:
@@ -28605,6 +28708,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
     post:
@@ -28646,6 +28753,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/azure_uc_config/{cloud_account_id}:
@@ -28680,6 +28791,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
     patch:
@@ -28723,6 +28838,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -28879,6 +28998,10 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
@@ -28920,6 +29043,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29046,6 +29173,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -29094,6 +29225,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: safe
     post:
@@ -29138,6 +29273,10 @@ paths:
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
         parameters:
@@ -29171,6 +29310,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: idempotent
     get:
@@ -29203,6 +29346,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: safe
     patch:
@@ -29248,6 +29395,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         type: idempotent
     x-merge-override:
@@ -29347,6 +29498,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -29637,6 +29792,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: safe
     post:
@@ -29690,6 +29849,10 @@ paths:
               \   \"type\": \"downtime\"\n  }\n}"
           step: there is a valid "downtime_v2" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         operationId: CancelDowntime
         parameters:
@@ -29734,6 +29897,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
     get:
@@ -29793,6 +29960,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: safe
     patch:
@@ -29850,6 +30021,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v2/events:
@@ -29931,8 +30106,14 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
+    x-merge-override:
+      get: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -29971,8 +30152,14 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
+    x-merge-override:
+      post: false
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -30011,6 +30198,10 @@ paths:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30061,6 +30252,10 @@ paths:
               \"incidents\"\n  }\n}"
           step: there is a valid "incident" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         operationId: DeleteIncident
         parameters:
@@ -30110,6 +30305,10 @@ paths:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data.attributes.incidents
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30143,6 +30342,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30180,6 +30383,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30226,6 +30433,10 @@ paths:
       - Incidents
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30262,6 +30473,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30314,6 +30529,10 @@ paths:
               \"incident_attachments\"\n    }\n  ]\n}"
           step: the "incident" has an "incident_attachment"
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30351,6 +30570,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30409,6 +30632,10 @@ paths:
               \ }\n}"
           step: the "incident" has an "incident_integration_metadata"
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         operationId: DeleteIncidentIntegration
         parameters:
@@ -30569,6 +30796,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30627,6 +30858,10 @@ paths:
               \ }\n}"
           step: the "incident" has an "incident_todo"
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         operationId: DeleteIncidentTodo
         parameters:
@@ -30667,6 +30902,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30704,6 +30943,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30749,6 +30992,10 @@ paths:
       - Incidents
       x-codegen-request-body-name: body
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -30776,6 +31023,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -30818,6 +31069,10 @@ paths:
               \   },\n    \"type\": \"gcp_service_account\"\n  }\n}"
           step: there is a valid "gcp_sts_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         operationId: DeleteGCPSTSAccount
         parameters:
@@ -30846,6 +31101,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         type: idempotent
     patch:
@@ -30879,6 +31138,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
     x-merge-override:
@@ -30904,6 +31167,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -30935,6 +31202,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
   /api/v2/integration/opsgenie/services:
@@ -30956,6 +31227,10 @@ paths:
       tags:
       - Opsgenie Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -30997,6 +31272,10 @@ paths:
               \ }\n}"
           step: there is a valid "opsgenie_service" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteOpsgenieService
         parameters:
@@ -31027,6 +31306,10 @@ paths:
       tags:
       - Opsgenie Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -31055,6 +31338,10 @@ paths:
       tags:
       - Opsgenie Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -31091,6 +31378,10 @@ paths:
       - Opsgenie Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -31120,6 +31411,10 @@ paths:
       tags:
       - Cloudflare Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -31160,6 +31455,10 @@ paths:
               \"zone-id-2\"],\n      \"resources\": [\"web\", \"dns\"]\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteCloudflareAccount
         parameters:
@@ -31194,6 +31493,10 @@ paths:
       tags:
       - Cloudflare Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -31225,6 +31528,10 @@ paths:
       tags:
       - Cloudflare Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -31263,6 +31570,10 @@ paths:
       - Cloudflare Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -31291,6 +31602,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -31335,6 +31650,10 @@ paths:
               \         ]\n        }\n      ]\n    }\n  }\n}"
           step: there is a valid "confluent_account" in the system
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteConfluentAccount
         parameters:
@@ -31362,6 +31681,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     get:
@@ -31388,6 +31711,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -31422,6 +31749,10 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     x-merge-override:
@@ -31452,6 +31783,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -31487,6 +31822,10 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources/{resource_id}:
@@ -31512,6 +31851,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     get:
@@ -31540,6 +31883,10 @@ paths:
       tags:
       - Confluent Cloud
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -31576,6 +31923,10 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -31603,6 +31954,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -31642,6 +31997,10 @@ paths:
               unique }}\",\n      \"services\": []\n    }\n  }\n}"
           step: there is a valid "fastly_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteFastlyAccount
         parameters:
@@ -31671,6 +32030,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -31697,6 +32060,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -31730,6 +32097,10 @@ paths:
       - Fastly Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -31760,6 +32131,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -31793,6 +32168,10 @@ paths:
       - Fastly Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteFastlyService
         parameters:
@@ -31824,6 +32203,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     get:
@@ -31851,6 +32234,10 @@ paths:
       tags:
       - Fastly Integration
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -31885,6 +32272,10 @@ paths:
       - Fastly Integration
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
     x-merge-override:
@@ -31914,6 +32305,10 @@ paths:
       tags:
       - Okta Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -31955,6 +32350,10 @@ paths:
               \ }\n}"
           step: there is a valid "okta_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteOktaAccount
         parameters:
@@ -31989,6 +32388,10 @@ paths:
       tags:
       - Okta Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -32020,6 +32423,10 @@ paths:
       tags:
       - Okta Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -32058,6 +32465,10 @@ paths:
       - Okta Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     x-merge-override:
@@ -32090,6 +32501,10 @@ paths:
       tags:
       - IP Allowlist
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: safe
     patch:
@@ -32146,6 +32561,10 @@ paths:
               \ }\n}"
           step: the "ip_allowlist_nonempty_disabled" has two entries and is disabled
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: idempotent
   /api/v2/logs:
@@ -32407,6 +32826,10 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v2/logs/config/archive-order:
@@ -32434,6 +32857,9 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 9
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -32487,6 +32913,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: safe
   /api/v2/logs/config/archives:
@@ -32512,6 +32942,10 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_archives
       x-undo:
         type: safe
     post:
@@ -32550,6 +32984,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         operationId: DeleteLogsArchive
         parameters:
@@ -32589,6 +33027,10 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: idempotent
     get:
@@ -32627,6 +33069,10 @@ paths:
       tags:
       - Logs Archives
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_archives
       x-undo:
         type: safe
     put:
@@ -32678,6 +33124,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: safe
   /api/v2/logs/config/archives/{archive_id}/readers:
@@ -32720,6 +33170,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: idempotent
     get:
@@ -32759,6 +33213,9 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -32800,6 +33257,10 @@ paths:
       - Logs Archives
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_archives
       x-undo:
         type: unsafe
   /api/v2/logs/config/custom-destinations:
@@ -32826,6 +33287,10 @@ paths:
       tags:
       - Logs Custom Destinations
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
     post:
@@ -32872,6 +33337,10 @@ paths:
               \ }\n}"
           step: there is a valid "custom_destination" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_forwarding_rules
       x-undo:
         operationId: DeleteLogsCustomDestination
         parameters:
@@ -32899,6 +33368,10 @@ paths:
       tags:
       - Logs Custom Destinations
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_forwarding_rules
       x-undo:
         type: idempotent
     get:
@@ -32925,6 +33398,10 @@ paths:
       tags:
       - Logs Custom Destinations
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
     patch:
@@ -32962,6 +33439,10 @@ paths:
       - Logs Custom Destinations
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_forwarding_rules
       x-undo:
         type: idempotent
   /api/v2/logs/config/metrics:
@@ -32983,6 +33464,9 @@ paths:
       tags:
       - Logs Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -33036,6 +33520,10 @@ paths:
               \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
           step: there is a valid "logs_metric_percentile" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_generate_metrics
       x-undo:
         operationId: DeleteLogsMetric
         parameters:
@@ -33061,6 +33549,10 @@ paths:
       tags:
       - Logs Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_generate_metrics
       x-undo:
         type: idempotent
     get:
@@ -33085,6 +33577,9 @@ paths:
       tags:
       - Logs Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     patch:
@@ -33122,6 +33617,10 @@ paths:
       - Logs Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_generate_metrics
       x-undo:
         type: idempotent
   /api/v2/logs/config/restriction_queries:
@@ -33150,6 +33649,9 @@ paths:
       tags:
       - Logs Restriction Queries
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33190,6 +33692,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteRestrictionQuery
         parameters:
@@ -33230,6 +33736,9 @@ paths:
       tags:
       - Logs Restriction Queries
       x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33266,6 +33775,9 @@ paths:
       tags:
       - Logs Restriction Queries
       x-menu-order: 9
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33305,6 +33817,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33348,6 +33864,9 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33396,6 +33915,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33441,6 +33964,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33485,6 +34012,9 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33529,6 +34059,10 @@ paths:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -33647,6 +34181,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v2/logs/events/search:
@@ -33699,6 +34237,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v2/metrics:
@@ -33728,7 +34270,7 @@ paths:
         name: filter[metric_type]
         required: false
         schema:
-          $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
+          $ref: '#/components/schemas/MetricTagConfigurationMetricTypeCategory'
       - description: 'Filter distributions with additional percentile
 
           aggregations enabled or disabled.'
@@ -33804,6 +34346,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/config/bulk-tags:
@@ -33861,6 +34407,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         type: idempotent
     post:
@@ -33927,6 +34477,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
@@ -33990,6 +34544,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/all-tags:
@@ -34038,6 +34596,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/assets:
@@ -34104,8 +34666,7 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with. Estimates are based on historical data, and unspecified fields default
-          to the minimum 49 hours.
+          with. If unspecified, it defaults to 0 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -34134,7 +34695,7 @@ paths:
         schema:
           type: boolean
       - description: A window, in hours, from the look back to estimate cardinality
-          with.
+          with. The minimum and default is 1 hour.
         example: 6
         in: query
         name: filter[timespan_h]
@@ -34178,6 +34739,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 11
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:
@@ -34213,6 +34777,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         type: idempotent
     get:
@@ -34254,6 +34822,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
     patch:
@@ -34315,6 +34887,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         type: idempotent
     post:
@@ -34388,6 +34964,10 @@ paths:
               }}\"\n  }\n}"
           step: there is a valid "metric_tag_configuration" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - metric_tags_write
       x-undo:
         operationId: DeleteTagConfiguration
         parameters:
@@ -34439,6 +35019,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 8
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/monitor/policy:
@@ -34469,6 +35052,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -34516,6 +35103,10 @@ paths:
               [\"prod\", \"staging\"]\n      }\n    }\n  }\n}"
           step: there is a valid "monitor_configuration_policy" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         operationId: DeleteMonitorConfigPolicy
         parameters:
@@ -34561,6 +35152,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
     get:
@@ -34604,6 +35199,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     patch:
@@ -34656,6 +35255,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
   /api/v2/monitor/{monitor_id}/downtime_matches:
@@ -34709,6 +35312,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: safe
   /api/v2/ndm/devices:
@@ -34915,6 +35522,9 @@ paths:
       tags:
       - Organizations
       x-menu-order: 100
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/org_configs/{org_config_name}:
@@ -34944,6 +35554,9 @@ paths:
       tags:
       - Organizations
       x-menu-order: 101
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     patch:
@@ -34978,6 +35591,10 @@ paths:
       tags:
       - Organizations
       x-menu-order: 102
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: idempotent
   /api/v2/permissions:
@@ -35307,6 +35924,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -35350,6 +35971,10 @@ paths:
             name: body
           step: there is a valid "powerpack" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeletePowerpack
         parameters:
@@ -35387,6 +36012,10 @@ paths:
       tags:
       - Powerpack
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -35423,6 +36052,10 @@ paths:
       tags:
       - Powerpack
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     patch:
@@ -35473,6 +36106,10 @@ paths:
       - Powerpack
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -35573,6 +36210,9 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/query/scalar:
@@ -35615,6 +36255,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
@@ -35660,6 +36304,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
@@ -35870,6 +36518,9 @@ paths:
       tags:
       - Restriction Policies
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: idempotent
     get:
@@ -35898,6 +36549,9 @@ paths:
       tags:
       - Restriction Policies
       x-menu-order: 2
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -35982,6 +36636,9 @@ paths:
       - Restriction Policies
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: idempotent
   /api/v2/roles:
@@ -36039,6 +36696,10 @@ paths:
       tags:
       - Roles
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -36088,6 +36749,10 @@ paths:
               unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
           step: there is a valid "role" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -36222,6 +36887,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     x-merge-override:
@@ -36282,6 +36951,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -36339,6 +37012,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     get:
@@ -36436,6 +37113,10 @@ paths:
               \"{{ permission.type }}\"\n  }\n}"
           step: the "permission" is granted to the "role"
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: safe
     x-merge-override:
@@ -36491,6 +37172,10 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
     get:
@@ -36607,6 +37292,10 @@ paths:
               \"{{ user.data.type }}\"\n  }\n}"
           step: the "user" has the "role"
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: safe
   /api/v2/rum/analytics/aggregate:
@@ -36642,6 +37331,9 @@ paths:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/rum/applications:
@@ -36663,6 +37355,10 @@ paths:
       tags:
       - RUM
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
     post:
@@ -36698,6 +37394,10 @@ paths:
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_write
       x-undo:
         operationId: DeleteRUMApplication
         parameters:
@@ -36729,6 +37429,10 @@ paths:
       tags:
       - RUM
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_write
       x-undo:
         type: idempotent
     get:
@@ -36756,6 +37460,10 @@ paths:
       tags:
       - RUM
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
     patch:
@@ -36798,6 +37506,10 @@ paths:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -36890,6 +37602,9 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/rum/events/search:
@@ -36937,6 +37652,9 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/saml_configurations/idp_metadata:
@@ -36974,6 +37692,10 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: idempotent
   /api/v2/scorecard/outcomes:
@@ -37352,6 +38074,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
@@ -37373,6 +38099,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
     post:
@@ -37414,6 +38144,10 @@ paths:
               \     \"enabled\": true\n     }\n  }\n}"
           step: there is a valid "agent_rule" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_write
       x-undo:
         operationId: DeleteCloudWorkloadSecurityAgentRule
         parameters:
@@ -37439,6 +38173,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_write
       x-undo:
         type: idempotent
     get:
@@ -37463,6 +38201,10 @@ paths:
       tags:
       - CSM Threats
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
     patch:
@@ -37501,6 +38243,10 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_cws_agent_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:
@@ -37527,6 +38273,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
       x-undo:
         type: safe
     post:
@@ -37580,6 +38330,10 @@ paths:
               true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         operationId: DeleteSecurityFilter
         parameters:
@@ -37610,6 +38364,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
     get:
@@ -37644,6 +38402,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
       x-undo:
         type: safe
     patch:
@@ -37687,6 +38449,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/configuration/suppressions:
@@ -37887,6 +38653,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: safe
     post:
@@ -37969,6 +38739,10 @@ paths:
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
@@ -38015,6 +38789,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/test:
@@ -38054,6 +38832,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/validation:
@@ -38085,6 +38867,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
@@ -38111,6 +38897,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
     get:
@@ -38138,6 +38928,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: safe
     put:
@@ -38187,6 +38981,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}/convert:
@@ -38221,6 +39019,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}/test:
@@ -38262,6 +39064,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals:
@@ -38348,6 +39154,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/search:
@@ -38392,6 +39202,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}:
@@ -38420,6 +39234,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -38467,6 +39285,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/incidents:
@@ -38514,6 +39336,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/state:
@@ -38561,6 +39387,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config:
@@ -38595,6 +39425,10 @@ paths:
         configuration:
           step: a valid "configuration" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_read
       x-undo:
         type: safe
     patch:
@@ -38632,6 +39466,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config/groups:
@@ -38692,6 +39530,10 @@ paths:
               \     }\n    }\n  },\n  \"meta\": {}\n}"
           step: there is a valid "scanning_group" in the system
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         operationId: DeleteScanningGroup
         parameters:
@@ -38740,6 +39582,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
     patch:
@@ -38789,6 +39635,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config/rules:
@@ -38850,6 +39700,10 @@ paths:
               \   }\n  },\n  \"meta\": {}\n}"
           step: the "scanning_group" has a "scanning_rule"
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         operationId: DeleteScanningRule
         parameters:
@@ -38898,6 +39752,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
     patch:
@@ -38946,6 +39804,10 @@ paths:
       - Sensitive Data Scanner
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_write
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config/standard-patterns:
@@ -38977,6 +39839,10 @@ paths:
       tags:
       - Sensitive Data Scanner
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - data_scanner_read
       x-undo:
         type: safe
   /api/v2/series:
@@ -39097,6 +39963,10 @@ paths:
               true\n     },\n     \"type\": \"users\"\n  }\n}"
           step: there is a valid "service_account_user" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         operationId: DisableUser
         parameters:
@@ -39147,6 +40017,10 @@ paths:
       tags:
       - Service Accounts
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: safe
     post:
@@ -39195,6 +40069,10 @@ paths:
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "service_account_application_key" for "service_account_user"
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         operationId: DeleteServiceAccountApplicationKey
         parameters:
@@ -39203,6 +40081,8 @@ paths:
         - name: service_account_id
           source: data.relationships.owned_by.data.id
         type: unsafe
+    x-merge-override:
+      get: false
   /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
     delete:
       description: Delete an application key owned by this service account.
@@ -39231,6 +40111,10 @@ paths:
       tags:
       - Service Accounts
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: idempotent
     get:
@@ -39264,6 +40148,10 @@ paths:
       tags:
       - Service Accounts
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: safe
     patch:
@@ -39310,6 +40198,10 @@ paths:
       - Service Accounts
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - service_account_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -39352,6 +40244,10 @@ paths:
       tags:
       - Incident Services
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -39400,6 +40296,10 @@ paths:
               unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
           step: there is a valid "service" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         operationId: DeleteIncidentService
         parameters:
@@ -39440,6 +40340,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
     post:
@@ -39494,6 +40398,10 @@ paths:
               \ \"team\": \"super-team\"\n}"
           step: there is a valid "service_definition" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_write
       x-undo:
         operationId: DeleteServiceDefinition
         parameters:
@@ -39526,6 +40434,10 @@ paths:
       tags:
       - Service Definition
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_write
       x-undo:
         type: idempotent
     get:
@@ -39560,6 +40472,10 @@ paths:
       tags:
       - Service Definition
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
   /api/v2/services/{service_id}:
@@ -39591,6 +40507,10 @@ paths:
       tags:
       - Incident Services
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -39630,6 +40550,10 @@ paths:
       tags:
       - Incident Services
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -39674,6 +40598,10 @@ paths:
       - Incident Services
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
@@ -39874,6 +40802,10 @@ paths:
       - Spans
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
   /api/v2/spans/events:
@@ -40038,6 +40970,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - billing_read
       x-undo:
         type: safe
     post:
@@ -40064,6 +41000,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - billing_edit
       x-undo:
         type: safe
   /api/v2/team:
@@ -40137,6 +41077,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     post:
@@ -40186,6 +41130,11 @@ paths:
               \   },\n    \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_read
+        - teams_manage
       x-undo:
         operationId: DeleteTeam
         parameters:
@@ -40229,6 +41178,11 @@ paths:
       tags:
       - Teams
       x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_read
+        - teams_manage
       x-undo:
         type: idempotent
     get:
@@ -40267,6 +41221,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     patch:
@@ -40328,6 +41286,10 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     x-merge-override:
@@ -40371,6 +41333,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     post:
@@ -40432,6 +41398,10 @@ paths:
               \   \"type\": \"team_links\"\n  }\n}"
           step: there is a valid "team_link" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         operationId: DeleteTeamLink
         parameters:
@@ -40479,6 +41449,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     get:
@@ -40523,6 +41497,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     patch:
@@ -40574,6 +41552,10 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
   /api/v2/team/{team_id}/memberships:
@@ -40600,7 +41582,6 @@ paths:
         name: filter[keyword]
         required: false
         schema:
-          description: Search query, can be user email or name.
           type: string
       responses:
         '200':
@@ -40632,6 +41613,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
     post:
@@ -40692,6 +41677,10 @@ paths:
               \       }\n      }\n    },\n    \"type\": \"team_memberships\"\n  }\n}"
           step: there is a valid "team_membership" in the system
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         operationId: DeleteTeamMembership
         parameters:
@@ -40700,10 +41689,6 @@ paths:
         - name: user_id
           source: data.relationships.user.data.id
         type: unsafe
-    x-merge-override:
-      get: false
-      patch: false
-      post: false
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
@@ -40743,6 +41728,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     patch:
@@ -40794,11 +41783,14 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
     x-merge-override:
       delete: true
-      patch: false
   /api/v2/team/{team_id}/permission-settings:
     get:
       description: Get all permission settings for a given team.
@@ -40836,6 +41828,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
   /api/v2/team/{team_id}/permission-settings/{action}:
@@ -40888,6 +41884,10 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: idempotent
   /api/v2/teams:
@@ -40928,6 +41928,10 @@ paths:
       tags:
       - Incident Teams
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -40976,6 +41980,10 @@ paths:
               unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
           step: there is a valid "team" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         operationId: DeleteIncidentTeam
         parameters:
@@ -41012,6 +42020,10 @@ paths:
       tags:
       - Incident Teams
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -41051,6 +42063,10 @@ paths:
       tags:
       - Incident Teams
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -41095,6 +42111,10 @@ paths:
       - Incident Teams
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
@@ -41159,6 +42179,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 38
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/cost_by_org:
@@ -41229,6 +42253,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 45
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -41332,6 +42360,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -41412,6 +42444,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -41439,6 +42475,7 @@ paths:
           families are `all`, `analyzed_logs`,
 
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
+          `cloud_siem`,
 
           `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
           `cws`, `dbm`, `error_tracking`,
@@ -41446,14 +42483,16 @@ paths:
           `fargate`, `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`,
           `ingested_spans`, `iot`,
 
-          `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `netflow_monitoring`,
+          `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `network_monitoring`,
           `observability_pipelines`,
 
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
-          and `timeseries`.
+          `timeseries`, `vuln_management`,
+
+          and `workflow_executions`.
 
           The following product family has been **deprecated**: `audit_logs`.'
         in: query
@@ -41549,6 +42588,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
@@ -41612,6 +42655,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 37
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:
@@ -41675,6 +42722,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/usage/projected_cost:
@@ -41739,6 +42790,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v2/user_invitations:
@@ -41791,6 +42846,10 @@ paths:
           source: data[0]
           step: the "user" has a "user_invitation"
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         type: safe
   /api/v2/user_invitations/{user_invitation_uuid}:
@@ -41836,6 +42895,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         type: safe
   /api/v2/users:
@@ -41920,6 +42983,10 @@ paths:
         limitParam: page[size]
         pageParam: page[number]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -41970,6 +43037,10 @@ paths:
               \    \"type\": \"users\"\n  }\n}"
           step: there is a valid "user" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         operationId: DisableUser
         parameters:
@@ -42011,6 +43082,11 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - service_account_write
       x-undo:
         type: idempotent
     get:
@@ -42049,6 +43125,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     patch:
@@ -42107,6 +43187,11 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - service_account_write
       x-undo:
         type: idempotent
     x-merge-override:
@@ -42150,6 +43235,9 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/users/{user_id}/permissions:
@@ -42190,6 +43278,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     x-merge-override:
@@ -42229,6 +43321,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
       x-undo:
         type: safe
   /api/v2/workflows/{workflow_id}/instances:
@@ -42262,6 +43358,10 @@ paths:
       tags:
       - Workflow Automation
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_read
       x-undo:
         type: safe
     post:
@@ -42294,6 +43394,10 @@ paths:
       - Workflow Automation
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_run
       x-undo:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}:
@@ -42328,6 +43432,10 @@ paths:
       tags:
       - Workflow Automation
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_read
       x-undo:
         type: safe
   /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
@@ -42357,6 +43465,10 @@ paths:
       tags:
       - Workflow Automation
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_run
       x-undo:
         type: safe
   x-merge-override:

@@ -244,11 +244,11 @@ datadog {
 ```
 
 ### Collection
-The SDK handles crash reporting with the following behaviors:
+When looking at RUM Crash Reporting behaviors for Android, consider the following:
 
 - The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
 - RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (typically an Activity or Fragment in an `onResume` state), or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][10] in your `RumConfiguration` builder.
-- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate of 100%][11], some will not be reported.
+- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate is not 100%][11], some will not be reported.
 
 ## Test your implementation
 
@@ -266,14 +266,6 @@ To test your implementation:
    ```
 
 3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][1].
-
-## Behaviors
-
-When looking at RUM Crash Reporting behaviors for Android, consider the following:
-
-- Crashes can only be detected after the Datadog SDK is initialized. To catch as many crashes as possible, initialize the SDK as soon as you can in the application's `onCreate` method.
-- Crashes in RUM need to be tied to a RUM View. This means that if a crash occurs before a view is visible, or after the app is sent to the background and the end-user switches to another app, the crash is muted and does not report to Datadog. Mitigate this behavior using the `trackBackgroundEvents` [method][10] in the RumConfiguration builder.
-- Only crashes tied to sampled sessions are kept. To capture all crashes, apply a `sessionSampleRate` of 100%.
 
 
 ## Further Reading
