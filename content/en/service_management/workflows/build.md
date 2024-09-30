@@ -85,7 +85,7 @@ The **Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png
 
 The **Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
 
-The **Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also type your annotations directly in Markdown.
+The **Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also enter your annotations in Markdown.
 
 {{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="An empty annotation, with the formatting bar displayed above it" style="width:70%;" >}}
 
