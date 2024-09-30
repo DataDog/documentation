@@ -6,11 +6,13 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-You can use account-level log subscriptions in your AWS environment to automatically forward all of your CloudWatch logs to Datadog. With an account-level log subscription, you don't need to manually configure log forwarding when you have a new log source, or when AWS releases a new service. You can also define your own selection criteria or filter pattern for granular control over which logs are forwarded.
+## Overview
+
+You can use account-level log subscriptions in your AWS environment to automatically forward all of your CloudWatch logs to Datadog. With an account-level log subscription, you don't need to manually configure log forwarding when you have a new log source, or when AWS releases a new service. You can also define your own selection criteria or filter pattern, for more control over which logs are forwarded.
 
 ## Create an account-level log subscription
 
-For the simplest setup, use [CloudFormation](#cloudformation-recommended) to create an Amazon Data Firehose and associated resources in each of your selected regions.
+There are two ways to create an account-level log subscription, through [CloudFormation](#cloudformation-recommended) and through [manual setup](#manual). For the simplest setup, use CloudFormation to create an Amazon Data Firehose and associated resources in each of your selected regions.
 
 ### CloudFormation (recommended)
 
@@ -76,7 +78,7 @@ aws logs put-account-policy \
 {{% /tab %}}
 {{% tab "Amazon Data Firehose" %}}
 
-#### Create S3 bucket and role for Amazon Data Firehose
+#### Create an S3 bucket and a role for Amazon Data Firehose
 
 The following steps guide you through creating a bucket and IAM role. This role grants Amazon Data Firehose permission to put data into your Amazon S3 bucket in case of delivery failures.
 
