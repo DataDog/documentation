@@ -148,6 +148,22 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. **Note**: The service name value is case sensitive. It should match the case of your service name.
 5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
+### Sampling Precedence Rules
+If sampling rules are set in multiple different locations, the following precedence rules will apply in order of highest to lowest, where higher precedence rules can override lower precedence rules
+
+1. Remotely configured sampling rules, either set via [Agent](#managing-ingestion-for-all-services-at-the-agent-level) or [resource-based sampling][16]
+1. [Adaptive sampling][17]
+1. [Locally configured sampling rules][8] (`DD_TRACE_SAMPLING_RULES`)
+1. [Remotely configured global sampling rate][8]
+1. [Locally configured global sampling rate][8] (`DD_TRACE_SAMPLE_RATE`)
+1. [Rates from the trace agent controlled indirectly via Agent settings][18] remotely or locally, like `DD_APM_TARGET_TPS` and `DD_APM_MAX_TPS`
+1. In the absence of any sampling rates, the default is 100%, meaning keep all traces
+
+In simpler terms, we follow the following precedence rules
+- Tracer settings > Agent settings
+- Sampling rules > Global sampling rate
+- Remote > Local
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -167,3 +183,6 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [14]: /agent/remote_config/#enabling-remote-configuration
 [15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
+[16]: /tracing/guide/resource_based_sampling/
+[17]: /tracing/guide/adaptive_sampling/
+[18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
