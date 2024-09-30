@@ -1,0 +1,16 @@
+---
+title: Generate Metrics
+disable_toc: false
+---
+
+## Overview
+
+Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't necessarily need to be stored. Oftentimes, you just want to see a summary of the logs and compare it to historical data. Use the Generate Metrics template to generate a count metric of logs that match a query or a [distribution metric][1] of a numeric value contained in the logs, such as a request duration. The template starts you off with the following processors:
+
+- **Filter**: Add a query to send only a subset of logs based on your conditions.
+- **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources or add custom parsing rules.
+- **Generate metrics**: Generate metrics for your logs or a subset of them. The available metric types are: COUNT, GAUGE, and DISTRIBUTION.
+
+{{% observability_pipelines/use_case_images/dual_ship_logs %}}
+
+[1]: /metrics/distributions/#overview

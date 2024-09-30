@@ -4752,6 +4752,61 @@ menu:
       parent: observability_pipelines_log_enrichment
       identifier: observability_pipelines_log_enrichment_syslog
       weight: 6020
+    - name: Generate Metrics
+      identifier: observability_pipelines_generate_metrics
+      url: /observability_pipelines/set_up_pipelines/generate_metrics/
+      parent: observability_pipelines_set_up_pipelines
+      weight: 107
+    - name: Datadog Agent
+      url: observability_pipelines/set_up_pipelines/generate_metrics/datadog_agent/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_datadog_agent
+      weight: 7011
+    - name: Fluent
+      url: observability_pipelines/set_up_pipelines/generate_metrics/fluent/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_fluent
+      weight: 7012
+    - name: Google Pub/Sub
+      url: observability_pipelines/set_up_pipelines/generate_metrics/google_pubsub/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_google_pubsub
+      weight: 7013
+    - name: HTTP Client
+      url: observability_pipelines/set_up_pipelines/generate_metrics/http_client/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_http_client
+      weight: 7014
+    - name: HTTP Server
+      url: observability_pipelines/set_up_pipelines/generate_metrics/http_server/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_http_server
+      weight: 7015
+    - name: Logstash
+      url: observability_pipelines/set_up_pipelines/generate_metrics/logstash/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_logstash
+      weight: 7016
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/set_up_pipelines/generate_metrics/splunk_hec/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_splunk_hec
+      weight: 7017
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/set_up_pipelines/generate_metrics/splunk_tcp/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_splunk_tcp
+      weight: 7018
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/set_up_pipelines/generate_metrics/sumo_logic_hosted_collector/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_sumo_logic_hosted_collector
+      weight: 7019
+    - name: Syslog
+      url: observability_pipelines/set_up_pipelines/generate_metrics/syslog/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_syslog
+      weight: 7020
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
