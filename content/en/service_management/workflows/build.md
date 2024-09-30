@@ -79,7 +79,7 @@ You can edit a step in the workflow at any time by clicking on it. Click and dra
 
 #### Shortcuts and canvas tools
 
-To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the keyboard icon {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}}. A list of shortcuts appears.
+To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the **Keyboard** {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} button. A list of shortcuts appears.
 
 The **Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
 
