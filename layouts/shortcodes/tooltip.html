@@ -1,36 +1,36 @@
 {{- /* Get shortcode parameters */ -}}
-{{- $text := .Get "text" -}}
-{{- $tooltip := .Get "tooltip" -}}
-{{- $glossary := .Get "glossary" -}}
+{{- $text := .Get "text" }}
+{{- $tooltip := .Get "tooltip" }}
+{{- $glossary := .Get "glossary" }}
 
 {{- /* Initialize variables */ -}}
-{{- $displayText := $text -}}
-{{- $tooltipContent := $tooltip -}}
-{{- $fullDefinitionLink := "" -}}
-{{- $glossaryMatch := false -}}
+{{- $displayText := $text }}
+{{- $tooltipContent := $tooltip }}
+{{- $fullDefinitionLink := "" }}
+{{- $glossaryMatch := false }}
 
 {{- /* Handle glossary terms if provided */ -}}
 {{- if $glossary }}
-  {{- /* Add underscore to multi-word terms to match file name */ -}}
-  {{- $glossaryTerm := replace $glossary " " "_" -}}
-  {{- $headless := .Site.GetPage "/glossary/terms" -}}
+  {{- /* Add underscore to multi-word terms to match filename */ -}}
+  {{- $glossaryTerm := replace $glossary " " "_" }}
+  {{- $headless := .Site.GetPage "/glossary/terms" }}
   {{- /* Find the matching glossary term file */ -}}
   {{- with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) }}
-    {{- $glossaryMatch = true -}}
-    {{- $displayText = .Title -}}
+    {{- $glossaryMatch = true }}
+    {{- $displayText = .Title }}
     {{- /* Use short definition if available; otherwise use full content */ -}}
     {{- if .Params.short_definition }}
-      {{- $tooltipContent = .Params.short_definition -}}
-      {{- $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) -}}
+      {{- $tooltipContent = .Params.short_definition }}
+      {{- $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) }}
     {{- else }}
       {{- /* Remove links from full content */ -}}
-      {{- $content := .Content | plainify -}}
-      {{- $tooltipContent = $content | replaceRE `\n\[\d+\]:\s+.*` "" | replaceRE `\[([^\]]+)\]\[\d+\]` "$1" | safeHTML -}}
-    {{- end -}}
+      {{- $content := .Content | plainify }}
+      {{- $tooltipContent = $content | replaceRE `\n\[\d+\]:\s+.*` "" | replaceRE `\[([^\]]+)\]\[\d+\]` "$1" | safeHTML }}
+    {{- end }}
   {{- else }}
     {{- /* Use glossary term if not found */ -}}
-    {{- $displayText = $glossary -}}
-    {{- warnf "Glossary term '%s' not found" $glossary -}}
+    {{- $displayText = $glossary }}
+    {{- warnf "Glossary term '%s' not found" $glossary }}
   {{- end }}
 {{- end }}
 
@@ -38,5 +38,5 @@
 {{- if or $glossaryMatch (and $text $tooltip) }}
 <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{ $displayText | anchorize }}">{{ $displayText }}</button><span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" role="tooltip">{{ $tooltipContent | safeHTML }}{{ if $fullDefinitionLink }}<a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{ end }}</span></span>
 {{- else }}
-{{- $displayText -}}
+{{- $displayText }}
 {{- end }}
