@@ -89,7 +89,7 @@ Published workflows accrue costs based on workflow executions. For more informat
 
 ## Variables and parameters
 
-For information on using variables and parameters in your workflows, see [Variables and parameters][].
+For information on using variables and parameters in your workflows, see [Variables and parameters][12].
 
 ## Workflow notifications
 
