@@ -1,6 +1,6 @@
 /**
  * A regex that matches a snake-case string,
- * such as `example_pref_id` or `example_pref_options`.
+ * such as `my_snake_case_string` or `this_other_string`.
  */
 export const SNAKE_CASE_REGEX = /^[a-z0-9]+(_[a-z0-9]+)*$/;
 
@@ -15,6 +15,13 @@ export const PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
  * Placeholders have the format `<MY_PLACEHOLDER>`.
  */
 export const GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
+
+/**
+ * A regex that matches a preference ID,
+ * such as 'host' or 'database_version'.
+ */
+export const PREF_ID_REGEX =
+  /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*$/;
 
 /**
  * A regex that matches a preference options set ID.
