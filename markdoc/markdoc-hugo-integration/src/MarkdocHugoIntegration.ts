@@ -132,10 +132,10 @@ export class MarkdocHugoIntegration {
    * @returns A ParsedFile object.
    */
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
-    const parsedFile = MdocFileParser.parseMdocFile(
-      markdocFilepath,
-      this.directories.partials
-    );
+    const parsedFile = MdocFileParser.parseMdocFile({
+      file: markdocFilepath,
+      partialsDir: this.directories.partials
+    });
 
     // if the file has errors, log the errors for later output
     // and continue to the next file

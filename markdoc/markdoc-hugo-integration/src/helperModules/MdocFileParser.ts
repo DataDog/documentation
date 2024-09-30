@@ -10,6 +10,7 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
 import { ParsingErrorReport, ParsedFile } from '../schemas/compilation';
+import { AllowlistsByType } from '../schemas/yaml/allowlist';
 
 /**
  * A module responsible for parsing Markdoc files into data structures
@@ -25,8 +26,12 @@ export class MdocFileParser {
    * @param partialsDir The directory containing any partials required by the Markdoc file.
    * @returns A read-only ParsedFile object.
    */
-  static parseMdocFile(markdocFile: string, partialsDir: string): Readonly<ParsedFile> {
-    const markdocStr = fs.readFileSync(markdocFile, 'utf8');
+  static parseMdocFile(p: {
+    file: string;
+    partialsDir: string;
+    // allowlistsByType: AllowlistsByType
+  }): Readonly<ParsedFile> {
+    const markdocStr = fs.readFileSync(p.file, 'utf8');
     const ast = MarkdocStaticCompiler.parse(markdocStr);
 
     // Validate the frontmatter
@@ -36,7 +41,7 @@ export class MdocFileParser {
     // Collect all partials and build their ASTs
     const { partials, errorReports: partialErrors } = this.#buildPartialASTs(
       ast,
-      partialsDir
+      p.partialsDir
     );
 
     return {
@@ -44,7 +49,7 @@ export class MdocFileParser {
       frontmatter,
       partials,
       errorReports: [
-        ...this.#extractErrors({ node: ast, file: markdocFile }),
+        ...this.#extractErrors({ node: ast, file: p.file }),
         ...partialErrors
       ]
     };

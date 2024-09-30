@@ -16,7 +16,10 @@ describe('treeManagement', () => {
   );
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
-  const parsedFile = MdocFileParser.parseMdocFile(testFilePath, VALID_PARTIALS_DIR);
+  const parsedFile = MdocFileParser.parseMdocFile({
+    file: testFilePath,
+    partialsDir: VALID_PARTIALS_DIR
+  });
   const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
     parsedFile.frontmatter,
     prefOptionsConfig

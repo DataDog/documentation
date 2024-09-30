@@ -10,10 +10,10 @@ describe('FileParse.parseMdocFile', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
-  const { ast, frontmatter, partials, errorReports } = MdocFileParser.parseMdocFile(
-    testFilePath,
-    VALID_PARTIALS_DIR
-  );
+  const { ast, frontmatter, partials, errorReports } = MdocFileParser.parseMdocFile({
+    file: testFilePath,
+    partialsDir: VALID_PARTIALS_DIR
+  });
 
   test(`creates an AST for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
     expect(ast).toBeDefined();
