@@ -218,8 +218,13 @@ To collect more comprehensive database metrics from MongoDB Atlas, install the [
 
 ## Data Collected
 
+### Metrics
+
+Refer to the [MongoDB integration documentation][4] for a comprehensive list of metrics collected by the MongoDB integration.
+
 {{% dbm-mongodb-agent-data-collected %}}
 
 [1]: /database_monitoring/architecture/#cloud-managed-databases
 [2]: /account_management/api-app-keys/
 [3]: /integrations/mongodb_atlas/
+[4]: /integrations/mongodb_atlas/#metrics
