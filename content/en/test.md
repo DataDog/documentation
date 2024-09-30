@@ -18,7 +18,7 @@ Here's an example of a {{< tooltip text="tooltip" tooltip="This is additional in
 
 By default, the {{< tooltip glossary="Agent" >}} is installed in a sandbox located at `/opt/datadog-agent`.
 
-By default, the {{< tooltip glossary="Agent" >}} test spacing.
+By default, the {{< tooltip glossary="Agent" >}}.
 
 
 **Glossary shortcode (short)**
