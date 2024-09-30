@@ -1,5 +1,0 @@
-- id: example_pref_one
-  display_name: Example Pref One
-  unexpected_key: unexpected_value
-- id: example_pref_two
-  display_name: Example Pref Two

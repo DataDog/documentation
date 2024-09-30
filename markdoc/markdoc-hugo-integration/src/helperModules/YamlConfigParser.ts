@@ -29,34 +29,67 @@ import {
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 
 export class YamlConfigParser {
+  static loadPrefsConfigFromLangDir(
+    dir: string,
+    allowlistsByType: AllowlistsByType
+  ): Readonly<PrefOptionsConfig> {
+    const optionSetsDir = `${dir}/option_sets`;
+
+    const prefOptionsConfig = this.loadPrefOptionsFromDir(optionSetsDir);
+
+    // Validate option IDs referenced in the option sets against the options allowlist
+    Object.values(prefOptionsConfig).forEach((optionsList) => {
+      const referencedOptionIds = new Set(optionsList.map((option) => option.id));
+      const allowedOptionIds = new Set(allowlistsByType.options.map((entry) => entry.id));
+      const invalidReferencedOptionIds = [...referencedOptionIds].filter(
+        (id) => !allowedOptionIds.has(id)
+      );
+      if (invalidReferencedOptionIds.length) {
+        throw new Error(
+          `Invalid option IDs found in ${optionSetsDir}: ${invalidReferencedOptionIds.join(
+            ', '
+          )}. These IDs are not present in allowlists/options.yaml.`
+        );
+      }
+    });
+
+    return prefOptionsConfig;
+  }
+
   /**
    * Load the pref and options allowlists from a prefs config directory.
    */
-  static loadAllowlistsFromDir(dir: string): AllowlistsByType {
+  static loadAllowlistsFromLangDir(dir: string): AllowlistsByType {
     const result: AllowlistsByType = { prefs: [], options: [] };
 
     // Load and validate the prefs allowlist
-    const prefsAllowlistFilePath = `${dir}/prefs.yaml`;
+    const prefsAllowlistFilePath = `${dir}/allowlists/prefs.yaml`;
     try {
       const prefsAllowlistStr = fs.readFileSync(prefsAllowlistFilePath, 'utf8');
       const prefsAllowlist = AllowlistSchema.parse(yaml.load(prefsAllowlistStr));
       result.prefs = prefsAllowlist;
-    } catch (error) {
-      throw new Error(
-        `Error reading or parsing the prefs allowlist file at ${prefsAllowlistFilePath}: ${error}`
-      );
+    } catch (e) {
+      // If the file is not found, use an empty list
+      if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
+        result.prefs = [];
+      } else {
+        throw e;
+      }
     }
 
     // Load and validate the options allowlist
-    const optionsAllowlistFilePath = `${dir}/options.yaml`;
+    const optionsAllowlistFilePath = `${dir}/allowlists/options.yaml`;
     try {
       const optionsAllowlistStr = fs.readFileSync(optionsAllowlistFilePath, 'utf8');
       const optionsAllowlist = AllowlistSchema.parse(yaml.load(optionsAllowlistStr));
       result.options = optionsAllowlist;
-    } catch (error) {
-      throw new Error(
-        `Error reading or parsing the options allowlist file at ${optionsAllowlistFilePath}: ${error}`
-      );
+    } catch (e) {
+      // If the file is not found, use an empty list
+      if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
+        result.options = [];
+      } else {
+        throw e;
+      }
     }
 
     return result;
@@ -70,7 +103,7 @@ export class YamlConfigParser {
    * @param dir The directory containing the preference options YAML files.
    * @returns A read-only PrefOptionsConfig object.
    */
-  static loadPrefOptionsFromDir(dir: string): Readonly<PrefOptionsConfig> {
+  private static loadPrefOptionsFromDir(dir: string): Readonly<PrefOptionsConfig> {
     const filenames = FileNavigator.findInDir(dir, /\.ya?ml$/);
     const prefOptions: PrefOptionsConfig = {};
 

@@ -1,0 +1,8 @@
+- id: red
+  display_name: Red
+- id: yellow
+  display_name: Yellow
+- id: green
+  display_name: Green
+- id: blue
+  display_name: Blue

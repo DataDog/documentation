@@ -1,0 +1,13 @@
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "traffic_light_color_options",
+      0,
+      "display_name"
+    ],
+    "message": "Required"
+  }
+]

@@ -5,6 +5,8 @@
     display_name: Blue
   - id: yellow
     display_name: Yellow
+  - id: green
+    display_name: Green
 
   # Blue items
   - display_name: Ocean
