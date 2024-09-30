@@ -33,7 +33,7 @@ export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true
 ddtrace-run python -m myapp
 ```
 
-3. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
+After starting your service with the required features enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
 
 ## Additional configuration
 
@@ -41,14 +41,14 @@ ddtrace-run python -m myapp
 
 If autocomplete suggestions do not appear for your package or module, it may be incorrectly recognized as third-party code. The autocomplete and search features use a heuristic to filter out third-party code, which can sometimes lead to accidental misclassification.
 
-To ensure that your code is properly recognized and to enable accurate autocomplete and search functionality, you can configure the third-party detection settings using the following options:
+To ensure that your code is properly recognized, and to enable accurate autocomplete and search functionality, configure your third-party detection settings to use the following options:
 
 ```
 export DD_THIRD_PARTY_DETECTION_EXCLUDES=<LIST_OF_USER_CODE_MODULES>
 export DD_THIRD_PARTY_DETECTION_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_MODULES>
 ```
 
-Where a list means a comma separated list of package prefixes, for example
+where `<LIST_OF_USER_CODE_MODULES>` and `<LIST_OF_ADDITIONAL_THIRD_PARTY_MODULES>` are comma separated lists of package prefixes.
 
 ```
 export DD_THIRD_PARTY_DETECTION_EXCLUDES=shopping,database
