@@ -8,7 +8,9 @@ import {
   MinifiedPrefOptionsConfig,
   MinifiedPrefOptionsConfigSchema,
   PrefOptionsConfig,
-  PrefOptionsConfigSchema
+  PrefOptionsConfigSchema,
+  RawPrefOptionsConfig,
+  RawPrefOptionsConfigSchema
 } from '../schemas/yaml/prefOptions';
 import { FileNavigator } from './FileNavigator';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
@@ -37,25 +39,27 @@ export class YamlConfigParser {
 
     const prefOptionsConfig = this.loadPrefOptionsFromDir(optionSetsDir);
 
-    // Validate option IDs referenced in the option sets against the options allowlist
     Object.values(prefOptionsConfig).forEach((optionsList) => {
-      const referencedOptionIds = new Set(optionsList.map((option) => option.id));
-      const allowedOptionIds = new Set(
-        p.allowlistsByType.options.map((entry) => entry.id)
-      );
-      const invalidReferencedOptionIds = [...referencedOptionIds].filter(
-        (id) => !allowedOptionIds.has(id)
-      );
-      if (invalidReferencedOptionIds.length) {
-        throw new Error(
-          `Invalid option IDs found in ${optionSetsDir}: ${invalidReferencedOptionIds.join(
-            ', '
-          )}. These IDs are not present in allowlists/options.yaml.`
+      const displayNamesByAllowedOptionId: Record<string, string> =
+        p.allowlistsByType.options.reduce(
+          (acc, entry) => ({ ...acc, [entry.id]: entry.display_name }),
+          {}
         );
-      }
+
+      optionsList.forEach((option) => {
+        const defaultDisplayName = displayNamesByAllowedOptionId[option.id];
+        if (!defaultDisplayName) {
+          throw new Error(
+            `The option ID '${option.id}' does not exist in the options allowlist.`
+          );
+        }
+        if (!option.display_name) {
+          option.display_name = defaultDisplayName;
+        }
+      });
     });
 
-    return prefOptionsConfig;
+    return PrefOptionsConfigSchema.parse(prefOptionsConfig);
   }
 
   /**
@@ -105,12 +109,14 @@ export class YamlConfigParser {
    * @param dir The directory containing the preference options YAML files.
    * @returns A read-only PrefOptionsConfig object.
    */
-  private static loadPrefOptionsFromDir(dir: string): Readonly<PrefOptionsConfig> {
+  private static loadPrefOptionsFromDir(dir: string): RawPrefOptionsConfig {
     const filenames = FileNavigator.findInDir(dir, /\.ya?ml$/);
     const prefOptions: PrefOptionsConfig = {};
 
     filenames.forEach((filename) => {
-      const prefOptionsConfig = this.loadPrefsYamlFromStr(filename);
+      const prefOptionsConfig = RawPrefOptionsConfigSchema.parse(
+        this.loadPrefsYamlFromStr(filename)
+      );
       for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
         // Verify that no duplicate options set IDs exist
         if (prefOptions[optionsListId]) {
@@ -122,7 +128,6 @@ export class YamlConfigParser {
       }
     });
 
-    PrefOptionsConfigSchema.parse(prefOptions);
     return prefOptions;
   }
 
@@ -135,7 +140,7 @@ export class YamlConfigParser {
   static loadPrefsYamlFromStr(yamlFile: string): Readonly<PrefOptionsConfig> {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent);
-    return PrefOptionsConfigSchema.parse(parsedYaml);
+    return RawPrefOptionsConfigSchema.parse(parsedYaml);
   }
 
   // TODO: Not in use yet, old demo code.

@@ -10,10 +10,13 @@ import { buildRenderableTree } from '../../src/helperModules/treeManagement';
 import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
 
 describe('treeManagement', () => {
+  const LANG_DIR = VALID_PREFS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
-  const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
-    VALID_PREFS_CONFIG_DIR + '/en/option_sets'
-  );
+  const allowlistsByType = YamlConfigParser.loadAllowlistsFromLangDir(LANG_DIR);
+  const prefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
+    dir: LANG_DIR,
+    allowlistsByType
+  });
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
   const parsedFile = MdocFileParser.parseMdocFile({

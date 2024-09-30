@@ -74,7 +74,6 @@
     },
     {
       "display_name": "Apple",
-      "default": true,
       "id": "apple"
     },
     {
@@ -83,6 +82,7 @@
     },
     {
       "display_name": "Stop sign",
+      "default": true,
       "id": "stop_sign"
     }
   ],
