@@ -1,13 +1,13 @@
 import { describe, test, expect } from 'vitest';
-import { VALID_PREF_OPTIONS_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../../config/constants';
+import { VALID_PREFS_CONFIG_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../../config/constants';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 
 const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid/prefsOptionsDirs`;
 
-describe('YamlConfigParser', () => {
+describe('YamlConfigParser.loadPrefOptionsFromDir', () => {
   test('loads preference options from a directory', () => {
     const prefOptionsConfig = YamlConfigParser.loadPrefOptionsFromDir(
-      VALID_PREF_OPTIONS_DIR + '/en/option_sets'
+      VALID_PREFS_CONFIG_DIR + '/en/option_sets'
     );
     expect(JSON.stringify(prefOptionsConfig, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/ingestedPrefOptions.snap.json`
