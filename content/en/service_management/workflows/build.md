@@ -77,13 +77,17 @@ If you're not sure about your workflow configuration, you can return to the pane
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
-#### Shortcuts and canvas navigation
+#### Shortcuts and canvas tools
 
-To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the keyboard icon. A list of shortcuts appears.
+To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the keyboard icon {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}}. A list of shortcuts appears.
 
-You can use the magnifying glass buttons and the **Reset viewport** button to control how the viewport is displayed.
+The **Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
 
-The **Auto layout** button
+The **Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
+
+The **Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also type your annotations directly in Markdown.
+
+{{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="An empty annotation, with the formatting bar displayed above it" style="width:70%;" >}}
 
 ## Test a step
 
