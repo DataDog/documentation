@@ -53,6 +53,10 @@ To get started, follow the instructions below.
    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][7].
 
+   **Optionally:**
+   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to logically separate jobs emitted from different Airflow instances.
+   * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
+
    See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][6] for other supported configurations of `openlineage` provider.
 
 3. Trigger a update to your Deployment and wait for it to finish.
@@ -79,7 +83,7 @@ Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-air
 
 To get started, follow the instructions below.
 
-1. Install `openlineage` provider by adding the following into your `requirements.txt` file or wherever your Airflow depedencies is managed:
+1. Install `openlineage` provider by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
    
    ```text
    apache-airflow-providers-openlineage>=1.11.0
@@ -97,6 +101,10 @@ To get started, follow the instructions below.
    * install and configure `openlineage` provider for both Airflow schedulers and Airflow workers.
    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][4].
+   
+   **Optionally:**
+   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to logically separate jobs emitted from different Airflow instances.
+   * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of `openlineage` provider.
 
@@ -136,13 +144,17 @@ To get started, follow the instructions below.
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
 
-   Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
-
    **Important:**
    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
-3. Deploy your updated `requirements.txt` and [Amazon MWAA start script][3] to your Amazon S3 folder you configured for your Amazon MWAA Environment.
+   **Optionally:**
+   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to logically separate jobs emitted from different Airflow instances.
+   * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
+
+   Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
+
+3. Deploy your updated `requirements.txt` and [Amazon MWAA start script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
 4. Ensure your Execution role configured for your Amazon MWAA Environment has the right permissions to the `requirements.txt` and [Amazon MWAA start script][3]. This is required if you are managing your own Execution role and it's the first time you are adding those supporting files. See official guide [Amazon MWAA execution role][6] for details if needed.
 
@@ -159,12 +171,15 @@ To get started, follow the instructions below.
 
 ## Validation
 
-In Datadog, view the [Data Jobs Monitoring][2] page to see a list of all your Airflow jobs.
+In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup. 
 
 ## Advanced Configuration
 
 ### Link your Spark jobs with Airflow task
-To allow your Airflow job linked to the the Spark application it submitted, following the following steps:
+
+**Prerequisites**: your Spark jobs are currently monitored via [Data Jobs Monitoring][2] and are submitted via [SparkSubmitOperator][5]s from your Airflow jobs.
+
+To allow your Airflow job linked to the Spark application it submitted, following the steps below:
 
 1. Configure your Airflow to turn off lazily loading Airflow plugins by setting [lazy_load_plugins config][3] to `False` in your `airflow.cfg` or exporting the following environment variable where your Airflow schedulers and Airflow workers run:
    
@@ -172,7 +187,7 @@ To allow your Airflow job linked to the the Spark application it submitted, foll
    export AIRFLOW__CORE__LAZY_LOAD_PLUGINS='False' 
    ```
 
-2. Update your Airflow job's DAG file by adding the following Spark configurations to your `SparkSubmitOperator` where you submit your Spark Application:
+2. Update your Airflow job's DAG file by adding the following Spark configurations to your [SparkSubmitOperator][5] where you submit your Spark Application:
 
    ```python
      SparkSubmitOperator(
@@ -186,7 +201,7 @@ To allow your Airflow job linked to the the Spark application it submitted, foll
 
    See [Lineage job & run macros][4] for definition of referenced macros.
 
-3. Once you have your Airflow environment redeployed with the updated [lazy_load_plugins config][3] and the updated DAG file, in the next run of your Airflow DAG, go to [Data Jobs Monitoring][2] page, find your latest Airflow job run, see a SpanLink is now linked from the Airflow Job Run trace to the trace of the launched Spark Application, and vice versa.
+3. Once you have your Airflow environment re-deployed with the updated [lazy_load_plugins config][3] and the updated DAG file, in the next run of your Airflow DAG, go to [Data Jobs Monitoring][2] page, find your latest Airflow job run, see a SpanLink is now linked from the Airflow Job Run trace to the trace of the launched Spark Application, and vice versa.
 
 ## Further Reading
 
@@ -196,5 +211,4 @@ To allow your Airflow job linked to the the Spark application it submitted, foll
 [2]: https://app.datadoghq.com/data-jobs/
 [3]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#lazy-load-plugins
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/macros.html#lineage-job-run-macros
-[13]: https://www.astronomer.io/docs/astro/cli/develop-project
-[14]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
+[5]: https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/_api/airflow/providers/apache/spark/operators/spark_submit/index.html#airflow.providers.apache.spark.operators.spark_submit.SparkSubmitOperator
