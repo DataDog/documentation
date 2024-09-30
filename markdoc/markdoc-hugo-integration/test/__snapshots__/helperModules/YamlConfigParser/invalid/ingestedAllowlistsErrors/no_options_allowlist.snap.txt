@@ -1,0 +1,1 @@
+Error reading or parsing the options allowlist file at /no_options_allowlist/options.yaml: Error: ENOENT: no such file or directory, open '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid/allowlistsDirs/no_options_allowlist/options.yaml'

@@ -1,0 +1,12 @@
+Error reading or parsing the prefs allowlist file at /bad_pref_id/prefs.yaml: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      0,
+      "display_name"
+    ],
+    "message": "Required"
+  }
+]

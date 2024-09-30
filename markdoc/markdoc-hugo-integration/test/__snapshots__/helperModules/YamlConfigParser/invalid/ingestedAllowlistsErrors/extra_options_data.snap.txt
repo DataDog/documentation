@@ -1,0 +1,12 @@
+Error reading or parsing the options allowlist file at /extra_options_data/options.yaml: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "default"
+    ],
+    "path": [
+      0
+    ],
+    "message": "Unrecognized key(s) in object: 'default'"
+  }
+]
