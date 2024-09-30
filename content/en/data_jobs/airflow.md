@@ -45,7 +45,6 @@ To get started, follow the instructions below.
    
    ```shell
    OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   OPENLINEAGE_ENDPOINT=api/v1/lineage
    OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
 
@@ -93,7 +92,6 @@ To get started, follow the instructions below.
    
    ```shell
    OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   OPENLINEAGE_ENDPOINT=api/v1/lineage
    OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
 
@@ -140,7 +138,6 @@ To get started, follow the instructions below.
    #!/bin/sh
    
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   export OPENLINEAGE_ENDPOINT=api/v1/lineage
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
 
