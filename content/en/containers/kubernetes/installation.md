@@ -14,6 +14,9 @@ further_reading:
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading'
       tag: "Source Code"
       text: 'Upgrading Datadog Helm'
+    - link: 'https://www.datadoghq.com/blog/datadog-operator-helm/'
+      tag: 'Blog'
+      text: 'Operator vs. Helm: Finding the best fit for your Kubernetes applications'
 ---
 
 ## Overview
