@@ -77,6 +77,14 @@ If you're not sure about your workflow configuration, you can return to the pane
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
+#### Shortcuts and canvas navigation
+
+To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the keyboard icon. A list of shortcuts appears.
+
+You can use the magnifying glass buttons and the **Reset viewport** button to control how the viewport is displayed.
+
+The **Auto layout** button
+
 ## Test a step
 
 See the test and debug page for information on [how to test a step][11].
@@ -89,7 +97,7 @@ Published workflows accrue costs based on workflow executions. For more informat
 
 ## Variables and parameters
 
-For information on using variables and parameters in your workflows, see [Variables and parameters][].
+For information on using variables and parameters in your workflows, see [Variables and parameters][12].
 
 ## Workflow notifications
 
