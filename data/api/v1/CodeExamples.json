@@ -128,6 +128,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1413226400",
+      "description": "Create a new dashboard with a toplist widget with stacked type and no legend specified"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2308247857",
       "description": "Create a new dashboard with alert_graph widget"
     },
