@@ -14077,8 +14077,8 @@ components:
         - time: sum, space: sum
 
 
-        Can only be applied to metrics that have a `metric_type` of `count`, `rate`,
-        or `gauge`.'
+        Can only be applied to non_distribution metrics that have a `metric_type`
+        of `count`, `rate`, or `gauge`.'
       example:
       - space: sum
         time: sum
@@ -14690,6 +14690,17 @@ components:
       required:
       - data
       type: object
+    MetricTagConfigurationMetricTypeCategory:
+      default: distribution
+      description: The metric's type category.
+      enum:
+      - non_distribution
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - NON_DISTRIBUTION
+      - DISTRIBUTION
     MetricTagConfigurationMetricTypes:
       default: gauge
       description: The metric's type.
@@ -15372,6 +15383,8 @@ components:
       - id
       - type
       type: object
+      x-merge-override:
+        required: false
     OktaAccountType:
       default: okta-accounts
       description: Account type for an Okta account.
@@ -19479,6 +19492,25 @@ components:
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
+    SecurityMonitoringReferenceTable:
+      description: Reference table for the rule.
+      properties:
+        checkPresence:
+          description: Whether to include or exclude the matched values.
+          type: boolean
+        columnName:
+          description: The name of the column in the reference table.
+          type: string
+        logFieldPath:
+          description: The field in the log to match against the reference table.
+          type: string
+        ruleQueryName:
+          description: The name of the rule query to apply the reference table to.
+          type: string
+        tableName:
+          description: The name of the reference table.
+          type: string
+      type: object
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
@@ -19983,6 +20015,11 @@ components:
           description: Queries for selecting logs which are part of the rule.
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+          type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
         tags:
           description: Tags for generated signals.
@@ -20688,6 +20725,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
           type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
+          type: array
         tags:
           description: Tags for generated signals.
           example:
@@ -20754,6 +20796,11 @@ components:
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
         tags:
           description: Tags for generated signals.
@@ -20895,6 +20942,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
           type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
+          type: array
         tags:
           description: Tags for generated signals.
           items:
@@ -20958,6 +21010,11 @@ components:
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
         tags:
           description: Tags for generated signals.
@@ -34257,7 +34314,7 @@ paths:
         name: filter[metric_type]
         required: false
         schema:
-          $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
+          $ref: '#/components/schemas/MetricTagConfigurationMetricTypeCategory'
       - description: 'Filter distributions with additional percentile
 
           aggregations enabled or disabled.'
@@ -34653,8 +34710,7 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with. Estimates are based on historical data, and unspecified fields default
-          to the minimum 49 hours.
+          with. If unspecified, it defaults to 0 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -34683,7 +34739,7 @@ paths:
         schema:
           type: boolean
       - description: A window, in hours, from the look back to estimate cardinality
-          with.
+          with. The minimum and default is 1 hour.
         example: 6
         in: query
         name: filter[timespan_h]
