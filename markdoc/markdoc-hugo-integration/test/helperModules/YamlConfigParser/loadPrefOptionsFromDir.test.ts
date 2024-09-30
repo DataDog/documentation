@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { VALID_PREFS_CONFIG_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../../config/constants';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
+import fs from 'fs';
 
 const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid/prefsOptionsDirs`;
 
@@ -14,16 +15,7 @@ describe('YamlConfigParser.loadPrefOptionsFromDir', () => {
     );
   });
 
-  const invalidDirs = [
-    'missing_default_value',
-    'multiple_default_values',
-    'missing_display_name',
-    'missing_id',
-    'capitalized_id',
-    'multi_word_id',
-    'punctuated_id',
-    'spinal_case_id'
-  ];
+  const invalidDirs = fs.readdirSync(INVALID_PREF_MOCKS_DIR);
 
   invalidDirs.forEach((invalidDir) => {
     test(`throws an error when processing the '${invalidDir}' directory`, () => {
