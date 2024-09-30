@@ -105,13 +105,13 @@ aws s3api create-bucket \
 ```
 
 3. Create an IAM role, specifying the trust policy file:
+   **Note**: The returned **Role.Arn** value is used in a later step.
 
 ```bash
 aws iam create-role \
   --role-name FirehosetoS3Role \
   --assume-role-policy-document file://./TrustPolicyForFirehose.json
 ```
-   **Note**: The returned **Role.Arn** value is used in a later step.
 
 4. Create a `PermissionsForFirehose.json` file with the following statement:
    - Replace `<BUCKET_NAME>` with the name of your S3 bucket.
