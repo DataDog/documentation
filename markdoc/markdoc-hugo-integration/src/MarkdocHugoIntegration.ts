@@ -52,10 +52,10 @@ export class MarkdocHugoIntegration {
 
     // Load English pref configuration
     this.prefOptionsConfig = {
-      en: YamlConfigParser.loadPrefsConfigFromLangDir(
-        this.directories.prefsConfig + '/en',
-        this.allowlists.en
-      )
+      en: YamlConfigParser.loadPrefsConfigFromLangDir({
+        dir: this.directories.prefsConfig + '/en',
+        allowlistsByType: this.allowlists.en
+      })
     };
 
     // Load translated pref configurations, backfilling with English
@@ -84,10 +84,10 @@ export class MarkdocHugoIntegration {
 
       let translatedPrefOptionsConfig: PrefOptionsConfig;
       try {
-        translatedPrefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir(
-          this.directories.prefsConfig + '/' + lang,
-          this.allowlists[lang]
-        );
+        translatedPrefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
+          dir: this.directories.prefsConfig + '/' + lang,
+          allowlistsByType: this.allowlists[lang]
+        });
       } catch (e) {
         // If no prefs config directory exists for this language,
         // assume no translated prefs exist

@@ -29,18 +29,20 @@ import {
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 
 export class YamlConfigParser {
-  static loadPrefsConfigFromLangDir(
-    dir: string,
-    allowlistsByType: AllowlistsByType
-  ): Readonly<PrefOptionsConfig> {
-    const optionSetsDir = `${dir}/option_sets`;
+  static loadPrefsConfigFromLangDir(p: {
+    dir: string;
+    allowlistsByType: AllowlistsByType;
+  }): Readonly<PrefOptionsConfig> {
+    const optionSetsDir = `${p.dir}/option_sets`;
 
     const prefOptionsConfig = this.loadPrefOptionsFromDir(optionSetsDir);
 
     // Validate option IDs referenced in the option sets against the options allowlist
     Object.values(prefOptionsConfig).forEach((optionsList) => {
       const referencedOptionIds = new Set(optionsList.map((option) => option.id));
-      const allowedOptionIds = new Set(allowlistsByType.options.map((entry) => entry.id));
+      const allowedOptionIds = new Set(
+        p.allowlistsByType.options.map((entry) => entry.id)
+      );
       const invalidReferencedOptionIds = [...referencedOptionIds].filter(
         (id) => !allowedOptionIds.has(id)
       );
