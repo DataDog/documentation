@@ -19,6 +19,7 @@ import {
   MinifiedPagePrefsConfigSchema,
   PagePrefsConfig
 } from '../schemas/yaml/frontMatter';
+import { AllowlistsByType, Allowlist, AllowlistSchema } from '../schemas/yaml/allowlist';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import {
@@ -28,6 +29,39 @@ import {
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 
 export class YamlConfigParser {
+  /**
+   * Load the pref and options allowlists from a prefs config directory.
+   */
+  static loadAllowlistsFromDir(dir: string): AllowlistsByType {
+    const result: AllowlistsByType = { prefs: [], options: [] };
+
+    // Load and validate the prefs allowlist
+    const prefsAllowlistFilePath = `${dir}/prefs.yaml`;
+    try {
+      const prefsAllowlistStr = fs.readFileSync(prefsAllowlistFilePath, 'utf8');
+      const prefsAllowlist = AllowlistSchema.parse(yaml.load(prefsAllowlistStr));
+      result.prefs = prefsAllowlist;
+    } catch (error) {
+      throw new Error(
+        `Error reading or parsing the prefs allowlist file at ${prefsAllowlistFilePath}: ${error}`
+      );
+    }
+
+    // Load and validate the options allowlist
+    const optionsAllowlistFilePath = `${dir}/options.yaml`;
+    try {
+      const optionsAllowlistStr = fs.readFileSync(optionsAllowlistFilePath, 'utf8');
+      const optionsAllowlist = AllowlistSchema.parse(yaml.load(optionsAllowlistStr));
+      result.options = optionsAllowlist;
+    } catch (error) {
+      throw new Error(
+        `Error reading or parsing the options allowlist file at ${optionsAllowlistFilePath}: ${error}`
+      );
+    }
+
+    return result;
+  }
+
   /**
    * Load all of the preference options files in a directory
    * into a single object, and validate the object as a whole.
