@@ -22,10 +22,10 @@ private: true
   This feature is currently in Preview.
 {{< /callout >}} 
 
-[Metrics without Limits™][1] enables flexibility and control over your custom metric ingestion and indexing. However, manual configuration of custom metrics becomes unscalable as organizations' custom metrics usage grows to hundreds of millions of metrics. 
+[Metrics without Limits™][1] enables flexibility and control over your custom metric ingestion and indexing. However, manual configuration of custom metrics becomes unscalable as your custom metrics usage grows to hundreds of millions of metrics. 
 
 Datadog provides an Automated Metrics without Limits™ Workflow (also known as dynamic quotas), which automatically configures your spiking metrics with their actively queried tags and aggregations. This workflow runs when a metric monitor alerts on your estimated custom metric usage data, sending a message to a Slack channel that you designate. The message prompts you to give permission for Metrics without Limits™ to configure any spiking metric names with suggested tags and aggregations on your behalf. This helps you to:
-   - Reduce the cost of your custom metrics
+   - Proactively reduce the cost of your custom metrics
    - Save time and engineering resources on managing your custom metrics and infrastructure budget
    - Avoid API rate limits that might be encountered when programmatically configuring metrics using public APIs
 
