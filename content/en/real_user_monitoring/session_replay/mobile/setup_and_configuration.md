@@ -220,6 +220,37 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 {{% /tab %}}
 {{< /tabs >}}
 
+### Start the recording manually
+
+By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+        .startRecordingImmediately(false)
+        .build()
+    // Do something 
+    SessionReplay.startRecording()
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate,
+        startRecordingImmediately: false
+    )
+    // Do something 
+    SessionReplay.startRecording()
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK:
