@@ -149,7 +149,7 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
 ### Sampling precedence rules
-If sampling rules are set in multiple different locations, the following precedence rule apply in order, where rules that appear first on the list can override lower precedence rules:
+If sampling rules are set in multiple locations, the following precedence rule apply in order, where rules that appear first on the list can override lower precedence rules:
 
 1. Remotely configured sampling rules, either set through the [Agent](#managing-ingestion-for-all-services-at-the-agent-level) or [resource-based sampling][16]
 1. [Adaptive sampling][17]
