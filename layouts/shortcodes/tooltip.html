@@ -2,12 +2,14 @@
 {{ $text := .Get "text" }}
 {{ $tooltip := .Get "tooltip" }}
 {{ $glossary := .Get "glossary" }}
+{{ $case := .Get "case"}}
 
 <!-- Initialize variables -->
 {{ $displayText := $text }}
 {{ $tooltipContent := $tooltip }}
 {{ $fullDefinitionLink := "" }}
 {{ $glossaryMatch := false }}
+{{ $shortDefMatch := false }}
 
 <!-- Handle glossary terms if provided -->
 {{ if $glossary }}
@@ -19,37 +21,34 @@
   {{ with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) }}
     {{ $glossaryMatch = true }}
     {{ $displayText = .Title }}
-    <!-- Use short definition if available, otherwise use full content -->
     {{ if .Params.short_definition }}
+      {{ $shortDefMatch = true }}
+      <!-- Use short definition if available -->
       {{ $tooltipContent = .Params.short_definition }}
       {{ $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) }}
-    {{ else }}
-      <!-- Remove links from full content -->
-      {{ $content := .Content | plainify }}
-      {{ $tooltipContent = $content | replaceRE `\n\[\d+\]:\s+.*` "" | replaceRE `\[([^\]]+)\]\[\d+\]` "$1" | safeHTML }}
+      {{ else }}
+        {{ warnf "Glossary term '%s' found but has no short_definition" $glossary }}
     {{ end }}
   {{ else }}
-    <!-- Use glossary term if not found -->
     {{ $displayText = $glossary }}
     {{ warnf "Glossary term '%s' not found" $glossary }}
   {{ end }}
 {{ end }}
 
-<!-- Render tooltip -->
-{{ if or $glossaryMatch (and $text $tooltip) }}
-  <span class="tooltip-container">
-    <button class="tooltip-trigger" aria-describedby="tooltip-{{ $displayText | anchorize }}">
-      {{ $displayText }}
-    </button>
-    <span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" role="tooltip">
-      {{ $tooltipContent | safeHTML }}
-      {{ if $fullDefinitionLink }}
-        <a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">
-          Glossary
-        </a>
-      {{ end }}
-    </span>
-  </span>
-{{ else }}
-  {{ $displayText }}
+<!-- Apply capitalization based on the 'case' parameter -->
+{{ if eq $case "sentence" }}
+  {{ $displayText = printf "%s%s" (substr $displayText 0 1 | upper) (substr $displayText 1 | lower) }}
+{{ else if eq $case "title" }}
+  {{ $displayText = title $displayText }}
+{{ else if eq $case "lower" }}
+  {{ $displayText = lower $displayText }}
+{{ else if eq $case "upper" }}
+  {{ $displayText = upper $displayText }}
 {{ end }}
+
+<!-- Render tooltip -->
+{{- if or $shortDefMatch (and $text $tooltip) -}}
+<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{ $displayText | anchorize }}">{{ $displayText }}</button><span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" role="tooltip">{{ $tooltipContent | safeHTML }}{{- if $fullDefinitionLink -}}<a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end }}</span></span>
+{{- else -}}
+{{- $displayText -}}
+{{- end -}}
