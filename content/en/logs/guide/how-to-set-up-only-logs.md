@@ -4,6 +4,8 @@ aliases:
   - /logs/faq/how-to-set-up-only-logs
 ---
 
+<div class="alert alert-danger">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection so that you don't lose critical telemetry and value.</div>
+
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}
