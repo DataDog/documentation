@@ -46,7 +46,7 @@ Bits AI enables natural language querying for service health and ownership of yo
 
 <div class="alert alert-info">Bits AI includes access to [DDSQL Editor][1], which is in private beta.</div>
 
-`Most Common Instance Types`:
+Most Common Instance Types:
 {{< img src="ddsql_editor/query-ui-overview.png" alt="Query result for most common instance types" style="width:90%;">}}
 
 To learn more about querying infrastructure resource data in DDSQL Editor, see this [page][2]. 
