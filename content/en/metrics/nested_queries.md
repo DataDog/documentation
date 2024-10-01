@@ -8,9 +8,9 @@ further_reading:
 
 ## Overview
 
-Datadog’s nested queries feature allows you to add additional layers of aggregation on the results of existing queries in time and space. This functionality is available through the JSON tab or the API, and it supports various aggregation functions to enhance data analysis. Nested queries help you achieve multilayer aggregation, compute percentiles, and standard deviations on metrics, and run higher resolution queries over historical time frames.
 
-Datadog currently allows for [time and space aggregation][2] of your metric queries allowing for custom roll-up  capaibilities but were limited to up to 1 time and 1 space aggregation per query. With nested queries, you are now able to add an additional layer of aggregation on the results of existing queries in time and space. This unlocks new querying functionality including multilayer aggregation, standard deviation
+Previously, Datadog offered custom roll-up capabilities with [time and space aggregation][2] on your metric queries, but was limited to only one time aggregation and one space aggregation per query. With nested queries, you are now able to add an additional layer of aggregation on the results of existing queries in time and space. This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. 
+
 
 ## Multilayer aggregation
 
@@ -52,7 +52,7 @@ This query calculates the 95th percentile of average CPU utilization for each EC
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
 
-In JSON or API format, it would look as follows:
+In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-time-agg-example.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
@@ -74,7 +74,7 @@ For percentile space aggregation, the following query calculates the 95th percen
 ```text
 percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})
 ```
-In JSON or API format, it would look as follows:
+In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-space-agg-example.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
@@ -88,7 +88,7 @@ Percentile calculations allow for a deeper understanding of data distribution. H
 ```text
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
-In JSON or API format:
+In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-example.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
@@ -102,7 +102,7 @@ Standard deviation helps measure the variability or dispersion of a dataset. The
 ```text
 "rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',3600)"
 ```
-In JSON or API format:
+In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-standard-dev-example.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
@@ -110,16 +110,26 @@ In JSON or API format:
 
 ## Higher Resolution Queries
 
-High-resolution queries allow you to obtain more granular data over extended periods. Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval:
+As the query time frame increases, the rollup interval becomes less granular, preventing you from querying anything more detailed than those default time intervals. With nested queries, you can now access more granular, high-resolution data over longer periods.
+
+Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval:
 
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
 ```text
 "rollup(sum:dd.metrics.query.batch.count{*}.rollup(avg,300),`stddev`,14400)"
 ```
-In JSON or API format:
+In the UI or JSON tab:
 
  {{< img src="/dashboards/querying/nested-queries-higher-res-example.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
+
+## How can I use Datadog API's to leverage nested queries functionality?
+Nested queries functionality will be available in the same public API we already offer customers for querying their metrics data [here][3].
+
+You would need to change the contents of the formula string parameter as seen here:
+
+ {{< img src="/metrics/nested_queries/nested-queries-using-api.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
+
 
 ## Further reading
 
@@ -127,3 +137,4 @@ In JSON or API format:
 
 [1]: /dashboards/functions/rollup/
 [2]: /metrics/#configure-time-aggregation
+[3]: /metrics/#query-timeseries-data-across-multiple-products
