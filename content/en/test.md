@@ -16,9 +16,13 @@ Here's an example of a {{% tooltip text="tooltip" tooltip="This is additional in
 
 **Glossary shortcode (default)**
 
-By default, the {{% tooltip glossary="Agent" %}} is installed in a sandbox located at `/opt/datadog-agent`.
+By default, the {{% tooltip glossary="agent" %}} is installed in a sandbox located at `/opt/datadog-agent`.
 
-By default, the {{% tooltip glossary="Agent" %}}.
+By default, the {{% tooltip glossary="agent" %}}.
+
+Test space {{% tooltip glossary="apm" %}} space.
+
+Test space {{% tooltip glossary="alert graph" %}} space.
 
 
 **Glossary shortcode (short)**
