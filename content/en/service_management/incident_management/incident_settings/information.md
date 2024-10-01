@@ -4,7 +4,7 @@ title: Information
 
 ## Overview
 
-From the [Incident Settings Information][1] page, define your organization’s severity levels and status levels, and declare incident helper text to reflect the specific needs of your organization. For example, you can customize severity settings differently for security and non-security incidents, creating a more nuanced response strategy. Or create custom helper text so that when an incident is declared, all the key pieces of information are added.
+From the [Incident Settings Information][1] page, define your organization’s severity levels and status levels, and declare incident helper text to reflect the specific needs of your organization. For example, you can customize severity settings differently for security and non-security incidents, creating a more nuanced response strategy. You can also create custom helper text so that when an incident is declared, all the key pieces of information are added.
 
 ## Severity levels
 
@@ -42,7 +42,7 @@ For the Declare Incident Helper Text settings, you can customize the helper text
 | ---  | ----------- |
 | Private&nbsp;Incidents | Enable users in your organization to make incidents private and to delete incidents. Private Incidents gives users the ability to limit access to incidents with sensitive information so that only responders of the incident can see it the details. Any previously created notification rules will not be sent when an incident is private.|
 | Incident&nbsp;Deletion | Incident Deletion gives users the ability to remove the incidents from the UI, including the analytics. By default, incident deletion is disabled. |
-| Portmortem&nbsp;Generation Anytime| Enable users to to generate a postmortem regardless of the incident status. When disabled, users can only generate postmortems after an incident has been resolved. |
+| Portmortem&nbsp;Generation Anytime| Enable users to to generate a postmortem regardless of the incident status. When this setting is disabled, users can only generate postmortems after an incident has been resolved. |
 
 
 [1]: https://app.datadoghq.com/incidents/settings#Information

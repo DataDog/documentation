@@ -8,16 +8,11 @@ aliases:
 
 ## Overview
 
-Use [Incident Settings][1] to customize aspects of the Incident Management experience for your entire organization. Customizable settings in Datadog Incident Management offer several key benefits, including:
-- Better alignment with existing processes which reduces the need for your team to learn entirely new procedures. 
-- Personalized notifications and dynamic templates to create messages that are consistently accurate and contain relevant context, enabling quicker understanding and action by the recipients. 
-- Tailored analytics and dashboards to provide valuable insights for historical analysis and optimization.
-
-Save time during high-stress incidents and create an incident response strategy that matches your unique needs, leading to faster resolution times and thorough post-incident analysis.
+Use [Incident Settings][1] to customize aspects of the Incident Management experience for your entire organization. These settings enable you to align your usage of Incident Management with your existing processes.
 
 ## Incident types
 
-Incident types allow you to apply different settings to different classes of incidents. The response for a security incident can be very different from the response for a service disruption, and with Incident types, you can customize each response. 
+Incident types allow you to apply different settings to different classes of incidents. The response for a security incident can be very different from the response for a service disruption. With incident types, you can customize each response. 
 
 To create an incident type:
 1. Navigate to the [Incidents Settings][1] page.

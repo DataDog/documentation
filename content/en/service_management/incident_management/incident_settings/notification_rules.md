@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Automated, customizable notification rules ensure the right stakeholders are alerted based on specific criteria. This removes the burden from the individual declaring the incident and ensures prompt involvement of the necessary parties, expediting the resolution process. For example, Set a notification rule to automatically notify team stakeholders whenever a SEV-1 or SEV-2 for `service:web-store` AND `application:purchasing` incident is declared and when that incident moves through different states of progression.
+Automated, customizable notification rules ensure the right stakeholders are alerted based on specific criteria. This removes the burden from the individual declaring the incident and ensures prompt involvement of the necessary parties, expediting the resolution process. For example, you can set a notification rule to automatically notify team stakeholders whenever a SEV-1 or SEV-2 incident for `service:web-store` AND `application:purchasing` is declared and when that incident moves through different states of progression.
 
 Use notification rules to:
  - Ensure key stakeholders are always made aware of high priority incidents

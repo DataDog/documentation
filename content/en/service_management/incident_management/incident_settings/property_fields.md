@@ -4,7 +4,7 @@ title: Property Fields
 
 ## Overview
 
-Custom property fields enable you to capture important attributes unique to your organization. Whether it's specific product models in the automotive industry or unique codes in a software deployment, detailed custom fields help in efficiently categorizing and resolving incidents.
+Custom property fields enable you to capture important attributes unique to your organization, such as specific product models in the automotive industry or unique codes in a software deployment. These attributes help you efficiently categorize incidents.
 
 ## Incident details page
 
@@ -26,8 +26,8 @@ Property fields are key pieces of metadata you can tag your incidents with. This
 | ----------------------   | ----------- | 
 |**Detection&nbsp;Method** | Add context on how this incident was declared.||
 |**Summary**               | Provide details on what happened to cause this incident.||
-|**Root&nbsp;Cause**       | List out possible root causes or areas for investigation.||
-|**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically leverages your APM Service names. To edit the values of `Services`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it. | 
+|**Root&nbsp;Cause**       | List possible root causes or areas for investigation.||
+|**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically uses your APM Service names. To edit the values of `Services`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it. | 
 |**Teams**                 | The `Teams` property field automatically populates from the [teams][5] defined in your organization. | 
 
 You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this, the key of your property field is the start case of your metric tag's key (for example, the tag `scope_name` becomes field `Scope Name`) and the values for the property field are equal to the values reported by the metric tag.
