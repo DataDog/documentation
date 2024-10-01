@@ -46,6 +46,6 @@ For the Declare Incident Helper Text settings, you can customize the helper text
 
 
 [1]: https://app.datadoghq.com/incidents/settings#Information
-[2]: /service_management/incident_management/incident_settings/notifications
+[2]: /service_management/incident_management/incident_settings/notification_rules
 [3]: /service_management/incident_management/analytics
 [4]: /service_management/incident_management/#from-the-incidents-page
