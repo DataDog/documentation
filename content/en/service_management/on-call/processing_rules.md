@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-On-call processing rules allow teams to customize their response strategies for distinct types of incoming events. This enables teams to add events and urgency levels to to escalation policies based on the event's metadata. Low urgency pages do not trigger escalation processes.
+On-call processing rules allow teams to customize their response strategies for distinct types of incoming events. This enables teams to add events and urgency levels to escalation policies based on the event's metadata. Low urgency pages do not trigger escalation processes.
 
 Datadog creates a default processing rule when you [onboard a Team to On-Call][1].
 
