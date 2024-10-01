@@ -23,6 +23,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
+Supported MariaDB versions
+: 10.5, 10.6, or 10.11 <br/><br/>
+Database Monitoring for MariaDB is supported with [known limitations][11].
+
 Supported Agent versions
 : 7.36.1+
 
@@ -364,3 +368,4 @@ If you have installed and configured the integrations and Agent as described and
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
+[11]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations

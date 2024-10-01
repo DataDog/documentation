@@ -100,7 +100,7 @@ Configure incident notifications to share incident updates with all stakeholders
 
 [1]: /service_management/incident_management/declare
 [2]: /account_management/teams/
-[3]: /service_management/incident_management/incident_settings/#responder-types
+[3]: /service_management/incident_management/incident_settings/responder-types
 [4]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [5]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [6]: /service_management/incident_management/notification
