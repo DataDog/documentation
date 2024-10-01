@@ -26,10 +26,6 @@ further_reading:
 
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup).
 
-## Automatic view tracking
-
-If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][18] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
-
 ## Initialization parameters
 You can specify the following parameters in your configuration when intializing the SDK.
 
@@ -89,12 +85,12 @@ The flavor (variant) of the application. For stack trace deobfuscation, this mus
 
 `firstPartyHosts`
 : Optional<br/>
-**Type**: [String]<br/>
-A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracingHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
+**Type**: List&lt;String&gt;<br/>
+A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracinHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
 
 `firstPartyHostsWithTracingHeaders`
 : Optional<br/>
-**Type**: Map<br/>
+**Type**: Map&lt;String, Set&lt;TracingHeaderType&gt;&gt;<br/>
 A map of first party hosts and the types of tracing headers Datadog automatically injects on resource calls, used in conjunction with Datadog network tracking packages. For example:<br/>
   ```dart
   final configuration = DatadogConfiguration(
@@ -184,6 +180,10 @@ A custom endpoint for sending RUM data.
 **Type**: Double<br/>
 **Default**: `20.0`
 The sampling rate for telemetry data, such as errors and debug logs.
+
+## Automatic view tracking
+
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][18] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
 
 ## Enrich user sessions
 
