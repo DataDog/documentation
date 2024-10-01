@@ -1,6 +1,6 @@
 --- 
 title: Trace Cluster Map
-description: Learn how to monitor and optimize your LLM application's performance by identifying and addressing quality issues through trace clusters on the Clusters page.
+description: Identify your LLM application's drifts by viewing its Cluster Map.
 further_reading: 
 - link: "/llm_observability/" 
   tag: "Documentation" 
@@ -14,7 +14,7 @@ further_reading:
 
 You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information. 
 
-The Cluster Map allows you to view input or output, with each type grouped by [topic][2]. Inputs and outputs are clustered separately. Topics are determined by clustering the selected input or output into text embeddings in high dimensions, then projecting them into a 2D space. 
+Cluster Maps display inputs or outputs, grouped by [topic][2]. Inputs and outputs are clustered separately. Topics are determined by clustering the selected input or output into text embeddings in high dimensions, then projecting them into a 2D space. 
 
 {{< img src="llm_observability/cluster_map/scatter.png" alt="The scatter plot displays clusters of traces with color-coded topics and includes a panel listing clusters, trace counts, and failure rates." style="width:100%;" >}}
 
@@ -23,7 +23,7 @@ You can visualize the clusters by using a **Box Packing** or **Scatter Plot** la
 - Box Packing gives you a grouped view of each of the clusters and overlays any metrics or evaluations on every trace. 
 - Scatter Plot, on the other hand, allows you to view the high dimensional text embeddings in a 2D space, although the distance between each trace may be misleading due to projection distortion. 
 
-The Cluster Map provides an overview of each cluster's performance across operational metrics, such as error types and latency, or [out-of-the-box or custom evaluations][3], enabling you to identify trends such as topic drift and additional quality issues.
+Cluster Maps provide an overview of each cluster's performance across operational metrics, such as error types and latency, or [out-of-the-box or custom evaluations][3], enabling you to identify trends such as topic drift and additional quality issues.
 
 ## Search and manage clusters
 
@@ -31,9 +31,9 @@ Customize your search query by selecting the sorting options to narrow down the 
 
 1. Select `inputs` or `outputs` from the dropdown menu to see clusters for inputs or outputs grouped by topic.
 1. Select an evaluation type or an evaluation score to color-code the clusters. For example, `Output Sentiment` for “What is the sentiment of the output?” or `duration` for “How long does it take for an LLM to generate an output (in nanoseconds)?” 
-1. Select a field for the clusters to be sorted by: time, duration, or color. Then, select desc or asc to set the order. 
+1. Select a field for the clusters to be sorted by: time, duration, or color. Then, select **desc** or **asc** to set the order. 
 
-Select a topic cluster from the list to examine how inputs or outputs about specific topics perform against other topics for each metric or evaluation, as well as see individual prompts and responses of each cluster. For example, you can quickly get an overview of your slowest topics when you overlay by `duration`.
+Select a topic cluster from the list to examine how inputs or outputs about specific topics perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each cluster. For example, you can get an overview of your slowest topics when you overlay by `duration`.
 
 {{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
 
