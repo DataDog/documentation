@@ -86,7 +86,7 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 
 ## "Deobfuscation failed" warning
 
-A warning appears when symbolication fails for a stack trace. If the stack trace is not symbolicated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][7] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][8].
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not deobfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][7] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][8].
 
 ## Further Reading
 
