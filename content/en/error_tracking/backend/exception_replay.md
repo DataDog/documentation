@@ -17,9 +17,9 @@ aliases:
   - /tracing/error_tracking/execution_replay/
 ---
 
-<div class="alert alert-info">
-Exception Replay for APM Error Tracking is in beta.
-</div>
+{{< callout url="#" btn_hidden="true" header="false">}}
+Exception Replay for APM Error Tracking is in Preview.
+{{< /callout >}}
 
 ## Overview
 
