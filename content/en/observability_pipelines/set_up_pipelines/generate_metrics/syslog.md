@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
+Configure rsyslog or syslog-ng to send logs to the Observability Pipelines Worker so that you can generate metrics from those logs.
 
 {{% observability_pipelines/use_case_images/generate_metrics %}} 
 

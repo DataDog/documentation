@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
+Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker so that you can generate metrics from those logs.
 
 {{% observability_pipelines/use_case_images/generate_metrics %}} 
 
