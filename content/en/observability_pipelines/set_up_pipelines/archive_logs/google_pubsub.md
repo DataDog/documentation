@@ -1,6 +1,8 @@
 ---
 title: Archive Logs for Google Pub/Sub
 disable_toc: false
+aliases:
+    - /observability_pipelines/set_up_pipelines/archive_logs/google_pub_sub/
 ---
 
 ## Overview
