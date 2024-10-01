@@ -46,7 +46,7 @@ Additional layers of time aggregation support:
 - `stddev`
 
 {{% collapse-content title="Time aggregation example query" level="h5" %}}
-This query calculates the 95th percentile of average CPU utilization for each EC2 instance grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes.
+This query calculates the 95th percentile of average CPU utilization for each EC2 instance grouped by environment and team, rolled up into 5-minute intervals, over the last 30 minutes.
 
 ```text
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
@@ -54,7 +54,10 @@ This query calculates the 95th percentile of average CPU utilization for each EC
 
 In the UI or JSON tab, it would look as follows:
 
-{{< img src="/metrics/nested_queries/multilayer-time-agg-example.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
+{{< img src="/metrics/nested_queries/multilayer-time-agg-ui.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
+{{% /collapse-content %}} 
+
+{{< img src="/metrics/nested_queries/multilayer-time-agg-json.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
 
@@ -76,21 +79,31 @@ percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {
 ```
 In the UI or JSON tab, it would look as follows:
 
-{{< img src="/metrics/nested_queries/multilayer-space-agg-example.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
+{{< img src="/metrics/nested_queries/multilayer-space-agg-ui.png" alt="example of multilayer space aggregation in the UI" style="width:100%;" >}}
 {{% /collapse-content %}} 
+
+{{< img src="/metrics/nested_queries/multilayer-space-agg-json.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
+{{% /collapse-content %}}
 
 
 ## Percentiles
 
-Percentile calculations allow for a deeper understanding of data distribution. Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
+Percentile calculations provide deeper insights into data distribution, setting performance thresholds, and identifying outliers/extremes in your data. For metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
+
+Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
 
 {{% collapse-content title="Percentiles example query" level="h5" %}}
 ```text
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
-In the UI or JSON tab, it would look as follows:
 
- {{< img src="/metrics/nested_queries/nested-queries-percentiles-example.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
+In the UI:
+ {{< img src="/metrics/nested_queries/nested-queries-percentiles-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
+{{% /collapse-content %}} 
+
+In the JSON tab, it would look as follows:
+
+ {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
 
@@ -100,11 +113,14 @@ Standard deviation helps measure the variability or dispersion of a dataset. The
 
 {{% collapse-content title="Standard deviation example query" level="h5" %}}
 ```text
-"rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',3600)"
+"rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',14400)"
 ```
 In the UI or JSON tab, it would look as follows:
 
- {{< img src="/metrics/nested_queries/nested-queries-standard-dev-example.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
+ {{< img src="/metrics/nested_queries/nested-queries-std-ui.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
+{{% /collapse-content %}} 
+
+ {{< img src="/metrics/nested_queries/nested-queries-std-jsonigh.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
 
@@ -120,8 +136,13 @@ Here's an example that calculates the standard deviation of high-resolution metr
 ```
 In the UI or JSON tab:
 
- {{< img src="/dashboards/querying/nested-queries-higher-res-example.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
+{{< img src="/dashboards/querying/nested-queries-higher-res-ui.png" alt="example of higher resolution queries using nested queries in the UI" style="width:100%;" >}}
 {{% /collapse-content %}} 
+
+{{< img src="/dashboards/querying/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
+{{% /collapse-content %}} 
+
+
 
 ## How can I use Datadog API's to leverage nested queries functionality?
 Nested queries functionality will be available in the same public API we already offer customers for querying their metrics data [here][3].
@@ -138,3 +159,4 @@ You would need to change the contents of the formula string parameter as seen he
 [1]: /dashboards/functions/rollup/
 [2]: /metrics/#configure-time-aggregation
 [3]: /metrics/#query-timeseries-data-across-multiple-products
+[4]: /metrics/distributions/
