@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-This document goes over [bootstrapping the Observability Pipelines Worker](#bootstrap-options) and [referencing files in Kubernetes](#referencing-files-in-kubernetes).
+This document goes over bootstrapping the Observability Pipelines Worker.
 
 ## Bootstrap Options
 
@@ -89,44 +89,6 @@ The following is a list of bootstrap options, their related pipeline environment
 : An example proxy configuration:
 : &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
 : <b>Note</b>: The `DD_PROXY_HTTP(S)` and `HTTP(S)_PROXY` environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.
-
-## Referencing files in Kubernetes
-
-If you are referencing files in Kubernetes for Google Cloud Storage authentication, TLS certificates for certain sources, or an enrichment table processor, you need to use `volumeMounts[*].subPath` to mount files from a `configMap` or `secret`.
-
-For example, if you have a `secret` defined as:
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: my-secret
-type: Opaque
-data:
-  credentials1.json: bXktc2VjcmV0LTE=
-  credentials2.json: bXktc2VjcmV0LTI=
-```
-
-Then you need to override `extraVolumes` and `extraVolumeMounts` in the `values.yaml` file to mount the secret files to Observability Pipelines Worker pods using `subPath`:
-
-```
-# extraVolumes -- Specify additional Volumes to use.
-extraVolumes:
-  - name: my-secret-volume
-    secret:
-      secretName: my-secret
-
-# extraVolumeMounts -- Specify Additional VolumeMounts to use.
-extraVolumeMounts:
-  - name: my-secret-volume
-    mountPath: /var/lib/observability-pipelines-worker/config/credentials1.json
-    subPath: credentials1.json
-  - name: my-secret-volume
-    mountPath: /var/lib/observability-pipelines-worker/config/credentials2.json
-    subPath: credentials2.json
-```
-
-**Note**: If you override the`datadog.dataDir` parameter, you need to override the `mountPath` as well.
 
 ## Further reading
 
