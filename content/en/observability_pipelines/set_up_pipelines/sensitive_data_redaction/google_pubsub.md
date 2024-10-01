@@ -247,8 +247,4 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker over Google_pubsub
-
-{{% observability_pipelines/log_source_configuration/google_pubsub %}}
-
 [1]: https://app.datadoghq.com/observability-pipelines

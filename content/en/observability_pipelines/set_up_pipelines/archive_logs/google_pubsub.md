@@ -337,10 +337,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker
-
-{{% observability_pipelines/log_source_configuration/google_pubsub%}}
-
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup
 [3]: /integrations/azure/#setup
