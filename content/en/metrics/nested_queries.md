@@ -85,7 +85,6 @@ In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/multilayer-space-agg-json.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-
 ## Percentiles
 
 Percentile calculations provide deeper insights into data distribution, setting performance thresholds, and identifying outliers/extremes in your data. For metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
@@ -105,7 +104,6 @@ In the JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
-
 
 ## Standard Deviation
 
