@@ -16,17 +16,17 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/fluent%}}
+{{% observability_pipelines/prerequisites/google_pubsub %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Dual Ship Logs** template to create a new pipeline.
-1. Select **Fluentd** or **Fluent Bit** as the source.
+1. Select the **Google Pub/Sub** source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/fluent%}}
+{{% observability_pipelines/source_settings/google_pubsub%}}
 
 ### Set up the destinations
 
@@ -66,6 +66,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}
@@ -153,8 +158,6 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Fluent socket address and port. The Observability Pipelines Worker listens on this address for incoming log messages.
-
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}
@@ -242,8 +245,8 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker over Fluent
+## Send logs to the Observability Pipelines Worker over Google_pubsub
 
-{{% observability_pipelines/log_source_configuration/fluent %}}
+{{% observability_pipelines/log_source_configuration/google_pubsub %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
