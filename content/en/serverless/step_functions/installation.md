@@ -222,6 +222,16 @@ After you have invoked your state machine, go to the [**Serverless app**][2] in 
 
 If you cannot see your traces, see [Troubleshooting][5].
 
+### Retry Step Functions executions or redrive failed executions from within Datadog
+
+You can retry any execution that is being monitored or [redrive][11] executions to continue failed AWS Step Functions from the point of failure, without needing a complete state machine restart. This can be done directly from Datadog.
+
+To take action on you [Step Functions][12] in Datadog, you can either use the invocations list on a Step Function side-panel and click on the **Failed** pill to open a redrive modal, or open the Step Function Trace Map to retry an execution or redrive a failed execution.
+
+{{< img src="serverless/step_functions/redrive.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
+
+To enable using redrive within Datadog, configure an [AWS Connection][13] with [Datadog App Builder][14]. Ensure that your IAM roles include policies that have permissions to allow executing a Step Function for the retry action (`StartExecution`) or redriving a Step Function for the redrive action (`RedriveExecution`).
+
 [2]: https://app.datadoghq.com/functions?search=&cloud=aws&entity_view=step_functions
 [3]: /serverless/installation/#installation-instructions
 [5]: /serverless/step_functions/troubleshooting
@@ -230,3 +240,7 @@ If you cannot see your traces, see [Troubleshooting][5].
 [8]: /serverless/step_functions/enhanced-metrics
 [9]: /integrations/amazon_step_functions
 [10]: /serverless/aws_lambda/installation
+[11]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
+[12]: https://app.datadoghq.com/functions?cloud=aws&entity_view=step_functions
+[13]: https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html
+[14]: /service_management/app_builder/
