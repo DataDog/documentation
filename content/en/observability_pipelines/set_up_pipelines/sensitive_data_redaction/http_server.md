@@ -248,7 +248,7 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send logs to the Observability Pipelines Worker over Http_server
+## Send logs to the Observability Pipelines Worker 
 
 {{% observability_pipelines/log_source_configuration/http_server %}}
 
