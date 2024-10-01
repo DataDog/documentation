@@ -116,7 +116,7 @@ template:
                 fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags.
+You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags:
 
 ```yaml
   containers:
