@@ -2368,132 +2368,152 @@ menu:
       parent: workflows
       identifier: workflows_trigger
       weight: 3
+    - name: Variables and parameters
+      url: service_management/workflows/variables/
+      parent: workflows
+      identifier: workflows_variables
+      weight: 4
     - name: Actions
       url: service_management/workflows/actions/
       parent: workflows
       identifier: workflows_actions
-      weight: 4
+      weight: 5
     - name: Workflow Logic
       url: service_management/workflows/actions/flow_control/
       parent: workflows_actions
       identifier: workflows_flow_control
-      weight: 402
+      weight: 502
     - name: Data Transformation
       url: service_management/workflows/actions/data_transformation/
       parent: workflows_actions
       identifier: workflows_data_transformation
-      weight: 403
+      weight: 503
     - name: HTTP Requests
       url: service_management/workflows/actions/http/
       parent: workflows_actions
       identifier: workflows_http
-      weight: 404
-    - name: Set variables
-      url: service_management/workflows/actions/set_variables/
-      parent: workflows_actions
-      identifier: workflows_set_variables
-      weight: 405
+      weight: 504
     - name: Private Actions
       url: service_management/workflows/private_actions/
       parent: workflows
       identifier: workflows_private_actions
-      weight: 5
+      weight: 6
+    - name: Use Private Actions
+      url: service_management/workflows/private_actions/use_private_actions/
+      parent: workflows_private_actions
+      identifier: workflows_use_private_actions
+      weight: 601
     - name: Private Action Credentials
       url: service_management/workflows/private_actions/private_action_credentials/
       parent: workflows_private_actions
       identifier: workflows_private_actions_creds
-      weight: 501
+      weight: 602
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
       identifier: workflows_saved_actions
-      weight: 6
+      weight: 7
     - name: Connections
       url: service_management/workflows/connections/
       parent: workflows
       identifier: workflows_connections
-      weight: 7
+      weight: 8
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
-      weight: 8
+      weight: 9
+    - name: Track Workflows
+      url: service_management/workflows/track
+      parent: workflows
+      identifier: workflows_track
+      weight: 10
+    - name: Limits
+      url: service_management/workflows/limits/
+      parent: workflows
+      identifier: workflows_limits
+      weight: 11
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 9
+      weight: 12
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
       identifier: app_builder
       parent: service_management_heading
       weight: 70000
-    - name: Authentication
-      url: service_management/app_builder/auth/
-      parent: app_builder
-      identifier: app_builder_access
-      weight: 1
-    - name: Connections
-      url: service_management/app_builder/connections/
-      parent: app_builder
-      identifier: app_builder_connections
-      weight: 2
-    - name: HTTP Request
-      url: service_management/app_builder/connections/http_request/
-      parent: app_builder_connections
-      identifier: app_builder_http_request
-      weight: 201
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
       identifier: app_builder_build
+      weight: 1
+    - name: Authentication
+      url: service_management/app_builder/auth/
+      parent: app_builder
+      identifier: app_builder_access
+      weight: 2
+    - name: Connections
+      url: service_management/app_builder/connections/
+      parent: app_builder
+      identifier: app_builder_connections
       weight: 3
-    - name: Components
-      url: service_management/app_builder/components/
-      parent: app_builder
-      identifier: app_builder_components
-      weight: 4
-    - name: Tables
-      url: service_management/app_builder/components/tables/
-      parent: app_builder_components
-      identifier: app_builder_tables
-      weight: 401
-    - name: Events
-      url: service_management/app_builder/events/
-      parent: app_builder
-      identifier: app_builder_events
-      weight: 5
+    - name: HTTP Request
+      url: service_management/app_builder/connections/http_request/
+      parent: app_builder_connections
+      identifier: app_builder_http_request
+      weight: 301
     - name: Queries
       url: service_management/app_builder/queries/
       parent: app_builder
       identifier: app_builder_queries
-      weight: 6
-    - name: JavaScript Expressions
-      url: service_management/app_builder/expressions/
-      parent: app_builder
-      identifier: app_builder_expressions
-      weight: 7
+      weight: 4
     - name: Variables
       url: service_management/app_builder/variables/
       parent: app_builder
       identifier: app_builder_variables
-      weight: 8
-    - name: Embedded Apps
-      url: service_management/app_builder/embedded_apps/
+      weight: 5
+    - name: Events
+      url: service_management/app_builder/events/
       parent: app_builder
-      identifier: app_builder_embedded_apps
-      weight: 9
+      identifier: app_builder_events
+      weight: 6
     - name: Private Actions
       url: service_management/app_builder/private_actions/
       parent: app_builder
       identifier: app_builder_private_actions
-      weight: 10
+      weight: 7
+    - name: Use Private Actions
+      url: service_management/app_builder/private_actions/use_private_actions/
+      parent: app_builder_private_actions
+      identifier: app_builder_use_private_actions
+      weight: 701
     - name: Private Action Credentials
       url: service_management/app_builder/private_actions/private_action_credentials/
       parent: app_builder_private_actions
       identifier: app_builder_private_actions_creds
-      weight: 1001
+      weight: 702
+    - name: Components
+      url: service_management/app_builder/components/
+      parent: app_builder
+      identifier: app_builder_components
+      weight: 8
+    - name: Tables
+      url: service_management/app_builder/components/tables/
+      parent: app_builder_components
+      identifier: app_builder_tables
+      weight: 801
+    - name: JavaScript Expressions
+      url: service_management/app_builder/expressions/
+      parent: app_builder
+      identifier: app_builder_expressions
+      weight: 9
+    - name: Embedded Apps
+      url: service_management/app_builder/embedded_apps/
+      parent: app_builder
+      identifier: app_builder_embedded_apps
+      weight: 10
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -4387,40 +4407,20 @@ menu:
       identifier: dora_metrics_setup
       weight: 1
     - name: Deployment Data Sources
-      url: dora_metrics/deployments
-      parent: dora_metrics
-      identifier: dora_metrics_deployments
-      weight: 2
-    - name: APM Deployment Tracking
-      url: dora_metrics/deployments/apm
-      parent: dora_metrics_deployments
-      identifier: dora_metrics_deployment_apm
-      weight: 201
-    - name: API
-      url: dora_metrics/deployments/deployment_api
-      parent: dora_metrics_deployments
-      identifier: dora_metrics_deployment_events_api
-      weight: 202
-    - name: Failure Data Sources
-      url: dora_metrics/failures/
-      parent: dora_metrics
-      identifier: dora_metrics_incidents
-      weight: 3
-    - name: PagerDuty
-      url: dora_metrics/failures/pagerduty
-      parent: dora_metrics_incidents
-      identifier: dora_metrics_incident_pagerduty
-      weight: 301
-    - name: API
-      url: dora_metrics/failures/incident_api
-      parent: dora_metrics_incidents
-      identifier: dora_metrics_incident_events_api
-      weight: 302
+      url: dora_metrics/setup/deployments
+      parent: dora_metrics_setup
+      identifier: dora_metrics_setup_deployments
+      weight: 101
+    - name: Incident Data Sources
+      url: dora_metrics/setup/failures/
+      parent: dora_metrics_setup
+      identifier: dora_metrics_setup_incidents
+      weight: 102
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 4
+      weight: 2
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -4898,51 +4898,56 @@ menu:
       url: logs/log_collection/roku/
       parent: log_collection
       weight: 106
+    - name: Kotlin Multiplatform
+      identifier: log_kotlin_multiplatform
+      url: logs/log_collection/kotlin-multiplatform/
+      parent: log_collection
+      weight: 107
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 107
+      weight: 108
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 108
+      weight: 109
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 109
+      weight: 110
     - name: NodeJS
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 110
+      weight: 111
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 111
+      weight: 112
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 112
+      weight: 113
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 113
+      weight: 114
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
       identifier: log_collection_opentelemetry
-      weight: 114
+      weight: 115
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 115
+      weight: 116
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
