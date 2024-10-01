@@ -151,7 +151,7 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 ### Sampling precedence rules
 If sampling rules are set in multiple locations, the following precedence rules apply in order, where rules that appear first on the list can override lower precedence rules:
 
-1. Remotely configured sampling rules, either set through the [Agent](#managing-ingestion-for-all-services-at-the-agent-level) or [resource-based sampling][16]
+1. Remotely configured sampling rules, set through [resource-based sampling][16]
 1. [Adaptive sampling configured rules][17]
 1. [Locally configured sampling rules][8] (`DD_TRACE_SAMPLING_RULES`)
 1. [Remotely configured global sampling rate][8]
