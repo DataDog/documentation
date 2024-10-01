@@ -27,7 +27,7 @@ This document walks you through the following steps to set up dual shipping:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][2].
-1. Select the **Dual Ship Logs** template to create a new pipeline.
+1. Select the **Generate Metrics** template to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
 ### Set up the source
