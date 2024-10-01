@@ -46,7 +46,7 @@ The environment name sent to Datadog. You can use `env` to filter events by envi
 `site`
 : Required<br/>
 **Type**: Enum<br/>
-The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, `ap1`.
+The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, and `ap1`.
 
 `nativeCrashReportEnabled`
 : Optional<br/>
@@ -62,18 +62,20 @@ The service name for the application.
 `uploadFrequency`
 : Optional<br/>
 **Type**: Enum<br/>
+**Default**: `average`<br/>
 The frequency at which the Datadog SDK tries to upload data batches. Enum values: `frequent`, `average`, `rare`.
 
 `batchSize`
 : Optional<br/>
 **Type**: Enum<br/>
+**Default**: `medium`<br/>
 Defines the Datadog SDK policy for batching data before uploading it to Datadog servers. Larger batches result in larger (but fewer) network requests. Smaller batches result in smaller (but more) network requests. Enum values: `small`, `medium`, `large`.
 
 `batchProcessingLevel`
 : Optional<br/>
 **Type**: Enum<br/>
 **Default**: `medium`
-Defines the maximum number of batches processed sequentially without a delay, within one reading/uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, `high`
+Defines the maximum number of batches processed sequentially without a delay, within one reading and uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, `high`
 
 `version`
 : Optional<br/>
@@ -88,7 +90,7 @@ The flavor (variant) of the application. For stack trace deobfuscation, this mus
 `firstPartyHosts`
 : Optional<br/>
 **Type**: [String]<br/>
-A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracinHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
+A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracingHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
 
 `firstPartyHostsWithTracingHeaders`
 : Optional<br/>
@@ -152,7 +154,7 @@ Enable or disable long task detection. This capability attempts to detect when a
 : Optional<br/>
 **Type**: Double<br/>
 **Default**: `0.1`<br/>
-The amount of elapsed time that distinguishes a _long task_, in seconds. If the main isolate takes more than this time to process a microtask, it appears as a long task in Datadog RUM Explorer. Minimum value: `0.02`. On Flutter Web, which always uses a value of `0.05` seconds, this argument is ignored.
+The amount of elapsed time that distinguishes a _long task_, in seconds. If the main isolate takes more than this amount of time to process a microtask, it appears as a long task in Datadog RUM Explorer. Minimum value: `0.02`. On Flutter Web, which always uses a value of `0.05` seconds, this argument is ignored.
 
 `trackFrustrations`
 : Optional<br/>
