@@ -75,6 +75,18 @@ attributes:
     data_type: Job traces
     default_retention_period: 90 days
   - suite: Digital Experience
+    product: Browser RUM
+    data_type: Events
+    default_retention_period: 30 days
+  - suite: Digital Experience
+    product: Continuous Testing
+    data_type: Batch results
+    default_retention_period: 2 months
+  - suite: Digital Experience
+    product: Continuous Testing
+    data_type: Test results
+    default_retention_period: 2 months
+  - suite: Digital Experience
     product: Error Tracking
     data_type: Errors
     default_retention_period: 1 year after last access
@@ -82,10 +94,6 @@ attributes:
     product: RUM
     data_type: Errors
     default_retention_period: 30 days (90 days upon request)
-  - suite: Digital Experience
-    product: Browser RUM
-    data_type: Events
-    default_retention_period: 30 days
   - suite: Digital Experience
     product: Mobile RUM
     data_type: Events
@@ -96,16 +104,16 @@ attributes:
     default_retention_period: 2 months (15 months if displayed in UI)
   - suite: Digital Experience
     product: Mobile App Testing
-    data_type: Test results
-    default_retention_period: If in UI, 15 months; if not in UI, 2 months
+    data_type: Metrics
+    default_retention_period: 15 months
   - suite: Digital Experience
     product: Mobile App Testing
     data_type: Mobile application binaries
     default_retention_period: Indefinite
   - suite: Digital Experience
     product: Mobile App testing
-    data_type: Metrics
-    default_retention_period: 15 months
+    data_type: Test results
+    default_retention_period: 2 months (15 months if displayed in UI)
   - suite: Digital Experience
     product: Session Replay
     data_type: Replays
