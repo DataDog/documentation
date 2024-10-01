@@ -10,7 +10,7 @@ To set up the add field processor:
 
 ##### Drop field
 
-Use **drop field** to drop a field from logging data that matches the filter you specify below.
+Use **drop field** to drop a field from logging data that matches the filter you specify below. The drop field can delete objects, so you can use it to drop nested keys.
 
 To set up the drop field processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
