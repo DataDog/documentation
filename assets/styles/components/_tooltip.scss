@@ -15,7 +15,8 @@
 .tooltip-trigger {
   background: none;
   border: none;
-  text-decoration: underline dotted;
+  text-decoration: underline;
+  text-decoration-style: dotted;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
   color: inherit;
@@ -100,6 +101,12 @@
       display: inline;
       margin-left: 2px;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .tooltip-content::after {
+    display: none;
   }
 }
 
