@@ -17,8 +17,8 @@ further_reading:
 <div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Early Flake Detection is in public beta.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Early Flake Detection is in Preview.
 {{< /callout >}}
 
 ## Overview
