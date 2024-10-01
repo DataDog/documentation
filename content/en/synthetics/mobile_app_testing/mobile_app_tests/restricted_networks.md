@@ -18,11 +18,11 @@ cascade:
 
 ## Overview
 
-Some of your applications may not be available to the public internet because they are either accessing development or local environments, or they are internal applications intended for users within your corporate network, for example, your corporate intranet or VPN. 
+Some of your applications might not be available to the public Internet because they are accessing development or local environments, or they are internal applications intended for users within your corporate network (for example, your corporate intranet or VPN). 
 
 {{< img src="/mobile_app_testing/mobile_app_restricted_networks.png" alt="Diagram showing testing of mobile apps behind a firewall or restricted networks" style="width:100%;">}}
 
-To test these applications, add the following IP address ranges to your company's allow list to ensure successful requests from your applications in Datadog Mobile App Testing. 
+To test these applications, add the following IP address ranges to your company's allowlist. This ensures successful requests from your applications in Datadog Mobile App Testing. 
 
 The following is the list of IP ranges associated with the real devices used for Datadog Mobile App Testing:
 
