@@ -59,19 +59,19 @@ The service name for the application.
 : Optional<br/>
 **Type**: Enum<br/>
 **Default**: `average`<br/>
-The frequency at which the Datadog SDK tries to upload data batches. Enum values: `frequent`, `average`, `rare`.
+The frequency at which the Datadog SDK tries to upload data batches. Enum values: `frequent`, `average`, and `rare`.
 
 `batchSize`
 : Optional<br/>
 **Type**: Enum<br/>
 **Default**: `medium`<br/>
-Defines the Datadog SDK policy for batching data before uploading it to Datadog servers. Larger batches result in larger (but fewer) network requests. Smaller batches result in smaller (but more) network requests. Enum values: `small`, `medium`, `large`.
+Defines the Datadog SDK policy for batching data before uploading it to Datadog servers. Larger batches result in larger (but fewer) network requests. Smaller batches result in smaller (but more) network requests. Enum values: `small`, `medium`, and `large`.
 
 `batchProcessingLevel`
 : Optional<br/>
 **Type**: Enum<br/>
 **Default**: `medium`
-Defines the maximum number of batches processed sequentially without a delay, within one reading and uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, `high`
+Defines the maximum number of batches processed sequentially without a delay, within one reading and uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, and `high`.
 
 `version`
 : Optional<br/>
@@ -162,7 +162,7 @@ Enables [automatic collection of user frustrations][19].
 : Optional<br/>
 **Type**: Enum<br/>
 **Default**: `average`<br/>
-The preferred frequency for collecting mobile vitals. Enum values: `frequent` (100ms),`average` (500ms), `rare` (1000ms). To disable mobile vitals collection, set this parameter to `null`.
+The preferred frequency for collecting mobile vitals. Enum values: `frequent` (100ms),`average` (500ms), and `rare` (1000ms). To disable mobile vitals collection, set this parameter to `null`.
 
 `reportFlutterPerformance`
 : Optional<br/>
