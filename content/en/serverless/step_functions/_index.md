@@ -47,7 +47,7 @@ You can retry any execution that is being monitored or [redrive][4] executions t
 
 To take action on you [Step Functions][5] in Datadog, you can either use the invocations list on a Step Function side-panel and click on the **Failed** pill to open a redrive modal, or open the Step Function Trace Map to retry an execution or redrive a failed execution.
 
-
+{{< img src="serverless/step_functions/redrive.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
 
 To enable using redrive within Datadog, configure an [AWS Connection][6] with [Datadog App Builder][7]. Ensure that your IAM roles include policies that have permissions to allow executing a Step Function for the retry action (`StartExecution`) or redriving a Step Function for the redrive action (`RedriveExecution`).
 
