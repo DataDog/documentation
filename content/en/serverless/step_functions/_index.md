@@ -41,11 +41,16 @@ You can view end-to-end traces for a single Step Function execution and its asso
 
 To get started, follow the [installation instructions][1].
 
-### Retry Step Functions from within Datadog
+### Retry Step Functions executions or redrive failed executions from within Datadog
 
-You can use [redrive][4] to continue failed AWS Step Functions from the point of failure, without needing a complete state machine restart. View your [Step Functions][5] in Datadog to identify failed executions and click on the **Failed** tag to open a redrive modal.
+You can retry any execution that is being monitored or [redrive][4] executions to continue failed AWS Step Functions from the point of failure, without needing a complete state machine restart. This can be done directly from Datadog.
 
-To enable using redrive within Datadog, configure an [AWS Connection][6] with [Datadog App Builder][7].
+To take action on you [Step Functions][5] in Datadog, you can either use the invocations list on a Step Function side-panel and click on the **Failed** pill to open a redrive modal, or open the Step Function Trace Map to retry an execution or redrive a failed execution.
+
+
+
+To enable using redrive within Datadog, configure an [AWS Connection][6] with [Datadog App Builder][7]. Ensure that your IAM roles include policies that have permissions to allow executing a Step Function for the retry action (`StartExecution`) or redriving a Step Function for the redrive action (`RedriveExecution`).
+
 
 ## Further Reading
 
