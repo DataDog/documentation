@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-This document goes over bootstrapping the Observability Pipelines Worker.
+This document explains bootstrapping for the Observability Pipelines Worker.
 
 ## Bootstrap Options
 
