@@ -6,17 +6,19 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-Processing Rules allow teams to customize their response strategies for distinct types of incoming events, enabling them to orchestrate events to escalation policies and urgency levels based on the event's metadata. Low urgency pages do not trigger escalation processes.
+## Overview
+
+On-call processing rules allow teams to customize their response strategies for distinct types of incoming events. This enables teams to add events and urgency levels to to escalation policies based on the event's metadata. Low urgency pages do not trigger escalation processes.
 
 Datadog creates a default processing rule when you [onboard a Team to On-Call][1].
 
-### Viewing processing rules of your team
+## View your team's processing rules
 
-To see the processing rule of your On-Call Team, simply click on its name in the [list of Teams][2].
+To see the processing rule of your On-Call Team, click on the Team name in the [list of Teams][2].
 
-### Query Syntax
+## Query syntax
 
-Processing rule follow the common query syntax of Datadog. Supported attributes include:
+Processing rules follow the common query syntax of Datadog. Supported attributes include:
 
 * `tags`: the tags set on the incoming alert. For example, `tags.env:prod`.
 * `groups`: checks if the incoming alert relates to a specific Monitor group. For example, `groups:"service:checkout-service"`.
@@ -25,9 +27,9 @@ Processing rule follow the common query syntax of Datadog. Supported attributes 
 
 If no specific filter should be applied, use `*`.
 
-### Ordering
+## Ordering
 
-Ordering of Processing Rules matters. The system goes from top to bottom and will stop matching rules if one matches. If no query or time filter matches the incoming alert, the default processing rule will be used.
+The ordering of processing rules matters. The system goes from top to bottom and stops at the first matching rule. If no query or time filter matches the incoming alert, the default processing rule is used.
 
 ## Further reading
 
