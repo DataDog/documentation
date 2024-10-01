@@ -13,7 +13,7 @@ further_reading:
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
 ---
 
-# Overview
+## Overview
 
 Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. Once the Datadog Agent is installed on a host that has access to the network, the Agent can autodiscover network devices and collect metrics right out of the box.
 
@@ -23,9 +23,13 @@ This guide explains how to configure Network Device Monitoring on your hosts, en
 
 ## How it works
 
-<insert info>
+The following diagram illustrates the data flow between Syslog, SNMP traps, and NetFlow information. The devices send the relevant information to the Datadog Agent over the ports as shown in the diagram (ports can be changed if needed by configuration in the Agent). For API based integrations, the Datadog Agent connects with the network device vendor software controllers or managers on-premise, or in the cloud, based on specific `https` API integrations instructions per vendor. The Datadog Agent, configured with NDM and deployed on-premises or in the cloud, consolidates all collected device and network data from your network and sends it to Datadog over https on port 443. This provides unified, full-stack observability of metrics, logs, traces, monitors, and dashboards.
 
-{{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="NDM Diagram showing the flow for Syslog, trap and Netflow collection." style="width:100%;" >}}
+  {{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="NDM Diagram showing the flow for Syslog, trap and Netflow collection." style="width:100%;" >}}
+
+## Next steps
+
+Follow the instructions below to configure Datadog to monitor your network devices.
 
 ## Phase 1: Prerequisites
 
@@ -33,7 +37,7 @@ This guide explains how to configure Network Device Monitoring on your hosts, en
 
 Navigate to the [Agent installation page][12], and install the [Datadog Agent][1] on your host (usually a server that is **not** the monitored device).</br>
 
-  {{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
+{{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
 
 ## Phase 2: Setup
 
@@ -56,12 +60,18 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 Alongside SNMP devices, you can monitor wireless and SD-WAN (Software-Defined Wide Area Network) environments for select vendors. Collect metrics from wireless access points, and monitor the health of SD-WAN tunnels and edge devices.
 
+{{< img src="network_device_monitoring/getting_started/sd-wan-datadog-integration.png" alt="SD-WAN reference architecture" style="width:100%;" >}}
+
 SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
   - [Meraki SD-WAN][15] (public beta)
   - [Cisco SD-WAN][14] (public beta)
+
+
+
+
 
 ### Enrich network devices with tags 
 
