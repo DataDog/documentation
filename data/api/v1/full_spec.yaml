@@ -19727,6 +19727,16 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        oci_host_sum:
+          description: Shows the sum of all Oracle Cloud Infrastructure hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_top99p:
+          description: Shows the 99th percentile of all Oracle Cloud Infrastructure
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for all organizations.
@@ -20464,6 +20474,16 @@ components:
         observability_pipelines_bytes_processed_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_sum:
+          description: Shows the sum of all Oracle Cloud Infrastructure hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_top99p:
+          description: Shows the 99th percentile of all Oracle Cloud Infrastructure
+            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -21226,6 +21246,16 @@ components:
         observability_pipelines_bytes_processed_agg_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        oci_host_agg_sum:
+          description: Shows the sum of Oracle Cloud Infrastructure hosts over all
+            hours in the current months for all organizations
+          format: int64
+          type: integer
+        oci_host_top99p_sum:
+          description: Shows the 99th percentile of Oracle Cloud Infrastructure hosts
+            over all hours in the current months for all organizations
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
