@@ -12,16 +12,16 @@ further_reading:
 
 ## Overview
 
-The LLM Observability SDK is built on APM's `dd-tracer`. This allows you to use LLM Observability with [Application Performance Monitoring (APM)][7]. By instrumenting your LLM-specific operations with LLM Observability and your broader application with APM, LLM Observability and APM [spans][6] are linked in Datadog.
+The LLM Observability SDK is built on APM's `dd-tracer`. This allows you to use LLM Observability with [Application Performance Monitoring (APM)][7]. You can link LLM Observability and APM [spans][6] in Datadog by instrumenting your LLM-specific operations with LLM Observability and your broader application with APM.
 
 This integration allows you to accomplish the following:
 
 * Understand end-to-end visibility: Explore upstream and downstream requests of your LLM applications within the context of your entire application.
-* Dive deeper from APM to LLM Observability to investigate whether or not an issue with your application is specific to LLM-specific applications, such as a call to OpenAI.
+* From APM, dive deeper into LLM Observability: Investigate whether or not an issue with your application is specific to LLM-specific applications, such as a call to OpenAI.
 
 ## Setup
 
-If you are using the [LLM Observability SDK for Python][1] along with APM's [`dd-tracer`][2], you can navigate between spans in Datadog APM and LLM Observability without any additional setup.
+If you are using the [LLM Observability SDK for Python][1] along with APM's [`dd-tracer`][2], you can navigate between spans in Datadog APM and LLM Observability without additional setup.
 
 If you are using the [LLM Observability API][3] with `dd-tracer` for APM:
 
