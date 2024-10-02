@@ -344,7 +344,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Send logs to the Observability Pipelines Worker
 
-{{% observability_pipelines/log_source_configuration/syslog%}}
+{{% observability_pipelines/log_source_configuration/syslog %}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup

@@ -76,7 +76,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/logstash%}}
+{{% observability_pipelines/source_settings/logstash %}}
 
 ### Set up the destinations
 
@@ -340,7 +340,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Send logs to the Observability Pipelines Worker
 
-{{% observability_pipelines/log_source_configuration/logstash%}}
+{{% observability_pipelines/log_source_configuration/logstash %}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup

@@ -77,7 +77,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/google_pubsub%}}
+{{% observability_pipelines/source_settings/google_pubsub %}}
 
 ### Set up the destinations
 
