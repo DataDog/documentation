@@ -4289,6 +4289,7 @@ components:
       - custom_timeseries_usage
       - cws_containers_usage
       - cws_hosts_usage
+      - data_jobs_monitoring_usage
       - dbm_hosts_usage
       - dbm_queries_usage
       - error_tracking_usage
@@ -4362,6 +4363,7 @@ components:
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_USAGE
+      - DATA_JOBS_MONITORING_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
@@ -8042,6 +8044,8 @@ components:
       - cws_containers_usage
       - cws_hosts_percentage
       - cws_hosts_usage
+      - data_jobs_monitoring_usage
+      - data_jobs_monitoring_percentage
       - dbm_hosts_percentage
       - dbm_hosts_usage
       - dbm_queries_percentage
@@ -8183,6 +8187,8 @@ components:
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
+      - DATA_JOBS_MONITORING_USAGE
+      - DATA_JOBS_MONITORING_PERCENTAGE
       - DBM_HOSTS_PERCENTAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
@@ -8468,6 +8474,10 @@ components:
           type: number
         cws_hosts_usage:
           description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        data_jobs_monitoring_usage:
+          description: The Data Jobs Monitoring usage by tag(s).
           format: double
           type: number
         dbm_hosts_percentage:
@@ -15288,11 +15298,13 @@ components:
       enum:
       - global
       - text
+      - email
       example: text
       type: string
       x-enum-varnames:
       - GLOBAL
       - TEXT
+      - EMAIL
     SyntheticsCoreWebVitals:
       description: Core Web Vitals attached to a browser test step.
       properties:
@@ -15419,6 +15431,32 @@ components:
       - EDGE_LAPTOP_LARGE
       - EDGE_TABLET
       - EDGE_MOBILE_SMALL
+    SyntheticsFetchUptimesPayload:
+      description: Object containing IDs of Synthetic tests and a timeframe.
+      properties:
+        from_ts:
+          description: Timestamp in seconds (Unix epoch) for the start of uptime.
+          example: 0
+          format: int64
+          type: integer
+        public_ids:
+          description: An array of Synthetic test IDs you want to delete.
+          example: []
+          items:
+            description: A Synthetic test ID.
+            example: abc-def-123
+            type: string
+          type: array
+        to_ts:
+          description: Timestamp in seconds (Unix epoch) for the end of uptime.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - from_ts
+      - to_ts
+      - public_ids
+      type: object
     SyntheticsGetAPITestLatestResultsResponse:
       description: Object with the latest Synthetic API test run.
       properties:
@@ -15695,6 +15733,795 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
+    SyntheticsMobileDeviceID:
+      description: The device ID.
+      enum:
+      - apple ipad (2022),16.4
+      - apple ipad (2022),17.3.1
+      - apple ipad 7th gen (2019),13.3
+      - apple ipad 9th gen (2021),15.0.2
+      - apple ipad 9th gen (2021),16.1
+      - apple ipad air (2022),15.4.1
+      - apple ipad mini (5th gen),14.6
+      - apple ipad mini (6th gen),15.1
+      - apple ipad pro 11 (2022),16.3
+      - apple ipad pro 12.9 (2020),14.8
+      - apple ipad pro 12.9 (2021),15.6.1
+      - apple ipad pro 12.9 (2022),16.5
+      - apple iphone 11 pro max,13.1.3
+      - apple iphone 11 pro,13.6
+      - apple iphone 11 pro,15.5
+      - apple iphone 11,13.3.1
+      - apple iphone 11,14.0
+      - apple iphone 11,16.3
+      - apple iphone 12 mini,14.2
+      - apple iphone 12 mini,16.5
+      - apple iphone 12 pro max,14.5.1
+      - apple iphone 12 pro,14.5.1
+      - apple iphone 12 pro,14.8
+      - apple iphone 12 pro,15.0.2
+      - apple iphone 12 pro,16.2
+      - apple iphone 12,14.2
+      - apple iphone 12,14.6
+      - apple iphone 12,14.8
+      - apple iphone 12,15.6.1
+      - apple iphone 12,16.6.1
+      - apple iphone 13 mini,15.0.2
+      - apple iphone 13 mini,16.6
+      - apple iphone 13 pro max,15.1
+      - apple iphone 13 pro max,17.3
+      - apple iphone 13 pro,15.0.2
+      - apple iphone 13 pro,15.2
+      - apple iphone 14 plus,16.1
+      - apple iphone 14 pro max,16.2
+      - apple iphone 14 pro,16.1
+      - apple iphone 14 pro,17.3.1
+      - apple iphone 14,16.1
+      - apple iphone 15 pro max,17.3.1
+      - apple iphone 15 pro,17.3.1
+      - apple iphone 15,17.2.1
+      - apple iphone se (2022),15.4.1
+      - galaxy a40,9
+      - galaxy a5,8.0.0
+      - galaxy note 10,9
+      - galaxy note5 (at&t),7.0
+      - galaxy s10,9
+      - galaxy s6 edge sm-g925f,7.0
+      - galaxy s8 (t-mobile),8.0.0
+      - galaxy s8 unlocked,8.0.0
+      - galaxy s9 (unlocked),9
+      - galaxy s9+ (unlocked),8.0.0
+      - galaxy s9+ (unlocked),9
+      - google pixel 2,8.0.0
+      - google pixel 2,9
+      - google pixel 3 xl,10
+      - google pixel 3 xl,9
+      - google pixel 3,10
+      - google pixel 3,9
+      - google pixel 3a xl,11
+      - google pixel 3a xl,12
+      - google pixel 3a,10
+      - google pixel 4 (unlocked),10
+      - google pixel 4 (unlocked),11
+      - google pixel 4 xl (unlocked),10
+      - google pixel 4a,11
+      - google pixel 4a,12
+      - google pixel 5a 5g,12
+      - google pixel 6 pro,12
+      - google pixel 6,12
+      - google pixel 6a,13
+      - google pixel 7 pro,13
+      - google pixel 7,13
+      - google pixel 7,14
+      - google pixel 8 pro,14
+      - google pixel 8,14
+      - ipad 8th gen (2020),14.8
+      - ipad air 2,13.6
+      - ipad air 4th gen (2020),14.8
+      - iphone 13,15.0.2
+      - iphone 13,16.0.2
+      - iphone 6,12.5.4
+      - iphone 6s,14.4.2
+      - iphone 7,14.8
+      - iphone 8,13.5.1
+      - iphone 8,14.4.2
+      - iphone se (2020),13.6
+      - iphone se (2020),14.6
+      - iphone se (2020),15.0.2
+      - iphone x,14.6
+      - iphone xr,12.0
+      - iphone xr,14.0
+      - iphone xs max,12.1
+      - iphone xs,13.6
+      - lg stylo 5,9
+      - lg stylo 6,10
+      - moto g 4,7.0
+      - moto g7 play,9
+      - nexus 7 - 2nd gen (wifi),6.0
+      - oneplus 8t,11
+      - pixel 2 xl,8.1.0
+      - pixel 2 xl,9
+      - pixel 5,11
+      - pixel 5,12
+      - pixel xl,8.0.0
+      - pixel,7.1.2
+      - samsung a51,10
+      - samsung galaxy a10s,10
+      - samsung galaxy a13 5g,11
+      - samsung galaxy a53 5g,12
+      - samsung galaxy a7,8.0.0
+      - samsung galaxy a71,11
+      - samsung galaxy a73 5g,12
+      - samsung galaxy j7 (2018),8.0.0
+      - samsung galaxy note20,11
+      - samsung galaxy s20 (unlocked),10
+      - samsung galaxy s20+ (unlocked),10
+      - samsung galaxy s21 ultra,11
+      - samsung galaxy s21 ultra,12
+      - samsung galaxy s21+,11
+      - samsung galaxy s21,11
+      - samsung galaxy s21,12
+      - samsung galaxy s22 5g,12
+      - samsung galaxy s22 5g,13
+      - samsung galaxy s22 ultra 5g,12
+      - samsung galaxy s22+ 5g,12
+      - samsung galaxy s23 ultra,13
+      - samsung galaxy s23+,13
+      - samsung galaxy s23,13
+      - samsung galaxy s23,14
+      - samsung galaxy tab a 10.1,10
+      - samsung galaxy tab a 10.1,7.0
+      - samsung galaxy tab a8 (2021),11
+      - samsung galaxy tab s4,8.1.0
+      - samsung galaxy tab s6,9
+      - samsung galaxy tab s7,11
+      - samsung galaxy tab s8,12
+      - samsung s20 ultra,10
+      - sony xperia xz3,9
+      - xiaomi redmi note 10 5g,11
+      - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
+      - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_17
+      - synthetics:mobile:device:apple_ipad_9th_gen_2021_ios_15
+      - synthetics:mobile:device:apple_ipad_air_2022_ios_15
+      - synthetics:mobile:device:apple_ipad_mini_5th_gen_ios_14
+      - synthetics:mobile:device:apple_ipad_mini_6th_gen_ios_15
+      - synthetics:mobile:device:apple_ipad_pro_11_2022_ios_16
+      - synthetics:mobile:device:apple_ipad_pro_12_9_2020_ios_14
+      - synthetics:mobile:device:apple_ipad_pro_12_9_2021_ios_15
+      - synthetics:mobile:device:apple_ipad_pro_12_9_2022_ios_16
+      - synthetics:mobile:device:apple_iphone_11_ios_14
+      - synthetics:mobile:device:apple_iphone_11_ios_16
+      - synthetics:mobile:device:apple_iphone_11_pro_ios_15
+      - synthetics:mobile:device:apple_iphone_12_ios_14
+      - synthetics:mobile:device:apple_iphone_12_ios_15
+      - synthetics:mobile:device:apple_iphone_12_ios_16
+      - synthetics:mobile:device:apple_iphone_12_mini_ios_14
+      - synthetics:mobile:device:apple_iphone_12_mini_ios_16
+      - synthetics:mobile:device:apple_iphone_12_pro_ios_14
+      - synthetics:mobile:device:apple_iphone_12_pro_max_ios_14
+      - synthetics:mobile:device:apple_iphone_13_mini_ios_15
+      - synthetics:mobile:device:apple_iphone_13_mini_ios_16
+      - synthetics:mobile:device:apple_iphone_13_pro_ios_15
+      - synthetics:mobile:device:apple_iphone_13_pro_max_ios_15
+      - synthetics:mobile:device:apple_iphone_13_pro_max_ios_17
+      - synthetics:mobile:device:apple_iphone_14_ios_16
+      - synthetics:mobile:device:apple_iphone_14_plus_ios_16
+      - synthetics:mobile:device:apple_iphone_14_pro_ios_16
+      - synthetics:mobile:device:apple_iphone_14_pro_ios_17
+      - synthetics:mobile:device:apple_iphone_14_pro_max_ios_16
+      - synthetics:mobile:device:apple_iphone_6_ios_12
+      - synthetics:mobile:device:apple_iphone_8_ios_13
+      - synthetics:mobile:device:apple_iphone_8_ios_14
+      - synthetics:mobile:device:apple_iphone_se_2022_ios_15
+      - synthetics:mobile:device:apple_iphone_se_2022_ios_16
+      - synthetics:mobile:device:galaxy_a5_android_8
+      - synthetics:mobile:device:galaxy_note5_android_7
+      - synthetics:mobile:device:google_pixel_3a_xl_android_11
+      - synthetics:mobile:device:google_pixel_4_unlocked_android_11
+      - synthetics:mobile:device:google_pixel_4_xl_unlocked_android_10
+      - synthetics:mobile:device:google_pixel_4a_android_11
+      - synthetics:mobile:device:google_pixel_6_android_12
+      - synthetics:mobile:device:google_pixel_6_pro_android_12
+      - synthetics:mobile:device:google_pixel_6a_android_13
+      - synthetics:mobile:device:google_pixel_7_android_13
+      - synthetics:mobile:device:google_pixel_7_android_14
+      - synthetics:mobile:device:google_pixel_7_pro_android_13
+      - synthetics:mobile:device:google_pixel_8_android_14
+      - synthetics:mobile:device:google_pixel_8_pro_android_14
+      - synthetics:mobile:device:ipad_air_2_ios_13
+      - synthetics:mobile:device:ipad_air_4th_gen_2020_ios_14
+      - synthetics:mobile:device:iphone_13_ios_15
+      - synthetics:mobile:device:iphone_13_ios_16
+      - synthetics:mobile:device:iphone_15_ios_17
+      - synthetics:mobile:device:iphone_15_pro_ios_17
+      - synthetics:mobile:device:iphone_15_pro_max_ios_17
+      - synthetics:mobile:device:iphone_se_2020_ios_13
+      - synthetics:mobile:device:iphone_se_2020_ios_14
+      - synthetics:mobile:device:iphone_x_ios_14
+      - synthetics:mobile:device:iphone_xr_ios_14
+      - synthetics:mobile:device:iphone_xs_ios_13
+      - synthetics:mobile:device:lg_stylo_6_android_10
+      - synthetics:mobile:device:pixel_5_android_12
+      - synthetics:mobile:device:samsung_a51_android_10
+      - synthetics:mobile:device:samsung_galaxy_a71_android_11
+      - synthetics:mobile:device:samsung_galaxy_note20_android_11
+      - synthetics:mobile:device:samsung_galaxy_s21_android_11
+      - synthetics:mobile:device:samsung_galaxy_s21_android_12
+      - synthetics:mobile:device:samsung_galaxy_s21_plus_android_11
+      - synthetics:mobile:device:samsung_galaxy_s21_ultra_android_11
+      - synthetics:mobile:device:samsung_galaxy_s22_5g_android_12
+      - synthetics:mobile:device:samsung_galaxy_s22_5g_android_13
+      - synthetics:mobile:device:samsung_galaxy_s22_plus_5g_android_12
+      - synthetics:mobile:device:samsung_galaxy_s22_ultra_5g_android_12
+      - synthetics:mobile:device:samsung_galaxy_s23_android_13
+      - synthetics:mobile:device:samsung_galaxy_s23_android_14
+      - synthetics:mobile:device:samsung_galaxy_s23_plus_android_13
+      - synthetics:mobile:device:samsung_galaxy_s23_plus_android_14
+      - synthetics:mobile:device:samsung_galaxy_s23_ultra_android_13
+      - synthetics:mobile:device:samsung_galaxy_tab_a_10_1_android_7
+      - synthetics:mobile:device:samsung_galaxy_tab_s7_android_11
+      - synthetics:mobile:device:samsung_galaxy_tab_s8_android_12
+      - synthetics:mobile:device:xiaomi_redmi_note_10_5g_android_11
+      example: apple ipad (2022),16.4
+      type: string
+      x-enum-varnames:
+      - APPLE_IPAD__2022__16_4
+      - APPLE_IPAD__2022__17_3_1
+      - APPLE_IPAD_7TH_GEN__2019__13_3
+      - APPLE_IPAD_9TH_GEN__2021__15_0_2
+      - APPLE_IPAD_9TH_GEN__2021__16_1
+      - APPLE_IPAD_AIR__2022__15_4_1
+      - APPLE_IPAD_MINI__5TH_GEN__14_6
+      - APPLE_IPAD_MINI__6TH_GEN__15_1
+      - APPLE_IPAD_PRO_11__2022__16_3
+      - APPLE_IPAD_PRO_12_9__2020__14_8
+      - APPLE_IPAD_PRO_12_9__2021__15_6_1
+      - APPLE_IPAD_PRO_12_9__2022__16_5
+      - APPLE_IPHONE_11_PRO_MAX_13_1_3
+      - APPLE_IPHONE_11_PRO_13_6
+      - APPLE_IPHONE_11_PRO_15_5
+      - APPLE_IPHONE_11_13_3_1
+      - APPLE_IPHONE_11_14_0
+      - APPLE_IPHONE_11_16_3
+      - APPLE_IPHONE_12_MINI_14_2
+      - APPLE_IPHONE_12_MINI_16_5
+      - APPLE_IPHONE_12_PRO_MAX_14_5_1
+      - APPLE_IPHONE_12_PRO_14_5_1
+      - APPLE_IPHONE_12_PRO_14_8
+      - APPLE_IPHONE_12_PRO_15_0_2
+      - APPLE_IPHONE_12_PRO_16_2
+      - APPLE_IPHONE_12_14_2
+      - APPLE_IPHONE_12_14_6
+      - APPLE_IPHONE_12_14_8
+      - APPLE_IPHONE_12_15_6_1
+      - APPLE_IPHONE_12_16_6_1
+      - APPLE_IPHONE_13_MINI_15_0_2
+      - APPLE_IPHONE_13_MINI_16_6
+      - APPLE_IPHONE_13_PRO_MAX_15_1
+      - APPLE_IPHONE_13_PRO_MAX_17_3
+      - APPLE_IPHONE_13_PRO_15_0_2
+      - APPLE_IPHONE_13_PRO_15_2
+      - APPLE_IPHONE_14_PLUS_16_1
+      - APPLE_IPHONE_14_PRO_MAX_16_2
+      - APPLE_IPHONE_14_PRO_16_1
+      - APPLE_IPHONE_14_PRO_17_3_1
+      - APPLE_IPHONE_14_16_1
+      - APPLE_IPHONE_15_PRO_MAX_17_3_1
+      - APPLE_IPHONE_15_PRO_17_3_1
+      - APPLE_IPHONE_15_17_2_1
+      - APPLE_IPHONE_SE__2022__15_4_1
+      - GALAXY_A40_9
+      - GALAXY_A5_8_0_0
+      - GALAXY_NOTE_10_9
+      - GALAXY_NOTE5__AT_T__7_0
+      - GALAXY_S10_9
+      - GALAXY_S6_EDGE_SMNOT_G925F_7_0
+      - GALAXY_S8__TNOT_MOBILE__8_0_0
+      - GALAXY_S8_UNLOCKED_8_0_0
+      - GALAXY_S9__UNLOCKED__9
+      - GALAXY_S9___UNLOCKED__8_0_0
+      - GALAXY_S9___UNLOCKED__9
+      - GOOGLE_PIXEL_2_8_0_0
+      - GOOGLE_PIXEL_2_9
+      - GOOGLE_PIXEL_3_XL_10
+      - GOOGLE_PIXEL_3_XL_9
+      - GOOGLE_PIXEL_3_10
+      - GOOGLE_PIXEL_3_9
+      - GOOGLE_PIXEL_3A_XL_11
+      - GOOGLE_PIXEL_3A_XL_12
+      - GOOGLE_PIXEL_3A_10
+      - GOOGLE_PIXEL_4__UNLOCKED__10
+      - GOOGLE_PIXEL_4__UNLOCKED__11
+      - GOOGLE_PIXEL_4_XL__UNLOCKED__10
+      - GOOGLE_PIXEL_4A_11
+      - GOOGLE_PIXEL_4A_12
+      - GOOGLE_PIXEL_5A_5G_12
+      - GOOGLE_PIXEL_6_PRO_12
+      - GOOGLE_PIXEL_6_12
+      - GOOGLE_PIXEL_6A_13
+      - GOOGLE_PIXEL_7_PRO_13
+      - GOOGLE_PIXEL_7_13
+      - GOOGLE_PIXEL_7_14
+      - GOOGLE_PIXEL_8_PRO_14
+      - GOOGLE_PIXEL_8_14
+      - IPAD_8TH_GEN__2020__14_8
+      - IPAD_AIR_2_13_6
+      - IPAD_AIR_4TH_GEN__2020__14_8
+      - IPHONE_13_15_0_2
+      - IPHONE_13_16_0_2
+      - IPHONE_6_12_5_4
+      - IPHONE_6S_14_4_2
+      - IPHONE_7_14_8
+      - IPHONE_8_13_5_1
+      - IPHONE_8_14_4_2
+      - IPHONE_SE__2020__13_6
+      - IPHONE_SE__2020__14_6
+      - IPHONE_SE__2020__15_0_2
+      - IPHONE_X_14_6
+      - IPHONE_XR_12_0
+      - IPHONE_XR_14_0
+      - IPHONE_XS_MAX_12_1
+      - IPHONE_XS_13_6
+      - LG_STYLO_5_9
+      - LG_STYLO_6_10
+      - MOTO_G_4_7_0
+      - MOTO_G7_PLAY_9
+      - NEXUS_7_NOT__2ND_GEN__WIFI__6_0
+      - ONEPLUS_8T_11
+      - PIXEL_2_XL_8_1_0
+      - PIXEL_2_XL_9
+      - PIXEL_5_11
+      - PIXEL_5_12
+      - PIXEL_XL_8_0_0
+      - PIXEL_7_1_2
+      - SAMSUNG_A51_10
+      - SAMSUNG_GALAXY_A10S_10
+      - SAMSUNG_GALAXY_A13_5G_11
+      - SAMSUNG_GALAXY_A53_5G_12
+      - SAMSUNG_GALAXY_A7_8_0_0
+      - SAMSUNG_GALAXY_A71_11
+      - SAMSUNG_GALAXY_A73_5G_12
+      - SAMSUNG_GALAXY_J7__2018__8_0_0
+      - SAMSUNG_GALAXY_NOTE20_11
+      - SAMSUNG_GALAXY_S20__UNLOCKED__10
+      - SAMSUNG_GALAXY_S20___UNLOCKED__10
+      - SAMSUNG_GALAXY_S21_ULTRA_11
+      - SAMSUNG_GALAXY_S21_ULTRA_12
+      - SAMSUNG_GALAXY_S21__11
+      - SAMSUNG_GALAXY_S21_11
+      - SAMSUNG_GALAXY_S21_12
+      - SAMSUNG_GALAXY_S22_5G_12
+      - SAMSUNG_GALAXY_S22_5G_13
+      - SAMSUNG_GALAXY_S22_ULTRA_5G_12
+      - SAMSUNG_GALAXY_S22__5G_12
+      - SAMSUNG_GALAXY_S23_ULTRA_13
+      - SAMSUNG_GALAXY_S23__13
+      - SAMSUNG_GALAXY_S23_13
+      - SAMSUNG_GALAXY_S23_14
+      - SAMSUNG_GALAXY_TAB_A_10_1_10
+      - SAMSUNG_GALAXY_TAB_A_10_1_7_0
+      - SAMSUNG_GALAXY_TAB_A8__2021__11
+      - SAMSUNG_GALAXY_TAB_S4_8_1_0
+      - SAMSUNG_GALAXY_TAB_S6_9
+      - SAMSUNG_GALAXY_TAB_S7_11
+      - SAMSUNG_GALAXY_TAB_S8_12
+      - SAMSUNG_S20_ULTRA_10
+      - SONY_XPERIA_XZ3_9
+      - XIAOMI_REDMI_NOTE_10_5G_11
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_10TH_GEN_2022_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_10TH_GEN_2022_IOS_17
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_9TH_GEN_2021_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_AIR_2022_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_MINI_5TH_GEN_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_MINI_6TH_GEN_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_11_2022_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_12_9_2020_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_12_9_2021_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_12_9_2022_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_11_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_11_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_11_PRO_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_MINI_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_MINI_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_PRO_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_PRO_MAX_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_MINI_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_MINI_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_PRO_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_PRO_MAX_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_PRO_MAX_IOS_17
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PLUS_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PRO_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PRO_IOS_17
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PRO_MAX_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_6_IOS_12
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_8_IOS_13
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_8_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_SE_2022_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_SE_2022_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_GALAXY_A5_ANDROID_8
+      - SYNTHETICS_MOBILE_DEVICE_GALAXY_NOTE5_ANDROID_7
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_3A_XL_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_4_UNLOCKED_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_4_XL_UNLOCKED_ANDROID_10
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_4A_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_6_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_6_PRO_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_6A_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_7_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_7_ANDROID_14
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_7_PRO_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_8_ANDROID_14
+      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_8_PRO_ANDROID_14
+      - SYNTHETICS_MOBILE_DEVICE_IPAD_AIR_2_IOS_13
+      - SYNTHETICS_MOBILE_DEVICE_IPAD_AIR_4TH_GEN_2020_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_13_IOS_15
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_13_IOS_16
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_15_IOS_17
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_15_PRO_IOS_17
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_15_PRO_MAX_IOS_17
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_SE_2020_IOS_13
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_SE_2020_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_X_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_XR_IOS_14
+      - SYNTHETICS_MOBILE_DEVICE_IPHONE_XS_IOS_13
+      - SYNTHETICS_MOBILE_DEVICE_LG_STYLO_6_ANDROID_10
+      - SYNTHETICS_MOBILE_DEVICE_PIXEL_5_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_A51_ANDROID_10
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_A71_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_NOTE20_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_PLUS_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_ULTRA_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_5G_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_5G_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_PLUS_5G_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_ULTRA_5G_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_ANDROID_14
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_PLUS_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_PLUS_ANDROID_14
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_ULTRA_ANDROID_13
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_TAB_A_10_1_ANDROID_7
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_TAB_S7_ANDROID_11
+      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_TAB_S8_ANDROID_12
+      - SYNTHETICS_MOBILE_DEVICE_XIAOMI_REDMI_NOTE_10_5G_ANDROID_11
+    SyntheticsMobileStep:
+      description: The steps used in a Synthetic mobile test.
+      properties:
+        allowFailure:
+          description: A boolean set to allow this step to fail.
+          type: boolean
+        hasNewStepElement:
+          description: A boolean set to determine if the step has a new step element.
+          type: boolean
+        isCritical:
+          description: A boolean to use in addition to `allowFailure` to determine
+            if the test should be marked as failed when the step fails.
+          type: boolean
+        name:
+          description: The name of the step.
+          maxLength: 1500
+          type: string
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
+        params:
+          description: The parameters of the mobile step.
+          type: object
+        publicId:
+          description: The public ID of the step.
+          example: pub-lic-id0
+          type: string
+        timeout:
+          description: The time before declaring a step failed.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepType'
+      type: object
+    SyntheticsMobileStepType:
+      description: Step type used in your mobile Synthetic test.
+      enum:
+      - assertElementContent
+      - assertScreenContains
+      - assertScreenLacks
+      - doubleTap
+      - extractVariable
+      - flick
+      - openDeeplink
+      - playSubTest
+      - pressBack
+      - restartApplication
+      - rotate
+      - scroll
+      - scrollToElement
+      - tap
+      - toggleWiFi
+      - typeText
+      - wait
+      example: assertElementContent
+      type: string
+      x-enum-varnames:
+      - ASSERTELEMENTCONTENT
+      - ASSERTSCREENCONTAINS
+      - ASSERTSCREENLACKS
+      - DOUBLETAP
+      - EXTRACTVARIABLE
+      - FLICK
+      - OPENDEEPLINK
+      - PLAYSUBTEST
+      - PRESSBACK
+      - RESTARTAPPLICATION
+      - ROTATE
+      - SCROLL
+      - SCROLLTOELEMENT
+      - TAP
+      - TOGGLEWIFI
+      - TYPETEXT
+      - WAIT
+    SyntheticsMobileTest:
+      description: Object containing details about a Synthetic mobile test.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsMobileTestConfig'
+        device_ids:
+          description: The `SyntheticsMobileTest` `device_ids`.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+          type: array
+        message:
+          description: Notification message associated with the test.
+          example: Notification message
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          example: Example test name
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptions'
+        public_id:
+          description: The public ID of the test.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        steps:
+          description: Array of steps for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStep'
+          type: array
+        tags:
+          description: Array of tags attached to the test.
+          example:
+          - env:production
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileTestType'
+      required:
+      - config
+      - name
+      - options
+      - type
+      type: object
+    SyntheticsMobileTestBinding:
+      description: Objects describing the binding used for a mobile test.
+      properties:
+        items:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingItems'
+      type: object
+    SyntheticsMobileTestBindingItems:
+      description: Object describing the binding used for a mobile test.
+      properties:
+        principals:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingPrincipals'
+        role:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingItemsRole'
+      type: object
+    SyntheticsMobileTestBindingItemsRole:
+      description: The definition of `SyntheticsMobileTestBindingItemsRole` object.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
+    SyntheticsMobileTestBindingPrincipals:
+      description: List of principals for a mobile test binding.
+      items:
+        description: A principal for a mobile test binding.
+        maxLength: 1500
+        type: string
+      type: array
+    SyntheticsMobileTestCiOptions:
+      description: CI/CD options for a Synthetic test.
+      properties:
+        executionRule:
+          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      required:
+      - executionRule
+      type: object
+    SyntheticsMobileTestConfig:
+      description: Configuration object for a Synthetic mobile test.
+      properties:
+        initialApplicationArguments:
+          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArguments'
+        variables:
+          description: Array of variables used for the test steps.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
+      type: object
+    SyntheticsMobileTestInitialApplicationArguments:
+      description: Initial application arguments for a mobile test.
+      properties:
+        propertyNames:
+          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArgumentsPropertyNames'
+      type: object
+    SyntheticsMobileTestInitialApplicationArgumentsPropertyNames:
+      description: Name of the property.
+      properties:
+        pattern:
+          description: The `propertyNames` `pattern`.
+          example: ^(?!_dd).*$
+          type: string
+      type: object
+    SyntheticsMobileTestOptions:
+      description: Object describing the extra options for a Synthetic test.
+      properties:
+        allowApplicationCrash:
+          description: The `SyntheticsMobileTestOptions` `allowApplicationCrash`.
+          type: boolean
+        bindings:
+          description: Array of bindings used for the mobile test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileTestBinding'
+          type: array
+        ci:
+          $ref: '#/components/schemas/SyntheticsMobileTestCiOptions'
+        defaultStepTimeout:
+          description: The `SyntheticsMobileTestOptions` `defaultStepTimeout`.
+          format: int32
+          maximum: 300
+          minimum: 1
+          type: integer
+        device_ids:
+          description: For mobile test, array with the different device IDs used to
+            run the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+          type: array
+        disableAutoAcceptAlert:
+          description: The `SyntheticsMobileTestOptions` `disableAutoAcceptAlert`.
+          type: boolean
+        min_failure_duration:
+          description: Minimum amount of time in failure required to trigger an alert.
+          format: int64
+          maximum: 7200
+          minimum: 0
+          type: integer
+        mobileApplication:
+          $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplication'
+        monitor_name:
+          description: The monitor name is used for the alert title as well as for
+            all monitor dashboard widgets and SLOs.
+          type: string
+        monitor_options:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptions'
+        monitor_priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        noScreenshot:
+          description: The `SyntheticsMobileTestOptions` `noScreenshot`.
+          type: boolean
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
+        tick_every:
+          description: The frequency at which to run the Synthetic test (in seconds).
+          format: int64
+          maximum: 604800
+          minimum: 300
+          type: integer
+        verbosity:
+          description: The `SyntheticsMobileTestOptions` `verbosity`.
+          format: int32
+          maximum: 5
+          minimum: 0
+          type: integer
+      type: object
+    SyntheticsMobileTestOptionsMonitorOptions:
+      description: 'Object containing the options for a mobile Synthetic test as a
+        monitor
+
+        (for example, renotification).'
+      properties:
+        escalation_message:
+          description: Message to include in the escalation notification.
+          type: string
+        notification_preset_name:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName'
+        renotify_interval:
+          description: 'Time interval before renotifying if the test is still failing
+
+            (in minutes).'
+          format: int64
+          minimum: 0
+          type: integer
+        renotify_occurrences:
+          description: The `SyntheticsMobileTestOptionsMonitorOptions` `renotify_occurrences`.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName:
+      description: The definition of `SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName`
+        object.
+      enum:
+      - show_all
+      - hide_all
+      - hide_query
+      - hide_handles
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+    SyntheticsMobileTestType:
+      default: mobile
+      description: Type of the Synthetic test, `mobile`.
+      enum:
+      - mobile
+      example: mobile
+      type: string
+      x-enum-varnames:
+      - MOBILE
+    SyntheticsMobileTestsMobileApplication:
+      description: Mobile application for mobile synthetics test.
+      properties:
+        applicationId:
+          description: Application ID of the mobile application.
+          maxLength: 1500
+          type: string
+        referenceId:
+          description: Reference ID of the mobile application.
+          maxLength: 1500
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplicationReferenceType'
+      type: object
+    SyntheticsMobileTestsMobileApplicationReferenceType:
+      description: Reference type for the mobile application for a mobile synthetics
+        test.
+      enum:
+      - latest
+      - version
+      type: string
+      x-enum-varnames:
+      - LATEST
+      - VERSION
     SyntheticsParsingOptions:
       description: Parsing options for variables to extract.
       example: {}
@@ -16275,6 +17102,7 @@ components:
       - blocking
       - non_blocking
       - skipped
+      example: blocking
       type: string
       x-enum-varnames:
       - BLOCKING
@@ -16589,8 +17417,7 @@ components:
           description: Persist cookies across redirects.
           type: boolean
         port:
-          description: Port to use when performing the test.
-          type: string
+          $ref: '#/components/schemas/SyntheticsTestRequestPort'
         proxy:
           $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
@@ -16694,6 +17521,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestNumericalPort:
+      description: Integer Port number to use when performing the test.
+      format: int64
+      type: integer
+    SyntheticsTestRequestPort:
+      description: Port to use when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariablePort'
     SyntheticsTestRequestProxy:
       description: The proxy to perform the test.
       properties:
@@ -16705,6 +17541,28 @@ components:
           type: string
       required:
       - url
+      type: object
+    SyntheticsTestRequestVariablePort:
+      description: String Port number to use when performing the test. Supports templated
+        variables.
+      type: string
+    SyntheticsTestUptime:
+      description: Object containing the uptime for a Synthetic test ID.
+      properties:
+        from_ts:
+          description: Timestamp in seconds for the start of uptime.
+          format: int64
+          type: integer
+        overall:
+          $ref: '#/components/schemas/SyntheticsUptime'
+        public_id:
+          description: A Synthetic test ID.
+          example: abc-def-123
+          type: string
+        to_ts:
+          description: Timestamp in seconds for the end of uptime.
+          format: int64
+          type: integer
       type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
@@ -16828,6 +17686,62 @@ components:
       properties:
         new_status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+      type: object
+    SyntheticsUptime:
+      description: Object containing the uptime information.
+      properties:
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          nullable: true
+          type: array
+        group:
+          description: The location name
+          example: name
+          type: string
+        history:
+          description: 'The state transition history for the monitor, represented
+            as an array of
+
+            pairs. Each pair is an array where the first element is the transition
+            timestamp
+
+            in Unix epoch format (integer) and the second element is the state (integer).
+
+            For the state, an integer value of `0` indicates uptime, `1` indicates
+            downtime,
+
+            and `2` indicates no data.'
+          example:
+          - - 1579212382
+            - 0
+          items:
+            description: An array of transitions
+            example:
+            - 1579212382
+            - 0
+            items:
+              description: A timeseries data point which is a tuple of (timestamp,
+                value).
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        span_precision:
+          description: The number of decimal places to which the SLI value is accurate
+            for the given from-to timestamps.
+          example: 2.0
+          format: double
+          type: number
+        uptime:
+          description: The overall uptime.
+          example: 99.99
+          format: double
+          type: number
       type: object
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
@@ -16977,6 +17891,181 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
+        text_formats:
+          description: List of text formats for columns produced by tags.
+          items:
+            $ref: '#/components/schemas/TableWidgetTextFormat'
+          type: array
+      type: object
+    TableWidgetTextFormat:
+      description: Text format rules for a tag-based column within a table widget.
+      example:
+      - match:
+          type: is
+          value: fruit
+        replace:
+          type: all
+          with: vegetable
+      - match:
+          type: is
+          value: cake
+        palette: white_on_green
+      items:
+        $ref: '#/components/schemas/TableWidgetTextFormatRule'
+      minItems: 1
+      type: array
+    TableWidgetTextFormatMatch:
+      description: Match rule for the table widget text format.
+      example:
+        type: is
+        value: fruit
+      properties:
+        type:
+          $ref: '#/components/schemas/TableWidgetTextFormatMatchType'
+        value:
+          description: Table Widget Match String.
+          example: Match Value
+          type: string
+      required:
+      - type
+      - value
+      type: object
+    TableWidgetTextFormatMatchType:
+      description: Match or compare option.
+      enum:
+      - is
+      - is_not
+      - contains
+      - does_not_contain
+      - starts_with
+      - ends_with
+      example: is
+      type: string
+      x-enum-varnames:
+      - IS
+      - IS_NOT
+      - CONTAINS
+      - DOES_NOT_CONTAIN
+      - STARTS_WITH
+      - ENDS_WITH
+    TableWidgetTextFormatPalette:
+      default: white_on_green
+      description: Color-on-color palette to highlight replaced text.
+      enum:
+      - white_on_red
+      - white_on_yellow
+      - white_on_green
+      - black_on_light_red
+      - black_on_light_yellow
+      - black_on_light_green
+      - red_on_white
+      - yellow_on_white
+      - green_on_white
+      - custom_bg
+      - custom_text
+      type: string
+      x-enum-varnames:
+      - WHITE_ON_RED
+      - WHITE_ON_YELLOW
+      - WHITE_ON_GREEN
+      - BLACK_ON_LIGHT_RED
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - RED_ON_WHITE
+      - YELLOW_ON_WHITE
+      - GREEN_ON_WHITE
+      - CUSTOM_BG
+      - CUSTOM_TEXT
+    TableWidgetTextFormatReplace:
+      description: Replace rule for the table widget text format.
+      example:
+        type: all
+        with: vegetable
+      oneOf:
+      - $ref: '#/components/schemas/TableWidgetTextFormatReplaceAll'
+      - $ref: '#/components/schemas/TableWidgetTextFormatReplaceSubstring'
+    TableWidgetTextFormatReplaceAll:
+      description: Match All definition.
+      example:
+        type: all
+        with: vegetable
+      properties:
+        type:
+          $ref: '#/components/schemas/TableWidgetTextFormatReplaceAllType'
+        with:
+          description: Replace All type.
+          example: all
+          type: string
+      required:
+      - type
+      - with
+      type: object
+    TableWidgetTextFormatReplaceAllType:
+      description: Table widget text format replace all type.
+      enum:
+      - all
+      example: all
+      type: string
+      x-enum-varnames:
+      - ALL
+    TableWidgetTextFormatReplaceSubstring:
+      description: Match Sub-string definition.
+      example:
+        substring: fruit
+        type: substring
+        with: vegetable
+      properties:
+        substring:
+          description: Text that will be replaced.
+          example: string to replace
+          type: string
+        type:
+          $ref: '#/components/schemas/TableWidgetTextFormatReplaceSubstringType'
+        with:
+          description: Text that will replace original sub-string.
+          example: replacement
+          type: string
+      required:
+      - type
+      - with
+      - substring
+      type: object
+    TableWidgetTextFormatReplaceSubstringType:
+      description: Table widget text format replace sub-string type.
+      enum:
+      - substring
+      example: substring
+      type: string
+      x-enum-varnames:
+      - SUBSTRING
+    TableWidgetTextFormatRule:
+      description: Text format rules.
+      example:
+        match:
+          type: is
+          value: apple
+        replace:
+          type: all
+          with: vegetable
+      properties:
+        custom_bg_color:
+          description: Hex representation of the custom background color. Used with
+            custom background palette option.
+          example: '#632ca6'
+          type: string
+        custom_fg_color:
+          description: Hex representation of the custom text color. Used with custom
+            text palette option.
+          example: '#632ca6'
+          type: string
+        match:
+          $ref: '#/components/schemas/TableWidgetTextFormatMatch'
+        palette:
+          $ref: '#/components/schemas/TableWidgetTextFormatPalette'
+        replace:
+          $ref: '#/components/schemas/TableWidgetTextFormatReplace'
+      required:
+      - match
       type: object
     TagToHosts:
       description: In this object, the key is the tag, the value is a list of host
@@ -17336,7 +18425,6 @@ components:
           $ref: '#/components/schemas/ToplistWidgetStackedType'
       required:
       - type
-      - legend
       type: object
     ToplistWidgetStackedType:
       default: stacked
@@ -19333,6 +20421,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        data_jobs_monitoring_host_hr_sum:
+          description: Shows the sum of all Data Jobs Monitoring hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         date:
           description: The date for the usage.
           format: date-time
@@ -19523,6 +20616,16 @@ components:
         observability_pipelines_bytes_processed_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_sum:
+          description: Shows the sum of all Oracle Cloud Infrastructure hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_top99p:
+          description: Shows the 99th percentile of all Oracle Cloud Infrastructure
+            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -20068,6 +21171,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        data_jobs_monitoring_host_hr_sum:
+          description: Shows the sum of all Data Jobs Monitoring hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         dbm_host_top99p_sum:
           description: Shows the 99th percentile of all Database Monitoring hosts
             over all hours in the current month for the given org.
@@ -20257,6 +21365,16 @@ components:
         observability_pipelines_bytes_processed_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_sum:
+          description: Shows the sum of all Oracle Cloud Infrastructure hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_top99p:
+          description: Shows the 99th percentile of all Oracle Cloud Infrastructure
+            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -20802,6 +21920,11 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
+        data_jobs_monitoring_host_hr_agg_sum:
+          description: Shows the sum of Data Jobs Monitoring hosts over all hours
+            in the current months for all organizations
+          format: int64
+          type: integer
         dbm_host_top99p_sum:
           description: Shows the 99th percentile of all Database Monitoring hosts
             over all hours in the current month for all organizations.
@@ -21014,6 +22137,16 @@ components:
         observability_pipelines_bytes_processed_agg_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        oci_host_agg_sum:
+          description: Shows the sum of Oracle Cloud Infrastructure hosts over all
+            hours in the current months for all organizations
+          format: int64
+          type: integer
+        oci_host_top99p_sum:
+          description: Shows the 99th percentile of Oracle Cloud Infrastructure hosts
+            over all hours in the current months for all organizations
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -22632,6 +23765,7 @@ components:
               access to the cloud cost data source in dashboards and notebooks.
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations.
+            code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
@@ -22667,6 +23801,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
+            security_pipelines_read: View Security Pipelines.
+            security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -22806,6 +23942,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     post:
@@ -22843,6 +23983,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -22891,6 +24035,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_delete
       x-undo:
         type: idempotent
     get:
@@ -22928,6 +24076,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     put:
@@ -22978,6 +24130,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         type: idempotent
   /api/v1/application_key:
@@ -23003,6 +24159,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+        - user_app_keys
       x-undo:
         type: safe
     post:
@@ -23046,6 +24207,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         operationId: DeleteApplicationKey
         parameters:
@@ -23088,6 +24253,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
+        - user_app_keys
       x-undo:
         type: idempotent
     get:
@@ -23125,6 +24295,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+        - user_app_keys
       x-undo:
         type: safe
     put:
@@ -23181,6 +24356,11 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
+        - user_app_keys
       x-undo:
         type: idempotent
   /api/v1/check_run:
@@ -23304,6 +24484,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 41
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/daily_custom_reports/{report_id}:
@@ -23352,6 +24536,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 42
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/dashboard:
@@ -23407,6 +24595,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -23477,6 +24669,10 @@ paths:
         limitParam: count
         pageOffsetParam: start
         resultsPath: dashboards
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     patch:
@@ -23531,6 +24727,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     post:
@@ -23590,6 +24790,10 @@ paths:
             name: body
           step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -23624,6 +24828,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -23673,6 +24881,10 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}\"\n}"
           step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeleteDashboardList
         parameters:
@@ -23721,6 +24933,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -23764,6 +24980,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -23821,6 +25041,10 @@ paths:
       - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
   /api/v1/dashboard/public:
@@ -23887,6 +25111,10 @@ paths:
               \   \"live_span\": \"1h\"\n  }\n}"
           step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -23935,6 +25163,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
     get:
@@ -23979,6 +25211,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -24051,6 +25287,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -24106,6 +25346,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
     get:
@@ -24163,6 +25407,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
     post:
@@ -24237,6 +25485,10 @@ paths:
               \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
           step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -24293,6 +25545,10 @@ paths:
             source: dashboard.id
           step: the "dashboard" was deleted
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -24335,6 +25591,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -24391,6 +25651,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
@@ -24506,6 +25770,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -24571,6 +25839,10 @@ paths:
               [\"canceled\"]\n}"
           step: there is a valid "downtime" for a "monitor" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         operationId: CancelDowntime
         parameters:
@@ -24629,6 +25901,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
@@ -24672,6 +25948,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
     get:
@@ -24718,6 +25998,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     put:
@@ -24779,6 +26063,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v1/events:
@@ -24892,6 +26180,10 @@ paths:
       tags:
       - Events
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
     post:
@@ -24974,6 +26266,10 @@ paths:
       tags:
       - Events
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
   /api/v1/graph/embed:
@@ -24999,6 +26295,9 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -25047,6 +26346,10 @@ paths:
       - Embeddable Graphs
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -25087,6 +26390,9 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/enable:
@@ -25125,6 +26431,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -25163,6 +26473,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -25261,6 +26575,9 @@ paths:
       tags:
       - Snapshots
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/host/{host_name}/mute:
@@ -25446,6 +26763,10 @@ paths:
       tags:
       - Hosts
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - hosts_read
       x-undo:
         type: safe
   /api/v1/hosts/totals:
@@ -25495,6 +26816,10 @@ paths:
       tags:
       - Hosts
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - hosts_read
       x-undo:
         type: safe
   /api/v1/integration/aws:
@@ -25541,6 +26866,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -25590,6 +26919,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -25652,6 +26985,10 @@ paths:
               \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
       x-undo:
         operationId: DeleteAWSAccount
         parameters:
@@ -25725,6 +27062,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
@@ -25757,6 +27098,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/aws/event_bridge:
@@ -25797,6 +27142,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -25828,6 +27177,9 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -25867,6 +27219,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteAWSEventBridgeSource
         parameters: []
@@ -25910,6 +27266,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
     get:
@@ -25947,6 +27307,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -25990,6 +27354,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: DeleteAWSTagFilter
         parameters: []
@@ -26036,6 +27404,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/aws/logs:
@@ -26076,6 +27448,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
     get:
@@ -26119,6 +27495,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26158,6 +27538,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: DeleteAWSLambdaARN
         parameters: []
@@ -26215,6 +27599,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/aws/logs/services:
@@ -26257,6 +27645,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26296,6 +27688,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: TODO
         type: unsafe
@@ -26342,6 +27738,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/azure:
@@ -26382,6 +27782,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -26413,6 +27817,10 @@ paths:
       tags:
       - Azure Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_read
       x-undo:
         type: safe
     post:
@@ -26480,6 +27888,10 @@ paths:
               \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configurations_manage
       x-undo:
         operationId: DeleteAzureIntegration
         parameters:
@@ -26532,6 +27944,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/azure/host_filters:
@@ -26573,6 +27989,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_edit
       x-undo:
         type: safe
   /api/v1/integration/gcp:
@@ -26615,6 +28035,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -26647,6 +28071,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -26704,6 +28132,10 @@ paths:
               \ \"type\": \"service_account\"\n}"
           step: there is a valid "gcp_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         operationId: DeleteGCPIntegration
         parameters:
@@ -26754,6 +28186,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
@@ -26793,6 +28229,10 @@ paths:
       - PagerDuty Integration
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeletePagerDutyIntegrationService
         parameters:
@@ -26831,6 +28271,10 @@ paths:
       tags:
       - PagerDuty Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -26868,6 +28312,10 @@ paths:
       tags:
       - PagerDuty Integration
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -26915,6 +28363,10 @@ paths:
       - PagerDuty Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
   /api/v1/integration/slack:
@@ -27098,6 +28550,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -27144,6 +28600,10 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
@@ -27180,6 +28640,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27219,6 +28683,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -27266,6 +28734,10 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
@@ -27312,6 +28784,10 @@ paths:
               \ \"is_secret\": false\n}"
           step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
         parameters:
@@ -27350,6 +28826,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27398,6 +28878,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27449,6 +28933,10 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
@@ -27499,6 +28987,10 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
           step: there is a valid "webhook" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - create_webhooks
       x-undo:
         operationId: DeleteWebhooksIntegration
         parameters:
@@ -27537,6 +29029,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27580,6 +29076,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27631,6 +29131,10 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v1/logs-queries/list:
@@ -27684,6 +29188,10 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -27710,6 +29218,9 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -27751,6 +29262,10 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
       x-undo:
         type: idempotent
   /api/v1/logs/config/indexes:
@@ -27782,6 +29297,9 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -27821,6 +29339,10 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
       x-undo:
         operationId: TODO
         parameters: []
@@ -27941,6 +29463,9 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -27995,6 +29520,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipelines:
@@ -28022,6 +29551,9 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -28060,6 +29592,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         operationId: DeleteLogsPipeline
         parameters:
@@ -28100,6 +29636,10 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
     get:
@@ -28139,6 +29679,9 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     put:
@@ -28187,6 +29730,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
   /api/v1/metrics:
@@ -28250,6 +29797,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v1/metrics/{metric_name}:
@@ -28293,6 +29844,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
     put:
@@ -28345,6 +29900,10 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_metadata_write
       x-undo:
         type: idempotent
   /api/v1/monitor:
@@ -28462,6 +30021,10 @@ paths:
       x-pagination:
         limitParam: page_size
         pageParam: page
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -28908,6 +30471,10 @@ paths:
             name: body
           step: there is a valid "monitor" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         operationId: DeleteMonitor
         parameters:
@@ -28967,6 +30534,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/groups/search:
@@ -29054,6 +30625,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/search:
@@ -29143,6 +30718,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/validate:
@@ -29191,6 +30770,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -29256,6 +30839,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
     get:
@@ -29320,6 +30907,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     put:
@@ -29384,6 +30975,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
@@ -29433,6 +31028,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/mute:
@@ -29498,6 +31097,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
@@ -29563,6 +31166,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/validate:
@@ -29617,6 +31224,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
@@ -29680,6 +31291,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 43
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/monthly_custom_reports/{report_id}:
@@ -29734,6 +31349,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 44
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/notebooks:
@@ -29864,6 +31483,10 @@ paths:
         limitParam: count
         pageOffsetParam: start
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_read
       x-undo:
         type: safe
     post:
@@ -29945,6 +31568,10 @@ paths:
             name: body
           step: there is a valid "notebook" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         operationId: DeleteNotebook
         parameters:
@@ -29990,6 +31617,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         type: idempotent
     get:
@@ -30034,6 +31665,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_read
       x-undo:
         type: safe
     put:
@@ -30130,6 +31765,10 @@ paths:
       - Notebooks
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         type: idempotent
   /api/v1/org:
@@ -30155,6 +31794,10 @@ paths:
       tags:
       - Organizations
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: safe
     post:
@@ -30209,6 +31852,10 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         operationId: TODO
         parameters: []
@@ -30454,6 +32101,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: safe
   /api/v1/search:
@@ -30497,6 +32148,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
@@ -30546,6 +32200,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -30593,6 +32251,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
@@ -30640,6 +32302,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/series:
@@ -30965,6 +32631,10 @@ paths:
         limitParam: limit
         pageOffsetParam: offset
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     post:
@@ -31018,6 +32688,10 @@ paths:
               \ }\n}"
           step: there is a valid "slo" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         operationId: DeleteSLO
         parameters:
@@ -31075,6 +32749,10 @@ paths:
       - Service Level Objectives
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
   /api/v1/slo/can_delete:
@@ -31128,6 +32806,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/correction:
@@ -31179,6 +32861,10 @@ paths:
         limitParam: limit
         pageOffsetParam: offset
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     post:
@@ -31238,6 +32924,10 @@ paths:
               \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_corrections
       x-undo:
         operationId: DeleteSLOCorrection
         parameters:
@@ -31432,6 +33122,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/{slo_id}:
@@ -31493,6 +33187,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
     get:
@@ -31542,6 +33240,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     put:
@@ -31598,6 +33300,10 @@ paths:
       - Service Level Objectives
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
   /api/v1/slo/{slo_id}/corrections:
@@ -31647,6 +33353,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/{slo_id}/history:
@@ -31736,6 +33446,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/synthetics/ci/batch/{batch_id}:
@@ -31773,6 +33487,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -31799,6 +33517,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_read
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -31843,6 +33565,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -31882,6 +33608,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         type: idempotent
     get:
@@ -31920,6 +33650,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_read
       x-undo:
         type: safe
     put:
@@ -31966,6 +33700,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/settings/default_locations:
@@ -31985,6 +33723,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_default_settings_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests:
@@ -32042,6 +33784,10 @@ paths:
         limitParam: page_size
         pageParam: page_number
         resultsPath: tests
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     post:
@@ -32096,6 +33842,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: TODO
         parameters: []
@@ -32285,6 +34035,10 @@ paths:
             name: body
           step: there is a "synthetics_api_test_with_wrong_dns" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -32336,6 +34090,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -32398,6 +34156,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser:
@@ -32450,6 +34212,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -32501,6 +34267,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -32563,6 +34333,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -32634,6 +34408,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -32687,6 +34465,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -32744,6 +34526,181 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/mobile:
+    post:
+      description: Create a Synthetic mobile test.
+      operationId: CreateSyntheticsMobileTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsMobileTest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Create a mobile test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-given:
+        synthetics_mobile_test:
+          parameters:
+          - file: synthetics_mobile_test_payload.json
+            name: body
+          step: there is a valid "synthetics_mobile_test" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
+        type: unsafe
+  /api/v1/synthetics/tests/mobile/{public_id}:
+    get:
+      description: 'Get the detailed configuration associated with
+
+        a Synthetic Mobile test.'
+      operationId: GetMobileTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a Mobile test
+      tags:
+      - Synthetics
+      x-menu-order: 9
+      x-undo:
+        type: safe
+    put:
+      description: Edit the configuration of a Synthetic Mobile test.
+      operationId: UpdateMobileTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsMobileTest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Edit a Mobile test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -32789,6 +34746,10 @@ paths:
               }}"}]}'
           step: the "synthetics_api_test_with_wrong_dns" is triggered
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
@@ -32827,6 +34788,56 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/uptimes:
+    post:
+      description: Fetch uptime for multiple Synthetic tests by ID.
+      operationId: FetchUptimes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsFetchUptimesPayload'
+        description: Public ID list of the Synthetic tests and timeframe.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SyntheticsTestUptime'
+                type: array
+          description: OK.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Fetch uptime for multiple tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -32872,6 +34883,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     patch:
@@ -32934,6 +34949,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
     put:
@@ -32998,6 +35017,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -33067,6 +35090,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -33118,6 +35145,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -33177,6 +35208,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -33207,6 +35242,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_read
       x-undo:
         type: safe
     post:
@@ -33262,6 +35301,10 @@ paths:
             name: body
           step: there is a valid "synthetics_global_variable" in the system
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -33311,6 +35354,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         type: idempotent
     get:
@@ -33403,6 +35450,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -33446,6 +35497,9 @@ paths:
       tags:
       - Tags
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/tags/hosts/{host_name}:
@@ -33719,6 +35773,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/audit_logs:
@@ -33781,6 +35839,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -33844,6 +35906,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -33905,6 +35971,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/ci-app:
@@ -33970,6 +36040,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 35
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/cspm:
@@ -34035,6 +36109,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -34100,6 +36178,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -34165,6 +36247,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -34228,6 +36314,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -34291,6 +36381,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/hourly-attribution:
@@ -34382,6 +36476,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/incident-management:
@@ -34447,6 +36545,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -34510,6 +36612,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -34575,6 +36681,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -34640,6 +36750,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -34703,6 +36817,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs-by-retention:
@@ -34768,6 +36886,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -34833,6 +36955,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/monthly-attribution:
@@ -34945,6 +37071,10 @@ paths:
             value: '"infra_host_usage"'
           step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/network_flows:
@@ -35010,6 +37140,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -35073,6 +37207,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/online-archive:
@@ -35138,6 +37276,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 36
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -35203,6 +37345,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/rum:
@@ -35267,6 +37413,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 33
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -35337,6 +37487,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/sds:
@@ -35402,6 +37556,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 32
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -35467,6 +37625,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -35544,6 +37706,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -35607,6 +37773,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -35670,6 +37840,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -35733,6 +37907,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -35796,6 +37974,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -35882,6 +38064,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/user:
@@ -35912,6 +38098,10 @@ paths:
       tags:
       - Users
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -35961,6 +38151,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         operationId: DisableUser
         parameters:
@@ -36136,6 +38330,9 @@ paths:
       tags:
       - Authentication
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /v1/input:

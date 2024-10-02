@@ -84,6 +84,10 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 * implement `URLSessionDataDelegate` and forward:
   * [`urlSession(_:dataTask:didReceive:)`][6]
 
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not deobfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][7] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][8].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -94,3 +98,5 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 [4]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1643148-urlsession
 [5]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411610-urlsession
 [6]: https://developer.apple.com/documentation/foundation/urlsessiondatadelegate/1411528-urlsession
+[7]: https://app.datadoghq.com/source-code/setup/rum
+[8]: /real_user_monitoring/guide/debug-symbols

@@ -30,11 +30,11 @@ You can also create cases manually from the following products:
 
 | Product | Instructions    | 
 | ------  | ----------- | 
-| Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Escalate** dropdown menu and select **Create a case**.<br> - In Slack, click **Create case** under a monitor notification. |
-| Security signals | Click into a Security Signal to open up the side panel. Click the **Escalate Investigation** dropdown menu and select **Create a case**. |
-| Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Create a case**. |
-| Watchdog | Click into an alert to open its side panel. Click the **Escalate** dropdown menu and select **Create a case**. |
-| Event Management (raw events) | Click into an event to open its side panel. Click the **Escalate** dropdown menu and select **Create a case**. |
+| Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a case**.<br> - In Slack, click **Create case** under a monitor notification. |
+| Security signals | Click into a Security Signal to open up the side panel. Click **Escalate Investigation** and select **Create a case**. |
+| Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a case**. |
+| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
+| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
 | Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create case**. |
 | Sensitive Data Scanner | Click **Create case** next to a Sensitive Data Scanner issue.  |
 | Slack  | Click the **Create Case** button under a monitor notification in Slack.  |

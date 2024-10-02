@@ -63,11 +63,10 @@ The Datadog nginx tracing module has experimental support for threat detection a
 
 ## Limitations
 
-As of version 1.2.0, the available functionality has the following important limitations:
+As of version 1.3.0, the available functionality has the following important limitations:
 
 * The request body is not inspected, regardless of its content type.
 
-- There is no remote configuration for AppSec. Consequently, AppSec excludes 1-click activation (AppSec must be explicitly enabled or disabled in the nginx configuration), rules cannot be updated/enabled/disabled, and blocking users by IP address is prevented, since the list cannot be transmitted to the nginx module.
 * It's not possible to block the request based on characteristics of the
   response, such as its status code, headers, or body.
 
