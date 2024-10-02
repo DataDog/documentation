@@ -9338,6 +9338,20 @@ components:
         tags:
           $ref: '#/components/schemas/FindingTags'
       type: object
+    FindingDetectionType:
+      description: The detection type of the finding.
+      enum:
+      - misconfiguration
+      - attack_path
+      - identity_risk
+      - api_security
+      example: misconfiguration
+      type: string
+      x-enum-varnames:
+      - MISCONFIGURATION
+      - ATTACK_PATH
+      - IDENTITY_RISK
+      - API_SECURITY
     FindingEvaluation:
       description: The evaluation of the finding.
       enum:
@@ -36310,6 +36324,17 @@ paths:
         required: false
         schema:
           type: string
+      - description: Return findings that match the selected detection types (repeatable).
+        example:
+        - misconfiguration
+        explode: true
+        in: query
+        name: filter[detection_type]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/FindingDetectionType'
+          type: array
       - description: Return findings that have these associated tags (repeatable).
         example: filter[tags]=cloud_provider:aws&filter[tags]=aws_account:999999999999
         in: query
