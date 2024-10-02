@@ -1,1 +1,3 @@
-REUSE INSTRUCTIONS
+- HTTP/S server address:
+    - The Observability Pipelines Worker listens to this socket address, such as `0.0.0.0:9997`, for logs from the HTTP/S server forwarder.
+    - Stored in the environment variable: `DD_OP_SOURCE_HTTP_SERVER_ADDRESS`.

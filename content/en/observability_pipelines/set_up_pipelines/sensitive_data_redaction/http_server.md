@@ -27,7 +27,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_server%}}
+{{% observability_pipelines/source_settings/http_server %}}
 
 ### Set up the destinations
 

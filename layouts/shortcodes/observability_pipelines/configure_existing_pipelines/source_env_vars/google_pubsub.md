@@ -1,1 +1,1 @@
-REUSE INSTRUCTIONS
+There are no environment variables for the Google Pub/Sub source.

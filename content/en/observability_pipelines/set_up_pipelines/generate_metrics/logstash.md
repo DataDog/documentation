@@ -26,7 +26,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/logstash%}}
+{{% observability_pipelines/source_settings/logstash %}}
 
 ### Set up the destinations
 

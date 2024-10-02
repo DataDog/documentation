@@ -110,6 +110,10 @@ Use the Sensitive Data Redaction template to detect and redact sensitive informa
 
 Your organization's different services, systems, and applications all generate logs containing layers of information and in different formats. This can make it difficult to extract the data you need when searching and analyzing the data for an investigation. Use the Log Enrichment template to standardize your logs and enrich them with information, such as data from a reference table.
 
+#### Generate Metrics
+
+Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+
 ### Build pipelines in the Observability Pipelines UI
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}

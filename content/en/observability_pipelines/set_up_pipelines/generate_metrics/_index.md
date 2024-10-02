@@ -11,6 +11,6 @@ Some log sources, such as firewalls and network appliances, generate a large vol
 - **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources or add custom parsing rules.
 - **Generate metrics**: Generate metrics for your logs or a subset of them. The available metric types are: COUNT, GAUGE, and DISTRIBUTION.
 
-{{% observability_pipelines/use_case_images/dual_ship_logs %}}
+{{% observability_pipelines/use_case_images/generate_metrics %}}
 
 [1]: /metrics/distributions/#overview

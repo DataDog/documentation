@@ -12,5 +12,50 @@ To set up the quota processor:
 1. Check the **Drop events** checkbox if you want to drop all events when your quota is met. Leave it unchecked if you plan to set up a [monitor][5001] that sends an alert when the quota is met.
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is selected, then those logs are dropped. In this case, only logs that did not match the filter query are sent to the next step in the pipeline.
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is not selected, then those logs and the logs that did not match the filter query are sent to the next step in the pipeline.
+1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.
+1. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.
+1. Click **Add Field** if you want to add another partition.  
+    a. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
+    b. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
+        - Click **Download as CSV** for an example of how to structure the CSV.  
+        - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.
+
+#### Examples
+
+##### Partition example
+
+Use **Partition by** if you want to set a quota on a specific service or region. For example, if you want to set a quota for 10 events per day and group the events by the `service` field, enter `service` into the **Partition by** field.
+
+##### Example for the "ignore when missing" option
+
+Select **Ignore when missing** if you want the quota applied only to events that match the partition. For example:
+
+If the Worker receives the following set of events:
+
+```
+{"service":"a", "source":"foo", "message": "..."}
+{"service":"b", "source":"bar", "message": "..."}
+{"service":"b", "message": "..."}
+{"source":"redis", "message": "..."}
+{"message": "..."}
+```
+
+And the **Ignore when missing** is selected, then the Worker:
+- creates a set for logs with `service:a` and `source:foo`
+- creates a set for logs with `service:b` and `source:bar`
+- ignores the last three events
+
+The quota is applied to the two sets of logs and not to the last three events.
+
+If the **Ignore when missing** is not selected, the quota is applied to all five events.
+
+##### Overrides example
+
+If you are partitioning by `service` and have two services: `a` and `b`, you can use overrides to apply different quotas for them. For example, if you want `service:a` to have a quota limit of 5,000 bytes and `service:b` to have a limit of 50 events, the override rules look like this:
+
+| Service | Type   | Limit |
+| ------- | ------ | ----- |
+|  `a`    | Bytes  | 5,000 |
+|  `b`    | Events | 50    |
 
 [5001]: /monitors/types/metric/?tab=threshold
