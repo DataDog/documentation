@@ -23,7 +23,7 @@ This document walks you through the following steps:
 
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
 
-You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
+You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See the [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
 
 Select the cloud provider you are using to archive your logs.
 
@@ -76,7 +76,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_server%}}
+{{% observability_pipelines/source_settings/http_server %}}
 
 ### Set up the destinations
 
@@ -232,7 +232,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the HTTP/S server address. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder. For example, `0.0.0.0:9997`.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 

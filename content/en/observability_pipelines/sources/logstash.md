@@ -3,7 +3,7 @@ title: Logstash Source
 disable_toc: false
 ---
 
-Use Observability Pipelines' logstash source to receive logs from your Logstash agent. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Logstash source to receive logs from your Logstash agent. Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 

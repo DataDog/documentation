@@ -5,14 +5,14 @@ disable_toc: false
 
 ## Overview
 
-Configure your HTTP Server and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your HTTP Client requests before routing them to various applications.
+Configure your HTTP Server and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your HTTP client requests before routing them to various applications.
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-http_server)
+1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -158,8 +158,8 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the HTTP/S server address. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder. For example, `0.0.0.0:9997`.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Enter the HTTP/S server address, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder.
+1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}
 

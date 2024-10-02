@@ -160,8 +160,8 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Logstash address and port. For example, `0.0.0.0:9997`. The Observability Pipelines Worker listens on this address for incoming log messages.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Enter the Logstash address and port, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens on this address for incoming log messages.
+1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}
 
