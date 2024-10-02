@@ -8,7 +8,7 @@ further_reading:
   tag: "Documentation"
   text: "Apply visualizations on your events"
 aliases:
-  - real_user_monitoring/explorer/analytics/
+  - /real_user_monitoring/explorer/analytics/
 ---
 
 ## Overview
