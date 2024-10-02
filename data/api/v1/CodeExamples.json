@@ -788,6 +788,13 @@
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
+  "CreateSyntheticsMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a mobile test returns \"OK - Returns the created test details.\" response"
+    }
+  ],
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
@@ -845,6 +852,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Create a private location returns \"OK\" response"
+    }
+  ],
+  "UpdateMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Edit a Mobile test returns \"OK\" response"
     }
   ],
   "UpdateAPITest": [
