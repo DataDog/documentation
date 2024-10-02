@@ -1,11 +1,12 @@
 name: Labeler
 on: [pull_request]
 
-permissions:
-  pull-requests: write # to update pull request
-
 jobs:
   label:
+    permissions:
+      pull-requests: write # to update pull request
+      contents: read # to read the contents of the repository
+      
     runs-on: ubuntu-latest
     steps:
     - uses: actions/labeler@v4
