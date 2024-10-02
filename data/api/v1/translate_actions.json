@@ -915,6 +915,22 @@
     "request_description": "Public ID list of the Synthetic tests to be deleted.",
     "request_schema_description": "A JSON list of the ID or IDs of the Synthetic tests that you want\nto delete."
   },
+  "CreateSyntheticsMobileTest": {
+    "description": "Create a Synthetic mobile test.",
+    "summary": "Create a mobile test",
+    "request_description": "Details of the test to create.",
+    "request_schema_description": "Object containing details about a Synthetic mobile test."
+  },
+  "GetMobileTest": {
+    "description": "Get the detailed configuration associated with\na Synthetic Mobile test.",
+    "summary": "Get a Mobile test"
+  },
+  "UpdateMobileTest": {
+    "description": "Edit the configuration of a Synthetic Mobile test.",
+    "summary": "Edit a Mobile test",
+    "request_description": "New test details to be saved.",
+    "request_schema_description": "Object containing details about a Synthetic mobile test."
+  },
   "TriggerTests": {
     "description": "Trigger a set of Synthetic tests.",
     "summary": "Trigger Synthetic tests",
@@ -926,6 +942,12 @@
     "summary": "Trigger tests from CI/CD pipelines",
     "request_description": "Details of the test to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."
+  },
+  "FetchUptimes": {
+    "description": "Fetch uptime for multiple Synthetic tests by ID.",
+    "summary": "Fetch uptime for multiple tests",
+    "request_description": "Public ID list of the Synthetic tests and timeframe.",
+    "request_schema_description": "Object containing IDs of Synthetic tests and a timeframe."
   },
   "GetTest": {
     "description": "Get the detailed configuration associated with a Synthetic test.",
