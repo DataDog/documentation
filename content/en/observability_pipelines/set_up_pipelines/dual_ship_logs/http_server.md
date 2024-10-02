@@ -12,7 +12,6 @@ Use the Observability Pipelines Worker to aggregate and processes your HTTP clie
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -245,9 +244,5 @@ Enter the following information based on your selected logs destination.
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker 
-
-{{% observability_pipelines/log_source_configuration/http_server %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
