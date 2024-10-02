@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-Datadog offers custom roll-up capabilities with [time and space aggregation][2] on metric queries, but were limited to only one time aggregation and one space aggregation per query. Time aggregation rolls data points into time buckets to effectively display large volumes of points. Space aggregation splits a single metric into multiple timeseries by tag. On top of these aggregations, you may want to add an additional layer of aggregation on top of existing queries. For instance, if you wanted the average latency of your EC2 instances by host, then find the max average over every hour. Now, with the introduciton of neted queries, you can now reaggregateon results of existing query in time and/or space. This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. 
+Datadog offers custom roll-up capabilities with [time and space aggregation][2] on metric queries, but were limited to only one time aggregation and one space aggregation per query. Time aggregation rolls data points into time buckets to effectively display large volumes of points. Space aggregation splits a single metric into multiple timeseries by tag. On top of these aggregations, you may want to add an additional layer of aggregation on top of existing queries. For instance, if you wanted the average latency of your EC2 instances by host, then find the max average over every hour. Now, with the introduciton of neted queries, you can now reaggregateon results of existing query in time and/or space. 
+
+This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. Percentiles are also enabled with nested queries, but for metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
 
 ## Multilayer aggregation
 
@@ -89,7 +91,7 @@ In the UI or JSON tab, it would look as follows:
 
 ## Percentiles
 
-Percentile calculations provide deeper insights into data distribution, setting performance thresholds, and identifying outliers/extremes in your data. For metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
+Percentile calculations provide deeper insights into data distribution, setting performance thresholds, and identifying outliers/extremes in your data.
 
 Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
 
@@ -117,7 +119,7 @@ Standard deviation helps measure the variability or dispersion of a dataset. The
 ```
 In the UI or JSON tab, it would look as follows:
 
- {{< img src="/metrics/nested_queries/nested-queries-std-ui.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
+ {{< img src="/metrics/nested_queries/nested-queries-std-ui.png" alt="example of standard deviation with nested queries in the UI" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
  {{< img src="/metrics/nested_queries/nested-queries-std-jsonigh.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
@@ -141,7 +143,6 @@ In the UI or JSON tab:
 
 {{< img src="/dashboards/querying/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
-
 
 
 ## How can I use Datadog API's to leverage nested queries functionality?
