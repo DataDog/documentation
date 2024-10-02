@@ -23,6 +23,14 @@ Active Protection streamlines threat detection and targeted response, resulting 
 
 The end result is crypto mining threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
 
+## RBAC for Active Protection
+
+Here are some important [role and permissions][11] to use for custom rules and Active Protection RBAC:
+
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the Active Protection feature. 
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
+
 ## Protection options
 
 You have three options for Agent rules:
