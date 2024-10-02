@@ -199,16 +199,20 @@ You can add span events using the `addEvent` API. This method requires a `name` 
 The following examples demonstrate different ways to add events to a span:
 
 ```java
-Attributes eventAttributes = Attributes.of(
-    AttributeKey.longKey("int_val"), 1,
-    AttributeKey.stringKey("string_val"), "two",
-    AttributeKey.longArrayKey("int_array"), Arrays.asList(3, 4),
-    AttributeKey.stringArrayKey("string_array"), Arrays.asList("5", "6"),
-    AttributeKey.booleanArrayKey("bool_array"), Arrays.asList(true, false)
-);
+      Attributes eventAttributes = Attributes.builder()
+          .put(AttributeKey.longKey("int_val"), 1L)
+          .put(AttributeKey.stringKey("string_val"), "two")
+          .put(AttributeKey.longArrayKey("int_array"), Arrays.asList(3L, 4L))
+          .put(AttributeKey.stringArrayKey("string_array"), Arrays.asList("5", "6"))
+          .put(AttributeKey.booleanArrayKey("bool_array"), Arrays.asList(true, false))
+          .build();
 
-span.addEvent("Event With No Attributes");
-span.addEvent("Event With Some Attributes", eventAttributes);
+      span.addEvent("Event With No Attributes");
+      span.addEvent("Event With Some Attributes", eventAttributes);
+
+      span.recordException(new Exception("Error Message"));
+      span.recordException(new Exception("Error Message"), 
+          Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
 ```
 
 Read the [OpenTelemetry][21] specification for more information.
