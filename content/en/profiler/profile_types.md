@@ -158,7 +158,7 @@ Wall Time
 
 Allocations (v2.3.0+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
-_Requires:_ [Manual enablement][3]
+_Requires:_ [Manual enablement][2]
 
 Heap Live Objects (alpha, v2.3.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
@@ -169,8 +169,7 @@ Heap Live Size (alpha, v2.3.0+)
 _Requires: Ruby 2.7+_ and [manual enablement][2]
 
 [1]: /profiler/enabling/ruby/#requirements
-[2]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.19.0#:~:text=You%20can%20enable%20these%20features%3A
-[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.21.0
+[2]: /profiler/enabling/ruby/#configuration
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -202,11 +201,11 @@ Thrown Exceptions (v2.31+)
 
 Allocations (beta, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
-_Requires: .NET 6+_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: beta .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
+_Requires: .NET Framework (with Datadog Agent 7.51+) / .NET 5+_
 
 Live Heap (beta, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />

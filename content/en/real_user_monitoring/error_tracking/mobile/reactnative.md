@@ -90,6 +90,10 @@ Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different re
 
 When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
 
+### List uploaded source maps
+
+See the [RUM Debug Symbols][16] page to view all uploaded symbols.
+
 ## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
@@ -482,3 +486,4 @@ Inside the loop, add the following snippet:
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
+[16]: https://app.datadoghq.com/source-code/setup/rum

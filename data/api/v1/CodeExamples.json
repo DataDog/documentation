@@ -58,6 +58,11 @@
   "CreateDashboard": [
     {
       "group": "dashboards",
+      "suffix": "_1433408735",
+      "description": "Clients deserialize a dashboard with a empty time object"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1442588603",
       "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
     },

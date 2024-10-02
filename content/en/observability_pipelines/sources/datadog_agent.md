@@ -15,6 +15,19 @@ Use Observability Pipelines' Datadog Agent source to receive logs from the Datad
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 
+Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
+
+{{< tabs >}}
+{{% tab "Agent configuration file" %}}
+
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
+
+{{% /tab %}}
+{{% tab "Agent Helm values file" %}}
+
+{{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: /observability_pipelines/set_up_pipelines/

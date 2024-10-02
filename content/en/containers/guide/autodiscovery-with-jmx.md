@@ -2,6 +2,8 @@
 title: Autodiscovery with JMX
 aliases:
   - /agent/guide/autodiscovery-with-jmx
+algolia:
+  tags: ["JMX", "JMX Metrics", "Missing Web Logic", "JMX Limit", "Cassandra", "Kafka", "Tomcat", "Weblogic"]
 further_reading:
     - link: '/agent/kubernetes/integrations/'
       tag: 'Documentation'
@@ -15,6 +17,7 @@ further_reading:
     - link: '/agent/kubernetes/tag/'
       tag: 'Documentation'
       text: 'Dynamically assign and collect tags from your application'
+
 ---
 
 In containerized environments there are a few differences in how the Agent connects to the JMX server. Autodiscovery features make it possible to dynamically setup these integrations. Use Datadog's JMX based integrations to collect JMX applications metrics from your pods in Kubernetes. 

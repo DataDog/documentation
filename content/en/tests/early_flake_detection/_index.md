@@ -17,8 +17,8 @@ further_reading:
 <div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Early Flake Detection is in public beta.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Early Flake Detection is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -63,9 +63,8 @@ After you have set up your Datadog library for Test Visibility, you can configur
 The required test framework and dd-trace versions are:
 
 `dd-trace-js`:
-* `>=5.12.0` for the 5.x release.
-* `>=4.36.0` for the 4.x release.
-* `>=3.57.0` for the 3.x release.
+* `>=5.23.0` for the 5.x release.
+* `>=4.47.0` for the 4.x release.
 
 The test framework compatibility is the same as [Test Visibility Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
@@ -81,6 +80,12 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 {{% tab ".NET" %}}
 
 `dd-trace-dotnet>=2.51.0`
+
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+`datadog-ci-rb>=1.5.0`
 
 {{% /tab %}}
 

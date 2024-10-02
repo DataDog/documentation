@@ -13,6 +13,8 @@ jobs:
     name: Find latest synthetics-worker version
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@v5.1.0
         with:
@@ -24,6 +26,8 @@ jobs:
           python local/bin/py/version_getter.py
       
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Write version
         run: |-
           git config user.name documentation-ci

@@ -2,9 +2,6 @@
 aliases:
 - /ja/service_catalog/manage_entries/
 further_reading:
-- link: /tracing/service_catalog/adding_metadata
-  tag: ドキュメント
-  text: メタデータの追加
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
   tag: 外部サイト
   text: Terraform によるサービス定義の作成と管理
