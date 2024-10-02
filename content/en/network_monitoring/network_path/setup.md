@@ -89,7 +89,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
      min_collection_interval: 60 # in seconds, default 60 seconds
    instances:
      # configure the endpoints you want to monitor, one check instance per endpoint
-     # warning: do not set port when using UDP, it can cause traceroute calls to fail and falsely report unreachable destination
+     # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
    
      - hostname: api.datadoghq.eu # endpoint hostname or IP
        protocol: TCP
