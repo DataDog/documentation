@@ -12,8 +12,7 @@ further_reading:
 
 ## Overview
 
-Previously, Datadog offered custom roll-up capabilities with [time and space aggregation][2] on your metric queries, but was limited to only one time aggregation and one space aggregation per query. With nested queries, you are now able to add an additional layer of aggregation on the results of existing queries in time and space. This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. 
-
+Datadog offers custom roll-up capabilities with [time and space aggregation][2] on metric queries, but were limited to only one time aggregation and one space aggregation per query. Time aggregation rolls data points into time buckets to effectively display large volumes of points. Space aggregation splits a single metric into multiple timeseries by tag. On top of these aggregations, you may want to add an additional layer of aggregation on top of existing queries. For instance, if you wanted the average latency of your EC2 instances by host, then find the max average over every hour. Now, with the introduciton of neted queries, you can now reaggregateon results of existing query in time and/or space. This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. 
 
 ## Multilayer aggregation
 
