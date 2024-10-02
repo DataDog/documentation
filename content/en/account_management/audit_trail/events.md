@@ -37,6 +37,7 @@ further_reading:
 - [Log Management](#log-management-events)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
+- [Security Notification events](#security-notification-events)
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [Service Level Objectives](#service-level-objectives-slo-events)
 - [Synthetic Monitoring](#synthetic-monitoring-events)
