@@ -44,7 +44,7 @@ Estimated usage metrics are generally available for the following usage types:
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` | Estimated usage for API tests. |
 | Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`| Estimated usage for browser tests. |
 | Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` | Estimated usage for parallel testing slots. |
-| Network Hosts                 | `datadog.estimated_usage.network.hosts` | Unique NPM hosts seen in the last hour. |
+| Network Hosts                 | `datadog.estimated_usage.network.hosts` | Unique CNM hosts seen in the last hour. |
 | Network Devices               | `datadog.estimated_usage.network.devices` | Unique NDM devices seen in the last hour. |
 | Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | Unique profiling hosts seen in the last hour. |
 | Profiled Containers           | `datadog.estimated_usage.profiling.containers` | Unique profiling containers seen in last 5 minutes. |

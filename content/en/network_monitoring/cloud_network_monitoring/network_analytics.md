@@ -5,17 +5,18 @@ aliases:
     - /network_performance_monitoring/network_table
     - /network_performance_monitoring/network_page
     - /network_monitoring/performance/network_page
+    - /network_monitoring/performance/network_analytics
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
-      text: 'Network Performance Monitoring'
+      text: 'Cloud Network Monitoring'
     - link: 'https://www.datadoghq.com/blog/datadog-npm-search-map-updates/'
       tag: 'Blog'
       text: 'Streamline network investigations with an enhanced querying and map experience'
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
-    - link: '/network_monitoring/performance/setup'
+    - link: '/network_monitoring/cloud_network_monitoring/setup'
       tag: 'Documentation'
       text: 'Collect your Network Data with the Datadog Agent.'
 ---
@@ -24,7 +25,7 @@ further_reading:
 
 The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm_4.png" alt="Network Analytics landing page under Network Performance" >}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_network_analytics.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
 
 ## Queries
 
@@ -32,9 +33,9 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic between your **client** ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
+For example, if you want to see network traffic between your **client** service called `ad_server` and all of your availability zones, use `client_service:ad-server` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
 
-{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag_2.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
 For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
 
@@ -44,21 +45,21 @@ Additionally, the following diagram illustrates inbound and outbound requests wh
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm3.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_default_view.png" alt="CNM Default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_analytics/flow_table_region_az2.png" alt="Aggregate connection table filtered" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_flow_table_region.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
 You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
 Additionally, set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame CNM" style="width:30%;">}}
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/network_analytics/recommended_query_options.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
+{{< img src="network_performance_monitoring/network_analytics/recommended_queries.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
 
 Recommended queries allow you to begin investigating into your network—whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. The recommended queries help you quickly find relevant network information without needing to search for or group the traffic. For example, the recommended query `Find dependencies of service: web-store` populates the search bar with the query `client_service: web-store` and displays the top services that the service web-store is sending traffic to within the network, and therefore its downstream dependencies.
 
@@ -176,7 +177,7 @@ For instance, you can:
 - Pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
 - Validate that their request is successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the side panel for a given dependency, under the *Integration Metrics* tab.
 
-NPM automatically maps:
+CNM automatically maps:
 
 - Network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
@@ -184,7 +185,7 @@ NPM automatically maps:
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
 
 ### Cloud service enhanced resolution
-If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Datadog applies the tags defined below in addition to the user-defined tags.
+If you have [setup][9] enhanced resolution for AWS or Azure, CNM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Datadog applies the tags defined below in addition to the user-defined tags.
 
  #### Amazon Web Services
  {{< tabs >}}
@@ -261,9 +262,9 @@ To view pre-NAT and post-NAT IPs, use the **Show pre-NAT IPs** toggle in the tab
 
 ### Network ID
 
-NPM users may configure their networks to have overlapping IP spaces. For instance, you may want to deploy in multiple VPCs (virtual private clouds) which have overlapping address ranges and communicate only through load balancers or cloud gateways.
+CNM users may configure their networks to have overlapping IP spaces. For instance, you may want to deploy in multiple VPCs (virtual private clouds) which have overlapping address ranges and communicate only through load balancers or cloud gateways.
 
-To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from.
+To correctly classify traffic destinations, CNM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from.
 
 In AWS and Google Cloud, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
@@ -316,7 +317,7 @@ Select any row from the data table to see associated logs, traces, and processes
 
 ### Pivot to network path
 
-Hover over a row in the analytics table to pivot to [network path][11] and see the paths between the source and destination specified in NPM.
+Hover over a row in the analytics table to pivot to [network path][11] and see the paths between the source and destination specified in CNM.
 
 {{< img src="network_performance_monitoring/network_analytics/view_network_path.png" alt="Example of hovering over a row in the Analytics table to show the Network Path toggle" style="width:90%;">}}
 
@@ -344,14 +345,14 @@ The **Security** tab highlights potential network threats and findings detected 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/search_syntax/
-[2]: /network_monitoring/performance/network_map/
-[3]: /network_monitoring/performance/guide/aws_supported_services/
-[4]: /network_monitoring/performance/guide/gcp_supported_services/
+[2]: /network_monitoring/cloud_network_monitoring/network_map/
+[3]: /network_monitoring/cloud_network_monitoring/guide/aws_supported_services/
+[4]: /network_monitoring/cloud_network_monitoring/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
 [6]: /security/threats/
 [7]: /security/cloud_security_management/misconfigurations/
 [8]: /security/detection_rules/
-[9]: /network_monitoring/performance/setup/#enhanced-resolution
+[9]: /network_monitoring/cloud_network_monitoring/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
 [11]: /network_monitoring/network_path
 [12]: /getting_started/tagging/unified_service_tagging/

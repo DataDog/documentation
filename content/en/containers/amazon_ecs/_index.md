@@ -199,7 +199,7 @@ To collect Live Process information for all your containers and send it to Datad
 }
 {{< /highlight >}}
 
-#### Network Performance Monitoring
+#### Cloud Network Monitoring
 
 <div class="alert alert-warning">
 This feature is only available for Linux.
