@@ -1,4 +1,4 @@
-setuptools==60.10.0
+setuptools==75.1.0
 PyGithub==1.47
 markdown
 algoliasearch>=2.2.0
