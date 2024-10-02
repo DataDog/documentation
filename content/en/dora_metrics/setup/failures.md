@@ -48,13 +48,36 @@ To integrate your PagerDuty account with DORA Metrics:
 
 1. Click **+ New Webhook** and enter the following details:
 
-   | Variable | Description |
-   |---|---|
-   | Webhook URL | Add `https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/`. |
-   | Scope Type | Select **Account** to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type. |
-   | Description | A description helps distinguish the webhook. Add something like `Datadog DORA Metrics integration`. |
-   | Event Subscription | Select the following events:<br>-`incident.acknowledged`<br>-`incident.annotated`<br>-`incident.custom_field_values.updated`<br>-`incident.delegated`<br>-`incident.escalated`<br>-`incident.priority_updated`<br>-`incident.reassigned`<br>-`incident.reopened`<br>-`incident.resolved`<br>-`incident.triggered`<br>-`incident.unacknowledged` |
-   | Custom Headers | Click **Add custom header**, enter `DD-API-KEY` as the name, and input your [Datadog API key][105] as the value.<br>  <br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name `dd_env` and the desired environment as the value. |
+     <table>
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Webhook URL</td>
+          <td>Add <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/</code>.</td>
+        </tr>
+        <tr>
+          <td>Scope Type</td>
+          <td>Select <strong>Account</strong> to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type.</td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>A description helps distinguish the webhook. Add something like <code>Datadog DORA Metrics integration</code>.</td>
+        </tr>
+        <tr>
+          <td>Event Subscription</td>
+          <td>Select the following events:<br>-<code>incident.acknowledged</code><br>-<code>incident.annotated</code><br>-<code>incident.custom_field_values.updated</code><br>-<code>incident.delegated</code><br>-<code>incident.escalated</code><br>-<code>incident.priority_updated</code><br>-<code>incident.reassigned</code><br>-<code>incident.reopened</code><br>-<code>incident.resolved</code><br>-<code>incident.triggered</code><br>-<code>incident.unacknowledged</code></td>
+        </tr>
+        <tr>
+          <td>Custom Headers</td>
+          <td>Click <strong>Add custom header</strong>, enter <code>DD-API-KEY</code> as the name, and input your <a href="https://docs.datadoghq.com/api/latest/authentication/#api-keys">Datadog API key</a> as the value.<br><br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name <code>dd_env</code> and the desired environment as the value.</td>
+        </tr>
+      </tbody>
+    </table>
 
 1. To save the webhook, click **Add Webhook**.
 

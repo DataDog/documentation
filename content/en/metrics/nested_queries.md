@@ -9,7 +9,7 @@ further_reading:
 ## Overview
 
 {{< callout url="#" btn_hidden="true">}}
-  This feature is currently in Preview.
+  This feature is in Preview.
 {{< /callout >}}  
 
 Datadog offers custom roll-up capabilities with [time and space aggregation][2] on metric queries, but were limited to only one time aggregation and one space aggregation per query. Time aggregation rolls data points into time buckets to effectively display large volumes of points. Space aggregation splits a single metric into multiple timeseries by tag. On top of these aggregations, you may want to add an additional layer of aggregation on top of existing queries. For instance, if you wanted the average latency of your EC2 instances by host, then find the max average over every hour. Now, with the introduciton of neted queries, you can now reaggregateon results of existing query in time and/or space. 
@@ -61,7 +61,6 @@ This query calculates the 95th percentile of average CPU utilization for each EC
 In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-time-agg-ui.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
-{{% /collapse-content %}} 
 
 {{< img src="/metrics/nested_queries/multilayer-time-agg-json.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
@@ -86,10 +85,9 @@ percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {
 In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-space-agg-ui.png" alt="example of multilayer space aggregation in the UI" style="width:100%;" >}}
-{{% /collapse-content %}} 
 
 {{< img src="/metrics/nested_queries/multilayer-space-agg-json.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
-{{% /collapse-content %}}
+{{% /collapse-content %}} 
 
 
 
@@ -106,7 +104,6 @@ Here's an example that calculates the 95th percentile of average CPU utilization
 
 In the UI:
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
-{{% /collapse-content %}} 
 
 In the JSON tab, it would look as follows:
 
@@ -126,7 +123,6 @@ Standard deviation helps measure the variability or dispersion of a dataset. The
 In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-std-ui.png" alt="example of standard deviation with nested queries in the UI" style="width:100%;" >}}
-{{% /collapse-content %}} 
 
  {{< img src="/metrics/nested_queries/nested-queries-std-jsonigh.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
@@ -146,7 +142,6 @@ Here's an example that calculates the standard deviation of high-resolution metr
 In the UI or JSON tab:
 
 {{< img src="/dashboards/querying/nested-queries-higher-res-ui.png" alt="example of higher resolution queries using nested queries in the UI" style="width:100%;" >}}
-{{% /collapse-content %}} 
 
 {{< img src="/dashboards/querying/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 

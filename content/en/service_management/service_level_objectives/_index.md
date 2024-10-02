@@ -290,8 +290,6 @@ The 90-day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
-
 #### Access in the UI
 
 To access SLO status corrections in the UI:
@@ -304,7 +302,15 @@ To access SLO status corrections in the UI:
 6. Optionally add **Notes**.
 7. Click **Apply Correction**.
 
+{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
+
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
+
+#### Visualizing status corrections
+
+For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the "History" section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration. 
+
+{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 
 ## SLO calendar view
 
