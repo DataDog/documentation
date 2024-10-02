@@ -89,7 +89,7 @@ The Agent can send its own configuration to Datadog to be displayed in the `Agen
 
 The Agent configuration is scrubbed of any sensitive information and only contains configuration you've set using the configuration file or environment variables. The configuration changes are updated every 10 minutes.
 
-The Agent configuration view is enabled by default in Agent version >= 7.47.0/6.47.0. In Agent versions >= 7.39/6.39, you can enable it:
+The Agent configuration view is enabled by default in Agent version >= 7.47.0/6.47.0. In Agent versions >= 7.39/6.39, you can enable it manually:
 
 To enable or disable the configuration view:
 - Set the value of `inventories_configuration_enabled` in your [Agent configuration file][6] to `true` to enable the configuration view, or `false` to disable it.
