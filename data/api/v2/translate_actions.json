@@ -563,6 +563,38 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "GetChannelByName": {
+    "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
+    "summary": "Get channel information by name"
+  },
+  "ListApiHandles": {
+    "description": "Get a list of all handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all handles"
+  },
+  "CreateApiHandle": {
+    "description": "Create a handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create handle",
+    "request_description": "Handle payload.",
+    "request_schema_description": "Create handle request."
+  },
+  "GetApiHandleByName": {
+    "description": "Get the tenant, team, and channel information of a handle by name from the Datadog Microsoft Teams integration.",
+    "summary": "Get handle information by name"
+  },
+  "DeleteApiHandle": {
+    "description": "Delete a handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete handle"
+  },
+  "GetApiHandle": {
+    "description": "Get the tenant, team, and channel information of a handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get handle information"
+  },
+  "UpdateApiHandle": {
+    "description": "Update a handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update handle",
+    "request_description": "Opsgenie service payload.",
+    "request_schema_description": "Update handle request."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"

@@ -99,6 +99,10 @@ If you are still having issues, check that your `firstPartyHosts` property is se
     ✅ Good - 'example.com', 'api.example.com', 'us1.api.sample.com'
     ❌ Bad - 'https://example.com', '*.example.com', 'us1.sample.com/api/*', 'api.sample.com/api'
 
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][6] to view all your uploaded symbol files, dSYMs, and mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][7].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -108,3 +112,5 @@ If you are still having issues, check that your `firstPartyHosts` property is se
 [3]: https://pub.dev/packages/datadog_tracking_http_client
 [4]: https://pub.dev/packages/http
 [5]: https://pub.dev/packages/dio
+[6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: /real_user_monitoring/guide/debug-symbols
