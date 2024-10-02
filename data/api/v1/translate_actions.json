@@ -943,6 +943,12 @@
     "request_description": "Details of the test to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."
   },
+  "FetchUptimes": {
+    "description": "Fetch uptime for multiple Synthetic tests by ID.",
+    "summary": "Fetch uptime for multiple tests",
+    "request_description": "Public ID list of the Synthetic tests and timeframe.",
+    "request_schema_description": "Object containing IDs of Synthetic tests and a timeframe."
+  },
   "GetTest": {
     "description": "Get the detailed configuration associated with a Synthetic test.",
     "summary": "Get a test configuration"
