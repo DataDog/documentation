@@ -16,6 +16,8 @@ Datadog offers custom roll-up capabilities with [time and space aggregation][2] 
 
 This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. Percentiles are also enabled with nested queries, but for metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
 
+
+
 ## Multilayer aggregation
 
 In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of aggregation beyond the default.
@@ -89,6 +91,8 @@ In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/multilayer-space-agg-json.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}}
 
+
+
 ## Percentiles
 
 Percentile calculations provide deeper insights into data distribution, setting performance thresholds, and identifying outliers/extremes in your data.
@@ -109,6 +113,8 @@ In the JSON tab, it would look as follows:
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
+
+
 ## Standard Deviation
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals, and rolled up over 1-hour periods:
@@ -124,6 +130,7 @@ In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-std-jsonigh.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
+
 
 
 ## Higher Resolution Queries
@@ -143,6 +150,7 @@ In the UI or JSON tab:
 
 {{< img src="/dashboards/querying/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
+
 
 
 ## How can I use Datadog API's to leverage nested queries functionality?
