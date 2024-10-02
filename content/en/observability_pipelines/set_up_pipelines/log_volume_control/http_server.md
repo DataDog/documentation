@@ -1,246 +1,166 @@
 ---
-title: Log Volume Control for HTTP Server
+title: Update Existing Pipelines
 disable_toc: false
 ---
 
 ## Overview
 
-Set up the Observability Pipelines Worker to only route useful HTTP client logs to their destinations.
+For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
-{{% observability_pipelines/use_case_images/log_volume_control %}}
-
-This document walks you through the following steps:
-1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
-1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-
-## Prerequisites
-
-{{% observability_pipelines/prerequisites/http_server %}}
-
-## Set up Observability Pipelines
+## Update an existing pipeline
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Log Volume Control** template to create a new pipeline.
-1. Select the **HTTP Server** source.
+1. Select the pipeline you want to update.
+1. Click **Edit Pipeline** in the top right corner.
+1. Make changes to the pipeline.
+    - If you are updating the source or destination settings shown in the tiles, or updating and adding processors, make the changes and then click **Deploy Changes**.
+    - To update source or destination environment variables, click **Go to Worker Installation Steps** and see [Update source or destination variables](#update-source-or-destination-variables) for instructions.
 
-### Set up the source
+### Update source or destination variables
 
-{{% observability_pipelines/source_settings/http_server %}}
-
-### Set up the destinations
-
-Enter the following information based on your selected logs destination.
-
-{{< tabs >}}
-{{% tab "Datadog" %}}
-
-{{% observability_pipelines/destination_settings/datadog %}}
-
-{{% /tab %}}
-{{% tab "Splunk HEC" %}}
-
-{{% observability_pipelines/destination_settings/splunk_hec %}}
-
-{{% /tab %}}
-{{% tab "Sumo Logic" %}}
-
-{{% observability_pipelines/destination_settings/sumo_logic %}}
-
-{{% /tab %}}
-{{% tab "Syslog" %}}
-
-{{% observability_pipelines/destination_settings/syslog %}}
-
-{{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_settings/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_settings/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_settings/new_relic %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Set up processors
-
-{{% observability_pipelines/processors/intro %}}
-
-{{% observability_pipelines/processors/filter_syntax %}}
-
-{{% observability_pipelines/processors/add_processors %}}
-
-{{< tabs >}}
-{{% tab "Filter" %}}
-
-{{% observability_pipelines/processors/filter %}}
-
-{{% /tab %}}
-{{% tab "Edit fields" %}}
-
-{{% observability_pipelines/processors/remap %}}
-
-{{% /tab %}}
-{{% tab "Sample" %}}
-
-{{% observability_pipelines/processors/sample %}}
-
-{{% /tab %}}
-{{% tab "Grok Parser" %}}
-
-{{% observability_pipelines/processors/grok_parser %}}
-
-{{% /tab %}}
-{{% tab "Quota" %}}
-
-{{% observability_pipelines/processors/quota %}}
-
-{{% /tab %}}
-{{% tab "Reduce" %}}
-
-{{% observability_pipelines/processors/reduce %}}
-
-{{% /tab %}}
-{{% tab "Dedupe" %}}
-
-{{% observability_pipelines/processors/dedupe %}}
-
-{{% /tab %}}
-{{% tab "Sensitive Data Scanner" %}}
-
-{{% observability_pipelines/processors/sensitive_data_scanner %}}
-
-{{% /tab %}}
-{{% tab "Add hostname" %}}
-
-{{% observability_pipelines/processors/add_hostname %}}
-
-{{% /tab %}}
-{{% tab "Parse JSON" %}}
-
-{{% observability_pipelines/processors/parse_json %}}
-
-{{% /tab %}}
-{{% tab "Enrichment table" %}}
-
-{{% observability_pipelines/processors/enrichment_table %}}
-
-{{% /tab %}}
-{{% tab "Generate metrics" %}}
-
-{{% observability_pipelines/processors/generate_metrics %}}
-
-{{% /tab %}}
-{{% tab "Set env vars" %}}
-
-{{% observability_pipelines/processors/set_env_vars %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Install the Observability Pipelines Worker
+On the the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the HTTP/S server address, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder.
-1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.
+1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Agent" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
+
+{{% /tab %}}
+{{% tab "Fluent" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/fluent %}}
+
+{{% /tab %}}
+{{% tab "Google Pub/Sub" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
+
+{{% /tab %}}
+{{% tab "HTTP Client" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
+
+{{% /tab %}}
+{{% tab "HTTP Server" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
+
+{{% /tab %}}
+{{% tab "Logstash" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
-{{% observability_pipelines/destination_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
+
+{{% /tab %}}
+{{% tab "Splunk TCP" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_tcp %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
 
-{{% observability_pipelines/destination_env_vars/sumo_logic %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
 
 {{% /tab %}}
 {{% tab "Syslog" %}}
 
-{{% observability_pipelines/destination_env_vars/syslog %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+1. If you want to update destination environment variables, update the information for your log destination.
+{{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
+{{% tab "Splunk HEC" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
+
+{{% /tab %}}
+{{% tab "Sumo Logic" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
 
-{{% observability_pipelines/destination_env_vars/chronicle %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
 {{% /tab %}}
 {{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
 {{% /tab %}}
 {{% tab "OpenSearch" %}}
 
-{{% observability_pipelines/destination_env_vars/opensearch %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
 {{% /tab %}}
 {{% tab "Amazon OpenSearch" %}}
 
-{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_env_vars/new_relic %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{< /tabs >}}
-1. Follow the instructions for your environment to install the Worker.
+1. Follow the instructions for your environment to update the worker:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-{{% observability_pipelines/install_worker/docker %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/amazon_eks %}}
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
-{{% observability_pipelines/install_worker/azure_aks %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/azure_aks %}}
 
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/google_gke %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
 
-{{% observability_pipelines/install_worker/linux_apt %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/linux_apt %}}
 
 {{% /tab %}}
 {{% tab "Linux (RPM)" %}}
 
-{{% observability_pipelines/install_worker/linux_rpm %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/linux_rpm %}}
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-{{% observability_pipelines/install_worker/cloudformation %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/cloudformation %}}
 
 {{% /tab %}}
 {{< /tabs >}}
