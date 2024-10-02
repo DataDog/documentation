@@ -57,15 +57,19 @@
                   {
                       "name": "docs_alias_view",
                       "search_parameters": {
-                          "sort_by": "rank:desc,order:asc,_text_match:desc",
-                          "query_by": "tags,title,section_header,content"
+                          "sort_by": "rank:desc,_text_match:desc",
+                          "query_by": "tags,content,title,section_header",
+                          "group_by": "distinct_base_url",
+                          "group_limit": 1
                       }
                   },
                   {
                       "name": "docs_alias_api_view",
                       "search_parameters": {
                           "sort_by": "rank:asc,_text_match:desc",
-                          "query_by": "tags,title,section_header,content"
+                          "query_by": "tags,content,title,section_header",
+                          "group_by": "distinct_base_url",
+                          "group_limit": 1
                       }
                   }
               ]
