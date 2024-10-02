@@ -1,5 +1,5 @@
 ---
-title: Log Enrichment for Splunk Heavy and Universal Forwarders (TCP)
+title: Log Enrichment for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/log_enrichment/splunk_tcp/

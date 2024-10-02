@@ -1,5 +1,5 @@
 ---
-title: Archive Logs for Splunk Heavy and Universal Forwarders (TCP)
+title: Archive Logs for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/archive_logs/splunk_tcp/

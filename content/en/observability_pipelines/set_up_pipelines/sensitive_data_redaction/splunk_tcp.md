@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Redaction for Splunk Heavy and Universal Forwarders (TCP)
+title: Sensitive Data Redaction for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/sensitive_data_redaction/splunk_tcp/
