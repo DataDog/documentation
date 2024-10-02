@@ -40,10 +40,10 @@ If the Worker receives the following set of events:
 {"message": "..."}
 ```
 
-And the **Ignore when missing** is selected, then the Worker separates the logs into two sets:
-- one for logs with `service:a` and `source:foo`
-- one for logs with `service:b` and `source:bar`
-- and ignores the last three events.
+And the **Ignore when missing** is selected, then the Worker:
+- creates a set for logs with `service:a` and `source:foo`
+- creates a set for logs with `service:b` and `source:bar`
+- ignores the last three events
 
 The quota is applied to the two sets of logs and not to the last three events.
 

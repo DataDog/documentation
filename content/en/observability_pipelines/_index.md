@@ -112,7 +112,7 @@ Your organization's different services, systems, and applications all generate l
 
 #### Generate Metrics
 
-Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Oftentimes, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
 ### Build pipelines in the Observability Pipelines UI
 

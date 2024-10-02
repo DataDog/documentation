@@ -4946,7 +4946,7 @@ menu:
       url: observability_pipelines/processors/set_environment_variables
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_set_environment_variables
-      weight: 512
+      weight: 513
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
