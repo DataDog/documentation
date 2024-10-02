@@ -18,6 +18,8 @@ If you've already [set up Cloud Security Management][3] and want to add a new AW
 
 <div class="alert alert-info">If you're setting up Cloud Security Management for the first time, you can follow the <a href="/security/cloud_security_management/setup/agentless_scanning/quick_start">quick start workflow</a>, which also uses AWS CloudFormation to enable Agentless Scanning.</div>
 
+<div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Agentless Scanning with Terraform</a> as the default template.</div>
+
 {{< tabs >}}
 {{% tab "New AWS account" %}}
 

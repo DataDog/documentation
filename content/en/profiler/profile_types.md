@@ -201,7 +201,7 @@ Thrown Exceptions (v2.31+)
 
 Allocations (in Preview, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
-_Requires: .NET 6+_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
