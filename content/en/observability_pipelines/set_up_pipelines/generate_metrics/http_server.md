@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Configure the HTTP Server source so that the Observability Pipelines Worker can generate metrics from those logs.
+Use the Observability Pipelines Worker to generate metrics from your HTTP client logs.
 
 {{% observability_pipelines/use_case_images/generate_metrics %}} 
 

@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your HTTP Server so that the Observability Pipelines Worker formats the logs collected from HTTP client requests into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Use the Observability Pipelines Worker to format HTTP client logs into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 

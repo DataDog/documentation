@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your HTTP Server and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your HTTP client requests before routing them to various applications.
+Use the Observability Pipelines Worker to aggregate and processes your HTTP client logs before routing them to various applications.
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
