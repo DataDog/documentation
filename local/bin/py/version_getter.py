@@ -69,16 +69,16 @@ if __name__ == "__main__":
         current_versions = json.load(open('data/synthetics_worker_versions.json'))
     except:
         current_versions = {}
-    print(current_versions)
     final_versions = get_versions(keys)
     
-    print(final_versions)
-    
     if current_versions != final_versions:
+        print("New version detected!")
+        print(final_versions)
         with open('data/synthetics_worker_versions.json', 'w') as f:
             f.write(json.dumps(final_versions, indent=4, sort_keys=True))
         with open(github_output, 'a', encoding='utf-8') as f:
             f.write('new_version=true')    
     else:
         with open(github_output, 'a', encoding='utf-8') as f:
+            print("No new version detected")
             f.write('new_version=false')
