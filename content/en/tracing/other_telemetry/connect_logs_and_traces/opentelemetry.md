@@ -21,7 +21,7 @@ further_reading:
   text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-<div class="alert alert-info">If you are using the latest versions of Datadog tracing libraries, Datadog automatically links OpenTelemetry traces and logs using <code>TraceId</code> or <code>SpanId</code>. If you're using older versions, follow the steps on this page to manually correlate traces and logs.</div>
+<div class="alert alert-info">If you are using the latest versions of Datadog tracing libraries, Datadog automatically links OpenTelemetry traces and logs using <code>TraceId</code>. If you're using older versions, follow the steps on this page to manually correlate traces and logs.</div>
 
 Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
 
