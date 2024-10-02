@@ -17,10 +17,6 @@ aliases:
   - /tracing/error_tracking/execution_replay/
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-Exception Replay for APM Error Tracking is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Exception Replay in APM Error Tracking automatically captures production variable values so you can reproduce exceptions from Error Tracking issues.
