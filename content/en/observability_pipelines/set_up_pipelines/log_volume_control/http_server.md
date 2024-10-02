@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Set up the Observability Pipelines Worker to only route useful HTTP Client logs to their destinations.
+Set up the Observability Pipelines Worker to only route useful HTTP client logs to their destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 

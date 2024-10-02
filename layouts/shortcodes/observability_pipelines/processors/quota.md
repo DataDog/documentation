@@ -26,7 +26,7 @@ To set up the quota processor:
 
 Use **Partition by** if you want to set a quota on a specific service or region. For example, if you want to set a quota for 10 events per day and group the events by the `service` field, enter `service` into the **Partition by** field.
 
-##### Example for the ignore when missing option
+##### Example for the "ignore when missing" option
 
 Select **Ignore when missing** if you want the quota applied only to events that match the partition. For example:
 
