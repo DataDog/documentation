@@ -135,4 +135,4 @@ The [JSON schema for Datadog service definitions][15] is registered with the ope
 [12]: https://app.datadoghq.com/personal-settings/profile
 [13]: http://json-schema.org/
 [14]: https://www.schemastore.org/json/
-[15]: https://raw.githubusercontent.com/DataDog/schema/main/service-catalog/version.schema.json
+[15]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json

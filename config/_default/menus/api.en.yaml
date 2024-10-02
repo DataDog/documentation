@@ -3111,6 +3111,42 @@ menu:
           - TriggerTests
         unstable: []
         order: 8
+    - name: Edit a Mobile test
+      url: '#edit-a-mobile-test'
+      identifier: synthetics-edit-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - UpdateMobileTest
+        unstable: []
+        order: 3
+    - name: Get a Mobile test
+      url: '#get-a-mobile-test'
+      identifier: synthetics-get-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - GetMobileTest
+        unstable: []
+        order: 9
+    - name: Create a mobile test
+      url: '#create-a-mobile-test'
+      identifier: synthetics-create-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - CreateSyntheticsMobileTest
+        unstable: []
+        order: 2
     - name: Delete tests
       url: '#delete-tests'
       identifier: synthetics-delete-tests
@@ -6154,6 +6190,94 @@ menu:
           - ListRestrictionQueries
         unstable:
           - v2
+        order: 1
+    - name: Microsoft Teams Integration
+      url: /api/latest/microsoft-teams-integration/
+      identifier: microsoft-teams-integration
+      generated: true
+    - name: Update handle
+      url: '#update-handle'
+      identifier: microsoft-teams-integration-update-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApiHandle
+        unstable: []
+        order: 1
+    - name: Get handle information
+      url: '#get-handle-information'
+      identifier: microsoft-teams-integration-get-handle-information
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiHandle
+        unstable: []
+        order: 1
+    - name: Delete handle
+      url: '#delete-handle'
+      identifier: microsoft-teams-integration-delete-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApiHandle
+        unstable: []
+        order: 1
+    - name: Get handle information by name
+      url: '#get-handle-information-by-name'
+      identifier: microsoft-teams-integration-get-handle-information-by-name
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiHandleByName
+        unstable: []
+        order: 1
+    - name: Create handle
+      url: '#create-handle'
+      identifier: microsoft-teams-integration-create-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApiHandle
+        unstable: []
+        order: 1
+    - name: Get all handles
+      url: '#get-all-handles'
+      identifier: microsoft-teams-integration-get-all-handles
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApiHandles
+        unstable: []
+        order: 1
+    - name: Get channel information by name
+      url: '#get-channel-information-by-name'
+      identifier: microsoft-teams-integration-get-channel-information-by-name
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChannelByName
+        unstable: []
         order: 1
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
