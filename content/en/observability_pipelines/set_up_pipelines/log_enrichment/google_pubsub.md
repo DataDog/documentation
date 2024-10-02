@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your Google Pub/Sub to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+Configure your Google Pub/Sub to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to their destination.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 

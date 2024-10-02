@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use the Observability Pipelines Worker to enrich and transform your HTTP client logs before routing them to its destination.
+Use the Observability Pipelines Worker to enrich and transform your HTTP client logs before routing them to their destination.
 
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
