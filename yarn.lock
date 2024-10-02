@@ -6552,7 +6552,7 @@ __metadata:
     traverse: 0.6.8
     typesense: ^1.8.2
     typesense-instantsearch-adapter: ^2.8.0
-    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.2.tgz"
+    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.3.tgz"
     yaml-lint: ^1.7.0
   languageName: unknown
   linkType: soft
@@ -14789,9 +14789,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.2.tgz":
-  version: 1.0.2
-  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.2.tgz"
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.3.tgz":
+  version: 1.0.3
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.3.tgz"
   dependencies:
     "@babel/runtime": ^7.25.0
     crypto: ^1.0.1
@@ -14799,7 +14799,7 @@ __metadata:
     typesense: ^1.8.2
     winston: ^3.14.2
     yargs: ^17.7.2
-  checksum: 2dc2af1f9d1e6d8495f6b18c82fd86fbff152db1b4bb1385ce4634f09f677e6e7fbce8cd56506e76bb6e1758cd683268a04d45ae820433d6321b20f0ebdffaee
+  checksum: d8fc8eff2afb9c86924181cde01fd4ef505906841c22be39212ac022aca56b67eec97324766cf6710c146fa54512391f38c4764a3820e7133f95954cf43a8d0c
   languageName: node
   linkType: hard
 
