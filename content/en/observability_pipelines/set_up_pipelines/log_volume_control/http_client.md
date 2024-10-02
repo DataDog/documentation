@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the HTTP Client source so that you route only useful logs to your destinations.
+Use the Observability Pipelines Worker to only route useful HTTP server logs to their destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 

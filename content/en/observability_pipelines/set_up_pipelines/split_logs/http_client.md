@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure HTTP Client to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Use the Observability Pipelines Worker to process and route your HTTP server logs to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 

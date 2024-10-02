@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your HTTP Client and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications.
+Use the Observability Pipelines Worker to aggregate and process your HTTP server logs before routing them to various applications.
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
