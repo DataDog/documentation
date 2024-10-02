@@ -6,7 +6,8 @@ jobs:
     permissions:
       pull-requests: write # to update pull request
       contents: read # to read the contents of the repository
-      
+      statuses: write # to set the status of the commit
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/labeler@v4
