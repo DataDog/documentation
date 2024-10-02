@@ -78,7 +78,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 

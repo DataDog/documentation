@@ -29,7 +29,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 

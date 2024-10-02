@@ -80,7 +80,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/fluent%}}
+{{% observability_pipelines/source_settings/fluent %}}
 
 ### Set up the destinations
 
@@ -345,7 +345,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Send logs to the Observability Pipelines Worker
 
-{{% observability_pipelines/log_source_configuration/fluent%}}
+{{% observability_pipelines/log_source_configuration/fluent %}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup

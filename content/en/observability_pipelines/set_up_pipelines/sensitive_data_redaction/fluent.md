@@ -20,7 +20,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/fluent%}}
+{{% observability_pipelines/prerequisites/fluent %}}
 
 ## Set up Observability Pipelines
 
@@ -30,7 +30,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/fluent%}}
+{{% observability_pipelines/source_settings/fluent %}}
 
 ### Set up the destinations
 
