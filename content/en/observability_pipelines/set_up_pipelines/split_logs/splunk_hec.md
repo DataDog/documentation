@@ -76,6 +76,11 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/opensearch %}}
 
 {{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
 {{% tab "New Relic" %}}
 
 {{% observability_pipelines/destination_settings/new_relic %}}

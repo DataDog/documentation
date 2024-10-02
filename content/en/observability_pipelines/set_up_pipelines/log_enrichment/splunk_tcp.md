@@ -1,5 +1,5 @@
 ---
-title: Log Enrichment for Splunk Heavy and Universal Forwarders (TCP)
+title: Log Enrichment for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/log_enrichment/splunk_tcp/
@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to their destination.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
@@ -68,6 +68,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

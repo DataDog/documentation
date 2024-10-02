@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure HTTP Client to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Use the Observability Pipelines Worker to process and route your HTTP server logs to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
@@ -27,7 +27,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 
@@ -67,6 +67,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

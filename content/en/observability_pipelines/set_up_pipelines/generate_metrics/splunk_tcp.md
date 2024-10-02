@@ -1,5 +1,5 @@
 ---
-title: Generate Metrics for Splunk Heavy and Universal Forwarders (TCP)
+title: Generate Metrics for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 ---
 
@@ -16,7 +16,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-### Splunk Heavy and Universal Forwarders (TCP)
+### Splunk Heavy or Universal Forwarders (TCP)
 
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
 
@@ -72,6 +72,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

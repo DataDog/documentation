@@ -1,5 +1,5 @@
 ---
-title: Dual Ship Logs for Splunk Heavy and Universal Forwarders (TCP)
+title: Dual Ship Logs for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/dual_ship_logs/splunk_tcp/
@@ -18,7 +18,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-### Splunk Heavy and Universal Forwarders (TCP)
+### Splunk Heavy or Universal Forwarders (TCP)
 
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
 
@@ -74,6 +74,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

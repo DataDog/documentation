@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the HTTP Client source so that you route only useful logs to your destinations.
+Use the Observability Pipelines Worker to only route useful HTTP server logs to their destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
@@ -27,7 +27,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 
@@ -67,6 +67,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

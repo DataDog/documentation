@@ -1,5 +1,5 @@
 ---
-title: Archive Logs for Splunk Heavy and Universal Forwarders (TCP)
+title: Archive Logs for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/archive_logs/splunk_tcp/
@@ -141,6 +141,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

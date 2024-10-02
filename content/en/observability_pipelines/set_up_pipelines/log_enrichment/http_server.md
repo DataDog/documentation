@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your HTTP Server to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+Use the Observability Pipelines Worker to enrich and transform your HTTP client logs before routing them to their destination.
 
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
@@ -13,7 +13,6 @@ Configure your HTTP Server to send logs to the Observability Pipelines Worker an
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 

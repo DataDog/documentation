@@ -5,14 +5,13 @@ disable_toc: false
 
 ## Overview
 
-Configure your HTTP Server to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Use the Observability Pipelines Worker to process and route your HTTP client logs to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 

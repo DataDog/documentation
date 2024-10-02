@@ -14,7 +14,6 @@ Use Observability Pipelines to identify, tag, and optionally redact or hash sens
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-google-pub-sub)
 
 ## Prerequisites
 

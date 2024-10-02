@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure Fluentd or Fluent Bit to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
+Configure Fluentd or Fluent Bit to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to their destination.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
@@ -18,7 +18,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/fluent%}}
+{{% observability_pipelines/prerequisites/fluent %}}
 
 ## Set up Observability Pipelines
 
@@ -28,7 +28,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/fluent%}}
+{{% observability_pipelines/source_settings/fluent %}}
 
 ### Set up the destinations
 
@@ -68,6 +68,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

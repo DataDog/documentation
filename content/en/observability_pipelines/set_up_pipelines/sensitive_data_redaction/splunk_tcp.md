@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Redaction for Splunk Heavy and Universal Forwarders (TCP)
+title: Sensitive Data Redaction for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/sensitive_data_redaction/splunk_tcp/
@@ -9,7 +9,7 @@ aliases:
 
 Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks. 
 
-Use the Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
+Use Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
 {{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
@@ -70,6 +70,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

@@ -1,5 +1,5 @@
 ---
-title: Split Logs for Splunk Heavy and Universal Forwarders (TCP)
+title: Split Logs for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/split_logs/splunk_tcp/
@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your Splunk Heavy and Universal Forwarders to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
@@ -74,6 +74,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

@@ -144,6 +144,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/opensearch %}}
 
 {{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
 {{% tab "New Relic" %}}
 
 {{% observability_pipelines/destination_settings/new_relic %}}

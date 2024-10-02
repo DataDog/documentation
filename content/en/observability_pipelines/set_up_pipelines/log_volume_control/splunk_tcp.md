@@ -1,5 +1,5 @@
 ---
-title: Log Volume Control for Splunk Heavy and Universal Forwarders (TCP)
+title: Log Volume Control for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/log_volume_control/splunk_tcp/
@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-This document walks you through the following steps to set up the Observability Pipelines Worker with Splunk Heavy and Universal Forwarders so that you route only useful logs to your destinations.
+This document walks you through the following steps to set up the Observability Pipelines Worker with Splunk Heavy or Universal Forwarders so that you route only useful logs to your destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
@@ -68,6 +68,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

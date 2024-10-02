@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your HTTP Client so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Use the Observability Pipelines Worker to format your HTTP server logs into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
@@ -15,7 +15,6 @@ This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -79,7 +78,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 
@@ -142,6 +141,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}

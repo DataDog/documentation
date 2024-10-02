@@ -22,7 +22,7 @@ Select a log source to get started:
 - [HTTP Server][5]
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
-- [Splunk Heavy and Universal Forwarders (TCP)][8]
+- [Splunk Heavy or Universal Forwarders (TCP)][8]
 - [Sumo Logic Hosted Collector][9]
 - [rsyslog or syslog-ng][10]
 
