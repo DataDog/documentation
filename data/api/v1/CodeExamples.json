@@ -868,6 +868,13 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "FetchUptimes": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Fetch uptime for multiple tests returns \"OK.\" response"
+    }
+  ],
   "PatchTest": [
     {
       "group": "synthetics",

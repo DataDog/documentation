@@ -15431,6 +15431,32 @@ components:
       - EDGE_LAPTOP_LARGE
       - EDGE_TABLET
       - EDGE_MOBILE_SMALL
+    SyntheticsFetchUptimesPayload:
+      description: Object containing IDs of Synthetic tests and a timeframe.
+      properties:
+        from_ts:
+          description: Timestamp in seconds (Unix epoch) for the start of uptime.
+          example: 0
+          format: int64
+          type: integer
+        public_ids:
+          description: An array of Synthetic test IDs you want to delete.
+          example: []
+          items:
+            description: A Synthetic test ID.
+            example: abc-def-123
+            type: string
+          type: array
+        to_ts:
+          description: Timestamp in seconds (Unix epoch) for the end of uptime.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - from_ts
+      - to_ts
+      - public_ids
+      type: object
     SyntheticsGetAPITestLatestResultsResponse:
       description: Object with the latest Synthetic API test run.
       properties:
@@ -17520,6 +17546,24 @@ components:
       description: String Port number to use when performing the test. Supports templated
         variables.
       type: string
+    SyntheticsTestUptime:
+      description: Object containing the uptime for a Synthetic test ID.
+      properties:
+        from_ts:
+          description: Timestamp in seconds for the start of uptime.
+          format: int64
+          type: integer
+        overall:
+          $ref: '#/components/schemas/SyntheticsUptime'
+        public_id:
+          description: A Synthetic test ID.
+          example: abc-def-123
+          type: string
+        to_ts:
+          description: Timestamp in seconds for the end of uptime.
+          format: int64
+          type: integer
+      type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -17642,6 +17686,62 @@ components:
       properties:
         new_status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+      type: object
+    SyntheticsUptime:
+      description: Object containing the uptime information.
+      properties:
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          nullable: true
+          type: array
+        group:
+          description: The location name
+          example: name
+          type: string
+        history:
+          description: 'The state transition history for the monitor, represented
+            as an array of
+
+            pairs. Each pair is an array where the first element is the transition
+            timestamp
+
+            in Unix epoch format (integer) and the second element is the state (integer).
+
+            For the state, an integer value of `0` indicates uptime, `1` indicates
+            downtime,
+
+            and `2` indicates no data.'
+          example:
+          - - 1579212382
+            - 0
+          items:
+            description: An array of transitions
+            example:
+            - 1579212382
+            - 0
+            items:
+              description: A timeseries data point which is a tuple of (timestamp,
+                value).
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        span_precision:
+          description: The number of decimal places to which the SLI value is accurate
+            for the given from-to timestamps.
+          example: 2.0
+          format: double
+          type: number
+        uptime:
+          description: The overall uptime.
+          example: 99.99
+          format: double
+          type: number
       type: object
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
@@ -34693,6 +34793,52 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/uptimes:
+    post:
+      description: Fetch uptime for multiple Synthetic tests by ID.
+      operationId: FetchUptimes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsFetchUptimesPayload'
+        description: Public ID list of the Synthetic tests and timeframe.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SyntheticsTestUptime'
+                type: array
+          description: OK.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Fetch uptime for multiple tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
