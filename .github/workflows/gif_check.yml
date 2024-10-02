@@ -5,6 +5,9 @@ on:
     paths:
     - 'static/images/**/*'
 
+permissions:
+  contents: read
+
 jobs:
   look-for-gifs:
     runs-on: ubuntu-latest
