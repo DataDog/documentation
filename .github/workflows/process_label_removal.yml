@@ -3,7 +3,8 @@ on:
   pull_request:
     types:
       - unlabeled
-
+permissions:
+  contents: read
 jobs:
   notify-docs-if-approved:
     runs-on: ubuntu-latest
