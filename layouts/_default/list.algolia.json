@@ -34,7 +34,7 @@
             {{- /* record for each individual section (split by h2 header) */ -}}
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
 
-            {{- /* Full page record */ -}}
+            {{- /* Full page record
             {{ $record := (
                 dict "objectID" $object_id
                 "id" $object_id
@@ -59,6 +59,7 @@
             {{ end }}
 
             {{- $.Scratch.Add "algoliaindex" $record }}
+            */ -}}
         {{ end }}
     {{ end }}
 
