@@ -15,7 +15,6 @@ This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -338,10 +337,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker
-
-{{% observability_pipelines/log_source_configuration/google_pubsub%}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup

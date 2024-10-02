@@ -12,7 +12,6 @@ Configure Google Pub/Sub and set up Observability Pipelines so that the Observab
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-google_pubsub)
 
 ## Prerequisites
 
@@ -244,9 +243,5 @@ Enter the following information based on your selected logs destination.
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker over Google_pubsub
-
-{{% observability_pipelines/log_source_configuration/google_pubsub %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
