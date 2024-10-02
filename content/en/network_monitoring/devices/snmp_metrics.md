@@ -21,7 +21,7 @@ Network Device Monitoring relies on the SNMP Integration included in the [Datado
 
 ## How it works
 
-The following diagram illustrates the default ports and protocols between the Datadog Agent and the device being monitored. For SNMP metrics, the Datadog Agent polls the devices with Autodiscovery, or based on manual device IP configuration. The Datadog Agent, configured with NDM and deployed on-premises or in the cloud, consolidates all collected device and network data from your network and sends it to Datadog over `https` on port `443`. This provides unified, full-stack observability of metrics, logs, traces, monitors, and dashboards.
+The following diagram illustrates the default ports and protocols between the Datadog Agent and the device being monitored. For SNMP metrics, the Datadog Agent polls the devices with Autodiscovery, or based on manual device IP configuration. The Datadog Agent, configured with NDM and deployed on-premises or in the cloud, consolidates all collected device and network data from your network and sends it to Datadog over HTTPS on port `443`. This provides unified, full-stack observability of metrics, logs, traces, monitors, and dashboards.
 
 {{< img src="/network_device_monitoring/snmp/snmp_device_polling.png" alt="NDM Diagram showing the flow for SNMP device polling." style="width:90%;" >}}
 
