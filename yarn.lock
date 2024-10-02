@@ -2569,7 +2569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.25.0":
+"@babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.25.6":
   version: 7.25.6
   resolution: "@babel/runtime@npm:7.25.6"
   dependencies:
@@ -4025,10 +4025,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/google.maps@npm:^3.45.3":
-  version: 3.50.5
-  resolution: "@types/google.maps@npm:3.50.5"
-  checksum: 1754518ffc1719c2086834ee1cab45b4a2a0ec007f3d1101d46afda46d7ef96a989ab977333352a1c73c5267ce2e7bec7e5bfeb74146a723be746279c3ad086c
+"@types/google.maps@npm:^3.55.12":
+  version: 3.58.1
+  resolution: "@types/google.maps@npm:3.58.1"
+  checksum: 7ad5bd9566ffa0396485c432368e45c43e3fe1ecc2b89324f257a49d9abbe03dfe046a771d82ae1808fa0fb6e04e6ffca870c7f2295fef73a6015a678b067364
   languageName: node
   linkType: hard
 
@@ -4473,14 +4473,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"algoliasearch-helper@npm:3.16.3":
-  version: 3.16.3
-  resolution: "algoliasearch-helper@npm:3.16.3"
+"algoliasearch-helper@npm:3.22.5":
+  version: 3.22.5
+  resolution: "algoliasearch-helper@npm:3.22.5"
   dependencies:
     "@algolia/events": ^4.0.1
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: b4664168e2900628e274508dbf4a7f366fa1397468ba49bd0a5c4f2b0d2d1f7ed8bd137ca218a6d142fec49963b7c0774e8929371e1906416bf0d82bcbb61fc1
+  checksum: bf1f0573778a5d4398efbc723558eaa7efd81a0c906c8c6339d6ab243e065c8dabea656c5bb914cda8dfa57e7af3c16e5370b0399f265a2a3dc49fed0dceedac
   languageName: node
   linkType: hard
 
@@ -6496,6 +6496,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.20.7
     "@babel/polyfill": ^7.12.1
     "@babel/preset-env": ^7.24.0
+    "@babel/runtime": ^7.25.6
     "@datadog/browser-logs": ^5.27.0
     "@datadog/browser-rum": ^5.27.0
     "@datadog/datadog-ci": ^2.36.0
@@ -6520,7 +6521,7 @@ __metadata:
     fancy-log: ^1.3.3
     geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz"
     hugo-bin: 0.123.0
-    instantsearch.js: ^4.66.0
+    instantsearch.js: ^4.74.1
     jest: ^25.5.4
     js-cookie: ^2.2.1
     js-yaml: ^3.14.1
@@ -6550,6 +6551,7 @@ __metadata:
     tomlify-j0.4: ^3.0.0
     traverse: 0.6.8
     typesense: ^1.8.2
+    typesense-instantsearch-adapter: ^2.8.0
     typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.2.tgz"
     yaml-lint: ^1.7.0
   languageName: unknown
@@ -8976,34 +8978,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"instantsearch-ui-components@npm:0.4.0":
-  version: 0.4.0
-  resolution: "instantsearch-ui-components@npm:0.4.0"
+"instantsearch-ui-components@npm:0.9.0":
+  version: 0.9.0
+  resolution: "instantsearch-ui-components@npm:0.9.0"
   dependencies:
     "@babel/runtime": ^7.1.2
-  checksum: 1878547d4c7c26d3d96161a25f9830e39148acaee40322bc6c23ec85d80fc71f459112f6c6f2d1d582faa6f17dbbebf601cb1326dcb4df55513ca8b950ba7cb2
+  checksum: a45987abaae672beec88a7cfca8e1e25aabba3a8faae21e18e73c7a9080a9a4fe1ad20eaac5a7ae692f28f5be390fa5cd654572d92ce110d9b71290c745753c5
   languageName: node
   linkType: hard
 
-"instantsearch.js@npm:^4.66.0":
-  version: 4.66.0
-  resolution: "instantsearch.js@npm:4.66.0"
+"instantsearch.js@npm:^4.74.1":
+  version: 4.74.2
+  resolution: "instantsearch.js@npm:4.74.2"
   dependencies:
     "@algolia/events": ^4.0.1
     "@types/dom-speech-recognition": ^0.0.1
-    "@types/google.maps": ^3.45.3
+    "@types/google.maps": ^3.55.12
     "@types/hogan.js": ^3.0.0
     "@types/qs": ^6.5.3
-    algoliasearch-helper: 3.16.3
+    algoliasearch-helper: 3.22.5
     hogan.js: ^3.0.2
     htm: ^3.0.0
-    instantsearch-ui-components: 0.4.0
+    instantsearch-ui-components: 0.9.0
     preact: ^10.10.0
     qs: ^6.5.1 < 6.10
-    search-insights: ^2.13.0
+    search-insights: ^2.15.0
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: 0dd4fe5b38ac113b74cd0d4d4661d457babfe4559f196d61943573cfc528ba42c7f527d918894fded3a02aeacad7996d08dc1013f75725322c29a9a5548358c3
+  checksum: e7097f7587860bfd6b76a26c1590ab631c443bd79d69ba0e1094199b6738dad99a2fdbaed864643a27a449b3e5da3ba30afac0c09572508dda33771217cbbd0c
   languageName: node
   linkType: hard
 
@@ -13397,10 +13399,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"search-insights@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "search-insights@npm:2.13.0"
-  checksum: 6d553606c879fe67f9ce1bbeb3c909cdb1401a336679d321656f065985a4999ba57882850fdabf4df6bef72d179b71e5ccb5f5f9a04143bc4da52dd8ba66fab3
+"search-insights@npm:^2.15.0":
+  version: 2.17.2
+  resolution: "search-insights@npm:2.17.2"
+  checksum: cd4751fe7735a823f2742dda29bbbc40839ff394764887009fdbc7661c1b0eb74ff84d01c5d753654e560fb0271cd2e7828bc07d3fee568e853368b133deff5a
   languageName: node
   linkType: hard
 
@@ -14776,6 +14778,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typesense-instantsearch-adapter@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "typesense-instantsearch-adapter@npm:2.8.0"
+  dependencies:
+    typesense: ^1.7.2
+  peerDependencies:
+    "@babel/runtime": ^7.17.2
+  checksum: 0436579f4d7a21bc4b44286a6c810955fed416c33107064c634a13feadcd9c86019ba0b6be3e54b6a11c0ccf495fda8a0793c0918dbab6ff75e7f7a218f9c115
+  languageName: node
+  linkType: hard
+
 "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.2.tgz":
   version: 1.0.2
   resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.2.tgz"
@@ -14790,7 +14803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense@npm:^1.8.2":
+"typesense@npm:^1.7.2, typesense@npm:^1.8.2":
   version: 1.8.2
   resolution: "typesense@npm:1.8.2"
   dependencies:
