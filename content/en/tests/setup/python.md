@@ -163,31 +163,31 @@ assert True
 
 {{% /tab %}}
 
-{{% tab "Manual Instrumentation (beta)" %}}
+{{% tab "Manual instrumentation (beta)" %}}
 
-### Using manual testing API
+### Manual testing API
 
-<div class="alert alert-warning"><strong>Note</strong>: The Test Visibility Manual API is in <strong>beta</strong> and subject to change.</div>
+<div class="alert alert-warning"><strong>Note</strong>: The Test Visibility manual testing API is in <strong>beta</strong> and subject to change.</div>
 
-As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Visibility API (`ddtrace.ext.test_visibility`) as a way to submit test visibility results in an ad-hoc manner.
+As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Visibility API (`ddtrace.ext.test_visibility`) to submit test visibility results as needed.
 
 #### API execution
 
 The API uses classes to provide namespaced methods to submit test visibility events.
 
-Execution of tests is split into two phases:
-- discovery: used to inform the API of items to expect
-- execution: submitting results (using start and finish calls)
+Test execution has two phases:
+- Discovery: inform the API what items to expect
+- Execution: submit results (using start and finish calls)
 
-The distinct discovery and execution phases allow for cases where tests are not started immediately after they are collected by the test runner process.
+The distinct discovery and execution phases allow for a gap between the test runner process collecting the tests and the tests starting.
 
 API users must provide consistent identifiers (described below) that are used as references for Test Visibility items within the API's state storage.
 
-##### Enabling test_visibility
+##### Enable `test_visibility`
 
-The `ddtrace.ext.test_visibility.api.enable_test_visibility()` function must be called in order for the Test Visibility API to become usable.
+You must call the `ddtrace.ext.test_visibility.api.enable_test_visibility()` function before using the Test Visibility API.
 
-The `ddtrace.ext.test_visibility.api.disable_test_visibility()` function should be called before process shutdown to ensure proper flushing of data.
+Call the `ddtrace.ext.test_visibility.api.disable_test_visibility()` function before process shutdown to ensure proper flushing of data.
 
 #### Domain model
 
@@ -223,21 +223,21 @@ After all the children items within the module have completed, call `ddtrace.ext
 
 A test suite represents a subset of tests within a project's modules (`.py` file, for example).
 
-Call `ddtrace.ext.test_visibility.api.TestSuiteId()`, providing the parent module's `TestModuleId`, and the suite's name, as arguments, to create a `TestSuiteId`.
+Call `ddtrace.ext.test_visibility.api.TestSuiteId()`, providing the parent module's `TestModuleId` and the suite's name as arguments, to create a `TestSuiteId`.
 
 Call `ddtrace.ext.test_visibility.api.TestSuite.discover()`, passing the `TestSuiteId` object as an argument, to discover the suite.
 
 Call `ddtrace.ext.test_visibility.api.TestSuite.start()`, passing the `TestSuiteId` object as an argument, to start the suite.
 
-After all the children items within the suite have completed, call `ddtrace.ext.test_visibility.api.TestSuite.finish()`, passing the `TestSuiteId` object as an argument.
+After all the child items within the suite have completed, call `ddtrace.ext.test_visibility.api.TestSuite.finish()`, passing the `TestSuiteId` object as an argument.
 
 ##### Test
 
 A test represents a single test case that is executed as part of a test suite.
 
-Call `ddtrace.ext.test_visibility.api.TestId()`, providing the parent suite's `TestSuiteId`, and the test's name, as arguments to create a `TestId`. The `TestId()` method accepts a JSON-parseable string as the optional `parameters` argument. The `parameters` argument can be used to distinguish parametrized tests that have the same name, but different parameter values.
+Call `ddtrace.ext.test_visibility.api.TestId()`, providing the parent suite's `TestSuiteId` and the test's name as arguments, to create a `TestId`. The `TestId()` method accepts a JSON-parseable string as the optional `parameters` argument. The `parameters` argument can be used to distinguish parametrized tests that have the same name, but different parameter values.
 
-Call `ddtrace.ext.test_visibility.api.Test.discover()`, passing the `TestId` object as an argument, to discover the test. The `Test.discover()` classmethod accepts a string as the optional `resource` parameter, which default to the `TestId`'s `name`.
+Call `ddtrace.ext.test_visibility.api.Test.discover()`, passing the `TestId` object as an argument, to discover the test. The `Test.discover()` classmethod accepts a string as the optional `resource` parameter, which defaults to the `TestId`'s `name`.
 
 Call `ddtrace.ext.test_visibility.api.Test.start()`, passing the `TestId` object as an argument, to start the test.
 
@@ -283,7 +283,7 @@ import pathlib
 import sys
 
 if __name__ == "__main__":
-    # Enabling the Test Visibility service
+    # Enable the Test Visibility service
     api.enable_test_visibility()
 
     # Discover items
