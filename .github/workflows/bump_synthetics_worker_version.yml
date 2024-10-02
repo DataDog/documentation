@@ -24,7 +24,10 @@ jobs:
       - name: Find latest synthetic-worker version
         id: write-synthetics-worker-version
         run: |
-          python local/bin/py/version_getter.py   
+          python local/bin/py/version_getter.py
+      
+      - name: echo new version
+        run: echo ${{ steps.write-synthetics-worker-version.outputs.new_version }}
       
       - uses: actions/checkout@v4
         with:
