@@ -4,8 +4,6 @@ further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Search for your events"
-aliases:
-  - real_user_monitoring/explorer/analytics/
 ---
 
 ## Overview
