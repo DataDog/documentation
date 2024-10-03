@@ -102,10 +102,9 @@ Here's an example that calculates the 95th percentile of average CPU utilization
 "rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
 
-In the UI:
- {{< img src="/metrics/nested_queries/nested-queries-percentiles-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
+In the UI or JSON tab, it would look as follows:
 
-In the JSON tab, it would look as follows:
+ {{< img src="/metrics/nested_queries/nested-queries-percentiles-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
 
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
