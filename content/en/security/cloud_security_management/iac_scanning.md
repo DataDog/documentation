@@ -16,7 +16,7 @@ Static Infrastructure as Code (IaC) scanning integrates with version control sys
 
 Follow [the instructions][3] for creating a GitHub app for your organization.
 
-<div class="alert alert-info">To use IaC scanning, you must give the Github App <code>Read & Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. These permissions can be applied to all or select repositories.
+<div class="alert alert-info">To use IaC scanning, you must give the GitHub App <code>Read & Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. These permissions can be applied to all or select repositories.
 </div>
 
 ### Enable IaC scanning for your repositories
