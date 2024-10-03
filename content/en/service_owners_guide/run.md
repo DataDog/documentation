@@ -7,7 +7,7 @@ further_reading:
   text: "Getting Started with Datadog"
 ---
 
-In the previous two sections, we viewed Datadog through the lens of the plan and build phases, next let's look at the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that need to be managed. 
+In the previous two sections, we viewed Datadog through the lens of the plan and build phases. Next, let's look at the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that need to be managed. 
 
 ## Service tasks
 
@@ -88,7 +88,7 @@ Datadog updates the Agent components frequently for security and functionality r
 **Recommendation:**  
 Include Datadog upgrades within existing patch management standards and upgrade policies. Subscribe to [Datadog’s release feed][17], and closely monitor your [Fleet Automation page][18] for Agent’s that require upgrades.
 
-## Run summary
+## Conclusion
 
 Datadog service ownership does have a few common activities, but the needs in this regard are few. These activities will slot well into your existing process standards. Be sure to fold Datadog into your standard systems for key rotation, patch updates, service onboarding and IaC.  Publish these standards early so that users know how to get started using your new Datadog service. 
 
