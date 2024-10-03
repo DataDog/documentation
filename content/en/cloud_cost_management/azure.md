@@ -39,16 +39,15 @@ Navigate to [Setup & Configuration][3] and select an Azure account from the menu
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
+1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*. The Azure portal screens look different if the "Improved exports (Preview)" is enabled for your account, or if you are accessing the Azure portal via the https://preview.portal.azure.com address.
+
+   {{< tabs >}}
+   {{% tab "Regular exports" %}}
+
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. After the scope is selected, click **Add**.
 
    {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" style="width:100%" >}}
-
-   The [improved exports experience][8] is in Preview and may not be available for all customers.
-
-   {{< tabs >}}
-   {{% tab "Regular exports" %}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
@@ -66,8 +65,14 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{% tab "Improved exports (Preview)" %}}
 
-4. Select the following Export details:
-    - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
+2. In the left hand navigation panel, select "Cost Management" and left hand nav items will change. Then "Reporting + analytics". Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
+3. After the scope is selected, click **Create**.
+
+   {{< img src="cloud_cost/improved_exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" style="width:100%" >}}
+
+4. Select "Cost and usage (actual + amortized)".
+5. Enter an "Export prefix" for the new exports. For example, enter "datadog" to avoid conflicts with existing exports.
+6. Click "Edit" on each export and confirm the following details:
     - Frequency: **Daily export of month-to-date costs**
     - Dataset version:
       - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
@@ -75,17 +80,20 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
 
-5. In the destination tab, select the following details:
+7. In the destination tab, select the following details:
+    - Choose "Azure blob storage" for storage type.
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
+    - Format: `CSV`. **Parquet is not supported.**
+    - Compression type: `Gzip`. `None` **is** supported.
     - File partitioning: `Checked`
     - Overwrite Data: `Unchecked`
         - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously `Checked`, make sure to clean the files in the directory or move them to another one.
 
-   {{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
+   {{< img src="cloud_cost/improved_export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-6. Click **Next** and **Review + Create**.
+8. Click **Next** and **Review + Create**.
 
    {{% /tab %}}
    {{< /tabs >}}
