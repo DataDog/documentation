@@ -49,9 +49,9 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 
    **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
-2. Once configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][5] with the following search query: `source:snmp_traps`.
+2. Once configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][5] with the following search query: `source:snmp-traps`.
 
-  {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp_traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
+  {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
 
 **Note**: Even though SNMP traps are _forwarded as logs_, `logs_enabled` does **not** need to be set to `true`.
 

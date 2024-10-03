@@ -12,10 +12,6 @@ further_reading:
 
 ## Overview
 
-{{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
-Calculated Fields is in beta. Have feedback or a feature request? <a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">Let us know</a>.
-{{< /beta-callout >}}
-
 Use calculated fields to transform and enrich your log data at query time. Define [formulas](#formula) to:
 - [Manipulate text][1]
 - [Perform arithmetic][2]
