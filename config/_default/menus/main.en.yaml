@@ -5087,8 +5087,8 @@ menu:
     - name: Calculated Fields Expression Language
       identifier: log_explorer_calculated_fields_expression_language
       url: logs/explorer/calculated_fields/expression_language/
-      parent: log_explorer
-      weight: 507
+      parent: log_explorer_calculated_fields
+      weight: 5061
     - name: Analytics
       identifier: log_explorer_analytics
       url: logs/explorer/analytics/
