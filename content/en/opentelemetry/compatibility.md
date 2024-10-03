@@ -17,9 +17,9 @@ The following setups are supported:
 
 | Setup Type                                               | API         | SDK                     | Collector/Agent                         |
 |----------------------------------------------------------|-------------|-------------------------|-----------------------------------------|
-| **Full OpenTelemetry**                                   | OTel API    | OTel SDK                | OTel Collector                          |
-| **OTel to Datadog Agent (OTLP)**                         | OTel API    | OTel SDK                | Datadog Agent (OTLP Ingest)             |
-| **OTel API with Datadog SDK and Agent**                  | OTel API    | Datadog SDK             | Datadog Agent                           |
+| **[Full OpenTelemetry][7]**                              | OTel API    | OTel SDK                | OTel Collector                          |
+| **[OTel to Datadog Agent (OTLP)][6]**                    | OTel API    | OTel SDK                | Datadog Agent (OTLP Ingest)             |
+| **[OTel API with Datadog SDK and Agent][8]**             | OTel API    | Datadog SDK             | Datadog Agent                           |
 | **Datadog Agent with embedded OTel Collector (Preview)** | OTel API    | OTel SDK or Datadog SDK | Datadog Agent (with embedded Collector) |
 | **Full Datadog**                                         | Datadog API | Datadog SDK             | Datadog Agent                           |
 
@@ -90,3 +90,6 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [3]: /network_monitoring/performance/setup/
 [4]: /infrastructure/process/
 [5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging
+[6]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/
+[7]: /opentelemetry/collector_exporter/
+[8]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
