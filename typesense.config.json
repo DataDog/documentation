@@ -57,8 +57,7 @@
                   {
                       "name": "docs_alias_view",
                       "search_parameters": {
-                          "sort_by": "rank:desc,order:asc,_text_match:desc",
-                          "query_by": "tags,content,title,section_header",
+                          "query_by": "tags,title,content,section_header",
                           "group_by": "distinct_base_url",
                           "group_limit": 1
                       }
