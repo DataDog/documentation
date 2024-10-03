@@ -183,7 +183,7 @@ public class Example {
 
 ## Adding span events
 
-_Minimum SDK version: 1.40.0._
+<div class="alert alert-info">Adding span events requires SDK version 1.40.0 or higher.</div>
 
 You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
@@ -194,25 +194,21 @@ You can add span events using the `addEvent` API. This method requires a `name` 
     - A primitive type: string, Boolean, or number.
     - A homogeneous array of primitive type values (for example, an array of strings).
   - Nested arrays and arrays containing elements of different data types are not allowed.
-- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects an `Instant` object.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects an `Instant` object.
 
 The following examples demonstrate different ways to add events to a span:
 
 ```java
-      Attributes eventAttributes = Attributes.builder()
-          .put(AttributeKey.longKey("int_val"), 1L)
-          .put(AttributeKey.stringKey("string_val"), "two")
-          .put(AttributeKey.longArrayKey("int_array"), Arrays.asList(3L, 4L))
-          .put(AttributeKey.stringArrayKey("string_array"), Arrays.asList("5", "6"))
-          .put(AttributeKey.booleanArrayKey("bool_array"), Arrays.asList(true, false))
-          .build();
+Attributes eventAttributes = Attributes.builder()
+    .put(AttributeKey.longKey("int_val"), 1L)
+    .put(AttributeKey.stringKey("string_val"), "two")
+    .put(AttributeKey.longArrayKey("int_array"), Arrays.asList(3L, 4L))
+    .put(AttributeKey.stringArrayKey("string_array"), Arrays.asList("5", "6"))
+    .put(AttributeKey.booleanArrayKey("bool_array"), Arrays.asList(true, false))
+    .build();
 
-      span.addEvent("Event With No Attributes");
-      span.addEvent("Event With Some Attributes", eventAttributes);
-
-      span.recordException(new Exception("Error Message"));
-      span.recordException(new Exception("Error Message"), 
-          Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
+span.addEvent("Event With No Attributes");
+span.addEvent("Event With Some Attributes", eventAttributes);
 ```
 
 Read the [OpenTelemetry][21] specification for more information.
@@ -225,7 +221,8 @@ The following examples demonstrate different ways to record exceptions:
 
 ```java
 span.recordException(new Exception("Error Message"));
-span.recordException(new Exception("Error Message"), Attributes.of(stringKey("status"), "failed"));
+span.recordException(new Exception("Error Message"), 
+    Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
 ```
 
 Read the [OpenTelemetry][22] specification for more information.
