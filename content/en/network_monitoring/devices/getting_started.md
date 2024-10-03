@@ -13,7 +13,7 @@ further_reading:
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
 ---
 
-# Overview
+## Overview
 
 Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. Once the Datadog Agent is installed on a host that has access to the network, the Agent can autodiscover network devices and collect metrics right out of the box.
 
@@ -21,13 +21,23 @@ This guide explains how to configure Network Device Monitoring on your hosts, en
 
 {{< img src="network_device_monitoring/getting_started/ndm_landing_page.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
 
+## How it works
+
+The following diagram illustrates the data flow between Syslog, SNMP traps, and NetFlow information. The devices send the relevant information to the Datadog Agent over the ports as shown in the diagram (ports can be changed if needed by configuration in the Agent). For API based integrations, the Datadog Agent connects with the network device vendor software controllers or managers on-premise or in the cloud based on specific `https` API integrations instructions per vendor. The Datadog Agent, configured with NDM and deployed on-premises or in the cloud, consolidates all collected device and network data from your network and sends it to Datadog over HTTPS on port `443`. This provides unified, full-stack observability of metrics, logs, traces, monitors, and dashboards.
+
+  {{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="NDM Diagram showing the flow for Syslog, trap and Netflow collection." style="width:90%;" >}}
+
+## Next steps
+
+Follow the instructions below to configure Datadog to monitor your network devices.
+
 ## Phase 1: Prerequisites
 
 ### Install the Agent
 
 Navigate to the [Agent installation page][12], and install the [Datadog Agent][1] on your host (usually a server that is **not** the monitored device).</br>
 
-  {{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
+{{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
 
 ## Phase 2: Setup
 
@@ -50,12 +60,14 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 Alongside SNMP devices, you can monitor wireless and SD-WAN (Software-Defined Wide Area Network) environments for select vendors. Collect metrics from wireless access points, and monitor the health of SD-WAN tunnels and edge devices.
 
-SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
+{{< img src="network_device_monitoring/getting_started/sd-wan-datadog-integration.png" alt="SD-WAN reference architecture" style="width:90%;" >}}
+
+SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. For more information on Datadog SD-WAN, see the [SD-WAN reference architecture][25].
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
-  - [Meraki SD-WAN][15] (public beta)
-  - [Cisco SD-WAN][14] (public beta)
+  - [Meraki SD-WAN][15] (in Preview)
+  - [Cisco SD-WAN][14] (in Preview)
 
 ### Enrich network devices with tags 
 
@@ -130,3 +142,4 @@ Configure [NetFlow Monitoring][21] to visualize and monitor your flow records fr
 [22]: /network_monitoring/devices/supported_devices
 [23]: /network_monitoring/devices/profiles
 [24]: /network_monitoring/devices/guide/device_profiles/
+[25]: https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/

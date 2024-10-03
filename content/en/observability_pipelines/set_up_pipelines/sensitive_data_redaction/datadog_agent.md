@@ -232,6 +232,19 @@ Enter the following information based on your selected logs destination.
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 
+Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
+
+{{< tabs >}}
+{{% tab "Agent configuration file" %}}
+
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
+
+{{% /tab %}}
+{{% tab "Agent Helm values file" %}}
+
+{{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

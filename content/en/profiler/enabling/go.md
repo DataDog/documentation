@@ -74,7 +74,7 @@ To begin profiling applications:
     defer profiler.Stop()
     ```
 
-4. Optional: Enable the [timeline feature][7] (beta), see [prerequisites][8].
+4. Optional: Enable the [timeline feature][7], see [prerequisites][8].
 
 5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 

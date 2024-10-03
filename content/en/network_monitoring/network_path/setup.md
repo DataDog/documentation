@@ -88,7 +88,9 @@ Manually configure individual paths by specifying the exact endpoint you want to
    init_config:
      min_collection_interval: 60 # in seconds, default 60 seconds
    instances:
-     # configure the endpoints you want to monitor, one check instance per endpoint 
+     # configure the endpoints you want to monitor, one check instance per endpoint
+     # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+   
      - hostname: api.datadoghq.eu # endpoint hostname or IP
        protocol: TCP
        port: 443
@@ -98,9 +100,10 @@ Manually configure individual paths by specifying the exact endpoint you want to
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
      # timeout: 10 # timeout in seconds of traceroute calls, default is 10s
+
+     # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
        protocol: UDP
-       port: 53
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
@@ -123,6 +126,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
   
      ## @param port - uint16 - optional - default:<RANDOM PORT>
      ## The port of the destination endpoint.
+     ## For UDP, we do not recommend setting the port since it can make probes less reliable.
      ## By default, the port is random.
      #
      # port: <PORT>

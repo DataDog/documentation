@@ -25,11 +25,17 @@ further_reading:
   text: 대화형 세선에 참여해 데이터베이스 모니터링을 한 단계 업그레이드하세요.
 title: 데이터베이스 모니터링
 ---
+
+
+{{< learning-center-callout header="인에이블먼트 웨비나 세션에 참여하세요" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
+  데이터베이스 모니터링을 통해 비용이 많이 들고 느린 쿼리를 신속하게 찾아내는 방법을 알아보세요. 정확한 실행 세부 정보를 분석하여 병목 현상을 해결하세요.
+{{< /learning-center-callout >}}
+
 Datadog 데이터베이스 모니터링을 사용하면 호스트 전반에 있는 데이터베이스에 대한 가시성을 확보할 수 있습니다. 쿼리 성능 메트릭 내역, 설명 계획, 호스트 수준 메트릭 등을 모두 한 곳에서 살펴보고, 데이터베이스의 상태와 성능을 파악하여 문제 발생 시 문제를 해결할 수 있습니다.
 
 ## 시작하기
 
-Datadog 데이터베이스 모니터링은 자체 호스팅과 **Postgres**, **MySQL**, **Oracle**, **SQL Server**의 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 설정하고 Datadog 에이전트를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택하세요.
+Datadog 데이터베이스 모니터링은 **Postgres**, **MySQL**, **Oracle**, **SQL Server** 및 **MongoDB**의 자체 호스팅 및 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 구성하고 Datadog Agent를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택합니다.
 
 ### Postgres
 
@@ -49,6 +55,12 @@ Datadog 데이터베이스 모니터링은 자체 호스팅과 **Postgres**, **M
 ### SQL 서버
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
+<p></p>
+
+### MongoDB
+
+<div class="alert alert-info">MongoDB용 데이터베이스 모니터링은 공개 베타 버전입니다. 참여하시려면 Datadog 고객 성공 관리자에게 문의하세요.</div>
+{{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 
 ## Datadog 데이터베이스 모니터링 탐색하기
