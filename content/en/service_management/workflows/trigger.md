@@ -72,12 +72,15 @@ To trigger a workflow from a monitor, you must first add a monitor trigger to yo
 Add the workflow to your monitor:
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the **Configure notifications & automations** section, click **Add Workflow**.
+1. In the **Configure notifications & automations** section, click **+ Add Workflow**.
 1. Use the workflow mention name to search for your workflow and select it from the drop-down. Only workflows with monitor triggers appear in the list.
-1. Optionally, to pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+1. If the workflow takes input parameters:
+    1. Click **Configure Inputs** next to the monitor name and ID.
+        {{< img src="service_management/workflows/monitor-configure-inputs-arrow.png" alt="An attached workflow with a Configure Inputs link available" style="width:100%;" >}}
+    1. Enter values for the input parameters. Values can include
 1. Save the monitor.
 
-Each time the monitor threshold is hit, the monitor triggers a workflow run.
+Each time the monitor threshold is reached, the monitor triggers a workflow run.
 
 ### Test a monitor trigger
 
