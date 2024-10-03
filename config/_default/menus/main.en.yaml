@@ -1580,24 +1580,24 @@ menu:
       parent: monitors_manage
       identifier: monitors_manage_search
       weight: 601
-    - name: Monitor Status
-      url: monitors/manage/status/
-      parent: monitors_manage
-      identifier: monitors_manage_status
-      weight: 602
     - name: Check Summary
       url: monitors/manage/check_summary/
       parent: monitors_manage
       identifier: monitors_check_summary
       weight: 603
+    - name: Monitor Status
+      url: monitors/status/
+      parent: alerting
+      identifier: monitors_status
+      weight: 7
     - name: Monitor Settings
       url: monitors/settings/
-      weight: 7
+      weight: 8
       parent: alerting
       identifier: monitor_settings
     - name: Monitor Quality
       url: monitors/quality/
-      weight: 8
+      weight: 9
       parent: alerting
       identifier: monitor_quality
     - name: Guides
