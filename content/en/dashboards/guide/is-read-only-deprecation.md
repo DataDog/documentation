@@ -15,7 +15,7 @@ On **November 30, 2024**, Datadog is removing support for the `is_read_only` att
 
 ## Actions to take before November 30, 2024
 
-Before November 30, 2024, migrate off of `is_read_only` to `restricted_roles` or consider participating in the beta for Restriction Policies.
+Before November 30, 2024, migrate off of `is_read_only` to `restricted_roles` or consider participating in the Preview for Restriction Policies.
 
 ### Migrate to `restricted_roles`
 

@@ -7,8 +7,8 @@ further_reading:
   text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="false" >}}
-  Log Workspaces is in private beta.
+{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="Access the Preview!" >}}
+  Log Workspaces is in Preview.
 {{< /callout >}}
 
 ## Overview
