@@ -230,7 +230,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the HTTP/S server address. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder. For example, `0.0.0.0:9997`.
+1. Enter the HTTP/S server address, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens to this socket address for your HTTP client logs.
 1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}

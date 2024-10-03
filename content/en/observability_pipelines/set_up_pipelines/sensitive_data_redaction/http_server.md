@@ -159,7 +159,7 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the HTTP/S server address, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens to this socket address for logs from the HTTP/S server forwarder.
+1. Enter the HTTP/S server address, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens to this socket address for your HTTP client logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}
