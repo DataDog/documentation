@@ -1,6 +1,6 @@
 ---
-title: Service Owners Guide
-description: Setup and implement Datadog as a Service owner to avoid pitfalls down the road
+title: Getting Started
+description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
 - link: "/getting_started/support/"
   tag: "Documentation"

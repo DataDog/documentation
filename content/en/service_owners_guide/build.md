@@ -13,13 +13,13 @@ As your IT footprint grows, establishing standards, methods, and practices for s
 
 ## Iterating on your environment
 
-In the plan section, we spent time deeply exploring a broad range of topics that should be considered within a Datadog service design specification. In a perfect world, every one of those questions would be fully researched and answered before executing a large rollout. In this regard, enterprise IT engineering is far from a perfect world, and sometimes we need to pause and adapt as we build out our implementations.
+In the plan section, we spent time deeply exploring a broad range of topics that should be considered within a Datadog service design specification. In a perfect world, every one of those questions would be fully researched and answered before executing a large roll-out. In this regard, enterprise IT engineering is far from a perfect world, and sometimes we need to pause and adapt as we build out our implementations.
 
 ### Prioritizing features
 It is possible to stagger the installation of Datadog, and build up the complexity gradually. Some things must be done early, and others can wait. The following describes a breakdown of how you can apply primary (needs) versus secondary (wants) as you build out Datadog.  
 
 **Primary**:
-1. Unified Service Tags - `service:test` `env:prod` `version:1.x` 
+1. Tagging strategy - `service:test` `env:prod` `version:1.x` 
 2. Product profiles (Infra, APM, Synthetics, RUM, logging, etc)
 3. Primary integration specifics (ports, logins, URLs)
 
@@ -83,7 +83,7 @@ These things are the basic operations that must be completed in order to install
 **Recommendation:**   
 When it comes to deploying Datadog Agent software, it is advisable to re-use as much of your existing provisioning systems as possible. Datadog software design is flat and compliant to industry standard methods.  
 
-## Conclusion
+## Build summary
 
 Datadog's Agent design is straightforward and adaptable, making it easy to integrate into any existing system. Leverage your current file, package, and service capabilities to incorporate Datadog. While the platform provides helpful mechanisms, the best method will depend on your specific local conditions.  
 

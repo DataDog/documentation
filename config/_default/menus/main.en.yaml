@@ -945,10 +945,10 @@ menu:
       parent: essentials_heading
       identifier: service_owners_guide
       weight: 80000
-    - name: Overview
-      url: service_owners_guide/overview/
+    - name: Getting Started
+      url: service_owners_guide/getting_started/
       parent: service_owners_guide
-      identifier: service_owners_guide_overview
+      identifier: service_owners_guide_getting_started
       weight: 1
     - name: Plan
       url: service_owners_guide/plan/

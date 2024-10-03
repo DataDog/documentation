@@ -1,6 +1,6 @@
 ---
 title: Plan your Datadog implementation
-description: Setup and implement Datadog as a Service owner to avoid pitfalls down the road
+description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
@@ -12,23 +12,25 @@ further_reading:
 
 ## Design
 
-### Sizing exercise
+### Scoping exercise
 
 Defining a clear end goal is essential when starting a significant product implementation. However, it's impractical to know all requirements from the beginning. Product engineers iterate deployments, and systems operations manage changes to mitigate risk. Similarly, a large-scale Datadog deployment benefits from standard project management practices. Certain Datadog elements should be included in this process. Survey outlines are useful for assessing and planning your needs.
 
-A sample survey form might look like this: 
-
-*Application name:*  
-	*Language:*  
-		*Frameworks:*  
-	*Model Layer:*   
-	*View Layer:*  
-	*Controller layer:*  
-	*Infra Type:*  
-	*Operating systems:*
-
 **Recommendation:**   
 Start whiteboarding early, collecting or consolidating a mental survey of your outline. Create a comprehensive view of your ecosystems, application language, data storage, networking, and infrastructure.
+
+A sample survey form might look like this: 
+
+```
+Application name:  
+  Language:  
+     Frameworks:  
+  Model layer:  
+  View layer: 
+  Controller layer:  
+  Infra type:  
+  Operating systems:
+```
 
 ## General best practices 
 
@@ -57,7 +59,7 @@ As early as possible, understand [Datadog Unified Service Tagging][3].  Once dev
 
 ### RBAC
 
-At the architectural design level, there are two main areas of access control within Datadog that need to be considered: organizational structure, and internal account [Role-Based Access Control][4].  
+At the architectural design level, there are two main areas of access control within Datadog that need to be considered; organizational structure, and internal account [Role-Based Access Control][4].  
 
 #### Multi-Organizational Structure
 Larger users often have more than one Datadog account instance. In some cases, full isolation within a single company is necessary. To accommodate this topology, [multiple organizational accounts][5] can be managed together for commercial purposes while remaining completely separate technologically. It is recommended to manage child organizations from a single parent organization account. 
@@ -65,7 +67,7 @@ Larger users often have more than one Datadog account instance. In some cases, f
 #### Internal Account RBAC
 Datadog has a granular system of Role-Based Access Control that can connect to your existing SAML authentication service. SAML group-mappings can be built against the Datadog default roles and team objects. Datadog provides three default roles, however these might not be enough to model complexity of your local AD/LDAP Roles. [Service accounts][6] are available for non-interactive purposes like [API and App Key][7] ownership, separating user activity from system tasks. There are granular permissions that can model the access and protections you need.  
 
-As an additional layer, Datadog offers [Teams][8]. Teams offer an added layer of user grouping designed to be flexible, informal, and ad-hoc. Users can self-join or be unilaterally added. Teams are highly integrated into sub-tools of Datadog.
+As an additional layer, Datadog offers [Teams][8]. Teams offer an added layer of user grouping designed to be flexible, informal, and ad-hoc. Users can self-join, or be unilaterally added.  Teams are highly integrated into sub-tools of Datadog.
 
 **Recommendations:**
 
@@ -133,7 +135,7 @@ Global SIEM
 
 ### Real User Monitoring
 
-Real User Monitoring and Session Replay can give highly granular insights into what an end-user is experiencing. When considering whether to install RUM, consider installations on high value sessions where the data can be used to make meaningful changes in your environment.  Similarly, Session Replay can serve as "the picture that tells a thousand words" when it comes to troubleshooting issues observed by humans. The highest value of Real User Monitoring and Session Replay comes from tracking actual customer experience, and is most likely of limited value in non-productions scenarios.  
+Real User Monitoring and Session Replay can give highly granular insights into what an end-user is experiencing. When considering to install RUM, consider installations on high value sessions where the data can be used to make meaningful changes in your environment.  Similarly, the power of Session Replay is tremendous; it serves as "the picture that tells a thousand words" when it comes to troubleshooting issues observed by humans. The highest value of Real User Monitoring and Session Replay comes from tracking actual customer experience, and is most likely of limited value in non-productions scenarios.  
 
 **Recommendations:** 
 
@@ -150,18 +152,23 @@ Datadog has a full synthetic application suite, including testing for browser, m
 - Review [Synthetics Consumption Considerations][23]  
 - Reduce test maintenance by using [sub-tests][24].
 - Make rational choices in test location selection. Users are often from different regions around the world. Test from where your customers actually are.    
-- Use Synthetics in conjunction with APM and RUM. 
+- Use Synthetics in conjunction with APM and RUM .  
 - Define the use cases for Synthetics vs [HTTP Checks][25].  
 
 ## Optimizing data collection 
 
-Datadog can collect and observe many things in your environments. However, it is important to limit the amount of collection points and establish guard rails. In this section we will discuss the mechanisms that control the telemetry collection, and discuss how these can be codified into local standards.
+Datadog can collect and observe many things in your environments, however, it is important to limit the amount of collection points and establish guard rails. In this section we will discuss the mechanisms that control the telemetry collection, and discuss how these can be codified into local standards.
 
 ### Infrastructure
 
 Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (K8s, rancher, docker), and public cloud providers(AWS, Azure, GCP).  Datadog's unique ability allows the platform to [autodiscover][38] new objects (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) that are created within those environments. It is important to limit the number of monitored objects, as they have billing implications to consider.
 
-The usage of Datadog within these auto-discovered environment types is critical to understand. These include linkages for excluding billable objects for [AWS][39], GCP, [Azure][40], HyperV, PCF, and vSphere.
+The usage of Datadog within these auto-discovered environment types is critical to understand. 
+See the following documentation pages to configure and exclude billable objects for:
+- [AWS][39] 
+- [GCP][44] 
+- [Azure][40]
+- [Containers][45]
 
 **Recommendations:**    
 For each virtualization framework, define the exclusion methodology. Enumerate specific tags, labels, namespaces, and annotations that will be used for collection control.
@@ -191,17 +198,17 @@ Web servers are almost always inter-connected with other services through a netw
 
 ## Ancillary products
 
-From years of collective experience with customers, Datadog has developed numerous ancillary products that complement our flagship offerings.  Included in the price of Infrastructure monitoring is a robust list of ancillary products that can enhance your Datadog observability platform. Datadog is a turn-key solution, but it is important to stay focused after the initial roll-out. The following are some examples of ancillary products that can be utilized to maximize your suite of products.
+Datadog is a platform of tremendous value. From years of collective experience with customers, we have developed numerous ancillary products that complement our flagship offerings.  Included in the price of Infrastructure monitoring is a robust list of ancillary products that can enhance your Datadog observability platform. Datadog is a turn-key solution, but it is important to stay focused after the initial roll-out. The following are some examples of ancillary products that can be utilized to maximize your suite of products.
 
 ### Service Catalog
 
-Services are the base object of observability. Utilizing the [service catalog][30] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally, this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
+Services are the base object of observability. Utilizing the [service catalog][30] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
 
 {{< img src="/service_owners_guide/service_catalog.png" alt="Service Catalog home screen" style="width:90%;">}}
 
 ### Event Management 
 
-Without any additional setup, [event management][31] can be used to see third-party event statuses, events generated from the Agent and installed integrations, and more. 
+Without any additional setup, [event management][31] can be used to see 3rd party event statuses, events generated from the Agent and installed integrations, and more. 
 
 ### Error Tracking 
 
@@ -247,7 +254,7 @@ To begin mapping out your deployment patterns, use the technology survey, combin
 **Recommendation** :
 Not every tool is fit for every job.  Evaluate the Datadog product use cases, and specifically match them to your needs. Consider the levels of SDLC, application importance, and Datadog product purpose.
 
-## Conclusion
+## Plan summary
 
 It is important to develop and plan a realistic course through the implementation of Datadog. In this section we have covered the planning and best practices phase, and at this stage, your   
 Datadog footprint is set up for success. You have identified and assembled your knowledge base and team members, developed your deployment models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations will assist you in the next phases of Datadog service ownership, build and run.  
@@ -301,8 +308,10 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [36]: https://docs.datadoghq.com/agent/remot\_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
 [37]: https://docs.datadoghq.com/notebooks/
 [38]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[39]: https://docs.datadoghq.com/account_management/billing/aws/\#aws-resource-exclusion
+[39]: https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion
 [40]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension\#metric-collection
 [41]: /service_owners_guide/build
 [42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
 [43]: /integrations/ping/
+[44]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#configuration
+[45]: /containers/guide/container-discovery-management/?tab=datadogoperator
