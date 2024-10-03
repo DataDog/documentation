@@ -21,8 +21,8 @@ assets:
     source_type_id: 10111
     source_type_name: Synthetic Email
   monitors:
-    Hop-count change: assets/monitors/hop_count_change.json
-    Performance degraded: assets/monitors/performance_degraded.json
+    Hop-count is changing: assets/monitors/hop_count_change.json
+    RTT time is experiencing degradation: assets/monitors/performance_degraded.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,7 +31,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -92,9 +92,9 @@ tile:
 ## Agent
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: support@rapdev.io
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222
+ - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて

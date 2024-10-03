@@ -25,7 +25,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
 display_on_public_website: true
@@ -45,6 +46,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::ログの収集
+  - Category::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup

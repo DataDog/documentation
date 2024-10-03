@@ -206,6 +206,10 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 
 ## Data Collected
 
+### Metrics
+
+Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
+
 {{% dbm-mongodb-agent-data-collected %}}
 
 [1]: /account_management/api-app-keys/

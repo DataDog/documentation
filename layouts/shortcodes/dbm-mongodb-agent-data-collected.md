@@ -1,7 +1,3 @@
-### Metrics
-
-Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
-
 ### Slow Operations
 
 Database Monitoring for MongoDB captures slow operations from either MongoDB slow query logs or the `system.profile` collection. Slow operations are defined as those taking longer than the `slowms` threshold set in your MongoDB configuration.
