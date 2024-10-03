@@ -19,11 +19,11 @@ version of Continuous Profiler with SSI works for host, container, and Kubernete
 
 Continuous Profiler with SSI can be enabled for the following languages:
 
-| Language | Tracer library version |
-|----------|------------------------|
-| Java     | 1.37.0+                |
-| Node.js  | 4.39.0+, 5.15.0+       |
-| Python   | 2.11.1+                |
+| Language           | Tracer library version |
+|--------------------|------------------------|
+| Java               | 1.37.0+                |
+| .NET (x86_64 only) | 3.3.1+                 |
+| Node.js            | 4.39.0+, 5.15.0+       |
 
 Kubernetes deployments require at least Datadog Agent 7.57.0. Host and container deployments can
 use 7.56.x versions of the Datadog Agent.
