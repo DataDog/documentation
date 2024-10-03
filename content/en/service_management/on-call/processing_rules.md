@@ -6,6 +6,10 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 On-call processing rules allow teams to customize their response strategies for distinct types of incoming events. This enables teams to add events and urgency levels to escalation policies based on the event's metadata. Low urgency pages do not trigger escalation processes.

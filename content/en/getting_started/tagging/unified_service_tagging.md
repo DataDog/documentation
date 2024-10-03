@@ -304,6 +304,11 @@ Requirements:
 {{% /tab %}}
 
 {{% tab "ECS" %}}
+
+<div class="alert alert-warning">
+On ECS Fargate using Fluent Bit or FireLens, unified service tagging is only available for metrics and traces, not log collection.
+</div>
+
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic version tagging) environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:

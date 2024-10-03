@@ -11059,7 +11059,7 @@ components:
     IncidentResponseIncludedItem:
       description: An object related to an incident that is included in the response.
       oneOf:
-      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/IncidentUserData'
       - $ref: '#/components/schemas/IncidentAttachmentData'
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
@@ -11997,6 +11997,37 @@ components:
           $ref: '#/components/schemas/IncidentUpdateData'
       required:
       - data
+      type: object
+    IncidentUserAttributes:
+      description: Attributes of user object returned by the API.
+      properties:
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user's icon.
+          type: string
+        name:
+          description: Name of the user.
+          nullable: true
+          type: string
+        uuid:
+          description: UUID of the user.
+          type: string
+      type: object
+    IncidentUserData:
+      description: User object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentUserAttributes'
+        id:
+          description: ID of the user.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
       type: object
     IncidentUserDefinedFieldType:
       description: The incident user defined fields type.

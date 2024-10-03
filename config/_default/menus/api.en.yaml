@@ -3087,6 +3087,18 @@ menu:
           - GetTest
         unstable: []
         order: 28
+    - name: Fetch uptime for multiple tests
+      url: '#fetch-uptime-for-multiple-tests'
+      identifier: synthetics-fetch-uptime-for-multiple-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - FetchUptimes
+        unstable: []
+        order: 30
     - name: Trigger tests from CI/CD pipelines
       url: '#trigger-tests-from-ci/cd-pipelines'
       identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -3111,6 +3123,42 @@ menu:
           - TriggerTests
         unstable: []
         order: 8
+    - name: Edit a Mobile test
+      url: '#edit-a-mobile-test'
+      identifier: synthetics-edit-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - UpdateMobileTest
+        unstable: []
+        order: 3
+    - name: Get a Mobile test
+      url: '#get-a-mobile-test'
+      identifier: synthetics-get-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - GetMobileTest
+        unstable: []
+        order: 9
+    - name: Create a mobile test
+      url: '#create-a-mobile-test'
+      identifier: synthetics-create-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - CreateSyntheticsMobileTest
+        unstable: []
+        order: 2
     - name: Delete tests
       url: '#delete-tests'
       identifier: synthetics-delete-tests

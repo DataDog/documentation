@@ -107,6 +107,10 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 For a full list of options, see the `datadog-ci` [Flutter Symbols documentation][5].
 
+### List uploaded symbol files
+
+See the [RUM Debug Symbols][10] page to view all uploaded symbols.
+
 ## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
@@ -163,3 +167,4 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 [7]: https://docs.flutter.dev/deployment/flavors
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
 [9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html
+[10]: https://app.datadoghq.com/source-code/setup/rum
