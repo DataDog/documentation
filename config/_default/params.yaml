@@ -118,6 +118,8 @@ code_language_ids:
     rust: "Rust"
     dd-api: "Datadog API"
     otel: "OpenTelemetry API"
+    status_legacy: "Status Page (Legacy)"
+    status_page: "Status Page"
 branch: ""
 
 signupclass: sign-up-trigger

@@ -1586,7 +1586,7 @@ menu:
       identifier: monitors_check_summary
       weight: 603
     - name: Monitor Status
-      url: monitors/status/
+      url: monitors/status/status_page
       parent: alerting
       identifier: monitors_status
       weight: 7

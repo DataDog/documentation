@@ -1,6 +1,9 @@
 ---
-title: Monitor Status
+title: Monitor Status Page (Legacy)
 description: "Get an overview of your monitor status over time"
+code_lang: status_legacy
+type: multi-code-lang
+weight: 2
 aliases:
 - /monitors/monitor_status/
 - /monitors/manage/status
