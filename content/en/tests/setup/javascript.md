@@ -48,6 +48,11 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{< tabs >}}
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}
@@ -614,11 +619,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 ## Manual testing API
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
-</div>
-
-<div class="alert alert-warning">
-  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
+  <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
 If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
@@ -723,7 +724,7 @@ The payload to be published is a dictionary `<string, string|number>` of tags or
 When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
 
 ```shell
-NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
 ```
 
 

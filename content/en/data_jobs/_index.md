@@ -19,7 +19,7 @@ Data Jobs Monitoring provides visibility into the performance and reliability of
 
 ## Setup
 
-Data Jobs Monitoring is supported for Amazon EMR, Databricks (AWS, Azure, Google Cloud), and Spark on Kubernetes.
+Data Jobs Monitoring is supported for Amazon EMR, Databricks (AWS, Azure, Google Cloud), Google Dataproc, and Spark on Kubernetes.
 
 To get started, select your platform and follow the installation instructions:
 

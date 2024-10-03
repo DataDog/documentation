@@ -20,7 +20,7 @@
     [datadog]
     Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
     ```
-    
+
 4. Update the `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` file with your DSN information.
 
     Example:
@@ -50,6 +50,25 @@ instances:
     adoprovider: MSOLEDBSQL
     include_ao_metrics: true  # If Availability Groups is enabled
     include_fci_metrics: true   # If Failover Clustering is enabled
+```
+
+### Monitoring SQL Server Agent Jobs
+
+**Note: For monitoring SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database**. Monitoring of SQL Server Agent jobs is supported on SQL Server versions 2016 and newer.
+Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
+
+```yaml
+instances:
+  - dbm: true
+    host: 'shopist-prod,1433'
+    username: datadog
+    password: '<PASSWORD>'
+    connector: adodbapi
+    adoprovider: MSOLEDBSQL
+    agent_jobs:
+      enabled: true
+      collection_interval: 15
+      history_row_limit: 10000
 ```
 
 ### One Agent connecting to multiple hosts

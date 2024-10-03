@@ -55,7 +55,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 
 **참고**: Dogwrap 도움 명령 `dogwrap --help`을 사용하여 사용 가능한 모든 옵션을 검색합니다.
 
-`cron`은 `dogwrap`의 실제 예시입니다. 매일 Postgres 테이블을 vacuuming하는 cron 스크립트를 가지고 있다면:
+`cron`은 `dogwrap`의 실제 예시입니다. 매일 Postgres 테이블을 vacuuming하는 cron 스크립트를 가지고 있다면:
 
 ```bash
 0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
