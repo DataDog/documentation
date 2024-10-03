@@ -3,6 +3,14 @@ aliases:
 - /developers/integrations/oauth_for_data_integrations/
 title: OAuth for Integrations
 description: Use OAuth to authenticate integrations.
+further_reading:
+- link: "/developers/authorization/oauth2_in_datadog/"
+  tag: "Documentation"
+  text: "OAuth2 in Datadog"
+- link: "https://www.datadoghq.com/blog/oauth/"
+  tag: "Blog"
+  text: "Authorize your Datadog integrations with OAuth"
+
 ---
 
 ## Overview
@@ -124,12 +132,106 @@ You cannot edit a published OAuth client directly, so only go through the publis
 
 For more information about publishing your integration tile and creating your pull request, see the [Marketplace and Integrations documentation][7].
 
-## Further Reading
+## Troubleshooting
 
-Additional helpful documentation, links, and articles:
+### The scopes for sending metrics, events and logs are not listed in the list of scopes
 
-- [OAuth 2.0 in Datadog][1]
-- [Authorize your Datadog integrations with OAuth][11]
+To send data into Datadog, select the  `api_keys_write` scope, which creates an API Key on behalf of the user. Use that API key to make calls to the Datadog API.
+
+### API Keys & Tokens
+
+
+
+**A:** 
+**Q: Does the api key or refresh tokens expire?**
+
+**A:** Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the refresh token, the user must re-authorize the integration to generate new refresh and access tokens. For reference: ![][image1][OAuth2 Authorization Endpoints Reference](https://docs.datadoghq.com/developers/authorization/oauth2_endpoints/?tab=tokenendpoints#exchange-authorization-code-for-access-token)
+
+**Q: How do I find my API key again?**
+
+**A:** After calling the [api\_keys/marketplace](https://docs.datadoghq.com/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#post-apiv2api_keysmarketplace) endpoint, you’ll receive the API Key in the response. Note: You won’t be able to view it again or regenerate it. You will need to store the response so it can be used to send data continuously.
+
+If you lost the API Key in the testing phase, partners can follow the steps to revoke the API Key in their Partner Sandbox Account: 
+
+1. Go to your  [Datadog API Keys Management page](https://app.datadoghq.com/organization-settings/api-keys)   
+2. Click on the API Key that was created with the POST request  
+3. Select “Revoke” to revoke the API Key. Note: The API key will have "OAuth Client API Key" in the name.    
+4. Once revoked, the API Key will be disabled and you will repeat the post request to create a new API Key. 
+
+Once revoked, you will need to follow the steps to re-install the integration and go through the OAuth flow again. 
+
+### OAuth Testing & Errors
+
+**Q: We are testing our OAuth client with another account, but we’re getting the following error:**
+
+invalid\_request \- Invalid client\_id parameter value
+
+**A:** You can only authorize the OAuth client from the account it was created in (partner's sandbox account). This error will occur if you try to authorize outside of that account until the client is published.
+
+ 
+
+**Q: I am getting a forbidden error because I don’t have an app key to send data via the api**
+
+A: The app key is replaced by the access token. Use the access\_token to make API calls, and for endpoints requiring an API key, use the created API key with the access token in the authorization header:
+
+headers \= {"Authorization": "Bearer {}".format(access\_token)}.
+
+ **Q: As we are conducting our final testing of the published client, we see the following error: {"errors": \["invalid\_request \- Mismatching redirect URI."\]}** 
+
+**A:** This likely has to do with configuration differences in your testing client vs. your published client. Here are a few things that can cause this issue:
+
+* You are trying to use your published client before the integration has been published to your sandbox. You will need to use your testing client until the integration has been merged to your sandbox account.   
+* Using the incorrect client\_id in your authorization request (likely using the client\_id of your testing client instead of the client\_id of your published client)  
+* Using the incorrect redirect\_uri in your authorization request (you may be using the staging redirect\_uri that you were using for testing, rather than your prod one)
+
+**Q: We are seeing an error when making an API call to orgs with subdomains.**  
+
+A: When connecting to the Datadog API, do not include the subdomain in the API call. For example, use datadoghq.eu instead of bigcorp.datadoghq.eu. Although the site parameter returns the subdomain, when you make calls/connect to the Datadog API, you should not be including the sub-domain, only the regional site. 
+
+**Q: I’m getting a “Forbidden” error when trying to make an API call/request to a specific endpoint, even though I’ve enabled the scope corresponding to that endpoint**
+
+A: This can happen if the API key, session, or OAuth token is invalid or expired. Ensure they are valid.
+
+**Q: We've just started working on our Datadog integration and ran into an OAuth flow problem with PKCE. I've tried running the authorize and token endpoints manually and getting the same error "Invalid code or code verifier".**
+
+A: Ensure the content-type header is set to “application/json” or “application/x-www-form-urlencoded” 
+
+### General Troubleshooting
+
+**Q: How do we support users in other sites? How can we know what a customer’s Datadog site is?**
+
+**A:** To make OAuth work for users across all Datadog regions, you will need to ensure that you’re making the correct API calls based on the users region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding\_url. You will use this site parameter in your calls to the Authorize and Token endpoints. **Please note that if a user kicks off authorization directly from your platform, this site parameter will not be sent, and the user will be prompted to select their site on the Datadog authorize page.**
+
+ Additionally, Your calls to the Datadog API must match the user’s region, i.e. https://trace.browser-intake-datadoghq.com for US, vs. https://public-trace-http-intake.logs.datadoghq.eu for EU.
+
+ 
+
+**Q:** **Is there a way to test multiple orgs and different regions prior to publishing?**
+
+**A:** You cannot test other organizations with your testing client. You can [test in other regions](https://docs.datadoghq.com/developers/integrations/oauth_for_integrations/#test-multiple-datadog-sites) by copying your client into your EU sandbox to make sure that the flow works, but you will need to get your OAuth client published before testing other organizations. 
+
+Note: Once we publish the OAuth client, we will publish the tile in your org only. Once published, you’ll be able to test freely from outside organizations.
+
+ 
+
+**Q: What's the difference between publishing an OAuth client and publishing the integration?**
+
+**A:** When implementing OAuth with Datadog you'll be working with two OAuth clients:
+
+1. Your testing client. This is created as soon as you click "Create Confidential Client" in the Developer Platform. This client only allows for authorization within your own organization.   
+2. Your published client. This is created after you click "Kick off publishing process" in the Publishing tab of the Developer Platform. You'll receive a new Client ID and Client Secret, and this will be what you'll use in your own production environment so that any Datadog organization can authorize your integration once it's completed.
+
+If you delete your client and create a new one in the Developer Platform, that new one will be a testing client, and will not be able to be authorized from outside of your organization. In order to be able to authorize from other organizations, you will need to go through the publishing process to create a published client. 
+
+Just because you have a published OAuth client, does not mean that you have a published integration. An integration is published when all customers can see the tile appear on the [Integrations page](https://app.datadoghq.com/integrations). There's a separate process to create and publish that tile which you [can read more about here](https://docs.datadoghq.com/developers/marketplace/offering) (even though the article is titled Marketplace offerings, the instructions apply for free integration offerings as well). 
+
+[image1]: <data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAA2dJREFUOE9tkm1Mk1cUx//3Pu2wtlA2xNICQmumILRu6nQRzZhR1AWjIdPJsrkgTHDLwrLND8uyxfnJOecnN8YGmvhSC27wYeLLB50R2BJddJSiolI6kLYCHRT6/rzc5blLWLbsfDq5OeeX87vnEPwnyssPapbMLtMjqSyQmZTDCM0lhFkJpTYmK4UMZBEVaFdL3+6P1FZSu+zsaqqhOxmQL2iIWdAI5lRcWggCAxgTGIBNbyyF3piGru8HICZlEEI6W/qrqzigzu6sYQwnrPYs1B9Zi3AogUstd1G63gLLYiOSMRFLVi3E4M1xePtDuNDsUdt6Wz3V6/4GOJwbwMjVj89sgs2RBf+jMLLzDdCmCXNyiaiI04duIcuix8WWuyACfRTuo0XnsUsm++zOIgUYqDu8lq55pQCj96dANRQ5hemYGI0gx5qBeETED8d+R0+HF7KsgApkysjE/KPuPVFSW9L+DIjk0xm06VWNyxHwhlHxVjG87hB3/rRtMwSBwNMbwKmDtzA1HgOhJEVFqfC7e28GyL6VzVo5ZRgEI9bNNcXY8a6dj59KyFBkhnl6DZjCMOmPou/6GFxf3FbNGajoaHXv8RBVtLb0XA/AykrKzHi/qRyEv/4Tk2NRfPthD7a/Y8fxxm7IkqJCKls91V28tM5xzsUU9pqgodjWUILK+lJEppMYH42goOhpMAbcufYY6md2d3qR96yRhQIx9wfNLz/HAfUrXEeklHJAzQ2ZaTh8eRsSUQndHUNzKqu3LoKpIIMrqRNdPTsY/PG3oTwOaFjp2i8mlW/UXNVo/PolhCfjCPpmUbzGNOfy8PYELLYMtB29g3k6zZ+9zuECDthb6qogUK7Y15nx+ieroEgMmSYdBnqDWLExj19fbFbEoVcvQdBSrvdipXW6u+OBnQPeXu4sWZCb7vmsfQsfMeibwfhIhDubbUYcf+8GntIJCHhn5qYp224L/do5tJEDap5vzy5cnDF24OQGrc6g5UU/NXkgpmT8cW8KjwenkZ1nQJZlPvSZaeqW5CfDs/GBXwJVHKDegkAzP2/4qszuWJ9bqb5db3s4MT2Z8IsJOT0SToWf+Ga8EyMz/nhUCqaSoo8pdASSvu9fG2eMGft7/MeG3aEXfnY9aAqFY6dMMOFLd0WMqMfzP/EXZwB/OTeZMwAAAAAASUVORK5CYII=>
+
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
@@ -141,5 +243,4 @@ Additional helpful documentation, links, and articles:
 [8]: https://docs.datadoghq.com/getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: https://www.datadoghq.com/blog/oauth/
 [12]: https://docs.datadoghq.com/api/latest/using-the-api/
