@@ -14,11 +14,11 @@ To set up the quota processor:
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is not selected, then those logs and the logs that did not match the filter query are sent to the next step in the pipeline.
 1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.  
     a. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.  
-    b. Click **Add Field** if you want to add another partition.  
         i. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
         ii. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
         - Click **Download as CSV** for an example of how to structure the CSV.  
-        - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.
+        - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.  
+    b. Click **Add Field** if you want to add another partition.
 
 #### Examples
 
