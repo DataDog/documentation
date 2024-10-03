@@ -6,8 +6,8 @@ further_reading:
   text: "Functions and Operators"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/datadog-sheets/" btn_hidden="false" header="Join the Beta!">}}
-Sheets is available in <strong>private beta</strong>. To qualify for this product beta, you should have existing use cases where you currently use spreadsheets (such as Excel or Google Sheets) with Datadog’s metrics, logs, or RUM data. If you're interested in this feature, complete the form to request access.
+{{< callout url="https://www.datadoghq.com/private-beta/datadog-sheets/" btn_hidden="false" header="Join the Preview!">}}
+Sheets is available in <strong>Preview</strong>. To qualify for this preview, you should have existing use cases where you currently use spreadsheets (such as Excel or Google Sheets) with Datadog’s metrics, logs, or RUM data. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview
