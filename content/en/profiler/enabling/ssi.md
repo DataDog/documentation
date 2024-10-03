@@ -64,7 +64,7 @@ datadog:
 ```
 
 If you already have the Datadog Helm chart, ensure it is updated to at least version 3.71.0.
-Use the "latest" image tag to install a recent Agent version with support for profiling, as 
+Use the "latest" image tag to install a recent Agent version with support for profiling, as
 the Datadog Helm chart defaults to an older Agent version.
 
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
@@ -91,7 +91,7 @@ spec:
           value: "auto"
 ```
 
-Use the "latest" image tag to install a recent Agent version with support for profiling, as 
+Use the "latest" image tag to install a recent Agent version with support for profiling, as
 the Datadog Operator defaults to an older Agent version.
 
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
