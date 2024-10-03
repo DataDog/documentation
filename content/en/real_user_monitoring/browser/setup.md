@@ -17,7 +17,7 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 ## Setup
 
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="false">}}
 You can now auto-inject the Browser SDK in your application instead of installing it manually. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
