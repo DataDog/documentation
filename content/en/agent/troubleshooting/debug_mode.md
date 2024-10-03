@@ -40,6 +40,8 @@ agent config set log_level debug
 
 You **cannot** change the log level for the trace-agent container at runtime like you can do for the agent container. A redeployment after setting `DD_LOG_LEVEL` variable to `debug` is still necessary for the dedicated trace-agent container.
 
+If using [**Helm**][4], replace `logLevel: INFO` with `logLevel: DEBUG` in your `datadog-values.yaml` file and re-deploy.
+
 ## Agent log level
 
 The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
