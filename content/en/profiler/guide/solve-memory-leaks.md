@@ -29,8 +29,6 @@ The walkthrough guides you through several steps to:
 
 ## Requirements
 
-<div class="alert alert-warning">The walkthrough is in public beta and prone to change. More languages and infrastructure will be supported over time</div>
-
 To use this walkthrough, you need:
 * A Go service running on Kubernetes.
 * [Continuous Profiler enabled][3].
