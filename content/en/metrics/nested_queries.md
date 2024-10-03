@@ -93,7 +93,7 @@ In the UI or JSON tab, it would look as follows:
 
 ## Percentiles
 
-Percentile calculations provide deeper insights into data distribution, setting performance thresholds, and identifying outliers/extremes in your data.
+Percentile calculations provide deeper insights into your data's distribution by allowing you to set performance thresholds, and identifying outliers/extremes in your data.
 
 Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
 
