@@ -260,7 +260,7 @@ The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an opt
 
 ###### Test source file information
 
-The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional `TestSourceFileInfo` object as the `source_file_info` parameter. A `TestSourceFileInfo` object represents the path and, optionally, the start and end lines for a given test.
+The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional `TestSourceFileInfo` object as the `source_file_info` parameter. A `TestSourceFileInfo` object represents the path and optionally, the start and end lines for a given test.
 
 The `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` method accepts three positional parameters:
 - `path`: a `pathlib.Path` object (made relative to the repo root by the `Test Visibility` API)
