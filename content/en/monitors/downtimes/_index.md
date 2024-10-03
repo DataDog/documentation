@@ -192,7 +192,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [6]: /monitors/guide/suppress-alert-with-downtimes/
 [7]: /monitors/notify/#overview
 [8]: /integrations/#cat-notification
-[9]: /monitors/manage/status/
+[9]: /monitors/status/
 [10]: /service_management/events/explorer
 [11]: /api/latest/downtimes/#cancel-a-downtime
 [12]: /account_management/#preferences
