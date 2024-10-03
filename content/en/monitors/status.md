@@ -3,6 +3,7 @@ title: Monitor Status
 description: "Get an overview of your monitor status over time"
 aliases:
 - /monitors/monitor_status/
+- /monitors/manage/status
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
