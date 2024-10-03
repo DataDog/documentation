@@ -12,11 +12,11 @@ To set up the quota processor:
 1. Check the **Drop events** checkbox if you want to drop all events when your quota is met. Leave it unchecked if you plan to set up a [monitor][5001] that sends an alert when the quota is met.
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is selected, then those logs are dropped. In this case, only logs that did not match the filter query are sent to the next step in the pipeline.
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is not selected, then those logs and the logs that did not match the filter query are sent to the next step in the pipeline.
-1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.
-1. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.
-1. Click **Add Field** if you want to add another partition.  
-    a. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
-    b. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
+1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.  
+    a. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.  
+    b. Click **Add Field** if you want to add another partition.  
+        i. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
+        ii. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
         - Click **Download as CSV** for an example of how to structure the CSV.  
         - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.
 
@@ -28,9 +28,7 @@ Use **Partition by** if you want to set a quota on a specific service or region.
 
 ##### Example for the "ignore when missing" option
 
-Select **Ignore when missing** if you want the quota applied only to events that match the partition. For example:
-
-If the Worker receives the following set of events:
+Select **Ignore when missing** if you want the quota applied only to events that match the partition. For example, if the Worker receives the following set of events:
 
 ```
 {"service":"a", "source":"foo", "message": "..."}

@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the rsyslog or syslog-ng source so that you route only useful logs to your destinations.
+Set up the Observability Pipelines Worker with the rsyslog or syslog-ng source so that you only route useful logs to your destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 

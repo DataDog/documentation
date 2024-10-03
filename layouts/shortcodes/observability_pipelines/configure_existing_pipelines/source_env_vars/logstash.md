@@ -1,3 +1,3 @@
 - Logstash address and port:
-    - The Observability Pipelines Worker listens on this address for incoming log messages. For example, `0.0.0.0:9997`.
+    - The Observability Pipelines Worker listens on this address, such as `0.0.0.0:9997`, for incoming log messages.
     - Stored in the environment variable as: `DD_OP_SOURCE_LOGSTASH_ADDRESS`

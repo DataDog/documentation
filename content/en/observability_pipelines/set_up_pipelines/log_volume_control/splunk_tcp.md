@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-This document walks you through the following steps to set up the Observability Pipelines Worker with Splunk Heavy or Universal Forwarders so that you route only useful logs to your destinations.
+This document walks you through the following steps to set up the Observability Pipelines Worker with Splunk Heavy or Universal Forwarders so that you only route useful logs to your destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
