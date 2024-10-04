@@ -15,11 +15,11 @@ title: Early Flake Detection
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">현재 선택한 사이트({{< region-param key="dd_site_name" >}})에서는 조기 결함 감지 기능을 사용할 수 없습니다.</div>
-{< /site-region >}}
+{{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
 조기 결함 감지 기능은 공개 베타 버전으로 제공됩니다.
-{< /callout >}}
+{{< /callout >}}
 
 ## 개요
 
