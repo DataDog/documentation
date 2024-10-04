@@ -21,7 +21,7 @@ For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 
 
 ## When to use OAuth in an integration
 
-OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks. 
+OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks.
 
 ## Build an integration with OAuth
 
@@ -72,6 +72,7 @@ Once you have implemented the OAuth protocol, you should test your OAuth client 
 To test your OAuth client, complete the following steps:
 
 #### Test that authorization is working properly
+
 Ensure that you do not encounter any errors when going through the basic authorization flow.
 
    1. Navigate to the Developer Platform, click the Edit icon on your app, and open the **OAuth and Permissions** tab.
@@ -80,11 +81,13 @@ Ensure that you do not encounter any errors when going through the basic authori
    4. Go through the OAuth flow and authorize your integration.
 
 #### Create an API Key
-If your OAuth client requests the `api_keys_write` scope, ensure that you can successfully make a request to the `marketplace_create_api` endpoint with your token in the headers of the request.
+
+If your OAuth client requests the `api_keys_write` scope, ensure that you can successfully make a request to the `marketplace` endpoint with your token in the headers of the request. 
 
 If successful, this request returns an API key that you can find on the [API Keys Management page][10]. You must securely save this key to use it for submitting data into Datadog on behalf of the user. **You cannot access this API key value again after the initial request response**.
 
 #### Test multiple Datadog sites
+
 Test that your OAuth client can work across multiple [Datadog sites][8] by kicking off authorization from your EU Datadog sandbox organization.
    1. If you do not have access to a sandbox account on a different site, contact `ecosystems@datadog.com`.
    2. Export your app manifest from the organization in the *original* US1 Datadog site by navigating to the app you've created in the Developer Platform, clicking the Gear icon to the right of **Documentation**, and clicking **Export App Manifest**.
@@ -93,6 +96,7 @@ Test that your OAuth client can work across multiple [Datadog sites][8] by kicki
    5. Navigate to the **Test Authorization** button, click it, and go through the OAuth flow.
 
 ### Confirm data flow for all scopes
+
 Ensure that you are able to send data in, pull data out, or edit data for each scope you've requested.
 
 ### Publish the OAuth client
@@ -134,113 +138,110 @@ For more information about publishing your integration tile and creating your pu
 
 ## Troubleshooting
 
-### The scopes for sending metrics, events and logs are not listed in the list of scopes
+### The list of API scopes does not include sending metrics, events and logs
 
-To send data into Datadog, select the  `api_keys_write` scope, which creates an API Key on behalf of the user. Use that API key to make calls to the Datadog API.
+To send data to Datadog, use the `api_keys_write` scope when generating an API key on behalf of the user. For more information, see [Create an API key](#create-an-api-key).
 
-### API Keys & Tokens
+### API key and token expiration
 
+Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the token, the user must reauthorize the integration to generate new refresh and access tokens. For more information, see the [OAuth2 Authorization Endpoints Reference][13].
 
+### Retrieving API keys
 
-**A:** 
-**Q: Does the api key or refresh tokens expire?**
+After you create an key using the [api_keys/marketplace][14] endpoint, it is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
 
-**A:** Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the refresh token, the user must re-authorize the integration to generate new refresh and access tokens. For reference: ![][image1][OAuth2 Authorization Endpoints Reference](https://docs.datadoghq.com/developers/authorization/oauth2_endpoints/?tab=tokenendpoints#exchange-authorization-code-for-access-token)
+1. Navigate to the [Datadog API Keys Management page][15].
+1. Look for the API key named `OAuth Client API Key` and select it.
+1. Click **Revoke** to disable the API key.
+1. Follow the steps in [Create an API key](#create-an-api-key) to create a new key.
+1. Reinstall the integration and repeat the OAuth flow.
 
-**Q: How do I find my API key again?**
+### Invalid client ID
 
-**A:** After calling the [api\_keys/marketplace](https://docs.datadoghq.com/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#post-apiv2api_keysmarketplace) endpoint, you’ll receive the API Key in the response. Note: You won’t be able to view it again or regenerate it. You will need to store the response so it can be used to send data continuously.
+Error
+: `invalid_request - Invalid client_id parameter value`
 
-If you lost the API Key in the testing phase, partners can follow the steps to revoke the API Key in their Partner Sandbox Account: 
+Until an OAuth client is published, you can only authorize the client from the account it was created in (the partner's sandbox account). This error occurs if you try to authorize outside of that account before the client is published.
 
-1. Go to your  [Datadog API Keys Management page](https://app.datadoghq.com/organization-settings/api-keys)   
-2. Click on the API Key that was created with the POST request  
-3. Select “Revoke” to revoke the API Key. Note: The API key will have "OAuth Client API Key" in the name.    
-4. Once revoked, the API Key will be disabled and you will repeat the post request to create a new API Key. 
+### Forbidden errors related to app keys
 
-Once revoked, you will need to follow the steps to re-install the integration and go through the OAuth flow again. 
+OAuth clients use an `access_token` for authentication. Use the `access_token` to make calls to Datadog API endpoints by sending it as a part of the authorization header of your request:
 
-### OAuth Testing & Errors
+```python
+headers = {"Authorization": "Bearer {}".format(access_token)}
+```
 
-**Q: We are testing our OAuth client with another account, but we’re getting the following error:**
+For more information, see [Implement the OAuth protocol][17].
 
-invalid\_request \- Invalid client\_id parameter value
+### Forbidden errors on API requests
 
-**A:** You can only authorize the OAuth client from the account it was created in (partner's sandbox account). This error will occur if you try to authorize outside of that account until the client is published.
+If you're getting a forbidden error when trying to make an API call to a specific endpoint and you've enabled the correct scope for that endpoint, it's possible your API key, session, or OAuth token is invalid or has expired.
 
- 
+### Mismatching redirect URI
 
-**Q: I am getting a forbidden error because I don’t have an app key to send data via the api**
+Error
+: `invalid_request - Mismatching redirect URI`
 
-A: The app key is replaced by the access token. Use the access\_token to make API calls, and for endpoints requiring an API key, use the created API key with the access token in the authorization header:
+This error is usually the result of configuration differences between your testing client and your published client. Verify the following:
+- Ensure you are using the correct `client_id` during authorization. For example, you might be using the `client_id` of your testing client instead of the client_id of your published client.
+- Confirm you are using the correct redirect URI. For example, if your client is published, the redirect URI should match the one configured for production, and not the URI you used for testing.
+- Ensure you are using the correct client. Use your testing client until the integration is published to your sandbox account.
 
-headers \= {"Authorization": "Bearer {}".format(access\_token)}.
+### Subdomain-related errors
 
- **Q: As we are conducting our final testing of the published client, we see the following error: {"errors": \["invalid\_request \- Mismatching redirect URI."\]}** 
-
-**A:** This likely has to do with configuration differences in your testing client vs. your published client. Here are a few things that can cause this issue:
-
-* You are trying to use your published client before the integration has been published to your sandbox. You will need to use your testing client until the integration has been merged to your sandbox account.   
-* Using the incorrect client\_id in your authorization request (likely using the client\_id of your testing client instead of the client\_id of your published client)  
-* Using the incorrect redirect\_uri in your authorization request (you may be using the staging redirect\_uri that you were using for testing, rather than your prod one)
-
-**Q: We are seeing an error when making an API call to orgs with subdomains.**  
-
-A: When connecting to the Datadog API, do not include the subdomain in the API call. For example, use datadoghq.eu instead of bigcorp.datadoghq.eu. Although the site parameter returns the subdomain, when you make calls/connect to the Datadog API, you should not be including the sub-domain, only the regional site. 
-
-**Q: I’m getting a “Forbidden” error when trying to make an API call/request to a specific endpoint, even though I’ve enabled the scope corresponding to that endpoint**
-
-A: This can happen if the API key, session, or OAuth token is invalid or expired. Ensure they are valid.
-
-**Q: We've just started working on our Datadog integration and ran into an OAuth flow problem with PKCE. I've tried running the authorize and token endpoints manually and getting the same error "Invalid code or code verifier".**
-
-A: Ensure the content-type header is set to “application/json” or “application/x-www-form-urlencoded” 
-
-### General Troubleshooting
-
-**Q: How do we support users in other sites? How can we know what a customer’s Datadog site is?**
-
-**A:** To make OAuth work for users across all Datadog regions, you will need to ensure that you’re making the correct API calls based on the users region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding\_url. You will use this site parameter in your calls to the Authorize and Token endpoints. **Please note that if a user kicks off authorization directly from your platform, this site parameter will not be sent, and the user will be prompted to select their site on the Datadog authorize page.**
-
- Additionally, Your calls to the Datadog API must match the user’s region, i.e. https://trace.browser-intake-datadoghq.com for US, vs. https://public-trace-http-intake.logs.datadoghq.eu for EU.
-
- 
-
-**Q:** **Is there a way to test multiple orgs and different regions prior to publishing?**
-
-**A:** You cannot test other organizations with your testing client. You can [test in other regions](https://docs.datadoghq.com/developers/integrations/oauth_for_integrations/#test-multiple-datadog-sites) by copying your client into your EU sandbox to make sure that the flow works, but you will need to get your OAuth client published before testing other organizations. 
-
-Note: Once we publish the OAuth client, we will publish the tile in your org only. Once published, you’ll be able to test freely from outside organizations.
-
- 
-
-**Q: What's the difference between publishing an OAuth client and publishing the integration?**
-
-**A:** When implementing OAuth with Datadog you'll be working with two OAuth clients:
-
-1. Your testing client. This is created as soon as you click "Create Confidential Client" in the Developer Platform. This client only allows for authorization within your own organization.   
-2. Your published client. This is created after you click "Kick off publishing process" in the Publishing tab of the Developer Platform. You'll receive a new Client ID and Client Secret, and this will be what you'll use in your own production environment so that any Datadog organization can authorize your integration once it's completed.
-
-If you delete your client and create a new one in the Developer Platform, that new one will be a testing client, and will not be able to be authorized from outside of your organization. In order to be able to authorize from other organizations, you will need to go through the publishing process to create a published client. 
-
-Just because you have a published OAuth client, does not mean that you have a published integration. An integration is published when all customers can see the tile appear on the [Integrations page](https://app.datadoghq.com/integrations). There's a separate process to create and publish that tile which you [can read more about here](https://docs.datadoghq.com/developers/marketplace/offering) (even though the article is titled Marketplace offerings, the instructions apply for free integration offerings as well). 
-
-[image1]: <data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAA2dJREFUOE9tkm1Mk1cUx//3Pu2wtlA2xNICQmumILRu6nQRzZhR1AWjIdPJsrkgTHDLwrLND8uyxfnJOecnN8YGmvhSC27wYeLLB50R2BJddJSiolI6kLYCHRT6/rzc5blLWLbsfDq5OeeX87vnEPwnyssPapbMLtMjqSyQmZTDCM0lhFkJpTYmK4UMZBEVaFdL3+6P1FZSu+zsaqqhOxmQL2iIWdAI5lRcWggCAxgTGIBNbyyF3piGru8HICZlEEI6W/qrqzigzu6sYQwnrPYs1B9Zi3AogUstd1G63gLLYiOSMRFLVi3E4M1xePtDuNDsUdt6Wz3V6/4GOJwbwMjVj89sgs2RBf+jMLLzDdCmCXNyiaiI04duIcuix8WWuyACfRTuo0XnsUsm++zOIgUYqDu8lq55pQCj96dANRQ5hemYGI0gx5qBeETED8d+R0+HF7KsgApkysjE/KPuPVFSW9L+DIjk0xm06VWNyxHwhlHxVjG87hB3/rRtMwSBwNMbwKmDtzA1HgOhJEVFqfC7e28GyL6VzVo5ZRgEI9bNNcXY8a6dj59KyFBkhnl6DZjCMOmPou/6GFxf3FbNGajoaHXv8RBVtLb0XA/AykrKzHi/qRyEv/4Tk2NRfPthD7a/Y8fxxm7IkqJCKls91V28tM5xzsUU9pqgodjWUILK+lJEppMYH42goOhpMAbcufYY6md2d3qR96yRhQIx9wfNLz/HAfUrXEeklHJAzQ2ZaTh8eRsSUQndHUNzKqu3LoKpIIMrqRNdPTsY/PG3oTwOaFjp2i8mlW/UXNVo/PolhCfjCPpmUbzGNOfy8PYELLYMtB29g3k6zZ+9zuECDthb6qogUK7Y15nx+ieroEgMmSYdBnqDWLExj19fbFbEoVcvQdBSrvdipXW6u+OBnQPeXu4sWZCb7vmsfQsfMeibwfhIhDubbUYcf+8GntIJCHhn5qYp224L/do5tJEDap5vzy5cnDF24OQGrc6g5UU/NXkgpmT8cW8KjwenkZ1nQJZlPvSZaeqW5CfDs/GBXwJVHKDegkAzP2/4qszuWJ9bqb5db3s4MT2Z8IsJOT0SToWf+Ga8EyMz/nhUCqaSoo8pdASSvu9fG2eMGft7/MeG3aEXfnY9aAqFY6dMMOFLd0WMqMfzP/EXZwB/OTeZMwAAAAAASUVORK5CYII=>
+When connecting to the Datadog API, do not include the subdomain in the API call. For example, use `datadoghq.eu` instead of `bigcorp.datadoghq.eu`.
 
 
+### OAuth with PKCE
+
+Error
+: `Invalid code or code verifier`
+
+For issues with the PKCE OAuth flow, ensure the `content-type` header is correctly set to `application/json` or `application/x-www-form-urlencoded`.
+
+## General Troubleshooting
+
+### Cross-Regional Support
+
+To support users in various regions, make correct API calls based on user location. During authorization, a `site` parameter is sent from the onboarding URL, which you should use in API calls to the Authorize and Token endpoints. If authorization begins from your platform, the user will select their site on the Datadog authorize page.
+
+Ensure API calls align with the user's region, such as `trace.browser-intake-datadoghq.com` for the US or `public-trace-http-intake.logs.datadoghq.eu` for the EU.
+
+### Testing Across Organizations and Regions
+
+You cannot test outside organizations with a testing client. To test in different regions, clone your client into your EU sandbox. Comprehensive testing with other organizations requires publishing the OAuth client, after which the tile will be available for external testing.
+
+## Publishing Process
+
+### OAuth Client vs. Integration Publishing
+
+Datadog's OAuth implementation involves two client types:
+
+1. **Testing Client**: Created upon selecting "Create Confidential Client." It allows only internal organization authorization.
+2. **Published Client**: Initiated by "Kick off publishing process," yielding new credentials for production use. It enables authorization across any Datadog organization post-completion.
+
+Deleting a client and creating a new one reverts to a testing client. To enable authorization for external organizations, complete the publishing process for the client.
+
+Publishing the OAuth client does not equate to a published integration. The integration appears on the [Integrations page][16] only upon completion of a separate publication process.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog/
+[1]: /developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://app.datadoghq.com/integrations
 [4]: https://app.datadoghq.com/apps
 [5]: https://github.com/DataDog/integrations-extras/
 [6]: http://github.com/DataDog/marketplace
-[7]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/#list-an-offering
-[8]: https://docs.datadoghq.com/getting_started/site/
+[7]: /developers/integrations/marketplace_offering/#list-an-offering
+[8]: /getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[12]: https://docs.datadoghq.com/api/latest/using-the-api/
+[12]: /api/latest/using-the-api/
+[13]: /developers/authorization/oauth2_endpoints/#exchange-authorization-code-for-access-token
+[14]: /developers/authorization/oauth2_endpoints/#post-apiv2api_keysmarketplace
+[15]: https://app.datadoghq.com/organization-settings/api-keys
+[16]: https://app.datadoghq.com/integrations
+[17]: /developers/authorization/oauth2_in_datadog/#implement-the-oauth-protocol
+
