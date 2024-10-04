@@ -13,7 +13,8 @@ Live Capture is in Preview.
 
 ## Overview
 
-Use Live Capture to see the data received from and sent out of each source or processor, specifically the following information:
+Use Live Capture to view data received from and sent out of each source or processor. 
+Specifically, the following information is shown:
 - The timestamp of when the data was received
 - The data received and sent
 - Whether the data was:
@@ -30,7 +31,7 @@ Use Live Capture to see the data received from and sent out of each source or pr
 1. Select **Capture and view events** in the side panel.
 1. Click **Capture**.
 1. Click **Confirm** to start capturing events.<br>**Note**: Capturing events usually takes up to 60 seconds. Captured data is visible to all users with view access, and is stored in the Datadog Platform for 72 hours.
-1. After the capture is complete, click a specific capture event to see data that was received and the data that was sent out. You can also search for specific events in the search bar. Use the dropdown menu next to the search bar to show events based on status (`MODIFIED`, `UNMODIFIED`, `DROPPED`, and `REDUCED`).
+1. After the capture is complete, click a specific capture event to see the data that was received and sent out. You can also search for specific events in the search bar. Use the dropdown menu next to the search bar to show events based on status (`MODIFIED`, `UNMODIFIED`, `DROPPED`, and `REDUCED`).
     - **Capture N** is the capture request number. For example, Capture N is `1` for the first capture and `6` for the sixth capture.
     - Data highlighted in red indicates data that was modified or dropped.
     - Data highlighted in green indicates data that was added.
