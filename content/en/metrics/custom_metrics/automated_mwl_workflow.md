@@ -66,7 +66,6 @@ The workflow blueprint contains several Slack integration tiles that need to be 
 2. Copy the **Mention handle** from the side panel that opens on the right.
 3. Add the handle to the **Configure notifications & automations** section of your metric monitor.
 
-{{< img src="/metrics/custom_metrics/automated_mwl_workflow/monitor_notification.png" alt="The Configure notifications & automations section of a monitor with the workflow handle added to the is_alert conditional variable" style="width:100%;" >}}
 
 4. Click **Save**.
 
