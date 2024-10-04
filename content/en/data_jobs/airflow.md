@@ -18,60 +18,6 @@ further_reading:
 [Data Jobs Monitoring][1] gives visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
 
 {{< tabs >}}
-{{% tab "Astronomer" %}}
-
-<div class="alert alert-warning">
-For Astronomer customers using Astro, the following setup may affect the lineage feature offered by Astro. see <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>this</a> for context.
-</div>
-
-## Requirements
-
-* [Apache Airflow 2.8.0][1] or later is required.
-* [apache-airflow-providers-openlineage][2] 1.11.0 or later is required.
-
-## Setup
-
-Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-airflow-providers-openlineage][2] installed.
-
-To get started, follow the instructions below.
-
-1. Airflow provider `openlineage` is already installed in [Astro Runtimes][3] if you are using Astro. Ensure your [Astro Runtime][3] comes with the package version greater or equal to `1.11.0` for `apache-airflow-providers-openlineage`. 
-   
-   Alternatively, add the following to your `requirements.txt` file inside your [Astro project][4] if you use a customized image.
-
-   ```text
-   apache-airflow-providers-openlineage>=1.11.0
-   ```
-
-2. Configure `openlineage` provider. The simplest option is to set the following environment variables [using the Astro UI][5]:
-   
-   ```shell
-   OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   OPENLINEAGE_API_KEY=<DD_API_KEY>
-   ```
-
-   **Important:**
-   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
-   * replace `<DD_API_KEY>` fully with your valid [Datadog API key][7].
-
-   **Optionally:**
-   * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
-   * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
-
-   See [Astronomer official guide][5] for managing environment variables for a Deployment, and check official documentation [configuration-openlineage][6] for other supported configurations of `openlineage` provider.
-
-3. Trigger a update to your Deployment and wait for it to finish.
-
-[1]: https://github.com/apache/airflow/releases/tag/2.8.0
-[2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
-[3]: https://www.astronomer.io/docs/astro/runtime-provider-reference
-[4]: https://www.astronomer.io/docs/astro/cli/develop-project
-[5]: https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui
-[6]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
-[7]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-
-{{% /tab %}}
-
 {{% tab "Kubernetes" %}}
 ## Requirements
 
