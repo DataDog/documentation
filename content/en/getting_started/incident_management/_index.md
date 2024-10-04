@@ -77,8 +77,6 @@ As part of the Slack integration, you can also use the `/datadog incident` short
    
 A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
 
-In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
-
 If you don't have the Slack integration enabled, click **Add Chat** to add the link to the chat service you are using to discuss the incident.
 
 Click **Add Video Call** to add a link to the call where discussions about the incident are happening. 
