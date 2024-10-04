@@ -67,30 +67,6 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 
 The workflow blueprint contains several Slack integration tiles that need to be updated.
 
-1. For the **Make a decision** and **Make a decision 1** tiles:
-   - Select a Slack workspace
-   - Select a channel or user to be prompted when the monitor alerts
-
-{{< img src="/metrics/custom_metrics/automated_mwl_workflow/slack_decisions_1.png" alt="The Make a decision tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
-
-2. For the **Send message** and **Send message 1** tiles:
-   - Select a Slack workspace
-   - Select a channel or user to receive a result message at the conclusion of the workflow
-
-{{< img src="/metrics/custom_metrics/automated_mwl_workflow/slack_decisions_2.png" alt="The Send message tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
-
-3. Click **Save**.
-4. Click **Publish**.
-
-### Configure monitor notifications
-
-1. Click the **Monitor** tile at the beginning of the workflow.
-2. Copy the **Mention handle** from the side panel that opens on the right.
-3. Add the handle to the **Configure notifications & automations** section of your metric monitor.
-
-
-4. Click **Save**.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
