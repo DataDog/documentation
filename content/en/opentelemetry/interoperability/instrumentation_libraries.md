@@ -110,6 +110,46 @@ To use OpenTelemetry instrumentations with the Datadog Python SDK, perform the f
  1. Follow the instructions in the [OpenTelemetry API][15] section in the Datadog Python library docs.
  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-python-contrib` library.
 
+The following is an example instrumenting the OpenTelemetry's kafka-python library with the Datadog Python SDK:
+
+```python
+from kafka import KafkaProducer, KafkaConsumer
+from opentelemetry.instrumentation.kafka import KafkaInstrumentor
+from opentelemetry import trace
+
+# Instrument Kafka with OpenTelemetry
+KafkaInstrumentor().instrument()
+
+# Kafka configuration
+KAFKA_TOPIC = 'demo-topic0'
+KAFKA_BROKER = 'localhost:9092'
+
+def produce_message():
+    producer = KafkaProducer(bootstrap_servers=KAFKA_BROKER)
+    message = b'Hello, OpenTelemetry!'
+    
+    # No manual span creation, relying on automatic instrumentation
+    producer.send(KAFKA_TOPIC, message)
+    producer.flush()
+    
+    print(f"Produced message: {message}")
+
+def consume_message():
+    consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=KAFKA_BROKER, auto_offset_reset='earliest', group_id='demo-group')
+    
+    # No manual span creation, relying on automatic instrumentation
+    for message in consumer:
+        print(f"Consumed message: {message.value}")
+        break  # For simplicity, consume just one message
+
+if __name__ == "__main__":
+    # manual span here 
+    tracer = trace.get_tracer(__name__)
+    with tracer.start_as_current_span("Span") as parent_span:
+        parent_span.set_attribute("Hello", "World")
+        produce_message()
+        consume_message()
+```
 
 [13]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation#readme
 [14]: https://opentelemetry.io/docs/zero-code/python/example/
@@ -308,6 +348,52 @@ To use OpenTelemetry instrumentation libraries with the Datadog .NET SDK:
 
 1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`
+
+The following example demonstrates how to instrument the `Hangfire` OpenTelemetry integrations with the Datadog .NET SDK:
+
+```js
+cusing System;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Instrumentation.Hangfire;
+using OpenTelemetry;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a new TracerSettings object and configure it
+        var openTelemetry = Sdk.CreateTracerProviderBuilder()
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("hangfire-demo2"))
+            .AddHangfireInstrumentation()
+            .Build();
+
+        // Configure Hangfire to use memory storage
+        GlobalConfiguration.Configuration.UseMemoryStorage();
+
+        // Create a new Hangfire server
+        using (var server = new BackgroundJobServer())
+        {
+            // Enqueue a background job
+            BackgroundJob.Enqueue(() => RunBackgroundJob());
+
+            Console.WriteLine("Hangfire Server started. Press any key to exit...");
+            Console.ReadKey();
+        }
+
+        // Dispose OpenTelemetry resources
+        openTelemetry?.Dispose();
+    }
+
+    // Define the background job method
+    public static void RunBackgroundJob()
+    {
+        Console.WriteLine("Hello from Hangfire!");
+    }
+}
+```
 
 ## Verified OpenTelemetry Instrumentation Libraries
 
