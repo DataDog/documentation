@@ -33,7 +33,7 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 ### Prerequisites
 
 1. A Datadog account with [Workflow Automation][3] enabled
-3. The Datadog [Slack integration][5] installed
+2. The Datadog [Slack integration][5] installed
 
 ### Configure blueprint
 
