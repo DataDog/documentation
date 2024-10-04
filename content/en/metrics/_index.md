@@ -156,6 +156,9 @@ _Grouping_ defines what constitutes a line on the graph. For example, if you hav
 
 You can modify your graph values with mathematical [functions][18]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2). Or performing arithmetic between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
 
+#### Multilayer aggregation (optional) 
+Add additional layers of time or space aggregation on top of your existing query. You can nest your initial query within more advanced query capabilities like percentiles or standard deviation for aggregated count/rate/gauges for more summarized analytics.  For more information, see the [Nested Queries][26] documentation.
+
 ### Time and space aggregation
 
 _Time aggregation_ and _space aggregation_ are two important components of any query. Because understanding how these aggregations work helps you avoid misinterpreting your graphs, these concepts are explained in more detail below.
