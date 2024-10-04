@@ -10767,6 +10767,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SlackIntegrationMetadata'
       - $ref: '#/components/schemas/JiraIntegrationMetadata'
+      - $ref: '#/components/schemas/MSTeamsIntegrationMetadata'
     IncidentIntegrationMetadataPatchData:
       description: Incident integration metadata data for a patch request.
       properties:
@@ -13771,6 +13772,43 @@ components:
           example: One or several indexes are missing or invalid, results hold data
             from the other indexes
           type: string
+      type: object
+    MSTeamsIntegrationMetadata:
+      description: Incident integration metadata for the Microsoft Teams integration.
+      properties:
+        teams:
+          description: Array of Microsoft Teams in this integration metadata.
+          example: []
+          items:
+            $ref: '#/components/schemas/MSTeamsIntegrationMetadataTeamsItem'
+          type: array
+      required:
+      - teams
+      type: object
+    MSTeamsIntegrationMetadataTeamsItem:
+      description: Item in the Microsoft Teams integration metadata teams array.
+      properties:
+        ms_channel_id:
+          description: Microsoft Teams channel ID.
+          example: 19:abc00abcdef00a0abcdef0abcdef0a@thread.tacv2
+          type: string
+        ms_channel_name:
+          description: Microsoft Teams channel name.
+          example: incident-0001-example
+          type: string
+        ms_tenant_id:
+          description: Microsoft Teams tenant ID.
+          example: 00000000-abcd-0005-0000-000000000000
+          type: string
+        redirect_url:
+          description: URL redirecting to the Microsoft Teams channel.
+          example: https://teams.microsoft.com/l/channel/19%3Aabc00abcdef00a0abcdef0abcdef0a%40thread.tacv2/conversations?groupId=12345678-abcd-dcba-abcd-1234567890ab&tenantId=00000000-abcd-0005-0000-000000000000
+          type: string
+      required:
+      - ms_tenant_id
+      - ms_channel_id
+      - ms_channel_name
+      - redirect_url
       type: object
     Metric:
       description: Object for a single metric tag configuration.
