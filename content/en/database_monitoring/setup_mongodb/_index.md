@@ -14,6 +14,7 @@ disable_sidebar: true
 | MongoDB 5.0 | {{< X >}}   | {{< X >}}     |
 | MongoDB 6.0 | {{< X >}}   | {{< X >}}     |
 | MongoDB 7.0 | {{< X >}}   | {{< X >}}     |
+| MongoDB 8.0 | {{< X >}}   | {{< X >}}     |
 
 For setup instructions, select your hosting type:
 
