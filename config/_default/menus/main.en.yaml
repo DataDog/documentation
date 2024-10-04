@@ -65,6 +65,11 @@ menu:
       url: markdoc_testing/demo_pages/postgres_integration_setup/
       parent: markdoc_testing_demo_pages
       weight: 103
+    - name: Postgres Integration Setup Control
+      identifier: markdoc_testing_postgres_control
+      url: markdoc_testing/demo_pages/postgres_integration_setup_control/
+      parent: markdoc_testing_demo_pages
+      weight: 104
     - name: Elements
       identifier: markdoc_testing_elements
       url: markdoc_testing/elements/

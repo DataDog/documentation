@@ -1,5 +1,5 @@
 ---
-title: Postgres Integration Setup
+title: Postgres Integration Setup (TEST)
 page_preferences:
   - id: postgres_version
     options_source: postgres_integration_version_options
@@ -44,6 +44,10 @@ This isn't a real section, it's here to test the dynamic TOC.
 <!-- kubernetes > Agent version 6 -->
 {% if equals($agent_version, "6_x_x") %}
 ### Running Agent v6 on Kubernetes
+```shell
+echo 'version 6' > /sys/guac/test/version_random.txt
+```
+
 
 This isn't a real section, it's here to test the dynamic TOC.
 {% /if %}
