@@ -39,7 +39,6 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 3. The Datadog [Slack integration][5] installed
 
 ### Configure blueprint
-Open the [workflow blueprint][4] and follow the instructions below.
 
 #### Configure Slack notifications
 
