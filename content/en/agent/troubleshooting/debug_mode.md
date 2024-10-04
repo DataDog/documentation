@@ -65,3 +65,4 @@ The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: /agent/configuration/agent-log-files/
+[4]: https://github.com/DataDog/helm-charts/blob/637472f105f42e8b444981ea2a38e955161c8e3a/charts/datadog/values.yaml#L125
