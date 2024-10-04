@@ -22,7 +22,9 @@ private: true
   This feature is currently in Preview.
 {{< /callout >}} 
 
-[Metrics without Limits™][1] enables flexibility and control over your custom metric ingestion and indexing. However, manual configuration of custom metrics becomes unscalable as your custom metrics usage grows to hundreds of millions of metrics. 
+As your business scales, managing observability costs could become unruly quickly. Effective custom metrics governance should increase monitoring efficiency rather than cut visibility entirely. And it should not be a time-consuming, cumbersome process to protect your organization from unintentional billing overages. 
+
+By following Datadog's [Best Practices Guide for Custom Metrics Governance](https://docs.datadoghq.com/metrics/guide/custom_metrics_governance/#monitoring-and-prevention), you can monitor spikes in your custom metrics volumes. With **Datadog's Dynamic Metrics Quotas**, you now additionally have automatic spike remediation -- reducing unintentional metrics usage and thereby reduce costs.
 
 Datadog provides an Automated Metrics without Limits™ Workflow (also known as dynamic quotas), which automatically configures your spiking metrics with their actively queried tags and aggregations. This workflow runs when a metric monitor alerts on your estimated custom metric usage data, sending a message to a Slack channel that you designate. The message prompts you to give permission for Metrics without Limits™ to configure any spiking metric names with suggested tags and aggregations on your behalf. This helps you to:
    - Proactively reduce the cost of your custom metrics
