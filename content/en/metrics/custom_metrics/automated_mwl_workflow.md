@@ -32,7 +32,6 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 
 ### Prerequisites
 
-   - The monitor must be configured with a [threshold alert][7] as well as [multi alert][2]
 2. A Datadog account with [Workflow Automation][3] enabled
 3. The Datadog [Slack integration][5] installed
 
