@@ -40,7 +40,7 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 #### How to build a per-metric quota
 
 1. Open this [workflow blueprint][8], and click "Create from Blueprint"
-2. Click on the green Monitor tile, and enable the "Automatic Triggering" toggle. Also copy the **Mention handle** for this workflow -- you'll use this in Step 5 below
+2. Click on the green Monitor tile, and enable the "Automatic triggering" toggle. Also copy the **Mention handle** for this workflow -- you'll use this in Step 5 below
 3. Create a [metric monitor][9]. In the **Define the metric** step, select ```datadog.estimated_usage.metrics.custom.by_metric``` as your metric name and choose the ```SUM BY``` space aggregator (recommendd monitor type - Threshold Alert, but you can also use Change or Anomaly Detection)
 4. Under ***Set alert conditions***, define your quota threshold number
 
@@ -53,14 +53,14 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 
 {{< img src="/metrics/custom_metrics/automated_mwl_workflow/slack_decisions_1.png" alt="The Make a decision tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
 
-9. You'll be asked to choose the Slack workspace and either a Slack channel or specific user who will be notified when the monitor alerts. These are the users who will be asked to give Datadog permission to automatically reduce your metrics costs on your behalf
+You'll be asked to choose the Slack workspace and either a Slack channel or specific user who will be notified when the monitor alerts. These are the users who will be asked to give Datadog permission to automatically reduce your metrics costs on your behalf
 
-10. For the ***Send message*** and ***Send message 1*** tiles, you'll also need to select the Slack workspace. And you'll be asked whether you want to notify a channel or specific user after Datadog has made the cost saving configurations on your behalf
+9. For the ***Send message*** and ***Send message 1*** tiles, you'll also need to select the Slack workspace. And you'll be asked whether you want to notify a channel or specific user after Datadog has made the cost saving configurations on your behalf
 
 {{< img src="/metrics/custom_metrics/automated_mwl_workflow/slack_decisions_2.png" alt="The Send message tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
 
-11. Click ***Save***.
-12. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
+10. Click ***Save***.
+11. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
 
 
 #### Configure Slack notifications
