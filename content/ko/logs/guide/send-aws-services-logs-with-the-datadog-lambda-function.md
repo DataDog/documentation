@@ -117,7 +117,7 @@ Datadog는 Datadog 포워더(Forwarder) 람다 함수에서 자동으로 트리�
     | `s3:GetBucketLogging`                                       | S3 액세스 로그가 포함된 S3 버킷의 이름을 가져옵니다.                     |
     | `s3:GetBucketLocation`                                      | S3 액세스 로그가 포함된 S3 버킷 지역을 가져옵니다.                   |
     | `s3:GetBucketNotification`                                  | 기존 람다 트리거 설정을 가져옵니다.                                  |
-   {{< partial name="whats-next/whats-next.html" >}}
+   List all S3 buckets.
     | `s3:PutBucketNotification`                                  | S3 버킷 이벤트 기반 람다 트리거를 추가하거나 제거합니다.                  |
     | `states:ListStateMachines`                                  | 모든 Step 함수를 목록화합니다.                                           |
     | `states:DescribeStateMachine`                               | Step 함수에 대한 로깅 상세 정보를 가져옵니다.                             |
