@@ -327,7 +327,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
 
 `onSessionStart`
-: The method that gets called when RUM starts the session.
+: (Optional) The method that gets called when RUM starts the session.
 
 `resourceEventMapper`
 : The data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
@@ -336,7 +336,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`.
 
 `telemetrySampleRate`
-: The sampling rate for the SDK internal telemetry utilized by Datadog. This must be a value between `0` and `100`. By default, this is set to `20`.
+: The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
 
 `trackFrustrations`
 : Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.

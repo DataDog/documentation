@@ -289,11 +289,20 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 
 Your web views appear in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
-Filter on your Android and Android TV applications, and click a session. A side panel with a list of events in the session appears.
+To access your web views:
 
-{{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
+1. Navigate to **Digital Experiences > Real User Monitoring > (Sessions) Explorer**.
+2. Create a query to filter on the following:
+   - Your Android and Android TV applications using either `application.id` or `application.name`
+   - The web component using `service`
+   - The platform using `source`
+3. Click a session. A side panel with a list of events in the session appears.
 
-Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
+   {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
+
+   Any service with the web icon indicates a webview.
+
+From here, you can hover over a session event and click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
 
 ## Billing implications
 
