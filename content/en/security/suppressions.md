@@ -52,8 +52,8 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 1. Select the detection rules you want to apply this suppression to. You can select multiple detection rules.
 1. In the **Add Suppression Query** section, you have the option to enter suppression queries so that a signal is not generated when the values are met. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input the log query: `@user.username:john.doe`.
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="The add suppression query with the query @user.username:john.doe" style="width:65%;" >}}
-  Suppression rule queries are based on **signal attributes**. 
-1. Additionally, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
+  In general, suppression rules are evaluated on signal outputs and not input logs/events. To add queries that only use inputs and CWS Agent and [NetFlow][6] events, you can suppress logs using the **Additionally, you can add a suppression query on log attribution to exclude logs from analysis** option.
+1. In **Additionally, you can add a suppression query on log attribution to exclude logs from analysis**, add a log exclusion query to exclude logs from analysis. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in this suppression rule's **Add Suppression Query** step.
   
 ## Further reading
 
@@ -64,3 +64,4 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 [3]: https://app.datadoghq.com/security/configuration/suppressions
 [4]: https://app.datadoghq.com/security/rules
 [5]: /logs/explorer/facets/#log-side-panel
+[6]: /network_monitoring/netflow/
