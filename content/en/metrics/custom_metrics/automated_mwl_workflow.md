@@ -55,7 +55,7 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 
 You'll be asked to choose the Slack workspace and either a Slack channel or specific user who will be notified when the monitor alerts. These are the users who will be asked to give Datadog permission to automatically reduce your metrics costs on your behalf
 
-9. For the ***Send message*** and ***Send message 1*** tiles, you'll also need to select the Slack workspace. And you'll be asked whether you want to notify a channel or specific user after Datadog has made the cost saving configurations on your behalf
+9. For the ***Send message*** and ***Send message 1*** tiles, you'll also need to select the Slack workspace. You'll also be asked whether you want to notify a channel or specific user after Datadog has made the cost saving configurations on your behalf
 
 {{< img src="/metrics/custom_metrics/automated_mwl_workflow/slack_decisions_2.png" alt="The Send message tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
 
