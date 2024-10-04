@@ -4907,36 +4907,46 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
       weight: 505
+    - name: Generate Metrics
+      url: observability_pipelines/processors/generate_metrics
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_generate_metrics
+      weight: 506
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 506
+      weight: 507
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 507
+      weight: 508
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 508
+      weight: 509
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 509
+      weight: 510
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 510
+      weight: 511
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 511
+      weight: 512
+    - name: Set Environment Variables
+      url: observability_pipelines/processors/set_environment_variables
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_set_environment_variables
+      weight: 513
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -4977,26 +4987,31 @@ menu:
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
       weight: 607
+    - name: New Relic
+      identifier: observability_pipelines_new_relic
+      url: /observability_pipelines/destinations/new_relic/
+      parent: observability_pipelines_destinations
+      weight: 608
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 608
+      weight: 609
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 609
+      weight: 610
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 610
+      weight: 611
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 611
+      weight: 612
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
