@@ -110,3 +110,4 @@ You can optionally sample logs while querying by using the [sample function][11]
 [9]: https://console.cloud.google.com/logs/viewer
 [10]: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
 [11]: https://cloud.google.com/logging/docs/view/logging-query-language#sample
+[12]: https://cloud.google.com/vpc-service-controls/docs/supported-products#table_pubsub
