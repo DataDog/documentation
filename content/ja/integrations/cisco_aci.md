@@ -19,8 +19,8 @@ assets:
     source_type_id: 210
     source_type_name: Cisco ACI
   monitors:
-    '[Cisco ACI] Average CPU usage high alert': assets/monitors/cpu_high.json
-    '[Cisco ACI] Critical health alert': assets/monitors/critical_health_score.json
+    CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
+    Health score of device is critical: assets/monitors/critical_health_score.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,7 +28,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.10.1
+integration_version: 2.11.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci
@@ -197,5 +197,5 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
 [4]: https://docs.datadoghq.com/ja/help/

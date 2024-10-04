@@ -34,7 +34,7 @@ Datadog Application Security [Threat Management][1] uses the information APM is 
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
 
-Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
+Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
 If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>

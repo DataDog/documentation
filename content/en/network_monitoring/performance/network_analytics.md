@@ -154,13 +154,8 @@ The following TCP metrics are available:
 | **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
 | **TCP Latency** | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged. |
 | **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
-| **TCP Timeouts** (Private Beta) | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
-| **TCP Refusals** (Private Beta) | The number of TCP connections that were refused by the server. Typically this indicates an attempt to connect to an IP/Port that isn’t receiving connections, or a firewall/security misconfiguration. |
-| **TCP Resets** (Private Beta) | The number of TCP connections that were reset by the server.  |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
-
-<div class="alert alert-warning">TCP Timeouts, Refusals, and Resets are in private beta. Reach out to your Datadog representative to request access. Once you've signed up, follow the <a href="/network_monitoring/performance/setup/?tab=agentlinux#failed-connections-private-beta">instructions</a> to enable the feature on your agent.</div>
 
 All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 

@@ -2,6 +2,8 @@
 title: Cloud Cost Recommendations
 private: true
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
+algolia:
+  tags: ['cloud cost recommendations', 'cloud cost recommendation', 'cost recommendations', 'cost recommendation', 'cloud resources', 'cloud resource']
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -16,7 +18,7 @@ Cloud Cost Recommendations is in public beta with support for AWS, and is automa
 
 [Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources.
 
-{{< img src="cloud_cost/recommendations/cost_recommendations.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
 Recommendations combine billing data and observability data to identify orphaned, legacy, or over-provisioned cloud resources.
 
@@ -32,7 +34,7 @@ For each AWS account that you would like to receive recommendations for:
 
 Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data. You can see the detailed logic for each recommendation type, along with observability metrics or cost data used to generate the recommendation, [on the **Recommendations** page][1].
 
-{{< img src="cloud_cost/recommendations/overprovisioned_k8s_containers_sidepanel.png" alt="A side panel displaying a Kubernetes container that is over-provisioned in the ad-auction service with recommended next steps to change its usage as well as investigation metrics." style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/overprovisioned_k8s_containers_sidepanel_1.png" alt="A side panel displaying a Kubernetes container that is over-provisioned in the ad-auction service with recommended next steps to change its usage as well as investigation metrics." style="width:100%;" >}}
 
 Recommendations are run on a daily basis, and are automatically refreshed in your account. When new recommendations are released, Datadog automatically adds them to your account.
 
