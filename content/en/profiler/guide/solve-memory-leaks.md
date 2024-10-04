@@ -30,7 +30,7 @@ The walkthrough guides you through several steps to:
 ## Requirements
 
 To use this walkthrough, you need:
-* A Go service running on Kubernetes.
+* A Go or Java service running on Kubernetes with the Datadog Kubernetes integration installed.
 * [Continuous Profiler enabled][3].
 
 ## Get started
