@@ -230,8 +230,8 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
-{{% /탭 %}}
-{{% 탭 "CloudFormation" %}}
+{{% /tab %}}
+{{% tab "CloudFormation" %}}
 
 CloudFormation 사용자의 경우, S3 버킷에 대해 CloudFormation [NotificationConfiguration][1]을 사용하여 트리거를 설정할 수 있습니다. 아래 샘플 코드를 참조하세요.
 
