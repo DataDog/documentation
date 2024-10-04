@@ -1,5 +1,5 @@
 ---
-title: Dynamic Metrics without Limits™ Workflow Automation
+title: Dynamic Quotas for Metrics
 further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"
