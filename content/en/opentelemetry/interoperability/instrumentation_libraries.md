@@ -309,6 +309,52 @@ To use OpenTelemetry instrumentation libraries with the Datadog .NET SDK:
 1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`
 
+The following example demonstrates how to instrument the `Hangfire` OpenTelemetry integrations with the Datadog .NET SDK:
+
+```js
+cusing System;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Instrumentation.Hangfire;
+using OpenTelemetry;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a new TracerSettings object and configure it
+        var openTelemetry = Sdk.CreateTracerProviderBuilder()
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("hangfire-demo2"))
+            .AddHangfireInstrumentation()
+            .Build();
+
+        // Configure Hangfire to use memory storage
+        GlobalConfiguration.Configuration.UseMemoryStorage();
+
+        // Create a new Hangfire server
+        using (var server = new BackgroundJobServer())
+        {
+            // Enqueue a background job
+            BackgroundJob.Enqueue(() => RunBackgroundJob());
+
+            Console.WriteLine("Hangfire Server started. Press any key to exit...");
+            Console.ReadKey();
+        }
+
+        // Dispose OpenTelemetry resources
+        openTelemetry?.Dispose();
+    }
+
+    // Define the background job method
+    public static void RunBackgroundJob()
+    {
+        Console.WriteLine("Hello from Hangfire!");
+    }
+}
+```
+
 ## Verified OpenTelemetry Instrumentation Libraries
 
 | Library           | Versions | NuGet package                     | Integration Name     | Setup instructions            |
@@ -322,6 +368,9 @@ The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the 
 [1]: https://opentelemetry.io/docs/languages/net/libraries/#use-natively-instrumented-libraries
 [2]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
 [3]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+
+
+
 {{% /tab %}}
 
 {{< /tabs >}}
