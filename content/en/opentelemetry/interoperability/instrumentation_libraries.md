@@ -351,8 +351,8 @@ To use OpenTelemetry instrumentation libraries with the Datadog .NET SDK:
 
 The following example demonstrates how to instrument the `Hangfire` OpenTelemetry integrations with the Datadog .NET SDK:
 
-```js
-cusing System;
+```csharp
+using System;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using OpenTelemetry.Trace;
