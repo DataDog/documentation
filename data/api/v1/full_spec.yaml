@@ -22785,18 +22785,18 @@ components:
           type: integer
         x:
           description: The position of the widget on the x (horizontal) axis. Should
-            be a non-negative integer.
+            be a non-negative number.
           example: 0
-          format: int64
+          format: double
           minimum: 0
-          type: integer
+          type: number
         y:
           description: The position of the widget on the y (vertical) axis. Should
-            be a non-negative integer.
+            be a non-negative number.
           example: 0
-          format: int64
+          format: double
           minimum: 0
-          type: integer
+          type: number
       required:
       - x
       - y
