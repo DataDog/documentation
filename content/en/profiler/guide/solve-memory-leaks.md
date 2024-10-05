@@ -7,6 +7,12 @@ further_reading:
 - link: "/profiler/compare_profiles/"
   tag: "Documentation"
   text: "Comparing Profiles"
+- link: "https://www.datadoghq.com/blog/go-memory-leaks/"
+  tag: "Blog"
+  text: "How to spot and fix memory leaks in Go"
+- link: "https://www.datadoghq.com/blog/go-memory-metrics/"
+  tag: "Blog"
+  text: "Go memory metrics demystified"
 ---
 
 ## Overview
