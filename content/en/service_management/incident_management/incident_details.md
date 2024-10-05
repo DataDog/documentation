@@ -95,10 +95,6 @@ As work for different tasks is finished, individual tasks can be marked as compl
   
 ## Response Team section
 
-<div class="alert alert-warning">
-This feature is in open beta.
-</div>
-
 {{< img src="/service_management/incidents/incident_details/incident_response_team.png" alt="Incident details reponse team section showing the assigned Incident Commander, Responder, and Communications Lead" style="width:100%;" >}}
 
 In the Response Team section, you can form your response team by adding other users and assigning them roles to carry out in the process of resolving an incident. The two default responder types provided by Datadog are:
