@@ -40,7 +40,7 @@ After the initial connection is established, you can enable individual AWS servi
 
 This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][3], [AWS CLI][4], or [Terraform][5] to set up multiple accounts at once. For more information, read the [Datadog-Amazon CloudFormation guide][6].
 
-**Note**: AWS Lambda is [deprecating the Python 3.8 runtime][59] on October 14, 2024. Datadog's CloudFormation template only supports creation and deletion, see [Modifying the runtime environment][60] for guidance on updating the runtime for existing functions.
+**Note**: Datadog's CloudFormation template only supports creation and deletion of its defined resources. See [Update your stack template][59] for guidance on applying updates to your stack.
 
 ## Prerequisites
 
@@ -278,5 +278,4 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/
 [58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
-[59]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
-[60]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-modify.html
+[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
