@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Hosts
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/troubleshooting/"
   tag: "External Site"

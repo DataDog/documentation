@@ -42,11 +42,25 @@ cascade:
 
 [OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
+## Choose your setup
+
 If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
 
-1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
+| If you...     | Then use...     |
+| ---  | ----------- |
+|Are already using the OpenTelemetry Collector|OpenTelemetry SDK + OpenTelemetry Collector|
+|Want to use OpenTelemetry APIs but keep Datadog's full feature set|OpenTelemetry API + Datadog SDK + Datadog Agent|
+|Are using OpenTelemetry SDKs and want a simple setup|OpenTelemetry SDK + OTLP Ingest in Datadog Agent|
+|Are working in a serverless environment (for example, AWS Lambda)|Serverless setup (AWS managed Lambda Layer)|
+|Can't install an agent and need direct backend access|Direct Backend Ingest|
+|Converted Agent|Converged Agent (future capability)|
 
-2. [Ingest data with the Datadog Agent, which collects it for Datadog][4].
+- OpenTelemetry SDK + OpenTelemetry Collector: Send data to the OpenTelemetry Collector, and use the Datadog Exporter to forward it to Datadog.
+- OpenTelemetry API + Datadog SDK + Datadog Agent: Use the OpenTelemetry API for instrumentation, but process and send data using the Datadog SDK and Agent.
+- OpenTelemetry SDK + OTLP Ingest in Datadog Agent: Send OpenTelemetry data directly to the Datadog Agent using OTLP ingestion.
+- Converged Agent: Use a single agent that supports both Datadog and OpenTelemetry protocols (future capability).
+- Direct Backend Ingest: Send OpenTelemetry data (traces, metrics, logs) directly to Datadog's backend.
+- Serverless: For serverless environments, ...
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
 
