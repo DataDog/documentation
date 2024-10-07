@@ -370,9 +370,9 @@ The potential `context` values are:
 | RUM event type   | Context                   |
 |------------------|---------------------------|
 | View             | [Location][6]                  |
-| Action           | [Event][7]                     |
-| Resource (XHR)   | [XMLHttpRequest][8] and [PerformanceResourceTiming][9]            |
-| Resource (Fetch) | [Request][10], [Response][11], and [PerformanceResourceTiming][9]      |
+| Action           | [Event][7] and handling stack                     |,
+| Resource (XHR)   | [XMLHttpRequest][8] [PerformanceResourceTiming][9], and handling stack            |
+| Resource (Fetch) | [Request][10], [Response][11], [PerformanceResourceTiming][9], and handling stack      |
 | Resource (Other) | [PerformanceResourceTiming][9] |
 | Error            | [Error][12]                     |
 | Long Task        | [PerformanceLongTaskTiming][13] |
@@ -502,6 +502,8 @@ You can update the following event properties:
 |   `view.url`            |   String  |   The URL of the active web page.                            |
 |   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
 |   `view.name`           |   String  |   The name of the current view.                            |
+|   `service`             |   String  |   The service name for your application.                                                            |
+|   `version`             |   String  |   The application’s version, for example: 1.2.3, 6c44da20, and 2020.02.13.                          |
 |   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
 |   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
@@ -1162,6 +1164,91 @@ However, this feature comes with some **limitations**:
 - The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
 - `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
 
+## Micro frontend
+
+Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace, to utilize it, you must be able to extract service and version properties from your application's file paths and filenames.
+
+### How to use it
+
+In the beforeSend property, you can override the service and version properties. To help you identify where the event originated, we've introduced a new property,  context.handlingStack.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+datadogRum.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+            if (service && version) {
+                event.service = service;
+                event.version = version;
+            }
+
+            return true;
+        },
+    });
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM && window.DD_RUM.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+
+Now, any query done in the RUM Explorer can use the service attribute to filter events.
+
+### Limitations
+
+Some events cannot be attributed to an origin, therefore they will not have an associated handling stack. This includes:
+- Action events collected automatically
+- Ressource events other than XHR and Fetch.
+- View events (but you can [override default rum view names][21] instead)
+- CORS and CSP violations
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1186,4 +1273,4 @@ However, this feature comes with some **limitations**:
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-
+[21]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names
