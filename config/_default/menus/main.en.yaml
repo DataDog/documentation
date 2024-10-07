@@ -1590,6 +1590,16 @@ menu:
       parent: alerting
       identifier: monitors_status
       weight: 7
+    - name: Status Graphs
+      url: monitors/status/graphs
+      parent: monitors_status
+      identifier: monitors_status_graphs
+      weight: 701
+    - name: Status Events
+      url: monitors/status/events
+      parent: monitors_status
+      identifier: monitors_status_events
+      weight: 702
     - name: Monitor Settings
       url: monitors/settings/
       weight: 8
