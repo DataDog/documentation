@@ -26,6 +26,7 @@ Supported application-layer protocols
 : HTTP<br/>
 HTTP2<br/>
 gRPC<br/>
+Kafka (Preview)<br/>
 
 Supported TLS implementations
 : GnuTLS<br/>
