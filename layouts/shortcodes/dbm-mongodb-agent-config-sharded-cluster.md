@@ -57,6 +57,23 @@ instances:
     #
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
 
+    ## @param additional_metrics - list of strings - optional
+    ## List of additional metrics to collect. Available options are:
+    ## - metrics.commands: Use of database commands
+    ## - tcmalloc: TCMalloc memory allocator
+    ## - top: Usage statistics for each collection
+    ## - collection: Metrics of the specified collections
+    ## - jumbo_chunks: Count and percentage of jumbo chunks. Ignored on mongod instances.
+    ## - sharded_data_distribution: Distribution of data in sharded collections.
+    #
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks", "sharded_data_distribution"]
+
+    ## @param collections_indexes_stats - boolean - optional
+    ## Set to true to collect index statistics for the specified collections.
+    ## Requires `collections` to be set.
+    #
+    collections_indexes_stats: true
+
     ## @param database_autodiscovery - mapping - optional
     ## Enable database autodiscovery to automatically collect metrics from all your MongoDB databases.
     #
@@ -113,6 +130,7 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks", "sharded_data_distribution"]
+    collections_indexes_stats: true
     database_autodiscovery:
       enabled: true
   ## Shard1
