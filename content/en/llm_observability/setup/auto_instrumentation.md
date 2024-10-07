@@ -16,7 +16,7 @@ further_reading:
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 
-| Framework                               | Supported Versions | `ddtrace` Version |
+| Framework                               | Supported Versions | Tracer Version    |
 |-----------------------------------------|--------------------|-------------------|
 | [OpenAI](#openai)                       | >= 0.26.5          | >= 2.9.0          |
 | [Langchain](#langchain)                 | >= 0.0.192         | >= 2.9.0          |
