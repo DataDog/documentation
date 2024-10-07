@@ -43140,7 +43140,7 @@ paths:
           `observability_pipelines`,
 
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
-          `sds`, `snmp`,
+          `sds`, `snmp`, `software_delivery`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
           `timeseries`, `vuln_management`,
