@@ -59,21 +59,29 @@ attributes:
     data_type: Query metrics
     default_retention_period: 15 months
   - suite: Applications
-    product: Data Streams Monitoring
-    data_type: Query samples
-    default_retention_period: 15 days
+    product: Data Jobs Monitoring
+    data_type: Job traces
+    default_retention_period: 90 days
   - suite: Applications
     product: Data Streams Monitoring
     data_type: Metrics
     default_retention_period: 15 months
   - suite: Applications
+    product: Database Monitoring
+    data_type: Query metrics
+    default_retention_period: 15 months
+  - suite: Applications
+    product: Database Monitoring
+    data_type: Query samples
+    default_retention_period: 15 days
+  - suite: Applications
     product: Service Catalog
     data_type: Service metadata
-    default_retention_period: Indefinite
-  - suite: Applications
-    product: Data Jobs Monitoring
-    data_type: Job traces
-    default_retention_period: 90 days
+    default_retention_period: indefinite
+  - suite: Error Tracking
+    product: Error Tracking
+    data_type: Errors
+    default_retention_period: 1 year after last access
   - suite: Digital Experience
     product: Browser RUM
     data_type: Events
@@ -87,22 +95,6 @@ attributes:
     data_type: Test results
     default_retention_period: 2 months
   - suite: Digital Experience
-    product: Error Tracking
-    data_type: Errors
-    default_retention_period: 1 year after last access
-  - suite: Digital Experience
-    product: RUM
-    data_type: Errors
-    default_retention_period: 30 days (90 days upon request)
-  - suite: Digital Experience
-    product: Mobile RUM
-    data_type: Events
-    default_retention_period: 30 days
-  - suite: Digital Experience
-    product: Synthetics
-    data_type: Test results
-    default_retention_period: 2 months (15 months if displayed in UI)
-  - suite: Digital Experience
     product: Mobile App Testing
     data_type: Metrics
     default_retention_period: 15 months
@@ -111,177 +103,121 @@ attributes:
     data_type: Mobile application binaries
     default_retention_period: Indefinite
   - suite: Digital Experience
-    product: Mobile App testing
+    product: Mobile App Testing
     data_type: Test results
     default_retention_period: 2 months (15 months if displayed in UI)
   - suite: Digital Experience
+    product: Mobile RUM
+    data_type: Events
+    default_retention_period: 30 days
+  - suite: Digital Experience
+    product: RUM
+    data_type: Errors
+    default_retention_period: 30 days (90 days upon request)
+  - suite: Digital Experience
     product: Session Replay
     data_type: Replays
-    default_retention_period: 30 days, with an option to manually extend replays by 15 months
+    default_retention_period: 30 days (15 months if [option is selected in UI](https://docs.datadoghq.com/real_user_monitoring/session_replay/#retention))
   - suite: Digital Experience
-    product: Product Analytics
-    data_type: Events
-    default_retention_period: 15 months
+    product: Synthetics
+    data_type: Test results
+    default_retention_period: 2 months (15 months if displayed in UI)
   - suite: Infrastructure
     product: Serverless
     data_type: Logs
     default_retention_period: 15 days
   - suite: Infrastructure
-    product: Serverless
-    data_type: Traces
-    default_retention_period: 30 days
-  - suite: Infrastructure
-    product: Serverless
-    data_type: Metrics
-    default_retention_period: 15 days
-  - suite: Infrastructure
     product: Cloud Cost Management
-    data_type: Reports
+    data_type: Cost metrics
     default_retention_period: 15 months
   - suite: Infrastructure
     product: Cloud Cost Management
     data_type: Recommendations
     default_retention_period: 90 days
   - suite: Infrastructure
-    product: Network Performance Monitoring
-    data_type: Netflow
-    default_retention_period: 14 days
-  - suite: Infrastructure
-    product: Network Device Monitoring
-    data_type: Netflow
-    default_retention_period: 30 days
-  - suite: Infrastructure
-    product: Network Device Monitoring
-    data_type: SNMP Traps (Logs)
-    default_retention_period: 14 days
-  - suite: Infrastructure
-    product: Network Device Monitoring
-    data_type: Metrics
-    default_retention_period: 15 months
-  - suite: Infrastructure
-    product: Cloudcraft
-    data_type: System architectures
-    default_retention_period: Indefinite
-  - suite: Infrastructure
     product: Container Monitoring
     data_type: Container metadata
     default_retention_period: 2 hours
   - suite: Infrastructure
     product: Container Monitoring
+    data_type: Live processes
+    default_retention_period: 36 hours
+  - suite: Infrastructure
+    product: Container Monitoring
+    data_type: Live containers
+    default_retention_period: 36 hours
+  - suite: Infrastructure
+    product: Container Monitoring
+    data_type: Metrics
+    default_retention_period: 15 months
+  - suite: Infrastructure
+    product: Container Monitoring
     data_type: YAML definitions
     default_retention_period: 7 days
   - suite: Infrastructure
-    product: Container Monitoring
-    data_type: Process distribution metrics
+    product: Network Device Monitoring
+    data_type: Metrics
     default_retention_period: 15 months
+  - suite: Infrastructure
+    product: Network Device Monitoring
+    data_type: Netflow
+    default_retention_period: 30 days
+  - suite: Infrastructure
+    product: Network Device Monitoring
+    data_type: SNMP traps (Logs)
+    default_retention_period: 14 days
+  - suite: Infrastructure
+    product: Network Performance Monitoring
+    data_type: Netflow
+    default_retention_period: 14 days
+  - suite: Infrastructure
+    product: Serverless
+    data_type: Metrics
+    default_retention_period: 15 months
+  - suite: Infrastructure
+    product: Serverless
+    data_type: Traces
+    default_retention_period: 30 days
   - suite: Infrastructure
     product: Universal Service Monitoring
     data_type: RED metrics
     default_retention_period: 15 months
-  - suite: Logs
-    product: Logs Management
+  - suite: Logs and Metrics
+    product: Logs
+    data_type: Errors
+    default_retention_period: Determined by customer plan
+  - suite: Logs and Metrics
+    product: Log Management
     data_type: Logs
-    default_retention_period: Plan
-  - suite: Logs
-    product: Observability Pipelines
-    data_type: Worker configurations
-    default_retention_period: Indefinite
-  - suite: Platform
-    product: CoScreen
-    data_type: Sessions
-    default_retention_period: 15 months
-  - suite: Platform
-    product: CoScreen
-    data_type: Anonymized client-side telemetry
-    default_retention_period: 90 days
-  - suite: Platform
-    product: App Builder
-    data_type: Apps
-    default_retention_period: Indefinite
-  - suite: Platform
-    product: Workflow Automation
-    data_type: Workflows
-    default_retention_period: 30 days
-  - suite: Platform
-    product: Reference Tables
-    data_type: Tables
-    default_retention_period: Indefinite
-  - suite: Platform
-    product: Dashboards / Notebooks / Monitors
-    data_type: Dashboards / Notebooks / Monitors
-    default_retention_period: Indefinite
-  - suite: Platform
+    default_retention_period: Determined by customer plan
+  - suite: Logs and Metrics
     product: Metrics
     data_type: Custom metrics
     default_retention_period: 15 months
-  - suite: Security
-    product: Software Composition Analysis
-    data_type: Detected Vulnerabilities
-    default_retention_period: 15 months
-  - suite: Security
-    product: Application Security Management
-    data_type: Security signals
-    default_retention_period: 15 months
-  - suite: Security
-    product: Application Security Management
-    data_type: Spans
-    default_retention_period: 90 days
-  - suite: Security
-    product: Application Security Management
-    data_type: Comments / IP addresses
-    default_retention_period: Indefinite
-  - suite: Security
-    product: Cloud Security Management
-    data_type: Findings
-    default_retention_period: 15 months
-  - suite: Security
-    product: Cloud SIEM
-    data_type: Security signals
-    default_retention_period: 15 months
-  - suite: Security
-    product: Cloud SIEM
-    data_type: Security notifications and rules
-    default_retention_period: Indefinite
-  - suite: Service Management
-    product: Incident Management
-    data_type: Incidents
-    default_retention_period: Indefinite
-  - suite: Service Management
-    product: Case Management
-    data_type: Cases
-    default_retention_period: Indefinite
-  - suite: Service Management
-    product: Service Level Objectives
-    data_type: Results
-    default_retention_period: 45 days
-  - suite: Service Management
-    product: Service Level Objectives
-    data_type: Snapshots
-    default_retention_period: Indefinite
-  - suite: Software Delivery
-    product: CI Pipeline Visibility
-    data_type: Pipelines
-    default_retention_period: 15 months
-  - suite: Software Delivery
-    product: CD Visibility
-    data_type: Deployments
-    default_retention_period: 30 days
-  - suite: Software Delivery
-    product: Test Visibility & Intelligent Test Runner, Continuous Testing
-    data_type: Tests
-    default_retention_period: 3 months
-  - suite: Software Delivery
-    product: DevOps Research and Assessment (DORA)
-    data_type: Metrics
-    default_retention_period: 15 months
-  - suite: Software Delivery
-    product: Quality Gates
-    data_type: Gates
-    default_retention_period: 30 days
-  - suite: Software Delivery
-    product: Code Analysis
-    data_type: Scans
-    default_retention_period: 15 months
+  - suite: Platform
+    product: 
+    data_type: 
+    default_retention_period: 
+  - suite: Platform
+    product: 
+    data_type: 
+    default_retention_period: 
+  - suite: Platform
+    product: 
+    data_type: 
+    default_retention_period: 
+  - suite: Platform
+    product: 
+    data_type: 
+    default_retention_period: 
+  - suite: Platform
+    product: 
+    data_type: 
+    default_retention_period: 
+  - suite: 
+    product: 
+    data_type: 
+    default_retention_period: 
 
 ---
 
