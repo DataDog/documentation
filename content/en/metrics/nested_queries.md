@@ -65,7 +65,6 @@ Additional layers provided by multilayer time aggregation supports additional ti
 This query first calculates the average CPU utilization for each EC2 instance grouped by `env` and `team`, rolled up into 5-minute intervals. Then multilayer time aggregation is applied to calculate the 95th percentile in time of this nested query over 30m intervals. 
 
 ```text
-"rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
 ```
 
 In the UI or JSON tab, it would look as follows:
