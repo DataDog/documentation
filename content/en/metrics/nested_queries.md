@@ -125,14 +125,13 @@ In the UI or JSON tab, it would look as follows:
 
 ## Percentiles and Standard Deviation for Aggregated Counts/Rates/Gauges
 
-Percentiles and standard deviation for aggregated counts/rates/gauges are a part of the multilayer aggregation aggregators. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. The percentile/standard deviation calculation offered in nested queries is computed on top of the results of an existing, aggregated metric query. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics](https://docs.datadoghq.com/metrics/distributions/) instead. 
+Percentiles and standard deviation for aggregated counts/rates/gauges are a part of the multilayer aggregation aggregators. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. The percentile/standard deviation calculation offered in nested queries is computed on top of the results of an existing, aggregated metric query. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
 
 
 {{% collapse-content title="Percentiles example query" level="h5" %}}
 
-```text
+
 We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
-```
 
 In the UI or JSON tab, it would look as follows:
 
@@ -141,7 +140,12 @@ In the UI or JSON tab, it would look as follows:
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
+Similarly, we can use percentiles in multilayer time aggregation. Here we "Use Case 3: Compute the 50th percentile in time for api request count every 2 hours from 10 minutes ago"
 
+ {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
+
+ {{< img src="/metrics/nested_queries/percentiles-time-agg-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
+{{% /collapse-content %}} 
 
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
@@ -199,3 +203,4 @@ You can use nested queries functionality in our public API for querying timeseri
 [6]: /metrics/nested-queries/#multilayer-aggregation
 [7]: /metrics/nested-queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
 [8]: /metrics/nested-queries/#higher-resolution-queries
+[9]: /metrics/distributions/
