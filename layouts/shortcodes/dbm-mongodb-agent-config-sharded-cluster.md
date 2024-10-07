@@ -112,7 +112,7 @@ instances:
     dbm: true
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
-    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks"]
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks", "sharded_data_distribution"]
     database_autodiscovery:
       enabled: true
   ## Shard1
