@@ -67,9 +67,6 @@ Other functions cannot be combined with multilayer aggregation.
 {{% collapse-content title="Time aggregation example query" level="h5" %}}
 This query first calculates the average CPU utilization for each EC2 instance grouped by `env` and `team`, rolled up into 5-minute intervals. Then multilayer time aggregation is applied to calculate the 95th percentile in time of this nested query over 30m intervals. 
 
-```text
-```
-
 
 {{< img src="/metrics/nested_queries/multilayer-time-agg-ui.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
 
@@ -115,14 +112,9 @@ All space aggregators with the exception of percentile space aggregators have on
 
 
 {{% collapse-content title="Space aggregation example queries" level="h5" %}}
-The following query calculates the sum of average CPU utilization, grouped by environment:
-
-```text
-```
+The following query calculates the sum of average CPU utilization, grouped by `env`:
 
 
-```text
-```
 In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-space-agg-ui.png" alt="example of multilayer space aggregation in the UI" style="width:100%;" >}}
@@ -137,6 +129,7 @@ Percentiles and standard deviation for aggregated counts/rates/gauges are a part
 
 
 {{% collapse-content title="Percentiles example query" level="h5" %}}
+
 ```text
 We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
 ```
@@ -204,5 +197,5 @@ You can use nested queries functionality in our public API for querying timeseri
 [4]: /metrics/distributions/
 [5]: /metrics/#anatomy-of-a-metric-query
 [6]: /metrics/nested-queries/#multilayer-aggregation
-[7]: /metrics/nested-queries/#percentiles-and-standard-deviation-for-aggregated-counts/rates/gauges
+[7]: /metrics/nested-queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
 [8]: /metrics/nested-queries/#higher-resolution-queries
