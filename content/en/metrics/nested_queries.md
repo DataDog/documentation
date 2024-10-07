@@ -67,7 +67,6 @@ This query first calculates the average CPU utilization for each EC2 instance gr
 ```text
 ```
 
-In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-time-agg-ui.png" alt="example of multilayer time aggregation in the JSON" style="width:100%;" >}}
 
