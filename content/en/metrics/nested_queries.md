@@ -9,7 +9,7 @@ further_reading:
 ## Overview
 
 {{< callout url="#" btn_hidden="true">}}
-  This feature is in Preview.
+  This feature is in Preview. Please reach out to Customer Success to get this feature enabled. 
 {{< /callout >}}  
 
 Datadog offers custom roll-up capabilities with [time and space aggregation][2] on metric queries, but were limited to only one-time aggregation and one space aggregation per query. Time aggregation rolls data points into time buckets to effectively display large volumes of points. Space aggregation splits a single metric into multiple timeseries by tag. On top of these aggregations, you may want to add an additional layer of aggregation on top of existing queries. For instance, if you wanted the average latency of your EC2 instances by host, then find the max average over every hour. Now, with the introduction of nested queries, you can now reaggregate the results of existing query in time and/or space. 
