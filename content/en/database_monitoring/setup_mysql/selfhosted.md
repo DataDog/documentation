@@ -21,6 +21,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
+Supported MariaDB versions
+: 10.5, 10.6, 10.11, or 11.1 <br/><br/>
+Database Monitoring for MariaDB is supported with [known limitations][13].
+
 Supported Agent versions
 : 7.36.1+
 
@@ -156,6 +160,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ## Install the Agent
 
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
@@ -176,10 +183,8 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
-
-**Note**: Wrap your password in single quotes in case a special character is present.
 
 Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 
@@ -299,3 +304,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql
+[13]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations

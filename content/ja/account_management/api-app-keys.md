@@ -15,7 +15,7 @@ API キーは組織に固有で、Datadog Agent でメトリクスとイベン�
 
 ## アプリケーションキー
 
-組織の API キーと組み合わせて[アプリケーションキー][2]を使用すると、ユーザーは Datadog のプログラム API に完全にアクセスできます。アプリケーションキーは、これを作成したユーザーアカウントに関連付けられており、デフォルトで作成したユーザーのアクセス許可とスコープを備えています。
+組織の API キーと組み合わせて[アプリケーションキー][2]を使用すると、ユーザーは Datadog のプログラム API にアクセスできます。アプリケーションキーは、これを作成したユーザーアカウントに関連付けられており、デフォルトで作成したユーザーの権限とスコープを持っています。
 
 ### スコープ
 
@@ -32,11 +32,11 @@ API キーは組織に固有で、Datadog Agent でメトリクスとイベン�
 
 ## クライアントトークン
 
-セキュリティ上の理由から、API キーはクライアント側で公開されるため、ブラウザ、モバイル、TV アプリからのデータ送信には使用できません。その代わりに、エンドユーザー向けアプリケーションでは、クライアントトークンを使用して Datadog にデータを送信します。
+セキュリティ上の理由から、API キーはクライアント側で公開されるため、ブラウザ、モバイル、TV アプリからのデータ送信には使用できません。その代わりに、エンドユーザー向けのアプリケーションでは、クライアントトークンを使用して Datadog にデータを送信します。
 
 以下の例を含む、いくつかのタイプのクライアントが、クライアントトークンを必要とするデータを送信します。
-- [Web ブラウザ][6]、[Android][12]、[iOS][13]、[React Native][14]、[Flutter][15]、[Roku][16] のログコレクターがログを送信します。
-- [リアルユーザーモニタリング][7]アプリケーションがイベントとログを送信する。
+- [Web ブラウザ][6]、[Android][7]、[iOS][8]、[React Native][9]、[Flutter][10]、[Roku][11] のログコレクターがログを送信します。
+- [リアルユーザーモニタリング][12]アプリケーションがイベントとログを送信する。
 
 クライアントトークンは、組織に固有のものです。クライアントトークンを管理するには、**Organization Settings** に移動し、**Client Tokens** タブをクリックします。
 
@@ -46,15 +46,17 @@ API キーは組織に固有で、Datadog Agent でメトリクスとイベン�
 
 Datadog API キーまたはクライアントトークンを追加するには
 
-1. オーガニゼーション設定に移動し、**API keys** または **Client Tokens** タブをクリックします。
+1. 組織設定に移動し、[**API keys**][1] または [**Client Tokens**][13] タブをクリックします。
 2. 作成するものに応じて、**New Key** (新しいキー) または **New Client Token** (新しいクライアントトークン) ボタンをクリックします。
 3. キーまたはトークンの名前を入力します。
 4. **Create API key** (API キーの作成) または **Create Client Token** (クライアントトークンの作成) をクリックします。
 
+{{< img src="account_management/api-key.png" alt="Datadog で組織の API Keys ページに移動する" style="width:80%;" >}}
+
 **注:**
 
 - 組織には、少なくとも最低 1 つ、最大 50 の API キーが必要です。
-- キー名は、オーガニゼーション全体で一意である必要があります。
+- キー名は、組織全体で一意である必要があります。
 
 ## API キーまたはクライアントトークンを削除する
 
@@ -62,7 +64,9 @@ Datadog API キーまたはクライアントトークンを削除するには�
 
 ## アプリケーションキーを追加する
 
-Datadog アプリケーションキーを追加するには、**Organization Settings** > **Application Keys** に移動します。アプリケーションキーを作成するための[アクセス許可][4]がある場合は、**New Key** をクリックします。
+Datadog アプリケーションキーを追加するには、[**Organization Settings** > **Application Keys**][2] に移動します。アプリケーションキーを作成するための[権限][4]がある場合は、**New Key** をクリックします。
+
+{{< img src="account_management/app-key.png" alt="Datadog で組織の Application Keys  ページに移動する" style="width:80%;" >}}
 
 **注:**
 
@@ -70,11 +74,11 @@ Datadog アプリケーションキーを追加するには、**Organization Set
 
 ## アプリケーションキーを削除する
 
-Datadog アプリケーションキーを削除するには、**Organization Settings** > **Application Keys** に移動します。アプリケーションキーを作成、管理するための[アクセス許可][4]がある場合は、自分のキーを表示して、取り消すキーの横にある **Revoke** をクリックできます。すべての組織アプリケーションキーを管理するアクセス許可がある場合は、取り消すキーを検索して、その横にある **Revoke** をクリックできます。
+Datadog アプリケーションキーを削除するには、[**Organization Settings** > **Application Keys**][2] に移動します。アプリケーションキーを作成、管理するための[権限][4]がある場合は、自分のキーを表示して、取り消すキーの横にある **Revoke** をクリックできます。すべての組織アプリケーションキーを管理する権限がある場合は、取り消すキーを検索して、その横にある **Revoke** をクリックできます。
 
 ## アプリケーションキーのスコープ
 
-アプリケーションキーの[認可スコープ][3]を指定するには、UI または [Datadog API にリクエスト][5]して、アプリケーションキーを作成または編集してください。スコープは、[現在のユーザー][8]または[サービスアカウント][9]が所有するアプリケーションキーに対して指定することができます。このフィールドが指定されていない場合、アプリケーションキーはデフォルトで、作成したユーザーと同じスコープと権限をすべて持っています。
+アプリケーションキーの[認可スコープ][3]を指定するには、UI または [Datadog API にリクエスト][5]して、アプリケーションキーを作成または編集してください。スコープは、[現在のユーザー][14]または[サービスアカウント][15]が所有するアプリケーションキーに対して指定することができます。このフィールドが指定されていない場合、アプリケーションキーはデフォルトで、作成したユーザーと同じスコープと権限をすべて持っています。
 
 **注:**
 
@@ -86,7 +90,7 @@ Datadog アプリケーションキーを削除するには、**Organization Set
 
 複数の API キーを使用することで、セキュリティ対策の一環としてキーをローテーションしたり、特定のキーが誤って公開された場合やそのキーに関連づけられたサービスを停止したい場合に取り消すことができます。
 
-API キーが定められた上限の 50 を超えて必要な場合は、上限の引き上げについて[サポートチーム][10]までお問い合わせください。
+API キーが定められた上限の 50 を超えて必要な場合は、上限の引き上げについて[サポートチーム][16]までお問い合わせください。
 
 ## ユーザーアカウントの無効化
 
@@ -94,7 +98,7 @@ API キーが定められた上限の 50 を超えて必要な場合は、上限
 
 ## キーの転送
 
-セキュリティ上の理由から、Datadog はアプリケーションキーをユーザー間で転送しません。アプリケーションキーを共有する必要がある場合は、[サービスアカウント][11]を使用します。
+セキュリティ上の理由から、Datadog はアプリケーションキーをユーザー間で転送しません。アプリケーションキーを共有する必要がある場合は、[サービスアカウント][17]を使用します。
 
 ## API キーやアプリケーションキーが流出した場合の対処法
 
@@ -115,11 +119,11 @@ API キーが定められた上限の 50 を超えて必要な場合は、上限
     - 新しいリソース
     - ロールまたは権限の変更
 
-異常な行動が確認された場合、またはアカウントの安全確保にさらに支援が必要な場合は、[Datadog サポート][10]に連絡してください。
+異常な行動が確認された場合、またはアカウントの安全確保にさらに支援が必要な場合は、[Datadog サポート][16]に連絡してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
@@ -127,13 +131,14 @@ API キーが定められた上限の 50 を超えて必要な場合は、上限
 [4]: /ja/account_management/rbac/permissions
 [5]: /ja/api/latest/key-management/
 [6]: /ja/logs/log_collection/javascript/
-[7]: /ja/real_user_monitoring/
-[8]: /ja/api/latest/key-management/#create-an-application-key-for-current-user
-[9]: /ja/api/latest/service-accounts/
-[10]: /ja/help/
-[11]: /ja/account_management/org_settings/service_accounts/
-[12]: /ja/logs/log_collection/android/
-[13]: /ja/logs/log_collection/ios/
-[14]: /ja/logs/log_collection/reactnative/
-[15]: /ja/logs/log_collection/flutter/
-[16]: /ja/logs/log_collection/roku/
+[7]: /ja/logs/log_collection/android/
+[8]: /ja/logs/log_collection/ios/
+[9]: /ja/logs/log_collection/reactnative/
+[10]: /ja/logs/log_collection/flutter/
+[11]: /ja/logs/log_collection/roku/
+[12]: /ja/real_user_monitoring/
+[13]: https://app.datadoghq.com/organization-settings/client-tokens
+[14]: /ja/api/latest/key-management/#create-an-application-key-for-current-user
+[15]: /ja/api/latest/service-accounts/
+[16]: /ja/help/
+[17]: /ja/account_management/org_settings/service_accounts/

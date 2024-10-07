@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/logs/faq/how-to-set-up-only-logs
-kind: documentación
 title: Uso exclusivo del Datadog Agent para la recopilación de logs
 ---
 

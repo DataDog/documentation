@@ -43,14 +43,34 @@ Use the dependency map to visualize service-to-service communication and gain in
 
 To opt in, Datadog recommends you adjust your:
 - [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
-- [APM tracing libraries](#apm-tracing-libary-configuration) configuration
+- [APM tracing libraries](#apm-tracing-library-configuration) configuration
 
 ### Datadog Agent configuration
 
-Requirements:
-- Datadog Agent version >= [7.50.3][4].
+#### Datadog Agent 7.55.1 and higher
 
-Update your `datadog.yaml` configuration file with the following:
+From Datadog Agent version >= [7.55.1][9], update your `datadog.yaml` configuration file with the following:
+
+{{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
+
+apm_config:
+  compute_stats_by_span_kind: true
+  peer_tags_aggregation: true
+
+{{< /code-block >}}
+
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+
+{{< code-block collapsible="true" lang="yaml" >}}
+
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_PEER_TAGS_AGGREGATION=true
+
+{{< /code-block >}}
+
+#### Datadog Agent version between 7.50.3 and 7.54.1
+
+If you use a Datadog Agent version >= [7.50.3][4] and <= 7.54.1, update your `datadog.yaml` configuration file with the following:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -108,7 +128,7 @@ exporters:
 {{< /code-block >}}
 
 
-### APM tracing libary configuration
+### APM tracing library configuration
 
 <div class="alert alert-warning">The following steps introduce a <b>breaking change</b>: Datadog will change the way service names are captured by default. Refer to <a href="#global-default-service-naming-migration">Global default service naming migration</a>, to determine if you need to take any migration actions.</div>
 
@@ -222,6 +242,23 @@ To opt in, add the following environment variables to your tracer settings or sy
 
 ### List of newly introduced peer.* tags 
 
+`peer.*` dimensions | Remapped from ...
+--------------------|-------------------
+`peer.aws.dynamodb.table` | `tablename`
+`peer.aws.kinesis.stream` | `streamname`
+`peer.aws.s3.bucket` | `bucketname`, `aws.s3.bucket`
+`peer.aws.sqs.queue` | `queuename`
+`peer.cassandra.contact.points` | `db.cassandra.contact.points`
+`peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
+`peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
+`peer.db.system` | `db.system`
+`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`
+`peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
+`peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
+`peer.messaging.system` | `messaging.system`
+`peer.rpc.service` | `rpc.service`
+`peer.rpc.system` | `rpc.system`
+`peer.service` | `peer.service`
 
 ### Global default service naming migration
 
@@ -262,3 +299,4 @@ And these target similar service names, update those items to use the global def
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L517-L538 
+[9]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1

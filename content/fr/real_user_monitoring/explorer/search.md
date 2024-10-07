@@ -28,11 +28,13 @@ Bien que la solution RUM enregistre automatiquement des événements, vous pouve
 
 Pour recherche des événements RUM, sélectionnez un type d'événements depuis le menu déroulant situé à gauche de la barre de recherche.
 
-{{< img src="real_user_monitoring/explorer/search/rum_explorer_search.png" alt="RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM Explorer" style="width:100%;">}}
 
 ## Requête de recherche
 
-Pour appliquer un filtre basé sur les sessions générées par les utilisateurs réels d'une certaine application au cours des dernières 24 heures, créez une requête personnalisée, par exemple `@application.id:Shopist @session.type:user`, et définissez l'intervalle sur `1d`.
+Pour appliquer un filtre basé sur les sessions générées par les utilisateurs réels d'une certaine application au cours des dernières 24 heures, utilisez le sélecteur d'applications en haut de la barre de navigation, puis créez une requête personnalisée (par exemple `@session.type:user`) et définissez l'intervalle sur `1d`.
+
+**Remarque :** si votre requête doit inclure une facette, n'oubliez pas de créer la facette en premier.
 
 ### Syntaxe de recherche
 
@@ -42,17 +44,25 @@ Pour en savoir plus sur la recherche d'événements RUM et l'utilisation d'inter
 
 Tous les événements RUM contiennent des attributs, qui sont automatiquement recueillis par les SDK RUM, ainsi que vos attributs personnalisés, qui sont indiqués dans le [volet latéral des événements][7].
 
-Bien que la plupart des attributs recueillis automatiquement soient indexés et possèdent une facette, ce n'est par défaut pas le cas pour les attributs d'événement personnalisés. Pour indexer ces attributs, créez une facette ou une mesure, afin de pouvoir les utiliser facilement dans vos recherches et vos [visualisations][8].
+Bien que la plupart des attributs recueillis automatiquement soient indexés et associés à une facette, ce n'est par défaut pas le cas pour les attributs d'événement personnalisés. Pour indexer ces attributs, créez une facette ou une mesure afin de pouvoir les utiliser dans vos recherches et vos [visualisations][8].
 
 ### Facettes
 
 Une facette présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre d'événements RUM représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour appliquer un filtre dans la barre de recherche, sélectionnez une valeur.
 
-{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="Liste des facettes à gauche de la liste des événements" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/rum-facet-3.png" alt="Liste des facettes à gauche de la liste des événements" style="width:90%;">}}
 
-Pour créer une facette, cliquez sur un attribut dans le [volet latéral des événements][7].
+Pour créer une facette, cliquez sur un attribut dans le [volet latéral des événements][7]. Cela crée une section d'attributs pour les valeurs dans le volet latéral, telle que « sous-division Pays ».
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" alt="Créer une facette" style="width:40%;">}}
+
+Pour créer une facette (Virginia, par exemple) à partir des métadonnées d'une session, cliquez sur **+ Add** depuis le volet de gauche, puis saisissez un chemin vers la facette ou sélectionnez-le.
+
+{{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="Créer une facette à l'aide du bouton + Add de la liste des facettes" style="width:40%;">}}
+
+Vous pouvez cliquer sur **Advanced options** pour configurer plus en détail la facette, par exemple en lui donnant un nom d'affichage, un type, un groupe ou une description différents.
+
+{{< img src="real_user_monitoring/explorer/create-facet-2.png" alt="Options avancées de la nouvelle facette" style="width:40%;">}}
 
 La valeur de cet attribut est stockée pour l'ensemble des nouvelles vues. Vous pouvez utiliser l'attribut dans la barre de recherche, le volet des **facettes** et vos [visualisations][8].
 

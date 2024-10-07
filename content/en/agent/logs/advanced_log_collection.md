@@ -502,6 +502,18 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
+If no pattern meets the line match threshold, add the `auto_multi_line_default_match_threshold` parameter with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
+  auto_multi_line_default_match_threshold: 0.1
+```
+
+[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -516,6 +528,11 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
         "auto_multi_line_detection": true
       }]
 ```
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
+
+If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+
+[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -545,6 +562,12 @@ spec:
         - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
+
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
+
+If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+
+[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 
 {{% /tab %}}
 {{< /tabs >}}

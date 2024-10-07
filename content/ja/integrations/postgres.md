@@ -25,8 +25,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 28
     source_type_name: Postgres
-  logs:
-    source: postgresql
   monitors:
     percent_usage_connections: assets/monitors/percent_usage_connections.json
     replication_delay: assets/monitors/replication_delay.json
@@ -46,6 +44,7 @@ categories:
 - log collection
 - notifications
 - tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_on_public_website: true
@@ -53,9 +52,8 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 18.2.1
+integration_version: 19.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: postgres
 public_title: Postgres
@@ -74,10 +72,22 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/postgresql-monitoring
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
   support: README.md#Support
   title: Postgres
 ---
@@ -93,15 +103,15 @@ Postgres インテグレーションは、Postgres データベースの健全�
 
 [データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
-## 計画と使用
+## セットアップ
 
 <div class="alert alert-info">このページでは、標準的な Postgres Agent のインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### インフラストラクチャーリスト
+### インストール
 
 PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][3]。
 
-### ブラウザトラブルシューティング
+### 構成
 
 **注**: PostgreSQL 用のデータベースモニタリングをインストールするには、[データベースモニタリングドキュメント][4]でご利用のホスティングソリューションを選択して、手順を確認してください。
 
@@ -153,7 +163,7 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 
 **注**: その他の表へのクエリを必要とするカスタムメトリクスを生成する際は、`datadog` ユーザーにそれらの表への `SELECT` 権限を付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳しくは、[よくあるご質問セクション][1]をご確認ください。
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -253,7 +263,7 @@ Datadog APM は Postgres を統合して、分散システム全体のトレー�
 1. [Datadog でトレースの収集を有効にします][4]。
 2. [Postgres へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -336,7 +346,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%", "port":5432,"username":"datadog","password":"<PASSWORD>"}]'
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -371,7 +381,7 @@ Agent コンテナで必要な環境変数
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -430,7 +440,7 @@ spec:
     - name: postgres
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
@@ -499,7 +509,7 @@ Agent コンテナで必要な環境変数
 }
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -546,25 +556,25 @@ Agent コンテナで必要な環境変数
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `postgres` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 以下に記載されているメトリクスのいくつかには、追加の構成が必要です。すべての構成オプションについては、[サンプル postgres.d/conf.yaml][6] を参照してください。
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "postgres" >}}
 
 
 Agent のバージョン `7.32.0` 以降では、Database Monitoring を有効にすると、`postgresql.connections` メトリクスに `state`、`app`、`db` および `user` がタグ付けされます。
 
-### ヘルプ
+### イベント
 
 PostgreSQL チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "postgres" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

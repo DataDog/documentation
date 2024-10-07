@@ -9,7 +9,9 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+
+{{< partial name="security-platform/CSW-billing-note.html" >}}
 
 ## Prerequisites
 
@@ -80,15 +82,18 @@ Use the following instructions to enable Misconfigurations, Threat Detection, Ho
       sbom:
         containerImage:
           enabled: true
-        # Enables Container Vulnerability Management
-        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-        containerImageCollection:
-          enabled: true
+
           # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
           # uncompressedLayersSupport: true
+
         # Enables Host Vulnerability Management
         host:
           enabled: true
+
+        # Enables Container Vulnerability Management
+        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+        # containerImageCollection:
+        #   enabled: true
     ```
 
 2. Restart the Agent.

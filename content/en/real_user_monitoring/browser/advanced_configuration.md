@@ -81,6 +81,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
+   - Context: Starting with [version 5.28.0][20], you can add context to views and the child events of views.
 
    For more information, see [Setup Browser Monitoring][4].
 
@@ -92,9 +93,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% tab "NPM" %}}
    ```javascript
    datadogRum.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3'
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
 
@@ -102,25 +106,69 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% tab "CDN async" %}}
    ```javascript
    window.DD_RUM.onReady(function() {
-       window.DD_RUM.startView({
-         name: 'checkout',
-         service: 'purchase',
-         version: '1.2.3'
-       })
+      window.DD_RUM.startView({
+            name: 'checkout',
+            service: 'purchase',
+            version: '1.2.3',
+            context: {
+                payment: 'Done'
+            },
+      })
    })
    ```
    {{% /tab %}}
    {{% tab "CDN sync" %}}
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3'
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
    {{% /tab %}}
    {{< /tabs >}}
-   </details>
+
+</details>
+<details>
+<summary>before <code>v5.28.0</code></summary>
+The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. It uses <code>checkout</code> for the view name and associates the <code>purchase</code> service with version <code>1.2.3</code>.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3'
+  })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+{{% /tab %}}
+{{< /tabs >}}
+</details>
 
    <details>
      <summary>before <code>v4.13.0</code></summary>
@@ -397,7 +445,7 @@ The RUM Browser SDK ignores:
 
 ### Enrich RUM events with feature flags
 
-You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
+You can [enrich your RUM event data with feature flags][14] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 
 ### Modify the content of a RUM event
 
@@ -459,7 +507,7 @@ You can update the following event properties:
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
-|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context) or when generating events manually (for example, `addError` and `addAction`). RUM view events `context` is read-only.                                                                                 |
+|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**).                                                                                 |
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
@@ -793,6 +841,108 @@ acceptCookieBannerButton.addEventListener('click', () => {
 {{% /tab %}}
 {{< /tabs >}}
 
+## View context
+
+Starting with [version 5.28.0][20], the context of view events is modifiable. Context can be added to the current view only, and populates its child events (such as `action`, `error`, and `timing`) with `startView`, `setViewContext`, and `setViewContextProperty` functions.
+
+### Start view with context
+
+Optionally define the context while starting a view with [`startView` options](#override-default-rum-view-names).
+
+### Add view context
+
+Enrich or modify the context of RUM view events and corresponding child events with the `setViewContextProperty(key: string, value: any)` API.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+
+// Code example
+datadogRum.setViewContextProperty('activity', {
+    hasPaid: true,
+    amount: 23.42
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+})
+
+// Code example
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContextProperty('activity', {
+        hasPaid: true,
+        amount: 23.42
+    });
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+
+// Code example
+window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
+    hasPaid: true,
+    amount: 23.42
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Replace view context
+
+Replace the context of your RUM view events and corresponding child events with `setViewContext(context: Context)` API.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+datadogRum.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// Code example
+datadogRum.setViewContext({
+    originalUrl: 'shopist.io/department/chairs',
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+})
+
+// Code example
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContext({
+      originalUrl: 'shopist.io/department/chairs',
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// Code example
+window.DD_RUM &&
+    window.DD_RUM.setViewContext({
+        originalUrl: 'shopist.io/department/chairs',
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 ## Global context
 
 ### Add global context property
@@ -1035,3 +1185,5 @@ However, this feature comes with some **limitations**:
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+

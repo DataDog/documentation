@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting React Native SDK issues
 description: Learn how to troubleshoot issues with React Native Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: reactnative
 type: multi-code-lang
 code_lang_weight: 50
@@ -31,7 +29,7 @@ Sometimes, no data is sent due to a small misstep in the configuration.
 Here are some common things to check for:
 
 - Ensure your `clientToken` and `applicationId` are correct.
-- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might be sent.
+- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might not be sent.
 - If you've set up a `Proxy` in the Datadog configuration, check that it has been correctly configured.
 - Check that you are **tracking views** (all events must be attached to a view) and **sending events**.
 
@@ -281,13 +279,9 @@ dependencies {
 }
 ```
 
-## Sending data when device is offline
+## "Deobfuscation failed" warning
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native RUM SDK does not use too much disk space.
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][6] to view all your uploaded source maps, dSYMs, and mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][7].
 
 ## Further Reading
 
@@ -298,3 +292,5 @@ This means that even if users open your application while offline, no data is lo
 [3]: https://github.com/JakeWharton/pidcat/issues/180#issuecomment-1124019329
 [4]: https://github.com/facebook/react-native/commit/6e08f84719c47985e80123c72686d7a1c89b72ed
 [5]: https://github.com/facebook/react-native/issues/28801
+[6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: /real_user_monitoring/guide/debug-symbols

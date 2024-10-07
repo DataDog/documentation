@@ -21,8 +21,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10059
     source_type_name: Vault
-  logs:
-    source: vault
   monitors:
     '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
   saved_views:
@@ -37,6 +35,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_on_public_website: true
@@ -44,9 +43,8 @@ draft: false
 git_integration_title: vault
 integration_id: vault
 integration_title: Vault
-integration_version: 4.1.0
+integration_version: 4.2.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: vault
 public_title: Vault
@@ -63,10 +61,20 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Vault は機密情報管理サービスアプリケーション
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/vault-monitoring-tools
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/vault-monitoring-with-datadog
   support: README.md#Support
   title: Vault
 ---
@@ -78,9 +86,9 @@ tile:
 
 このチェックは、[Vault][1] クラスターの健全性とリーダーの変更を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Vault チェックは [Datadog Agent][2] パッケージに含まれています。
 
@@ -144,12 +152,12 @@ Vault インテグレーションには以下の機能が必要です。
   }
   ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -215,7 +223,7 @@ Vault インテグレーションには以下の機能が必要です。
 
 Vault の認証コンフィギュレーションに応じて、`INSTANCE_CONFIG` をカスタマイズする必要があります。上記のホストセクションの例を参照してください。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -269,25 +277,25 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `vault` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "vault" >}}
 
 
 
 [`vault.replication.fetchRemoteKeys`、`vault.replication.merkleDiff`、`vault.replication.merkleSync` で始まるメトリクス]は、レプリケーションが不健全状態でなければ報告されません。
 
-### ヘルプ
+### イベント
 
 `vault.leader_change`:
 このイベントは、クラスターリーダーが変更されると発生します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "vault" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

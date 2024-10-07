@@ -1,177 +1,223 @@
 ---
 aliases:
-- /ko/getting_started/tracing/distributed-tracing
+- /getting_started/tracing/distributed-tracing
 further_reading:
-- link: /tracing/trace_collection/
+- link: /tracing/
   tag: 설명서
-  text: 애플리케이션 언어를 선택해주세요
-- link: /tracing/glossary/
+  text: APM 기능에 대해 더 알아보기
+- link: /tracing/metrics/runtime_metrics/
   tag: 설명서
-  text: APM UI 사용하기
+  text: 런타임 메트릭 활성화
+- link: /tracing/guide/#enabling-tracing-tutorials
+  tag: 가이드
+  text: 추적을 활성화하는 다양한 방법 튜토리얼
 - link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: 학습 센터
   text: 애플리케이션 성능 모니터링 소개
 - link: https://dtdg.co/fe
-  tag: 기반 활성화
-  text: 대화형 세션에 참여해 애플리케이션 성능 모니터링(APM)에 대한 이해도를 향상하세요.
-title: 트레이싱 시작하기
+  tag: 기초 구축
+  text: 대화형 세션에 참여해 애플리케이션 성능 모니터링(APM)에 대한 이해도를 높이세요.
+title: APM 추적 시작하기
 ---
 
 ## 개요
 
-Datadog의 애플리케이션 성능 모니터링(APM 또는 '트레이싱'이라고 합니다)을 사용하면 백엔드 애플리케이션 코드에서 [트레이스][1]를 수집할 수 있습니다. 이번 초보자용 가이드에서는 첫 트레이스를 Datadog로 가져오는 방법을 설명합니다.
+Datadog APM(애플리케이션 성능 모니터링)을 이용하면 애플리케이션을 더욱 상세히 가시화할 수 있어 성능 병목 현상을 파악하고, 오류를 트러블슈팅하고, 서비스를 최적화할 수 있습니다.
 
-**참조**: Datadog APM은 다양한 언어와 프레임워크로 사용할 수 있습니다. 자세한 내용은 [애플리케이션 계측][2] 문서를 참조하세요.
+이 가이드에서는 APM을 시작해 Datadog로 첫 트레이스를 전송하는 방법을 설명합니다.
 
-## Datadog 계정
+1. Datadog APM을 설정해 Datadog로 트레이스를 보낼 수 있습니다.
+1. 애플리케이션을 실행해 데이터를 생성합니다.
+1. Datadog에서 수집한 데이터를 탐색합니다.
 
-계정이 없다면 [Datadog 계정][3]을 만드세요.
+## 사전 필수 조건
 
-## Datadog 에이전트
+본 지침을 완료하려면 다음이 필요합니다.
 
-Datadog 에이전트를 설치하기 전에, 다음 명령어를 사용하여 [Vagrant Ubuntu 22.04 가상머신][4]을 설치하세요. Vagrant에 대해 더 자세히 알아보려면 [시작하기][5] 페이지를 참고하세요.
+1. 계정이 없는 경우 [Datadog 계정을 생성][1]하세요.
+1. [Datadog API 키][2]를 검색 또는 생성하세요.
+1. Linux 호스트나 VM을 시작하세요
 
-```text
-vagrant init ubuntu/jammy64
-vagrant up
-vagrant ssh
-```
+## 애플리케이션 생성
 
-호스트 상에 Datadog 에이전트를 설치하려면  [Datadog API 키][7]와 함께 업데이트된 [원라인 설치 명령어][6]를 사용하세요.
+Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
+1. Linux 호스트나 VM에서 이름이 `hello.py`인 새 Python 애플리케이션을 생성하세요(예: `nano hello.py`).
+1. `hello.py`에 다음 코드를 추가하세요.
 
-### 검증
+    {{< code-block lang="python" filename="hello.py" collapsible="true" disable_copy="false" >}}
+  from flask import Flask
+  import random
 
-[상태 명령어][8]를 사용해 에이전트가 실행 중인지 확인합니다.
+  app = Flask(__name__)
 
-```shell
-sudo datadog-agent status
-```
+  quotes = [
+      "성공한 사람보다는 가치 있는 사람이 되라. - 알버트 아인슈타인",
+      "스스로 할 수 있다고 믿으면 절반은 성공이다". - 시어도어 루즈벨트",
+      "미래는 자신의 꿈의 아름다움을 믿는 사람의 것이다. - 엘레노어 루즈벨트"
+  ]
 
-몇 분 후, Datadog의 [인프라스트럭처 목록][9]을 확인하여 에이전트가 계정에 연결되었는지 검증하세요.
+  @app.route('/')
+  def index():
+      quote = random.choice(quotes)+"\n"
+      return quote
 
-## Datadog APM
+  if __name__ == '__main__':
+      app.run(host='0.0.0.0', port=5050)
+  {{< /code-block >}}
 
-### 앱에 안내된 설명서를 따릅니다(권장).
+## Datadog APM 설정
 
-최적의 경험을 위해서는 Datadog 사이트의 [빠른 시작 안내][10]에 안내된 나머지 단계를 따르세요.
+애플리케이션 코드나 배포 프로세스를 수정하지 않고 Datadog APM을 설정하려면 단일 단계 APM 계측을 사용하세요.
 
-- 배포 설정(이번 경우는 호스트 기반의 배포)을 다루는 단계별 안내를 따릅니다.
-- 동적으로 `service`, `env`, `version` 태그를 설정하세요.
-- 연속적 프로파일러를 활성화하면 설정 트레이스를 100% 수집하고 설정 중에 트레이스 ID를 삽입합니다.
+<div class="alert alert-info"><strong>참고</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">단일 단계 APM 계측</a>은 베타 서비스 중입니다. 대신 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Datadog 추적 라이브러리</a>를 사용해 APM을 설정할 수도 있습니다.</div>
 
+1. 설치 명령을 실행하세요
 
-### 애플리케이션 성능 모니터링(APM) 활성화
+   ```shell
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    ```
 
-최신 버전 Agent v6 및 v7의 경우 애플리케이션 성능 모니터링(APM) 이 기본적으로 활성화되어 있습니다. Agent [`datadog.yaml` 설정 파일][11]에서 확인할 수 있습니다:
+    `<YOUR_DD_API_KEY>`를 [Datadog API 키][2]로 변경하고, `<YOUR_DD_SITE>`를 [Datadog 사이트][7]로 변경하며, `<AGENT_ENV>`를 에이전트가 설치된 환경으로 변경하세요(예: `development`).
 
-```yaml
-# apm_config:
-##   Whether or not the APM Agent should run
-#   enabled: true
-```
+1. 셸 세션을 시작하세요.
+1. 내 호스트나 VM에 있는 서비스를 재시작하세요
+1. 에이전트가 실행 중인지 확인하세요
 
-`trace-agent.log`에서도 확인할 수 있습니다.
+    ```shell
+   sudo datadog-agent status
+   ```
 
-```bash
-# /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
-2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
-2019-03-25 20:33:28 INFO (api.go:341) - no data received
-2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
-```
+이 방법을 사용하면 자동으로 Datadog 에이전트가 설치되고, Datadog APM이 활성화되며, 런타임에 애플리케이션이 [계측][5]됩니다.
 
-### 환경 이름
+## 애플리케이션 실행
 
-최상의 경험을 위해 환경 변수`DD_ENV`를 사용하여 서비스의 트래이서를 통해 `env`를 설정하는 것을 권장합니다.
+단일 단계 계측으로 Datadog APM을 설정하면 Datadog가 런타임에 애플리케이션을 자동으로 계측합니다.
 
-또한 트레이서에서 로그 삽입이 활성화된 경우 `env`는 트레이스와 로그 전체에 일관적으로 적용됩니다. 이 부분을 자세히 알고 싶으신 분은 [통합형 서비스 태그 지정][12] 설명을 참조하시기 바랍니다.
+`hello.py`을 실행하는 방법:
 
-또는 `datadog.yaml`을 업데이트하여 환경 이름을 지정하고 `apm_config`에서 `env`를 설정할 수 있습니다. APM의 `env` 설정을 자세히 알아보려면 [범위 설정용 주요 태그 지정 가이드][13]를 참고하세요.
+1. 현재 디렉터리에 Python 가상 환경을 만드세요.
 
-## APM 애플리케이션
+   ```shell
+   python3 -m venv ./venv
+   ```
 
-### 설치
+1. `venv` 가상 환경을 활성화하세요.
 
-애플리케이션을 설정하기 전에 Ubuntu 가상머신에 `pip`, `flask`, `ddtrace`를 설치하세요.
+   ```shell
+   source ./venv/bin/activate
+   ```
 
-```shell
-sudo apt-get install python-pip
-pip install flask
-pip install ddtrace
-```
+1. `pip`과 `flask`를 설치하세요.
 
-### 생성
+   ```shell
+   sudo apt-get install python3-pip
+   pip install flask
+   ```
 
-우분투 가상머신에서 다음 콘텐츠로 `hello.py` 애플리케이션을 생성하세요.
+1. 서비스 이름을 설정하고 `hello.py`를 실행하세요.
 
-```python
-from flask import Flask
-app = Flask(__name__)
+   ```shell
+   export DD_SERVICE=hello
+   python3 hello.py
+   ```
 
-@app.route('/')
-def index():
-    return 'hello world'
+## 애플리케이션을 테스트하세요.
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050)
-```
+트레이스를 Datadog에 전송하려면 애플리케이션을 테스트하세요.
 
-### 실행
+1. 새 명령 프롬프트에서 다음을 실행하세요.
 
-`ddtrace`를 사용하여 `hello.py`를 실행합니다. 이는 Datadog에서 애플리케이션을 자동으로 계측합니다.
+   ```shell
+   curl http://0.0.0.0:5050/
+   ```
+1. 무작위 인용이 반환되는지 확인하세요.
+   ```text
+   Believe you can and you're halfway there. - Theodore Roosevelt
+   ```
 
-```shell
-export DD_SERVICE=hello
-ddtrace-run python hello.py
-```
+`curl` 명령을 실행할 때마다 새 트레이스가 Datadog로 전송됩니다.
 
-이제 다음과 유사한 출력값을 보게 됩니다.
+## Datadog에서 트레이스 탐색
 
-```bash
-* Serving Flask app "hello" (lazy loading)
-  ...
-* Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
-```
+1. Datadog에서 [**APM** > **Services**][3]로 이동하세요. 이름이 `hello`인 Python 서비스가 있습니다.
 
-### 테스트
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service" style="width:100%;" >}}
 
-애플리케이션을 테스트하고 `curl`을 사용하여 Datadog에 트레이스를 보냅니다. 애플리케이션이 (위와 같이) 실행 중인 것이 보입니다. 별도의 명령 프롬프트에서 다음을 실행하세요.
+1. 대기 시간, 처리량, 오류율과 같은 성능 메트릭을 볼 서비스를 선택하세요.
+1. [**APM** > **Traces**][4]로 이동하세요. `hello` 서비스 트레이스가 있습니다.
 
-```text
-vagrant ssh
-curl http://0.0.0.0:5050/
-```
+   {{< img src="/getting_started/apm/trace-explorer.png" alt="hello 서비스를 보여주는 트레이스 탐색기" style="width:100%;" >}}
 
-이제 다음과 같은 출력값이 표시됩니다.
+1. 트레이스를 선택하면 플레임 그래프를 포함한 상세 정보를 볼 수 있습니다. 플레임 그래프는 성능 병목 현상을 파악하는 데 도움이 됩니다.
 
-```text
-hello world
-```
+## 고급 APM 설정
 
-몇 분 후, Datadog `hello` 서비스 아래에 트레이스가 표시됩니다. [Service Catalog][14]나 [trace list][15]을 확인하세요.
+지금까지는 단일 단계 계측을 사용해 Datadog에서 `hello.py` 애플리케이션을 자동으로 계측하는 방법을 알아봤습니다. 코드나 수동으로 라이브러리를 설치하지 않고 일반적인 라이브러리와 언어에서 중요 트레이스를 캡처하고 싶을 때 이 방법을 추천합니다.
 
-{{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
+그러나 커스텀 코드에서 트레이스를 수집해야 하거나 세부적인 제어가 필요할 경우 [커스텀 계측][6]을 추가할 수 있습니다.
+
+예를 들어 Datadog Python 추적 라이브러리를 `hello.py`로 가져와 커스텀 스팬과 스팬 태그를 생성할 수 있습니다.
+
+커스텀 계측을 추가하는 방법:
+
+1. Datadog 추적 라이브러리를 설치합니다.
+
+   ```shell
+   pip install ddtrace
+   ```
+
+1. `hello.py`에 강조 표시한 줄을 추가하여 커스텀 스팬 태그 `get_quote`와 커스텀 스팬 태그 `quote`를 생성하세요.
+
+   {{< highlight python "hl_lines=3 15 17" >}}
+    from flask import Flask
+    import random
+    from ddtrace import tracer
+
+    app = Flask(__name__)
+
+    quotes = [
+        "성공한 사람보다는 가치 있는 사람이 되라. - 알버트 아인슈타인",
+        "스스로 할 수 있다고 믿으면 절반은 성공이다". - 시어도어 루즈벨트",
+        "미래는 자신의 꿈의 아름다움을 믿는 사람의 것이다. - 엘레노어 루즈벨트"
+    ]
+
+    @app.route('/')
+    def index():
+        with tracer.trace("get_quote") as span:
+            quote = random.choice(quotes)+"\n"
+            span.set_tag("quote", quote)
+            return quote
+
+    if __name__ == '__main__':
+        app.run(host='0.0.0.0', port=5050)
+   {{< /highlight >}}
+
+1. 이전 가상 환경에서 `hello.py`를 실행하세요.
+   ```shell
+   ddtrace-run python hello.py
+   ```
+1. 별도의 명령 프롬프트에서 `curl` 명령을 몇 번 실행하세요.
+   ```shell
+   curl http://0.0.0.0:5050/
+   ```
+1. Datadog에서 [**APM** > **Traces**][4]로 이동하세요.
+1. **hello** 트레이스를 선택하세요.
+1. 플레임 그래프에서 새 커스텀 `get_quote` 스팬을 찾아 마우스 커서를 올리세요.
+
+   {{< img src="/getting_started/apm/custom-instrumentation.png" alt="플레임 그래프에 표시된 get_quote 커스텀 스팬, 마우스 커서를 올리면 인용 스팬 태그를 표시" style="width:100%;" >}}
+
+1. 커스텀 `quote` 스팬 태그가 **Info** 탭에 표시됩니다.
+
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/tracing/#terminology
-[2]: https://docs.datadoghq.com/ko/tracing/setup/
-[3]: https://www.datadoghq.com
-[4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
-[5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /ko/agent/configuration/agent-commands/#agent-information
-[9]: https://app.datadoghq.com/infrastructure
-[10]: https://app.datadoghq.com/apm/service-setup
-[11]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[12]: /ko/getting_started/tagging/unified_service_tagging
-[13]: /ko/tracing/guide/setting_primary_tags_to_scope/
-[14]: https://app.datadoghq.com/services
-[15]: https://app.datadoghq.com/apm/traces
+[1]: https://www.datadoghq.com/free-datadog-trial/
+[2]: https://app.datadoghq.com/organization-settings/api-keys/
+[3]: https://app.datadoghq.com/services
+[4]: https://app.datadoghq.com/apm/traces
+[5]: /ko/tracing/glossary/#instrumentation
+[6]: /ko/tracing/trace_collection/custom_instrumentation/
+[7]: /ko/getting_started/site/

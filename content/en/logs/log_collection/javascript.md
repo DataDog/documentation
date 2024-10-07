@@ -364,6 +364,7 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
 | `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.          |
 | `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
+| `sendLogsAfterSessionExpiration` | Boolean                                                             | No       |                 | Keep sending logs after the session expires.
 
 
 Options that must have a matching configuration when using the `RUM` SDK:
@@ -753,7 +754,7 @@ window.DD_LOGS.onReady(function () {
     level: 'info',
     handler: 'http',
     context: { env: 'staging' }
-  )
+  })
 })
 ```
 
@@ -786,7 +787,7 @@ It can then be used in a different part of the code with:
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```

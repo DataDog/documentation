@@ -37,6 +37,8 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 
 OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports.
 
+{{% otel-endpoint-note %}}
+
 For gRPC, default port 4317:
 
 ```yaml
@@ -44,7 +46,7 @@ otlp_config:
   receiver:
     protocols:
       grpc:
-        endpoint: localhost:4317
+        endpoint: 0.0.0.0:4317
 ```
 For HTTP, default port 4318:
 
@@ -53,7 +55,7 @@ otlp_config:
   receiver:
     protocols:
       http:
-        endpoint: localhost:4318
+        endpoint: 0.0.0.0:4318
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
@@ -165,6 +167,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
     receiver:
       protocols:
         grpc:
+          endpoint: 0.0.0.0:4317
           enabled: true
    ```
 
@@ -174,6 +177,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
     receiver:
       protocols:
         http:
+          endpoint: 0.0.0.0:4318
           enabled: true
    ```
 
@@ -201,6 +205,18 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
 
 [1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:
+
+- Instrumenting your Lambda functions with OpenTelemetry
+- Using OpenTelemetry API support within Datadog tracers
+- Sending OpenTelemetry traces to the Datadog Lambda Extension
+
+See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].
+
+[100]: /serverless/aws_lambda/opentelemetry/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -261,5 +277,5 @@ env:
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [10]: /opentelemetry/runtime_metrics/

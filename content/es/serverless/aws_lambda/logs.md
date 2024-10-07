@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Recopilación de logs para AWS Lambda
 ---
 

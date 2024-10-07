@@ -40,6 +40,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 | [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 | [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
+| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines. |
 
 The following GitLab versions are supported:
 
@@ -52,32 +53,33 @@ The following GitLab versions are supported:
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
 
-Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
+Configure the integration on a [project][101] or [group][102] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
 
-[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
+[101]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#view-projects-that-use-custom-settings
+[102]: https://docs.gitlab.com/ee/user/project/integrations/index.html#manage-group-default-settings-for-a-project-integration
+
 {{% /tab %}}
 {{% tab "GitLab &gt;&equals; 14.1" %}}
 
-Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
+Configure the integration on a [project][101] or [group][102] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument. You can also activate the integration at the GitLab [instance][103] level by going to **Admin > Settings > Integrations > Datadog**.
 
-You can also activate the integration at the GitLab [instance][3] level, by going to **Admin > Settings > Integrations > Datadog**.
-
-[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
-[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
+[101]: https://docs.gitlab.com/ee/administration/settings/project_integration_management.html#view-projects-that-use-custom-settings
+[102]: https://docs.gitlab.com/ee/user/project/integrations/index.html#manage-group-default-settings-for-a-project-integration
+[103]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
 {{% /tab %}}
 {{% tab "GitLab &lt; 14.1" %}}
 
-Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
+Enable the `datadog_ci_integration` [feature flag][1] to activate the integration.
 
-**Omnibus installations**
+Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
+
+From **Omnibus Installations**:
 
 {{< code-block lang="shell" >}}
 sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-**From source installations**
+From **Source Installations**:
 
 {{< code-block lang="shell" >}}
 sudo -u git -H bundle exec rails runner \
@@ -85,7 +87,7 @@ sudo -u git -H bundle exec rails runner \
   "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-**Kubernetes installations**
+From **Kubernetes Installations**:
 
 {{< code-block lang="shell" >}}
 kubectl exec -it <task-runner-pod-name> -- \
@@ -94,7 +96,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-warning"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
+<div class="alert alert-danger">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
@@ -103,26 +105,26 @@ Then, configure the integration on a [project][3] by going to **Settings > Integ
 
 {{% tab "GitLab &lt; 13.7" %}}
 
-For older versions of GitLab, you can use [webhooks][1] to send pipeline data to Datadog.
+<div class="alert alert-warning">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
-<div class="alert alert-info"><strong>Note</strong>: Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
+For older versions of GitLab, you can use [webhooks][101] to send pipeline data to Datadog.
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 
-- **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> where `<API_KEY>` is your [Datadog API key][2].
-- **Secret Token**: leave blank
+- **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> where `<API_KEY>` is your [Datadog API key][102].
+- **Secret Token**: Leave this field empty.
 - **Trigger**: Select `Job events` and `Pipeline events`.
 
-To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
+To set custom `env` or `service` parameters, add more query parameters in the webhooks URL. For example, `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`.
 
-**Set custom tags**
+### Set custom tags
 
-To set custom tags to all the pipeline and job spans generated by the integration, add to the **URL** a URL-encoded query parameter `tags`, with `key:value` pairs separated by commas. If a key:value pair contains any commas, surround it with quotes. For example, to add `key1:value1,"key2: value with , comma",key3:value3`, the following string would need to be appended to the **Webhook URL**:
+To set custom tags to all the pipeline and job spans generated by the integration, add a URL-encoded query parameter `tags` with `key:value` pairs separated by commas to the URL.
 
-`?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
+If a key:value pair contains any commas, surround it with quotes. For example, to add `key1:value1,"key2: value with , comma",key3:value3`, the following string would need to be appended to the **Webhook URL**: `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`.
 
-[1]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+[101]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+[102]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -141,14 +143,14 @@ Fill in the integration configuration settings:
 **Default**: (empty, no override)
 
 **API key**
-: Specifies which API key to use when sending data. You can generate one in the [APIs tab][2] of the Integrations section on Datadog.
+: Specifies which [Datadog API key][2] to use when sending data.
 
 **Service** (optional)
 : Specifies which service name to attach to each span generated by the integration. Use this to differentiate between GitLab instances.<br/>
 **Default**: `gitlab-ci`
 
 **Env** (optional)
-: Specifies which environment (`env` tag) to attach to each span generated by the integration. Use this to differentiate between groups of GitLab instances (for example: staging or production).<br/>
+: Specifies which environment (`env` tag) to attach to each span generated by the integration. Use this to differentiate between groups of GitLab instances (for example, staging or production).<br/>
 **Default**: `none`
 
 **Tags** (optional)
@@ -156,45 +158,29 @@ Fill in the integration configuration settings:
 **Default**: (empty, no additional tags)<br/>
 **Note**: Available only in GitLab.com and GitLab >= 14.8 self-hosted.
 
-You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up.
+You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up. If the button fails, click **Save changes** and check that the first webhooks sent are successful by looking at the history in the "Recent events" section below.
 
+## Advanced configuration
+
+### Set custom tags
+
+You can set custom tags for all pipeline and job spans from your GitLab projects to improve traceability. For more information, see [Custom Tags and Measures][13].
 
 #### Integrate with Datadog Teams
+
 To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][16] team handle exactly.
-
-## Visualize pipeline data in Datadog
-
-Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
-
-The Pipelines page shows data for only the default branch of each repository.
-
-### Partial and downstream pipelines
-
-On the **Executions** page, you can use the filters below in the search bar:
-
-`Downstream Pipeline`
-: Possible values: `true`, `false`
-
-`Manually Triggered`
-: Possible values: `true`, `false`
-
-`Partial Pipeline`
-: Possible values: `retry`
-
-{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
-
-These filters can also be applied through the facet panel on the left hand side of the page.
-{{< img src="ci/partial_retries_facet_panel_without_paused.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
-
 
 ### Correlate infrastructure metrics to jobs
 
-If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them. Datadog infrastructure correlation is possible using different methods:
+If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
+
+Datadog infrastructure correlation is possible using different methods:
 
 #### Tagging runners with hostname
 
-The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job. This excludes executors that are autoscaling the infrastructure in order to run the job
-(such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
+The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job.
+
+This excludes executors that are autoscaling the infrastructure in order to run the job (such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
 
 For existing runners:
 
@@ -209,10 +195,10 @@ through the UI by going to **Settings > CI/CD > Runners** and editing the approp
 {{% /tab %}}
 {{< /tabs >}}
 
-After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
-view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
+After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
 #### Instance and Docker Autoscaler executors
+
 CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
 #### Other executors
@@ -227,45 +213,42 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
 
-See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of `Job failed` and error domain of `unknown`.
+The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed` error message and an `unknown` error domain.
 
-| Error Type | Error Message | Error Domain |
-| :---  |    :----:   |  ---: |
-|  unknown_failure  |  Failed due to unknown reason  |  unknown
-|  config_error  |  Failed due to error on CI/CD configuration file |  user
-|  external_validation_failure  |  Failed due to external pipeline validation  |  unknown
-|  user_not_verified  |  The pipeline failed due to the user not being verified  |  user
-|  activity_limit_exceeded  |  The pipeline activity limit was exceeded  |  provider
-|  size_limit_exceeded  |  The pipeline size limit was exceeded  |  provider
-|  job_activity_limit_exceeded  |  The pipeline job activity limit was exceeded  |  provider
-|  deployments_limit_exceeded  |  The pipeline deployments limit was exceeded  |  provider
-|  project_deleted  |  The project associated with this pipeline was deleted  |  provider
-|  api_failure  |  API Failure  |  provider
-|  stuck_or_timeout_failure  |  Pipeline is stuck or timed out  |  unknown
-|  runner_system_failure  |  Failed due to runner system failure  |  provider
-|  missing_dependency_failure  |  Failed due to missing dependency  |  unknown
-|  runner_unsupported  |  Failed due to unsupported runner  |  provider
-|  stale_schedule  |  Failed due to stale schedule  |  provider
-|  job_execution_timeout  |  Failed due to job timeout  |  unknown
-|  archived_failure  |  Archived failure  |  provider
-|  unmet_prerequisites  |  Failed due to unmet prerequisite  |  unknown
-|  scheduler_failure  |  Failed due to schedule failure  |  provider
-|  data_integrity_failure  |  Failed due to data integrity  |  provider
-|  forward_deployment_failure  |  Deployment failure  |  unknown
-|  user_blocked  |  Blocked by user  |  user
-|  ci_quota_exceeded  |  CI quota exceeded  |  provider
-|  pipeline_loop_detected  |  Pipeline loop detected  |  user
-|  builds_disabled  |  Build disabled  |  user
-|  deployment_rejected  |  Deployment rejected  |  user
-|  protected_environment_failure  |  Environment failure  |  provider
-|  secrets_provider_not_found  |  Secret provider not found  |  user
-|  reached_max_descendant_pipelines_depth  |  Reached max descendant pipelines  |  user
-|  ip_restriction_failure  |  IP restriction failure  |  provider
+| Error Type                       | Error Domain | Error Message                                              |
+|---------------------------------|--------------|------------------------------------------------------------|
+| `unknown_failure`                | unknown      | Failed due to unknown reason.                             |
+| `config_error`                   | user         | Failed due to error on CI/CD configuration file.           |
+| `external_validation_failure`    | unknown      | Failed due to external pipeline validation.                |
+| `user_not_verified`              | user         | The pipeline failed due to the user not being verified.    |
+| `activity_limit_exceeded`        | provider     | The pipeline activity limit was exceeded.                  |
+| `size_limit_exceeded`            | provider     | The pipeline size limit was exceeded.                      |
+| `job_activity_limit_exceeded`    | provider     | The pipeline job activity limit was exceeded.              |
+| `deployments_limit_exceeded`     | provider     | The pipeline deployments limit was exceeded.               |
+| `project_deleted`                | provider     | The project associated with this pipeline was deleted.     |
+| `api_failure`                    | provider     | API failure.                                               |
+| `stuck_or_timeout_failure`       | unknown      | Pipeline is stuck or timed out.                            |
+| `runner_system_failure`          | provider     | Failed due to runner system failure.                       |
+| `missing_dependency_failure`     | unknown      | Failed due to missing dependency.                          |
+| `runner_unsupported`             | provider     | Failed due to unsupported runner.                          |
+| `stale_schedule`                 | provider     | Failed due to stale schedule.                              |
+| `job_execution_timeout`          | unknown      | Failed due to job timeout.                                |
+| `archived_failure`               | provider     | Archived failure.                                         |
+| `unmet_prerequisites`            | unknown      | Failed due to unmet prerequisite.                          |
+| `scheduler_failure`              | provider     | Failed due to schedule failure.                            |
+| `data_integrity_failure`         | provider     | Failed due to data integrity.                              |
+| `forward_deployment_failure`     | unknown      | Deployment failure.                                        |
+| `user_blocked`                   | user         | Blocked by user.                                           |
+| `ci_quota_exceeded`              | provider     | CI quota exceeded.                                         |
+| `pipeline_loop_detected`         | user         | Pipeline loop detected.                                    |
+| `builds_disabled`                | user         | Build disabled.                                            |
+| `deployment_rejected`            | user         | Deployment rejected.                                      |
+| `protected_environment_failure`  | provider     | Environment failure.                                       |
+| `secrets_provider_not_found`     | user         | Secret provider not found.                                 |
+| `reached_max_descendant_pipelines_depth` | user   | Reached max descendant pipelines.                        |
+| `ip_restriction_failure`          | provider     | IP restriction failure.                                    |
 
-<!-- | ---------- | ---------- | ---------- | -->
-<!-- | :---        |    :----:   |          ---: | -->
-
-## Enable job log collection
+### Collect job logs
 
 The following GitLab versions support collecting job logs:
 
@@ -273,13 +256,7 @@ The following GitLab versions support collecting job logs:
 * GitLab >= 15.3 (self-hosted) only if you are using [object storage to store job logs][7]
 * GitLab >= 14.8 (self-hosted) by enabling the `datadog_integration_logs_collection` feature flag
 
-<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
-
-<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
-
 Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
-
-For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
 
 To enable collection of job logs:
 
@@ -312,7 +289,31 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for GitLab jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:gitlab</code> tags.</div>
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][29]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
+
+For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
+
+## View partial and downstream pipelines
+
+You can use the following filters to customize your search query in the [CI Visibility Explorer][27].
+
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
+
+| Facet Name | Facet ID | Possible Values |
+|---|---|---|
+| Downstream Pipeline | `@ci.pipeline.downstream` | `true`, `false` |
+| Manually Triggered | `@ci.is_manual` | `true`, `false` |
+| Partial Pipeline | `@ci.partial_pipeline` | `retry`, `paused`, `resumed` |
+
+You can also apply these filters using the facet panel on the left hand side of the page.
+
+{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:20%;">}}
+
+## Visualize pipeline data in Datadog
+
+Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
+
+The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][28].
 
 ## Further reading
 
@@ -343,3 +344,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [23]: /glossary/#approval-wait-time
 [24]: /glossary/#pipeline-execution-time
 [25]: /glossary/#running-pipeline
+[26]: /glossary/#custom-span
+[27]: /continuous_integration/explorer
+[28]: /continuous_integration/search/#search-for-pipelines
+[29]: /logs/guide/best-practices-for-log-management/

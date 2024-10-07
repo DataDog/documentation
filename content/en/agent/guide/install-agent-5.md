@@ -39,6 +39,25 @@ sudo cp '/opt/datadog-agent/etc/com.datadoghq.agent.plist' /Library/LaunchDaemon
 sudo launchctl load -w /Library/LaunchDaemons/com.datadoghq.agent.plist
 {{< /code-block >}}
 
+### Uninstall
+
+1. Stop and close the Datadog Agent with the bone icon in the tray.
+1. Drag the Datadog application from the application folder to the trash bin.
+1. Run:
+
+   ```shell
+   sudo rm -rf /opt/datadog-agent
+   sudo rm -rf /usr/local/bin/datadog-agent
+   sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+   ```
+
+If you ran the optional install commands to have the Agent run at boot time, run the following to finish uninstalling:
+
+```shell
+sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
+sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+```
+
 ## Windows
 
 ### Install the Agent
@@ -69,6 +88,28 @@ To install the Agent on Azure, follow the [Microsoft Azure documentation][8].
 ### New upgrade procedure for 5.12
 
 If you are an existing customer running a Windows Agent prior to 5.12, there may be additional steps required to upgrade your device. Specifically, the latest Agent is a "per-machine" installation. Prior versions of the Agent were "per-user" by default. There may also be additional steps required if you're deploying with Chef. For more information, see [Windows Agent Installation][9].
+
+### Uninstall
+
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+**Note**: For Agent < v5.12.0, it's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
+
+### Add or remove programs
+
+1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
+1. Search for `add` and click **Add or remove programs**.
+1. Search for `Datadog Agent` and click **Uninstall**.
+
+### PowerShell
+
+**Note:** Enable WinRM to use the commands below.
+
+Use the following PowerShell command to uninstall the Agent without rebooting:
+
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+```
 
 ## Linux and Unix
 
@@ -176,6 +217,28 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    sudo /etc/init.d/datadog-agent start
    ```
 
+### Uninstall
+
+To uninstall the Agent, run the following command:
+
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo apt-get --purge remove datadog-agent -y
+```
+
 {{% /tab %}}
 
 {{% tab "Amazon Linux" %}}
@@ -218,6 +281,32 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    ```shell
    sudo /etc/init.d/datadog-agent restart
    ```
+
+
+### Uninstall
+
+To uninstall the Agent, run the following command:
+
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 {{% /tab %}}
 
 {{% tab "CentOS and Red Hat" %}}
@@ -261,6 +350,32 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    ```shell
    sudo /etc/init.d/datadog-agent restart
    ```
+
+### Uninstall
+
+To uninstall the Agent, run the following command:
+
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+
 {{% /tab %}}
 
 {{% tab "Fedora" %}}
@@ -303,6 +418,32 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    ```shell
    sudo /etc/init.d/datadog-agent restart
    ```
+
+### Uninstall
+
+To uninstall the Agent, run the following command:
+
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+
 {{% /tab %}}
 
 {{% tab "Suse" %}}
@@ -344,6 +485,32 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    ```shell
    sudo /etc/init.d/datadog-agent restart
    ```
+
+### Uninstall
+
+To uninstall the Agent, run the following command:
+
+```shell
+sudo zypper remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+
+
 {{% /tab %}}
 
 {{% tab "AIX" %}}
@@ -392,6 +559,18 @@ For a full list of the available installation script environment variables, see 
    ```shell
    sudo startsrc -s datadog-agent
    ```
+
+### Uninstall
+
+To uninstall the Agent, run the following command:
+
+To remove an installed Agent, run the following `installp` command:
+
+```shell
+installp -e dd-aix-uninstall.log -uv datadog-unix-agent
+```
+
+Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 
 [1]: /agent/basic_agent_usage/aix/#installation
 [2]: https://github.com/DataDog/datadog-unix-agent/releases

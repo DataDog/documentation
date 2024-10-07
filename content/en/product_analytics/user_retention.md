@@ -22,7 +22,7 @@ The retention graph displays the percentage of users who completed the return ev
 
 ## Prerequisites
 
-The unique user attributes field must be populated. See the [instructions for sending unique user attributes][4].
+In order for User Retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
 
 ## Build a graph
 

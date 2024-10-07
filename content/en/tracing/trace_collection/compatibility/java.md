@@ -108,6 +108,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Spring Web (MVC)        | 4.0+       | Fully Supported                                     | `spring-web`                                             |
 | Spring WebFlux          | 5.0+       | Fully Supported                                     | `spring-webflux`                                         |
 | Tomcat                  | 5.5+       | Fully Supported                                     | `tomcat`                                                 |
+| Undertow                | 2.0+       | Fully Supported                                     | `undertow`                                               |
 | Vert.x                  | 3.4+       | Fully Supported                                     | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
@@ -119,14 +120,14 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation     | To Enable 									                                                                                                              |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS		          | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft		        | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Grizzly             | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
-| Grizzly-HTTP        | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
-| Ning                | `-Ddd.integration.ning.enabled=true`                                                                                                      |
-| Spark Java          | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
-| Hazelcast           | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
-| TIBCO BusinessWorks | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
 
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
@@ -238,10 +239,11 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
 |-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                                    | `cxf`                                          |
 | Datanucleus JDO     | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
-| Hazelcast           | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hazelcast (client)  | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
 | Hibernate           | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
 | Hystrix             | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
 | JSP Rendering       | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
@@ -304,7 +306,8 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -318,7 +321,8 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -328,7 +332,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
-   - You can do this at the build tool level, like Maven:
+    - You can do this at the build tool level, like Maven:
      ```yaml
      <build>
      <plugins>
@@ -350,7 +354,8 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </build>
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
-3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr’`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog
@@ -365,6 +370,13 @@ After completing the setup, the service should send traces to Datadog.
 You can view traces using the [Trace Explorer][9].
 
 {{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Features are not enabled or configured correctly for native images
+
+There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.
+
+- For runtime configuration, use environment variables (`DD_PROPERTY_NAME=value`), instead of system properties (`-Ddd.property.name=value`).
+- The exception to this rule is when enabling the profiler. In this case, pass `-J-Ddd.profiling.enabled=true` to the `native-image` tool at _build time_.
+
 ##### Native-image buildpack versions older than 5.12.2
 
 Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
@@ -372,10 +384,10 @@ Older native-image buildpack versions expose the following option: `USE_NATIVE_I
 When this option is `false`, exceptions like the following can occur:
 
 ```text
-Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
-com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
-No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
-as this class should be initialized at image runtime. To see how this object got 
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
 instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
 ```
 
@@ -409,3 +421,4 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [5]: /tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
+[10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java

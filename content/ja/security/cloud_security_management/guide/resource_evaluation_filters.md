@@ -9,12 +9,12 @@ further_reading:
 title: フィルターを使用して評価からリソースを除外する
 ---
 
-リソースタグを使用して、Cloud Security Management (CSM) による評価にリソースを含めたり除外したりするフィルターを作成できます。フィルターはカンマで区切られた `key:value` のペアのリストとして指定する必要があります。
+You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
 
 **注**:
 
-- リソース評価フィルターは、クラウドインテグレーションによってスキャンされるホストでのみ使用できます。
-- タグはリソースに直接適用する必要があります。フィルターは、Datadog で追加されたユーザータグを考慮しません。唯一の例外は、 AWS と Google Cloud Platform のインテグレーションタイルに追加されたタグです。
+- Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
+- Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog. The only exception is for tags added on the integration tiles for AWS and Google Cloud Platform.
 
 | 形式                       | 値        |
 |------------------------------|--------------|
@@ -37,9 +37,9 @@ title: フィルターを使用して評価からリソースを除外する
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. [**Cloud Security Management Setup** ページ][1]で、**Cloud accounts** をクリックします。
+1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
 2. **AWS** セクションを展開します。
-3. **Resource Evaluation Filters (Optional)** の下で、フィルターを追加したいアカウントの **Plus** (+) アイコンをクリックします。
+3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon for the account you want to add the filter to.
 4. 許可リストまたはブロックリストにしたいタグの `key:value` のペアをカンマで区切ったリストを入力します。
 5. **Save** をクリックします。
 
@@ -48,9 +48,9 @@ title: フィルターを使用して評価からリソースを除外する
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-1. [**Cloud Security Management Setup** ページ][1]で、**Cloud accounts** をクリックします。
+1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
 2. **Azure** セクションを展開します。
-3. サブスクリプションを展開します。
+3. Expand a subscription.
 3. **Resource Evaluation Filters (Optional)** の下で、**Plus** (+) アイコンをクリックします。
 4. 許可リストまたはブロックリストにしたいタグの `key:value` のペアをカンマで区切ったリストを入力します。
 5. **Save** をクリックします。
@@ -60,9 +60,9 @@ title: フィルターを使用して評価からリソースを除外する
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-1. [**Cloud Security Management Setup** ページ][1]で、**Cloud accounts** をクリックします。
+1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
 2. **GCP** セクションを展開します。
-3. プロジェクトを展開します。
+3. Expand a project.
 3. **Resource Evaluation Filters (Optional)** の下で、**Plus** (+) アイコンをクリックします。
 4. 許可リストまたはブロックリストにしたいタグの `key:value` のペアをカンマで区切ったリストを入力します。
 5. **Save** をクリックします。
