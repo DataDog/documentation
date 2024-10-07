@@ -9,24 +9,36 @@ further_reading:
   text: "OpenTelemetry Collector Deployment"
 ---
 
-## Downloading the collector
+This page guides you through various deployment options for the OpenTelemetry Collector with the Datadog Exporter, allowing you to send traces, metrics, and logs to Datadog.
+
+## Download the Collector
 
 To run the OpenTelemetry Collector along with the Datadog Exporter, download the latest release of the [OpenTelemetry Collector Contrib distribution][3]. 
 
-## Running the collector
+## Deploy the Collector
 
-{{< tabs >}}
-{{% tab "On a host" %}}
+The OpenTelemetry Collector can be deployed in various environments to suit different infrastructure needs. This section covers the following deployment options:
 
-Run the collector, specifying the configuration file using the `--config` parameter:
+- [On a host](#on-a-host)
+- [Docker](#docker)
+- [Kubernetes](#kubernetes)
+
+It's important to note that certain features and capabilities may vary depending on the deployment method. For a detailed overview of these differences, see the [Deployment-based Limitations](#deployment-based-limitations).
+
+Choose the deployment option that best fits your infrastructure and follow the step-by-step instructions below.
+
+### On a host
+
+Run the Collector, specifying the configuration file using the `--config` parameter:
 
 ```
 otelcontribcol_linux_amd64 --config collector.yaml
 ```
 
-{{% /tab %}}
+### Docker
 
-{{% tab "Docker (localhost)" %}}
+{{< tabs >}}
+{{% tab "localhost" %}}
 To run the OpenTelemetry Collector as a Docker image and receive traces from the same host:
 
 1. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib`][1].
@@ -46,7 +58,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 [1]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
 {{% /tab %}}
-{{% tab "Docker (other containers)" %}}
+{{% tab "Other containers" %}}
 
 To run the OpenTelemetry Collector as a Docker image and receive traces from other containers:
 
@@ -79,7 +91,12 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
    ```
 
 {{% /tab %}}
-{{% tab "Kubernetes (DaemonSet)" %}}
+{{< /tabs >}}
+
+### Kubernetes
+
+{{< tabs >}}
+{{% tab "DaemonSet" %}}
 
 Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
 
@@ -144,7 +161,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L32-L39
 
 {{% /tab %}}
-{{% tab "Kubernetes (Gateway)" %}}
+{{% tab "Gateway" %}}
 
 To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gateway deployment
 
@@ -268,7 +285,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#as-a-gateway
 
 {{% /tab %}}
-{{% tab "Kubernetes (Operator)" %}}
+{{% tab "Operator" %}}
 
 To use the OpenTelemetry Operator, follow the [official documentation for deploying the OpenTelemetry Operator][1]. As described there, deploy the certificate manager in addition to the Operator.
 
