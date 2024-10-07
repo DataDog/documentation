@@ -157,7 +157,7 @@ In the UI or JSON tab:
 
 
 ## How can I use Datadog API's to leverage nested queries?
-Nested queries functionality will be available in the same public API we already offer customers for querying their metrics data [here][3].
+You can use nested queries functionality in our public API for querying timeseries data [here][3]. Simply change the contents of the **formula** object
 
 You would need to change the contents of the formula string parameter as seen here:
 
