@@ -51,7 +51,7 @@ The first rollup supports the following aggregators:
 - `max`
 - `count`
 
-Additional layers of time aggregation support:
+Additional layers provided by multilayer time aggregation supports additional time aggregators: 
 
 - `avg`
 - `sum`
