@@ -127,7 +127,7 @@ Percentiles and standard deviation for aggregated counts/rates/gauges are a part
 
 {{% collapse-content title="Percentiles example query" level="h5" %}}
 ```text
-"rollup(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95',1800)"
+We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
 ```
 
 In the UI or JSON tab, it would look as follows:
