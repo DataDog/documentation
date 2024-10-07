@@ -12,7 +12,16 @@ further_reading:
   This feature is in Preview. Please reach out to Customer Success to get this feature enabled. 
 {{< /callout >}}  
 
-Datadog offers custom roll-up capabilities with [time and space aggregation][2] on metric queries, but were limited to only one-time aggregation and one space aggregation per query. Time aggregation rolls data points into time buckets to effectively display large volumes of points. Space aggregation splits a single metric into multiple timeseries by tag. On top of these aggregations, you may want to add an additional layer of aggregation on top of existing queries. For instance, if you wanted the average latency of your EC2 instances by host, then find the max average over every hour. Now, with the introduction of nested queries, you can now reaggregate the results of existing query in time and/or space. 
+Every metrics query in Datadog consists of two layers of aggregation by default (quick refresher [here](https://docs-staging.datadoghq.com/rachealou/nested-queries-updates/metrics/#anatomy-of-a-metric-query)). 
+Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one. 
+
+![nestedqueries](https://github.com/user-attachments/assets/b1b0a116-70cb-40da-a48a-2ab318a17d12)
+
+Nested queries unlocks several powerful capabilities: 
+
+- Multilayer aggregation 
+- Percentiles and standard deviation on non-distribution metrics
+- Higher resolution queries over historical timeframes
 
 This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. Percentiles are also enabled with nested queries, but for metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
 
