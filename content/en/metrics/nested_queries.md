@@ -23,7 +23,6 @@ Nested queries unlocks several powerful capabilities:
 - Percentiles and standard deviation on non-distribution metrics
 - Higher resolution queries over historical timeframes
 
-This unlocks multiple query features including multilayer aggregation, standard deviation, and higher resolution queries over historical time frames. Percentiles are also enabled with nested queries, but for metrics where globally accurate percentile aggregations are essential, submitting [distribution metrics][4] achieves this directly without applying nested queries. 
 
 
 
