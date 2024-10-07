@@ -2176,7 +2176,7 @@ menu:
       weight: 10
     - name: On-Call
       url: service_management/on-call/
-      pre: incidents
+      pre: on-call
       parent: service_management_heading
       identifier: oncall
       weight: 30000
