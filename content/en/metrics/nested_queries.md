@@ -109,7 +109,6 @@ The following query calculates the sum of average CPU utilization, grouped by en
 sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})
 ```
 
-For percentile space aggregation, the following query calculates the 95th percentile of average CPU utilization, grouped by environment:
 
 ```text
 percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})
