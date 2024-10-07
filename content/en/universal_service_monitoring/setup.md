@@ -24,7 +24,8 @@ Supported Windows platforms
 
 Supported application-layer protocols
 : HTTP<br/>
-HTTP2/gRPC<br/>
+HTTP2<br/>
+gRPC<br/>
 
 Supported TLS implementations
 : GnuTLS<br/>
