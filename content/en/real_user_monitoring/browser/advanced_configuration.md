@@ -1194,7 +1194,6 @@ datadogRum.init({
     },
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
@@ -1217,7 +1216,6 @@ window.DD_RUM.onReady(function() {
     });
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 ```javascript
@@ -1238,6 +1236,8 @@ window.DD_RUM && window.DD_RUM.init({
     },
 });
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 Any query done in the RUM Explorer can use the service attribute to filter events.
 
