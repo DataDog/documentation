@@ -52,7 +52,7 @@ The following table shows feature compatibility across different setups:
 
 ## More details
 
-### Runtime Metrics
+### Runtime metrics
 
 Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1] specification.
 
@@ -78,7 +78,7 @@ For unsupported languages in OpenTelemetry setups, [configure telemetry tagging]
 
 When using Datadog and OpenTelemetry together, Datadog recommends the following best practices to ensure optimal performance and to avoid potential issues:
 
-- **Avoid Mixed Instrumentation**: Do not use both a Datadog SDK and a OpenTelemetry SDK to instrument the same application, as this leads to undefined behavior.
+- **Avoid Mixed Instrumentation**: Do not use both a Datadog SDK and an OpenTelemetry SDK to instrument the same application, as this leads to undefined behavior.
 - **Avoid Agent and Separate Collector on Same Host**: Do not run the Datadog Agent and a separate OpenTelemetry Collector on the same host, as this may cause issues. However, you can run Agents and Collectors on different hosts within the same fleet.
 
 ## Further reading
