@@ -126,11 +126,11 @@ To display a list of available variables:
 
 - In your browser test's details: Type `{{` in the desired field.
 
-  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/use_global_variables_1.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
 
 - In your browser test's recorder: Import the variable in your test, then type `{{` in the desired field or inject the variable in your application to use it.
 
-  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/use_global_variables_2.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
 
 For more information about using variables in your browser test recording, see [Browser Test Steps][5].
 
