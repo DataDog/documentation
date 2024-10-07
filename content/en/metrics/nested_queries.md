@@ -140,7 +140,7 @@ In the UI or JSON tab, it would look as follows:
 
 
 
-Standard deviation helps measure the variability or dispersion of a dataset. The following query calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals, and rolled up over 1-hour periods:
+Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
 
 {{% collapse-content title="Standard deviation example query" level="h5" %}}
 ```text
