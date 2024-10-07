@@ -110,7 +110,7 @@ To set up a scanning group, perform the following steps:
 [3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
 {{% tab "Using the Agent" %}}
-<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner using the Agent supports only one scanning group per organization.</div>
+<div class="alert alert-warning"><strong>Limitations using the Agent</strong>:<br/>- Sensitive Data Scanner using the Agent supports only one scanning group per organization.<br />- It is recommended to use files-based logs collection when using the Sensitive Data Scanner in the Agent.<br />- Log lines longer than 256KB might be truncated and the processing may not be applied correctly.</div>
 
 A scanning group determines what logs to scan. It consists of a query filter to match eligible agents based on host tags.
 
