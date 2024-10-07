@@ -13,7 +13,7 @@ further_reading:
 ## Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some features in preview require higher versions.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some features in Preview require higher versions.
 
 Supported Linux platforms
 : Linux Kernel 4.14 and greater<br/>
@@ -30,7 +30,7 @@ Known limitations
 : Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Additional protocols and traffic encryption methods are in <a href="/universal_service_monitoring/additional_protocols/">preview</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
+Additional protocols and traffic encryption methods are in <a href="/universal_service_monitoring/additional_protocols/">Preview</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
 </div>
 
 ## Prerequisites
@@ -785,7 +785,7 @@ Universal Service Monitoring is available in <strong>beta</strong> to monitor TL
 <strong>Note</strong>:
 <br>
 <ul role="list">
-  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in preview. Reach out to your account manager for details.</li>
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in Preview. Reach out to your account manager for details.</li>
   <li>Requires Agent version 7.51 or greater.</li>
 </ul>
 
@@ -956,7 +956,7 @@ agents:
 {{< collapse-content title="Kafka Monitoring (Preview)" level="h4" >}}
 
 <div class="alert alert-info">
-Kafka Monitoring is available in <strong>preview</strong>.
+Kafka Monitoring is available in <strong>Preview</strong>.
 </div>
 
 <strong>Note</strong>:
@@ -1069,7 +1069,7 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM is in preview for discovering cloud services and decoding additional protocols and traffic encryption methods. For more information and to request access to the preview, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
+<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM is in Preview for discovering cloud services and decoding additional protocols and traffic encryption methods. For more information and to request access to the Preview, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
 
 
 ## Further reading

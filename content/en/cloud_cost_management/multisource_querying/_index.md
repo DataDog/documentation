@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/multisource-querying/" btn_hidden="false" header="Join the Preview!">}}
-Multisource Querying is in preview. To request access, complete the form.
+Multisource Querying is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview

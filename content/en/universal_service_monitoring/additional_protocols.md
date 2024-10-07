@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://docs.google.com/forms/d/1dYRQxWEAC3nFsv75tlG0hbiPXd899r36v5R2ar6hJLE/" btn_hidden="true" header="Join the Preview!" >}}
-  Cloud service discovery and support for additional protocols and traffic encryption methods are in preview.
+  Cloud service discovery and support for additional protocols and traffic encryption methods are in Preview.
 {{< /callout >}}
 
 ## Discovering cloud services and third-party APIs

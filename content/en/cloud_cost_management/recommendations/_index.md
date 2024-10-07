@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
-Cloud Cost Recommendations are in preview with support for AWS, and are automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.
+Cloud Cost Recommendations are in Preview with support for AWS, and are automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.
 {{< /callout >}}
 
 ## Overview

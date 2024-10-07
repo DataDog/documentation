@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility for CI provider deployments is in preview. To request access, complete the form.
+CD Visibility for CI provider deployments is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview

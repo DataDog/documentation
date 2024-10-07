@@ -25,7 +25,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
-SaaS Cost Integrations are in preview.
+SaaS Cost Integrations are in Preview.
 {{< /callout >}}
 
 ## Overview

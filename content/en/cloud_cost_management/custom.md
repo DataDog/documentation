@@ -19,7 +19,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
-Custom Costs are in preview.
+Custom Costs are in Preview.
 {{< /callout >}}
 
 ## Overview
