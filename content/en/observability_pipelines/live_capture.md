@@ -16,8 +16,7 @@ Live Capture is in Preview.
 Use Live Capture to see the data a source sends through the pipeline and also the data a processor receives and sends out.
 Specifically, the following information is shown:
 - The timestamp of when the data was received
-- The data received and sent
-- Whether the data was:
+- The data that was sent out and whether it was:
     - Modified
     - Unmodified
     - Dropped
