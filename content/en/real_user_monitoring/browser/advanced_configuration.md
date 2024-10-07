@@ -503,7 +503,7 @@ You can update the following event properties:
 |   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
 |   `view.name`           |   String  |   The name of the current view.                            |
 |   `service`             |   String  |   The service name for your application.                                                            |
-|   `version`             |   String  |   The application’s version, for example: 1.2.3, 6c44da20, and 2020.02.13.                          |
+|   `version`             |   String  |   The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                          |
 |   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
 |   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
@@ -1166,11 +1166,11 @@ However, this feature comes with some **limitations**:
 
 ## Micro frontend
 
-Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace, to utilize it, you must be able to extract service and version properties from your application's file paths and filenames.
+Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace, to use it, you must be able to extract service and version properties from your application's file paths and filenames.
 
 ### How to use it
 
-In the beforeSend property, you can override the service and version properties. To help you identify where the event originated, we've introduced a new property,  context.handlingStack.
+In the beforeSend property, you can override the service and version properties. To help you identify where the event originated, a new property `context.handlingStack` was introduced.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1239,11 +1239,11 @@ window.DD_RUM && window.DD_RUM.init({
 });
 ```
 
-Now, any query done in the RUM Explorer can use the service attribute to filter events.
+Any query done in the RUM Explorer can use the service attribute to filter events.
 
 ### Limitations
 
-Some events cannot be attributed to an origin, therefore they will not have an associated handling stack. This includes:
+Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
 - Action events collected automatically
 - Ressource events other than XHR and Fetch.
 - View events (but you can [override default rum view names][21] instead)
