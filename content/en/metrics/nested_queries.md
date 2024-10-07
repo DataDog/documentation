@@ -15,7 +15,7 @@ nested
 Every metrics query in Datadog consists of two layers of aggregation by default (quick refresher [here][5]).
 Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one.
 
-{{< img src="metrics/nested-queries-example-video.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
+{{< img src="metrics/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}
 
 Nested queries unlocks several powerful capabilities: 
 
@@ -28,6 +28,9 @@ Nested queries unlocks several powerful capabilities:
 ## Multilayer aggregation
 
 In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space (quick refresher [here][5]). Multilayer aggregation allows you to apply additional layers of time or space aggregation.
+
+{{< img src="/metrics/nested_queries/nested-queries-before-after.png" alt="example of applying nested queries before and after" style="width:100%;" >}}
+
 
 | Supported Functions   | Description                                                                                    |
 |-----------------------|-----------------------------------------------------------------------------------------------|
