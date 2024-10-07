@@ -139,7 +139,6 @@ In the UI or JSON tab, it would look as follows:
 
 
 
-## Standard Deviation
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query calculates the standard deviation of the sum of API request counts, averaged over 5-minute intervals, and rolled up over 1-hour periods:
 
