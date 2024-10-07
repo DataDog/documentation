@@ -8,6 +8,10 @@ further_reading:
   text: "OpenTelemetry Support in Datadog"
 ---
 
+<div class="alert alert-info">
+This feature is in Preview. If you have any feedback, contact <a href="/help/">Datadog support</a>.
+</div>
+
 ## Overview
 
 The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
