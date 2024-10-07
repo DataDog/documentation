@@ -433,6 +433,20 @@ components:
       required: true
       schema:
         type: string
+    IncidentTypeIDPathParameter:
+      description: The UUID of the incident type.
+      in: path
+      name: incident_type_id
+      required: true
+      schema:
+        type: string
+    IncidentTypeIncludeDeletedParameter:
+      description: Include deleted incident types in the response.
+      in: query
+      name: include_deleted
+      schema:
+        default: false
+        type: boolean
     Include:
       description: include relationship data
       explode: true
@@ -10554,6 +10568,11 @@ components:
               type: dropdown
               value: SEV-5
           type: object
+        incident_type_uuid:
+          description: A unique identifier that represents an incident type. The default
+            incident type will be used if this property is not provided.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
         initial_cells:
           description: An array of initial timeline cells to be placed at the beginning
             of the incident timeline.
@@ -10963,6 +10982,10 @@ components:
               type: dropdown
               value: SEV-5
           type: object
+        incident_type_uuid:
+          description: A unique identifier that represents an incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
         modified:
           description: Timestamp when the incident was last modified.
           format: date-time
@@ -11910,6 +11933,175 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENTS
+    IncidentTypeAttributes:
+      description: Incident type's attributes.
+      properties:
+        createdAt:
+          description: Timestamp when the incident type was created.
+          format: date-time
+          readOnly: true
+          type: string
+        createdBy:
+          description: A unique identifier that represents the user that created the
+            incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        description:
+          description: Text that describes the incident type.
+          example: Any incidents that harm (or have the potential to) the confidentiality,
+            integrity, or availability of our data.
+          type: string
+        is_default:
+          default: false
+          description: If true, this incident type will be used as the default incident
+            type if a type is not specified during the creation of incident resources.
+          example: true
+          type: boolean
+        lastModifiedBy:
+          description: A unique identifier that represents the user that last modified
+            the incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Timestamp when the incident type was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the incident type.
+          example: Security Incident
+          type: string
+        prefix:
+          description: The string that will be prepended to the incident title across
+            the Datadog app.
+          example: IR
+          readOnly: true
+          type: string
+      required:
+      - name
+      type: object
+    IncidentTypeCreateData:
+      description: Incident type data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTypeAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTypeCreateRequest:
+      description: Create request for an incident type.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTypeCreateData'
+      required:
+      - data
+      type: object
+    IncidentTypeListResponse:
+      description: Response with a list of incident types.
+      properties:
+        data:
+          description: An array of incident types.
+          items:
+            $ref: '#/components/schemas/IncidentTypeResponse'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentTypePatchData:
+      description: Incident type data for a patch request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTypeUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTypePatchRequest:
+      description: Patch request for an incident type.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTypePatchData'
+      required:
+      - data
+      type: object
+    IncidentTypeResponse:
+      description: Incident type response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTypeAttributes'
+        id:
+          description: The incident type's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentTypeType:
+      default: incident_types
+      description: Incident type resource type.
+      enum:
+      - incident_types
+      example: incident_types
+      type: string
+      x-enum-varnames:
+      - INCIDENT_TYPES
+    IncidentTypeUpdateAttributes:
+      description: Incident type's attributes for updates.
+      properties:
+        createdAt:
+          description: Timestamp when the incident type was created.
+          format: date-time
+          readOnly: true
+          type: string
+        createdBy:
+          description: A unique identifier that represents the user that created the
+            incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        description:
+          description: Text that describes the incident type.
+          example: 'Any incidents that harm (or have the potential to) the confidentiality,
+            integrity, or availability of our data. Note: This will notify the security
+            team.'
+          type: string
+        is_default:
+          description: When true, this incident type will be used as the default type
+            when an incident type is not specified.
+          example: true
+          type: boolean
+        lastModifiedBy:
+          description: A unique identifier that represents the user that last modified
+            the incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Timestamp when the incident type was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the incident type.
+          example: Security Incident
+          type: string
+        prefix:
+          description: The string that will be prepended to the incident title across
+            the Datadog app.
+          example: IR
+          readOnly: true
+          type: string
+      type: object
     IncidentUpdateAttributes:
       description: The incident's attributes for an update request.
       properties:
@@ -12053,6 +12245,7 @@ components:
               customer_impact_start: null
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
+              incident_type_uuid: 00000000-0000-0000-0000-000000000000
               modified: '2020-09-17T14:16:58.696424+00:00'
               public_id: 1
               resolved: null
@@ -26075,6 +26268,7 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
+            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -30705,6 +30899,232 @@ paths:
         - name: incident_id
           source: data.id
         type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/types:
+    get:
+      description: Get all incident types.
+      operationId: ListIncidentTypes
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIncludeDeletedParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+        - incident_read
+      summary: Get a list of incident types
+      tags:
+      - Incidents
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_read
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident type.
+      operationId: CreateIncidentType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTypeCreateRequest'
+        description: Incident type payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Create an incident type
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_type:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Security
+              Incident\"\n    },\n    \"type\": \"incident_types\"\n  }\n}"
+          step: there is a valid "incident_type" in the system
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
+      x-undo:
+        operationId: DeleteIncidentType
+        parameters:
+        - name: incident_type_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/types/{incident_type_id}:
+    delete:
+      description: Delete an incident type.
+      operationId: DeleteIncidentType
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Delete an incident type
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get incident type details.
+      operationId: GetIncidentType
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+        - incident_read
+      summary: Get incident type details
+      tags:
+      - Incidents
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_read
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an incident type.
+      operationId: UpdateIncidentType
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTypePatchRequest'
+        description: Incident type payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Update an incident type
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
