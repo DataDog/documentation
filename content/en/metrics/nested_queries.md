@@ -110,7 +110,6 @@ The following query calculates the sum of average CPU utilization, grouped by en
 
 
 ```text
-percentile(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),'p95', {env})
 ```
 In the UI or JSON tab, it would look as follows:
 
