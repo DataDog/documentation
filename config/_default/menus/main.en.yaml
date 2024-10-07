@@ -1580,24 +1580,24 @@ menu:
       parent: monitors_manage
       identifier: monitors_manage_search
       weight: 601
-    - name: Monitor Status
-      url: monitors/manage/status/
-      parent: monitors_manage
-      identifier: monitors_manage_status
-      weight: 602
     - name: Check Summary
       url: monitors/manage/check_summary/
       parent: monitors_manage
       identifier: monitors_check_summary
       weight: 603
+    - name: Monitor Status
+      url: monitors/status/
+      parent: alerting
+      identifier: monitors_status
+      weight: 7
     - name: Monitor Settings
       url: monitors/settings/
-      weight: 7
+      weight: 8
       parent: alerting
       identifier: monitor_settings
     - name: Monitor Quality
       url: monitors/quality/
-      weight: 8
+      weight: 9
       parent: alerting
       identifier: monitor_quality
     - name: Guides
@@ -2129,6 +2129,36 @@ menu:
       parent: incidents
       identifier: incidents_settings
       weight: 5
+    - name: Information
+      url: service_management/incident_management/incident_settings/information
+      parent: incidents_settings
+      identifier: incidents_settings_information
+      weight: 501
+    - name: Property Fields
+      url: service_management/incident_management/incident_settings/property_fields
+      parent: incidents_settings
+      identifier: incidents_settings_property_fields
+      weight: 502
+    - name: Responder Types
+      url: service_management/incident_management/incident_settings/responder_types
+      parent: incidents_settings
+      identifier: incidents_settings_responder_types
+      weight: 503
+    - name: Integrations
+      url: service_management/incident_management/incident_settings/integrations
+      parent: incidents_settings
+      identifier: incidents_settings_integrations
+      weight: 504
+    - name: Notification Rules
+      url: service_management/incident_management/incident_settings/notification_rules
+      parent: incidents_settings
+      identifier: incidents_settings_notification_rules
+      weight: 505
+    - name: Templates
+      url: service_management/incident_management/incident_settings/templates
+      parent: incidents_settings
+      identifier: incidents_settings_templates
+      weight: 506
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
@@ -2160,21 +2190,26 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
+    - name: Processing Rules
+      url: service_management/on-call/processing_rules/
+      parent: oncall
+      identifier: oncall_processing_rules
+      weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
-      weight: 3
+      weight: 4
     - name: Schedules
       url: service_management/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
-      weight: 4
+      weight: 5
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 5
+      weight: 6
     - name: Event Management
       url: service_management/events/
       pre: events
@@ -5764,11 +5799,16 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
       weight: 403
+    - name: Restricted Networks
+      url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_restricted_networks
+      weight: 404
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 404
+      weight: 405
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
@@ -6201,41 +6241,36 @@ menu:
       parent: rum_explorer
       identifier: rum_explorer_search_syntax
       weight: 602
-    - name: Analytics
-      url: real_user_monitoring/explorer/analytics/
-      parent: rum_explorer
-      identifier: rum_explorer_analytics
-      weight: 603
     - name: Group
       url: real_user_monitoring/explorer/group/
       parent: rum_explorer
       identifier: rum_explorer_group
-      weight: 604
+      weight: 603
     - name: Visualize
       url: real_user_monitoring/explorer/visualize/
       parent: rum_explorer
       identifier: rum_explorer_visualize
-      weight: 605
+      weight: 604
     - name: Events
       url: real_user_monitoring/explorer/events/
       parent: rum_explorer
       identifier: rum_explorer_events
-      weight: 606
+      weight: 605
     - name: Export
       url: real_user_monitoring/explorer/export/
       parent: rum_explorer
       identifier: rum_explorer_export
-      weight: 607
+      weight: 606
     - name: Saved Views
       url: real_user_monitoring/explorer/saved_views/
       parent: rum_explorer
       identifier: rum_explorer_saved_views
-      weight: 608
+      weight: 607
     - name: Watchdog Insights for RUM
       url: real_user_monitoring/explorer/watchdog_insights/
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
-      weight: 609
+      weight: 608
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum

@@ -116,6 +116,19 @@ template:
                 fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
+You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags:
+
+```yaml
+  containers:
+  -  ...
+     env:
+         - name: OTEL_RESOURCE_ATTRIBUTES
+           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment=<ENV>"
+         - name: OTEL_SERVICE_NAME
+           value: "<SERVICE>"
+```
+<div class="alert alert-warning"><strong>Note</strong>: The <code>OTEL_SERVICE_NAME</code> environment variable takes precedence over the <code>service.name</code> attribute in the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable.</div>
+
 ##### Partial configuration
 
 ###### Pod-level metrics
@@ -291,6 +304,11 @@ Requirements:
 {{% /tab %}}
 
 {{% tab "ECS" %}}
+
+<div class="alert alert-warning">
+On ECS Fargate using Fluent Bit or FireLens, unified service tagging is only available for metrics and traces, not log collection.
+</div>
+
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic version tagging) environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:

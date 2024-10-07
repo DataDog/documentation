@@ -217,6 +217,18 @@ Optional [proxy configuration][13].
 **Default**: `true`<br/>
 Determines whether the accessibility labels are used to name RUM actions (default is true).
 
+`bundleLogsWithRum`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Enables RUM correlation with logs (default is true).
+
+`bundleLogsWithTraces`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Enables trace correlation with logs (default is true).
+
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
@@ -320,6 +332,14 @@ DdSdkReactNative.setAttributes({
     chat_enabled: true,
     campaign_origin: 'example_ad_network'
 });
+```
+
+## Clear all data
+
+Use `clearAllData` to clear all data that has not been sent to Datadog.
+
+```js
+DdSdkReactNative.clearAllData();
 ```
 
 ## Modify or drop RUM events

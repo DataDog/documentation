@@ -3,7 +3,7 @@ title: Single Step Instrumentation for Profiling
 private: true
 ---
 
-<div class="alert alert-info">Enabling Profiling using Single Step Instrumentation is in private beta.</div>
+<div class="alert alert-info">Enabling Profiling using Single Step Instrumentation is in Preview.</div>
 
 ## Overview
 
@@ -14,16 +14,16 @@ how to set it up.
 
 ## Supported operating systems and environments
 
-SSI is supported only on Linux, for both `x86_64` and `arm64` (ARM v8) architectures. The beta
+SSI is supported only on Linux, for both `x86_64` and `arm64` (ARM v8) architectures. The Preview
 version of Continuous Profiler with SSI works for host, container, and Kubernetes deployments.
 
 Continuous Profiler with SSI can be enabled for the following languages:
 
-| Language | Tracer library version |
-|----------|------------------------|
-| Java     | 1.37.0+                |
-| Node.js  | 4.39.0+, 5.15.0+       |
-| Python   | 2.11.1+                |
+| Language           | Tracer library version |
+|--------------------|------------------------|
+| Java               | 1.37.0+                |
+| .NET (x86_64 only) | 3.3.1+                 |
+| Node.js            | 4.39.0+, 5.15.0+       |
 
 Kubernetes deployments require at least Datadog Agent 7.57.0. Host and container deployments can
 use 7.56.x versions of the Datadog Agent.
@@ -64,7 +64,7 @@ datadog:
 ```
 
 If you already have the Datadog Helm chart, ensure it is updated to at least version 3.71.0.
-Use the "latest" image tag to install a recent Agent version with support for profiling, as 
+Use the "latest" image tag to install a recent Agent version with support for profiling, as
 the Datadog Helm chart defaults to an older Agent version.
 
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
@@ -91,7 +91,7 @@ spec:
           value: "auto"
 ```
 
-Use the "latest" image tag to install a recent Agent version with support for profiling, as 
+Use the "latest" image tag to install a recent Agent version with support for profiling, as
 the Datadog Operator defaults to an older Agent version.
 
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
