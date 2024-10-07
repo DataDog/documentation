@@ -31,13 +31,6 @@ In Datadog, each metric query in Datadog is evaluated with two layers of aggrega
 
 {{< img src="/metrics/nested_queries/nested-queries-before-after.png" alt="example of applying nested queries before and after" style="width:100%;" >}}
 
-
-| Supported Functions   | Description                                                                                    |
-|-----------------------|-----------------------------------------------------------------------------------------------|
-| Arithmetic operators   | `+, -, *, /`                                                                                  |
-| Timeshift functions    | `<METRIC_NAME>{*}, -<TIME_IN_SECOND>`<br> `hour_before(<METRIC_NAME>{*})`<br> `day_before(<METRIC_NAME>{*})`<br> `week_before(<METRIC_NAME>{*})`<br> `month_before(<METRIC_NAME>{*})` |
-| Top-k selection        | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`                                         |
-
 Other functions cannot be combined with multilayer aggregation.
 
 ### Multilayer time aggregation
@@ -62,6 +55,14 @@ Additional layers provided by multilayer time aggregation supports additional ti
 - `count`
 - `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
 - `stddev`
+
+| Supported Functions   | Description                                                                                    |
+|-----------------------|-----------------------------------------------------------------------------------------------|
+| Arithmetic operators   | `+, -, *, /`                                                                                  |
+| Timeshift functions    | `<METRIC_NAME>{*}, -<TIME_IN_SECOND>`<br> `hour_before(<METRIC_NAME>{*})`<br> `day_before(<METRIC_NAME>{*})`<br> `week_before(<METRIC_NAME>{*})`<br> `month_before(<METRIC_NAME>{*})` |
+| Top-k selection        | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`                                         |
+
+Other functions cannot be combined with multilayer aggregation. 
 
 {{% collapse-content title="Time aggregation example query" level="h5" %}}
 This query first calculates the average CPU utilization for each EC2 instance grouped by `env` and `team`, rolled up into 5-minute intervals. Then multilayer time aggregation is applied to calculate the 95th percentile in time of this nested query over 30m intervals. 
@@ -99,6 +100,15 @@ Additional layers of space aggregation support:
 - arbitrary percentile pXX (p75, p99, p99.99, etc.)
 - stddev by
 
+
+| Supported Functions   | Description                                                                                    |
+|-----------------------|-----------------------------------------------------------------------------------------------|
+| Arithmetic operators   | `+, -, *, /`                                                                                  |
+| Timeshift functions    | `<METRIC_NAME>{*}, -<TIME_IN_SECOND>`<br> `hour_before(<METRIC_NAME>{*})`<br> `day_before(<METRIC_NAME>{*})`<br> `week_before(<METRIC_NAME>{*})`<br> `month_before(<METRIC_NAME>{*})` |
+| Top-k selection        | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')`                                         |
+
+Other functions cannot be combined with multilayer aggregation. 
+
 All space aggregators with the exception of percentile space aggregators have one argument, which is the tag key(s) you'd want to group by. Percentile space aggregators require two arguments: 
 - The arbitrary percentile pXX
 - The tag(s) to group by
@@ -119,7 +129,6 @@ In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/multilayer-space-agg-json.png" alt="example of multilayer space aggregation in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
-
 
 
 ## Percentiles and Standard Deviation for Aggregated Counts/Rates/Gauges
