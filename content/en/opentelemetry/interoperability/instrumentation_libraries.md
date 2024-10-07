@@ -63,7 +63,7 @@ Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its 
 OpenTelemetry provides an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
 
 The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
-build, for example the [CFX instrumentation JAR][10].
+build, for example the [R2DBC instrumentation JAR][11].
 
 <div class="alert alert-warning">
 OpenTelemetry incubator APIs are not supported.
@@ -77,12 +77,36 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 2. Copy the OpenTelemetry extension JAR containing the instrumentation to the same container as the application.
 3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the extension JAR path.
 
+The following is an example of adding OpenTelemetry's R2DBC instrumentation to the Datadog Java SDK, it requires Java 17 and Maven 3:
+
+```sh
+git clone https://github.com/eugenp/tutorials
+
+cd tutorials/spring-reactive-modules/spring-reactive-data
+
+curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+
+curl -Lo opentelemetry-javaagent-r2dbc.jar \
+  'https://repo1.maven.org/maven2/io/opentelemetry/javaagent/instrumentation/opentelemetry-javaagent-r2dbc-1.0/2.5.0-alpha/opentelemetry-javaagent-r2dbc-1.0-2.5.0-alpha.jar'
+
+mvn spring-boot:run -Dstart-class=com.baeldung.pagination.PaginationApplication \
+  -Dspring-boot.run.jvmArguments='-javaagent:dd-java-agent.jar -Ddd.trace.otel.enabled=true -Dotel.javaagent.extensions=opentelemetry-javaagent-r2dbc.jar -Ddd.trace.split-by-tags=db.name,db.sql.table -Ddd.trace.debug=true'
+```
+
+open `http://127.0.0.1:8080/products` to exercise the product query.
+
+The `-Ddd.trace.split-by-tags=db.name,db.sql.table` setting is to give R2DBC spans a service name based on the table, if you don't want R2DBC spans to appear under a separate service then that setting can be dropped.
+
+<div class="alert alert-warning">
+Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not currently supported by the Datadog Java SDK.
+</div>
 
 ## Verified OpenTelemetry extensions
 
 | Framework           | Versions | OpenTelemetry Extension                         | Instrumentation Names |
 |---------------------|----------|-------------------------------------------------|-----------------------|
-| Apache CXF (Jax-WS) | 3.0+     | [opentelemetry-javaagent-jaxws-2.0-cxf-3.0][10] | `cxf`                 |
+| Apache CXF (Jax-WS) | 3.0+     | [opentelemetry-javaagent-jaxws-2.0-cxf-3.0][10] | `otel.cxf`            |
+| R2DBC               | 1.0+     | [opentelemetry-javaagent-r2dbc-1.0][11]         | `otel.r2dbc`          |
 
 [4]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation-api/src/main/java/io/opentelemetry/instrumentation/api/instrumenter/
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/javaagent-extension-api/src/main/java/io/opentelemetry/javaagent/extension/instrumentation/
@@ -91,7 +115,8 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 [8]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/src/main/java/com/example/javaagent/instrumentation/DemoServlet3InstrumentationModule.java
 [9]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/
 [10]: https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0
-[11]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
+[11]: https://search.maven.org/search?q=a:opentelemetry-javaagent-r2dbc-1.0
+[12]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
 
 {{% /tab %}}
 
