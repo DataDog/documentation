@@ -251,9 +251,7 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 Error outliers in Synthetic Monitoring display unexpected behaviors and performance deviations. These anomalies provide insights into the reliability issues in your [Synthetic browser tests][101]. Identifying these error outliers helps you troubleshoot errors in failed test runs, enhancing debugging and reducing Mean Time To Resolution (MTTR).
 
-In the banner card view, you can see:
-
-* The number of error outliers for a failed test run
+In the banner card view, you can see the number of error outliers for a failed test run:
 
 {{< img src="watchdog/failed_test_run.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
