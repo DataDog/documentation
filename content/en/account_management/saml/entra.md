@@ -1,6 +1,7 @@
 ---
-title: Azure Active Directory SAML IdP
+title: Microsoft Entra ID SAML IdP
 aliases:
+  - /account_management/saml/azure/
   - /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 further_reading:
 - link: "/account_management/saml/"
@@ -13,7 +14,7 @@ further_reading:
 
 ## Setup
 
-Follow the [Azure Active Directory single sign-on (SSO) integration with Datadog][1] tutorial to configure Azure AD as a SAML identity provider (IdP). **Note**: An Azure AD subscription is required. If you don't have a subscription, sign up for a [free account][2].
+Follow the [Microsoft Entra single sign-on (SSO) integration with Datadog][1] tutorial to configure Entra ID as a SAML identity provider (IdP). **Note**: An Entra ID subscription is required. If you don't have a subscription, sign up for a [free account][2].
 
 ### Datadog
 
@@ -43,6 +44,6 @@ If you are using SSO with a Datadog button or link, a sign-on URL is required:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.microsoft.com/en-us/azure/active-directory/saas-apps/datadog-tutorial
+[1]: https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-tutorial
 [2]: https://azure.microsoft.com/free/
 [3]: https://app.datadoghq.com/saml/saml_setup
