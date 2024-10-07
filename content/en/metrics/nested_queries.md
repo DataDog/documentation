@@ -15,20 +15,19 @@ nested
 Every metrics query in Datadog consists of two layers of aggregation by default (quick refresher [here][5]).
 Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one.
 
-{{< img src="/metrics/nested_queries/nested_queries_example.gif" alt="gif demonstrating nested queries" style="width:100%;" >}}
+{{< img src="metrics/nested-queries-example-video.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
 Nested queries unlocks several powerful capabilities: 
 
-- Multilayer aggregation 
-- Percentiles and standard deviation on non-distribution metrics
-- Higher resolution queries over historical timeframes
-
+- [Multilayer aggregation][6]
+- [Percentiles and standard deviation on non-distribution metrics][7]
+- [Higher resolution queries over historical timeframes][8]
 
 
 
 ## Multilayer aggregation
 
-In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of aggregation beyond the default.
+In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space (quick refresher [here][5]). Multilayer aggregation allows you to apply additional layers of time or space aggregation.
 
 | Supported Functions   | Description                                                                                    |
 |-----------------------|-----------------------------------------------------------------------------------------------|
@@ -192,3 +191,6 @@ You can use nested queries functionality in our public API for querying timeseri
 [3]: /metrics/#query-timeseries-data-across-multiple-products
 [4]: /metrics/distributions/
 [5]: /metrics/#anatomy-of-a-metric-query
+[6]: /metrics/nested-queries/#multilayer-aggregation
+[7]: /metrics/nested-queries/#percentiles-and-standard-deviation-for-aggregated-counts/rates/gauges
+[8]: /metrics/nested-queries/#higher-resolution-queries
