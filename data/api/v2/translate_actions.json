@@ -563,6 +563,34 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "GetChannelByName": {
+    "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
+    "summary": "Get channel information by name"
+  },
+  "ListTenantBasedHandles": {
+    "description": "Get a list of all tenant-based handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all tenant-based handles"
+  },
+  "CreateTenantBasedHandle": {
+    "description": "Create a tenant-based handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Create tenant-based handle request."
+  },
+  "DeleteTenantBasedHandle": {
+    "description": "Delete a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete tenant-based handle"
+  },
+  "GetTenantBasedHandle": {
+    "description": "Get the tenant, team, and channel information of a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get tenant-based handle information"
+  },
+  "UpdateTenantBasedHandle": {
+    "description": "Update a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Update tenant-based handle request."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"

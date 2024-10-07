@@ -45,8 +45,8 @@ The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 
 1. The timestamp (`T0`) of the log that triggers a security signal.
 1. The timestamp (`T1`) of when the signal is generated.
-1. The timestamp (`T3`) of when the signal status is changed to `under_review`.
-1. The timestamp (`T4`) of when the signal status is changed to `archived`.
+1. The timestamp (`T2`) of when the signal status is changed to `under_review`.
+1. The timestamp (`T3`) of when the signal status is changed to `archived`.
 
 | Metric                                                                                | How the metric is calculated |
 | ------------------------------------------------------------------------------------- | ---------------------------- |
