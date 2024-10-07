@@ -27,49 +27,20 @@ For Datadog Security products, granular access control is available for detectio
 
 ## Permissions
 
-See the [list of permissions][4] for Security products.
+See the [list of permissions][2] for Security products.
 
 ## Granular access control
 
-[Granular access control][2] is available for view and write permissions for detection and suppression rules.
+[Granular access control][3] is available for view and write permissions for detection and suppression rules.
 
 ### Restrict access to detection rules
 
-By default, all users have full access to detection rules. To use granular access controls to limit the roles that may edit a suppression rule:
-
-1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
-1. Click **Add**.
-1. Click **Save**.
-
-**Note**: To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving.
-
-To restore access to a rule:
-
-1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+{{% security-products/detection-rules-granular-access %}}
 
 ### Restrict access to suppression rules
 
-By default, all users have full access to [suppressions][3]. To use granular access controls to limit the roles that may edit a suppression rule:
+{{% security-products/suppressions-granular-access %}}
 
-1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
-1. Click **Add**.
-1. Click **Save**.
-
-**Note**: To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving.
-
-To restore access to a rule:
-
-1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
-
-[1]: /account_management/rbac/
-[2]: /account_management/rbac/granular_access/
-[3]: /security/suppressions/
-[4]: /account_management/rbac/permissions/#cloud-security-platform
+[1]: /account_management/rbac/#role-based-access-control
+[2]: /account_management/rbac/permissions/#cloud-security-platform
+[3]: /account_management/rbac/granular_access/
