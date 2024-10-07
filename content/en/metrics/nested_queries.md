@@ -124,7 +124,6 @@ In the UI or JSON tab, it would look as follows:
 
 Percentiles and standard deviation for aggregated counts/rates/gauges are a part of the multilayer aggregation aggregators. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. The percentile/standard deviation calculation offered in nested queries is computed on top of the results of an existing, aggregated metric query. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics](https://docs.datadoghq.com/metrics/distributions/) instead. 
 
-Here's an example that calculates the 95th percentile of average CPU utilization, grouped by environment and host, rolled up into 5-minute intervals, over the last 30 minutes:
 
 {{% collapse-content title="Percentiles example query" level="h5" %}}
 ```text
