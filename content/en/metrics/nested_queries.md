@@ -40,7 +40,9 @@ Other functions cannot be combined with multilayer aggregation.
 
 ### Multilayer time aggregation
 
-Multilayer time aggregation is expressed with the `rollup` function. The first `rollup` applied to a query determines its base level precision and aggregation. For more information, see the [Rollup][1] documentation. Subsequent rollups allow for additional layers of time aggregation.
+Multilayer time aggregation can be accessed with the `rollup` function. As a reminder, every metrics query already contains an initial `rollup` (time aggregation) that controls the granularity of the data points displayed on the graph. For more information, see the [Rollup][1] documentation. 
+
+You can apply additional layers of time aggregation with subsequent rollups.
 
 The first rollup supports the following aggregators:
 - `avg`
