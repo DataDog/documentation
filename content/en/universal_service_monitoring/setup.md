@@ -28,9 +28,9 @@ HTTP2/gRPC<br/>
 
 Supported TLS implementations
 : GnuTLS<br/>
-Go TLS<br/>
-Istio TLS<br/>
-NodeJS TLS<br/>
+Go<br/>
+Istio<br/>
+NodeJS<br/>
 OpenSSL<br/>
 
 Known limitations
