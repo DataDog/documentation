@@ -106,7 +106,6 @@ All space aggregators with the exception of percentile space aggregators have on
 The following query calculates the sum of average CPU utilization, grouped by environment:
 
 ```text
-sum(avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300),{env})
 ```
 
 
