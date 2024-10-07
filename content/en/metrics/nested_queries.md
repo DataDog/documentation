@@ -145,7 +145,9 @@ Here's an example that calculates the standard deviation of high-resolution metr
 
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
 ```text
-"rollup(sum:dd.metrics.query.batch.count{*}.rollup(avg,300),`stddev`,14400)"
+Historically when querying a metric over the past month, you would see data at 4-hour granularity. You can now use nested queries to access higher granularity data over this historical timeframe
+
+Note: We recommend you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs.
 ```
 In the UI or JSON tab:
 
