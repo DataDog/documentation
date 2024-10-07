@@ -43,7 +43,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Serverless Explorer][8]
     - [Kubernetes Explorer][9]
 - [Real User Monitoring (RUM) Explorer][10]
-- [Synthetic Monitoring & Testing Explorer][14]
+- [Synthetic Monitoring & Testing Explorer][15]
 - [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
@@ -253,8 +253,6 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{% /tab %}}
 {{% tab "Synthetic Monitoring" %}}
 
-<div class="alert alert-warning">Error Outliers for Synthetic Monitoring is in public beta.</div>
-
 ### Error outliers
 
 Error outliers in Synthetic Monitoring display unexpected behaviors and performance deviations. These anomalies provide insights into the reliability issues in your [Synthetic browser tests][101]. Identifying these error outliers helps you troubleshoot errors in failed test runs, enhancing debugging and reducing Mean Time To Resolution (MTTR).
@@ -325,4 +323,5 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
 [14]: /dashboards/graph_insights/watchdog_explains
+[15]: https://app.datadoghq.com/synthetics/explorer
 
