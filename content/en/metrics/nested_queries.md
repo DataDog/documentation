@@ -11,11 +11,11 @@ further_reading:
 {{< callout url="#" btn_hidden="true">}}
   This feature is in Preview. Please reach out to Customer Success to get this feature enabled. 
 {{< /callout >}}  
+nested
+Every metrics query in Datadog consists of two layers of aggregation by default (quick refresher [here][5]).
+Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one.
 
-Every metrics query in Datadog consists of two layers of aggregation by default (quick refresher [here](https://docs-staging.datadoghq.com/rachealou/nested-queries-updates/metrics/#anatomy-of-a-metric-query)). 
-Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one. 
-
-![nestedqueries](https://github.com/user-attachments/assets/b1b0a116-70cb-40da-a48a-2ab318a17d12)
+{{< img src="/metrics/nested_queries/nested_queries_example.gif" alt="gif demonstrating nested queries" style="width:100%;" >}}
 
 Nested queries unlocks several powerful capabilities: 
 
@@ -191,3 +191,4 @@ You can use nested queries functionality in our public API for querying timeseri
 [2]: /metrics/#configure-time-aggregation
 [3]: /metrics/#query-timeseries-data-across-multiple-products
 [4]: /metrics/distributions/
+[5]: /metrics/#anatomy-of-a-metric-query
