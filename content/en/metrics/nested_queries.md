@@ -76,7 +76,31 @@ This query first calculates the average CPU utilization for each EC2 instance gr
 
 ### Multilayer space aggregation
 
-Multilayer space aggregation is expressed with the name of the aggregator. Aggregators such as max(), stddev(), sum() have one argument, which is the tag key(s) to group by. Percentile space aggregation, on the other hand, requires two arguments: The percentile aggregator in the form of pxx and the tag key(s) to group-by.
+Once you've already specified tag(s) in your first layer of space aggregation to group by, multilayer space aggregation can be accessed with the `Group By` function. As a reminder, every metrics query already contains an initial space aggregation that controls the number of timeseries displayed on the graph. For example, this query `avg:system.cpu.usage{*} by {host}` plots the average cpu usage for every host. 
+
+You can apply additional layers of space aggregation with subsequent `Group Bys`.
+Note: if you do not specify tag(s) to group by in your initial space aggregation layer, multilayer space aggregation will not be available.
+
+The first layer of space aggregation supports the following aggregators:
+
+- avg by
+- sum by
+- min by
+- max by
+
+Additional layers of space aggregation support:
+
+- avg by
+- sum by
+- min by
+- max by
+- arbitrary percentile pXX (p75, p99, p99.99, etc.)
+- stddev by
+
+All space aggregators with the exception of percentile space aggregators have one argument, which is the tag key(s) you'd want to group by. Percentile space aggregators require two arguments: 
+- The arbitrary percentile pXX
+- The tag(s) to group by
+
 
 {{% collapse-content title="Space aggregation example queries" level="h5" %}}
 The following query calculates the sum of average CPU utilization, grouped by environment:
