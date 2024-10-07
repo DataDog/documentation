@@ -120,7 +120,7 @@ In the UI or JSON tab, it would look as follows:
 
 
 
-## Percentiles
+## Percentiles and Standard Deviation for Aggregated Counts/Rates/Gauges
 
 Percentile calculations provide deeper insights into your data's distribution by allowing you to set performance thresholds, and identifying outliers/extremes in your data.
 
