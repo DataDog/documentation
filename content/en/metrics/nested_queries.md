@@ -159,7 +159,6 @@ In the UI or JSON tab:
 ## How can I use Datadog API's to leverage nested queries?
 You can use nested queries functionality in our public API for querying timeseries data [here][3]. Simply change the contents of the **formula** object
 
-You would need to change the contents of the formula string parameter as seen here:
 
  {{< img src="/metrics/nested_queries/nested-queries-using-api.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 
