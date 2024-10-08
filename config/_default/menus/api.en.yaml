@@ -4375,6 +4375,70 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: ASM Exclusion Filters
+      url: /api/latest/asm-exclusion-filters/
+      identifier: asm-exclusion-filters
+      generated: true
+    - name: Update a ASM Exclusion filter
+      url: '#update-a-asm-exclusion-filter'
+      identifier: asm-exclusion-filters-update-a-asm-exclusion-filter
+      parent: asm-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateASMExclusionFilter
+        unstable: []
+        order: 5
+    - name: Get a specific ASM Exclusion Filter
+      url: '#get-a-specific-asm-exclusion-filter'
+      identifier: asm-exclusion-filters-get-a-specific-asm-exclusion-filter
+      parent: asm-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetASMExclusionFilters
+        unstable: []
+        order: 1
+    - name: Delete a ASM Exclusion Filter
+      url: '#delete-a-asm-exclusion-filter'
+      identifier: asm-exclusion-filters-delete-a-asm-exclusion-filter
+      parent: asm-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteASMExclusionFilter
+        unstable: []
+        order: 6
+    - name: Create a ASM WAF Exclusion filter
+      url: '#create-a-asm-waf-exclusion-filter'
+      identifier: asm-exclusion-filters-create-a-asm-waf-exclusion-filter
+      parent: asm-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateASMExclusionFilter
+        unstable: []
+        order: 2
+    - name: List ASM Exclusion Filters
+      url: '#list-asm-exclusion-filters'
+      identifier: asm-exclusion-filters-list-asm-exclusion-filters
+      parent: asm-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListASMExclusionFilters
+        unstable: []
+        order: 3
     - name: Audit
       url: /api/latest/audit/
       identifier: audit

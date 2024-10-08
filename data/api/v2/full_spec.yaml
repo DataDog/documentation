@@ -92,6 +92,14 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/APIKeysSort'
+    ASMExclusionFilterID:
+      description: The ID of the exclusion filter.
+      example: 3b5-v82-ns6
+      in: path
+      name: exclusion_filter_id
+      required: true
+      schema:
+        type: string
     ApplicationKeyFilterCreatedAtEndParameter:
       description: Only include application keys created on or before the specified
         date.
@@ -996,6 +1004,326 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    ASMExclusionFilterAttributes:
+      description: The attributes of the ASM WAF exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Test exclude path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: false
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/ASMExclusionFilterMetadata'
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterScope'
+          type: array
+      type: object
+    ASMExclusionFilterCreateAttributes:
+      description: Create a new ASM WAF exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Test exclude path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: false
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      - path_glob
+    ASMExclusionFilterCreateData:
+      description: Object for a single exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ASMExclusionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ASMExclusionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    ASMExclusionFilterCreateRequest:
+      description: Request object that includes the exclusion filter to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/ASMExclusionFilterCreateData'
+      required:
+      - data
+      type: object
+    ASMExclusionFilterData:
+      description: Object for a single Exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ASMExclusionFilterAttributes'
+        id:
+          description: The ID of the Exclusion filter.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/ASMExclusionFilterType'
+      type: object
+    ASMExclusionFilterID:
+      description: The ID of the exclusion filter.
+      example: 3dd-0uc-h1s
+      type: string
+    ASMExclusionFilterListAttributes:
+      description: The attributes of the ASM WAF exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Test exclude path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: false
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/ASMExclusionFilterMetadata'
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterListRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterScope'
+          type: array
+      type: object
+    ASMExclusionFilterListResponse:
+      description: Response object that includes a list of exclusion filters.
+      properties:
+        data:
+          description: The ASMExclusionFilterResponse data.
+          items:
+            $ref: '#/components/schemas/ASMExclusionListFilterData'
+          type: array
+      type: object
+    ASMExclusionFilterListRulesTarget:
+      description: A rule targeted by the exclusion filter.
+      properties:
+        tags:
+          $ref: '#/components/schemas/ASMExclusionFilterListRulesTargetTags'
+      type: object
+    ASMExclusionFilterListRulesTargetTags:
+      description: Tags identifying the category and type of the targeted rule.
+      properties:
+        category:
+          description: The category of the rule.
+          example: attack_attempt
+          type: string
+        type:
+          description: The type of the rule.
+          example: lfi
+          type: string
+      type: object
+    ASMExclusionFilterMetadata:
+      description: Metadata about the exclusion filter.
+      properties:
+        added_at:
+          description: The timestamp when the exclusion filter was added.
+          example: '2023-05-04T15:26:41Z'
+          format: date-time
+          type: string
+        added_by:
+          description: The email address of the user who added the exclusion filter.
+          example: xxxx@xxxx.com
+          type: string
+        modified_at:
+          description: The timestamp when the exclusion filter was last modified.
+          example: '2023-05-30T15:45:51Z'
+          format: date-time
+          type: string
+        modified_by:
+          description: The email address of the user who last modified the exclusion
+            filter.
+          example: xxx@xxx.com
+          type: string
+      type: object
+    ASMExclusionFilterResponse:
+      description: Response object that includes a list of exclusion filters.
+      properties:
+        data:
+          description: The ASMExclusionFilterResponse data.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterData'
+          type: array
+      type: object
+    ASMExclusionFilterRulesTarget:
+      description: A rule targeted by the exclusion filter.
+      properties:
+        rule_id:
+          description: The ID of the targeted rule.
+          example: dog-913-009
+          type: string
+      type: object
+    ASMExclusionFilterScope:
+      description: The scope of the exclusion filter.
+      properties:
+        env:
+          description: The environment scope for the exclusion filter.
+          example: dd-appsec-php-support
+          type: string
+        service:
+          description: The service scope for the exclusion filter.
+          example: anil-php-weblog
+          type: string
+      type: object
+    ASMExclusionFilterType:
+      default: exclusion_filter
+      description: The type of the resource. The value should always be `exclusion_filter`.
+      enum:
+      - exclusion_filter
+      example: exclusion_filter
+      type: string
+      x-enum-varnames:
+      - EXCLUSION_FILTER
+    ASMExclusionFilterUpdateAttributes:
+      description: Update an existing ASM Exclusion filter.
+      properties:
+        description:
+          description: The description of the Exclusion filter.
+          example: My Exclusion filter
+          type: string
+        enabled:
+          description: Whether the Exclusion filter is enabled.
+          example: true
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ASMExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      - path_glob
+      type: object
+    ASMExclusionFilterUpdateData:
+      description: Object for a single Exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ASMExclusionFilterUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/ASMExclusionFilterID'
+        type:
+          $ref: '#/components/schemas/ASMExclusionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    ASMExclusionFilterUpdateRequest:
+      description: Request object that includes the Exclusion filter with the attributes
+        to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/ASMExclusionFilterUpdateData'
+      required:
+      - data
+      type: object
+    ASMExclusionListFilterData:
+      description: Object for a single Exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ASMExclusionFilterListAttributes'
+        id:
+          description: The ID of the Exclusion filter.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/ASMExclusionFilterType'
+      type: object
     AWSRelatedAccount:
       description: AWS related account.
       properties:
@@ -36975,6 +37303,157 @@ paths:
         We are gradually onboarding support for more sources. If you have any
 
         feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
+  /api/v2/remote_config/products/asm/waf/exclusion_filters:
+    get:
+      description: Retrieve a list of ASM exclusion filters.
+      operationId: ListASMExclusionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ASMExclusionFilterListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ASM Exclusion Filters
+      tags:
+      - ASM Exclusion Filters
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    post:
+      description: Create a new exclusion filter with the given parameters.
+      operationId: CreateASMExclusionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ASMExclusionFilterCreateRequest'
+        description: The definition of the new Exclusion filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ASMExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a ASM WAF Exclusion filter
+      tags:
+      - ASM Exclusion Filters
+      x-codegen-request-body-name: body
+      x-given:
+        exclusion_filter:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"exclusion_filter\",\n    \"attributes\":
+              {\n      \"description\": \"My Exclusion Filter\",\n      \"enabled\":
+              true,\n      \"path_glob\": \"*\",\n      \"parameters\": [\n        \"list.search.query\"\n
+              \     ],\n      \"rules_target\": [\n        {\n          \"tags\":
+              {\n            \"category\":\"attack_attempt\",\n            \"type\":\"xss\"\n
+              \         }\n        }\n      ],\n      \"scope\": [\n        {\n          \"env\":
+              \"staging\",\n          \"service\": \"event-query\"\n        }\n      ]\n
+              \   }\n  }\n}"
+          step: there is a valid "exclusion_filter" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteASMExclusionFilter
+        parameters:
+        - name: exclusion_filter_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/asm/waf/exclusion_filters/{exclusion_filter_id}:
+    delete:
+      description: Delete a specific ASM Exclusion filter.
+      operationId: DeleteASMExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ASMExclusionFilterID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a ASM Exclusion Filter
+      tags:
+      - ASM Exclusion Filters
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieve a specific ASM exclusion filter by ID.
+      operationId: GetASMExclusionFilters
+      parameters:
+      - $ref: '#/components/parameters/ASMExclusionFilterID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ASMExclusionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific ASM Exclusion Filter
+      tags:
+      - ASM Exclusion Filters
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific Exclusion filter.
+
+        Returns the Exclusion filter object when the request is successful.'
+      operationId: UpdateASMExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ASMExclusionFilterID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ASMExclusionFilterUpdateRequest'
+        description: New definition of the Exclusion filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ASMExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a ASM Exclusion filter
+      tags:
+      - ASM Exclusion Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
     get:
       description: Get the list of Cloud Security Management Threats Agent rules.
@@ -44182,6 +44661,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
   name: APM Retention Filters
+- description: Exclusion filters in ASM libraries are used to circumvent false positives
+    in protection.
+  name: ASM Exclusion Filters
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
