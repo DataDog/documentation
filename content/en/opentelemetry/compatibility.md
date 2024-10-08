@@ -15,13 +15,13 @@ Datadog offers multiple setup options to accommodate various use cases, from ful
 
 The following setups are supported:
 
-| Setup Type                                               | API         | SDK                     | Collector/Agent                         |
-|----------------------------------------------------------|-------------|-------------------------|-----------------------------------------|
-| **[Full OpenTelemetry][7]**                              | OTel API    | OTel SDK                | OTel Collector                          |
-| **[OTel to Datadog Agent (OTLP)][6]**                    | OTel API    | OTel SDK                | Datadog Agent (OTLP Ingest)             |
-| **[OTel API with Datadog SDK and Agent][8]**             | OTel API    | Datadog SDK             | Datadog Agent                           |
-| **Datadog Agent with embedded OTel Collector (Preview)** | OTel API    | OTel SDK or Datadog SDK | Datadog Agent (with embedded Collector) |
-| **Full Datadog**                                         | Datadog API | Datadog SDK             | Datadog Agent                           |
+| Setup Type                                                    | API         | SDK                     | Collector/Agent                         |
+|---------------------------------------------------------------|-------------|-------------------------|-----------------------------------------|
+| **[Full OpenTelemetry][7]**                                   | OTel API    | OTel SDK                | OTel Collector                          |
+| **[OTel to Datadog Agent (OTLP)][6]**                         | OTel API    | OTel SDK                | Datadog Agent (OTLP Ingest)             |
+| **[OTel API with Datadog SDK and Agent][8]**                  | OTel API    | Datadog SDK             | Datadog Agent                           |
+| **[Datadog Agent with embedded OTel Collector][9] (Preview)** | OTel API    | OTel SDK or Datadog SDK | Datadog Agent (with embedded Collector) |
+| **[Full Datadog][10]**                                        | Datadog API | Datadog SDK             | Datadog Agent                           |
 
 <div class="alert alert-info">The <strong>Agent with embedded OTel Collector (Preview)</strong> supports two data flow options:
     <li>OTel SDK &#8594; embedded Collector, or</li>
@@ -78,8 +78,8 @@ For unsupported languages in OpenTelemetry setups, [configure telemetry tagging]
 
 When using Datadog and OpenTelemetry together, Datadog recommends the following best practices to ensure optimal performance and to avoid potential issues:
 
-- **Avoid Mixed Instrumentation**: Do not use both a Datadog SDK and an OpenTelemetry SDK to instrument the same application, as this leads to undefined behavior.
-- **Avoid Agent and Separate Collector on Same Host**: Do not run the Datadog Agent and a separate OpenTelemetry Collector on the same host, as this may cause issues. However, you can run Agents and Collectors on different hosts within the same fleet.
+- **Avoid mixed instrumentation**: Do not use both a Datadog SDK and an OpenTelemetry SDK to instrument the same application, as this leads to undefined behavior.
+- **Avoid Agent and separate Collector on same host**: Do not run the Datadog Agent and a separate OpenTelemetry Collector on the same host, as this may cause issues. However, you can run Agents and Collectors on different hosts within the same fleet.
 
 ## Further reading
 
@@ -93,3 +93,5 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [6]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/
 [7]: /opentelemetry/collector_exporter/
 [8]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[9]: https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/
+[10]: /tracing/trace_collection/
