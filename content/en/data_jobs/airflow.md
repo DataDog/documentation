@@ -125,7 +125,7 @@ You can troubleshoot Airflow tasks that run Spark jobs more efficiently by conne
 
 To see the link between Airflow task and the the Spark application it submitted, following these steps:
 
-1. Configure your Airflow to turn off lazily loading Airflow plugins by setting [lazy_load_plugins config][3] to `False` in your `airflow.cfg` or exporting the following environment variable where your Airflow schedulers and Airflow workers run:
+1. Configure Airflow to turn off lazy loading of Airflow plugins by setting [lazy_load_plugins config][3] to `False` in your `airflow.cfg` or exporting the following environment variable where your Airflow schedulers and Airflow workers run:
    
    ```shell
    export AIRFLOW__CORE__LAZY_LOAD_PLUGINS='False' 
