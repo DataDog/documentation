@@ -73,7 +73,7 @@ Learn more in the [custom metrics][4] documentation.
 
 ### Indexed custom metrics
 
-Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][10] documentation.
+Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][0] documentation.
 
 ### Hosts
 
@@ -215,7 +215,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]: /metrics/metrics-without-limits
+[0]: /metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/
