@@ -163,15 +163,8 @@ Datadog can collect and observe many things in your environments, however, it is
 
 Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (K8s, rancher, docker), and public cloud providers(AWS, Azure, GCP).  Datadog's unique ability allows the platform to [autodiscover][38] new objects (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) that are created within those environments. It is important to limit the number of monitored objects, as they have billing implications to consider.
 
-The usage of Datadog within these auto-discovered environment types is critical to understand. 
-See the following documentation pages to configure and exclude billable objects for:
-- [AWS][39] 
-- [GCP][44] 
-- [Azure][40]
-- [Containers][45]
-
 **Recommendations:**    
-For each virtualization framework, define the exclusion methodology. Enumerate specific tags, labels, namespaces, and annotations that will be used for collection control.
+Enable resource collection for [AWS][39] and [GCP][44] to view an inventory of resources, as well as cost and security insights. Additionally, limit metric collection for your [Azure][40] resources as well as in your [containerized][45] environments.
 
 ### Service levels
 
@@ -205,6 +198,10 @@ Datadog is a platform of tremendous value. From years of collective experience w
 Services are the base object of observability. Utilizing the [service catalog][30] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
 
 {{< img src="/service_owners_guide/service_catalog.png" alt="Service Catalog home screen" style="width:90%;">}}
+
+### Resource Catalog
+
+Use the Datadog [Resource Catalog][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. Resource Catalog offers visibility into infrastructure compliance, facilitating good tagging practices, reducing application risks by identifying security vulnerabilities, providing engineering leadership with a high-level view of security practices, and allowing resource export for record-keeping or auditing.
 
 ### Event Management 
 
@@ -313,5 +310,6 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [41]: /service_owners_guide/build
 [42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
 [43]: /integrations/ping/
-[44]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#configuration
+[44]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#resource-change-collection
 [45]: /containers/guide/container-discovery-management/?tab=datadogoperator
+[46]: /infrastructure/resource_catalog/

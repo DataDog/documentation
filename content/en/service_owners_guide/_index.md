@@ -49,4 +49,4 @@ Throughout this guide you will learn how to maximize the value of Datadog by exp
 [2]: /service_owners_guide/plan
 [3]: /service_owners_guide/build
 [4]: /service_owners_guide/run
-[5]: /service_owners_guide/overview
+[5]: /service_owners_guide/getting_started
