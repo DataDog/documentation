@@ -25,7 +25,7 @@ Datadog supports custom OpenAPI fields to help manage metadata:
    teamHandle: dd-team
   ```
 
-- **Scope to service**: Add the following to the top level of the OpenAPI file in order to scope this API to a specific service. Without this tag, Datadog will match all endpoints that fit to this definition:
+- **Scope to service**: Add the `service` parameter to the top level of an OpenAPI file to scope the API to a specific service. If you don't define a specific service, Datadog matches all endpoints that fit your definition:
   ```yaml
   x-datadog:
    service: web-store
