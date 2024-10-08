@@ -43,6 +43,7 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
+| [Baggage](#baggage) | Baggage is contextual information that is passed between signals in the form of key value pairs |
 
 ## Services
 
@@ -105,6 +106,10 @@ You can automatically instrument your application when you install the Datadog A
 You can use custom instrumentation by embedding tracing code directly into your application code. This allows you to programmatically create, modify, or delete traces to send to Datadog.
 
 To learn more, read [Application Instrumentation][26].
+
+## Baggage
+
+Baggage allows you to propagate key-value pairs (aka baggage items), across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
 
 ## Further Reading
 
