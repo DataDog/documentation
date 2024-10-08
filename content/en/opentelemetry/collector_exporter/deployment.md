@@ -25,13 +25,13 @@ The OpenTelemetry Collector can be deployed in various environments to suit diff
 
 It's important to note that certain features and capabilities may vary depending on the deployment method. For a detailed overview of these differences, see the [Deployment-based Limitations](#deployment-based-limitations).
 
-Choose the deployment option that best fits your infrastructure and follow the step-by-step instructions below.
+Choose the deployment option that best fits your infrastructure and complete the following instructions.
 
 ### On a host
 
 Run the Collector, specifying the configuration file using the `--config` parameter:
 
-```
+```shell
 otelcontribcol_linux_amd64 --config collector.yaml
 ```
 
@@ -149,6 +149,36 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
              value: "http://$(HOST_IP):4318"
    # ...
    ```
+   
+  4. Configure host metadata collection:
+   To ensure accurate host information, configure your DaemonSet to collect and forward host metadata:
+
+   ```yaml
+   processors:
+     resourcedetection:
+       detectors: [system, env]
+     k8sattributes:
+       # existing k8sattributes config
+     transform:
+       metric_statements:
+         - context: resource
+           statements:
+             - set(attributes["datadog.host.use_as_metadata"], true)
+
+   exporters:
+     datadog:
+       api:
+         key: ${DD_API_KEY}
+
+   service:
+     pipelines:
+       metrics:
+         receivers: [hostmetrics, otlp]
+         processors: [resourcedetection, k8sattributes, transform, batch]
+         exporters: [datadog]
+   ```
+
+   This configuration collects host metadata using the `resourcedetection` processor, adds Kubernetes metadata with the `k8sattributes` processor, and sets the `datadog.host.use_as_metadata` attribute to `true`.
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart
@@ -268,6 +298,58 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
          key: ${env:DD_API_KEY}
    # ...
    ```
+9. Configure host metadata collection:
+   In a gateway deployment, you need to ensure that host metadata is collected by the agent collectors and preserved by the gateway collector.
+
+   Agent collector configuration:
+
+   ```yaml
+   processors:
+     resourcedetection:
+       detectors: [system, env]
+     k8sattributes:
+       passthrough: true
+     transform:
+       metric_statements:
+         - context: resource
+           statements:
+             - set(attributes["datadog.host.use_as_metadata"], true)
+
+   exporters:
+     otlp:
+       endpoint: "<GATEWAY_HOSTNAME>:4317"
+
+   service:
+     pipelines:
+       metrics:
+         receivers: [hostmetrics, otlp]
+         processors: [resourcedetection, k8sattributes, transform, batch]
+         exporters: [otlp]
+   ```
+
+   Gateway collector configuration:
+
+   ```yaml
+   processors:
+     k8sattributes:
+       extract:
+       metadata: [node.name, k8s.node.name]
+
+   exporters:
+     datadog:
+       api:
+         key: ${DD_API_KEY}
+       hostname_source: resource_attribute
+
+   service:
+     pipelines:
+       metrics:
+         receivers: [otlp]
+         processors: [k8sattributes, batch]
+         exporters: [datadog]
+   ```
+
+   This ensures that host metadata is collected by the agents and properly forwarded through the gateway to Datadog.
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart
