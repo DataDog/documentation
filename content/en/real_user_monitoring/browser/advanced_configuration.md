@@ -370,8 +370,8 @@ The potential `context` values are:
 | RUM event type   | Context                   |
 |------------------|---------------------------|
 | View             | [Location][6]                  |
-| Action           | [Event][7] and handling stack                     |,
-| Resource (XHR)   | [XMLHttpRequest][8] [PerformanceResourceTiming][9], and handling stack            |
+| Action           | [Event][7] and handling stack                     |
+| Resource (XHR)   | [XMLHttpRequest][8], [PerformanceResourceTiming][9], and handling stack            |
 | Resource (Fetch) | [Request][10], [Response][11], [PerformanceResourceTiming][9], and handling stack      |
 | Resource (Other) | [PerformanceResourceTiming][9] |
 | Error            | [Error][12]                     |
@@ -1166,11 +1166,11 @@ However, this feature comes with some **limitations**:
 
 ## Micro frontend
 
-Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace, to use it, you must be able to extract service and version properties from your application's file paths and filenames.
+Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace. To use it, you must be able to extract service and version properties from your application's file paths and filenames.
 
 ### How to use it
 
-In the beforeSend property, you can override the service and version properties. To help you identify where the event originated, a new property `context.handlingStack` was introduced.
+In the `beforeSend` property, you can override the service and version properties. To help you identify where the event originated, use the `context.handlingStack` property.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
