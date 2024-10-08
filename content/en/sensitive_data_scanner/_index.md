@@ -22,6 +22,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-security/"
       tag: "Blog"
       text: "Discover sensitive data in your cloud data stores with Data Security"
+    - link: "https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/"
+      tag: "Blog"
+      text: "How companies subject to HIPAA requirements manage sensitive data with Datadog"
 ---
 
 ## Overview
