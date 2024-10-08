@@ -141,7 +141,7 @@ In the UI or JSON tab, it would look as follows:
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
-Similarly, we can use percentiles in multilayer time aggregation. Here we "Use Case 3: Compute the 50th percentile in time for api request count every 2 hours from 10 minutes ago"
+Similarly, we can use percentiles in multilayer time aggregation. Here we compute the p50th CPU utilization every 2 hours, from 10 minutes ago.
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
 
