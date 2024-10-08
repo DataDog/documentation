@@ -198,7 +198,7 @@ You can use nested queries functionality in our public API for querying timeseri
 [3]: /metrics/#query-timeseries-data-across-multiple-products
 [4]: /metrics/distributions/
 [5]: /metrics/#anatomy-of-a-metric-query
-[6]: /metrics/nested-queries/#multilayer-aggregation
-[7]: /metrics/nested-queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
-[8]: /metrics/nested-queries/#higher-resolution-queries
+[6]: /metrics/nested_queries/#multilayer-aggregation
+[7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
+[8]: /metrics/nested_queries/#higher-resolution-queries
 [9]: /metrics/distributions/
