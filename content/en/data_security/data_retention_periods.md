@@ -195,29 +195,117 @@ attributes:
     data_type: Custom metrics
     default_retention_period: 15 months
   - suite: Platform
-    product: 
-    data_type: 
-    default_retention_period: 
+    product: Audit Trail
+    data_type: Audit logs
+    default_retention_period: 90 days
   - suite: Platform
-    product: 
-    data_type: 
-    default_retention_period: 
+    product: CoScreen
+    data_type: Sessions
+    default_retention_period: 15 months
   - suite: Platform
-    product: 
-    data_type: 
-    default_retention_period: 
+    product: Dashboards/Notebooks/Monitors
+    data_type: Dashboards, Notebooks, Monitors
+    default_retention_period: Indefinite
   - suite: Platform
-    product: 
-    data_type: 
-    default_retention_period: 
+    product: Reference Tables
+    data_type: Tables
+    default_retention_period: Indefinite
   - suite: Platform
-    product: 
-    data_type: 
-    default_retention_period: 
-  - suite: 
-    product: 
-    data_type: 
-    default_retention_period: 
+    product: Workflow Automation
+    data_type: Workflows
+    default_retention_period: 30 days
+  - suite: Security
+    product: Application Security Management
+    data_type: Comments
+    default_retention_period: Indefinite
+  - suite: Security
+    product: Application Security Management
+    data_type: Security signals
+    default_retention_period: 15 months
+  - suite: Security
+    product: Application Security Management
+    data_type: Spans
+    default_retention_period: 90 days
+  - suite: Security
+    product: Cloud Security Management
+    data_type: Findings
+    default_retention_period: 15 months
+  - suite: Security
+    product: Cloud Security Management
+    data_type: Resolved vulnerabilities
+    default_retention_period: 15 months
+  - suite: Security
+    product: Cloud SIEM
+    data_type: Detection rules
+    default_retention_period: Indefinite
+  - suite: Security
+    product: Cloud SIEM
+    data_type: Notification rules
+    default_retention_period: Indefinite
+  - suite: Security
+    product: Cloud SIEM
+    data_type: Signals
+    default_retention_period: 15 months
+  - suite: Security
+    product: Cloud SIEM
+    data_type: Suppressions
+    default_retention_period: Indefinite
+  - suite: Security
+    product: Cloud Workload Security
+    data_type: Events
+    default_retention_period: 90 days
+  - suite: Security
+    product: Cloud Workload Security
+    data_type: Security signals
+    default_retention_period: 15 months
+  - suite: Security
+    product: Code Security (IAST)
+    data_type: Detected vulnerabilities
+    default_retention_period: 15 months
+  - suite: Security
+    product: Software Composition Analysis
+    data_type: Detected vulnerabilities
+    default_retention_period: 15 months
+  - suite: Service Management
+    product: Case Management
+    data_type: Cases
+    default_retention_period: Indefinite
+  - suite: Service Management
+    product: Event Management
+    data_type: Events
+    default_retention_period: 15 months
+  - suite: Service Management
+    product: Incident Management
+    data_type: Incidents
+    default_retention_period: Indefinite
+  - suite: Service Management
+    product: Service Level Objectives
+    data_type: Monitor-based results
+    default_retention_period: 3 months
+  - suite: Service Management
+    product: Service Level Objectives
+    data_type: Metric and time slice-based results
+    default_retention_period: 15 months
+  - suite: Software Delivery
+    product: CD Visibility
+    data_type: Deployments
+    default_retention_period: 30 days
+  - suite: Software Delivery
+    product: CI Pipeline Visibility
+    data_type: Pipelines, stages, jobs, steps, commands
+    default_retention_period: 15 months
+  - suite: Software Delivery
+    product: Test Visibility & Intelligent Test Runner
+    data_type: Tests
+    default_retention_period: 3 months
+  - suite: Software Delivery
+    product: Quality Gates
+    data_type: Gate evaluations
+    default_retention_period: 30 days
+  - suite: Software Delivery
+    product: Code Analysis
+    data_type: Scans
+    default_retention_period: 15 months
 
 ---
 
