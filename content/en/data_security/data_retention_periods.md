@@ -77,7 +77,7 @@ attributes:
   - suite: Applications
     product: Service Catalog
     data_type: Service metadata
-    default_retention_period: indefinite
+    default_retention_period: Indefinite
   - suite: Error Tracking
     product: Error Tracking
     data_type: Errors
