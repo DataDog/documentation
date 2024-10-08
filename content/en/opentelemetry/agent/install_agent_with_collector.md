@@ -83,7 +83,7 @@ agents:
 ...
    {{< /code-block >}}
    <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.57.0-v1.0-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
-   By default, the Agent image is pulled from Google Artifact Registry (<code>gcr.io/datadoghq</code>). If Artifact Registry is not accessible in your deployment region, <a href="/containers/guide/changing_container_registry/">use another registry</a>.
+   By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][53].
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -598,3 +598,4 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [50]: https://docs.docker.com/engine/install/
 [51]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml#L7
 [52]: /getting_started/site/
+[53]: /containers/guide/changing_container_registry/
