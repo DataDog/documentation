@@ -30,7 +30,7 @@ Datadog supports custom OpenAPI fields to help manage metadata:
   x-datadog:
    service: web-store
   ```
-  The name of the service should be the exact service name as appeared on Datadog traces.
+  The name of the service should be the exact service name as it appears on Datadog traces.
 
 Example OpenAPI file:
 
