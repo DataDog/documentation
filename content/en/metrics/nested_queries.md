@@ -154,12 +154,10 @@ We can also use percentiles in multilayer time aggregation to additionally summa
  {{% /collapse-content %}} 
 
 
+{{% collapse-content title="Standard deviation example query" level="h5" %}}
+
 Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
 
-{{% collapse-content title="Standard deviation example query" level="h5" %}}
-```text
-"rollup(sum:api.requests.count{*}.rollup(avg,300),'stddev',14400)"
-```
 In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-std-ui.png" alt="example of standard deviation with nested queries in the UI" style="width:100%;" >}}
