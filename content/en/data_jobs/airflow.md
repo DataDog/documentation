@@ -26,7 +26,7 @@ further_reading:
 
 ## Setup
 
-Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-airflow-providers-openlineage][2] installed.
+Data Jobs Monitoring supports Apache Airflow deployments with [apache-airflow-providers-openlineage][2] installed.
 
 To get started, follow the instructions below.
 
