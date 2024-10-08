@@ -279,7 +279,7 @@ If you already have a task definition, update your file to include the following
 
    These files deploy an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. The Agent can also run Agent integrations based on Docker Labels discovered on your containers.
 
-3. Optionally, to monitor network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually, add the following additional environment variables to your `datadog-agent-sysprobe-ecs.json`:
+3. To monitor network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually, add the following additional environment variables to your `datadog-agent-sysprobe-ecs.json`:
 
    ```json
       "environment": [
