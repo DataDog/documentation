@@ -204,7 +204,7 @@ attributes:
     default_retention_period: 15 months
   - suite: Platform
     product: Dashboards/Notebooks/Monitors
-    data_type: Dashboards, Notebooks, Monitors
+    data_type: Dashboards, Notebooks, and Monitors
     default_retention_period: Indefinite
   - suite: Platform
     product: Reference Tables
@@ -292,10 +292,10 @@ attributes:
     default_retention_period: 30 days
   - suite: Software Delivery
     product: CI Pipeline Visibility
-    data_type: Pipelines, stages, jobs, steps, commands
+    data_type: Pipelines, stages, jobs, steps, and commands
     default_retention_period: 15 months
   - suite: Software Delivery
-    product: Test Visibility & Intelligent Test Runner
+    product: Test Visibility and Intelligent Test Runner
     data_type: Tests
     default_retention_period: 3 months
   - suite: Software Delivery
