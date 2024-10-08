@@ -34,8 +34,8 @@ If your organization has an existing all-encompassing index with a low limit, pl
 - It's also recommended that you are using the latest version of the Datadog Lambda Forwarder to avoid discrepancies in how logs are forwarded.
 
 ### Caution when using custom log pipelines
-- Custom log pipelines can offer flexibility in processing logs but altering the log format too much can lead to issues downstream, such as logs not being parsed or recognized.
-- Avoid making significant changes to the Step Function log structure that will change the JSON format.
+- Custom log pipelines can offer flexibility in processing logs, but altering the log format too much can lead to issues downstream, such as logs not being parsed or recognized.
+- Avoid making significant changes to the Step Function log structure that change the JSON format.
 
 ## Lambda traces are not merging with Step Function traces
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
