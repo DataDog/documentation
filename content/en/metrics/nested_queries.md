@@ -139,13 +139,14 @@ In the UI or JSON tab, it would look as follows:
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
 
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
-{{% /collapse-content %}} 
 
-Similarly, we can use percentiles in multilayer time aggregation. Here we compute the p50th CPU utilization every 2 hours, from 10 minutes ago.
+We can also use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
+
+ {{% /collapse-content %}} 
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
 
