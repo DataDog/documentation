@@ -202,7 +202,9 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 
 {{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
-You can also pass the result of a child workflow back to the parent workflow by defining **Output parameters** in the child workflow. Use the `WorkflowOutputs` context variable in the parent workflow to retrieve the output parameters of the child workflow. For example, given a child workflow named `Example_workflow` with an output parameter named `exampleList`, use `Steps.Example_workflow.workflowOutputs.exampleList` to access the result of the child workflow.
+### Access the result of a child workflow
+
+You can pass the result of a child workflow back to the parent workflow by defining **Output parameters** in the child workflow. Use the `WorkflowOutputs` context variable in the parent workflow to retrieve the output parameters of the child workflow. For example, given a child workflow named `Example_workflow` with an output parameter named `exampleList`, use `Steps.Example_workflow.workflowOutputs.exampleList` to access the result of the child workflow.
 
 ## Run history
 

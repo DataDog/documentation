@@ -1,8 +1,5 @@
 To authenticate the Observability Pipelines Worker for Google Chronicle, contact your Google Security Operations representative for a Google Developer Service Account Credential. This credential is a JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][10001] for more information.
 
-**Note**: If you are installing the Worker in Kubernetes, see [Referencing files in Kubernetes][10004] for information on how to reference the credentials file.
-
-
 To set up the Worker's Google Chronicle destination:
 
 1. Enter the customer ID for your Google Chronicle instance.
@@ -14,4 +11,3 @@ To set up the Worker's Google Chronicle destination:
 
 [10001]: https://cloud.google.com/chronicle/docs/reference/ingestion-api#getting_api_authentication_credentials
 [10003]: https://cloud.google.com/chronicle/docs/ingestion/parser-list/supported-default-parsers#with-default-parser
-[10004]: /observability_pipelines/advanced_configurations/#referencing-files-in-kubernetes
