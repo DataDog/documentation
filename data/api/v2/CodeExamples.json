@@ -652,14 +652,14 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
-  "CreateApiHandle": [
+  "CreateTenantBasedHandle": [
     {
       "group": "microsoft_teams_integration",
       "suffix": "_1540689753",
       "description": "Create api handle returns \"CREATED\" response"
     }
   ],
-  "UpdateApiHandle": [
+  "UpdateTenantBasedHandle": [
     {
       "group": "microsoft_teams_integration",
       "suffix": "_419892746",

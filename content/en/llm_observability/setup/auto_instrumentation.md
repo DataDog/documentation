@@ -15,13 +15,13 @@ further_reading:
 
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
-
-| Framework                               | Supported Versions |
-|-----------------------------------------|--------------------|
-| [OpenAI](#openai)                       | >= 0.26.5          |
-| [Langchain](#langchain)                 | >= 0.0.192         |
-| [AWS Bedrock](#aws-bedrock)             | >= 1.31.57         |
-| [Anthropic](#anthropic)                 | >= 0.28.0          |
+| Framework                               | Supported Versions | Tracer Version    |
+|-----------------------------------------|--------------------|-------------------|
+| [OpenAI](#openai)                       | >= 0.26.5          | >= 2.9.0          |
+| [Langchain](#langchain)                 | >= 0.0.192         | >= 2.9.0          |
+| [Amazon Bedrock](#amazon-bedrock)       | >= 1.31.57         | >= 2.9.0          |
+| [Anthropic](#anthropic)                 | >= 0.28.0          | >= 2.10.0         |
+| [Google Gemini](#google-gemini)         | >= 0.7.2           | >= 2.14.0         |
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -45,22 +45,22 @@ LLMObs.enable(integrations_enabled=False, ...)
 patch(<INTEGRATION_NAME_IN_LOWERCASE>=True)
 {{< /code-block >}}
 
-**Note**: Use `botocore` as the name of the [AWS Bedrock](#aws-bedrock) integration when manually enabling.
+**Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
 
 ## OpenAI
 
-The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][1] completion and chat completion endpoints.
+The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][1] completion and chat completion endpoints to OpenAI and Azure OpenAI.
 
 ### Traced methods
 
 The OpenAI integration instruments the following methods, including streamed calls:
 
 - [Completions][2]:
-   - `OpenAI().completions.create()`
-   - `AsyncOpenAI().completions.create()`
+   - `OpenAI().completions.create()`, `AzureOpenAI().completions.create()`
+   - `AsyncOpenAI().completions.create()`, `AsyncAzureOpenAI().completions.create()`
 - [Chat completions][3]:
-   - `OpenAI().chat.completions.create()`
-   - `AsyncOpenAI().chat.completions.create()`
+   - `OpenAI().chat.completions.create()`, `AzureOpenAI().chat.completions.create()`
+   - `AsyncOpenAI().chat.completions.create()`, `AsyncAzureOpenAI().chat.completions.create()`
 
 ## LangChain
 
@@ -82,20 +82,20 @@ The LangChain integration instruments the following methods:
 
 **Note:** The LangChain integration does not yet support tracing streamed calls.
 
-## AWS Bedrock
+## Amazon Bedrock
 
-The AWS Bedrock integration provides automatic tracing for the AWS Bedrock Runtime Python SDK's chat model calls (using [Boto3][5]/[Botocore][6]).
+The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Python SDK's chat model calls (using [Boto3][5]/[Botocore][6]).
 
 ### Traced methods
 
-The AWS Bedrock integration instruments the following methods:
+The Amazon Bedrock integration instruments the following methods:
 
 - [Chat messages][7]:
   - `InvokeModel`
 - [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
 
-**Note:** The AWS Bedrock integration does not yet support tracing embedding calls.
+**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls.
 
 ## Anthropic
 
@@ -109,6 +109,18 @@ The Anthropic integration instruments the following methods:
   - `Anthropic().messages.create()`, `AsyncAnthropic().messages.create()`
 - [Streamed chat messages][11]:
   - `Anthropic().messages.stream()`, `AsyncAnthropic().messages.stream()`
+
+## Google Gemini
+
+The Google Gemini integration provides automatic tracing for the [Google AI Python SDK's][19] content generation calls.
+
+### Traced methods
+
+The Google Gemini integration instruments the following methods:
+
+- [Generating content][20] (including streamed calls):
+  - `model.generate_content()` (Also captures `chat.send_message()`)
+  - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
 
 ## Further Reading
 
@@ -132,3 +144,5 @@ The Anthropic integration instruments the following methods:
 [16]: /llm_observability/setup/sdk/
 [17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
 [18]: /llm_observability/setup/sdk/#tracing-spans
+[19]: https://ai.google.dev/gemini-api/docs
+[20]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
