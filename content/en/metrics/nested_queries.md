@@ -162,7 +162,7 @@ In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-std-ui.png" alt="example of standard deviation with nested queries in the UI" style="width:100%;" >}}
 
- {{< img src="/metrics/nested_queries/nested-queries-std-jsonigh.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
+ {{< img src="/metrics/nested_queries/nested-queries-std-json.png" alt="example of standard deviation with nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
 
