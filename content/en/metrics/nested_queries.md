@@ -146,8 +146,6 @@ Similarly, we can use percentiles in multilayer time aggregation. Here we comput
  {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
-{{% /collapse-content %}} 
-
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
 
