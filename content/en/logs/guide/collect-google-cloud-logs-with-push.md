@@ -17,12 +17,9 @@ further_reading:
 
 <div class="alert alert-danger">
 
-This page describes deprecated features with configuration information relevant to legacy Pub/Sub Push subscriptions, useful for troubleshooting or modifying legacy setups.
-
-Collecting Google Cloud logs with a Pub/Sub Push subscription is in the process of being deprecated for the following reasons:
-
-- If you have a Google Cloud VPC, new Push subscriptions cannot be configured with external endpoints (see Google Cloud's [Supported products and limitations][12] page for more information)
-- The Push subscription does not provide compression or batching of events, and as such is only suitable for a very low volume of logs
+This page describes deprecated features with configuration information relevant to legacy Pub/Sub Push subscriptions, useful for troubleshooting or modifying legacy setups. Pub/Sub Push subscription is being deprecated for the following reasons:
+- For Google Cloud VPC, new Push subscriptions cannot be configured with external endpoints (see Google Cloud's [Supported products and limitations][12] page for more information)
+- The Push subscription does not provide compression or batching of events
 
 Documentation for the <strong>Push</strong> subscription is only maintained for troubleshooting or modifying legacy setups. 
 
