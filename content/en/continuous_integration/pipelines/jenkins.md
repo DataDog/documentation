@@ -48,6 +48,8 @@ This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-a
 
 The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin.
 
+If you want to report the logs of your Jenkins jobs to Datadog, make sure that custom log collection over TCP is [enabled and configured][29] in the Agent.
+
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
 <div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
@@ -1510,3 +1512,4 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [26]: /glossary/#custom-span
 [27]: /logs/guide/best-practices-for-log-management/
 [28]: /continuous_integration/search/#search-for-pipelines
+[29]: /agent/logs/?tab=tcpudp#custom-log-collection

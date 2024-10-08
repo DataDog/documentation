@@ -50,8 +50,6 @@ sbom:
   # Set to true to enable Host Vulnerability Management  
   host:
     enabled: true
-container_image:
-  enabled: true
 {{< /code-block >}}
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}

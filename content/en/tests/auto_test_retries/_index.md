@@ -14,10 +14,6 @@ further_reading:
 <div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Auto Test Retries is in public beta.
-{{< /callout >}}
-
 ## Overview
 
 Test Visibility's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
@@ -58,6 +54,10 @@ After you have set up Test Visibility, you can configure Auto Test Retries from 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
+This behavior can be fine-tuned with the following environment variables:
+
+* `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to 0 or false to explicitly disable retries even if the remote setting is enabled (default: true).
+* `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
 
 #### Known limitations
 
@@ -80,8 +80,8 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
-[1]: /tests/explorer/
 
+[1]: /tests/explorer/
 {{% /tab %}}
 
 {{< /tabs >}}

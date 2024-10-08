@@ -13,7 +13,7 @@ Autocomplete and search are in public beta.
 ## Requirements
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- Tracing library [`dd-trace-java`][6] 1.34.0 or higher is installed.
+- Tracing library [`dd-trace-java`][6] 1.39.1 or higher is installed.
 
 ## Installation
 
