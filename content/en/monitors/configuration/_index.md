@@ -16,9 +16,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
   tag: "Blog"
   text: "Manage your monitors more efficiently with Datadog Teams"
-- link: "https://www.datadoghq.com/blog/bordant-technologies-camunda-8-datadog-marketplace/"
-  tag: "Blog"
-  text: "Gain visibility into your Camunda 8 components with Bordant Technologies’ Datadog integration"
 ---
 
 ## Overview
