@@ -364,7 +364,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create a new TracerSettings object and configure it
+        // Create an OpenTelemetry TracerProvider to initialize the OpenTelemetry Hangfire instrumentation and build the configuration
         var openTelemetry = Sdk.CreateTracerProviderBuilder()
             .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("hangfire-demo2"))
             .AddHangfireInstrumentation() // This line generates the OpenTelemetry spans
