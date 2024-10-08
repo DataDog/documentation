@@ -10950,7 +10950,7 @@ components:
             Periods of no data are counted either as uptime or downtime depending
             on monitor settings.
 
-            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+            See [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
 
             for detailed information.'
           example:
