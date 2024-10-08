@@ -59,6 +59,7 @@ The list of automatically-assigned tags depends on the Agent's [cardinality conf
   | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
   | `eks_fargate_node`            | Low          | Pod spec                                                                | EKS Fargate environment                             |
   | `kube_runtime_class`          | Low          | Pod spec                                                                | Pod must be attached to a runtime class             |
+  | `kube_gpu_type`               | Low          | Pod spec                                                                | Container must be attached to a GPU resource        |
 
 </div>
 
