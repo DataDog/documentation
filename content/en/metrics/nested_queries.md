@@ -127,29 +127,29 @@ In the UI or JSON tab, it would look as follows:
 
 Percentiles and standard deviation for aggregated counts/rates/gauges are a part of the multilayer aggregation aggregators. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. The percentile/standard deviation calculation offered in nested queries is computed on top of the results of an existing, aggregated metric query. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
 
+ {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
+
+We can also use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
+
+ {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of MLA time agg percentiles using nested queries in the UI" style="width:100%;" >}}
+
+ {{< img src="/metrics/nested_queries/percentiles-time-agg-json.png" alt="example of MLA time agg percentiles using nested queries in the JSON" style="width:100%;" >}}
+
+ {{% /collapse-content %}} 
+ 
 
 {{% collapse-content title="Percentiles in Multilayer Space Aggregation example query" level="h5" %}}
 
-We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
+We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
 
 In the UI or JSON tab, it would look as follows:
 
- {{< img src="/metrics/nested_queries/nested-queries-percentiles-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
+ {{< img src="/metrics/nested_queries/percentiles-space-agg-ui.png" alt="example of MLA space agg percentiles using nested queries in the UI" style="width:100%;" >}}
 
- {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
+ {{< img src="/metrics/nested_queries/percentiles-space-agg-json.png" alt="example of MLA space agg percentiles using nested queries in the JSON" style="width:100%;" >}}
 
   {{% /collapse-content %}} 
 
-
- {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
-
-We can also use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
-
- {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
-
- {{< img src="/metrics/nested_queries/percentiles-time-agg-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
-
- {{% /collapse-content %}} 
 
 
 {{% collapse-content title="Standard deviation example query" level="h5" %}}
