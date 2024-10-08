@@ -113,6 +113,7 @@ All space aggregators with the exception of percentile space aggregators have on
 
 {{% collapse-content title="Space aggregation example queries" level="h5" %}}
 The following query calculates the sum of average CPU utilization, grouped by `env`:
+This initial query, `avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300)` calculates the sum of average CPU utilization, grouped by `env` and `host` every 5 minutes. Then multilayer space aggregation is applied to calculate maximum value of the average CPU utilization by `env`.
 
 
 In the UI or JSON tab, it would look as follows:
