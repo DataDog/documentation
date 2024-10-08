@@ -21,9 +21,9 @@ further_reading:
 
 ## Overview
 
-Datadog's access management system uses role-based access control to let you determine the level of access users have to Datadog resources. Users are added to roles, which define the account permissions those users have, such as what data they can read or what account assets they can modify. When permissions are granted to a role, any user who is associated with that role receives those permissions. See the [Account Management Access Control][1] documentation for more information.
+Datadog's access management system uses role-based access control, enabling you to define the level of access users have to Datadog resources. Users are assigned to roles that define their account permissions, including what data they can read and which account assets they can modify. When permissions are granted to a role, any user who is associated with that role receives those permissions. See the [Account Management Access Control][1] documentation for more information.
 
-For Datadog Security products, granular access control is available for detection rules and suppressions, so you can restrict access to them by teams, roles, or service accounts.
+For Datadog Security products, granular access control is available for detection rules and suppressions, allowing you to restrict access by teams, roles, or service accounts.
 
 ## Permissions
 
