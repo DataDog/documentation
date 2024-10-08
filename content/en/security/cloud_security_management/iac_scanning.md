@@ -26,8 +26,8 @@ After you set up the GitHub integration, enable IaC scanning for the repositorie
 1. On the [CSM Setup page][4], expand the **Source Code Integrations** section.
 2. Click **Configure** for the GitHub account you want to configure.
 3. To enable IaC scanning:
-    - For all repositories, toggle the IAC toggle under Enable Infrastructure as Code (IaC) Scanning to the on position.
-    - For a single repository, toggle the IAC scanning toggle for that repository.
+    - All repositories: Toggle **Enable Infrastructure as Code (IaC) Scanning** to the on position.
+    - Single repository: Toggle the **IAC Scanning** option for the specific repository to the on position.
 
 [1]: /security/cloud_security_management/misconfigurations
 [2]: /security/cloud_security_management/identity_risks
