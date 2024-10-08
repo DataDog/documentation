@@ -83,6 +83,7 @@ agents:
 ...
    {{< /code-block >}}
    <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.57.0-v1.0-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+   
    By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][53].
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
