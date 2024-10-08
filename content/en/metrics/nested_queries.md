@@ -130,7 +130,6 @@ Percentiles and standard deviation for aggregated counts/rates/gauges are a part
 
 {{% collapse-content title="Percentiles in Multilayer Space Aggregation example query" level="h5" %}}
 
-
 We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
 
 In the UI or JSON tab, it would look as follows:
@@ -143,7 +142,6 @@ In the UI or JSON tab, it would look as follows:
 
 
  {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
-
 
 We can also use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
 
@@ -170,13 +168,11 @@ In the UI or JSON tab, it would look as follows:
 
 As the query time frame increases, the rollup interval becomes less granular, preventing you from querying anything more detailed than those default time intervals. With nested queries, you can now access more granular, high-resolution data over longer periods.
 
-Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval:
-
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
 
-Historically when querying a metric over the past month, you would see data at 4-hour granularity. You can now use nested queries to access higher granularity data over this historical timeframe
+Historically when querying a metric over the past month, you would see data at 4-hour granularity. You can now use nested queries to access higher granularity data over this historical timeframe. Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval.
 
-Note: We recommend you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs.
+_Note: We recommend you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs._
 
 In the UI or JSON tab:
 
