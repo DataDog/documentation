@@ -6207,76 +6207,64 @@ menu:
       url: /api/latest/microsoft-teams-integration/
       identifier: microsoft-teams-integration
       generated: true
-    - name: Update handle
-      url: '#update-handle'
-      identifier: microsoft-teams-integration-update-handle
+    - name: Update tenant-based handle
+      url: '#update-tenant-based-handle'
+      identifier: microsoft-teams-integration-update-tenant-based-handle
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateApiHandle
+          - UpdateTenantBasedHandle
         unstable: []
         order: 1
-    - name: Get handle information
-      url: '#get-handle-information'
-      identifier: microsoft-teams-integration-get-handle-information
+    - name: Get tenant-based handle information
+      url: '#get-tenant-based-handle-information'
+      identifier: microsoft-teams-integration-get-tenant-based-handle-information
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetApiHandle
+          - GetTenantBasedHandle
         unstable: []
         order: 1
-    - name: Delete handle
-      url: '#delete-handle'
-      identifier: microsoft-teams-integration-delete-handle
+    - name: Delete tenant-based handle
+      url: '#delete-tenant-based-handle'
+      identifier: microsoft-teams-integration-delete-tenant-based-handle
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteApiHandle
+          - DeleteTenantBasedHandle
         unstable: []
         order: 1
-    - name: Get handle information by name
-      url: '#get-handle-information-by-name'
-      identifier: microsoft-teams-integration-get-handle-information-by-name
+    - name: Create tenant-based handle
+      url: '#create-tenant-based-handle'
+      identifier: microsoft-teams-integration-create-tenant-based-handle
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetApiHandleByName
+          - CreateTenantBasedHandle
         unstable: []
         order: 1
-    - name: Create handle
-      url: '#create-handle'
-      identifier: microsoft-teams-integration-create-handle
+    - name: Get all tenant-based handles
+      url: '#get-all-tenant-based-handles'
+      identifier: microsoft-teams-integration-get-all-tenant-based-handles
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateApiHandle
-        unstable: []
-        order: 1
-    - name: Get all handles
-      url: '#get-all-handles'
-      identifier: microsoft-teams-integration-get-all-handles
-      parent: microsoft-teams-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListApiHandles
+          - ListTenantBasedHandles
         unstable: []
         order: 1
     - name: Get channel information by name
