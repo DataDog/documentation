@@ -298,11 +298,6 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
        detectors: [system, env]
      k8sattributes:
        passthrough: true
-     transform:
-       trace_statements:
-         - context: resource
-           statements:
-             - set(attributes["datadog.host.use_as_metadata"], true)
 
    exporters:
      otlp:
