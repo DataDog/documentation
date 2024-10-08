@@ -15,14 +15,13 @@ further_reading:
 Every metric query in Datadog consists of two layers of aggregation by default (quick refresher [here][5]).
 Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one.
 
-{{< img src="metrics/nested-queries/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}
+{{< img src="metrics/nested_queries/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}
 
 Nested queries unlocks several powerful capabilities: 
 
 - [Multilayer aggregation][6]
 - [Percentiles and standard deviation on non-distribution metrics][7]
 - [Higher resolution queries over historical timeframes][8]
-
 
 
 ## Multilayer aggregation
@@ -129,7 +128,7 @@ In the UI or JSON tab, it would look as follows:
 Percentiles and standard deviation for aggregated counts/rates/gauges are a part of the multilayer aggregation aggregators. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. The percentile/standard deviation calculation offered in nested queries is computed on top of the results of an existing, aggregated metric query. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
 
 
-{{% collapse-content title="Percentiles example query" level="h5" %}}
+{{% collapse-content title="Percentiles example query in Multilayer Space Aggregation " level="h5" %}}
 
 
 We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
@@ -140,6 +139,12 @@ In the UI or JSON tab, it would look as follows:
 
  {{< img src="/metrics/nested_queries/nested-queries-percentiles-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 
+  {{% /collapse-content %}} 
+
+
+ {{% collapse-content title="Percentiles example query in Multilayer Time Aggregation " level="h5" %}}
+
+
 We can also use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `region` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of percentiles  using nested queries in the UI" style="width:100%;" >}}
@@ -147,6 +152,7 @@ We can also use percentiles in multilayer time aggregation to additionally summa
  {{< img src="/metrics/nested_queries/percentiles-time-agg-json.png" alt="example of percentiles  using nested queries in the JSON" style="width:100%;" >}}
 
  {{% /collapse-content %}} 
+
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
 
@@ -162,7 +168,6 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 
-
 ## Higher Resolution Queries
 
 As the query time frame increases, the rollup interval becomes less granular, preventing you from querying anything more detailed than those default time intervals. With nested queries, you can now access more granular, high-resolution data over longer periods.
@@ -170,18 +175,17 @@ As the query time frame increases, the rollup interval becomes less granular, pr
 Here's an example that calculates the standard deviation of high-resolution metrics batch counts, with a 5-minute base and a 4-hour reducer interval:
 
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
-```text
+
 Historically when querying a metric over the past month, you would see data at 4-hour granularity. You can now use nested queries to access higher granularity data over this historical timeframe
 
 Note: We recommend you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs.
-```
+
 In the UI or JSON tab:
 
-{{< img src="/dashboards/querying/nested-queries-higher-res-ui.png" alt="example of higher resolution queries using nested queries in the UI" style="width:100%;" >}}
+{{< img src="/metrics/nested_queries/nested-queries-higher-res-ui.png" alt="example of higher resolution queries using nested queries in the UI" style="width:100%;" >}}
 
-{{< img src="/dashboards/querying/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
+{{< img src="/metrics/nested_queries/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
-
 
 
 ## How can I use Datadog API's to leverage nested queries?
