@@ -16,12 +16,12 @@ further_reading:
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 | Framework                               | Supported Versions | Tracer Version    |
-|-----------------------------------------|--------------------|-------------------|
-| [OpenAI](#openai)                       | >= 0.26.5          | >= 2.9.0          |
-| [Langchain](#langchain)                 | >= 0.0.192         | >= 2.9.0          |
-| [Amazon Bedrock](#amazon-bedrock)       | >= 1.31.57         | >= 2.9.0          |
-| [Anthropic](#anthropic)                 | >= 0.28.0          | >= 2.10.0         |
-| [Google Gemini](#google-gemini)         | >= 0.7.2           | >= 2.14.0         |
+|--------------------------------------------|--------------------|-------------------|
+| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 0.26.5          | >= 2.9.0          |
+| [Langchain](#langchain)                    | >= 0.0.192         | >= 2.9.0          |
+| [Amazon Bedrock](#amazon-bedrock)          | >= 1.31.57         | >= 2.9.0          |
+| [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
+| [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
