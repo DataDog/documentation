@@ -1,4 +1,4 @@
-By default, all users have full access to the detection rules. To use granular access controls to limit the [roles][101] that may edit a single rule:
+By default, all users have read and write access to the detection rules. To use granular access controls to limit the [roles][101] that may edit a single rule:
 
 1. Click the vertical three-dot menu for the rule and select **Permissions**.
 1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
