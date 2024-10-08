@@ -18,6 +18,9 @@ further_reading:
 - link: "dashboards/functions/algorithms/#anomalies"
   tag: "Documentation"
   text: Anomalies function
+- link: "https://www.datadoghq.com/blog/bordant-technologies-camunda-8-datadog-marketplace/#monitor-the-health-of-your-camunda-8-components-and-prepare-for-peak-loads"
+  tag: "Blog"
+  text: "Gain visibility into your Camunda 8 components with Bordant Technologies’ Datadog integration"
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']

@@ -21,6 +21,9 @@ further_reading:
   - link: "/api/v1/monitors/"
     tag: "Documentation"
     text: "Datadog Monitors API"
+  - link: "https://www.datadoghq.com/blog/bordant-technologies-camunda-8-datadog-marketplace/#monitor-the-health-of-your-camunda-8-components-and-prepare-for-peak-loads"
+    tag: "Blog"
+    text: "Gain visibility into your Camunda 8 components with Bordant Technologies’ Datadog integration"
 cascade:
     algolia:
         rank: 70
