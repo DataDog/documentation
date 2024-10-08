@@ -11,7 +11,7 @@ further_reading:
 {{< callout url="#" btn_hidden="true">}}
   This feature is in Preview. Please reach out to Customer Success to get this feature enabled. 
 {{< /callout >}}  
-nested
+
 Every metrics query in Datadog consists of two layers of aggregation by default (quick refresher [here][5]).
 Nested queries allows users to reuse the results of an initial existing query as input to a subsequent one.
 
