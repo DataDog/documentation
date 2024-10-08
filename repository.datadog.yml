@@ -9,3 +9,4 @@ speculative_max_depth: 3 # (default)
 wait_for_check_timeout_in_minutes: 120 # 2 hours (default)
 gitlab_jobs_retry_enable: true
 gitlab_fail_fast: true
+team: webops-platform
