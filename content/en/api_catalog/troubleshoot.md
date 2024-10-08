@@ -11,7 +11,7 @@ If you experience unexpected behavior with Datadog API Catalog, this guide may h
 
 ## Definition matches too many services
 
-By default, The API Catalog will match a definition to all instances that fit to the defined path.
+By default, The API Catalog matches a definition to all instances that fit the defined path.
 You can scope the definition to a specific service by adding the [relevant tag][4] to the API definition.
 
 ## Missing endpoints
