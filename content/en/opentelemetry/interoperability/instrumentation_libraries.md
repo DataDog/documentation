@@ -367,7 +367,7 @@ class Program
         // Create a new TracerSettings object and configure it
         var openTelemetry = Sdk.CreateTracerProviderBuilder()
             .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("hangfire-demo2"))
-            .AddHangfireInstrumentation()
+            .AddHangfireInstrumentation() // This line generates the OpenTelemetry spans
             .Build();
 
         // Configure Hangfire to use memory storage
