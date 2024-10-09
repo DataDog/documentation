@@ -5420,25 +5420,25 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
-    - name: Security Pipelines
-      url: security/security_pipelines/
+    - name: Vulnerability Pipeline
+      url: security/vulnerability_pipeline/
       parent: security_platform
-      identifier: security_pipelines
+      identifier: vulnerability_pipeline
       weight: 4
     - name: Mute
-      url: security/security_pipelines/mute
-      parent: security_pipelines
-      identifier: security_pipelines_mute
+      url: security/vulnerability_pipeline/mute
+      parent: vulnerability_pipeline
+      identifier: vulnerability_pipeline_mute
       weight: 10001
     - name: Security Inbox
-      url: security/security_pipelines/security_inbox
-      parent: security_pipelines
-      identifier: security_pipelines_inbox
+      url: security/vulnerability_pipeline/security_inbox
+      parent: vulnerability_pipeline
+      identifier: vulnerability_pipeline_inbox
       weight: 10002
     - name: Due Date
-      url: security/security_pipelines/due_date
-      parent: security_pipelines
-      identifier: security_pipelines_due_date
+      url: security/vulnerability_pipeline/due_date
+      parent: vulnerability_pipeline
+      identifier: vulnerability_pipeline_due_date
       weight: 10003
     - name: Security Inbox
       url: security/security_inbox

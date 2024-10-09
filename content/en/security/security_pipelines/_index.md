@@ -1,5 +1,0 @@
----
-title: Security Pipelines
----
-
-overview
