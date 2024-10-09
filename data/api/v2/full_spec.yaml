@@ -470,24 +470,24 @@ components:
       required: true
       schema:
         type: string
-    MicrosoftTeamsHandleIDPathParameter:
-      description: Your handle id.
-      in: path
-      name: handle_id
-      required: true
-      schema:
-        type: string
-    MicrosoftTeamsHandleNamePathParameter:
-      description: Your handle name.
-      in: path
-      name: handle_name
-      required: true
+    MicrosoftTeamsHandleNameQueryParameter:
+      description: Your tenant-based handle name.
+      in: query
+      name: name
+      required: false
       schema:
         type: string
     MicrosoftTeamsTeamNamePathParameter:
       description: Your team name.
       in: path
       name: team_name
+      required: true
+      schema:
+        type: string
+    MicrosoftTeamsTenantBasedHandleIDPathParameter:
+      description: Your tenant-based handle id.
+      in: path
+      name: handle_id
       required: true
       schema:
         type: string
@@ -9337,6 +9337,8 @@ components:
           $ref: '#/components/schemas/FindingStatus'
         tags:
           $ref: '#/components/schemas/FindingTags'
+        vulnerability_type:
+          $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
     FindingEvaluation:
       description: The evaluation of the finding.
@@ -9470,6 +9472,20 @@ components:
       type: string
       x-enum-varnames:
       - FINDING
+    FindingVulnerabilityType:
+      description: The vulnerability type of the finding.
+      enum:
+      - misconfiguration
+      - attack_path
+      - identity_risk
+      - api_security
+      example: misconfiguration
+      type: string
+      x-enum-varnames:
+      - MISCONFIGURATION
+      - ATTACK_PATH
+      - IDENTITY_RISK
+      - API_SECURITY
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -9684,6 +9700,12 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
+          example: true
           type: boolean
         is_security_command_center_enabled:
           default: false
@@ -10767,6 +10789,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SlackIntegrationMetadata'
       - $ref: '#/components/schemas/JiraIntegrationMetadata'
+      - $ref: '#/components/schemas/MSTeamsIntegrationMetadata'
     IncidentIntegrationMetadataPatchData:
       description: Incident integration metadata data for a patch request.
       properties:
@@ -13772,6 +13795,43 @@ components:
             from the other indexes
           type: string
       type: object
+    MSTeamsIntegrationMetadata:
+      description: Incident integration metadata for the Microsoft Teams integration.
+      properties:
+        teams:
+          description: Array of Microsoft Teams in this integration metadata.
+          example: []
+          items:
+            $ref: '#/components/schemas/MSTeamsIntegrationMetadataTeamsItem'
+          type: array
+      required:
+      - teams
+      type: object
+    MSTeamsIntegrationMetadataTeamsItem:
+      description: Item in the Microsoft Teams integration metadata teams array.
+      properties:
+        ms_channel_id:
+          description: Microsoft Teams channel ID.
+          example: 19:abc00abcdef00a0abcdef0abcdef0a@thread.tacv2
+          type: string
+        ms_channel_name:
+          description: Microsoft Teams channel name.
+          example: incident-0001-example
+          type: string
+        ms_tenant_id:
+          description: Microsoft Teams tenant ID.
+          example: 00000000-abcd-0005-0000-000000000000
+          type: string
+        redirect_url:
+          description: URL redirecting to the Microsoft Teams channel.
+          example: https://teams.microsoft.com/l/channel/19%3Aabc00abcdef00a0abcdef0abcdef0a%40thread.tacv2/conversations?groupId=12345678-abcd-dcba-abcd-1234567890ab&tenantId=00000000-abcd-0005-0000-000000000000
+          type: string
+      required:
+      - ms_tenant_id
+      - ms_channel_id
+      - ms_channel_name
+      - redirect_url
+      type: object
     Metric:
       description: Object for a single metric tag configuration.
       example:
@@ -14982,205 +15042,6 @@ components:
       - data_source
       - query
       type: object
-    MicrosoftTeamsApiHandleAttributes:
-      description: Handle attributes.
-      properties:
-        channel_id:
-          description: Channel id.
-          example: fake-channel-id
-          maxLength: 255
-          type: string
-        name:
-          description: Handle name.
-          example: fake-handle-name
-          maxLength: 255
-          type: string
-        team_id:
-          description: Team id.
-          example: 00000000-0000-0000-0000-000000000000
-          maxLength: 255
-          type: string
-        tenant_id:
-          description: Tenant id.
-          example: 00000000-0000-0000-0000-000000000001
-          maxLength: 255
-          type: string
-      type: object
-      x-merge-override:
-        required: false
-    MicrosoftTeamsApiHandleInfoResponse:
-      description: Response of a handle.
-      properties:
-        data:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoResponseData'
-      type: object
-    MicrosoftTeamsApiHandleInfoResponseAttributes:
-      description: Handle attributes.
-      properties:
-        channel_id:
-          description: Channel id.
-          example: fake-channel-id
-          maxLength: 255
-          type: string
-        channel_name:
-          description: Channel name.
-          example: fake-channel-name
-          maxLength: 255
-          type: string
-        name:
-          description: Handle name.
-          example: fake-handle-name
-          maxLength: 255
-          type: string
-        team_id:
-          description: Team id.
-          example: 00000000-0000-0000-0000-000000000000
-          maxLength: 255
-          type: string
-        team_name:
-          description: Team name.
-          example: fake-team-name
-          maxLength: 255
-          type: string
-        tenant_id:
-          description: Tenant id.
-          example: 00000000-0000-0000-0000-000000000001
-          maxLength: 255
-          type: string
-        tenant_name:
-          description: Tenant name.
-          example: fake-tenant-name
-          maxLength: 255
-          type: string
-      type: object
-      x-merge-override:
-        required: false
-    MicrosoftTeamsApiHandleInfoResponseData:
-      description: Handle data from a response.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoResponseAttributes'
-        id:
-          description: The ID of the handle.
-          example: 596da4af-0563-4097-90ff-07230c3f9db3
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoType'
-      type: object
-      x-merge-override:
-        required: false
-    MicrosoftTeamsApiHandleInfoType:
-      default: ms-teams-handle-info
-      description: Handle resource type.
-      enum:
-      - ms-teams-handle-info
-      example: ms-teams-handle-info
-      type: string
-      x-enum-varnames:
-      - MS_TEAMS_HANDLE_INFO
-    MicrosoftTeamsApiHandleRequestAttributes:
-      description: Handle attributes.
-      properties:
-        channel_id:
-          description: Channel id.
-          example: fake-channel-id
-          maxLength: 255
-          type: string
-        name:
-          description: Handle name.
-          example: fake-handle-name
-          maxLength: 255
-          type: string
-        team_id:
-          description: Team id.
-          example: 00000000-0000-0000-0000-000000000000
-          maxLength: 255
-          type: string
-        tenant_id:
-          description: Tenant id.
-          example: 00000000-0000-0000-0000-000000000001
-          maxLength: 255
-          type: string
-      required:
-      - name
-      - channel_id
-      - team_id
-      - tenant_id
-      type: object
-      x-merge-override:
-        required: false
-    MicrosoftTeamsApiHandleRequestData:
-      description: Handle data from a response.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleRequestAttributes'
-        type:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleType'
-      required:
-      - type
-      - attributes
-      type: object
-      x-merge-override:
-        required: false
-    MicrosoftTeamsApiHandleResponseData:
-      description: Handle data from a response.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleAttributes'
-        id:
-          description: The ID of the handle.
-          example: 596da4af-0563-4097-90ff-07230c3f9db3
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleType'
-      type: object
-      x-merge-override:
-        required: false
-    MicrosoftTeamsApiHandleType:
-      default: handle
-      description: Specifies the handle resource type.
-      enum:
-      - handle
-      example: handle
-      type: string
-      x-enum-varnames:
-      - HANDLE
-    MicrosoftTeamsApiHandlesResponse:
-      description: Response with a list of handles.
-      properties:
-        data:
-          description: An array of handles.
-          example:
-          - attributes:
-              channelId: 19:b41k24b14bn1nwffkernfkwrnfneubgkr@thread.tacv2
-              channelName: General
-              name: general-handle
-              teamId: 00000000-0000-0000-0000-000000000000
-              teamName: Example Team
-              tenantId: 00000000-0000-0000-0000-000000000001
-              tenantName: Company, Inc.
-            id: 596da4af-0563-4097-90ff-07230c3f9db3
-            type: ms-teams-handle-info
-          - attributes:
-              channelId: 19:b41k24b14bn1nwffkernfkwrnfneubgk1@thread.tacv2
-              channelName: General2
-              name: general-handle-2
-              teamId: 00000000-0000-0000-0000-000000000002
-              teamName: Example Team 2
-              tenantId: 00000000-0000-0000-0000-000000000003
-              tenantName: Company, Inc.
-            id: 596da4af-0563-4097-90ff-07230c3f9db4
-            type: ms-teams-handle-info
-          items:
-            $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoResponseData'
-          type: array
-      required:
-      - data
-      type: object
     MicrosoftTeamsChannelInfoResponseAttributes:
       description: Channel attributes.
       properties:
@@ -15227,19 +15088,11 @@ components:
       type: string
       x-enum-varnames:
       - MS_TEAMS_CHANNEL_INFO
-    MicrosoftTeamsCreateApiHandleRequest:
-      description: Create handle request.
+    MicrosoftTeamsCreateTenantBasedHandleRequest:
+      description: Create tenant-based handle request.
       properties:
         data:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleRequestData'
-      required:
-      - data
-      type: object
-    MicrosoftTeamsCreateApiHandleResponse:
-      description: Response of a handle.
-      properties:
-        data:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleResponseData'
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleRequestData'
       required:
       - data
       type: object
@@ -15249,21 +15102,222 @@ components:
         data:
           $ref: '#/components/schemas/MicrosoftTeamsChannelInfoResponseData'
       type: object
-    MicrosoftTeamsUpdateApiHandleRequest:
-      description: Update handle request.
+    MicrosoftTeamsTenantBasedHandleAttributes:
+      description: Tenant-based handle attributes.
+      properties:
+        channel_id:
+          description: Channel id.
+          example: fake-channel-id
+          maxLength: 255
+          type: string
+        name:
+          description: Tenant-based handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        team_id:
+          description: Team id.
+          example: 00000000-0000-0000-0000-000000000000
+          maxLength: 255
+          type: string
+        tenant_id:
+          description: Tenant id.
+          example: 00000000-0000-0000-0000-000000000001
+          maxLength: 255
+          type: string
+      type: object
+      x-merge-override:
+        required: false
+    MicrosoftTeamsTenantBasedHandleInfoResponseAttributes:
+      description: Tenant-based handle attributes.
+      properties:
+        channel_id:
+          description: Channel id.
+          example: fake-channel-id
+          maxLength: 255
+          type: string
+        channel_name:
+          description: Channel name.
+          example: fake-channel-name
+          maxLength: 255
+          type: string
+        name:
+          description: Tenant-based handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        team_id:
+          description: Team id.
+          example: 00000000-0000-0000-0000-000000000000
+          maxLength: 255
+          type: string
+        team_name:
+          description: Team name.
+          example: fake-team-name
+          maxLength: 255
+          type: string
+        tenant_id:
+          description: Tenant id.
+          example: 00000000-0000-0000-0000-000000000001
+          maxLength: 255
+          type: string
+        tenant_name:
+          description: Tenant name.
+          example: fake-tenant-name
+          maxLength: 255
+          type: string
+      type: object
+      x-merge-override:
+        required: false
+    MicrosoftTeamsTenantBasedHandleInfoResponseData:
+      description: Tenant-based handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleInfoResponseAttributes'
+        id:
+          description: The ID of the tenant-based handle.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleInfoType'
+      type: object
+      x-merge-override:
+        required: false
+    MicrosoftTeamsTenantBasedHandleInfoType:
+      default: ms-teams-tenant-based-handle-info
+      description: Tenant-based handle resource type.
+      enum:
+      - ms-teams-tenant-based-handle-info
+      example: ms-teams-tenant-based-handle-info
+      type: string
+      x-enum-varnames:
+      - MS_TEAMS_TENANT_BASED_HANDLE_INFO
+    MicrosoftTeamsTenantBasedHandleRequestAttributes:
+      description: Tenant-based handle attributes.
+      properties:
+        channel_id:
+          description: Channel id.
+          example: fake-channel-id
+          maxLength: 255
+          type: string
+        name:
+          description: Tenant-based handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        team_id:
+          description: Team id.
+          example: 00000000-0000-0000-0000-000000000000
+          maxLength: 255
+          type: string
+        tenant_id:
+          description: Tenant id.
+          example: 00000000-0000-0000-0000-000000000001
+          maxLength: 255
+          type: string
+      required:
+      - name
+      - channel_id
+      - team_id
+      - tenant_id
+      type: object
+      x-merge-override:
+        required: false
+    MicrosoftTeamsTenantBasedHandleRequestData:
+      description: Tenant-based handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleRequestAttributes'
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+      x-merge-override:
+        required: false
+    MicrosoftTeamsTenantBasedHandleResponse:
+      description: Response of a tenant-based handle.
       properties:
         data:
-          $ref: '#/components/schemas/MicrosoftTeamsUpdateApiHandleRequestData'
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleResponseData'
       required:
       - data
       type: object
-    MicrosoftTeamsUpdateApiHandleRequestData:
-      description: Handle data from a response.
+    MicrosoftTeamsTenantBasedHandleResponseData:
+      description: Tenant-based handle data from a response.
       properties:
         attributes:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleAttributes'
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleAttributes'
+        id:
+          description: The ID of the tenant-based handle.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
         type:
-          $ref: '#/components/schemas/MicrosoftTeamsApiHandleType'
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleType'
+      type: object
+      x-merge-override:
+        required: false
+    MicrosoftTeamsTenantBasedHandleType:
+      default: tenant-based-handle
+      description: Specifies the tenant-based handle resource type.
+      enum:
+      - tenant-based-handle
+      example: tenant-based-handle
+      type: string
+      x-enum-varnames:
+      - TENANT_BASED_HANDLE
+    MicrosoftTeamsTenantBasedHandlesResponse:
+      description: Response with a list of tenant-based handles.
+      properties:
+        data:
+          description: An array of tenant-based handles.
+          example:
+          - attributes:
+              channelId: 19:b41k24b14bn1nwffkernfkwrnfneubgkr@thread.tacv2
+              channelName: General
+              name: general-handle
+              teamId: 00000000-0000-0000-0000-000000000000
+              teamName: Example Team
+              tenantId: 00000000-0000-0000-0000-000000000001
+              tenantName: Company, Inc.
+            id: 596da4af-0563-4097-90ff-07230c3f9db3
+            type: ms-teams-tenant-based-handle-info
+          - attributes:
+              channelId: 19:b41k24b14bn1nwffkernfkwrnfneubgk1@thread.tacv2
+              channelName: General2
+              name: general-handle-2
+              teamId: 00000000-0000-0000-0000-000000000002
+              teamName: Example Team 2
+              tenantId: 00000000-0000-0000-0000-000000000003
+              tenantName: Company, Inc.
+            id: 596da4af-0563-4097-90ff-07230c3f9db4
+            type: ms-teams-tenant-based-handle-info
+          items:
+            $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleInfoResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    MicrosoftTeamsUpdateTenantBasedHandleRequest:
+      description: Update tenant-based handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsUpdateTenantBasedHandleRequestData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsUpdateTenantBasedHandleRequestData:
+      description: Tenant-based handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleAttributes'
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleType'
       required:
       - type
       - attributes
@@ -31653,16 +31707,18 @@ paths:
       get: true
   /api/v2/integration/ms-teams/configuration/tenant-based-handles:
     get:
-      description: Get a list of all handles from the Datadog Microsoft Teams integration.
-      operationId: ListApiHandles
+      description: Get a list of all tenant-based handles from the Datadog Microsoft
+        Teams integration.
+      operationId: ListTenantBasedHandles
       parameters:
       - $ref: '#/components/parameters/MicrosoftTeamsTenantIDQueryParameter'
+      - $ref: '#/components/parameters/MicrosoftTeamsHandleNameQueryParameter'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MicrosoftTeamsApiHandlesResponse'
+                $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandlesResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -31674,28 +31730,28 @@ paths:
           $ref: '#/components/responses/PreconditionFailedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get all handles
+      summary: Get all tenant-based handles
       tags:
       - Microsoft Teams Integration
       x-menu-order: 1
       x-undo:
         type: safe
     post:
-      description: Create a handle in the Datadog Microsoft Teams integration.
-      operationId: CreateApiHandle
+      description: Create a tenant-based handle in the Datadog Microsoft Teams integration.
+      operationId: CreateTenantBasedHandle
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MicrosoftTeamsCreateApiHandleRequest'
-        description: Handle payload.
+              $ref: '#/components/schemas/MicrosoftTeamsCreateTenantBasedHandleRequest'
+        description: Tenant-based handle payload.
         required: true
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MicrosoftTeamsCreateApiHandleResponse'
+                $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleResponse'
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -31709,23 +31765,23 @@ paths:
           $ref: '#/components/responses/PreconditionFailedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create handle
+      summary: Create tenant-based handle
       tags:
       - Microsoft Teams Integration
       x-codegen-request-body-name: body
       x-given:
-        api_handle:
+        tenant_based_handle:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\",\n      \"tenant_id\": \"4d3bac44-0230-4732-9e70-cc00736f0a97\",\n
               \     \"team_id\": \"e5f50a58-c929-4fb3-8866-e2cd836de3c2\",\n      \"channel_id\":
               \"19:iD_D2xy_sAa-JV851JJYwIa6mlW9F9Nxm3SLyZq68qY1@thread.tacv2\"\n     },\n
-              \    \"type\": \"handle\"\n  }\n}"
-          step: there is a valid "api_handle" in the system
+              \    \"type\": \"tenant-based-handle\"\n  }\n}"
+          step: there is a valid "tenant_based_handle" in the system
       x-menu-order: 1
       x-undo:
-        operationId: DeleteApiHandle
+        operationId: DeleteTenantBasedHandle
         parameters:
         - name: handle_id
           source: data.id
@@ -31733,44 +31789,12 @@ paths:
     x-merge-override:
       get: true
       post: true
-  /api/v2/integration/ms-teams/configuration/tenant-based-handles/name/{handle_name}:
-    get:
-      description: Get the tenant, team, and channel information of a handle by name
-        from the Datadog Microsoft Teams integration.
-      operationId: GetApiHandleByName
-      parameters:
-      - $ref: '#/components/parameters/MicrosoftTeamsHandleNamePathParameter'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/ForbiddenResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '412':
-          $ref: '#/components/responses/PreconditionFailedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get handle information by name
-      tags:
-      - Microsoft Teams Integration
-      x-menu-order: 1
-      x-undo:
-        type: safe
-    x-merge-override:
-      get: true
   /api/v2/integration/ms-teams/configuration/tenant-based-handles/{handle_id}:
     delete:
-      description: Delete a handle from the Datadog Microsoft Teams integration.
-      operationId: DeleteApiHandle
+      description: Delete a tenant-based handle from the Datadog Microsoft Teams integration.
+      operationId: DeleteTenantBasedHandle
       parameters:
-      - $ref: '#/components/parameters/MicrosoftTeamsHandleIDPathParameter'
+      - $ref: '#/components/parameters/MicrosoftTeamsTenantBasedHandleIDPathParameter'
       responses:
         '204':
           description: OK
@@ -31782,24 +31806,24 @@ paths:
           $ref: '#/components/responses/PreconditionFailedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete handle
+      summary: Delete tenant-based handle
       tags:
       - Microsoft Teams Integration
       x-menu-order: 1
       x-undo:
         type: idempotent
     get:
-      description: Get the tenant, team, and channel information of a handle from
-        the Datadog Microsoft Teams integration.
-      operationId: GetApiHandle
+      description: Get the tenant, team, and channel information of a tenant-based
+        handle from the Datadog Microsoft Teams integration.
+      operationId: GetTenantBasedHandle
       parameters:
-      - $ref: '#/components/parameters/MicrosoftTeamsHandleIDPathParameter'
+      - $ref: '#/components/parameters/MicrosoftTeamsTenantBasedHandleIDPathParameter'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoResponse'
+                $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -31811,30 +31835,30 @@ paths:
           $ref: '#/components/responses/PreconditionFailedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get handle information
+      summary: Get tenant-based handle information
       tags:
       - Microsoft Teams Integration
       x-menu-order: 1
       x-undo:
         type: safe
     patch:
-      description: Update a handle from the Datadog Microsoft Teams integration.
-      operationId: UpdateApiHandle
+      description: Update a tenant-based handle from the Datadog Microsoft Teams integration.
+      operationId: UpdateTenantBasedHandle
       parameters:
-      - $ref: '#/components/parameters/MicrosoftTeamsHandleIDPathParameter'
+      - $ref: '#/components/parameters/MicrosoftTeamsTenantBasedHandleIDPathParameter'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MicrosoftTeamsUpdateApiHandleRequest'
-        description: Opsgenie service payload.
+              $ref: '#/components/schemas/MicrosoftTeamsUpdateTenantBasedHandleRequest'
+        description: Tenant-based handle payload.
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MicrosoftTeamsApiHandleInfoResponse'
+                $ref: '#/components/schemas/MicrosoftTeamsTenantBasedHandleResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -31848,7 +31872,7 @@ paths:
           $ref: '#/components/responses/PreconditionFailedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update handle
+      summary: Update tenant-based handle
       tags:
       - Microsoft Teams Integration
       x-codegen-request-body-name: body
@@ -36403,6 +36427,17 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/FindingStatus'
+      - description: Return findings that match the selected vulnerability types (repeatable).
+        example:
+        - misconfiguration
+        explode: true
+        in: query
+        name: filter[vulnerability_type]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/FindingVulnerabilityType'
+          type: array
       responses:
         '200':
           content:
@@ -43138,7 +43173,7 @@ paths:
           `observability_pipelines`,
 
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
-          `sds`, `snmp`,
+          `sds`, `snmp`, `software_delivery`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
           `timeseries`, `vuln_management`,
