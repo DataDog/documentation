@@ -184,12 +184,12 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
    }
    {{< /highlight >}}
 
-### Set up Data Jobs Monitoring
+### Set up Data Jobs Monitoring with Private Networking
 If you're using [Databricks Private Networking][12], there are three key requirements to meet:
 
-1. Verify that the Datadog crawler has the necessary permissions to access the Databricks workspace; otherwise, jobs won't appear in Datadog.
-2. Ensure that the agent can be downloaded onto the Databricks cluster using the curl command in the init script.
-3. Confirm that traces and metrics can be sent, which may require whitelisting these specific [IP addresses][13]. Please see [12] for more details on how to allow IP addresses in Databricks.
+1. Ensure that the agent can be downloaded onto the Databricks cluster using the curl command in the init script.
+2. Verify that the Datadog crawler has the necessary permissions to access the Databricks workspace; otherwise, jobs won't appear in Datadog.
+3. Confirm that traces and metrics can be sent, which may require whitelisting these specific [IP addresses][13]. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
 
 
 ## Further Reading
@@ -205,4 +205,5 @@ If you're using [Databricks Private Networking][12], there are three key require
 [10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
 [11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
 [12]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
-[13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
+[13]: https://ip-ranges.datadoghq.com/api.json
+[14]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
