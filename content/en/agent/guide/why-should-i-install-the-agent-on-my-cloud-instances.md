@@ -22,7 +22,7 @@ If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, in
 
 * **Integrations** - Over [750 integrations][2] extend the functionality of the Datadog Agent beyond the native metrics.
 
-* **Tagging Consistency Across Products**: Tags applied at the Agent-level are applied to all metrics, logs, traces, etc. reported by the Agent. 
+* **Tagging consistency across services**: Tags applied at the Agent level are added to all metrics, logs, and traces reported by the Agent. 
 
 * **Custom metrics with DogStatsD** - With the Datadog Agent, use the built-in [StatsD client][4] to send custom metrics from your application, allowing you to correlate what's happening with your application, your users, and your system.
 
