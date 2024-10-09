@@ -209,7 +209,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Serverless               | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
 | Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including Scorecard metrics.
 | Synthetics              | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetics][26] product. 
-| USM                     | Custom metrics generated from the Datadog [Universal Service Monitoring][27]product. 
+| USM                     | Custom metrics generated from the Datadog [Universal Service Monitoring][27] product. 
 
 ## Further reading
 
