@@ -54,7 +54,7 @@ To get started, follow the instructions below.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
    
    **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment to logically separate jobs from different Airflow deployment.
+   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment to allow jobs from different Airflow deployments logically separated.
    * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of the `openlineage` provider.
@@ -98,8 +98,8 @@ To get started, follow the instructions below.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
    **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
-   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
+   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment to allow jobs from different Airflow deployments logically separated.
+   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
