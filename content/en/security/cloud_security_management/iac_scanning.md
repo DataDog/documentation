@@ -3,7 +3,7 @@ title: IaC Scanning
 private: true
 ---
 
-<div class="alert alert-info">Static Infrastructure as Code (IaC) scanning is in private beta.</div>
+<div class="alert alert-info">Static Infrastructure as Code (IaC) scanning is in Preview.</div>
 
 Static Infrastructure as Code (IaC) scanning integrates with version control systems, such as GitHub, to detect misconfigurations in cloud resources defined by Terraform. The scanning results are displayed in two primary locations: within pull requests during code modifications and on the **Explorers** page within Cloud Security Management.
 
