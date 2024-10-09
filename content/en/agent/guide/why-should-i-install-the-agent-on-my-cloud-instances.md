@@ -14,7 +14,7 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
 
 If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, installing the Datadog Agent on your instances gives you several benefits, for example:
 
-* **Better resolution** - Cloud providers monitor your hosts externally by sampling them every 5-25 minutes. Additionally, AWS provides metrics on a per minute basis through their API. As Datadog stores all metrics at a 1-second resolution, AWS metrics are averaged over 60 seconds during post-processing. To provide more granular insight into host performance, the Datadog Agent collects performance statistics every 15 seconds, offering a more detailed view of what's happening inside your hosts.
+* **Better resolution** - Cloud providers monitor your hosts externally by sampling them every 5-25 minutes. Additionally, AWS provides metrics on a per-minute basis through their API. As Datadog stores all metrics at a 1-second resolution, AWS metrics are averaged over 60 seconds during post-processing. To provide more granular insight into host performance, the Datadog Agent collects performance statistics every 15 seconds, offering a more detailed view of what's happening inside your hosts.
 
   {{< img src="agent/guide/Agent_VS_AWSA.jpg" alt="Agent vs AWS CloudWatch" style="width:70%;">}}
 
