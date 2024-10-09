@@ -121,7 +121,7 @@ In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflo
 
 ### Link your Spark jobs with Airflow task
 You can troubleshoot Airflow tasks that run Spark jobs more efficiently by connecting the Spark job run info and telemetry with the respective Airflow task.
-**Prerequisites**: your Spark jobs are currently monitored via [Data Jobs Monitoring][2] and are submitted via [SparkSubmitOperator][5]s from your Airflow jobs.
+**Prerequisites**: your Spark jobs are currently monitored through [Data Jobs Monitoring][2] and are submitted through [SparkSubmitOperator][5]s from your Airflow jobs.
 
 To see the link between Airflow task and the the Spark application it submitted, follow these steps:
 
