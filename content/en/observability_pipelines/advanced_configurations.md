@@ -40,6 +40,8 @@ Bootstrap the Observability Pipelines Worker within your infrastructure before y
 - Bootstrap file: `/etc/observability-pipelines-worker/bootstrap.yaml`
 - Environment variables file: `/etc/default/observability-pipelines-worker`
 
+**Note**: `DD_OP_DATA_DIR` can only be owned by a single Observability Pipelines Worker. If you have multiple Workers, you must use unique data directories.
+
 To set bootstrap options, do one of the following:
 - Use environmental variables.
 - Create a `bootstrap.yaml` and start the Worker instance with `--bootstrap-config /path/to/bootstrap.yaml`.
