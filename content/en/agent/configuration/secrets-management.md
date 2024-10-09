@@ -206,7 +206,7 @@ func main() {
 {{% /tab %}}
 {{% tab "PowerShell" %}}
 ```powershell
-$secretsJson = Read-Host | ConvertFrom-Json
+$secretsJson = $input | ConvertFrom-Json
 $secrets = @{}
 for ($index = 0; $index -lt $secretsJson.secrets.count; $index++) {
     $secretKey = $secretsJson.secrets[$index]
