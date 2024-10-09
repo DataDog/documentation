@@ -361,7 +361,7 @@ aws iam update-assume-role-policy --role-name <YOUR_AGENT_ECS_ROLE> --policy-doc
 1. Create an IAM role in the account where the RDS instance is located, and attach the IAM policy created for DB authentication to the role using the example below.
    - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
    - Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
-   - Replace `<YOUR_AGENT_EKS_ROLE>` with the  IAM role to be used by the EKS pods where the Agent is running
+   - Replace `<YOUR_AGENT_EKS_ROLE>` with the IAM role to be used by the EKS pods where the Agent is running
    - Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created for DB authentication
 
 ```bash
