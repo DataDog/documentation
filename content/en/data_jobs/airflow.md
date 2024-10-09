@@ -126,6 +126,7 @@ In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflo
 
 ### Link your Spark jobs with Airflow task
 You can troubleshoot Airflow tasks that run Spark jobs more efficiently by connecting the Spark job run info and telemetry with the respective Airflow task.
+
 **Prerequisites**: your Spark jobs are currently monitored through [Data Jobs Monitoring][2] and are submitted through [SparkSubmitOperator][5]s from your Airflow jobs.
 
 To see the link between Airflow task and the the Spark application it submitted, follow these steps:
@@ -150,7 +151,7 @@ To see the link between Airflow task and the the Spark application it submitted,
 
    See [Lineage job & run macros][4] for the definitions of referenced macros.
 
-3. Once you have re-deployed your Airflow environment with the updated [lazy_load_plugins config][3] and the updated DAG file, and your Airflow DAG as been re-run, go to [Data Jobs Monitoring][2] page. You can then find your latest Airflow job run and see a SpanLink in the Airflow Job Run trace to the trace of the launched Spark Application. This makes it possible to debug issues in Airflow or Spark all in once place.
+3. Once you have re-deployed your Airflow environment with the updated [lazy_load_plugins config][3] and the updated DAG file, and your Airflow DAG as been re-run, go to [Data Jobs Monitoring][2] page. You can then find your latest Airflow job run and see a SpanLink in the Airflow Job Run trace to the trace of the launched Spark Application. This makes it possible to debug issues in Airflow or Spark all in one place.
 
 ## Further Reading
 
