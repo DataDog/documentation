@@ -28,7 +28,7 @@ If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, in
 
 * **Custom Agent checks** - For even deeper customization, implement [custom Agent checks][5] to collect metrics and other data from your custom systems or applications and send them to Datadog.
 
-* **Application Logs**: The Datadog Agent [collects and forwarder application logs that are created locally][6] on your cloud VMs or containers so they don't need to be forwarded through the Cloud-provider. These logs also have Agent-level tags applied.
+* **Application logs**: The Datadog Agent [collects and forwards application logs that are created locally][6] on your cloud VMs or containers, so they don't need to be forwarded through the cloud provider integration. These logs also have Agent-level tags applied.
 
 * **Application Performance Monitoring (APM)** - [Traces collected through the APM Agent][4] give a comprehensive look into your applications, helping you understand end-to-end service performance and identify potential bottlenecks.  
 
