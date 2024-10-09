@@ -362,11 +362,10 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
+Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
 
 ```shell
-oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/namespace: openshift-monitoring/namespace: <datadog agent namespace>/'  | oc create -f -
-
+oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
 ```
 
 These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
@@ -396,7 +395,7 @@ spec:
       volumes:
         - name: etcd-certs
           secret:
-            secretName: kube-etcd-client-certs
+            secretName: etcd-metric-client
         - name: disable-etcd-autoconf
           emptyDir: {}
 {{< /code-block >}}
@@ -410,7 +409,7 @@ clusterChecksRunner:
   volumes:
     - name: etcd-certs
       secret:
-        secretName: kube-etcd-client-certs
+        secretName: etcd-metric-client
     - name: disable-etcd-autoconf
       emptyDir: {}
   volumeMounts:
@@ -419,6 +418,7 @@ clusterChecksRunner:
       readOnly: true
     - name: disable-etcd-autoconf
       mountPath: /etc/datadog-agent/conf.d/etcd.d
+      
 {{< /code-block >}}
 
 {{% /tab %}}
