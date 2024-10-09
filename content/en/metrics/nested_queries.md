@@ -34,7 +34,7 @@ Other functions cannot be combined with multilayer aggregation.
 
 ### Multilayer time aggregation
 
-Multilayer time aggregation can be accessed with the `rollup` function. As a reminder, every metrics query already contains an initial `rollup` (time aggregation) that controls the granularity of the data points displayed on the graph. For more information, see the [Rollup][1] documentation. 
+Multilayer time aggregation can be accessed with the `rollup` function. As a reminder, every metric query already contains an initial `rollup` (time aggregation) that controls the granularity of the data points displayed on the graph. For more information, see the [Rollup][1] documentation. 
 
 You can apply additional layers of time aggregation with subsequent rollups.
 
@@ -165,7 +165,9 @@ In the UI or JSON tab, it would look as follows:
 
 ## Higher Resolution Queries
 
-As the query time frame increases, the rollup interval becomes less granular, preventing you from querying anything more detailed than those default time intervals. With nested queries, you can now access more granular, high-resolution data over longer periods.
+As a reminder, every metric query contains an initial layer of time aggregation (aka. rollup) which controls the granularity of datapoints plotted on a graph. Datadog provides default rollup time intervals that grow as your overall query timeframe grows. With nested queries, you can now access more granular, high-resolution data over longer, historical timeframes.
+
+ {{< img src="/metrics/nested_queries/higher-res-query-example.png" alt="example of standard deviation with nested queries in the UI" style="width:100%;" >}}
 
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
 
