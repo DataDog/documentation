@@ -50,7 +50,7 @@ To get started, follow the instructions below.
    ```
 
    * install and configure `openlineage` provider for **both Airflow schedulers and Airflow workers**.
-   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
+   * replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` with your valid [Datadog API key][4].
    
    **Optionally:**
