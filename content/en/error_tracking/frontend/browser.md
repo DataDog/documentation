@@ -37,6 +37,10 @@ Error Tracking can use this information to correlate errors with your source cod
 
 For more information, see the [Datadog Source Code Integration][14].
 
+## List uploaded source maps
+
+See the [RUM Debug Symbols][15] page to view all uploaded symbols.
+
 ### Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
@@ -69,3 +73,4 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [12]: https://about.gitlab.com
 [13]: https://bitbucket.org/product
 [14]: /integrations/guide/source-code-integration/
+[15]: https://app.datadoghq.com/source-code/setup/rum

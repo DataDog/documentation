@@ -21,6 +21,9 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+- link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
+  tag: "Blog"
+  text: "Best practices for monitoring and remediating connection churn"
 cascade:
     algolia:
         rank: 70

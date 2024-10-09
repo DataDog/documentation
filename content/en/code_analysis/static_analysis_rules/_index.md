@@ -167,6 +167,10 @@ rulesets:
     title: "Security rules for Ruby"
     description: |
       Rules focused on finding security issues in your Ruby code.
+  terraform-aws:
+    title: "Terraform AWS"
+    description: |
+      Rules to enforce Terraform best practices for AWS.
   tsx-react:
     title: "TypeScript React code quality"
     description: |

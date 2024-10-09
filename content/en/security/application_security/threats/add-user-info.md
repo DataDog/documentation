@@ -737,12 +737,14 @@ Automatic user activity tracking offers the following modes:
     - `user`
   - If no user ID is available or found, the user event is not emitted.
 - `anonymization` mode (short name: `anon`):
-  - This mode is the same as `identification`, but anonymizes the user ID.
+  - This mode is the same as `identification`, but anonymizes the user ID by hashing (SHA256) it and cropping the resulting hash.
 - `disabled` mode:
   - ASM libraries do *not* collect any user ID from their automated instrumentations. 
   - User login events are not emitted.
 
 <div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
+
+### Manual configuration
 
 Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident`|`anon`|`disabled`.
 
@@ -761,11 +763,11 @@ The following modes are deprecated:
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
-## Disabling automatic user activity event tracking
+## Disabling user activity event tracking 
 
-If you wish to disable the detection of these events, you should set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false`. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+To disable automated user activity detection through your [ASM service catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
 
-The previous environment variable was named `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING`.
+For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
 ## Further Reading
 
@@ -782,3 +784,5 @@ The previous environment variable was named `DD_APPSEC_AUTOMATED_USER_EVENTS_TRA
 [11]: https://guid.one/guid
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
+[14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
+[15]: /agent/remote_config/
