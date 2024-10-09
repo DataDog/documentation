@@ -193,22 +193,22 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | CSM                     | Timeseries sent by the Datadog Cloud Security Monitoring product.
 | Cloud Integrations      | Timeseries collected via cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
 | DBM                     | Timeseries sent by the Datadog Database Monitoring product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
-| DSM                     | Timeseries sent by Datadog's Data Streams Monitoring product, for metrics generated via the DSM spans and traces.
+| DSM                     | Timeseries sent by the Datadog Data Streams Monitoring product, for metrics generated via the DSM spans and traces.
 | Datadog Exporter        | Timeseries sent by the OpenTelemetry Collector or the Datadog Exporter.
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Custom metrics generated from the Datadog Events platform.
 | LLM Observability       | Timeseries emitted by the LLM Observability product via `lmobs_to_metrics` service.
-| Logs                    | Custom metrics generated from the Datadog's Logs platform.
+| Logs                    | Custom metrics generated from the Datadog Logs platform.
 | Metrics API             | Timeseries sent via Datadog's OTLP endpoint and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
-| NPM                     | Timeseries sent by the Datadog's Network Performance Monitoring product.
-| Observability Pipelines | Timeseries sent by the Datadog's Observability Pipielines including error and performance metrics.
-| Other                   | Timeseries sent by Datadog's Agent's OTLP ingest and other receivers or metrics that don’t have a DD integration counterpart.
+| NPM                     | Timeseries sent by the Datadog Network Performance Monitoring product.
+| Observability Pipelines | Timeseries sent by the Datadog Observability Pipielines including error and performance metrics.
+| Other                   | Timeseries sent by Datadog Agent's OTLP ingest and other receivers or metrics that don’t have a DD integration counterpart.
 | Processes               | Custom metrics generated from the Datadog Processes product.
 | RUM                     | Custom metrics generated from the Datadog Real User Monitoring product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless               | Timeseries sent by the Datadog Serverless platform including Function, App Services, Cloud Run, and Container App Metrics.
 | Service Catalog         | Timeseries sent by the Datadog Server Catalog product including Scorecard metrics.
-| Synthetics              | Synthetic monitoring and continuous testing metrics generated from Datadog's Synthetics product. 
+| Synthetics              | Synthetic monitoring and continuous testing metrics generated from the Datadog Synthetics product. 
 | USM                     | Custom metrics generated from the Datadog Universal Service Monitoring product. 
 
 ## Further reading
