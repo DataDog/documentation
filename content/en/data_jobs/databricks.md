@@ -189,7 +189,9 @@ If you're using [Databricks Private Networking][12], there are three key require
 
 1. Ensure that the agent can be downloaded onto the Databricks cluster using the curl command in the init script.
 2. Verify that the Datadog crawler has the necessary permissions to access the Databricks workspace.
-3. Confirm that traces and metrics can be sent, which may require whitelisting these specific [IP addresses][13]. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
+3. Confirm that traces and metrics can be sent.
+
+Whitelisting these specific [IP addresses][13] allows your cluster to performs all these interactions with our services. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
 
 
 ## Further Reading
