@@ -15,7 +15,7 @@ further_reading:
   Data Jobs Monitoring for Apache Airflow is in preview. To sign up for access, fill out [this form](https://www.datadoghq.com/private-beta/monitoring-for-data-and-data-pipelines/).
 {{< /callout >}}
 
-[Data Jobs Monitoring][1] gives visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
+[Data Jobs Monitoring][1] provides visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
