@@ -198,7 +198,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Custom metrics generated from the Datadog Events platform.
 | LLM Observability       | Timeseries emitted by the LLM Observability product via `lmobs_to_metrics` service.
-| Logs                    | Custom metrics generated from the Datadog Logs platform.
+| Logs                    | Custom metrics generated from the Datadog [Logs][28] platform.
 | Metrics API             | Timeseries sent via Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | NPM                     | Timeseries sent by the Datadog [Network Performance Monitoring][19] product.
 | Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
@@ -243,3 +243,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [25]: https://docs.datadoghq.com/service_catalog/
 [26]: https://docs.datadoghq.com/synthetics/
 [27]: https://docs.datadoghq.com/universal_service_monitoring/
+[28]: https://docs.datadoghq.com/logs/
