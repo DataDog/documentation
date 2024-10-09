@@ -199,17 +199,17 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Events                  | Custom metrics generated from the Datadog Events platform.
 | LLM Observability       | Timeseries emitted by the LLM Observability product via `lmobs_to_metrics` service.
 | Logs                    | Custom metrics generated from the Datadog's Logs platform.
-| Metrics API             | Timeseries sent via Datadog's OTLP endpoint and Otel receivers with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
+| Metrics API             | Timeseries sent via Datadog's OTLP endpoint and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | NPM                     | Timeseries sent by the Datadog's Network Performance Monitoring product.
 | Observability Pipelines | Timeseries sent by the Datadog's Observability Pipielines including error and performance metrics.
 | Other                   | Timeseries sent by Datadog's Agent's OTLP ingest and other receivers or metrics that don’t have a DD integration counterpart.
-| Processes               | Custom metrics generated from the Datadog's Processes product.
-| RUM                     | Custom metrics generated from the Datadog's Real User Monitoring product.
-| SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, and PagerDuty etc.
-| Serverless               | Timeseries sent by the Datadog's Serverless platform including Function, App Services, Cloud Run, and Container App Metrics.
+| Processes               | Custom metrics generated from the Datadog Processes product.
+| RUM                     | Custom metrics generated from the Datadog Real User Monitoring product.
+| SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
+| Serverless               | Timeseries sent by the Datadog Serverless platform including Function, App Services, Cloud Run, and Container App Metrics.
 | Service Catalog         | Timeseries sent by the Datadog Server Catalog product including Scorecard metrics.
 | Synthetics              | Synthetic monitoring and continuous testing metrics generated from Datadog's Synthetics product. 
-| USM                     | Custom metrics generated from Datadog's Universal Service Monitoring product. 
+| USM                     | Custom metrics generated from the Datadog Universal Service Monitoring product. 
 
 ## Further reading
 
