@@ -22,7 +22,7 @@ OAuth enables Datadog customers to securely authorize third-party access to thei
 
 For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 documentation][1].
 
-Publishing an OAuth client does not result in a published integration. Your integration only appears on the [Integrations page][16] after you've completed a separate publication process. For information on creating and publishing an integration, see [Build and integration][18].
+Publishing an OAuth client does not result in a published integration. Your integration only appears on the [Integrations page][16] after you've completed a separate publication process. For information on creating and publishing an integration, see [Build an integration][18].
 
 ## When to use OAuth in an integration
 
@@ -95,7 +95,7 @@ If successful, this request returns an API key that you can find on the [API Key
 
 #### Test multiple Datadog sites
 
-You cannot test other organizations with your testing client, but you can test your OAuth client can work across multiple [Datadog sites][8] by copying your client into your EU sandbox and kicking off authorization.
+You cannot test other organizations with your testing client, but you can verify that your OAuth client works across multiple [Datadog sites][8] by copying your client into your EU sandbox and kicking off authorization.
    1. If you do not have access to a sandbox account on a different site, contact `ecosystems@datadog.com`.
    2. Export your app manifest from the organization in the *original* US1 Datadog site by navigating to the app you've created in the Developer Platform, clicking the Gear icon to the right of **Documentation**, and clicking **Export App Manifest**.
    3. In your EU sandbox organization, navigate to the Developer Platform and import your app manifest from Step 2.
@@ -106,7 +106,7 @@ After your OAuth client is published, you can test freely from other organizatio
 
 ##### Cross-regional support
 
-To make OAuth work for users across all Datadog regions, you need to ensure that you're making the correct API calls based on a user's region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding url. You use this site parameter in your calls to the authorization and token endpoints.
+To make OAuth work for users across all Datadog regions, you need to ensure that you're making the correct API calls based on a user's region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding URL. You use this site parameter in your calls to the authorization and token endpoints.
 
 If a user kicks off authorization directly from your platform, this site parameter is not sent and the user is instead prompted to select their site on the Datadog authorization page.
 
@@ -155,7 +155,7 @@ For more information about publishing your integration tile and creating your pu
 
 ## Troubleshooting
 
-### The list of API scopes does not include sending metrics, events and logs
+### The list of API scopes does not include sending metrics, events, and logs
 
 To send data to Datadog, use the `api_keys_write` scope when generating an API key on behalf of the user. For more information, see [Create an API key](#create-an-api-key).
 
@@ -165,7 +165,7 @@ Refresh tokens do not expire unless the user revokes authorization or the partne
 
 ### Retrieving API keys
 
-After you create an key using the [api_keys/marketplace][14] endpoint, the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
+After you create a key using the [api_keys/marketplace][14] endpoint, the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
 
 1. Navigate to the [Datadog API Keys Management page][15].
 1. Look for the API key named `OAuth Client API Key` and select it.
