@@ -3421,6 +3421,12 @@ components:
             to be set to true.'
           example: true
           type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
+          example: true
+          type: boolean
         is_security_command_center_enabled:
           default: false
           description: 'When enabled, Datadog will attempt to collect Security Command
@@ -10944,7 +10950,7 @@ components:
             Periods of no data are counted either as uptime or downtime depending
             on monitor settings.
 
-            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+            See [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
 
             for detailed information.'
           example:
@@ -15298,11 +15304,13 @@ components:
       enum:
       - global
       - text
+      - email
       example: text
       type: string
       x-enum-varnames:
       - GLOBAL
       - TEXT
+      - EMAIL
     SyntheticsCoreWebVitals:
       description: Core Web Vitals attached to a browser test step.
       properties:
@@ -15429,6 +15437,32 @@ components:
       - EDGE_LAPTOP_LARGE
       - EDGE_TABLET
       - EDGE_MOBILE_SMALL
+    SyntheticsFetchUptimesPayload:
+      description: Object containing IDs of Synthetic tests and a timeframe.
+      properties:
+        from_ts:
+          description: Timestamp in seconds (Unix epoch) for the start of uptime.
+          example: 0
+          format: int64
+          type: integer
+        public_ids:
+          description: An array of Synthetic test IDs you want to delete.
+          example: []
+          items:
+            description: A Synthetic test ID.
+            example: abc-def-123
+            type: string
+          type: array
+        to_ts:
+          description: Timestamp in seconds (Unix epoch) for the end of uptime.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - from_ts
+      - to_ts
+      - public_ids
+      type: object
     SyntheticsGetAPITestLatestResultsResponse:
       description: Object with the latest Synthetic API test run.
       properties:
@@ -15705,6 +15739,341 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
+    SyntheticsMobileDeviceID:
+      description: The device ID.
+      example: synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
+      type: string
+    SyntheticsMobileStep:
+      description: The steps used in a Synthetic mobile test.
+      properties:
+        allowFailure:
+          description: A boolean set to allow this step to fail.
+          type: boolean
+        hasNewStepElement:
+          description: A boolean set to determine if the step has a new step element.
+          type: boolean
+        isCritical:
+          description: A boolean to use in addition to `allowFailure` to determine
+            if the test should be marked as failed when the step fails.
+          type: boolean
+        name:
+          description: The name of the step.
+          maxLength: 1500
+          type: string
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
+        params:
+          description: The parameters of the mobile step.
+          type: object
+        publicId:
+          description: The public ID of the step.
+          example: pub-lic-id0
+          type: string
+        timeout:
+          description: The time before declaring a step failed.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepType'
+      type: object
+    SyntheticsMobileStepType:
+      description: Step type used in your mobile Synthetic test.
+      enum:
+      - assertElementContent
+      - assertScreenContains
+      - assertScreenLacks
+      - doubleTap
+      - extractVariable
+      - flick
+      - openDeeplink
+      - playSubTest
+      - pressBack
+      - restartApplication
+      - rotate
+      - scroll
+      - scrollToElement
+      - tap
+      - toggleWiFi
+      - typeText
+      - wait
+      example: assertElementContent
+      type: string
+      x-enum-varnames:
+      - ASSERTELEMENTCONTENT
+      - ASSERTSCREENCONTAINS
+      - ASSERTSCREENLACKS
+      - DOUBLETAP
+      - EXTRACTVARIABLE
+      - FLICK
+      - OPENDEEPLINK
+      - PLAYSUBTEST
+      - PRESSBACK
+      - RESTARTAPPLICATION
+      - ROTATE
+      - SCROLL
+      - SCROLLTOELEMENT
+      - TAP
+      - TOGGLEWIFI
+      - TYPETEXT
+      - WAIT
+    SyntheticsMobileTest:
+      description: Object containing details about a Synthetic mobile test.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsMobileTestConfig'
+        device_ids:
+          description: The `SyntheticsMobileTest` `device_ids`.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+          type: array
+        message:
+          description: Notification message associated with the test.
+          example: Notification message
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          example: Example test name
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptions'
+        public_id:
+          description: The public ID of the test.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        steps:
+          description: Array of steps for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStep'
+          type: array
+        tags:
+          description: Array of tags attached to the test.
+          example:
+          - env:production
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileTestType'
+      required:
+      - config
+      - name
+      - options
+      - type
+      type: object
+    SyntheticsMobileTestBinding:
+      description: Objects describing the binding used for a mobile test.
+      properties:
+        items:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingItems'
+      type: object
+    SyntheticsMobileTestBindingItems:
+      description: Object describing the binding used for a mobile test.
+      properties:
+        principals:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingPrincipals'
+        role:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingItemsRole'
+      type: object
+    SyntheticsMobileTestBindingItemsRole:
+      description: The definition of `SyntheticsMobileTestBindingItemsRole` object.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
+    SyntheticsMobileTestBindingPrincipals:
+      description: List of principals for a mobile test binding.
+      items:
+        description: A principal for a mobile test binding.
+        maxLength: 1500
+        type: string
+      type: array
+    SyntheticsMobileTestCiOptions:
+      description: CI/CD options for a Synthetic test.
+      properties:
+        executionRule:
+          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      required:
+      - executionRule
+      type: object
+    SyntheticsMobileTestConfig:
+      description: Configuration object for a Synthetic mobile test.
+      properties:
+        initialApplicationArguments:
+          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArguments'
+        variables:
+          description: Array of variables used for the test steps.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
+      type: object
+    SyntheticsMobileTestInitialApplicationArguments:
+      description: Initial application arguments for a mobile test.
+      properties:
+        propertyNames:
+          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArgumentsPropertyNames'
+      type: object
+    SyntheticsMobileTestInitialApplicationArgumentsPropertyNames:
+      description: Name of the property.
+      properties:
+        pattern:
+          description: The `propertyNames` `pattern`.
+          example: ^(?!_dd).*$
+          type: string
+      type: object
+    SyntheticsMobileTestOptions:
+      description: Object describing the extra options for a Synthetic test.
+      properties:
+        allowApplicationCrash:
+          description: The `SyntheticsMobileTestOptions` `allowApplicationCrash`.
+          type: boolean
+        bindings:
+          description: Array of bindings used for the mobile test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileTestBinding'
+          type: array
+        ci:
+          $ref: '#/components/schemas/SyntheticsMobileTestCiOptions'
+        defaultStepTimeout:
+          description: The `SyntheticsMobileTestOptions` `defaultStepTimeout`.
+          format: int32
+          maximum: 300
+          minimum: 1
+          type: integer
+        device_ids:
+          description: For mobile test, array with the different device IDs used to
+            run the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+          type: array
+        disableAutoAcceptAlert:
+          description: The `SyntheticsMobileTestOptions` `disableAutoAcceptAlert`.
+          type: boolean
+        min_failure_duration:
+          description: Minimum amount of time in failure required to trigger an alert.
+          format: int64
+          maximum: 7200
+          minimum: 0
+          type: integer
+        mobileApplication:
+          $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplication'
+        monitor_name:
+          description: The monitor name is used for the alert title as well as for
+            all monitor dashboard widgets and SLOs.
+          type: string
+        monitor_options:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptions'
+        monitor_priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        noScreenshot:
+          description: The `SyntheticsMobileTestOptions` `noScreenshot`.
+          type: boolean
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
+        tick_every:
+          description: The frequency at which to run the Synthetic test (in seconds).
+          format: int64
+          maximum: 604800
+          minimum: 300
+          type: integer
+        verbosity:
+          description: The `SyntheticsMobileTestOptions` `verbosity`.
+          format: int32
+          maximum: 5
+          minimum: 0
+          type: integer
+      type: object
+    SyntheticsMobileTestOptionsMonitorOptions:
+      description: 'Object containing the options for a mobile Synthetic test as a
+        monitor
+
+        (for example, renotification).'
+      properties:
+        escalation_message:
+          description: Message to include in the escalation notification.
+          type: string
+        notification_preset_name:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName'
+        renotify_interval:
+          description: 'Time interval before renotifying if the test is still failing
+
+            (in minutes).'
+          format: int64
+          minimum: 0
+          type: integer
+        renotify_occurrences:
+          description: The `SyntheticsMobileTestOptionsMonitorOptions` `renotify_occurrences`.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName:
+      description: The definition of `SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName`
+        object.
+      enum:
+      - show_all
+      - hide_all
+      - hide_query
+      - hide_handles
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+    SyntheticsMobileTestType:
+      default: mobile
+      description: Type of the Synthetic test, `mobile`.
+      enum:
+      - mobile
+      example: mobile
+      type: string
+      x-enum-varnames:
+      - MOBILE
+    SyntheticsMobileTestsMobileApplication:
+      description: Mobile application for mobile synthetics test.
+      properties:
+        applicationId:
+          description: Application ID of the mobile application.
+          maxLength: 1500
+          type: string
+        referenceId:
+          description: Reference ID of the mobile application.
+          maxLength: 1500
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplicationReferenceType'
+      type: object
+    SyntheticsMobileTestsMobileApplicationReferenceType:
+      description: Reference type for the mobile application for a mobile synthetics
+        test.
+      enum:
+      - latest
+      - version
+      type: string
+      x-enum-varnames:
+      - LATEST
+      - VERSION
     SyntheticsParsingOptions:
       description: Parsing options for variables to extract.
       example: {}
@@ -16275,16 +16644,19 @@ components:
       enum:
       - api
       - browser
+      - mobile
       type: string
       x-enum-varnames:
       - API
       - BROWSER
+      - MOBILE
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
       - blocking
       - non_blocking
       - skipped
+      example: blocking
       type: string
       x-enum-varnames:
       - BLOCKING
@@ -16728,6 +17100,24 @@ components:
       description: String Port number to use when performing the test. Supports templated
         variables.
       type: string
+    SyntheticsTestUptime:
+      description: Object containing the uptime for a Synthetic test ID.
+      properties:
+        from_ts:
+          description: Timestamp in seconds for the start of uptime.
+          format: int64
+          type: integer
+        overall:
+          $ref: '#/components/schemas/SyntheticsUptime'
+        public_id:
+          description: A Synthetic test ID.
+          example: abc-def-123
+          type: string
+        to_ts:
+          description: Timestamp in seconds for the end of uptime.
+          format: int64
+          type: integer
+      type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -16850,6 +17240,62 @@ components:
       properties:
         new_status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+      type: object
+    SyntheticsUptime:
+      description: Object containing the uptime information.
+      properties:
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          nullable: true
+          type: array
+        group:
+          description: The location name
+          example: name
+          type: string
+        history:
+          description: 'The state transition history for the monitor, represented
+            as an array of
+
+            pairs. Each pair is an array where the first element is the transition
+            timestamp
+
+            in Unix epoch format (integer) and the second element is the state (integer).
+
+            For the state, an integer value of `0` indicates uptime, `1` indicates
+            downtime,
+
+            and `2` indicates no data.'
+          example:
+          - - 1579212382
+            - 0
+          items:
+            description: An array of transitions
+            example:
+            - 1579212382
+            - 0
+            items:
+              description: A timeseries data point which is a tuple of (timestamp,
+                value).
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        span_precision:
+          description: The number of decimal places to which the SLI value is accurate
+            for the given from-to timestamps.
+          example: 2.0
+          format: double
+          type: number
+        uptime:
+          description: The overall uptime.
+          example: 99.99
+          format: double
+          type: number
       type: object
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
@@ -17533,7 +17979,6 @@ components:
           $ref: '#/components/schemas/ToplistWidgetStackedType'
       required:
       - type
-      - legend
       type: object
     ToplistWidgetStackedType:
       default: stacked
@@ -19407,6 +19852,16 @@ components:
             events over all hours in the current date for the given org.
           format: int64
           type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -20145,6 +20600,16 @@ components:
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20896,6 +21361,16 @@ components:
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm_sum:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm_sum:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current month for all organizations.
           format: int64
           type: integer
         container_avg_sum:
@@ -27234,8 +27709,8 @@ paths:
               \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
               }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
               \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
-              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
-              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"is_resource_change_collection_enabled\":
+              true,\n  \"private_key\": \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
               \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
               true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
               \ \"type\": \"service_account\"\n}"
@@ -29187,6 +29662,8 @@ paths:
         - database-monitoring: `database-monitoring alert`
 
         - network-performance: `network-performance alert`
+
+        - cloud cost: `cost alert`
 
 
         **Notes**:
@@ -33641,6 +34118,177 @@ paths:
         - synthetics_write
       x-undo:
         type: idempotent
+  /api/v1/synthetics/tests/mobile:
+    post:
+      description: Create a Synthetic mobile test.
+      operationId: CreateSyntheticsMobileTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsMobileTest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Create a mobile test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-given:
+        synthetics_mobile_test:
+          parameters:
+          - file: synthetics_mobile_test_payload.json
+            name: body
+          step: there is a valid "synthetics_mobile_test" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
+        type: unsafe
+  /api/v1/synthetics/tests/mobile/{public_id}:
+    get:
+      description: 'Get the detailed configuration associated with
+
+        a Synthetic Mobile test.'
+      operationId: GetMobileTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a Mobile test
+      tags:
+      - Synthetics
+      x-menu-order: 9
+      x-undo:
+        type: safe
+    put:
+      description: Edit the configuration of a Synthetic Mobile test.
+      operationId: UpdateMobileTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsMobileTest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Edit a Mobile test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/trigger:
     post:
       description: Trigger a set of Synthetic tests.
@@ -33730,6 +34378,52 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/uptimes:
+    post:
+      description: Fetch uptime for multiple Synthetic tests by ID.
+      operationId: FetchUptimes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsFetchUptimesPayload'
+        description: Public ID list of the Synthetic tests and timeframe.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SyntheticsTestUptime'
+                type: array
+          description: OK.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Fetch uptime for multiple tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:

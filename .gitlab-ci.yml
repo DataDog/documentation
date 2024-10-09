@@ -4,6 +4,25 @@ stages:
   - post-deploy
   - cleanup
 
+# set pipeline type for merge queue
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      variables:
+        PIPELINE_TYPE: 'schedule'
+    - if: '$CI_PIPELINE_SOURCE == "api"'
+      variables:
+        PIPELINE_TYPE: 'api'
+    - if: '$CI_COMMIT_BRANCH == $GIT_BASE_BRANCH'
+      variables:
+        PIPELINE_TYPE: 'main-branch'
+    - if: '$CI_COMMIT_BRANCH =~ /^mq-working-branch-/'
+      variables:
+        PIPELINE_TYPE: 'merge-queue'
+    - when: always
+      variables:
+        PIPELINE_TYPE: 'feature-branch'
+
 variables:
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
@@ -100,7 +119,7 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN || $CI_COMMIT_BRANCH =~ /^mq-working-branch-/
       when: on_success
 
 .preview_manual_rules: &preview_manual_rules
