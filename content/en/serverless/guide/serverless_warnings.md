@@ -130,7 +130,7 @@ At least one invocation in the selected time range approached the maximum durati
 
 Invocations in this function have a recursive loop, generally caused by recursive triggering between AWS entities (for example, Lambda -> SQS -> Lambda). When this exceeds your `maxReceiveCount` (default 16), then it adds to this metric. For more information, see [Use Lambda recursive loop detection to prevent infinite loops][15].
 
-**Resolution:** Find recursive calls in your AWS entities related to this function. Look for related entities such as [SQS, SNS, and S3](16).
+**Resolution:** Find recursive calls in your AWS entities related to this function. Look for related entities such as [SQS, SNS, and S3][16].
 
 ## Further Reading
 
