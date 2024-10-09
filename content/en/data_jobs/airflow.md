@@ -70,7 +70,7 @@ To get started, follow the instructions below.
 {{% tab "Amazon MWAA" %}}
 ## Requirements
 
-* [Apache Airflow 2.8.3][1] or later is required.
+* [Apache Airflow 2.8.3][1] or later
 * [apache-airflow-providers-openlineage 1.11.0][2] or later is required.
 
 ## Setup
