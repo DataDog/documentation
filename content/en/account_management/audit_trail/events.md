@@ -27,6 +27,7 @@ further_reading:
 - [Teams management](#teams-management-events)
 
 #### Product-Specific Events
+- [App Builder](#app-builder)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
 - [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
@@ -81,6 +82,14 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name  | Description of audit event                          | Query in audit explorer              |
 |-------------| --------------------------------------------------  | ------------------------------------ |
 | [API Request][16] | An API Request is made across the Datadog platform. | `@evt.name:Request @action:accessed` |
+
+### App Builder
+
+| Name                 | Description of audit event | Query in audit explorer              |
+|----------------------| -------------------------  | ------------------------------------ |
+| [App][109]           | A user accessed, created, modified, deleted, reverted, or unpublished an app.| `@evt.name:"App Builder" @asset.type:app @action:(accessed OR created OR modified OR published OR deleted OR reverted OR unpublished)`|
+| [Query started][107] | A user started a query.    | `@evt.name:"App Builder" @asset.type:query @action:started` |
+| [Query executed][108]| A user executed a query.   | `@evt.name:"App Builder" @asset.type:query @action:executed`|
 
 ### Application Performance Monitoring (APM) events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -382,3 +391,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [104]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Amodified%20%40asset.type%3Aindex_list%20
 [105]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Amodified%20%40asset.type%3Aarchive_list%20
 [106]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
+[107]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aquery%20%40action%3Astarted%20
+[108]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aquery%20%40action%3Aexecuted%20
+[109]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aapp%20%40action%3A%28accessed%20OR%20created%20OR%20modified%20OR%20published%20OR%20deleted%20OR%20reverted%20OR%20unpublished%29%20
