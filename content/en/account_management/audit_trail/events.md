@@ -100,6 +100,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Primary operation name][23] | A user created, modified, or deleted the [primary operation name][24] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
 | [Second Primary tag][25] | A user added, modified, or deleted the [second primary tag][26] and the previous and/or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
+| [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
+| [Custom metrics][113] | A user created, modified, or deleted a custom metric | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:custom_metrics` |
 
 ### Application Security Management
 
@@ -281,7 +283,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Workflow Action][98] | A user responded to a Slack prompt during the execution of a workflow. | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` |
 | [Custom Connection][99] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
 | [Step completed][110] | A step was completed. | `@evt.name:Workflows @action:completed @asset.type:step`|
-| [Notification][111] | A notification configuration was created, modified, or deleted for a workflow.| `@evt.name:Workflows @action:(created OR modified OR deleted) @asset.type:workflow_notifications` |
+| [Notifications][111] | A notification configuration was created, modified, or deleted for a workflow.| `@evt.name:Workflows @action:(created OR modified OR deleted) @asset.type:workflow_notifications` |
 
 ## Further Reading
 
@@ -398,3 +400,5 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [109]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aapp%20%40action%3A%28accessed%20OR%20created%20OR%20modified%20OR%20published%20OR%20deleted%20OR%20reverted%20OR%20unpublished%29%20
 [110]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40action%3Acompleted%20%40asset.type%3Astep%20
 [111]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Aworkflow_notifications%20
+[112]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
+[113]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Acustom_metrics%20
