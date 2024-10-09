@@ -57,7 +57,7 @@ There are two locations where you can redact your sensitive data:
 **In your environment:**
 
 {{< callout header="Use the Datadog Agent to start scanning for sensitive data within your premises." url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Sensitive Data Scanner support for the Datadog Agent is in Preview. To enroll, click <strong>Request Access</strong>.
+  Sensitive Data Scanner support for the Datadog Agent is in Preview. To enroll, click "Request Access".
 {{< /callout >}}
 
 - With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
@@ -323,8 +323,8 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 
 ## Data Security
 
-{{< callout header="Start scanning for sensitive data in your AWS S3 buckets." url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Data Security is in Preview. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Start scanning for sensitive data in your Amazon S3 buckets." url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Data Security is in Preview. To enroll, click "Request Access".
 {{< /callout >}}
 
 <div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
