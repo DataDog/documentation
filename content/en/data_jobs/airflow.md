@@ -51,7 +51,7 @@ To get started, follow the instructions below.
 
    * install and configure `openlineage` provider for **both Airflow schedulers and Airflow workers**.
    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
-   * replace `<DD_API_KEY>` fully with your valid [Datadog API key][4].
+   * replace `<DD_API_KEY>` with your valid [Datadog API key][4].
    
    **Optionally:**
    * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
