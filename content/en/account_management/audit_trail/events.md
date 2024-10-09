@@ -185,8 +185,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Standard attribute configuration][63] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
 | [Download as CSV][64] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
 | [Log forwarding][103] | A user created, modified, or deleted a custom destination. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:log_forwarding` |
-| [Index list modified][104] | A user modified an index list order. | `@evt.name:"Log Management" @action:modified @asset.type:index_list` |
-| [Archive list modified][105] | A user modified an archive list order. | `@evt.name:"Log Management" @action:modified @asset.type:archive_list` |
+| [Index order modified][104] | A user modified the order of indexes. | `@evt.name:"Log Management" @action:modified @asset.type:index_list` |
+| [Archiving order modified][105] | A user modified the order of archives. | `@evt.name:"Log Management" @action:modified @asset.type:archive_list` |
 | [Saved view][106] | A user created, modified, or deleted a saved view. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
 ### Metrics events
