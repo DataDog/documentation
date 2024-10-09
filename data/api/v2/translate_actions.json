@@ -441,6 +441,12 @@
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
     "summary": "Get a list of events"
   },
+  "CreateEvent": {
+    "description": "This endpoint allows you to post events. Only events with `change` category are supported.",
+    "summary": "Post a change event",
+    "request_description": "Event request object",
+    "request_schema_description": "Object representing an event."
+  },
   "SearchEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search events",
