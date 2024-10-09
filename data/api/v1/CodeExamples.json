@@ -128,6 +128,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1413226400",
+      "description": "Create a new dashboard with a toplist widget with stacked type and no legend specified"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2308247857",
       "description": "Create a new dashboard with alert_graph widget"
     },
@@ -788,6 +793,13 @@
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
+  "CreateSyntheticsMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a mobile test returns \"OK - Returns the created test details.\" response"
+    }
+  ],
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
@@ -847,11 +859,25 @@
       "description": "Create a private location returns \"OK\" response"
     }
   ],
+  "UpdateMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Edit a Mobile test returns \"OK\" response"
+    }
+  ],
   "UpdateAPITest": [
     {
       "group": "synthetics",
       "suffix": "",
       "description": "Edit an API test returns \"OK\" response"
+    }
+  ],
+  "FetchUptimes": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Fetch uptime for multiple tests returns \"OK.\" response"
     }
   ],
   "PatchTest": [
