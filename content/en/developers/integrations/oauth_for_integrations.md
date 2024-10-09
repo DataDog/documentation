@@ -52,7 +52,7 @@ The client is the component of an application that enables users to authorize th
 
 1. Navigate to the **OAuth & Permissions** tab under **Features** and click **New Confidential OAuth Client**.
 
-   The OAuth clients you create for integrations are **confidential clients** that provide a client ID and client secret. The client you create in this step is a private version of the client, whose credentials you can use for testing. It allows only internal organization authorization. When a published version of this client is created, you will receive a new set of credentials that enable authorization across any Datadog organization.
+   The OAuth clients you create for integrations are **confidential clients** that provide a client ID and client secret. The client you create in this step is a private version of the client, whose credentials you can use for testing. It allows only internal organization authorization. When a published version of this client is created, you receive a new set of credentials that enable authorization across any Datadog organization.
 
    <div class="alert alert-info">These credentials are never shown again after you create the client, so be sure to store them in a secure location.</div>
 
@@ -106,9 +106,9 @@ After your OAuth client is published, you can test freely from other organizatio
 
 ##### Cross-regional support
 
-To make OAuth work for users across all Datadog regions, you need to ensure that you're making the correct API calls based on a user's region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding url. You use this site parameter in your calls to the Authorize and Token endpoints.
+To make OAuth work for users across all Datadog regions, you need to ensure that you're making the correct API calls based on a user's region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding url. You use this site parameter in your calls to the authorization and token endpoints.
 
-Note that if a user kicks off authorization directly from your platform, this site parameter is not sent and the user is instead prompted to select their site on the Datadog authorize page.
+If a user kicks off authorization directly from your platform, this site parameter is not sent and the user is instead prompted to select their site on the Datadog authorization page.
 
 Make sure you test calls to the Datadog API that match the user's region. For example, `https://trace.browser-intake-datadoghq.com` for US, and `https://public-trace-http-intake.logs.datadoghq.eu` for EU.
 
