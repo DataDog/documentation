@@ -10,6 +10,10 @@ further_reading:
   text: 'Learn how to search your rules and executions'
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Quality Gates is in Preview.
+{{< /callout >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}

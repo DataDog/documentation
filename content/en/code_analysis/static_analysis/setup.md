@@ -16,6 +16,10 @@ algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
