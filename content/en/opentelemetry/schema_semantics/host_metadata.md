@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This feature is in beta. If you have any feedback, contact <a href="/help/">Datadog support</a>.
+This feature is in Preview. If you have any feedback, contact <a href="/help/">Datadog support</a>.
 </div>
 
 ## Overview
@@ -20,7 +20,7 @@ Datadog uses [OpenTelemetry semantic conventions][2] to recognize system informa
 
 ## Opting in to the feature
 
-To opt into the **public beta**, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
+To use this feature, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
 
 Resources populate the infrastructure list information if they have a [host-identifying attribute][10] and the `datadog.host.use_as_metadata` attribute set to `true`.
 
