@@ -197,7 +197,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Datadog Exporter        | Timeseries sent by the OpenTelemetry Collector or the Datadog Exporter.
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Custom metrics generated from the Datadog Events platform.
-| LLM Observability       | Timeseries emitted by the LLM Observability product via `lmobs_to_metrics`. 
+| LLM Observability       | Timeseries emitted by the LLM Observability product via `lmobs_to_metrics` service.
 | Logs                    | Custom metrics generated from the Datadog's Logs platform.
 | Metrics API             | Timeseries sent via Datadog's OTLP endpoint and Otel receivers with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | NPM                     | Timeseries sent by the Datadog's Network Performance Monitoring product.
