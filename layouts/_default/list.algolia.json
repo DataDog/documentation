@@ -32,34 +32,37 @@
             {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
 
             {{- /* record for each individual section (split by h2 header) */ -}}
-            {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
+            {{- partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) -}}
 
-            {{- /* Full page record
-            {{ $record := (
-                dict "objectID" $object_id
-                "id" $object_id
-                "title" $title
-                "section_header" ""
-                "content" $content
-                "type" $page.Type
-                "relpermalink" $page.RelPermalink
-                "distinct_base_url" $page.RelPermalink
-                "full_url" $page.Permalink
-                "language" $page.Language.Lang
-                "category" $category
-                "subcategory" $subcategory
-                "rank" $rank
-                "order" -1
-                "tags" (slice)
-            ) }}
+            {{/* This page has no h2 headings lets do a full page record, so we don't miss the page */}}
+            {{- $headingCount := (len .Fragments.HeadingsMap) | default 0 -}}
+            {{- if eq $headingCount 0 -}}
+                {{- /* Full page record */ -}}
+                {{- $record := (
+                    dict "objectID" $object_id
+                    "id" $object_id
+                    "title" $title
+                    "section_header" ""
+                    "content" $content
+                    "type" $page.Type
+                    "relpermalink" $page.RelPermalink
+                    "distinct_base_url" $page.RelPermalink
+                    "full_url" $page.Permalink
+                    "language" $page.Language.Lang
+                    "category" $category
+                    "subcategory" $subcategory
+                    "rank" $rank
+                    "order" -1
+                    "tags" (slice)
+                ) -}}
 
-            {{ if $tags }}
-                {{ $tags_dict := (dict "tags" $tags) }}
-                {{ $record = merge $record $tags_dict }}
-            {{ end }}
+                {{- if $tags -}}
+                    {{- $tags_dict := (dict "tags" $tags) -}}
+                    {{- $record = merge $record $tags_dict -}}
+                {{- end -}}
 
-            {{- $.Scratch.Add "algoliaindex" $record }}
-            */ -}}
+                {{- $.Scratch.Add "algoliaindex" $record -}}
+            {{- end -}}
         {{ end }}
     {{ end }}
 
