@@ -26,7 +26,7 @@ If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, in
 
 * **Custom metrics with DogStatsD** - With the Datadog Agent, use the built-in [StatsD client][4] to send custom metrics from your application, allowing you to correlate what's happening with your application, your users, and your system.
 
-* **Custom Agent Checks** - For even deeper customization, implement [custom Agent checks][5] to collect metrics and other data from your custom systems or applications and send them to Datadog.
+* **Custom Agent checks** - For even deeper customization, implement [custom Agent checks][5] to collect metrics and other data from your custom systems or applications and send them to Datadog.
 
 * **Application Logs**: The Datadog Agent [collects and forwarder application logs that are created locally][6] on your cloud VMs or containers so they don't need to be forwarded through the Cloud-provider. These logs also have Agent-level tags applied.
 
