@@ -6,6 +6,9 @@ further_reading:
 - link: "/agent/configuration/network/"
   tag: "Guide"
   text: "Network Traffic"
+- link: "/observability_pipelines/"
+  tag: "documentation"
+  text: "Send logs to external destinations with Observability Pipelines"
 ---
 
 <div class="alert alert-danger">
@@ -212,6 +215,8 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadog
 ```
 
 ## Logs
+
+Use the Agent for dual shipping if you want to send logs to multiple Datadog organizations. Use [Observability Pipelines][2] if you want to send logs to Datadog and external destinations.
 
 TCP requires Agent version >= 6.6.<br/>
 HTTPS requires Agent version >= 6.13.
@@ -521,3 +526,4 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/network/
+[2]: /observability_pipelines/
