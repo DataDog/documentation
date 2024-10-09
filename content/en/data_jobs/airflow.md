@@ -71,7 +71,7 @@ To get started, follow the instructions below.
 ## Requirements
 
 * [Apache Airflow 2.8.3][1] or later
-* [apache-airflow-providers-openlineage 1.11.0][2] or later is required.
+* [apache-airflow-providers-openlineage 1.11.0][2] or later
 
 ## Setup
 
