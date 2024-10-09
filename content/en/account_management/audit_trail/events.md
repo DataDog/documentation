@@ -173,6 +173,10 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Restriction query configuration][62] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | [Standard attribute configuration][63] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
 | [Download as CSV][64] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
+| [Log forwarding][103] | A user created, modified, or deleted a custom destination. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:log_forwarding` |
+| [Index list modified][104] | A user modified an index list order. | `@evt.name:"Log Management" @action:modified @asset.type:index_list` |
+| [Archive list modified][105] | A user modified an archive list order. | `@evt.name:"Log Management" @action:modified @asset.type:archive_list` |
+| [Saved view][106] | A user created, modified, or deleted a saved view. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -374,3 +378,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
 [101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
 [102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser_invite
+[103]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Alog_forwarding%20
+[104]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Amodified%20%40asset.type%3Aindex_list%20
+[105]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Amodified%20%40asset.type%3Aarchive_list%20
+[106]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
