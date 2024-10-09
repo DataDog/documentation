@@ -145,7 +145,7 @@ To see the link between Airflow task and the the Spark application it submitted,
 
    See [Lineage job & run macros][4] for the definitions of referenced macros.
 
-3. Once you have re-deployed your Airflow environment with the updated [lazy_load_plugins config][3] and the updated DAG file, and your Airflow DAG as been re-run, go to [Data Jobs Monitoring][2] page. You can then find your latest Airflow job run and see a SpanLink in the Airflow Job Run trace to the trace of the launched Spark Application. This makes it possible to debug issues in Airflow or in Spark all in once place.
+3. Once you have re-deployed your Airflow environment with the updated [lazy_load_plugins config][3] and the updated DAG file, and your Airflow DAG as been re-run, go to [Data Jobs Monitoring][2] page. You can then find your latest Airflow job run and see a SpanLink in the Airflow Job Run trace to the trace of the launched Spark Application. This makes it possible to debug issues in Airflow or Spark all in once place.
 
 ## Further Reading
 
