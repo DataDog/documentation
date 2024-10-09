@@ -96,7 +96,7 @@ To get started, follow the instructions below.
 
    **Important:**
    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
-   * replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
+   * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
    **Optional:**
    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
