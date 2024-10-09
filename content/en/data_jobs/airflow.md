@@ -6,6 +6,12 @@ aliases:
     - /data_jobs/airflow/
     - data_jobs/airflow/
 further_reading:
+    - link: 'https://www.datadoghq.com/blog/data-jobs-monitoring/'
+      tag: 'blog'
+      text: 'Troubleshoot and optimize data processing workloads with Data Jobs Monitoring'
+    - link: 'https://www.datadoghq.com/blog/data-observability-monitoring'
+      tag: 'blog'
+      text: 'Observing the data lifecycle with Datadog'
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Jobs Monitoring'
