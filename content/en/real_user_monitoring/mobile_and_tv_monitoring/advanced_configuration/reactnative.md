@@ -120,7 +120,7 @@ Enables [automatic collection of user frustrations][11]. Only error taps are sup
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false` <br/>
-Enables crash reporting for native plaforms (iOS, Android).
+Enables crash reporting for native platforms (iOS, Android).
 
 `sampleRate`
 : Optional - **Deprecated**<br/>
@@ -217,6 +217,18 @@ Optional [proxy configuration][13].
 **Default**: `true`<br/>
 Determines whether the accessibility labels are used to name RUM actions (default is true).
 
+`bundleLogsWithRum`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Enables RUM correlation with logs (default is true).
+
+`bundleLogsWithTraces`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Enables trace correlation with logs (default is true).
+
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
@@ -304,6 +316,14 @@ DdSdkReactNative.setUser({
 });
 ```
 
+If you want to add or update user information, you can use the following code to modify the existing user's details.
+
+```js
+DdSdkReactNative.addUserExtraInfo({
+    hasPaid: 'true'
+});
+```
+
 If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
 
 ```js
@@ -320,6 +340,14 @@ DdSdkReactNative.setAttributes({
     chat_enabled: true,
     campaign_origin: 'example_ad_network'
 });
+```
+
+## Clear all data
+
+Use `clearAllData` to clear all data that has not been sent to Datadog.
+
+```js
+DdSdkReactNative.clearAllData();
 ```
 
 ## Modify or drop RUM events

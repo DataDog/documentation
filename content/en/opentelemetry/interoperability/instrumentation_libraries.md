@@ -110,6 +110,46 @@ To use OpenTelemetry instrumentations with the Datadog Python SDK, perform the f
  1. Follow the instructions in the [OpenTelemetry API][15] section in the Datadog Python library docs.
  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-python-contrib` library.
 
+The following is an example instrumenting the OpenTelemetry's kafka-python library with the Datadog Python SDK:
+
+```python
+from kafka import KafkaProducer, KafkaConsumer
+from opentelemetry.instrumentation.kafka import KafkaInstrumentor
+from opentelemetry import trace
+
+# Instrument Kafka with OpenTelemetry
+KafkaInstrumentor().instrument()
+
+# Kafka configuration
+KAFKA_TOPIC = 'demo-topic0'
+KAFKA_BROKER = 'localhost:9092'
+
+def produce_message():
+    producer = KafkaProducer(bootstrap_servers=KAFKA_BROKER)
+    message = b'Hello, OpenTelemetry!'
+    
+    # No manual span creation, relying on automatic instrumentation
+    producer.send(KAFKA_TOPIC, message)
+    producer.flush()
+    
+    print(f"Produced message: {message}")
+
+def consume_message():
+    consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=KAFKA_BROKER, auto_offset_reset='earliest', group_id='demo-group')
+    
+    # No manual span creation, relying on automatic instrumentation
+    for message in consumer:
+        print(f"Consumed message: {message.value}")
+        break  # For simplicity, consume just one message
+
+if __name__ == "__main__":
+    # manual span here 
+    tracer = trace.get_tracer(__name__)
+    with tracer.start_as_current_span("Span") as parent_span:
+        parent_span.set_attribute("Hello", "World")
+        produce_message()
+        consume_message()
+```
 
 [13]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation#readme
 [14]: https://opentelemetry.io/docs/zero-code/python/example/
@@ -261,14 +301,40 @@ DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net
 
 {{% /tab %}}
 
-<!-- {{% tab "PHP" %}}
+{{% tab "PHP" %}}
 
 ## Compatibility requirements
 
+The Datadog PHP SDK supports library [instrumentation][25] using the `stable` OpenTelemetry PHP Trace API.
+
+OpenTelemetry provides an [example][26] for instrumenting a sample application.
+
 ## Setup
 
+To use OpenTelemetry integrations with the Datadog PHP SDK:
 
-{{% /tab %}} -->
+  1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
+  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
+
+You can also find [the sample Slim4OtelDropIn PHP application with OpenTelemetry and Datadog auto instrumentations][28] in the `DataDog/trace-examples` GitHub repository.
+
+## Configuration
+
+To avoid duplicate spans, you can disable the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]). 
+
+Use the integration name when setting integration-specific configuration for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
+
+```sh
+DD_TRACE_LARAVEL_ENABLED=false
+```
+
+[25]: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation
+[26]: https://opentelemetry.io/docs/zero-code/php/
+[27]: /tracing/trace_collection/custom_instrumentation/php/otel/#setup
+[28]: https://github.com/DataDog/trace-examples/tree/master/php/Slim4OtelDropIn
+[29]: /tracing/trace_collection/library_config/php/#integration-names
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
@@ -278,10 +344,56 @@ The Datadog .NET SDK supports library instrumentations that come with [built-in 
 
 ## Setup
 
-To use Opentelemetry instrumentation libraries with the Datadog .NET SDK:
+To use OpenTelemetry instrumentation libraries with the Datadog .NET SDK:
 
 1. Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 2. Follow the steps to configure each library, if any, to generate OpenTelemetry-compatible instrumentation via `ActivitySource`
+
+The following example demonstrates how to instrument the `Hangfire` OpenTelemetry integrations with the Datadog .NET SDK:
+
+```csharp
+using System;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Instrumentation.Hangfire;
+using OpenTelemetry;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create an OpenTelemetry TracerProvider to initialize the OpenTelemetry Hangfire instrumentation and build the configuration
+        var openTelemetry = Sdk.CreateTracerProviderBuilder()
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("hangfire-demo2"))
+            .AddHangfireInstrumentation() // This line generates the OpenTelemetry spans
+            .Build();
+
+        // Configure Hangfire to use memory storage
+        GlobalConfiguration.Configuration.UseMemoryStorage();
+
+        // Create a new Hangfire server
+        using (var server = new BackgroundJobServer())
+        {
+            // Enqueue a background job
+            BackgroundJob.Enqueue(() => RunBackgroundJob());
+
+            Console.WriteLine("Hangfire Server started. Press any key to exit...");
+            Console.ReadKey();
+        }
+
+        // Dispose OpenTelemetry resources
+        openTelemetry?.Dispose();
+    }
+
+    // Define the background job method
+    public static void RunBackgroundJob()
+    {
+        Console.WriteLine("Hello from Hangfire!");
+    }
+}
+```
 
 ## Verified OpenTelemetry Instrumentation Libraries
 

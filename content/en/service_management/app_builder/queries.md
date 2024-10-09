@@ -62,6 +62,8 @@ return arr
 
 Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
 
+You can use [state functions][12] in post-query hooks.
+
 ### Error notifications
 
 To display a toast (a brief notification message) to the user when the system returns an error, toggle **Show Toast on Errors** in the **Advanced** section of a query.
@@ -276,3 +278,4 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 [8]: https://datadoghq.slack.com/
 [10]: https://app.datadoghq.com/app-builder/action-catalog
 [11]: /service_management/app_builder/events
+[12]: /service_management/app_builder/events/#state-functions

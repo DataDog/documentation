@@ -16,7 +16,7 @@ Database Monitoring offers comprehensive insights into your MongoDB databases by
 ## Before you begin
 
 Supported MongoDB major versions
-: 4.4, 5.0, 6.0, 7.0
+: 4.4, 5.0, 6.0, 7.0, 8.0
 
 {{% dbm-mongodb-before-you-begin %}}
 
@@ -206,6 +206,10 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 
 
 ## Data Collected
+
+### Metrics
+
+Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
 
 {{% dbm-mongodb-agent-data-collected %}}
 
