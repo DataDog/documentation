@@ -30,7 +30,7 @@ If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, in
 
 * **Application logs**: The Datadog Agent [collects and forwards application logs that are created locally][6] on your cloud VMs or containers, so they don't need to be forwarded through the cloud provider integration. These logs also have Agent-level tags applied.
 
-* **Application Performance Monitoring (APM)** - [Traces collected through the APM Agent][4] give a comprehensive look into your applications, helping you understand end-to-end service performance and identify potential bottlenecks.  
+* **Application Performance Monitoring (APM)** - [Traces collected through the Agent][4] give a comprehensive look into your applications, helping you understand end-to-end service performance and identify potential bottlenecks.  
 
 ## Further Reading
 
