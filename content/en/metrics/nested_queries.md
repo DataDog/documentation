@@ -111,7 +111,6 @@ All space aggregators with the exception of percentile space aggregators have on
 
 
 {{% collapse-content title="Space aggregation example queries" level="h5" %}}
-The following query calculates the sum of average CPU utilization, grouped by `env`:
 This initial query, `avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300)` calculates the sum of average CPU utilization, grouped by `env` and `host` every 5 minutes. Then multilayer space aggregation is applied to calculate maximum value of the average CPU utilization by `env`.
 
 
@@ -129,7 +128,7 @@ Percentiles and standard deviation for aggregated counts/rates/gauges are a part
 
  {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
 
-We can also use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
+We can use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of MLA time agg percentiles using nested queries in the UI" style="width:100%;" >}}
 
@@ -174,7 +173,7 @@ Historically when querying a metric over the past month, you would see data at 4
 
 _Note: We recommend you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs._
 
-In the UI or JSON tab:
+In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/nested-queries-higher-res-ui.png" alt="example of higher resolution queries using nested queries in the UI" style="width:100%;" >}}
 
