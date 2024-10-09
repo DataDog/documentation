@@ -53,7 +53,7 @@ To get started, follow the instructions below.
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of `openlineage` provider.
 
-3. Trigger a update to your Airflow pods and wait for them to finish.
+3. Trigger an update to your Airflow pods and wait for them to finish.
 
 [1]: https://github.com/apache/airflow/releases/tag/2.7.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
