@@ -169,7 +169,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
            exporters: [datadog]
      ```
 
-   This configuration collects host metadata using the `resourcedetection` processor, adds Kubernetes metadata with the `k8sattributes` processor, and sets the `datadog.host.use_as_metadata` attribute to `true`. For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][14].
+   This configuration collects host metadata using the `resourcedetection` processor, adds Kubernetes metadata with the `k8sattributes` processor, and sets the `datadog.host.use_as_metadata` attribute to `true`. For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][9].
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart
@@ -181,6 +181,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L21-L22
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L32-L39
 [9]: /opentelemetry/schema_semantics/host_metadata/
+
 
 {{% /tab %}}
 {{% tab "Gateway" %}}
