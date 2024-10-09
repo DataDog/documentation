@@ -207,7 +207,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | RUM                     | Custom metrics generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless               | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including Scorecard metrics.
+| Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
 | Synthetics              | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetics][26] product. 
 | USM                     | Custom metrics generated from the Datadog [Universal Service Monitoring][27] product. 
 
@@ -244,3 +244,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [26]: https://docs.datadoghq.com/synthetics/
 [27]: https://docs.datadoghq.com/universal_service_monitoring/
 [28]: https://docs.datadoghq.com/logs/
+[29]: https://docs.datadoghq.com/service_catalog/scorecards/
