@@ -92,7 +92,7 @@ To get started, follow the instructions below.
    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
-   **Optionally:**
+   **Optional:**
    * set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow instance to allow jobs from different Airflow instances logically separated.
    * set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules to log at `DEBUG` logging level. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
