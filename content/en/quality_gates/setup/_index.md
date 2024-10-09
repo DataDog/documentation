@@ -67,7 +67,7 @@ This command:
 | Environment Variables | Description |
 |---|---|
 | `DD_API_KEY` | Point to your [Datadog API key][5]. |
-| `DD_APP_KEY` | Point to your [Datadog application key][6]. |
+| `DD_APP_KEY` | Point to your [Datadog application key][6]. The application key must have the `Quality Gates Evaluations` permission enabled.|
 | `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). **Note**: `DATADOG_SITE` is not supported. |
 
 For example:

@@ -15,7 +15,7 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 
 ## Overview
@@ -88,7 +88,9 @@ Manually configure individual paths by specifying the exact endpoint you want to
    init_config:
      min_collection_interval: 60 # in seconds, default 60 seconds
    instances:
-     # configure the endpoints you want to monitor, one check instance per endpoint 
+     # configure the endpoints you want to monitor, one check instance per endpoint
+     # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+   
      - hostname: api.datadoghq.eu # endpoint hostname or IP
        protocol: TCP
        port: 443
@@ -98,6 +100,8 @@ Manually configure individual paths by specifying the exact endpoint you want to
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
      # timeout: 10 # timeout in seconds of traceroute calls, default is 10s
+
+     # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
        protocol: UDP
        tags:
