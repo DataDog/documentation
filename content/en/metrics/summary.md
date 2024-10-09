@@ -189,7 +189,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | ------------------------| ----------------------------------------------------------------------------- |
 | API Catalog             | Timeseries sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
-| Agent                   | Timeseries sent by the Datadog agent, collected via [Agent integrations][10], or [built-in integrations][9].
+| Agent                   | Timeseries sent by the Datadog agent, collected from [Agent integrations][10], or [built-in integrations][9].
 | CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
 | Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
 | DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
