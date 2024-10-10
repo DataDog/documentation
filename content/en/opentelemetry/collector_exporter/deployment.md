@@ -364,7 +364,7 @@ Configure the Operator using one of the OpenTelemetry Collector standard Kuberne
 
 [1]: https://github.com/open-telemetry/opentelemetry-operator#readme
 [2]: /opentelemetry/collector_exporter/deployment/?tab=daemonset#kubernetes
-[3]: http://localhost:1313/opentelemetry/collector_exporter/deployment/?tab=gateway#kubernetes
+[3]: /opentelemetry/collector_exporter/deployment/?tab=gateway#kubernetes
 {{% /tab %}}
 
 {{< /tabs >}}
