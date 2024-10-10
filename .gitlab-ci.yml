@@ -1,6 +1,5 @@
 stages:
   - bootstrap
-  - preview-test-group
   - build
   - post-deploy
   - cleanup
@@ -120,8 +119,13 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN || $CI_COMMIT_BRANCH =~ /^mq-working-branch-/
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN 
       when: on_success
+
+.if_mergequeue: &if_mergequeue
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^mq-working-branch-/
+      when: always
 
 .preview_manual_rules: &preview_manual_rules
   rules:
@@ -148,41 +152,13 @@ before_script:
     - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
       when: on_success
 
-test_resource_groups-1:
-  <<: *base_template
-  <<: *preview_rules
-  stage: preview-test-group
-  script:
-    - echo "Testing resource group 1"
-    - echo "Starting sleep for 3 minutes..."
-    - sleep 180  # Sleep for 180 seconds (3 minutes) 
-    - echo "Sleep completed"
-  resource_group: build_live_group
-  variables:
-    RESOURCE_GROUP_ORDER: oldest_first
-    RESOURCE_GROUP_LIMIT: 1
-
-test_resource_groups-2:
-  <<: *base_template
-  <<: *preview_rules
-  stage: preview-test-group
-  script:
-    - echo "Testing resource group 2"
-    - echo "Starting sleep for 3 minutes..."
-    - sleep 180  # Sleep for 180 seconds (3 minutes)
-    - echo "Sleep completed"
-  resource_group: build_live_group
-  variables:
-    RESOURCE_GROUP_ORDER: oldest_first
-    RESOURCE_GROUP_LIMIT: 1
-
-
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   <<: *preview_rules
+  <<: *if_mergequeue
   stage: build
   cache:
     - *hugo_cache
@@ -236,6 +212,7 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   <<: *preview_rules
+  <<: *if_mergequeue
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -260,6 +237,7 @@ link_checks_preview:
 missing_tms_preview:
   <<: *base_template
   <<: *preview_rules
+  <<: *if_mergequeue
   stage: post-deploy
   environment: "preview"
   allow_failure: true
@@ -430,6 +408,8 @@ build_live:
     UNTRACKED_EXTRAS: "data"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
+    RESOURCE_GROUP_ORDER: oldest_first
+    RESOURCE_GROUP_LIMIT: 1
   script:
     - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - notify_slack.py "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" --status="#FFD700"
@@ -456,6 +436,7 @@ build_live:
       - ./public/redirects.txt
       - typesense.config.json
     expire_in: 1 week
+  resource_group: build_live_group
 
 test_live_link_checks:
   <<: *base_template
@@ -466,6 +447,8 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
     GIT_STRATEGY: none
+    RESOURCE_GROUP_ORDER: oldest_first
+    RESOURCE_GROUP_LIMIT: 1
   script:
     - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
@@ -479,6 +462,7 @@ test_live_link_checks:
   artifacts:
     paths:
       - ./tmp/.htmltest
+  resource_group: build_live_group
 
 sourcemaps_live:
   <<: *base_template
@@ -495,6 +479,10 @@ sourcemaps_live:
   dependencies:
     - build_live
   allow_failure: true
+  resource_group: build_live_group
+  variables:
+    RESOURCE_GROUP_ORDER: oldest_first
+    RESOURCE_GROUP_LIMIT: 1
 
 evaluate_missing_metrics:
   <<: *base_template
