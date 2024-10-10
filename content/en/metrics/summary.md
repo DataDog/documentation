@@ -35,7 +35,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). Learn more about the different metric origin types [here][12].
+- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
 **Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
 
@@ -181,7 +181,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 **Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
 
-### Metric Origin Definitions
+### Metric origin definitions
 
 This table shows the mapping between the metric origin as seen in the facet and where it was submitted from:
 
@@ -228,20 +228,20 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: https://docs.datadoghq.com/api_catalog/
-[14]: https://docs.datadoghq.com/security/cloud_security_management/
-[15]: https://docs.datadoghq.com/database_monitoring/
-[16]: https://docs.datadoghq.com/data_streams/
-[17]: https://docs.datadoghq.com/opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
-[18]: https://docs.datadoghq.com/opentelemetry/collector_exporter/
-[19]: https://docs.datadoghq.com/network_monitoring/performance/
-[20]: https://docs.datadoghq.com/observability_pipelines/
-[21]: https://docs.datadoghq.com/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[22]: https://docs.datadoghq.com/integrations/process/
-[23]: https://docs.datadoghq.com/monitors/types/real_user_monitoring/
-[24]: https://docs.datadoghq.com/serverless/
-[25]: https://docs.datadoghq.com/service_catalog/
-[26]: https://docs.datadoghq.com/synthetics/
-[27]: https://docs.datadoghq.com/universal_service_monitoring/
-[28]: https://docs.datadoghq.com/logs/
-[29]: https://docs.datadoghq.com/service_catalog/scorecards/
+[13]: /api_catalog/
+[14]: /security/cloud_security_management/
+[15]: /database_monitoring/
+[16]: /data_streams/
+[17]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
+[18]: /opentelemetry/collector_exporter/
+[19]: /network_monitoring/performance/
+[20]: /observability_pipelines/
+[21]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[22]: /integrations/process/
+[23]: /monitors/types/real_user_monitoring/
+[24]: /serverless/
+[25]: /service_catalog/
+[26]: /synthetics/
+[27]: /universal_service_monitoring/
+[28]: /logs/
+[29]: /service_catalog/scorecards/

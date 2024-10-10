@@ -6,6 +6,10 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You must [configure your profile settings][1] before you can receive On-Call Pages. Your profile includes settings for contact methods, testing those methods, and notification preferences. These ensure that you receive timely and effective Pages.
 
 ## Configure your On-Call profile

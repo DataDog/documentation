@@ -21,7 +21,7 @@ assets:
     source_type_id: 10149
     source_type_name: VoltDB
   monitors:
-    CPU load: assets/monitors/cpu_load.json
+    Voltdb Node CPU is high: assets/monitors/cpu_load.json
   saved_views:
     voltdb_processes: assets/saved_views/voltdb_processes.json
 author:
@@ -32,7 +32,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
 display_on_public_website: true

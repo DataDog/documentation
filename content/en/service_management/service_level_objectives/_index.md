@@ -21,9 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-key-questions/"
   tag: "Blog"
   text: "Key questions to ask when setting SLOs"
-- link: "https://dtdg.co/fe"
-  tag: "Foundation Enablement"
-  text: "Join an interactive session on creating effective monitors and SLOs"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
   tag: "External Site"
   text: "Create and manage SLOs with Terraform"
@@ -290,8 +290,6 @@ The 90-day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
-
 #### Access in the UI
 
 To access SLO status corrections in the UI:
@@ -304,13 +302,21 @@ To access SLO status corrections in the UI:
 6. Optionally add **Notes**.
 7. Click **Apply Correction**.
 
+{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
+
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
+
+#### Visualizing status corrections
+
+For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the "History" section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration. 
+
+{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 
 ## SLO calendar view
 
-The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
+The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Daily", "Weekly", or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO calendar view" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="SLO calendar view" >}}
 
 ## SLO CSV export
 
