@@ -17,7 +17,9 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-If you wish to send data to more than one destination, such as a second Datadog organization, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
+This document provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics, and so on) to multiple Datadog organizations.
+
+**Note**: If you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers, see [Observability Pipelines][2].
 
 For a full list of network traffic destinations, see [Network Traffic][1].
 
