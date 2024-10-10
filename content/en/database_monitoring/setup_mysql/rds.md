@@ -340,7 +340,7 @@ The Cluster Agent automatically registers this configuration and begins running 
 
 ### Validate
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section, or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section, or see the [Databases][7] page to get started!
 
 ## Example Agent Configurations
 {{% dbm-mysql-agent-config-examples %}}
