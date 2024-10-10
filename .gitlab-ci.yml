@@ -4,7 +4,7 @@ stages:
   - post-deploy
   - cleanup
 
-# set pipeline type for merge queue
+# set pipeline type for merge queue 
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
