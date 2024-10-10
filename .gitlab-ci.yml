@@ -1,5 +1,6 @@
 stages:
   - bootstrap
+  - preview-test-group
   - build
   - post-deploy
   - cleanup
@@ -146,6 +147,38 @@ before_script:
       when: never
     - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
       when: on_success
+
+test_resource_groups-1:
+  <<: *base_template
+  stage: preview-test-group
+  script:
+    - echo "Testing resource group 1"
+    - echo "Starting sleep for 3 minutes..."
+    - sleep 180  # Sleep for 180 seconds (3 minutes)
+    - echo "Sleep completed"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "devin.ford/test-resource-groups"'
+      when: always
+  resource_group: build_live_group
+  variables:
+    RESOURCE_GROUP_ORDER: oldest_first
+    RESOURCE_GROUP_LIMIT: 1
+
+test_resource_groups-2:
+  <<: *base_template
+  stage: preview-test-group
+  script:
+    - echo "Testing resource group 2"
+    - echo "Starting sleep for 3 minutes..."
+    - sleep 180  # Sleep for 180 seconds (3 minutes)
+    - echo "Sleep completed"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "devin.ford/test-resource-groups"'
+      when: always
+  resource_group: build_live_group
+  variables:
+    RESOURCE_GROUP_ORDER: oldest_first
+    RESOURCE_GROUP_LIMIT: 1
 
 
 # ================== preview ================== #
