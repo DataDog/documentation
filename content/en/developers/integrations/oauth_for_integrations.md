@@ -112,6 +112,8 @@ If a user kicks off authorization directly from your platform, this site paramet
 
 Make sure you test calls to the Datadog API that match the user's region. For example, `https://trace.browser-intake-datadoghq.com` for US, and `https://public-trace-http-intake.logs.datadoghq.eu` for EU.
 
+To see a list of destinations based on the Datadog site, go to the [Network traffic][19] page and use the **DATADOG SITE** selector on the right to switch regions.
+
 ### Confirm data flow for all scopes
 
 Ensure that you are able to send data in, pull data out, or edit data for each scope you've requested.
@@ -163,7 +165,7 @@ To send data to Datadog, use the `api_keys_write` scope when generating an API k
 
 Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the token, the user must reauthorize the integration to generate new refresh and access tokens. For more information, see the [OAuth2 Authorization Endpoints Reference][13].
 
-### Retrieving API keys
+### Retrieving API keys in your partner sandbox account
 
 After you create a key using the [api_keys/marketplace][14] endpoint, the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
 
@@ -180,7 +182,14 @@ Error
 
 Until an OAuth client is published, you can only authorize the client from the account it was created in (the partner's sandbox account). This error occurs if you try to authorize the client outside of that account before the client is published.
 
-### Forbidden errors related to app keys
+### Forbidden errors
+
+Error
+: `{"errors":["Forbidden"]}`
+
+This error might be related to an app key or an issue with your API authentication credentials.
+
+#### App key use
 
 OAuth clients use an `access_token` for authentication. Use the `access_token` to make calls to Datadog API endpoints by sending it as a part of the authorization header of your request:
 
@@ -190,7 +199,7 @@ headers = {"Authorization": "Bearer {}".format(access_token)}
 
 For more information, see [Implement the OAuth protocol][17].
 
-### Forbidden errors on API requests
+#### API requests
 
 If you're getting a forbidden error when trying to make an API call to a specific endpoint and you've enabled the correct scope for that endpoint, it's possible your API key, session, or OAuth token is invalid or has expired.
 
@@ -237,4 +246,4 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 [16]: https://app.datadoghq.com/integrations
 [17]: /developers/authorization/oauth2_in_datadog/#implement-the-oauth-protocol
 [18]: /developers/integrations/
-
+[19]: /agent/configuration/network/
