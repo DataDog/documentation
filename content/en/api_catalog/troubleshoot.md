@@ -9,6 +9,11 @@ further_reading:
 
 If you experience unexpected behavior with Datadog API Catalog, this guide may help you resolve the issue. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
+## Definition matches too many services
+
+By default, The API Catalog matches a definition to all instances that fit the defined path.
+You can scope the definition to a specific service by adding the [service parameter][4] to the API definition.
+
 ## Missing endpoints
 
 API Catalog is based on APM tracing, so the first step is to make sure your services are instrumented. Click **Learn More** in the app, then select **Troubleshoot** to verify this.
@@ -35,3 +40,4 @@ API Catalog is based on APM tracing, so info from traffic is displayed only when
 [1]: /help/
 [2]: /tracing/trace_collection/
 [3]: /tracing/trace_pipeline/ingestion_controls/
+[4]: /api_catalog/add_metadata/#metadata-structure-and-supported-versions
