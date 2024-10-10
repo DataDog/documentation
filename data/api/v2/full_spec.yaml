@@ -9337,6 +9337,8 @@ components:
           $ref: '#/components/schemas/FindingStatus'
         tags:
           $ref: '#/components/schemas/FindingTags'
+        vulnerability_type:
+          $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
     FindingEvaluation:
       description: The evaluation of the finding.
@@ -9470,6 +9472,20 @@ components:
       type: string
       x-enum-varnames:
       - FINDING
+    FindingVulnerabilityType:
+      description: The vulnerability type of the finding.
+      enum:
+      - misconfiguration
+      - attack_path
+      - identity_risk
+      - api_security
+      example: misconfiguration
+      type: string
+      x-enum-varnames:
+      - MISCONFIGURATION
+      - ATTACK_PATH
+      - IDENTITY_RISK
+      - API_SECURITY
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -9684,6 +9700,12 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
+          example: true
           type: boolean
         is_security_command_center_enabled:
           default: false
@@ -35205,7 +35227,8 @@ paths:
         type: safe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
-      description: View indexed tag key-value pairs for a given metric name.
+      description: View indexed tag key-value pairs for a given metric name over the
+        previous hour.
       operationId: ListTagsByMetricName
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -36405,6 +36428,17 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/FindingStatus'
+      - description: Return findings that match the selected vulnerability types (repeatable).
+        example:
+        - misconfiguration
+        explode: true
+        in: query
+        name: filter[vulnerability_type]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/FindingVulnerabilityType'
+          type: array
       responses:
         '200':
           content:
