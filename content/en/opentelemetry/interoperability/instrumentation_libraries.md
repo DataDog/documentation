@@ -98,7 +98,7 @@ open `http://127.0.0.1:8080/products` to exercise the product query.
 The `-Ddd.trace.split-by-tags=db.name,db.sql.table` setting gives R2DBC spans a service name based on the table. If you don't want R2DBC spans to appear under a separate service then that setting can be dropped.
 
 <div class="alert alert-warning">
-Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not currently supported by the Datadog Java SDK.
+Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not supported by the Datadog Java SDK.
 </div>
 
 ## Verified OpenTelemetry extensions
