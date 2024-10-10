@@ -6802,9 +6802,9 @@ menu:
       url: account_management/scim/okta
       parent: account_management_scim
       weight: 501
-    - name: Azure
-      identifier: account_management_scim_azure
-      url: account_management/scim/azure
+    - name: Microsoft Entra ID
+      identifier: account_management_scim_entra
+      url: account_management/scim/entra
       parent: account_management_scim
       weight: 502
     - name: API and Application Keys

@@ -23,7 +23,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 ## Add Datadog to the Microsoft Entra ID application gallery
 
 1. Sign in to the [Microsoft Entra admin center][6] as at least a [Cloud Application Administrator][7]
-1. Browse to **Identity** -> **Applications -> **Enterprise Applications**
+1. Browse to **Identity** -> **Applications** -> **Enterprise Applications**
 1. Click **New Application** -> **Create your own application**
 1. Type "Datadog" in the search box
 1. Select the Datadog application from the gallery
@@ -51,7 +51,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 ### User attributes
 
 1. Expand the **Mappings** section
-2. Click **Provision Azure Active Directory Users**
+2. Click **Provision Microsoft Entra ID Users**
 3. Set **Enabled** to **Yes**
 4. Click the **Save** icon
 5. Under **Target Object actions**, ensure Create, Update, and Delete actions are selected
