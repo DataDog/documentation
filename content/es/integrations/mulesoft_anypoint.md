@@ -105,7 +105,7 @@ tile:
   - caption: 'Ejecutivos: Dashboard de optimización de costes'
     image_url: images/dmi_exec_cost_optimization.png
     media_type: imagen
-  - caption: Datadog Conector para Mule 4
+  - caption: Datadog Connector para Mule 4
     image_url: images/dmi_mule_connector.png
     media_type: imagen
   - caption: APM de Datadog
