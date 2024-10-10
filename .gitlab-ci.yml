@@ -157,8 +157,9 @@ before_script:
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
-  <<: *preview_rules
-  <<: *if_mergequeue
+  rules:
+    - !reference [.preview_rules ]
+    - !reference [.if_mergequeue ]
   stage: build
   cache:
     - *hugo_cache
@@ -211,8 +212,9 @@ build_preview:
 
 link_checks_preview:
   <<: *base_template
-  <<: *preview_rules
-  <<: *if_mergequeue
+  rules:
+    - !reference [.preview_rules ]
+    - !reference [.if_mergequeue ]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -236,8 +238,9 @@ link_checks_preview:
 
 missing_tms_preview:
   <<: *base_template
-  <<: *preview_rules
-  <<: *if_mergequeue
+  rules:
+    - !reference [.preview_rules ]
+    - !reference [.if_mergequeue ]
   stage: post-deploy
   environment: "preview"
   allow_failure: true
@@ -447,8 +450,6 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
     GIT_STRATEGY: none
-    RESOURCE_GROUP_ORDER: oldest_first
-    RESOURCE_GROUP_LIMIT: 1
   script:
     - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
@@ -462,7 +463,6 @@ test_live_link_checks:
   artifacts:
     paths:
       - ./tmp/.htmltest
-  resource_group: build_live_group
 
 sourcemaps_live:
   <<: *base_template
@@ -479,10 +479,6 @@ sourcemaps_live:
   dependencies:
     - build_live
   allow_failure: true
-  resource_group: build_live_group
-  variables:
-    RESOURCE_GROUP_ORDER: oldest_first
-    RESOURCE_GROUP_LIMIT: 1
 
 evaluate_missing_metrics:
   <<: *base_template
