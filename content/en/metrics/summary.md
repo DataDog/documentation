@@ -187,19 +187,19 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Standard Metrics sent by the Datadog [API Catalog][13] product via APIM Endpoint.
+| API Catalog             | Standard Metrics sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
 | APM                     | Custom Metrics sent by the Datadog APM product for metrics generated from traces and span metrics.
-| Agent                   | Standard Metrics sent by the Datadog agent, collected via [Agent integrations][10], or [built-in integrations][9].
+| Agent                   | Standard Metrics sent by the Datadog agent, collected from [Agent integrations][10], or [built-in integrations][9].
 | CSM                     | Standard Metrics sent by the Datadog [Cloud Security Monitoring][14] product.
-| Cloud Integrations      | Standard Metrics collected via cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
+| Cloud Integrations      | Standard Metrics collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
 | DBM                     | Standard Metrics sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
-| DSM                     | Standard Metrics sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated via the DSM spans and traces.
+| DSM                     | Standard Metrics sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
 | Datadog Exporter        | Standard Metrics sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
 | Datadog Platform        | Standard Metrics sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Custom Metrics generated from the Datadog Events platform.
-| LLM Observability       | Custom Metrics emitted by the LLM Observability product via `lmobs_to_metrics` service.
+| LLM Observability       | Custom Metrics emitted by the LLM Observability product using the `lmobs_to_metrics` service.
 | Logs                    | Custom Metrics generated from the Datadog [Logs][28] platform.
-| Metrics API             | Custom Metrics sent via Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
+| Metrics API             | Custom Metrics sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | NPM                     | Standard Metrics sent by the Datadog [Network Performance Monitoring][19] product.
 | Observability Pipelines | Standard Metrics sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
 | Other                   | Custom Metrics that don’t have a DD integration counterpart.
