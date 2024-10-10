@@ -1,5 +1,5 @@
 ---
-title: Enrich Default Catalog
+title: Getting Started
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
