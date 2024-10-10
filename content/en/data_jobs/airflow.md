@@ -17,7 +17,7 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="<https://www.datadoghq.com/private-beta/monitoring-for-data-and-data-pipelines/>" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/monitoring-for-data-and-data-pipelines/" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
 Data Jobs Monitoring for Apache Airflow is in Preview. To request access, complete the form.
 {{< /callout >}}
 
@@ -27,7 +27,7 @@ Data Jobs Monitoring for Apache Airflow is in Preview. To request access, comple
 {{% tab "Kubernetes" %}}
 ## Requirements
 
-* [Apache Airflow 2.8.3][1] or later
+* [Apache Airflow 2.9.0][1] or later
 * [apache-airflow-providers-openlineage 1.11.0][2] or later
 
 ## Setup
@@ -61,7 +61,7 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
-[1]: https://github.com/apache/airflow/releases/tag/2.7.0
+[1]: https://github.com/apache/airflow/releases/tag/2.9.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
@@ -70,7 +70,7 @@ To get started, follow the instructions below.
 {{% tab "Amazon MWAA" %}}
 ## Requirements
 
-* [Apache Airflow 2.8.3][1] or later
+* [Apache Airflow 2.9.0][1] or later
 * [apache-airflow-providers-openlineage 1.11.0][2] or later
 
 ## Setup
@@ -108,7 +108,7 @@ To get started, follow the instructions below.
 4. Ensure your Execution role configured for your Amazon MWAA Environment has the right permissions to the `requirements.txt` and [Amazon MWAA start script][3]. This is required if you are managing your own Execution role and it's the first time you are adding those supporting files. See official guide [Amazon MWAA execution role][6] for details if needed.
 
 
-[1]: https://github.com/apache/airflow/releases/tag/2.7.0
+[1]: https://github.com/apache/airflow/releases/tag/2.9.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
