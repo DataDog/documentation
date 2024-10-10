@@ -39,7 +39,7 @@ Elige el tipo de consulta de la que quieres ver un ejemplo:
 {{< tabs >}}
 {{% tab "Recuento" %}}
 
-Para monitorizar cuántos usuarios están activos en un momento dado, tu [comando de recuento Mongo][1] sería:
+Para monitorizar cuántos usuarios están activos en un momento dado, tu [comando de recuento de Mongo][1] sería:
 
 ```text
 db.runCommand( {count: user_collection, query: {active:true}})
@@ -65,7 +65,7 @@ Esto emitiría una métrica `gauge` `mongo.users` con una etiqueta: `user:active
 {{% /tab %}}
 {{% tab "Buscar" %}}
 
-Para monitorizar la edad por usuario, tu [comando de búsqueda Mongo][1] sería:
+Para monitorizar la edad por usuario, tu [comando de búsqueda de Mongo][1] sería:
 
 ```text
 db.runCommand( {find: user_collection, filter: {active:true} )
