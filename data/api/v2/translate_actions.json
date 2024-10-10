@@ -958,7 +958,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name.",
+    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
