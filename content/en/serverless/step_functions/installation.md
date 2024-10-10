@@ -157,33 +157,33 @@ The `JsonMerge` [intrinsic function][1] merges the [Step Functions context objec
 
 {{< highlight json "hl_lines=4-7" >}}
 "Lambda Read From DynamoDB": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::lambda:invoke",
-      "Parameters": {
-        "Payload.$": "States.JsonMerge($$, $, false)",
-        "FunctionName": "${lambdaArn}"
-      },
-      "End": true
-    }
+  "Type": "Task",
+  "Resource": "arn:aws:states:::lambda:invoke",
+  "Parameters": {
+    "Payload.$": "States.JsonMerge($$, $, false)",
+    "FunctionName": "${lambdaArn}"
+  },
+  "End": true
+}
 {{< /highlight >}}
 
 Alternatively, if you have business logic defined in the payload, you could also use the following:
 
 {{< highlight json "hl_lines=8-10" >}}
 "Lambda Read From DynamoDB": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::lambda:invoke",
-      "Parameters": {
-        "Payload": {
-          ...
-          "Execution.$": "$$.Execution",
-          "State.$": "$$.State",
-          "StateMachine.$": "$$.StateMachine"
-        },
-        "FunctionName": "${lambdaArn}"
-      },
-      "End": true
-    }
+  "Type": "Task",
+  "Resource": "arn:aws:states:::lambda:invoke",
+  "Parameters": {
+    "Payload": {
+      ...
+      "Execution.$": "$$.Execution",
+      "State.$": "$$.State",
+      "StateMachine.$": "$$.StateMachine"
+    },
+    "FunctionName": "${lambdaArn}"
+  },
+  "End": true
+}
 {{< /highlight >}}
 
 If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][3].
