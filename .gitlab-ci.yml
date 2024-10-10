@@ -157,7 +157,7 @@ test_resource_groups-1:
     - sleep 180  # Sleep for 180 seconds (3 minutes) 
     - echo "Sleep completed"
   rules:
-    - if: '$CI_COMMIT_BRANCH == "devin.ford/test-resource-groups"'
+    - if: '$CI_COMMIT_BRANCH =~ /devin\.ford\/test-resource-groups/'
       when: always
   resource_group: build_live_group
   variables:
@@ -173,7 +173,7 @@ test_resource_groups-2:
     - sleep 180  # Sleep for 180 seconds (3 minutes)
     - echo "Sleep completed"
   rules:
-    - if: '$CI_COMMIT_BRANCH == "devin.ford/test-resource-groups"'
+    - if: '$CI_COMMIT_BRANCH =~ /devin\.ford\/test-resource-groups/'
       when: always
   resource_group: build_live_group
   variables:
