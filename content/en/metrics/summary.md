@@ -202,13 +202,13 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Metrics API             | Custom Metrics sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | NPM                     | Standard Metrics sent by the Datadog [Network Performance Monitoring][19] product.
 | Observability Pipelines | Standard Metrics sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
-| Other                   | Custom Metrics that don’t have a DD integration counterpart.
+| Other                   | Custom Metrics that don't have a DD integration counterpart.
 | Processes               | Custom Metrics generated from the Datadog [Processes][22] product.
 | RUM                     | Standard Metrics generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Standard Metrics collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless               | Custom Metrics sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
 | Service Catalog         | Standard Metrics sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
-| Synthetics              | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetics][26] product. 
+| Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
 | USM                     | Custom Metrics generated from the Datadog [Universal Service Monitoring][27] product. 
 
 ## Further reading
