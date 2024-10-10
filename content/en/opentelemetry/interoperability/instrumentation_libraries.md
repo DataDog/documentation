@@ -298,9 +298,7 @@ DD_TRACE_DISABLED_INSTRUMENTATIONS=http,dns,express,net
 
 ## Compatibility requirements
 
-The Datadog PHP SDK supports library [instrumentation][25] using the `stable` OpenTelemetry PHP Trace API.
-
-OpenTelemetry provides an [example][26] for instrumenting a sample application.
+The Datadog PHP SDK supports library [instrumentation][25] using the `stable` OpenTelemetry PHP Trace API. OpenTelemetry provides an [example][26] for instrumenting a sample PHP application.
 
 ## Setup
 
@@ -309,7 +307,7 @@ To use OpenTelemetry integrations with the Datadog PHP SDK:
 1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
 
-You can also find [the sample Slim4OtelDropIn PHP application with OpenTelemetry and Datadog auto instrumentations][28] in the `DataDog/trace-examples` GitHub repository.
+You can find a sample  [PHP application][28] with OpenTelemetry and Datadog auto instrumentations in the `DataDog/trace-examples` GitHub repository.
 
 ## Configuration
 
