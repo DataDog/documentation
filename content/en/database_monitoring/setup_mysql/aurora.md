@@ -49,7 +49,7 @@ Configure the following in the [DB cluster parameter group][3] and then **restar
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Required. Enables the collection of wait events. |
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters are not collected. |
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Must match <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
