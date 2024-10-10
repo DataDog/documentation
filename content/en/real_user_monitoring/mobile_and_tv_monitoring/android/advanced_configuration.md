@@ -1,8 +1,5 @@
 ---
 title: RUM Android Advanced Configuration
-code_lang: android
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
     - /real_user_monitoring/android/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
@@ -52,35 +49,6 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{% /tab %}}
 {{< /tabs >}}
 
-### Notify the SDK that your view finished loading
-
-iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override=)` method
-through the `GlobalRumMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-   ```kotlin
-       @OptIn(ExperimentalRumApi::class)
-       fun onViewLoaded() {
-            GlobalRumMonitor.get().addViewLoadingTime(override = false)
-       }
-   ```
-{{% /tab %}}
-{{% tab "Java" %}}
-   ```java
-       @OptIn(markerClass = ExperimentalRumApi.class)
-       public void onViewLoaded() {
-            GlobalRumMonitor.get().addViewLoadingTime(override);
-       }
-   ```
-{{% /tab %}}
-{{< /tabs >}}
-
-Use the `override` option to replace the previously calculated loading time for the current view.
-
-After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
-Please note that this API is still experimental and might change in the future.
-
 ### Add your own performance timing
 
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
@@ -102,7 +70,6 @@ In addition to RUM's default attributes, you can measure where your application 
 {{< /tabs >}}
 
 Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][10] before graphing it in RUM analytics or in dashboards. 
-
 
 ### Custom Actions
 
@@ -652,12 +619,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/android
 [3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
 [9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
 [10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[11]: /real_user_monitoring/android/#sending-data-when-device-is-offline
+[11]: /real_user_monitoring/android/setup/#sending-data-when-device-is-offline
 [12]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279

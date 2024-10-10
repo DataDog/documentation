@@ -6472,51 +6472,81 @@ menu:
       parent: rum
       identifier: mobile_and_tv_monitoring
       weight: 2
-    - name: Setup
-      url: real_user_monitoring/mobile_and_tv_monitoring/setup
+    - name: Android and Android TV
+      url: real_user_monitoring/mobile_and_tv_monitoring/android
       parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_setup
+      identifier: rum_mobile_android
       weight: 201
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/setup
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_setup
+      weight: 101
     - name: Crash Reporting
-      url: real_user_monitoring/error_tracking/mobile
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_error_tracking
-      weight: 202
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/error_tracking
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_crash
+      weight: 102
     - name: Advanced Configuration
-      url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_advanced
-      weight: 203
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_advanced_config
+      weight: 103
     - name: Data Collected
-      url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_data_collected
-      weight: 204
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/data_collected
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_data_collected
+      weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_vitals
-      weight: 205
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/mobile_vitals
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_mobile_vitals
+      weight: 105
     - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_web_view_tracking
-      weight: 206
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_web_view_tracking
+      weight: 106
     - name: Integrated Libraries
-      url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_integrated_libraries
-      weight: 207
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_integrated_libraries
+      weight: 107
     - name: Troubleshooting
-      url: real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_troubleshooting
+      weight: 108
+    - name: iOS and tvOS
+      url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_troubleshooting
-      weight: 208
-    - name: Supported Versions
-      url: real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
+      identifier: rum_mobile_ios
+      weight: 202
+    - name: Flutter
+      url: real_user_monitoring/mobile_and_tv_monitoring/flutter
       parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_supported_versions
-      weight: 209
+      identifier: rum_mobile_flutter
+      weight: 203
+    - name: Kotlin Multiplatform
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_kotlin
+      weight: 204
+    - name: React Native
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_react_native
+      weight: 205
+    - name: Roku
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_roku
+      weight: 206
+    - name: Unity
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_unity
+      weight: 207
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
