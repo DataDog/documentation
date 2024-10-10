@@ -19,9 +19,9 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 This document provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics, and so on) to multiple Datadog organizations.
 
-**Note**: If you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers, see [Observability Pipelines][2].
+**Note**: Use [Observability Pipelines][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
 
-For a full list of network traffic destinations, see [Network Traffic][1].
+For a full list of network traffic destinations, see [Network Traffic][2].
 
 ## Metrics and service checks
 
@@ -527,5 +527,5 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/network/
-[2]: /observability_pipelines/
+[1]: /observability_pipelines/
+[2]: /agent/configuration/network/
