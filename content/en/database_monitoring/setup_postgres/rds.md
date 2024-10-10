@@ -17,7 +17,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
-<div class="alert alert-info">Interested in a more streamlined setup where Datadog automatically deploys the Agent to monitor your RDS? Click <a href="https://forms.gle/1dyK11ubXdmKuriH7">here</a> to share your interest.</div>
+<div class="alert alert-info">Interested in a more streamlined setup where Datadog automatically deploys the Agent to monitor your RDS? <a href="https://forms.gle/1dyK11ubXdmKuriH7">Fill out this form</a> to share your interest.</div>
 <p></p>
 
 ## Before you begin
