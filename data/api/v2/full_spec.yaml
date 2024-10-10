@@ -35227,7 +35227,8 @@ paths:
         type: safe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
-      description: View indexed tag key-value pairs for a given metric name.
+      description: View indexed tag key-value pairs for a given metric name over the
+        previous hour.
       operationId: ListTagsByMetricName
       parameters:
       - $ref: '#/components/parameters/MetricName'
