@@ -41,16 +41,6 @@ Data security considerations
 Configure the following [Database Flags][3] and then **restart the server** for the settings to take effect:
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| Parameter | Value | Description |
-| --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][9]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -59,7 +49,16 @@ Configure the following [Database Flags][3] and then **restart the server** for 
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][9]. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -70,18 +69,6 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
@@ -90,6 +77,18 @@ Create the `datadog` user and grant basic permissions:
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -372,7 +371,7 @@ The Cluster Agent automatically registers this configuration and begins running 
 
 ### Validate
 
-[Run the Agent's status subcommand][5] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
+[Run the Agent's status subcommand][5] and look for `mysql` under the Checks section, or visit the [Databases][6] page to get started!
 
 ## Example Agent Configurations
 {{% dbm-mysql-agent-config-examples %}}
