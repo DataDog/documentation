@@ -191,7 +191,7 @@ If you're using [Databricks Private Networking][12], there are three key require
 2. Verify that the Datadog crawler has sufficient permission to access the Databricks workspace.
 3. Confirm that traces and metrics can be sent.
 
-Whitelisting these specific [IP addresses][13] allows your cluster to performs all these interactions with our services. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
+Allow-listing these specific [IP addresses][13] allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
 
 
 ## Further Reading
