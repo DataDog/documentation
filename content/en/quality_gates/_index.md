@@ -1,7 +1,7 @@
 ---
 title: Quality Gates
 description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
@@ -19,6 +19,10 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Audit Trail"
 ---
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Quality Gates is in Preview.
+{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
