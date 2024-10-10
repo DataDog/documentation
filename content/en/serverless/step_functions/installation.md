@@ -155,7 +155,7 @@ The `JsonMerge` [intrinsic function][1] merges the [Step Functions context objec
 
 **Example**:
 
-{{< highlight json "hl_lines=4-7" >}}
+{{< highlight json "hl_lines=5-5" >}}
 "Lambda Read From DynamoDB": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
@@ -169,7 +169,7 @@ The `JsonMerge` [intrinsic function][1] merges the [Step Functions context objec
 
 Alternatively, if you have business logic defined in the payload, you could also use the following:
 
-{{< highlight json "hl_lines=8-10" >}}
+{{< highlight json "hl_lines=7-9" >}}
 "Lambda Read From DynamoDB": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
