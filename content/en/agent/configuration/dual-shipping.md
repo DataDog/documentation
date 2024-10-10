@@ -218,7 +218,7 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadog
 
 ## Logs
 
-Use the Agent for dual shipping if you want to send logs to multiple Datadog organizations. Use [Observability Pipelines][2] if you want to send logs to Datadog and external destinations.
+Use the Agent if you want to dual ship logs to multiple Datadog organizations. Use [Observability Pipelines][2] if you want to send logs to Datadog and external destinations.
 
 TCP requires Agent version >= 6.6.<br/>
 HTTPS requires Agent version >= 6.13.
