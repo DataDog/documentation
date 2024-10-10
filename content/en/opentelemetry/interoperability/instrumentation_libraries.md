@@ -47,9 +47,7 @@ Datadog SDKs also support configuring [OpenTelemetry environment variables][16].
 ## Compatibility requirements
 
 1. The Datadog Java SDK supports library instrumentations using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
-
 2. Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own JAR.
-
 3. OpenTelemetry provides an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
 
 4. The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
@@ -67,11 +65,13 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 2. Copy the OpenTelemetry extension JAR containing the instrumentation to the same container as the application.
 3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the extension JAR path.
 
-The following is an example of adding OpenTelemetry's R2DBC instrumentation to the Datadog Java SDK, it requires Java 17 and Maven 3:
+Here’s a step-by-step example using R2DBC in Java to illustrate how you can drop OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans. R2DBC is the reactive version of JDBC, commonly used for reactive database interactions in Java applications. Datadog’s Java agent does not provide out-of-the-box instrumentation for R2DBC queries. 
+
+Download the OpenTelemetry R2DBC agent and run your Spring Boot application with both the Datadog Java agent and the OpenTelemetry R2DBC agent.
+
 
 ```sh
 git clone https://github.com/eugenp/tutorials
-
 cd tutorials/spring-reactive-modules/spring-reactive-data
 
 curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -82,10 +82,11 @@ curl -Lo opentelemetry-javaagent-r2dbc.jar \
 mvn spring-boot:run -Dstart-class=com.baeldung.pagination.PaginationApplication \
   -Dspring-boot.run.jvmArguments='-javaagent:dd-java-agent.jar -Ddd.trace.otel.enabled=true -Dotel.javaagent.extensions=opentelemetry-javaagent-r2dbc.jar -Ddd.trace.split-by-tags=db.name,db.sql.table -Ddd.trace.debug=true'
 ```
+Open `http://127.0.0.1:8080/products` to exercise the product query. With this setup, you’re now using OpenTelemetry’s instrumentation to ensure full observability for R2DBC queries.
 
-open `http://127.0.0.1:8080/products` to exercise the product query.
-
-The `-Ddd.trace.split-by-tags=db.name,db.sql.table` setting gives R2DBC spans a service name based on the table. If you don't want R2DBC spans to appear under a separate service then that setting can be dropped.
+<div class="alert alert-warning">
+Additionally, note that the `-Ddd.trace.split-by-tags=db.name,db.sql.table` setting gives R2DBC spans a service name based on the table. If you don't want R2DBC spans to appear under a separate service then that setting can be dropped.
+</div>
 
 <div class="alert alert-warning">
 Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not supported by the Datadog Java SDK.
@@ -115,15 +116,14 @@ Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not s
 ## Compatibility requirements
 
 1. The Datadog Python SDK supports library [instrumentations][13] using the OpenTelemetry Python Trace API.
-
 2. OpenTelemetry provides an [example][14] for instrumenting a sample application.
 
 ## Setup
 
 To use OpenTelemetry instrumentations with the Datadog Python SDK, perform the following steps:
 
- 1. Follow the instructions in the [OpenTelemetry API][15] section in the Datadog Python library docs.
- 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-python-contrib` library.
+1. Follow the instructions in the [OpenTelemetry API][15] section in the Datadog Python library docs.
+2. Follow the steps for instrumenting your service with your chosen `opentelemetry-python-contrib` library.
 
 The following is an example instrumenting the OpenTelemetry's kafka-python library with the Datadog Python SDK:
 
@@ -182,8 +182,8 @@ The Datadog SDK for Go supports library instrumentations written using the [Open
 
 To use OpenTelemetry integrations with the Datadog Go SDK, perform the following steps:
 
- 1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][23] page.
- 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
+1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][23] page.
+2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
 
 The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
 
@@ -237,8 +237,8 @@ The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTe
 
 To use OpenTelemetry instrumentations with the Datadog Node.js SDK, perform the following steps:
 
- 1. Follow the Setup instructions in [Node.js Custom Instrumentation using OpenTelemetry API][18].
- 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
+1. Follow the Setup instructions in [Node.js Custom Instrumentation using OpenTelemetry API][18].
+2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
 
 The following example demonstrates how to instrument the `http` and `express` OpenTelemetry integrations with the Datadog Node.js SDK:
 
@@ -306,8 +306,8 @@ OpenTelemetry provides an [example][26] for instrumenting a sample application.
 
 To use OpenTelemetry integrations with the Datadog PHP SDK:
 
-  1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
-  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
+1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
+2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
 
 You can also find [the sample Slim4OtelDropIn PHP application with OpenTelemetry and Datadog auto instrumentations][28] in the `DataDog/trace-examples` GitHub repository.
 
@@ -415,8 +415,8 @@ OpenTelemetry provides an [example][19] for instrumenting a sample application.
 
 To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the following steps:
 
-  1. Follow the instructions in [configuring OpenTelemetry][20] in the Datadog Ruby SDK documentation.
-  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-ruby-contrib` library.
+1. Follow the instructions in [configuring OpenTelemetry][20] in the Datadog Ruby SDK documentation.
+2. Follow the steps for instrumenting your service with your chosen `opentelemetry-ruby-contrib` library.
 
 [18]: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation#opentelemetry-instrumentation-libraries
 [19]: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation/faraday/example
