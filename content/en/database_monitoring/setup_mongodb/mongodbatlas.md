@@ -12,8 +12,6 @@ further_reading:
 
 Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB Atlas instances. This guide outlines the steps to set up Database Monitoring for MongoDB Atlas.
 
-{{% dbm-mongodb-beta-new-features %}}
-
 ## Before you begin
 
 Supported MongoDB major versions
@@ -167,22 +165,6 @@ For the config server, they are:
 - `XXXXX-00-02-config.4zh9o.mongodb.net:27017`
 
 You can use one of these hostnames to configure the Agent.
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Install the beta version of the Datadog Agent
-
-Database Monitoring for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment. A [Datadog API key][2] is required.
-
-{{< tabs >}}
-{{% tab "Linux Host" %}}
-{{% dbm-mongodb-agent-beta-install-linux %}}
-{{% /tab %}}
-{{% tab "Docker" %}}
-{{% dbm-mongodb-agent-beta-install-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-{{% dbm-mongodb-agent-beta-install-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 
