@@ -43,7 +43,7 @@ To query for all traces containing threat intelligence from any source, use the 
 ## Bring your own threat intelligence
 
 {{< callout url="https://forms.gle/JV8VLH1ZTzmUnK5F7" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Bring your own threat intelligence (BYOTI) is in private beta.
+  Bring your own threat intelligence (BYOTI) is in Preview.
 {{< /callout >}} 
 
 ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.

@@ -32,7 +32,7 @@ The minimum tracer version to get all supported application security capabilitie
 | Kubernetes  | {{< X >}}                | {{< X >}}                     |
 | Amazon ECS  | {{< X >}}                | {{< X >}}                     |
 | AWS Fargate | {{< X >}}                | {{< X >}}                     |
-| AWS Lambda  | {{< X >}}                | beta                          |
+| AWS Lambda  | {{< X >}}                | {{< X >}}                     |
 
 ## Language and framework compatibility
 
