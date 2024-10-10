@@ -792,6 +792,18 @@ menu:
           - SearchEvents
         unstable: []
         order: 2
+    - name: Post a change event
+      url: '#post-a-change-event'
+      identifier: events-post-a-change-event
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEvent
+        unstable: []
+        order: 2
     - name: Get an event
       url: '#get-an-event'
       identifier: events-get-an-event

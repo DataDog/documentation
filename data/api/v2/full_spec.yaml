@@ -4030,6 +4030,226 @@ components:
           format: int64
           type: integer
       type: object
+    ChangeEvent:
+      description: Object representing a change event.
+      properties:
+        aggregation_key:
+          description: 'An arbitrary string to use for aggregation. Limited to 100
+            characters.
+
+            If you specify a key, all events using that key are grouped together in
+            the Event Stream.'
+          maxLength: 100
+          type: string
+        attributes:
+          $ref: '#/components/schemas/ChangeEventCustomAttributes'
+        category:
+          $ref: '#/components/schemas/ChangeEventCategory'
+        message:
+          description: The body of the event. Limited to 4000 characters.
+          example: payment_processed feature flag has been enabled
+          maxLength: 4000
+          type: string
+        tags:
+          description: 'A list of tags to apply to the event.
+
+            Refer to [Tags docs](https://docs.datadoghq.com/getting_started/tagging/).'
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: 'Timestamp in which the event occurred. Must follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
+            format.
+
+            For example `"2017-01-15T01:30:15.010000Z"`.
+
+            Defaults to now. Limited to values no older than 18 hours.'
+          type: string
+        title:
+          description: The event title. Limited to 500 characters.
+          example: payment_processed feature flag updated
+          maxLength: 500
+          type: string
+      required:
+      - title
+      - category
+      - attributes
+      type: object
+    ChangeEventCategory:
+      description: Event category to identify the type of event. Only the value `change`
+        is supported.
+      enum:
+      - change
+      example: change
+      type: string
+      x-enum-varnames:
+      - CHANGE
+    ChangeEventCreateRequest:
+      description: Object representing an event.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ChangeEvent'
+        type:
+          $ref: '#/components/schemas/ChangeEventCreateRequestType'
+      type: object
+    ChangeEventCreateRequestType:
+      description: Entity type.
+      enum:
+      - event
+      type: string
+      x-enum-varnames:
+      - EVENT
+    ChangeEventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ChangeEventCreateResponseAttributes'
+        type:
+          description: Event type
+          type: string
+      type: object
+    ChangeEventCreateResponseAttributes:
+      description: The definition of `ChangeEventCreateResponseAttributes` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ChangeEventCreateResponseAttributesAttributes'
+      type: object
+    ChangeEventCreateResponseAttributesAttributes:
+      description: The definition of `ChangeEventCreateResponseAttributesAttributes`
+        object.
+      properties:
+        evt:
+          $ref: '#/components/schemas/ChangeEventCreateResponseAttributesAttributesEvt'
+      type: object
+    ChangeEventCreateResponseAttributesAttributesEvt:
+      description: The definition of `ChangeEventCreateResponseAttributesAttributesEvt`
+        object.
+      properties:
+        id:
+          description: Event id
+          type: string
+      type: object
+    ChangeEventCustomAttributes:
+      description: Object representing custom event attributes.
+      properties:
+        author:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesAuthor'
+        change_metadata:
+          additionalProperties: {}
+          description: Free form object with any related information of the `change`
+            event.
+          example:
+            resource_link: /feature/fallback_payments_test
+            user:
+              email: dd_user_email
+              name: dd_user
+          type: object
+        changed_resource:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResource'
+        impacted_resources:
+          description: 'A list of resources impacted by this change. At least one
+            resource is required. Only resources
+
+            of type `service` are supported.'
+          example:
+          - name: payments_api
+            type: service
+          items:
+            $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItems'
+          type: array
+        new_value:
+          additionalProperties: {}
+          description: Free form object to track new value of the changed resource.
+          example:
+            enabled: true
+            percentage: 50%
+            rule:
+              datacenter: us1.prod
+          type: object
+        prev_value:
+          additionalProperties: {}
+          description: Free form object to track previous value of the changed resource.
+          example:
+            enabled: true
+            percentage: 10%
+            rule:
+              datacenter: us1.prod
+          type: object
+      required:
+      - changed_resource
+      type: object
+    ChangeEventCustomAttributesAuthor:
+      description: Object representing the entity which made the change. Optional
+        field but if provided should include `type` and `name`.
+      properties:
+        name:
+          description: Author's name. Limited to 128 characters.
+          example: user
+          maxLength: 128
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesAuthorType'
+      required:
+      - name
+      - type
+      type: object
+    ChangeEventCustomAttributesAuthorType:
+      description: Author's type.
+      enum:
+      - user
+      - system
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - SYSTEM
+    ChangeEventCustomAttributesChangedResource:
+      description: Object representing a uniquely identified resource. Only the resource
+        type `feature_flag` is supported.
+      properties:
+        name:
+          description: Resource's name.
+          example: fallback_payments_test
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResourceType'
+      required:
+      - type
+      - name
+      type: object
+    ChangeEventCustomAttributesChangedResourceType:
+      description: Resource's type.
+      enum:
+      - feature_flag
+      example: feature_flag
+      type: string
+      x-enum-varnames:
+      - FEATURE_FLAG
+    ChangeEventCustomAttributesImpactedResourcesItems:
+      description: Object representing a uniquely identified resource. Only the resource
+        type `service` is supported.
+      properties:
+        name:
+          description: Resource's name.
+          example: payments_api
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItemsType'
+      required:
+      - type
+      - name
+      type: object
+    ChangeEventCustomAttributesImpactedResourcesItemsType:
+      description: Resource's type.
+      enum:
+      - service
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
     ChargebackBreakdown:
       description: Charges breakdown.
       properties:
@@ -30577,8 +30797,50 @@ paths:
         - events_read
       x-undo:
         type: safe
+    post:
+      description: This endpoint allows you to post events. Only events with `change`
+        category are supported.
+      operationId: CreateEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeEventCreateRequest'
+        description: Event request object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeEventCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Post a change event
+      tags:
+      - Events
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: unsafe
     x-merge-override:
       get: false
+      post: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
