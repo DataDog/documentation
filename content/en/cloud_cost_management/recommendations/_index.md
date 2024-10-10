@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Recommendations
-private: true
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
 algolia:
   tags: ['cloud cost recommendations', 'cloud cost recommendation', 'cost recommendations', 'cost recommendation', 'cloud resources', 'cloud resource']

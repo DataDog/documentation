@@ -17,7 +17,7 @@ Database Monitoring offers comprehensive insights into your MongoDB databases by
 ## Before you begin
 
 Supported MongoDB major versions
-: 4.4, 5.0, 6.0, 7.0
+: 4.4, 5.0, 6.0, 7.0, 8.0
 
 {{% dbm-mongodb-before-you-begin %}}
 

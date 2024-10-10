@@ -70,15 +70,12 @@ This guide describes using the [Datadog Clipboard][2] to declare an incident. Us
 | Title                    | Follow any naming conventions your team wants to use for incident titles. Because this is not a real incident, include the word `TEST` to make it clear that this is a test incident. An example title: `[TEST] My incident test`                                                                      |
 | Severity Level           | Set to **Unknown** since it's unclear whether customers are being impacted and how related services are being impacted. See the in-app description of what each severity level means and follow your team's guidelines.                                                                                |
 | Incident Commander       | Leave this assigned to you. In an actual incident this would be assigned to the leader of the incident investigation. You or others can update who the incident commander is as the incident investigation progresses.                                                                                 |
-| Notifications            | Leave blank because this is only a test, and you don't want to alert anyone else or another service. For an actual incident, add people and services that should be notified to help with the investigation and remediation. You can send these notifications to Slack and PagerDuty as well. |  
 9. Click **Declare Incident** to create the incident.
    You can also declare an incident from a [graph][4], [monitor][5], or the [incidents API][6]. For APM users, you can click the incidents icon on any APM graph to declare an incident.
 As part of the Slack integration, you can also use the `/datadog incident` shortcut to declare an incident and set the title, severity, and customer impact.
 10. Click **Slack Channel** on the incident's page to go to the incident's Slack channel.
    
 A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
-
-In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
 
 If you don't have the Slack integration enabled, click **Add Chat** to add the link to the chat service you are using to discuss the incident.
 

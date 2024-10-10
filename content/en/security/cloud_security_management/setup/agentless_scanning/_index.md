@@ -40,6 +40,8 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
 
 ## Setup
 
+<div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Agentless Scanning with Terraform</a> as the default template.</div>
+
 To enable Agentless Scanning, use one of the following workflows:
 
 ### Quick start
