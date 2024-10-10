@@ -146,7 +146,7 @@ Puedes utilizar estas métricas para aprovechar las ventajas de los dashboards y
 
 - Identificar rápidamente los problemas de memoria, de CPU y de red en tus aplicaciones Mule
 - Encontrar cuellos de botella en tus aplicaciones Mule para optimizar el rendimiento
-- Instrumentar sus aplicaciones Mule con nuestro Datadog Connector for Mule 4 para solucionar problemas
+- Instrumentar sus aplicaciones Mule con nuestro Datadog Connector para Mule 4 para solucionar problemas
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_dev_optimization.png" alt="Desarrollo: Dashboard de optimizaciones" >}}
 
