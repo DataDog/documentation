@@ -57,7 +57,7 @@ Además de mostrar estas métricas en tu Página de servicios de APM, Datadog pr
 
 [1]: https://app.datadoghq.com/services
 [2]: /es/developers/dogstatsd/#setup
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
 [4]: /es/agent/docker/#dogstatsd-custom-metrics
 [5]: /es/developers/dogstatsd/?tab=kubernetes#agent
 [6]: /es/agent/amazon_ecs/#create-an-ecs-task

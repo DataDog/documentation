@@ -94,15 +94,15 @@ DD_VERSION=(application version)
 
 앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+go get github.com/DataDog/dd-trace-go/v2@v1.44.0
 ```
 
 코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -129,8 +129,8 @@ import (
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
@@ -153,7 +153,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
 {{% /tab %}}
 
@@ -427,7 +427,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 [1]: /ko/database_monitoring/#getting-started
 [2]: /ko/tracing/
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb

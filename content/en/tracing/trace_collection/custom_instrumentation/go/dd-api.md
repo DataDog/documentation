@@ -40,7 +40,7 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +70,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +89,7 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTa
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 func main() {
     tracer.Start(
@@ -157,7 +157,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -183,7 +183,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -218,9 +218,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
 [3]: /tracing/setup/go/#compatibility
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
+[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
 [11]: /tracing/trace_collection/trace_context_propagation/

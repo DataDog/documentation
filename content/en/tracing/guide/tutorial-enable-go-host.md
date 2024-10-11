@@ -96,17 +96,17 @@ make exitNotes
 Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
 {{< code-block lang="shell" >}}
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+go get github.com/DataDog/dd-trace-go/v2/ddtrace
 {{< /code-block >}}
 
 Now that the tracing library has been added to `go.mod`, enable tracing support.
 
 Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
   "fmt"
 {{< /code-block >}}
 
@@ -216,9 +216,9 @@ Datadog has several fully supported libraries for Go that allow for automatic tr
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -263,7 +263,7 @@ Remove the comments around the following lines:
 Also remove the comment around the following import:
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 There are several examples of custom tracing in the sample application. Here are a couple more examples. Remove the comments to enable these spans:
@@ -301,8 +301,8 @@ func privateMethod1(ctx context.Context) {
 Uncomment the following imports:
 
 {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "github.com/DataDog/dd-trace-go/ddtrace/ext"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 Launch the application with `make runNotes` and try the `curl` commands again to observe the custom spans and traces you've just configured:
@@ -332,8 +332,8 @@ The sample project includes a second application called `calendar` that returns 
 To enable tracing in the calendar application, uncomment the following lines in `cmd/calendar/main.go`:
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}

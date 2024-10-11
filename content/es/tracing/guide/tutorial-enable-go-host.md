@@ -96,17 +96,17 @@ make exitNotes
 A continuación, instala el rastreador de Go. Desde tu directorio `apm-tutorial-golang`, ejecuta:
 
 {{< code-block lang="shell" >}}
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+go get github.com/DataDog/dd-trace-go/v2/ddtrace
 {{< /code-block >}}
 
 Ahora que se ha añadido la biblioteca de rastreo a `go.mod`, activa el soporte de rastreo.
 
 Elimina los comentarios de las siguientes importaciones en `apm-tutorial-golang/cmd/notes/main.go`:
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
   "fmt"
 {{< /code-block >}}
 
@@ -216,9 +216,9 @@ Datadog dispone de varias bibliotecas completamente compatibles para Go que perm
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -263,7 +263,7 @@ Elimina los comentarios de las siguientes líneas:
 Elimina también el comentario de la siguiente importación:
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 Hay varios ejemplos de rastreo personalizado en la aplicación de ejemplo. Aquí hay un par de ejemplos más. Elimina los comentarios para habilitar estos tramos:
@@ -301,8 +301,8 @@ func privateMethod1(ctx context.Context) {
 Elimina los comentarios de las siguientes importaciones:
 
 {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "github.com/DataDog/dd-trace-go/ddtrace/ext"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 Inicia la aplicación con `make runNotes` y prueba de nuevo los comandos `curl` para observar los tramos y trazas personalizados que acabas de configurar:
@@ -332,8 +332,8 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que de
 Para activar el rastreo en la aplicación de calendario, elimina los comentarios de las siguientes líneas en `cmd/calendar/main.go`:
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}

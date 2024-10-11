@@ -21,7 +21,7 @@ Vous avez le choix entre deux types d'instrumentation :
 
 ```go
 import (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+  ddkafka "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2"
 )
 
 ...
@@ -47,7 +47,7 @@ Si un service consomme des données en un point et en produit en un autre point,
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2"
 )
 
 ...

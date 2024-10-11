@@ -94,15 +94,15 @@ DD_VERSION=(versión de la aplicación)
 
 Actualiza las dependencias de tu aplicación para incluir [dd-trace-go@v1.44.0][1] o posterior:
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+go get github.com/DataDog/dd-trace-go/v2@v1.44.0
 ```
 
 Actualiza tu código para importar el paquete `contrib/database/sql`:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -129,8 +129,8 @@ Ejemplo completo:
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
@@ -153,7 +153,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
 {{% /tab %}}
 
@@ -427,7 +427,7 @@ Visualiza el rendimiento histórico de consultas similares a las que se ejecutan
 
 [1]: /es/database_monitoring/#getting-started
 [2]: /es/tracing/
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb

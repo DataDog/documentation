@@ -25,8 +25,8 @@ package main
 import (
     "github.com/opentracing/opentracing-go"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/ddtrace/opentracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -45,5 +45,5 @@ func main() {
 ```
 
 [1]: https://github.com/opentracing/opentracing-go
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/opentracer
 [3]: http://opentracing.io

@@ -93,15 +93,15 @@ DD_VERSION=(application version)
 
 アプリの依存関係を更新して、[dd-trace-go@v1.44.0][1] 以上を含むようにします。
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+go get github.com/DataDog/dd-trace-go/v2@v1.44.0
 ```
 
 コードを更新して `contrib/database/sql` パッケージをインポートします。
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -128,8 +128,8 @@ import (
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
@@ -152,7 +152,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
 {{% /tab %}}
 
@@ -426,7 +426,7 @@ Database Monitoring で Query Sample を表示するとき、関連付けられ�
 
 [1]: /ja/database_monitoring/#getting-started
 [2]: /ja/tracing/
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb

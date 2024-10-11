@@ -95,17 +95,17 @@ make exitNotes
 次に、Go トレーサーをインストールします。`apm-tutorial-golang` ディレクトリから、以下を実行します。
 
 {{< code-block lang="shell" >}}
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+go get github.com/DataDog/dd-trace-go/v2/ddtrace
 {{< /code-block >}}
 
 トレーシングライブラリが `go.mod` に追加されたので、トレーシングのサポートを有効にします。
 
 `apm-tutorial-golang/cmd/notes/main.go` の以下のインポートのコメントを解除します。
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
   "fmt"
 {{< /code-block >}}
 
@@ -215,9 +215,9 @@ Datadog には Go 用に完全にサポートされたライブラリがいく�
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -262,7 +262,7 @@ r.Mount("/", nr.Register())
 また、以下のインポート周りのコメントも削除してください。
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 サンプルアプリケーションには、カスタムトレースの例がいくつかあります。ここでは、さらにいくつかの例を紹介します。これらのスパンを有効にするには、コメントを削除してください。
@@ -300,8 +300,8 @@ func privateMethod1(ctx context.Context) {
 以下のインポートのコメントを解除します。
 
 {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "github.com/DataDog/dd-trace-go/ddtrace/ext"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 `make runNotes` でアプリケーションを起動し、再度 `curl` コマンドを実行して、先ほど構成したカスタムスパンやトレースを観測します。
@@ -331,8 +331,8 @@ func privateMethod1(ctx context.Context) {
 カレンダーアプリケーションでトレースを有効にするには、`cmd/calendar/main.go` の以下の行のコメントを解除します。
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
