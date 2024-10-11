@@ -50,6 +50,10 @@ Use the following instructions to enable Misconfigurations, Threat Detection, an
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
+    
+            # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+            # uncompressedLayersSupport: true
+    
           # Enables Host Vulnerability Management
           host:
             enabled: true
@@ -82,15 +86,18 @@ Use the following instructions to enable Misconfigurations, Threat Detection, an
       sbom:
         containerImage:
           enabled: true
-        # Enables Container Vulnerability Management
-        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-        containerImageCollection:
-          enabled: true
+
           # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
           # uncompressedLayersSupport: true
+
         # Enables Host Vulnerability Management
         host:
           enabled: true
+
+        # Enables Container Vulnerability Management
+        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+        # containerImageCollection:
+        #   enabled: true
     ```
 
 2. Restart the Agent.

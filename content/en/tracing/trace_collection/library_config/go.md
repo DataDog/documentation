@@ -75,7 +75,8 @@ Overrides the default trace Agent port for Datadog trace submission. If the [Age
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `nil`<br>
-Enable ingestion rate control.
+Enable ingestion rate control.<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.
 
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.

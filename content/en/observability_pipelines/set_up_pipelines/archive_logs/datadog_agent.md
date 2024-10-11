@@ -149,6 +149,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -212,6 +217,16 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Enrichment table" %}}
 
 {{% observability_pipelines/processors/enrichment_table %}}
+
+{{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -280,6 +295,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 1. Follow the instructions for your environment to install the Worker.
@@ -323,7 +343,20 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 
+Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
+
+{{< tabs >}}
+{{% tab "Agent configuration file" %}}
+
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
+
+{{% /tab %}}
+{{% tab "Agent Helm values file" %}}
+
+{{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup

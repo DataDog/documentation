@@ -14,6 +14,9 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Take a course to customize alert monitor notifications"
 ---
 
 Use variables in notification messages to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
@@ -258,17 +261,6 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
-#### Query group by host
-
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
-
-Some specific host metadata variables are available:
-
-- Agent Version: `{{host.metadata_agent_version}}`
-- Machine: `{{host.metadata_machine}}`
-- Platform: `{{host.metadata_platform}}`
-- Processor: `{{host.metadata_processor}}`
-
 #### Tag key with period
 
 If your tag's key has a period in it, include brackets around the full key when using a tag variable.
@@ -308,6 +300,55 @@ If your facet has periods, use brackets around the facet, for example:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Customize the notification based on the group
+
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group.
+
+##### Query group by host
+
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+
+Specific host metadata variables:
+
+- Agent Version: `{{host.metadata_agent_version}}`
+- Machine: `{{host.metadata_machine}}`
+- Platform: `{{host.metadata_platform}}`
+- Processor: `{{host.metadata_processor}}`
+
+##### Query group by kube_namespace and kube_cluster_name
+
+If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
+
+Namespace metadata variables:
+
+- Cluster name: `{{kube_namespace.cluster_name}}`
+- Namespace name: `{{kube_namespace.display_name}}`
+- Namespace status: `{{kube_namespace.status}}`
+- Namespace labels: `{{kube_namespace.labels}}`
+
+The following table contains all available attributes:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
+
+##### Query group by pod_name and kube_namespace and kube_cluster_name
+
+If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
+
+Pod metadata variables:
+- Cluster name: `{{pod_name.cluster_name}}`
+- Pod name: `{{pod_name.name}}`
+- Pod phase: `{{pod_name.phase}}`
+
+The following table contains all available attributes:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
+
+
 
 ### Matching attribute/tag variables
 
@@ -466,6 +507,17 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 ```text
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
+
+When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle. 
+
+To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
+
+```text
+{{#is_match "kube_namespace.owner" ""}}
+  @slack-example
+{{/is_match}}
+```
+
 
 ### Dynamic links
 

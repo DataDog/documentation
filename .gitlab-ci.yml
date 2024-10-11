@@ -4,6 +4,25 @@ stages:
   - post-deploy
   - cleanup
 
+# set pipeline type for merge queue 
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      variables:
+        PIPELINE_TYPE: 'schedule'
+    - if: '$CI_PIPELINE_SOURCE == "api"'
+      variables:
+        PIPELINE_TYPE: 'api'
+    - if: '$CI_COMMIT_BRANCH == $GIT_BASE_BRANCH'
+      variables:
+        PIPELINE_TYPE: 'main-branch'
+    - if: '$CI_COMMIT_BRANCH =~ /^mq-working-branch-/'
+      variables:
+        PIPELINE_TYPE: 'merge-queue'
+    - when: always
+      variables:
+        PIPELINE_TYPE: 'feature-branch'
+
 variables:
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
@@ -100,7 +119,7 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN || $CI_COMMIT_BRANCH =~ /^mq-working-branch-/
       when: on_success
 
 .preview_manual_rules: &preview_manual_rules
@@ -176,6 +195,7 @@ build_preview:
       - ./public/redirects.txt
       - $PREVIEW_ERROR_LOG
       - ./latest-cached.tar.gz
+      - typesense.config.json
   after_script:
     - |
       if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
@@ -253,6 +273,37 @@ algolia_sync_preview:manual:
     - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"'
       when: manual
 
+typesense_sync_preview:manual:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  allow_failure: true
+  interruptible: true
+  timeout: 2h
+  cache:
+    - *hugo_cache
+    - *yarn_cache
+    - *pip_cache
+  dependencies:
+    - build_preview
+  script:
+    # build the site to get algolia.json ondemand
+    - touch Makefile.config preview_error.log
+    - make dependencies
+    - make config
+    - yarn run prebuild
+    - build_site
+    # end build
+    - >
+      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_preview_admin_api_key')
+      TYPESENSE_HOST=$(get_secret 'typesense_preview_host')
+      yarn run typesense:sync
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: never
+    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"'
+      when: manual
+
 algolia_sync_live:
   <<: *base_template
   <<: *live_rules
@@ -270,6 +321,22 @@ algolia_sync_live:
       ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key')
       CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
       yarn run algolia:sync
+
+#typesense_sync_live:
+#  <<: *base_template
+#  <<: *live_rules
+#  stage: post-deploy
+#  environment: "live"
+#  allow_failure: true
+#  interruptible: true
+#  timeout: 2h
+#  dependencies:
+#    - build_live
+#  script:
+#    - >
+#      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
+#      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
+#      yarn run typesense:sync
 
 sourcemaps_preview:
   <<: *base_template
@@ -357,6 +424,7 @@ build_live:
       - content/en
       - .htmltest.yml
       - ./public/redirects.txt
+      - typesense.config.json
     expire_in: 1 week
 
 test_live_link_checks:

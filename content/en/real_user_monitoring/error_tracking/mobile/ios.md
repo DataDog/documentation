@@ -349,6 +349,10 @@ Mapping files are used to deobfuscate stack traces, which helps in debugging err
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
+### List uploaded .dSYMs
+
+See the [RUM Debug Symbols][20] page to view all uploaded symbols.
+
 ### Symbolicate crash reports
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .`dSYM` files, which are generated in your application's build or distribution process.
@@ -491,3 +495,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [17]: /real_user_monitoring/explorer/search/#facets
 [18]: /dashboards/widgets/timeseries
 [19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
+[20]: https://app.datadoghq.com/source-code/setup/rum
