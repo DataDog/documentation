@@ -25,7 +25,7 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 
 1. **Don't start from scratch**. There are over [150 public official examples][5]. If you're not sure what type of graph you want to use, fork an existing example to test the visualization. Use Vega-Lite over Vega for simplicity and ease of debugging.
 1. **Test the Wildcard widget**. The flexibility of the Wildcard widget comes with the risk of creating slow, unappealing, or inconsistent visualizations. Test the Wildcard widget on a scratchpad or empty dashboard before adding Wildcard widgets to production.
-1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query which ensures the configuration builds the expected graph. With the Wildcard widget you're adding a custom Vega-lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
+1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query which ensures the configuration builds the expected graph. With the Wildcard widget you're adding a custom Vega-Lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
 
  ## Setup
 
@@ -36,10 +36,10 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification. 
 1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**. 1. Paste the copied Vega-Lite definition.
 1. Click **Apply** to apply your configuration changes, see a preview of the visualization, and iterate on your design. **Note**: You must click **Apply** to add your changes, however this does not save your configuration.
-1. (Optional) Debug Vega-lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-lite specification maps to the Datadog query. 
+1. (Optional) Debug Vega-Lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-Lite specification maps to the Datadog query. 
 1. Click **Save**.
 
-## Import data from an existing widget
+### Import data from an existing widget
 
 1. Copy from an existing Datadog widget using `cmd+c`.
 1. Open the Wildcard widget [full screen editor][6].
@@ -59,15 +59,15 @@ The command palette provides quick access to Wildcard widget tools. Activate wit
 The Data Preview table shows the response, fields, and values from your data request that are available to use in your Vega-lite specification. To access, click the arrow at the bottom of the Wildcard widget editor to *Show data preview*. There are three types of tables in the preview:
 - Request Rows: Displays your actual data.
 - Request Columns: Displays column summary statistics and data types. 
-- Internal Tables: Displays transformed data stored by Vega-lite.
+- Internal Tables: Displays transformed data stored by Vega-Lite.
 
-Datadog widgets automatically map the query results to the visualization elements, but the Wildcard widget requires you to add a custom Vega-lite specification that defines how the Datadog query maps to visual elements. This creates the potential for a mismatch. With Data Preview, you can verify that the Vega-lite specification maps to the correct query response.
+Datadog widgets automatically map the query results to the visualization elements, but the Wildcard widget requires you to add a custom Vega-Lite specification that defines how the Datadog query maps to visual elements. This creates the potential for a mismatch. With Data Preview, you can verify that the Vega-Lite specification maps to the correct query response.
 
 To highlight this, use the example metric query of `system.cpu.user` averaged by `env`
 
 {{< img src="/dashboards/widgets/wildcard/example_configuration_query.png" alt="Example widget configuration metric query for system.cpu.user grouped by env" style="width:100%;" >}}
 
-Notice the matching **query1** and **env** fields listed in the Vega-lite specification and the Data Preview column. 
+Notice the matching **query1** and **env** fields listed in the Vega-Lite specification and the Data Preview column. 
 
 {{< highlight json "hl_lines=8 12" >}}
   {
@@ -111,8 +111,8 @@ The Wildcard Widget supports data requests from all data sources supported in na
 |-----------------------|-------------------------------------------------------------------------------------------------------------|
 | Scalar Requests | Change, Pie Chart, Query Value, Scatter Plot, Table, Treemap, Top List, Distribution (of groups), Geomap |
 | Timeseries Requests | Timeseries, Heatmap |
-| Distribution Requests | Distribution of Points |
-| List requests | All “event” oriented data in the List widget |       
+| Distribution Requests | Distribution (of points) |
+| List requests | All “event” oriented data in the List widget |  
 
 ## Additional information
 ### Choosing Between Vega and Vega-Lite
@@ -128,12 +128,6 @@ Avoid using Wildcard widgets for the following scenarios:
 - Visuals requiring physics-based layouts.
 - Advanced geographic mapping.
 - 3D graphical representations.
-
-## API
-
-This widget can be used with the **[Dashboards API][16]**. See the following table for the [widget JSON schema definition][17]:
-
-{{< dashboards-widgets-api >}}
 
 ## Further reading
 
