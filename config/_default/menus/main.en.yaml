@@ -5435,11 +5435,6 @@ menu:
       parent: vulnerability_pipeline
       identifier: vulnerability_pipeline_inbox
       weight: 10002
-    - name: Due Date
-      url: security/vulnerability_pipeline/due_date
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_due_date
-      weight: 10003
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
