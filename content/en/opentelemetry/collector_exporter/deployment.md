@@ -23,7 +23,7 @@ The OpenTelemetry Collector can be deployed in various environments to suit diff
 - [Docker](#docker)
 - [Kubernetes](#kubernetes)
 
-It's important to note that certain features and capabilities may vary depending on the deployment method. For a detailed overview of these differences, see the [Deployment-based Limitations](#deployment-based-limitations).
+It's important to note that certain features and capabilities may vary depending on the deployment method. For a detailed overview of these differences, see the [Deployment-based limitations](#deployment-based-limitations).
 
 Choose the deployment option that best fits your infrastructure and complete the following instructions.
 

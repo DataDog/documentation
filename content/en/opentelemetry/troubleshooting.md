@@ -36,7 +36,7 @@ processors:
   - k8sattributes
 ```
 
-For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2]
+For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2].
 
 ## Unexpected hostnames with AWS Fargate deployment
 
