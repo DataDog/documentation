@@ -44,13 +44,14 @@ To enable the ingestion of historical metrics for a specific metric:
 
 ### Bulk configuration for multiple metrics
 
-You can enable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
+You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
 1.  Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
 1. Select **Enable historical metrics**.
-1. Specify a metric namespace prefix to enable Historical Metrics Ingestion on all metrics that match that namespace.
+1. Specify a metric namespace prefix to select all metrics that match that namespace.
+1. Click the **Historical metrics** toggle to enable or disable Historical Metrics Ingestion for all selected metrics.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Walkthrough of bulk enabling historic metric ingestion" video=true >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics ingestion toggle" >}}
 
 ## Historical metrics submission
 
