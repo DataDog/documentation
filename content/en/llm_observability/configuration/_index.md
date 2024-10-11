@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-You can configure your LLM applications on the [Configuration page][1] with settings that can optimize your application's performance and security. 
+You can configure evaluations for each of your LLM applications in LLM Observability
 
 Topics
 : Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
