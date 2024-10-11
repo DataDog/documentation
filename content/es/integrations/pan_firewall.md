@@ -74,7 +74,7 @@ tile:
 
 ## Información general
 
-La integración de logs de cortafuegos de Palo Alto Networks en Datadog permite a los clientes ingerir, examinar y analizar logs de cortafuegos de Palo Alto Networks. Esta integración de logs se basa en las plantillas de logs HTTPS y en la capacidad de reenvío proporcionada por PAN OS, el sistema operativo que se ejecuta en los cortafuegos de Palo Alto Networks. PAN-OS permite a los clientes reenviar eventos de amenazas, tráfico, autenticación y otros importantes eventos de logs.
+La integración de logs de cortafuegos de Palo Alto Networks en Datadog permite a los clientes ingerir, examinar y analizar logs de cortafuegos de Palo Alto Networks. Esta integración de logs se basa en las plantillas de logs HTTPS y en la capacidad de reenvío proporcionada por PAN OS, el sistema operativo que se ejecuta en los cortafuegos de Palo Alto Networks. PAN-OS permite a los clientes reenviar eventos de logs de amenazas, tráfico, autenticación y otros eventos de logs importantes.
 
 ### Casos clave de uso
 #### Responder a eventos de amenazas de alta gravedad
