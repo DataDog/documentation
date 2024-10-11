@@ -20,6 +20,8 @@ Datadog supports the following OpenTelemetry integrations:
 
 ### APM (Application Performance Monitoring)
 
+Monitor and optimize your application's performance with these APM integrations:
+
 | Integration | Support |
 |-------------|---------|
 | [Trace Metrics][2] | Full support |
@@ -27,12 +29,16 @@ Datadog supports the following OpenTelemetry integrations:
 
 ### Containers and hosts
 
+Gain insights into your containerized environments and host systems with these integrations:
+
 | Integration | Support |
 |-------------|---------|
 | [Docker Metrics][4] | Full support |
 | [Host Metrics][5] | Full support |
 
 ### Vendor technologies
+
+Extend your observability to popular vendor technologies with these integrations:
 
 | Integration | Support |
 |-------------|---------|

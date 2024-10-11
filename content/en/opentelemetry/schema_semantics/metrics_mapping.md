@@ -25,6 +25,10 @@ To differentiate the metrics captured by the `hostmetrics` receiver from Datadog
 
 <div class="alert alert-info">Datadog is evaluating ways to improve the OTLP metric experience, including potentially deprecating this <code>otel</code> prefix. If you have feedback related to this, reach out your account team to provide your input.</div>
 
+## Metrics mappings
+
+Metrics mappings between Datadog and OpenTelemetry are defined on [OTel integration][11] pages. Select the integration you are using for more information.
+
 ## Host metrics
 
 Host Metrics are collected by the [host metrics receiver][1]. For information about setting up the receiver, see [OpenTelemetry Collector Datadog Exporter][2].
@@ -163,4 +167,5 @@ The following table shows what Datadog container metric names are associated wit
 [8]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [9]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [10]: /tracing/trace_explorer/trace_view/
+[11]: /opentelemetry/integrations/
 
