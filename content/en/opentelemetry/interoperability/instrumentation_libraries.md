@@ -13,7 +13,7 @@ algolia:
   tags: ['otel instrumentation']
 ---
 
-Datadog's support for OpenTelemetry instrumentations allows you to use OpenTelemetry-compatible instrumentations. You can extend Datadog's tracing capabilities to these frameworks. This provides observability for libraries not covered by Datadog SDKs without changing SDKs.
+Datadog supports OpenTelemetry-compatible instrumentations which provides observability for libraries not covered by Datadog SDKs without changing SDKs. You can extend Datadog's tracing capabilities to these frameworks.
 
 ## Prerequisites
 
