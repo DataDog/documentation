@@ -27,7 +27,7 @@ The **Performance** tab displays a waterfall of events (such as actions, errors,
 
 Select and apply filters such as Action Name and resource Type to change the scope of resources and event types displayed. You can also drag and drop the sliders in the waterfall to expand the time range.  
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-1.mp4" alt="Performance filters" video="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-2.mp4" alt="Performance filters" video="true" style="width:60%;">}}
 
 ### Console
 
