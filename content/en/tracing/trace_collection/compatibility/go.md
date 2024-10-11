@@ -70,7 +70,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Kafka (confluent)][53] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go][54]   |
 | [Kafka (sarama)][55]    | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/Shopify/sarama][56]                    |
 | [Google API][57]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/api][58]             |
-| [go-restful][59]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful][60]               |
+| [go-restful][59]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful.v3/v2][60]               |
 | [Twirp][61]             | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp][62]                    |
 | [Vault][63]             | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/hashicorp/vault][64]                   |
 | [Consul][65]            | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/hashicorp/consul][66]                  |
@@ -148,7 +148,7 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [57]: https://github.com/googleapis/google-api-go-client
 [58]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/api
 [59]: https://github.com/emicklei/go-restful
-[60]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful
+[60]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful.v3/v2
 [61]: https://github.com/twitchtv/twirp
 [62]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp
 [63]: https://github.com/hashicorp/vault
