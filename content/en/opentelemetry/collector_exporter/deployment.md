@@ -289,7 +289,8 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
    # ...
    ```
 1. Configure host metadata collection:
-   In a gateway deployment, you need to ensure that host metadata is collected by the agent collectors and preserved by the gateway collector.
+   In a gateway deployment, you need to ensure that host metadata is collected by the agent collectors and preserved by the gateway collector. This ensures that host metadata is collected by the agents and properly forwarded through the gateway to Datadog.  
+   For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][14].
 
    **Agent collector configuration**:
 
@@ -333,9 +334,6 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
          processors: [k8sattributes, batch]
          exporters: [datadog]
    ```
-
-   This ensures that host metadata is collected by the agents and properly forwarded through the gateway to Datadog. For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][14].
-
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33-L38
