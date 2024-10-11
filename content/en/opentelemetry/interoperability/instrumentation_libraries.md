@@ -65,7 +65,7 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 2. Copy the OpenTelemetry extension JAR containing the instrumentation to the same container as the application.
 3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the extension JAR path.
 
-Here’s a step-by-step example using R2DBC in Java to illustrate how you can drop OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans. R2DBC is the reactive version of JDBC, commonly used for reactive database interactions in Java applications. Datadog’s Java agent does not provide out-of-the-box instrumentation for R2DBC queries. 
+Here's a step-by-step example using R2DBC in Java. It illustrates how you can drop OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans. R2DBC is the reactive version of JDBC, commonly used for reactive database interactions in Java applications. Datadog's Java agent does not provide out-of-the-box instrumentation for R2DBC queries. 
 
 1. Download the OpenTelemetry R2DBC agent and run your Spring Boot application with both the Datadog Java agent and the OpenTelemetry R2DBC agent.
 
