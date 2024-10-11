@@ -13,7 +13,7 @@ algolia:
   tags: ['otel instrumentation']
 ---
 
-Datadog's support for OpenTelemetry instrumentations allows you to leverage community-built OpenTelemetry-compatible instrumentations. You can extend Datadog's tracing capabilities to these frameworks, ensuring no part of your tech stack is left unmonitored.
+Datadog's support for OpenTelemetry instrumentations allows you to use OpenTelemetry-compatible instrumentations. You can extend Datadog's tracing capabilities to these frameworks. This provides observability for libraries not covered by Datadog SDKs without changing SDKs.
 
 ## Prerequisites
 
@@ -26,9 +26,14 @@ Datadog instrumentation to prevent duplicate spans from appearing in the trace.
 
 ## Configuration
 
-You can also configure Datadog SDKs by setting the same environment variables supported by [OpenTelemetry][16].
+You can also configure Datadog SDKs by setting the same [environment variables supported by OpenTelemetry][16].
 
 ## Language support
+
+Datadog SDKs implement the OpenTelemetry API by overriding the default implementations in the OpenTelemetry SDK. However, note the following limitations:
+
+Operations only supported by the OpenTelemetry SDK are not supported (for example, SpanProcessors or OTLP Trace Exporters).
+Datadog SDKs do not support OpenTelemetry Metrics and Logs APIs. To use OpenTelemetry Logs and Metrics APIs, use OTLP Ingest.
 
 | Language | Minimum version          |
 |----------|--------------------------|
