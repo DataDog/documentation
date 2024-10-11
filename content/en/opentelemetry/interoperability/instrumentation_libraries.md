@@ -13,7 +13,7 @@ algolia:
   tags: ['otel instrumentation']
 ---
 
-Datadog’s support for OpenTelemetry instrumentations now allows you to leverage community-built OpenTelemetry-compatible instrumentations. You can now extend Datadog’s tracing capabilities to these frameworks, ensuring no part of your tech stack is left unmonitored.
+Datadog's support for OpenTelemetry instrumentations allows you to leverage community-built OpenTelemetry-compatible instrumentations. You can extend Datadog's tracing capabilities to these frameworks, ensuring no part of your tech stack is left unmonitored.
 
 ## Prerequisites
 
