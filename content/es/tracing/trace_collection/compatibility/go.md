@@ -72,7 +72,6 @@ El rastreador Go incluye compatibilidad con los siguientes almacenes de datos y 
 | [Twirp][61]             | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp][62]                    |
 | [Vault][63]             | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/hashicorp/vault][64]                   |
 | [Consul][65]            | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/hashicorp/consul][66]                  |
-| [Gorm][67]              | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm][68]                       |
 | [Gorm v2][69]           | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1][70]                   |
 | [Kubernetes][71]        | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/k8s.io/client-go/kubernetes][72]       |
 | [Memcache][73]          | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache][74]      |
@@ -153,7 +152,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [65]: https://github.com/hashicorp/consul
 [66]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/hashicorp/consul
 [67]: https://github.com/jinzhu/gorm
-[68]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm
 [69]: https://gorm.io/
 [70]: https://github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1
 [71]: https://github.com/kubernetes/client-go
