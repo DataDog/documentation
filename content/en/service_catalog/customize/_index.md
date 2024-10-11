@@ -1,5 +1,5 @@
 ---
-title: Enrich Default Catalog
+title: Customize the Service Catalog
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -15,6 +15,7 @@ further_reading:
   text: "Import Backstage YAML files into Datadog"
 aliases:
     - /service_catalog/manage_entries/
+    - /service_catalog/enrich_default_catalog/
 ---
 
 ## Automatic discovery
