@@ -27,7 +27,7 @@ further_reading:
 - [Teams management](#teams-management-events)
 
 #### Product-Specific Events
-- [App Builder](#app-builder)
+- [App Builder](#app-builder-events)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
 - [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
