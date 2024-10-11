@@ -58,7 +58,6 @@ Go トレーサーには、次のデータストアとライブラリのサポ�
 | [HTTP router][30]       | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/julienschmidt/httprouter][31]          |
 | [Redis (go-redis)][32]  | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/go-redis/redis][33]                    |
 | [Redis (go-redis-v8)][34]| 完全対応 | [github.com/DataDog/dd-trace-go/contrib/go-redis/redis.v8][35]                |
-| [Redis (redigo)][36]    | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/garyburd/redigo][37]                   |
 | [Redis (new redigo)][38]| 完全対応 | [github.com/DataDog/dd-trace-go/contrib/gomodule/redigo][39]                   |
 | [SQL][40]               | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/database/sql][41]                      |
 | [SQLx][42]              | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx][43]                      |
@@ -126,7 +125,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<パッケージディレクト�
 [34]: https://github.com/go-redis/redis/v8
 [35]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-redis/redis.v8
 [36]: https://github.com/garyburd/redigo
-[37]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/garyburd/redigo
 [38]: https://github.com/gomodule/redigo
 [39]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gomodule/redigo
 [40]: https://golang.org/pkg/database/sql
