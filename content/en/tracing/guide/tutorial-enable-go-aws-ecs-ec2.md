@@ -179,11 +179,11 @@ To enable tracing support:
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-   r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
+   r.Use(chitrace.Middleware(chitrace.WithService("notes"))){{< /code-block >}}
 
 1. In `setupDB()`, uncomment the following lines:
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}

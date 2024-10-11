@@ -135,13 +135,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 {{< /code-block >}}
 
 En `setupDB()`, elimina los comentarios de las siguientes líneas:
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -228,11 +228,11 @@ En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-El uso de `chitrace.WithServiceName("notes")` garantiza que todos los elementos rastreados por la biblioteca estén bajo el nombre de servicio `notes`.
+El uso de `chitrace.WithService("notes")` garantiza que todos los elementos rastreados por la biblioteca estén bajo el nombre de servicio `notes`.
 
 El archivo `main.go` contiene más ejemplos de aplicación para cada una de estas bibliotecas. Para ver una extensa lista de bibliotecas, consulta [Requisitos de compatibilidad de Go][16].
 
@@ -342,7 +342,7 @@ Para activar el rastreo en la aplicación de calendario, elimina los comentarios
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+  r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
 {{< /code-block >}}
 
 1. Si la aplicación de notas sigue ejecutándose, utiliza `make exitNotes` para detenerla.

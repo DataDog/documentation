@@ -32,7 +32,7 @@ import (
 func main() {
     // Start the regular tracer and return it as an opentracing.Tracer interface. You
     // may use the same set of options as you normally would with the Datadog tracer.
-    t := opentracer.New(tracer.WithServiceName("<SERVICE_NAME>"))
+    t := opentracer.New(tracer.WithService("<SERVICE_NAME>"))
 
     // Stop it using the regular Stop call for the tracer package.
     defer tracer.Stop()

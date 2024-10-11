@@ -135,13 +135,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 {{< /code-block >}}
 
 In `setupDB()`, uncomment the following lines:
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -228,11 +228,11 @@ In `cmd/notes/main.go`, the Datadog libraries are initialized with the `WithServ
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-Using `chitrace.WithServiceName("notes")` ensures that all elements traced by the library fall under the service name `notes`.
+Using `chitrace.WithService("notes")` ensures that all elements traced by the library fall under the service name `notes`.
 
 The `main.go` file contains more implementation examples for each of these libraries. For an extensive list of libraries, see [Go Compatibility Requirements][16].
 
@@ -342,7 +342,7 @@ To enable tracing in the calendar application, uncomment the following lines in 
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+  r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
 {{< /code-block >}}
 
 1. If the notes application is still running, use `make exitNotes` to stop it.

@@ -120,13 +120,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 {{< /code-block >}}
 
 Dans `setupDB()`, supprimez la mise en commentaire des lignes suivantes :
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -266,11 +266,11 @@ Dans `cmd/notes/main.go`, les bibliothèques Datadog sont initialisées avec l'o
 {{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-L'utilisation de `chitrace.WithServiceName("notes")` garantit que tous les éléments tracés par la bibliothèque relèvent du nom de service `notes`.
+L'utilisation de `chitrace.WithService("notes")` garantit que tous les éléments tracés par la bibliothèque relèvent du nom de service `notes`.
 
 Le fichier `main.go` contient d'autres exemples d'implémentation pour chacune de ces bibliothèques. Pour obtenir la liste complète des bibliothèques, référez-vous à la section [Exigences de compatibilité Go][16].
 
@@ -358,7 +358,7 @@ Pour activer le tracing dans l'application de calendrier :
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+   r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
    {{< /code-block >}}
 
 1. Ouvrez `docker/all-docker-compose.yaml` et supprimez la mise en commentaire du service `calendar` pour configurer le host de lʼAgent et les tags de service unifié pour l'application et pour Docker :

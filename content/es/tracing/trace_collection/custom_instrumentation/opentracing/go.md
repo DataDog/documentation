@@ -32,7 +32,7 @@ import (
 func main() {
     // Inicia el rastreador regular y devuélvelo como una interfaz opentracing.Tracer.
     // Puedes usar el mismo conjunto de opciones como lo harías normalmente con el rastreador de Datadog.
-    t := opentracer.New(tracer.WithServiceName("<SERVICE_NAME>"))
+    t := opentracer.New(tracer.WithService("<SERVICE_NAME>"))
 
     // Detenlo con la llamada a Stop (Detener) para el paquete del rastreador.
     defer tracer.Stop()

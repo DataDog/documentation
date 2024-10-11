@@ -134,13 +134,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 {{< /code-block >}}
 
 `setupDB()` で、以下の行のコメントを解除します。
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -227,11 +227,11 @@ import (
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-`chitrace.WithServiceName("notes")` を使用すると、ライブラリによってトレースされるすべての要素がサービス名 `notes` に該当することを保証します。
+`chitrace.WithService("notes")` を使用すると、ライブラリによってトレースされるすべての要素がサービス名 `notes` に該当することを保証します。
 
 `main.go` ファイルには、これら各ライブラリの実装例がより多く含まれています。ライブラリの拡張機能については、[Go 互換性要件][16]を参照してください。
 
@@ -341,7 +341,7 @@ func privateMethod1(ctx context.Context) {
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+  r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
 {{< /code-block >}}
 
 1. ノートアプリケーションがまだ実行されている場合は、`make exitNotes` を使用して停止させます。
