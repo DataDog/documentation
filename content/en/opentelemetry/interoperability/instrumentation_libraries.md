@@ -26,7 +26,7 @@ Datadog instrumentation to prevent duplicate spans from appearing in the trace.
 
 ## Configuration
 
-You can also configure Datadog SDKs by setting the same [environment variables supported by OpenTelemetry][16].
+You can configure Datadog SDKs by setting the same [environment variables supported by OpenTelemetry][16].
 
 ## Language support
 
