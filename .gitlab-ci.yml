@@ -447,14 +447,14 @@ post_build_failure_status_to_spec_repo:
 
 # Standard master build job
 build_live:
-  <<: *build_template
+  <<: *build_live_template
   <<: *live_rules
   environment: "live"
   resource_group: build_live_group
 
 # Urgent fix build job
 build_live_urgent:
-  <<: *build_template
+  <<: *build_live_template
   <<: *live_urgent_fix_rules
   environment: "live"
   resource_group: build_live_urgent_group
