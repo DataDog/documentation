@@ -36,6 +36,13 @@ In the [Log Explorer][2]:
 1. Click **More**, next to *Download as CSV*, and select **Open in Workspace**.
 1. The workspace adds the log query to a data source cell. By default, the columns in Log Explorer are added to the data source cell.
 
+### Add a column to your workspace
+
+In addition to the default columns, you can add your own columns to your workspace:
+1. From your workspace cell, click on a log to open the detail side panel.
+1. Click the attribute you want to add as a column.
+1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**
+
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
 - Include additional data sources such as reference tables
