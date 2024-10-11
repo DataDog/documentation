@@ -40,7 +40,6 @@ Integra el rastreador Go con la siguiente lista de marcos web utilizando uno de 
 | [gRPC v1.2][10]   | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12][12] |
 | [chi][13]         | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi][14] |
 | [echo v4][15]     | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4][16]           |
-| [echo v3][15]     | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/labstack/echo][17]              |
 | [Fiber][18]     | Totalmente compatible | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2][19]              |
 
 #### Compatibilidad de biblioteca
@@ -105,7 +104,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi
 [15]: https://github.com/labstack/echo
 [16]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4
-[17]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo
 [18]: https://github.com/gofiber/fiber
 [19]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2
 [20]: https://aws.amazon.com/sdk-for-go

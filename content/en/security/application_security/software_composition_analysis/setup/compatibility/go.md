@@ -91,7 +91,6 @@ The Go packages listed in this page are relevant for Application Security capabi
 [7]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin
 [8]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux
 [9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4
-[10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo
 [11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc
 [12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi
 [13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http
