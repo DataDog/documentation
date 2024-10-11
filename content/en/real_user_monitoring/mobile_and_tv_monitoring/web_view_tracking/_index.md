@@ -158,6 +158,13 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
+**Note**:
+In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
+
+```kotlin
+    webView.settings.javaScriptEnabled = true
+```
+
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [2]: /real_user_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
