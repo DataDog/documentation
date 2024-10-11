@@ -77,7 +77,7 @@ Add the workflow to your monitor:
 1. If the workflow takes input parameters:
     1. Click **Configure Inputs** next to the monitor name and ID.
         {{< img src="service_management/workflows/monitor-configure-inputs-arrow.png" alt="An attached workflow with a Configure Inputs link available" style="width:100%;" >}}
-    1. Enter values for the input parameters. Values can include
+    1. Enter values for the input parameters.<br>**Note**: Values can include monitor message template variables. To see a list of available variables, click **Use Message Template Variables** in the upper-right of the **Configure notifications & automations** section.
     <br>The parameters populate in the mention within the notification message field.<br>For example, if you configure a workflow named `@workflow-test-inputs` to have the following parameters:
         {{< img src="service_management/workflows/monitor-configure-inputs-modal.png" alt="Configure Inputs panel with values set as follows: im_a_string to 'abc', im_a_number to 123, im_a_boolean toggled to true, and i_have_a_default_value to 'override this'" style="width:70%;" >}}
         the mention changes to `@workflow-test-inputs(im_a_string="abc", im_a_number=123, im_a_boolean=true, i_have_a_default_value="override this")`.
