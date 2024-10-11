@@ -71,7 +71,7 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 
 ## Example
 
-Here’s a step-by-step example using R2DBC in Java to illustrate how you can use OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans. 
+Here's a step-by-step example using R2DBC in Java to illustrate how you can use OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans. 
 
 ```sh
 git clone https://github.com/eugenp/tutorials
