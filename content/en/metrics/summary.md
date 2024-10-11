@@ -43,17 +43,19 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 ## Configuration of multiple metrics 
 
-Clicking on **Configure Metrics** gives you two buttons that you can use to configure multiple metrics at a time: 
+Clicking on **Configure Metrics** gives you three buttons that you can use to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
+
+* **Manage Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
+
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
 * **Enable Percentiles**: Enable or disable percentile aggregations to multiple distribution metrics.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:75%;">}}
 
-* **Manage Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
-
-{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+* **Enable historical metrics**: Enable or disable ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
 ## Metric details sidepanel
 
@@ -245,3 +247,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [27]: /universal_service_monitoring/
 [28]: /logs/
 [29]: /service_catalog/scorecards/
+[30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
