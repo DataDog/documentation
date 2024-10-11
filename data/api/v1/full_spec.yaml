@@ -4296,6 +4296,7 @@ components:
       - cws_containers_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
+      - data_stream_monitoring_usage
       - dbm_hosts_usage
       - dbm_queries_usage
       - error_tracking_usage
@@ -4370,6 +4371,7 @@ components:
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
@@ -8052,6 +8054,8 @@ components:
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_jobs_monitoring_percentage
+      - data_stream_monitoring_usage
+      - data_stream_monitoring_percentage
       - dbm_hosts_percentage
       - dbm_hosts_usage
       - dbm_queries_percentage
@@ -8195,6 +8199,8 @@ components:
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_JOBS_MONITORING_PERCENTAGE
+      - DATA_STREAM_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_PERCENTAGE
       - DBM_HOSTS_PERCENTAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
@@ -8484,6 +8490,10 @@ components:
           type: number
         data_jobs_monitoring_usage:
           description: The Data Jobs Monitoring usage by tag(s).
+          format: double
+          type: number
+        data_stream_monitoring_usage:
+          description: The Data Stream Monitoring usage by tag(s).
           format: double
           type: number
         dbm_hosts_percentage:
