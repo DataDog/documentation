@@ -43,7 +43,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 ## Configuration of multiple metrics 
 
-There are two buttons that allow you to configure multiple metrics at a time: 
+Clicking on **Configure Metrics** gives you two buttons that you can use to configure multiple metrics at a time: 
 
 {{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
 
