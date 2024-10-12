@@ -10,13 +10,13 @@ further_reading:
   text: "Learn about facets"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Quality Gates is in Preview.
+{{< /callout >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
 
 ## Overview
 
