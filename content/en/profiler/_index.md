@@ -37,6 +37,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
       tag: 'Blog'
       text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
+    - link: 'https://www.datadoghq.com/blog/ruby-allocations-profiler/'
+      tag: 'Blog'
+      text: 'Optimize Ruby garbage collection activity with Datadog's allocations profiler'
 cascade:
     algolia:
         rank: 70
