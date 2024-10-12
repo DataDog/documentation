@@ -11,9 +11,9 @@ further_reading:
 
 ## Overview
 
-{{< beta-callout url="https://www.datadoghq.com/private-beta/watchdog-explains-graph-insights/">}}
-Watchdog Explains is available in Private Beta. To request access, complete the form.
-{{< /beta-callout >}}
+{{<callout url="https://www.datadoghq.com/private-beta/watchdog-explains-graph-insights/" header="Access the Preview!">}}
+Watchdog Explains is available in Preview. To request access, complete the form.
+{{</callout >}}
 
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
