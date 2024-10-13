@@ -78,13 +78,13 @@ herramientas de monitorización y puede proporcionar una visión holística del 
 permite a los clientes de Datadog dar una respuesta más eficaz a los incidentes y, al mismo tiempo, aumentar la visibilidad
 y la responsabilidad a lo largo del ciclo de vida del incidente. PagerDuty ofrece dos nuevas aplicaciones que
 te ofrecen todas las capacidades de nuestra plataforma de operaciones en tiempo real, dondequiera que trabajes,
-sin necesidad de cambiar de herramienta. Añade nuevos widgets, Dashboard de estado por PagerDuty
-e Incidentes por PagerDuty, directamente a tu dashboard para ver el dashboard de estado del servicio y responder
+sin necesidad de cambiar de herramienta. Añade nuevos widgets, Dashboard de estado de PagerDuty
+e Incidentes de PagerDuty, directamente a tu dashboard para ver el dashboard de estado del servicio y responder
 a incidentes de alta urgencia directamente desde Datadog en tiempo real.
 
-### Dashboard de estado por PagerDuty
+### Dashboard de estado de PagerDuty
 
-El Dashboard de estado por PagerDuty proporciona a los responsables técnicos, a los responsables de negocios
+El Dashboard de estado de PagerDuty proporciona a los responsables técnicos, a los responsables de negocios
 y a los jefes técnicos y empresariales una visión compartida y en directo del estado del sistema para mejorar
 la concientización de los problemas operativos. Muestra el estado actual de servicio y envía
 notificaciones para alertar a los usuarios cuando los servicios empresariales son afectadas. Esta función
@@ -101,7 +101,7 @@ mejora la comunicación entre los equipos de respuesta y las partes interesadas 
 #### Requisitos
 - La integración está disponible para todos los clientes de PagerDuty. Sin embargo, la siguiente función sólo está disponible para los clientes de Pagerduty Business Plan y superiores.
 
-### Incidentes por PagerDuty
+### Incidentes de PagerDuty
 
 Incidentes de PagerDuty te permite tomar medidas ante incidentes directamente desde la
 interfaz de Datadog. Te permite visualizar incidentes activos en PagerDuty
@@ -128,7 +128,7 @@ Ponte en contacto con [el equipo de ventas de PagerDuty][2] si quieres ser clien
 PagerDuty, o con [el servicio de asistencia de Datadog][3] si necesitas solucionar algún problema.
 
 Ponte en contacto con [el equipo de ventas de Pagerduty][2] si quieres
-pasarte a un plan que incluya la función del dashboard de estado e Incidentes por Pagerduty.
+pasarte a un plan que incluya la función del dashboard de estado e Incidentes de Pagerduty.
 
 [1]: https://docs.datadoghq.com/es/dashboards/#new-dashboard
 [2]: https://www.pagerduty.com/contact-sales/
