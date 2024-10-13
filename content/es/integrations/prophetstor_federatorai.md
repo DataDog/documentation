@@ -66,17 +66,17 @@ tile:
   configuration: README.md#Configuración
   description: Licencia de Federator.ai para optimizar las aplicaciones Kubernetes
   media:
-  - caption: El dashboard con información general del clúster de ProphetStor Federator.ai
+  - caption: El dashboard con información general del clúster ProphetStor Federator.ai
       muestra predicciones sobre el uso de recursos, recomendaciones para clústeres
       y nodos Kubernetes, y el historial de uso.
     image_url: images/Federator_ai_Datadog_Cluster_Overview.png
     media_type: imagen
-  - caption: El dashboard con información general de la aplicación de ProphetStor
-      Federator.ai muestra el uso previsto de CPU y de memoria, así como recomendaciones
-      para cada aplicación.
+  - caption: El dashboard con información general de la aplicación ProphetStor Federator.ai
+      muestra el uso previsto de CPU y de memoria, así como recomendaciones para cada
+      aplicación.
     image_url: images/Federator_ai_Datadog_Application_Overview.png
     media_type: imagen
-  - caption: El dashboard con información general de Kafkade ProphetStor Federator.ai
+  - caption: El dashboard con información general de Kafka de ProphetStor Federator.ai
       muestra información de uso y recomendaciones sobre el autoescalado de réplicas
       de consumidores de Kafka.
     image_url: images/Federator_ai_Datadog_Kafka_Overview.png
@@ -88,8 +88,8 @@ tile:
     image_url: images/Federator_ai_Datadog_Cost_Analysis_Overview.png
     media_type: imagen
   - caption: El dashboard de Federator.ai muestra la predicción de las cargas de trabajo
-      y recomendaciones de recursos de Kubernetes o clústeres y aplicaciones de máquinas
-      virtuales.
+      y recomendaciones de recursos para clústeres y aplicaciones Kubernetes o de
+      máquinas virtuales.
     image_url: images/Federator_ai_Dashboard.png
     media_type: imagen
   - caption: Federator.ai proporciona predicciones y recomendaciones de recursos para
