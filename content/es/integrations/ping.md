@@ -66,7 +66,7 @@ tile:
 Este check utiliza el comando [ping][1] del sistema para comprobar la accesibilidad de un host.
 También mide opcionalmente el tiempo de ida y vuelta de los mensajes enviados desde el check al host de destino.
 
-Ping funciona enviando paquetes de solicitud de eco del Protocolo de mensajes de control de Internet (ICMP) al host de destino y esperando una respuesta de eco ICMP.
+El ping funciona enviando paquetes de solicitud de eco del Protocolo de mensajes de control de Internet (ICMP) al host de destino y esperando una respuesta de eco ICMP.
 
 Este check utiliza el comando ping del sistema, en lugar de generar la solicitud de eco del ICMP, ya que la creación de un paquete ICMP requiere un socket sin procesar. La creación de sockets sin procesar requiere privilegios raíz que el Agent no tiene. El comando ping utiliza el marcador de acceso `setuid` para ejecutarse con privilegios elevados y evitar este inconveniente.
 
@@ -123,7 +123,7 @@ El check ping no incluye eventos.
 ## Solucionar problemas
 
 ### Error `SubprocessOutputEmptyError: get_subprocess_output expected output but had none`
-Mientras ejecutas la integración Ping, puedes ver un error como el siguiente:
+Mientras ejecutas la integración del ping, puedes ver un error como el siguiente:
 
 ```
       Traceback (most recent call last):
@@ -138,7 +138,7 @@ Mientras ejecutas la integración Ping, puedes ver un error como el siguiente:
       _util.SubprocessOutputEmptyError: get_subprocess_output expected output but had none.
 ```
 
-Debido a que la integración Ping no está incluida por defecto en el Agent, el binario `ping` tampoco está incluido en el Agent. Para poder ejecutar la integración con éxito, debes instalar el binario `ping`.
+Debido a que la integración del ping no está incluida por defecto en el Agent, el binario `ping` tampoco está incluido en el Agent. Para poder ejecutar la integración con éxito, debes instalar el binario `ping`.
 
 
 ¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
