@@ -25,7 +25,7 @@ categories:
 - conformidad
 - notificaciones
 - orquestación
-- suministro
+- aprovisionamiento
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
@@ -51,7 +51,7 @@ tile:
   - Categoría::Conformidad
   - Categoría::Notificaciones
   - Categoría::Orquestación
-  - Categoría::Suministro
+  - Categoría::Aprovisionamiento
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::Windows
   - Sistema operativo compatible::macOS
@@ -77,8 +77,8 @@ Algunos ejemplos son:
 
 - Reinicio del servicio
 - Configuración del equilibrador de carga
-- Suministro del sistema
-- Borrado del disco / aprovisionamiento de almacenamiento
+- Aprovisionamiento del sistema
+- Borrado del disco / Aprovisionamiento de almacenamiento
 - Aprovisionamiento de máquinas virtuales adicionales o nodos de contenedor en respuesta a la carga
 - Desactivación de recursos cuando la carga es baja
 
