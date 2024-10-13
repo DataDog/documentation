@@ -123,7 +123,7 @@ Este flujo de trabajo se ejecuta con sus variables de entrada asignadas inicialm
 
 También se inicializan variables de salida adicionales (`host`, `meta` y `ip`). El flujo de trabajo asigna estas variables de salida y emite los valores resultantes al finalizar. También puede especificar variables que no son ni de entrada ni de salida para utilizarlas internamente en la lógica del flujo de trabajo.
 
-¡[Expandir][5]
+![Expandir][5]
 
 3. Para obtener el endpoint del flujo de trabajo Pliant utilizado para la activación desde Datadog con una solicitud HTTP, haz clic en el icono "Expandir" al inicio del flujo de trabajo.
 
@@ -131,7 +131,7 @@ Haz clic en "cURL" > "Token de titular temporario" y selecciona la clave de API 
 
 ![cUrl][6]
 
-¡[tecla de selección][7]
+![tecla de selección][7]
 
 Tu endpoint está encerrado entre comillas dobles y se asemeja a: ***https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>***
 
@@ -148,7 +148,7 @@ Copia toda la URL entre comillas dobles (que puede incluir parámetros de consul
 
 
 3. Desplázate hasta "webhooks". Haz clic en **Nuevo** para añadir un nuevo webhook para vincular al flujo de trabajo Pliant. En primer lugar, asigna un nombre al webhook en el campo "nombre". Este ejemplo utiliza el nombre *RestartHost*.
-![webhooksConfig2][11]
+![configuración de webhooks 2][11]
 
 Pega la URL copiada en el paso 4. Por ejemplo:
 
@@ -158,7 +158,7 @@ https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_
 
 Pega esto en el campo ***URL*** del formulario del webhook.
 
-![webhookForm][12]
+![formulario de webhook][12]
 
 La carga útil de la solicitud está preconfigurada. Selecciona la casilla "ENCODIFICAR COMO FORMULARIO" y haz clic en Guardar.
 
