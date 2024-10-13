@@ -74,11 +74,11 @@ Este check utiliza el comando ping del sistema, en lugar de generar la solicitud
 
 ## Configuración
 
-El check de ping no está incluido en el paquete del [Datadog Agent][2], por lo que es necesario instalarlo.
+El check ping no está incluido en el paquete del [Datadog Agent][2], por lo que es necesario instalarlo.
 
 ### Instalación
 
-Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucciones para instalar el check de ping en tu host. Para instalarlo con el Agent Docker o versiones anteriores del Agent, consulta [Uso de integraciones de la comunidad][3].
+Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucciones para instalar el check ping en tu host. Para instalarlo con el Agent Docker o versiones anteriores del Agent, consulta [Uso de integraciones de la comunidad][3].
 
 1. Ejecuta el siguiente comando para instalar la integración del Agent:
 
@@ -98,7 +98,7 @@ Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucci
 
 ### Configuración
 
-1. Edita el archivo `ping.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de tu ping. Para conocer todas las opciones de configuración disponibles, consulta el [ignite.d/conf.yaml de ejemplo][1].
+1. Edita el archivo `ping.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de tu ping. Para conocer todas las opciones de configuración disponibles, consulta el [ignite.d/conf.yaml de ejemplo][5].
 
 2. [Reinicia el Agent][6].
 
@@ -114,7 +114,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `ping` en la sección Che
 
 ### Eventos
 
-El check de Ping no incluye eventos.
+El check ping no incluye eventos.
 
 ### Checks de servicio
 {{< get-service-checks-from-git "ping" >}}
