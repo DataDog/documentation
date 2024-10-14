@@ -185,7 +185,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
    {{< /highlight >}}
 
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
-With the default [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which can prevent three key requirements for Data Jobs Monitoring from functioning properly:
+With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 1. Ensure that the agent can be downloaded onto the Databricks cluster using the curl command in the init script.
 2. Verify that the Datadog crawler has sufficient permission to access the Databricks workspace.
 3. Confirm that traces and metrics can be sent.
