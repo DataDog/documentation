@@ -41,7 +41,7 @@ In the [Log Explorer][2]:
 In addition to the default columns, you can add your own columns to your workspace:
 1. From your workspace cell, click on a log to open the detail side panel.
 1. Click the attribute you want to add as a column.
-1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**
+1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**.
 
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
