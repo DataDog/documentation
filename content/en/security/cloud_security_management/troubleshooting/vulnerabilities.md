@@ -47,7 +47,20 @@ ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 
 The workaround for this issue is to set the configuration option:
 - For containerd: set `discard_unpacked_layers=false` in the containerd configuration file.
 - For Helm: set `datadog.sbom.containerImage.uncompressedLayersSupport: true` in your `values.yaml` file.
-- For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your DatadogAgent CRD.
+- For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your Datadog Agent CRD.
+
+### Timeout
+
+Some setups can take a long time to scan, causing it to time out. To ensure each asset is scanned, try increasing the timeout duration.
+
+```sh
+Error: unable to marshal report to sbom format, err: analyze error: pipeline error: failed to analyze layer
+```
+
+The workaround for this issue is to set the configuration option:
+- For containerd: set `scan_timeout` to 600 or higher, in the containerd configuration file.
+- Set `datadog.sbom.containerImage.scan_timeout` to 600 or higher in your `values.yaml` file.
+- Set `features.sbom.containerImage.scan_timeout` to 600 or higher in your `values.yaml` in your Datadog Agent CRD.
 
 ## Further Reading
 
