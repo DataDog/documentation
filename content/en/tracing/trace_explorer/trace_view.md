@@ -84,11 +84,18 @@ To expand or collapse span descendants, click the chevron (>) icon on a row. To 
 {{% /tab %}}
 {{% tab "Map" %}}
 
-{{< img src="tracing/trace_view/map.png" alt="Map" style="width:90%;">}}
+![trace-map](https://github.com/user-attachments/assets/d9715379-f2a0-46c4-8644-3cd57905de64)
 
-Displays a representation of all the services involved in the trace. This visualization is useful for getting a high-level overview of the services' dependencies and transaction lifecycle at a service level.
+Trace map displays a representation of all services involved in a single trace, providing an overview of the transaction lifecycle at the service level and clarifying service dependencies.
 
-Hover over a service to highlight its parent and children, and click on it to focus on the service entry span.
+Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call back to a service already invoked by them are represented by duplicated nodes.
+
+Service nodes explicitly show the percentage of the **total execution time** which provides an overview of the trace duration breakdown at the service level.
+
+If a [service entry span][6] is in an error state, the corresponding service node is marked with a red border to highlight faulty services at a glance. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
+
+To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name along with any error message. For further investigation, you can switch to the Waterfall view using the ``View Entry Span`` button.
+
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -235,3 +242,4 @@ To learn more about span links and how to add them with custom instrumentation, 
 [3]: /tracing/glossary/#services
 [4]: /tracing/glossary/#resources
 [5]: /tracing/trace_explorer
+[6]: /glossary/#service-entry-span
