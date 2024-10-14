@@ -3,26 +3,19 @@ title: Getting Started with Google Cloud
 ---
 
 ## Overview
-This guide provides an overview of how to get started with the Google Cloud (GCP) integration with Datadog.
-Integrating your Google Cloud projects with Datadog allows you to:
+This guide provides an overview of how to get started with the Google Cloud integration with Datadog.
 
-- Monitor your GCE infrastructure directly within Datadog
-- Search through GCP hosts using automatically imported GCE host tags & GCE labels
-- View metrics from your GCP projects
-- Manage and view logs from GCP in Datadog
-
-See [Explore related products][48] at the end of this guide to discover more ways to monitor your GCP infrastructure.
+Integrating your Google Cloud projects with Datadog allows you to monitor real-time metrics & logs from your GCE and GKE compute instances.
 
 ## Prerequisites
 1) Create a [Datadog account][1]
-2) Set up a [Service Account][2] in GCP
-3) Review these GCP [Prerequisites][3]:
+2) Set up a [Service Account][2] in Google Cloud
+3) Review these Google Cloud [Prerequisites][3]:
 
 - If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
-- Ensure that any projects being monitored are **not** configured as [**scoping projects**][42] that pull in metrics from multiple other projects.
+- Ensure that any projects being monitored are **not** configured as [scoping projects][42] that pull in metrics from multiple other projects.
 
-- The GCP integration requires specific APIs to be enabled to monitor your projects.
-Before setting up the integration, enable the below APIs for **each of the projects** you want to monitor:
+- The Google Cloud integration requires the below APIs to be enabled **for each of the projects** you want to monitor:
 
 [Cloud Monitoring API][7] 
 : Allows Datadog to query your Google Cloud Metric data.
@@ -42,22 +35,102 @@ Before setting up the integration, enable the below APIs for **each of the proje
 [Google Cloud Billing API][12] 
 : Enables accurate billing for API calls.
 
-<div class="alert alert-info">You can confirm if these APIs are enabled by heading to <b>Enabled APIs & Services</b> under each project in your Google Cloud workspace.</div>
+<div class="alert alert-info">You can confirm if these APIs are enabled by heading to <a href="https://console.cloud.google.com/apis/dashboard"><b>Enabled APIs & Services</a></b> under each project in your Google Cloud workspace.</div>
 
 
 ## Setup 
 
 You can integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
 
-After reviewing the above [Prerequisites][52], follow the step-by-step instructions described in the [**Google Cloud Platform guide**][6] to set up the Google Cloud integration.
+After reviewing the above [Prerequisites][52], follow these step-by-step instructions to set up the Google Cloud integration:
 
+{{% collapse-content title=" 1. Create your Google Cloud service account" level="h5" %}}
+1. Open your [Google Cloud console][53].
 
-### Metric collection
+2. Navigate to **IAM & Admin** > **Service Accounts**.
 
-The GCP integration is designed to collect [**all Google Cloud metrics**][17]. 
-While Datadog provides detailed documentation for most GCP services, newly released services may not yet have detailed documentation. Metrics for new services are still collected through the integration.
+3. Click on Create service account at the top.
 
-{{% collapse-content title="Click here for a sample of the GCP services Datadog supports" level="h5" %}}
+4. Give the service account a unique name, then click **Create and continue**.
+
+5. Add the following roles to the service account:
+- Monitoring Viewer
+
+- Compute Viewer
+
+- Cloud Asset Viewer
+
+- Browser
+
+6. Click **Continue**, then **Done** to complete creating the service account.
+
+{{< img src="integrations/google_cloud_platform/create-service-account.png" alt="Google Cloud console interface, showing the 'Create service account' flow. Under 'Grant this service account access to project', the four roles in the instructions are added." style="width:70%;">}}
+{{% /collapse-content %}} 
+
+{{% collapse-content title="2. Add the Datadog principal to your service account" level="h5" %}}
+1. In Datadog, navigate to the [**Integrations** > **Google Cloud Platform**][54].
+
+2. Click on **Add Google Cloud Account**. 
+If you have no configured projects, you are automatically redirected to this page.
+
+3. If you have not generated a Datadog principal for your org, click the **Generate Principal** button.
+
+4. Copy your Datadog principal and keep it for the next section.
+
+{{< img src="integrations/google_cloud_platform/principal-2.png" alt="Datadog interface, showing the 'Add New GCP Account' flow. The first step, 'Add Datadog Principal to Google,' features a text box where a user can generate a Datadog Principal and copy it to their clipboard. The second step, 'Add Service Account Email,' features a text box that the user can complete in section 3." style="width:70%;">}}
+
+Keep this window open for Section 3.
+
+5. In the [Google Cloud console][55], under the **Service Accounts** menu, find the service account you created in Section 1.
+
+6. Go to the **Permissions** tab and click on **Grant Access**.
+
+   {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Google Cloud console interface, showing the Permissions tab under Service Accounts." style="width:70%;">}}
+
+7. Paste your Datadog principal into the **New principals** text box.
+
+8. Assign the role of **Service Account Token Creator** and click **Save**.
+   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="Google Cloud console interface, showing an 'Add principals' box and an 'Assign roles' interface." style="width:70%;">}}
+
+**Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
+{{% /collapse-content %}}
+
+{{% collapse-content title="3. Complete the integration setup in Datadog" level="h5" %}}
+1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. There, you can find the email associated with this Google service account. It resembles `<sa-name>@<project-id>.iam.gserviceaccount.com`.
+
+2. Copy this email.
+
+3. Return to the integration configuration tile in Datadog (where you copied your Datadog principal in the previous section).
+
+4. In the box under **Add Service Account Email**, paste the email you previously copied.
+
+5. Click on **Verify and Save Account**.
+{{% /collapse-content %}}
+
+After finishing these steps, metrics will appear in Datadog after approximately **15 minutes**.
+
+{{% collapse-content title="(Optional) Assign roles to other projects" level="h5" %}}
+Automatic project discovery simplifies the process of adding additional projects to be monitored. If you grant your service account access to other projects, folders, or orgs, Datadog discovers these projects (and any projects nested in the folders or orgs) and automatically adds them to your integration tile.
+
+1. Make sure you have the appropriate permissions to assign roles at the desired scope:
+- Project IAM Admin (or higher)
+- Folder Admin
+- Organization Admin
+2. In the Google Cloud console, go to the **IAM** page.
+3. Select a project, folder, or organization.
+4. To grant a role to a principal that does not already have other roles on the resource, click **Grant Access**, then enter the email of the service account you created earlier.
+5. Assign the following roles:
+- Compute Viewer
+- Monitoring Viewer
+- Cloud Asset Viewer (**Note**: The Browser role is only required in the default project of the service account).
+6. Click **Save**.
+{{% /collapse-content %}}
+
+## Metric collection
+
+The Google Cloud integration collects [**all GA Google Cloud metrics**][17] from your projects through the Google Cloud Monitoring API.
+
+{{% collapse-content title="Click here for a sample of the Google Cloud metrics Datadog collects" level="h5" %}}
 | Integration                         | Description                                                                           |
 |-------------------------------------|---------------------------------------------------------------------------------------|
 | [App Engine][1]                     | PaaS (platform as a service) to build scalable applications                           |
@@ -96,11 +169,7 @@ While Datadog provides detailed documentation for most GCP services, newly relea
 | [VPN][34]                           | Managed network functionality                                                         |
 {{% /collapse-content %}} 
 
-Datadog crawls GCP metrics from your projects on a default **5 minute schedule**.
-For more details on the crawler schedule, see [Cloud Metric Delay][18].
-
-
-You can find your GCP metrics in the Metrics Summary page in the Datadog platform.
+You can find your Google Cloud metrics in the Metrics Summary page in the Datadog platform.
 To view your metrics, navigate to `Metrics > Summary` and search for `gcp`:
 
 {{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" style="width:100%;" >}}
@@ -117,7 +186,7 @@ This example includes all c1* sized instances, but excludes staging hosts:
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-See Google's documentation on [Creating and managing labels][19] for more details on adding labels to your GCP hosts.
+See Google's documentation on [Creating and managing labels][19] for more details on adding labels to your Google Cloud hosts.
 
 For more information on how to control your resource costs, see the [Google Cloud Integration Billing page][20].
 
@@ -132,16 +201,16 @@ Follow [the instructions listed here][33] to set up Log Collection.
 
 Alternatively, to collect logs from applications running in GCE or GKE, you can also use the [Datadog Agent][32].
 
-## GCP integrations
+## Google Cloud integrations
 
-Our [Integrations page][26] provides a full listing of the available sub-integrations for GCP. 
-Many of these integrations are installed by default when Datadog recognizes data being ingested in from your GCP account.
+Our [Integrations page][26] provides a full listing of the available sub-integrations for Google Cloud. 
+Many of these integrations are installed by default when Datadog recognizes data being ingested in from your Google Cloud account.
 
 ## Leveraging the Datadog Agent for greater visibility
 
-After the GCP integration is configured, Datadog automatically starts collecting GCP metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
+After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
 
-The [Datadog Agent][25] provides the [most granular, low-latency metrics from your infrastructure][47], delivering real-time insights into CPU, memory, disk usage, and more for your GCP hosts. 
+The [Datadog Agent][25] provides the [most granular, low-latency metrics from your infrastructure][47], delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts. 
 The Agent can be installed on any host, including GKE - [Google Kubernetes Engine, Agent][28].
 
 The Agent also supports [a wide range of integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
@@ -152,7 +221,7 @@ For a full list of benefits with installing the Agent on your cloud instances, s
 
 
 
-## Explore related products
+## Explore related services
 
 ### Private Service Connect 
 **(Only available in US5 & US1)**
@@ -165,15 +234,7 @@ Get started with the [Google Cloud Private Service Connect guide.][46]
 
 To begin monitoring serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform][6] integration. 
 
-The [Google Cloud Run][34] page provides a list of out-of-the-box metrics collected by the GCP integration, along with instructions for [Log Collection through Dataflow][35].
-
----
-**DO WE WANT TO REMOVE THIS?**
-
-Datadog also provides a solution, currently in public beta, for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
-
----
-
+The [Google Cloud Run][34] page provides a list of out-of-the-box metrics collected by the Google Cloud integration, along with instructions for [Log Collection through Dataflow][35].
 
 ### Cloud Cost Management (CCM)
 
@@ -205,7 +266,7 @@ Datadog Cloud Security Management (CSM) delivers real-time threat detection and 
 
 Check out the [Setting up Cloud Security Management guide][39] to get started.
 
-After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][41] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][40] on GCP.
+After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][41] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][40] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/gcp_resource_collection.png" style="width:100%;" >}}
 
@@ -273,3 +334,6 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 [50]: https://docs.datadoghq.com/cloud_cost_management/
 [51]: https://docs.datadoghq.com/cloud_cost_management/google_cloud/
 [52]: https://docs.datadoghq.com/getting_started/integrations/google_cloud/#prerequisites
+[53]: https://console.cloud.google.com/
+[54]: https://app.datadoghq.com/integrations/google-cloud-platform
+[55]: https://console.cloud.google.com/
