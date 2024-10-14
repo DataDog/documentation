@@ -129,9 +129,9 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
+{{% collapse-content title="(Optional) Build and run Graal native-image" level="h4" %}}
 
-Follow the [Tracer Setup Instructions][14] to build your native image with the Datadog Java Profiler.
+Follow the [Tracer Setup Instructions][14] to build your Graal native image with the Datadog Java Profiler.
 
 When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
 
