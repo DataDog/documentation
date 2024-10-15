@@ -170,7 +170,7 @@ The Google Cloud integration collects [**all GA Google Cloud metrics**][17] from
 {{% /collapse-content %}} 
 
 You can find your Google Cloud metrics in the Metrics Summary page in the Datadog platform.
-To view your metrics, navigate to `Metrics > Summary` and search for `gcp`:
+To view your metrics, use the left menu to navigate to **Metrics** > **Summary** and search for `gcp`:
 
 {{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" style="width:100%;" >}}
 
