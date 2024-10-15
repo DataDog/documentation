@@ -21,7 +21,7 @@ Integrating your Google Cloud projects with Datadog allows you to monitor real-t
 : Allows Datadog to query your Google Cloud Metric data.
 
 [Compute Engine API][8] 
-: Allows Datadog to discover Compute instance data.
+: Allows Datadog to discover compute instance data.
 
 [Cloud Asset API][9]
 : Allows Datadog to request Google Cloud resources and link them to relevant metric tags.
