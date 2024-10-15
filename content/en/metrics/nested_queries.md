@@ -249,7 +249,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 {{% collapse-content title="`is_between()` example query" level="h5" %}}
-`is_between()` returns 1.0 for each point where the query is between 3 and 5 (Exclusive), and 0.0 elsewhere.
+`is_between()` returns 1.0 for each point where the query is between 10 and 30 (exclusive), and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/is_between_ui.png" alt="example of is_between mapping function in UI" style="width:100%;" >}}
