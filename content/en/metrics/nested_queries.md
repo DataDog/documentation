@@ -219,7 +219,30 @@ When nesting these `moving_rollups`, the rollup intervals provided must get larg
 
 
 ## Remapping functions
+To remap the results of your metric queries, you can now use the following 3 new functions:
 
+- `is_greater` (`<QUERY>, <THRESHOLD>`)
+- `is_less` (`<QUERY>, <THRESHOLD>`)
+- `is_between` (`<QUERY>, <LOWER THRESHOLD>, <UPPER THRESHOLD>`)
+
+
+{{% collapse-content title="`is_greater()` example query" level="h5" %}}
+When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="`is_less()` example query" level="h5" %}}
+When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="`is_between()` example query" level="h5" %}}
+When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+
+
+{{% /collapse-content %}} 
 
 ## How can I use Datadog API's to leverage nested queries?
 You can use nested queries functionality in our public API for querying timeseries data [here][3]. Simply change the contents of the **formula** object
