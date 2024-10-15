@@ -51,11 +51,11 @@ Clicking on **Configure Metrics** gives you three options that you can use to co
 
 {{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
-* **Enable percentiles**: Enable or disable percentile aggregations to multiple distribution metrics.
+* **Enable percentiles**: Manage percentile aggregations for multiple distribution metrics.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:75%;">}}
 
-* **Enable historical metrics**: Enable or disable ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
+* **Enable historical metrics**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
 ## Metric details sidepanel
 
