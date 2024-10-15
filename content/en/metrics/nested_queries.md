@@ -20,7 +20,7 @@ Nested queries allows you to reuse the results of a previous query in a subseque
 Nested queries unlocks several powerful capabilities: 
 
 - [Multilayer aggregation][6]
-- [Percentiles and standard deviation on count/rate/gauge type metrics[7]
+- [Percentiles and standard deviation on count/rate/gauge type metrics][7]
 - [Higher resolution queries over historical timeframes][8]
 
 
@@ -189,7 +189,7 @@ In the UI or JSON tab, it would look as follows:
 
 ## Moving rollup
 
-The existing version of the `moving-rollup` function does not execute a lookback on the query window (review of the function [here][10]). The lookback mode of the `moving-rollup` function with query for data points past the original query window.
+Datadog provide a `moving-rollup` function that allows you to combine data points from a specified time window (review of the function [here][10]). With nested queries, you can use the `moving-rollup` function to query for data points past the original query window. 
 
 {{< img src="/metrics/nested_queries/moving-rollup-digram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
