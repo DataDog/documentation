@@ -217,7 +217,7 @@ The Agent also supports a wide range of [integrations][29], enabling you to exte
 
 [Traces][31] collected through the Trace Agent enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance. 
 
-For a full list of benefits with installing the Agent on your cloud instances, see [Why should I install the Datadog Agent on my cloud instances?][27]
+For the full list of benefits of installing the Agent on your cloud instances, see [Why should I install the Datadog Agent on my cloud instances?][27]
 
 
 
