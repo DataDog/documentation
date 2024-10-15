@@ -42,7 +42,7 @@ Integrating your Google Cloud projects with Datadog allows you to monitor real-t
 
 You can integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
 
-After reviewing the above [Prerequisites][52], follow these step-by-step instructions to set up the Google Cloud integration:
+After reviewing the above [Prerequisites][3], follow these step-by-step instructions to set up the Google Cloud integration:
 
 {{% collapse-content title=" 1. Create your Google Cloud service account" level="h5" %}}
 1. Open your [Google Cloud console][53].
@@ -278,7 +278,7 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 
 [1]: https://www.datadoghq.com/
 [2]: https://cloud.google.com/iam/docs/service-accounts-create
-[3]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#prerequisites
+[3]: https://docs.datadoghq.com/getting_started/integrations/google_cloud/#prerequisites
 [4]: https://cloud.google.com/gcp?utm_source=google&utm_medium=cpc&utm_campaign=emea-ie-all-en-bkws-all-all-trial-b-gcp-1707574&utm_content=text-ad-none-any-DEV_c-CRE_669760174288-ADGP_Hybrid+%7C+BKWS+-+BRO+%7C+Txt+-+GCP+-+General+-+v3-KWID_43700077708210645-kwd-14471151-userloc_1007850&utm_term=KW_gcp-NET_g-PLAC_&&gad_source=1&gclid=Cj0KCQjwjY64BhCaARIsAIfc7YbR2kdAZ5vGSkq1FDDHkHRnzAX7KcFTlFxIfOUnS86LyRc9Y1TerXEaAmOMEALw_wcB&gclsrc=aw.ds&hl=en
 [5]: https://cloud.google.com/iam/docs/service-account-overview#impersonation
 [6]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#setup
@@ -327,7 +327,6 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 [49]: https://docs.datadoghq.com/database_monitoring/
 [50]: https://docs.datadoghq.com/cloud_cost_management/
 [51]: https://docs.datadoghq.com/cloud_cost_management/google_cloud/
-[52]: https://docs.datadoghq.com/getting_started/integrations/google_cloud/#prerequisites
 [53]: https://console.cloud.google.com/
 [54]: https://app.datadoghq.com/integrations/google-cloud-platform
 [55]: https://console.cloud.google.com/
