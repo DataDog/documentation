@@ -68,7 +68,7 @@ After reviewing the above [Prerequisites][3], follow these step-by-step instruct
 {{% /collapse-content %}} 
 
 {{% collapse-content title="2. Add the Datadog principal to your service account" level="h5" %}}
-1. In Datadog, navigate to the [**Integrations** > **Google Cloud Platform**][54].
+1. In Datadog, navigate to **Integrations** > [**Google Cloud Platform**][54].
 
 2. Click on **Add Google Cloud Account**. 
 If you have no configured projects, you are automatically redirected to this page.
