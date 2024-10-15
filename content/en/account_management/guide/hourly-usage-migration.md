@@ -130,11 +130,6 @@ ENDPOINT | PRODUCT FAMILY
 : `logs_scanned_bytes`
 : `total_scanned_bytes`
 
-`<base_url>/api/v1/usage/rum` | rum
-: `browser_rum_units`
-: `mobile_rum_units`
-: `rum_units`
-
 `<base_url>/api/v1/usage/ci-app` | ci_app
 : `ci_pipeline_indexed_spans`
 : `ci_test_indexed_spans`
