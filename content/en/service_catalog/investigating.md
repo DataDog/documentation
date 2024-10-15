@@ -31,7 +31,7 @@ algolia:
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
 ## Determining and communicating service levels
-Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of any issues. 
+Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
 
 ## Investigating infrastructure
 From the **Performance** tab, find the service you are investigating. In the *Infrastructure* column, click the resources related to this service to **View in Service Context Map**.
