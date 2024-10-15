@@ -244,8 +244,7 @@ To use Google Cloud Cost Management in Datadog, [follow these steps][51].
 
 ### Security
 
-{{< tabs >}}
-{{% tab "Cloud SIEM" %}}
+### Cloud SIEM
 
 With Cloud SIEM, you can analyze operational and security logs in real time, while utilizing out-of-the-box integrations and rules to detect threats and investigate them.
 To set this feature up, see [Getting Started with Cloud SIEM][36].
@@ -258,9 +257,7 @@ To view security findings from [Google Cloud Security Command Center][37] in Clo
 [37]: https://console.cloud.google.com/projectselector2/security/command-center/overview?supportedpurview=organizationId,folder,project
 [38]: https://docs.datadoghq.com/integrations/google_cloud_security_command_center/#installation
 
-{{% /tab %}}
-{{% tab "Cloud Security Management" %}}
-
+### Cloud Security Management
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
 
@@ -273,9 +270,6 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [39]: https://docs.datadoghq.com/security/cloud_security_management/setup/
 [40]: https://docs.datadoghq.com/security/cloud_security_management/setup/cloud_integrations/?tab=googlecloud
 [41]: https://docs.datadoghq.com/infrastructure/resource_catalog/
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Database Monitoring (DBM)
 Use [Database Monitoring (DBM)][49] to gain increased insight on performance metrics, host health and query samples for your Google Cloud SQL databases.
