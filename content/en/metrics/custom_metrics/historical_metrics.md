@@ -49,7 +49,7 @@ You can enable or disable Historical Metrics Ingestion for multiple metrics at o
 1. Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
 1. Select **Enable historical metrics**.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
-1. To disable Historical Metrics Ingestion for the namespace, click the **Historical metrics** toggle.
+1. (Optional) To disable Historical Metrics Ingestion for the namespace, click the **Historical metrics** toggle.
 
 {{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics ingestion toggle" >}}
 
