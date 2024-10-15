@@ -59,7 +59,8 @@ To run the workflow:
 
 ## Monitor triggers
 
-To trigger a workflow from a monitor, you must first add a monitor trigger to your workflow:
+### Add a monitor trigger to your workflow
+
 1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Monitor**.
    - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
@@ -69,7 +70,8 @@ To trigger a workflow from a monitor, you must first add a monitor trigger to yo
 1. Save your Workflow.
 1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-Add the workflow to your monitor:
+### Add the workflow to your monitor
+
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
 1. In the **Configure notifications & automations** section, click **+ Add Workflow**.
