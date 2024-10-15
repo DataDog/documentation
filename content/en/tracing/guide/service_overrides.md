@@ -18,7 +18,7 @@ Inferred services improve how Datadog represents service dependencies. This docu
 
 ### Before inferred services
 
-Datadog used to change service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. Changing the service name of spans will be referred to as a [**service override**](#service-override) in the rest of this guide. The initial service name will be referred to as the [**base service**](#base-service)
+Datadog used to change service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. Changing the service name of spans is referred to as a [**service override**](#service-override) in the rest of this guide. The initial service name is referred to as the [**base service**](#base-service).
 
 In this approach, a span representing a client call from a service `auth-dotnet` to a PostgreSQL database would be tagged with `service:auth-dotnet-postgres`. In service maps, these dependencies were represented as separate services, as shown below:
 
@@ -98,7 +98,7 @@ For example:
 - .NET tags gRPC calls as `service:<DD_SERVICE>-grpc-client`
 - Python tags gRPC calls as `service:grpc-client`
 
-With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This ensure all spans are always tagged with the *default service name* emitting the span; [`peer.*`][6] attributes are used to describe the called dependency (database, queue, etc...).
+With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This ensures all spans are always tagged with the *default service name* emitting the span; [`peer.*`][6] attributes are used to describe the called dependency (for example, database or queue).
 
 | Scenario | Service Name | Additional `peer.*` Attributes |
 |----------|--------------|--------------------------------|
