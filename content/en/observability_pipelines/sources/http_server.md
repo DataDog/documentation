@@ -3,7 +3,7 @@ title: HTTP Server Source
 disable_toc: false
 ---
 
-Use Observability Pipelines' HTTP/S Server source to push logs from HTTP client requests. Select and set up this source when you [set up a pipeline][1].
+Use the Observability Pipelines' HTTP/S Server source to receive logs from HTTP client requests. Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 
