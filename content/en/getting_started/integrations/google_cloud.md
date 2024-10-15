@@ -49,7 +49,7 @@ After reviewing the above [Prerequisites][52], follow these step-by-step instruc
 
 2. Navigate to **IAM & Admin** > **Service Accounts**.
 
-3. Click on Create service account at the top.
+3. Click on **Create service account** at the top.
 
 4. Give the service account a unique name, then click **Create and continue**.
 
