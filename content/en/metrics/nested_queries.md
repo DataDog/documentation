@@ -228,7 +228,7 @@ Remap functions give you the ability to refine and transform query results based
 
 
 {{% collapse-content title="`is_greater()` example query" level="h5" %}}
-`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30. 
+`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/is_greater_ui.png" alt="example of is_greater mapping function in UI" style="width:100%;" >}}
@@ -238,7 +238,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 {{% collapse-content title="`is_less()` example query" level="h5" %}}
-`is_less()` returns 1.0 for each point where the query is greater than a constant of 30. 
+`is_less()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/is_less_ui.png" alt="example of is_less mapping function in UI" style="width:100%;" >}}
@@ -249,7 +249,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 {{% collapse-content title="`is_between()` example query" level="h5" %}}
-`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30. 
+`is_between()` returns 1.0 for each point where the query is between 3 and 5 (Exclusive), and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/is_between_ui.png" alt="example of is_between mapping function in UI" style="width:100%;" >}}
