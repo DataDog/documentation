@@ -15244,7 +15244,7 @@ components:
       description: Object describing the synthetics tests to trigger.
       properties:
         tests:
-          description: Individual synthetics test.
+          description: List of individual synthetic tests.
           items:
             $ref: '#/components/schemas/SyntheticsCITest'
           type: array
