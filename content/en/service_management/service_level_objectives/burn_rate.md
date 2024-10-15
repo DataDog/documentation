@@ -14,7 +14,9 @@ further_reading:
 
 SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO's 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
-**Note:** Burn rate alerts are available for the following SLO types:
+<div class="alert alert-info">For time slice SLOs containing groups, you can set burn rate alerts based on the SLO groups or the overall SLO. For metric-based and monitor-based SLOs, you can only set alerts based on the overall SLO.</div>
+
+Burn rate alerts are available for the following SLO types:
 
 - [Metric-based SLOs][1], 
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
