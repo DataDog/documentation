@@ -213,7 +213,7 @@ After the Google Cloud integration is configured, Datadog automatically starts c
 The [Datadog Agent][25] provides the [most granular, low-latency metrics from your infrastructure][47], delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts. 
 The Agent can be installed on any host, including [GKE][28].
 
-The Agent also supports [a wide range of integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
+The Agent also supports a wide range of [integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
 
 [Traces collected through the Trace Agent][31] enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance. 
 
