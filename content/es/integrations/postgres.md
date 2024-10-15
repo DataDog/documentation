@@ -52,7 +52,7 @@
 "git_integration_title": "postgres"
 "integration_id": "postgres"
 "integration_title": "Postgres"
-"integration_version": "22.0.0"
+"integration_version": "22.0.1"
 "is_public": true
 "manifest_version": "2.0.0"
 "name": "postgres"
@@ -354,7 +354,7 @@ LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%", "port":5432,"username":
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [recopilación de logs de Docker][2].
 
-Luego, configura [integraciones de logs][3] como etiquetas (labels) Docker:
+Luego, configura [integraciones de logs][3] como etiquetas Docker:
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"postgresql","service":"postgresql"}]'
@@ -496,7 +496,7 @@ Para configurar este check para un Agent que se ejecuta en ECS:
 
 ##### Recopilación de métricas
 
-Configura [plantillas de integraciones Autodiscovery][1] como etiquetas (labels) Docker en el contenedor de tu aplicación:
+Configura [plantillas de integraciones Autodiscovery][1] como etiquetas Docker en el contenedor de tu aplicación:
 
 ```json
 {
@@ -517,7 +517,7 @@ Configura [plantillas de integraciones Autodiscovery][1] como etiquetas (labels)
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [recopilación de logs de ECS][2].
 
-Luego, configura [integraciones de logs][3] como etiquetas (labels) Docker:
+Luego, configura [integraciones de logs][3] como etiquetas Docker:
 
 ```json
 {
