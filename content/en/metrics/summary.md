@@ -45,7 +45,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 Clicking on **Configure Metrics** gives you three options that you can use to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk Configuration Buttons" style="width:100%;">}}
 
 * **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
@@ -53,7 +53,7 @@ Clicking on **Configure Metrics** gives you three options that you can use to co
 
 * **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics.
 
-{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:75%;">}}
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
 * **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
