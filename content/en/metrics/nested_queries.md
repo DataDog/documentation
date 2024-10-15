@@ -219,7 +219,8 @@ When nesting these `moving_rollups`, the rollup intervals provided must get larg
 
 
 ## Remapping functions
-To remap the results of your metric queries, you can now use the following 3 new functions:
+
+Remap functions give you the ability to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis Nested queries unlocks the following 3 new functions:
 
 - `is_greater` (`<QUERY>, <THRESHOLD>`)
 - `is_less` (`<QUERY>, <THRESHOLD>`)
@@ -227,19 +228,33 @@ To remap the results of your metric queries, you can now use the following 3 new
 
 
 {{% collapse-content title="`is_greater()` example query" level="h5" %}}
-When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30. 
 
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_greater_ui.png" alt="example of is_greater mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_greater_json.png" alt="example of is_greater mapping function in JSON" style="width:100%;" >}}
 
 {{% /collapse-content %}} 
 
 {{% collapse-content title="`is_less()` example query" level="h5" %}}
-When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+`is_less()` returns 1.0 for each point where the query is greater than a constant of 30. 
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_less_ui.png" alt="example of is_less mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_less_json.png" alt="example of is_less mapping function in JSON" style="width:100%;" >}}
 
 
 {{% /collapse-content %}} 
 
 {{% collapse-content title="`is_between()` example query" level="h5" %}}
-When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30. 
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_between_ui.png" alt="example of is_between mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_between_json.png" alt="example of is_between mapping function in JSON" style="width:100%;" >}}
 
 
 {{% /collapse-content %}} 
