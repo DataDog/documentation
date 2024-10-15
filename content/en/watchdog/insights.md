@@ -290,7 +290,7 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 {{% tab "Cloud Cost Management" %}}
 
-For Cloud Cost, the Watchdog Insight carousel analyzes outliers to automatically [reflect arising trends][1] that you can investigate to nip potential cost explosions in the bud.
+For Cloud Cost, the Watchdog Insight carousel analyzes outliers to automatically [reflect arising trends][1] that you can investigate to prevent potential cost explosions.
 
 
 [1]: https://app.datadoghq.com/cost/explorer
