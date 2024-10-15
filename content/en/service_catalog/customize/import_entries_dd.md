@@ -15,6 +15,7 @@ further_reading:
   text: "Import Backstage YAML files into Datadog"
 aliases:
     - /service_catalog/import_entries_dd/
+    - /service_catalog/enrich_default_catalog/import_entries_dd
 ---
 
 ## Manual Service Discovery through other Datadog telemetries
