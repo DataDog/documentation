@@ -97,7 +97,7 @@ Ordena por **Filas/Consulta** para ver si un host en particular tiende a devolve
 
 Los gráficos muestran la comparación de las métricas de esta consulta con las de todas las consultas excepto esta. Puede que la latencia media de esta consulta sea mucho mayor que la media de las demás, pero que también se ejecute con poca frecuencia, por lo que su impacto total es menor. Puedes ver cuánto tiempo de la base de datos consume cuando se ejecuta, en comparación con todas las demás consultas.
 
-Haz clic en la pestaña **Metrics* (Métricas) para ver más gráficos de métricas para esta consulta.
+Haz clic en la pestaña **Metrics** (Métricas) para ver más gráficos de métricas para esta consulta.
 
 ### Planes explicativos
 
@@ -105,7 +105,7 @@ Datadog recopila los planes de explicación de forma continua, por lo que una co
 
 {{< img src="database_monitoring/dbm-qd-explain-plans-2.png" alt="Información de los planes de explicación de una consulta" style="width:100%;">}}
 
-Selecciona un plan para ver métricas de costes o su JSON. Haz clic en **View All Samples for This Plan* (Ver todas las muestras de este plan) para ir a la vista Muestras de consulta de [las muestras asociadas a él][5].
+Selecciona un plan para ver métricas de costes o su JSON. Haz clic en **View All Samples for This Plan** (Ver todas las muestras de este plan) para ir a la vista Muestras de consulta de [las muestras asociadas a él][5].
 
 No todas las consultas tienen planes de explicación, por varias razones, incluyendo qué tipo de consulta es, o varios parámetros de configuración. Para ver más detalles, consulta [Solucionar problemas][6].
 
