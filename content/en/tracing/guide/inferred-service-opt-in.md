@@ -13,10 +13,13 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/"
   tag: "Documentation"
   text: "Add the Datadog Tracing Library"
+- link: "/tracing/guide/service_overrides"
+  tag: "Documentation"
+  text: "Service Overrides"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
-Inferred service dependencies are in private beta. To request access, complete the form.
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the Preview!" >}}
+Inferred service dependencies are in Preview. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
@@ -262,32 +265,11 @@ To opt in, add the following environment variables to your tracer settings or sy
 
 ### Global default service naming migration
 
-When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+With inferred services, service names are automatically detected from span attributes. When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
-Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRPC calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
+<div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
-_ | Before | After
---|-------|--------
-Service name | `service:my-service-grpc-client` or `service:grpc-client` | `service:myservice` 
-additional `peer.*` attributes | _No `peer.*` tags set_ | `@peer.service:otherservice` (`otherservice` being the name of the remote service being called with gRPC)
-
-Similarly, for a span representing a call to a mySQL database:
-
-_ | Before | After
---|-------|--------
-Service name | `service:my-service-mysql` or `service:mysql` | `service:myservice` 
-additional `peer.*` attributes | _No `peer.*` tags set_ | `@peer.db.name:user-db`, `@peer.db.system:mysql`
-
-Consequently, if you have existing:
-
-- APM metrics
-- APM custom span metrics
-- Trace analytics
-- Retention filters
-- Sensitive data scans
-- Monitors, dashboards, or notebooks 
-
-And these target similar service names, update those items to use the global default service tag (`service:<DD_SERVICE>`) instead.
+For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][10].
 
 ## Further reading
 
@@ -300,3 +282,4 @@ And these target similar service names, update those items to use the global def
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L517-L538 
 [9]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[10]: /tracing/guide/service_overrides
