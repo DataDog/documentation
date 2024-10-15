@@ -154,7 +154,7 @@ Response bodies and parameter names conform to the [JSON:API specification][3]. 
 available in the v1 APIs is still available. See the example below of the mapping from the v1 hosts
 API to the v2 hourly usage API.
 
-### V1 API: [Get hourly usage for hosts and containers][4]
+### V1 API: Get hourly usage for hosts and containers
 
 #### Request
 
@@ -324,5 +324,3 @@ parameter `filter[include_descendants]` to request data for child organizations.
 [1]: /api/latest/usage-metering/#get-hourly-usage-by-product-family
 [2]: /account_management/guide/relevant-usage-migration/#rum
 [3]: https://jsonapi.org/format/
-[4]: /api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
-
