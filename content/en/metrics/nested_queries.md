@@ -220,7 +220,7 @@ When nesting these `moving_rollups`, the rollup intervals provided must get larg
 
 ## Remapping functions
 
-Remap functions give you the ability to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis Nested queries unlocks the following 3 new functions:
+Remap functions give you the ability to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis (read more about remap functions [here][]). Nested queries unlocks the following 3 new functions:
 
 - `is_greater` (`<QUERY>, <THRESHOLD>`)
 - `is_less` (`<QUERY>, <THRESHOLD>`)
