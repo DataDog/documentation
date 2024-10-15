@@ -22,7 +22,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 
 Throughout most of Datadog, Watchdog returns two types of insights:
 
-- **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
+- **Anomalies**: All the pre-calculated [Watchdog alerts][1] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][2].
 - **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency). Outliers are dynamically calculated on the data matching the active query and the time frame.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
@@ -31,20 +31,20 @@ Throughout most of Datadog, Watchdog returns two types of insights:
 
 The Watchdog Insights carousel sits near the top of the following product pages:
 
-- [Log explorer][1]
+- [Log explorer][3]
 - APM:
-    - [Trace Explorer][2]
-    - [Service Page][3]
-    - [Resource Page][4]
-    - [Database Explorer][5]
-    - [Profile Explorer][6]
+    - [Trace Explorer][4]
+    - [Service Page][5]
+    - [Resource Page][6]
+    - [Database Explorer][7]
+    - [Profile Explorer][8]
 - Infrastructure:
-    - [Processes Explorer][7]
-    - [Serverless Explorer][8]
-    - [Kubernetes Explorer][9]
-    - [Cloud Cost Explorer][15]
-- [Real User Monitoring (RUM) Explorer][10]
-- [Error Tracking issue side panel][13]
+    - [Processes Explorer][9]
+    - [Serverless Explorer][10]
+    - [Kubernetes Explorer][11]
+    - [Cloud Cost Explorer][12]
+- [Real User Monitoring (RUM) Explorer][13]
+- [Error Tracking issue side panel][14]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
@@ -75,7 +75,7 @@ Datadog collects various types of data to provide insights into application perf
 - What is the source of the spike?
 - Does this anomaly affect everyone or is an isolated incident?
 
-For more information, see the [Watchdog Explains][14] documentation.
+For more information, see the [Watchdog Explains][15] documentation.
 
 ## Outlier types
 
@@ -109,9 +109,9 @@ In the full side panel view, you can see:
 {{% tab "APM" %}}
 
 APM outliers are available on all APM pages where the Watchdog Insights carousel is available:
- - [Trace Explorer](/tracing/trace_explorer/?tab=listview)
- - [Service Page](/tracing/services/service_page/)
- - [Resource Page](/tracing/services/resource_page/)
+ - [Trace Explorer][1]
+ - [Service Page][2]
+ - [Resource Page][3]
 
 ### Error outliers
 
@@ -152,6 +152,9 @@ In the full side panel, you can see a latency distribution graph for the tag and
 
 {{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
+[1]: /tracing/trace_explorer/?tab=listview
+[2]: /tracing/services/service_page/
+[3]: /tracing/services/resource_page/
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
@@ -220,7 +223,7 @@ An overlay is then set on the databases, with pink pills highlighting the differ
 
 ### Error outlier
 
-Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root causes of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
+Error outliers display fields such as [faceted tags or attributes][1] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root causes of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
 
 In the banner card view, you can see:
 
@@ -234,9 +237,9 @@ In the full side panel, you can see a timeseries graph about the total number of
 
 ### Latency outlier
 
-Latency outliers display fields such as [faceted tags or attributes][1] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
+Latency outliers display fields such as [faceted tags or attributes][2] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
 
-Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
+Latency outliers are computed for [Core Web Vitals][3] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][1]. For more information, see [Monitoring Page Performance][3].
 
 In the banner card view, you can see:
 
@@ -247,9 +250,9 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
-[1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[1]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[2]: /real_user_monitoring/explorer/search/#facets
+[3]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
@@ -271,7 +274,6 @@ An overlay is then set on the function, with pink pills highlighting the differe
 
 {{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:100%;">}}
 
-[1]: /serverless/guide/serverless_warnings/#errors
 {{% /tab %}}
 {{% tab "Processes" %}}
 
@@ -290,8 +292,8 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 For Cloud Cost, the Watchdog Insight carousel analyzes outliers to automatically [reflect arising trends][1] that you can investigate to nip potential cost explosions in the bud.
 
-[1]: https://app.datadoghq.com/cost/explorer
 
+[1]: https://app.datadoghq.com/cost/explorer
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -301,18 +303,18 @@ For Cloud Cost, the Watchdog Insight carousel analyzes outliers to automatically
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs
-[2]: https://app.datadoghq.com/apm/traces
-[3]: /tracing/services/service_page/
-[4]: /tracing/services/resource_page/
-[5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/search
-[7]: https://app.datadoghq.com/process
-[8]: https://app.datadoghq.com/functions
-[9]: https://app.datadoghq.com/orchestration/overview/pod
-[10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
-[11]: /watchdog/#overview
-[12]: https://app.datadoghq.com/watchdog
-[13]: https://app.datadoghq.com/rum/error-tracking
-[14]: /dashboards/graph_insights/watchdog_explains
-[15]: https://app.datadoghq.com/cost/explorer
+[1]: /watchdog/#overview
+[2]: https://app.datadoghq.com/watchdog
+[3]: https://app.datadoghq.com/logs
+[4]: https://app.datadoghq.com/apm/traces
+[5]: /tracing/services/service_page/
+[6]: /tracing/services/resource_page/
+[7]: https://app.datadoghq.com/databases/list
+[8]: https://app.datadoghq.com/profiling/search
+[9]: https://app.datadoghq.com/process
+[10]: https://app.datadoghq.com/functions
+[11]: https://app.datadoghq.com/orchestration/overview/pod
+[12]: https://app.datadoghq.com/cost/explorer
+[13]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
+[14]: https://app.datadoghq.com/rum/error-tracking
+[15]: /dashboards/graph_insights/watchdog_explains
