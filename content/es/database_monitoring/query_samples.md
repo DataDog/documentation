@@ -20,7 +20,7 @@ La página de muestras presenta un snapshot de un momento de ejecución de las c
 
 ## Buscar y filtrar
 
-La página Muestras presenta consultas en todos los productos de bases de datos compatibles juntos (a diferencia de la página de las métricas de consultas, en la que puedes seleccionar la base de datos que quieres consultar). Filtra por la faceta `source` para ver los datos de una base de datos concreta (Postgres o MySQL).
+La página de muestras presenta consultas en todos los productos de bases de datos compatibles juntos (a diferencia de la página de las métricas de consultas, en la que puedes seleccionar la base de datos que quieres consultar). Filtra por la faceta `source` para ver los datos de una base de datos concreta (Postgres o MySQL).
 
 Introduce etiquetas (tags) en el campo de búsqueda para filtrar la lista de muestras de consultas o utiliza las facetas que aparecen a la izquierda. Las facetas incluyen:
 
@@ -51,7 +51,7 @@ Filtra u ordena para encontrar las consultas que tardan más en ejecutarse duran
 
 ### Detalles de la muestra
 
-Haz clic en una consulta de la tabla para abrir su página de detalles de las muestras. Utiliza los cuadros Source (Origen), Host y Client IP (IP del cliente) en la parte superior, para filtrar la página de las muestras de consultas por los valores de esta muestra o para consultar otra información de Datadog como el dashboard del host o las métricas del tráfico de red de la IP del cliente.
+Haz clic en una consulta de la tabla para abrir su página de detalles de las muestras. Utiliza los cuadros Source (Origen), Host y Client IP (IP del cliente) en la parte superior, para filtrar la página de muestras de consultas por los valores de esta muestra o para consultar otra información de Datadog como el dashboard del host o las métricas del tráfico de red de la IP del cliente.
 
 {{< img src="database_monitoring/dbm_sd_actions.png" alt="Cuadros de acciones de los detalles de las muestras" style="width:100%;">}}
 
