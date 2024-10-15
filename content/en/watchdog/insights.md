@@ -23,7 +23,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 Throughout most of Datadog, Watchdog returns two types of insights:
 
 - **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
-- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
+- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency). Outliers are dynamically calculated on the data matching the active query and the time frame.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -42,6 +42,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Processes Explorer][7]
     - [Serverless Explorer][8]
     - [Kubernetes Explorer][9]
+    - [Cloud Cost Explorer][15]
 - [Real User Monitoring (RUM) Explorer][10]
 - [Error Tracking issue side panel][13]
 
@@ -284,6 +285,15 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 [1]: https://app.datadoghq.com/orchestration/overview/pod
 {{% /tab %}}
+
+{{% tab "Cloud Cost Management" %}}
+
+For Cloud Cost, the Watchdog Insight carousel analyzes outliers to automatically [reflect arising trends][1] that you can investigate to nip potential cost explosions in the bud.
+
+[1]: https://app.datadoghq.com/cost/explorer
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -305,3 +315,4 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
 [14]: /dashboards/graph_insights/watchdog_explains
+[15]: https://app.datadoghq.com/cost/explorer
