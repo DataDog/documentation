@@ -27,17 +27,11 @@ further_reading:
 algolia:
   tags: ['service catalog']
 ---
+## Assigning an owner to a service:
+You can assign a ‘team’ to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. It’s recommended that you set up [Datadog Teams][5] so you may specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
-Clicking a service opens a side panel with details in two main sections: 
-
-## Service details by views:
-
-- **Ownership information** from the service definition such as links to team contacts, source code, and supplemental information like documentation and dashboards.
-- **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
-- **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
-- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
-- **Costs information** showing the cloud spend for a service, broken down by resource types.
-- **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
+## Determining and communicating service levels
+Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of any issues. 
 
 ## Investigating infrastructure
 From the **Performance** tab, find the service you are investigating. In the *Infrastructure* column, click the resources related to this service to **View in Service Context Map**.
@@ -45,6 +39,18 @@ From the **Performance** tab, find the service you are investigating. In the *In
 {{< img src="tracing/service_catalog/access_service_context_map.png" alt="Access the Service Context Map from the Service Catalog Performance tab, highlighting the Infrastructure column" style="width:90%;" >}}
 
 The Service Context Map provides an overview of the relationships and dependencies between services and related infrastructure. Use this view to analyze the source of an issue by looking at upstream and downstream services and infrastructure.
+
+Clicking a service in Service Catalog opens a side panel with details in two main sections: 
+
+## Service details by views:
+
+- **Ownership information** from the [Service Definition][4] such as links to team, contacts, source code, and supplemental information like documentation and dashboards.
+- **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
+- **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
+- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
+- **Costs information** showing the cloud spend for a service, broken down by resource types.
+- **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
+
 
 
 ## Configuration details 
@@ -58,7 +64,8 @@ The Service Context Map provides an overview of the relationships and dependenci
 
   {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
 
-Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
+Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
+
 
 ## Further reading
 
@@ -67,3 +74,7 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 [1]: /agent/remote_config/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[4]: /service_catalog/service_definitions/
+[5]: /account_management/teams/
+[6]: /tracing/services/service_page/
+
