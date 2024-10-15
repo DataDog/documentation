@@ -34,7 +34,7 @@
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
             {{ range $endpoint_data }}
                 {{ $tags := slice }}
-                {{ with .tags }}{{ $tags = . }}{{ end }}
+                {{ with (.tags | default slice) }}{{ $tags = . }}{{ end }}
 
                 {{ if in $tags $title }}
 
@@ -60,7 +60,7 @@
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
             {{ range $endpoint_data }}
                 {{ $tags := slice }}
-                {{ with .tags }}{{ $tags = . }}{{ end }}
+                {{ with (.tags | default slice) }}{{ $tags = . }}{{ end }}
 
                 {{ if in $tags $title }}
 
