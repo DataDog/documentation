@@ -80,7 +80,7 @@ The email body undergoes several cleanup steps to enhance readability and securi
 
 - **HTML to Markdown:** HTML content is converted to its markdown equivalent.
 - **HTML sanitization:** For security, email bodies are sanitized, allowing only specific HTML tags: `a`, `br`, `code`, `div`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `iframe`, `img`,
-`li`, `ol`, `p`, `pre`, `span`, `strong`, `ul`. Any other HTML tag, including strings enclosed in `<>`, will be removed.
+`li`, `ol`, `p`, `pre`, `span`, `strong`, `ul`. Any other HTML tag, including strings enclosed in `<>`, are removed.
 - **Strip reply/forward content:** Only the most recent email in a thread is retained, with older replies/forwards removed.
 
 ### Datadog event {#datadog-event-2}
