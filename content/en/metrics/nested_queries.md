@@ -191,7 +191,7 @@ In the UI or JSON tab, it would look as follows:
 
 Datadog provides a `moving_rollup` function that enables aggregation of data points over a specified time window (quick refresher [here][10]). By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze data points beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
 
-{{< img src="/metrics/nested_queries/moving-rollup-digram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
+{{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
 The existing version of the `moving-rollup` function only supports the following aggregators:
 
