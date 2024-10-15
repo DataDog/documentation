@@ -42,7 +42,7 @@ The Service Context Map provides an overview of the relationships and dependenci
 
 Click a service in Service Catalog to open the side panel with the following details: 
 
-## Service details by views:
+### Service details by views
 
 - **Ownership information** from the [Service Definition][4], such as links to team, contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
