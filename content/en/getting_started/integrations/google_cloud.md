@@ -155,7 +155,7 @@ The Google Cloud integration collects [**all GA Google Cloud metrics**][17] from
 | [Cloud Tasks][20]                   | Distributed task queues                                                               |
 | [Cloud TPU][21]                     | Train and run machine learning models                                                 |
 | [Compute Engine][22]                | High performance virtual machines                                                     |
-| [Container Engine][23]              | Kubernetes, managed by google                                                         |
+| [Container Engine][23]              | Kubernetes, managed by Google                                                         |
 | [Datastore][24]                     | NoSQL database                                                                        |
 | [Firebase][25]                      | Mobile platform for application development                                           |
 | [Functions][26]                     | Serverless platform for building event-based microservices                            |
