@@ -211,7 +211,7 @@ Many of these integrations are installed by default when Datadog recognizes data
 After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
 
 The [Datadog Agent][25] provides the [most granular, low-latency metrics from your infrastructure][47], delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts. 
-The Agent can be installed on any host, including GKE - [Google Kubernetes Engine, Agent][28].
+The Agent can be installed on any host, including [GKE][28].
 
 The Agent also supports [a wide range of integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
 
