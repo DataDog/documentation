@@ -319,7 +319,7 @@ See [RUM & Session Replay Billing][7] for details on how web views in mobile app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup
 [4]: /logs/log_collection/ios
