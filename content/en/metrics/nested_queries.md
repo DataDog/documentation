@@ -32,6 +32,7 @@ In Datadog, each metric query in Datadog is evaluated with two layers of aggrega
 
 Other functions cannot be combined with multilayer aggregation.
 
+
 ### Multilayer time aggregation
 
 Multilayer time aggregation can be accessed with the `rollup` function. As a reminder, every metric query already contains an initial `rollup` (time aggregation) that controls the granularity of the data points displayed on the graph. For more information, see the [Rollup][1] documentation. 
@@ -84,19 +85,19 @@ Note: if you do not specify tag(s) to group by in your initial space aggregation
 
 The first layer of space aggregation supports the following aggregators:
 
-- avg by
-- sum by
-- min by
-- max by
+- `avg by`
+- `sum by`
+- `min by`
+- `max by`
 
 Additional layers of space aggregation support:
 
-- avg by
-- sum by
-- min by
-- max by
-- arbitrary percentile pXX (p75, p99, p99.99, etc.)
-- stddev by
+- `avg by`
+- `sum by`
+- `min by`
+- `max by`
+- `arbitrary percentile pXX` (`p75, p99, p99.99, etc.`)
+- `stddev by`
 
 Multilayer space aggregation can be used with the following functions: 
 | Supported Functions   | Description                                                                                    |
@@ -186,6 +187,39 @@ In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
+## Moving rollup
+
+The existing version of the `moving-rollup` function does not execute a lookback on the query window (review of the function [here][10]). The lookback mode of the `moving-rollup` function with query for data points past the original query window.
+
+{{< img src="/metrics/nested_queries/moving-rollup-digram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
+
+The existing version of the `moving-rollup` function only supports the following aggregators:
+
+- `avg`
+- `sum`
+- `min`
+- `max`
+- `median`
+
+When nesting queries, only the lookback mode version of the `moving_rollup` function can be used. This version of the function supports the following aggregators:
+
+- `avg`
+- `sum`
+- `min`
+- `max`
+- `count`
+- `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
+- `stddev`
+
+{{% collapse-content title="Moving rollup example query" level="h5" %}}
+When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+
+
+{{% /collapse-content %}} 
+
+
+## Remapping functions
+
 
 ## How can I use Datadog API's to leverage nested queries?
 You can use nested queries functionality in our public API for querying timeseries data [here][3]. Simply change the contents of the **formula** object
@@ -207,3 +241,4 @@ You can use nested queries functionality in our public API for querying timeseri
 [7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
 [8]: /metrics/nested_queries/#higher-resolution-queries
 [9]: /metrics/distributions/
+[10]: /dashboards/functions/rollup/#moving-rollup
