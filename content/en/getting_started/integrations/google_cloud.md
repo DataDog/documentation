@@ -18,7 +18,7 @@ Integrating your Google Cloud projects with Datadog allows you to monitor real-t
 - The Google Cloud integration requires the below APIs to be enabled **for each of the projects** you want to monitor:
 
 [Cloud Monitoring API][7] 
-: Allows Datadog to query your Google Cloud Metric data.
+: Allows Datadog to query your Google Cloud metric data.
 
 [Compute Engine API][8] 
 : Allows Datadog to discover compute instance data.
