@@ -76,7 +76,7 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 ```
 
 ### Email body processing {#email-body-2}
-The email body undergoes several cleanup steps to enhance readability and security. Expected changes include:
+The email body goes through several cleanup steps to enhance readability and security. The expected changes include:
 
 - **HTML to Markdown:** HTML content is converted to its markdown equivalent.
 - **HTML sanitization:** For security, email bodies are sanitized, allowing only specific HTML tags: `a`, `br`, `code`, `div`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `iframe`, `img`,
