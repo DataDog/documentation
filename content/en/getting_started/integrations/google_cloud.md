@@ -323,7 +323,7 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 [45]: https://cloud.google.com/vpc/docs/private-service-connect
 [46]: https://docs.datadoghq.com/integrations/google_cloud_private_service_connect/
 [47]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
-[48]: http://localhost:1313/getting_started/integrations/google_cloud/#explore-related-products
+[48]: http://docs.datadoghq.com/getting_started/integrations/google_cloud/#explore-related-products
 [49]: https://docs.datadoghq.com/database_monitoring/
 [50]: https://docs.datadoghq.com/cloud_cost_management/
 [51]: https://docs.datadoghq.com/cloud_cost_management/google_cloud/
