@@ -51,7 +51,7 @@ Clicking on **Configure Metrics** gives you three options that you can use to co
 
 {{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
-* **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics.
+* **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
@@ -248,3 +248,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [28]: /logs/
 [29]: /service_catalog/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
+[31]: /metrics/distributions/
