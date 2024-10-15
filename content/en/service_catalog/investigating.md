@@ -40,7 +40,7 @@ From the **Performance** tab, find the service you are investigating. In the **I
 
 The Service Context Map provides an overview of the relationships and dependencies between services and related infrastructure. Use this view to analyze the source of an issue by looking at upstream and downstream services and infrastructure.
 
-Clicking a service in Service Catalog opens a side panel with details in two main sections: 
+Click a service in Service Catalog to open the side panel with the following details: 
 
 ## Service details by views:
 
