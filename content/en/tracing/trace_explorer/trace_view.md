@@ -86,15 +86,15 @@ To expand or collapse span descendants, click the chevron (>) icon on a row. To 
 
 {{< img src="tracing/trace_view/trace-map.png" alt="Trace map" style="width:100%;">}}
 
-Trace map displays a representation of all services involved in a single trace, providing an overview of the transaction lifecycle at the service level and clarifying service dependencies.
+Trace map displays a representation of all services involved in a single trace. It provides an overview of the transaction lifecycle at the service level and shows service dependencies.
 
-Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call back to a service already invoked by them are represented by duplicated nodes.
+Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call another service that had already been invoked by the original service, are represented by duplicated nodes.
 
-Service nodes explicitly show the percentage of the **total execution time** which provides an overview of the trace duration breakdown at the service level.
+Service nodes explicitly show the percentage of the **total execution time**, which shows the trace duration breakdown at the service level.
 
-If a [service entry span][6] is in an error state, the corresponding service node is marked with a red border to highlight faulty services at a glance. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
+If a [service entry span][6] is in an error state, the corresponding service node is marked with a red border to highlight a faulty services. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
 
-To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name along with any error message. For further investigation, you can switch to the Waterfall view using the ``View Entry Span`` button.
+To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name, along with any error messages. To further investigation, click **View Entry Span** to switch to the Waterfall view.
 
 
 {{% /tab %}}
