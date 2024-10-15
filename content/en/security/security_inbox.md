@@ -56,6 +56,17 @@ Security Inbox ranks issues by considering the severity of a finding first, foll
 
 **Note**: The type of finding, detected risk, or impacted resource does not influence prioritization.
 
+## Using the security context map to identify and mitigate vulnerabilities
+
+The security context map for [Attack Paths](#types-of-findings-in-security-inbox) provides a comprehensive view to help identify and address potential breach points. It effectively maps interconnected misconfigurations, permission gaps, and vulnerabilities that attackers might exploit.
+
+Key features include:
+
+- **Risk assessment**: The map enables security teams to assess the broader impact of vulnerabilities and misconfigurations. This includes evaluating whether security policies---such as access paths and permissions---need updating, and understanding the compliance implications of exposure, particularly when sensitive data is at risk within the blast radius.
+- **Actionable context for immediate response**: The map includes service ownership information and other relevant context, allowing teams to make informed, real-time decisions.  Teams can take action directly from the map by leveraging integrated workflows, sharing security issue links, and accessing the AWS console view of resources for efficient remediation, all without switching tools.
+
+{{< img src="security/security_context_map.png" alt="The security context map showing a publicly accessible AWS EC2 instance with a critical misconfiguration" width="100%">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
