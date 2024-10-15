@@ -44,7 +44,7 @@ Click a service in Service Catalog to open the side panel with the following det
 
 ## Service details by views:
 
-- **Ownership information** from the [Service Definition][4] such as links to team, contacts, source code, and supplemental information like documentation and dashboards.
+- **Ownership information** from the [Service Definition][4], such as links to team, contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
 - **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
