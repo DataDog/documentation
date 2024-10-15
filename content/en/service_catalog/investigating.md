@@ -34,7 +34,7 @@ You can assign a `team` to entries in the Service Catalog either in the UI or by
 Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
 
 ## Investigating infrastructure
-From the **Performance** tab, find the service you are investigating. In the *Infrastructure* column, click the resources related to this service to **View in Service Context Map**.
+From the **Performance** tab, find the service you are investigating. In the **Infrastructure** column, click the resources related to this service to **View in Service Context Map**.
 
 {{< img src="tracing/service_catalog/access_service_context_map.png" alt="Access the Service Context Map from the Service Catalog Performance tab, highlighting the Infrastructure column" style="width:90%;" >}}
 
