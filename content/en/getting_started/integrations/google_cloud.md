@@ -215,7 +215,7 @@ The Agent can be installed on any host, including [GKE][28].
 
 The Agent also supports a wide range of [integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
 
-[Traces collected through the Trace Agent][31] enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance. 
+[Traces][31] collected through the Trace Agent enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance. 
 
 For a full list of benefits with installing the Agent on your cloud instances, see [Why should I install the Datadog Agent on my cloud instances?][27]
 
