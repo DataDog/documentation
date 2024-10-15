@@ -275,7 +275,7 @@ Habilita la asignación de nombres basada en rutas para las solicitudes del serv
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
 **Por defecto**: `-1`<br>
-La frecuencia de muestreo para las trazas (traces), un número entre `0.0` y `1.0`. El valor por defecto de `-1` cede el control del muestreo al Datadog Agent .<br>
+La frecuencia de muestreo para las trazas, un número entre `0.0` y `1.0`. El valor por defecto de `-1` cede el control del muestreo al Datadog Agent .<br>
 **Nota**: `DD_TRACE_SAMPLE_RATE` queda obsoleto en favor de `DD_TRACE_SAMPLING_RULES`.<br>
 
 `DD_TRACE_RATE_LIMIT`
