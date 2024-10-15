@@ -203,7 +203,7 @@ Alternatively, to collect logs from applications running in GCE or GKE, you can 
 
 ## Google Cloud integrations
 
-Our [Integrations page][26] provides a full listing of the available sub-integrations for Google Cloud. 
+The [Integrations page][26] provides a full listing of the available sub-integrations for Google Cloud. 
 Many of these integrations are installed by default when Datadog recognizes data being ingested in from your Google Cloud account.
 
 ## Leveraging the Datadog Agent
