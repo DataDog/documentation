@@ -6,6 +6,9 @@ further_reading:
 - link: "/agent/configuration/network/"
   tag: "Guide"
   text: "Network Traffic"
+- link: "/observability_pipelines/"
+  tag: "documentation"
+  text: "Send logs to external destinations with Observability Pipelines"
 ---
 
 <div class="alert alert-danger">
@@ -14,9 +17,11 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-If you wish to send data to more than one destination, such as a second Datadog organization, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
+This document provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics, and so on) to multiple Datadog organizations.
 
-For a full list of network traffic destinations, see [Network Traffic][1].
+**Note**: Use [Observability Pipelines][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
+
+For a full list of network traffic destinations, see [Network Traffic][2].
 
 ## Metrics and service checks
 
@@ -212,6 +217,8 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadog
 ```
 
 ## Logs
+
+Use the Agent if you want to dual ship logs to multiple Datadog organizations. Use [Observability Pipelines][2] if you want to send logs to Datadog and external destinations.
 
 TCP requires Agent version >= 6.6.<br/>
 HTTPS requires Agent version >= 6.13.
@@ -520,4 +527,5 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/network/
+[1]: /observability_pipelines/
+[2]: /agent/configuration/network/
