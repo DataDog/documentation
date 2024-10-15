@@ -5424,27 +5424,27 @@ menu:
       url: security/security_inbox
       parent: security_platform
       identifier: security_inbox
-      weight: 5
+      weight: 4
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
       idenfier: security_threat_intelligence
-      weight: 6
+      weight: 5
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 7
+      weight: 6
     - name: Account Takeover Protection
       url: security/account_takeover_protection
       parent: security_platform
       identifier: security_ato_protection
-      weight: 8
+      weight: 7
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 9
+      weight: 8
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
