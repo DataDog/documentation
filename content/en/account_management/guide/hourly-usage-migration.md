@@ -25,7 +25,7 @@ The v2 API introduces the concepts of product family and usage type. Product fam
 groupings of one or more usage types. Usage types are usage measurements for a given organization
 and time period. The `all` product family retrieves the usage for all product families or you can filter by specific product families.
 
-This list below shows how the product families and usage types map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted otherwise:
+This list below shows how the product families and usage types map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted:
 
 ENDPOINT | PRODUCT FAMILY
 `<base_url>/api/v1/usage/hosts` | infra_hosts
