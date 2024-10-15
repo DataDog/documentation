@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/sharing/
   tag: Documentación
   text: Gráficos compartidos
-kind: guía
 title: Gráficos integrables con variables de plantilla
 ---
 

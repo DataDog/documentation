@@ -1,6 +1,5 @@
 ---
 title: React Native Libraries for RUM
-kind: documentation
 code_lang: reactnative
 type: multi-code-lang
 code_lang_weight: 20
@@ -8,7 +7,7 @@ aliases:
 - /real_user_monitoring/reactnative/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
   tag: Documentation
@@ -36,7 +35,7 @@ yarn add @datadog/mobile-react-navigation
 ```
 
 ### Track view navigation
-To track changes in navigation as RUM Views, set the `onready` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
+To track changes in navigation as RUM Views, set the `onReady` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
 
 Returning `null` in the `ViewNamePredicate` prevents the new RUM View from being created. The previous RUM View remains active.
 

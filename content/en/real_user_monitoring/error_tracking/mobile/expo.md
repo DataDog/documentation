@@ -1,6 +1,5 @@
 ---
 title: Expo Crash Reporting and Error Tracking
-kind: documentation
 description: Capture Expo crash reports in Datadog.
 aliases:
 - /real_user_monitoring/error_tracking/expo
@@ -19,7 +18,7 @@ further_reading:
   text: Learn about Error Tracking
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
-  text: Visualize Error Tracking data in the RUM Explorer
+  text: Visualize Error Tracking data in the Explorer
 
 ---
 ## Overview
@@ -81,6 +80,9 @@ If you are using EAS to build your Expo application, set `cli.requireCommit` to 
     }
 }
 ```
+### List uploaded source maps
+
+See the [RUM Debug Symbols][4] page to view all uploaded symbols.
 
 ## Limitations
 
@@ -93,7 +95,7 @@ Source maps, mapping files, and dSYM files are limited to **500** MB each.
 
 ## Test your implementation
 
-To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 
@@ -109,7 +111,7 @@ To test your implementation:
 3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
 4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
 
-To make sure your sourcemaps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
+To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
 Install it with yarn or npm then re-install your pods:
 
@@ -128,7 +130,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new sourcemaps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
 ```
 
 ## Additional configuration options
@@ -159,7 +161,7 @@ If you want to disable **all file uploads**, remove `expo-datadog` from the list
 
 ### Using Expo with Datadog and Sentry
 
-Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the sourcemap. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
+Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
 To use both plugins, make sure to add the `expo-datadog` plugin first in order in your `app.json` file:
 
@@ -179,3 +181,4 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage
+[4]: https://app.datadoghq.com/source-code/setup/rum

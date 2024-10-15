@@ -26,7 +26,7 @@ guid: 1cab328c-5560-4737-ad06-92ebc54af901
 integration_id: gitlab
 integration_title: Gitlab
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: gitlab.

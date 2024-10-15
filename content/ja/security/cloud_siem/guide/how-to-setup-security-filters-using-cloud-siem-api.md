@@ -7,7 +7,6 @@ aliases:
 - /ja/security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ja/security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ja/security/guide/how-to-setup-security-filters-using-security-monitoring-api/
-kind: ガイド
 title: Cloud SIEM API によるセキュリティフィルター
 ---
 

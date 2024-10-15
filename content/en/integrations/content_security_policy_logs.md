@@ -9,7 +9,7 @@ dependencies:
 has_logo: true
 integration_title: Content Security Policy
 is_public: true
-kind: integration
+custom_kind: integration
 name: content_security_policy_logs
 public_title: Datadog-Content Security Policy
 short_description: 'Detect CSP violations'
@@ -207,9 +207,9 @@ script-src https://www.datadoghq-browser-agent.com
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters
+[4]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
 [5]: /logs/log_collection/javascript/#initialization-parameters
-[6]: /real_user_monitoring/browser/#setup
+[6]: /real_user_monitoring/browser/setup
 [7]: /logs/log_collection/javascript/#cdn-async
 [8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
 [9]: https://www.npmjs.com/package/@datadog/browser-worker

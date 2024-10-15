@@ -1,6 +1,5 @@
 ---
 title: How to use Terraform to restrict the editing of a dashboard
-kind: guide
 aliases:
   - /dashboards/faq/how-to-use-terraform-to-restrict-dashboards
   - /dashboards/guide/how-to-use-terraform-to-restrict-dashboards

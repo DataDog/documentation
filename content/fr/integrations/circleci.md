@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: CircleCI
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: circleci
 public_title: '"Intégration Datadog/CircleCI"'

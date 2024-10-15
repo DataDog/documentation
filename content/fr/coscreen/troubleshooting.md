@@ -1,6 +1,5 @@
 ---
 is_beta: false
-kind: guide
 title: Optimisation et dépannage de CoScreen
 ---
 

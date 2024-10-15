@@ -6,28 +6,30 @@
   {{ with (index $dot.Site.Data.api $versionNum).full_spec_deref }}
     {{ $spec := . }}
     {{ range $path_key, $path_object := $spec.paths }}
-      {{ range $action_type, $action := $path_object }}
-          {{ $tag := index $action.tags 0 }}
-            {{ range $sec := ($action.security | default slice) }}
-                {{ range $k, $v := $sec }}
-                    {{ if eq $k "AuthZ" }}
-                      {{ range $scope := $v }}
-                        {{ $scopeMap := index ($s.Get "scopes" | default dict) $scope | default dict }}
-                        {{ $tags := ($scopeMap.tags | default slice) }}
-                        {{ if not (in $tags $tag) }}
-                            {{ $tags = $tags | append $tag }}
+      {{ if not (hasPrefix $path_key "x-") }}
+        {{ range $action_type, $action := $path_object }}
+            {{ $tag := index $action.tags 0 }}
+              {{ range $sec := ($action.security | default slice) }}
+                  {{ range $k, $v := $sec }}
+                      {{ if eq $k "AuthZ" }}
+                        {{ range $scope := $v }}
+                          {{ $scopeMap := index ($s.Get "scopes" | default dict) $scope | default dict }}
+                          {{ $tags := ($scopeMap.tags | default slice) }}
+                          {{ if not (in $tags $tag) }}
+                              {{ $tags = $tags | append $tag }}
+                          {{ end }}
+                          {{ $endpoints := ($scopeMap.endpoints | default slice) }}
+                          {{ $slug := $action.summary | urlize }}
+                          {{ $url := (printf "api/latest/%s/" $tag | urlize) | absLangURL }}
+                          {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
+                          {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
+                          {{ $scopeMap = merge $scopeMap $updateMap }}
+                          {{ $s.SetInMap "scopes" $scope $scopeMap }}
                         {{ end }}
-                        {{ $endpoints := ($scopeMap.endpoints | default slice) }}
-                        {{ $slug := $action.summary | urlize }}
-                        {{ $url := (printf "api/latest/%s/" $tag | urlize) | absLangURL }}
-                        {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
-                        {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
-                        {{ $scopeMap = merge $scopeMap $updateMap }}
-                        {{ $s.SetInMap "scopes" $scope $scopeMap }}
                       {{ end }}
-                    {{ end }}
-                {{ end }}
-            {{ end }}
+                  {{ end }}
+              {{ end }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}

@@ -1,6 +1,6 @@
 ---
 title: Configurer l'APM en C++
-kind: guide
+
 further_reading:
   - link: /tracing/setup/cpp/
     tag: Documentation

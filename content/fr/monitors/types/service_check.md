@@ -8,13 +8,12 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
 - link: /monitors/manage/status/
   tag: Documentation
   text: Consulter le statut de votre monitor
-kind: documentation
 title: Monitor de check de service
 ---
 
@@ -100,8 +99,8 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 [4]: /fr/api/v1/service-checks/
 [5]: /fr/developers/service_checks/#overview
 [6]: https://app.datadoghq.com/monitors/create/custom
-[7]: /fr/monitors/create/configuration/#advanced-alert-conditions
-[8]: /fr/monitors/create/configuration/#no-data
-[9]: /fr/monitors/create/configuration/#auto-resolve
-[10]: /fr/monitors/create/configuration/#new-group-delay
+[7]: /fr/monitors/configuration/#advanced-alert-conditions
+[8]: /fr/monitors/configuration/#no-data
+[9]: /fr/monitors/configuration/#auto-resolve
+[10]: /fr/monitors/configuration/#new-group-delay
 [11]: /fr/monitors/notify/

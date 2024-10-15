@@ -1,6 +1,5 @@
 ---
 title: Set Ingestion Control for CI Visibility
-kind: guide
 description: Learn how to define condition(s) by which to exclude specific events from being processed by CI Visibility.
 further_reading:
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"

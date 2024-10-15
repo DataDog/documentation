@@ -3,7 +3,7 @@ aliases:
 - /ja/security_platform/findings
 - /ja/security_platform/cspm/findings
 - /ja/security/cspm/findings
-- /ja/continuous_testing/cicd_integrations/azure_devops_extension
+- /ja/security/misconfigurations/findings
 further_reading:
 - link: security/default_rules
   tag: ドキュメント
@@ -11,7 +11,6 @@ further_reading:
 - link: security/cspm/frameworks_and_benchmarks
   tag: ドキュメント
   text: フレームワークおよび業界のベンチマークの詳細
-kind: ドキュメント
 title: 誤構成を探索する
 ---
 
@@ -25,7 +24,7 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) [Explorer][1
 
 誤構成の確認と対応に加えて、失敗した誤構成の通知を設定し、[Cloud SIEM][2] と [CSM Threats][3] によって生成されたリアルタイムの脅威と同じビューで誤構成を関連付けてトリアージするようにシグナルを構成できます。これにより、今日のクラウド侵害の多くの根本原因は、攻撃者による誤構成のあるサービスの悪用であるため、調査を加速できます。
 
-## ガイド
+## 誤構成
 
 誤構成はリソースに対するルール評価の主要な構成要素です。リソースがルールに対して評価されるたびに、**Pass** または **Fail** のステータスが付いた誤構成が生成されます。リソースの評価は 15 分〜4 時間の間で行われます (タイプにより異なる)。Datadog はスキャンが終了するとすぐに新しい誤構成を生成し、過去 15 か月の完全な履歴を保存するため、調査や監査の際に利用できます。
 

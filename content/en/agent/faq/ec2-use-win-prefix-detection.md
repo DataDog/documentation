@@ -1,6 +1,5 @@
 ---
 title: Windows EC2 hostnames starting with EC2AMAZ-
-kind: faq
 aliases:
   - /ec2-use-win-prefix-detection # short link for Agent logs (do not remove)
 ---

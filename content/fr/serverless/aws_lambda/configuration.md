@@ -15,7 +15,6 @@ further_reading:
 - link: /integrations/github
   tag: Documentation
   text: Intégration Datadog/GitHub
-kind: documentation
 title: Configurer la surveillance sans serveur pour AWS Lambda
 ---
 

@@ -3,7 +3,6 @@ aliases:
 - /ko/developers/faq/using-postman-with-datadog-apis
 - /ko/getting_started/using-postman-with-datadog-apis
 - /ko/developers/guide/using-postman-with-datadog-apis
-kind: 설명서
 title: Datadog API와 Postman의 사용
 ---
 

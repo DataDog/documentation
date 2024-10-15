@@ -2,6 +2,7 @@
 categories:
 - Collaboration
 - issue tracking
+custom_kind: integration
 dependencies: []
 description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
 doc_link: https://docs.datadoghq.com/integrations/desk/
@@ -12,7 +13,6 @@ integration_id: desk
 integration_title: Desk
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: desk
 public_title: Datadog-Desk インテグレーション
@@ -32,9 +32,9 @@ Desk を Datadog に接続すると、Salesforce サポートケースのデー�
 
 詳細については、[Salesforce Desk インテグレーションを利用して、サポートを情報面で一致させる][1]をご覧ください。
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 Desk アカウントから、Settings -> API -> My Applications ページで API アプリケーションを追加します (管理者特権が必要な場合があります)。
 
@@ -46,21 +46,21 @@ Desk アカウントから、Settings -> API -> My Applications ページで API
 
 インストール後、カスタムダッシュボードで `desk.*` メトリクスを選択するか、提供されている [Desk ダッシュボード][3]で表示することができます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "desk" >}}
 
 
-### ヘルプ
+### イベント
 
 Desk インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Desk インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

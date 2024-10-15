@@ -20,6 +20,7 @@ categories:
 - コンプライアンス
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/drata/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: drata-integration
 integration_title: Drata
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: drata
 public_title: Drata
@@ -65,11 +65,11 @@ Drata は、企業のセキュリティ管理を継続的に監視して証拠�
 
 このインテグレーションにより、[Drata][1] のお客様は、API インテグレーションを通じて、Datadog から Drata にコンプライアンス関連のログやイベントを転送することができます。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションを設定するには、アクティブな [Drata アカウント][2]が必要です。また、Datadog の適切な[管理者権限][3]も必要となります。
 
-### インフラストラクチャーリスト
+### インストール
 
 1. このインテグレーションをインストールするには、API キーとアプリキーを作成する必要があります。
 2. Datadog でサービスアカウントを作成し、"Datadog Read Only" Role を適用して、この接続に限定的な権限を付与することをお勧めします。

@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: Blog
   text: Meilleures pratiques concernant le tagging des monitors
-kind: documentation
 title: Gérer les monitors
 ---
 

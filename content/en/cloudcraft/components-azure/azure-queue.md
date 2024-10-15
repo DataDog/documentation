@@ -1,6 +1,5 @@
 ---
 title: "Azure Queue Component"
-kind: documentation
 ---
 
 ## Overview

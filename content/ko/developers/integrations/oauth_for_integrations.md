@@ -2,7 +2,6 @@
 aliases:
 - /ko/developers/integrations/oauth_for_data_integrations/
 description: OAuth를 사용하여 통합을 인증합니다.
-kind: 설명서
 title: 통합을 위한 OAuth
 ---
 {{< callout btn_hidden="true" >}}

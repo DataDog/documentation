@@ -3,6 +3,7 @@ aliases: []
 categories:
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies: []
 description: BigPanda と Datadog アラートを相関付け、アクションにつながるインシデントを作成します。
 doc_link: https://docs.datadoghq.com/integrations/bigpanda/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: BigPanda
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: bigpanda
 public_title: Datadog-BigPanda インテグレーション
@@ -28,13 +28,13 @@ BigPanda を Datadog に接続すると、以下のことが可能になりま�
 
 - Datadog からアラートを受信して情報の相関付けを行う。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 BigPanda インテグレーションは、Datadog サイトの[インテグレーションタイル][1]を使用してインストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. BigPanda アカウントのインテグレーションページで新しいインテグレーションを選択します。
 2. _Datadog_ --> _Add Integration_, の順にクリックし、アプリキーを作成します。
@@ -49,27 +49,27 @@ BigPanda インテグレーションは、Datadog サイトの[インテグレ�
 - 現在サポートされている BigPanda のアカウント数は最大 5 つです。
 - **Route All Monitor Events** (すべてのモニターイベントをルーティング) オプションを有効にして、すべてのモニターイベントを BigPanda に自動的に送信するには、[Datadog サポート][2]にお問い合わせください。デフォルトでは、**@bigpanda-<account-name>** を含むモニターイベントのみが送信されます。
 
-### API
+### 使用方法
 
 BigPanda は Datadog からイベントを受信し、インシデントを作成します。インシデントにはトリガーされたモニター名やアラートの発生源となった条件などの関連する情報が含まれています。
 
 インシデントはモニターの遷移が変更されるにつれて、Active から Resolved に移動させることができます。Datadog から BigPanda　へのアラート送信を中止する場合は、インテグレーションタイルから目的のアカウントを削除してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 BigPanda インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### イベント
 
 BigPanda インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 BigPanda インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

@@ -21,7 +21,7 @@ integration_id: cortex
 integration_title: Cortex
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@getcortexapp.com
 manifest_version: 1.0.0
 metric_prefix: cortex.

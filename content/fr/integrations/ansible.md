@@ -15,7 +15,7 @@ integration_id: ansible
 integration_title: Ansible
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: ansible
 public_title: Intégration Datadog/Ansible

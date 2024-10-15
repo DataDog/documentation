@@ -20,10 +20,8 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10149
     source_type_name: VoltDB
-  logs:
-    source: voltdb
   monitors:
-    CPU load: assets/monitors/cpu_load.json
+    Voltdb Node CPU is high: assets/monitors/cpu_load.json
   saved_views:
     voltdb_processes: assets/saved_views/voltdb_processes.json
 author:
@@ -34,6 +32,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
 display_on_public_website: true
@@ -41,9 +40,8 @@ draft: false
 git_integration_title: voltdb
 integration_id: voltdb
 integration_title: VoltDB
-integration_version: 3.2.0
+integration_version: 3.2.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: voltdb
 public_title: VoltDB
@@ -60,6 +58,7 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
   media: []
@@ -75,18 +74,18 @@ tile:
 
 このチェックは、Datadog Agent を通じて [VoltDB][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
 **注**: このチェックは、クラスター当たり 1 つの Agent に構成される必要があります。複数ホストに及ぶクラスターを監視する場合は、各ホストに 1 つの Agent をインストールします。ただし、メトリクスが重複してしまうため、1 つ以上のホストで VoltDB インテグレーションを有効にしないでください。
 
-### インフラストラクチャーリスト
+### インストール
 
 VoltDB チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. VoltDB `deployment.xml` ファイルを編集し、`datadog-agent` ユーザーを追加します。**注**: 特別なロールは必要ないため、組み込みの `user` ロールを割り当てます。
 
@@ -149,7 +148,7 @@ VoltDB チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 3. [Agent を再起動します][5]。
 
-#### 収集データ
+#### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -176,21 +175,21 @@ VoltDB チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 [Agent のステータスサブコマンドを実行][8]し、Checks セクションで `voltdb` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "voltdb" >}}
 
 
-### ヘルプ
+### イベント
 
 このチェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "voltdb" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

@@ -24,7 +24,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentación
   text: Descubrir widgets para dashboards
-kind: documentación
 title: Variables de plantilla
 ---
 

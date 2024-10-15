@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: フィルターを使用してより良い図を作成する
 ---
 
@@ -7,7 +6,9 @@ title: フィルターを使用してより良い図を作成する
 
 このような問題を回避するため、Cloudcraft では **Filtered layout** 機能を使用してフィルターを適用したり、ライブコンポーネントを配置する際にサービスを除外したりすることを推奨しています。
 
-より小さな図を作成することで、図の管理がより簡単になります。また、どのように情報を取り込むかを、よりコントロールしやすくなります。
+より小さな図を作成することで、図の管理がより簡単になります。また、これにより閲覧者は情報の取り込み方をよりコントロールしやすくなります。
+
+<div class="alert alert-info">If you are using Cloudcraft's New Live Experience, see this documentation: <a href="https://docs.datadoghq.com/cloudcraft/getting-started/crafting-better-diagrams/" title="Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering">Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering</a>.</div>
 
 ## 検索パターン
 

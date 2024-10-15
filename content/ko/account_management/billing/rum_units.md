@@ -1,6 +1,5 @@
 ---
 beta: true
-kind: 설명서
 title: RUM 빌링 정보
 ---
 

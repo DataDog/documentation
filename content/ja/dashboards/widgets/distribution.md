@@ -18,7 +18,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: クエリ
-kind: documentation
 title: 分布ウィジェット
 widget_type: ディストリビューション
 ---

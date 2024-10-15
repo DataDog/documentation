@@ -13,7 +13,7 @@ integration_id: azure-blob-storage
 integration_title: Stockage Blob Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_blob_storage
 public_title: Intégration Datadog/Stockage Blob Microsoft Azure

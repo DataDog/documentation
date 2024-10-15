@@ -1,6 +1,5 @@
 ---
 title: "Metric submission: PowerShell"
-kind: documentation
 aliases:
   - /developers/faq/powershell-api-examples
   - /developers/faq/submitting-metrics-via-powershell

@@ -8,7 +8,6 @@ further_reading:
   tag: Blog
   text: Crea herramientas de monitorización y de corrección personalizadas con App
     Builder de Datadog
-kind: documentación
 title: App Builder
 ---
 

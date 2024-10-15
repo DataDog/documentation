@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 比較では、変数はそのままにしておかなければならない
 ---
 ## メタデータ

@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: Documentation
   text: Apprendre à explorer vos logs
-kind: documentation
 title: Collecte de logs iOS
 ---
 ## Présentation

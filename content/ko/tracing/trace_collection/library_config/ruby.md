@@ -8,7 +8,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/ruby/
   tag: 설명서
   text: 트레이스 컨텍스트 전파
-kind: 설명서
 title: 루비(Ruby) 추적 라이브러리 설정하기
 type: multi-code-lang
 ---

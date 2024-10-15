@@ -1,6 +1,5 @@
 ---
 title: Process Check Monitor
-kind: documentation
 description: "Check if a process is running on a host"
 aliases:
 - /monitors/monitor_types/process_check
@@ -12,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -78,14 +77,14 @@ See the [Monitor configuration][3] documentation for information on [No data][4]
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/process/
-[2]: https://app.datadoghq.com/monitors#create/process
+[2]: https://app.datadoghq.com/monitors/create/process
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/configuration/#no-data
 [5]: /monitors/configuration/#auto-resolve

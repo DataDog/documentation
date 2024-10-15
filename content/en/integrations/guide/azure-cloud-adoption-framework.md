@@ -1,6 +1,6 @@
 ---
 title: Azure Cloud Adoption Framework with Datadog
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"

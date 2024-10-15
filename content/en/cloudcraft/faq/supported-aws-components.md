@@ -1,6 +1,5 @@
 ---
 title: What AWS components are supported?
-kind: faq
 ---
 
 Cloudcraft supports the following AWS components:

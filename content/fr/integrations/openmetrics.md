@@ -21,7 +21,7 @@ guid: 3f67af75-6987-468c-99b3-5001ba5ab414
 integration_id: openmetrics
 integration_title: OpenMetrics
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: openmetrics

@@ -1,6 +1,5 @@
 ---
 title: Geomap Widget
-kind: documentation
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/

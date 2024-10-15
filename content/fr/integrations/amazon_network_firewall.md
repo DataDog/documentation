@@ -13,7 +13,7 @@ integration_id: amazon-network-firewall
 integration_title: Amazon Network Firewall
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_network_firewall
 public_title: Amazon Network Firewall

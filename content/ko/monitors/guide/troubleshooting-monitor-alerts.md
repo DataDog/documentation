@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/set-and-monitor-slas/
   tag: 블로그
   text: Datadog으로 서비스 모니터링 및 SLA 설정
-kind: 가이드
 title: 모니터 경고 트러블슈팅
 ---
 

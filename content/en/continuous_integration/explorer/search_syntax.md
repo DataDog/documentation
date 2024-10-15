@@ -1,11 +1,10 @@
 ---
 title: CI Visibility Explorer Search Syntax
-kind: documentation
-description: Search all of your test runs or pipeline executions.
+description: Learn how to search for all of your pipeline executions in the CI Visibility Explorer.
 further_reading:
 - link: "/continuous_integration/search"
   tag: "Documentation"
-  text: "Filter and group tests and pipelines"
+  text: "Filter and group pipelines"
 - link: "/continuous_integration/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"
@@ -17,7 +16,7 @@ A query filter is composed of terms and operators.
 
 There are two types of terms:
 
-* A **single term** is a single word such as `test` or `hello`.
+* A **single term** is a single word such as `pipeline` or `hello`.
 
 * A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
@@ -33,7 +32,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 You are not required to define a facet in order to search on attributes and tags. To search on a specific attribute, add `@` to specify you are searching on an attribute. Attributes searches are case sensitive. Use free text search to get case insensitive results. 
 
-For example, if you are interested in the `git.repository.name` attribute and you want to filter on the value `Datadog/documentation`, use `@git.repository.name:DataDog/documentation`.
+For example, if you are interested in the `git.repository.id` attribute and you want to filter on the value `Datadog/documentation`, use `@git.repository.id:"github.com/Datadog/documentation"`.
 
 Searching for an attribute value that contains special characters requires escaping or double quotes. For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
 
@@ -51,32 +50,25 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`.
 * `*web` matches all log messages that end with `web`.
 
-Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
-<p> </p>
-<p></p>
-
-```
-test.service:*mongo
-```
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. 
 
 ### Search wildcard
 
 When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
-<p> </p>
 
 ## Numerical values
 
 In order to search on a numerical attribute, first [add it as a facet][1]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
 
-For example, to retrieve all test runs that have a duration of over one week, use: `@duration:>=7days`.
+For example, to retrieve all pipeline executions that have a duration of over one week, use: `@duration:>=7days`.
 
 ## Tags
 
-Your test runs and pipeline executions inherit tags from [hosts][3] and [integrations][4] that generate them. They can be used in the search and as facets as well:
+Your pipeline executions inherit tags from [hosts][3] and [integrations][4] that generate them. They can be used in the search and as facets as well:
 
-* `test` is searching for the string "test".
-* `env:(prod OR test)` matches all test runs or pipeline executions with the tag `env:prod` or the tag `env:test`
-* `(env:prod AND -version:beta)` matches all test runs or pipeline executions that contain tag `env:prod` and that do not contain tag `version:beta`
+* `pipeline` is searching for the string "pipeline".
+* `env:(prod OR pipeline)` matches all pipeline executions with the tag `env:prod` or the tag `env:pipeline`.
+* `(env:prod AND -version:beta)` matches all pipeline executions that contain tag `env:prod` and that do not contain tag `version:beta`.
 
 If your tags don't follow [tags best practices][5] and don't use the `key:value` syntax, use this search query: `tags:<MY_TAG>`.
 

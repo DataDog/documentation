@@ -8,7 +8,6 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentation
   text: Explorer vos services, ressources et traces
-kind: documentation
 title: Configurer la bibliothèque de tracing Java
 type: multi-code-lang
 ---

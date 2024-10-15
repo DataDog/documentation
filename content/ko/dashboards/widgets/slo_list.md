@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: SLO 목록 위젯
 ---
 

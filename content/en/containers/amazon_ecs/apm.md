@@ -1,6 +1,5 @@
 ---
 title: Tracing ECS Applications
-kind: Documentation
 aliases:
   - /agent/amazon_ecs/apm
 further_reading:
@@ -191,7 +190,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```ruby
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 require 'net/http'
 
 Datadog.configure do |c|

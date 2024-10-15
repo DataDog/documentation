@@ -1,6 +1,6 @@
 ---
 title: Trace and Span ID Formats
-kind: guide
+
 aliases:
   - /tracing/faq/span_and_trace_id_format/
 further_reading:
@@ -11,7 +11,7 @@ further_reading:
 ---
 {{< jqmath-vanilla >}}
 
-This page details Datadog tracing library support for trace and span IDs.
+This page details Datadog tracing library support for trace and {{< tooltip glossary="span id" >}}s.
 
 - **Generated IDs**: By default, all tracing libraries generate 128-bit trace IDs and 64-bit span IDs.  
 - **Accepted IDs**: Datadog accepts 128-bit or 64-bit trace IDs, and 64-bit span IDs.

@@ -1,6 +1,5 @@
 ---
 title: User Management
-kind: documentation
 description: "Add or remove users in your organization. Modify user roles."
 aliases:
  - /account_management/team/

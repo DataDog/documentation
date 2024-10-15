@@ -1,6 +1,5 @@
 ---
 title: Alert Value Widget
-kind: documentation
 widget_type: alert_value
 description: "Graph the current value of a metric in any simple-alert metric monitor defined on your system."
 aliases:

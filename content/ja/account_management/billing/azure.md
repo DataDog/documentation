@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Azure インテグレーションの請求
 ---
 

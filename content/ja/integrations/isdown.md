@@ -5,19 +5,23 @@ assets:
   dashboards:
     IsDown: assets/dashboards/isdown_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10323
     source_type_name: IsDown
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://isdown.app
   name: IsDown
   sales_email: sales@isdown.app
   support_email: support@isdown.app
 categories:
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/isdown/README.md
 display_on_public_website: true
@@ -27,7 +31,6 @@ integration_id: isdown
 integration_title: IsDown
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: isdown
 public_title: IsDown
@@ -39,7 +42,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Notification
+  - Category::Notifications
   - Offering::Integration
   - Submitted Data Type::Events
   - Supported OS::Linux
@@ -58,10 +61,14 @@ tile:
     image_url: images/isdown_datadog_dashboard.jpg
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/track-provider-outages-isdown-datadog/
   support: README.md#Support
   title: IsDown
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -90,7 +97,7 @@ tile:
 
 ## 収集データ
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "isdown" >}}
 
 
@@ -105,7 +112,14 @@ IsDown は、監視するサービスで障害が発生するたびに、イベ�
 
 ご不明な点は、[IsDown のサポートチーム][4]までお問い合わせください。
 
+## 参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+[Track service provider outages with IsDown and Datadog][5]
+
 [1]: https://isdown.app
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: assets/service_checks.json
 [4]: mailto:support@isdown.app
+[5]: https://www.datadoghq.com/blog/track-provider-outages-isdown-datadog/

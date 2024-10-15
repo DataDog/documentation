@@ -1,6 +1,6 @@
 ---
 title: Build custom reports using Log Analytics API
-kind: guide
+
 further_reading:
 - link: "/logs/explorer/analytics/?tab=timeseries#overview"
   tag: "Documentation"

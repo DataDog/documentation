@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: Blog
   text: Recueillir des traces, logs et métriques custom à partir de services Cloud Run
-kind: documentation
 title: Google Cloud Run
 ---
 
@@ -29,7 +28,7 @@ Datadog publie les nouvelles versions de l'image de conteneur `serverless-init` 
 
 L'application de tags aux images se base sur la gestion sémantique des versions, chaque nouvelle version recevant trois tags pertinents :
 
-* `1`, `1-alpine` : utilisez ces tags pour suivre les dernières versions mineures, qui ne contiennent aucun changement majeur.
+* `1`, `1-alpine` : utilisez ces tags pour suivre les dernières versions mineures, sans changement majeur.
 * `1.x.x`, `1.x.x-alpine` : utilisez ces tags pour identifier une version spécifique de la bibliothèque.
 * `latest`, `latest-alpine` : utilisez ces tags pour suivre la version la plus récente, qui peut contenir des changements majeurs.
 

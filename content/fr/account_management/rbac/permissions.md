@@ -9,7 +9,6 @@ further_reading:
 - link: /api/v2/roles/#enumerer-les-autorisations
   tag: Documentation
   text: Gérer vos autorisations avec l'API Permission
-kind: documentation
 title: Autorisations des rôles Datadog
 algolia:
     rank: 80

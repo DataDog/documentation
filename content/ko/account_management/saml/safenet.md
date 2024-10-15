@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/saml/
   tag: 설명서
   text: Datadog 계정용 SAML 설정하기
-kind: 설명서
 title: SafeNet SAML IdP
 ---
 

@@ -5,7 +5,6 @@ further_reading:
 - link: /dashboards/guide/widget_colors/#categorical-palettes
   tag: Documentación
   text: Seleccionar colores adecuados para gráficos
-kind: guía
 title: Etiquetas (Tags) semánticas compatibles
 ---
 

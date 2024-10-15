@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: Documentation
 further_reading:
 - link: "/service_management/events/explorer/"
   tag: "Documentation"

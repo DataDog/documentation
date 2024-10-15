@@ -28,6 +28,7 @@ categories:
 - インシデント
 - notifications
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
 display_on_public_website: true
@@ -37,7 +38,6 @@ integration_id: stackpulse
 integration_title: StackPulse
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: stackpulse
 public_title: StackPulse
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
   media: []
@@ -72,7 +73,7 @@ tile:
 
 [StackPulse][1] インテグレーションは、Datadog のアラートに応答する形で自動プレイブックをトリガーし、アラートの強化、インシデントの軽減、そしてコラボレーションをサポートします。トリガー後は実行中のプレイブックから直接、イベントを Datadog のイベントストリームと専用の StackPulse ダッシュボードに返送することができます。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションを設定するには、アクティブな [StackPulse アカウント][2]と、そのアカウント所有者のロールが必要です。また、Datadog の適切な管理者権限も必要となります。
 
@@ -84,7 +85,7 @@ tile:
 
 3. 新規作成した Webhook エンドポイントを**コピー**します。
 
-### Ruby
+### Datadog
 
 1. **Integrations** に移動して [**Webhooks**][3] カードを選択します。
 
@@ -143,21 +144,21 @@ tile:
 
 2. インテグレーションに意味のある名前を入力し、**Add** をクリックします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 StackPulse インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### イベント
 
 StackPulse インテグレーションでは、[Datadog ポストイベント][6]ステップを使用して Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
 
-### ヘルプ
+### サービスチェック
 
 StackPulse インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

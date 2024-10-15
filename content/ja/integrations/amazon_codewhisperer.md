@@ -27,6 +27,8 @@ categories:
 - メトリクス
 - クラウド
 - ai/ml
+- 開発ツール
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,7 +37,6 @@ integration_id: amazon-codewhisperer
 integration_title: Amazon CodeWhisperer
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_codewhisperer
 public_title: Amazon CodeWhisperer
@@ -48,6 +49,9 @@ tile:
   - Category::Metrics
   - Category::Cloud
   - Category::AI/ML
+  - Category::Developer Tools
+  - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon CodeWhisperer は ML を搭載したコード提案サービスです。
   media: []
@@ -63,9 +67,9 @@ Amazon CodeWhisperer は、自然言語によるコメントと統合開発環�
 
 このインテグレーションを有効にすると、Datadog にすべての CodeWhisperer メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -74,21 +78,21 @@ Amazon CodeWhisperer は、自然言語によるコメントと統合開発環�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CodeWhisperer` が有効になっていることを確認します。
 2. [Datadog - Amazon CodeWhisperer インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_codewhisperer" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon CodeWhisperer インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon CodeWhisperer インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

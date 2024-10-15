@@ -1,6 +1,5 @@
 ---
 title: "API Management Component"
-kind: documentation
 ---
 
 ## Overview

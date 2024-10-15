@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/faq/log-parsing-best-practice
   tag: 설명서
   text: 로그 파싱 - 모범 사례
-kind: 가이드
 title: 파싱 되지 않은 로그 모니터링 및 쿼리하기
 ---
 

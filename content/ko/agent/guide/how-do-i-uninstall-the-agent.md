@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/
   tag: 설명서
   text: Datadog 에이전트에 대해 자세히 알아보기
-kind: 가이드
 title: 에이전트 설치 제거
 ---
 

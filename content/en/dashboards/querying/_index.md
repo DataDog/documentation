@@ -1,6 +1,5 @@
 ---
 title: Querying
-kind: documentation
 aliases:
   - /graphing/using_graphs/
 description: Query your data to gain insight

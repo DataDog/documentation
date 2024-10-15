@@ -1,6 +1,5 @@
 ---
 title: Analytics from Cases and Events
-kind: Documentation
 further_reading:
 - link: "service_management/events/correlation/"
   tag: "Documentation"

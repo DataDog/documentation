@@ -14,7 +14,7 @@ git_integration_title: amazon_machine_learning
 has_logo: true
 integration_title: Amazon Machine Learning
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_machine_learning
 public_title: "Intégration Datadog/Amazon\_Machine\_Learning"

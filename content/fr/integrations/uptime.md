@@ -18,7 +18,7 @@ integration_id: uptime
 integration_title: Uptime
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: jeremy-lq
 manifest_version: 1.0.0
 metric_prefix: uptime

@@ -1,16 +1,11 @@
 ---
 title: Access and Authentication
-kind: documentation
 description: Access and authentication for App builder
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
-Datadog App Builder is in private beta. Complete the form to request access.
-{{< /callout >}}
 
 A few tools control access and authentication for apps and their components.
 
@@ -102,8 +97,8 @@ To restrict access to the app, perform the following steps in the app canvas:
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
 
-[1]: /service_management/workflows/actions_catalog/
-[2]: /service_management/workflows/connections/
+[1]: https://app.datadoghq.com/app-builder/action-catalog
+[2]: /service_management/app_builder/connections/
 [3]: /service_management/workflows/
 [4]: /account_management/rbac/
 [5]: https://app.datadoghq.com/app-builder/

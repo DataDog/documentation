@@ -1,6 +1,6 @@
 ---
 title: Understanding Your Service Configuration
-kind: guide
+
 aliases:
   - /tracing/service_catalog/guides/understanding-service-configuration
 further_reading:

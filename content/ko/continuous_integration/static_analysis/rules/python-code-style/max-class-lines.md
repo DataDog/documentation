@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 클래스는 100 줄 미만이어야 함
 ---
 ## 메타데이터

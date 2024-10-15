@@ -12,16 +12,15 @@ further_reading:
 - link: logs/explorer/live_tail
   tag: 설명서
   text: Live Tail에서 로그 미리보기
-- link: real_user_monitoring/
+- link: logs/explorer/saved_views/
   tag: 설명서
   text: 로그 탐색기 자동 설정
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: 블로그
   text: 클립보드에 로그 탐색기 URL 추가
-- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: 블로그
   text: Amazon Kinesis  Data Firehose 및 Datadog으로 Amazon VPC 플로우 로그 전송
-kind: 설명서
 title: 로그 탐색기
 ---
 

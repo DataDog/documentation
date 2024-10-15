@@ -5,7 +5,6 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_commands/
   tag: Documentation
   text: Dépannage CI
-kind: documentation
 title: Ajouter des commandes personnalisées à des traces de pipeline
 ---
 

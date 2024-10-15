@@ -1,6 +1,5 @@
 ---
 title: Can you disable 2FA on my account?
-kind: faq
 ---
 
 Yes, we can. If you no longer have access to your device or recovery code, [send an email to our support team][1] to begin the reset process.

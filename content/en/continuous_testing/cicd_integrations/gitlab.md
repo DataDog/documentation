@@ -1,6 +1,5 @@
 ---
 title: GitLab
-kind: documentation
 description: Configure your GitLab instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
   - /synthetics/cicd_integrations/gitlab
@@ -56,7 +55,7 @@ synthetic-tests:
 
 ### Run tests using variable overrides
 
-If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, see the Synthetics command](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics) in the `datadog-ci` NPM package.
+If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, [see the Synthetics command](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics) in the `datadog-ci` NPM package.
 
 {{< code-block lang="yaml" >}}
 stages: 

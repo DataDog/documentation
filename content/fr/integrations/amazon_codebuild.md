@@ -16,7 +16,7 @@ integration_id: amazon-codebuild
 integration_title: "AWS\_CodeBuild"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_codebuild
 public_title: "Intégration Datadog/AWS\_CodeBuild"

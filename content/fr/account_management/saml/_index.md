@@ -5,7 +5,6 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configurer des équipes et organisations avec plusieurs comptes
-kind: documentation
 title: Authentification unique avec SAML
 ---
 {{< site-region region="gov" >}}

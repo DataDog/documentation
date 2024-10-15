@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: ドキュメント
   text: イベントへの視覚化の適用
-kind: documentation
 title: RUM イベントの検索
 ---
 

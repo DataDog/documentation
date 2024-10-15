@@ -23,6 +23,7 @@ author:
   support_email: jean@tripping.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: filebeat
 integration_title: Filebeat
 integration_version: 1.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: filebeat
 public_title: Filebeat
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 軽量ログシッパー
   media: []
@@ -66,11 +67,11 @@ Filebeat サービスからメトリクスをリアルタイムに取得して�
 - Filebeat の状態を視覚化および監視できます。
 - Filebeat のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
 Filebeat チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -82,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チ�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Filebeat の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `filebeat.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル filebeat.d/conf.yaml][5] を参照してください。
 
@@ -92,21 +93,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `filebeat` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "filebeat" >}}
 
 
-### ヘルプ
+### イベント
 
 Filebeat チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "filebeat" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

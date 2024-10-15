@@ -3,12 +3,12 @@ aliases:
 - /ja/integrations/tcprtt
 categories:
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
 integration_id: tcp-rtt
 integration_title: TCP RTT
 is_public: true
-kind: integration
 name: tcp_rtt
 newhlevel: true
 public_title: Datadog-TCP RTT インテグレーション

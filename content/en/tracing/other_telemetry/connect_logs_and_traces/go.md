@@ -1,6 +1,5 @@
 ---
 title: Correlating Go Logs and Traces
-kind: documentation
 description: 'Connect your Go logs and traces to correlate them in Datadog.'
 aliases:
   - /tracing/connect_logs_and_traces/go

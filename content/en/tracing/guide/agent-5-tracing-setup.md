@@ -1,6 +1,6 @@
 ---
 title: APM & Continuous Profiler with Agent v5
-kind: guide
+
 private: true
 aliases:
   - /tracing/faq/agent-5-tracing-setup

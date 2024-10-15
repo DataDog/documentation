@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: グラフクエリの構築方法について
-kind: documentation
 title: テーブルウィジェット
 widget_type: query_table
 ---
@@ -53,7 +52,7 @@ widget_type: query_table
   * クエリ数の上限を大きくして、できるだけ多くの列が組み合わさるようにします。
   * インサイトを"生み出している"と思われる列でテーブルをソートします。
 
-## 課金
+## API
 
 このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][8] ドキュメントをご参照ください。
 

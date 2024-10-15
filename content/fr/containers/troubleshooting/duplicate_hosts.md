@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Hosts dupliqués avec Kubernetes sur AWS (EC2 ou EKS)
 ---
 

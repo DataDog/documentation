@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 함수가 아닌 연산자를 사용하여 값 비교하기
 ---
 ## 메타데이터

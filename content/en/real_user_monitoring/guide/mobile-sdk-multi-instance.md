@@ -1,6 +1,6 @@
 ---
 title: Use Multiple Instances of the Mobile SDK
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -41,6 +41,13 @@ GlobalRumMonitor.get(namedSdkInstance)
 NdkCrashReports.enable(namedSdkInstance)
 
 WebViewTracking.enable(webView, allowedHosts, namedSdkInstance)
+```
+
+**Note**:
+In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
+
+```kotlin
+    webView.settings.javaScriptEnabled = true
 ```
 
 You can retrieve the named SDK instance by calling `Datadog.getInstance(<name>)` and use the `Datadog.isInitialized(<name>)` method to check if the particular SDK instance is initialized.

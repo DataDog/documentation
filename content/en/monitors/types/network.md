@@ -1,6 +1,5 @@
 ---
 title: Network Monitor
-kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
 aliases:
 - /monitors/monitor_types/network
@@ -12,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor."
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -82,7 +81,7 @@ See the [Monitor configuration][4] documentation for information on [No data][5]
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
 ### Network metric
 
@@ -94,7 +93,7 @@ Create a network metric monitor by following the instructions in the [metric mon
 
 [1]: /integrations/http_check/
 [2]: /integrations/tcp_check/
-[3]: https://app.datadoghq.com/monitors#create/network
+[3]: https://app.datadoghq.com/monitors/create/network
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/configuration/#no-data
 [6]: /monitors/configuration/#auto-resolve

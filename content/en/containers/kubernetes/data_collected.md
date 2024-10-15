@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Data Collected
-kind: documentation
 aliases:
  - /agent/kubernetes/metrics
  - /agent/kubernetes/data_collected

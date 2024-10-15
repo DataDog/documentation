@@ -3,7 +3,6 @@ aliases:
 - /es/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
-kind: documentación
 title: Paquete de compilación de Heroku de Datadog
 ---
 Este [paquete de compilación de Heroku][1] instala el Datadog Agent en tu dyno de Heroku para recopilar métricas del sistema, métricas personalizadas de la aplicación y trazas (traces). Si quieres recopilar métricas personalizadas de la aplicación o trazas, debes incluir la [biblioteca de DogStatsD o Datadog APM][2] apropiada según el lenguaje en tu aplicación.
@@ -376,6 +375,8 @@ RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.co
 RUN touch ${DATADOG_APT_KEYRING}
 RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
+RUN curl -o /tmp/DATADOG_APT_KEY_06462314.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_06462314.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_06462314.public
 RUN curl -o /tmp/DATADOG_APT_KEY_C0962C7D.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_C0962C7D.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
 RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \

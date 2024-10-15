@@ -26,6 +26,7 @@ author:
 categories:
 - コンテナ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_on_public_website: true
@@ -33,9 +34,8 @@ draft: false
 git_integration_title: kube_apiserver_metrics
 integration_id: kube-apiserver-metrics
 integration_title: Kubernetes API サーバーメトリクス
-integration_version: 4.3.0
+integration_version: 4.3.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_apiserver_metrics
 public_title: Kubernetes API サーバーメトリクス
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubernetes APIServer からメトリクスを収集
   media: []
@@ -69,13 +70,13 @@ tile:
 
 このチェックは [Kube_apiserver_metrics][2] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Kube_apiserver_metrics チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 kube_apiserver_metrics チェックを実行する主な使用例としては、クラスターレベルのチェックがあります。
 詳細については、[クラスターレベルのチェック][4]に関するドキュメントを参照してください。
@@ -102,21 +103,21 @@ annotations:
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `kube_apiserver_metrics` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Kube_apiserver_metrics には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Kube_apiserver_metrics には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

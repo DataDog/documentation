@@ -8,7 +8,6 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configurer des équipes et organisations avec plusieurs comptes
-kind: documentation
 title: Configurer Google en tant que fournisseur d'identité SAML
 ---
 

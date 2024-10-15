@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/
   tag: 설명서
   text: 데이터를 시각화하여 인사이트 확보
-kind: 설명서
 title: 메트릭 단위
 ---
 

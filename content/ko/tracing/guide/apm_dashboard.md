@@ -12,13 +12,12 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: 모든 가이드
-kind: 가이드
 title: APM 메트릭을 추적 및 상호 연결하기 위해 대시보드 생성
 ---
 
 _읽는 데 걸리는 시간 4분_
 
-{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/apm_dashboard/dashboard_7_cropped.mp4" alt="대시보드 7" video="true" style="width:90%;">}}
 
 Datadog APM을 이용하면 내 사업에 필요한 우선순위와 중요도가 높은 메트릭에 기반해 대시보드를 생성할 수 있습니다.
 대시보드에 위젯을 만들어 기존 인프라스트럭처, 로그, 호스트 메모리 사용량과 같은 커스텀 메트릭을 계속 추적할 수 있고, 처리량, 대기 시간, 오류 비율을 기반으로 핵심 APM 메트릭을 추적해 상관 관계를 파악할 수 있습니다.
@@ -34,13 +33,13 @@ Datadog APM을 이용하면 내 사업에 필요한 우선순위와 중요도가
 
 2. **Total Requests Graph를 찾고** 우측 상단에 있는 `export` 버튼을 클릭한 후 `Export to Dashboard`를 선택하세요. **`New Timeboard`를 클릭**하세요.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_2_cropped.png" alt="대시보드 2" style="width:90%;">}}
 
 3. 성공 메시지에서 **`View Dashboard`를 클릭**하세요.
 
    새 대시보드에서 `web-store` 서비스의 `Hit/error count on service` 그래프를 확인할 수 있습니다. 해당 서비스의 전체 처리량과 총 오류량을 볼 수 있습니다.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_3_cropped.png" alt="대시보드 3" style="width:90%;">}}
 
    **참고**: 연필 아이콘을 클릭해 그래프를 편집하고 사용 중인 메트릭 종류를 구체적으로 확인할 수 있습니다.
 
@@ -86,7 +85,7 @@ Datadog APM을 이용하면 내 사업에 필요한 우선순위와 중요도가
 
    이 예시에서는 예시 애플리케이션에서 대기 시간을 쿼리하는 방법을 설명합니다. 플랫폼 판매자별로 분석하고 대기 시간이 가장 긴 판매자 상위 10순위를 볼 수 있습니다. Analytics 화면에서 그래프를 내보내 대시보드에서 볼 수 있습니다.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_6_cropped.mp4" video="true" alt="대시보드 6" style="width:90%;">}}
 
 8. **내 대시보드로 돌아갑니다**.
 
@@ -96,7 +95,7 @@ Datadog APM을 이용하면 내 사업에 필요한 우선순위와 중요도가
 
 9. **`Search Events or Logs` 버튼을 클릭**하고 관련 이벤트 탐색기 검색을 추가하세요. **참고**: 이 예시에서는 Ansible을 사용했습니다. [이벤트 탐색기][6]는 사용자별로 다를 수 있으니 참고하세요.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_1_cropped.png" alt="대시보드 1" style="width:90%;">}}
 
    여기에서 대시보드 보기와 더불어 배포, 작업 완료, 또는 모니터 알림과 같은 최근 이벤트를 볼 수 있습니다(Datadog나 Ansible, Chef 등과 같은 외부 서비스). 이 이벤트를 대시보드에 있는 메트릭 설정과 연결해 상관 관계를 파악할 수 있습니다. 
 
@@ -106,7 +105,7 @@ Datadog APM을 이용하면 내 사업에 필요한 우선순위와 중요도가
 
     이 예시에서는 템플릿 변수 `Region`을 추가해 주 운영 지역인 `us-east1`와 `europe-west-4`에서 어떻게 동작하는지 대시보드에서 살펴보겠습니다.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable.png" alt="변수 이름 및 변수 태그 추가 필드 옵션을 보여주는 변수 팝오버" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable_cropped.png" alt="변수 이름 및 변수 태그 추가를 위해 필드 옵션을 표시하는 변수 팝오버 추가" style="width:90%;">}}
 
     이제 이 템플릿 변수를 각 그래프에 추가할 수 있습니다.
 

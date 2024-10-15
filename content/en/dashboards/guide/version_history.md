@@ -1,6 +1,5 @@
 ---
 title: Version History for Dashboards
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -40,7 +39,7 @@ From the Version History side panel, click on a version to preview what your das
 ## Restore a version
 There are two ways you can restore your dashboard to a previous version.
 
-{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History side panel shows past dashboard versions and ways to restore them." style="width:100%;" >}}
 
 - From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this version**.
 - When the Version History side panel opens up, a button appears at the top of the page to **Restore this version**.

@@ -1,6 +1,5 @@
 ---
 title: RUM Dashboards
-kind: documentation
 description: Use out-of-the-box RUM dashboards to learn more about your application's data and performance.
 aliases:
 - /real_user_monitoring/dashboards

@@ -1,6 +1,5 @@
 ---
 title: Migrating to New Plan & Usage CSV Headers the week of February 19, 2024
-kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

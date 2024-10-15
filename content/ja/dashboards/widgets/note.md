@@ -6,11 +6,13 @@ further_reading:
 - link: /ja/dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築方法について
-kind: documentation
 title: ノート &amp; リンクウィジェット
+widget_type: note
 ---
 
 **Notes & Links** ウィジェットは、[フリーテキストウィジェット][1]と似ていますが、より多くのフォーマットと表示オプションが含まれています。
+
+**注**: Notes & Links ウィジェットはインライン HTML をサポートしていません。
 
 ## セットアップ
 
@@ -32,16 +34,15 @@ title: ノート &amp; リンクウィジェット
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
-ノートウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
 {{< dashboards-widgets-api >}}
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/widgets/free_text/
-[2]: /ja/api/v1/dashboards/
+[2]: /ja/api/latest/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/

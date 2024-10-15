@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explorer la solution RUM de Datadog
-kind: documentation
 title: Configuration avancée de RUM pour Roku
 type: multi-code-lang
 ---

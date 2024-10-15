@@ -13,7 +13,7 @@ integration_id: git
 integration_title: Git
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: git
 public_title: Intégration Datadog/Git

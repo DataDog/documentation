@@ -21,7 +21,7 @@ integration_id: puma
 integration_title: Puma
 integration_version: 1.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: justin.morris@ferocia.com.au
 manifest_version: 1.0.0
 metric_prefix: puma.

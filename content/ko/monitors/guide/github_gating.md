@@ -15,7 +15,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: 블로그
   text: GitHub 배포 보호 규칙 및 Datadog으로 실패한 품질 검사 감지
-kind: guide
+
 title: Datadog 모니터로 GitHub Actions 배포 게이팅하기
 ---
 

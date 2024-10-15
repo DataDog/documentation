@@ -12,7 +12,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: Documentation
   text: ログエクスプローラーの詳細
-kind: documentation
 title: ログ用 Watchdog Insights
 ---
 
@@ -40,6 +39,11 @@ Watchdog Insights サイドパネル全体にアクセスするには、**View a
 
 ## インサイトの種類
 
+[Watchdog Insights][8] では、特定のタグで検出された異常と外れ値が表示され、問題の根本原因を調査することができます。[インサイト][9]は、`service` タグを含む APM、Continuous Profiler、ログ管理、インフラストラクチャーのデータから発見されます。ログ管理固有のインサイトは、次の 2 種類です。
+
+- [ログの異常検出](#log-anomaly-detection)
+- [エラーの外れ値](#error-outliers)
+
 ### ログ異常検出
 
 取り込まれたログはインテークレベルで分析され、Watchdog は検出されたパターンと `environment`、`service`、`source`、`status` タグの集計を実行します。
@@ -51,7 +55,7 @@ Watchdog Insights サイドパネル全体にアクセスするには、**View a
 
 ログは、検索コンテキストとロールに適用される制限に一致する、ログエクスプローラーのインサイトとして表示されます。
 
-{{< img src="logs/explorer/watchdog_insights/log-anomalies-light.mp4" alt="特定のインサイトの詳細をスクロールしているユーザー" video="true">}}
+{{< img src="logs/explorer/watchdog_insights/log-anomalies-light-cropped.mp4" alt="特定のインサイトの詳細をスクロールしているユーザー" video="true">}}
 
 特定のインサイトをクリックすると、検出された異常の詳細な説明と、その異常の原因となるパターンのリストが表示されます。
 
@@ -102,3 +106,5 @@ Watchdog が特に重大と判断した異常は、[Watchdog アラートフィ�
 [5]: /ja/logs/explorer/analytics/patterns
 [6]: https://app.datadoghq.com/watchdog
 [7]: /ja/monitors/types/watchdog/
+[8]: /ja/watchdog/
+[9]: /ja/watchdog/insights/?tab=logmanagement#outlier-types

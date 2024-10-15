@@ -1,8 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
-1. Run the one-step command provided in the UI to install the Worker:
-    ```shell
-    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLES> <DESTINATION_ENV_VARIABLES> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
-    ```
+1. Run the one-step command provided in the UI to install the Worker.
+
+    **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
 1. Set up APT transport for downloading using HTTPS:
@@ -16,6 +15,7 @@ If you prefer not to use the one-line installation script, follow these step-by-
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```

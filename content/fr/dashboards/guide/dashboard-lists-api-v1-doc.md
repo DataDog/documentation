@@ -1,6 +1,5 @@
 ---
 title: API Dashboard Lists (v1)
-kind: guide
 aliases:
   - /fr/graphing/faq/dashboard-lists-api-doc
   - /fr/graphing/guide/dashboard-lists-api-v1-doc

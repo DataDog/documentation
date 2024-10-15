@@ -1,6 +1,5 @@
 ---
 title: Grok Parser
-kind: Documentation
 
 ---
 

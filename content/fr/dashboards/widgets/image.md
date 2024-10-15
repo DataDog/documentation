@@ -6,11 +6,11 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Créer des dashboards avec JSON
-kind: documentation
 title: Widget Image
+widget_type: image
 ---
 
-Le widget Image vous permet d'intégrer une image à votre dashboard. Une image désigne un fichier PNG, JPG ou GIF animé accessible depuis une URL :
+Le widget Image vous permet d'intégrer une image à votre dashboard. Une image désigne un fichier PNG, JPG ou GIF animé accessible depuis une URL.
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}
 
@@ -26,9 +26,7 @@ Le widget Image vous permet d'intégrer une image à votre dashboard. Une image 
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
-
-Le [schéma JSON][2] utilisé pour le widget Image est le suivant :
+Ce widget peut être utilisé avec l'**[API Dashboards][1]**. Le tableau ci-dessous définit le [schéma JSON du widget][2] :
 
 {{< dashboards-widgets-api >}}
 
@@ -36,5 +34,5 @@ Le [schéma JSON][2] utilisé pour le widget Image est le suivant :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/api/v1/dashboards/
+[1]: /fr/api/latest/dashboards/
 [2]: /fr/dashboards/graphing_json/widget_json/

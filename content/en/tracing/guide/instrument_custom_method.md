@@ -1,6 +1,6 @@
 ---
 title: Instrument a custom method to get deep visibility into your business logic
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -320,14 +320,15 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
     public function write(array $transactions) {
       foreach ($transactions as $transaction) {
         // Use global tracer to trace blocks of inline code
-        $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
+        $span = \DDTrace\start_span();
+        $span->name = 'BackupLedger.persist';
 
         // Add custom metadata to the span
-        $scope->getSpan()->setTag('transaction.id', $transaction->getId());
+        $span->meta['transaction.id'] = $transaction->getId();
         $this->transactions[$transaction->getId()] = $transaction;
 
         // Close the span
-        $scope->close();
+        \DDTrace\close_span();
       }
 
       # [...]

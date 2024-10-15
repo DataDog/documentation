@@ -12,7 +12,7 @@ further_reading:
   tag: 설명서
   text: Service Definition API로 서비스 등록하기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-  tag: Terraform
+  tag: 외부 사이트
   text: Terraform을 사용하여 서비스 정의 생성 및 관리
 - link: /tracing/service_catalog/guides/understanding-service-configuration
   tag: 가이드
@@ -38,7 +38,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
   tag: 블로그
   text: Datadog Service Catalog를 사용한 엔드투엔드 서비스 소유권 모범 사례
-kind: 설명서
+- link: https://www.datadoghq.com/blog/service-catalog-schema-v3/
+  tag: 블로그
+  text: Service Catalog 스키마 버전 3.0으로 개발자 경험 및 협업 개선
 title: Datadog 서비스 카탈로그
 ---
 
@@ -75,16 +77,16 @@ Datadog [Service Catalog][1]는 소유권 메타데이터, 성능 인사이트, 
 - 누락된 SLO, 모니터 또는 소유권이 없는 서비스와 같은 문제를 발견합니다.
 
 #### 인시던트 발생 시 협업 간소화
-- 모니터링 및 문제 해결 세부 사항에 대한 간소화된 액세스와 함께 올바른 소유권 정보 및 커뮤니케이션 채널을 설정하여 모든 사람의 비상대기 경험을 개선합니다.
+- 모니터링 및 문제 해결 세부 사항에 대한 간소화된 액세스와 함께 올바른 소유권 정보 및 커뮤니케이션 채널을 설정하여 모든 사람의 비상대기 경험을 개선합니다.
 - 엔지니어가 이미 사용하고 있는 옵저버빌리티 도구에 직접 솔루션 및 문제 해결 도구(예: 런북 및 설명서)에 대한 링크를 포함합니다.
 - 신뢰도를 높이고 업스트림 및 다운스트림 서비스와 종속성의 소유자를 찾는 작업을 간소화하여 인시던트 복구 속도를 높입니다.
 
 
 ## 시작하기
 
-{{< whatsnext desc="Service Catalog 제공 사항 알아보기:" >}}
-    {{< nextlink href="tracing/service_catalog/browsing/" >}}Service Catalog 살펴보기{{< /nextlink >}}
-    {{< nextlink href="tracing/service_catalog/investigating" >}}서비스 살펴보기{{< /nextlink >}}
+{{< whatsnext desc="서비스 카탈로그 기능:" >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}서비스 카탈로그 살펴보기{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}서비스 자세히 살펴보기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 역할 기반 액세스 및 권한
@@ -124,15 +126,6 @@ Service Catalog 쓰기 권한을 통해 사용자는 서비스 카탈로그 데�
 *  Web
 
 일부 통합은 유형에 대한 별칭입니다. 예를 들어 Postgres, MySQL 및 Cassandra는 "DB" 유형에 매핑됩니다. Redis 및 Memcache 통합은 "Cache" 유형에 매핑됩니다.
-
-### 서비스 유형 및 언어 업데이트하기
-[Service Catalog 메타데이터 스키마 2.2][5]를 사용하면 사용자 정의 서비스에 대한 유형 및 언어를 지정하거나 계측된 서비스에 대해 자동 감지된 유형 및 언어를 덮어쓸 수 있습니다. 서비스 유형과 언어에 올바른 레이블을 지정하여 다른 팀이 서비스의 기능과 상호 작용 방법을 더 잘 이해할 수 있도록 하세요.
-
-## 서비스 색상 변경하기
-
-서비스 색상은 트레이스 시각화에 사용됩니다. 서비스 유형 아이콘을 클릭하여 변경하세요.
-
-{{< img src="tracing/service_catalog/change_service_color.png" alt="다른 아이콘 색상을 선택하려면 서비스 아이콘을 클릭하세요." style="width:80%;" >}}
 
 ## 데이터 보존
 **Service List** 및 **Service Page**의 서비스 및 리소스 통계와 스팬 요약은 최대 30일 동안 유지됩니다. APM 트레이스 메트릭에 대한 사용자 정의 쿼리의 경우 Metric Explorer를 사용하세요. [APM의 데이터 보존에 대해 자세히 알아보세요][4].

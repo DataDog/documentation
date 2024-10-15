@@ -27,6 +27,7 @@ author:
   support_email: support@neotechnology.com
 categories:
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md
 display_on_public_website: true
@@ -34,9 +35,8 @@ draft: false
 git_integration_title: neo4j
 integration_id: neo4j
 integration_title: Neo4j
-integration_version: 3.0.2
+integration_version: 3.0.3
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: neo4j
 public_title: Neo4j
@@ -52,6 +52,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: Neo4j のメトリクスを収集する
   media:
@@ -78,11 +79,11 @@ Neo4j メトリクスは、データベース管理者が Neo4j のデプロイ�
 このインテグレーションにより、すぐに使えるダッシュボードで Neo4j の重要なメトリクスを視覚化し、DBA が Neo4j データベースのトラブルシューティングと健全性のモニタリングを行えるようになります。
 
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 neo4j チェックをホストにインストールするには
 
@@ -93,7 +94,7 @@ neo4j チェックをホストにインストールするには
    datadog-agent integration install -t datadog-neo4j==<INTEGRATION_VERSION>
    ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. neo4j のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `neo4j.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[neo4j.d/conf.yaml のサンプル][4]を参照してください。
 
@@ -105,22 +106,22 @@ neo4j チェックをホストにインストールするには
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `neo4j` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "neo4j" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 サービスチェック `neo4j.prometheus.health` はベースチェックで送信されます
 
-### ヘルプ
+### イベント
 
 Neo4j には、イベントは含まれません。
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Neo4j サポート][10]までお問い合わせください。
 

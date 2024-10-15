@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Feature Flag Data in RUM
-kind: guide
+
 beta: true
 description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:
@@ -13,11 +13,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
-
-<div class="alert alert-warning">
-    Feature Flag Tracking is in beta.
-</div>
-
 
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
@@ -196,6 +191,120 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
 
 Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
 
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ConfigCat integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+When initializing the ConfigCat Javascript SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```javascript
+const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.AutoPoll,
+  {
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', (details) => {
+        datadogRum.addFeatureFlagEvaluation(details.key, details.value);
+      })
+  }
+);
+```
+
+For more information about initializing the ConfigCat Javascript SDK, see ConfigCat's [JavaScript SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/js
+
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+When initializing the ConfigCat Swift iOS SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```swift
+  let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: details.key, variation: details.value)
+    }
+  }
+```
+
+For more information about initializing the ConfigCat Swift (iOS) SDK, see ConfigCat's[Swift iOS SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/ios
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+When initializing the ConfigCat Android SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```java
+  ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
+    });
+  });
+```
+
+For more information about initializing the ConfigCat Android SDK, see ConfigCat's [Android SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/android
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+When initializing the ConfigCat Dart SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```dart
+  final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(
+        pollingMode: PollingMode.autoPoll(),
+        hooks: Hooks(
+            onFlagEvaluated: (details) => {
+              DatadogSdk.instance.rum?.addFeatureFlagEvaluation(details.key, details.value);
+            }
+        )
+    )
+  );
+```
+
+For more information about initializing the ConfigCat Dart (Flutter) SDK, see ConfigCat's [Dart SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/dart
+
+
+{{% /tab %}}
+
+
+{{% tab "React Native" %}}
+
+When initializing the ConfigCat React SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
+
+```typescript
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', (details) => {
+        DdRum.addFeatureFlagEvaluation(details.key, details.value);
+      }),
+  }}
+>
+  ...
+</ConfigCatProvider>
+```
+
+For more information about initializing the ConfigCat React SDK, see ConfigCat's [React SDK documentation][1].
+
+[1]: https://configcat.com/docs/sdk-reference/react
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -453,6 +562,62 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Kameleoon integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+For more information about the SDK, see [Kameleoon JavaScript SDK documentation][1].
+
+```javascript
+client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+Learn more about SDK initialization in the [Kameleoon React Native SDK documentation][1].
+
+```javascript
+const { onEvent } = useInitialize();
+
+onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### LaunchDarkly integration
 
 {{< tabs >}}
@@ -652,12 +817,12 @@ Initialize Statsig's SDK with `statsig.initialize`.
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
     {userID: '<USER ID>'},
-    {     
+    {
         gateEvaluationCallback: (key, value) => {
             datadogRum.addFeatureFlagEvaluation(key, value);
         }
     }
-    ); 
+    );
    ```
 
 [1]: https://docs.statsig.com/client/jsClientSDK
@@ -710,16 +875,14 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Why doesn't my feature flag data reflect what I expect to see?
+### Feature flag data is not reflecting the expected information
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
 
 For example, to see what **Views** your feature flag is being evaluated on, you can use the RUM Explorer to make a similar query:
 
-
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
 
 Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
 
@@ -740,7 +903,7 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#setup
+[1]: /real_user_monitoring/browser/setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

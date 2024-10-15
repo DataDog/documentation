@@ -1,6 +1,5 @@
 ---
 title: Log Search Syntax
-kind: documentation
 description: "Search through all of your logs."
 aliases:
     - /logs/search-syntax
@@ -41,7 +40,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Full-text search 
 
-<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, rehydration filters, or in Live Tail. </div>
 
 Use the syntax `*:search_term` to perform a full-text search across all log attributes, including the log message.
 
@@ -76,7 +75,7 @@ The full-text search syntax `*:"hello world" "i am here"` is equivalent to `*:"h
 
 ## Escape special characters and spaces
 
-The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
+The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#`, and spaces require escaping with the `\` character. 
 `/` is not considered a special character and doesn't need to be escaped.
 
 You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.

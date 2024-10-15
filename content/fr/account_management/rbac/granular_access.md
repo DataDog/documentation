@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Contrôle d'accès granulaire
 ---
 ## Gérer l'accès à des ressources spécifiques

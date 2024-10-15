@@ -17,7 +17,7 @@ integration_id: azure-arc
 integration_title: Microsoft Azure Arc
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_arc
 public_title: Intégration Datadog/Microsoft Azure Arc

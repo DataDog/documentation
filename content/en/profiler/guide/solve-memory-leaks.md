@@ -1,6 +1,5 @@
 ---
 title: Solve Memory Leaks with Profiling
-kind: guide
 further_reading:
 - link: "/profiler"
   tag: "Documentation"
@@ -30,10 +29,8 @@ The walkthrough guides you through several steps to:
 
 ## Requirements
 
-<div class="alert alert-warning">The walkthrough is in public beta and prone to change. More languages and infrastructure will be supported over time</div>
-
 To use this walkthrough, you need:
-* A Go service running on Kubernetes.
+* A Go or Java service running on Kubernetes with the Datadog Kubernetes integration installed.
 * [Continuous Profiler enabled][3].
 
 ## Get started

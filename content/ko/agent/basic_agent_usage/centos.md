@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: 설명서
   text: 인바운드 포트 구성
-kind: documentation
 platform: CentOS
 title: CentOS(Rocky/Alma Linux 포함)를 위한 기본 Agent 사용법
 ---

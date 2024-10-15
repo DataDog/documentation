@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Datadog Sites
-kind: documentation
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/dashboards-slos'
   tag: 'Learning Center'

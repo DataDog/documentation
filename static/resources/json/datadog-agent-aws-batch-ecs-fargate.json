@@ -1,0 +1,45 @@
+{
+  "jobDefinitionName": "<JOB_DEFINITION_NAME>",
+  "type": "container",
+  "platformCapabilities": [
+    "FARGATE"
+  ],
+  "ecsProperties": {
+    "taskProperties": [
+      {
+        "executionRoleArn": "<YOUR_EXECUTION_ROLE>",
+        "containers": [
+          {
+            "essential": true,
+            "command": [],
+            "image": "public.ecr.aws/datadog/agent:latest",
+            "name": "datadog-agent",
+            "environment": [
+              {
+                "name": "DD_API_KEY",
+                "value": "<YOUR_API_KEY>"
+              },
+              {
+                "name": "ECS_FARGATE",
+                "value": "true"
+              }
+            ],
+            "resourceRequirements": [
+              {
+                "value": "0.25",
+                "type": "VCPU"
+              },
+              {
+                "value": "1024",
+                "type": "MEMORY"
+              }
+            ]
+          }
+        ],
+        "networkConfiguration": {
+          "assignPublicIp": "ENABLED"
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,5 @@
 ---
 title: "EKS Workload Component"
-kind: documentation
 ---
 ## Overview
 

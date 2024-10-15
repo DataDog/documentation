@@ -6,7 +6,6 @@ further_reading:
 - link: dashboards/querying/#incident-management-analytics
   tag: Documentation
   text: インシデント管理分析
-kind: documentation
 title: インシデント詳細ページ
 ---
 
@@ -30,15 +29,15 @@ Overview セクションを使用して、インシデントのプロパティ�
 
 * Root Cause
 * サービス
-* ヘルプ
+* チーム
 * 検出方法
-* ダウンタイム
+* サマリー
 
 プロパティは以下の 3 つのセクションに分かれています。
 
 * 発生した事象
 * 発生原因
-* .NET コア
+* 属性
 
 [Incident Settings][7] で、Datadog メトリクスタグから `<KEY>:<VALUE>` ペアを使用してプロパティフィールドを追加するか、カスタムフィールドを作成します。インシデントのプロパティに値を割り当てると、[Incident Homepage][8] でインシデントのサブセットを検索したり、[Incident Management Analytics][9] を使用する際にクエリを形成したりできます。プロパティフィールドを並べ替えたり、異なる見出しに移動させたりして、最も重要なプロパティを目立つ場所に配置することもできます。
 

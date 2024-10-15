@@ -3,7 +3,6 @@ further_reading:
 - link: /dashboards/widgets
   tag: ドキュメント
   text: ダッシュボードウィジェット一覧
-kind: ガイド
 title: コンテキストリンク
 ---
 
@@ -20,9 +19,9 @@ title: コンテキストリンク
 このガイドでは、ダッシュボードにおける**コンテキストリンク**を紹介し、以下の内容について説明します。
 
 1. [コンテキストリンクの仕組みと、それを正確なニーズに適合させる方法](#introduction-to-context-links)。
-2. [コンテキストリンク構成の使用例](#example-use-cases)。
+2. [Example use cases of the context links configuration](#example-use-cases).
 
-## コンテキストリンクの紹介
+## Introduction to context links
 
 コンテキストリンクは、ダッシュボードウィジェットと Datadog の他のページ、およびワークフローに統合したサードパーティアプリケーションとの橋渡しをします。
 
@@ -44,7 +43,7 @@ title: コンテキストリンク
 | APM トレース     | [トレースエクスプローラー][12]にリンクする基礎となるトレースを表示するサイドパネルを開きます。|
 | RUM イベント     | [RUM エクスプローラー][13]にリンクします。                                                      |
 | プロファイル       | APM [プロファイルエクスプローラー][14]にリンクします。                                              |
-| ログ管理           | [ログエクスプローラー][15]にリンクする基礎となるログを表示するサイドパネルを開きます。    |
+| Logs           | [ログエクスプローラー][15]にリンクする基礎となるログを表示するサイドパネルを開きます。    |
 
 該当する場合、コンテキストリンクは以下を埋め込みます。
 
@@ -61,7 +60,7 @@ title: コンテキストリンク
 カスタムリンクを定義したり、デフォルトリンクをオーバーライドするには、**Label** フィールドにリンク名を、**URL** フィールドにリンクパスを指定します。Key-value ヘルパーを使用するには、**+ Add URL Parameter** をクリックします。
 
 
-#### コンテキストリンク変数
+#### Context Links variables
 
 {{< img src="dashboards/guide/context_links/custom-link.png" alt="URL のパラメーターに key-value のペアを設定する" style="width:75%;" >}}
 
@@ -99,7 +98,7 @@ title: コンテキストリンク
 
 #### URL エンコーディング
 
-{{< img src="dashboards/guide/context_links/url-encoding.png" alt="URL と Key-Value パラメーターのスクリーンショット" style="width:75%;" >}}
+{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Screenshot of a URL and key-value parameters" style="width:75%;" >}}
 
 Datadog は、コンテキストリンクの URL エンコーディングを処理します。
 
@@ -144,11 +143,11 @@ URL に変数を追加すると、テンプレートリンクが `https://acme.z
 
 ### ダッシュボードから AWS コンソールへのリンク
 
-次の例では、ダッシュボードウィジェット内のホストから、AWS コンソールの対応する Amazon EC2 インスタンスページへのリンクを作成する方法を説明します。
+次の例では、ダッシュボードウィジェットのホストから、AWS コンソールの対応する Amazon EC2 インスタンスページへのリンクを作成する方法を説明します。
 
 #### コンテキスト
 
-プラットフォームは [Amazon EC2][19] インスタンス上にホストされており、プラットフォームのアップスケールとダウンスケールの手順は、ほとんど手作業です。
+プラットフォームは [Amazon EC2][19] インスタンスでホストされており、プラットフォームのスケールアップおよびスケールダウンの手順は、ほとんど手作業です。
 
 Datadog のダッシュボードには、インフラストラクチャーの主要なヘルスメトリクスが集約されています。
 
@@ -156,7 +155,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 #### アプローチ
 
-典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` であり、そこで以下を確認することができます。
+典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` です。
 
 * `eu-west-3`: サブドメインと URL のパラメーターとして表示される、データセンターのリージョン。
 * `i-04b737b9f8bf94a94`: ハッシュパラメーターとして表示されるホスト ID。
@@ -169,7 +168,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 {{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
-* リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **template** 変数です。
+* If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable. 
 
 {{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
@@ -209,7 +208,7 @@ Datadog で企業サイトを監視しています。[RUM][17] でユーザー�
 
 ウェブサイトでのナビゲーションが匿名の場合、ユーザーを特定するために IP アドレスをプロキシとして使用する場合があります。
 
-RUM イベントの `@session.ip` 属性とログの `@network.client.ip` 属性を識別したいと思います。この 2 つの属性は一般的に異なる意味を持つため、異なる名前を持っていますが、この認証ログのコンテキストでは、両方を識別することができます。
+You would like to identify the `@session.ip` attribute from your RUM events with the `@network.client.ip` attribute from your logs. The two attributes have different names because they generally have different meanings, but in this context of authentication logs, you can identify both.
 
 そのためには、`@network.client.ip` を元にしたフィルターに `@session.ip` を注入し、適切なフィルター `@network.client.ip:{{@session.ip.value}}` を構築します。
 
@@ -217,7 +216,7 @@ RUM イベントの `@session.ip` 属性とログの `@network.client.ip` 属性
 
 セッション IP ごと、および特定の国ごとのインサイトを表示する RUM ダッシュボードウィジェットについては、このリンクの構成に従います。
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="保存ビューの URL 構成例" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Example URL configuration for saved views" style="width:70%;">}}
 
 #### 結果
 

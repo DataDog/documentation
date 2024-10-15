@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/functions/smoothing
   tag: 설명서
   text: 평활화
-kind: 지침
 title: weighted()는 어떻게 동작하나요?
 ---
 

@@ -10,29 +10,28 @@ code_lang_weight: 30
 description: Flutter Monitoring の構成について説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: ソースコード
   text: dd-sdk-flutter のソースコード
-- link: network_monitoring/performance/guide/
+- link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: ブログ
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
-kind: ドキュメント
 title: RUM Flutter の高度なコンフィギュレーション
 type: multi-code-lang
 ---
 ## 概要
 
-Datadog Flutter SDK for RUM をまだセットアップしていない場合は、[アプリ内セットアップ手順][1]に従うか、[RUM Flutter セットアップドキュメント][2]を参照してください。[RUM Flutter で OpenTelemetry をセットアップする](#opentelemetry-setup)方法を説明します。
+If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup).
 
-## ビューの自動追跡
+## Automatic View Tracking
 
-Flutter Navigator v2.0 を使用している場合、ビューの自動追跡のセットアップは、ルーティング用のミドルウェアによって異なります。ここでは、最も一般的なルーティングパッケージとのインテグレーション方法を記述します。
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. Here, we document how to integrate with the most popular routing packages.
 
 ### go_router
 
-[go_router][8] は Flutter Navigator v1 と同じオブザーバーインターフェースを使用するため、`GoRouter` へのパラメーターとして `DatadogNavigationObserver` を他のオブザーバーに追加することができます。 
+Since [go_router][8], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -72,7 +71,7 @@ MaterialApp.router(
 );
 ```
 
-さらに、`GoRoute` の `pageBuilder` パラメーターを `builder` パラメーターよりも優先して使用する場合は、`MaterialPage` に `state.pageKey` の値と `name` の値が渡されるようにしてください。
+Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, ensure that you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
 
 ```dart
 GoRoute(
@@ -80,8 +79,8 @@ GoRoute(
   path: '/path',
   pageBuilder: (context, state) {
     return MaterialPage(
-      key: state.pageKey,       // GoRouter がオブザーバーを呼び出すために必要
-      name: name,               // Datadog が正しいルート名を取得するために必要
+      key: state.pageKey,       // Necessary for GoRouter to call Observers
+      name: name,               // Needed for Datadog to get the right route name
       child: _buildContent(),
     );
   },
@@ -166,46 +165,46 @@ void _onHeroImageLoaded() {
 
 ### ユーザーアクションの追跡
 
-`DdRum.addUserAction` を使用すると、タップ、クリック、スクロールなどの特定のユーザーアクションを追跡することができます。
+`DdRum.addAction` を使用すると、タップ、クリック、スクロールなどの特定のユーザーアクションを追跡することができます。
 
-`RumUserActionType.tap` のような瞬間的な RUM アクションを手動で登録するには、`DdRum.addUserAction()` を使用します。`RumUserActionType.scroll` のような連続的な RUM アクションを登録するには、`DdRum.startUserAction()` または `DdRum.stopUserAction()` を使用します。
+To manually register instantaneous RUM actions such as `RumActionType.tap`, use `DdRum.addAction()`. For continuous RUM actions such as `RumActionType.scroll`, use `DdRum.startAction()` or `DdRum.stopAction()`.
 
 例:
 
 ```dart
 void _downloadResourceTapped(String resourceName) {
-    DatadogSdk.instance.rum?.addUserAction(
-        RumUserActionType.tap,
+    DatadogSdk.instance.rum?.addAction(
+        RumActionType.tap,
         resourceName,
     );
 }
 ```
 
-`DdRum.startUserAction` と `DdRum.stopUserAction` を使用する場合、Datadog Flutter SDK がアクションの開始と完了を一致させるために、`type` アクションは同じでなければなりません。
+When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same for the Datadog Flutter SDK to match an action's start with its completion.
 
 ### カスタムリソースの追跡
 
 [Datadog Tracking HTTP Client][5] を使用して自動的にリソースを追跡するほか、[以下の方法][6]を使用して、ネットワークリクエストやサードパーティプロバイダ API など特定のカスタムリソースを追跡することが可能です。
 
-- `DdRum.startResourceLoading`
-- `DdRum.stopResourceLoading`
-- `DdRum.stopResourceLoadingWithError`
-- `DdRum.stopResourceLoadingWithErrorInfo`
+- `DdRum.startResource`
+- `DdRum.stopResource`
+- `DdRum.stopResourceWithError`
+- `DdRum.stopResourceWithErrorInfo`
 
 例:
 
 ```dart
-// ネットワーククライアントで
+// in your network client:
 
-DatadogSdk.instance.rum?.startResourceLoading(
+DatadogSdk.instance.rum?.startResource(
     "resource-key",
     RumHttpMethod.get,
     url,
 );
 
-// 後で
+// Later
 
-DatadogSdk.instance.rum?.stopResourceLoading(
+DatadogSdk.instance.rum?.stopResource(
     "resource-key",
     200,
     RumResourceType.image
@@ -253,7 +252,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 | `usr.name`  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
 | `usr.email` | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
 
-ユーザーセッションを識別するには、`DdRum.setUserInfo` を使用します。
+ユーザーセッションを識別するには、`DatadogSdk.setUserInfo` を使用します。
 
 例:
 
@@ -268,9 +267,9 @@ DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
 Datadog に送信される前に RUM イベントの属性を変更したり、イベントを完全に削除したりするには、Flutter RUM SDK を構成するときに Event Mappers API を使用します。
 
 ```dart
-final config = DdSdkConfiguration(
-    // 他の構成...
-    rumConfiguration: RumConfiguration(
+final config = DatadogConfiguration(
+    // other configuration...
+    rumConfiguration: DatadogRumConfiguration(
         applicationId: '<YOUR_APPLICATION_ID>',
         rumViewEventMapper = (event) => event,
         rumActionEventMapper = (event) => event,
@@ -291,7 +290,6 @@ final config = DdSdkConfiguration(
         resourceEvent.resource.url = redacted(resourceEvent.resource.url)
         return resourceEvent
     }
-}
 ```
 
 エラー、リソース、アクションのマッパーから `null` を返すと、イベントは完全に削除され、Datadog に送信されません。ビューイベントマッパーから返される値は `null` であってはなりません。
@@ -300,25 +298,29 @@ final config = DdSdkConfiguration(
 
 | イベントタイプ       | 属性キー                     | 説明                                   |
 |------------------|-----------------------------------|-----------------------------------------------|
-| RumViewEvent     | `viewEvent.view.name`             | ビューの名前。1                            |
-|                  | `viewEvent.view.url`              | ビューの URL。                              |
+| RumViewEvent     | `viewEvent.view.url`              | ビューの URL。                              |
 |                  | `viewEvent.view.referrer`         | ビューの参照元。                         |
 | RumActionEvent   | `actionEvent.action.target?.name` | アクションの名前。                           |
-|                  | `actionEvent.view.name`           | このアクションにリンクしているビューに名前を付けます。1         |
 |                  | `actionEvent.view.referrer`       | このアクションにリンクしているビューの参照元。   |
 |                  | `actionEvent.view.url`            | このアクションにリンクされているビューの URL。        |
 | RumErrorEvent    | `errorEvent.error.message`        | エラーメッセージ。                                |
 |                  | `errorEvent.error.stack`          | エラーのスタックトレース。                      |
 |                  | `errorEvent.error.resource?.url`  | エラーが参照するリソースの URL。      |
-|                  | `errorEvent.view.name`            | このアクションにリンクしているビューに名前を付けます。1         |
 |                  | `errorEvent.view.referrer`        | このアクションにリンクしているビューの参照元。   |
 |                  | `errorEvent.view.url`             | このエラーにリンクされているビューの URL。         |
 | RumResourceEvent | `resourceEvent.resource.url`      | リソースの URL。                          |
-|                  | `resourceEvent.view.name`         | このアクションにリンクしているビューに名前を付けます。1         |
 |                  | `resourceEvent.view.referrer`     | このアクションにリンクしているビューの参照元。   |
 |                  | `resourceEvent.view.url`          | このリソースにリンクされているビューの URL。      |
 
-1 イベントマッパーを使用してビュー名を変更することは可能ですが、ビュー名を変更する推奨される方法ではありません。代わりに [`DatadogNavigationObserver`][7] の `viewInfoExtractor` パラメーターを使用してください。
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```dart
+final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
+```
 
 ## トラッキングの同意を設定（GDPR と CCPA の遵守）
 
@@ -336,17 +338,13 @@ Flutter RUM SDK の初期化後に追跡同意値を変更するには、`Datado
 
 同様に、値を `TrackingConsent.pending` から `TrackingConsent.notGranted` に変更すると、Flutter RUM SDK はすべてのデータを消去し、今後データを収集しないようにします。
 
-## デバイスがオフラインの時のデータ送信
+## Flutter 固有のパフォーマンスメトリクス
 
-RUM では、ユーザーのデバイスがオフラインのときにもデータを確実に利用できます。ネットワークの状態が悪いエリアやデバイスのバッテリーが非常に少ないなどの場合でも、すべての RUM イベントは最初にローカルデバイスにバッチで格納されます。ネットワークが利用可能で、Flutter RUM SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドで実行している状態でネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
+Flutter 固有のパフォーマンスメトリクスの収集を有効にするには、`DatadogRumConfiguration` で `reportFlutterPerformance: true` を設定します。ウィジェットのビルド時間とラスター時間は[モバイルバイタル][17]に表示されます。
 
-つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。
+## OpenTelemetry setup
 
-**注**: ディスク上のデータは、古すぎる場合は Flutter RUM SDK がディスク容量を使いすぎないようにするために自動的に削除されます。
-
-## OpenTelemetry のセットアップ
-
-[Datadog Tracking HTTP Client][12] パッケージと [gRPC Interceptor][13] パッケージは、いずれも自動ヘッダー生成とヘッダー取り込みの両方により分散型トレーシングをサポートします。このセクションでは、OpenTelemetry を RUM Flutter で使用する方法を説明します。
+The [Datadog Tracking HTTP Client][12] package and [gRPC Interceptor][13] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
 
 ### Datadog のヘッダー生成
 
@@ -362,24 +360,24 @@ final hostHeaders = {
 このオブジェクトは、初期構成時に使用することができます。
 
 ```dart
-// デフォルトの Datadog HTTP トレース用:
-final configuration = DdSdkConfiguration(
-    // 構成
+// For default Datadog HTTP tracing:
+final configuration = DatadogConfiguration(
+    // configuration
     firstPartyHostsWithTracingHeaders: hostHeaders,
 );
 ```
 
 その後、通常通りトレースを有効にすることができます。
 
-この情報は、`DdSdkConfiguration.firstPartyHosts` で設定されたホストとマージされます。`firstPartyHosts` で指定されたホストは、デフォルトで Datadog Tracing Headers を生成します。
+This information is merged with any hosts set on `DatadogConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /ja/real_user_monitoring/flutter/#setup
-[3]: /ja/real_user_monitoring/flutter/data_collected
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter#setup
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
 [4]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
@@ -393,3 +391,4 @@ final configuration = DdSdkConfiguration(
 [14]: https://github.com/openzipkin/b3-propagation#single-headers
 [15]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [16]: https://www.w3.org/TR/trace-context/#tracestate-header
+[17]: /ja/real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter

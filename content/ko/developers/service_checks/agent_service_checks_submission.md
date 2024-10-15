@@ -3,7 +3,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: 설명서
   text: Agent 커스텀 점검 생성하기
-kind: 설명서
 title: '서비스 점검 제출: Agent 점검'
 ---
 

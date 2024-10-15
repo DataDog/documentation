@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Consultar y configurar alertas sobre el uso de APM
 ---
 

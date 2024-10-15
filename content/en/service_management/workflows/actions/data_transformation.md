@@ -1,6 +1,5 @@
 ---
 title: Data Transformation
-kind: Documentation
 disable_toc: false
 ---
 
@@ -32,6 +31,8 @@ To add an expression action:
 - In a new workflow, click **Add step** and search for `expression`. Select the **Expression** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
 
+In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Set variables][4].
+
 ## Function
 
 The function action allows for variable assignments and data transformations requiring multiple expressions.
@@ -40,30 +41,23 @@ To add a function action:
 - In a new workflow, click **Add step** and search for `function`. Select the **Function** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `function`. Select the **Function** action to add it to your workflow.
 
-## Testing expressions and functions
+### Write functions with AI
 
-To test an expression or function action, click **Test** in the **Inputs** section. If the action uses an output variable from a previous step, comment out the variable in your code and replace it with test data. For example, consider the following action that assigns variables to the workflow name and to the `Steps.List_monitors` output from a previous step:
+You can use Bits AI to help you write the JavaScript for a **Function** step. To use this feature, perform the following steps:
 
-```js
-let name = $.WorkflowName;
-let object = $.Steps.List_monitors;
+1. Add a **Function** step to your workflow.
+1. Under **General**, in the **Script** field, click **<i class="icon-bits-ai"></i> Write with Bits AI**.
+1. In the **Describe your transformation script** field, enter a description of what you want your script to do. Click the up arrow (**↑**) to submit your description.
+1. Choose an option to **Replace script**, **Insert in script**, or **Copy to clipboard**.
+1. Check the script and change it as necessary to fit your needs.
 
-...
-```
+## Test expressions and functions
 
-To test the action, comment out the existing variable assignments and replace them with hardcoded test data:
-
-```js
-\\ let name = $.WorkflowName;
-let name = 'Test workflow'
-\\ let object = $.Steps.List_monitors;
-let object = {0:{
-  'name': 'Test monitor'
-}}
-...
-```
+See the test and debug page to learn how to [test a workflow step][3].
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
 [1]: https://lodash.com/
 [2]: https://datadoghq.slack.com/
+[3]: /service_management/workflows/test_and_debug/#test-a-step
+[4]: /service_management/workflows/actions/set_variables

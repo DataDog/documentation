@@ -1,6 +1,5 @@
 ---
 title: Producing Delta Temporality Metrics with OpenTelemetry
-kind: guide
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
@@ -103,6 +102,7 @@ import (
 func deltaSelector(kind metric.InstrumentKind) metricdata.Temporality {
 	switch kind {
 	case metric.InstrumentKindCounter,
+    metric.InstrumentKindGauge,
 		metric.InstrumentKindHistogram,
 		metric.InstrumentKindObservableGauge,
 		metric.InstrumentKindObservableCounter:

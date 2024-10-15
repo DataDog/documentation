@@ -4,7 +4,6 @@ cascade:
     category: Guía
     rank: 20
     subcategory: Guías de gestión de cuentas
-kind: guía
 private: true
 title: Guías de gestión de cuentas
 ---

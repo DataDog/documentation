@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/integrations/faq/how-to-run-jmx-commands-in-windows
-kind: ガイド
 title: Windows で JMX コマンドを実行する
 ---
 

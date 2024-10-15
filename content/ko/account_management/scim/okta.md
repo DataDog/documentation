@@ -5,7 +5,6 @@ algolia:
   - identity provider
   - IdP
   - Okta
-kind: documentation
 title: Okta로 SCIM 설정
 ---
 

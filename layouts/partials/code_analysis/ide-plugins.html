@@ -1,0 +1,28 @@
+{{ $dot := . }}
+<div class="code-analysis-ide-plugins">
+  <div class="container cards-dd">
+    <div class="row row-cols-3 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/developers/ide_plugins/vscode/#static-analysis/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/jetbrains-ides_avatar.svg" "class" "img-fluid" "alt" "jetbrains" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/developers/ide_plugins/vscode/#static-analysis/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/vscode_avatar.svg" "class" "img-fluid" "alt" "visual studio code" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/developers/ide_plugins/visual_studio/#static-analysis/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/visual-studio_avatar.svg" "class" "img-fluid" "alt" "visual studio" "width" "50") }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,6 @@ aliases:
 - /ja/developers/faq/using-postman-with-datadog-apis
 - /ja/getting_started/using-postman-with-datadog-apis
 - /ja/developers/guide/using-postman-with-datadog-apis
-kind: documentation
 title: Datadog API と Postman の使用
 ---
 
@@ -52,7 +51,7 @@ data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434
 
 Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーごとに構造化されて表示されます。
 
-#### Go
+#### 認証
 
 認証用に Datadog の API キーとアプリケーションキーを[コレクション変数][6]に追加します。
 

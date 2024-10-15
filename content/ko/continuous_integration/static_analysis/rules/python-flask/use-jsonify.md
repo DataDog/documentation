@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: JSON 출력에 json.dumps 대신 jsonify 사용하기
 ---
 ## 메타데이터

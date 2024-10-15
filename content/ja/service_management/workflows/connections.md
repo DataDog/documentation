@@ -1,10 +1,18 @@
 ---
+algolia:
+  tags:
+  - ワークフロー
+  - workflows/
+  - ワークフローの自動化
 aliases:
 - /ja/workflows/connections
 - /ja/workflows/setup
 description: ワークフロー接続
 disable_toc: false
-kind: documentation
+further_reading:
+- link: /getting_started/workflow_automation/
+  tag: ドキュメント
+  text: Workflow Automation を始める
 title: 接続
 ---
 
@@ -32,19 +40,19 @@ title: 接続
 
 ## 接続の資格情報
 
-ワークフロー接続は、インストールされているインテグレーションを拡張し、ワークフローステップの認証を制御できるようにします。[汎用アクション][8]、またはインテグレーションタイルが認証を提供しないアクションを認証するために、接続資格情報を使用します。認証のためにインテグレーションタイルを使用するインテグレーションのリストについては、[インテグレーションタイルの資格情報](#integration-tile-credentials)セクションを参照してください。接続資格情報は、Workflow Automation 製品内でのみ使用可能です。
+Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 接続は、以下のユースケース例に対応しています。
 - 必要なインテグレーションが、ビルトイン接続では利用でない場合。
 - カスタムアクションを認証したい場合。例えば、独自のサービスで HTTP アクションを使用する必要があります。
-- インテグレーションでサポートされていない権限が必要な場合、例えば AWS の書き込み権限など。
+- AWS の書き込み権限など、インテグレーションでサポートされていない権限が必要です。
 - 特定のワークフローへのユーザーのアクセスを制限するなど、きめ細かなアクセス制御を行いたい場合。
 
 ### 接続セキュリティへの配慮
 
 接続を作成する前に、必要なタスクを実行するために必要な権限を考え、そのタスクを実行するために必要な権限のみを接続に付与します。さらに、接続は、その接続を使用する必要がある人だけに制限される必要があります。
 
-可能であれば、異なるワークフローに対して粒度の細かい接続を使用します。例えば、Amazon S3 バケットに書き込むワークフローと、Amazon EC2 インスタンスを終了させるワークフローがある場合、両方のワークフローに同じ接続を使用しないでください。代わりに、それぞれが範囲を限定した IAM ロールに対応する、2 つの接続をそれぞれ作成します。
+Where possible, use granular connections for different workflows. For example, if you have a workflow that writes to an Amazon S3 bucket, and a workflow that terminates Amazon EC2 instances, do not use the same connection for both workflows. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
 
 ## 接続の使用
 
@@ -73,9 +81,9 @@ title: 接続
 1. **New Connection** ダイアログボックスで、接続に名前を付け、必要な認証の詳細を入力します。
 1. **Save** をクリックします。
 
-以下の例では、AWS 接続の **New Connection** ダイアログボックスを表示しています。各接続では、異なる認証情報が必要です。AWS 接続では、有効な AWS IAM Account ID と Role Name が必要です。
+以下の例では、OpenAI 接続の **New Connection** ダイアログボックスを表示しています。各接続では、異なる認証情報が必要です。OpenAI 接続では、有効な Connection Name と API Token が必要です。
 
-{{< img src="service_management/workflows/new-connection.png" alt="AWS 接続の New Connection ダイアログボックス" >}}
+{{< img src="service_management/new-connection.png" alt="OpenAI 接続の New Connection ダイアログボックス" >}}
 
 ### 接続の編集
 
@@ -98,19 +106,13 @@ title: 接続
 
 ## HTTP 接続
 
-任意のサービスに接続するには、HTTP 接続タイプを使用し、2 つの認証オプションから選択します。
-- トークンベース認証
-- ユーザー名とパスワードの組み合わせ
+To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
-### HTTP 接続の作成
+## 参考資料
 
-1. [接続リスト][3]に移動します。
-1. **New Connection** を選択します。ダイアログボックスが表示されます。
-1. **HTTP Connection** を選択します。ダイアログボックスが更新され、HTTP 接続パラメーターが表示されます。
-1. **Base URL** を入力します。
-1. 必要に応じて、**Add +** ボタンを使用して、ヘッダーや URL パラメーターを追加します。
-1. 接続の種類を選択します。**Token Auth** または **Basic Auth** を選択します。適切なパラメーターを入力します。
-1. HTTP 接続を保存するには、**Create** をクリックします。
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
 
 [1]: /ja/service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
@@ -119,3 +121,5 @@ title: 接続
 [6]: /ja/integrations/
 [8]: /ja/service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
+[10]: /ja/service_management/workflows/actions/http/
+[11]: https://datadoghq.slack.com/

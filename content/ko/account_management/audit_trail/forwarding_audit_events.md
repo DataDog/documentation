@@ -4,7 +4,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: 설명서
   text: Audit Trail에 대해 자세히 알아보기
-kind: 설명서
 title: 감사 이벤트를 커스텀 대상으로 전달
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Datadog Documentation Guides
-kind: guide
+
 disable_toc: true
 ---
 

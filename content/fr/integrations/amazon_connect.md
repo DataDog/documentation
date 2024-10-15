@@ -14,7 +14,7 @@ integration_id: amazon-connect
 integration_title: "Amazon\_Connect"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_connect
 public_title: "Intégration Datadog/Amazon\_Connect"

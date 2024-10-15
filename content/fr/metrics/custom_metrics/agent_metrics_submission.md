@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentation
   text: Écrire un check d'Agent custom
-kind: documentation
 title: 'Envoi de métriques : check custom d''Agent'
 ---
 

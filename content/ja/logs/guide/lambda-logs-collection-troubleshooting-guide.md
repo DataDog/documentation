@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-lambda-telemetry-api/
   tag: GitHub
   text: AWS Lambda テレメトリー API による Datadog Lambda 拡張機能の拡張
-kind: documentation
 title: Lambda 関数によるログ収集のトラブルシューティングガイド
 ---
 

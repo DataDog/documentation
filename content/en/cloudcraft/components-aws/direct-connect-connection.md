@@ -1,6 +1,5 @@
 ---
 title: "Direct Connect Connection Component"
-kind: documentation
 ---
 ## Overview
 

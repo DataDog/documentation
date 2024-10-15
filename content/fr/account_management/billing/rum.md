@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
   text: En savoir plus sur RUM et Session Replay
-kind: documentation
 title: Facturation de RUM et Session Replay
 ---
 

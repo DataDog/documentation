@@ -1,6 +1,5 @@
 ---
 title: Container Troubleshooting
-kind: documentation
 description: Troubleshooting containers-related issues
 further_reading:
 - link: "/containers/troubleshooting/duplicate_hosts"

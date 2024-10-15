@@ -1,6 +1,5 @@
 ---
 title: Pipelines
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/pipelines/
@@ -182,7 +181,7 @@ An example of a log transformed by a pipeline:
 See the <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
 </div>
 
-Integration processing pipelines are available for certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer.
+Integration processing pipelines are available for certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Log Explorer.
 
 To view an integration pipeline, navigate to the [Pipelines][5] page. To edit an integration pipeline, clone it and then edit the clone:
 
@@ -224,9 +223,11 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 
 {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested pipelines" style="width:80%;">}}
 
-It is possible to move a pipeline into another pipeline to transform it into a nested pipeline:
+Move a pipeline into another pipeline to make it into a nested pipeline:
 
-{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true" width="80%" >}}
+1. Hover over the pipeline you want to move, and click on the **Move to** icon.
+1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
+1. Click **Move**.
 
 ## Manage your pipelines
 

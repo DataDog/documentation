@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: ブログ
   text: Datadog Open Source Hub のご紹介
-kind: documentation
 title: コミュニティ
 ---
 
@@ -17,6 +16,6 @@ title: コミュニティ
     {{< nextlink href="developers/community/libraries" >}}Datadog およびコミュニティによってサポートされるオープンソースライブラリと SDK。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

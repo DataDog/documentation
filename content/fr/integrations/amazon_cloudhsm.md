@@ -10,7 +10,7 @@ has_logo: true
 integration_id: amazon-cloudhsm
 integration_title: AWS CloudHSM
 is_public: true
-kind: integration
+custom_kind: integration
 name: amazon_cloudhsm
 public_title: Intégration Datadog/AWS CloudHSM
 short_description: Rassemblez vos logs d'audit de HSM au sein de votre organisation

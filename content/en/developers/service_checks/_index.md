@@ -1,6 +1,5 @@
 ---
 title: Service Check
-kind: documentation
 aliases:
     - /developers/faq/how-can-i-submit-a-custom-status-check
     - /developers/service_checks/visualize-your-service-check-in-the-datadog-ui
@@ -70,10 +69,10 @@ In this form, you can:
 - **Pick a service check**: Select the check status name to monitor.
 - **Pick monitor scope**: Select the context for your monitor (including/excluding tags).
 - **Set alert conditions**: Choose between a simple check alert or a cluster alert.
-- **Notify your team**: Choose who this monitor should notify.
-- **Say what's happening**: Edit the notifications sent (find more about [Datadog notifications][4]).
+- **Configure notifications and automations**: Choose who this monitor should notify and edit the notifications sent (find more about [Datadog notifications][4]).
+- **Define permissions and audit notifications**: Edit access permissions for your monitor and set audit notifications.
 
-For more information on creating a service check see [Service Check Monitor][5]
+For more information on creating a service check, see [Service Check Monitor][5].
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard

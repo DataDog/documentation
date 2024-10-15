@@ -10,7 +10,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: 설명서
   text: 플랜 및 사용량 설정
-kind: 설명서
 title: 사용량 속성
 ---
 

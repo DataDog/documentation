@@ -1,6 +1,5 @@
 ---
 title: Notifications
-kind: documentation
 aliases:
   - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
@@ -14,16 +13,19 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Take a course to customize alert monitor notifications"
 ---
 
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Notify your team** section.
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Configure notifications and automations** section.
 
-## Notify your team
+## Configure notifications and automations
 
-Use the **Notify your team** section to:
-- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
+Use the **Configure notifications and automations** section to:
+- Send notifications to your team through email, Slack, PagerDuty, and other integrations.
 - Trigger a workflow or create a workflow from a monitor.
 - Add a case to your monitor.
 
@@ -69,19 +71,18 @@ If a notification channel is set, you can route notifications to a specific Team
 {{% notifications-integrations %}}
 
 ### Workflows
-You can trigger a [workflow automation][7] or create a new workflow from a monitor.
+You can trigger a [workflow automation][7] or create a new workflow from a monitor. Before you add a workflow to a monitor, add a monitor trigger to the workflow.
 
 **To add an existing workflow to a monitor**:
-1. In the message section, add the full workflow mention name:
-   - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
-   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`
+1. Click **Add Workflow** and search for it in the drop-down menu.
+1. Alternatively, in the message section, add the full workflow mention name. The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`.
 
-1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
+To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`.
 
 For more information on triggering a workflow, see [Trigger a workflow][8].
 
 **To create a workflow**:
-1. Click **Add Worklfow**.
+1. Click **Add Workflow**.
 1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
@@ -137,7 +138,7 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
 For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
-**Note:** [Attribute and tag variables][12] in the renotification are populated with the data available to the monitor during the time period of the renotification.
+**Note:** [Attribute and tag variables][2] in the renotification are populated with the data available to the monitor during the time period of the renotification.
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
@@ -145,7 +146,7 @@ If renotification is enabled, you are given the option to include an escalation 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Notify your team` section.
+* In the *Renotification message* field in the `Configure notifications and automations` section.
 * With the `escalation_message` attribute in the API.
 
 If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
@@ -153,42 +154,24 @@ If you use the `{{#is_renotify}}` block, the original notification message is al
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
 
-Learn how to configure your monitors for those use cases in the [example section][13].
+Learn how to configure your monitors for those use cases in the [example section][12].
 
 
-## Define permissions and audit notifications
+## Audit notifications
 
-### Modifications
-
-An [event][14] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
-
-### Permissions
-
-All users can read all monitors, regardless of the role they are associated with.
-
-By default, only users attached to roles with the [Monitors Write permission][15] can edit monitors. [Datadog Admin Role and Datadog Standard Role][16] have the Monitors Write permission by default. If your organization uses [Custom Roles][17], other custom roles may have the Monitors Write permission.
-
-You can further restrict your monitor by specifying a list of [roles][18] allowed to edit it. The monitor's creator can always edit the monitor.
-
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
-
-Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
-
-**Note**: The limitations are applied both in the UI and API.
-
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][19].
+An audit [event][13] is created anytime a monitor is created, modified, silenced, or deleted. Under the **Define permissions and audit notifications** section, select **Notify** to alert team members, chat services, and the monitor creator of these events.
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][20]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][14]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][21] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor transition to test and the group (available only if the query has [grouping][15]). You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][16] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
 3. Click **Run Test** to send notifications to the people and services listed in the monitor.
 
@@ -212,7 +195,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration
-[2]: /monitors/notify/variables/#tag-variables
+[2]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
@@ -222,13 +205,8 @@ Message variables auto-populate with a randomly selected group based on the scop
 [9]: /service_management/workflows/build/
 [10]: /monitors/settings/#tag-policies
 [11]: /account_management/teams/
-[12]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[13]: /monitors/notify/variables/?tab=is_renotify#examples
-[14]: /events/
-[15]: /account_management/rbac/permissions/#monitors
-[16]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[17]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[18]: /account_management/rbac/?tab=datadogapplication
-[19]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[20]: /monitors/types
-[21]: /monitors/guide/recovery-thresholds/
+[12]: /monitors/notify/variables/?tab=is_renotify#examples
+[13]: /events/
+[14]: /monitors/types
+[15]: /monitors/configuration/
+[16]: /monitors/guide/recovery-thresholds/

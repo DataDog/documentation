@@ -8,7 +8,6 @@ further_reading:
   tag: Blog
   text: Créer des outils de surveillance et de remédiation personnalisés avec la solution App Builder
     Datadog
-kind: documentation
 title: App Builder
 ---
 

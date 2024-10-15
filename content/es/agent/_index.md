@@ -27,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
   tag: Blog
   text: No temas al Agent
-kind: documentación
 title: Agent
 ---
 

@@ -5,7 +5,6 @@ algolia:
   - 異常グラフ
 aliases:
 - /ja/graphing/functions/algorithms/
-kind: documentation
 title: アルゴリズム
 ---
 
@@ -46,7 +45,7 @@ title: アルゴリズム
 
 詳細については、[外れ値モニター][2]のページを参照してください。
 
-## 予測値
+## 予測
 
 | 関数     | 説明                | 例                                                                    |
 | :----        | :-------                   | :---------                                                                 |
@@ -74,5 +73,5 @@ title: アルゴリズム
 
 [1]: /ja/monitors/types/anomaly/
 [2]: /ja/monitors/types/outlier/
-[3]: /ja/monitors/types/forecasts/#forecast-algorithms
+[3]: /ja/monitors/types/forecasts/?tab=linear#algorithms
 [4]: /ja/monitors/types/anomaly/?s=anomaly%20algorithm#seasonality

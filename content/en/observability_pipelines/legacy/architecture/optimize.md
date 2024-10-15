@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Optimizing the Instance
-kind: Documentation
 aliases:
   - /observability_pipelines/architecture/optimize/
 ---

@@ -18,7 +18,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
   text: ASM クエリを定義するための構文
-kind: documentation
 title: カスタム検出ルール
 ---
 
@@ -33,13 +32,16 @@ Application Security Management (ASM) には、本番システムに影響を与
 このような場合、カスタム検出ルールを作成することで、そのようなイベントを除外することができます。このガイドでは、ASM のカスタム検出ルールを作成する方法を説明します。
 
 ## ビジネスロジック不正使用検出ルール
+
 ASM は、ビジネスロジックの不正使用 (例えば、ブルートフォースによるパスワードのリセット) を検出するためのルールをすぐに使えるようにしています。これらのルールでは、[トレースにビジネスロジック情報を追加する][7]必要があります。
+
+最近の Datadog トレーシングライブラリは、コードを変更する必要なく、ユーザーのログインやサインアップイベントを自動的に検出し、送信することを試みます。必要であれば、[ユーザーアクティビティイベントの自動追跡をオプトアウトする][8]ことができます。
 
 ルールにフィルターをかけ、どのビジネスロジックの追跡を開始するかを特定することができます。さらに、これらのルールを青写真として使用し、独自のビジネスロジックに基づいたカスタムルールを作成することができます。
 
 ルールの構成は、以下のセクションを参照してください。
 
-## コンフィギュレーション
+## 構成
 
 OOTB 検出ルールをカスタマイズするには、まず既存のルールを複製する必要があります。[検出ルール][2]に移動して、ルールを選択します。ルールの下までスクロールして、Clone Rule ボタンをクリックします。これで、既存のルールを編集できるようになります。
 
@@ -107,10 +109,11 @@ OOTB 検出ルールをカスタマイズするには、まず既存のルール
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/default_rules/#cat-application-security
+[1]: /ja/security/default_rules/?category=cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /ja/tracing/trace_explorer/query_syntax/
 [4]: /ja/monitors/notify/?tab=is_alert#integrations
 [5]: /ja/security/notifications/variables/
 [6]: /ja/security/notifications/variables/#template-variables
 [7]: /ja/security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /ja/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking

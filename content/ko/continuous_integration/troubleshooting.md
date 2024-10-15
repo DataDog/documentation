@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/intelligent_test_runner
   tag: 설명서
   text: Intelligent Test Runner에 대해 알아보기
-kind: 설명서
 title: CI Visibility 트러블슈팅
 ---
 

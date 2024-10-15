@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/browser_tests/actions/
   tag: ドキュメント
   text: ブラウザテストステップについて
-kind: ドキュメント
 title: ブラウザテストステップの高度なオプション
 ---
 
@@ -39,12 +38,16 @@ Datadog では、不安定なテストを防ぐために、ロケータのセッ
 
 カスタムセレクターは、レコーダーで興味のあるステップ (**クリック**、**ホバー**、**アサート**など) をページの任意の要素に実行することで作成されます。これは、実行する必要があるステップの種類を指定します。
 
-特定の識別子を使用するには (例えば、要素の内容が何であるかに関係なく、ドロップダウンメニューの `nth` 要素をクリックする場合など)
+To use a specific identifier (for example, to click on the `nth` element in a dropdown menu regardless of what the content of the element is):
 
 1. 記録するか、手動で[ステップ][1]を追加します。
 2. 記録されたステップをクリックし、**Advanced options** をクリックします。
 3. HTML 要素の **User Specified Locator** に XPath 1.0 セレクタまたは CSS クラス/ID (例: `div`、`h1`、または `.hero-body`) を入力します。
-4. 要素を定義した後、**Test** をクリックすると、記録中の要素が右の画面でハイライト表示されます。
+4. Optionally, use handlebars (`{{`) syntax to insert dynamic content. A pre-populated dropdown list of variables is shown:
+
+{{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
+
+5. 要素を定義した後、**Test** をクリックすると、記録中の要素が右の画面でハイライト表示されます。
 
 デフォルトで、**If user specified locator fails, fail test** のチェックボックスはオンになっています。つまり、定義したロケータが失敗した場合、テストは失敗と見なされます。
 
@@ -53,6 +56,7 @@ Datadog では、不安定なテストを防ぐために、ロケータのセッ
 通常のアルゴリズムでブラウザテストを行う場合は、**If user specified locator fails, fail test** チェックボックスをオフにしてください。
 
 {{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="テスト失敗時のオプション" style="width:70%">}}
+
 
 ## タイムアウト
 

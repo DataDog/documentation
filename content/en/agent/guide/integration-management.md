@@ -1,6 +1,5 @@
 ---
 title: Integration Management
-kind: guide
 algolia:
   tags: ['integration management']
 ---

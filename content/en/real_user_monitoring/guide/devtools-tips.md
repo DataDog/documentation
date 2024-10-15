@@ -1,6 +1,6 @@
 ---
 title: Tips When Using Browser Developer Tools
-kind: guide
+
 further_reading:
     - link: '/real_user_monitoring/browser'
       tag: 'Documentation'
@@ -54,4 +54,4 @@ In the network tab, add a filter of the form `-url:intake-datadoghq.com` (update
 
 [1]: /getting_started/site
 [2]: /real_user_monitoring/guide/proxy-rum-data
-[3]: /real_user_monitoring/browser/#choose-the-right-installation-method
+[3]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method

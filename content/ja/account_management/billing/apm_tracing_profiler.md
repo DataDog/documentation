@@ -3,7 +3,6 @@ aliases:
 - /ja/account_management/billing/profiler/
 - /ja/account_management/billing/apm_distributed_tracing/
 - /ja/account_management/billing/apm_tracing_profiling/
-kind: documentation
 title: APM 料金
 ---
 
@@ -26,7 +25,7 @@ APM は、APM、APM Pro、APM Enterprise の 3 つの階層で提供されてい
 
 詳細については、[料金ページ][7]を参照してください。
 
-## データベース モニタリング
+## Database Monitoring
 
 | 請求パラメーター  | 正規化されたクエリ                | 課金                                          |
 |--------------------|-----------------------------------|--------------------------------------------------|

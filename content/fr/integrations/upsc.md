@@ -18,7 +18,7 @@ integration_id: upsc
 integration_title: UPSC
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: '@platinummonkey'
 manifest_version: 1.0.0
 metric_prefix: upsc.

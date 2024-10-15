@@ -1,6 +1,5 @@
 ---
 title: Parsing
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
     - /logs/parsing/
@@ -18,6 +17,8 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview

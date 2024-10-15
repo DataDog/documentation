@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 함수 인수에 할당하지 않기
 ---
 ## 메타데이터

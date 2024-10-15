@@ -29,7 +29,7 @@ integration_id: weblogic
 integration_title: WebLogic
 integration_version: 1.1.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: weblogic.

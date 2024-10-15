@@ -1,6 +1,6 @@
 ---
 title: Monitor your AWS billing details
-kind: guide
+
 aliases:
   - /integrations/faq/how-do-i-monitor-my-aws-billing-details
 

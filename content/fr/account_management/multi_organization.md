@@ -14,7 +14,6 @@ further_reading:
 - link: /account_management/billing/usage_attribution
   tag: Documentation
   text: Configurer l'attribution de l'utilisation
-kind: documentation
 title: Gestion des comptes multi-organisations
 ---
 

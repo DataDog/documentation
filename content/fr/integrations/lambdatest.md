@@ -27,7 +27,7 @@ integration_id: lambdatest
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: prateeksaini@lambdatest.com
 manifest_version: 1.0.0
 metric_prefix: lambdatest.

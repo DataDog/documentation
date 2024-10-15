@@ -1,6 +1,6 @@
 ---
 title: Understand How Synthetic Test Retries Determine Monitor Status
-kind: guide
+
 description: Learn how a Synthetic test retry affects the associated monitor status.
 further_reading:
 - link: "/synthetics/guide/synthetic-test-monitors/"

@@ -1,6 +1,6 @@
 ---
 title: Using Session Replay As A Key Tool In Post-Mortems
-kind: guide
+
 further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'blog'

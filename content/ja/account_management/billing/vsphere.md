@@ -1,7 +1,7 @@
 ---
 title: vSphere インテグレーションの課金
-kind: documentation
 ---
+
 ## 概要
 
 Datadog では、vCenter サーバーにインストールされている Agent および監視される VM のそれぞれに対して課金が発生します。

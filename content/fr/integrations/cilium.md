@@ -24,7 +24,7 @@ guid: 1d9db288-4678-4ede-9ba0-8b04a8ae31c2
 integration_id: cilium
 integration_title: Cilium
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: cilium.

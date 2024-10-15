@@ -1,15 +1,14 @@
 ---
 title: Getting Started with the Datadog Operator
-kind: documentation
 further_reading:
   - link: '/containers/datadog_operator'
     tag: 'documentation'
     text: 'Datadog Operator'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Advanced Installation'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Configuration'
 ---
 

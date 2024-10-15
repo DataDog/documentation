@@ -20,7 +20,7 @@ has_logo: true
 integration_id: kubernetes-audit-logs
 integration_title: Kubernetes 감사 로그
 is_public: true
-kind: integration
+custom_kind: integration
 name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes 감사 로그
 short_description: 'Kubernetes 클러스터 내부 추적 '

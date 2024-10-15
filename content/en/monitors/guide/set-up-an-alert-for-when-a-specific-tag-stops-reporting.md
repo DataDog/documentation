@@ -1,6 +1,5 @@
 ---
 title: Set up an alert for when a specific tag stops reporting
-kind: guide
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

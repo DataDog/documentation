@@ -1,6 +1,5 @@
 ---
 title: Azure Configuration Guide for Cloud SIEM
-kind: documentation
 further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"

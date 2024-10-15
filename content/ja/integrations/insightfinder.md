@@ -28,6 +28,7 @@ categories:
 - インシデント
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/insightfinder/README.md
 display_on_public_website: true
@@ -37,7 +38,6 @@ integration_id: insightfinder
 integration_title: InsightFinder
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: insightfinder
 public_title: InsightFinder
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: InsightFinder で DataDog からデータを統合して分析
   media: []
@@ -74,14 +75,14 @@ tile:
 
 この双方向インテグレーションは、高度な AIOps 機能を提供します。InsightFinder は、標準的な API を通じて Datadog からデータを取り込み、ビジネスに影響が及ぶ前に異常なイベントを発見します。これらの異常なイベントに対するアラートを Datadog に送信し、チームに通知することができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 InsightFinder のインテグレーションを構成してデータを送信するには、[InsightFinder-Datadog インテグレーション][2]を参照してください。Datadog [API キーおよびアプリケーションキー][3]が必要です。
 
 
-## Agent
+## サポート
 
 [Datadog サポート][4]にお問い合わせいただくか、[InsightFinder サポート][5]にメールしてください。
 

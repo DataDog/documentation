@@ -1,6 +1,5 @@
 ---
 title: Suppressions
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "security/detection_rules/"
@@ -55,7 +54,11 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="The add suppression query with the query @user.username:john.doe" style="width:65%;" >}}
   Suppression rule queries are based on **signal attributes**. 
 1. Additionally, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
-  
+
+### Restrict edit permissions
+
+{{% security-products/suppressions-granular-access %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

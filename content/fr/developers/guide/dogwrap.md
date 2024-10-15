@@ -1,10 +1,13 @@
 ---
-title: Dogwrap
-description: Appeler des commandes et générer des événements à partir des résultats avec Dogwrap
-kind: guide
 aliases:
-  - /fr/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
+- /fr/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
+- /fr/dashboards/faq/how-do-i-track-cron-jobs
+description: Appeler des commandes et générer des événements à partir des résultats
+  avec Dogwrap
+
+title: Dogwrap
 ---
+
 L'outil de ligne de commande Dogwrap vous permet d'appeler des commandes et de générer des événements à partir des résultats. Pour pouvoir utiliser Dogwrap, vous devez installer la [bibliothèque Python de Datadog][1] :
 
 Pour l'installer avec pip :
@@ -20,9 +23,31 @@ Pour l'installer depuis les sources :
 
 Pour être valide, une commande `dogwrap` doit au moins disposer des éléments suivants :
 
+{{< site-region region="us,gov,ap1" >}}
 ```bash
 dogwrap -n <TITRE_ÉVÉNEMENT> -k <CLÉ_API_DATADOG> "<COMMANDE>"
 ```
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us3 "<COMMAND>"
+```
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us5 "<COMMAND>"
+```
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
+```
+{{< /site-region >}}
+
+**Remarque** : La commande `dogwrap` envoie des données au site américain de Datadog par défaut. Si vous souhaitez envoyer des données vers un autre site, vous devez inclure `-s` option specifying a target site, such as `eu`, `us3`, `us5`, etc.
 
 Voici l'explication des paramètres fictifs de la commande :
 

@@ -31,7 +31,7 @@ integration_id: planetscale
 integration_title: PlanetScale
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: planetscale
 public_title: PlanetScale

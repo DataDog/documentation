@@ -34,7 +34,7 @@ integration_id: tomcat
 integration_title: Tomcat
 integration_version: 1.11.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: tomcat.

@@ -1,9 +1,9 @@
 ---
-title: カウント
-kind: documentation
 aliases:
-  - /ja/graphing/functions/count/
+- /ja/graphing/functions/count/
+title: カウント
 ---
+
 ## 0 以外のカウント
 
 | 関数          | 説明                           | 例                           |

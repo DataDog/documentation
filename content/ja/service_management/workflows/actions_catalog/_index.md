@@ -7,7 +7,6 @@ cascade:
   disable_sidebar: true
   type: actioncatalog
 disable_toc: true
-kind: documentation
 title: アクションカタログ
 type: actioncatalog
 ---

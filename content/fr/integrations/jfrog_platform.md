@@ -28,7 +28,7 @@ integration_id: jfrog-platform
 integration_title: Plateforme JFrog
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: integrations@jfrog.com
 manifest_version: 1.0.0
 metric_prefix: jfrog.

@@ -1,6 +1,6 @@
 ---
 title: Set up Orchestrator Explorer with DaemonSet
-kind: faq
+
 further_reading:
 - link: "/infrastructure/containers"
   tag: "Documentation"

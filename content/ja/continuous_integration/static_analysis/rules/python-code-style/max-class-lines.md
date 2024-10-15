@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: クラスは 100 行以下でなければならない
 ---
 ## メタデータ

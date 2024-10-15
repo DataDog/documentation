@@ -13,7 +13,6 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Métriques d'utilisation
-kind: documentation
 title: Mécanismes d'ingestion
 ---
 

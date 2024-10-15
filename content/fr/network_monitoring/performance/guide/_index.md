@@ -2,7 +2,6 @@
 aliases:
 - /fr/network_performance_monitoring/guide/
 disable_toc: true
-kind: guide
 private: true
 title: Guides pour la solution Network Performance Monitoring
 ---

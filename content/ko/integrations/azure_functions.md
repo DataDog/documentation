@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Microsoft Azure Functions
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_functions
 public_title: Datadog-Microsoft Azure Functions 통합

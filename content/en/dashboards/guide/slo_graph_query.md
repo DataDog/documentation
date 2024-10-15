@@ -1,6 +1,5 @@
 ---
 title: Scope metric-based SLO queries
-kind: guide
 disable_toc: false
 further_reading:
 - link: "/dashboards/widgets/slo/"

@@ -12,7 +12,7 @@ integration_id: chatwork
 integration_title: Chatwork
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: chatwork
 public_title: Datadog-Chatwork 통합

@@ -16,7 +16,6 @@ further_reading:
   tag: 설명서
   text: ASM API 보안
 is_beta: true
-kind: 설명서
 title: Datadog API 카탈로그
 ---
 

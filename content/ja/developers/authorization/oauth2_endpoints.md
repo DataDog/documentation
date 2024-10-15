@@ -4,12 +4,8 @@ further_reading:
 - link: /developers/authorization/
   tag: Documentation
   text: OAuth2 認可について
-kind: documentation
 title: OAuth2 認可エンドポイントリファレンス
 ---
-{{< callout btn_hidden="true" >}}
-  Datadog Developer Platform は現在ベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /callout >}} 
 
 ## 概要
 
@@ -46,7 +42,7 @@ https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/
 
 #### 成功レスポンス
 
-ユーザーがアクセスリクエストの許可に成功した場合、アプリケーションは[認可コードを取得](#obtain-an-authorization-code)し、クエリコンポーネントに `site` パラメーターと同様に認可 `code` を指定してリダイレクト URI にユーザーをリダイレクトさせます。
+If a user successfully grants the access request, your application [obtains an authorization code](#obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `domain` parameter, in the query component. 
 
 #### エラーレスポンス
 

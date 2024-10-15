@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
-kind: documentación
 title: Puppet
 ---
 Este módulo instala el Datadog Agent y envía informes de Puppet a Datadog.

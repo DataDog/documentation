@@ -1,6 +1,5 @@
 ---
 title: Incident Management Guides
-kind: documentation
 private: true
 disable_toc: true
 further_reading:

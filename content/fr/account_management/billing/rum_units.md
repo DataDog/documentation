@@ -1,6 +1,5 @@
 ---
 title: Informations détaillées sur la facturation RUM 
-kind: documentation
 beta: true
 ---
 

@@ -24,7 +24,7 @@ guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
 is_public: true
-kind: intégration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: kube_scheduler.

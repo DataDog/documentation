@@ -5,7 +5,6 @@ further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
   tag: FAQ
   text: Haz un gráfico del cambio porcentual entre un valor anterior y un valor actual.
-kind: documentación
 title: Monitorización dinámica
 ---
 

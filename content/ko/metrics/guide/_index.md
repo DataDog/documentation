@@ -8,7 +8,6 @@ cascade:
     subcategory: 메트릭 가이드
 description: 메트릭 가이드 인덱스
 disable_toc: true
-kind: 가이드
 private: true
 title: 메트릭 가이드
 ---

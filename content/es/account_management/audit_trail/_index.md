@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: Blog
   text: Monitorizar activos y configuraciones críticos de Datadog con Audit Trail
-kind: documentación
 title: Datadog Audit Trail
 ---
 

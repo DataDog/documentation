@@ -1,16 +1,16 @@
 ---
-title: Network Device Monitoring avec l'Agent de cluster
-kind: guide
 aliases:
-  - /fr/network_performance_monitoring/devices/guide/cluster-agent/
+- /fr/network_performance_monitoring/devices/guide/cluster-agent/
 further_reading:
-  - link: /agent/cluster_agent
-    tag: Documentation
-    text: Agent de cluster pour Kubernetes
-  - link: /agent/cluster_agent/clusterchecks
-    tag: Documentation
-    text: Checks de cluster
+- link: /agent/cluster_agent
+  tag: Documentation
+  text: Agent de cluster pour Kubernetes
+- link: /agent/cluster_agent/clusterchecks
+  tag: Documentation
+  text: Checks de cluster
+title: Network Device Monitoring avec l'Agent de cluster
 ---
+
 Pour les environnements Kubernetes, l'[Agent de cluster Datadog][1] peut être configuré de façon à utiliser la logique Autodiscovery de la solution Network Device Monitoring (NDM) afin de générer des [checks de cluster][2].
 
 Lorsqu'elle est combinée avec l'Agent de cluster Datadog, la fonction Autodiscovery de l'Agent se révèle particulièrement évolutive. Elle permet de surveiller un grand nombre d'appareils.
@@ -42,7 +42,7 @@ Voici un exemple de fichier `cluster-agent-values.yaml` :
 datadog:
   ## @param apiKey - chaîne - obligatoire
   ## Définir ce paramètre sur votre clé d'API Datadog avant l'exécution de l'Agent.
-  ## Pour en savoir plus : https://app.datadoghq.com/account/settings#agent/kubernetes
+  ## Pour en savor plus : https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
   #
   apiKey: <CLÉ_API_DATADOG>
 

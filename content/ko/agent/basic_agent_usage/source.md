@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: 설명서
   text: 인바운드 포트 구성
-kind: 설명서
 platform: 소스
 title: 소스 설치용 Agent의 기본 사용법
 ---

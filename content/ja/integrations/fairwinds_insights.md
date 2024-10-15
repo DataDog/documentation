@@ -32,6 +32,7 @@ categories:
 - マーケットプレイス
 - プロビジョニング
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +41,6 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -70,7 +70,6 @@ tile:
   - Category::Provisioning
   - Category::Security
   - Offering::Integration
-  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -109,6 +108,11 @@ tile:
     image_url: images/Fairwinds_Insights_VulnerabilityScanning_Image_v1.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/fairwinds-insights-datadog-marketplace/
+  - resource_type: documentation
+    url: https://insights.docs.fairwinds.com/
   support: README.md#Support
   title: Fairwinds Insights
   uninstallation: README.md#Uninstallation
@@ -142,27 +146,27 @@ tile:
 * コンテナ内の既知の脆弱性を監視
 * Kubernetes のデプロイメントコンフィギュレーションを確認
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Fairwinds Insights インサイトのアクションアイテムは、タグと共に Datadog に表示されるため、必要な分析を行うことができます。
 
-### ヘルプ
+### サービスチェック
 
 Fairwinds Insights にサービスのチェックは含まれません。
 
-### ヘルプ
+### イベント
 
 * 最初のイベントは、インテグレーションのセットアップを完了すると表示されます
 * Fairwinds Insights の新しいアクションアイテムごとのイベント
 * Fairwinds Insights のイベント修正済みアクションアイテムごとのイベント
 
-## Agent
+## サポート
 
 サポートまたはリクエストをご希望の場合は、以下のチャンネルから Fairwinds にお問い合わせください。
 
-- 電話: +1 617-202-3659 
+- 電話: +1 617-202-3659
 - メール: [sales@fairwinds.com][2]
 
 ### よくある質問

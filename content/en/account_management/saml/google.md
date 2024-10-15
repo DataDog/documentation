@@ -1,6 +1,5 @@
 ---
 title: Google SAML IdP
-kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
 further_reading:

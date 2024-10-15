@@ -11,14 +11,12 @@ further_reading:
 - link: /synthetics/multistep
   tag: Documentación
   text: Crear un test de API multipaso
-kind: guía
-title: Ejecutar tests de API simples y API multipaso en aplicaciones que requieren
-  autenticación
+title: Uso de la autenticación en los tests de API y de API multipaso
 ---
 
 ## Información general
 
-Los [tests de HTTP][1] te permiten enviar solicitudes HTTP a los endpoints de API de tus aplicaciones para verificar las respuestas y las condiciones definidas, como el tiempo general de respuesta, el código de estado previsto, el encabezado o el contenido del cuerpo. Con los [tests de API multipaso][2] puedes encadenar solicitudes HTTP para monitorizar proactivamente recorridos sofisticados en servicios claves y asegurarte de que se puede acceder a ellos en cualquier momento y desde cualquier ubicación gestionada y privada.
+Los [tests de API][1] te permiten enviar solicitudes a los endpoints de las API de tus aplicaciones para verificar las respuestas y las condiciones definidas, como el tiempo de respuesta general, el código de estado esperado, el encabezado o el contenido del cuerpo. Los [tests de API multipaso][2] te permiten encadenar solicitudes para monitorizar de forma proactiva recorridos sofisticados en tus servicios clave y garantizar que estén disponibles en cualquier momento y desde cualquier localización gestionada o privada.
 
 En este artículo vamos a ver los distintos protocolos de autenticación que se pueden usar en los tests de API simples y de API multipaso de Synthetics. En el artículo sobre cómo [ejecutar tests en aplicaciones que requieren autenticación][3], encontrarás más información sobre la autenticación en tests de navegador.
 
@@ -95,7 +93,7 @@ Al guardar tus credenciales como variables locales, estas solo se limitan a un �
 
 Para obtener más información sobre cómo proteger los datos, consulta [Seguridad de los datos en Synthetic Monitoring][7].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -106,3 +104,4 @@ Para obtener más información sobre cómo proteger los datos, consulta [Segurid
 [5]: https://app.datadoghq.com/synthetics/multi-step/create
 [6]: /es/account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [7]: /es/data_security/synthetics
+[8]: /es/synthetics/api_tests/grpc_tests

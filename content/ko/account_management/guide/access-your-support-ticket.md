@@ -2,7 +2,6 @@
 aliases:
 - /ko/developers/faq/access-your-support-ticket
 - /ko/account_management/faq/access-your-support-ticket
-kind: 설명서
 title: 지원 티켓에 액세스하기
 ---
 
