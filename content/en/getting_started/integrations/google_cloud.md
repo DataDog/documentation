@@ -176,7 +176,7 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 
 ### Filtering metric collection
 
-You can limit the GCE/GKE instances & Cloud Run Revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab.
+You can limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab.
 Only resources that match one of the defined tags are imported into Datadog. 
 
 You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. 
