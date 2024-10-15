@@ -5420,21 +5420,6 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
-    - name: Vulnerability Pipeline
-      url: security/vulnerability_pipeline/
-      parent: security_platform
-      identifier: vulnerability_pipeline
-      weight: 4
-    - name: Mute
-      url: security/vulnerability_pipeline/mute
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_mute
-      weight: 10001
-    - name: Security Inbox
-      url: security/vulnerability_pipeline/security_inbox
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_inbox
-      weight: 10002
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
