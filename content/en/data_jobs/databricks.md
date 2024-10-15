@@ -187,9 +187,9 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access through IP access lists, allow-listing Datadog's specific [IP addresses][13] allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
+If you are controlling Databricks API access through IP access lists, allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][14] for more details on how to manage IP access lists in Databricks.
 
-If you are using [Databricks Private Connectivity][15], we recommend contacting our [support team][16].
+If you are using [Databricks Private Connectivity][15], it's recommended that you contact the Datadog [support team][16].
 
 ## Further Reading
 
@@ -204,7 +204,6 @@ If you are using [Databricks Private Connectivity][15], we recommend contacting 
 [10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
 [11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
 [12]: https://docs.databricks.com/en/security/network/front-end/index.html
-[13]: https://ip-ranges.{{< region-param key="dd_site" >}}/webhooks.json
 [14]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [15]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [16]: https://www.datadoghq.com/support/
