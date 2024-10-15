@@ -53,7 +53,7 @@ Clicking a service in Service Catalog opens a side panel with details in two mai
 
 
 
-## Configuration details 
+### Configuration details 
 - **Setup completeness status** for Datadog products that can collect data for the service.
 - **External libraries used** which includes the ability to download the Inventory of Libraries.
 - **Service definition** in YAML with a link to the service's source code.
