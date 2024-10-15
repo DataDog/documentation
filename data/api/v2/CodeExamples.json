@@ -20,6 +20,20 @@
       "description": "Update a retention filter returns \"OK\" response"
     }
   ],
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "AWS Integration - Create account config returns \"AWS Account object\" response"
+    }
+  ],
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "AWS Integration - Patch account config returns \"AWS Account object\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
