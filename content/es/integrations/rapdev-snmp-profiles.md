@@ -61,7 +61,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10122
-    source_type_name: Perfiles SNMP RapDev
+    source_type_name: Perfiles SNMP de RapDev
   monitors:
     Barracuda memory usage is high: assets/monitors/rapdev_barracuda-memory.json
     CMOS battery has an issue: assets/monitors/rapdev_idrac-cmos.json
@@ -139,7 +139,7 @@ tile:
   description: Capacidad de observación de dispositivos SNMP con perfiles de dispositivos
     de detección automática
   media:
-  - caption: Presentación de los perfiles SNMP RapDev
+  - caption: Presentación de los perfiles SNMP de RapDev
     image_url: images/vídeo.png
     media_type: vídeo
     vimeo_id: 630489707
