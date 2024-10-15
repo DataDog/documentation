@@ -84,7 +84,7 @@ To expand or collapse span descendants, click the chevron (>) icon on a row. To 
 {{% /tab %}}
 {{% tab "Map" %}}
 
-![trace-map](https://github.com/user-attachments/assets/d9715379-f2a0-46c4-8644-3cd57905de64)
+{{< img src="tracing/trace_view/trace-map.png" alt="Trace map" style="width:100%;">}}
 
 Trace map displays a representation of all services involved in a single trace, providing an overview of the transaction lifecycle at the service level and clarifying service dependencies.
 
