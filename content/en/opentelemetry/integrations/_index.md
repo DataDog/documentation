@@ -12,7 +12,7 @@ This page covers Datadog-supported OpenTelemetry (OTel) integrations. These inte
 
 OpenTelemetry (OTel) integrations are components that enable the collection of observability data (metrics, traces, and logs) from various sources using the OpenTelemetry standard. These integrations are designed to work with the OpenTelemetry Collector, which receives, processes, and exports telemetry data to observability backends like Datadog.
 
-For a comprehensive list of all OpenTelemetry integrations, see the [OpenTelemetry Registry][1]. This registry provides information on receivers, exporters, and other components of the OpenTelemetry ecosystem.
+For a comprehensive list of all OpenTelemetry integrations, see the [OpenTelemetry Registry][1]. This registry provides information on receivers, exporters, and other components in the OpenTelemetry ecosystem.
 
 ## Datadog-supported OpenTelemetry integrations
 
