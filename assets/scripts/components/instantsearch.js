@@ -14,9 +14,24 @@ const typesenseConfig = getConfig(env).typesense;
 const adapterOptions = {
     server: {
         apiKey: typesenseConfig.public_key,
+        nearestNode: {
+            host: `${typesenseConfig.host}.a1.typesense.net`,
+            port: 443,
+            protocol: 'https'
+        },
         nodes: [
             {
-                host: `${typesenseConfig.host}.a1.typesense.net`,
+                host: `${typesenseConfig.host}-1.a1.typesense.net`,
+                port: 443,
+                protocol: 'https'
+            },
+            {
+                host: `${typesenseConfig.host}-2.a1.typesense.net`,
+                port: 443,
+                protocol: 'https'
+            },
+            {
+                host: `${typesenseConfig.host}-3.a1.typesense.net`,
                 port: 443,
                 protocol: 'https'
             }
@@ -24,7 +39,7 @@ const adapterOptions = {
         cacheSearchResultsForSeconds: 2 * 60
     },
     additionalSearchParameters: {
-        preset: "docs_alias_view"
+        preset: 'docs_alias_view'
     }
 };
 const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterOptions);
@@ -106,11 +121,14 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     }
 
     if (apiPage) {
-        typesenseInstantSearchAdapter.updateConfiguration({...adapterOptions, ...{
-          additionalSearchParameters: {
-            preset: "docs_alias_api_view"
-          }
-        }});
+        typesenseInstantSearchAdapter.updateConfiguration({
+            ...adapterOptions,
+            ...{
+                additionalSearchParameters: {
+                    preset: 'docs_alias_api_view'
+                }
+            }
+        });
     }
 
     if (searchResultsPage) {

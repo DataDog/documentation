@@ -9,6 +9,12 @@ module.exports = {
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },
+        typesense: {
+            host: 'gk6e3zbyuntvc5dap',
+            public_key: 'bDUaL3uKrCG0033PDb6Vbi8n46mKGaMG',
+            index: 'docs_alias',
+            api_index: 'docs_api_alias'
+        },
         imgUrl: 'https://datadog-docs.imgix.net/',
         gaTag: 'UA-21102638-5'
     },
