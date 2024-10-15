@@ -25,17 +25,17 @@ Pipelines and processors can be applied to all events and can be configured in t
 
 ## Create a pipeline
 
-Create an Pipeline to filter to the events that your interested in, for example, a source or a tag. 
+Create an Pipeline to filter to the events that you are interested in, for example, a source or a tag. 
 
-1. Navigate to [Event Management Pipelines][1] in the Datadog app.
+1. Navigate to [Event Management Pipelines][1] in Datadog.
 1. Click **Add a Pipeline**.
-1. Choose a filter from the dropdown menu or create your own filter query in the [Event Management Explorer][2] by selecting the `</>` icon. Filters let you limit what kinds of events a pipeline applies to. **Note**: The pipeline filtering is applied before any of the pipeline’s processors. You cannot filter on an attribute that is extracted in the pipeline itself.
+1. Choose a filter from the dropdown menu or create your own filter query in the [Event Management Explorer][2] by selecting the `</>` icon. Filters let you limit what kinds of events a pipeline applies to. **Note**: The pipeline filtering is applied before any of the pipeline's processors. You cannot filter on an attribute that is extracted in the pipeline itself.
 1. Name the pipeline.
 1. Click **Create**.
 
 ## Add a processor
 
-After you created a pipeline you can then add processors. The processors available are: 
+You can add processors after you create a pipeline. The processors available are:
 
 - [Arithmetic Processor][3]
 - [Date Remapper][4]
