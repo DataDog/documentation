@@ -11,9 +11,9 @@ further_reading:
 Datadog Event Management Pipelines allow you to process and manage events from various sources efficiently. With pipelines, you can apply various processing rules and filters to customize how events are handled. Pipelines make it easier to manage large volumes of incoming events in a structured way. 
 
 Use pipelines to:
-1. **Enrich events**: Pipelines can add additional context or information to events, such as tagging, adding custom attributes, or correlating events with relevant metadata to make them more informative and actionable.
-2. **Normalize event tags**: You can set up rules to remap tags so that your events all have standardized tags.
-3. **Parse messages and attributes as tags**: Create custom grok rules to parse the full message or a specific attribute of your raw event. Translate the context into trackable tags and attributes that can be referenced during investigation.
+- **Enrich events**: Pipelines can add additional context or information to events, such as tagging, adding custom attributes, or correlating events with relevant metadata to make them more informative and actionable.
+- **Normalize event tags**: You can set up rules to remap tags so that your events all have standardized tags.
+- **Parse messages and attributes as tags**: Create custom grok rules to parse the full message or a specific attribute of your raw event. Translate the context into trackable tags and attributes that can be referenced during investigation.
 
 Datadog Event Management Pipelines help organizations simplify their monitoring processes, enhance the clarity of their operational insights, and ultimately respond more effectively to incidents and alerts.
 
