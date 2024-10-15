@@ -14,9 +14,9 @@ further_reading:
 title: Explorar ejemplos de consulta
 ---
 
-La página [Muestras][1] te ayuda a comprender cuáles consultas se estaban ejecutando en un momento dado. Compara cada ejecución con el rendimiento medio de la consulta y las consultas relacionadas.
+La página de [muestras][1] te ayuda a comprender cuáles consultas se estaban ejecutando en un momento dado. Compara cada ejecución con el rendimiento medio de la consulta y las consultas relacionadas.
 
-La página Muestras presenta un snapshot de un momento de ejecución de las consultas y de las consultas finalizadas recientemente. Dado que se trata del snapshot de un momento específico, no muestra necesariamente una representación de todas las consultas, pero puede indicar proporciones.
+La página de muestras presenta un snapshot de un momento de ejecución de las consultas y de las consultas finalizadas recientemente. Dado que se trata del snapshot de un momento específico, no muestra necesariamente una representación de todas las consultas, pero puede indicar proporciones.
 
 ## Buscar y filtrar
 
@@ -35,7 +35,7 @@ Haz clic en **Options** (Opciones) para añadir columnas a la tabla. Haz clic en
 
 El coste del plan de explicación es una medida sin unidades que la base de datos utiliza para comparar dos planes entre sí. Se corresponde aproximadamente con el número de elementos de los bloques o páginas de la base de datos, pero es útil sobre todo para comparar dos planes en términos relativos, no en los términos absolutos de un único plan. El cálculo del coste del plan de explicación ayuda a la base de datos a elegir el plan que va a utilizar.
 
-La página de las muestras de consultas permite filtrar, ordenar y comparar los costes del plan de explicación de varias consultas. En este contexto, el coste del plan de explicación no debe tomarse de forma absoluta. Una consulta con un coste del plan de explicación de 8,5 no tiene necesariamente un mejor rendimiento que otra con un coste de 8,7. Pero si dos consultas tienen costes muy diferentes cuando se esperaría que fueran similares, puede ser beneficioso investigar por qué. Además, puedes ordenar tus consultas por coste para ver cuáles son las más caras, independientemente de factores externos como la latencia de red.
+La página de muestras de consultas permite filtrar, ordenar y comparar los costes del plan de explicación de varias consultas. En este contexto, el coste del plan de explicación no debe tomarse de forma absoluta. Una consulta con un coste del plan de explicación de 8,5 no tiene necesariamente un mejor rendimiento que otra con un coste de 8,7. Pero si dos consultas tienen costes muy diferentes cuando se esperaría que fueran similares, puede ser beneficioso investigar por qué. Además, puedes ordenar tus consultas por coste para ver cuáles son las más caras, independientemente de factores externos como la latencia de red.
 
 ### Índices
 
@@ -51,7 +51,7 @@ Filtra u ordena para encontrar las consultas que tardan más en ejecutarse duran
 
 ### Detalles de la muestra
 
-Haz clic en una consulta de la tabla para abrir su página detalles de las muestras. Utiliza los cuadros Source (Origen), Host y Client IP (IP del cliente) en la parte superior, para filtrar la página de consultas de muestras por los valores de esta muestra o para consultar otra información de Datadog como el dashboard del host o las métricas del tráfico de red de la IP del cliente.
+Haz clic en una consulta de la tabla para abrir su página de detalles de las muestras. Utiliza los cuadros Source (Origen), Host y Client IP (IP del cliente) en la parte superior, para filtrar la página de las muestras de consultas por los valores de esta muestra o para consultar otra información de Datadog como el dashboard del host o las métricas del tráfico de red de la IP del cliente.
 
 {{< img src="database_monitoring/dbm_sd_actions.png" alt="Cuadros de acciones de los detalles de las muestras" style="width:100%;">}}
 
