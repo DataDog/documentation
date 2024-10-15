@@ -40,7 +40,7 @@ Integrating your Google Cloud projects with Datadog allows you to monitor real-t
 
 ## Setup 
 
-You can integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
+Integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
 
 After reviewing the above [Prerequisites][3], follow these step-by-step instructions to set up the Google Cloud integration:
 
@@ -96,7 +96,7 @@ Keep this window open for Section 3.
 {{% /collapse-content %}}
 
 {{% collapse-content title="3. Complete the integration setup in Datadog" level="h5" %}}
-1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. There, you can find the email associated with this Google service account. It resembles `<sa-name>@<project-id>.iam.gserviceaccount.com`.
+1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. On this page, find the email associated with this Google service account. It resembles `<sa-name>@<project-id>.iam.gserviceaccount.com`.
 
 2. Copy this email.
 
@@ -176,10 +176,10 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 
 ### Filtering metric collection
 
-You can limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab.
+Limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab.
 Only resources that match one of the defined tags are imported into Datadog. 
 
-You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. 
+Use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. 
 This example includes all c1* sized instances, but excludes staging hosts:
 
 ```text
@@ -246,8 +246,8 @@ To use Google Cloud Cost Management in Datadog, [follow these steps][51].
 
 ### Cloud SIEM
 
-With Cloud SIEM, you can analyze operational and security logs in real time, while utilizing out-of-the-box integrations and rules to detect threats and investigate them.
-To set this feature up, see [Getting Started with Cloud SIEM][36].
+Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
+To use this feature, see [Getting Started with Cloud SIEM][36].
 
 To view security findings from [Google Cloud Security Command Center][37] in Cloud SIEM, toggle the **Enable collection of security findings** option under the **Security Findings** tab & follow the setup instructions on the [Google Cloud Security Command Center guide][38].
 
@@ -259,8 +259,7 @@ To view security findings from [Google Cloud Security Command Center][37] in Clo
 
 ### Cloud Security Management
 
-Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
-
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.z
 Check out the [Setting up Cloud Security Management guide][39] to get started.
 
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][41] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][40] on Google Cloud.
