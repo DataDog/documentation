@@ -242,7 +242,7 @@ Enhanced metrics are automatically enabled if you enable tracing.
 
 To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Step Function invocations) and 1.000 (trace all Step Function invocations). 
 
-The dropped traces will not be ingested into Datadog. 
+The dropped traces are not ingested into Datadog. 
 
 ## Link Step Functions with your AWS Lambda traces
 
