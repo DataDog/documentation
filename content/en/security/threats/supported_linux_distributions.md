@@ -14,7 +14,7 @@ Cloud Security Management Threats supports the following Linux distributions:
 | Red Hat Enterprise Linux                                      | 7, 8, and 9             |
 | Oracle Linux                                                  | 7, 8, and 9             |
 | CentOS                                                        | 7                       |
-| Google Container Optimized OS (default on GKE) (PREVIEW)      | 93 and higher           |
+| Google Container Optimized OS (default on GKE) (Preview)      | 93 and higher           |
 
 **Notes:**
 
