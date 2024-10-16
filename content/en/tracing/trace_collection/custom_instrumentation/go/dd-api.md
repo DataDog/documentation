@@ -1,5 +1,5 @@
 ---
-title: Go Custom Instrumentation using Datadog API
+title: Go Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
