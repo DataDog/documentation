@@ -82,7 +82,7 @@ Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación
 
 ### Configuración
 
-1. Edita el archivo `puma.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de tu Puma. Para conocer todas las opciones de configuración disponibles, consulta el [puma.d/conf.yaml de ejemplo][4].
+1. Edita el archivo `puma.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de tu Puma. Para conocer todas las opciones de configuración disponibles, consulta el [puma.d/conf.yaml de ejemplo][6].
 
 2. [Reinicia el Agent][7].
 
