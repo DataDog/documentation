@@ -109,7 +109,7 @@ To learn more, read [Application Instrumentation][26].
 
 ## Baggage
 
-Baggage allows you to propagate key-value pairs (aka baggage items), across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
+Baggage allows you to propagate key-value pairs (also known as baggage items) across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
 
 ## Further Reading
 
