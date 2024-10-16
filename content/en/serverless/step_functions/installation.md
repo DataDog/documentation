@@ -238,11 +238,11 @@ Enhanced metrics are automatically enabled if you enable tracing.
 
 <div class="alert alert-info">If you enable enhanced metrics without enabling traces, you are only billed for Serverless Workload Monitoring. If you enable tracing (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
 
-## Sampling Traces
+## Sample Traces
 
 To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Step Function invocations) and 1.000 (trace all Step Function invocations). 
 
-Sampling will function as head-based sampling and the dropped traces will not be ingested to Datadog. 
+The dropped traces will not be ingested into Datadog. 
 
 ## Link Step Functions with your AWS Lambda traces
 
