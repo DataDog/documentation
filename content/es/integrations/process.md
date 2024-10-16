@@ -65,17 +65,17 @@ tile:
 
 El check de proceso te permite:
 - Recopila métricas del uso de recursos para procesos en ejecución específicos en cualquier host. Por ejemplo, CPU, memoria, E/S y número de subprocesos.
-- Utiliza [Process Monitors][1] para configurar umbrales de cuántas instancias de un proceso específico deben ejecutarse y recibe alertas cuando no se cumplen los umbrales (consulta **Checks de servicio* a continuación).
+- Utiliza [monitores de procesos][1] para configurar umbrales de cuántas instancias de un proceso específico deben ejecutarse y recibe alertas cuando no se cumplen los umbrales (consulta **Checks de servicio* a continuación).
 
 ## Configuración
 
 ### Instalación
 
-El check de Process está incluido en el paquete del [Datadog Agent][2], por lo que no necesitas instalar nada más en tu servidor.
+El check de procesos está incluido en el paquete del [Datadog Agent][2], por lo que no necesitas instalar nada más en tu servidor.
 
 ### Configuración
 
-A diferencia de muchos checks, el check de Process no monitoriza nada útil por defecto. Debes configurar los procesos que quieres monitorizar.
+A diferencia de muchos checks, el check de procesos no monitoriza nada útil por defecto. Debes configurar los procesos que quieres monitorizar.
 
 Aunque no hay una configuración de check por defecto, aquí hay un ejemplo de `process.d/conf.yaml` que monitoriza procesos SSH/SSHD. Para ver todas las opciones de configuración disponibles, consulta el [process.d/conf.yaml de ejemplo][3]:
 
@@ -90,7 +90,7 @@ instances:
 
 **Nota**: Asegúrate de [reiniciar el Agent][4] después de realizar cambios de configuración.
 
-La recuperación de algunas métricas de procesos requiere que el recopilador de Datadog se ejecute como el usuario del proceso monitorizado o con acceso privilegiado. Para la métrica`open_file_descriptors` en plataformas Unix, existe una opción de configuración adicional. Configurar `try_sudo` como `true` en el archivo `conf.yaml` permite que el check de Process intente utilizar `sudo` para recopilar la métrica `open_file_descriptors`. El uso de esta opción de configuración requiere definir reglas para sudoers apropiadas en `/etc/sudoers`:
+La recuperación de algunas métricas de procesos requiere que el recopilador de Datadog se ejecute como el usuario del proceso monitorizado o con acceso privilegiado. Para la métrica`open_file_descriptors` en plataformas Unix, existe una opción de configuración adicional. Configurar `try_sudo` como `true` en el archivo `conf.yaml` permite que el El check de procesos intente utilizar `sudo` para recopilar la métrica `open_file_descriptors`. El uso de esta opción de configuración requiere definir reglas para sudoers apropiadas en `/etc/sudoers`:
 
 ```shell
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
@@ -103,7 +103,7 @@ Ejecuta el [subcomando de estado del Agent][5] y busca `process` en la sección 
 ### Notas de métricas
 
 Las siguientes métricas no están disponibles en Linux o macOS:
-- Las métricas I/O de Process **no** están disponibles en Linux o macOS, ya que los archivos que lee el Agent (`/proc//io`) sólo pueden ser leídos por el propietario del proceso. Para obtener más información, [lee las FAQ del Agent][6].
+- Las métricas de I/O de procesos **no** están disponibles en Linux o macOS, ya que los archivos que lee el Agent (`/proc//io`) sólo pueden ser leídos por el propietario del proceso. Para obtener más información, [lee las FAQ del Agent][6].
 
 Las siguientes métricas no están disponibles en Windows:
 - `system.cpu.iowait`
@@ -134,7 +134,7 @@ Para ver la lista completa de métricas, consulta la sección [Métricas](#metri
 
 ### Eventos
 
-El check de Process no incluye eventos.
+El check de procesos no incluye eventos.
 
 ### Checks de servicio
 {{< get-service-checks-from-git "process" >}}
