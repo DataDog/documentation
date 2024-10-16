@@ -58,7 +58,7 @@ Security Inbox ranks issues by considering the severity of a finding first, foll
 
 ## Using the security context map to identify and mitigate vulnerabilities
 
-The security context map for [Attack Paths](#types-of-findings-in-security-inbox) provides a comprehensive view to help identify and address potential breach points, effectively mapping interconnected misconfigurations, permission gaps, and vulnerabilities that attackers might exploit.
+The security context map for [Attack Paths](#types-of-findings-in-security-inbox) provides a comprehensive view to help identify and address potential breach points. It effectively maps interconnected misconfigurations, permission gaps, and vulnerabilities that attackers might exploit.
 
 Key features include:
 
