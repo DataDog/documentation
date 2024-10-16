@@ -15774,8 +15774,7 @@ components:
           description: A boolean set to not take a screenshot for the step.
           type: boolean
         params:
-          description: The parameters of the mobile step.
-          type: object
+          $ref: '#/components/schemas/SyntheticsMobileStepParams'
         publicId:
           description: The public ID of the step.
           example: pub-lic-id0
@@ -15786,6 +15785,189 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/SyntheticsMobileStepType'
+      type: object
+    SyntheticsMobileStepParams:
+      description: The parameters of a mobile step.
+      properties:
+        check:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsCheck'
+        delay:
+          description: The `SyntheticsMobileStepParams` `delay`.
+          format: int64
+          maximum: 5000
+          minimum: 0
+          type: integer
+        direction:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsDirection'
+        element:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElement'
+        enable:
+          description: The `SyntheticsMobileStepParams` `enable`.
+          type: boolean
+        maxScrolls:
+          description: The `SyntheticsMobileStepParams` `maxScrolls`.
+          format: int64
+          type: integer
+        position:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsPosition'
+        subtestPublicId:
+          description: The `SyntheticsMobileStepParams` `subtestPublicId`.
+          type: string
+        value:
+          description: The `SyntheticsMobileStepParams` `value`.
+          type: string
+        variable:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsVariable'
+        withEnter:
+          description: The `SyntheticsMobileStepParams` `withEnter`.
+          type: boolean
+        x:
+          description: The `SyntheticsMobileStepParams` `x`.
+          format: int64
+          type: integer
+        y:
+          description: The `SyntheticsMobileStepParams` `y`.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileStepParamsCheck:
+      description: The definition of `SyntheticsMobileStepParamsCheck` object.
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsCheckType'
+      type: object
+    SyntheticsMobileStepParamsDirection:
+      description: The definition of `SyntheticsMobileStepParamsDirection` object.
+      enum:
+      - up
+      - down
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - UP
+      - DOWN
+      - LEFT
+      - RIGHT
+    SyntheticsMobileStepParamsElement:
+      description: The definition of `SyntheticsMobileStepParamsElement` object.
+      properties:
+        context:
+          description: The `element` `context`.
+          type: string
+        contextType:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementContextType'
+        elementDescription:
+          description: The `element` `elementDescription`.
+          type: string
+        multiLocator:
+          description: The `element` `multiLocator`.
+          type: object
+        relativePosition:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementRelativePosition'
+        textContent:
+          description: The `element` `textContent`.
+          type: string
+        userLocator:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocator'
+        viewName:
+          description: The `element` `viewName`.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementContextType:
+      description: The definition of `SyntheticsMobileStepParamsElementContextType`
+        object.
+      enum:
+      - native
+      - web
+      type: string
+      x-enum-varnames:
+      - NATIVE
+      - WEB
+    SyntheticsMobileStepParamsElementRelativePosition:
+      description: The definition of `SyntheticsMobileStepParamsElementRelativePosition`
+        object.
+      properties:
+        x:
+          description: The `relativePosition` `x`.
+          format: int64
+          type: integer
+        y:
+          description: The `relativePosition` `y`.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileStepParamsElementUserLocator:
+      description: The definition of `SyntheticsMobileStepParamsElementUserLocator`
+        object.
+      properties:
+        failTestOnCannotLocate:
+          description: The `userLocator` `failTestOnCannotLocate`.
+          type: boolean
+        values:
+          description: The `userLocator` `values`.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItems'
+          type: array
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItems:
+      description: The definition of `SyntheticsMobileStepParamsElementUserLocatorValuesItems`
+        object.
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItemsType'
+        value:
+          description: The `SyntheticsMobileStepParamsElementUserLocatorValuesItems`
+            `value`.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItemsType:
+      description: The definition of `SyntheticsMobileStepParamsElementUserLocatorValuesItemsType`
+        object.
+      enum:
+      - accessibility-id
+      - id
+      - ios-predicate-string
+      - ios-class-chain
+      - xpath
+      type: string
+      x-enum-varnames:
+      - ACCESSIBILITYNOT_ID
+      - ID
+      - IOSNOT_PREDICATENOT_STRING
+      - IOSNOT_CLASSNOT_CHAIN
+      - XPATH
+    SyntheticsMobileStepParamsPosition:
+      description: The definition of `SyntheticsMobileStepParamsPosition` object.
+      properties:
+        positions:
+          description: The `position` `positions`.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStepParamsPositionPositionsItems'
+          type: array
+      type: object
+    SyntheticsMobileStepParamsPositionPositionsItems:
+      description: The definition of `SyntheticsMobileStepParamsPositionPositionsItems`
+        object.
+      properties:
+        x:
+          description: The `SyntheticsMobileStepParamsPositionPositionsItems` `x`.
+          format: int64
+          type: integer
+        y:
+          description: The `SyntheticsMobileStepParamsPositionPositionsItems` `y`.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileStepParamsVariable:
+      description: The definition of `SyntheticsMobileStepParamsVariable` object.
+      properties:
+        example:
+          description: The `variable` `example`.
+          type: string
+        name:
+          description: The `variable` `name`.
+          type: string
       type: object
     SyntheticsMobileStepType:
       description: Step type used in your mobile Synthetic test.
@@ -15884,26 +16066,11 @@ components:
     SyntheticsMobileTestBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        items:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItems'
-      type: object
-    SyntheticsMobileTestBindingItems:
-      description: Object describing the binding used for a mobile test.
-      properties:
         principals:
           $ref: '#/components/schemas/SyntheticsMobileTestBindingPrincipals'
-        role:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItemsRole'
+        relation:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingRelation'
       type: object
-    SyntheticsMobileTestBindingItemsRole:
-      description: The definition of `SyntheticsMobileTestBindingItemsRole` object.
-      enum:
-      - editor
-      - viewer
-      type: string
-      x-enum-varnames:
-      - EDITOR
-      - VIEWER
     SyntheticsMobileTestBindingPrincipals:
       description: List of principals for a mobile test binding.
       items:
@@ -15911,14 +16078,15 @@ components:
         maxLength: 1500
         type: string
       type: array
-    SyntheticsMobileTestCiOptions:
-      description: CI/CD options for a Synthetic test.
-      properties:
-        executionRule:
-          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
-      required:
-      - executionRule
-      type: object
+    SyntheticsMobileTestBindingRelation:
+      description: The definition of `SyntheticsMobileTestBindingRelation` object.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
       properties:
@@ -15931,18 +16099,10 @@ components:
           type: array
       type: object
     SyntheticsMobileTestInitialApplicationArguments:
+      additionalProperties:
+        description: A single application argument.
+        type: string
       description: Initial application arguments for a mobile test.
-      properties:
-        propertyNames:
-          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArgumentsPropertyNames'
-      type: object
-    SyntheticsMobileTestInitialApplicationArgumentsPropertyNames:
-      description: Name of the property.
-      properties:
-        pattern:
-          description: The `propertyNames` `pattern`.
-          example: ^(?!_dd).*$
-          type: string
       type: object
     SyntheticsMobileTestOptions:
       description: Object describing the extra options for a Synthetic test.
@@ -15956,7 +16116,7 @@ components:
             $ref: '#/components/schemas/SyntheticsMobileTestBinding'
           type: array
         ci:
-          $ref: '#/components/schemas/SyntheticsMobileTestCiOptions'
+          $ref: '#/components/schemas/SyntheticsTestCiOptions'
         defaultStepTimeout:
           description: The `SyntheticsMobileTestOptions` `defaultStepTimeout`.
           format: int32
