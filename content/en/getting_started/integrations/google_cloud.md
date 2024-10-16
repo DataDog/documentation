@@ -3,14 +3,14 @@ title: Getting Started with Google Cloud
 ---
 
 ## Overview
-This guide provides an overview of how to get started with the Google Cloud integration with Datadog.
 
-Integrating your Google Cloud projects with Datadog allows you to monitor real-time metrics & logs from your GCE and GKE compute instances.
+Integrating your Google Cloud projects with Datadog allows you to monitor metrics from your GCE and GKE compute instances within the Datadog platform.
+This guide provides an overview of how to quickly get started with the Datadog Google Cloud integration.
 
 ## Prerequisites
 1) Create a [Datadog account][1]
 2) Set up a [Service Account][2] in Google Cloud
-3) Review these Google Cloud [Prerequisites][3]:
+3) Review these Google Cloud Prerequisites:
 
 - If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
 - Ensure that any projects being monitored are **not** configured as [scoping projects][42] that pull in metrics from multiple other projects.
@@ -18,10 +18,10 @@ Integrating your Google Cloud projects with Datadog allows you to monitor real-t
 - The Google Cloud integration requires the below APIs to be enabled **for each of the projects** you want to monitor:
 
 [Cloud Monitoring API][7] 
-: Allows Datadog to query your Google Cloud Metric data.
+: Allows Datadog to query your Google Cloud metric data.
 
 [Compute Engine API][8] 
-: Allows Datadog to discover Compute instance data.
+: Allows Datadog to discover compute instance data.
 
 [Cloud Asset API][9]
 : Allows Datadog to request Google Cloud resources and link them to relevant metric tags.
@@ -40,16 +40,16 @@ Integrating your Google Cloud projects with Datadog allows you to monitor real-t
 
 ## Setup 
 
-You can integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
+Integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
 
-After reviewing the above [Prerequisites][52], follow these step-by-step instructions to set up the Google Cloud integration:
+After reviewing the above [Prerequisites][3], follow these step-by-step instructions to set up the Google Cloud integration:
 
 {{% collapse-content title=" 1. Create your Google Cloud service account" level="h5" %}}
 1. Open your [Google Cloud console][53].
 
 2. Navigate to **IAM & Admin** > **Service Accounts**.
 
-3. Click on Create service account at the top.
+3. Click on **Create service account** at the top.
 
 4. Give the service account a unique name, then click **Create and continue**.
 
@@ -68,7 +68,7 @@ After reviewing the above [Prerequisites][52], follow these step-by-step instruc
 {{% /collapse-content %}} 
 
 {{% collapse-content title="2. Add the Datadog principal to your service account" level="h5" %}}
-1. In Datadog, navigate to the [**Integrations** > **Google Cloud Platform**][54].
+1. In Datadog, navigate to **Integrations** > [**Google Cloud Platform**][54].
 
 2. Click on **Add Google Cloud Account**. 
 If you have no configured projects, you are automatically redirected to this page.
@@ -96,7 +96,7 @@ Keep this window open for Section 3.
 {{% /collapse-content %}}
 
 {{% collapse-content title="3. Complete the integration setup in Datadog" level="h5" %}}
-1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. There, you can find the email associated with this Google service account. It resembles `<sa-name>@<project-id>.iam.gserviceaccount.com`.
+1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. On this page, find the email associated with this Google service account. It resembles `<sa-name>@<project-id>.iam.gserviceaccount.com`.
 
 2. Copy this email.
 
@@ -133,61 +133,66 @@ The Google Cloud integration collects [**all GA Google Cloud metrics**][17] from
 {{% collapse-content title="Click here for a sample of the Google Cloud metrics Datadog collects" level="h5" %}}
 | Integration                         | Description                                                                           |
 |-------------------------------------|---------------------------------------------------------------------------------------|
-| [App Engine][1]                     | PaaS (platform as a service) to build scalable applications                           |
-| [Big Query][2]                      | Enterprise data warehouse                                                             |
-| [Bigtable][3]                       | NoSQL Big Data database service                                                       |
-| [Cloud SQL][4]                      | MySQL database service                                                                |
-| [Cloud APIs][5]                     | Programmatic interfaces for all Google Cloud Platform services                        |
-| [Cloud Armor][6]                   | Network security service to help protect against denial of service and web attacks    |
-| [Cloud Composer][7]                 | A fully managed workflow orchestration service                                        |
-| [Cloud Dataproc][8]                 | A cloud service for running Apache Spark and Apache Hadoop clusters                   |
-| [Cloud Dataflow][9]                | A fully-managed service for transforming and enriching data in stream and batch modes |
-| [Cloud Filestore][10]                | High-performance, fully managed file storage                                          |
-| [Cloud Firestore][11]                | A flexible, scalable database for mobile, web, and server development                 |
-| [Cloud Interconnect][12]            | Hybrid connectivity                                                                   |
-| [Cloud IoT][13]                     | Secure device connection and management                                               |
-| [Cloud Load Balancing][14]          | Distribute load-balanced compute resources                                            |
-| [Cloud Logging][15]                 | Real-time log management and analysis                                                 |
-| [Cloud Memorystore for Redis][16]   | A fully managed in-memory data store service                                          |
-| [Cloud Router][17]                  | Exchange routes between your VPC and on-premises networks by using BGP                |
-| [Cloud Run][18]                     | Managed compute platform that runs stateless containers through HTTP                  |
-| [Cloud Security Command Center][19] | Security Command Center is a threat reporting service.                                |
-| [Cloud Tasks][20]                   | Distributed task queues                                                               |
-| [Cloud TPU][21]                     | Train and run machine learning models                                                 |
-| [Compute Engine][22]                | High performance virtual machines                                                     |
-| [Container Engine][23]              | Kubernetes, managed by google                                                         |
-| [Datastore][24]                     | NoSQL database                                                                        |
-| [Firebase][25]                      | Mobile platform for application development                                           |
-| [Functions][26]                     | Serverless platform for building event-based microservices                            |
-| [Kubernetes Engine][27]             | Cluster manager and orchestration system                                              |
-| [Machine Learning][28]              | Machine learning services                                                             |
-| [Private Service Connect][29]       | Access managed services with private VPC connections                                  |
-| [Pub/Sub][30]                       | Real-time messaging service                                                           |
-| [Spanner][31]                       | Horizontally scalable, globally consistent, relational database service               |
-| [Storage][32]                       | Unified object storage                                                                |
-| [Vertex AI][33]                     | Build, train and deploy custom machine learning (ML) models.                          |
-| [VPN][34]                           | Managed network functionality                                                         |
+| [App Engine][56]                     | PaaS (platform as a service) to build scalable applications                           |
+| [Big Query][57]                      | Enterprise data warehouse                                                             |
+| [Bigtable][58]                       | NoSQL Big Data database service                                                       |
+| [Cloud SQL][59]                      | MySQL database service                                                                |
+| [Cloud APIs][60]                     | Programmatic interfaces for all Google Cloud Platform services                        |
+| [Cloud Armor][61]                   | Network security service to help protect against denial of service and web attacks    |
+| [Cloud Composer][62]                 | A fully managed workflow orchestration service                                        |
+| [Cloud Dataproc][63]                 | A cloud service for running Apache Spark and Apache Hadoop clusters                   |
+| [Cloud Dataflow][64]                | A fully-managed service for transforming and enriching data in stream and batch modes |
+| [Cloud Filestore][65]                | High-performance, fully managed file storage                                          |
+| [Cloud Firestore][66]                | A flexible, scalable database for mobile, web, and server development                 |
+| [Cloud Interconnect][67]            | Hybrid connectivity                                                                   |
+| [Cloud IoT][68]                     | Secure device connection and management                                               |
+| [Cloud Load Balancing][69]          | Distribute load-balanced compute resources                                            |
+| [Cloud Logging][70]                 | Real-time log management and analysis                                                 |
+| [Cloud Memorystore for Redis][71]   | A fully managed in-memory data store service                                          |
+| [Cloud Router][72]                  | Exchange routes between your VPC and on-premises networks by using BGP                |
+| [Cloud Run][73]                     | Managed compute platform that runs stateless containers through HTTP                  |
+| [Cloud Security Command Center][74] | Security Command Center is a threat reporting service.                                |
+| [Cloud Tasks][75]                   | Distributed task queues                                                               |
+| [Cloud TPU][76]                     | Train and run machine learning models                                                 |
+| [Compute Engine][77]                | High performance virtual machines                                                     |
+| [Container Engine][78]              | Kubernetes, managed by Google                                                         |
+| [Datastore][79]                     | NoSQL database                                                                        |
+| [Firebase][80]                      | Mobile platform for application development                                           |
+| [Functions][81]                     | Serverless platform for building event-based microservices                            |
+| [Kubernetes Engine][82]             | Cluster manager and orchestration system                                              |
+| [Machine Learning][83]              | Machine learning services                                                             |
+| [Private Service Connect][84]       | Access managed services with private VPC connections                                  |
+| [Pub/Sub][85]                       | Real-time messaging service                                                           |
+| [Spanner][86]                       | Horizontally scalable, globally consistent, relational database service               |
+| [Storage][87]                       | Unified object storage                                                                |
+| [Vertex AI][88]                     | Build, train and deploy custom machine learning (ML) models.                          |
+| [VPN][89]                           | Managed network functionality                                                         |
 {{% /collapse-content %}} 
 
 You can find your Google Cloud metrics in the Metrics Summary page in the Datadog platform.
-To view your metrics, navigate to `Metrics > Summary` and search for `gcp`:
+To view your metrics, use the left menu to navigate to **Metrics** > **Summary** and search for `gcp`:
 
 {{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" style="width:100%;" >}}
 
 ### Filtering metric collection
 
-You can limit the GCE/GKE instances & Cloud Run Revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab.
-Only resources that match one of the defined tags are imported into Datadog. 
-
-You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. 
-This example includes all c1* sized instances, but excludes staging hosts:
-
-```text
-datadog:monitored,env:production,!env:staging,instance-type:c1.*
-```
+Limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab of the Google Cloud Integration tile.
+Only Google Cloud hosts with **labels** that match these defined tags are imported into Datadog. 
 
 See Google's documentation on [Creating and managing labels][19] for more details on adding labels to your Google Cloud hosts.
 
+In the below example, only Google Cloud hosts with the label `datadog:true` will be monitored by Datadog: 
+
+{{< img src="integrations/google_cloud_platform/limit_metric_collection.mp4" video=true style="width:100%;" >}}
+
+Use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. 
+This example includes all c1* sized instances, but excludes staging hosts:
+
+```text
+datadog:true,env:production,!env:staging,instance-type:c1.*
+```
+
+Limiting your hosts also helps to control your resource costs.
 For more information on how to control your resource costs, see the [Google Cloud Integration Billing page][20].
 
 
@@ -203,21 +208,21 @@ Alternatively, to collect logs from applications running in GCE or GKE, you can 
 
 ## Google Cloud integrations
 
-Our [Integrations page][26] provides a full listing of the available sub-integrations for Google Cloud. 
+The [Integrations page][26] provides a full listing of the available sub-integrations for Google Cloud. 
 Many of these integrations are installed by default when Datadog recognizes data being ingested in from your Google Cloud account.
 
-## Leveraging the Datadog Agent for greater visibility
+## Leveraging the Datadog Agent
 
 After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
 
-The [Datadog Agent][25] provides the [most granular, low-latency metrics from your infrastructure][47], delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts. 
-The Agent can be installed on any host, including GKE - [Google Kubernetes Engine, Agent][28].
+The [Datadog Agent][25] provides the [most granular, low-latency metrics][47] from your infrastructure, delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts. 
+The Agent can be installed on any host, including [GKE][28].
 
-The Agent also supports [a wide range of integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
+The Agent also supports a wide range of [integrations][29], enabling you to extend visibility into specific services and databases running on your hosts. 
 
-[Traces collected through the Trace Agent][31] enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance. 
+[Traces][31] collected through the Trace Agent enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance. 
 
-For a full list of benefits with installing the Agent on your cloud instances, see [Why should I install the Datadog Agent on my cloud instances?][27]
+For the full list of benefits of installing the Agent on your cloud instances, see [Why should I install the Datadog Agent on my cloud instances?][27]
 
 
 
@@ -244,38 +249,23 @@ To use Google Cloud Cost Management in Datadog, [follow these steps][51].
 
 ### Security
 
-{{< tabs >}}
-{{% tab "Cloud SIEM" %}}
+### Cloud SIEM
 
-With Cloud SIEM, you can analyze operational and security logs in real time, while utilizing out-of-the-box integrations and rules to detect threats and investigate them.
-To set this feature up, see [Getting Started with Cloud SIEM][36].
+Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
+To use this feature, see [Getting Started with Cloud SIEM][36].
 
 To view security findings from [Google Cloud Security Command Center][37] in Cloud SIEM, toggle the **Enable collection of security findings** option under the **Security Findings** tab & follow the setup instructions on the [Google Cloud Security Command Center guide][38].
 
-{{< img src="integrations/google_cloud_platform/security_findings.png" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/security_findings.png" style="width:90%;" >}}
 
-[36]: https://docs.datadoghq.com/getting_started/cloud_siem/
-[37]: https://console.cloud.google.com/projectselector2/security/command-center/overview?supportedpurview=organizationId,folder,project
-[38]: https://docs.datadoghq.com/integrations/google_cloud_security_command_center/#installation
+### Cloud Security Management
 
-{{% /tab %}}
-{{% tab "Cloud Security Management" %}}
-
-
-Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
-
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.z
 Check out the [Setting up Cloud Security Management guide][39] to get started.
 
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][41] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][40] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/gcp_resource_collection.png" style="width:100%;" >}}
-
-[39]: https://docs.datadoghq.com/security/cloud_security_management/setup/
-[40]: https://docs.datadoghq.com/security/cloud_security_management/setup/cloud_integrations/?tab=googlecloud
-[41]: https://docs.datadoghq.com/infrastructure/resource_catalog/
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Database Monitoring (DBM)
 Use [Database Monitoring (DBM)][49] to gain increased insight on performance metrics, host health and query samples for your Google Cloud SQL databases.
@@ -284,7 +274,7 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 
 [1]: https://www.datadoghq.com/
 [2]: https://cloud.google.com/iam/docs/service-accounts-create
-[3]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#prerequisites
+[3]: https://docs.datadoghq.com/getting_started/integrations/google_cloud/#prerequisites
 [4]: https://cloud.google.com/gcp?utm_source=google&utm_medium=cpc&utm_campaign=emea-ie-all-en-bkws-all-all-trial-b-gcp-1707574&utm_content=text-ad-none-any-DEV_c-CRE_669760174288-ADGP_Hybrid+%7C+BKWS+-+BRO+%7C+Txt+-+GCP+-+General+-+v3-KWID_43700077708210645-kwd-14471151-userloc_1007850&utm_term=KW_gcp-NET_g-PLAC_&&gad_source=1&gclid=Cj0KCQjwjY64BhCaARIsAIfc7YbR2kdAZ5vGSkq1FDDHkHRnzAX7KcFTlFxIfOUnS86LyRc9Y1TerXEaAmOMEALw_wcB&gclsrc=aw.ds&hl=en
 [5]: https://cloud.google.com/iam/docs/service-account-overview#impersonation
 [6]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#setup
@@ -329,11 +319,44 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 [45]: https://cloud.google.com/vpc/docs/private-service-connect
 [46]: https://docs.datadoghq.com/integrations/google_cloud_private_service_connect/
 [47]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
-[48]: http://localhost:1313/getting_started/integrations/google_cloud/#explore-related-products
+[48]: http://docs.datadoghq.com/getting_started/integrations/google_cloud/#explore-related-products
 [49]: https://docs.datadoghq.com/database_monitoring/
 [50]: https://docs.datadoghq.com/cloud_cost_management/
 [51]: https://docs.datadoghq.com/cloud_cost_management/google_cloud/
-[52]: https://docs.datadoghq.com/getting_started/integrations/google_cloud/#prerequisites
 [53]: https://console.cloud.google.com/
 [54]: https://app.datadoghq.com/integrations/google-cloud-platform
 [55]: https://console.cloud.google.com/
+[56]: https://docs.datadoghq.com/integrations/google_app_engine/
+[57]: https://docs.datadoghq.com/integrations/google_bigquery/
+[58]: https://docs.datadoghq.com/integrations/google_cloud_bigtable/
+[59]: https://docs.datadoghq.com/integrations/google_cloudsql/
+[60]: https://docs.datadoghq.com/integrations/google_cloud_apis/
+[61]: https://docs.datadoghq.com/integrations/google_cloud_armor/
+[62]: https://docs.datadoghq.com/integrations/google_cloud_composer/
+[63]: https://docs.datadoghq.com/integrations/google_cloud_dataproc/
+[64]: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
+[65]: https://docs.datadoghq.com/integrations/google_cloud_filestore/
+[66]: https://docs.datadoghq.com/integrations/google_cloud_firestore/
+[67]: https://docs.datadoghq.com/integrations/google_cloud_interconnect/
+[68]: https://docs.datadoghq.com/integrations/google_cloud_iot/
+[69]: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/
+[70]: https://docs.datadoghq.com/integrations/google_stackdriver_logging/
+[71]: https://docs.datadoghq.com/integrations/google_cloud_redis/
+[72]: https://docs.datadoghq.com/integrations/google_cloud_router/
+[73]: https://docs.datadoghq.com/integrations/google_cloud_run/
+[74]: https://docs.datadoghq.com/integrations/google_cloud_security_command_center/
+[75]: https://docs.datadoghq.com/integrations/google_cloud_tasks/
+[76]: https://docs.datadoghq.com/integrations/google_cloud_tpu/
+[77]: https://docs.datadoghq.com/integrations/google_compute_engine/
+[78]: https://docs.datadoghq.com/integrations/google_container_engine/
+[79]: https://docs.datadoghq.com/integrations/google_cloud_datastore/
+[80]: https://docs.datadoghq.com/integrations/google_cloud_firebase/
+[81]: https://docs.datadoghq.com/integrations/google_cloud_functions/
+[82]: https://docs.datadoghq.com/integrations/google_kubernetes_engine/
+[83]: https://docs.datadoghq.com/integrations/google_cloud_ml/
+[84]: https://docs.datadoghq.com/integrations/google_cloud_private_service_connect/
+[85]: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
+[86]: https://docs.datadoghq.com/integrations/google_cloud_spanner/
+[87]: https://docs.datadoghq.com/integrations/google_cloud_storage/
+[88]: https://docs.datadoghq.com/integrations/google_cloud_vertex_ai/
+[89]: https://docs.datadoghq.com/integrations/google_cloud_vpn/
