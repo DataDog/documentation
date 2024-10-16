@@ -109,7 +109,7 @@ Nota: `<INTEGRATION_VERSION>` se puede encontrar dentro del [CHANGELOG.md][5] de
 
 1. Crea un usuario local en tu FlashArray con el rol de sólo lectura y genera un token de API para este usuario.
    ![Generación de una clave de API][6] 
-2. Añade el siguiente bloque de configuración al archivo `purefa.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent para comenzar a recopilar tus datos de rendimiento de PureFA. Para conocer todas las opciones de configuración disponibles, consulta el [purefa.d/conf.yaml de ejemplo][4].
+2. Añade el siguiente bloque de configuración al archivo `purefa.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent para comenzar a recopilar tus datos de rendimiento de PureFA. Para conocer todas las opciones de configuración disponibles, consulta el [purefa.d/conf.yaml de ejemplo][7].
 
 **Nota**: La creación de tu archivo de configuración requiere el endpoint `/array` como mínimo absoluto.
 
