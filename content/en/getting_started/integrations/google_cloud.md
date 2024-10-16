@@ -176,18 +176,23 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 
 ### Filtering metric collection
 
-Limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab.
-Only resources that match one of the defined tags are imported into Datadog. 
+Limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab of the Google Cloud Integration tile.
+Only Google Cloud hosts with labels that match these defined tags are imported into Datadog. 
+
+See Google's documentation on [Creating and managing labels][19] for more details on adding labels to your Google Cloud hosts.
+
+In the below example, only Google Cloud hosts with the label `datadog:true` will be monitored by Datadog: 
+
+{{< img src="integrations/google_cloud_platform/limit_metric_collection.mp4" video=true style="width:100%;" >}}
 
 Use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. 
 This example includes all c1* sized instances, but excludes staging hosts:
 
 ```text
-datadog:monitored,env:production,!env:staging,instance-type:c1.*
+datadog:true,env:production,!env:staging,instance-type:c1.*
 ```
 
-See Google's documentation on [Creating and managing labels][19] for more details on adding labels to your Google Cloud hosts.
-
+Limiting your hosts also helps to control your resource costs.
 For more information on how to control your resource costs, see the [Google Cloud Integration Billing page][20].
 
 
@@ -253,10 +258,6 @@ To view security findings from [Google Cloud Security Command Center][37] in Clo
 
 {{< img src="integrations/google_cloud_platform/security_findings.png" style="width:100%;" >}}
 
-[36]: https://docs.datadoghq.com/getting_started/cloud_siem/
-[37]: https://console.cloud.google.com/projectselector2/security/command-center/overview?supportedpurview=organizationId,folder,project
-[38]: https://docs.datadoghq.com/integrations/google_cloud_security_command_center/#installation
-
 ### Cloud Security Management
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.z
@@ -265,10 +266,6 @@ Check out the [Setting up Cloud Security Management guide][39] to get started.
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][41] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][40] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/gcp_resource_collection.png" style="width:100%;" >}}
-
-[39]: https://docs.datadoghq.com/security/cloud_security_management/setup/
-[40]: https://docs.datadoghq.com/security/cloud_security_management/setup/cloud_integrations/?tab=googlecloud
-[41]: https://docs.datadoghq.com/infrastructure/resource_catalog/
 
 ### Database Monitoring (DBM)
 Use [Database Monitoring (DBM)][49] to gain increased insight on performance metrics, host health and query samples for your Google Cloud SQL databases.
