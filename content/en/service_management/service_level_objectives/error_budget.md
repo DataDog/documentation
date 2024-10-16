@@ -37,7 +37,7 @@ over the past `target` number of days.
 
 ### Alerting for SLOs with groups
 
-For time slice SLOs containing groups, you can set error budget alerts based on the SLO groups or the overall SLO. If you alert based on the groups, you can confiure the [alert aggregation][9] to use simple or multi alerts. For metric-based and monitor-based SLOs, you can only set error budget alerts based on the overall SLO.
+For Time Slice SLOs containing groups, you can set error budget alerts based on the SLO groups or the overall SLO. If you alert based on the groups, you can confiure the [alert aggregation][9] to use simple or multi alerts. For metric-based and monitor-based SLOs, you can only set error budget alerts based on the overall SLO.
 
 
 ### API and Terraform
