@@ -177,7 +177,7 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 ### Filtering metric collection
 
 Limit the GCE/GKE instances and Cloud Run revisions that are pulled into Datadog by entering tags in the **Limit Metric Collection Filters** text boxes under the **General** tab of the Google Cloud Integration tile.
-Only Google Cloud hosts with labels that match these defined tags are imported into Datadog. 
+Only Google Cloud hosts with **labels** that match these defined tags are imported into Datadog. 
 
 See Google's documentation on [Creating and managing labels][19] for more details on adding labels to your Google Cloud hosts.
 
