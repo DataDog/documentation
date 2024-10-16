@@ -37,8 +37,6 @@ Distributions provide enhanced query functionality and configuration options tha
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
 
-See the [Developer Tools section][1] for more implementation details. 
-
 **Note:** Because distributions metric data is stored differently from other types, any metric name used for a `distribution` should not be used for any other metric types.
 
 ## Enabling advanced query functionality
@@ -69,7 +67,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
+1. Navigate to the [Metrics Summary Page][4] and click the **Configure Metrics** dropdown.
 1. Select **Enable percentiles**.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
 1. (Optional) To disable percentiles for the namespace, click the **Percentile aggregations** toggle.
@@ -135,3 +133,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [1]: /metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [3]: https://app.datadoghq.com/event/explorer
+[4]: https://app.datadoghq.com/metric/summary
