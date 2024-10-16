@@ -256,7 +256,7 @@ To use this feature, see [Getting Started with Cloud SIEM][36].
 
 To view security findings from [Google Cloud Security Command Center][37] in Cloud SIEM, toggle the **Enable collection of security findings** option under the **Security Findings** tab & follow the setup instructions on the [Google Cloud Security Command Center guide][38].
 
-{{< img src="integrations/google_cloud_platform/security_findings.png" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/security_findings.png" style="width:90%;" >}}
 
 ### Cloud Security Management
 
