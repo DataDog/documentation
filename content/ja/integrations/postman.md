@@ -23,6 +23,7 @@ author:
   sales_email: integrations-partnerships@postman.com
   support_email: integrations-partnerships@postman.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/postman/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: postman
 integration_title: Postman
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: postman
 public_title: Postman
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Postman Monitoring を実行し、Datadog でメトリクスを分析しイベントを生成します。　
   media: []
@@ -68,11 +69,11 @@ tile:
 
 - 成功および失敗した Monitoring のイベントを生成
 
-## 計画と使用
+## セットアップ
 
 詳細な手順は [Postman のドキュメント][2]を参照してください。Postman インテグレーションを利用するには、Postman の [Team, Business, Enterprise プラン][3]のご契約が必要です。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Datadog [API キー][4]を生成します。
 2. Postman アカウントにサインインし、[Datadog インテグレーション][5]へ移動します。
@@ -87,17 +88,17 @@ tile:
 
 ![インテグレーションを構成][6]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "postman" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Postman には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Postman で監視が実行されるたびにイベントが生成されます。イベントの重大度は、Postman モニターのテストに基づきます。
 
@@ -106,7 +107,7 @@ Postman で監視が実行されるたびにイベントが生成されます。
 | `Low`    | すべてのテストが合格の場合                                                 |
 | `Normal` | 一部のテストが合格しなかった、またはイベントの実行でエラーが発生した場合 |
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Postman サポート][8]までお問い合わせください。
 

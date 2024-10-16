@@ -70,7 +70,7 @@ The Basic Auth connection uses an authorization header with a username and passw
 
 ### Create a 2 Step HTTP authentication connection
 
-The HTTP 2 step connection allows you to make a preliminary request to retrieve an access token with which to authenticate the HTTP request.
+The HTTP 2 step connection allows you to make a preliminary request to retrieve an access token with which to authenticate the HTTP request. This is useful for authenticating JSON Web Token (JWT) and OAuth applications.
 
 1. In the **Connection** section, click the plus icon (**+**).
 1. Select **HTTP**.

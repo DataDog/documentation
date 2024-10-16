@@ -13,7 +13,9 @@ further_reading:
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you type an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
+You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you begin an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
+
+{{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" video=true >}}
 
 Some fields, like [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the **Content** property of a text component (and add an exclamation mark), use the expression `${textInput0.value} ${textInput1.value}!`.
 
@@ -32,7 +34,7 @@ You can view the available properties and values for a component in the followin
 - **Inspect Data**: Provides properties and values for a specific component or query in your app.
 - The **Admin Console**: The **Data** tab of the **Admin Console** provides properties and values for all components and queries in your app.
 
-{{% collapse-content title="App State" level="h3" %}}
+{{% collapse-content title="App State" level="h4" %}}
 To access **App State**:
 1. Click **App Properties** in the left side-panel.
 1. Scroll down to the **App State** section.
@@ -40,7 +42,7 @@ To access **App State**:
 {{< img src="service_management/app_builder/app-state.png" alt="The App State section in App Properties" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inspect Data" level="h3" %}}
+{{% collapse-content title="Inspect Data" level="h4" %}}
 To access **Inspect Data**:
 1. Click on the query or component you want to inspect.
 1. Scroll down to the **Inspect Data** section.
@@ -48,7 +50,7 @@ To access **Inspect Data**:
 {{< img src="service_management/app_builder/inspect-data.png" alt="The App State section in App Properties" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Admin Console" level="h3" %}}
+{{% collapse-content title="Admin Console" level="h4" %}}
 To access the **Admin Console**:
 1. Click on the cog (**Settings**) icon and select **Admin Console**.
 1. Click **Data**.
@@ -68,9 +70,11 @@ For example, if you want a text component to be visible only when two text input
 
 ### Disable a component conditionally
 
-Similar to visibility, you can disable a component unless conditions are met by other components in your app.
+Similar to visibility, you can disable a component unless conditions are met by other aspects of your app, such as other components or the app context.
 
-For example, if your app has a button that uses the content from a text component to send a message, you can disable the button unless the text component is visible:
+#### Disable a component based on visibility
+
+If your app has a button that uses the content from a text component to send a message, you can disable the button unless the text component is visible:
 1. Click the button component on your canvas.
 1. Click the code editor symbol (**</>**) next to the **Is Disabled** property.
 1. Add the expression `${!text0.isVisible}`.
@@ -78,6 +82,15 @@ For example, if your app has a button that uses the content from a text componen
 The text component is invisible and the button is disabled unless both text input fields have content.
 
 {{< img src="service_management/app_builder/is-disabled.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
+
+#### Disable a component based on the app context
+
+You can also disable a component based on the app context, such as the team that the user is on.
+
+For example, you can enable a component only for users who are in the Product Management team:
+1. Click the button component on your canvas.
+1. Click the code editor symbol (**</>**) next to the **Is Disabled** property.
+1. Add the expression `${global.user.teams[0].name == 'Product Management'}`.
 
 ### Disable a component while loading
 

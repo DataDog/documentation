@@ -7,4 +7,4 @@ further_reading:
       tag: Documentation
       text: Session Replay
 ---
-{{< include-markdown "content/en/real_user_monitoring/session_replay/playlists.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/playlists" >}}

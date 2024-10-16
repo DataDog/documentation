@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 82
     source_type_name: Marathon
-  logs:
-    source: marathon
   saved_views:
     marathon_processes: assets/saved_views/marathon_processes.json
 author:
@@ -33,6 +31,7 @@ categories:
 - configuration & deployment
 - containers
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
 display_on_public_website: true
@@ -40,9 +39,8 @@ draft: false
 git_integration_title: marathon
 integration_id: marathon
 integration_title: Marathon
-integration_version: 2.3.0
+integration_version: 2.3.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: marathon
 public_title: Marathon
@@ -58,6 +56,7 @@ tile:
   - Category::構成 & デプロイ
   - Category::コンテナ
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
   media: []
@@ -76,20 +75,20 @@ Agent の Marathon チェックを使用して、以下のことができます�
 - すべてのアプリケーションの状態と健全性を追跡し、構成されているメモリ、ディスク、CPU、インスタンスを確認し、正常および異常なタスクの数を監視できます。
 - キューに置かれたアプリケーションの数やデプロイの数を監視できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Marathon チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -117,7 +116,7 @@ Marathon チェックは [Datadog Agent][1] パッケージに含まれていま
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -192,7 +191,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                          |
 | `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:%%port%%"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -211,21 +210,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][2]し、Checks セクションで `marathon` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "marathon" >}}
 
 
-### ヘルプ
+### イベント
 
 Marathon チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "marathon" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

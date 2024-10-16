@@ -22,6 +22,7 @@ categories:
 - イベント管理
 - 問題追跡
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -30,7 +31,6 @@ integration_id: onepassword
 integration_title: 1Password
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: 1password
 public_title: 1Password
@@ -114,7 +114,7 @@ Datadog と 1Password のインテグレーションは、[1Password Events API]
 
 Datadog のログを `source:1password` で検索します。インテグレーションが正しくインストールされていれば、1Password のイベントを見ることができるはずです。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 

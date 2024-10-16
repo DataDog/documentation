@@ -7,4 +7,4 @@ further_reading:
 title: Error Tracking Explorer
 ---
 
-{{< include-markdown "content/en/error_tracking/explorer.md" >}}
+{{< include-markdown "error_tracking/explorer" >}}

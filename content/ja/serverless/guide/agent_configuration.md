@@ -12,7 +12,7 @@ Agent の[メインコンフィグレーションファイル][1]は `datadog.ya
 |--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`                   | Datadog API キーが入った環境変数を平文で指定します。キー環境変数が **1 つ** 必要です。[サーバーレス CLI 環境変数][7]を参照してください。                                                                                              |
 | `DD_KMS_API_KEY`               | Datadog API キーが入った環境変数を KMS を使用して指定します。キー環境変数が **1 つ** 必要です。[サーバーレス CLI 環境変数][7]を参照してください。                                                                        |
-| `DD_API_KEY_SECRET_ARN`        | Datadog API キーが入った環境変数をシークレットマネージャーを使用して指定します。キー環境変数が **1 つ** 必要です。[サーバーレス CLI 環境変数][7]を参照してください。                                                                           |
+| `DD_API_KEY_SECRET_ARN`        | The environment variable with your Datadog API key, using an AWS Secrets Manager secret. **One** key environment variable is required. See [serverless CLI environment variables][7].                                                                           |
 | `DD_LOG_LEVEL`                 | [Datadog Agent ログ][8]のレベルを設定します。                                                                                                                                                                      |
 | `DD_SERVERLESS_FLUSH_STRATEGY` | Datadog Agent のフラッシュ戦略。指定できる値は `end` または `periodically[,milliseconds]` です。例えば、`DD_SERVERLESS_FLUSH_STRATEGY=periodically,100` は 100ms 毎にフラッシュします。                                                                                                                  |
 | `DD_ENV`                       | 出力されるすべてのデータにグローバルタグの `env` タグを設定します。                                                                                                                                                                |
@@ -20,7 +20,7 @@ Agent の[メインコンフィグレーションファイル][1]は `datadog.ya
 | `DD_SITE`                      | メトリクス、トレース、ログの送信先サイト。Datadog サイトを `{{< region-param key="dd_site" >}}` に設定します。デフォルトは `datadoghq.com` です。                                                                  |
 | `DD_DD_URL`                    | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                        |
 | `DD_URL`                       | `DD_DD_URL` のエイリアス。すでに `DD_DD_URL` が設定されている場合は無視されます。                                                                                                                                                      |
-| `DD_TRACE_ENABLED`             | トレース収集を有効にします。デフォルトは `true` です。トレース収集の追加環境変数の詳細をご覧ください。                                                                                       |
+| `DD_TRACE_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about trace collection environment variables, see [Library Configuration][9].                                                                                       |
 | `DD_TAGS`                      | タグのリスト。この Agent が発するすべてのメトリクス、イベント、ログ、トレース、サービスチェックにアプリ内でアタッチされます。                                                                                                         |
 | `DD_TAG_VALUE_SPLIT_SEPARATOR` | 指定されたセパレーターに従ってタグの値を分割します。ホストタグ、およびコンテナインテグレーションからのタグにのみ適用されます。DogStatsD メトリクスのタグや、他のインテグレーションによって収集されたタグには適用されません。 |
 |
@@ -30,7 +30,7 @@ Agent の[メインコンフィグレーションファイル][1]は `datadog.ya
 | 環境変数                                  | 説明                                                                                                                                                                                                                          |
 |-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_LOGS_ENABLED`                             | Datadog Agent のログ収集を有効にするには、`true` に設定します。                                                                                                                                                          |
-| `DD_LOGS_CONFIG_DD_URL`                       | ログ用のプロキシを使用する際にヒットするエンドポイントとポートを定義します。ログは TCP で転送されるため、プロキシは TCP 接続を扱える必要があります。`<ENDPOINT>:<PORT>` の形式で文字列を指定します。                                  |
+| `DD_LOGS_CONFIG_LOGS_DD_URL`                       | ログ用のプロキシを使用する際にヒットするエンドポイントとポートを定義します。ログは TCP で転送されるため、プロキシは TCP 接続を扱える必要があります。`<ENDPOINT>:<PORT>` の形式で文字列を指定します。                                  |
 | `DD_LOGS_CONFIG_LOGS_NO_SSL`                  | SSL 暗号化を無効にします。このパラメーターは、ログがローカルでプロキシに転送される場合にのみ使用する必要があります。その後、プロキシ側で SSL 暗号化を処理することを強くお勧めします。                                             |
 | `DD_LOGS_CONFIG_PROCESSING_RULES`             | すべてのログに適用されるグローバルな処理ルール。使用できるルールは `exclude_at_match`、`include_at_match`、`mask_sequences` です。詳しくは、[グローバル処理ルール][2]を参照してください。                                            |
 | `DD_LOGS_CONFIG_FORCE_USE_HTTP`               | デフォルトでは、Agent は Agent 起動時に HTTPS 接続が確立されている場合、ポート 443 に HTTPS バッチでログを送信し、そうでない場合は TCP にフォールバックします。このパラメーターを `true` に設定すると、常に HTTPS でログを送信するようになります (推奨)。 |
@@ -53,7 +53,6 @@ Agent の[メインコンフィグレーションファイル][1]は `datadog.ya
 | `DD_APM_DD_URL`           | APM のプロキシを使用する際にヒットするエンドポイントとポートを定義します。`<ENDPOINT>:<PORT>` の形式で文字列を指定します。トレースは TCP で転送されるため、プロキシは TCP 接続を扱える必要があります。                                                        |
 | `DD_APM_REPLACE_TAGS`     | [潜在的な機密情報][3]を含む特定のタグを置換または削除するための一連のルールを定義します。                                                                                                                |
 | `DD_APM_IGNORE_RESOURCES` | 正規表現の除外リスト。これらの表現のいずれかに一致するリソース名を持つトレースは、無視されます。カンマで区切ったリストを使用し、各項目を二重引用符で囲みます。例: `"^foo$", "bar$"`                                              |
-| `DD_APM_LOG_THROTTLING`   | `true` に設定すると、10 秒ごとに警告とエラーの合計数を 10 に制限します。デフォルトは `true` です。                                                                                                                                                    |
 
 ### 高度なネットワーク構成
 
@@ -109,8 +108,10 @@ Agent の[メインコンフィグレーションファイル][1]は `datadog.ya
 
 [5]: /ja/developers/dogstatsd/
 
-[6]: /ja/agent/proxy/#agent-v6
+[6]: /ja/agent/configuration/proxy/#agent-v6
 
 [7]: /ja/serverless/libraries_integrations/cli/#environment-variables
 
 [8]: /ja/agent/troubleshooting/debug_mode/?tab=agentv6v7#agent-log-level
+
+[9]: /ja/tracing/trace_collection/library_config/

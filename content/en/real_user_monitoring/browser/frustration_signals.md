@@ -32,6 +32,8 @@ Dead Clicks
 Error Clicks
 : A user clicks on an element right before a JavaScript error occurs.
 
+By enabling frustration signals, Datadog collects all three signal types by default.
+
 ## Requirements
 
 First, you need the Browser RUM SDK version >= 4.14.0.
@@ -137,17 +139,13 @@ For more information, see the [Real User Monitoring Monitor documentation][9].
 
 ## Troubleshooting
 
-### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
+### Rage clicks are not being created when a user presses a key (like Delete) on the keyboard
 
 Frustration signals are generated from mouse clicks, not keyboard strokes.
 
-### Why does the side panel show that a session has a different number of frustration signals than in the event timeline?
+### The side panel does not show that a session has a different number of frustration signals than in the event timeline
 
 If a session is live, it is fetching information and may cause the banners to reflect a different number than those in the timeline.
-
-### Can I pick and choose what signals to track?
-
-By enabling frustration signals, Datadog collects all three signal types by default. Contact your [Customer Success Manager][10] for more information.
 
 <div class="alert alert-warning">
 To provide feedback or submit a feature request, contact <a href="/help/">Datadog Support</a>.

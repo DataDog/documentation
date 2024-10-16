@@ -19,11 +19,10 @@ further_reading:
 - link: "/cloud_cost_management/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
+- link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
+  tag: "Blog"
+  text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
 SaaS Cost Integrations are in public beta.
@@ -31,7 +30,7 @@ SaaS Cost Integrations are in public beta.
 
 ## Overview
 
-SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog. 
+SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
 
 {{< partial name="cloud_cost/cost-integrations.html" >}}
 
@@ -41,7 +40,7 @@ If your provider is not supported, use [Custom Costs][1] to upload any cost data
 
 ## Setup
 
-To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud. 
+To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud.
 
 See the respective documentation for your cloud provider:
 
@@ -49,14 +48,14 @@ See the respective documentation for your cloud provider:
 
 </br>
 
-Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data. 
+### Configure your SaaS accounts
+
+Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data.
 
 {{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
 
 {{< tabs >}}
 {{% tab "Databricks" %}}
-
-<div class="alert alert-warning">The Databricks SaaS Cost integration is in private beta.</div>
 
 1. Navigate to the [Databricks integration tile][101] in Datadog and click **Add Account**.
 2. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
@@ -71,8 +70,6 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
-
-<div class="alert alert-warning">The Confluent Cloud SaaS Cost integration is in public beta.</div>
 
 1. Create or acquire an API key with the organizational admin role in Confluent Cloud.
 2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
@@ -89,9 +86,7 @@ Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud C
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">The MongoDB SaaS Cost integration is in private beta.</div>
-
-1. [Create an API token][101] in MongoDB with `Organization Member` permissions, and add `Organization Read Only` permissions for cluster resource tags.
+1. [Create an API token][101] in MongoDB with `Organizational Billing Viewer` permissions, and add `Organizational Read Only` permissions for cluster resource tags.
 2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
 3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
 4. Click **Save**.
@@ -106,13 +101,11 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">The Snowflake SaaS Cost integration is in public beta.</div>
-
 1. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
 2. Enter your Snowflake account URL, for example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
 3. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
 4. Enter your Snowflake user name in the `User Name` field.
-5. Create a Datadog-specific role and user to monitor Snowflake. 
+5. Create a Datadog-specific role and user to monitor Snowflake.
 
    Run the following in Snowflake to create a custom role:
 
@@ -141,7 +134,7 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
    ```
 
 4. Configure the key-value pair authentication:
-   
+
    - Generate a private key by following the [official Snowflake documentation][102] and upload the private key file by clicking **Upload Key**.
    - Generate a public key by following the [official Snowflake documentation][103].
    - Assign the public key to the user created in Step 5 by following the [official Snowflake documentation][104].
@@ -158,9 +151,29 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
 
 {{% /tab %}}
-{{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">The OpenAI SaaS Cost integration is in public beta.</div>
+
+{{% tab "Elastic Cloud" %}}
+
+1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
+2. Click **Create New Key**.
+3. Choose a **Name** and **Expiration Date** for your API key.
+4. Select the **Billing Admin** role.
+5. Click **Create Key** to generate the key.
+6. Go to the [Elastic Cloud integration tile][101] in Datadog
+7. Click **Add Account**.
+8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
+
+Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
+
+[101]: https://app.datadoghq.com/integrations/elastic-cloud-ccm
+[102]: https://cloud.elastic.co/account/keys
+
+{{% /tab %}}
+
+{{% tab "OpenAI" %}}
 
 1. [Create an API key][101] in your account settings in OpenAI.
 2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
@@ -178,11 +191,9 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">The Fastly SaaS Cost integration is in public beta.</div>
-
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
 2. Navigate to the [Fastly integration tile][102] in Datadog and click **Add Account**.
-3. Enter your Fastly account name and API token. 
+3. Enter your Fastly account name and API token.
 4. Click the checkbox for `Collect Billing Data`.
 5. Click **Save**.
 
@@ -195,8 +206,6 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{% /tab %}}
 {{% tab "Twilio" %}}
-
-<div class="alert alert-warning">The Twilio SaaS Cost integration is in private beta.</div>
 
 1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
 2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
@@ -241,9 +250,6 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
 | `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
 
-{{% /tab %}}
-{{% tab "MongoDB" %}}
-
 | Tag Name | Tag Description |
 |---|---|
 | `invoice_id` | The unique identifier of the invoice. |
@@ -271,12 +277,22 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
 
 {{% /tab %}}
+{{% tab "Elastic Cloud" %}}
+| Tag Name | Tag Description |
+|---|---
+| `name` | The unique identifier of the Elastic Cloud resource. |
+| `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
+| `kind` | The type of resource. |
+
+{{% /tab %}}
+{{% tab "MongoDB" %}}
+
+{{% /tab %}}
 {{% tab "OpenAI" %}}
 
 | Tag Name | Tag Description |
 |---|---|
 | `organization_id` | The unique identifier of the organization. |
-| `project_id` | The unique identifier of the project (can be null). |
 | `project_name` | The name of the project. |
 | `organization_name` | The name of the organization. |
 

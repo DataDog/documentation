@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting Android SDK issues
 description: Learn how to troubleshoot issues with Android Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
@@ -35,33 +33,13 @@ When writing your application, you can enable development logs by calling the `s
 Datadog.setVerbosity(Log.INFO)
 ```
 
-## Set tracking consent (GDPR compliance)
-
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
-Tracking consent can be one of the following values:
-
-- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
- collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
-- `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or
- RUM events.
-
-To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
-
-- `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
-
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
-
-Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
-This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
-
 ## Migrating to 2.0.0
 
 If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][2] for more information.
+
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][3] to view all your uploaded mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][4].
 
 ## Further Reading
 
@@ -69,3 +47,5 @@ If you've been using the SDK v1, there are some breaking changes introduced in v
 
 [1]: /help
 [2]: https://github.com/DataDog/dd-sdk-android/blob/develop/MIGRATION.MD
+[3]: https://app.datadoghq.com/source-code/setup/rum
+[4]: /real_user_monitoring/guide/debug-symbols

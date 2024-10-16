@@ -222,7 +222,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <th>Notes</th>
   </thead>
   <tr>
-    <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
@@ -230,10 +230,17 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
-    <td>2012/R2</td>
+    <td>2012</td>
     <td></td>
     <td><= 6.46.0</td>
     <td><= 7.46.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2012 R2</td>
+    <td></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
     <td></td>
   </tr>
   <tr>
@@ -244,7 +251,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td></td>
   </tr>
   <tr>
-    <td rowspan=3>Windows</td>
+    <td rowspan=4>Windows</td>
     <td>7</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -259,7 +266,14 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td></td>
   </tr>
   <tr>
-    <td>>=10</td>
+    <td>10</td>
+    <td></td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>

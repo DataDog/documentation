@@ -26,6 +26,7 @@ categories:
 - metrics
 - log collection
 - event management
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,7 +35,6 @@ integration_id: zendesk
 integration_title: Zendesk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: zendesk
 public_title: Zendesk
@@ -46,10 +46,14 @@ tile:
   - Category::Metrics
   - Category::ログの収集
   - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: Zendesk はカスタマーサービスとサポートチケットの SaaS です。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
   support: README.md#Support
   title: Zendesk
 ---
@@ -68,9 +72,9 @@ Zendesk と統合して、以下のことができます。
 - モニター通知で `@zendesk` メンションを使用してチケットを作成および更新します。
 - [監査ログ][1]を収集することで、データ保持を管理し、[Cloud SIEM][2] の検出ルールを活用します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 このインテグレーションをインストールするには、Zendesk API トークンを生成します。
 
@@ -108,19 +112,19 @@ Datadog RUM アプリを使用すると、サポートスタッフは、現在�
 6. **Save** をクリックします。
 7. アカウントの Zendesk チケットに移動し、Datadog RUM サイドバーアプリをクリックして、ユーザーの RUM セッションを表示します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "zendesk" >}}
 
 
-### ヘルプ
+### イベント
 
 このインテグレーションは、新しい Zendesk チケットが開かれるたびにイベントを生成します。
 
 {{< img src="integrations/zendesk/zendesk_event.png" alt="Datadog イベントエクスプローラーの Zendesk イベント" popup="true">}}
 
-### ヘルプ
+### サービスチェック
 
 Zendesk インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -134,7 +138,7 @@ Zendesk チケットを作成してグループに割り当てることができ
 
 - ブログ記事: [Zendesk と Datadog セッションリプレイでユーザーが直面する問題を視覚的に再生する][12]
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

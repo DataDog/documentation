@@ -88,6 +88,10 @@ title: デプロイメントの追跡
 
 {{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="デプロイメント比較グラフ" style="width:100%;">}}
 
+[Continuous Profiler が有効な場合][5]、CPU 時間や割り当てメモリなどの主要なパフォーマンスメトリクスの比較を APM リソースごとに表示することもできます。そこから、[プロファイル比較ページ][6]に移動することができます。
+
+{{< img src="tracing/deployment_tracking/DeploymentTrackingProfileComparison.png" alt="デプロイメントプロファイリング比較グラフ" style="width:100%;">}}
+
 ### エラー比較
 
 このセクションには、それぞれの 2 バージョンで検出されたエラータイプの違いが、以下をハイライトしてリストアップされます。
@@ -231,3 +235,5 @@ Time = 45
 [2]: /ja/metrics/types/?tab=distribution#metric-types
 [3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: /ja/watchdog/faulty_deployment_detection/
+[5]: /ja/profiler/enabling/
+[6]: /ja/profiler/compare_profiles

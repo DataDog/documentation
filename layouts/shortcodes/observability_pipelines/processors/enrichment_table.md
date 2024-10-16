@@ -36,4 +36,3 @@ merchant_info {
     "state":"Colorado"
 }
 ```
-

@@ -6,4 +6,4 @@ further_reading:
   text: "Understand your application usage at a glance"
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/explorer/search_syntax.md" >}}
+{{< include-markdown "real_user_monitoring/explorer/search_syntax" >}}

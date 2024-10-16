@@ -3,7 +3,6 @@ aliases:
 - /es/logs/historical-views
 - /es/logs/archives/rehydrating/
 description: Recupera eventos de logs de tus archivos en Datadog.
-kind: Documentación
 title: Recuperación de archivos
 ---
 

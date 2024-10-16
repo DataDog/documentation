@@ -16,7 +16,6 @@ further_reading:
 - link: /logs/guide/
   tag: Guía
   text: Guías adicionales sobre el registro con Datadog
-kind: Documentación
 title: Configuración de log
 ---
 

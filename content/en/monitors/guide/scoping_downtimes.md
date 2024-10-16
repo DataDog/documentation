@@ -60,8 +60,6 @@ The examples in this guide show how the `Group scope` may be applied to monitors
 
 After the scheduled downtime begins, only alerts for the group `service:web-store` are muted for this monitor.
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:90%;">}}
-
 This mutes any alerts that includes the tag `service:web-store`, for example:
 
 | Monitor Group                | Muted |
@@ -122,11 +120,7 @@ If you are running your application and infrastructure on multiple environments,
 
 6. *Monitor A* shows downtime has started, but only for the group in scope: `service:web-store`
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:80%;">}}
-
 7. *Monitor B* shows downtime has started for `service:web-store`. Because all the monitor's groups (by `host`) belong to `service:web-store`, the result is that all hosts are muted during downtime for this monitor.
-
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.png" alt="Evaluation graph showing downtime for group service:web-store and both affected hosts" style="width:80%;">}}
 
 ## Further reading
 

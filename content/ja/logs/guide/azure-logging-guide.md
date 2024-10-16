@@ -10,11 +10,11 @@ title: Azure ログを Datadog に送信
 
 このガイドを使用して、Azure サブスクリプションから Datadog へのロギングを設定します。
 
-Datadog では、Azure から Datadog へログを送信するには、Agent または DaemonSet を使うことを推奨しています。一部のリソースではできない場合があります。その場合、Azure Event Hub を使いログ転送パイプラインを作成し、[Azure プラットフォームログ][2]を収集することができます。Azure プラットフォームログを Event Hub にストリーミングできないリソースには、Blob Storage 転送オプションを使用できます。
+Datadog は、Azure から Datadog へログを送信するのに Agent または DaemonSet を使うことを推奨しています。一部のリソースではできない場合があります。その場合、Azure Event Hub を使いログ転送パイプラインを作成し、[Azure プラットフォームログ][2]を収集することができます。Azure プラットフォームログを Event Hub にストリーミングできないリソースには、Blob Storage 転送オプションを使用できます。
 
 **全サイト**: すべての Datadog サイトは、このページの手順を使用して、Azure ログを Datadog に送信することができます。
 
-**US3**: 組織が Datadog US3 サイト上にある場合、Azure Native インテグレーションを使用して、Azure ログ転送の構成を簡素化することができます。Datadog では、可能な限りこの方法を使用することを推奨しています。構成は、[Azure の Datadog リソース][5]を通じて行います。これは、ログ転送のための Azure Event Hub プロセスを置き換えます。詳細は [Azure Native ロギングガイド][4]を参照してください。
+**US3**: 組織が Datadog US3 サイト上にある場合、Azure Native インテグレーションを使用して、Azure ログ転送の構成を簡素化することができます。Datadog では、可能な限りこの方法を使用することを推奨しています。構成は、[Azure の Datadog リソース][5]を通じて行います。これは、ログ転送のための Azure Event Hub プロセスを置き換えます。詳細は [Azure Native Logging Guide][4] を参照してください。
 
 {{< tabs >}}
 
@@ -28,7 +28,7 @@ Datadog では、Azure から Datadog へログを送信するには、Agent ま
 
 ### Azure アクティビティログ
 
-以下の手順に従って、アクティビティログを Datadog アカウントにストリーミングするために必要な Azure リソースを作成および構成するスクリプトを実行します。これらのリソースには、アクティビティログの診断設定、Azure Functions、Event Hub ネームスペース、および Event Hub が含まれます。
+以下の手順に従って、アクティビティ ログを Datadog アカウントにストリーミングするために必要な Azure リソースを作成および構成するスクリプトを実行します。これらのリソースには、アクティビティログの診断設定、Azure Functions、Event Hub ネームスペース、Event Hub が含まれます。
 
 1. Azure ポータルで、**Cloud Shell** に移動します。
 
@@ -44,17 +44,17 @@ Datadog では、Azure から Datadog へログを送信するには、Agent ま
 
 [スクリプトの内容を表示する](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1)こともできます。
 
-3. 以下のコマンドを実行し、**`<API_KEY>`** を [Datadog API トークン](https://app.datadoghq.com/organization-settings/api-keys)に、**`<SUBSCRIPTION_ID>`** を Azure サブスクリプション ID に置き換えてスクリプトを起動します。[Optional Parameters](#optional-parameters) を追加して、デプロイを構成します。
+3. 以下のコマンドを実行し、**`<API_KEY>`** を [Datadog API トークン](https://app.datadoghq.com/organization-settings/api-keys)に、**`<SUBSCRIPTION_ID>`** を Azure サブスクリプション ID に置き換えてスクリプトを起動します。[オプションパラメーター](#optional-parameters)を追加して、デプロイを構成します。
 
 {{< code-block lang="powershell" filename="アクティビティログステップ 2" >}}
 
-./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID>
 
 {{< /code-block >}}
 
 ### Azure プラットフォームログ
 
-Azure プラットフォームのログ (リソースログを含む) を送信するには、Event Hub とログフォワーダー関数のペアをデプロイします。
+Azure プラットフォームのログ (リソースログを含む) を送信するには、Event Hub とログ転送機能のペアをデプロイします。
 デプロイ後、ログを Datadog にストリーミングするために、各ログソースの診断設定を作成します。
 
 1. Azure ポータルで、**Cloud Shell** に移動します。
@@ -69,15 +69,15 @@ Azure プラットフォームのログ (リソースログを含む) を送信�
 
    [スクリプトの内容を表示する](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1)こともできます。
 
-3. 以下の Powershell コマンドを実行し、**`<API_KEY>`** を [Datadog API トークン](https://app.datadoghq.com/organization-settings/api-keys)に、**`<SUBSCRIPTION_ID>`** を Azure サブスクリプション ID に置き換えてスクリプトを起動します。また、その他のオプションのパラメーターを追加して、デプロイを構成することもできます。[Optional Parameters](#optional-parameters) を参照してください。
+3. 以下の Powershell コマンドを実行し、**`<API_KEY>`** を [Datadog API トークン](https://app.datadoghq.com/organization-settings/api-keys)に、**`<SUBSCRIPTION_ID>`** を Azure サブスクリプション ID に置き換えてスクリプトを起動します。その他のオプションパラメーターを追加して、デプロイを構成することもできます。[オプションパラメーター](#optional-parameters)を参照してください。
 
    {{< code-block lang="powershell" filename="プラットフォームログステップ 2" >}}
 
-   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID>
 
    {{< /code-block >}}
 
-4. Datadog にログを送信するすべての Azure リソースの診断設定を作成します。これらの診断設定を構成して、作成したばかりの Event Hub へストリーミングします。
+4. Datadog にログを送信するすべての Azure リソースの診断設定を作成します。これらの診断設定を構成して、作成したばかりの Event Hub へのストリーミングします。
 
 プラットフォームログパイプライン用にデプロイされたすべての Azure リソースには、デフォルト名に追加された ResourceGroup-Location が含まれています。例: `datadog-eventhub-westus`。ただし、パラメーターをオーバーライドすれば、この規則を変更できます。
 
@@ -85,7 +85,7 @@ Azure プラットフォームのログ (リソースログを含む) を送信�
 
 ### アクティビティログとリソースログの設定
 
-アクティビティログとリソースログの両方をストリーミングするには、オプションのパラメーター `-ResourceGroupLocation 1` を含む最初のスクリプトを実行します。アクティビティログはサブスクリプションレベルのソースなので、どのリージョンでもパイプラインを作成できます。これがデプロイされたら、`westus` でリソースに診断設定を追加して、同じイベントハブを通してリソースログを送信します。
+アクティビティログとリソースログの両方をストリーミングするには、オプションのパラメーター `-ResourceGroupLocation <REGION>` を含む最初のスクリプトを実行します。アクティビティログはサブスクリプションレベルのソースなので、どのリージョンでもパイプラインを作成できます。これがデプロイされたら、`-westus` でリソースに診断設定を追加して、同じイベントハブを通してリソースログを送信します。
 
 **注**: このインテグレーションは、イベントを収集しません。
 
@@ -105,153 +105,233 @@ Azure プラットフォームのログ (リソースログを含む) を送信�
 | -FunctionName `<datadog-function>`                                  | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function の名前をカスタマイズします。                                                                              |
 | -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>` | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure 診断設定の名前をカスタマイズします。**(アクティビティログの送信にのみ関連)**                      |
 
-インストールでエラーが発生した場合は、[自動ログ収集][1]でよくあるエラーケースを参照してください。
+インストールでエラーが発生した場合は、よくあるエラーケースについて、[自動ログ収集][1]を参照してください。
 
-[1]: /ja/integrations/guide/azure-troubleshooting/#automated-log-collection
+[101]: /ja/integrations/guide/azure-troubleshooting/#automated-log-collection
 {{% /tab %}}
 
 {{% tab "手動インストール" %}}
 
-Azure から Datadog にログを送信するには、以下の手順に従ってください。
+このセクションでは、Azure ログを Datadog に転送するための手動セットアッププロセスについて説明します。
 
-1. [Azure Event Hub][1] を作成。
-2. Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Datadog へログを転送します。
-3. [診断設定][3]を作成し、Azure サービスが Event Hub へログをストリーミングするように構成する。
+1. [Azure Event Hub を作成](#create-an-azure-event-hub)します。
+2. [Event Hub トリガー付き Datadog-Azure 関数](#create-the-datadog-azure-function)を設定して、ログを Datadog に転送します。
+3. [診断設定を作成](#create-diagnostic-settings)して、Azure の[アクティビティログ](#activity-logs)、[リソースログ](#resource-logs)、またはその両方を Event Hub に転送します。
 
 以下の手順では、Azure Portal を使用した基本的な初期設定について説明します。手順はすべて、Azure ドキュメントを参照し、CLI、Powershell、リソーステンプレートで実行できます。
 
-#### Azure Event Hub
+#### Azure Event Hub を作成
 
-[Azure Event Hub][1] を作成：
+##### Event Hubs ネームスペースの作成
 
-以下の手順に従って、新しいネームスペースを作成するか、既存のネームスペースに新しいイベントハブを追加します。
+すでに Event Hubs ネームスペースに Event Hub 接続文字列が構成されている場合は、[Event Hubs ネームスペースに Event Hub を追加](#add-an-event-hub-to-your-event-hubs-namespace)に進んでください。
 
-1. Azure ポータルで、**Event Hubs** 概要に移動し、**Create** をクリックします。
-2. 名前、価格帯、サブスクリプション、リソースグループを入力します。
-3. 場所を選択します。**注**: Event Hub とログの送信元となるリソースは同じ場所になければなりません。アクティビティログや他のアカウント全体のログソースは、その限りではありません。
-4. スループット単位、アベイラビリティーゾーン、および自動インフレに必要なオプションを選択します。
-5. **作成**をクリックします。
+1. Azure ポータルで [Event Hubs][208] overview に移動し、**Create** をクリックします。
+2. 必要に応じて、**Project Details** と **Instance Details** セクションに入力します。
+  **注**: [Azure リソースログ][209]を収集する計画の場合、Event Hub はログを収集するリソースと同じ **Location** にある必要があります。アクティビティログやその他のアカウント全体のログソースの場合は、任意の地域を選択できます。
+3. **Review + create** をクリックしてリソースを検証します。検証が成功したら、**Create** をクリックします。
 
-イベントハブをイベントハブネームスペースに追加します。
+詳細については、[Azure Event Hub のクイックスタート][201]を参照してください。
 
-1. Azure ポータルで、新規または既存のネームスペースに移動します。
+##### Event Hubs ネームスペースに Event Hub を追加
+
+1. Azure ポータルで、新規または既存の Event Hubs ネームスペースに移動します。
 2. **+ Event Hub** をクリックします。
-3. 名前、パーティション数、およびメッセージ保持に必要なオプションを選択します。
-4. **作成**をクリックします。
+3. 必要に応じて、**Basics** タブと **Capture** タブを構成します。
+4. **Review + create** をクリックしてリソースを検証します。検証が成功したら、**Create** をクリックします。
 
-#### Datadog Azure 関数
+##### 共有アクセスを構成
 
-Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Datadog へログを転送します。
+1. Event Hub の詳細ページで、左側の **Settings** タブの下にある **Shared access policies** をクリックします。
+2. **+ Add** をクリックします。
+3. ポリシー名を入力し、**Listen** を選択します。
+4. **Connection string-primary key** の値をコピーし、安全な場所に保管してください。これは Datadog-Azure 関数が Event Hub と通信するために必要です。
 
-新しい関数アプリを作成するか、既存の関数アプリを使用して、次のセクションにスキップします。
+{{< img src="integration/azure/eventhub_connection_string.png" alt="イベントハブの共有アクセスポリシーの接続文字列プライマリキー値" popup="true" style="width:100%">}}
 
-1. Azure ポータルで、**Function Apps** 概要に移動し、**Create** をクリックします。
-2. サブスクリプション、リソースグループ、地域を選択し、関数アプリの名前を入力します。
-3. **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS** を選択します。
-4. オペレーティングシステムとプランタイプを選択します。
-5. **Next:Hosting** をクリックします。
-6. ストレージアカウントを選択します。
-7. 確認し、新しい関数アプリを作成します。
-8. デプロイが完了するのを待ちます。
+#### Datadog-Azure 関数を作成
 
-イベントハブトリガーテンプレートを使用して、関数アプリに新しい関数を追加します。
+##### 関数アプリを作成
 
-1. 関数アプリリストから新規/既存の関数アプリを選択します。
-2. 関数メニューから **Functions** を選択し、**Create** をクリックします。
-3. テンプレートメニューから [Azure イベントハブトリガー][2]を選択します。
+すでに Event Hub 接続文字列で関数アプリを構成している場合は、[Event Hub トリガーテンプレートを使用して関数アプリに新しい関数を追加](#add-a-new-function-to-your-function-app-using-the-event-hub-trigger-template)に進んでください。
+
+1. Azure ポータルで [Function App overview][211] に移動し、**Create** をクリックします。
+2. **Instance Details** セクションで、以下の設定を構成します。
+   a. **Code** ラジオボタンを選択します。
+   b. **Runtime stack** では、`Node.js` を選択します。
+   c. **Version** は `18 LTS` を選択します。
+3. その他の設定は必要に応じて行ってください。
+4. **Review + create** をクリックしてリソースを検証します。検証が成功したら、**Create** をクリックします。
+
+詳細は、[Azure 関数のための Azure Event Hubs トリガー][202]を参照してください。
+
+##### Event Hub の接続文字列を使用して関数アプリを構成
+
+1. 関数アプリの詳細ページで、左側の **Settings** タブにある **Environment variables** をクリックします。
+2. **App settings** タブで、接続文字列の名前を指定します。
+3. 先ほど[共有アクセスを構成セクション](#configure-shared-access)で取得した値を貼り付けます。
+4. **Apply** をクリックします。
+
+**注**: Datadog API キーの値を関数のコードに直接貼り付けたくない場合は、Datadog API キーの値の環境変数を追加で作成します。
+
+##### Event Hub トリガーテンプレートを使用して関数アプリに新しい関数を追加
+
+1. [Function App overview][211] から新規または既存の関数アプリを選択します。
+2. **Functions** タブで、**Create** をクリックします。
+3. **Development environment** フィールドで、**Develop in portal** を選択します。
+3. **Select a template** で、[Azure Event Hub trigger][202] を選択します。
 4. **Event Hub connection** で、ネームスペースとイベントハブを選択します。
-5. **作成**をクリックします。
+5. **Create** をクリックします。
 
-イベントハブトリガーを Datadog にポイントします。
+詳細については、[Azure 関数の概要][215]を参照してください。
 
-1. 関数ビューから新しいイベントハブトリガーを選択します。
-2. 開発者側メニューの **Code + Test** をクリックします。
-3. [Datadog-Azure 関数コード][4]を index.js ファイルに追加します。
-4. 関数アプリのコンフィギュレーションタブで `DD_API_KEY` 環境変数を作成して API キーを追加するか、22 行目の `<DATADOG_API_KEY>` を置き換えて関数コードにコピーします。
-5. Datadog US1 サイトを使用していない場合は、関数アプリの構成タブにある環境変数 `DD_SITE` で [Datadog サイト][7]を設定するか、23 行目の関数コードにサイトパラメーターをコピーしてください。
-6. 関数を保存します。
-7. トリガーの **Integration** をクリックしてから **Azure Event Hubs** をクリックし、次の設定を確認します。
-    a. Event Parameter Name が `eventHubMessages` に設定されている。
-    b. Event Hub Cardinality が `Many` に設定されている。
-    c. Event Hub Data Type が空のままになっている。
-8. **保存**をクリックします。
-9. 関数を実行し、[Datadog ログエクスプローラー][6]でテストメッセージをチェックし、設定が正しいことを確認します。
-**注**: テストログイベントは、有効な JSON 形式である必要があります。
+##### Event Hub トリガーを Datadog に指定
 
-#### アクティビティログ
+1. Event Hub トリガー関数の詳細ページで、**Developer** サイドメニューの **Code + Test** をクリックします。
+2. 関数の `index.js` ファイルに [Datadog-Azure 関数コード][204]を追加します。
+3. 環境変数 `DD_API_KEY` を使って Datadog API キーを追加するか、21 行目の `<DATADOG_API_KEY>` を置き換えて関数コードにコピーします。
+4. Datadog US1 サイトを使用していない場合は、関数アプリの構成タブで環境変数 `DD_SITE` を使用して [Datadog サイト][207]を設定するか、22 行目の関数コードにサイトパラメーターをコピーします。
+5. 関数を保存します。
+6. **Developer** サイドメニューの **Integration** をクリックします。
+7. **Trigger and inputs** の下にある **Azure Event Hubs** をクリックします。
+8. 以下の設定になっていることを確認します。
+  a. **Event hub connection** に接続文字列環境変数名が設定されている。
+  b. **Event parameter name** が `eventHubMessages` に設定されている。
+  c. **Event hub name** が Event Hub の名前に設定されている。
+  d. **Event hub cardinality** が `Many` に設定されている。
+  e. **Event hub data type** が空のままになっている。
+9. セットアップを確認するには、**Developer** サイドメニューの **Code + Test** をクリックします。
+10. **Test/Run** をクリックし、有効な JSON 形式でテストメッセージを入力します。
+11. [Datadog Log Explorer][206] でテストメッセージを検索します。
 
-1. Azure ポータルで、**Activity Log** に移動します。
-2. **Diagnostic Settings** をクリックします。
+#### 診断設定を作成
+
+##### アクティビティログ
+
+1. Azure ポータルで、[アクティビティログ][212]に移動します。
+2. **Export Activity Logs** をクリックします。
+3. **+ Add diagnostic setting** をクリックします。
+4. **Category** で、Datadog に送信するログのカテゴリーを選択します。
+5. **Destination details** で、**Stream to an event hub** を選択します。
+6. **Event hub namespace** と **Event hub name** には、それぞれ Event Hub トリガーの作成に使用した Event Hub ネームスペースの名前と Event Hub 名を設定します。
+7. **Event hub policy name** には、必要に応じて `RootManageSharedAccessKey` を選択します。**オプション**として、Event Hub **ネームスペース**レベルで独自の共有アクセスポリシーを作成します。
+  a. Event Hub の**ネームスペース**で、左側の **Settings** タブの下にある **Shared access policies** をクリックします。
+  b. **+ Add** をクリックします。
+  c. ポリシー名を入力し、**Send** または **Manage** を選択します。
+  d. **Save** をクリックします。
+  e. 診断設定ページに戻り、**Event hub policy name** フィールドに共有アクセスポリシーを選択します。ページを更新する必要があるかもしれません。
+  **注**: 詳細については、[共有アクセス署名を使用した Event Hub リソースへのアクセスの認可][214]を参照してください。
+8. アクティビティログを [Datadog Log Explorer][206] で確認して、セットアップが正しいことを確認します。
+
+詳細については、[Azure モニターの診断設定][213]を参照してください。
+
+##### リソースログ
+
+[診断設定][203]を使用して、ログを Event Hub に転送するように Azure リソースを構成します。
+
+1. Azure ポータルで、Datadog にログを転送するリソースに移動します。
+2. リソースブレードの **Monitoring** セクションで、**Diagnostic settings** をクリックします。
 3. **Add diagnostic setting** をクリックします。
-4. カテゴリの詳細で、Datadog に送るログのカテゴリを選択します。
-5. 送信先情報で、**Stream to an event hub** を選択します。
-6. イベントハブのネームスペースと名前を設定します。これらは、ネームスペーストリガーの作成に使用したネームスペースネームのスペースおよび名前と一致する必要があります。
-7. 共有アクセスキーを設定します。このキーは送信アクセスまたは管理アクセスで構成しなければなりません。
-8. **保存**をクリックします。
-9. [Datadog ログエクスプローラー][6]でこのリソースからのログをチェックして、正しくセットアップできたことを確認します。
+4. 名前を入力し、転送するデータのソースを選択します。
+5. **Destination details** で、**Stream to an event hub** を選択します。
+6. **Event hub namespace** と **Event hub name** には、それぞれ Event Hub トリガーの作成に使用した Event Hub ネームスペースの名前と Event Hub 名を設定します。
+7. **Event hub policy name** には、必要に応じて `RootManageSharedAccessKey` を選択します。**オプション**として、Event Hub **ネームスペース**レベルで独自の共有アクセスポリシーを作成します。
+  a. Event Hub の**ネームスペース**で、左側の **Settings** タブの下にある **Shared access policies** をクリックします。
+  b. **+ Add** をクリックします。
+  c. ポリシー名を入力し、**Send** または **Manage** を選択します。
+  d. **Save** をクリックします。
+  e. 診断設定ページに戻り、**Event hub policy name** フィールドに共有アクセスポリシーを選択します。ページを更新する必要があるかもしれません。
+  **注**: 詳細については、[共有アクセス署名を使用した Event Hub リソースへのアクセスの認可][214]を参照してください。
+8. **Save** をクリックします。
+9. このリソースからのログを [Datadog Log Explorer][206] で確認して、セットアップが正しいことを確認します。
 
-#### リソースログ
+詳細については、[Azure モニターの診断設定][213]を参照してください。
 
-[診断設定][3]を作成し、Azure サービスが Event Hub へログを転送するように構成する。
-
-1. Azure ポータルで、Datadog に送るログのリソースへ移動します。
-2. リソースブレードの監視セクションで、**Diagnostic settings** をクリックします。
-3. **Add diagnostic setting** をクリックします。
-4. カテゴリの詳細で、Datadog に送るログのカテゴリを選択します。
-5. 送信先情報で、**Stream to an event hub** を選択します。
-6. イベントハブのネームスペースと名前を設定します。これらは、ネームスペーストリガーの作成に使用したネームスペースネームのスペースおよび名前と一致する必要があります。
-7. 共有アクセスキーを設定します。このキーは送信アクセスまたは管理アクセスで構成しなければなりません。
-8. **保存**をクリックします。
-9. [Datadog ログエクスプローラー][6]でこのリソースからのログをチェックして、正しくセットアップできたことを確認します。
-
-[1]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
-[2]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
-[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
-[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://app.datadoghq.com/logs
-[7]: https://docs.datadoghq.com/ja/getting_started/site/
-
+[201]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
+[202]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
+[203]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
+[204]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
+[205]: https://app.datadoghq.com/organization-settings/api-keys
+[206]: https://app.datadoghq.com/logs
+[207]: https://docs.datadoghq.com/ja/getting_started/site/
+[208]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
+[209]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/tutorial-resource-logs
+[210]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function
+[211]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+[212]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
+[213]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?WT.mc_id=Portal-Microsoft_Azure_Monitoring
+[214]: https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature
+[215]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
 {{% /tab %}}
 
 {{% tab "Blob Storage" %}}
 
-Datadog では、Azure ログ収集に Event Hub セットアップを使用することを推奨しています。ただし、以下の手順に従って、Blob ストレージからすべての Azure App Services ログを転送することもできます。
+{{% site-region region="us3,us5,gov,ap1" %}}
+<div class="alert alert-warning">
+  Datadog {{< region-param key="dd_site_name" >}} サイトではサポートされていません。
+</div>
+{{% /site-region %}}
 
-1. [Azure ポータル][2]、[Azure ストレージエクスプローラー][3]、[Azure CLI][4]、または [Powershell][5] から [Azure BLOB ストレージ][1]をセットアップします。
-2. Blob ストレージから Datadog へログを転送する [Datadog-Azure 関数](#create-a-new-azure-blob-storage-function)をセットアップします。
-3. [ログを Blob ストレージに転送する][6] Azure App Service を構成します。
+Datadog は、Azure ログ収集に Event Hub セットアップを使用することを推奨します。ただし、このセクションの手順に従って、Azure Blob Storage からすべての Azure App Services ログを転送することもできます。
 
-#### 新しい Azure Blob ストレージ関数を作成する
+1. [Azure Blob Storage][301] をまだセットアップしていない場合は、次のいずれかの方法で開始してください。
+   - [Azure ポータル][302]
+   - [Azure Storage Explorer][303]
+   - [Azure CLI][304]
+   - [Powershell][305]
+2. 以下の手順で、Datadog-Azure 関数をセットアップして、Blob Storage からログを転送します。
+3. [ログを Blob Storage に転送する][306]ようにAzure App Services を構成します。
 
-Azure 関数に馴染みのない方は、[Azure 関数入門][7]をご覧ください。
+##### 関数アプリを作成
 
-1. [Azure ポータル][2]で、**Function Apps** 概要に移動し、**Create** をクリックします。
-2. サブスクリプション、リソースグループ、地域を選択し、関数アプリの名前を入力します。
-3. **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS** を選択します。
-4. オペレーティングシステム **Windows** とプランタイプを選択します。
-5. **Next:Hosting** をクリックします。
-6. ストレージアカウントを選択します。
-7. 確認し、新しい関数を **Create** します。
-8. デプロイが完了したら、関数アプリリストから新しい関数を選択します。
-9. 関数を**ポータル内**で構築するように選択し、Blog Storage トリガーテンプレートを使用します (**More templates…** の下)。プロンプトが表示されたら、`Microsoft.Azure.WebJobs.Extensions.EventHubs` 拡張機能をインストールします。
-10. **Storage account connection** を選択するか追加し、**Create** を作成します。
-11. `index.js` ファイルを作成し、[Datadog-Azure 関数コード][8]を追加します (`<DATADOG_API_KEY>` はご使用の [Datadog API キー][9]に置き換えます)。
-12. 関数を保存します。
-13. **統合**で、**BLOB パラメーター名**を `blobContent` に設定し、**保存**をクリックします。
-14. [Datadog ログエクスプローラー][10]でログをチェックして、正しくセットアップできたことを確認します。
+この目的のためにすでに関数アプリを構成している場合は、[Event Hub トリガーテンプレートを使用して関数アプリに新しい関数を追加](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template)に進んでください。
 
-[1]: https://azure.microsoft.com/en-us/services/storage/blobs/
-[2]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
-[3]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
-[4]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli
-[5]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-powershell
-[6]: https://docs.microsoft.com/en-us/learn/modules/store-app-data-with-azure-blob-storage/
-[7]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function
-[8]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
-[9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://app.datadoghq.com/logs
+1. Azure ポータルで [Function App overview][309] に移動し、**Create** をクリックします。
+2. **Instance Details** セクションで、以下の設定を構成します。
+  a. **Code** ラジオボタンを選択します。
+  b. **Runtime stack** では、`Node.js` を選択します。
+  c. **Version** では、`18 LTS` を選択します。
+  d. **Operating System** では、`Windows` を選択します。
+3. その他の設定は必要に応じて行ってください。
+4. **Review + create** をクリックしてリソースを検証します。検証が成功したら、**Create** をクリックします。
 
+##### Azure Blob Storage トリガーテンプレートを使用して新しい関数を関数アプリに追加
+
+1. [Function App overview][309] から新規または既存の関数アプリを選択します。
+2. **Functions** タブで、**Create** をクリックします。
+3. **Development environment** フィールドで、**Develop in portal** を選択します。
+4. **Select a template** で、[Azure Blob storage trigger][313] を選択します。
+5. **Storage account connection** を選択します。
+   **注**: 詳細は、[Azure ストレージアカウントの接続文字列を構成][311]を参照してください。
+6. **Create** をクリックします。
+
+詳細は、[Azure 関数の概要][307]を参照してください。
+
+##### Blob Storage トリガーを Datadog に指定
+
+1. Event Hub トリガー関数の詳細ページで、**Developer** サイドメニューの **Code + Test** をクリックします。
+2. 関数の `index.js` ファイルに [Datadog-Azure 関数コード][308]を追加します。
+3. 環境変数 `DD_API_KEY` で Datadog API キーを追加するか、20 行目の `<DATADOG_API_KEY>` を置き換えて関数コードにコピーします。
+4. Datadog US1 サイトを使用していない場合は、関数アプリの構成タブにある `DD_SITE` 環境変数で [Datadog サイト][312]を設定するか、21 行目の関数コードにサイトパラメーターをコピーします。
+5. 関数を保存します。
+6. **Developer** サイドメニューの **Integration** をクリックします。
+7. **Trigger and inputs** の下にある **Azure Blob Storage** をクリックします。
+8. **Blob Parameter Name** を `blobContent` に設定し、**Save** をクリックします。
+9. このリソースからのログを [Datadog Log Explorer][310] で確認して、セットアップが正しいことを確認します。
+
+[301]: https://azure.microsoft.com/en-us/services/storage/blobs/
+[302]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+[303]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
+[304]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli
+[305]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-powershell
+[306]: https://learn.microsoft.com/en-us/training/modules/store-app-data-with-azure-blob-storage/
+[307]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
+[308]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
+[309]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+[310]: https://app.datadoghq.com/logs
+[311]: https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
+[312]: https://docs.datadoghq.com/ja/getting_started/site/
+[313]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
 {{% /tab %}}
 {{< /tabs >}}
 

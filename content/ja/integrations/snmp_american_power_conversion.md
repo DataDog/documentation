@@ -21,6 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_american_power_conversion/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: snmp-american-power-conversion
 integration_title: American Power Conversion
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_american_power_conversion
 public_title: American Power Conversion
@@ -48,10 +48,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: American Power Conversion のネットワークデバイスから SNMP メトリクスを収集します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: American Power Conversion
 ---
@@ -67,17 +71,17 @@ APC インテグレーションを構成し、APC 無停電電源装置 (UPS) �
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## 計画と使用
+## セットアップ
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

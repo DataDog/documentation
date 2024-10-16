@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting iOS SDK issues
 description: Learn how to troubleshoot issues with iOS Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -86,13 +84,9 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 * implement `URLSessionDataDelegate` and forward:
   * [`urlSession(_:dataTask:didReceive:)`][6]
 
-## Sending data when device is offline
+## "Deobfuscation failed" warning
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not deobfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][7] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][8].
 
 ## Further Reading
 
@@ -104,3 +98,5 @@ This means that even if users open your application while offline, no data is lo
 [4]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1643148-urlsession
 [5]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411610-urlsession
 [6]: https://developer.apple.com/documentation/foundation/urlsessiondatadelegate/1411528-urlsession
+[7]: https://app.datadoghq.com/source-code/setup/rum
+[8]: /real_user_monitoring/guide/debug-symbols
