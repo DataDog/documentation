@@ -122,7 +122,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. At a minimum, the file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
+Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. The file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
 
 To apply the changes, restart the [Datadog Agent][1].
 

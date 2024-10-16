@@ -48,6 +48,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
     tag: "Blog"
     text: "How Datadog Security Inbox prioritizes security risks"
+  - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
+    tag: "Blog"
+    text: "How we use Datadog for detection as code"
 algolia:
   tags: ['inbox']
 cascade:
