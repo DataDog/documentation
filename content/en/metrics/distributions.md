@@ -65,6 +65,17 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a dropdown for alert conditions in a monitor " style="width:80%;">}}
 
+### Bulk configuration for multiple metrics
+
+You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
+
+1. Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
+1. Select **Enable percentiles**.
+1. Specify a metric namespace prefix to select all metrics that match that namespace.
+1. (Optional) To disable percentiles for the namespace, click the **Percentile aggregations** toggle.
+
+{{< img src="metrics/distributions/percentile_aggregations_toggle.png" alt="Percentile aggregations toggle" >}}
+
 ### Threshold Queries
 
 <div class="alert alert-warning">
