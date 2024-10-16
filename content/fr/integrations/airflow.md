@@ -5,6 +5,7 @@ assets:
   dashboards:
     Airflow Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,13 @@ assets:
     - airflow
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10083
     source_type_name: Airflow
-  logs:
-    source: airflow
+  monitors:
+    DAG task ongoing duration is high: assets/monitors/ongoing_duration.json
+    Task instances are failing: assets/monitors/heartbeat_failures.json
+  saved_views:
+    airflow_overview: assets/saved_views/airflow_overview.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +33,7 @@ author:
 categories:
 - automation
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airflow/README.md
 display_on_public_website: true
@@ -35,9 +41,8 @@ draft: false
 git_integration_title: airflow
 integration_id: airflow
 integration_title: Airflow
-integration_version: 4.0.0
+integration_version: 5.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: airflow
 public_title: Airflow
@@ -55,6 +60,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Surveillez des métriques liées à vos DAG, tâches, pools, exécuteurs,
     etc.
@@ -64,6 +70,7 @@ tile:
   title: Airflow
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
@@ -79,7 +86,7 @@ Les métriques sont recueillies via le plugin [StatsD pour Airflow][1] puis envo
 
 En plus des métriques, l'Agent Datadog envoie également des checks de service liés à l'état de santé d'Airflow.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -105,7 +112,7 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
 - [Métriques Airflow][4]
 - [Configuration des métriques Airflow][5]
 
-**Remarque** : les métriques StatsD transmises par Airflow peuvent varier en fonction de l'exécuteur Airflow utilisé. Par exemple, les métriques `airflow.ti_failures/successes`, `airflow.operator_failures/successes`, `airflow.dag.task.duration` ne sont [pas transmises pour `KubernetesExecutor`][6].
+**Remarque** : les métriques StatsD transmises par Airflow peuvent varier en fonction de l'exécuteur Airflow utilisé. Par exemple, les métriques `airflow.ti_failures/successes`, `airflow.operator_failures/successes` et `airflow.dag.task.duration` ne sont [pas transmises pour `KubernetesExecutor`][6].
 
 1. Installez le [plugin StatsD pour Airflow][7].
 
@@ -114,6 +121,8 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
    ```
 
 2. Modifiez le fichier de configuration `airflow.cfg` d'Airflow pour y ajouter les paramètres suivants :
+
+   <div class="alert alert-warning"> Ne définissez pas `statsd_datadog_enabled` sur true. L'activation de `statsd_datadog_enabled` peut entraîner des conflits. Pour éviter tout problème, vérifiez que la variable est définie sur `false`.</div>
 
    ```conf
    [scheduler]
@@ -247,14 +256,14 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
            match_type: regex
            name: airflow.ti.start
            tags: 
-             dagid: "$1"
-             taskid: "$2"
+             dag_id: "$1"
+             task_id: "$2"
          - match: 'airflow\.ti\.finish\.(\w+)\.(.+)\.(\w+)'
            name: airflow.ti.finish
            match_type: regex
            tags: 
-             dagid: "$1"
-             taskid: "$2"
+             dag_id: "$1"
+             task_id: "$2"
              state: "$3"
    ```
 
@@ -307,7 +316,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
       ```yaml
       logs:
         - type: file
-          path: "<PATH_TO_AIRFLOW>/logs/!(scheduler)/*/*.log"
+          path: "<PATH_TO_AIRFLOW>/logs/*/*/*/*.log"
           source: airflow
           log_processing_rules:
             - type: multi_line
@@ -390,16 +399,14 @@ Cette configuration doit rediriger le trafic StatsD provenant du conteneur Airfl
   env: 
     - name: DD_DOGSTATSD_MAPPER_PROFILES
       value: >
-        [{"prefix":"airflow.","name":"airflow","mappings":[{"name":"airflow.job.start","match":"airflow.*_start","tags":{"job_name":"$1"}},{"name":"airflow.job.end","match":"airflow.*_end","tags":{"job_name":"$1"}},{"name":"airflow.job.heartbeat.failure","match":"airflow.*_heartbeat_failure","tags":{"job_name":"$1"}},{"name":"airflow.operator_failures","match":"airflow.operator_failures_*","tags":{"operator_name":"$1"}},{"name":"airflow.operator_successes","match":"airflow.operator_successes_*","tags":{"operator_name":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_runtime","match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag.loading_duration","match":"airflow\\.dag\\.loading-duration\\.(.*)","tags":{"dag_file":"$1"}},{"name":"airflow.dagrun.first_task_scheduling_delay","match":"airflow.dagrun.*.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"name":"airflow.pool.open_slots","match":"airflow.pool.open_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.queued_slots","match":"airflow.pool.queued_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.running_slots","match":"airflow.pool.running_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.used_slots","match":"airflow.pool.used_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.starving_tasks","match":"airflow.pool.starving_tasks.*","tags":{"pool_name":"$1"}},{"match_type":"regex","name":"airflow.dagrun.dependency_check","match":"airflow\\.dagrun\\.dependency-check\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task.duration","match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match_type":"regex","name":"airflow.dag_processing.last_duration","match":"airflow\\.dag_processing\\.last_duration\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.success","match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.failed","match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.schedule_delay","match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.scheduler.tasks.running","match":"airflow.scheduler.tasks.running"},{"name":"airflow.scheduler.tasks.starving","match":"airflow.scheduler.tasks.starving"},{"name":"airflow.sla_email_notification_failure","match":"airflow.sla_email_notification_failure"},{"match_type":"regex","name":"airflow.dag.task_removed","match":"airflow\\.task_removed_from_dag\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task_restored","match":"airflow\\.task_restored_to_dag\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.task.instance_created","match":"airflow.task_instance_created-*","tags":{"task_class":"$1"}},{"name":"airflow.ti.start","match":"airflow.ti.start.*.*","tags":{"dag_id":"$1","task_id":"$2"}},{"name":"airflow.ti.finish","match":"airflow.ti.finish.*.*.*","tags":{"dag_id":"$1","state":"$3","task_id":"$2"}}]}]
+        [{"name":"airflow","prefix":"airflow.","mappings":[{"match":"airflow.*_start","name":"airflow.job.start","tags":{"job_name":"$1"}},{"match":"airflow.*_end","name":"airflow.job.end","tags":{"job_name":"$1"}},{"match":"airflow.*_heartbeat_failure","name":"airflow.job.heartbeat.failure","tags":{"job_name":"$1"}},{"match":"airflow.operator_failures_*","name":"airflow.operator_failures","tags":{"operator_name":"$1"}},{"match":"airflow.operator_successes_*","name":"airflow.operator_successes","tags":{"operator_name":"$1"}},{"match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_runtime","tags":{"dag_file":"$1"}},{"match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","tags":{"dag_file":"$1"}},{"match":"airflow\\.dag\\.loading-duration\\.(.*)","match_type":"regex","name":"airflow.dag.loading_duration","tags":{"dag_file":"$1"}},{"match":"airflow.dagrun.*.first_task_scheduling_delay","name":"airflow.dagrun.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"match":"airflow.pool.open_slots.*","name":"airflow.pool.open_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.queued_slots.*","name":"airflow.pool.queued_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.running_slots.*","name":"airflow.pool.running_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.used_slots.*","name":"airflow.pool.used_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.starving_tasks.*","name":"airflow.pool.starving_tasks","tags":{"pool_name":"$1"}},{"match":"airflow\\.dagrun\\.dependency-check\\.(.*)","match_type":"regex","name":"airflow.dagrun.dependency_check","tags":{"dag_id":"$1"}},{"match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","match_type":"regex","name":"airflow.dag.task.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match":"airflow\\.dag_processing\\.last_duration\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_duration","tags":{"dag_file":"$1"}},{"match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","match_type":"regex","name":"airflow.dagrun.duration.success","tags":{"dag_id":"$1"}},{"match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","match_type":"regex","name":"airflow.dagrun.duration.failed","tags":{"dag_id":"$1"}},{"match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","match_type":"regex","name":"airflow.dagrun.schedule_delay","tags":{"dag_id":"$1"}},{"match":"airflow.scheduler.tasks.running","name":"airflow.scheduler.tasks.running"},{"match":"airflow.scheduler.tasks.starving","name":"airflow.scheduler.tasks.starving"},{"match":"airflow.sla_email_notification_failure","name":"airflow.sla_email_notification_failure"},{"match":"airflow\\.task_removed_from_dag\\.(.*)","match_type":"regex","name":"airflow.dag.task_removed","tags":{"dag_id":"$1"}},{"match":"airflow\\.task_restored_to_dag\\.(.*)","match_type":"regex","name":"airflow.dag.task_restored","tags":{"dag_id":"$1"}},{"match":"airflow.task_instance_created-*","name":"airflow.task.instance_created","tags":{"task_class":"$1"}},{"match":"airflow\\.ti\\.start\\.(.+)\\.(\\w+)","match_type":"regex","name":"airflow.ti.start","tags":{"dag_id":"$1","task_id":"$2"}},{"match":"airflow\\.ti\\.finish\\.(\\w+)\\.(.+)\\.(\\w+)","name":"airflow.ti.finish","match_type":"regex","tags":{"dag_id":"$1","task_id":"$2","state":"$3"}}]}]
   ```
-
-Consultez le référentiel `integrations-core` Datadog pour découvrir un [exemple de configuration][8].
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][9].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][8].
 
 | Paramètre      | Valeur                                                 |
 |----------------|-------------------------------------------------------|
@@ -412,8 +419,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [5]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
 [6]: https://docs.datadoghq.com/fr/developers/dogstatsd/?tab=kubernetes#setup
 [7]: /fr/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
-[8]: https://github.com/DataDog/integrations-core/tree/master/airflow/tests/k8s_sample
-[9]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes#configuration
 {{% /tab %}}
 {{< /tabs >}}
 

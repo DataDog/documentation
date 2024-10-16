@@ -30,6 +30,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
+  tag: "Blog"
+  text: "Best practices for monitoring and remediating connection churn"
 algolia:
   tags: ['npm', 'network performance monitoring']
 ---
@@ -47,7 +50,7 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 
 NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
-Additionally, [Network path][5], a feature of NPM, is available in private beta, which allows you to see hop-by-hop traffic in your network.
+Additionally, [Network path][5], a feature of NPM, is available in Preview, which allows you to see hop-by-hop traffic in your network.
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}

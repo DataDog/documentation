@@ -12,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "/watchdog/insights/"
@@ -122,4 +122,4 @@ The outlier algorithms are set up to identify groups that are behaving different
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
-[6]: /monitors/manage/status/#settings
+[6]: /monitors/status/#settings

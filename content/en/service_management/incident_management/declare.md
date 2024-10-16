@@ -43,6 +43,12 @@ You can declare an incident directly from a graph by clicking the export button 
 
 {{< img src="service_management/incidents/from-a-graph.png" alt="Create in incident from a graph" style="width:80%;">}}
 
+## From a Synthetic test
+
+Create incidents directly from a [Synthetic test][8] through the Actions dropdown. Select **Declare incident** to open an incident creation modal, where a summary of the test is added to your incident timeline, allowing you to pursue the investigation from there.
+
+{{< img src="service_management/incidents/declare/synthetics_declare_incident.png" alt="Declare an incident from a Synthetic test." style="width:90%;" >}}
+
 ## From the Datadog Clipboard
 Use the [Datadog Clipboard][6] to gather multiple monitors and graphs and to generate an incident. To declare an incident from the Clipboard, copy a graph you want to investigate and open the Clipboard with the command `Cmd/Ctrl + Shift + K`. Click **Declare Incident** or the export icon to add to the incident as a signal.
 
@@ -71,3 +77,4 @@ After you declare an incident from Slack, it generates an incident channel.
 [5]: /service_management/case_management/view_and_manage
 [6]: /service_management/incident_management/datadog_clipboard
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[8]: https://app.datadoghq.com/synthetics/tests

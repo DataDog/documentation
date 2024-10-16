@@ -32,9 +32,24 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/fluent %}}
 
 {{% /tab %}}
+{{% tab "Google Pub/Sub" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
+
+{{% /tab %}}
 {{% tab "HTTP Client" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
+
+{{% /tab %}}
+{{% tab "HTTP Server" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
+
+{{% /tab %}}
+{{% tab "Logstash" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -108,6 +123,11 @@ On the the Worker installation page:
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
