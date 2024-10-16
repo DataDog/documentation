@@ -29,7 +29,7 @@ Create an Pipeline to filter to the events that you are interested in, for examp
 
 1. Navigate to [Event Management Pipelines][1] in Datadog.
 1. Click **Add a Pipeline**.
-1. Choose a filter from the dropdown menu or create your own filter query in the [Event Management Explorer][2] by selecting the `</>` icon. Filters let you limit what kinds of events a pipeline applies to. **Note**: The pipeline filtering is applied before any of the pipeline's processors. You cannot filter on an attribute that is extracted in the pipeline itself.
+1. Choose a filter from the dropdown menu or create your own filter query in the [Event Management Explorer][2] by selecting the `</>` icon. Use the filter to apply pipeline processors to specific events. **Note**: The pipeline filtering is applied before any of the pipeline's processors. You cannot filter on an attribute that is extracted in the pipeline itself.
 1. Name the pipeline.
 1. Click **Create**.
 
