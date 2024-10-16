@@ -453,7 +453,7 @@ Track your indexed historical metrics through the Usage Summary section of the [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/summary/
+[1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
