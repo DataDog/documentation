@@ -141,7 +141,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name               | Description of audit event                                                                        | Query in audit explorer                                               |
 | -------------------| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------   |
 | [Dashboard created][38] | A dashboard is created and the new JSON value for the dashboard.                                    | `@evt.name:Dashboard @asset.type:dashboard @action:created`             |
-| [Dashboard embedded][40] (Roadie) | A Datadog dashboard is [embedded into a third party][41] and a user views the dashboard.                      | `@evt.name:Dashboard @asset.type:embed @action:accessed`                |
+| [Dashboard embedded][40] (Roadie) | A Datadog dashboard is embedded into a third party ([Roadie][41]) and a user views the dashboard.                      | `@evt.name:Dashboard @asset.type:embed @action:accessed`                |
 | [Dashboard modified][42] | A dashboard is modified and the previous and new JSON values for the dashboard.                   | `@evt.name:Dashboard @asset.type:dashboard @action:modified`            |
 | [Dashboard deleted][39] | A dashboard is deleted and the previous JSON value for the dashboard.                              | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`             |
 | [Dashboard user(s) added][43] | A user added user ID(s) that can access a dashboard and the list of new user IDs.                 | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:created`   |
