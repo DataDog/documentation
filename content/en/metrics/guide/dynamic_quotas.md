@@ -30,7 +30,7 @@ Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/
 
 If your monitor alerts, Datadog identifies the culprit, spiking metrics and asks permission via Slack to automatically apply Metrics without Limits configurations to these metrics; reducing the usage and costs of these metrics on your behalf. 
 
-Datadog’s Intelligent query insights provide us a list of the actively queried tags that we use to configure problematic metrics such that you are guaranteed the most cost-optimized configuration that doesn’t sacrifice visibility. Dynamic metric quotas help protect your organization from unintentional cardinality and budget overages and relieves your teams from having to play whack-a-mole to remediate metric volume spikes.
+Datadog’s Intelligent query insights provide us a list of the actively queried tags that we use to configure problematic metrics such that you are guaranteed the most cost-optimized configuration that doesn’t sacrifice visibility. Dynamic metric quotas help protect your organization from unintentional cardinality and budget overages and relieves your teams from having to play whack-a-mole to remediate metric volume spikes. (Learn more about using Datadog's Estimated Usage Metrics to monitor your metric volume usage [here][10])
 
 ## Setup
 
@@ -43,13 +43,12 @@ Datadog’s Intelligent query insights provide us a list of the actively queried
 
 #### How to build a per-metric quota
 
+{{< img src="/metrics/guide/dynamic_quotas/automated_mwl_workflow_monitor.png" alt="The Make a decision tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
+
 1. Open this [workflow blueprint][8], and click "Create from Blueprint"
 2. Click on the green Monitor tile, and enable the "Automatic triggering" toggle. Also copy the **Mention handle** for this workflow -- you'll use this in Step 5 below
 3. Create a [metric monitor][9]. In the **Define the metric** step, select ```datadog.estimated_usage.metrics.custom.by_metric``` as your metric name and choose the ```SUM BY``` space aggregator (recommendd monitor type - Threshold Alert, but you can also use Change or Anomaly Detection)
 4. Under ***Set alert conditions***, define your quota threshold number
-
-{{< img src="/metrics/guide/dynamic_quotas/automated_mwl_workflow_monitor.png" alt="The Make a decision tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
-
 5. Under ***Configure notifications & automations***, you'll update the monitor notification message and include the Workflow handle from Step 2) above
 6. Select "Multi Alert" to send a notification for each culprit metric.
 7. Click ***Create*** to create the metric monitor
@@ -84,3 +83,4 @@ The workflow blueprint contains several Slack integration tiles that need to be 
 [7]: /monitors/configuration/?tab=thresholdalert#set-alert-conditions
 [8]: https://app.datadoghq.com/workflow/blueprints/manage-metrics-without-limits-suggested-tags
 [9]: https://app.datadoghq.com/monitors/create/metric
+[10]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
