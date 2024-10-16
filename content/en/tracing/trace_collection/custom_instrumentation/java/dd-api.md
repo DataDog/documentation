@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/java
-description: 'Instrument your code with the Datadog Java APM tracer.'
+description: 'Instrument your code with the Datadog API.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
