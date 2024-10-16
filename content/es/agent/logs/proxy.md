@@ -8,7 +8,7 @@ further_reading:
   text: Recopilar tus procesos
 - link: /tracing/
   tag: Documentación
-  text: Recopilar tus trazas
+  text: Recopilación de tus trazas (traces)
 title: Proxy TCP del Agent para el envío de logs
 ---
 
