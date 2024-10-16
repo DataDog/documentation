@@ -161,19 +161,6 @@ For more information about publishing your integration tile and creating your pu
 
 To send data to Datadog, use the `api_keys_write` scope when generating an API key on behalf of the user. For more information, see [Create an API key](#create-an-api-key).
 
-### API key and token expiration
-
-Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the token, the user must reauthorize the integration to generate new refresh and access tokens. For more information, see the [OAuth2 Authorization Endpoints Reference][13].
-
-### Retrieving API keys in your partner sandbox account
-
-After you create a key using the [api_keys/marketplace][14] endpoint, the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
-
-1. Navigate to the [Datadog API Keys Management page][15].
-1. Look for the API key named `OAuth Client API Key` and select it.
-1. Click **Revoke** to disable the API key.
-1. Follow the steps in [Create an API key](#create-an-api-key) to create a new key.
-1. Reinstall the integration and repeat the OAuth flow.
 
 ### Invalid client ID
 
