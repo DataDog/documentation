@@ -139,7 +139,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 <div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</div>
 
 4. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>`, `service:<SERVICE_NAME>`, and `version:<VERSION>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name. The `version` tag defaults to `1.0`.
-5. Link your Step Function traces to downstream Lambda traces<!-- or nested Step Function traces-->:
+5. Link your Step Function traces to downstream Lambda traces or nested Step Function traces:
 
 {{% collapse-content title="Link Step Function traces to downstream Lambda traces" level="h4" %}}
 For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
@@ -155,35 +155,35 @@ The `JsonMerge` [intrinsic function][1] merges the [Step Functions context objec
 
 **Example**:
 
-{{< highlight json "hl_lines=4-7" >}}
+{{< highlight json "hl_lines=5-5" >}}
 "Lambda Read From DynamoDB": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::lambda:invoke",
-      "Parameters": {
-        "Payload.$": "States.JsonMerge($$, $, false)",
-        "FunctionName": "${lambdaArn}"
-      },
-      "End": true
-    }
+  "Type": "Task",
+  "Resource": "arn:aws:states:::lambda:invoke",
+  "Parameters": {
+    "Payload.$": "States.JsonMerge($$, $, false)",
+    "FunctionName": "${lambdaArn}"
+  },
+  "End": true
+}
 {{< /highlight >}}
 
 Alternatively, if you have business logic defined in the payload, you could also use the following:
 
-{{< highlight json "hl_lines=8-10" >}}
+{{< highlight json "hl_lines=7-9" >}}
 "Lambda Read From DynamoDB": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::lambda:invoke",
-      "Parameters": {
-        "Payload": {
-          ...
-          "Execution.$": "$$.Execution",
-          "State.$": "$$.State",
-          "StateMachine.$": "$$.StateMachine"
-        },
-        "FunctionName": "${lambdaArn}"
-      },
-      "End": true
-    }
+  "Type": "Task",
+  "Resource": "arn:aws:states:::lambda:invoke",
+  "Parameters": {
+    "Payload": {
+      ...
+      "Execution.$": "$$.Execution",
+      "State.$": "$$.State",
+      "StateMachine.$": "$$.StateMachine"
+    },
+    "FunctionName": "${lambdaArn}"
+  },
+  "End": true
+}
 {{< /highlight >}}
 
 If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][3].
@@ -193,11 +193,29 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 [3]: /logs/guide/forwarder/?tab=cloudformation#installation
 {{% /collapse-content %}} 
 
-<!--
 {{% collapse-content title="Link Step Function traces to nested Step Function traces" level="h4" %}}
-TODO
+**Example**:
+
+{{< highlight json "hl_lines=9-13" >}}
+"Step Functions StartExecution": {
+  "Type": "Task",
+  "Resource": "arn:aws:states:::states:startExecution",
+  "Parameters": {
+    "StateMachineArn": "${stateMachineArn}",
+    "Input": {
+      "StatePayload": "Hello from Step Functions!",
+      "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
+      "CONTEXT": {
+        "Execution.$": "$$.Execution",
+        "State.$": "$$.State",
+        "StateMachine.$": "$$.StateMachine"
+      }
+    }
+  },
+  "End": true
+}
+{{< /highlight >}}
 {{% /collapse-content %}} 
--->
 
 [1]: /logs/guide/forwarder/
 [2]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
