@@ -3,9 +3,9 @@ title: Getting Started with Google Cloud
 ---
 
 ## Overview
-This guide provides an overview of how to get started with the Datadog Google Cloud integration.
 
-Integrating your Google Cloud projects with Datadog allows you to monitor real-time metrics & logs from your GCE and GKE compute instances.
+Integrating your Google Cloud projects with Datadog allows you to monitor metrics from your GCE and GKE compute instances within the Datadog platform.
+This guide provides an overview of how to quickly get started with the Datadog Google Cloud integration.
 
 ## Prerequisites
 1) Create a [Datadog account][1]
