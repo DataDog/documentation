@@ -190,7 +190,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 [1]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
 [2]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
-[3]: /logs/guide/forwarder/?tab=cloudformation#installation
+[3]: /serverless/aws_lambda/installation/
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Link Step Function traces to nested Step Function traces" level="h4" %}}
